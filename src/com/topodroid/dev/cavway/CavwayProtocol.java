@@ -116,54 +116,69 @@ public class CavwayProtocol extends TopoDroidProtocol
     // }
 
     byte flag = packetdata[1];   //leg, err flag
-    double d =  (packetdata[2] << 8) + MemoryOctet.toInt( packetdata[4], packetdata[3] );
-    double b = MemoryOctet.toInt( packetdata[6], packetdata[5] );  //AZM
-    double c = MemoryOctet.toInt( packetdata[8], packetdata[7] );  //INCL
-    double r = MemoryOctet.toInt( packetdata[10], packetdata[9] ); //ROLL
 
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
     //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);
-    mDistance = d / 1000.0;
-    mBearing  = b * 180.0 / 32768.0; // 180/0x8000;
-    mClino    = c * 90.0  / 16384.0; // 90/0x4000;
-    if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
-    mRoll  = r * 180.0 / 32768.0; // 180/0x8000;
 
-    double acc = MemoryOctet.toInt( packetdata[12], packetdata[11] );
+    // double d = (packetdata[2] << 8) + MemoryOctet.toInt( packetdata[4], packetdata[3] );
+    // double b = MemoryOctet.toInt( packetdata[6], packetdata[5] );  //AZM
+    // double c = MemoryOctet.toInt( packetdata[8], packetdata[7] );  //INCL
+    // double r = MemoryOctet.toInt( packetdata[10], packetdata[9] ); //ROLL
+    mDistance = CavwayData.toLaser( packetdata );   // d / 1000.0;
+    mBearing  = CavwayData.toAzimuth( packetdata ); // b * 180.0 / 32768.0; // 180/0x8000;
+    mClino    = CavwayData.toClino( packetdata );   // c * 90.0  / 16384.0; // 90/0x4000;
+    // if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
+    mRoll     = CavwayData.toRoll( packetdata );    // r * 180.0 / 32768.0; // 180/0x8000;
+
+    double acc = MemoryOctet.toInt( packetdata[12], packetdata[11] ); // FIXME use CavwayDaya ?
     double mag = MemoryOctet.toInt( packetdata[14], packetdata[13] );
-    double dip = MemoryOctet.toInt( packetdata[16], packetdata[15] );
     mAcceleration = acc;
-    mMagnetic = mag;
-    mDip = dip * 90.0  / 16384.0; // 90/0x4000;
-    if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
+    mMagnetic     = mag;
 
-    mGX = MemoryOctet.toInt( packetdata[22], packetdata[21] );
-    mGY = MemoryOctet.toInt( packetdata[24], packetdata[23] );
-    mGZ = MemoryOctet.toInt( packetdata[26], packetdata[25] );
-    if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
-    if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
-    if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
+    // double dip = MemoryOctet.toInt( packetdata[16], packetdata[15] );
+    // mDip = dip * 90.0  / 16384.0; // 90/0x4000;
+    // if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
+    mDip = CavwayData.toDip1( packetdata );
 
-    mMX = MemoryOctet.toInt( packetdata[28], packetdata[27] );
-    mMY = MemoryOctet.toInt( packetdata[30], packetdata[29] );
-    mMZ = MemoryOctet.toInt( packetdata[32], packetdata[31] );
-    if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
-    if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
-    if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
+    // mGX = MemoryOctet.toInt( packetdata[22], packetdata[21] ); // TODO use CavwayData functions
+    // mGY = MemoryOctet.toInt( packetdata[24], packetdata[23] );
+    // mGZ = MemoryOctet.toInt( packetdata[26], packetdata[25] );
+    // if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
+    // if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
+    // if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
+    mGX = CavwayData.toRawG1x( packetdata );
+    mGY = CavwayData.toRawG1y( packetdata );
+    mGZ = CavwayData.toRawG1z( packetdata );
 
-    mG2X = MemoryOctet.toInt( packetdata[34], packetdata[33] );
-    mG2Y = MemoryOctet.toInt( packetdata[36], packetdata[35] );
-    mG2Z = MemoryOctet.toInt( packetdata[38], packetdata[37] );
-    if ( mG2X > TDUtil.ZERO ) mG2X = mG2X - TDUtil.NEG;
-    if ( mG2Y > TDUtil.ZERO ) mG2Y = mG2Y - TDUtil.NEG;
-    if ( mG2Z > TDUtil.ZERO ) mG2Z = mG2Z - TDUtil.NEG;
+    // mMX = MemoryOctet.toInt( packetdata[28], packetdata[27] );
+    // mMY = MemoryOctet.toInt( packetdata[30], packetdata[29] );
+    // mMZ = MemoryOctet.toInt( packetdata[32], packetdata[31] );
+    // if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
+    // if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
+    // if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
+    mMX = CavwayData.toRawM1x( packetdata );
+    mMY = CavwayData.toRawM1y( packetdata );
+    mMZ = CavwayData.toRawM1z( packetdata );
 
-    mM2X = MemoryOctet.toInt( packetdata[40], packetdata[39] );
-    mM2Y = MemoryOctet.toInt( packetdata[42], packetdata[41] );
-    mM2Z = MemoryOctet.toInt( packetdata[44], packetdata[43] );
-    if ( mM2X > TDUtil.ZERO ) mM2X = mM2X - TDUtil.NEG;
-    if ( mM2Y > TDUtil.ZERO ) mM2Y = mM2Y - TDUtil.NEG;
-    if ( mM2Z > TDUtil.ZERO ) mM2Z = mM2Z - TDUtil.NEG;
+    // mG2X = MemoryOctet.toInt( packetdata[34], packetdata[33] );
+    // mG2Y = MemoryOctet.toInt( packetdata[36], packetdata[35] );
+    // mG2Z = MemoryOctet.toInt( packetdata[38], packetdata[37] );
+    // if ( mG2X > TDUtil.ZERO ) mG2X = mG2X - TDUtil.NEG;
+    // if ( mG2Y > TDUtil.ZERO ) mG2Y = mG2Y - TDUtil.NEG;
+    // if ( mG2Z > TDUtil.ZERO ) mG2Z = mG2Z - TDUtil.NEG;
+    mG2X = CavwayData.toRawG2x( packetdata );
+    mG2Y = CavwayData.toRawG2y( packetdata );
+    mG2Z = CavwayData.toRawG2z( packetdata );
+
+    // mM2X = MemoryOctet.toInt( packetdata[40], packetdata[39] );
+    // mM2Y = MemoryOctet.toInt( packetdata[42], packetdata[41] );
+    // mM2Z = MemoryOctet.toInt( packetdata[44], packetdata[43] );
+    // if ( mM2X > TDUtil.ZERO ) mM2X = mM2X - TDUtil.NEG;
+    // if ( mM2Y > TDUtil.ZERO ) mM2Y = mM2Y - TDUtil.NEG;
+    // if ( mM2Z > TDUtil.ZERO ) mM2Z = mM2Z - TDUtil.NEG;
+    mM2X = CavwayData.toRawM2x( packetdata );
+    mM2Y = CavwayData.toRawM2y( packetdata );
+    mM2Z = CavwayData.toRawM2z( packetdata );
 
     byte[] errorbytes = new byte[9];
     for (int i = 0; i < 9; i++)

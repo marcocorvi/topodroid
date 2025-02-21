@@ -94,7 +94,7 @@ public class CavwayData extends MemoryData
     }
   }
 
-  public double toLaser( byte[] b )
+  public static double toLaser( byte[] b )
   {
     int dhh = (int)( b[2] ); 
     if ( dhh < 0 ) dhh += 256;
@@ -105,37 +105,37 @@ public class CavwayData extends MemoryData
   public double getClino()   { return toClino( data ); }
   public double getRoll()    { return toRoll( data ); }
 
-  public double toAzimuth( byte[] b ) { return toInt( b[ 6], b[ 5] ) * ANGLE_SCALE; }
-  // public double toAzimuth( byte[] b ) { return toAzimuth( b[5], b[6] ); }
+  public static double toAzimuth( byte[] b ) { return toInt( b[ 6], b[ 5] ) * ANGLE_SCALE; }
+  // public static double toAzimuth( byte[] b ) { return toAzimuth( b[5], b[6] ); }
 
-  public double toClino( byte[] b ) // 20250105 changed as for CavwayProtocol
+  public static double toClino( byte[] b ) // 20250105 changed as for CavwayProtocol
   { 
     return  toSignedInt( b[ 8], b[ 7] ) * ANGLE_SCALE;
   }
   // public double toClino( byte[] b ) { return toClino( b[7], b[8] ); }
 
-  public double toRoll( byte[] b )  { return - toInt( b[10], b[ 9] ) * ANGLE_SCALE; }
+  public static double toRoll( byte[] b )  { return - toInt( b[10], b[ 9] ) * ANGLE_SCALE; }
   // public double toRoll( byte[] b ) { return toAzimuth( b[9], b[10] ); }
 
-  public double toAbsG1( byte[] b ) { return toInt( b[12], b[11] ) * G_SCALE / 1000.0 / GLOBAL_FM; }
-  public double toAbsM1( byte[] b ) { return toInt( b[14], b[13] ) * M_SCALE /  100.0 / GLOBAL_FM; }
-  public double toDip1( byte[] b )  { return toSignedInt( b[16], b[15] ) * ANGLE_SCALE; }
-  // public double toDip1( byte[] b ) { return toClino( b[15], b[16] ) * ANGLE_SCALE; }
+  public static double toAbsG1( byte[] b ) { return toInt( b[12], b[11] ) * G_SCALE / 1000.0 / GLOBAL_FM; }
+  public static double toAbsM1( byte[] b ) { return toInt( b[14], b[13] ) * M_SCALE /  100.0 / GLOBAL_FM; }
+  public static double toDip1( byte[] b )  { return toSignedInt( b[16], b[15] ) * ANGLE_SCALE; }
+  // public static double toDip1( byte[] b ) { return toClino( b[15], b[16] ) * ANGLE_SCALE; }
 
-  public double toAbsG2( byte[] b ) { return toInt( b[59], b[58] ) * G_SCALE / 1000.0 / GLOBAL_FM; }
-  public double toAbsM2( byte[] b ) { return toInt( b[61], b[60] ) * M_SCALE /  100.0 / GLOBAL_FM; }
-  public double toDip2( byte[] b )  { return toSignedInt( b[63], b[62] ) * ANGLE_SCALE; }
-  // public double toDip2( byte[] b ) { return toClino( b[62], b[63] ) * ANGLE_SCALE; }
+  public static double toAbsG2( byte[] b ) { return toInt( b[59], b[58] ) * G_SCALE / 1000.0 / GLOBAL_FM; }
+  public static double toAbsM2( byte[] b ) { return toInt( b[61], b[60] ) * M_SCALE /  100.0 / GLOBAL_FM; }
+  public static double toDip2( byte[] b )  { return toSignedInt( b[63], b[62] ) * ANGLE_SCALE; }
+  // public static double toDip2( byte[] b ) { return toClino( b[62], b[63] ) * ANGLE_SCALE; }
 
-  public int toSQ( byte[] b ) { return toInt( b[57], b[56] ); }
+  public static int toSQ( byte[] b ) { return toInt( b[57], b[56] ); }
 
-  public String toTime( byte[] b ) 
+  public static String toTime( byte[] b ) 
   { 
     long seconds = toLong( b[20], b[19], b[18], b[17] );
     return TDUtil.timestampToDateTime( seconds );
   }
 
-  public String toDate( byte[] b ) 
+  public static String toDate( byte[] b ) 
   { 
     long seconds = toLong( b[20], b[19], b[18], b[17] );
     return TDUtil.timestampToDate( seconds );
