@@ -369,6 +369,7 @@ public class ExportDialogShot extends MyDialog
       case TDConst.SURVEY_POS_CSURVEY: // CSurvey
         {
           TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.csurvey_prefix )).isChecked();
+          TDSetting.mExportMedia = ((CheckBox) findViewById( R.id.csurvey_media )).isChecked();
         }
         break;
       // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
@@ -476,6 +477,7 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.compass_swap_lr )).setChecked( TDSetting.mSwapLR );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
+    ((CheckBox) findViewById( R.id.csurvey_media )).setChecked( TDSetting.mExportMedia );
 
     ((CheckBox) findViewById( R.id.survex_splay )).setChecked( TDSetting.mSurvexSplay );
     ((CheckBox) findViewById( R.id.survex_lrud )).setChecked( TDSetting.mSurvexLRUD );

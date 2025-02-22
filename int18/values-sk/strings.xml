@@ -1199,6 +1199,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="export_maps">Mapy pred dátami</string>
     <string name="export_prefix">Cave-prefix v staničeniach</string>
     <string name="export_prefix_hint">Predpona</string>
+    <!-- TODO string name="export_media">media items</string -->
     <!-- UNUSED string name="export_suffix_hint">suffix</string -->
     <string name="export_series_hint">Série</string>
     <string name="export_roundtrip">Round-trip</string>
@@ -1498,6 +1499,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_unnamed_device_summary">Povolí menu na vloženie názvu zariadenia</string> <!-- KEEP -->
   <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
+  <!-- TODO string name="pref_with_media_title">Media export</string -->
+  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
   <string name="pref_compass_splays_title">Pomocné zámery</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
   <string name="pref_walls_splays_title">Walls pomocné zámery</string>

@@ -244,12 +244,16 @@ public class BrushManager
   static Path getPointPath( int i )                  { return (mPointLib == null)? null : mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i )              { return (mPointLib == null)? null : mPointLib.getPointOrigPath( i ); }
 
+  // system and special points
   public static boolean isPointUser( int index )    { return mPointLib != null && index == mPointLib.mPointUserIndex; }
   public static boolean isPointLabel( int index )   { return mPointLib != null && index == mPointLib.mPointLabelIndex; }
   public static boolean isPointPhoto( int index )   { return mPointLib != null && index == mPointLib.mPointPhotoIndex; }
   public static boolean isPointAudio( int index )   { return mPointLib != null && index == mPointLib.mPointAudioIndex; }
   public static boolean isPointSection( int index ) { return mPointLib != null && index == mPointLib.mPointSectionIndex; }
   public static boolean isPointPicture( int index ) { return mPointLib != null && index == mPointLib.mPointPictureIndex; }
+
+  public static boolean isPointMedia( int index )
+  { return mPointLib != null && ( index == mPointLib.mPointPictureIndex || index == mPointLib.mPointPhotoIndex || index == mPointLib.mPointAudioIndex ); }
 
   static boolean isPointEnabled( String name ) { return mPointLib != null && mPointLib.isSymbolEnabled( name ); }
   static boolean isLineEnabled( String name )  { return mLineLib  != null && mLineLib.isSymbolEnabled( name ); }

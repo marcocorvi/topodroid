@@ -1208,6 +1208,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_maps">Maps before data</string>
     <string name="export_prefix">Cave-prefix in station names</string>
     <string name="export_prefix_hint">prefix</string>
+    <string name="export_media">media items</string>
     <!-- UNUSED string name="export_suffix_hint">suffix</string -->
     <string name="export_series_hint">series</string>
     <string name="export_roundtrip" copyable="all">Round-trip</string>
@@ -1508,6 +1509,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_unnamed_device_summary">Enable menu to enter device name</string> <!-- KEEP -->
   <string name="pref_station_prefix_title">Station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey/WinKarst]</string>
+  <string name="pref_with_media_title">Media export</string>
+  <string name="pref_with_media_summary">Include media in export [cSurvey]</string>
   <string name="pref_compass_splays_title">Compass splays</string>
   <string name="pref_compass_splays_summary">Export splays in Compass files</string>
   <string name="pref_walls_splays_title">Walls splays</string>

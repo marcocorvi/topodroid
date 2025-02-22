@@ -95,6 +95,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_prefix"
       />
+    <CheckBox android:id="@+id/csurvey_media"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_media"
+      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_survex"

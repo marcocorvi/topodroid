@@ -1188,6 +1188,7 @@
     <string name="export_maps">地图在数据之前</string>
     <string name="export_prefix">测量点名称里的洞穴前缀</string>
     <string name="export_prefix_hint">前缀</string>
+    <!-- TODO string name="export_media">media items</string -->
     <!-- UNUSED string name="export_suffix_hint">后缀</string -->
     <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">往返</string>
@@ -1482,6 +1483,8 @@
   <string name="pref_unnamed_device_summary">启用菜单以输入设备名称</string>
   <string name="pref_station_prefix_title">Compass测点前缀</string>
   <string name="pref_station_prefix_summary">输出测点前缀[Compass]</string>
+  <!-- TODO string name="pref_with_media_title">Media export</string -->
+  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
   <string name="pref_compass_splays_title">Compass辐测</string>
   <string name="pref_compass_splays_summary">输出辐测到Compass文件</string>
   <string name="pref_walls_splays_title">洞壁侧线</string>

@@ -286,6 +286,7 @@ public class ExportDialogPlot extends MyDialog
       case 1: // CSurvey
         {
           TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.csurvey_prefix )).isChecked();
+          TDSetting.mExportMedia = ((CheckBox) findViewById( R.id.csurvey_media )).isChecked();
         }
         break;
       case 2: // DXF
@@ -380,6 +381,7 @@ public class ExportDialogPlot extends MyDialog
     ((EditText) findViewById( R.id.therion_spacing )).setText( String.format( Locale.US, "%.2f", TDSetting.mBezierStep ) );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
+    ((CheckBox) findViewById( R.id.csurvey_media )).setChecked( TDSetting.mExportMedia );
     
     // ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
     ((CheckBox) findViewById( R.id.dxf_xsections )).setChecked( TDSetting.mAutoXSections );

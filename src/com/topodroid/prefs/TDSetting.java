@@ -255,6 +255,7 @@ public class TDSetting
 
   // public static final boolean mExportUri = true;
 
+  public static boolean mExportMedia          = false;  // whether to include media in export
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
   public static String  mExportPrefix         = null;   // export prefix - only for the current run
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
@@ -1282,9 +1283,10 @@ public class TDSetting
     mKmlSplays         = prefs.getBoolean(     keyExpKml[1], bool(defExpKml[1]) ); // DISTOX_KML_SPLAYS
     // TDLog.v("SETTING load secondary export KML done");
 
-    // String[] keyExpCsx = TDPrefKey.EXPORT_CSX;
-    // String[] defExpCsx = TDPrefKey.EXPORT_CSXdef;
+    String[] keyExpCsx = TDPrefKey.EXPORT_CSX;
+    String[] defExpCsx = TDPrefKey.EXPORT_CSXdef;
     // mExportStationsPrefix = prefs.getBoolean(     keyExpCsx[0], bool(defExpCsx[0]) ); // DISTOX_STATION_PREFIX
+    mExportMedia       =  prefs.getBoolean(     keyExpCsx[1], bool(defExpCsx[1]) ); // DISTOX_WITH_MEDIA
 
     String[] keyExpGpx = TDPrefKey.EXPORT_GPX;
     String[] defExpGpx = TDPrefKey.EXPORT_GPXdef;
@@ -2390,6 +2392,8 @@ public class TDSetting
     String[] def = TDPrefKey.EXPORT_CSXdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_STATION_PREFIX
       mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WITH_MEDIA
+      mExportMedia = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     } else {
       TDLog.e("missing EXPORT CSX key: " + k );
     }
@@ -3309,7 +3313,7 @@ public class TDSetting
       // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c, EPSG %d\n", eol, tf(mSurvexSplay), tf(mSurvexLRUD), mSurvexEPSG );
-      pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
+      pw.printf(Locale.US, "Compass/cSurvey: swap_LR %c, prefix %c, splays %c, media %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays), tf(mExportMedia) );
       // pw.printf(Locale.US, "Walls: splays %c, wallsUD %d \n", tf(mWallsSplays), mWallsUD );
       pw.printf(Locale.US, "Walls: splays %c \n", tf(mWallsSplays) );
       pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c, trox %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom), tf(mVTopoTrox) ); 
@@ -3596,6 +3600,9 @@ public class TDSetting
             mSwapLR = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SWAP_LR", mSwapLR );
             mExportStationsPrefix = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_STATION_PREFIX", mExportStationsPrefix );
             mCompassSplays = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_COMPASS_SPLAYS", mCompassSplays );
+            if ( vals.length > 8 ) {
+              mExportMedia = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_WITH_MEDIA", mExportMedia );
+            }
           }
           continue;
         }

@@ -1189,6 +1189,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_maps">Mapa antes de datos</string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
+    <!-- TODO string name="export_media">media items</string -->
     <!-- UNUSED string name="export_suffix_hint">sufijo</string -->
     <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Ida y vuelta </string>
@@ -1482,6 +1483,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_unnamed_device_summary">Habilitar menú para ingresar el nombre del dispositivo</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
+  <!-- TODO string name="pref_with_media_title">Media export</string -->
+  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
   <string name="pref_compass_splays_title">Muestra Compass</string>
   <string name="pref_compass_splays_summary">Exportar reproducciones en archivos de Compass</string>
   <string name="pref_walls_splays_title">Muestra walls</string>

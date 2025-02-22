@@ -213,6 +213,7 @@ public class TDExporter
 
   static private void writeCsxShotAttachments( PrintWriter pw, DataHelper data, String survey, long sid, DBlock blk )
   {
+    if ( ! TDSetting.mExportMedia ) return;
     long bid = blk.mId;
     AudioInfo audio = data.getAudioAtShot( sid, bid );
     List< PhotoInfo > photos = data.selectPhotoAtShot( sid, bid );

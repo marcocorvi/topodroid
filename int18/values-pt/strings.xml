@@ -1115,6 +1115,7 @@ no campo abaixo e aperte o botão.
   <string name="export_maps">Mapas antes dos dados</string>
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
+    <!-- TODO string name="export_media">media items</string -->
   <!-- UNUSED string name="export_suffix_hint">sufixo</string -->
   <string name="export_series_hint">séries</string>
   <string name="export_roundtrip">Circuito</string>
@@ -1385,6 +1386,8 @@ no campo abaixo e aperte o botão.
   <!-- KEEP -->
   <string name="pref_station_prefix_title">Pref base</string>
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
+  <!-- TODO string name="pref_with_media_title">Media export</string -->
+  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12–1" ou como "12 –".</string>
   <string name="pref_walls_splays_title">Med aux Walls</string>

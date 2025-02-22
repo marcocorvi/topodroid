@@ -1241,7 +1241,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.EXPORT_CSXdef;
     int[] lvl = TDPrefKey.EXPORT_CSXlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ) // DISTOX_STATION_PREFIX
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ), // DISTOX_STATION_PREFIX
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1],         ctx, hlp )  // DISTOX_WITH_MEDIA
     };
   }
 

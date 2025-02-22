@@ -733,21 +733,27 @@ class TDPrefKey
 
   // EXPORT CSV -------------------------------------------------------------------
   static String[] EXPORT_CSX = { // [1]
-    "DISTOX_STATION_PREFIX"        // whether to add cave-name prefix to stations (cSurvey/Compass export)
+    "DISTOX_STATION_PREFIX",        // whether to add cave-name prefix to stations (cSurvey/Compass export)
+    "DISTOX_WITH_MEDIA",
   };
   static int[] EXPORT_CSXtitle = { // [1]
     R.string.pref_station_prefix_title,
+    R.string.pref_with_media_title,
     -1
   };
   static int[] EXPORT_CSXdesc = { // [1]
     R.string.pref_station_prefix_summary,
+    R.string.pref_with_media_summary,
     -1
   };
   static String[] EXPORT_CSXdef = { // [1]
     FALSE,
+    FALSE,
+
     null
   };
   static int[] EXPORT_CSXlvl = {
+    N,
     N,
   };
 

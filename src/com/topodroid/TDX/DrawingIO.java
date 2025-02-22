@@ -2364,6 +2364,7 @@ public class DrawingIO
     for ( DrawingPath p : paths ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
+  // system and special points
         ap.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
       } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
@@ -2403,7 +2404,9 @@ public class DrawingIO
           }
           pp.toTCsurvey( pw, survey, cave, branch, bind, section_info, section );
         } else {
-          pp.toTCsurvey( pw, survey, cave, branch, bind );
+          if ( TDSetting.mExportMedia || ! BrushManager.isPointMedia( pp.mPointType ) ) {
+            pp.toTCsurvey( pw, survey, cave, branch, bind );
+          }
         }
       }
     }
