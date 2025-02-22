@@ -6286,13 +6286,12 @@ public class DataHelper extends DataSetObservable
 
      mColorReset = false;
      try {
-       // TDLog.Log( TDLog.LOG_IO, "load survey from sql file " + filename );
+       // TDLog.v( "DB load survey from file " + filename + " db version " + db_version );
        FileReader fr = TDFile.getFileReader( filename ); // DistoX-SAF
        BufferedReader br = new BufferedReader( fr );
        // first line is survey
        line = br.readLine();
-       // TDLog.Log( TDLog.LOG_DB, "load from file: " + line );
-       // TDLog.v( "DB load: " + line );
+       TDLog.v( "DB load: " + line );
        String[] vals = line.split(" ", 4); 
        // if ( vals.length != 4 ) { TODO } // FIXME
        String table = vals[2];
@@ -6329,7 +6328,7 @@ public class DataHelper extends DataSetObservable
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
 
            while ( (line = br.readLine()) != null ) {
-             // TDLog.Log( TDLog.LOG_DB, "load from file: " + line );
+             // TDLog.v( "DB: " + line );
              vals = line.split(" ", 4);
              table = vals[2];
              v = vals[3];
@@ -6340,18 +6339,19 @@ public class DataHelper extends DataSetObservable
 
              if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
 	     {
+               // TDLog.v("DB AUDIO table " + table + " id " + id + " v " + v );
                itemid = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
                  date    = TDString.unescape( scanline1.stringValue( ) );
                  reftype = (db_version > 53)? scanline1.longValue( 0 ) : 0 ;
                  cv = makeAudioContentValues( sid, id, itemid, date, reftype );
                  myDB.insert( AUDIO_TABLE, null, cv ); 
-                 // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
 
              }
 	     else if ( table.equals(SENSOR_TABLE) ) // ------------ FIXME_SENSORS
 	     {
+               // TDLog.v("DB SENSOR table " + table + " id " + id + " v " + v );
                itemid  = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
                  status  = scanline1.longValue( 0 );
@@ -6363,13 +6363,14 @@ public class DataHelper extends DataSetObservable
                  reftype = (db_version > 53)? scanline1.longValue( 0 ) : 0; // reference item_type
                  cv = makeSensorContentValues( sid, id, itemid, status, title, date, comment, type_str, value, (int)reftype );
                  myDB.insert( SENSOR_TABLE, null, cv ); 
-                 // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
 	     else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
              {
+               // TDLog.v("DB PHOTO table " + table + " id " + id + " v " + v );
                itemid  = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
+                 status  = scanline1.longValue( 0 );
                  title   = TDString.unescape( scanline1.stringValue( ) );
                  date    = TDString.unescape( scanline1.stringValue( ) );
                  comment = TDString.unescape( scanline1.stringValue( ) );
@@ -6378,11 +6379,11 @@ public class DataHelper extends DataSetObservable
                  reftype   = (db_version > 53)? scanline1.longValue( 0 ) : 0 ;
                  cv = makePhotoContentValues( sid, id, itemid, TDStatus.NORMAL, title, date, comment, camera, code, reftype );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
-                 // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
 	     else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
 	     {
+               // TDLog.v("DB PLOT table " + table + " id " + id + " v " + v );
                name         = TDString.unescape( scanline1.stringValue( ) );
                long plot_type = scanline1.longValue( -1 ); if ( db_version <= 20 ) if ( plot_type == 3 ) plot_type = 5;
                status       = scanline1.longValue( 0 );
@@ -6405,7 +6406,6 @@ public class DataHelper extends DataSetObservable
                cv = makePlotContentValues( sid, id, name, plot_type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap, intercept,
                                            center_x, center_y, center_z );
                myDB.insert( PLOT_TABLE, null, cv ); 
-               // TDLog.Log( TDLog.LOG_DB, "load from file plot " + sid + " " + id + " " + start + " " + name );
                // TDLog.v( "DB load from file plot " + sid + " " + id + " " + start + " " + name + " success " + success );
    
              }
@@ -6439,6 +6439,7 @@ public class DataHelper extends DataSetObservable
  * END_SKETCH_3D */
 	     else if ( table.equals(SHOT_TABLE) ) // ------------ SHOTS
              {
+               // TDLog.v("DB SHOT table " + table + " id " + id + " v " + v );
                String from = TDString.unescape( scanline1.stringValue( ) );
                String to   = TDString.unescape( scanline1.stringValue( ) );
                double d    = scanline1.doubleValue( 0.0 );
@@ -6501,10 +6502,10 @@ public class DataHelper extends DataSetObservable
                myDB.insert( SHOT_TABLE, null, cv ); 
 
                // TDLog.v( "DB insert shot " + from + "-" + to + ": " + success );
-               // TDLog.Log( TDLog.LOG_DB, "insert shot " + sid + " " + id + " " + from + " " + to );
              }
 	     else if ( table.equals(FIXED_TABLE) )
 	     {
+               // TDLog.v("DB FIXED table " + table + " id " + id + " v " + v );
                station    = TDString.unescape( scanline1.stringValue( ) );
                double lng = scanline1.doubleValue( 0.0 );
                double lat = scanline1.doubleValue( 0.0 );
@@ -6548,13 +6549,12 @@ public class DataHelper extends DataSetObservable
                cv = makeFixedContentValues( sid, -1L, station, lng, lat, h_ell, h_geo, comment, status, source,
 		     cs, cs_lng, cs_lat, cs_h_geo, cs_n_dec, conv, accur, accur_v, m_to_units, m_to_vunits );
                myDB.insert( FIXED_TABLE, null, cv ); 
-               // TDLog.Log( TDLog.LOG_DB, "load from file fixed " + sid + " " + id + " " + station  );
              } 
 	     else if ( table.equals(STATION_TABLE) )
 	     {
+               // TDLog.v("DB STATION table " + table + " id " + id + " v " + v );
                // N.B. ONLY IF db_version > 19
                // TDLog.e( "v <" + v + ">" );
-               // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
                name    = TDString.unescape( scanline1.stringValue( ) );
                comment = TDString.unescape( scanline1.stringValue( ) );
                long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
