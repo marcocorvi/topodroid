@@ -98,7 +98,7 @@ public class CavwayData extends MemoryData
   {
     int dhh = (int)( b[2] ); 
     if ( dhh < 0 ) dhh += 256;
-    return ( dhh * 1024.0 + toInt( b[4], b[3] ) )/1000.0;
+    return ( dhh * 65536.0 + toInt( b[4], b[3] ) )/1000.0;
   }
 
   public double getAzimuth() { return toAzimuth( data ); }

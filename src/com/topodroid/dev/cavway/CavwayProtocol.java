@@ -120,7 +120,7 @@ public class CavwayProtocol extends TopoDroidProtocol
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
     //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);
 
-    // double d = (packetdata[2] << 8) + MemoryOctet.toInt( packetdata[4], packetdata[3] );
+    // double d = (packetdata[2] << 16) + MemoryOctet.toInt( packetdata[4], packetdata[3] );
     // double b = MemoryOctet.toInt( packetdata[6], packetdata[5] );  //AZM
     // double c = MemoryOctet.toInt( packetdata[8], packetdata[7] );  //INCL
     // double r = MemoryOctet.toInt( packetdata[10], packetdata[9] ); //ROLL
