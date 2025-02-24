@@ -423,6 +423,8 @@ public class DataHelper extends DataSetObservable
   /** min and max times of survey shots with NORMAL status */
   private static final String qSurveysStat6 = " select min( millis ), max( millis ) from shots where surveyId=? AND status=0 ";
 
+  private static final String qCountDevices = " select count( distinct address ) from shots where surveyId=? AND status=0 AND address != \"\" ";
+
   /** @return the name of the survey initial station
    * @param sid   survey ID
    */
@@ -652,6 +654,8 @@ public class DataHelper extends DataSetObservable
         SurveyAccuracy accu = new SurveyAccuracy();
         stat.nrMGD = accu.setBlocks( stat, nr_mgd );
         if ( stat.nrMGD > 0 ) {
+          stat.deviceNr  = cnts.size();
+          // FIXME stddev are computed even if nr. of devices is greater than 1
           for ( int k = 0; k < nr_mgd; ++ k ) {
             if ( stat.G[k] > 10.0f ) {
               float m = stat.M[k] - stat.averageM;
@@ -667,7 +671,6 @@ public class DataHelper extends DataSetObservable
           stat.stddevD   = (float)Math.sqrt( stat.stddevD / stat.nrMGD );
           stat.stddevM  *= 100/stat.averageM;  // percent of average
           stat.stddevG  *= 100/stat.averageG;
-          stat.deviceNr  = cnts.size();
           StringBuilder sb = new StringBuilder();
           for ( String addr : cnts.keySet() ) {
             // TDLog.v("address " + addr + " " + (Integer)cnts.get( addr ) );
@@ -880,6 +883,22 @@ public class DataHelper extends DataSetObservable
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return stat;
+  }
+
+  /** @return the number of different devices used in the survey
+   * @param sid   survey ID
+   */
+  int getCountDevices( long sid )
+  {
+    int ret = 0;
+    String[] args = new String[1];
+    args[0] = Long.toString( sid );
+    Cursor cursor = myDB.rawQuery( qCountDevices, args );
+    if (cursor.moveToFirst()) {
+      ret = (int)( cursor.getLong(0) );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
   }
 
   // --------------------------------------------------------------------
