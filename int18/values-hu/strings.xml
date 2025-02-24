@@ -1192,7 +1192,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_maps">Térkép az adatok előtt</string>
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
-    <!-- TODO string name="export_media">media items</string -->
+    <string name="export_media">média elemek</string>
     <!-- UNUSED string name="export_suffix_hint">utótag</string -->
     <string name="export_series_hint">sorozatok</string>
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
@@ -1488,8 +1488,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_unnamed_device_summary">Menü engedélyezése a műszer nevének megadásához</string>
   <string name="pref_station_prefix_title">Pontnév előtag</string>
   <string name="pref_station_prefix_summary">Pontnév előtagok exportálása</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+  <string name="pref_with_media_title">Média export</string>
+  <string name="pref_with_media_summary">Média felvétele az exportálásba [cSurvey]</string>
   <string name="pref_compass_splays_title">Compass segédmérések</string>
   <string name="pref_compass_splays_summary">Segédmérések exportja a Compass fájlokba</string>
   <string name="pref_walls_splays_title">Walls sünök</string>
@@ -1793,8 +1793,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_line_units_summary">Rajz vonal mértékegység</string>
   <string name="pref_line_close_title">Zárt vonal zárás</string>
   <string name="pref_line_close_summary">Vonal zárása a zárt vonal típusnál</string>
-  <string name="pref_linesnap_title">Vonal/felület illesztés</string>
-  <string name="pref_linesnap_summary">Vonal/terület megfordításának engedélyezése</string>
+  <string name="pref_linesnap_title">Vonal/terület illesztés</string>
+  <string name="pref_linesnap_summary">Vonal/terület akciók engedélyezése</string>
   <string name="pref_linecurve_title">Sima/Kiegyenesített</string>
   <string name="pref_linecurve_summary">Sima/Kiegyenesített vonal szakasz lehetőség</string>
   <string name="pref_linestraight_title">Kiegyenesített vonal</string>
