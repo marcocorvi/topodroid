@@ -1793,8 +1793,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_line_units_summary">Rajz vonal mértékegység</string>
   <string name="pref_line_close_title">Zárt vonal zárás</string>
   <string name="pref_line_close_summary">Vonal zárása a zárt vonal típusnál</string>
-  <string name="pref_linesnap_title">Vonal/felület illesztés</string>
-  <string name="pref_linesnap_summary">Vonal/terület megfordításának engedélyezése</string>
+  <string name="pref_linesnap_title">Vonal/terület illesztés</string>
+  <string name="pref_linesnap_summary">Vonal/terület akciók engedélyezése</string>
   <string name="pref_linecurve_title">Sima/Kiegyenesített</string>
   <string name="pref_linecurve_summary">Sima/Kiegyenesített vonal szakasz lehetőség</string>
   <string name="pref_linestraight_title">Kiegyenesített vonal</string>
