@@ -205,7 +205,7 @@ public class ShotWindow extends Activity
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
   private SurveyAccuracy mSurveyAccuracy;
-  private int mNrDevices = 0;
+  // private int mNrDevices = 0;
 
   private static DBlockBuffer mDBlockBuffer = new DBlockBuffer(); // survey-data buffer (created on first call)
 
@@ -304,9 +304,9 @@ public class ShotWindow extends Activity
   private BitmapDrawable mBMright;
   // private SearchResult mSearch = null;
 
-  boolean isBlockMagneticBad( DBlock blk ) { return (mNrDevices == 1) && mSurveyAccuracy.isBlockAMDBad( blk ); }
+  boolean isBlockMagneticBad( DBlock blk ) { return /* (mNrDevices == 1) && */ mSurveyAccuracy.isBlockAMDBad( blk ); }
 
-  String getBlockExtraString( DBlock blk ) { return (mNrDevices == 1) ? mSurveyAccuracy.getBlockExtraString( blk ): ""; }
+  String getBlockExtraString( DBlock blk ) { return /* (mNrDevices != 1) ? "" : */ mSurveyAccuracy.getBlockExtraString( blk ); }
 
   // --------------------------------------------------------------------------------
   // get a button-1
@@ -405,7 +405,7 @@ public class ShotWindow extends Activity
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       mMyBlocks = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
       mSurveyAccuracy = new SurveyAccuracy( mMyBlocks ); 
-      mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
+      // mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
       // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
 
       mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
@@ -465,7 +465,7 @@ public class ShotWindow extends Activity
   synchronized public void updateBlockList( long blk_id )
   {
     // TDLog.v( TAG + "update block list " + blk_id );
-    DBlock blk = mApp_mData.selectLastShot( blk_id, TDInstance.sid );
+    DBlock blk = mApp_mData.selectTheShot( blk_id, TDInstance.sid );
     if ( blk == null || mDataAdapter == null ) {
       // TDLog.v( TAG + "data null block");
       return;
@@ -480,7 +480,7 @@ public class ShotWindow extends Activity
       boolean ret = false;
       if ( ! scan ) { // normal data
         mSurveyAccuracy.addBlockAMD( blk );
-        mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
+        // mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           // FIXME UNTESTED it was: ret = mApp.assignStationsAll( mDataAdapter.getItems( ) ); 
           ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign( 2 ) ); // from the 2-nd last leg
@@ -1210,7 +1210,7 @@ public class ShotWindow extends Activity
     mActivity = this;
     mOnOpenDialog = false;
     mSurveyAccuracy = new SurveyAccuracy( ); 
-    mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
+    // mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
     mMediaManager   = new MediaManager( mApp_mData );
 
     // FIXME-28
