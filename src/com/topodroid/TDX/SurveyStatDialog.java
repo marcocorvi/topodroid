@@ -97,7 +97,7 @@ class SurveyStatDialog extends MyDialog
       mTextDevices.setText( String.format( res.getString(R.string.stat_devices), mStat.deviceNr, mStat.deviceCnt ) );
       mTextDates.setText( String.format( res.getString(R.string.stat_dates), TDUtil.millisToDate( mStat.minMillis * 1000 ), TDUtil.millisToDate( mStat.maxMillis * 1000 ) ) );
 
-      if ( mStat.deviceNr == 1 ) {
+      // if ( mStat.deviceNr == 1 ) {
         float g = mStat.averageG*TDSetting.mAccelerationThr/2000; // 2000 = 20 * 100 ie percent/20
         float m = mStat.averageM*TDSetting.mMagneticThr/2000;
         float d = TDSetting.mDipThr/20;
@@ -108,14 +108,14 @@ class SurveyStatDialog extends MyDialog
         mTextStddevM.setText( String.format( res.getString(R.string.stat_stddev_m), mStat.stddevM ) );
         mTextStddevG.setText( String.format( res.getString(R.string.stat_stddev_g), mStat.stddevG ) );
         mTextStddevD.setText( String.format( res.getString(R.string.stat_stddev_dip), mStat.stddevD, mStat.averageD ) );
-      } else {
-        histG.setVisibility( View.GONE );
-        histM.setVisibility( View.GONE );
-        histD.setVisibility( View.GONE );
-        mTextStddevM.setVisibility( View.GONE );
-        mTextStddevG.setVisibility( View.GONE );
-        mTextStddevD.setVisibility( View.GONE );
-      }
+      // } else {
+      //   histG.setVisibility( View.GONE );
+      //   histM.setVisibility( View.GONE );
+      //   histD.setVisibility( View.GONE );
+      //   mTextStddevM.setVisibility( View.GONE );
+      //   mTextStddevG.setVisibility( View.GONE );
+      //   mTextStddevD.setVisibility( View.GONE );
+      // }
 
   }
 

@@ -8322,7 +8322,7 @@ public class DrawingWindow extends ItemDrawer
               azimuth = mPlot2.azimuth;
               oblique = mPlot2.clino;
             }
-            new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
+            new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp.getSurveyStat( TDInstance.sid ) ).show();
           } else {
             TDToast.makeBad( R.string.no_data_reduction );
 	  }

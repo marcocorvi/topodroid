@@ -130,6 +130,37 @@ class Accuracy
     mCountDip += 1.0f;
   }
 
+  /** @return weighted average of differences of per-device value minus mean 
+   * @param n   number of elements in G[]
+   * @param G   values (size( nr)
+   * @param GG  means (per device)
+   * @param idx device index for each value (size nr)
+   */
+  static float computeWeightedAverage( int nr, float[] G, float[] GG, int[] idx )
+  {
+    float count = 0;
+    float mean  = 0;
+    for ( int j = 0; j < nr; ++ j ) {
+      int k = idx[j];
+      if ( k >= 0 && G[j] > THRS ) {
+        float a = G[j];
+        float m = GG[k];
+        float r = BND_1 * a / m - BND_2;
+        if ( r >= 1.0f ) {
+          mean += (a - m);
+          count += 1.0f;
+        } else if ( r > 0 ) {
+          mean += (a - m) * r;
+          count += r;
+        }
+      }
+    }
+    if ( count > 0.0f ) {
+      mean /= count;
+    }
+    return mean;
+  }
+
   // /** set the means with a list of shot data
   //  * @param blks   list of shot data
   //  */
@@ -162,46 +193,46 @@ class Accuracy
   //   // TDLog.v("ACCURACY count " + mCountDip + " means " + ma + " / " + mCountAcc + " " + mm + " / " + mCountMag + " " + mDipMean );
   // } 
 
-  /** compute the means with the shot data in a survey statistics
-   * @param stat   survey statistics
-   * @param n      number of data in stat vectors
-   * @return the number of items that could be used in the averages
-   * @note used by DataHelper
-   */
-  static public int countBlocks( SurveyStat stat, int n  ) 
-  {
-    Accuracy accu = new Accuracy( null );
-    return accu.doCountBlocks( stat, n );
-  }
+  // /** compute the means with the shot data in a survey statistics
+  //  * @param stat   survey statistics
+  //  * @param n      number of data in stat vectors
+  //  * @return the number of items that could be used in the averages
+  //  * @note used by DataHelper
+  //  */
+  // static public int countBlocks( SurveyStat stat, int n  ) 
+  // {
+  //   Accuracy accu = new Accuracy( null );
+  //   return accu.doCountBlocks( stat, n );
+  // }
 
-  private int doCountBlocks( SurveyStat stat, int n  ) 
-  {
-    float ma = 0;
-    float mm = 0;
-    int   nr = 0;
-    for ( int k = 0; k < n; ++k ) {
-      if ( stat.G[k] > THRS ) { 
-        ma += stat.G[k];
-        mm += stat.M[k];
-        ++ nr;
-      }
-    }
-    if ( nr > 0 ) {
-      ma /= nr;
-      mm /= nr;
-      for ( int k = 0; k < n; ++k ) {
-        if ( stat.G[k] > THRS ) { 
-          addBlockAcc( stat.G[k], ma );
-          addBlockMag( stat.M[k], mm );
-          addBlockDip( stat.D[k] );
-        }
-      }
-      if ( mCountDip > 0 ) stat.averageD = mDipSum / mCountDip;
-      stat.averageG = mAccelerationSum / mCountAcc;
-      stat.averageM = mMagneticSum / mCountMag;
-    }
-    return nr;
-  } 
+  // private int doCountBlocks( SurveyStat stat, int n  ) 
+  // {
+  //   float ma = 0;
+  //   float mm = 0;
+  //   int   nr = 0;
+  //   for ( int k = 0; k < n; ++k ) {
+  //     if ( stat.G[k] > THRS ) { 
+  //       ma += stat.G[k];
+  //       mm += stat.M[k];
+  //       ++ nr;
+  //     }
+  //   }
+  //   if ( nr > 0 ) {
+  //     ma /= nr;
+  //     mm /= nr;
+  //     for ( int k = 0; k < n; ++k ) {
+  //       if ( stat.G[k] > THRS ) { 
+  //         addBlockAcc( stat.G[k], ma );
+  //         addBlockMag( stat.M[k], mm );
+  //         addBlockDip( stat.D[k] );
+  //       }
+  //     }
+  //     if ( mCountDip > 0 ) stat.averageD = mDipSum / mCountDip;
+  //     stat.averageG = mAccelerationSum / mCountAcc;
+  //     stat.averageM = mMagneticSum / mCountMag;
+  //   }
+  //   return nr;
+  // } 
 
   /** reset counters
    */

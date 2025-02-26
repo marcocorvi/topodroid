@@ -28,6 +28,7 @@ import com.topodroid.inport.ParserShot;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
+import com.topodroid.dev.Device;
 
 // import java.io.File;
 import java.io.FileNotFoundException;
@@ -423,7 +424,8 @@ public class DataHelper extends DataSetObservable
   /** min and max times of survey shots with NORMAL status */
   private static final String qSurveysStat6 = " select min( millis ), max( millis ) from shots where surveyId=? AND status=0 ";
 
-  private static final String qCountDevices = " select count( distinct address ) from shots where surveyId=? AND status=0 AND address != \"\" ";
+  // private static final String qCountDevices = " select count( distinct address ) from shots where surveyId=? AND status=0 AND address != \"\" ";
+  private static final String qDevices = " select distinct address from shots where surveyId=? AND status=0 AND address != \"\" ";
 
   /** @return the name of the survey initial station
    * @param sid   survey ID
@@ -599,91 +601,162 @@ public class DataHelper extends DataSetObservable
   }
 
   /** @return the survey data statistics
-   * @param sid   survey ID
+   * @param sid     survey ID
+   * @param devices list of known devices
    */
-  SurveyStat getSurveyStat( long sid )
+  SurveyStat getSurveyStat( long sid, List< Device > devices )
   {
-    // TDLog.Log( TDLog.LOG_DB, "Get Survey Stat sid " + sid );
-    HashMap< String, Integer > map = new HashMap< String, Integer >();
-    int n0 = 0;
-    int nc = 0;
-    int ne = 0;
-    int nl = 0;
-    int nv = 0;
-
     SurveyStat stat = new SurveyStat( sid );
-
     if ( myDB == null ) return stat;
+    int n0 = 0;
+    int nc = 0; // number of components
+    int ne = 0; // number of edges
+    int nl = 0; // number of loops
+    int nv = 0; // number of vertices
 
-    int datamode = getSurveyDataMode( sid );
     String[] args = new String[1];
     args[0] = Long.toString( sid );
 
-    Cursor cursor; // = null;
-    if ( datamode == 0 ) {
-      // cursor = myDB.query( SHOT_TABLE,
-      //     		   new String[] { "flag", "acceleration", "magnetic", "dip", "address" },
-      //                      "surveyId=? AND status=0 AND acceleration > 1 ",
-      //                      new String[] { Long.toString(sid) },
-      //                      null, null, null );
-      cursor = myDB.rawQuery( qSurveysStat1, args );
-// FIXME take into account possibly more than one device
-      int nr_mgd = 0;
-      if (cursor.moveToFirst()) {
-        int nr = cursor.getCount();
-        stat.G = new float[ nr ];
-        stat.M = new float[ nr ];
-        stat.D = new float[ nr ];
-        HashMap< String, Integer > cnts = new HashMap<>();
-        do {
-          String address = cursor.getString(4);
-          if ( address.length() > 0 ) {
-            stat.G[nr_mgd] = (float)( cursor.getDouble(1) );
-            stat.M[nr_mgd] = (float)( cursor.getDouble(2) );
-            stat.D[nr_mgd] = (float)( cursor.getDouble(3) );
-            ++nr_mgd;
-            Integer cnt = (Integer) cnts.get( address );
-            if ( cnt == null ) {
-              cnts.put( address, new Integer(1) );
-              // cnts.put( address, 1 ); // suggested by lint Integer.valueOf( 1 )
-            } else {
-              cnts.put( address, new Integer( cnt.intValue() + 1 ) );
-              // cnts.put( address, cnt.intValue() + 1 ); // suggested by lint Integer.valueOf( ... )
-            }
+    int datamode = getSurveyDataMode( sid );
+    HashMap< String, Integer > map = new HashMap< String, Integer >(); // stations hash-map
+
+    // TDLog.Log( TDLog.LOG_DB, "Get Survey Stat sid " + sid );
+    List<String> addresses = getListDevices( sid );
+    int nr_dev = addresses.size();
+    stat.deviceNr  = nr_dev; // cnts.size();
+    // TDLog.v("DB devices " + nr_dev );
+    // for ( int k =0; k< nr_dev; ++k ) TDLog.v("  dev " + k + ": " + addresses.get(k) );
+
+    if ( nr_dev > 0 ) {
+      String[] name = new String[ nr_dev ];
+      for ( int k=0; k<nr_dev; ++ k) {
+        String add = addresses.get(k);
+        name[k] = add.substring( 9 );
+        for ( Device dev : devices ) {
+          if (dev.hasAddress( add ) ) {
+            name[k] = dev.toSimpleString();
+            break;
           }
-        } while ( cursor.moveToNext() );
-        stat.nrMGD = Accuracy.countBlocks( stat, nr_mgd );
-        if ( stat.nrMGD > 0 ) {
-          stat.deviceNr  = cnts.size();
-          // FIXME stddev are computed even if nr. of devices is greater than 1
-          for ( int k = 0; k < nr_mgd; ++ k ) {
-            if ( stat.G[k] > 10.0f ) {
-              float m = stat.M[k] - stat.averageM;
-              float g = stat.G[k] - stat.averageG;
-              float d = stat.D[k] - stat.averageD;
-              stat.stddevM += m * m;
-              stat.stddevG += g * g;
-              stat.stddevD += d * d;
-            }
-          }
-          stat.stddevM   = (float)Math.sqrt( stat.stddevM / stat.nrMGD );
-          stat.stddevG   = (float)Math.sqrt( stat.stddevG / stat.nrMGD );
-          stat.stddevD   = (float)Math.sqrt( stat.stddevD / stat.nrMGD );
-          stat.stddevM  *= 100/stat.averageM;  // percent of average
-          stat.stddevG  *= 100/stat.averageG;
-          StringBuilder sb = new StringBuilder();
-          for ( String addr : cnts.keySet() ) {
-            // TDLog.v("address " + addr + " " + (Integer)cnts.get( addr ) );
-            try { // 20280118 try - catch
-              sb.append(((Integer) cnts.get(addr)).intValue()).append(" ");
-            } catch ( NullPointerException e ) {
-              TDLog.e( e.getMessage() );
-            }
-          }
-          stat.deviceCnt = sb.toString();
         }
       }
-      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+      int[]   CA = new int[ nr_dev ];   // per-device counts
+      int[]   CC = new int[ nr_dev ];   // per-device counts over threshold
+      float[] GG = new float[ nr_dev ]; // per-device accumulators 
+      float[] MM = new float[ nr_dev ];
+      float[] DD = new float[ nr_dev ];
+      for ( int k = 0; k < nr_dev; ++ k ) {
+        CC[ k ] = 0;
+        GG[ k ] = 0;
+        MM[ k ] = 0;
+        DD[ k ] = 0;
+      }
+      Cursor cursor; // = null;
+      if ( datamode == 0 ) {
+        // cursor = myDB.query( SHOT_TABLE,
+        //     		   new String[] { "flag", "acceleration", "magnetic", "dip", "address" },
+        //                      "surveyId=? AND status=0 AND acceleration > 1 ",
+        //                      new String[] { Long.toString(sid) },
+        //                      null, null, null );
+        cursor = myDB.rawQuery( qSurveysStat1, args );
+        int nr_mgd = 0;
+        if (cursor.moveToFirst()) {
+          int nr = cursor.getCount(); 
+          // assert( nr > 0 );
+          int[] addr = new int[ nr ]; // index of device
+          for ( int j = 0; j<nr; ++j ) addr[j] = -1;
+          stat.G = new float[ nr ];
+          stat.M = new float[ nr ];
+          stat.D = new float[ nr ];
+          do {
+            String address = cursor.getString(4);
+            if ( address.length() > 0 ) {
+              int k = 0;
+              for ( ; k < nr_dev; ++ k ) {
+                if ( address.equals( addresses.get(k) ) ) {
+                  addr[ nr_mgd ] = k;
+                  if ( cursor.getDouble(1) > Accuracy.THRS ) {
+                    GG[ k ] +=  (float)( cursor.getDouble(1) );
+                    MM[ k ] +=  (float)( cursor.getDouble(1) );
+                    ++ CC[k];
+                  }
+                  DD[ k ] +=  (float)( cursor.getDouble(1) );
+                  ++ CA[k];
+                  break;
+                }
+              }
+              stat.G[nr_mgd] = (float)( cursor.getDouble(1) );
+              stat.M[nr_mgd] = (float)( cursor.getDouble(2) );
+              stat.D[nr_mgd] = (float)( cursor.getDouble(3) );
+              ++nr_mgd;
+            }
+          } while ( cursor.moveToNext() );
+          stat.nrMGD = nr_mgd;
+          float mean_g = 0; // average of the per-device averages 
+          float mean_m = 0;
+          float mean_d = 0;
+          int cnt_gm = 0;   // count of the per-device average
+          int cnt_d  = 0;
+          for ( int k = 0; k < nr_dev; ++ k ) {
+            if ( CC[k] > 0 ) { 
+              GG[k] /= CC[k];
+              MM[k] /= CC[k];
+              mean_g += GG[k];
+              mean_m += MM[k];
+              ++ cnt_gm;
+            }
+            if ( CA[k] > 0 ) {
+              DD[k] /= CA[k];
+              mean_d += DD[k];
+              ++ cnt_d;
+            }
+          }
+          if ( cnt_gm > 0 ) {
+            mean_g /= cnt_gm;
+            mean_m /= cnt_gm;
+          } 
+          if ( cnt_d > 0 ) {
+            mean_d /= cnt_d;
+          }
+          stat.averageG = mean_g + Accuracy.computeWeightedAverage( nr_mgd, stat.G, GG, addr );
+          stat.averageM = mean_m + Accuracy.computeWeightedAverage( nr_mgd, stat.M, MM, addr );
+          stat.averageD = mean_d + Accuracy.computeWeightedAverage( nr_mgd, stat.D, DD, addr );
+          // stat.nrMGD = Accuracy.countBlocks( stat, nr_mgd );
+          if ( stat.nrMGD > 0 ) {
+            // FIXME stddev should be computed for each address and combined
+            int cnt = 0;
+            for ( int j = 0; j < nr_mgd; ++ j ) {
+              int k = addr[j];
+              if ( k >= 0 && stat.G[j] > 10.0f ) {
+                float m = stat.M[j] - MM[k]; // stat.averageM;
+                float g = stat.G[j] - GG[k]; // stat.averageG;
+                float d = stat.D[j] - DD[k]; // stat.averageD;
+                stat.stddevM += m * m;
+                stat.stddevG += g * g;
+                stat.stddevD += d * d;
+                ++ cnt;
+              }
+            }
+            if ( cnt > 0 ) {
+              stat.stddevM   = (float)Math.sqrt( stat.stddevM / cnt );
+              stat.stddevG   = (float)Math.sqrt( stat.stddevG / cnt );
+              stat.stddevD   = (float)Math.sqrt( stat.stddevD / cnt );
+              stat.stddevM  *= 100/stat.averageM;  // percent of average
+              stat.stddevG  *= 100/stat.averageG;
+            } else {
+              stat.stddevM = 0;
+              stat.stddevG = 0;
+              stat.stddevD = 0;
+            }
+            StringBuilder sb = new StringBuilder();
+            for ( int k=0; k<nr_dev; ++ k) {
+              sb.append( name[k] ).append( ": ").append( Integer.toString( CA[k] ) );
+              if ( k + 1 < nr_dev ) sb.append(" / ");
+            }
+            stat.deviceCnt = sb.toString();
+          }
+        }
+        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+      }
     }
 
     // count components
@@ -693,7 +766,7 @@ public class DataHelper extends DataSetObservable
       //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
       //                      new String[] { Long.toString(sid) },
       //                      null, null, null );
-      cursor = myDB.rawQuery( qSurveysStat2, args );
+      Cursor cursor = myDB.rawQuery( qSurveysStat2, args );
       if (cursor.moveToFirst()) {
         do {
           float len = (float)( cursor.getDouble(1) );
@@ -788,7 +861,7 @@ public class DataHelper extends DataSetObservable
       // //                      null, null, null );
       // cursor = myDB.rawQuery( qSurveysStat4, args );
 
-      cursor = myDB.rawQuery( qjShots, new String[] { Long.toString(sid), Long.toString(sid) } );
+      Cursor cursor = myDB.rawQuery( qjShots, new String[] { Long.toString(sid), Long.toString(sid) } );
       if (cursor.moveToFirst()) {
         do {
           String f = cursor.getString(2);
@@ -798,16 +871,16 @@ public class DataHelper extends DataSetObservable
             case 0: // NORMAL SHOT
               ++ stat.countLeg;
               stat.lengthLeg += len;
-	      // if ( depths.containsKey( t ) ) {
-	        // float dep = (float)( cursor.getDouble(4) ) - depths.get( t ).floatValue();
-	        float dep = (float)( cursor.getDouble(4) - cursor.getDouble(5) );
+              // if ( depths.containsKey( t ) ) {
+                // float dep = (float)( cursor.getDouble(4) ) - depths.get( t ).floatValue();
+                float dep = (float)( cursor.getDouble(4) - cursor.getDouble(5) );
                 if ( cursor.getLong(6) == 0 ) {
                   stat.extLength += Math.abs( dep );
                 } else {
                   stat.extLength += len;
                 }
-		if ( len > dep ) stat.planLength += (float)( Math.sqrt( len*len - dep*dep ) );
-	      // }
+        	if ( len > dep ) stat.planLength += (float)( Math.sqrt( len*len - dep*dep ) );
+              // }
               break;
             case 1: // SURFACE SHOT
               ++ stat.countSurface;
@@ -861,6 +934,7 @@ public class DataHelper extends DataSetObservable
     stat.countLoop = nl;
     stat.countComponent = nc;
     // TDLog.Log( TDLog.LOG_DB, "Get Survey Stats NV " + nv + " NE " + ne + " NL " + nl + " NC " + nc);
+    
 
     // cursor = myDB.query( SHOT_TABLE,
     //                      new String[] { "count()" },
@@ -869,7 +943,7 @@ public class DataHelper extends DataSetObservable
     //                      null,  // groupBy
     //                      null,  // having
     //                      null ); // order by
-    cursor = myDB.rawQuery( qSurveysStat5, args );
+    Cursor cursor = myDB.rawQuery( qSurveysStat5, args );
     if (cursor.moveToFirst()) {
       stat.countSplay = (int)( cursor.getLong(0) );
     }
@@ -901,6 +975,25 @@ public class DataHelper extends DataSetObservable
   //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
   //   return ret;
   // }
+
+  /** @return the list of devices used in a survey
+   * @param sid   survey ID
+   */
+  private List<String> getListDevices( long sid )
+  {
+    ArrayList< String > ret = new ArrayList<>();
+    String[] args = new String[1];
+    args[0] = Long.toString( sid );
+    Cursor cursor = myDB.rawQuery( qDevices, args );
+    if (cursor.moveToFirst()) {
+      do {
+        ret.add( cursor.getString(0) );
+      } while (cursor.moveToNext());
+    }    
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }      
+
 
   // --------------------------------------------------------------------
   /* compile statements

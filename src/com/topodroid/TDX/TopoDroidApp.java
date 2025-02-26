@@ -593,6 +593,15 @@ public class TopoDroidApp extends Application
     mData.updateSurveyExtend( TDInstance.sid, extend );
   }
 
+  /** @return the statistics of a survey
+   * @param sid   survey ID
+   */
+  static SurveyStat getSurveyStat( long sid )
+  {
+    List< Device > devices = mDData.getDevices();
+    return mData.getSurveyStat( sid, devices );
+  }
+
   /** @return the info of the current calibration
    */
   public CalibInfo getCalibInfo()

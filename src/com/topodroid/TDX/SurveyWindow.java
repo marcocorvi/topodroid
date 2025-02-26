@@ -439,7 +439,7 @@ public class SurveyWindow extends Activity
       if ( k < mNrButton1 && b == mButton1[k++] ) {  // NOTES
         doNotes();
       } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-        new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
+        new SurveyStatDialog( mActivity, mApp.getSurveyStat( TDInstance.sid ) ).show();
       } else if ( TDLevel.overNormal ) {
         if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
           do3D();

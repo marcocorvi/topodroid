@@ -101,6 +101,12 @@ public class Device
   public String getAddress() { return mAddress; }
 
   // check if this device has given address or nickname
+  public boolean hasAddress( String addr )
+  {
+    return mAddress.equals( addr );
+  }
+
+  // check if this device has given address or nickname
   public boolean hasAddressOrNickname( String addr )
   {
     return mAddress.equals( addr ) || ( mNickname != null && mNickname.equals( addr ) );
