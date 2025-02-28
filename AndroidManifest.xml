@@ -37,7 +37,8 @@
          API-31 = Android 12
          API-32 = Android 12.1
          API-33 = Android 13    Tiramisu
-         API-34 = Android 14 
+         API-34 = Android 14    Upside Down Cake
+         API-35 = Android 15 	Vanilla Ice Cream 
     -->
     <uses-sdk
        android:minSdkVersion="21"
