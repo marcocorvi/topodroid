@@ -1185,7 +1185,7 @@
     <string name="export_maps">Блок map до данных съёмки</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
-    <!-- TODO string name="export_media">media items</string -->
+    <tring name="export_media">Фото-Аудио</string>
     <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
     <string name="export_series_hint">группа</string>
     <string name="export_roundtrip">Roundtrip</string>
@@ -1480,8 +1480,8 @@
   <string name="pref_unnamed_device_summary">Включить меню для ввода имени устройства</string>
   <string name="pref_station_prefix_title">Экспортировать пикеты с префиксом </string>
   <string name="pref_station_prefix_summary">Добавлять префикс к номерам пикетов при экспорте в формат [Compass]</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+  <string name="pref_with_media_title">Экспорт фото-аудио</string>
+  <string name="pref_with_media_summary">Включть фото-аудио в экспорт [cSurvey]</string>
   <string name="pref_compass_splays_title">Сплеи в Compass</string>
   <string name="pref_compass_splays_summary">Экспорт сплеев в формат Compass</string>
   <string name="pref_walls_splays_title">Сплеи в Walls</string>
@@ -2328,8 +2328,8 @@
     <string name="cpref_dem_maxsize_summary">Максимальное число ячеек сетки [400]</string>
     <string name="cpref_dem_reduce_title">Уменьшение DEM</string>
     <string name="cpref_dem_reduce_summary">режим уменьшения DEM [сократить]</string>
-    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
-    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
+    <string name="cpref_texture_root_title">Хранилище текстур</string>
+    <string name="cpref_texture_root_summary">Путь к хранилищу текстур [/sdcard/]</string>
   
     <string name="cpref_all_splay_title">Все сплеи</string>
     <string name="cpref_all_splay_summary">Все сплеи для стен</string>
