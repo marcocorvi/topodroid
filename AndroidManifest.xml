@@ -366,7 +366,7 @@
           android:configChanges="orientation|screenSize"
           android:exported="false"
         ><!--
-                android:configChanges="orientation|screenSize" to react to screen orientation chnages
+                android:configChanges="orientation|screenSize" to react to screen orientation changes
 	        android:requestLegacyExternalStorage="true"
         -->
         <!-- intent-filter>
@@ -379,8 +379,8 @@
         </intent-filter -->
       </activity>
 
-      <!-- 2025-01-27 drop MyFileProvider -->
-      <!-- provider 
+      <!-- MyFileProvider used by zip-sharing -->
+      <provider 
         android:name="com.topodroid.utils.MyFileProvider" 
         android:authorities="com.topodroid.fileprovider" 
         android:exported="false" 
@@ -388,6 +388,6 @@
         <meta-data 
           android:name="android.support.FILE_PROVIDER_PATHS" 
           android:resource="@xml/file_paths" /> 
-      </provider --> 
+      </provider> 
     </application>
 </manifest> 
