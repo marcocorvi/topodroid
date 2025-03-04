@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 
 import com.topodroid.ui.MyColorPicker;
-import com.topodroid.ui.MyButton;;
+import com.topodroid.ui.MyButton;
 
 import android.content.Context;
 
