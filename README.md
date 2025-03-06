@@ -6,7 +6,7 @@ TopoDroid code base
 This is the TopoDroid app (com.topodroid.TDX) repository.
 
 TopoDroid is a productivity Android app for cave surveying.
-It is specially designed to do cave surveying with the DistoX (v. 1, 2, and BLE). the BRIC (4 and 5), and the SAP (5 and 6)
+It is specially designed to do cave surveying with the DistoX (v. 1, 2, and BLE), the Cavway X1, the BRIC (4 and 5), and the SAP (5 and 6)
 although it can be profitably used even without it.
 
 Visit the website https://sites.google.com/site/speleoapps for more informations about TopoDroid, and in particular for the old version changes doc.

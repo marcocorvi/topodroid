@@ -12,7 +12,7 @@
 package com.topodroid.dev.cavway;
 
 import com.topodroid.math.TDVector;
-import com.topodroid.math.TDMatrix;;
+import com.topodroid.math.TDMatrix;
 import com.topodroid.utils.TDUtil;
 
 
