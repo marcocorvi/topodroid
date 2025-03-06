@@ -58,6 +58,7 @@ public class QCamDrawingSurface extends SurfaceView
   private Camera.ShutterCallback mShutter;
   private Display mDisplay = null;
   private byte[] mJpegData;
+  private byte[] mRawData;
 
   private OrientationEventListener mOrientationListener = null;
   private int mOrientation = 0;
@@ -89,6 +90,7 @@ public class QCamDrawingSurface extends SurfaceView
     mQCam = null;
     mCamera   = null;
     mJpegData = null;
+    mRawData  = null;
 
     createCallbacks();
 
@@ -103,6 +105,10 @@ public class QCamDrawingSurface extends SurfaceView
   /** @return the JPEG data buffer
    */
   byte[] getJpegData() { return mJpegData; }
+
+  /** @return the RAW data buffer
+   */
+  byte[] getRawData() { return mRawData; }
 
 
   /** called when the surface is changed
@@ -356,12 +362,13 @@ public class QCamDrawingSurface extends SurfaceView
     };
     mRaw = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) {
-        // TDLog.v( "Picture Raw callback data " + ((data==null)? "null" : data.length) );
+        TDLog.v( "Picture Raw callback data " + ((data==null)? "null" : data.length) );
+        mRawData = data;
       }
     };
     mJpeg = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) { 
-        // TDLog.v( "Picture JPEG callback data " + ((data==null)? "null" : data.length) );
+        TDLog.v( "Picture JPEG callback data " + ((data==null)? "null" : data.length) );
         mJpegData = data;
       }
     };

@@ -87,7 +87,7 @@ public class MyBearingAndClino implements IBearingAndClino
     } catch ( IOException e ) {
       TDLog.e( "IO exception " + e.getMessage() );
     }
-      TDLog.v("set JPEG data: " + mHasSaved + " - file: " + mFilepath );
+    TDLog.v("set JPEG data: " + mHasSaved + " - file: " + mFilepath );
     return mHasSaved;
   }
 

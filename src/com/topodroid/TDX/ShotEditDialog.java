@@ -1149,49 +1149,51 @@ class ShotEditDialog extends MyDialog
   private void createMoreButtons( int size )
   {
     int nr_buttons = 5; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
-    Button[] mButtonX = new Button[nr_buttons];
-    int pos = 0;
 
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     // mButtonPlot.setOnClickListener( this );
     
     // if ( photoCheck ) {
       mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
-      mButtonX[pos++] = mButtonPhoto;
       mButtonPhoto.setOnClickListener( this );
     // } else {
+    //   mButtonPhoto = null;
     //   -- nr_buttons;
     // }
 
     if ( hasAudio ) {
       mButtonAudio = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
       mButtonAudio.setOnClickListener( this );
-      mButtonX[pos++] = mButtonAudio;
     } else {
+      mButtonAudio = null;
       -- nr_buttons;
     }
 
     if ( TDSetting.mWithSensors ) {
       mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
       mButtonSensor.setOnClickListener( this );
-      mButtonX[pos++] = mButtonSensor;
     } else {
-      // mButtonSensor = null;
+      mButtonSensor = null;
       -- nr_buttons;
     }
 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
     mButtonShot.setOnClickListener( this );
-    mButtonX[pos++] = mButtonShot;
 
     if ( TDLevel.overAdvanced ) {
       mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
       mButtonSurvey.setOnClickListener( this );
-      mButtonX[pos++] = mButtonSurvey;
     } else {
-      // mButtonSurvey = null;
+      mButtonSurvey = null;
       -- nr_buttons;
     }
+    Button[] mButtonX = new Button[nr_buttons];
+    int pos = 0;
+    if ( mButtonPhoto  != null ) mButtonX[pos++] = mButtonPhoto;
+    if ( mButtonAudio  != null ) mButtonX[pos++] = mButtonAudio;
+    if ( mButtonSensor != null ) mButtonX[pos++] = mButtonSensor;
+    if ( mButtonShot   != null ) mButtonX[pos++] = mButtonShot;
+    if ( mButtonSurvey != null ) mButtonX[pos++] = mButtonSurvey;
 
     LinearLayout layout4x = (LinearLayout) findViewById( R.id.layout4x );
     layout4x.setMinimumHeight( size + 20 );

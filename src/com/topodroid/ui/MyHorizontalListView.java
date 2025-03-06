@@ -252,7 +252,7 @@ public class MyHorizontalListView extends AdapterView<ListAdapter>
           mMaxX = 0;
         }
       } else {
-        TDLog.e("Horizontal list view: fill right, null child. Size " + mAdapter.getCount() );
+        TDLog.e("Horizontal list view: fill right, null child. Index " + mRightViewIndex + " Size " + mAdapter.getCount() );
       }
       mRightViewIndex++;
     }
@@ -267,7 +267,7 @@ public class MyHorizontalListView extends AdapterView<ListAdapter>
         leftEdge -= child.getMeasuredWidth();
         mDisplayOffset -= child.getMeasuredWidth();
       } else {
-        TDLog.e("Horizontal list view: fill left, null child. Size " + mAdapter.getCount() );
+        TDLog.e("Horizontal list view: fill left, null child. Index " + mLeftViewIndex + " Size " + mAdapter.getCount() );
       }
       mLeftViewIndex--;
     }
