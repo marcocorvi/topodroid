@@ -251,6 +251,11 @@ public class DrawingPhotoPath extends DrawingPointPath
   {
     TopoDroidApp.mData.deletePhotoRecord( TDInstance.sid, mId );
     TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( mId ) ) );
+    String png = TDPath.getSurveyPngFile( TDInstance.survey, Long.toString( mId ) );
+    if ( TDFile.hasTopoDroidFile( png ) ) {
+      TDFile.deleteFile( png );
+    }
+    
   }
 }
 

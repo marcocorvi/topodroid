@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/qcam_layout"
   android:orientation="vertical" 
   android:layout_width="match_parent"
@@ -10,11 +10,27 @@
     android:layout_height="match_parent"
     android:id="@+id/drawingSurface"
   / -->
-  <com.topodroid.TDX.QCamDrawingTexture
+  <RelativeLayout
+    android:id="@+id/layout_canvas"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/drawingTexture"
-  />
+    android:layout_height="fill_parent"
+    android:layout_gravity="top"
+    >
+    <com.topodroid.TDX.QCamDrawingTexture
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/drawingTexture"
+    />
+    <com.topodroid.TDX.PhotoSurface
+      android:id="@+id/drawingSurface"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clickable="true"
+      android:focusable="true"
+      />
+  </RelativeLayout>
+  
   <!--  style="@style/zero_padding" -->
   
   <LinearLayout
@@ -31,7 +47,7 @@
       android:textSize="@dimen/textsizehuge"
       android:gravity="start"
       />
-    <LinearLayout android:id="@+id/help"
+    <LinearLayout android:id="@+id/buttons"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
@@ -73,4 +89,4 @@
       android:layout_width="wrap_content"
       android:layout_gravity="center"
       />
-</RelativeLayout>
+</FrameLayout>

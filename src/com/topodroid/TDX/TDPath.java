@@ -757,6 +757,13 @@ public class TDPath
     return dirpath + "/" + idx + ".jpg";
   }
 
+  static String getSurveyPngFile( String survey, String idx )
+  {
+    String dirpath = PATH_CW_DIR + "/" + survey + "/photo";
+    TDFile.makeTopoDroidDir( dirpath );
+    return dirpath + "/" + idx + ".png";
+  }
+
   /** @return full pathname of a survey audio (WAV) file 
    * @param survey   survey name
    * @param idx      audio index

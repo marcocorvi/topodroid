@@ -4087,6 +4087,10 @@ public class DrawingWindow extends ItemDrawer
       // TODO delete record from photos table: WHAT IS THE ID ?
       // mApp_mData.dropPhoto( TDInstance.sid, id, MediaInfo.TYPE_XSECTION );
       TDFile.deleteFile( jpg_path );
+      String png_path = jpg_path.replace(".jpg", ".png");
+      if ( TDFile.hasTopoDroidFile( png_path ) ) {
+        TDFile.deleteFile( png_path );
+      }
     }
     // section point is deleted automatically
     // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
@@ -4641,14 +4645,12 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 boolean add = true;
                 if ( mSymbol == SymbolType.LINE ) {
-                  if ( TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
-                    DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
-                    lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
-                    lp1.setClosed( true );
-                    lp1.closePath();
-                    mDrawingSurface.addDrawingPath( lp1 );
-                    // mLastLinePath = lp1;
-                  } else if ( ! tryAndJoinLine( mCurrentLinePath, mCurrentLinePath ) ) {
+                  boolean closed_line = TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine );
+                  boolean joined_line = false;
+                  if ( ! closed_line ) {
+                    joined_line = tryAndJoinLine( mCurrentLinePath, mCurrentLinePath );
+                  }
+                  if ( ! joined_line ) {
                     // TODO this is useful for STYLUS-ONLY, it might be better to skip for complex line modes
                     if ( /* TDSetting.mStylusOnly && */ TDSetting.mLineEnds > 0 ) mCurrentLinePath.dropEndPoints( TDSetting.mLineEnds );
 
@@ -4656,14 +4658,28 @@ public class DrawingWindow extends ItemDrawer
                     lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
                     if ( BrushManager.isLineStraight( mCurrentLine ) ) {
                       lp1.addStartPoint( mCurrentLinePath.mFirst.x, mCurrentLinePath.mFirst.y );
-                      int nx = BrushManager.getLineStyleX( mCurrentLine );
+                      float nx = BrushManager.getLineStyleX( mCurrentLine ) * 2.0f;
                       // TDLog.v("line is straight " + nx);
                       if ( nx > 0 ) { 
                         LinePoint lp = mCurrentLinePath.mFirst;
+                        float x = 0;
                         while ( lp != mCurrentLinePath.mLast ) {
-                          for ( int i=0; i<nx && lp != mCurrentLinePath.mLast; ++i ) lp = lp.mNext;
+                          LinePoint lpn = lp.mNext;
+                          x += lp.distance( lpn );
+                          if ( x > nx ) { 
+                            if ( lpn == mCurrentLinePath.mLast ) {
+                              lp1.addPoint( lpn.x, lpn.y );
+                              break;
+                            } else {
+                              lp1.addPoint( lp.x, lp.y );
+                            }
+                            x = 0;
+                          } 
+                          lp = lpn;
+                        }
+                        if ( lp == mCurrentLinePath.mLast ) {
                           lp1.addPoint( lp.x, lp.y );
-                        } 
+                        }
                       } else {
                         lp1.addPoint( mCurrentLinePath.mLast.x, mCurrentLinePath.mLast.y );
                       }
@@ -4678,11 +4694,21 @@ public class DrawingWindow extends ItemDrawer
                         lp1 = mCurrentLinePath;
                       }
                     }
-                    if ( add && lp1 != null && lp1.size() > 1 ) {
+                    if ( lp1 != null ) {
                       // TDLog.v("line nr points " + lp1.size() );
-                      lp1.computeUnitNormal();
-                      mDrawingSurface.addDrawingPath( lp1 );
-                      // mLastLinePath = lp1;
+                      if ( closed_line ) {
+                        if ( lp1.size() > 3 ) {
+                          lp1.setClosed( true );
+                          lp1.closePath();
+                        } else {
+                          add = false;
+                        }
+                      }
+                      if ( add && lp1.size() > 1 ) {
+                        lp1.computeUnitNormal();
+                        mDrawingSurface.addDrawingPath( lp1 );
+                        // mLastLinePath = lp1;
+                      }
                     }
                   }
                   mCurrentLinePath = null;
@@ -5678,7 +5704,7 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
-  // public void insertPhoto( Bitmap bitmap )
+  // public boolean insertPhoto( Bitmap bitmap )
   // {
   //   assert( mLastLinePath == null );
   //   if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
@@ -5686,21 +5712,29 @@ public class DrawingWindow extends ItemDrawer
   //     // mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
   //     // // FIXME NOTIFY ? no
   //     createPhotoPoint();
+  //     return true;
   //   } else {
   //     // TDLog.v("PLOT PHOTO failed to save photo");
   //   }
+  //   return false;
   // }
 
   /** insert a photo
    * @note from IPhotoInserter
    */
-  public void insertPhoto( )
+  public boolean insertPhoto( )
   {
     TDLog.v("Drawing Window insert photo type PLOT, id " + mMediaManager.getPhotoId() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT );
     // FIXME NOTIFY ? no
     createPhotoPoint();
+    return true;
+  }
+
+  public void insertPhotoBitmap( Bitmap bitmap )
+  {
+    TDLog.e("PLOT TODO insert photo bitmap");
   }
 
   // NOTE this was used to let QCamCompass tell the DrawingWindow the photo azimuth/clino

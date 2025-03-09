@@ -194,8 +194,9 @@ class MediaManager
   //   return ret;
   // }
 
-  // void insertPhoto()
+  // boolean insertPhoto()
   // {
+  //   return false;
   // }
 
 }

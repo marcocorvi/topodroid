@@ -88,8 +88,9 @@ class ShotPhotoDialog extends MyDialog
       mCamera    = (CheckBox) findViewById(R.id.photo_camera );
       if ( cameraAPI ) { // use old Camera API
         mCamera.setVisibility( View.GONE );
-      } else {
         mCamera.setChecked( true );  // checked = use old Camera API
+      } else {
+        mCamera.setChecked( false );  // false = use new Camera API
       }
 
       mBtnGeoCode = (Button) findViewById(R.id.photo_code );

@@ -180,7 +180,12 @@ public class PhotoListDialog extends MyDialog
   {
     long photo_id = photo.getId();
     mApp_mData.deletePhotoRecord( photo.getSurveyId(), photo_id );
-    TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
+    String jpg_path = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.id ) );
+    TDFile.deleteFile( jpg_path );
+    String png_path = jpg_path.replace(".jpg", ".png" );
+    if ( TDFile.hasTopoDroidFile( png_path ) ) {
+      TDFile.deleteFile( png_path );
+    }
     if ( photo.getItemType() == MediaInfo.TYPE_PLOT ) {
       // get the plot tdr file
       new AsyncTask<PhotoInfo,Void,Boolean>() {

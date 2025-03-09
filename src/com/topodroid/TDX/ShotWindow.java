@@ -82,13 +82,16 @@ import android.widget.AbsListView.OnScrollListener;
 // import android.provider.MediaStore;
 // import android.provider.Settings.System;
 
+// import android.graphics.Canvas;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 // import android.net.Uri;
 
-// import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import java.util.TreeSet;
 
 // FIXME-28
@@ -1117,7 +1120,7 @@ public class ShotWindow extends Activity
   /** insert the photo that has been just taken
    * @from PhotoInserter interface
    */
-  public void insertPhoto( )
+  public boolean insertPhoto( )
   {
     // FIXME TITLE has to go
     // TDLog.v( TAG + "insert Photo type SHOT id " + mMediaManager.getPhotoId() );
@@ -1125,7 +1128,23 @@ public class ShotWindow extends Activity
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT );
     // FIXME NOTIFY ? no
     updateDisplay( ); 
+    return true;
   }
+
+  public void insertPhotoBitmap( Bitmap bitmap ) 
+  {
+    String file_path = mMediaManager.getImageFilepath().replace(".jpg", ".png" );
+    TDLog.e("SHOT TODO insert photo bitmap for " + file_path );
+    try {
+      FileOutputStream fos = new FileOutputStream( file_path );
+      bitmap.compress( Bitmap.CompressFormat.PNG, 0, fos );
+      fos.flush();
+      fos.close();
+    } catch ( IOException e ) {
+      TDLog.e("BITMAP compress" );
+    }
+  }
+
 
   // void deletePhoto( PhotoInfo photo ) 
   // {

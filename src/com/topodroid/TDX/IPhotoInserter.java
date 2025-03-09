@@ -11,9 +11,13 @@
  */
 package com.topodroid.TDX;
 
+import android.graphics.Bitmap;
+
 interface IPhotoInserter
 {
   /** insert the photo
    */
-  void insertPhoto( );
+  boolean insertPhoto( );
+
+  void insertPhotoBitmap( Bitmap bitmap );
 }

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan. 2017
  *
- * @brief TopoDroid quick cam drawing surface
+ * @brief TopoDroid quick cam drawing surface (old camera)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -82,7 +82,6 @@ public class QCamDrawingSurface extends SurfaceView
   {
     super(context, attrs);
     mContext = context;
-    // TDLog.v( "QCam Surface cstr" );
     mHolder = getHolder();
     mHolder.addCallback(this);
     // mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // required on android <= API-11
@@ -100,6 +99,7 @@ public class QCamDrawingSurface extends SurfaceView
     } catch ( ClassCastException e ) {
       TDLog.e( e.getMessage() );
     }
+    TDLog.v("QCAM Surface cstr");
   }
 
   /** @return the JPEG data buffer

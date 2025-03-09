@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 
@@ -33,6 +33,7 @@ class QCamBox extends View
     mWhite.setColor( 0xffffffff );
     mWhite.setStrokeWidth( 2 );
     mWhite.setStyle(Paint.Style.FILL_AND_STROKE);
+    TDLog.v("QCAM box cstr");
   }
 
   /** draw a cross centered at (x,y) with a gap of half-size d in the middle
