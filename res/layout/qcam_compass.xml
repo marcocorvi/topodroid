@@ -31,7 +31,7 @@
       android:textSize="@dimen/textsizehuge"
       android:gravity="start"
       />
-    <LinearLayout android:id="@+id/help"
+    <LinearLayout android:id="@+id/buttons"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"

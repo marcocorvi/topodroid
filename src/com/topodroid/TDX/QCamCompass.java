@@ -237,7 +237,7 @@ class QCamCompass extends Dialog
     ll_buttons.setMinimumHeight( size + 20 );
     buttonClick  = MyButton.getButton( mContext, this, R.drawable.iz_camera_red );
     ll_buttons.addView( buttonClick, lp );
-    if ( TDLevel.overExpert ) {
+    if ( mCamera != PhotoInfo.CAMERA_TOPODROID && TDLevel.overExpert ) {
       buttonEdit   = MyButton.getButton( mContext, this, R.drawable.iz_edit_off );
       ll_buttons.addView( buttonEdit, lp );
     }
