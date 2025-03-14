@@ -84,12 +84,12 @@ public class TDConst
     "application/octet-stream", // 16 Polygon (.cave)
     "application/octet-stream", // 17 Topo (.cav)
     null, // "application/octet-stream", // 18 Grottolf
-    "application/octet-stream", // 19 GhTopo
-    null, // "application/octet-stream", // 20 WinKarst
+    null, // "application/octet-stream", // 19 GhTopo
+    "application/octet-stream", // 20 WinKarst
     "text/plain", // "application/octet-stream", // 21 TopoRobot
     null, // "application/json",         // 22 *Json
     "application/shp",          // 23
-    "application/xvi",          // 24
+    "application/xvi",          // 24 xtherion
     null, // "application/xml",          // 25 *Tunnel
     null, // "application/octet-stream", // 26 *Cave3D
     "application/pdf",          // 27 *PDF
@@ -102,7 +102,7 @@ public class TDConst
     "application/octet-stream", // 34 STL binary
     "application/octet-stream", // 35 LAS binary
     "test/plain",               // 36 serialized
-    // "image/x-portable-pixmap",  // 37 NO_PNM
+    null // "image/x-portable-pixmap",  // 37 NO_PNM
   };
 
   /** @return the mime type given the type index

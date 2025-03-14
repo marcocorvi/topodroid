@@ -302,6 +302,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="photo_text">Napíšte poznámku</string>
     <string name="photo_failed">Zlyhanie fotografie</string>
     <string name="photo_max_captures">Dosiahnutý maximálny limit</string>
+    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">POPIS</string>
     <string name="label_text">Zadajte text popisu</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

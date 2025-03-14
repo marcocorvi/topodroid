@@ -293,6 +293,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="photo_text">Írd be a fénykép megjegyzését</string>
     <string name="photo_failed">Sikertelen fotó</string>
     <string name="photo_max_captures">Elérte a maximális rögzítési korlátot</string>
+    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">FELIRAT</string>
     <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Mag. </string -->
