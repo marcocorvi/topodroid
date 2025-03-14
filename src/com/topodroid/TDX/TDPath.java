@@ -750,19 +750,36 @@ public class TDPath
    * @param survey   survey name
    * @param idx      photo index
    */
-  static String getSurveyJpgFile( String survey, String idx )
+  static String getSurveyJpgFile( String survey, String idx ) { return getSurveyImageFile( survey, idx, ".jpg" ); }
+
+  /** @return full pathname of a survey photo (PNG) file 
+   * @param survey   survey name
+   * @param idx      photo index
+   */
+  static String getSurveyPngFile( String survey, String idx ) { return getSurveyImageFile( survey, idx, ".png" ); }
+
+  /** @return full pathname of a survey photo image file 
+   * @param survey   survey name
+   * @param idx      photo index
+   * @param ext      image file extension
+   */
+  private static String getSurveyImageFile( String survey, String idx, String ext ) 
   {
     String dirpath = PATH_CW_DIR + "/" + survey + "/photo";
     TDFile.makeTopoDroidDir( dirpath );
-    return dirpath + "/" + idx + ".jpg";
+    return dirpath + "/" + idx + ext;
   }
 
-  static String getSurveyPngFile( String survey, String idx )
+  static String getSurveyNextImageFilepath( long photo_id, int format ) 
   {
-    String dirpath = PATH_CW_DIR + "/" + survey + "/photo";
-    TDFile.makeTopoDroidDir( dirpath );
-    return dirpath + "/" + idx + ".png";
+    if ( format == PhotoInfo.FORMAT_JPEG ) {
+      return getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id) ); // photo file is "survey/id.jpg"
+    } else if ( format == PhotoInfo.FORMAT_PNG ) {
+      return getSurveyPngFile( TDInstance.survey, Long.toString(photo_id) ); // photo file is "survey/id.png"
+    }
+    return null;
   }
+
 
   /** @return full pathname of a survey audio (WAV) file 
    * @param survey   survey name

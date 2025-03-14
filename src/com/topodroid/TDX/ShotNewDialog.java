@@ -633,7 +633,8 @@ class ShotNewDialog extends MyDialog
                                     "snap " + shot_from + " " + shot_to,
                                     PhotoInfo.CAMERA_TOPODROID,
                                     "",  // TODO geomorphology code
-                                    PhotoInfo.TYPE_SHOT
+                                    PhotoInfo.TYPE_SHOT,
+                                    PhotoInfo.FORMAT_JPEG
             ); // FIXME TITLE has to go
           } catch ( IOException e ) {
             TDLog.e( "IO exception " + e.getMessage() );

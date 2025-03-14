@@ -1123,9 +1123,9 @@ public class ShotWindow extends Activity
   public boolean insertPhoto( )
   {
     // FIXME TITLE has to go
-    // TDLog.v( TAG + "insert Photo type SHOT id " + mMediaManager.getPhotoId() );
+    TDLog.v("Shot window: insert photo JPEG");
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
-      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT );
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT, PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
     updateDisplay( ); 
     return true;
@@ -1133,13 +1133,17 @@ public class ShotWindow extends Activity
 
   public void insertPhotoBitmap( Bitmap bitmap ) 
   {
-    String file_path = mMediaManager.getImageFilepath().replace(".jpg", ".png" );
-    TDLog.e("SHOT TODO insert photo bitmap for " + file_path );
+    long photo_id = mApp_mData.nextPhotoId( TDInstance.sid );
+    String file_path = TDPath.getSurveyNextImageFilepath( photo_id, PhotoInfo.FORMAT_PNG );
+    TDLog.v("Shot window: insert bitmap photo PNG " + file_path );
     try {
       FileOutputStream fos = new FileOutputStream( file_path );
       bitmap.compress( Bitmap.CompressFormat.PNG, 0, fos );
       fos.flush();
       fos.close();
+      // N.B. use the next photo ID
+      mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId()+1, mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
+        mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT, PhotoInfo.FORMAT_PNG );
     } catch ( IOException e ) {
       TDLog.e("BITMAP compress" );
     }

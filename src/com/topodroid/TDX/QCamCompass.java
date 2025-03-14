@@ -358,7 +358,12 @@ class QCamCompass extends Dialog
   {
     boolean dismiss = true;
     Button b = (Button)v;
-    if ( mMode == MODE_CAPTURE && b == buttonClick ) {
+    boolean b_click = (b == buttonClick);
+    boolean b_edit  = (buttonEdit != null && b == buttonEdit); 
+    boolean b_save  = (b == buttonSave);
+    boolean b_cancel= (b == buttonCancel);
+
+    if ( mMode == MODE_CAPTURE && b_click ) {
       // TDLog.v( "QCAM compass. Click picture button");
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
@@ -396,9 +401,9 @@ class QCamCompass extends Dialog
         timer.execute();
       }
       return;
-    } else if ( b == buttonSave || ( buttonEdit != null && b == buttonEdit) ) {
-      TDLog.v( "QCAM compass. Click save/edit button - mode " + mMode );
+    } else if ( b_save || b_edit ) {
       if ( mMode == MODE_CAPTURE ) {
+        TDLog.v( "QCAM compass. Click save/edit button - mode CAPTURE has saved " + mHasSaved );
         if ( mHasBearingAndClino ) {
           if ( mCallback != null ) {
             // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
@@ -411,19 +416,19 @@ class QCamCompass extends Dialog
             }
             if ( mHasSaved ) {
               if ( mMediaManager != null && mMediaManager.getItemType() == MediaInfo.TYPE_XSECTION ) {
-                TDLog.v("insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
+                TDLog.v("QCAM comapss: insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
                 TopoDroidApp.mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
                   mMediaManager.getComment(), mMediaManager.getCamera(), "", 
-                  (int)(mMediaManager.getItemType()) /* MediaInfo.TYPE_XSECTION */ );
+                  (int)(mMediaManager.getItemType()) /* MediaInfo.TYPE_XSECTION */ , PhotoInfo.FORMAT_JPEG );
                 mHasInserted = true;
               }
             } else {
               TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
               dismiss = false;
             }
-            if ( dismiss && buttonEdit != null && b == buttonEdit) {
+            if ( dismiss && b_edit ) {
               Bitmap bitmap = mTexture.getBitmap();
-              // TDLog.v("QCAM canvas bitmap " + bitmap.getWidth() + " x " + bitmap.getHeight() );
+              TDLog.v("QCAM canvas bitmap " + bitmap.getWidth() + " x " + bitmap.getHeight() );
               if ( mPhotoSurface.setBitmap( bitmap ) ) {
                 buttonEdit.setVisibility( View.GONE );
                 buttonClick.setVisibility( View.GONE );
@@ -434,19 +439,18 @@ class QCamCompass extends Dialog
                 mPhotoSurface.setVisibility( View.VISIBLE );
                 mPhotoSurface.setOnTouchListener( this );
                 mBitmapHeight = bitmap.getHeight();
-                TDLog.v("QCAM canvas bitmap height = " + mBitmapHeight );
               }
             }
           }
         }
       } else if ( mMode == MODE_EDIT ) {
-        TDLog.v("QCAM TODO save bitmap");
-        if ( mJpgInserted && mPhotoSurface != null ) {
+        TDLog.v( "QCAM compass. Click save/edit button - mode EDIT ");
+        if ( mPhotoSurface != null ) {
           mInserter.insertPhotoBitmap( mPhotoSurface.getDrawnBitmap() );
         }
         dismiss();
       }
-    } else if ( b == buttonCancel ) {
+    } else if ( b_cancel ) {
       TDLog.v( "QCAM compass. Click cancel button");
       if ( mMode == MODE_CAPTURE ) {
         mHasSaved = false;
@@ -462,14 +466,15 @@ class QCamCompass extends Dialog
       TDUtil.slowDown( 100 );
       if ( mHasSaved && ! mHasInserted ) {
         if ( mInserter != null ) {
-          mJpgInserted = mInserter.insertPhoto();
+          mHasInserted = mInserter.insertPhoto();
+          TDLog.v("QCAM parent insert photo: " + mHasInserted );
         }
         // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
       }
       // unlock screen orientation
       // // mSurface.close(); 
       if ( mTexture != null ) mTexture.stop(); // TEXTURE 
-      if ( mJpgInserted && mMode == MODE_EDIT ) {
+      if ( mMode == MODE_EDIT ) {
         TDLog.v("QCAM TODO start drawing dialog with bitmap " );
       } else {
         dismiss();

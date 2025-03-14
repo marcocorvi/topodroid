@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
 
@@ -56,15 +56,22 @@ class PhotoEditDialog extends MyDialog
     // TDLog.v("photo edit dialog id " + photo.id );
     mParent = parent;
     mPhoto  = photo;
-    // mFilename = filename;
     if ( mPhoto.getItemType() == MediaInfo.TYPE_XSECTION ) {
-      mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPhoto.mItemName );
+      if ( mPhoto.mFormat == PhotoInfo.FORMAT_JPEG ) {
+        mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPhoto.mItemName );
+      } else {
+        mFilename = TDPath.getSurveyPngFile( TDInstance.survey, mPhoto.mItemName );
+      }
     } else {
-      mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
+      if ( mPhoto.mFormat == PhotoInfo.FORMAT_JPEG ) {
+        mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
+      } else {
+        mFilename = TDPath.getSurveyPngFile( TDInstance.survey, Long.toString(mPhoto.id) );
+      }
     }
     mGeoCode  = mPhoto.getGeoCode();
     mAtShot   = ( mPhoto.getItemType() == MediaInfo.TYPE_SHOT );
-    // TDLog.v("PhotoEditDialog " + mFilename);
+    TDLog.v("PhotoEditDialog file " + mFilename);
     mTdImage = new TDImage( mFilename );
     // TDLog.v( "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
     // TDLog.v( "photo edit dialog: " + mFilename );

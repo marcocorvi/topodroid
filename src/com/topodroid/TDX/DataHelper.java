@@ -2678,7 +2678,7 @@ public class DataHelper extends DataSetObservable
 
   private static final String qAudiosByReftype = "select id, shotId, date from audios where surveyId=? and reftype=?";
 
-  private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code, reftype from photos where surveyId=? ";
+  private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code, reftype, format from photos where surveyId=? ";
 
   private static final String qjPhoto       = "select id, shotId from photos where surveyId=? and id=? and reftype=?";
 
@@ -2686,23 +2686,23 @@ public class DataHelper extends DataSetObservable
 
   // used in selectAllPhotosShot
   private static final String qjPhotosShot  =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and s.status=? and p.reftype=1";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and s.status=? and p.reftype=1";
   // 20241018 was p.status
   //  "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
 
   // used in selectAllPhotosPlot
   private static final String qjPhotosPlot  =
-    "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and q.status=? and p.reftype=2";
+    "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and q.status=? and p.reftype=2";
   // 20241018 was p.status
 
   // used in selectAllPhotoAtShot
   private static final String qjShotPhotos  =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? AND p.reftype=1";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? AND p.reftype=1";
 
   // used in selectAllPhotoXSection
   private static final String qjPhotosXSection  =
-    "select p.id, x.id, p.title, x.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as x on p.shotId=x.id where p.surveyId=? AND x.surveyId=? AND x.status=? AND p.reftype=3";
+    "select p.id, x.id, p.title, x.name, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join plots as x on p.shotId=x.id where p.surveyId=? AND x.surveyId=? AND x.status=? AND p.reftype=3";
   // 20241018 was p.status
 
   // // used in countAllShotPhotos
@@ -3133,15 +3133,16 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       do {
         list.add( new PhotoInfo( sid, 
-                                 cursor.getLong(0), // id
-                                 cursor.getLong(1),
-                                 cursor.getString(2),
+                                 cursor.getLong(0),        // id
+                                 cursor.getLong(1),        // plot id
+                                 cursor.getString(2),      // photo title
                                  cursor.getString(3),      // plot name
-                                 cursor.getString(4),
-                                 cursor.getString(5),
+                                 cursor.getString(4),      // date
+                                 cursor.getString(5),      // comment
                                  (int)(cursor.getLong(6)), // camera
                                  cursor.getString(7),      // code
-                                 (int)(cursor.getLong(8))  // reftype
+                                 (int)(cursor.getLong(8)), // reftype
+                                 (int)(cursor.getLong(9))  // format
                  ) );
       } while (cursor.moveToNext());
     }
@@ -3170,7 +3171,8 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(5),
                                  (int)(cursor.getLong(6)), // camera
                                  cursor.getString(7),      // code
-                                 (int)(cursor.getLong(8))  // reftype
+                                 (int)(cursor.getLong(8)), // reftype
+                                 (int)(cursor.getLong(9))  // format
                  ) );
       } while (cursor.moveToNext());
     }
@@ -3193,15 +3195,16 @@ public class DataHelper extends DataSetObservable
       do {
         String name = cursor.getString(3) + "-" + cursor.getString(4);
         list.add( new PhotoInfo( sid, 
-                                 cursor.getLong(0), // id
-                                 cursor.getLong(1),
+                                 cursor.getLong(0),        // id
+                                 cursor.getLong(1),        // shot id
                                  cursor.getString(2),
-                                 name,              // shot name
-                                 cursor.getString(5),
-                                 cursor.getString(6),
+                                 name,                     // shot name
+                                 cursor.getString(5),      // date
+                                 cursor.getString(6),      // comment
                                  (int)(cursor.getLong(7)), // camera
                                  cursor.getString(8),      // code
-                                 (int)(cursor.getLong(9))  // reftype
+                                 (int)(cursor.getLong(9)), // reftype
+                                 (int)(cursor.getLong(10)) // format
                  ) );
       } while (cursor.moveToNext());
     }
@@ -3236,10 +3239,11 @@ public class DataHelper extends DataSetObservable
    * @param camera    camera type
    * @param code      geomophology code
    * @param reftype   reference item type
+   * @param format    image format
    * @return id of the record (-1 on error)
    * @note used only for x-sections - could it be used also for shots and plots ?
    */
-  long insertOrUpdatePhoto( long sid, long id, long item_id, String title, String date, String comment, int camera, String geocode, int reftype )
+  long insertOrUpdatePhoto( long sid, long id, long item_id, String title, String date, String comment, int camera, String geocode, int reftype, int format )
   {
     if ( myDB == null ) return -1;
     TDLog.v("insert / update Photo: id " + id + " reftype " + reftype );
@@ -3255,7 +3259,7 @@ public class DataHelper extends DataSetObservable
       }
       if ( ! cursor.isClosed() ) cursor.close();
     } 
-    if ( insert ) id = insertPhotoRecord( sid, -1L, item_id, title, date, comment, camera, geocode, reftype );
+    if ( insert ) id = insertPhotoRecord( sid, -1L, item_id, title, date, comment, camera, geocode, reftype, format );
     return id;
   }
 
@@ -3276,15 +3280,16 @@ public class DataHelper extends DataSetObservable
       do {
         String name = cursor.getString(3) + "-" + cursor.getString(4);
         list.add( new PhotoInfo( sid, 
-                                 cursor.getLong(0), // id
-                                 cursor.getLong(1),
+                                 cursor.getLong(0),        // id
+                                 cursor.getLong(1),        // shot id
                                  cursor.getString(2),
-                                 name,              // shot name
-                                 cursor.getString(5),
-                                 cursor.getString(6),
-                                 (int)(cursor.getLong(7)),
-                                 cursor.getString(8),
-                                 (int)(cursor.getLong(9))
+                                 name,                     // shot name
+                                 cursor.getString(5),      // date
+                                 cursor.getString(6),      // comment
+                                 (int)(cursor.getLong(7)), // camera
+                                 cursor.getString(8),      // code
+                                 (int)(cursor.getLong(9)), // reftype
+                                 (int)(cursor.getLong(10)) // format
                  ) );
       } while (cursor.moveToNext());
     }
@@ -5058,7 +5063,7 @@ public class DataHelper extends DataSetObservable
    * @param reftype   reference item type
    * @return content-value set
    */
-  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera, String code, long reftype )
+  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera, String code, long reftype, long format )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId",  sid );
@@ -5071,6 +5076,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "camera",    camera );
     cv.put( "code",      (code == null)? TDString.EMPTY : code );
     cv.put( "reftype",   reftype );
+    cv.put( "format",    format );
     return cv;
   }
 
@@ -5084,14 +5090,15 @@ public class DataHelper extends DataSetObservable
    * @param camera    camera type
    * @param code      geomophology code
    * @param reftype   reference item type
+   * @param format    image format
    * @return id of the record (-1 on error)
    */
-  long insertPhotoRecord( long sid, long id, long item_id, String title, String date, String comment, int camera, String code, int reftype )
+  long insertPhotoRecord( long sid, long id, long item_id, String title, String date, String comment, int camera, String code, int reftype, int format )
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
     TDLog.v("do insert Photo: id " + id + " reftype " + reftype );
-    ContentValues cv = makePhotoContentValues( sid, id, item_id, TDStatus.NORMAL, title, date, comment, camera, code, reftype );
+    ContentValues cv = makePhotoContentValues( sid, id, item_id, TDStatus.NORMAL, title, date, comment, camera, code, reftype, format );
     if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
     return id;
   }
@@ -6180,7 +6187,7 @@ public class DataHelper extends DataSetObservable
          // TDLog.v("dump PHOTO");
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d, \"%s\", %d );\n",
+                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d, \"%s\", %d, %d );\n",
                      PHOTO_TABLE,
                      sid,
                      cursor.getLong(0),   // id
@@ -6189,9 +6196,10 @@ public class DataHelper extends DataSetObservable
                      TDString.escape( cursor.getString(3) ), // title
                      TDString.escape( cursor.getString(4) ), // date
                      TDString.escape( cursor.getString(5) ), // comment
-                     cursor.getLong(6),
+                     cursor.getLong(6),                      // camera
                      TDString.escape( cursor.getString(7) ), // code
-                     cursor.getLong(8)                       // reftype: reference item type
+                     cursor.getLong(8),                      // reftype: reference item type
+                     cursor.getLong(10)                      // format
            );
          } while (cursor.moveToNext());
        }
@@ -6524,8 +6532,9 @@ public class DataHelper extends DataSetObservable
                  comment = TDString.unescape( scanline1.stringValue( ) );
                  long camera = (db_version > 39)? scanline1.longValue( 0 ) : 0 ;
                  String code = (db_version > 52)? scanline1.stringValue( ) : "" ;
-                 reftype   = (db_version > 53)? scanline1.longValue( 0 ) : 0 ;
-                 cv = makePhotoContentValues( sid, id, itemid, TDStatus.NORMAL, title, date, comment, camera, code, reftype );
+                 reftype     = (db_version > 53)? scanline1.longValue( 0 ) : 0 ;
+                 long format =  (db_version > 54)? scanline1.longValue( 0 ) : 0 ;
+                 cv = makePhotoContentValues( sid, id, itemid, TDStatus.NORMAL, title, date, comment, camera, code, reftype, format );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
                }
              }
@@ -7304,7 +7313,8 @@ public class DataHelper extends DataSetObservable
             +   " comment TEXT, "
             +   " camera INTEGER default 0, "  // source_type
             +   " code TEXT default NIL, "     // geo-morphology code(s)
-            +   " reftype INTEGER default 0 "     // reference item_type: 0 undefined, 1 shots, 2 plots
+            +   " reftype INTEGER default 0, "     // reference item_type: 0 undefined, 1 shots, 2 plots
+            +   " format INTEGER deafult 0 " // image format: 0 jpeg, 1 png
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -7513,7 +7523,11 @@ public class DataHelper extends DataSetObservable
              if ( !columnExists( db, "sensors", "reftype" ) ) {
                db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
              }
-             case 55:
+           case 55:
+             if ( !columnExists( db, "photos", "format" ) ) {
+               db.execSQL( "ALTER TABLE photos ADD COLUMN format INTEGER default 0" );
+             }
+           case 56:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

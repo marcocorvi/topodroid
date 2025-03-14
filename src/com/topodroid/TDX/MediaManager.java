@@ -65,8 +65,8 @@ class MediaManager
     mSize     = size;
     mCamera   = camera;
     mPhotoId  = mData.nextPhotoId( TDInstance.sid );
-    TDLog.v("Media Manager prepare photo id " + mPhotoId );
     mImageFilepath = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ); // photo file is "survey/id.jpg"
+    TDLog.v("Media Manager prepare photo id " + mPhotoId );
     // mImageFile = TDFile.getTopoDroidFile( mImageFilepath );
     return mPhotoId;
   }
@@ -130,25 +130,25 @@ class MediaManager
    */
   void setComment( String comment ) { mComment = comment; }
 
-  /** @return media geomorphology code
+  /** @return current media geomorphology code
    */
   String getCode() { return mCode; }
 
-  /** @return photo size (horizontal width) [m]
+  /** @return current photo size (horizontal width) [m]
    */
   float getPhotoSize() { return mSize; }
 
-  /** @return photo ID
+  /** @return current photo ID
    */
   long getPhotoId() { return mPhotoId; }
 
-  /** @return audio ID
+  /** @return current audio ID
    */
   long getAudioId() { return mAudioId; }
 
   // File getImageFile() { return mImageFile; }
 
-  /** @return the photo file full path
+  /** @return the current photo file full path
    */
   String getImageFilepath() { return mImageFilepath; } 
 

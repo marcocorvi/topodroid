@@ -41,7 +41,12 @@ class PhotoViewDialog extends MyDialog
     super( context, null, R.string.PhotoViewDialog ); // null app
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
     // TDLog.v("photo dialog id " + photo.id );
-    String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) );
+    String filename = null;
+    if ( photo.mFormat == PhotoInfo.FORMAT_JPEG ) {
+      filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) );
+    } else if ( photo.mFormat == PhotoInfo.FORMAT_PNG ) {
+      filename = TDPath.getSurveyPngFile( TDInstance.survey, Long.toString(photo.id) );
+    }
     mTdImage = new TDImage( filename );
     mTitle   = photo.mTitle;
   }

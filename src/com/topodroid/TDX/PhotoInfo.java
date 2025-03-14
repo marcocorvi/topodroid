@@ -13,6 +13,9 @@ package com.topodroid.TDX;
 
 class PhotoInfo extends MediaInfo
 {
+  static final int FORMAT_JPEG = 0;
+  static final int FORMAT_PNG  = 1;
+
   static final int CAMERA_UNDEFINED   = 0;
   static final int CAMERA_TOPODROID   = 1;
   static final int CAMERA_TOPODROID_2 = 2;
@@ -23,6 +26,7 @@ class PhotoInfo extends MediaInfo
   // public String mName; // photo filename without extension ".jpg" and survey prefix dir = photo id
   String mComment;
   int mCamera;
+  int mFormat;
   String mGeoCode;   // geomorphology code
 
   /** cstr
@@ -36,14 +40,16 @@ class PhotoInfo extends MediaInfo
    * @param camera   camera type
    * @param code     geomorphology code
    * @param type     reference item type
+   * @param format   image format (0: JOEG, 1: PNG)
    */
-  PhotoInfo( long _sid, long _id, long item_id, String t, String sn, String dt, String cmt, int camera, String code, int type )
+  PhotoInfo( long _sid, long _id, long item_id, String t, String sn, String dt, String cmt, int camera, String code, int type, int format )
   {
     super( MediaInfo.MEDIA_PHOTO, _sid, _id, item_id, dt, type );
     mTitle  = t; // FIXME TITLE
     mItemName = sn;
     mComment = cmt;
     mCamera  = camera;
+    mFormat  = format; // FIXME this could go in MediaInfo
     mGeoCode = (code == null)? "" : code;
   }
 
@@ -57,9 +63,8 @@ class PhotoInfo extends MediaInfo
   @Override
   public String toString()
   {
-    return id 
-           + " <" + ( (mItemName == null)? "-" : mItemName )
-           + "> " + mComment; 
+    return id + ( (mFormat == FORMAT_JPEG)? " JPG <" : " PNG <" ) +
+           ( (mItemName == null)? "-" : mItemName ) + "> " + mComment; 
   }
 
   /** @return the geomorphology code
@@ -75,9 +80,8 @@ class PhotoInfo extends MediaInfo
    */
   String debugString()
   {
-    return id  
-           + " <" + ( (mItemName == null)? "-" : mItemName )
-           + "> " + mComment + " " + ((mTitle == null)? "-" : mTitle); 
+    return id + ( (mFormat == FORMAT_JPEG)? " JPG <" : " PNG <" ) +
+           ( (mItemName == null)? "-" : mItemName ) + "> " + mComment + " " + ((mTitle == null)? "-" : mTitle); 
   }
 
 }

@@ -5726,7 +5726,7 @@ public class DrawingWindow extends ItemDrawer
   {
     TDLog.v("Drawing Window insert photo type PLOT, id " + mMediaManager.getPhotoId() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
-      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT );
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT, PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
     createPhotoPoint();
     return true;
