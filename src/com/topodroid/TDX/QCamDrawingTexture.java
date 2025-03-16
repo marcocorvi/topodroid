@@ -98,7 +98,7 @@ public class QCamDrawingTexture extends TextureView {
   private CameraCaptureSession mCaptureSession;
   private Size mPreviewSize;
   private HandlerThread mBackgroundThread;
-  private Handler mBackgroundHandler;
+  private Handler mBackgroundHandler; // FIXME the background handler does not do anything 
   private ImageReader mImageReader = null;
   private CaptureRequest mPreviewRequest;
   private CaptureRequest.Builder mPreviewRequestBuilder;
@@ -237,12 +237,14 @@ public class QCamDrawingTexture extends TextureView {
       // TDLog.v("QCAM2 callback: capture buffer lost");
     }
 
+    // this is called when the request has been sent 
+    // https://stackoverflow.com/questions/32961771/camera2-api-oncapturecomplete-is-called-but-camera-state-is-still-control-ae-s
     @Override
     public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result)
     {
-      TDLog.v("QCAM2 callback: capture completed");
       // if (Build.VERSION.SDK_INT < 21) return;
-      process(result);
+      TDLog.v("QCAM2 callback: capture completed");
+      process( result );
     }
 
     @Override
@@ -255,7 +257,7 @@ public class QCamDrawingTexture extends TextureView {
     public void onCaptureProgressed(CameraCaptureSession session, CaptureRequest request, CaptureResult partialResult) {
       if (Build.VERSION.SDK_INT < 21) return;
       // TDLog.v("QCAM2 callback: capture progressed");
-      process(partialResult);
+      process( partialResult );
     }
 
     @Override
@@ -296,6 +298,8 @@ public class QCamDrawingTexture extends TextureView {
             } else {
               runPrecaptureSequence();
             }
+          } else {
+            runPrecaptureSequence();
           }
           break;
         case STATE_WAITING_PRECAPTURE:
@@ -386,7 +390,7 @@ public class QCamDrawingTexture extends TextureView {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) return false;
     TDLog.v("QCAM2 open camera");
     CameraManager manager = (CameraManager) (mContext.getSystemService(Context.CAMERA_SERVICE));
-    setupCameraOutput(manager, w, h);
+    if ( ! setupCameraOutput(manager, w, h) ) return false;
     configureTransform(w, h);
     try {
       if (!mLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
@@ -434,12 +438,12 @@ public class QCamDrawingTexture extends TextureView {
    * @param h   height
    * @note called by openCamera()
    */
-  private void setupCameraOutput( CameraManager manager, int w, int h )
+  private boolean setupCameraOutput( CameraManager manager, int w, int h )
   {
-    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) return;
-    TDLog.v("QCAM2 setup camera output");
+    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) return false;
     try {
       for ( String id : manager.getCameraIdList() ) {
+        TDLog.v("QCAM2 setup camera output. Camera ID " + id );
         CameraCharacteristics chr = manager.getCameraCharacteristics( id );
         Integer facing = chr.get( CameraCharacteristics.LENS_FACING );
         if ( facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT ) continue;
@@ -499,8 +503,8 @@ public class QCamDrawingTexture extends TextureView {
         mHasFlash = ( flash == null )? false : flash;
 
         mCameraId = id;
-        // TDLog.v("QCAM2 preview size " + mPreviewSize.getWidth() + "x" + mPreviewSize.getHeight() + " config orient " + orientation + " rotation " + rot + " flash " + mHasFlash );
-        return;
+        TDLog.v("QCAM2 preview size " + mPreviewSize.getWidth() + "x" + mPreviewSize.getHeight() + " config orient " + orientation + " rotation " + rot + " flash " + mHasFlash );
+        return true;
       }
     } catch ( CameraAccessException e ) {
       TDLog.e("QCAM2 access " + e.getMessage() );
@@ -510,6 +514,7 @@ public class QCamDrawingTexture extends TextureView {
       // camera2 API used but not supported
       e.printStackTrace();
     }
+    return false;
   }
 
   

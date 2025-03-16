@@ -334,7 +334,7 @@ class QCamCompass extends Dialog
     mAccuracy    = a;
     mCamera = cam;
     // TDLog.v( "QCAM compass camera " + cam + " orient " + o + " --> " + mOrientation );
-    // TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c + " orientation " + o + " -> " + mOrientation );
+    TDLog.v( "QCAM compass. Set orientation " + o + " -> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
@@ -364,7 +364,7 @@ class QCamCompass extends Dialog
     boolean b_cancel= (b == buttonCancel);
 
     if ( mMode == MODE_CAPTURE && b_click ) {
-      // TDLog.v( "QCAM compass. Click picture button");
+      TDLog.v( "QCAM compass. Click picture button. Has shot " + mHasShot );
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
           TDToast.makeWarn( "Too many pictures" );
@@ -406,13 +406,14 @@ class QCamCompass extends Dialog
         TDLog.v( "QCAM compass. Click save/edit button - mode CAPTURE has saved " + mHasSaved );
         if ( mHasBearingAndClino ) {
           if ( mCallback != null ) {
-            // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
+            TDLog.v( "QCAM compass. Orientation " + mOrientation + " " + mBearing + " " + mClino );
             if ( mSurface != null ) { // save JPEG file
               mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
               mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
             } else if ( mTexture != null ) {
               mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 2 ); // camera2 API
               mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
+              TDLog.v( "QCAM compass: set jpeg data. Has saved " + mHasSaved );
             }
             if ( mHasSaved ) {
               if ( mMediaManager != null && mMediaManager.getItemType() == MediaInfo.TYPE_XSECTION ) {
@@ -441,6 +442,8 @@ class QCamCompass extends Dialog
                 mBitmapHeight = bitmap.getHeight();
               }
             }
+          } else {
+            TDLog.e("QCAM compass. null callbacxk");
           }
         }
       } else if ( mMode == MODE_EDIT ) {
@@ -460,7 +463,7 @@ class QCamCompass extends Dialog
     } else {
       TDLog.e( "QCAM compass. Click unexpected view");
     }
-    // TDLog.v("QCAM has saved data " + mHasSaved + " dismiss " + dismiss );
+    TDLog.v("QCAM compass. Has saved " + mHasSaved + " Has inserted " + mHasInserted + " dismiss " + dismiss );
     if ( dismiss ) {
       // if ( mSurface != null ) mSurface.close();
       TDUtil.slowDown( 100 );
