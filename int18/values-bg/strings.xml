@@ -298,7 +298,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="photo_text">Въведете коментар за снимката</string>
     <string name="photo_failed">Неуспешна снимка</string>
     <string name="photo_max_captures">Достигнато максимално ограничение</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">Етикет</string>
     <string name="label_text">Въведете заглавие</string>
     <!-- UNUSED string name="altitude">Надморска височина </string -->

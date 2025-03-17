@@ -293,7 +293,7 @@
     <string name="photo_text">输入照片注释</string>
     <string name="photo_failed">照片失败</string>
     <string name="photo_max_captures">超过最大照片限定</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">标注</string>
     <string name="label_text">输入标注文本</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

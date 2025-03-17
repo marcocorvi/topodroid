@@ -276,7 +276,7 @@ no campo abaixo e aperte o botão.
   <string name="photo_text">Entre comentário para foto</string>
   <string name="photo_failed">Foto falhou</string>
   <string name="photo_max_captures">Limite máximo de captura atingido</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
   <string name="label_title">Rótulo</string>
   <string name="label_text">Inserir o texto do rótulo</string>
   <!-- UNUSED string name="altitude">Alt. </string -->

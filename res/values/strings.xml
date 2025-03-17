@@ -307,7 +307,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="photo_text">Enter photo comment</string>
     <string name="photo_failed">Failed photo</string>
     <string name="photo_max_captures">Reached maximum capture limit</string>
-    <string name="photo_many_pictures">Too many pictures</string>
+    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">Label</string>
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

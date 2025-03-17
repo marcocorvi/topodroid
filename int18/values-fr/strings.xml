@@ -293,7 +293,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="photo_text">Saisir un commentaire pour la photo</string>
     <string name="photo_failed">Échec de la photo</string>
     <string name="photo_max_captures">Limite de capture maximale atteinte</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">ÉTIQUETTE</string>
     <string name="label_text">Saisissez le texte de l\'étiquette</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

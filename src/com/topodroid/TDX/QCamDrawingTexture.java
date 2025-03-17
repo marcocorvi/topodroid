@@ -276,7 +276,7 @@ public class QCamDrawingTexture extends TextureView {
       TDLog.v("QCAM2 callback: capture started");
     }
 
-    private void process(CaptureResult result)
+    private void process( CaptureResult result )
     {
       TDLog.v("QCAM2 callback: process state " + mStateStr[mState] );
       // if (Build.VERSION.SDK_INT < 21) return;
@@ -299,7 +299,7 @@ public class QCamDrawingTexture extends TextureView {
               runPrecaptureSequence();
             }
           } else {
-            runPrecaptureSequence();
+            capturePicture();
           }
           break;
         case STATE_WAITING_PRECAPTURE:
