@@ -296,7 +296,7 @@
     <string name="photo_text">Inserisci commento</string>
     <string name="photo_failed">Fallito salvataggio foto</string>
     <string name="photo_max_captures">Raggiunto limite massimo di foto</string>
-    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
+    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

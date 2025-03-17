@@ -293,7 +293,7 @@
     <string name="photo_text">Введите коментарий к фото</string>
     <string name="photo_failed">Ошибка фото</string>
     <string name="photo_max_captures">Достигнут предел кол-ва попыток съёмки</string>
-    <!-- UNUSED string name="photo_many_pictures">Too many pictures</string -->
+    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

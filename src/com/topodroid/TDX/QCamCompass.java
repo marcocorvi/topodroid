@@ -367,8 +367,8 @@ class QCamCompass extends Dialog
       TDLog.v( "QCAM compass. Click picture button. Has shot " + mHasShot );
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
-          TDToast.makeWarn( "Too many pictures" );
-          enableButtonCancel( false );
+          TDToast.makeWarn( mContext.getResources().getString( R.string.photo_many_pictures ) );
+          enableButtonCancel( true );
         } else {
           mHasShot = false;
           TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
