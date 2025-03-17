@@ -98,7 +98,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
-    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
+    <string name="shot_not_saved">No se guardo la toma</string>
     <string name="bad_sibling">Toma incorrecta</string>
     <string name="bad_station">Estación incorrecta: %1$s</string>
     <string name="bad_station_name">Nombre de la estación no admitida</string>
@@ -225,7 +225,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
     <!-- CHANGED string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string -->
-    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
+    <string name="strike_dip">Dip direccion %1$.0f inclinacion %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
@@ -277,7 +277,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="bad_manifest_sql">Error: error de SQL</string>
     <string name="bad_manifest_number">Error: número incorrecto</string>
     <string name="bad_manifest_manifest">Error: datos incorrecto</string>
-    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
+    <string name="bad_manifest_file">Error: datos evidentes</string>
     <string name="bad_manifest_missing">Error: Falta datos</string>
     <string name="bad_manifest_error">Error: error de lectura de datos</string>
     <string name="bad_manifest_other">Error: error inesperado</string>
@@ -295,12 +295,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="datamode_diving">Modo de datos profundos</string>
     <string name="illegal_data_value">Valores de datos no válidos</string>
 	
-    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
+    <string name="geocode_title">Código de geomorfología</string>
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
     <string name="photo_failed">foto fallida</string>
     <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <string name="photo_many_pictures">demasiadas fotos</string>
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -332,7 +332,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_clino_required">Introducir Clino</string>
     <string name="error_comment_required">Introducir comentario</string>
     <string name="error_begin_required">Introducir dirección de inicio</string>
-    <!-- TODO string name="error_number_required">Data number required</string -->
+    <string name="error_number_required">Número de datos requerido</string>
     <string name="error_declination_number">La declinación debe ser un número</string>
     <string name="error_end_required">Introducir dirección final</string>
     <string name="error_fixes_nocs">Fijar puntos sin CS %1$s:\n%2$s</string>
@@ -462,7 +462,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <string name="menu_color">Limpiar color</string>
-    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
+    <string name="menu_cwd">CARPETA DE TRABAJO</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <!-- UNUSED string name="menu_display">Pantalla</string -->
@@ -536,8 +536,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_delete">Cancelar</string>
     <string name="popup_decimate">Diezmar</string>
     <string name="popup_join">Unirse</string>
-    <!-- TODO string name="popup_store">Store</string -->
-    <!-- TODO string name="popup_restore">Restore</string -->
+    <string name="popup_store">Guardar</string>
+    <string name="popup_restore">Restaurar</string>
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
     <string name="popup_erase_line">Borrar líneas</string>
@@ -578,7 +578,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="photo_survey">Dividir topografía</string -->
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
     <string name="plot_delete">¿Quiere eliminar el croquis?</string>
-    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
+    <string name="scrap_delete">¿Eliminar chatarra?</string>
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
