@@ -73,6 +73,7 @@ class QCamCompass extends Dialog
   private Button buttonClick;
   private Button buttonSave;
   private Button buttonCancel;
+  private boolean mIsCapturing = false;
 
   private View mZoomView;
   private ZoomButtonsController mZoomBtnsCtrl = null;
@@ -364,11 +365,12 @@ class QCamCompass extends Dialog
     boolean b_cancel= (b == buttonCancel);
 
     if ( mMode == MODE_CAPTURE && b_click ) {
-      TDLog.v( "QCAM compass. Click picture button. Has shot " + mHasShot );
+      TDLog.v( "QCAM compass. Button click, mode CAPTURE. Has shot " + mHasShot );
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
           TDToast.makeWarn( mContext.getResources().getString( R.string.photo_many_pictures ) );
           enableButtonCancel( true );
+          enableButtonSave( false ); // FIXME should i do this ?
         } else {
           mHasShot = false;
           TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
@@ -376,13 +378,15 @@ class QCamCompass extends Dialog
 
           // QCamDrawingSurface.startPreview() when it is created
           if ( mSurface != null ) {
-            mSurface.startPreview(); // TEXTURE
+            TDLog.v( "QCAM compass. Surface preview");
+            mSurface.startPreview(); 
           } else if ( mTexture != null ) {
-            // TODO
+            TDLog.v( "QCAM compass. Texture preview");
             mTexture.startPreview();
           }
           enableButtonCancel( true );
           enableButtonSave( false );
+          mIsCapturing = true;
         }
       } else {
         int wait  = TDSetting.mTimerWait;
@@ -399,21 +403,23 @@ class QCamCompass extends Dialog
         }
         TimerTask timer = new TimerTask( this, -TimerTask.Z_AXIS, wait, count );
         timer.execute();
+        mIsCapturing = false;
       }
       return;
     } else if ( b_save || b_edit ) {
       if ( mMode == MODE_CAPTURE ) {
-        TDLog.v( "QCAM compass. Click save/edit button - mode CAPTURE has saved " + mHasSaved );
+        TDLog.v( "QCAM compass. Button save/edit, mode CAPTURE has saved " + mHasSaved );
         if ( mHasBearingAndClino ) {
           if ( mCallback != null ) {
             TDLog.v( "QCAM compass. Orientation " + mOrientation + " " + mBearing + " " + mClino );
             if ( mSurface != null ) { // save JPEG file
               mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
               mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
+              TDLog.v( "QCAM compass: Surface set jpeg data returns " + mHasSaved );
             } else if ( mTexture != null ) {
               mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 2 ); // camera2 API
               mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
-              TDLog.v( "QCAM compass: set jpeg data. Has saved " + mHasSaved );
+              TDLog.v( "QCAM compass: Texture set jpeg data returns " + mHasSaved );
             }
             if ( mHasSaved ) {
               if ( mMediaManager != null && mMediaManager.getItemType() == MediaInfo.TYPE_XSECTION ) {
@@ -424,7 +430,11 @@ class QCamCompass extends Dialog
                 mHasInserted = true;
               }
             } else {
-              TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
+              if ( mSurface != null ) {
+                TDToast.makeBad( mContext.getResources().getString( R.string.photo_not_ready ) );
+              } else if ( mTexture != null ) {
+                TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
+              }
               dismiss = false;
             }
             if ( dismiss && b_edit ) {
@@ -447,15 +457,15 @@ class QCamCompass extends Dialog
           }
         }
       } else if ( mMode == MODE_EDIT ) {
-        TDLog.v( "QCAM compass. Click save/edit button - mode EDIT ");
+        TDLog.v( "QCAM compass. Button save/edit, mode EDIT ");
         if ( mPhotoSurface != null ) {
           mInserter.insertPhotoBitmap( mPhotoSurface.getDrawnBitmap() );
         }
         dismiss();
       }
     } else if ( b_cancel ) {
-      TDLog.v( "QCAM compass. Click cancel button");
       if ( mMode == MODE_CAPTURE ) {
+        TDLog.v( "QCAM compass. Button cancel, mode CAPTURE");
         mHasSaved = false;
       } else {
         dismiss();
@@ -470,7 +480,7 @@ class QCamCompass extends Dialog
       if ( mHasSaved && ! mHasInserted ) {
         if ( mInserter != null ) {
           mHasInserted = mInserter.insertPhoto();
-          TDLog.v("QCAM parent insert photo: " + mHasInserted );
+          TDLog.v("QCAM compass. Parent insert photo returns " + mHasInserted );
         }
         // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
       }
@@ -478,13 +488,13 @@ class QCamCompass extends Dialog
       // // mSurface.close(); 
       if ( mTexture != null ) mTexture.stop(); // TEXTURE 
       if ( mMode == MODE_EDIT ) {
-        TDLog.v("QCAM TODO start drawing dialog with bitmap " );
+        TDLog.v("QCAM compass start drawing dialog with bitmap: TODO" );
       } else {
         dismiss();
       }
     } else {
       enableButtonCancel( true );
-      enableButtonSave( false );
+      enableButtonSave( ! mIsCapturing );
     }
   }
 
