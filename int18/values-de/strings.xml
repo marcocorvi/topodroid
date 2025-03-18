@@ -264,6 +264,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="photo_title">FOTO</string>
   <string name="photo_text">Foto-Kommentar eingeben</string>
   <string name="photo_failed">Foto fehlgeschlagen</string>
+    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
   <string name="photo_max_captures">Maximale Anzahl Fotos erreicht</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
   <string name="label_title">BESCHRIFTUNG</string>

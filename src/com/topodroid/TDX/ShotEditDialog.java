@@ -1284,7 +1284,7 @@ class ShotEditDialog extends MyDialog
       // mBtnColor.setBackgroundColor( mColor );
       dismiss();
     } else {
-      TDLog.v("color not changed");
+      // TDLog.v("color not changed");
     }
   }
 

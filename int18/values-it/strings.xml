@@ -295,6 +295,7 @@
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Inserisci commento</string>
     <string name="photo_failed">Fallito salvataggio foto</string>
+    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Raggiunto limite massimo di foto</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">TESTO</string>

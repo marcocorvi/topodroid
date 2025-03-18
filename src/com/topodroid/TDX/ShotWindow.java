@@ -403,7 +403,7 @@ public class ShotWindow extends Activity
    */
   void updateDisplay( )
   {
-    if ( LOG ) TDLog.v( TAG + "update display");
+    // if ( LOG ) TDLog.v( TAG + "update display");
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       mMyBlocks = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
@@ -1123,7 +1123,7 @@ public class ShotWindow extends Activity
   public boolean insertPhoto( )
   {
     // FIXME TITLE has to go
-    TDLog.v("Shot window: insert photo JPEG");
+    // TDLog.v("Shot window: insert photo JPEG");
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT, PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
@@ -1135,7 +1135,7 @@ public class ShotWindow extends Activity
   {
     long photo_id = mApp_mData.nextPhotoId( TDInstance.sid );
     String file_path = TDPath.getSurveyNextImageFilepath( photo_id, PhotoInfo.FORMAT_PNG );
-    TDLog.v("Shot window: insert bitmap photo PNG " + file_path );
+    // TDLog.v("Shot window: insert bitmap photo PNG " + file_path );
     try {
       FileOutputStream fos = new FileOutputStream( file_path );
       bitmap.compress( Bitmap.CompressFormat.PNG, 0, fos );
@@ -1381,7 +1381,7 @@ public class ShotWindow extends Activity
   public void onStart() 
   {
     super.onStart();
-    TDLog.v( "Shot Activity on Start " );
+    // TDLog.v( "Shot Activity on Start " );
     // Debug.startMethodTracing( "distox" );
     // TDLog.v( TAG + "on Start() " );
     TDLocale.resetTheLocale();
@@ -1636,7 +1636,7 @@ public class ShotWindow extends Activity
       // int k2 = 0;
       if ( ! TDInstance.isDivingMode() ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-         //  TDLog.v( TAG + "pressed download button");
+          // TDLog.v( TAG + "pressed download button");
           if ( TDInstance.getDeviceA() != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == ConnectionState.CONN_DISCONNECTED ) {

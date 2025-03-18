@@ -335,7 +335,7 @@ class QCamCompass extends Dialog
     mAccuracy    = a;
     mCamera = cam;
     // TDLog.v( "QCAM compass camera " + cam + " orient " + o + " --> " + mOrientation );
-    TDLog.v( "QCAM compass. Set orientation " + o + " -> " + mOrientation );
+    // TDLog.v( "QCAM compass. Set orientation " + o + " -> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
@@ -365,7 +365,7 @@ class QCamCompass extends Dialog
     boolean b_cancel= (b == buttonCancel);
 
     if ( mMode == MODE_CAPTURE && b_click ) {
-      TDLog.v( "QCAM compass. Button click, mode CAPTURE. Has shot " + mHasShot );
+      // TDLog.v( "QCAM compass. Button click, mode CAPTURE. Has shot " + mHasShot );
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
           TDToast.makeWarn( mContext.getResources().getString( R.string.photo_many_pictures ) );
@@ -378,10 +378,10 @@ class QCamCompass extends Dialog
 
           // QCamDrawingSurface.startPreview() when it is created
           if ( mSurface != null ) {
-            TDLog.v( "QCAM compass. Surface preview");
+            // TDLog.v( "QCAM compass. Surface preview");
             mSurface.startPreview(); 
           } else if ( mTexture != null ) {
-            TDLog.v( "QCAM compass. Texture preview");
+            // TDLog.v( "QCAM compass. Texture preview");
             mTexture.startPreview();
           }
           enableButtonCancel( true );
@@ -408,22 +408,22 @@ class QCamCompass extends Dialog
       return;
     } else if ( b_save || b_edit ) {
       if ( mMode == MODE_CAPTURE ) {
-        TDLog.v( "QCAM compass. Button save/edit, mode CAPTURE has saved " + mHasSaved );
+        // TDLog.v( "QCAM compass. Button save/edit, mode CAPTURE has saved " + mHasSaved );
         if ( mHasBearingAndClino ) {
           if ( mCallback != null ) {
-            TDLog.v( "QCAM compass. Orientation " + mOrientation + " " + mBearing + " " + mClino );
+            // TDLog.v( "QCAM compass. Orientation " + mOrientation + " " + mBearing + " " + mClino );
             if ( mSurface != null ) { // save JPEG file
               mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
               mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
-              TDLog.v( "QCAM compass: Surface set jpeg data returns " + mHasSaved );
+              // TDLog.v( "QCAM compass: Surface set jpeg data returns " + mHasSaved );
             } else if ( mTexture != null ) {
               mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 2 ); // camera2 API
               mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
-              TDLog.v( "QCAM compass: Texture set jpeg data returns " + mHasSaved );
+              // TDLog.v( "QCAM compass: Texture set jpeg data returns " + mHasSaved );
             }
             if ( mHasSaved ) {
               if ( mMediaManager != null && mMediaManager.getItemType() == MediaInfo.TYPE_XSECTION ) {
-                TDLog.v("QCAM comapss: insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
+                // TDLog.v("QCAM comapss: insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
                 TopoDroidApp.mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
                   mMediaManager.getComment(), mMediaManager.getCamera(), "", 
                   (int)(mMediaManager.getItemType()) /* MediaInfo.TYPE_XSECTION */ , PhotoInfo.FORMAT_JPEG );
@@ -439,7 +439,7 @@ class QCamCompass extends Dialog
             }
             if ( dismiss && b_edit ) {
               Bitmap bitmap = mTexture.getBitmap();
-              TDLog.v("QCAM canvas bitmap " + bitmap.getWidth() + " x " + bitmap.getHeight() );
+              // TDLog.v("QCAM canvas bitmap " + bitmap.getWidth() + " x " + bitmap.getHeight() );
               if ( mPhotoSurface.setBitmap( bitmap ) ) {
                 buttonEdit.setVisibility( View.GONE );
                 buttonClick.setVisibility( View.GONE );
@@ -457,7 +457,7 @@ class QCamCompass extends Dialog
           }
         }
       } else if ( mMode == MODE_EDIT ) {
-        TDLog.v( "QCAM compass. Button save/edit, mode EDIT ");
+        // TDLog.v( "QCAM compass. Button save/edit, mode EDIT ");
         if ( mPhotoSurface != null ) {
           mInserter.insertPhotoBitmap( mPhotoSurface.getDrawnBitmap() );
         }
@@ -465,7 +465,7 @@ class QCamCompass extends Dialog
       }
     } else if ( b_cancel ) {
       if ( mMode == MODE_CAPTURE ) {
-        TDLog.v( "QCAM compass. Button cancel, mode CAPTURE");
+        // TDLog.v( "QCAM compass. Button cancel, mode CAPTURE");
         mHasSaved = false;
       } else {
         dismiss();
@@ -473,14 +473,14 @@ class QCamCompass extends Dialog
     } else {
       TDLog.e( "QCAM compass. Click unexpected view");
     }
-    TDLog.v("QCAM compass. Has saved " + mHasSaved + " Has inserted " + mHasInserted + " dismiss " + dismiss );
+    // TDLog.v("QCAM compass. Has saved " + mHasSaved + " Has inserted " + mHasInserted + " dismiss " + dismiss );
     if ( dismiss ) {
       // if ( mSurface != null ) mSurface.close();
       TDUtil.slowDown( 100 );
       if ( mHasSaved && ! mHasInserted ) {
         if ( mInserter != null ) {
           mHasInserted = mInserter.insertPhoto();
-          TDLog.v("QCAM compass. Parent insert photo returns " + mHasInserted );
+          // TDLog.v("QCAM compass. Parent insert photo returns " + mHasInserted );
         }
         // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
       }
@@ -488,7 +488,7 @@ class QCamCompass extends Dialog
       // // mSurface.close(); 
       if ( mTexture != null ) mTexture.stop(); // TEXTURE 
       if ( mMode == MODE_EDIT ) {
-        TDLog.v("QCAM compass start drawing dialog with bitmap: TODO" );
+        // TDLog.v("QCAM compass start drawing dialog with bitmap: TODO" );
       } else {
         dismiss();
       }

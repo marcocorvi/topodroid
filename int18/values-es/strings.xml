@@ -299,6 +299,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
     <string name="photo_failed">foto fallida</string>
+    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">Texto</string>

@@ -292,6 +292,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="photo_title">FÉNYKÉP</string>
     <string name="photo_text">Írd be a fénykép megjegyzését</string>
     <string name="photo_failed">Sikertelen fotó</string>
+    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Elérte a maximális rögzítési korlátot</string>
     <string name="photo_many_pictures">Túl sok kép</string>
     <string name="label_title">FELIRAT</string>

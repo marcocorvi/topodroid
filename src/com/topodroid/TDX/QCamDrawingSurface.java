@@ -99,7 +99,7 @@ public class QCamDrawingSurface extends SurfaceView
     } catch ( ClassCastException e ) {
       TDLog.e( e.getMessage() );
     }
-    TDLog.v("QCAM Surface cstr");
+    // TDLog.v("QCAM Surface cstr");
   }
 
   /** @return the JPEG data buffer
@@ -317,7 +317,7 @@ public class QCamDrawingSurface extends SurfaceView
    */
   void startPreview()
   {
-    TDLog.v("QCAM surface preview start");
+    // TDLog.v("QCAM surface preview start");
     if ( mCamera != null ) {
       try { // start preview with new settings
         // mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
@@ -336,7 +336,7 @@ public class QCamDrawingSurface extends SurfaceView
    */
   private void stop()
   {
-    TDLog.v("QCAM surface preview stop");
+    // TDLog.v("QCAM surface preview stop");
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
       try { // stop preview before making changes
@@ -360,13 +360,13 @@ public class QCamDrawingSurface extends SurfaceView
     };
     mRaw = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) {
-        TDLog.v( "QCAM surface Picture Raw callback data " + ((data==null)? "null" : data.length) );
+        // TDLog.v( "QCAM surface Picture Raw callback data " + ((data==null)? "null" : data.length) );
         mRawData = data;
       }
     };
     mJpeg = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) { 
-        TDLog.v( "QCAM surface Picture JPEG callback data " + ((data==null)? "null" : data.length) );
+        // TDLog.v( "QCAM surface Picture JPEG callback data " + ((data==null)? "null" : data.length) );
         mJpegData = data;
       }
     };
