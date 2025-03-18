@@ -162,10 +162,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_dip">Dip Magnetica: %1$.1f</string>
-    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
+    <string name="calib_roll">Dif. rollo.: %1$.2f &#xb0;</string>
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
     <string name="calib_min_error">Mínimo error</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+    <string name="calib_delta_dir">Dir. difer.: %1$.2f ± %2$.2f (max %3$.2f)</string>
     <string name="magn_dip">Dip Magnetica: &#8230;</string>
     <string name="auto_calib">Auto Calibración</string>
     <string name="autocalib_not_supported">Cálculo de calibración requerido</string>
@@ -614,7 +614,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="section_line_not_allowed">Línea de sección no permitida</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
-    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
+    <string name="sensor_title">Agregar sensor de medición</string>
     <string name="sensor_gravity">Gravedad</string>
     <!-- UNUSED string name="sensor_humidity">Humedad</string -->
     <string name="sensor_light">Luz</string>
@@ -629,7 +629,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="insufficient_data">Datos insuficientes del sensor</string -->
     <string name="sensor_no_readings">Medidas insuficientes</string>
     <string name="sensor_failure">Fallo del sensor: %1$d</string>
-    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
+    <string name="sensor_shot">Toma %1$d: %2$s</string>
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
@@ -726,11 +726,11 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="screenshot_saved">Captura de pantalla guardada %1$s</string>
     <string name="screenshot_failed">No se pudo tomar la captura de pantalla</string>
     <string name="start_index">Índice de inicio-toma</string>
-    <!-- TODO string name="trilateration_failed">Trilateration failed completely</string -->
-    <!-- TODO string name="trilateration_failure">Trilateration failed %1$d / %2$d </string -->
-    <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
+    <string name="trilateration_failed">Fallo completo de trilateración</string>
+    <string name="trilateration_failure">Fallo trilateración  %1$d / %2$d </string>
+    <!-- UNUSED string name="trilateration_error">Error trilateración %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <!-- TODO string name="trilateration_success">Trilateration success: %1$d clusters</string -->
+    <string name="trilateration_success">Trilateración correcta: %1$d clústeres</string>
 
     <string name="survey_info">Info Topografía</string>
     <string name="stat_dates">De %1$s a %2$s</string>
@@ -772,7 +772,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hide_leg">Visualizar tomas repetidas</string>
     <string name="hide_ids">Visualizar enumeración de las tomas</string>
     <string name="hide_splay">Visualizar las tomas radiales</string>
-    <!-- TODO string name="slope_lside">Slope l-side</string -->
+    <string name="slope_lside">Pendiente l-lado</string>
 
     <!-- UNUSED string name="plan">Planta</string -->
    <string name="extended">Sección Long.</string>
@@ -809,7 +809,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_apply"     >Applicar</string>
     <string name="button_back"      >Atrás</string>
     <string name="button_cancel"    >Cancelar</string>
-    <!-- TODO string name="button_geocode"   >GeoCode</string -->
+    <string name="button_geocode"   >Código geográfico</string>
     <!-- UNUSED string name="button_change">Cambio</string -->
     <string name="button_clipboard" >Notas</string>
     <string name="button_close"     >Cerrar</string>
@@ -839,14 +839,14 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
-    <!-- TODO string name="button_less">Less</string -->
+    <string name="button_less"    >Menos</string>
     <string name="button_more"    >Más</string>
     <string name="button_move"    >Mueve</string>
     <string name="button_next"    >Siguiente</string>
     <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >nuevo exceso</string>
-    <!-- TODO string name="button_rename"  >Rename</string -->
-    <!-- TODO string name="button_prefix"  >Prefix</string -->
+    <string name="button_rename"  >Renombrar</string>
+    <string name="button_prefix"  >Prefijo</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
@@ -878,7 +878,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
     <string name="button_saved"     >Estación guardada</string>
-    <!-- TODO string name="button_scrap"     >Outlines</string -->
+    <string name="button_scrap"     >Contornos</string>
     <string name="button_split"     >Dividir     </string>
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
@@ -898,7 +898,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_xsection"  >Secciones transversales</string>
     <string name="xsection">Secciones transversales</string>
     <string name="buffer_size">Búfer: %1$d datos</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <string name="buffer_sorted">ordenado</string>
     <!-- UNUSED string name="buffer_unsorted">Sin clasificar</string -->
 
     <string name="mode_leg">Visuales</string>
@@ -960,12 +960,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="azimuth">Rumbo [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
-    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
+    <string name="bt_alias_title">Alias ​​de Bluetooth</string>
+    <string name="hint_bt_alias">Alias BT</string>
+    <string name="hint_bt_code">Codigo dispositivo</string>
+    <string name="bt_alias_missing">Alias desconocido BT</string>
+    <string name="bt_code_missing">Codigo dispositivo desconocido</string>
+    <string name="bt_alias_delete">¿Eliminar alias de bluetooth?</string>
 
     <string name="hint_cellsize">Lado de la celda</string>
     <string name="hint_cwd">Carpeta de trabajo</string>
@@ -978,18 +978,18 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hint_units">Tamaño del símbolo</string>
     <string name="hint_value">Valor</string>
 
-    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
-    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
-    <!-- TODO string name="calib_measurement_group">Group: </string -->
+    <string name="calib_measurement_id">Toma %1$d</string>
+    <string name="calib_measurement_error">Error %1$.4f</string>
+    <string name="calib_measurement_group">Groupo: </string>
 
     <string name="hint_notes">Nota</string>
     <string name="hint_label">Etiqueta</string>
     <string name="hint_comment">Comentario</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+    <string name="hint_size">Tamaño [m]</string>
     <string name="hint_text">Texto</string>
     <string name="hint_options">Opciones</string>
     <string name="hint_name">Nombre</string>
-    <!-- TODO string name="hint_prefix">prefix</string -->
+    <string name="hint_prefix">prefijo</string>
     <string name="hint_from">de</string>
     <string name="hint_to">a</string>
     <string name="hint_azimuth">Rumbo</string>
@@ -1053,7 +1053,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_close_app">Cerrar la app</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
-    <!-- TODO string name="help_cwd">Current work folder</string -->
+    <string name="help_cwd">Carpeta de trabajo actual</string>
     <string name="help_join">Unir líneas</string>
     <!-- UNUSED string name="help_continue">Continuar el dibujo de una línea</string -->
     <!-- UNUSED string name="help_contour">Editar Contorno</string -->
@@ -1190,12 +1190,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_maps">Mapa antes de datos</string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
-    <!-- TODO string name="export_media">media items</string -->
+    <string name="export_media">elementos multimedia</string>
     <!-- UNUSED string name="export_suffix_hint">sufijo</string -->
-    <!-- TODO string name="export_series_hint">series</string -->
+    <string name="export_series_hint">serie</string>
     <string name="export_roundtrip">Ida y vuelta </string>
-    <string name="export_share">Share</string>
-    <!-- TODO string name="export_overwrite">Overwrite</string -->
+    <string name="export_share">Compartir</string>
+    <string name="export_overwrite">exagerar</string>
     <!-- UNUSED string name="export_scale_png">Resolución </string -->
     <string name="export_scale_th">Escala 1:</string>
     <string name="export_spacing_th">Espaciado de puntos</string>
@@ -1208,7 +1208,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_walls">Paredes</string>
     <string name="export_xvi">Imágenes Xvi</string>
     <string name="export_with_xsections">Incluir X-sección</string>
-    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
+    <string name="export_grouped">Agrupar elementos por tipos de capas</string>
     <string name="export_with_reference">Incluir referencias XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke"> Trazo de dirección de línea</string -->
@@ -1243,13 +1243,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
-    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
+    <string name="title_coeff_two">Coeficiente Calibración [%1$d]</string>
     <string name="title_color_picker">Elige un color</string>
     <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
-    <!-- TODO string name="title_pref_search">Settings search</string -->
+    <string name="title_pref_search">Búsqueda de configuración</string>
     <string name="title_gm_search">Calib data search</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
@@ -1297,7 +1297,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_scraps_outline">Esquema del dibujo</string>
     <!-- UNUSED string name="title_select">Seleccionar</string -->
-    <!-- TODO string name="setting" >setting</string -->
+    <string name="setting" >Configuración</string>
 
     <string name="title_settings_main">Configuración principal de TopoDroid</string>
     <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
@@ -1349,7 +1349,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar la toma?</string>
     <string name="title_sensor_edit">Sensor</string>
-    <!-- TODO string name="title_sensor_list">Sensor data</string -->
+    <string name="title_sensor_list">Datos Sensor</string>
     <string name="title_split">Dividir dibujo</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -1419,10 +1419,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_locale_summary">Seleccione idioma</string>
   <string name="pref_orientation_title">Orientación de Pantalla</string>
   <string name="pref_orientation_summary">Orientación Pantalla App </string>
-  <!-- TODO string name="pref_single_back_title">Single back</string -->
-  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+  <string name="pref_single_back_title">Respaldo Simple</string>
+  <string name="pref_single_back_summary">Cerrar ventanas con respaldo simple</string>
+  <string name="pref_hide_navbar_title">barra de navegación</string>
+  <string name="pref_hide_navbar_summary">Oculto. Se muestra deslizándose hacia arriba.</string>
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
@@ -1472,8 +1472,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bezier_step_summary">Distancia entre puntos en una línea de exportación [m]</string>
   <string name="pref_leg_shots_title">Repeticiones de una visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
-  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
-  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
+  <string name="pref_backsight_splay_title">Vista atrás tomas laterales</string>
+  <string name="pref_backsight_splay_summary">Comprobación de orientación hacia atrás con primera toma lateral</string>
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
   <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
@@ -1484,8 +1484,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_unnamed_device_summary">Habilitar menú para ingresar el nombre del dispositivo</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+  <string name="pref_with_media_title">Exportación de medios</string>
+  <string name="pref_with_media_summary">Incluir medios en la exportación[cSurvey]</string>
   <string name="pref_compass_splays_title">Muestra Compass</string>
   <string name="pref_compass_splays_summary">Exportar reproducciones en archivos de Compass</string>
   <string name="pref_walls_splays_title">Muestra walls</string>
@@ -1510,8 +1510,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_survex_splay_summary">Añadir a la estación toma radial en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
-  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
-  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
+  <string name="pref_survex_epsg_title">EPSG "cs fuera"</string>
+  <string name="pref_survex_epsg_summary">Número EPSG para Survex "cs out"</string>
   <string name="pref_svg_program_title">Programa SVG</string>
   <string name="pref_svg_program_summary">Programa SVG utilizado</string>
   <string name="pref_svg_grid_title">Parrilla</string>
@@ -1520,8 +1520,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_svg_roundtrip_summary">Exportar SVG con capa de ida y vuelta</string>
   <string name="pref_svg_splays_title">Biscelado SVG</string>
   <string name="pref_svg_splays_summary">Incluir biscelado en la exportación SVG</string>
-  <!-- TODO string name="pref_svg_groups_title">Type groups</string -->
-  <!-- TODO string name="pref_svg_groups_summary">Group items by type in SVG export</string -->
+  <string name="pref_svg_groups_title">Tipo de grupos</string>
+  <string name="pref_svg_groups_summary">Agrupar elementos por tipo de exportación SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Incorpore la exportación de SVG en HTML</string -->
   <string name="pref_svg_pointstroke_title">Trazo de punto en SVG</string>
@@ -1557,7 +1557,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_zip_share_category_title">Categoría de zip-share</string>
   <string name="pref_zip_share_category_summary">Agregar categoría a la solicitud de zip-share</string>
   
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">Alias ​​de BT</string>
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo Disto</string -->
@@ -1608,8 +1608,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_mode_summary">Modo operativo BRIC</string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
-  <!-- TODO string name="pref_bric_index_is_id_title">BRIC index is ID</string -->
-  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
+  <string name="pref_bric_index_is_id_title">El índice BRIC es ID</string>
+  <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
@@ -1698,8 +1698,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de topógrafos por defecto</string>
-  <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
+  <string name="pref_team_names_title">Nombres de equipo</string>
+  <string name="pref_team_names_summary">Therion/Survex nombres de equipo</string>
 
   <string name="pref_ethr_title">Precisión toma lateral</string>
   <string name="pref_ethr_summary">Ampliar límites de la toma lateral</string>
