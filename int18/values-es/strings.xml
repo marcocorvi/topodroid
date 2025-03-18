@@ -1787,10 +1787,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_iter_summary">Número máximo de iteraciones</string>
   <string name="pref_label_size_title">Tamaño del texto</string>
   <string name="pref_label_size_summary">Tamaño del texto</string>
-  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
-  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
-  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
-  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
+  <string name="pref_scalable_label_title">Etiquetas de escala</string>
+  <string name="pref_scalable_label_summary">Las etiquetas se escalan con zoom</string>
+  <string name="pref_slope_lside_title">Línea de pendiente l-lado</string>
+  <string name="pref_slope_lside_summary">Líneas de pendiente por defecto l-lado</string>
   <string name="pref_arrow_length_title">Corte seccional</string>
   <string name="pref_arrow_length_message">Tamaño de la línea del corte de sección</string>
   <string name="pref_dot_radius_title">Puntos de nodo</string>
@@ -1819,8 +1819,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_plot_split_summary">Dibujar acciones de división y fusión</string>
   <string name="pref_stylus_size_title">Tamaño del lápiz</string>
   <string name="pref_stylus_size_summary">Tamaño del lápiz óptico [0: ignorar]</string>
-  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
-  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
+  <string name="pref_line_ends_title">Corte de fin de línea</string>
+  <string name="pref_line_ends_summary">Número de puntos de línea a eliminar desde los extremos [0]</string>
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
 	  
@@ -2114,7 +2114,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Visualizar paredes</string>
-    <!-- TODO string name="cmenu_search">SEARCH</string -->
+    <string name="cmenu_search">BUSCAR</string>
     <!-- UNUSED string name="cmenu_sketch">Dibujos</string -->
     <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 
@@ -2314,8 +2314,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string -->
 	  
     <string name="warning_nogrant_camera">No se ha concedido el permiso de la cámara</string>
-    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
-    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
+    <string name="warning_no_csv_type">Tipo CSV no especificado</string>
+    <string name="warning_cavway_info">Fallo al obtener la información de Cavway</string>
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->
@@ -2368,8 +2368,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cpref_grid_above_summary">Situar la cuadrícula en la parte superior</string>
     <string name="cpref_grid_extent_title">Extensión de cuadrícula</string>
     <string name="cpref_grid_extent_summary">Extensión de cuadrícula alrededor del relieve</string>
-    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
-    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
+    <string name="cpref_names_visibility_title">Visibilidad de nombres</string>
+    <string name="cpref_names_visibility_summary">Los nombres de las estaciones siempre visibles</string>
     <string name="cpref_neg_clino_title">Vista por debajo del horizonte</string>
     <string name="cpref_neg_clino_summary">Permitir punto de vista por debajo del horizonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>
@@ -2379,8 +2379,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cpref_dem_maxsize_summary">Número máximo de celdas [400]</string>
     <string name="cpref_dem_reduce_title">Reducir DEM</string>
     <string name="cpref_dem_reduce_summary">Método de reducción DEM [shrink] </string>
-    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
-    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
+    <string name="cpref_texture_root_title">Raíz de textura</string>
+    <string name="cpref_texture_root_summary">Ruta de acceso raíz de textura [/sdcard/]</string>
   
     <string name="cpref_all_splay_title">Todas las tomas radiales</string>
     <string name="cpref_all_splay_summary">Todas las tomas radiales para paredes</string>
