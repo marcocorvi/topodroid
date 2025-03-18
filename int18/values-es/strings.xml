@@ -48,7 +48,7 @@
     <!-- UNUSED string name="version_check_latest">Esta es la última versión</string -->
     <string name="version_check_newer">Versión más reciente disponible: %1$d</string>
     <!-- UNUSED string name="version_check_newer">Disponible nueva versión: %1$d</string -->
-    <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
+    <string name="setup_textsize_title">Configuración de TopoDroid. Tamaño del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
     <string name="setup_drawingunit_title">Configuración de TopoDroid. Tamaño de los iconos</string>
     <string name="setup_done_title">Configuración de TopoDroid. Hecho</string>
@@ -56,7 +56,7 @@
 	
     <string name="setup_textsize">Establezca el tamaño del texto. \nPuede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_buttonsize">Establezca el tamaño del botón. \nPuede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
-    <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \nPuede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
+    <string name="setup_drawingunit">Establezca el tamaño del icono de croquis. \nPuede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
     <string name="setup_done">La configuración básica está lista.\n\n
 	    Si tiene problemas con la conexión DistoX, intente configurar el modo de conexión emparejamiento inestable.\n\n Otras configuraciones se refieren a la presentación en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de línea, etc.)
 debe ajustarlos a sus necesidades./n/n </string>
@@ -84,8 +84,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 	
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
-    <string name="thp_section">sección</string>
-    <string name="thp_station">estación</string>
+    <string name="thp_section">Sección</string>
+    <string name="thp_station">Estación</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
     <string name="thl_wall">Pared</string>
@@ -101,7 +101,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_not_saved">No se guardo la toma</string>
     <string name="bad_sibling">Toma incorrecta</string>
     <string name="bad_station">Estación incorrecta: %1$s</string>
-    <string name="bad_station_name">Nombre de la estación no admitida</string>
+    <string name="bad_station_name">Nombre de la estación no valida</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -123,7 +123,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="bric_battery_wait">Batería &#8230;</string>
     <string name="bric_reset_time">Resetear hora</string>
     <string name="bric_clear_memory">limpiar memoria</string>
-    <string name="bric_future_time">No resetear a un hora futura</string>
+    <string name="bric_future_time">No resetear a tiempo futuro</string>
     <string name="bric_ask_memory_clear">¿Borrar la memoria BRIC?</string>
     <string name="bric_reset_ok">Hora reseteada</string>
     <string name="bric_reset_fail">Error al restablecer la hora</string>
@@ -138,7 +138,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="calib_new">Nueva calibración</string>
     <string name="calib_exists">La calibración ya existe</string>
     <string name="calib_delete">Eliminar calibración </string>
-    <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
+    <string name="calib_device_mismatch">ADVERTENCIA: Calibración del dispositivo desajustada</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
     <string name="calib_no_coeff">Coeficientes de calibración no establecidos</string>
     <string name="calib_gm_policy">Política de grupo</string>
@@ -166,7 +166,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
     <string name="calib_min_error">Mínimo error</string>
     <string name="calib_delta_dir">Dir. difer.: %1$.2f ± %2$.2f (max %3$.2f)</string>
-    <string name="magn_dip">Dip Magnetica: &#8230;</string>
+    <string name="magn_dip">Dip Magnética: &#8230;</string>
     <string name="auto_calib">Auto Calibración</string>
     <string name="autocalib_not_supported">Cálculo de calibración requerido</string>
 
@@ -190,7 +190,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="device_model_set">¿Quiere cambiar de dispositivo?</string -->
     <!-- UNUSED string name="device_none">DistoX no seleccionado</string -->
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
-    <string name="device_reset">Reseteo memoria de DistoX </string>
+    <string name="device_reset">Reseteo memoria de DistoX</string>
     <string name="device_clear">limpiar memoria del DistoX</string>
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -225,7 +225,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
     <!-- CHANGED string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string -->
-    <string name="strike_dip">Dip direccion %1$.0f inclinacion %2$.0f</string>
+    <string name="strike_dip">Dip dirección %1$.0f inclinación %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
@@ -256,8 +256,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_calib_already">Calib. ya existe</string>
     <string name="import_calib_mismatch">Desajuste Calib. dispositivo</string>
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
-    <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
-    <string name="imported_file">importado %1$s</string>
+    <string name="import_calib_io_error">Archivo de calib: error lectura</string>
+    <string name="imported_file">Importado %1$s</string>
     <string name="import_zip_ok">Archivo ZIP importados con éxito</string>
     <string name="import_zip_newer">ZIP importado de una versión más reciente</string>
     <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
@@ -272,13 +272,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="bad_manifest_db_old">Error: la versión de la base de datos es demasiado antigua</string>
     <string name="bad_manifest_db_new">Error: la versión de la base de datos es demasiado nueva</string>
     <!-- UNUSED string name="bad_manifest_name">Error: el nombre de la topografía difiere del nombre del archivo Zip</string -->
-    <string name="bad_manifest_present">Error: la topografía ya está existe</string>
+    <string name="bad_manifest_present">Error: la topografía ya existe</string>
     <string name="bad_manifest_db">Error: no se puede abrir la base de datos</string>
     <string name="bad_manifest_sql">Error: error de SQL</string>
-    <string name="bad_manifest_number">Error: número incorrecto</string>
-    <string name="bad_manifest_manifest">Error: datos incorrecto</string>
+    <string name="bad_manifest_number">Error: números incorrectos</string>
+    <string name="bad_manifest_manifest">Error: datos incorrectos</string>
     <string name="bad_manifest_file">Error: datos evidentes</string>
-    <string name="bad_manifest_missing">Error: Falta datos</string>
+    <string name="bad_manifest_missing">Error: Faltan datos</string>
     <string name="bad_manifest_error">Error: error de lectura de datos</string>
     <string name="bad_manifest_other">Error: error inesperado</string>
     <string name="archive_reset_color">Advertencia. Colores personalizados restablecidos</string>
@@ -296,7 +296,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="illegal_data_value">Valores de datos no válidos</string>
 	
     <string name="geocode_title">Código de geomorfología</string>
-    <string name="photo_title">FOTO</string>
+    <string name="photo_title">Foto</string>
     <string name="photo_text">Introducir comentario de foto</string>
     <string name="photo_failed">foto fallida</string>
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
@@ -389,7 +389,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
     <string name="splays_on_off">Tomas laterales</string>
     <!-- UNUSED string name="including_splays">incluyendo tomas laterales</string -->
-    <string name="with_splays">con tomas laterales</string>
+    <string name="with_splays">Con tomas laterales</string>
     <string name="cell_size">Tamaño de la celda [m]</string>
 
     <string name="legs">Battute</string>
@@ -463,7 +463,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <string name="menu_color">Limpiar color</string>
-    <string name="menu_cwd">CARPETA DE TRABAJO</string>
+    <string name="menu_cwd">Carpeta de trabajo</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <!-- UNUSED string name="menu_display">Pantalla</string -->
@@ -492,7 +492,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
-    <string name="menu_sections">Secciónes</string>
+    <string name="menu_sections">Secciones</string>
     <string name="menu_sensor">Tomas con sensor</string>
     <!-- UNUSED string name="menu_scan">Escanear</string -->
     <!-- UNUSED string name="menu_scan_ble">Escanear BTLE</string -->
@@ -584,7 +584,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
     <string name="plot_dangling">Croquis colgado</string>
-    <string name="plot_name">Nombre dibujo</string>
+    <string name="plot_name">Nombre croquiw</string>
     <string name="plot_new">Nuevo croquis</string>
     <string name="plot_not_found">No hay croquis</string>
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
@@ -594,7 +594,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="plot_view">Punto de referencia</string -->
     <string name="read_fail_with_code">Fallo de lectura: código de error </string>
     <string name="read_failed">Error al leer DistoX</string>
-    <string name="swap_hotbit_ok">Cambiato hot-bit dei dati</string>
+    <string name="swap_hotbit_ok">Bits de acceso rápido de datos modificados</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
 
     <string name="saved_file_1">Guardar archivo %1$s</string>
