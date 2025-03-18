@@ -18,7 +18,7 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <string name="desc_menu" copyable="fr it pt sk">Menu</string>
+    <string name="desc_menu" copyable="fr es it pt sk">Menu</string>
 
   <string name="r_title">Android-13+ WARNING</string>
   <!-- UNUSED string name="r_dialog_1">
@@ -229,7 +229,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="extend_vert">Vert</string>
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD at TO station</string>
-    <string name="lrud" copyable="it pt sk">LRUD</string>
+    <string name="lrud" copyable="es it pt sk">LRUD</string>
     <string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string>
 
     <string name="few_data">Too few calibration data</string>
@@ -305,7 +305,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="geocode_title">Geomorphology Code</string>
     <string name="photo_title" copyable="fr">Photo</string>
     <string name="photo_text">Enter photo comment</string>
-    <string name="photo_failed">Failed photo</string>
+    <!-- UNUSED string name="photo_failed">Failed photo</string -->
     <string name="photo_not_ready">Photo not ready. Wait &#8230;</string>
     <string name="photo_max_captures">Reached maximum capture limit</string>
     <string name="photo_many_pictures">Too many pictures</string>
@@ -830,7 +830,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_clipboard" >Clipboard</string>
     <string name="button_close"     >Close</string>
     <!-- UNUSED string name="button_create"    >Create</string -->
-    <string name="button_color"     >Color</string>
+    <string name="button_color"   copyable="es">Color</string>
     <string name="button_compute"   >Compute</string>
     <string name="button_clear_convert">Clear convert</string>
     <string name="button_convert"   >Convert</string>
@@ -950,7 +950,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="popup_do_leg">Leg shots</string>
     <string name="popup_do_gm_data">Calib. shot</string>
     <string name="popup_do_gm_group">Calib. group</string>
-    <string name="popup_do_laser" copyable="fr it pt sk">Laser</string>
+    <string name="popup_do_laser" copyable="fr es it pt sk">Laser</string>
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Shot</string>
     <string name="popup_do_clear">Clear</string>
@@ -1422,7 +1422,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_cat_exportsvg" translatable="false">SVG</string>
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
-  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
+  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string -->
   <string name="pref_cat_exportgpx" translatable="false">GPX</string>
   <string name="pref_cat_exportkml" translatable="false">KML</string>
   <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
@@ -1736,7 +1736,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
   <string name="pref_hthr_title">X-section H-threshold</string>
   <string name="pref_hthr_summary">Threshold for horizontal x-sections</string>
-  <!-- UNUSED string name="pref_bitmap_scale_title">Resolution</string NO_PNG -->
+  <!-- UNUSED string name="pref_bitmap_scale_title">Resolution</string -->
   <!-- UNUSED string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string -->
   <!-- UNUSED string name="pref_bitmap_bgcolor_title">Background color</string -->
   <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
@@ -1959,10 +1959,10 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
   <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
 
-  <string name="pref_3d_sketch_title">3D modeling</string>
-  <string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string>
-  <string name="pref_sketch_splay_buffer_title">Splay buffer</string>
-  <string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string>
+  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
+  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
+  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
+  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
 
 <!-- UNUSED NO_LOGS
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
@@ -2284,7 +2284,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="view_west">West</string>
     <string name="view_south">South</string>
     <!-- UNUSED string name="view_point">Viewpoint</string -->
-    <string name="view_zoom" copyable="fr hu it pt">Zoom 1</string>
+    <string name="view_zoom" copyable="fr eses  hu it pt">Zoom 1</string>
 
     <string name="walls_title">WALLS</string>
     <string name="walls_convexhull" copyable="all">Convex Hull</string>

@@ -47,7 +47,7 @@
     <!-- UNUSED string name="version_check_failed">Comprobación de versión fallida</string -->
     <!-- UNUSED string name="version_check_latest">Esta es la última versión</string -->
     <string name="version_check_newer">Versión más reciente disponible: %1$d</string>
-    <!-- UNUSED string name="version_check_newer">Disponible nueva versión: %1$d</string -->
+
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
     <string name="setup_drawingunit_title">Configuración de TopoDroid. Tamaño de los iconos</string>
@@ -80,11 +80,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
     <string name="memoryXBLE">DistoX-BLE</string>
+    <!-- TODO string name="memoryCavway">Cavway memory</string -->
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 	
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <string name="thp_section">sección</string>
+    <!-- TODO string name="thp_picture">picture</string -->
     <string name="thp_station">estación</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
@@ -236,6 +238,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
     <string name="gettingble_info">Descargando información de DistoX-BLE &#8230;</string>
+    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
@@ -266,7 +269,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="GPX_record_none">No hay registro de puntos GPX</string>
     <string name="MT_points_none">No hay punto GPS</string>
     <string name="MT_bad_file">Archivo de topografía del móvil corrupto</string>
-    <string name="bad_manifest">Archivo de manifiesto corrupto</string>
+    <string name="bad_manifest">Archivo de manifiesto corrupto [%1$d]</string>
     <string name="bad_manifest_zip">Error: error de lectura del zip</string>
     <string name="bad_manifest_td">Error: la versión de TopoDroid es demasiado antigua</string>
     <string name="bad_manifest_db_old">Error: la versión de la base de datos es demasiado antigua</string>
@@ -298,7 +301,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="geocode_title">Código de geomorfología</string>
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
-    <string name="photo_failed">foto fallida</string>
+    <!-- UNUSED string name="photo_failed">foto fallida</string -->
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
     <string name="photo_many_pictures">demasiadas fotos</string>
@@ -756,7 +759,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="stat_leg_sigma">Toma sigma %1$.1f cm</string>
     <string name="stat_dangling">Tomas colgadas %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
-    <!-- UNUSED string name="stat_surface">mediciones Superficie %1$d # %2$d %3$.1f %4$s</string -->
+    <!-- UNUSED string name="stat_surface_z">mediciones Superficie %1$d # %2$d %3$.1f %4$s</string -->
     <string name="stat_survey_z">Desnivel de la cueva: Z %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
@@ -767,7 +770,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Tomas laterales %1$d</string>
     <string name="survey_stat_station">Estaciones %1$d</string>
-    <string name="survey_stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
+    <string name="survey_stat_surface">Tomas de superficie %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Visualizar tomas en blanco</string>
     <string name="hide_leg">Visualizar tomas repetidas</string>
@@ -1133,12 +1136,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_zoom_fit">Ajustar dibujo a la pantalla</string>
    
     <string name="help_line_point">Editar punto o línea: unir, separar, cortar, eliminar</string>
-<!--
-    <string name="help_to_point">Mueva el punto seleccionado para unirse con el punto más cercano</string>
-    <string name="help_split_point">Dividir el punto en dos [línea / área]</string>
-    <string name="help_split_line">Dividir la línea en dos puntos</string>
-    <string name="help_kink">Utilice una línea recta en el punto [línea / área]</string>
--->
+
+    <!-- UNUSED string name="help_to_point">Mueva el punto seleccionado para unirse con el punto más cercano</string -->
+    <!-- UNUSED string name="help_split_point">Dividir el punto en dos [línea / área]</string -->
+    <!-- UNUSED string name="help_split_line">Dividir la línea en dos puntos</string -->
+    <!-- UNUSED string name="help_kink">Utilice una línea recta en el punto [línea / área]</string -->
+
     <string name="help_manual_calibration">Manual instrumentos calibración</string>
     <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
@@ -1251,7 +1254,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
     <string name="title_pref_search">Búsqueda de configuración</string>
-    <string name="title_gm_search">Calib data search</string>
+    <!-- TODO string name="title_gm_search">Calib data search</string -->
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
@@ -1353,17 +1356,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_sensor_list">Datos Sensor</string>
     <string name="title_split">Dividir dibujo</string>
 
-    <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
-    <!-- UNUSED string name="title_sketch_shot">Nueva toma</string -->
-    <!-- UNUSED string name="title_sketch_section_type">tipo Secciones</string -->
-    <!-- UNUSED string name="title_sketch_select">Seleccionar elemento</string -->
-
     <string name="title_stats">Estadísticas</string>
     <string name="title_survey">Info. topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
+    <!-- TODO string name="title_team_dialog">Team names</string -->
     <string name="title_plot_rename">Cambiar el nombre topografía</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
@@ -1398,15 +1396,6 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">Importar</string>
   <string name="pref_cat_exportenable">Activado</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
@@ -1610,7 +1599,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
   <string name="pref_bric_index_is_id_title">El índice BRIC es ID</string>
-  <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
+  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
@@ -1924,21 +1913,20 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_unit_location_title">Unidades de Posicionamiento</string>
   <string name="pref_unit_location_summary">Visualizar unidades de Posicionamiento</string>
 
-<!-- UNUSED
-  <string name="pref_plot_walls_title">Ajustes paredes automáticas</string>
-  <string name="pref_walls_type_title">Tipo de pared</string>
-  <string name="pref_walls_type_summary">Tipo de paredes</string>
-  <string name="pref_walls_plan_thr_title">Inclinación tomas radiales lisas</string>
-  <string name="pref_walls_plan_thr_summary">Máxima inclinación para tomas radiales, paredes lisas [deg]</string>
-  <string name="pref_walls_extended_thr_title">Inclinación de tomas radiales paredes</string>
-  <string name="pref_walls_extended_thr_summary">Máxima inclinación para tomas radiales, perfil paredes [grad.]</string>
-  <string name="pref_walls_xclose_title">Separación</string>
-  <string name="pref_walls_xclose_summary">Separación mínima de puntos de pared a lo largo de una toma [m]</string>
-  <string name="pref_walls_concave_title">Concavidad</string>
-  <string name="pref_walls_concave_summary">Concavidad máxima [porciento]</string>
-  <string name="pref_walls_xstep_title">Media</string>
-  <string name="pref_walls_xstep_summary">La separación de los puntos a lo largo de la pared [m]</string>
--->
+
+  <!-- UNUSED string name="pref_plot_walls_title">Ajustes paredes automáticas</string -->
+  <!-- UNUSED string name="pref_walls_type_title">Tipo de pared</string -->
+  <!-- UNUSED string name="pref_walls_type_summary">Tipo de paredes</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_title">Inclinación tomas radiales lisas</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_summary">Máxima inclinación para tomas radiales, paredes lisas [deg]</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_title">Inclinación de tomas radiales paredes</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_summary">Máxima inclinación para tomas radiales, perfil paredes [grad.]</string -->
+  <!-- UNUSED string name="pref_walls_xclose_title">Separación</string -->
+  <!-- UNUSED string name="pref_walls_xclose_summary">Separación mínima de puntos de pared a lo largo de una toma [m]</string -->
+  <!-- UNUSED string name="pref_walls_concave_title">Concavidad</string -->
+  <!-- UNUSED string name="pref_walls_concave_summary">Concavidad máxima [porciento]</string -->
+  <!-- UNUSED string name="pref_walls_xstep_title">Media</string -->
+  <!-- UNUSED string name="pref_walls_xstep_summary">La separación de los puntos a lo largo de la pared [m]</string -->
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
@@ -2104,7 +2092,6 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="cmenu_open">Abrir archivo</string>
     <string name="cmenu_reset">Restablecer</string>
-    <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <string name="cmenu_alpha">Transparencia DEM </string>
     <string name="cmenu_viewpoint">Punto de vista</string>
@@ -2155,7 +2142,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <!-- UNUSED string name="info_volume_value_tryme">P. %1$.0f m³ C. %2$.0f m³</string -->
+    <string name="info_volume_value">%1$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
@@ -2401,14 +2389,14 @@ debe ajustarlos a sus necesidades./n/n </string>
     
     <string name="cpref_powercrust_delta_title">Recubrimiento fuerte Delta</string>
     <string name="cpref_powercrust_delta_summary">Filtrado de tomas radiales</string>
-<!--
-    <string name="cpref_convex_hull_title">Convex hull</string>
-    <string name="cpref_convex_hull_summary">Convex hull walls</string>
-    <string name="cpref_delaunay_title">Delaunay</string>
-    <string name="cpref_delaunay_summary">Delaunay walls</string>
-    <string name="cpref_hull_title">Hull</string>
-    <string name="cpref_hull_summary">Hull walls</string>
--->
+
+    <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
+    <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull walls</string -->
+    <!-- UNUSED string name="cpref_delaunay_title">Delaunay</string -->
+    <!-- UNUSED string name="cpref_delaunay_summary">Delaunay walls</string -->
+    <!-- UNUSED string name="cpref_hull_title">Hull</string -->
+    <!-- UNUSED string name="cpref_hull_summary">Hull walls</string -->
+
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
     <!-- UNUSED string name="cperms_mandatory">Cave3D no puede ejecutarse sin estos permisos:</string -->

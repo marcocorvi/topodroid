@@ -296,7 +296,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="geocode_title">Геоморфологичен код</string>
     <string name="photo_title">Снимка</string>
     <string name="photo_text">Въведете коментар за снимката</string>
-    <string name="photo_failed">Неуспешна снимка</string>
+    <!-- UNUSED string name="photo_failed">Неуспешна снимка</string -->
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Достигнато максимално ограничение</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->

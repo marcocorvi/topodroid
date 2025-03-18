@@ -430,11 +430,11 @@ class QCamCompass extends Dialog
                 mHasInserted = true;
               }
             } else {
-              if ( mSurface != null ) {
+              // if ( mSurface != null ) {
                 TDToast.makeBad( mContext.getResources().getString( R.string.photo_not_ready ) );
-              } else if ( mTexture != null ) {
-                TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
-              }
+              // } else if ( mTexture != null ) {
+              //   TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
+              // }
               dismiss = false;
             }
             if ( dismiss && b_edit ) {

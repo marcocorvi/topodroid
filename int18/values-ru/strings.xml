@@ -291,7 +291,7 @@
     <string name="geocode_title">Код геоморфологии</string>
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
-    <string name="photo_failed">Ошибка фото</string>
+    <!-- UNUSED string name="photo_failed">Ошибка фото</string -->
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Достигнут предел кол-ва попыток съёмки</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->

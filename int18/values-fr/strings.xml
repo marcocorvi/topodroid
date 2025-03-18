@@ -291,8 +291,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="geocode_title">Geomorphology Code</string -->
     <string name="photo_title">Photo</string>
     <string name="photo_text">Saisir un commentaire pour la photo</string>
+    <!-- UNUSED string name="photo_failed">Échec de la photo</string -->
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
-    <string name="photo_failed">Échec de la photo</string>
     <string name="photo_max_captures">Limite de capture maximale atteinte</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
     <string name="label_title">ÉTIQUETTE</string>

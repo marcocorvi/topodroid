@@ -300,7 +300,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="geocode_title">Geomorfologický kód</string>
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Napíšte poznámku</string>
-    <string name="photo_failed">Zlyhanie fotografie</string>
+    <!-- UNUSED string name="photo_failed">Zlyhanie fotografie</string -->
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">Dosiahnutý maximálny limit</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->

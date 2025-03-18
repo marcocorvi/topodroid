@@ -291,7 +291,7 @@
     <string name="geocode_title">地貌代码</string>
     <string name="photo_title">照片</string>
     <string name="photo_text">输入照片注释</string>
-    <string name="photo_failed">照片失败</string>
+    <!-- UNUSED string name="photo_failed">照片失败</string -->
     <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
     <string name="photo_max_captures">超过最大照片限定</string>
     <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
