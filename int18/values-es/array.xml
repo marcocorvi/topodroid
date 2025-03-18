@@ -5,12 +5,12 @@
      <item name="plain">Texto sin formato</item>
      <item name="separated">Texto separado</item>
      <item name="dialog">Diálogo</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="bricMode">
      <item name="prim_only">Solo Prim.</item>
      <item name="all">Toda la información</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="geoImportApp">
      <item name="none">no especificado</item>
@@ -19,7 +19,7 @@
      <item name="gps_position">Posición GPS</item>
      <item name="gps_test">Test GPS</item>
      <item name="gps_logger">Registro GPS</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="orientation">
      <item name="unspecified">Sin especificar</item>
