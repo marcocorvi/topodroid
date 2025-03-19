@@ -1303,7 +1303,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="setting" >Configuración</string>
 
     <string name="title_settings_main">Configuración principal de TopoDroid</string>
-    <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
+    <string name="title_settings_export">Configuración de importación y exportación de TopoDroid</string>
     <string name="title_settings_export_enable">Configuración de exportación de datos activada</string>
     <string name="title_settings_import">Configuración de importación de TopoDroid</string>
     <string name="title_settings_csv">Configuración de exportación CSV</string>
@@ -1394,7 +1394,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">Importar</string>
-  <string name="pref_cat_exportenable">Activado</string>
+  <string name="pref_cat_exportenable">Activar exportaciones</string>
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
