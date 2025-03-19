@@ -43,6 +43,7 @@ import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 
 // API-21 use android.hardware.camera2 classes
@@ -95,6 +96,7 @@ public class QCamDrawingTexture extends TextureView {
 
   private String mCameraId;
   private CameraDevice mCamera = null;
+  private CameraManager mManager = null;
   private CameraCaptureSession mCaptureSession;
   private Size mPreviewSize;
   private HandlerThread mBackgroundThread;
@@ -111,6 +113,7 @@ public class QCamDrawingTexture extends TextureView {
   private int mOrientation = 0; // sensor orientation
   private boolean mHasFlash = false;
   private int mNrCaptures = 0;
+  private float mZoomLevel = 3;
 
   // ------------------------------------------------------------------------
   /** surface-texture listener
@@ -389,8 +392,8 @@ public class QCamDrawingTexture extends TextureView {
   {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) return false;
     // TDLog.v("QCAM2 open camera");
-    CameraManager manager = (CameraManager) (mContext.getSystemService(Context.CAMERA_SERVICE));
-    if ( ! setupCameraOutput(manager, w, h) ) return false;
+    mManager = (CameraManager) (mContext.getSystemService(Context.CAMERA_SERVICE));
+    if ( ! setupCameraOutput( w, h ) ) return false;
     configureTransform(w, h);
     try {
       if (!mLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
@@ -400,7 +403,7 @@ public class QCamDrawingTexture extends TextureView {
         TDLog.e("No CAMERA permission");
         return false;
       }
-      manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
+      mManager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
       return true;
     } catch ( CameraAccessException e ) {
       TDLog.e("QCAM2 " + e.getMessage() );
@@ -433,18 +436,17 @@ public class QCamDrawingTexture extends TextureView {
   }
 
   /** setup the output
-   * @param manager   camera manager
    * @param w   width
    * @param h   height
    * @note called by openCamera()
    */
-  private boolean setupCameraOutput( CameraManager manager, int w, int h )
+  private boolean setupCameraOutput( int w, int h )
   {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) return false;
     try {
-      for ( String id : manager.getCameraIdList() ) {
+      for ( String id : mManager.getCameraIdList() ) {
         // TDLog.v("QCAM2 setup camera output. Camera ID " + id );
-        CameraCharacteristics chr = manager.getCameraCharacteristics( id );
+        CameraCharacteristics chr = mManager.getCameraCharacteristics( id );
         Integer facing = chr.get( CameraCharacteristics.LENS_FACING );
         if ( facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT ) continue;
         StreamConfigurationMap map = chr.get( CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP );
@@ -578,7 +580,6 @@ public class QCamDrawingTexture extends TextureView {
     if ( mCamera != null /* && mPreviewRequest != null */ ) {
       try { // continuously send capture requests: necessary to send pictures to the surface
         mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
-
         mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ); // autofocus
         setAutoFlash( mPreviewRequestBuilder );
         mPreviewRequest = mPreviewRequestBuilder.build();
@@ -770,7 +771,7 @@ public class QCamDrawingTexture extends TextureView {
       setAutoFlash( captureBuilder );
       int r = mDisplay.getRotation();
       captureBuilder.set( CaptureRequest.JPEG_ORIENTATION, getOrientation( r ) );
-      CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
+      CameraCaptureSession.CaptureCallback mCaptureCallback = new CameraCaptureSession.CaptureCallback() {
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result ) {
           unlockFocus();
@@ -778,7 +779,7 @@ public class QCamDrawingTexture extends TextureView {
       };
       mCaptureSession.stopRepeating(); 
       mCaptureSession.abortCaptures(); 
-      mCaptureSession.capture( captureBuilder.build(), captureCallback, null );
+      mCaptureSession.capture( captureBuilder.build(), mCaptureCallback, null );
     } catch ( CameraAccessException e ) {
       TDLog.e("QCAM2 access " + e.getMessage() );
     }
@@ -885,30 +886,6 @@ public class QCamDrawingTexture extends TextureView {
   //   }
   // }
 
-  /** get the maximum zoom value
-   */
-  int getMaxZoom()
-  {
-    return 100; // (mCamera != null )? mCamera.getParameters().getMaxZoom() : 100;
-  }
-
-  /** zoom in/out
-   * @param delta_zoom   zoom change
-   */
-  void zoom( int delta_zoom )
-  {
-    // if ( mCamera != null ) {
-    //   CameraDevice.Parameters params = mCamera.getParameters();
-    //   int max = params.getMaxZoom();
-    //   int zoom = params.getZoom() + delta_zoom;
-    //   if ( zoom > 0 && zoom < max ) {
-    //     // TDLog.v("DistoX-QCAM", "set zoom " + zoom + "/" + max );
-    //     params.setZoom( zoom );
-    //     mCamera.setParameters( params );
-    //   }
-    // }
-  }
-
   // from AutoFitTextureView -------------------------------------------------------------
   // https://github.com/googlearchive/android-Camera2Basic/blob/master/kotlinApp/Application/src/main/java/com/example/android/camera2basic/AutoFitTextureView.kt
 
@@ -951,6 +928,88 @@ public class QCamDrawingTexture extends TextureView {
       } else {
         setMeasuredDimension(height * ratioWidth / ratioHeight, height);
       }
+    }
+  }
+
+  // zoom functions from https://stackoverflow.com/questions/52158395/how-to-zoom-camera-using-android-camera2-api
+
+  /** @return the current zoom level
+   */
+  public float getCurrentZoom() 
+  {
+    return mZoomLevel;
+  }
+
+  /** set the current zoom level
+   * @param zoomLevel  new zoom level
+   */
+  public void setCurrentZoom( float zoomLevel )
+  {
+    Rect zoomRect = getZoomRect( zoomLevel );
+    if ( zoomRect != null ) {
+      try {
+        //you can try to add the synchronized object here 
+        mPreviewRequestBuilder.set( CaptureRequest.SCALER_CROP_REGION, zoomRect );
+        mCaptureSession.setRepeatingRequest( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
+      } catch ( Exception e ) {
+        TDLog.e("Error updating preview: " + e.getMessage() );
+      }
+      mZoomLevel = (int) zoomLevel;
+      TDLog.v("set current zoom " + mZoomLevel );
+    }
+  }
+
+  /** @return the zoom rectangle for a given level
+   * @param zoomLevel  zoom level
+   */
+  private Rect getZoomRect( float zoomLevel )
+  {
+    try {
+      CameraCharacteristics characteristics = mManager.getCameraCharacteristics( mCameraId );
+      float maxZoom = (characteristics.get( CameraCharacteristics.SCALER_AVAILABLE_MAX_DIGITAL_ZOOM)) * 10;
+      Rect activeRect = characteristics.get( CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+      if ( ( zoomLevel <= maxZoom ) && ( zoomLevel > 1 ) ) {
+        int minW = (int) (activeRect.width() / maxZoom);
+        int minH = (int) (activeRect.height() / maxZoom);
+        int difW = activeRect.width() - minW;
+        int difH = activeRect.height() - minH;
+        int cropW = difW / 100 * (int) zoomLevel;
+        int cropH = difH / 100 * (int) zoomLevel;
+        cropW -= cropW & 3;
+        cropH -= cropH & 3;
+        return new Rect(cropW, cropH, activeRect.width() - cropW, activeRect.height() - cropH);
+      } else if ( zoomLevel == 0 ){
+        return new Rect(0, 0, activeRect.width(), activeRect.height());
+      }
+      return null;
+    } catch (Exception e) {
+      TDLog.e("Error get zoom rect " + e.getMessage());
+      return null;
+    }
+  }
+
+  /** get the maximum zoom value
+   */
+  public int getMaxZoom()
+  {
+    // return 100; // (mCamera != null )? mCamera.getParameters().getMaxZoom() : 100;
+    try {
+      float max = (mManager.getCameraCharacteristics( mCameraId ).get(CameraCharacteristics.SCALER_AVAILABLE_MAX_DIGITAL_ZOOM)) * 10;
+      TDLog.v("max zoom " + max );
+      return (int)max;
+    } catch (Exception e) {
+      TDLog.e("Error get max zoom " + e.getMessage());
+      return -1;
+    }
+  }
+
+  /** zoom in/out
+   * @param delta_zoom   zoom change
+   */
+  void zoom( int delta_zoom )
+  {
+    if ( mCamera != null ) {
+      setCurrentZoom( mZoomLevel + delta_zoom );
     }
   }
 
