@@ -218,7 +218,11 @@ class QCamCompass extends Dialog
     mZoomView = (View) findViewById(R.id.zoomView );
     mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
     // mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
-    switchZoomCtrl( 1 ); // temporary zoom buttons
+    if ( mCamera == PhotoInfo.CAMERA_TOPODROID ) {
+      switchZoomCtrl( 1 ); // temporary zoom buttons
+    } else {
+      switchZoomCtrl( 2 ); // permanent zoom buttons
+    }
 
     // buttonClick  = (Button) findViewById(R.id.buttonClick);
     // buttonSave   = (Button) findViewById(R.id.buttonSave);
