@@ -569,7 +569,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="not_implemented">No implantado</string -->
     <string name="null_bitmap">Mapa bits nulo</string>
     <string name="photo">Foto</string>
-    <string name="photo_camera">Cámara de TopoDroid</string>
+    <!-- UNUSED string name="photo_camera">Cámara de TopoDroid</string -->
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Clino %2$.1f</string>
     <!-- UNUSED string name="photo_name">Estación/nombre</string -->

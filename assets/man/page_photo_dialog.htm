@@ -8,8 +8,7 @@ This dialog is opened from the <i>Photo</i> button in the secondary <i>Shot edit
 or a photo xsection are inserted
 in the <u>Drawing window</u>.<br><p>
 
-There is a text field for the <b>comment</b> to the photo you are going to take,
-and a checkbox for the choice of the camera implementation, old or new API.<br><p>
+There is a text field for the <b>comment</b> to the photo you are going to take.<br><p>
 
 Buttons:
 <ul>
@@ -42,10 +41,13 @@ A warning is displayed if the sensor accuracy is low or there is a sensor failur
 The TopoDroid camera has buttons on the lower right.
 <ul>
 <li><b>camera</b>. Red: ready, tap to take a picture. Blue: on hold, tap to turn camera active.</li>
-<li><b>edit</b> saves the photo and allows to draw over it [T]</li> 
+<li><b>edit</b> saves the photo and allows to draw over it (only with new camera) [T]</li> 
 <li><b>floppy</b> saves the photo (JPG) or the drawing (PNG)</li>
 <li><b>back</b> closes the window without saving the image.</li>
 </ul>
+
+A warning is displayed, if the JPEG image is not available.
+You should wait a second and retry.<br><p> 
 
 With the screen up the picture is portrait.
 When the screen is turned to the left or to the right the picture is landscape.<br><p>
@@ -56,14 +58,14 @@ To go through large zoom steps tap the zoom buttons repeatedly fast.<br><p>
 <b>Camera implementation</b><br>
 TopoDroid has two camera implementations: the first uses the old Android camera API,
 the second uses the new Android camera2 API.<br>
-The default is the old camera.<br><p>
+From Android-5 onward TopoDroid uses the new camera implementation.
+On old device it uses the old implementation.<br><p>
 
 With the new camera2 API there is a limit of five attempts of picture capture,
 after which the <i>camera</i> button is no longer available.<br><p>
 
-A warning is displayed, if the JPEG image saving fails.<br><p> 
 
-</div><br><p>
+</div>
 
 </body>
 </html>

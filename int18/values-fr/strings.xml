@@ -564,7 +564,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">Création d\'image impossible</string>
     <string name="photo">Photo</string>
-    <string name="photo_camera">Appareil photo TopoDroid</string>
+    <!-- UNUSED string name="photo_camera">Appareil photo TopoDroid</string -->
     <string name="photo_comment_prompt">Saisissez un commentaire pour la photo</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Clino %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/nom</string -->

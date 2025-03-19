@@ -517,7 +517,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
   <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
   <string name="photo">Foto</string>
-  <string name="photo_camera">TopoDroid Kamera</string>
+  <!-- UNUSED string name="photo_camera">TopoDroid Kamera</string -->
   <string name="photo_comment_prompt">Kommentar</string>
   <string name="photo_azimuth_clino">Azimut: %1$.1f°, Deklination %2$.1f°</string>
   <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->

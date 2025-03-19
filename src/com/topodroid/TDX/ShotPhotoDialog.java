@@ -42,7 +42,7 @@ class ShotPhotoDialog extends MyDialog
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
   private Button   mBtnGeoCode;    // geomorphology coding
-  private CheckBox mCamera;        // whether to use camera or camera2
+  // private CheckBox mCamera;        // whether to use camera or camera2
   private long     mSid;           // shot id
   private String   mName;          // shot name
   private String   mGeoCode;       // geomorphology code
@@ -85,13 +85,13 @@ class ShotPhotoDialog extends MyDialog
       mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
       mButtonOK.setOnClickListener( this );
 
-      mCamera    = (CheckBox) findViewById(R.id.photo_camera );
-      if ( cameraAPI ) { // use old Camera API
-        mCamera.setVisibility( View.GONE );
-        mCamera.setChecked( true );  // checked = use old Camera API
-      } else {
-        mCamera.setChecked( false );  // false = use new Camera API
-      }
+      // mCamera    = (CheckBox) findViewById(R.id.photo_camera );
+      // if ( cameraAPI ) { // use old Camera API
+      //   mCamera.setVisibility( View.GONE );
+      //   mCamera.setChecked( true );  // checked = use old Camera API
+      // } else {
+      //   mCamera.setChecked( false );  // false = use new Camera API
+      // }
 
       mBtnGeoCode = (Button) findViewById(R.id.photo_code );
       if ( TDLevel.overExpert ) {
@@ -122,7 +122,8 @@ class ShotPhotoDialog extends MyDialog
       //   return;
       // }
       // TDLog.v( "PHOTO comment " + comment );
-      int camera = ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
+      int camera = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
+      // int camera = // ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
       // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
       mParent.doTakePhoto( mSid, comment, camera, mGeoCode );

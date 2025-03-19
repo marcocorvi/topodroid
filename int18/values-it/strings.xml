@@ -565,7 +565,7 @@
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
     <string name="photo">foto</string>
-    <string name="photo_camera">Foto con TopoDroid</string>
+    <!-- UNUSED string name="photo_camera">Foto con TopoDroid</string -->
     <string name="photo_comment_prompt">Scrivi il commento</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Inclinazione %2$.1f</string>
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->

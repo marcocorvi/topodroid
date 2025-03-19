@@ -58,17 +58,22 @@ class DrawingPhotoDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    if ( ! TDandroid.checkCamera( mContext ) ) {
+      TDToast.makeWarn( R.string.warning_nogrant_camera );
+      dismiss();
+      return;
+    }
     cameraCheck = TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mContext );
     initLayout( R.layout.drawing_photo_dialog, R.string.photo_title );
 
     mComment = (EditText) findViewById(R.id.photo_comment);
     mSize    = (EditText) findViewById(R.id.photo_size );
-    mCamera  = (CheckBox) findViewById( R.id.photo_camera );
-    if ( ! cameraCheck ) {
-      mCamera.setVisibility( View.GONE );
-    } else {
-      mCamera.setChecked( true );
-    }
+    // mCamera  = (CheckBox) findViewById( R.id.photo_camera );
+    // if ( ! cameraCheck ) {
+    //   mCamera.setVisibility( View.GONE );
+    // } else {
+    //   mCamera.setChecked( true );
+    // }
 
     ((Button) findViewById(R.id.photo_ok)).setOnClickListener( this );
     ((Button) findViewById(R.id.photo_cancel)).setOnClickListener( this );
@@ -92,7 +97,8 @@ class DrawingPhotoDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Photo Dialog onClick() " + view.toString() );
     if (view.getId() == R.id.photo_ok ) {
-      int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
+      int camera = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
+      // int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
 
       float size = 2 * TDSetting.mPictureMin; // pixels: 10 pixels means a square of size 10+10 = 20 = 1 meter
       if ( mSize.getText() != null ) {

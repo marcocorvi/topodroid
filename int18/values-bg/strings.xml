@@ -569,7 +569,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="not_implemented">Все още не е изпълнено</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
     <string name="photo">снимка</string>
-    <string name="photo_camera">Стара камера</string>
+    <!-- UNUSED string name="photo_camera">Стара камера</string -->
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
     <string name="photo_azimuth_clino">Азимут: %1$.1f Наклон %2$.1f</string>
     <!-- UNUSED string name="photo_name">репер/име</string -->
