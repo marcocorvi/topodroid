@@ -1959,10 +1959,10 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
   <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
 
-  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
-  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
+  <string name="pref_3d_sketch_title">3D modeling</string>
+  <string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string>
+  <string name="pref_sketch_splay_buffer_title">Splay buffer</string>
+  <string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string>
 
 <!-- UNUSED NO_LOGS
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
