@@ -394,7 +394,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="with_splays">Con tomas laterales</string>
     <string name="cell_size">Tamaño de la celda [m]</string>
 
-    <string name="legs">Battute</string>
+    <string name="legs">Líneas</string>
     <string name="stations">Estaciones</string>
     <string name="splays">Tomas laterales</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
@@ -421,7 +421,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <!-- UNUSED string name="no_capture_app">No hay aplicaciones de foto</string -->
     <string name="no_cave3d">Cave3D No instalado</string>
-    <string name="no_data_reduction">Sin reducción de datos</string>
+    <string name="no_data_reduction">Sin disminución de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_window">Ventana del dispositivo deshabilitada durante la descarga</string>
@@ -1303,7 +1303,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="setting" >Configuración</string>
 
     <string name="title_settings_main">Configuración principal de TopoDroid</string>
-    <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
+    <string name="title_settings_export">Configuración de importación y exportación de TopoDroid</string>
     <string name="title_settings_export_enable">Configuración de exportación de datos activada</string>
     <string name="title_settings_import">Configuración de importación de TopoDroid</string>
     <string name="title_settings_csv">Configuración de exportación CSV</string>
@@ -1363,7 +1363,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- TODO string name="title_team_dialog">Team names</string -->
     <string name="title_plot_rename">Cambiar el nombre topografía</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>
-    <string name="title_calib_export">Exportar topografía como&#8230;</string>
+    <string name="title_calib_export">Exportar topografía como &#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
   <string name="title_import_shot">Importar Topografía</string>
@@ -1394,7 +1394,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">Importar</string>
-  <string name="pref_cat_exportenable">Activado</string>
+  <string name="pref_cat_exportenable">Activar exportaciones</string>
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
@@ -2101,7 +2101,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Visualizar paredes</string>
-    <string name="cmenu_search">BUSCAR</string>
+    <string name="cmenu_search">Buscar</string>
     <!-- UNUSED string name="cmenu_sketch">Dibujos</string -->
     <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 
