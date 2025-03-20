@@ -724,10 +724,10 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="screenshot_saved">Copie d\'écran enregistrée %1$s</string>
     <string name="screenshot_failed">Échec de la capture d\'écran</string>
     <string name="start_index">Index de visée initiale</string>
-    <!-- TODO string name="trilateration_failed">Trilateration failed completely</string -->
-    <!-- TODO string name="trilateration_failure">Trilateration failed %1$d / %2$d </string -->
-    <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
-    <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
+    <string name="trilateration_failed">La trilatération a totalement échoué</string>
+    <string name="trilateration_failure">Echec de trilatération %1$d / %2$d </string>
+    <!-- UNUSED string name="trilateration_error">Erreur de trilatération %1$.2f</string -->
+    <!-- UNUSED string name="trilateration_succeeded">Trilatération réussie : erreur restante %1$.2f</string -->
     <string name="trilateration_success">Trilatération réussie : %1$d clusters</string>
     
     <string name="survey_info">Information sur le relevé</string>
@@ -808,7 +808,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_apply"     >Appliquer</string>
     <string name="button_back"      >Retour</string>
     <string name="button_cancel"    >Annuler</string>
-    <!-- TODO string name="button_geocode"   >GeoCode</string -->
+    <string name="button_geocode"   >GeoCode</string>
     <!-- UNUSED string name="button_change">Change</string -->
     <string name="button_clipboard" >Presse-papiers</string>
     <string name="button_close"     >Fermer</string>
@@ -1407,8 +1407,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
     <string name="pref_single_back_title">Simple retour arrière</string>
     <string name="pref_single_back_summary">Fermer la fenêtre avec un seul retour arrière</string>
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+    <string name="pref_hide_navbar_title">Barre de navigation</string>
+    <string name="pref_hide_navbar_summary">Cachée. Montrer en glissant vers le haut</string>
 
     <string name="pref_raw_data_title">Données brutes</string>
     <string name="pref_raw_data_summary">Afficher les données brutes</string>
@@ -1462,8 +1462,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
     <string name="pref_leg_shots_title">Nombre mini. visées</string>
     <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
-  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
-  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
+    <string name="pref_backsight_splay_title">Visée d'habillage arrière</string>
+    <string name="pref_backsight_splay_summary">Vérification de visée arrière lors du premier habillage</string>
     <string name="pref_recent_timeout_title">Expiration donnée récente</string>
     <string name="pref_recent_timeout_summary">Délai d\'expiration au-delà duquel une donnée n\'est plus considérée comme récente</string>
     <string name="pref_triple_shot_title">Bip visée de cheminement</string>
@@ -1474,8 +1474,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_unnamed_device_summary">Activation du menu pour la saisie du nom de l\'appareil périphérique</string>
     <string name="pref_station_prefix_title">Préfixe station</string>
     <string name="pref_station_prefix_summary">Export préfixe station [Compass/cSurvey/WinKarst]</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+    <string name="pref_with_media_title">Exportation des médias</string>
+    <string name="pref_with_media_summary">Inclure les médias dans l\'export [cSurvey]</string>
     <string name="pref_compass_splays_title">Visées latérales d\'habillage Compass</string>
     <string name="pref_compass_splays_summary">Exporter les visées latérales d\'habillage dans le fichier Compass</string>
     <string name="pref_walls_splays_title">Habillage Walls</string>
@@ -1500,8 +1500,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_survex_splay_summary">Ajout station VERS aux visées dans Survex</string>
     <string name="pref_survex_lrud_title">LRUD Survex</string>
     <string name="pref_survex_lrud_summary">Ajout LRUD à l\'export Survex</string>
-  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
-  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
+    <string name="pref_survex_epsg_title">EPSG "cs out"</string>
+    <string name="pref_survex_epsg_summary">Code EPSG pour Survex "cs out"</string>
     <string name="pref_svg_program_title">Programme SVG</string>
     <string name="pref_svg_program_summary">Programme SVG cible</string>
     <string name="pref_svg_grid_title">Grille</string>
@@ -1510,8 +1510,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_svg_roundtrip_summary">Inclure les A/R à l\'export SVG</string>
     <string name="pref_svg_splays_title">Visées latérales d\'habillage SVG</string>
     <string name="pref_svg_splays_summary">Inclure les visées latérales d\'habillage dans l\'export SVG</string>
-  <!-- TODO string name="pref_svg_groups_title">Type groups</string -->
-  <!-- TODO string name="pref_svg_groups_summary">Group items by type in SVG export</string -->
+    <string name="pref_svg_groups_title">Groupes par type</string>
+    <string name="pref_svg_groups_summary">Grouper les éléments par type dans l'export SVG</string>
     <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
     <!-- UNUSED string name="pref_svg_in_html_summary">Embarquer l\'export SVG en HTML</string -->
     <string name="pref_svg_pointstroke_title">Points SVG</string>
@@ -1547,7 +1547,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_zip_share_category_title">Catégorie Zip-share</string>
     <string name="pref_zip_share_category_summary">Ajouter une catégorie à une demande de partage de fichier zip</string>
 
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+    <string name="pref_bt_alias_title">alias BT</string>
     <string name="pref_sock_type_title">Socket</string>
     <string name="pref_sock_type_summary">Créer un socket</string>
     <!-- UNUSED string name="pref_device_type_title">Type de Disto</string -->
@@ -1681,8 +1681,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="pref_team_title">Équipe spéleo</string>
     <string name="pref_team_summary">Noms des spéléos topographes de l\'équipe</string>
-  <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
+    <string name="pref_team_names_title">Nom des équipes</string>
+    <string name="pref_team_names_summary">Nom des équipes pour Therion/Survex</string>
 
     <string name="pref_ethr_title">Seuil vertical vis. lat.</string>
     <string name="pref_ethr_summary">Seuil d\'angle aux alentours des 90 deg pour définir l\'extension verticale des visées de cheminement</string>
@@ -1764,8 +1764,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_iter_summary">Nombre de répétitions maxi</string>
     <string name="pref_label_size_title">Taille étiquettes</string>
     <string name="pref_label_size_summary">Taille des étiquettes</string>
-  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
-  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
+    <string name="pref_scalable_label_title">Mise à l\'échelle des étiquettes</string>
+    <string name="pref_scalable_label_summary">Les étiquettes s\'adaptent au zoom</string>
     <string name="pref_slope_lside_title">Lignes de pente côté gauche</string>
     <string name="pref_slope_lside_summary">Lignes de pente par défaut du côté gauche</string>
     <string name="pref_arrow_length_title">Ligne de section pointillée</string>
@@ -1796,8 +1796,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_plot_split_summary">Action de fractionner ou de fusionner les croquis</string>
     <string name="pref_stylus_size_title">Taille du stylet</string>
     <string name="pref_stylus_size_summary">Taille du stylet [0: aucun]</string>
-  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
-  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
+    <string name="pref_line_ends_title">Coupure fin de ligne</string>
+    <string name="pref_line_ends_summary">Nombre de points à abandonner aux extrémités de ligne [0]</string>
     <string name="pref_fixed_thickness_title">Épaisseur ligne croquis</string>
     <string name="pref_fixed_thickness_summary">Épaisseur de ligne du croquis</string>
     <!-- UNUSED string name="pref_device_title">Périphériques</string -->
@@ -2039,7 +2039,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cmenu_ico">DIAGRAMME ROSACE-3D</string>
     <string name="cmenu_rose">DIAGRAMME ROSACE</string>
     <string name="cmenu_wall">PAROIS</string>
-    <!-- TODO string name="cmenu_search">SEARCH</string -->
+    <string name="cmenu_search">RECHERCHER</string>
     <!-- UNUSED string name="cmenu_sketch">CROQUIS</string -->
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     
@@ -2223,8 +2223,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <!-- UNUSED string name="warning_no_parent">Attention : impossible d\'accéder au dossier parent</string -->
     <string name="warning_nogrant_camera">L\'autorisation caméra n\'a pas été accordée</string>
-    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
-    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
+    <string name="warning_no_csv_type">Type de CSV non spécifiéd</string>
+    <string name="warning_cavway_info">Échec d\'obtention d\'infos Cavway</string>
     <string name="no_permissions">L\'application ne peut pas fonctionner sans les autorisations requises.</string>
     
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>
@@ -2269,8 +2269,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
     <string name="cpref_grid_extent_title">Étendue grille</string>
     <string name="cpref_grid_extent_summary">Étendue de la grille autour du plan du relevé</string>
-    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
-    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
+    <string name="cpref_names_visibility_title">Noms visibles</string>
+    <string name="cpref_names_visibility_summary">Les noms des stations sont toujours visibles</string>
     <string name="cpref_neg_clino_title">Vue sous horizon</string>
     <string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
     <string name="cpref_dem_buffer_title">Tampon MNE</string>
@@ -2279,8 +2279,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cpref_dem_maxsize_summary">Nombre maximum de cellules [400]</string>
     <string name="cpref_dem_reduce_title">Réduction MNE</string>
     <string name="cpref_dem_reduce_summary">Mode de réduction du MNE [shrink]</string>
-    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
-    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
+    <string name="cpref_texture_root_title">Racine de texture</string>
+    <string name="cpref_texture_root_summary">Chemin d\'accès à la racine de la texture [/sdcard/]</string>
     <string name="cpref_all_splay_title">Toutes visées latérales</string> 
     <string name="cpref_all_splay_summary">Toutes visées latérales pour parois</string>
     <string name="cpref_splay_use_title">Usage visées latérales</string>
