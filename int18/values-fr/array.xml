@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  IMPORATANT translatable="false" MEANS THAT THE ARRAY MUST NOT BE HERE 
+  IMPORTANT translatable="false" MEANS THAT THE ARRAY MUST NOT BE HERE 
 -->
 
 <!--suppress CheckTagEmptyBody -->
 <resources>
-  <!-- TODO string-array name="teamNames">
-     <item name="plain">Text plain</item>
-     <item name="separated">Text separated</item>
-     <item name="dialog">Dialog</item>
-  </string-array -->
+  <string-array name="teamNames">
+     <item name="plain">Texte brut</item>
+     <item name="separated">Texte séparé</item>
+     <item name="dialog">Dialogue</item>
+  </string-array>
 
   <string-array name="bricMode">
      <item name="prim_only">Seulement prim.</item>
-     <!-- item name="sequence">Sequence</item -->
+     <!-- item name="sequence">Séquence</item -->
      <item name="all">Tous avec index</item>
-     <!-- item name="all_zero">All + Zero</ite -->
+     <!-- item name="all_zero">Tous + Zero</ite -->
      <!-- item name="no_index">Tous sans index</item -->
   </string-array>
 
-  <!-- TODO string-array name="geoImportApp">
-     <item name="none">non-specified</item>
+  <string-array name="geoImportApp">
+     <item name="none">Non spécifié</item>
      <item name="mobile_topographer">Mobile Topographer</item>
-     <item name="gpx_recorder">GPX Recorder</item>
-     <item name="gps_position">GPS Position</item>
+     <item name="gpx_recorder">Enregistreur GPX</item>
+     <item name="gps_position">Position GPS</item>
      <item name="gps_test">GPSTest</item>
      <item name="gps_logger">GPS Logger</item>
-  </string-array -->
+  </string-array>
   
   <string-array name="orientation">
      <item name="unspecified">Non spécifiée</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">paysage</item>
+     <item name="portrait">Portrait</item>
+     <item name="landscape">Paysage</item>
   </string-array>
 
   <string-array name="splayDash">
@@ -50,7 +50,7 @@
   <string-array name="feedbackMode">
      <item name="none">aucun</item>
      <item name="sound">son</item>
-     <item name="heptic">haptique</item>
+     <item name="heptic">tactile</item>
   </string-array>
 
   <string-array name="canvasLevels">
@@ -61,7 +61,7 @@
 
   <string-array name="csvSeparator">
      <item name="comma">virgule</item>
-     <item name="pipe">pipe</item>
+     <item name="pipe">barre verticale</item>
      <item name="tab">tabulation</item>
   </string-array>
 
@@ -245,7 +245,7 @@
      <item name="for">Visée normale, visées latérales d\'habillage en premier</item>
      <item name="back">Visée inverse, visées latérales d\'habillage en premier</item>
      <item name="backsight">Visée Arrière, Backsight</item>
-     <item name="tripod">Tripod</item>
+     <item name="tripod">Trépied</item>
      <item name="anomaly">Anomalie magnétique</item>
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
@@ -382,7 +382,7 @@
   <string-array name="splayUse">
      <item name="skip">Sauter</item>
      <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
+     <item name="xsection">Section Transverse</item>
   </string-array>
  
 </resources>
