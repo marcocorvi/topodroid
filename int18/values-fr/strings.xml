@@ -90,11 +90,11 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <!-- UNUSED string name="make_walls">Parois</string -->
     <string name="missing_station">Station manquante</string>
-    <string name="station_not_found">Station non trouvée</string>
+    <string name="station_not_found">Station introuvable</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
-    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
+    <string name="shot_not_saved">Visée non sauvegardée</string>
     <string name="bad_sibling">Mauvaise visée parente</string>
     <string name="bad_station">Mauvaise station: %1$s</string>
     <string name="bad_station_name">Nom de station non conforme</string>
@@ -160,7 +160,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="calib_roll">Roulis diff. : %1$.2f &#xb0;</string>
     <string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string>
     <string name="calib_min_error">Erreur Minimum</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+    <string name="calib_delta_dir">Diff. dir.: %1$.2f ± %2$.2f (max %3$.2f)</string>
     <string name="magn_dip">Inclin. magn. &#8230;</string>
     <string name="auto_calib">Étalonnage automatique</string>
     <string name="autocalib_not_supported">Calcul de l\'étalonnage requis</string>
@@ -208,8 +208,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="flag">Point Drapeau</string -->
     <!-- UNUSED string name="backshot">Visée Arrière</string -->
     <!-- UNUSED string name="duplicate">Double</string -->
-    <!-- UNUSED string name="regular">régulier</string -->
-    <!-- UNUSED string name="surface">surface</string -->
+    <!-- UNUSED string name="regular">Régulier</string -->
+    <!-- UNUSED string name="surface">Surface</string -->
     <!-- UNUSED string name="extend">Etendre</string -->
     <!-- UNUSED string name="extend_ignore">Aucun</string -->
     <string name="extend_left">Gauche</string>
@@ -219,7 +219,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="splay_at_to">GDHB à la station VERS</string>
     <string name="lrud">GDHB (LRUD)</string>
     <!-- CHANGED string name="strike_dip">Azimut %1$.0f Pendage %2$.0f</string -->
-    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
+    <string name="strike_dip">Dip direction %1$.0f inclinaison %2$.0f</string>
 
     <string name="few_data">Pas assez de données</string>
     <string name="few_iter">Échec de l\'itération</string>
@@ -270,7 +270,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="bad_manifest_sql">Échec: erreur SQL</string>
     <string name="bad_manifest_number">Échec: mauvais nombre</string>
     <string name="bad_manifest_manifest">Échec: mauvais fichier Manifest</string>
-    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
+    <string name="bad_manifest_file">Echec de l'ouverure du fichier Manifest</string>
     <string name="bad_manifest_missing">Échec: fichier Manifest ommis</string>
     <string name="bad_manifest_error">Échec: erreur de lecture du fichier Manifest</string>
     <string name="bad_manifest_other">Échec: erreur inconnue</string>
@@ -288,13 +288,13 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="datamode_diving">Mode de données Plongée</string>
     <string name="illegal_data_value">Valeur de donnée incorrecte</string>
     
-    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
+    <string name="geocode_title">Code de géomorphologie</string>
     <string name="photo_title">Photo</string>
     <string name="photo_text">Saisir un commentaire pour la photo</string>
     <!-- UNUSED string name="photo_failed">Échec de la photo</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">Photo non prête. Attendre &#8230;</string>
     <string name="photo_max_captures">Limite de capture maximale atteinte</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <string name="photo_many_pictures">Trop d'images</string>
     <string name="label_title">ÉTIQUETTE</string>
     <string name="label_text">Saisissez le texte de l\'étiquette</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -327,7 +327,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_clino_required">Pente nécessaire</string>
     <string name="error_comment_required">Commentaire nécessaire</string>
     <string name="error_begin_required">Adresse de début nécessaire</string>
-    <!-- TODO string name="error_number_required">Data number required</string -->
+    <string name="error_number_required">Numéro de données nécessaire</string>
     <string name="error_declination_number">La déclinaison doit être un nombre</string>
     <string name="error_end_required">Adresse de fin nécessaire</string>
     <string name="error_fixes_nocs">Points fixes sans CS %1$s:\n%2$s</string>
@@ -457,7 +457,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_close">FERMER</string>
     <!-- UNUSED string name="menu_clear">EFFACER</string -->
     <string name="menu_color">EFFACER COULEUR</string>
-    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
+    <string name="menu_cwd">DOSSIER DE TRAVAIL</string>
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
     <!-- UNUSED string name="menu_display">AFFICHAGE</string -->
@@ -532,8 +532,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="popup_delete">Supprimer</string>
     <string name="popup_decimate">Réduire</string>
     <string name="popup_join">Joindre</string>
-    <!-- TODO string name="popup_store">Store</string -->
-    <!-- TODO string name="popup_restore">Restore</string -->
+    <string name="popup_store">Mémoriser</string>
+    <string name="popup_restore">Restaurer</string>
 
     <string name="popup_erase_all">Tout suppr.</string>
     <string name="popup_erase_point">Suppr. points</string>
@@ -576,7 +576,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="photo_survey">Découper le relevé</string -->
     <!-- UNUSED string name="picture_no_station">Nom station requis</string -->
     <string name="plot_delete">Supprimer le croquis ?</string>
-    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
+    <string name="scrap_delete">Supprimer le scrap ?</string>
     <string name="item_delete">Supprimer l\'objet %1$s ?</string>
     <string name="splay_delete">Supprimer le cheminement %1$s ?</string>
     <string name="plot_duplicate_name">Dupliquer le nom du relevé</string>
@@ -626,7 +626,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="insufficient_data">Données capteur insuffisantes</string -->
     <string name="sensor_no_readings">Aucune données du capteur</string>
     <string name="sensor_failure">Erreur du capteur : %1$d</string>
-    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
+    <string name="sensor_shot">Visée %1$d: %2$s</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
@@ -728,7 +728,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="trilateration_failure">Trilateration failed %1$d / %2$d </string -->
     <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <!-- TODO string name="trilateration_success">Trilateration success: %1$d clusters</string -->
+    <string name="trilateration_success">Trilatération réussie : %1$d clusters</string>
     
     <string name="survey_info">Information sur le relevé</string>
     <string name="stat_dates">De %1$s jusqu\'à %2$s</string>
@@ -844,8 +844,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_next"    >Suivant</string>
     <string name="button_prev"    >Précédent</string>
     <string name="button_new"     >Nouveau fragment</string>
-    <!-- TODO string name="button_rename"  >Rename</string -->
-    <!-- TODO string name="button_prefix"  >Prefix</string -->
+    <string name="button_rename"  >Renommer</string>
+    <string name="button_prefix"  >Préfixe</string>
     <string name="button_skip"    >Passer</string>
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"  copyable="all">Ajouter GDHB LRUD</string>
@@ -877,7 +877,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_search"    >Chercher</string>
     <string name="button_merge"     >Fusionner</string>
     <string name="button_saved"     >Station sauvegardée</string>
-    <!-- TODO string name="button_scrap"     >Outlines</string -->
+    <string name="button_scrap"     >Aperçu</string>
     <string name="button_split"     >Diviser</string>
     <string name="button_station"   >Centrer sur</string>
     <string name="button_store"     >Stocker</string>
@@ -897,7 +897,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">Section Transverse</string>
     <string name="buffer_size">Mémoire tampon: %1$d données</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <string name="buffer_sorted">trié</string>
     <!-- UNUSED string name="buffer_unsorted">non trié</string -->
 
     <string name="mode_leg">Cheminements</string>
@@ -959,12 +959,12 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
     
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
-    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
+    <string name="bt_alias_title">Alias Bluetooth</string>
+    <string name="hint_bt_alias">BT alias</string>
+    <string name="hint_bt_code">Code de l'appareil</string>
+    <string name="bt_alias_missing">Alias BT manquant</string>
+    <string name="bt_code_missing">Code appareil manquant</string>
+    <string name="bt_alias_delete">Supprimer l'alias Bluetooth ?</string>
 
     <string name="hint_cellsize">taille cellule</string>
     <string name="hint_cwd">dossier de travail</string>
@@ -977,18 +977,18 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hint_units">taille des symboles</string>
     <string name="hint_value">valeur</string>
 
-    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
-    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
-    <!-- TODO string name="calib_measurement_group">Group: </string -->
+    <string name="calib_measurement_id">Visée %1$d</string>
+    <string name="calib_measurement_error">Erreur %1$.4f</string>
+    <string name="calib_measurement_group">Groupe : </string>
 
     <string name="hint_notes">notes</string>
     <string name="hint_label">étiquette</string>
     <string name="hint_comment">commentaire</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+    <string name="hint_size">taille [m]</string>
     <string name="hint_text">texte</string>
     <string name="hint_options">options</string>
     <string name="hint_name">nom</string>
-    <!-- TODO string name="hint_prefix">prefix</string -->
+    <string name="hint_prefix">préfixe</string>
     <string name="hint_from">de</string>
     <string name="hint_to">vers</string>
     <string name="hint_azimuth">azimut</string>
@@ -1052,7 +1052,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_close_app">Fermer l\'app</string>
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_color">Effacer la couleur des visées</string>
-    <!-- TODO string name="help_cwd">Current work folder</string -->
+    <string name="help_cwd">Dossier de travail courant</string>
     <string name="help_join">Joindre les lignes</string>
     <!-- UNUSED string name="help_continue">Continuer une ligne</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
@@ -1106,16 +1106,16 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_search">Rechercher une station</string>
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporter le croquis</string>
-    <!-- UNUSED string name="help_tdr2th2">Converti dessin vers format th2</string -->
+    <!-- UNUSED string name="help_tdr2th2">Convertir dessin vers format th2</string -->
     <string name="help_toggle_plot">Basculer entre plan et coupe développée</string>
-    <!-- UNUSED string name="help_trash">Supprime le croquis</string -->
+    <!-- UNUSED string name="help_trash">Supprimer le croquis</string -->
     <string name="help_undo">Annuler la dernière action</string>
     <string name="help_redo">Rétablir la dernière action</string>
-    <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
+    <string name="help_symbol_plot">Sélectionner le symbole à dessiner</string>
     <string name="help_delete_item">Supprimer élément du croquis</string>
-    <!-- TODO string name="help_section_type">Sketch section type</string -->
-    <!-- TODO string name="help_section_item">Sketch section item</string -->
-    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
+    <string name="help_section_type">Type de section de croquis</string>
+    <string name="help_section_item">Point de section de croquis</string>
+    <string name="help_select_clear">Effacer le croquis sélectionné</string>
     <string name="help_range">Déplacer portion de ligne</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Effacer un/des éléments du croquis</string>
@@ -1190,12 +1190,12 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_maps">Les cartes avant les données</string>
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
     <string name="export_prefix_hint">préfixe</string>
-    <!-- TODO string name="export_media">media items</string -->
+    <string name="export_media">items media</string>
     <!-- UNUSED string name="export_suffix_hint">suffixe</string -->
-    <!-- TODO string name="export_series_hint">series</string -->
+    <string name="export_series_hint">séries</string>
     <string name="export_roundtrip">Aller-retour</string>
     <string name="export_share">Partager</string>
-    <!-- TODO string name="export_overwrite">Overwrite</string -->
+    <string name="export_overwrite">Ecraser</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Echelle 1 :</string>
     <string name="export_spacing_th">Espacement des points</string>
@@ -1208,7 +1208,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_walls">Parois</string>
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
-    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
+    <string name="export_grouped">Regrouper les éléments en couches par type</string>
     <string name="export_with_reference">Inclure les références XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1243,13 +1243,13 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>
-    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
+    <string name="title_coeff_two">Coefficients d'étalonnage [%1$d]</string>
     <string name="title_color_picker">Choisir une couleur</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_search">Recherche Station/cheminement</string>
-    <!-- TODO string name="title_pref_search">Settings search</string -->
+    <string name="title_pref_search">Recherche de paramètres</string>
     <string name="title_gm_search">Recherche des données d\'étalonnage</string>
     <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
@@ -1297,7 +1297,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_scraps_outline">Contours croquis</string>
     <!-- UNUSED string name="title_select">Sélectionner</string -->
-    <!-- TODO string name="setting" >setting</string -->
+    <string name="setting" >paramètres</string>
 
     <string name="title_settings_main">Paramètres principaux de TopoDroid</string>
     <string name="title_settings_export">Paramètres d\'importation / exportation de TopoDroid</string>
@@ -1349,7 +1349,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>
     <string name="title_sensor_edit">Capteur</string>
-    <!-- TODO string name="title_sensor_list">Sensor data</string -->
+    <string name="title_sensor_list">Données de capteur</string>
     <string name="title_split">Diviser le croquis</string>
 
     <string name="title_stats">Statistiques</string>
