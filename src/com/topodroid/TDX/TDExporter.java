@@ -101,7 +101,7 @@ public class TDExporter
       for ( DBlock blk : list ) {
 	if ( blk.mTo != null && blk.mTo.length() > 0 && blk.mFrom != null && blk.mFrom.length() > 0 ) {
           // sets the blocks clino
-          TDNum num = new TDNum( list, blk.mFrom, null, null, 0.0f, null ); // no declination, null formatClosure
+          TDNum num = new TDNum( list, blk.mFrom, 0.0f, null ); // no declination, null formatClosure
 	  break;
 	}
       }
@@ -681,7 +681,7 @@ public class TDExporter
     for ( FixedInfo fixed : fixeds ) {
       float decl0 = decl;
       if ( convergence && fixed.hasCSCoords() ) decl0 -= fixed.getConvergence();
-      TDNum num = new TDNum( shots_data, fixed.name, null, null, decl0, null ); // null formatClosure
+      TDNum num = new TDNum( shots_data, fixed.name, decl0, null ); // null formatClosure
       // TDLog.v( "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
         makeGeolocalizedData( num, fixed, h_geo_factor, ellipsoid_h, convergence );
@@ -2241,7 +2241,7 @@ public class TDExporter
         }
         if ( from != null ) {
           boolean do_header = true;
-          TDNum num = new TDNum( list, from, null, null, 0.0f, null ); // no declination, null formatClosure
+          TDNum num = new TDNum( list, from, 0.0f, null ); // no declination, null formatClosure
           List< NumBranch > branches = num.makeBranches( true );
           // TDLog.v( "Station " + from + " shots " + num.shotsNr() + " splays " + num.splaysNr()
           //               + " branches " + branches.size() );

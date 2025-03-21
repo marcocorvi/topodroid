@@ -301,22 +301,23 @@ public class DrawingWindow extends ItemDrawer
                         R.string.menu_stats,      // 2
                         R.string.menu_reload,
                         R.string.menu_zoom_fit,
+                        R.string.menu_plot_search,     // 5 SEARCH
                         R.string.menu_rename_delete,
                         R.string.menu_plot_scrap,
-                        R.string.menu_palette,    // 7
+                        R.string.menu_palette,    // 8
                         R.string.menu_overview,
                         R.string.menu_options,
                         R.string.menu_help,
-                        R.string.menu_area,       // 11
-                        R.string.menu_close,      // 12
-                        R.string.menu_save,      // 13 TH2EDIT
-                        R.string.menu_open       // 14 TH2EDIT
+                        R.string.menu_area,       // 12
+                        R.string.menu_close,      // 13
+                        R.string.menu_save,       // 14 TH2EDIT
+                        R.string.menu_open        // 15 TH2EDIT
                      };
 
-  private static final int MENU_AREA  = 11;
-  private static final int MENU_CLOSE = 12;
-  private static final int MENU_SAVE  = 13; // TH2EDIT
-  private static final int MENU_OPEN  = 14; // TH2EDIT
+  private static final int MENU_AREA  = 12;
+  private static final int MENU_CLOSE = 13;
+  private static final int MENU_SAVE  = 14; // TH2EDIT
+  private static final int MENU_OPEN  = 15; // TH2EDIT
 /*
   private static final int[] help_icons = {
                         R.string.help_draw,
@@ -450,6 +451,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_stats,
                         R.string.help_recover,
                         R.string.help_zoom_fit,
+                        R.string.help_plot_search,
                         R.string.help_plot_rename,
                         R.string.help_plot_scrap,
                         R.string.help_symbol,
@@ -960,7 +962,8 @@ public class DrawingWindow extends ItemDrawer
     mPlot1.start = station;
     mPlot2.start = station;
     mMultiBad = new ArrayList< StringPair >();
-    mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+    mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
     computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
     computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
@@ -3685,7 +3688,8 @@ public class DrawingWindow extends ItemDrawer
       if ( list.size() > 0 ) {
         // TDLog.v( "data reduction " + list.size() + " start at " + mPlot1.start );
         mMultiBad = new ArrayList< StringPair >();
-        mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+        mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
         if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       } else {
         mNum = null;
@@ -3974,7 +3978,8 @@ public class DrawingWindow extends ItemDrawer
     if ( mType == PlotType.PLOT_EXTENDED ) { 
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
-      mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       mDrawingSurface.clearShotsAndStations( (int)mType );
       computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
@@ -7961,7 +7966,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "PLOT compute ref type " + mType + " reset " + reset );
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mMultiBad = new ArrayList< StringPair >();
-    mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+    mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
     if ( mType == (int)PlotType.PLOT_PLAN ) {
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
@@ -8011,7 +8017,8 @@ public class DrawingWindow extends ItemDrawer
     } else {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
-      TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      TDNum num = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( num.nrInaccurateLoops > 0 );
       recomputeReferences( num, TopoDroidApp.mScaleFactor );
       mNum = num;
@@ -8028,7 +8035,8 @@ public class DrawingWindow extends ItemDrawer
     if ( mNum == null ) {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
-      TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      TDNum num = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( num.nrInaccurateLoops > 0 );
       recomputeReferences( num, TopoDroidApp.mScaleFactor );
       mNum = num;
@@ -8232,18 +8240,21 @@ public class DrawingWindow extends ItemDrawer
       }
       menu_adapter.add( res.getString( menus[4] ) );  // ZOOM-FIT
     }
+    if ( TDLevel.overAdvanced ) {
+      menu_adapter.add( res.getString( menus[5] ) ); // STATION SEARCH and HIGHLIGHT
+    }
     if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( type ) ) { // TH2EDIT
-      menu_adapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
+      menu_adapter.add( res.getString( menus[6] ) ); // RENAME/DELETE
     }
     if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( type ) || mTh2Edit ) ) { // TH2EDIT
-      menu_adapter.add( res.getString( menus[6] ) ); // SCRAPS
+      menu_adapter.add( res.getString( menus[7] ) ); // SCRAPS
     }
-    menu_adapter.add( res.getString( menus[7] ) ); // PALETTE
+    menu_adapter.add( res.getString( menus[8] ) ); // PALETTE
     if ( TDLevel.overBasic && (! mTh2Edit) && PlotType.isSketch2D( type ) ) { // TH2EDIT
-      menu_adapter.add( res.getString( menus[8] ) ); // OVERVIEW
+      menu_adapter.add( res.getString( menus[9] ) ); // OVERVIEW
     }
-    menu_adapter.add( res.getString( menus[9] ) ); // OPTIONS
-    menu_adapter.add( res.getString( menus[10] ) ); // HELP
+    menu_adapter.add( res.getString( menus[10] ) ); // OPTIONS
+    menu_adapter.add( res.getString( menus[11] ) ); // HELP
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
@@ -8391,6 +8402,8 @@ public class DrawingWindow extends ItemDrawer
 	} else {
 	  doZoomFit();
 	}
+      } else if ( TDLevel.overNormal && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
+        ( new PlotSearchDialog( mActivity, this ) ).show();
       } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this )).show();
@@ -9982,5 +9995,12 @@ public class DrawingWindow extends ItemDrawer
   //     }
   //   );
   // }
+
+  
+  /** highlight a station name
+   * @param name  name to highight, or null to clear
+   */
+  void highlightStation( String name ) { mDrawingSurface.highlightStation( name ); }
+
 
 }

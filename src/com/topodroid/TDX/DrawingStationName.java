@@ -44,6 +44,7 @@ public class DrawingStationName extends DrawingPointPath
   // float mY;
 
   private boolean mDuplicate;  // whether this is a duplicated station
+  private boolean mHighlight = false;
 
   long  mXSectionType; // whether this station has a X-section
   private float mAzimuth, mClino;
@@ -103,6 +104,8 @@ public class DrawingStationName extends DrawingPointPath
     
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
+
+  void highlightName( boolean on_off ) { mHighlight = on_off; }
 
   /** @return the station name
    */
@@ -171,7 +174,12 @@ public class DrawingStationName extends DrawingPointPath
   {
     if ( intersects( bbox ) ) {
       // TDLog.v( "PLOT station name " + mName );
-      canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
+      Paint paint = mPaint;
+      if ( mHighlight ) {
+        paint = new Paint( mPaint );
+        paint.setColor( 0xffffffff );
+      }
+      canvas.drawTextOnPath( mName, mPath, 0f, 0f, paint );
       if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
@@ -194,7 +202,11 @@ public class DrawingStationName extends DrawingPointPath
       // TDLog.v( "PLOT station name " + mName + " xor color " + xor_color );
       // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
       Paint paint = new Paint( mPaint );
-      if ( xor_color > 0 ) paint.setColor( BrushManager.xorColor( mPaint.getColor() ) );
+      if ( mHighlight ) {
+        paint.setColor( 0xffffffff );
+      } else if ( xor_color > 0 ) {
+        paint.setColor( BrushManager.xorColor( mPaint.getColor() ) );
+      }
       paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, paint );
       if ( mXSectionType != PlotType.PLOT_NULL ) {
@@ -217,9 +229,14 @@ public class DrawingStationName extends DrawingPointPath
     if ( intersects( bbox ) ) {
       // TDLog.v( "PLOT station name " + mName + " with matrix" );
       if ( mName != null && mPaint != null ) {
+        Paint paint = mPaint;
+        if ( mHighlight ) {
+          paint = new Paint( mPaint );
+          paint.setColor( 0xffffffff );
+        }
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
-        canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, mPaint );
+        canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, paint );
       }
       if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();
@@ -246,6 +263,7 @@ public class DrawingStationName extends DrawingPointPath
       if ( mName != null && mPaint != null ) {
         // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
         Paint paint = new Paint( mPaint );
+        // if ( mHighlight ) TODO
         paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );

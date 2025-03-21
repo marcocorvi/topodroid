@@ -153,7 +153,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
               // float decl = mData.getSurveyDeclination( mSid );
               // if ( decl >= SurveyInfo.DECLINATION_MAX ) decl = 0;
               float decl = mInfo.getDeclination();
-              TDNum num = new TDNum( list, blk.mFrom, null, null, decl, null ); // null formatClosure
+              TDNum num = new TDNum( list, blk.mFrom, decl, null ); // null formatClosure
               pathname = mSurvey + TDPath.DXF;
               ret = TDExporter.exportSurveyAsDxf( bw, mSid, mData, mInfo, num, mSurvey );
             }

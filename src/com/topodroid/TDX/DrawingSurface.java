@@ -818,6 +818,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     return st;
   }
 
+  /** highlight a station name
+   * @param name  name to highight, or null to clear
+   */
+  void highlightStation( String name ) { commandManager.highlightStation( name ); }
+
   /** reset the "fixed" paint
    * @param app   application
    * @param paint new paint

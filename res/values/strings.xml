@@ -513,6 +513,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">VALIDATE</string>
     <string name="menu_zoom_fit">ZOOM FIT</string>
+    <string name="menu_plot_search">STATION SEARCH</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Graph-paper</string>
@@ -1121,6 +1122,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_plot_delete">Delete sketch</string>
     <string name="help_plot_rename">Rename/Delete sketch</string>
     <string name="help_plot_scrap">Sketch scraps</string>
+    <string name="help_plot_search">Station search</string>
     <string name="help_plot_switch">Switch sketch</string>
     <string name="help_search">Data search</string>
     <string name="help_stats">Sketch statistics</string>
@@ -1269,6 +1271,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_search">Station/Leg search</string>
+    <string name="title_plot_search">Station search</string>
     <string name="title_pref_search">Settings search</string>
     <string name="title_gm_search">Calib data search</string>
     <string name="title_dangling">Unattached shots</string>

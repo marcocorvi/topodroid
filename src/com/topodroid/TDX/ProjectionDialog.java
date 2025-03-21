@@ -609,7 +609,7 @@ class ProjectionDialog extends MyDialog
       TDToast.makeBad( R.string.few_data );
     } else {
       // float decl = mApp.mData.getSurveyDeclination( mSid );
-      mNum = new TDNum( mList, mFrom, "", "", 0.0f, null, true ); // null formatClosure, true: midline_only
+      mNum = new TDNum( mList, mFrom, 0.0f, null, true ); // null formatClosure, true: midline_only
       mNum.recenter();
       mSeekBar.setProgress( 200 );
       mProjBar.setProgress( 200 );
