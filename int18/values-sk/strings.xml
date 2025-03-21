@@ -508,6 +508,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Milimetrový papier</string>
@@ -1112,6 +1113,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_plot_delete">Vymazať nákres</string>
     <string name="help_plot_rename">Premenovať/Vymazať nákres</string>
     <string name="help_plot_scrap">Nákres - scrapy</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">Prepínanie medzi nákresmi</string>
     <string name="help_search">Vyhľadať body</string>
     <string name="help_stats">Štatistika mapovania</string>
@@ -1260,6 +1262,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_search">Staničenia/Hľadanie zámer</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Hľadanie kalibračných dát</string>
     <string name="title_dangling">Nepripojené zámery</string>

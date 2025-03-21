@@ -496,6 +496,7 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
     <string name="menu_validate">ВАЛИДАЦИЯ</string>
     <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметровая-бумага</string>
@@ -1099,6 +1100,7 @@
     <string name="help_plot_delete">Удалить абрис</string>
     <string name="help_plot_rename">Переименовать/Удалить абрис</string>
     <string name="help_plot_scrap">Скрапы в абрисе</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">Переключить абрис</string>
     <string name="help_search">Поиск пикета</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
@@ -1246,6 +1248,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <string name="title_pref_search">Поиск настроек</string>
     <string name="title_gm_search">Поиск данных калибровки</string>
     <string name="title_dangling">Неприсоединенные замеры</string>

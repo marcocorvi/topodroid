@@ -505,6 +505,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
     <string name="menu_zoom_fit">Centrar en pantalla</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel cuadriculado</string>
@@ -1105,6 +1106,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_plot_delete">Eliminar dibujo</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_scrap">Residuos de dibujo</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">Activación dibujo</string>
     <string name="help_search">Búsqueda de estación</string>
     <string name="help_stats">Estadísticas de Topografía</string>
@@ -1252,6 +1254,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <string name="title_pref_search">Búsqueda de configuración</string>
     <!-- TODO string name="title_gm_search">Calib data search</string -->
     <string name="title_dangling">Tomas no adjuntadas</string>

@@ -498,6 +498,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">VALIDATION</string>
     <string name="menu_zoom_fit">ZOOM</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papier millimétré</string>
@@ -1102,6 +1103,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_plot_delete">Effacer le croquis</string>
     <string name="help_plot_rename">Renommer/suppr croquis</string>
     <string name="help_plot_scrap">Scraps de croquis</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">Changer de croquis</string>
     <string name="help_search">Rechercher une station</string>
     <string name="help_stats">Statistiques du relevé</string>
@@ -1249,6 +1251,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_search">Recherche Station/cheminement</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Recherche des données d\'étalonnage</string>
     <string name="title_dangling">Visée non reliée</string>
