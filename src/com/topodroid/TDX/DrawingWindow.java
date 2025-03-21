@@ -963,10 +963,14 @@ public class DrawingWindow extends ItemDrawer
     mPlot2.start = station;
     mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+    // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); 20250321
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
+    mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
     computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
+
+    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
     computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+
     NumStation st = mNum.getStation( old_station );
     if ( st != null ) {
       mDrawingSurface.shiftXSections( st );
@@ -3689,7 +3693,11 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v( "data reduction " + list.size() + " start at " + mPlot1.start );
         mMultiBad = new ArrayList< StringPair >();
         mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+        if ( type == PlotType.PLOT_PLAN ) { // 20250321
+          mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+        } else {
+          mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide );
+        }
         if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       } else {
         mNum = null;
@@ -3716,10 +3724,14 @@ public class DrawingWindow extends ItemDrawer
       List< PlotInfo > xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION,  parent );
       List< PlotInfo > xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
 
-      computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, true );
-      computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
       if ( mNum == null ) {
         TDToast.makeBad( R.string.survey_no_data_reduction );
+      } else {
+        mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
+        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, true );
+
+        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
+        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
       }
 
       doMoveTo();
@@ -3979,7 +3991,8 @@ public class DrawingWindow extends ItemDrawer
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
       mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+      mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
+
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       mDrawingSurface.clearShotsAndStations( (int)mType );
       computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
@@ -6050,7 +6063,8 @@ public class DrawingWindow extends ItemDrawer
    */
   void toggleStationHidden( String st_name, boolean is_hidden )
   {
-    String hide = mPlot1.hide.trim();
+    PlotInfo plot = ( mType == PlotType.PLOT_PLAN )? mPlot1 : mPlot2; // 20250321
+    String hide = plot.hide.trim(); // 20250321 mPlot1.hide.trim();
     // TDLog.v( "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + ">" );
     String new_hide = ""; // empty string
     boolean add = false;
@@ -6085,16 +6099,20 @@ public class DrawingWindow extends ItemDrawer
         hide = hide + " " + st_name;
       }
       // TDLog.v( "addStationHidden " + st_name + " hide <" + hide + ">" );
-      mApp_mData.updatePlotHide( mPid1, mSid, hide );
-      mApp_mData.updatePlotHide( mPid2, mSid, hide );
-      mPlot1.hide = hide;
-      mPlot2.hide = hide;
+      // mApp_mData.updatePlotHide( mPid1, mSid, hide ); 20250321
+      // mApp_mData.updatePlotHide( mPid2, mSid, hide );
+      // mPlot1.hide = hide;
+      // mPlot2.hide = hide;
+      mApp_mData.updatePlotHide( mPid, mSid, hide );
+      plot.hide = hide;
       h = 1; // hide
     } else if ( drop && is_hidden ) {
-      mApp_mData.updatePlotHide( mPid1, mSid, new_hide );
-      mApp_mData.updatePlotHide( mPid2, mSid, new_hide );
-      mPlot1.hide = new_hide;
-      mPlot2.hide = new_hide;
+      // mApp_mData.updatePlotHide( mPid1, mSid, new_hide ); 20250321
+      // mApp_mData.updatePlotHide( mPid2, mSid, new_hide );
+      // mPlot1.hide = new_hide;
+      // mPlot2.hide = new_hide;
+      mApp_mData.updatePlotHide( mPid, mSid, new_hide );
+      plot.hide = new_hide;
       h = -1; // un-hide
       // TDLog.v( "dropStationHidden " + st_name + " hide <" + new_hide + ">" );
     }
@@ -6115,7 +6133,8 @@ public class DrawingWindow extends ItemDrawer
    */
   void toggleStationBarrier( String st_name, boolean is_barrier ) 
   {
-    String view = mPlot1.view.trim();
+    PlotInfo plot = ( mType == PlotType.PLOT_PLAN )? mPlot1 : mPlot2; // 20250321
+    String view = plot.view.trim(); // 20250321 mPlot1.view.trim();
     // TDLog.v( "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
     String new_view = ""; // empty string
     boolean add = false;
@@ -6150,16 +6169,20 @@ public class DrawingWindow extends ItemDrawer
         view = view + " " + st_name;
       }
       // TDLog.v( "addStationBarrier " + st_name + " view <" + view + ">" );
-      mApp_mData.updatePlotView( mPid1, mSid, view );
-      mApp_mData.updatePlotView( mPid2, mSid, view );
-      mPlot1.view = view;
-      mPlot2.view = view;
+      // mApp_mData.updatePlotView( mPid1, mSid, view ); 20250321
+      // mApp_mData.updatePlotView( mPid2, mSid, view );
+      // mPlot1.view = view;
+      // mPlot2.view = view;
+      mApp_mData.updatePlotView( mPid, mSid, view );
+      plot.view = view;
       h = 1;
     } else if ( drop && is_barrier ) {
-      mApp_mData.updatePlotView( mPid1, mSid, new_view );
-      mApp_mData.updatePlotView( mPid2, mSid, new_view );
-      mPlot1.view = new_view;
-      mPlot2.view = new_view;
+      // mApp_mData.updatePlotView( mPid1, mSid, new_view ); 20250321
+      // mApp_mData.updatePlotView( mPid2, mSid, new_view );
+      // mPlot1.view = new_view;
+      // mPlot2.view = new_view;
+      mApp_mData.updatePlotView( mPid, mSid, new_view );
+      plot.view = new_view;
       h = -1;
     }
     // TDLog.v( "toggle station barrier: view <" + view + "> H " + h );
@@ -6878,6 +6901,7 @@ public class DrawingWindow extends ItemDrawer
       setButton1( BTN_PLAN, mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
+        mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
         computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
       }
       resetReference( mPlot2, params );
@@ -6906,6 +6930,7 @@ public class DrawingWindow extends ItemDrawer
       setButton1( BTN_PLAN, mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute && mNum != null ) {
+        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
         computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
       }
       resetReference( mPlot1, params );
@@ -7967,15 +7992,23 @@ public class DrawingWindow extends ItemDrawer
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+    // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); 20250321
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
     if ( mType == (int)PlotType.PLOT_PLAN ) {
+      mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
+
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
+
       if ( reset ) resetReference( mPlot1, false );
     } else if ( PlotType.isProfile( mType ) ) {
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
+
+      mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
+
       if ( reset ) resetReference( mPlot2, false );
     }
   }
@@ -8149,11 +8182,11 @@ public class DrawingWindow extends ItemDrawer
     if ( num == null ) return;
     // mLastLinePath = null; // not needed
 
-    if ( mType == (int)PlotType.PLOT_PLAN ) {
-      if ( mPlot2 != null ) computeReferences( num, mPlot2.type, mPlot2.name, zoom, false );
-    } else if ( PlotType.isProfile( mType ) ) {
-      computeReferences( num, mPlot1.type, mPlot1.name, zoom, false );
-    }
+    // if ( mType == (int)PlotType.PLOT_PLAN ) { 20250321
+    //   if ( mPlot2 != null ) computeReferences( num, mPlot2.type, mPlot2.name, zoom, false );
+    // } else if ( PlotType.isProfile( mType ) ) {
+    //   computeReferences( num, mPlot1.type, mPlot1.name, zoom, false );
+    // }
     computeReferences( num, (int)mType, mName, zoom, false );
   }
 
