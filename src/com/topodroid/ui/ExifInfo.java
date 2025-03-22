@@ -84,7 +84,7 @@ public class ExifInfo
    */
   public void setExifValues( float azimuth, float clino, int orientation, int accuracy, int camera )
   {
-    TDLog.v("EXIF set orientation " + orientation + " camera " + camera );
+    // TDLog.v("EXIF set orientation " + orientation + " camera " + camera );
     mAzimuth     = azimuth;
     mClino       = clino;
     mOrientation = orientation;
@@ -116,8 +116,8 @@ public class ExifInfo
     try {
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", azimuth, clino );
-      int rot = (mCamera == 1 )? toRotation( mOrientation ) : toRotation2( mOrientation );
-      TDLog.v( "EXIF write orientation " + mOrientation + " rotation " + rot + " camera " + mCamera );
+      int rot = toRotation( mOrientation );
+      // TDLog.v( "EXIF write orientation " + mOrientation + " rotation " + rot + " camera " + mCamera );
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
       }
@@ -182,10 +182,10 @@ public class ExifInfo
             TDLog.e( e.getMessage() );
           }
         }
-        TDLog.v("EXIF from MAKER_NOTE orientation " + mOrientation + " camera " + mCamera );
+        // TDLog.v("EXIF from MAKER_NOTE orientation " + mOrientation + " camera " + mCamera );
       } else {
         mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
-        TDLog.v("EXIF from ORIENTATION orientation " + mOrientation );
+        // TDLog.v("EXIF from ORIENTATION orientation " + mOrientation );
       }
       // TDLog.v( "Photo edit orientation " + mOrientation );
       String azimuth = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
@@ -269,20 +269,14 @@ public class ExifInfo
    *   xx        xx       x    x      x         xxxxxx   xxxxxx         x
    *   x          x    xxxx    xxxx   
    */
-  static private int toRotation( int orientation )
+  static private int toRotation2( int orientation )
   {
-    TDLog.v("EXIT to rotation " + orientation );
+    // TDLog.v("EXIT to rotation " + orientation );
     if ( orientation <  45 ) return EXIF_UP;
     if ( orientation < 135 ) return EXIF_RIGHT;
     if ( orientation < 225 ) return EXIF_DOWN;
     if ( orientation < 315 ) return EXIF_LEFT;
-    return EXIF_UP;
-  }
-
-  static private int toRotation2( int orientation )
-  {
-    TDLog.v("EXIT to rotation-2 " + orientation );
-    return EXIF_NORMAL;
+    return EXIF_UP; // EXIF_NORMAL;
   }
 
   /** @return camera orientation [degrees] from the orientation angle
@@ -290,7 +284,7 @@ public class ExifInfo
    */
   static public int getCameraOrientation( int orientation )
   {
-    TDLog.v("EXIF get camera orientation for " + orientation );
+    // TDLog.v("EXIF get camera orientation for " + orientation );
     if ( orientation <  45 ) return ORIENTATION_UP;     // 0
     if ( orientation < 135 ) return ORIENTATION_RIGHT;  // 90
     if ( orientation < 225 ) return ORIENTATION_DOWN;   // 180

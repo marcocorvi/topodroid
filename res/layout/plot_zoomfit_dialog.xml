@@ -64,6 +64,10 @@
     android:layout_marginTop="10pt" 
     android:layout_marginBottom="10pt" 
     >
+    <Button android:id="@+id/button_clear_station"
+      style="@style/button_default"
+      android:text="@string/button_clear"
+      />
     <Button android:id="@+id/button_station"
       style="@style/button_default"
       android:text="@string/button_station"

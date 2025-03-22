@@ -40,7 +40,6 @@ class PlotZoomFitDialog extends MyDialog
   private final DrawingWindow mParent;
   private Button mBtnPortrait;
   private Button mBtnLandscape;
-  private Button mBtnStation;
   private EditText mETstation;
   // private Button mBtnZoomFit;
 
@@ -122,15 +121,14 @@ class PlotZoomFitDialog extends MyDialog
 
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
 
-    mBtnStation  = (Button) findViewById( R.id.button_station );
     mETstation = (EditText) findViewById( R.id.center_station );
     if ( mSkipSaving ) { // TH2EDIT
       LinearLayout layout_station = (LinearLayout) findViewById( R.id.layout_station );
-      // mBtnStation.setVisibility( View.GONE );
       // mETstation.setVisibility( View.GONE );
       layout_station.setVisibility( View.GONE );
     } else {
-      mBtnStation.setOnClickListener( this );
+      ((Button) findViewById( R.id.button_station )).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_clear_station )).setOnClickListener( this );
     }
   }
  
@@ -165,13 +163,15 @@ class PlotZoomFitDialog extends MyDialog
       } else if ( TDLevel.overExpert && btn == mBtnZoomFix ) {
         // mParent.setFixedZoom( mCBZoomFix.isChecked() );
         mParent.setFixedZoom( (mSelectedPos < 0)? 0 : mSelectedPos );
-      } else if ( btn == mBtnStation ) {
+      } else if ( v.getId() == R.id.button_station ) {
         String station = mETstation.getText().toString();
 	if ( TDString.isNullOrEmpty( station ) ) {
           mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
 	  return;
 	}
 	mParent.centerAtStation( station );
+      } else if ( v.getId() ==  R.id.button_clear_station ) {
+        mParent.highlightStation( null );
       }
     }
     dismiss();

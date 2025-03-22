@@ -1744,6 +1744,7 @@ public class DrawingWindow extends ItemDrawer
         // return;
         // TDLog.v( "PROJ offset at " + mOffset.x + " " + mOffset.y );
       }
+      highlightStation( move_to );
     }
   }
 
@@ -8273,7 +8274,7 @@ public class DrawingWindow extends ItemDrawer
       }
       menu_adapter.add( res.getString( menus[4] ) );  // ZOOM-FIT
     }
-    if ( TDLevel.overAdvanced ) {
+    if ( TDLevel.overTester ) {
       menu_adapter.add( res.getString( menus[5] ) ); // STATION SEARCH and HIGHLIGHT
     }
     if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( type ) ) { // TH2EDIT
@@ -8435,7 +8436,7 @@ public class DrawingWindow extends ItemDrawer
 	} else {
 	  doZoomFit();
 	}
-      } else if ( TDLevel.overNormal && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
+      } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
         ( new PlotSearchDialog( mActivity, this ) ).show();
       } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
         //   askDelete();
@@ -10033,7 +10034,10 @@ public class DrawingWindow extends ItemDrawer
   /** highlight a station name
    * @param name  name to highight, or null to clear
    */
-  void highlightStation( String name ) { mDrawingSurface.highlightStation( name ); }
+  void highlightStation( String name ) // STATION SEARCH and HIGHLIGHT
+  {
+    mDrawingSurface.highlightStation( name );
+  }
 
 
 }
