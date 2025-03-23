@@ -79,13 +79,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
     <string name="memoryXBLE">DistoX-BLE</string>
-    <!-- TODO string name="memoryCavway">Cavway memory</string -->
+    <string name="memoryCavway">Memoria Cavway</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 	
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <string name="thp_section">Sección</string>
-    <!-- TODO string name="thp_picture">picture</string -->
+    <string name="thp_picture">Imagen</string>
     <string name="thp_station">Estación</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
@@ -237,7 +237,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
     <string name="gettingble_info">Descargando información de DistoX-BLE &#8230;</string>
-    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
+    <string name="gettingCavway_info">Obtener información de Cavway &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
@@ -301,7 +301,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="photo_title">Foto</string>
     <string name="photo_text">Introducir comentario de foto</string>
     <!-- UNUSED string name="photo_failed">foto fallida</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">La foto no está lista. Espere &#8230;</string>
     <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
     <string name="photo_many_pictures">demasiadas fotos</string>
     <string name="label_title">Texto</string>
@@ -505,7 +505,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
     <string name="menu_zoom_fit">Centrar en pantalla</string>
-    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
+    <string name="menu_plot_search">Búsqueda de estaciones</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel cuadriculado</string>
@@ -1106,7 +1106,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_plot_delete">Eliminar dibujo</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_scrap">Residuos de dibujo</string>
-    <!-- TODO string name="help_plot_search">Station search</string -->
+    <string name="help_plot_search">Búsqueda de estaciones</string>
     <string name="help_plot_switch">Activación dibujo</string>
     <string name="help_search">Búsqueda de estación</string>
     <string name="help_stats">Estadísticas de Topografía</string>
@@ -1254,9 +1254,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
-    <!-- TODO string name="title_plot_search">Station search</string -->
+    <string name="title_plot_search">Búsqueda de estaciones</string>
     <string name="title_pref_search">Búsqueda de configuración</string>
-    <!-- TODO string name="title_gm_search">Calib data search</string -->
+    <string name="title_gm_search">Búsqueda de datos de Calib</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
@@ -1363,7 +1363,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
-    <!-- TODO string name="title_team_dialog">Team names</string -->
+    <string name="title_team_dialog">Nombre del grupo</string>
     <string name="title_plot_rename">Cambiar el nombre topografía</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>
     <string name="title_calib_export">Exportar topografía como &#8230;</string>
@@ -1601,7 +1601,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
   <string name="pref_bric_index_is_id_title">El índice BRIC es ID</string>
-  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
+  <string name="pref_bric_index_is_id_summary">Usar el índice BRIC como ID de toma</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
@@ -1939,10 +1939,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
-  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
+  <string name="pref_3d_sketch_title">Modelado 3D</string>
+  <string name="pref_3d_sketch_summary">Habilitar el modelado 3D (solo compilación de depuración)</string>
+  <string name="pref_sketch_splay_buffer_title">Búfer de separación</string>
+  <string name="pref_sketch_splay_buffer_summary">Búfer de separación de sección [m]</string>
 	  
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log output stream</string>
