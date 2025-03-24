@@ -1470,6 +1470,9 @@ public class DrawingWindow extends ItemDrawer
     // if ( ! mDrawingSurface.isSelectable() ) {
     //   sb.append( mActivity.getTitle() + " [!s]" );
     // }
+    if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) { // IMMUTABLE
+      mActivity.setTitleColor( 0xffff3333 );
+    }
     mActivity.setTitle( sb.toString() );
   }
 
@@ -1584,6 +1587,14 @@ public class DrawingWindow extends ItemDrawer
    */
   private void startSaveTdrTask( final long type, int save_mode, int maxTasks, int rotate )
   {
+    if ( TDSetting.WITH_IMMUTABLE ) {
+      // if ( ! mApp_mData.isSurveyMutable( TDInstance.sid, "startSaveTdrTask" ) ) 
+      if ( ! TDInstance.isSurveyMutable ) { 
+        // TDToast.makeWarn("IMMUTABLE SURVEY plot not saved");
+        TDLog.v("IMMUTABLE SURVEY plot not saved");
+        return;
+      }
+    }
     if ( ( save_mode == PlotSave.TOGGLE || save_mode == PlotSave.MODIFIED ) && ! mModified ) {
       // TDLog.v("SAVE TDR: save_mode toggle or modified, but not modified ");
       return;
@@ -1815,13 +1826,15 @@ public class DrawingWindow extends ItemDrawer
     nr_magnetic_bad = 0;
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
-        NumStation st1 = sh.from;
-        NumStation st2 = sh.to;
-        if ( st1.show() && st2.show() ) {
-          DBlock blk = sh.getFirstBlock();
-          DrawingPath path = addFixedLine( type, blk, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
-          if ( sh.isBadLoop() ) {
-            path.setPathPaint( BrushManager.badLoopPaint );
+        DBlock blk = sh.getFirstBlock();
+        if ( ! blk.isCommented() ) {
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+          if ( st1.show() && st2.show() ) {
+            DrawingPath path = addFixedLine( type, blk, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
+            if ( sh.isBadLoop() ) {
+              path.setPathPaint( BrushManager.badLoopPaint );
+            }
           }
         }
       }
@@ -1830,7 +1843,7 @@ public class DrawingWindow extends ItemDrawer
           NumStation st = sp.from;
           if ( st.show() ) {
             DBlock blk = sp.getBlock();
-            if ( ! blk.isNoPlan() ) {
+            if ( ! ( blk.isNoPlan() || blk.isCommented() ) ) {
               // TDLog.v("SPLAY cosine " + sp.getCosine() );
               addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
             }
@@ -1856,10 +1869,12 @@ public class DrawingWindow extends ItemDrawer
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
 	  DBlock blk = sh.getFirstBlock();
-          if ( blk != null && st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
-            DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
-            if ( sh.isBadLoop() ) {
-              path.setPathPaint( BrushManager.badLoopPaint );
+          if ( blk != null && ! blk.isCommented() ) {
+            if ( st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
+              DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
+              if ( sh.isBadLoop() ) {
+                path.setPathPaint( BrushManager.badLoopPaint );
+              }
             }
           }
         }
@@ -1868,7 +1883,7 @@ public class DrawingWindow extends ItemDrawer
         NumStation st = sp.from;
         if ( st.hasExtend() && st.show() ) {
           DBlock blk = sp.getBlock();
-          if ( ! blk.isNoProfile() ) {
+          if ( ! ( blk.isNoProfile() || blk.isCommented() ) ) {
             addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
           }
         }
@@ -1891,9 +1906,12 @@ public class DrawingWindow extends ItemDrawer
         if ( st1.show() && st2.show() ) {
           h1 = st1.e * cosp + st1.s * sinp;
           h2 = st2.e * cosp + st2.s * sinp;
-          DrawingPath path = addFixedLine( type, sh.getFirstBlock(), h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
-          if ( sh.isBadLoop() ) {
-            path.setPathPaint( BrushManager.badLoopPaint );
+          DBlock blk = sh.getFirstBlock();
+          if ( ! blk.isCommented() ) {
+            DrawingPath path = addFixedLine( type, blk, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
+            if ( sh.isBadLoop() ) {
+              path.setPathPaint( BrushManager.badLoopPaint );
+            }
           }
         }
       } 
@@ -1901,7 +1919,7 @@ public class DrawingWindow extends ItemDrawer
         NumStation st = sp.from;
         if ( st.show() ) {
           DBlock blk = sp.getBlock();
-          if ( ! blk.isNoProfile() ) {
+          if ( ! ( blk.isNoProfile() || blk.isCommented() ) ) {
             h1 = st.e * cosp + st.s * sinp;
             h2 = sp.e * cosp + sp.s * sinp;
             // cosine of the angle between the splay and the direction of projection
@@ -3419,7 +3437,7 @@ public class DrawingWindow extends ItemDrawer
           break;
         }
       }
-      if ( blk != null ) {
+      if ( blk != null ) { // test blk.isCommenetd() ?
         float dfrom = dist;
         float dto   = 0;
         if ( tt >= 0 && tt <= 1 ) {
@@ -3584,7 +3602,7 @@ public class DrawingWindow extends ItemDrawer
     float ytt = (float)center.y; // South
     float ztt = (float)center.z; // Down
     for ( DBlock b : list ) {
-      if ( b.isSplay() ) {
+      if ( b.isSplay() ) { // test b.isCommented() ?
         // TDLog.v("multileg splay block " + b.mFrom );
         NumStation st_f = mNum.getStation( b.mFrom );
         NumSplay sp = mNum.getSplayOf( b );

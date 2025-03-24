@@ -127,7 +127,7 @@ class PlotZoomFitDialog extends MyDialog
       // mETstation.setVisibility( View.GONE );
       layout_station.setVisibility( View.GONE );
     } else {
-      ((Button) findViewById( R.id.button_station )).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_center_station )).setOnClickListener( this );
       ((Button) findViewById( R.id.button_clear_station )).setOnClickListener( this );
     }
   }
@@ -163,7 +163,7 @@ class PlotZoomFitDialog extends MyDialog
       } else if ( TDLevel.overExpert && btn == mBtnZoomFix ) {
         // mParent.setFixedZoom( mCBZoomFix.isChecked() );
         mParent.setFixedZoom( (mSelectedPos < 0)? 0 : mSelectedPos );
-      } else if ( v.getId() == R.id.button_station ) {
+      } else if ( v.getId() == R.id.button_center_station ) {
         String station = mETstation.getText().toString();
 	if ( TDString.isNullOrEmpty( station ) ) {
           mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );

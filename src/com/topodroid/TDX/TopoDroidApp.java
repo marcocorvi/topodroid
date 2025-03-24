@@ -909,6 +909,11 @@ public class TopoDroidApp extends Application
    */
   void doBluetoothButton( Context ctx, ILister lister, Button b, int nr_shots )
   {
+    if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
+      doBluetoothReset( lister );
+      return;
+    }
+
     if ( TDLevel.overAdvanced ) {
       if ( TDInstance.isDeviceBric() ) {
         // TDLog.v( "bt button over advanced : BRIC");
@@ -1626,6 +1631,11 @@ public class TopoDroidApp extends Application
       // TDLog.v( "set SurveyFromName <" + name + ">");
 
       TDInstance.sid = mData.setSurvey( name, datamode );
+      if ( TDSetting.WITH_IMMUTABLE ) {
+        TDInstance.isSurveyMutable = mData.isSurveyMutable( TDInstance.sid );
+      } else {
+        TDInstance.isSurveyMutable = true;
+      }
 
       // mFixed.clear();
       TDInstance.survey = null;

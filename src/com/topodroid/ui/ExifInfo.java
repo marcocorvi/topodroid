@@ -269,7 +269,7 @@ public class ExifInfo
    *   xx        xx       x    x      x         xxxxxx   xxxxxx         x
    *   x          x    xxxx    xxxx   
    */
-  static private int toRotation2( int orientation )
+  static private int toRotation( int orientation )
   {
     // TDLog.v("EXIT to rotation " + orientation );
     if ( orientation <  45 ) return EXIF_UP;

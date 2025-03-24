@@ -411,6 +411,7 @@ public class DataHelper extends DataSetObservable
   private static final String qDatamode     = "select datamode from surveys where id=?";
   private static final String qDeclination  = "select declination from surveys where id=?";
   private static final String qExtend       = "select extend from surveys where id=?";
+  private static final String qCreated      = "select day, created, immutable from surveys where id=?";
   private static final String qSurveysStat1 = "select flag, acceleration, magnetic, dip, address from shots where surveyId=? AND status=0 AND acceleration > 1 ";
   private static final String qSurveysStat2 =
     "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
@@ -547,8 +548,8 @@ public class DataHelper extends DataSetObservable
    */
   int getSurveyExtend( long sid )
   {
-    int ret = SurveyInfo.SURVEY_EXTEND_NORMAL;
     if ( myDB == null ) return SurveyInfo.SURVEY_EXTEND_NORMAL;
+    int ret = SurveyInfo.SURVEY_EXTEND_NORMAL;
     Cursor cursor = myDB.rawQuery( qExtend, new String[] { Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       ret = (int)(cursor.getLong( 0 ));
@@ -563,7 +564,8 @@ public class DataHelper extends DataSetObservable
    */
   void updateSurveyExtend( long sid, int extend )
   {
-    if ( myDB == null ) return;
+    // if ( myDB == null ) return; checked by isSurveyMutable
+    if ( ! isSurveyMutable( sid, "updateSurveyExtend" ) ) return;
     ContentValues cv = makeSurveyExtend( extend );
     try {
       myDB.beginTransaction();
@@ -581,7 +583,8 @@ public class DataHelper extends DataSetObservable
    */
   void prefixSurveyStations( long sid, String prefix )
   {
-    if ( myDB == null ) return;
+    // if ( myDB == null ) return; checked by isSurveyMutable
+    if ( ! isSurveyMutable( sid, "prefixSurveyStations " + prefix ) ) return;
     ContentValues cv;
     String wSid = "where surveyId=" + sid;
     try {
@@ -1093,6 +1096,8 @@ public class DataHelper extends DataSetObservable
    */
   boolean renameSurvey( long id, String name )
   {
+    // if ( myDB == null ) return false; checked by isSurveyMutable
+    if ( ! isSurveyMutable( id, "renameSurvey " + name ) ) return false;
     boolean ret = true;
     ContentValues cv = new ContentValues();
     cv.put("name", name );
@@ -1125,7 +1130,7 @@ public class DataHelper extends DataSetObservable
    * @param init_station initial station
    * @param xsections     xsection mode (private or shared)
    */
-  private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
+  private ContentValues makeSurveyInfoContentValues( String date, String team, double decl, String comment,
                                 String init_station, int xsections ) // datamode cannot be updated
   {
     ContentValues cv = new ContentValues();
@@ -1137,6 +1142,58 @@ public class DataHelper extends DataSetObservable
     cv.put( "xsections", xsections );
     return cv;
   }
+
+  /** get the content values for mutability of a survey record
+   * @param sid       survey ID
+   * @param created   timestamp (sec) 
+   * @param immutable whether the survey data are to be immutable
+   */
+  private void makeSurveyInfoMutableValues( long sid, long created, boolean immutable )
+  {
+    TDLog.v("SURVEY make mutable values: created " + created + " immutable " + immutable );
+    ContentValues cv = new ContentValues();
+    cv.put( "created", created );
+    cv.put( "immutable", (immutable? 1 : 0 ) );
+    myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
+  }
+
+  /** check if the survey record needs to be made immutable
+   * @param sid    survey ID
+   * @return true if the survey is immutable
+   * @note used by ShotWindow
+   */
+  boolean checkSurveyInfoImmutable( long sid )
+  {
+    if ( ! TDSetting.WITH_IMMUTABLE ) return false; // FIXME_IMMUTABLE
+    if ( ! isSurveyMutable( sid ) ) return true;
+    long ret = 0;
+    boolean immutable = false;
+    String day = null;
+    Cursor cursor = myDB.rawQuery( qCreated, new String[] { Long.toString(sid) } );
+    if (cursor.moveToFirst()) {
+      day       = cursor.getString( 0 );
+      ret       = cursor.getLong( 1 );
+      immutable = ( cursor.getLong( 2 ) == 1 );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    TDLog.v("SURVEY MUTABLE: created " + ret + " immutable " + immutable );
+    if ( ret == 0 ) {
+      long time = 0L;
+      if ( day == null ) {
+        time = TDUtil.getTimeStamp();
+      } else {
+        time = TDUtil.dateToTimestamp( day );
+        if ( time == 0 ) time =  TDUtil.getTimeStamp();
+      }
+      makeSurveyInfoMutableValues( sid, time, false );
+      return false;
+    } else if ( ( ! immutable ) && TDUtil.getTimeStamp() - ret > 1296000L ) { // 345600 = four days, 1296000 = 15 days
+      makeSurveyInfoMutableValues( sid, ret, true );
+      return true;
+    }
+    return immutable;
+  }
+
 
   /** update a survey infos
    * @param date         date
@@ -1150,8 +1207,10 @@ public class DataHelper extends DataSetObservable
                          String init_station, int xsections )
                          // FIXME int extend
   {
+    // if ( myDB == null ) return; checked by isSurveyMutable
+    if ( ! isSurveyMutable( sid, "updateSurveyInfo" ) ) return;
     // TDLog.v("DB update survey, init station <" + init_station + ">" );
-    ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+    ContentValues cv = makeSurveyInfoContentValues( date, team, decl, comment, init_station, xsections );
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
@@ -1170,8 +1229,10 @@ public class DataHelper extends DataSetObservable
    */
   public boolean updateSurveyDayAndComment( String name, String date, String comment )
   {
+    if ( myDB == null ) return false;
     boolean ret = false;
     long sid = getIdFromName( SURVEY_TABLE, name );
+    if ( ! isSurveyMutable( sid, "updateSurveyDayAndComment " + name ) ) return false;
     if ( sid >= 0 ) { // survey name exists
       ret = updateSurveyDayAndComment( sid, date, comment );
     }
@@ -1182,6 +1243,7 @@ public class DataHelper extends DataSetObservable
    * @param sid    survey ID
    * @param cv     content-value set of the update
    * @param msg    message (for error reporting)
+   * @note called only is surevy is mutable
    */
   private boolean doUpdateSurvey( long sid, ContentValues cv, String msg )
   {
@@ -1296,6 +1358,8 @@ public class DataHelper extends DataSetObservable
    */
   private void updateStatus( String table, long id, long sid, long status )
   {
+    // if ( myDB == null ) return; checked by isSurveyMutable
+    if ( ! isSurveyMutable( sid, "updateStatus" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "status", status );
     try {
@@ -1334,6 +1398,8 @@ public class DataHelper extends DataSetObservable
    */
   public boolean updateSurveyDayAndComment( long id, String date, String comment )
   {
+    // if ( myDB == null ) return false; checked by isSurveyMutable
+    if ( ! isSurveyMutable( id, "updateSurveyDayAndComment" ) ) return false;
     if ( date == null ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
@@ -1348,6 +1414,8 @@ public class DataHelper extends DataSetObservable
    */
   public boolean updateSurveyTeam( long id, String team )
   {
+    // if ( myDB == null ) return false; checked by isSurveyMutable
+    if ( ! isSurveyMutable( id, "updateSurveyTeam" ) ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "team", team );
     return doUpdateSurvey( id, cv, "survey team" );
@@ -1360,6 +1428,8 @@ public class DataHelper extends DataSetObservable
    */
   public boolean updateSurveyInitStation( long id, String station )
   {
+    if ( myDB == null ) return false; // checked by isSurveyMutable
+    // if ( ! isSurveyMutable( id, "updateSurveyInitStation" ) ) return false;
     ContentValues cv = new ContentValues();
     // TDLog.v("DB update survey init_station <" + station + ">" );
     cv.put( "init_station", station );
@@ -1373,6 +1443,8 @@ public class DataHelper extends DataSetObservable
    */
   public boolean updateSurveyDeclination( long id, double decl )
   {
+    if ( myDB == null ) return false; // checked by isSurveyMutable
+    // if ( ! isSurveyMutable( id, "updateSurveyDeclination" ) ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "declination", decl );
     return doUpdateSurvey( id, cv, "survey decl" );
@@ -1708,6 +1780,7 @@ public class DataHelper extends DataSetObservable
    */
   void deleteShot( long id, long sid, int status )
   {
+    // isMutable checked in child
     // if ( myDB == null ) return;
     updateStatus( SHOT_TABLE, id, sid, status );
   }
@@ -1718,13 +1791,22 @@ public class DataHelper extends DataSetObservable
    */
   void undeleteShot( long id, long sid )
   {
+    // isMutable checked in child
     // if ( myDB == null ) return;
     updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
   }
   
-  // called by the importXXXTask's
+  /** import the survey shots
+   * @param sid    survey ID
+   * @param id     first shot id
+   * @param shots  list of shots
+   * @return id of last shot
+   * @note called by the importXXXTask's
+   * @note executed on immutable surveys
+   */
   public long insertImportShots( long sid, long id, ArrayList< ParserShot > shots )
   {
+    if ( myDB == null ) return -1L;
     // if ( myDB == null ) return -1L;
     long millis = 0L;
     long color  = 0L;
@@ -1827,7 +1909,14 @@ public class DataHelper extends DataSetObservable
     return id;
   }
   
-  // called by the importXXXTask's
+  /** import the survey shots in diving format
+   * @param sid    survey ID
+   * @param id     first shot id
+   * @param shots  list of shots
+   * @return id of last shot
+   * @note called by the importXXXTask's
+   * @note executed on immutable surveys
+   */
   public long insertImportShotsDiving( long sid, long id, ArrayList< ParserShot > shots )
   {
     // [1] compute stations depth
@@ -1906,6 +1995,7 @@ public class DataHelper extends DataSetObservable
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    if ( ! isSurveyMutable( sid, "insertCavwayShot" ) ) return -1L;
     if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID
       id = -1L;
     }
@@ -1942,6 +2032,7 @@ public class DataHelper extends DataSetObservable
     //   id = -1L;
     // }
     // return doBricInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr, idx );
+    if ( ! isSurveyMutable( sid, "insertBricShot" ) ) return -1L;
     return doBricInsertShot( sid, -1L, TDUtil.getTimeStamp(), 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr, idx, time );
   }
 
@@ -1962,6 +2053,7 @@ public class DataHelper extends DataSetObservable
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    if ( ! isSurveyMutable( sid, "insertDistoXShot" ) ) return -1L;
     return doSimpleInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, d, b, c, r, extend, 0.0, 0L, status, 0L, addr, idx, 0L );
   }
 
@@ -1972,7 +2064,8 @@ public class DataHelper extends DataSetObservable
    */
   public long insertDBlockShot( long sid, DBlock blk )
   {
-    if ( myDB == null ) return -1L;
+    // if ( myDB == null ) return -1L;
+    if ( ! isSurveyMutable( sid, "insertDBlockShot" ) ) return -1L;
     ++ myNextId;
     // 0L = color, 0 = status
     ContentValues cv = makeShotContentValues( sid, myNextId, blk.mTime, 0L, blk.mFrom, blk.mTo, 
@@ -2026,11 +2119,13 @@ public class DataHelper extends DataSetObservable
                         long shot_type )
   { // leg, 0L=status, type 
     // return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "" );
+    if ( ! isSurveyMutable( sid, "insertManualShot" ) ) return -1L;
     return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, "", 0, 0L );
   }
 
   void resetShotColor( long sid )
   {
+    // if ( ! isSurveyMutable( sid, "resetShotColor" ) ) return;
     // if ( resetShotColorStmt == null ) {
     //   resetShotColorStmt = myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
     // }
@@ -2044,7 +2139,8 @@ public class DataHelper extends DataSetObservable
 
   void updateShotColor( long id, long sid, int color )
   {
-    // if ( myDB == null ) return;
+    if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updateShotColor" ) ) return;
 
     // StringWriter sw = new StringWriter();
     // PrintWriter pw  = new PrintWriter( sw );
@@ -2071,6 +2167,7 @@ public class DataHelper extends DataSetObservable
   void updateShotsColor( List< DBlock > blks, long sid, int color )
   {
     if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updateShotsColor" ) ) return;
     try {
       myDB.beginTransaction();
       String stmt = "UPDATE shots SET color=" + color + " WHERE surveyId=" + sid + " AND id=";
@@ -2095,6 +2192,7 @@ public class DataHelper extends DataSetObservable
   public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean backshot )
   {
     // if ( myDB == null ) return;
+    if ( ! isSurveyMutable( sid, "updateShotAMDR" ) ) return;
 
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
@@ -2131,6 +2229,7 @@ public class DataHelper extends DataSetObservable
    * @param sid               ID of the target survey
    * @param old_sid           ID of the source survey
    * @param station           plot origin station
+   * @note survey mutable is checked by parent
    */
   private void transferPlots( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
   {
@@ -2164,12 +2263,15 @@ public class DataHelper extends DataSetObservable
    * @param sid     target survey ID
    * @param old_sid source survey ID
    * @param old_id  ID of first shot of the source survey that is transferred
+   * @note transferShots is called also by SurveyNewDialog
    */
   void transferShots( long sid, long old_sid, long old_id )
   {
-    if ( myDB == null ) return;
+    // if ( myDB == null ) return; checked by isSurveyMutable
+    // if ( ! isSurveyMutable( sid, "transferShots" ) ) return;
     SurveyInfo old_survey = selectSurveyInfo( old_sid );
     SurveyInfo new_survey = selectSurveyInfo( sid );
+    if ( new_survey.isImmutable() || old_survey.isImmutable() ) return;
     long max_old_id = maxId( SHOT_TABLE, old_sid );
     // TDLog.v("max shot ID " + max_old_id );
 
@@ -2294,6 +2396,7 @@ public class DataHelper extends DataSetObservable
   long insertManualShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r,
 		     long extend, double stretch, long leg, long shot_type )
   {
+    if ( ! isSurveyMutable( sid, "insertManualShotAt" ) ) return -1L;
     if ( myDB == null ) return -1L;
     // TDLog.v("DB manual insert shot at " + at + " d " + d + " b " + b + " c " + c );
     shiftShotsId( sid, at );
@@ -2481,9 +2584,17 @@ public class DataHelper extends DataSetObservable
   // -----------------------------------------------------------------
   // PLOT
 
+  /** update plot position and zoom
+   * @param pid     plot ID
+   * @param sid     survey ID
+   * @param xoffset X offset
+   * @param yoffset Y offset
+   * @param zoom    zoom
+   */
   void updatePlot( long pid, long sid, double xoffset, double yoffset, double zoom )
   {
     if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updatePlot" ) ) return;
     // TDLog.Log( TDLog.LOG_DB, "update Plot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zoom);
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
@@ -2503,7 +2614,8 @@ public class DataHelper extends DataSetObservable
 
   void updatePlotOrigin( long sid, long pid, String station )
   {
-    if ( myDB == null ) return; // false;
+    // if ( myDB == null ) return; // false;
+    if ( ! isSurveyMutable( sid, "updatePlotOrigin" ) ) return;
     if ( station == null ) station = "";
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
@@ -2511,8 +2623,14 @@ public class DataHelper extends DataSetObservable
     doExecSQL( sw, "plt origin" );
   }
  
+  /** uodate the nickname string of plot
+   * @param pid     plot ID
+   * @param sid     survey ID
+   * @param nick    nickname string
+   */
   void updatePlotNick( long pid, long sid, String nick )
   {
+    if ( ! isSurveyMutable( sid, "updatePlotNick" ) ) return;
     if ( myDB == null ) return; // false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotNick: " + pid + "/" + sid + " nick " + nick );
     if ( nick == null ) nick = TDString.EMPTY;
@@ -2530,9 +2648,15 @@ public class DataHelper extends DataSetObservable
     // doStatement( updatePlotNickStmt, "plt nick" );
   }
  
+  /** uodate the "view" string of plot
+   * @param pid     plot ID
+   * @param sid     survey ID
+   * @param view    view string
+   */
   void updatePlotView( long pid, long sid, String view )
   {
     if ( myDB == null ) return; // false;
+    // if ( ! isSurveyMutable( sid, "updatePlotView" ) ) return;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
     if ( view == null ) view = TDString.EMPTY;
     StringWriter sw = new StringWriter();
@@ -2549,10 +2673,16 @@ public class DataHelper extends DataSetObservable
     // doStatement( updatePlotViewStmt, "plt view" );
   }
 
-  // for leg xsections store the value of intercept TT
+  /** uodate the leg intercept of plot
+   * @param pid        plot ID
+   * @param sid        survey ID
+   * @param intercept  leg intercept
+   * @note for leg xsections store the value of intercept TT
+   */
   void updatePlotIntercept( long pid, long sid, float intercept )
   {
-    if ( myDB == null ) return; // false;
+    // if ( myDB == null ) return; // false;
+    if ( ! isSurveyMutable( sid, "updatePlotIntercept" ) ) return;
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE plots set intercept=%f WHERE surveyId=%d AND id=%d", intercept, sid, pid );
@@ -2562,8 +2692,9 @@ public class DataHelper extends DataSetObservable
   // for multileg xsections stores the value of intercept TT=2 and center
   void updatePlotCenter( long pid, long sid, Vector3D center )
   {
-    if ( myDB == null ) return; // false;
     if ( center == null ) return;
+    // if ( myDB == null ) return; // false;
+    if ( ! isSurveyMutable( sid, "updatePlotCenter" ) ) return;
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE plots set intercept=2.0, center_x=%f, center_y=%f, center_z=%f WHERE surveyId=%d AND id=%d", center.x, center.y, center.z, sid, pid );
@@ -2589,6 +2720,7 @@ public class DataHelper extends DataSetObservable
   void updatePlotHide( long pid, long sid, String hide )
   {
     if ( myDB == null ) return; // false;
+    // if ( ! isSurveyMutable( sid, "updatePlotHide" ) ) return;
     // TDLog.Log( TDLog.LOG_DB, "update PlotHide: " + pid + "/" + sid + " hide " + hide );
     if ( hide == null ) hide = TDString.EMPTY;
     StringWriter sw = new StringWriter();
@@ -2610,6 +2742,7 @@ public class DataHelper extends DataSetObservable
   void dropPlot( long pid, long sid )
   {
     if ( myDB == null ) return;
+    if ( ! isSurveyMutable( sid, "dropPlot" ) ) return;
     try {
       myDB.beginTransaction();
       myDB.delete( PLOT_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(pid) } );
@@ -2621,15 +2754,22 @@ public class DataHelper extends DataSetObservable
 
   void deletePlot( long pid, long sid )
   {
+    // isMutable checked in child
     // TDLog.Log( TDLog.LOG_DB, "deletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
     updateStatus( PLOT_TABLE, pid, sid, TDStatus.DELETED );
   }
 
-  // THIS REALLY DROPS THE RECORD FROM THE TABLE
+  /** delete an x-section plot
+   * @param name   x-section name
+   * @param sid    survey ID
+   * @note THIS REALLY DROPS THE RECORD FROM THE TABLE
+   * @note called to delete an X-sections
+   */
   void deletePlotByName( String name, long sid )
   {
-    if ( myDB == null ) return;
+    // if ( myDB == null ) return;
+    if ( ! isSurveyMutable( sid, "deletePlotByName" ) ) return;
     try {
       myDB.beginTransaction();
       myDB.delete( PLOT_TABLE, WHERE_SID_NAME, new String[]{ Long.toString(sid), name } );
@@ -2641,6 +2781,7 @@ public class DataHelper extends DataSetObservable
   
   void undeletePlot( long pid, long sid )
   {
+    // isMutable checked in child
     // TDLog.Log( TDLog.LOG_DB, "undeletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
     updateStatus( PLOT_TABLE, pid, sid, TDStatus.NORMAL );
@@ -2931,7 +3072,8 @@ public class DataHelper extends DataSetObservable
    */
   private long insertAudio( long sid, long id, long item_id, String date, long reftype )
   {
-    if ( myDB == null ) return -1L;
+    // if ( myDB == null ) return -1L;
+    if ( ! isSurveyMutable( sid, "insertAudio" ) ) return -1L;
     // TDLog.v("Insert audio: SID " + sid + " ID " + id + " item " + item_id + " type " + reftype );
     if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
     if ( date == null ) date = TDUtil.currentDate();
@@ -2950,7 +3092,8 @@ public class DataHelper extends DataSetObservable
    */
   void updateAudio( long sid, long id, long bid, String date, long reftype )
   {
-    if ( myDB == null ) return; // false;
+    // if ( myDB == null ) return; // false;
+    if ( ! isSurveyMutable( sid, "updateAudio" ) ) return;
     // boolean ret = false;
     // TDLog.v("Update audio: SID " + sid + " ID " + id + " item " + bid + " type " + reftype );
     if ( id >= 0 ) {
@@ -2985,6 +3128,7 @@ public class DataHelper extends DataSetObservable
   void setAudioTime( long sid, long id, String date )
   {
     if ( myDB == null ) return; // false;
+    if ( ! isSurveyMutable( sid, "setAudioTime " + date ) ) return;
     String[] args = new String[] { Long.toString(sid), Long.toString(id) };
     ContentValues cv = new ContentValues();
     cv.put( "date", date );
@@ -3067,6 +3211,8 @@ public class DataHelper extends DataSetObservable
    */
   void deleteAudioRecord( long sid, long id ) 
   { 
+    // isSurveyMutable checked by child
+    if ( myDB == null ) return;
     deleteFromTable( sid, id, AUDIO_TABLE );
   }
 
@@ -3245,7 +3391,8 @@ public class DataHelper extends DataSetObservable
    */
   long insertOrUpdatePhoto( long sid, long id, long item_id, String title, String date, String comment, int camera, String geocode, int reftype, int format )
   {
-    if ( myDB == null ) return -1;
+    // if ( myDB == null ) return -1;
+    if ( ! isSurveyMutable( sid, "insertOrUpdatePhoto" ) ) return -1L;
     TDLog.v("insert / update Photo: id " + id + " reftype " + reftype );
     boolean insert = (id < 0);
     Cursor cursor = null;
@@ -3316,7 +3463,12 @@ public class DataHelper extends DataSetObservable
    * @param sid   survey ID
    * @param id    photo ID
    */
-  void deletePhotoRecord( long sid, long id ) { deleteFromTable( sid, id, PHOTO_TABLE ); }
+  void deletePhotoRecord( long sid, long id ) 
+  { 
+    // isSurveyMutable checked by child
+    if ( myDB == null ) return;
+    deleteFromTable( sid, id, PHOTO_TABLE );
+  }
 
 
 
@@ -3812,14 +3964,7 @@ public class DataHelper extends DataSetObservable
 
   void updatePlotName( long sid, long pid, String name )
   {
-    // if ( updatePlotNameStmt == null ) {
-    //   updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
-    // }
-    // updatePlotNameStmt.bindString( 1, name );
-    // updatePlotNameStmt.bindLong( 2, sid );
-    // updatePlotNameStmt.bindLong( 3, pid );
-    // doStatement( updatePlotNameStmt, "plot name" );
-
+    if ( ! isSurveyMutable( sid, "updatePlotName" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "name", name );
     doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot name" );
@@ -3827,6 +3972,7 @@ public class DataHelper extends DataSetObservable
 
   void updatePlotMaxScrap( long sid, long pid, int maxscrap )
   {
+    if ( ! isSurveyMutable( sid, "updatePlotMaxScrap" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "maxscrap", maxscrap );
     doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot maxscrap" );
@@ -3834,14 +3980,7 @@ public class DataHelper extends DataSetObservable
 
   void updatePlotOrientation( long sid, long pid, int orient )
   {
-    // if ( updatePlotOrientationStmt == null ) {
-    //   updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
-    // }
-    // updatePlotOrientationStmt.bindLong( 1, orient );
-    // updatePlotOrientationStmt.bindLong( 2, sid );
-    // updatePlotOrientationStmt.bindLong( 3, pid );
-    // doStatement( updatePlotOrientationStmt, "plot orientation" );
-
+    if ( ! isSurveyMutable( sid, "updatePlotOrientation" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "orientation", orient );
     doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot orient" );
@@ -3849,15 +3988,7 @@ public class DataHelper extends DataSetObservable
 
   void updatePlotAzimuthClino( long sid, long pid, float b, float c )
   {
-    // if ( updatePlotAzimuthClinoStmt == null ) {
-    //   updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
-    // }
-    // updatePlotAzimuthClinoStmt.bindDouble( 1, b );
-    // updatePlotAzimuthClinoStmt.bindDouble( 2, c );
-    // updatePlotAzimuthClinoStmt.bindLong( 3, sid );
-    // updatePlotAzimuthClinoStmt.bindLong( 4, pid );
-    // return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
-
+    if ( ! isSurveyMutable( sid, "updatePlotAzimuthClino" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "azimuth", b );
     cv.put( "clino", c );
@@ -4001,6 +4132,7 @@ public class DataHelper extends DataSetObservable
   // mergeToNextLeg does not change anything if blk has both FROM and TO stations
   long mergeToNextLeg( DBlock blk, long sid )
   {
+    if ( ! isSurveyMutable( sid, "mergeToNextLeg" ) ) return -1L;
     // TDLog.v("DB Merge to next leg " + blk.mId + " < " + blk.mFrom + " - " + blk.mTo + " >" );
     long ret = -1;
     long extend = ExtendType.EXTEND_LEFT;
@@ -4709,6 +4841,10 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return the list of the survey legs with a given status
+   * @param sid     survey ID
+   * @param status  leg status
+   */
   List< DBlock > selectAllLegShots( long sid, long status )
   {
     // TDLog.v( "B4 select shots all leg");
@@ -4733,10 +4869,14 @@ public class DataHelper extends DataSetObservable
 
   // SURVEY ------------------------------------------------------------------------------
 
+  /** @return the survey info
+   * @param sid   survey ID
+   */
   SurveyInfo selectSurveyInfo( long sid )
   {
     SurveyInfo info = null;
     if ( myDB == null ) return null;
+    boolean immutable = checkSurveyInfoImmutable( sid ); // possibly make survey immutable
     Cursor cursor = myDB.query( SURVEY_TABLE,
                                new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" }, // columns
                                WHERE_ID, new String[] { Long.toString(sid) },
@@ -4750,9 +4890,10 @@ public class DataHelper extends DataSetObservable
       info.declination = (float)(cursor.getDouble( 3 ));
       info.comment = cursor.getString( 4 );
       info.initStation = cursor.getString( 5 );
-      info.xsections = (int)cursor.getLong( 6 );
-      info.datamode  = (int)cursor.getLong( 7 );
-      info.mExtend   = (int)cursor.getLong( 8 );
+      info.xsections   = (int)cursor.getLong( 6 );
+      info.datamode    = (int)cursor.getLong( 7 );
+      info.mExtend     = (int)cursor.getLong( 8 );
+      info.mImmutable  = immutable;
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
@@ -5096,6 +5237,7 @@ public class DataHelper extends DataSetObservable
   long insertPhotoRecord( long sid, long id, long item_id, String title, String date, String comment, int camera, String code, int reftype, int format )
   {
     if ( myDB == null ) return -1L;
+    // if ( ! isSurveyMutable( sid, "insertPhotoRecord" ) ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
     TDLog.v("do insert Photo: id " + id + " reftype " + reftype );
     ContentValues cv = makePhotoContentValues( sid, id, item_id, TDStatus.NORMAL, title, date, comment, camera, code, reftype, format );
@@ -5124,6 +5266,7 @@ public class DataHelper extends DataSetObservable
   boolean updatePhoto( long sid, long id, String title, String date, String comment, int camera, String geocode )
   {
     if ( myDB == null ) return false;
+    // if ( ! isSurveyMutable( sid, "updatePhoto" ) ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "title",   title );
     cv.put( "date",    date );
@@ -5150,6 +5293,7 @@ public class DataHelper extends DataSetObservable
   boolean updatePhotoCommentAndCode( long sid, long id, String comment, String geocode )
   {
     if ( myDB == null ) return false;
+    // if ( ! isSurveyMutable( sid, "updatePhotoCommentAndCode" ) ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "comment", comment );
     cv.put( "code",    geocode );
@@ -5224,6 +5368,7 @@ public class DataHelper extends DataSetObservable
   long insertSensor( long sid, long id, long itemid, String title, String date, String comment, String sensor_type, String value, int reftype )
   {
     if ( myDB == null ) return -1L;
+    // if ( ! isSurveyMutable( sid, "insertSensor" ) ) return -1L;
     if ( id == -1L ) id = maxId( SENSOR_TABLE, sid );
     ContentValues cv = makeSensorContentValues( sid, id, itemid, TDStatus.NORMAL, title, date, comment, sensor_type, value, reftype );
     if ( ! doInsert( SENSOR_TABLE, cv, "sensor insert" ) ) return -1L;
@@ -5244,6 +5389,7 @@ public class DataHelper extends DataSetObservable
    */
   void deleteSensor( long sid, long id )
   {
+    // isMutable checked in child
     if ( myDB == null ) return;
     updateStatus( SENSOR_TABLE, id, sid, TDStatus.DELETED );
   }
@@ -5256,6 +5402,7 @@ public class DataHelper extends DataSetObservable
   boolean updateSensor( long sid, long id, String comment )
   {
     if ( myDB == null ) return false;
+    // if ( ! isSurveyMutable( sid, "updateSensor" ) ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "comment", comment );
     try {
@@ -5315,6 +5462,7 @@ public class DataHelper extends DataSetObservable
    * @param old_sid  ID of the source survey
    * @param pid      plot ID
    * @note myDB is checked non-null before transfer methods are called
+   * @note surveyMutable is checked by parent
    */
   private void transferPlot( long sid, long old_sid, long pid )
   {
@@ -5362,6 +5510,8 @@ public class DataHelper extends DataSetObservable
   public long insertFixed( long sid, long id, String station, double lng, double lat, double h_ell, double h_geo,
                            String comment, long status, long source, double accur, double accur_v )
   {
+    if ( myDB == null ) return -1L;
+    // if ( ! isSurveyMutable( sid, "insertFixed" ) ) return -1L;
     return insertFixed( sid, id, station, lng, lat, h_ell, h_geo, comment, status, source, "", 0, 0, 0, 2, 0, accur, accur_v, 1, 1 );
   }
 
@@ -5401,7 +5551,6 @@ public class DataHelper extends DataSetObservable
   {
     // TDLog.v( "insert fixed id " + id + " station " + station );
     if ( id != -1L ) return id;
-    if ( myDB == null ) return -1L;
     long fid = getFixedId( sid, station );
     if ( fid != -1L ) return fid;     // check non-deleted fixeds
     dropDeletedFixed( sid, station ); // drop deleted fixed if any
@@ -5486,6 +5635,7 @@ public class DataHelper extends DataSetObservable
                    double xoffset, double yoffset, double zoom, double azimuth, double clino,
                    String hide, String nick, int orientation )
   {
+    if ( ! isSurveyMutable( sid, "insertPlot" ) ) return -1L;
     return insertPlot( sid, id, name, plot_type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, -1, 0, 0, 0 );
   }
 
@@ -5516,6 +5666,7 @@ public class DataHelper extends DataSetObservable
                    String hide, String nick, int orientation,
                    double intercept, double center_x, double center_y, double center_z )
   {
+    if ( ! isSurveyMutable( sid, "insertPlot" ) ) return -1L;
     // TDLog.v( "DB insert plot " + name + " start " + start + " azimuth " + azimuth );
     // TDLog.v( "insert plot <" + name + "> hide <" + hide + "> nick <" + nick + ">" );
     if ( myDB == null ) return -1L;
@@ -5548,6 +5699,8 @@ public class DataHelper extends DataSetObservable
    */
   boolean moveShotsBetweenSurveys( long old_sid, long old_id, long new_sid )
   {
+    if ( ! isSurveyMutable( new_sid, "moveShotsBetweenSurveys" ) ) return false;
+    if ( ! isSurveyMutable( old_sid, "moveShotsBetweenSurveys" ) ) return false;
     boolean ret = false;
     long offset = getLastShotId( new_sid ) + 1 - old_id; 
     // update shots set id=id+offset, surveyId=new_sid where surveyId=old_sid && id >= old_id;
@@ -5644,6 +5797,8 @@ public class DataHelper extends DataSetObservable
   // FIXME DBCHECK
   boolean updateFixedStation( long id, long sid, String station )
   {
+    if ( myDB == null ) return false;
+    // if ( ! isSurveyMutable( sid, "updateFixedStation" ) ) return false;
     // TDLog.v( "update fixed id " + id + " station " + station );
     boolean ret = false;
     if ( ! hasFixedStation( id, sid, station ) ) {
@@ -5658,11 +5813,14 @@ public class DataHelper extends DataSetObservable
 
   void updateFixedStatus( long id, long sid, long status )
   {
+    // isMutable checked in child
     updateStatus( FIXED_TABLE, id, sid, status );
   }
 
   void updateFixedStationComment( long id, long sid, String station, String comment )
   {
+    if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updateFixedStationComment" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "station", station );
     cv.put( "comment", comment );
@@ -5672,6 +5830,7 @@ public class DataHelper extends DataSetObservable
   void updateFixedAltitude( long id, long sid, double h_ell, double h_geo )
   {
     if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updateFixedAltitude" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "altitude",   h_ell );
     cv.put( "altimetric", h_geo );
@@ -5680,6 +5839,7 @@ public class DataHelper extends DataSetObservable
 
   void updateFixedData( long id, long sid, double lng, double lat, double h_ell ) // ,  double accur, double accur_v  )
   {
+    if ( ! isSurveyMutable( sid ) ) return;
     if ( myDB == null ) return;
     ContentValues cv = new ContentValues();
     cv.put( "longitude",  lng );
@@ -5693,6 +5853,7 @@ public class DataHelper extends DataSetObservable
   void updateFixedData( long id, long sid, double lng, double lat, double h_ell, double h_geo ) // , double accur, double accur_v )
   {
     if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updateFixedData" ) ) return;
     ContentValues cv = new ContentValues();
     cv.put( "longitude",  lng );
     cv.put( "latitude",   lat );
@@ -5713,6 +5874,7 @@ public class DataHelper extends DataSetObservable
    * @param n_dec number of decimals
    * @param conv  convergence [degree]
    * @param m_to_vunits  meters to vert. units
+   * @note allowed even is not isSurveyMutable
    */
   void updateFixedCS( long id, long sid, String cs, double lng, double lat, double h_ell, long n_dec, double conv, double m_to_units, double m_to_vunits )
   {
@@ -5878,6 +6040,27 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return true is the survey data are mutable
+   * @param sid    survey ID
+   * @param msg    debug message
+   * @note used also by DrawingWindow when saving TDR
+   */
+  boolean isSurveyMutable( long sid, String msg )
+  {
+    if ( myDB == null ) return false;
+    if ( ! TDSetting.WITH_IMMUTABLE ) return true; // FIXME_IMMUTABLE
+    Cursor cursor = myDB.query( SURVEY_TABLE, new String[]{ "immutable" }, "id=?", new String[]{ Long.toString( sid ) }, null, null, null );
+    boolean ret = true;
+    if (cursor.moveToFirst()) {
+      ret = ( cursor.getLong( 0 ) == 0 );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    if ( ! ret ) TDLog.e("IMMUTABLE SURVEY " + msg);
+    return ret;
+  }    
+
+  boolean isSurveyMutable( long sid ) { return isSurveyMutable( sid, null ); }
+
 // -------------------------------------------------------------------------------
 // SKETCH_3D
 /* FIXME_SKETCH_3D *
@@ -5915,6 +6098,7 @@ public class DataHelper extends DataSetObservable
   
   void deleteSketch( long sketch_id, long sid )
   {
+    // isMutable checked in child
     if ( myDB == null ) return;
     updateStatus( SKETCH_TABLE, sketch_id, sid, TDStatus.DELETED );
     // if ( deleteSketchStmt == null )
@@ -6133,14 +6317,14 @@ public class DataHelper extends DataSetObservable
        FileWriter fw = TDFile.getFileWriter( filename ); // DistoX-SAF
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend", "created", "immutable" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          // TDLog.v("dump SURVEY");
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d, %ld %d );\n",
                      SURVEY_TABLE,
                      sid,
                      TDString.escape( cursor.getString(0) ),
@@ -6151,7 +6335,9 @@ public class DataHelper extends DataSetObservable
                      TDString.escape( cursor.getString(5) ),     // init_station
                      (int)cursor.getLong(6),  // xstation
                      (int)cursor.getLong(7),  // datamode
-                     (int)cursor.getLong(8)   // extend
+                     (int)cursor.getLong(8),  // extend
+                     cursor.getLong(9),       // created
+                     (int)cursor.getLong(10)  // immutable
            );
          } while (cursor.moveToNext());
        }
@@ -6470,14 +6656,22 @@ public class DataHelper extends DataSetObservable
                                            : SurveyInfo.DATAMODE_NORMAL;
 	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
                                             : SurveyInfo.SURVEY_EXTEND_NORMAL;
+         long created = TDUtil.getTimeStamp();
+         if ( db_version > 55) {
+           created = scanline0.longValue( created );
+           long temp = scanline0.longValue( 0 ); // immutable is discarded
+         }
+         boolean immutable = TDSetting.WITH_IMMUTABLE; // imported surveys are always immutable FIXME_IMMUTABLE
 
          sid = setSurvey( name, datamode );
 
          try {
            myDB.beginTransaction();
            // success &= updateSurveyInfo( sid, date, team, decl, comment, init_station, xsections, false );
-           ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+           ContentValues cv = makeSurveyInfoContentValues( date, team, decl, comment, init_station, xsections );
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
+           makeSurveyInfoMutableValues( sid, created, immutable );
+           // myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
            // TDLog.v( "DB updateSurveyInfo: " + success );
 
            cv = makeSurveyExtend( extend_ref );
@@ -6765,6 +6959,7 @@ public class DataHelper extends DataSetObservable
   public boolean insertStation( long sid, String name, String comment, long flag, String presentation, String code )
   {
     if ( myDB == null ) return false;
+    // if ( ! isSurveyMutable( sid, "insertStation" ) ) return false;
     boolean ret = false;
     if ( comment == null ) comment = TDString.EMPTY;
     Cursor cursor = myDB.query( STATION_TABLE, mStationFields,
@@ -6815,8 +7010,9 @@ public class DataHelper extends DataSetObservable
    */
   void updateStationGeocode( long sid, String name, String geocode )
   {
-    if ( TDString.isNullOrEmpty( name ) ) return;
     if ( myDB == null ) return;
+    // if ( ! isSurveyMutable( sid, "updateStationGeocode" ) ) return;
+    if ( TDString.isNullOrEmpty( name ) ) return;
     ContentValues cv = new ContentValues();
     // cv.put("comment", comment );
     // cv.put("flag", flag );
@@ -6878,6 +7074,8 @@ public class DataHelper extends DataSetObservable
    */
   void deleteStation( long sid, String name )
   {
+    if ( myDB == null ) return; 
+    // if ( ! isSurveyMutable( sid, "deleteStation" ) ) return;
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "DELETE FROM stations WHERE surveyId=%d AND name=\"%s\"", sid, name );
@@ -6983,6 +7181,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return null;
     Cursor cursor = myDB.query( SURVEY_TABLE,
                                new String[] { "id", "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" }, // columns
+                               // no need to get "created" and "immutable"
                                WHERE_NAME, new String[] { name },
                                null, null, "name" );
     if (cursor.moveToFirst()) {
@@ -6994,11 +7193,13 @@ public class DataHelper extends DataSetObservable
       info.declination = (float)(cursor.getDouble( 4 ));
       info.comment = cursor.getString( 5 );
       info.initStation = cursor.getString( 6 );
-      info.xsections = (int)cursor.getLong( 7 );
-      info.datamode  = (int)cursor.getLong( 8 );
-      info.mExtend   = (int)cursor.getLong( 9 );
+      info.xsections   = (int)cursor.getLong( 7 );
+      info.datamode    = (int)cursor.getLong( 8 );
+      info.mExtend     = (int)cursor.getLong( 9 );
+      // info.mImmutable  = ( cursor.getLong( 10 ) == 1 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    info.mImmutable = checkSurveyInfoImmutable( info.id );
     return info;
   }
 
@@ -7062,10 +7263,10 @@ public class DataHelper extends DataSetObservable
    * @param sid   survey ID
    * @param id    record ID
    * @param table table name
+   * @note called by deleteAudioRecord and deletePhotoRecord
    */
   private void deleteFromTable( long sid, long id, String table )
   {
-    if ( myDB == null ) return;
     try {
       myDB.beginTransaction();
       myDB.execSQL( "DELETE FROM " + table + " WHERE surveyId=" + sid + " AND id=" + id );
@@ -7161,14 +7362,16 @@ public class DataHelper extends DataSetObservable
               create_table + SURVEY_TABLE 
             + " ( id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
             +   " name TEXT, "
-            +   " day TEXT, "
+            +   " day TEXT, "           // yyyy.mm.dd
             +   " team TEXT, "
             +   " comment TEXT, "
             +   " declination REAL, "
             +   " init_station TEXT, "  // initial station
             +   " xsections INTEGER, "  // whether xsections are shared or private
             +   " datamode INTEGER, "   // datamode: normal or diving
-            +   " extend INTEGER "      // ???
+            +   " extend INTEGER, "     // survey "extend reference"
+            +   " created INTEGER default 0, " // survey creation timestamp
+            +   " immutable INTEGER default 0" // whether survey data are immutable (1) or mutable (0)
             +   ")"
           );
 
@@ -7528,6 +7731,13 @@ public class DataHelper extends DataSetObservable
                db.execSQL( "ALTER TABLE photos ADD COLUMN format INTEGER default 0" );
              }
            case 56:
+             if ( !columnExists( db, "surveys", "created" ) ) {
+               db.execSQL( "ALTER TABLE surveys ADD COLUMN created INTEGER default 0" );
+             }
+             if ( !columnExists( db, "surveys", "immutable" ) ) {
+               db.execSQL( "ALTER TABLE surveys ADD COLUMN immutable INTEGER default 0" );
+             }
+           case 57:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

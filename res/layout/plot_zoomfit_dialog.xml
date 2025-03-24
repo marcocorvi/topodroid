@@ -68,7 +68,7 @@
       style="@style/button_default"
       android:text="@string/button_clear"
       />
-    <Button android:id="@+id/button_station"
+    <Button android:id="@+id/button_center_station"
       style="@style/button_default"
       android:text="@string/button_station"
       />

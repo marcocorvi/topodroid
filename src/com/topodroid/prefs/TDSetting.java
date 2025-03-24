@@ -71,6 +71,8 @@ public class TDSetting
   public static final int DASHING_AZIMUTH = 2;
   public static final int DASHING_VIEW    = 3;
 
+  public static final boolean WITH_IMMUTABLE = false;
+
   private static String defaultTextSize   = "16";
   private static String defaultButtonSize = TDString.THREE;
 

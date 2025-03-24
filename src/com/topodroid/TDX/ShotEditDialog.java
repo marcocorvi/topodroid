@@ -840,6 +840,10 @@ class ShotEditDialog extends MyDialog
     MyKeyboard.close( mKeyboard );
 
     Button b = (Button) v;
+    if ( b == mButtonBack ) {
+      CutNPaste.dismissPopup();
+      dismiss();
+    }
 
     if ( b == mRBleft ) {
       mRBvert.setChecked( false );
@@ -853,8 +857,46 @@ class ShotEditDialog extends MyDialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
       // shot_extend = mRBright.isChecked() ? ExtendType.EXTEND_RIGHT : ExtendType.EXTEND_IGNORE;
+    }
+    if ( b == mButtonPrev ) {
+      mCBallSplay.setVisibility( View.GONE );
+      setCBxSplay( -1 );
+      // shift:
+      //               prev -- blk -- next
+      // prevOfPrev -- prev -- blk
+      //
+      // saveDBlock();
+      if ( mPrevBlk != null ) {
+        DBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
+        // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
+        loadDBlock( mPrevBlk, prevBlock, mBlk );
+        // updateView();
+      // } else {
+        // TDLog.v( "PREV is null" );
+      }
+    } else if ( b == mButtonNext ) {
+      mCBallSplay.setVisibility( View.GONE );
+      setCBxSplay( -1 );
+      // shift:
+      //        prev -- blk -- next
+      //                blk -- next -- nextOfNext
+      // saveDBlock();
+      if ( mNextBlk != null ) {
+        DBlock next = mParent.getNextLegShot( mNextBlk, true );
+        // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
+        loadDBlock( mNextBlk, mBlk, next );
+        // updateView();
+      // } else {
+        // TDLog.v( "NEXT is null" );
+      }
+    }
 
-    } else if ( b == mCBlegPrev ) {
+    if ( ! TDInstance.isSurveyMutable ) { // IMMUTABLE
+      TDToast.makeWarn("Immutable survey");
+      return;
+    }
+
+    if ( b == mCBlegPrev ) {
       // TDLog.v( "CB leg clicked ");
       if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
@@ -908,9 +950,6 @@ class ShotEditDialog extends MyDialog
         mRBcmtd.setState( false ); // FIXME_COMMENTED
       }
 
-    } else if ( b == mButtonBack ) {
-      CutNPaste.dismissPopup();
-      dismiss();
     } else if ( b == mButtonMore ) {
       CutNPaste.dismissPopup();
       // dismiss();
@@ -935,38 +974,6 @@ class ShotEditDialog extends MyDialog
     } else if ( b == mButtonSave ) {
       if ( ! saveDBlock() ) {
         TDToast.makeWarn( R.string.shot_not_saved );
-      }
-    } else if ( b == mButtonPrev ) {
-      mCBallSplay.setVisibility( View.GONE );
-      setCBxSplay( -1 );
-      // shift:
-      //               prev -- blk -- next
-      // prevOfPrev -- prev -- blk
-      //
-      // saveDBlock();
-      if ( mPrevBlk != null ) {
-        DBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
-        // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
-        loadDBlock( mPrevBlk, prevBlock, mBlk );
-        // updateView();
-      // } else {
-        // TDLog.v( "PREV is null" );
-      }
-
-    } else if ( b == mButtonNext ) {
-      mCBallSplay.setVisibility( View.GONE );
-      setCBxSplay( -1 );
-      // shift:
-      //        prev -- blk -- next
-      //                blk -- next -- nextOfNext
-      // saveDBlock();
-      if ( mNextBlk != null ) {
-        DBlock next = mParent.getNextLegShot( mNextBlk, true );
-        // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
-        loadDBlock( mNextBlk, mBlk, next );
-        // updateView();
-      // } else {
-        // TDLog.v( "NEXT is null" );
       }
 
     } else if ( b == mButtonReverse ) {

@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -78,6 +79,10 @@ class DialogAnnotations extends MyDialog // Activity
   private void save( )
   {
     // TDLog.Log( TDLog.LOG_IO, "annotations save to file " + mFilename );
+    if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
+      TDToast.makeWarn("Immutable survey");
+      return;
+    }
     try {
       TDPath.checkPath( mFilename );
       FileWriter fw = TDFile.getFileWriter( mFilename, false );

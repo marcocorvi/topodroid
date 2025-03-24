@@ -353,6 +353,9 @@ public class SurveyWindow extends Activity
   {
     setTitle( // mApp.getConnectionStateTitleStr() + // IF_COSURVEY
               getResources().getString( R.string.title_survey ) );
+    if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) { // IMMUTABLE
+      mActivity.setTitleColor( 0xffff3333 );
+    }
   }
 
   /** lifecycle: on resume
@@ -402,6 +405,10 @@ public class SurveyWindow extends Activity
       return;
     }
     if ( view instanceof EditText ) {
+      if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
+        TDToast.makeWarn("Immutable survey");
+        return;
+      } 
       ArrayList< String > names = new ArrayList< String >();
       CharSequence chars = mEditTeam.getText();
       if ( chars != null ) {
@@ -426,6 +433,10 @@ public class SurveyWindow extends Activity
         }
         return;
       } else if ( b == mEditDate ) {
+        if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
+          TDToast.makeWarn("Immutable survey");
+          return;
+        } 
         String date = mEditDate.getText().toString();
         int y = TDUtil.dateParseYear( date );
         int m = TDUtil.dateParseMonth( date );

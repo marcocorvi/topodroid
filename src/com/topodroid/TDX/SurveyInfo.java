@@ -42,7 +42,7 @@ public class SurveyInfo
   int xsections;       // 0: shared, 1: private
   int datamode;        // normal or diving
   int mExtend;         // survey extend
-  boolean mImported = false; // whether the survey has been imported
+  boolean mImmutable = false; // whether the survey has been imported
 
   SurveyInfo copy() 
   {
@@ -57,7 +57,7 @@ public class SurveyInfo
     ret.xsections   = xsections;
     ret.datamode    = datamode;
     ret.mExtend     = mExtend;
-    ret.mImported   = mImported;
+    ret.mImmutable  = mImmutable;
     return ret;
   }
 
@@ -67,7 +67,9 @@ public class SurveyInfo
 
   // boolean isSectionPrivate() { return xsection == 1; }
 
-  // boolean isImported() { return mImported; }
+  /** @return true if the survey is immutable
+   */
+  boolean isImmutable() { return mImmutable; }
 
   /** @return true if the specified extend if LEFT ( ie, less than -999 )
    * @param extend  the specified extend
