@@ -1468,7 +1468,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_backsight_splay_summary">Comprobación de orientación hacia atrás con primera toma lateral</string>
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
-  <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
+  <string name="pref_triple_shot_title">Sonido de la toma de una visual</string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>
   <string name="pref_connect_feedback_summary">Avisos sobre la conexión del dispositivo</string>
@@ -1685,8 +1685,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string -->
 	  
-  <string name="pref_azimuth_manual_title">"extender" manual</string>
-  <string name="pref_azimuth_manual_summary">Establecer "extender" las líneas manualmente</string>
+  <string name="pref_azimuth_manual_title">Despleagdo manual</string>
+  <string name="pref_azimuth_manual_summary">Establecer desplegar las líneas manualmente</string>
 
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de topógrafos por defecto</string>
