@@ -406,10 +406,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="painted">Dibujado</string>
 
     <!-- UNUSED string name="cbd_title">Directorio principal</string -->
-    <string name="cwd">Directorio de proyectos TopoDroid</string>
-    <string name="empty_cwd">Nombre del proyecto vacío</string>
+    <string name="cwd">Directorio TopoDroid de la topografía</string>
+    <string name="empty_cwd">Nombre de la topografía vacío</string>
     <!-- UNUSED string name="bad_cbd">Directorio base inexistente o no editable</string -->
-    <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
+    <string name="bad_cwd">El nombre de la topografía no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
     <string name="index_oob">Índice fuera de los límites %1$d</string>
@@ -669,8 +669,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string -->
     <string name="survey_no_data_reduction">ATENCIÓN: datos sin procesar</string>
     <string name="survey_not_saved">ATENCIÓN: información de la topografía no guardada</string>
-    <string name="survey_bad_siblings">ATENCIÓN: proyecto repetido incoherente %1$s</string>
-    <string name="survey_bad_magnetic">ATENCIÓN: proyecto poco preciso</string>
+    <string name="survey_bad_siblings">ATENCIÓN: Topografía duplicada %1$s</string>
+    <string name="survey_bad_magnetic">ATENCIÓN: Topografía poco precisa</string>
     <string name="saturated_coeffs">ATENCIÓN: coeficientes de calibración saturados</string>
     <string name="out_of_memory">ATENCIÓN: sin memoria!</string>
     <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
@@ -1168,7 +1168,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_write">Enviar calibración a DistoX</string>
     <string name="help_splays">Tomas como líneas o puntos</string>
 
-    <string name="help_add_project">Agregar proyecto</string>
+    <string name="help_add_project">Agregar topografía</string>
     <string name="help_add_surveys">Agregar relieve</string>
     <string name="help_drop_surveys">Eliminar relieve</string>
     <string name="help_view_surveys">Mostra relieve</string>
@@ -1545,7 +1545,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_csv_eol_title">CSV conocido</string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
   <string name="pref_gpx_single_track_title">GPX de tramo única</string>
-  <string name="pref_gpx_single_track_summary">Topografía de proyectos en un solo track</string>
+  <string name="pref_gpx_single_track_summary">Proyecto de topografía en un solo track</string>
   <string name="pref_zip_share_category_title">Categoría de zip-share</string>
   <string name="pref_zip_share_category_summary">Agregar categoría a la solicitud de zip-share</string>
   
@@ -2047,7 +2047,7 @@ debe ajustarlos a sus necesidades./n/n </string>
    <string name="firmware_uploaded">%1$s firmware: subido %2$d</string>
    <string name="firmware_downloaded">%1$s firmware: descargado %2$d</string>
 
-    <string name="project">Proyecto %1$s</string>
+    <string name="project">Topografía %1$s</string>
     <string name="no_editor">Editor no encontrado</string>
     <string name="no_file">Archivo no encontrado</string>
     <string name="no_path">Ruta del archivo no encontrada</string>
@@ -2074,13 +2074,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="overwrite">Sobrescribir</string -->
 
     <string name="title_export_settings">Ajustes de importación/exportación</string>
-    <string name="title_export">Exportar proyecto como &#8230;</string>
+    <string name="title_export">Exportar topografía como &#8230;</string>
     <string name="title_equates">Enlaces</string>
     <string name="title_equate_new">Agregar enlace &#8230;</string>
     <string name="title_equate_with">Enlace %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Carpeta de trabajo actual</string -->
     <string name="title_drop">¿Eliminar relieves? </string>
-    <string name="title_tdconfig">Ingrese el nombre del proyecto</string>
+    <string name="title_tdconfig">Escribir nombre de la Topografía</string>
     <string name="title_surveys">Relieves</string>
 
     <string name="exported">Archivo guardado %1$s</string>
