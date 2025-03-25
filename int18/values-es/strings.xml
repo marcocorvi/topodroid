@@ -859,7 +859,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_on"        >on</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
-    <string name="button_recover"   >Recupera</string>
+    <string name="button_recover"   >Recuperar</string>
     <string name="button_reverse"   >Inversi</string>
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
