@@ -225,7 +225,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
     <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
-    <!-- CHANGED string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string -->
     <string name="strike_dip">Dip dirección %1$.0f inclinación %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
@@ -1867,6 +1866,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
   <string name="pref_diving_mode_title">Modo de buceo</string>
   <string name="pref_diving_mode_summary">Habilitar el modo de buceo</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">clases de tomas secundarias</string>
   <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>  
   <string name="pref_splay_color_title">Colores de tomas secundarias</string>

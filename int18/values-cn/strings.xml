@@ -1861,6 +1861,8 @@
   <string name="pref_LRExtend_summary">评估左右输出 (Compass/VisualTopo输入)</string>
   <string name="pref_diving_mode_title">洞潜模式</string>
   <string name="pref_diving_mode_summary">启用洞潜模式</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">副线等级</string>
   <string name="pref_splay_classes_summary">启用副线等级</string>
   <string name="pref_splay_color_title">副线着色</string>

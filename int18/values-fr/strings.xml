@@ -1849,6 +1849,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_LRExtend_summary">Estimer les extensions gauche/droite (Compass/VisualTopo import)</string>
     <string name="pref_diving_mode_title">Mode plongée</string>
     <string name="pref_diving_mode_summary">Activer le mode plongée</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
     <string name="pref_splay_classes_title">Visées lat. d\'habillage : catégories</string>
     <string name="pref_splay_classes_summary">Activer les différentes catégories de visées latérales d\'habillage</string>
     <string name="pref_splay_color_title">Couleurs visées lat. d\'habillage</string>

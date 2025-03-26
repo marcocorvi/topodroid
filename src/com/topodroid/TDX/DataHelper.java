@@ -71,6 +71,7 @@ public class DataHelper extends DataSetObservable
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
   private static final String AUDIO_TABLE  = "audios";
+  private static final String ORIGINALS    = "originals";
 
   private final static String WHERE_ID          = "id=?";
   private final static String WHERE_SID         = "surveyId=?";
@@ -1492,7 +1493,98 @@ public class DataHelper extends DataSetObservable
   //   clearStationsStmt.bindLong( 2, sid );
   //   try { clearStationsStmt.execute(); } catch (SQLiteException e ) { logError("clear station after", e); }
   // }
+ 
+  /** drop a survey originals
+   * @param sid   survey ID
+   */
+  void dropOriginals( long sid )
+  {
+    try {
+      myDB.beginTransaction();
+      myDB.execSQL( "DELETE FROM originals WHERE surveyId=" + sid );
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("delete originals", e);
+    } catch ( IllegalStateException e2 ) { logError("delete originals", e2 );
+    } finally { myDB.endTransaction(); }
+  }
 
+  /** drop a single original
+   * @param sid   survey ID
+   * @param id    shot ID
+   */
+  void dropOriginal( long sid, long id )
+  {
+    try {
+      myDB.beginTransaction();
+      myDB.execSQL( "DELETE FROM originals WHERE surveyId=" + sid + " AND shotId=" + id );
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("delete original", e);
+    } catch ( IllegalStateException e2 ) { logError("delete original", e2 );
+    } finally { myDB.endTransaction(); }
+  }
+
+  /** save original normal mode data
+   * @param sid  survey ID
+   * @param blk  shot
+   */
+  void saveShotDistanceBearingClino( long sid, DBlock blk )
+  {
+    saveShotOriginals( sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 0 );
+  }
+
+  /** save original diving mode data
+   * @param sid  survey ID
+   * @param blk  shot
+   */
+  void saveShotDepthBearingDistance( long sid, DBlock blk )
+  {
+    saveShotOriginals( sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 1 );
+  }
+
+  /** save original diving mode data
+   * @param sid  survey ID
+   * @param id   shot ID
+   * @param flag shot flag
+   * @param d    shot distance
+   * @param b    shot bearing
+   * @param c    shot clino
+   * @param p    shot depth
+   * @param mode shot datamode
+   */
+  private void saveShotOriginals( long sid, long id, long flag, float d, float b, float c, float p, int mode )
+  {
+    TDLog.v("DB save originals " + sid + "/" + id + " flag " + flag );
+    try {
+      myDB.beginTransaction();
+      myDB.execSQL( "UPDATE shots SET flag=" + flag + " WHERE surveyId=" + sid + " AND id=" + id );
+      Cursor cursor = myDB.rawQuery( qCountOriginals, new String[] { Long.toString(sid), Long.toString(id) } );
+      long ret = 0;
+      if ( cursor.moveToFirst() ) { 
+        ret = cursor.getLong(0);
+        TDLog.v("DB count " + ret );
+      }
+      if ( ! cursor.isClosed() ) cursor.close();
+      if ( ret == 0 ) {
+        TDLog.v("DB insert original " + d + " " + b + " " + c + " " + p );
+        ContentValues cv = new ContentValues();
+        cv.put( "surveyId", sid );
+        cv.put( "shotId",   id );
+        cv.put( "length",   d );
+        cv.put( "bearing",  b );
+        cv.put( "clino",    c );
+        cv.put( "depth",    p );
+        cv.put( "datamode", mode );
+        myDB.insert( ORIGINALS, null, cv ); 
+      }
+      myDB.setTransactionSuccessful();
+      TDLog.v("DB saveShotOriginals OK");
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError("save originals", e1 ); 
+    } catch ( IllegalStateException e2 ) { logError("save originals", e2 );
+    } finally { myDB.endTransaction(); }
+  }
 
   // this is an update of a manual-shot data
   void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c )
@@ -2824,6 +2916,7 @@ public class DataHelper extends DataSetObservable
   private static final String qjPhoto       = "select id, shotId from photos where surveyId=? and id=? and reftype=?";
 
   private static final String qjCountPhoto  = "select count() from photos where surveyId=? and status=?";
+  private static final String qCountOriginals  = "select count() from originals where surveyId=? and shotId=?";
 
   // used in selectAllPhotosShot
   private static final String qjPhotosShot  =
@@ -7550,6 +7643,18 @@ public class DataHelper extends DataSetObservable
             +   ")"
           );
 
+          db.execSQL( 
+              create_table + ORIGINALS
+            + " ( surveyId INTEGER, "
+            +   " shotId INTEGER, " // shot ID 
+            +   " length REAL, "
+            +   " bearing REAL, "
+            +   " clino REAL, "
+            +   " depth REAL, "
+            +   " datamode INTEGER default 0 " //  datamode 0: normal 1: diving
+            +   ")"
+          );
+
           // db.execSQL(
           //     " CREATE TRIGGER fk_insert_shot BEFORE "
           //   + " INSERT on " + SHOT_TABLE 
@@ -7738,6 +7843,8 @@ public class DataHelper extends DataSetObservable
                db.execSQL( "ALTER TABLE surveys ADD COLUMN immutable INTEGER default 0" );
              }
            case 57:
+             db.execSQL( "CREATE TABLE originals ( surveyId INTEGER, shotId INTEGER, distance REAL, bearing REAL, clino REAL, depth REAL, datamode INTEGER default 0)" );
+           case 58:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

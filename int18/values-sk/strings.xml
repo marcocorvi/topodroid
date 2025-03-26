@@ -1877,6 +1877,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_LRExtend_summary">Odhadnúť Smerovú orientáciu vľavo/vpravo (len pre import Compass VisualTopo)</string>
   <string name="pref_diving_mode_title">Potápačský mód</string>
   <string name="pref_diving_mode_summary">Povolí potápačský mód</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Triedy pomocných zámer</string>
   <string name="pref_splay_classes_summary">Povolí zaradenie pomocných zámer do tried</string>
   <string name="pref_splay_color_title">Označovanie pomocných zámer</string>

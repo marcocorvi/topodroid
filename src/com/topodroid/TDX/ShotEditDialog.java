@@ -117,7 +117,8 @@ class ShotEditDialog extends MyDialog
   private String shot_distance;  // distance - depth
   private String shot_bearing;   // bearing
   private String shot_clino;     // clino    - distance
-  private boolean shot_manual;
+  // private boolean shot_manual;
+  private boolean editable;      // whether the shot data are editable
   private float shot_stretch; // FIXME_STRETCH
 
   private String shot_extra;
@@ -247,9 +248,9 @@ class ShotEditDialog extends MyDialog
       shot_bearing  = blk.bearingString();
       shot_clino    = blk.clinoString();
     }
-    shot_manual   = blk.isManual();
-
-    // TDLog.v( "shot is manual " + shot_manual + " length " + shot_distance );
+    // shot_manual = blk.isManual();
+    editable    = blk.isManual() || TDSetting.mEditableShots;
+    TDLog.v( "shot " + blk.mId + " is editable " + editable + " length " + shot_distance );
 
     // shot_extra   = blk.extraString( mParent.mSurveyAccuracy );
     shot_extra   = mParent.getBlockExtraString( blk );
@@ -333,13 +334,13 @@ class ShotEditDialog extends MyDialog
 
     // do at the very end
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
-      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDepth );
-      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
-      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagDistance );
+      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, editable, flagDepth );
+      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  editable, flagBearing );
+      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    editable, flagDistance );
     } else {
-      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDistance );
-      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
-      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagClino );
+      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, editable, flagDistance );
+      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  editable, flagBearing );
+      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    editable, flagClino );
     }
 
     updateLayoutLRUD();
@@ -790,7 +791,7 @@ class ShotEditDialog extends MyDialog
     }
     // mParent.scrollTo( mPos );
 
-    if ( shot_manual ) {
+    if ( editable ) {
       try {
 	if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
           float p = Float.parseFloat( mETdistance.getText().toString() ) / TDSetting.mUnitLength;

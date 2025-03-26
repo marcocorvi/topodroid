@@ -1857,6 +1857,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_LRExtend_summary">Оцени разширението ляво/дясно (Compass/VisualTopo import)</string>
   <string name="pref_diving_mode_title">Подводен режим</string>
   <string name="pref_diving_mode_summary">Активирай подводен режим</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Класове странични измервания</string>
   <string name="pref_splay_classes_summary">Активирай класове на странични измервания</string>
   <string name="pref_splay_color_title">Оцветяване на странични измервания</string>

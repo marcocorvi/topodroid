@@ -91,6 +91,7 @@ public class DBlock
   static final long FLAG_NO_PROFILE = 16;
   static final long FLAG_NONE       = 24; // 16 | 8
   // static final long FLAG_BACKSHOT   = 32;
+  static final long FLAG_TAMPERED   = 64;
 
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
@@ -121,6 +122,7 @@ public class DBlock
   public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public boolean isNone()      { return (mFlag & FLAG_NONE)       == FLAG_NONE; }
   // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
+  public boolean isTampered()  { return (mFlag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
   public static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
@@ -130,6 +132,10 @@ public class DBlock
   public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public static boolean isNone(long flag)      { return (flag & FLAG_NONE)       == FLAG_NONE; }
   // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
+  public static boolean isTampered(long flag)  { return (flag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
+
+  public void setTempered() { mFlag |= FLAG_TAMPERED; }
+  public void clearTempered() { mFlag &= ~FLAG_TAMPERED; }
 
   public boolean failBacksplay()  { return mFailBacksplay; }
 
@@ -383,7 +389,7 @@ public class DBlock
    */
   int getColorByType() { 
     // TDLog.v( "Block " + mId + " color() block type " + mBlockType );
-    return colors[ mBlockType ];
+    return isTampered()? /* colors[ mBlockType ] | */ 0xffff0000 : colors[ mBlockType ];
   }
 
   // ---------------------------------------------------------------

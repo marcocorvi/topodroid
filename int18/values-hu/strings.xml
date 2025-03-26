@@ -1866,6 +1866,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_LRExtend_summary">Bal/Jobb irányú kiterjedés becslése (Compass/VisualTopo import</string>
   <string name="pref_diving_mode_title">Búvár mód</string>
   <string name="pref_diving_mode_summary">Búvár mód engedélyezése</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Segédmérés osztályozása</string>
   <string name="pref_splay_classes_summary">Segédmérés osztályozás engedélyezése</string>
   <string name="pref_splay_color_title">Segédmérés szinezés</string>
