@@ -439,7 +439,11 @@ public class ShotWindow extends Activity
       sb.append( String.format( getResources().getString( R.string.select_size ), mDataAdapter.getMultiSelectSize() ) );
     }
 
-    setTitleColor( StationPolicy.mTitleColor );
+    if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) { // IMMUTABLE
+      mActivity.setTitleColor( 0xffff3333 );
+    } else {
+      setTitleColor( StationPolicy.mTitleColor );
+    }
     mActivity.setTitle( sb.toString() );
   }
 
@@ -691,6 +695,11 @@ public class ShotWindow extends Activity
   public void itemClick( View view, int pos )
   {
     if ( mDataAdapter.isMultiSelect() ) {
+      if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
+        TDToast.makeWarn("Immutable survey");
+        clearMultiSelect();
+        return;
+      }
       multiSelect( pos, false );
       return;
     }
@@ -733,9 +742,14 @@ public class ShotWindow extends Activity
   /** implement a user long-tap of a shot data item: start a multiselection
    * @param view     tapped view
    * @param pos      item position
+   * @return true if entered multiselection
    */
   public boolean itemLongClick( View view, int pos )
   {
+    if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
+      // TDToast.makeWarn("Immutable survey");
+      return false;
+    }
     DBlock blk = mDataAdapter.get(pos);
     if ( blk == null ) return false;
     // onBlockLongClick( blk );
@@ -1427,11 +1441,16 @@ public class ShotWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    TDLog.v( "Shot Activity on Resume " );
+    TDLog.v( "Shot Activity on Resume SID " + TDInstance.sid );
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
     // TDLog.v( TAG + "on Resume()" );
     
+    if ( TDSetting.WITH_IMMUTABLE ) {
+      // if ( mApp_mData != null ) 
+      mApp_mData.checkSurveyInfoImmutable( TDInstance.sid ); 
+    }
+
     restoreInstanceFromData();
     updateDisplay( );
     TDFeedback.reset();
@@ -1567,6 +1586,10 @@ public class ShotWindow extends Activity
     } else {
       mDataAdapter.clearSearch();
       if ( ! TDInstance.isDivingMode() && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DEVICE or SECOND-DEVICE
+        if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
+          TDToast.makeWarn("Immutable survey");
+          return true;
+        }
         if ( TDInstance.isDeviceDistoX() ) {
           if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
             if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
@@ -1598,6 +1621,10 @@ public class ShotWindow extends Activity
         }
         ret = true;
       } else if ( isButton1( b, BTN_MANUAL ) ) {
+        if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
+          TDToast.makeWarn("Immutable survey");
+          return true;
+        }
         new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
         ret = true;
       }
@@ -1637,6 +1664,10 @@ public class ShotWindow extends Activity
       if ( ! TDInstance.isDivingMode() ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
           // TDLog.v( TAG + "pressed download button");
+          if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
+            TDToast.makeWarn("Immutable survey");
+            return;
+          }
           if ( TDInstance.getDeviceA() != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == ConnectionState.CONN_DISCONNECTED ) {
@@ -1675,6 +1706,10 @@ public class ShotWindow extends Activity
         }
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
+        if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
+          TDToast.makeWarn("Immutable survey");
+          return;
+        }
         if ( TDLevel.overBasic ) {
           // mSearch = null; // invalidate search
           DBlock last_blk = mApp_mData.selectLastShotWithFromStation( TDInstance.sid );
@@ -2048,6 +2083,12 @@ public class ShotWindow extends Activity
   void updateShotDistanceBearingClino( float d, float b, float c, DBlock blk )
   {
     // TDLog.v( TAG + "update shot DBC length " + d );
+    if ( ! blk.isManual() ) {
+      TDLog.v( "update shot DBC length " + d + " tampered ");
+      blk.setTempered();
+      // mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, 0 ); // 0: mode normal
+      mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk );
+    }
     mApp_mData.updateShotDistanceBearingClino( blk.mId, TDInstance.sid, d, b, c );
     checkSiblings( blk, blk.mFrom, blk.mTo, d, b, c );
     blk.mLength  = d;
@@ -2066,6 +2107,11 @@ public class ShotWindow extends Activity
   void updateShotDepthBearingDistance( float p, float b, float d, DBlock blk )
   {
     // TDLog.v( TAG + "update shot DBC length " + d );
+    if ( ! blk.isManual() ) {
+      blk.setTempered();
+      // mApp_mData.saveShotDepthBearingDistance( TDInstance.sid, blk.mId, blk.mFlag, blk.mDepth, blk.mBearing, blk.mLength, 1 ); // 1: mode diving
+      mApp_mData.saveShotDepthBearingDistance( TDInstance.sid, blk );
+    }
     mApp_mData.updateShotDepthBearingDistance( blk.mId, TDInstance.sid, p, b, d );
     checkSiblings( blk, blk.mFrom, blk.mTo, d, b, p );
     blk.mLength  = d;

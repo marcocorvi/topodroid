@@ -1860,6 +1860,7 @@ class TDPrefKey
 
   static String[] GEEKSHOT = {
     "DISTOX_DIVING_MODE",     // enable diving mode
+    "DISTOX_TAMPERING",       // enable DistoX shot editing
     "DISTOX_BACKSIGHT_SPLAY", // whether first splay is backsight check
     "DISTOX_RECENT_SHOT",     // highlight recent shots
     "DISTOX_RECENT_TIMEOUT",  // recent block timeout
@@ -1884,6 +1885,7 @@ class TDPrefKey
 
   static int[] GEEKSHOTtitle = {
     R.string.pref_diving_mode_title,
+    R.string.pref_shot_tampering_title,
     R.string.pref_backsight_splay_title,
     R.string.pref_recent_shot_title,
     R.string.pref_recent_timeout_title,
@@ -1908,6 +1910,7 @@ class TDPrefKey
 
   static int[] GEEKSHOTdesc = {
     R.string.pref_diving_mode_summary,
+    R.string.pref_shot_tampering_summary,
     R.string.pref_backsight_splay_summary,
     R.string.pref_recent_shot_summary,
     R.string.pref_recent_timeout_summary,
@@ -1933,6 +1936,7 @@ class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    FALSE,
     "30",
     FALSE,
     FALSE,
@@ -1954,6 +1958,7 @@ class TDPrefKey
   };
   static int[] GEEKSHOTlvl = {
     T,
+    B,
     T,
     T,
     T,

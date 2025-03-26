@@ -497,6 +497,7 @@
     <!-- UNUSED string name="menu_updates">检测更新</string -->
     <string name="menu_validate">验证</string>
     <string name="menu_zoom_fit">缩放适合</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">方格纸</string>
@@ -1102,6 +1103,7 @@
     <string name="help_plot_delete">删除草图</string>
     <string name="help_plot_rename">重命名/删除 草图</string>
     <string name="help_plot_scrap">草图层</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">切换草图</string>
     <string name="help_search">查找测点</string>
     <string name="help_stats">测量项目统计</string>
@@ -1249,6 +1251,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
     <string name="title_search">站点/主线 查找</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">校准数据搜索</string>
     <string name="title_dangling">独立测线</string>
@@ -1858,6 +1861,8 @@
   <string name="pref_LRExtend_summary">评估左右输出 (Compass/VisualTopo输入)</string>
   <string name="pref_diving_mode_title">洞潜模式</string>
   <string name="pref_diving_mode_summary">启用洞潜模式</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">副线等级</string>
   <string name="pref_splay_classes_summary">启用副线等级</string>
   <string name="pref_splay_color_title">副线着色</string>

@@ -377,6 +377,24 @@ public class TDUtil
     return System.currentTimeMillis() / 1000L;
   }
 
+  /** @return the topodroid timestamp (sec) from a date
+   * @param date   topodroid date YYYY.MM.DD
+   */
+  public static long dateToTimestamp( String date )
+  {
+    try {
+      int year = Integer.parseInt( date.substring(0,4) );
+      int month = Integer.parseInt( date. substring(6,7) );
+      if ( date.charAt(5) == '0' ) month += 10;
+      int day = ( date.charAt(8) == '0' )? Integer.parseInt( date.substring(9,10) ) : Integer.parseInt( date.substring(8,10) );
+      GregorianCalendar cal = new GregorianCalendar( year, month-1, day );
+      return cal.getTimeInMillis() / 1000L;
+    } catch ( NumberFormatException e ) {
+      // ???
+    }
+    return 0;
+  }
+
   /** @return the date from the millis
    * @param millis    millis
    */

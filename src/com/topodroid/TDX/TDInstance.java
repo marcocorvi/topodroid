@@ -43,6 +43,7 @@ public class TDInstance
   public static String cbd;  // current base directory
 
   public static long sid   = -1;   // id of the current survey
+  public static boolean isSurveyMutable = true;
   public static long cid   = -1;   // id of the current calib
   public static String survey;   // current survey name
   static String calib;    // current calib name

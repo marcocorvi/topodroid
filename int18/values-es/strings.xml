@@ -79,13 +79,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
     <string name="memoryXBLE">DistoX-BLE</string>
-    <!-- TODO string name="memoryCavway">Cavway memory</string -->
+    <string name="memoryCavway">Memoria Cavway</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 	
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <string name="thp_section">Sección</string>
-    <!-- TODO string name="thp_picture">picture</string -->
+    <string name="thp_picture">Imagen</string>
     <string name="thp_station">Estación</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
@@ -225,7 +225,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
     <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
-    <!-- CHANGED string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string -->
     <string name="strike_dip">Dip dirección %1$.0f inclinación %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
@@ -237,7 +236,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
     <string name="gettingble_info">Descargando información de DistoX-BLE &#8230;</string>
-    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
+    <string name="gettingCavway_info">Obtener información de Cavway &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
@@ -301,7 +300,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="photo_title">Foto</string>
     <string name="photo_text">Introducir comentario de foto</string>
     <!-- UNUSED string name="photo_failed">foto fallida</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">La foto no está lista. Espere &#8230;</string>
     <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
     <string name="photo_many_pictures">demasiadas fotos</string>
     <string name="label_title">Texto</string>
@@ -406,10 +405,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="painted">Dibujado</string>
 
     <!-- UNUSED string name="cbd_title">Directorio principal</string -->
-    <string name="cwd">Directorio de proyectos TopoDroid</string>
-    <string name="empty_cwd">Nombre del proyecto vacío</string>
+    <string name="cwd">Directorio TopoDroid de la topografía</string>
+    <string name="empty_cwd">Nombre de la topografía vacío</string>
     <!-- UNUSED string name="bad_cbd">Directorio base inexistente o no editable</string -->
-    <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
+    <string name="bad_cwd">El nombre de la topografía no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
     <string name="index_oob">Índice fuera de los límites %1$d</string>
@@ -505,6 +504,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
     <string name="menu_zoom_fit">Centrar en pantalla</string>
+    <string name="menu_plot_search">Búsqueda de estaciones</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel cuadriculado</string>
@@ -668,8 +668,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string -->
     <string name="survey_no_data_reduction">ATENCIÓN: datos sin procesar</string>
     <string name="survey_not_saved">ATENCIÓN: información de la topografía no guardada</string>
-    <string name="survey_bad_siblings">ATENCIÓN: proyecto repetido incoherente %1$s</string>
-    <string name="survey_bad_magnetic">ATENCIÓN: proyecto poco preciso</string>
+    <string name="survey_bad_siblings">ATENCIÓN: Topografía duplicada %1$s</string>
+    <string name="survey_bad_magnetic">ATENCIÓN: Topografía poco precisa</string>
     <string name="saturated_coeffs">ATENCIÓN: coeficientes de calibración saturados</string>
     <string name="out_of_memory">ATENCIÓN: sin memoria!</string>
     <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
@@ -858,7 +858,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_on"        >on</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
-    <string name="button_recover"   >Recupera</string>
+    <string name="button_recover"   >Recuperar</string>
     <string name="button_reverse"   >Inversi</string>
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
@@ -1105,6 +1105,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_plot_delete">Eliminar dibujo</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_scrap">Residuos de dibujo</string>
+    <string name="help_plot_search">Búsqueda de estaciones</string>
     <string name="help_plot_switch">Activación dibujo</string>
     <string name="help_search">Búsqueda de estación</string>
     <string name="help_stats">Estadísticas de Topografía</string>
@@ -1166,7 +1167,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_write">Enviar calibración a DistoX</string>
     <string name="help_splays">Tomas como líneas o puntos</string>
 
-    <string name="help_add_project">Agregar proyecto</string>
+    <string name="help_add_project">Agregar topografía</string>
     <string name="help_add_surveys">Agregar relieve</string>
     <string name="help_drop_surveys">Eliminar relieve</string>
     <string name="help_view_surveys">Mostra relieve</string>
@@ -1252,8 +1253,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
+    <string name="title_plot_search">Búsqueda de estaciones</string>
     <string name="title_pref_search">Búsqueda de configuración</string>
-    <!-- TODO string name="title_gm_search">Calib data search</string -->
+    <string name="title_gm_search">Búsqueda de datos de Calib</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
@@ -1360,7 +1362,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
-    <!-- TODO string name="title_team_dialog">Team names</string -->
+    <string name="title_team_dialog">Nombre del grupo</string>
     <string name="title_plot_rename">Cambiar el nombre topografía</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>
     <string name="title_calib_export">Exportar topografía como &#8230;</string>
@@ -1465,7 +1467,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_backsight_splay_summary">Comprobación de orientación hacia atrás con primera toma lateral</string>
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
-  <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
+  <string name="pref_triple_shot_title">Sonido de la toma de una visual</string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>
   <string name="pref_connect_feedback_summary">Avisos sobre la conexión del dispositivo</string>
@@ -1542,7 +1544,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_csv_eol_title">CSV conocido</string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
   <string name="pref_gpx_single_track_title">GPX de tramo única</string>
-  <string name="pref_gpx_single_track_summary">Topografía de proyectos en un solo track</string>
+  <string name="pref_gpx_single_track_summary">Proyecto de topografía en un solo track</string>
   <string name="pref_zip_share_category_title">Categoría de zip-share</string>
   <string name="pref_zip_share_category_summary">Agregar categoría a la solicitud de zip-share</string>
   
@@ -1598,7 +1600,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
   <string name="pref_bric_index_is_id_title">El índice BRIC es ID</string>
-  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
+  <string name="pref_bric_index_is_id_summary">Usar el índice BRIC como ID de toma</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
@@ -1682,8 +1684,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string -->
 	  
-  <string name="pref_azimuth_manual_title">"extender" manual</string>
-  <string name="pref_azimuth_manual_summary">Establecer "extender" las líneas manualmente</string>
+  <string name="pref_azimuth_manual_title">Despleagdo manual</string>
+  <string name="pref_azimuth_manual_summary">Establecer desplegar las líneas manualmente</string>
 
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de topógrafos por defecto</string>
@@ -1864,6 +1866,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
   <string name="pref_diving_mode_title">Modo de buceo</string>
   <string name="pref_diving_mode_summary">Habilitar el modo de buceo</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">clases de tomas secundarias</string>
   <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>  
   <string name="pref_splay_color_title">Colores de tomas secundarias</string>
@@ -1936,10 +1940,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
-  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
+  <string name="pref_3d_sketch_title">Modelado 3D</string>
+  <string name="pref_3d_sketch_summary">Habilitar el modelado 3D (solo compilación de depuración)</string>
+  <string name="pref_sketch_splay_buffer_title">Búfer de separación</string>
+  <string name="pref_sketch_splay_buffer_summary">Búfer de separación de sección [m]</string>
 	  
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log output stream</string>
@@ -2044,7 +2048,7 @@ debe ajustarlos a sus necesidades./n/n </string>
    <string name="firmware_uploaded">%1$s firmware: subido %2$d</string>
    <string name="firmware_downloaded">%1$s firmware: descargado %2$d</string>
 
-    <string name="project">Proyecto %1$s</string>
+    <string name="project">Topografía %1$s</string>
     <string name="no_editor">Editor no encontrado</string>
     <string name="no_file">Archivo no encontrado</string>
     <string name="no_path">Ruta del archivo no encontrada</string>
@@ -2071,13 +2075,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="overwrite">Sobrescribir</string -->
 
     <string name="title_export_settings">Ajustes de importación/exportación</string>
-    <string name="title_export">Exportar proyecto como &#8230;</string>
+    <string name="title_export">Exportar topografía como &#8230;</string>
     <string name="title_equates">Enlaces</string>
     <string name="title_equate_new">Agregar enlace &#8230;</string>
     <string name="title_equate_with">Enlace %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Carpeta de trabajo actual</string -->
     <string name="title_drop">¿Eliminar relieves? </string>
-    <string name="title_tdconfig">Ingrese el nombre del proyecto</string>
+    <string name="title_tdconfig">Escribir nombre de la Topografía</string>
     <string name="title_surveys">Relieves</string>
 
     <string name="exported">Archivo guardado %1$s</string>

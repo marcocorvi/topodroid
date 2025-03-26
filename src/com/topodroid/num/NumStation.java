@@ -59,6 +59,14 @@ public class NumStation extends NumSurveyPoint
   public boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   public boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
 
+  /** clear the hidden/barrier flags
+   */
+  void clearBarrierAndHidden() 
+  {
+    mHidden = 0;
+    mBarrierAndHidden = false;
+  }
+
   // /** @return the station reduction type: 0 unknown, 1 survey, 2 surface, 3 origin
   //  */
   // public int reductionType() { return mReductionType; }
@@ -101,8 +109,7 @@ public class NumStation extends NumSurveyPoint
     s2 = null;
     node = null;
     mAnomaly = 0.0f;
-    mHidden  = 0;
-    mBarrierAndHidden = false;
+    clearBarrierAndHidden();
     mParent  = null;
     mChild   = null;
     mSibling = null;
@@ -139,8 +146,7 @@ public class NumStation extends NumSurveyPoint
     s2 = null;
     node = null;
     mAnomaly = 0.0f;
-    mHidden  = 0;
-    mBarrierAndHidden = false;
+    clearBarrierAndHidden();
     setParent( from );
     mLegAzimuths = new ArrayList<>();
     // mReductionType = reduction_type;

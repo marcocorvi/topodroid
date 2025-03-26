@@ -2403,4 +2403,32 @@ public class DrawingCommandManager
     for ( Scrap scrap : mScraps ) scrap.shiftXSections( x, y );
   }
 
+  // STATION HIGHLIGHT
+  private DrawingStationName highlightedStation = null;
+
+  /** highlight a station name
+   * @param name   name to highlight, or null
+   * @note if the name does not correspond to any station no station is highlighted
+   */
+  void highlightStation( String name ) 
+  {
+    if ( name == null ) {
+      if ( highlightedStation != null ) {
+        highlightedStation.highlightName( false );
+        highlightedStation = null;
+      }
+    } else {
+      if ( highlightedStation != null ) {
+        if ( highlightedStation.getName().equals( name ) ) return;
+        highlightedStation.highlightName( false );
+      }
+      highlightedStation = getStation( name );
+      if ( highlightedStation != null ) {
+        highlightedStation.highlightName( true );
+      }
+    }
+  }
+          
+    
+
 }

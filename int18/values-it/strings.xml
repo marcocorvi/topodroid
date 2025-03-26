@@ -499,6 +499,7 @@
     <!-- UNUSED string name="menu_tdr2th2">DISEGNI TH2</string -->
     <string name="menu_validate">CONVALIDA</string>
     <string name="menu_zoom_fit">ADATTA ZOOM</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Carta millimetrata</string>
@@ -1103,6 +1104,7 @@
     <string name="help_plot_delete">Elimina disegno</string>
     <string name="help_plot_rename">Rinomina/Elimina disegno</string>
     <string name="help_plot_scrap">Scarti di disegno</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">Scambia disegno</string>
     <string name="help_search">Cerca caposaldo</string>
     <string name="help_stats">Statistiche rilievo</string>
@@ -1250,6 +1252,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_search">Ricerca caposaldi/battute</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Ricarca dati calibrazione</string>
     <string name="title_dangling">Tiri non collegati</string>
@@ -1858,6 +1861,8 @@
   <string name="pref_LRExtend_summary">Stima extend Sx/Dx (Bussola/import VisualTopo)</string>
   <string name="pref_diving_mode_title">Modo Immersione</string>
   <string name="pref_diving_mode_summary">Modalità distanza/azimut/profondità </string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Classi di splay</string>
   <string name="pref_splay_classes_summary">Classi e colorazione splay</string>
   <!-- UNUSED string name="pref_splay_as_dot_title">Finale di splay</string -->

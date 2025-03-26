@@ -503,6 +503,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UPDATES string name="menu_updates">ПРОВЕРИ ЪПДЕЙТИТЕ</string -->
     <string name="menu_validate">ПРОВЕРКА</string>
     <string name="menu_zoom_fit">ОПТИМАЛНО УВЕЛИЧАВАНЕ</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметрова хартия</string>
@@ -1109,6 +1110,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_plot_delete">Изтриване на скица</string>
     <string name="help_plot_rename">Преименуване/изтриване на скица</string>
     <string name="help_plot_scrap">Отрязъци от скицата</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
     <string name="help_plot_switch">Смяна на скица</string>
     <string name="help_search">Търсене на данни</string>
     <string name="help_stats">Статистика за скицата</string>
@@ -1256,6 +1258,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
     <string name="title_search">Търси репер/отсечка</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <string name="title_pref_search">Търсене на настройки</string>
     <string name="title_gm_search">Търси данни за калибрация</string>
     <string name="title_dangling">Неприкрепени измервания</string>
@@ -1854,6 +1857,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_LRExtend_summary">Оцени разширението ляво/дясно (Compass/VisualTopo import)</string>
   <string name="pref_diving_mode_title">Подводен режим</string>
   <string name="pref_diving_mode_summary">Активирай подводен режим</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Класове странични измервания</string>
   <string name="pref_splay_classes_summary">Активирай класове на странични измервания</string>
   <string name="pref_splay_color_title">Оцветяване на странични измервания</string>

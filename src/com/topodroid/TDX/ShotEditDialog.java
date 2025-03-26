@@ -117,7 +117,8 @@ class ShotEditDialog extends MyDialog
   private String shot_distance;  // distance - depth
   private String shot_bearing;   // bearing
   private String shot_clino;     // clino    - distance
-  private boolean shot_manual;
+  // private boolean shot_manual;
+  private boolean editable;      // whether the shot data are editable
   private float shot_stretch; // FIXME_STRETCH
 
   private String shot_extra;
@@ -247,9 +248,9 @@ class ShotEditDialog extends MyDialog
       shot_bearing  = blk.bearingString();
       shot_clino    = blk.clinoString();
     }
-    shot_manual   = blk.isManual();
-
-    // TDLog.v( "shot is manual " + shot_manual + " length " + shot_distance );
+    // shot_manual = blk.isManual();
+    editable    = blk.isManual() || TDSetting.mEditableShots;
+    TDLog.v( "shot " + blk.mId + " is editable " + editable + " length " + shot_distance );
 
     // shot_extra   = blk.extraString( mParent.mSurveyAccuracy );
     shot_extra   = mParent.getBlockExtraString( blk );
@@ -333,13 +334,13 @@ class ShotEditDialog extends MyDialog
 
     // do at the very end
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
-      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDepth );
-      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
-      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagDistance );
+      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, editable, flagDepth );
+      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  editable, flagBearing );
+      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    editable, flagDistance );
     } else {
-      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDistance );
-      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
-      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagClino );
+      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, editable, flagDistance );
+      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  editable, flagBearing );
+      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    editable, flagClino );
     }
 
     updateLayoutLRUD();
@@ -790,7 +791,7 @@ class ShotEditDialog extends MyDialog
     }
     // mParent.scrollTo( mPos );
 
-    if ( shot_manual ) {
+    if ( editable ) {
       try {
 	if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
           float p = Float.parseFloat( mETdistance.getText().toString() ) / TDSetting.mUnitLength;
@@ -840,6 +841,10 @@ class ShotEditDialog extends MyDialog
     MyKeyboard.close( mKeyboard );
 
     Button b = (Button) v;
+    if ( b == mButtonBack ) {
+      CutNPaste.dismissPopup();
+      dismiss();
+    }
 
     if ( b == mRBleft ) {
       mRBvert.setChecked( false );
@@ -853,8 +858,46 @@ class ShotEditDialog extends MyDialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
       // shot_extend = mRBright.isChecked() ? ExtendType.EXTEND_RIGHT : ExtendType.EXTEND_IGNORE;
+    }
+    if ( b == mButtonPrev ) {
+      mCBallSplay.setVisibility( View.GONE );
+      setCBxSplay( -1 );
+      // shift:
+      //               prev -- blk -- next
+      // prevOfPrev -- prev -- blk
+      //
+      // saveDBlock();
+      if ( mPrevBlk != null ) {
+        DBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
+        // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
+        loadDBlock( mPrevBlk, prevBlock, mBlk );
+        // updateView();
+      // } else {
+        // TDLog.v( "PREV is null" );
+      }
+    } else if ( b == mButtonNext ) {
+      mCBallSplay.setVisibility( View.GONE );
+      setCBxSplay( -1 );
+      // shift:
+      //        prev -- blk -- next
+      //                blk -- next -- nextOfNext
+      // saveDBlock();
+      if ( mNextBlk != null ) {
+        DBlock next = mParent.getNextLegShot( mNextBlk, true );
+        // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
+        loadDBlock( mNextBlk, mBlk, next );
+        // updateView();
+      // } else {
+        // TDLog.v( "NEXT is null" );
+      }
+    }
 
-    } else if ( b == mCBlegPrev ) {
+    if ( ! TDInstance.isSurveyMutable ) { // IMMUTABLE
+      TDToast.makeWarn("Immutable survey");
+      return;
+    }
+
+    if ( b == mCBlegPrev ) {
       // TDLog.v( "CB leg clicked ");
       if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
@@ -908,9 +951,6 @@ class ShotEditDialog extends MyDialog
         mRBcmtd.setState( false ); // FIXME_COMMENTED
       }
 
-    } else if ( b == mButtonBack ) {
-      CutNPaste.dismissPopup();
-      dismiss();
     } else if ( b == mButtonMore ) {
       CutNPaste.dismissPopup();
       // dismiss();
@@ -935,38 +975,6 @@ class ShotEditDialog extends MyDialog
     } else if ( b == mButtonSave ) {
       if ( ! saveDBlock() ) {
         TDToast.makeWarn( R.string.shot_not_saved );
-      }
-    } else if ( b == mButtonPrev ) {
-      mCBallSplay.setVisibility( View.GONE );
-      setCBxSplay( -1 );
-      // shift:
-      //               prev -- blk -- next
-      // prevOfPrev -- prev -- blk
-      //
-      // saveDBlock();
-      if ( mPrevBlk != null ) {
-        DBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
-        // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
-        loadDBlock( mPrevBlk, prevBlock, mBlk );
-        // updateView();
-      // } else {
-        // TDLog.v( "PREV is null" );
-      }
-
-    } else if ( b == mButtonNext ) {
-      mCBallSplay.setVisibility( View.GONE );
-      setCBxSplay( -1 );
-      // shift:
-      //        prev -- blk -- next
-      //                blk -- next -- nextOfNext
-      // saveDBlock();
-      if ( mNextBlk != null ) {
-        DBlock next = mParent.getNextLegShot( mNextBlk, true );
-        // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
-        loadDBlock( mNextBlk, mBlk, next );
-        // updateView();
-      // } else {
-        // TDLog.v( "NEXT is null" );
       }
 
     } else if ( b == mButtonReverse ) {

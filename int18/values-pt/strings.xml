@@ -472,6 +472,7 @@ no campo abaixo e aperte o botão.
   <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
   <string name="menu_validate">VALIDAR</string>
   <string name="menu_zoom_fit">ZOOM GERAL</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
   <!-- FIXED_ZOOM -->
   <string name="zoom_fixed">Papel milimetrado</string>
   <!-- UNUSED string name="start_scan">Começar varredura</string -->
@@ -1034,6 +1035,7 @@ no campo abaixo e aperte o botão.
   <string name="help_plot_delete">Apagar croqui</string>
   <string name="help_plot_rename">Renomear/apagar croqui</string>
   <string name="help_plot_scrap">Trechos croqui</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
   <string name="help_plot_switch">Mudar para outro trecho</string>
   <string name="help_search">Pesquisar base</string>
   <string name="help_stats">Estatísticas croqui</string>
@@ -1172,6 +1174,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
   <string name="title_search">Pesquisa bases e medidas</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
   <string name="title_gm_search">Pesquisa dados calibração</string>
   <string name="title_dangling">Medidas desconectadas</string>
@@ -1751,6 +1754,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
   <string name="pref_diving_mode_title">Modo mergulho</string>
   <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Classes aux</string>
   <string name="pref_splay_classes_summary">Habilitar classes de medidas auxiliares</string>
   <string name="pref_splay_color_title">Cores aux</string>

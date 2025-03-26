@@ -199,6 +199,13 @@ class NumStationSet
     }
     return ret;
   }
+
+  /** clear the stations barrier/hidden flag
+   */
+  void clearBarrierAndHidden()
+  {
+    for ( NumStation st : mStations ) st.clearBarrierAndHidden();
+  }
   
   /** initialize the search of the shortest path
    *  initialize the tree with a distance value "p" (supposedly large)

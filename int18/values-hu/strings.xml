@@ -292,7 +292,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="photo_title">FÉNYKÉP</string>
     <string name="photo_text">Írd be a fénykép megjegyzését</string>
     <!-- UNUSED string name="photo_failed">Sikertelen fotó</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">Nincs kész a fotó. Várj! &#8230;</string>
     <string name="photo_max_captures">Elérte a maximális rögzítési korlátot</string>
     <string name="photo_many_pictures">Túl sok kép</string>
     <string name="label_title">FELIRAT</string>
@@ -499,6 +499,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 	<!-- UPDATES string name="menu_updates">UPDATE ELLENŐRZÉS</string -->
     <string name="menu_validate">ELLENŐRZÉS</string>
     <string name="menu_zoom_fit">ABLAK NAGYÍTÁS</string>
+    <string name="menu_plot_search">ALAPPONT KERESÉS</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Rajz felület</string>
@@ -1106,6 +1107,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_plot_delete">Vázlat törlése</string>
     <string name="help_plot_rename">Vázlat átnevezése/törlése</string>
     <string name="help_plot_scrap">Vázlat szintek</string>
+    <string name="help_plot_search">Alappont keresés</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
     <string name="help_search">Mérési pont keresése</string>
     <string name="help_stats">Felmérési statisztikák</string>
@@ -1253,6 +1255,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
     <string name="title_search">Pont/Mérés keresés</string>
+    <string name="title_plot_search">Alappont keresés</string>
     <string name="title_pref_search">Beállítások keresése</string>
     <string name="title_gm_search">Kalibrációs adat keresés</string>
     <string name="title_dangling">Csatolatlan mérés</string>
@@ -1863,6 +1866,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_LRExtend_summary">Bal/Jobb irányú kiterjedés becslése (Compass/VisualTopo import</string>
   <string name="pref_diving_mode_title">Búvár mód</string>
   <string name="pref_diving_mode_summary">Búvár mód engedélyezése</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Segédmérés osztályozása</string>
   <string name="pref_splay_classes_summary">Segédmérés osztályozás engedélyezése</string>
   <string name="pref_splay_color_title">Segédmérés szinezés</string>

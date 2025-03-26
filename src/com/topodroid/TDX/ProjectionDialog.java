@@ -290,18 +290,21 @@ class ProjectionDialog extends MyDialog
     // float dx = 0; // mOffset.x;
     // float dy = 0; // mOffset.y;
     for ( NumShot sh : shots ) {
-      NumStation st1 = sh.from;
-      NumStation st2 = sh.to;
-      if ( st1.show() && st2.show() ) {
-	double x1 = (st1.e - e0) * cx + (st1.s - s0) * sx; // - dx;
-	double x2 = (st2.e - e0) * cx + (st2.s - s0) * sx; // - dx;
-	double y1 = st1.v - v0; // - dy;
-	double y2 = st2.v - v0; // - dy;
-        h1 = DrawingUtil.toSceneX( x1, y1 ); // CENTER_X + x1 * SCALE_FIX = 100 + x1 * 20
-        h2 = DrawingUtil.toSceneX( x2, y2 ); // CENTER_Y + Y1 * SCALE_FIX = 120 + y1 * 20
-        v1 = DrawingUtil.toSceneY( x1, y1 );
-        v2 = DrawingUtil.toSceneY( x2, y2 );
-        addFixedLegLine( sh.getFirstBlock(), h1, v1, h2, v2 );
+      DBlock blk = sh.getFirstBlock();
+      if ( ! blk.isCommented() ) {
+        NumStation st1 = sh.from;
+        NumStation st2 = sh.to;
+        if ( st1.show() && st2.show() ) {
+          double x1 = (st1.e - e0) * cx + (st1.s - s0) * sx; // - dx;
+          double x2 = (st2.e - e0) * cx + (st2.s - s0) * sx; // - dx;
+          double y1 = st1.v - v0; // - dy;
+          double y2 = st2.v - v0; // - dy;
+          h1 = DrawingUtil.toSceneX( x1, y1 ); // CENTER_X + x1 * SCALE_FIX = 100 + x1 * 20
+          h2 = DrawingUtil.toSceneX( x2, y2 ); // CENTER_Y + Y1 * SCALE_FIX = 120 + y1 * 20
+          v1 = DrawingUtil.toSceneY( x1, y1 );
+          v2 = DrawingUtil.toSceneY( x2, y2 );
+          addFixedLegLine( blk, h1, v1, h2, v2 );
+        }
       }
     } 
     // for ( NumSplay sp : splays ) {
@@ -609,7 +612,7 @@ class ProjectionDialog extends MyDialog
       TDToast.makeBad( R.string.few_data );
     } else {
       // float decl = mApp.mData.getSurveyDeclination( mSid );
-      mNum = new TDNum( mList, mFrom, "", "", 0.0f, null, true ); // null formatClosure, true: midline_only
+      mNum = new TDNum( mList, mFrom, 0.0f, null, true ); // null formatClosure, true: midline_only
       mNum.recenter();
       mSeekBar.setProgress( 200 );
       mProjBar.setProgress( 200 );

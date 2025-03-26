@@ -460,6 +460,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
   <string name="menu_validate">VALIDIEREN</string>
   <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
+    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
   <!-- FIXED_ZOOM -->
   <string name="zoom_fixed">Papier-Massstab</string>
   <!-- UNUSED string name="start_scan">BLE-Scan starten</string -->
@@ -1023,6 +1024,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_plot_delete">Skizze löschen</string>
   <string name="help_plot_rename">Skizze umbenennen/löschen</string>
   <string name="help_plot_scrap">Teilskizzen</string>
+    <!-- TODO string name="help_plot_search">Station search</string -->
   <string name="help_plot_switch">Skizze wechseln</string>
   <string name="help_search">Suche Messpunkt</string>
   <string name="help_stats">Vermessungs-Statistiken</string>
@@ -1161,6 +1163,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
   <string name="title_current_station">Gespeicherte Messpunkte</string>
   <string name="title_search">Messstation/-züge suchen</string>
+    <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
   <string name="title_gm_search">Kalibrationsdatensuche</string>
   <string name="title_dangling">Unverbundene Messungen</string>
@@ -1738,6 +1741,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo Import)</string>
   <string name="pref_diving_mode_title">Tauchmodus</string>
   <string name="pref_diving_mode_summary">Tauchmodus aktivieren</string>
+  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
+  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
   <string name="pref_splay_classes_title">Hilfszüge klassieren</string>
   <string name="pref_splay_classes_summary">Klassierung von Hilfszügen aktivieren</string>
   <string name="pref_splay_color_title">Hilfszüge färben</string>

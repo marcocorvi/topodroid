@@ -327,14 +327,20 @@ public class OverviewWindow extends ItemDrawer
 
     if ( type == PlotType.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
-        NumStation st1 = sh.from;
-        NumStation st2 = sh.to;
-        addFixedLine( sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s ); // xoff, yoff
+        DBlock blk = sh.getFirstBlock();
+        if ( ! blk.isCommented() ) {
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+          addFixedLine( sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s ); // xoff, yoff
+        }
       }
       for ( NumSplay sp : splays ) {
-        if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) {
-          NumStation st = sp.from;
-          addFixedSplayLine( sp.getBlock(), st.e, st.s, sp.e, sp.s ); // xoff, yoff
+        DBlock blk = sp.getBlock();
+        if ( ! blk.isCommented() ) {
+          if ( Math.abs( blk.mClino ) < TDSetting.mSplayVertThrs ) {
+            NumStation st = sp.from;
+            addFixedSplayLine( blk, st.e, st.s, sp.e, sp.s ); // xoff, yoff
+          }
         }
       }
       for ( NumStation st : stations ) {
@@ -346,14 +352,20 @@ public class OverviewWindow extends ItemDrawer
     } else { // if ( PlotType.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
-          NumStation st1 = sh.from;
-          NumStation st2 = sh.to;
-          addFixedLine( sh.getFirstBlock(), st1.h, st1.v, st2.h, st2.v ); // xoff, yoff
+          DBlock blk = sh.getFirstBlock();
+          if ( ! blk.isCommented() ) {
+            NumStation st1 = sh.from;
+            NumStation st2 = sh.to;
+            addFixedLine( blk, st1.h, st1.v, st2.h, st2.v ); // xoff, yoff
+          }
         }
       } 
       for ( NumSplay sp : splays ) {
-        NumStation st = sp.from;
-        addFixedSplayLine( sp.getBlock(), st.h, st.v, sp.h, sp.v ); // xoff, yoff
+        DBlock blk = sp.getBlock();
+        if ( ! blk.isCommented() ) {
+          NumStation st = sp.from;
+          addFixedSplayLine( blk, st.h, st.v, sp.h, sp.v ); // xoff, yoff
+        }
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
@@ -639,7 +651,7 @@ public class OverviewWindow extends ItemDrawer
         // mPid = plot.id;
         // NOTE Overview only for plan or extended plots
         // float decl = mData.getSurveyDeclination( mSid );
-        mNum = new TDNum( mBlockList, start, null, null, 0.0f, null ); // null formatClosure
+        mNum = new TDNum( mBlockList, start, 0.0f, null ); // null formatClosure
         mStartStation = mNum.getStation( start );
         // computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
         computeReferences( (int)type, mZoom );

@@ -39,13 +39,11 @@ public class TDNum
   /** cstr: create the numerical centerline
    * @param data     list of survey data
    * @param start    start station
-   * @param view     barriers list
-   * @param hide     hiding list
    * @param decl     magnetic declination (possibly including the convergence)
    * @param loop_fmt loop closure report format
    * @param midline_only  whether to reduce only the midline (no compensation)
    */
-  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt, boolean midline_only )
+  public TDNum( List< DBlock > data, String start, float decl, String loop_fmt, boolean midline_only )
   {
     // TDLog.v( "data reduction: decl " + decl + " start " + start );
     // for ( DBlock b : data ) {
@@ -56,13 +54,29 @@ public class TDNum
     nrCompensatedLoops = 0;
     nrInaccurateLoops  = 0;
     surveyAttached = computeNum( data, start, loop_fmt, midline_only );
-    setStationsHide( hide );
-    setStationsBarr( view );
   }
 
-  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt )
+  /** cstr: create the numerical centerline
+   * @param data     list of survey data
+   * @param start    start station
+   * @param decl     magnetic declination (possibly including the convergence)
+   * @param loop_fmt loop closure report format
+   */
+  public TDNum( List< DBlock > data, String start, float decl, String loop_fmt )
   {
-    this( data, start, view, hide, decl, loop_fmt, false );
+    this( data, start, decl, loop_fmt, false );
+  }
+
+  /** set barrier and hidden stations
+   * @param view     barriers list
+   * @param hide     hiding list
+   */
+  public void setBarrierAndHidden( String view, String hide )
+  {
+    if ( mStations == null ) return;
+    clearBarrierAndHidden();
+    setStationsHide( hide );
+    setStationsBarr( view );
   }
 
   // public void dump( )
@@ -508,6 +522,8 @@ public class TDNum
       }
     }    
   }
+
+  private void clearBarrierAndHidden() { mStations.clearBarrierAndHidden(); }
 
   /** set the hidden stations
    * @param hide   string with the names of the hidden stations
