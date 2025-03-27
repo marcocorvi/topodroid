@@ -802,6 +802,7 @@ no campo abaixo e aperte o botão.
   <string name="button_off">não</string>
   <string name="button_on">sim</string>
   <string name="button_open">Abrir     </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
   <string name="button_read">Ler       </string>
   <string name="button_recover">Recuperar</string>
   <string name="button_reverse">Invertidas</string>

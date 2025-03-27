@@ -853,6 +853,7 @@
     <string name="button_off"       >关闭</string>
     <string name="button_on"        >开启</string>
     <string name="button_open"      >打开      </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >读取      </string>
     <string name="button_recover"   >恢复</string>
     <string name="button_reverse"   >反向</string>

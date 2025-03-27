@@ -134,8 +134,8 @@ public class DBlock
   // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
   public static boolean isTampered(long flag)  { return (flag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
-  public void setTempered() { mFlag |= FLAG_TAMPERED; }
-  public void clearTempered() { mFlag &= ~FLAG_TAMPERED; }
+  public void setTampered() { mFlag |= FLAG_TAMPERED; }
+  public void clearTampered() { mFlag &= ~FLAG_TAMPERED; }
 
   public boolean failBacksplay()  { return mFailBacksplay; }
 

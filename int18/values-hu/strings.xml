@@ -856,6 +856,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_off"       >ki</string>
     <string name="button_on"        >be</string>
     <string name="button_open"      >Megnyit</string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >Olvas  </string>
     <string name="button_recover"   >Visszaállít</string>
     <string name="button_reverse"   >Fordított</string>

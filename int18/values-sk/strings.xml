@@ -867,6 +867,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_off"       >Vypnúť</string>
     <string name="button_on"        >Zapnúť</string>
     <string name="button_open"      >Uložiť a Otvoriť     </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >Čítať    </string>
     <string name="button_recover"   >Obnoviť</string>
     <string name="button_reverse"   >Vymeniť</string>

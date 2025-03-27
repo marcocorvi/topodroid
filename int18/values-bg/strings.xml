@@ -860,6 +860,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_off">изключено</string>
     <string name="button_on">включено</string>
     <string name="button_open">Отваряне</string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read">Четене</string>
     <string name="button_recover">Възстановяване</string>
     <string name="button_reverse">Обръщане</string>

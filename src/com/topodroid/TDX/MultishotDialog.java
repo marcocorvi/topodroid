@@ -54,9 +54,11 @@ class MultishotDialog extends MyDialog
 
   private EditText mETfrom;
   private EditText mETto;
+  // private EditText mEToffset;
   private TextView mTVstrikeDip;
   
   private Button   mButtonRenumber;
+  private Button   mButtonOffset;
   private Button   mButtonSwap;
   // private Button   mButtonHighlight; FIXME_HIGHLIGHT
   private Button   mButtonColor;
@@ -91,10 +93,12 @@ class MultishotDialog extends MyDialog
 
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
+    // mEToffset  = (EditText) findViewById(R.id.value_offset );
     mTVstrikeDip = (TextView) findViewById(R.id.strike_dip );
 
     mETfrom.setText( mBlk.mFrom );
     mETto.setText( mBlk.mTo );
+    // mEToffset.setText( "0.0" );
    
     // mETfrom.setOnLongClickListener( this );
     // mETto.setOnLongClickListener( this );
@@ -123,6 +127,7 @@ class MultishotDialog extends MyDialog
     ((CheckBox)findViewById( R.id.rb_noprofile )).setChecked( true );
 
     mButtonRenumber  = (Button) findViewById(R.id.renumber );
+    mButtonOffset    = (Button) findViewById(R.id.offset );
     mButtonSwap      = (Button) findViewById(R.id.swap );
     // mButtonHighlight = (Button) findViewById(R.id.highlight ); FIXME_HIGHLIGHT
     mButtonColor     = (Button) findViewById(R.id.color );
@@ -134,6 +139,7 @@ class MultishotDialog extends MyDialog
     // mBlk = mBlks.get(0);
     // if ( mBlk != null && mBlk.isLeg() ) {
       mButtonRenumber.setOnClickListener( this );
+      mButtonOffset.setOnClickListener( this );
       mButtonSwap.setOnClickListener( this );
     // } else {
     //   renumber = false;
@@ -216,6 +222,15 @@ class MultishotDialog extends MyDialog
       }
     // } else if ( b == mButtonHighlight ) { FIXME_HIGHLIGHT
     //   mParent.highlightBlocks( mBlks );
+    } else if ( b == mButtonOffset ) {
+      try {
+        EditText et_offset  = (EditText) findViewById(R.id.value_offset );
+        String offset_str = et_offset.getText().toString();
+        float offset = Float.parseFloat( offset_str );
+        mParent.addOffset( offset ); 
+      } catch ( NumberFormatException e ) {
+        TDLog.v("ERROR " + e.getMessage() );
+      }
     } else if ( b == mButtonSwap ) {
       mParent.swapBlocksName( mBlks );
     } else if ( mColoring ) {

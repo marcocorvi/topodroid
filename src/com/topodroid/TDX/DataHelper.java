@@ -1465,6 +1465,7 @@ public class DataHelper extends DataSetObservable
     try {
       // myDB.setLockingEnabled( false );
       myDB.beginTransaction();
+      myDB.delete( ORIGINALS,     WHERE_SID, clause );
       myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
       myDB.delete( AUDIO_TABLE,   WHERE_SID, clause );
       myDB.delete( PLOT_TABLE,    WHERE_SID, clause );
@@ -1568,14 +1569,7 @@ public class DataHelper extends DataSetObservable
       if ( ! cursor.isClosed() ) cursor.close();
       if ( ret == 0 ) {
         TDLog.v("DB insert original " + d + " " + b + " " + c + " " + p );
-        ContentValues cv = new ContentValues();
-        cv.put( "surveyId", sid );
-        cv.put( "shotId",   id );
-        cv.put( "length",   d );
-        cv.put( "bearing",  b );
-        cv.put( "clino",    c );
-        cv.put( "depth",    p );
-        cv.put( "datamode", mode );
+        ContentValues cv = makeOriginalContentValues( sid, id, d, b, c, p, mode );
         myDB.insert( ORIGINALS, null, cv ); 
       }
       myDB.setTransactionSuccessful();
@@ -1586,7 +1580,43 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  // this is an update of a manual-shot data
+  private ContentValues makeOriginalContentValues( long sid, long id, double d, double b, double c, double p, int mode )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "surveyId", sid );
+    cv.put( "shotId",   id );
+    cv.put( "length",   d );
+    cv.put( "bearing",  b );
+    cv.put( "clino",    c );
+    cv.put( "depth",    p );
+    cv.put( "datamode", mode );
+    return cv;
+  }
+
+  /** update the shot distance
+   * @param id   shot ID
+   * @param sid  survey ID
+   * @param d    distance
+   * @note this is when to add an offset to the distance
+   */
+  void updateShotDistance( long id, long sid, float d )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US,
+               "UPDATE shots SET distance=%.6f WHERE surveyId=%d AND id=%d",
+               d, sid, id );
+    doExecShotSQL( id, sw );
+  }
+
+  /** update the shot data
+   * @param id   shot ID
+   * @param sid  survey ID
+   * @param d    distance
+   * @param b    azimuth
+   * @param c    clino
+   * @note this is an update of a manual-shot data
+   */
   void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c )
   {
     // updateShotDBCStmt.bindDouble(  1, d );
@@ -2917,6 +2947,7 @@ public class DataHelper extends DataSetObservable
 
   private static final String qjCountPhoto  = "select count() from photos where surveyId=? and status=?";
   private static final String qCountOriginals  = "select count() from originals where surveyId=? and shotId=?";
+  private static final String qOriginalsAll = "select shotId, distance, bearing, clino, depth, datamode from originals where surveyId=?";
 
   // used in selectAllPhotosShot
   private static final String qjPhotosShot  =
@@ -6436,6 +6467,23 @@ public class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
+       cursor = myDB.rawQuery( qOriginalsAll, new String[] { Long.toString(sid) } );
+       if ( cursor.moveToFirst()) {
+         do {
+           pw.format(Locale.US, "INSERT into %s values( %d, %d, %.3f, %.2f, %.2f, %.2f, %d );\n",
+             ORIGINALS,
+             sid,
+             cursor.getLong(0),   // shotId
+             cursor.getDouble(1),
+             cursor.getDouble(2),
+             cursor.getDouble(3),
+             cursor.getDouble(4),
+             (int)(cursor.getLong(5))  // datamode
+           );
+         } while (cursor.moveToNext());
+       }
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
        // cursor = myDB.query( AUDIO_TABLE, // SELECT ALL AUDIO RECORD
        //                      new String[] { "id", "shotId", "date" },
        //                      "surveyId=?", new String[] { Long.toString(sid) },
@@ -6780,7 +6828,17 @@ public class DataHelper extends DataSetObservable
              id = scanline1.longValue( -1 );
              // TDLog.v("DB table " + table + " id " + id + " v " + v );
 
-             if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
+             if ( table.equals(ORIGINALS) ) // ---------------- ORIGINALS
+	     { // id = shotId
+               double distance = scanline1.doubleValue( 0.0 );
+               double bearing  = scanline1.doubleValue( 0.0 );
+               double clino    = scanline1.doubleValue( 0.0 );
+               double depth    = scanline1.doubleValue( 0.0 );
+               int mode        = (int)(scanline1.longValue( 0 ));
+               cv = makeOriginalContentValues( sid, id, distance, bearing, clino, depth, mode );
+               myDB.insert( ORIGINALS, null, cv );
+             }
+             else if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
 	     {
                // TDLog.v("DB AUDIO table " + table + " id " + id + " v " + v );
                itemid = scanline1.longValue( -1 );

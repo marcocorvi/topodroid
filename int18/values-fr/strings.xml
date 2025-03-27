@@ -854,6 +854,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_off"       >Off</string>
     <string name="button_on"        >On</string>
     <string name="button_open"      >Ouvrir</string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >Lecture</string>
     <string name="button_recover"   >Récupérer</string>
     <string name="button_reverse"   >Inverser</string>

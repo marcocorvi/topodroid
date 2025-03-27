@@ -854,6 +854,7 @@
     <string name="button_off"       >spento</string>
     <string name="button_on"        >acceso</string>
     <string name="button_open"      >Apri      </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >Leggi     </string>
     <string name="button_recover"   >Recupera</string>
     <string name="button_reverse"   >Inversi</string>

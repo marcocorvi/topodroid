@@ -791,6 +791,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_off">aus</string>
   <string name="button_on">ein</string>
   <string name="button_open">Öffnen     </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
   <string name="button_read">Lesen      </string>
   <string name="button_recover">Wiederherstellen</string>
   <string name="button_reverse">Rückgängig</string>

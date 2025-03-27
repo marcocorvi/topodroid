@@ -857,6 +857,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_off"       >off</string>
     <string name="button_on"        >on</string>
     <string name="button_open"      >Abrir     </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >Leer      </string>
     <string name="button_recover"   >Recuperar</string>
     <string name="button_reverse"   >Inversi</string>

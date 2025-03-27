@@ -259,6 +259,25 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  /** add an offset to the distance of the shots in multiselection
+   * @param data_helper    database helper
+   * @param offset         offset to add: the shot length becomes length + offset
+   */
+  void addOffset( DataHelper data_helper, float offset )
+  {
+    for ( DBlock blk : mSelect ) {
+      if ( ! blk.isManual() ) {
+        if ( ! blk.isTampered() ) {
+          blk.setTampered();
+          data_helper.saveShotDistanceBearingClino( TDInstance.sid, blk );
+        }
+      }
+      blk.mLength += offset;
+      data_helper.updateShotDistance( blk.mId, TDInstance.sid, blk.mLength );
+      updateBlockView( blk.mId );
+    }
+  }
+
   /** clear multiselected status
    */
   private void clearLastMultiselected()

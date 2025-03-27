@@ -651,6 +651,12 @@ public class ShotWindow extends Activity
     setTheTitle();
   }
 
+  void addOffset( float offset )
+  {
+    mDataAdapter.addOffset( mApp_mData, offset );
+    clearMultiSelect();
+  }
+
   /** close the multiselection
    */
   void clearMultiSelect( )
@@ -2084,10 +2090,12 @@ public class ShotWindow extends Activity
   {
     // TDLog.v( TAG + "update shot DBC length " + d );
     if ( ! blk.isManual() ) {
-      TDLog.v( "update shot DBC length " + d + " tampered ");
-      blk.setTempered();
-      // mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, 0 ); // 0: mode normal
-      mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk );
+      if ( ! blk.isTampered() ) {
+        TDLog.v( "update shot DBC length " + d + " tampered ");
+        blk.setTampered();
+        // mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, 0 ); // 0: mode normal
+        mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk );
+      }
     }
     mApp_mData.updateShotDistanceBearingClino( blk.mId, TDInstance.sid, d, b, c );
     checkSiblings( blk, blk.mFrom, blk.mTo, d, b, c );
@@ -2108,9 +2116,11 @@ public class ShotWindow extends Activity
   {
     // TDLog.v( TAG + "update shot DBC length " + d );
     if ( ! blk.isManual() ) {
-      blk.setTempered();
-      // mApp_mData.saveShotDepthBearingDistance( TDInstance.sid, blk.mId, blk.mFlag, blk.mDepth, blk.mBearing, blk.mLength, 1 ); // 1: mode diving
-      mApp_mData.saveShotDepthBearingDistance( TDInstance.sid, blk );
+      if ( ! blk.isTampered() ) {
+        blk.setTampered();
+        // mApp_mData.saveShotDepthBearingDistance( TDInstance.sid, blk.mId, blk.mFlag, blk.mDepth, blk.mBearing, blk.mLength, 1 ); // 1: mode diving
+        mApp_mData.saveShotDepthBearingDistance( TDInstance.sid, blk );
+      }
     }
     mApp_mData.updateShotDepthBearingDistance( blk.mId, TDInstance.sid, p, b, d );
     checkSiblings( blk, blk.mFrom, blk.mTo, d, b, p );

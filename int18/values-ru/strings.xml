@@ -850,6 +850,7 @@
     <string name="button_off"       >выкл</string>
     <string name="button_on"        >вкл</string>
     <string name="button_open"      >Откр      </string>
+    <!-- TODO string name="button_offset"    >Offset</string -->
     <string name="button_read"      >Считать   </string>
     <string name="button_recover"   >Восстановить</string>
     <string name="button_reverse"   >Развернуть</string>

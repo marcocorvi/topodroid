@@ -872,6 +872,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_off"       >off</string>
     <string name="button_on"        >on</string>
     <string name="button_open"      >Open</string>
+    <string name="button_offset"    >Offset</string>
     <string name="button_read"      >Read</string>
     <string name="button_recover"   >Recover</string>
     <string name="button_reverse"   >Reverse</string>
