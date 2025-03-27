@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+<!-- IMPORTANT: DO NOT FORGET TO ESCAPE APOSTROIPHE -->
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Impossible de récupérer le manuel depuis Internet</string>
@@ -270,7 +271,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="bad_manifest_sql">Échec: erreur SQL</string>
     <string name="bad_manifest_number">Échec: mauvais nombre</string>
     <string name="bad_manifest_manifest">Échec: mauvais fichier Manifest</string>
-    <string name="bad_manifest_file">Echec de l'ouverure du fichier Manifest</string>
+    <string name="bad_manifest_file">Echec de l\'ouverure du fichier Manifest</string>
     <string name="bad_manifest_missing">Échec: fichier Manifest ommis</string>
     <string name="bad_manifest_error">Échec: erreur de lecture du fichier Manifest</string>
     <string name="bad_manifest_other">Échec: erreur inconnue</string>
@@ -294,7 +295,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="photo_failed">Échec de la photo</string -->
     <string name="photo_not_ready">Photo non prête. Attendre &#8230;</string>
     <string name="photo_max_captures">Limite de capture maximale atteinte</string>
-    <string name="photo_many_pictures">Trop d'images</string>
+    <string name="photo_many_pictures">Trop d\'images</string>
     <string name="label_title">ÉTIQUETTE</string>
     <string name="label_text">Saisissez le texte de l\'étiquette</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -963,10 +964,10 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     
     <string name="bt_alias_title">Alias Bluetooth</string>
     <string name="hint_bt_alias">BT alias</string>
-    <string name="hint_bt_code">Code de l'appareil</string>
+    <string name="hint_bt_code">Code de l\'appareil</string>
     <string name="bt_alias_missing">Alias BT manquant</string>
     <string name="bt_code_missing">Code appareil manquant</string>
-    <string name="bt_alias_delete">Supprimer l'alias Bluetooth ?</string>
+    <string name="bt_alias_delete">Supprimer l\'alias Bluetooth ?</string>
 
     <string name="hint_cellsize">taille cellule</string>
     <string name="hint_cwd">dossier de travail</string>
@@ -1246,7 +1247,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>
-    <string name="title_coeff_two">Coefficients d'étalonnage [%1$d]</string>
+    <string name="title_coeff_two">Coefficients d\'étalonnage [%1$d]</string>
     <string name="title_color_picker">Choisir une couleur</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
@@ -1466,7 +1467,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
     <string name="pref_leg_shots_title">Nombre mini. visées</string>
     <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
-    <string name="pref_backsight_splay_title">Visée d'habillage arrière</string>
+    <string name="pref_backsight_splay_title">Visée d\'habillage arrière</string>
     <string name="pref_backsight_splay_summary">Vérification de visée arrière lors du premier habillage</string>
     <string name="pref_recent_timeout_title">Expiration donnée récente</string>
     <string name="pref_recent_timeout_summary">Délai d\'expiration au-delà duquel une donnée n\'est plus considérée comme récente</string>
@@ -1515,7 +1516,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_svg_splays_title">Visées latérales d\'habillage SVG</string>
     <string name="pref_svg_splays_summary">Inclure les visées latérales d\'habillage dans l\'export SVG</string>
     <string name="pref_svg_groups_title">Groupes par type</string>
-    <string name="pref_svg_groups_summary">Grouper les éléments par type dans l'export SVG</string>
+    <string name="pref_svg_groups_summary">Grouper les éléments par type dans l\'export SVG</string>
     <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
     <!-- UNUSED string name="pref_svg_in_html_summary">Embarquer l\'export SVG en HTML</string -->
     <string name="pref_svg_pointstroke_title">Points SVG</string>

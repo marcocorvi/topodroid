@@ -582,7 +582,7 @@
     <string name="splay_delete">删除辐侧 %1$s ?</string>
     <string name="plot_duplicate_name">重复的草图名称</string>
     <string name="plot_dangling">悬挂草图</string>
-    <TODO string name="plot_name">草图名</string>
+    <string name="plot_name">草图名</string>
     <string name="plot_new">新建草图</string>
     <string name="plot_not_found">未发现草图</string>
     <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
@@ -1610,7 +1610,7 @@
   <string name="pref_bric_mode_summary">BRIC 操作模式</string>
   <string name="pref_bric_zero_length_title">BRIC 零点测射</string>
   <string name="pref_bric_zero_length_summary">记录BRIC 零长度测射</string>
-  <string name="pref_bric_index_is_id_title">BRIC序列是ID</string -->
+  <string name="pref_bric_index_is_id_title">BRIC序列是ID</string>
   <string name="pref_bric_index_is_id_summary">使用BRIC序号作为测站编号</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug解决方案</string>
@@ -1698,7 +1698,7 @@
   <string name="pref_team_title">团队</string>
   <string name="pref_team_summary">默认测量团队</string>
   <string name="pref_team_names_title">团队名</string>
-  <TODO string name="pref_team_names_summary">Therion/Survex团队名</string>
+  <string name="pref_team_names_summary">Therion/Survex团队名</string>
 
   <string name="pref_ethr_title">测线垂直临界角度</string>
   <string name="pref_ethr_summary">该值决定在延展剖面图中测线的绘制方向</string>
@@ -2287,8 +2287,8 @@
     <!-- UNUSED string name="warning_empty_cwd">警告: 空基本路径</string -->
     <!-- UNUSED string name="warning_no_parent">警告: 无法转到父文件夹</string -->
     <string name="warning_nogrant_camera">相机权限没有被允许</string>
-    <string name="warning_no_csv_type">没有指定CSV类型</string -->
-    <string name="warning_cavway_info">无法获取Cavway信息</string -->
+    <string name="warning_no_csv_type">没有指定CSV类型</string>
+    <string name="warning_cavway_info">无法获取Cavway信息</string>
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
 
     <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->
