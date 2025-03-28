@@ -97,6 +97,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         if ( pfd == null ) return false;
       }
       try {
+        TDPath.checkOutdir(); // FIXME don't know why have to do this check
 	String file_name = mFullName + "." + mExt; // file-name
         String file_path = TDPath.getOutFile( file_name );
         // TDLog.v("EXPORT plot to file <" + file_name + "> path " + file_path );

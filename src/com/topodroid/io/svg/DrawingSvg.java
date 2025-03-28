@@ -30,7 +30,7 @@ import com.topodroid.TDX.DrawingUtil;
 import com.topodroid.TDX.DrawingCommandManager;
 import com.topodroid.TDX.IDrawingLink;
 import com.topodroid.TDX.BrushManager;
-// import com.topodroid.TDX.SymbolPoint;
+import com.topodroid.TDX.SymbolPoint;
 import com.topodroid.TDX.Scrap;
 // import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.TDInstance;
@@ -40,6 +40,7 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
@@ -75,7 +76,7 @@ public class DrawingSvg extends DrawingSvgBase
 
       // header
       out.write( svg_header );
-      out.write( " width=\"" + (width*TDSetting.mToSvg) + "px\" height=\"" + (height*TDSetting.mToSvg) + "px\"\n" );
+      out.write( String.format(Locale.US, " width=\"%fpx\" height=\"%fpx\"\n", (width*TDSetting.mToSvg), (height*TDSetting.mToSvg) ) );
       // out.write( " viewBox=\"0 0 " + width + " " + height + "\"\n" );
       // out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n"); // already in the svg_header
       // out.write( "   xmlns=\"http://www.w3.org/2000/svg\");
@@ -91,6 +92,38 @@ public class DrawingSvg extends DrawingSvgBase
       out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
       out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
       out.write( "    </marker>\n"); 
+      out.write( "    <marker id=\"Circle\" markerWidth=\"20\" markerHeight=\"20\" viewBox=\"0 0 40 40\" refX=\"10\" refY=\"10\">\n");
+      out.write( "      <circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"red\" />\n");
+      out.write( "    </marker>\n"); 
+
+      Set<SymbolPoint> pts = plot.getPointSymbols();
+      for ( SymbolPoint pt : pts ) {
+        String name = pt.getFullThName();
+        // TDLog.v("SVG point marker " + pt.getFullThName() );
+        out.write( "    <marker id=\"" + name + "\" markerWidth=\"40\" markerHeight=\"40\" viewBox=\"0 0 40 40\" refX=\"20\" refY=\"20\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n");
+        out.write( "      " );
+        int p = pt.getSvg().indexOf("d=\"M ");
+        out.write( pt.getSvg().substring(0, p+5 ) );
+        String[] svg = pt.getSvg().substring(p+5).split(" ");
+        int k = 0;
+        for ( ; k < svg.length; ++k ) {
+          if ( svg[k].startsWith("\"") ) {
+            out.write( "\" stroke-width=\"0.3\" fill=\"none\" stroke=\"" );
+            int color = pt.getColor( 0xff000000 );
+            out.write( pathToColor( color ) );
+            out.write( "\" />\n" );
+            break;
+          }
+          try {
+            float f = (Float.parseFloat( svg[k] ) + 10)*2;
+            out.write( String.format(Locale.US, "%.2f ", f ) );
+          } catch ( NumberFormatException e ) {
+            out.write( svg[k] + " " );
+          }
+        }
+        out.write( "    </marker>\n");
+      }
+
       out.write( "  </defs>\n");
 
       // out.write( "<g id=\"canvas\" transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );

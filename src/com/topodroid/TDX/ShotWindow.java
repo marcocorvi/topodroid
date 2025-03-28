@@ -2541,7 +2541,7 @@ public class ShotWindow extends Activity
    */
   String computeBedding( List< DBlock > blks ) // BEDDING
   {
-    String strike_dip = getResources().getString(R.string.few_data);
+    String strike_dip = getResources().getString(R.string.few_points);
     if ( blks != null && blks.size() > 2 ) {
       DBlock b0 = blks.get(0);
       String st = b0.mFrom;
@@ -2566,6 +2566,7 @@ public class ShotWindow extends Activity
             ++ nn;
           }
         }
+        TDLog.v("BED [1] center " + st + " points " + nn );
       } else {
         st = b0.mTo;
         if ( st != null && st.length() > 0 ) {
@@ -2588,6 +2589,7 @@ public class ShotWindow extends Activity
             }
           }
 	}
+        TDLog.v("BED [2] center " + st + " points " + nn );
       }
       if ( nn >= 3 ) {
 	String strike_fmt = getResources().getString( R.string.strike_dip );
@@ -2613,6 +2615,7 @@ public class ShotWindow extends Activity
         float adip = 90 - TDMath.asind( n1.z );   // dip inclination
 
         strike_dip = String.format( Locale.US, strike_fmt, astk, adip );
+        TDLog.v("BED strike/dip " + strike_dip );
         // TDToast.make( strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {
 	  if ( b0.mComment.matches( ".*" + strike_regex + ".*" ) ) {

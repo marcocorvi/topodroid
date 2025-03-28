@@ -221,10 +221,15 @@ public class Symbol implements SymbolInterface
 
   /** @return the symbol color - either the paint color of full white
    */
-  public int    getColor() 
+  public int getColor( ) { return getColor( 0xffffffff ); }
+
+  /** @return the symbol color - either the paint color of the provided color
+   * @param color  provided color
+   */
+  public int getColor( int color )
   { 
     Paint paint = getPaint();
-    return ( paint == null )? 0xffffffff : paint.getColor();
+    return ( paint == null )? color : paint.getColor();
   }
 
   /** @return true if the symbol is enabled

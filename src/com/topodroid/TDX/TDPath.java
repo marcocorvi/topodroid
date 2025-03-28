@@ -975,6 +975,14 @@ public class TDPath
   //   return null;
   // }
 
+  static void checkOutdir()
+  {
+    TDLog.v("PATH out path " + APP_OUT_PATH );
+    if ( APP_OUT_PATH == null ) return;
+    File dir = new File( APP_OUT_PATH );
+    if ( ! dir.exists() ) dir.mkdirs();
+  }
+
   /** make sure the file parent directory exists
    * @param fp   file
    *

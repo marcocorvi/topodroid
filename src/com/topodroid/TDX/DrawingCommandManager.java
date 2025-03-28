@@ -35,6 +35,8 @@ import android.graphics.RectF;
 import android.view.Display;
 
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
@@ -2428,6 +2430,17 @@ public class DrawingCommandManager
       }
     }
   }
+
+  /** @return the set of point symbols used in the drawing
+   */
+  public Set<SymbolPoint> getPointSymbols()
+  {
+    Set<SymbolPoint> ret = new HashSet<>();
+    for ( Scrap scrap : mScraps ) scrap.getPointSymbols( ret );
+    return ret;
+  }
+
+  
           
     
 

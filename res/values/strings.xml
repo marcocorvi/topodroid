@@ -232,6 +232,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="lrud" copyable="es it pt sk">LRUD</string>
     <string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string>
 
+    <string name="few_points">Too few data points</string>
     <string name="few_data">Too few calibration data</string>
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>
     <string name="few_groups">Not enough data with group</string>

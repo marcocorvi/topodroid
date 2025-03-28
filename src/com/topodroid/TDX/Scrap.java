@@ -20,6 +20,7 @@ import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -3591,6 +3592,24 @@ public class Scrap
       } else if ( cmd instanceof DrawingPointPath ) {
         DrawingPointPath point = (DrawingPointPath)cmd;
         if ( BrushManager.isPointSection( point.mPointType ) ) point.shiftBy( x, y );
+      }
+    }
+  }
+
+  /** add the point symbols of this scrap to the set
+   * @param set   set of point symbols (no duplicate)
+   */
+  void getPointSymbols( Set<SymbolPoint> set )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingPointPath ) {
+        DrawingPointPath point = (DrawingPointPath)cmd;
+        if ( BrushManager.isPointLabel( point.mPointType ) ) continue;
+        if ( BrushManager.isPointSection( point.mPointType ) ) continue;
+        // if ( BrushManager.isPointPicture( point.mPointType ) ) continue;
+        if ( BrushManager.isPointMedia( point.mPointType ) ) continue;
+        SymbolPoint pt = BrushManager.getPointByIndex( point.mPointType );
+        set.add( pt );
       }
     }
   }

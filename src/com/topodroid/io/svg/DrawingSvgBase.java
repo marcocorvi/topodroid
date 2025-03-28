@@ -170,9 +170,13 @@ public class DrawingSvgBase
   /** @return the string hex RGB-color of a path
    * @param path   path
    */
-  static protected String pathToColor( DrawingPath path )
+  static protected String pathToColor( DrawingPath path ) { return pathToColor( path.color() ); }
+
+  /** @return the string hex RGB-color of a color
+   * @param color color
+   */
+  static protected String pathToColor( int color )
   {
-    int color = path.color();
     int red = ( color >> 16 ) & 0xff;
     int grn = ( color >>  8 ) & 0xff;
     int blu = ( color       ) & 0xff;
@@ -321,7 +325,7 @@ public class DrawingSvgBase
   static private void toSvgStation( PrintWriter pw, String name, String color, float x, float y )
   {
     pw.format("<g id=\"station_%s\">\n", name);
-    pw.format("<text font-size=\"%d\" fill=\"%s\" stroke=\"none\" text-anchor=\"middle\" id=\"%s\"", TDSetting.mSvgStationSize, color, name );
+    pw.format("<text font-size=\"%d\" fill=\"%s\" stroke=\"none\" text-anchor=\"middle\" id=\"s_%s\"", TDSetting.mSvgStationSize, color, name );
     printPointWithXY( pw, "", x, y + (POINT_RADIUS * 1.5f) );
     pw.format(">%s</text>\n", name );
     printPointWithCXCY( pw, "<circle", x, y );
@@ -411,8 +415,11 @@ public class DrawingSvgBase
         pw.format(Locale.US, "<g" );
         printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
         pw.format(Locale.US, " >\n" );
-
-        pw.format( "%s\n", sp.getSvg() );
+        // pw.format( "%s\n", sp.getSvg() );
+        float a = (float)( point.mOrientation );
+        float x = 0.1f * TDMath.cosd( a );
+        float y = 0.1f * TDMath.sind( a );
+        pw.format("  <path d=\"M 0 0 L %.2f %.2f\" marker-start=\"url(#%s)\" />\n", x, y, name ); 
         pw.format( end_grp );
         pw.format( end_grp );
       } else {
