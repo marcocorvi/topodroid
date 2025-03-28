@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  >
+  <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/marginv"
+	android:layout_marginBottom="@dimen/marginv"
+      >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/stations"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <EditText android:id="@+id/name"
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:inputType="text"
+        android:layout_marginTop="@dimen/marginv"
+        android:hint="@string/station"
+        android:importantForAutofill="no"
+      />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/help"
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_marginBottom="@dimen/marginv"
+      android:gravity="start"
+      >
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/btn_cancel"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/btn_clear"
+          style="@style/button_default"
+          android:text="@string/button_clear"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/btn_station"
+          style="@style/button_default"
+          android:text="@string/button_ok"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
+
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
+  />
+
+</LinearLayout>
+</ScrollView>

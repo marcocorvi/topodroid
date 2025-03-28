@@ -190,7 +190,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-    <LinearLayout android:id="@+id/layout_lrud"
+    <!-- LinearLayout android:id="@+id/layout_lrud" INTERMEDIATE_DATA
       android:layout_width="match_parent" 
       android:layout_height="50sp"
       android:paddingStart="@dimen/paddingh"
@@ -285,16 +285,16 @@
         android:singleLine="true"
         android:importantForAutofill="no"
         />
-    </LinearLayout>
+    </LinearLayout -->
 
     <LinearLayout android:id="@+id/layout4x"
-      android:layout_below="@id/layout_lrud_data"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:layout_marginBottom="@dimen/marginv"
       android:orientation="horizontal" 
       >
+      <!-- android:layout_below="@id/layout_lrud_data" INTERMEDIATE_DATA -->
       <com.topodroid.ui.MyHorizontalListView android:id="@+id/listviewx"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/marginv"

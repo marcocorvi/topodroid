@@ -1040,34 +1040,50 @@ public class ShotWindow extends Activity
   //   startActivityForResult( intent, TDRequest.EXTERNAL_ACTIVITY );
   // }
 
-  /** called to insert a manual shot after a given shot
-   * @param blk  shot after which to insert the new shot
-   */
-  void dialogInsertShotAt( DBlock blk )
-  {
-    (new ShotNewDialog( this, mApp, this, blk, blk.mId /* mShotId */ )).show();
-  }
+  // /** called to insert a manual shot after (?) a given shot // INTERMEDIATE_DATA
+  //  * @param blk  shot after which to insert the new shot
+  //  */
+  // void dialogInsertShotAt( DBlock blk )
+  // {
+  //   (new ShotNewDialog( this, mApp, this, blk, blk.mId )).show();
+  // }
 
-  // insert a manual intermediate leg
-  // called by the photo-sensor dialog only
-  // return id of inserted leg
-  long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
-  {
-    long id = mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
-    if  ( id >= 0L ) updateDisplay( ); 
-    return id;
-  }
+  // /** insert a manual intermediate leg - called by ShotEditDialog// INTERMEDIATE_DATA
+  //  * @param from     from station
+  //  * @param to       to station
+  //  * @param distance length
+  //  * @param bearing  azimuth
+  //  * @param clino    clino
+  //  * @param extend   leg extend
+  //  * @return id of inserted leg
+  //  */
+  // long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
+  // {
+  //   long id = mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
+  //   if  ( id >= 0L ) updateDisplay( ); 
+  //   return id;
+  // }
 
-  boolean insertLRUDatStation( long at, String station, float bearing, float clino,
-                            String left, String right, String up, String down )
-  {
-    // TDLog.v( TAG + "insert LRUD " + left + "/" + right + "/" + up + "/" + down + " at " + at );
-    if ( mApp.insertLRUDatStation( at, station, bearing, clino, left, right, up, down ) < 0L ) return false;
-    updateDisplay( ); 
-    return true;
-  }
+  // /** insert intermediate LRUD: first insert a duplicate leg from the given station, then insert LRUD at the TO point of the leg
+  //  * @param at ???
+  //  * @param station   station
+  //  * @param bearing   leg azimuth
+  //  * @param clino     leg clino
+  //  * @param left      left
+  //  * @param right     right
+  //  * @param up        up  
+  //  * @param down      down
+  //  */
+  // boolean insertLRUDatStation( long at, String station, float bearing, float clino, // INTERMEDIATE_DATA
+  //                           String left, String right, String up, String down )
+  // {
+  //   // TDLog.v( TAG + "insert LRUD " + left + "/" + right + "/" + up + "/" + down + " at " + at );
+  //   if ( mApp.insertLRUDatStation( at, station, bearing, clino, left, right, up, down ) < 0L ) return false;
+  //   updateDisplay( ); 
+  //   return true;
+  // }
 
-  // /** called by PhotoSensorDialog to split the survey
+  // /** called by shot edit dialog to split the survey
   //  * @param shot_id   id of the shot at which to split
   //  */
   // void askSurvey( long shot_id )
