@@ -668,6 +668,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Vymazať mapovanie ?</string>
     <string name="survey_move">Presunúť zámery k Mapovaniu %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">Rozdeliť Mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>

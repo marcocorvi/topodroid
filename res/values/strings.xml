@@ -674,6 +674,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Delete survey ?</string>
     <string name="survey_move">Move shots to survey %1$s ?</string>
+    <string name="survey_copy_all_flags">Shots copyable only if all displayed</string>
+    <string name="survey_copy_only_tail">Only the final segment of shots is copyable</string>
     <string name="survey_split">Split survey ?</string>
     <string name="survey_not_attached">WARNING: unattached shots</string>
     <string name="survey_not_extend">WARNING: unset shot extends</string>

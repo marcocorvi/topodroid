@@ -663,6 +663,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Изтриване на картировката \?</string>
     <string name="survey_move">Преместване на измерванията в картировка %1$s \?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">Разделяне на картировката \?</string>
     <string name="survey_not_attached">ПРЕДУПРЕЖДЕНИЕ: неприкрепени измервания</string>
     <string name="survey_not_extend">ПРЕДУПРЕЖДЕНИЕ: неустановени измервания</string>

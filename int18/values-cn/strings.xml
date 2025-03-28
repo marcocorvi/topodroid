@@ -658,6 +658,8 @@
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">删除测量 ?</string>
     <string name="survey_move">移动测射到测量里 %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">拆分测量 ?</string>
     <string name="survey_not_attached">警告:未连接的测量</string>
     <string name="survey_not_extend">警告:未设置测线扩展</string>

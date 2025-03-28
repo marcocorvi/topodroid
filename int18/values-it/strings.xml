@@ -659,6 +659,8 @@
     <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_move">Muovere i tiri al rilievo %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">Dividi rilievo?</string>
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">ATTENZIONE: extend disabilitati</string>

@@ -658,6 +658,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="survey_date">aaaa/mm/jj</string -->
     <string name="survey_delete">Supprimer le relevé ?</string>
     <string name="survey_move">Déplacer les visées vers le relevé %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">Diviser le relevé ?</string>
     <string name ="survey_not_attached">ATTENTION : visées non reliées !</string>
     <string name="survey_not_extend">ATTENTION : direction d\'extension des visées non définie !</string>

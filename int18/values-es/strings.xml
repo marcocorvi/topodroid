@@ -662,6 +662,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">¿Quiere eliminar la topografía?</string>
     <string name="survey_move">Mover tomas a la topografia %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>

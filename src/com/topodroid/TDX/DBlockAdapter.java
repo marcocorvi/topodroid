@@ -36,6 +36,7 @@ import android.view.KeyEvent;
 // import androidx.annotation.RecentlyNonNull;
 
 import java.util.List;
+import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -318,6 +319,28 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** @return the list of the items on selection
    */
   List<DBlock> getMultiSelect() { return mSelect; }
+
+  private boolean isShotMultiSelect( DBlock blk )
+  {
+    ListIterator< DBlock > it = mSelect.listIterator();
+    while ( it.hasNext() ) {
+      if ( blk == (DBlock)it.next() ) return true;
+    }
+    return false;
+  }
+
+  /** @return true if the multiselection contains the tail of the shots
+   */
+  boolean isMultiSelectTail()
+  {
+    int size = getCount();
+    int pos = size - mSelect.size();
+    if ( pos < 0 ) pos = 0; // extra safety
+    for ( ; pos < size; ++pos ) {
+      if ( ! isShotMultiSelect( (DBlock)( getItem( pos ) ) ) ) return false;
+    }
+    return true;
+  } 
 
   /** clear the multiselection
    */

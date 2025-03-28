@@ -656,6 +656,8 @@
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
     <string name="survey_delete">Удалить съёмку?</string>
     <string name="survey_move">Переместить замеры в съёмку %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
     <string name="survey_split">Разорвать съёмку ?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>

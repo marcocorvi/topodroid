@@ -619,6 +619,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="survey_date">aaaa.mm.dd</string -->
   <string name="survey_delete">Apagar a topo?</string>
   <string name="survey_move">Mover medidas para topo %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
   <string name="survey_split">Dividir a topo?</string>
   <string name="survey_not_attached">ALERTA: visadas desconectadas</string>
   <string name="survey_not_extend">ALERTA: visadas sem medidas auxiliares</string>

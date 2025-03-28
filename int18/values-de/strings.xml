@@ -607,6 +607,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="survey_date">jjjj.mm.tt</string -->
   <string name="survey_delete">Vermessung löschen?</string>
   <string name="survey_move">Messungen verschieben nach %1$s ?</string>
+    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
+    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
   <string name="survey_split">Vermessung teilen?</string>
   <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
   <string name="survey_not_extend">WARNUNG: Nicht definierte Ausrichtung im Seitenriss</string>
