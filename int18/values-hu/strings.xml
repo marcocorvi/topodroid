@@ -658,8 +658,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Törli a felmérést?</string>
     <string name="survey_move">Mérések mozhatása a %1$s felmérésbe?</string>
-    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+    <string name="survey_copy_all_flags">A mérések akkor másolhatók, ha mind megjelennek</string>
+    <string name="survey_copy_only_tail">Csak a mérések utolsó része másolható</string>
     <string name="survey_split">Felosztja a felmérést?</string>
     <string name="survey_not_attached">FIGYELEM: nem kapcsolódó mérések</string>
     <string name="survey_not_extend">FIGYELEM: nincs beállítva a mérés kiterítése</string>
