@@ -36,8 +36,9 @@
   <ListView android:id="@+id/code_list"
      style="@style/list_top"
      android:layout_width="match_parent"
-     android:layout_height="fill_parent"
+     android:layout_height="fill_parent" 
      android:layout_weight="1"
      android:background="#111"
-  />  
+  />
+  <!-- lint: Use a layout_height of 0dp instead of fill_parent for better performance -->
 </LinearLayout>

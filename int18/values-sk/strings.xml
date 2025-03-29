@@ -2376,7 +2376,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">3D model</string>
     <!-- UNUSED string name="help_temperature">Temperature</string -->
-    <string name="help_sketch_3d">3D sketch lifting</string>
+    <!-- UNUSED string name="help_sketch_3d">3D sketch lifting</string -->
     <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
     <string name="help_light_3d">Režim</string>

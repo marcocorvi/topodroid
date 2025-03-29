@@ -365,7 +365,7 @@ public class TopoGL extends Activity
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     // TDLog.v("on create: Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 );
-    // TDLog.v("on create");
+    TDLog.v("GL on create - texture root: " + mTextureRoot );
     checkPreferences();
 
     mHasC3d     &= TDLevel.overExpert;
@@ -1942,7 +1942,7 @@ public class TopoGL extends Activity
   public static float mDEMbuffer  = 200;
   public static int   mDEMmaxsize = 400;
   public static int   mDEMreduce  = DEM_SHRINK;
-  public static String mTextureRoot = "/sdcard/";
+  public static String mTextureRoot = "/sdcard/"; // Environment.getExternalStorageDirectory().getPath();
   // static boolean mWallConvexHull = false;
   // static boolean mWallPowercrust = false;
   // static boolean mWallDelaunay   = false;

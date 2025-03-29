@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.R;
 
+import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -2248,7 +2249,7 @@ class TDPrefKey
     "200",
     "400",
     "1",
-    "/sdcard/",
+    "/sdcard/", // Environment.getExternalStorageDirectory().getPath() 
   };
   static int[] DEM3Dlvl = {
     N,
@@ -2716,14 +2717,14 @@ class TDPrefKey
   {
     ArrayList< Integer > res = new ArrayList<>();
     // key = key.replaceAll( "*", "\\*" );
-    Pattern p = Pattern.compile( key.toUpperCase() );
+    Pattern p = Pattern.compile( key.toUpperCase(Locale.US) );
     int cat = 0;
     for ( int[] section : mSections ) {
       if ( section != null ) {
         // TDLog.v("check category " + cat + " titles " + section.length );
         for ( int r : section ) {
           if ( r < 0 ) break;
-          Matcher m = p.matcher( TDInstance.getResourceString( r ).toUpperCase() );
+          Matcher m = p.matcher( TDInstance.getResourceString( r ).toUpperCase(Locale.US) );
           if ( m.find() ) {
             // TDLog.v("matched category " + cat + " titles " + section.length );
             res.add( cat ); // add matching category

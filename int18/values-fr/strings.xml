@@ -2330,7 +2330,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="help_alpha_3d">M.N.E.</string>
     <string name="help_wall_3d">Modèle 3D</string>
     <!-- UNUSED string name="help_temperature">Tempérture</string -->
-    <string name="help_sketch_3d">Levage de croquis en 3D</string>
+    <!-- UNUSED string name="help_sketch_3d">Levage de croquis en 3D</string -->
     <!-- UNUSED string name="help_fractal">Analyse fractale</string -->
 
     <string name="help_light_3d">Panoramique et lumière</string>

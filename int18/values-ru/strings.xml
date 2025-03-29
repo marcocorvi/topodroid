@@ -2381,7 +2381,7 @@
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">3D модель</string>
     <!-- UNUSED string name="help_temperature">Температура</string -->
-    <string name="help_sketch_3d">3D sketch lifting</string>
+    <!-- UNUSED string name="help_sketch_3d">3D sketch lifting</string -->
     <!-- UNUSED string name="help_fractal">Фрактальный анализ</string -->
 
     <string name="help_light_3d">Перемещение и освещение</string>

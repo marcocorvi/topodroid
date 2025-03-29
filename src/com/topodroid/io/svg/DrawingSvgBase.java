@@ -791,24 +791,91 @@ public class DrawingSvgBase
       // TDLog.v("SVG point marker " + pt.getFullThName() );
       out.write( "    <marker id=\"" + name + "\" markerWidth=\"40\" markerHeight=\"40\" viewBox=\"0 0 40 40\" refX=\"20\" refY=\"20\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n");
       out.write( "      " );
-      int p = pt.getSvg().indexOf("d=\"M ");
-      out.write( pt.getSvg().substring(0, p+5 ) );
-      String[] svg = pt.getSvg().substring(p+5).split(" ");
-      int k = 0;
-      for ( ; k < svg.length; ++k ) {
-        if ( svg[k].startsWith("\"") ) {
-          out.write( "\" stroke-width=\"0.3\" fill=\"none\" stroke=\"" );
-          int color = pt.getColor( 0xff000000 );
-          out.write( pathToColor( color ) );
-          out.write( "\" />\n" );
-          break;
+      int pos = 0;
+      for ( ; ; ) {
+        boolean is_path = true;
+        int pos_path   = pt.getSvg().indexOf("<path d=\"", pos );
+        int pos_circle = pt.getSvg().indexOf("<circle ", pos );
+        if ( pos_path < 0 && pos_circle < 0 ) break;
+        if ( pos_path >= 0 && ( pos_circle < 0 || pos_path < pos_circle ) ) { // path
+          pos = pos_path + 9;
+          is_path = true;
+        } else {
+          pos = pos_circle + 8;
+          is_path = false;
         }
-        try {
-          float f = (Float.parseFloat( svg[k] ) + 10)*2;
-          out.write( String.format(Locale.US, "%.2f ", f ) );
-        } catch ( NumberFormatException e ) {
-          out.write( svg[k] + " " );
+        if ( is_path ) {
+          int qos = pt.getSvg().indexOf("\"/>", pos ); // see SymbolPoint:695
+          String[] svg = pt.getSvg().substring( pos, qos ).split(" ");
+          out.write( "<path d=\"" );
+          int k = 0;
+          for ( ; k < svg.length; ++k ) {
+            if ( svg[k].startsWith("\"") ) {
+              break;
+            } else if ( svg[k].equals("M") || svg[k].equals("L") ) {
+              try {
+                float x = (Float.parseFloat( svg[k+1] ) + 10)*2;
+                float y = (Float.parseFloat( svg[k+2] ) + 10)*2;
+                out.write( String.format(Locale.US, "%s %.2f %.2f ", svg[k], x, y ) );
+              } catch ( NumberFormatException e ) {
+                out.write( svg[k] + " " );
+                out.write( svg[k+1] + " " );
+                out.write( svg[k+2] + " " );
+              }
+              k += 2;
+            } else if ( svg[k].equals("C") ||  svg[k].equals("A") ) {
+              try {
+                float x0 = (Float.parseFloat( svg[k+1] ) + 10)*2;
+                float y0 = (Float.parseFloat( svg[k+2] ) + 10)*2;
+                if ( svg[k].equals("A") ) {
+                  out.write( String.format(Locale.US, "%s %.2f %.2f 0 1 ", svg[k], x0, y0 ) );
+                } else {
+                  float x1 = (Float.parseFloat( svg[k+1] ) + 10)*2;
+                  float y1 = (Float.parseFloat( svg[k+2] ) + 10)*2;
+                  out.write( String.format(Locale.US, "%s %.2f %.2f %.2f %.2f ", svg[k], x0, y0, x1, y1 ) );
+                }
+              } catch ( NumberFormatException e ) {
+                out.write( svg[k] + " " );
+                out.write( svg[k+1] + " " );
+                out.write( svg[k+2] + " " );
+                out.write( svg[k+3] + " " );
+                out.write( svg[k+4] + " " );
+              }
+              k += 4;
+            } else {
+              try {
+                float x = (Float.parseFloat( svg[k  ] ) + 10)*2;
+                float y = (Float.parseFloat( svg[k+1] ) + 10)*2;
+                out.write( String.format(Locale.US, "%.2f %.2f ", x, y ) );
+              } catch ( NumberFormatException e ) {
+                out.write( svg[k] + " " );
+                out.write( svg[k+1] + " " );
+              }
+            }
+          }
+          out.write( "\" " );
+          pos = qos;
+        } else { // circle
+          int qos = pt.getSvg().indexOf("/>", pos ); // see SymbolPoint:695
+          String svg = pt.getSvg().substring( pos, qos+2 );
+          int c1 = svg.indexOf( "cx=\"" );
+          int c2 = svg.indexOf( "\" cy=\"", c1 );
+          int c3 = svg.indexOf( "\" r=\"", c2 );
+          int c4 = svg.indexOf( "\" />", c3 );
+          try {
+            float cx = (Float.parseFloat( svg.substring( c1+4, c2 ) ) + 10)*2;
+            float cy = (Float.parseFloat( svg.substring( c2+6, c3 ) ) + 10)*2;
+            float r  = (Float.parseFloat( svg.substring( c3+5, c4 ) ))*2;
+            out.write( String.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%.2f\" ", cx, cy, r ) );
+          } catch ( NumberFormatException e ) {
+            out.write( svg );
+          }
+          pos = qos;
         }
+        out.write( "stroke-width=\"0.3\" fill=\"none\" stroke=\"" );
+        int color = pt.getColor( 0xff000000 );
+        out.write( pathToColor( color ) );
+        out.write( "\" />\n" );
       }
       out.write( "    </marker>\n");
     }

@@ -1,4 +1,4 @@
-// area_acolor_vertex.glsl
+// area_acolor_vertex.glsl - lint: appear to be unused
 
 uniform mat4 uMVPMatrix;
 

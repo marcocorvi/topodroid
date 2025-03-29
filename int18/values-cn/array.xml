@@ -83,7 +83,7 @@
   </string-array>
 
   
-  <string-array name="闭环关闭">
+  <string-array name="loopClosure">
      <item name="none">不补偿</item>
      <item name="normal">标准</item>
      <item name="weighted">Weighted</item>

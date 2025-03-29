@@ -2394,7 +2394,7 @@
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">modello 3D</string>
     <!-- UNUSED string name="help_temperature">Temperatura</string -->
-    <string name="help_sketch_3d">sollevamento disegno 3D</string>
+    <!-- UNUSED string name="help_sketch_3d">sollevamento disegno 3D</string -->
     <!-- UNUSED string name="help_fractal">Analisi Frattale</string -->
 
     <string name="help_light_3d">Panoramica e luce</string>

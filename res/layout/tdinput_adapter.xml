@@ -4,7 +4,10 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:background="@color/menu_background"
-      > <!-- background is necessary -->
+      > 
+<!-- background is necessary, otherwise the menu get confused with the window background 
+  lint: Possible overdraw: Root element paints background 
+-->
       <Button android:id="@+id/tdinput_color"
         android:layout_width="20dp"
         android:layout_height="20dp"

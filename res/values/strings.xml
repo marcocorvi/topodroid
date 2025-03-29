@@ -174,7 +174,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f &#xb0; (max %3$.2f &#xb0;)</string>
     <string name="magn_dip">Magn. dip &#xb0;</string>
     <string name="auto_calib" copyable="pt">Auto Calib</string>
-    <string name="autocalib_not_supported">Required calibration computation</string>
+    <string name="autocalib_not_supported">Required calibration computation</string><!-- lint: unused -->
     
     <string name="algorithm">Algorithm:</string>
     <string name="auto" copyable="it pt">auto</string>
@@ -237,7 +237,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>
     <string name="few_groups">Not enough data with group</string>
     <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
-    <string name="regroup">No regroup</string>
+    <string name="regroup">No regroup</string><!-- lint: unued -->
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
     <string name="getting_info">Getting DistoX info &#8230;</string>
@@ -498,7 +498,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
     <string name="menu_packets">PACKETS</string>
-    <string name="menu_calib_auto" copyable="pt">AUTO-CALIB</string>
+    <string name="menu_calib_auto" copyable="pt">AUTO-CALIB</string><!-- lint: unused -->
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette" copyable="fr it">PALETTE</string>
     <string name="menu_photo" copyable="fr">PHOTO</string>
@@ -870,7 +870,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_prefix"  >Prefix</string>
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
-    <string name="button_lrud"  copyable="all">+ LRUD</string>
+    <string name="button_lrud"  copyable="all">+ LRUD</string><!-- lint: unused -->
     <string name="button_ok"  copyable="all">OK</string>
     <string name="button_off"       >off</string>
     <string name="button_on"        >on</string>
@@ -1084,7 +1084,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_refresh">Refresh display</string>
     <string name="help_device">Device activity</string>
-    <string name="help_device_add">Add a device</string> <!-- KEEP -->
+    <string name="help_device_add">Add a device</string> <!-- lint: unused - KEEP -->
     <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_geopoint_app">External GNSS apps</string>
@@ -2439,7 +2439,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="help_alpha_3d" copyable="all">D.E.M.</string>
     <string name="help_wall_3d" copyable="sk">3D model</string>
     <!-- UNUSED string name="help_temperature">Temperature</string -->
-    <string name="help_sketch_3d" copyable="all">3D sketch lifting</string>
+    <!-- UNUSED string name="help_sketch_3d" copyable="all">3D sketch lifting</string -->
     <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
     <string name="help_light_3d">Pan and light</string>

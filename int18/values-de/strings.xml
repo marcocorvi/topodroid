@@ -2198,7 +2198,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_alpha_3d">D.E.M.</string>
   <string name="help_wall_3d">3D Modell</string>
   <!-- UNUSED string name="help_temperature">Temperatur</string -->
-  <string name="help_sketch_3d">3D Skizzen Erhöhung</string>
+  <!-- UNUSED string name="help_sketch_3d">3D Skizzen Erhöhung</string -->
   <!-- UNUSED string name="help_fractal">Fraktale Analyse</string -->
   <string name="help_light_3d">Verschieben und Licht</string>
   <string name="help_projection_3d">3D Projektion</string>

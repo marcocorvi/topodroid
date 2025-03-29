@@ -2058,7 +2058,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_export_settings">Импортиране/експортиране на настройки</string>
     <string name="title_export">Експортирай проекта в</string>
     <string name="title_equates">Сравнявания в проекта</string>
-    <string name="title_equate_new">Добави сравняване ...</string>
+    <string name="title_equate_new">Добави сравняване &#8230;</string>
     <string name="title_equate_with">Сравни %1$s и %2$s</string>
     <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <string name="title_drop">Извлачване на картировки \?</string>
@@ -2163,7 +2163,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="surface_east">Изток</string>
     <string name="surface_north">Север</string>
     <string name="dem_load">Зареди дигитален модел на височините</string>
-    <string name="dem_loading">Зареждане на повърхност ... моля, изчакайте</string>
+    <string name="dem_loading">Зареждане на повърхност &#8230; моля, изчакайте</string>
     <string name="dem_failed">Неуспешно зареждане на дигитален модел на височините</string>
     <string name="dem_ok">Четене на данни за дигитален модел на височините</string>
     <string name="dem">Дигитален модел на височините (DEM)</string>
@@ -2371,7 +2371,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_alpha_3d">Дигитален модел на височините (D.E.M.)</string>
     <string name="help_wall_3d">3D модел</string>
     <!-- UNUSED string name="help_temperature">Temperature</string -->
-    <string name="help_sketch_3d">повдигане на 3D скица</string>
+    <!-- UNUSED string name="help_sketch_3d">повдигане на 3D скица</string -->
     <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
     <string name="help_light_3d">Панорама и осветление</string>

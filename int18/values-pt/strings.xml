@@ -2229,7 +2229,7 @@ no campo abaixo e aperte o botão.
   <string name="help_alpha_3d">Superfície DEM</string>
   <string name="help_wall_3d">Modelo 3D</string>
   <!-- UNUSED string name="help_temperature">Tempertaure</string -->
-  <string name="help_sketch_3d">Elevação croqui 3D</string>
+  <!-- UNUSED string name="help_sketch_3d">Elevação croqui 3D</string -->
   <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
   <string name="help_light_3d">Giro e luz</string>
   <string name="help_projection_3d">Projeção 3D</string>

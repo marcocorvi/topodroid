@@ -2389,7 +2389,7 @@
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">3D 模型</string>
     <!-- UNUSED string name="help_temperature">温度</string -->
-    <string name="help_sketch_3d">3D 草图提升</string>
+    <!-- UNUSED string name="help_sketch_3d">3D 草图提升</string -->
     <!-- UNUSED string name="help_fractal">分形分析</string -->
 
     <string name="help_light_3d">Pan and light</string>

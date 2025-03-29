@@ -1,4 +1,4 @@
-// name_pos_hl_geometry
+// name_pos_hl_geometry - lint: appears to be unused
 
 layout (lines, max_vertices = 4) out;
   

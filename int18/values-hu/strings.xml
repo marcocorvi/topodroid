@@ -2398,7 +2398,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">3D modell</string>
     <!-- UNUSED string name="help_temperature">Hőmérséklet</string -->
-    <string name="help_sketch_3d">3D vázlat felemelés</string>
+    <!-- UNUSED string name="help_sketch_3d">3D vázlat felemelés</string -->
     <!-- UNUSED string name="help_fractal">Fraktál analízis</string -->
 
     <string name="help_light_3d">Eltolás és fény</string>

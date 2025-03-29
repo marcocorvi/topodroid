@@ -10,7 +10,6 @@
   android:layout_height="match_parent"
   >
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/layout1"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,14 +21,14 @@
       style="@style/button_empty"
       android:text="@string/button_help"
     />
-    <Button android:id="@+id/btn_search"
-      style="@style/button_default"
-      android:text="@string/button_search"
-      android:layout_marginEnd="@dimen/marginh"
-    />
     <Button android:id="@+id/btn_cancel"
       style="@style/button_default"
       android:text="@string/button_cancel"
+      android:layout_marginEnd="@dimen/marginh"
+    />
+    <Button android:id="@+id/btn_search"
+      style="@style/button_default"
+      android:text="@string/button_search"
       android:layout_marginEnd="@dimen/marginh"
     />
     <EditText android:id="@+id/name"

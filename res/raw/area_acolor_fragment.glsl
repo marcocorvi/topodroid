@@ -1,4 +1,4 @@
-// area_acolor_fragment.glsl
+// area_acolor_fragment.glsl - lint: appears to be unused
 
 precision mediump float;
 

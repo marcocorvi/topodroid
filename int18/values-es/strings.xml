@@ -2419,7 +2419,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">modelo 3D</string>
     <!-- UNUSED string name="help_temperature">Temperatura</string -->
-    <string name="help_sketch_3d">dibujo 3D levantando</string>
+    <!-- UNUSED string name="help_sketch_3d">dibujo 3D levantando</string -->
     <!-- UNUSED string name="help_fractal">Análisis Fractal</string -->
 
     <string name="help_light_3d">Panoramica y luz</string>

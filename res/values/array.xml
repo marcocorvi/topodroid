@@ -712,18 +712,18 @@
      <item name="ddmmss">ddmmss</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- UNUSED string-array name="calibAlgo">
      <item name="auto">Auto</item>
      <item name="linear">Linear</item>
      <item name="nonlinear">Non-linear</item>
-     <!-- item name="minimum">Minimum</item -->
+     <! - - item name="minimum">Minimum</item - - >
   </string-array>
   <string-array name="calibAlgoValue" translatable="false">
      <item name="auto">0</item>
      <item name="linear">1</item>
      <item name="nonlinear">2</item>
-     <!-- item name="minimum">3</item -->
-  </string-array>
+     <! - - item name="minimum">3</item - - >
+  </string-arrayi -->
 
   <string-array name="rawCData">
      <item name="none">None</item>
