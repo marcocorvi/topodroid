@@ -419,7 +419,7 @@ public class DrawingSvgBase
         // float a = (float)( point.mOrientation ) / 2.0f;
         float x = 0.1f;
         float y = 0.0f;
-        pw.format("  <path d=\"M 0 0 L %.2f %.2f\" marker-start=\"url(#%s)\" />\n", x, y, name ); 
+        pw.format(Locale.US, "  <path d=\"M 0 0 L %.2f %.2f\" marker-start=\"url(#%s)\" />\n", x, y, name ); 
         pw.format( end_grp );
         pw.format( end_grp );
       } else {
