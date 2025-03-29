@@ -208,40 +208,43 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write(    end_metadata );
       out.write(    sodipodi );
 
-      out.write( "  <defs id=\"defs\">\n" );
-      out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
-      out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
-      out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
-      out.write( "    </marker>\n"); 
-      // if ( TDSetting.mSvgLineDirection ) {
-        // TDLog.v( "SVG line direction");
-      StringWriter swD = new StringWriter();
-      PrintWriter pwD  = new PrintWriter(swD);
-      pwD.format("    <marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
-      pwD.format("       markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
-      pwD.format(Locale.US, "      markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
-      pwD.format("      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
-      pwD.format("    </marker>\n");
-      pwD.format("    <marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
-      pwD.format("      markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
-      pwD.format(Locale.US, "      markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
-      pwD.format("      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
-      pwD.format("    </marker>\n");
-      out.write( swD.getBuffer().toString() );
-      out.flush();
+      writeDefs( out, plot.getPointSymbols() ); // replaces:
+
+      // out.write( "  <defs id=\"defs\">\n" );
+      // out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
+      // out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
+      // out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
+      // out.write( "    </marker>\n"); 
+      // // if ( TDSetting.mSvgLineDirection ) {
+      //   // TDLog.v( "SVG line direction");
+      // StringWriter swD = new StringWriter();
+      // PrintWriter pwD  = new PrintWriter(swD);
+      // pwD.format("    <marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+      // pwD.format("       markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
+      // pwD.format(Locale.US, "      markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+      // pwD.format("      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+      // pwD.format("    </marker>\n");
+      // pwD.format("    <marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+      // pwD.format("      markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
+      // pwD.format(Locale.US, "      markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+      // pwD.format("      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+      // pwD.format("    </marker>\n");
+      // out.write( swD.getBuffer().toString() );
+      // out.flush();
       // }
-      out.write( "    <g id=\"icons\" " ); out.write( group_mode_open );
-      for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
-        SymbolPoint pt = (SymbolPoint) BrushManager.getPointByIndex(n);
-        if (pt != null) {
-          // int block = 1 + n; // block_name = 1 + therion_code
-          out.write("    <marker id=\"" + pt.getThName() + "\">\n");
-          out.write("      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"") + "\n");
-          out.write("    </marker>\n");
-        }
-      }
-      out.write( "    </g>\n");
-      out.write( "  </defs>\n");
+      // out.write( "    <g id=\"icons\" " ); out.write( group_mode_open );
+      // for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
+      //   SymbolPoint pt = (SymbolPoint) BrushManager.getPointByIndex(n);
+      //   if (pt != null) {
+      //     // int block = 1 + n; // block_name = 1 + therion_code
+      //     out.write("    <marker id=\"" + pt.getThName() + "\">\n");
+      //     out.write("      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"") + "\n");
+      //     out.write("    </marker>\n");
+      //   }
+      // }
+      // out.write( "    </g>\n");
+      // out.write( "  </defs>\n");
+
       // out.write(    clip );
       // out.write( "  <svg width=\"" + width + "\" height=\"" + height + "\"\n" );
       out.write( "  <svg width=\"auto\" height=\"auto\"\n" );

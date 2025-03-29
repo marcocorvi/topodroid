@@ -87,44 +87,44 @@ public class DrawingSvg extends DrawingSvgBase
       out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write( sodipodi );
 
-      out.write( "  <defs>\n");
-      out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
-      out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
-      out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
-      out.write( "    </marker>\n"); 
-      out.write( "    <marker id=\"Circle\" markerWidth=\"20\" markerHeight=\"20\" viewBox=\"0 0 40 40\" refX=\"10\" refY=\"10\">\n");
-      out.write( "      <circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"red\" />\n");
-      out.write( "    </marker>\n"); 
+      writeDefs( out, plot.getPointSymbols() ); // replaces:
 
-      Set<SymbolPoint> pts = plot.getPointSymbols();
-      for ( SymbolPoint pt : pts ) {
-        String name = pt.getFullThName();
-        // TDLog.v("SVG point marker " + pt.getFullThName() );
-        out.write( "    <marker id=\"" + name + "\" markerWidth=\"40\" markerHeight=\"40\" viewBox=\"0 0 40 40\" refX=\"20\" refY=\"20\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n");
-        out.write( "      " );
-        int p = pt.getSvg().indexOf("d=\"M ");
-        out.write( pt.getSvg().substring(0, p+5 ) );
-        String[] svg = pt.getSvg().substring(p+5).split(" ");
-        int k = 0;
-        for ( ; k < svg.length; ++k ) {
-          if ( svg[k].startsWith("\"") ) {
-            out.write( "\" stroke-width=\"0.3\" fill=\"none\" stroke=\"" );
-            int color = pt.getColor( 0xff000000 );
-            out.write( pathToColor( color ) );
-            out.write( "\" />\n" );
-            break;
-          }
-          try {
-            float f = (Float.parseFloat( svg[k] ) + 10)*2;
-            out.write( String.format(Locale.US, "%.2f ", f ) );
-          } catch ( NumberFormatException e ) {
-            out.write( svg[k] + " " );
-          }
-        }
-        out.write( "    </marker>\n");
-      }
-
-      out.write( "  </defs>\n");
+      // out.write( "  <defs>\n");
+      // out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
+      // out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
+      // out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
+      // out.write( "    </marker>\n"); 
+      // out.write( "    <marker id=\"Circle\" markerWidth=\"20\" markerHeight=\"20\" viewBox=\"0 0 40 40\" refX=\"10\" refY=\"10\">\n");
+      // out.write( "      <circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"red\" />\n");
+      // out.write( "    </marker>\n"); 
+      // Set<SymbolPoint> pts = plot.getPointSymbols();
+      // for ( SymbolPoint pt : pts ) {
+      //   String name = pt.getFullThName();
+      //   // TDLog.v("SVG point marker " + pt.getFullThName() );
+      //   out.write( "    <marker id=\"" + name + "\" markerWidth=\"40\" markerHeight=\"40\" viewBox=\"0 0 40 40\" refX=\"20\" refY=\"20\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n");
+      //   out.write( "      " );
+      //   int p = pt.getSvg().indexOf("d=\"M ");
+      //   out.write( pt.getSvg().substring(0, p+5 ) );
+      //   String[] svg = pt.getSvg().substring(p+5).split(" ");
+      //   int k = 0;
+      //   for ( ; k < svg.length; ++k ) {
+      //     if ( svg[k].startsWith("\"") ) {
+      //       out.write( "\" stroke-width=\"0.3\" fill=\"none\" stroke=\"" );
+      //       int color = pt.getColor( 0xff000000 );
+      //       out.write( pathToColor( color ) );
+      //       out.write( "\" />\n" );
+      //       break;
+      //     }
+      //     try {
+      //       float f = (Float.parseFloat( svg[k] ) + 10)*2;
+      //       out.write( String.format(Locale.US, "%.2f ", f ) );
+      //     } catch ( NumberFormatException e ) {
+      //       out.write( svg[k] + " " );
+      //     }
+      //   }
+      //   out.write( "    </marker>\n");
+      // }
+      // out.write( "  </defs>\n");
 
       // out.write( "<g id=\"canvas\" transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
 
@@ -227,23 +227,23 @@ public class DrawingSvg extends DrawingSvgBase
         }
       }
 
-      if ( TDSetting.mSvgLineDirection ) {
-        // TDLog.v( "SVG line direction");
-        StringWriter swD = new StringWriter();
-        PrintWriter pwD  = new PrintWriter(swD);
-        pwD.format("<marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
-        pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
-        pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
-        pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
-        pwD.format("</marker>\n");
-        pwD.format("<marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
-        pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
-        pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
-        pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
-        pwD.format("</marker>\n");
-        out.write( swD.getBuffer().toString() );
-        out.flush();
-      }
+      // if ( TDSetting.mSvgLineDirection ) { // moved to writeDefs()
+      //   // TDLog.v( "SVG line direction");
+      //   StringWriter swD = new StringWriter();
+      //   PrintWriter pwD  = new PrintWriter(swD);
+      //   pwD.format("<marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+      //   pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
+      //   pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+      //   pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+      //   pwD.format("</marker>\n");
+      //   pwD.format("<marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+      //   pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
+      //   pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+      //   pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+      //   pwD.format("</marker>\n");
+      //   out.write( swD.getBuffer().toString() );
+      //   out.flush();
+      // }
 
       // TDLog.v( "SVG scraps " + plot.getScraps().size() );
       for ( Scrap scrap : plot.getScraps() ) {

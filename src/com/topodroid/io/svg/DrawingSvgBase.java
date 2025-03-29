@@ -416,9 +416,9 @@ public class DrawingSvgBase
         printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
         pw.format(Locale.US, " >\n" );
         // pw.format( "%s\n", sp.getSvg() );
-        float a = (float)( point.mOrientation );
-        float x = 0.1f * TDMath.cosd( a );
-        float y = 0.1f * TDMath.sind( a );
+        // float a = (float)( point.mOrientation ) / 2.0f;
+        float x = 0.1f;
+        float y = 0.0f;
         pw.format("  <path d=\"M 0 0 L %.2f %.2f\" marker-start=\"url(#%s)\" />\n", x, y, name ); 
         pw.format( end_grp );
         pw.format( end_grp );
@@ -751,4 +751,61 @@ public class DrawingSvgBase
 
   protected static final String sodipodi = "  <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"auto\" inkscape:window-height=\"auto\" id=\"namedview48\" showgrid=\"false\" inkscape:zoom=\"1\" inkscape:cx=\"auto\" inkscape:cy=\"auto\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:window-maximized=\"1\" inkscape:current-layer=\"w2d_Walls_shp\" showborder=\"false\"/>\n";
 
+
+  protected void writeDefs( BufferedWriter out, Set<SymbolPoint> pts ) throws IOException
+  {
+    out.write( "  <defs>\n");
+    out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
+    out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
+    out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
+    out.write( "    </marker>\n"); 
+    out.write( "    <marker id=\"Circle\" markerWidth=\"20\" markerHeight=\"20\" viewBox=\"0 0 40 40\" refX=\"10\" refY=\"10\">\n");
+    out.write( "      <circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"red\" />\n");
+    out.write( "    </marker>\n"); 
+    // if ( TDSetting.mSvgLineDirection ) {
+      StringWriter swD = new StringWriter();
+      PrintWriter pwD  = new PrintWriter(swD);
+      pwD.format("    <marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+      pwD.format("       markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
+      pwD.format(Locale.US, "      markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+      pwD.format("      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+      pwD.format("    </marker>\n");
+      pwD.format("    <marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+      pwD.format("      markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
+      pwD.format(Locale.US, "      markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+      pwD.format("      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+      pwD.format("    </marker>\n");
+      out.write( swD.getBuffer().toString() );
+    // }
+    out.flush();
+
+    for ( SymbolPoint pt : pts ) {
+      String name = pt.getFullThName();
+      // TDLog.v("SVG point marker " + pt.getFullThName() );
+      out.write( "    <marker id=\"" + name + "\" markerWidth=\"40\" markerHeight=\"40\" viewBox=\"0 0 40 40\" refX=\"20\" refY=\"20\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n");
+      out.write( "      " );
+      int p = pt.getSvg().indexOf("d=\"M ");
+      out.write( pt.getSvg().substring(0, p+5 ) );
+      String[] svg = pt.getSvg().substring(p+5).split(" ");
+      int k = 0;
+      for ( ; k < svg.length; ++k ) {
+        if ( svg[k].startsWith("\"") ) {
+          out.write( "\" stroke-width=\"0.3\" fill=\"none\" stroke=\"" );
+          int color = pt.getColor( 0xff000000 );
+          out.write( pathToColor( color ) );
+          out.write( "\" />\n" );
+          break;
+        }
+        try {
+          float f = (Float.parseFloat( svg[k] ) + 10)*2;
+          out.write( String.format(Locale.US, "%.2f ", f ) );
+        } catch ( NumberFormatException e ) {
+          out.write( svg[k] + " " );
+        }
+      }
+      out.write( "    </marker>\n");
+    }
+    out.write( "  </defs>\n");
+    out.flush();
+  }
 }
