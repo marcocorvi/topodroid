@@ -752,8 +752,15 @@ public class DrawingSvgBase
   protected static final String sodipodi = "  <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"auto\" inkscape:window-height=\"auto\" id=\"namedview48\" showgrid=\"false\" inkscape:zoom=\"1\" inkscape:cx=\"auto\" inkscape:cy=\"auto\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:window-maximized=\"1\" inkscape:current-layer=\"w2d_Walls_shp\" showborder=\"false\"/>\n";
 
 
+  /** write the markers
+   * @param out    writer
+   * @param pts    set of point symbols used in the sketch
+   */
   protected void writeDefs( BufferedWriter out, Set<SymbolPoint> pts ) throws IOException
   {
+    // TDLog.v("SVG scale " + TDSetting.mToSvg );
+    // scale 1:100 corresponds to mToSvg 1.8897638
+    //       1:200                       0.9448819
     out.write( "  <defs>\n");
     out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
     out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
