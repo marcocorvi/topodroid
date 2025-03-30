@@ -3606,8 +3606,8 @@ public class Scrap
         DrawingPointPath point = (DrawingPointPath)cmd;
         if ( BrushManager.isPointLabel( point.mPointType ) ) continue;
         if ( BrushManager.isPointSection( point.mPointType ) ) continue;
-        // if ( BrushManager.isPointPicture( point.mPointType ) ) continue;
-        if ( BrushManager.isPointMedia( point.mPointType ) ) continue;
+        if ( BrushManager.isPointPicture( point.mPointType ) ) continue;
+        // if ( BrushManager.isPointMedia( point.mPointType ) ) continue;
         SymbolPoint pt = BrushManager.getPointByIndex( point.mPointType );
         set.add( pt );
       }

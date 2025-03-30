@@ -1088,6 +1088,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_add_project">Projekt hinzufügen</string>
   <string name="help_add_surveys">Vermessungen hinzufügen</string>
   <string name="help_drop_surveys">Vermessungen entfernen</string>
+    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
   <string name="help_view_surveys">Vermessungen anzeigen</string>
   <string name="help_view_equates">Verbindungspunkte anzeigen</string>
   <string name="help_export_config">Projekt exportieren</string>

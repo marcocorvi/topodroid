@@ -41,6 +41,12 @@ import android.graphics.Matrix;
 
 public class SymbolPoint extends Symbol
 {
+  static final private float SVG_M_OFF   = 10;
+  static final private float SVG_M_SCALE = 2;
+  static final public  int    SVG_M_SIDE = 40;           // marker side
+  static final public  int    SVG_M_REF  = 20;           // marker reference point (X or Y)
+  static final public  String SVG_M_VBOX = "0 0 40 40";  // marker viewBox
+ 
   static final private float dxfScale = 0.05f; // 1 / 20 TopoDroid has 20 units = 1 m
   static final private float csxScale = 5.00f;
   static final private float csxdxfScale = csxScale * dxfScale;
@@ -497,7 +503,7 @@ public class SymbolPoint extends Symbol
             x00 = x0 * dxfScale;
             y00 = y0 * dxfScale;
 
-            pv1.format(Locale.US, "M %.2f %.2f ", x00*csxScale, y00*csxScale );
+            pv1.format(Locale.US, "M %.2f %.2f ", (x00*csxScale+SVG_M_OFF)*SVG_M_SCALE, (y00*csxScale+SVG_M_OFF)*SVG_M_SCALE );
           }
         } catch ( NumberFormatException e ) {
           TDLog.e( path + " parse moveTo error" );
@@ -520,7 +526,7 @@ public class SymbolPoint extends Symbol
             x00 = x01;
             y00 = y01;
             
-            pv1.format(Locale.US, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
+            pv1.format(Locale.US, "L %.2f %.2f ", (x00*csxScale+SVG_M_OFF)*SVG_M_SCALE, (y00*csxScale+SVG_M_OFF)*SVG_M_SCALE );
           }
         } catch ( NumberFormatException e ) {
           TDLog.e( path + " parse lineTo error" );
@@ -606,7 +612,9 @@ public class SymbolPoint extends Symbol
             y00 = y2 * dxfScale;
 
             pv1.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f ",
-               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale, y1*csxdxfScale, x2*csxdxfScale, y2*csxdxfScale );
+               (x0*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, (y0*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, 
+               (x1*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, (y1*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE,
+               (x2*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, (y2*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE );
           }
         } catch ( NumberFormatException e ) {
           TDLog.e( path + " parse cubicTo error" );
@@ -634,7 +642,7 @@ public class SymbolPoint extends Symbol
             //   x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
             pv3.format(Locale.US,
               "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%.2f\" />",
-              x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
+              (x0*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, (y0*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, x1*csxdxfScale*SVG_M_SCALE );
           }
         } catch ( NumberFormatException e ) {
           TDLog.e( path + " parse circle error" );
@@ -684,15 +692,16 @@ public class SymbolPoint extends Symbol
             y00 = (cy + ry * TDMath.sind( x2+y2 ) )* dxfScale;
             
             // mode to (x00, y00)
-            pv1.format(Locale.US, "M %.2f %.2f ", x0i*csxScale, y0i*csxScale );
-            pv1.format(Locale.US, "A %.2f %.2f 0 1 %.2f %.2f ", rx*csxdxfScale, ry*csxdxfScale, x00*csxScale, y00*csxScale );
+            pv1.format(Locale.US, "M %.2f %.2f ", (x0i*csxScale+SVG_M_OFF)*SVG_M_SCALE, (y0i*csxScale+SVG_M_OFF)*SVG_M_SCALE );
+            pv1.format(Locale.US, "A %.2f %.2f 0 1 %.2f %.2f ", 
+              (rx*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, (ry*csxdxfScale+SVG_M_OFF)*SVG_M_SCALE, (x00*csxScale+SVG_M_OFF)*SVG_M_SCALE, (y00*csxScale+SVG_M_OFF)*SVG_M_SCALE );
           }
         } catch ( NumberFormatException e ) {
           TDLog.e( path + " parse arcTo error" );
         }
       }
     }
-    mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
+    mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\" />" + sv3.getBuffer().toString();
     mXvi = sv4.getBuffer().toString();
   }
 

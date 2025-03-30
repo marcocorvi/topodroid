@@ -1171,6 +1171,7 @@
     <string name="help_add_project">添加洞穴项目</string>
     <string name="help_add_surveys">添加测量</string>
     <string name="help_drop_surveys">终止测量</string>
+    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
     <string name="help_view_surveys">显示测量项目</string>
     <string name="help_view_equates">显示相同</string>
     <string name="help_export_config">输出项目</string>

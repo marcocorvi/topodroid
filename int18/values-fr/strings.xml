@@ -1172,6 +1172,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_add_project">Ajouter un projet</string>
     <string name="help_add_surveys">Ajouter des topographies au projet</string>
     <string name="help_drop_surveys">Supprimer des topographies du projet</string>
+    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
     <string name="help_view_surveys">Afficher les topographies</string>
     <string name="help_view_equates">Lister les égalités</string>
     <string name="help_export_config">Exporter le projet</string>

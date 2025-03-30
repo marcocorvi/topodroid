@@ -1181,6 +1181,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_add_project">Pridaj Projekt</string>
     <string name="help_add_surveys">Pridač Mapovania</string>
     <string name="help_drop_surveys">Zahodiť Mapovania</string>
+    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
     <string name="help_view_surveys">Zobraziť Mapovania</string>
     <string name="help_view_equates">Porovnanie</string>
     <string name="help_export_config">Export Projektu</string>

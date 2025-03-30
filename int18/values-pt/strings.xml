@@ -1099,6 +1099,7 @@ no campo abaixo e aperte o botão.
   <string name="help_add_project">Adicionar projeto</string>
   <string name="help_add_surveys">Adicionar topos</string>
   <string name="help_drop_surveys">Remover topos</string>
+    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
   <string name="help_view_surveys">Mostrar topos</string>
   <string name="help_view_equates">Listar \'equates\'</string>
   <string name="help_export_config">Exportar projeto</string>
