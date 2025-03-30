@@ -995,7 +995,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_text">szöveg</string>
     <string name="hint_options">opciók</string>
     <string name="hint_name">név</string>
-    <string name="hint_prefix">előtagx</string>
+    <string name="hint_prefix">előtag</string>
     <string name="hint_from">kezdőpont</string>
     <string name="hint_to">végpont</string>
     <string name="hint_azimuth">irány</string>
