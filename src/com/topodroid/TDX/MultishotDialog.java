@@ -234,28 +234,27 @@ class MultishotDialog extends MyDialog
     } else if ( b == mButtonSwap ) {
       mParent.swapBlocksName( mBlks );
     } else if ( mColoring && b == mButtonColor ) {
-        hide();
-        (new MyColorPicker( mContext, this, 0 )).show();
-        return;
+      hide();
+      (new MyColorPicker( mContext, this, 0 )).show();
+      return;
     } else if ( mColoring && b == mButtonSplays ) {
-        int leg_type = LegType.NORMAL;
-        if ( ((RadioButton)findViewById( R.id.rb_xsplay )).isChecked() ) {
-          leg_type = LegType.XSPLAY;
-        } else if ( ((RadioButton)findViewById( R.id.rb_hsplay )).isChecked() ) {
-          leg_type = LegType.HSPLAY;
-        } else if ( ((RadioButton)findViewById( R.id.rb_vsplay )).isChecked() ) {
-          leg_type = LegType.VSPLAY;
-        }
-        long flag = DBlock.FLAG_SURVEY;
-        if ( ! ((CheckBox)findViewById( R.id.rb_noplan )).isChecked() ) {
-          flag |= DBlock.FLAG_NO_PLAN;
-        } 
-        if ( ! ((CheckBox)findViewById( R.id.rb_noprofile )).isChecked() ) {
-          flag |= DBlock.FLAG_NO_PROFILE;
-        }
-        mParent.updateSplaysLegType( mBlks, leg_type, flag );
-        // TDLog.v("FLAG " + flag );
+      int leg_type = LegType.NORMAL;
+      if ( ((RadioButton)findViewById( R.id.rb_xsplay )).isChecked() ) {
+        leg_type = LegType.XSPLAY;
+      } else if ( ((RadioButton)findViewById( R.id.rb_hsplay )).isChecked() ) {
+        leg_type = LegType.HSPLAY;
+      } else if ( ((RadioButton)findViewById( R.id.rb_vsplay )).isChecked() ) {
+        leg_type = LegType.VSPLAY;
       }
+      long flag = DBlock.FLAG_SURVEY;
+      if ( ! ((CheckBox)findViewById( R.id.rb_noplan )).isChecked() ) {
+        flag |= DBlock.FLAG_NO_PLAN;
+      } 
+      if ( ! ((CheckBox)findViewById( R.id.rb_noprofile )).isChecked() ) {
+        flag |= DBlock.FLAG_NO_PROFILE;
+      }
+      mParent.updateSplaysLegType( mBlks, leg_type, flag );
+      // TDLog.v("FLAG " + flag );
     } else if ( mBedding > 0 && b == mButtonBedding ) {
       // if ( mBedding > 1 ) { // warning toast
       //   TDToast.makeWarn( R.string.multistation_plane );
