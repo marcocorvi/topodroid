@@ -233,12 +233,11 @@ class MultishotDialog extends MyDialog
       }
     } else if ( b == mButtonSwap ) {
       mParent.swapBlocksName( mBlks );
-    } else if ( mColoring ) {
-      if ( b == mButtonColor ) {
+    } else if ( mColoring && b == mButtonColor ) {
         hide();
         (new MyColorPicker( mContext, this, 0 )).show();
         return;
-      } else if ( b == mButtonSplays ) {
+    } else if ( mColoring && b == mButtonSplays ) {
         int leg_type = LegType.NORMAL;
         if ( ((RadioButton)findViewById( R.id.rb_xsplay )).isChecked() ) {
           leg_type = LegType.XSPLAY;
