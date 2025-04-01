@@ -1197,7 +1197,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_lrud">JBFL</string>
     <string name="export_lrud_from">JBFL a kezdő ponton</string>
     <string name="export_maps">Térkép az adatok előtt</string>
-    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
+    <string name="export_uncommented_maps">Nem kommentelt térképek</string>
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
     <string name="export_media">média elemek</string>
