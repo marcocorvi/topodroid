@@ -1191,6 +1191,7 @@
     <string name="export_lrud">ЛПВН</string>
     <string name="export_lrud_from">ЛПВН на пикете ОТ</string>
     <string name="export_maps">Блок map до данных съёмки</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
     <string name="export_media">Фото-Аудио</string>

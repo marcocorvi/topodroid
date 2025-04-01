@@ -1472,11 +1472,12 @@ public class TDExporter
   static private void doTherionMaps( PrintWriter pw, SurveyInfo info, List< PlotInfo > plots )
   {
     if ( TDUtil.isEmpty(plots) ) return;
+    String with_comment = TDSetting.mTherionUncommentedMaps ? " " : "  #";
     for ( PlotInfo plt : plots ) {
       String subdir = TDInstance.survey + "/tdr"; // plot files
       String plotname =  info.name + "-" + plt.name;
       if (  TDFile.hasMSfile( subdir, plotname + ".tdr" ) ) {
-        pw.format("  # input \"%s.th2\"\n", plotname );
+        pw.format("%s input \"%s.th2\"\n", with_comment, plotname );
       }
     } 
     pw.format("\n");
@@ -1487,14 +1488,14 @@ public class TDExporter
         String plotname =  info.name + "-" + plt.name;
         if ( TDFile.hasMSfile( subdir, plotname + ".tdr" ) ) {
           if ( plt.type == PlotType.PLOT_PROJECTED ){
-            pw.format("  # map m%s -projection [%s %d]\n", plt.name, PlotType.projName( plt.type ) , (int) plt.azimuth);
+            pw.format("%s map m%s -projection [%s %d]\n", with_comment, plt.name, PlotType.projName( plt.type ) , (int) plt.azimuth);
           } else {
-            pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
+            pw.format("%s map m%s -projection %s\n", with_comment, plt.name, PlotType.projName( plt.type ) );
           }
-          pw.format("  #   %s\n", plotname );
-          for ( int k=1; k<=scrap_nr; ++k) pw.format("  #   %s%d\n", plotname, k );
-          pw.format("  # endmap\n");
-        } 
+          pw.format("%s   %s\n", with_comment, plotname );
+          for ( int k=1; k<=scrap_nr; ++k) pw.format("  %s   %s%d\n", with_comment, plotname, k );
+          pw.format("%s endmap\n", with_comment );
+        }
       }
     }
     pw.format("\n");

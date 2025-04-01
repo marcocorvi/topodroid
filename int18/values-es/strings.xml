@@ -1196,6 +1196,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD a estación DA</string>
     <string name="export_maps">Mapa antes de datos</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
     <string name="export_media">elementos multimedia</string>

@@ -1195,6 +1195,7 @@
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD alla stazione DA</string>
     <string name="export_maps">Mappa prima dei dati</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
     <!-- TODO string name="export_media">media items</string -->

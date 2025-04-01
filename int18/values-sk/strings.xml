@@ -1205,6 +1205,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD na POČIATOČNOM staničení</string>
     <string name="export_maps">Mapy pred dátami</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Cave-prefix v staničeniach</string>
     <string name="export_prefix_hint">Predpona</string>
     <!-- TODO string name="export_media">media items</string -->

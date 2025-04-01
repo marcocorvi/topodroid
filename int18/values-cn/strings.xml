@@ -1194,6 +1194,7 @@
     <string name="export_lrud">左右上下</string>
     <string name="export_lrud_from">测量点的左右上下</string>
     <string name="export_maps">地图在数据之前</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">测量点名称里的洞穴前缀</string>
     <string name="export_prefix_hint">前缀</string>
     <!-- TODO string name="export_media">media items</string -->

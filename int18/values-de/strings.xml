@@ -1110,6 +1110,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="export_lrud">LRUD</string>
   <string name="export_lrud_from">LRUD an der Ausgangsstation</string>
   <string name="export_maps">Pläne/Karten vor Daten</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
   <string name="export_prefix">Name der Vermessung in Messpunkten</string>
   <string name="export_prefix_hint">Prefix</string>
     <!-- TODO string name="export_media">media items</string -->

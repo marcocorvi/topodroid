@@ -1215,6 +1215,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_lrud" copyable="all">LRUD</string>
     <string name="export_lrud_from">LRUD at FROM station</string>
     <string name="export_maps">Maps before data</string>
+    <string name="export_uncommented_maps">Uncommented map commands</string>
     <string name="export_prefix">Cave-prefix in station names</string>
     <string name="export_prefix_hint">prefix</string>
     <string name="export_media">media items</string>

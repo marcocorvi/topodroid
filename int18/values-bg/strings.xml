@@ -1201,6 +1201,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_lrud">Ляво/дясно/горе/долу</string>
     <string name="export_lrud_from">Ляво/дясно/горе/долу на репер ОТ</string>
     <string name="export_maps">Карти преди данните</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
     <!-- TODO string name="export_media">media items</string -->

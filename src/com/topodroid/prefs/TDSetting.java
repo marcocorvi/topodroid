@@ -269,6 +269,7 @@ public class TDSetting
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
   public static int     mTherionScale = 100;
   public static boolean mTherionMaps   = false;
+  public static boolean mTherionUncommentedMaps = false;
   public static float   mToTherion = THERION_SCALE / 100;
   // public static boolean mXTherionAreas = false;
   public static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files

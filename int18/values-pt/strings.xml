@@ -1121,6 +1121,7 @@ no campo abaixo e aperte o botão.
   <string name="export_lrud">EDTC</string>
   <string name="export_lrud_from">EDTC na base DE</string>
   <string name="export_maps">Mapas antes dos dados</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
     <!-- TODO string name="export_media">media items</string -->

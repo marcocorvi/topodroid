@@ -1195,6 +1195,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">GDHB liées à la station DEPUIS</string>
     <string name="export_maps">Les cartes avant les données</string>
+    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
     <string name="export_prefix_hint">préfixe</string>
     <string name="export_media">items media</string>

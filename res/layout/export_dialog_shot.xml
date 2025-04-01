@@ -158,6 +158,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_maps"
       />
+    <CheckBox android:id="@+id/therion_uncommented_maps"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_uncommented_maps"
+      />
     <CheckBox android:id="@+id/therion_lrud"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
