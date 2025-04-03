@@ -225,9 +225,13 @@ public class ShotWindow extends Activity
   boolean isFlagBlank()  { return mFlagBlank; }
   boolean isShowIds()    { return mDataAdapter.show_ids; }
 
-  /** @return true if all shots are displayed
+  /** @return false if all shots are displayed
    */
-  private boolean isFlagSplayLegBlank() { return mFlagSplay && mFlagLeg && mFlagBlank; }
+  private boolean testFlagSplayLegBlank() 
+  { 
+    TDLog.v("Flags splay " + mFlagSplay + " leg " + mFlagLeg + " blank " + mFlagBlank );
+    return mFlagSplay || mFlagLeg || mFlagBlank; 
+  }
 
   // void setShowIds( boolean show ) { mDataAdapter.show_ids = show; }
 
@@ -1817,7 +1821,7 @@ public class ShotWindow extends Activity
         } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE - CUT
           askMultiDelete();
         } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // COPY
-          if ( ! isFlagSplayLegBlank() ) {
+          if ( testFlagSplayLegBlank() ) {
             TDToast.makeWarn( R.string.survey_copy_all_flags );
           } else if ( ! mDataAdapter.isMultiSelectTail() ) {
             TDToast.makeWarn( R.string.survey_copy_only_tail );
