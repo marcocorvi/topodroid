@@ -662,8 +662,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">¿Quiere eliminar la topografía?</string>
     <string name="survey_move">Mover tomas a la topografia %1$s ?</string>
-    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+    <string name="survey_copy_all_flags">Tomas copiables solo si se muestran todas</string>
+    <string name="survey_copy_only_tail">Solo se puede copiar el segmento final de las tomas</string>
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
@@ -1173,7 +1173,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_add_project">Agregar topografía</string>
     <string name="help_add_surveys">Agregar relieve</string>
     <string name="help_drop_surveys">Eliminar relieve</string>
-    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
+    <string name="help_color_surveys">Cambiar el color de las topografías</string>
     <string name="help_view_surveys">Mostra relieve</string>
     <string name="help_view_equates">Lista de equivalentes</string>
     <string name="help_export_config">Exportar topografía</string>
@@ -1196,7 +1196,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD a estación DA</string>
     <string name="export_maps">Mapa antes de datos</string>
-    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
+    <string name="export_uncommented_maps">Mapas sin comentarios</string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
     <string name="export_media">elementos multimedia</string>
@@ -1871,8 +1871,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
   <string name="pref_diving_mode_title">Modo de buceo</string>
   <string name="pref_diving_mode_summary">Habilitar el modo de buceo</string>
-  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
-  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
+  <string name="pref_shot_tampering_title">Manipulación de tomas</string>
+  <string name="pref_shot_tampering_summary">Edición de fotos descargada</string>
   <string name="pref_splay_classes_title">clases de tomas secundarias</string>
   <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>  
   <string name="pref_splay_color_title">Colores de tomas secundarias</string>
