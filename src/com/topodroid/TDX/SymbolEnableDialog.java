@@ -220,7 +220,7 @@ class SymbolEnableDialog extends MyDialog
     //       @Override
     //       public void onClick( DialogInterface dialog, int btn ) {
     //         mApp.installSymbols( true );
-    //         BrushManager.loadAllLibraries( mContext.getResources() );
+    //         BrushManager.loadAllSymbolLibraries( mContext.getResources() );
     //         createAdapters();
     //         updateList();
     //       }

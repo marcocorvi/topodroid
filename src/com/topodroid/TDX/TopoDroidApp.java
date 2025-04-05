@@ -1235,11 +1235,12 @@ public class TopoDroidApp extends Application
             // BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
             // BrushManager.reloadLineLibrary( res );
             // BrushManager.reloadAreaLibrary( res );
-            // BrushManager.setHasSymbolLibraries( true );
-            BrushManager.loadAllLibraries( TDInstance.context, res );
+            BrushManager.setHasSymbolLibraries( false );
+            BrushManager.loadAllSymbolLibraries( TDInstance.context, res );
             BrushManager.doMakePaths( );
             MainWindow.enablePaletteButton();
             done_loaded_palette = true;
+            BrushManager.setHasSymbolLibraries( true );
           }
         };
         loader.setPriority( Thread.MIN_PRIORITY );
@@ -1248,7 +1249,9 @@ public class TopoDroidApp extends Application
         TDLog.e("TDApp init env [3] database not opened");
       }
     } else {
-      BrushManager.initAllIndices();
+      BrushManager.setHasSymbolLibraries( false );
+      BrushManager.initAllSymbolIndices();
+      BrushManager.setHasSymbolLibraries( true );
     }
     // mStationName = new StationName();
     return mData.hasDB();
@@ -2166,7 +2169,10 @@ public class TopoDroidApp extends Application
     if ( karst  ) installSymbols( R.raw.symbols_karst,  true );
 
     mDData.setValue( "symbol_version", TDVersion.SYMBOL_VERSION );
-    BrushManager.loadAllLibraries( this, getResources() );
+    BrushManager.setHasSymbolLibraries( false );
+    BrushManager.loadAllSymbolLibraries( this, getResources() );
+    // BrushManager.doMakePaths( ); // TODO FIXME needed ?
+    BrushManager.setHasSymbolLibraries( true );
     DrawingSurface.clearManagersCache();
   }
 

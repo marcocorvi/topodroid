@@ -389,20 +389,20 @@ public class BrushManager
    * @param ctx   context
    * @param res   resources
    */
-  static void loadAllLibraries( Context ctx, Resources res ) 
+  static void loadAllSymbolLibraries( Context ctx, Resources res ) 
   {
     // TDLog.v("BRUSH load libraries" );
-    mHasSymbolLibraries = false;
+    // mHasSymbolLibraries = false; // TODO FIXME needed ?
     makeStationSymbol( res );
     reloadPointLibrary( ctx, res );
     reloadLineLibrary( res );
     reloadAreaLibrary( res );
-    mHasSymbolLibraries = true;
+    // mHasSymbolLibraries = true;
   }
 
   /** reset symbol config-enabled values and all that
    */
-  static void initAllIndices()
+  static void initAllSymbolIndices()
   {
     if ( mPointLib != null ) mPointLib.initIndices();
     if ( mLineLib  != null ) mLineLib.initIndices();
@@ -574,7 +574,7 @@ public class BrushManager
   //  */
   // static boolean hasMadePaths() { return doneMakePaths; }
 
-  /** make the paths - protected by doneMakePaths to make paths only once
+  /** make the splay path effects - protected by doneMakePaths to make paths only once
    */
   static void doMakePaths()
   {
