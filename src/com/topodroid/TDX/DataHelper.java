@@ -6445,10 +6445,10 @@ public class DataHelper extends DataSetObservable
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
-         // TDLog.v("dump SURVEY");
+         TDLog.v("dump SURVEY created " + cursor.getLong(9) + " immutable " + cursor.getLong(10) );
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d, %ld %d );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d, %d %d );\n",
                      SURVEY_TABLE,
                      sid,
                      TDString.escape( cursor.getString(0) ),
