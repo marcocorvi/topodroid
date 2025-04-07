@@ -164,7 +164,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="calib_roll">Разлика: %1$.2f °</string>
     <string name="calib_reset">Нулиране на DistoX калибрацията \?</string>
     <string name="calib_min_error">Минимална грешка</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+    <string name="calib_delta_dir">Разлики м/у две директории: %1$.2f ± %2$.2f (макс. %3$.2f)</string>
     <string name="magn_dip">Магнитна точност …</string>
     <string name="auto_calib">Автоматична калибрация</string>
     <string name="autocalib_not_supported">Изисква се изчисление на калибрирането</string>
@@ -297,9 +297,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="photo_title">Снимка</string>
     <string name="photo_text">Въведете коментар за снимката</string>
     <!-- UNUSED string name="photo_failed">Неуспешна снимка</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">Снимката не е готова. Изчакай &#8230;</string>
     <string name="photo_max_captures">Достигнато максимално ограничение</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <string name="photo_many_pictures">Прекалено много снимки</string>
     <string name="label_title">Етикет</string>
     <string name="label_text">Въведете заглавие</string>
     <!-- UNUSED string name="altitude">Надморска височина </string -->
@@ -503,7 +503,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UPDATES string name="menu_updates">ПРОВЕРИ ЪПДЕЙТИТЕ</string -->
     <string name="menu_validate">ПРОВЕРКА</string>
     <string name="menu_zoom_fit">ОПТИМАЛНО УВЕЛИЧАВАНЕ</string>
-    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
+    <string name="menu_plot_search">ТЪРСЕНЕ НА РЕПЕР</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметрова хартия</string>
@@ -663,8 +663,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Изтриване на картировката \?</string>
     <string name="survey_move">Преместване на измерванията в картировка %1$s \?</string>
-    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+    <string name="survey_copy_all_flags">Измерванията могат да се копират, само ако всички са видими</string>
+    <string name="survey_copy_only_tail">Само последният сегмент може да се копира</string>
     <string name="survey_split">Разделяне на картировката \?</string>
     <string name="survey_not_attached">ПРЕДУПРЕЖДЕНИЕ: неприкрепени измервания</string>
     <string name="survey_not_extend">ПРЕДУПРЕЖДЕНИЕ: неустановени измервания</string>
@@ -862,7 +862,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_off">изключено</string>
     <string name="button_on">включено</string>
     <string name="button_open">Отваряне</string>
-    <!-- TODO string name="button_offset"    >Offset</string -->
+    <string name="button_offset">Офсет</string>
     <string name="button_read">Четене</string>
     <string name="button_recover">Възстановяване</string>
     <string name="button_reverse">Обръщане</string>
@@ -975,7 +975,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_bt_code">Код на устройството</string>
     <string name="bt_alias_missing">Липсва псевдоним на BT</string>
     <string name="bt_code_missing">Липсва код на устройството</string>
-    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
+    <string name="bt_alias_delete">Изтриване на името на bluetooth устройството?</string>
 
     <string name="hint_cellsize">размер на клетка</string>
     <string name="hint_cwd">работна папка</string>
@@ -1113,7 +1113,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_plot_delete">Изтриване на скица</string>
     <string name="help_plot_rename">Преименуване/изтриване на скица</string>
     <string name="help_plot_scrap">Отрязъци от скицата</string>
-    <!-- TODO string name="help_plot_search">Station search</string -->
+    <string name="help_plot_search">Търсене на репер</string>
     <string name="help_plot_switch">Смяна на скица</string>
     <string name="help_search">Търсене на данни</string>
     <string name="help_stats">Статистика за скицата</string>
@@ -1178,7 +1178,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_add_project">Добави пещера</string>
     <string name="help_add_surveys">Добави картировки</string>
     <string name="help_drop_surveys">Извлачи картировки</string>
-    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
+    <string name="help_color_surveys">Промяна на цвета на картировките</string>
     <string name="help_view_surveys">Покажи картировки</string>
     <string name="help_view_equates">Покажи списък със свързвания</string>
     <string name="help_export_config">Експортирай проект</string>
@@ -1201,10 +1201,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_lrud">Ляво/дясно/горе/долу</string>
     <string name="export_lrud_from">Ляво/дясно/горе/долу на репер ОТ</string>
     <string name="export_maps">Карти преди данните</string>
-    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
+    <string name="export_uncommented_maps">Карти без коментари</string>
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
-    <!-- TODO string name="export_media">media items</string -->
+    <string name="export_media">медийни елементи</string>
     <!-- UNUSED string name="export_suffix_hint">наставка</string -->
     <string name="export_series_hint">поредица</string>
     <string name="export_roundtrip">Отиване и връщане</string>
@@ -1263,7 +1263,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
     <string name="title_search">Търси репер/отсечка</string>
-    <!-- TODO string name="title_plot_search">Station search</string -->
+    <string name="title_plot_search">Търсене на репер</string>
     <string name="title_pref_search">Търсене на настройки</string>
     <string name="title_gm_search">Търси данни за калибрация</string>
     <string name="title_dangling">Неприкрепени измервания</string>
@@ -1422,8 +1422,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_orientation_summary">Ориентация на екрана на приложението</string>
   <string name="pref_single_back_title">Единично докосване</string>
   <string name="pref_single_back_summary">Затвори прозорците с единично докосване</string>
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+  <string name="pref_hide_navbar_title">Навигационна лента</string>
+  <string name="pref_hide_navbar_summary">Скрита. Показване с плъзгане нагоре</string>
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Покажи необработени данни за калибриране</string>
@@ -1489,8 +1489,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_unnamed_device_summary">Активирай менюто за въвеждане на име на устройството</string> <!-- KEEP -->
   <string name="pref_station_prefix_title">Представка за репер</string>
   <string name="pref_station_prefix_summary">Представка за експортиране на репер [Compass/cSurvey/WinKarst]</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+  <string name="pref_with_media_title">Експортиране на медия</string>
+  <string name="pref_with_media_summary">Включи медия при експортиране [cSurvey]</string>
   <string name="pref_compass_splays_title">Странични измервания в Compass</string>
   <string name="pref_compass_splays_summary">Експортирай файлове със странични измервания в Compass</string>
   <string name="pref_walls_splays_title">Странични измервания в Walls</string>
@@ -1862,8 +1862,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_LRExtend_summary">Оцени разширението ляво/дясно (Compass/VisualTopo import)</string>
   <string name="pref_diving_mode_title">Подводен режим</string>
   <string name="pref_diving_mode_summary">Активирай подводен режим</string>
-  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
-  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
+  <string name="pref_shot_tampering_title">Поправяне на измерването</string>
+  <string name="pref_shot_tampering_summary">Редактиране на изтеглени измервания</string>
   <string name="pref_splay_classes_title">Класове странични измервания</string>
   <string name="pref_splay_classes_summary">Активирай класове на странични измервания</string>
   <string name="pref_splay_color_title">Оцветяване на странични измервания</string>
@@ -2320,8 +2320,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cpref_grid_above_summary">Решетката е отгоре вместо отдолу [n]</string>
     <string name="cpref_grid_extent_title">Разширение на решетката</string>
     <string name="cpref_grid_extent_summary">Разширение на решетката отвъд плана на картировката</string>
-    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
-    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
+    <string name="cpref_names_visibility_title">Видимост на имената</string>
+    <string name="cpref_names_visibility_summary">Имената на реперите са винаги видими</string>
     <string name="cpref_neg_clino_title">Изгледи под хоризонта</string>
     <string name="cpref_neg_clino_summary">Разреши гледни точки под хоризонта [n]</string>
     <string name="cpref_dem_buffer_title">Буфер за дигитален модел на височините</string>
@@ -2330,8 +2330,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cpref_dem_maxsize_summary">Максимален брой клетки [400]</string>
     <string name="cpref_dem_reduce_title">Намаляване на дигиталния модел на височините</string>
     <string name="cpref_dem_reduce_summary">Режим на намаляване на дигиталния модел на височините [свиване]</string>
-    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
-    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
+    <string name="cpref_texture_root_title">Път към текстурите</string>
+    <string name="cpref_texture_root_summary">Име на пътя към текстурите [/sdcard/]</string>
     <string name="cpref_all_splay_title">Всички странични измервания</string>
     <string name="cpref_all_splay_summary">Да се използват ли всички странични измервания за стените [y]</string>
     <string name="cpref_splay_use_title">Използване на странични измервания</string>
