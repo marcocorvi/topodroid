@@ -879,6 +879,8 @@
     <string name="button_saved"     >Сохраненный пикет</string>
     <string name="button_scrap"     >Контуры</string>
     <string name="button_split"     >Разделить     </string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
     <string name="button_swap"      >Поменять местами      </string>
@@ -1018,7 +1020,9 @@
 
     <string name="split_nothing">Нечего разделять</string>
     <string name="flip_shots">Развернуть пикеты</string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">Копировать объекты</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Предисловие</string>

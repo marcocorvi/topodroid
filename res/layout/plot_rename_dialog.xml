@@ -75,6 +75,11 @@
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
        >
+      <Button android:id="@+id/btn_delete"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_delete"
+      />
       <Button android:id="@+id/btn_rename"
         android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
@@ -89,16 +94,27 @@
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
        >
+      <CheckBox android:id="@+id/cb_move"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginEnd="@dimen/margintiny"
+        android:text="@string/move_items"
+      />
       <CheckBox android:id="@+id/cb_copy"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginsmall"
         android:text="@string/copy_items"
       />
-      <Button android:id="@+id/btn_split"
+      <Button android:id="@+id/btn_to_sketch"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginsmall"
+        android:text="@string/button_to_sketch"
+      />
+      <Button android:id="@+id/btn_to_scrap"
         style="@style/button_default"
         android:layout_marginEnd="@dimen/marginh"
-        android:text="@string/button_split"
+        android:text="@string/button_to_scrap"
       />
     </LinearLayout>
 
@@ -109,7 +125,7 @@
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
        >
-      <Button android:id="@+id/btn_scrap"
+      <Button android:id="@+id/btn_outline"
         android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_scrap"
@@ -128,19 +144,10 @@
         style="@style/button_default"
         android:text="@string/button_merge"
       />
-    </LinearLayout>
-
-    <LinearLayout 
-       android:layout_width="wrap_content" 
-       android:layout_height="wrap_content"
-       android:layout_gravity="end"
-       android:orientation="horizontal"
-       android:layout_marginTop="@dimen/marginv"
-       >
-      <Button android:id="@+id/btn_delete"
+      <Button android:id="@+id/btn_paste"
         android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
-        android:text="@string/button_delete"
+        android:text="@string/paste_items"
       />
     </LinearLayout>
 

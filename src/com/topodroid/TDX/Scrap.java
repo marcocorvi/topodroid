@@ -784,7 +784,7 @@ public class Scrap
    * @param border  given border
    * @param remove  whether to drop the paths that are inside the border from this scrap
    */
-  List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) 
+  List< DrawingPath > splitPaths( ArrayList< PointF > border, boolean remove ) 
   {
     ArrayList< DrawingPath > paths = new ArrayList<>();
     synchronized( TDPath.mCommandsLock ) {

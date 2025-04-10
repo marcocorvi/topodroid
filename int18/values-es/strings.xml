@@ -886,6 +886,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_saved"     >Estación guardada</string>
     <string name="button_scrap"     >Contornos</string>
     <string name="button_split"     >Dividir     </string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
     <string name="button_swap"      >Cambiar      </string>
@@ -1023,7 +1025,9 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="split_nothing">Nada para dividir</string>
     <string name="flip_shots">Tomas contínuas</string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">Copiar elementos</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface"> Prefacio </string>

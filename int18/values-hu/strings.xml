@@ -883,7 +883,9 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_merge"     >Egyesít     </string>
     <string name="button_saved"     >Mentett pont</string>
     <string name="button_scrap"     >Körvonal</string>
-    <string name="button_split"     >Feloszt     </string>
+    <string name="button_split"     >Feloszt</string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station"   >Központ:</string>
     <string name="button_store"     >Tárol</string>
     <string name="button_swap"      >Csere      </string>
@@ -1023,7 +1025,9 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
     <string name="split_nothing">Nem megosztható</string>
     <string name="flip_shots">Mérések_megfordítása </string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">Tételek másolása</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">K %1$.1f É %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Előszó</string>

@@ -1173,8 +1173,12 @@ public class DrawingCommandManager
    */
   boolean removeLinePointFromSelection( DrawingLinePath line, LinePoint point ) { return mCurrentScrap.removeLinePointFromSelection( line, point ); }
 
-  List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) { return mCurrentScrap.splitPlot( border, remove ); }
-    
+  /** split the plot, in the current scrap
+   * @param border    splitting border
+   * @param remove    whether to remove split items
+   * @return the list of (a copy of the) split items
+   */
+  List< DrawingPath > splitPaths( ArrayList< PointF > border, boolean remove ) { return mCurrentScrap.splitPaths( border, remove ); }
 
   /** remove a splay path
    * @param p   splay path (this is the path of the selection point)
@@ -2248,7 +2252,11 @@ public class DrawingCommandManager
 
   /** clear the scrap outlines
    */
-  void clearScrapOutline() { synchronized( mSyncOutline ) { mPlotOutline.clear(); } }
+  void clearPlotOutline() { synchronized( mSyncOutline ) { mPlotOutline.clear(); } }
+
+  /** @return true if there is a plot outline
+   */
+  boolean hasPlotOutline() { return ( mPlotOutline != null && mPlotOutline.size() > 0 ); }
 
   /** add an outline path to the set of outlines
    * @param path    outline path

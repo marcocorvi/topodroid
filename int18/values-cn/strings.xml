@@ -882,6 +882,8 @@
     <string name="button_saved"     >保存站点</string>
     <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >分割     </string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
     <string name="button_swap"      >交换      </string>
@@ -1020,7 +1022,9 @@
 
     <string name="split_nothing">无分割项</string>
     <string name="flip_shots">点击测量</string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">拷贝项目</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">引言</string>

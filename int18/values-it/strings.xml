@@ -883,6 +883,8 @@
     <string name="button_saved"     >Caposaldo salvato</string>
     <string name="button_scrap"     >Outline</string>
     <string name="button_split"     >Dividi    </string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
     <string name="button_swap"      >Scambia   </string>
@@ -1022,7 +1024,9 @@
 
     <string name="split_nothing">Nulla da dividere</string>
     <string name="flip_shots">Capovolgi battute</string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">Copia elemento</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Prefazione</string>

@@ -588,7 +588,8 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_SHIFT = 5; // change point symbol position
   static final int MODE_ERASE = 6;
   static final int MODE_ROTATE = 7; // selected point rotate
-  static final int MODE_SPLIT = 8;  // split the plot
+  static final int MODE_SPLIT_SKETCH = 8;  // split the plot
+  static final int MODE_SPLIT_SCRAP  = 9;  // split the scrap
 
   private int mMode         = MODE_MOVE; // MODE_NONE;
   private int mTouchMode    = MODE_MOVE;
@@ -763,6 +764,7 @@ public class DrawingWindow extends ItemDrawer
   // private DrawingStationName mSplitStation;
   private String mSplitStationName;
   private ArrayList< PointF > mSplitBorder = null;
+  private List< DrawingPath > mSplitPaths  = null;
   private boolean mSplitRemove;
 
   // ----------------------------------------------------------------
@@ -1464,7 +1466,7 @@ public class DrawingWindow extends ItemDrawer
       sb.append( res.getString( R.string.title_shift ) );
     } else if ( mMode == MODE_ERASE ) {
       sb.append( res.getString( R.string.title_erase ) );
-    } else if ( mMode == MODE_SPLIT ) {
+    } else if ( mMode == MODE_SPLIT_SKETCH ) {
       sb.append( res.getString( R.string.title_split ) );
     }
     // if ( ! mDrawingSurface.isSelectable() ) {
@@ -5037,11 +5039,15 @@ public class DrawingWindow extends ItemDrawer
         mShiftMove = false;
       } else if ( mMode == MODE_ERASE ) {
 	finishErasing();
-      } else if ( mMode == MODE_SPLIT ) {
+      } else if ( mMode == MODE_SPLIT_SKETCH || mMode == MODE_SPLIT_SCRAP) {
         mDrawingSurface.resetPreviewPath();
         mSplitBorder.add( new PointF( xs, ys ) );
         // TDLog.v("*** split border size " + mSplitBorder.size() );
-        doSplitPlot( );
+        if ( mMode == MODE_SPLIT_SKETCH ) {
+          doSplitPlot( );
+        } else if ( mMode == MODE_SPLIT_SCRAP) {
+          doSplitScrap( );
+        }
         setMode( MODE_MOVE ); // this setTheTitle() as well
       // } else { // MODE_MOVE
 /* F for the moment do not create X-Sections
@@ -5185,7 +5191,7 @@ public class DrawingWindow extends ItemDrawer
       mSaveY = yc;
       // return false;
 
-    } else if ( mMode == MODE_SPLIT ) {
+    } else if ( mMode == MODE_SPLIT_SKETCH || mMode == MODE_SPLIT_SCRAP ) {
       mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
       mSplitBorder.add( new PointF( xs, ys ) );
       // TDLog.v("*** split start border size " + mSplitBorder.size() );
@@ -5346,7 +5352,7 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.setEraser( xc, yc, mEraseSize );
           doEraseAt( xs, ys );
 	}
-      } else if ( mMode == MODE_SPLIT ) {
+      } else if ( mMode == MODE_SPLIT_SKETCH || mMode == MODE_SPLIT_SCRAP ) {
         if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
           mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), xc, yc );
           mSplitBorder.add( new PointF( xs, ys ) );
@@ -8458,7 +8464,10 @@ public class DrawingWindow extends ItemDrawer
         ( new PlotSearchDialog( mActivity, this ) ).show();
       } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
         //   askDelete();
-        (new PlotRenameDialog( mActivity, this )).show();
+        boolean scrap_copy = (mSplitPaths != null);
+        boolean has_outline = mDrawingSurface.hasPlotOutline();
+        TDLog.v("RENAME etc. scrap_copy " + scrap_copy + " has_outline " + has_outline );
+        (new PlotRenameDialog( mActivity, this, scrap_copy, has_outline )).show();
       } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
         (new PlotScrapsDialog( mActivity, this )).show();
 
@@ -8499,7 +8508,7 @@ public class DrawingWindow extends ItemDrawer
           case MODE_EDIT:
             new HelpDialog(mActivity, izons_edit, menus, help_icons_edit, help_menus, NR_BUTTON3, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
             break;
-          default: // MODE_MOVE MODE_SPLIT
+          default: // MODE_MOVE MODE_SPLIT_SKETCH MODE_SPLIT_SCRAP
             new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, NR_BUTTON1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
         }
       }
@@ -9520,11 +9529,11 @@ public class DrawingWindow extends ItemDrawer
   /** add a scrap to the plot
    * @param plot  (current) plot info
    */
-  void addScrap( PlotInfo plot )
+  void addPlot( PlotInfo plot )
   {
     // assert( mLastLinePath == null );
 
-    mDrawingSurface.clearScrapOutline();
+    mDrawingSurface.clearPlotOutline();
     if ( mNum == null || plot == null ) {
       // TDLog.v("null num or plot");
       return;
@@ -9610,32 +9619,69 @@ public class DrawingWindow extends ItemDrawer
       } else {
         mSplitBorder.clear();
       }
-      mMode = MODE_SPLIT;
+      mMode = MODE_SPLIT_SKETCH;
       mTouchMode = MODE_MOVE;
-      // TDLog.v("*** split mode");
+      TDLog.v("*** split SKETCH mode");
     // } else {
     //   TDToast.makeBad("Missing station " + station );
     // }
     // TDLog.v("mode " + mMode + " touch-mode " + mTouchMode );
   }
 
+  void splitScrap( boolean remove ) 
+  {
+    mSplitName = null;
+    mSplitStationName = null;
+    mSplitRemove = remove;
+    // mSplitScrap  = mDrawingSurface.getCurrentScrap();
+    if ( mSplitBorder == null ) {
+      mSplitBorder = new ArrayList<>();
+    } else {
+      mSplitBorder.clear();
+    }
+    mMode = MODE_SPLIT_SCRAP;
+    mTouchMode = MODE_MOVE;
+    TDLog.v("*** split SCRAP mode");
+  }
+
   /** marge the plot of the outline in the current plot
    */
-  void mergeOutlineScrap()
+  void mergePlotOutline()
   {
     // merge is called in MOVE mode
     // assert( mLastLinePath == null );
     if ( mType == PlotType.PLOT_PLAN ) {
       if ( mOutlinePlot1 == null ) return;
-      mDrawingSurface.clearScrapOutline();
+      mDrawingSurface.clearPlotOutline();
       doMergePlot( mOutlinePlot1 );
       mOutlinePlot1 = null;
     } else if ( mType == PlotType.PLOT_EXTENDED ) {
       if ( mOutlinePlot2 == null ) return;
-      mDrawingSurface.clearScrapOutline();
+      mDrawingSurface.clearPlotOutline();
       doMergePlot( mOutlinePlot2 );
       mOutlinePlot2 = null;
     }
+  }
+
+  void pasteToScrap()
+  {
+    if ( mSplitPaths != null && mSplitPaths.size() > 0 ) {
+      TDLog.v("merge split paths " + mSplitPaths.size() + " removed " + mSplitRemove );
+      boolean copy = true;
+      int scrap_nr = mDrawingSurface.currentScrapNumber();
+      if ( ! mSplitRemove ) { // avoid double items
+        DrawingPath path = mSplitPaths.get(0);
+        if ( path.mScrap == scrap_nr ) copy = false;
+      }
+      if ( copy ) {
+        for ( DrawingPath path : mSplitPaths ) {
+          // avoid double copy of paths
+          path.mScrap = scrap_nr;
+          mDrawingSurface.addDrawingPath( path ); // INSERT PATH
+        }
+        mSplitPaths = null;
+      }
+    } 
   }
 
   /** merge the items of another plot into the current plot
@@ -9679,7 +9725,7 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeWarn( R.string.split_nothing );
       return;
     }
-    List< DrawingPath > paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
+    List< DrawingPath > paths = mDrawingSurface.splitPaths( mSplitBorder, mSplitRemove );
     if ( TDUtil.isEmpty(paths) ) { // nothing to split
       TDToast.makeWarn( R.string.split_nothing );
       return;
@@ -9697,6 +9743,25 @@ public class DrawingWindow extends ItemDrawer
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager
+  }
+
+  /** split the current scrap: selected items are moved or copied to a new scrap
+   * @note mSplitBorder: border path of the items to move/copy to the new scrap
+   * @note mSplitRemove: whether to remove the paths from the current scrap
+   */
+  private void doSplitScrap( )
+  {
+    if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
+      TDToast.makeWarn( R.string.split_nothing );
+      return;
+    }
+    mSplitPaths = mDrawingSurface.splitPaths( mSplitBorder, mSplitRemove );
+    if ( TDUtil.isEmpty( mSplitPaths) ) { // nothing to split
+      TDToast.makeWarn( R.string.split_nothing );
+      mSplitPaths = null;
+      return;
+    }
+    TDLog.v("DO SPLIT SCRAP: border " + mSplitBorder.size() + " paths " + mSplitPaths.size() );
   }
 
   // -------------------------------------------------------

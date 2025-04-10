@@ -670,14 +670,14 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   // ----------------------------------------------------------
 
-  /** split the plot, in the current manager
+  /** split the drawing, in the current manager
    * @param border    splitting border
    * @param remove    whether to remove split items
    * @return the list of (a copy of the) split items
    */
-  List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove )
+  List< DrawingPath > splitPaths( ArrayList< PointF > border, boolean remove )
   {
-    return commandManager.splitPlot( border, remove );
+    return commandManager.splitPaths( border, remove );
   }
 
   // TH2EDIT this method was commented
@@ -1400,12 +1400,18 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     commandManager.deleteSectionPoint( scrap, cmd );
     commandManager.addEraseCommand( cmd );
   }
+
+  /** @return true if there are plot outlines
+   */
+  boolean hasPlotOutline() { return commandManager.hasPlotOutline(); }
   
-  void clearScrapOutline() { commandManager.clearScrapOutline(); }
+  /** clear the plot outlines
+   */
+  void clearPlotOutline() { commandManager.clearPlotOutline(); }
 
   void addScrapDataStream( String tdr, float xdelta, float ydelta )
   {
-    commandManager.clearScrapOutline( );
+    commandManager.clearPlotOutline( );
     DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, null );
   }
 

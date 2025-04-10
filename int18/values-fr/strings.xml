@@ -884,6 +884,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_saved"     >Station sauvegardée</string>
     <string name="button_scrap"     >Aperçu</string>
     <string name="button_split"     >Diviser</string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station"   >Centrer sur</string>
     <string name="button_store"     >Stocker</string>
     <string name="button_swap"      >Échanger</string>
@@ -1021,7 +1023,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="split_nothing">Rien à diviser</string>
     <string name="flip_shots">Inverser les points</string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">Copie des données</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Préface</string>

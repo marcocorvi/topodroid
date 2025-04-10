@@ -115,7 +115,7 @@ class ScrapOutlineDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "ScrapOutlineDialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnClear ) {
-      mParent.addScrap( null );
+      mParent.addPlot( null );
     // } else if ( TDSetting.mPlotSplit && b == mBtnMerge ) {
     //   mParent.mergeOutlineScrap( );
     // } else if ( b == mBtnBack ) {
@@ -151,7 +151,7 @@ class ScrapOutlineDialog extends MyDialog
     // } else if ( res.getString( R.string.extended ).equals( type ) ) {
     //   plot_type = PlotType.PLOT_EXTENDED;
     // }
-    mParent.addScrap( mPlots.get( pos ) );
+    mParent.addPlot( mPlots.get( pos ) );
     dismiss();
   }
 

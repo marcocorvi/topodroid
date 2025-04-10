@@ -820,6 +820,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_saved">Gespeicherte Station</string>
   <string name="button_scrap">Skizze</string>
   <string name="button_split">Aufteilen</string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
   <string name="button_station">Zentrieren bei</string>
   <string name="button_store">Speichern</string>
   <string name="button_swap">Tausche Stationen</string>
@@ -944,7 +946,9 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="btn_horizontal">Horizontal</string>
   <string name="split_nothing">Nichts aufzuteilen</string>
   <string name="flip_shots">Profil-Ausrichtung drehen</string>
+    <!-- TODO string name="move_items">Move</string -->
   <string name="copy_items">Kopieren</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
   <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
   <string name="man_preface">Einführung</string>
   <string name="man_intro">1. Einleitung</string>

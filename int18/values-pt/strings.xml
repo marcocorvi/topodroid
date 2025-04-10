@@ -831,6 +831,8 @@ no campo abaixo e aperte o botão.
   <string name="button_saved">Gravar base</string>
   <string name="button_scrap">Contornos</string>
   <string name="button_split">Dividir   </string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
   <string name="button_swap">Inverter      </string>
@@ -954,7 +956,9 @@ no campo abaixo e aperte o botão.
   <string name="btn_horizontal">Horizontal</string>
   <string name="split_nothing">Nada a ser dividido</string>
   <string name="flip_shots">Virar medidas</string>
+    <!-- TODO string name="move_items">Move</string -->
   <string name="copy_items">Copiar itens</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
   <string name="current_station_format">L %1$.1f | N %2$.1f | A %3$.1f</string>
   <string name="man_preface">Prefácio</string>
   <string name="man_intro">1. Introdução</string>

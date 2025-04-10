@@ -889,6 +889,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_saved">Запазени репери</string>
     <string name="button_scrap">Очертания</string>
     <string name="button_split">Раздели</string>
+    <!-- TODO string name="button_to_sketch">To sketch</string -->
+    <!-- TODO string name="button_to_scrap" >To scrap</string -->
     <string name="button_station">Център на</string>
     <string name="button_store">Запази</string>
     <string name="button_swap">Размени</string>
@@ -1027,7 +1029,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="split_nothing">Няма нищо за разделяне</string>
     <string name="flip_shots">Завърти измерванията</string>
+    <!-- TODO string name="move_items">Move</string -->
     <string name="copy_items">Копиране на елементи</string>
+    <!-- TODO string name="paste_items">Paste items</string -->
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Предговор</string>
