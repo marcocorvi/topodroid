@@ -292,9 +292,9 @@
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
     <!-- UNUSED string name="photo_failed">Ошибка фото</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">Фото не готово. Ожидайте &#8230;</string>
     <string name="photo_max_captures">Достигнут предел кол-ва попыток съёмки</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <string name="photo_many_pictures">Слишком много фотографий</string>
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -496,7 +496,7 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
     <string name="menu_validate">ВАЛИДАЦИЯ</string>
     <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
-    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
+    <string name="menu_plot_search">ПОИСК ПИКЕТА</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметровая-бумага</string>
@@ -656,8 +656,8 @@
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
     <string name="survey_delete">Удалить съёмку?</string>
     <string name="survey_move">Переместить замеры в съёмку %1$s ?</string>
-    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+    <string name="survey_copy_all_flags">Замеры можно копировать только если все отображаются</string>
+    <string name="survey_copy_only_tail">Копировать можно только последний сегмент замеров</string>
     <string name="survey_split">Разорвать съёмку ?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
@@ -852,7 +852,7 @@
     <string name="button_off"       >выкл</string>
     <string name="button_on"        >вкл</string>
     <string name="button_open"      >Откр      </string>
-    <!-- TODO string name="button_offset"    >Offset</string -->
+    <string name="button_offset"    >Отступ</string>
     <string name="button_read"      >Считать   </string>
     <string name="button_recover"   >Восстановить</string>
     <string name="button_reverse"   >Развернуть</string>
@@ -1107,7 +1107,7 @@
     <string name="help_plot_delete">Удалить абрис</string>
     <string name="help_plot_rename">Переименовать/Удалить абрис</string>
     <string name="help_plot_scrap">Скрапы в абрисе</string>
-    <!-- TODO string name="help_plot_search">Station search</string -->
+    <string name="help_plot_search">Поиск пикета</string>
     <string name="help_plot_switch">Переключить абрис</string>
     <string name="help_search">Поиск пикета</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
@@ -1172,7 +1172,7 @@
     <string name="help_add_project">Добавить проект пещеры</string>
     <string name="help_add_surveys">Добавить съёмки</string>
     <string name="help_drop_surveys">Удалить съёмки</string>
-    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
+    <string name="help_color_surveys">Изменить цвета съёмок</string>
     <string name="help_view_surveys">Показать съёмки</string>
     <string name="help_view_equates">Список соединений</string>
     <string name="help_export_config">Экспортировать проект</string>
@@ -1195,7 +1195,7 @@
     <string name="export_lrud">ЛПВН</string>
     <string name="export_lrud_from">ЛПВН на пикете ОТ</string>
     <string name="export_maps">Блок map до данных съёмки</string>
-    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
+    <string name="export_uncommented_maps">Раскомментированные карты</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
     <string name="export_media">Фото-Аудио</string>
@@ -1257,7 +1257,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
-    <!-- TODO string name="title_plot_search">Station search</string -->
+    <string name="title_plot_search">Поиск пикета</string>
     <string name="title_pref_search">Поиск настроек</string>
     <string name="title_gm_search">Поиск данных калибровки</string>
     <string name="title_dangling">Неприсоединенные замеры</string>
@@ -1867,8 +1867,8 @@
   <string name="pref_LRExtend_summary">Оценить расстояния лево/право при импорте форматов Compass/VisualTopo</string>
   <string name="pref_diving_mode_title">Подводная съёмка</string>
   <string name="pref_diving_mode_summary">Включить режим подводной съёмки</string>
-  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
-  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
+  <string name="pref_shot_tampering_title">Редактирование замеров</string>
+  <string name="pref_shot_tampering_summary">Редактирование скачаных с дисто замеров</string>
   <string name="pref_splay_classes_title">Классы сплеев</string>
   <string name="pref_splay_classes_summary">Включить разделение сплеев на классы (показаны разным цветом)</string>
   <string name="pref_splay_color_title">Цвета сплеев</string>
