@@ -875,12 +875,12 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_clear_week">Tisztít 7nap</string>
     <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
-    <!-- UNUSED string name="button_select"    >Kiválaszt    </string -->
+    <string name="button_select"    >Kiválaszt    </string>
     <string name="button_leg_station">Poligon pontok</string>
     <string name="button_all_station">Minden pont</string>
     <string name="button_leg_search">Poligon keresés</string>
-    <string name="button_search"    >Keres    </string>
-    <string name="button_merge"     >Egyesít     </string>
+    <string name="button_search"    >Keres</string>
+    <string name="button_merge"     >Egyesít körvonal</string>
     <string name="button_saved"     >Mentett pont</string>
     <string name="button_scrap"     >Körvonal</string>
     <string name="button_split"     >Feloszt</string>
