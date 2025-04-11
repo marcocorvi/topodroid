@@ -471,7 +471,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="menu_recover">HELYREÁLLÍT</string>
     <string name="menu_recover_paste">HELYREÁLLÍT/BEILLESZT</string>
     <string name="menu_reload">ÚJRATÖLT</string>
-    <string name="menu_rename_delete">ÁTNEVEZ/TÖRÖL</string>
+    <string name="menu_rename_delete">MŰVELETEK</string>
     <string name="menu_rename">ÁTNEVEZ</string>
     <string name="menu_plot_scrap">SZINTEK</string>
     <string name="menu_switch">VÁLT/BEZÁR</string>
