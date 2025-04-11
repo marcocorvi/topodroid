@@ -1027,8 +1027,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
     <string name="split_nothing">Nem megosztható</string>
     <string name="flip_shots">Mérések_megfordítása </string>
-    <string name="move_items">Mozgat</string>
-    <string name="copy_items">Tételek másolása</string>
+    <string name="move_items">Elemek mozgatása</string>
+    <string name="copy_items">Elemek másolása</string>
     <string name="paste_items">Beilleszt</string>
     <string name="current_station_format">K %1$.1f É %2$.1f H %3$.1f</string>
 
