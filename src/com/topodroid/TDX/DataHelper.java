@@ -6171,19 +6171,29 @@ public class DataHelper extends DataSetObservable
    */
   boolean isSurveyMutable( long sid, String msg )
   {
-    if ( myDB == null ) return false;
     if ( ! TDSetting.WITH_IMMUTABLE ) return true; // FIXME_IMMUTABLE
+    boolean ret = checkSurveyMutable( sid );
+    if ( ! ret ) TDLog.e("IMMUTABLE SURVEY " + msg);
+    return ret;
+  }    
+
+  boolean isSurveyMutable( long sid ) { return isSurveyMutable( sid, null ); }
+
+  /** check if the survey is mutable without considering WITH_IMMUTABLE
+   * @param sid    survey ID
+   * @return true is the survey data are mutable 
+   */
+  private boolean checkSurveyMutable( long sid )
+  {
+    if ( myDB == null ) return false;
     Cursor cursor = myDB.query( SURVEY_TABLE, new String[]{ "immutable" }, "id=?", new String[]{ Long.toString( sid ) }, null, null, null );
     boolean ret = true;
     if (cursor.moveToFirst()) {
       ret = ( cursor.getLong( 0 ) == 0 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    if ( ! ret ) TDLog.e("IMMUTABLE SURVEY " + msg);
     return ret;
-  }    
-
-  boolean isSurveyMutable( long sid ) { return isSurveyMutable( sid, null ); }
+  }
 
 // -------------------------------------------------------------------------------
 // SKETCH_3D
