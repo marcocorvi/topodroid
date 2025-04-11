@@ -884,6 +884,7 @@
     <string name="button_split"     >分割     </string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
     <string name="button_swap"      >交换      </string>
@@ -902,6 +903,7 @@
     <string name="button_write"     >上载</string>
     <string name="button_xsection"  >截面</string>
     <string name="xsection">截面</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">缓存: %1$d 数据</string>
     <string name="buffer_sorted">已排序</string>
     <!-- UNUSED string name="buffer_unsorted">未分类</string -->

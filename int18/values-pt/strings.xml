@@ -833,6 +833,7 @@ no campo abaixo e aperte o botão.
   <string name="button_split">Dividir   </string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
   <string name="button_swap">Inverter      </string>
@@ -849,6 +850,7 @@ no campo abaixo e aperte o botão.
   <string name="button_write">Enviar</string>
   <string name="button_xsection">Corte</string>
   <string name="xsection">Corte</string>
+    <!-- TODO string name="buffer">Buffer</string -->
   <string name="buffer_size">Buffer: %1$d dados</string>
   <string name="buffer_sorted">ordenado</string>
   <!-- UNUSED string name="buffer_unsorted">desordenado</string -->

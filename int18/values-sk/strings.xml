@@ -898,6 +898,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_split"     >Rozdeliť   </string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >Vycentrovať na</string>
     <string name="button_store"     >Zapísať    </string>
     <string name="button_swap"      >Vymeniť      </string>
@@ -916,6 +917,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_write"     >Nahrať koeficienty do DistaX</string>
     <string name="button_xsection">Priečny rez</string>
     <string name="xsection">Priečny rez</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Veľkosť vyrovnávacej pamäte: %1$d</string>
     <string name="buffer_sorted">zoradené</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->

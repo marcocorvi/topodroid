@@ -1,20 +1,23 @@
 <html>
 <body>
 
-<h4>SKETCH RENAME/DELETE/SPLIT</h4>
+<h4>SKETCH OPERATIONS</h4>
 
 <div style="font-size=90%">
-With this dialog you can do maintenance actions on the sketch:
+With this dialog you can do maintenance operations on the sketch:
 <ul>
 <li>delete the sketch</li>
 <li>change the name of the sketch</li>
 <li>change the origin station of the sketch [T]</li>
 <li>split the sketch and create a new sketch moving or copying drawing items to it</li>
-<li>move or copy drawing items in a buffer and paste them into another scrap of the sketch</li>
-<li>merge the items of the sketch outlines in the current sketch</li>
+<li>move or copy drawing items to a new scrap of the sketch</li>
+<li>move or copy drawing items in a buffer</li>
+<li>clear the item buffer or paste them in a scrap</li>
+<li>select another sketch and add it to the outlines of the current sketch</li>
+<li>merge the items of the outline sketches in the current sketch</li>
 </ul><br><p>
 
-The dialog is opened from the <i>Rename</i> menu of the <u>Drawing window</u>.<br><p>
+The dialog is opened from the <i>Operations</i> menu of the <u>Drawing window</u>.<br><p>
 
 It has a field for the new name of the sketch (or the name of the new sketch in case of "split")
 and a text box with the sketch reference station (sketch origin).<br>
@@ -22,21 +25,25 @@ and a text box with the sketch reference station (sketch origin).<br>
 
 Type the new sketch name in the edit box, and tap the <i>Rename</i> button to confirm.<br><p>
 
+The <i>Delete</i> button marks the sketch as "deleted". It can be recovered with the <u>Survey Data window</u>
+<i>recover</i> menu.<br><p>
+
 With the <i>sketch</i> button [T] you can cut a portion of the sketch and save it as a new sketch.
 You must write the name of the new sketch in the edit box.
 Then you select the portion of the sketch by tracing a line around it.<br>
 With the check box you choose whether to copy or to move the selected items to the new sketch.<br>
 The base station of the new sketch is the same as that of the current sketch.<br><p>
 
-With the <i>scrap</i> button [T] the selected items are put in a buffer, to be later pasted to another
-scrap with the <i>Paste</i> button.<br><p>
+With the <i>scrap</i> button [T] the selected items are copied or moved to a new scrap.<br><p>
 
-The <i>Outline</i> button opens a dialog to pick another sketch and add its outline as a reference.
+With the <i>buffer</i> button they are put in a bufferr.<br>
+The buffer items can be pasted to a scrap with the <i>Paste</i> button.<br>
+The <i>Clear</i> button clears the buffer.<br><p>
+
+<b>Outlines</b><br>
+The <i>Select</i> button opens a dialog to pick another sketch and add its outline as a reference.
 The outlines are not saved with the sketch, and are lost when the sketch is closed.<br>
 The <i>Merge</i> button copies the items of the sketches shown in outline in the current sketch.<br><p>
-
-The <i>Delete</i> button marks the sketch as "deleted". It can be recovered with the <u>Survey Data window</u>
-<i>recover</i> menu.<br><p>
 
 Close the dialog with the <i>Cancel</i> button to cancel.<br><p>
 

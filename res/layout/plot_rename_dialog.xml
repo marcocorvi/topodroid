@@ -87,19 +87,19 @@
       />
     </LinearLayout>
 
-    <LinearLayout 
+    <LinearLayout android:id="@+id/layout_items"
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
        android:layout_gravity="end"
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
        >
-      <CheckBox android:id="@+id/cb_move"
+      <!-- CheckBox android:id="@+id/cb_move"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginEnd="@dimen/margintiny"
         android:text="@string/move_items"
-      />
+      / -->
       <CheckBox android:id="@+id/cb_copy"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -116,38 +116,62 @@
         android:layout_marginEnd="@dimen/marginh"
         android:text="@string/button_to_scrap"
       />
-    </LinearLayout>
-
-    <LinearLayout 
-       android:layout_width="wrap_content" 
-       android:layout_height="wrap_content"
-       android:layout_gravity="end"
-       android:orientation="horizontal"
-       android:layout_marginTop="@dimen/marginv"
-       >
-      <Button android:id="@+id/btn_outline"
-        android:layout_marginEnd="@dimen/marginh"
+      <Button android:id="@+id/btn_to_buffer"
         style="@style/button_default"
-        android:text="@string/button_scrap"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_to_buffer"
       />
     </LinearLayout>
 
-    <LinearLayout 
+    <LinearLayout android:id="@+id/layout_buffer"
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
        android:layout_gravity="end"
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
        >
-      <Button android:id="@+id/btn_merge"
+      <TextView 
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textsize"
+        android:text="@string/buffer"
+      />
+      <Button android:id="@+id/btn_clear"
         android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
-        android:text="@string/button_merge"
+        android:text="@string/button_clear"
       />
       <Button android:id="@+id/btn_paste"
         android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/paste_items"
+      />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/layout_outline" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginv"
+       >
+      <TextView 
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textsize"
+        android:text="@string/button_scrap"
+      />
+      <Button android:id="@+id/btn_outline"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_select"
+      />
+      <Button android:id="@+id/btn_merge"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_merge"
       />
     </LinearLayout>
 

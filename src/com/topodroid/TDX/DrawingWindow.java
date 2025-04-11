@@ -765,7 +765,8 @@ public class DrawingWindow extends ItemDrawer
   private String mSplitStationName;
   private ArrayList< PointF > mSplitBorder = null;
   private List< DrawingPath > mSplitPaths  = null;
-  private boolean mSplitRemove;
+  private boolean mSplitRemove = false;
+  private boolean mSplitCreate = false;
 
   // ----------------------------------------------------------------
   // BUTTONS and MENU
@@ -9613,6 +9614,7 @@ public class DrawingWindow extends ItemDrawer
     // mSplitStation = mDrawingSurface.getStation( station );
     mSplitStationName = station;
     mSplitRemove  = remove;
+    // mSplitCreate  = true;
     // if ( mSplitStation != null ) { // do not check origin station
       if ( mSplitBorder == null ) {
         mSplitBorder = new ArrayList<>();
@@ -9628,11 +9630,16 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("mode " + mMode + " touch-mode " + mTouchMode );
   }
 
-  void splitScrap( boolean remove ) 
+  /** 
+   * @param remove  whether to remove items from the source scrap
+   * @param create  whether to create a new scrap and put the items in there
+   */
+  void splitScrap( boolean remove, boolean create )
   {
     mSplitName = null;
     mSplitStationName = null;
     mSplitRemove = remove;
+    mSplitCreate = create;
     // mSplitScrap  = mDrawingSurface.getCurrentScrap();
     if ( mSplitBorder == null ) {
       mSplitBorder = new ArrayList<>();
@@ -9663,7 +9670,17 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  void pasteToScrap()
+  /** clear the drawing item buffer
+   */
+  void clearSplitBuffer()
+  {
+    mSplitPaths = null;
+  }
+
+  /** copy the drawing item buffer to the current scrap
+   * @param clear   whether the clear the buffer after copying it
+   */
+  void pasteSplitBufferToScrap( boolean clear )
   {
     if ( mSplitPaths != null && mSplitPaths.size() > 0 ) {
       TDLog.v("merge split paths " + mSplitPaths.size() + " removed " + mSplitRemove );
@@ -9679,7 +9696,7 @@ public class DrawingWindow extends ItemDrawer
           path.mScrap = scrap_nr;
           mDrawingSurface.addDrawingPath( path ); // INSERT PATH
         }
-        mSplitPaths = null;
+        if ( clear ) mSplitPaths = null;
       }
     } 
   }
@@ -9721,6 +9738,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSplitPlot( )
   {
+    // mSplitCreate = false;
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
       TDToast.makeWarn( R.string.split_nothing );
       return;
@@ -9755,13 +9773,24 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeWarn( R.string.split_nothing );
       return;
     }
-    mSplitPaths = mDrawingSurface.splitPaths( mSplitBorder, mSplitRemove );
-    if ( TDUtil.isEmpty( mSplitPaths) ) { // nothing to split
+    List< DrawingPath > paths = mDrawingSurface.splitPaths( mSplitBorder, mSplitRemove );
+    if ( TDUtil.isEmpty( paths ) ) { // nothing to split
       TDToast.makeWarn( R.string.split_nothing );
-      mSplitPaths = null;
       return;
+    } 
+    if ( mSplitPaths == null ) {
+      mSplitPaths = paths;
+    } else {
+      for ( DrawingPath path : paths ) {
+        if ( ! mSplitPaths.contains( path ) ) mSplitPaths.add( path );
+      }
     }
-    TDLog.v("DO SPLIT SCRAP: border " + mSplitBorder.size() + " paths " + mSplitPaths.size() );
+    TDLog.v("DO SPLIT SCRAP: border " + mSplitBorder.size() + " paths " + mSplitPaths.size() + " create " + mSplitCreate );
+    if ( mSplitCreate ) { // make a new scrap and put items there
+      scrapNew();
+      pasteSplitBufferToScrap( true ); // true = clear buffer
+      mSplitCreate = false;
+    }
   }
 
   // -------------------------------------------------------

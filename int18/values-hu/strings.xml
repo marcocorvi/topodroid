@@ -886,6 +886,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_split"     >Feloszt</string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >Központ:</string>
     <string name="button_store"     >Tárol</string>
     <string name="button_swap"      >Csere      </string>
@@ -904,6 +905,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_write"     >Feltölt</string>
     <string name="button_xsection"  >Keresztmetszet</string>
     <string name="xsection">Kereszmetszetek</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Puffer: %1$d adat</string>
     <string name="buffer_sorted">rendezett</string>
     <!-- UNUSED string name="buffer_unsorted">rendezetlen</string -->

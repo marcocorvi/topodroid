@@ -888,6 +888,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_split"     >Dividir     </string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
     <string name="button_swap"      >Cambiar      </string>
@@ -905,6 +906,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >Secciones transversales</string>
     <string name="xsection">Secciones transversales</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Búfer: %1$d datos</string>
     <string name="buffer_sorted">ordenado</string>
     <!-- UNUSED string name="buffer_unsorted">Sin clasificar</string -->

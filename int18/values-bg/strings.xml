@@ -891,6 +891,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_split">Раздели</string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station">Център на</string>
     <string name="button_store">Запази</string>
     <string name="button_swap">Размени</string>
@@ -909,6 +910,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_write">Качване</string>
     <string name="button_xsection">Сечение</string>
     <string name="xsection">Сечение</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Размер на буфера: %1$d</string>
     <string name="buffer_sorted">сортиран</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->

@@ -487,7 +487,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_recover">RECOVER</string>
     <string name="menu_recover_paste">RECOVER/PASTE</string>
     <string name="menu_reload">RELOAD</string>
-    <string name="menu_rename_delete">RENAME, ETC.</string>
+    <string name="menu_rename_delete">OPERATIONS</string>
     <string name="menu_rename">RENAME</string>
     <string name="menu_plot_scrap" copyable="cn fr it">SCRAPS</string>
     <string name="menu_switch">SWITCH/CLOSE</string>
@@ -893,17 +893,18 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_clear_week">Clear 7d</string>
     <string name="button_clear_memory">Clear memory</string>
     <string name="button_save"      >Save</string>
-    <!-- UNUSED string name="button_select"    >Select</string -->
+    <string name="button_select"    >Select</string>
     <string name="button_leg_station">Leg stations</string>
     <string name="button_all_station">All stations</string>
     <string name="button_leg_search">Leg search</string>
     <string name="button_search"    >Search</string>
-    <string name="button_merge"     >Merge outline</string>
+    <string name="button_merge"     >Merge</string>
     <string name="button_saved"     >Saved station</string>
     <string name="button_scrap"     >Outlines</string>
     <string name="button_split"     >Split</string>
     <string name="button_to_sketch">sketch</string>
     <string name="button_to_scrap" >scrap</string>
+    <string name="button_to_buffer">buffer</string>
     <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store</string>
     <string name="button_swap"      >Swap</string>
@@ -922,6 +923,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_write"     >Upload</string>
     <string name="button_xsection" copyable="fr">X-Section</string>
     <string name="xsection" copyable="fr">X-Section</string>
+    <string name="buffer" copyable="all">Buffer</string>
     <string name="buffer_size">Buffer size: %1$d</string>
     <string name="buffer_sorted">sorted</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
@@ -1042,9 +1044,9 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="split_nothing">Nothing to split</string>
     <string name="flip_shots">Flip shots</string>
-    <string name="move_items">Move</string>
+    <string name="move_items">Move items to</string>
     <string name="copy_items">Copy items to</string>
-    <string name="paste_items">Paste items</string>
+    <string name="paste_items">Paste</string>
     <string name="current_station_format" copyable="all">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Preface</string>
@@ -1393,7 +1395,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_survey_export">Export survey</string>
     <string name="title_survey_rename">Rename survey</string>
     <string name="title_team_dialog">Team names</string>
-    <string name="title_plot_rename">Rename sketch</string>
+    <string name="title_plot_rename">Sketch operations</string>
     <string name="title_plot_zoomfit">Zoom fit / Orientation</string>
     <string name="title_calib_export">Export calibration</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->

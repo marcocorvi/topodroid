@@ -22,6 +22,7 @@ import android.widget.EditText;
 // import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 
 class PlotRenameDialog extends MyDialog
@@ -34,13 +35,15 @@ class PlotRenameDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnDelete;
   // private Button   mBtnSplit;
-  private CheckBox mCBmove     = null;
+  // private CheckBox mCBmove     = null;
   private CheckBox mCBcopy     = null;
   private Button   mBtnOutline = null; // sketch outlines
   private Button   mBtnMerge   = null;  // sketch merge outlines
+  private Button   mBtnClear   = null;  // paste into scrap
   private Button   mBtnPaste   = null;  // paste into scrap
   private Button   mBtnSketch  = null; // sketch move/copy
   private Button   mBtnScrap   = null;  // scrap move/copy
+  private Button   mBtnBuffer  = null;  // scrap move/copy
 
   private final DrawingWindow mParent;
   private String mStation;
@@ -70,12 +73,14 @@ class PlotRenameDialog extends MyDialog
     mBtnRename = (Button) findViewById(R.id.btn_rename );
     mBtnSketch = (Button) findViewById(R.id.btn_to_sketch );
     mBtnScrap  = (Button) findViewById(R.id.btn_to_scrap );
+    mBtnBuffer = (Button) findViewById(R.id.btn_to_buffer );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
-    mCBmove    = (CheckBox) findViewById( R.id.cb_move );
+    // mCBmove    = (CheckBox) findViewById( R.id.cb_move );
     mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
     mBtnOutline = (Button) findViewById(R.id.btn_outline );
     mBtnMerge  = (Button) findViewById(R.id.btn_merge );
+    mBtnClear  = (Button) findViewById(R.id.btn_clear );
     mBtnPaste  = (Button) findViewById(R.id.btn_paste );
 
     mEtName = (EditText) findViewById( R.id.et_name );
@@ -91,11 +96,12 @@ class PlotRenameDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
     if ( TDLevel.overExpert && TDSetting.mPlotSplit && mParent != null && ! mParent.isAnySection() ) {
-      mCBmove.setOnClickListener( this );
+      // mCBmove.setOnClickListener( this );
       mCBcopy.setOnClickListener( this );
       mBtnOutline.setOnClickListener( this );
       mBtnSketch.setOnClickListener( this );
       mBtnScrap.setOnClickListener( this );
+      mBtnBuffer.setOnClickListener( this );
       // mBtnSplit.setOnLongClickListener( this );
       if ( mHasOutline ) {
         mBtnMerge.setOnClickListener( this );
@@ -103,22 +109,30 @@ class PlotRenameDialog extends MyDialog
         mBtnMerge.setVisibility( View.GONE );
       }
       if ( mScrapCopy ) {
+        mBtnClear.setOnClickListener( this );
         mBtnPaste.setOnClickListener( this );
       } else {
-        mBtnPaste.setVisibility( View.GONE );
+        LinearLayout layout = (LinearLayout) findViewById( R.id.layout_buffer );
+        layout.setVisibility( View.GONE );
       }
-      mCBmove.setChecked( true );
+      // mCBmove.setChecked( true );
       mCBcopy.setChecked( false );
+      setCBcopyText();
     } else {
-      mCBmove.setVisibility( View.GONE );
-      mCBcopy.setVisibility( View.GONE );
-      mBtnSketch.setVisibility( View.GONE );
-      mBtnScrap.setVisibility( View.GONE );
-      mBtnOutline.setVisibility( View.GONE );
-      mBtnMerge.setVisibility( View.GONE );
-      mBtnPaste.setVisibility( View.GONE );
+      LinearLayout layout = (LinearLayout) findViewById( R.id.layout_items );
+      layout.setVisibility( View.GONE );
+      layout = (LinearLayout) findViewById( R.id.layout_buffer );
+      layout.setVisibility( View.GONE );
+      layout = (LinearLayout) findViewById( R.id.layout_outline );
+      layout.setVisibility( View.GONE );
     }
 
+  }
+
+
+  private void setCBcopyText()
+  {
+    mCBcopy.setText( mCBcopy.isChecked() ? R.string.copy_items : R.string.move_items );
   }
 
   @Override
@@ -129,12 +143,14 @@ class PlotRenameDialog extends MyDialog
     // onPause will be called, and we save our data there.
     if ( v instanceof CheckBox ) {
       CheckBox cb = (CheckBox)v;
-      if ( cb == mCBmove ) {
-        mCBmove.setChecked( true );
-        mCBcopy.setChecked( false );
-      } else if ( cb == mCBcopy ) {
-        mCBmove.setChecked( false );
-        mCBcopy.setChecked( true );
+      // if ( cb == mCBmove ) {
+      //   mCBmove.setChecked( true );
+      //   mCBcopy.setChecked( false );
+      // } else 
+      if ( cb == mCBcopy ) {
+        // mCBmove.setChecked( false );
+        // mCBcopy.setChecked( true );
+        setCBcopyText( );
       }
       return;
     }
@@ -166,16 +182,20 @@ class PlotRenameDialog extends MyDialog
       if ( ! handleSketchSplit( true ) ) return;
     } else if ( TDSetting.mPlotSplit && b == mBtnScrap ) {
       // TDLog.v("click SCRAP");
-      handleScrapSplit( );
+      handleScrapSplit( true );
+    } else if ( TDSetting.mPlotSplit && b == mBtnBuffer ) {
+      handleScrapSplit( false );
     } else if ( b == mBtnOutline ) {
       // TDLog.v("click OUTLINE");
       mParent.scrapOutlineDialog();
     } else if ( b == mBtnMerge ) { // merge outline to plot
       // TDLog.v("click MERGE");
       mParent.mergePlotOutline( );
+    } else if ( b == mBtnClear ) { // merge paths to scrap
+      mParent.clearSplitBuffer( );
     } else if ( b == mBtnPaste ) { // merge paths to scrap
       // TDLog.v("click PASTE");
-      mParent.pasteToScrap( );
+      mParent.pasteSplitBufferToScrap( true ); // true = clear the buffer after copy
     // } else if ( b == mBtnBack ) {
       /* nothing */
     }
@@ -205,9 +225,9 @@ class PlotRenameDialog extends MyDialog
     return true;
   }
 
-  private void handleScrapSplit( )
+  private void handleScrapSplit( boolean create )
   {
-    mParent.splitScrap(  ! mCBcopy.isChecked() ); //  not mCBcopy == remove
+    mParent.splitScrap(  ! mCBcopy.isChecked(), create ); //  not mCBcopy == remove
   }
 
 }

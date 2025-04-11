@@ -881,6 +881,7 @@
     <string name="button_split"     >Разделить     </string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
     <string name="button_swap"      >Поменять местами      </string>
@@ -899,6 +900,7 @@
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
     <string name="xsection">Сечение</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Буфер: %1$d записей</string>
     <string name="buffer_sorted">отсортировано</string>
     <!-- UNUSED string name="buffer_unsorted">не отсортировано</string -->

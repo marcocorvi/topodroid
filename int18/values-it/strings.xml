@@ -473,7 +473,7 @@
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_recover_paste">RIPRISTINA/INCOLLA</string>
     <string name="menu_reload">RICARICA</string>
-    <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
+    <string name="menu_rename_delete">OPERAZIONI</string>
     <string name="menu_rename">RINOMINA</string>
     <string name="menu_plot_scrap">SCARTI</string>
     <string name="menu_switch">CAMBIA/CHIUDI</string>
@@ -874,17 +874,18 @@
     <string name="button_clear_week">Pulisci 7gg  </string>
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
-    <!-- UNUSED string name="button_select"    >Seleziona </string -->
+    <string name="button_select"    >Seleziona</string>
     <string name="button_leg_station">Battute</string>
     <string name="button_all_station">Tutti i capisaldi</string>
     <string name="button_leg_search">Ricerca battuta</string>
     <string name="button_search"    >Cerca     </string>
-    <string name="button_merge"     >Unisci    </string>
+    <string name="button_merge"     >Inserisci</string>
     <string name="button_saved"     >Caposaldo salvato</string>
     <string name="button_scrap"     >Outline</string>
     <string name="button_split"     >Dividi    </string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
     <string name="button_swap"      >Scambia   </string>
@@ -903,6 +904,7 @@
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Sezione trasversale</string>
     <string name="xsection">Sezione trasversale</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Buffer: %1$d dati</string>
     <string name="buffer_sorted">ordinato</string>
     <!-- UNUSED string name="buffer_unsorted">non ordinati</string -->
@@ -1377,7 +1379,7 @@
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_team_dialog">Nomi squadra topo</string>
-    <string name="title_plot_rename">Rinomina disegno</string>
+    <string name="title_plot_rename">iOperazioni sul disegno</string>
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->

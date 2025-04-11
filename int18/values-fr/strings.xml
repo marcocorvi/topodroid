@@ -886,6 +886,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_split"     >Diviser</string>
     <!-- TODO string name="button_to_sketch">To sketch</string -->
     <!-- TODO string name="button_to_scrap" >To scrap</string -->
+    <!-- TODO string name="button_to_buffer">buffer</string -->
     <string name="button_station"   >Centrer sur</string>
     <string name="button_store"     >Stocker</string>
     <string name="button_swap"      >Échanger</string>
@@ -903,6 +904,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">Section Transverse</string>
+    <!-- TODO string name="buffer">Buffer</string -->
     <string name="buffer_size">Mémoire tampon: %1$d données</string>
     <string name="buffer_sorted">trié</string>
     <!-- UNUSED string name="buffer_unsorted">non trié</string -->
