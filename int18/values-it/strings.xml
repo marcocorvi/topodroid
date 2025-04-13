@@ -1379,7 +1379,7 @@
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_team_dialog">Nomi squadra topo</string>
-    <string name="title_plot_rename">iOperazioni sul disegno</string>
+    <string name="title_plot_rename">Operazioni sul disegno</string>
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
