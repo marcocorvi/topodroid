@@ -470,7 +470,7 @@
     <string name="menu_recover">Восстановить</string>
     <string name="menu_recover_paste">ВОССТАНОВИТЬ/ВСТАВИТЬ</string>
     <string name="menu_reload">Перезагрузить</string>
-    <!-- TODO string name="menu_rename_delete">OPERATIONS</string -->
+    <string name="menu_rename_delete">ОПЕРАЦИИ</string>
     <string name="menu_rename">ПЕРЕИМЕНОВАТЬ</string>
     <string name="menu_plot_scrap">СКРАПЫ</string>
     <string name="menu_switch">ЗАКРЫТЬ/ПЕРЕКЛЮЧИТЬ</string>
@@ -879,9 +879,9 @@
     <string name="button_saved"     >Сохраненный пикет</string>
     <string name="button_scrap"     >Контуры</string>
     <string name="button_split"     >Разделить     </string>
-    <!-- TODO string name="button_to_sketch">To sketch</string -->
-    <!-- TODO string name="button_to_scrap" >To scrap</string -->
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+    <string name="button_to_sketch">В абрис</string>
+    <string name="button_to_scrap" >В скрап</string>
+    <string name="button_to_buffer">Буфер</string>
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
     <string name="button_swap"      >Поменять местами      </string>
@@ -900,7 +900,7 @@
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
     <string name="xsection">Сечение</string>
-    <!-- TODO string name="buffer">Buffer</string -->
+    <string name="buffer">Буфер</string>
     <string name="buffer_size">Буфер: %1$d записей</string>
     <string name="buffer_sorted">отсортировано</string>
     <!-- UNUSED string name="buffer_unsorted">не отсортировано</string -->
@@ -1022,9 +1022,9 @@
 
     <string name="split_nothing">Нечего разделять</string>
     <string name="flip_shots">Развернуть пикеты</string>
-    <!-- TODO string name="move_items">Move</string -->
+    <string name="move_items">Переместить объекты</string>
     <string name="copy_items">Копировать объекты</string>
-    <!-- TODO string name="paste_items">Paste items</string -->
+    <string name="paste_items">Вставить объекты</string>
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Предисловие</string>
@@ -1369,7 +1369,7 @@
     <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
-    <!-- TODO string name="title_plot_rename">Sketch operations</string -->
+    <string name="title_plot_rename">Операции с абрисом</string>
     <string name="title_plot_zoomfit">Вместить / Ориентация</string>
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
