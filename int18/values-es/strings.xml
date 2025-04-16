@@ -35,7 +35,7 @@
     <!-- NO TRANSLATION string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">proyecto.tdconfig</string>
-    <string name="double_back">Para salir presione ATRAS nuevamente</string>
+    <string name="double_back">Para salir presione ATRÁS nuevamente</string>
 
     <string name="new_survey_label">Nueva topografía</string>
     <!-- NO string name="distox_label">DistoX</string -->
@@ -478,7 +478,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_recover_paste">Restaurar/Pegar</string>
     <string name="menu_reload">Importar</string>
-    <!-- TODO string name="menu_rename_delete">OPERATIONS</string -->
+    <string name="menu_rename_delete">Operaciones</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_plot_scrap">Basura</string>
     <string name="menu_switch">Cerrar/Cambiar</string>
@@ -886,9 +886,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_saved"     >Estación guardada</string>
     <string name="button_scrap"     >Contornos</string>
     <string name="button_split"     >Dividir     </string>
-    <!-- TODO string name="button_to_sketch">To sketch</string -->
-    <!-- TODO string name="button_to_scrap" >To scrap</string -->
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+    <string name="button_to_sketch">Para dibujo</string>
+    <string name="button_to_scrap" >Para desguazar</string>
+    <string name="button_to_buffer">búfer</string>
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
     <string name="button_swap"      >Cambiar      </string>
@@ -906,7 +906,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >Secciones transversales</string>
     <string name="xsection">Secciones transversales</string>
-    <!-- TODO string name="buffer">Buffer</string -->
+    <string name="buffer">búfer</string>
     <string name="buffer_size">Búfer: %1$d datos</string>
     <string name="buffer_sorted">ordenado</string>
     <!-- UNUSED string name="buffer_unsorted">Sin clasificar</string -->
@@ -1027,9 +1027,9 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="split_nothing">Nada para dividir</string>
     <string name="flip_shots">Tomas contínuas</string>
-    <!-- TODO string name="move_items">Move</string -->
+    <string name="move_items">Mover</string>
     <string name="copy_items">Copiar elementos</string>
-    <!-- TODO string name="paste_items">Paste items</string -->
+    <string name="paste_items">Pegar elementos</string>
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface"> Prefacio </string>
@@ -1374,7 +1374,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
     <string name="title_team_dialog">Nombre del grupo</string>
-    <!-- TODO string name="title_plot_rename">Sketch operations</string -->
+    <string name="title_plot_rename">Operaciones de dibujo</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>
     <string name="title_calib_export">Exportar topografía como &#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
