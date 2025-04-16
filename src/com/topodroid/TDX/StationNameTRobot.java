@@ -45,6 +45,47 @@ class StationNameTRobot extends StationName
     return sr + "." + pt; // Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
+  // /** @return the series of a station 
+  //  * @param station station name
+  //  */
+  // private static int getSeries( String station )
+  // {
+  //   int pos = station.indexOf( '.' );
+  //   return Integer.parseInt( station.substring( 0, pos ) );
+  // }
+
+  // /** @return the point of a station 
+  //  * @param station station name
+  //  */
+  // private static int getPoint( String station )
+  // {
+  //   int pos = station.indexOf( '.' );
+  //   return Integer.parseInt( station.substring( pos+1 ) );
+  // }
+
+  /** @return the next station in the series
+   * @param station station name
+   */
+  private static String getNextStation( String station )
+  {
+    int pos = station.indexOf( '.' );
+    try {
+      if ( pos < 0 ) {
+        int next = 1 + Integer.parseInt( station );
+        return Integer.toString( next );
+      } else {
+        int next = 1 + Integer.parseInt( station.substring(pos+1) );
+        return station.substring(0, pos+1 ) + Integer.toString( next );
+      }
+    } catch ( NumberFormatException e ) {
+      // TODO TDLog.e( "Station name exception " + station );
+    }
+    return null;
+  }
+    
+        
+
+
   /** @return the maximum series (number) occurring in a list of shots
    * @param list  list of shots
    */
@@ -90,7 +131,7 @@ class StationNameTRobot extends StationName
   {
     boolean ret = false;
     ArrayList< DBlock > unassigned = new ArrayList<>();
-    // TDLog.v( "assign stations after - TRobot");
+    TDLog.v( "TROBOT assign stations after " + blk0.mId );
 
     DBlock prev = blk0;
     String from = blk0.mFrom;
@@ -155,7 +196,7 @@ class StationNameTRobot extends StationName
   { 
     boolean ret = false;
     int series = getMaxTRobotSeries( list ); // current max series
-    // TDLog.v( "TRobot assign stations. size " + list.size() );
+    TDLog.v( "TROBOT assign stations. data " + list.size() + " stations " + sts.size() );
     DBlock prev = null;
     String from = getTRobotStation( 1, 0 ); // from = 1.0
     String to   = getTRobotStation( 1, 1 ); // to   = 1.1
@@ -180,9 +221,16 @@ class StationNameTRobot extends StationName
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
                 if ( mCurrentStationName != null ) {
-                  ++series;
-                  from = mCurrentStationName;
-                  to   = getTRobotStation( series, 1 ); // to = series.1
+                  // if the mCurrentStationName is the last of its series do not start a new series
+                  String next = getNextStation( mCurrentStationName );
+                  if ( sts.contains( next ) ) {
+                    ++series;
+                    from = mCurrentStationName;
+                    to   = getTRobotStation( series, 1 ); // to = series.1
+                  } else {
+                    from = mCurrentStationName;
+                    to   = next;
+                  }
                 }
                 nrLegShots = 2; // prev and this shot
               } else {
