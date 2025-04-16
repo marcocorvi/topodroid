@@ -5,7 +5,7 @@
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>
-    <string name="user_man_fail">Failed to install user manual translation</string>
+    <string name="user_man_fail">Failed to install user manual translation [%1$d]</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->

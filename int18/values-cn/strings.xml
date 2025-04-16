@@ -3,7 +3,7 @@
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">无法从网络检索用户手册</string>
     <string name="user_man_ok">已安装用户手册译本</string>
-    <string name="user_man_fail">无法安装用户手册译本</string>
+    <string name="user_man_fail">无法安装用户手册译本 [%1$d]</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->

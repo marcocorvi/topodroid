@@ -3,7 +3,7 @@
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
     <string name="user_man_ok">Installált felhasználói kézikönyv fordítás</string>
-    <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor</string>
+    <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor [%1$d]</string>
 
     <!-- UNUSED string name="string_false">hamis</string -->
     <!-- UNUSED string name="string_true">igaz</string -->

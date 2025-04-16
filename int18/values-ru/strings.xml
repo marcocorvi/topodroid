@@ -3,7 +3,7 @@
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Невозможно скачать руководство из интернета.</string>
     <string name="user_man_ok">Перевод руководства установлен</string>
-    <string name="user_man_fail">Не удалось установить перевод руководства</string>
+    <string name="user_man_fail">Не удалось установить перевод руководства [%1$d]</string>
 
     <!-- UNUSED string name="string_false">неверно</string -->
     <!-- UNUSED string name="string_true">верно</string -->

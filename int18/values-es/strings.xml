@@ -5,7 +5,7 @@
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
-    <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
+    <string name="user_man_fail">Error al instalar la traducción del manual del usuario [%1$d]</string>
 	
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->

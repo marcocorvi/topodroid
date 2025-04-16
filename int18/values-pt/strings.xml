@@ -3,7 +3,7 @@
   <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
   <string name="no_manual">Não é possível obter o manual do usuário na internet</string>
   <string name="user_man_ok">Manual traduzido instalado</string>
-  <string name="user_man_fail">Instalação do manual traduzido falhou</string>
+  <string name="user_man_fail">Instalação do manual traduzido falhou [%1$d]</string>
   <!-- UNUSED string name="string_false">false</string -->
   <!-- UNUSED string name="string_true">true</string -->
   <!-- UNUSED string name="target_sdk" translatable="false">TopoDroidX official app is on http://marcocorvi.altervista.com/TopoDroidX.html\nFinish ?</string -->

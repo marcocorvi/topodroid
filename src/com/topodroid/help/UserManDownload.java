@@ -13,7 +13,7 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-// import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDInstance;
 // import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
@@ -94,15 +94,19 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
           ret = 1;
         } else {
           TDLog.e("ERROR could not mkdirs" );
+          ret = -1;
         }
       } else {
         TDLog.e("HTTP error : " + response );
+        ret = -response;
       } 
       http.disconnect();
     } catch ( MalformedURLException e1 ) {
       TDLog.e( "ERROR bad URL: " + e1.toString() );
+      ret = -2;
     } catch ( IOException e2 ) {
       TDLog.e( "ERROR I/O exception: " + e2.toString() );
+      ret = -3;
     }
     return ret;
   }
@@ -128,7 +132,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
       if ( r == 1 ) { // success
 	TDToast.make( R.string.user_man_ok );
       } else { // failed
-	TDToast.makeBad( R.string.user_man_fail );
+	TDToast.makeBad( TDInstance.formatString( R.string.user_man_fail, -res) );
       }
     }
     unlock();
