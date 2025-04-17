@@ -150,7 +150,7 @@ no campo abaixo e aperte o botão.
   <string name="calib_roll">Mergulho mag. (rotação): %1$.2f °</string>
   <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
   <string name="calib_min_error">Erro mínimo</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+  <string name="calib_delta_dir">Dif. dir.: %1$.2f ± %2$.2f (max %3$.2f)</string>
   <string name="magn_dip">Inclinação mag. …</string>
   <string name="auto_calib" copyable="pt">Auto Calib</string>
   <string name="autocalib_not_supported">Cálculo obrigatório de calibração</string>
@@ -206,7 +206,6 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="external_prompt">Inserir medição</string -->
   <string name="splay_at_to">Dados EDTC na base PARA</string>
   <string name="lrud">EDTC</string>
-  <!-- CHANGED string name="strike_dip">Direção %1$.0f — Mergulho %2$.0f</string -->
   <string name="strike_dip">Mergulho: direção %1$.0f — inclinação %2$.0f</string>
   <string name="few_data">Não há dados suficientes</string>
   <string name="few_iter">Falha: excesso de iterações</string>
@@ -275,9 +274,9 @@ no campo abaixo e aperte o botão.
   <string name="photo_title">FOTO</string>
   <string name="photo_text">Entre comentário para foto</string>
   <!-- UNUSED string name="photo_failed">Foto falhou</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+  <string name="photo_not_ready">Foto não está pronta. Aguarde &#8230;</string>
   <string name="photo_max_captures">Limite máximo de captura atingido</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+  <string name="photo_many_pictures">Quantidade excessiva de fotos</string>
   <string name="label_title">Rótulo</string>
   <string name="label_text">Inserir o texto do rótulo</string>
   <!-- UNUSED string name="altitude">Alt. </string -->
@@ -445,7 +444,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_recover">RESTAURAR</string>
   <string name="menu_recover_paste">RESTAURAR/COLAR</string>
   <string name="menu_reload">RECARREGAR</string>
-    <!-- TODO string name="menu_rename_delete">OPERATIONS</string -->
+  <string name="menu_rename_delete">OPERAÇÕES</string>
   <string name="menu_rename">RENOMEAR</string>
   <string name="menu_plot_scrap">DESENHOS</string>
   <string name="menu_switch">MUDAR/FECHAR</string>
@@ -472,7 +471,7 @@ no campo abaixo e aperte o botão.
   <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
   <string name="menu_validate">VALIDAR</string>
   <string name="menu_zoom_fit">ZOOM GERAL</string>
-    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
+  <string name="menu_plot_search">BUSCA BASE</string>
   <!-- FIXED_ZOOM -->
   <string name="zoom_fixed">Papel milimetrado</string>
   <!-- UNUSED string name="start_scan">Começar varredura</string -->
@@ -619,8 +618,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="survey_date">aaaa.mm.dd</string -->
   <string name="survey_delete">Apagar a topo?</string>
   <string name="survey_move">Mover medidas para topo %1$s ?</string>
-    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+  <string name="survey_copy_all_flags">Medidas só podem ser copiadas se todas estiverem sendo apresentadas</string>
+  <string name="survey_copy_only_tail">Somente o segmento final das medidas pode ser copiado</string>
   <string name="survey_split">Dividir a topo?</string>
   <string name="survey_not_attached">ALERTA: visadas desconectadas</string>
   <string name="survey_not_extend">ALERTA: visadas sem medidas auxiliares</string>
@@ -804,7 +803,7 @@ no campo abaixo e aperte o botão.
   <string name="button_off">não</string>
   <string name="button_on">sim</string>
   <string name="button_open">Abrir     </string>
-    <!-- TODO string name="button_offset"    >Offset</string -->
+  <string name="button_offset"    >Deslocamento</string>
   <string name="button_read">Ler       </string>
   <string name="button_recover">Recuperar</string>
   <string name="button_reverse">Invertidas</string>
@@ -831,9 +830,9 @@ no campo abaixo e aperte o botão.
   <string name="button_saved">Gravar base</string>
   <string name="button_scrap">Contornos</string>
   <string name="button_split">Dividir   </string>
-    <!-- TODO string name="button_to_sketch">To sketch</string -->
-    <!-- TODO string name="button_to_scrap" >To scrap</string -->
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+  <string name="button_to_sketch">Para croqui</string>
+  <string name="button_to_scrap" >Para trecho</string>
+  <string name="button_to_buffer">Para armazenamento temporário</string>
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
   <string name="button_swap">Inverter      </string>
@@ -850,7 +849,7 @@ no campo abaixo e aperte o botão.
   <string name="button_write">Enviar</string>
   <string name="button_xsection">Corte</string>
   <string name="xsection">Corte</string>
-    <!-- TODO string name="buffer">Buffer</string -->
+  <string name="buffer">Armazenamento temporário</string>
   <string name="buffer_size">Buffer: %1$d dados</string>
   <string name="buffer_sorted">ordenado</string>
   <!-- UNUSED string name="buffer_unsorted">desordenado</string -->
@@ -910,7 +909,7 @@ no campo abaixo e aperte o botão.
   <string name="hint_bt_code">Código do dispositivo</string>
   <string name="bt_alias_missing">ID BT faltando</string>
   <string name="bt_code_missing">Código do dispositivo faltando</string>
-    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
+  <string name="bt_alias_delete">Remover alias Bluetooth?</string>
   <string name="hint_cellsize">tamanho célula</string>
   <string name="hint_cwd">pasta de trabalho</string>
   <string name="hint_distance">distância</string>
@@ -958,9 +957,9 @@ no campo abaixo e aperte o botão.
   <string name="btn_horizontal">Horizontal</string>
   <string name="split_nothing">Nada a ser dividido</string>
   <string name="flip_shots">Virar medidas</string>
-    <!-- TODO string name="move_items">Move</string -->
+  <string name="move_items">Mover</string>
   <string name="copy_items">Copiar itens</string>
-    <!-- TODO string name="paste_items">Paste items</string -->
+  <string name="paste_items">Colar itens</string>
   <string name="current_station_format">L %1$.1f | N %2$.1f | A %3$.1f</string>
   <string name="man_preface">Prefácio</string>
   <string name="man_intro">1. Introdução</string>
@@ -1044,7 +1043,7 @@ no campo abaixo e aperte o botão.
   <string name="help_plot_delete">Apagar croqui</string>
   <string name="help_plot_rename">Renomear/apagar croqui</string>
   <string name="help_plot_scrap">Trechos croqui</string>
-    <!-- TODO string name="help_plot_search">Station search</string -->
+  <string name="help_plot_search">Buscar bases</string>
   <string name="help_plot_switch">Mudar para outro trecho</string>
   <string name="help_search">Pesquisar base</string>
   <string name="help_stats">Estatísticas croqui</string>
@@ -1105,7 +1104,7 @@ no campo abaixo e aperte o botão.
   <string name="help_add_project">Adicionar projeto</string>
   <string name="help_add_surveys">Adicionar topos</string>
   <string name="help_drop_surveys">Remover topos</string>
-    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
+  <string name="help_color_surveys">Mudar a cor das topos</string>
   <string name="help_view_surveys">Mostrar topos</string>
   <string name="help_view_equates">Listar \'equates\'</string>
   <string name="help_export_config">Exportar projeto</string>
@@ -1127,10 +1126,10 @@ no campo abaixo e aperte o botão.
   <string name="export_lrud">EDTC</string>
   <string name="export_lrud_from">EDTC na base DE</string>
   <string name="export_maps">Mapas antes dos dados</string>
-    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
+  <string name="export_uncommented_maps">Mapas não comentados</string>
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
-    <!-- TODO string name="export_media">media items</string -->
+  <string name="export_media">itens de mídia</string>
   <!-- UNUSED string name="export_suffix_hint">sufixo</string -->
   <string name="export_series_hint">séries</string>
   <string name="export_roundtrip">Circuito</string>
@@ -1185,8 +1184,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
   <string name="title_search">Pesquisa bases e medidas</string>
-    <!-- TODO string name="title_plot_search">Station search</string -->
-    <!-- TODO string name="title_pref_search">Settings search</string -->
+  <string name="title_plot_search">Busca por base</string>
+  <string name="title_pref_search">Busca por configuração</string>
   <string name="title_gm_search">Pesquisa dados calibração</string>
   <string name="title_dangling">Medidas desconectadas</string>
   <string name="title_device">Dispositivos DistoX</string>
@@ -1234,7 +1233,7 @@ no campo abaixo e aperte o botão.
   <string name="title_scraps">Croquis</string>
   <string name="title_scraps_outline">Contorno desenhos</string>
   <!-- UNUSED string name="title_select">Selecionar</string -->
-    <!-- TODO string name="setting" >setting</string -->
+  <string name="setting">configuração</string>
   <string name="title_settings_main">Config principais</string>
   <string name="title_settings_export">Config importação/exportação</string>
   <string name="title_settings_export_enable">Config habilitar export dados</string>
@@ -1292,7 +1291,7 @@ no campo abaixo e aperte o botão.
   <string name="title_survey_export">Exportar topo</string>
   <string name="title_survey_rename">Renomear topo</string>
   <string name="title_team_dialog">Nomes integrantes equipe</string>
-    <!-- TODO string name="title_plot_rename">Sketch operations</string -->
+  <string name="title_plot_rename">Operações em croquis</string>
   <string name="title_plot_zoomfit">Zoom / Orientação</string>
   <string name="title_calib_export">Exportar calibração</string>
   <!-- UNUSED string name="title_zoom">Zoom</string -->
@@ -1336,8 +1335,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
   <string name="pref_single_back_title">\u0022Voltar\u0022 único</string>
   <string name="pref_single_back_summary">fechar janelas com um único clique no botão \u0022Voltar\u0022 do dispositivo Android</string>
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+  <string name="pref_hide_navbar_title">Barra de navegação</string>
+  <string name="pref_hide_navbar_summary">Oculto. Mostre deslizando para cima</string>
   <string name="pref_raw_data_title">Dado bruto</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
   <string name="pref_calib_shot_download_title">Download dado remoto</string>
@@ -1402,8 +1401,8 @@ no campo abaixo e aperte o botão.
   <!-- KEEP -->
   <string name="pref_station_prefix_title">Pref base</string>
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+  <string name="pref_with_media_title">Exportar mídias</string>
+  <string name="pref_with_media_summary">Incluir mídias na exportação [cSurvey]</string>
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12–1" ou como "12 –".</string>
   <string name="pref_walls_splays_title">Med aux Walls</string>
@@ -1765,8 +1764,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
   <string name="pref_diving_mode_title">Modo mergulho</string>
   <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
-  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
-  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
+  <string name="pref_shot_tampering_title">Edição de medidas</string>
+  <string name="pref_shot_tampering_summary">Edição de medidas baixadas</string>
   <string name="pref_splay_classes_title">Classes aux</string>
   <string name="pref_splay_classes_summary">Habilitar classes de medidas auxiliares</string>
   <string name="pref_splay_color_title">Cores aux</string>
@@ -2184,8 +2183,8 @@ no campo abaixo e aperte o botão.
   <string name="cpref_grid_above_summary">Apresentar grade sobre o modelo</string>
   <string name="cpref_grid_extent_title">Extensão grade</string>
   <string name="cpref_grid_extent_summary">Tamanho da extensão da grade ao redor da planta baixa</string>
-    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
-    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
+  <string name="cpref_names_visibility_title">Visibilidade dos nomes</string>
+  <string name="cpref_names_visibility_summary">Nomes das bases sempre visíveis</string>
   <string name="cpref_neg_clino_title">Visão abaixo horizonte</string>
   <string name="cpref_neg_clino_summary">Permitir pontos de vista abaixo do horizonte</string>
   <string name="cpref_dem_buffer_title">Buffer DEM</string>
@@ -2194,8 +2193,8 @@ no campo abaixo e aperte o botão.
   <string name="cpref_dem_maxsize_summary">Tamanho máximo da superfície DEM em cada direção</string>
   <string name="cpref_dem_reduce_title">Redução DEM</string>
   <string name="cpref_dem_reduce_summary">Modo de redução DEM</string>
-    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
-    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
+  <string name="cpref_texture_root_title">Caminho textura</string>
+  <string name="cpref_texture_root_summary">Caminho diretório raiz para textura [/sdcard/]</string>
   <string name="cpref_all_splay_title">Todas aux</string>
   <string name="cpref_all_splay_summary">Usar todas as medidas auxiliares na modelagem de paredes</string>
   <string name="cpref_splay_use_title">Uso aux</string>
