@@ -1944,7 +1944,12 @@ public class TopoDroidApp extends Application
 
   /** set the "current station" to the "last station" if the current station is unset
    */
-  private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
+  private void resetCurrentOrLastStation( )
+  { 
+    // TDLog.v("APP DATA reset current station");
+    StationName.resetCurrentOrLastStation( mData, TDInstance.sid);
+    // if ( mDrawingWindow != null ) mDrawingWindow.clearCurrentStation(); // not necessary
+  }
 
   /** @return the origin station of the first plot
    */
@@ -1966,7 +1971,9 @@ public class TopoDroidApp extends Application
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid /*, TDStatus.NORMAL */ );
     // TDLog.v("DATA " + "assign stations after " + blk0.mId + " " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
+    // TDLog.v("APP DATA clear current station");
     StationName.clearCurrentStation();
+    // if ( mDrawingWindow != null ) mDrawingWindow.clearCurrentStation(); // not necessary
     if ( StationPolicy.doTopoRobot() ) {
       // long millis = SystemClock.uptimeMillis(); // TROBOT_MILLIS
       // if ( millis > trobotmillis + 10000 ) {

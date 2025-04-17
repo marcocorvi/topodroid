@@ -98,6 +98,10 @@ class StationName
    */
   static boolean isCurrentStationName( String name ) { return name.equals(mCurrentStationName); }
 
+  // /** @return true if the current station name is set (ie, not null)
+  //  */
+  // static boolean hasCurrentStationName() { return mCurrentStationName != null; }
+
   /** unset the "current station"
    */
   static void clearCurrentStation() { mCurrentStationName = null; }

@@ -459,8 +459,18 @@ public class DrawingCommandManager
   // the CURRENT STATION is displayed green
   private DrawingStationName mCurrentStationName = null;
 
+  /** set the current station
+   * @param st   current station
+   */
   void setCurrentStationName( DrawingStationName st ) { mCurrentStationName = st; }
+
+  /** @return the current station
+   */
   DrawingStationName getCurrentStationName( ) { return mCurrentStationName; }
+
+  // /** @return true if the current station is set
+  //  */
+  // boolean hasCurrentStation() { return mCurrentStationName != null; }
 
   // ----------------------------------------------------------------
 

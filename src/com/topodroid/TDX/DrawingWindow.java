@@ -5921,6 +5921,10 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setCurrentStation( st, saved );
   }
 
+  // /** clear the current station - reset its paint
+  //  */
+  // void clearCurrentStation() { mDrawingSurface.clearCurrentStation(); }
+
   /** delete at-station xsection
    * @param st   station
    * @param name xsection index
