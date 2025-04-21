@@ -229,7 +229,7 @@ public class ShotWindow extends Activity
    */
   private boolean testFlagSplayLegBlank() 
   { 
-    TDLog.v("Flags splay " + mFlagSplay + " leg " + mFlagLeg + " blank " + mFlagBlank );
+    // TDLog.v("Flags splay " + mFlagSplay + " leg " + mFlagLeg + " blank " + mFlagBlank );
     return mFlagSplay || mFlagLeg || mFlagBlank; 
   }
 
@@ -2119,9 +2119,10 @@ public class ShotWindow extends Activity
   void updateShotDistanceBearingClino( float d, float b, float c, DBlock blk )
   {
     // TDLog.v( TAG + "update shot DBC length " + d );
+    if ( Math.abs( blk.mLength - d ) < 0.1 && Math.abs( blk.mBearing - b ) < 0.2 && Math.abs( blk.mClino - c ) < 0.2 ) return;
     if ( ! blk.isManual() ) {
       if ( ! blk.isTampered() ) {
-        TDLog.v( "update shot DBC length " + d + " tampered ");
+        // TDLog.v( "update shot DBC tampered " + blk.mLength + " " + blk.mBearing + " " + blk.mClino + " -> " + d + " " + b + " " + c );
         blk.setTampered();
         // mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, 0 ); // 0: mode normal
         mApp_mData.saveShotDistanceBearingClino( TDInstance.sid, blk );
@@ -2145,6 +2146,7 @@ public class ShotWindow extends Activity
   void updateShotDepthBearingDistance( float p, float b, float d, DBlock blk )
   {
     // TDLog.v( TAG + "update shot DBC length " + d );
+    if ( Math.abs( blk.mLength - d ) < 0.1 && Math.abs( blk.mBearing - b ) < 0.2 && Math.abs( blk.mDepth - p ) < 0.2 ) return;
     if ( ! blk.isManual() ) {
       if ( ! blk.isTampered() ) {
         blk.setTampered();
@@ -2208,10 +2210,11 @@ public class ShotWindow extends Activity
    */
   void doUpdateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
-    // TDLog.v( TAG + "do update name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
+    // TDLog.v( "SHOT WINDOW do update name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
     blk.setBlockLegType( (int)leg );
 
+    if ( blk.isTampered() ) flag |= DBlock.FLAG_TAMPERED; 
     int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
 
     if ( ret == -1 ) {
@@ -2596,7 +2599,7 @@ public class ShotWindow extends Activity
             ++ nn;
           }
         }
-        TDLog.v("BED [1] center " + st + " points " + nn );
+        // TDLog.v("BED [1] center " + st + " points " + nn );
       } else {
         st = b0.mTo;
         if ( st != null && st.length() > 0 ) {
@@ -2619,7 +2622,7 @@ public class ShotWindow extends Activity
             }
           }
 	}
-        TDLog.v("BED [2] center " + st + " points " + nn );
+        // TDLog.v("BED [2] center " + st + " points " + nn );
       }
       if ( nn >= 3 ) {
 	String strike_fmt = getResources().getString( R.string.strike_dip );
@@ -2645,7 +2648,7 @@ public class ShotWindow extends Activity
         float adip = 90 - TDMath.asind( n1.z );   // dip inclination
 
         strike_dip = String.format( Locale.US, strike_fmt, astk, adip );
-        TDLog.v("BED strike/dip " + strike_dip );
+        // TDLog.v("BED strike/dip " + strike_dip );
         // TDToast.make( strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {
 	  if ( b0.mComment.matches( ".*" + strike_regex + ".*" ) ) {
@@ -2681,7 +2684,12 @@ public class ShotWindow extends Activity
       if ( b.mId == blk.mId ) {
         blk.setBlockName( from, to );
         // FIXME leg should be LegType.NORMAL
-        int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
+        int ret = -1;
+        if ( blk.isTampered() ) {
+          ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag | DBlock.FLAG_TAMPERED, leg, comment );
+        } else {
+          ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
+        }
 
         if ( ret == -1 ) {
           TDToast.makeBad( R.string.no_db );

@@ -1532,7 +1532,7 @@ public class DataHelper extends DataSetObservable
    */
   void saveShotDistanceBearingClino( long sid, DBlock blk )
   {
-    saveShotOriginals( sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 0 );
+    saveShotOriginals( sid, blk.mId, blk.getFlag(), blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 0 );
   }
 
   /** save original diving mode data
@@ -1541,7 +1541,7 @@ public class DataHelper extends DataSetObservable
    */
   void saveShotDepthBearingDistance( long sid, DBlock blk )
   {
-    saveShotOriginals( sid, blk.mId, blk.mFlag, blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 1 );
+    saveShotOriginals( sid, blk.mId, blk.getFlag(), blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 1 );
   }
 
   /** save original diving mode data
@@ -1652,6 +1652,7 @@ public class DataHelper extends DataSetObservable
 
     if ( tStation == null ) tStation = TDString.EMPTY;
 
+    // TDLog.v("UPDATE shot " + id + " name and data - flag " + flag ); 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     if ( comment != null ) {
@@ -1675,6 +1676,7 @@ public class DataHelper extends DataSetObservable
                   long extend, long flag, long leg, String comment, int status )
   {
     if ( myDB == null ) return -1;
+    // TDLog.v("UPDATE shot " + id + " name and data status - flag " + flag ); 
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
     if ( tStation == null ) tStation = TDString.EMPTY;
     StringWriter sw = new StringWriter();
@@ -1871,6 +1873,7 @@ public class DataHelper extends DataSetObservable
   void updateShotLegFlag( long id, long sid, long leg, long flag )
   {
     // TDLog.v( "A2 update shot leg/flag. id " + id + " leg " + leg + " flag " + flag ); 
+    // TDLog.v("UPDATE shot " + id + " flag " + flag ); 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET leg=%d, flag=%d WHERE surveyId=%d AND id=%d", leg, flag, sid, id );
@@ -2192,7 +2195,7 @@ public class DataHelper extends DataSetObservable
     // 0L = color, 0 = status
     ContentValues cv = makeShotContentValues( sid, myNextId, blk.mTime, 0L, blk.mFrom, blk.mTo, 
                          blk.mLength, blk.mBearing, blk.mClino, blk.mRoll, blk.mMagnetic, blk.mAcceleration, blk.mDip, 
-                         blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress(),
+                         blk.mExtend, blk.getStretch(), blk.getFlag(), blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress(),
                          blk.mRawMx, blk.mRawMy, blk.mRawMz, blk.mRawGx, blk.mRawGy, blk.mRawGz, blk.mIndex, blk.mDeviceTime );
     if ( ! doInsert( SHOT_TABLE, cv, "dblock insert" ) ) return -1L;
     return myNextId;

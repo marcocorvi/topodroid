@@ -483,12 +483,13 @@ class DrawingShotDialog extends MyDialog
       mParent.updateBlockExtend( mBlock, extend, mStretch ); // FIXME_STRETCH equal extend checked by the method
 
       if ( TDLevel.overNormal ) {
+        mBlock.clearFlagDuplicateSurfaceCommented();
         long flag  = mBlock.getFlag();
-        if ( mRBdup.isChecked() )       { flag = DBlock.FLAG_DUPLICATE; }
-        else if ( mRBsurf.isChecked() ) { flag = DBlock.FLAG_SURFACE; }
-        else if ( mRBcmtd.isChecked() ) { flag = DBlock.FLAG_COMMENTED; }
-        // else if ( mRBbackshot.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; }
-        else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.FLAG_SURVEY; }
+        if ( mRBdup.isChecked() )       { flag |= DBlock.FLAG_DUPLICATE; }
+        else if ( mRBsurf.isChecked() ) { flag |= DBlock.FLAG_SURFACE; }
+        else if ( mRBcmtd.isChecked() ) { flag |= DBlock.FLAG_COMMENTED; }
+        // // else if ( mRBbackshot.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; }
+        // else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.FLAG_SURVEY; }
         mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
       }
 

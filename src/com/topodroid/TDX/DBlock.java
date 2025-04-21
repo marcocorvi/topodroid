@@ -59,7 +59,7 @@ public class DBlock
   public String mComment;
 
   int  mExtend;
-  long mFlag;     
+  private long mFlag;     
   int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY
   private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
@@ -93,6 +93,8 @@ public class DBlock
   // static final long FLAG_BACKSHOT   = 32;
   static final long FLAG_TAMPERED   = 64;
 
+  static final long FLAG_SURFACE_DUPLICATE_COMMENTED = 7; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED
+
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
 
@@ -113,6 +115,7 @@ public class DBlock
    * @return true if the flag is set
    */
   boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
+
 
   public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
@@ -139,17 +142,23 @@ public class DBlock
 
   public boolean failBacksplay()  { return mFailBacksplay; }
 
+  void clearFlagDuplicateSurfaceCommented() { mFlag &= ~FLAG_SURFACE_DUPLICATE_COMMENTED; }
+
   // void resetFlag() { mFlag = FLAG_SURVEY; }
 
   /** set the block flag to a given bit-string
    * @param flag    new flag bit-string
    */
-  void resetFlag( long flag ) { mFlag = flag; }
+  void resetFlag( long flag ) 
+  { 
+    // TDLog.v("BLK " + mId + " reset flag " + ((flag&FLAG_TAMPERED) != 0) );
+    mFlag = flag | ( mFlag & FLAG_TAMPERED );
+  }
 
-  /** set a flag value(s)
-   * @param flag    flag value(s) to set
-   */
-  void setFlag( long flag ) { mFlag |= flag; }
+  // /** set a flag value(s)
+  //  * @param flag    flag value(s) to set
+  //  */
+  // void setFlagBit( long flag ) { mFlag |= flag; TDLog.v("BLK " + mId + " set flag " + ((flag&FLAG_TAMPERED) != 0 ) ); }
 
   // /** clear a flag value(s)
   //  * @param flag   flag value(s) to clear

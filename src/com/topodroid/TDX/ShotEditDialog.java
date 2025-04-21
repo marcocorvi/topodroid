@@ -250,7 +250,7 @@ class ShotEditDialog extends MyDialog
     }
     // shot_manual = blk.isManual();
     editable    = blk.isManual() || TDSetting.mEditableShots;
-    TDLog.v( "shot " + blk.mId + " is editable " + editable + " length " + shot_distance );
+    // TDLog.v( "shot " + blk.mId + " is editable " + editable + " length " + shot_distance );
 
     // shot_extra   = blk.extraString( mParent.mSurveyAccuracy );
     shot_extra   = mParent.getBlockExtraString( blk );
@@ -684,6 +684,7 @@ class ShotEditDialog extends MyDialog
     }
     // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; }
     // else                            { shot_flag = DBlock.FLAG_SURVEY; }
+    if ( mBlk.isTampered() ) shot_flag |= DBlock.FLAG_TAMPERED;
     // TDLog.v("shot flag " + shot_flag );
 
     shot_extend = mBlk.getIntExtend();

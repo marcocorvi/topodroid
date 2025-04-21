@@ -266,8 +266,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   void addOffset( DataHelper data_helper, float offset )
   {
+    boolean tamper = Math.abs( offset ) > 0.1;
     for ( DBlock blk : mSelect ) {
-      if ( ! blk.isManual() ) {
+      if ( tamper && ! blk.isManual() ) {
         if ( ! blk.isTampered() ) {
           blk.setTampered();
           data_helper.saveShotDistanceBearingClino( TDInstance.sid, blk );
