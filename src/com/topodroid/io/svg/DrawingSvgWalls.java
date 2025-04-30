@@ -208,7 +208,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write(    end_metadata );
       out.write(    sodipodi );
 
-      writeDefs( out, plot.getPointSymbols() ); // replaces:
+      writeDefs( out, plot.getPointSymbols(), plot.getLineSymbols(), plot.getAreaSymbols() ); // replaces:
 
       // out.write( "  <defs id=\"defs\">\n" );
       // out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");

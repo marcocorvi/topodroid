@@ -3614,4 +3614,34 @@ public class Scrap
     }
   }
 
+  /** add the line symbols of this scrap to the set
+   * @param set   set of line symbols (no duplicate)
+   */
+  void getLineSymbols( Set<SymbolLine> set )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingLinePath ) {
+        DrawingLinePath line = (DrawingLinePath)cmd;
+        // if ( BrushManager.isLineSection( line.mLineType ) ) continue;
+        SymbolLine ln = BrushManager.getLineByIndex( line.mLineType );
+        set.add( ln );
+      }
+    }
+  }
+
+  /** add the area symbols of this scrap to the set
+   * @param set   set of area symbols (no duplicate)
+   */
+  void getAreaSymbols( Set<SymbolArea> set )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingAreaPath ) {
+        DrawingAreaPath area = (DrawingAreaPath)cmd;
+        // if ( BrushManager.isAreaXXX( area.mAreaType ) ) continue;
+        SymbolArea ar = BrushManager.getAreaByIndex( area.mAreaType );
+        set.add( ar );
+      }
+    }
+  }
+
 }

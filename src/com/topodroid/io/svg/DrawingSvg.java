@@ -87,7 +87,7 @@ public class DrawingSvg extends DrawingSvgBase
       out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write( sodipodi );
 
-      writeDefs( out, plot.getPointSymbols() ); // replaces:
+      writeDefs( out, plot.getPointSymbols(), plot.getLineSymbols(), plot.getAreaSymbols() ); // replaces:
 
       // out.write( "  <defs>\n");
       // out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");

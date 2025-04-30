@@ -29,7 +29,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 
-class SymbolArea extends Symbol
+public class SymbolArea extends Symbol
 {
   String mName;
   int mColor;
@@ -47,8 +47,15 @@ class SymbolArea extends Symbol
   TileMode mYMode;
 
   @Override public String getName()  { return mName; }
+
   @Override public Paint  getPaint() { return mPaint; }
+
+  // /** @return the area color - default to black = use Symbol::getColor
+  //  */
+  // @Override public int getColor() { return (mPaint == null)? 0 : mPaint.getColor(); }
+
   @Override public Path   getPath()  { return mPath; }
+
   @Override public boolean isOrientable() { return mOrientable; }
 
   // @Override public boolean isEnabled() { return mEnabled; }

@@ -2458,8 +2458,23 @@ public class DrawingCommandManager
     return ret;
   }
 
-  
-          
-    
+  /** @return the set of line symbols used in the drawing
+   */
+  public Set<SymbolLine> getLineSymbols()
+  {
+    Set<SymbolLine> ret = new HashSet<>();
+    for ( Scrap scrap : mScraps ) scrap.getLineSymbols( ret );
+    return ret;
+  }
 
+  /** @return the set of area symbols used in the drawing
+   */
+  public Set<SymbolArea> getAreaSymbols()
+  {
+    Set<SymbolArea> ret = new HashSet<>();
+    for ( Scrap scrap : mScraps ) scrap.getAreaSymbols( ret );
+    return ret;
+  }
+
+  
 }

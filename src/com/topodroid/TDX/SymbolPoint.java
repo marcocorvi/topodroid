@@ -131,6 +131,10 @@ public class SymbolPoint extends Symbol
    */
   @Override public Paint getPaint( ) { return mPaint; }
 
+  // /** @return the point color - default to black = use Symbol::getColor
+  //  */
+  // @Override public int getColor() { return (mPaint == null)? 0 : mPaint.getColor(); }
+
   /** cstr
    * @param pathname file path
    * @param fname    file name (must coincide with Therion name)

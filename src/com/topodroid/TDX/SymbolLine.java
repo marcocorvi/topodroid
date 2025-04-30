@@ -32,7 +32,7 @@ import android.graphics.PathDashPathEffect;
 // import android.graphics.PathDashPathEffect.Style;
 // import android.graphics.Matrix;
 
-class SymbolLine extends Symbol
+public class SymbolLine extends Symbol
 {
   String mName;       // local name
   Paint  mPaint;      // forward paint
@@ -45,8 +45,15 @@ class SymbolLine extends Symbol
 
   @Override public String getName()  { return mName; }
   // @Override public String getThName( ) { return mThName; } // same as in Symbol.java
+
   @Override public Paint  getPaint() { return mPaint; }
+
+  // /** @return the line color - default to black = use Symbol::getColor
+  //  */
+  // @Override public int getColor() { return (mPaint == null)? 0 : mPaint.getColor(); }
+
   @Override public Path   getPath()  { return mPath; }
+
   // @Override public boolean isOrientable() { return false; }
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
