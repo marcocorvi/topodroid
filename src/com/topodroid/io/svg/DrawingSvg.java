@@ -157,14 +157,23 @@ public class DrawingSvg extends DrawingSvgBase
         // FIXME OK PROFILE
 
         // TDLog.v( "SVG legs " + plot.getLegs().size() );
-        out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\"" + group_mode_open);
+        // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+          out.write("<g id=\"legs\" class=\"legs\"" + group_mode_open);
+        // } else {
+        //   out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\"" + group_mode_open);
+        // }
         for ( DrawingPath sh : plot.getLegs() ) {
           DBlock blk = sh.mBlock;
           if ( blk == null ) continue;
 
           StringWriter sw4 = new StringWriter();
           PrintWriter pw4  = new PrintWriter(sw4);
-          pw4.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
+          // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+            // pw4.format(Locale.US, "  <path class=\"legs\" d=\"" );
+            pw4.format(Locale.US, "  <path d=\"" );
+          // } else {
+          //   pw4.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
+          // }
           // // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
           //   NumStation f = num.getStation( blk.mFrom );
           //   NumStation t = num.getStation( blk.mTo );
@@ -291,17 +300,34 @@ public class DrawingSvg extends DrawingSvgBase
     }
   }
 
+  /** write out a set of splays
+   * @param out      output writer
+   * @param splays   splays array
+   * @param group    splays group / class
+   * @param color    splays color (not used with class)
+   * @param xoff     X offset
+   * @param yoff     Y offset
+   */
   private void writeSplays( BufferedWriter out, ArrayList< DrawingPath > splays, String group, String color, float xoff, float yoff )
   {
     if ( splays.size() == 0 ) return;
     try {
       out.write("<g id=\"" + group + "\"\n" );
-      out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:" + color + "\"" + group_mode_open);
+      // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+        out.write("  class=\"" + group + "\" " + group_mode_open);
+      // } else {
+      //   out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:" + color + "\" " + group_mode_open);
+      // }
       int count = 1;
       for ( DrawingPath sh : splays ) {
         StringWriter sw41x = new StringWriter();
         PrintWriter pw41x  = new PrintWriter(sw41x);
-        pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay_%s_%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
+        // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+          // pw41x.format(Locale.US, "  <path class=\"%s\" stroke=\"%s\" id=\"splay_%s_%d\" d=\"", group, color, group, count++ );
+          pw41x.format(Locale.US, "  <path id=\"splay_%s_%d\" d=\"", group, count++ );
+        // } else {
+        //   pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay_%s_%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
+        // }
         printSegmentWithClose( pw41x, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         pw41x.format("\n");
         out.write( sw41x.getBuffer().toString() );

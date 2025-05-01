@@ -322,6 +322,7 @@ public class TDSetting
   public static float mSvgShotStroke    = 0.5f;
   public static int   mSvgStationSize   = 20;     // font-size
   public static int   mSvgLabelSize     = 30;     // font-size
+  // public static boolean mFixmeClass     = true;   // FIXME_CLASS
 
   // ----------- KML
   public static boolean mKmlStations   = true;

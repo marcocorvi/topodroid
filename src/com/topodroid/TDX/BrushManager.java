@@ -177,6 +177,10 @@ public class BrushManager
   public static String getLineFullThName( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolFullThName( idx ); }
   public static String getAreaFullThName( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolFullThName( idx ); }
 
+  public static String getPointFullThNameEscapedColon( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolFullThNameEscapedColon( idx ); }
+  public static String getLineFullThNameEscapedColon( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolFullThNameEscapedColon( idx ); }
+  public static String getAreaFullThNameEscapedColon( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolFullThNameEscapedColon( idx ); }
+
   static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
   static String getLineGroup( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolGroup( idx ); }

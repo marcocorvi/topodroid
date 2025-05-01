@@ -406,6 +406,10 @@ public class DrawingLinePath extends DrawingPointLinePath
    */
   public String getFullThName() { return BrushManager.getLineFullThName( mLineType ); }
 
+  /** @return the line Therion type (possibly incuding the prefix), with ':' replaced by '_'
+   */
+  public String getFullThNameEscapedColon() { return  BrushManager.getLineFullThNameEscapedColon( mLineType ); }
+
   /** draw the line with the specified paint
    * @param canvas   canvas
    * @param matrix   transform matrix

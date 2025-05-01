@@ -317,6 +317,10 @@ public class DrawingAreaPath extends DrawingPointLinePath
    */
   public String getFullThName() { return BrushManager.getAreaFullThName( mAreaType ); }
 
+  /** @return the area Therion type (possibly incuding the prefix), with ':' replaced by '_'
+   */
+  public String getFullThNameEscapedColon() { return  BrushManager.getAreaFullThNameEscapedColon( mAreaType ); }
+
   /** set the area orientation angle
    * @param angle  orientation angle [degrees]
    */

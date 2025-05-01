@@ -93,7 +93,11 @@ public class DrawingSvgWalls extends DrawingSvgBase
         printPointWithCXCY( pw5, "<circle", xx, yy );
         pw5.format(Locale.US, " r=\"%d\" ", RADIUS );
         // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
-        pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+        // if ( TDSetting.mFixmeClass ) {
+          pw5.format(Locale.US, " class=\"circle_label\" />\n" );
+        // } else {
+        //   pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+        // }
         out.write( sw5.getBuffer().toString() );
       } else {
         StringWriter sw5p = new StringWriter();
@@ -339,7 +343,11 @@ public class DrawingSvgWalls extends DrawingSvgBase
         String id = blk.mFrom  + "_" + blk.mTo;
         StringWriter sw4 = new StringWriter();
         PrintWriter pw4  = new PrintWriter(sw4);
-        pw4.format(Locale.US, "        <path id=\"%s\" stroke-width=\"%.2f\" stroke=\"black\" d=\"", id, TDSetting.mSvgShotStroke );
+        // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+          pw4.format(Locale.US, "        <path id=\"%s\" class=\"legs\" d=\"", id );
+        // } else {
+        //   pw4.format(Locale.US, "        <path id=\"%s\" stroke-width=\"%.2f\" stroke=\"black\" d=\"", id, TDSetting.mSvgShotStroke );
+        // }
         printSegmentWithClose( pw4, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         // pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         out.write( sw4.getBuffer().toString() );
@@ -353,7 +361,11 @@ public class DrawingSvgWalls extends DrawingSvgBase
           String id = blk.mFrom + "_" + blk.mFrom + "ss" + TDExporter.nextSplayInt( splay_station, blk.mFrom );
           StringWriter sw41 = new StringWriter();
           PrintWriter pw41  = new PrintWriter(sw41);
-          pw41.format(Locale.US, "        <path id=\"%s\" stroke-width=\"%.2f\" stroke=\"grey\" d=\"", id, TDSetting.mSvgShotStroke );
+          // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+            pw41.format(Locale.US, "        <path id=\"%s\" class=\"splays\" d=\"", id );
+          // } else {
+          //   pw41.format(Locale.US, "        <path id=\"%s\" stroke-width=\"%.2f\" stroke=\"grey\" d=\"", id, TDSetting.mSvgShotStroke );
+          // }
           printSegmentWithClose( pw41, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
           // pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
 

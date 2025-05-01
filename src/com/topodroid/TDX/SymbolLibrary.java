@@ -219,6 +219,11 @@ public class SymbolLibrary
    */
   String getSymbolFullThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getFullThName(); }
 
+  /** #return the Therion full-name (including prefix), with ':' replaced by '_', of the k-th symbol 
+   * @param k  symbol index
+   */
+  String getSymbolFullThNameEscapedColon( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getFullThNameEscapedColon(); }
+
   /** #return the group of the k-th symbol 
    * @param k  symbol index
    */

@@ -401,6 +401,10 @@ public class DrawingPointPath extends DrawingPath
    */
   public String getFullThName() { return  BrushManager.getPointFullThName( mPointType ); }
 
+  /** @return the point Therion type (possibly incuding the prefix), with ':' replaced by '_'
+   */
+  public String getFullThNameEscapedColon() { return  BrushManager.getPointFullThNameEscapedColon( mPointType ); }
+
   /** draw the point on the canvas
    * @param canvas    canvas
    * @param matrix    transform matrix
