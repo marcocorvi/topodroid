@@ -794,6 +794,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="landscape">Paisaje</string -->
 
     <string name="display_view">vista</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">planta</string>
     <string name="profile_view">sección</string>
 

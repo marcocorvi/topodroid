@@ -141,8 +141,8 @@ public class SymbolPointLibrary extends SymbolLibrary
   // ========================================================================
 
   static final private String p_label   = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
-  static final private String p_user    = "addCircle 0 0 6";                                  // "o" shape
-  static final private String p_section = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5"; // square
+  static final private String p_user    = "addCircle 0 0 6";                                 // "o" shape
+  static final private String p_section = "moveTo -2 0 lineTo 2 0 moveTo 0 -2 lineTo 0 2";   // small cross
   static final private String p_picture = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5 lineTo 5 5"; // square with diagonal
 
   /** load the system points, "user", "label", "section"

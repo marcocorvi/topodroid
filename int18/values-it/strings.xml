@@ -791,6 +791,7 @@
     <!-- UNUSED string name="landscape">panorama</string -->
 
     <string name="display_view">visualizza</string>
+    <string name="display_refresh">Aggiornata la visualizzazione</string>
     <string name="plan_view">pianta</string>
     <string name="profile_view">sezione</string>
 
@@ -856,7 +857,7 @@
     <string name="button_off"       >spento</string>
     <string name="button_on"        >acceso</string>
     <string name="button_open"      >Apri      </string>
-    <!-- TODO string name="button_offset"    >Offset</string -->
+    <string name="button_offset"    >Offset</string>
     <string name="button_read"      >Leggi     </string>
     <string name="button_recover"   >Recupera</string>
     <string name="button_reverse"   >Inversi</string>
@@ -883,9 +884,9 @@
     <string name="button_saved"     >Caposaldo salvato</string>
     <string name="button_scrap"     >Outline</string>
     <string name="button_split"     >Dividi    </string>
-    <!-- TODO string name="button_to_sketch">To sketch</string -->
-    <!-- TODO string name="button_to_scrap" >To scrap</string -->
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+    <string name="button_to_sketch">A schizzo</string>
+    <string name="button_to_scrap" >A scrap</string>
+    <string name="button_to_buffer">buffer</string>
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
     <string name="button_swap"      >Scambia   </string>
@@ -904,7 +905,7 @@
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Sezione trasversale</string>
     <string name="xsection">Sezione trasversale</string>
-    <!-- TODO string name="buffer">Buffer</string -->
+    <string name="buffer">Buffer</string>
     <string name="buffer_size">Buffer: %1$d dati</string>
     <string name="buffer_sorted">ordinato</string>
     <!-- UNUSED string name="buffer_unsorted">non ordinati</string -->

@@ -18,6 +18,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 import com.topodroid.common.PointScale;
@@ -67,6 +68,7 @@ public class DrawingPointPath extends DrawingPath
   public DrawingPointPath fixScrap( String survey_name )
   {
     if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
+      // String scrapname = mOptions.replace( TDString.OPTION_SCRAP + " ", "");
       String scrapname = mOptions.replace("-scrap ", "");
       if ( scrapname != null ) scrapname = TDUtil.replacePrefix( TDInstance.survey, scrapname );
       if ( scrapname != null ) {
@@ -74,7 +76,7 @@ public class DrawingPointPath extends DrawingPath
           int pos = scrapname.lastIndexOf('-');
           scrapname = survey_name + "-" + scrapname.substring(pos+1);
         }
-        mOptions = "-scrap " + scrapname;
+        mOptions = TDString.OPTION_SCRAP + " " + scrapname;
       } else {
         TDLog.e("section point without scrap-name");
         return null;
@@ -209,9 +211,9 @@ public class DrawingPointPath extends DrawingPath
       }
       // FIXME SECTION_RENAME
       // if ( BrushManager.isPointSection( type ) ) {
-      //   String scrapname = TDUtil.replacePrefix( TDInstance.survey, options.replace("-scrap ", "") );
+      //   String scrapname = TDUtil.replacePrefix( TDInstance.survey, options.replace( TDString.OPTION_SCRAP + " ", "") );
       //   scrapname = scrapname.replace( mApp.mSurvey + "-", "" ); // remove survey name from options
-      //   option = "-scrap " + scrapname;
+      //   option = TDString.OPTION_SCRAP + " " + scrapname;
       // }
       DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, text, options, scrap );
       ret.mLevel = level;
@@ -752,8 +754,8 @@ public class DrawingPointPath extends DrawingPath
     }
     // FIXME SECTION_RENAME
     // if ( BrushManager.isPointSection( type ) ) {
-    //   String scrapname = TDUtil.replacePrefix( TDInstance.survey, mOptions.replace("-scrap ", "") );
-    //   pw.format(" -scrap %s-%s", mApp.mSurvey, scrapname );
+    //   String scrapname = TDUtil.replacePrefix( TDInstance.survey, mOptions.replace( TDString.OPTION_SCRAP + " ", "") );
+    //   pw.format(" %s %s-%s", TDString.OPTION_SCRAP, mApp.mSurvey, scrapname );
     // } else {
       if ( mOptions != null && mOptions.length() > 0 ) {
         pw.format(" %s", mOptions );

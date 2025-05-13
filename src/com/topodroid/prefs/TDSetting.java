@@ -323,6 +323,7 @@ public class TDSetting
   public static int   mSvgStationSize   = 20;     // font-size
   public static int   mSvgLabelSize     = 30;     // font-size
   // public static boolean mFixmeClass     = true;   // FIXME_CLASS
+  // public static boolean mFixmeXSection  = true;   // FIXME_XSECTION
 
   // ----------- KML
   public static boolean mKmlStations   = true;

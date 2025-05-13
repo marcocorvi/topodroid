@@ -790,6 +790,7 @@
     <!-- UNUSED string name="landscape">地形</string -->
 
     <string name="display_view">显示</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">平面图</string>
     <string name="profile_view">剖面图</string>
 

@@ -230,11 +230,10 @@ class DrawingXvi
 
 	    if ( TDSetting.mAutoXSections ) {
               // GET_OPTION option: -scrap survey-xx#
-              String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
-              if ( scrapname != null ) {
-                String scrapfile = scrapname + ".tdr";
+              String section = point.getOption( TDString.OPTION_SCRAP );
+              if ( section != null ) {
+                String scrapfile = TDUtil.replacePrefix( TDInstance.survey, section ) + ".tdr";
                 // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-
                 // open file survey-xx#.tdr and convert it to xvi
                 tdrToXvi( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X,  DrawingUtil.CENTER_Y );
               }

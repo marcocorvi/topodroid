@@ -787,6 +787,7 @@
     <!-- UNUSED string name="landscape">альбомная</string -->
 
     <string name="display_view">Вид отображения</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">план</string>
     <string name="profile_view">разрез</string>
 

@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDString;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -1454,19 +1455,39 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   void addScrapDataStream( String tdr, float xdelta, float ydelta )
   {
     commandManager.clearPlotOutline( );
-    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, null );
+    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, null, -1 );
   }
 
   // @param name xsection scrap name ( survey_name + "-" + xsection_id )
   boolean hasXSectionOutline( String name ) { return commandManager.hasXSectionOutline( name ); }
 
-  // @param name xsection scrap name ( survey_name + "-" + xsection_id )
-  // @param tdr  xsection tdr pathname
-  void setXSectionOutline( String name, String tdr, float xdelta, float ydelta )
+  /** insert the outline of a xsection
+   * @param name       xsection scrap name ( survey_name + "-" + xsection_id )
+   * @param scrap_id   id of the scrap of the section point
+   * @param tdr        xsection tdr pathname
+   * @param xdelta     ???
+   * @param ydelta     ???
+   */
+  void setXSectionOutline( String name, int scrap_id, String tdr, float xdelta, float ydelta )
   {
-    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name );
+    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name, scrap_id );
   }
 
+  void setAllXSectionOutlines( DrawingWindow window, int cm )
+  {
+    // PROBLEM: section points are in scraps, xsection outlines are in command manager
+    List< DrawingPointPath > pts = ( cm == 1 )? mCommandManager1.getSectionPoints()
+                                              : mCommandManager2.getSectionPoints();
+    for ( DrawingPointPath pt : pts ) {
+      String name = pt.getOption( TDString.OPTION_SCRAP );
+      if ( name != null ) {
+        String tdr = TDPath.getTdrFileWithExt( name );
+        int scrap_id = pt.mScrap;
+        setXSectionOutline( name, scrap_id, tdr, pt.cx-DrawingUtil.CENTER_X, pt.cy-DrawingUtil.CENTER_Y );
+      }
+    }
+  }
+    
   // @param name xsection scrap name ( survey_name + "-" + xsection_id )
   void clearXSectionOutline( String name )
   {

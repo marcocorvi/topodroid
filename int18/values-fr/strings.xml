@@ -792,6 +792,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="landscape">Paysage</string -->
     
     <string name="display_view">Afficher</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">Plan</string>
     <string name="profile_view">Coupe</string>
 

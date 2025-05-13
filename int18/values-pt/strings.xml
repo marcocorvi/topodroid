@@ -741,6 +741,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="h_section">CORTE H</string -->
   <!-- UNUSED string name="landscape">paisagem</string -->
   <string name="display_view">Mostrar em</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
   <string name="plan_view">planta baixa</string>
   <string name="profile_view">perfil</string>
   <string name="distox_err_ok">OK</string>

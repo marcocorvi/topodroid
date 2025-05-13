@@ -803,6 +803,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Zobrazenie</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">Pôdorys</string>
     <string name="profile_view">Rozvinutý rez</string>
 

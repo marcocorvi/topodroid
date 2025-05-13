@@ -797,6 +797,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Дисплей</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">план</string>
     <string name="profile_view">профил</string>
 

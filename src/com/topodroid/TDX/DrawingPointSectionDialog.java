@@ -202,7 +202,7 @@ class DrawingPointSectionDialog extends MyDialog
 
       if ( mXSectionName != null ) {
         if ( TDLevel.overAdvanced && mHasXSectionOutline != mCBxsection.isChecked() ) {
-          mParent.setXSectionOutline( mXSectionName, mCBxsection.isChecked(), mPoint.cx, mPoint.cy );
+          mParent.setXSectionOutline( mXSectionName, mPoint.mScrap, mCBxsection.isChecked(), mPoint.cx, mPoint.cy );
         }
       }
 

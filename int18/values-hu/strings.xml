@@ -792,6 +792,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="landscape">térkép</string -->
 
     <string name="display_view">Képernyő</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
     <string name="plan_view">alaprajz</string>
     <string name="profile_view">oldalnézet</string>
 

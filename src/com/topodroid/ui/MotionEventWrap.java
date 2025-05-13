@@ -99,6 +99,10 @@ public class MotionEventWrap
                "Invalid pointer index for Donut/Cupcake");
       }
    }
+
+   public int getToolType( int id ) { return event.getToolType(id); }
+
+   public float getPressure( int id ) { return event.getPressure(id); }
    
 }
 

@@ -1879,7 +1879,11 @@ public class DrawingCommandManager
       }
       if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
         synchronized( TDPath.mXSectionsLock )  {
-          for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, null /* bbox */ );
+          for ( DrawingOutlinePath path : mXSectionOutlines ) {
+            if ( path.isScrapId( mCurrentScrap.mScrapIdx ) ) {
+              path.mPath.draw( canvas, mm, null /* bbox */ );
+            }
+          }
         }
       }
     }
@@ -2255,7 +2259,13 @@ public class DrawingCommandManager
    // * @param stations station names
    * @param name     name of parent plot of the xsections
    */
-  void linkSections( String name ) { mCurrentScrap.linkSections( mStations, name ); }
+  void linkSections( String name ) 
+  { 
+    // mCurrentScrap.linkSections( mStations, name );
+    for ( Scrap scrap : mScraps ) {
+      scrap.linkSections( mStations, name );
+    }
+  }
 
   // -------------------------------------------------------------------
   // OUTLINE
@@ -2473,6 +2483,13 @@ public class DrawingCommandManager
   {
     Set<SymbolArea> ret = new HashSet<>();
     for ( Scrap scrap : mScraps ) scrap.getAreaSymbols( ret );
+    return ret;
+  }
+
+  List< DrawingPointPath > getSectionPoints()
+  {
+    ArrayList< DrawingPointPath > ret = new ArrayList<>();
+    for ( Scrap scrap : mScraps ) scrap.addSectionPoints( ret );
     return ret;
   }
 

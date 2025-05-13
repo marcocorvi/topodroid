@@ -731,6 +731,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="h_section">H-PROFIL</string -->
   <!-- UNUSED string name="landscape">Querformat</string -->
   <string name="display_view">Anzeige</string>
+    <!-- TODO string name="display_refresh">Refreshed display</string -->
   <string name="plan_view">Plan</string>
   <string name="profile_view">Seitenriss</string>
   <string name="distox_err_ok">OK</string>

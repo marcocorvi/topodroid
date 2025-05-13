@@ -507,6 +507,7 @@ public class DrawingWindow extends ItemDrawer
   // private Paint mCurrentPaint;
   private DrawingBrush mCurrentBrush;
   // private Path  mCurrentPath;
+  private DrawingPointPath mSectionPt = null;
 
   // private static boolean mRecentToolsForward = true;
 
@@ -1514,6 +1515,11 @@ public class DrawingWindow extends ItemDrawer
         popInfo();
         doStart( false, -1, null );
         // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
+        // if ( TDSetting.mFixmeXSection && mSectionPt != null ) {
+          // TDLog.v("setXSectionOutline name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+          setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+          mSectionPt = null; 
+        // }
       } else {
         if ( TDSetting.mSingleBack ) {
           super.onBackPressed();
@@ -3760,6 +3766,11 @@ public class DrawingWindow extends ItemDrawer
 
       mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       mDrawingSurface.linkAllSections( mName1, mName2 );
+      // if ( TDSetting.mFixmeXSection ) { // add all section point XSection outlines 
+        // the XSection outlines are stored in the command manager: they must be loaded separately for command managers 1 and 2
+        mDrawingSurface.setAllXSectionOutlines( this, 1 );
+        mDrawingSurface.setAllXSectionOutlines( this, 2 );
+      // }
     } else { // X_SECTION
       resetReference( mPlot3, true );
       mTo = ( PlotType.isLegSection( type ) )? mPlot3.view : "";
@@ -4058,7 +4069,11 @@ public class DrawingWindow extends ItemDrawer
     //   DrawingSensorPath sensor = (DrawingSensorPath)point;
     //   mApp_mData.deleteSensorRecord( TDInstance.sid, sensor.mId );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
-      mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
+      String section = point.getOption( TDString.OPTION_SCRAP );
+      if ( section != null ) {
+        TDLog.v("Delete section point: Clear XSection outline: " + section );
+        mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, section ) );
+      }
     }
     modified();
   }
@@ -4207,7 +4222,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // ----------------------------------------------------------------
-  /*
+  //
   private void dumpEvent( MotionEventWrap ev )
   {
     String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
@@ -4223,11 +4238,13 @@ public class DrawingWindow extends ItemDrawer
       sb.append( "#" ).append( i );
       sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
       if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
+      sb.append(" ").append( ev.getToolType(i) );
+      sb.append(" ").append( ev.getPressure(i) );
     }
     sb.append( "]" );
-    // TDLog.Log(TDLog.LOG_PLOT, sb.toString() );
+    TDLog.v( sb.toString() );
   }
-  */
+  //
 
   /** @return the spacing between the first two pointers in the event
    * @param ev    screen event
@@ -5686,13 +5703,13 @@ public class DrawingWindow extends ItemDrawer
       float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
       // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
       // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + section_id;
-      String scrap_option = "-scrap " + TDInstance.survey + "-" + section_id;
-      DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
+      String scrap_option = TDString.OPTION_SCRAP + " " + TDInstance.survey + "-" + section_id;
+      mSectionPt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
                                                       x5, y5, PointScale.SCALE_M, 
                                                       null, // no text 
                                                       scrap_option, mDrawingSurface.scrapIndex() );
-      section_pt.setLink( currentLine );
-      mDrawingSurface.addDrawingPath( section_pt );
+      mSectionPt.setLink( currentLine );
+      mDrawingSurface.addDrawingPath( mSectionPt );
     }
 
     // TDLog.v( "PLOT line section dialog TT " + tt + " line type " + mCurrentLine );
@@ -6042,12 +6059,12 @@ public class DrawingWindow extends ItemDrawer
         float y5 = st.getXSectionY( 4 );
         if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
         // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
-        String scrap_option = "-scrap " + TDInstance.survey + "-" + xs_id;
-        DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
+        String scrap_option = TDString.OPTION_SCRAP + " " + TDInstance.survey + "-" + xs_id;
+        mSectionPt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
       						    x5, y5, PointScale.SCALE_M, 
       						    null, scrap_option, mDrawingSurface.scrapIndex() ); // no text
-        section_pt.setLink( st );
-        mDrawingSurface.addDrawingPath( section_pt );
+        mSectionPt.setLink( st );
+        mDrawingSurface.addDrawingPath( mSectionPt );
       }
     } else {
       updatePlotNick( plot, nick );
@@ -7125,22 +7142,23 @@ public class DrawingWindow extends ItemDrawer
       if ( sp != null ) {
         DrawingPath item = sp.mItem;
         if ( item != null ) {
-          if ( item instanceof DrawingPointPath ) {
-            DrawingPointPath point = (DrawingPointPath)item;
-            if ( BrushManager.isPointSection( point.mPointType ) ) {
-              String section_name = TDUtil.replacePrefix( TDInstance.survey, point.getOption(TDString.OPTION_SCRAP) );
-              // TDLog.v("POINT section <" + section_name + ">");
-              if ( section_name != null ) {
-                openXSectionDraw( section_name );
-              } else {
-                onClick( view ); 
-              }
-            } else {
-              onClick( view ); 
-            }
-          } else {
+          // if ( item instanceof DrawingPointPath && ! TDSetting.mFixmeXSection ) {
+          //   DrawingPointPath point = (DrawingPointPath)item;
+          //   if ( BrushManager.isPointSection( point.mPointType ) ) {
+          //     String section = point.getOption(TDString.OPTION_SCRAP);
+          //     // TDLog.v("POINT section <" + section_name + ">");
+          //     if ( section != null ) {
+          //       String section_name = TDUtil.replacePrefix( TDInstance.survey, section );
+          //       openXSectionDraw( section_name );
+          //     } else {
+          //       onClick( view ); 
+          //     }
+          //   } else {
+          //     onClick( view ); 
+          //   }
+          // } else {
             onClick( view ); 
-          } 
+          // } 
         }
       }
     } else if ( b == mMenuImage ) { // MENU long click
@@ -7356,7 +7374,15 @@ public class DrawingWindow extends ItemDrawer
                   TDToast.makeWarn( R.string.no_feature_audio );
                 }
               } else if ( BrushManager.isPointSection( point.mPointType ) ) { // open x-section sketch
-                new DrawingPointSectionDialog( mActivity, this, point ).show();
+                // if ( TDSetting.mFixmeXSection ) {
+                  String section = point.getOption(TDString.OPTION_SCRAP);
+                  if ( section != null ) {
+                    String section_name = TDUtil.replacePrefix( TDInstance.survey, section );
+                    openXSectionDraw( section_name );
+                  }
+                // } else {
+                //   new DrawingPointSectionDialog( mActivity, this, point ).show();
+                // }
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }
@@ -7465,6 +7491,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
         // TDLog.v("Button REFRESH");
         updateDisplay();
+        TDToast.make( R.string.display_refresh );
       }
     }
 
@@ -9579,13 +9606,15 @@ public class DrawingWindow extends ItemDrawer
    */
   boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
 
+  // TODO move this to DrawingSurface ?
   /** add/drop the outline of a xsection
-   * @param name    xsection name
-   * @param on_off  whether to add or to drop
-   * @param x       X coordinate of the point where to put the xsection (canvas frame)
-   * @param y       y coordinate
+   * @param name     xsection name
+   * @param scrap_id id of the scrap of the section point
+   * @param on_off   whether to add or to drop
+   * @param x        X coordinate of the point where to put the xsection (canvas frame)
+   * @param y        Y coordinate
    */
-  void setXSectionOutline( String name, boolean on_off, float x, float y )
+  void setXSectionOutline( String name, int scrap_id, boolean on_off, float x, float y )
   { 
     // assert( mLastLinePath == null );
 
@@ -9594,7 +9623,7 @@ public class DrawingWindow extends ItemDrawer
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
       // TDLog.v("XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
-      mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
+      mDrawingSurface.setXSectionOutline( name, scrap_id, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
   }
 

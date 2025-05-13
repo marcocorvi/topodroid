@@ -2767,7 +2767,7 @@ public class Scrap
           // get the line/station
           String scrap = TDUtil.replacePrefix( TDInstance.survey, p.getOption( TDString.OPTION_SCRAP ) );
           if ( scrap != null ) {
-            // TDLog.v( "link xsection: point scrap " + scrap );
+            TDLog.v( "link xsection: point scrap " + scrap );
             int pos = scrap.lastIndexOf( "-xx" );
             if ( pos > 0 ) {
               String id = scrap.substring(pos+1); // line id
@@ -3640,6 +3640,19 @@ public class Scrap
         // if ( BrushManager.isAreaXXX( area.mAreaType ) ) continue;
         SymbolArea ar = BrushManager.getAreaByIndex( area.mAreaType );
         set.add( ar );
+      }
+    }
+  }
+
+  /** add section points to the list
+   * @param ret   list of section points (to be filled)
+   */
+  void addSectionPoints( List< DrawingPointPath > ret )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingPointPath ) {
+        DrawingPointPath path = (DrawingPointPath)cmd;
+        if ( BrushManager.isPointSection( path.mPointType )  ) ret.add( path );
       }
     }
   }

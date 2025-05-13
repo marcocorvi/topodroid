@@ -879,9 +879,17 @@ public class DrawingIO
     return true;
   }
 
+  /** load the outline of a xection scrap
+   * @param surface    drawing surface
+   * @param filename   xsection filename
+   * @param dx
+   * @param dy
+   * @param name       xsection name
+   * @param scrap_id   index of the scrap of the section point
+   */
   static void doLoadOutlineDataStream( DrawingSurface surface,
                                    String filename,
-                                   float dx, float dy, String name )
+                                   float dx, float dy, String name, int scrap_id )
   {
     int version = 0;
     boolean in_scrap = false;
@@ -986,7 +994,7 @@ public class DrawingIO
             // TDLog.v("outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
             path.setPathPaint( BrushManager.fixedGrid100Paint );
             if ( name != null ) { // xsection outline
-              surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path ) );
+              surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path, scrap_id ) );
             } else {
               surface.addScrapOutlinePath( path );
             }
