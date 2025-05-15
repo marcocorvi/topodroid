@@ -476,7 +476,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_recover">ВЪЗСТАНОВЯВАНЕ</string>
     <string name="menu_recover_paste">ВЪЗСТАНОВЯВАНЕ/ПОСТАВЯНЕ</string>
     <string name="menu_reload">ПРЕЗАРЕДИ</string>
-    <!-- TODO string name="menu_rename_delete">OPERATIONS</string -->
+    <string name="menu_rename_delete">ОПЕРАЦИИ</string>
     <string name="menu_rename">ПРЕИМЕНУВАНЕ</string>
     <string name="menu_plot_scrap">ОТРЯЗЪЦИ</string>
     <string name="menu_switch">ПРЕВКЛЮЧВАНЕ/ЗАТВАРЯНЕ</string>
@@ -797,7 +797,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Дисплей</string>
-    <!-- TODO string name="display_refresh">Refreshed display</string -->
+    <string name="display_refresh">Обновен дисплей</string>
     <string name="plan_view">план</string>
     <string name="profile_view">профил</string>
 
@@ -890,9 +890,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_saved">Запазени репери</string>
     <string name="button_scrap">Очертания</string>
     <string name="button_split">Раздели</string>
-    <!-- TODO string name="button_to_sketch">To sketch</string -->
-    <!-- TODO string name="button_to_scrap" >To scrap</string -->
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+    <string name="button_to_sketch">Към скица</string>
+    <string name="button_to_scrap" >Към отрязъци</string>
+    <string name="button_to_buffer">буфер</string>
     <string name="button_station">Център на</string>
     <string name="button_store">Запази</string>
     <string name="button_swap">Размени</string>
