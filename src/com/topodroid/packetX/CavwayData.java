@@ -149,19 +149,20 @@ public class CavwayData extends MemoryData
   public static long toRawMy( byte[] b ) { return toLong( b[30], b[29], b[42], b[41] ); }
   public static long toRawMz( byte[] b ) { return toLong( b[32], b[31], b[44], b[43] ); }
 
-  public static int toRawG1x( byte[] b ) { return toSignedInt( b[22], b[21] ); }
-  public static int toRawG1y( byte[] b ) { return toSignedInt( b[24], b[23] ); }
-  public static int toRawG1z( byte[] b ) { return toSignedInt( b[26], b[25] ); }
-  public static int toRawM1x( byte[] b ) { return toSignedInt( b[28], b[27] ); }
-  public static int toRawM1y( byte[] b ) { return toSignedInt( b[30], b[29] ); }
-  public static int toRawM1z( byte[] b ) { return toSignedInt( b[32], b[31] ); }
+  private static int toRawG1x( byte[] b ) { return toSignedInt( b[22], b[21] ); }
+  private static int toRawG1y( byte[] b ) { return toSignedInt( b[24], b[23] ); }
+  private static int toRawG1z( byte[] b ) { return toSignedInt( b[26], b[25] ); }
+  private static int toRawM1x( byte[] b ) { return toSignedInt( b[28], b[27] ); }
+  private static int toRawM1y( byte[] b ) { return toSignedInt( b[30], b[29] ); }
+  private static int toRawM1z( byte[] b ) { return toSignedInt( b[32], b[31] ); }
 
-  public static int toRawG2x( byte[] b ) { return toSignedInt( b[34], b[33] ); }
-  public static int toRawG2y( byte[] b ) { return toSignedInt( b[36], b[35] ); }
-  public static int toRawG2z( byte[] b ) { return toSignedInt( b[38], b[37] ); }
-  public static int toRawM2x( byte[] b ) { return toSignedInt( b[40], b[39] ); }
-  public static int toRawM2y( byte[] b ) { return toSignedInt( b[42], b[41] ); }
-  public static int toRawM2z( byte[] b ) { return toSignedInt( b[44], b[43] ); }
+  private static int toRawG2x( byte[] b ) { return toSignedInt( b[34], b[33] ); }
+  private static int toRawG2y( byte[] b ) { return toSignedInt( b[36], b[35] ); }
+  private static int toRawG2z( byte[] b ) { return toSignedInt( b[38], b[37] ); }
+  private static int toRawM2x( byte[] b ) { return toSignedInt( b[40], b[39] ); }
+  private static int toRawM2y( byte[] b ) { return toSignedInt( b[42], b[41] ); }
+  private static int toRawM2z( byte[] b ) { return toSignedInt( b[44], b[43] ); }
+
 
   public void printHexString( PrintWriter pw )
   {

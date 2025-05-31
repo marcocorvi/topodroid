@@ -340,12 +340,12 @@ public class DataHelper extends DataSetObservable
     blk.mLeg          = (int)(  cursor.getLong(15) );  // NOTE mLeg is not mBlockType: see setBlockType()
     blk.mStatus       = (int)(  cursor.getLong(16) );
     blk.mComment      = cursor.getString( 17 );
-    blk.mRawMx        = (int)(  cursor.getLong(18) );
-    blk.mRawMy        = (int)(  cursor.getLong(19) );
-    blk.mRawMz        = (int)(  cursor.getLong(20) );
-    blk.mRawGx        = (int)(  cursor.getLong(21) );
-    blk.mRawGy        = (int)(  cursor.getLong(22) );
-    blk.mRawGz        = (int)(  cursor.getLong(23) );
+    blk.mRawMx        = (long)( cursor.getLong(18) );
+    blk.mRawMy        = (long)( cursor.getLong(19) );
+    blk.mRawMz        = (long)( cursor.getLong(20) );
+    blk.mRawGx        = (long)( cursor.getLong(21) );
+    blk.mRawGy        = (long)( cursor.getLong(22) );
+    blk.mRawGz        = (long)( cursor.getLong(23) );
     blk.mIndex        = (int)(  cursor.getLong(24) );
     blk.mDeviceTime   = cursor.getLong(25);
   }
@@ -2115,8 +2115,9 @@ public class DataHelper extends DataSetObservable
    * @param addr    BRIC4 address
    * @return inserted shot ID
    */
-  public long insertCavwayShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip, long extend, int leg, long status, String comment, String addr,
-                                int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz , long time)
+  public long insertCavwayShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip,
+                                long extend, int leg, long status, String comment, String addr,
+                                long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long time)
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
@@ -2564,7 +2565,7 @@ public class DataHelper extends DataSetObservable
   private ContentValues makeShotContentValues( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, double acc, double mag, double dip,
                           long extend, double stretch, long flag, long leg, long status, long shot_type, String comment, String addr,
-                          int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz, long idx, long time )
+                          long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long idx, long time )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -2688,7 +2689,7 @@ public class DataHelper extends DataSetObservable
   private long doCavwayInsertShot( long sid, long id, long millis, long color, 
                           double d, double b, double c, double r, double mag, double acc, double dip,
                           long extend, double stretch, long leg, long status, String comment, long shot_type, String addr,
-                          int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz, long time )
+                          long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long time )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
     // TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
@@ -6983,21 +6984,21 @@ public class DataHelper extends DataSetObservable
                }
 	       double stretch = 0; if ( db_version > 35 ) stretch = scanline1.doubleValue( 0.0 );
 	       String addr = ""; if ( db_version > 37 ) addr = TDString.unescape( scanline1.stringValue( ) );
-               int rawMx = 0;
-               int rawMy = 0;
-               int rawMz = 0;
-               int rawGx = 0;
-               int rawGy = 0;
-               int rawGz = 0;
+               long rawMx = 0;
+               long rawMy = 0;
+               long rawMz = 0;
+               long rawGx = 0;
+               long rawGy = 0;
+               long rawGz = 0;
                int idx   = 0;
                int time  = 0; // [s]
                if ( db_version > 49 ) {
-                 rawMx = (int)( scanline1.longValue( 0 ) ); 
-                 rawMy = (int)( scanline1.longValue( 0 ) );
-                 rawMz = (int)( scanline1.longValue( 0 ) );
-                 rawGx = (int)( scanline1.longValue( 0 ) );
-                 rawGy = (int)( scanline1.longValue( 0 ) );
-                 rawGz = (int)( scanline1.longValue( 0 ) );
+                 rawMx = scanline1.longValue( 0 ); 
+                 rawMy = scanline1.longValue( 0 );
+                 rawMz = scanline1.longValue( 0 );
+                 rawGx = scanline1.longValue( 0 );
+                 rawGy = scanline1.longValue( 0 );
+                 rawGz = scanline1.longValue( 0 );
                  if ( db_version > 50 ) {
                    idx = (int)( scanline1.longValue( 0 ) );
                    if ( db_version > 51 ) {

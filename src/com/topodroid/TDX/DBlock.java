@@ -70,12 +70,12 @@ public class DBlock
   private String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
 
-  int mRawMx = 0;
-  int mRawMy = 0;
-  int mRawMz = 0;
-  int mRawGx = 0;
-  int mRawGy = 0;
-  int mRawGz = 0;
+  long mRawMx = 0; // (M1x,M2x) in four bytes of a long: M1x.high M1x.low M2x.high M2x.low
+  long mRawMy = 0;
+  long mRawMz = 0;
+  long mRawGx = 0;
+  long mRawGy = 0;
+  long mRawGz = 0;
 
   int mIndex = 0;      // device index
   long mDeviceTime = 0; // device tiem [s]

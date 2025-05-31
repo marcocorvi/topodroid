@@ -54,6 +54,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
+import com.topodroid.packetX.MemoryData;
 // import com.topodroid.common.StationFlag;
 
 import android.os.ParcelFileDescriptor;
@@ -2425,7 +2426,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
-      pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, Mx, My, Mz, Gx, Gy, Gz, comment%s", newline );
+      pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, M1x, M1y, M1z, G1x, G1y, G1z, M2x, M2y, M2z, G2x, G2y, G2z, comment%s", newline );
       for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
 	// String t = ( b.mTo   == null )? "" : b.mTo;
@@ -2436,7 +2437,18 @@ public class TDExporter
         if ( TDString.isNullOrEmpty( address ) ) address = "-";
         pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.getShotType(), sep, address, sep );
         pw.format(Locale.US, "%d%c%d%c%d%c%d%c", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep );  // NOTE mLeg is not mBlockType
-        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%c", b.mRawMx, sep, b.mRawMy, sep, b.mRawMz, sep, b.mRawGx, sep, b.mRawGy, sep, b.mRawGz, sep );
+        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%c", MemoryData.longToSignedInt1( b.mRawMx ), sep, 
+                                                         MemoryData.longToSignedInt1( b.mRawMy ), sep,
+                                                         MemoryData.longToSignedInt1( b.mRawMz ), sep,
+                                                         MemoryData.longToSignedInt1( b.mRawGx ), sep,
+                                                         MemoryData.longToSignedInt1( b.mRawGy ), sep,
+                                                         MemoryData.longToSignedInt1( b.mRawGz ), sep );
+        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%c", MemoryData.longToSignedInt2( b.mRawMx ), sep, 
+                                                         MemoryData.longToSignedInt2( b.mRawMy ), sep,
+                                                         MemoryData.longToSignedInt2( b.mRawMz ), sep,
+                                                         MemoryData.longToSignedInt2( b.mRawGx ), sep,
+                                                         MemoryData.longToSignedInt2( b.mRawGy ), sep,
+                                                         MemoryData.longToSignedInt2( b.mRawGz ), sep );
         pw.format(Locale.US, "%s%s", TDString.escapeSeparator(sep, b.mComment), newline );
       }
       bw.flush();
