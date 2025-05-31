@@ -86,6 +86,28 @@ public class MemoryData
     return (l3 << 24 | l2 << 16 | l1 << 8 | l0);
   }
 
+  /** extract the first signed int from a long containing two signed ints
+   * @param x  input long
+   * @return the first signed int
+   */
+  public static int longToSignedInt1( long x )
+  {
+    byte b3 = (byte)((x >> 24) & 0xff);
+    byte b2 = (byte)((x >> 16) & 0xff);
+    return toSignedInt( b3, b2 );
+  }
+
+  /** extract the second signed int from a long containing two signed ints
+   * @param x  input long
+   * @return the second signed int
+   */
+  public static int longToSignedInt2( long x )
+  {
+    byte b1 = (byte)((x >> 8) & 0xff);
+    byte b0 = (byte)((x >> 0) & 0xff);
+    return toSignedInt( b1, b0 );
+  }
+
   // ------------------------------------------------------------
 
   public MemoryData( int idx, int size )

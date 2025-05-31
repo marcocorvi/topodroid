@@ -94,6 +94,7 @@ public class CalibExport
       String coeff_str = data.selectCalibCoeff( cid );
       if ( coeff_str != null ) {
         byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, 1 ); // 1: first set
+        TDLog.v("coeff size " + coeff1.length );
         TDMatrix mG = new TDMatrix();
         TDMatrix mM = new TDMatrix();
         TDVector vG = new TDVector();
@@ -112,7 +113,9 @@ public class CalibExport
         pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.z.x, mM.z.y, mM.z.z );
         pw.format(Locale.US, "# NL %.4f %.4f %.4f\n", nL.x,   nL.y,   nL.z );
         if ( two_sensors ) { // TWO_SENSORS
-          byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, 2 ); // 2: second set
+          // byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, 2 ); // 2: second set
+          byte[] coeff2 = new byte[ CalibTransform.COEFF_DIM ];
+          System.arraycopy( coeff1, CalibTransform.COEFF_DIM, coeff2, 0, CalibTransform.COEFF_DIM );
           if ( coeff2 != null ) {
             CalibAlgo.coeffToG( coeff2, vG, mG );
             CalibAlgo.coeffToM( coeff2, vM, mM );

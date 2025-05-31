@@ -141,6 +141,13 @@ public class CavwayData extends MemoryData
     return TDUtil.timestampToDate( seconds );
   }
 
+  // condensate G1&G2 and M1&M2
+  public static long toRawGx( byte[] b ) { return toLong( b[22], b[21], b[34], b[33] ); }
+  public static long toRawGy( byte[] b ) { return toLong( b[24], b[23], b[36], b[35] ); }
+  public static long toRawGz( byte[] b ) { return toLong( b[26], b[25], b[38], b[37] ); }
+  public static long toRawMx( byte[] b ) { return toLong( b[28], b[27], b[40], b[39] ); }
+  public static long toRawMy( byte[] b ) { return toLong( b[30], b[29], b[42], b[41] ); }
+  public static long toRawMz( byte[] b ) { return toLong( b[32], b[31], b[44], b[43] ); }
 
   public static int toRawG1x( byte[] b ) { return toSignedInt( b[22], b[21] ); }
   public static int toRawG1y( byte[] b ) { return toSignedInt( b[24], b[23] ); }

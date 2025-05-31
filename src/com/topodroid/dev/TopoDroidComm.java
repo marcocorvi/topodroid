@@ -180,6 +180,9 @@ public class TopoDroidComm
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
               mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, LegType.NORMAL, 0, comment, TDInstance.deviceAddress(),
               (int) mProtocol.mMX, (int) mProtocol.mMY, (int) mProtocol.mMZ, (int) mProtocol.mGX, (int) mProtocol.mGY, (int) mProtocol.mGZ, time);
+      // FIXME
+      //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);
+      //
       if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
         Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
         Bundle bundle = new Bundle();

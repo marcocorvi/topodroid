@@ -72,7 +72,7 @@ class DrawingShotDialog extends MyDialog
   // private RadioButton mRBsurvey;
   private MyCheckBox mRBdup  = null;
   private MyCheckBox mRBsurf = null;
-  private MyCheckBox mRBcmtd = null;
+  // private MyCheckBox mRBcmtd = null;
   private MyCheckBox mCBxSplay = null;
 
   private CheckBox mCBfrom   = null;
@@ -229,13 +229,13 @@ class DrawingShotDialog extends MyDialog
     if ( TDLevel.overNormal ) {
       mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-      mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
+      // mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
       layout3.addView( mRBdup,  lp );
       layout3.addView( mRBsurf, lp );
-      layout3.addView( mRBcmtd, lp );
+      // layout3.addView( mRBcmtd, lp );
       mRBdup.setOnClickListener( this );
       mRBsurf.setOnClickListener( this );
-      mRBcmtd.setOnClickListener( this );
+      // mRBcmtd.setOnClickListener( this );
       if ( TDLevel.overAdvanced && mBlock.isOtherSplay() ) {
         mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
         mCBxSplay.setChecked( false ); // ??? setState( false );
@@ -335,8 +335,8 @@ class DrawingShotDialog extends MyDialog
           mRBdup.setState( true );
         } else if ( mBlock.isSurface() ) {
           mRBsurf.setState( true );
-        } else if ( mBlock.isCommented() ) { // FIXME_COMMENTED
-          mRBcmtd.setState( true );
+        // } else if ( mBlock.isCommented() ) { // FIXME_COMMENTED
+        //   mRBcmtd.setState( true );
         // } else if ( mBlock.isBackshot() ) {
         //   mRBbackshot.setChecked( true );
         }
@@ -427,20 +427,20 @@ class DrawingShotDialog extends MyDialog
       mRBdup.toggleState();
       if ( mRBdup.isChecked() ) {
         mRBsurf.setState( false );
-        mRBcmtd.setState( false );
+        // mRBcmtd.setState( false );
       }
     } else if ( TDLevel.overNormal && b == mRBsurf ) {
       mRBsurf.toggleState();
       if ( mRBsurf.isChecked() ) {
         mRBdup.setState( false );
-        mRBcmtd.setState( false );
+        // mRBcmtd.setState( false );
       }
-    } else if ( TDLevel.overNormal && b == mRBcmtd ) {
-      mRBcmtd.toggleState();
-      if ( mRBcmtd.isChecked() ) {
-        mRBdup.setState( false );
-        mRBsurf.setState( false );
-      }
+    // } else if ( TDLevel.overNormal && b == mRBcmtd ) {
+    //   mRBcmtd.toggleState();
+    //   if ( mRBcmtd.isChecked() ) {
+    //     mRBdup.setState( false );
+    //     mRBsurf.setState( false );
+    //   }
     } else if ( TDLevel.overNormal && b == mCBxSplay ) {
       mCBxSplay.toggleState();
 
@@ -487,7 +487,7 @@ class DrawingShotDialog extends MyDialog
         long flag  = mBlock.getFlag();
         if ( mRBdup.isChecked() )       { flag |= DBlock.FLAG_DUPLICATE; }
         else if ( mRBsurf.isChecked() ) { flag |= DBlock.FLAG_SURFACE; }
-        else if ( mRBcmtd.isChecked() ) { flag |= DBlock.FLAG_COMMENTED; }
+        // else if ( mRBcmtd.isChecked() ) { flag |= DBlock.FLAG_COMMENTED; }
         // // else if ( mRBbackshot.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; }
         // else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.FLAG_SURVEY; }
         mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
