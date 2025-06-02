@@ -1254,7 +1254,7 @@ public class DrawingWindow extends ItemDrawer
   private DrawingPath makeFixedLeg( long type, DBlock blk, float x1, float y1, float x2, float y2 )
   {
     DrawingPath dpath = null;
-    // TDLog.v("DATA " + "make fixed path " + blk.mId + " <" + blk.mFrom + "-" + blk.mTo + ">" );
+    // TDLog.v("DATA " + "make fixed path " + blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> commented " + blk.isCommented() + " tampered " + blk.isTampered() );
     dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mDrawingSurface.scrapIndex() );
     dpath.setPathPaint( BrushManager.fixedShotPaint );
     if ( blk != null ) {
@@ -1836,7 +1836,7 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
         DBlock blk = sh.getFirstBlock();
-        if ( ! blk.isCommented() ) {
+        // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
           if ( st1.show() && st2.show() ) {
@@ -1845,14 +1845,14 @@ public class DrawingWindow extends ItemDrawer
               path.setPathPaint( BrushManager.badLoopPaint );
             }
           }
-        }
+        // }
       }
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
           NumStation st = sp.from;
           if ( st.show() ) {
             DBlock blk = sp.getBlock();
-            if ( ! ( blk.isNoPlan() || blk.isCommented() ) ) {
+            if ( ! ( blk.isNoPlan() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
               // TDLog.v("SPLAY cosine " + sp.getCosine() );
               addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
             }
@@ -1878,7 +1878,7 @@ public class DrawingWindow extends ItemDrawer
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
 	  DBlock blk = sh.getFirstBlock();
-          if ( blk != null && ! blk.isCommented() ) {
+          if ( blk != null /* && ! blk.isCommented() */ ) { // FIXME_COMMENTED
             if ( st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
               DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
               if ( sh.isBadLoop() ) {
@@ -1892,7 +1892,7 @@ public class DrawingWindow extends ItemDrawer
         NumStation st = sp.from;
         if ( st.hasExtend() && st.show() ) {
           DBlock blk = sp.getBlock();
-          if ( ! ( blk.isNoProfile() || blk.isCommented() ) ) {
+          if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
             addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
           }
         }
@@ -1916,19 +1916,19 @@ public class DrawingWindow extends ItemDrawer
           h1 = st1.e * cosp + st1.s * sinp;
           h2 = st2.e * cosp + st2.s * sinp;
           DBlock blk = sh.getFirstBlock();
-          if ( ! blk.isCommented() ) {
+          // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
             DrawingPath path = addFixedLine( type, blk, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
             if ( sh.isBadLoop() ) {
               path.setPathPaint( BrushManager.badLoopPaint );
             }
-          }
+          // }
         }
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         if ( st.show() ) {
           DBlock blk = sp.getBlock();
-          if ( ! ( blk.isNoProfile() || blk.isCommented() ) ) {
+          if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
             h1 = st.e * cosp + st.s * sinp;
             h2 = sp.e * cosp + sp.s * sinp;
             // cosine of the angle between the splay and the direction of projection
@@ -3611,7 +3611,7 @@ public class DrawingWindow extends ItemDrawer
     float ytt = (float)center.y; // South
     float ztt = (float)center.z; // Down
     for ( DBlock b : list ) {
-      if ( b.isSplay() ) { // test b.isCommented() ?
+      if ( b.isSplay() ) { // test b.isCommented() ? // FIXME_COMMENTED
         // TDLog.v("multileg splay block " + b.mFrom );
         NumStation st_f = mNum.getStation( b.mFrom );
         NumSplay sp = mNum.getSplayOf( b );
@@ -3979,6 +3979,8 @@ public class DrawingWindow extends ItemDrawer
     // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
     if ( shot instanceof DrawingSplayPath ) {
       ((DrawingSplayPath)shot).setSplayPathPaint( mType, blk );
+    } else {
+      /* nothing yet */
     }
     mApp_mData.updateShotFlag( blk.mId, mSid, flag );
   }

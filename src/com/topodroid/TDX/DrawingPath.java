@@ -702,18 +702,25 @@ public class DrawingPath extends RectF
    */
   void drawPath( Path path, Canvas canvas )
   {
-    if ( mBlock != null && mType == DRAWING_PATH_SPLAY ) { // FIXME_X_SPLAY
-      if ( TDSetting.mSplayColor ) {
-        if ( mBlock.isRecent( ) ) { 
-          canvas.drawPath( path, BrushManager.lightBluePaint );
-          return;
-        }
-        if ( TDLevel.overExpert ) { // splay user-color only at tester level
-          Paint paint = mBlock.getPaint();
-          if ( paint != null ) {
-            canvas.drawPath( path, paint );
+    if ( mBlock != null ) {
+      if ( mType == DRAWING_PATH_SPLAY ) { // FIXME_X_SPLAY
+        if ( TDSetting.mSplayColor ) {
+          if ( mBlock.isRecent( ) ) { 
+            canvas.drawPath( path, BrushManager.lightBluePaint );
             return;
           }
+          if ( TDLevel.overExpert ) { // splay user-color only at tester level
+            Paint paint = mBlock.getPaint();
+            if ( paint != null ) {
+              canvas.drawPath( path, paint );
+              return;
+            }
+          }
+        }
+      } else {
+        if ( mBlock.isCommented() ) {
+          canvas.drawPath( path, BrushManager.paintSplayComment );
+          return;
         }
       }
     } 
