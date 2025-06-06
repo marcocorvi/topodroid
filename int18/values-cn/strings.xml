@@ -1832,6 +1832,8 @@
   <string name="pref_stylus_size_summary">笔尖尺寸 [0: ignore]</string>
   <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
   <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
+  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">测量线宽度</string>
   <string name="pref_fixed_thickness_summary">测量线宽度</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

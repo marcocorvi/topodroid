@@ -1713,6 +1713,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_stylus_size_summary">Stiftgröße in Pixel [0: ignoriere]</string>
   <string name="pref_line_ends_title">Linienende abschneiden</string>
   <string name="pref_line_ends_summary">Anzahl Linienpunkte am Ende einer Linie entfernen [0]</string>
+  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

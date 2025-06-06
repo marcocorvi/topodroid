@@ -1829,6 +1829,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_stylus_size_summary">Tamaño del lápiz óptico [0: ignorar]</string>
   <string name="pref_line_ends_title">Corte de fin de línea</string>
   <string name="pref_line_ends_summary">Número de puntos de línea a eliminar desde los extremos [0]</string>
+  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
 	  

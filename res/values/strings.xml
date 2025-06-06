@@ -1857,6 +1857,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_stylus_size_summary">Stylus maximum size [pxl, 0: ignore]</string>
   <string name="pref_line_ends_title">Line ends cut</string>
   <string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string>
+  <string name="pref_zoom_lower_bound_title">Zoom bound</string>
+  <string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string>
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

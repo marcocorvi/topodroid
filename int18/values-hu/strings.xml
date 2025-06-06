@@ -1835,6 +1835,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_stylus_size_summary">Toll méret [pxl, 0: nincs]</string>
   <string name="pref_line_ends_title">Vonal-vég vágás</string>
   <string name="pref_line_ends_summary">A végekről ledobandó vonalpontok száma [0]</string>
+  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
   <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
   <!-- UNUSED string name="pref_device_title">Műszer</string -->

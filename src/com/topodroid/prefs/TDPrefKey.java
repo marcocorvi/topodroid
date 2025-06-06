@@ -1998,6 +1998,7 @@ class TDPrefKey
     "DISTOX_SLANT_XSECTION",  // whether to allow slanted xsections in clino degrees 5 by 5
     "DISTOX_OBLIQUE_PROJECTED", // maximum oblique projection angle ( 0: perpendicular )
     "DISTOX_LINE_ENDS",          // number of points to cut from the line end
+    "DISTOX_ZOOM_LOWER_BOUND",  // lower bound on zoom for zoom-fit
     null
   };
 
@@ -2018,6 +2019,7 @@ class TDPrefKey
     R.string.pref_slant_xsection_title,
     R.string.pref_oblique_projection_title,
     R.string.pref_line_ends_title,
+    R.string.pref_zoom_lower_bound_title,
     -1
   };
 
@@ -2038,6 +2040,7 @@ class TDPrefKey
     R.string.pref_slant_xsection_summary,
     R.string.pref_oblique_projection_summary,
     R.string.pref_line_ends_summary,
+    R.string.pref_zoom_lower_bound_summary,
     -1
   };
   static String[] GEEKPLOTdef = {
@@ -2057,6 +2060,7 @@ class TDPrefKey
     FALSE,
     TDString.ZERO,
     TDString.ZERO,
+    "0.1",
     null
   };
   static int[] GEEKPLOTlvl = {
@@ -2068,6 +2072,7 @@ class TDPrefKey
     A,
     // T
     // T
+    T,
     T,
     T,
     T,

@@ -1487,6 +1487,7 @@ public class DrawingCommandManager
         }
       }
     }
+    // TDLog.v( "Before scraps bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.getBitmapBounds( bounds );
     }
@@ -1494,7 +1495,7 @@ public class DrawingCommandManager
     bounds.top    *= scale;
     bounds.right  *= scale;
     bounds.bottom *= scale;
-    // TDLog.v( "scale " + scale + " bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+    // TDLog.v( "After scraps bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     return bounds;
   }
 

@@ -923,6 +923,7 @@ public class Scrap
       synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.computeBounds( b, true );
+          // TDLog.v("command bounds X " + b.left + " " + b.right + " Y " + b.top + " " + b.bottom );
           // bounds.union( b );
           union( bounds, b );
         }

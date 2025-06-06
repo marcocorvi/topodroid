@@ -1671,6 +1671,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[10], tit[10], dsc[10], lvl[10], def[10],          ctx, hlp ), // SLANT_XSECTION
       makeEdt( cat, key[11], tit[11], dsc[11], lvl[11], def[11], INTEGER, ctx, hlp ), // OBLIQUE_MAX
       makeEdt( cat, key[12], tit[12], dsc[12], lvl[12], def[12], INTEGER, ctx, hlp ), // LINE ENDS (POINTS)
+      makeEdt( cat, key[13], tit[13], dsc[13], lvl[13], def[13], FLOAT,   ctx, hlp ), // ZOOM LOWER BOUND
     };
   }
 

@@ -8216,7 +8216,9 @@ public class DrawingWindow extends ItemDrawer
       float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
       mZoom = Math.min(hZoom, wZoom);
-      if ( mZoom < 0.1f ) mZoom = 0.1f;
+      if ( TDSetting.mZoomLowerBound > 0.0f && mZoom < TDSetting.mZoomLowerBound ) {
+        mZoom = TDSetting.mZoomLowerBound;
+      }
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) + lr;
       mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - tb;
     } else {
@@ -8225,7 +8227,10 @@ public class DrawingWindow extends ItemDrawer
       float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
       mZoom = Math.min(hZoom, wZoom);
-      if ( mZoom < 0.1f ) mZoom = 0.1f;
+      // TDLog.v("Zoom Fit W " + w + " H " + h + " zoom " + mZoom );
+      if ( TDSetting.mZoomLowerBound > 0.0f && mZoom < TDSetting.mZoomLowerBound ) {
+        mZoom = TDSetting.mZoomLowerBound;
+      }
       mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - lr;
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
     }

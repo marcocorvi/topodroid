@@ -1846,6 +1846,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_stylus_size_summary">Stylus - maximálna veľkosť [pxl, 0: ignorovanie]</string>
   <string name="pref_line_ends_title">Konce Čiar odrezanie</string>
   <string name="pref_line_ends_summary">Počet bodov, ktoré budú zahodené z konca Čiary pri kreslení Stylusom [0]</string>
+  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
   <string name="pref_fixed_thickness_summary">Hrúbka meračskej zámery v nákrese</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
