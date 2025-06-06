@@ -513,7 +513,7 @@ public class DeviceHelper extends DataSetObservable
     return id;
   }
  
-  /** @return the info of a calibration 
+  /** @return the info of a calibration given the ID
    * @param cid     calibration ID
    */
   public CalibInfo selectCalibInfo( long cid )
@@ -534,6 +534,42 @@ public class DeviceHelper extends DataSetObservable
         info = new CalibInfo( 
                 cid,
                 cursor.getString( 0 ),
+                cursor.getString( 1 ),
+                cursor.getString( 2 ),
+                cursor.getString( 3 ),
+                (int)cursor.getLong( 4 ),
+                (float)cursor.getDouble( 5 ),
+                (float)cursor.getDouble( 6 ), // FIXME ROLL_DIFFERENCE
+                (int)cursor.getLong( 7 )      // NUMBER of SENSOR SETS
+        );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return info;
+  }
+
+ 
+  /** @return the info of a calibration given the name
+   * @param name     calibration name
+   */
+  public CalibInfo selectCalibInfo( String name )
+  {
+    if ( myDB == null ) {
+      TDLog.e( ERROR_NULL_DB + "select calib info");
+      return null;
+    }
+    CalibInfo info = null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "id", "day", "device", "comment", "algo", "dip", "roll", "sensors" }, // columns
+                           "name=?",
+                           new String[] { name },
+                           null, null, null ); 
+      if ( cursor != null && cursor.moveToFirst()) {
+        info = new CalibInfo( 
+                cursor.getLong( 0 ),
+                name,
                 cursor.getString( 1 ),
                 cursor.getString( 2 ),
                 cursor.getString( 3 ),

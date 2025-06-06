@@ -452,6 +452,9 @@ public class TDVector
     return a;
   }
 
+  /** log-debug the vector entries
+   * @param msg  header
+   */
   public void dump( String msg )
   {
     TDLog.v( String.format(Locale.US, "%s: %.2f %.2f %.2f", msg, x, y, z ) );

@@ -162,6 +162,12 @@
     <string name="calib_min_error">最小误差</string>
     <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
     <string name="magn_dip">磁倾角(dip) &#8230;</string>
+    <!-- TODO string name="auto_calib" copyable="pt">Auto Calib</string -->
+    <!-- TODO string name="autocalib_not_supported">Required calibration computation</string -->
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
     
     <string name="algorithm">算法:</string>
     <string name="auto">自动</string>
@@ -1252,6 +1258,7 @@
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

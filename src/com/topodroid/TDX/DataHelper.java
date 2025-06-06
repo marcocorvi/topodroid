@@ -4795,6 +4795,12 @@ public class DataHelper extends DataSetObservable
     return set;
   }
 
+  /** select all shots with a specified status of a survey starting at a given shot
+   * @param id     ID of starting shot
+   * @param sid    survey ID
+   * @param status required shot status
+   * @return list of shots of the survey with the specified status, starting at the given shot
+   */
   List< DBlock > selectAllShotsAfter( long id, long sid, long status )
   {
     // TDLog.v( "B2 select shots after id " + id );
@@ -4857,6 +4863,32 @@ public class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
+  /** select all shots of a survey starting at a given shot
+   * @param id   ID of starting shot
+   * @param sid  survey ID
+   * @return list of shots of the survey, starting at the given shot, ordered by ID
+   */
+  List< RawDBlock > selectAllShotsRawDataAfter( long id, long sid )
+  {
+    // TDLog.v( "B2 select shots after id " + id );
+    List< RawDBlock > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query(SHOT_TABLE, mShotRawDataFields,
+                    "id>=? and surveyId=?",
+                    new String[] { Long.toString(id), Long.toString(sid) },
+                    null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        RawDBlock block = new RawDBlock();
+        fillBlockRawData( sid, block, cursor );
+        list.add( block );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }

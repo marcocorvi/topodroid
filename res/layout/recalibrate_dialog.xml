@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  >
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <TextView android:id="@+id/calib_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      style="@style/text_default"
+    />
+  </LinearLayout>  
+
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <Button android:id="@+id/button_cancel"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+      android:layout_marginEnd="@dimen/marginh"
+    />
+    <Button android:id="@+id/button_ok"
+      android:layout_height="match_parent"
+      style="@style/button_default"
+      android:text="@string/button_ok"
+      android:layout_marginEnd="@dimen/marginh"
+    />
+
+    <LinearLayout android:id="@+id/help"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:gravity="start"
+      android:orientation="horizontal"
+      >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
+    </LinearLayout>
+
+  </LinearLayout>
+   
+  <ListView android:id="@+id/list"
+    style="@style/list_top"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+  />  
+
+
+</LinearLayout>

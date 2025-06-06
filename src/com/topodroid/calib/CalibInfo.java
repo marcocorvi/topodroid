@@ -43,6 +43,10 @@ public class CalibInfo
     sensors = _sensors;
   }
 
+  /** @return the calib ID
+   */
+  public long getId() { return id; }
+
   // void debug()
   // {
   //   // TDLog.v("CALIB " + id + " " + name + " " + date + " " + device ); // this is DEBUG

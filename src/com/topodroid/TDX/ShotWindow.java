@@ -39,6 +39,10 @@ import com.topodroid.dev.DataType;
 import com.topodroid.common.PlotType;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
+import com.topodroid.calib.CalibInfo;
+import com.topodroid.calib.CalibAlgo;
+import com.topodroid.calib.CalibTransform;
+import com.topodroid.packetX.MemoryData;
 
 import java.util.List;
 import java.util.Set;
@@ -3093,6 +3097,90 @@ public class ShotWindow extends Activity
                                     : audio.getId();
     // TDLog.v( TAG + "start audio id " + audio_id + " block " + blk.mId );
     (new AudioDialog( mActivity, /* this */ null, audio_id, blk, blk.mId, MediaInfo.TYPE_SHOT )).show();
+  }
+
+  /** open dialog to recalibrate shots from the given ID onwards
+   * @param shot_id shot ID
+   */
+  void recalibrate( long shot_id )
+  {
+    (new RecalibrateDialog( this, this, shot_id )).show();
+  }
+
+  void doRecalibrate( long shot_id, String calib_name )
+  {
+    // TODO
+    CalibInfo ci = mApp.mDData.selectCalibInfo( calib_name );
+    if ( ci == null ) {
+      TDToast.make( R.string.recalibrate_none );
+      return;
+    }
+    if ( ci.sensors != 2 ) {
+      TDToast.make( R.string.recalibrate_no_cavway );
+      return;
+    }
+    String coeff_str = mApp.mDData.selectCalibCoeff( ci.getId() );
+    if ( coeff_str == null ) {
+      TDToast.make( R.string.recalibrate_no_coeff );
+      return;
+    }
+    byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, 1 ); // 1: first set
+    // TDLog.v("coeff size " + coeff1.length );
+    TDMatrix mG1 = new TDMatrix();
+    TDMatrix mM1 = new TDMatrix();
+    TDVector vG1 = new TDVector();
+    TDVector vM1 = new TDVector();
+    TDVector nL1 = new TDVector();
+    CalibAlgo.coeffToG( coeff1, vG1, mG1 );
+    CalibAlgo.coeffToM( coeff1, vM1, mM1 );
+    CalibAlgo.coeffToNL( coeff1, nL1 );
+    byte[] coeff2 = new byte[ CalibTransform.COEFF_DIM ];
+    if ( coeff2 == null ) {
+      TDLog.e("Failed to create coeff2");
+      return;
+    }
+    System.arraycopy( coeff1, CalibTransform.COEFF_DIM, coeff2, 0, CalibTransform.COEFF_DIM );
+    TDMatrix mG2 = new TDMatrix();
+    TDMatrix mM2 = new TDMatrix();
+    TDVector vG2 = new TDVector();
+    TDVector vM2 = new TDVector();
+    TDVector nL2 = new TDVector();
+    CalibAlgo.coeffToG( coeff2, vG2, mG2 );
+    CalibAlgo.coeffToM( coeff2, vM2, mM2 );
+    CalibAlgo.coeffToNL( coeff2, nL2 );
+    mG1.dump("MG1");
+    mG2.dump("MG2");
+
+    List< RawDBlock > shots = mApp_mData.selectAllShotsRawDataAfter( shot_id, TDInstance.sid );
+    for ( RawDBlock b : shots ) {
+      float FV = TDUtil.FV;
+      if ( b.mRawMx != 0 && b.mRawMy != 0 && b.mRawMz != 0 && b.mRawGx != 0 && b.mRawGy != 0 && b.mRawGz != 0 ) {
+        TDVector g1 = new TDVector( MemoryData.longToSignedInt1( b.mRawGx )/FV, MemoryData.longToSignedInt1( b.mRawGy )/FV, MemoryData.longToSignedInt1( b.mRawGz )/FV );
+        TDVector m1 = new TDVector( MemoryData.longToSignedInt1( b.mRawMx )/FV, MemoryData.longToSignedInt1( b.mRawMy )/FV, MemoryData.longToSignedInt1( b.mRawMz )/FV );
+        float b1 = computeB( mG1, vG1, mM1, vM1, nL1, g1, m1 );
+        float c1 = computeC( mG1, vG1, nL1, g1 );
+        TDVector g2 = new TDVector( MemoryData.longToSignedInt2( b.mRawGx )/FV, MemoryData.longToSignedInt2( b.mRawGy )/FV, MemoryData.longToSignedInt2( b.mRawGz )/FV );
+        TDVector m2 = new TDVector( MemoryData.longToSignedInt2( b.mRawMx )/FV, MemoryData.longToSignedInt2( b.mRawMy )/FV, MemoryData.longToSignedInt2( b.mRawMz )/FV );
+        float b2 = computeB( mG2, vG2, mM2, vM2, nL2, g2, m2 );
+        float c2 = computeC( mG2, vG2, nL2, g2 );
+        TDLog.v( "Shot " + b.mId + " B " + b.mBearing + " " + b1 + " " + b2 + " C " + b.mClino + " " + c1 + " " + c2 );
+      }
+    }
+  }
+    
+  private float computeC( TDMatrix mG, TDVector vG, TDVector nL, TDVector g0 )
+  {
+    TDVector g = vG.plus( mG.timesV( g0 ) );
+    return TDMath.atan2d( - g.x, TDMath.sqrt(g.y*g.y + g.z*g.z ) );
+  }
+
+  private float computeB( TDMatrix mG, TDVector vG, TDMatrix mM, TDVector vM, TDVector nL, TDVector g0, TDVector m0 )
+  {
+    TDVector g = vG.plus( mG.timesV( g0 ) );  g.normalize();
+    TDVector m = vM.plus( mM.timesV( m0 ) );  m.normalize();
+    float sd = g.y * m.z - g.z * m.y; // this is ec[0];
+    float cd = m.x - g.x * g.dot( m );
+    return TDMath.atan2d( sd, cd );
   }
 
 }

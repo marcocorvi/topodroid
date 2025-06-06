@@ -35,6 +35,7 @@
   <string name="CalibGMDialog" translatable="false">page_gm.htm</string>
   <string name="CalibImportDialog" translatable="false">page_calib_import.htm</string>
   <string name="CalibListDialog" translatable="false">page_calib_dialog.htm</string>
+  <string name="RecalibrateDialog" translatable="false">page_recalibrate_dialog.htm</string>
   <string name="CalibValidateListDialog" translatable="false">page_validation.htm</string>
   <string name="CalibValidateResultDialog" translatable="false">page_validation.htm</string>
   <string name="ExportDialogCalib" translatable="false">page_calib_import.htm</string>

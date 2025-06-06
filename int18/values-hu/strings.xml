@@ -164,6 +164,11 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="magn_dip">Mágn. lehajlás &#8230;</string>
     <string name="auto_calib">Auto. Kalib.</string>
     <string name="autocalib_not_supported">Kalibrációs számítás szükséges</string>
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+
     <string name="algorithm">Algoritmus:</string>
     <string name="auto">automatikus</string>
     <string name="linear">lineáris</string>
@@ -1255,6 +1260,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
     <!-- UNUSED string name="title_check">Kalibrációs ellenőrzés</string -->

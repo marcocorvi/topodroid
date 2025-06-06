@@ -13,6 +13,8 @@
  */
 package com.topodroid.math;
 
+import com.topodroid.utils.TDLog;
+
 public class TDMatrix
 { 
   public TDVector x,y,z;
@@ -223,6 +225,17 @@ public class TDMatrix
     if ( dx < dy ) { dx = dy; }
     if ( dx < dz ) { dx = dz; }
     return dx;
+  }
+
+  /** log-debug the matrix entries
+   * @param msg  header
+   */
+  public void dump( String msg )
+  {
+    if ( msg != null ) TDLog.v( msg );
+    TDLog.v(" X " + x.x + " " + x.y + " " + x.z );
+    TDLog.v(" Y " + y.x + " " + y.y + " " + y.z );
+    TDLog.v(" Z " + z.x + " " + z.y + " " + z.z );
   }
 
 }

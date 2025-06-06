@@ -36,8 +36,8 @@ import java.lang.Math;
 
 public class CalibTransform
 {
-  final static int COEFF_DIM  =  52;
-  final static int COEFF_DIM2 = 104; // 52 * 2
+  public final static int COEFF_DIM  =  52;
+  public final static int COEFF_DIM2 = 104; // 52 * 2
   // final static float G_SCALE = 667;
   // final static float M_SCALE = 4876;
 

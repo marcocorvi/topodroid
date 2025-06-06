@@ -165,6 +165,10 @@
     <string name="magn_dip">Dip Magnetica &#8230;</string>
     <string name="auto_calib">Auto-calibrazione</string>
     <string name="autocalib_not_supported">Richiesto calcolo calibrazione</string>
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -1253,6 +1257,7 @@
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calibr.</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

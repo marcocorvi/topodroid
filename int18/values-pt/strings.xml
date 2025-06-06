@@ -154,6 +154,11 @@ no campo abaixo e aperte o botão.
   <string name="magn_dip">Inclinação mag. …</string>
   <string name="auto_calib" copyable="pt">Auto Calib</string>
   <string name="autocalib_not_supported">Cálculo obrigatório de calibração</string>
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+
   <string name="algorithm">Algoritmo:</string>
   <string name="auto">auto</string>
   <string name="linear">linear</string>
@@ -1174,6 +1179,7 @@ no campo abaixo e aperte o botão.
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
   <!-- UNUSED string name="title_check">Calibration-check</string -->

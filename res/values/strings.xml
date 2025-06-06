@@ -175,6 +175,10 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="magn_dip">Magn. dip &#xb0;</string>
     <string name="auto_calib" copyable="pt">Auto Calib</string>
     <string name="autocalib_not_supported">Required calibration computation</string><!-- lint: unused -->
+    <string name="recalibrate_with">Recompute shots with %1$s</string>
+    <string name="recalibrate_none">No calibration selected</string>
+    <string name="recalibrate_no_cavway">Not a Cavway calibration</string>
+    <string name="recalibrate_no_coeff">No calibration coefficients</string>
     
     <string name="algorithm">Algorithm:</string>
     <string name="auto" copyable="it pt">auto</string>
@@ -1273,6 +1277,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_audio_list">Audio records</string>
+    <string name="title_recalibrate">Calibrations</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_calib_check">Calibration-check shots</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

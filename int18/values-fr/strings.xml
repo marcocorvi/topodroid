@@ -165,6 +165,10 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="magn_dip">Inclin. magn. &#8230;</string>
     <string name="auto_calib">Étalonnage automatique</string>
     <string name="autocalib_not_supported">Calcul de l\'étalonnage requis</string>
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
 
     <string name="algorithm">algorithme:</string>
     <string name="auto">automatique</string>
@@ -1253,6 +1257,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_audio_list">Enregistrements audio</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Étalonnage</string>
     <string name="title_calib_check">Visée de contrôle étalonnage</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

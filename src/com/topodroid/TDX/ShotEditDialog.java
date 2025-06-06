@@ -168,6 +168,7 @@ class ShotEditDialog extends MyDialog
   private MyCheckBox mButtonCheck  = null;
 
   private Button mBtnColor = null;  // user-set color (tester level)
+  private Button mBtnRecalibrate = null; // recalibrate survey data from this shot onwards
 
   private int mColor;    // block color
   private boolean hideColorBtn = true;
@@ -1009,6 +1010,9 @@ class ShotEditDialog extends MyDialog
     } else if ( (! hideColorBtn) && mBtnColor != null && b == mBtnColor ) {
       new MyColorPicker( mContext, this, mColor ).show();
       return; // dismiss only after the color change
+    } else if ( mBtnRecalibrate != null && b == mBtnRecalibrate ) { // RECALIBRATE
+      mParent.recalibrate( mBlk.mId );
+      dismiss();
     // } else if ( mHasLRUD && b == mBTlrud ) { // AT-STATION LRUD // INTERMEDIATE_DATA
     //   float d = -1;
     //   long at = mBlk.mId;
@@ -1232,6 +1236,11 @@ class ShotEditDialog extends MyDialog
     // mCBleg = (CheckBox) findViewById( R.id.leg ); // delete whole leg
     layout4b.addView( mButtonDelete );
     mButtonDelete.setLayoutParams( lp );
+
+    mBtnRecalibrate  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
+    mBtnRecalibrate.setOnClickListener( this );
+    layout4b.addView( mBtnRecalibrate );
+    mBtnRecalibrate.setLayoutParams( lp );
 
     mCBleg = new CheckBox( mContext );
     mCBleg.setText( R.string.delete_whole_leg );

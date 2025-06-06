@@ -168,6 +168,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="magn_dip">Магнитна точност …</string>
     <string name="auto_calib">Автоматична калибрация</string>
     <string name="autocalib_not_supported">Изисква се изчисление на калибрирането</string>
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
     
     <string name="algorithm">Алгоритъм:</string>
     <string name="auto">автоматичен</string>
@@ -1259,6 +1263,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Калибриране - проверка на измерванията</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

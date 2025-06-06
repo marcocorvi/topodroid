@@ -169,6 +169,10 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="magn_dip">Magn. uhol &#8230;</string>
     <string name="auto_calib">Auto Calibrácia</string>
     <string name="autocalib_not_supported">Vyžaduje sa výpočet kalibrácie</string>
+    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
+    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
+    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
+    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
     
     <string name="algorithm">Algoritmus kalibrácie:</string>
     <string name="auto">Automatický</string>
@@ -1263,6 +1267,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_azimut">Smerová orientácia</string>
     <string name="title_audio">Zvukový komentár</string>
     <string name="title_audio_list">Audio nahrávky</string>
+    <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Kalibrácie</string>
     <string name="title_calib_check">Kalibrácia - Kontrolné merania</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
