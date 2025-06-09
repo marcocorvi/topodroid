@@ -92,6 +92,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="failed_snap_to_point">Kein Punkt zum Verbinden gefunden</string>
   <string name="failed_snap_to_splays">Kein Hilfszug zum Verbinden gefunden</string>
   <string name="failed_append_to_line">Linie fortsetzen fehlgeschlagen</string>
+    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
   <string name="bric_device">Gerät %1$s</string>
   <string name="bric_ble">BLE %1$s</string>
   <string name="bric_fw">Firmware %1$s</string>

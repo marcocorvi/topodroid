@@ -102,6 +102,7 @@ no campo abaixo e aperte o botão.
   <string name="failed_snap_to_point">Nenhum ponto de fechamento ao qual juntar o ponto</string>
   <string name="failed_snap_to_splays">Nenhuma medida auxiliar próxima a qual juntar a linha</string>
   <string name="failed_append_to_line">Falha ao conectar a outra linha</string>
+    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
   <string name="bric_device">Dispositivo %1$s</string>
   <string name="bric_ble">BLE %1$s</string>
   <string name="bric_fw">Firmware %1$s</string>

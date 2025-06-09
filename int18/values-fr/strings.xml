@@ -111,6 +111,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="failed_snap_to_point">Pas de point à attacher</string>
     <string name="failed_snap_to_splays">Aucun cheminement assez proche pour attacher la ligne</string>
     <string name="failed_append_to_line">Échec de la jonction à une autre ligne</string>
+    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
     <string name="bric_device">Appareil %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
