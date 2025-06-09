@@ -168,10 +168,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="magn_dip">Магнитна точност …</string>
     <string name="auto_calib">Автоматична калибрация</string>
     <string name="autocalib_not_supported">Изисква се изчисление на калибрирането</string>
-    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
-    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
-    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
-    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+    <string name="recalibrate_with">Преизчисляване на измерванията с %1$s</string>
+    <string name="recalibrate_none">Не е избрана калибрация</string>
+    <string name="recalibrate_no_cavway">Няма калибрация за Cavway</string>
+    <string name="recalibrate_no_coeff">Няма коефициенти на калибриране</string>
     
     <string name="algorithm">Алгоритъм:</string>
     <string name="auto">автоматичен</string>
@@ -915,7 +915,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_write">Качване</string>
     <string name="button_xsection">Сечение</string>
     <string name="xsection">Сечение</string>
-    <!-- TODO string name="buffer">Buffer</string -->
+    <string name="buffer">Буфер</string>
     <string name="buffer_size">Размер на буфера: %1$d</string>
     <string name="buffer_sorted">сортиран</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
@@ -1036,9 +1036,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="split_nothing">Няма нищо за разделяне</string>
     <string name="flip_shots">Завърти измерванията</string>
-    <!-- TODO string name="move_items">Move</string -->
+    <string name="move_items">Премести</string>
     <string name="copy_items">Копиране на елементи</string>
-    <!-- TODO string name="paste_items">Paste items</string -->
+    <string name="paste_items">Поставяне на елементи</string>
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Предговор</string>
@@ -1263,7 +1263,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
-    <!-- TODO string name="title_recalibrate">Calibrations</string -->
+    <string name="title_recalibrate">Калибрации</string>
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Калибриране - проверка на измерванията</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1385,7 +1385,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_survey_new">Нова картировка</string>
     <string name="title_survey_export">Експортирай картировката</string>
     <string name="title_survey_rename">Преименувай картировката</string>
-    <!-- TODO string name="title_plot_rename">Sketch operations</string -->
+    <string name="title_plot_rename">Операции за скица</string>
     <string name="title_plot_zoomfit">Мащабиране / ориентация</string>
     <string name="title_calib_export">Експортирай калибрацията</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
