@@ -3104,9 +3104,18 @@ public class ShotWindow extends Activity
    */
   void recalibrate( long shot_id )
   {
+    // if ( TDInstance.isDivingMode ) { // this should not occur
+    //   TDLog.e("No recalibrate in diving-mode");
+    //   return;
+    // }
     (new RecalibrateDialog( this, this, shot_id )).show();
   }
 
+  /** recompute bearing/clino of survey shots from one shot onwards - only Cavway
+   * @param shot_id  first shot to recompute
+   * @param calib_name name of the calibration that is used - must be Cavway calibration
+   * NOTE this is not for diving-mode
+   */
   void doRecalibrate( long shot_id, String calib_name )
   {
     // TODO
@@ -3148,8 +3157,8 @@ public class ShotWindow extends Activity
     CalibAlgo.coeffToG( coeff2, vG2, mG2 );
     CalibAlgo.coeffToM( coeff2, vM2, mM2 );
     CalibAlgo.coeffToNL( coeff2, nL2 );
-    mG1.dump("MG1");
-    mG2.dump("MG2");
+    // mG1.dump("MG1");
+    // mG2.dump("MG2");
 
     List< RawDBlock > shots = mApp_mData.selectAllShotsRawDataAfter( shot_id, TDInstance.sid );
     for ( RawDBlock b : shots ) {
@@ -3163,17 +3172,39 @@ public class ShotWindow extends Activity
         TDVector m2 = new TDVector( MemoryData.longToSignedInt2( b.mRawMx )/FV, MemoryData.longToSignedInt2( b.mRawMy )/FV, MemoryData.longToSignedInt2( b.mRawMz )/FV );
         float b2 = computeB( mG2, vG2, mM2, vM2, nL2, g2, m2 );
         float c2 = computeC( mG2, vG2, nL2, g2 );
-        TDLog.v( "Shot " + b.mId + " B " + b.mBearing + " " + b1 + " " + b2 + " C " + b.mClino + " " + c1 + " " + c2 );
+        TDVector v1 = new TDVector( TDMath.cosd( c1 ) * TDMath.sind( b1 ), TDMath.cosd( c1 ) * TDMath.cosd( b1 ), TDMath.sind( c1 ) );
+        TDVector v2 = new TDVector( TDMath.cosd( c2 ) * TDMath.sind( b2 ), TDMath.cosd( c2 ) * TDMath.cosd( b2 ), TDMath.sind( c2 ) );
+        TDVector v = v1.plus( v2 );
+        // v.normalize();
+        float b0 = TDMath.atan2d( v.x, v.y );  if ( b0 < 0 ) b0 += 360;
+        float c0 = TDMath.atan2d( v.z, TDMath.sqrt( v.x*v.x + v.y*v.y ) );
+        // TDLog.v( "Shot " + b.mId + " B " + b.mBearing + " " + b1 + " " + b2 + " " + b0 + " C " + b.mClino + " " + c1 + " " + c2 + " " + c0 );
+        mApp_mData.updateShotBearingClino( b.mId, TDInstance.sid, b0, c0 );
       }
     }
   }
     
+  /** @return the clino
+   * @param mG    AG calibration matrix
+   * @param vG    BG calibration vector
+   * @param nL    non-linear coeffs (unused)
+   * @param g0    sensor raw values
+   */
   private float computeC( TDMatrix mG, TDVector vG, TDVector nL, TDVector g0 )
   {
     TDVector g = vG.plus( mG.timesV( g0 ) );
     return TDMath.atan2d( - g.x, TDMath.sqrt(g.y*g.y + g.z*g.z ) );
   }
 
+  /** @return the bearing
+   * @param mG    AG calibration matrix
+   * @param vG    BG calibration vector
+   * @param nL    non-linear coeffs (unused)
+   * @param mM    AM calibration matrix
+   * @param vM    BM calibration vector
+   * @param g0    G sensor raw values
+   * @param m0    M sensor raw values
+   */
   private float computeB( TDMatrix mG, TDVector vG, TDMatrix mM, TDVector vM, TDVector nL, TDVector g0, TDVector m0 )
   {
     TDVector g = vG.plus( mG.timesV( g0 ) );  g.normalize();

@@ -1609,7 +1609,24 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  /** update the shot data
+  /** update the shot bearing and clino
+   * @param id   shot ID
+   * @param sid  survey ID
+   * @param b    azimuth
+   * @param c    clino
+   * @note this is an update of a manual-shot data
+   */
+  void updateShotBearingClino( long id, long sid, float b, float c )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US,
+               "UPDATE shots SET bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
+               b, c, sid, id );
+    doExecShotSQL( id, sw );
+  }
+
+  /** update the shot data distance, bearing, clino
    * @param id   shot ID
    * @param sid  survey ID
    * @param d    distance

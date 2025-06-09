@@ -1231,16 +1231,18 @@ class ShotEditDialog extends MyDialog
     layout4b.addView( mButtonCheck );
     mButtonCheck.setLayoutParams( lp );
 
+    if ( ! TDInstance.isDivingMode() ) {
+      mBtnRecalibrate  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
+      mBtnRecalibrate.setOnClickListener( this );
+      layout4b.addView( mBtnRecalibrate );
+      mBtnRecalibrate.setLayoutParams( lp );
+    }
+
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete_transp, R.drawable.iz_delete_transp );
     mButtonDelete.setOnClickListener( this );
     // mCBleg = (CheckBox) findViewById( R.id.leg ); // delete whole leg
     layout4b.addView( mButtonDelete );
     mButtonDelete.setLayoutParams( lp );
-
-    mBtnRecalibrate  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
-    mBtnRecalibrate.setOnClickListener( this );
-    layout4b.addView( mBtnRecalibrate );
-    mBtnRecalibrate.setLayoutParams( lp );
 
     mCBleg = new CheckBox( mContext );
     mCBleg.setText( R.string.delete_whole_leg );
