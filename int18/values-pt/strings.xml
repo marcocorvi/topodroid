@@ -1723,8 +1723,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_stylus_size_summary">Tamanho da caneta para permitir que a mão toque a tela ao desenhar somente com caneta [0: ignorar]</string>
   <string name="pref_line_ends_title">Cortar fim linha</string>
   <string name="pref_line_ends_summary">Quantidade de pontos a serem desprezados nas extremidades das linhas ao usar recurso "Tam caneta" maior do que zero [0]</string>
-  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
-  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Espessura linha</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas (visadas e medidas auxiliares)</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->

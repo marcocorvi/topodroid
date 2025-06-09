@@ -8206,7 +8206,7 @@ public class DrawingWindow extends ItemDrawer
   /** fit the view to the sketch
    * @param b    fitting rectangle
    */
-  private void zoomFit( RectF b )
+  private boolean zoomFit( RectF b )
   {
     float tb = (b.top + b.bottom)/2;
     float lr = (b.left + b.right)/2;
@@ -8215,10 +8215,12 @@ public class DrawingWindow extends ItemDrawer
       float h = b.right - b.left;
       float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
-      mZoom = Math.min(hZoom, wZoom);
-      if ( TDSetting.mZoomLowerBound > 0.0f && mZoom < TDSetting.mZoomLowerBound ) {
-        mZoom = TDSetting.mZoomLowerBound;
-      }
+      float zoom = Math.min(hZoom, wZoom);
+      if ( zoom <= 0.0f ) return false;
+      mZoom = zoom;
+      // if ( TDSetting.mZoomLowerBound > 0.0f && mZoom < TDSetting.mZoomLowerBound ) {
+      //   mZoom = TDSetting.mZoomLowerBound;
+      // }
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) + lr;
       mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - tb;
     } else {
@@ -8226,11 +8228,13 @@ public class DrawingWindow extends ItemDrawer
       float h = b.bottom - b.top;
       float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
-      mZoom = Math.min(hZoom, wZoom);
+      float zoom = Math.min(hZoom, wZoom);
+      if ( zoom <= 0.0f ) return false;
+      mZoom = zoom;
       // TDLog.v("Zoom Fit W " + w + " H " + h + " zoom " + mZoom );
-      if ( TDSetting.mZoomLowerBound > 0.0f && mZoom < TDSetting.mZoomLowerBound ) {
-        mZoom = TDSetting.mZoomLowerBound;
-      }
+      // if ( TDSetting.mZoomLowerBound > 0.0f && mZoom < TDSetting.mZoomLowerBound ) {
+      //   mZoom = TDSetting.mZoomLowerBound;
+      // }
       mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - lr;
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
     }
@@ -8238,6 +8242,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight );
     // TDLog.v( "PLOT zoom fit " + mOffset.x + " " + mOffset.y + " zoom " + mZoom + " tb " + tb + " lr " + lr );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+    return true;
   }
 
   // called when the data reduction changes (hidden/barrier)
@@ -8366,13 +8371,13 @@ public class DrawingWindow extends ItemDrawer
 
   /** change the zoom to fit the drawing to the screen
    */
-  private void doZoomFit()
+  private boolean doZoomFit()
   {
-    if ( mDrawingSurface.isFixedZoom() ) return;
+    if ( mDrawingSurface.isFixedZoom() ) return false;
     // FIXME FIXED_ZOOM for big sketches this leaves out some bits at the ends
     // maybe should increase the bitmap bounds by a small factor ...
     RectF b = mDrawingSurface.getBitmapBounds( 1.0f );
-    zoomFit( b );
+    return zoomFit( b );
   }
 
   /** center the view at a station
@@ -8399,6 +8404,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void setOrientation( int orientation )
   {
+    boolean ret = false;
     boolean landscape = (orientation == PlotInfo.ORIENTATION_LANDSCAPE);
     if ( landscape != mLandscape ) {
       mLandscape = landscape;
@@ -8410,10 +8416,13 @@ public class DrawingWindow extends ItemDrawer
       mApp_mData.updatePlotOrientation( TDInstance.sid, mPid, mLandscape ? 1 : 0 );
       // TDLog.v( "PLOT orientation " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
-      doZoomFit();
-      setTheTitle();
+      ret = doZoomFit();
+      if ( ret ) setTheTitle();
     } else {
-      doZoomFit();
+      ret = doZoomFit();
+    }
+    if ( ! ret ) {
+      TDToast.makeWarn( R.string.failed_zoomfit );
     }
   }
 

@@ -1827,8 +1827,8 @@
   <string name="pref_stylus_size_summary">Размер точки касания стилуса [пиксели, 0: игнорировать касания]</string>
   <string name="pref_line_ends_title">Обрезать окончания линий</string>
   <string name="pref_line_ends_summary">Количество точек линии, которые нужно убрать с концов [0]</string>
-  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
-  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->

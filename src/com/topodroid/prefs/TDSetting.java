@@ -610,7 +610,7 @@ public class TDSetting
   // public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mLineClose = true;
   public static int     mLineEnds  = 3;       // number of points to drop from line ends
-  public static float   mZoomLowerBound = 0.1f; // lower bound on zoom for zoom-fit
+  // public static float   mZoomLowerBound = 0.1f; // lower bound on zoom for zoom-fit
 
   // ---------- WEEDING
   public static float mWeedDistance  = 0.5f;  // max weeding distance
@@ -1381,7 +1381,7 @@ public class TDSetting
     mSlantXSection  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SLANT_XSECTION
     mObliqueMax     = tryInt( prefs,   keyGPlot[11],      defGPlot[11] );  // DISTOX_OBLIQUE_PROJECTED
     mLineEnds       = tryInt( prefs,   keyGPlot[12],      defGPlot[12] );  // DISTOX_LINE_ENDS
-    mZoomLowerBound = tryFloat( prefs, keyGPlot[13],      defGPlot[13] );  // DISTOX_ZOOM_LOWER_BOUND
+    // mZoomLowerBound = tryFloat( prefs, keyGPlot[13],      defGPlot[13] );  // DISTOX_ZOOM_LOWER_BOUND
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
@@ -2037,9 +2037,9 @@ public class TDSetting
       else if ( mObliqueMax > 80 ) { mObliqueMax = 80; ret = Integer.toString( mObliqueMax ); }
     } else if ( k.equals( key[12 ] ) ) { // DISTOX_LINE_ENDS
       mLineEnds = tryIntValue( hlp, k, v, def[12 ] );
-    } else if ( k.equals( key[13 ] ) ) {  // DISTOX_ZOOM_LOWER_BOUND
-      mZoomLowerBound = tryFloatValue( hlp, k, v, def[13] );  // DISTOX_ZOOM_LOWER_BOUND
-      if ( mZoomLowerBound < 0.0f ) mZoomLowerBound = 0.0f;
+    // } else if ( k.equals( key[13 ] ) ) {  // DISTOX_ZOOM_LOWER_BOUND
+    //   mZoomLowerBound = tryFloatValue( hlp, k, v, def[13] );  // DISTOX_ZOOM_LOWER_BOUND
+    //   if ( mZoomLowerBound < 0.0f ) mZoomLowerBound = 0.0f;
     } else {
       TDLog.e("missing GEEK_PLOT key: " + k );
     }

@@ -120,6 +120,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="failed_snap_to_point">No close point to snap the point to</string>
     <string name="failed_snap_to_splays">No close splay to snap the line to</string>
     <string name="failed_append_to_line">Failed to attach to another line</string>
+    <string name="failed_zoomfit">Failed to fit to screen</string>
 
     <string name="bric_device">Device %1$s</string>
     <string name="bric_ble" copyable="all">BLE %1$s</string>
@@ -1857,8 +1858,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_stylus_size_summary">Stylus maximum size [pxl, 0: ignore]</string>
   <string name="pref_line_ends_title">Line ends cut</string>
   <string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string>
-  <string name="pref_zoom_lower_bound_title">Zoom bound</string>
-  <string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string>
+  <!-- UNUSED string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

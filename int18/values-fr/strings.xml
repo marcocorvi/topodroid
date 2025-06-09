@@ -1819,8 +1819,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_stylus_size_summary">Taille du stylet [0: aucun]</string>
     <string name="pref_line_ends_title">Coupure fin de ligne</string>
     <string name="pref_line_ends_summary">Nombre de points à abandonner aux extrémités de ligne [0]</string>
-  <!-- TODO string name="pref_zoom_lower_bound_title">Zoom bound</string -->
-  <!-- TODO string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_title">Zoom bound</string -->
+  <!-- UNUSED string name="pref_zoom_lower_bound_summary">Zoom-fit minimum scale [0.1]</string -->
     <string name="pref_fixed_thickness_title">Épaisseur ligne croquis</string>
     <string name="pref_fixed_thickness_summary">Épaisseur de ligne du croquis</string>
     <!-- UNUSED string name="pref_device_title">Périphériques</string -->
