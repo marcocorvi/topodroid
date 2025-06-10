@@ -227,6 +227,7 @@
     <string name="lrud">LRUD</string>
     <string name="strike_dip">Immersione %1$.0f inclinazione %2$.0f</string>
 
+    <string name="few_points">Punti insufficienti</string>
     <string name="few_data">Dati insufficienti</string>
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>

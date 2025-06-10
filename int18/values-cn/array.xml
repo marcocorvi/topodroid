@@ -364,12 +364,12 @@
      <item name="ddmmss">度, 分, 秒</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">自动</item>
      <item name="linear">线性</item>
      <item name="nonlinear">非线性</item>
-     <!-- item name="minimum">Minimum</item -->
-  </string-array>
+     <! - - item name="minimum">Minimum</item - - >
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">不显示</item>

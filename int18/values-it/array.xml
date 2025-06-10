@@ -283,11 +283,11 @@
      <item name="ddmmss">gradi, minuti, secondi</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">auto</item>
      <item name="linear">lineare</item>
      <item name="nonlinear">non-lineare</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">Nessuno</item>

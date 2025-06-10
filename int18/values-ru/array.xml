@@ -278,11 +278,11 @@
      <item name="ddmmss">градусы, минуты, секунды</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">Авто</item>
      <item name="linear">Линейный</item>
      <item name="nonlinear">Нелинейный</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">Нет</item>

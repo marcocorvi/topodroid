@@ -640,7 +640,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="shot_delete">Supprimer la visée ?</string>
     <string name="shots_delete">Supprimer les visées ?</string>
     <string name="shots_delete_unsafe">Stations référencées par sections transverses.\nSupprimer les visées ?</string>
-    <string name="shot_rename_unsafe">Stations référencées par sections transverses.\nRenommer la visée ?</string>
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string -->
     <string name="shots_rename_unsafe">Stations referenced by xsections.\nRenommer les visées ?</string>
     <string name="shot_check">Marquer la visée comme visée de contrôle ?</string>
     <string name="shot_from">DEPUIS ou DE</string>

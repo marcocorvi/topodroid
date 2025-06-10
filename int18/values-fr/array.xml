@@ -349,12 +349,12 @@
      <item name="ddmmss">Degrés, minutes, secondes</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">Automatique</item>
      <item name="linear">Linéaire</item>
      <item name="nonlinear">Non-linéaire</item>
-	 <!-- item name="minimum">Minimum</item -->
-  </string-array>
+	 <! - - item name="minimum">Minimum</item - - >
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">Aucune</item>

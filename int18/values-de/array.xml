@@ -284,11 +284,11 @@
      <item name="ddmmss">Grad, Minute, Sekunde</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">Automatisch</item>
      <item name="linear">Linear</item>
      <item name="nonlinear">Nicht-linear</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">Keine</item>

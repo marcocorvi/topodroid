@@ -348,12 +348,12 @@
     <item name="degrees">graus decimais</item>
     <item name="ddmmss">graus, minutos, segundos</item>
   </string-array>
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
     <item name="auto">automático</item>
     <item name="linear">linear</item>
     <item name="nonlinear">não linear</item>
-    <!-- item name="minimum">Mínimo</item -->
-  </string-array>
+    <! - - item name="minimum">Mínimo</item - - >
+  </string-array -->
   <string-array name="rawCData">
     <item name="none">nenhum</item>
     <item name="dec">decimal</item>

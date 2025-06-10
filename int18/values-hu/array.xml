@@ -310,12 +310,12 @@
      <item name="ddmmss">fok, perc, másodperc</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">Automatikus</item>
      <item name="linear">Lineáris</item>
      <item name="nonlinear">Nem lineáris</item>
-     <!-- item name="minimum">Minimum</item -->
-  </string-array>
+     <! - - item name="minimum">Minimum</item - - >
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">Nincs</item>

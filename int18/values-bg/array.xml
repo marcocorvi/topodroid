@@ -277,11 +277,11 @@
      <item name="ddmmss">градуси, минути, секунди</item>
   </string-array>
 
-  <string-array name="calibAlgo">
+  <!-- string-array name="calibAlgo">
      <item name="auto">Автоматично</item>
      <item name="linear">Линейно</item>
      <item name="nonlinear">Нелинейно</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="rawCData">
      <item name="none">без</item>
