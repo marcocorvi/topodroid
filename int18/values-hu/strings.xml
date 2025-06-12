@@ -74,11 +74,13 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="memoryA3">DistoX A3 memória </string>
     <string name="memoryX310">DistoX X310 memória</string>
     <string name="memoryXBLE">DistoX-BLE memória</string>
+    <string name="memoryCavway">Cavway memória</string>
     <!-- UNUSED string name="memory_data">DistoX adat</string -->
 
     <string name="thp_user">felhasználó</string>
     <string name="thp_label">felirat</string>
     <string name="thp_section">metszet</string>
+    <string name="thp_picture">kép</string>
     <string name="thp_station">mérési pont</string>
     <!-- UNUSED string name="thp_danger">veszély</string -->
     <string name="thl_user">felhasználó</string>
@@ -108,7 +110,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="failed_snap_to_point">Nincs közeli pont, amihez a pont illeszthető</string>
     <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
     <string name="failed_append_to_line">Nem sikerült másik vonalhoz kapcsolni</string>
-    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
+    <string name="failed_zoomfit">Sikertelen teljes nagyítás</string>
 
     <string name="bric_device">Műszer %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -225,6 +227,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="splay_at_to">BJFL a következő pontnál</string>
     <string name="lrud">BJFL</string>
     <string name="strike_dip">Dőlés irány %1$.0f lehajlás %2$.0f</string>
+    <string name="few_points">Nincs elegendő adat pont</string>
     <string name="few_data">Nincs elegendő adat</string>
     <string name="few_iter">Iteráció nem sikerült</string>
     <string name="few_groups">Nincs elegendő csoportosítható adat</string>
@@ -233,7 +236,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="few_plots">Nincs elég vázlat</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
     <string name="getting_info">DistoX információk letöltése &#8230;</string>
-    <string name="gettingble_info">Letöltött DistoX-BLE információk &#8230;</string>
+    <string name="gettingble_info">DistoX-BLE információk letöltése &#8230;</string>
+    <string name="gettingCavway_info">Cavway információk letöltése &#8230;</string>
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>
@@ -1383,6 +1387,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_survey_new">Új felmérés</string>
     <string name="title_survey_export">felmérés exportálása</string>
     <string name="title_survey_rename">Felmérés átnevezése</string>
+    <string name="title_team_dialog">Csapat nevek</string>
     <string name="title_plot_rename">Vázlat műveletek</string>
     <string name="title_plot_zoomfit">Zoom teljes / Irány</string>
     <string name="title_calib_export">Kalibráció exportálása</string>
