@@ -1005,7 +1005,7 @@ public class DrawingCommandManager
   /** @return a station name by the name
    * @param name   name of the station
    */
-  DrawingStationName getStation( String name ) 
+  public DrawingStationName getStation( String name ) 
   {
     for ( DrawingStationName st : mStations ) {
       if ( name.equals( st.getName() ) ) return st;

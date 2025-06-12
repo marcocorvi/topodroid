@@ -312,10 +312,12 @@ public class ExportDialogPlot extends MyDialog
         {
           TDSetting.mSvgRoundTrip  = ((CheckBox) findViewById( R.id.svg_roundtrip )).isChecked();
           TDSetting.mSvgGrid       = ((CheckBox) findViewById( R.id.svg_grid )).isChecked();
+          TDSetting.mSvgOrigin     = ((CheckBox) findViewById( R.id.svg_origin)).isChecked();
           TDSetting.mSvgLineDirection   = ((CheckBox) findViewById( R.id.svg_linedir )).isChecked();
+          TDSetting.mSvgStations   = ((CheckBox) findViewById( R.id.svg_stations)).isChecked();
           TDSetting.mSvgSplays     = ((CheckBox) findViewById( R.id.svg_splays )).isChecked();
           TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.svg_xsections )).isChecked();
-          TDSetting.mSvgGroups = ((CheckBox) findViewById( R.id.svg_groups)).isChecked();
+          TDSetting.mSvgGroups     = ((CheckBox) findViewById( R.id.svg_groups)).isChecked();
           if ( mParentType == PARENT_DRAWING ) {
             mBothViews = ((CheckBox) findViewById( R.id.svg_bothviews )).isChecked();
           }
@@ -391,7 +393,9 @@ public class ExportDialogPlot extends MyDialog
     
     ((CheckBox) findViewById( R.id.svg_roundtrip )).setChecked( TDSetting.mSvgRoundTrip );
     ((CheckBox) findViewById( R.id.svg_grid )).setChecked( TDSetting.mSvgGrid );
+    ((CheckBox) findViewById( R.id.svg_origin)).setChecked( TDSetting.mSvgOrigin );
     ((CheckBox) findViewById( R.id.svg_linedir )).setChecked( TDSetting.mSvgLineDirection );
+    ((CheckBox) findViewById( R.id.svg_stations )).setChecked( TDSetting.mSvgStations );
     ((CheckBox) findViewById( R.id.svg_splays )).setChecked( TDSetting.mSvgSplays );
     ((CheckBox) findViewById( R.id.svg_xsections )).setChecked( TDSetting.mAutoXSections );
     ((CheckBox) findViewById( R.id.svg_groups)).setChecked( TDSetting.mSvgGroups );

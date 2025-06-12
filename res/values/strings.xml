@@ -1249,6 +1249,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_xvi">Xvi images</string>
     <string name="export_with_xsections">Include X-sections</string>
     <string name="export_grouped">Group elements in layers by type</string>
+    <string name="export_origin">Origin station</string>
     <string name="export_with_reference">Include XY reference</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->

@@ -636,13 +636,18 @@ The "shot" DBF contains the fields
 
 <b id="svg">SVG</b> ".svg"<br>
 Sketches can be exported as SVG files.<br>
+Sketch exports do not share a common frame of reference, but each sketch export has its
+own frame.<br>
+The magnetic declination is not taken into account in the export.<br>
+<br><p>
+
 Items are organized in layers: <i>sketch grids</i>, <i>stations</i>, <i>legs</i>, <i>splays</i>,
 <i>points</i>, <i>lines</i>, and <i>areas</i>.<br>
 These layers are under a global <i>canvas</i> layer.<br>
 Each "scrap" has its  <i>points</i>, <i>lines</i>, and <i>areas</i> layers.<br>
 <br><p>
 
-The export scale is 1:100.
+The default export scale is 1:100.
 <br><p>
 
 If splay classes are enabled, the splays are colored be the class: normal splay are gray,
@@ -666,6 +671,7 @@ otherwise only the user-chosen stations are included</li>
 <li><u>line direction</u> tick [no]</li> 
 <li><u>lines width</u>: labels, icons, lines (and area borders), sketch grid lines, shots, orientation stroke</li>
 <li><u>station size</u>: station names text-size. Default 20</li>
+<li><u>origin</u>: whether to highlight the origin station with a orange cross [only in the export dialog]</li> 
 </ul><p>
 
 

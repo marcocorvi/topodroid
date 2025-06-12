@@ -805,6 +805,40 @@ public class DrawingSvgBase
     printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
     out.write( end_grp ); // grid
   }
+
+  /** 
+   * @param out   output writer
+   * @param x     X position (offset.X + center.X)
+   * @param y     Y position
+   */
+  protected void writeOrigin( BufferedWriter out, float x, float y )
+  {
+    float delta = TDSetting.mSvgStationSize * 0.8f;
+    // TDLog.v( "SVG grid");
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
+      // pw.format(Locale.US, "  <path class=\"%s\" d=\"", id ); 
+      pw.format(Locale.US, "  <path d=\"" ); 
+    // } else {
+    //   pw.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"#%s\" d=\"", TDSetting.mSvgGridStroke, "ff9900" );
+    // }
+    printPoint( pw, "M",  x+delta, y );
+    printPoint( pw, " L", x-delta, y );
+    printPoint( pw, "M",  x, y+delta );
+    printPoint( pw, " L", x, y-delta );
+    pw.format("\" />\n");
+    try {
+      out.write("<g id=\"origin\" class=\"origin\"\n" );
+      out.write("  style=\"fill:none;stroke-opacity:0.8\" >\n");
+      out.write( sw.getBuffer().toString() );
+      out.write( end_grp ); // origin
+      out.flush();
+    } catch ( IOException e ) {
+      TDLog.e( "SVG origin io-exception " + e.getMessage() );
+    }
+  }
+ 
  
   // strings
 
@@ -834,6 +868,7 @@ public class DrawingSvgBase
     out.write( "      .grid1 { stroke: #999999; stroke-opacity: 0.4; ");   out.write( grid_width );
     out.write( "      .grid10 { stroke: #666666; stroke-opacity: 0.6; ");  out.write( grid_width );
     out.write( "      .grid100 { stroke: #333333; stroke-opacity: 0.8; "); out.write( grid_width );
+    out.write( "      .origin { stroke: #ffcc00; stroke-opacity: 0.8; "); out.write( grid_width );
     out.write( "      .p_label { stroke: black; fill: black; "); out.write( label_width );
     out.write( "      .point { stroke: black; fill: none; " );   out.write( point_width );
     out.write( "      .legs { stroke: #882222; stroke-opacity: 0.6; fill: none; "); out.write( shot_width );

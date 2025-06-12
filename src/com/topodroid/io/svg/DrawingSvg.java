@@ -17,6 +17,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
@@ -60,16 +61,22 @@ public class DrawingSvg extends DrawingSvgBase
     float xmax = bbox.right;
     float ymin = bbox.top;
     float ymax = bbox.bottom;
-    int dx = (int)(xmax - xmin);
-    int dy = (int)(ymax - ymin);
-    if ( dx > 200 ) dx = 200;
-    if ( dy > 200 ) dy = 200;
-    xmin -= dx;  xmax += dx;
-    ymin -= dy;  ymax += dy;
+    float xoff = 0; // offset
+    float yoff = 0;
+    // if ( TDSetting.mSvgOffset ) 
+    {
+      int dx = (int)(xmax - xmin); // additional border
+      int dy = (int)(ymax - ymin);
+      if ( dx > 200 ) dx = 200;
+      if ( dy > 200 ) dy = 200;
+      xmin -= dx;  xmax += dx;
+      ymin -= dy;  ymax += dy;
+      xoff = - xmin;
+      yoff = - ymin;
+    }
+
     int width  = (int)(xmax - xmin);
     int height = (int)(ymax - ymin);
-    float xoff = - xmin; // offset
-    float yoff = - ymin;
 
     try {
       // if ( TDSetting.mSvgInHtml ) out.write("<!DOCTYPE html>\n<html>\n<body>\n");
@@ -149,6 +156,18 @@ public class DrawingSvg extends DrawingSvgBase
 
       if ( TDSetting.mSvgGrid ) {
         writeGrid( out, plot, xoff, yoff, xmin, ymin, xmax, ymax );
+      }
+
+      if ( TDSetting.mSvgOrigin ) {
+        NumStation origin = num.getOrigin();
+        if ( num != null ) {
+          DrawingStationName st = plot.getStation( origin.name );
+          if ( st != null ) { 
+            float x = xoff + st.cx;
+            float y = yoff + st.cy;
+            writeOrigin( out, x, y );
+          }
+        }
       }
 
       // centerline data
@@ -271,12 +290,14 @@ public class DrawingSvg extends DrawingSvgBase
       // TDLog.v( "SVG stations " + plot.getStations().size() );
       out.write("<g id=\"stations\"" + group_mode_open);
       if ( TDSetting.mAutoStations ) {
-        for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-          StringWriter sw61 = new StringWriter();
-          PrintWriter pw61  = new PrintWriter(sw61);
-          toSvg( pw61, name, xoff, yoff );
-          out.write( sw61.getBuffer().toString() );
-          out.flush();
+        if ( TDSetting.mSvgStations ) {
+          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+            StringWriter sw61 = new StringWriter();
+            PrintWriter pw61  = new PrintWriter(sw61);
+            toSvg( pw61, name, xoff, yoff );
+            out.write( sw61.getBuffer().toString() );
+            out.flush();
+          }
         }
       } else {
         for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen

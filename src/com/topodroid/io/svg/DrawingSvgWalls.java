@@ -14,6 +14,7 @@ package com.topodroid.io.svg;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.TDX.DrawingStationUser;
@@ -167,16 +168,21 @@ public class DrawingSvgWalls extends DrawingSvgBase
     float xmax = bbox.right;
     float ymin = bbox.top;
     float ymax = bbox.bottom;
-    int dx = (int)(xmax - xmin);
-    int dy = (int)(ymax - ymin);
-    if ( dx > 200 ) dx = 200;
-    if ( dy > 200 ) dy = 200;
-    xmin -= dx;  xmax += dx;
-    ymin -= dy;  ymax += dy;
+    float xoff = 0; // offset
+    float yoff = 0;
+    // if ( TDSetting.mSvgOffset ) 
+    {
+      int dx = (int)(xmax - xmin);
+      int dy = (int)(ymax - ymin);
+      if ( dx > 200 ) dx = 200;
+      if ( dy > 200 ) dy = 200;
+      xmin -= dx;  xmax += dx;
+      ymin -= dy;  ymax += dy;
+      xoff = - xmin; // offset
+      yoff = - ymin;
+    }
     int width  = (int)((xmax - xmin));
     int height = (int)((ymax - ymin));
-    float xoff = - xmin; // offset
-    float yoff = - ymin;
     // xoff + xmin = 0
     // xoff + xmax = xmax - xmin = width
     // xmin xmax are used only for the grids
@@ -393,12 +399,14 @@ public class DrawingSvgWalls extends DrawingSvgBase
       // TDLog.v("survey: LABELS");
       out.write(       group_labels ); out.write( group_mode_open );
       if ( TDSetting.mAutoStations ) {
-        StringWriter sw6s = new StringWriter();
-        PrintWriter pw6s  = new PrintWriter(sw6s);
-        for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-          toSvg( pw6s, name, xoff, yoff );
+        if ( TDSetting.mSvgStations ) {
+          StringWriter sw6s = new StringWriter();
+          PrintWriter pw6s  = new PrintWriter(sw6s);
+          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+            toSvg( pw6s, name, xoff, yoff );
+          }
+          out.write( sw6s.getBuffer().toString() );
         }
-        out.write( sw6s.getBuffer().toString() );
       } else {
         if ( plot.hasUserStations() ) {
           StringWriter sw7s = new StringWriter();
@@ -450,6 +458,18 @@ public class DrawingSvgWalls extends DrawingSvgBase
         writeGrid( out, plot, xoff, yoff, xmin, ymin, xmax, ymax );
       }
       out.write( "    " + end_grp ); // group_grids
+
+      if ( TDSetting.mSvgOrigin ) {
+        NumStation origin = num.getOrigin();
+        if ( num != null ) {
+          DrawingStationName st = plot.getStation( origin.name );
+          if ( st != null ) { 
+            float x = xoff + st.cx;
+            float y = yoff + st.cy;
+            writeOrigin( out, x, y );
+          }
+        }
+      }
 
       out.write(     group_legend );     out.write( group_mode_open );
       out.write(       group_scalebar ); out.write( group_mode_close );
