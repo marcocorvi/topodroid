@@ -2,8 +2,8 @@
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Scarico manuale utente dal web non riuscito</string>
-    <string name="user_man_ok">Istallata la traduzione del manuale utente</string>
-    <string name="user_man_fail">Errore nella istallazione del manuale utente [%1$d]</string>
+    <string name="user_man_ok">Installata la traduzione del manuale utente</string>
+    <string name="user_man_fail">Errore nella installazione del manuale utente [%1$d]</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -812,7 +812,7 @@
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
-    <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Istallata v. %2$d</string>
+    <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Installata v. %2$d</string>
 
     <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>
@@ -1021,7 +1021,7 @@
     <!-- UNUSED string name="hint_longitude">longitudine</string -->
     <!-- UNUSED string name="hint_altitude">altitudine</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitudine (asl)</string -->
-    <!-- UNUSED string name="hint_declination">declinatione</string -->
+    <!-- UNUSED string name="hint_declination">declinazione</string -->
     <string name="hint_station">caposaldo</string>
 
     <string name="orientation">orientamento</string>

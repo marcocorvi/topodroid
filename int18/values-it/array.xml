@@ -2,23 +2,23 @@
 
 <resources>
   <!-- TODO string-array name="teamNames">
-     <item name="plain">Text plain</item>
-     <item name="separated">Text separated</item>
-     <item name="dialog">Dialog</item>
+     <item name="plain">Testo</item>
+     <item name="separated">Testo con separatori</item>
+     <item name="dialog">Dialogo</item>
   </string-array -->
 
   <!-- TODO string-array name="bricMode">
-     <item name="prim_only">Prim. only</item>
-     <item name="all">All info</item>
+     <item name="prim_only">Solo Prim.</item>
+     <item name="all">Tutte le info</item>
   </string-array -->
 
   <!-- TODO string-array name="geoImportApp">
-     <item name="none">non-specified</item>
-     <item name="mobile_topographer">Mobile Topographer</item>
-     <item name="gpx_recorder">GPX Recorder</item>
-     <item name="gps_position">GPS Position</item>
-     <item name="gps_test">GPSTest</item>
-     <item name="gps_logger">GPS Logger</item>
+     <item name="none">Non specificato</item>
+     <item name="mobile_topographer">Topografo mobile</item>
+     <item name="gpx_recorder">Registratore GPXr</item>
+     <item name="gps_position">Posizione GPS</item>
+     <item name="gps_test">GPS-Test</item>
+     <item name="gps_logger">GPS-Logger</item>
   </string-array -->
 
   <string-array name="orientation">
