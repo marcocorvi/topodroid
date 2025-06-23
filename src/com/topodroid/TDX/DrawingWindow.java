@@ -2501,14 +2501,11 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** set the params of the tools toolbar
+   * @NOTE called by TopoDroidApp when toolbar size setting is changed
    */
   public void setToolsToolbarParams()
   {
     float scale = 8 * TDSetting.mItemButtonSize;
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 0, 0, 0 );
-    lp.weight = 16;
-    lp.gravity = 0x10; // LinearLayout.LayoutParams.center_vertical;
     {
       ViewGroup.LayoutParams lp0;
       lp0 = mLayoutToolsP.getLayoutParams();
@@ -2524,6 +2521,11 @@ public class DrawingWindow extends ItemDrawer
       lp0.height = (int)(scale * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
       mLayoutToolsA.setLayoutParams( lp0 );
     }
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 0, 0, 0 );
+    lp.weight = 16;
+    lp.gravity = 0x10; // LinearLayout.LayoutParams.center_vertical;
+
     mLayoutToolsP.removeAllViews( );
     mLayoutToolsL.removeAllViews( );
     mLayoutToolsA.removeAllViews( );
@@ -2730,6 +2732,35 @@ public class DrawingWindow extends ItemDrawer
     } );
     mLayoutTools.setVisibility( View.INVISIBLE );
 
+    resetRecentTools();
+
+    // setBtnRecentAll(); done on Start
+    // mRecentTools = mRecentLine; // done on Start
+
+    if ( mDataDownloader != null ) {
+      mApp.registerLister( this );
+    } 
+
+    mBTstatus = ConnectionState.CONN_DISCONNECTED;
+    TopoDroidApp.mDrawingWindow = this;
+
+    // if ( mApp.hasHighlighted() ) {
+    //   // TDLog.v( "drawing window [2] highlighted " + mApp.getHighlightedSize() );
+    //   mDrawingSurface.highlights( mApp );
+    //   TopoDroidApp.mShotWindow.clearMultiSelect();
+    // }
+
+    // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
+
+    setTheTitle();
+  }
+
+  /** reset the recent toolbars
+   * @NOTE called by TopoDroidApp when the symbol-size setting is changed
+   */
+  void resetRecentTools()
+  {
+    TDLog.v("RESET recent tools - symbol size " + TDSetting.mSymbolSize );
     mBtnRecentP = new ItemButton[ NR_RECENT + 1 ];
     mBtnRecentL = new ItemButton[ NR_RECENT + 1 ];
     mBtnRecentA = new ItemButton[ NR_RECENT + 1 ];
@@ -2812,25 +2843,6 @@ public class DrawingWindow extends ItemDrawer
     );
 
     setToolsToolbarParams();
-    // setBtnRecentAll(); done on Start
-    // mRecentTools = mRecentLine; // done on Start
-
-    if ( mDataDownloader != null ) {
-      mApp.registerLister( this );
-    } 
-
-    mBTstatus = ConnectionState.CONN_DISCONNECTED;
-    TopoDroidApp.mDrawingWindow = this;
-
-    // if ( mApp.hasHighlighted() ) {
-    //   // TDLog.v( "drawing window [2] highlighted " + mApp.getHighlightedSize() );
-    //   mDrawingSurface.highlights( mApp );
-    //   TopoDroidApp.mShotWindow.clearMultiSelect();
-    // }
-
-    // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
-
-    setTheTitle();
   }
 
   // ------------------------------------- PUSH / POP INFO --------------------------------
@@ -3115,7 +3127,7 @@ public class DrawingWindow extends ItemDrawer
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
     mOutlinePlot2 = null;
-    setBtnRecentAll(); 
+    // setBtnRecentAll(); // FIXME this is done onResume
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
     setMenuAdapter( getResources(), mType );
     closeMenu();
@@ -4224,7 +4236,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // ----------------------------------------------------------------
-  //
+  /*
   private void dumpEvent( MotionEventWrap ev )
   {
     String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
@@ -4240,13 +4252,15 @@ public class DrawingWindow extends ItemDrawer
       sb.append( "#" ).append( i );
       sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
       if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
+      // normal stylus has TYPE 1 and PRESSURE 1.0
+      // sumsung pen has TYPE 2 and variable PRESSURE between 0.0 and 1.0
       sb.append(" ").append( ev.getToolType(i) );
       sb.append(" ").append( ev.getPressure(i) );
     }
     sb.append( "]" );
     TDLog.v( sb.toString() );
   }
-  //
+  */
 
   /** @return the spacing between the first two pointers in the event
    * @param ev    screen event
@@ -8316,6 +8330,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setMenuAdapter( Resources res, long type )
   {
+    TDLog.v("Drawing Activity set menu adapter");
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     if ( PlotType.isSketch2D( type ) && TDLevel.overNormal && ! mTh2Edit ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[0] ) ); // SWITCH/CLOSE
@@ -10051,7 +10066,8 @@ public class DrawingWindow extends ItemDrawer
       Symbol p = recents[k];
       if ( p == null || buttons[k] == null ) break;
       if ( p.isPoint() && p.isSection() ) continue;
-      buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+      if ( p.isPoint() ) TDLog.v("SET button point " + p.getThName() );
+      buttons[kk].resetPaintPath( p.getPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY );
       buttons[kk].invalidate();
       ++kk;
     }

@@ -1673,6 +1673,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string>
   <string name="pref_text_size_title">Text size</string>
   <string name="pref_text_size_summary">Size of text in lists</string>
+  <string name="pref_symbol_size_title">Symbol size</string>
+  <string name="pref_symbol_size_summary">Size of symbols in bottom bar</string>
   <string name="pref_closeness_title">Selection radius</string>
   <string name="pref_closeness_message">Sketch item selection radius</string>
   <string name="pref_eraseness_title">Eraser size</string>

@@ -38,6 +38,7 @@ class TDPrefKey
     // "DISTOX_CWD",           // CWD must be the last of primary preferences
     "DISTOX_TEXT_SIZE",     // size of text [pt]
     "DISTOX_SIZE_BUTTONS",  // size of buttons (S, N, M, L, XL)
+    "DISTOX_SYMBOL_SIZE",   // symbol size
     "DISTOX_EXTRA_BUTTONS", // Activity Level
     // "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
     // "DISTOX_NO_CURSOR",     // no cursor for custom keyboard
@@ -60,6 +61,7 @@ class TDPrefKey
     // R.string.pref_cwd_title,
     R.string.pref_text_size_title,
     R.string.pref_size_buttons_title,
+    R.string.pref_symbol_size_title,
     R.string.pref_extra_buttons_title,
     // R.string.pref_mkeyboard_title,
     // R.string.pref_no_cursor_title,
@@ -82,6 +84,7 @@ class TDPrefKey
     // -1,
     R.string.pref_text_size_summary,
     R.string.pref_size_buttons_summary,
+    R.string.pref_symbol_size_summary,
     R.string.pref_extra_buttons_summary,
     // R.string.pref_mkeyboard_summary,
     // R.string.pref_no_cursor_summary,
@@ -104,7 +107,8 @@ class TDPrefKey
      // "TopoDroid",
      TDString.TWENTY, // TEXT_SIZE
      TDString.ONE,    // BUTTON_SIZE
-     TDString.ONE,    // SYMBOL_SIZE
+     "1.8",           // SYMBOL SIZE
+     TDString.ONE,    // BUTTON SIZE
      // FALSE,           // CUSTOM KEYBOARD
      // TRUE,            // NO CURSOR
      TDString.ZERO,   // USER MANUAL
@@ -125,7 +129,8 @@ class TDPrefKey
   static int[] MAINlvl = {
      B, // TEXT_SIZE
      B, // BUTTON_SIZE
-     B, // SYMBOL_SIZE
+     B, // SYMBOL SIZE
+     B, // ACTIVITY LEVEL
      // ,           // CUSTOM KEYBOARD
      // ,            // NO CURSOR
      A, // USER MANUAL

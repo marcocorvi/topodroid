@@ -75,6 +75,7 @@ public class TDSetting
 
   private static String defaultTextSize   = "16";
   private static String defaultButtonSize = TDString.THREE;
+  private static String defaultSymbolSize = "1.8";
 
   private static int FLAG_BUTTON = 1;
   private static int FLAG_MENU   = 2;
@@ -126,6 +127,16 @@ public class TDSetting
       mTextSize = MIN_SIZE_TEXT;
       mMainFlag |= FLAG_TEXT;
       return Integer.toString( mTextSize );
+    }
+    return null;
+  }
+
+  public static String setSymbolSize( float fs )
+  {
+    if ( fs > 0.1f && fs != mSymbolSize ) {
+      mSymbolSize = fs;
+      TopoDroidApp.resetRecentTools();
+      return Float.toString( mSymbolSize );
     }
     return null;
   }
@@ -215,6 +226,7 @@ public class TDSetting
   public static int mSizeBtns     = 0;      // action bar buttons scale (3: medium)
   public static int mSizeButtons  = BTN_SIZE_UNUSED;     // default 52 
   public static int mTextSize     = 16;     // list text size 
+  public static float mSymbolSize = 1.8f;   // symbol size
   public static boolean mKeyboard = false;
   public static boolean mNoCursor = true;
   public static boolean mLocalManPages = true;
@@ -1007,7 +1019,7 @@ public class TDSetting
     // ------------------- GENERAL PREFERENCES
     String[] keyMain = TDPrefKey.MAIN;
     String[] defMain = TDPrefKey.MAINdef;
-    int level = Integer.parseInt( prefs.getString( keyMain[2], defMain[2] ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
+    int level = Integer.parseInt( prefs.getString( keyMain[3], defMain[3] ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
     String[] keyGeek = TDPrefKey.GEEK;
@@ -1027,9 +1039,11 @@ public class TDSetting
 
     setTextSize( tryInt(    prefs,     keyMain[0], defMain[0] ) );      // DISTOX_TEXT_SIZE
     setSizeButtons( tryInt( prefs,     keyMain[1], defMain[1] ) );      // DISTOX_SIZE_BUTTONS
-    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[3], defMain[3] ), false ); // DISTOX_LOCAL_MAN
-    setLocale( prefs.getString( keyMain[4], TDString.EMPTY ), false ); // DISTOX_LOCALE
-    mOrientation = Integer.parseInt( prefs.getString( keyMain[5], defMain[5] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
+    setSymbolSize( tryFloat( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SYMBOL_SIZE
+    // skip 3
+    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[4], defMain[4] ), false ); // DISTOX_LOCAL_MAN
+    setLocale( prefs.getString( keyMain[5], TDString.EMPTY ), false ); // DISTOX_LOCALE
+    mOrientation = Integer.parseInt( prefs.getString( keyMain[6], defMain[6] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1595,16 +1609,18 @@ public class TDSetting
       if ( setSizeButtons( tryIntValue( hlp, k, v, defaultButtonSize ) ) ) {
         TopoDroidApp.resetButtonBar();
       }
-    } else if ( k.equals( key[ 2 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
-      int level = tryIntValue( hlp, k, v, def[2] );
+    } else if ( k.equals( key[ 2 ] ) ) {             // DISTOX_SYMBOL_SIZE
+      ret = setSymbolSize( tryFloatValue( hlp, k, v, defaultSymbolSize ) );
+    } else if ( k.equals( key[ 4 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
+      int level = tryIntValue( hlp, k, v, def[3] );
       setActivityBooleans( hlp.getSharedPrefs(), level );
-    } else if ( k.equals( key[ 3 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
+    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
       // TDLog.v("SETTING handle local man pages - key " + k + " default " + def[6] );
-      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[3] ), true );
-    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_LOCALE (choice)
-      setLocale( tryStringValue( hlp, k, v, def[4] ), true );
-    } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_ORIENTATION (choice)
-      mOrientation = tryIntValue( hlp, k, v, def[5] );
+      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[4] ), true );
+    } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_LOCALE (choice)
+      setLocale( tryStringValue( hlp, k, v, def[5] ), true );
+    } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_ORIENTATION (choice)
+      mOrientation = tryIntValue( hlp, k, v, def[6] );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
     /* ---- IF_COSURVEY
@@ -3319,7 +3335,7 @@ public class TDSetting
       PrintWriter pw = new PrintWriter( fw, true ); // true = auto-flush
       pw.printf(Locale.US, "TopoDroid v. %s %d\n", TDVersion.string(), TDVersion.code() );
       pw.printf(Locale.US, "Buttons Size %d %d\n", mSizeBtns, mSizeButtons);
-      pw.printf(Locale.US, "Text Size %d \n", mTextSize);
+      pw.printf(Locale.US, "Text Size %d Symbol Size\n", mTextSize, mSymbolSize);
       pw.printf(Locale.US, "Level %d \n", TDLevel.mLevel );
       pw.printf(Locale.US, "Keyboard %c no-cursor %c \n", tf(mKeyboard), tf(mNoCursor) );
       pw.printf(Locale.US, "Local man %c \n", tf(mLocalManPages) );
@@ -3538,6 +3554,11 @@ public class TDSetting
               }
               setTextSize( size ); setPreference( editor, "DISTOX_TEXT_SIZE", mTextSize );
               // TDLog.v("Setting text size " + mTextSize );
+              if ( vals.length > 5 ) {
+                float fsize = getFloat( vals, 5, -1 );
+                if ( fsize < 0 ) { return false; }
+                setSymbolSize( fsize ); setPreference( editor, "DISTOX_SYMBOL_SIZE", mSymbolSize );
+              }
             } else {
               // TDLog.v("Setting text vals len " + vals.length );
               return false;

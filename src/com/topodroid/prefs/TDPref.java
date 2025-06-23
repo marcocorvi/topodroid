@@ -750,18 +750,19 @@ class TDPref implements AdapterView.OnItemSelectedListener
       // makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], ctx, hlp ), // DISTOX_CWD
       makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], INTEGER, ctx, hlp ),
       makeLst( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], R.array.sizeButtons, R.array.sizeButtonsValue, ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], R.array.extraButtons, R.array.extraButtonsValue, ctx, hlp ),
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.localUserMan, R.array.localUserManValue, ctx, hlp ),
-      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], R.array.locale, R.array.localeValue, ctx, hlp ),
-      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], R.array.orientation, R.array.orientationValue, ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT, ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.extraButtons, R.array.extraButtonsValue, ctx, hlp ),
+      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], R.array.localUserMan, R.array.localUserManValue, ctx, hlp ),
+      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], R.array.locale, R.array.localeValue, ctx, hlp ),
+      makeLst( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], R.array.orientation, R.array.orientationValue, ctx, hlp ),
       // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[8], def[ 8], ctx, hlp ), // IF_COSURVEY
-      makeFwd( cat, key[ 6], tit[ 6],          lvl[ 6],          ctx, hlp ),    // IMPORT EXPORT
-      makeFwd( cat, key[ 7], tit[ 7],          lvl[ 7],          ctx, hlp ),    // SURVEY DATA
-      makeFwd( cat, key[ 8], tit[ 8],          lvl[ 8],          ctx, hlp ),    // SKETCHING
-      makeFwd( cat, key[ 9], tit[ 9],          lvl[ 9],          ctx, hlp ),    // DEVICES
-      makeFwd( cat, key[10], tit[10],          lvl[10],          ctx, hlp ),    // CAVE3D
-      makeFwd( cat, key[11], tit[11],          lvl[11],          ctx, hlp ),    // GEEK
-      makeFwd( cat, key[12], tit[12],          lvl[12],          ctx, hlp ),    // EXPORT SETTINGS
+      makeFwd( cat, key[ 7], tit[ 7],          lvl[ 7],          ctx, hlp ),    // IMPORT EXPORT
+      makeFwd( cat, key[ 8], tit[ 8],          lvl[ 8],          ctx, hlp ),    // SURVEY DATA
+      makeFwd( cat, key[ 9], tit[ 9],          lvl[ 9],          ctx, hlp ),    // SKETCHING
+      makeFwd( cat, key[10], tit[10],          lvl[10],          ctx, hlp ),    // DEVICES
+      makeFwd( cat, key[11], tit[11],          lvl[11],          ctx, hlp ),    // CAVE3D
+      makeFwd( cat, key[12], tit[12],          lvl[12],          ctx, hlp ),    // GEEK
+      makeFwd( cat, key[13], tit[13],          lvl[13],          ctx, hlp ),    // EXPORT SETTINGS
     };
   }
 

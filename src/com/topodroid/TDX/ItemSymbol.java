@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date 
  *
- * @brief TopoDroid drawing
+ * @brief TopoDroid drawing symbol for symbol picker dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.ui.ItemButton;
 // import com.topodroid.common.SymbolType;
+import com.topodroid.prefs.TDSetting;
 
 // import java.util.ArrayList;
 
@@ -50,6 +51,7 @@ class ItemSymbol
    * @param type      symbol class (POINT, LINE, AREA)
    * @param index     symbol index
    * @param symbol    symbol interface
+   * @NOTE used only by the ItemPickerDialog
    */
   ItemSymbol( Context context, IItemPicker dialog, int type, int index, SymbolInterface symbol )
   {  
@@ -58,8 +60,8 @@ class ItemSymbol
     mSymbol = symbol;
     int pad = 4;
 
-    sx = Symbol.sizeX( mType );
-    sy = Symbol.sizeY( mType );
+    sx = Symbol.sizeX( mType, TDSetting.mSymbolSize );
+    sy = Symbol.sizeY( mType, TDSetting.mSymbolSize );
     // TDLog.v( "Item " + mType + "/" + mIndex + " " + mSymbol.getName() );
 
     LinearLayout ll = new LinearLayout( context );
@@ -76,7 +78,7 @@ class ItemSymbol
     // }
     lllp.setMargins(2,1,2,1);
 
-    mButton   = new ItemButton( context, mSymbol.getPaint(), mSymbol.getPath(), sx, sy, pad );
+    mButton = new ItemButton( context, mSymbol.getPaint(), mSymbol.getScaledPath(), sx, sy, pad );
     ll.addView( mButton, lllp );
 
     // if ( mUseText ) {
@@ -143,7 +145,7 @@ class ItemSymbol
   {
     // TDLog.v( "item " + mType + "/" + mIndex + " " + mSymbol.getName() + " set angle " + angle );
     if ( mSymbol.setAngle( angle ) ) {
-      mButton.resetPath( mSymbol.getPath(), sx, sy );
+      mButton.resetPath( mSymbol.getScaledPath(), sx, sy );
       mButton.invalidate();
     }
   }

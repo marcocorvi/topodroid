@@ -276,7 +276,7 @@ public class TopoDroidApp extends Application
   // public static TDPrefHelper mPrefHlp      = null;
   static SurveyWindow mSurveyWindow          = null; // FIXME ref Survey Activity
   public static ShotWindow mShotWindow       = null; // FIXME ref Shot Activity - public for prefs/TDSetting
-  public static DrawingWindow mDrawingWindow = null; // FIXME currently not used
+  public static DrawingWindow mDrawingWindow = null;
   public static MainWindow mMainActivity     = null; // FIXME ref Main Activity
   public static TopoGL mTopoGL               = null; // FIXME
 
@@ -285,6 +285,11 @@ public class TopoDroidApp extends Application
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
 
   static StationName mStationName = null;
+
+  public static void resetRecentTools() 
+  {
+    if ( mDrawingWindow != null ) mDrawingWindow.resetRecentTools();
+  }
 
   // static Device mDevice = null;
   // static int deviceType() { return (mDevice == null)? 0 : mDevice.mType; }

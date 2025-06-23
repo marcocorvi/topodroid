@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
 
@@ -77,8 +78,8 @@ class EnableSymbol implements View.OnClickListener
     // mMustSave = false;
     mSymbol = symbol;
     mEnabled = mSymbol.isEnabled();
-    sx = Symbol.sizeX( mType );
-    sy = Symbol.sizeY( mType );
+    sx = Symbol.sizeX( mType, TDSetting.mSymbolSize );
+    sy = Symbol.sizeY( mType, TDSetting.mSymbolSize );
   }
 
 }

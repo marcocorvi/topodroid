@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date 
  *
- * @brief TopoDroid 
+ * @brief TopoDroid symbol adapter for symble enable dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -96,7 +96,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     // holder.mCheckBox.setText( b.getName() );
     holder.mTextView.setText( b.getName() );
     holder.mGroupView.setText( b.getGroupName() );
-    holder.mButton.resetPaintPath( b.mSymbol.getPaint(), b.mSymbol.getPath(), b.sx, b.sy );
+    holder.mButton.resetPaintPath( b.mSymbol.getPaint(), b.mSymbol.getScaledPath(), b.sx, b.sy );
     convertView.invalidate();
     return convertView;
   }

@@ -213,6 +213,14 @@ public class Symbol implements SymbolInterface
    */
   public Path   getPath()       { return null; }
 
+  /** @return the symbol scaled path - default to getPath()
+   */
+  public Path   getScaledPath() { return getPath(); }
+
+  // /** @return the original path
+  //  */
+  // public Path   getOrigPath()       { return null; }
+
   /** @return true if the symbol is orientable - default to false
    */
   public boolean isOrientable() { return false; }
@@ -277,12 +285,12 @@ public class Symbol implements SymbolInterface
   /** @return the symbol X-dimension
    * @param type   symbol type (point, line, or area)
    */
-  static float sizeX( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * sizeFactorXP : TDSetting.mUnitIcons * sizeFactorXL; }
+  static float sizeX( int type, float unit ) { return ( type == SymbolType.POINT )? unit * sizeFactorXP : unit * sizeFactorXL; }
 
   /** @return the symbol Y-dimension
    * @param type   symbol type (point, line, or area)
    */
-  static float sizeY( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * sizeFactorYP : TDSetting.mUnitIcons * sizeFactorYL; }
+  static float sizeY( int type, float unit ) { return ( type == SymbolType.POINT )? unit * sizeFactorYP : unit * sizeFactorYL; }
 
   /** @return the therion name, removing the "u:" prefix if present
    * @param name  full therion name
