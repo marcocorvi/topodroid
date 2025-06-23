@@ -1655,8 +1655,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_pt_color_map_summary">PocketTopo szín jelkulcs (PocketTopo import)</string>
   <string name="pref_text_size_title">Betűméret</string>
   <string name="pref_text_size_summary">Lista elemek betűmérete</string>
-  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
-  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
+  <string name="pref_symbol_size_title">Szimbólum méret</string>
+  <string name="pref_symbol_size_summary">Alsó választó sáv szimbólum méret</string>
   <string name="pref_closeness_title">Kijelölési sugár</string>
   <string name="pref_closeness_message">Vázlat elemek kijelölési sugara</string>
   <string name="pref_eraseness_title">Radír méret</string>
