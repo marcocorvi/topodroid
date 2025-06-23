@@ -1635,6 +1635,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_pt_color_map_summary">Couleur de la topo PocketTopo (PocketTopo import)</string>
     <string name="pref_text_size_title">Taille du texte</string>
     <string name="pref_text_size_summary">Taille du texte des éléments de liste</string>
+  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
+  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
     <string name="pref_closeness_title">Rayon de sélection</string>
     <string name="pref_closeness_message">Portée de la zone de sélection</string>
     <string name="pref_eraseness_title">Taille de la gomme</string>

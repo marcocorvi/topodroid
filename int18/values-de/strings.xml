@@ -1536,6 +1536,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
   <string name="pref_text_size_title">Schriftgröße</string>
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
+  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
+  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
   <string name="pref_closeness_title">Auswählradius</string>
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
   <string name="pref_eraseness_title">Löschradius</string>

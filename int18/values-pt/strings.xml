@@ -1546,6 +1546,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_pt_color_map_summary">Mapa de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tam texto</string>
   <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
+  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
+  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
   <string name="pref_closeness_title">Raio seleção</string>
   <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
   <string name="pref_eraseness_title">Tam borracha</string>

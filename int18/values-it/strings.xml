@@ -1646,6 +1646,8 @@
   <string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
+  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
+  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
   <string name="pref_closeness_title">Raggio di selezione</string>
   <string name="pref_closeness_message">Raggio di selezione oggetti disegno</string>
   <string name="pref_eraseness_title">Raggio del cancellino</string>

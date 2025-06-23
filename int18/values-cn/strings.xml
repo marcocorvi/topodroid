@@ -1647,6 +1647,8 @@
   <string name="pref_pt_color_map_summary">PocketTopo地图颜色(PocketTopo输入)</string>
   <string name="pref_text_size_title">字体大小</string>
   <string name="pref_text_size_summary">列表中字体大小</string>
+  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
+  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
   <string name="pref_closeness_title">选择边界范围</string>
   <string name="pref_closeness_message">草图项目选择半径</string>
   <string name="pref_eraseness_title">橡皮擦尺寸</string>

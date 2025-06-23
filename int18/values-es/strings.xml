@@ -1636,6 +1636,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
   <string name="pref_text_size_title">Tamaño del texto</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
+  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
+  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
   <string name="pref_closeness_title">Selección nodo</string>
   <string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string>
   <string name="pref_eraseness_title">Tamaño goma de borrar</string>
