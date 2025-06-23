@@ -107,7 +107,7 @@
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
     <string name="failed_snap_to_splays">Рядом нет бокового замера чтобы привязать к нему эту линию</string>
     <string name="failed_append_to_line">Не удалось добавить новую линию к существующей</string>
-    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
+    <string name="failed_zoomfit">Не удалось вместить в экран</string>
 
     <string name="bric_device">Прибор %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -163,10 +163,10 @@
     <string name="magn_dip">Магн. наклон &#8230;</string>
     <string name="auto_calib">Авто калибровка</string>
     <string name="autocalib_not_supported">Необходимый расчет калибровки</string>
-    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
-    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
-    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
-    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+    <string name="recalibrate_with">Пересчитать замеры с %1$s</string>
+    <string name="recalibrate_none">Калибровка не выбрана</string>
+    <string name="recalibrate_no_cavway">Не является калибровкой Cavway</string>
+    <string name="recalibrate_no_coeff">Нет калибровочных коэффициентов</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -1254,7 +1254,7 @@
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
-    <!-- TODO string name="title_recalibrate">Calibrations</string -->
+    <string name="title_recalibrate">Калибровки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

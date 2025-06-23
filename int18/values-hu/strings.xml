@@ -1769,8 +1769,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_extend_frac_summary">A "kiterítés"-nek lehet-e tizedes része</string>
   <string name="pref_recent_shot_title">Legutóbbi mérés</string>
   <string name="pref_recent_shot_summary">Az utolsó mérés kiemelése</string>
-  <string name="pref_drawing_unit_title">Pont eszközök méretaránya</string>
-  <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
+  <string name="pref_drawing_unit_title">Pont szimbólumok méretaránya</string>
+  <string name="pref_drawing_unit_summary">Pont ikonok/szimbólumok méretaránya</string>
   <string name="pref_unscaled_points_title">Pont nagyítás</string>
   <string name="pref_unscaled_points_summary">A pont tipusú jelkulcs elemek nem nagyíthatóak</string>
   <string name="pref_segment_title">Vonal-pont távolság</string>
