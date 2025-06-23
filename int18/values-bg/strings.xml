@@ -113,7 +113,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="failed_snap_to_point">Няма близка точка, към която да се прикачи избраната точка</string>
     <string name="failed_snap_to_splays">Няма близки измервания, към които да се прикачи линията</string>
     <string name="failed_append_to_line">Неуспешно прикачане към друга линия</string>
-    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
+    <string name="failed_zoomfit">Неуспешно побиране на екрана</string>
 
     <string name="bric_device">Устройство %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
