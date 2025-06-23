@@ -2760,7 +2760,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void resetRecentTools()
   {
-    TDLog.v("RESET recent tools - symbol size " + TDSetting.mSymbolSize );
+    // TDLog.v("RESET recent tools - symbol size " + TDSetting.mSymbolSize );
     mBtnRecentP = new ItemButton[ NR_RECENT + 1 ];
     mBtnRecentL = new ItemButton[ NR_RECENT + 1 ];
     mBtnRecentA = new ItemButton[ NR_RECENT + 1 ];

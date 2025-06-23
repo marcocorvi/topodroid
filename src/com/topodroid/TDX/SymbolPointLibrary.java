@@ -132,6 +132,7 @@ public class SymbolPointLibrary extends SymbolLibrary
 
   /** @return the original drawing path of a point
    * @param k    point index
+   * @NOTE used by DrawingPointPath to reset path when therion scale is changed
    */
   Path getPointOrigPath( int k )
   {

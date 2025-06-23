@@ -126,6 +126,8 @@ public class SymbolPoint extends Symbol
   @Override public Path getPath( ) { return mPath; }
 
   /** @return the point original path
+   * @NOTE origPath could be stored with the path is computed
+   * @NOTE used by SimbolPointLibrary to get the original path before therion scale is applied
    */
   Path getOrigPath( )
   {
@@ -133,6 +135,8 @@ public class SymbolPoint extends Symbol
   }
 
   /** @return the point scaled path
+   * @NOTE used for symbol tollbar, picker, enabler 
+   * scaledPath could be precomputed, if recomputed every time symbolSize setting changes
    */
   public Path getScaledPath()
   {
