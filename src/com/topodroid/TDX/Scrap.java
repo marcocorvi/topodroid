@@ -1872,21 +1872,22 @@ public class Scrap
     }
   }
 
-  void scaleDrawing( float z, Matrix m )
-  {
-    if ( mCurrentStack != null ){
-      synchronized( TDPath.mCommandsLock ) {
-        for ( ICanvasCommand cmd : mCurrentStack ) {
-          cmd.scalePathBy( z, m );
-        }
-      }
-    }
-    if ( mSelection != null ) {
-      synchronized( TDPath.mSelectionLock ) {
-        mSelection.scaleSelectionBy( z, m );
-      }
-    }
-  }
+  // NOT USED
+  // void scaleDrawing( float z, Matrix m )
+  // {
+  //   if ( mCurrentStack != null ){
+  //     synchronized( TDPath.mCommandsLock ) {
+  //       for ( ICanvasCommand cmd : mCurrentStack ) {
+  //         cmd.scalePathBy( z, m );
+  //       }
+  //     }
+  //   }
+  //   if ( mSelection != null ) {
+  //     synchronized( TDPath.mSelectionLock ) {
+  //       mSelection.scaleSelectionBy( z, m );
+  //     }
+  //   }
+  // }
 
   void affineTransformDrawing( float[] mm, Matrix m )
   {

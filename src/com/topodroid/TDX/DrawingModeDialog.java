@@ -35,7 +35,9 @@ class DrawingModeDialog extends MyDialog
     private CheckBox mCBlatest;   // whether to show latest shots
     private CheckBox mCBstation;  // whether to show stations
     private CheckBox mCBgrid;     // whether to show the grid
-    private CheckBox mCBfixed;    // whether to show the grid
+    private CheckBox mCBfixed;    // whether to keep centerline fixed, ie, shift the drawing
+    private CheckBox mCBscrap;    // whether to shift only the current scrap
+
     // private CheckBox mCBscrap;    // sketch outlines
 
     private CheckBox mCBfloor = null;
@@ -74,6 +76,7 @@ class DrawingModeDialog extends MyDialog
       mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
+      mCBscrap   = (CheckBox) findViewById(R.id.cb_mode_scrap);
 
       if ( TDSetting.mWithLevels > 0 ) {
         mCBfloor = (CheckBox) findViewById(R.id.cb_layer_floor);
@@ -109,6 +112,7 @@ class DrawingModeDialog extends MyDialog
         mCBsplay.setVisibility( View.GONE );
         mCBlatest.setVisibility( View.GONE );
         mCBfixed.setVisibility( View.GONE );
+        mCBscrap.setVisibility( View.GONE );
         // mCBscrap.setVisibility( View.GONE );
       } else {
         mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
@@ -119,8 +123,10 @@ class DrawingModeDialog extends MyDialog
 	}
         if ( mParent != null && TDLevel.overAdvanced && TDSetting.mPlotShift ) {
           mCBfixed.setChecked( mParent.isShiftDrawing() );
+          mCBscrap.setChecked( mParent.isShiftScrap() );
         } else {
           mCBfixed.setVisibility( View.GONE );
+          mCBscrap.setVisibility( View.GONE );
         }
         // if ( ! TDLevel.overNormal ) mCBscrap.setVisibility( View.GONE );
       }
@@ -156,7 +162,7 @@ class DrawingModeDialog extends MyDialog
           if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
           if ( TDSetting.mShotRecent && mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
           if ( /* mParent != null && */ TDLevel.overAdvanced && TDSetting.mPlotShift ) {
-            mParent.setShiftDrawing( mCBfixed.isChecked() );
+            mParent.setShiftDrawing( mCBfixed.isChecked(), mCBscrap.isChecked() );
           }
         }
         if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;

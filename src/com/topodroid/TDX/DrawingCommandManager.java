@@ -684,9 +684,10 @@ public class DrawingCommandManager
 
   /** flip the sketch horizontally
    * @param z   current zoom
+   * @param flip_scrap  whether to flip only current scrap
    * @note from ICanvasCommand
    */
-  public void flipXAxis( float z )
+  public void flipXAxis( float z, boolean flip_scrap )
   {
     synchronized( TDPath.mGridsLock ) {
       flipXAxes( mGridStack1 );
@@ -707,15 +708,20 @@ public class DrawingCommandManager
       // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis(z);
     }
     synchronized( mSyncScrap ) {
-      for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
+      if ( flip_scrap ) {
+        if ( mCurrentScrap != null ) mCurrentScrap.flipXAxis( z );
+      } else {
+        for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
+      }
     }
   }
 
   /** shift the drawing: translate the drawing by (x,y)
    * @param x   X shift
    * @param y   Y shift
+   * @param shift_scrap whether to shift only the current scrap
    */
-  void shiftDrawing( float x, float y )
+  void shiftDrawing( float x, float y, boolean shift_scrap )
   {
     // if ( mStations != null ) {
     //   synchronized( TDPath.mStationsLock ) {
@@ -724,27 +730,36 @@ public class DrawingCommandManager
     //   }
     // }
     synchronized( mSyncScrap ) {
-      for ( Scrap scrap : mScraps ) scrap.shiftDrawing( x, y );
+      if ( shift_scrap ) {
+        if ( mCurrentScrap != null ) mCurrentScrap.shiftDrawing( x, y );
+      } else {
+        for ( Scrap scrap : mScraps ) scrap.shiftDrawing( x, y );
+      }
     }
   }
 
-  /** scale the drawing (by z)
-   * @param z    scale factor
-   */
-  void scaleDrawing( float z )
-  {
-    // if ( mStations != null ) {
-    //   synchronized( TDPath.mStationsLock ) {
-    //     for ( DrawingStationName st : mStations ) st.scaleBy( z );
-    //     for ( DrawingFixedName fx : mFixeds ) fx.scaleBy( z );
-    //   }
-    // }
-    Matrix m = new Matrix();
-    m.postScale(z,z);
-    synchronized( mSyncScrap ) {
-      for ( Scrap scrap : mScraps ) scrap.scaleDrawing( z, m );
-    }
-  }
+  // /** scale the drawing (by z)
+  //  * @param z    scale factor
+  //  * @param shift_scrap whether to scale only the current scrap
+  //  */
+  // void scaleDrawing( float z, boolean scale_scrap )
+  // {
+  //   // if ( mStations != null ) {
+  //   //   synchronized( TDPath.mStationsLock ) {
+  //   //     for ( DrawingStationName st : mStations ) st.scaleBy( z );
+  //   //     for ( DrawingFixedName fx : mFixeds ) fx.scaleBy( z );
+  //   //   }
+  //   // }
+  //   Matrix m = new Matrix();
+  //   m.postScale(z,z);
+  //   synchronized( mSyncScrap ) {
+  //     if ( scale_scrap ) {
+  //       if ( mCurrentScrap != null ) mCurrentScrap.scaleDrawing(z, m );
+  //     } else {
+  //       for ( Scrap scrap : mScraps ) scrap.scaleDrawing( z, m );
+  //     }
+  //   }
+  // }
 
   /** affine transform the drawing
    * @param a    transform A coeff
@@ -753,12 +768,13 @@ public class DrawingCommandManager
    * @param d    transform D coeff
    * @param e    transform E coeff
    * @param f    transform F coeff
+   * @param affine_scrap whether to transform only the current scrap
    *
    * the transformation is
    *   x' = a x + b y + c
    *   y' = d x + e y + f
    */
-  void affineTransformDrawing( float a, float b, float c, float d, float e, float f ) 
+  void affineTransformDrawing( float a, float b, float c, float d, float e, float f, boolean affine_scrap ) 
   {
     Matrix m = new Matrix();
     float[] mm = new float[9];
@@ -767,7 +783,11 @@ public class DrawingCommandManager
     mm[6] = 0; mm[7] = 0; mm[8] = 1;
     m.setValues( mm );
     synchronized( mSyncScrap ) {
-      for ( Scrap scrap : mScraps ) scrap.affineTransformDrawing( mm, m );
+      if ( affine_scrap ) {
+        if ( mCurrentScrap != null ) mCurrentScrap.affineTransformDrawing( mm, m );
+      } else {
+        for ( Scrap scrap : mScraps ) scrap.affineTransformDrawing( mm, m );
+      }
     }
   }
 

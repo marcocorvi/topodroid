@@ -923,6 +923,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
     <string name="mode_outline">Solo poligonal</string>
     <string name="mode_scale_ref">Barra de referencia de escala</string>
     <string name="mode_sections">Secciones</string>

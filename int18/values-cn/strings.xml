@@ -922,6 +922,7 @@
     <string name="mode_station">测点</string>
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">修复refs文件</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
     <string name="mode_outline">只显示轮廓</string>
     <string name="mode_scale_ref">比例尺参考</string>
     <string name="mode_sections">截面</string>

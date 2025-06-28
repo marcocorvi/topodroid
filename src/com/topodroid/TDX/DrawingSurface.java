@@ -577,11 +577,12 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   /** flip the profile - only profile manager
    * @param z   ???
+   * @param scrap  whether ti flip only the current scrap
    */
-  void flipProfile( float z )
+  void flipProfile( float z, boolean scrap )
   {
     if ( mCommandManager2 == null ) return;
-    mCommandManager2.flipXAxis( z );
+    mCommandManager2.flipXAxis( z, scrap );
   }
 
   // static Handler previewDoneHandler = new Handler()
@@ -1133,11 +1134,21 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void clearSelected() { commandManager.syncClearSelected(); }
 
-  void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }
+  /** shift the drawing
+   * @param x   X-shift
+   * @param y   Y-shift
+   * @param scrap whether to shift only the current scrap
+   */
+  void shiftDrawing( float x, float y, boolean scrap ) { commandManager.shiftDrawing( x, y, scrap ); }
 
-  void scaleDrawing( float z ) { commandManager.scaleDrawing( z ); }
+  // /** scrap drawing by a factor
+  //  * @param z  factor
+  //  * @param scrap whether to scale only the current scrap
+  //  */
+  // void scaleDrawing( float z, boolean scrap ) { commandManager.scaleDrawing( z, scrap ); }
 
-  void affineTransformDrawing( float a, float b, float c, float d, float e, float f ) { commandManager.affineTransformDrawing( a,b,c, d,e,f ); }
+  void affineTransformDrawing( float a, float b, float c, float d, float e, float f, boolean scrap ) 
+  { commandManager.affineTransformDrawing( a,b,c, d,e,f, scrap ); }
 
   // ---------------------------------------------------------------------
 

@@ -858,6 +858,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="mode_station">Messpunkte</string>
   <string name="mode_grid">Gitter</string>
   <string name="mode_fixed">Fester Rahmen</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
   <string name="mode_outline">Nur Umriss</string>
   <string name="mode_scale_ref">Massstab</string>
   <string name="mode_sections">Profile</string>

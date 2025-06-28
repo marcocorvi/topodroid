@@ -866,6 +866,7 @@ no campo abaixo e aperte o botão.
   <string name="mode_station">Bases</string>
   <string name="mode_grid">Grade</string>
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
   <string name="mode_outline">Contorno</string>
   <string name="mode_scale_ref">Escala</string>
   <string name="mode_sections">Cortes</string>

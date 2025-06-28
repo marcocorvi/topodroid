@@ -927,6 +927,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Fix ref.</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
     <string name="mode_sections">Metszetek</string>

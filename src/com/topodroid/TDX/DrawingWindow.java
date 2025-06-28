@@ -541,12 +541,21 @@ public class DrawingWindow extends ItemDrawer
   private boolean mPointerDown = false;
   private boolean mEditMove;      // whether moving the selected point
   private boolean mShiftMove;     // whether to move the canvas in point-shift mode
+
+  // TODO SHIFT should go in the DrawingState
   private boolean mShiftDrawing;  // whether to shift the drawing 
+  private boolean mScrapOnly;    // whether to shift only the current scrap
+
   private EraseCommand mEraseCommand = null;
 
   // used only by the DrawingModeDialog
-  void setShiftDrawing( boolean shift_drawing ) { mShiftDrawing = shift_drawing; }
+  void setShiftDrawing( boolean shift_drawing, boolean scrap_only ) 
+  { 
+    mShiftDrawing = shift_drawing;
+    mScrapOnly    = scrap_only;
+  }
   boolean isShiftDrawing() { return mShiftDrawing; }
+  boolean isShiftScrap()   { return mScrapOnly; }
 
   private int mHotItemType     = -1;
   private DrawingPath mHotPath = null;
@@ -2684,6 +2693,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; // resetStatus
     // mLastLinePath = null;
     mShiftDrawing = false;
+    mScrapOnly   = false;
     mDrawingState.reset();
     resetModified();
 
@@ -2858,6 +2868,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; 
     // mLastLinePath = null;
     mShiftDrawing = false;
+    mScrapOnly   = false;
     mDrawingState.reset();
     resetModified();
     setMode( MODE_MOVE ); // this setTheTitle() as well, and clearHotPath( INVISIBLE )
@@ -3059,6 +3070,7 @@ public class DrawingWindow extends ItemDrawer
       mSectionName  = null; // resetStatus
       // mLastLinePath = null;
       mShiftDrawing = false;
+      mScrapOnly   = false;
       mDrawingState.reset();
       resetModified();
 
@@ -4400,7 +4412,7 @@ public class DrawingWindow extends ItemDrawer
     } 
     // apply affine transform to sketch
     TDLog.v("Affine Transform C " + c + " F " + f ); 
-    mDrawingSurface.affineTransformDrawing( a, b, c, d, e, f );
+    mDrawingSurface.affineTransformDrawing( a, b, c, d, e, f, mScrapOnly );
     return 0;
   }
 
@@ -5414,9 +5426,9 @@ public class DrawingWindow extends ItemDrawer
         if ( TDLevel.overNormal ) {
           if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
     	    if ( mLandscape ) {
-              mDrawingSurface.shiftDrawing( -y_shift/mZoom, x_shift/mZoom );
+              mDrawingSurface.shiftDrawing( -y_shift/mZoom, x_shift/mZoom, mScrapOnly );
     	    } else {
-              mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
+              mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom, mScrapOnly );
     	    }
             modified();
           }
@@ -5426,7 +5438,7 @@ public class DrawingWindow extends ItemDrawer
         if ( event.getPointerCount() == 3 ) {
             int ret = affineTransformByEvent( event );
             TDLog.v("affine transform returns " + ret );
-            // mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
+            // mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f, mScrapOnly );
             saveEventPoint( event );
         } else {
           changeZoom( factor );
@@ -7018,12 +7030,13 @@ public class DrawingWindow extends ItemDrawer
 
     /** flip the profile sketch left/right
      * @param flip_shots whether to flip also the shots extend
+     * @param scrap      whether to flip only the current scrap
      * @note barrier and hiding shots are not flipped
      */
-    public void flipProfile( boolean flip_shots )
+    public void flipProfile( boolean flip_shots, boolean scrap )
     {
       // assert( mLastLinePath == null );
-      mDrawingSurface.flipProfile( mZoom );
+      mDrawingSurface.flipProfile( mZoom, scrap );
       if ( flip_shots ) {
         DBlock blk;
         for ( NumShot sh : mNum.getShots() ) {
@@ -7214,7 +7227,7 @@ public class DrawingWindow extends ItemDrawer
     setButton3Item( null );
   }
 
-  /** react to a user tap
+  /** ON CLICK: react to a user tap
    * @param view   tapped view
    */
   @Override

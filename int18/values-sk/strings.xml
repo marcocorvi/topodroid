@@ -934,6 +934,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="mode_station">Staničenie</string>
     <string name="mode_grid">Mriežka</string>
     <string name="mode_fixed">Bočný Posun</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
     <string name="mode_outline">Obrys</string>
     <string name="mode_scale_ref">Grafická mierka</string>
     <string name="mode_sections">Sekcie</string>

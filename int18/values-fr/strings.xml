@@ -921,6 +921,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="mode_station">Stations</string>
     <string name="mode_grid">Grille</string>
     <string name="mode_fixed">Références fixes</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
     <string name="mode_outline">Bordure ext. uniquement</string>
     <string name="mode_scale_ref">Barre d\'échelle de réf.</string>
     <string name="mode_sections">Sections</string>

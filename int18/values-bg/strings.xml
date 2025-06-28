@@ -927,6 +927,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="mode_station">Репери</string>
     <string name="mode_grid">Решетка</string>
     <string name="mode_fixed">Коригиране на референции</string>
+    <!-- TODO string name="mode_scrap">Current scrap only</string -->
     <string name="mode_outline">Само контур</string>
     <string name="mode_scale_ref">Лента за мащаб</string>
     <string name="mode_sections">Сечения</string>

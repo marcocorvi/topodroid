@@ -15,6 +15,12 @@
     android:checked="true"
     android:text="@string/flip_shots"
   />
+  <CheckBox android:id="@+id/scrap"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:checked="true"
+    android:text="@string/mode_scrap"
+  />
 
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent" 

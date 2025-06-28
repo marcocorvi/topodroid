@@ -78,6 +78,12 @@
         android:layout_height="wrap_content" 
         android:text="@string/mode_fixed"
         />
+      <CheckBox android:id="@+id/cb_mode_scrap"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_scrap"
+        />
 
     </LinearLayout>
 
