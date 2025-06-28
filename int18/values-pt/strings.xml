@@ -102,7 +102,7 @@ no campo abaixo e aperte o botão.
   <string name="failed_snap_to_point">Nenhum ponto de fechamento ao qual juntar o ponto</string>
   <string name="failed_snap_to_splays">Nenhuma medida auxiliar próxima a qual juntar a linha</string>
   <string name="failed_append_to_line">Falha ao conectar a outra linha</string>
-    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
+  <string name="failed_zoomfit">Falha ao ajustar à tela</string>
   <string name="bric_device">Dispositivo %1$s</string>
   <string name="bric_ble">BLE %1$s</string>
   <string name="bric_fw">Firmware %1$s</string>
@@ -155,10 +155,10 @@ no campo abaixo e aperte o botão.
   <string name="magn_dip">Inclinação mag. …</string>
   <string name="auto_calib" copyable="pt">Auto Calib</string>
   <string name="autocalib_not_supported">Cálculo obrigatório de calibração</string>
-    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
-    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
-    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
-    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+  <string name="recalibrate_with">Recalcular medidas com %1$s</string>
+  <string name="recalibrate_none">Nenhuma calibração selecionada</string>
+  <string name="recalibrate_no_cavway">Não é uma calibração Cavway</string>
+  <string name="recalibrate_no_coeff">Sem coeficientes de calibração</string>
 
   <string name="algorithm">Algoritmo:</string>
   <string name="auto">auto</string>
@@ -747,7 +747,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="h_section">CORTE H</string -->
   <!-- UNUSED string name="landscape">paisagem</string -->
   <string name="display_view">Mostrar em</string>
-    <!-- TODO string name="display_refresh">Refreshed display</string -->
+  <string name="display_refresh">Exibição atualizada</string>
   <string name="plan_view">planta baixa</string>
   <string name="profile_view">perfil</string>
   <string name="distox_err_ok">OK</string>
@@ -1181,7 +1181,7 @@ no campo abaixo e aperte o botão.
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
-    <!-- TODO string name="title_recalibrate">Calibrations</string -->
+  <string name="title_recalibrate">Calibrações</string>
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
   <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1547,8 +1547,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_pt_color_map_summary">Mapa de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tam texto</string>
   <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
-  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
-  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
+  <string name="pref_symbol_size_title">Tam símbolo</string>
+  <string name="pref_symbol_size_summary">Tamanho dos símbolos na barra inferior</string>
   <string name="pref_closeness_title">Raio seleção</string>
   <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
   <string name="pref_eraseness_title">Tam borracha</string>
