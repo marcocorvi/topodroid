@@ -917,7 +917,7 @@
     <string name="mode_station">Пикеты</string>
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
-    <!-- TODO string name="mode_scrap">Current scrap only</string -->
+    <string name="mode_scrap">Только текущий абрис</string>
     <string name="mode_outline">Только контур</string>
     <string name="mode_scale_ref">Шкала масштаба</string>
     <string name="mode_sections">Сечения</string>
