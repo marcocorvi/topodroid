@@ -891,8 +891,10 @@ public class DrawingDxf
                   DXF.printString( pw5, 0, "INSERT" );
                   DXF.printString( pw5, 8, layer2 );
                   DXF.printString( pw5, 2, "B_" + th_name );
-                  DXF.printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
-                  DXF.printFloat( pw5, 42, point.getScaleValue()*1.4f );
+                  //DXF.printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+                  //DXF.printFloat( pw5, 42, point.getScaleValue()*1.4f );
+		  DXF.printFloat( pw5, 41, point.getScaleValue()*TDSetting.mUnitIcons); //HBX unit
+                  DXF.printFloat( pw5, 42, point.getScaleValue()*TDSetting.mUnitIcons); //HBX unit
                   DXF.printFloat( pw5, 50, 360.0f-(float)(point.mOrientation) );
                   DXF.printXYZ( pw5, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, z, 0 );
                 }
@@ -1013,8 +1015,10 @@ public class DrawingDxf
             (TDSetting.mAcadLayer?  "SCRAP_" + Integer.toString( scrap ) : "P_"+th_name),
             "AcDbBlockReference" );
     DXF.printString( pw, 2, "B_" + th_name );
-    DXF.printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
-    DXF.printFloat( pw, 42, point.getScaleValue()*1.4f );
+    //DXF.printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+    //DXF.printFloat( pw, 42, point.getScaleValue()*1.4f );
+    DXF.printFloat( pw5, 41, point.getScaleValue()*TDSetting.mUnitIcons); //HBX unit
+    DXF.printFloat( pw5, 42, point.getScaleValue()*TDSetting.mUnitIcons); //HBX unit
     DXF.printFloat( pw, 50, 360.0f-(float)(point.mOrientation) );
     DXF.printXYZ( pw, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, z, 0 );
     return handle;
