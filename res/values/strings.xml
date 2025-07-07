@@ -2187,7 +2187,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_survey">Surveys</string>
     <string name="info_shot">Shots</string>
     <string name="info_station" copyable="fr">Stations</string>
-    <string name="info_length">Cave length</string>
+    <string name="info_length">Legs length</string>
     <string name="info_surface">Surface length</string>
     <string name="info_depth">Denivelation</string>
     <string name="info_volume" copyable="fr it pt">Volume</string>
