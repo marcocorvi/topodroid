@@ -241,16 +241,20 @@ public class DataHelper extends DataSetObservable
       TDLog.v( "DB open: app already has database " + db_name );
       return false;
     }
-    try {
-      // TDLog.v("DB ... try to open RW " + db_name);
-      myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
-      if ( myDB != null ) {
-        checkUpgrade();
-        return false;
+    int k = 1;
+    for ( ; k<=3; ++k ) {
+      try {
+        // TDLog.v("DB ... try to open RW " + db_name);
+        myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
+        if ( myDB != null ) {
+          checkUpgrade();
+          return false;
+        }
+      } catch ( SQLiteException e ) {
+        // if it OK to fail
+        TDLog.e( "Fail open DB R/W [" + k + "]: " +e.getMessage() );
+        if ( k < 3 ) TDUtil.slowDown( 200 );
       }
-    } catch ( SQLiteException e ) {
-      // if it OK to fail
-      TDLog.e( "Fail open DB R/W: " + e.getMessage() );
     }
     
     try {
@@ -7731,7 +7735,7 @@ public class DataHelper extends DataSetObservable
             +   " camera INTEGER default 0, "  // source_type
             +   " code TEXT default NIL, "     // geo-morphology code(s)
             +   " reftype INTEGER default 0, "     // reference item_type: 0 undefined, 1 shots, 2 plots
-            +   " format INTEGER deafult 0 " // image format: 0 jpeg, 1 png
+            +   " format INTEGER default 0 " // image format: 0 jpeg, 1 png
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"

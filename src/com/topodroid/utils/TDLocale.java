@@ -30,16 +30,18 @@ public class TDLocale
 {
   public static final boolean FIXME_LOCALE = false; // 6.0.33 true;
 
-  static Locale mLocale = null;
-  static String mLocaleStr = null;
+  static Locale mLocale    = Locale.getDefault();
+  static String mLocaleStr = mLocale.toString().substring(0,2);
 
   /** @return the current locale
    */
-  public static Locale getLocale() { return mLocale; }
+  public static Locale getLocale() { return (mLocale == null)? Locale.getDefault() : mLocale; }
 
   /** @return the locale country ISO code
    */
-  public static String getLocaleCode() { return mLocale.toString().substring(0,2); }
+  public static String getLocaleCode() 
+  { 
+    return ( (mLocale == null)?  Locale.getDefault() : mLocale ).toString().substring(0,2); }
 
   /** reset the locale
    * @note called by MainWindow

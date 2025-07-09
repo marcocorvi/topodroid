@@ -1636,7 +1636,7 @@ public class TopoDroidApp extends Application
     ManualCalibration.reset();
 
     if ( name != null && mData != null ) {
-      // TDLog.v( "set SurveyFromName <" + name + ">");
+      TDLog.v( "set Survey From Name <" + name + ">");
 
       TDInstance.sid = mData.setSurvey( name, datamode );
       if ( TDSetting.WITH_IMMUTABLE ) {
