@@ -2153,7 +2153,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="info_survey">Felmérések</string>
     <string name="info_shot">Mérések</string>
     <string name="info_station">Pontok</string>
-    <string name="info_length">Hossz</string>
+    <string name="info_length">Poligon hossz</string>
     <string name="info_surface">Felszín hossz</string>
     <string name="info_depth">Mélység</string>
     <string name="info_volume">Térfogat</string>
