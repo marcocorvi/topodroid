@@ -81,7 +81,8 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
   private final static String WHERE_SID_STATUS_FROM  = "surveyId=? AND status=? AND id>=?";
-  // private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
+  // private final static String WHERE_SID_STATUS_LEG   = "surveyId=? AND status=? AND leg=?";
+  private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_LEG     = "surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_FROM    = "surveyId=? AND fStation > \"\"";
   private final static String WHERE_ID_SID_LEG  = "id<=? AND surveyId=? AND fStation > \"\" AND tStation > \"\"";
@@ -964,6 +965,8 @@ public class DataHelper extends DataSetObservable
       stat.maxMillis = cursor.getLong(1);
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
+    stat.lengthSurvey = getSurveyLength( sid );
     return stat;
   }
 
@@ -5078,6 +5081,41 @@ public class DataHelper extends DataSetObservable
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
+  }
+
+  /** @return the survey length - do not count duplicate, surface, commented, and repeated legs
+   * @param sid   survey ID
+   */
+  private float getSurveyLength( long sid )
+  {
+    float length = 0;
+    ArrayList< String > names = new ArrayList<>();
+    Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation", "distance", "flag" },  // "leg"
+                    WHERE_SID_STATUS_LEG, new String[] { Long.toString(sid), Long.toString( 0 ) },
+                    null, null, null );
+    if (cursor.moveToFirst()) {
+      do {
+        if ( cursor.getLong(3) == 0 ) {
+          String name1 = cursor.getString(0) + "-" + cursor.getString(1);
+          String name2 = cursor.getString(1) + "-" + cursor.getString(0);
+          TDLog.v( "Name <" + name1 + "> <" + name2 + ">" );
+          boolean found = false;
+          for ( String name : names ) {
+            if ( name.equals( name1 ) || name.equals( name2 ) ) {
+              found = true;
+              break;
+            }
+          }
+          if ( ! found ) {
+            TDLog.v("not found");
+            names.add( name1 );
+            length += (float)(cursor.getDouble( 2 ));
+          }
+        }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return length;
   }
 
   /** @return the list of surveys

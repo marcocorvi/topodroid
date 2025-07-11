@@ -97,6 +97,7 @@ class DrawingStatDialog extends MyDialog
         TextView mTextSplay     = (TextView) findViewById(R.id.stat_splay);
         TextView mTextStation   = (TextView) findViewById(R.id.stat_station);
         TextView mTextLegSigma  = (TextView) findViewById(R.id.stat_leg_sigma);
+        TextView mTextSurveyLen = (TextView) findViewById(R.id.stat_survey_length);
         TextView mTextDangling  = (TextView) findViewById(R.id.stat_dangling);
         TextView mTextLoop      = (TextView) findViewById(R.id.stat_loop);
         TextView mTextComponent = (TextView) findViewById(R.id.stat_component);
@@ -114,6 +115,8 @@ class DrawingStatDialog extends MyDialog
         mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay, mNum.splaysNr() ) );
         mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation, mNum.stationsNr() ) );
         mTextLegSigma.setText( String.format( res.getString(R.string.stat_leg_sigma), mNum.legSigma()*100 ) );
+
+        mTextSurveyLen.setText( String.format( res.getString(R.string.stat_survey_length), mStat.lengthSurvey * unit, unit_str ) );
 
         if ( mNum.unattachedShotsNr() > 0 ) {
           mTextDangling.setText( String.format( res.getString(R.string.stat_dangling),

@@ -1611,7 +1611,7 @@ public class TDSetting
       }
     } else if ( k.equals( key[ 2 ] ) ) {             // DISTOX_SYMBOL_SIZE
       ret = setSymbolSize( tryFloatValue( hlp, k, v, defaultSymbolSize ) );
-    } else if ( k.equals( key[ 4 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
+    } else if ( k.equals( key[ 3 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
       int level = tryIntValue( hlp, k, v, def[3] );
       setActivityBooleans( hlp.getSharedPrefs(), level );
     } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
@@ -3127,6 +3127,7 @@ public class TDSetting
 
   private static void setActivityBooleans( SharedPreferences prefs, int level )
   {
+    TDLog.v("Level current " + TDLevel.mLevel + " set " + level );
     if ( level == TDLevel.mLevel ) return;
 
     if ( StationPolicy.policyDowngrade( level ) ) {

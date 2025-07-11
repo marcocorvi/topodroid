@@ -78,6 +78,7 @@ public class TDLevel
       mLevel = DEBUG; // N.B. this causes all DEBUG settings FIXME_FIXME
       TDLog.v("LEVEL: over tester");
     }
+    TDLog.v("LEVEL: " + mLevel );
   }
 
   public static void setLevelWithDebug( boolean with_debug )

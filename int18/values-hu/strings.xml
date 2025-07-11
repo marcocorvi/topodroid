@@ -770,6 +770,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="stat_surface">Felszíni mérések %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">Felszín Z %1$.1f %2$.1f %3$s</string -->
     <string name="stat_survey_z">Felmérés Z %1$.1f %2$.1f %3$s</string>
+    <!-- TODO string name="stat_survey_length">Survey length %1$.1f %2$s</string -->
     <string name="stat_wens">Ny %1$.0f  K %2$.0f  É %3$.0f  D %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
     <string name="shot_title">MÉRÉS %1$s - %2$s</string>

@@ -711,6 +711,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="stat_surface">Oberflächenmessungen: %1$d # %2$d %3$.1f %4$s</string>
   <!-- UNUSED string name="stat_surface_z">Surface denivelation %1$.1f %2$.1f %3$s</string -->
   <string name="stat_survey_z">Höhenunterschied %1$.1f %2$.1f %3$s</string>
+    <!-- TODO string name="stat_survey_length">Survey length %1$.1f %2$s</string -->
   <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
   <string name="stat_angle_error">Winkelfehler %1$.2f ± %2$.2f"</string>
   <string name="shot_title">Messung %1$s - %2$s"</string>

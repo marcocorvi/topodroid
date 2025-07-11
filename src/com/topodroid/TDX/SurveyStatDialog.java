@@ -67,6 +67,7 @@ class SurveyStatDialog extends MyDialog
       TextView mTextSurface   = (TextView) findViewById(R.id.stat_surface);
       TextView mTextSplay     = (TextView) findViewById(R.id.stat_splay);
       TextView mTextStation   = (TextView) findViewById(R.id.stat_station);
+      TextView mTextSurveyLen = (TextView) findViewById(R.id.stat_survey_len);
       TextView mTextLoop      = (TextView) findViewById(R.id.stat_loop);
       TextView mTextComponent = (TextView) findViewById(R.id.stat_component);
       TextView mTextStddevM   = (TextView) findViewById(R.id.stat_stddev_m);
@@ -91,6 +92,7 @@ class SurveyStatDialog extends MyDialog
                         mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );
       mTextSplay.setText( String.format( res.getString(R.string.survey_stat_splay), mStat.countSplay ) );
       mTextStation.setText( String.format( res.getString(R.string.survey_stat_station), mStat.countStation ) );
+      mTextSurveyLen.setText( String.format( res.getString(R.string.stat_survey_length), mStat.lengthSurvey * unit, unit_str ) );
       mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
       mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
 

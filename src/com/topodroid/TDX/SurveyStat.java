@@ -15,6 +15,7 @@ class SurveyStat
 {
   long id;  // survey id
   float lengthLeg;
+  float lengthSurvey;
   float extLength;
   float planLength;
   float lengthDuplicate;
@@ -54,6 +55,7 @@ class SurveyStat
   {
     id = sid;
     lengthLeg  = 0.0f;
+    lengthSurvey = 0.0f;
     extLength  = 0.0f;
     planLength = 0.0f;
     lengthDuplicate = 0.0f;
