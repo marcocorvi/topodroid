@@ -1238,6 +1238,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
     <string name="export_grouped">Elemek csoportosítása rétegekre típus szerint</string>
+    <string name="export_origin">Kezdópont</string>
     <string name="export_with_reference">XY skála</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Vonal irány stroke</string -->
