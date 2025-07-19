@@ -83,7 +83,8 @@ class StationNameBacksight extends StationName
     // TDLog.v( "FROM " + from + " TO " + to + " NEXT " + next + " STATION " + station + " increment " + increment );
 
     for ( DBlock blk : list ) {
-      if ( blk.mId == blk0.mId ) continue;
+      if ( blk.mId == blk0.mId || blk.isSecLeg() ) continue; // 20250719 replaces
+      // if ( blk.mId == blk0.mId ) continue;
       if ( blk.isSplay() ) {
         if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) { // mSplayStation 
           setSplayName( blk, station );
@@ -149,6 +150,10 @@ class StationNameBacksight extends StationName
     // TDLog.v( "FROM " + from + " TO " + to + " STATION " + station );
 
     for ( DBlock blk : list ) {
+      if ( blk.isSecLeg() && prev != null && ! prev.isSplay() ) { // 20250719 new test
+        // TDLog.v("20250719 skip block marked sec-leg: " + blk.mId + " prev " + ( prev==null? "null" : prev.mId ) );
+        continue; 
+      }
       if ( blk.mFrom.length() == 0 ) {
         if ( blk.mTo.length() == 0 ) {
           if ( prev == null ) { // blk is (possibly) splay

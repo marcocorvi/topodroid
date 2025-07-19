@@ -95,7 +95,7 @@ class StationNameDefault extends StationName
       station = shot_after_splays ? next : from;
     }
 
-    // TDLog.v( "F " + from + " T " + to + " N " + next + " S " + station );
+    TDLog.v( "assign stations after " + blk0.mId + " F " + from + " T " + to + " N " + next + " S " + station );
     // if ( TDLog.LOG_DATA ) {
     //   TDLog.v( "assign after: F<" + from + "> T<" + to + "> N<" + next + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
     //   StringBuilder sb = new StringBuilder();
@@ -104,8 +104,11 @@ class StationNameDefault extends StationName
     // }
 
     // [2] scan the list of DBlock's
+
     for ( DBlock blk : list ) {
-      if ( blk.mId == blk0.mId ) continue;
+      if ( blk.mId == blk0.mId || blk.isSecLeg() ) continue; // 20250719 replaces
+      // if ( blk.mId == blk0.mId ) continue;
+        
       if ( blk.isScan() ) {
         setSplayName( blk, station );
 	sts.add( station );
@@ -198,7 +201,7 @@ class StationNameDefault extends StationName
       return (new StationNameDefaultBlunder( mContext, mData, mSid )).assignStations( list, sts );
     }
 
-    // TDLog.v("Station Name Default assign stations all: list " + list.size() + " stations " + sts.size() );
+    TDLog.v("Station Name Default assign stations all: list " + list.size() + " stations " + sts.size() );
 
     NativeName mNativeName = new NativeName();
 
@@ -241,11 +244,16 @@ class StationNameDefault extends StationName
 
     for ( DBlock blk : list ) {
       if ( TDLog.isStreamFile() ) TDLog.e("  process " + name(blk) + " prev " + id(prev) );
+      if ( blk.isSecLeg() && prev != null && ! prev.isSplay() ) { // 20250719 new test
+        // TDLog.v("20250719 skip block marked sec-leg: " + blk.mId + " prev " + ( prev==null? "null" : prev.mId ) );
+        continue; 
+      }
       // TDLog.v("  process " + name(blk) + " prev " + id(prev) );
       if ( blk.mFrom.length() == 0 ) {
         if ( blk.isScan() ) {
           nrLegShots = 0;
           setSplayName( blk, station );
+          // TDLog.v("20250719 (1) set " + blk.mId + " splay " + station );
           prev = null;
           continue;
         }
@@ -256,6 +264,7 @@ class StationNameDefault extends StationName
             prev = blk;
             // blk.mFrom = station;
             setSplayName( blk, station );
+            // TDLog.v("20250719 (2) set " + blk.mId + " splay " + station );
             first_splay = null;
             // TDLog.v("  null prev: splay " + id(blk) + " : " + station );
           } else {
@@ -300,6 +309,7 @@ class StationNameDefault extends StationName
                 current_station = null;
                 if ( TDLog.isStreamFile() ) TDLog.e("  set leg " + name(prev) + " => " + from + " " + to + " {" + station + "}" );
                 setLegName( prev, from, to );
+                // TDLog.v("20250719 (3) set " + prev.mId + " leg " + from + " " + to );
                 first_splay = prev;
                 ret = true;
                 setLegExtend( prev );
@@ -335,11 +345,15 @@ class StationNameDefault extends StationName
                 }
                 if ( TDLog.isStreamFile() ) TDLog.e("  set leg " + name(prev) + " Now {" + from + " " + to + " " + station + "}" );
                 // TDLog.v("  set leg " + name(prev) + " Now {" + from + " " + to + " " + station + "}" );
-                for ( DBlock b : sec_legs ) setSecLegName( b );
+                for ( DBlock b : sec_legs ) {
+                  setSecLegName( b );
+                  // TDLog.v("20250719 (3) set " + b.mId + " sec-leg " );
+                }
                 sec_legs.clear();
               } else {
                 if ( TDLog.isStreamFile() ) TDLog.e("  set sec-leg " + id(blk) );
                 setSecLegName( blk );
+                // TDLog.v("20250719 (4) set " + blk.mId + " sec-leg " );
               }
             } else { // distance from prev > "closeness" setting
               if ( backsight_splay && first_splay != null ) {
@@ -349,6 +363,7 @@ class StationNameDefault extends StationName
               if ( TDLog.isStreamFile() ) TDLog.e("  set splay " + id(blk) + " : " + station + " / prev " + id(prev) + " => " + id(blk) );
               nrLegShots = 0;
               setSplayName( blk, station );
+              // TDLog.v("20250719 (5) set " + blk.mId + " splay " + station );
               prev = blk;
               // TDLog.v("  set splay " + name(blk) + " set prev " + id(prev) + " station " + station );
             }
