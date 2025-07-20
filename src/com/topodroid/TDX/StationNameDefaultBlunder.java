@@ -279,6 +279,9 @@ class StationNameDefaultBlunder extends StationName
 
     for ( DBlock blk : list ) {
       if ( TDLog.isStreamFile() ) TDLog.e("process " + name(blk) + " " + id(leg) + "." + id(prev) + "." + id(blunder) );
+      if ( blk.isSecLeg() && prev != null && ! prev.isSplay() ) { // 20250719 new test
+        continue;
+      }
       if ( blk.mTo.length() == 0 ) {
         if ( blk.mFrom.length() == 0 ) {
           if ( blk.isScan() ) {

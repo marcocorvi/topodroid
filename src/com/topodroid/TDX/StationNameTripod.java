@@ -82,7 +82,8 @@ class StationNameTripod extends StationName
     String main_to   = null;
 
     for ( DBlock blk : list ) {
-      if ( blk.mId == blk0.mId ) continue;
+      if ( blk.mId == blk0.mId || blk.isSecLeg() ) continue; // 20250719 replaces
+      // if ( blk.mId == blk0.mId ) continue;
       if ( blk.isSplay() ) {
         if ( flip ) flip = false;
         if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) { // mSplayStation 
@@ -157,6 +158,9 @@ class StationNameTripod extends StationName
 
     for ( DBlock blk : list ) {
       // TDLog.v( blk.mId + " <" + blk.mFrom + ">-<" + blk.mTo + "> F " + from + " T " + back + " N " + next );
+      if ( blk.isSecLeg() && prev != null && ! prev.isSplay() ) { // 20250719 new test
+        continue;
+      }
       if ( blk.mFrom.length() == 0 ) {
         if ( blk.mTo.length() == 0 ) {
           if ( prev == null ) { // possible SPLAY

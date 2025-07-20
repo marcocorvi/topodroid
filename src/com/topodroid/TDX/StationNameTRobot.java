@@ -147,7 +147,8 @@ class StationNameTRobot extends StationName
     String main_to   = null;
 
     for ( DBlock blk : list ) {
-      if ( blk.mId == blk0.mId ) continue;
+      if ( blk.mId == blk0.mId || blk.isSecLeg() ) continue; // 20250719 replaces
+      // if ( blk.mId == blk0.mId ) continue;
       if ( blk.isSplay() ) {
         if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) { // mSplayStation 
           // blk.mFrom = station;
@@ -208,6 +209,9 @@ class StationNameTRobot extends StationName
 
     int nrLegShots = 0;
     for ( DBlock blk : list ) {
+      if ( blk.isSecLeg() && prev != null && ! prev.isSplay() ) { // 20250719 new test
+        continue;
+      }
       if ( blk.mFrom.length() == 0 ) {
         if ( blk.mTo.length() == 0 ) {
           // TDLog.v( blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
