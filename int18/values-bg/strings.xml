@@ -768,7 +768,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="stat_dangling">Висящи измервания %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Повърхностни измервания %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">Денивелация на повърхността %1$.1f %2$.1f %3$s</string -->
-    <string name="stat_survey_z">Денивелация на пещерата %1$.1f %2$.1f %3$s</string>
+    <string name="stat_survey_z">Денивелация на картировката %1$.1f %2$.1f %3$s</string>
     <string name="stat_survey_length">Дължина на картировката %1$.1f %2$s</string>
     <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Ъглова грешка %1$.2f ± %2$.2f</string>
