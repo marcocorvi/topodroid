@@ -2186,6 +2186,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="legs_surface">Felszín</string>
     <string name="legs_duplicate">Duplikált</string>
     <string name="legs_commented">Kizárt</string> <!-- kizárt=kommentelt -->
+    <!-- TODO string name="legs_backshot">Backshot</string -->
 
     <string name="proj_perspective">Perspektív parameterek</string>
     <string name="proj_orthographic">Merőleges parameterek</string>

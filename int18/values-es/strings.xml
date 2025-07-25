@@ -2183,6 +2183,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="legs_surface">Superficiales</string>
     <string name="legs_duplicate">Duplicadas</string>
     <string name="legs_commented">Cometadas</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
 
     <string name="proj_perspective">Parámetros de perspectiva</string>
     <string name="proj_orthographic">Parámetros ortográficos</string>

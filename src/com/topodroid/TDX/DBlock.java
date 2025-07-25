@@ -90,10 +90,11 @@ public class DBlock
   static final long FLAG_NO_PLAN    =  8;
   static final long FLAG_NO_PROFILE = 16;
   static final long FLAG_NONE       = 24; // 16 | 8
-  // static final long FLAG_BACKSHOT   = 32;
+  static final long FLAG_BACKSHOT   = 32; // BACKSHOT
   static final long FLAG_TAMPERED   = 64;
 
-  static final long FLAG_SURFACE_DUPLICATE_COMMENTED = 7; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED
+  static final long FLAG_SURFACE_DUPLICATE_COMMENTED = 7; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED 
+  static final long FLAG_SURFACE_DUPLICATE_COMMENTED_BACKSHOT = 39; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED | FLAG_BACKSHOT
 
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
@@ -124,7 +125,7 @@ public class DBlock
   public boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public boolean isNone()      { return (mFlag & FLAG_NONE)       == FLAG_NONE; }
-  // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
+  public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)  == FLAG_BACKSHOT; } // BACKSHOT
   public boolean isTampered()  { return (mFlag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
@@ -134,7 +135,7 @@ public class DBlock
   public static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public static boolean isNone(long flag)      { return (flag & FLAG_NONE)       == FLAG_NONE; }
-  // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
+  public static boolean isBackshot(long flag)  { return (flag & FLAG_BACKSHOT)  == FLAG_BACKSHOT; } // BACKSHOT
   public static boolean isTampered(long flag)  { return (flag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
   public void setTampered() { mFlag |= FLAG_TAMPERED; }
@@ -143,6 +144,7 @@ public class DBlock
   public boolean failBacksplay()  { return mFailBacksplay; }
 
   void clearFlagDuplicateSurfaceCommented() { mFlag &= ~FLAG_SURFACE_DUPLICATE_COMMENTED; }
+  void clearFlagDuplicateSurfaceCommentedBackshot() { mFlag &= ~FLAG_SURFACE_DUPLICATE_COMMENTED_BACKSHOT; } // BACKSHOT
 
   // void resetFlag() { mFlag = FLAG_SURVEY; }
 
@@ -995,8 +997,8 @@ public class DBlock
       pw.format( "]\u00F7" );     // division sign
     // } else if ( isCommented() ) { // commented = gray background
     //   pw.format( "^" );
-    // } else if ( isBackshot() ) {
-    //   pw.format( "+" );
+    } else if ( isBackshot() ) {
+      pw.format( "]\u266D" );
     } else {
       pw.format("]");
     }

@@ -765,7 +765,7 @@
     <string name="stat_surface">Tiri di superficie %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
     <string name="stat_survey_z">Rilievo: Z %1$.1f %2$.1f %3$s</string>
-    <!-- TODO string name="stat_survey_length">Survey length %1$.1f %2$s</string -->
+    <string name="stat_survey_length">Lunghezza rilievo %1$.1f %2$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
@@ -923,7 +923,7 @@
     <string name="mode_station">Capisaldi</string>
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
-    <!-- TODO string name="mode_scrap">Current scrap only</string -->
+    <string name="mode_scrap">Solo scrap attivo</string>
     <string name="mode_outline">Solo contorno</string>
     <string name="mode_scale_ref">Scala barra di riferimento</string>
     <string name="mode_sections">Sezioni</string>
@@ -1648,8 +1648,8 @@
   <string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
-  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
-  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
+  <string name="pref_symbol_size_title">Dimensione simboli</string>
+  <string name="pref_symbol_size_summary">Dimensione simboli nella barra</string>
   <string name="pref_closeness_title">Raggio di selezione</string>
   <string name="pref_closeness_message">Raggio di selezione oggetti disegno</string>
   <string name="pref_eraseness_title">Raggio del cancellino</string>
@@ -2170,7 +2170,8 @@
 
     <string name="legs_surface">Esterno</string>
     <string name="legs_duplicate">Doppio</string>
-    <string name="legs_commented">Commento</string>
+    <string name="legs_commented">Commentato</string>
+    <string name="legs_backshot">Inverso</string>
 
     <string name="proj_perspective">Parametri prospettiva</string>
     <string name="proj_orthographic">Parametri ortografia</string>

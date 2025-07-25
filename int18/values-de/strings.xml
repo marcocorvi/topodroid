@@ -2016,6 +2016,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="legs_surface">Oberfläche</string>
   <string name="legs_duplicate">Duplikate</string>
   <string name="legs_commented">Kommentiert</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
+
   <string name="proj_perspective">Perspektivische Parameter</string>
   <string name="proj_orthographic">Ortografische Parameter</string>
   <string name="proj_focal">Fokal</string>

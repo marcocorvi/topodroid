@@ -2034,6 +2034,8 @@ no campo abaixo e aperte o botão.
   <string name="legs_surface">Superfície</string>
   <string name="legs_duplicate">Duplicadas</string>
   <string name="legs_commented">Comentadas</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
+
   <string name="proj_perspective">Projeção em perspectiva</string>
   <string name="proj_orthographic">Projeção ortográfica</string>
   <string name="proj_focal">Focal</string>

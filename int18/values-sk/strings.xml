@@ -2156,6 +2156,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="legs_surface">Povrchové</string>
     <string name="legs_duplicate">Zdvojené</string>
     <string name="legs_commented">S poznámkou</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
 
     <string name="proj_perspective">Parametre perspektívy</string>
     <string name="proj_orthographic">Parametre ortografické</string>

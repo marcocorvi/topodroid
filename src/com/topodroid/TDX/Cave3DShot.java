@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.TDX.DBlock;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDVector;
 import com.topodroid.utils.TDMath;
@@ -23,17 +24,17 @@ public class Cave3DShot
 {
   static final double DEG2RAD = (Math.PI/180);
 
-  static final long FLAG_SURVEY     =  0; // flags
-  static final long FLAG_SURFACE    =  1;
-  static final long FLAG_DUPLICATE  =  2;
-  static final long FLAG_COMMENTED  =  4; // lox-flag NOT_VISIBLE
+  static final long FLAG_SURVEY     = DBlock.FLAG_SURVEY;    // 0; // flags
+  static final long FLAG_SURFACE    = DBlock.FLAG_SURFACE;   // 1;
+  static final long FLAG_DUPLICATE  = DBlock.FLAG_DUPLICATE; // 2;
+  static final long FLAG_COMMENTED  = DBlock.FLAG_COMMENTED; // 4; // lox-flag NOT_VISIBLE
   // static final long FLAG_NO_PLAN    =  8;
   // static final long FLAG_NO_PROFILE = 16;
-  // static final long FLAG_BACKSHOT   = 32;
+  static final long FLAG_BACKSHOT   = DBlock.FLAG_BACKSHOT;  // 32;
 
   public double len, ber, cln;      // radians
   boolean used = false;
-  long mFlag;    // shot flag
+  private long mFlag;    // shot flag
   long mMillis;  // timestamp [msec]
 
   public String from;
@@ -45,21 +46,26 @@ public class Cave3DShot
   public int mSurveyId;  // survey ID for bluetooth
   public int mColor = 0; // survey color - used by parser to pass the value to survey
 
+  // same as in DBlock
   public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
   public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
   public boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } 
+  public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
   public boolean isUsed()      { return used; }
   public void setUsed() { used = true; }
 
+  public long getFlag() { return mFlag; }
+
   // used by manual legs
-  public void setFlags( boolean s, boolean d, boolean c )
-  {
-    mFlag = FLAG_SURVEY
-          | ( s ? FLAG_SURFACE : 0 )
-          | ( d ? FLAG_DUPLICATE : 0 )
-          | ( c ? FLAG_COMMENTED : 0 );
-  }
+  // public void setFlags( boolean s, boolean d, boolean c, boolean b )
+  // {
+  //   mFlag = FLAG_SURVEY
+  //         | ( s ? FLAG_SURFACE : 0 )
+  //         | ( d ? FLAG_DUPLICATE : 0 )
+  //         | ( c ? FLAG_COMMENTED : 0 )
+  //         | ( b ? FLAG_BACKSHOT : 0 );
+  // }
     
 
   public double length( ) { return len; }

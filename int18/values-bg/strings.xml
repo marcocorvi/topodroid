@@ -2156,6 +2156,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="legs_surface">Повърхност</string>
     <string name="legs_duplicate">Дубликат</string>
     <string name="legs_commented">Със забележки</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
 
     <string name="proj_perspective">Параметри на перспективата</string>
     <string name="proj_orthographic">Ортографични параметри</string>

@@ -392,6 +392,7 @@ public class DataHelper extends DataSetObservable
     blk.mIndex  = (int)cursor.getLong(17);
     blk.mDeviceTime = cursor.getLong(18);
     // blk.setAddress( null ); 
+    // TDLog.v("DBlock " + blk.mId + " flag " + blk.getFlag() + " cursor " + cursor.getLong(10) );
   }
   
   /** fill a data block with values from the cursor - including the address
@@ -2009,7 +2010,7 @@ public class DataHelper extends DataSetObservable
         ih.bind( flagCol, s.duplicate ? DBlock.FLAG_DUPLICATE 
                         : s.surface ? DBlock.FLAG_SURFACE 
                         // : s.commented ? DBlock.FLAG_COMMENTED // ParserShots are not "commented"
-                        // : s.backshot ? DBlock.FLAG_BACKSHOT
+                        : s.backshot ? DBlock.FLAG_BACKSHOT
                         : 0 );
         ih.bind( legCol, s.leg );
         ih.bind( statusCol, 0 );
@@ -2046,7 +2047,7 @@ public class DataHelper extends DataSetObservable
                         s.duplicate ? DBlock.FLAG_DUPLICATE    // flag
                           : s.surface ? DBlock.FLAG_SURFACE 
                           // : s.commented ? DBlock.FLAG_COMMENTED 
-                          // : s.backshot ? DBlock.FLAG_BACKSHOT
+                          : s.backshot ? DBlock.FLAG_BACKSHOT
                           : 0,
                         s.leg, // leg
                         0L, // status
@@ -2204,7 +2205,8 @@ public class DataHelper extends DataSetObservable
     // stretch = 0.0;
     // return doInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
     if ( ! isSurveyMutable( sid, "insertDistoXShot" ) ) return -1L;
-    return doSimpleInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, d, b, c, r, extend, 0.0, 0L, status, 0L, addr, idx, 0L );
+    // BACKSHOT flag is handled by the station policy (only the backsight policy)
+    return doSimpleInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, addr, idx, 0L );
   }
 
   /** insert a shot copying from a dblock (except surveyId and Id)
@@ -2242,11 +2244,11 @@ public class DataHelper extends DataSetObservable
   //  * @param addr      device address (?)
   //  */
   // public long insertSimpleShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
-  //       	   long extend, double stretch, long leg,
+  //       	   long extend, double stretch, long flag0, long leg,
   //                  long shot_type, String addr )
   // { // leg, 0L=status, type 
   //   // return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", addr );
-  //   return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, addr, 0, 0L );
+  //   return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, flag0, leg, 0L, shot_type, addr, 0, 0L );
   // }
 
   /**
@@ -2260,17 +2262,18 @@ public class DataHelper extends DataSetObservable
    * @param r         roll [degree]
    * @param extend    extend (-1,0,1,2,...)
    * @param stretch   fractional extend (in [-1,1])
-   * @param leg      
+   * @param flag0     flag
+   * @param leg       leg type
    * @param shot_type shot type (?)
    * @return id of the shot record
    */
   long insertManualShot(long sid, @SuppressWarnings("SameParameterValue") long id, long millis, long color, double d, double b, double c, double r,
-                        long extend, double stretch, long leg,
+                        long extend, double stretch, long flag0, long leg,
                         long shot_type )
   { // leg, 0L=status, type 
     // return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "" );
     if ( ! isSurveyMutable( sid, "insertManualShot" ) ) return -1L;
-    return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, "", 0, 0L );
+    return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, flag0, leg, 0L, shot_type, "", 0, 0L );
   }
 
   void resetShotColor( long sid )
@@ -2544,7 +2547,7 @@ public class DataHelper extends DataSetObservable
   }
 
   long insertManualShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r,
-		     long extend, double stretch, long leg, long shot_type )
+		     long extend, double stretch, long flag, long leg, long shot_type )
   {
     if ( ! isSurveyMutable( sid, "insertManualShotAt" ) ) return -1L;
     if ( myDB == null ) return -1L;
@@ -2564,7 +2567,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "magnetic", 0.0 );
     cv.put( "dip",      0.0 );
     cv.put( "extend",   extend );
-    cv.put( "flag",     DBlock.FLAG_SURVEY ); // flag );
+    cv.put( "flag",     flag ); // DBlock.FLAG_SURVEY ); // flag );
     cv.put( "leg",      leg ); // LegType.NORMAL ); // leg );
     cv.put( "status",   TDStatus.NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
@@ -2660,6 +2663,7 @@ public class DataHelper extends DataSetObservable
   // @param d, b, c, r    distance, bearing, clino, roll
   // @param extend
   // @param stretch       fractional extend
+  // @param flag          shot flag
   // @param leg           "leg" type
   // @param status        shot status
   // @param shot_type     either DISTOX or MANUAL
@@ -2673,7 +2677,7 @@ public class DataHelper extends DataSetObservable
   // flag is set to SURVEY
   private long doSimpleInsertShot( long sid, long id, long millis, long color, 
                           double d, double b, double c, double r, 
-                          long extend, double stretch, long leg, long status, long shot_type, String addr, long idx, long time )
+                          long extend, double stretch, long flag, long leg, long status, long shot_type, String addr, long idx, long time )
   {
     // TDLog.v("DB simple insert shot id " + id + " d " + d + " b " + b + " c " + c + " extend " + extend + "/" + stretch + " leg " + leg + 
     //   " status " + status + " type " + shot_type + " addr " + addr + " idx " + idx + " millis " + millis + " color " + color );
@@ -2685,7 +2689,8 @@ public class DataHelper extends DataSetObservable
       myNextId = id;
     }
     if (addr == null) addr = "";                                  // from-to              acc  mag  dip  ext str flag leg status type comment addr raw... index
-    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0, extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr, 
+    // ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0, extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr, 
+    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0, extend, stretch, flag, leg, status, shot_type, "", addr, 
       0, 0, 0, 0, 0, 0, idx, time );
     if ( ! doInsert( SHOT_TABLE, cv, "simple insert" ) ) return -1L;
     return id;
@@ -5098,7 +5103,7 @@ public class DataHelper extends DataSetObservable
         if ( cursor.getLong(3) == 0 ) {
           String name1 = cursor.getString(0) + "-" + cursor.getString(1);
           String name2 = cursor.getString(1) + "-" + cursor.getString(0);
-          TDLog.v( "Name <" + name1 + "> <" + name2 + ">" );
+          // TDLog.v( "Name <" + name1 + "> <" + name2 + ">" );
           boolean found = false;
           for ( String name : names ) {
             if ( name.equals( name1 ) || name.equals( name2 ) ) {
@@ -5107,7 +5112,7 @@ public class DataHelper extends DataSetObservable
             }
           }
           if ( ! found ) {
-            TDLog.v("not found");
+            // TDLog.v("not found");
             names.add( name1 );
             length += (float)(cursor.getDouble( 2 ));
           }

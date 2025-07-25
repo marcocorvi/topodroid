@@ -542,7 +542,7 @@ public class TglParser
         if ( reverse ) {
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( station, shot.from_station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) );
+          ret.add( new Cave3DShot( station, shot.from_station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) );
         } else {
           ret.add( shot );
         }
@@ -570,14 +570,14 @@ public class TglParser
           // TDLog.v( "add other shot " + shot.to + "-" + shot.from );
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) ); // stations not important
+          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) ); // stations not important
         }
       } else if ( shot.to_station == station ) {
         if ( shot.from_station == other ) {
           // TDLog.v( "add reversed shot " + shot.to + "-" + shot.from );
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) ); // stations not important
+          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) ); // stations not important
         } else {
           // TDLog.v( "add other shot " + shot.from + "-" + shot.to );
           ret.add( shot );
@@ -603,7 +603,7 @@ public class TglParser
           // TDLog.v( "add reversed shot " + shot.to + "-" + shot.from );
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) ); // stations not important
+          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) ); // stations not important
         } 
       }
     }
@@ -625,7 +625,7 @@ public class TglParser
         } else if ( shot.to_station == station ) {
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( station, null, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor ) ); // stations not important
+          ret.add( new Cave3DShot( station, null, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor ) ); // stations not important
         }
       }
     }

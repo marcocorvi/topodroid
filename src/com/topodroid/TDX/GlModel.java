@@ -48,6 +48,7 @@ public class GlModel
   static boolean showLegsSurface   = true;
   static boolean showLegsDuplicate = true;
   static boolean showLegsCommented = true;
+  static boolean showLegsBackshot  = true;
 
   TglParser mParser = null;
   RectF mSurfaceBounds = null;
@@ -68,6 +69,7 @@ public class GlModel
   public GlLines glLegsS   = null; // surface
   public GlLines glLegsD   = null; // duplicate
   public GlLines glLegsC   = null; // commented
+  public GlLines glLegsB   = null; // backshot
   public GlLines glSplays  = null;
   GlLines glGrid    = null;
   GlLines glFrame   = null;
@@ -158,6 +160,7 @@ public class GlModel
     glLegsS   = null;
     glLegsD   = null;
     glLegsC   = null;
+    glLegsB   = null;
     glPath    = null;
     mParser   = null;
     glPoint   = null; // WITH-GPS
@@ -263,6 +266,7 @@ public class GlModel
     showLegsSurface   = true;
     showLegsDuplicate = true;
     showLegsCommented = true;
+    showLegsBackshot  = true;
     // GlSketch.reloadSymbols( TDPath.PATH_SYMBOL_POINT );
   }
 
@@ -274,6 +278,7 @@ public class GlModel
     if ( glLegsS  != null ) glLegsS.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
     if ( glLegsD  != null ) glLegsD.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
     if ( glLegsC  != null ) glLegsC.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
+    if ( glLegsB  != null ) glLegsB.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
     if ( glSplays != null ) glSplays.setColorMode( GlLines.COLOR_NONE, GlLines.COLOR_MAX );
     clearStationHighlight();
   }
@@ -306,6 +311,7 @@ public class GlModel
       if ( glLegsS  != null ) glLegsS.toggleColorMode( max );
       if ( glLegsD  != null ) glLegsD.toggleColorMode( max );
       if ( glLegsC  != null ) glLegsC.toggleColorMode( max );
+      if ( glLegsB  != null ) glLegsB.toggleColorMode( max );
       if ( glSplays != null ) glSplays.setColorMode( glLegs.mColorMode, GlLines.COLOR_MAX ); 
     }
   }
@@ -351,6 +357,7 @@ public class GlModel
       // glLegsS.hideOrShow( visible );
       // glLegsD.hideOrShow( visible );
       // glLegsC.hideOrShow( visible );
+      // glLegsB.hideOrShow( visible );
       glLegs.hideOrShow( visible );
       glNames.hideOrShow( visible );
     }
@@ -469,6 +476,10 @@ public class GlModel
     if ( showLegsCommented ) {
       synchronized( this ) { legs = glLegsC; }
       if ( legs   != null ) legs.draw( mvp_matrix, DRAW_LINE, mStationPoints, TglColor.ColorLegC );
+    }
+    if ( showLegsBackshot ) {
+      synchronized( this ) { legs = glLegsB; }
+      if ( legs   != null ) legs.draw( mvp_matrix, DRAW_LINE, mStationPoints, TglColor.ColorLegB );
     }
     synchronized( this ) { legs = glLegs; }
     if ( legs   != null ) legs.draw( mvp_matrix, DRAW_LINE, mStationPoints, TglColor.ColorLeg );
@@ -714,6 +725,7 @@ public class GlModel
   //   glLegsS.prepareTemperatureBuffer( legsSurface );
   //   glLegsD.prepareTemperatureBuffer( legsDuplicate );
   //   glLegsC.prepareTemperatureBuffer( legsCommented );
+  //   glLegsB.prepareTemperatureBuffer( legsBackshot );
   // }
 
   // called by GlRenderer notifyDEM
@@ -733,6 +745,7 @@ public class GlModel
     glLegsS.prepareDepthBuffer( legsSurface );
     glLegsD.prepareDepthBuffer( legsDuplicate );
     glLegsC.prepareDepthBuffer( legsCommented );
+    glLegsB.prepareDepthBuffer( legsBackshot );
 
     prepareSurfaceLegs( mParser, dem );
   }
@@ -941,6 +954,7 @@ public class GlModel
   ArrayList< Cave3DShot > legsSurface;
   ArrayList< Cave3DShot > legsDuplicate;
   ArrayList< Cave3DShot > legsCommented;
+  ArrayList< Cave3DShot > legsBackshot;
 
   /** create the 3D model
    * @param parser  parser with the 3D data
@@ -959,9 +973,10 @@ public class GlModel
 	
     // FIXME INCREMENTAL
     GlLines legs   = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
-    GlLines legsS  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
-    GlLines legsD  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
-    GlLines legsC  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
+    GlLines legsS  = new GlLines( mContext, GlLines.COLOR_NONE, 0 ); // SURFACE
+    GlLines legsD  = new GlLines( mContext, GlLines.COLOR_NONE, 0 ); // DUPLICATE
+    GlLines legsC  = new GlLines( mContext, GlLines.COLOR_NONE, 0 ); // COMMENTED
+    GlLines legsB  = new GlLines( mContext, GlLines.COLOR_NONE, 0 ); // BACKSHOT
     GlLines splays = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
     GlNames names  = new GlNames( mContext, NAME_INCREMENT );
  
@@ -969,6 +984,7 @@ public class GlModel
     legsSurface   = new ArrayList< Cave3DShot >();
     legsDuplicate = new ArrayList< Cave3DShot >();
     legsCommented = new ArrayList< Cave3DShot >();
+    legsBackshot  = new ArrayList< Cave3DShot >();
 
     // TDLog.v("3D-Model create. surveys " + parser.getSurveyNumber() + " shots " + parser.getShotNumber() + "/" + parser.getSplayNumber() + " stations " + parser.getStationNumber() );
 
@@ -988,6 +1004,9 @@ public class GlModel
       } else if ( leg.isCommented() ) {
         legsCommented.add( leg );
         legsC.addLine( leg.from_station, leg.to_station, color, survey_nr, true, null );
+      } else if ( leg.isBackshot() ) { // BACKSHOT
+        legsBackshot.add( leg );
+        legsB.addLine( leg.from_station, leg.to_station, color, survey_nr, true, null );
       } else {
         legsSurvey.add( leg );
         legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true, leg ); 
@@ -1005,6 +1024,7 @@ public class GlModel
       legsS.reduceData( mXmed, mYmed, mZmed );
       legsD.reduceData( mXmed, mYmed, mZmed );
       legsC.reduceData( mXmed, mYmed, mZmed );
+      legsB.reduceData( mXmed, mYmed, mZmed );
     }
 
     // TDLog.v("Model center " + mXmed + " " + mYmed + " " + mZmed );
@@ -1064,6 +1084,7 @@ public class GlModel
     legsD.initData( );
     // TDLog.v("MODEL leg commented init data");
     legsC.initData( );
+    legsB.initData( );
     // TDLog.v("MODEL legs init data");
     legs.initData( );
     // TDLog.v("MODEL splays init data");
@@ -1079,6 +1100,7 @@ public class GlModel
       legsS.prepareDepthBuffer( legsSurface );
       legsD.prepareDepthBuffer( legsDuplicate );
       legsC.prepareDepthBuffer( legsCommented );
+      legsB.prepareDepthBuffer( legsBackshot );
     }
 
     mDiameter = legs.diameter();
@@ -1092,6 +1114,7 @@ public class GlModel
       glLegsS  = legsS;
       glLegsD  = legsD;
       glLegsC  = legsC;
+      glLegsB  = legsB;
       glSplays = splays;
       glNames  = names;
     }
@@ -1143,6 +1166,7 @@ public class GlModel
   //   GlLines legsS  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
   //   GlLines legsD  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
   //   GlLines legsC  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
+  //   GlLines legsB  = new GlLines( mContext, GlLines.COLOR_NONE, 0 );
   //   GlLines splays = new GlLines( mContext, GlLines.COLOR_NONE, SPLAY_INCREMENT );
   //   GlNames names  = new GlNames( mContext, NAME_INCREMENT );
 
@@ -1150,6 +1174,7 @@ public class GlModel
   //   legsSurface   = new ArrayList< Cave3DShot >();
   //   legsDuplicate = new ArrayList< Cave3DShot >();
   //   legsCommented = new ArrayList< Cave3DShot >();
+  //   legsBackshot  = new ArrayList< Cave3DShot >();
 
   //   // TDLog.v("GL Model create. shots " + parser.getShotNumber() + "/" + parser.getSplayNumber() + " stations " + parser.getStationNumber() );
   //   legs.initEmptyBBox();
@@ -1171,6 +1196,7 @@ public class GlModel
   //   legsS.initData( );
   //   legsD.initData( );
   //   legsC.initData( );
+  //   legsB.initData( );
   //   legs.initData( );
   //   splays.initData( );
   //   names.initData( );
@@ -1188,6 +1214,7 @@ public class GlModel
   //     glLegsS  = legsS;
   //     glLegsD  = legsD;
   //     glLegsC  = legsC;
+  //     glLegsB  = legsB;
   //     glSplays = splays;
   //     glNames  = names;
   //   }

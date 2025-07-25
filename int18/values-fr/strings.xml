@@ -2115,6 +2115,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="legs_surface">Surface</string>
     <string name="legs_duplicate">Dupliquée</string>
     <string name="legs_commented">Commentée</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
 
     <string name="proj_perspective">Paramètres de perspective </string>
     <string name="proj_orthographic">Paramètres orthographiques</string>

@@ -375,7 +375,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   public void clear()
   {
     super.clear();
-    TDLog.v("DBlockAdapter :: CLEAR");
+    // TDLog.v("DBlockAdapter :: CLEAR");
     clearLastMultiselected();
     mSelect.clear();
     mSearch.reset( null, false );

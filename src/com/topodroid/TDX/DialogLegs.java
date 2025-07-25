@@ -28,6 +28,7 @@ class DialogLegs extends MyDialog
   private CheckBox mCBsurface;
   private CheckBox mCBduplicate;
   private CheckBox mCBcommented;
+  private CheckBox mCBbackshot;
 
   /** cstr
    * @param context context
@@ -48,13 +49,15 @@ class DialogLegs extends MyDialog
     buttonOK.setOnClickListener( this );
     buttonCancel.setOnClickListener( this );
 
-    mCBsurface   = (CheckBox) findViewById( R.id.surface );
+    mCBsurface   = (CheckBox) findViewById( R.id.surface   );
     mCBduplicate = (CheckBox) findViewById( R.id.duplicate );
     mCBcommented = (CheckBox) findViewById( R.id.commented );
+    mCBbackshot  = (CheckBox) findViewById( R.id.backshot  );
 
     mCBsurface.setChecked(   GlModel.showLegsSurface );
     mCBduplicate.setChecked( GlModel.showLegsDuplicate );
     mCBcommented.setChecked( GlModel.showLegsCommented );
+    mCBbackshot.setChecked(  GlModel.showLegsBackshot );
   }
 
   /** respond to user taps
@@ -68,6 +71,7 @@ class DialogLegs extends MyDialog
       GlModel.showLegsSurface   = mCBsurface.isChecked();
       GlModel.showLegsDuplicate = mCBduplicate.isChecked();
       GlModel.showLegsCommented = mCBcommented.isChecked();
+      GlModel.showLegsBackshot  = mCBbackshot.isChecked();
     }
     dismiss();
   }

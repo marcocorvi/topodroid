@@ -99,7 +99,7 @@ class StationNameBacksight extends StationName
           p_to = oldFrom; 
           from = to;
           station = from;
-	  mData.updateShotLegFlag( blk.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE );
+	  mData.updateShotLegFlag( blk.mId, mSid, LegType.BACK, DBlock.FLAG_BACKSHOT ); // BACKSHOT DBlock.FLAG_DUPLICATE
         } else {  // forward
           if ( increment ) {
             from = to;
@@ -181,7 +181,7 @@ class StationNameBacksight extends StationName
                   prev_to = oldFrom;   // 1
                   station = from;
 	          // TDLog.v( "set " + prev.mId + " back leg and dup ");
-	          mData.updateShotLegFlag( prev.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE );
+	          mData.updateShotLegFlag( prev.mId, mSid, LegType.BACK, DBlock.FLAG_BACKSHOT ); // BACKSHOT DBlock.FLAG_DUPLICATE
                 } else {               // 2 backsight forward shot from--to
                   // prev_to = to;     // 3
                   oldFrom = from;      // 2

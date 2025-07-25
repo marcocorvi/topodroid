@@ -2171,6 +2171,7 @@
     <string name="legs_surface">表面</string>
     <string name="legs_duplicate">副本</string>
     <string name="legs_commented">注释</string>
+    <!-- TODO string name="legs_backshot">Backshot</string -->
 
     <string name="proj_perspective">角度参数</string>
     <string name="proj_orthographic">直角参数</string>

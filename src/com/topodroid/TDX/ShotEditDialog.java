@@ -87,6 +87,7 @@ class ShotEditDialog extends MyDialog
   private MyCheckBox mRBdup   = null;
   private MyCheckBox mRBsurf  = null;
   private MyCheckBox mRBcmtd  = null;  // FIXME_COMMENTED 
+  private MyCheckBox mRBbcks  = null;  // BACKSHOT 
   private MyStateBox mRBsplay = null;  // inhibit splay plan/profile display
 
   private MyCheckBox mCBlegPrev;  // adjoin to previous leg shot
@@ -188,7 +189,7 @@ class ShotEditDialog extends MyDialog
     mNextBlk     = next;
     mBlk         = blk;
     // loadDBlock( blk, prev, next );
-    // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
+    // TDLog.v( "Shot Dialog " + blk.toStringNormal(true) + " flag " + blk.getFlag() );
     if ( /* TDLevel.overAdvanced && */  mBlk.isSplay() ) {
       if ( mBlk.isXSplay() ) {
         splay_type = LegType.XSPLAY;
@@ -298,9 +299,11 @@ class ShotEditDialog extends MyDialog
       mRBdup.setState(  false );
       mRBsurf.setState( false );
       mRBcmtd.setState( false ); // FIXME_COMMENTED
+      mRBbcks.setState( false ); // BACKSHOT
       if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setState(  true ); }
       else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setState( true ); }
       else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setState( true ); } // FIXME_COMMENTED
+      else if ( DBlock.isBackshot(shot_flag) )  { mRBbcks.setState( true ); } // BACKSHOT
       else if ( mRBsplay != null ) {
         if ( DBlock.isNoPlan(shot_flag) && DBlock.isNoProfile(shot_flag) ) { mRBsplay.setState( 3 ); }
         else if ( DBlock.isNoPlan(shot_flag) )        { mRBsplay.setState( 2 ); }
@@ -465,10 +468,12 @@ class ShotEditDialog extends MyDialog
       mRBdup  = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
       mRBcmtd = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
+      mRBbcks = new MyCheckBox( mContext, size, R.drawable.iz_backsight_ok, R.drawable.iz_backsight_no );
       mRBdup.setOnClickListener( this );
       mRBsurf.setOnClickListener( this );
       mRBcmtd.setOnClickListener( this );
-      nr_buttons += 3;
+      mRBbcks.setOnClickListener( this );
+      nr_buttons += 4;
     }
 
     // FIXME_X2_SPLAY
@@ -507,6 +512,7 @@ class ShotEditDialog extends MyDialog
     if ( mRBdup  != null ) mButton[k++] = mRBdup;
     if ( mRBsurf != null ) mButton[k++] = mRBsurf;
     if ( mRBcmtd != null ) mButton[k++] = mRBcmtd;
+    if ( mRBbcks != null ) mButton[k++] = mRBbcks;
     mButton[k++] = mCBlegPrev;
     mButton[k++] = mCBlegNext;
     if ( mCBbackLeg != null ) mButton[k++] = mCBbackLeg;
@@ -622,7 +628,7 @@ class ShotEditDialog extends MyDialog
     // }
     // TDLog.v("SAVE block");
 
-    boolean do_backleg = false;
+    boolean can_do_backleg = false;
     boolean backleg_val = mCBbackLeg != null && mCBbackLeg.isChecked();
     boolean all_splay = mCBallSplay.isChecked();
     // FIXME_X2_SPLAY
@@ -642,7 +648,7 @@ class ShotEditDialog extends MyDialog
       // shot_from = "";
       // shot_to   = "";
       // shot_secleg  = true;
-      // // do_backleg = false;
+      // // can_do_backleg = false;
       // all_splay = false;
       // set_xsplay = -1;
     } else if ( mCBlegNext.isChecked() ) {
@@ -667,15 +673,16 @@ class ShotEditDialog extends MyDialog
         mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
         return false;
       }
-      do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
+      can_do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
     }
-    // TDLog.v( "<" + shot_from + "-" + shot_to + "> do backleg " + do_backleg + " value " + backleg_val );
+    // TDLog.v( "<" + shot_from + "-" + shot_to + "> do backleg " + can_do_backleg + " value " + backleg_val );
 
     shot_flag = DBlock.FLAG_SURVEY;
     if ( TDLevel.overNormal ) {
       if ( mRBdup.isChecked() )       { shot_flag = DBlock.FLAG_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.FLAG_SURFACE; }
       else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.FLAG_COMMENTED; } // FIXME_COMMENTED
+      else if ( mRBbcks.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; } // BACKSHOT
       else if ( mRBsplay != null ) {
         if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.FLAG_NO_PROFILE; }
         else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.FLAG_NO_PLAN; }
@@ -683,7 +690,7 @@ class ShotEditDialog extends MyDialog
         // FIXME TODO add another state for both NO_PLAN and NO_PROFILE
       }
     }
-    // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; }
+    // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; } // old
     // else                            { shot_flag = DBlock.FLAG_SURVEY; }
     if ( mBlk.isTampered() ) shot_flag |= DBlock.FLAG_TAMPERED;
     // TDLog.v("shot flag " + shot_flag );
@@ -696,7 +703,7 @@ class ShotEditDialog extends MyDialog
 
     // TDLog.v("clr xsplay " + set_xsplay
     //                     + " all splay " + all_splay 
-    //                     + " do_backleg " + do_backleg
+    //                     + " can_do_backleg " + can_do_backleg
     //                     + " backleg val " + backleg_val 
     //                     + " leg_next " + leg_next
     //                     + " secleg " + shot_secleg
@@ -711,7 +718,7 @@ class ShotEditDialog extends MyDialog
     //   // TDLog.v( "block set sec-leg type ");
     //   mBlk.setTypeSecLeg();
     // } else if ( leg_next ) { // FIXME this can go immediately after the test of the checkbox
-    //   // do_backleg = false; // not necessary
+    //   // can_do_backleg = false; // not necessary
     //   long id = mParent.mergeToNextLeg( mBlk );
     //   if ( id >= 0 ) {
     //     shot_from = mBlk.mFrom;
@@ -784,7 +791,7 @@ class ShotEditDialog extends MyDialog
         leg = set_xsplay;
       }
       // TDLog.v("[3] leg type " + leg + " " + set_xsplay );
-      if ( do_backleg && backleg_val ) {
+      if ( can_do_backleg && backleg_val ) {
         leg = LegType.BACK;
       }
       // TDLog.v( "Block is splay " + mBlk.isSplay() + " leg " + leg + " blk type " + mBlk.getBlockType() );
@@ -931,18 +938,28 @@ class ShotEditDialog extends MyDialog
       if ( mRBdup.toggleState() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false ); // FIXME_COMMENTED
+        mRBbcks.setState( false ); // BACKSHOT
         if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
     } else if ( mRBsurf != null  && b == mRBsurf ) {
       if ( mRBsurf.toggleState() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false ); // FIXME_COMMENTED
+        mRBbcks.setState( false ); // BACKSHOT
         if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
     } else if ( mRBcmtd != null  && b == mRBcmtd ) { // FIXME_COMMENTED
       if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
+        mRBbcks.setState( false ); // BACKSHOT
+        if ( mRBsplay != null ) mRBsplay.setState( 0 );
+      }
+    } else if ( mRBbcks != null  && b == mRBbcks ) { // BACKSHOT
+      if ( mRBbcks.toggleState() ) {
+        mRBdup.setState( false );
+        mRBsurf.setState( false );
+        mRBcmtd.setState( false ); // FIXME_COMMENTED
         if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
     } else if ( mRBsplay != null && b == mRBsplay ) {
@@ -951,6 +968,7 @@ class ShotEditDialog extends MyDialog
         mRBdup.setState( false );
         mRBsurf.setState( false );
         mRBcmtd.setState( false ); // FIXME_COMMENTED
+        mRBbcks.setState( false ); // BACKSHOT
       }
 
     } else if ( b == mButtonMore ) {

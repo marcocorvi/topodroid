@@ -2220,6 +2220,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="legs_surface" copyable="fr">Surface</string>
     <string name="legs_duplicate">Duplicate</string>
     <string name="legs_commented">Commented</string>
+    <string name="legs_backshot">Backshot</string>
 
     <string name="proj_perspective">Perspective parameters</string>
     <string name="proj_orthographic">Orthographic parameters</string>

@@ -509,14 +509,14 @@ class ShotNewDialog extends MyDialog
                              Float.parseFloat(backclino.replace(',','.') ),
                              bbx, // DIVING_BEARING Float.parseFloat(backbearing.replace(',','.') ),
                              Float.parseFloat(backdistance.replace(',','.') ),
-                             back_extend, DBlock.FLAG_SURVEY,
+                             back_extend, DBlock.FLAG_BACKSHOT, // BACKSHOT DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
               } else {
                 blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),
                              Float.parseFloat(backclino.replace(',','.') ),
-                             back_extend, DBlock.FLAG_SURVEY,
+                             back_extend, DBlock.FLAG_BACKSHOT, // BACKSHOT DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
               }
             }

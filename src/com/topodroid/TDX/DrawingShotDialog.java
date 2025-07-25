@@ -73,11 +73,11 @@ class DrawingShotDialog extends MyDialog
   private MyCheckBox mRBdup  = null;
   private MyCheckBox mRBsurf = null;
   private MyCheckBox mRBcmtd = null;
+  private MyCheckBox mRBbcks = null; // BACKSHOT
   private MyCheckBox mCBxSplay = null;
 
   private CheckBox mCBfrom   = null;
   private CheckBox mCBto     = null;
-  // private CheckBox mRBbackshot;
   // private Button mRBwalls;
 
   private final DrawingWindow mParent;
@@ -156,7 +156,6 @@ class DrawingShotDialog extends MyDialog
     // mRBsurvey    = (RadioButton) findViewById( R.id.survey );
     // mRBdup  = (CheckBox) findViewById( R.id.duplicate );
     // mRBsurf = (CheckBox) findViewById( R.id.surface );
-    // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
     // hideStretchBar = true;
     // hideColorBtn   = true;
@@ -230,12 +229,15 @@ class DrawingShotDialog extends MyDialog
       mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
       mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
+      mRBbcks     = new MyCheckBox( mContext, size, R.drawable.iz_backsight_ok, R.drawable.iz_backsight_no ); // BACKSHOT
       layout3.addView( mRBdup,  lp );
       layout3.addView( mRBsurf, lp );
       layout3.addView( mRBcmtd, lp );
+      layout3.addView( mRBbcks, lp ); // BACKSHOT
       mRBdup.setOnClickListener( this );
       mRBsurf.setOnClickListener( this );
       mRBcmtd.setOnClickListener( this );
+      mRBbcks.setOnClickListener( this ); // BACKSHOT
       if ( TDLevel.overAdvanced && mBlock.isOtherSplay() ) {
         mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
         mCBxSplay.setChecked( false ); // ??? setState( false );
@@ -290,8 +292,6 @@ class DrawingShotDialog extends MyDialog
     mRBvert.setOnClickListener( this );
     mRBright.setOnClickListener( this );
 
-    // mRBbackshot.setOnClickListener( this );
-
     // AUTOWALLS
     // if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
     //   && TDLevel.overExpert 
@@ -337,8 +337,8 @@ class DrawingShotDialog extends MyDialog
           mRBsurf.setState( true );
         } else if ( mBlock.isCommented() ) { // FIXME_COMMENTED
           mRBcmtd.setState( true );
-        // } else if ( mBlock.isBackshot() ) {
-        //   mRBbackshot.setChecked( true );
+        } else if ( mBlock.isBackshot() ) { // BACKSHOT
+          mRBbcks.setChecked( true );
         }
       }
     }
@@ -428,25 +428,31 @@ class DrawingShotDialog extends MyDialog
       if ( mRBdup.isChecked() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false );
+        mRBbcks.setState( false ); // BACKSHOT
       }
     } else if ( TDLevel.overNormal && b == mRBsurf ) {
       mRBsurf.toggleState();
       if ( mRBsurf.isChecked() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false );
+        mRBbcks.setState( false ); // BACKSHOT
       }
     } else if ( TDLevel.overNormal && b == mRBcmtd ) {
       mRBcmtd.toggleState();
       if ( mRBcmtd.isChecked() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
+        mRBbcks.setState( false ); // BACKSHOT
+      }
+    } else if ( TDLevel.overNormal && b == mRBbcks ) { // BACKSHOT
+      mRBbcks.toggleState();
+      if ( mRBbcks.isChecked() ) {
+        mRBdup.setState( false );
+        mRBsurf.setState( false );
+        mRBcmtd.setState( false );
       }
     } else if ( TDLevel.overNormal && b == mCBxSplay ) {
       mCBxSplay.toggleState();
-
-    // } else if ( b == mRBbackshot ) {
-    //   mRBdup.setChecked( false );
-    //   mRBsurf.setChecked( false );
 
     // } else if ( TDLevel.overExpert && b == mRBwalls ) { // AUTOWALLS
     //   mParent.drawWallsAt( mBlock );
@@ -483,12 +489,12 @@ class DrawingShotDialog extends MyDialog
       mParent.updateBlockExtend( mBlock, extend, mStretch ); // FIXME_STRETCH equal extend checked by the method
 
       if ( TDLevel.overNormal ) {
-        mBlock.clearFlagDuplicateSurfaceCommented();
+        mBlock.clearFlagDuplicateSurfaceCommentedBackshot();
         long flag  = mBlock.getFlag();
-        if ( mRBdup.isChecked() )       { flag |= DBlock.FLAG_DUPLICATE; }
+        if ( mRBdup.isChecked() )       { flag |= DBlock.FLAG_DUPLICATE; } // FIXME why |= ? because other flags have not been cleared
         else if ( mRBsurf.isChecked() ) { flag |= DBlock.FLAG_SURFACE; }
         else if ( mRBcmtd.isChecked() ) { flag |= DBlock.FLAG_COMMENTED; }
-        // // else if ( mRBbackshot.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; }
+        else if ( mRBbcks.isChecked() ) { flag |= DBlock.FLAG_BACKSHOT; }
         // else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.FLAG_SURVEY; }
         mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
       }
