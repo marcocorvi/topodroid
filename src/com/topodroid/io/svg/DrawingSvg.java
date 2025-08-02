@@ -175,6 +175,8 @@ public class DrawingSvg extends DrawingSvgBase
 
         // FIXME OK PROFILE
 
+        out.write("<g id=\"centerline\" class=\"centerline\"" + group_mode_open );
+
         // TDLog.v( "SVG legs " + plot.getLegs().size() );
         // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
           out.write("<g id=\"legs\" class=\"legs\"" + group_mode_open);
@@ -255,6 +257,31 @@ public class DrawingSvg extends DrawingSvgBase
         }
       }
 
+      // TDLog.v( "SVG stations " + plot.getStations().size() );
+      out.write("<g id=\"stations\"" + group_mode_open);
+      if ( TDSetting.mAutoStations ) {
+        if ( TDSetting.mSvgStations ) {
+          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+            StringWriter sw61 = new StringWriter();
+            PrintWriter pw61  = new PrintWriter(sw61);
+            toSvg( pw61, name, xoff, yoff );
+            out.write( sw61.getBuffer().toString() );
+            out.flush();
+          }
+        }
+      } else {
+        for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
+          StringWriter sw62 = new StringWriter();
+          PrintWriter pw62 = new PrintWriter(sw62);
+          toSvg(pw62, st_path, xoff, yoff);
+          out.write(sw62.getBuffer().toString());
+          out.flush();
+        }
+      }
+      out.write(end_grp); // stations
+
+      out.write(end_grp); // centerline
+
       // if ( TDSetting.mSvgLineDirection ) { // moved to writeDefs()
       //   // TDLog.v( "SVG line direction");
       //   StringWriter swD = new StringWriter();
@@ -286,29 +313,6 @@ public class DrawingSvg extends DrawingSvgBase
         out.write( end_grp ); // scrap_
         out.flush();
       }
-
-      // TDLog.v( "SVG stations " + plot.getStations().size() );
-      out.write("<g id=\"stations\"" + group_mode_open);
-      if ( TDSetting.mAutoStations ) {
-        if ( TDSetting.mSvgStations ) {
-          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            StringWriter sw61 = new StringWriter();
-            PrintWriter pw61  = new PrintWriter(sw61);
-            toSvg( pw61, name, xoff, yoff );
-            out.write( sw61.getBuffer().toString() );
-            out.flush();
-          }
-        }
-      } else {
-        for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
-          StringWriter sw62 = new StringWriter();
-          PrintWriter pw62 = new PrintWriter(sw62);
-          toSvg(pw62, st_path, xoff, yoff);
-          out.write(sw62.getBuffer().toString());
-          out.flush();
-        }
-      }
-      out.write(end_grp); // stations
 
       // out.write( end_grp ); // canvas
       out.write( end_svg );

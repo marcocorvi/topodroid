@@ -882,7 +882,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_off"       >off</string>
     <string name="button_on"        >on</string>
     <string name="button_open"      >Open</string>
-    <string name="button_offset"    >Offset</string>
+    <string name="button_offset" copyable="it">Offset</string>
     <string name="button_read"      >Read</string>
     <string name="button_recover"   >Recover</string>
     <string name="button_reverse"   >Reverse</string>
@@ -1436,8 +1436,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_cat_survey">SURVEY DATA</string>
   <string name="pref_cat_splay">SPLAY DATA</string>
   <string name="pref_cat_drawing">SKETCHING</string>
-  <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <string name="pref_cat_exportimport">IMPORT</string>
+  <string name="pref_cat_import_export" copyable="all">IMPORT_EXPORT</string>
+  <string name="pref_cat_exportimport" copyable="it">IMPORT</string>
   <string name="pref_cat_exportenable">ENABLE</string>
   <string name="pref_cat_exportsvx" translatable="false">Survex</string>
   <string name="pref_cat_exportth"  translatable="false">Therion</string>

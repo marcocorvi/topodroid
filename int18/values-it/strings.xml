@@ -8,8 +8,6 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
-
     <!-- UNUSED string name="desc_user_man">Manuale utente</string -->
     <!-- UNUSED string name="desc_points">Punti</string -->
     <!-- UNUSED string name="desc_lines">Linee</string -->
@@ -17,7 +15,9 @@
     <string name="desc_menu">Menu</string>
 
   <string name="r_title">Android-13+: avviso importante</string>
-  <string name="r_dialog">Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl sotto "Android/data". Attenzione, questa cartella viene cancellata se si disinstalla l\'app. Per confermare digitare\n"%1$s"\nnel campo sotto e premere il bottone.</string>
+  <string name="r_dialog">
+Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl sotto "Android/data". Attenzione, questa cartella viene cancellata se si disinstalla l\'app. Per confermare digitare\n"%1$s"\nnel campo sotto e premere il bottone.
+  </string>
   <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
   <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
   <string name="r_continue">CONTINUA</string>
@@ -378,7 +378,7 @@
     <!-- UNUSED string name="scale">scala</string -->
     <!-- UNUSED string name="reversed">inversa</string -->
     <string name="options">opzioni</string>
-    <string name="outline">outline</string>
+    <string name="outline">contorno</string>
     <string name="out">out</string>
     <string name="in">in</string>
     <!-- UNUSED string name="none">none</string -->
@@ -1232,6 +1232,7 @@
     <string name="export_xvi">Immagini Xvi</string>
     <string name="export_with_xsections">Includere X-section</string>
     <string name="export_grouped">Gruppo elementi del layer per tipo</string>
+    <string name="export_origin">Punto zero</string>
     <string name="export_with_reference">Includere riferimenti XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1706,8 +1707,8 @@
   <string name="pref_max_shot_summary">Massima lunghezza tiro [m]</string>
   <string name="pref_min_leg_title">Minima lunghezza battuta</string>
   <string name="pref_min_leg_summary">Minima lunghezza battuta [m]</string>
-  <string name="pref_backsight_title">Backsight</string>
-  <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
+  <string name="pref_backsight_title">Battuta inversa</string>
+  <string name="pref_backsight_summary">Campi tiro inverso nel dialogo Nuovo Dato</string>
   <string name="pref_backshot_title">Dati Backshot</string>
   <string name="pref_backshot_summary">Inverti capisaldi nei dati backshot</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>
