@@ -2162,7 +2162,7 @@
     <string name="legs_surface">Поверхность</string>
     <string name="legs_duplicate">Дубликат</string>
     <string name="legs_commented">Закоментированный</string>
-    <!-- TODO string name="legs_backshot">Backshot</string -->
+    <string name="legs_backshot">Обратный замер</string>
 
     <string name="proj_perspective">Настройки перспективы</string>
     <string name="proj_orthographic">Настройки ортографической проекции</string>
