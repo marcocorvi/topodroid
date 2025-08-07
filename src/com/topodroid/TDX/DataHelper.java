@@ -330,7 +330,7 @@ public class DataHelper extends DataSetObservable
     blk.mSurveyId     = sid;
     blk.mFrom         = cursor.getString(1);
     blk.mTo           = cursor.getString(2);
-    blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+    blk.mLength       = (float)( cursor.getDouble(3) );  // distance [meters]
     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
     blk.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
     blk.mRoll         = (float)( cursor.getDouble(6) );  // clino [degrees], or depth [meters]
@@ -365,7 +365,7 @@ public class DataHelper extends DataSetObservable
     long leg = cursor.getLong(11);
     blk.setId( cursor.getLong(0), sid );
     blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
-    blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+    blk.mLength       = (float)( cursor.getDouble(3) );  // distance [meters]
     // blk.setBearing( (float)( cursor.getDouble(4) ) ); 
     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
     float clino       = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
@@ -1593,7 +1593,7 @@ public class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
     cv.put( "shotId",   id );
-    cv.put( "length",   d );
+    cv.put( "distance", d );
     cv.put( "bearing",  b );
     cv.put( "clino",    c );
     cv.put( "depth",    p );
@@ -1744,8 +1744,8 @@ public class DataHelper extends DataSetObservable
    * @param sid    survey id
    * @param from   from station
    * @param to     to station
-   * @param d0     shot length to check
-   * @param b0     shot azimuth to check
+   * @param d0     shot distance to check
+   * @param b0     shot bearing to check
    * @param c0     shot clino to check
    */
   boolean checkSiblings( long id0, long sid, String from, String to, float d0, float b0, float c0 )
@@ -2117,7 +2117,7 @@ public class DataHelper extends DataSetObservable
     for ( ParserShot sh : shots ) {
       Float f = depths.get( sh.from );
       sh.cln = ( f == null )? 0 : f.floatValue();
-      // TDLog.v( "update shot " + sh.from + "-" + sh.to + " depth " + sh.cln + " azimuth " + sh.ber + " length " + sh.len );
+      // TDLog.v( "update shot " + sh.from + "-" + sh.to + " depth " + sh.cln + " bearing " + sh.ber + " distance " + sh.len );
     }
     // [3] call the insertImportShots
     return insertImportShots( sid, id, shots );
@@ -7407,7 +7407,7 @@ public class DataHelper extends DataSetObservable
     long leg = cursor.getLong(7);
     blk.setId( cursor.getLong(0), sid );
     blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
-    blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+    blk.mLength       = (float)( cursor.getDouble(3) );  // distance [meters]
     // blk.setBearing( (float)( cursor.getDouble(4) ) ); 
     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
     float clino       = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
@@ -7815,7 +7815,7 @@ public class DataHelper extends DataSetObservable
               create_table + ORIGINALS
             + " ( surveyId INTEGER, "
             +   " shotId INTEGER, " // shot ID 
-            +   " length REAL, "
+            +   " distance REAL, "
             +   " bearing REAL, "
             +   " clino REAL, "
             +   " depth REAL, "
@@ -8013,6 +8013,24 @@ public class DataHelper extends DataSetObservable
            case 57:
              db.execSQL( "CREATE TABLE originals ( surveyId INTEGER, shotId INTEGER, distance REAL, bearing REAL, clino REAL, depth REAL, datamode INTEGER default 0)" );
            case 58:
+             if ( columnExists( db, "originals", "length" ) ) {
+               if ( TDandroid.ABOVE_API_29 ) {
+                 db.execSQL( "ALTER TABLE originals RENAME COLUMN \"length\" TO \"distance\" " ); 
+               } else { // sqlite before v. 3.25.0
+                 try {
+                   db.beginTransaction();
+                   db.execSQL( "CREATE TABLE temp ( surveyId INTEGER, shotId INTEGER, distance REAL, bearing REAL, clino REAL, depth REAL, datamode INTEGER default 0 " );
+                   db.execSQL( "INSERT INTO temp ( surveyId, shotId, distance, bearing, clino, depth, datamode ) SELECT surveyId, shotId, length, bearing, clino, depth, datamode FROM originals " );
+                   db.execSQL( "DROP TABLE originals " );
+                   db.execSQL( "ALTER TABLE temp RENAME TO originals " );
+                   db.setTransactionSuccessful();
+                 } catch ( SQLiteDiskIOException e0 ) { TDLog.v( e0.getMessage() );
+                 } catch ( SQLiteException e1 )       { TDLog.v( e1.getMessage() );
+                 } catch ( IllegalStateException e2 ) { TDLog.v( e2.getMessage() );
+                 } finally { db.endTransaction(); }
+               }
+             }
+           case 59:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;
