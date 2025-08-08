@@ -144,6 +144,13 @@ public class DrawingSvgBase
     pw.format(Locale.US, "%s cx=\"%.2f\" cy=\"%.2f\" ", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
   }
 
+  static protected void printMarkerWithXY( PrintWriter pw, String marker, float x, float y, String css )
+  {
+    x *= TDSetting.mToSvg;
+    y *= TDSetting.mToSvg;
+    pw.format(Locale.US, "  <path d=\"M %.2f %.2f L %.2f %.2f\" marker-start=\"url(#%s)\" class=\"%s\" />\n", x, y, x, y+0.01f, marker, css );
+  } 
+
   /** print a segment with the closing angle-bracket
    * @param pw   writer
    * @param x1    X coord of the first point
@@ -370,13 +377,14 @@ public class DrawingSvgBase
     // }
     printPointWithXY( pw, "", x, y + (POINT_RADIUS * 1.5f) );
     pw.format(">%s</text>\n", name );
-    printPointWithCXCY( pw, "<circle", x, y );
-    pw.format(Locale.US, " r=\"%.2f\" ", (float)(POINT_RADIUS / 5) );
-    // if ( TDSetting.mFixmeClass ) {
-      pw.format(Locale.US, " class=\"circle_point\" />\n", TDSetting.mSvgPointStroke );
-    // } else {
-    //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
-    // }
+    printMarkerWithXY( pw, "Station", x, y, "triangle" );
+    // printPointWithCXCY( pw, "<circle", x, y );
+    // pw.format(Locale.US, " r=\"%.2f\" ", (float)(POINT_RADIUS / 5) );
+    // // if ( TDSetting.mFixmeClass ) {
+    //   pw.format(Locale.US, " class=\"circle_point\" />\n" );
+    // // } else {
+    // //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
+    // // }
     pw.write( end_grp ); // station_
   }
 
@@ -861,8 +869,12 @@ public class DrawingSvgBase
     String grid_width  = String.format( Locale.US, "stroke-width: %.2f; fill: none; } \n", TDSetting.mSvgGridStroke );
     String label_width = String.format( Locale.US, "stroke-width: %.2f; } \n", TDSetting.mSvgLabelStroke );
     String point_width = String.format( Locale.US, "stroke-width: %.2f; } \n", TDSetting.mSvgPointStroke );
+    String triangle_width = String.format( Locale.US, "stroke-width: %.2f; } \n", TDSetting.mSvgPointStroke );
     String shot_width  = String.format( Locale.US, "stroke-width: %.2f; } \n", TDSetting.mSvgShotStroke );
     String text_size   = String.format( Locale.US, "font-size: %d; } \n", TDSetting.mSvgStationSize );
+
+    String end_stroke_width = String.format( Locale.US, "stroke-width=\"%.2f\" />\n", TDSetting.mSvgShotStroke );
+
     out.write( "  <defs>\n");
     out.write( "    <style type=\"text/css\" id=\"style_grid\"> \n"); // FIXME_CLASS
     out.write( "      .grid1 { stroke: #999999; stroke-opacity: 0.4; ");   out.write( grid_width );
@@ -877,6 +889,7 @@ public class DrawingSvgBase
     out.write( "      .v-splays { stroke: lightsteelgreen; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
     out.write( "      .x-splays { stroke: lightseablue; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
     out.write( "      .stations { stroke: none; text-anchor: middle; "); out.write( text_size );
+    out.write( "      .triangle { stroke: red;  fill: none; ");          out.write( triangle_width );
     out.write( "      .circle_point { stroke: black;  fill: none; ");    out.write( point_width );
     out.write( "      .circle_label { stroke: black;  fill: grey; ");    out.write( label_width );
     // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
@@ -895,6 +908,10 @@ public class DrawingSvgBase
       }
     // }
     out.write( "    </style> \n");
+    out.write( "    <marker id=\"Station\" viewBox=\"0 0 100 100\" refX=\"50\" refY=\"50\" \n"); 
+    out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"40\" markerHeight=\"24\" orient=\"0\" >\n");
+    out.write( "      <path d=\"M 0 80 L 100 80 L 50 0 z\" stroke=\"black\" fill=\"none\" "); out.write( end_stroke_width );
+    out.write( "    </marker>\n");
     out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
     out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
     out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
