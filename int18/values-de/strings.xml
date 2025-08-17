@@ -1686,6 +1686,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_label_size_summary">Schriftgröße der Beschriftung</string>
   <string name="pref_scalable_label_title">Zoom in Skala anzeigen</string>
   <string name="pref_scalable_label_summary">Zeikt den Zoom in der Grössenskala an</string>
+  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
+  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
   <string name="pref_slope_lside_title">Abhang-Linie links</string>
   <string name="pref_slope_lside_summary">Der Abhang ist auf der linken Seite der Linie</string>
   <string name="pref_arrow_length_title">Profillänge</string>

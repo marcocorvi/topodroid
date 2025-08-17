@@ -1799,6 +1799,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_label_size_summary">Размер на етикетите</string>
   <string name="pref_scalable_label_title">Мащаб на етикетите</string>
   <string name="pref_scalable_label_summary">Мащабабиране на етикетите при приближаване</string>
+  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
+  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
   <string name="pref_slope_lside_title">Начална линия на наклона</string>
   <string name="pref_slope_lside_summary">Дължина на лявата линия за посоката на наклона</string>
   <string name="pref_arrow_length_title">Размер на стрелката на линията на сечение</string>

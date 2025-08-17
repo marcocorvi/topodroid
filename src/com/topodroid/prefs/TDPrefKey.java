@@ -1574,6 +1574,7 @@ class TDPrefKey
     "DISTOX_DRAWING_UNIT",    // 1 // plot unit
     "DISTOX_LABEL_SIZE",      // 2 // size of labels [pt]
     "DISTOX_SCALABLE_LABEL",
+    "DISTOX_PLOT_CACHE",
     null
   };
 
@@ -1581,25 +1582,29 @@ class TDPrefKey
     R.string.pref_unscaled_points_title,
     R.string.pref_drawing_unit_title,
     R.string.pref_label_size_title,
-    R.string.pref_scalable_label_title
+    R.string.pref_scalable_label_title,
+    R.string.pref_plot_cache_title
   };
   static int[] POINTdesc = {
     R.string.pref_unscaled_points_summary,
     R.string.pref_drawing_unit_summary,
     R.string.pref_label_size_summary,
-    R.string.pref_scalable_label_summary
+    R.string.pref_scalable_label_summary,
+    R.string.pref_plot_cache_summary
   };
   static String[] POINTdef = {
     FALSE,
     "1.2",
     TDString.TWENTYFOUR,
-    FALSE
+    FALSE,
+    TRUE
   };
   static int[] POINTlvl = {
     N,
     B,
     B,
     N,
+    B,
   };
 
 

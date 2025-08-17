@@ -1802,6 +1802,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_label_size_summary">Tamaño del texto</string>
   <string name="pref_scalable_label_title">Etiquetas de escala</string>
   <string name="pref_scalable_label_summary">Las etiquetas se escalan con zoom</string>
+  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
+  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
   <string name="pref_slope_lside_title">Línea de pendiente l-lado</string>
   <string name="pref_slope_lside_summary">Líneas de pendiente por defecto l-lado</string>
   <string name="pref_arrow_length_title">Corte seccional</string>

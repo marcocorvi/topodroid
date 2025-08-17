@@ -2364,6 +2364,21 @@ public class TDExporter
    *  NOTE declination exported in comment only in CSV
    *       handled flags: duplicate surface commented 
    */
+
+  static private void writeCsvHeader( PrintWriter pw, SurveyInfo info, String newline )
+  {
+    pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
+    pw.format("# name: %s%s", info.name, newline );
+    pw.format("# date: %s%s", info.date, newline );
+    pw.format("# team: %s%s", info.team, newline );
+    if ( ! TDString.isNullOrEmpty( info.comment ) ) {
+      pw.format("# comment: %s%s", info.comment, newline );
+    }
+    if ( info.hasDeclination() ) {
+      pw.format(Locale.US, "# declination: %.2f%s", info.declination, newline );
+    }
+  }
+
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, int leg_extend, char sep )
   {
     pw.format(Locale.US, "%c%.2f%c%.1f%c%.1f%c%d", sep, leg.length() * ul, sep, leg.bearing() * ua, sep, leg.clino() * ua, sep, leg_extend );
@@ -2424,8 +2439,8 @@ public class TDExporter
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csv", survey_name + ".csv", "text/csv" );
       PrintWriter pw = new PrintWriter( bw );
-      pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
-      pw.format("# %s%s", info.name, newline );
+      writeCsvHeader( pw, info, newline );
+
       pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, M1x, M1y, M1z, G1x, G1y, G1z, M2x, M2y, M2z, G2x, G2y, G2z, comment%s", newline );
       for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
@@ -2483,9 +2498,8 @@ public class TDExporter
       // TDLog.Log( TDLog.LOG_IO, "export CSV " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "csv", survey_name + ".csv", "text/csv" );
       PrintWriter pw = new PrintWriter( bw );
+      writeCsvHeader( pw, info, newline );
 
-      pw.format("# %s created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
-      pw.format("# %s%s", info.name, newline );
       // if ( fixed.size() > 0 ) {
       //   pw.format("  ; fix stations as long-lat h_geo\n");
       //   for ( FixedInfo fix : fixed ) {

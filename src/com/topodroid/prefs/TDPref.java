@@ -1451,7 +1451,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],        ctx, hlp ),
       makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], FLOAT, ctx, hlp ),
       makeEdt( cat, key[2], tit[2], dsc[2], lvl[2], def[2], FLOAT, ctx, hlp ),
-      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],        ctx, hlp )
+      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],        ctx, hlp ),
+      makeCbx( cat, key[4], tit[4], dsc[4], lvl[4], def[4],        ctx, hlp )
     };
   }
 

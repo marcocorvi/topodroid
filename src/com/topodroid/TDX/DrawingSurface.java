@@ -155,7 +155,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   private static void addManagerToCache( String fullname ) 
   { 
-    if ( commandManager != null ) {
+    if ( TDSetting.mPlotCache && commandManager != null ) {
       // if ( mCache.get( fullname ) != null ) {
       //   TDLog.Log( TDLog.LOG_IO, "replace manager into cache " + fullname );
       // } else {
@@ -180,7 +180,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     // TDLog.v( "cache size " + mCache.size() );
 
     if ( mode == DRAWING_PLAN ) {
-      if ( fullname != null ) manager = mCache.get( fullname );
+      if ( TDSetting.mPlotCache && fullname != null ) manager = mCache.get( fullname );
       // TDLog.Log( TDLog.LOG_IO, "check out PLAN from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
         mCommandManager1 = new DrawingCommandManager( DRAWING_PLAN, fullname );
@@ -191,7 +191,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       }
       commandManager = mCommandManager1;
     } else if ( mode == DRAWING_PROFILE ) {
-      if ( fullname != null ) manager = mCache.get( fullname );
+      if ( TDSetting.mPlotCache && fullname != null ) manager = mCache.get( fullname );
       // TDLog.Log( TDLog.LOG_IO, "check out PROFILE from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
         mCommandManager2 = new DrawingCommandManager( DRAWING_PROFILE, fullname );

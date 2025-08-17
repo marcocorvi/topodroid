@@ -651,7 +651,7 @@ public class TDSetting
   public static boolean mSharedXSections = false; // default value
   public static boolean mAutoXSections   = true;  // auto save/export xsections with section points
   public static boolean mSavedStations   = false;
-  // public static boolean mPlotCache       = true;  // default value
+  public static boolean mPlotCache       = true;  // default value
   public static float mDotRadius      = 5;  // radius of selection dots - splay dots are 1.5 as big
   public static float mArrowLength    = 8;
   public static int   mSlopeLSide     = 20;  // l-side of slope lines
@@ -1515,7 +1515,7 @@ public class TDSetting
     mUnitIcons     = tryFloat( prefs,   keyPoint[1], defPoint[1] );       // DISTOX_DRAWING_UNIT 
     mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
     mScalableLabel = prefs.getBoolean(  keyPoint[3], bool(defPoint[3]) ); // DISTOX_SCALABLE_LABEL
-    // mPlotCache  = prefs.getBoolean( keyPoint[], bool(defPoint[]) );    // DISTOX_PLOT_CACHE
+    mPlotCache     = prefs.getBoolean(  keyPoint[4], bool(defPoint[4]) ); // DISTOX_PLOT_CACHE
 
     // AUTOWALLS
     // String[] keyWalls = TDPrefKey.WALLS;
@@ -2808,6 +2808,8 @@ public class TDSetting
       ret = String.format(Locale.US, "%.2f", mLabelSize );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SCALABLE_LABEL
       mScalableLabel = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_PLOT_CACHE
+      mPlotCache = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else {
       TDLog.e("missing POINT key: " + k );
     }
