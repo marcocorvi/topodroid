@@ -77,13 +77,17 @@ public class CavwayProtocol extends TopoDroidProtocol
   private byte[] mPacketBytes;
 
   public long mTime = 0;
+  public int  mCavwayFlag = 0;
   public String mComment = "";
 
   /** @return the shot timestamp [s]
    */
   @Override
-  public long getTimeStamp() {
-    return mTime; }
+  public long getTimeStamp() { return mTime; }
+
+  /** @return the shot Cavway flag
+   */
+  public int getCavwayFlag() { return mCavwayFlag; }
 
   /** cstr
    * @param ctx      context
@@ -116,6 +120,7 @@ public class CavwayProtocol extends TopoDroidProtocol
     // }
 
     byte flag = packetdata[1];   //leg, err flag
+    mCavwayFlag = (flag >> 1) & 0x111; // cavway flag
 
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
     //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);

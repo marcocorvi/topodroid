@@ -99,6 +99,11 @@ public class DBlock
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
 
+  static final long FLAG_CAVWAY_1   =  512;
+  static final long FLAG_CAVWAY_2   = 1024;
+  static final long FLAG_CAVWAY_3   = 2048;
+  static final long FLAG_CAVWAY_4   = 4096;
+
   /** @return the block ID or the bric-index if the proper setting is active
    * @nore used only by the DBlockAdapter
    */
@@ -117,6 +122,7 @@ public class DBlock
    */
   boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
 
+  public long cavwayFlag() { return mFlag >> 9; }
 
   public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
@@ -125,7 +131,7 @@ public class DBlock
   public boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public boolean isNone()      { return (mFlag & FLAG_NONE)       == FLAG_NONE; }
-  public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)  == FLAG_BACKSHOT; } // BACKSHOT
+  public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT
   public boolean isTampered()  { return (mFlag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
