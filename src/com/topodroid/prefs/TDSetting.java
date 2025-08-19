@@ -1515,6 +1515,7 @@ public class TDSetting
     mUnitIcons     = tryFloat( prefs,   keyPoint[1], defPoint[1] );       // DISTOX_DRAWING_UNIT 
     mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
     mScalableLabel = prefs.getBoolean(  keyPoint[3], bool(defPoint[3]) ); // DISTOX_SCALABLE_LABEL
+    // FIXME tis should go in SCREEN
     mPlotCache     = prefs.getBoolean(  keyPoint[4], bool(defPoint[4]) ); // DISTOX_PLOT_CACHE
 
     // AUTOWALLS

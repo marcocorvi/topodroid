@@ -134,6 +134,11 @@ public class DBlock
   public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT
   public boolean isTampered()  { return (mFlag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
+  /** @return true if the cavway flag has the requested value
+   * @param f   requested flag value
+   */
+  public boolean isCavwayFlag( int f ) { return ((mFlag >> 9) & f) == f; }
+
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
   public static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
   public static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
@@ -1008,6 +1013,10 @@ public class DBlock
     } else {
       pw.format("]");
     }
+    long cavway_flag = cavwayFlag();
+    if ( (cavway_flag & 0x1) == 0x1 ) pw.format("\u066D"); // five point star
+    if ( (cavway_flag & 0x2) == 0x2 ) pw.format("\u02FF"); // lower backarrow
+    if ( (cavway_flag & 0x4) == 0x4 ) pw.format("\u061E"); // three dots
     if ( mWithPhoto ) { pw.format("#"); }
   }
 

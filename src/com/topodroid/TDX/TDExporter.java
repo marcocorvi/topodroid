@@ -1583,8 +1583,8 @@ public class TDExporter
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
 
-    String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
-    String uas = ( ua < 1.01f )? "degrees" : "grads";
+    String uls = ( ul < 1.01f )? "meter"  : "foot"; // FIXME
+    String uas = ( ua < 1.01f )? "degree" : "grad";
     // String uls = TDSetting.mUnitLengthStr;
     // String uas = TDSetting.mUnitAngleStr;
 
@@ -2047,8 +2047,8 @@ public class TDExporter
 
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
-    String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
-    String uas = ( ua < 1.01f )? "degrees" : "grads";
+    String uls = ( ul < 1.01f )? "meter"  : "foot"; // FIXME
+    String uas = ( ua < 1.01f )? "degree" : "grad";
 
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
@@ -2365,7 +2365,7 @@ public class TDExporter
    *       handled flags: duplicate surface commented 
    */
 
-  static private void writeCsvHeader( PrintWriter pw, SurveyInfo info, String newline )
+  static private void writeCsvHeader( PrintWriter pw, SurveyInfo info, String uls, String uas, String newline )
   {
     pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
     pw.format("# name: %s%s", info.name, newline );
@@ -2376,7 +2376,10 @@ public class TDExporter
     }
     if ( info.hasDeclination() ) {
       pw.format(Locale.US, "# declination: %.2f%s", info.declination, newline );
+    } else {
+      pw.format(Locale.US, "# declination: undefined%s", newline );
     }
+    pw.format(Locale.US, "#units: tape %s compass clino %s%s", uls, uas, newline );
   }
 
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, int leg_extend, char sep )
@@ -2439,9 +2442,11 @@ public class TDExporter
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csv", survey_name + ".csv", "text/csv" );
       PrintWriter pw = new PrintWriter( bw );
-      writeCsvHeader( pw, info, newline );
+      writeCsvHeader( pw, info, "meter", "degree", newline );
 
+      // FIXME TOPO put sep in this line
       pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, M1x, M1y, M1z, G1x, G1y, G1z, M2x, M2y, M2z, G2x, G2y, G2z, comment%s", newline );
+
       for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
 	// String t = ( b.mTo   == null )? "" : b.mTo;
@@ -2492,13 +2497,13 @@ public class TDExporter
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
-    String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
-    String uas = ( ua < 1.01f )? "degrees" : "grads";
+    String uls = ( ul < 1.01f )? "meter"  : "foot"; // FIXME
+    String uas = ( ua < 1.01f )? "degree" : "grad";
     try {
       // TDLog.Log( TDLog.LOG_IO, "export CSV " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "csv", survey_name + ".csv", "text/csv" );
       PrintWriter pw = new PrintWriter( bw );
-      writeCsvHeader( pw, info, newline );
+      writeCsvHeader( pw, info, uls, uas, newline );
 
       // if ( fixed.size() > 0 ) {
       //   pw.format("  ; fix stations as long-lat h_geo\n");
@@ -2506,12 +2511,7 @@ public class TDExporter
       //     pw.format("  ; *fix %s\n", fix.toExportString() );
       //   }
       // }
-      if ( info.hasDeclination() ) { // DECLINATION in CSV
-        pw.format(Locale.US, "# from to tape compass clino extend flags (declination %.4f)%s", info.declination, newline ); 
-      } else {
-        pw.format(Locale.US, "# from to tape compass clino extend flags (declination undefined)%s", newline );
-      }
-      pw.format(Locale.US, "# units tape %s compass clino %s%s", uls, uas, newline );
+      pw.format(Locale.US, "# from%c to%c tape%c compass%c clino%c extend%c flags%c comment%s",sep, sep, sep, sep, sep, sep, sep, newline );
       
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -2604,6 +2604,40 @@ public class TDExporter
         // duplicate = false; // reset flags
         // surface   = false;
       }
+
+      // HBx CSV ext
+      List< StationInfo > stations = data.getStations( sid );
+      if ( stations.size() > 0 ) {
+        pw.format(Locale.US, "%s", newline);
+        pw.format(Locale.US, "# station%c comment%c flag%c%s", sep, sep, sep, newline );
+        for ( StationInfo station : stations ) {
+          pw.format(Locale.US, "%s%c \"%s\"%c", station.mName, sep, station.mComment, sep );
+          if ( station.mFlag.isFixed() ) {
+            pw.format("F");
+          } else if ( station.mFlag.isPainted() ) {
+            pw.format("P");
+          }
+          //station.mPresentation
+          pw.format(Locale.US, "%s", newline);
+        }
+      }
+
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
+      if ( fixed.size() > 0 ) {
+        pw.format(Locale.US, "%s", newline);
+        pw.format(Locale.US, "# station%c lng%c lat%c h_geo%c accuracy%c V_accuracy%c comment%c CRS%s", sep, sep, sep, sep, sep, sep, sep, newline );
+        for ( FixedInfo fix : fixed ) {
+          pw.format(Locale.US, "%s%c %.6f%c %.6f%c %.0f%c %.1f%c %.1f%c", fix.name, sep, fix.lng, sep, fix.lat, sep, fix.h_geo, sep, fix.accuracy, sep, fix.accuracy_v, sep );
+          pw.format(Locale.US, "\"%s\"%c", fix.comment, sep );
+          if ( fix.hasCSCoords() ) {
+            pw.format(" \"%s\"%c", fix.csName(), sep );
+            pw.format(Locale.US, "%.0f%c %.0f%c %.0f", fix.cs_lng*fix.mToUnits, sep, fix.cs_lat*fix.mToUnits, sep, fix.cs_h_geo*fix.mToVUnits );
+          }
+          pw.format(Locale.US, "%s", newline);
+        }
+      }
+      // HBx CSV extend
+
       bw.flush();
       bw.close();
       return 1;

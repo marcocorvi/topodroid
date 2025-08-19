@@ -724,6 +724,20 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       setColor( b );
    }
 
+   /** @return the background color for the splay
+    * @param b    shot
+    * @param col  fallback color
+    */
+   private int getSplayColor( DBlock b, int col )
+   {
+     if ( b.failBacksplay() ) {
+       return TDColor.VIOLET;
+     } else if ( ( col = b.getPaintColor() ) != 0 ) {
+       return col & 0x99ffffff;
+     }
+     return col;
+   }
+
    /** set the color of a block
     * @param b  block
     * @note this implements the TopoDroid data coloring policy
@@ -749,11 +763,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           int color = b.isRecent()? TDColor.GREEN : TDColor.BACK_YELLOW;
           tvTo.setBackgroundColor( color );
           if ( b.isSplay() ) {
-            if ( b.failBacksplay() ) {
-              color = TDColor.VIOLET;
-            } else if ( ( col = b.getPaintColor() ) != 0 ) {
-              color = col & 0x99ffffff;
-            }
+            color = getSplayColor( b, color );
           }
           tvFrom.setBackgroundColor( color );
         } else {
@@ -763,11 +773,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             tvTo.setBackgroundColor( color );
           }
           if ( b.isSplay() ) {
-            if ( b.failBacksplay() ) {
-              color = TDColor.VIOLET;
-            } else if ( ( col = b.getPaintColor() ) != 0 ) {
-              color = col & 0x99ffffff;
-            }
+            color = getSplayColor( b, color );
           }
           if ( color != 0 ) tvFrom.setBackgroundColor( color );
         }
