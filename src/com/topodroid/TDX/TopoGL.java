@@ -495,7 +495,7 @@ public class TopoGL extends Activity
 
     TDLocale.resetTheLocale();
 
-    mListView = (MyHorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview); // button bar on the top
     int size = resetButtonBar();
 
     mMenuImage = (Button) findViewById( R.id.handle );

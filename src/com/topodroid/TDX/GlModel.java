@@ -72,6 +72,8 @@ public class GlModel
   public GlLines glLegsB   = null; // backshot
   public GlLines glSplays  = null;
   GlLines glGrid    = null;
+  GlLines glVGrid1  = null;
+  GlLines glVGrid2  = null;
   GlLines glFrame   = null;
   GlLines glSurfaceLegs = null;
   GlWalls glWalls = null;
@@ -150,6 +152,8 @@ public class GlModel
     glSurfaceLegs = null;
     glSurface = null;
     glGrid    = null;
+    glVGrid1  = null;
+    glVGrid2  = null;
     glFrame   = null;
     glNames   = null;
     glWalls   = null;
@@ -193,10 +197,11 @@ public class GlModel
   // ----------------------------------------------------------------------------------
   // DISPLAY MODE
 
-  static final int FRAME_NONE = 0;
-  static final int FRAME_GRID = 1;
-  static final int FRAME_AXES = 2;
-  static final int FRAME_MAX  = 3;
+  static final int FRAME_NONE  = 0;
+  static final int FRAME_GRID  = 1;
+  static final int FRAME_GRID2 = 2;
+  static final int FRAME_AXES  = 3;
+  static final int FRAME_MAX   = 4;
 
   static final int DRAW_NONE  = 0;
   static final int DRAW_LINE  = 1;
@@ -249,7 +254,10 @@ public class GlModel
 
   /** cycle through the modes of the display of the frame
    */
-  static void toggleFrameMode()   { frameMode = (frameMode + 1) % FRAME_MAX; }
+  static void toggleFrameMode() 
+  { 
+    frameMode = (frameMode + 1) % FRAME_MAX;
+  }
 
   /** reset to the default display modes
    */
@@ -385,7 +393,7 @@ public class GlModel
       }
     }
 
-    if ( frameMode == FRAME_GRID ) { 
+    if ( frameMode == FRAME_GRID || frameMode == FRAME_GRID2 ) { 
       GlLines grid = null;
       synchronized( this ) { grid = glGrid; } 
       if ( grid != null ) {
@@ -398,8 +406,16 @@ public class GlModel
           revMatrix[ 5] = -1;
           Matrix.multiplyMM( matrix, 0, mvp_matrix, 0, revMatrix, 0 );
           grid.draw( matrix, DRAW_LINE ); 
+          grid = (frameMode == FRAME_GRID) ? glVGrid1 : glVGrid2 ;
+          if ( grid != null ) {
+            grid.draw( matrix, DRAW_LINE );
+          }
         } else {
           grid.draw( mvp_matrix, DRAW_LINE );
+          grid = (frameMode == FRAME_GRID) ? glVGrid1 : glVGrid2 ;
+          if ( grid != null ) {
+            grid.draw( mvp_matrix, DRAW_LINE );
+          }
         }
       }
     } else if ( frameMode == FRAME_AXES  ) { 
@@ -596,7 +612,7 @@ public class GlModel
     float zmax = (float)legs.getZmax() + delta;
     
     makeGrid(  xmin, xmax, zmin, zmax, (float)legs.getYmin(), (float)legs.getYmax(), grid_size );
-    makeFrame( xmin, xmax, zmin, zmax, (float)legs.getYmin(), (float)legs.getYmax() );
+    makeFrame( xmin, xmax, zmin, zmax, (float)legs.getYmin(), (float)legs.getYmax(), grid_size );
   }
 
   /** prepare the walls triangles using the Convex-Hull model
@@ -863,7 +879,8 @@ public class GlModel
     // step = 2 * step;
     int nx = 1 + (int)((x2-x1)/step);
     int nz = 1 + (int)((z2-z1)/step);
-    // TDLog.v("Model Grid NX " + nx + " NY " + nz + " cell " + step + " X0 " + x1 + " Y0 " + y1 + " Z0 " + z1 );
+    int ny = 1 + (int)((y2-y1)/step);
+    // TDLog.v("Model Grid N " + nx + " " + nz + " " + ny + " step " + step + " X " + x1 + " " + x2 + " Z " + z1 + " " + z2 + " Y " + y1 + " " + y2 );
     int count = nx + nz + 1;
     float[] data = new float[ count*2 * 7 ];
     int k = 0;
@@ -901,17 +918,79 @@ public class GlModel
     data[ k++ ] = y2;
     data[ k++ ] = z2;
     data[ k++ ] = 1; data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 1.0f;
+
+    int count2 = 2 * ny;
+    float[] data1 = new float[ count2*2 * 7 ];
+    float[] data2 = new float[ count2*2 * 7 ];
+    x0 = x1 + step;
+    z0 = z2 - step;
+    float y0 = y1;
+    k = 0;
+    for ( int i=0; i<ny; ++i ) {
+      data1[ k++ ] = x1;
+      data1[ k++ ] = y0;
+      data1[ k++ ] = z2;
+      data1[ k++ ] = 1; data1[ k++ ] = 0; data1[ k++ ] = 0; data1[ k++ ] = 0.7f;
+      data1[ k++ ] = x0;
+      data1[ k++ ] = y0;
+      data1[ k++ ] = z2;
+      data1[ k++ ] = 1; data1[ k++ ] = 0; data1[ k++ ] = 0; data1[ k++ ] = 0.7f;
+      data1[ k++ ] = x1;
+      data1[ k++ ] = y0;
+      data1[ k++ ] = z2;
+      data1[ k++ ] = 1; data1[ k++ ] = 0; data1[ k++ ] = 0; data1[ k++ ] = 0.7f;
+      data1[ k++ ] = x1;
+      data1[ k++ ] = y0;
+      data1[ k++ ] = z0;
+      data1[ k++ ] = 1; data1[ k++ ] = 0; data1[ k++ ] = 0; data1[ k++ ] = 0.7f;
+      y0 += step;
+    }
+    x0 = x2;
+    z0 = z1;
+    y0 = y1;
+    k = 0;
+    for ( int i=0; i<ny; ++i ) {
+      data2[ k++ ] = x1;
+      data2[ k++ ] = y0;
+      data2[ k++ ] = z2;
+      data2[ k++ ] = 1; data2[ k++ ] = 0; data2[ k++ ] = 0; data2[ k++ ] = 0.7f;
+      data2[ k++ ] = x0;
+      data2[ k++ ] = y0;
+      data2[ k++ ] = z2;
+      data2[ k++ ] = 1; data2[ k++ ] = 0; data2[ k++ ] = 0; data2[ k++ ] = 0.7f;
+      data2[ k++ ] = x1;
+      data2[ k++ ] = y0;
+      data2[ k++ ] = z2;
+      data2[ k++ ] = 1; data2[ k++ ] = 0; data2[ k++ ] = 0; data2[ k++ ] = 0.7f;
+      data2[ k++ ] = x1;
+      data2[ k++ ] = y0;
+      data2[ k++ ] = z0;
+      data2[ k++ ] = 1; data2[ k++ ] = 0; data2[ k++ ] = 0; data2[ k++ ] = 0.7f;
+      y0 += step;
+    }
     
+    TDLog.v("MODEL grid init data N " + nx + " " + nz + " " + ny + " count " + count );
     // FIXME INCREMENTAL : , 0 );
     glGrid = new GlLines( mContext, GlLines.COLOR_SURVEY, 0 );
     glGrid.setAlpha( 0.5f );
-    // TDLog.v("MODEL grid init data");
     glGrid.initData( data, count ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
+
+    glVGrid1 = new GlLines( mContext, GlLines.COLOR_SURVEY, 0 );
+    glVGrid1.setAlpha( 0.5f );
+    glVGrid1.initData( data1, count2 ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
+
+    glVGrid2 = new GlLines( mContext, GlLines.COLOR_SURVEY, 0 );
+    glVGrid2.setAlpha( 0.5f );
+    glVGrid2.initData( data2, count2 ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
   }
       
-  private void makeFrame( float x1, float x2, float z1, float z2, float y1, float y2 )
+  private void makeFrame( float x1, float x2, float z1, float z2, float y1, float y2, float step )
   { 
-    float[] data = new float[ 3*2 * 7 ];
+    int nx = 1 + (int)((x2-x1)/step);
+    int nz = 1 + (int)((z2-z1)/step);
+    int ny = 1 + (int)((y2-y1)/step);
+    int count = 3 + 2 * ny + nx + nz;
+    float[] data = new float[ count*2 * 7 ];
     int k = 0;
     // line y1-y2
     data[ k++ ] = x1;
@@ -922,6 +1001,28 @@ public class GlModel
     data[ k++ ] = y2;
     data[ k++ ] = z2;
     data[ k++ ] = 1; data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 1.0f;
+    float x0 = x2; // x1 + step;
+    float z0 = z1; // z2 - step;
+    float y0 = y1;
+    for ( int i=0; i<ny; ++i ) {
+      data[ k++ ] = x1;
+      data[ k++ ] = y0;
+      data[ k++ ] = z2;
+      data[ k++ ] = 1; data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 0.3f;
+      data[ k++ ] = x0;
+      data[ k++ ] = y0;
+      data[ k++ ] = z2;
+      data[ k++ ] = 1; data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 0.3f;
+      data[ k++ ] = x1;
+      data[ k++ ] = y0;
+      data[ k++ ] = z2;
+      data[ k++ ] = 1; data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 0.3f;
+      data[ k++ ] = x1;
+      data[ k++ ] = y0;
+      data[ k++ ] = z0;
+      data[ k++ ] = 1; data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 0.3f;
+      y0 += step;
+    }
 
     // line x1-x2
     data[ k++ ] = x1;
@@ -932,6 +1033,19 @@ public class GlModel
     data[ k++ ] = y1;
     data[ k++ ] = z2;
     data[ k++ ] = 0; data[ k++ ] = 0.7f; data[ k++ ] = 0; data[ k++ ] = 1.0f;
+    x0 = x1;
+    z0 = z2 - step;
+    for ( int i=0; i<nx; ++i ) {
+      data[ k++ ] = x0;
+      data[ k++ ] = y1;
+      data[ k++ ] = z2;
+      data[ k++ ] = 0; data[ k++ ] = 0.7f; data[ k++ ] = 0; data[ k++ ] = 0.6f;
+      data[ k++ ] = x0;
+      data[ k++ ] = y1;
+      data[ k++ ] = z0;
+      data[ k++ ] = 0; data[ k++ ] = 0.7f; data[ k++ ] = 0; data[ k++ ] = 0.6f;
+      x0 += step;
+    }
 
     // line z1-z2
     data[ k++ ] = x1;
@@ -942,12 +1056,25 @@ public class GlModel
     data[ k++ ] = y1;
     data[ k++ ] = z2;
     data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 1; data[ k++ ] = 1.0f;
+    x0 = x1 + step;
+    z0 = z2;
+    for ( int i=0; i<nz; ++i ) {
+      data[ k++ ] = x1;
+      data[ k++ ] = y1;
+      data[ k++ ] = z0;
+      data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 1; data[ k++ ] = 0.6f;
+      data[ k++ ] = x0;
+      data[ k++ ] = y1;
+      data[ k++ ] = z0;
+      data[ k++ ] = 0; data[ k++ ] = 0; data[ k++ ] = 1; data[ k++ ] = 0.6f;
+      z0 -= step;
+    }
     
     // FIXME INCREMENTAL : , 0 );
     glFrame = new GlLines( mContext, GlLines.COLOR_SURVEY, 0);
     glFrame.setAlpha( 0.9f );
     // TDLog.v("MODEL frame init data");
-    glFrame.initData( data, 3 ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
+    glFrame.initData( data, count ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
   }
 
   ArrayList< Cave3DShot > legsSurvey;
