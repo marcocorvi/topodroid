@@ -1814,7 +1814,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_label_size_summary">Címkék mérete</string>
   <string name="pref_scalable_label_title">Felirat méretezés</string>
   <string name="pref_scalable_label_summary">Felirat mérete a nagyítás szerint</string>
-  <string name="pref_plot_cache_title">Vázlat gyorsítótárSketch cache</string>
+  <string name="pref_plot_cache_title">Vázlat gyorsítótár</string>
   <string name="pref_plot_cache_summary">Vázlatok gyorsítótárazása a memóriában</string>
   <string name="pref_slope_lside_title">Lejtő vonal l-side</string>
   <string name="pref_slope_lside_summary">Lejtő vonal alapértelmezett l-side</string>
