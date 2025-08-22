@@ -1101,6 +1101,7 @@ public class TDSetting
     mCheckAttached = prefs.getBoolean( keyPlot[3], bool(defPlot[3]) ); // DISTOX_CHECK_ATTACHED
     mCheckExtend   = prefs.getBoolean( keyPlot[4], bool(defPlot[4]) ); // DISTOX_CHECK_EXTEND
     mItemButtonSize= tryFloat( prefs,  keyPlot[5],      defPlot[5] );  // DISTOX_TOOLBAR_SIZE
+    mPlotCache     = prefs.getBoolean( keyPlot[6], bool(defPlot[6]) ); // DISTOX_PLOT_CACHE
     // TDLog.v("SETTING load plot done");
 
     String[] keyCalib = TDPrefKey.CALIB;
@@ -1516,7 +1517,6 @@ public class TDSetting
     mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
     mScalableLabel = prefs.getBoolean(  keyPoint[3], bool(defPoint[3]) ); // DISTOX_SCALABLE_LABEL
     // FIXME tis should go in SCREEN
-    mPlotCache     = prefs.getBoolean(  keyPoint[4], bool(defPoint[4]) ); // DISTOX_PLOT_CACHE
 
     // AUTOWALLS
     // String[] keyWalls = TDPrefKey.WALLS;
@@ -1712,6 +1712,8 @@ public class TDSetting
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_TOOLBAR_SIZE
       mItemButtonSize = tryFloatValue( hlp, k, v, def[5] );
       TopoDroidApp.setToolsToolbarParams();
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_PLOT_CACHE
+      mPlotCache = tryBooleanValue( hlp, k, v, bool(def[6]) );
     } else {
       TDLog.e("missing PLOT key: " + k );
     }
@@ -2809,8 +2811,6 @@ public class TDSetting
       ret = String.format(Locale.US, "%.2f", mLabelSize );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SCALABLE_LABEL
       mScalableLabel = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_PLOT_CACHE
-      mPlotCache = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else {
       TDLog.e("missing POINT key: " + k );
     }

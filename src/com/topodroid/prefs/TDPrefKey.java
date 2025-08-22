@@ -248,6 +248,7 @@ class TDPrefKey
     "DISTOX_TOOLBAR_SIZE",
     // "DISTOX_BACKUP_NUMBER",       // number of plot backups
     // "DISTOX_BACKUP_INTERVAL",// 7 // minimum interval between plot backups [60 s]
+    "DISTOX_PLOT_CACHE",
     "DISTOX_TOOL_POINT",     // 8  FORWARD
     "DISTOX_TOOL_LINE",      //    FORWARD
     "DISTOX_PLOT_SCREEN",    //    FORWARD
@@ -267,6 +268,7 @@ class TDPrefKey
     R.string.pref_toolbarSize_title,
     // R.string.pref_backup_number_title,
     // R.string.pref_backup_interval_title,
+    R.string.pref_plot_cache_title,
     R.string.pref_tool_point_title,
     R.string.pref_tool_line_title,
     R.string.pref_plot_screen_title,
@@ -286,6 +288,7 @@ class TDPrefKey
     R.string.pref_toolbarSize_summary,
     // R.string.pref_backup_number_summary,
     // R.string.pref_backup_interval_summary,
+    R.string.pref_plot_cache_summary,
     -1,
     -1,
     -1,
@@ -305,6 +308,7 @@ class TDPrefKey
     TDString.FIVE,
     // TDString.FIVE,
     // TDString.SIXTY,
+    TRUE,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -319,6 +323,7 @@ class TDPrefKey
     A,
     A,
     T,
+    B,
     B,
     N,
     B,
@@ -1574,7 +1579,6 @@ class TDPrefKey
     "DISTOX_DRAWING_UNIT",    // 1 // plot unit
     "DISTOX_LABEL_SIZE",      // 2 // size of labels [pt]
     "DISTOX_SCALABLE_LABEL",
-    "DISTOX_PLOT_CACHE",
     null
   };
 
@@ -1582,29 +1586,25 @@ class TDPrefKey
     R.string.pref_unscaled_points_title,
     R.string.pref_drawing_unit_title,
     R.string.pref_label_size_title,
-    R.string.pref_scalable_label_title,
-    R.string.pref_plot_cache_title
+    R.string.pref_scalable_label_title
   };
   static int[] POINTdesc = {
     R.string.pref_unscaled_points_summary,
     R.string.pref_drawing_unit_summary,
     R.string.pref_label_size_summary,
-    R.string.pref_scalable_label_summary,
-    R.string.pref_plot_cache_summary
+    R.string.pref_scalable_label_summary
   };
   static String[] POINTdef = {
     FALSE,
     "1.2",
     TDString.TWENTYFOUR,
-    FALSE,
-    TRUE
+    FALSE
   };
   static int[] POINTlvl = {
     N,
     B,
     B,
     N,
-    B,
   };
 
 

@@ -819,12 +819,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeLst( cat, key[ 1], tit[ 1], dsc[1], lvl[ 1], def[1], R.array.zoomCtrl, R.array.zoomCtrlValue, ctx, hlp ),
       // makeLst( cat, key[  ], tit[  ], dsc[ ], lvl[ ], def[ ], R.array.sectionStations, R.array.sectionStationsValue, ctx, hlp ),
       makeEdt( cat, key[ 2], tit[ 2], dsc[2], lvl[ 2], def[2], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
-      makeCbx( cat, key[ 3], tit[ 3], dsc[3], lvl[ 3], def[3], ctx, hlp ), // CHECK-MIDLINE
-      makeCbx( cat, key[ 4], tit[ 4], dsc[4], lvl[ 4], def[4], ctx, hlp ), // CHECK-EXTEND
-      makeEdt( cat, key[ 5], tit[ 5], dsc[5], lvl[ 5], def[5], FLOAT, ctx, hlp ), // DISTOX_TOOLBAR_SIZE
-      makeFwd( cat, key[ 6], tit[ 6],         lvl[ 6],         ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 3], dsc[3], lvl[ 3], def[3], ctx, hlp ),          // CHECK-MIDLINE
+      makeCbx( cat, key[ 4], tit[ 4], dsc[4], lvl[ 4], def[4], ctx, hlp ),          // CHECK-EXTEND
+      makeEdt( cat, key[ 5], tit[ 5], dsc[5], lvl[ 5], def[5], FLOAT, ctx, hlp ),   // DISTOX_TOOLBAR_SIZE
+      makeCbx( cat, key[ 6], tit[ 6], dsc[6], lvl[ 6], def[6],        ctx, hlp ),   // DISTOX_PLOT_CACHE
       makeFwd( cat, key[ 7], tit[ 7],         lvl[ 7],         ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         lvl[ 8],         ctx, hlp )
+      makeFwd( cat, key[ 8], tit[ 8],         lvl[ 8],         ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],         lvl[ 9],         ctx, hlp )
       // makeFwd( cat, key[11], tit[11],         lvl[11],         ctx, hlp ), // PLOT_WALLS
     };
   }
@@ -1451,8 +1452,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],        ctx, hlp ),
       makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], FLOAT, ctx, hlp ),
       makeEdt( cat, key[2], tit[2], dsc[2], lvl[2], def[2], FLOAT, ctx, hlp ),
-      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],        ctx, hlp ),
-      makeCbx( cat, key[4], tit[4], dsc[4], lvl[4], def[4],        ctx, hlp )
+      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],        ctx, hlp )
     };
   }
 
