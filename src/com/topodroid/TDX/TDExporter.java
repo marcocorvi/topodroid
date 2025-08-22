@@ -2444,8 +2444,12 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
       writeCsvHeader( pw, info, "meter", "degree", newline );
 
-      // FIXME TOPO put sep in this line
-      pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, M1x, M1y, M1z, G1x, G1y, G1z, M2x, M2y, M2z, G2x, G2y, G2z, comment%s", newline );
+      // FIXME TOPO put sep in this line OK HB
+      // pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, M1x, M1y, M1z, G1x, G1y, G1z, M2x, M2y, M2z, G2x, G2y, G2z, comment%s", newline );
+      pw.format("# id%c from%c to%c dist%c azi%c clino%c roll%c G%c M%c dip%c time%c type%c addres%c extend%c flag%c leg-type%c status%c M1x%c M1y%c M1z%c G1x%c G1y%c G1z%c M2x%c M2y%c M2z%c G2x%c G2y%c G2z%c comment%s",
+              sep, sep, sep, sep, sep, sep, sep, sep, sep, sep,
+              sep, sep, sep, sep, sep, sep, sep, sep, sep, sep,
+              sep, sep, sep, sep, sep, sep, sep, sep, sep, newline );// 30
 
       for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
