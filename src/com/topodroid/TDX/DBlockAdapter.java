@@ -67,7 +67,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id );
-    TDLog.v( "DBlock Adapter cstr");
+    // TDLog.v( "DBlock Adapter cstr");
     // mContext = ctx;
     mParent  = parent;
     // mItems   = items;
@@ -266,6 +266,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   void addOffset( DataHelper data_helper, float offset )
   {
+    // TDLog.v("add offset " + offset );
     boolean tamper = Math.abs( offset ) > 0.1;
     for ( DBlock blk : mSelect ) {
       if ( tamper && ! blk.isManual() ) {
@@ -284,6 +285,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   private void clearLastMultiselected()
   {
+    // TDLog.v("clear last multi selected");
     lastPosAdd    = -1;
     lastPosRemove = -1;
     lastMultiselectedBlock = null;
@@ -294,6 +296,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   private void removeItem(int pos)
   {
+    // TDLog.v("multiselect remove item");
     DBlock b = (DBlock)( getItem( pos ) );
     if ( ! b.mMultiSelected ) return;
     mSelect.remove( b );
@@ -306,6 +309,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   private void addItem(int pos)
   {
+    // TDLog.v("multiselect add item");
     DBlock b = (DBlock) getItem(pos);
     if (b.mMultiSelected) return;
     mSelect.add(b);
@@ -347,7 +351,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   void clearMultiSelect() 
   { 
-    TDLog.v("clear multiselect");
+    // TDLog.v("multiselect clear");
     DBlock blk = lastMultiselectedBlock;
     clearLastMultiselected();
     for ( DBlock b : mSelect ) {
@@ -462,6 +466,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   boolean addDataBlock( DBlock b ) 
   {
     if ( ! b.isScan() && hasBlock( b.mId ) ) return false;
+    // TDLog.v("adapter add block " + b.mId );
     add( b );
     // notifyDataSetChanged();
     return true;
@@ -595,36 +600,71 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvLength  = len;
       tvLength.setMinWidth( (int)(TopoDroidApp.mDisplayWidth) - tvFrom.getMinWidth() - tvTo.getMinWidth() );
       mBlock    = null; // REVISE_RECENT
+      tvLength.setOnClickListener( this );
+      tvFrom.setOnClickListener( this );
+      tvTo.setOnClickListener( this );
+
+      if ( TDLevel.overBasic ) tvLength.setOnLongClickListener( this );
+
+      if ( TDSetting.mEditableStations ) {
+	// tvFrom.setClickable( true );
+	// tvTo.setClickable( true );
+	// tvFrom.setFocusable( true );
+	// tvTo.setFocusable( true );
+        tvFrom.setOnEditorActionListener( this );
+        tvTo.setOnEditorActionListener( this );
+      } else {
+        tvFrom.setOnEditorActionListener( null );
+        tvTo.setOnEditorActionListener( null );
+	tvFrom.setClickable( false ); // added 20250826
+	tvTo.setClickable( false );
+	tvFrom.setFocusable( false );
+	tvTo.setFocusable( false );
+      }
     }
 
+    // FIXME inline station editing - this does not react to FROM / TO click
     // OnClickListener on_click = new OnClickListener()
     // {
       @Override
       public void onClick( View v )
       {
+        // TDLog.v("holder on click pos " + pos );
         if ( pos < START ) return;
-        // TDLog.v( "onClick " + v.getId() );
         if ( (TextView)v == tvLength ) {
-          mParent.itemClick( v, pos );
-        } else {
-          if ( editing ) {
-            mParent.recomputeItems( ((TextView)v).getText().toString(), pos );
-            editing = false;
+          mParent.itemClick( v, pos ); // this is ok
+        } else { // if ( v instanceof EditText ) // try to add this 20250826
+          if ( TDSetting.mEditableStations ) { // if ( v instanceof EditText ) // try to add this 20250826
+	    // TDLog.v("holder on click editing " + editing );
+            if ( editing ) {
+              mParent.recomputeItems( ((TextView)v).getText().toString(), pos );
+              editing = false;
+            } else {
+              editing = true;
+            }
           } else {
-            editing = true;
+            String name = ((TextView)v).getText().toString();
+            // TDLog.v("click " + name );
+            if ( ! TDString.isNullOrEmpty( name ) ) {
+              mParent.openSavedStationDialog( name );
+            }
           }
-        }
+        // } else {
+        //   TDLog.v("another view ...");
+	}
       }
     // };
 
+    // FIXME this is not called
     // OnEditorActionListener on_edit = new OnEditorActionListener()
     // {
       @Override
       public boolean onEditorAction( TextView v, int action, KeyEvent event )
       {
+        // TDLog.v("on editor action " + action );
         if ( pos < START ) return false;
-        // TDLog.v( "onEditor " + v.getId() + " F " + tvFrom.getId() + " T " + tvTo.getId() );
         if ( (TextView)v == tvLength ) return false;
+        // TDLog.v( "on editor action view " + v.getId() + " F " + tvFrom.getId() + " T " + tvTo.getId() );
         // action EditorInfo.IME_NULL = 0
         // TDLog.v( "FROM action " + action + " event " + ( (event == null)? "null": event.toString()) );
         // TDLog.v( "Blk " + mBlock.mFrom + " " + mBlock.mTo + " --> " + tvFrom.getText().toString() + " " + tvTo.getText().toString() );
@@ -649,22 +689,22 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         return true; // action consumed
       }
     // };
-      @Override
-      public boolean onLongClick( View v )
-      {
-        if ( pos < START ) return false;
-        // TDLog.v( "onLongClick " + v.getId() );
-        if ( (TextView)v == tvLength ) {
-          return mParent.itemLongClick( v, pos );
-        }
-        return false;
+
+    @Override
+    public boolean onLongClick( View v )
+    {
+      if ( pos < START ) return false;
+      // TDLog.v( "holder on long click " + v.getId() );
+      if ( (TextView)v == tvLength ) {
+        return mParent.itemLongClick( v, pos );
       }
+      return false;
+    }
 
     /** fill the text-views with the data of a block
      * @param b        block
-     * @param listener listener of long-taps on the view
      */
-    void setViewText( DBlock b, OnLongClickListener listener )
+    private void setViewData( DBlock b )
     {
       if ( b == null ) return;
       tvId.setText( String.format(Locale.US, "%1$d", b.getBlockIndexOrId() ) );
@@ -683,28 +723,62 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           b.mClino   * TDSetting.mUnitAngle,
           b.toNote() ) );
       }
+    }
+
+    /** fill the text-views with the data of a block
+     * @param b        block
+     * @param listener listener of long-taps on the view
+     * #note called only from inside this file
+     */
+    void setViewText( DBlock b, OnLongClickListener listener )
+    {
+      if ( b == null ) return;
+      // TDLog.v("set view text block " + b.mId );
+      setViewData( b );
 
       // OnClickListener toggle = new OnClickListener() {
       //   public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
       // };
 
-      tvFrom.setOnClickListener( this );
-      tvTo.setOnClickListener( this );
-      tvLength.setOnClickListener( this );
-      if ( TDLevel.overBasic ) tvLength.setOnLongClickListener( this );
+      // FIXME inline station editing: FROM and TO click are not dispatched ...
+      //
+      // tvFrom.setOnClickListener( new OnClickListener() {
+      //   public void onClick( View v ) {
+      //     if ( editing ) {
+      //       mParent.recomputeItems( ((TextView)v).getText().toString(), pos );
+      //       editing = false;
+      //     } else {
+      //       editing = true;
+      //     }
+      //   }
+      // } );
+      // tvLength.setOnClickListener( this );
+      // tvFrom.setOnClickListener( this );
+      // tvTo.setOnClickListener( this );
 
+      // if ( TDLevel.overBasic ) tvLength.setOnLongClickListener( this );
+
+      // important to have the active station 20250826
       if ( TDLevel.overBasic ) {
         tvFrom.setOnLongClickListener( listener );
         tvTo.setOnLongClickListener( listener );
       }
 
-      if ( TDSetting.mEditableStations ) {
-        tvFrom.setOnEditorActionListener( this );
-        tvTo.setOnEditorActionListener( this );
-      } else {
-        tvFrom.setOnEditorActionListener( null );
-        tvTo.setOnEditorActionListener( null );
-      }
+      // if ( TDSetting.mEditableStations ) {
+      //   // tvFrom.setClickable( true );
+      //   // tvTo.setClickable( true );
+      //   // tvFrom.setFocusable( true );
+      //   // tvTo.setFocusable( true );
+      //   tvFrom.setOnEditorActionListener( this );
+      //   tvTo.setOnEditorActionListener( this );
+      // } else {
+      //   tvFrom.setOnEditorActionListener( null );
+      //   tvTo.setOnEditorActionListener( null );
+      //   tvFrom.setClickable( false );
+      //   tvTo.setClickable( false );
+      //   tvFrom.setFocusable( false );
+      //   tvTo.setFocusable( false );
+      // }
 
       int text_size = TDSetting.mTextSize;
 
@@ -722,28 +796,28 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvId.setVisibility( View.GONE );
       }
       setColor( b );
-   }
+    }
 
-   /** @return the background color for the splay
-    * @param b    shot
-    * @param col  fallback color
-    */
-   private int getSplayColor( DBlock b, int col )
-   {
-     if ( b.failBacksplay() ) {
-       return TDColor.VIOLET;
-     } else if ( ( col = b.getPaintColor() ) != 0 ) {
-       return col & 0x99ffffff;
-     }
-     return col;
-   }
+    /** @return the background color for the splay
+     * @param b    shot
+     * @param col  fallback color
+     */
+    private int getSplayColor( DBlock b, int col )
+    {
+      if ( b.failBacksplay() ) {
+        return TDColor.VIOLET;
+      } else if ( ( col = b.getPaintColor() ) != 0 ) {
+        return col & 0x99ffffff;
+      }
+      return col;
+    }
 
-   /** set the color of a block
-    * @param b  block
-    * @note this implements the TopoDroid data coloring policy
-    */
-   void setColor( DBlock b )
-   {
+    /** set the color of a block
+     * @param b  block
+     * @note this implements the TopoDroid data coloring policy
+     */
+    void setColor( DBlock b )
+    {
       if ( b == null ) return;
       int col = b.getColorByType();
       if ( b == lastMultiselectedBlock ) {
@@ -795,6 +869,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    * @param pos         position
    * @param convertView convert-view, or null
    * @param parent      parent view-group
+   * 
+   * @note getView is repeatedly called to layout the list of shots
    */
   // @RecentlyNonNull
   @SuppressLint("WrongConstant")
@@ -825,8 +901,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     holder.mBlock = b;
     // holder.blkId = b.mId; // DistoX-EDIT
 
-    if ( b != null ) {
-      b.setView( convertView );
+    if ( b != null ) { 
+      b.setView( convertView ); // TODO the next statement could be conditioned to this returning true
       holder.setViewText( b, this );
       if ( mSearch.contains( pos ) ) {
         b.setBackgroundColor( TDColor.SEARCH );
@@ -853,9 +929,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   void updateSelectBlocksView()
   {
+    // TDLog.v( "update select blocks view ");
     for ( DBlock b : mSelect ) {
       View v = b.getView();
-      // TDLog.v( "DBlock adapter " + b.mId + " get type: view is " + ((v == null)? "null" : "non-null") );
       if ( v != null ) {
         ViewHolder holder = (ViewHolder) v.getTag();
         if ( holder != null ) {
@@ -875,6 +951,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   DBlock updateBlockView( long blk_id ) 
   {
     int size = getCount();
+    // TDLog.v( "update block view " + blk_id );
     for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == blk_id ) { // use block id instead of block itself
@@ -901,6 +978,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   @SuppressLint("WrongConstant")
   private void updateBlocksName( boolean set )
   {
+    // TDLog.v( "update blocks name");
     int size = getCount();
     if ( ! set ) {
       for ( int pos=START; pos < size; ++pos ) {

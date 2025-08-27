@@ -156,7 +156,7 @@ class TDPrefKey
     "DISTOX_STATION_NAMES", // station names: 0 alphanumeric, 1 numbers
     "DISTOX_INIT_STATION",      // 4 * // default initial station name
     "DISTOX_THUMBNAIL",                // size of photo thumbnails
-    "DISTOX_EDITABLE_STATIONS",
+    // "DISTOX_EDITABLE_STATIONS",
     "DISTOX_FIXED_ORIGIN",
     "DISTOX_SHARED_XSECTIONS",  // 8 // whether at-station X-sections are shared among plots
     // "DISTOX_DATA_BACKUP",       // export data when shot window is closed
@@ -174,7 +174,7 @@ class TDPrefKey
     R.string.pref_station_names_title,
     R.string.pref_init_station_title,
     R.string.pref_thumbnail_title,
-    R.string.pref_editable_stations_title,
+    // R.string.pref_editable_stations_title,
     R.string.pref_fixed_origin_title,
     R.string.pref_shared_xsections_title,
     // R.string.pref_data_backup_title,
@@ -191,7 +191,7 @@ class TDPrefKey
     R.string.pref_station_names_summary,
     R.string.pref_init_station_summary,
     R.string.pref_thumbnail_summary,  
-    R.string.pref_editable_stations_summary,
+    // R.string.pref_editable_stations_summary,
     R.string.pref_fixed_origin_summary,
     R.string.pref_shared_xsections_summary,
     // R.string.pref_data_backup_summary,
@@ -208,7 +208,7 @@ class TDPrefKey
     "alpha",
     TDString.ZERO,
     "200",
-    FALSE,
+    // FALSE,
     FALSE,
     FALSE,
     // FALSE,
@@ -225,7 +225,7 @@ class TDPrefKey
     B,
     B,
     A,
-    E,
+    // E, // editable stations
     B,
     B,
     B,

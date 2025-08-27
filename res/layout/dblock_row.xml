@@ -24,13 +24,15 @@
     android:padding="@dimen/padding"
     android:gravity="end"
     android:inputType="text"
+    android:editable="true"
     android:imeOptions="actionDone"
-    android:hint="@string/hint_from"
-    android:importantForAutofill="no"
-  />
+  /> <!-- editable=true is deprecated and does not help -->
   <!--
+    android:importantForAutofill="no"
+    android:hint="@string/hint_from"
     style="?android:attr/textViewStyle"
     android:background="@android:color/transparent"
+    android:onClick="doStationClick"
   -->
 
   <EditText android:id="@+id/to"
@@ -43,10 +45,13 @@
     android:padding="@dimen/padding"
     android:gravity="end"
     android:inputType="text"
+    android:editable="true"
     android:imeOptions="actionDone"
+  /> <!-- editable=true is deprecated and does not help -->
+  <!--
     android:hint="@string/hint_to"
     android:importantForAutofill="no"
-  />
+  -->
 
   <TextView android:id="@+id/length"
     android:layout_weight="140"

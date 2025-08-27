@@ -493,7 +493,7 @@ public class TDSetting
   public static float mHThreshold;         // horizontal xsection threshold (if |clino| < mHThreshold)
   // public static boolean mDataBackup = false; // whether to export data when shot-window is closed
   public static boolean mDistoXBackshot   = false;
-  public static boolean mEditableStations = false;
+  public static boolean mEditableStations = false; // FIXED to false
   public static boolean mEditableShots    = false;
   // public static int mTitleColor = TDColor.TITLE_NORMAL;
 
@@ -1081,9 +1081,9 @@ public class TDSetting
     parseStationPolicy( pref_hlp, prefs.getString( keySurvey[2], defSurvey[2] ) ); // DISTOX_SURVEY_STATION
     mStationNames = (prefs.getString(    keySurvey[3],      defSurvey[3] ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     mThumbSize    = tryInt(   prefs,     keySurvey[5],      defSurvey[5] );       // DISTOX_THUMBNAIL
-    mEditableStations = prefs.getBoolean(keySurvey[6], bool(defSurvey[6]) ); // DISTOX_EDITABLE_STATIONS
-    mFixedOrigin  = prefs.getBoolean(    keySurvey[7], bool(defSurvey[7]) ); // DISTOX_FIXED_ORIGIN
-    mSharedXSections = prefs.getBoolean( keySurvey[8], bool(defSurvey[8]) ); // DISTOX_SHARED_XSECTIONS
+    // mEditableStations = prefs.getBoolean(keySurvey[6], bool(defSurvey[6]) ); // DISTOX_EDITABLE_STATIONS
+    mFixedOrigin  = prefs.getBoolean(    keySurvey[6], bool(defSurvey[6]) ); // DISTOX_FIXED_ORIGIN
+    mSharedXSections = prefs.getBoolean( keySurvey[7], bool(defSurvey[7]) ); // DISTOX_SHARED_XSECTIONS
     // mDataBackup   = prefs.getBoolean(    keySurvey[8], bool(defSurvey[8]) ); // DISTOX_DATA_BACKUP
     // TDLog.v("SETTING load survey done");
 
@@ -1664,12 +1664,12 @@ public class TDSetting
       mThumbSize = tryIntValue( hlp, k, v, def[5] ); 
       if ( mThumbSize < 80 )       { mThumbSize = 80;  ret = Integer.toString( mThumbSize ); }
       else if ( mThumbSize > 400 ) { mThumbSize = 400; ret = Integer.toString( mThumbSize ); }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_EDITABLE_STATIONS (bool)
-      mEditableStations = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
-      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
-      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[8]) );
+    // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_EDITABLE_STATIONS (bool)
+    //   mEditableStations = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
+      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
+      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[7]) );
     // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_DATA_BACKUP (bool)
     //   mDataBackup = tryBooleanValue( hlp, k, v, bool(def[8]) );
     } else {

@@ -69,6 +69,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -248,6 +249,7 @@ public class ShotWindow extends Activity
     mFlagLeg    = leg;
     mFlagBlank  = blank;
     saveInstanceToData();
+    // TDLog.v("update display : set flags");
     updateDisplay();
   }
 
@@ -390,6 +392,7 @@ public class ShotWindow extends Activity
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         // mLastShotId = mApp_mData.getLastShotId( TDInstance.sid );
+        // TDLog.v("update display : refresh display");
         updateDisplay( );
       }
       if ( toast ) {
@@ -415,7 +418,6 @@ public class ShotWindow extends Activity
    */
   void updateDisplay( )
   {
-    // if ( LOG ) TDLog.v( TAG + "update display");
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       mMyBlocks = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
@@ -425,6 +427,7 @@ public class ShotWindow extends Activity
 
       mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
       if ( ! mDataAdapter.isMultiSelect() ) { // FIXME 2024-11-15 check if causes errors
+        // TDLog.v("update display updates shot list");
         updateShotList( mMyBlocks, mMyPhotos );
       }
       
@@ -483,7 +486,7 @@ public class ShotWindow extends Activity
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
-    // TDLog.v( TAG + "update block list " + blk_id );
+    // TDLog.v( "shot window: update block list " + blk_id );
     DBlock blk = mApp_mData.selectTheShot( blk_id, TDInstance.sid );
     if ( blk == null || mDataAdapter == null ) {
       // TDLog.v( TAG + "data null block");
@@ -512,7 +515,7 @@ public class ShotWindow extends Activity
 
       mList.post( new Runnable() {
         @Override public void run() {
-          // TDLog.v( TAG + "notify data set changed " + mDataAdapter.getCount() );
+          // TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
           // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
           mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
           mList.setSelection( mDataAdapter.getCount() - 1 );
@@ -543,7 +546,7 @@ public class ShotWindow extends Activity
   private void updateShotList( List< DBlock > list, List< PhotoInfo > photos )
   {
     if ( list == null ) return;
-    // TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
+    // TDLog.v( "update shot list: shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
     if ( TDUtil.isEmpty(list) ) {
@@ -690,7 +693,7 @@ public class ShotWindow extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    // TDLog.v( TAG + "on item click " + view.getId() );
+    // TDLog.v( "shot window: on item click pos " + pos );
     if ( CutNPaste.dismissPopupBT() ) return;
     if ( mSkipItemClick ) {
       mSkipItemClick = false;
@@ -712,6 +715,7 @@ public class ShotWindow extends Activity
    */
   public void itemClick( View view, int pos )
   {
+    // TDLog.v( "shot window: item click pos " + pos );
     if ( mDataAdapter.isMultiSelect() ) {
       if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
         TDToast.makeWarn("Immutable survey");
@@ -731,7 +735,7 @@ public class ShotWindow extends Activity
    */
   void onBlockClick( DBlock blk, int pos )
   {
-    // TDLog.v( TAG + "on block click: on_open " + mOnOpenDialog );
+    // TDLog.v( "shot window: block click pos " + pos );
     if ( mOnOpenDialog ) return;
     mOnOpenDialog = true;
     mShotPos = pos;
@@ -751,7 +755,7 @@ public class ShotWindow extends Activity
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    // TDLog.v( TAG + "on item longClick " + view.getId() );
+    // TDLog.v( "shot window: on item long click " + pos );
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
     return false;
@@ -764,6 +768,7 @@ public class ShotWindow extends Activity
    */
   public boolean itemLongClick( View view, int pos )
   {
+    // TDLog.v( "shot window: item long click " + pos );
     if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
       // TDToast.makeWarn("Immutable survey");
       return false;
@@ -795,6 +800,7 @@ public class ShotWindow extends Activity
       if ( (--pos) < 0 ) break;
       blk = mDataAdapter.get(pos);
     } while ( blk != null && blk.isSplay() && blk.getLegType() == leg0 );
+    // TDLog.v("update display : update splay leg");
     updateDisplay();
   }
 
@@ -842,6 +848,7 @@ public class ShotWindow extends Activity
       blk = mDataAdapter.get(pos);
     } while ( blk != null && blk.isSplay() );
 
+    // TDLog.v("update display : set splay class");
     updateDisplay();
   }
 
@@ -858,6 +865,7 @@ public class ShotWindow extends Activity
     // // long leg_type = DBlock.legOfBlockType[ block_type ];
     // blk.setBlockType( block_type ); // FIXME 20240716
     blk.setBlockLegType( (int)leg1 );
+    // TDLog.v("update display : update splay leg type");
     updateDisplay();
   }
 
@@ -872,6 +880,7 @@ public class ShotWindow extends Activity
       blk.setBlockLegType( leg_type );
       blk.resetFlag( flag );
     }
+    // TDLog.v("update display : update splays leg type");
     updateDisplay();
     clearMultiSelect();
   }
@@ -1162,6 +1171,7 @@ public class ShotWindow extends Activity
         }
       }
     }
+    // TDLog.v("update display : do delete shot");
     updateDisplay( ); 
   }
 
@@ -1175,6 +1185,7 @@ public class ShotWindow extends Activity
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT, PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
+    // TDLog.v("update display : insert phoito");
     updateDisplay( ); 
     return true;
   }
@@ -1366,11 +1377,14 @@ public class ShotWindow extends Activity
 
     mList = (ListView) findViewById(R.id.list);
     // view_group.setDescendantFocusability( ViewGroup.FOCUS_BLOCK_DESCENDANTS ); //  FOCUS_BEFORE_DESCENDANTS FOCUS_AFTER_DESCENDANTS
-    mList.setOnScrollListener( new OnScrollListener() {
+    mList.setOnScrollListener( new OnScrollListener()
+    {
       @Override public void onScroll( AbsListView listview, int first, int count, int total ) { }
 
-      @Override public void onScrollStateChanged( AbsListView list_view, int state ) { 
+      @Override public void onScrollStateChanged( AbsListView list_view, int state )
+      { 
         if ( OnScrollListener.SCROLL_STATE_TOUCH_SCROLL == state ) {
+          // TDLog.v("list on scroll state changed");
           View focus_view = getCurrentFocus();
           if ( focus_view != null ) focus_view.clearFocus();
         }
@@ -1379,19 +1393,26 @@ public class ShotWindow extends Activity
 
     // https://stackoverflow.com/questions/7100555/preventing-catching-illegalargumentexception-parameter-must-be-a-descendant-of
     mList.setRecyclerListener( new AbsListView.RecyclerListener() {
-        @Override
-        public void onMovedToScrapHeap(View view) {
-            if ( view.hasFocus()){
-                view.clearFocus(); //we can put it inside the second if as well, but it makes sense to do it to all scraped views
-                //Optional: also hide keyboard in that case
-                if ( view instanceof EditText) {
-                    InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
+      @Override
+      public void onMovedToScrapHeap( View view )
+      {
+        // TDLog.v("list on moved to scrap heap");
+        if ( view.hasFocus() ) {
+          //Optional: also hide keyboard in that case
+          if ( view instanceof EditText ) {
+            if ( TDSetting.mEditableStations ) {
+              view.requestFocus();
+            } else {
+              view.clearFocus(); //we can put it inside the second if as well, but it makes sense to do it to all scraped views
+              InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+              imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
+          }
         }
+      }
     });
 
+    // TDLog.v("list set adapter");
     mList.setAdapter( mDataAdapter );
     // mList.setOnItemClickListener( this );
     // mList.setLongClickable( true );
@@ -1486,6 +1507,7 @@ public class ShotWindow extends Activity
     }
 
     restoreInstanceFromData();
+    TDLog.v("update display : on resume");
     updateDisplay( );
     TDFeedback.reset();
 
@@ -1604,7 +1626,7 @@ public class ShotWindow extends Activity
   @Override 
   public boolean onLongClick( View view )
   {
-    // TDLog.v( TAG + "on longClick " + view.getId() );
+    // TDLog.v( "shot window: on long click " );
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
 
@@ -1669,29 +1691,28 @@ public class ShotWindow extends Activity
   @Override 
   public void onClick(View view)
   {
-    // TDLog.v( TAG + "on click " + view.getId() );
+    // TDLog.v( "shot window: on click " );
     if ( closeMenu() ) return;
     if ( CutNPaste.dismissPopupBT() ) return;
 
     mDataAdapter.clearSearch();
     // TDLog.v( TAG + "Multiselect [1] " + onMultiselect + " " + mDataAdapter.getMultiSelectSize() );
 
-    Button b = (Button)view;
-    if ( b == mMenuImage ) {
-      if ( mMenu.getVisibility() == View.VISIBLE ) {
-        mMenu.setVisibility( View.GONE );
-        onMenu = false;
-      } else {
-        mMenu.setVisibility( View.VISIBLE );
-        onMenu = true;
-        // if ( onMultiselect ) clearMultiSelect();
+    if ( view instanceof Button ) {
+      Button b = (Button)view;
+      if ( b == mMenuImage ) {
+        if ( mMenu.getVisibility() == View.VISIBLE ) {
+          mMenu.setVisibility( View.GONE );
+          onMenu = false;
+        } else {
+          mMenu.setVisibility( View.VISIBLE );
+          onMenu = true;
+          // if ( onMultiselect ) clearMultiSelect();
+        }
+        return;
       }
-      return;
-    }
 
-    if ( b != null ) {
       Intent intent;
-
       int k1 = 0;
       int kf = 0;
       // int k2 = 0;
@@ -1761,7 +1782,7 @@ public class ShotWindow extends Activity
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SAVED STATIONS
         if ( TDLevel.overAdvanced ) {
-          (new CurrentStationDialog( mActivity, this, mApp, mApp.getCurrentOrLastStation() )).show();
+          openSavedStationDialog( mApp.getCurrentOrLastStation() );
           // ArrayList< DBlock > list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
           //   updateDisplay( );
@@ -1773,6 +1794,7 @@ public class ShotWindow extends Activity
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // REFRESH
         if ( TDLevel.overExpert ) {
+          // TDLog.v("update display : refresh");
           updateDisplay();
 	}
 
@@ -1836,7 +1858,14 @@ public class ShotWindow extends Activity
           clearMultiSelect( );
         }
       }
+    } else {
+      TDLog.v("view not button");
     }
+  }
+
+  void openSavedStationDialog( String name )
+  {
+    (new CurrentStationDialog( mActivity, this, mApp, name )).show();
   }
 
   // ----------------------------------------------------------------
@@ -1891,6 +1920,7 @@ public class ShotWindow extends Activity
     mList.post( new Runnable() {
       @Override
       public void run() {
+        // TDLog.v("list jump to pos " + pos );
         mList.setSelection( pos );
         View v = mList.getChildAt( pos );
         if ( v != null ) v.requestFocus();
@@ -1957,6 +1987,7 @@ public class ShotWindow extends Activity
     }
     // TDLog.v( TAG + "BUFFER after cut: size " + mDBlockBuffer.size() );
     clearMultiSelect( );
+    // TDLog.v("update display : do multiselect");
     updateDisplay( ); 
   }
 
@@ -2292,6 +2323,7 @@ public class ShotWindow extends Activity
     // }
     clearMultiSelect( );
     // ... and refresh list
+    // TDLog.v("update display : color blocks");
     updateDisplay();
   }
 
@@ -2314,7 +2346,7 @@ public class ShotWindow extends Activity
    */
   void updateDBlockName( DBlock blk, String from, String to )
   {
-    // TDLog.v( TAG + "update Block Name ");
+    // TDLog.v( "update Block Name " + blk.mId + " : " + from + " - " + to );
     String sts = checkXSections( blk, from, to );
     if ( sts == null ) {
       updateShotName( blk.mId, from, to );
@@ -2481,6 +2513,7 @@ public class ShotWindow extends Activity
     }
     if ( blk.isLeg() ) {
       mApp.assignStationsAfter( blk, blks /*, stations */ );
+      // TDLog.v("update display : renumber assign stations after");
       updateDisplay();
       // mList.invalidate();
       checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
@@ -2776,10 +2809,12 @@ public class ShotWindow extends Activity
 
   void recomputeItems( String st, int pos )
   {
+    // TDLog.v("list recompute items");
     if ( mFlagSplay ) {
       if ( ! mShowSplay.remove( st ) ) {
         mShowSplay.add( st );
       }
+      // TDLog.v("update display : recompute items");
       updateDisplay( );
       mList.setSelection( (pos>5)? pos-5 : 0 );
     }
@@ -2869,6 +2904,7 @@ public class ShotWindow extends Activity
     // List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
     // mApp.assign Stations( shots );
 
+    // TDLog.v("update display : renumber shots after");
     updateDisplay();
   }
 
@@ -2881,6 +2917,7 @@ public class ShotWindow extends Activity
     // TDLog.v( TAG + "merge next leg: block " + blk.mId + " leg " + id );
     if ( id >= 0 && id != blk.mId ) {
       // mDataAdapter.updateBlockName( id, "", "" ); // name has already been updated in DB
+      // TDLog.v("update display : merge to next leg");
       updateDisplay(); // FIXME change only block with id and blk.mId
     }
     return id;
@@ -3214,4 +3251,29 @@ public class ShotWindow extends Activity
     return TDMath.atan2d( sd, cd );
   }
 
+
+  // FIXME trying to do inline station editing, but there is no view on focus
+  // public boolean dispatchTouchEvent( MotionEvent ev )
+  // {
+  //   if ( TDSetting.mEditableStations ) {
+  //     if ( ev.getAction() == MotionEvent.ACTION_DOWN ) {
+  //       View v = getCurrentFocus();
+  //       if ( v != null ) {
+  //         TDLog.v("Motion event ACTION DOWN " + v.toString() );
+  //       } else {
+  //         TDLog.v("Motion event ACTION DOWN no view on focus" );
+  //       }
+  //       // if ( v instanceof EditText ) {
+  //       //   return v.performClick();
+  //       // }
+  //     }
+  //   }
+  //   return super.dispatchTouchEvent( ev );
+  // }
+
+  // this is for onClick defined in the res file - no help
+  // public void doStationClick( View v ) 
+  // {
+  //   TDLog.v("do station click " );
+  // }
 }

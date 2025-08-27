@@ -521,8 +521,16 @@ public class DBlock
 
   /** set the display view
    * @param view   display view
+   * @return true if the block view has changed
    */
-  void setView( View view ) { mView = view; }
+  boolean setView( View view ) 
+  { 
+    if ( mView != view ) {
+      mView = view;
+      return true;
+    }
+    return false;
+  }
 
   /** set the color of the background
    * @param color   new background color

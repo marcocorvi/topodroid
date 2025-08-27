@@ -197,8 +197,10 @@
 	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
+          android:windowSoftInputMode="adjustPan" 
         />
           <!-- android:screenOrientation="fullSensor" -->
+          <!-- android:windowSoftInputMode="adjustPan" for inline station editing -->
 
         <activity android:name=".SensorActivity"
 	  android:theme="@style/Theme.NoFullScreen"
