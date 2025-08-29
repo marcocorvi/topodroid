@@ -70,6 +70,13 @@
       android:text="@string/button_clear"
       android:layout_marginEnd="@dimen/marginh"
     />
+    <Button android:id="@+id/button_photo"
+      style="@style/button_default"
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:text="@string/button_photo"
+      android:layout_marginEnd="@dimen/marginh"
+    />
     <Button android:id="@+id/button_code"
       style="@style/button_default"
       android:layout_width="0dp"

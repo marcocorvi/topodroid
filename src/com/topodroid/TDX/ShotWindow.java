@@ -1006,15 +1006,20 @@ public class ShotWindow extends Activity
   }
 
   /**
-   * @param sid      shot ID
+   * @param sid      shot ID or 0 for saved station
+   * @param title    photo title (or null)
    * @param comment  photo comment
    * @param camera   camera type: 0 use URI, 1 use TopoDroid - not used
-   * @param geomorphology code
+   * @param code     geomorphology code
+   * @param reftype  type of reference item 
+   * @return the ID of the next photo
+   * @note called by CurrentStationDialog and ShotPhotoDialog
    */
-  void doTakePhoto( long sid, String comment, int camera, String code )
+  long doTakePhoto( long shot_id, String title, String comment, int camera, String code, int reftype )
   {
     // camera = 1;
-    mMediaManager.prepareNextPhoto( sid, comment, 1, camera, code, MediaInfo.TYPE_SHOT ); // size 1 m
+    TDLog.v("shot window do take photo reftype " + reftype );
+    long ret = mMediaManager.prepareNextPhoto( shot_id, title, comment, 1, camera, code, reftype ); // size 1 m
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
@@ -1042,6 +1047,7 @@ public class ShotWindow extends Activity
     //     TDToast.makeBad( R.string.no_capture_app );
     //   }
     // }
+    return ret;
   }
 
   void askSensor( DBlock blk )
@@ -1181,20 +1187,20 @@ public class ShotWindow extends Activity
   public boolean insertPhoto( )
   {
     // FIXME TITLE has to go
-    // TDLog.v("Shot window: insert photo JPEG");
+    TDLog.v("Shot window: insert photo JPEG reftype " + mMediaManager.getRefType() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
-      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT, PhotoInfo.FORMAT_JPEG );
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), mMediaManager.getRefType(), PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
     // TDLog.v("update display : insert phoito");
     updateDisplay( ); 
     return true;
   }
 
-  public void insertPhotoBitmap( Bitmap bitmap ) 
+  public void insertPhotoBitmap( Bitmap bitmap )
   {
     long photo_id = mApp_mData.nextPhotoId( TDInstance.sid );
     String file_path = TDPath.getSurveyNextImageFilepath( photo_id, PhotoInfo.FORMAT_PNG );
-    // TDLog.v("Shot window: insert bitmap photo PNG " + file_path );
+    TDLog.v("Shot window: insert bitmap photo PNG " + file_path + " reftype " + mMediaManager.getRefType() );
     try {
       FileOutputStream fos = new FileOutputStream( file_path );
       bitmap.compress( Bitmap.CompressFormat.PNG, 0, fos );
@@ -1202,11 +1208,15 @@ public class ShotWindow extends Activity
       fos.close();
       // N.B. use the next photo ID
       mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId()+1, mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
-        mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT, PhotoInfo.FORMAT_PNG );
+        mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), mMediaManager.getRefType(), PhotoInfo.FORMAT_PNG );
     } catch ( IOException e ) {
       TDLog.e("BITMAP compress" );
     }
   }
+
+  /** @return the current photo ID in the media manager
+   */
+  long getPhotoId() { return mMediaManager.getPhotoId(); }
 
 
   // void deletePhoto( PhotoInfo photo ) 

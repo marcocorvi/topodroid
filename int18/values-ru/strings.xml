@@ -90,6 +90,7 @@
     <string name="missing_station">Отсутствует пикет</string>
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Высота %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
     <string name="shot_not_found">Замеры не найдены</string>
     <string name="shot_not_saved">Замер не сохранен</string>
     <string name="bad_sibling">Плохой замер в группе</string>
@@ -839,7 +840,7 @@
     <!-- NO string name="button_help">Помощь</string -->
     <string name="button_manual"    >Руководство</string>
     <!-- UNUSED string name="button_measure"   >Изменить   </string -->
-    <!-- UNUSED string name="button_photo"   >Фото</string -->
+    <string name="button_photo"   >Фото</string>
     <!-- UNUSED string name="button_sensor"  >Датчики</string -->
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
@@ -851,6 +852,7 @@
     <string name="button_prev"    >Предыдущий</string>
     <string name="button_new"     >Новый скрап</string>
     <string name="button_rename"  >Переименовать</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix"  >Префикс</string>
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
@@ -1378,6 +1380,7 @@
     <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <string name="title_plot_rename">Операции с абрисом</string>
     <string name="title_plot_zoomfit">Вместить / Ориентация</string>
     <string name="title_calib_export">Экспорт калибровки как</string>

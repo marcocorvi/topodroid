@@ -75,6 +75,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="missing_station">Kein Messpunkt</string>
   <string name="station_not_found">Messpunkt nicht gefunden</string>
   <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
   <string name="shot_not_found">Keine Messung gefunden</string>
     <!-- TODO string name="shot_not_saved">Shot not saved</string -->
   <string name="bad_sibling">Messzug weicht stark ab</string>
@@ -783,7 +784,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
   <string name="button_manual">Handbuch</string>
   <!-- UNUSED string name="button_measure"   >Messung   </string -->
-  <!-- UNUSED string name="button_photo"   >Foto</string -->
+  <string name="button_photo"   >Foto</string>
   <!-- UNUSED string name="button_sensor"  >Messung</string -->
   <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
   <!-- UNUSED string name="button_azimuth">Azimut</string -->
@@ -795,6 +796,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_prev">Vorherige</string>
   <string name="button_new">Neue Teilskizze</string>
   <string name="button_rename">Umbenennen</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
   <string name="button_prefix">Prefix</string>
   <string name="button_skip">Überspringen</string>
   <string name="button_done">Fertig</string>
@@ -1293,6 +1295,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="title_survey_new">Neue Vermessung</string>
   <string name="title_survey_export">Vermessung speichern als</string>
   <string name="title_survey_rename">Benenne Vermessung um in</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <!-- TODO string name="title_plot_rename">Sketch operations</string -->
   <string name="title_plot_zoomfit">Größe anpassen / Ausrichtung</string>
   <string name="title_calib_export">Kalibrierung speichern als</string>

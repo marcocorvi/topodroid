@@ -24,16 +24,17 @@ class MediaInfo
   static final int TYPE_SHOT      = 1;
   static final int TYPE_PLOT      = 2;
   static final int TYPE_XSECTION  = 3; // FIXME when is this used ?
-  static final int TYPE_MAX       = 3; //maximum reference tyep
+  static final int TYPE_STATION   = 4;
+  static final int TYPE_MAX       = 4; //maximum reference tyep
 
-  static final private String[] mTypeStr = { "u", "s", "p", "x" };
+  static final private String[] mTypeStr = { "u", "s", "p", "x", "c" };
 
   protected final int  mMediaType; // either MEDIA_AUDIO or MEDIA_PHOTO or MEDIA_SENSOR
   protected final long sid;     // survey id (assigned but never used)
   protected final long id;      // media id (audio id or photo id)
   protected final long mItemId; // reference item ID: shot ID or plot ID (for audio: old fileIdx)
   protected final String mDate;
-  protected int mItemType;     // reference item type
+  protected int mRefType;     // reference item type
 
   /** cstr
    * @param _sid    survey ID
@@ -49,7 +50,7 @@ class MediaInfo
     id      = _id;
     mItemId = item_id;
     mDate   = dt;
-    mItemType = type;
+    mRefType = type;
   }
 
   /** @return the type of media
@@ -66,7 +67,7 @@ class MediaInfo
 
   /** @return the reference type
    */
-  public int getItemType() { return mItemType; }
+  public int getRefType() { return mRefType; }
 
   /** @return the reference item ID
    */
@@ -81,7 +82,7 @@ class MediaInfo
    */
   public String getMediaName()
   {
-    return Long.toString( id ) + mTypeStr[ mItemType ];
+    return Long.toString( id ) + mTypeStr[ mRefType ];
   }
 
   /** @return name of media file
@@ -106,10 +107,11 @@ class MediaInfo
    */
   public String toString()
   {
-    switch ( mItemType ) {
+    switch ( mRefType ) {
       case TYPE_SHOT:     return id + " <" + mDate + "> ";
       case TYPE_PLOT:     return id + " {" + mDate + "} ";
       case TYPE_XSECTION: return id + " [" + mDate + "] ";
+      case TYPE_STATION:  return id + " /" + mDate + "/ ";
     }
     return id + " - " + mDate;
   }
@@ -120,17 +122,19 @@ class MediaInfo
   public String getFullString( String item_name )
   {
     if ( item_name != null ) {
-      switch ( mItemType ) {
+      switch ( mRefType ) {
         case TYPE_SHOT:     return id + ": " + item_name + " <" + mDate  + "> ";
         case TYPE_PLOT:     return id + ": " + item_name + " {" + mDate  + "} ";
         case TYPE_XSECTION: return id + ": " + item_name + " [" + mDate  + "] ";
+        case TYPE_STATION:  return id + ": " + item_name + " /" + mDate  + "/ ";
       }
       return id + ": " + item_name + " - " + mDate;
     } else {
-      switch ( mItemType ) {
+      switch ( mRefType ) {
         case TYPE_SHOT:     return id + ": <" + mDate  + "> ";
         case TYPE_PLOT:     return id + ": {" + mDate  + "} ";
         case TYPE_XSECTION: return id + ": [" + mDate  + "] ";
+        case TYPE_STATION:  return id + ": /" + mDate  + "/ ";
       }
       return id + ": " + mDate;
     }

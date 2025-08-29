@@ -98,6 +98,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
     <string name="shot_not_found">No se encontró ninguna toma</string>
     <string name="shot_not_saved">No se guardo la toma</string>
     <string name="bad_sibling">Toma incorrecta</string>
@@ -846,7 +847,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manual de usuario</string>
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
-    <!-- UNUSED string name="button_photo"   >Fotos</string -->
+    <string name="button_photo"   >Fotos</string>
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
@@ -858,6 +859,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >Nuevo exceso</string>
     <string name="button_rename"  >Renombrar</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix"  >Prefijo</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
@@ -1382,6 +1384,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <string name="title_team_dialog">Nombre del grupo</string>
     <string name="title_plot_rename">Operaciones de dibujo</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>

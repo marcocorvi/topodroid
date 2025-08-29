@@ -69,11 +69,11 @@ class AudioListDialog extends MyDialog
   private String getAudioDescription( AudioInfo audio )
   {
     long item_id = audio.getItemId();
-    if ( audio.getItemType() == MediaInfo.TYPE_SHOT ) {
+    if ( audio.getRefType() == MediaInfo.TYPE_SHOT ) {
       for ( DBlock blk : mShots ) if ( blk.mId == item_id ) {
         return audio.getFullString( blk.mFrom + " " + blk.mTo );
       }
-    } else if ( audio.getItemType() == MediaInfo.TYPE_PLOT ) {
+    } else if ( audio.getRefType() == MediaInfo.TYPE_PLOT ) {
       return audio.getFullString( Long.toString( item_id ) );
     }
     // return audio.getFullString( "- -" );
@@ -151,7 +151,7 @@ class AudioListDialog extends MyDialog
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
     AudioInfo audio = mAudios.get( pos );
-    if ( audio.getItemType() != MediaInfo.TYPE_SHOT ) return false;
+    if ( audio.getRefType() != MediaInfo.TYPE_SHOT ) return false;
     DBlock blk = getAudioBlock( audio );
     if ( blk == null ) return false;
     mParent.startAudio( audio, blk );

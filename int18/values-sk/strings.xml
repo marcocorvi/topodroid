@@ -97,6 +97,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="missing_station">Chýba meračský bod</string>
     <string name="station_not_found">Meračský bod nenájdený</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
     <string name="shot_not_found">Zámera nenájdená</string>
     <string name="shot_not_saved">Zámera neuložená</string>
     <string name="bad_sibling">Nesprávna opakovaná zámera</string>
@@ -856,7 +857,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual"    >Používateľský Manuál</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
-    <!-- UNUSED string name="button_photo"   >Photo</string -->
+    <!-- TODO string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -868,6 +869,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_prev"    >Predchádzajúci</string>
     <string name="button_new"     >Nový scrap</string>
     <string name="button_rename"  >Premenovať</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix"  >Predpona</string>
     <string name="button_skip"    >Preskočiť</string>
     <string name="button_done"    >Dokončiť</string>
@@ -1392,6 +1394,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_survey_new">Nové mapovanie</string>
     <string name="title_survey_export">Export mapovania</string>
     <string name="title_survey_rename">Premenovať mapovanie</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <string name="title_team_dialog">Mená tímu</string>
     <!-- TODO string name="title_plot_rename">Sketch operations</string -->
     <string name="title_plot_zoomfit">Orientácia</string>

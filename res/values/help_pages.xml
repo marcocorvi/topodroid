@@ -42,6 +42,7 @@
   <string name="GMSearchDialog" translatable="false">page_gm_search.htm</string>
   <!-- string name="ConnectDialog" translatable="false">page_connect.htm</string -->
   <string name="CurrentStationDialog" translatable="false">page_saved_station.htm</string>
+  <string name="StationPhotoDialog" translatable="false">page_station_photo.htm</string>
   <string name="SearchDialog" translatable="false">page_search.htm</string>
   <string name="DeviceA3InfoDialog" translatable="false">page_a3_info.htm</string>
   <string name="DeviceA3MemoryDialog" translatable="false">page_memory.htm</string>

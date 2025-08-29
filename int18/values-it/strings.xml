@@ -93,6 +93,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
     <string name="missing_station">Caposaldo assente</string>
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <string name="station_not_saved">Caposaldo non salvato</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
     <string name="shot_not_saved">Tiro non salvato</string>
     <string name="bad_sibling">Battuta con dissimili</string>
@@ -844,7 +845,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
     <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manuale utente</string>
     <!-- UNUSED string name="button_measure"   >Misura    </string -->
-    <!-- UNUSED string name="button_photo"   >Foto</string -->
+    <string name="button_photo"   >Foto</string>
     <!-- UNUSED string name="button_sensor"  >Misure</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -856,6 +857,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
     <string name="button_rename"  >Renomina</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix"  >Prefisso</string>
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
@@ -1389,6 +1391,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
     <string name="title_survey_new">Nuovo rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <string name="title_team_dialog">Nomi squadra topo</string>
     <string name="title_plot_rename">Operazioni sul disegno</string>
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
@@ -1805,8 +1808,8 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
   <string name="pref_scalable_label_title">Etichetta scala</string>
   <string name="pref_scalable_label_summary">Etichetta scala con zoom</string>
-  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
-  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
+  <string name="pref_plot_cache_title">Cache degli schizzi</string>
+  <string name="pref_plot_cache_summary">Tenere gli schizzi in memoria</string>
   <string name="pref_slope_lside_title">Linea pendenza lato sx</string>
   <string name="pref_slope_lside_summary">Default linea pendenza lato sx</string>
   <string name="pref_arrow_length_title">Direzione di sezione</string>

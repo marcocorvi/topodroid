@@ -85,6 +85,7 @@ no campo abaixo e aperte o botão.
   <string name="missing_station">Base inexistente</string>
   <string name="station_not_found">Base não encontrada</string>
   <string name="station_coords">L %1$.2f | N %2$.2f | Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
   <string name="shot_not_found">Medida não encontrada</string>
   <string name="shot_not_saved">Visada não gravada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
@@ -791,7 +792,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
   <string name="button_manual">Manual do Usuário</string>
   <!-- UNUSED string name="button_measure"   >Medir   </string -->
-  <!-- UNUSED string name="button_photo"   >Foto</string -->
+  <string name="button_photo"   >Foto</string>
   <!-- UNUSED string name="button_sensor"  >Sensores</string -->
   <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
   <!-- UNUSED string name="button_azimuth">Azimute</string -->
@@ -803,6 +804,7 @@ no campo abaixo e aperte o botão.
   <string name="button_prev">Anterior</string>
   <string name="button_new">Novo trecho</string>
   <string name="button_rename">Renomear</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
   <string name="button_prefix">Prefixo</string>
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
@@ -1300,6 +1302,7 @@ no campo abaixo e aperte o botão.
   <string name="title_survey_new">Nova topo</string>
   <string name="title_survey_export">Exportar topo</string>
   <string name="title_survey_rename">Renomear topo</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
   <string name="title_team_dialog">Nomes integrantes equipe</string>
   <string name="title_plot_rename">Operações em croquis</string>
   <string name="title_plot_zoomfit">Zoom / Orientação</string>

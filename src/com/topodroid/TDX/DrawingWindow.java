@@ -5841,7 +5841,7 @@ public class DrawingWindow extends ItemDrawer
    * @param type        reference item type
    * @note this method returns before the QCamCompass is finished
    */
-  private void doTakePointPhoto( String imagefile, boolean insert, long pid, long type )
+  private void doTakePointPhoto( String imagefile, boolean insert, long pid, int type )
   {
     TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
     // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // canTakeasPhoto
@@ -5888,7 +5888,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    mMediaManager.prepareNextPhoto( pid, ((comment == null)? "" : comment), size, camera, ((code == null)? "" : code), MediaInfo.TYPE_PLOT );
+    mMediaManager.prepareNextPhoto( pid, "", ((comment == null)? "" : comment), size, camera, ((code == null)? "" : code), MediaInfo.TYPE_PLOT );
     // mMediaComment = (comment == null)? "" : comment;
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );

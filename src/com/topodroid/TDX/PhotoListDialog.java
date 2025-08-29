@@ -186,7 +186,7 @@ public class PhotoListDialog extends MyDialog
     if ( TDFile.hasTopoDroidFile( png_path ) ) {
       TDFile.deleteFile( png_path );
     }
-    if ( photo.getItemType() == MediaInfo.TYPE_PLOT ) {
+    if ( photo.getRefType() == MediaInfo.TYPE_PLOT ) {
       // get the plot tdr file
       new AsyncTask<PhotoInfo,Void,Boolean>() {
         @Override protected Boolean doInBackground(PhotoInfo... args)

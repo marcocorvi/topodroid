@@ -19,11 +19,12 @@ import com.topodroid.utils.TDString;
 
 public class StationInfo
 {
-  String mName;      // name (ID)
-  String mComment;   // comment / description
-  StationFlag mFlag; // flags
+  String mName;          // name (ID)
+  String mComment;       // comment / description
+  StationFlag mFlag;     // flags
   String mPresentation;  // presentation string
-  String mGeoCode;          // geomorphology code
+  String mGeoCode;       // geomorphology code
+  long mPhotoId;         // photo ID
 
   /** @return true if the station info flag is "fixed"
    */
@@ -48,13 +49,14 @@ public class StationInfo
    * @param flag     flag
    * @param presentation ???
    */
-  StationInfo( String name, String comment, long flag, String presentation, String code )
+  StationInfo( String name, String comment, long flag, String presentation, String code, long photoId )
   {
     mName    = name;
     mComment = (comment == null)? TDString.EMPTY : comment;
     mFlag    = new StationFlag( (int)flag );
     mPresentation = presentation;
     mGeoCode    = code;
+    mPhotoId    = photoId;
   }
 
   /** @return string presentation of the station info
@@ -86,5 +88,7 @@ public class StationInfo
    * @param code   new code
    */
   public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
+
+  public long getPhotoId() { return mPhotoId; }
 
 }

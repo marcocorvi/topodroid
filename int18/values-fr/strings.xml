@@ -93,6 +93,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="missing_station">Station manquante</string>
     <string name="station_not_found">Station introuvable</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
     <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
     <string name="shot_not_saved">Visée non sauvegardée</string>
@@ -844,7 +845,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual"    >Manuel</string>
     <!-- UNUSED string name="button_measure"   >Mesure   </string -->
-    <!-- UNUSED string name="button_photo"   >Photos</string -->
+    <string name="button_photo"   >Photo</string>
     <!-- UNUSED string name="button_sensor"  >Capteurs</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -856,6 +857,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_prev"    >Précédent</string>
     <string name="button_new"     >Nouveau fragment</string>
     <string name="button_rename"  >Renommer</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix"  >Préfixe</string>
     <string name="button_skip"    >Passer</string>
     <string name="button_done"    >Effectué</string>
@@ -1382,6 +1384,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_survey_new">Nouveau relevé</string>
     <string name="title_survey_export">Exporter le relevé sous</string>
     <string name="title_survey_rename">Renommer le relevé sous</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <!-- TODO string name="title_plot_rename">Sketch operations</string -->
     <string name="title_plot_zoomfit">Ajustement zoom / Orientation</string>
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>

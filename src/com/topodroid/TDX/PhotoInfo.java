@@ -21,8 +21,8 @@ class PhotoInfo extends MediaInfo
   static final int CAMERA_TOPODROID_2 = 2;
   static final int CAMERA_INTENT      = 3;       // camera type
 
-  String mTitle;   // photo title FIXME TITLE
-  String mItemName; // shot name
+  String mTitle;    // photo title FIXME TITLE
+  String mItemName; // name of reference item (shot), or null
   // public String mName; // photo filename without extension ".jpg" and survey prefix dir = photo id
   String mComment;
   int mCamera;

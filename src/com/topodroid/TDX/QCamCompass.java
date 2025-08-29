@@ -426,11 +426,12 @@ class QCamCompass extends Dialog
               // TDLog.v( "QCAM compass: Texture set jpeg data returns " + mHasSaved );
             }
             if ( mHasSaved ) {
-              if ( mMediaManager != null && mMediaManager.getItemType() == MediaInfo.TYPE_XSECTION ) {
+              if ( mMediaManager != null && mMediaManager.getRefType() == MediaInfo.TYPE_XSECTION ) {
                 // TDLog.v("QCAM comapss: insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
-                TopoDroidApp.mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
-                  mMediaManager.getComment(), mMediaManager.getCamera(), "", 
-                  (int)(mMediaManager.getItemType()) /* MediaInfo.TYPE_XSECTION */ , PhotoInfo.FORMAT_JPEG );
+                TopoDroidApp.mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(),
+                  mMediaManager.getTitle(), TDUtil.currentDateTime(), 
+                  mMediaManager.getComment(), mMediaManager.getCamera(), "",  // geocode=""
+                  (int)(mMediaManager.getRefType()) /* MediaInfo.TYPE_XSECTION */ , PhotoInfo.FORMAT_JPEG );
                 mHasInserted = true;
               }
             } else {

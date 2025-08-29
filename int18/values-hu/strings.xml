@@ -93,6 +93,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="missing_station">Hiányzó mérési pont</string>
     <string name="station_not_found">Mérési pont nem található</string>
     <string name="station_coords">K %1$.2f É %2$.2f Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
     <string name="shot_not_found">Mérés nem található</string>
     <string name="shot_not_saved">Mérés nincs elmentve</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
@@ -849,7 +850,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- DONT TRANSLATE string name="button_help">Súgó</string -->
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
     <!-- UNUSED string name="button_measure"   >Mérés   </string -->
-    <!-- UNUSED string name="button_photo"   >Fotó</string -->
+    <string name="button_photo"   >Fotó</string>
     <!-- UNUSED string name="button_sensor"  >Szenzorok</string -->
     <!-- UNUSED string name="button_direction">Irány/Lejtés</string -->
     <!-- UNUSED string name="button_azimuth">Irány</string -->
@@ -861,6 +862,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_prev"    >Előző</string>
     <string name="button_new"     >Új szint</string>
     <string name="button_rename"  >Átnevez</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix"  >Előtag</string>
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
@@ -1390,6 +1392,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_survey_new">Új felmérés</string>
     <string name="title_survey_export">felmérés exportálása</string>
     <string name="title_survey_rename">Felmérés átnevezése</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <string name="title_team_dialog">Csapat nevek</string>
     <string name="title_plot_rename">Vázlat műveletek</string>
     <string name="title_plot_zoomfit">Zoom teljes / Irány</string>

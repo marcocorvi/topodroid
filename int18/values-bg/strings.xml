@@ -96,6 +96,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="missing_station">Липсващ репер</string>
     <string name="station_not_found">Реперът не е намерен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <!-- TODO string name="station_not_saved">Station not saved</string -->
     <string name="shot_not_found">Няма открити измервания</string>
     <string name="shot_not_saved">Измерванията не са запаметени</string>
     <string name="bad_sibling">Лоши измервания</string>
@@ -849,7 +850,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual">Ръководство за потребителя</string>
     <!-- UNUSED string name="button_measure"   >Measure</string -->
-    <!-- UNUSED string name="button_photo"  copyable="fr">Photo</string -->
+    <string name="button_photo">Photo</string>
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -861,6 +862,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_prev">Предишен</string>
     <string name="button_new">Нов отрязък</string>
     <string name="button_rename">Преименувай</string>
+    <!-- TODO string name="button_retake"  >Retake</string -->
     <string name="button_prefix">Представка</string>
     <string name="button_skip">Пропусни</string>
     <string name="button_done">Готово</string>
@@ -1388,6 +1390,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_survey_new">Нова картировка</string>
     <string name="title_survey_export">Експортирай картировката</string>
     <string name="title_survey_rename">Преименувай картировката</string>
+    <!-- TODO string name="title_station_photo">Station photo</string -->
     <string name="title_plot_rename">Операции за скица</string>
     <string name="title_plot_zoomfit">Мащабиране / ориентация</string>
     <string name="title_calib_export">Експортирай калибрацията</string>

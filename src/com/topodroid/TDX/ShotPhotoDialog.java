@@ -43,7 +43,7 @@ class ShotPhotoDialog extends MyDialog
   private Button   mButtonOK;
   private Button   mBtnGeoCode;    // geomorphology coding
   // private CheckBox mCamera;        // whether to use camera or camera2
-  private long     mSid;           // shot id
+  private long     mShotId;           // shot id
   private String   mName;          // shot name
   private String   mGeoCode;       // geomorphology code
   // private Button   mButtonCancel;
@@ -52,14 +52,14 @@ class ShotPhotoDialog extends MyDialog
   /**
    * @param context   context
    * @param parent    parent shot list activity
-   * @param sid       shot id
+   * @param shot_id   shot id
    * @param name      shot name
    */
-  ShotPhotoDialog( Context context, ShotWindow parent, long sid, String name )
+  ShotPhotoDialog( Context context, ShotWindow parent, long shot_id, String name )
   {
     super( context, null, R.string.ShotPhotoDialog ); // null app
     mParent = parent;
-    mSid    = sid;
+    mShotId = shot_id;
     mName   = name;
     mGeoCode   = "";
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoComment");
@@ -126,7 +126,7 @@ class ShotPhotoDialog extends MyDialog
       // int camera = // ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
       // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
-      mParent.doTakePhoto( mSid, comment, camera, mGeoCode );
+      mParent.doTakePhoto( mShotId, "", comment, camera, mGeoCode, MediaInfo.TYPE_SHOT ); // title=""
     } else if ( TDLevel.overExpert && b == mBtnGeoCode ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;

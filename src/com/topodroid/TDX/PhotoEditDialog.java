@@ -56,7 +56,7 @@ class PhotoEditDialog extends MyDialog
     // TDLog.v("photo edit dialog id " + photo.id );
     mParent = parent;
     mPhoto  = photo;
-    if ( mPhoto.getItemType() == MediaInfo.TYPE_XSECTION ) {
+    if ( mPhoto.getRefType() == MediaInfo.TYPE_XSECTION ) {
       if ( mPhoto.mFormat == PhotoInfo.FORMAT_JPEG ) {
         mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPhoto.mItemName );
       } else {
@@ -70,8 +70,8 @@ class PhotoEditDialog extends MyDialog
       }
     }
     mGeoCode  = mPhoto.getGeoCode();
-    mAtShot   = ( mPhoto.getItemType() == MediaInfo.TYPE_SHOT );
-    TDLog.v("PhotoEditDialog file " + mFilename);
+    mAtShot   = ( mPhoto.getRefType() == MediaInfo.TYPE_SHOT );
+    TDLog.v("PhotoEditDialog file " + mFilename + " at shot " + mAtShot );
     mTdImage = new TDImage( mFilename );
     // TDLog.v( "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
     // TDLog.v( "photo edit dialog: " + mFilename );

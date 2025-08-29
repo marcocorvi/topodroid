@@ -103,6 +103,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="missing_station">Missing station</string>
     <string name="station_not_found">Station not found</string>
     <string name="station_coords" copyable="all">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <string name="station_not_saved">Station not saved</string>
     <string name="shot_not_found">No shot found</string>
     <string name="shot_not_saved">Shot not saved</string>
     <string name="bad_sibling">Bad leg sibling</string>
@@ -862,7 +863,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual"    >User manual</string>
     <!-- UNUSED string name="button_measure"   >Measure</string -->
-    <!-- UNUSED string name="button_photo"  copyable="fr">Photo</string -->
+    <string name="button_photo"  copyable="fr">Photo</string>
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -874,6 +875,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_prev"    >Previous</string>
     <string name="button_new"     >New scrap</string>
     <string name="button_rename"  >Rename</string>
+    <string name="button_retake"  >Retake</string>
     <string name="button_prefix"  >Prefix</string>
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
@@ -1404,6 +1406,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_survey_new">New survey</string>
     <string name="title_survey_export">Export survey</string>
     <string name="title_survey_rename">Rename survey</string>
+    <string name="title_station_photo">Station photo</string>
     <string name="title_team_dialog">Team names</string>
     <string name="title_plot_rename">Sketch operations</string>
     <string name="title_plot_zoomfit">Zoom fit / Orientation</string>
