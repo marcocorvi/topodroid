@@ -341,4 +341,8 @@ public class TopoDroidProtocol
    */
   public boolean readCalibration( byte[] calib ) { return false; }
 
+  /** @return the cavway flag (0 by default if the method is not overridden)
+   */
+  public int getCavwayFlag() { return 0; }
+
 }

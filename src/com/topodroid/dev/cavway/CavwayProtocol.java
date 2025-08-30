@@ -1,4 +1,4 @@
-/* @file DeviceXBLEProtocol.java
+/* @file CavwayProtocol.java
  *
  * @author Siwei Tian
  * @date July 2024
@@ -77,7 +77,13 @@ public class CavwayProtocol extends TopoDroidProtocol
   private byte[] mPacketBytes;
 
   public long mTime = 0;
-  public int  mCavwayFlag = 0;
+  private int mCavwayFlag = 0; // complementary values than in the device packet
+  // 7: feature
+  // 6: border
+  // 5: backshot
+  // 4: generic
+  // 3,2,1: unused
+  // 0: no-flag
   public String mComment = "";
 
   /** @return the shot timestamp [s]
@@ -85,8 +91,9 @@ public class CavwayProtocol extends TopoDroidProtocol
   @Override
   public long getTimeStamp() { return mTime; }
 
-  /** @return the shot Cavway flag
+  /** @return the shot Cavway flag: 0=none, 4=generic, 5=backsight, 6=ridge, 7=feature
    */
+  @Override
   public int getCavwayFlag() { return mCavwayFlag; }
 
   /** cstr
@@ -119,8 +126,9 @@ public class CavwayProtocol extends TopoDroidProtocol
     //   TDLog.v( TAG + "packet " + packetdata.length + ": " + sb.toString() );
     // }
 
-    byte flag = packetdata[1];   //leg, err flag
-    mCavwayFlag = (flag >> 1) & 0x111; // cavway flag
+    byte flag = packetdata[1];   // leg, err flag
+    mCavwayFlag = ( (flag >> 1) & 0x7 ) ^ 0x7; // cavway flag: this uses the complementary values than in the device
+    if ( mCavwayFlag != 0 ) TDLog.v("cavway data flag " + mCavwayFlag ); // DEBUG check the flag values
 
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
     //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);

@@ -171,6 +171,7 @@ public class TopoDroidComm
   {
     if(res == DataType.PACKET_DATA) {
       ++mNrReadPackets;
+      int flag = ( mProtocol.getCavwayFlag() << 16 ); // DBlock.FLAG_SURVEY | ( mProtocol.getCavwayFlag() << 16 );
       double d = mProtocol.mDistance;
       double b = mProtocol.mBearing;
       double c = mProtocol.mClino;
@@ -178,7 +179,7 @@ public class TopoDroidComm
       long time = mProtocol.getTimeStamp();
       long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
-              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, LegType.NORMAL, 0, comment, TDInstance.deviceAddress(),
+              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, LegType.NORMAL, 0, comment, TDInstance.deviceAddress(),
               mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, time);
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);

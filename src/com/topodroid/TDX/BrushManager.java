@@ -336,6 +336,11 @@ public class BrushManager
   public static final Paint paintSplayXVdot   = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);  // MID_BLUE
   public static final Paint paintSplayLatest  = makePaint( TDColor.SPLAY_LATEST,  WIDTH_CURRENT, Paint.Style.STROKE);
 
+  public static final Paint paintSplayFeature   = makePaint( TDColor.SPLAY_FEATURE,   WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayRidge     = makePaint( TDColor.SPLAY_RIDGE,     WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayBacksight = makePaint( TDColor.SPLAY_BACKSIGHT, WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayGeneric   = makePaint( TDColor.SPLAY_GENERIC,   WIDTH_CURRENT, Paint.Style.STROKE);
+
   public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);

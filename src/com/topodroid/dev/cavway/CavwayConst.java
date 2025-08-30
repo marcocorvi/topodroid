@@ -32,4 +32,11 @@ public class CavwayConst
   public static final int LASER_ON         = 0x36;
   public static final int LASER_OFF        = 0x37;
   public static final int MEASURE          = 0x38;
+
+  public static final int FLAG_FEATURE   = 0x7; // Cavway flags: values are complementary than in the device 
+  public static final int FLAG_RIDGE     = 0x6;
+  public static final int FLAG_BACKSIGHT = 0x5;
+  public static final int FLAG_GENERIC   = 0x4;
+  // 0x3 0x2 0x1 unused
+  public static final int FLAG_NONE      = 0x0;
 }

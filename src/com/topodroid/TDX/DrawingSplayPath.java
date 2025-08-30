@@ -22,6 +22,7 @@ package com.topodroid.TDX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.common.PlotType;
+import com.topodroid.dev.cavway.CavwayConst;
 
 // import java.io.PrintWriter;
 // import java.io.DataOutputStream;
@@ -255,6 +256,28 @@ public class DrawingSplayPath extends DrawingPath
       mPaint = BrushManager.paintSplayXB; // BLUE
       return true;
     }
+    int cavway_flag = blk.cavwayFlag();
+    if ( cavway_flag > 0 ) {
+      switch ( cavway_flag ) {
+        case CavwayConst.FLAG_FEATURE: 
+          mPaint = BrushManager.paintSplayFeature;
+          break;
+        case CavwayConst.FLAG_RIDGE:
+          mPaint = BrushManager.paintSplayRidge;
+          break;
+        case CavwayConst.FLAG_BACKSIGHT:
+          mPaint = BrushManager.paintSplayBacksight;
+          break;
+        case CavwayConst.FLAG_GENERIC:
+          mPaint = BrushManager.paintSplayGeneric;
+          break;
+        default:
+          mPaint = BrushManager.fixedOrangePaint;
+          break;
+      }
+      return true;
+    }
+      
     // if ( blk.isHighlighted() ) {
     //   mPaint = BrushManager.highlightPaint;
     //   return;

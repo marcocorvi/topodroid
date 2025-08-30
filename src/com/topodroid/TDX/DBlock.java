@@ -20,6 +20,7 @@ import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
+import com.topodroid.dev.cavway.CavwayConst;
 
 
 // import java.lang.Long;
@@ -60,6 +61,7 @@ public class DBlock
 
   int  mExtend;
   private long mFlag;     
+  private long mCavwayFlag = 0;
   int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY
   private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
@@ -99,10 +101,8 @@ public class DBlock
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
 
-  static final long FLAG_CAVWAY_1   =  512;
-  static final long FLAG_CAVWAY_2   = 1024;
-  static final long FLAG_CAVWAY_3   = 2048;
-  static final long FLAG_CAVWAY_4   = 4096;
+  static final long FLAG_MASK     =  0xffff; // mask of the topodroid flag
+  static final long FLAG_CAVWAY   = 0x70000; // mask of the cavway flag
 
   /** @return the block ID or the bric-index if the proper setting is active
    * @nore used only by the DBlockAdapter
@@ -120,11 +120,13 @@ public class DBlock
    * @param flag     flag to test
    * @return true if the flag is set
    */
-  boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
+  boolean hasFlag( long flag ) { return (mFlag & flag) == flag; }
 
-  public long cavwayFlag() { return mFlag >> 9; }
+  /** @return the Cavway flag: 0=none, 7=feature, 6=ridge, 5=backsight, 4=generic
+   */
+  public int cavwayFlag() { return (int)( mFlag >> 16 ); } // { return ( mFlag & FLAG_CAVWAY ) >> 16; }
 
-  public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
+  public boolean isSurvey()    { return (mFlag & FLAG_MASK)       == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
   public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
   public boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
@@ -137,7 +139,7 @@ public class DBlock
   /** @return true if the cavway flag has the requested value
    * @param f   requested flag value
    */
-  public boolean isCavwayFlag( int f ) { return ((mFlag >> 9) & f) == f; }
+  public boolean isCavwayFlag( int f ) { return ((mFlag >> 16) & f) == f; }
 
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
   public static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
@@ -146,7 +148,7 @@ public class DBlock
   public static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public static boolean isNone(long flag)      { return (flag & FLAG_NONE)       == FLAG_NONE; }
-  public static boolean isBackshot(long flag)  { return (flag & FLAG_BACKSHOT)  == FLAG_BACKSHOT; } // BACKSHOT
+  public static boolean isBackshot(long flag)  { return (flag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT
   public static boolean isTampered(long flag)  { return (flag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
 
   public void setTampered() { mFlag |= FLAG_TAMPERED; }
@@ -161,11 +163,12 @@ public class DBlock
 
   /** set the block flag to a given bit-string
    * @param flag    new flag bit-string
+   * @note TAMPERED and CAVWAY flags are not reset
    */
   void resetFlag( long flag ) 
   { 
     // TDLog.v("BLK " + mId + " reset flag " + ((flag&FLAG_TAMPERED) != 0) );
-    mFlag = flag | ( mFlag & FLAG_TAMPERED );
+    mFlag = flag | ( mFlag & FLAG_TAMPERED ) | ( mFlag & FLAG_CAVWAY );
   }
 
   // /** set a flag value(s)
@@ -1021,10 +1024,24 @@ public class DBlock
     } else {
       pw.format("]");
     }
-    long cavway_flag = cavwayFlag();
-    if ( (cavway_flag & 0x1) == 0x1 ) pw.format("\u066D"); // five point star
-    if ( (cavway_flag & 0x2) == 0x2 ) pw.format("\u02FF"); // lower backarrow
-    if ( (cavway_flag & 0x4) == 0x4 ) pw.format("\u061E"); // three dots
+    switch ( cavwayFlag() ) {
+      case CavwayConst.FLAG_NONE:
+        break;
+      case CavwayConst.FLAG_FEATURE: 
+        pw.format("\u066D");     // five point star
+        break;
+      case CavwayConst.FLAG_RIDGE:
+        pw.format("\u29d9");         // right wiggly fence
+        break;
+      case CavwayConst.FLAG_BACKSIGHT:
+        pw.format("\u02FF"); // lower backarrow
+        break;
+      case CavwayConst.FLAG_GENERIC:
+        pw.format("\u061E");     // three dots
+        break;
+      default:
+        break;
+    }
     if ( mWithPhoto ) { pw.format("#"); }
   }
 
