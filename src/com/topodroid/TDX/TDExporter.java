@@ -2423,7 +2423,8 @@ public class TDExporter
     if ( comment == null ) {
       pw.format("%c%s", sep, newline );
     } else {
-      pw.format("%c%s%s", sep, TDString.escapeSeparator(sep, comment), newline );
+      // pw.format("%c%s%s", sep, TDString.escapeSeparator(sep, comment), newline ); // \,
+      pw.format("%c\"%s\"%s", sep, comment, newline ); // " " HBc
     }
   }
 
