@@ -2563,7 +2563,7 @@ public class TDExporter
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
-              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), item.mComment, sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), ref_item.mComment, sep, newline ); //HBc 
               duplicate = false; // reset flags
               surface   = false;
               ref_item = null; 
