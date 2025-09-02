@@ -129,7 +129,7 @@ public class TDPath
   private static String ROOT_ZIP      = ROOT_CW_DIR + "/zip";
   private static String ROOT_TMP      = ROOT_CW_DIR + "/tmp";
   private static String ROOT_TDCONFIG = ROOT_CW_DIR + "/thconfig";
-  private static String ROOT_C3EXPORT = ROOT_CW_DIR + "/c3export";
+  private static String ROOT_C3EXPORT = ROOT_CW_DIR + "/c3export"; // used as temp folder for shp
 
   private static String APP_SURVEY_PATH   = null;
   private static String APP_PHOTO_PATH    = null;
@@ -487,6 +487,9 @@ public class TDPath
   public static String getTdconfigFile( String name ) { return ROOT_TDCONFIG + "/" + name; }
 
   // replaced with TDFile functions
+
+  /** c3xport folder is used as temporray forder for SHP files before zip-compressing them in SHZ
+   */
   // public static String getC3exportDir( ) { return ROOT_C3EXPORT ; }
   public static String getC3exportPath( String name ) { return ROOT_C3EXPORT + "/" + name; }
   // public static String getC3exportPath( String name, String ext ) { return ROOT_C3EXPORT + "/" + name + "." + ext; }

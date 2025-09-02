@@ -75,7 +75,16 @@ public class ExportSHP
 
   // ---------------------------------------------------------------------------
 
-  // @param name survey/model name
+  /** export 3D as ascii Shapefile
+   * @param zos      zip output stream
+   * @param filepath folder in which the individual SHP files are saved
+   * @param name     survey/model name
+   * @param data     data model
+   * @param b_legs   whether to export legs
+   * @param b_splays whether to export splays
+   * @param b_walls  whether to export walls
+   * @return true on success
+   */
   public boolean exportASCII( OutputStream zos, String filepath, String name, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls )
   {
     // if ( data == null ) return false;
@@ -96,9 +105,9 @@ public class ExportSHP
     // this is dirname
     // String filepath = TDPath.getC3exportPath( name ); // export temporary folder for shp files - fullpath
 
-    if ( ret )             ret &= exportStations( filepath, files, data.getStations(), data );
-    if ( ret && b_legs )   ret &= exportShots( filepath, files, data.getShots(), "leg", data );
-    if ( ret && b_splays ) ret &= exportShots( filepath, files, data.getSplays(), "splay", data );
+    if ( ret )             ret &= exportStations( filepath, files, data.getStations(), data );     // stations saved in filepath/station
+    if ( ret && b_legs )   ret &= exportShots( filepath, files, data.getShots(), "leg", data );    // legs saved in filepath/leg
+    if ( ret && b_splays ) ret &= exportShots( filepath, files, data.getSplays(), "splay", data ); // splays saved in filepath/splay
     if ( ret && b_walls ) {
       ret &= exportFacets( filepath, files, mFacets, data );
       if ( ret ) ret &= exportTriangles( filepath, files, mTriangles );
