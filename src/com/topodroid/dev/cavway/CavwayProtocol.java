@@ -59,8 +59,8 @@ public class CavwayProtocol extends TopoDroidProtocol
   public static final int PACKET_NONE           = 0;
   public static final int PACKET_ERROR          = 0x80;
 
-  public long mG2X, mG2Y, mG2Z;
-  public long mM2X, mM2Y, mM2Z;
+  // public long mG2X, mG2Y, mG2Z;
+  // public long mM2X, mM2Y, mM2Z;
 
   public String mFirmVer;
   public String mHardVer;
@@ -153,7 +153,7 @@ public class CavwayProtocol extends TopoDroidProtocol
     // if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
     mDip = CavwayData.toDip1( packetdata );
 
-    // encode G1x,G2x in a long 
+    // for shots encode G1x,G2x in a long
     mGX = CavwayData.toRawGx( packetdata );
     mGY = CavwayData.toRawGy( packetdata );
     mGZ = CavwayData.toRawGz( packetdata );

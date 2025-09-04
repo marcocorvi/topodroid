@@ -108,7 +108,7 @@ public class TDColor
 
   public static final int SPLAY_FEATURE   = 0xccffee44; // yellow
   public static final int SPLAY_RIDGE     = 0xccee44ff; // purple
-  public static final int SPLAY_BACKSIGHT = 0xcccceeee; // bluish white
+  public static final int SPLAY_BACKSIGHT = 0xcc66ccee; // blue
   public static final int SPLAY_GENERIC   = 0xcc77ff77; // green
 
   public static final int SEARCH        = 0xff996600; // search result highlight color

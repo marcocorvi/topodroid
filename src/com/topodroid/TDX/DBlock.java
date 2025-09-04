@@ -1007,41 +1007,53 @@ public class DBlock
    */
   private void formatFlagPhoto( PrintWriter pw )
   {
+    switch ( cavwayFlag() ) {
+      case CavwayConst.FLAG_NONE:
+        pw.format("]");
+        break;
+      case CavwayConst.FLAG_FEATURE: 
+        // pw.format("\u066D");     // five point star
+        // pw.format("\u07B0 ");     // Thaana Sukun
+        pw.format("\u2990 ");     // upper tick square bracket
+        break;
+      case CavwayConst.FLAG_RIDGE:
+        // pw.format("\u29d9");         // right wiggly fence
+        // pw.format("\u27E7");         // double square bracket
+        // pw.format("\u2224");         // not divide
+        // pw.format("\u23A4");         // top-half bracket
+        // pw.format("\u2309");         // top-half bracket
+        // pw.format("\u23AB");         // curved top-half bracket
+        pw.format("\u2773");         // curved bracket
+        // pw.format("\u2998");         // turtoise bracket
+        break;
+      case CavwayConst.FLAG_BACKSIGHT:
+        // pw.format("\u02FF"); // lower backarrow
+        pw.format("\u298C"); // underlined square bracket
+        break;
+      case CavwayConst.FLAG_GENERIC:
+        // pw.format("\u061E");     // three dots
+        pw.format("\u298E");     // lower tick square bracket
+        break;
+      default:
+        pw.format("]");
+        break;
+    }
     if ( isNone() ) {
-      pw.format("]x");       // section symbol: 'x'
+      pw.format( "x");       // section symbol: 'x'
     } else if ( isNoPlan() ) {
-      pw.format("]\u00A7");       // section symbol
+      pw.format( "\u00A7");       // section symbol
     } else if ( isNoProfile() ) {
-      pw.format("]_");            // low_line: underscore
+      pw.format( "_");            // low_line: underscore
     } else if ( isDuplicate() ) {
-      pw.format( "]\u00B2" );     // superscript 2
+      pw.format( "\u00B2" );     // superscript 2
     } else if ( isSurface() ) {
-      pw.format( "]\u00F7" );     // division sign
+      pw.format( "\u00F7" );     // division sign
     // } else if ( isCommented() ) { // commented = gray background
     //   pw.format( "^" );
     } else if ( isBackshot() ) {
-      pw.format( "]\u266D" );
-    } else {
-      pw.format("]");
+      pw.format( "\u266D" );
     }
-    switch ( cavwayFlag() ) {
-      case CavwayConst.FLAG_NONE:
-        break;
-      case CavwayConst.FLAG_FEATURE: 
-        pw.format("\u066D");     // five point star
-        break;
-      case CavwayConst.FLAG_RIDGE:
-        pw.format("\u29d9");         // right wiggly fence
-        break;
-      case CavwayConst.FLAG_BACKSIGHT:
-        pw.format("\u02FF"); // lower backarrow
-        break;
-      case CavwayConst.FLAG_GENERIC:
-        pw.format("\u061E");     // three dots
-        break;
-      default:
-        break;
-    }
+
     if ( mWithPhoto ) { pw.format("#"); }
   }
 

@@ -286,6 +286,7 @@ public class DeviceHelper extends DataSetObservable
       TDLog.e( ERROR_NULL_DB + "update GM second");
       return;
     }
+    // TDLog.v("update GM 2nd: " + gmid + " G: " + gx + " " + gy + " " + gz + " M: " + mx + " " + my + " " + mz );
     ContentValues cv = new ContentValues();
     cv.put( "gxt", gx );
     cv.put( "gyt", gy );
@@ -313,6 +314,7 @@ public class DeviceHelper extends DataSetObservable
       return -1L;
     }
     ++ myNextCId;
+    // TDLog.v("insert GM 1st: " + myNextCId + " G: " + gx + " " + gy + " " + gz + " M: " + mx + " " + my + " " + mz );
     ContentValues cv = new ContentValues();
     cv.put( "calibId", cid );
     cv.put( "id",      myNextCId );

@@ -25,6 +25,7 @@ import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 // import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.cavway.CavwayProtocol;
+import com.topodroid.packetX.CavwayData;
 
 import java.util.UUID;
 // import java.util.List;
@@ -203,13 +204,28 @@ public class TopoDroidComm
     {
       ++mNrReadPackets;
       if ( ! lister.hasDialog() ) {
-        long c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ);
-        // TODO if CAVWAY 
+        long c_blk = -1L;
         if ( mProtocol instanceof CavwayProtocol ) {
-          CavwayProtocol proto = (CavwayProtocol)mProtocol;
-          TopoDroidApp.mDData.updateGMsecond( TDInstance.cid, c_blk, proto.mG2X, proto.mG2Y, proto.mG2Z, proto.mM2X, proto.mM2Y, proto.mM2Z);
+          // CavwayProtocol proto = (CavwayProtocol)mProtocol;
+          c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, 
+            CavwayData.longToSignedInt1( mProtocol.mGX ), 
+            CavwayData.longToSignedInt1( mProtocol.mGY ),
+            CavwayData.longToSignedInt1( mProtocol.mGZ ),
+            CavwayData.longToSignedInt1( mProtocol.mMX ),
+            CavwayData.longToSignedInt1( mProtocol.mMY ),
+            CavwayData.longToSignedInt1( mProtocol.mMZ ) );
+          TopoDroidApp.mDData.updateGMsecond( TDInstance.cid, c_blk, 
+            CavwayData.longToSignedInt2( mProtocol.mGX ), 
+            CavwayData.longToSignedInt2( mProtocol.mGY ),
+            CavwayData.longToSignedInt2( mProtocol.mGZ ),
+            CavwayData.longToSignedInt2( mProtocol.mMX ),
+            CavwayData.longToSignedInt2( mProtocol.mMY ),
+            CavwayData.longToSignedInt2( mProtocol.mMZ ) );
+        } else {
+          c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, 
+            mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
         }
-        if (lister != null) {
+        if ( lister != null && c_blk >= 0 ) {
           Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
           Bundle bundle = new Bundle();
           bundle.putLong(Lister.BLOCK_ID, c_blk);
