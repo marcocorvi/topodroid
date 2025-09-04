@@ -857,7 +857,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
     <string name="button_rename"  >Renomina</string>
-    <!-- TODO string name="button_retake"  >Retake</string -->
+    <string name="button_retake"  >Riprendi</string>
     <string name="button_prefix"  >Prefisso</string>
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
@@ -1391,7 +1391,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
     <string name="title_survey_new">Nuovo rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
-    <!-- TODO string name="title_station_photo">Station photo</string -->
+    <string name="title_station_photo">Foto Caposaldo</string>
     <string name="title_team_dialog">Nomi squadra topo</string>
     <string name="title_plot_rename">Operazioni sul disegno</string>
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
@@ -2026,7 +2026,7 @@ Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl s
 \nDocumentazione: http://sites.google.com/site/speleoapps
 \nCommenti, segnalazioni bug, richieste: marco.corvi@gmail.com
 \n
-\nTraduzione italiana: fabrizio.toso@fastwebnet.it
+\nTraduzione italiana: fabrizio.toso63@gmail.com
     </string>
 
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
