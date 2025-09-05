@@ -2379,7 +2379,7 @@ public class TDExporter
     } else {
       pw.format(Locale.US, "# declination: undefined%s", newline );
     }
-    pw.format(Locale.US, "#units: tape %s compass clino %s%s", uls, uas, newline );
+    pw.format(Locale.US, "# units: tape %s compass clino %s%s", uls, uas, newline );
   }
 
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, int leg_extend, char sep )
