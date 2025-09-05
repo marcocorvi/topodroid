@@ -3993,13 +3993,15 @@ public class DrawingWindow extends ItemDrawer
 
   /** update the flag of a data block
    * @param blk   shot data block
-   * @param flag  new flag
+   * @param flag  new flag (without cavway bits)
    * @param shot  drawing path of the data block
+   * @note called by DrawingShotDialog with the flag 
    */
   void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
   {
+    TDLog.v("update block flag: " + blk.getFlag() + "/" + blk.cavwayFlag() + " -> " + flag );
     if ( blk.getFlag() == flag ) return;
-    blk.resetFlag( flag );
+    flag = blk.resetFlag( flag ); // return the new shot flag, including old cavway bits
     // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
     if ( shot instanceof DrawingSplayPath ) {
       ((DrawingSplayPath)shot).setSplayPathPaint( mType, blk );

@@ -258,7 +258,7 @@ class ShotEditDialog extends MyDialog
     shot_extra   = mParent.getBlockExtraString( blk );
     shot_extend  = blk.getIntExtend();
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
-    shot_flag    = blk.getFlag();
+    shot_flag    = blk.getFlag(); // no cavway bits - not needed
     shot_comment = blk.mComment;
     shot_time    = TDUtil.timestampToDateTime( blk.mTime );
 
@@ -693,6 +693,8 @@ class ShotEditDialog extends MyDialog
     // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; } // old
     // else                            { shot_flag = DBlock.FLAG_SURVEY; }
     if ( mBlk.isTampered() ) shot_flag |= DBlock.FLAG_TAMPERED;
+    // shot_flag |= mBlk.cavwayBits(); // cavway bits are restored by resetFlag()
+    shot_flag = mBlk.resetFlag( shot_flag );
     // TDLog.v("shot flag " + shot_flag );
 
     shot_extend = mBlk.getIntExtend();
@@ -712,7 +714,6 @@ class ShotEditDialog extends MyDialog
     //                     + " flag " + shot_flag
     //                     + " extend " + shot_extend );
 
-    mBlk.resetFlag( shot_flag );
 
     // if ( shot_secleg ) {
     //   // TDLog.v( "block set sec-leg type ");

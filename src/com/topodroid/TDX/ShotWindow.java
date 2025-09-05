@@ -875,10 +875,10 @@ public class ShotWindow extends Activity
     // int block_type = DBlock.blockOfSplayLegType[ leg_type ];
     for ( DBlock blk : blks ) {
       // long leg_type = DBlock.legOfBlockType[ block_type ];
-      mApp_mData.updateShotLegFlag( blk.mId, TDInstance.sid, leg_type, flag );
-      // blk.setBlockType( block_type ); // FIXME 20240716
+      long f = blk.resetFlag( flag ); // n.b. keep cavway bits
       blk.setBlockLegType( leg_type );
-      blk.resetFlag( flag );
+      // blk.setBlockType( block_type ); // FIXME 20240716
+      mApp_mData.updateShotLegFlag( blk.mId, TDInstance.sid, leg_type, f );
     }
     // TDLog.v("update display : update splays leg type");
     updateDisplay();
@@ -1172,7 +1172,8 @@ public class ShotWindow extends Activity
         ++id;
         DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
         if ( b != null && b.isSecLeg() ) { //  DBlock.BLOCK_SEC_LEG --> leg-flag = 0
-          mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment, 0 );
+          long flag = blk.getFlag() | b.cavwayBits();
+          mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), flag, 0, blk.mComment, 0 );
           // mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
         }
       }
@@ -1989,7 +1990,8 @@ public class ShotWindow extends Activity
           ++id;
           DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
           if ( b != null && b.isSecLeg() ) { // DBlock.BLOCK_SEC_LEG --> leg-flag 0
-            mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment, 0 );
+            long flag = blk.getFlag() & b.cavwayBits();
+            mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), flag, 0, blk.mComment, 0 );
             // mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
           }
         }
@@ -2260,7 +2262,8 @@ public class ShotWindow extends Activity
     blk.setBlockLegType( (int)leg );
 
     if ( blk.isTampered() ) flag |= DBlock.FLAG_TAMPERED; 
-    int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
+    long fl = flag & blk.cavwayBits();
+    int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, fl, leg, comment );
 
     if ( ret == -1 ) {
       TDToast.makeBad( R.string.no_db );
@@ -2732,11 +2735,9 @@ public class ShotWindow extends Activity
         blk.setBlockName( from, to );
         // FIXME leg should be LegType.NORMAL
         int ret = -1;
-        if ( blk.isTampered() ) {
-          ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag | DBlock.FLAG_TAMPERED, leg, comment );
-        } else {
-          ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
-        }
+        if ( blk.isTampered() ) flag |= DBlock.FLAG_TAMPERED;
+        flag |= blk.cavwayBits();
+        ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
 
         if ( ret == -1 ) {
           TDToast.makeBad( R.string.no_db );

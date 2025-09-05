@@ -1540,7 +1540,7 @@ public class DataHelper extends DataSetObservable
    */
   void saveShotDistanceBearingClino( long sid, DBlock blk )
   {
-    saveShotOriginals( sid, blk.mId, blk.getFlag(), blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 0 );
+    saveShotOriginals( sid, blk.mId, blk.getFlagFully(), blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 0 );
   }
 
   /** save original diving mode data
@@ -1549,7 +1549,7 @@ public class DataHelper extends DataSetObservable
    */
   void saveShotDepthBearingDistance( long sid, DBlock blk )
   {
-    saveShotOriginals( sid, blk.mId, blk.getFlag(), blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 1 );
+    saveShotOriginals( sid, blk.mId, blk.getFlagFully(), blk.mLength, blk.mBearing, blk.mClino, blk.mDepth, 1 );
   }
 
   /** save original diving mode data
@@ -1669,8 +1669,7 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  int updateShotNameAndData( long id, long sid, String fStation, String tStation,
-                  long extend, long flag, long leg, String comment )
+  int updateShotNameAndData( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment )
   {
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
@@ -1697,8 +1696,7 @@ public class DataHelper extends DataSetObservable
     return 0;
   }
 
-  int updateShotNameAndDataStatus( long id, long sid, String fStation, String tStation,
-                  long extend, long flag, long leg, String comment, int status )
+  int updateShotNameAndDataStatus( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment, int status )
   {
     if ( myDB == null ) return -1;
     // TDLog.v("UPDATE shot " + id + " name and data status - flag " + flag ); 
@@ -2223,7 +2221,7 @@ public class DataHelper extends DataSetObservable
     // 0L = color, 0 = status
     ContentValues cv = makeShotContentValues( sid, myNextId, blk.mTime, 0L, blk.mFrom, blk.mTo, 
                          blk.mLength, blk.mBearing, blk.mClino, blk.mRoll, blk.mMagnetic, blk.mAcceleration, blk.mDip, 
-                         blk.mExtend, blk.getStretch(), blk.getFlag(), blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress(),
+                         blk.mExtend, blk.getStretch(), blk.getFlagFully(), blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress(),
                          blk.mRawMx, blk.mRawMy, blk.mRawMz, blk.mRawGx, blk.mRawGy, blk.mRawGz, blk.mIndex, blk.mDeviceTime );
     if ( ! doInsert( SHOT_TABLE, cv, "dblock insert" ) ) return -1L;
     return myNextId;
@@ -4362,7 +4360,7 @@ public class DataHelper extends DataSetObservable
           blk.mFrom = from;
           blk.mTo   = to;
           blk.setExtend( (int)extend, 0 );
-          blk.resetFlag( flag );
+          blk.setFlagFully( flag );
           blk.resetBlockType( (int)leg );
           blk.mComment   = comment;
           break;

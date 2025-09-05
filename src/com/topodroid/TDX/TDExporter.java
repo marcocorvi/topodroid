@@ -4619,7 +4619,7 @@ public class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
+              flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol ); // no cavway bits
               printShotToCav( pw, leg, ref_item, eol, ents );
               ref_item = null; 
             }

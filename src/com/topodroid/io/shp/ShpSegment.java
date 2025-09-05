@@ -101,13 +101,13 @@ public class ShpSegment extends ShpObject
           fields[0] = "leg";
 	  fields[1] = blk.mFrom;
 	  fields[2] = blk.mTo;
-          fields[3] = Long.toString( blk.getFlag() );
+          fields[3] = Long.toString( blk.getFlag() ); // no cavway bits
 	} else if ( sgm.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
           write = true;
           fields[0] = "splay";
 	  fields[1] = blk.mFrom;
 	  fields[2] = "-";
-          fields[3] = Long.toString( blk.getFlag() );
+          fields[3] = Long.toString( blk.getFlag() ); // no cavway bits
 	}
         if ( write ) {
           writeShpRecord( cnt, shp_len, sgm, x0, y0, xscale, yscale, cd, sd );

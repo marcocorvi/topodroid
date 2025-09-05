@@ -126,6 +126,10 @@ public class DBlock
    */
   public int cavwayFlag() { return (int)( mFlag >> 16 ); } // { return ( mFlag & FLAG_CAVWAY ) >> 16; }
 
+  /** @return the cavway bits of the flag
+   */
+  public long cavwayBits() { return mFlag & FLAG_CAVWAY; }
+
   public boolean isSurvey()    { return (mFlag & FLAG_MASK)       == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
   public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
@@ -159,17 +163,19 @@ public class DBlock
   void clearFlagDuplicateSurfaceCommented() { mFlag &= ~FLAG_SURFACE_DUPLICATE_COMMENTED; }
   void clearFlagDuplicateSurfaceCommentedBackshot() { mFlag &= ~FLAG_SURFACE_DUPLICATE_COMMENTED_BACKSHOT; } // BACKSHOT
 
-  // void resetFlag() { mFlag = FLAG_SURVEY; }
-
   /** set the block flag to a given bit-string
    * @param flag    new flag bit-string
+   * @return the new shot flag
    * @note TAMPERED and CAVWAY flags are not reset
    */
-  void resetFlag( long flag ) 
+  long resetFlag( long flag ) 
   { 
     // TDLog.v("BLK " + mId + " reset flag " + ((flag&FLAG_TAMPERED) != 0) );
     mFlag = flag | ( mFlag & FLAG_TAMPERED ) | ( mFlag & FLAG_CAVWAY );
+    return mFlag;
   }
+
+  void setFlagFully( long flag ) { mFlag = flag; }
 
   // /** set a flag value(s)
   //  * @param flag    flag value(s) to set
@@ -181,9 +187,13 @@ public class DBlock
   //  */
   // void clearFlag( long flag ) { mFlag &= ~flag; }
 
-  /** @return the block flag
+  /** @return the block flag (cavway bits masked off)
    */
-  public long getFlag() { return mFlag; }
+  public long getFlag() { return mFlag & 0xffff; }
+
+  /** @return the block full flag (cavway bits not masked off)
+   */
+  public long getFlagFully() { return mFlag; }
 
   /** set the block visibility
    * @param visible  block visibility - must be one of View.VISIBLE, View.INVISIBLE, View.GONE
@@ -1012,27 +1022,40 @@ public class DBlock
         pw.format("]");
         break;
       case CavwayConst.FLAG_FEATURE: 
+        // pw.format("\u2990 ");     // upper tick square bracket
+        pw.format("]\u20f0");        // combining asterisc
         // pw.format("\u066D");     // five point star
         // pw.format("\u07B0 ");     // Thaana Sukun
-        pw.format("\u2990 ");     // upper tick square bracket
+        // pw.format("]\u02E3");        // upper big x
+        // pw.format("]\u2DEF");        // combining X
         break;
       case CavwayConst.FLAG_RIDGE:
+        // pw.format("\u2773");         // curved bracket
+        pw.format("\u27E7");         // double square bracket
         // pw.format("\u29d9");         // right wiggly fence
-        // pw.format("\u27E7");         // double square bracket
+        // pw.format("\u23AB");         // curved top-half bracket
         // pw.format("\u2224");         // not divide
         // pw.format("\u23A4");         // top-half bracket
         // pw.format("\u2309");         // top-half bracket
-        // pw.format("\u23AB");         // curved top-half bracket
-        pw.format("\u2773");         // curved bracket
         // pw.format("\u2998");         // turtoise bracket
         break;
       case CavwayConst.FLAG_BACKSIGHT:
-        // pw.format("\u02FF"); // lower backarrow
-        pw.format("\u298C"); // underlined square bracket
+        // pw.format("\u298C"); // underlined square bracket
+        // pw.format("]\u1AB3");  // combining down arrow
+        pw.format("]\u036e");  // combining V
+        // pw.format("\u02FF");   // lower backarrow
+        // pw.format("\u2345");   // mid arrow
+        // pw.format("]\uFE26");  // combining top line
+        // pw.format("]\u08f7");  // combining left arrow - no good
         break;
       case CavwayConst.FLAG_GENERIC:
+        // pw.format("\u298E");     // lower tick square bracket
+        pw.format("]\u2DEA");       // combining o
         // pw.format("\u061E");     // three dots
-        pw.format("\u298E");     // lower tick square bracket
+        // pw.format("]\u02D6");
+        // pw.format("]\u2092");
+        // pw.format("]\u1ddf");       // combining M
+        // pw.format("]\u2DE8");       // combining cyrillic M
         break;
       default:
         pw.format("]");

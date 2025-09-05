@@ -2317,7 +2317,7 @@ public class TopoDroidApp extends Application
     * @param clino    from block
     * @param extend   ...
     * @return id of inserted leg
-    * note before inserting the duplicate leg it set the CurrentStationName
+    * @note before inserting the duplicate leg it set the CurrentStationName
     */
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
@@ -2332,7 +2332,7 @@ public class TopoDroidApp extends Application
       TDToast.makeWarn( R.string.bad_sibling );
     }
     mData.updateShotName( id, TDInstance.sid, from, to );
-    mData.updateShotFlag( id, TDInstance.sid, DBlock.FLAG_DUPLICATE );
+    mData.updateShotFlag( id, TDInstance.sid, DBlock.FLAG_DUPLICATE ); // @note manual shot flag does not have cavway bits
     return id;
   }
 

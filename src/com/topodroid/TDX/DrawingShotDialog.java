@@ -490,7 +490,7 @@ class DrawingShotDialog extends MyDialog
 
       if ( TDLevel.overNormal ) {
         mBlock.clearFlagDuplicateSurfaceCommentedBackshot();
-        long flag  = mBlock.getFlag();
+        long flag  = mBlock.getFlagFully();
         if ( mRBdup.isChecked() )       { flag |= DBlock.FLAG_DUPLICATE; } // FIXME why |= ? because other flags have not been cleared
         else if ( mRBsurf.isChecked() ) { flag |= DBlock.FLAG_SURFACE; }
         else if ( mRBcmtd.isChecked() ) { flag |= DBlock.FLAG_COMMENTED; }
