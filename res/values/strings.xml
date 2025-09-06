@@ -668,6 +668,13 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">to</string>
 
+    <string name="mark_no_mark"   translatable="false">( )</string>
+    <string name="mark_generic"   translatable="false">(&#x1d52;)</string>
+    <string name="mark_backsight" translatable="false">(&#x1d5b;)</string>
+    <string name="mark_ridge"     translatable="false">(&#x2225;)</string>
+    <string name="mark_feature"   translatable="false">(&#x02e3;)</string>
+    <string name="mark_unknown"   translatable="false">(?)</string>
+
     <string name="station" copyable="fr">station</string>
     <string name="station_ask">Insert station in sketch?</string>
     <string name="station_del">Remove station from sketch?</string>

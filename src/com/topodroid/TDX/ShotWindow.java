@@ -321,8 +321,14 @@ public class ShotWindow extends Activity
   private BitmapDrawable mBMright;
   // private SearchResult mSearch = null;
 
+  /** @return true if the shot AMD are out-of-threshold from the survey average AMD
+   * @param blk  shot data (guatanteed not null)
+   */
   boolean isBlockMagneticBad( DBlock blk ) { return /* (mNrDevices == 1) && */ mSurveyAccuracy.isBlockAMDBad( blk ); }
 
+  /** @return the string with how much the data differ from the means
+   * @param blk  shot data (guatanteed not null)
+   */
   String getBlockExtraString( DBlock blk ) { return /* (mNrDevices != 1) ? "" : */ mSurveyAccuracy.getBlockExtraString( blk ); }
 
   // --------------------------------------------------------------------------------

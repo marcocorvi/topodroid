@@ -54,9 +54,16 @@
       style="@style/edit_text"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="0dp"
-      android:layout_weight="30"
+      android:layout_weight="15"
       android:text="@string/dash"
       />
+    <!-- TextView android:id="@+id/shot_mark"
+      style="@style/edit_text"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="0dp"
+      android:layout_weight="15"
+      android:text="@string/dash"
+      / -->
   </LinearLayout>
 
   <EditText android:id="@+id/shot_comment"

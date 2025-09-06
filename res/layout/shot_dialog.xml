@@ -146,26 +146,48 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     >
-    <CheckBox 
-      android:id="@+id/left"
-      android:layout_width="wrap_content"
+    <LinearLayout
+      android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:text="@string/extend_left" />
-    <CheckBox 
-      android:id="@+id/vert"
-      android:layout_width="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_gravity="start"
+      android:gravity="start"
+      >
+      <CheckBox 
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_left" />
+      <CheckBox 
+        android:id="@+id/vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_vert" />
+      <CheckBox 
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_right" />
+      <!-- CheckBox 
+        android:id="@+id/ignore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_ignore" / -->
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:text="@string/extend_vert" />
-    <CheckBox 
-      android:id="@+id/right"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/extend_right" />
-    <!-- CheckBox 
-      android:id="@+id/ignore"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/extend_ignore" / -->
+      android:orientation="horizontal" 
+      android:layout_gravity="end"
+      android:gravity="end"
+      android:paddingEnd="@dimen/paddingh"
+      >
+      <TextView android:id="@+id/shot_mark"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        />
+    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout4"

@@ -125,6 +125,7 @@ class ShotEditDialog extends MyDialog
   private String shot_extra;
   private int  shot_extend;
   private long shot_flag;
+  private int  shot_mark; // cavway flag
   private String shot_time;
   private String shot_comment;
 
@@ -143,6 +144,12 @@ class ShotEditDialog extends MyDialog
   private int splay_type; // 0 plain, 2 X, 4 H, 5 V see LegType
 
   private boolean hasMore = false;
+
+  // @note used also by DrawingShohtDialog
+  // 0: no_mark, ...
+  final static int[] mShotMark= { R.string.mark_no_mark, R.string.mark_no_mark, R.string.mark_no_mark, R.string.mark_no_mark,
+                                  R.string.mark_generic, R.string.mark_backsight, R.string.mark_ridge, R.string.mark_feature,
+                                  R.string.mark_unknown };
 
   // MORE -------------------------------------------
   private LinearLayout mLayoutMore;
@@ -208,6 +215,11 @@ class ShotEditDialog extends MyDialog
     hasAudio = TDandroid.checkMicrophone( mContext );
   }
 
+  /** load a shot and fill the fields of the interface
+   * @param blk   shot to load
+   * @param prev  previous shot
+   * @param next  next shot
+   */
   private void loadDBlock( DBlock blk, DBlock prev, DBlock next )
   {
     mPrevBlk     = prev;
@@ -258,7 +270,8 @@ class ShotEditDialog extends MyDialog
     shot_extra   = mParent.getBlockExtraString( blk );
     shot_extend  = blk.getIntExtend();
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
-    shot_flag    = blk.getFlag(); // no cavway bits - not needed
+    shot_flag    = blk.getFlag();    // no cavway bits - not needed
+    shot_mark    = blk.cavwayFlag(); // cavway flag
     shot_comment = blk.mComment;
     shot_time    = TDUtil.timestampToDateTime( blk.mTime );
 
@@ -270,6 +283,8 @@ class ShotEditDialog extends MyDialog
     updateView();
   }
 
+  /** update the interface
+   */
   private void updateView()
   {
     mETdistance.setText( shot_distance );
@@ -349,6 +364,14 @@ class ShotEditDialog extends MyDialog
 
     // updateLayoutLRUD(); // INTERMEDIATE_DATA
     updateDeleteCheckButtons();
+
+    TextView tv = (TextView)findViewById( R.id.shot_mark );
+    if ( shot_mark > 0 ) {
+      tv.setVisibility( View.VISIBLE );
+      tv.setText( mShotMark[ (shot_mark < 8)? shot_mark : 8 ] );
+    } else {
+      tv.setVisibility( View.GONE );
+    }
 
     mETcomment.requestFocus();
   }

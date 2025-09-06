@@ -355,14 +355,17 @@ public class GMActivity extends Activity
         for ( int k = 0; k < nk; ++ k ) {
           TDVector v1 = mCalibration.getDirection( k ); 
           TDVector v2 = mCalibration2.getDirection( k ); 
-          float a  = TDMath.acosd( TDVector.dot_product( v1, v2 ) );
-          a1 += a;
-          a2 += a * a;
-          if ( a > am ) am = a;
+          float v1_v2 = TDVector.dot_product( v1, v2 );
+          if ( v1_v2 < 1 ) {
+            float a = TDMath.acosd( v1_v2 );
+            a1 += a;
+            a2 += a * a;
+            if ( a > am ) am = a;
+          }
         }
         a1 /= nk;
         a2 = TDMath.sqrt(a2/nk - a1*a1);
-        TDLog.v("Delta orientation average " + a1 + " stddev " + a2 + " max " + am );
+        TDLog.v("Delta orientation average " + a1 + " stddev " + a2 + " max " + am + " N " + nk );
         mDeltaDirAve = a1;
         mDeltaDirStd = a2;
         mDeltaDirMax = am;

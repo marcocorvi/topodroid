@@ -130,6 +130,7 @@ public class CalibAlgo extends CalibTransform
    */
   public TDVector getDirection( int k )
   {
+    // TDLog.v("calib algo get direction " + k + " of " + num );
     assert ( k >= 0 && k < num );
     TDVector down = getTransformedG( g[k] );
     TDVector mag  = getTransformedM( m[k] );

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyButton;
@@ -125,6 +125,7 @@ class DrawingShotDialog extends MyDialog
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
     TextView tv_type    = (TextView) findViewById(R.id.shot_type ); // 20230118 local var "tv_type"
+    // TextView tv_mark    = (TextView) findViewById(R.id.shot_mark ); // cavway flag
     if (mBlock.isBacksight() ) {
       tv_type.setText( R.string.type_b );
     } else if (mBlock.isForesight() ) {
@@ -132,6 +133,7 @@ class DrawingShotDialog extends MyDialog
     } else if (mBlock.isManual() ) {
       tv_type.setText( R.string.type_m );
     }
+
     if (mBlock.isMultiBad() ) {
       tv_type.setTextColor( TDColor.DARK_ORANGE );
     } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( mBlock ) ) {
@@ -282,11 +284,17 @@ class DrawingShotDialog extends MyDialog
     //   mRBignore.setClickable( false );
     //   mRBignore.setTextColor( TDColor.MID_GRAY );
     // }
+    StringBuilder sb = new StringBuilder();
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-      mLabel.setText( mBlock.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
+      sb.append( mBlock.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
     } else { // SurveyInfo.DATAMODE_DIVING
-      mLabel.setText( mBlock.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
+      sb.append( mBlock.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
     }
+    int mark = mBlock.cavwayFlag();
+    if ( mark > 0 ) {
+      sb.append(" ").append( mContext.getResources().getString( ShotEditDialog.mShotMark[ (mark < 8)? mark : 8 ] ) );
+    }
+    mLabel.setText( sb.toString() );
 
     mRBleft.setOnClickListener( this );
     mRBvert.setOnClickListener( this );
