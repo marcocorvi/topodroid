@@ -22,9 +22,7 @@
   <!-- UNUSED string name="r_dialog_1">
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
-  <string name="r_dialog">
-С Android-13 TopoDroid трябва да съхранява картировките в отделна папка в „Android/data“. Имайте предвид, че тази папка обикновено се изтрива, когато деинсталирате приложението. За да потвърдите, въведете\n\"%1$s\"\в полето по-долу и натиснете бутона
-  </string>
+  <string name="r_dialog">С Android-13 TopoDroid трябва да съхранява картировките в отделна папка в „Android/data“. Имайте предвид, че тази папка обикновено се изтрива, когато деинсталирате приложението. За да потвърдите, въведете\n\"%1$s\"\в полето по-долу и натиснете бутона</string>
   <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <string name="r_continue">ПРОДЪЛЖИ</string>

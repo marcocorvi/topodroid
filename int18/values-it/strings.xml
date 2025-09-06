@@ -15,9 +15,7 @@
     <string name="desc_menu">Menu</string>
 
   <string name="r_title">Android-13+: avviso importante</string>
-  <string name="r_dialog">
-Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl sotto "Android/data". Attenzione, questa cartella viene cancellata se si disinstalla l\'app. Per confermare digitare\n"%1$s"\nnel campo sotto e premere il bottone.
-  </string>
+  <string name="r_dialog">Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell\'appl sotto "Android/data". Attenzione, questa cartella viene cancellata se si disinstalla l\'app. Per confermare digitare\n"%1$s"\nnel campo sotto e premere il bottone.</string>
   <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
   <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
   <string name="r_continue">CONTINUA</string>

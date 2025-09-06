@@ -24,9 +24,7 @@
   <!-- UNUSED string name="r_dialog_1">
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
-  <string name="r_dialog">
-With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.
-  </string>
+  <string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string>
   <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
   <string name="r_i_understood" translatable="false">I UNDERSTOOD</string> <!-- FIXME FIXME FIXME -->
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
@@ -58,10 +56,7 @@ With Android-13 TopoDroid must store surveys in the app private folder under "An
     <string name="setup_textsize">Set the text size.\nYou can always change this later through the main window settings.</string>
     <string name="setup_buttonsize">Set the button size.\nYou can always change this later through the main window settings.</string>
     <string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later through the sketch window settings.</string>
-    <string name="setup_done">The basic setup is done.\n\n
-If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-There are other settings for the presentation of the sketches (icon size, label size, line width etc.); you can set them later.\n
-    </string>
+    <string name="setup_done">The basic setup is done.\n\nIf you experience problems with the DistoX connection, try and set the insecure socket.\n\nThere are other settings for the presentation of the sketches (icon size, label size, line width etc.); you can set them later.\n</string>
     <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT" copyable="fr">POINT</string>

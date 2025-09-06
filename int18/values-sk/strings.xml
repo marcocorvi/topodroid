@@ -18,9 +18,7 @@ xmlns:tools="http://schemas.android.com/tools"
   <!-- UNUSED string name="r_dialog_1">
 V systéme Android-11+ musí byť pre TopoDroid udelený prístup k úložisku.\nMôžete to urobiť pomocou PC cez "adb".\nV systéme Android: povoľte nastavenia vývojára a USB-debug.\nPripojte Android k počítaču pomocou kábla USB.\ nNa počítači napíšte "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
-  <string name="r_dialog">
-V Android 13 musí TopoDroid ukladať merania v privátnom priečinku pod adresárom „Android/data“. Upozorňujeme, že tento priečinok sa zvyčajne odstráni pri odinštalovaní aplikácie. Pre potvrdenie zadajte\n"%1$s"\do poľa nižšie a klepnite na tlačidlo.
-  </string>
+  <string name="r_dialog">V Android 13 musí TopoDroid ukladať merania v privátnom priečinku pod adresárom „Android/data“. Upozorňujeme, že tento priečinok sa zvyčajne odstráni pri odinštalovaní aplikácie. Pre potvrdenie zadajte\n"%1$s"\do poľa nižšie a klepnite na tlačidlo.</string>
   <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
 
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
@@ -1008,6 +1006,10 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="hint_textsize">Veľkosť textu</string>
     <string name="hint_units">Jednotky symbolu</string>
     <string name="hint_value">Hodnota</string>
+
+    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
+    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
+    <!-- TODO string name="calib_measurement_group">Group: </string -->
 
     <string name="hint_notes">Poznámky</string>
     <string name="hint_label">Štítok</string>

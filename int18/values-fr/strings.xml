@@ -21,9 +21,7 @@
      <!-- UNUSED string name="r_dialog_1">
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
      </string -->
-     <string name="r_dialog">
-Avec Android-R TopoDroid doit utiliser son dossier sous "Android/data". Attention, ce dossier est généralement supprimé lorsque l\'application est désinstallée. Pour confirmer, tapez \n"%1$s"\nin dans le champ ci-dessous et appuyez sur le bouton.
-     </string>
+     <string name="r_dialog">Avec Android-R TopoDroid doit utiliser son dossier sous "Android/data". Attention, ce dossier est généralement supprimé lorsque l\'application est désinstallée. Pour confirmer, tapez \n"%1$s"\nin dans le champ ci-dessous et appuyez sur le bouton.</string>
      <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
      <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
 	<string name="r_continue">CONTINUER</string>
@@ -642,7 +640,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="shots_delete">Supprimer les visées ?</string>
     <string name="shots_delete_unsafe">Stations référencées par sections transverses.\nSupprimer les visées ?</string>
     <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string -->
-    <string name="shots_rename_unsafe">Stations referenced by xsections.\nRenommer les visées ?</string>
+    <string name="shots_rename_unsafe">Stations referenced by xsections.\n%1$s\nRenommer les visées ?</string>
     <string name="shot_check">Marquer la visée comme visée de contrôle ?</string>
     <string name="shot_from">DEPUIS ou DE</string>
     <string name="shot_info">Saisir les infos de visée</string>

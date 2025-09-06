@@ -17,13 +17,7 @@
   <!-- UNUSED string name="r_dialog_1">
 On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.TopoDroidX.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
-  <string name="r_dialog">
-A partir do Android 13 o TopoDroidX é obrigado a armazenar seus dados em um diretório privado do app dentro de "Android/data".
-Fique atento pois esse diretório normalmente é apagado ao desintalar o app.
-Para confirmar, digite
-"%1$s"
-no campo abaixo e aperte o botão.
-  </string>
+  <string name="r_dialog">A partir do Android 13 o TopoDroidX é obrigado a armazenar seus dados em um diretório privado do app dentro de "Android/data". Fique atento pois esse diretório normalmente é apagado ao desintalar o app.\nPara confirmar, digite "%1$s" no campo abaixo e aperte o botão.</string>
   <!-- UNUSED string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string -->
   <!-- FIXME FIXME FIXME -->
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->

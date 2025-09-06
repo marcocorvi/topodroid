@@ -17,9 +17,7 @@
   <!-- UNUSED string name="r_dialog_1">
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
-  <string name="r_dialog">
-Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner unter "Android/data" speichern. Beachte, dass dieser Ordner normalerweise gelöscht wird, wenn die App deinstalliert wird. Zum bestätigen, tippe\n"%1$s"\nin das folgende Feld und drücke den Knopf.
-  </string>
+  <string name="r_dialog">Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner unter "Android/data" speichern. Beachte, dass dieser Ordner normalerweise gelöscht wird, wenn die App deinstalliert wird. Zum bestätigen, tippe\n"%1$s"\nin das folgende Feld und drücke den Knopf.</string>
   <!-- UNUSED string name="r_checkboxes">Bitte bestätigen.</string -->
   <!-- UNUSED string name="r_disclaimer">Ich bin einverstanden, dass der/die Autor(en) von TopoDroid nicht haftbar sind für jeglichen Datenverlust.</string -->
   <string name="r_continue">WEITER</string>

@@ -26,9 +26,7 @@
     <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <string name="r_title">Android-13+ FIGYELMEZTETÉS</string>
-  <string name="r_dialog">
-Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell tárolnia a felméréseket az "Android/data" alatt.\nVigyázat, ez a mappa általában törlődik az alkalmazás eltávolításakor.\nGépeld be\n"%1$s"\naz alábbi mezőbe, hogy folytatni tudd.
-</string>
+  <string name="r_dialog">Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell tárolnia a felméréseket az "Android/data" alatt.\nVigyázat, ez a mappa általában törlődik az alkalmazás eltávolításakor.\nGépeld be\n"%1$s"\naz alábbi mezőbe, hogy folytatni tudd.</string>
   <string name="r_continue">FOLYTATÁS</string>
   <string name="r_quit">KILÉPÉS</string>
 
