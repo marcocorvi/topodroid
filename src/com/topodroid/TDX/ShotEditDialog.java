@@ -665,6 +665,7 @@ class ShotEditDialog extends MyDialog
     // boolean leg_next = false;
     // boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
+      // secondary leg shot have empty FROM, TO, ignore EXTEND, no STRETCH, survey FLAG, extra LEG_TYPE, no COMMENT
       mBlk.setTypeSecLeg();
       mParent.updateShotNameAndFlags( "", "", ExtendType.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk, false );
       return true;
@@ -700,24 +701,24 @@ class ShotEditDialog extends MyDialog
     }
     // TDLog.v( "<" + shot_from + "-" + shot_to + "> do backleg " + can_do_backleg + " value " + backleg_val );
 
-    shot_flag = DBlock.FLAG_SURVEY;
+    long flag = DBlock.FLAG_SURVEY;
     if ( TDLevel.overNormal ) {
-      if ( mRBdup.isChecked() )       { shot_flag = DBlock.FLAG_DUPLICATE; }
-      else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.FLAG_SURFACE; }
-      else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.FLAG_COMMENTED; } // FIXME_COMMENTED
-      else if ( mRBbcks.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; } // BACKSHOT
+      if ( mRBdup.isChecked() )       { flag = DBlock.FLAG_DUPLICATE; }
+      else if ( mRBsurf.isChecked() ) { flag = DBlock.FLAG_SURFACE; }
+      else if ( mRBcmtd.isChecked() ) { flag = DBlock.FLAG_COMMENTED; } // FIXME_COMMENTED
+      else if ( mRBbcks.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; } // BACKSHOT
       else if ( mRBsplay != null ) {
-        if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.FLAG_NO_PROFILE; }
-        else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.FLAG_NO_PLAN; }
-        else if ( mRBsplay.getState() == 3 ) { shot_flag = DBlock.FLAG_NO_PLAN | DBlock.FLAG_NO_PROFILE; }
+        if ( mRBsplay.getState() == 1 )      { flag = DBlock.FLAG_NO_PROFILE; }
+        else if ( mRBsplay.getState() == 2 ) { flag = DBlock.FLAG_NO_PLAN; }
+        else if ( mRBsplay.getState() == 3 ) { flag = DBlock.FLAG_NO_PLAN | DBlock.FLAG_NO_PROFILE; }
         // FIXME TODO add another state for both NO_PLAN and NO_PROFILE
       }
     }
-    // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; } // old
-    // else                            { shot_flag = DBlock.FLAG_SURVEY; }
-    if ( mBlk.isTampered() ) shot_flag |= DBlock.FLAG_TAMPERED;
-    // shot_flag |= mBlk.cavwayBits(); // cavway bits are restored by resetFlag()
-    shot_flag = mBlk.resetFlag( shot_flag );
+    // else if ( mRBback.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; } // old
+    // else                            { flag = DBlock.FLAG_SURVEY; }
+    if ( mBlk.isTampered() ) flag |= DBlock.FLAG_TAMPERED;
+    // flag |= mBlk.cavwayBits(); // cavway bits are restored by resetFlag()
+    shot_flag = mBlk.resetFlag( flag );
     // TDLog.v("shot flag " + shot_flag );
 
     shot_extend = mBlk.getIntExtend();

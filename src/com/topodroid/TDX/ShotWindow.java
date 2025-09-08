@@ -2220,7 +2220,7 @@ public class ShotWindow extends Activity
    * @param to      TO station
    * @param extend  integer extend
    * @param stretch fractional extend
-   * @param flag    shot flags
+   * @param flag    shot flags (without cavway flags)
    * @param leg     leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
    * @param comment shot comment
    * @param blk     shot data block
@@ -2255,7 +2255,7 @@ public class ShotWindow extends Activity
    * @param to      TO station
    * @param extend  integer extend
    * @param stretch fractional extend
-   * @param flag    shot flags
+   * @param flag    shot flags (without cavway flag)
    * @param leg     leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
    * @param comment shot comment
    * @param blk     shot data block
@@ -2267,8 +2267,8 @@ public class ShotWindow extends Activity
     blk.setBlockName( from, to, (leg == LegType.BACK) );
     blk.setBlockLegType( (int)leg );
 
-    if ( blk.isTampered() ) flag |= DBlock.FLAG_TAMPERED; 
-    long fl = flag & blk.cavwayBits();
+    long fl = flag | blk.cavwayBits();
+    if ( blk.isTampered() ) fl |= DBlock.FLAG_TAMPERED; 
     int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, fl, leg, comment );
 
     if ( ret == -1 ) {

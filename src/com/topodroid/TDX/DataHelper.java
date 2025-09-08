@@ -1159,7 +1159,7 @@ public class DataHelper extends DataSetObservable
    */
   private void makeSurveyInfoMutableValues( long sid, long created, boolean immutable )
   {
-    TDLog.v("SURVEY make mutable values: created " + created + " immutable " + immutable );
+    // TDLog.v("SURVEY make mutable values: created " + created + " immutable " + immutable );
     ContentValues cv = new ContentValues();
     cv.put( "created", created );
     cv.put( "immutable", (immutable? 1 : 0 ) );
@@ -1185,7 +1185,7 @@ public class DataHelper extends DataSetObservable
       immutable = ( cursor.getLong( 2 ) == 1 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    TDLog.v("SURVEY MUTABLE: created " + ret + " immutable " + immutable );
+    // TDLog.v("SURVEY MUTABLE: created " + ret + " immutable " + immutable );
     if ( ret == 0 ) {
       long time = 0L;
       if ( day == null ) {
@@ -3527,7 +3527,7 @@ public class DataHelper extends DataSetObservable
    */
   List< PhotoInfo > selectAllPhotos( long sid, long status )
   {
-    TDLog.v("DB select all photos");
+    // TDLog.v("DB select all photos");
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB != null ) {
       list.addAll( selectAllPhotosShot( sid, status ) );

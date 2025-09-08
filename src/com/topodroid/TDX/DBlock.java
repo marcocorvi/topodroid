@@ -102,7 +102,7 @@ public class DBlock
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
 
   static final long FLAG_MASK     =  0xffff; // mask of the topodroid flag
-  static final long FLAG_CAVWAY   = 0x70000; // mask of the cavway flag
+  static final long FLAG_CAVWAY   = 0xf0000; // mask of the cavway flag
 
   /** @return the block ID or the bric-index if the proper setting is active
    * @nore used only by the DBlockAdapter
@@ -170,7 +170,7 @@ public class DBlock
    */
   long resetFlag( long flag ) 
   { 
-    // TDLog.v("BLK " + mId + " reset flag " + ((flag&FLAG_TAMPERED) != 0) );
+    TDLog.v("BLK " + mId + " reset flag " + mFlag + " -> " + flag + " tempered: " + ((flag&FLAG_TAMPERED) != 0) );
     mFlag = flag | ( mFlag & FLAG_TAMPERED ) | ( mFlag & FLAG_CAVWAY );
     return mFlag;
   }
