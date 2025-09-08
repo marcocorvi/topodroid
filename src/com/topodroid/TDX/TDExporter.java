@@ -1887,7 +1887,7 @@ public class TDExporter
         pw.format("    data dimensions station left right up down\n");
         for ( String station : lruds.keySet() ) {
           LRUD lrud = lruds.get( station );
-          pw.format(Locale.US, "    %s %.2f %.2f %.2f %.2f\n", station, lrud.l * ul, lrud.r * ul, lrud.r * ul, lrud.d * ul );
+          pw.format(Locale.US, "    %s %.2f %.2f %.2f %.2f\n", station, lrud.l * ul, lrud.r * ul, lrud.u * ul, lrud.d * ul );
         }
       }
 
