@@ -2630,7 +2630,7 @@ public class TDExporter
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
         pw.format(Locale.US, "%s", newline);
-        pw.format(Locale.US, "# station%c lng%c lat%c h_geo%c accuracy%c V_accuracy%c comment%c CRS%s", sep, sep, sep, sep, sep, sep, sep, newline );
+        pw.format(Locale.US, "# station%c lon%c lat%c h_geo%c accuracy%c V_accuracy%c comment%c CRS%s", sep, sep, sep, sep, sep, sep, sep, newline );
         for ( FixedInfo fix : fixed ) {
           pw.format(Locale.US, "%s%c %.6f%c %.6f%c %.0f%c %.1f%c %.1f%c", fix.name, sep, fix.lng, sep, fix.lat, sep, fix.h_geo, sep, fix.accuracy, sep, fix.accuracy_v, sep );
           pw.format(Locale.US, "\"%s\"%c", fix.comment, sep );
