@@ -208,6 +208,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="device_status_silent_on">Тих режим включен</string>
     <string name="device_status_silent_off">Тих режим изключен</string>
     <string name="bt_reset">Рестартиране на Bluetooth връзката</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">запис като</string>
     <string name="nickname">Име на устройството</string>
     <string name="unknown_device_type">Непознато устройство %1$d</string>
@@ -328,6 +329,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="fmt_h_geoid">Геоид надморска височина: %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Начална добра позиция</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
 
     <string name="error_azimuth_required">Необходим азимут</string>
@@ -427,7 +429,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Устройството не е избрано</string>
     <string name="no_device_window">Прозорецът на устройството не е наличен по време на изтегляне</string>
-    <!-- UNUSED string name="no_device_found">Не е намерено устройство</string -->
+    <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_feature_audio">Аудиото не се поддържа</string>
     <string name="no_feature_pdf">PDF не се поддържа</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
@@ -497,7 +499,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_photo">СНИМКА</string>
     <string name="menu_sections">СЕЧЕНИЯ</string>
     <string name="menu_sensor">СЕНЗОРИ</string>
-    <!-- UNUSED string name="menu_scan">СКАНИРАНЕ</string -->
+    <string name="menu_scan">СКАНИРАНЕ</string>
     <!-- UNUSED string name="menu_scan_ble">СКАНИРАНЕ BTLE</string -->
     <!-- UNUSED string name="menu_station" copyable="fr">РЕПЕРИ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
@@ -512,8 +514,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметрова хартия</string>
 
-    <!-- UNUSED string name="start_scan">Стартирай сканиране</string -->
-    <!-- UNUSED string name="stop_scan">Спри сканиране</string -->
+    <string name="start_scan">Стартирай сканиране</string>
+    <string name="stop_scan">Спри сканиране</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">BLE сканиране</string -->
     <!-- UNUSED string name="ble_scan_failed">Грешка при BLE сканиране</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE грешка</string -->
@@ -1266,6 +1272,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <string name="title_recalibrate">Калибрации</string>
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Калибриране - проверка на измерванията</string>

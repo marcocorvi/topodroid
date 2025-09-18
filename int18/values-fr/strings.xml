@@ -204,6 +204,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="device_status_silent_on">Mode silencieux : on</string>
     <string name="device_status_silent_off">Mode silencieux : off</string>
     <string name="bt_reset">Redémarrer la connexion Bluetooth</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">Enregistrer sous</string>
     <string name="nickname">Alias</string>
     <string name="unknown_device_type">Appareil inconnu type %1$d</string>
@@ -324,6 +325,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="fmt_h_geoid">Alt. géoïde %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string -->
     <string name="location_start_fine">Démarre localisation fine</string> <!-- a confirmer dans le contexte -->
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
 
     <string name="error_azimuth_required">Azimut nécessaire</string>
@@ -423,7 +425,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_db">Pas de base de données</string>
     <string name="no_device_address">Aucun périphérique sélectionné</string>
     <string name="no_device_window">La fenêtre du périphérique n\'est pas disponible pendant le téléchargement</string>
-    <!-- UNUSED string name="no_device_found">Found no device</string -->
+    <!-- TODO string name="no_device_found">Found no device</string -->
     <string name="no_feature_audio">Audio non supporté</string>
     <string name="no_feature_pdf">PDF non supporté</string>
     <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
@@ -493,7 +495,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sections">SECTIONS</string>
     <string name="menu_sensor">CAPTEUR</string>
-    <!-- UNUSED string name="menu_scan">SCAN</string -->
+    <string name="menu_scan">SCAN</string>
     <!-- UNUSED string name="menu_scan_ble">SCAN BLE</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
@@ -508,8 +510,13 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papier millimétré</string>
 
-    <!-- UNUSED string name="start_scan">Start scan</string -->
-    <!-- UNUSED string name="stop_scan">Stop scan</string -->
+    <string name="start_scan">Start scan</string>
+    <string name="stop_scan">Stop scan</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
+
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
@@ -1260,6 +1267,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_audio_list">Enregistrements audio</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Étalonnage</string>
     <string name="title_calib_check">Visée de contrôle étalonnage</string>

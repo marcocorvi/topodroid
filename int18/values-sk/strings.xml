@@ -209,6 +209,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="device_status_silent_on">Tichý režim: zapnutý</string>
     <string name="device_status_silent_off">Tichý režim: vypnutý</string>
     <string name="bt_reset">Obnovenie pripojenia Bluetooth</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">Uložiť ako</string>
     <string name="nickname">Prezývka NICK</string>
     <string name="unknown_device_type">Neznámy typ zariadenia %1$d</string>
@@ -332,6 +333,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="fmt_h_geoid">Geoid výška %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Začatie jemnej korekcie pozície</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Vyžaduje sa azimut</string>
@@ -431,7 +433,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="no_db">Žiadna databáza</string>
     <string name="no_device_address">Zariadenie nie je vybraté</string>
     <string name="no_device_window">Počas sťahovania nie je k dispozícii okno zariadenia</string>
-    <!-- UNUSED string name="no_device_found">Found no device</string -->
+    <string name="no_device_found">Found no device</string>
     <string name="no_feature_audio">Audio nie je podporované</string>
     <string name="no_feature_pdf">PDF nepodporované</string>
     <string name="no_gms">Kalibrácia nemá žiade dáta \nPoužite tlačidlo Stiahnuť</string>
@@ -502,7 +504,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="menu_photo">FOTO</string>
     <string name="menu_sections">SEKCIE</string>
     <string name="menu_sensor">SENZOR</string>
-    <!-- UNUSED string name="menu_scan">SKENOVAŤ</string -->
+    <string name="menu_scan">SKENOVAŤ</string>
     <!-- UNUSED string name="menu_scan_ble">SKEN BTLE</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
@@ -517,8 +519,12 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Milimetrový papier</string>
 
-    <!-- UNUSED string name="start_scan">Štart sken</string -->
-    <!-- UNUSED string name="stop_scan">Stop sken</string -->
+    <string name="start_scan">Štart sken</string>
+    <string name="stop_scan">Stop sken</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">BLE sken</string -->
     <!-- UNUSED string name="ble_scan_failed">BLE sken neúspešný</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failzlyhanieure</string -->
@@ -1274,6 +1280,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_azimut">Smerová orientácia</string>
     <string name="title_audio">Zvukový komentár</string>
     <string name="title_audio_list">Audio nahrávky</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Kalibrácie</string>
     <string name="title_calib_check">Kalibrácia - Kontrolné merania</string>

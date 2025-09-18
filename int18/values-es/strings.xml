@@ -210,6 +210,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="device_status_silent_on">Silenciar: on</string>
     <string name="device_status_silent_off">Silenciar: off</string>
     <string name="bt_reset">Reinicio conexión bluetooth</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
     <string name="unknown_device_type">Tipo de dispositivo desconocido: %1$d</string>
@@ -330,6 +331,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="fmt_h_geoid">Error %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
     <string name="location_start_fine">Inicio de precisión de posicionamiento</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
@@ -428,7 +430,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_window">Ventana del dispositivo deshabilitada durante la descarga</string>
-    <!-- UNUSED string name="no_device_found">Dispositivo non trovato</string -->
+    <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_feature_audio">Audio no compatible</string>
     <string name="no_feature_pdf">PDF no soportado</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
@@ -499,7 +501,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sections">Secciones</string>
     <string name="menu_sensor">Tomas con sensor</string>
-    <!-- UNUSED string name="menu_scan">Escanear</string -->
+    <string name="menu_scan">Escanear</string>
     <!-- UNUSED string name="menu_scan_ble">Escanear BTLE</string -->
     <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
@@ -513,8 +515,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel cuadriculado</string>
 
-    <!-- UNUSED string name="start_scan">Inicio escaneo</string-->
-    <!-- UNUSED string name="stop_scan">Fin de escaneo</string-->
+    <string name="start_scan">Inicio escaneo</string>
+    <string name="stop_scan">Fin de escaneo</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
@@ -1261,6 +1267,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_audio_list">Registros de audio</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>

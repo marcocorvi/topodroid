@@ -6670,7 +6670,7 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(6),                      // camera
                      TDString.escape( cursor.getString(7) ), // code
                      cursor.getLong(8),                      // reftype: reference item type
-                     cursor.getLong(10)                      // format
+                     cursor.getLong(9)                       // format
            );
          } while (cursor.moveToNext());
        }

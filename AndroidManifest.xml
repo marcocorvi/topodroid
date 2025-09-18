@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="603047"
-      android:versionName="6.3.47"
+      android:versionCode="603049"
+      android:versionName="6.3.49"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -215,11 +215,11 @@
           android:exported="false"
         />
 
-        <!-- activity android:name=".DeviceList"
+        <activity android:name=".DeviceSearch"
 	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-        / -->
+        />
 
         <!-- MUST LIST WINDOWS -->
         <!-- activity android:name=".ItemDrawer"

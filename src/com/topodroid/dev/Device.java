@@ -53,6 +53,15 @@ public class Device
     "SAP 5",  null, "SAP 6", null,
     "Cavway X1" };
 
+  public final static boolean isKnownDevice( String name )
+  {
+    if ( name.startsWith( "Cavway" ) ) return true;
+    if ( name.startsWith( "DistoX" ) ) return true;
+    if ( name.startsWith( "BRIC" ) )   return true;
+    if ( name.startsWith( "SAP" ) )    return true;
+    return false;
+  }
+
   // supported BLE models
   final static String[] mBleModels = { NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_BRIC5_2, NAME_SAP5, NAME_SAP5_2, NAME_SAP6, NAME_SAP6_2, NAME_CAVWAY };
 
@@ -157,6 +166,30 @@ public class Device
   /** @return the list of the supported BLE models
    */
   public static String[] getBleModels() { return mBleModels; }
+
+  /** @return the device name given the BT name 
+   * @param bt_name   BT name
+   * @note used by DeviceActivity
+   */
+  public static String btnameToModel( String bt_name )
+  {
+    // TDLog.v("DEVICE model to name <" + bt_name + ">");
+    if ( bt_name.startsWith( NAME_DISTOX2 ) )   return "DistoX2";
+    if ( bt_name.startsWith( NAME_DISTOXBLE ) ) return "DistoXBLE";
+    if ( bt_name.startsWith( NAME_CAVWAY ) )    return "Cavway";
+    if ( bt_name.startsWith( NAME_BRIC4 ) )     return "BRIC4";
+    if ( bt_name.startsWith( NAME_BRIC5 ) )     return "BRIC5";
+    if ( bt_name.startsWith( NAME_BRIC5_2 ) )   return "BRIC5";
+    if ( bt_name.startsWith( NAME_SAP5 ) )      return "SAP5";
+    if ( bt_name.startsWith( NAME_SAP5_2 ) )    return "SAP5";
+    if ( bt_name.startsWith( NAME_SAP6 ) )      return "SAP6";
+    if ( bt_name.startsWith( NAME_SAP6_2 ) )    return "SAP6";
+    if ( bt_name.startsWith( NAME_DISTOX1 ) )   return "DistoX";
+    // if ( bt_name.startsWith("Ble-") ) { // FIXME BLE_5
+    //   return bt_name.replace("Ble-", "" );
+    // }
+    return "--";
+  }
 
   /** @return the device name given the BT name 
    * @param bt_name   BT name

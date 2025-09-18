@@ -45,16 +45,16 @@ public class DeviceUtil
   public static final String ACTION_ACL_CONNECTED      = BluetoothDevice.ACTION_ACL_CONNECTED;
   public static final String ACTION_ACL_DISCONNECTED   = BluetoothDevice.ACTION_ACL_DISCONNECTED;
   public static final String ACTION_ACL_DISCONNECT_REQUESTED = BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED;
-  // public static final String ACTION_FOUND              = BluetoothDevice.ACTION_FOUND;
+  public static final String ACTION_FOUND              = BluetoothDevice.ACTION_FOUND;
   public static final String ACTION_BOND_STATE_CHANGED = BluetoothDevice.ACTION_BOND_STATE_CHANGED;
-  // public static final String ACTION_PAIRING_REQUEST    = BluetoothDevice.ACTION_PAIRING_REQUEST;  // REQUIRES API-19
+  public static final String ACTION_PAIRING_REQUEST    = BluetoothDevice.ACTION_PAIRING_REQUEST;  // REQUIRES API-19
 
   // public static final int SCAN_MODE_CONNECTABLE_DISCOVERABLE = BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE;
 
   // public static final String EXTRA_DISCOVERABLE_DURATION  = BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION;
-  // public static final String ACTION_DISCOVERY_STARTED     = BluetoothAdapter.ACTION_DISCOVERY_STARTED;
-  // public static final String ACTION_DISCOVERY_FINISHED    = BluetoothAdapter.ACTION_DISCOVERY_FINISHED;
-  // public static final String ACTION_REQUEST_DISCOVERABLE  = BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE;
+  public static final String ACTION_DISCOVERY_STARTED     = BluetoothAdapter.ACTION_DISCOVERY_STARTED;
+  public static final String ACTION_DISCOVERY_FINISHED    = BluetoothAdapter.ACTION_DISCOVERY_FINISHED;
+  public static final String ACTION_REQUEST_DISCOVERABLE  = BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE;
   public static final String ACTION_REQUEST_ENABLE        = BluetoothAdapter.ACTION_REQUEST_ENABLE;
 
   public static final String EXTRA_DEVICE              = BluetoothDevice.EXTRA_DEVICE;
@@ -100,17 +100,20 @@ public class DeviceUtil
 
   /** start BT devices discovery
    */
-  public static void startDiscovery()
+  public static boolean startDiscovery()
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     if ( adapter != null ) {
       try {
-        adapter.startDiscovery();
+        boolean ret = adapter.startDiscovery();
+        TDLog.v("start BT discovery: " + ret );
+        return ret;
       } catch ( SecurityException e ) {
         TDLog.e("SECURITY start discovery " + e.getMessage() );
         // TDToast.makeBad("Security error: start discovery");
       }
     }
+    return false;
   }
 
   /** cancel BT devices discovery

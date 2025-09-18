@@ -206,6 +206,7 @@
     <string name="device_status_silent_on">静音: 开</string>
     <string name="device_status_silent_off">静音: 关</string>
     <string name="bt_reset">重置蓝牙连接</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">另存为</string>
     <string name="nickname">别称</string>
     <string name="unknown_device_type">无法识别的设备 %1$d</string>
@@ -326,6 +327,7 @@
     <string name="fmt_h_geoid">海拔. %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string -->
     <string name="location_start_fine">开始定位</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">输入方位角</string>
@@ -425,7 +427,7 @@
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>
     <string name="no_device_window">下载时设备窗口不可用</string>
-    <!-- UNUSED string name="no_device_found">未发现设备</string -->
+    <string name="no_device_found">未发现设备</string>
     <string name="no_feature_audio">音频不支持</string>
     <string name="no_feature_pdf">PDF格式不支持</string>
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
@@ -495,7 +497,7 @@
     <string name="menu_photo">照片</string>
     <string name="menu_sections">截面</string>
     <string name="menu_sensor">传感器</string>
-    <!-- UNUSED string name="menu_scan">扫描</string -->
+    <string name="menu_scan">扫描</string>
     <!-- UNUSED string name="menu_scan_ble">扫描低功耗蓝牙设备</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">统计</string>
@@ -510,8 +512,12 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">方格纸</string>
 
-    <!-- UNUSED string name="start_scan">开始扫描</string -->
-    <!-- UNUSED string name="stop_scan">停止扫描</string -->
+    <string name="start_scan">开始扫描</string>
+    <string name="stop_scan">停止扫描</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">BLE扫描</string -->
     <!-- UNUSED string name="ble_scan_failed">蓝牙设备扫描失败</string -->
     <!-- UNUSED string name="ble_gatt_failure">蓝牙故障</string -->
@@ -1263,6 +1269,7 @@
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>

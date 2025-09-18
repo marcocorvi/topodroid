@@ -205,6 +205,7 @@
     <string name="device_status_silent_on">Silenzioso: on</string>
     <string name="device_status_silent_off">Silenzioso: off</string>
     <string name="bt_reset">Resettare la connessione bluetooth</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">salva come</string>
     <string name="nickname">Nome</string>
     <string name="unknown_device_type">Tipo dispositivo non noto: %1$d</string>
@@ -326,6 +327,7 @@
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Errore %1$.0f m</string -->
     <string name="location_start_fine">Inizio affinamento posizione</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
@@ -424,7 +426,7 @@
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_window">Finestra dispositivi disabilitata durante scaricamento</string>
-    <!-- UNUSED string name="no_device_found">Dispositivo non trovato</string -->
+    <string name="no_device_found">Dispositivi non trovati</string>
     <string name="no_feature_audio">Audio non supportato</string>
     <string name="no_feature_pdf">PDF non supportato</string>
     <string name="no_gms">Calibrazione senza data.</string>
@@ -495,7 +497,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sections">SEZIONI</string>
     <string name="menu_sensor">SENSORI</string>
-    <!-- UNUSED string name="menu_scan">CERCA</string -->
+    <string name="menu_scan">RICERCA BT</string>
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">STATISTICHE</string>
@@ -509,8 +511,12 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Carta millimetrata</string>
 
-    <!-- UNUSED string name="start_scan">Inizia scansione</string -->
-    <!-- UNUSED string name="stop_scan">Termina scansione</string -->
+    <string name="start_scan">Inizia scansione</string>
+    <string name="stop_scan">Termina scansione</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">Scansione BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Scansione BLE fallita</string -->
     <!-- UNUSED string name="ble_gatt_failure">Guasto BLE</string -->
@@ -1262,6 +1268,7 @@
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <string name="title_recalibrate">Calibrazioni</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calibr.</string>

@@ -206,6 +206,7 @@
     <string name="device_status_silent_on">Csendes mód: be</string>
     <string name="device_status_silent_off">Csendes mód: ki</string>
     <string name="bt_reset">Bluetooth kapcsolat újraindítása</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">mentés mint</string>
     <string name="nickname">Becenév</string>
     <string name="unknown_device_type">Ismeretlen műszer típus %1$d</string>
@@ -327,6 +328,7 @@
     <string name="fmt_h_geoid">Geoid mag. %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string -->
     <string name="location_start_fine">Pontos helymeghatározás kezdés</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
 
     <string name="error_azimuth_required">Azimut szükséges</string>
@@ -426,7 +428,7 @@
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
     <string name="no_device_window">Műszar ablak nem elérhető a letöltés közben</string>
-    <!-- UNUSED string name="no_device_found">Nem talált műszert</string -->
+    <string name="no_device_found">Nem talált műszert</string>
     <string name="no_feature_audio">Hang nem támogatott</string>
     <string name="no_feature_pdf">PDF nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
@@ -497,7 +499,7 @@
     <string name="menu_photo">FOTÓ</string>
     <string name="menu_sections">METSZETEK</string>
     <string name="menu_sensor">SZENZOR</string>
-    <!-- UNUSED string name="menu_scan">KERESÉS</string -->
+    <string name="menu_scan">KERESÉS</string>
     <!-- UNUSED string name="menu_scan_ble">BTLE KERESÉS</string -->
     <!-- UNUSED string name="menu_station">ÁLLÁSPONTOK</string -->
     <string name="menu_stats">STATISZTIKA</string>
@@ -512,8 +514,12 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Rajz felület</string>
 
-    <!-- UNUSED string name="start_scan">Keresés indítás</string -->
-    <!-- UNUSED string name="stop_scan">Keresés leállítás</string -->
+    <string name="start_scan">Keresés indítás</string>
+    <string name="stop_scan">Keresés leállítás</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">BTLE keresés</string -->
     <!-- UNUSED string name="ble_scan_failed">BTLE keresés eredménytelen</string -->
     <!-- UNUSED string name="ble_gatt_failure">BTLE hiba</string -->
@@ -1268,6 +1274,7 @@
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <string name="title_recalibrate">Klibrációk</string>
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>

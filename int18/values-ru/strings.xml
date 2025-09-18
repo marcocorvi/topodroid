@@ -204,6 +204,7 @@
     <string name="device_status_silent_on">Без сохранения: вкл</string>
     <string name="device_status_silent_off">Без сохранения: выкл</string>
     <string name="bt_reset">Сброс соединения bluetooth</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">сохранить как</string>
     <string name="nickname">Псевдоним</string>
     <string name="unknown_device_type">Неизвестный тип устройства %1$d</string>
@@ -324,6 +325,7 @@
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string -->
     <string name="location_start_fine">Начинаю уточнение позиции</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
@@ -422,7 +424,7 @@
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
     <string name="no_device_window">Окно устройств недоступно во время загрузки данных</string>
-    <!-- UNUSED string name="no_device_found">Прибор не обнаружен</string -->
+    <string name="no_device_found">Прибор не обнаружен</string>
     <string name="no_feature_audio">Аудио не поддерживается</string>
     <string name="no_feature_pdf">PDF не поддерживается</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
@@ -493,7 +495,7 @@
     <string name="menu_photo">ФОТО</string>
     <string name="menu_sections">СЕЧЕНИЯ</string>
     <string name="menu_sensor">ДАТЧИКИ</string>
-    <!-- UNUSED string name="menu_scan">Сканировать</string -->
+    <string name="menu_scan">Сканировать</string>
     <!-- UNUSED string name="menu_scan_ble">СКАН BT окружение</string -->
     <!-- UNUSED string name="menu_station">ПИКЕТЫ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
@@ -507,8 +509,12 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметровая-бумага</string>
 
-    <!-- UNUSED string name="start_scan">Начать сканирование</string -->
-    <!-- UNUSED string name="stop_scan">Остановить сканирование</string -->
+    <string name="start_scan">Начать сканирование</string>
+    <string name="stop_scan">Остановить сканирование</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
     <!-- UNUSED string name="title_scan">Сканировать BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Сбой сканирования BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Сбой BLE</string -->
@@ -1258,6 +1264,7 @@
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <string name="title_recalibrate">Калибровки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>

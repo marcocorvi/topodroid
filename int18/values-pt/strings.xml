@@ -189,6 +189,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="device_status_silent_on">Silencioso: on</string>
   <string name="device_status_silent_off">Silencioso: off</string>
   <string name="bt_reset">Reiniciar conexão Bluetooth</string>
+    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
   <string name="save_as">Gravar como</string>
   <string name="nickname">Apelido</string>
   <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
@@ -301,6 +302,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
   <!-- UNUSED string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string -->
   <string name="location_start_fine">Posição de início adequada</string>
+    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
   <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
   <string name="error_azimuth_required">Azimute exigido</string>
   <string name="error_length_required">Comprimento exigido</string>
@@ -392,7 +394,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="no_db">Nenhum banco de dados</string>
   <string name="no_device_address">Nenhum dispositivo selecionado</string>
   <string name="no_device_window">Tela Dispositivos não disponível durante download</string>
-  <!-- UNUSED string name="no_device_found">Nenhum dispositivo encontrado</string -->
+  <string name="no_device_found">Nenhum dispositivo encontrado</string>
   <string name="no_feature_audio">Sem suporte para áudio</string>
   <string name="no_feature_pdf">PDF não suportado</string>
   <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
@@ -462,7 +464,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_photo">FOTO</string>
   <string name="menu_sections">CORTES</string>
   <string name="menu_sensor">SENSOR</string>
-  <!-- UNUSED string name="menu_scan">PROCURAR</string -->
+  <string name="menu_scan">PROCURAR</string>
   <!-- UNUSED string name="menu_scan_ble">PROCURAR DISPOSITIVOS BLE</string -->
   <!-- UNUSED string name="menu_station">BASES</string -->
   <string name="menu_stats">ESTATÍSTICAS</string>
@@ -475,8 +477,12 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_plot_search">BUSCA BASE</string>
   <!-- FIXED_ZOOM -->
   <string name="zoom_fixed">Papel milimetrado</string>
-  <!-- UNUSED string name="start_scan">Começar varredura</string -->
-  <!-- UNUSED string name="stop_scan">Parar varredura</string -->
+  <string name="start_scan">Começar varredura</string>
+  <string name="stop_scan">Parar varredura</string>
+    <!-- TODO string name="scan_started">Discovery started</string -->
+    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+
   <!-- UNUSED string name="title_scan">Varredura BLE</string -->
   <!-- UNUSED string name="ble_scan_failed">Busca por dispositivos BLE falhou</string -->
   <!-- UNUSED string name="ble_gatt_failure">Falha no dispositivo BLE</string -->
@@ -1178,6 +1184,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
+    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
   <string name="title_recalibrate">Calibrações</string>
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>

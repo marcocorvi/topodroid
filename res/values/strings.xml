@@ -212,6 +212,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="device_status_silent_on">Silent: on</string>
     <string name="device_status_silent_off">Silent: off</string>
     <string name="bt_reset">Bluetooth reset</string>
+    <string name="bt_busy">Bluetooth busy</string>
     <string name="save_as">save as</string>
     <string name="nickname">Nickname</string>
     <string name="unknown_device_type">Unknown device type %1$d</string>
@@ -294,6 +295,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
  
     <string name="pleasewait">Please wait</string>
     <string name="processing">processing &#8230;</string>
+    <string name="idle" translatable="false">&#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Failed to read DistoX memory index</string>
@@ -335,6 +337,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="fmt_h_geoid">Geoid alt.: %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Starting fine position</string>
+    <string name="location_enabled">Make sure LOCATION is enabled</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimuth required</string>
@@ -434,7 +437,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
     <string name="no_device_window">Device window not available while downloading</string>
-    <!-- UNUSED string name="no_device_found">Found no device</string -->
+    <string name="no_device_found">Found no device</string>
     <string name="no_feature_audio">Audio not supported</string>
     <string name="no_feature_pdf">PDF not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
@@ -444,7 +447,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
     <string name="no_native_lib">Missing native library</string>
-    <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
+    <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a device</string -->
     <string name="no_photos">Survey has no photo</string>
     <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
     <string name="no_profile_overview">No overview for projected profiles</string>
@@ -505,8 +508,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_photo" copyable="fr">PHOTO</string>
     <string name="menu_sections">SECTIONS</string>
     <string name="menu_sensor" copyable="pt">SENSOR</string>
-    <!-- UNUSED string name="menu_scan">SCAN</string -->
-    <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan">BT SCAN</string>
+    <!-- UNUSED string name="menu_scan_ble">BLE SCAN</string -->
     <!-- UNUSED string name="menu_station" copyable="fr">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
@@ -520,8 +523,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Graph-paper</string>
 
-    <!-- UNUSED string name="start_scan">Start scan</string -->
-    <!-- UNUSED string name="stop_scan">Stop scan</string -->
+    <string name="start_scan">Start scan</string>
+    <string name="stop_scan">Stop scan</string>
+    <string name="scan_started">Discovery started</string>
+    <string name="scan_finished">Discovery finished</string>
+    <string name="scanning">Scanning ... Please wait</string>
+
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
@@ -1285,6 +1292,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_audio_list">Audio records</string>
+    <string name="title_bt_search">Bluetooth scan</string>
     <string name="title_recalibrate">Calibrations</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_calib_check">Calibration-check shots</string>

@@ -174,7 +174,7 @@ public class DeviceActivity extends Activity
   static final private int IDX_MEMORY = 5;
 
   private static final int[] menus = {
-                        // R.string.menu_scan,
+                        R.string.menu_scan, // BT_SCAN
                         // R.string.menu_scan_ble, // FIXME_SCAN_BRIC
                         // R.string.menu_pair,
                         R.string.menu_detach,
@@ -636,7 +636,9 @@ public class DeviceActivity extends Activity
     setState( false );
   }
 
-  // pair the android and the current device
+  /** pair the android and the current device
+   * NOT USED
+   *
   private void pairDevice()
   {
     if ( currDeviceA() == null ) return;
@@ -653,6 +655,7 @@ public class DeviceActivity extends Activity
                // 1: paired ok
     }
   }
+   */
 
   // interface ICoeffDisplayer
   // @Implements
@@ -1170,7 +1173,7 @@ public class DeviceActivity extends Activity
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = -1;
-    // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
+    ++k; if ( TDLevel.overExpert   ) menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
     // ++k; if ( TDLevel.overExpert && mHasBLE ) menu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
@@ -1199,19 +1202,19 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    // if ( TDLevel.overBasic && p++ == pos ) { // BT_SCAN
-    //   Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
-    //   scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
-    //   startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
-    //   TDToast.makeLong(R.string.wait_scan );
+    if ( TDLevel.overExpert && p++ == pos ) { // BT_SCAN
+      Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
+      scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
+      startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
+      // TDToast.makeLong(R.string.wait_scan );
 
     // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC BLE_SCAN
     //   BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     //   (new BleScanDialog( this, this, adapter, null )).show();
     // } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
     //   pairDevice();
-    // } else 
-    if ( TDLevel.overNormal && p++ == pos ) { // DETACH
+
+    } else if ( TDLevel.overNormal && p++ == pos ) { // DETACH
       detachDevice();
 
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE

@@ -83,6 +83,7 @@ public class TDandroid
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       android.Manifest.permission.BLUETOOTH_CONNECT, // API-31
+      android.Manifest.permission.BLUETOOTH_SCAN,    // API-31
       // android.Manifest.permission.INTERNET,
       // android.Manifest.permission.MANAGE_EXTERNAL_STORAGE, // will always be denied from API-30
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -97,6 +98,7 @@ public class TDandroid
       "BLUETOOTH", 
       "BLUETOOTH_ADMIN",
       "BLUETOOTH_CONNECT", // API-31
+      "BLUETOOTH_SCAN",    // CODE-S
       // "MANAGE_EXTERNAL_STORAGE", // API-30
       "WRITE_EXTERNAL_STORAGE",
       "READ_EXTERNAL_STORAGE",
@@ -111,6 +113,7 @@ public class TDandroid
       "BLUETOOTH", 
       "BT_ADMIN",
       "BT_CONNECT", // API-31
+      "BT_SCAN",    // API-31
       // "MANAGE_FILE", // API-30
       "WRITE_FILE",
       "READ_FILE",
@@ -124,14 +127,15 @@ public class TDandroid
   // static final String mPermissionManageExternalStorage = android.Manifest.permission.MANAGE_EXTERNAL_STORAGE; // API-30
   static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
-  static final int NR_PERMS_D = 5; // 5 API-31 
+  static final int NR_PERMS_D = 6; // 5 API-31 
   static final int NR_PERMS   = NR_PERMS_D + 3;
 
   // private static final int PERM_BT         = 0;
   // private static final int PERM_BT_ADMIN   = 1;
   private static final int PERM_BT_CONNECT  = 2; // 2 API-31, use -1 to fail test and skip \
-  private static final int PERM_WRITE       = 3; 
-  private static final int PERM_READ        = 4; 
+  private static final int PERM_BT_SCAN     = 3; // 3 API-31
+  private static final int PERM_WRITE       = 4;
+  private static final int PERM_READ        = 5; 
 
   // private static final int PERM_LOCATION   = NR_PERMS_D + 0;
   private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
@@ -166,7 +170,7 @@ public class TDandroid
   }
 
   static boolean MustRestart = false; // whether need to restart app
-  static boolean[] GrantedPermission = { false, false, false, false, false, false, false, false }; // size = NR_PERMS
+  static boolean[] GrantedPermission = { false, false, false, false, false, false, false, false, false }; // size = NR_PERMS
 
   // number of times permissions are requested
 
@@ -177,7 +181,7 @@ public class TDandroid
    */
   static int createPermissions( Context context, Activity activity, int time )
   {
-    // TDLog.v( "PERM create permissions" );
+    TDLog.v( "PERM create permissions" );
     MustRestart = false;
     if ( BELOW_API_23 ) {
       // TDLog.v("PERM create perms: below API-23 - return " );
@@ -196,6 +200,11 @@ public class TDandroid
         continue;
       } 
 
+      if ( k == PERM_BT_SCAN && BELOW_API_31 ) { // BT_SCAN only for API >= 31 - API-31
+        GrantedPermission[k] = true;
+        continue;
+      } 
+
       if ( k == PERM_CAMERA && BELOW_API_21 ) { // CAMERA only for API >= 21
         // GrantedPermission[k] = false;
         continue;
@@ -208,7 +217,7 @@ public class TDandroid
 
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
-        // TDLog.v( "PERM " + permNames[k] + " not granted ");
+        TDLog.v( "PERM " + permNames[k] + " not granted ");
         if ( time > 1 ) {
           activity.requestPermissions( new String[] { perms[k] }, REQUEST_PERMISSIONS );
           GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
@@ -221,10 +230,10 @@ public class TDandroid
       //   // TDLog.v( "Perm " + permNames[k] + " granted ");
       }
     }
-    // TDLog.v("PERM create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS );
+    TDLog.v("PERM create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS );
 
     if ( not_granted > 0 && time < 3 ) {
-      // TDLog.v( "request perms time " + time );
+      TDLog.v( "request perms time " + time );
       // String[] ask_perms = new String[ not_granted ];
       // int kk = 0;
       // for ( int k = 0; k < NR_PERMS; ++k ) if ( ! GrantedPermission[k] ) ask_perms[kk++] = perms[k];
@@ -402,6 +411,8 @@ public class TDandroid
     for ( k=0; k<NR_PERMS_D; ++k ) {
       if ( k == PERM_BT_CONNECT && BELOW_API_31 ) {
         // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
+      } else if ( k == PERM_BT_SCAN && BELOW_API_31 ) {
+        // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
       } else {
         int res = context.checkCallingOrSelfPermission( perms[k] );
         if ( res != PackageManager.PERMISSION_GRANTED ) {
@@ -486,6 +497,11 @@ public class TDandroid
     if ( PERM_BT_CONNECT < 0 || BELOW_API_31 ) {
       return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
+    } // API-31
+    if ( PERM_BT_SCAN < 0 || BELOW_API_31 ) {
+      return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
+        && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
+        // TODO FINE_LOCATION
     } // API-31
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
         && ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH_CONNECT ) == PackageManager.PERMISSION_GRANTED )
