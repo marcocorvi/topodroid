@@ -1225,7 +1225,7 @@
     <string name="export_uncommented_maps">Nem kommentelt térképek</string>
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
-    <!-- TODO string name="export_prefix_survey">Autofill</string -->
+    <string name="export_prefix_survey">Autokitöltés</string>
     <string name="export_media">média elemek</string>
     <!-- UNUSED string name="export_suffix_hint">utótag</string -->
     <string name="export_series_hint">sorozatok</string>
