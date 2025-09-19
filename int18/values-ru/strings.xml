@@ -204,7 +204,7 @@
     <string name="device_status_silent_on">Без сохранения: вкл</string>
     <string name="device_status_silent_off">Без сохранения: выкл</string>
     <string name="bt_reset">Сброс соединения bluetooth</string>
-    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
+    <string name="bt_busy">Bluetooth занят</string>
     <string name="save_as">сохранить как</string>
     <string name="nickname">Псевдоним</string>
     <string name="unknown_device_type">Неизвестный тип устройства %1$d</string>
@@ -325,7 +325,7 @@
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string -->
     <string name="location_start_fine">Начинаю уточнение позиции</string>
-    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
+    <string name="location_enabled">Убедитесь, что функция МЕСТОПОЛОЖЕНИЕ включена</string>
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
@@ -511,9 +511,9 @@
 
     <string name="start_scan">Начать сканирование</string>
     <string name="stop_scan">Остановить сканирование</string>
-    <!-- TODO string name="scan_started">Discovery started</string -->
-    <!-- TODO string name="scan_finished">Discovery finished</string -->
-    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+    <string name="scan_started">Начато обнаружение устройств</string>
+    <string name="scan_finished">Обнаружение устройств закончено</string>
+    <string name="scanning">Сканирование... Пожалуйста, подождите</string>
 
     <!-- UNUSED string name="title_scan">Сканировать BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Сбой сканирования BLE</string -->
@@ -1265,7 +1265,7 @@
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
-    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
+    <string name="title_bt_search">Сканирование Bluetooth</string>
     <string name="title_recalibrate">Калибровки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
