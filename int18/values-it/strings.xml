@@ -1219,6 +1219,7 @@
     <string name="export_uncommented_maps">Mappe scommentate</string>
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
+    <!-- TODO string name="export_prefix_survey">Autofill</string -->
     <string name="export_media">media</string>
     <!-- UNUSED string name="export_suffix_hint">suffisso</string -->
     <string name="export_series_hint">serie</string>

@@ -1136,6 +1136,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
   <string name="export_prefix">Name der Vermessung in Messpunkten</string>
   <string name="export_prefix_hint">Prefix</string>
+    <!-- TODO string name="export_prefix_survey">Autofill</string -->
     <!-- TODO string name="export_media">media items</string -->
   <!-- UNUSED string name="export_suffix_hint">Suffix</string -->
     <!-- TODO string name="export_series_hint">series</string -->

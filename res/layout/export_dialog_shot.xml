@@ -74,13 +74,23 @@
       android:layout_height="wrap_content"
       android:text="@string/export_swap_lr"
       />
-    <EditText android:id="@+id/compass_prefix"
+    <LinearLayout
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:hint="@string/export_prefix_hint"
-      android:importantForAutofill="no"
-      android:inputType="text"
-      />
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/compass_prefix_survey"
+        style="@style/button_default"
+        android:text="@string/export_prefix_survey"
+        />
+      <EditText android:id="@+id/compass_prefix"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:hint="@string/export_prefix_hint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        />
+    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_csurvey"
@@ -100,6 +110,23 @@
       android:layout_height="wrap_content"
       android:text="@string/export_media"
       />
+    <!-- LinearLayout
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/csurvey_prefix_survey"
+        style="@style/button_default"
+        android:text="@string/export_prefix_survey"
+        />
+      <EditText android:id="@+id/csurvey_prefix"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:hint="@string/export_prefix_hint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        />
+    </LinearLayout -->
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_survex"

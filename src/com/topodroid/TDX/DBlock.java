@@ -170,7 +170,7 @@ public class DBlock
    */
   long resetFlag( long flag ) 
   { 
-    TDLog.v("BLK " + mId + " reset flag " + mFlag + " -> " + flag + " tempered: " + ((flag&FLAG_TAMPERED) != 0) );
+    // TDLog.v("BLK " + mId + " reset flag " + mFlag + " -> " + flag + " tempered: " + ((flag&FLAG_TAMPERED) != 0) );
     mFlag = flag | ( mFlag & FLAG_TAMPERED ) | ( mFlag & FLAG_CAVWAY );
     return mFlag;
   }

@@ -44,6 +44,8 @@ public class ExportDialogShot extends MyDialog
                    , View.OnClickListener
 {
   private Button   mBtnOk;
+  private Button   mBtnCompassSurvey;
+  // private Button   mBtnCSurveySurvey;
   // private Button   mBtnBack;
 
   private final IExporter mParent;
@@ -121,6 +123,11 @@ public class ExportDialogShot extends MyDialog
     mLayoutKml      = (LinearLayout) findViewById( R.id.layout_kml );
     mLayoutShp      = (LinearLayout) findViewById( R.id.layout_shp );
     // mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
+
+    mBtnCompassSurvey = (Button) findViewById( R.id.compass_prefix_survey );
+    mBtnCompassSurvey.setOnClickListener( this );
+    // mBtnCSurveySurvey = (Button) findViewById( R.id.csurvey_prefix_survey );
+    // mBtnCSurveySurvey.setOnClickListener( this );
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
@@ -201,7 +208,13 @@ public class ExportDialogShot extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    if ( b == mBtnOk && mSelected != null ) {
+    if ( b == mBtnCompassSurvey ) {
+      ((EditText) findViewById( R.id.compass_prefix )).setText( mSurvey );
+      return;
+    // } else if ( b == mBtnCSurveySurvey ) {
+    //   ((EditText) findViewById( R.id.csurvey_prefix )).setText( mSurvey );
+    //   return;
+    } else if ( b == mBtnOk && mSelected != null ) {
       if ( ! setOptions() ) return;
       // TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
@@ -343,6 +356,7 @@ public class ExportDialogShot extends MyDialog
       mExportPrefix = TDString.noSpace( prefix.toString().trim() );
       if ( mExportPrefix.length() == 0 ) mExportPrefix = null;
     }
+    TDSetting.mExportStationsPrefix = (mExportPrefix != null);
   }
 
   /** set the options for the selected export
@@ -370,6 +384,7 @@ public class ExportDialogShot extends MyDialog
         {
           TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.csurvey_prefix )).isChecked();
           TDSetting.mExportMedia = ((CheckBox) findViewById( R.id.csurvey_media )).isChecked();
+          // setExportPrefix( ((EditText) findViewById( R.id.csurvey_prefix )).getText() );
         }
         break;
       // case TDConst.SURVEY_POS_GHTOPO: // GHTopo

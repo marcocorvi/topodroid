@@ -1232,6 +1232,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Cave-prefix v staničeniach</string>
     <string name="export_prefix_hint">Predpona</string>
+    <!-- TODO string name="export_prefix_survey">Autofill</string -->
     <!-- TODO string name="export_media">media items</string -->
     <!-- UNUSED string name="export_suffix_hint">suffix</string -->
     <string name="export_series_hint">Série</string>
