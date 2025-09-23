@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.content.Context;
 
 import android.widget.Button;
+import android.widget.RadioButton; // HBPly
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -63,6 +64,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
   private LinearLayout mLayoutCSurvey;
+  private LinearLayout mLayoutPolygon; // HBPly
   private LinearLayout mLayoutSurvex;
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutWalls;
@@ -113,6 +115,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutZip      = (LinearLayout) findViewById( R.id.layout_zip );
     mLayoutCompass  = (LinearLayout) findViewById( R.id.layout_compass );
     mLayoutCSurvey  = (LinearLayout) findViewById( R.id.layout_csurvey );
+    mLayoutPolygon   = (LinearLayout) findViewById( R.id.layout_polygon ); // HBPly
     mLayoutSurvex   = (LinearLayout) findViewById( R.id.layout_survex );
     mLayoutTherion  = (LinearLayout) findViewById( R.id.layout_therion );
     mLayoutWalls    = (LinearLayout) findViewById( R.id.layout_walls );
@@ -236,6 +239,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutZip.setVisibility( View.GONE );
     mLayoutCompass.setVisibility( View.GONE );
     mLayoutCSurvey.setVisibility( View.GONE );
+    mLayoutPolygon.setVisibility( View.GONE ); // HBPly
     mLayoutSurvex.setVisibility( View.GONE );
     mLayoutTherion.setVisibility( View.GONE );
     mLayoutWalls.setVisibility( View.GONE );
@@ -253,7 +257,7 @@ public class ExportDialogShot extends MyDialog
       // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
       // // case TDConst.SURVEY_POS_GROTTOLF: // Grottolf
       // // case TDConst.SURVEY_POS_PTOPO: // PocketTopo
-      // case TDConst.SURVEY_POS_POLYGON: // Polygon
+      case TDConst.SURVEY_POS_POLYGON:  mLayoutPolygon.setVisibility( View.VISIBLE ); break;// Polygon // HBPly
       case TDConst.SURVEY_POS_SURVEX:   mLayoutSurvex.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_THERION:  mLayoutTherion.setVisibility( View.VISIBLE ); break;
       // case TDConst.SURVEY_POS_TOPO:  // Topo
@@ -388,7 +392,12 @@ public class ExportDialogShot extends MyDialog
         }
         break;
       // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
-      // case TDConst.SURVEY_POS_POLYGON: // Polygon
+      case TDConst.SURVEY_POS_POLYGON: // Polygon // HBPly
+      {
+        TDSetting.mPlyLRUD = ((RadioButton) findViewById( R.id.ply_lrud )).isChecked();
+        TDSetting.mPlyMinus = ((RadioButton) findViewById( R.id.ply_minus )).isChecked();
+      }
+      break;
       case TDConst.SURVEY_POS_SURVEX: // Survex
         {
           TDSetting.mSurvexSplay = ((CheckBox) findViewById( R.id.survex_splay )).isChecked();
