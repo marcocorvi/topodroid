@@ -29,11 +29,13 @@ import android.os.ParcelFileDescriptor;
 import android.os.AsyncTask;
 
 import java.io.FileOutputStream;
-// import java.io.OutputStream;
+// import java.io.OutputStreamWriter;
 // import java.io.FileWriter;
 import java.io.BufferedWriter;
 // import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import java.nio.charset.Charset;
 
 class SaveDataFileTask extends AsyncTask<Void, Void, String >
 {
@@ -204,7 +206,8 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             break;
           case TDConst.SURVEY_FORMAT_PLG: // Polygon CAVE
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getCaveFileWithExt( mSurvey ) ) );
-            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            bw = new BufferedWriter( TDsafUri.docOutputStreamWriter( pfd, Charset.forName( "ISO-8859-2" ) ) );
             pathname = mSurvey + TDPath.CAVE;
             ret = TDExporter.exportSurveyAsPlg( bw, mSid, mData, mInfo, mSurvey );
             break;
