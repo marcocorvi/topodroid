@@ -129,6 +129,41 @@
     </LinearLayout -->
   </LinearLayout>
 
+  <!--// HBPly -->
+  <LinearLayout android:id="@+id/layout_polygon"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_marginBottom="@dimen/marginvbig"
+      >
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+      <RadioButton
+          android:id="@+id/ply_lrud"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="LRUD"
+          android:checked="true"
+          />
+      <RadioButton
+          android:id="@+id/ply_snumber"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="S1..S1000"
+          />
+      <RadioButton
+          android:id="@+id/ply_minus"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="-"
+          />
+    </RadioGroup>
+  </LinearLayout>
+
+
   <LinearLayout android:id="@+id/layout_survex"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
