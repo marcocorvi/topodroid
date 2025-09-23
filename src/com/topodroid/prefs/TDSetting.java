@@ -257,6 +257,8 @@ public class TDSetting
   public static float   mLRUDhorizontal     = 45;     // horizontal splay for LR 
   public static boolean mLRUDcount          = false;  // LRUD counter (false: use all)
 
+  public static boolean mPlyLRUD            = true; // HBPly
+  public static boolean mPlyMinus           = false; // HBPly
   public static String  mSurvexEol          = "\n";
   public static boolean mSurvexSplay        = false; // splays with named TO
   public static boolean mSurvexLRUD         = false;
