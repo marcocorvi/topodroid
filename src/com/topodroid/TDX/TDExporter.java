@@ -4797,15 +4797,14 @@ public class TDExporter
       printPolygonEOL( pw );
       pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote");
       printPolygonEOL( pw );
-
-
+      
       int size = 0; // count legs
       for ( DBlock blk : list ) {
         if ( ! mPlgSplay ) { // HBPly
           if (blk.mFrom != null && blk.mTo != null)
             ++size;
         } else {
-          if ((blk.mFrom != null) || (blk.mTo != null))// HBPly 
+          if ((blk.mFrom != null) || (blk.mTo != null))// HBPly
             ++size;
         }
       }
@@ -4953,43 +4952,44 @@ public class TDExporter
 
       if ( nr_data > 0 ) {
         // boolean repeat2 = false;
-        for ( int n0 = 0; n0 < nr_data; ++n0 ) { // HBPly
-          PolygonData d0 = polygon_data[0];
-          if (d0.from.equals(first_from)) { //
+        for ( int n0 = 0; n0 < nr_data; ++n0 ) { // HBPly first leg
+          PolygonData d0 = polygon_data[n0];
+          if (d0.from.equals(first_from) && !d0.to.equals("-")) { // forward
             printPolygonData( pw, d0 );
             d0.used = true;
-            TDLog.v(" HBPly kiírás " + d0.from + " to " + d0.to );
+            break;
+          }
+          if (d0.to.equals(first_from) && !d0.from.equals("-")) { // backward to GPS
+            d0.reverse();
+            printPolygonData( pw, d0 );
+            d0.used = true;
             break;
           }
         }
         //PolygonData d0 = polygon_data[0]; // HBPly
         //printPolygonData( pw, d0 ); // HBPly
-        //d0.used = true; // az elsőt mindig nyomtatja // HBPly
+        //d0.used = true;  // HBPly
         boolean repeat = true;
         while ( repeat ) {
           repeat = false;
           //TDLog.v(" HBPly rpeat " + repeat);
           for ( int n2 = 0; n2 < nr_data; ++n2 ) {  // HBPly
-            //TDLog.v(" HBPly rendezés " + " n2 " + n2 +" rpeat " + repeat);
             PolygonData d2 = polygon_data[n2];
             if ( d2.used ) continue; // ha nem nyomtatott
             String from = d2.from;
             String to   = d2.to;
             for ( int n1 = 0; n1 < nr_data; ++n1 ) {
-              //TDLog.v(" HBPly rendezés " + n1 + " list " + n2 );
               PolygonData d1 = polygon_data[n1];
-              if ( d1.used && !(mPlgMinus && d1.to.equals( "-" )) && !(mPlgMinus && d1.from.equals( "-" ))) {  // HBPly "-" not point
+              if ( d1.used && !(mPlgMinus && d1.to.equals( "-" )) && !(mPlgMinus && d1.from.equals( "-" ))) {// HBPly "-" not point
                 if ( from.equals( d1.to ) || from.equals( d1.from ) ) {
                   printPolygonData( pw, d2 );
                   d2.used = true;
-                  //TDLog.v(" HBPly kiírás " + d2.from + " to " + d2.to + " n1 " + n1 );
                   break;
                 }
                 if ( to.equals( d1.to ) || to.equals( d1.from ) ) { // try reversed
                   d2.reverse();
                   printPolygonData( pw, d2 );
                   d2.used = true;
-                  //TDLog.v(" HBPly kiírás " + d2.from + " from " + d2.to + " n1 " + n1 );
                   break;
                 }
               }
