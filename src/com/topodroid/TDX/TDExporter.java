@@ -4802,10 +4802,10 @@ public class TDExporter
       int size = 0; // count legs
       for ( DBlock blk : list ) {
         if ( ! mPlgSplay ) { // HBPly
-          if (blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0)
+          if (blk.mFrom != null && blk.mTo != null)
             ++size;
         } else {
-          if ((blk.mFrom != null && blk.mFrom.length() > 0) || (blk.mTo != null && blk.mTo.length() > 0))// HBPly ? 0 length alias centerline?
+          if ((blk.mFrom != null) || (blk.mTo != null))// HBPly 
             ++size;
         }
       }
@@ -4978,17 +4978,17 @@ public class TDExporter
             for ( int n1 = 0; n1 < nr_data; ++n1 ) {
               //TDLog.v(" HBPly rendezés " + n1 + " list " + n2 );
               PolygonData d1 = polygon_data[n1];
-              if ( d1.used ) {
+              if ( d1.used && !(mPlgMinus && d1.to.equals( "-" )) && !(mPlgMinus && d1.from.equals( "-" ))) {  // HBPly "-" not point
                 if ( from.equals( d1.to ) || from.equals( d1.from ) ) {
                   printPolygonData( pw, d2 );
-                  if (!(mPlgMinus && to.equals( "-" ))) d2.used = true;  // HBPly "-" not point
+                  d2.used = true;
                   //TDLog.v(" HBPly kiírás " + d2.from + " to " + d2.to + " n1 " + n1 );
                   break;
                 }
                 if ( to.equals( d1.to ) || to.equals( d1.from ) ) { // try reversed
                   d2.reverse();
                   printPolygonData( pw, d2 );
-                  if (!(mPlgMinus && from.equals( "-" ))) d2.used = true;  // HBPly "-" not point
+                  d2.used = true;
                   //TDLog.v(" HBPly kiírás " + d2.from + " from " + d2.to + " n1 " + n1 );
                   break;
                 }
