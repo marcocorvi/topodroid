@@ -4684,125 +4684,12 @@ public class TDExporter
   //   }
   //   printPolygonEOL( pw );
   // }
-  private static String convertFromUtf8ToR(String s1) { // HBPly
-    if(s1 == null) {
-      return null;
-    }
-    byte[] a = s1.getBytes();
-    byte[] b = new byte[a.length];
-    int i2 =0;
-    for (  int i = 0; i < a.length; ++i ) {// repülő ékezetes átalakítás, nem tudok jobbat
-      switch (a[i]) { // HBPly
-        case -61:
-          switch (a[i+1]) { // HBPly
-            case -95://á
-              b[i2] = 97;
-              b[i+1] = 39;
-              break;
-            case -87://é
-              b[i2] = 101;
-              b[i+1] = 39;
-              break;
-            case -83://í
-              b[i2] = 105;
-              b[i+1] = 39;
-              break;
-            case -77://ó
-              b[i2] = 111;
-              b[i+1] = 39;
-              break;
-            case -70: //ú
-              b[i2] = 117;
-              b[i+1] = 39;
-              break;
-            case -74://ö
-              b[i2] = 111;
-              b[i+1] = 58;
-              break;
-            case -68://ü
-              b[i2] = 117;
-              b[i+1] = 58;
-              break;
-            case -127://Á
-              b[i2] = 65;
-              b[i+1] = 39;
-              break;
-            case -119://É
-              b[i2] = 69;
-              b[i+1] = 39;
-              break;
-            case -115://Í
-              b[i2] = 73;
-              b[i+1] = 39;
-              break;
-            case -109://Ó
-              b[i2] = 79;
-              b[i+1] = 39;
-              break;
-            case -102://Ú
-              b[i2] = 85;
-              b[i+1] = 39;
-              break;
-            case -106://Ö
-              b[i2] = 79;
-              b[i+1] = 58;
-              break;
-            case -100://Ü
-              b[i2] = 85;
-              b[i+1] = 58;
-              break;
-            default:
-              b[i2] = 32;
-              b[i+1] = 32;
-          }
-          i++;
-          i2++;
-          break;
-        case -59:
-          switch (a[i+1]) { // HBPly
-            case -111://ő
-              b[i2] = 111;
-              b[i+1] = 34;
-              break;
-            case -79://ű
-              b[i2] = 117;
-              b[i+1] = 34;
-              break;
-            case -112://Ő
-              b[i2] = 79;
-              b[i+1] = 34;
-              break;
-            case -80://Ű
-              b[i2] = 85;
-              b[i+1] = 34;
-              break;
-            default:
-              b[i2] = 32;
-              b[i+1] = 32;
-          }
-          i++;
-          i2++;
-          break;
-        default:
-          //b[i] = 32;
-          if ( a[i]>= 0x20 || a[i]< 0x7f ){
-            b[i2] = a[i];
-          }
-      }
-      i2++;
-    }
-    for (  int i = i2; i < b.length; ++i ) {
-      b[i] = 32;
-    }
-    return new String(b);
-  }
   static private void printPolygonData( PrintWriter pw, PolygonData data )
   {
     pw.format( "%s\t%s\t", data.from, data.to );
     pw.format(Locale.US, "%.2f\t%.1f\t%.1f\t\t%.2f\t%.2f\t%.2f\t%.2f\t",
             data.length, data.bearing, data.clino, data.lrud.l, data.lrud.r, data.lrud.u, data.lrud.d );
     if ( data.comment != null && data.comment.length() > 0 ) {
-      // pw.format("%s", convertFromUtf8ToR(data.comment) ); // HBPly  FIXME ANSI
       pw.format("%s", data.comment );
     }
     printPolygonEOL( pw );
@@ -4831,7 +4718,6 @@ public class TDExporter
       // TDLog.Log( TDLog.LOG_IO, "export Polygon " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "cave", survey_name + ".cave", "text/cave" );
       PrintWriter pw = new PrintWriter( bw );
-      // PrintWriter pw = new PrintWriter(bw.toString(), StandardCharsets.ISO_8859_1); // HBPly elszáll
 
       pw.format("POLYGON Cave Surveying Software"); printPolygonEOL( pw );
       pw.format("Polygon Program Version   = 2");   printPolygonEOL( pw );
@@ -4840,12 +4726,12 @@ public class TDExporter
       pw.format("-------------------------------"); printPolygonEOL( pw ); printPolygonEOL( pw );
 
       pw.format("*** Project ***");                 printPolygonEOL( pw );
-      pw.format("Project name: %s", info.name );    printPolygonEOL( pw );  // FIXME karakter kódolás
+      pw.format("Project name: %s", info.name );    printPolygonEOL( pw );  // FIXME char coding
       pw.format("Project place: %s", "" );          printPolygonEOL( pw ); // HBPly
       pw.format("Project code: ");                  printPolygonEOL( pw ); // HBPly
       pw.format("Made by: TopoDroid %s", TDVersion.string() );   printPolygonEOL( pw );
       pw.format(Locale.US, "Made date: %f", TDUtil.getDatePlg() ); printPolygonEOL( pw );
-      pw.format("Last modi: 0");   printPolygonEOL( pw ); // modi ???
+      pw.format("Last modi: 0");   printPolygonEOL( pw ); // no modification
       pw.format("AutoCorrect: 0"); printPolygonEOL( pw ); // HBPly no closed loops
       pw.format("AutoSize: 20.0"); printPolygonEOL( pw ); printPolygonEOL( pw );
 
@@ -4864,7 +4750,7 @@ public class TDExporter
       }
       // TDLog.v("Date Y " + y + " M " + m + " d " + d + " " + date );
       pw.format("*** Surveys ***");             printPolygonEOL( pw );
-      pw.format("Survey name: %s", info.name ); printPolygonEOL( pw );  // FIXME karakter kódolás
+      pw.format("Survey name: %s", info.name ); printPolygonEOL( pw );  // FIXME char coding
       pw.format("Survey team:");                printPolygonEOL( pw );
       pw.format("\t%s", (info.team != null)? info.team : "" ); printPolygonEOL( pw );
       printPolygonTabEOL( pw );
@@ -4885,7 +4771,7 @@ public class TDExporter
       // }
       List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL ); // HBPly
       checkShotsClino( list ); // HBPly
-      String first_from = "0"; // HBPly ha nincs induló pont beír nullát
+      String first_from = "0"; // HBPly if not first data
       for ( DBlock blk : list ) { // HBPly
         if (blk.mFrom != null) { first_from = blk.mFrom; break;}
       }
@@ -4893,7 +4779,7 @@ public class TDExporter
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
-          first_from = fix.name;  // HBPly kezdő sorhoz név TODO több induló pont
+          first_from = fix.name;  // HBPly first name TODO több induló pont
           pw.format("Fix point: %s", fix.name );
           printPolygonEOL( pw );
           pw.format(Locale.US, "%.7f\t%.7f\t%.0f\t0\t0\t0\t0", fix.lng, fix.lat, fix.h_geo );
@@ -4919,7 +4805,7 @@ public class TDExporter
           if (blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0)
             ++size;
         } else {
-          if ((blk.mFrom != null && blk.mFrom.length() > 0) || (blk.mTo != null && blk.mTo.length() > 0))// HBPly ? 0 hosszú csatoló poligonok?
+          if ((blk.mFrom != null && blk.mFrom.length() > 0) || (blk.mTo != null && blk.mTo.length() > 0))// HBPly ? 0 length alias centerline?
             ++size;
         }
       }
@@ -4942,7 +4828,7 @@ public class TDExporter
         String to   = item.mTo;
         // TDLog.v(" HBPly item " + nr_data + " from " + from + " to " + to + " length " + item.mLength + " cmnt "+ item.mComment);
         if ( TDString.isNullOrEmpty( from ) ) { // no from station
-          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported ismételt mérés
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported repeated leg shot
             if ( ref_item != null &&
                     ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {//HB problem Secleg
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -4979,7 +4865,7 @@ public class TDExporter
               if (mPlgMinus){
                 splay_name = "-";
               } else {
-                splay_name = "S" + snr;
+                splay_name = "S_" + snr;
                 snr++;
               }
               // TDLog.v(" HBPly splay " + snr + " name " + splay_name + " nr " + nr_data);
@@ -5027,7 +4913,7 @@ public class TDExporter
               if (mPlgMinus){
                 splay_name = "-";
               } else {
-                splay_name = "S" + snr;
+                splay_name = "S_" + snr;
                 snr++;
               }
               // TDLog.v(" HBPly splay " + snr + " name " + splay_name + " ." + " nr " + nr_data);
@@ -5083,30 +4969,29 @@ public class TDExporter
         while ( repeat ) {
           repeat = false;
           //TDLog.v(" HBPly rpeat " + repeat);
-          for ( int n2 = 0; n2 < nr_data; ++n2 ) {  // HBPly elsőtől kezdve // végig megy a másodiktól kezdve
+          for ( int n2 = 0; n2 < nr_data; ++n2 ) {  // HBPly
             //TDLog.v(" HBPly rendezés " + " n2 " + n2 +" rpeat " + repeat);
             PolygonData d2 = polygon_data[n2];
             if ( d2.used ) continue; // ha nem nyomtatott
             String from = d2.from;
             String to   = d2.to;
-            for ( int n1 = 0; n1 < nr_data; ++n1 ) { // végig megy az elsőtől kezdve
+            for ( int n1 = 0; n1 < nr_data; ++n1 ) {
               //TDLog.v(" HBPly rendezés " + n1 + " list " + n2 );
               PolygonData d1 = polygon_data[n1];
-              if ( d1.used ) { //ha az egyes már nyomtatott
+              if ( d1.used ) {
                 if ( from.equals( d1.to ) || from.equals( d1.from ) ) {
-                  printPolygonData( pw, d2 ); //ha a kettes kezdőpontja kapcsolódik az egyeshez nyomtatja
-                  d2.used = true;
+                  printPolygonData( pw, d2 );
+                  if (!(mPlgMinus && to.equals( "-" ))) d2.used = true;  // HBPly "-" not point
                   //TDLog.v(" HBPly kiírás " + d2.from + " to " + d2.to + " n1 " + n1 );
                   break;
                 }
-                if (!mPlgMinus)
-                  if ( to.equals( d1.to ) || to.equals( d1.from ) ) { // try reversed
-                    d2.reverse();
-                    printPolygonData( pw, d2 );//ha a kettes végpontja kapcsolódik az egyeshez nyomtatja fordítva
-                    d2.used = true;
-                    //TDLog.v(" HBPly kiírás " + d2.from + " from " + d2.to + " n1 " + n1 );
-                    break;
-                  }
+                if ( to.equals( d1.to ) || to.equals( d1.from ) ) { // try reversed
+                  d2.reverse();
+                  printPolygonData( pw, d2 );
+                  if (!(mPlgMinus && from.equals( "-" ))) d2.used = true;  // HBPly "-" not point
+                  //TDLog.v(" HBPly kiírás " + d2.from + " from " + d2.to + " n1 " + n1 );
+                  break;
+                }
               }
             }
             repeat |= d2.used;
