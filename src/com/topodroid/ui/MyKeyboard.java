@@ -81,6 +81,17 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   private Keyboard mKeyboard1;
   private Keyboard mKeyboard2; // secondary kbd
 
+  /** keyboard constructor
+   * @param ctx       context
+   * @param kbd_view  keyboard view
+   * @param kbd_base  keyboard base 
+   * @param kbd_type  keyboard type
+   */
+  public static MyKeyboard getMyKeyboard( Context ctx, View kbd_view, int kbd_base, int kbd_type )
+  {
+    return new MyKeyboard( ctx, (KeyboardView)kbd_view, kbd_base, kbd_type );
+  }
+
   public EditText getEditText() { return mEdit; }
   // Context  getContext() { return mContext; }
 

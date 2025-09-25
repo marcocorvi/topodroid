@@ -48,7 +48,7 @@ import android.widget.Button;
 
 import android.view.View;
 // import android.widget.ListView;
-import android.inputmethodservice.KeyboardView;
+// import android.inputmethodservice.KeyboardView;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -174,8 +174,9 @@ class FixedGpsDialog extends MyDialog
     mLocating = false;
     mWMM = new WorldMagneticModel( mContext );
 
-    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
-                                R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
+    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
+    mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
+
     if ( TDSetting.mKeyboard ) {
       if ( TDSetting.mStationNames == 1 ) {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT );

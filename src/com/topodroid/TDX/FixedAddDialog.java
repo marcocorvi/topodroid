@@ -38,7 +38,7 @@ import android.content.ClipboardManager;
 import android.content.ClipData;
 // import android.content.ClipDescription;
 
-import android.inputmethodservice.KeyboardView;
+// import android.inputmethodservice.KeyboardView;
 
 class FixedAddDialog extends MyDialog
                      implements View.OnClickListener
@@ -100,8 +100,9 @@ class FixedAddDialog extends MyDialog
     mNorth = true;
     mEast  = true;
 
-    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
-                                R.xml.my_keyboard, R.xml.my_keyboard_qwerty );
+    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, R.xml.my_keyboard_qwerty );
+    mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard, R.xml.my_keyboard_qwerty );
+
     if ( TDSetting.mKeyboard ) {
       if ( TDSetting.mStationNames == 1 ) {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT );

@@ -43,7 +43,7 @@ import android.view.View;
 // import android.widget.GridView;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-import android.inputmethodservice.KeyboardView;
+// import android.inputmethodservice.KeyboardView;
 
 import android.text.method.KeyListener; 
 
@@ -204,8 +204,9 @@ class FixedDialog extends MyDialog
     // mTVh_ell.setText( String.format( Locale.US, "%.0f", mFxd.h_ell ) );
     mTVh_geo.setText( String.format( Locale.US, "%.0f", mFxd.h_geo ) );
 
-    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
-                                R.xml.my_keyboard, -1 );
+    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
+    mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
+
     if ( TDSetting.mKeyboard ) {
       if ( TDSetting.mNegAltitude ) {
         // MyKeyboard.registerEditText( mKeyboard, mTVh_ell, MyKeyboard.FLAG_POINT_SIGN );
