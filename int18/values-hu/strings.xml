@@ -1534,10 +1534,10 @@
   <string name="pref_compass_splays_summary">Segédmérések exportja a Compass fájlokba</string>
   <string name="pref_walls_splays_title">Walls sünök</string>
   <string name="pref_walls_splays_summary">Segédmérések exportja a Walls fájlokba</string>
-  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
-  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
+  <string name="pref_ply_lrud_title">Polygon LRUD</string>
+  <string name="pref_ply_lrud_summary">BJFL vagy pontnév hozzáadása a sünöknél</string>
+  <string name="pref_ply_minus_title">Polygon minus</string>
+  <string name="pref_ply_minus_summary">"-" vagy számozott sünök a Polygonban</string>
   <string name="pref_vtopo_splays_title">VisualTopo segédmérések</string>
   <string name="pref_vtopo_splays_summary">Segédmérések exportja a VisualTopo fájlokba</string>
   <string name="pref_vtopo_lrud_title">BJFL a kezdőpontnál</string>
