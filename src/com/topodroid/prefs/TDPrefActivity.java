@@ -204,6 +204,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_CATEGORY_CSX:       mPrefs = TDPref.makeCsxPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_TRO:       mPrefs = TDPref.makeTroPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SRV:       mPrefs = TDPref.makeSrvPrefs(      this, hlp ); break;
+      case TDPrefCat.PREF_CATEGORY_PLY:       mPrefs = TDPref.makePlyPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SHP:       mPrefs = TDPref.makeShpPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs(      this, hlp ); break;

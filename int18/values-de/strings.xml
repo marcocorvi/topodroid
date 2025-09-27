@@ -1416,6 +1416,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_compass_splays_summary">Hilfszüge exportieren (compass)</string>
   <string name="pref_walls_splays_title">Walls Hilfszüge</string>
   <string name="pref_walls_splays_summary">Hilfszüge als "splays" statt "wall shots" exportieren</string>
+  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
+  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
   <string name="pref_vtopo_splays_title">VisualTopo: Hilfszüge</string>
   <string name="pref_vtopo_splays_summary">Hilfszüge exportieren (VisualTopo)</string>
   <string name="pref_vtopo_lrud_title">VisualTopo: LRUD von Quellstation</string>

@@ -394,7 +394,7 @@ public class ExportDialogShot extends MyDialog
       // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
       case TDConst.SURVEY_POS_POLYGON: // Polygon // HBPly
       {
-        TDSetting.mPlyLRUD = ((RadioButton) findViewById( R.id.ply_lrud )).isChecked();
+        TDSetting.mPlyLRUD  = ((RadioButton) findViewById( R.id.ply_lrud )).isChecked();
         TDSetting.mPlyMinus = ((RadioButton) findViewById( R.id.ply_minus )).isChecked();
       }
       break;
@@ -507,6 +507,9 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.survex_splay )).setChecked( TDSetting.mSurvexSplay );
     ((CheckBox) findViewById( R.id.survex_lrud )).setChecked( TDSetting.mSurvexLRUD );
     ((EditText) findViewById( R.id.survex_epsg )).setText( Integer.toString( TDSetting.mSurvexEPSG ) );
+
+    ((CheckBox) findViewById( R.id.ply_lrud )).setChecked( TDSetting.mPlyLRUD );
+    ((CheckBox) findViewById( R.id.ply_minus )).setChecked( TDSetting.mPlyMinus );
 
     ((CheckBox) findViewById( R.id.therion_config )).setChecked( TDSetting.mTherionWithConfig );
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );

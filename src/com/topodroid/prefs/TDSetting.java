@@ -1245,106 +1245,111 @@ public class TDSetting
     mBezierStep        = tryFloat( prefs,      keyExport[ 6],      defExport[ 6] );  // DISTOX_BEZIER_STEP
     // TDLog.v("SETTING load secondary export done");
 
-    String[] keyExpSvx = TDPrefKey.EXPORT_SVX;
-    String[] defExpSvx = TDPrefKey.EXPORT_SVXdef;
-    mSurvexEol         = ( prefs.getString(  keyExpSvx[0],      defExpSvx[0] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    mSurvexSplay       =   prefs.getBoolean( keyExpSvx[1], bool(defExpSvx[1]) ); // DISTOX_SURVEX_SPLAY
-    mSurvexLRUD        =   prefs.getBoolean( keyExpSvx[2], bool(defExpSvx[2]) ); // DISTOX_SURVEX_LRUD
-    mSurvexEPSG        = tryInt(   prefs,    keyExpSvx[3],      defExpSvx[3] );  // DISTOX_SURVEX_EPSG
+    String[] keyExp = TDPrefKey.EXPORT_SVX;
+    String[] defExp = TDPrefKey.EXPORT_SVXdef;
+    mSurvexEol         = ( prefs.getString(  keyExp[0],      defExp[0] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
+    mSurvexSplay       =   prefs.getBoolean( keyExp[1], bool(defExp[1]) ); // DISTOX_SURVEX_SPLAY
+    mSurvexLRUD        =   prefs.getBoolean( keyExp[2], bool(defExp[2]) ); // DISTOX_SURVEX_LRUD
+    mSurvexEPSG        = tryInt(   prefs,    keyExp[3],      defExp[3] );  // DISTOX_SURVEX_EPSG
     // TDLog.v("SETTING load secondary export SVX done");
 
-    String[] keyExpTh  = TDPrefKey.EXPORT_TH;
-    String[] defExpTh  = TDPrefKey.EXPORT_THdef;
-    mTherionWithConfig = prefs.getBoolean( keyExpTh[0], bool(defExpTh[0]) ); // DISTOX_THERION_CONFIG
-    mTherionMaps       = prefs.getBoolean( keyExpTh[1], bool(defExpTh[1]) ); // DISTOX_THERION_MAPS
-    // mAutoStations      = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_AUTO_STATIONS 
-    // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
-    mTherionSplays     = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_THERION_SPLAYS
-    // mSurvexLRUD     =   prefs.getBoolean(   keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_SURVEX_LRUD
-    mTherionScale      = tryInt( prefs, keyExpTh[4], defExpTh[4] );  // DISTOX_TH2_SCALE
-    mTherionXvi        = prefs.getBoolean( keyExpTh[5], bool(defExpTh[5]) ); // DISTOX_TH2_XVI
+    keyExp = TDPrefKey.EXPORT_PLY;
+    defExp = TDPrefKey.EXPORT_PLYdef;
+    mPlyLRUD  = prefs.getBoolean( keyExp[0], bool(defExp[0]) ); // DISTOX_PLY_LRUD
+    mPlyMinus = prefs.getBoolean( keyExp[1], bool(defExp[1]) ); // DISTOX_PLY_MINUS
+
+    keyExp  = TDPrefKey.EXPORT_TH;
+    defExp  = TDPrefKey.EXPORT_THdef;
+    mTherionWithConfig = prefs.getBoolean( keyExp[0], bool(defExp[0]) ); // DISTOX_THERION_CONFIG
+    mTherionMaps       = prefs.getBoolean( keyExp[1], bool(defExp[1]) ); // DISTOX_THERION_MAPS
+    // mAutoStations   = prefs.getBoolean( keyExp[2], bool(defExp[2]) ); // DISTOX_AUTO_STATIONS 
+    // mXTherionAreas  = prefs.getBoolean( keyExp[ ], bool(defExp[ ]) ); // DISTOX_XTHERION_AREAS
+    mTherionSplays     = prefs.getBoolean( keyExp[2], bool(defExp[2]) ); // DISTOX_THERION_SPLAYS
+    // mSurvexLRUD     = prefs.getBoolean( keyExp[3], bool(defExp[3]) ); // DISTOX_SURVEX_LRUD
+    mTherionScale      = tryInt( prefs, keyExp[4],         defExp[4] );  // DISTOX_TH2_SCALE
+    mTherionXvi        = prefs.getBoolean( keyExp[5], bool(defExp[5]) ); // DISTOX_TH2_XVI
     // TDLog.v("SETTING load secondary export TH done");
 
-    String[] keyExpDat = TDPrefKey.EXPORT_DAT;
-    String[] defExpDat = TDPrefKey.EXPORT_DATdef;
-    mExportStationsPrefix =  prefs.getBoolean( keyExpDat[0], bool(defExpDat[0]) ); // DISTOX_STATION_PREFIX
-    mCompassSplays     = prefs.getBoolean(     keyExpDat[1], bool(defExpDat[1]) ); // DISTOX_COMPASS_SPLAYS
-    mSwapLR            = prefs.getBoolean(     keyExpDat[2], bool(defExpDat[2]) ); // DISTOX_SWAP_LR
-
-    String[] keyExpSrv = TDPrefKey.EXPORT_SRV;
-    String[] defExpSrv = TDPrefKey.EXPORT_SRVdef;
-    mWallsSplays       = prefs.getBoolean(     keyExpSrv[0], bool(defExpSrv[0]) ); // DISTOX_WALLS_SPLAYS
+    keyExp = TDPrefKey.EXPORT_DAT;
+    defExp = TDPrefKey.EXPORT_DATdef;
+    mExportStationsPrefix =  prefs.getBoolean( keyExp[0], bool(defExp[0]) ); // DISTOX_STATION_PREFIX
+    mCompassSplays     = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_COMPASS_SPLAYS
+    mSwapLR            = prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_SWAP_LR
+    
+    keyExp = TDPrefKey.EXPORT_SRV;
+    defExp = TDPrefKey.EXPORT_SRVdef;
+    mWallsSplays       = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_WALLS_SPLAYS
     // mWallsUD           = tryInt( prefs, keyExpSrv[1], defExpSrv[1] );  // DISTOX_WALLS_UD
+    
+    keyExp = TDPrefKey.EXPORT_TRO;
+    defExp = TDPrefKey.EXPORT_TROdef;
+    mVTopoSplays       = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_VTOPO_SPLAYS
+    mVTopoLrudAtFrom   = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_VTOPO_LRUD
+    mVTopoTrox         = prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_VTOPO_TROX
 
-    String[] keyExpTro = TDPrefKey.EXPORT_TRO;
-    String[] defExpTro = TDPrefKey.EXPORT_TROdef;
-    mVTopoSplays       = prefs.getBoolean(     keyExpTro[0], bool(defExpTro[0]) ); // DISTOX_VTOPO_SPLAYS
-    mVTopoLrudAtFrom   = prefs.getBoolean(     keyExpTro[1], bool(defExpTro[1]) ); // DISTOX_VTOPO_LRUD
-    mVTopoTrox         = prefs.getBoolean(     keyExpTro[2], bool(defExpTro[2]) ); // DISTOX_VTOPO_TROX
-
-    String[] keyExpSvg = TDPrefKey.EXPORT_SVG;
-    String[] defExpSvg = TDPrefKey.EXPORT_SVGdef;
-    mSvgRoundTrip      = prefs.getBoolean(     keyExpSvg[0], bool(defExpSvg[9]) ); // DISTOX_SVG_ROUNDTRIP
-    mSvgGrid           = prefs.getBoolean(     keyExpSvg[1], bool(defExpSvg[1]) ); // DISTOX_SVG_GRID
-    mSvgLineDirection  = prefs.getBoolean(     keyExpSvg[2], bool(defExpSvg[2]) ); // DISTOX_SVG_LINE_DIR
-    mSvgSplays         = prefs.getBoolean(     keyExpSvg[3], bool(defExpSvg[3]) ); // DISTOX_SVG_SPLAYS
-    mSvgGroups         = prefs.getBoolean(     keyExpSvg[4], bool(defExpSvg[4]) ); // DISTOX_SVG_GROUPS
-    // mSvgInHtml      = prefs.getBoolean(     keyExpSvg[ ], bool(defExpSvg[ ]) ); // DISTOX_SVG_IN_HTML
-    mSvgPointStroke    = tryFloat( prefs,      keyExpSvg[ 5],      defExpSvg[ 5] );  // DISTOX_SVG_POINT_STROKE
-    mSvgLabelStroke    = tryFloat( prefs,      keyExpSvg[ 6],      defExpSvg[ 6] );  // DISTOX_SVG_LABEL_STROKE
-    mSvgLineStroke     = tryFloat( prefs,      keyExpSvg[ 7],      defExpSvg[ 7] );  // DISTOX_SVG_LINE_STROKE
-    mSvgGridStroke     = tryFloat( prefs,      keyExpSvg[ 8],      defExpSvg[ 8] );  // DISTOX_SVG_GRID_STROKE
-    mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[ 9],      defExpSvg[ 9] );  // DISTOX_SVG_SHOT_STROKE
-    mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[10],      defExpSvg[10] ); // DISTOX_SVG_LINEDIR_STROKE
-    mSvgStationSize    = tryInt(   prefs,      keyExpSvg[11],      defExpSvg[11] ); // DISTOX_SVG_STATION_SIZE
-    mSvgLabelSize      = tryInt  ( prefs,      keyExpSvg[12],      defExpSvg[12] ); // DISTOX_SVG_LABEL_SIZE
-    mSvgProgram        = tryInt(   prefs,      keyExpSvg[13],      defExpSvg[13] );  // DISTOX_SVG_PROGRAM
+    keyExp = TDPrefKey.EXPORT_SVG;
+    defExp = TDPrefKey.EXPORT_SVGdef;
+    mSvgRoundTrip      = prefs.getBoolean(     keyExp[0], bool(defExp[9]) ); // DISTOX_SVG_ROUNDTRIP
+    mSvgGrid           = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_SVG_GRID
+    mSvgLineDirection  = prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_SVG_LINE_DIR
+    mSvgSplays         = prefs.getBoolean(     keyExp[3], bool(defExp[3]) ); // DISTOX_SVG_SPLAYS
+    mSvgGroups         = prefs.getBoolean(     keyExp[4], bool(defExp[4]) ); // DISTOX_SVG_GROUPS
+    // mSvgInHtml      = prefs.getBoolean(     keyExp[ ], bool(defExp[ ]) ); // DISTOX_SVG_IN_HTML
+    mSvgPointStroke    = tryFloat( prefs,      keyExp[ 5],     defExp[ 5] );  // DISTOX_SVG_POINT_STROKE
+    mSvgLabelStroke    = tryFloat( prefs,      keyExp[ 6],     defExp[ 6] );  // DISTOX_SVG_LABEL_STROKE
+    mSvgLineStroke     = tryFloat( prefs,      keyExp[ 7],     defExp[ 7] );  // DISTOX_SVG_LINE_STROKE
+    mSvgGridStroke     = tryFloat( prefs,      keyExp[ 8],     defExp[ 8] );  // DISTOX_SVG_GRID_STROKE
+    mSvgShotStroke     = tryFloat( prefs,      keyExp[ 9],     defExp[ 9] );  // DISTOX_SVG_SHOT_STROKE
+    mSvgLineDirStroke  = tryFloat( prefs,      keyExp[10],     defExp[10] ); // DISTOX_SVG_LINEDIR_STROKE
+    mSvgStationSize    = tryInt(   prefs,      keyExp[11],     defExp[11] ); // DISTOX_SVG_STATION_SIZE
+    mSvgLabelSize      = tryInt  ( prefs,      keyExp[12],     defExp[12] ); // DISTOX_SVG_LABEL_SIZE
+    mSvgProgram        = tryInt(   prefs,      keyExp[13],     defExp[13] );  // DISTOX_SVG_PROGRAM
     // TDLog.v("SETTING load secondary export SVG done");
 
     // having mTherionScale and mSvgProgram we can set export scale
     setExportScale( mTherionScale );
 
-    String[] keyExpKml = TDPrefKey.EXPORT_KML;
-    String[] defExpKml = TDPrefKey.EXPORT_KMLdef;
-    mKmlStations       = prefs.getBoolean(     keyExpKml[0], bool(defExpKml[0]) ); // DISTOX_KML_STATIONS
-    mKmlSplays         = prefs.getBoolean(     keyExpKml[1], bool(defExpKml[1]) ); // DISTOX_KML_SPLAYS
+    keyExp = TDPrefKey.EXPORT_KML;
+    defExp = TDPrefKey.EXPORT_KMLdef;
+    mKmlStations       = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_KML_STATIONS
+    mKmlSplays         = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_KML_SPLAYS
     // TDLog.v("SETTING load secondary export KML done");
 
-    String[] keyExpCsx = TDPrefKey.EXPORT_CSX;
-    String[] defExpCsx = TDPrefKey.EXPORT_CSXdef;
-    // mExportStationsPrefix = prefs.getBoolean(     keyExpCsx[0], bool(defExpCsx[0]) ); // DISTOX_STATION_PREFIX
-    mExportMedia       =  prefs.getBoolean(     keyExpCsx[1], bool(defExpCsx[1]) ); // DISTOX_WITH_MEDIA
+    keyExp = TDPrefKey.EXPORT_CSX;
+    defExp = TDPrefKey.EXPORT_CSXdef;
+    // mExportStationsPrefix = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_STATION_PREFIX
+    mExportMedia       =  prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_WITH_MEDIA
 
-    String[] keyExpGpx = TDPrefKey.EXPORT_GPX;
-    String[] defExpGpx = TDPrefKey.EXPORT_GPXdef;
-    mGPXSingleTrack    = prefs.getBoolean(     keyExpGpx[0], bool(defExpGpx[0]) ); // DISTOX_GPX_STATION_TRACK
+    keyExp = TDPrefKey.EXPORT_GPX;
+    defExp = TDPrefKey.EXPORT_GPXdef;
+    mGPXSingleTrack    = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_GPX_STATION_TRACK
 
-    String[] keyExpCsv = TDPrefKey.EXPORT_CSV;
-    String[] defExpCsv = TDPrefKey.EXPORT_CSVdef;
-    mCsvRaw            = prefs.getBoolean(     keyExpCsv[0], bool(defExpCsv[0]) ); // DISTOX_CSV_RAW
-    mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, keyExpCsv[1], defExpCsv[1] ) ]; // DISTOX_CSV_SEP
+    keyExp = TDPrefKey.EXPORT_CSV;
+    defExp = TDPrefKey.EXPORT_CSVdef;
+    mCsvRaw            = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_CSV_RAW
+    mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, keyExp[1], defExp[1] ) ]; // DISTOX_CSV_SEP
 
     /* NO_PNG
-    String[] keyExpPng = TDPrefKey.EXPORT_PNG;
-    String[] defExpPng = TDPrefKey.EXPORT_PNGdef;
-    mBitmapScale       = tryFloat( prefs,      keyExpPng[0], defExpPng[0] );  // DISTOX_BITMAP_SCALE 
-    setBitmapBgcolor( prefs, keyExpPng[1], prefs.getString(keyExpPng[1], defExpPng[1]), defExpPng[1] );  // DISTOX_BITMAP_BGCOLOR
+    keyExp = TDPrefKey.EXPORT_PNG;
+    defExp = TDPrefKey.EXPORT_PNGdef;
+    mBitmapScale       = tryFloat( prefs,      keyExp[0], defExp[0] );  // DISTOX_BITMAP_SCALE 
+    setBitmapBgcolor( prefs, keyExp[1], prefs.getString(keyExp[1], defExp[1]), defExp[1] );  // DISTOX_BITMAP_BGCOLOR
     // TDLog.v("SETTING load secondary export PNG done");
     */
 
-    String[] keyExpDxf = TDPrefKey.EXPORT_DXF;
-    String[] defExpDxf = TDPrefKey.EXPORT_DXFdef;
-    // mDxfScale     = tryFloat( prefs,    keyExpDxf[ ],      defExpDxf[ ] );  // DISTOX_DXF_SCALE
-    mDxfBlocks    =  prefs.getBoolean(     keyExpDxf[0], bool(defExpDxf[0]) ); // DISTOX_DXF_BLOCKS
-    mAcadVersion  = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
-    mAcadSpline   =  prefs.getBoolean(     keyExpDxf[2], bool(defExpDxf[2]) ); // DISTOX_ACAD_SPLINE
-    mDxfReference =  prefs.getBoolean(     keyExpDxf[3], bool(defExpDxf[3]) ); // DISTOX_DXF_REFERENCE
-    mAcadLayer    =  prefs.getBoolean(     keyExpDxf[4], bool(defExpDxf[4]) ); // DISTOX_ACAD_LAYER
+    keyExp = TDPrefKey.EXPORT_DXF;
+    defExp = TDPrefKey.EXPORT_DXFdef;
+    // mDxfScale     = tryFloat( prefs,    keyExp[ ],      defExp[ ] );  // DISTOX_DXF_SCALE
+    mDxfBlocks    =  prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_DXF_BLOCKS
+    mAcadVersion  = tryInt(   prefs,       keyExp[1],      defExp[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
+    mAcadSpline   =  prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_ACAD_SPLINE
+    mDxfReference =  prefs.getBoolean(     keyExp[3], bool(defExp[3]) ); // DISTOX_DXF_REFERENCE
+    mAcadLayer    =  prefs.getBoolean(     keyExp[4], bool(defExp[4]) ); // DISTOX_ACAD_LAYER
     // TDLog.v("SETTING load secondary export DXF done");
   
-    String[] keyExpShp = TDPrefKey.EXPORT_SHP;
-    String[] defExpShp = TDPrefKey.EXPORT_SHPdef;
-    mShpGeoref   =  prefs.getBoolean(     keyExpShp[0], bool(defExpShp[0]) ); // DISTOX_SHP_GEOREF
+    keyExp = TDPrefKey.EXPORT_SHP;
+    defExp = TDPrefKey.EXPORT_SHPdef;
+    mShpGeoref   =  prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_SHP_GEOREF
     // TDLog.v("SETTING load secondary export SHP done");
 
     String[] keyData = TDPrefKey.DATA;
@@ -2312,6 +2317,20 @@ public class TDSetting
       mSurvexEPSG = tryIntValue( hlp, k, v, def[3] );
     } else {
       TDLog.e("missing EXPORT SVX key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefPly( TDPrefHelper hlp, String k, String v ) 
+  { 
+    String[] key = TDPrefKey.EXPORT_PLY;
+    String[] def = TDPrefKey.EXPORT_PLYdef;
+    if ( k.equals( key[0] ) ) {      // DISTOX_PLY_LRUD
+      mPlyLRUD  = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    } else if ( k.equals( key[1] ) ) { // DISTOX_PLY_MINUS
+      mPlyMinus = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else {
+      TDLog.e("missing EXPORT PLY key: " + k );
     }
     return null;
   }
@@ -3352,6 +3371,7 @@ public class TDSetting
       // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c, EPSG %d\n", eol, tf(mSurvexSplay), tf(mSurvexLRUD), mSurvexEPSG );
+      pw.printf(Locale.US, "Polygon: LRUD %c, minus %c\n", tf(mPlyLRUD), tf(mPlyMinus) );
       pw.printf(Locale.US, "Compass/cSurvey: swap_LR %c, prefix %c, splays %c, media %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays), tf(mExportMedia) );
       // pw.printf(Locale.US, "Walls: splays %c, wallsUD %d \n", tf(mWallsSplays), mWallsUD );
       pw.printf(Locale.US, "Walls: splays %c \n", tf(mWallsSplays) );
@@ -3636,6 +3656,13 @@ public class TDSetting
               mSurvexEPSG = getInt( vals, 8, 0 ); setPreference( editor, "DISTOX_SURVEX_EPSG", mSurvexEPSG );
             }
             // TDLog.v("Setting import survex settings " + mSurvexEol + " " + mSurvexSplay + " " + mSurvexLRUD );
+          }
+          continue;
+        }
+        if ( line.startsWith("Polygon") ) { 
+          if ( vals.length > 4 ) {
+            mPlyLRUD  = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_PLY_LRUD",  mPlyLRUD );
+            mPlyMinus = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_PLY_MINUS", mPlyMinus );
           }
           continue;
         }

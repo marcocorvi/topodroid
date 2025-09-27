@@ -922,13 +922,14 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[12], tit[12],          lvl[12],                  ctx, hlp ), // compass
       makeFwd( cat, key[13], tit[13],          lvl[13],                  ctx, hlp ), // visualtopo
       makeFwd( cat, key[14], tit[14],          lvl[14],                  ctx, hlp ), // walls
-      makeFwd( cat, key[15], tit[15],          lvl[15],                  ctx, hlp ), // svg
-      makeFwd( cat, key[16], tit[16],          lvl[16],                  ctx, hlp ), // shapefile
+      makeFwd( cat, key[15], tit[15],          lvl[15],                  ctx, hlp ), // polygon
+      makeFwd( cat, key[16], tit[16],          lvl[16],                  ctx, hlp ), // svg
+      makeFwd( cat, key[17], tit[17],          lvl[17],                  ctx, hlp ), // shapefile
       // makeFwd( cat, key[16], tit[16],       lvl[  ],                  ctx, hlp ), // png NO_PNG
-      makeFwd( cat, key[17], tit[17],          lvl[17],                  ctx, hlp ), // dxf
-      makeFwd( cat, key[18], tit[18],          lvl[18],                  ctx, hlp ), // kml
-      makeFwd( cat, key[19], tit[19],          lvl[19],                  ctx, hlp ), // gpx
-      makeFwd( cat, key[20], tit[20],          lvl[20],                  ctx, hlp )  // cvs
+      makeFwd( cat, key[18], tit[18],          lvl[18],                  ctx, hlp ), // dxf
+      makeFwd( cat, key[19], tit[19],          lvl[19],                  ctx, hlp ), // kml
+      makeFwd( cat, key[20], tit[20],          lvl[20],                  ctx, hlp ), // gpx
+      makeFwd( cat, key[21], tit[21],          lvl[21],                  ctx, hlp )  // cvs
     };
   }
 
@@ -1109,6 +1110,25 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] lvl = TDPrefKey.EXPORT_SRVlvl;
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0], ctx, hlp ),
+    };
+  }
+
+  /** construct the "Polygon" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "Polygon" preferences
+   */
+  static TDPref[] makePlyPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefCat.PREF_CATEGORY_PLY;
+    String[] key = TDPrefKey.EXPORT_PLY;
+    int[] tit = TDPrefKey.EXPORT_PLYtitle;
+    int[] dsc = TDPrefKey.EXPORT_PLYdesc;
+    String[] def = TDPrefKey.EXPORT_PLYdef;
+    int[] lvl = TDPrefKey.EXPORT_PLYlvl;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0], ctx, hlp ), // DISTOX_PLY_LRUD
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1], ctx, hlp ), // DISTOX_PLY_MINUS
     };
   }
 

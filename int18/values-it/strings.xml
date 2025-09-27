@@ -1526,6 +1526,10 @@
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
   <string name="pref_walls_splays_title">Splay di Walls</string>
   <string name="pref_walls_splays_summary">Export splay nel file Walls</string>
+  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
+  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
   <string name="pref_vtopo_splays_title">Splay VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Esporta splay in VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD al DA</string>

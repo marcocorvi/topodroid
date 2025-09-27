@@ -1543,6 +1543,10 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
   <string name="pref_walls_splays_title">Walls pomocné zámery</string>
   <string name="pref_walls_splays_summary">Export pomocných zámer do Walls súborov</string>
+  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
+  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
   <string name="pref_vtopo_splays_title">VisualTopo pomocné zámery</string>
   <string name="pref_vtopo_splays_summary">Exportuje pomocné zámery do programu VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD na Počiatočnom Bode</string>

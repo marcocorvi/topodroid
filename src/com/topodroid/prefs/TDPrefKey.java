@@ -599,25 +599,26 @@ class TDPrefKey
     "DISTOX_EXPORT_SHOTS",    // 0 // default data export format
     "DISTOX_EXPORT_PLOT",          // default plot export format
     "DISTOX_AUTO_PLOT_EXPORT", // format to export plots to "out" folder automatically
-    "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_ORTHO_LRUD",      // 3 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
-    "DISTOX_LRUD_HORIZONTAL", // 4 
+    "DISTOX_LRUD_HORIZONTAL", // 5 
     "DISTOX_BEZIER_STEP",           // max step between interpolating points for bezier in export (cSurvey)
     "DISTOX_EXPORT_ENABLE_PREF",
-    "DISTOX_EXPORT_IMPORT_PREF", // 6
+    "DISTOX_EXPORT_IMPORT_PREF", // 8
     "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
     "DISTOX_EXPORT_CSX_PREF",
-    "DISTOX_EXPORT_DAT_PREF",    // 10
+    "DISTOX_EXPORT_DAT_PREF",    // 12
     "DISTOX_EXPORT_TRO_PREF",
-    "DISTOX_EXPORT_SRV_PREF",    // 12
-    "DISTOX_EXPORT_SVG_PREF",    // 13
-    "DISTOX_EXPORT_SHP_PREF",    // 14
+    "DISTOX_EXPORT_SRV_PREF",    // 14
+    "DISTOX_EXPORT_PLY_PREF",    // 15
+    "DISTOX_EXPORT_SVG_PREF",    // 16
+    "DISTOX_EXPORT_SHP_PREF",    // 17
     "DISTOX_EXPORT_DXF_PREF",
     // "DISTOX_EXPORT_PNG_PREF", // NO_PNG
-    "DISTOX_EXPORT_KML_PREF",    // 16
-    "DISTOX_EXPORT_GPX_PREF",    // 17
-    "DISTOX_EXPORT_CSV_PREF",    // 18
+    "DISTOX_EXPORT_KML_PREF",    // 19
+    "DISTOX_EXPORT_GPX_PREF",    // 20
+    "DISTOX_EXPORT_CSV_PREF",    // 21
     null
   };
 
@@ -637,6 +638,7 @@ class TDPrefKey
     R.string.pref_cat_exportdat,
     R.string.pref_cat_exporttro,
     R.string.pref_cat_exportsrv,
+    R.string.pref_cat_exportply,
     R.string.pref_cat_exportsvg,
     R.string.pref_cat_exportshp,
     R.string.pref_cat_exportdxf,
@@ -654,6 +656,7 @@ class TDPrefKey
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
     R.string.pref_bezier_step_summary,
+    -1,
     -1,
     -1,
     -1,
@@ -694,18 +697,20 @@ class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
+    TDString.EMPTY,
     null
   };
 
   static int[] EXPORTlvl = {
-    B,
-    B,
+    N,
+    N,
     N,
     A,
     A,
     A,
     E,
-    B,
+    N,
+    N,
     N,
     N,
     N,
@@ -738,7 +743,7 @@ class TDPrefKey
     TRUE,
   };
   static int[] EXPORT_importlvl = {
-    B,
+    N,
     A,
   };
 
@@ -1020,7 +1025,7 @@ class TDPrefKey
     FALSE,
   };
   static int[] EXPORT_DATlvl = {
-    B,
+    N,
     A,
     N,
   };
@@ -1039,7 +1044,29 @@ class TDPrefKey
     TRUE,
   };
   static int[] EXPORT_SRVlvl = {
-    B,
+    N,
+  };
+
+  // EXPORT PLY POLYGON -----------
+  static String[] EXPORT_PLY = {
+    "DISTOX_PLY_LRUD",
+    "DISTOX_PLY_MINUS",
+  };
+  static int[] EXPORT_PLYtitle = {
+    R.string.pref_ply_lrud_title,
+    R.string.pref_ply_minus_title,
+  };
+  static int[] EXPORT_PLYdesc = {
+    R.string.pref_ply_lrud_summary,
+    R.string.pref_ply_minus_summary,
+  };
+  static String[] EXPORT_PLYdef = {
+    TRUE,
+    FALSE,
+  };
+  static int[] EXPORT_PLYlvl = {
+    N,
+    N,
   };
 
   // EXPORT TRO VISUALTOPO  -------
@@ -1066,7 +1093,7 @@ class TDPrefKey
   static int[] EXPORT_TROlvl = {
     A,
     N,
-    B,
+    N,
   };
 
   // EXPORT KML -------------------

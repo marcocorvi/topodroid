@@ -1510,6 +1510,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_compass_splays_summary">Exportar reproducciones en archivos de Compass</string>
   <string name="pref_walls_splays_title">Muestra walls</string>
   <string name="pref_walls_splays_summary">Exportar reproducciones en archivos de walls</string>
+  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
+  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
   <string name="pref_vtopo_splays_title">Muestra VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Exportar reproducciones en archivos de VisualTopo</string>
   <string name="pref_vtopo_lrud_title">A partir de LRUD</string>

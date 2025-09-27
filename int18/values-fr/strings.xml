@@ -1514,6 +1514,10 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_compass_splays_summary">Exporter les visées latérales d\'habillage dans le fichier Compass</string>
     <string name="pref_walls_splays_title">Habillage Walls</string>
     <string name="pref_walls_splays_summary">Exporter les visées d\'habillage dans les fichiers Walls</string>
+  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
+  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
+  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
     <string name="pref_vtopo_splays_title">Visées latérales VisualTopo</string>
     <string name="pref_vtopo_splays_summary">Exporter les visées latérales d\'habillage dans le fichier VisualTopo</string>
     <string name="pref_vtopo_lrud_title">LRUD à la station DEPUIS</string>
