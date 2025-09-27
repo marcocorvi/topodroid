@@ -1558,9 +1558,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_walls_splays_title">Walls splays</string>
   <string name="pref_walls_splays_summary">Export splays in Walls files</string>
   <string name="pref_ply_lrud_title" copyable="all">Polygon LRUD</string>
-  <string name="pref_ply_lrud_summary">Polygon LRUD</string>
-  <string name="pref_ply_minus_title">Polygon minus</string>
-  <string name="pref_ply_minus_summary">Polygon minus</string>
+  <string name="pref_ply_lrud_summary">LRUD or add TO station to splays in Polygon</string>
+  <string name="pref_ply_minus_title">Polygon splay name</string>
+  <string name="pref_ply_minus_summary">"-" or numbered splays in Polygon</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>
   <string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string>
   <string name="pref_vtopo_lrud_title">LRUD at From</string>
