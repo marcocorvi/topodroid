@@ -1484,6 +1484,15 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name, scrap_id );
   }
 
+  /** @return the section point of a given x-section
+   * @param scrap_name    X-section fullname
+   */
+  DrawingPointPath findSectionPoint( String scrap_name )
+  {
+    return commandManager.findSectionPoint( scrap_name );
+  }
+
+
   void setAllXSectionOutlines( DrawingWindow window, int cm )
   {
     // PROBLEM: section points are in scraps, xsection outlines are in command manager

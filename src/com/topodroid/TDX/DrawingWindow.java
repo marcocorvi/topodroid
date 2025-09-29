@@ -1524,11 +1524,17 @@ public class DrawingWindow extends ItemDrawer
         popInfo();
         doStart( false, -1, null );
         // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
-        // if ( TDSetting.mFixmeXSection && mSectionPt != null ) {
-          // TDLog.v("setXSectionOutline name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+        if ( mSectionPt == null ) {
+          // TODO find section point and redraw the outline
+          // the section point has option "-scrap mFullName3"
+          // (1) find the section point
+          mSectionPt = findSectionPoint( mFullName3 );
+        }
+        if ( /* TDSetting.mFixmeXSection && */ mSectionPt != null ) {
+          TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
           setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
           mSectionPt = null; 
-        // }
+        }
       } else {
         if ( TDSetting.mSingleBack ) {
           super.onBackPressed();
@@ -9654,7 +9660,7 @@ public class DrawingWindow extends ItemDrawer
 
   // TODO move this to DrawingSurface ?
   /** add/drop the outline of a xsection
-   * @param name     xsection name
+   * @param name     xsection fullname
    * @param scrap_id id of the scrap of the section point
    * @param on_off   whether to add or to drop
    * @param x        X coordinate of the point where to put the xsection (canvas frame)
@@ -9665,12 +9671,20 @@ public class DrawingWindow extends ItemDrawer
     // assert( mLastLinePath == null );
 
     mDrawingSurface.clearXSectionOutline( name );
-    // TDLog.v("XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
+    TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
-      // TDLog.v("XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
+      TDLog.v("XSection set " + name + " tdr-file " + tdr );
       mDrawingSurface.setXSectionOutline( name, scrap_id, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
+  }
+
+  /** @return the section point of a given x-section
+   * @param scrap_name    X-section fullname
+   */
+  private DrawingPointPath findSectionPoint( String scrap_name )
+  {
+    return mDrawingSurface.findSectionPoint( scrap_name );
   }
 
   // ------------------------------------------------------------------

@@ -3659,4 +3659,20 @@ public class Scrap
     }
   }
 
+  /** @return the section point of a given x-section, or null if not found
+   * @param scrap_name    X-section fullname
+   */
+  DrawingPointPath findSectionPoint( String scrap_name )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingPointPath ) {
+        DrawingPointPath path = (DrawingPointPath)cmd;
+        if ( BrushManager.isPointSection( path.mPointType )  ) {
+          if ( scrap_name.equals( path.getOption( TDString.OPTION_SCRAP ) ) ) return path;
+        }
+      }
+    }
+    return null;
+  }
+
 }

@@ -2271,6 +2271,14 @@ public class DrawingCommandManager
     }
   }
 
+  /** @return the section point of a given x-section
+   * @param scrap_name    X-section fullname
+   */
+  DrawingPointPath findSectionPoint( String scrap_name )
+  {
+    return mCurrentScrap.findSectionPoint( scrap_name );
+  }
+
   /** compute the area of the xsection
    * @return the computed area
    */
@@ -2348,7 +2356,10 @@ public class DrawingCommandManager
     List< DrawingOutlinePath > xsection_outlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
     synchronized( TDPath.mXSectionsLock ) {
       for ( DrawingOutlinePath path : mXSectionOutlines  ) {
-        if ( ! path.isScrapName( name ) ) xsection_outlines.add( path );
+        if ( ! path.isScrapName( name ) ) {
+          TDLog.v("clear XSection outline: retain " + name );
+          xsection_outlines.add( path );
+        }
       }
       mXSectionOutlines.clear(); // not necessary
     }
