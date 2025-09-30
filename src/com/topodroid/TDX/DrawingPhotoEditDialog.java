@@ -143,7 +143,7 @@ class DrawingPhotoEditDialog extends MyDialog
     } else if ( vid == R.id.photo_image ) {
       // TopoDroidApp.viewPhoto( mContext, mFilename );
       if ( mTdImage != null ) {
-        (new PhotoViewDialog( mContext, mFilename )).show();
+        (new PhotoViewDialog( mContext, mFilename, null )).show(); // null title
       }
       return;
     } else if ( vid == R.id.photo_geocode ) {

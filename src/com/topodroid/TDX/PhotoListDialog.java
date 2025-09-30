@@ -127,7 +127,7 @@ public class PhotoListDialog extends MyDialog
     // mList.setAdapter( mDataAdapter );
   }
 
-  /** implements item click listener
+  /** implements item click listener: react to a tap on a photo entry in the list
    * @param parent  view parent container
    * @param view    clicked item view
    * @param pos     position of the item in the container
@@ -138,7 +138,7 @@ public class PhotoListDialog extends MyDialog
   {
     PhotoInfo info = mDataAdapter.get(pos); // mSavePhoto
     // String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(info.id) );
-    // TDLog.v( "Photo file <" + filename + "> id " + info.id );
+    // TDLog.v( "Photo info: id " + info.id + " reference " + info.mItemName + " item " + info.mItemId + " type " + info.mRefType );
     PhotoEditDialog ped = (new PhotoEditDialog( mContext, this, info ));
     ped.show();
     // TDLog.v( "photo activity started photo edit dialog");

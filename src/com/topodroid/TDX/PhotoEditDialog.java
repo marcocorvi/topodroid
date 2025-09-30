@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
 
@@ -53,9 +53,9 @@ class PhotoEditDialog extends MyDialog
   PhotoEditDialog( Context context, PhotoListDialog parent, PhotoInfo photo )
   {
     super( context, null, R.string.PhotoEditDialog ); // null app
-    // TDLog.v("photo edit dialog id " + photo.id );
     mParent = parent;
     mPhoto  = photo;
+    // TDLog.v("photo edit dialog id " + photo.id + " ref. type " + photo.getRefType() );
     if ( mPhoto.getRefType() == MediaInfo.TYPE_XSECTION ) {
       if ( mPhoto.mFormat == PhotoInfo.FORMAT_JPEG ) {
         mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPhoto.mItemName );
@@ -71,7 +71,7 @@ class PhotoEditDialog extends MyDialog
     }
     mGeoCode  = mPhoto.getGeoCode();
     mAtShot   = ( mPhoto.getRefType() == MediaInfo.TYPE_SHOT );
-    TDLog.v("PhotoEditDialog file " + mFilename + " at shot " + mAtShot );
+    // TDLog.v("PhotoEditDialog file " + mFilename + " at shot " + mAtShot );
     mTdImage = new TDImage( mFilename );
     // TDLog.v( "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
     // TDLog.v( "photo edit dialog: " + mFilename );
@@ -152,7 +152,8 @@ class PhotoEditDialog extends MyDialog
     } else if ( vid == R.id.photo_delete ) {
       mParent.dropPhoto( mPhoto );
     } else if ( vid == R.id.photo_image ) {
-      (new PhotoViewDialog( mContext, mPhoto )).show();
+      // (new PhotoViewDialog( mContext, mPhoto )).show();
+      (new PhotoViewDialog( mContext, mFilename, mPhoto.mTitle )).show();
       return;
     } else if ( vid == R.id.photo_geocode ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
