@@ -1521,6 +1521,7 @@ public class DrawingWindow extends ItemDrawer
       if ( PlotType.isAnySection( mType ) ) {
         // Modified = true; // force saving
         startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
+        // TODO make sure the xsection has been written to file
         popInfo();
         doStart( false, -1, null );
         // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
@@ -1531,7 +1532,7 @@ public class DrawingWindow extends ItemDrawer
           mSectionPt = findSectionPoint( mFullName3 );
         }
         if ( /* TDSetting.mFixmeXSection && */ mSectionPt != null ) {
-          TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+          // TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
           setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
           mSectionPt = null; 
         }
@@ -2379,6 +2380,7 @@ public class DrawingWindow extends ItemDrawer
     mNrButton1x = mNrButton1 - 1;
     mButton1  = new Button[ mNrButton1  + 1 ]; // MOVE
     mButton1x = new Button[ mNrButton1x + 1 ]; // MOVE
+    // TDLog.v("Nr button1 " + mNrButton1 + " 1X " + mNrButton1x );
     int off = 0;
     int ic = 0;
     int kx = 0;
@@ -2386,14 +2388,17 @@ public class DrawingWindow extends ItemDrawer
       ic = ( k <3 )? k : off+k;
       mButton1[k]  = MyButton.getButton( mActivity, this, izons[ic] );
       if ( k != BTN_DIAL ) {
+        // TDLog.v("init buttonX " + kx + " with button " + k );
         mButton1x[kx++] = mButton1[k];
+        // mButton1x[kx++] = MyButton.getButton( mActivity, this, izons[ic] );
       }
       if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( this, res, izons[ic] ); }
       else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( this, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( this, res, izons[ic] ); }
     }
     mButton1[ mNrButton1 ]   = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
-    mButton1x[ mNrButton1x ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
+    mButton1x[ mNrButton1x ] = mButton1[ mNrButton1 ]; 
+    // mButton1x[ mNrButton1x ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
     // FIXME_AZIMUTH_DIAL 1,2
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); 
@@ -2871,6 +2876,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void resetStatus()
   {
+    TDLog.v("reset status");
     mSectionName  = null; 
     // mLastLinePath = null;
     mShiftDrawing = false;
@@ -2908,7 +2914,7 @@ public class DrawingWindow extends ItemDrawer
     mAzimuth = plot.azimuth;
     mClino   = plot.clino;
     mDrawingSurface.setDisplayMode( mSavedMode );
-    // TDLog.v( "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
+    TDLog.v( "pop info " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
     resetStatus();
 
     // DO NOT CALL resetReference( plot ); THIS LINE IS ENOUGH
@@ -2939,7 +2945,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
   {
-    // TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
+    TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
     mSavedType = mType;
     mSavedOffset.x = mOffset.x;
     mSavedOffset.y = mOffset.y;
@@ -2967,6 +2973,7 @@ public class DrawingWindow extends ItemDrawer
     if ( ! TDLevel.overExpert && BTN_PLAN < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( null );
     if ( TDLevel.overNormal ) {
       mListView.setAdapter( mButtonView1x.mAdapter );
+      // mListView.setAdapter( mButtonView1.mAdapter );
       // if (  BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
       // if (  BTN_REFRESH < mNrButton1 ) mButton1[ BTN_REFRESH ].setVisibility( View.GONE );
     }
@@ -3923,7 +3930,7 @@ public class DrawingWindow extends ItemDrawer
         if ( SelectionRange.isRange( mDoEditRange ) ) {
           // setButton3( BTN_BORDER, mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
-            mMode = MODE_SHIFT;
+            mMode = MODE_SHIFT; // setMode( MODE_SHIFT );
             return;
           }
         }
@@ -3936,10 +3943,10 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v( " zoom " + mZoom + " radius " + d0 );
       if ( mHasSelected ) {
         if ( SelectionRange.isPoint( mDoEditRange ) ) {
-          mMode = MODE_SHIFT;
+          mMode = MODE_SHIFT; // setMode( MODE_SHIFT );
 	} else if ( SelectionRange.isItem( mDoEditRange ) ) {
           mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size );
-          mMode = MODE_SHIFT;
+          mMode = MODE_SHIFT; // setMode( MODE_SHIFT );
         }
         setButton3Item( selection.mHotItem );
       } else {
@@ -4005,7 +4012,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
   {
-    TDLog.v("update block flag: " + blk.getFlag() + "/" + blk.cavwayFlag() + " -> " + flag );
+    // TDLog.v("update block flag: " + blk.getFlag() + "/" + blk.cavwayFlag() + " -> " + flag );
     if ( blk.getFlag() == flag ) return;
     flag = blk.resetFlag( flag ); // return the new shot flag, including old cavway bits
     // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
@@ -5084,7 +5091,7 @@ public class DrawingWindow extends ItemDrawer
             // mEditMove = false;
 	    // PATH_MULTISELECTION
 	    if ( ! mDrawingSurface.isMultiselection() ) {
-              clearSelected();
+              clearSelected( true );
             // } else {
             //   TODO
 	    }
@@ -6356,7 +6363,10 @@ public class DrawingWindow extends ItemDrawer
      */
     private void setMode( int mode )
     {
-      if ( mMode == mode ) return;
+      if ( mMode == mode ) {
+        TDLog.v("set mode from " + mMode + " to " + mode + " (skip)");
+        return;
+      }
 
       if ( mMode == MODE_DRAW ) {  // this has annoying glitches 
         mZoomView.setTranslationY( 0 );
@@ -6367,34 +6377,50 @@ public class DrawingWindow extends ItemDrawer
       }
 
       mMode = mode;
+      TDLog.v("set mode from " + mMode + " to " + mode);
+      
       // mLastLinePath = null;
       switch ( mMode ) {
         case MODE_MOVE:
           clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
-          mListView.setAdapter( mButtonView1.mAdapter );
+          if ( PlotType.isSketch2D( mType ) ) {
+            TDLog.v("set mode MOVE type sketch2D " + mType );
+            mListView.setAdapter( mButtonView1.mAdapter );
+          } else {
+            TDLog.v("set mode MOVE type XSection " + mType );
+            mListView.setAdapter( mButtonView1x.mAdapter );
+          }
           mListView.invalidate();
           break;
         case MODE_DRAW:
+          TDLog.v("set mode DRAW");
           clearHotPath( View.VISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView2.mAdapter );
           mListView.invalidate();
           break;
         case MODE_ERASE:
+          TDLog.v("set mode ERASE");
           clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView5.mAdapter );
           mListView.invalidate();
           break;
         case MODE_EDIT:
-          clearSelected();
+          TDLog.v("set mode EDIT");
+          clearSelected( true );
           clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( true );
           mListView.setAdapter( mButtonView3.mAdapter );
           mListView.invalidate();
           break;
+        case MODE_SHIFT:
+        case MODE_SPLIT_SKETCH:
+        case MODE_SPLIT_SCRAP:
+          break;
         default:
+          TDLog.v("set mode unknown: no change");
           break;
       }
       setTheTitle();
@@ -6583,7 +6609,7 @@ public class DrawingWindow extends ItemDrawer
                    mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
                    mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // SNAP to nearest point POINT/LINE/AREA
                 if ( mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 ) ) {
-                  clearSelected();
+                  clearSelected( true );
                   modified();
                 } else {
                   TDToast.makeBad( R.string.failed_snap_to_point );
@@ -7224,22 +7250,28 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** clear the selection of item/point
+   * @param set_mode_edit  whether to set mode to EDIT
    */
-  private void clearSelected()
+  private void clearSelected( boolean set_mode_edit )
   {
     // assert( mLastLinePath == null ); // not needed
     mHasSelected = false;
     mDrawingSurface.clearSelected();
-    mMode = MODE_EDIT;
-    setButton3PrevNext();
-    setButton3Item( null );
+    if ( set_mode_edit ) {
+      mMode = MODE_EDIT; // setMode( MODE_EDIT );
+      setButton3PrevNext();
+      setButton3Item( null );
+      TDLog.v("clear selected - set mode EDIT " + mMode );
+    } else {
+      TDLog.v("clear selected - no set mode EDIT " + mMode );
+    }
   }
 
   /** ON CLICK: react to a user tap
    * @param view   tapped view
    */
   @Override
-  public void onClick(View view)
+  public void onClick( View view )
   {
     if ( onMenu ) {
       closeMenu();
@@ -7334,7 +7366,10 @@ public class DrawingWindow extends ItemDrawer
       if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // PREV
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.prevHotItem( );
-          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
+          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) {
+            // TDLog.v("set mode SHIFT (1)");
+            mMode = MODE_SHIFT; // setMode( MODE_SHIFT );
+          }
           setButton3Item( pt );
         } else {
           makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
@@ -7342,7 +7377,10 @@ public class DrawingWindow extends ItemDrawer
       } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // NEXT
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.nextHotItem( );
-          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
+          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) {
+            // TDLog.v("set mode SHIFT (2)");
+            mMode = MODE_SHIFT; // setMode( MODE_SHIFT );
+          }
           setButton3Item( pt );
         } else {
           setButtonSelectSize( mSelectScale + 1 ); // toggle select size
@@ -7379,6 +7417,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
+        boolean set_mode_edit = true;
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           DrawingPath item = sp.mItem;
@@ -7416,6 +7455,7 @@ public class DrawingWindow extends ItemDrawer
                   if ( section != null ) {
                     String section_name = TDUtil.replacePrefix( TDInstance.survey, section );
                     openXSectionDraw( section_name );
+                    set_mode_edit = false;
                   }
                 // } else {
                 //   new DrawingPointSectionDialog( mActivity, this, point ).show();
@@ -7456,7 +7496,7 @@ public class DrawingWindow extends ItemDrawer
             TDLog.e("selected point has null item");
           }
         }
-        clearSelected();
+        clearSelected( set_mode_edit );
       } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
         // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
         SelectionPoint sp = mDrawingSurface.hotItem();
@@ -7479,8 +7519,10 @@ public class DrawingWindow extends ItemDrawer
         setButtonRange();
       }
     } else if ( ! mTh2Edit ) { // TH2EDIT
+      TDLog.v("on click - no th2 edit");
       int k1 = 3;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DOWNLOAD
+        TDLog.v("Button DOWNLOAD");
         // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
@@ -7494,13 +7536,13 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BLUETOOTH
-        // TDLog.v("Button BLUETOOTH");
+        TDLog.v("Button BLUETOOTH");
         doBluetooth( b, dismiss );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY MODE 
-        // TDLog.v("Button MODE");
+        TDLog.v("Button DISPLAY MODE");
         new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
-        // TDLog.v("Button PLAV/EXTENDED");
+        TDLog.v("Button PLAV/EXTENDED");
         if ( PlotType.isSketch2D( mType ) ) { 
           // TDLog.v( "saving TOGGLE ...");
           startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -7512,11 +7554,11 @@ public class DrawingWindow extends ItemDrawer
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { //  NOTE
-        // TDLog.v("Button NOTE");
+        TDLog.v("Button NOTE");
         (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
 
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  AZIMUTH
-        // TDLog.v("Button AZIMUTH");
+        TDLog.v("Button AZIMUTH");
         if ( PlotType.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend ); // flip fixed extend left/right
@@ -7526,10 +7568,12 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
-        // TDLog.v("Button REFRESH");
+        TDLog.v("Button REFRESH");
         updateDisplay();
         TDToast.make( R.string.display_refresh );
       }
+    } else {
+      TDLog.v("on click - th2 edit: NOTHING ");
     }
 
   }
@@ -7638,12 +7682,19 @@ public class DrawingWindow extends ItemDrawer
    * @param nick    xsection comment
    * @param azimuth section azimuth
    * @param clino   section clino
+   * @param tt      intersection abscissa (leg xsection), 2 (multileg xsection)
+   * @note called by DrawingLineSectionDialog
    */
-  void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
+  void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt )
   {
     TDLog.v("make photo x-section " + id );
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
+      if ( tt <= 1.0 ) {
+        mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
+      } else {
+        TDLog.e("multileg photo xsection not fully supported");
+      }
       // imageFile := survey / photo / sectionId .jpg
       String image_filepath = TDPath.getSurveyJpgFile( TDInstance.survey, id ); // 20230118 local var "image_filepath"
       // File imagefile = TDFile.getTopoDroidFile( image_filepath );
@@ -7664,6 +7715,7 @@ public class DrawingWindow extends ItemDrawer
    * @param clino   section clino
    * @param tt      intersection abscissa (leg xsection), 2 (multileg xsection)
    * @param center  center (multileg xsection)
+   * @note called by DrawingLineSectionDialog
    */
   void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt, Vector3D center )
   {
@@ -8348,10 +8400,11 @@ public class DrawingWindow extends ItemDrawer
   /** initialize the menu list
    * @param res      app resources
    * @param type     plot type
+   * @note called from onStart and resetStatus
    */
   private void setMenuAdapter( Resources res, long type )
   {
-    TDLog.v("Drawing Activity set menu adapter");
+    // TDLog.v("Drawing Activity set menu adapter - type " + type );
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     if ( PlotType.isSketch2D( type ) && TDLevel.overNormal && ! mTh2Edit ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[0] ) ); // SWITCH/CLOSE
@@ -9671,10 +9724,10 @@ public class DrawingWindow extends ItemDrawer
     // assert( mLastLinePath == null );
 
     mDrawingSurface.clearXSectionOutline( name );
-    TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
+    // TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
-      TDLog.v("XSection set " + name + " tdr-file " + tdr );
+      // TDLog.v("XSection set " + name + " tdr-file " + tdr );
       mDrawingSurface.setXSectionOutline( name, scrap_id, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
   }
@@ -9714,9 +9767,9 @@ public class DrawingWindow extends ItemDrawer
       } else {
         mSplitBorder.clear();
       }
-      mMode = MODE_SPLIT_SKETCH;
+      mMode = MODE_SPLIT_SKETCH; // setMode( MODE_SPLIT_SKETCH );
       mTouchMode = MODE_MOVE;
-      TDLog.v("*** split SKETCH mode");
+      TDLog.v("set mode SPLIT SKETCH (1)");
     // } else {
     //   TDToast.makeBad("Missing station " + station );
     // }
@@ -9739,9 +9792,9 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mSplitBorder.clear();
     }
-    mMode = MODE_SPLIT_SCRAP;
+    mMode = MODE_SPLIT_SCRAP; // setMode( MODE_SPLIT_SCRAP ); 
     mTouchMode = MODE_MOVE;
-    TDLog.v("*** split SCRAP mode");
+    TDLog.v("set mode SPLIT SKETCH (2)");
   }
 
   /** marge the plot of the outline in the current plot

@@ -244,7 +244,8 @@ class DrawingLineSectionDialog extends MyDialog
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
       MyCheckBox cb = (MyCheckBox)v;
       if ( canTakePhoto && cb == mBtnFoto ) {
-        mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
+        // TODO mCenter for multileg xsection
+        mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
       } else if ( cb == mBtnDraw ) {
         mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT, mCenter );
       } else if ( cb == mBtnErase ) {
