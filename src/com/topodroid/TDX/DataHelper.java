@@ -4886,7 +4886,10 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  // select all LEG stations
+  /** select all LEG stations
+   * @param sid    survey ID
+   * @note the result is a TreeSset, elements are not repeated
+   */
   Set<String> selectAllStations( long sid )
   {
     Set<String> set = new TreeSet<String>();
@@ -4903,6 +4906,43 @@ public class DataHelper extends DataSetObservable
           set.add( f );
           set.add( t );
         }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return set;
+  }
+
+  /** select all survey stations: LEG, SPLAY, plot ORIGIN, fixed STATION, station name
+   * @param sid    survey ID
+   * @note the result is a TreeSset, elements are not repeated
+   */
+  Set<String> selectAllSurveyStations( long sid )
+  {
+    Set<String> set = new TreeSet<String>();
+    if ( myDB == null ) return set;
+    Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, null );
+    if (cursor.moveToFirst()) {
+      do {
+        String f = cursor.getString( 0 );
+        String t = cursor.getString( 1 );
+        if ( f.length() > 0 ) set.add( f );
+        if ( t.length() > 0 ) set.add( t );
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    cursor = myDB.query(FIXED_TABLE, new String[] { "station" }, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, null );
+    if (cursor.moveToFirst()) {
+      do {
+        String f = cursor.getString( 0 );
+        if ( f.length() > 0 ) set.add( f );
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    cursor = myDB.query(STATION_TABLE, new String[] { "name" }, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, null );
+    if (cursor.moveToFirst()) {
+      do {
+        String f = cursor.getString( 0 );
+        if ( f.length() > 0 ) set.add( f );
       } while (cursor.moveToNext());
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();

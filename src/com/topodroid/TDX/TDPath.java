@@ -545,9 +545,13 @@ public class TDPath
   /** @return survey plot backup filename
    * @param survey   survey name
    * @param name     plot name
-   * @param backup   backup extension number 
+   * @param backup   backup extension number (-1 to fall back to unnumbered backup)
    */
-  static String getSurveyPlotTdrBackupFile( String survey, String name, int backup ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr.bck" + backup ; }
+  static String getSurveyPlotTdrBackupFile( String survey, String name, int backup ) 
+  { 
+    if ( backup < 0 ) return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr.bck";
+    return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr.bck" + backup ; 
+  }
 
   /** return a 3D sketch file in the survey folder
    * @param survey   survey name
@@ -825,8 +829,9 @@ public class TDPath
   /** rename a plot file
    * @param old_name old (short) filename
    * @param new_name new (short) filename
+   * @return false on error, true on ok
    */
-  static void renamePlotFiles( String old_name, String new_name )
+  static boolean renamePlotFiles( String old_name, String new_name )
   {
     String old_tdr = TDPath.getTdrFile( old_name + ".tdr" );
     String new_tdr = TDPath.getTdrFile( new_name + ".tdr" );
@@ -835,20 +840,40 @@ public class TDPath
     new_tdr = new_tdr + TDPath.BCK_SUFFIX;
     File file1 = TDFile.getTopoDroidFile( old_tdr ); // DistoX-SAF
     File file2 = TDFile.getTopoDroidFile( new_tdr );
-    if ( ( ! file1.exists() ) || file2.exists() ) return;
+    if ( ! file1.exists() ) return true;
+    if ( file2.exists() ) return false;
     if ( ! file1.renameTo( file2 ) ) {
       TDLog.e("bck file rename failed");
-      return;
+      return false;
     }
     for ( int i=0; ; ++i ) {
       file1 = TDFile.getTopoDroidFile( old_tdr + i ); // DistoX-SAF
       file2 = TDFile.getTopoDroidFile( new_tdr + i );
-      if ( ( ! file1.exists() ) || file2.exists() ) break;
+      if ( ( ! file1.exists() ) /* || file2.exists() */ ) return true;
       if ( ! file1.renameTo( file2 ) ) {
         TDLog.e("bck" + i + " file rename failed");
-        break;
+        return false;
       }
     }
+    // return true;
+  }
+
+  /**
+   * @param survey   survey name
+   * @param from     old station name
+   * @param to       new station name
+   * @return false on error, true on ok
+   */
+  static boolean renameStationXSectionFiles( String survey, String from, String to )
+  {
+    boolean ret = true;
+    String old_name = survey + "-xs-" + from;
+    String new_name = survey + "-xs-" + to;
+    ret &= renamePlotFiles( old_name, new_name );
+    old_name = survey + "-xh-" + from;
+    new_name = survey + "-xh-" + to;
+    ret &= renamePlotFiles( old_name, new_name );
+    return ret;
   }
 
   /** delete the files of a survey
