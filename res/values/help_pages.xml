@@ -111,6 +111,7 @@
   <string name="ShotEditDialog" translatable="false">page_shot_edit1.htm</string>
   <string name="ShotDisplayDialog" translatable="false">page_displaymode.htm</string>
   <string name="ShotNewDialog" translatable="false">page_man_data.htm</string>
+  <string name="StationsDialog" translatable="false">page_stations_map.htm</string>
   <!-- FIXME_SKETCH_3D string name="Sketch3dNewDialog" translatable="false">page_todo.htm</string -->
   <!-- FIXME_SKETCH_3D string name="SketchModeDialog" translatable="false">page_todo.htm</string -->
   <!-- FIXME_SKETCH_3D string name="SketchNewShotDialog" translatable="false">page_todo.htm</string -->

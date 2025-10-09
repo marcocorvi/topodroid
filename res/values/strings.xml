@@ -453,6 +453,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_profile_overview">No overview for projected profiles</string>
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
+    <string name="no_stations">Survey has no stations</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_search_result">No search result.</string>
     <string name="no_survey">No survey selected.</string>
@@ -506,6 +507,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette" copyable="fr it">PALETTE</string>
     <string name="menu_photo" copyable="fr">PHOTO</string>
+    <string name="menu_stations">STATIONS</string>
     <string name="menu_sections">SECTIONS</string>
     <string name="menu_sensor" copyable="pt">SENSOR</string>
     <string name="menu_scan">BT SCAN</string>
@@ -1140,6 +1142,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo" copyable="fr">Photos</string>
     <string name="help_sensor">Measurements</string>
+    <string name="help_stations">Stations</string>
     <string name="help_3d">3D view (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Drawing mode</string>
@@ -1306,6 +1309,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_search">Station/Leg search</string>
+    <string name="title_stations">Stations</string>
     <string name="title_plot_search">Station search</string>
     <string name="title_pref_search">Settings search</string>
     <string name="title_gm_search">Calib data search</string>

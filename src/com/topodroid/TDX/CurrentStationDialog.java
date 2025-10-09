@@ -79,7 +79,7 @@ class CurrentStationDialog extends MyDialog
 
   /** cstr
    * @param context   context
-   * @param parent    parent window
+   * @param parent    parent window - can be null if called from DrawingStationDialog
    * @param app       application (used to set the active station)
    * @param station   station name
    */
@@ -137,7 +137,11 @@ class CurrentStationDialog extends MyDialog
       } else {
         mBtnGeoCode.setVisibility( View.GONE );
       }
-      mBtnPhoto.setOnClickListener( this );
+      if ( mParent == null ) {
+        mBtnPhoto.setVisibility( View.GONE );
+      } else {
+        mBtnPhoto.setOnClickListener( this );
+      }
     } else {
       mBtnPhoto.setVisibility( View.GONE );
       mBtnGeoCode.setVisibility( View.GONE );
@@ -313,16 +317,20 @@ class CurrentStationDialog extends MyDialog
   }
 
   /** take a station photo
+   * @return true on success
+   * @note called by StationPhotoDialog
    */
-  public void takePhoto()
+  public boolean takePhoto()
   {
+    if ( mParent == null ) return false;
     int camera   = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
     long photoId = mParent.doTakePhoto( 0, mStationName, "", camera, "", MediaInfo.TYPE_STATION ); // shot_id=0, comment="", mGeoCode=""
     TDLog.v("current station took photo " + photoId );
     if ( photoId > 0 ) {
       storeStationPhoto( mStationName, photoId );
+      return true;
     }
-
+    return false;
   }
 
   /** commit a station and its photo
@@ -391,7 +399,7 @@ class CurrentStationDialog extends MyDialog
         (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       }
       return;
-    } else if ( b == mBtnPhoto ) { // PHOTO
+    } else if ( mParent != null && b == mBtnPhoto ) { // PHOTO
       if ( storeStation( name ) ) {
         StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
         if ( cs == null ) {

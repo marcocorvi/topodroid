@@ -32,6 +32,7 @@ import com.topodroid.calib.CalibCheckDialog;
 import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 // import java.util.Calendar;
 
 import android.app.Activity;
@@ -102,6 +103,7 @@ public class SurveyWindow extends Activity
                         R.string.menu_color,
                         R.string.menu_manual_calibration,
                         R.string.menu_calib_check,
+                        R.string.menu_stations,
                         R.string.menu_options,
                         R.string.menu_help
                       };
@@ -122,6 +124,7 @@ public class SurveyWindow extends Activity
                         R.string.help_color,
                         R.string.help_manual_calibration,
                         R.string.help_calib_check,
+                        R.string.help_stations,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -775,8 +778,9 @@ public class SurveyWindow extends Activity
     if ( mSplayColor          ) menu_adapter.add( res.getString( menus[4] ) );
     if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[5] ) );
     if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[6] ) );
-    menu_adapter.add( res.getString( menus[7] ) );
+    if ( TDLevel.overExpert   ) menu_adapter.add( res.getString( menus[7] ) );
     menu_adapter.add( res.getString( menus[8] ) );
+    menu_adapter.add( res.getString( menus[9] ) );
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -813,6 +817,13 @@ public class SurveyWindow extends Activity
         TDToast.makeWarn( R.string.no_calib_check );
       } else {
         new CalibCheckDialog( mActivity, this, shots ).show();
+      }
+    } else if ( TDLevel.overExpert && p++ == pos ) { // STATION NAMES
+      Set< String > stations = mApp_mData.selectAllSurveyStations( TDInstance.sid );
+      if ( stations.isEmpty() ) {
+        TDToast.makeWarn( R.string.no_stations );
+      } else {
+        new StationsDialog( mActivity, this, stations ).show();
       }
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
