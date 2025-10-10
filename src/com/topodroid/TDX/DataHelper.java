@@ -41,6 +41,7 @@ import java.io.StringWriter;
 
 import android.content.Context;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.DataSetObservable;
@@ -248,7 +249,16 @@ public class DataHelper extends DataSetObservable
         // TDLog.v("DB ... try to open RW " + db_name);
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
         if ( myDB != null ) {
-          checkUpgrade();
+          if ( ! checkUpgrade() ) {
+            // TODO exit application: this doesn't work: app finish too early
+            // TopoDroidAlertDialog.makeAlert( context, TDInstance.getResources(), "Bad DB - Exiting", R.string.button_ok, -1, 
+            //   new DialogInterface.OnClickListener() { @Override public void onClick( DialogInterface dialog, int btn ) { TopoDroidApp.mMainActivity.finish(); } },// terminate  
+            //   null );
+            // * could show a toast and quit - this work
+            // TDToast.makeBad( "Bad DB - Exiting" );
+            // TDUtil.slowDown( 1500 ); // wait 1.5 seconds
+            // TopoDroidApp.mMainActivity.finish();
+          }
           return false;
         }
       } catch ( SQLiteException e ) {
@@ -276,47 +286,54 @@ public class DataHelper extends DataSetObservable
   }
 
   /** check if the database need upgrading - in case upgrade it
+   * @return false if tampered DB is detected
    */
-  private void checkUpgrade()
+  private boolean  checkUpgrade()
   {
     int oldVersion = myDB.getVersion();
+    if ( oldVersion < 14 ) return false;
     int newVersion = TDVersion.DATABASE_VERSION;
     boolean need_upgrade = myDB.needUpgrade( TDVersion.DATABASE_VERSION ); 
-    // TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
+    TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
     if ( oldVersion < newVersion ) {
       // TDLog.v( "DB updating tables ...");
       DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
       myDB.setVersion( TDVersion.DATABASE_VERSION );
     }
+    return true;
   }
 
-  /** open a given database file
-   * @param context    context
-   * @param db_name    database path
-   *
-   * open the database, if successful check if it needs updating
-   * @note the database is opened RW only to update the tables (if needed)
-   */
-  private void openDatabaseWithPath( Context context, String db_name )
-  {
-    try {
-      // TDLog.v( "BD-path open " + db_name );
-      myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
-      if ( myDB != null ) {
-        int oldVersion = myDB.getVersion();
-        int newVersion = TDVersion.DATABASE_VERSION;
-        // TDLog.v( "DB-path version: " + oldVersion + " -> " + newVersion );
-        if ( oldVersion < newVersion ) {
-          // TDLog.v( "DB-path updating tables ...");
-          DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
-          myDB.setVersion( TDVersion.DATABASE_VERSION );
-        }
-      }
-    } catch ( SQLiteException e ) {
-      TDLog.e( "ERROR DB-path open: " + e.getMessage() );
-      myDB = null;
-    }
-  }
+  // /** open a given database file
+  //  * @param context    context
+  //  * @param db_name    database path
+  //  * @return false if tampered DB is detected
+  //  *
+  //  * open the database, if successful check if it needs updating
+  //  * @note the database is opened RW only to update the tables (if needed)
+  //  */
+  // private boolean openDatabaseWithPath( Context context, String db_name )
+  // {
+  //   try {
+  //     // TDLog.v( "BD-path open " + db_name );
+  //     myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
+  //     if ( myDB != null ) {
+  //       int oldVersion = myDB.getVersion();
+  //       if ( oldVersion < 14 ) return false;
+  //       int newVersion = TDVersion.DATABASE_VERSION;
+  //       TDLog.v( "DB-path version: " + oldVersion + " -> " + newVersion );
+  //       if ( oldVersion < newVersion ) {
+  //         // TDLog.v( "DB-path updating tables ...");
+  //         DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+  //         myDB.setVersion( TDVersion.DATABASE_VERSION );
+  //       }
+  //     }
+  //   } catch ( SQLiteException e ) {
+  //     TDLog.e( "ERROR DB-path open: " + e.getMessage() );
+  //     myDB = null;
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   /** fill a raw data block with values from the cursor
    * @param sid     survey ID
@@ -7997,8 +8014,7 @@ public class DataHelper extends DataSetObservable
     static void updateTables( SQLiteDatabase db, int oldVersion, int newVersion)
      {
         // FIXME this is called at each start when the database file exists
-        // TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
-        // TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
+        TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         switch ( oldVersion ) {
           case 14: 
             db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );

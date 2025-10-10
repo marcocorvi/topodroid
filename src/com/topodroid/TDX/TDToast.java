@@ -54,6 +54,15 @@ public class TDToast
     show( toast );
     return toast;
   }
+  
+  public static Toast makeToast( String text, int color )
+  {
+    Toast toast = Toast.makeText( TDInstance.context, text, SHORT );
+    getView( toast, color );
+    toast.setGravity( mGravity, 0, 0 ); // ANDROID-11 no-op
+    show( toast );
+    return toast;
+  }
 
   @SuppressLint("ShowToast")
   public static void makeLong( int r ) { show( Toast.makeText( TDInstance.context, r, LONG ) ); }
@@ -69,6 +78,10 @@ public class TDToast
     toast.show();
   }
 
+  /**
+   * @param r     content resource
+   * @param color text color
+   */
   public static void makeColor( int r, int color )
   {
     Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
@@ -128,6 +141,11 @@ public class TDToast
     return view;
   }
 
+  /** @return toast text view
+   * @param toast  toast
+   * @param color  text color
+   * @note set text color, and view going away on click
+   */
   static private View getView( Toast toast, int color )
   {
     View view = toast.getView(); // ANDROID-11 returns null
