@@ -3873,6 +3873,40 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  void remapStationNames( long sid, List<StationMap> name_map )
+  {
+    if ( myDB == null ) return;
+    TDLog.v("Remap station names: " + name_map.size() );
+    try {
+      ContentValues cv = new ContentValues();
+      String where1 = "surveyId=" + sid + " AND fStation=?";
+      String where2 = "surveyId=" + sid + " AND tStation=?";
+      String where3 = "surveyId=" + sid + " AND station=?";
+      String where4 = "surveyId=" + sid + " AND name=?";
+      String where5 = "surveyId=" + sid + " AND start=?";
+      String where6 = "surveyId=" + sid + " AND view=?";
+      String where7 = "surveyId=" + sid + " AND hide=? AND ( type=1 OR type=2 OR type=8 )";
+      myDB.beginTransaction();
+      for ( StationMap sm : name_map ) {
+        TDLog.v("map " + sm.mFrom + " -> " + sm.mTo );
+        String[] values = new String[] { sm.mFrom };
+        cv.clear(); cv.put( "fStation", sm.mTo ); myDB.update( SHOT_TABLE,    cv, where1, values );
+        cv.clear(); cv.put( "tStation", sm.mTo ); myDB.update( SHOT_TABLE,    cv, where2, values );
+        cv.clear(); cv.put( "station",  sm.mTo ); myDB.update( FIXED_TABLE,   cv, where3, values );
+        cv.clear(); cv.put( "name",     sm.mTo ); myDB.update( STATION_TABLE, cv, where4, values );
+        cv.clear(); cv.put( "start",    sm.mTo ); myDB.update( PLOT_TABLE,    cv, where5, values );
+        cv.clear(); cv.put( "view",     sm.mTo ); myDB.update( PLOT_TABLE,    cv, where6, values );
+        cv.clear(); cv.put( "hide",     sm.mTo ); myDB.update( PLOT_TABLE,    cv, where7, values );
+      }
+      TDLog.v("remap OK");
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
+    } catch (SQLiteException e ) { logError( "remap station names", e ); 
+    } finally {
+      myDB.endTransaction();
+    }
+  }
+
   /** @return the name of the last station
    * @param sid    survey ID
    */

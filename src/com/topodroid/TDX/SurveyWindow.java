@@ -872,4 +872,38 @@ public class SurveyWindow extends Activity
     TDLocale.resetTheLocale();
   }
 
+  void remapStationNames( List< StationMap > name_map )
+  {
+    ArrayList< StationMap > tmp_map1 = new ArrayList< StationMap >();
+    for ( StationMap sm : name_map ) {
+      if ( sm.mFrom.equals( sm.mTo ) ) continue;
+      tmp_map1.add( sm );
+    }
+    int nr = tmp_map1.size();
+    if ( nr < 1 ) return;
+    String prefix = "";
+    boolean ok = false;
+    while ( ! ok ) {
+      ok = true;
+      prefix = prefix + "$";
+      for ( StationMap sm : name_map ) { // use name_map: avoid conflict with other names
+        if ( sm.startsWith( prefix ) ) { ok = false; break; }
+      }
+    }
+    TDLog.v("Remap station names " + nr + ". Prefix <" + prefix + ">" );
+    ArrayList< StationMap > tmp_map2 = new ArrayList< StationMap >();
+    for ( int k = 0; k < nr; ++k ) {
+      String tmp_name = prefix + k;
+      StationMap sm = tmp_map1.get( k );
+      tmp_map2.add( new StationMap( tmp_name, sm.mTo ) );
+      sm.mTo = tmp_name;
+    }
+    TDLog.v("Remap station names. First pass");
+    mApp_mData.remapStationNames( TDInstance.sid, tmp_map1 );
+    for ( StationMap sm : tmp_map1 ) TDPath.renameStationXSectionFiles( TDInstance.survey, sm.mFrom, sm.mTo );
+    TDLog.v("Remap station names. Second pass");
+    mApp_mData.remapStationNames( TDInstance.sid, tmp_map2 );
+    for ( StationMap sm : tmp_map2 ) TDPath.renameStationXSectionFiles( TDInstance.survey, sm.mFrom, sm.mTo );
+  }
+
 }

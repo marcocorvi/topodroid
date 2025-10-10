@@ -304,7 +304,7 @@ public class TDandroid
       if ( (k == PERM_WRITE || k == PERM_READ ) && ( PRIVATE_STORAGE || AT_LEAST_API_33 ) ) continue;
       // if ( k == PERM_CAMERA && AT_LEAST_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) {
-        TDLog.e("TD cannot run because of perm " + permShortNames[k] + " - canRun() returns false" );
+        TDLog.v("TD cannot perm " + permShortNames[k] + " - canRun() returns false" );
         // TDToast.makeLong( permShortNames[k] + " is needed to run. Bye.");
         return false;
       }

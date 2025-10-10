@@ -99,6 +99,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="station_not_found">Station not found</string>
     <string name="station_coords" copyable="all">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="station_not_saved">Station not saved</string>
+    <string name="station_name_conflict">Conflicting names. Continue anyways?</string>
+
     <string name="shot_not_found">No shot found</string>
     <string name="shot_not_saved">Shot not saved</string>
     <string name="bad_sibling">Bad leg sibling</string>
@@ -891,6 +893,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
     <string name="button_lrud"  copyable="all">+ LRUD</string><!-- lint: unused -->
+    <string name="button_no"  copyable="all">NO</string>
     <string name="button_ok"  copyable="all">OK</string>
     <string name="button_off"       >off</string>
     <string name="button_on"        >on</string>

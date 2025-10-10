@@ -1182,7 +1182,7 @@ public class MainWindow extends Activity
         // resetButtonBar();
       } else {
         // if ( TDandroid.PRIVATE_STORAGE && ! TopoDroidApp.hasTopoDroidDatabase() ) TopoDroidApp.setSayDialogR( true );
-        TDLog.e("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
+        TDLog.v("MAIN: has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
         if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
           // TDLog.v("MAIN can run - init envs first [2]");
           mApp.initEnvironmentFirst( );

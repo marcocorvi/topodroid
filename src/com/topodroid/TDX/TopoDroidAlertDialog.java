@@ -188,4 +188,50 @@ public class TopoDroidAlertDialog
       mAlert = alert;
   }
 
+  /** make alert dialog with OK / CANCEL buttons
+   * @param context    context
+   * @param res        resources - used to get the OK NO strings
+   * @param message    display message string code
+   * @param ok         OK string code (negative to hide)
+   * @param no         CANCEL string code (negative to hide)
+   * @param ok_handler OK callback (null to default to nothing)
+   * @param no_handler CANCEL callback (null to default to nothing)
+   */  
+  public static void makeAlert( Context context, Resources res, int message, 
+             int ok, 
+             int no,
+             DialogInterface.OnClickListener ok_handler,
+             DialogInterface.OnClickListener no_handler )
+  {
+      AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
+      alert_builder.setMessage( message );
+      if ( ok >= 0 ) {
+        if ( ok_handler == null ) {
+          ok_handler = new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { }
+          };
+        } 
+        alert_builder.setNegativeButton( res.getString(ok), ok_handler );
+      }
+
+      if ( no >= 0 ) {
+        if ( no_handler == null ) {
+          no_handler = new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { }
+          };
+        } 
+        alert_builder.setPositiveButton( res.getString(no), no_handler );
+      }
+
+      AlertDialog alert = alert_builder.create();
+      // NEEDED API-11 for custom background color
+      if ( TDandroid.ABOVE_API_24 ) {
+        alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
+      } else {
+        alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
+      }
+      alert.show();
+      mAlert = alert;
+  }
+
 }

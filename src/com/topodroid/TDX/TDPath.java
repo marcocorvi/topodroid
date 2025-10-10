@@ -868,11 +868,17 @@ public class TDPath
   {
     boolean ret = true;
     String old_name = survey + "-xs-" + from;
-    String new_name = survey + "-xs-" + to;
-    ret &= renamePlotFiles( old_name, new_name );
+    if ( TDFile.hasTopoDroidFile( APP_TDR_PATH, old_name ) ) {
+      String new_name = survey + "-xs-" + to;
+      TDLog.v("Rename " + old_name + " -> " + new_name );
+      ret &= renamePlotFiles( old_name, new_name );
+    }
     old_name = survey + "-xh-" + from;
-    new_name = survey + "-xh-" + to;
-    ret &= renamePlotFiles( old_name, new_name );
+    if ( TDFile.hasTopoDroidFile( APP_TDR_PATH, old_name ) ) {
+      String new_name = survey + "-xh-" + to;
+      TDLog.v("Rename " + old_name + " -> " + new_name );
+      ret &= renamePlotFiles( old_name, new_name );
+    }
     return ret;
   }
 

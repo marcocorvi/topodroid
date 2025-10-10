@@ -25,4 +25,15 @@ class StationMap
     mTo   = station;
   }
 
+  StationMap( String from, String to )
+  { 
+    mFrom = from;
+    mTo   = to;
+  }
+
+  boolean startsWith( String prefix ) 
+  {
+    return ( mFrom.startsWith( prefix ) || mTo.startsWith( prefix ) );
+  }
+
 }
