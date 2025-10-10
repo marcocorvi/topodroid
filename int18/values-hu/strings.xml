@@ -444,6 +444,7 @@
     <string name="no_profile_overview">Nincs áttekintő a vetített szelvényekhez</string>
     <string name="no_proj4">Proj4 nincs telepítve</string>
     <string name="no_sensors">A felmérésben nincsennek mérések</string>
+	<string name="no_stations">A felmérésben nincsennek mérési pontok</string>
     <!-- UNUSED string name="no_shots">Mérésben nincs poligon.\nhasználd a letöltés gombot</string -->
     <string name="no_search_result">Nincs a keresésnek eredménye.</string>
     <string name="no_survey">Nincs kiválasztva felmérés</string>
@@ -497,6 +498,7 @@
     <!-- UNUSED string name="menu_pair">PÁROSÍTÁS</string -->
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
+	<string name="menu_stations">PONTOK</string>
     <string name="menu_sections">METSZETEK</string>
     <string name="menu_sensor">SZENZOR</string>
     <string name="menu_scan">KERESÉS</string>
@@ -1123,6 +1125,7 @@
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Fényképek</string>
     <string name="help_sensor">Mérések</string>
+	<string name="help_stations">Pontok</string>
     <string name="help_3d">3D nézőke (Cave3D)</string>
     <!-- UNUSED string name="help_move">Mozgatás/zoom mód</string -->
     <string name="help_draw">Rajz mód</string>
@@ -1288,6 +1291,7 @@
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
     <string name="title_search">Pont/Mérés keresés</string>
+	 <string name="title_stations">Pontok</string>
     <string name="title_plot_search">Alappont keresés</string>
     <string name="title_pref_search">Beállítások keresése</string>
     <string name="title_gm_search">Kalibrációs adat keresés</string>
