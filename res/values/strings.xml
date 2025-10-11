@@ -1431,6 +1431,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_calib_export">Export calibration</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <string name="title_read_names">Station names map</string>
     <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
     <string name="title_import_th2" copyable="all">Therion th2 file</string>

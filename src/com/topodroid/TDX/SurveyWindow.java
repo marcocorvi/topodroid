@@ -18,6 +18,7 @@ import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDsafUri;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.common.ExportInfo;
 import com.topodroid.ui.MyButton;
@@ -28,12 +29,22 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.calib.CalibCheckDialog;
+import com.topodroid.common.PlotType;
 
 import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 // import java.util.Calendar;
+
+import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -42,6 +53,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 // import android.os.Handler;
 // import android.os.Message;
+import android.os.ParcelFileDescriptor;
 
 // import android.content.Context;
 import android.content.Intent;
@@ -872,8 +884,40 @@ public class SurveyWindow extends Activity
     TDLocale.resetTheLocale();
   }
 
+  /** remap the names of the stations
+   * @para, name_map  names mapping
+   */
   void remapStationNames( List< StationMap > name_map )
   {
+
+    DrawingSurface.clearManagersCache();
+
+    List< String > xs_names   = mApp_mData.getSurveyPlotNames( TDInstance.sid, PlotType.PLOT_X_SECTION );
+    // TDLog.v("xs XSection " + xs_names.size() );
+    if ( ! xs_names.isEmpty() ) {
+      String prefix = TDInstance.survey + "-xs-";
+      List< String > plan_names = mApp_mData.getSurveyPlotNames( TDInstance.sid, PlotType.PLOT_PLAN ); 
+      for ( String plan : plan_names ) {
+        String filename = TDPath.getSurveyPlotTdrFile( TDInstance.survey, plan );
+        DrawingIO.doRemapStationXSections( filename, name_map, prefix );
+      }
+    }
+    List< String > xh_names   = mApp_mData.getSurveyPlotNames( TDInstance.sid, PlotType.PLOT_XH_SECTION );
+    // TDLog.v("xh XSection " + xh_names.size() );
+    if ( ! xh_names.isEmpty() ) {
+      String prefix = TDInstance.survey + "-xh-";
+      List< String > ext_names  = mApp_mData.getSurveyPlotNames( TDInstance.sid, PlotType.PLOT_EXTENDED ); 
+      for ( String ext : ext_names ) {
+        String filename = TDPath.getSurveyPlotTdrFile( TDInstance.survey, ext );
+        DrawingIO.doRemapStationXSections( filename, name_map, prefix );
+      }
+      List< String > proj_names = mApp_mData.getSurveyPlotNames( TDInstance.sid, PlotType.PLOT_PROJECTED ); 
+      for ( String proj : proj_names ) {
+        String filename = TDPath.getSurveyPlotTdrFile( TDInstance.survey, proj );
+        DrawingIO.doRemapStationXSections( filename, name_map, prefix );
+      }
+    }
+
     ArrayList< StationMap > tmp_map1 = new ArrayList< StationMap >();
     for ( StationMap sm : name_map ) {
       if ( sm.mFrom.equals( sm.mTo ) ) continue;
@@ -890,7 +934,7 @@ public class SurveyWindow extends Activity
         if ( sm.startsWith( prefix ) ) { ok = false; break; }
       }
     }
-    TDLog.v("Remap station names " + nr + ". Prefix <" + prefix + ">" );
+    // TDLog.v("Remap station names " + nr + ". Prefix <" + prefix + ">" );
     ArrayList< StationMap > tmp_map2 = new ArrayList< StationMap >();
     for ( int k = 0; k < nr; ++k ) {
       String tmp_name = prefix + k;
@@ -898,12 +942,52 @@ public class SurveyWindow extends Activity
       tmp_map2.add( new StationMap( tmp_name, sm.mTo ) );
       sm.mTo = tmp_name;
     }
-    TDLog.v("Remap station names. First pass");
+    // TDLog.v("Remap station names. First pass");
     mApp_mData.remapStationNames( TDInstance.sid, tmp_map1 );
     for ( StationMap sm : tmp_map1 ) TDPath.renameStationXSectionFiles( TDInstance.survey, sm.mFrom, sm.mTo );
-    TDLog.v("Remap station names. Second pass");
+    // TDLog.v("Remap station names. Second pass");
     mApp_mData.remapStationNames( TDInstance.sid, tmp_map2 );
     for ( StationMap sm : tmp_map2 ) TDPath.renameStationXSectionFiles( TDInstance.survey, sm.mFrom, sm.mTo );
+
+  }
+
+  StationsDialog mStationsDialog = null;
+
+  void doReadNameMap( StationsDialog dialog )
+  {
+    mStationsDialog = dialog;
+    int index = TDConst.SURVEY_FORMAT_TEXT;
+    Intent intent = TDandroid.getOpenDocumentIntent( index ); 
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_read_names ) ), TDRequest.REQUEST_READ_NAMES );
+  }
+    
+  public void onActivityResult( int request, int result, Intent intent ) 
+  {
+    switch ( request ) {
+      case TDRequest.REQUEST_READ_NAMES:
+        if ( result == Activity.RESULT_OK ) {
+          if ( mStationsDialog != null ) {
+            Uri uri = intent.getData();   // import uri - may NullPointerException
+            String mimetype = TDsafUri.getDocumentType( uri );
+            String path = TDsafUri.getDocumentPath(this, uri);
+            // TDLog.v("MIME " + mimetype + " " + path );
+            if (path != null) {
+              try {
+                ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+                InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+                mStationsDialog.readNames( isr );
+                isr.close();
+              } catch ( IOException e ) {
+                TDLog.e("IO error " + e.getMessage() );
+              }
+            }
+          }
+        } else {
+          TDLog.e("READ canceled");
+        }
+        mStationsDialog = null;
+        break;
+    }
   }
 
 }

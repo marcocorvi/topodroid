@@ -135,7 +135,7 @@ public class TDPath
   private static String APP_PHOTO_PATH    = null;
   private static String APP_AUDIO_PATH    = null;
   private static String APP_NOTE_PATH     = null;
-  private static String APP_TDR_PATH      = null;
+  private static String APP_TDR_PATH      = null; // full dir pathname
   private static String APP_C3D_PATH      = null;
   private static String APP_OUT_PATH      = null;
 
@@ -867,17 +867,20 @@ public class TDPath
   static boolean renameStationXSectionFiles( String survey, String from, String to )
   {
     boolean ret = true;
-    String old_name = survey + "-xs-" + from;
-    if ( TDFile.hasTopoDroidFile( APP_TDR_PATH, old_name ) ) {
-      String new_name = survey + "-xs-" + to;
-      TDLog.v("Rename " + old_name + " -> " + new_name );
-      ret &= renamePlotFiles( old_name, new_name );
+    String prefix  = APP_TDR_PATH + "/" + survey;
+    String old_name = prefix + "-xs-" + from + ".tdr";
+    if ( TDFile.hasTopoDroidFile( old_name ) ) {
+      String new_name = prefix + "-xs-" + to + ".tdr";
+      // TDLog.v("Rename " + old_name + " -> " + new_name );
+      ret &= TDFile.moveFile( old_name, new_name );
+    // } else { TDLog.v("Rename " + old_name + " does not exist" );
     }
-    old_name = survey + "-xh-" + from;
+    old_name = prefix + "-xh-" + from + ".tdr";
     if ( TDFile.hasTopoDroidFile( APP_TDR_PATH, old_name ) ) {
-      String new_name = survey + "-xh-" + to;
-      TDLog.v("Rename " + old_name + " -> " + new_name );
-      ret &= renamePlotFiles( old_name, new_name );
+      String new_name = prefix + "-xh-" + to + ".tdr";
+      // TDLog.v("Rename " + old_name + " -> " + new_name );
+      ret &= TDFile.moveFile( old_name, new_name );
+    // } else { TDLog.v("Rename " + old_name + " does not exist" );
     }
     return ret;
   }

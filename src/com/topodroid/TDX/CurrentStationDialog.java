@@ -322,7 +322,10 @@ class CurrentStationDialog extends MyDialog
    */
   public boolean takePhoto()
   {
-    if ( mParent == null ) return false;
+    if ( mParent == null ) {
+      TDLog.v("Current Station Dialog. Null parent: no photo");
+      return false;
+    }
     int camera   = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
     long photoId = mParent.doTakePhoto( 0, mStationName, "", camera, "", MediaInfo.TYPE_STATION ); // shot_id=0, comment="", mGeoCode=""
     TDLog.v("current station took photo " + photoId );

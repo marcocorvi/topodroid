@@ -697,15 +697,17 @@ public class TDFile
    * @param newname   new pathname
    * @pre oldname exists
    */
-  public static void moveFile( String oldname, String newname )
+  public static boolean moveFile( String oldname, String newname )
   {
     File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
     File f2 = getTopoDroidFile( newname );
     if ( f1.exists() ) {
-      if ( ! f1.renameTo( f2 ) ) TDLog.e("file move: failed " + oldname + " to " + newname );
+      if ( f1.renameTo( f2 ) ) return true;
+      TDLog.e("file move: failed " + oldname + " to " + newname );
     } else {
       TDLog.e("file move: no-exist " + oldname ); // this may be OK
     }
+    return false;
   }
 
   /** creates a "topodroid" folder

@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDString;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -31,6 +32,8 @@ import android.util.Pair;
 import java.util.Set;
 import java.util.ArrayList;
 
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 class StationsDialog extends MyDialog
@@ -88,7 +91,7 @@ class StationsDialog extends MyDialog
     if ( v.getId() == R.id.button_ok ) {
       int nr_maps = mStations.size();
       mAdapter.setTargetNames();
-      for ( StationMap st : mStations ) TDLog.v( st.mFrom + " -> " + st.mTo );
+      // for ( StationMap st : mStations ) TDLog.v( st.mFrom + " -> " + st.mTo );
       ArrayList< Pair<StationMap,StationMap> > conflicting_maps = new ArrayList<>();
       for ( int k=0; k<nr_maps; ++k ) {
         StationMap sm1 = mStations.get( k );
@@ -97,7 +100,7 @@ class StationsDialog extends MyDialog
           if ( sm1.mTo.equals( sm2.mTo ) ) conflicting_maps.add( new Pair<StationMap,StationMap>( sm1, sm2 ) );
         }
       }
-      TDLog.v("Button OK. Maps " + nr_maps + " conflicts " + conflicting_maps.size() );
+      // TDLog.v("Button OK. Maps " + nr_maps + " conflicts " + conflicting_maps.size() );
       if (  conflicting_maps.size() > 0 ) {
         TopoDroidAlertDialog.makeAlert( mContext, mContext.getResources(), R.string.station_name_conflict, R.string.button_ok, R.string.button_no,
           new DialogInterface.OnClickListener() { @Override public void onClick( DialogInterface dialog, int btn ) 
@@ -110,14 +113,34 @@ class StationsDialog extends MyDialog
         dismiss();
       }
     } else if ( v.getId() == R.id.button_import ) {
-      TDLog.v("Button Import: TODO");
-      // read a file and update names map
+      mParent.doReadNameMap( this );
     } else {
-      TDLog.v("Button Cancel");
+      // TDLog.v("Button Cancel");
       dismiss();
     }
   }
 
+  void readNames( InputStreamReader isr ) throws IOException
+  {
+    boolean update = false;
+    BufferedReader br = new BufferedReader( isr );
+    String line;
+    while ( (line = br.readLine()) != null ) {
+      // TDLog.v(line);
+      String[] names = TDString.splitOnSpaces( line.trim() );
+      if ( names.length == 2 ) {
+        for ( StationMap sm : mStations ) if ( sm.mFrom.equals( names[0] ) ) {
+          sm.mTo = names[1];
+          update = true;
+          break;
+        }
+      }
+    }
+    if ( update ) {
+      mAdapter = new StationAdapter( mContext, mParent, R.layout.two_columns, mStations );
+      mList.setAdapter( mAdapter );
+    }
+  }
 
 }
 

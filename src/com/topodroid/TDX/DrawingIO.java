@@ -2714,5 +2714,217 @@ public class DrawingIO
     }
     return true;
   }
+  
+  /** remap at-station xsections in the tdr file
+   * @param filename   file path
+   * @param name_map   station names mapping
+   * @param prefix     xsection name prefix ( survey-xs- or survey-xh- )
+   * @return true if success
+   */
+  static boolean doRemapStationXSections( String filename, List<StationMap> name_map, String prefix )
+  {
+    int todo = 1;
+    synchronized ( TDPath.mTdrLock ) { // FIXME-THREAD_SAFE
+      String filename_tmp = filename + ".tmp";
+      try {
+        DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
+        if ( dis == null ) return false;
+        DataOutputStream dos = TDFile.getTopoDroidFileOutputStream( filename_tmp );
+        int version = 0;
+        int scrap_index = 0;
+        DrawingPath path; // = null;
+        // FileInputStream fis = TDFile.getFileInputStream( filename );
+        // BufferedInputStream bfis = new BufferedInputStream( fis );
+        // DataInputStream dis = new DataInputStream( bfis );
+
+        while ( todo > 0 ) {
+          int what = dis.read();
+          // TDLog.v( " read " + what );
+          path = null;
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              dos.write('V');
+              dos.writeInt( version );
+              break;
+            case 'I': // plot info: bounding box
+              dos.write('I');
+              {
+                dos.writeFloat( dis.readFloat() );
+                dos.writeFloat( dis.readFloat() );
+                dos.writeFloat( dis.readFloat() );
+                dos.writeFloat( dis.readFloat() );
+                int k = dis.readInt();
+                dos.writeInt( k );
+                if ( k  == 1 ) {
+                  dos.writeFloat( dis.readFloat() );
+                  dos.writeFloat( dis.readFloat() );
+                  dos.writeFloat( dis.readFloat() );
+                  dos.writeFloat( dis.readFloat() );
+                }
+              }
+              break;
+            case 'S': // SCRAP
+              dos.write('S');
+              {
+                dos.writeUTF( dis.readUTF() );
+                int type = dis.readInt();
+                dos.writeInt( type ); // WRITE
+                if ( type == PlotType.PLOT_PROJECTED ) {
+                  dos.writeInt( dis.readInt() );
+                  // OBLIQUE if ( version > 602029 ) /* oblique */ dis.readInt();
+                }
+                // read palettes
+                dos.writeUTF( dis.readUTF() );
+                dos.writeUTF( dis.readUTF() );
+                dos.writeUTF( dis.readUTF() );
+              }
+              break;
+            case 'N':
+              dos.write('N');
+              scrap_index = dis.readInt();
+              dos.writeInt( scrap_index );
+              break;
+            case 'P':
+              path = DrawingPointPath.loadDataStream( version, dis, 0, 0 /*, missingSymbols */ );
+              if ( path != null ) {
+                DrawingPointPath point_path = (DrawingPointPath)path;
+                if ( BrushManager.isPointSection( point_path.mPointType ) ) {
+                  String scrap = point_path.getOption( TDString.OPTION_SCRAP );
+                  if ( scrap != null && scrap.startsWith( prefix ) ) {
+                    String station = scrap.substring( prefix.length() );
+                    if ( station.length() > 0 ) {
+                      for ( StationMap sm : name_map ) if ( sm.mFrom.equals( station ) ) {
+                        point_path.mOptions = TDString.OPTION_SCRAP + " " + prefix + sm.mTo;
+                        break;
+                      }
+                    }
+                  }
+                }
+                point_path.toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null point");
+                todo = -1;
+              }
+              break;
+            case 'T':
+              path = DrawingLabelPath.loadDataStream( version, dis, 0, 0 );
+              if ( path != null ) {
+                ((DrawingLabelPath)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null label");
+                todo = -1;
+              }
+              break;
+            case 'Y':
+              path = DrawingPhotoPath.loadDataStream( version, dis, 0, 0 );
+              if ( path != null ) {
+                ((DrawingPhotoPath)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null photo");
+                todo = -1;
+              }
+              break;
+            case 'Z':
+              path = DrawingAudioPath.loadDataStream( version, dis, 0, 0 );
+              if ( path != null ) {
+                ((DrawingAudioPath)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null audio");
+                todo = -1;
+              }
+              break;
+            // case 'W':
+            //   path = DrawingSensorPath.loadDataStream( version, dis, 0, 0 );
+            //   if ( path != null ) {
+            //     path.toDataStream( dos, scrap_index );
+            //   } else { 
+            //     todo = -1;
+            //   }
+            //   break;
+            case 'L':
+              path = DrawingLinePath.loadDataStream( version, dis, 0, 0 /*, missingSymbols */ );
+              if ( path != null ) {
+                ((DrawingLinePath)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null line");
+                todo = -1;
+              }
+              break;
+            case 'A':
+              path = DrawingAreaPath.loadDataStream( version, dis, 0, 0 /*, missingSymbols */ );
+              if ( path != null ) {
+                ((DrawingAreaPath)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null area");
+                todo = -1;
+              }
+              break;
+            case 'J':
+              path = DrawingSpecialPath.loadDataStream( version, dis, 0, 0 );
+              if ( path != null ) {
+                ((DrawingSpecialPath)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null special");
+                todo = -1;
+              }
+              break;
+            case 'U':
+              path = DrawingStationUser.loadDataStream( version, dis ); // consume DrawingStationUser data
+              if ( path != null ) {
+                ((DrawingStationUser)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null user station");
+                todo = -1;
+              }
+              break;
+            case 'X':
+              path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+              if ( path != null ) {
+                ((DrawingStationName)path).toDataStream( dos, scrap_index );
+              } else { 
+                TDLog.v("null station name");
+                todo = -1;
+              }
+              break;
+            // case 'G':
+            //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+            //   if ( path != null ) {
+            //     path.toDataStream( dos, scrap_index );
+            //   } else { 
+            //     todo = -1;
+            //   }
+            //   break;
+            case 'F': // do not continue parsing stations
+            case 'E':
+              dos.write( (byte)what );
+              todo = 0;
+              break;
+            default:
+              dos.write( (byte)what );
+              todo = 0;
+              if ( filename != null ) {
+                TDLog.e( "ERROR " + filename + " bad input (1) " + what );
+              } else {
+                TDLog.e( "ERROR bad input (1) " + what );
+              }
+              break;
+          } 
+        }
+        dis.close();
+        dos.close();
+        if ( todo == 0 ) { // MOVE FILE
+          TDFile.moveFile( filename_tmp, filename );
+        }
+      } catch ( FileNotFoundException e ) {
+        // this is OK
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
+      // TDLog.v( "read: " + sb.toString() );
+    }
+    // FIXME-MISSING return (missingSymbols == null ) || missingSymbols.isOK();
+    return todo == 0;
+  }
 
 }

@@ -369,6 +369,7 @@ class DrawingStationDialog extends MyDialog
         }
       } else if ( /* TDLevel.overNormal && */ b == mBtnSaved ) {
         dismiss();
+        // FIXME with TopoDrooidApp.mShotWindow the method doTakePhoto is called, but QCamCompass does not show up
         (new CurrentStationDialog( mContext, null, mApp, mStationName )).show();
         return;
       } else if ( b == mBtnCancel ) {

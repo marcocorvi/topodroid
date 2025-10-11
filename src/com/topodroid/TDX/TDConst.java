@@ -59,8 +59,9 @@ public class TDConst
   public static final int SURVEY_FORMAT_STL     = 33;
   public static final int SURVEY_FORMAT_STL_BIN = 34;
   public static final int SURVEY_FORMAT_LAS_BIN = 35;
-  public static final int SURVEY_FORMAT_SERIAL  = 36;
+  public static final int SURVEY_FORMAT_SERIAL  = 36; 
   // public static final int SURVEY_FORMAT_PNM     = 37; // NO_PNM
+  public static final int SURVEY_FORMAT_TEXT    = 38; // TEXT_PLAIN
 
   private static final String[] mMimeType = {
     "application/octet-stream", //  0 Therion
@@ -102,7 +103,8 @@ public class TDConst
     "application/octet-stream", // 34 STL binary
     "application/octet-stream", // 35 LAS binary
     "test/plain",               // 36 serialized
-    null // "image/x-portable-pixmap",  // 37 NO_PNM
+    null, // "image/x-portable-pixmap",  // 37 NO_PNM
+    "text/plain",               // 38 text
   };
 
   /** @return the mime type given the type index

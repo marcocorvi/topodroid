@@ -80,6 +80,7 @@ public class DataHelper extends DataSetObservable
   // private final static String WHERE_SID_ID_LEGTYPE = "surveyId=? AND id=? AND leg=?";
   private final static String WHERE_SID_ID_MORE = "surveyId=? AND id>=?";
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
+  private final static String WHERE_SID_TYPE    = "surveyId=? AND type=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
   private final static String WHERE_SID_STATUS_FROM  = "surveyId=? AND status=? AND id>=?";
   // private final static String WHERE_SID_STATUS_LEG   = "surveyId=? AND status=? AND leg=?";
@@ -4253,6 +4254,25 @@ public class DataHelper extends DataSetObservable
               null, null, null );
     if (cursor != null ) {
       if (cursor.moveToFirst() ) ret = cursor.getString(0);
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
+
+  /** @return the list of the plot names of a given type
+   * @param sid     survey ID
+   * @param type    plot type
+   */
+  List<String> getSurveyPlotNames( long sid, long type )
+  {
+    ArrayList<String> ret = new ArrayList<>();
+    Cursor cursor = myDB.query( PLOT_TABLE, new String[] {"name"}, WHERE_SID_TYPE, new String[] { Long.toString(sid), Long.toString( type ) }, null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) {
+        do {
+          ret.add( cursor.getString(0) );
+        } while (cursor.moveToNext());
+      }
       if (!cursor.isClosed()) cursor.close();
     }
     return ret;
