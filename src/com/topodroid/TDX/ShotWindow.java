@@ -1012,7 +1012,8 @@ public class ShotWindow extends Activity
   }
 
   /**
-   * @param sid      shot ID or 0 for saved station
+   * @param ctx      context
+   * @param shot_id  shot ID or 0 for saved station
    * @param title    photo title (or null)
    * @param comment  photo comment
    * @param camera   camera type: 0 use URI, 1 use TopoDroid - not used
@@ -1021,20 +1022,20 @@ public class ShotWindow extends Activity
    * @return the ID of the next photo
    * @note called by CurrentStationDialog and ShotPhotoDialog
    */
-  long doTakePhoto( long shot_id, String title, String comment, int camera, String code, int reftype )
+  long doTakePhoto( Context ctx, long shot_id, String title, String comment, int camera, String code, int reftype )
   {
     // camera = 1;
-    TDLog.v("shot window do take photo reftype " + reftype );
+    // TDLog.v("shot window do take photo: shot id " + shot_id + " title " + title + " reftype " + reftype );
     long ret = mMediaManager.prepareNextPhoto( shot_id, title, comment, 1, camera, code, reftype ); // size 1 m
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
 
     // if ( mMediaManager.isTopoDroidCamera() ) {
-      TDLog.v( "take photo with TopoDroid - prepare next photo returns " + ret + " path " + mMediaManager.getImageFilepath() );
+      // TDLog.v( "take photo with TopoDroid - prepare next photo returns " + ret + " path " + mMediaManager.getImageFilepath() );
       // new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
       MyBearingAndClino bearing_clino = new MyBearingAndClino( mApp, mMediaManager.getImageFilepath());
-      new QCamCompass( this, this, bearing_clino, this, false, false, camera, mMediaManager).show();  // false = with_box, false=with_delay
+      new QCamCompass( ctx, this, bearing_clino, this, false, false, camera, mMediaManager).show();  // false = with_box, false=with_delay
     // } else {
     //   // TDLog.v( TAG + "take photo with Android");
     //   try {
@@ -1194,7 +1195,7 @@ public class ShotWindow extends Activity
   public boolean insertPhoto( )
   {
     // FIXME TITLE has to go
-    TDLog.v("Shot window: insert photo JPEG reftype " + mMediaManager.getRefType() );
+    // TDLog.v("Shot window: insert photo JPEG reftype " + mMediaManager.getRefType() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), mMediaManager.getRefType(), PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
@@ -1207,7 +1208,7 @@ public class ShotWindow extends Activity
   {
     long photo_id = mApp_mData.nextPhotoId( TDInstance.sid );
     String file_path = TDPath.getSurveyNextImageFilepath( photo_id, PhotoInfo.FORMAT_PNG );
-    TDLog.v("Shot window: insert bitmap photo PNG " + file_path + " reftype " + mMediaManager.getRefType() );
+    // TDLog.v("Shot window: insert bitmap photo PNG " + file_path + " reftype " + mMediaManager.getRefType() );
     try {
       FileOutputStream fos = new FileOutputStream( file_path );
       bitmap.compress( Bitmap.CompressFormat.PNG, 0, fos );

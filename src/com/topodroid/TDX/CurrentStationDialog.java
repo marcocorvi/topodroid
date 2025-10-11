@@ -327,8 +327,8 @@ class CurrentStationDialog extends MyDialog
       return false;
     }
     int camera   = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
-    long photoId = mParent.doTakePhoto( 0, mStationName, "", camera, "", MediaInfo.TYPE_STATION ); // shot_id=0, comment="", mGeoCode=""
-    TDLog.v("current station took photo " + photoId );
+    long photoId = mParent.doTakePhoto( mContext, 0, mStationName, "", camera, "", MediaInfo.TYPE_STATION ); // shot_id=0, comment="", mGeoCode=""
+    // TDLog.v("current station took photo " + photoId );
     if ( photoId > 0 ) {
       storeStationPhoto( mStationName, photoId );
       return true;
@@ -382,7 +382,7 @@ class CurrentStationDialog extends MyDialog
       long photoId = TopoDroidApp.mData.deleteStation( TDInstance.sid, name );
       if ( photoId > 0 ) {
         String photoFile = "st-" + photoId + ".jpg";
-        TDLog.v("TODO delete photo file " + photoFile );
+        TDLog.v("TODO ? delete photo file " + photoFile );
       }
       // clear();
       // updateList();

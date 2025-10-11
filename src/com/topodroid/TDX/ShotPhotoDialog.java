@@ -126,7 +126,7 @@ class ShotPhotoDialog extends MyDialog
       // int camera = // ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
       // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
-      mParent.doTakePhoto( mShotId, "", comment, camera, mGeoCode, MediaInfo.TYPE_SHOT ); // title=""
+      mParent.doTakePhoto( mContext, mShotId, "", comment, camera, mGeoCode, MediaInfo.TYPE_SHOT ); // title=""
     } else if ( TDLevel.overExpert && b == mBtnGeoCode ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;

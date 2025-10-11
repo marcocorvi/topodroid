@@ -2876,7 +2876,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void resetStatus()
   {
-    TDLog.v("reset status");
+    // TDLog.v("reset status");
     mSectionName  = null; 
     // mLastLinePath = null;
     mShiftDrawing = false;
@@ -2914,7 +2914,7 @@ public class DrawingWindow extends ItemDrawer
     mAzimuth = plot.azimuth;
     mClino   = plot.clino;
     mDrawingSurface.setDisplayMode( mSavedMode );
-    TDLog.v( "pop info " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
+    // TDLog.v( "pop info " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
     resetStatus();
 
     // DO NOT CALL resetReference( plot ); THIS LINE IS ENOUGH
@@ -2945,7 +2945,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
   {
-    TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
+    // TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
     mSavedType = mType;
     mSavedOffset.x = mOffset.x;
     mSavedOffset.y = mOffset.y;
@@ -4112,7 +4112,7 @@ public class DrawingWindow extends ItemDrawer
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       String section = point.getOption( TDString.OPTION_SCRAP );
       if ( section != null ) {
-        TDLog.v("Delete section point: Clear XSection outline: " + section );
+        // TDLog.v("Delete section point: Clear XSection outline: " + section );
         mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, section ) );
       }
     }
@@ -5828,7 +5828,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public boolean insertPhoto( )
   {
-    TDLog.v("Drawing Window insert photo type PLOT, id " + mMediaManager.getPhotoId() );
+    // TDLog.v("Drawing Window insert photo type PLOT, id " + mMediaManager.getPhotoId() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT, PhotoInfo.FORMAT_JPEG );
     // FIXME NOTIFY ? no
@@ -5858,7 +5858,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doTakePointPhoto( String imagefile, boolean insert, long pid, int type )
   {
-    TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
+    // TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
     // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // canTakeasPhoto
       boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
@@ -6364,7 +6364,7 @@ public class DrawingWindow extends ItemDrawer
     private void setMode( int mode )
     {
       if ( mMode == mode ) {
-        TDLog.v("set mode from " + mMode + " to " + mode + " (skip)");
+        // TDLog.v("set mode from " + mMode + " to " + mode + " (skip)");
         return;
       }
 
@@ -6377,7 +6377,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       mMode = mode;
-      TDLog.v("set mode from " + mMode + " to " + mode);
+      // TDLog.v("set mode from " + mMode + " to " + mode);
       
       // mLastLinePath = null;
       switch ( mMode ) {
@@ -6385,30 +6385,30 @@ public class DrawingWindow extends ItemDrawer
           clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           if ( PlotType.isSketch2D( mType ) ) {
-            TDLog.v("set mode MOVE type sketch2D " + mType );
+            // TDLog.v("set mode MOVE type sketch2D " + mType );
             mListView.setAdapter( mButtonView1.mAdapter );
           } else {
-            TDLog.v("set mode MOVE type XSection " + mType );
+            // TDLog.v("set mode MOVE type XSection " + mType );
             mListView.setAdapter( mButtonView1x.mAdapter );
           }
           mListView.invalidate();
           break;
         case MODE_DRAW:
-          TDLog.v("set mode DRAW");
+          // TDLog.v("set mode DRAW");
           clearHotPath( View.VISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView2.mAdapter );
           mListView.invalidate();
           break;
         case MODE_ERASE:
-          TDLog.v("set mode ERASE");
+          // TDLog.v("set mode ERASE");
           clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView5.mAdapter );
           mListView.invalidate();
           break;
         case MODE_EDIT:
-          TDLog.v("set mode EDIT");
+          // TDLog.v("set mode EDIT");
           clearSelected( true );
           clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( true );
@@ -7261,9 +7261,9 @@ public class DrawingWindow extends ItemDrawer
       mMode = MODE_EDIT; // setMode( MODE_EDIT );
       setButton3PrevNext();
       setButton3Item( null );
-      TDLog.v("clear selected - set mode EDIT " + mMode );
+      // TDLog.v("clear selected - set mode EDIT " + mMode );
     } else {
-      TDLog.v("clear selected - no set mode EDIT " + mMode );
+      // TDLog.v("clear selected - no set mode EDIT " + mMode );
     }
   }
 
@@ -7519,10 +7519,10 @@ public class DrawingWindow extends ItemDrawer
         setButtonRange();
       }
     } else if ( ! mTh2Edit ) { // TH2EDIT
-      TDLog.v("on click - no th2 edit");
+      // TDLog.v("on click - no th2 edit");
       int k1 = 3;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DOWNLOAD
-        TDLog.v("Button DOWNLOAD");
+        // TDLog.v("Button DOWNLOAD");
         // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
@@ -7536,13 +7536,13 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BLUETOOTH
-        TDLog.v("Button BLUETOOTH");
+        // TDLog.v("Button BLUETOOTH");
         doBluetooth( b, dismiss );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY MODE 
-        TDLog.v("Button DISPLAY MODE");
+        // TDLog.v("Button DISPLAY MODE");
         new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
-        TDLog.v("Button PLAV/EXTENDED");
+        // TDLog.v("Button PLAV/EXTENDED");
         if ( PlotType.isSketch2D( mType ) ) { 
           // TDLog.v( "saving TOGGLE ...");
           startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -7554,11 +7554,11 @@ public class DrawingWindow extends ItemDrawer
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { //  NOTE
-        TDLog.v("Button NOTE");
+        // TDLog.v("Button NOTE");
         (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
 
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  AZIMUTH
-        TDLog.v("Button AZIMUTH");
+        // TDLog.v("Button AZIMUTH");
         if ( PlotType.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend ); // flip fixed extend left/right
@@ -7568,12 +7568,12 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
-        TDLog.v("Button REFRESH");
+        // TDLog.v("Button REFRESH");
         updateDisplay();
         TDToast.make( R.string.display_refresh );
       }
     } else {
-      TDLog.v("on click - th2 edit: NOTHING ");
+      // TDLog.v("on click - th2 edit: NOTHING ");
     }
 
   }
@@ -7687,7 +7687,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt )
   {
-    TDLog.v("make photo x-section " + id );
+    // TDLog.v("make photo x-section " + id );
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
       if ( tt <= 1.0 ) {
@@ -8603,7 +8603,7 @@ public class DrawingWindow extends ItemDrawer
         //   askDelete();
         boolean scrap_copy = (mSplitPaths != null);
         boolean has_outline = mDrawingSurface.hasPlotOutline();
-        TDLog.v("RENAME etc. scrap_copy " + scrap_copy + " has_outline " + has_outline );
+        // TDLog.v("RENAME etc. scrap_copy " + scrap_copy + " has_outline " + has_outline );
         (new PlotRenameDialog( mActivity, this, scrap_copy, has_outline )).show();
       } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
         (new PlotScrapsDialog( mActivity, this )).show();
@@ -9769,7 +9769,7 @@ public class DrawingWindow extends ItemDrawer
       }
       mMode = MODE_SPLIT_SKETCH; // setMode( MODE_SPLIT_SKETCH );
       mTouchMode = MODE_MOVE;
-      TDLog.v("set mode SPLIT SKETCH (1)");
+      // TDLog.v("set mode SPLIT SKETCH (1)");
     // } else {
     //   TDToast.makeBad("Missing station " + station );
     // }
@@ -9794,7 +9794,7 @@ public class DrawingWindow extends ItemDrawer
     }
     mMode = MODE_SPLIT_SCRAP; // setMode( MODE_SPLIT_SCRAP ); 
     mTouchMode = MODE_MOVE;
-    TDLog.v("set mode SPLIT SKETCH (2)");
+    // TDLog.v("set mode SPLIT SKETCH (2)");
   }
 
   /** marge the plot of the outline in the current plot
@@ -9829,7 +9829,7 @@ public class DrawingWindow extends ItemDrawer
   void pasteSplitBufferToScrap( boolean clear )
   {
     if ( mSplitPaths != null && mSplitPaths.size() > 0 ) {
-      TDLog.v("merge split paths " + mSplitPaths.size() + " removed " + mSplitRemove );
+      // TDLog.v("merge split paths " + mSplitPaths.size() + " removed " + mSplitRemove );
       boolean copy = true;
       int scrap_nr = mDrawingSurface.currentScrapNumber();
       if ( ! mSplitRemove ) { // avoid double items
@@ -9931,7 +9931,7 @@ public class DrawingWindow extends ItemDrawer
         if ( ! mSplitPaths.contains( path ) ) mSplitPaths.add( path );
       }
     }
-    TDLog.v("DO SPLIT SCRAP: border " + mSplitBorder.size() + " paths " + mSplitPaths.size() + " create " + mSplitCreate );
+    // TDLog.v("DO SPLIT SCRAP: border " + mSplitBorder.size() + " paths " + mSplitPaths.size() + " create " + mSplitCreate );
     if ( mSplitCreate ) { // make a new scrap and put items there
       scrapNew();
       pasteSplitBufferToScrap( true ); // true = clear buffer
