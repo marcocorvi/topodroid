@@ -1622,7 +1622,7 @@ class TDPrefKey
     R.string.pref_drawing_unit_summary,
     R.string.pref_label_size_summary,
     R.string.pref_scalable_label_summary,
-    R.string.pref_xsection_offset_title
+    R.string.pref_xsection_offset_summary
   };
   static String[] POINTdef = {
     FALSE,
