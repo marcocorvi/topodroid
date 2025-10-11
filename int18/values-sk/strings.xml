@@ -96,6 +96,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="station_not_found">Meračský bod nenájdený</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO string name="station_not_saved">Station not saved</string -->
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
     <string name="shot_not_found">Zámera nenájdená</string>
     <string name="shot_not_saved">Zámera neuložená</string>
     <string name="bad_sibling">Nesprávna opakovaná zámera</string>
@@ -449,6 +450,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="no_profile_overview">Celkový pohľad pre Priemet je nepodporovaný</string>
     <string name="no_proj4">Proj4 nie je nainštalovaný</string>
     <string name="no_sensors">Mapovanie nemá žiadne meranie</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_search_result">Žiadny výsledok hľadania</string>
     <string name="no_survey">Nie je zvolené mapovanie</string>
@@ -502,6 +504,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
     <string name="menu_sections">SEKCIE</string>
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SKENOVAŤ</string>
@@ -878,6 +881,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_skip"    >Preskočiť</string>
     <string name="button_done"    >Dokončiť</string>
     <string name="button_lrud"    >Pridať LRUD</string>
+    <!-- TODO string name="button_no">NO</string -->
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >Vypnúť</string>
     <string name="button_on"        >Zapnúť</string>
@@ -1129,6 +1133,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Zobraziť nasnímané fotografie</string>
     <string name="help_sensor">Zobraziť merania z interných senzorov</string>
+    <!-- TODO string name="help_stations">Stations</string -->
     <string name="help_3d">3D zobrazenie (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Režim kreslenia</string>
@@ -1294,6 +1299,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_search">Staničenia/Hľadanie zámer</string>
+    <!-- TODO string name="title_stations">Stations</string -->
     <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Hľadanie kalibračných dát</string>
@@ -1411,6 +1417,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <!-- TODO string name="title_read_names">Station names map</string -->
     <string name="title_import_shot">Import Mapovania</string>
     <string name="title_import_gps">Import bodov GPS</string>
     <string name="title_import_th2">Therion th2 file</string>

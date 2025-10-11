@@ -92,6 +92,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="station_not_found">Station introuvable</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO string name="station_not_saved">Station not saved</string -->
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
     <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
     <string name="shot_not_saved">Visée non sauvegardée</string>
@@ -441,6 +442,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_profile_overview">Pas d\'apercu pour les coupes projetées</string>
     <string name="no_proj4">*Proj$* non installé</string>
     <string name="no_sensors">Le relevé ne contient aucune mesure</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
     <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
     <string name="no_search_result">Aucun résultat de recherche.</string>
     <string name="no_survey">Aucun relevé sélectionné.</string>
@@ -493,6 +495,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
     <string name="menu_sections">SECTIONS</string>
     <string name="menu_sensor">CAPTEUR</string>
     <string name="menu_scan">SCAN</string>
@@ -867,6 +870,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_skip"    >Passer</string>
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"  copyable="all">Ajouter GDHB LRUD</string>
+    <!-- TODO string name="button_no">NO</string -->
     <string name="button_ok"  copyable="all">OK</string>
     <string name="button_off"       >Off</string>
     <string name="button_on"        >On</string>
@@ -1117,6 +1121,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Photos</string>
     <string name="help_sensor">Mesures</string>
+    <!-- TODO string name="help_stations">Stations</string -->
     <string name="help_3d">Visionneuse 3D (Cave3D)</string>
     <!-- UNUSED string name="help_move">DÉPLACER /mode ZOOM</string -->
     <string name="help_draw">Mode dessin</string>
@@ -1281,6 +1286,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_search">Recherche Station/cheminement</string>
+    <!-- TODO string name="title_stations">Stations</string -->
     <string name="title_plot_search">Recherche de station</string>
     <string name="title_pref_search">Recherhce de paramètres</string>
     <string name="title_gm_search">Recherche des données d\'étalonnage</string>
@@ -1397,6 +1403,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <!-- TODO string name="title_read_names">Station names map</string -->
     <string name="title_import_shot">Importation relevé</string>
     <string name="title_import_gps">Importation point GPS</string>
     <string name="title_import_th2">Fichier Therion th2</string>

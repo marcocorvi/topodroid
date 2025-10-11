@@ -95,6 +95,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="station_not_found">Реперът не е намерен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO string name="station_not_saved">Station not saved</string -->
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
     <string name="shot_not_found">Няма открити измервания</string>
     <string name="shot_not_saved">Измерванията не са запаметени</string>
     <string name="bad_sibling">Лоши измервания</string>
@@ -445,6 +446,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_profile_overview">Няма общ преглед за проектирани разрези</string>
     <string name="no_proj4">Proj4 не е инсталиран</string>
     <string name="no_sensors">Картировката не съдържа измервания</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
     <!-- UNUSED string name="no_shots">Картировката няма измервания.\nИзползвайте бутона за сваляне</string -->
     <string name="no_search_result">Няма резултат от търсенето.</string>
     <string name="no_survey">Не е избрана картировка.</string>
@@ -497,6 +499,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="menu_pair">СВРЪЗКА</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">СНИМКА</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
     <string name="menu_sections">СЕЧЕНИЯ</string>
     <string name="menu_sensor">СЕНЗОРИ</string>
     <string name="menu_scan">СКАНИРАНЕ</string>
@@ -871,6 +874,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_skip">Пропусни</string>
     <string name="button_done">Готово</string>
     <string name="button_lrud">+ ляво/дясно/горе/долу</string>
+    <!-- TODO string name="button_no">NO</string -->
     <string name="button_ok">OK</string>
     <string name="button_off">изключено</string>
     <string name="button_on">включено</string>
@@ -1122,6 +1126,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Снимки</string>
     <string name="help_sensor">Измервания</string>
+    <!-- TODO string name="help_stations">Stations</string -->
     <string name="help_3d">3D изглед (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Режим на рисуване</string>
@@ -1286,6 +1291,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
     <string name="title_search">Търси репер/отсечка</string>
+    <!-- TODO string name="title_stations">Stations</string -->
     <string name="title_plot_search">Търсене на репер</string>
     <string name="title_pref_search">Търсене на настройки</string>
     <string name="title_gm_search">Търси данни за калибрация</string>
@@ -1402,6 +1408,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_calib_export">Експортирай калибрацията</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <!-- TODO string name="title_read_names">Station names map</string -->
     <string name="title_import_shot">Импортирай картировка</string>
     <string name="title_import_gps">Импортирай GPS точка</string>
     <string name="title_import_th2">Therion th2 файл</string>

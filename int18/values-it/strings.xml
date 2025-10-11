@@ -92,6 +92,7 @@
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="station_not_saved">Caposaldo non salvato</string>
+    <string name="station_name_conflict">Conflitto di nomi. Procedo comunque?</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
     <string name="shot_not_saved">Tiro non salvato</string>
     <string name="bad_sibling">Battuta con dissimili</string>
@@ -205,7 +206,7 @@
     <string name="device_status_silent_on">Silenzioso: on</string>
     <string name="device_status_silent_off">Silenzioso: off</string>
     <string name="bt_reset">Resettare la connessione bluetooth</string>
-    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
+    <string name="bt_busy">Bluetooth occupato</string>
     <string name="save_as">salva come</string>
     <string name="nickname">Nome</string>
     <string name="unknown_device_type">Tipo dispositivo non noto: %1$d</string>
@@ -327,7 +328,7 @@
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Errore %1$.0f m</string -->
     <string name="location_start_fine">Inizio affinamento posizione</string>
-    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
+    <string name="location_enabled">Assicurati che LOCATION sia abilitata</string>
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
@@ -442,6 +443,7 @@
     <string name="no_profile_overview">Nessuna panoramica per i profili proiettati</string>
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
+    <string name="no_stations">Rilievo senza capisaldi</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_search_result">Trovato nulla</string>
     <string name="no_survey">Rilievo non selezionato</string>
@@ -495,6 +497,7 @@
     <!-- UNUSED string name="menu_pair">ASSOCIA</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
+    <string name="menu_stations">CAPISALDI</string>
     <string name="menu_sections">SEZIONI</string>
     <string name="menu_sensor">SENSORI</string>
     <string name="menu_scan">RICERCA BT</string>
@@ -513,9 +516,9 @@
 
     <string name="start_scan">Inizia scansione</string>
     <string name="stop_scan">Termina scansione</string>
-    <!-- TODO string name="scan_started">Discovery started</string -->
-    <!-- TODO string name="scan_finished">Discovery finished</string -->
-    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+    <string name="scan_started">Ricerca iniziata</string>
+    <string name="scan_finished">Ricerca finita</string>
+    <string name="scanning">Scansione ... Attendi</string>
 
     <!-- UNUSED string name="title_scan">Scansione BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Scansione BLE fallita</string -->
@@ -866,6 +869,7 @@
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
+    <string name="button_no"      >NO</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >spento</string>
     <string name="button_on"        >acceso</string>
@@ -1117,6 +1121,7 @@
     <string name="help_undelete">Recupera oggetti eliminati</string>
     <string name="help_photo">Foto</string>
     <string name="help_sensor">Misurazioni</string>
+    <string name="help_stations">Capisaldi</string>
     <string name="help_3d">3D app (Cave3D)</string>
     <!-- UNUSED string name="help_move">Modalità muovi/zoom</string -->
     <string name="help_draw">Modalità disegno</string>
@@ -1219,7 +1224,7 @@
     <string name="export_uncommented_maps">Mappe scommentate</string>
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
-    <!-- TODO string name="export_prefix_survey">Autofill</string -->
+    <string name="export_prefix_survey">Autocompletamento</string>
     <string name="export_media">media</string>
     <!-- UNUSED string name="export_suffix_hint">suffisso</string -->
     <string name="export_series_hint">serie</string>
@@ -1269,7 +1274,7 @@
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
-    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
+    <string name="title_bt_search">Scansione Bluetooth</string>
     <string name="title_recalibrate">Calibrazioni</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calibr.</string>
@@ -1282,6 +1287,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_search">Ricerca caposaldi/battute</string>
+    <string name="title_stations">Capisaldi</string>
     <string name="title_plot_search">Ricerca caposaldo</string>
     <string name="title_pref_search">Impostazioni ricerca</string>
     <string name="title_gm_search">Ricarca dati calibrazione</string>
@@ -1404,6 +1410,7 @@
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <string name="title_read_names">File nomi capisaldi</string>
     <string name="title_import_shot">Importa rilievo</string>
     <string name="title_import_gps">Importa punto GPS</string>
     <string name="title_import_th2">File Therion th2</string>
@@ -1526,10 +1533,10 @@
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
   <string name="pref_walls_splays_title">Splay di Walls</string>
   <string name="pref_walls_splays_summary">Export splay nel file Walls</string>
-  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
-  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
+  <string name="pref_ply_lrud_title">Polygon con LRUD</string>
+  <string name="pref_ply_lrud_summary">Polygon con LRUD</string>
+  <string name="pref_ply_minus_title">Polygon con splay</string>
+  <string name="pref_ply_minus_summary">Polygon con splay</string>
   <string name="pref_vtopo_splays_title">Splay VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Esporta splay in VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD al DA</string>

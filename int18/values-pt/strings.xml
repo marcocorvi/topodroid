@@ -80,6 +80,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="station_not_found">Base não encontrada</string>
   <string name="station_coords">L %1$.2f | N %2$.2f | Z %3$.2f</string>
     <!-- TODO string name="station_not_saved">Station not saved</string -->
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
   <string name="shot_not_found">Medida não encontrada</string>
   <string name="shot_not_saved">Visada não gravada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
@@ -410,6 +411,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="no_profile_overview">Nenhuma panorâmica para as projeções</string>
   <string name="no_proj4">Proj4 não instalado</string>
   <string name="no_sensors">Topo sem informações de sensores externos</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
   <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
   <string name="no_search_result">Nenhum resultado na pesquisa.</string>
   <string name="no_survey">Nenhuma topo selecionada.</string>
@@ -462,6 +464,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="menu_pair">PAREAR</string -->
   <string name="menu_palette">PALETA</string>
   <string name="menu_photo">FOTO</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
   <string name="menu_sections">CORTES</string>
   <string name="menu_sensor">SENSOR</string>
   <string name="menu_scan">PROCURAR</string>
@@ -809,6 +812,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
+    <!-- TODO string name="button_no">NO</string -->
   <string name="button_ok" copyable="all">OK</string>
   <string name="button_off">não</string>
   <string name="button_on">sim</string>
@@ -1043,6 +1047,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UPDATES string name="help_updates">Check for app version updates</string -->
   <string name="help_photo">Fotos</string>
   <string name="help_sensor">Sensores externos</string>
+    <!-- TODO string name="help_stations">Stations</string -->
   <string name="help_3d">App de visualização 3D (Cave3D)</string>
   <!-- UNUSED string name="help_move">Modo mover/zoom</string -->
   <string name="help_draw">Modo DESENHAR</string>
@@ -1198,6 +1203,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
   <string name="title_search">Pesquisa bases e medidas</string>
+    <!-- TODO string name="title_stations">Stations</string -->
   <string name="title_plot_search">Busca por base</string>
   <string name="title_pref_search">Busca por configuração</string>
   <string name="title_gm_search">Pesquisa dados calibração</string>
@@ -1310,6 +1316,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_plot_zoomfit">Zoom / Orientação</string>
   <string name="title_calib_export">Exportar calibração</string>
   <!-- UNUSED string name="title_zoom">Zoom</string -->
+    <!-- TODO string name="title_read_names">Station names map</string -->
   <string name="title_import_shot">Importar topo</string>
   <string name="title_import_gps">Importar ponto GPS</string>
   <string name="title_import_th2">Arquivo th2 Therion</string>

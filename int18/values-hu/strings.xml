@@ -92,6 +92,7 @@
     <string name="station_not_found">Mérési pont nem található</string>
     <string name="station_coords">K %1$.2f É %2$.2f Z %3$.2f</string>
     <string name="station_not_saved">Nincs elmentve a pont</string>
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
     <string name="shot_not_found">Mérés nem található</string>
     <string name="shot_not_saved">Mérés nincs elmentve</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
@@ -873,6 +874,7 @@
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
     <string name="button_lrud"    >+BJFL</string>
+    <!-- TODO string name="button_no">NO</string -->
     <string name="button_ok"        >OK     </string>
     <string name="button_off"       >ki</string>
     <string name="button_on"        >be</string>
@@ -1409,6 +1411,7 @@
     <string name="title_calib_export">Kalibráció exportálása</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <!-- TODO string name="title_read_names">Station names map</string -->
     <string name="title_import_shot">Felmérés import</string>
     <string name="title_import_gps">GNSS pont import</string>
     <string name="title_import_th2">Therion th2 fájl</string>

@@ -92,6 +92,7 @@
     <string name="station_not_found">未发现测点</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO string name="station_not_saved">Station not saved</string -->
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
     <string name="shot_not_found">未发现测线数据</string>
     <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">坏的测量簇</string>
@@ -443,6 +444,7 @@
     <string name="no_profile_overview">无投影剖面图预览</string>
     <string name="no_proj4">Proj4未安装</string>
     <string name="no_sensors">测量无数据</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_search_result">无检索结果.</string>
     <string name="no_survey">未选定测量.</string>
@@ -495,6 +497,7 @@
     <!-- UNUSED string name="menu_pair">配对</string -->
     <string name="menu_palette">调色板</string>
     <string name="menu_photo">照片</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
     <string name="menu_sections">截面</string>
     <string name="menu_sensor">传感器</string>
     <string name="menu_scan">扫描</string>
@@ -868,6 +871,7 @@
     <string name="button_skip"    >跳过</string>
     <string name="button_done"    >完成</string>
     <string name="button_lrud"    >+ 左右上下</string>
+    <!-- TODO string name="button_no">NO</string -->
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >关闭</string>
     <string name="button_on"        >开启</string>
@@ -1119,6 +1123,7 @@
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">照片</string>
     <string name="help_sensor">测量对话框</string>
+    <!-- TODO string name="help_stations">Stations</string -->
     <string name="help_3d">3D视图(Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">绘图模式</string>
@@ -1283,6 +1288,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
     <string name="title_search">站点/主线 查找</string>
+    <!-- TODO string name="title_stations">Stations</string -->
     <string name="title_plot_search">测站搜索</string>
     <string name="title_pref_search">设置搜索</string>
     <string name="title_gm_search">校准数据搜索</string>
@@ -1399,6 +1405,7 @@
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
+    <!-- TODO string name="title_read_names">Station names map</string -->
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
     <string name="title_import_th2">Therion th2 文件</string>

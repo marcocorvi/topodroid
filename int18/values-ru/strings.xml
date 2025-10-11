@@ -91,6 +91,7 @@
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Высота %3$.2f</string>
     <string name="station_not_saved">Пикет не сохранён</string>
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
     <string name="shot_not_found">Замеры не найдены</string>
     <string name="shot_not_saved">Замер не сохранен</string>
     <string name="bad_sibling">Плохой замер в группе</string>
@@ -440,6 +441,7 @@
     <string name="no_profile_overview">Нет обзора для спроецированного профиля</string>
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
     <string name="no_search_result">Поиск не дал результатов.</string>
     <string name="no_survey">Съёмка не выбрана.</string>
@@ -493,6 +495,7 @@
     <!-- UNUSED string name="menu_pair">СОПРЯЖЕНИЕ</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
     <string name="menu_sections">СЕЧЕНИЯ</string>
     <string name="menu_sensor">ДАТЧИКИ</string>
     <string name="menu_scan">Сканировать</string>
@@ -863,6 +866,7 @@
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
+    <!-- TODO string name="button_no">NO</string -->
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >выкл</string>
     <string name="button_on"        >вкл</string>
@@ -1114,6 +1118,7 @@
     <string name="help_undelete">Восстановить удаленные элементы</string>
     <string name="help_photo">Фотографии в съёмке</string>
     <string name="help_sensor">Показания датчиков</string>
+    <!-- TODO string name="help_stations">Stations</string -->
     <string name="help_3d">3D просмотр (Cave3D)</string>
     <!-- UNUSED string name="help_move">Включть режим перемещения/зума</string -->
     <string name="help_draw">Перейти в режим рисования</string>
@@ -1278,6 +1283,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
+    <!-- TODO string name="title_stations">Stations</string -->
     <string name="title_plot_search">Поиск пикета</string>
     <string name="title_pref_search">Поиск настроек</string>
     <string name="title_gm_search">Поиск данных калибровки</string>
@@ -1394,6 +1400,7 @@
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
 
+    <!-- TODO string name="title_read_names">Station names map</string -->
     <string name="title_import_shot">Импорт съёмки</string>
     <string name="title_import_gps">Импорт точки GPS</string>
     <string name="title_import_th2">Therion th2 файл</string>

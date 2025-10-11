@@ -74,6 +74,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="station_not_found">Messpunkt nicht gefunden</string>
   <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO string name="station_not_saved">Station not saved</string -->
+    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
   <string name="shot_not_found">Keine Messung gefunden</string>
     <!-- TODO string name="shot_not_saved">Shot not saved</string -->
   <string name="bad_sibling">Messzug weicht stark ab</string>
@@ -407,6 +408,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="no_profile_overview">Kein Überblick für projizierte Profile</string>
   <string name="no_proj4">Proj4 nicht installiert</string>
   <string name="no_sensors">Vermessung hat keine Sensormessungen</string>
+    <!-- TODO string name="no_stations">Survey has no stations</string -->
   <!-- UNUSED string name="no_shots">Vermessung hat keine Messungen</string -->
   <string name="no_search_result">Kein resultat</string>
   <string name="no_survey">Keine Vermessung ausgewählt</string>
@@ -457,6 +459,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="menu_pair">VERBINDEN</string -->
   <string name="menu_palette">PALETTE</string>
   <string name="menu_photo">FOTO</string>
+    <!-- TODO string name="menu_stations">STATIONS</string -->
   <string name="menu_sections">PROFILE</string>
   <string name="menu_sensor">SENSORWERTE</string>
   <string name="menu_scan">SCAN</string>
@@ -805,6 +808,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="button_skip">Überspringen</string>
   <string name="button_done">Fertig</string>
   <string name="button_lrud">LRUD hinzufügen</string>
+    <!-- TODO string name="button_no">NO</string -->
   <string name="button_ok">OK        </string>
   <string name="button_off">aus</string>
   <string name="button_on">ein</string>
@@ -1039,6 +1043,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UPDATES string name="help_updates">Check for app version updates</string -->
   <string name="help_photo">Fotos</string>
   <string name="help_sensor">Sensormessungen</string>
+    <!-- TODO string name="help_stations">Stations</string -->
   <string name="help_3d">3D-Modell (Benötigt Cave3D)</string>
   <!-- UNUSED string name="help_move">Move/zoom Modus</string -->
   <string name="help_draw">Skizzenmodus</string>
@@ -1194,6 +1199,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
   <string name="title_current_station">Gespeicherte Messpunkte</string>
   <string name="title_search">Messstation/-züge suchen</string>
+    <!-- TODO string name="title_stations">Stations</string -->
     <!-- TODO string name="title_plot_search">Station search</string -->
     <!-- TODO string name="title_pref_search">Settings search</string -->
   <string name="title_gm_search">Kalibrationsdatensuche</string>
@@ -1306,6 +1312,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="title_plot_zoomfit">Größe anpassen / Ausrichtung</string>
   <string name="title_calib_export">Kalibrierung speichern als</string>
   <!-- UNUSED string name="title_zoom">Zoom</string -->
+    <!-- TODO string name="title_read_names">Station names map</string -->
   <string name="title_import_shot">Vermessungsimport</string>
   <string name="title_import_gps">GPS Import</string>
   <string name="title_import_th2">Therion th2 Dateien</string>
