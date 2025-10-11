@@ -657,6 +657,7 @@ public class TDSetting
   public static float mDotRadius      = 5;  // radius of selection dots - splay dots are 1.5 as big
   public static float mArrowLength    = 8;
   public static int   mSlopeLSide     = 20;  // l-side of slope lines
+  public static int   mXSectionOffset = 20;  // offset of section point
 
 
   // NOTE not used, but could set a default for section splays
@@ -1523,6 +1524,7 @@ public class TDSetting
     mUnitIcons     = tryFloat( prefs,   keyPoint[1], defPoint[1] );       // DISTOX_DRAWING_UNIT 
     mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
     mScalableLabel = prefs.getBoolean(  keyPoint[3], bool(defPoint[3]) ); // DISTOX_SCALABLE_LABEL
+    mXSectionOffset = tryInt( prefs,    keyPoint[4], defPoint[4] );       // DISTOX_XSECTION_OFFSET
     // FIXME tis should go in SCREEN
 
     // AUTOWALLS
@@ -2832,6 +2834,17 @@ public class TDSetting
       ret = String.format(Locale.US, "%.2f", mLabelSize );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SCALABLE_LABEL
       mScalableLabel = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_XSECTION_OFFSET
+      try {
+        int value = tryIntValue( hlp, k, v, def[4] );
+        if ( value > 0 && value < 500 && value != mXSectionOffset ) {
+          ret = String.format(Locale.US, "%d", value );
+          mXSectionOffset = value;
+        }
+      } catch ( NumberFormatException e ) {
+        TDLog.e( e.getMessage() );
+      }
+      // FIXME changing label size affects only new labels; not existing labels (until they are edited)
     } else {
       TDLog.e("missing POINT key: " + k );
     }
@@ -3429,8 +3442,8 @@ public class TDSetting
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %.1f, slant-xsection %c, oblique %d\n", // STYLUS_MM
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize, tf(mSlantXSection), mObliqueMax );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
-      pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f, scaleable_label %c\n",
-        mStationSize, mLabelSize, mFixedThickness, mLineThickness, tf(mScalableLabel) );
+      pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f, scaleable_label %c, xsection_offset %d\n",
+        mStationSize, mLabelSize, mFixedThickness, mLineThickness, tf(mScalableLabel), mXSectionOffset );
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
         mSelectness, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );
       pw.printf(Locale.US, "Erase: radius %.2f\n", mEraseness );
@@ -4124,6 +4137,9 @@ public class TDSetting
               mLineThickness  = getFloat( vals, 8, 1.0f );  setPreference( editor, "DISTOX_LINE_THICKNESS", mLineThickness );
               if ( vals.length > 10 ) {
                 mScalableLabel = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_SCALABLE_LABEL", mScalableLabel );
+                if ( vals.length > 12 ) {
+                  mXSectionOffset = getInt( vals, 12, 20 ); setPreference( editor, "DISTOX_XSECTION_OFFSET", mXSectionOffset );
+                }
               }
             }
           }

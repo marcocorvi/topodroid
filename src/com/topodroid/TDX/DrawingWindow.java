@@ -6070,7 +6070,7 @@ public class DrawingWindow extends ItemDrawer
     if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
     long xtype = PlotType.getXSectionType( type );
 
-    // TDLog.v( "open xsection <" + xs_id + "> nick <" + nick + ">" );
+    TDLog.v( "open xsection " + mName + " <" + xs_id + "> X-type " + xtype );
 
     PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
@@ -6088,7 +6088,7 @@ public class DrawingWindow extends ItemDrawer
       } else { // type == PlotType.PLOT_PLAN
         clino = 0;
       }
-      // TDLog.v( "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
+      TDLog.v( "new at-station X-section " + xs_id + " station name " + st_name + " nick <" + nick + ">" );
 
       long pid = mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
       // plot = mApp_mData.getPlotInfo( TDInstance.sid, pid );
@@ -6098,8 +6098,9 @@ public class DrawingWindow extends ItemDrawer
 
       st.setXSection( azimuth, clino, type );
       if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
-        float x5 = st.getXSectionX( 4 ); // FIXME offset
-        float y5 = st.getXSectionY( 4 );
+        int offset = TDSetting.mXSectionOffset;
+        float x5 = st.getXSectionX( offset ); 
+        float y5 = st.getXSectionY( offset );
         if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
         // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
         String scrap_option = TDString.OPTION_SCRAP + " " + TDInstance.survey + "-" + xs_id;
@@ -9724,7 +9725,7 @@ public class DrawingWindow extends ItemDrawer
     // assert( mLastLinePath == null );
 
     mDrawingSurface.clearXSectionOutline( name );
-    // TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
+    TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
       // TDLog.v("XSection set " + name + " tdr-file " + tdr );

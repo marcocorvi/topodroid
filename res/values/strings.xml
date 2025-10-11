@@ -1858,6 +1858,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_label_size_summary">Size of labels</string>
   <string name="pref_scalable_label_title">Scaling labels</string>
   <string name="pref_scalable_label_summary">Labels scale with the zoom</string>
+  <string name="pref_xsection_offset_title">XSection offset</string>
+  <string name="pref_xsection_offset_summary">Offset of section points</string>
   <string name="pref_plot_cache_title">Sketch cache</string>
   <string name="pref_plot_cache_summary">Whether to cache sketches in memory</string>
   <string name="pref_slope_lside_title">Slope line l-side</string>

@@ -1822,6 +1822,8 @@
   <string name="pref_label_size_summary">Размер шрифта в подписях</string>
   <string name="pref_scalable_label_title">Масштабирование подписей</string>
   <string name="pref_scalable_label_summary">Масштабирование подписей при зуме</string>
+  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
+  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
   <string name="pref_plot_cache_title">Кэш абрисов</string>
   <string name="pref_plot_cache_summary">Кэширование абрисов в памяти</string>
   <string name="pref_slope_lside_title">Линия уклона l-направление</string>

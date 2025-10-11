@@ -1819,6 +1819,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_label_size_summary">Размер на етикетите</string>
   <string name="pref_scalable_label_title">Мащаб на етикетите</string>
   <string name="pref_scalable_label_summary">Мащабабиране на етикетите при приближаване</string>
+  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
+  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
   <string name="pref_plot_cache_title">Кеш на скицата</string>
   <string name="pref_plot_cache_summary">Дали да се кешират скици в паметта</string>
   <string name="pref_slope_lside_title">Начална линия на наклона</string>
