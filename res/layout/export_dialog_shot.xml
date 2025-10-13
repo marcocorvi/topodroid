@@ -48,11 +48,6 @@
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
     >
-    <!-- CheckBox android:id="@+id/compass_prefix" OBSOLETED BY EditText
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:text="@string/export_prefix"
-      / -->
     <CheckBox android:id="@+id/compass_splays"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -81,7 +76,7 @@
       >
       <Button android:id="@+id/compass_prefix_survey"
         style="@style/button_default"
-        android:text="@string/export_prefix_survey"
+        android:text="@string/export_prefix_reset"
         />
       <EditText android:id="@+id/compass_prefix"
         android:layout_width="fill_parent" 
@@ -327,21 +322,31 @@
       />
   </LinearLayout>
 
-  <!-- LinearLayout android:id="@+id/layout_winkarst"
+  <LinearLayout android:id="@+id/layout_winkarst"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical" 
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
     >
-    <EditText android:id="@+id/winkarst_prefix"
+    <LinearLayout
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:hint="@string/export_prefix_hint"
-      android:importantForAutofill="no"
-      android:inputType="text"
-      />
-  </LinearLayout -->
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/winkarst_prefix_survey"
+        style="@style/button_default"
+        android:text="@string/export_prefix_reset"
+        />
+      <EditText android:id="@+id/winkarst_prefix"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:hint="@string/export_prefix_hint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        />
+    </LinearLayout>
+  </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_csv"
     android:layout_width="match_parent" 

@@ -46,6 +46,7 @@ public class ExportDialogShot extends MyDialog
 {
   private Button   mBtnOk;
   private Button   mBtnCompassSurvey;
+  private Button   mBtnWinkarstSurvey;
   // private Button   mBtnCSurveySurvey;
   // private Button   mBtnBack;
 
@@ -74,7 +75,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutDxf;
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
-  // private LinearLayout mLayoutWinkarst;
+  private LinearLayout mLayoutWinkarst;
 
   /** cstr
    * @param context     context
@@ -125,10 +126,12 @@ public class ExportDialogShot extends MyDialog
     mLayoutDxf      = (LinearLayout) findViewById( R.id.layout_dxf );
     mLayoutKml      = (LinearLayout) findViewById( R.id.layout_kml );
     mLayoutShp      = (LinearLayout) findViewById( R.id.layout_shp );
-    // mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
+    mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
 
     mBtnCompassSurvey = (Button) findViewById( R.id.compass_prefix_survey );
     mBtnCompassSurvey.setOnClickListener( this );
+    mBtnWinkarstSurvey = (Button) findViewById( R.id.winkarst_prefix_survey );
+    mBtnWinkarstSurvey.setOnClickListener( this );
     // mBtnCSurveySurvey = (Button) findViewById( R.id.csurvey_prefix_survey );
     // mBtnCSurveySurvey.setOnClickListener( this );
 
@@ -204,6 +207,17 @@ public class ExportDialogShot extends MyDialog
     updateLayouts();
   }
 
+  private void setPrefix( EditText et, Button bt )
+  {
+    if ( et.getText() == null || et.getText().length() == 0 ) {
+      et.setText( mSurvey );
+      bt.setText( R.string.export_prefix_reset );
+    } else {
+      et.setText( null );
+      bt.setText( R.string.export_prefix_set );
+    }
+  }
+
   /** react to a user tap
    * @param v  tapped view
    */
@@ -212,7 +226,10 @@ public class ExportDialogShot extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mBtnCompassSurvey ) {
-      ((EditText) findViewById( R.id.compass_prefix )).setText( mSurvey );
+      setPrefix( (EditText) findViewById( R.id.compass_prefix ), b );
+      return;
+    } else if ( b == mBtnWinkarstSurvey ) {
+      setPrefix( (EditText) findViewById( R.id.winkarst_prefix ), b );
       return;
     // } else if ( b == mBtnCSurveySurvey ) {
     //   ((EditText) findViewById( R.id.csurvey_prefix )).setText( mSurvey );
@@ -249,7 +266,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutDxf.setVisibility( View.GONE );
     mLayoutKml.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
-    // mLayoutWinkarst.setVisibility( View.GONE );
+    mLayoutWinkarst.setVisibility( View.GONE );
     switch ( mSelectedPos ) { // indices in mSurveyExportTypes
       case TDConst.SURVEY_POS_ZIP: mLayoutZip.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_COMPASS: mLayoutCompass.setVisibility( View.VISIBLE ); break;
@@ -264,7 +281,7 @@ public class ExportDialogShot extends MyDialog
       case TDConst.SURVEY_POS_TOPOROBOT: mLayoutTRobot.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_VTOPO:    mLayoutVTopo.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_WALLS:    mLayoutWalls.setVisibility( View.VISIBLE ); break;
-      // case TDConst.SURVEY_POS_WINKARST: mLayoutWinkarst.setVisibility( View.VISIBLE ); break; // WinKarst
+      case TDConst.SURVEY_POS_WINKARST: mLayoutWinkarst.setVisibility( View.VISIBLE ); break; // WinKarst
       case TDConst.SURVEY_POS_CSV:      mLayoutCsv.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_DXF:      mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_KML: // KML (same as GeoJson)
@@ -455,11 +472,11 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mWallsSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
         }
         break;
-      // case TDConst.SURVEY_POS_WINKARST: // Winkarst
-      //   {
-      //     setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
-      //   }
-      //   break;
+      case TDConst.SURVEY_POS_WINKARST: // Winkarst
+        {
+          setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
+        }
+        break;
       case TDConst.SURVEY_POS_CSV: //CSV
         {
           TDSetting.mCsvRaw = ((CheckBox) findViewById( R.id.csv_rawdata )).isChecked();
@@ -498,6 +515,11 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.zip_overwrite )).setChecked( TDSetting.mZipOverwrite );
 
     // ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );
+    if ( TDSetting.mExportStationsPrefix ) {
+      ( (EditText) findViewById( R.id.compass_prefix )).setText( mSurvey );
+    } else {
+      mBtnCompassSurvey.setText( R.string.export_prefix_set );
+    }
     ((CheckBox) findViewById( R.id.compass_splays )).setChecked( TDSetting.mCompassSplays );
     ((CheckBox) findViewById( R.id.compass_swap_lr )).setChecked( TDSetting.mSwapLR );
 
@@ -525,6 +547,12 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.vtopo_faverjon )).setChecked( TDSetting.mVTopoFaverjon );
 
     ((CheckBox) findViewById( R.id.walls_splays )).setChecked( TDSetting.mWallsSplays );
+
+    if ( TDSetting.mExportStationsPrefix ) {
+      ( (EditText) findViewById( R.id.winkarst_prefix )).setText( mSurvey );
+    } else {
+      mBtnWinkarstSurvey.setText( R.string.export_prefix_set );
+    }
 
     ((CheckBox) findViewById( R.id.csv_rawdata )).setChecked( TDSetting.mCsvRaw );
 

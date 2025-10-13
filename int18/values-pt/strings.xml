@@ -1145,7 +1145,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_uncommented_maps">Mapas não comentados</string>
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
-    <!-- TODO string name="export_prefix_survey">Autofill</string -->
+    <!-- TODO string name="export_prefix_set">Set</string -->
+    <!-- TODO string name="export_prefix_reset">Reset</string -->
   <string name="export_media">itens de mídia</string>
   <!-- UNUSED string name="export_suffix_hint">sufixo</string -->
   <string name="export_series_hint">séries</string>

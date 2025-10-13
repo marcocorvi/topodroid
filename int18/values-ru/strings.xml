@@ -1221,7 +1221,8 @@
     <string name="export_uncommented_maps">Раскомментированные карты</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
-    <string name="export_prefix_survey">Автозаполнение</string>
+    <!-- TODO string name="export_prefix_set">Set</string -->
+    <!-- TODO string name="export_prefix_reset">Reset</string -->
     <string name="export_media">Фото-Аудио</string>
     <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
     <string name="export_series_hint">группа</string>

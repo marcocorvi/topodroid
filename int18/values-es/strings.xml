@@ -1224,7 +1224,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_uncommented_maps">Mapas sin comentarios</string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
-    <!-- TODO string name="export_prefix_survey">Autofill</string -->
+    <!-- TODO string name="export_prefix_set">Set</string -->
+    <!-- TODO string name="export_prefix_reset">Reset</string -->
     <string name="export_media">elementos multimedia</string>
     <!-- UNUSED string name="export_suffix_hint">sufijo</string -->
     <string name="export_series_hint">Serie</string>

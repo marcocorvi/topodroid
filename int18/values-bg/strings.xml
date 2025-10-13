@@ -1229,7 +1229,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_uncommented_maps">Карти без коментари</string>
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
-    <!-- TODO string name="export_prefix_survey">Autofill</string -->
+    <!-- TODO string name="export_prefix_set">Set</string -->
+    <!-- TODO string name="export_prefix_reset">Reset</string -->
     <string name="export_media">медийни елементи</string>
     <!-- UNUSED string name="export_suffix_hint">наставка</string -->
     <string name="export_series_hint">поредица</string>

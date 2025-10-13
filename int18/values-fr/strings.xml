@@ -1224,7 +1224,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
     <string name="export_prefix_hint">préfixe</string>
-    <!-- TODO string name="export_prefix_survey">Autofill</string -->
+    <!-- TODO string name="export_prefix_set">Set</string -->
+    <!-- TODO string name="export_prefix_reset">Reset</string -->
     <string name="export_media">items media</string>
     <!-- UNUSED string name="export_suffix_hint">suffixe</string -->
     <string name="export_series_hint">séries</string>
