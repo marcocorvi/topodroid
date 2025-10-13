@@ -1230,8 +1230,8 @@
     <string name="export_uncommented_maps">Nem kommentelt térképek</string>
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
-    <!-- TODO string name="export_prefix_set">Set</string -->
-    <!-- TODO string name="export_prefix_reset">Reset</string -->
+    <string name="export_prefix_set">Beállít</string>
+    <string name="export_prefix_reset">Visszaállít</string>
     <string name="export_media">média elemek</string>
     <!-- UNUSED string name="export_suffix_hint">utótag</string -->
     <string name="export_series_hint">sorozatok</string>
