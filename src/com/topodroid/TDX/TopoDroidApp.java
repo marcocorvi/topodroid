@@ -3243,9 +3243,10 @@ public class TopoDroidApp extends Application
    * @param uri             output URI
    * @param export_info     export info
    * @param toast           whether to toast a message
+   * @param in_foreground   whether to run in foreground
    * @note called by (ShotWindow and) SurveyWindow on export
    *
-  boolean doExportDataAsync( Context context, Uri uri, ExportInfo export_info, boolean toast )
+  boolean doExportDataAsync( Context context, Uri uri, ExportInfo export_info, boolean toast, boolean in_foreground )
   {
     // TDLog.v( "APP URI-export - index " + export_info.index );
     if ( export_info.index < 0 ) return false; // extra safety
@@ -3253,7 +3254,7 @@ public class TopoDroidApp extends Application
       // TDLog.v( "APP URIr-export zip");
       // this is SurveyWindow.doArchive
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
-      (new ExportZipTask( context, this, uri )).execute();
+      (new ExportZipTask( context, this, uri, toast )).execute();
     } else {
       SurveyInfo survey_info = getSurveyInfo( );
       if ( survey_info == null ) return false;
@@ -3270,18 +3271,22 @@ public class TopoDroidApp extends Application
    * @param context         context
    * @param export_info     export info
    * @param toast           whether to toast a message
+   * @param in_foreground   whether to run in foreground
    * @note called by SurveyWindow on export
    */
-  boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast )
+  boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast, boolean in_foreground )
   {
     // TDLog.v( "APP async-export - index " + export_info.index + " name " + export_info.name );
     if ( export_info.index < 0 ) return false; // extra safety
     if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
-      (new ExportZipTask( context, this, null )).execute();
-      // (new ExportZipTask( context, this, null )).doInForeground();
-      // return false;
-      return true;
+      if ( in_foreground ) {
+        ExportZipTask zip_export = new ExportZipTask( context, this, null, toast );
+        return zip_export.doInForeground();
+      } else {
+        (new ExportZipTask( context, this, null, toast )).execute();
+        return true;
+      }
     } else {
       String filename = export_info.name;
       SurveyInfo survey_info = getSurveyInfo( );

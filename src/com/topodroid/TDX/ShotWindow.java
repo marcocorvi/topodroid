@@ -910,7 +910,7 @@ public class ShotWindow extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
 
@@ -1142,7 +1142,7 @@ public class ShotWindow extends Activity
     // long old_id  = shot_id; // mShotId;
     // TDLog.v( TAG + "split survey old: " + old_sid + " " + shot_id + " New: " + ((new_survey == null)? "null" : new_survey) );
     if ( TopoDroidApp.mShotWindow != null ) {
-      // // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+      // // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow.doFinish();
       // TopoDroidApp.mShotWindow = null; // done in doFinish
     }
@@ -1282,7 +1282,7 @@ public class ShotWindow extends Activity
         break;
       case TDRequest.INFO_ACTIVITY_SHOTWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
-          // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+          // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
           doFinish();
         }
         break;
@@ -1495,7 +1495,7 @@ public class ShotWindow extends Activity
     // Debug.stopMethodTracing( );
     super.onStop();
     TDLog.v( "Shot activity on Stop" );
-    // // if ( TDSetting.mDataBackup && TDSetting.mExportShotsFormat >= 0 ) TopoDroidApp.doExportDataAsync( TDInstance.context, TDSetting.mExportShotsFormat, false );
+    // // if ( TDSetting.mDataBackup && TDSetting.mExportShotsFormat >= 0 ) TopoDroidApp.doExportDataAsync( TDInstance.context, TDSetting.mExportShotsFormat, false, false );
   }
 
   @Override
@@ -1576,7 +1576,7 @@ public class ShotWindow extends Activity
     if ( TDSetting.mSingleBack ) {
       DrawingSurface.clearManagersCache();
       new DataStopTask( mApp, this, mDataDownloader ).execute();
-      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
     } else if ( doubleBack ) {
@@ -1584,7 +1584,7 @@ public class ShotWindow extends Activity
       doubleBackToast = null;
       DrawingSurface.clearManagersCache();
       new DataStopTask( mApp, this, mDataDownloader ).execute();
-      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
     } else {

@@ -1807,7 +1807,7 @@ public class MainWindow extends Activity
     }
   }
 
-  public void doExport( String type, String filename, String prefix, long first, boolean second )
+  public void doExport( final String type, final String filename, final String prefix, final long first, boolean second )
   { 
     TDLog.v("Type " + type + " filename " + filename + " prefix " + prefix );
     TDSetting.mExportPrefix = prefix; // save export-prefix
@@ -1815,16 +1815,24 @@ public class MainWindow extends Activity
     String extension = filename.substring( filename.lastIndexOf(".") );
     if ( index >= 0 ) {
       // N.B. zip export not supported
-      List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
-      ExportInfo export_info = new ExportInfo( index, null, null, first );
-      for ( String survey : survey_list ) {
-        filename = survey + extension;
-        TDLog.v("Index " + index + " Exporting " + filename + " prefix " + prefix );
-        if ( prefix != null ) export_info.prefix = survey;
-        export_info.name = filename;
-        mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
-        doExport( survey, index, filename, export_info );
-      }
+      Thread export_thread = new Thread() {
+        public void run() {
+          TDLog.v("Export Thread run");
+          List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
+          ExportInfo export_info = new ExportInfo( index, null, null, first );
+          for ( String survey : survey_list ) {
+            String file_name = survey + extension;
+            TDLog.v("Index " + index + " Exporting " + file_name + " prefix " + prefix );
+            if ( prefix != null ) export_info.prefix = survey;
+            export_info.name = file_name;
+            mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
+            doExport( survey, index, file_name, export_info );
+          }
+          TDLog.v("Export Thread done");
+          runOnUiThread( new Runnable() { public void run() { TDToast.make( "Export done" ); } } );
+        }
+      };
+      export_thread.start();
     }
   }
       
@@ -1841,12 +1849,12 @@ public class MainWindow extends Activity
     TDLog.v( "MAIN do export " + survey + " filename " + filename );
     // if ( index >= 0 ) {
       if ( TDInstance.sid < 0 ) {
-        TDToast.makeBad( R.string.no_survey );
+        // TDToast.makeBad( R.string.no_survey );
       } else {
         if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-          mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
+          mApp.doExportDataAsync( getApplicationContext(), export_info, false, true ); // uri = null
         } else {
-          mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
+          mApp.doExportDataAsync( getApplicationContext(), export_info, false, false ); // uri = null
         }
       }
     // } else {
