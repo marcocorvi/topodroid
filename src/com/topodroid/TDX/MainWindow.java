@@ -1813,7 +1813,7 @@ public class MainWindow extends Activity
     TDSetting.mExportPrefix = prefix; // save export-prefix
     int index = TDConst.surveyFormatIndex( type );
     String extension = filename.substring( filename.lastIndexOf(".") );
-    if ( index > 0 ) {
+    if ( index >= 0 ) {
       // N.B. zip export not supported
       List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
       ExportInfo export_info = new ExportInfo( index, null, null, first );
