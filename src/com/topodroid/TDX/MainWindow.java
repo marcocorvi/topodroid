@@ -22,6 +22,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.CWDfolder;
+import com.topodroid.common.ExportInfo;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -116,6 +117,7 @@ public class MainWindow extends Activity
                         // , View.OnLongClickListener
                         , OnCancelListener
                         , OnDismissListener
+                        , IExporter
 {
   private TopoDroidApp mApp;
   // private boolean mApp_mCosurvey = false; // IF_COSURVEY
@@ -166,6 +168,7 @@ public class MainWindow extends Activity
 			  // R.string.menu_backups, // CLEAR_BACKUPS
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
+                          R.string.menu_export,
                           R.string.menu_about,
                           R.string.menu_options,
                           R.string.menu_help,
@@ -188,6 +191,7 @@ public class MainWindow extends Activity
 			  // R.string.help_backups, // CLEAR_BACKUPS
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
+                          R.string.help_export_surveys,
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
                           R.string.help_help,
@@ -255,7 +259,7 @@ public class MainWindow extends Activity
 
   private void startSurveyDialog()
   {
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // new-survey dialog: tell app to clear survey name and id
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
     (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
   }
 
@@ -369,7 +373,7 @@ public class MainWindow extends Activity
   //
   private void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
-    mApp.setSurveyFromName( value, -1, true ); // open survey activity: tell app to update survey name+id
+    mApp.setSurveyFromName( value, -1, true, true ); // open survey activity: tell app to update survey name+id
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyWindow.class );
     surveyIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen );
     // surveyIntent.putExtra( TDTag.TOPODROID_OLDSID, old_sid );
@@ -380,7 +384,7 @@ public class MainWindow extends Activity
   void startSplitSurvey( long old_sid, long old_id )
   {
     TDLog.v( "start split survey");
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
 
@@ -393,7 +397,7 @@ public class MainWindow extends Activity
   {
     TDLog.v( "start move survey");
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
-      mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
+      mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     // } else {
     }
   }
@@ -421,7 +425,7 @@ public class MainWindow extends Activity
    */
   void doOpenSurvey( String name )
   {
-    mApp.setSurveyFromName( name, -1, true ); // open survey: tell app to update survey name+id
+    mApp.setSurveyFromName( name, -1, true, true ); // open survey: tell app to update survey name+id
     Intent intent = new Intent( this, ShotWindow.class );
     intent.setAction( Intent.ACTION_VIEW ); // SDK-35
     startActivity( intent );
@@ -466,7 +470,7 @@ public class MainWindow extends Activity
    */
   public void startShowWindow( CharSequence item )
   {
-    mApp.setSurveyFromName( item.toString(), -1, true ); 
+    mApp.setSurveyFromName( item.toString(), -1, true, true ); 
     Intent intent = new Intent( this, ShotWindow.class );
     intent.setAction( Intent.ACTION_VIEW ); // SDK-35
     startActivity( intent );
@@ -677,9 +681,10 @@ public class MainWindow extends Activity
     // if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
-    menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
-    menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
-    menu_adapter.add( res.getString( menus[5] ) ); // HELP
+    if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // EXPORT
+    menu_adapter.add( res.getString( menus[4] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[5] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[6] ) ); // HELP
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -728,6 +733,9 @@ public class MainWindow extends Activity
       //   (new ConnectDialog( mActivity, mApp )).show();
       // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
       //   // (new TDUpdatesDialog( mActivity, mApp )).show();
+      } else if ( TDLevel.overExpert && p++ == pos ) {  // EXPORT
+        String[] types = TDConst.surveyExportTypes( false ); // with_geo=false
+        new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, false, false ).show(); // diving=false
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
@@ -1797,6 +1805,53 @@ public class MainWindow extends Activity
     } else {
       TopoDroidApp.setSayDialogR( false );
     }
+  }
+
+  public void doExport( String type, String filename, String prefix, long first, boolean second )
+  { 
+    TDLog.v("Type " + type + " filename " + filename + " prefix " + prefix );
+    TDSetting.mExportPrefix = prefix; // save export-prefix
+    int index = TDConst.surveyFormatIndex( type );
+    String extension = filename.substring( filename.lastIndexOf(".") );
+    if ( index > 0 ) {
+      // N.B. zip export not supported
+      List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
+      ExportInfo export_info = new ExportInfo( index, null, null, first );
+      for ( String survey : survey_list ) {
+        filename = survey + extension;
+        TDLog.v("Index " + index + " Exporting " + filename + " prefix " + prefix );
+        if ( prefix != null ) export_info.prefix = survey;
+        export_info.name = filename;
+        mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
+        doExport( survey, index, filename, export_info );
+      }
+    }
+  }
+      
+
+  /** export the data of one surveys
+   * @param survey    survey name
+   * @param index     export file format
+   * @param filename  export filename - short name, eg, "survey.dat"
+   * @param prefix    station name prefix (Compass, VTopo, Winkarst)
+   * @note called from the public doExport()
+   */
+  private void doExport( String survey, int index, String filename, ExportInfo export_info )
+  {
+    TDLog.v( "MAIN do export " + survey + " filename " + filename );
+    // if ( index >= 0 ) {
+      if ( TDInstance.sid < 0 ) {
+        TDToast.makeBad( R.string.no_survey );
+      } else {
+        if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
+          mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
+        } else {
+          mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
+        }
+      }
+    // } else {
+    //   TDLog.e("Main Window export - negative index " + index );
+    // }
   }
 
 }

@@ -103,17 +103,17 @@
 </li>
 <li>Survex export:
   <ul>
-    <li><i>Survex/Topo line termination</i>: end-of-line {Linux,Windows}. [Linux]</li>
+    <li><i>Line separator</i>: end-of-line chracters {Linux,Windows}. [Linux]</li>
     <li><i>Survex splays station</i>: add splays TO station. [no]</li>
-    <li><i>Survex/Therion LRUD</i>: Add LRUD to the export. [no]</li>
+    <li><i>LRUD</i>: add LRUD to the export. [no]</li>
   </ul>
 </li>
 <li>Therion export:
   <ul>
-    <li><i>Therion config</i>: create thconfig [no]</li> 
-    <li><i>Therion maps first</i>: put Therion map commands before survey data. [no]</li>
+    <li><i>Config</i>: create Therion thconfig file [no]</li> 
+    <li><i>Maps first</i>: put Therion map commands before survey data. [no]</li>
     <li><i>Splays</i>: add splay lines to Therion scraps. [yes]</li>
-    <li><i>Survex/Therion LRUD</i>: add LRUD to the export. [no]</li>
+    <li><i>LRUD</i>: add LRUD to the export. [no]</li>
     <li><i>Therion scale</i>: export scale. [1:100]</li>
     <li><i>xvi image</i>: insert reference to xvi image in th2 files</li>
   </ul>
@@ -127,20 +127,26 @@
 <li>Compass export:
   <ul>
     <li>Compass <i>station prefix</i>. [no]</li>
-    <li><i>Compass splays</i>: add splays to Compass files</li>
-    <li><i>Compass swap LR</i>: swap Left and Right on Compass export. [no]</li>
+    <li><i>Splays</i>: add splays to Compass files</li>
+    <li><i>Swap LR</i>: swap Left and Right on Compass export. [no]</li>
+  </ul>
+</li>
+<li>Polygon export:
+  <ul>
+    <li><i>LRUD</i>: include LRUD</li>
+    <li><i>Splays</i>: add splays to Polygon files</li>
   </ul>
 </li>
 <li>VisualTopo export:
   <ul>
-    <li><i>VisualTopo splays</i>: add splays to VisualTopo files</li>
+    <li><i>Splays</i>: add splays to VisualTopo files</li>
     <li><i>LRUD at FROM</i> station</li>
     <li><i>Trox format</i>: file format, tro or trox</li>
   </ul>
 </li>
 <li>Walls export:
   <ul>
-    <li><i>Walls splays</i>: include splays in Walls files</li>
+    <li><i>Splays</i>: include splays in Walls files</li>
   </ul>
 </li>
 <li>SVG export:
@@ -148,7 +154,7 @@
     <li><i>SVG roundtrip</i>: round-trip ready SVG export [no]</li>
     <li><i>Grid</i>: add sketch grid to SVG export. [no]</li>
     <li><i>Line orientation</i> [no]</li>
-    <li><i>SVG splays</i>: include splays. [no]</li>
+    <li><i>Splays</i>: include splays. [no]</li>
     <li><i>Point stroke</i> [0.5]</li>
     <li><i>Label stroke</i> [1.5]</li>
     <li><i>Line stroke</i> [2.5]</li>
@@ -169,8 +175,8 @@
   <ul>
     <li><i>DXF splay endpoints</i> [yes]</li>
     <li><i>DXF version</i> {6,12,16}. [6]</li>
-    <li><i>DXF splines</i>: use splines for Bezier segments</li>
-    <li><i>DXF reference</i>: X-Y axes are DXF sketch export</li>
+    <li><i>Splines</i>: use splines for Bezier segments</li>
+    <li><i>Reference</i>: X-Y axes are DXF sketch export</li>
     <li><i>Scrap layers</i>: DXF layers by scraps</li>
   </ul>
 </li>
@@ -191,14 +197,14 @@
 </li>
 <li>GPX export:<br>
   <ul>
-    <li><i>GPX single track</i> export [yes]</li>
+    <li><i>Single track</i> export data as single GPX track [yes]</li>
   </ul>
 </li>
 <li>CSV export:<br>
   <ul>
     <li><i>Complete CSV</i>: export whole data to csv. [no]</li>
-    <li><i>CSV separator</i>: field separator [pipe]</li>
-    <li><i>CSV eol</i>: line separator [line-feed]</li>
+    <li><i>Separator</i>: field separator [pipe]</li>
+    <li><i>Line separator</i>: line separator [line-feed]</li>
   </ul>
 </li>
 </ul>
@@ -289,6 +295,7 @@
   <li><i>Point tools scale</i> [1.2]</li>
   <li><i>Labels size</i> [24 pxl]</li>
   <li><i>Labels scaling</i> [no]</li>
+  <li><i>Section point offset</i> [20 pxl]</li>
 </ul>
 
 <hr style="height:1px;background-color:black;">

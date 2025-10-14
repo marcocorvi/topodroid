@@ -70,7 +70,7 @@ public class ImportVisualTopoTask extends ImportTask
         return -1L;
       }
 
-      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false );
+      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, true );
 
       // DataHelper app_data = TopoDroidApp.mData;
       // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );

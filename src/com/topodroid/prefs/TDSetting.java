@@ -1566,6 +1566,7 @@ public class TDSetting
       case TDPrefCat.PREF_CATEGORY_DAT:    return updatePrefDat( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_CSX:    return updatePrefCsx( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SVG:    return updatePrefSvg( hlp, k, v );
+      case TDPrefCat.PREF_CATEGORY_PLY:    return updatePrefPly( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SHP:    return updatePrefShp( hlp, k, v );
       // case TDPrefCat.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v ); // NO_PNG

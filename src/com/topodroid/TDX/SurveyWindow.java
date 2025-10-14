@@ -641,21 +641,21 @@ public class SurveyWindow extends Activity
 
   /** export the survey data
    * @param type      export file format
-   * @param filename  export file "name"
+   * @param filename  export filename - short name, eg, "survey.dat"
    * @param prefix    station name prefix (Compass, VTopo, Winkarst)
    * @param first     not used
-   * @param second    whether to export the second view (unused: only plan or profile in DrawingWindow)
+   * @param second    whether to export the second view (unused: only plan or profile in DrawingWindow) - not used here
    * @note interface IExporter
    */
   public void doExport( String type, String filename, String prefix, long first, boolean second )
   {
-    TDLog.v( "SURVEY do export - name " + filename );
+    TDLog.v( "SURVEY do export - name " + filename + " prefix " + prefix );
     if ( ! saveSurvey( false ) ) {
       TDLog.e( "SURVEY do export - name " + filename + " : save survey failed" );
       return;
     }
     TDSetting.mExportPrefix = prefix; // save export-prefix
-    mExportInfo = null;
+    // mExportInfo = null;
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );
     // if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
@@ -665,18 +665,18 @@ public class SurveyWindow extends Activity
       if ( TDInstance.sid < 0 ) {
         TDToast.makeBad( R.string.no_survey );
       } else {
-        mExportInfo = new ExportInfo( index, prefix, filename, first );
+        ExportInfo export_info = new ExportInfo( index, prefix, filename, first );
         // APP_OUT_DIR
         // // if ( TDSetting.mExportUri ) { // FIXME-URI unused URI_EXPORT
         //   selectExportFromProvider( index, filename );
         // // } else {
-        // //   mApp.doExportDataAsync( getApplicationContext(), mExportInfo, true ); // uri = null
+        // //   mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
         // // }
         if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
           // selectExportFromProvider( index, filename );
-          mApp.doExportDataAsync( getApplicationContext(), mExportInfo, true ); // uri = null
+          mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
         } else {
-          mApp.doExportDataAsync( getApplicationContext(), mExportInfo, true ); // uri = null
+          mApp.doExportDataAsync( getApplicationContext(), export_info, true ); // uri = null
         }
       }
     } else {
@@ -684,7 +684,7 @@ public class SurveyWindow extends Activity
     }
   }
 
-  private static ExportInfo mExportInfo; // index of the export-type 
+  // private static ExportInfo mExportInfo; // index of the export-type 
 
   /* unused URI_EXPORT
    *
@@ -749,7 +749,7 @@ public class SurveyWindow extends Activity
     TDPath.deleteSurveyDir( survey );
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // tell app to clear survey name and id
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, true ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     TopoDroidApp.mSurveyWindow = null;
     super.onBackPressed();
@@ -814,7 +814,7 @@ public class SurveyWindow extends Activity
     } else if ( p++ == pos ) { // EXPORT
       boolean diving = (mDatamode == SurveyInfo.DATAMODE_DIVING );
       String[] types = TDConst.surveyExportTypes( mApp_mData.hasFixed( TDInstance.sid, TDStatus.NORMAL) );
-      new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, diving ).show();
+      new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, diving, true ).show(); // with_name = true
     } else if ( TDLevel.overExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();
     } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE

@@ -61,6 +61,7 @@ public class ExportDialogShot extends MyDialog
   private String    mExportName   = null;
   private long      mExportFirst  = -1L; // index of first shot to export
   private boolean   mDiving = false; // diving-mode survey
+  private boolean   mWithName = true;
 
   private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
@@ -84,16 +85,18 @@ public class ExportDialogShot extends MyDialog
    * @param title       dialog title (resource)
    * @param survey      survey name
    * @param diving      whether survey is diving-mode
+   * @param with_name   whether to use survey name
    */
-  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey, boolean diving )
+  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey, boolean diving, boolean with_name )
   {
     super( context, null, R.string.ExportDialog ); // null app
     mParent   = parent;
     mTypes    = types;
     mSelected = null;
     mTitle    = title;
-    mSurvey   = survey;
+    mSurvey   = with_name? survey : context.getResources().getString( R.string.with_prefix );
     mDiving   = diving;
+    mWithName = with_name;
     // mExportPrefix = null; // already in declaration
     // mExportName   = null;
     // mExportFirst  = -1L;
@@ -148,6 +151,14 @@ public class ExportDialogShot extends MyDialog
     // mSelected = mTypes[ mSelectedPos ];
     setSelected( spin );
 
+    if ( ! mWithName ) {
+      ((EditText) findViewById( R.id.compass_prefix )).setFocusable( false );
+      ((EditText) findViewById( R.id.winkarst_prefix )).setFocusable( false );
+      // ((EditText) findViewById( R.id.csurvey_prefix )).setFocusable( false );
+      ((EditText) findViewById( R.id.trobot_name )).setFocusable( false );
+      ((EditText) findViewById( R.id.vtopo_series )).setFocusable( false );
+    }
+
     initOptions();
     updateLayouts();
   }
@@ -157,8 +168,8 @@ public class ExportDialogShot extends MyDialog
    */
   private void setSelected( Spinner spin )
   {
-    int pos = 0;
-    int kpos = -1;
+    int pos  =  0; // index in the array of formats
+    int kpos = -1; // index in the enabled formats
     if ( TDSetting.mExportShotsFormat >= 0 ) {
       for ( int k = 0; k < TDConst.mSurveyExportIndex.length; ++ k ) {
         if ( TDConst.mSurveyExportEnable[k] ) {
@@ -236,7 +247,7 @@ public class ExportDialogShot extends MyDialog
     //   return;
     } else if ( b == mBtnOk && mSelected != null ) {
       if ( ! setOptions() ) return;
-      // TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName );
+      TDLog.v("Survey format selected " + mSelected + " pos " + mSelectedPos + ": " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName  + " prefix " + mExportPrefix );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
         mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false ); // second = false
@@ -464,7 +475,6 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
           TDSetting.mVTopoFaverjon   = ((CheckBox) findViewById( R.id.vtopo_faverjon )).isChecked();
           setExportPrefix( ((EditText) findViewById( R.id.vtopo_series )).getText() );
-          
         }
         break;
       case TDConst.SURVEY_POS_WALLS: // Walls
@@ -473,9 +483,7 @@ public class ExportDialogShot extends MyDialog
         }
         break;
       case TDConst.SURVEY_POS_WINKARST: // Winkarst
-        {
-          setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
-        }
+        setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
         break;
       case TDConst.SURVEY_POS_CSV: //CSV
         {

@@ -373,13 +373,13 @@ public class TDConst
   };
 
   /** return the survey export name (null if illegal type)
-   * @param type    export type (position in the export-type list)
+   * @param index    export index (position in the export-type list)
    * @param name    survey name
    */
-  public static String getSurveyFilename( int type, String survey )
+  public static String getSurveyFilename( int index, String survey )
   {
-    // TDLog.v("CONST export type " + type );
-    switch ( type ) {
+    // TDLog.v("CONST export index " + index );
+    switch ( index ) {
       case SURVEY_POS_ZIP:       return survey + TDPath.ZIP;
       case SURVEY_POS_COMPASS:   return survey + TDPath.DAT;
       case SURVEY_POS_CSURVEY:   return survey + TDPath.CSX;

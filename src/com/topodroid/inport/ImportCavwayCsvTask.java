@@ -47,7 +47,7 @@ public class ImportCavwayCsvTask extends ImportTask
       if ( hasSurveyName( parser.mName ) ) {
         return -1L;
       }
-      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false ); // IMPORT CaveSniper no update
+      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, true ); // IMPORT CaveSniper no update
 
       // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
       // // app_data.updateSurveyDeclination( sid, parser.mDeclination );

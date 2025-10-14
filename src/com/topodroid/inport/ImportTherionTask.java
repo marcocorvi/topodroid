@@ -56,7 +56,7 @@ public class ImportTherionTask extends ImportTask
         return -1L;
       }
 
-      sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false ); // IMPORT TH no update
+      sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false, true ); // IMPORT TH no update
 
       DataHelper app_data = TopoDroidApp.mData;
       // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );

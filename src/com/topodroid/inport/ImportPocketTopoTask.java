@@ -56,7 +56,7 @@ public class ImportPocketTopoTask extends ImportTask
 
       TDPath.createSurveyPaths( parser.mName );
 
-      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false ); // no update
+      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, true ); // no update
 
       // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
       // app_data.updateSurveyDeclination( sid, parser.mDeclination );

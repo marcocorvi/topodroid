@@ -56,7 +56,7 @@ public class ImportCompassTask extends ImportTask
       if ( hasSurveyName( parser.mName ) ) {
         return -1L;
       }
-      sid = mApp.get().setSurveyFromName( parser.mName, mDatamode, false ); // IMPORT DAT no update
+      sid = mApp.get().setSurveyFromName( parser.mName, mDatamode, false, true ); // IMPORT DAT no update
 
       // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle ); 
       // app_data.updateSurveyDeclination( sid, parser.mDeclination ); 

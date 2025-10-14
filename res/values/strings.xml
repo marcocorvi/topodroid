@@ -1199,6 +1199,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">Save changes to calibration info</string>
     <string name="help_export_survey">Export survey</string>
+    <string name="help_export_surveys">Export all surveys</string>
     <string name="help_loc">GPS location</string>
     <string name="help_delete_survey">Delete survey</string>
     <string name="help_delete_calib">Delete calibration</string>
@@ -1569,7 +1570,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_ply_lrud_title" copyable="all">Polygon LRUD</string>
   <string name="pref_ply_lrud_summary">LRUD or add TO station to splays in Polygon</string>
   <string name="pref_ply_minus_title">Polygon splay name</string>
-  <string name="pref_ply_minus_summary">"-" or numbered splays in Polygon</string>
+  <string name="pref_ply_minus_summary">Dash or numbered splays in Polygon</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>
   <string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string>
   <string name="pref_vtopo_lrud_title">LRUD at From</string>

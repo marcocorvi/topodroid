@@ -304,6 +304,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_EXPORT_TRO_PREF",     TDPrefCat.PREF_CATEGORY_TRO );
       linkPreference( "DISTOX_EXPORT_SRV_PREF",     TDPrefCat.PREF_CATEGORY_SRV );
       linkPreference( "DISTOX_EXPORT_SVG_PREF",     TDPrefCat.PREF_CATEGORY_SVG );
+      linkPreference( "DISTOX_EXPORT_PLY_PREF",     TDPrefCat.PREF_CATEGORY_PLY );
       linkPreference( "DISTOX_EXPORT_SHP_PREF",     TDPrefCat.PREF_CATEGORY_SHP );
       linkPreference( "DISTOX_EXPORT_DXF_PREF",     TDPrefCat.PREF_CATEGORY_DXF );
       // linkPreference( "DISTOX_EXPORT_PNG_PREF",     TDPrefCat.PREF_CATEGORY_PNG ); // NO_PNG

@@ -1624,9 +1624,10 @@ public class TopoDroidApp extends Application
    * @param name      survey name - if name is null, survey refs in TDInstance are cleared 
    * @param datamode  survey datamode
    * @param update    whether to call a display update
+   * @param all_info  whether to set all data instead of only info in TDInstance
    * @return survey ID
    */
-  public long setSurveyFromName( String name, int datamode, boolean update )
+  public long setSurveyFromName( String name, int datamode, boolean update, boolean all_info )
   { 
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
@@ -1649,25 +1650,27 @@ public class TopoDroidApp extends Application
       TDInstance.survey = null;
       if ( TDInstance.sid > 0 ) {
         TDPath.setSurveyPaths( name );
-        DistoXStationName.setInitialStation( mData.getSurveyInitStation( TDInstance.sid ) );
         TDInstance.survey = name;
 	TDInstance.datamode = mData.getSurveyDataMode( TDInstance.sid );
 	// TDLog.v( "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
-        TDInstance.secondLastShotId = lastShotId();
-        // restoreFixed();
-	if ( update ) updateWindows();
-        TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSectionsMode( TDInstance.sid ) );
+        if ( all_info ) {
+          DistoXStationName.setInitialStation( mData.getSurveyInitStation( TDInstance.sid ) );
+          TDInstance.secondLastShotId = lastShotId();
+          // restoreFixed();
+	  if ( update ) updateWindows();
+          TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSectionsMode( TDInstance.sid ) );
 
-        // TDInstance.extend = 
-        int extend = mData.getSurveyExtend( TDInstance.sid );
-        // TDLog.v( "set SurveyFromName extend: " + extend );
-        if ( SurveyInfo.isSurveyExtendLeft( extend ) ) { 
-          TDAzimuth.mFixedExtend = -1L;
-        } else if ( SurveyInfo.isSurveyExtendRight( extend ) ) { 
-          TDAzimuth.mFixedExtend = 1L;
-        } else {
-          TDAzimuth.mFixedExtend = 0;
-          TDAzimuth.mRefAzimuth  = extend;
+          // TDInstance.extend = 
+          int extend = mData.getSurveyExtend( TDInstance.sid );
+          // TDLog.v( "set SurveyFromName extend: " + extend );
+          if ( SurveyInfo.isSurveyExtendLeft( extend ) ) { 
+            TDAzimuth.mFixedExtend = -1L;
+          } else if ( SurveyInfo.isSurveyExtendRight( extend ) ) { 
+            TDAzimuth.mFixedExtend = 1L;
+          } else {
+            TDAzimuth.mFixedExtend = 0;
+            TDAzimuth.mRefAzimuth  = extend;
+          }
         }
       }
       return TDInstance.sid;
