@@ -1212,7 +1212,7 @@
     <string name="export_bothviews">Pianta e sezione</string>
     <string name="export_config">Comandi di configurazione</string>
     <string name="export_csv_rawdata">Dati grezzi</string>
-    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
+    <string name="export_data_batch">Esportazione %1$s: %2$d rilievi</string>
     <string name="export_dxf_blocks">Blocchi DXF</string>
     <string name="export_dxf_version">Versione</string>
     <string name="export_georeference">Georeferenza</string>
@@ -1225,8 +1225,8 @@
     <string name="export_uncommented_maps">Mappe scommentate</string>
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
-    <!-- TODO string name="export_prefix_set">Set</string -->
-    <!-- TODO string name="export_prefix_reset">Reset</string -->
+    <string name="export_prefix_set">Imposta</string>
+    <string name="export_prefix_reset">Pulisci</string>
     <string name="export_media">media</string>
     <!-- UNUSED string name="export_suffix_hint">suffisso</string -->
     <string name="export_series_hint">serie</string>
@@ -1827,8 +1827,8 @@
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
   <string name="pref_scalable_label_title">Etichetta scala</string>
   <string name="pref_scalable_label_summary">Etichetta scala con zoom</string>
-  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
-  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
+  <string name="pref_xsection_offset_title">Offset di sezione</string>
+  <string name="pref_xsection_offset_summary">Offset dei punti \"sezione\"</string>
   <string name="pref_plot_cache_title">Cache degli schizzi</string>
   <string name="pref_plot_cache_summary">Tenere gli schizzi in memoria</string>
   <string name="pref_slope_lside_title">Linea pendenza lato sx</string>
