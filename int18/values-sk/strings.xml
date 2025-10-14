@@ -1224,6 +1224,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="export_bothviews">Pôdorys a Rez</string>
     <string name="export_config">Konfiguračné príkazy</string>
     <string name="export_csv_rawdata">Surové dáta</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">DXF blocks</string>
     <string name="export_dxf_version">Verzia</string>
     <string name="export_georeference">Georeferencovanie</string>

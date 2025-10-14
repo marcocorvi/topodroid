@@ -1214,6 +1214,7 @@
     <string name="export_bothviews">平面图和剖面图</string>
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">DXF块</string>
     <string name="export_dxf_version">版本</string>
     <string name="export_georeference">地理参考</string>

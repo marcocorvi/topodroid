@@ -1209,6 +1209,7 @@
     <string name="export_bothviews">План и разрез</string>
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">Блоки DXF</string>
     <string name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопривязка</string>

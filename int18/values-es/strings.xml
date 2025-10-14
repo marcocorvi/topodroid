@@ -1212,6 +1212,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_bothviews">Planta y secciones</string>
     <string name="export_config">Comandos de configuración</string>
     <string name="export_csv_rawdata">Datos sin procesar</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">Bloques DXF</string>
     <string name="export_dxf_version">Versión</string>
     <string name="export_georeference">Georeferencia</string>

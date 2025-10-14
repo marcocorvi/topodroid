@@ -1820,16 +1820,18 @@ public class MainWindow extends Activity
           TDLog.v("Export Thread run");
           List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
           ExportInfo export_info = new ExportInfo( index, null, null, first );
+          int cnt = 0; 
           for ( String survey : survey_list ) {
             String file_name = survey + extension;
             TDLog.v("Index " + index + " Exporting " + file_name + " prefix " + prefix );
             if ( prefix != null ) export_info.prefix = survey;
             export_info.name = file_name;
             mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
-            doExport( survey, index, file_name, export_info );
+            if ( doExport( survey, index, file_name, export_info ) ) ++cnt;
           }
           TDLog.v("Export Thread done");
-          runOnUiThread( new Runnable() { public void run() { TDToast.make( "Export done" ); } } );
+          final String res = String.format( TDInstance.getResourceString( R.string.export_data_batch ), type, cnt );
+          runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
         }
       };
       export_thread.start();
@@ -1844,22 +1846,23 @@ public class MainWindow extends Activity
    * @param prefix    station name prefix (Compass, VTopo, Winkarst)
    * @note called from the public doExport()
    */
-  private void doExport( String survey, int index, String filename, ExportInfo export_info )
+  private boolean doExport( String survey, int index, String filename, ExportInfo export_info )
   {
-    TDLog.v( "MAIN do export " + survey + " filename " + filename );
+    // TDLog.v( "MAIN do export " + survey + " filename " + filename );
     // if ( index >= 0 ) {
       if ( TDInstance.sid < 0 ) {
         // TDToast.makeBad( R.string.no_survey );
       } else {
         if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-          mApp.doExportDataAsync( getApplicationContext(), export_info, false, true ); // uri = null
+          return mApp.doExportDataAsync( getApplicationContext(), export_info, false, true ); // uri = null
         } else {
-          mApp.doExportDataAsync( getApplicationContext(), export_info, false, false ); // uri = null
+          return mApp.doExportDataAsync( getApplicationContext(), export_info, false, false ); // uri = null
         }
       }
     // } else {
     //   TDLog.e("Main Window export - negative index " + index );
     // }
+    return false;
   }
 
 }

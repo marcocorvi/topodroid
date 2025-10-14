@@ -1218,6 +1218,7 @@
     <string name="export_bothviews">Alaprajz és oldalnézet</string>
     <string name="export_config">Konfigurációs parancsok</string>
     <string name="export_csv_rawdata">Összes adat</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">Segédmérés végpont</string>
     <string name="export_dxf_version">Verzió</string>
     <string name="export_georeference">Georeferencia</string>

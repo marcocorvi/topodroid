@@ -1129,6 +1129,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="export_bothviews">Plan and Seitenriss</string>
   <string name="export_config">Therion Konfiguration</string>
   <string name="export_csv_rawdata">Rohdaten</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
   <string name="export_dxf_blocks">DXF Hilfszügepunkte</string>
   <string name="export_dxf_version">Version</string>
   <string name="export_georeference">Georeferenzierung</string>

@@ -1133,6 +1133,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_bothviews">Planta baixa e perfil</string>
   <string name="export_config">Comandos de configuração</string>
   <string name="export_csv_rawdata">Dados brutos CSV</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
   <string name="export_dxf_blocks">Blocos DXF</string>
   <string name="export_dxf_version">Versão</string>
   <string name="export_georeference">Georeferência</string>

@@ -1212,6 +1212,7 @@
     <string name="export_bothviews">Pianta e sezione</string>
     <string name="export_config">Comandi di configurazione</string>
     <string name="export_csv_rawdata">Dati grezzi</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">Blocchi DXF</string>
     <string name="export_dxf_version">Versione</string>
     <string name="export_georeference">Georeferenza</string>

@@ -1212,6 +1212,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_bothviews">Plan et coupe</string>
     <string name="export_config">Commandes de configuration</string>
     <string name="export_csv_rawdata">Données brutes</string>
+    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
     <string name="export_dxf_blocks">Blocs DXF</string>
     <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Géoréférence</string>
