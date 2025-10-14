@@ -1218,7 +1218,7 @@
     <string name="export_bothviews">Alaprajz és oldalnézet</string>
     <string name="export_config">Konfigurációs parancsok</string>
     <string name="export_csv_rawdata">Összes adat</string>
-    <string name="export_data_batch">%1$s mérés exportálva a %2$d -ból</string>
+    <string name="export_data_batch">%2$d mérés exportálása %1$s formátumba</string>
     <string name="export_dxf_blocks">Segédmérés végpont</string>
     <string name="export_dxf_version">Verzió</string>
     <string name="export_georeference">Georeferencia</string>
