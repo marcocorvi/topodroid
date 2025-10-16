@@ -590,7 +590,7 @@ class QCamCompass extends Dialog
         mLine = new DrawingLinePath( BrushManager.getLineWallIndex(), 0 );
         mLine.addStartPoint( x0, y0 );
         mPhotoSurface.addLine( mLine );
-      } else if ( action == MotionEvent.ACTION_MOVE ) { 
+      } else if ( action == MotionEvent.ACTION_MOVE && mLine != null ) { 
         float x0 = event.getX(0);
         // float y0 = event.getY(0);
         mLine.addPoint( x0, y0 );
