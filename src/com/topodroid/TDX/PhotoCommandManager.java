@@ -61,9 +61,9 @@ public class PhotoCommandManager
   {
     // TDLog.v(plot_name + " command manager mode " + mode );
     mCurrentStack = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
-    mRedoStack     = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
-    // mMatrix       = new Matrix(); // identity
-    // mScale        = 1.0f;
+    mRedoStack    = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
+    // mMatrix      = new Matrix(); // identity
+    // mScale       = 1.0f;
   }
 
   // ----------------------------------------------------------------
@@ -79,7 +79,9 @@ public class PhotoCommandManager
    */
   void clearDrawing()
   {
-    mCurrentStack.clear();
+    synchronized(this) {
+      mCurrentStack.clear();
+    }
     mRedoStack.clear();
     // mMatrix = new Matrix(); // identity
   }
@@ -90,15 +92,19 @@ public class PhotoCommandManager
    */
   void addLine( DrawingLinePath path ) 
   { 
-    mCurrentStack.add( path ); 
+    synchronized(this) {
+      mCurrentStack.add( path ); 
+    }
   }
 
   void undo()
   {
     int sz = mCurrentStack.size();
     if ( sz > 0 ) {
-      DrawingLinePath path = mCurrentStack.get( sz - 1 );
-      mRedoStack.add( path );
+      synchronized(this) {
+        DrawingLinePath path = mCurrentStack.get( sz - 1 );
+        mRedoStack.add( path );
+      }
     }
   }
 
@@ -106,8 +112,10 @@ public class PhotoCommandManager
   {
     int sz = mRedoStack.size();
     if ( sz > 0 ) {
-      DrawingLinePath path = mRedoStack.get( sz - 1 );
-      mCurrentStack.add( path );
+      synchronized(this) {
+        DrawingLinePath path = mRedoStack.get( sz - 1 );
+        mCurrentStack.add( path );
+      }
     }
   }
 
@@ -129,8 +137,10 @@ public class PhotoCommandManager
     // Matrix mm    = mMatrix; // mMatrix = Scale( 1/s, 1/s) * Translate( -Offx, -Offy)  (first translate then scale)
     // float  scale = mScale;
 
-    for ( DrawingLinePath line : mCurrentStack ) {
-      line.draw( canvas ); // , mMatrix, mScale );
+    synchronized(this) {
+      for ( DrawingLinePath line : mCurrentStack ) {
+        line.draw( canvas ); // , mMatrix, mScale );
+      }
     }
 
   }
