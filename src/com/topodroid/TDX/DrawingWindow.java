@@ -760,7 +760,7 @@ public class DrawingWindow extends ItemDrawer
   private ArrayList< String > mTos   = new ArrayList<>();
   private float mAzimuth = 0.0f;
   private float mClino   = 0.0f;
-  private float mIntersectionT = -1.0f; // intersection abscissa for leg xsections
+  private float mIntersectionT = -1.0f; // intersection abscissa for leg xsections (2 for multileg, negative for regular plots)
   private PointF mOffset  = new PointF( 0f, 0f );
   private PointF mDisplayCenter;
   private float mZoom  = 1.0f;
@@ -2940,7 +2940,7 @@ public class DrawingWindow extends ItemDrawer
    * @param to      xsection to string
    * @param azimuth xsection azimuth
    * @param clino   xsection clino
-   * @param tt      xsection leg-intersection, only for single-leg xsections
+   * @param tt      xsection leg-intersection, only for single-leg xsections (2 for multileg)
    * @param center  xsection center, only for multileg xsections
    */
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
@@ -3301,11 +3301,12 @@ public class DrawingWindow extends ItemDrawer
     List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
     if ( list != null && list.size() > 0 ) {
       if ( PlotType.isMultilegSection( mType, mTo ) ) {
-        // TDLog.v("PLOT restart multileg list " + list.size() );
+        // TDLog.v("PLOT restart multileg: from " + mFrom + " to " + mTo + " leg nr. " + list.size() );
         makeMultilegSectionReferences( list, mPlot3.center );
       } else {
+        // TDLog.v("PLOT restart single leg: from " + mFrom + " to " + mTo + " leg nr. " + ((list == null)? "null" : list.size()) );
         if ( mIntersectionT != mPlot3.intercept ) {
-          // TDLog.v( "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
+          // TDLog.v( "PLOT restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
           mPlot3.intercept = mIntersectionT;
           mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
         }
@@ -3316,7 +3317,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** start the sketch display 
    * @param do_load whether to load plot from file
-   * @param tt      used only by leg x-sections when created to insert leg intersection point
+   * @param tt      used only by leg x-sections when created to insert leg intersection point (2 for multileg)
    * @param center  plot center - for multileg x-section
    * @note called by onCreate, switchPlotType, onBackPressed and pushInfo
    * 
@@ -3421,7 +3422,7 @@ public class DrawingWindow extends ItemDrawer
 
     // assert( mLastLinePath == null); // not needed - guaranteed by callers
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
-    // TDLog.v( "section list " + list.size() + " tt " + tt + " azimuth " + mAzimuth + " clino " + mClino );
+    // TDLog.v( "single leg section list " + list.size() + " tt " + tt + " azimuth " + mAzimuth + " clino " + mClino );
     // 2023-01-31 use survey declination for PLOT_H_SECTION
     float decl = ( mType == PlotType.PLOT_H_SECTION )? mApp_mData.getSurveyDeclination( mSid ) : 0;
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, decl );
@@ -3601,7 +3602,7 @@ public class DrawingWindow extends ItemDrawer
   private void makeMultilegSectionReferences( List< DBlock > list, Vector3D center )
   {
     // assert( mLastLinePath == null); // not needed - guaranteed by callers
-    // TDLog.v("PLOT multileg make section reference " + mAzimuth + " " + mClino + " list " + list.size() );
+    // TDLog.v("multileg section azimuth " + mAzimuth + " clino " + mClino + " list " + list.size() );
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, 0 );
@@ -3649,7 +3650,7 @@ public class DrawingWindow extends ItemDrawer
     float ztt = (float)center.z; // Down
     for ( DBlock b : list ) {
       if ( b.isSplay() ) { // test b.isCommented() ? // FIXME_COMMENTED
-        // TDLog.v("multileg splay block " + b.mFrom );
+        // TDLog.v("multileg splay block " + b.mId + ": " +  b.mFrom );
         NumStation st_f = mNum.getStation( b.mFrom );
         NumSplay sp = mNum.getSplayOf( b );
         if ( st_f != null && sp != null ) {
@@ -3664,10 +3665,10 @@ public class DrawingWindow extends ItemDrawer
           // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto + " cosine " + cosine );
           addFixedLine( mType, b, xfrom, yfrom, xto, yto, cosine, true, false ); // splay, not-selectable
         } else {
-          TDLog.e( "splay block without station " + b.mFrom );
+          TDLog.e( "splay block without station " +  b.mId + ": " + b.mFrom );
         }
       } else {
-        // TDLog.v("multileg leg block " + b.mFrom + " " + b.mTo );
+        // TDLog.v("multileg leg block " +  b.mId + ": " + b.mFrom + " " + b.mTo );
         NumStation st_f = mNum.getStation( b.mFrom );
         NumStation st_t = mNum.getStation( b.mTo );
         if ( st_f != null && st_t != null ) {
@@ -3687,6 +3688,7 @@ public class DrawingWindow extends ItemDrawer
           addFixedLine( mType, b, xfrom, yfrom, xto, yto, 1.0f, false, false ); // cosine 1.0 not used, not-splay, not-selectable
           mDrawingSurface.addDrawingStationName( b.mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
           mDrawingSurface.addDrawingStationName( b.mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
+          // TDLog.v("leg  " + b.mFrom + " " + b.mTo + ": intercept " + tt + " af " + af + " at " + at );
           if ( tt >= 0 && tt <= 1 ) {
             float xt = xfrom + tt * ( xto - xfrom );
             float yt = yfrom + tt * ( yto - yfrom );
@@ -3695,9 +3697,10 @@ public class DrawingWindow extends ItemDrawer
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
             DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xt,yt), DrawingUtil.toSceneY(xt,yt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
             mDrawingSurface.addDrawingDotPath( path );
+          } else {
           }
         } else {
-          TDLog.e( "leg block without station " + b.mFrom + " " + b.mTo );
+          TDLog.e( "leg block without station " +  b.mId + ": " + b.mFrom + " " + b.mTo );
         }
       }
     }
@@ -6070,7 +6073,7 @@ public class DrawingWindow extends ItemDrawer
     if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
     long xtype = PlotType.getXSectionType( type );
 
-    TDLog.v( "open xsection " + mName + " <" + xs_id + "> X-type " + xtype );
+    // TDLog.v( "open xsection " + mName + " <" + xs_id + "> X-type " + xtype );
 
     PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
@@ -6088,7 +6091,7 @@ public class DrawingWindow extends ItemDrawer
       } else { // type == PlotType.PLOT_PLAN
         clino = 0;
       }
-      TDLog.v( "new at-station X-section " + xs_id + " station name " + st_name + " nick <" + nick + ">" );
+      // TDLog.v( "new at-station X-section " + xs_id + " station name " + st_name + " nick <" + nick + ">" );
 
       long pid = mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
       // plot = mApp_mData.getPlotInfo( TDInstance.sid, pid );
@@ -7674,7 +7677,7 @@ public class DrawingWindow extends ItemDrawer
     return pid;
   }
 
-  /** make a photo X-Section from a section-line
+  /** make a photo (leg) X-Section from a section-line
    * @param line    "section" line
    * @param id      section ID, eg "xx0"
    * @param type    either PLOT_SECTION or PLOT_H_SECTION
@@ -7705,7 +7708,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** make a X-Section from a section-line
+  /** make a (leg) X-Section from a section-line
    * @param line    "section" line
    * @param id      section ID, eg "xx0"
    * @param type    either PLOT_SECTION or PLOT_H_SECTION
@@ -7728,6 +7731,7 @@ public class DrawingWindow extends ItemDrawer
       if ( tt <= 1.0 ) {
         mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
       } else {
+        // TDLog.v("Center " + center.x + " " + center.y + " " + center.z );
         mApp_mData.updatePlotCenter( pid, TDInstance.sid, center );
       }
       pushInfo( type, mSectionName, from, to, azimuth, clino, tt, center );
@@ -7737,6 +7741,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** open the xsection scrap in the window
    * @param scrapname fullname of the scrap
+   *
    * the name can be the scrap-name or the section-name (plot name)
    * @note called only by DrawingPointDialog and onLongClick()
    */
@@ -9725,7 +9730,7 @@ public class DrawingWindow extends ItemDrawer
     // assert( mLastLinePath == null );
 
     mDrawingSurface.clearXSectionOutline( name );
-    TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
+    // TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
       // TDLog.v("XSection set " + name + " tdr-file " + tdr );

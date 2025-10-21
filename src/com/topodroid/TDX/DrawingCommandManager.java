@@ -1470,9 +1470,11 @@ public class DrawingCommandManager
   void addDotCommand( DrawingPath path ) 
   { 
     if ( path instanceof DrawingSpecialPath ) { 
+      // TDLog.v("add dot command special");
       setCurrentScrapByIdx( path.mScrap );
-      mCurrentScrap.addSpecialCommand( path ); 
+      mCurrentScrap.addSpecialCommand( (DrawingSpecialPath)path ); 
     } else {
+      // TDLog.v("add dot command normal");
       addCommand( path );
     }
   }

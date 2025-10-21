@@ -65,8 +65,8 @@ class DrawingLineSectionDialog extends MyDialog
   private ImageView mIVimage;   // photo image
   private boolean mHSection;
   private boolean mExists;
-  private boolean canTakePhoto;     // whether the xsection can have a photo
-  private float mTT; // intersection abscissa
+  private boolean canTakePhoto; // whether the xsection can have a photo
+  private float mTT;            // intersection abscissa - or 2 for multileg xsections
 
   private TDImage mTdImage = null;
 
@@ -126,6 +126,7 @@ class DrawingLineSectionDialog extends MyDialog
         // TDLog.v("Section Line: start <" + mFrom + "> view <" + mTo + "> azimuth " + mAzimuth + " clino " + mClino ); 
       }
     }
+    TDLog.v( "Drawing Line Section Dialog: intercept " + mTT + " (" + tt0 + ")" ); 
     canTakePhoto = ( mTT <= 1.0 ) && TDandroid.checkCamera( context );
     // TDLog.v( "line id " + mId );
   }

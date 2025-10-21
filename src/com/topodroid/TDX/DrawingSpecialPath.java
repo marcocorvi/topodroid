@@ -33,15 +33,15 @@ public class DrawingSpecialPath extends DrawingPath
   static final int SPECIAL_ANY = 0; // generic
   static final int SPECIAL_DOT = 1; // leg x-section dot reference
 
-  private int mType; // type of special path
+  private int mSpecialType; // type of special path
 
-  boolean isType( int type ) { return mType == type; }
+  boolean isSpecialType( int type ) { return mSpecialType == type; }
 
   // FIXME-COPYPATH
   // @Override
   // DrawingPath copyPath()
   // {
-  //   DrawingSpecialPath ret = new DrawingSpecialPath( mType, cx, cy, mLevel );
+  //   DrawingSpecialPath ret = new DrawingSpecialPath( mSpecialType, cx, cy, mLevel );
   //   copyTo( ret );
   //   return ret;
   // }
@@ -50,7 +50,7 @@ public class DrawingSpecialPath extends DrawingPath
   {
     super( DrawingPath.DRAWING_PATH_NORTH, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
-    mType = t;
+    mSpecialType = t;
     setCenter( x, y );
     mLevel = level;
     resetPath();
@@ -213,7 +213,7 @@ public class DrawingSpecialPath extends DrawingPath
   {
     try {
       dos.write( 'J' );
-      dos.writeInt( mType );
+      dos.writeInt( mSpecialType );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       // if ( version > 401090 ) 
@@ -229,7 +229,7 @@ public class DrawingSpecialPath extends DrawingPath
   // @Override
   // void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
   // {
-  //   if ( mType == SPECIAL_DOT ) {
+  //   if ( mSpecialType == SPECIAL_DOT ) {
   //     // cx,cy are in pixels divide by 20 to write coords in meters
   //     TDVector vv = DrawingPath.getCave3D( cx, cy, V1, V2 )
   //     pw.format( Locale.US, "POINT dot 0.0 %f %f %f\n",  vv.x,  vv.y, -vv.z );

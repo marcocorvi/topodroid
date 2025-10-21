@@ -898,9 +898,12 @@ public class Scrap
   /** add a drawing special item 
    * @param path    drawing special item
    */
-  void addSpecialCommand( DrawingPath path ) 
+  void addSpecialCommand( DrawingSpecialPath path ) 
   {
-    if ( mCurrentStack.size() > 0 ) return;
+    if ( mCurrentStack.size() > 0 ) {
+      // TDLog.v("stack not empty " + mCurrentStack.size() + " dot " +  path.isSpecialType( DrawingSpecialPath.SPECIAL_DOT ));
+      if ( ! path.isSpecialType( DrawingSpecialPath.SPECIAL_DOT ) ) return;
+    }
     mRedoStack.clear(); 
     synchronized( TDPath.mCommandsLock ) {
       mCurrentStack.add( path );
@@ -3575,7 +3578,7 @@ public class Scrap
     for ( ICanvasCommand cmd : mCurrentStack ) {
       if ( cmd instanceof DrawingSpecialPath ) {
         DrawingSpecialPath special = (DrawingSpecialPath)cmd;
-        if ( special.isType( type ) ) return special;
+        if ( special.isSpecialType( type ) ) return special;
       }
     }
     return null;
