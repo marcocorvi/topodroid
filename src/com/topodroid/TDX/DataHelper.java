@@ -674,6 +674,7 @@ public class DataHelper extends DataSetObservable
       float[] DD = new float[ nr_dev ];
       for ( int k = 0; k < nr_dev; ++ k ) {
         CC[ k ] = 0;
+        CA[ k ] = 0;
         GG[ k ] = 0;
         MM[ k ] = 0;
         DD[ k ] = 0;
@@ -704,10 +705,10 @@ public class DataHelper extends DataSetObservable
                   addr[ nr_mgd ] = k;
                   if ( cursor.getDouble(1) > Accuracy.THRS ) {
                     GG[ k ] +=  (float)( cursor.getDouble(1) );
-                    MM[ k ] +=  (float)( cursor.getDouble(1) );
+                    MM[ k ] +=  (float)( cursor.getDouble(2) );
                     ++ CC[k];
                   }
-                  DD[ k ] +=  (float)( cursor.getDouble(1) );
+                  DD[ k ] +=  (float)( cursor.getDouble(3) );
                   ++ CA[k];
                   break;
                 }
