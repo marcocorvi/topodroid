@@ -91,7 +91,7 @@
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Высота %3$.2f</string>
     <string name="station_not_saved">Пикет не сохранён</string>
-    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
+    <string name="station_name_conflict">Конфликтующие названия. Всё равно продолжить?</string>
     <string name="shot_not_found">Замеры не найдены</string>
     <string name="shot_not_saved">Замер не сохранен</string>
     <string name="bad_sibling">Плохой замер в группе</string>
@@ -441,7 +441,7 @@
     <string name="no_profile_overview">Нет обзора для спроецированного профиля</string>
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
-    <!-- TODO string name="no_stations">Survey has no stations</string -->
+    <string name="no_stations">Съёмка не содержит пикетов</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
     <string name="no_search_result">Поиск не дал результатов.</string>
     <string name="no_survey">Съёмка не выбрана.</string>
@@ -495,7 +495,7 @@
     <!-- UNUSED string name="menu_pair">СОПРЯЖЕНИЕ</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
-    <!-- TODO string name="menu_stations">STATIONS</string -->
+    <string name="menu_stations">ПИКЕТЫ</string>
     <string name="menu_sections">СЕЧЕНИЯ</string>
     <string name="menu_sensor">ДАТЧИКИ</string>
     <string name="menu_scan">Сканировать</string>
@@ -866,7 +866,7 @@
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
-    <!-- TODO string name="button_no">NO</string -->
+    <string name="button_no"		>НЕТ</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >выкл</string>
     <string name="button_on"        >вкл</string>
@@ -1118,7 +1118,7 @@
     <string name="help_undelete">Восстановить удаленные элементы</string>
     <string name="help_photo">Фотографии в съёмке</string>
     <string name="help_sensor">Показания датчиков</string>
-    <!-- TODO string name="help_stations">Stations</string -->
+    <string name="help_stations">Пикеты</string>
     <string name="help_3d">3D просмотр (Cave3D)</string>
     <!-- UNUSED string name="help_move">Включть режим перемещения/зума</string -->
     <string name="help_draw">Перейти в режим рисования</string>
@@ -1209,7 +1209,7 @@
     <string name="export_bothviews">План и разрез</string>
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
-    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
+    <string name="export_data_batch">Экспортировано %1$s из %2$d съёмок</string>
     <string name="export_dxf_blocks">Блоки DXF</string>
     <string name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопривязка</string>
@@ -1222,8 +1222,8 @@
     <string name="export_uncommented_maps">Раскомментированные карты</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
-    <!-- TODO string name="export_prefix_set">Set</string -->
-    <!-- TODO string name="export_prefix_reset">Reset</string -->
+    <string name="export_prefix_set">Установить</string>
+    <string name="export_prefix_reset">Сбросить</string>
     <string name="export_media">Фото-Аудио</string>
     <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
     <string name="export_series_hint">группа</string>
@@ -1285,7 +1285,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
-    <!-- TODO string name="title_stations">Stations</string -->
+    <string name="title_stations">Пикеты</string>
     <string name="title_plot_search">Поиск пикета</string>
     <string name="title_pref_search">Поиск настроек</string>
     <string name="title_gm_search">Поиск данных калибровки</string>
@@ -1402,7 +1402,7 @@
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
 
-    <!-- TODO string name="title_read_names">Station names map</string -->
+    <string name="title_read_names">Карта номеров пикетов</string>
     <string name="title_import_shot">Импорт съёмки</string>
     <string name="title_import_gps">Импорт точки GPS</string>
     <string name="title_import_th2">Therion th2 файл</string>
@@ -1531,10 +1531,10 @@
   <string name="pref_compass_splays_summary">Экспорт сплеев в формат Compass</string>
   <string name="pref_walls_splays_title">Сплеи в Walls</string>
   <string name="pref_walls_splays_summary">Экспорт сплеев в формат Walls</string>
-  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
-  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
+  <string name="pref_ply_lrud_title">Нитка хода ЛПВН</string>
+  <string name="pref_ply_lrud_summary">Нитка хода ЛПВН</string>
+  <string name="pref_ply_minus_title">Нитка хода минус</string>
+  <string name="pref_ply_minus_summary">Нитка хода минус</string>
   <string name="pref_vtopo_splays_title">Сплеи VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Экспорт сплеев в формат VisualTopo</string>
   <string name="pref_vtopo_lrud_title">ЛПВН на пикете ОТ</string>
@@ -1824,8 +1824,8 @@
   <string name="pref_label_size_summary">Размер шрифта в подписях</string>
   <string name="pref_scalable_label_title">Масштабирование подписей</string>
   <string name="pref_scalable_label_summary">Масштабирование подписей при зуме</string>
-  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
-  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
+  <string name="pref_xsection_offset_title">Смещение поперечного сечения</string>
+  <string name="pref_xsection_offset_summary">Смещение точки поперечного сечения</string>
   <string name="pref_plot_cache_title">Кэш абрисов</string>
   <string name="pref_plot_cache_summary">Кэширование абрисов в памяти</string>
   <string name="pref_slope_lside_title">Линия уклона l-направление</string>
