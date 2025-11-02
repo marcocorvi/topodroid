@@ -39,6 +39,7 @@
          API-33 = Android 13    Tiramisu
          API-34 = Android 14    Upside Down Cake
          API-35 = Android 15 	Vanilla Ice Cream 
+	     API-36 = Android 16    Baklava
     -->
     <uses-sdk
        android:minSdkVersion="21"
