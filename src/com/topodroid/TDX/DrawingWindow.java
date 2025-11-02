@@ -5913,6 +5913,15 @@ public class DrawingWindow extends ItemDrawer
     doTakePointPhoto( mMediaManager.getImageFilepath(), true, -1L, MediaInfo.TYPE_PLOT ); // with inserter, no pid
   }
 
+  // /** set the photo size
+  //  * @param size   new photo size (horizontal width) [m]
+  //  */
+  // void setPhotoSize( DrawingPhotoPath photo )
+  // { 
+  //   float size = photo.getPhotoSize();
+  //   TDLog.v("Photo new size " + size );
+  // }
+
   /** insert a "audio" point
    * @param pid    plot ID 
    * @param x      X coord

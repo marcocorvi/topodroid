@@ -47,10 +47,6 @@ public class DrawingPicturePath extends DrawingPointPath
 
   void setId( long id ) { mId = id; }
 
-  /** set the size of the picture
-   * @param size   new photo size (horizontal width) [m]
-   */
-  void setPhotoSize( float size ) { mPhotoSize = size; }
 
   /** @return the size of the picture
    */
@@ -62,6 +58,18 @@ public class DrawingPicturePath extends DrawingPointPath
   void scalePhotoSize( float scale )
   { 
     mPhotoSize *= scale;
+    if ( mPhotoSize < TDSetting.mPictureMin ) mPhotoSize = TDSetting.mPictureMin; // min max sizes in meters
+    else if ( mPhotoSize > TDSetting.mPictureMax ) mPhotoSize = TDSetting.mPictureMax;
+    // TDLog.v("PICTURE new size " + mPhotoSize + " scale " + scale );
+    makePath();
+  }
+
+  /** set the size of the picture
+   * @param size   new photo size (horizontal width) [m]
+   */
+  void setPhotoSize( float size )
+  {
+    mPhotoSize = size;
     if ( mPhotoSize < TDSetting.mPictureMin ) mPhotoSize = TDSetting.mPictureMin; // min max sizes in meters
     else if ( mPhotoSize > TDSetting.mPictureMax ) mPhotoSize = TDSetting.mPictureMax;
     // TDLog.v("PICTURE new size " + mPhotoSize + " scale " + scale );

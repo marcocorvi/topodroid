@@ -107,7 +107,7 @@ class DrawingPhotoDialog extends MyDialog
           if ( size < TDSetting.mPictureMin ) size = TDSetting.mPictureMin;
           if ( size > TDSetting.mPictureMax ) size = TDSetting.mPictureMax;
         } catch ( NumberFormatException e ) {
-          size = 1;
+          size = TDSetting.mPictureMin;
         }
       }
       mActivity.addPhotoPoint( mPid, mComment.getText().toString(), size, mX, mY, camera, mGeoCode );

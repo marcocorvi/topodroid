@@ -42,7 +42,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="21"
-       android:targetSdkVersion="35"
+       android:targetSdkVersion="36"
        tools:ignore="GradleOverrides,OldTargetApi"
     />
     <!-- android:maxSdkVersion="29" -->

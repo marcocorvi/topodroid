@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -132,9 +132,14 @@ class DrawingPhotoEditDialog extends MyDialog
       mPhoto.setCode( mGeoCode );
       try {
         float size = Float.parseFloat( mETsize.getText().toString() );
-        if ( size < 1 ) size = 1; // min size 1 meter
-        mPhoto.setPhotoSize( size );
+        if ( size < TDSetting.mPictureMin ) size = TDSetting.mPictureMin; // same as DrawingPhotoDialog
+        if ( size > TDSetting.mPictureMax ) size = TDSetting.mPictureMax;
+        if ( mPhoto.setPhotoSize( size ) ) {
+          // mActivity.setPhotoSize( mPhoto );
+        }
       } catch ( NumberFormatException e ) {
+        // do not update photo size
+        // TODO feddback to the user
       }
       TopoDroidApp.mData.updatePhotoCommentAndCode( TDInstance.sid, mPhoto.mId, comment, mGeoCode );
     // } else if ( vid == R.id.photo_delete ) {

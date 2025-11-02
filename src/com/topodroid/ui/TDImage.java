@@ -11,7 +11,7 @@
  */
 package com.topodroid.ui;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 // import java.io.IOException;
@@ -69,7 +69,7 @@ public class TDImage
       mImageWidth   = mImage.getWidth();
       mImageHeight  = mImage.getHeight();
     }  
-    // TDLog.v( "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
+    TDLog.v( "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
   }
 
   /** @return true if the image is portrait - exif orientations:
