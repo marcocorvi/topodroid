@@ -520,7 +520,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="start_scan">Стартирай сканиране</string>
     <string name="stop_scan">Спри сканиране</string>
     <string name="scan_started">Сканирането е стартирано</string>
-    <string name="scan_finished">Сканирането е завършено/string>
+    <string name="scan_finished">Сканирането е завършено</string>
     <string name="scanning">Сканиране ... Моля изчакайте</string>
 
     <!-- UNUSED string name="title_scan">BLE сканиране</string -->
