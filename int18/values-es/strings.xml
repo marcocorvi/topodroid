@@ -662,6 +662,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_note">Nota de toma</string>
     <!-- UNUSED string name="shot_reverse">Toma Inversa</string -->
     <string name="shot_to">Toma hasta</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">Estación</string>
     <string name="station_ask">¿Quiere Insertar estación?</string>

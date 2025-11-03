@@ -662,6 +662,7 @@
     <string name="shot_note">注释</string>
     <!-- UNUSED string name="shot_reverse">反测</string -->
     <string name="shot_to">到</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">测点</string>
     <string name="station_ask">插入测点到草图?</string>

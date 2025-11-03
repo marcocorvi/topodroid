@@ -663,6 +663,7 @@
     <string name="shot_note">megjegyzés</string>
     <!-- UNUSED string name="shot_reverse">visszamérés</string -->
     <string name="shot_to">hová</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">mérési pont</string>
     <string name="station_ask">Beilleszt mérési pontot a vázlatba?</string>

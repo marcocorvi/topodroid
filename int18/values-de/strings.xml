@@ -611,6 +611,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="shot_note">Notizen</string>
   <!-- UNUSED string name="shot_reverse">Richtung umkehren</string -->
   <string name="shot_to">bis</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
   <string name="station">Messpunkt</string>
   <string name="station_ask">Messpunkt in Skizze anlegen?</string>
   <string name="station_del">Messpunkt aus Skizze entfernen?</string>

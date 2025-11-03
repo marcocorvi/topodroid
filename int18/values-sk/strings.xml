@@ -668,6 +668,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="shot_note">Poznámka</string>
     <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">Na</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">Meračský bod</string>
     <string name="station_ask">Vložiť meračské body do nákresu?</string>

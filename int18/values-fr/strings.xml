@@ -659,6 +659,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="shot_note">Note</string>
     <!-- UNUSED string name="shot_reverse">Inverse</string -->
     <string name="shot_to">À ou VERS</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">Station</string>
     <string name="station_ask">Insérer station ?</string>

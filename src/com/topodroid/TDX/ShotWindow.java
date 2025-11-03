@@ -421,28 +421,34 @@ public class ShotWindow extends Activity
   private List< PhotoInfo > mMyPhotos = null;
     
   /** update the display 
+   * @return 0: shot list not refreshed, 1: list refreshed but display not updated, 2 list refreshed and display updated
+   *        
    */
-  void updateDisplay( )
+  int updateDisplay( )
   {
+    int ret = 0;
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       mMyBlocks = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
       mSurveyAccuracy = new SurveyAccuracy( mMyBlocks ); 
       // mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
       // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
-
       mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
       if ( ! mDataAdapter.isMultiSelect() ) { // FIXME 2024-11-15 check if causes errors
-        // TDLog.v("update display updates shot list");
+        TDLog.v("update display updates shot list: " + mMyBlocks.size() );
         updateShotList( mMyBlocks, mMyPhotos );
+        ret = 2;
+      } else {
+        TDLog.v("update display updates shot list: " + mMyBlocks.size() + " adapter is multiselect" );
+        ret = 1;
       }
-      
       setTheTitle( );
     } else {
       mApp.clearSurveyReferences();
       doFinish();
       // TDToast.makeWarn( R.string.no_survey );
     }
+    return ret;
   }
 
   public void setTheTitle()
@@ -1813,7 +1819,9 @@ public class ShotWindow extends Activity
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // REFRESH
         if ( TDLevel.overExpert ) {
           // TDLog.v("update display : refresh");
-          updateDisplay();
+          if ( updateDisplay() > 1 ) {
+            TDToast.make( R.string.shot_refreshed );
+          }
 	}
 
       } else if ( mDataAdapter.getMultiSelectSize() > 0 ) {

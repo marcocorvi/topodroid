@@ -663,6 +663,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="shot_note">забележка</string>
     <!-- UNUSED string name="shot_reverse">обръщане</string -->
     <string name="shot_to">до</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата\?</string>

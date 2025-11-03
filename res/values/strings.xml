@@ -673,6 +673,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="shot_note">note</string>
     <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">to</string>
+    <string name="shot_refreshed">Refreshed shot list</string>
 
     <string name="mark_no_mark"   translatable="false">( )</string>
     <string name="mark_generic"   translatable="false">(&#x1d52;)</string>

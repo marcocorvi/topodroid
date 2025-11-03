@@ -660,6 +660,7 @@
     <string name="shot_note">nota</string>
     <!-- UNUSED string name="shot_reverse">inverso</string -->
     <string name="shot_to">a</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>

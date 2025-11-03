@@ -616,6 +616,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="shot_note">comentário</string>
   <!-- UNUSED string name="shot_reverse">inverter</string -->
   <string name="shot_to">Para</string>
+    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
   <string name="station">Base referência</string>
   <string name="station_ask">Inserir base no arquivo th2 exportado?</string>
   <string name="station_del">Remover base do arquivo th2 exportado?</string>
