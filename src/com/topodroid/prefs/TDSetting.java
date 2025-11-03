@@ -694,9 +694,9 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DATA ACCURACY
-  public static float mAccelerationThr =  1; // acceleration threshold (shot quality) [%]
-  public static float mMagneticThr     =  1; // magnetic threshold [%]
-  public static float mDipThr          =  2; // dip threshold [deg]
+  public static float mAccelerationThr =  2; // acceleration threshold (shot quality) [%]
+  public static float mMagneticThr     =  2; // magnetic threshold [%]
+  public static float mDipThr          =  3; // dip threshold [deg]
   private static float mSiblingThr     =  5; // sibling threshold [%]
   public static float mSiblingThrA     = 0.56f * 5; // sibling angle threshold [deg]
   public static float mSiblingThrD     = 0.05f;     // sibling distance threshold [m] 

@@ -247,12 +247,34 @@ class Accuracy
     mCountDip = 0;
   }
 
+
+  // the count correction is used to reduce deviations from the mean value
+  private static float COUNT_CORRECTION = 20.0f;
+
+  /** @return scale factor for small counts
+   * the scale factor is less than 1 and is used to reduce deviations from the mean value
+   */
+  private float countCorrection( float cnt )
+  {
+    return cnt/(COUNT_CORRECTION + cnt);
+  }
+
+  /** @return count-corrected percent deviation from mean
+   * @param cnt   samples count
+   * @param sum   samples sum
+   * @param val   sample value
+   */
+  private float percentDeviation( float cnt, float sum, float val )
+  {
+    return TDMath.abs( 100*( val * cnt - sum )/sum * cnt/(COUNT_CORRECTION + cnt) );
+  }
+
   /** @return percent difference from the mean acceleration
    * @param acc   testing acceleration
    */
   private float deltaAcc( float acc )
   {
-    return ( mAccelerationSum > 0 )? TDMath.abs( 100*( acc * mCountAcc - mAccelerationSum)/mAccelerationSum ) : 0;
+    return ( mAccelerationSum > 0 )? percentDeviation( mCountAcc, mAccelerationSum, acc) : 0;
   }
 
   /** @return percent difference from the mean magnetic field
@@ -260,12 +282,12 @@ class Accuracy
    */
   private float deltaMag( float mag )
   {
-    return ( mMagneticSum > 0 )? TDMath.abs( 100*( mag * mCountMag - mMagneticSum)/mMagneticSum ) : 0;
+    return ( mMagneticSum > 0 )? percentDeviation( mCountMag, mMagneticSum, mag ) : 0;
   }
 
   /** @return absolute difference from the mean magnetic dip [degrees]
    * @param dip   testing magnetic dip [degrees]
    */
-  private float deltaDip( float dip ) { return TDMath.abs( dip - mDipSum/mCountDip ); }
+  private float deltaDip( float dip ) { return TDMath.abs( dip - mDipSum/mCountDip ) * countCorrection( mCountDip ); }
 
 }
