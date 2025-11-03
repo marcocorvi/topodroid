@@ -26,6 +26,12 @@ import java.util.Map;
 
 class SurveyAccuracy
 {
+  /** the class SurveyAccuracy contains a hashmap of Accuracy class 
+   * indexed by the device MAC.
+   * The Accuracy calsses are used to compute the shots accuracy.
+   * Shot data balcks contribute to the Accuracy of their MAC address,
+   * and the shot accuracy is computed using the Accuracy of their MAC address.
+   */
   private HashMap< String, Accuracy > mAccuracies;
 
   /** default cstr
@@ -46,6 +52,9 @@ class SurveyAccuracy
     setBlocks( blks );
   }
 
+  /** @return the Accuracy class of the block MAC address
+   * @param blk   shot data block
+   */
   private Accuracy getBlockAccuracy( DBlock blk )
   {
     if ( blk == null ) return null;
@@ -76,6 +85,7 @@ class SurveyAccuracy
 
   /** add a block to the existing means
    * @param blk  shot data
+   * [ @note blocks are added when they arrive to the app ]
    */
   void addBlockAMD( DBlock blk ) 
   {
@@ -86,7 +96,7 @@ class SurveyAccuracy
     if ( device == null || device.isEmpty() ) return;
     Accuracy accu = getBlockAccuracy( blk );
     if ( accu == null ) {
-      // TDLog.v("ACCU new " + device );
+      TDLog.v("ACCU new " + device );
       accu = new Accuracy( device );
       mAccuracies.put( device, accu );
     }

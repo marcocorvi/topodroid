@@ -858,12 +858,24 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       } else if ( b.isMainLeg() && b.mLength < TDSetting.mMinLegLength ) {
         tvLength.setBackgroundColor( TDColor.BROWN );
       } else if ( mParent.isBlockMagneticBad( b ) ) {
+        // TDLog.v("Block " + b.mId + " is AMD bad" );
         tvLength.setBackgroundColor( TDColor.DARK_RED );
       } else {
         tvLength.setBackgroundColor( TDColor.BLACK );
       }
     }
   } // ViewHolder
+
+  /** refresh the colors of a shot view
+   * @param view  shot display view
+   */
+  void refreshViewColors( View v )
+  {
+    ViewHolder holder = (ViewHolder) v.getTag();
+    if ( holder == null ) return;
+    holder.setColor( holder.mBlock );
+  }
+
 
   /** @return the view for a position
    * @param pos         position
@@ -878,6 +890,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   public View getView( int pos, View convertView, ViewGroup parent )
   {
     DBlock b = (DBlock)(getItem( pos ));
+    // recompute accuracy of the block
 
     ViewHolder holder; // = null;
     if ( convertView == null ) {

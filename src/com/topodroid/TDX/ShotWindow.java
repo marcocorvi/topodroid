@@ -527,10 +527,11 @@ public class ShotWindow extends Activity
 
       mList.post( new Runnable() {
         @Override public void run() {
-          // TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
+          TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
           // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
           mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
           mList.setSelection( mDataAdapter.getCount() - 1 );
+          refreshShotViews();
         }
       } );
       // mList.invalidate();
@@ -3275,6 +3276,17 @@ public class ShotWindow extends Activity
     float sd = g.y * m.z - g.z * m.y; // this is ec[0];
     float cd = m.x - g.x * g.dot( m );
     return TDMath.atan2d( sd, cd );
+  }
+
+  /** refresh the colors of the shot views
+   */
+  void refreshShotViews()
+  {
+    int cnt = mList.getChildCount();
+    // TDLog.v("Child view " + cnt );
+    for ( int i = 0; i < cnt; ++i ) { // refresh view colors
+      mDataAdapter.refreshViewColors( mList.getChildAt( i ) );
+    } 
   }
 
 

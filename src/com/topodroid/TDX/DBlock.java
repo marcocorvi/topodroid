@@ -545,7 +545,7 @@ public class DBlock
     return false;
   }
 
-  /** set the color of the background
+  /** set the color of the background of the view of this block
    * @param color   new background color
    */
   void setBackgroundColor( int color ) { if ( mView != null ) mView.setBackgroundColor( color ); }
