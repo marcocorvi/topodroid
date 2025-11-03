@@ -248,8 +248,12 @@ class Accuracy
   }
 
 
-  // the count correction is used to reduce deviations from the mean value
-  private static float COUNT_CORRECTION = 20.0f;
+  // The count correction is used to reduce deviations from the mean value 
+  // usig a simple heuristics
+  // For example after 8 samples the percent deviation is reduced to half its value
+  // after 16 samples to 2/3 its value, 
+  // after 24 samples to 3/4 its value, and so on
+  private static float COUNT_CORRECTION = 8.0f;
 
   /** @return scale factor for small counts
    * the scale factor is less than 1 and is used to reduce deviations from the mean value
