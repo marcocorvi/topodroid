@@ -146,4 +146,14 @@ class SurveyAccuracy
   //   stat.averageM = mMagneticSum / mCountMag;
   //   return nr;
   // } 
+
+  void debug()
+  {
+    TDLog.v("Survey Accuracy - size " + mAccuracies.size() );
+    for ( String key : mAccuracies.keySet() ) {
+      Accuracy acc = (Accuracy)(mAccuracies.get( key ));
+      TDLog.v( acc.toString() );
+    }
+  }
+
 }

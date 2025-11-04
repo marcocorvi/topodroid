@@ -59,10 +59,26 @@ class Accuracy
    */
   boolean isBlockAMDBad( DBlock blk )
   {
-    if ( blk.mAcceleration < THRS || blk.mMagnetic < THRS ) return false; // block without G,M,Dip
-    return deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr
-        || deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr
-        || deltaDip( blk.mDip )          > TDSetting.mDipThr;
+    if ( blk.mAcceleration < THRS || blk.mMagnetic < THRS ) {
+      TDLog.e("Accu block below threshold " + blk.mAcceleration + " " + blk.mMagnetic );
+      return false; // block without G,M,Dip
+    }
+    // return deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr
+    //     || deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr
+    //     || deltaDip( blk.mDip )          > TDSetting.mDipThr;
+    if ( deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr ) {
+      TDLog.v( "Accu block " + blk.mId + " BAD mag");
+      return true;
+    }
+    if ( deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr ) {
+      TDLog.v( "Accu block " + blk.mId + " BAD acc");
+      return true;
+    }
+    if ( deltaDip( blk.mDip )          > TDSetting.mDipThr ) {
+      TDLog.v( "Accu block " + blk.mId + " BAD dip");
+      return true;
+    }
+    return false;
   }
   
   /** @return the string with how much the data differ from the means
@@ -149,6 +165,7 @@ class Accuracy
   {
     mDipSum   += dip;
     mCountDip += 1.0f;
+    TDLog.v("Accu [*] dip " + dip + " cnt " +  mCountDip );
   }
 
   /** @return weighted average of differences of per-device value minus mean 
@@ -314,5 +331,8 @@ class Accuracy
    * @param dip   testing magnetic dip [degrees]
    */
   private float deltaDip( float dip ) { return TDMath.abs( dip - mDipSum/mCountDip ) * countCorrection( mCountDip ); }
+
+  // DEBUG
+  public String toString() { return "Accu: " + mCountAcc + " " + mCountMag + " " + mCountDip; }
 
 }

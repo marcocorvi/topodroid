@@ -437,9 +437,10 @@ public class ShotWindow extends Activity
       if ( ! mDataAdapter.isMultiSelect() ) { // FIXME 2024-11-15 check if causes errors
         TDLog.v("update display updates shot list: " + mMyBlocks.size() );
         updateShotList( mMyBlocks, mMyPhotos );
+        mSurveyAccuracy.debug();
         ret = 2;
       } else {
-        TDLog.v("update display updates shot list: " + mMyBlocks.size() + " adapter is multiselect" );
+        // TDLog.v("update display updates shot list: " + mMyBlocks.size() + " adapter is multiselect" );
         ret = 1;
       }
       setTheTitle( );
@@ -505,6 +506,8 @@ public class ShotWindow extends Activity
     }
     if ( ! blk.isScan() ) { // normal data
       mSurveyAccuracy.addBlockAMD( blk );
+      boolean ret = mDataAdapter.updateBlockAMD( blk );
+      TDLog.v( "update block AMD " + ret );
       mList.post( new Runnable() {
         @Override public void run() {
           TDLog.v( "list runnable: notify data set AMD changed " + mDataAdapter.getCount() );
@@ -613,7 +616,7 @@ public class ShotWindow extends Activity
    */
   private void processShotList( List< DBlock > list )
   {
-    // TDLog.v( TAG + "process shot list - recent " + mFlagLatest );
+    int cnt = 0;
     DBlock prev = null;
     boolean prev_is_leg = false;
     boolean check_recent = TDSetting.mShotRecent && mFlagLatest;
@@ -650,6 +653,7 @@ public class ShotWindow extends Activity
         } else { // do not hide extra leg-shots
           if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
             if ( ! prev_is_leg ) {
+              ++cnt;
               mDataAdapter.add( prev );
               prev_is_leg = true;
             // } else {
@@ -682,8 +686,10 @@ public class ShotWindow extends Activity
       }
       // TDLog.Log( TDLog.LOG_SHOT, "adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
       // TDLog.v( TAG + "adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+      ++cnt;
       mDataAdapter.add( cur );
     }
+    TDLog.v( "process shot list added " + cnt );
   }
 
   // ---------------------------------------------------------------
@@ -3317,7 +3323,7 @@ public class ShotWindow extends Activity
   void refreshShotViews()
   {
     int cnt = mList.getChildCount();
-    // TDLog.v("Child view " + cnt );
+    TDLog.v("refresh shot child views " + cnt );
     for ( int i = 0; i < cnt; ++i ) { // refresh view colors
       mDataAdapter.refreshViewColors( mList.getChildAt( i ) );
     } 

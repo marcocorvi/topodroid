@@ -872,7 +872,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   void refreshViewColors( View v )
   {
     ViewHolder holder = (ViewHolder) v.getTag();
-    if ( holder == null ) return;
+    if ( holder == null ) {
+      TDLog.e( "DBlockAdapter: view without holder");
+      return;
+    }
+    TDLog.v( "DBlockAdapter: view holder block " + ((holder.mBlock == null)? "null " : holder.mBlock.mId + " " + mParent.isBlockMagneticBad( holder.mBlock ) ) );
     holder.setColor( holder.mBlock );
   }
 
@@ -1100,6 +1104,24 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         ++pos;
       }
     }
+  }
+
+  /** update a block AMD
+   * @param blk    block with updated values
+   * @return true if a block has been updated
+   */
+  boolean updateBlockAMD( DBlock blk )
+  {
+    int pos = getCount();
+    while (pos > 0 ) {
+      -- pos;
+      DBlock b = (DBlock)getItem(pos);
+      if ( blk.mId == b.mId ) {
+        b.updateAMD( blk );
+        return true;
+      }
+    }
+    return false;
   }
 
 }

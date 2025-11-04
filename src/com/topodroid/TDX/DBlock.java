@@ -1124,6 +1124,16 @@ public class DBlock
     float d = (v1.minus(v2)).length();
     mFailBacksplay = ( d/alen + d/blen > 2 * TDSetting.mCloseDistance );
   }
+
+  /** update AMD from another block
+   * @param b    data block
+   */
+  void updateAMD( DBlock b )
+  {
+    mAcceleration = b.mAcceleration;
+    mMagnetic     = b.mMagnetic;
+    mDip          = b.mDip;
+  }
     
 
 }
