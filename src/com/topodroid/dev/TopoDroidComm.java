@@ -188,24 +188,16 @@ public class TopoDroidComm
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);
       //
-      if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
-        TDLog.v("Cavway send UPDATE " + mLastShotId );
-        Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
-        Bundle bundle = new Bundle();
-        bundle.putLong(Lister.BLOCK_ID, mLastShotId);
-        msg.setData(bundle);
-        lister.sendMessage(msg);
-        if (TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10) {
-          TDUtil.slowDown(TDSetting.mWaitData);
-        }
-      }
+
+      // this only updates the mBcakshot: it could be done in the previous call
       TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
       if (TDSetting.mWaitData > 10) {
         TDUtil.slowDown(TDSetting.mWaitData);
       }
-      if (lister != null) { // FIXME_LISTER the two messages could be joined into one
-        TDLog.v("Cavway send AMD " + mLastShotId );
-        Message msg = lister.obtainMessage(Lister.LIST_AMD);
+
+      if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
+        TDLog.v("Cavway send UPDATE " + mLastShotId );
+        Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
         Bundle bundle = new Bundle();
         bundle.putLong(Lister.BLOCK_ID, mLastShotId);
         msg.setData(bundle);

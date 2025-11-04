@@ -541,8 +541,10 @@ public class ShotWindow extends Activity
       boolean scan = blk.isScan();
       boolean ret = false;
       if ( ! scan ) { // normal data
-        // 2025-11-04 moved to updateBlockAMDList
-        // mSurveyAccuracy.addBlockAMD( blk );
+        // 2025-11-04 moved to updateBlockAMDList for X2 and XBLE
+        if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 ) {
+          mSurveyAccuracy.addBlockAMD( blk );
+        }
 
         // mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
