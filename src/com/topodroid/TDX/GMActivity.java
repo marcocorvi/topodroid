@@ -779,6 +779,13 @@ public class GMActivity extends Activity
     updateCBlockList( mApp_mDData.selectGM( blk_id, TDInstance.cid ) );
   }
 
+  /** update the block AMD - empty method
+   * @param blk_id    ID of the data block
+   */
+  @Override
+  public void updateBlockAMDList( long blk_id ) { }
+   
+
   /** set the reference azimuth for survey data - empty method
    * @param azimuth      azimuth
    * @param fixed_extend whether the extend is kept fixed

@@ -77,6 +77,10 @@ class ListerSetHandler extends ListerHandler
         // TDUtil.slowDown( (int)(400 + Math.random() * 600) );
         for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
         break;
+      case Lister.LIST_AMD:
+        blk_id = bundle.getLong( Lister.BLOCK_ID );
+        for ( ILister lister : mListers ) lister.updateBlockAMDList( blk_id );
+        break;
       case Lister.LIST_REF_AZIMUTH:
         float azimuth =  bundle.getFloat( Lister.AZIMUTH );
         long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );

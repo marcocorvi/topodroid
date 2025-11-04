@@ -82,6 +82,7 @@ class Accuracy
    */
   void addBlockAMD( DBlock blk ) 
   {
+    TDLog.v("Accuracy " + mDevice + " add block " + blk.mId + " counts " + mCountAcc + " " + mCountMag + " " + mCountDip );
     if ( mCountAcc > 0 ) {
       addBlockAcc( blk.mAcceleration, mAccelerationSum / mCountAcc );
     } else {
@@ -102,25 +103,45 @@ class Accuracy
 
   private void addBlockAcc( float acc, float mean ) 
   {
-    float r = BND_1 * acc / mean - BND_2;
-    if ( r >= 1.0f ) {
+    if ( mean < 0.01f || mCountAcc < 1.0f ) {
       mAccelerationSum += acc;
       mCountAcc += 1.0f;
-    } else if ( r > 0.0f ) {
-      mAccelerationSum += acc * r;
-      mCountAcc += r;
+      TDLog.v("Accu [1] accel " + acc + " mean " + mean + " cnt " + mCountAcc );
+    } else {
+      float r = BND_1 * acc / mean - BND_2;
+      if ( r >= 1.0f ) {
+        mAccelerationSum += acc;
+        mCountAcc += 1.0f;
+        TDLog.v("Accu [2] accel " + acc + " mean " + mean + " cnt " + mCountAcc + " r " + r );
+      } else if ( r > 0.0f ) {
+        mAccelerationSum += acc * r;
+        mCountAcc += r;
+        TDLog.v("Accu [3] accel " + acc + " mean " + mean + " cnt " + mCountAcc + " r " + r );
+      } else {
+        TDLog.v("Accu [4] accel " + acc + " mean " + mean + " r " + r );
+      }
     }
   }
 
   private void addBlockMag( float mag, float mean ) 
   {
-    float r = BND_1 * mag / mean - BND_2;
-    if ( r >= 1.0f ) {
+    if ( mean < 0.01f || mCountMag < 1.0f ) {
       mMagneticSum += mag;
       mCountMag += 1.0f;
-    } else if ( r > 0.0f ) {
-      mMagneticSum += mag * r;
-      mCountMag += r;
+      TDLog.v("Accu [1] mag " + mag + " mean " + mean + " cnt " +  mCountMag );
+    } else {
+      float r = BND_1 * mag / mean - BND_2;
+      if ( r >= 1.0f ) {
+        mMagneticSum += mag;
+        mCountMag += 1.0f;
+        TDLog.v("Accu [2] mag " + mag + " mean " + mean + " cnt " +  mCountMag + " r " + r );
+      } else if ( r > 0.0f ) {
+        mMagneticSum += mag * r;
+        mCountMag += r;
+        TDLog.v("Accu [3] mag " + mag + " mean " + mean + " cnt " +  mCountMag + " r " + r );
+      } else {
+        TDLog.v("Accu [4] mag " + mag + " mean " + mean + " r " + r );
+      }
     }
   }
 

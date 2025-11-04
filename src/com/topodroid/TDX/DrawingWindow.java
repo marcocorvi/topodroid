@@ -8373,6 +8373,18 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** forward the update AMD request to the Shot Window
+   * @param blk_id    data block id
+   */
+  @Override
+  public void updateBlockAMDList( long blk_id )
+  {
+    // TDLog.v("DRAWING " + TDLog.threadId() + " update block list" );
+    if ( TopoDroidApp.mShotWindow != null ) {
+      TopoDroidApp.mShotWindow.updateBlockAMDList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
+    }
+  }
+
   /** handle data update notifications
    * @param blk_id  update starting with this blk id
    * @param got_leg whether the latest splay is actually a leg

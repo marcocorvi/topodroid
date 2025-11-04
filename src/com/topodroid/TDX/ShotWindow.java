@@ -33,7 +33,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.ConnectionState;
-// import com.topodroid.dev.Device;
+import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.dev.DataType;
 import com.topodroid.common.PlotType;
@@ -490,6 +490,34 @@ public class ShotWindow extends Activity
     // updateDisplay( );
   }
 
+  /** udate block list AMD with a new block
+   * @param blk_id   ID of the new block
+   * @note only X2 and XBLE
+   */
+  @Override
+  synchronized public void updateBlockAMDList( long blk_id )
+  {
+    assert( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE  );
+    DBlock blk = mApp_mData.selectTheShot( blk_id, TDInstance.sid );
+    if ( blk == null ) {
+      // TDLog.v( TAG + "data null block");
+      return;
+    }
+    if ( ! blk.isScan() ) { // normal data
+      mSurveyAccuracy.addBlockAMD( blk );
+      mList.post( new Runnable() {
+        @Override public void run() {
+          TDLog.v( "list runnable: notify data set AMD changed " + mDataAdapter.getCount() );
+          // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
+          mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
+          mList.setSelection( mDataAdapter.getCount() - 1 );
+          refreshShotViews();
+        }
+      } );
+      // mList.invalidate();
+    }
+  }
+
   /** add a block to the adapter (ILister interface)
    * @param blk_id   block ID
    * @note called by the RFcommThread after receiving a data packet
@@ -513,7 +541,9 @@ public class ShotWindow extends Activity
       boolean scan = blk.isScan();
       boolean ret = false;
       if ( ! scan ) { // normal data
-        mSurveyAccuracy.addBlockAMD( blk );
+        // 2025-11-04 moved to updateBlockAMDList
+        // mSurveyAccuracy.addBlockAMD( blk );
+
         // mNrDevices = mApp_mData.getCountDevices( TDInstance.sid );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           // FIXME UNTESTED it was: ret = mApp.assignStationsAll( mDataAdapter.getItems( ) ); 
@@ -525,15 +555,17 @@ public class ShotWindow extends Activity
         // TDLog.v( TAG + "data shot window block " + blk.mId + " station assign return " + ret );
       }
 
-      mList.post( new Runnable() {
-        @Override public void run() {
-          TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
-          // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
-          mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
-          mList.setSelection( mDataAdapter.getCount() - 1 );
-          refreshShotViews();
-        }
-      } );
+      if ( ! ( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE  ) ) {
+        mList.post( new Runnable() {
+          @Override public void run() {
+            TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
+            // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
+            mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
+            mList.setSelection( mDataAdapter.getCount() - 1 );
+            refreshShotViews();
+          }
+        } );
+      }
       // mList.invalidate();
       // mDataAdapter.reviseLatest();
       if ( ret || scan ) { // always update when a leg is received 

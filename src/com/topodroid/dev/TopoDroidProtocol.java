@@ -162,8 +162,8 @@ public class TopoDroidProtocol
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
     byte type = (byte)(buffer[0] & 0x3f);
     // TDLog.v( "TD proto: handle packet: type " + type );
-    TDLog.v( "TD proto: handle packet type " + type + " " + packetType[ type & 0x7 ] + ": " +
-         String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
+    // TDLog.v( "TD proto: handle packet type " + type + " " + packetType[ type & 0x7 ] + ": " +
+    //      String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
     // int high, low;
     switch ( type ) {
@@ -227,7 +227,7 @@ public class TopoDroidProtocol
           if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
           if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
           if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
-          TDLog.v( "Proto packet G " + String.format(Locale.US, " %d %d %d", mGX, mGY, mGZ ) );
+          // TDLog.v( "Proto packet G " + String.format(Locale.US, " %d %d %d", mGX, mGY, mGZ ) );
           return DataType.PACKET_G;
         }
         break;
@@ -239,7 +239,7 @@ public class TopoDroidProtocol
           if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
           if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
           if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
-          TDLog.v( "Proto packet M " + String.format(Locale.US, " %d %d %d", mMX, mMY, mMZ ) );
+          // TDLog.v( "Proto packet M " + String.format(Locale.US, " %d %d %d", mMX, mMY, mMZ ) );
           return DataType.PACKET_M;
         }
         break;

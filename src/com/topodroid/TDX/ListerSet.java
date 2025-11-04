@@ -66,6 +66,15 @@ class ListerSet implements ILister
     for ( ILister lister : mLister ) lister.updateBlockList( blk_id );
   }
 
+  /** forward list update AMD to the listers in the set
+   * @param blk_id  block ID
+   */
+  public void updateBlockAMDList( long blk_id ) 
+  {
+    // if ( TDLog.isStreamFile() ) TDLog.e("LISTER AMD " + TDLog.threadId() + " update block list: blk id " + blk_id );
+    for ( ILister lister : mLister ) lister.updateBlockAMDList( blk_id );
+  }
+
   /** forward the connection status update to the listers in the set
    * @param status  new connection status
    */

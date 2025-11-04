@@ -83,6 +83,9 @@ public class PhotoListDialog extends MyDialog
   public void updateBlockList( long blk_id ) { }
   
   @Override
+  public void updateBlockAMDList( long blk_id ) { }
+
+  @Override
   public void setConnectionStatus( int status ) { }
 
   @Override

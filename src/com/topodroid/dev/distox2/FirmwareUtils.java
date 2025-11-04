@@ -82,13 +82,13 @@ public class FirmwareUtils
       // SIWEI FIXME
       skip = OFFSET_TIAN - offset; // already assigned
       if ( dis.skipBytes( skip ) != skip ) {
-        TDLog.v( "failed tian skip");
+        TDLog.v( "FW failed tian skip");
         return 0; // skip 8 bootloader blocks
       }
       offset += skip;
       byte[] buf = new byte[SIGNATURE_SIZE];
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        TDLog.v( "failed tian read");
+        TDLog.v( "FW failed tian read");
         return 0;
       }
       if ( verifySignatureTian( buf ) == SIGNATURE_SIZE ) {
@@ -99,11 +99,11 @@ public class FirmwareUtils
 
       skip = OFFSET_HEEB - offset; // 1984 = 2048 - (0 + 64)
       if ( dis.skipBytes( skip ) != skip ) {  // skip to 2048: heeb bootloader blocks
-        TDLog.v( "failed heeb skip");
+        TDLog.v( "FW failed heeb skip");
         return 0;
       }
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        TDLog.v( "failed heeb read");
+        TDLog.v( "FW failed heeb read");
         return 0;
       }
       if ( verifySignatureHeeb( buf ) == SIGNATURE_SIZE ) {
@@ -114,11 +114,11 @@ public class FirmwareUtils
 
       skip = OFFSET_LANDOLT - offset; // 1984 = 4096 - (2048 + 64)
       if ( dis.skipBytes( skip ) != skip ) { // skip to 4096: landolt bootloader blocks
-        TDLog.v( "failed landolt skip");
+        TDLog.v( "FW failed landolt skip");
         return 0; 
       }
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        TDLog.v( "failed landolt read");
+        TDLog.v( "FW failed landolt read");
         return 0;
       }
       if ( verifySignatureLandolt( buf ) == SIGNATURE_SIZE ) {
@@ -175,7 +175,7 @@ public class FirmwareUtils
       }
       fis.close();
     } catch ( IOException e ) {
-      TDLog.v( "check " + fw_version + ": IO exception " + e.getMessage() );
+      TDLog.v( "FW check " + fw_version + ": IO exception " + e.getMessage() );
       return false;
     }
     TDLog.v( "FW check " + fw_version + " checksum: " + String.format("%08x", checksum) );
@@ -206,15 +206,15 @@ public class FirmwareUtils
   static int getDeviceHardwareSignature( byte[] signature )
   {
     if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
-      TDLog.v( "device hw HEEB" );
+      TDLog.v( "FW device hw HEEB" );
       return HW_HEEB;
     }
     if ( verifySignatureLandolt( signature ) == SIGNATURE_SIZE ) {
-      TDLog.v( "device hw LANDOLT" );
+      TDLog.v( "FW device hw LANDOLT" );
       return HW_LANDOLT;
     }
     if ( verifyHardwareSignatureTian( signature ) == SIGNATURE_SIZE ) {
-      TDLog.v( "device hw TIAN" );
+      TDLog.v( "FW device hw TIAN" );
       return HW_TIAN;
     }
     return HW_NONE;

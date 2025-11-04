@@ -95,8 +95,13 @@ public class ListerHandler extends Handler
           break;
         case Lister.LIST_UPDATE:
           long blk_id = bundle.getLong( Lister.BLOCK_ID );
-          if ( TDLog.isStreamFile() ) TDLog.e("LISTER " + TDLog.threadId() + " lister " + this.toString() + " blk id " + blk_id );
+          if ( TDLog.isStreamFile() ) TDLog.e("LISTER BLK " + TDLog.threadId() + " lister " + this.toString() + " blk id " + blk_id );
           mLister.updateBlockList( blk_id );
+          break;
+        case Lister.LIST_AMD:
+          blk_id = bundle.getLong( Lister.BLOCK_ID );
+          if ( TDLog.isStreamFile() ) TDLog.e("LISTER AMD " + TDLog.threadId() + " lister " + this.toString() + " blk id " + blk_id );
+          mLister.updateBlockAMDList( blk_id );
           break;
         case Lister.LIST_REF_AZIMUTH:
           float azimuth =  bundle.getFloat( Lister.AZIMUTH );

@@ -36,6 +36,14 @@ public interface ILister
    */
   void updateBlockList( long blk_id );
 
+  /** 
+   * @param blk_id id (of the data-block) from which to update the AMD
+   *
+   *  updateBlockList is called by
+   *   - ListerHandler.handleMessage Lister.BLOCK_ID
+   */
+  void updateBlockAMDList( long blk_id );
+
   /**
    * @param status   current status ( 0: off,  1: on,  2: wait )A
    *
