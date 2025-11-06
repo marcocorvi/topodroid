@@ -435,9 +435,9 @@ public class ShotWindow extends Activity
       // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
       mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
       if ( ! mDataAdapter.isMultiSelect() ) { // FIXME 2024-11-15 check if causes errors
-        TDLog.v("update display updates shot list: " + mMyBlocks.size() );
+        // TDLog.v("update display updates shot list: " + mMyBlocks.size() );
         updateShotList( mMyBlocks, mMyPhotos );
-        mSurveyAccuracy.debug();
+        // mSurveyAccuracy.debug();
         ret = 2;
       } else {
         // TDLog.v("update display updates shot list: " + mMyBlocks.size() + " adapter is multiselect" );
@@ -506,11 +506,11 @@ public class ShotWindow extends Activity
     }
     if ( ! blk.isScan() ) { // normal data
       mSurveyAccuracy.addBlockAMD( blk );
-      boolean ret = mDataAdapter.updateBlockAMD( blk );
-      TDLog.v( "update block AMD " + ret );
+      mDataAdapter.updateBlockAMD( blk ); // copy blk AMD to the block in the adapter
+      // TDLog.v( "update block AMD " + ret );
       mList.post( new Runnable() {
         @Override public void run() {
-          TDLog.v( "list runnable: notify data set AMD changed " + mDataAdapter.getCount() );
+          // TDLog.v( "list runnable: notify data set AMD changed " + mDataAdapter.getCount() );
           // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
           mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
           mList.setSelection( mDataAdapter.getCount() - 1 );
@@ -563,7 +563,7 @@ public class ShotWindow extends Activity
       if ( ! ( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE  ) ) {
         mList.post( new Runnable() {
           @Override public void run() {
-            TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
+            // TDLog.v( "list runnable: notify data set changed " + mDataAdapter.getCount() );
             // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
             mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
             mList.setSelection( mDataAdapter.getCount() - 1 );
@@ -689,7 +689,7 @@ public class ShotWindow extends Activity
       ++cnt;
       mDataAdapter.add( cur );
     }
-    TDLog.v( "process shot list added " + cnt );
+    // TDLog.v( "process shot list added " + cnt );
   }
 
   // ---------------------------------------------------------------
@@ -1926,7 +1926,7 @@ public class ShotWindow extends Activity
         }
       }
     } else {
-      TDLog.v("view not button");
+      TDLog.e("view not button");
     }
   }
 
@@ -3323,7 +3323,7 @@ public class ShotWindow extends Activity
   void refreshShotViews()
   {
     int cnt = mList.getChildCount();
-    TDLog.v("refresh shot child views " + cnt );
+    // TDLog.v("refresh shot child views " + cnt );
     for ( int i = 0; i < cnt; ++i ) { // refresh view colors
       mDataAdapter.refreshViewColors( mList.getChildAt( i ) );
     } 

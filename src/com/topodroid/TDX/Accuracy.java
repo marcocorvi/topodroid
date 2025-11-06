@@ -67,15 +67,15 @@ class Accuracy
     //     || deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr
     //     || deltaDip( blk.mDip )          > TDSetting.mDipThr;
     if ( deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr ) {
-      TDLog.v( "Accu block " + blk.mId + " BAD mag");
+      // TDLog.v( "Accu block " + blk.mId + " BAD mag");
       return true;
     }
     if ( deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr ) {
-      TDLog.v( "Accu block " + blk.mId + " BAD acc");
+      // TDLog.v( "Accu block " + blk.mId + " BAD acc");
       return true;
     }
     if ( deltaDip( blk.mDip )          > TDSetting.mDipThr ) {
-      TDLog.v( "Accu block " + blk.mId + " BAD dip");
+      // TDLog.v( "Accu block " + blk.mId + " BAD dip");
       return true;
     }
     return false;
@@ -98,7 +98,7 @@ class Accuracy
    */
   void addBlockAMD( DBlock blk ) 
   {
-    TDLog.v("Accuracy " + mDevice + " add block " + blk.mId + " counts " + mCountAcc + " " + mCountMag + " " + mCountDip );
+    // TDLog.v("Accuracy " + mDevice + " add block " + blk.mId + " counts " + mCountAcc + " " + mCountMag + " " + mCountDip );
     if ( mCountAcc > 0 ) {
       addBlockAcc( blk.mAcceleration, mAccelerationSum / mCountAcc );
     } else {
@@ -122,19 +122,19 @@ class Accuracy
     if ( mean < 0.01f || mCountAcc < 1.0f ) {
       mAccelerationSum += acc;
       mCountAcc += 1.0f;
-      TDLog.v("Accu [1] accel " + acc + " mean " + mean + " cnt " + mCountAcc );
+      // TDLog.v("Accu [1] accel " + acc + " mean " + mean + " cnt " + mCountAcc );
     } else {
       float r = BND_1 * acc / mean - BND_2;
       if ( r >= 1.0f ) {
         mAccelerationSum += acc;
         mCountAcc += 1.0f;
-        TDLog.v("Accu [2] accel " + acc + " mean " + mean + " cnt " + mCountAcc + " r " + r );
+        // TDLog.v("Accu [2] accel " + acc + " mean " + mean + " cnt " + mCountAcc + " r " + r );
       } else if ( r > 0.0f ) {
         mAccelerationSum += acc * r;
         mCountAcc += r;
-        TDLog.v("Accu [3] accel " + acc + " mean " + mean + " cnt " + mCountAcc + " r " + r );
-      } else {
-        TDLog.v("Accu [4] accel " + acc + " mean " + mean + " r " + r );
+        // TDLog.v("Accu [3] accel " + acc + " mean " + mean + " cnt " + mCountAcc + " r " + r );
+      // } else {
+      //   TDLog.v("Accu [4] accel " + acc + " mean " + mean + " r " + r );
       }
     }
   }
@@ -144,19 +144,19 @@ class Accuracy
     if ( mean < 0.01f || mCountMag < 1.0f ) {
       mMagneticSum += mag;
       mCountMag += 1.0f;
-      TDLog.v("Accu [1] mag " + mag + " mean " + mean + " cnt " +  mCountMag );
+      // TDLog.v("Accu [1] mag " + mag + " mean " + mean + " cnt " +  mCountMag );
     } else {
       float r = BND_1 * mag / mean - BND_2;
       if ( r >= 1.0f ) {
         mMagneticSum += mag;
         mCountMag += 1.0f;
-        TDLog.v("Accu [2] mag " + mag + " mean " + mean + " cnt " +  mCountMag + " r " + r );
+        // TDLog.v("Accu [2] mag " + mag + " mean " + mean + " cnt " +  mCountMag + " r " + r );
       } else if ( r > 0.0f ) {
         mMagneticSum += mag * r;
         mCountMag += r;
-        TDLog.v("Accu [3] mag " + mag + " mean " + mean + " cnt " +  mCountMag + " r " + r );
-      } else {
-        TDLog.v("Accu [4] mag " + mag + " mean " + mean + " r " + r );
+        // TDLog.v("Accu [3] mag " + mag + " mean " + mean + " cnt " +  mCountMag + " r " + r );
+      // } else {
+      //   TDLog.v("Accu [4] mag " + mag + " mean " + mean + " r " + r );
       }
     }
   }
@@ -165,7 +165,7 @@ class Accuracy
   {
     mDipSum   += dip;
     mCountDip += 1.0f;
-    TDLog.v("Accu [*] dip " + dip + " cnt " +  mCountDip );
+    // TDLog.v("Accu [*] dip " + dip + " cnt " +  mCountDip );
   }
 
   /** @return weighted average of differences of per-device value minus mean 

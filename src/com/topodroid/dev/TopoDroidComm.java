@@ -196,7 +196,7 @@ public class TopoDroidComm
       }
 
       if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
-        TDLog.v("Cavway send UPDATE " + mLastShotId );
+        // TDLog.v("Cavway send UPDATE " + mLastShotId );
         Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
         Bundle bundle = new Bundle();
         bundle.putLong(Lister.BLOCK_ID, mLastShotId);
@@ -273,7 +273,7 @@ public class TopoDroidComm
       //   }
       // }
       if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
-        TDLog.v("send UPDATE message shot id " +  mLastShotId ); 
+        // TDLog.v("send UPDATE message shot id " +  mLastShotId ); 
         Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
         Bundle bundle = new Bundle();
         bundle.putLong( Lister.BLOCK_ID, mLastShotId );
@@ -380,7 +380,7 @@ public class TopoDroidComm
           TDUtil.slowDown( TDSetting.mWaitData );
         }
         if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
-          TDLog.v("send AMD message shot id " +  mLastShotId ); 
+          // TDLog.v("send AMD message shot id " +  mLastShotId ); 
           Message msg = lister.obtainMessage( Lister.LIST_AMD );
           Bundle bundle = new Bundle();
           bundle.putLong( Lister.BLOCK_ID, mLastShotId );

@@ -96,7 +96,7 @@ class SurveyAccuracy
     if ( device == null || device.isEmpty() ) return;
     Accuracy accu = getBlockAccuracy( blk );
     if ( accu == null ) {
-      TDLog.v("ACCU new " + device );
+      // TDLog.v("ACCU new " + device );
       accu = new Accuracy( device );
       mAccuracies.put( device, accu );
     }
@@ -147,13 +147,13 @@ class SurveyAccuracy
   //   return nr;
   // } 
 
-  void debug()
-  {
-    TDLog.v("Survey Accuracy - size " + mAccuracies.size() );
-    for ( String key : mAccuracies.keySet() ) {
-      Accuracy acc = (Accuracy)(mAccuracies.get( key ));
-      TDLog.v( acc.toString() );
-    }
-  }
+  // void debug()
+  // {
+  //   // TDLog.v("Survey Accuracy - size " + mAccuracies.size() );
+  //   for ( String key : mAccuracies.keySet() ) {
+  //     Accuracy acc = (Accuracy)(mAccuracies.get( key ));
+  //     TDLog.v( acc.toString() );
+  //   }
+  // }
 
 }
