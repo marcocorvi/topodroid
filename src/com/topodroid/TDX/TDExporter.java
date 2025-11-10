@@ -3201,6 +3201,68 @@ public class TDExporter
     return ret;
   }
 
+  /** reorder shots as incresing series
+   * @param shots   array of shots
+   * @return list of stations
+   */
+  static private ArrayList < String > reorderShotsAsTopoRobot( ArrayList<DBlock> shots )
+  {
+    ArrayList < DBlock > ret = new ArrayList<>();
+    ArrayList< String > stations = new ArrayList<>();
+    int sr_max = 0;
+    for ( DBlock shot : shots ) {
+      int sr_from = getTrbSeries( shot.mFrom );
+      int sr_to   = getTrbSeries( shot.mTo );
+      if ( sr_from > sr_max ) sr_max = sr_from;
+      if ( sr_to   > sr_max ) sr_max = sr_to;
+    }
+    int unlinking = 0;
+    int nr = shots.size();
+    for ( int k1 = 0; k1 < nr; ++k1 ) {
+      if ( unlinking == nr - k1 ) {
+        TDLog.e("TROBOT disconnected survey - removing " + unlinking + " shots " + k1 + "/" + nr  );
+        for ( int k3 = k1; k3 < nr; ++k3 ) shots.remove( k1 );
+        break;
+      }
+      DBlock shot = shots.get( k1 );
+      if ( stations.isEmpty() ) {
+        stations.add( shot.mFrom );
+        stations.add( shot.mTo );
+        continue;
+      }
+      String from = shot.mFrom;
+      String to   = shot.mTo;
+      if ( stations.contains( to ) ) {
+        if ( stations.contains( from ) ) {
+          ++ sr_max;
+          shot.mTo   = Integer.toString(sr_max) + ".1";
+          for ( int k2 = k1+1; k2 < nr; ++k2 ) {
+            DBlock shot2 = shots.get( k2 );
+            if ( to.equals( shot2.mFrom ) ) shot2.mFrom = shot.mTo;
+            if ( to.equals( shot2.mTo   ) ) shot2.mTo   = shot.mTo;
+          }
+        } else { // reverse shot
+          shot.mFrom = to;
+          shot.mTo   = from;
+          shot.mBearing += 180; if ( shot.mBearing >= 360 ) shot.mBearing -= 360;
+          shot.mClino = -shot.mClino;
+        }
+      } else {
+        if ( ! stations.contains( from ) ) { // unlinked shot
+          shots.remove( shot );
+          shots.add( shot );
+          -- k1;
+          unlinking ++;
+          continue;
+        } else {
+          unlinking = 0;
+        }
+      }
+      stations.add( shot.mTo );
+    }
+    return stations;
+  }
+
   static TrbStruct makeTrbStations( List<DBlock> list )
   {
     TrbStruct trb = new TrbStruct();
@@ -3217,7 +3279,12 @@ public class TDExporter
       }
     }
     int nr = shots.size();
+    if ( nr == 0 ) return trb;
+    reorderShotsAsTopoRobot( shots );
+
     if ( trb.areStationsAllTopoRobot() ) {
+      TDLog.v("TROBOT after reorder " + nr + " " + shots.size() );
+      nr = shots.size();
       trb.copyStations();
       for ( DBlock shot : shots ) {
         String from = shot.mFrom;
@@ -3244,7 +3311,7 @@ public class TDExporter
           }
         }
       }
-    } else {
+    } else if ( nr > 0 ) {
       DBlock item = shots.get( 0 );
       String st = item.mFrom; // current station
       trb.put( st, "1.0" );
@@ -3254,45 +3321,56 @@ public class TDExporter
       int series = 1;
       int start_series = 1;
       int start_point  = 0;
+      DBlock single_shot = null;
       while ( repeat1 ) {
         repeat1 = false;
         TDLog.v("TRB make series " + series + " start " + start_series + "." + start_point );
         TrbSeries trb_series = new TrbSeries( series, start_series, start_point );
         trb.addSeries( trb_series );
-        int point  = 0;
-        boolean repeat2 = true;
-        while ( repeat2 ) {
-          repeat2 = false;
-          
-          for ( int k = 0; k < shots.size(); ) {
-            item = shots.get( k );
-            String from = item.mFrom;
-            String to   = item.mTo;
-            TDLog.v("TRB shot " + k + "/" + shots.size() + ": " + from + "-" + to );
-            if ( from.equals( st ) && trb.get( to ) == null ) {
-              point ++;
-              TDLog.v("TRB forward shot " + from + "-" + to + " put " + to + " as " + series + "." + point );
-              trb.put( to, String.format("%d.%d", series, point ) );
-              trb_series.appendShot( item, true );
-              st = to;
-              shots.remove( k );
-              repeat2 = true;
-              break;
-            } else if ( to.equals( st ) && trb.get( from ) == null ) {
-              point ++;
-              TDLog.v("TRB backward shot " + from + "-" + to + " put " + from + " as " + series + "." + point );
-              trb.put( from, String.format("%d.%d", series, point ) );
-              trb_series.appendShot( item, false );
-              st = from;
-              shots.remove( k );
-              repeat2 = true;
-              break;
-            } else {
-              ++k;
+        if ( single_shot != null ) {
+          trb_series.appendShot( item, true );
+          shots.remove( single_shot );
+          trb_series.setPoints( 1 );
+        } else { // regular series
+          int point  = 0;
+          boolean repeat2 = true;
+          while ( repeat2 ) {
+            repeat2 = false;
+            for ( int k = 0; k < shots.size(); ) {
+              item = shots.get( k );
+              String from = item.mFrom;
+              String to   = item.mTo;
+              TDLog.v("TRB shot " + k + "/" + shots.size() + ": " + from + "-" + to );
+              if ( from.equals( st ) && trb.get( to ) == null ) {
+                point ++;
+                TDLog.v("TRB forward shot " + from + "-" + to + " put " + to + " as " + series + "." + point );
+                trb.put( to, String.format("%d.%d", series, point ) );
+                trb_series.appendShot( item, true );
+                st = to;
+                shots.remove( k );
+                repeat2 = true;
+                break;
+              } else if ( to.equals( st ) && trb.get( from ) == null ) {
+                point ++;
+                TDLog.v("TRB backward shot " + from + "-" + to + " put " + from + " as " + series + "." + point );
+                trb.put( from, String.format("%d.%d", series, point ) );
+                trb_series.appendShot( item, false );
+                st = from;
+                shots.remove( k );
+                repeat2 = true;
+                break;
+              } else {
+                ++k;
+              }
             }
           }
+          trb_series.setPoints( point );
         }
-        trb_series.setPoints( point );
+ 
+        if ( shots.size() == 0 ) {
+          TDLog.v("TRB finished shots");
+          break;
+        }
 
         TDLog.v("TRB check new series. shots " + shots.size() );
         boolean found = false;
@@ -3306,6 +3384,7 @@ public class TDExporter
           if ( spf != null && spt == null ) { // new series
             ++ series;
             repeat1 = true;
+            single_shot = null;
             start_series = getTrbSeries( spf );
             start_point  = getTrbStation( spf );
             st = from;
@@ -3315,12 +3394,22 @@ public class TDExporter
           } else if ( spt != null && spf == null ) { // new series
             ++ series;
             repeat1 = true;
+            single_shot = null;
             start_series = getTrbSeries( spt );
             start_point  = getTrbStation( spt );
             st = to;
             found = true;
             TDLog.v("TRB new series T " + series + " from " + st + " = " + spt );
             break;
+          } else if ( spt != null && spf != null ) { // close loop single-shot series
+            ++ series;
+            repeat1 = true;
+            single_shot = item;
+            start_series = getTrbSeries( spf );
+            start_point  = getTrbStation( spf );
+            st = from;
+            found = true;
+            TDLog.v("TRB new single-shot series F " + series + " from " + st + " = " + spf );
           }
         }
         if ( ! found ) { 

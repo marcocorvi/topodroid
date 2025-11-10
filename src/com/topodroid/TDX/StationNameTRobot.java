@@ -227,6 +227,7 @@ class StationNameTRobot extends StationName
                 if ( mCurrentStationName != null ) {
                   // if the mCurrentStationName is the last of its series do not start a new series
                   String next = getNextStation( mCurrentStationName );
+                  TDLog.v("TRB station current " + mCurrentStationName + " next " + next );
                   if ( sts.contains( next ) ) {
                     ++series;
                     from = mCurrentStationName;

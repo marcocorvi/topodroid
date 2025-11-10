@@ -876,7 +876,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       TDLog.e( "DBlockAdapter: view without holder");
       return;
     }
-    TDLog.v( "DBlockAdapter: view holder block " + ((holder.mBlock == null)? "null " : holder.mBlock.mId + " " + mParent.isBlockMagneticBad( holder.mBlock ) ) );
+    // TDLog.v( "DBlockAdapter: view holder block " + ((holder.mBlock == null)? "null " : holder.mBlock.mId + " " + mParent.isBlockMagneticBad( holder.mBlock ) ) );
     holder.setColor( holder.mBlock );
   }
 
