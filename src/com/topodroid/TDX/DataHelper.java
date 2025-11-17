@@ -351,7 +351,7 @@ public class DataHelper extends DataSetObservable
     blk.mLength       = (float)( cursor.getDouble(3) );  // distance [meters]
     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
     blk.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
-    blk.mRoll         = (float)( cursor.getDouble(6) );  // clino [degrees], or depth [meters]
+    blk.mRoll         = (float)( cursor.getDouble(6) );  // rolroll
     blk.mAcceleration = (float)( cursor.getDouble(7) );
     blk.mMagnetic     = (float)( cursor.getDouble(8) );
     blk.mDip          = (float)( cursor.getDouble(9) );
@@ -2163,6 +2163,7 @@ public class DataHelper extends DataSetObservable
                                 long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long time)
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
+    // TDLog.v("DH insert Cavway shot ID " + id + " B " + b + " C " + c + " R " + r );
     // return doInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
     if ( ! isSurveyMutable( sid, "insertCavwayShot" ) ) return -1L;
     if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID

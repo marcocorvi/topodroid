@@ -114,7 +114,7 @@ public class CavwayData extends MemoryData
   }
   // public double toClino( byte[] b ) { return toClino( b[7], b[8] ); }
 
-  public static double toRoll( byte[] b )  { return - toInt( b[10], b[ 9] ) * ANGLE_SCALE; }
+  public static double toRoll( byte[] b )  { return toInt( b[10], b[ 9] ) * ANGLE_SCALE; }
   // public double toRoll( byte[] b ) { return toAzimuth( b[9], b[10] ); }
 
   public static double toAbsG1( byte[] b ) { return toInt( b[12], b[11] ) * G_SCALE / 1000.0 / GLOBAL_FM; }

@@ -184,8 +184,7 @@ class ShotEditDialog extends MyDialog
 
   /** cstr
    */
-  ShotEditDialog( Context context, ShotWindow parent, int pos, DBlock blk,
-              DBlock prev, DBlock next
+  ShotEditDialog( Context context, ShotWindow parent, int pos, DBlock blk, DBlock prev, DBlock next
             )
   {
     super( context, null, R.string.ShotEditDialog ); // null app
@@ -196,6 +195,7 @@ class ShotEditDialog extends MyDialog
     mNextBlk     = next;
     mBlk         = blk;
     // loadDBlock( blk, prev, next );
+    // TDLog.v("Shot edit dialog. Blk " + blk.mId + " roll " + blk.mRoll ); // mRoll is not set
     // TDLog.v( "Shot Dialog " + blk.toStringNormal(true) + " flag " + blk.getFlag() );
     if ( /* TDLevel.overAdvanced && */  mBlk.isSplay() ) {
       if ( mBlk.isXSplay() ) {

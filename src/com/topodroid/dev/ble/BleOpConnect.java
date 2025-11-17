@@ -36,7 +36,7 @@ public class BleOpConnect extends BleOperation
       TDLog.e("BleOp connect error: null pipe" );
       return;
     }
-    TDLog.v( "BleOp exec connect");
+    if ( BleCallback.LOG ) TDLog.v( "BleOp exec connect");
     mPipe.connectGatt( mContext, mDevice );
   }
 }

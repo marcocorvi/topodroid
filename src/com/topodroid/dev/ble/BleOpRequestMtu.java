@@ -38,7 +38,7 @@ public class BleOpRequestMtu extends BleOperation
       TDLog.e("BleOp request MTU: ERROR null pipe" );
       return;
     }
-    TDLog.v( "BleOp exec request MTU");
+    if ( BleCallback.LOG ) TDLog.v( "BleOp exec request MTU");
     mPipe.requestMtu( mMtu );
   }
 }
