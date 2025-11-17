@@ -658,7 +658,7 @@
     <string name="shot_note">заметки</string>
     <!-- UNUSED string name="shot_reverse">развернуть</string -->
     <string name="shot_to">№ НА</string>
-    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
+    <string name="shot_refreshed">Таблица замеров обновлена</string>
 
     <string name="station">пикет</string>
     <string name="station_ask">Добавить пикет в абрис?</string>
