@@ -34,6 +34,8 @@ import android.util.ArraySet;
 
 class ParserTopoRobot extends ImportParser
 {
+  private static boolean TR_LOG = false; 
+
   private class TRobotTags
   {  
     int series;
@@ -50,7 +52,7 @@ class ParserTopoRobot extends ImportParser
       code   = Integer.parseInt( token[k++] );
       session= Integer.parseInt( token[k++] );
       trip   = Integer.parseInt( token[k++] );
-      // TDLog.v("TR tags " + series + " " + point + " " + code + " " + session + " " + trip );
+      if ( TR_LOG)  TDLog.v("TR tags " + series + " " + point + " " + code + " " + session + " " + trip + " is_comment " + is_comment );
     }
   }
 
@@ -76,7 +78,7 @@ class ParserTopoRobot extends ImportParser
       tape   = Float.parseFloat( token[10] ); // 100.00
       winkel = Float.parseFloat( token[11] ); // 100.00
       // everything else is ignored
-      // TDLog.v("TR code " + code + " A " + uAzi + " C " + uCln );
+      if ( TR_LOG)  TDLog.v("TR code " + code + " A " + uAzi + " C " + uCln );
     }
 
     public String toString()
@@ -120,16 +122,16 @@ class ParserTopoRobot extends ImportParser
             try {
               decl = Float.parseFloat( token[k] );
               mDeclination = decl;
-              // TDLog.v("TR parser: set declination " + decl );
+              if ( TR_LOG)  TDLog.v("TR parser: set declination " + decl );
             } catch ( NumberFormatException e ) {
               TDLog.e("TR parser: bad declination " + token[k] );
             } 
-          // } else {
-          //   TDLog.v("TR parser: dont use declination");
+          } else {
+            if ( TR_LOG) TDLog.v("TR parser: dont use declination");
           }
         }
       }
-      // TDLog.v("TR trip " + index + " decl " + mDeclination + " team " + team );
+      if ( TR_LOG ) TDLog.v("TR trip " + index + " decl " + mDeclination + " team " + mTeam );
     }
 
     public String toString()
@@ -181,6 +183,11 @@ class ParserTopoRobot extends ImportParser
     TRobotFix( String[] token ) throws NumberFormatException
     {
       station = String.format("%s.%s", token[8], token[9] );
+      if ( token[8].equals("0") ) {
+        TDLog.e("TR fix invalid series \"0\" \n");
+        return;
+      }
+      if ( TR_LOG ) TDLog.v("TR new fix " + station + " : " + token[5] + " " + token[6] + " " + token[7] );
 
       lat = Double.parseDouble( token[5] );
       lng = Double.parseDouble( token[6] );
@@ -190,7 +197,11 @@ class ParserTopoRobot extends ImportParser
     void updateLatLng( String str )
     {
       String[] token = str.split("/");
-      // TDLog.v("TR parser: fix tokens " + token[0] + " " + token[1] + " " + token[2] );
+      if ( token.length < 3 ) {
+        if ( TR_LOG ) TDLog.v("TR update fix " + station + " not coord: " + str );
+        return;
+      }
+      if ( TR_LOG ) TDLog.v("TR update fix " + station + " : " + str );
       try {
         int qos;
         int pos = token[2].indexOf("m");
@@ -333,12 +344,14 @@ class ParserTopoRobot extends ImportParser
     int line_nr = 0;
     try {
       line = nextLine( br ); ++ line_nr;
-      // TDLog.v("TR parser " + line_nr + " first line length " + line.length() );
+      if ( TR_LOG)  TDLog.v("TR parser " + line_nr + " first line length " + line.length() );
       while ( line != null ) {
         line = line.trim();
-        // TDLog.v( "LINE: " + line );
+        if ( TR_LOG)  TDLog.v( "LINE: " + line );
         token = splitLine( line );
-        if ( token.length >= 5 ) {
+        if ( ( token.length >= 6 && token[5].startsWith("1-") ) ) {
+          // ignore
+        } else if ( token.length >= 5 ) {
           if ( line.startsWith("(") ) { // comment
             is_comment = true;
             StringBuilder sb = new StringBuilder();
@@ -376,7 +389,7 @@ class ParserTopoRobot extends ImportParser
               StringBuilder sb = new StringBuilder();
               for ( String name : names ) sb.append( name ).append(" ");
               mTeam = sb.toString().trim();;
-              // TDLog.v("TR parser: " + line_nr + " team " + mTeam );
+              if ( TR_LOG)  TDLog.v("TR parser: " + line_nr + " team " + mTeam );
               names = null;
               // for ( int k = trips.size()-1; k>=0; --k ) { // set the date
               //   TRobotTrip trip = trips.get(k);
