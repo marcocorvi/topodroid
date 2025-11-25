@@ -159,9 +159,9 @@ public class TDsafUri
           final String[] split = docId.split(":");
           final String type = split[0];
 
-          if ("primary".equalsIgnoreCase(type)) {
+         // if ("primary".equalsIgnoreCase(type)) { // HB map
             return Environment.getExternalStorageDirectory() + "/" + split[1];
-          }
+         // }
           // TODO handle non-primary volumes
         } else if (isDownloadsDocument(uri)) { // DownloadsProvider
           final String id = DocumentsContract.getDocumentId(uri);
