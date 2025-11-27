@@ -147,6 +147,7 @@ public class TDsafUri
     return TDInstance.getContentResolver().getType( uri );
   }
 
+  /* DROPPED 2025-11-26
   // https://stackoverflow.com/questions/36128077/android-opening-a-file-with-action-get-content-results-into-different-uris
   public static String getDocumentPath( Context context, Uri uri )
   {
@@ -196,9 +197,6 @@ public class TDsafUri
     return null;
   }
 
-  // ------------------------------------------------------------------------
-  // utils
-
   private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs)
   {
     Cursor cursor = null;
@@ -215,7 +213,15 @@ public class TDsafUri
     }
     return null;
   }
+  */
 
+  // ------------------------------------------------------------------------
+  // utils
+
+  /**
+   * @param uri The Uri to check.
+   * @return Whether the Uri authority is Documents in external storage
+   */
   private static boolean isExternalStorageDocument(Uri uri) {
       return "com.android.externalstorage.documents".equals(uri.getAuthority());
   }

@@ -969,18 +969,20 @@ public class SurveyWindow extends Activity
           if ( mStationsDialog != null ) {
             Uri uri = intent.getData();   // import uri - may NullPointerException
             String mimetype = TDsafUri.getDocumentType( uri );
-            String path = TDsafUri.getDocumentPath(this, uri);
-            // TDLog.v("MIME " + mimetype + " " + path );
-            if (path != null) {
+            // String path = TDsafUri.getDocumentPath(this, uri); // 2025-11-26
+            // // TDLog.v("MIME " + mimetype + " " + path );
+            // if (path != null) {
               try {
                 ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
-                InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
-                mStationsDialog.readNames( isr );
-                isr.close();
+                if ( pfd != null ) {
+                  InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+                  mStationsDialog.readNames( isr );
+                  isr.close();
+                }
               } catch ( IOException e ) {
                 TDLog.e("IO error " + e.getMessage() );
               }
-            }
+            // }
           }
         } else {
           TDLog.e("READ canceled");

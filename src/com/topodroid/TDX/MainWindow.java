@@ -1474,8 +1474,8 @@ public class MainWindow extends Activity
     Uri uri = intent.getData();   // import uri - may NullPointerException
     String mimetype = TDsafUri.getDocumentType( uri );
     if ( mimetype == null ) {
-      String path = TDsafUri.getDocumentPath(this, uri);
-      if (path == null) {
+      // String path = TDsafUri.getDocumentPath(this, uri); // 2025-11-26
+      // if (path == null) {
         // filename = FilenameUtils.getName(uri.toString());
         filename = uri.getLastPathSegment();
         int ros = filename.indexOf(":"); // drop the "content" header
@@ -1486,15 +1486,15 @@ public class MainWindow extends Activity
           filename = filename.substring( pos+1 );
         // }
         // TDLog.v( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
-      } else {
-        // filename = (new File(path)).getName(); // FILE to get the survey name
-        int pos = path.lastIndexOf('/');
-        filename = ( pos >= 0 )? path.substring(pos+1) : path;
-        int ros = filename.indexOf(":"); // drop the "content" header
-        if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-        TDLog.v("MAIN import: path " + path + " filename " + filename );
-        // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
-      }
+      // } else { // 2025-11-26
+      //   // filename = (new File(path)).getName(); // FILE to get the survey name
+      //   int pos = path.lastIndexOf('/');
+      //   filename = ( pos >= 0 )? path.substring(pos+1) : path;
+      //   int ros = filename.indexOf(":"); // drop the "content" header
+      //   if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+      //   TDLog.v("MAIN import: path " + path + " filename " + filename );
+      //   // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
+      // }
     } else { // mime not null
       filename = uri.getLastPathSegment();
       // TDLog.v( "MAIN import: uri " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );

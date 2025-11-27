@@ -120,6 +120,10 @@ class StationsDialog extends MyDialog
     }
   }
 
+  /** read the station names map from a file
+   *  each line contains two names: the existing name and the new name
+   * @param isr input stream reader for the file of the names-map 
+   */
   void readNames( InputStreamReader isr ) throws IOException
   {
     boolean update = false;
