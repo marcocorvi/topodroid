@@ -160,14 +160,23 @@ public class TDsafUri
           final String[] split = docId.split(":");
           final String type = split[0];
 
-          if ("primary".equalsIgnoreCase(type)) {
+         // if ("primary".equalsIgnoreCase(type)) { // HB map
             return Environment.getExternalStorageDirectory() + "/" + split[1];
-          }
+         // }
           // TODO handle non-primary volumes
         } else if (isDownloadsDocument(uri)) { // DownloadsProvider
           final String id = DocumentsContract.getDocumentId(uri);
-          final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-          return getDataColumn(context, contentUri, null, null);
+          final String[] split = id.split(":");
+          final String type = split[0];
+          if ("msf".equals(type)) { // HB map
+              final Uri contentUri = MediaStore.Files.getContentUri("external");
+              final String selection = "_id=?";
+              final String[] selectionArgs = new String[]{split[1]};
+              return getDataColumn(context, contentUri, selection, selectionArgs);
+          } else {
+              final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+              return getDataColumn(context, contentUri, null, null);
+          }
         } else if (isMediaDocument(uri)) { // MediaProvider
           final String docId = DocumentsContract.getDocumentId(uri);
           final String[] split = docId.split(":");
@@ -179,7 +188,7 @@ public class TDsafUri
             contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
           } else if ("audio".equals(type)) {
             contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-          } else if ("document".equals(type)) { // HB
+          } else if ("document".equals(type)) { // HB map
             contentUri = MediaStore.Files.getContentUri("external");
           }
           final String selection = "_id=?";
