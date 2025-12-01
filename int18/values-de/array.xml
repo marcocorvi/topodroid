@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="teamNames">
-     <item name="plain">Text plain</item>
-     <item name="separated">Text separated</item>
+  <string-array name="teamNames">
+     <item name="plain">Freitext</item>
+     <item name="separated">Kommasepariert</item>
      <item name="dialog">Dialog</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="bricMode">
+  <string-array name="bricMode">
      <item name="prim_only">Prim. only</item>
-     <item name="all">All info</item>
-  </string-array -->
+     <item name="all">Alle</item>
+  </string-array>
 
-  <!-- TODO string-array name="geoImportApp">
-     <item name="none">non-specified</item>
+  <string-array name="geoImportApp">
+     <item name="none">unspezifiziert</item>
      <item name="mobile_topographer">Mobile Topographer</item>
      <item name="gpx_recorder">GPX Recorder</item>
      <item name="gps_position">GPS Position</item>
      <item name="gps_test">GPSTest</item>
      <item name="gps_logger">GPS Logger</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="orientation">
      <item name="unspecified">System</item>
