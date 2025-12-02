@@ -50,7 +50,7 @@ public class DrawingPicturePath extends DrawingPointPath
 
   /** @return the size of the picture
    */
-  float getPhotoSize() { return mPhotoSize; }
+  public float getPhotoSize() { return mPhotoSize; } // HB shp extra
 
   /** scale the size of the picture
    * @param scale  scale factor
