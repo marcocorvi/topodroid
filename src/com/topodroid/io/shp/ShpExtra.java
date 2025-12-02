@@ -20,6 +20,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingAudioPath;
 import com.topodroid.TDX.DrawingPhotoPath;
+import com.topodroidHB2.TDX.DrawingPicturePath; // HB shp extra
 import com.topodroid.TDX.DrawingUtil;
 import com.topodroid.TDX.BrushManager;
 import com.topodroid.TDX.TDPath;
@@ -134,14 +135,18 @@ public class ShpExtra extends ShpObject
         fields[6] = TDPath.getSurveyWavFilename( TDInstance.survey, Long.toString( ((DrawingAudioPath)pt).getId()) );
       } else if ( pt instanceof DrawingPhotoPath ) {
         fields[6] = TDPath.getSurveyJpgFilename( TDInstance.survey, Long.toString( ((DrawingPhotoPath)pt).getId()) );
-      } else {
-        if ( BrushManager.isPointSection( pt.pointType() ) ) {
+      } else if ( BrushManager.isPointSection( pt.pointType() ) ) {
           fields[6] = TDUtil.replacePrefix( TDInstance.survey, pt.getOption(TDString.OPTION_SCRAP) ); 
           if ( links != null && pt.mLink != null ) {
             links.add( new Link( pt ) );
           }
-        }
-      }
+      } else if (  pt instanceof DrawingPicturePath ) { // HB shp extra
+          fields[6] = TDPath.getSurveyJpgFilename( TDInstance.survey, Long.toString( ((DrawingPicturePath)pt).getId()) );
+                if ( links != null && pt.mLink != null ) {
+                    links.add( new Link( pt ) );
+                }
+          fields[2] = Integer.toString((int) ((DrawingPicturePath)pt).getPhotoSize());
+          }
       if ( fields[3] == null ) fields[3] = "";
       if ( fields[4] == null ) fields[4] = "";
       if ( fields[5] == null ) fields[5] = "";
