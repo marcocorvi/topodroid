@@ -104,6 +104,8 @@ public class DrawingShp
             extras.add( point );
           } else if ( point instanceof DrawingPhotoPath ) {
             extras.add( point );
+          } else if ( point instanceof DrawingPicturePath) {// HB shp extra
+            extras.add( point );
           } else {
             if ( BrushManager.isPointSection( point.mPointType ) ) {
               extras.add( point );
