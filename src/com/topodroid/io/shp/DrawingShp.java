@@ -24,6 +24,7 @@ import com.topodroid.TDX.DrawingPath;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingAudioPath;
 import com.topodroid.TDX.DrawingPhotoPath;
+import com.topodroid.TDX.DrawingPicturePath;
 import com.topodroid.TDX.DrawingPointLinePath;
 import com.topodroid.TDX.DrawingLinePath;
 import com.topodroid.TDX.DrawingAreaPath;

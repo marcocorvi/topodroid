@@ -115,6 +115,9 @@ public class CavwayProtocol extends TopoDroidProtocol
     for ( int k=0; k< CavwayData.SIZE ; ++k ) mPacketBytes[k] = (byte)0xa5;
   }
 
+  /** handle a Cavway packet
+   * @param packetdata   Cavway  packet (64 bytes)
+   */
   // public int handleCavwayPacket( CavwayData packet )
   public int handleCavwayPacket(byte [] packetdata)
   {

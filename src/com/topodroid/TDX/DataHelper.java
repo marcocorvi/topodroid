@@ -2156,6 +2156,13 @@ public class DataHelper extends DataSetObservable
    * @param status  status
    * @param comment shot comment
    * @param addr    BRIC4 address
+   * @param rawMx   raw M1,M2 X cmponents packed in a long: M1 at bytes 2(low), 3(high); M2 at bytes 0(low), 1(high)
+   * @param rawMy   raw M1,M2 Y components
+   * @param rawMz   raw M1,M2 Z components
+   * @param rawGx   raw G1,G2 X components
+   * @param rawGy   raw G1,G2 Y components
+   * @param rawGz   raw G1,G2 Z components
+   * @param time    cavway shot time
    * @return inserted shot ID
    */
   public long insertCavwayShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip,

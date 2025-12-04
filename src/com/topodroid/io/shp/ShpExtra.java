@@ -20,7 +20,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingAudioPath;
 import com.topodroid.TDX.DrawingPhotoPath;
-import com.topodroidHB2.TDX.DrawingPicturePath; // HB shp extra
+import com.topodroid.TDX.DrawingPicturePath; // HB shp extra
 import com.topodroid.TDX.DrawingUtil;
 import com.topodroid.TDX.BrushManager;
 import com.topodroid.TDX.TDPath;

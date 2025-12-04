@@ -1114,7 +1114,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_current_station">Saved stations</string>
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_refresh">Refresh display</string>
-    <string name="help_device">Device activity</string>
+    <string name="help_device">Device window</string>
     <string name="help_device_add">Add a device</string> <!-- lint: unused - KEEP -->
     <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
@@ -1132,9 +1132,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_display">Display mode</string>
     <string name="help_display_calib">Toggle display of deleted shots</string>
     <string name="help_validate">Calibration validation</string>
-    <string name="help_overview">Overview activity</string>
+    <string name="help_overview">Overview window</string>
     <string name="help_packets">DistoX packets dialog</string>
-    <string name="help_plot">Sketch activity</string>
+    <string name="help_plot">Sketch window</string>
     <string name="help_note">Survey notes</string>
     <string name="help_bluetooth">Reset bluetooth connection</string>
     <string name="help_remote">Remote DistoX control</string>
@@ -1518,7 +1518,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_therion_config_summary">Embed Therion config commands</string>
   <string name="pref_therion_maps_title">Therion maps first</string>
   <string name="pref_therion_maps_summary">Put Therion maps before survey data</string>
-  <string name="pref_extra_buttons_title">Activity level</string>
+  <string name="pref_extra_buttons_title">Usage profile</string>
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
