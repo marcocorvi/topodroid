@@ -756,6 +756,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="zip_saved">Saved zip archive</string>
     <string name="zip_failed">Failed survey-zip</string>
     <string name="zip_share_failed">Unable to share zip-archive</string>
+    <string name="file_share_failed">Unable to share file</string>
     <string name="unzip_fail">Failed survey-unzip</string>
     <string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string>
     <string name="unzip_fail_survey">Failed: survey name mismatch</string>

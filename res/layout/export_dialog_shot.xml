@@ -221,9 +221,14 @@
       android:text="@string/export_uncommented_maps"
       />
     <CheckBox android:id="@+id/therion_lrud"
-      android:layout_width="match_parent" 
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/export_lrud"
+      />
+    <CheckBox android:id="@+id/therion_share"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/export_share"
       />
   </LinearLayout>
 
@@ -389,9 +394,14 @@
       android:text="@string/export_splays"
       />
     <CheckBox android:id="@+id/kml_stations"
-      android:layout_width="match_parent" 
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/export_stations"
+      />
+    <CheckBox android:id="@+id/kml_share"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/export_share"
       />
   </LinearLayout>
 

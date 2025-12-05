@@ -3296,7 +3296,7 @@ public class TopoDroidApp extends Application
       Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
       if ( uri != null ) {
         // TDLog.v("EXPORT " + filename + " info " + export_info.index + " " + export_info.name );
-        (new SaveDataFileTask( uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
+        (new SaveDataFileTask( this, uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
         return true;
       }
     }
@@ -3323,6 +3323,30 @@ public class TopoDroidApp extends Application
       // mSurveyWindow.startActivity( Intent.createChooser( intent, "chooser title" ) );
     } catch ( ActivityNotFoundException e ) {
       TDToast.makeWarn( R.string.zip_share_failed );
+    }
+  }
+
+  /** share a file (KML, TH, etc.)
+   * @param filename   the filename (relative, e.g., "survey.kml")
+   * @param mimeType   the MIME type for the file
+   */
+  void shareFile( String filename, String mimeType )
+  {
+    String filepath = TDPath.getOutFile( filename );
+    TDLog.v("Share file " + filepath );
+    Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( filepath ) );
+
+    Intent intent = new Intent( );
+    intent.setAction( Intent.ACTION_SEND );
+    intent.putExtra( Intent.EXTRA_STREAM, uri );
+    intent.setType( mimeType );
+    intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
+    try {
+      if ( mSurveyWindow != null ) {
+        mSurveyWindow.startActivity( intent );
+      }
+    } catch ( ActivityNotFoundException e ) {
+      TDToast.makeWarn( R.string.file_share_failed );
     }
   }
 
