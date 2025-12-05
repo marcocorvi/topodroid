@@ -1,5 +1,4 @@
 /** @file MyFileProvider.java
- 
  *
  * This class is adapted from androidx.core.content.FileProvider
  * Copyright (C) 2013 The Android Open Source Project

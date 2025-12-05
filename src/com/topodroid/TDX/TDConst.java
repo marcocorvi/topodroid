@@ -50,7 +50,7 @@ public class TDConst
   // public static final int SURVEY_FORMAT_C3D = 26; // Cave3D    C3dFile
   public static final int SURVEY_FORMAT_PDF = 27; // PDF
   public static final int SURVEY_FORMAT_SNP = 28; // CaveSniper
-  // public static final int SURVEY_FORMAT_TROX = 29; // VisualTopo X
+  public static final int SURVEY_FORMAT_TROX = 29; // VisualTopo X
   
   public static final int SURVEY_FORMAT_ZIP     = 30;
 
@@ -62,6 +62,63 @@ public class TDConst
   public static final int SURVEY_FORMAT_SERIAL  = 36; 
   // public static final int SURVEY_FORMAT_PNM     = 37; // NO_PNM
   public static final int SURVEY_FORMAT_TEXT    = 38; // TEXT_PLAIN
+
+  private static int getIndexFromFilename( String filename ) 
+  {
+    int pos = filename.lastIndexOf('.');
+    if ( pos < 0 ) return -1;
+    String ext = filename.substring( pos+1 );
+    return getIndexFromExtension( filename.substring( pos+1 ) );
+  }
+
+  public static int getIndexFromExtension( String ext )
+  {
+    if ( ext.equalsIgnoreCase("th") ) return SURVEY_FORMAT_TH;
+    // if ( ext.equalsIgnoreCase("tlx") ) return SURVEY_FORMAT_TLX;
+    if ( ext.equalsIgnoreCase("dat") ) return SURVEY_FORMAT_DAT;
+    if ( ext.equalsIgnoreCase("svx") ) return SURVEY_FORMAT_SVX;
+    if ( ext.equalsIgnoreCase("tro") ) return SURVEY_FORMAT_TRO;
+    if ( ext.equalsIgnoreCase("csv") ) return SURVEY_FORMAT_CSV;
+    if ( ext.equalsIgnoreCase("dxf") ) return SURVEY_FORMAT_DXF;
+    if ( ext.equalsIgnoreCase("csx") ) return SURVEY_FORMAT_CSX;
+    // if ( ext.equalsIgnoreCase("top") ) return SURVEY_FORMAT_TOP;
+    if ( ext.equalsIgnoreCase("srv") ) return SURVEY_FORMAT_SRV;
+    if ( ext.equalsIgnoreCase("kml") ) return SURVEY_FORMAT_KML;
+    // if ( ext.equalsIgnoreCase("plt") ) return SURVEY_FORMAT_PLT;
+    // if ( ext.equalsIgnoreCase("gpx") ) return SURVEY_FORMAT_GPX;
+    if ( ext.equalsIgnoreCase("svg") ) return SURVEY_FORMAT_SVG;
+    if ( ext.equalsIgnoreCase("th2") ) return SURVEY_FORMAT_TH2;
+    // if ( ext.equalsIgnoreCase("th3") ) return SURVEY_FORMAT_TH3;
+    if ( ext.equalsIgnoreCase("cave") ) return SURVEY_FORMAT_PLG;
+    if ( ext.equalsIgnoreCase("cav") ) return SURVEY_FORMAT_CAV;
+    // if ( ext.equalsIgnoreCase("grt") ) return SURVEY_FORMAT_GRT;
+    // if ( ext.equalsIgnoreCase("gtx") ) return SURVEY_FORMAT_GTX;
+    if ( ext.equalsIgnoreCase("sur") ) return SURVEY_FORMAT_SUR;
+    if ( ext.equalsIgnoreCase("trb") ) return SURVEY_FORMAT_TRB;
+    if ( ext.equalsIgnoreCase("text") ) return SURVEY_FORMAT_TRB;
+    // if ( ext.equalsIgnoreCase("json") ) return SURVEY_FORMAT_JSON;
+    if ( ext.equalsIgnoreCase("shz") ) return SURVEY_FORMAT_SHP;
+    if ( ext.equalsIgnoreCase("xvi") ) return SURVEY_FORMAT_XVI;
+    // if ( ext.equalsIgnoreCase("tnl") ) return SURVEY_FORMAT_TNL;
+    // if ( ext.equalsIgnoreCase("c3d") ) return SURVEY_FORMAT_C3D;
+    if ( ext.equalsIgnoreCase("pdf") ) return SURVEY_FORMAT_PDF;
+    // if ( ext.equalsIgnoreCase("snp") ) return SURVEY_FORMAT_SNP;
+    if ( ext.equalsIgnoreCase("trox") ) return SURVEY_FORMAT_TROX;
+
+    if ( ext.equalsIgnoreCase("zip") ) return SURVEY_FORMAT_ZIP;
+
+    // if ( ext.equalsIgnoreCase("gltf") ) return SURVEY_FORMAT_GLTF;
+    // if ( ext.equalsIgnoreCase("") ) return SURVEY_FORMAT_CGAL;
+    // if ( ext.equalsIgnoreCase("") ) return SURVEY_FORMAT_STL;
+    // if ( ext.equalsIgnoreCase("") ) return SURVEY_FORMAT_STL_BIN;
+    // if ( ext.equalsIgnoreCase("") ) return SURVEY_FORMAT_LAS_BIN;
+    // if ( ext.equalsIgnoreCase("") ) return SURVEY_FORMAT_SERIAL;
+    // if ( ext.equalsIgnoreCase("pnm") ) return SURVEY_FORMAT_PNM;
+
+    if ( ext.equalsIgnoreCase("txt") ) return SURVEY_FORMAT_TEXT;
+
+    return -1;
+  }
 
   private static final String[] mMimeType = {
     "application/octet-stream", //  0 Therion
@@ -107,6 +164,20 @@ public class TDConst
     "text/plain",               // 38 text
   };
 
+  public static String getMimeFromFilename( String filename ) 
+  {
+    int index = getIndexFromFilename( filename );
+    if ( index < 0 || index >= mMimeType.length ) return "*/*";
+    return mMimeType[ index ];
+  }
+
+  public static String getMimeFromExtension( String ext )
+  {
+    int index = getIndexFromExtension( ext );
+    if ( index < 0 || index >= mMimeType.length ) return "*/*";
+    return mMimeType[ index ];
+  }
+
   /** @return the mime type given the type index
    * @param index   type index
    */
@@ -118,6 +189,7 @@ public class TDConst
   }
 
   public static int getMimeTypeLength() { return mMimeType.length; }
+
 
   // ======= IMPORT ======
   public static final String[] mSurveyImportTypes = { 

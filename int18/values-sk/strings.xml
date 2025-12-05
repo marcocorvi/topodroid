@@ -744,6 +744,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="zip_saved">Uložený </string>
     <string name="zip_failed">Obnova mapovania zlyhala-zip</string>
     <string name="zip_share_failed">Nie je možné zdieľať zip archív</string>
+    <!-- TODO string name="file_share_failed">Unable to share file</string -->
     <string name="unzip_fail">Obnova mapovania zlyhala-unzip</string>
     <string name="unzip_fail_sqlite">Neúspešné SQL: vymažte mapovanie a skúste znova</string>
     <string name="unzip_fail_survey">Neúspešné: Neodpovedajúce pomenovanie</string>

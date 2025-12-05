@@ -696,7 +696,7 @@ public class OverviewWindow extends ItemDrawer
    * @param ext    export type (ie, extension)
    * @note called only by export menu
    */
-  private void saveWithExt( /* Uri uri, */ final String ext )
+  private void saveWithExt( /* Uri uri, */ final String ext ) // FIXME 20251206
   {
     TDNum num = mNum;
     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
@@ -728,7 +728,7 @@ public class OverviewWindow extends ItemDrawer
         // oblique = 0
         // save = OVERVIEW
         // rotate  = 0
-        (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, 0, PlotSave.OVERVIEW, 0, false )).execute(); // TH2EDIT false
+        (new SavePlotFileTask( mApp, this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, 0, PlotSave.OVERVIEW, 0, false )).execute(); // TH2EDIT false
       } else {
         GeoReference station = null;
         if ( mType == PlotType.PLOT_PLAN && ext.equals("shz") ) {
@@ -737,7 +737,7 @@ public class OverviewWindow extends ItemDrawer
         }
         SurveyInfo info = mData.selectSurveyInfo( mSid );
         // null PlotInfo, null FixedInfo, true toast
-        (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
+        (new ExportPlotToFile( mApp, this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
       }
     }
   }
@@ -882,6 +882,12 @@ public class OverviewWindow extends ItemDrawer
       pdf.close();
       /* if ( fos != null ) */ fos.close(); // test always true
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) ); // PDF
+      if ( TDSetting.mExportPlotShare ) {
+        String filename = fullname + ".pdf";
+        // TDLog.v("sharing PDF filename " + filename );
+        String mimetype = TDConst.getMimeFromExtension("pdf");
+        mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity FIXME 20251206
+      }
     } catch ( IOException e ) {
       TDLog.e("Failed PDF export " + e.getMessage() );
     } finally {

@@ -1703,14 +1703,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.clino, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+        (new SavePlotFileTask( mApp, mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.clino, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
       } catch ( RejectedExecutionException e ) { 
         TDLog.e("rejected exec save plot " + psd2.filename );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.clino, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+      (new SavePlotFileTask( mApp, mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.clino, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
     } catch ( RejectedExecutionException e ) { 
       TDLog.e("rejected exec save plot " + psd1.filename );
       -- mNrSaveTh2Task;
@@ -7953,6 +7953,12 @@ public class DrawingWindow extends ItemDrawer
       pdf.close();
       fos.close();
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) );
+      if ( TDSetting.mExportPlotShare ) {
+        String filename = fullname + ".pdf";
+        // TDLog.v("sharing PDF filename " + filename );
+        String mimetype = TDConst.getMimeFromExtension("pdf");
+        mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity
+      }
     // } catch ( NoSuchMethodException e ) {
     } catch ( IOException e ) {
       TDLog.e("failed PDF export " + e.getMessage() );
@@ -7974,8 +7980,9 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v( "save csx");
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-    TopoDroidApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
+    mApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
   }
+
 
   /** used to save "dxf", "svg" - called only by doExport
    * @param uri   export URI
@@ -8034,8 +8041,7 @@ public class DrawingWindow extends ItemDrawer
   // used also by SavePlotFileTask
   void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
   {
-    // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-    // TDLog.v( "SAVE with ext: filename " + filename + " ext " + ext );
+    // TDLog.v( "SAVE with ext: filename " + filename + " ext " + ext + " type " + type );
     // mActivity = context (only to toast)
     SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
     PlotInfo   plot  = null;
@@ -8054,7 +8060,7 @@ public class DrawingWindow extends ItemDrawer
     //   if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0, -1, -1 ); // NOTE ACCURACY -1 (unset)
     }
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-    new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
+    new ExportPlotToFile( mApp, mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
   }
 
   // static private Handler th2Handler = null;
@@ -8073,7 +8079,6 @@ public class DrawingWindow extends ItemDrawer
     if ( manager == null ) return;
     Handler th2Handler = null;
 
-    int save_mode = PlotSave.EXPORT;
     int azimuth = 0;
     int oblique = 0;
     String name = null;
@@ -8112,9 +8117,9 @@ public class DrawingWindow extends ItemDrawer
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       if ( mTh2Edit ) { // TH2EDIT 
         // set type by the scrap projection 
-        (new SavePlotFileTask( mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, 0, PlotSave.EXPORT, 0, true )).execute();
+        (new SavePlotFileTask( mApp, mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, 0, PlotSave.EXPORT, 0, true )).execute();
       } else {
-        (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, oblique, save_mode, 0, false )).execute();
+        (new SavePlotFileTask( mApp, mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, oblique, PlotSave.EXPORT, 0, false )).execute();
       }
     } catch ( RejectedExecutionException e ) {
       TDLog.e("Sketch saving exec rejected");
@@ -8762,9 +8767,8 @@ public class DrawingWindow extends ItemDrawer
         if ( ! PlotType.isAnySection( type ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
             String origin = mPlot1.start;
-	    int save_mode    = PlotSave.EXPORT;
-	    PlotSaveData psd1 = makePlotSaveData( 1, save_mode, 0 );
-	    PlotSaveData psd2 = makePlotSaveData( 2, save_mode, 0 );
+	    PlotSaveData psd1 = makePlotSaveData( 1, PlotSave.EXPORT, 0 );
+	    PlotSaveData psd2 = makePlotSaveData( 2, PlotSave.EXPORT, 0 );
             doSaveCsx( uri, origin, psd1, psd2, true );
 	  }
           break;
@@ -9930,7 +9934,7 @@ public class DrawingWindow extends ItemDrawer
     String fullname = TDInstance.survey + "-" + name;
     // TDLog.v("Split Plot " + paths.size() + " paths to <" + name + ">" );
     PlotInfo info = mApp_mData.getPlotInfo( TDInstance.sid, name );
-    (new SavePlotFileTask( mActivity, null, this, null, mNum, paths, info, fullname, mType, azimuth, oblique ) ).execute();
+    (new SavePlotFileTask( mActivity, null, this, null, mNum, paths, info, fullname, mType, azimuth, oblique ) ).execute(); // no mApp
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager

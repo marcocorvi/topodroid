@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
+import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -43,6 +44,7 @@ import android.net.Uri;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
+  private TopoDroidApp mApp = null;
   private String mFormat; 
   private Handler mHandler;
   // private TopoDroidApp mApp;
@@ -56,13 +58,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private PlotInfo mInfo;   // plot info (can be null for th2 export/overview)
   private int mProjDir; // projection azimuth
   private int mOblique; // oblique projection angle
-  private int mSuffix;
+  private int mSuffix;  // plot save mode
   private int mRotate;  // nr. backups to rotate
   private String origin = null;
   private PlotSaveData psd1 = null;
   private PlotSaveData psd2 = null;
   private Uri mUri;
   private boolean mTh2Edit = false; // TH2EDIT
+  private boolean mTherionExported = false;
 
   /**
    * @param context  context
@@ -78,7 +81,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
    * @param suffix   plot save-mode: EXPORT (th2), SAVE (tdr), OVERVIEW (overview export th2)
    * @param rotate   whether to rotate the backups (only for TDR)
    */
-  SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
+  SavePlotFileTask( TopoDroidApp app, Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    DrawingCommandManager manager, PlotInfo info,
                     String fullname, long type, int proj_dir, int oblique, int suffix, int rotate, boolean th2_edit )
@@ -86,6 +89,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = new WeakReference<DrawingWindow>( parent );
+     mApp      = app;
      mHandler  = handler;
      mNum      = num;
      mManager  = manager;
@@ -124,6 +128,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = new WeakReference<DrawingWindow>( parent );
+     // mApp      = (TopoDroidApp)(parent.getApplication()); // mApp null is OK
      mHandler  = handler;
      mNum      = num;
      mManager  = null;
@@ -174,6 +179,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           TDSetting.mBezierStep = point_spacing;
         }
         TDsafUri.closeFileDescriptor( pfd );
+        mTherionExported = true;
       }
       return true; 
     } else if ( mSuffix == PlotSave.OVERVIEW ) {
@@ -188,6 +194,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, true, false ); // multi-sketch, no th2_edit
         // bw.flush(); // FIXME necessary ???
         bw.close();
+        mTherionExported = true;
       } catch ( IOException e ) {
         TDLog.e( e.getMessage() );
         e.printStackTrace(); 
@@ -334,12 +341,22 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   }
 
   @Override
-  protected void onPostExecute(Boolean bool)
+  protected void onPostExecute( Boolean bool )
   {
     super.onPostExecute(bool);
-    // TDLog.v( "save plot file task post exec " + bool );
+    // TDLog.v( "save plot file task post exec " + bool + " fullname " + mFullName );
     if ( mHandler != null ) {
       mHandler.sendEmptyMessage( bool? 661 : 660 );
+    }
+    if ( mTherionExported && TDSetting.mExportPlotShare && mApp != null ) {
+      if ( ! TDString.isNullOrEmpty( mFullName ) ) { 
+        String filename = mFullName + ".th2";
+        String mimetype = TDConst.getMimeFromExtension( "th2" );
+        // TDLog.v("filename " + filename + " mime " + mimetype );
+        if ( mimetype != null ) {
+          mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity
+        }
+      }
     }
   }
 }

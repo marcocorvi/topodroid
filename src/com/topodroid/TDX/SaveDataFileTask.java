@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
@@ -52,33 +53,6 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   private TopoDroidApp mApp = null;
 
   /**
-   * @param uri         output URI
-   * @param format      format for the toast
-   * @param sid         survey ID
-   * @param info        survey info
-   * @param data        DB helper class
-   * @param survey      survey name
-   * @param device      active device (A) - only for SVX
-   * @param export_info export info (type, prefix, name ...)
-   * @param toast       whether to toast
-   */
-  SaveDataFileTask( Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, ExportInfo export_info, boolean toast )
-  {
-    /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
-    mFormat  = format;
-    mSid     = sid;
-    mInfo    = info.copy();
-    mData    = data;
-    mSurvey  = survey;
-    mDevice  = device;
-    mExportInfo = export_info;
-    mToast   = toast;
-    mApp     = null;
-    setSurveyName();
-    // TDLog.v( "save data file task - type " + export_info.index + " name " + export_info.name );
-  }
-
-  /**
    * @param app         TopoDroidApp reference (for sharing)
    * @param uri         output URI
    * @param format      format for the toast
@@ -92,6 +66,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
    */
   SaveDataFileTask( TopoDroidApp app, Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, ExportInfo export_info, boolean toast )
   {
+    mApp     = app;
     /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
     mFormat  = format;
     mSid     = sid;
@@ -101,7 +76,6 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     mDevice  = device;
     mExportInfo = export_info;
     mToast   = toast;
-    mApp     = app;
     setSurveyName();
     // TDLog.v( "save data file task - type " + export_info.index + " name " + export_info.name );
   }
@@ -321,22 +295,15 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         TDToast.make( String.format(mFormat, filename) );
       }
     }
-    // Share file if enabled
-    if ( filename != null && filename.length() > 0 && mApp != null ) {
-      boolean doShare = false;
-      String mimeType = "application/octet-stream";
-      if ( mExportInfo.index == TDConst.SURVEY_FORMAT_KML && TDSetting.mKmlShare ) {
-        doShare = true;
-        mimeType = "application/vnd.google-earth.kml+xml";
-      } else if ( mExportInfo.index == TDConst.SURVEY_FORMAT_TH && TDSetting.mThShare ) {
-        doShare = true;
-        mimeType = "text/plain";
-      }
-      if ( doShare ) {
-        mApp.shareFile( filename, mimeType );
+    if ( TDSetting.mExportDataShare && mApp != null ) { // Share file if enabled
+      if ( ! TDString.isNullOrEmpty( filename ) ) { 
+        String mimetype = TDConst.getMimeFromFilename( filename );
+        // TDLog.v("mime " + mimetype );
+        if ( mimetype != null ) {
+          mApp.shareFile( filename, mimetype, 1 ); // 1 SurveyActivity
+        }
       }
     }
   }
 
 }
-
