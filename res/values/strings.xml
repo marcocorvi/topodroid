@@ -1260,6 +1260,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_series_hint">series</string>
     <string name="export_roundtrip" copyable="all">Round-trip</string>
     <string name="export_share">Share</string>
+    <string name="export_save_as">Save as\u2026</string>
     <string name="export_overwrite">Overwrite</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Scale 1 :</string>

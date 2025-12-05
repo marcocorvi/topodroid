@@ -3264,21 +3264,21 @@ public class TopoDroidApp extends Application
   }
 
   // ==================================================================
-  
-  /** export survey data in a user-chosen URI --- unused URI_EXPORT
+
+  /** export survey data in a user-chosen URI
    * @param context         context
    * @param uri             output URI
    * @param export_info     export info
    * @param toast           whether to toast a message
    * @param in_foreground   whether to run in foreground
-   * @note called by (ShotWindow and) SurveyWindow on export
-   *
+   * @note called by SurveyWindow on export with file picker
+   */
   boolean doExportDataAsync( Context context, Uri uri, ExportInfo export_info, boolean toast, boolean in_foreground )
   {
     // TDLog.v( "APP URI-export - index " + export_info.index );
     if ( export_info.index < 0 ) return false; // extra safety
     if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-      // TDLog.v( "APP URIr-export zip");
+      // TDLog.v( "APP URI-export zip");
       // this is SurveyWindow.doArchive
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, uri, toast )).execute();
@@ -3287,12 +3287,10 @@ public class TopoDroidApp extends Application
       if ( survey_info == null ) return false;
       // TDLog.v( "APP URI-export survey " + TDInstance.survey + " Index " + export_info.index );
       String format = context.getResources().getString(R.string.saved_file_1);
-      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      (new SaveDataFileTask( uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
+      (new SaveDataFileTask( this, uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
     }
     return true;
   }
-  */
   
   /** export survey data in the "out" subfolder --- APP_OUT_DATA
    * @param context         context

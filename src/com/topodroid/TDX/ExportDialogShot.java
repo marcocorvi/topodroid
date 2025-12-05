@@ -396,6 +396,8 @@ public class ExportDialogShot extends MyDialog
    */
   private boolean setOptions()
   {
+    // Save as option (common for all formats)
+    TDSetting.mSurveyExportSaveAs = ((CheckBox) findViewById( R.id.export_save_as )).isChecked();
     switch ( mSelectedPos ) {
       case TDConst.SURVEY_POS_ZIP: // Zip 
         {
@@ -521,6 +523,9 @@ public class ExportDialogShot extends MyDialog
    */
   private void initOptions()
   {
+    // Save as option (common for all formats)
+    ((CheckBox) findViewById( R.id.export_save_as )).setChecked( TDSetting.mSurveyExportSaveAs );
+
     ((CheckBox) findViewById( R.id.zip_share )).setChecked( TDSetting.mZipShare );
     ((CheckBox) findViewById( R.id.zip_overwrite )).setChecked( TDSetting.mZipOverwrite );
 

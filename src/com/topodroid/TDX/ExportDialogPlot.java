@@ -258,6 +258,8 @@ public class ExportDialogPlot extends MyDialog
    */
   private void setOptions()
   {
+    // Save as option (common for all formats)
+    TDSetting.mPlotExportSaveAs = ((CheckBox) findViewById( R.id.export_save_as )).isChecked();
     int selected = mSelectedPos;
     if ( mParentType == PARENT_OVERVIEW ) {
       if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up - skip csx
@@ -377,6 +379,9 @@ public class ExportDialogPlot extends MyDialog
    */
   private void initOptions()
   {
+    // Save as option (common for all formats)
+    ((CheckBox) findViewById( R.id.export_save_as )).setChecked( TDSetting.mPlotExportSaveAs );
+
     ((CheckBox) findViewById( R.id.therion_splays )).setChecked( TDSetting.mTherionSplays );
     ((CheckBox) findViewById( R.id.therion_xvi )).setChecked( TDSetting.mTherionXvi );
     ((EditText) findViewById( R.id.therion_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
