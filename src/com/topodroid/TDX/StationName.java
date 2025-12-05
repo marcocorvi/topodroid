@@ -54,7 +54,70 @@ class StationName
    */
   protected String name( DBlock blk ) { return (blk==null)? "<->" : "<" + Long.toString(blk.mId) + ":" + blk.mFrom + "-" + blk.mTo + ">"; }
 
+  /** compare two string token, first as integers, if that fails as strings
+   * @param t1   first token
+   * @param t2   second token
+   * @return -1: first greater than second, 1: second greater than first; 0 equal
+   */
+  private static int compareToken( String t1, String t2 )
+  {
+    try {
+      int i1 = Integer.parseInt( t1 );
+      int i2 = Integer.parseInt( t2 );
+      return ( i1 < i2 )? 1 : -1;
+    } catch ( NumberFormatException e ) {
+      // StringBuilde1 sb1 = new StringBuilder();
+      // sb1.append( t1[k] );
+      // for ( int k1=k+1; k1 < t1.length; ++k1 ) sb1.append( ch1 ).append(t1[k1]);
+      // StringBuilde1 sb2 = new StringBuilder();
+      // sb2.append( t2[k] );
+      // for ( int k2=k+1; k2 < t2.length; ++k2 ) sb2.append( ch1 ).append(t2[k2]);
+      // return compareWithSeparators( ch2, -1 );
+    }
+    return t1.compareTo( t2 );
+  }
 
+  /** compare two string names, parsing tokens on char '.'
+   * @param n1   first name
+   * @param n2   second name
+   * @return -1: first greater than second, 1: second greater than first; 0 equal
+   */
+  static int compareNames( String n1, String n2 ) 
+  {
+    final String ch1 = ".";
+    int p1 = n1.indexOf( ch1 );
+    int p2 = n2.indexOf( ch1 );
+    if ( p1 >= 0 ) {
+      if ( p2 >= 0 ) {
+        String[] t1 = n1.split( ch1 );
+        String[] t2 = n2.split( ch1 );
+        int k = 0;
+        while ( k < t1.length && k < t2.length && t1[k].equals( t2[k] ) ) ++k;
+        if ( k == t1.length ) {
+          if ( k == t2.length ) { 
+            return 0;
+          } else { // k > t2.length
+            return 1;
+          }
+        } else {
+          if ( k == t2.length ) {
+            return -1;
+          } else { // compare t1[k] and t2[k]
+            return compareToken( t1[k], t2[k] );
+          }
+        }
+      } else { // p1 >= 0, p2 < 0
+        return -1;
+      }
+    } else { // p1 < 0
+      if ( p2 >= 0 ) {
+        return 1;
+      } else {
+        return compareToken( n1, n2 );
+      }
+    }
+  }
+            
   /** assign station names to shots
    * @param list  list of dblock, including those to assign
    * @param sts   station names already in use

@@ -19,7 +19,7 @@ import java.util.Set;
 
 class NativeName
 {
-  public native String incrementName( String name, Set<String> stations );
+  public native static String incrementName( String name, Set<String> stations );
 
   public native void initLog();
 

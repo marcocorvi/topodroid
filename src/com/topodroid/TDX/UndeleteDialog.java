@@ -201,9 +201,15 @@ class UndeleteDialog extends MyDialog
     // TDLog.v("Append buffer " + mDBlockBuffer.size() );
     if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
     if ( mCBbufferSortByID.isChecked() ) mDBlockBuffer.sort();
+    long bid = -1L;
     for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
-      mData.insertDBlockShot( mSid, blk );
+      if ( bid == -1L ) {
+        bid = mData.insertDBlockShot( mSid, blk );
+      } else {
+        mData.insertDBlockShot( mSid, blk );
+      }
     }
+    if ( bid >= 0 ) mParent.renumberShotsFrom( bid ); // 20251205
     mParent.updateDisplay(); // this recomputes DistoX accuracy
   }
 

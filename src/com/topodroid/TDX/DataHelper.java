@@ -1810,6 +1810,12 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** update the name of a shot; the name of a shot is made of the FROM and the TO stations
+   * @param id    shot id
+   * @param sid   survey id
+   * @param fStation FROM station name
+   * @param tStation TO station name
+   */
   void updateShotName( long id, long sid, String fStation, String tStation )
   {
     // TDLog.v( "update shot " + id + " name " + fStation + " " + tStation );
@@ -1818,8 +1824,7 @@ public class DataHelper extends DataSetObservable
     if ( tStation == null ) tStation = TDString.EMPTY;
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
-               fStation, tStation, sid, id );
+    pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d", fStation, tStation, sid, id );
     doExecShotSQL( id, sw );
   }
 
@@ -4913,9 +4918,11 @@ public class DataHelper extends DataSetObservable
   //   return list;
   // }
 
-  // select all LEG stations before a shot
-  // @param id     shot id
-  // @param sid    survey id
+  /** select all LEG stations before a shot
+   * @param id     shot id
+   * @param sid    survey id
+   * @return the set of all the station names of legs before the specified shot
+   */
   Set<String> selectAllStationsBefore( long id, long sid /*, long status */ )
   {
     Set< String > set = new TreeSet<String>();
@@ -4939,6 +4946,32 @@ public class DataHelper extends DataSetObservable
     return set;
   }
 
+  /** select all shots with a specified status of a survey starting at a given shot irrespective of the status
+   * @param id     ID of starting shot
+   * @param sid    survey ID
+   * @return list of shots of the survey with the specified status, starting at the given shot
+   */
+  List< DBlock > selectAllShotsAfter( long id, long sid )
+  {
+    // TDLog.v( "B2 select shots after id " + id );
+    List< DBlock > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
+                    "id>=? and surveyId=? ",
+                    new String[] { Long.toString(id), Long.toString(sid) },
+                    null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        DBlock block = new DBlock();
+        fullFillBlock( sid, block, cursor );
+        list.add( block );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
   /** select all shots with a specified status of a survey starting at a given shot
    * @param id     ID of starting shot
    * @param sid    survey ID
@@ -4947,7 +4980,7 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShotsAfter( long id, long sid, long status )
   {
-    // TDLog.v( "B2 select shots after id " + id );
+    // TDLog.v( "B2 select shots after id " + id + " status " + status );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,

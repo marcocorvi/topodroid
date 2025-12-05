@@ -2305,8 +2305,7 @@ public class TopoDroidApp extends Application
    * @param down     DOWN length
    * could return the long at
    */
-  long insertLRUDatStation( long at, String splay_station, float bearing, float clino,
-                            String left, String right, String up, String down )
+  long insertLRUDatStation( long at, String splay_station, float bearing, float clino, String left, String right, String up, String down )
   {
     // TDLog.v("LRUD " + "insert LRUD " + at + " station " + splay_station );
     return addManualSplays( at, splay_station, left, right, up, down, bearing, false, true ); // horizontal=false, true=ret +/-1;
@@ -2324,6 +2323,7 @@ public class TopoDroidApp extends Application
     */
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
+    if ( distance <= 0.0f ) return -1L;
     // reset current station so that the next shot does not attach to the intermediate leg
     resetCurrentOrLastStation( );
     long time = TDUtil.getTimeStamp();
@@ -2392,7 +2392,7 @@ public class TopoDroidApp extends Application
     }
 
     extend = ExtendType.EXTEND_IGNORE;
-    if ( l >= 0.0f ) { // FIXME_X_SPLAY
+    if ( l > 0.0f ) { // FIXME_X_SPLAY
       ok = true;
       if ( horizontal ) { // WENS
         // extend = TDAzimuth.computeSplayExtend( 270 );
@@ -2421,7 +2421,7 @@ public class TopoDroidApp extends Application
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
       // TDLog.v("LRUD " + "insert " + id + " left " + l );
     }
-    if ( r >= 0.0f ) {
+    if ( r > 0.0f ) {
       ok = true;
       if ( horizontal ) { // WENS
         // extend = TDAzimuth.computeSplayExtend( 90 );
@@ -2450,7 +2450,7 @@ public class TopoDroidApp extends Application
       // TDLog.v("LRUD " + "insert " + id + " right " + r );
     }
     extend = ExtendType.EXTEND_VERT;
-    if ( u >= 0.0f ) {  
+    if ( u > 0.0f ) {  
       ok = true;
       if ( horizontal ) {
         if ( at >= 0L ) {
@@ -2472,7 +2472,7 @@ public class TopoDroidApp extends Application
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
       // TDLog.v("LRUD " + "insert " + id + " up " + u );
     }
-    if ( d >= 0.0f ) {
+    if ( d > 0.0f ) {
       ok = true;
       if ( horizontal ) {
         if ( at >= 0L ) {
@@ -2524,7 +2524,6 @@ public class TopoDroidApp extends Application
   {
     TDInstance.secondLastShotId = lastShotId();
     DBlock ret = null;
-    long id;
     long time = TDUtil.getTimeStamp();
 
     distance = distance / TDSetting.mUnitLength - ManualCalibration.mLength;
@@ -2546,6 +2545,7 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.makes_cycle );
       // } else
       {
+        long id = -1;
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot Data " + distance + " " + bearing + " " + clino );
         boolean horizontal = ( Math.abs( clino ) > TDSetting.mVThreshold );
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot SID " + TDInstance.sid + " LRUD " + left + " " + right + " " + up + " " + down);
@@ -2553,39 +2553,42 @@ public class TopoDroidApp extends Application
           // TDLog.v( "[1] manual-shot Data " + distance + " " + bearing + " " + clino );
           at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal, false );
 
-          if ( at >= 0L ) {
-            id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
-            // TDLog.v("APP insert at " + at + " return " + id );
-          } else {
-            id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+          if ( distance > 0.0f ) {
+            if ( at >= 0L ) {
+              id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+              // TDLog.v("APP insert at " + at + " return " + id );
+            } else {
+              id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+            }
+            // String name = from + "-" + to;
+            mData.updateShotName( id, TDInstance.sid, from, to );
+            if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
+              // TDLog.v("APP insert manual shot detect bad sibling");
+              TDToast.makeWarn( R.string.bad_sibling );
+            }
+            // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
+            // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 ); // FIXME WHY ???
+            // FIXME updateDisplay( );
           }
-          // String name = from + "-" + to;
-          mData.updateShotName( id, TDInstance.sid, from, to );
-          if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
-            // TDLog.v("APP insert manual shot detect bad sibling");
-            TDToast.makeWarn( R.string.bad_sibling );
-          }
-          // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
-          // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 ); // FIXME WHY ???
-          // FIXME updateDisplay( );
         } else {
           // TDLog.v( "[2] manual-shot Data " + distance + " " + bearing + " " + clino );
-          if ( at >= 0L ) {
-            id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
-            // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [1]" );
-            ++ at;
-          } else {
-            id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+          if ( distance > 0.0f ) {
+            if ( at >= 0L ) {
+              id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+              // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [1]" );
+              ++ at;
+            } else {
+              id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+            }
+            // String name = from + "-" + to;
+            mData.updateShotName( id, TDInstance.sid, from, to );
+            // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
+            // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 );  // FIXME WHY ???
+            // FIXME updateDisplay( );
           }
-          // String name = from + "-" + to;
-          mData.updateShotName( id, TDInstance.sid, from, to );
-          // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
-          // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 );  // FIXME WHY ???
-          // FIXME updateDisplay( );
-
           addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal, false );
         }
-        ret = mData.selectShot( id, TDInstance.sid );
+        if ( id >= 0 ) ret = mData.selectShot( id, TDInstance.sid );
       }
     } else {
       TDToast.makeBad( R.string.missing_station );

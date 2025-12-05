@@ -47,6 +47,7 @@ import com.topodroid.packetX.MemoryData;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashMap;
 // import java.util.Stack;
 import java.util.Locale;
 
@@ -1183,11 +1184,15 @@ public class ShotWindow extends Activity
     (new SurveySplitOrMoveDialog( this, this, shot_id )).show();
   }
   
-  void doSplitOrMoveSurvey( long shot_id, String new_survey )
+  /** split the survey and move the last shots to a survey of to a new survey
+   * @param shot_id  first shot to move
+   * @param survey   name of the target survey or null (for a new one)
+   */
+  void doSplitOrMoveSurvey( long shot_id, String survey )
   {
     long old_sid = TDInstance.sid;
     // long old_id  = shot_id; // mShotId;
-    // TDLog.v( TAG + "split survey old: " + old_sid + " " + shot_id + " New: " + ((new_survey == null)? "null" : new_survey) );
+    // TDLog.v( TAG + "split survey old: " + old_sid + " " + shot_id + " New: " + ((survey == null)? "null" : survey) );
     if ( TopoDroidApp.mShotWindow != null ) {
       // // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow.doFinish();
@@ -1197,12 +1202,13 @@ public class ShotWindow extends Activity
       TopoDroidApp.mSurveyWindow.finish();
       TopoDroidApp.mSurveyWindow = null;
     }
-    if ( new_survey == null ) {
+    if ( survey == null ) {
       // TDLog.v( TAG + "split survey " + old_sid + " " + shot_id );
       TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, shot_id ); // SPLIT SURVEY
     } else {
-      // TDLog.v( TAG + "MOVE survey Old: " + old_sid + " " + shot_id + " New: " + new_survey );
-      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, shot_id, new_survey ); // MOVE SURVEY
+      // TDLog.v( TAG + "MOVE survey Old: " + old_sid + " " + shot_id + " New: " + survey );
+      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, shot_id, survey ); // MOVE SURVEY
+      // FIXME 20251205 TODO renumber moved shots inside the target survey
     }
   }
 
@@ -2946,13 +2952,62 @@ public class ShotWindow extends Activity
   // }
 
   // ------------------------------------------------------------------
+  /** renumber shots after a given one
+   * @param bid      ID of shot from which to renumber
+   * no need to synchronize
+   */
+  void renumberShotsFrom( long bid ) // 20251205
+  {
+    List< DBlock > shots = mApp_mData.selectAllShotsAfter( bid, TDInstance.sid, TDStatus.NORMAL );
+    TDLog.v("Renumber: shots from " + bid + " size " + shots.size() );
+    if ( shots.isEmpty() ) return;
+    // N.B. this set is the leg stations, but it should be ok
+    Set< String > stations = mApp_mData.selectAllStationsBefore(  bid, TDInstance.sid );  
+    TDLog.v("Renumber: stations before" + bid + " size " + stations.size() );
+    if ( ! stations.isEmpty() ) {
+      String last_station = null;
+      for ( String station : stations ) {
+        if ( last_station == null || StationName.compareNames( last_station, station ) > 0 ) last_station = station;
+      }
+      TDLog.v("Renumber: max station " + last_station );
+      HashMap< String, String > station_map = new HashMap<>();
+      for ( DBlock b : shots ) {
+        String fi = null;
+        String ti = null;
+        String f = b.mFrom;
+        if ( ! TDString.isNullOrEmpty( f ) ) {
+          fi = station_map.get( f );
+          if ( fi == null ) {
+            fi = NativeName.incrementName( last_station, stations );
+            last_station = fi;
+            stations.add( fi );
+            station_map.put( f, fi );
+          }
+        } 
+        String t = b.mTo;
+        if ( ! TDString.isNullOrEmpty( t ) ) {
+          ti = station_map.get( t );
+          if ( ti == null ) {
+            ti = NativeName.incrementName( last_station, stations );
+            last_station = ti;
+            stations.add( ti );
+            station_map.put( t, ti );
+          }
+        } 
+        if ( fi != null || ti != null ) {
+          if ( fi == null ) fi = TDString.EMPTY;
+          // if ( ti == null ) ti = TDString.EMPTY
+          mApp_mData.updateShotName( b.mId, TDInstance.sid, fi, ti );
+        }
+      }
+    }
+  }
 
   /** renumber shots after a given one
-   * @param blk   shot after which to renumber
+   * @param blk      shot after which to renumber
    * no need to synchronize
-   * @note called be ShotEditDialog
    */
-  void renumberShotsAfter( DBlock blk )
+  private void renumberShotsAfter( DBlock blk )
   {
     // TDLog.v( TAG + "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     // NEED TO FORWARD to the APP to change the stations accordingly
