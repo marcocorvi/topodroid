@@ -35,152 +35,163 @@ import android.net.Uri;
 
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
-    private final DrawingCommandManager mCommand;
-    private final SurveyInfo mInfo;
-    private final TDNum mNum;
-    private final long mType;
-    private final String mFullName; // "survey-plotX" name ;
-    private final String mExt; // extension
-    // private String filename = null;
-    private final boolean mToast;
-    private final String mFormat;
-    private final GeoReference mStation; // for shp
-    private final FixedInfo mFixedInfo;  // for c3d
-    private final PlotInfo  mPlotInfo;
-    private Uri mUri = null;
+  private TopoDroidApp mApp; // app - used to share
+  private final DrawingCommandManager mCommand;
+  private final SurveyInfo mInfo;
+  private final TDNum mNum;
+  private final long mType;
+  private final String mFullName; // "survey-plotX" name ;
+  private final String mExt; // extension
+  // private String filename = null;
+  private final boolean mToast;
+  private final String mFormat;
+  private final GeoReference mStation; // for shp
+  private final FixedInfo mFixedInfo;  // for c3d
+  private final PlotInfo  mPlotInfo;
+  private Uri mUri = null;
 
-    /** constructor
-     * @param context context, for the resources
-     * @param uri     export URI or null (to export in private folder)
-     * @param info    survey info
-     * @param plot    plot info
-     * @param fixed   fixed info, for georeference
-     * @param num     data reduction
-     * @param command plot drawing items
-     * @param type    ???
-     * @param name    full filename
-     * @param ext     extension, used to decide how to export the plot data
-     * @param toast   whether to toast
-     * @param station georeference station
-     */
-    ExportPlotToFile( Context context, Uri uri, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
-                      TDNum num, DrawingCommandManager command,
-                      long type, String name, String ext, boolean toast, GeoReference station )
-    {
-      // TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
-      // FIXME assert( ext != null );
-      /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
-      mFormat    = context.getResources().getString(R.string.saved_file_1);
-      mInfo      = info;
-      mPlotInfo  = plot;
-      mFixedInfo = fixed;
-      mNum       = num;
-      mCommand   = command;
-      mType      = type;
-      mFullName  = name;
-      mExt       = ext;
-      mToast     = toast;
-      mStation   = station;
+  /** constructor
+   * @param app     TopoDroid app
+   * @param context context, for the resources
+   * @param uri     export URI or null (to export in private folder)
+   * @param info    survey info
+   * @param plot    plot info
+   * @param fixed   fixed info, for georeference
+   * @param num     data reduction
+   * @param command plot drawing items
+   * @param type    ???
+   * @param name    full filename
+   * @param ext     extension, used to decide how to export the plot data
+   * @param toast   whether to toast
+   * @param station georeference station
+   */
+  ExportPlotToFile( TopoDroidApp app, Context context, Uri uri, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
+                    TDNum num, DrawingCommandManager command,
+                    long type, String name, String ext, boolean toast, GeoReference station )
+  {
+    // TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
+    // FIXME assert( ext != null );
+    mApp       = app;
+    /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
+    mFormat    = context.getResources().getString(R.string.saved_file_1);
+    mInfo      = info;
+    mPlotInfo  = plot;
+    mFixedInfo = fixed;
+    mNum       = num;
+    mCommand   = command;
+    mType      = type;
+    mFullName  = name;
+    mExt       = ext;
+    mToast     = toast;
+    mStation   = station;
+  }
+
+  /** execute in background
+   * @return true on success
+   */
+  @Override
+  protected Boolean doInBackground(Void... arg0)
+  {
+    // TDLog.v("EXPORT plot to file in bkgr. ext " + mExt );
+    // String dirname = null;
+    ParcelFileDescriptor pfd = null; 
+    if ( mUri != null ) {
+      pfd = TDsafUri.docWriteFileDescriptor( mUri );
+      if ( pfd == null ) return false;
     }
-
-    /** execute in background
-     * @return true on success
-     */
-    @Override
-    protected Boolean doInBackground(Void... arg0)
-    {
-      // TDLog.v("EXPORT plot to file in bkgr. ext " + mExt );
-      // String dirname = null;
-      ParcelFileDescriptor pfd = null; 
-      if ( mUri != null ) {
-        pfd = TDsafUri.docWriteFileDescriptor( mUri );
-        if ( pfd == null ) return false;
-      }
-      try {
-        TDPath.checkOutdir(); // FIXME don't know why have to do this check
-	String file_name = mFullName + "." + mExt; // file-name
-        String file_path = TDPath.getOutFile( file_name );
-        // TDLog.v("EXPORT plot to file <" + file_name + "> path " + file_path );
-        boolean ret = true;
-        synchronized ( TDFile.mFilesLock ) {
-          // final FileOutputStream out = TDFile.getFileOutputStream( filename );
-          if ( mExt.equals("shz") ) { 
-            FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getFileOutputStream( file_path );
-            // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
-            String dirpath = TDPath.getShpTempRelativeDir();
-            if ( dirpath != null ) {
-              // TDLog.v("EXPORT shp - dir " + dirpath );
-	      DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
-	      // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
-              // TDFile.deleteDir( dirpath );
-            } else {
-              TDLog.e("EXPORT shp - null dirpath"); // TODO
-            }
-            fos.close();
-	  } else {
-            BufferedWriter bw = null;
-            if ( mExt.equals("dxf") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-              DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
-            } else if ( mExt.equals("svg") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-              if ( TDSetting.mSvgRoundTrip ) {
-                // List<String> segments = pfd.getPathSegments();
-                (new DrawingSvgWalls()).writeSvg( file_name, bw, mNum, mCommand, mType );
-              } else {
-                (new DrawingSvg()).writeSvg( file_name, bw, mNum, mCommand, mType );
-              }
-            } else if ( mExt.equals("xvi") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-              DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
-            // } else if ( mExt.equals("xml") ) { // NO_TUNNEL
-            //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-            //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            //   (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
-            // } else if ( mExt.equals("c3d") ) { // NO_C3D
-            //   // TDLog.v("C3D export to Cave3D: " + mFullName );
-            //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-            //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            //   ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
-            } else {
-              // TDLog.e("EXPORT unsupported extension " + mExt );
-              TDToast.makeBad( String.format( TDInstance.getResourceString( R.string.unsupported_extension ), mExt ) );
-            } 
-            if ( bw != null ) {
-              bw.flush();
-              bw.close();
-            }
-	  }
-        }
-        return ret;
-      } catch (Exception e) {
-        e.printStackTrace();
-      } finally {
-        if ( pfd != null ) {
-          TDsafUri.closeFileDescriptor( pfd );
-        }
-      }
-      return false;
-    }
-
-    /** post execution, on UI thread
-     * @param bool execution result
-     */
-    @Override
-    protected void onPostExecute(Boolean bool) 
-    {
-      // TDLog.v( "export plot to file post exec");
-      super.onPostExecute(bool);
-      if ( mToast ) {
-        if ( bool ) {
-          TDToast.make( String.format( mFormat, mFullName ) ); // mExt ) );
+    try {
+      TDPath.checkOutdir(); // FIXME don't know why have to do this check
+      String file_name = mFullName + "." + mExt; // file-name
+      String file_path = TDPath.getOutFile( file_name );
+      // TDLog.v("EXPORT plot to file <" + file_name + "> path " + file_path );
+      boolean ret = true;
+      synchronized ( TDFile.mFilesLock ) {
+        // final FileOutputStream out = TDFile.getFileOutputStream( filename );
+        if ( mExt.equals("shz") ) { 
+          FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getFileOutputStream( file_path );
+          // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
+          String dirpath = TDPath.getShpTempRelativeDir();
+          if ( dirpath != null ) {
+            // TDLog.v("EXPORT shp - dir " + dirpath );
+            DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
+            // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
+            // TDFile.deleteDir( dirpath );
+          } else {
+            TDLog.e("EXPORT shp - null dirpath"); // TODO
+          }
+          fos.close();
         } else {
-          TDToast.makeBad( R.string.saving_file_failed );
+          BufferedWriter bw = null;
+          if ( mExt.equals("dxf") ) {
+            bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+            // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
+          } else if ( mExt.equals("svg") ) {
+            bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+            // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            if ( TDSetting.mSvgRoundTrip ) {
+              // List<String> segments = pfd.getPathSegments();
+              (new DrawingSvgWalls()).writeSvg( file_name, bw, mNum, mCommand, mType );
+            } else {
+              (new DrawingSvg()).writeSvg( file_name, bw, mNum, mCommand, mType );
+            }
+          } else if ( mExt.equals("xvi") ) {
+            bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+            // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
+          // } else if ( mExt.equals("xml") ) { // NO_TUNNEL
+          //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+          //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
+          // } else if ( mExt.equals("c3d") ) { // NO_C3D
+          //   // TDLog.v("C3D export to Cave3D: " + mFullName );
+          //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+          //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
+          } else {
+            // TDLog.e("EXPORT unsupported extension " + mExt );
+            TDToast.makeBad( String.format( TDInstance.getResourceString( R.string.unsupported_extension ), mExt ) );
+          } 
+          if ( bw != null ) {
+            bw.flush();
+            bw.close();
+          }
         }
       }
+      return ret;
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if ( pfd != null ) {
+        TDsafUri.closeFileDescriptor( pfd );
+      }
     }
+    return false;
+  }
+
+  /** post execution, on UI thread
+   * @param bool execution result
+   */
+  @Override
+  protected void onPostExecute(Boolean bool) 
+  {
+    // TDLog.v( "export plot to file post exec " + bool );
+    super.onPostExecute(bool);
+    if ( mToast ) {
+      if ( bool ) {
+        TDToast.make( String.format( mFormat, mFullName ) ); // mExt ) );
+      } else {
+        TDToast.makeBad( R.string.saving_file_failed );
+      }
+    }
+    if ( bool && TDSetting.mExportPlotShare && mApp != null ) {
+      String filename = mFullName + "." + mExt;
+      String mimetype = TDConst.getMimeFromExtension( mExt );
+      // TDLog.v("sharing PLOT file " + filename + " mime " + mimetype );
+      if ( mimetype != null ) {
+        mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity
+      }
+    }
+  }
 }
 

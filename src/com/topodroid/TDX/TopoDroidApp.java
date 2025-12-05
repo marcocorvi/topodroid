@@ -853,7 +853,7 @@ public class TopoDroidApp extends Application
     // TDLog.v( "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
-    TDLog.v( "load secondary done");
+    // TDLog.v( "load secondary done");
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -1119,7 +1119,7 @@ public class TopoDroidApp extends Application
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     mDData = new DeviceHelper( thisApp );
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-    TDLog.v("TDApp load primary prefs");
+    // TDLog.v("TDApp load primary prefs");
     TDSetting.loadPrimaryPreferences( TDInstance.getResources(),  prefHlp );
 
     thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
@@ -1643,7 +1643,7 @@ public class TopoDroidApp extends Application
     ManualCalibration.reset();
 
     if ( name != null && mData != null ) {
-      TDLog.v( "set Survey From Name <" + name + ">");
+      // TDLog.v( "set Survey From Name <" + name + ">");
 
       TDInstance.sid = mData.setSurvey( name, datamode );
       if ( TDSetting.WITH_IMMUTABLE ) {
@@ -1694,7 +1694,7 @@ public class TopoDroidApp extends Application
   {
     if ( mData == null ) return false;
     long new_sid = mData.getSurveyId( new_survey );
-    TDLog.v( "MOVE data: " + old_sid + "/" + old_id + " to " + new_sid );
+    // TDLog.v( "MOVE data: " + old_sid + "/" + old_id + " to " + new_sid );
     if ( new_sid <= 0 || new_sid == old_sid ) return false;
     return mData.moveShotsBetweenSurveys( old_sid, old_id, new_sid );
   }
@@ -2043,7 +2043,7 @@ public class TopoDroidApp extends Application
    * @param psd2      profile data
    * @param toast     whether to toast to result
    */
-  static void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
+  void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
     SurveyInfo survey_info = getSurveyInfo();
     if ( survey_info == null ) {
@@ -2056,7 +2056,7 @@ public class TopoDroidApp extends Application
     // String filename = TDPath.getSurveyCsxFile( fullname );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
-    (new SaveFullFileTask( context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname, 
+    (new SaveFullFileTask( this, context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname, 
        /* TDPath.getCsxFile(""), */ toast )).execute();
   }
 
@@ -2336,7 +2336,7 @@ public class TopoDroidApp extends Application
     resetCurrentOrLastStation( );
     long time = TDUtil.getTimeStamp();
     distance = distance / TDSetting.mUnitLength;
-    TDLog.v( "[2] duplicate-shot Data " + distance + " " + bearing + " " + clino );
+    // TDLog.v( "[2] duplicate-shot Data " + distance + " " + bearing + " " + clino );
     long id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend, 0.0, DBlock.FLAG_DUPLICATE, LegType.NORMAL, 1 );
     if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
       // TDLog.v("APP insert duplicate leg detect bad sibling");
@@ -2538,7 +2538,7 @@ public class TopoDroidApp extends Application
     clino    = clino    / TDSetting.mUnitAngle  - ManualCalibration.mClino;
     float b  = bearing  / TDSetting.mUnitAngle;
 
-    TDLog.v("APP insert manual shot " + from + "-" + to + " at " + at + " D " + distance + " B " + bearing + " C " + clino + " flag " + flag0 );
+    // TDLog.v("APP insert manual shot " + from + "-" + to + " at " + at + " D " + distance + " B " + bearing + " C " + clino + " flag " + flag0 );
 
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
@@ -3331,7 +3331,7 @@ public class TopoDroidApp extends Application
   void shareZip( Uri uri0 )
   {
     String zipname = TDPath.getSurveyZipFile( TDInstance.survey );
-    TDLog.v("Zip share file " + zipname );
+    // TDLog.v("Zip share file " + zipname );
     // Uri uri = Uri.fromFile( TDFile.getFile( zipname ) );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( zipname ) );
 
@@ -3344,7 +3344,11 @@ public class TopoDroidApp extends Application
     intent.setType( "application/zip" );
     intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
     try {
-      mSurveyWindow.startActivity( intent );
+      if ( mSurveyWindow == null ) {
+        mSurveyWindow.startActivity( intent );
+      } else {
+        TDToast.makeWarn( R.string.zip_share_failed );
+      }
       // mSurveyWindow.startActivity( Intent.createChooser( intent, "chooser title" ) );
     } catch ( ActivityNotFoundException e ) {
       TDToast.makeWarn( R.string.zip_share_failed );
@@ -3354,11 +3358,12 @@ public class TopoDroidApp extends Application
   /** share a file (KML, TH, etc.)
    * @param filename   the filename (relative, e.g., "survey.kml")
    * @param mimeType   the MIME type for the file
+   * @param act        activity type
    */
-  void shareFile( String filename, String mimeType )
+  void shareFile( String filename, String mimeType, int act )
   {
     String filepath = TDPath.getOutFile( filename );
-    TDLog.v("Share file " + filepath );
+    // TDLog.v("Share file " + filepath );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( filepath ) );
 
     Intent intent = new Intent( );
@@ -3367,8 +3372,12 @@ public class TopoDroidApp extends Application
     intent.setType( mimeType );
     intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
     try {
-      if ( mSurveyWindow != null ) {
+      if ( act == 1 && mSurveyWindow != null ) {
         mSurveyWindow.startActivity( intent );
+      } else if ( act == 2 && mDrawingWindow != null ) {
+        mDrawingWindow.startActivity( intent );
+      } else {
+        TDToast.makeWarn( R.string.file_share_failed );
       }
     } catch ( ActivityNotFoundException e ) {
       TDToast.makeWarn( R.string.file_share_failed );

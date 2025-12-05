@@ -278,8 +278,8 @@ public class TDSetting
   public static boolean mZipShare             = false;  // whether to share exported zip
   public static boolean mZipShareCategory     = false;  // DISTOX_ZIP_SHARE_CATEGORY
   public static boolean mZipOverwrite         = true;   // whether to overwrite exported zip
-  public static boolean mKmlShare             = false;  // whether to share exported KML
-  public static boolean mThShare              = false;  // whether to share exported Therion
+  public static boolean mExportDataShare      = false;  // whether to share exported data file
+  public static boolean mExportPlotShare      = false;  // whether to share exported plot file
   public static boolean mPlotExportSaveAs     = false;  // whether to choose save location for plot export
   public static boolean mSurveyExportSaveAs   = false;  // whether to choose save location for survey export
 

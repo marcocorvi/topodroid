@@ -736,6 +736,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="zip_share_failed">No se puede compartir el archivo zip</string>
+    <!-- TODO string name="file_share_failed">Unable to share file</string -->
     <string name="unzip_fail">Error al importar archivo</string>
     <string name="unzip_fail_sqlite">Fallo SQL: elimine la topografía y vuelva a intentarlo</string>
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>

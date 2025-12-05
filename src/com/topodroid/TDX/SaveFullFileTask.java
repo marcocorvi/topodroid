@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2014
  *
- * @brief TopoDroid drawing: save drawing in therion format
+ * @brief TopoDroid drawing: save drawing in cSurvey format - used only for plot
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,8 +11,9 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDFile;
+import com.topodroid.prefs.TDSetting;
 
 // import java.lang.ref.WeakReference;
 
@@ -30,6 +31,7 @@ import android.net.Uri;
 
 class SaveFullFileTask extends AsyncTask<Void,Void,String>
 {
+  private TopoDroidApp mApp;
   private long mSid;
   private DataHelper mData;
   private SurveyInfo mInfo;
@@ -55,9 +57,10 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
    * @param fullname  file name, either "survey" or "survey-plot" 
    * @param toast     whether to toast to result
    */
-  SaveFullFileTask( Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, // String filename,
+  SaveFullFileTask( TopoDroidApp app, Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, // String filename,
                     String fullname, /* String dirname, */ boolean toast )
   {
+    mApp      = app;
     mUri      = uri;
     mSid      = sid;
     mData     = data;
@@ -97,14 +100,21 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   @Override
   protected void onPostExecute(String filename)
   {
-    // TDLog.v( "save plot file task post exec");
+    // TDLog.v( "save full plot file task post exec " + filename );
     if ( filename == null ) {
       // TDLog.Log( TDLog.LOG_IO, "failed export as CSX " + mFullname );
       if ( mToast ) TDToast.make( R.string.saving_file_failed );
     } else {
       // TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );
       if ( mToast ) TDToast.make( String.format( mFormat, "csx" ) ); // was filename
+      if ( TDSetting.mExportPlotShare ) {
+        String filename2 = filename + ".csx";
+        // TDLog.v("sharing CSX filename " + filename2 );
+        String mimetype = TDConst.getMimeFromExtension( "csx" );
+        mApp.shareFile( filename2, mimetype, 2 );
+      }
     }
   }
+
 }
 

@@ -731,6 +731,7 @@
     <string name="zip_saved">Сохранено </string>
     <string name="zip_failed">Ошибка survey-zip</string>
     <string name="zip_share_failed">Невозможно поделиться zip-архивом</string>
+    <!-- TODO string name="file_share_failed">Unable to share file</string -->
     <string name="unzip_fail">Ошибка survey-unzip</string>
     <string name="unzip_fail_sqlite">Ошибка SQL: удалите съёмку и попробуйте снова</string>
     <string name="unzip_fail_survey">Ошибка: несовпадение названия съёмки</string>
