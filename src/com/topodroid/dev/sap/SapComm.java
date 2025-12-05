@@ -72,11 +72,11 @@ public class SapComm extends TopoDroidComm
   private UUID mNotifyUUID;
 
   private ConcurrentLinkedQueue< BleOperation > mOps;
-  private Context         mContext;
+  protected Context         mContext;
   private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
   private BleCallback mCallback;
-  private SapProtocol mSapProto;
+  protected SapProtocol mSapProto;
   // private int mDataType = DataType.DATA_SHOT;
   private int mDataType;
 
@@ -149,13 +149,21 @@ public class SapComm extends TopoDroidComm
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
       TDLog.v( "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() );
       notifyStatus( ConnectionState.CONN_WAITING );
-      mSapProto = new SapProtocol( this, device, context );
+      createProtocol( device );
       mCallback = new BleCallback( this, true ); // auto_connect true
       mProtocol = mSapProto;
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
       doNextOp();
       // mCallback.connectGatt( mContext, mRemoteBtDevice );
     }
+  }
+
+  /** create the protocol
+   * @param device   BT device
+   */
+  protected void createProtocol( Device device )
+  {
+    mSapProto = new SapProtocol( this, device, mContext );
   }
 
   // -------------------------------------------------------------

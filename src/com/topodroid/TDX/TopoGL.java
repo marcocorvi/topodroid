@@ -23,6 +23,7 @@ import com.topodroid.utils.TDLocale;
 // import com.topodroid.c3bt.BleUtils;
 // import com.topodroid.c3bt.BricComm;
 // import com.topodroid.c3bt.SapComm;
+// import com.topodroid.c3bt.DiscoXComm;
 // import com.topodroid.c3bt.DistoXComm;
 
 import com.topodroid.c3in.ParserTh;
@@ -2638,6 +2639,8 @@ public class TopoGL extends Activity
         mBluetoothComm = new BricComm( this, this, mBtRemoteDevice );
       } else if ( Device.isSap( mBtRemoteName ) ) {
         mBluetoothComm = new SapComm( this, this, mBtRemoteDevice );
+      } else if ( Device.isDiscoX( mBtRemoteName ) ) {
+        mBluetoothComm = new DiscoXComm( this, this, mBtRemoteDevice );
       } else if ( mBtRemoteName.startsWith( Device.NAME_DISTOX2 ) ) {
         mBluetoothComm = new DistoXComm( this, this, mBtRemoteDevice, mBtRemoteDevice.getAddress() );
       } else if ( mBtRemoteName.startsWith( Device.NAME_DISTOXBLE ) ) {

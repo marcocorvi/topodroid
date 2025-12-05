@@ -38,7 +38,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
 // -----------------------------------------------------------------------------
-class SapProtocol extends TopoDroidProtocol
+public class SapProtocol extends TopoDroidProtocol
 {
   // private SapComm mComm; // UNUSED
   ArrayList< byte[] > mWriteBuffer;  // write buffer
@@ -48,7 +48,7 @@ class SapProtocol extends TopoDroidProtocol
    * @param device  BT device
    * @param context context
    */
-  SapProtocol( SapComm comm, Device device, Context context )
+  public SapProtocol( SapComm comm, Device device, Context context )
   {
     super( device, context );
     // mComm   = comm;

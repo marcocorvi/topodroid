@@ -45,6 +45,7 @@ import com.topodroid.dev.distox2.DistoX310Comm;
 import com.topodroid.dev.distox2.DeviceX310Info;
 import com.topodroid.dev.distox2.DeviceX310Details;
 import com.topodroid.dev.sap.SapComm;
+import com.topodroid.dev.discox.DiscoXComm;
 import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.PairingRequest;
@@ -883,6 +884,11 @@ public class TopoDroidApp extends Application
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         // TDLog.v( "TDApp: create SAP comm");
         mComm = new SapComm( this, address, bt_device );
+      } else if ( TDInstance.isDeviceDiscoX() ) {
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
+        // TDLog.v( "TDApp: create SAP comm");
+        mComm = new DiscoXComm( this, address, bt_device );
       } else if ( TDInstance.isDeviceBric() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
@@ -1845,7 +1851,9 @@ public class TopoDroidApp extends Application
         // address, model, head, tail, name, nickname
         TDInstance.setDeviceA( new Device( address, model, 0, 0, name, null ) );
         TDInstance.setBleDevice( bt_device );
-        if ( TDInstance.isDeviceSap() ) {
+        if ( TDInstance.isDeviceDiscoX() ) {
+          mComm = new DiscoXComm( this, address, bt_device ); 
+        } else if ( TDInstance.isDeviceSap() ) {
           mComm = new SapComm( this, address, bt_device ); 
         } else if ( TDInstance.isDeviceBric() ) {
           mComm = new BricComm( this, this, address, bt_device );
@@ -2703,6 +2711,22 @@ public class TopoDroidApp extends Application
 
 
   // --------------------------------------------------------
+
+  // FIXME_DISCOX
+  /** send a command to the DiscoX
+   * @param cmd   command code (@see SapConst)
+   */
+  public void sendDiscoXCommand( int cmd )
+  { 
+    // boolean ret = false;
+    if ( mComm != null && mComm instanceof DiscoXComm ) {
+      TDLog.v( "DiscoX app send command " + cmd );
+      mComm.sendCommand( cmd );
+    // } else {
+    //   TDLog.e("Comm is null or not SAP6");
+    }
+    // return ret;
+  }
 
   // FIXME_SAP6
   /** send a command to the SAP6

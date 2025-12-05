@@ -100,6 +100,10 @@ public class TDInstance
    */
   public static boolean isDeviceSap6()   { return deviceA != null && deviceA.isSap6(); }
 
+  /** @return true if the primary device is set and is of type SAP6
+   */
+  public static boolean isDeviceDiscoX() { return deviceA != null && deviceA.isDiscoX(); }
+
   /** @return true if the primary device is set and is of type BRIC (BRIC4 or BRIC5)
    */
   public static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
