@@ -169,6 +169,8 @@ public class MainWindow extends Activity
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
                           R.string.menu_export,
+                          R.string.menu_backup,
+                          R.string.menu_restore,
                           R.string.menu_about,
                           R.string.menu_options,
                           R.string.menu_help,
@@ -192,6 +194,8 @@ public class MainWindow extends Activity
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
                           R.string.help_export_surveys,
+                          R.string.help_full_backup,
+                          R.string.help_full_restore,
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
                           R.string.help_help,
@@ -682,9 +686,11 @@ public class MainWindow extends Activity
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
     if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // EXPORT
-    menu_adapter.add( res.getString( menus[4] ) ); // ABOUT
-    menu_adapter.add( res.getString( menus[5] ) ); // SETTINGS
-    menu_adapter.add( res.getString( menus[6] ) ); // HELP
+    menu_adapter.add( res.getString( menus[4] ) ); // BACKUP
+    menu_adapter.add( res.getString( menus[5] ) ); // RESTORE
+    menu_adapter.add( res.getString( menus[6] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[7] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[8] ) ); // HELP
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -736,6 +742,18 @@ public class MainWindow extends Activity
       } else if ( TDLevel.overExpert && p++ == pos ) {  // EXPORT
         String[] types = TDConst.surveyExportTypes( false ); // with_geo=false
         new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, false, false ).show(); // diving=false
+      } else if ( p++ == pos ) { // FULL BACKUP
+        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.backup_confirm,
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { doFullBackup(); }
+          }
+        );
+      } else if ( p++ == pos ) { // RESTORE BACKUP
+        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.restore_confirm,
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { doFullRestore(); }
+          }
+        );
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
@@ -1393,6 +1411,39 @@ public class MainWindow extends Activity
     super.onBackPressed();
   }
 
+  /** perform full backup - open file picker to select destination */
+  private void doFullBackup()
+  {
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd_HHmmss", java.util.Locale.US);
+    String timestamp = sdf.format(new java.util.Date());
+    String backupName = "TopoDroid-backup-" + timestamp + ".zip";
+    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.setType("application/zip");
+    intent.putExtra(Intent.EXTRA_TITLE, backupName);
+    try {
+      startActivityForResult(intent, TDRequest.REQUEST_FULL_BACKUP);
+    } catch (ActivityNotFoundException e) {
+      TDLog.e("BACKUP file picker not available: " + e.getMessage());
+      // Fallback: save to default location without picker
+      new FullBackupTask(mActivity, null).execute();
+    }
+  }
+
+  /** perform full restore - open file picker to select backup file */
+  private void doFullRestore()
+  {
+    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.setType("application/zip");
+    try {
+      startActivityForResult(intent, TDRequest.REQUEST_FULL_RESTORE);
+    } catch (ActivityNotFoundException e) {
+      TDLog.e("RESTORE file picker not available: " + e.getMessage());
+      TDToast.makeBad(R.string.restore_failed);
+    }
+  }
+
   // ------------------------------------------------------------------
  
   /** attach base context
@@ -1454,11 +1505,31 @@ public class MainWindow extends Activity
           TDLog.e("SETTINGS canceled");
         }
         break;
-      case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
+      case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import
         if ( result == Activity.RESULT_OK ) {
           importFile( intent );
         } else {
           TDLog.e("IMPORT canceled");
+        }
+        break;
+      case TDRequest.REQUEST_FULL_BACKUP:
+        if ( result == Activity.RESULT_OK && intent != null ) {
+          Uri uri = intent.getData();
+          if ( uri != null ) {
+            new FullBackupTask(mActivity, uri).execute();
+          }
+        } else {
+          TDLog.v("BACKUP canceled");
+        }
+        break;
+      case TDRequest.REQUEST_FULL_RESTORE:
+        if ( result == Activity.RESULT_OK && intent != null ) {
+          Uri uri = intent.getData();
+          if ( uri != null ) {
+            new FullRestoreTask(mActivity, mApp, uri).execute();
+          }
+        } else {
+          TDLog.v("RESTORE canceled");
         }
         break;
     }

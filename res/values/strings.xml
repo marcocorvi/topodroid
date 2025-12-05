@@ -489,6 +489,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_device">DEVICE</string>
     <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
     <string name="menu_export">EXPORT</string>
+    <string name="menu_backup">Full backup</string>
+    <string name="menu_restore">Restore backup</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
     <string name="menu_geopoint_app" copyable="all">GNSS APP</string>
     <string name="menu_recover">RECOVER</string>
@@ -757,6 +759,17 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="zip_failed">Failed survey-zip</string>
     <string name="zip_share_failed">Unable to share zip-archive</string>
     <string name="file_share_failed">Unable to share file</string>
+    <string name="backup_saved">Backup saved</string>
+    <string name="backup_failed">Backup failed</string>
+    <string name="restore_completed">Restore completed</string>
+    <string name="restore_failed">Restore failed</string>
+    <string name="backup_confirm">Create a full backup of all surveys and database?</string>
+    <string name="restore_confirm">Restore from backup? This will replace your current data!</string>
+    <string name="title_backup">Full backup</string>
+    <string name="title_restore">Restore backup</string>
+    <string name="restart_required">Restart required to apply preferences</string>
+    <string name="restart_now">Restart now</string>
+    <string name="restart_later">Later</string>
     <string name="unzip_fail">Failed survey-unzip</string>
     <string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string>
     <string name="unzip_fail_survey">Failed: survey name mismatch</string>
@@ -1202,6 +1215,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_save_calib">Save changes to calibration info</string>
     <string name="help_export_survey">Export survey</string>
     <string name="help_export_surveys">Export all surveys</string>
+    <string name="help_full_backup">Create a full backup of all surveys and database</string>
+    <string name="help_full_restore">Restore all data from a backup file</string>
     <string name="help_loc">GPS location</string>
     <string name="help_delete_survey">Delete survey</string>
     <string name="help_delete_calib">Delete calibration</string>
