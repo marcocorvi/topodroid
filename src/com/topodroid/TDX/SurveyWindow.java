@@ -649,6 +649,8 @@ public class SurveyWindow extends Activity
    * @param second    whether to export the second view (unused: only plan or profile in DrawingWindow) - not used here
    * @note interface IExporter
    */
+  private static ExportInfo mExportInfo; // export info for file picker callback
+
   public void doExport( String type, String filename, String prefix, long first, boolean second )
   {
     TDLog.v( "SURVEY do export - name " + filename + " prefix " + prefix );
@@ -657,39 +659,28 @@ public class SurveyWindow extends Activity
       return;
     }
     TDSetting.mExportPrefix = prefix; // save export-prefix
-    // mExportInfo = null;
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );
-    // if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
-    //   doArchive();
-    // } else 
     if ( index >= 0 ) {
       if ( TDInstance.sid < 0 ) {
         TDToast.makeBad( R.string.no_survey );
       } else {
         ExportInfo export_info = new ExportInfo( index, prefix, filename, first );
-        // APP_OUT_DIR
-        // // if ( TDSetting.mExportUri ) { // FIXME-URI unused URI_EXPORT
-        //   selectExportFromProvider( index, filename );
-        // // } else {
-        // //   mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
-        // // }
-
-        //if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-        //  // selectExportFromProvider( index, filename );
-        //  mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
-        //} else {
-        //  mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
-        //}
-        // 20251208 since there is no need for the "if"
-        mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
+        if ( TDSetting.mSurveyExportSaveAs ) {
+          // Use file picker to let user choose save location
+          mExportInfo = export_info;
+          Intent intent = TDandroid.getCreateDocumentIntent( index );
+          intent.putExtra( Intent.EXTRA_TITLE, filename );
+          startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.select_export_file ) ), TDRequest.REQUEST_GET_EXPORT );
+        } else {
+          // Save directly to default location
+          mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
+        }
       }
     } else {
       TDLog.e("Survey Window export - negative index " + index );
     }
   }
-
-  // private static ExportInfo mExportInfo; // index of the export-type 
 
   /* unused URI_EXPORT
    *
@@ -966,9 +957,20 @@ public class SurveyWindow extends Activity
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_read_names ) ), TDRequest.REQUEST_READ_NAMES );
   }
     
-  public void onActivityResult( int request, int result, Intent intent ) 
+  public void onActivityResult( int request, int result, Intent intent )
   {
     switch ( request ) {
+      case TDRequest.REQUEST_GET_EXPORT:
+        if ( result == Activity.RESULT_OK && intent != null ) {
+          Uri uri = intent.getData();
+          if ( uri != null && mExportInfo != null ) {
+            mApp.doExportDataAsync( getApplicationContext(), uri, mExportInfo, true, false );
+          }
+        } else {
+          TDLog.e("SURVEY export canceled");
+        }
+        mExportInfo = null;
+        break;
       case TDRequest.REQUEST_READ_NAMES:
         if ( result == Activity.RESULT_OK ) {
           if ( mStationsDialog != null ) {

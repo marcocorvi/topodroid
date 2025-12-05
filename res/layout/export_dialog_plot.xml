@@ -17,6 +17,13 @@
     android:drawSelectorOnTop="true"
   />
 
+  <CheckBox android:id="@+id/export_save_as"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:text="@string/export_save_as"
+  />
+
   <LinearLayout android:id="@+id/layout_therion"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
