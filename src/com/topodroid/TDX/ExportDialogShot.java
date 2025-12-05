@@ -444,6 +444,7 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mTherionMaps = ((CheckBox) findViewById( R.id.therion_maps )).isChecked();
           TDSetting.mTherionUncommentedMaps = ((CheckBox) findViewById( R.id.therion_uncommented_maps )).isChecked();
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.therion_lrud )).isChecked();
+          TDSetting.mThShare = ((CheckBox) findViewById( R.id.therion_share )).isChecked();
         }
         break;
       // case 7: // Topo
@@ -502,6 +503,7 @@ public class ExportDialogShot extends MyDialog
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.kml_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.kml_stations )).isChecked();
+          TDSetting.mKmlShare = ((CheckBox) findViewById( R.id.kml_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_SHAPEFILE: // Shapefile
@@ -545,6 +547,7 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );
     ((CheckBox) findViewById( R.id.therion_uncommented_maps )).setChecked( TDSetting.mTherionUncommentedMaps );
     ((CheckBox) findViewById( R.id.therion_lrud )).setChecked( TDSetting.mSurvexLRUD );
+    ((CheckBox) findViewById( R.id.therion_share )).setChecked( TDSetting.mThShare );
     if ( mDiving ) {
       ((CheckBox) findViewById( R.id.vtopo_trox )).setVisibility( View.GONE );
     } else {
@@ -568,6 +571,7 @@ public class ExportDialogShot extends MyDialog
 
     ((CheckBox) findViewById( R.id.kml_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.kml_stations )).setChecked( TDSetting.mKmlStations );
+    ((CheckBox) findViewById( R.id.kml_share )).setChecked( TDSetting.mKmlShare );
 
     ((CheckBox) findViewById( R.id.shp_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.shp_stations )).setChecked( TDSetting.mKmlStations );
