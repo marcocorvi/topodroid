@@ -37,6 +37,9 @@ public class TDRequest
 
   public static final int REQUEST_CWD                = 30; // current work directory
 
+  public static final int REQUEST_FULL_BACKUP        = 40; // full backup save location
+  public static final int REQUEST_FULL_RESTORE       = 41; // full backup restore file
+
   public static final int REQUEST_TDCONFIG = 200;
   public static final String TDCONFIG_PATH = "TdManagerConfig"; // request extra key
 
