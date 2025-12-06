@@ -64,7 +64,7 @@ public class BtAliasActivity extends Activity
 
   private String mModel = null;
   private int mSelectedPos = -1;
-  private int[] mPosToIndex;
+  private int[] mPosToIndex; // from position in the adapter list to index in the Device arrays
   
   private boolean setBtAlias()
   {

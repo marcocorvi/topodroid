@@ -18,7 +18,8 @@ package com.topodroid.dev;
 // SIWEI_TIAN changed on Jun 2022
 public class Device
 {
-  /** Bluetooth advertised name prefixes
+  /** Devices comon names:
+   * Bluetooth advertised name prefixes
    * The device BT model strings are defined only here
    *
    * These strings (without the underscore/dash) can appear also in log statements
@@ -39,28 +40,42 @@ public class Device
   public final static String NAME_DISCOX    = "discox_";
   
   // supported models and their common names
-  public final static String[] mModels = { NAME_DISTOX1, NAME_DISTOX2, NAME_DISTOXBLE,
+  public final static String[] mModels = {
+    NAME_DISTOX1, NAME_DISTOX2, NAME_DISTOXBLE,
     NAME_BRIC4, NAME_BRIC5, NAME_BRIC5_2,
     NAME_SAP5, NAME_SAP5_2, NAME_SAP6, NAME_SAP6_2,
-    NAME_CAVWAY };
+    NAME_CAVWAY,
+    NAME_DISCOX };
 
-  public final static String[] mModelNames = { "DistoX A3", "DistoX X310", "DistoX BLE",
+  /** device presentation names, for the user interface
+   */
+  public final static String[] mModelNames = {
+    "DistoX A3", "DistoX X310", "DistoX BLE",
     "BRIC 4", "BRIC 5", "BRIC 5",
     "SAP 5",  "SAP 5",  "SAP 6",  "SAP 6",
-    "Cavway X1", "DiscoX" };
+    "Cavway X1",
+    "discox" };
 
-  public final static String[] mAdvertisedNames = { "DistoX A3", "DistoX X310", "DistoX BLE",
+  /** these "advertised names" are used to set the device through a setting
+   * BT aliases are saved in device.sqlite
+   */
+  public final static String[] mAdvertisedNames = {
+    "DistoX A3", "DistoX X310", "DistoX BLE",
     "BRIC 4", "BRIC 5", null,
     "SAP 5",  null, "SAP 6", null,
-    "Cavway X1", "DiscoX" };
+    "Cavway X1",
+    "discox" };
 
+  /** @return true if the BT name is known
+   * @param name   device BT advertised name
+   */
   public final static boolean isKnownDevice( String name )
   {
-    if ( name.startsWith( "Cavway" ) ) return true;
+    if ( name.startsWith( "Cavway" ) ) return true; // comparison is case sensitive
     if ( name.startsWith( "DistoX" ) ) return true;
+    if ( name.startsWith( "discox" ) ) return true;
     if ( name.startsWith( "BRIC" ) )   return true;
     if ( name.startsWith( "SAP" ) )    return true;
-    if ( name.startsWith( "DiscoX" ) )    return true;
     return false;
   }
 
@@ -102,8 +117,8 @@ public class Device
 
 
   // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9        10
-  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CVWY1", "DiscoX" };
-  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5", "CVWY1", "DiscoX" };
+  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CVWY1", "discox" };
+  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5", "CVWY1", "discox" };
   
   public static String typeToString( int type )
   {
@@ -187,7 +202,7 @@ public class Device
     if ( bt_name.startsWith( NAME_BRIC5 ) )     return "BRIC5";
     if ( bt_name.startsWith( NAME_BRIC5_2 ) )   return "BRIC5";
     if ( bt_name.startsWith( NAME_BRIC4 ) )     return "BRIC4";
-    if ( bt_name.startsWith( NAME_DISCOX ) )    return "DiscoX";
+    if ( bt_name.startsWith( NAME_DISCOX ) )    return "discox";
     if ( bt_name.startsWith( NAME_SAP5 ) )      return "SAP5";
     if ( bt_name.startsWith( NAME_SAP5_2 ) )    return "SAP5";
     if ( bt_name.startsWith( NAME_SAP6 ) )      return "SAP6";
@@ -200,7 +215,7 @@ public class Device
   }
 
   /** @return the device name given the BT name 
-   * @param bt_name   BT name
+   * @param bt_name   BT advertised name
    * @note used by DeviceActivity
    */
   public static String btnameToName( String bt_name )
@@ -211,6 +226,7 @@ public class Device
     if ( bt_name.startsWith( NAME_CAVWAY ) )    return bt_name.replace( NAME_CAVWAY, "" );
     if ( bt_name.startsWith( NAME_DISCOX ) )    return bt_name.replace( NAME_DISCOX, "" );
     // NAME_DISTOX1 left unchnaged
+
     if ( bt_name.startsWith( NAME_BRIC5 ) )   return bt_name.replace( NAME_BRIC5, "" );
     if ( bt_name.startsWith( NAME_BRIC5_2 ) ) return bt_name.replace( NAME_BRIC5_2, "" );
     if ( bt_name.startsWith( NAME_BRIC4 ) )   return bt_name.replace( NAME_BRIC4, "" );

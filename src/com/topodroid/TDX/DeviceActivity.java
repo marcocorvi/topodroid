@@ -1173,7 +1173,7 @@ public class DeviceActivity extends Activity
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = -1;
-    ++k; if ( TDLevel.overExpert   ) menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
+    ++k; menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
     // ++k; if ( TDLevel.overExpert && mHasBLE ) menu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
@@ -1202,7 +1202,7 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( TDLevel.overExpert && p++ == pos ) { // BT_SCAN
+    if ( p++ == pos ) { // BT_SCAN
       Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
       scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
