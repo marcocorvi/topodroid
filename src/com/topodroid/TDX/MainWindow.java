@@ -136,6 +136,7 @@ public class MainWindow extends Activity
   private ListItemAdapter mArrayAdapter;
 
   private Button[] mButton1;
+  /** device buttons */
   private BitmapDrawable  mButtonDistoX0;
   private BitmapDrawable  mButtonDistoX1;
   private BitmapDrawable  mButtonDistoX2;
@@ -145,6 +146,7 @@ public class MainWindow extends Activity
   private BitmapDrawable  mButtonBric4;
   private BitmapDrawable  mButtonBric5;
   private BitmapDrawable  mButtonCavwayX1;
+  private BitmapDrawable  mButtonDiscoX;
 
   private final  int BTN_DEVICE = 0;
 
@@ -1031,6 +1033,7 @@ public class MainWindow extends Activity
     mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric4 );
     mButtonBric5   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric5 );
     mButtonCavwayX1 = MyButton.getButtonBackground( this, res, R.drawable.iz_cavwayx1 );
+    mButtonDiscoX   = MyButton.getButtonBackground( this, res, R.drawable.iz_discox );
 
     // mButton1[2].setOnLongClickListener( this ); // IMPORT ZIP
     setButtonDevice();
@@ -1079,6 +1082,8 @@ public class MainWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap6 );
     } else if ( TDInstance.isDeviceCavwayX1() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonCavwayX1 );
+    } else if ( TDInstance.isDeviceDiscoX() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDiscoX );
     } else {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX0 );
     }
