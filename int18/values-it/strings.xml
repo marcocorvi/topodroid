@@ -735,6 +735,7 @@
     <string name="zip_failed">Archiviazione rilievo fallita</string>
     <string name="zip_share_failed">Impossibile condivisione zip</string>
     <!-- TODO string name="file_share_failed">Unable to share file</string -->
+    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
     <string name="unzip_fail">Scompattazione rilievo fallita</string>
     <string name="unzip_fail_sqlite">Errore SQL: cancellare il rilievo e riprovare</string>
     <string name="unzip_fail_survey">Fallito: Nome rilievo non corrispondente</string>

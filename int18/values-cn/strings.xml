@@ -736,6 +736,7 @@
     <string name="zip_failed">文件压缩失败</string>
     <string name="zip_share_failed">不能分享zip档案</string>
     <string name="file_share_failed">无法分享文件</string>
+    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
     <string name="unzip_fail">文件解压失败</string>
     <string name="unzip_fail_sqlite">错误 SQL: 删除测量项目并重试</string>
     <string name="unzip_fail_survey">错误:测量名称不匹配</string>

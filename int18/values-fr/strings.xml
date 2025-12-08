@@ -735,6 +735,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="zip_failed">Échec lors de la compression du relevé</string>
     <string name="zip_share_failed">Impossible de partager l\'archive zip</string>
     <!-- TODO string name="file_share_failed">Unable to share file</string -->
+    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
     <string name="unzip_fail">Échec lors de la décompression du relevé</string>
     <string name="unzip_fail_sqlite">Erreur SQL : effacez le relevé et réessayez</string>
     <string name="unzip_fail_survey">Échec : nom du relevé incorrect</string>

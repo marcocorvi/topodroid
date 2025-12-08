@@ -695,6 +695,7 @@
     <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
     <string name="zip_share_failed">Fehler beim teilen der Zip-Datei</string>
     <!-- TODO string name="file_share_failed">Unable to share file</string -->
+    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
     <string name="unzip_fail">Fehler beim Entpacken der Zip-Datei</string>
     <string name="unzip_fail_sqlite">Datenbank-Fehler; Vermessung löschen und erneut versuchen</string>
     <string name="unzip_fail_survey">Fehler: Vermessungsname falsch</string>

@@ -739,6 +739,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="zip_failed">Неуспешно архивиране на картировка</string>
     <string name="zip_share_failed">Неуспешно споделяне на zip - архив</string>
     <!-- TODO string name="file_share_failed">Unable to share file</string -->
+    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
     <string name="unzip_fail">Неуспешно разархивиране на картировка</string>
     <string name="unzip_fail_sqlite">Неуспешен SQL: изтрийте картировката и опитайте отново</string>
     <string name="unzip_fail_survey">Неуспешно: несъответствие на името на картировката</string>

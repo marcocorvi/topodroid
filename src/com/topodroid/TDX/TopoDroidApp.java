@@ -3298,7 +3298,7 @@ public class TopoDroidApp extends Application
    * @param context         context
    * @param export_info     export info
    * @param toast           whether to toast a message
-   * @param in_foreground   whether to run in foreground
+   * @param in_foreground   whether to run in foreground (only ZIP export)
    * @note called by SurveyWindow on export
    */
   boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast, boolean in_foreground )
@@ -3385,7 +3385,7 @@ public class TopoDroidApp extends Application
         TDToast.makeWarn( R.string.file_share_failed );
       }
     } catch ( ActivityNotFoundException e ) {
-      TDToast.makeWarn( R.string.file_share_failed );
+      TDToast.makeWarn( R.string.file_share_no_app );
     }
   }
 
