@@ -387,7 +387,7 @@
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
     <!-- UNUSED string name="cbd_title">Basisverzeichnis</string -->
-    <string name="cwd">TopoDroid Projektverzeichnis</string>
+    <string name="cwd">TopoDroid Projektsubverzeichnis</string>
     <string name="empty_cwd">Leerer Projektname</string>
     <!-- UNUSED string name="bad_cbd">Basisverzeichnis existiert nicht oder nicht beschreibbar</string -->
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
@@ -870,7 +870,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Größe anpassen  </string -->
     <!-- UNUSED string name="button_landscape" >Querformat </string -->
     <!-- UNUSED string name="button_portrait"  >Hochformat  </string -->
-    <string name="button_splays">Hilfszüge</string>
+    <string name="button_splays">Attribute speichern</string>
     <string name="button_wait">Warten</string>
     <string name="button_write">Hochladen</string>
     <string name="button_xsection">Profil</string>
@@ -977,7 +977,7 @@
     <!-- UNUSED string name="hint_altitude">altitude</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
-    <string name="hint_station">Messsstation</string>
+    <string name="hint_station">Messpunkt</string>
     <string name="orientation">Ausrichtung</string>
     <string name="contents">Inhalt</string>
     <string name="error_distribution">Fehlerverteilung</string>
