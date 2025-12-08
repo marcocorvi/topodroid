@@ -674,12 +674,15 @@ public class SurveyWindow extends Activity
         // // } else {
         // //   mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
         // // }
-        if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-          // selectExportFromProvider( index, filename );
-          mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
-        } else {
-          mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
-        }
+
+        //if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
+        //  // selectExportFromProvider( index, filename );
+        //  mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
+        //} else {
+        //  mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
+        //}
+        // 20251208 since there is no need for the "if"
+        mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
       }
     } else {
       TDLog.e("Survey Window export - negative index " + index );

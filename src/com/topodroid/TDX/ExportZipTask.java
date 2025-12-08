@@ -61,7 +61,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   protected Boolean doInBackground( Void... args )
   {
     // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
-    TDLog.v("export zip task exec ...");
+    // TDLog.v("export zip task exec ...");
     mArchiver = new Archiver( );
     return mArchiver.archiveSurvey( mApp, mUri );
   }
@@ -75,13 +75,12 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   @Override
   protected void onPostExecute( Boolean res )
   {
-    TDLog.v("Export zip task post-exec res " + res );
+    // TDLog.v("Export zip task post-exec res " + res );
     if ( res ) {
       // TDToast.make( mSaved + " " + mArchiver.getZipname() );
       if ( mToast ) TDToast.make( R.string.zip_saved );
       if ( TDSetting.mZipShare ) {
-        TDLog.v("share zip");
-        mApp.shareZip( mUri );
+        mApp.shareZip( );
       }
     } else {
       if ( mToast ) TDToast.makeBad( R.string.zip_failed );

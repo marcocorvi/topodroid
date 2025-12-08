@@ -3330,12 +3330,15 @@ public class TopoDroidApp extends Application
     return false;
   }
 
-  void shareZip( Uri uri0 )
+  /** share the zip export
+   */
+  void shareZip( )
   {
     String zipname = TDPath.getSurveyZipFile( TDInstance.survey );
-    // TDLog.v("Zip share file " + zipname );
+    TDLog.v("Zip sharing file: " + zipname );
     // Uri uri = Uri.fromFile( TDFile.getFile( zipname ) );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( zipname ) );
+    // TDLog.v("Uri " + uri.toString() );
 
     Intent intent = new Intent( );
     intent.setAction( Intent.ACTION_SEND );
@@ -3346,7 +3349,7 @@ public class TopoDroidApp extends Application
     intent.setType( "application/zip" );
     intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
     try {
-      if ( mSurveyWindow == null ) {
+      if ( mSurveyWindow != null ) {
         mSurveyWindow.startActivity( intent );
       } else {
         TDToast.makeWarn( R.string.zip_share_failed );
