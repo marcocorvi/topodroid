@@ -230,8 +230,6 @@ class DrawingLineSectionDialog extends MyDialog
    */
   public void onClick(View v) 
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
-
     if ( v.getId() == R.id.line_image ) {
       if ( mTdImage != null ) {
         (new PhotoViewDialog( mContext, mFilename, null )).show(); // null title
@@ -242,7 +240,7 @@ class DrawingLineSectionDialog extends MyDialog
       return;
     } else {
       long type = mHSection ? PlotType.PLOT_H_SECTION : PlotType.PLOT_SECTION;
-      mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
+      mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : ""; // FIXME NOSPACES ?
       MyCheckBox cb = (MyCheckBox)v;
       if ( canTakePhoto && cb == mBtnFoto ) {
         // TODO mCenter for multileg xsection

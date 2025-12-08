@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -263,10 +264,9 @@ class FixedAddDialog extends MyDialog
     MyKeyboard.close( mKeyboard );
   
     Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "FixedAddDialog onClick() button " + b.getText().toString() ); 
 
-    mNorth  = mBtnNS.getText().toString().equals(getContext().getString(R.string.north));
-    mEast  = mBtnEW.getText().toString().equals(getContext().getString(R.string.east));
+    mNorth = mBtnNS.getText().toString().equals( getContext().getString(R.string.north) );
+    mEast  = mBtnEW.getText().toString().equals( getContext().getString(R.string.east) );
     
     if ( b == mBtnNS ) {
       mBtnNS.setText( mNorth ? R.string.south : R.string.north );
@@ -286,8 +286,8 @@ class FixedAddDialog extends MyDialog
       mParent.getProj4Coords( this );
       return;
     } else if ( b == mBtnOK ) {
-      String name = mETstation.getText().toString();
-      if ( /* name == null || */ name.length() == 0 ) {
+      String name = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
+      if ( TDString.isNullOrEmpty( name ) ) {
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
@@ -302,8 +302,7 @@ class FixedAddDialog extends MyDialog
         mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
         return;
       }
-      String comment = mETcomment.getText().toString();
-      // if ( comment == null ) comment = "";
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
       if ( getLngLat() ) {
         // String h_ell_str = mEThell.getText().toString();
         String h_geo_str = mEThgeo.getText().toString();
@@ -343,8 +342,8 @@ class FixedAddDialog extends MyDialog
         // }
         double accur = -1;
         if ( mETaccur.getText() != null ) {
-          String accur_str = mETaccur.getText().toString();
-          if ( accur_str.length() > 0 ) {
+          String accur_str = TDUtil.getTextOrNull( mETaccur );
+          if ( accur_str != null ) {
             try {
               accur = Double.parseDouble( accur_str );
             } catch ( NumberFormatException e ) {

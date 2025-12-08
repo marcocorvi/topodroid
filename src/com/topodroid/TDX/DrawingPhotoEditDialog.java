@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
 import com.topodroid.prefs.TDSetting;
@@ -122,12 +123,9 @@ class DrawingPhotoEditDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "DrawingPhotoEditDialog onClick() " + b.getText().toString() );
-
     int vid = v.getId();
     if ( vid == R.id.photo_ok ) {
-      String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
       mPhoto.setPointText( comment );
       mPhoto.setCode( mGeoCode );
       try {

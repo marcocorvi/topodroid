@@ -194,7 +194,7 @@ class FixedGpsDialog extends MyDialog
 
   private boolean addFixedPoint( )
   {
-    String name = mETstation.getText().toString();
+    String name = TDString.noSpaces( mETstation.getText().toString() );
     if ( name.length() == 0 ) {
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
       return false;
@@ -210,8 +210,7 @@ class FixedGpsDialog extends MyDialog
       mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
       return false;
     }
-    String comment = mETcomment.getText().toString();
-    // if ( comment == null ) comment = "";
+    String comment = TDUtil.getTextOrEmpty( mETcomment );
     mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID, mErrH, mErrV );
     return true;
   }

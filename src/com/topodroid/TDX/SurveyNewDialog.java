@@ -182,7 +182,7 @@ class SurveyNewDialog extends MyDialog
         dismiss();
       }
       if ( b == mEditDate ) {
-        String date = mEditDate.getText().toString();
+        String date = TDUtil.stringToDate( mEditDate.getText().toString() );
         int y = TDUtil.dateParseYear( date );
         int m = TDUtil.dateParseMonth( date );
         int d = TDUtil.dateParseDay( date );
@@ -192,11 +192,12 @@ class SurveyNewDialog extends MyDialog
 
       // if ( mEditName.getText() == null ) return;
       String name = mEditName.getText().toString();
-      if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
+      if ( name != null ) name = TDString.spacesToUnderscore( name );
+      if ( TDString.isNullOrEmpty( name ) ) { // ALWAYS false
         mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
-      name = TDUtil.noSpaces( name ); // FIXME FORCE NAMES WITHOUT UNACCEPTABLE CHARACTERS
+      name = TDString.noSpaces( name ); // FIXME FORCE NAMES WITHOUT UNACCEPTABLE CHARACTERS
       if ( ! saveSurvey( name ) ) {
         return;
       }
@@ -223,7 +224,7 @@ class SurveyNewDialog extends MyDialog
   private boolean saveSurvey( String name )
   {
     // if ( name == null ) return false; // guaranteed
-    // name = TDUtil.noSpaces( name ); // already checked
+    // name = TDString.noSpaces( name ); // already checked
     if ( name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;
@@ -233,7 +234,7 @@ class SurveyNewDialog extends MyDialog
       return false;
     }
 
-    String date = mEditDate.getText().toString();
+    String date = TDUtil.stringToDate( mEditDate.getText().toString() );
     String team = mEditTeam.getText().toString();
     if ( TDString.isNullOrEmpty( team ) ) {
       if ( mWarnTeam ) {
@@ -244,7 +245,7 @@ class SurveyNewDialog extends MyDialog
         team = "";
       }
     } 
-    String comment = mEditComment.getText().toString();
+    String comment = TDUtil.getTextOrEmpty( mEditComment ); // COMMENT can be empty ?
     double decl = SurveyInfo.declination( mEditDecl );
     // if ( decl >= SurveyInfo.DECLINATION_MAX ) {
     //   mEditDecl.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
@@ -256,16 +257,16 @@ class SurveyNewDialog extends MyDialog
     if ( station_text != null ) {
       String station = station_text.toString();
       if ( station.length() > 0 ) {
-        station = TDString.noSpace( station );
+        station = TDString.noSpaces( station );
         if ( station.length() > 0 ) init_station = station;
       }
     } // if mEditStation text is empty use setting mInitStation
     if ( TDString.isNullOrEmpty( init_station ) ) init_station = TDString.ZERO;
 
     // date, team, comment always non-null
-    /* if ( date != null ) */ { date = date.trim(); } // else { date = TDString.EMPTY; }
+    // /* if ( date != null ) */ { date = date.trim(); } // else { date = ""; }
     /* if ( team != null ) */ { team = team.trim(); } // else { team = TDString.EMPTY; }
-    /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = TDString.EMPTY; }
+    // /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
     int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
                                              : SurveyInfo.XSECTION_SHARED;

@@ -272,12 +272,12 @@ public class ExportDialogPlot extends MyDialog
             mBothViews = ((CheckBox) findViewById( R.id.therion_bothviews )).isChecked();
           }
           try { 
-            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() ) );
+            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() ) ); // TRIM
           } catch ( NumberFormatException e ) {
             TDLog.e("export scale: not integer");
           }
           try { 
-            TDSetting.setBezierStep( Float.parseFloat( ((EditText) findViewById( R.id.therion_spacing )).getText().toString() ) );
+            TDSetting.setBezierStep( Float.parseFloat( ((EditText) findViewById( R.id.therion_spacing )).getText().toString() ) ); // TRIM
           } catch ( NumberFormatException e ) {
             TDLog.e("export spacing: bad value");
           }
@@ -325,7 +325,7 @@ public class ExportDialogPlot extends MyDialog
             mBothViews = ((CheckBox) findViewById( R.id.svg_bothviews )).isChecked();
           }
           try { 
-            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.svg_scale )).getText().toString() ) );
+            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.svg_scale )).getText().toString() ) ); // TRIM
           } catch ( NumberFormatException e ) {
             TDLog.e("Not integer export scale");
           }
@@ -364,7 +364,7 @@ public class ExportDialogPlot extends MyDialog
             mBothViews = ((CheckBox) findViewById( R.id.pdf_bothviews )).isChecked();
           }
           try { 
-            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.pdf_scale )).getText().toString() ) );
+            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.pdf_scale )).getText().toString() ) ); // TRIM
           } catch ( NumberFormatException e ) {
             TDLog.e("Not integer export scale");
           }

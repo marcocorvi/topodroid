@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
@@ -226,7 +227,7 @@ class FixedImportDialog extends MyDialog
 
     boolean do_toast = false;
     if ( b == mBtnOk ) {
-      String station = mETstation.getText().toString();
+      String station = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
       if ( station.length() == 0 ) { // if ( station == null || station.length() == 0 )
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
@@ -242,8 +243,7 @@ class FixedImportDialog extends MyDialog
         mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
         return;
       }
-      String comment = mETcomment.getText().toString();
-      // if ( comment == null ) comment = "";
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
       if ( isSet ) {
         mParent.addFixedPoint( station, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MOBILE_TOP, -1, -1 ); // FIXME ACCURACY
         dismiss();

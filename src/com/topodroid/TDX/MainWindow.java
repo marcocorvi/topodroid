@@ -1686,7 +1686,7 @@ public class MainWindow extends Activity
         while ( lang == null || version < 0 ) {
           String line = br.readLine();
           if ( line == null ) break;
-          String[] token = TDString.noSpace(line.trim() ).split("="); // line.trim().replaceAll("\\s+", "").split("=");
+          String[] token = TDString.noSpaces( line ).split("="); // line.trim().replaceAll("\\s+", "").split("=");
           if ( token.length > 1 ) {
             String key = token[0].toUpperCase( Locale.getDefault() );
             if ( key.equals("LANG") ) { 

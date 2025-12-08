@@ -6189,7 +6189,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      if ( sb.length() > 0 ) new_hide = sb.toString().trim();
+      if ( sb.length() > 0 ) new_hide = sb.toString().trim(); // FIXME TRIM
       // if ( new_hide.length() > 0 ) new_hide = new_hide.trim();
       add = ! drop;
     }
@@ -6259,7 +6259,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      if ( sb.length() > 0 ) new_view = sb.toString().trim();
+      if ( sb.length() > 0 ) new_view = sb.toString().trim(); // FIXME TRIM
       // if ( new_view.length() > 0 ) new_view = new_view.trim();
       add = ! drop;
     }

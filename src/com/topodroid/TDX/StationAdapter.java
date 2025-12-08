@@ -106,7 +106,7 @@ class StationAdapter extends ArrayAdapter< StationMap >
     public void afterTextChanged( Editable s ) {
       // TODO Auto-generated method stub
       // CharSequence cs = convert( tvTo.getText().toString() );
-      if ( mStation != null ) mStation.mTo = tvTo.getText().toString();
+      if ( mStation != null ) mStation.mTo = TDString.noSpaces( tvTo.getText().toString() );
     }
 
     @Override
@@ -137,7 +137,7 @@ class StationAdapter extends ArrayAdapter< StationMap >
     //   if ( pos < START ) return false;
     //   if ( mStation != null ) {
     //     if ( ( event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER ) || action == EditorInfo.IME_ACTION_DONE ) {
-    //       mStation.mTo = tvTo.getText().toString();
+    //       mStation.mTo = TDStruing.noSpaces( tvTo.getText().toString() );
     //       InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
     //       imm.hideSoftInputFromWindow( v.getWindowToken(), 0);
     //     } else {

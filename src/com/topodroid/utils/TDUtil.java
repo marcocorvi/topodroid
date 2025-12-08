@@ -31,6 +31,8 @@ import java.time.DateTimeException; // API-26
 
 // import android.content.Context;
 
+import android.widget.EditText;
+
 public class TDUtil
 {
   public static final long ZERO = 32768;
@@ -122,13 +124,13 @@ public class TDUtil
   public static String toStationFromName( String s )
   {
     if ( s == null ) return null;
-    return s.replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+    return s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
   }
 
   public static String toStationToName( String s )
   {
     if ( s == null ) return null;
-    s = s.replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+    s = s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
     if ( s.equals(".") || s.equals("-") ) return "";
     return s;
   }
@@ -138,17 +140,6 @@ public class TDUtil
     if ( s == null || s.length() == 0 ) return true;
     int ch = s.codePointAt( s.length() - 1);
     return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) || ch == '.' || ch == '@' );
-  }
-
-  public static String noSpaces( String s )
-  {
-    return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
-  }
-
-  public static String dropSpaces( String s )
-  {
-    return ( s == null )? null : TDString.noSpace( s.trim() );
   }
 
   // sort strings by name (alphabetical order)
@@ -164,6 +155,16 @@ public class TDUtil
   }
 
   // DATE and TIME -------------------------------------------------------------
+
+  /** @return a date string in TopoDroid date format yyyy.mm.dd
+   * @param s  input date string 
+   * The input date string can use either space, slash, colon, or dash in place of dot
+   */
+  public static String stringToDate( String s )
+  {
+    return ( s == null )? null 
+      :  s.trim().replaceAll("\\s+", ".").replaceAll("-", ".").replaceAll("/", ".").replaceAll(":",".");
+  }
 
   /** @return the current (today) date - format "yyyy.mm.dd"
    * @note month mm ranges from 01 to 12
@@ -540,6 +541,25 @@ public class TDUtil
   public static int randomPastel()
   {
     return PASTEL[ mRandom.nextInt( 12 ) ];
+  }
+
+  // EDITTEXT ------------------------------------------
+
+  /** @return the content of the edittext or empty string
+   * @oaram et   edittext
+   */
+  public static String getTextOrEmpty( EditText et )
+  {
+    return ( et.getText() == null )? "" : et.getText().toString().trim();
+  }
+
+  /** @return the content of the edittext or null if empty
+   * @oaram et   edittext
+   */
+  public static String getTextOrNull(  EditText et )
+  {
+    String ret = ( et.getText() == null )? null : et.getText().toString().trim();
+    return ( TDString.isNullOrEmpty( ret ) )? null : ret;
   }
 
 

@@ -168,10 +168,9 @@ class SearchDialog extends MyDialog
     if ( CutNPaste.dismissPopup() ) return;
     MyKeyboard.close( mKeyboard );
 
-    // TDLog.Log(  TDLog.LOG_INPUT, "Search Dialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnLegStation ) { // SEARCH leg station
-      String name = mName.getText().toString().trim();
+      String name = mName.getText().toString().trim();  // FIXME NOSTRUNG user should enter a proper string
       if ( ! checkArgsName( name, 1 ) ) return;
       mParent.searchStation( name, false );
     } else if ( b == mBtnAllStation ) { // SEARCH all station

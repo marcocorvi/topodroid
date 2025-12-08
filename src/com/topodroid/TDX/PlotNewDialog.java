@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -150,7 +151,6 @@ class PlotNewDialog extends MyDialog
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "PlotDialog onClick() button " + b.getText().toString() ); 
 
     int vid = v.getId( );
     if ( vid == R.id.btn_ok ) {
@@ -166,49 +166,50 @@ class PlotNewDialog extends MyDialog
    */
   private boolean handleOK( )
   {
-    String name  = mEditName.getText().toString().trim();
-    String start = mEditStart.getText().toString().trim();
+    String plot_name  = TDString.spacesToUnderscore( mEditName.getText().toString() ); // FIXME TRIM
+    String plot_start = TDString.noSpaces( mEditStart.getText().toString() );
     // String view  = mEditView.getText().toString();
     // String view = null;
 
-    // if ( name == null ) { // CANNOT HAPPEN
+    // if ( plot_name == null ) { // CANNOT HAPPEN
     //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
     //   return false;
     // }
-    name = TDUtil.toStationFromName( name );
-    if ( name == null || name.length() == 0 ) {
+    // FIXME why these three checks
+    plot_name = TDUtil.toStationFromName( plot_name );
+    if ( TDString.isNullOrEmpty( plot_name ) ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;
     }
-    if ( ! TDUtil.isStationName( name ) ) {
+    if ( ! TDUtil.isStationName( plot_name ) ) {
       mEditName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
       return false;
     }
-    if ( mApp.hasSurveyPlotName( name ) ) {
+    if ( mApp.hasSurveyPlotName( plot_name ) ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
       return false;
     }
 
-    // if ( start == null ) { // CANNOT HAPPEN
+    // if ( plot_start == null ) { // CANNOT HAPPEN
     //   mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
     //   return false;
     // }
     
-    // start = TDUtil.toStationFromName( start );
-    if ( start.length() == 0 ) {
+    // plot_start = TDUtil.toStationFromName( plot_start );
+    if ( TDString.isNullOrEmpty( plot_start ) ) {
       mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
       return false;
     } 
-    if ( ! TDUtil.isStationName( start ) ) {
+    if ( ! TDUtil.isStationName( plot_start ) ) {
       mEditStart.setError( mContext.getResources().getString( R.string.bad_station_name ) );
       return false;
     }
-    if ( mMaker.hasSurveyPlot( name ) ) {
+    if ( mMaker.hasSurveyPlot( plot_name ) ) {
       mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;
     }
     boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();
-    if ( ! ( dangling || mMaker.hasSurveyStation( start ) ) ) {
+    if ( ! ( dangling || mMaker.hasSurveyStation( plot_start ) ) ) {
       mEditStart.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
       return false;
     }
@@ -219,9 +220,9 @@ class PlotNewDialog extends MyDialog
     }
 
     if ( projected ) {
-      mMaker.doProjectionDialog( name, start );
+      mMaker.doProjectionDialog( plot_name, plot_start );
     } else {
-      mMaker.makeNewPlot( name, start, true, 0, 0 ); // true = extended
+      mMaker.makeNewPlot( plot_name, plot_start, true, 0, 0 ); // true = extended
     }
     return true;
   }

@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -298,11 +299,14 @@ public class CalibActivity extends Activity
       }
       return;
     } else if ( b == mEditDate ) {
-      String date = mEditDate.getText().toString();
-      int y = TDUtil.dateParseYear( date );
-      int m = TDUtil.dateParseMonth( date );
-      int d = TDUtil.dateParseDay( date );
-      new DatePickerDialog( this, mDateListener, y, m, d ).show();
+      // date string must be "YYYY.MM.DD" but the separator dot is not considered in the parsing
+      String date = TDUtil.stringToDate( mEditDate.getText().toString() );
+      if ( date != null ) {
+        int y = TDUtil.dateParseYear( date );
+        int m = TDUtil.dateParseMonth( date );
+        int d = TDUtil.dateParseDay( date );
+        new DatePickerDialog( this, mDateListener, y, m, d ).show();
+      }
       return;
     }
 
@@ -370,32 +374,29 @@ public class CalibActivity extends Activity
    */
   private void doSave( )
   {
-    String name = mEditName.getText().toString().trim();
+    String name = TDString.replaceSpecials( mEditName.getText().toString() ); // SPECIAL CHARS
     // if ( name == null ) {
     //   String error = getResources().getString( R.string.error_name_required );
     //   mEditName.setError( error );
     //   return;
     // }
-    name = TDUtil.noSpaces( name );
-    if ( name.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( name ) ) {
       String error = getResources().getString( R.string.error_name_required );
       mEditName.setError( error );
       return;
     }
 
-    String date    = mEditDate.getText().toString();
+    String date    = TDUtil.stringToDate( mEditDate.getText().toString() ); // trimmed by stringToDate
     String device  = mDeviceAddress; // mEditDevice.getText().toString();
-    String comment = mEditComment.getText().toString();
-    /* if ( date != null ) */ { date    = date.trim(); }  // date != null always true
+    String comment = TDUtil.getTextOrEmpty( mEditComment ); // COMMENT
     if ( device  != null ) { device  = device.trim(); }
-    /* if ( comment != null ) */ { comment = comment.trim(); } // comment != null always true
 
     if ( isSaved ) { // calib already saved
       TopoDroidApp.mDData.updateCalibInfo( TDInstance.cid, date, device, comment );
       TDToast.make( R.string.calib_updated );
     } else { // new calib
-      name = TDUtil.noSpaces( name );
-      if ( /* name != null && */ name.length() > 0 ) { // name != null always true
+      name = TDString.noSpaces( name ); // NOSPACES
+      if ( TDString.isNullOrEmpty( name ) ) { // name != null always true
         if ( mApp.hasCalibName( name ) ) { // name already exists
           // TDToast.makeBad( R.string.calib_exists );
           String error = getResources().getString( R.string.calib_exists );

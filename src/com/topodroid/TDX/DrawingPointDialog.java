@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.MyDialog;
@@ -195,15 +196,9 @@ class DrawingPointDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TDLog.Log( TDLog.LOG_INPUT, "DrawingPointDialog onClick() " + b.getText().toString() );
-
     if ( b == mBtnOk ) {
       if ( mDoOptions ) {
-        if ( mEToptions.getText() == null ) {
-          mPoint.setOptions( "" );
-        } else {
-          mPoint.setOptions( mEToptions.getText().toString().trim() );
-        }
+        mPoint.setOptions( TDUtil.getTextOrEmpty( mEToptions ) );
       }
       if ( mBtnScaleXS.isChecked() )      mPoint.setScale( PointScale.SCALE_XS );
       else if ( mBtnScaleS.isChecked() )  mPoint.setScale( PointScale.SCALE_S  );
@@ -222,7 +217,7 @@ class DrawingPointDialog extends MyDialog
         // TDLog.v( "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }
       if ( BrushManager.pointHasTextOrValue( mPoint.mPointType ) ) {
-        mPoint.setPointText( mETtext.getText().toString().trim() );
+        mPoint.setPointText( mETtext.getText().toString().trim() ); // TRIM
       }
 
       if ( TDSetting.mWithLevels > 1 ) setLevel();

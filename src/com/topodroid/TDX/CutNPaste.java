@@ -99,7 +99,7 @@ public class CutNPaste
         public void onClick(View v) {
           EditText edit_text = mEditText.get();
           if ( edit_text != null ) {
-            mClipboardText = edit_text.getText().toString();
+            mClipboardText = edit_text.getText().toString(); // FIXME NOSPACES ?
             edit_text.setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.START | Gravity.TOP );
@@ -114,7 +114,7 @@ public class CutNPaste
         public void onClick(View v) {
           EditText edit_text = mEditText.get();
           if ( edit_text != null ) {
-            mClipboardText = edit_text.getText().toString();
+            mClipboardText = edit_text.getText().toString(); // FIXME NOSPACES ?
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.START | Gravity.TOP );
           }

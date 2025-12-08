@@ -124,7 +124,7 @@ class HighlightDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "Search Dialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnStation ) { // SEARCH station
-      String name = mName.getText().toString().trim();
+      String name = TDString.noSpaces( mName.getText().toString() );
       if ( ! checkArgsName( name, 1 ) ) return;
       mParent.highlightStations( name );
     // } else if ( b == mBtnCancel ) {

@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.CWDfolder;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
@@ -83,7 +84,7 @@ public class CWDActivity extends Activity
 
   private boolean setCwdPreference()
   {
-    String dir_name = mETcwd.getText().toString();
+    String dir_name = TDString.noSpaces( mETcwd.getText().toString() ); // NOSPACES
     // String base_name = TDPath.getCurrentBaseDir();
 
     // CURRENT WORK DIRECTORY

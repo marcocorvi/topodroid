@@ -118,7 +118,6 @@ class SymbolReload extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "SymbolReload onClick button " + b.getText().toString() );
 
     if ( b == mBtnInstall ) {
       mApp.reloadSymbols( false,  // do not clear first 

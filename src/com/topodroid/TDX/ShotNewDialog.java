@@ -412,7 +412,6 @@ class ShotNewDialog extends MyDialog
 
     Button b = (Button) v;
     String val;
-    // TDLog.Log( TDLog.LOG_INPUT, "ShotNewDialog onClick button " + b.getText().toString() );
 
     if ( b == mBtnOk || b == mBtnSave ) {
       String shot_from =  null;
@@ -443,23 +442,23 @@ class ShotNewDialog extends MyDialog
         return;
       }
 
-      String distance     = mETdistance.getText().toString().trim();
-      String backdistance = mETbackdistance.getText().toString().trim();
-      if ( distance.length() == 0 && backdistance.length() == 0 ) { 
+      String distance     = TDString.noSpaces( mETdistance.getText().toString() );
+      String backdistance = TDString.noSpaces( mETbackdistance.getText().toString() );
+      if ( TDString.isNullOrEmpty( distance ) && TDString.isNullOrEmpty( backdistance ) ) {
         mETdistance.setError( mContext.getResources().getString( (diving? R.string.error_depth_required : R.string.error_length_required) ) );
         return;
       }
 
-      String bearing = mETbearing.getText().toString().trim();
-      String backbearing = mETbackbearing.getText().toString().trim();
-      if ( bearing.length() == 0 && backbearing.length() == 0 ) {
+      String bearing     = TDString.noSpaces( mETbearing.getText().toString() );
+      String backbearing = TDString.noSpaces( mETbackbearing.getText().toString() );
+      if ( TDString.isNullOrEmpty( bearing ) && TDString.isNullOrEmpty( backbearing ) ) {
         mETbearing.setError( mContext.getResources().getString( R.string.error_azimuth_required ) );
         return;
       }
 
-      String clino = mETclino.getText().toString().trim();
-      String backclino = mETbackclino.getText().toString().trim();
-      if ( clino.length() == 0 && backclino.length() == 0 ) {
+      String clino     = TDString.noSpaces( mETclino.getText().toString() );
+      String backclino = TDString.noSpaces( mETbackclino.getText().toString() );
+      if ( TDString.isNullOrEmpty( clino ) && TDString.isNullOrEmpty( backclino ) ) {
         mETclino.setError( mContext.getResources().getString( (diving? R.string.error_length_required : R.string.error_clino_required) ) );
         return;
       }
@@ -528,14 +527,14 @@ class ShotNewDialog extends MyDialog
                                bx, // DIVING_BEARING Float.parseFloat( bearing.replace(',','.') ),
                                Float.parseFloat( distance.replace(',','.') ), // diving depth
                                shot_extend, DBlock.FLAG_SURVEY,
-                               mETleft.getText().toString().replace(',','.') ,
+                               mETleft.getText().toString().replace(',','.') , // FIXME NOSPACES
                                mETright.getText().toString().replace(',','.') ,
                                mETup.getText().toString().replace(',','.') ,
                                mETdown.getText().toString().replace(',','.') ,
                                splay_station );
 	    } else {
               blk = mApp.insertManualShot( mAt, shot_from, shot_to,
-                               Float.parseFloat( distance.replace(',','.') ),
+                               Float.parseFloat( distance.replace(',','.') ), // FIXME NOSPACES
                                Float.parseFloat( bearing.replace(',','.') ),
                                Float.parseFloat( clino.replace(',','.') ),
                                shot_extend, DBlock.FLAG_SURVEY,
@@ -550,7 +549,7 @@ class ShotNewDialog extends MyDialog
               if ( diving ) {
                 float bbx = divingBearing( backbearing ); // DIVING_BEARING
                 blk = mApp.insertManualShot( mAt, shot_to, shot_from,
-                             Float.parseFloat( backclino.replace(',','.') ),
+                             Float.parseFloat( backclino.replace(',','.') ), // FIXME NOSPACES
                              bbx, // Float.parseFloat( backbearing.replace(',','.') ),
                              Float.parseFloat( backdistance.replace(',','.') ),
                              back_extend, DBlock.FLAG_SURVEY,
@@ -561,7 +560,7 @@ class ShotNewDialog extends MyDialog
                              splay_station );
               } else {
                 blk = mApp.insertManualShot( mAt, shot_to, shot_from,
-                             Float.parseFloat( backdistance.replace(',','.') ),
+                             Float.parseFloat( backdistance.replace(',','.') ), // FIXME NOSPACES
                              Float.parseFloat( backbearing.replace(',','.') ),
                              Float.parseFloat( backclino.replace(',','.') ),
                              back_extend, DBlock.FLAG_SURVEY,

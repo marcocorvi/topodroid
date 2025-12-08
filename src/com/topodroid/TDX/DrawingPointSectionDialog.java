@@ -189,8 +189,6 @@ class DrawingPointSectionDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TDLog.Log( TDLog.LOG_INPUT, "DrawingPointSectionDialog onClick() " + b.getText().toString() );
-
     if ( b == mBtnOk ) {
       if ( mBtnScaleXS.isChecked() )      mPoint.setScale( PointScale.SCALE_XS );
       else if ( mBtnScaleS.isChecked() )  mPoint.setScale( PointScale.SCALE_S  );

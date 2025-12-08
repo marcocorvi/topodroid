@@ -687,13 +687,13 @@ class ShotEditDialog extends MyDialog
       // all_splay = false;
       // set_xsplay = -1;
     } else {
-      shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() );
+      shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() ); // NOSPACES this replaces all specials
       if ( ! TDUtil.isStationName( shot_from ) ) {
         mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
         return false;
       }
       // if ( shot_from == null ) { shot_from = ""; }
-      shot_to = TDUtil.toStationToName( mETto.getText().toString() );
+      shot_to = TDUtil.toStationToName( mETto.getText().toString() ); // NOSPACES this replaces all specials
       if ( ! TDUtil.isStationName( shot_to ) ) {
         mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
         return false;
@@ -765,7 +765,7 @@ class ShotEditDialog extends MyDialog
       }
     }
 
-    String comment = mETcomment.getText().toString();
+    String comment = mETcomment.getText().toString();  // COMMENT empty comment is OK
     if ( comment != null ) mBlk.mComment = comment.trim();
 
     boolean renumber  = false;

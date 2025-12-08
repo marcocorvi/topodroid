@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -157,19 +158,18 @@ class PlotRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnRename ) {
       // TDLog.v("click RENAME");
-      String name = mEtName.getText().toString();
+      String name = TDString.spacesToUnderscores( mEtName.getText().toString() );
       if ( ! mName.equals( name ) ) {
         INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
         if ( maker.hasSurveyPlot( name ) ) {
           mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
           return;
         }
-        // mParent.renamePlot( mEtName.getText().toString() );
         mParent.renamePlot( name );
       }
 
       if ( TDLevel.overExpert ) {
-        String station = mEtOrigin.getText().toString();
+        String station = TDString.noSpaces( mEtOrigin.getText().toString() ); // no spaces in station nmaes
         if ( ! mStation.equals( station ) ) { // change origin name
           mParent.setPlotOrigin( station );
         }
@@ -216,7 +216,7 @@ class PlotRenameDialog extends MyDialog
   private boolean handleSketchSplit( boolean warning )
   {
     INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
-    String name = mEtName.getText().toString();
+    String name = TDString.spacesToUnderscores( mEtName.getText().toString() );
     if ( maker.hasSurveyPlot( name ) ) {
       mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;

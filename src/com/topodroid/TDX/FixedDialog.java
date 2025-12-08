@@ -282,10 +282,9 @@ class FixedDialog extends MyDialog
     MyKeyboard.close( mKeyboard );
 
     Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "FixedDialog onClick() button " + b.getText().toString() );
 
     if ( b == mButtonSave ) {
-      String station = mETstation.getText().toString();
+      String station = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
       if ( /* station == null || */ station.length() == 0 ) { // FIXME this should never happen: mETstation is TextView
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
@@ -297,11 +296,10 @@ class FixedDialog extends MyDialog
       }
       // mETstation.setText( station );
       
-      String comment = mETcomment.getText().toString();
-      // if ( comment == null ) comment = "";
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
       if ( mButtonDecl.isChecked() && mTVdecl.getText() != null ) {
         String decl_str = mTVdecl.getText().toString();
-        if ( /* decl_str != null && */ decl_str.length() > 0 ) {
+        if ( TDString.isNullOrEmpty( decl_str ) ) {
           decl_str = TDString.commaToPoint( decl_str );
           try {
             mParent.setDeclination( Float.parseFloat( decl_str ) );

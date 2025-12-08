@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 //import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 
 
@@ -92,11 +93,9 @@ class SensorEditDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "SensorEditDialog onClick() " + b.getText().toString() );
 
     if ( b == mButtonOK ) {
-      String comment = mETcomment.getText().toString();
-      // if ( comment == null ) comment = "";
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
       mParent.updateSensor( mSensor, comment );
     } else if ( b == mButtonDelete ) {
       mParent.dropSensor( mSensor );

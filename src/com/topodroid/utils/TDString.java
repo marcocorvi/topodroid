@@ -47,7 +47,7 @@ public class TDString
   /** @return string with spaces removes
    * @param str input string
    */
-  public static String noSpace( String str )
+  public static String noSpaces( String str )
   {
     return (str == null)? null : str.replaceAll("\\s+", "");
   }
@@ -485,6 +485,23 @@ public class TDString
     while ( mSize > 0 && Character.isSpaceChar( mChr[mSize] ) ) -- mSize;
     nullTerminate();
     return this;
+  }
+
+  /** @return a string with replaced special chars
+   * @param s   input string
+   */
+  public static String replaceSpecials( String s )
+  {
+    return ( s == null )? null 
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+  }
+
+  /** @return a string with all spaces dropped
+   * @param s   input string
+   */
+  public static String dropSpaces( String s )
+  {
+    return ( s == null )? null : TDString.noSpaces( s.trim() );
   }
 
   /** @return this string tokenization on multiple spaces

@@ -4415,7 +4415,7 @@ public class DataHelper extends DataSetObservable
     long extend = ExtendType.EXTEND_LEFT;
     long flag   = DBlock.FLAG_SURVEY;
     long leg    = DBlock.BLOCK_MAIN_LEG;
-    String comment = "";
+    String comment = TDString.EMPTY;
     if ( myDB == null ) return ret;
     Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation", "extend", "flag", "leg", "comment" },
                                 WHERE_SID_ID_MORE, new String[] { Long.toString(sid), Long.toString(blk.mId) },

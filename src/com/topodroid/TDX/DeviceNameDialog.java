@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.dev.Device;
 
@@ -86,8 +88,8 @@ class DeviceNameDialog extends MyDialog
   {
     Button b = (Button)view;
     if ( b == mBTok ) {
-      if ( mETnickname.getText() != null ) {
-        String nickname = mETnickname.getText().toString();
+      String nickname = TDUtil.getTextOrNull( mETnickname ); // FIXME NOSPACES ?
+      if ( nickname != null ) {
         mParent.setDeviceNickname( mDevice, nickname );
       }
       if ( mCBsecondDevice.isChecked() ) {

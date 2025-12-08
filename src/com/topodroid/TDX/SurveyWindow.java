@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
@@ -189,7 +190,7 @@ public class SurveyWindow extends Activity
    */
   void renameSurvey( String name ) 
   {
-    name = TDUtil.noSpaces( name );
+    name = TDString.noSpaces( name );
     if ( mApp.renameCurrentSurvey( TDInstance.sid, name ) ) {
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
@@ -205,7 +206,7 @@ public class SurveyWindow extends Activity
    */
   void prefixStations( String prefix )
   {
-    prefix = TDUtil.noSpaces(prefix );
+    prefix = TDString.noSpaces(prefix );
     mApp.prefixSurveyStations(TDInstance.sid, prefix );
   }
     
@@ -452,7 +453,7 @@ public class SurveyWindow extends Activity
           TDToast.makeWarn("Immutable survey");
           return;
         } 
-        String date = mEditDate.getText().toString();
+        String date = TDUtil.stringToDate( mEditDate.getText().toString() );
         int y = TDUtil.dateParseYear( date );
         int m = TDUtil.dateParseMonth( date );
         int d = TDUtil.dateParseDay( date );
@@ -607,10 +608,11 @@ public class SurveyWindow extends Activity
   private boolean saveSurvey( boolean check_team )
   {
     // TDLog.v("Save warn " + mWarnTeam + " check " + check_team );
-    // String name = mTextName.getText().toString(); // RENAME is special
+    // String name = TDString.spacesToUnderscores( mTextName.getText().toString() ); // RENAME is special
     // if ( name == null || name.length == 0 ) {
     // }
     String team = mEditTeam.getText().toString();
+    // if ( team != null ) team = team.trim();
     if ( TDString.isNullOrEmpty( team ) ) {
       if ( mWarnTeam && check_team ) {
         mEditTeam.setError( getResources().getString( R.string.error_team_required ) );
@@ -621,17 +623,17 @@ public class SurveyWindow extends Activity
         team = "";
       }
     }
-    String date = mEditDate.getText().toString();
-    String comment = mEditComment.getText().toString();
+    String date    = TDUtil.stringToDate( mEditDate.getText().toString() );
+    String comment = TDUtil.getTextOrEmpty( mEditComment ); // COMMENT can be empty 
     float decl = SurveyInfo.declination( mEditDecl );
     doSetDeclination( decl );
 
     // FORCE NAMES WITHOUT SPACES
-    // name = TDUtil.noSpaces( name );
+    // name = TDString.noSpaces( name );
     // date, team, comment always non-null
-    /* if ( date != null ) */ { date = date.trim(); } // else { date = ""; }
+    // /* if ( date != null ) */ { date = date.trim(); } // else { date = ""; }
     /* if ( team != null ) */ { team = team.trim(); } // else { team = ""; }
-    /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
+    // /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
     // TDLog.v( "UPDATE survey id " + TDInstance.sid + " team " + team + " date " + date + " comment " + comment );
     mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );

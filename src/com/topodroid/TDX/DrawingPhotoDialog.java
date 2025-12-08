@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -110,7 +111,7 @@ class DrawingPhotoDialog extends MyDialog
           size = TDSetting.mPictureMin;
         }
       }
-      mActivity.addPhotoPoint( mPid, mComment.getText().toString(), size, mX, mY, camera, mGeoCode );
+      mActivity.addPhotoPoint( mPid, TDUtil.getTextOrEmpty(mComment), size, mX, mY, camera, mGeoCode );
     } else if ( view.getId() == R.id.photo_code ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;

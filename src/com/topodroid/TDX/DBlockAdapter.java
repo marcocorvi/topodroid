@@ -637,13 +637,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( TDSetting.mEditableStations ) { // if ( v instanceof EditText ) // try to add this 20250826
 	    // TDLog.v("holder on click editing " + editing );
             if ( editing ) {
-              mParent.recomputeItems( ((TextView)v).getText().toString(), pos );
+              mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); // N.B. NOSPACES: no spaces in station names
               editing = false;
             } else {
               editing = true;
             }
           } else {
-            String name = ((TextView)v).getText().toString();
+            String name = ((TextView)v).getText().toString(); // N.B. NOSPACES: no spaces in station names
             // TDLog.v("click " + name );
             if ( ! TDString.isNullOrEmpty( name ) ) {
               mParent.openSavedStationDialog( name );
@@ -1057,7 +1057,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     if ( TDLevel.overBasic ) {
       TextView tv = (TextView) view;
       if ( tv != null ) {
-        String st = tv.getText().toString();
+        String st = tv.getText().toString(); // N.B. NOSPACES: no spaces in station names
         boolean set = mParent.setCurrentStationName( st );
         updateBlocksName( set );
       }

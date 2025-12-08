@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 
@@ -76,8 +77,8 @@ class SurveyRenameDialog extends MyDialog
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
     if ( b == mBtnRename ) {
-      String name = mEtName.getText().toString();
-      if ( /* name == null || */ name.length() == 0 ) {
+      String name = TDString.spacesToUnderscores( mEtName.getText().toString() );
+      if ( TDString.isNullOrEmpty( name ) ) {
         mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
 	return;
       }
@@ -89,8 +90,8 @@ class SurveyRenameDialog extends MyDialog
         mParent.renameSurvey( name );
       }
     } else if ( TDLevel.overExpert && b == mBtnPrefix ) {
-      String prefix = mEtPrefix.getText().toString();
-      if ( /* prefix == null || */ prefix.length() == 0 ) {
+      String prefix = TDString.spacesToUnderscores( mEtPrefix.getText().toString() );
+      if ( TDString.isNullOrEmpty( prefix ) ) {
 	/* nothing */
       } else {
         mParent.prefixStations( prefix );

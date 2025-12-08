@@ -17,6 +17,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -305,10 +306,7 @@ class CurrentStationDialog extends MyDialog
       flag = StationFlag.STATION_PAINTED;
     }
 
-    String comment = TDString.EMPTY;
-    if ( mComment.getText() != null ) {
-      comment = mComment.getText().toString().trim();
-    }
+    String comment = TDUtil.getTextOrEmpty( mComment ); // COMMENT
 
     mStationName = name;
     TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name, mGeoCode ); // PRESENTATION = name
@@ -361,7 +359,7 @@ class CurrentStationDialog extends MyDialog
 
     // TDLog.Log(  TDLog.LOG_INPUT, "CurrentStationDialog onClick() " );
     Button b = (Button) v;
-    String name = mName.getText().toString().trim();
+    String name = TDString.noSpaces( mName.getText().toString() ); // NOSPACES
     if ( b == mBtnFixed ) {
       mBtnPainted.setChecked( false );
       return;

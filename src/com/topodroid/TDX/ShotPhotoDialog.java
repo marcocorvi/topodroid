@@ -15,6 +15,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 
 // import android.app.Dialog;
@@ -115,8 +116,7 @@ class ShotPhotoDialog extends MyDialog
   {
     Button b = (Button) v;
     if ( b == mButtonOK ) {
-      String comment = "";
-      if ( mETcomment.getText() != null ) comment = mETcomment.getText().toString().trim();
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
       // if ( comment.length() == 0 ) { // this was annoying
       //   mETcomment.setError(  mContext.getResources().getString( R.string.error_text_required ) );
       //   return;

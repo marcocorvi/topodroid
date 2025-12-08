@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
 
@@ -139,16 +140,9 @@ class PhotoEditDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
-
     int vid = v.getId();
     if ( vid == R.id.photo_ok ) {
-      if ( mETcomment.getText() == null ) {
-        mParent.updatePhoto( mPhoto, "", mGeoCode );
-      } else {
-        mParent.updatePhoto( mPhoto, mETcomment.getText().toString(), mGeoCode );
-      }
+      mParent.updatePhoto( mPhoto, TDUtil.getTextOrEmpty( mETcomment ), mGeoCode ); 
     } else if ( vid == R.id.photo_delete ) {
       mParent.dropPhoto( mPhoto );
     } else if ( vid == R.id.photo_image ) {

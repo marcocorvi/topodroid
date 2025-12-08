@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyButton;
@@ -513,15 +515,15 @@ class DrawingShotDialog extends MyDialog
 	}
       }
 
-      String from = mETfrom.getText().toString().trim();
-      String to   = mETto.getText().toString().trim();
+      String from = TDString.noSpaces( mETfrom.getText().toString() ); // N.B. no spaces in station names
+      String to   = TDString.noSpaces( mETto.getText().toString() );
 
       if ( ! from.equals( mBlock.mFrom ) || ! to.equals( mBlock.mTo ) ) { // FIXME revert equals
         mParent.updateBlockName( mBlock, from, to );
       }
 
       if ( mETcomment.getText() != null ) {
-        String comment = mETcomment.getText().toString().trim();
+        String comment = TDUtil.getTextOrEmpty( mETcomment );
         mParent.updateBlockComment( mBlock, comment ); // equal comment checked by the method
       }
 

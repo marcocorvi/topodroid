@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
@@ -288,15 +289,15 @@ public class SensorActivity extends Activity
     String error;
     int vid = view.getId(); 
     if ( vid == R.id.sensor_ok ) {
-      String type    = mETtype.getText().toString().trim();
-      String value   = mETvalue.getText().toString().trim();
-      String comment = mETcomment.getText().toString().trim();
-      if ( type.length() == 0 ) {
+      String type    = TDUtil.getTextOrNull( mETtype );
+      String value   = TDUtil.getTextOrNull( mETvalue );
+      String comment = TDUtil.getTextOrEmpty( mETcomment );
+      if ( type == null ) {
         error = getResources().getString( R.string.error_sensor_required );
         mETtype.setError( error );
         return;
       }
-      if (  value.length() == 0 ) {
+      if (  value == null ) {
         error = getResources().getString( R.string.error_value_required );
         mETvalue.setError( error );
         return;

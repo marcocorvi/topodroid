@@ -142,9 +142,6 @@ class StationPhotoDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "StationPhotoDialog onClick() " + b.getText().toString() );
-
     int vid = v.getId();
     if ( vid == R.id.photo_retake ) {
       deletePhoto();

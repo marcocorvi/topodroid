@@ -86,7 +86,7 @@ public class PtCmapActivity extends Activity
   {
     StringBuilder sb = new StringBuilder();
     for ( int k=0; k<7; ++k ) {
-      String txt = mETline[k].getText().toString().trim();
+      String txt = mETline[k].getText().toString().trim(); // FIXME NOSPACES ?
       if ( ! BrushManager.hasLineByThName( txt ) ) {
         mETline[k].setError( getResources().getString( R.string.bad_line ) );
         return false;
@@ -95,7 +95,7 @@ public class PtCmapActivity extends Activity
       sb.append( txt );
     }
     for ( int k=0; k<7; ++k ) {
-      String txt = mETpoint[k].getText().toString().trim();
+      String txt = mETpoint[k].getText().toString().trim(); // FIXME NOSPACES ?
       if ( SymbolLibrary.LABEL.equals( txt ) || ! BrushManager.hasPointByThName( txt ) ) {
         mETpoint[k].setError( getResources().getString( R.string.bad_point ) );
         return false;

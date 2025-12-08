@@ -114,7 +114,8 @@ class PlotSearchDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "Search Dialog onClick() " );
     Button b = (Button) v;
     if ( v.getId() == R.id.btn_station ) {
-      String name = mName.getText().toString().trim();
+      // String name = TDString.noSpacs( mName.getText().toString() ); // FIXME NOSPACES no spaces in station names
+      String name = mName.getText().toString(); // FIXME TRIM ???
       if ( ! checkArgsName( name, 1 ) ) return;
       mParent.highlightStation( name );
     } else if ( v.getId() == R.id.btn_clear ) {

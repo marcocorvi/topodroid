@@ -17,6 +17,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDMath;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
@@ -355,13 +356,11 @@ class DrawingStationDialog extends MyDialog
         return;
       } else if ( /* TDLevel.overExpert && */ b == mBtnOkComment ) {
         boolean fail = true;
-        if ( mComment.getText() != null ) {
-          String comment = mComment.getText().toString().trim();
-          if ( comment.length() > 0 ) {
-            // set/change saved-station comment - leave flags unchanged
-            TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName, mGeoCode ); // PRESENTATION
-            fail = false;
-          } 
+        String comment = TDUtil.getTextOrNull( mComment );
+        if ( comment != null ) {
+          // set/change saved-station comment - leave flags unchanged
+          TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName, mGeoCode ); // PRESENTATION
+          fail = false;
         } 
         if ( fail ) {
           mComment.setError( mContext.getResources().getString( R.string.error_comment_required ) );
@@ -389,7 +388,7 @@ class DrawingStationDialog extends MyDialog
         mParent.toggleStationSplays( mStationName, false, mCbSplaysOff.isChecked() );
 
       } else if ( b == mBtnXSection ) {
-        nick = (mETnick.getText() != null)? mETnick.getText().toString() : null;
+        nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
         // if ( nick.length() == 0 ) {
         //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
         //   return;
@@ -404,14 +403,14 @@ class DrawingStationDialog extends MyDialog
           mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
         }
       } else if ( b == mBtnDirect ) {
-        nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+        nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
         // if ( nick.length() == 0 ) {
         //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
         //   return;
         // }
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
       } else if ( b == mBtnInverse ) {
-        nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+        nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
         // if ( nick.length() == 0 ) {
         //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
         //   return;
@@ -435,7 +434,7 @@ class DrawingStationDialog extends MyDialog
     {
       // TDLog.v( "Station dialog set orientation " + orientation + " bearing " + b + " clino " + c );
       String nick = "";
-      nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+      nick = TDUtil.getTextOrEmpty( mETnick );
       // if ( nick.length() == 0 ) {
       //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
       //   return;

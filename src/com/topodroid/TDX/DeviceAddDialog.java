@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
@@ -110,7 +111,7 @@ class DeviceAddDialog extends MyDialog
         mNumber.setError( mContext.getResources().getString( R.string.model_missing ) );
         return;
       }
-      String number = mNumber.getText().toString();
+      String number = TDString.noSpaces( mNumber.getText().toString() );
       Pattern p = Pattern.compile( "[0-9]{4}" );
       if ( ! p.matcher( number ).matches() ) {
         mNumber.setError( mContext.getResources().getString( R.string.model_invalid ) );
@@ -118,8 +119,8 @@ class DeviceAddDialog extends MyDialog
       }
       String address = mAddresses[ mAddress.getSelectedItemPosition() ];
       String model = mModels[ mModel.getSelectedItemPosition() ];
-      String model_number = model + mNumber.getText().toString();
-      String nickname = ( mNickname.getText() == null )? null :  mNickname.getText().toString();
+      String model_number = model + number;
+      String nickname = TDUtil.getTextOrNull( mNickname );
       mParent.addDevice( address, model_number, nickname );
     }
     dismiss();

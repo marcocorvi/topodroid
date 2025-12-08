@@ -164,7 +164,7 @@ class PlotZoomFitDialog extends MyDialog
         // mParent.setFixedZoom( mCBZoomFix.isChecked() );
         mParent.setFixedZoom( (mSelectedPos < 0)? 0 : mSelectedPos );
       } else if ( v.getId() == R.id.button_center_station ) {
-        String station = mETstation.getText().toString();
+        String station = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
 	if ( TDString.isNullOrEmpty( station ) ) {
           mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
 	  return;

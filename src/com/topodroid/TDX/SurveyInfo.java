@@ -13,6 +13,8 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDUtil;
 
 
 import android.widget.EditText;
@@ -118,8 +120,8 @@ public class SurveyInfo
   {
     float decl = DECLINATION_UNSET;
     if ( et != null && et.getText() != null ) {
-      String decl_str = et.getText().toString().trim();
-      if ( /* decl_str != null && */ decl_str.length() > 0 ) { // ALWAYS true
+      String decl_str = TDString.noSpaces( et.getText().toString() );
+      if ( ! TDString.isNullOrEmpty( decl_str ) ) { // ALWAYS true
         decl_str = decl_str.replace(',', '.');
         try {
           decl = Float.parseFloat( decl_str );
@@ -138,8 +140,8 @@ public class SurveyInfo
   static boolean declinationOutOfRange( EditText et )
   {
     if ( et != null && et.getText() != null ) {
-      String decl_str = et.getText().toString().trim();
-      if ( /* decl_str != null && */ decl_str.length() == 0 ) return true;
+      String decl_str = TDString.noSpaces( et.getText().toString() );
+      if ( TDString.isNullOrEmpty( decl_str ) ) return true;
       decl_str = decl_str.replace(',', '.');
       try {
         float decl = Float.parseFloat( decl_str );

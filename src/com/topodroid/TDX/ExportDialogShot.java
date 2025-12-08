@@ -314,7 +314,7 @@ public class ExportDialogShot extends MyDialog
       mExportName = null;
       return true;
     } else {
-      String export_name =name.toString().trim();
+      String export_name = name.toString().trim(); // FIXME NOSPACES
       int len = export_name.length();
       if ( len == 0 ) {
         mExportName = null;
@@ -385,7 +385,7 @@ public class ExportDialogShot extends MyDialog
     if ( prefix == null ) {
       mExportPrefix = null;
     } else {
-      mExportPrefix = TDString.noSpace( prefix.toString().trim() );
+      mExportPrefix = TDString.noSpaces( prefix.toString() );
       if ( mExportPrefix.length() == 0 ) mExportPrefix = null;
     }
     TDSetting.mExportStationsPrefix = (mExportPrefix != null);
@@ -436,7 +436,7 @@ public class ExportDialogShot extends MyDialog
           EditText epsg  = (EditText)findViewById( R.id.survex_epsg );
           if ( epsg.getText() != null ) {
             try {
-              TDSetting.mSurvexEPSG = Integer.parseInt( epsg.getText().toString() );
+              TDSetting.mSurvexEPSG = Integer.parseInt( epsg.getText().toString() ); // TRIM
             } catch ( NumberFormatException e ) { } 
           }
           TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.survex_share )).isChecked();
@@ -460,7 +460,7 @@ public class ExportDialogShot extends MyDialog
           EditText index =  (EditText) findViewById( R.id.trobot_index );
           if ( index.getText() != null ) {
             try {
-              first = Integer.parseInt( index.getText().toString() );
+              first = Integer.parseInt( index.getText().toString() ); // TRIM
             } catch ( NumberFormatException e ) { first = -1; }
             if ( first >= mApp.mData.maxShotId( TDInstance.sid ) ) return false;
           }
