@@ -106,6 +106,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 // import android.provider.MediaStore;
 
@@ -135,6 +136,7 @@ public class DrawingWindow extends ItemDrawer
                                     , View.OnClickListener
                                     , View.OnLongClickListener
                                     , OnItemClickListener
+                                    , OnItemLongClickListener
                                     , OnItemSelectedListener
                                     , OnZoomListener
                                     // , ILabelAdder
@@ -2627,6 +2629,7 @@ public class DrawingWindow extends ItemDrawer
     TDandroid.setButtonBackground( mMenuImage, mBMmenublue );
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
+    mMenu.setOnItemLongClickListener( this );
 
     // redoBtn.setEnabled(false);
     // undoBtn.setEnabled(false); // let undo always be there
@@ -8547,140 +8550,174 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** handle a long tap on a menu item
+   * @param pos    item position
+   * @return true if the long tap has been handled, false otherwise (falls back tp short tap)
+   */
+  private boolean handleMenuLongClick( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // CLOSE
+    } else if ( p++ == pos ) { // EXPORT - SAVE
+    } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
+    } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
+    } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
+    } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
+    } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
+    } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
+    } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
+    } else if ( p++ == pos ) { // PALETTE
+      // TDLog.v("MENU palette");
+      if ( mMode == MODE_DRAW ) { // only if in drawing mode
+        startItemPickerDialog();
+        return true;
+      }
+    } else if ( TDLevel.overBasic && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT OVERVIEW
+    } else if ( p++ == pos ) { // OPTIONS
+    } else if ( p++ == pos ) { // HELP
+    }
+    return false;
+  }
+    
+
+  /** handle a short tap on a menu item
+   * @param pos    item position
+   */
   private void handleMenu( int pos )
   {
-      closeMenu();
-      int p = 0;
-      if ( p++ == pos ) {
-        if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
-          if ( TDLevel.overNormal ) {
-            new PlotListDialog( mActivity, null, mApp, this ).show();
-          } else {
-            super.onBackPressed();
-          }
-        } else { // close
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) {
+      if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
+        if ( TDLevel.overNormal ) {
+          new PlotListDialog( mActivity, null, mApp, this ).show();
+        } else {
           super.onBackPressed();
         }
-      } else if ( p++ == pos ) { // EXPORT - SAVE
-        if ( mTh2Edit ) { // TH2EDIT export Therion
-          // int th_pos = 0; // Therion index, unused? - 20230118 local var "th_pos"
-          // TDLog.v("DRAW save therion");
-          // API_19
-          selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
-        } else {
-          String plotname1 = TDInstance.survey + "-" + mName;
-          String plotname2 = null;
-          if ( TDLevel.overExpert ) {
-            if ( PlotType.isProfile( mType ) ) {
-              plotname2 = TDInstance.survey + "-" + mName1;
-            } else if (  PlotType.isPlan( mType ) ) {
-              plotname2 = TDInstance.survey + "-" + mName2;
-            } 
-          }
-          // TDLog.v("export " + plotname1 + " " + plotname2 );
-          new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, plotname1, plotname2 ).show();
-        }
-      } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
-        if ( PlotType.isAnySection( mType ) ) {
-          float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
-          Resources res = getResources();
-          String msg = String.format( res.getString( R.string.section_area ), area );
-          TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
-	} else {
-          if ( mNum != null ) {
-            float azimuth = -1;
-            float oblique = 0;
-            if ( isProfileProjected() ) {
-              azimuth = mPlot2.azimuth;
-              oblique = mPlot2.clino;
-            }
-            new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp.getSurveyStat( TDInstance.sid ) ).show();
-          } else {
-            TDToast.makeBad( R.string.no_data_reduction );
-	  }
-	}
-      } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
-        if ( mTh2Edit ) { // TH2EDIT API_19
-          selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_IMPORT, Intent.ACTION_OPEN_DOCUMENT );
-        } else {
-          Intent intent = new Intent( this, PlotReloadWindow.class );
-          intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
-          intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
-          intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
-          intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
-          intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
-          intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
-          intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
+      } else { // close
+        super.onBackPressed();
+      }
+    } else if ( p++ == pos ) { // EXPORT - SAVE
+      if ( mTh2Edit ) { // TH2EDIT export Therion
+        // int th_pos = 0; // Therion index, unused? - 20230118 local var "th_pos"
+        // TDLog.v("DRAW save therion");
+        // API_19
+        selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
+      } else {
+        String plotname1 = TDInstance.survey + "-" + mName;
+        String plotname2 = null;
+        if ( TDLevel.overExpert ) {
           if ( PlotType.isProfile( mType ) ) {
-            intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName2 );
-            // ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
-          } else if ( mType == PlotType.PLOT_PLAN ) {
-            intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName1 );
-            // ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
-          } else {
-            intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName3 );
-            // ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
+            plotname2 = TDInstance.survey + "-" + mName1;
+          } else if (  PlotType.isPlan( mType ) ) {
+            plotname2 = TDInstance.survey + "-" + mName2;
+          } 
+        }
+        // TDLog.v("export " + plotname1 + " " + plotname2 );
+        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, plotname1, plotname2 ).show();
+      }
+    } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
+      if ( PlotType.isAnySection( mType ) ) {
+        float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
+        Resources res = getResources();
+        String msg = String.format( res.getString( R.string.section_area ), area );
+        TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
+      } else {
+        if ( mNum != null ) {
+          float azimuth = -1;
+          float oblique = 0;
+          if ( isProfileProjected() ) {
+            azimuth = mPlot2.azimuth;
+            oblique = mPlot2.clino;
           }
-          startActivityForResult( intent, TDRequest.PLOT_RELOAD );
-        }
-      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
-	if ( TDLevel.overExpert ) {
-          ( new PlotZoomFitDialog( mActivity, this, mTh2Edit ) ).show(); // TH2EDIT added last param
-	} else {
-	  doZoomFit();
-	}
-      } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
-        ( new PlotSearchDialog( mActivity, this ) ).show();
-      } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
-        //   askDelete();
-        boolean scrap_copy = (mSplitPaths != null);
-        boolean has_outline = mDrawingSurface.hasPlotOutline();
-        // TDLog.v("RENAME etc. scrap_copy " + scrap_copy + " has_outline " + has_outline );
-        (new PlotRenameDialog( mActivity, this, scrap_copy, has_outline )).show();
-      } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
-        (new PlotScrapsDialog( mActivity, this )).show();
-
-      } else if ( p++ == pos ) { // PALETTE
-        (new SymbolEnableDialog( mActivity )).show();
-
-      } else if ( TDLevel.overBasic && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT OVERVIEW
-        if ( mType == PlotType.PLOT_PROJECTED ) {
-          TDToast.makeBad( R.string.no_profile_overview );
+          new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp.getSurveyStat( TDInstance.sid ) ).show();
         } else {
-          updateReference();
-          Intent intent = new Intent( this, OverviewWindow.class );
-          intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
-          intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
-          intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
-          intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
-          intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
-          intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
-          intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
-          mActivity.startActivity( intent );
-        }
-      } else if ( p++ == pos ) { // OPTIONS
-        updateReference();
-        Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
-        intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );
-        mActivity.startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        // 1 for select-tool
-        // int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
-        // TDLog.v( "Help menu, nn " + nn );
-        switch ( mMode ) {
-          case MODE_DRAW:
-            new HelpDialog(mActivity, izons_draw, menus, help_icons_draw, help_menus, NR_BUTTON2, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
-            break;
-          case MODE_ERASE:
-            new HelpDialog(mActivity, izons_erase, menus, help_icons_erase, help_menus, NR_BUTTON5, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
-            break;
-          case MODE_EDIT:
-            new HelpDialog(mActivity, izons_edit, menus, help_icons_edit, help_menus, NR_BUTTON3, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
-            break;
-          default: // MODE_MOVE MODE_SPLIT_SKETCH MODE_SPLIT_SCRAP
-            new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, NR_BUTTON1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          TDToast.makeBad( R.string.no_data_reduction );
         }
       }
+    } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
+      if ( mTh2Edit ) { // TH2EDIT API_19
+        selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_IMPORT, Intent.ACTION_OPEN_DOCUMENT );
+      } else {
+        Intent intent = new Intent( this, PlotReloadWindow.class );
+        intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
+        intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
+        intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
+        intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
+        intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
+        intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
+        intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
+        if ( PlotType.isProfile( mType ) ) {
+          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName2 );
+          // ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
+        } else if ( mType == PlotType.PLOT_PLAN ) {
+          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName1 );
+          // ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
+        } else {
+          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName3 );
+          // ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
+        }
+        startActivityForResult( intent, TDRequest.PLOT_RELOAD );
+      }
+    } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
+      if ( TDLevel.overExpert ) {
+        ( new PlotZoomFitDialog( mActivity, this, mTh2Edit ) ).show(); // TH2EDIT added last param
+      } else {
+        doZoomFit();
+      }
+    } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
+      ( new PlotSearchDialog( mActivity, this ) ).show();
+    } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
+      //   askDelete();
+      boolean scrap_copy = (mSplitPaths != null);
+      boolean has_outline = mDrawingSurface.hasPlotOutline();
+      // TDLog.v("RENAME etc. scrap_copy " + scrap_copy + " has_outline " + has_outline );
+      (new PlotRenameDialog( mActivity, this, scrap_copy, has_outline )).show();
+    } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
+      (new PlotScrapsDialog( mActivity, this )).show();
+
+    } else if ( p++ == pos ) { // PALETTE
+      (new SymbolEnableDialog( mActivity )).show();
+
+    } else if ( TDLevel.overBasic && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT OVERVIEW
+      if ( mType == PlotType.PLOT_PROJECTED ) {
+        TDToast.makeBad( R.string.no_profile_overview );
+      } else {
+        updateReference();
+        Intent intent = new Intent( this, OverviewWindow.class );
+        intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
+        intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
+        intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
+        intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
+        intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
+        intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
+        intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
+        mActivity.startActivity( intent );
+      }
+    } else if ( p++ == pos ) { // OPTIONS
+      updateReference();
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );
+      mActivity.startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      // 1 for select-tool
+      // int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
+      // TDLog.v( "Help menu, nn " + nn );
+      switch ( mMode ) {
+        case MODE_DRAW:
+          new HelpDialog(mActivity, izons_draw, menus, help_icons_draw, help_menus, NR_BUTTON2, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          break;
+        case MODE_ERASE:
+          new HelpDialog(mActivity, izons_erase, menus, help_icons_erase, help_menus, NR_BUTTON5, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          break;
+        case MODE_EDIT:
+          new HelpDialog(mActivity, izons_edit, menus, help_icons_edit, help_menus, NR_BUTTON3, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          break;
+        default: // MODE_MOVE MODE_SPLIT_SKETCH MODE_SPLIT_SCRAP
+          new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, NR_BUTTON1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+      }
+    }
   }
 
   /** @return true if the profile is projected
@@ -8789,12 +8826,34 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** implements user tap on an item
+   * @param parent    parent view
+   * @param view      tapped view
+   * @param pos       item position in the list
+   * @param id        ...
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( mMenu == (ListView)parent ) { // MENU
       handleMenu( pos );
     }
+  }
+
+  /** implements user long-tap on an item
+   * @param parent    parent view
+   * @param view      tapped view
+   * @param pos       item position in the list
+   * @param id        ...
+   * @return true if tap has been handled
+   */
+  @Override 
+  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    if ( mMenu == (ListView)parent ) { // MENU
+      return handleMenuLongClick( pos );
+    }
+    return false;
   }
 
   void doRecover( String filename, long type )
