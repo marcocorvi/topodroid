@@ -86,7 +86,7 @@ public class ExportDialogSettings extends MyDialog
         protected Boolean doInBackground(Void... v)
         {
           // TDLog.v("export settings");
-          return TDSetting.exportSettings();
+          return TDSetting.exportSettings( mContext, mPrefs );
         }
         @Override
         protected void onPostExecute( Boolean v )
@@ -108,7 +108,7 @@ public class ExportDialogSettings extends MyDialog
         protected Boolean doInBackground(Void... v)
         {
           TDLog.v("import settings - functional " + functional );
-          return TDSetting.importSettings( mPrefs, all );
+          return TDSetting.importSettings( mContext, mPrefs, all );
         }
         @Override
         protected void onPostExecute( Boolean v )

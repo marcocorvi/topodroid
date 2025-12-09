@@ -1425,6 +1425,8 @@
   <string name="pref_export_settings">输出设置</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
+  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
   <string name="pref_export_plot_title">草图输出格式</string>
   <string name="pref_export_plot_summary">默认草图输出格式</string>
   <string name="pref_export_shots_title">数据输出格式</string>

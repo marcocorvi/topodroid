@@ -1334,6 +1334,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_settings_failed">Falha ao exportar configurações</string>
   <string name="pref_export_settings">IMPORT/EXPORT CONFIGURAÇÕES</string>
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
+  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
+  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
   <string name="pref_export_plot_title">Form export croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
   <string name="pref_export_shots_title">Form export dados</string>

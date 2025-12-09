@@ -1421,6 +1421,8 @@
 
   <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
+  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
   <string name="pref_export_plot_summary">Формат по умолчанию для экспорта абрисов</string>
   <string name="pref_export_shots_title">Формат экспорта съёмки</string>

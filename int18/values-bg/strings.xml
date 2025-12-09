@@ -1428,6 +1428,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_export_settings">Импортиране/експортиране на настройки</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
+  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
   <string name="pref_export_plot_title">Формат за експортиране на скица</string>
   <string name="pref_export_plot_summary">Формат по подразбиране за експортиране на скици</string>
   <string name="pref_export_shots_title">Формат за експортиране на данни</string>

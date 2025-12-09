@@ -117,7 +117,7 @@ public class MainWindow extends Activity
                         // , View.OnLongClickListener
                         , OnCancelListener
                         , OnDismissListener
-                        , IExporter
+                        , IExporter // EXPORT
 {
   private TopoDroidApp mApp;
   // private boolean mApp_mCosurvey = false; // IF_COSURVEY
@@ -170,7 +170,7 @@ public class MainWindow extends Activity
 			  // R.string.menu_backups, // CLEAR_BACKUPS
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
-                          R.string.menu_export,
+                          R.string.menu_export, // EXPORT
                           R.string.menu_about,
                           R.string.menu_options,
                           R.string.menu_help,
@@ -193,7 +193,7 @@ public class MainWindow extends Activity
 			  // R.string.help_backups, // CLEAR_BACKUPS
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
-                          R.string.help_export_surveys,
+                          R.string.help_export_surveys, // EXPORT
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
                           R.string.help_help,
@@ -683,7 +683,8 @@ public class MainWindow extends Activity
     // if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
-    if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // EXPORT
+
+    if ( TDLevel.overExpert && TDSetting.mBulkExport ) menu_adapter.add( res.getString( menus[3] ) ); // EXPORT
     menu_adapter.add( res.getString( menus[4] ) ); // ABOUT
     menu_adapter.add( res.getString( menus[5] ) ); // SETTINGS
     menu_adapter.add( res.getString( menus[6] ) ); // HELP
@@ -735,9 +736,11 @@ public class MainWindow extends Activity
       //   (new ConnectDialog( mActivity, mApp )).show();
       // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
       //   // (new TDUpdatesDialog( mActivity, mApp )).show();
-      } else if ( TDLevel.overExpert && p++ == pos ) {  // EXPORT
+
+      } else if ( TDLevel.overExpert && TDSetting.mBulkExport && p++ == pos ) {  // EXPORT
         String[] types = TDConst.surveyExportTypes( false ); // with_geo=false
         new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, false, false ).show(); // diving=false
+
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
@@ -1811,6 +1814,8 @@ public class MainWindow extends Activity
       TopoDroidApp.setSayDialogR( false );
     }
   }
+
+  // EXPORT -----------------------------------------------------------------
 
   public void doExport( final String type, final String filename, final String prefix, final long first, boolean second )
   { 

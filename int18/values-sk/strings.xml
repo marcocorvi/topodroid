@@ -1437,6 +1437,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
+  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
   <string name="pref_export_plot_title">Formát exportu Nákresu</string>
   <string name="pref_export_plot_summary">Predvolený formát Nákresu pri Exporte</string>
   <string name="pref_export_shots_title">Formát exportu Dát</string>
@@ -1452,19 +1454,6 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_cat_import_export">NASTAVENIA IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
   <string name="pref_cat_exportenable">PREDVOLIŤ</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  

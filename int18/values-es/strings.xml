@@ -1423,6 +1423,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_export_settings">Ajustes de exportación</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
+  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
   <string name="pref_export_plot_title">Formato de exportación de croquis</string>
   <string name="pref_export_plot_summary">Formato de exportación de croquis predeterminado</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>

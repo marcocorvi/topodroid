@@ -1449,9 +1449,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="imported_settings">Imported settings</string>
   <string name="imported_settings_failed">Failed to import settings</string>
   <string name="export_settings_failed">Failed to export settings</string>
-  <string name="pref_export_settings">Settings import/export</string>
+  <string name="pref_export_settings">Settings save/reload</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <string name="pref_bulk_export_title">Bulk data export</string>
+  <string name="pref_bulk_export_summary">Bulk data export of all surveys</string>
   <string name="pref_export_plot_title">Sketch export format</string>
   <string name="pref_export_plot_summary">Default format for sketch export</string>
   <string name="pref_export_shots_title">Data export format</string>

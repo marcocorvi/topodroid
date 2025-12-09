@@ -2366,6 +2366,7 @@ class TDPrefKey
     // "DISTOX_BACKUPS_CLEAR", // CLEAR_BACKUPS
     "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
     "DISTOX_NO_CURSOR",     // no cursor for custom keyboard
+    "DISTOX_BULK_EXPORT",    
     "DISTOX_PACKET_LOGGER",
     "DISTOX_TH2_EDIT",         // SKETCH EDIT
     "DISTOX_GEEK_SHOT",       // FORWARD
@@ -2387,6 +2388,7 @@ class TDPrefKey
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
     R.string.pref_mkeyboard_title,        // 2 MKEYBOARD
     R.string.pref_no_cursor_title,
+    R.string.pref_bulk_export_title,
     R.string.pref_packet_logger_title,
     R.string.pref_th2_edit_title,
     R.string.pref_cat_survey,
@@ -2408,6 +2410,7 @@ class TDPrefKey
     // R.string.pref_backups_clear_summary, // CLEAR_BACKUPS
     R.string.pref_mkeyboard_summary,
     R.string.pref_no_cursor_summary,
+    R.string.pref_bulk_export_summary,
     R.string.pref_packet_logger_summary,
     R.string.pref_th2_edit_summary,
     -1,
@@ -2431,6 +2434,7 @@ class TDPrefKey
     TRUE,            // NO CURSOR
     FALSE,
     FALSE,
+    FALSE,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -2447,6 +2451,7 @@ class TDPrefKey
     N,
     T,
     // T,
+    T,
     T,
     T,
     T,
