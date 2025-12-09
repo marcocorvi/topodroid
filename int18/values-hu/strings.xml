@@ -1431,8 +1431,8 @@
   <string name="pref_export_settings">Beállítások exportálása/importálása</string>
  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
-  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
+  <string name="pref_bulk_export_title">Tömeges adatexportálás</string>
+  <string name="pref_bulk_export_summary">Az összes felmérés tömeges exportálása</string>
   <string name="pref_export_plot_title">Vázlat export formátum</string>
   <string name="pref_export_plot_summary">Alapértelmezett vázlat export formátum</string>
   <string name="pref_export_shots_title">Adat export formátum</string>
