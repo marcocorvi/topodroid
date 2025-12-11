@@ -135,13 +135,15 @@ class FullBackupTask extends AsyncTask<Void, Integer, Boolean>
 
       // 3. Add each survey folder
       int progress = 0;
+      mSurveyCount = surveys.size(); // Count all surveys from database
       for (String survey : surveys) {
         String surveyDir = TDPath.getSurveyDir(survey);
         File surveyFolder = new File(surveyDir);
         if (surveyFolder.exists() && surveyFolder.isDirectory()) {
           addDirectoryToZip(zos, surveyFolder, survey);
-          mSurveyCount++;
-          TDLog.v("BACKUP added survey: " + survey);
+          TDLog.v("BACKUP added survey folder: " + survey);
+        } else {
+          TDLog.v("BACKUP survey without folder: " + survey);
         }
         progress++;
         publishProgress(progress, surveys.size());

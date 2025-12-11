@@ -501,8 +501,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
     <string name="menu_export">EXPORT</string>
     <string name="menu_exit">EXIT</string>
-    <string name="menu_backup">Full backup</string>
-    <string name="menu_restore">Restore backup</string>
+    <string name="menu_backup">FULL BACKUP</string>
+    <string name="menu_restore">RESTORE BACKUP</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
     <string name="menu_geopoint_app" copyable="all">GNSS APP</string>
     <string name="menu_recover">RECOVER</string>
