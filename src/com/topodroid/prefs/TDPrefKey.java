@@ -2398,7 +2398,7 @@ class TDPrefKey
     // R.string.pref_plot_walls_title, // AUTOWALLS
     R.string.pref_cat_device,
     R.string.pref_cat_import_export,
-    R.string.pref_cat_sketch,
+    R.string.pref_cat_import_export, //pref_cat_sketch,
     R.string.pref_with_debug_title,    // 13
     -1
   };
