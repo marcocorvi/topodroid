@@ -41,6 +41,18 @@
           android:layout_marginEnd="@dimen/marginh"
           android:text="@string/button_cancel"
         />
+        <!-- HB EQ all-->
+          <Button android:id="@+id/button_search"
+              style="@style/button_default"
+              android:layout_marginEnd="@dimen/marginh"
+              android:text="@string/button_equate_search"
+              />
+          <Button android:id="@+id/button_all"
+              style="@style/button_default"
+              android:layout_marginEnd="@dimen/marginh"
+              android:text="@string/button_equate_all"
+              />
+        <!-- HB EQ all-->
         <Button android:id="@+id/button_ok"
           style="@style/button_default"
           android:layout_marginEnd="@dimen/marginh"
