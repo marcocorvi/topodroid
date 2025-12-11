@@ -1759,7 +1759,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
         makeFwd( cat, key[11], tit[11],        lvl[11],          ctx, hlp ), // GEEK_LINE
         // makeFwd( cat, key[7], tit[7],       lvl[ ],          ctx, hlp ), // PLOT_WALLS AUTOWALLS
         makeFwd( cat, key[12], tit[12],        lvl[12],          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[13], tit[14],        lvl[13],          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[13], tit[13],        lvl[13],          ctx, hlp ), // GEEK_IMPORT
         makeFwd( cat, key[14], tit[14],        lvl[14],          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
         makeSpecial( cat, key[15], tit[15], dsc[15],  lvl[15], def[15],  ctx, hlp ), // WITH DEBUG
       };
@@ -1780,8 +1780,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
         makeFwd( cat, key[11], tit[11],        lvl[11],          ctx, hlp ), // GEEK_LINE
         // makeFwd( cat, key[7], tit[7],       lvl[ ],          ctx, hlp ), // PLOT_WALLS AUTOWALLS
         makeFwd( cat, key[12], tit[12],        lvl[12],          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[13], tit[14],        lvl[13],          ctx, hlp ), // GEEK_IMPORT
-        makeFwd( cat, key[14], tit[14],        lvl[14],          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeFwd( cat, key[13], tit[13],        lvl[13],          ctx, hlp ), // GEEK_IMPORT
       };
     }
   }

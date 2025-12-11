@@ -1388,6 +1388,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_settings_gpx">GPX export settings</string>
     <string name="title_settings_kml">KML export settings</string>
     <string name="title_settings_srv">Walls export settings</string>
+    <string name="title_settings_ply">Polygon export settings</string>
 
     <string name="title_settings_sketch">3d sketch settings</string>
     <string name="title_settings_survey">Survey settings</string>

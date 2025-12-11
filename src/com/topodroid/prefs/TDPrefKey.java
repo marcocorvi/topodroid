@@ -14,6 +14,7 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.R;
 
 import java.util.Locale;
@@ -2382,24 +2383,24 @@ class TDPrefKey
   };
 
   static int[] GEEKtitle = {
-    R.string.pref_single_back_title,
+    R.string.pref_single_back_title,      // 0
     R.string.pref_hide_navbar_title,
     R.string.pref_palettes_title,
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
-    R.string.pref_mkeyboard_title,        // 2 MKEYBOARD
+    R.string.pref_mkeyboard_title,        // 3 MKEYBOARD
     R.string.pref_no_cursor_title,
     R.string.pref_bulk_export_title,
-    R.string.pref_packet_logger_title,
+    R.string.pref_packet_logger_title,    // 6
     R.string.pref_th2_edit_title,
     R.string.pref_cat_survey,
-    R.string.pref_cat_splay,
+    R.string.pref_cat_splay,              // 9
     R.string.pref_cat_drawing,
     R.string.pref_tool_line_title,
     // R.string.pref_plot_walls_title, // AUTOWALLS
-    R.string.pref_cat_device,
+    R.string.pref_cat_device,          // 12
     R.string.pref_cat_import_export,
-    R.string.pref_cat_import_export, //pref_cat_sketch,
-    R.string.pref_with_debug_title,    // 13
+    R.string.pref_cat_sketch, //pref_cat_sketch,
+    R.string.pref_with_debug_title,    // 15
     -1
   };
 
@@ -2464,8 +2465,12 @@ class TDPrefKey
     A,
     T,
     D,
-    T,
+    D, // developer mode but be accessible from below D
   };
+
+  static {
+    if ( TDLevel.isDebugBuild() ) GEEKlvl[15] = T;
+  }
 
   // -------------------------------------------------------------------------------
   static String[] GEEKIMPORT = {

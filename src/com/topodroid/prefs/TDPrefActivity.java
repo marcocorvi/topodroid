@@ -114,7 +114,7 @@ public class TDPrefActivity extends Activity
       }
     }
 
-    // TDLog.v( "TDPrefActivity::onCreate category " + mPrefCategory );
+    TDLog.v( "TDPrefActivity::onCreate category " + mPrefCategory );
     if ( loadPreferences() ) {
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL )    { mPrefActivityAll    = this; }
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
@@ -187,7 +187,7 @@ public class TDPrefActivity extends Activity
     // Resources res = getResources();
     TDPrefHelper hlp = new TDPrefHelper( mCtx ); // TopoDroidApp.mPrefHlp;
 
-    // TDLog.v( "PREF load category " + mPrefCategory );
+    TDLog.v( "PREF load category " + mPrefCategory );
     switch ( mPrefCategory ) {
       case TDPrefCat.PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs(   this, hlp ); break;
@@ -419,7 +419,7 @@ public class TDPrefActivity extends Activity
         @Override
         public void onClick( View v )
         {
-	  // TDLog.v( "PREF click on " + pref.name + " category " + category );
+	  TDLog.v( "PREF click on " + pref.name + " category " + category );
           startActivity( intent );
         }
     } );
