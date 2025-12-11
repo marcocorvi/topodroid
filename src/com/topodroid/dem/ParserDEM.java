@@ -14,7 +14,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.dem;
 
 // import com.topodroid.utils.TDLog;
 
@@ -24,7 +24,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-class ParserDEM extends DEMsurface
+public class ParserDEM extends DEMsurface
 {
   protected boolean mValid;    // header is valid
   protected int   mMaxSize;    // max DEM size (in each direction)
@@ -50,7 +50,7 @@ class ParserDEM extends DEMsurface
    * @param filename   file fullpath
    * @param size       max DEM size
    */
-  ParserDEM( InputStreamReader isr, String filename, int size ) // FIXME DEM_URI 
+  public ParserDEM( InputStreamReader isr, String filename, int size ) // FIXME DEM_URI 
   {
     mIsr      = isr;
     mBr       = new BufferedReader( mIsr );
@@ -67,7 +67,7 @@ class ParserDEM extends DEMsurface
    * @param xu         X units
    * @param yu         Y units
    */
-  ParserDEM( InputStreamReader isr, String filename, int size, double xu, double yu )
+  public ParserDEM( InputStreamReader isr, String filename, int size, double xu, double yu )
   {
     mIsr      = isr;
     mBr       = new BufferedReader( mIsr );
@@ -80,49 +80,49 @@ class ParserDEM extends DEMsurface
 
   /** @return whether the DEM is valid
    */
-  boolean valid() { return mValid; }
+  public boolean valid() { return mValid; }
 
   /** @return DEM west bound
    */
-  double west()  { return mEast1; }
+  public double west()  { return mEast1; }
 
   /** @return DEM east bound
    */
-  double east()  { return mEast2; }
+  public double east()  { return mEast2; }
 
   /** @return DEM south bound
    */
-  double south() { return mNorth1; }
+  public double south() { return mNorth1; }
 
   /** @return DEM north bound
    */
-  double north() { return mNorth2; }
+  public double north() { return mNorth2; }
 
   /** @return Z value of a cell
    * @param i   X-index of the cell
    * @param j   Y-index of the cell
    */
-  float Z( int i, int j ) { return mZ[j*mNr1+i]; }
+  public float Z( int i, int j ) { return mZ[j*mNr1+i]; }
 
   /** @return cell X size
    */
-  double cellXSize() { return mDim1; }
+  public double cellXSize() { return mDim1; }
 
   /** @return cell Y size
    */
-  double cellYSize() { return mDim2; }
+  public double cellYSize() { return mDim2; }
 
   /** @return number of cells in X direction
    */
-  int dimX() { return mNr1; }
+  public int dimX() { return mNr1; }
 
   /** @return number of cells in Y direction
    */
-  int dimY() { return mNr2; }
+  public int dimY() { return mNr2; }
   
   /** @return the array of Z values
    */
-  float[] data() { return mZ; }
+  public float[] data() { return mZ; }
 
   /** read DEM data - default no read
    * @param xwest     West X coord
@@ -130,7 +130,7 @@ class ParserDEM extends DEMsurface
    * @param ysouth    South Y coord
    * @param ynorth    North Y coord
    */
-  boolean readData( double xwest, double xeast, double ysouth, double ynorth ) { return false; }
+  public boolean readData( double xwest, double xeast, double ysouth, double ynorth ) { return false; }
 
   /** read DEM header - default no read
    * @param filename    pathname of the file 

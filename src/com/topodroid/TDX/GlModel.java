@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.dem.DEMsurface;
+import com.topodroid.dem.ParserDEM;
 
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch; // NO_C3D
@@ -1195,7 +1197,7 @@ public class GlModel
       valid_surface = gl_surface.initData( surface, mXmed, mYmed, mZmed, parser.surfaceFlipped() );
       if ( valid_surface ) {
         if ( parser != null && parser.mBitmap != null ) {
-          Bitmap texture = parser.mBitmap.getBitmap( surface.mEast1, surface.mNorth1, surface.mEast2, surface.mNorth2 );
+          Bitmap texture = parser.mBitmap.getBitmap( surface.east1(), surface.north1(), surface.east2(), surface.north2() );
           if ( texture != null ) {
             gl_surface.setTextureBitmap( texture );
           }

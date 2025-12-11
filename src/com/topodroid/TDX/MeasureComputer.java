@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.dem.DEMsurface;
+import com.topodroid.dem.ParserDEM;
 
 import android.os.AsyncTask;
 // import android.content.Context;

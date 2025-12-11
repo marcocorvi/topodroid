@@ -30,6 +30,7 @@ import com.topodroid.c3walls.cw.CWBorder;
 import com.topodroid.c3walls.cw.CWConvexHull;
 import com.topodroid.c3walls.cw.ConvexHullComputer;
 import com.topodroid.c3walls.pcrust.PowercrustComputer;
+import com.topodroid.dem.DEMsurface;
 
 // import java.io.File;
 import java.io.IOException;

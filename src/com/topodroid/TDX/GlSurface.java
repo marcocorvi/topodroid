@@ -14,6 +14,8 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
+import com.topodroid.dem.DEMsurface;
+import com.topodroid.dem.ParserDEM;
 
 // import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
@@ -110,21 +112,20 @@ public class GlSurface extends GlShape
    */
   boolean  initData( DEMsurface surface, double xmed, double ymed, double zmed, boolean flip )
   {
-    int nx = surface.mNr1;
-    int nz = surface.mNr2;
+    int nx = surface.nr1();
+    int nz = surface.nr2();
     if ( nx <= 1 || nz <= 1 ) return false;
-    float dx = (float)( surface.mDim1 );
-    float x0 = (float)( surface.mEast1  - xmed );
+    float dx = (float)( surface.dim1() );
+    float x0 = (float)( surface.east1() - xmed );
    
-    // double dz =   surface.mDim2;  // GOOD
-    float dz = (float)( flip ? - surface.mDim2 : surface.mDim2 ); // flip for "complesso.lox"
+    // double dz =   surface.Dim2();  // GOOD
+    float dz = (float)( flip ? - surface.dim2() : surface.dim2() ); // flip for "complesso.lox"
     // double z0 =   surface.mNorth1 + zmed; //  GOOD
-    float z0 = (float)( flip ? surface.mNorth2 + zmed : surface.mNorth1 + zmed );
+    float z0 = (float)( flip ? surface.north2() + zmed : surface.north1() + zmed );
 
-    // TDLog.v("SURFACE " + nx + "x" + nz + " E " + surface.mEast1 + " " + surface.mEast2 + " " + x0 + " N " + surface.mNorth1 + " " + surface.mNorth2 + " " + z0 + " Dx " + dx + " Dz " + dz );
-    // TDLog.v("Z " + surface.mZ[0] + " " + surface.mZ[1] + " " + surface.mZ[2] + " " + surface.mZ[3] + " " + surface.mZ[4] + " " + surface.mZ[5] + " " + surface.mZ[6] + " ... ");
-    isValid = initDataBuffer( surface.mZ, nx, nz, dx, dz, x0, z0, (float)ymed ); // ymed = survey data medium elevation
-    // logData( surface.mZ, nx, nz, x0, (x0+nx*dx), z0, (z0+nz*dz) );
+    // TDLog.v("SURFACE " + nx + "x" + nz + " E " + surface.east1() + " " + surface.east2() + " " + x0 + " N " + surface.north1() + " " + surface.north2() + " " + z0 + " Dx " + dx + " Dz " + dz );
+    isValid = initDataBuffer( surface.Z(), nx, nz, dx, dz, x0, z0, (float)ymed ); // ymed = survey data medium elevation
+    // logData( surface.Z(), nx, nz, x0, (x0+nx*dx), z0, (z0+nz*dz) );
     return isValid;
   }
 

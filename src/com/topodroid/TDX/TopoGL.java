@@ -41,6 +41,10 @@ import com.topodroid.c3out.ExportTask;
 
 import com.topodroid.c3walls.cw.CWConvexHull;
 
+import com.topodroid.dem.ParserDEM;
+import com.topodroid.dem.DEMasciiParser;
+import com.topodroid.dem.DEMgridParser;
+
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 // import com.topodroid.utils.TDVersion;

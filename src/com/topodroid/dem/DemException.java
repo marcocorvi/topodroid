@@ -10,7 +10,7 @@
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.dem;
 
 class DemException extends Exception
 {

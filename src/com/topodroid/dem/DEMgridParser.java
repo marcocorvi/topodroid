@@ -14,7 +14,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.dem;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
@@ -25,7 +25,7 @@ import com.topodroid.utils.TDString;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-class DEMgridParser extends ParserDEM
+public class DEMgridParser extends ParserDEM
 {
   private double xll, yll; // lower-left corner of lower-left cell
   private int   cols, rows;
@@ -36,7 +36,7 @@ class DEMgridParser extends ParserDEM
    * @param filename   file fullpath
    * @param maxsize    ...
    */
-  DEMgridParser( InputStreamReader isr, String filename, int maxsize ) // FIXME DEM_URI
+  public DEMgridParser( InputStreamReader isr, String filename, int maxsize ) // FIXME DEM_URI
   {
     super( isr, filename, maxsize );
   }
@@ -49,7 +49,7 @@ class DEMgridParser extends ParserDEM
    * @return true if the DEM in memory is valid
    */
   @Override
-  boolean readData( double xwest, double xeast, double ysouth, double ynorth ) 
+  public boolean readData( double xwest, double xeast, double ysouth, double ynorth ) 
   {
     // TDLog.v("DEM read data dim " + cols + "x" + rows + " LLcorner " + xll + " " + yll + " cell " + mDim1 + " " + mDim2 + " flip " + flip_vert + " " + flip_horz );
     if ( ! mValid ) return false; // return mValid;

@@ -16,7 +16,7 @@ import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Cave3DSurvey;
-import com.topodroid.TDX.DEMsurface;
+import com.topodroid.dem.DEMsurface;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;

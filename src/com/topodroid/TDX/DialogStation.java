@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.dem.DEMsurface;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;

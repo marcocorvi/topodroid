@@ -14,7 +14,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.dem;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
@@ -28,7 +28,7 @@ import java.io.InputStreamReader;
 /* ascii DEM have reference at the LL-corner.
  * For TopoGL grid points (center of cells) must add (mDim1/2, mDim2/2) 
  */
-class DEMasciiParser extends ParserDEM
+public class DEMasciiParser extends ParserDEM
 {
   private double  xll,  yll;  // Lower-left corner of lower-left cell
   private int     cols, rows; // columns, rows
@@ -42,7 +42,7 @@ class DEMasciiParser extends ParserDEM
    * @param xu         X unit factor (either 1 for m, or R*PI/180 for dec-degrees)
    * @param yu         Y unit factor
    */
-  DEMasciiParser( InputStreamReader isr, String filename, int maxsize, boolean hflip, double xu, double yu ) // FIXME DEM_URI
+  public DEMasciiParser( InputStreamReader isr, String filename, int maxsize, boolean hflip, double xu, double yu ) // FIXME DEM_URI
   {
     super( isr, filename, maxsize, xu, yu );
     flip_horz = hflip;
@@ -56,7 +56,7 @@ class DEMasciiParser extends ParserDEM
    * @return true if the DEM in memory is valid
    */
   @Override
-  boolean readData( double xwest, double xeast, double ysouth, double ynorth )
+  public boolean readData( double xwest, double xeast, double ysouth, double ynorth )
   {
     // TDLog.v("DEM ascii X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
     if ( ! mValid ) {

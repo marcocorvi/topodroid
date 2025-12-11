@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.dem;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
@@ -37,10 +37,22 @@ public class DEMsurface
   /** get the bounding box: left top right bottom
    * @return bounding rectangle
    */
-  RectF getBounds( )
+  public RectF getBounds( )
   {
     return new RectF( (float)(mEast1-mDim1/2), (float)(mNorth2+mDim2/2), (float)(mEast2+mDim1/2), (float)(mNorth1-mDim2/2) );
   }
+
+  public double dim1() { return mDim1; }
+  public double dim2() { return mDim2; }
+  public int nr1() { return mNr1; }
+  public int nr2() { return mNr2; }
+
+  public float[] Z() { return mZ; }
+
+  public double east1() { return mEast1; }
+  public double east2() { return mEast2; }
+  public double north1() { return mNorth1; }
+  public double north2() { return mNorth2; }
 
   /** cstr
    * @param e1   east coord of cell (0,0) lower-left corner
@@ -92,7 +104,7 @@ public class DEMsurface
    * @param n   north
    * @return z value of the DEM at (e,n)
    */ 
-  float computeZ( double e, double n )
+  public float computeZ( double e, double n )
   {
     if ( e < mEast1 || n < mNorth1 || e > mEast2 || n > mNorth2 ) return -9999.0f;
     int i1 = (int)((e-mEast1)/mDim1);

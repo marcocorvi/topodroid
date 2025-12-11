@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserSketch; // NO_C3D
 import com.topodroid.c3out.ExportGltf;
 import com.topodroid.c3out.ExportData;
+import com.topodroid.dem.ParserDEM;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
