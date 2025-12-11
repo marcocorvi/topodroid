@@ -52,6 +52,10 @@ class TdmEquateNewDialog extends MyDialog
 
   private Button mBTok;
   private Button mBTback;
+    private Button mBTall; // HB EQ all
+    private Button mBTsearch; // HB EQ all
+    int j0=0; // HB EQ all
+    int l0=0; // HB EQ all
 
   TdmEquateNewDialog( Context context, TdmViewActivity parent, ArrayList< TdmViewCommand > commands )
   {
@@ -79,6 +83,10 @@ class TdmEquateNewDialog extends MyDialog
     mBTok.setOnClickListener( this );
     mBTback = (Button) findViewById( R.id.button_back );
     mBTback.setOnClickListener( this );
+      mBTall = (Button) findViewById( R.id.button_all ); // HB EQ all
+      mBTall.setOnClickListener( this ); // HB EQ all
+      mBTsearch = (Button) findViewById( R.id.button_search ); // HB EQ all
+      mBTsearch.setOnClickListener( this ); // HB EQ all
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams( 
@@ -122,18 +130,20 @@ class TdmEquateNewDialog extends MyDialog
         int len = survey.length();
         while ( len > 0 && survey.charAt( len - 1 ) == '.' ) -- len;
         String station = mEdit[k].getText().toString();
-        if ( station != null && station.length() > 0 ) {
-          if ( vc.getViewStation( station ) != null ) {
-            sts.add( station + "@" + survey.substring(0,len) );
-            TDLog.v("added station: " + sts.size() );
+        if ( !station.equals("-") ) {// HB EQ all
+          if ( station != null && station.length() > 0 ) {
+            if ( vc.getViewStation( station ) != null ) {
+              sts.add( station + "@" + survey.substring(0,len) );
+              TDLog.v("added station: " + sts.size() );
+            } else {
+              bad_station = station + "@" + survey.substring(0,len);
+              TDLog.v("Bad station: " + bad_station );
+              break;
+            }
           } else {
-            bad_station = station + "@" + survey.substring(0,len);
-            TDLog.v("Bad station: " + bad_station );
-            break;
+            mEdit[k].setError( mContext.getResources().getString( R.string.error_name_required ) );
+            return;
           }
-        } else {
-          mEdit[k].setError( mContext.getResources().getString( R.string.error_name_required ) );
-          return;
         }
       }
       if ( bad_station == null ) {
@@ -143,6 +153,112 @@ class TdmEquateNewDialog extends MyDialog
         return;
       }
     }
+ //--------------------------------------------------------------------------------------------------HB EQ all
+      if ( b == mBTall ) {
+          ArrayList<String> stations = new ArrayList<>();
+          if (size > 1) {
+              for (int j = 0; j < ( size - 1 ) ; ++j) {
+                  int good_station = 0;
+                  TdmViewCommand vc0 = mCommands.get(j);
+                  String survey0 = vc0.name();
+                  for (TdmViewStation st : vc0.mStations) {
+                      if (st.mEquated) break;
+                      String station = st.name();
+                      boolean old = false;
+                      for ( String st0 : stations ) {
+                          if ( st0.equals( station ) ) old = true;
+                      }
+                      if (!old) {
+                          ArrayList<String> sts = new ArrayList<>();
+                          int len0 = survey0.length();
+                          while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0;
+                          sts.add(station + "@" + survey0.substring(0, len0));
+                          for (int k = ( j + 1 ); k < size; ++k) {
+                              TdmViewCommand vc = mCommands.get(k);
+                              String survey = vc.name();
+                              int len = survey.length();
+                              while (len > 0 && survey.charAt(len - 1) == '.') --len; // ?
+                              //String station = station0;
+                              if (station != null && station.length() > 0) {
+                                  if (vc.getViewStation(station) != null) {
+                                      sts.add(station + "@" + survey.substring(0, len)); //
+                                      good_station++;
+                                  } else {
+                                     // TDLog.v("Good station: " + good_station + survey);
+                                  }
+                              } else {
+                                  //mEdit[k].setError(mContext.getResources().getString(R.string.error_name_required));
+                                  //return;
+                              }
+                          }
+                          if (good_station > 0) {
+                              mParent.makeEquate(sts); // does nothing if sts.size() <= 1
+                              stations.add(station);
+                          }
+                      }
+                  }
+              }
+              //TDToast.makeWarn(String.format("size %d", size));
+          }
+      }
+      if ( b == mBTsearch ) {
+          ArrayList<String> stations = new ArrayList<>();
+          for (int k = 0; k < size ; ++k) mEdit[k].setText("-");
+          if (size > 1) {
+              for (int j = j0; j < ( size - 1 ) ; ++j) {
+                  int good_station = 0;
+                  TdmViewCommand vc0 = mCommands.get(j);
+                  String survey0 = vc0.name();
+                  for (int l=l0;l<vc0.mStations.size(); ++l ){
+                      TdmViewStation st = vc0.mStations.get(l);
+                      if (st.mEquated) break;
+                      String station = st.name();
+                      boolean old = false;
+                      for ( String st0 : stations ) {
+                          if ( st0.equals( station ) ) old = true;
+                      }
+                      if (!old) {
+                          ArrayList<String> sts = new ArrayList<>();
+                          int len0 = survey0.length();
+                          while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // ?
+                          for (int k = j+1; k < size; ++k) {
+                              TdmViewCommand vc = mCommands.get(k);
+                              String survey = vc.name();
+                              int len = survey.length();
+                              while (len > 0 && survey.charAt(len - 1) == '.') --len; // ?
+                              //String station = station0;
+                              if (station != null && station.length() > 0) {
+                                  if (vc.getViewStation(station) != null) {
+                                      sts.add(station + "@" + survey.substring(0, len)); //
+                                      mEdit[j].setText(station);
+                                      mEdit[k].setText(station);
+                                      good_station++;
+                                  } else {
+                                      //TDLog.v("HBEQ Bad station: " + good_station + survey);
+                                  }
+                              } else {
+                                  //mEdit[k].setError(mContext.getResources().getString(R.string.error_name_required));
+                                  //return;
+                              }
+                          }
+                          if (good_station > 0) {
+                              j0=j;
+                              l0=l+1;
+                              if (l0>=vc0.mStations.size()) {
+                                  j0=j+1;
+                                  l0=0;
+                              }
+                              good_station = 0;
+                              return;
+                          }
+                      }
+                  }
+              }
+              //TDToast.makeWarn(String.format("size %d", size));
+              l0=0;
+          }
+      }
+//-------------------------------------------------------------------------------HB EQ all
     dismiss();
   }
 }
