@@ -1213,8 +1213,8 @@ public class TDSetting
     m3Dsketch    = prefs.getBoolean( keySketch[0], bool(defSketch[0]) );
     mSplayBuffer = tryFloat( prefs, keySketch[1], defSketch[1] );
 
-    String[] keyImport = TDPrefKey.EXPORT_import;
-    String[] defImport = TDPrefKey.EXPORT_importdef;
+    String[] keyImport = TDPrefKey.EXPORT_IMPORT;
+    String[] defImport = TDPrefKey.EXPORT_IMPORTdef;
     // keyImport[ 0 ] // DISTOX_PT_CMAP
     mLRExtend          = prefs.getBoolean(     keyImport[ 1], bool(defImport[ 1]) ); // DISTOX_SPLAY_EXTEND
     // TDLog.v("SETTING load secondary export import done");
@@ -1416,8 +1416,8 @@ public class TDSetting
     // mZoomLowerBound = tryFloat( prefs, keyGPlot[13],      defGPlot[13] );  // DISTOX_ZOOM_LOWER_BOUND
     // TDLog.v("SETTING load secondary GEEK plot done");
 
-    String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
-    String[] defGPlotSplay = TDPrefKey.GEEKsplaydef;
+    String[] keyGPlotSplay = TDPrefKey.GEEKSPLAY;
+    String[] defGPlotSplay = TDPrefKey.GEEKSPLAYdef;
     mSplayClasses  = prefs.getBoolean( keyGPlotSplay[ 0], bool(defGPlotSplay[ 0]) ); // DISTOX_SPLAY_CLASSES
     // mSplayColor    = prefs.getBoolean( keyGPlotSplay[ 1], bool(defGPlotSplay[ 1]) ); // DISTOX_SPLAY_COLOR
     mDiscreteColors = tryInt( prefs,   keyGPlotSplay[ 1],      defGPlotSplay[ 1] );  // DISTOX_DISCRETE_COLORS
@@ -2092,8 +2092,8 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref data: " + k );
-    String[] key = TDPrefKey.GEEKsplay;
-    String[] def = TDPrefKey.GEEKsplaydef;
+    String[] key = TDPrefKey.GEEKSPLAY;
+    String[] def = TDPrefKey.GEEKSPLAYdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_SPLAY_CLASSES
       mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DISCRETE_COLORS was DISTOX_SPLAY_COLOR
@@ -2224,8 +2224,8 @@ public class TDSetting
   private static String updatePrefImport( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref import: " + k );
-    String[] key = TDPrefKey.EXPORT_import;
-    String[] def = TDPrefKey.EXPORT_importdef;
+    String[] key = TDPrefKey.EXPORT_IMPORT;
+    String[] def = TDPrefKey.EXPORT_IMPORTdef;
     if ( k.equals( key[ 0 ] ) ) {        // DISTOX_PT_CMAP
       // not handled here
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_EXTEND (bool)
@@ -3735,6 +3735,7 @@ public class TDSetting
         }
         String kay = vals[1];
         String value = vals[2];
+        int key_type = TDPrefKey.getKeyType( kay ); // FIXME TODO
         if ( all ) {
           switch ( kay ) {
             case "DISTOX_SIZE_BUTTONS":

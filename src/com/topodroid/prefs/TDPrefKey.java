@@ -35,6 +35,18 @@ class TDPrefKey
   static final int T = 4;
   static final int D = 5;
 
+  static final int GEN = 1; // setting type
+  static final int UI  = 2;
+  static final int DT  = 3; // data
+  static final int DR  = 4; // draw
+  static final int D3  = 5; // 3D
+  static final int XP  = 6; // export
+  static final int BT  = 7;
+  static final int DEV = 8; // device
+  static final int CAL = 9;
+  static final int CX  =10; // calib extra
+  static final int XT  =11; // extra
+
   static String[] MAIN = { // [14]
     // "DISTOX_CWD",           // CWD must be the last of primary preferences
     "DISTOX_TEXT_SIZE",     // size of text [pt]
@@ -56,6 +68,17 @@ class TDPrefKey
     // "DISTOX_SKETCH_PREF",   // FORWARD moved to GEEK
     "DISTOX_EXPORT_SETTINGS", // 15
     null
+  };
+
+  static int[] MAINtype = {
+    UI, 
+    UI,
+    UI,
+    GEN,
+    GEN,
+    GEN,
+    UI
+    // skip all the following
   };
 
   static int[] MAINtitle = {
@@ -168,6 +191,19 @@ class TDPrefKey
     null
   };
 
+  static int[] SURVEYtype = {
+    DT,
+    UI,
+    DT,
+    DT,
+    DT,
+    UI,
+    DR,
+    DR
+    // skip the rest
+  };
+    
+
   static int[] SURVEYtitle = {
     R.string.pref_team_title,
     R.string.pref_team_names_title,
@@ -256,6 +292,17 @@ class TDPrefKey
     null
   };
 
+  static int[] PLOTtype = {
+    UI,
+    UI,
+    UI,
+    DT,
+    DT,
+    UI,
+    GEN
+    // skip the rest
+  };
+    
   static int[] PLOTtitle = {
     // R.string.pref_picker_type_title,
     // R.string.pref_triple_toolbar_title,
@@ -351,6 +398,23 @@ class TDPrefKey
     null
   };
 
+  static int[] CALIBtype = {
+    CAL,
+    CAL,
+    CAL,
+    CAL,
+    BT,
+    UI,
+    CX,
+    CX,
+    CX,
+    CX,
+    CX,
+    CX,
+    CX,
+    CX
+  };
+
   static int[] CALIBtitle = {
     R.string.pref_group_by_title,
     R.string.pref_group_title,
@@ -443,6 +507,16 @@ class TDPrefKey
     null
   };
 
+  static int[] DEVICEtype = {
+    BT,
+    BT,
+    DEV,
+    BT,
+    BT,
+    UI
+    // skip
+  };
+
   static int[] DEVICEtitle = {
     // R.string.pref_device_title,
     // R.string.pref_device_type_title,
@@ -525,6 +599,24 @@ class TDPrefKey
     "EXPORT_DATA_GPX",
     // "EXPORT_DATA_GEOJSON",
     "EXPORT_DATA_SHAPEFILE"   // 15
+  };
+
+  static int[] EXPORT_ENABLEtype = {
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI
   };
 
   static int[] EXPORT_ENABLEtitle = {
@@ -621,6 +713,17 @@ class TDPrefKey
     "DISTOX_EXPORT_GPX_PREF",    // 20
     "DISTOX_EXPORT_CSV_PREF",    // 21
     null
+  };
+
+  static int[] EXPORTtype= {
+    XP,
+    XP,
+    XP,
+    XP,
+    XP,
+    XP,
+    XP,
+    -1,
   };
 
   static int[] EXPORTtitle = {
@@ -727,23 +830,29 @@ class TDPrefKey
     N,
   };
   // ------------------------------------------------------------------------------
-  static String[] EXPORT_import = { // [3]
+  static String[] EXPORT_IMPORT = { // [3]
     "DISTOX_PT_CMAP",         // 0
     "DISTOX_SPLAY_EXTEND",    // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
   };
-  static int[] EXPORT_importtitle = {
+
+  static int[] EXPORT_IMPORTtype = {
+    XP,
+    XP
+  };
+
+  static int[] EXPORT_IMPORTtitle = {
     R.string.pref_pt_color_map_title,
     R.string.pref_LRExtend_title,
   };
-  static int[] EXPORT_importdesc = {
+  static int[] EXPORT_IMPORTdesc = {
     R.string.pref_pt_color_map_summary,
     R.string.pref_LRExtend_summary,
   };
-  static String[] EXPORT_importdef = { 
+  static String[] EXPORT_IMPORTdef = { 
     TDString.EMPTY,
     TRUE,
   };
-  static int[] EXPORT_importlvl = {
+  static int[] EXPORT_IMPORTlvl = {
     N,
     A,
   };
@@ -752,6 +861,10 @@ class TDPrefKey
   static String[] EXPORT_CSX = { // [1]
     "DISTOX_STATION_PREFIX",        // whether to add cave-name prefix to stations (cSurvey/Compass export)
     "DISTOX_WITH_MEDIA",
+  };
+  static int[] EXPORT_CSXtype = {
+     XP,
+     XP
   };
   static int[] EXPORT_CSXtitle = { // [1]
     R.string.pref_station_prefix_title,
@@ -778,6 +891,9 @@ class TDPrefKey
   static String[] EXPORT_GPX = { // [1]
     "DISTOX_GPX_SINGLE_TRACK"        // whether to export project surveys as a single track
   };
+  static int[] EXPORT_GPXtype = {
+     XP
+  };
   static int[] EXPORT_GPXtitle = { // [1]
     R.string.pref_gpx_single_track_title,
     -1
@@ -799,6 +915,11 @@ class TDPrefKey
     "DISTOX_CSV_RAW",
     "DISTOX_CSV_SEP",   // separator: 0 comma, 1 pipe, 2 tab
     "DISTOX_SURVEX_EOL"
+  };
+  static int[] EXPORT_CSVtype = {
+     XP,
+     XP,
+     XP
   };
   static int[] EXPORT_CSVtitle = { // [1]
     R.string.pref_csv_raw_title,
@@ -830,6 +951,12 @@ class TDPrefKey
     "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
     "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
     "DISTOX_SURVEX_EPSG"            // EPSG number for cs out
+  };
+  static int[] EXPORT_SVXtype = {
+     XP,
+     XP,
+     XP,
+     XP
   };
   static int[] EXPORT_SVXtitle = {
     R.string.pref_survex_eol_title,
@@ -870,6 +997,14 @@ class TDPrefKey
     "DISTOX_TH2_SCALE",        // th2/xvi scale
     "DISTOX_TH2_XVI"           // th2 with xvi image comment
   };
+  static int[] EXPORT_THtype = {
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP
+   };
   static int[] EXPORT_THtitle = {
     R.string.pref_therion_config_title,
     R.string.pref_therion_maps_title,
@@ -933,6 +1068,23 @@ class TDPrefKey
     "DISTOX_SVG_PROGRAM",     // inkscape or illustrator
     null
   };
+  static int[] EXPORT_SVGtype = {
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP,
+     XP
+   };
   static int[] EXPORT_SVGtitle = {
     R.string.pref_svg_roundtrip_title,
     R.string.pref_svg_grid_title,
@@ -1010,6 +1162,11 @@ class TDPrefKey
     "DISTOX_COMPASS_SPLAYS",       // whether to add splays to Compass dat export
     "DISTOX_SWAP_LR",               // whether to swap Left-Right in Compass export
   };
+  static int[] EXPORT_DATtype = {
+     XP,
+     XP,
+     XP
+  };
   static int[] EXPORT_DATtitle = {
     R.string.pref_station_prefix_title,
     R.string.pref_compass_splays_title,
@@ -1035,6 +1192,9 @@ class TDPrefKey
   static String[] EXPORT_SRV = {
     "DISTOX_WALLS_SPLAYS",       // whether to use splays for Walls srv export
   };
+  static int[] EXPORT_SRVtype = {
+    XP
+  };
   static int[] EXPORT_SRVtitle = {
     R.string.pref_walls_splays_title,
   };
@@ -1052,6 +1212,10 @@ class TDPrefKey
   static String[] EXPORT_PLY = {
     "DISTOX_PLY_LRUD",
     "DISTOX_PLY_MINUS",
+  };
+  static int[] EXPORT_PLYtype = {
+    XP,
+    XP
   };
   static int[] EXPORT_PLYtitle = {
     R.string.pref_ply_lrud_title,
@@ -1075,6 +1239,11 @@ class TDPrefKey
     "DISTOX_VTOPO_SPLAYS",       // whether to add splays to VisualTopo tro export
     "DISTOX_VTOPO_LRUD",         // whether VisualTopo LRUD are at-from 
     "DISTOX_VTOPO_TROX",         // whether to write trox format
+  };
+  static int[] EXPORT_TROtype = {
+    XP,
+    XP,
+    XP
   };
   static int[] EXPORT_TROtitle = {
     R.string.pref_vtopo_splays_title,
@@ -1102,6 +1271,10 @@ class TDPrefKey
     "DISTOX_KML_STATIONS",     // 26 // whether to add station points to KML export
     "DISTOX_KML_SPLAYS"              // whether to add splay lines to KML export
   };
+  static int[] EXPORT_KMLtype = {
+    XP,
+    XP
+  };
   static int[] EXPORT_KMLtitle = {
     R.string.pref_kml_stations_title,
     R.string.pref_kml_splays_title
@@ -1127,6 +1300,12 @@ class TDPrefKey
     "DISTOX_SVG_GRID",
     "DISTOX_THERION_SPLAYS",
     // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
+  };
+  static int[] EXPORT_PNGtype = {
+    XP,
+    XP,
+    XP,
+    XP
   };
   static int[] EXPORT_PNGtitle = {
     R.string.pref_bitmap_scale_title,
@@ -1163,6 +1342,13 @@ class TDPrefKey
     "DISTOX_DXF_REFERENCE",
     "DISTOX_ACAD_LAYER",
     // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
+  };
+  static int[] EXPORT_DXFtype = {
+    XP,
+    XP,
+    XP,
+    XP,
+    XP
   };
   static int[] EXPORT_DXFtitle = {
     // R.string.pref_dxf_scale_title,
@@ -1208,6 +1394,9 @@ class TDPrefKey
   static String[] EXPORT_SHP = {
     "DISTOX_SHP_GEOREF",             // whether to export plan-sketch georeferenced
   };
+  static int[] EXPORT_SHPtype = {
+    XP
+  };
   static int[] EXPORT_SHPtitle = {
     R.string.pref_shp_georef_title,
   };
@@ -1242,6 +1431,19 @@ class TDPrefKey
     null
   };
 
+  static int[] DATAtype = {
+    DT,
+    DT,
+    DT,
+    DT,
+    DR,
+    DT,
+    DR,
+    UI,
+    UI,
+    UI
+  };
+  
   static int[] DATAtitle = {
     R.string.pref_leg_title,
     R.string.pref_max_shot_title,
@@ -1327,6 +1529,12 @@ class TDPrefKey
     null
   };
 
+  static int[] UNITStype = {
+    UI,
+    UI,
+    UI,
+    UI
+  };
   static int[] UNITStitle = {
     R.string.pref_unit_length_title,
     R.string.pref_unit_angle_title,
@@ -1375,6 +1583,12 @@ class TDPrefKey
     null
   };
 
+  static int[] ACCURACYtype = {
+    DT,
+    DT,
+    DT,
+    DT
+  };
   static int[] ACCURACYtitle = {
     R.string.pref_accel_thr_title,
     R.string.pref_mag_thr_title,
@@ -1410,6 +1624,15 @@ class TDPrefKey
     "DISTOX_FINE_LOCATION", // fine location time
     "DISTOX_GEOPOINT_APP",  // geopoint import app
     null
+  };
+
+  static int[] LOCATIONtype = {
+    UI,
+    DT,
+    DT,
+    DT,
+    DT,
+    DT
   };
 
   static int[] LOCATIONtitle = {
@@ -1463,6 +1686,17 @@ class TDPrefKey
     // "DISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
     // "DISTOX_HTHRESHOLD",      // 12 // if clino is over thr, H_SECTION is horizontal (has north arrow)
     null
+  };
+
+  static int[] SCREENtype = {
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI
   };
 
   static int[] SCREENtitle = {
@@ -1540,6 +1774,17 @@ class TDPrefKey
     null
   };
 
+  static int[] LINEtype = {
+    UI,
+    DR,
+    DR,
+    DR,
+    DR,
+    UI,
+    DR,
+    UI
+  };
+
   static int[] LINEtitle = {
     R.string.pref_line_thickness_title,
     R.string.pref_line_units_title,
@@ -1611,6 +1856,13 @@ class TDPrefKey
     null
   };
 
+  static int[] POINTtype = {
+    UI,
+    DR,
+    UI,
+    UI,
+    DR
+  };
   static int[] POINTtitle = {
     R.string.pref_unscaled_points_title,
     R.string.pref_drawing_unit_title,
@@ -1653,6 +1905,8 @@ class TDPrefKey
   //   null
   // };
 
+  // static int[] WALLStype = { TODO
+  // };
   // static int[] WALLStitle = {
   //   R.string.pref_walls_type_title,
   //   R.string.pref_walls_plan_thr_title,
@@ -1695,6 +1949,19 @@ class TDPrefKey
     "DISTOX_AREA_BORDER",           // area border visibility
     // "DISTOX_REDUCE_ANGLE",    // 10 // "rock" reducing lines: maximal angle
     null
+  };
+
+  static int[] DRAWtype = {
+    UI,
+    DR,
+    UI,
+    UI,
+    DR,
+    DR,
+    DR,
+    UI,
+    DR,
+    UI
   };
 
   static int[] DRAWtitle = {
@@ -1774,6 +2041,12 @@ class TDPrefKey
     null
   };
 
+  static int[] ERASEtype = {
+    UI,
+    UI,
+    UI
+  };
+
   static int[] ERASEtitle = {
     R.string.pref_closeness_title,
     R.string.pref_eraseness_title,
@@ -1802,6 +2075,12 @@ class TDPrefKey
     "DISTOX_MIN_SHIFT",       // maximum amount for a shift (to avoid jumps)
     "DISTOX_POINTING",   // 3 // "size" of a "point touch" (max distance between down and up)
     null
+  };
+  static int[] EDITtype = {
+    UI,
+    UI,
+    UI,
+    UI
   };
   static int[] EDITtitle = {
     R.string.pref_dot_radius_title,
@@ -1842,6 +2121,20 @@ class TDPrefKey
     "DISTOX_PATH_MULTISELECT",// path multiselection
     // "DISTOX_COMPOSITE_ACTIONS",
     null
+  };
+
+  static int[] GEEKLINEtype = {
+    DR,
+    DR,
+    DR,
+    DR,
+    DR,
+    DR,
+    UI,
+    UI,
+    UI,
+    UI
+    // UI,
   };
 
   static int[] GEEKLINEtitle = {
@@ -1901,7 +2194,7 @@ class TDPrefKey
     // T,
   };
 
-
+  // -----------------------------------------------------------------
   static String[] GEEKSHOT = {
     "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_TAMPERING",       // enable DistoX shot editing
@@ -1925,6 +2218,28 @@ class TDPrefKey
     "DISTOX_SPLAY_GROUP",     // splay stations group only-forward rename
     // "DISTOX_TDMANAGER",
     null
+  };
+
+  static int[] GEEKSHOTtype = {
+    DT,
+    GEN,
+    DT,
+    UI,
+    UI,
+    DT,
+    DT,
+    XT,
+    XT,
+    DT,
+    DT,
+    //
+    XT,
+    XT,
+    XT,
+    XT,
+    XT,
+    DT
+    // GEN,
   };
 
   static int[] GEEKSHOTtitle = {
@@ -2024,6 +2339,7 @@ class TDPrefKey
     // T,
   };
 
+  // -----------------------------------------------------------------
   static String[] GEEKPLOT = {
     "DISTOX_PLOT_SHIFT",      // plot shift and scale
     "DISTOX_PLOT_SPLIT",      // plot split and merge
@@ -2043,6 +2359,25 @@ class TDPrefKey
     "DISTOX_LINE_ENDS",          // number of points to cut from the line end
     // "DISTOX_ZOOM_LOWER_BOUND",  // lower bound on zoom for zoom-fit
     null
+  };
+
+  static int[] GEEKPLOTtype = {
+    UI,
+    XT,
+    UI,
+    //
+    GEN,
+    GEN,
+    //
+    UI,
+    UI,
+    XT,
+    XT,
+    XT,
+    XT,
+    XT,
+    XT
+    //
   };
 
   static int[] GEEKPLOTtitle = {
@@ -2126,7 +2461,8 @@ class TDPrefKey
     // T,
   };
 
-  static String[] GEEKsplay = {
+  // ---------------------------------------------------------
+  static String[] GEEKSPLAY = {
     "DISTOX_SPLAY_CLASSES",   // splay classes
     "DISTOX_DISCRETE_COLORS", // splay color: 0 no, 1 yes, 2 discrete - was DISTOX_SPLAY_COLOR
     // "DISTOX_SPLAY_AS_DOT", // plot splays as dots
@@ -2140,7 +2476,20 @@ class TDPrefKey
     "DISTOX_SPLAY_LATEST_COLOR",    // color for latest splay 
   };
 
-  static int[] GEEKsplaytitle = {
+  static int[] GEEKSPLAYtype = {
+    XT,
+    XT,
+    //
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI,
+    UI
+  };
+  static int[] GEEKSPLAYtitle = {
     R.string.pref_splay_classes_title,
     R.string.pref_splay_color_title,
     // R.string.pref_splay_as_dot_title,
@@ -2154,7 +2503,7 @@ class TDPrefKey
     R.string.pref_splay_latest_color_title,
   };
 
-  static int[] GEEKsplaydesc = {
+  static int[] GEEKSPLAYdesc = {
     R.string.pref_splay_classes_summary,
     R.string.pref_splay_color_summary,
     // R.string.pref_splay_as_dot_summary,
@@ -2167,7 +2516,7 @@ class TDPrefKey
     R.string.pref_splay_dot_color_summary,
     R.string.pref_splay_latest_color_summary,
   };
-  static String[] GEEKsplaydef = {
+  static String[] GEEKSPLAYdef = {
     FALSE,
     TDString.ZERO,
     // FALSE,
@@ -2180,7 +2529,7 @@ class TDPrefKey
     "7190271", 
     "6737151", // "0xff66ccff", // TDColor.SPLAY_LATEST
   };
-  static int[] GEEKsplaylvl = {
+  static int[] GEEKSPLAYlvl = {
     E,
     // T,
     T,
@@ -2210,6 +2559,22 @@ class TDPrefKey
     "DISTOX_NAMES_VISIBILITY",
     "DISTOX_DEM3D_PREF",      // FORWARD
     "DISTOX_WALLS3D_PREF",
+  };
+
+  static int[] CAVE3Dtype = {
+    D3,
+    //
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3
   };
 
   static int[] CAVE3Dtitle = {
@@ -2281,6 +2646,12 @@ class TDPrefKey
     "CAVE3D_DEM_REDUCE",
     "CAVE3D_TEXTURE_ROOT",
   };
+  static int[] DEM3Dtype = {
+    D3,
+    D3,
+    D3,
+    D3
+  };
   static int[] DEM3Dtitle = {
     R.string.cpref_dem_buffer_title,
     R.string.cpref_dem_maxsize_title,
@@ -2316,6 +2687,16 @@ class TDPrefKey
     "CAVE3D_SPLIT_RANDOM",
     "CAVE3D_SPLIT_STRETCH",
     "CAVE3D_POWERCRUST_DELTA"
+  };
+  static int [] WALLS3Dtype = {
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3,
+    D3
   };
   static int[] WALLS3Dtitle = {
     R.string.cpref_splay_use_title,
@@ -2381,6 +2762,20 @@ class TDPrefKey
     "DISTOX_WITH_DEBUG",
     null
   };
+
+  static int[] GEEKtype = {
+    UI,
+    UI,
+    GEN,
+    //
+    UI,
+    UI,
+    GEN,
+    BT,
+    XT
+  };
+
+
 
   static int[] GEEKtitle = {
     R.string.pref_single_back_title,      // 0
@@ -2484,6 +2879,14 @@ class TDPrefKey
     // "DISTOX_TRANSFER_CSURVEY"
   };
  
+  static int[] GEEKIMPORTtype = {
+    XP,
+    XP,
+    XP,
+    XP,
+    XP,
+    XT
+  };
   static int[] GEEKIMPORTtitle = {
     R.string.pref_zipped_symbols_title,
     R.string.pref_import_datamode_title,
@@ -2547,6 +2950,22 @@ class TDPrefKey
     "DISTOX_BRIC_INDEX_IS_ID", // whether to use the BRIC index as shot ID
     "DISTOX_SAP5_BIT16_BUG",   // SAP5 bit-16 bug workaround
     null
+  };
+
+  static int[] GEEKDEVICEtype = {
+    XT,
+    XT,
+    BT,
+    XT,
+    BT,
+    BT,
+    BT,
+    BT,
+    GEN,
+    DEV,
+    DEV,
+    DEV,
+    DEV
   };
 
   static int[] GEEKDEVICEtitle = {
@@ -2619,6 +3038,11 @@ class TDPrefKey
     "DISTOX_3D_SKETCH",
     "DISTOX_SKETCH_SPLAY_BUFFER",
     null
+  };
+
+  static int[] SKETCHtype = {
+    XT,
+    XT
   };
   static int[] SKETCHtitle = {
     R.string.pref_3d_sketch_title,
@@ -2720,6 +3144,108 @@ class TDPrefKey
   //    // R.string.pref_log_sync
   // };
 
+  // array of key sets
+  // the order must match the list of categories in TDPrefcat
+  private final static String[][] mKeySets = {
+    MAIN,  // 0
+    SURVEY,
+    PLOT,
+    CALIB,
+    DEVICE,
+    SKETCH,  // 5
+    EXPORT,
+    EXPORT_IMPORT,
+    CAVE3D,
+    EXPORT_ENABLE,
+    EXPORT_SVX, // 10
+    EXPORT_TH,  
+    EXPORT_DAT,
+    EXPORT_CSX,
+    EXPORT_TRO,
+    EXPORT_SVG,  // 15
+    EXPORT_SHP,
+    EXPORT_DXF,
+    // EXPORT_PNG,
+    EXPORT_GPX,
+    EXPORT_KML,
+    EXPORT_CSV,  // 20
+    EXPORT_SRV,
+    EXPORT_PLY,
+    DATA,
+    UNITS,
+    ACCURACY,  // 25
+    LOCATION,
+    SCREEN,
+    LINE,
+    POINT,
+    // WALLS,
+    DRAW,    // 30
+    ERASE,
+    EDIT,
+    DEM3D,
+    WALLS3D,
+    GEEK,   // 35
+    GEEKSHOT,
+    GEEKSPLAY,
+    GEEKPLOT,
+    GEEKLINE,
+    GEEKDEVICE, // 40
+    GEEKIMPORT,
+    null, // GEEKSKETCH
+    null
+  };
+
+  // array of key type arrays
+  // the order must match the list of categories in TDPrefcat
+  private final static int[][] mKeyTypes = {
+    MAINtype,  // 0
+    SURVEYtype,
+    PLOTtype,
+    CALIBtype,
+    DEVICEtype,
+    SKETCHtype,  // 5
+    EXPORTtype,
+    EXPORT_IMPORTtype,
+    CAVE3Dtype,
+    EXPORT_ENABLEtype,
+    EXPORT_SVXtype, // 10
+    EXPORT_THtype,  
+    EXPORT_DATtype,
+    EXPORT_CSXtype,
+    EXPORT_TROtype,
+    EXPORT_SVGtype,  // 15
+    EXPORT_SHPtype,
+    EXPORT_DXFtype,
+    // EXPORT_PNGtype,
+    EXPORT_GPXtype,
+    EXPORT_KMLtype,
+    EXPORT_CSVtype,  // 20
+    EXPORT_SRVtype,
+    EXPORT_PLYtype,
+    DATAtype,
+    UNITStype,
+    ACCURACYtype,  // 25
+    LOCATIONtype,
+    SCREENtype,
+    LINEtype,
+    POINTtype,
+    // WALLStype,
+    DRAWtype,    // 30
+    ERASEtype,
+    EDITtype,
+    DEM3Dtype,
+    WALLS3Dtype,
+    GEEKtype,   // 35
+    GEEKSHOTtype,
+    GEEKSPLAYtype,
+    GEEKPLOTtype,
+    GEEKLINEtype,
+    GEEKDEVICEtype, // 40
+    GEEKIMPORTtype,
+    null, // GEEKSKETCHtype
+    null
+  };
+
   // array of title arrays.
   // the order must match the list of categories in TDPrefcat
   private final static int[][] mSections = {
@@ -2759,13 +3285,30 @@ class TDPrefKey
     WALLS3Ddesc,
     GEEKdesc,
     GEEKSHOTdesc,
-    GEEKsplaydesc,
+    GEEKSPLAYdesc,
     GEEKPLOTdesc,
     GEEKLINEdesc,
     GEEKDEVICEdesc,
     GEEKIMPORTdesc,
     null // GEEKSKETCHdesc
   };
+
+  /** @return the type of a setting
+   * @param key  setting key
+   */
+  static int getKeyType( String key )
+  {
+    int len = mKeySets.length;
+    for ( int k = 0; k<len; ++ k ) {
+      String[] keys = mKeySets[k];
+      int[] types = mKeyTypes[k];
+      int type_len = types.length;
+      for ( int j=0; j<type_len; ++j ) {
+        if ( key.equals( keys[j] ) ) return types[j];
+      }
+    }
+    return 0;
+  }
 
   /** @return the list of TDPrefCat categpries that match a givem key
    * @param key   input key

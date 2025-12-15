@@ -269,12 +269,12 @@ public class TdmViewActivity extends Activity
       // TdmConfig config = mApp.mConfig;
       ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
 
-      for ( TdmSurvey sr : surveys ) {
-        TDLog.v("VIEW survey >" + sr.getFullName() + "<" );
-      }
-      for ( TdmEquate eq : equates ) {
-        TDLog.v("VIEW equate >" + eq.stationsString() + "<");
-      }
+      // for ( TdmSurvey sr : surveys ) {
+      //   TDLog.v("VIEW survey >" + sr.getFullName() + "<" );
+      // }
+      // for ( TdmEquate eq : equates ) {
+      //   TDLog.v("VIEW equate >" + eq.stationsString() + "<");
+      // }
 
       // TDLog.v( "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
 
@@ -598,7 +598,7 @@ public class TdmViewActivity extends Activity
         // TdmStation stn2 = vts2.mStation;
         st = mDrawingSurface.selectedStationName() + "@" + mDrawingSurface.selectedCommandName();
         len = st.length();
-        while ( len > 0 && st.charAt( len - 1 ) == '.' ) -- len;
+        // while ( len > 0 && st.charAt( len - 1 ) == '.' ) -- len; // 2025-12-15
         final String st2 = st.substring(0,len);
 
         // String title = "Equate " + st1 + " with " + st2;

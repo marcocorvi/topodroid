@@ -974,11 +974,11 @@ class TDPref implements AdapterView.OnItemSelectedListener
   static TDPref[] makeImportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_IMPORT;
-    String[] key = TDPrefKey.EXPORT_import;
-    int[] tit = TDPrefKey.EXPORT_importtitle;
-    int[] dsc = TDPrefKey.EXPORT_importdesc;
-    String[] def = TDPrefKey.EXPORT_importdef;
-    int[] lvl = TDPrefKey.EXPORT_importlvl;
+    String[] key = TDPrefKey.EXPORT_IMPORT;
+    int[] tit = TDPrefKey.EXPORT_IMPORTtitle;
+    int[] dsc = TDPrefKey.EXPORT_IMPORTdesc;
+    String[] def = TDPrefKey.EXPORT_IMPORTdef;
+    int[] lvl = TDPrefKey.EXPORT_IMPORTlvl;
     return new TDPref[ ] {
       makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],         ctx, hlp ),
       makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],         ctx, hlp )
@@ -1706,11 +1706,11 @@ class TDPref implements AdapterView.OnItemSelectedListener
   static TDPref[] makeGeekSplayPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_SPLAY;
-    String[] key = TDPrefKey.GEEKsplay;
-    int[] tit    = TDPrefKey.GEEKsplaytitle;
-    int[] dsc    = TDPrefKey.GEEKsplaydesc;
-    String[] def = TDPrefKey.GEEKsplaydef;
-    int[] lvl    = TDPrefKey.GEEKsplaylvl;
+    String[] key = TDPrefKey.GEEKSPLAY;
+    int[] tit    = TDPrefKey.GEEKSPLAYtitle;
+    int[] dsc    = TDPrefKey.GEEKSPLAYdesc;
+    String[] def = TDPrefKey.GEEKSPLAYdef;
+    int[] lvl    = TDPrefKey.GEEKSPLAYlvl;
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],          ctx, hlp ), // SPLAY CLASSES
       // makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],          ctx, hlp ), // SPLAY COLOR

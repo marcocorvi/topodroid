@@ -128,16 +128,16 @@ class TdmEquateNewDialog extends MyDialog
         TdmViewCommand vc = mCommands.get( k );
         String survey = vc.name();
         int len = survey.length();
-        while ( len > 0 && survey.charAt( len - 1 ) == '.' ) -- len;
+        // while ( len > 0 && survey.charAt( len - 1 ) == '.' ) -- len;
         String station = mEdit[k].getText().toString();
-        if ( !station.equals("-") ) {// HB EQ all
+        if ( ! station.equals("-") ) {// HB EQ all
           if ( station != null && station.length() > 0 ) {
             if ( vc.getViewStation( station ) != null ) {
               sts.add( station + "@" + survey.substring(0,len) );
-              TDLog.v("added station: " + sts.size() );
+              TDLog.v("added station: " + sts.size() + " survey <" + survey + ">" );
             } else {
               bad_station = station + "@" + survey.substring(0,len);
-              TDLog.v("Bad station: " + bad_station );
+              TDLog.v("Bad station: " + bad_station + " survey <" + survey + ">" );
               break;
             }
           } else {
@@ -172,13 +172,14 @@ class TdmEquateNewDialog extends MyDialog
                           boolean good_station = false;
                           ArrayList<String> sts = new ArrayList<>();
                           int len0 = survey0.length();
-                          while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0;
+                          // while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0;
                           sts.add(station + "@" + survey0.substring(0, len0));
                           for (int k = ( j + 1 ); k < size; ++k) {
                               TdmViewCommand vc = mCommands.get(k);
                               String survey = vc.name();
+                              TDLog.v("survey <" + survey + ">" );
                               int len = survey.length();
-                              while (len > 0 && survey.charAt(len - 1) == '.') --len; // ?
+                              // while (len > 0 && survey.charAt(len - 1) == '.') --len; // ?
                               //String station = station0;
                               if (station != null && station.length() > 0) { // FIXME this is guaranteed - or the test should be done when station is assigned
                                                                              // use TDSting.isNullOrEmpty( station )
@@ -223,12 +224,13 @@ class TdmEquateNewDialog extends MyDialog
                           boolean good_station = true;
                           ArrayList<String> sts = new ArrayList<>();
                           int len0 = survey0.length();
-                          while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // ?
+                          // while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // ?
                           for (int k = j+1; k < size; ++k) {
                               TdmViewCommand vc = mCommands.get(k);
                               String survey = vc.name();
                               int len = survey.length();
-                              while (len > 0 && survey.charAt(len - 1) == '.') --len; // ?
+                              TDLog.v("survey <" + survey + ">" );
+                              // while (len > 0 && survey.charAt(len - 1) == '.') --len; // ?
                               //String station = station0;
                               if (station != null && station.length() > 0) {
                                   if (vc.getViewStation(station) != null) {

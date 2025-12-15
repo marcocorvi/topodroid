@@ -180,7 +180,7 @@ public class TdmViewSurface extends SurfaceView
         for ( TdmViewCommand command : mCommandManager ) {
           String survey_name = command.mSurvey.mName;
           int len = survey_name.length();
-          while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len;
+          // while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len; // 2025-12-15
           survey_name = survey_name.substring( 0, len );
           String st = equate.getSurveyStation( survey_name );
           if ( st != null ) {
@@ -220,7 +220,7 @@ public class TdmViewSurface extends SurfaceView
 
       String survey_name = survey.getName();
       int len = survey_name.length();
-      while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len;
+      // while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len; // 2025-12-15
       survey_name = survey_name.substring( 0, len );
       for ( TdmEquate equate : equates ) {
         String station = equate.getSurveyStation( survey_name );
