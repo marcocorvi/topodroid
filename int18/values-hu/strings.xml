@@ -1098,7 +1098,7 @@
     <string name="help_current_station">Elmentett mérési pontok</string>
     <string name="help_azimuth">Kiterítési irány</string>
     <string name="help_refresh">Képernyő frissítés</string>
-    <string name="help_device">Műszer funkciók</string>
+    <string name="help_device">Műszer ablak</string>
     <string name="help_device_add">Műszer hozzáadása</string>
     <string name="help_add_topodroid">Új felmérés</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
@@ -1116,9 +1116,9 @@
     <string name="help_display">Képernyő mód választása</string>
     <string name="help_display_calib">Törölt mérések láthatóak/nem </string>
     <string name="help_validate">Kalibráció érvényesítése</string>
-    <string name="help_overview">Funkciók áttekintése</string>
+    <string name="help_overview">Áttekintő ablak</string>
     <string name="help_packets">DistoX csomag párbeszédpanel</string>
-    <string name="help_plot">Vázlat funkciók megtekintése</string>
+    <string name="help_plot">Vázlat ablak</string>
     <string name="help_note">Felmérési jegyzetek szerkesztése</string>
     <string name="help_bluetooth">Bluetooth kapcsolat újraindítása</string>
     <string name="help_remote">DistoX távirányítása</string>
@@ -1499,7 +1499,7 @@
   <string name="pref_therion_config_summary">Therion konfig parancs készítés</string>
   <string name="pref_therion_maps_title">Therion térképek elöl</string>
   <string name="pref_therion_maps_summary">Therion térképek a felmérési adatok előtt</string>
-  <string name="pref_extra_buttons_title">Engedélyezett funkciók</string>
+  <string name="pref_extra_buttons_title">Használati profil</string>
   <string name="pref_extra_buttons_summary">Engedélyezett funkciók beállítása</string>
   <string name="pref_size_buttons_title">Gombok mérete</string>
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
