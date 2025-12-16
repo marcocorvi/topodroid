@@ -85,8 +85,6 @@ public class TDSetting
   private static int FLAG_LEVEL  = FLAG_BUTTON | FLAG_MENU;
   private static int mMainFlag = 0xff; // Main Window flag
 
-  private static final int POLICY_INDEX = 2; // index of station-policy in SURVEY settings
-
   public static boolean mWithDebug = false;
 
   /** reset MainWindow flag
@@ -1025,56 +1023,49 @@ public class TDSetting
     // TDLog.v("SETTING default button size " + defaultButtonSize );
 
     // ------------------- GENERAL PREFERENCES
-    String[] keyMain = TDPrefKey.MAIN;
-    String[] defMain = TDPrefKey.MAINdef;
-    int level = Integer.parseInt( prefs.getString( keyMain[3], defMain[3] ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
+    TDPrefKey[] key = TDPrefKey.mMain;
+    int level = Integer.parseInt( prefs.getString( key[3].key, key[3].dflt ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
-    String[] keyGeek = TDPrefKey.GEEK;
-    String[] defGeek = TDPrefKey.GEEKdef;
-    mSingleBack = prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ); // DISTOX_SINGLE_BACK
-    setHideNavBar( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_HIDE_NAVBAR
-    setPalettes(  prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ) ); // DISTOX_PALETTES
-    // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
-    mKeyboard = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_MKEYBOARD
-    mNoCursor = prefs.getBoolean( keyGeek[4], bool(defGeek[4]) ); // DISTOX_NO_CURSOR
-    mBulkExport = prefs.getBoolean( keyGeek[5], bool(defGeek[5]) ); // DISTOX_BULK_EXPORT
-    mPacketLog = prefs.getBoolean( keyGeek[6], bool(defGeek[6]) ); // DISTOX_PACKET_LOGGER
-    mTh2Edit   = prefs.getBoolean( keyGeek[7], bool(defGeek[7]) ); // DISTOX_TH2_EDIT
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[15], bool(defGeek[15]) ) : false; // DISTOX_WITH_DEBUG
+    key = TDPrefKey.mGeek;
+    mSingleBack = prefs.getBoolean(  key[0].key, bool(key[0].dflt) ); // DISTOX_SINGLE_BACK
+    setHideNavBar( prefs.getBoolean( key[1].key, bool(key[1].dflt) ) ); // DISTOX_HIDE_NAVBAR
+    setPalettes(  prefs.getBoolean(  key[2].key, bool(key[2].dflt) ) ); // DISTOX_PALETTES
+    // setBackupsClear( prefs.getBoolean( key[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
+    mKeyboard = prefs.getBoolean(   key[3].key, bool(key[3].dflt) ); // DISTOX_MKEYBOARD
+    mNoCursor = prefs.getBoolean(   key[4].key, bool(key[4].dflt) ); // DISTOX_NO_CURSOR
+    mBulkExport = prefs.getBoolean( key[5].key, bool(key[5].dflt) ); // DISTOX_BULK_EXPORT
+    mPacketLog = prefs.getBoolean(  key[6].key, bool(key[6].dflt) ); // DISTOX_PACKET_LOGGER
+    mTh2Edit   = prefs.getBoolean(  key[7].key, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( key[15].key, bool(key[15].dflt) ) : false; // DISTOX_WITH_DEBUG
 
-    // String[] keyGPlot = TDPrefKey.GEEKPLOT;
-    // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
-
-    setTextSize( tryInt(    prefs,     keyMain[0], defMain[0] ) );      // DISTOX_TEXT_SIZE
-    setSizeButtons( tryInt( prefs,     keyMain[1], defMain[1] ) );      // DISTOX_SIZE_BUTTONS
-    setSymbolSize( tryFloat( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SYMBOL_SIZE
+    key = TDPrefKey.mMain;
+    setTextSize( tryInt(    prefs,  key[0].key, key[0].dflt ) );      // DISTOX_TEXT_SIZE
+    setSizeButtons( tryInt( prefs,  key[1].key, key[1].dflt ) );      // DISTOX_SIZE_BUTTONS
+    setSymbolSize( tryFloat( prefs, key[2].key, key[2].dflt ) );      // DISTOX_SYMBOL_SIZE
     // skip 3
-    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[4], defMain[4] ), false ); // DISTOX_LOCAL_MAN
-    setLocale( prefs.getString( keyMain[5], TDString.EMPTY ), false ); // DISTOX_LOCALE
-    mOrientation = Integer.parseInt( prefs.getString( keyMain[6], defMain[6] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
+    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( key[4].key, key[4].dflt ), false ); // DISTOX_LOCAL_MAN
+    setLocale( prefs.getString( key[5].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
+    mOrientation = Integer.parseInt( prefs.getString( key[6].key, key[6].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
 
-    String[] keySurvey = TDPrefKey.SURVEY;
-    String[] defSurvey = TDPrefKey.SURVEYdef;
-    mDefaultTeam = prefs.getString( keySurvey[0], defSurvey[0] );               // DISTOX_TEAM
-    mInitStation = prefs.getString( keySurvey[4], defSurvey[4] ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
-    if ( mInitStation.length() == 0 ) mInitStation = defSurvey[4];
+    key = TDPrefKey.mSurvey;
+    mDefaultTeam = prefs.getString( key[0].key, key[0].dflt );               // DISTOX_TEAM
+    mInitStation = prefs.getString( key[4].key, key[4].dflt ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
+    if ( mInitStation.length() == 0 ) mInitStation = key[4].dflt;
     DistoXStationName.setInitialStation( mInitStation );
 
-    String[] keyData = TDPrefKey.DATA;
-    String[] defData = TDPrefKey.DATAdef;
-    mAzimuthManual = prefs.getBoolean( keyData[6], bool(defData[6]) );   // DISTOX_AZIMUTH_MANUAL 
+    key = TDPrefKey.mData;
+    mAzimuthManual = prefs.getBoolean( key[6].key, bool(key[6].dflt) );   // DISTOX_AZIMUTH_MANUAL 
     // TDAzimuth.setAzimuthManual( mAzimuthManual ); // FIXME FIXED_EXTEND 20240603
     TDAzimuth.resetRefAzimuth( null, SurveyInfo.SURVEY_EXTEND_NORMAL, mAzimuthManual ); // BUG ?? may call setRefAzimuthButton on non-UI thread
     
     // ------------------- DEVICE PREFERENCES -def--fallback--min-max
-    String[] keyDevice = TDPrefKey.DEVICE;
-    String[] defDevice = TDPrefKey.DEVICEdef;
+    key = TDPrefKey.mDevice;
     // DISTOX_DEVICE - UNUSED HERE
-    mCheckBT        = tryInt( prefs, keyDevice[0], defDevice[0] );        // DISTOX_BLUETOOTH choice: 0, 1, 2
+    mCheckBT        = tryInt( prefs, key[0].key, key[0].dflt );        // DISTOX_BLUETOOTH choice: 0, 1, 2
   }
 
   public static void loadSecondaryPreferences( /* TopoDroidApp my_app, */ TDPrefHelper pref_hlp )
@@ -1082,259 +1073,233 @@ public class TDSetting
     // TDLog.v("SETTING load secondary");
     SharedPreferences prefs = pref_hlp.getSharedPrefs();
 
-    String[] keySurvey = TDPrefKey.SURVEY;
-    String[] defSurvey = TDPrefKey.SURVEYdef;
+    TDPrefKey[] key = TDPrefKey.mSurvey;
     // int old = mTeamNames;
-    mTeamNames    = tryInt(   prefs,     keySurvey[1],      defSurvey[1] );       // DISTOX_TEAM_DIALOG
-    // TDLog.v("SETTING load secondary TEAM DIALOG " + old + " -> " + mTeamNames + " default " + defSurvey[1] );
-    parseStationPolicy( pref_hlp, prefs.getString( keySurvey[2], defSurvey[2] ) ); // DISTOX_SURVEY_STATION
-    mStationNames = (prefs.getString(    keySurvey[3],      defSurvey[3] ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
-    mThumbSize    = tryInt(   prefs,     keySurvey[5],      defSurvey[5] );       // DISTOX_THUMBNAIL
-    // mEditableStations = prefs.getBoolean(keySurvey[6], bool(defSurvey[6]) ); // DISTOX_EDITABLE_STATIONS
-    mFixedOrigin  = prefs.getBoolean(    keySurvey[6], bool(defSurvey[6]) ); // DISTOX_FIXED_ORIGIN
-    mSharedXSections = prefs.getBoolean( keySurvey[7], bool(defSurvey[7]) ); // DISTOX_SHARED_XSECTIONS
-    // mDataBackup   = prefs.getBoolean(    keySurvey[8], bool(defSurvey[8]) ); // DISTOX_DATA_BACKUP
+    mTeamNames    = tryInt(   prefs,     key[1].key,      key[1].dflt );       // DISTOX_TEAM_DIALOG
+    // TDLog.v("SETTING load secondary TEAM DIALOG " + old + " -> " + mTeamNames + " default " + key[1].dflt );
+    parseStationPolicy( pref_hlp, prefs.getString( key[2].key, key[2].dflt ) ); // DISTOX_SURVEY_STATION
+    mStationNames = (prefs.getString(    key[3].key,      key[3].dflt ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
+    mThumbSize    = tryInt(   prefs,     key[5].key,      key[5].dflt );       // DISTOX_THUMBNAIL
+    // mEditableStations = prefs.getBoolean(key[6].key, bool(key[6].dflt) ); // DISTOX_EDITABLE_STATIONS
+    mFixedOrigin  = prefs.getBoolean(    key[6].key, bool(key[6].dflt) ); // DISTOX_FIXED_ORIGIN
+    mSharedXSections = prefs.getBoolean( key[7].key, bool(key[7].dflt) ); // DISTOX_SHARED_XSECTIONS
+    // mDataBackup   = prefs.getBoolean(    key[8].key, bool(key[8].dflt) ); // DISTOX_DATA_BACKUP
     // TDLog.v("SETTING load survey done");
 
-    String[] keyPlot = TDPrefKey.PLOT;
-    String[] defPlot = TDPrefKey.PLOTdef;
-    // mPickerType = tryInt( prefs,       keyPlot[0],      defPlot[0] );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
+    key = TDPrefKey.mPlot;
+    // mPickerType = tryInt( prefs,       key[0].key,      key[0].dflt );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
     // if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
-    // mTripleToolbar   = prefs.getBoolean(    keyPlot[1], bool(defPlot[1]) ); // DISTOX_TRIPLE_TOOLBAR
-    // mRecentNr   = tryInt( prefs,       keyPlot[ ],      defPlot[ ] );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
-    mSideDrag   = prefs.getBoolean(    keyPlot[0], bool(defPlot[0]) ); // DISTOX_SIDE_DRAG
-    // setZoomControls( prefs.getBoolean( keyPlot[ ], bool(defPlot[ ]) ) ); // DISTOX_ZOOM_CONTROLS
-    setZoomControls( prefs.getString(  keyPlot[1],      defPlot[1] ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
-    // mSectionStations  = tryInt( prefs, keyPlot[ ], "3");      // DISTOX_SECTION_STATIONS
-    mHThreshold    = tryFloat( prefs,  keyPlot[2],      defPlot[2] );  // DISTOX_HTHRESHOLD
-    mCheckAttached = prefs.getBoolean( keyPlot[3], bool(defPlot[3]) ); // DISTOX_CHECK_ATTACHED
-    mCheckExtend   = prefs.getBoolean( keyPlot[4], bool(defPlot[4]) ); // DISTOX_CHECK_EXTEND
-    mItemButtonSize= tryFloat( prefs,  keyPlot[5],      defPlot[5] );  // DISTOX_TOOLBAR_SIZE
-    mPlotCache     = prefs.getBoolean( keyPlot[6], bool(defPlot[6]) ); // DISTOX_PLOT_CACHE
+    // mTripleToolbar   = prefs.getBoolean(    key[1].key, bool(key[1].dflt) ); // DISTOX_TRIPLE_TOOLBAR
+    // mRecentNr   = tryInt( prefs,       key[ ].key,      key[ ].dflt );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
+    mSideDrag   = prefs.getBoolean(    key[0].key, bool(key[0].dflt) ); // DISTOX_SIDE_DRAG
+    // setZoomControls( prefs.getBoolean( key[ ].key, bool(key[ ].dflt) ) ); // DISTOX_ZOOM_CONTROLS
+    setZoomControls( prefs.getString(  key[1].key,      key[1].dflt ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
+    // mSectionStations  = tryInt( prefs, key[ ].key, "3");      // DISTOX_SECTION_STATIONS
+    mHThreshold    = tryFloat( prefs,  key[2].key,      key[2].dflt );  // DISTOX_HTHRESHOLD
+    mCheckAttached = prefs.getBoolean( key[3].key, bool(key[3].dflt) ); // DISTOX_CHECK_ATTACHED
+    mCheckExtend   = prefs.getBoolean( key[4].key, bool(key[4].dflt) ); // DISTOX_CHECK_EXTEND
+    mItemButtonSize= tryFloat( prefs,  key[5].key,      key[5].dflt );  // DISTOX_TOOLBAR_SIZE
+    mPlotCache     = prefs.getBoolean( key[6].key, bool(key[6].dflt) ); // DISTOX_PLOT_CACHE
     // TDLog.v("SETTING load plot done");
 
-    String[] keyCalib = TDPrefKey.CALIB;
-    String[] defCalib = TDPrefKey.CALIBdef;
-    mGroupBy       = tryInt(   prefs,      keyCalib[ 0],     defCalib[ 0] );  // DISTOX_GROUP_BY choice: 0, 1, 2
-    mGroupDistance = tryFloat( prefs,      keyCalib[ 1],     defCalib[ 1] );  // DISTOX_GROUP_DISTANCE
-    mCalibEps      = tryFloat( prefs,      keyCalib[ 2],     defCalib[ 2] );  // DISTOX_CAB_EPS
-    mCalibMaxIt    = tryInt(   prefs,      keyCalib[ 3],     defCalib[ 3] );  // DISTOX_CALIB_MAX_IT
-    mCalibShotDownload = prefs.getBoolean( keyCalib[ 4], bool(defCalib[ 4]) ); // DISTOX_CALIB_SHOT_DOWNLOAD
-    // mRawData       = prefs.getBoolean( keyCalib[], bool(defCalib[]) );    // DISTOX_RAW_DATA 20
-    mRawCData      = tryInt( prefs,        keyCalib[ 5],     defCalib[ 5] );  // DISTOX_RAW_CDATA 20
-    // mCalibAlgo     = tryInt( prefs,        keyCalib[ 6],      defCalib[ 6] );  // DISTOX_CALIB_ALGO choice: 0, 1, 2
-    mAlgoMinAlpha  = tryFloat( prefs,      keyCalib[ 6],     defCalib[ 6] );  // DISTOX_ALGO_MIN_ALPHA
-    mAlgoMinBeta   = tryFloat( prefs,      keyCalib[ 7],     defCalib[ 7] );  // DISTOX_ALGO_MIN_BETA
-    mAlgoMinGamma  = tryFloat( prefs,      keyCalib[ 8],     defCalib[ 8] );  // DISTOX_ALGO_MIN_GAMMA
-    mAlgoMinDelta  = tryFloat( prefs,      keyCalib[ 9],     defCalib[ 9] ); // DISTOX_ALGO_MIN_DELTA
-    mAutoCalBeta   = tryFloat( prefs,      keyCalib[10],     defCalib[10] ); // DISTOX_AUTO_CAL_BETA
-    mAutoCalEta    = tryFloat( prefs,      keyCalib[11],     defCalib[11] ); // DISTOX_AUTO_CAL_ETA
-    mAutoCalGamma  = tryFloat( prefs,      keyCalib[12],     defCalib[12] ); // DISTOX_AUTO_CAL_GAMMA
-    mAutoCalDelta  = tryFloat( prefs,      keyCalib[13],     defCalib[13] ); // DISTOX_AUTO_CAL_DELTA
+    key = TDPrefKey.mCalib;
+    mGroupBy       = tryInt(   prefs,      key[ 0].key,     key[ 0].dflt );  // DISTOX_GROUP_BY choice: 0, 1, 2
+    mGroupDistance = tryFloat( prefs,      key[ 1].key,     key[ 1].dflt );  // DISTOX_GROUP_DISTANCE
+    mCalibEps      = tryFloat( prefs,      key[ 2].key,     key[ 2].dflt );  // DISTOX_CAB_EPS
+    mCalibMaxIt    = tryInt(   prefs,      key[ 3].key,     key[ 3].dflt );  // DISTOX_CALIB_MAX_IT
+    mCalibShotDownload = prefs.getBoolean( key[ 4].key,bool(key[ 4].dflt) ); // DISTOX_CALIB_SHOT_DOWNLOAD
+    // mRawData       = prefs.getBoolean(  key[  ].key,bool(key[  ].dflt) );    // DISTOX_RAW_DATA 20
+    mRawCData      = tryInt( prefs,        key[ 5].key,     key[ 5].dflt );  // DISTOX_RAW_CDATA 20
+    // mCalibAlgo     = tryInt( prefs,     key[ 6].key,     key[ 6].dflt );  // DISTOX_CALIB_ALGO choice: 0, 1, 2
+    mAlgoMinAlpha  = tryFloat( prefs,      key[ 6].key,     key[ 6].dflt );  // DISTOX_ALGO_MIN_ALPHA
+    mAlgoMinBeta   = tryFloat( prefs,      key[ 7].key,     key[ 7].dflt );  // DISTOX_ALGO_MIN_BETA
+    mAlgoMinGamma  = tryFloat( prefs,      key[ 8].key,     key[ 8].dflt );  // DISTOX_ALGO_MIN_GAMMA
+    mAlgoMinDelta  = tryFloat( prefs,      key[ 9].key,     key[ 9].dflt ); // DISTOX_ALGO_MIN_DELTA
+    mAutoCalBeta   = tryFloat( prefs,      key[10].key,     key[10].dflt ); // DISTOX_AUTO_CAL_BETA
+    mAutoCalEta    = tryFloat( prefs,      key[11].key,     key[11].dflt ); // DISTOX_AUTO_CAL_ETA
+    mAutoCalGamma  = tryFloat( prefs,      key[12].key,     key[12].dflt ); // DISTOX_AUTO_CAL_GAMMA
+    mAutoCalDelta  = tryFloat( prefs,      key[13].key,     key[13].dflt ); // DISTOX_AUTO_CAL_DELTA
     // TDLog.v("SETTING load calib done");
 
-    String[] keyDevice = TDPrefKey.DEVICE;
-    String[] defDevice = TDPrefKey.DEVICEdef;
-    mConnectionMode  = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
-    // mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
-    mHeadTail        = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
-    // TDLog.v("SETTINGS load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
-    mSockType        = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
-    // TDLog.v("SETTING load device next " + keyDevice[4] + " " + defDevice[4] );
-    // mZ6Workaround    = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
-    mAutoPair        = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4]) );  // DISTOX_AUTO_PAIR
-    // TDLog.v("SETTING load device next " + keyDevice[6] + " " + defDevice[6] );
-    mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 5] );   // DISTOX_CONNECT_FEEDBACK
+    key = TDPrefKey.mDevice;
+    mConnectionMode  = tryInt( prefs,      key[ 1].key,       key[ 1].dflt );   // DISTOX_CONN_MODE choice: 0, 1, 2
+    // mAutoReconnect  = prefs.getBoolean( key[ 2].key,  bool(key[ 2].dflt) );  // DISTOX_AUTO_RECONNECT
+    mHeadTail        = prefs.getBoolean(   key[ 2].key,  bool(key[ 2].dflt) );  // DISTOX_HEAD_TAIL
+    // TDLog.v("SETTINGS load dev skip>" + key[ 3].key + ":" +key[ 3].dflt + "<" );
+    mSockType        = tryInt( prefs,      key[ 3].key,       key[ 3].dflt ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
+    // mZ6Workaround   = prefs.getBoolean( key[ 4].key,  bool(key[ 4].dflt)  ); // DISTOX_Z6_WORKAROUND
+    mAutoPair        = prefs.getBoolean(   key[ 4].key,  bool(key[ 4].dflt) );  // DISTOX_AUTO_PAIR
+    mConnectFeedback = tryInt( prefs,      key[ 6].key,       key[ 5].dflt );   // DISTOX_CONNECT_FEEDBACK
     // TDLog.v("SETTING load device done");
 
-    String[] keyGDev = TDPrefKey.GEEKDEVICE;
-    String[] defGDev = TDPrefKey.GEEKDEVICEdef;
-    mUnnamedDevice  = prefs.getBoolean( keyGDev[ 1], bool(defGDev[ 1])  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
-    mConnectSocketDelay = tryInt(prefs, keyGDev[ 2],      defGDev[ 2] );   // DISTOX_SOCKET_DELAY
-    mSecondDistoX   = prefs.getBoolean( keyGDev[ 3], bool(defGDev[ 3]) );  // DISTOX_SECOND_DISTOX
-    mWaitData       = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_DATA
-    mWaitConn       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_CONN
-    mWaitLaser      = tryInt( prefs,    keyGDev[ 6],      defGDev[ 6] );   // DISTOX_WAIT_LASER
-    mWaitShot       = tryInt( prefs,    keyGDev[ 7],      defGDev[ 7] );   // DISTOX_WAIT_SHOT
-    mFirmwareSanity = prefs.getBoolean( keyGDev[ 8], bool(defGDev[ 8]) );  // DISTOX_FIRMWARE_SANITY
-    mBricMode       = tryInt( prefs,    keyGDev[ 9],      defGDev[ 9] );   // DISTOX_BRIC_MODE
-    mBricZeroLength = prefs.getBoolean( keyGDev[10], bool(defGDev[10]) );  // DISTOX_BRIC_ZERO_LENGTH
-    mBricIndexIsId  = prefs.getBoolean( keyGDev[11], bool(defGDev[11]) );  // DISTOX_BRIC_INDEX_IS_ID
-    mSap5Bit16Bug   = prefs.getBoolean( keyGDev[12], bool(defGDev[12]) );  // DISTOX_SAP5_BIT16_BUG
+    key = TDPrefKey.mGeekDevice;
+    mUnnamedDevice  = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt)  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
+    mConnectSocketDelay = tryInt(prefs, key[ 2].key,      key[ 2].dflt );   // DISTOX_SOCKET_DELAY
+    mSecondDistoX   = prefs.getBoolean( key[ 3].key, bool(key[ 3].dflt) );  // DISTOX_SECOND_DISTOX
+    mWaitData       = tryInt( prefs,    key[ 4].key,      key[ 4].dflt );   // DISTOX_WAIT_DATA
+    mWaitConn       = tryInt( prefs,    key[ 5].key,      key[ 5].dflt );   // DISTOX_WAIT_CONN
+    mWaitLaser      = tryInt( prefs,    key[ 6].key,      key[ 6].dflt );   // DISTOX_WAIT_LASER
+    mWaitShot       = tryInt( prefs,    key[ 7].key,      key[ 7].dflt );   // DISTOX_WAIT_SHOT
+    mFirmwareSanity = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) );  // DISTOX_FIRMWARE_SANITY
+    mBricMode       = tryInt( prefs,    key[ 9].key,      key[ 9].dflt );   // DISTOX_BRIC_MODE
+    mBricZeroLength = prefs.getBoolean( key[10].key, bool(key[10].dflt) );  // DISTOX_BRIC_ZERO_LENGTH
+    mBricIndexIsId  = prefs.getBoolean( key[11].key, bool(key[11].dflt) );  // DISTOX_BRIC_INDEX_IS_ID
+    mSap5Bit16Bug   = prefs.getBoolean( key[12].key, bool(key[12].dflt) );  // DISTOX_SAP5_BIT16_BUG
     // TDLog.v("SETTING load geek device done");
 
-    String[] keyCave3D = TDPrefKey.CAVE3D;
-    String[] defCave3D = TDPrefKey.CAVE3Ddef;
-    boolean b = prefs.getBoolean( keyCave3D[0], bool(defCave3D[0]) );
+    key = TDPrefKey.mCave3D;
+    boolean b = prefs.getBoolean( key[0].key, bool(key[0].dflt) );
     GlRenderer.mMinClino = b ? 90 : 0;
-    GlModel.mStationPoints  = prefs.getBoolean( keyCave3D[1], bool(defCave3D[1]) );
-    GlNames.setPointSize( tryInt(   prefs,  keyCave3D[2], defCave3D[2] ) );
-    GlNames.setTextSize( tryInt(   prefs,  keyCave3D[3], defCave3D[3] ) );
-    TopoGL.mSelectionRadius = tryFloat( prefs,  keyCave3D[4], defCave3D[4] );
-    TopoGL.mMeasureToast    = prefs.getBoolean( keyCave3D[5], bool(defCave3D[5]) );
-    TopoGL.mStationDialog   = prefs.getBoolean( keyCave3D[6], bool(defCave3D[6]) );
-    GlModel.mGridAbove      = prefs.getBoolean( keyCave3D[7], bool(defCave3D[7]) );
-    GlModel.mGridExtent     = tryInt(   prefs,  keyCave3D[8], defCave3D[8] );
-    GlNames.mNamesVisible   =  prefs.getBoolean( keyCave3D[9], bool(defCave3D[9]) );
+    GlModel.mStationPoints  = prefs.getBoolean( key[1].key, bool(key[1].dflt) );
+    GlNames.setPointSize( tryInt(   prefs,      key[2].key,      key[2].dflt ) );
+    GlNames.setTextSize( tryInt(   prefs,       key[3].key,      key[3].dflt ) );
+    TopoGL.mSelectionRadius = tryFloat( prefs,  key[4].key,      key[4].dflt );
+    TopoGL.mMeasureToast    = prefs.getBoolean( key[5].key, bool(key[5].dflt) );
+    TopoGL.mStationDialog   = prefs.getBoolean( key[6].key, bool(key[6].dflt) );
+    GlModel.mGridAbove      = prefs.getBoolean( key[7].key, bool(key[7].dflt) );
+    GlModel.mGridExtent     = tryInt(   prefs,  key[8].key,      key[8].dflt );
+    GlNames.mNamesVisible   = prefs.getBoolean( key[9].key, bool(key[9].dflt) );
 
-    String[] keyDem3D = TDPrefKey.DEM3D;
-    String[] defDem3D = TDPrefKey.DEM3Ddef;
-    TopoGL.mDEMbuffer   = tryFloat( prefs, keyDem3D[0], defDem3D[0] );
-    TopoGL.mDEMmaxsize  = tryInt(   prefs, keyDem3D[1], defDem3D[1] );
-    TopoGL.mDEMreduce   = tryInt(   prefs, keyDem3D[2], defDem3D[2] );
-    TopoGL.mTextureRoot = prefs.getString( keyDem3D[3], defDem3D[3] );
+    key = TDPrefKey.mDem3D;
+    TopoGL.mDEMbuffer   = tryFloat( prefs, key[0].key, key[0].dflt );
+    TopoGL.mDEMmaxsize  = tryInt(   prefs, key[1].key, key[1].dflt );
+    TopoGL.mDEMreduce   = tryInt(   prefs, key[2].key, key[2].dflt );
+    TopoGL.mTextureRoot = prefs.getString( key[3].key, key[3].dflt );
 
-    String[] keyWalls3D = TDPrefKey.WALLS3D;
-    String[] defWalls3D = TDPrefKey.WALLS3Ddef;
-    TglParser.mSplayUse = tryInt(   prefs,  keyWalls3D[0], defWalls3D[0] );
-    GlModel.mAllSplay   = prefs.getBoolean( keyWalls3D[1], bool(defWalls3D[1]) );
-    TopoGL.mSplayProj   = prefs.getBoolean( keyWalls3D[2], bool(defWalls3D[2]) );
-    TopoGL.mSplayThr    = tryFloat( prefs,  keyWalls3D[3], defWalls3D[3] );
-    GlModel.mSplitTriangles = prefs.getBoolean( keyWalls3D[4], bool(defWalls3D[4]) );
-    float r = tryFloat( prefs,  keyWalls3D[5], defWalls3D[5] );
+    key = TDPrefKey.mWalls3D;
+    TglParser.mSplayUse = tryInt(   prefs,  key[0].key,      key[0].dflt );
+    GlModel.mAllSplay   = prefs.getBoolean( key[1].key, bool(key[1].dflt) );
+    TopoGL.mSplayProj   = prefs.getBoolean( key[2].key, bool(key[2].dflt) );
+    TopoGL.mSplayThr    = tryFloat( prefs,  key[3].key,      key[3].dflt );
+    GlModel.mSplitTriangles = prefs.getBoolean( key[4].key, bool(key[4].dflt) );
+    float r = tryFloat( prefs,  key[5].key, key[5].dflt );
     if ( r > 0.0001f ) {
       GlModel.mSplitRandomizeDelta = r;
       GlModel.mSplitRandomize = true;
     } else {
       GlModel.mSplitRandomize = false;
     }
-    r = tryFloat( prefs,  keyWalls3D[6], defWalls3D[6] );
+    r = tryFloat( prefs,  key[6].key, key[6].dflt );
     if ( r > 0.0001f ) {
       GlModel.mSplitStretchDelta = r;
       GlModel.mSplitStretch = true;
     } else {
       GlModel.mSplitStretch = false;
     }
-    GlModel.mPowercrustDelta = tryFloat( prefs,  keyWalls3D[7], defWalls3D[7] );
+    GlModel.mPowercrustDelta = tryFloat( prefs,  key[7].key, key[7].dflt );
     // TDLog.v("SETTING load model done");
 
-    String[] keySketch = TDPrefKey.SKETCH;
-    String[] defSketch = TDPrefKey.SKETCHdef;
-    m3Dsketch    = prefs.getBoolean( keySketch[0], bool(defSketch[0]) );
-    mSplayBuffer = tryFloat( prefs, keySketch[1], defSketch[1] );
+    key = TDPrefKey.mSketch;
+    m3Dsketch    = prefs.getBoolean( key[0].key, bool(key[0].dflt) );
+    mSplayBuffer = tryFloat( prefs,  key[1].key,      key[1].dflt );
 
-    String[] keyImport = TDPrefKey.EXPORT_IMPORT;
-    String[] defImport = TDPrefKey.EXPORT_IMPORTdef;
+    key = TDPrefKey.mExportImport;
     // keyImport[ 0 ] // DISTOX_PT_CMAP
-    mLRExtend          = prefs.getBoolean(     keyImport[ 1], bool(defImport[ 1]) ); // DISTOX_SPLAY_EXTEND
+    mLRExtend          = prefs.getBoolean(     key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_SPLAY_EXTEND
     // TDLog.v("SETTING load secondary export import done");
 
-    String[] keyGeekImport = TDPrefKey.GEEKIMPORT;
-    String[] defGeekImport = TDPrefKey.GEEKIMPORTdef;
-    mZipWithSymbols = prefs.getBoolean( keyGeekImport[ 0], bool(defGeekImport[ 0]) ); // DISTOX_ZIP_WITH_SYMBOLS
-    mImportDatamode = tryInt(   prefs,  keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
-    mAutoXSections  = prefs.getBoolean( keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_AUTO_XSECTIONS
-    mAutoStations   = prefs.getBoolean( keyGeekImport[ 3], bool(defGeekImport[ 3]) ); // DISTOX_AUTO_STATIONS
-    mLRUDcount      = prefs.getBoolean( keyGeekImport[ 4], bool(defGeekImport[ 4]) ); // DISTOX_LRUD_COUNT
-    mZipShareCategory = prefs.getBoolean( keyGeekImport[ 5], bool(defGeekImport[ 5]) ); // DISTOX_ZIP_SHARE_CATEGORY
-    // mAutoExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
-    // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
+    key = TDPrefKey.mGeekImport;
+    mZipWithSymbols = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_ZIP_WITH_SYMBOLS
+    mImportDatamode = tryInt(   prefs,  key[ 1].key,      key[ 1].dflt );  // DISTOX_IMPORT_DATAMODE
+    mAutoXSections  = prefs.getBoolean( key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_AUTO_XSECTIONS
+    mAutoStations   = prefs.getBoolean( key[ 3].key, bool(key[ 3].dflt) ); // DISTOX_AUTO_STATIONS
+    mLRUDcount      = prefs.getBoolean( key[ 4].key, bool(key[ 4].dflt) ); // DISTOX_LRUD_COUNT
+    mZipShareCategory = prefs.getBoolean( key[ 5].key, bool(key[ 5].dflt) ); // DISTOX_ZIP_SHARE_CATEGORY
+    // mAutoExportPlotFormat = tryInt( prefs,  key[ 4].key,      key[ 4].dflt );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    // mExportTcsx     = prefs.getBoolean(     key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
 
-    String[] keyEnable = TDPrefKey.EXPORT_ENABLE;
-    String[] defEnable = TDPrefKey.EXPORT_ENABLEdef;
-    for ( int k = 0; k < keyEnable.length; ++ k ) {
-      b = prefs.getBoolean( keyEnable[ k], bool(defEnable[ k]) );
+    key = TDPrefKey.mExportEnable;
+    for ( int k = 0; k < key.length; ++ k ) {
+      b = prefs.getBoolean( key[ k].key, bool(key[ k].dflt) );
       TDConst.mSurveyExportEnable[ 1 + k ] = b;
       // TDLog.v("SETTING enable " + (1+k) + " " + b );
     }
 
-    String[] keyExport = TDPrefKey.EXPORT;
-    String[] defExport = TDPrefKey.EXPORTdef;
-    mExportShotsFormat = tryInt(   prefs,      keyExport[ 0],      defExport[ 0] );  // DISTOX_EXPORT_SHOTS choice: 
-    mExportPlotFormat  = tryInt(   prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
-    mAutoExportPlotFormat = tryInt(  prefs,    keyExport[ 2],      defExport[ 2] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
-    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[ 3],      defExport[ 3] );  // DISTOX_ORTHO_LRUD
+    key = TDPrefKey.mExport;
+    mExportShotsFormat = tryInt(   prefs,      key[ 0].key,      key[ 0].dflt );  // DISTOX_EXPORT_SHOTS choice: 
+    mExportPlotFormat  = tryInt(   prefs,      key[ 1].key,      key[ 1].dflt );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
+    mAutoExportPlotFormat = tryInt(  prefs,    key[ 2].key,      key[ 2].dflt );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    mOrthogonalLRUDAngle = tryFloat( prefs,    key[ 3].key,      key[ 3].dflt );  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    mLRUDvertical      = tryFloat( prefs,      keyExport[ 4],      defExport[ 4] );  // DISTOX_LRUD_VERTICAL
-    mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 5],      defExport[ 5] );  // DISTOX_LRUD_HORIZONTAL
-    mBezierStep        = tryFloat( prefs,      keyExport[ 6],      defExport[ 6] );  // DISTOX_BEZIER_STEP
+    mLRUDvertical      = tryFloat( prefs,      key[ 4].key,      key[ 4].dflt );  // DISTOX_LRUD_VERTICAL
+    mLRUDhorizontal    = tryFloat( prefs,      key[ 5].key,      key[ 5].dflt );  // DISTOX_LRUD_HORIZONTAL
+    mBezierStep        = tryFloat( prefs,      key[ 6].key,      key[ 6].dflt );  // DISTOX_BEZIER_STEP
     // TDLog.v("SETTING load secondary export done");
 
-    String[] keyExp = TDPrefKey.EXPORT_SVX;
-    String[] defExp = TDPrefKey.EXPORT_SVXdef;
-    mSurvexEol         = ( prefs.getString(  keyExp[0],      defExp[0] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    mSurvexSplay       =   prefs.getBoolean( keyExp[1], bool(defExp[1]) ); // DISTOX_SURVEX_SPLAY
-    mSurvexLRUD        =   prefs.getBoolean( keyExp[2], bool(defExp[2]) ); // DISTOX_SURVEX_LRUD
-    mSurvexEPSG        = tryInt(   prefs,    keyExp[3],      defExp[3] );  // DISTOX_SURVEX_EPSG
+    key = TDPrefKey.mExportSvx;
+    mSurvexEol         = ( prefs.getString(  key[0].key,      key[0].dflt ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
+    mSurvexSplay       =   prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_SURVEX_SPLAY
+    mSurvexLRUD        =   prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_SURVEX_LRUD
+    mSurvexEPSG        = tryInt(   prefs,    key[3].key,      key[3].dflt );  // DISTOX_SURVEX_EPSG
     // TDLog.v("SETTING load secondary export SVX done");
 
-    keyExp = TDPrefKey.EXPORT_PLY;
-    defExp = TDPrefKey.EXPORT_PLYdef;
-    mPlyLRUD  = prefs.getBoolean( keyExp[0], bool(defExp[0]) ); // DISTOX_PLY_LRUD
-    mPlyMinus = prefs.getBoolean( keyExp[1], bool(defExp[1]) ); // DISTOX_PLY_MINUS
+    key = TDPrefKey.mExportPly;
+    mPlyLRUD  = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_PLY_LRUD
+    mPlyMinus = prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_PLY_MINUS
 
-    keyExp  = TDPrefKey.EXPORT_TH;
-    defExp  = TDPrefKey.EXPORT_THdef;
-    mTherionWithConfig = prefs.getBoolean( keyExp[0], bool(defExp[0]) ); // DISTOX_THERION_CONFIG
-    mTherionMaps       = prefs.getBoolean( keyExp[1], bool(defExp[1]) ); // DISTOX_THERION_MAPS
-    // mAutoStations   = prefs.getBoolean( keyExp[2], bool(defExp[2]) ); // DISTOX_AUTO_STATIONS 
-    // mXTherionAreas  = prefs.getBoolean( keyExp[ ], bool(defExp[ ]) ); // DISTOX_XTHERION_AREAS
-    mTherionSplays     = prefs.getBoolean( keyExp[2], bool(defExp[2]) ); // DISTOX_THERION_SPLAYS
-    // mSurvexLRUD     = prefs.getBoolean( keyExp[3], bool(defExp[3]) ); // DISTOX_SURVEX_LRUD
-    mTherionScale      = tryInt( prefs, keyExp[4],         defExp[4] );  // DISTOX_TH2_SCALE
-    mTherionXvi        = prefs.getBoolean( keyExp[5], bool(defExp[5]) ); // DISTOX_TH2_XVI
+    key = TDPrefKey.mExportTh;
+    mTherionWithConfig = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_THERION_CONFIG
+    mTherionMaps       = prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_THERION_MAPS
+    // mAutoStations   = prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_AUTO_STATIONS 
+    // mXTherionAreas  = prefs.getBoolean( key[ ].key, bool(key[ ].dflt) ); // DISTOX_XTHERION_AREAS
+    mTherionSplays     = prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_THERION_SPLAYS
+    // mSurvexLRUD     = prefs.getBoolean( key[3].key, bool(key[3].dflt) ); // DISTOX_SURVEX_LRUD
+    mTherionScale      = tryInt( prefs,    key[4].key,      key[4].dflt );  // DISTOX_TH2_SCALE
+    mTherionXvi        = prefs.getBoolean( key[5].key, bool(key[5].dflt) ); // DISTOX_TH2_XVI
     // TDLog.v("SETTING load secondary export TH done");
 
-    keyExp = TDPrefKey.EXPORT_DAT;
-    defExp = TDPrefKey.EXPORT_DATdef;
-    mExportStationsPrefix =  prefs.getBoolean( keyExp[0], bool(defExp[0]) ); // DISTOX_STATION_PREFIX
-    mCompassSplays     = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_COMPASS_SPLAYS
-    mSwapLR            = prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_SWAP_LR
+    key = TDPrefKey.mExportDat;
+    mExportStationsPrefix =  prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_STATION_PREFIX
+    mCompassSplays     = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_COMPASS_SPLAYS
+    mSwapLR            = prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_SWAP_LR
     
-    keyExp = TDPrefKey.EXPORT_SRV;
-    defExp = TDPrefKey.EXPORT_SRVdef;
-    mWallsSplays       = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_WALLS_SPLAYS
-    // mWallsUD           = tryInt( prefs, keyExpSrv[1], defExpSrv[1] );  // DISTOX_WALLS_UD
+    key = TDPrefKey.mExportSrv;
+    mWallsSplays       = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_WALLS_SPLAYS
+    // mWallsUD           = tryInt( prefs, key[1].key,      key[1].dflt );  // DISTOX_WALLS_UD
     
-    keyExp = TDPrefKey.EXPORT_TRO;
-    defExp = TDPrefKey.EXPORT_TROdef;
-    mVTopoSplays       = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_VTOPO_SPLAYS
-    mVTopoLrudAtFrom   = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_VTOPO_LRUD
-    mVTopoTrox         = prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_VTOPO_TROX
+    key = TDPrefKey.mExportTro;
+    mVTopoSplays       = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_VTOPO_SPLAYS
+    mVTopoLrudAtFrom   = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_VTOPO_LRUD
+    mVTopoTrox         = prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_VTOPO_TROX
 
-    keyExp = TDPrefKey.EXPORT_SVG;
-    defExp = TDPrefKey.EXPORT_SVGdef;
-    mSvgRoundTrip      = prefs.getBoolean(     keyExp[0], bool(defExp[9]) ); // DISTOX_SVG_ROUNDTRIP
-    mSvgGrid           = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_SVG_GRID
-    mSvgLineDirection  = prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_SVG_LINE_DIR
-    mSvgSplays         = prefs.getBoolean(     keyExp[3], bool(defExp[3]) ); // DISTOX_SVG_SPLAYS
-    mSvgGroups         = prefs.getBoolean(     keyExp[4], bool(defExp[4]) ); // DISTOX_SVG_GROUPS
-    // mSvgInHtml      = prefs.getBoolean(     keyExp[ ], bool(defExp[ ]) ); // DISTOX_SVG_IN_HTML
-    mSvgPointStroke    = tryFloat( prefs,      keyExp[ 5],     defExp[ 5] );  // DISTOX_SVG_POINT_STROKE
-    mSvgLabelStroke    = tryFloat( prefs,      keyExp[ 6],     defExp[ 6] );  // DISTOX_SVG_LABEL_STROKE
-    mSvgLineStroke     = tryFloat( prefs,      keyExp[ 7],     defExp[ 7] );  // DISTOX_SVG_LINE_STROKE
-    mSvgGridStroke     = tryFloat( prefs,      keyExp[ 8],     defExp[ 8] );  // DISTOX_SVG_GRID_STROKE
-    mSvgShotStroke     = tryFloat( prefs,      keyExp[ 9],     defExp[ 9] );  // DISTOX_SVG_SHOT_STROKE
-    mSvgLineDirStroke  = tryFloat( prefs,      keyExp[10],     defExp[10] ); // DISTOX_SVG_LINEDIR_STROKE
-    mSvgStationSize    = tryInt(   prefs,      keyExp[11],     defExp[11] ); // DISTOX_SVG_STATION_SIZE
-    mSvgLabelSize      = tryInt  ( prefs,      keyExp[12],     defExp[12] ); // DISTOX_SVG_LABEL_SIZE
-    mSvgProgram        = tryInt(   prefs,      keyExp[13],     defExp[13] );  // DISTOX_SVG_PROGRAM
+    key = TDPrefKey.mExportSvg;
+    mSvgRoundTrip      = prefs.getBoolean(     key[0].key, bool(key[9].dflt) ); // DISTOX_SVG_ROUNDTRIP
+    mSvgGrid           = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_SVG_GRID
+    mSvgLineDirection  = prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_SVG_LINE_DIR
+    mSvgSplays         = prefs.getBoolean(     key[3].key, bool(key[3].dflt) ); // DISTOX_SVG_SPLAYS
+    mSvgGroups         = prefs.getBoolean(     key[4].key, bool(key[4].dflt) ); // DISTOX_SVG_GROUPS
+    // mSvgInHtml      = prefs.getBoolean(     key[ ].key, bool(key[ ].dflt) ); // DISTOX_SVG_IN_HTML
+    mSvgPointStroke    = tryFloat( prefs,      key[ 5].key,     key[ 5].dflt );  // DISTOX_SVG_POINT_STROKE
+    mSvgLabelStroke    = tryFloat( prefs,      key[ 6].key,     key[ 6].dflt );  // DISTOX_SVG_LABEL_STROKE
+    mSvgLineStroke     = tryFloat( prefs,      key[ 7].key,     key[ 7].dflt );  // DISTOX_SVG_LINE_STROKE
+    mSvgGridStroke     = tryFloat( prefs,      key[ 8].key,     key[ 8].dflt );  // DISTOX_SVG_GRID_STROKE
+    mSvgShotStroke     = tryFloat( prefs,      key[ 9].key,     key[ 9].dflt );  // DISTOX_SVG_SHOT_STROKE
+    mSvgLineDirStroke  = tryFloat( prefs,      key[10].key,     key[10].dflt ); // DISTOX_SVG_LINEDIR_STROKE
+    mSvgStationSize    = tryInt(   prefs,      key[11].key,     key[11].dflt ); // DISTOX_SVG_STATION_SIZE
+    mSvgLabelSize      = tryInt  ( prefs,      key[12].key,     key[12].dflt ); // DISTOX_SVG_LABEL_SIZE
+    mSvgProgram        = tryInt(   prefs,      key[13].key,     key[13].dflt );  // DISTOX_SVG_PROGRAM
     // TDLog.v("SETTING load secondary export SVG done");
 
     // having mTherionScale and mSvgProgram we can set export scale
     setExportScale( mTherionScale );
 
-    keyExp = TDPrefKey.EXPORT_KML;
-    defExp = TDPrefKey.EXPORT_KMLdef;
-    mKmlStations       = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_KML_STATIONS
-    mKmlSplays         = prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_KML_SPLAYS
+    key = TDPrefKey.mExportKml;
+    mKmlStations       = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_KML_STATIONS
+    mKmlSplays         = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_KML_SPLAYS
     // TDLog.v("SETTING load secondary export KML done");
 
-    keyExp = TDPrefKey.EXPORT_CSX;
-    defExp = TDPrefKey.EXPORT_CSXdef;
-    // mExportStationsPrefix = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_STATION_PREFIX
-    mExportMedia       =  prefs.getBoolean(     keyExp[1], bool(defExp[1]) ); // DISTOX_WITH_MEDIA
+    key = TDPrefKey.mExportCsx;
+    // mExportStationsPrefix = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_STATION_PREFIX
+    mExportMedia       =  prefs.getBoolean(      key[1].key, bool(key[1].dflt) ); // DISTOX_WITH_MEDIA
 
-    keyExp = TDPrefKey.EXPORT_GPX;
-    defExp = TDPrefKey.EXPORT_GPXdef;
-    mGPXSingleTrack    = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_GPX_STATION_TRACK
+    key = TDPrefKey.mExportGpx;
+    mGPXSingleTrack    = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_GPX_STATION_TRACK
 
-    keyExp = TDPrefKey.EXPORT_CSV;
-    defExp = TDPrefKey.EXPORT_CSVdef;
-    mCsvRaw            = prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_CSV_RAW
-    mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, keyExp[1], defExp[1] ) ]; // DISTOX_CSV_SEP
+    key = TDPrefKey.mExportCsv;
+    mCsvRaw            = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_CSV_RAW
+    mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, key[1].key, key[1].dflt ) ]; // DISTOX_CSV_SEP
 
     /* NO_PNG
     keyExp = TDPrefKey.EXPORT_PNG;
@@ -1344,125 +1309,117 @@ public class TDSetting
     // TDLog.v("SETTING load secondary export PNG done");
     */
 
-    keyExp = TDPrefKey.EXPORT_DXF;
-    defExp = TDPrefKey.EXPORT_DXFdef;
-    // mDxfScale     = tryFloat( prefs,    keyExp[ ],      defExp[ ] );  // DISTOX_DXF_SCALE
-    mDxfBlocks    =  prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_DXF_BLOCKS
-    mAcadVersion  = tryInt(   prefs,       keyExp[1],      defExp[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
-    mAcadSpline   =  prefs.getBoolean(     keyExp[2], bool(defExp[2]) ); // DISTOX_ACAD_SPLINE
-    mDxfReference =  prefs.getBoolean(     keyExp[3], bool(defExp[3]) ); // DISTOX_DXF_REFERENCE
-    mAcadLayer    =  prefs.getBoolean(     keyExp[4], bool(defExp[4]) ); // DISTOX_ACAD_LAYER
+    key = TDPrefKey.mExportDxf;
+    // mDxfScale     = tryFloat( prefs,    key[ ].key,      key[ ].dflt );  // DISTOX_DXF_SCALE
+    mDxfBlocks    =  prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_DXF_BLOCKS
+    mAcadVersion  = tryInt(   prefs,       key[1].key,      key[1].dflt );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
+    mAcadSpline   =  prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_ACAD_SPLINE
+    mDxfReference =  prefs.getBoolean(     key[3].key, bool(key[3].dflt) ); // DISTOX_DXF_REFERENCE
+    mAcadLayer    =  prefs.getBoolean(     key[4].key, bool(key[4].dflt) ); // DISTOX_ACAD_LAYER
     // TDLog.v("SETTING load secondary export DXF done");
   
-    keyExp = TDPrefKey.EXPORT_SHP;
-    defExp = TDPrefKey.EXPORT_SHPdef;
-    mShpGeoref   =  prefs.getBoolean(     keyExp[0], bool(defExp[0]) ); // DISTOX_SHP_GEOREF
+    key = TDPrefKey.mExportShp;
+    mShpGeoref   =  prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_SHP_GEOREF
     // TDLog.v("SETTING load secondary export SHP done");
 
-    String[] keyData = TDPrefKey.DATA;
-    String[] defData = TDPrefKey.DATAdef;
-    mCloseDistance = tryFloat( prefs,          keyData[ 0],      defData[ 0] );  // DISTOX_CLOSE_DISTANCE
-    mMaxShotLength = tryFloat( prefs,          keyData[ 1],      defData[ 1] );  // DISTOX_MAX_SHOT_LENGTH
-    mMinLegLength  = tryFloat( prefs,          keyData[ 2],      defData[ 2] );  // DISTOX_MIN_LEG_LENGTH
-    mMinNrLegShots = tryInt(   prefs,          keyData[ 3],      defData[ 3] );  // DISTOX_LEG_SHOTS choice: 2, 3, 4
-    mExtendThr     = tryFloat( prefs,          keyData[ 4],      defData[ 4]  ); // DISTOX_EXTEND_THR2
-    mVThreshold    = tryFloat( prefs,          keyData[ 5],      defData[ 5]  ); // DISTOX_VTHRESHOLD
+    key = TDPrefKey.mData;
+    mCloseDistance = tryFloat( prefs,          key[ 0].key,      key[ 0].dflt );  // DISTOX_CLOSE_DISTANCE
+    mMaxShotLength = tryFloat( prefs,          key[ 1].key,      key[ 1].dflt );  // DISTOX_MAX_SHOT_LENGTH
+    mMinLegLength  = tryFloat( prefs,          key[ 2].key,      key[ 2].dflt );  // DISTOX_MIN_LEG_LENGTH
+    mMinNrLegShots = tryInt(   prefs,          key[ 3].key,      key[ 3].dflt );  // DISTOX_LEG_SHOTS choice: 2, 3, 4
+    mExtendThr     = tryFloat( prefs,          key[ 4].key,      key[ 4].dflt  ); // DISTOX_EXTEND_THR2
+    mVThreshold    = tryFloat( prefs,          key[ 5].key,      key[ 5].dflt  ); // DISTOX_VTHRESHOLD
     // DISTOX_AZIMUTH_MANUAL [7] handled in the first pass
-    mPrevNext      = prefs.getBoolean(         keyData[ 7], bool(defData[ 7]) ); // DISTOX_PREV_NEXT
-    mBacksightInput = prefs.getBoolean(        keyData[ 8], bool(defData[ 8]) ); // DISTOX_BACKSIGHT
-    mTripleShot     = tryInt(  prefs,          keyData[ 9],      defData[ 9]  ); // DISTOX_LEG_FEEDBACK
-    // mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
-    // mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
+    mPrevNext      = prefs.getBoolean(         key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_PREV_NEXT
+    mBacksightInput = prefs.getBoolean(        key[ 8].key, bool(key[ 8].dflt) ); // DISTOX_BACKSIGHT
+    mTripleShot     = tryInt(  prefs,          key[ 9].key,      key[ 9].dflt  ); // DISTOX_LEG_FEEDBACK
+    // mTimerWait     = tryInt(   prefs,       key[10].key,      key[10].dflt );  // DISTOX_SHOT_TIMER
+    // mBeepVolume    = tryInt(   prefs,       key[11].key,      key[11].dflt );  // DISTOX_BEEP_VOLUME
     // TDLog.v("SETTING load secondary data done");
 
-    String[] keyGShot = TDPrefKey.GEEKSHOT;
-    String[] defGShot = TDPrefKey.GEEKSHOTdef;
-    mDivingMode       = prefs.getBoolean( keyGShot[ 0], bool(defGShot[ 0]) ); // DISTOX_DIVING_MODE
-    mEditableShots    = prefs.getBoolean( keyGShot[ 1], bool(defGShot[ 1]) ); // DISTOX_TAMPERING
-    mBacksightSplay   = prefs.getBoolean( keyGShot[ 2], bool(defGShot[ 2]) ); // DISTOX_BACKSIGHT_SPLAY
-    mShotRecent       = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_RECENT_SHOT
-    mRecentTimeout    = tryInt(   prefs,  keyGShot[ 4],      defGShot[ 4] );  // DISTOX_RECENT_TIMEOUT
-    mExtendFrac       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_EXTEND_FRAC
-    mDistoXBackshot   = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BACKSHOT
-    mBedding          = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_BEDDING
-    mWithSensors      = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
-    setLoopClosure( tryInt(   prefs,      keyGShot[ 9],      defGShot[ 9] ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mLoopThr          = tryFloat( prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_LOOP_THR
-    mWithAzimuth      = prefs.getBoolean( keyGShot[11], bool(defGShot[11]) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait        = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_SHOT_TIMER
-    mBeepVolume       = tryInt(   prefs,  keyGShot[13],      defGShot[13] );  // DISTOX_BEEP_VOLUME
-    mBlunderShot      = prefs.getBoolean( keyGShot[14], bool(defGShot[14]) ); // DISTOX_BLUNDER_SHOT
-    mSplayStation     = prefs.getBoolean( keyGShot[15], bool(defGShot[15]) ); // DISTOX_SPLAY_STATION
-    mSplayOnlyForward = prefs.getBoolean( keyGShot[16], bool(defGShot[16]) ); // DISTOX_SPLAY_GROUP
-    // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
+    key = TDPrefKey.mGeekShot;
+    mDivingMode       = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_DIVING_MODE
+    mEditableShots    = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_TAMPERING
+    mBacksightSplay   = prefs.getBoolean( key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_BACKSIGHT_SPLAY
+    mShotRecent       = prefs.getBoolean( key[ 3].key, bool(key[ 3].dflt) ); // DISTOX_RECENT_SHOT
+    mRecentTimeout    = tryInt(   prefs,  key[ 4].key,      key[ 4].dflt );  // DISTOX_RECENT_TIMEOUT
+    mExtendFrac       = prefs.getBoolean( key[ 5].key, bool(key[ 5].dflt) ); // DISTOX_EXTEND_FRAC
+    mDistoXBackshot   = prefs.getBoolean( key[ 6].key, bool(key[ 6].dflt) ); // DISTOX_BACKSHOT
+    mBedding          = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_BEDDING
+    mWithSensors      = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) ); // DISTOX_WITH_SENSORS
+    setLoopClosure( tryInt(   prefs,      key[ 9].key,      key[ 9].dflt ) );// DISTOX_LOOP_CLOSURE_VALUE
+    mLoopThr          = tryFloat( prefs,  key[10].key,      key[10].dflt );  // DISTOX_LOOP_THR
+    mWithAzimuth      = prefs.getBoolean( key[11].key, bool(key[11].dflt) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait        = tryInt(   prefs,  key[12].key,      key[12].dflt );  // DISTOX_SHOT_TIMER
+    mBeepVolume       = tryInt(   prefs,  key[13].key,      key[13].dflt );  // DISTOX_BEEP_VOLUME
+    mBlunderShot      = prefs.getBoolean( key[14].key, bool(key[14].dflt) ); // DISTOX_BLUNDER_SHOT
+    mSplayStation     = prefs.getBoolean( key[15].key, bool(key[15].dflt) ); // DISTOX_SPLAY_STATION
+    mSplayOnlyForward = prefs.getBoolean( key[16].key, bool(key[16].dflt) ); // DISTOX_SPLAY_GROUP
+    // mWithTdManager = prefs.getBoolean( key[13].key, bool(key[13].dflt) ); // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
-    String[] keyGPlot = TDPrefKey.GEEKPLOT;
-    String[] defGPlot = TDPrefKey.GEEKPLOTdef;
-    mPlotShift     = prefs.getBoolean( keyGPlot[ 0], bool(defGPlot[ 0]) ); // DISTOX_PLOT_SHIFT
-    mPlotSplit     = prefs.getBoolean( keyGPlot[ 1], bool(defGPlot[ 1]) ); // DISTOX_PLOT_SPLIT
-    setStylusSize(  tryFloat( prefs,   keyGPlot[ 2],      defGPlot[ 2] ) );  // DISTOX_STYLUS_SIZE // STYLUS_MM
-    mBackupNumber   = tryInt( prefs,   keyGPlot[ 3],      defGPlot[ 3] );  // DISTOX_BACKUP_NUMBER
-    mBackupInterval = tryInt( prefs,   keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_BACKUP_INTERVAL
-    // mAutoXSections  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_AUTO_XSECTIONS
-    mSavedStations  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_SAVED_STATIONS
-    mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
-    mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
-    mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
-    mGraphPaperScale = tryInt( prefs,  keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_GRAPH_PAPER_SCALE
-    mSlantXSection  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SLANT_XSECTION
-    mObliqueMax     = tryInt( prefs,   keyGPlot[11],      defGPlot[11] );  // DISTOX_OBLIQUE_PROJECTED
-    mLineEnds       = tryInt( prefs,   keyGPlot[12],      defGPlot[12] );  // DISTOX_LINE_ENDS
-    // mZoomLowerBound = tryFloat( prefs, keyGPlot[13],      defGPlot[13] );  // DISTOX_ZOOM_LOWER_BOUND
+    key = TDPrefKey.mGeekPlot;
+    mPlotShift     = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_PLOT_SHIFT
+    mPlotSplit     = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_PLOT_SPLIT
+    setStylusSize(  tryFloat( prefs,   key[ 2].key,      key[ 2].dflt ) );  // DISTOX_STYLUS_SIZE // STYLUS_MM
+    mBackupNumber   = tryInt( prefs,   key[ 3].key,      key[ 3].dflt );  // DISTOX_BACKUP_NUMBER
+    mBackupInterval = tryInt( prefs,   key[ 4].key,      key[ 4].dflt );  // DISTOX_BACKUP_INTERVAL
+    // mAutoXSections  = prefs.getBoolean( key[ 5].key, bool(key.dflt[ 5].dflt) ); // DISTOX_AUTO_XSECTIONS
+    mSavedStations  = prefs.getBoolean( key[ 5].key, bool(key[ 5].dflt) ); // DISTOX_SAVED_STATIONS
+    mLegOnlyUpdate  = prefs.getBoolean( key[ 6].key, bool(key[ 6].dflt) ); // DISTOX_LEGONLY_UPDATE
+    mFullAffine     = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_FULL_UPDATE
+    mWithLevels     = tryInt( prefs,    key[ 8].key,      key[ 8].dflt );   // DISTOX_WITH_LEVELS
+    mGraphPaperScale = tryInt( prefs,   key[ 9].key,      key[ 9].dflt );  // DISTOX_GRAPH_PAPER_SCALE
+    mSlantXSection  = prefs.getBoolean( key[10].key, bool(key[10].dflt) ); // DISTOX_SLANT_XSECTION
+    mObliqueMax     = tryInt( prefs,    key[11].key,      key[11].dflt );  // DISTOX_OBLIQUE_PROJECTED
+    mLineEnds       = tryInt( prefs,    key[12].key,      key[12].dflt );  // DISTOX_LINE_ENDS
+    // mZoomLowerBound = tryFloat( prefs, key[13].key,      key[13].dflt );  // DISTOX_ZOOM_LOWER_BOUND
     // TDLog.v("SETTING load secondary GEEK plot done");
 
-    String[] keyGPlotSplay = TDPrefKey.GEEKSPLAY;
-    String[] defGPlotSplay = TDPrefKey.GEEKSPLAYdef;
-    mSplayClasses  = prefs.getBoolean( keyGPlotSplay[ 0], bool(defGPlotSplay[ 0]) ); // DISTOX_SPLAY_CLASSES
-    // mSplayColor    = prefs.getBoolean( keyGPlotSplay[ 1], bool(defGPlotSplay[ 1]) ); // DISTOX_SPLAY_COLOR
-    mDiscreteColors = tryInt( prefs,   keyGPlotSplay[ 1],      defGPlotSplay[ 1] );  // DISTOX_DISCRETE_COLORS
+    key = TDPrefKey.mGeekSplay;
+    mSplayClasses  = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_SPLAY_CLASSES
+    // mSplayColor = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_SPLAY_COLOR
+    mDiscreteColors = tryInt( prefs,   key[ 1].key,      key[ 1].dflt );  // DISTOX_DISCRETE_COLORS
     mSplayColor = (mDiscreteColors > 0);
-    // mSplayAsDot    = prefs.getBoolean( keyGPlotSplay[ 2], bool(defGPlotSplay[ 2]) ); // DISTOX_SPLAY_AS_DOT
-    mSplayVertThrs  = tryFloat( prefs, keyGPlotSplay[ 2],      defGPlotSplay[ 2]  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay      = tryInt( prefs,   keyGPlotSplay[ 3],      defGPlotSplay[ 3] );  // DISTOX_SPLAY_DASH
-    mVertSplay      = tryFloat( prefs, keyGPlotSplay[ 4],      defGPlotSplay[ 4] );  // DISTOX_VERT_SPLAY
-    mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_HORIZ_SPLAY
+    // mSplayAsDot = prefs.getBoolean( key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_SPLAY_AS_DOT
+    mSplayVertThrs  = tryFloat( prefs, key[ 2].key,      key[ 2].dflt  ); // DISTOX_SPLAY_VERT_THRS
+    mDashSplay      = tryInt( prefs,   key[ 3].key,      key[ 3].dflt );  // DISTOX_SPLAY_DASH
+    mVertSplay      = tryFloat( prefs, key[ 4].key,      key[ 4].dflt );  // DISTOX_VERT_SPLAY
+    mHorizSplay     = tryFloat( prefs, key[ 5].key,      key[ 5].dflt );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
-    mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_SECTION_SPLAY
+    mSectionSplay   = tryFloat( prefs, key[ 6].key,      key[ 6].dflt );  // DISTOX_SECTION_SPLAY
     mCosSectionSplay  = TDMath.cosd( mSectionSplay );
-    mSplayDashColor = tryColor( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SPLAY_DASH_COLOR
+    mSplayDashColor   = tryColor( prefs, key[ 7].key,    key[ 7].dflt );  // DISTOX_SPLAY_DASH_COLOR
     BrushManager.setSplayDashColor( mSplayDashColor );
-    mSplayDotColor  = tryColor( prefs, keyGPlotSplay[ 8],      defGPlotSplay[ 8] );  // DISTOX_SPLAY_DOT_COLOR
+    mSplayDotColor    = tryColor( prefs, key[ 8].key,    key[ 8].dflt );  // DISTOX_SPLAY_DOT_COLOR
     BrushManager.setSplayDotColor( mSplayDotColor );
-    mSplayLatestColor  = tryColor( prefs, keyGPlotSplay[ 9],   defGPlotSplay[ 9] );  // DISTOX_SPLAY_LATEST_COLOR
+    mSplayLatestColor = tryColor( prefs, key[ 9].key,    key[ 9].dflt );  // DISTOX_SPLAY_LATEST_COLOR
     BrushManager.setSplayLatestColor( mSplayLatestColor );
     // TDLog.v("SETTING load secondary GEEK plot done");
 
-    String[] keyGLine = TDPrefKey.GEEKLINE;
-    String[] defGLine = TDPrefKey.GEEKLINEdef;
-    setReduceAngle( tryFloat(  prefs,  keyGLine[ 0],      defGLine[ 0] ) ); // DISTOX_REDUCE_ANGLE
-    mLineAccuracy  = tryFloat( prefs,  keyGLine[ 1],      defGLine[ 1] );   // DISTOX_LINE_ACCURACY
-    mLineCorner    = tryFloat( prefs,  keyGLine[ 2],      defGLine[ 2] );   // DISTOX_LINE_CORNER
-    mWeedDistance  = tryFloat( prefs,  keyGLine[ 3],      defGLine[ 3] );   // DISTOX_WEED_DISTANCE
-    mWeedLength    = tryFloat( prefs,  keyGLine[ 4],      defGLine[ 4] );   // DISTOX_WEED_LENGTH
-    mWeedBuffer    = tryFloat( prefs,  keyGLine[ 5],      defGLine[ 5] );   // DISTOX_WEED_BUFFER
-    mLineSnap      = prefs.getBoolean( keyGLine[ 6], bool(defGLine[ 6]) );  // DISTOX_LINE_SNAP
-    mLineCurve     = prefs.getBoolean( keyGLine[ 7], bool(defGLine[ 7]) );  // DISTOX_LINE_CURVE
-    mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
-    mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
-    // mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
+    key = TDPrefKey.mGeekLine;
+    setReduceAngle( tryFloat(  prefs,  key[ 0].key,      key[ 0].dflt ) ); // DISTOX_REDUCE_ANGLE
+    mLineAccuracy  = tryFloat( prefs,  key[ 1].key,      key[ 1].dflt );   // DISTOX_LINE_ACCURACY
+    mLineCorner    = tryFloat( prefs,  key[ 2].key,      key[ 2].dflt );   // DISTOX_LINE_CORNER
+    mWeedDistance  = tryFloat( prefs,  key[ 3].key,      key[ 3].dflt );   // DISTOX_WEED_DISTANCE
+    mWeedLength    = tryFloat( prefs,  key[ 4].key,      key[ 4].dflt );   // DISTOX_WEED_LENGTH
+    mWeedBuffer    = tryFloat( prefs,  key[ 5].key,      key[ 5].dflt );   // DISTOX_WEED_BUFFER
+    mLineSnap      = prefs.getBoolean( key[ 6].key, bool(key[ 6].dflt) );  // DISTOX_LINE_SNAP
+    mLineCurve     = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) );  // DISTOX_LINE_CURVE
+    mLineStraight  = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) );  // DISTOX_LINE_STRAIGHT
+    mPathMultiselect=prefs.getBoolean( key[ 9].key, bool(key[ 9].dflt) );  // DISTOX_PATH_MULTISELECT
+    // mCompositeActions = prefs.getBoolean( key[10].key, bool(key[10].dflt) );  // DISTOX_COMPOSITE_ACTIONS
     // TDLog.v("SETTING load secondary GEEK line done");
 
-    String[] keyUnits = TDPrefKey.UNITS;
-    String[] defUnits = TDPrefKey.UNITSdef;
-    if ( prefs.getString( keyUnits[0], defUnits[0] ).equals( defUnits[0] ) ) {
+    key = TDPrefKey.mUnits;
+    if ( prefs.getString( key[0].key, key[0].dflt ).equals( key[0].dflt ) ) {
       mUnitLength = 1.0f;
       mUnitLengthStr = "m";
     } else {
       mUnitLength = TDUtil.M2FT;
       mUnitLengthStr = "ft";
     }
-    if ( prefs.getString( keyUnits[1],  defUnits[1] ).equals( defUnits[1] ) ) {
+    if ( prefs.getString( key[1].key,  key[1].dflt ).equals( key[1].dflt ) ) {
       mUnitAngle = 1.0f;
       mUnitAngleStr = "deg";
     } else {
@@ -1470,79 +1427,73 @@ public class TDSetting
       mUnitAngleStr = "grad";
     }
 
-    mUnitGrid       = tryFloat(  prefs, keyUnits[2], defUnits[2] );      // DISTOX_UNIT_GRID
-    mUnitMeasure    = tryFloat(  prefs, keyUnits[3], defUnits[3] );      // DISTOX_UNIT_MEASURE
+    mUnitGrid       = tryFloat(  prefs, key[2].key, key[2].dflt );      // DISTOX_UNIT_GRID
+    mUnitMeasure    = tryFloat(  prefs, key[3].key, key[3].dflt );      // DISTOX_UNIT_MEASURE
     // TDLog.v("SETTING units grid " + mUnitGrid );
   
-    String[] keyAcc = TDPrefKey.ACCURACY;
-    String[] defAcc = TDPrefKey.ACCURACYdef;
-    mAccelerationThr = tryFloat( prefs, keyAcc[0], defAcc[0] ); // DISTOX_ACCEL_PERCENT
-    mMagneticThr     = tryFloat( prefs, keyAcc[1], defAcc[1] ); // DISTOX_MAG_PERCENT
-    mDipThr          = tryFloat( prefs, keyAcc[2], defAcc[2] ); // DISTOX_DIP_THR
-    setSiblingThr( tryFloat( prefs, keyAcc[3], defAcc[3] ) ); // DISTOX_SIBLING_PERCENT
+    key = TDPrefKey.mAccuracy;
+    mAccelerationThr = tryFloat( prefs, key[0].key, key[0].dflt ); // DISTOX_ACCEL_PERCENT
+    mMagneticThr     = tryFloat( prefs, key[1].key, key[1].dflt ); // DISTOX_MAG_PERCENT
+    mDipThr          = tryFloat( prefs, key[2].key, key[2].dflt ); // DISTOX_DIP_THR
+    setSiblingThr( tryFloat( prefs,     key[3].key, key[3].dflt ) ); // DISTOX_SIBLING_PERCENT
 
-    String[] keyLoc = TDPrefKey.LOCATION;
-    String[] defLoc = TDPrefKey.LOCATIONdef;
-    mUnitLocation  = (prefs.getString( keyLoc[0], defLoc[0] ).equals(defLoc[0])) ? TDUtil.DDMMSS  // DISTOX_UNIT_LOCATION
-                                                                                 : TDUtil.DEGREE;
-    mCRS           = prefs.getString(  keyLoc[1], defLoc[1] );       // DISTOX_CRS
-    mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) ); // DISTOX_NEG_ALTITUDE
-    mEditableHGeo  = prefs.getBoolean( keyLoc[3], bool(defLoc[3]) ); // DISTOX_EDIT_ALTITUDE
-    mFineLocation  = tryInt( prefs,    keyLoc[4], defLoc[4] );       // DISTOX_FINE_LOCATION
-    // mGeoImportApp  = tryInt( prefs,    keyLoc[4], defLoc[4] );       // DISTOX_GEOPOINT_APP
+    key = TDPrefKey.mLocation;
+    mUnitLocation  = (prefs.getString( key[0].key,      key[0].dflt ).equals(key[0].dflt)) ? TDUtil.DDMMSS  // DISTOX_UNIT_LOCATION
+                                                                           : TDUtil.DEGREE;
+    mCRS           = prefs.getString(  key[1].key,      key[1].dflt );       // DISTOX_CRS
+    mNegAltitude   = prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_NEG_ALTITUDE
+    mEditableHGeo  = prefs.getBoolean( key[3].key, bool(key[3].dflt) ); // DISTOX_EDIT_ALTITUDE
+    mFineLocation  = tryInt( prefs,    key[4].key,      key[4].dflt );       // DISTOX_FINE_LOCATION
+    // mGeoImportApp  = tryInt( prefs, key[4].key,      key[4].dflt );       // DISTOX_GEOPOINT_APP
     // TDLog.v("PREFS key <" + keyLoc[4] + "> val <" + defLoc[4] + ">" );
     try {
-      mGeoImportApp = Integer.parseInt( prefs.getString( keyLoc[5], defLoc[5] ) );
+      mGeoImportApp = Integer.parseInt( prefs.getString( key[5].key, key[5].dflt ) );
     } catch ( RuntimeException e ) {
       TDLog.v("ERROR " + e.getMessage() );
     } catch ( Exception ee ) {
       TDLog.v("EXCEPT " + ee.getMessage() );
     }
 
-    String[] keyScreen = TDPrefKey.SCREEN;
-    String[] defScreen = TDPrefKey.SCREENdef;
-    mFixedThickness = tryFloat( prefs, keyScreen[ 0], defScreen[ 0] );  // DISTOX_FIXED_THICKNESS
-    mStationSize    = tryFloat( prefs, keyScreen[ 1], defScreen[ 1] );  // DISTOX_STATION_SIZE
-    mDotRadius      = tryFloat( prefs, keyScreen[ 2], defScreen[ 2] );  // DISTOX_DOT_RADIUS
-    mSelectness     = tryFloat( prefs, keyScreen[ 3], defScreen[ 3] );  // DISTOX_CLOSENESS
-    mEraseness      = tryFloat( prefs, keyScreen[ 4], defScreen[ 4] );  // DISTOX_ERASENESS
-    mMinShift       = tryInt(   prefs, keyScreen[ 5], defScreen[ 5] );  // DISTOX_MIN_SHIFT
-    mPointingRadius = tryInt(   prefs, keyScreen[ 6], defScreen[ 6] );  // DISTOX_POINTING
-    mSplayAlpha     = tryInt(   prefs, keyScreen[ 7], defScreen[ 7] );  // DISTOX_SPLAY_ALPHA
+    key = TDPrefKey.mScreen;
+    mFixedThickness = tryFloat( prefs, key[ 0].key, key[ 0].dflt );  // DISTOX_FIXED_THICKNESS
+    mStationSize    = tryFloat( prefs, key[ 1].key, key[ 1].dflt );  // DISTOX_STATION_SIZE
+    mDotRadius      = tryFloat( prefs, key[ 2].key, key[ 2].dflt );  // DISTOX_DOT_RADIUS
+    mSelectness     = tryFloat( prefs, key[ 3].key, key[ 3].dflt );  // DISTOX_CLOSENESS
+    mEraseness      = tryFloat( prefs, key[ 4].key, key[ 4].dflt );  // DISTOX_ERASENESS
+    mMinShift       = tryInt(   prefs, key[ 5].key, key[ 5].dflt );  // DISTOX_MIN_SHIFT
+    mPointingRadius = tryInt(   prefs, key[ 6].key, key[ 6].dflt );  // DISTOX_POINTING
+    mSplayAlpha     = tryInt(   prefs, key[ 7].key, key[ 7].dflt );  // DISTOX_SPLAY_ALPHA
     BrushManager.setSplayAlpha( mSplayAlpha );
 
-    String[] keyLine = TDPrefKey.LINE;
-    String[] defLine = TDPrefKey.LINEdef;
-    mLineThickness = tryFloat( prefs,  keyLine[0],      defLine[0] );   // DISTOX_LINE_THICKNESS
-    mUnitLines     = tryFloat( prefs,  keyLine[1],      defLine[1] );   // DISTOX_LINE_UNITS
-    setLineStyleAndType( prefs.getString( keyLine[2],   defLine[2] ) ); // DISTOX_LINE_STYLE
-    setLineSegment( tryInt(    prefs,  keyLine[3],      defLine[3] ) ); // DISTOX_LINE_SEGMENT
-    mLineClose     = prefs.getBoolean( keyLine[4], bool(defLine[4]) );  // DISTOX_LINE_CLOSE
-    mSlopeLSide    = tryInt(   prefs,  keyLine[5],      defLine[5] );   // DISTOX_SLOPE_LSIDE
-    mArrowLength   = tryFloat( prefs,  keyLine[6],      defLine[6] );   // DISTOX_ARROW_LENGTH
-    mAutoSectionPt = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_AUTO_SECTION_PT
-    // mContinueLine  = tryInt(   prefs,  keyLine[7],      defLine[7] );   // DISTOX_LINE_CONTINUE
-    // mWithLineJoin  = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_WITH_CONTINUE_LINE
-    mAreaBorder    = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_AREA_BORDER
+    key = TDPrefKey.mLine;
+    mLineThickness = tryFloat( prefs,  key[0].key,      key[0].dflt );   // DISTOX_LINE_THICKNESS
+    mUnitLines     = tryFloat( prefs,  key[1].key,      key[1].dflt );   // DISTOX_LINE_UNITS
+    setLineStyleAndType( prefs.getString( key[2].key,   key[2].dflt ) ); // DISTOX_LINE_STYLE
+    setLineSegment( tryInt(    prefs,  key[3].key,      key[3].dflt ) ); // DISTOX_LINE_SEGMENT
+    mLineClose     = prefs.getBoolean( key[4].key, bool(key[4].dflt) );  // DISTOX_LINE_CLOSE
+    mSlopeLSide    = tryInt(   prefs,  key[5].key,      key[5].dflt );   // DISTOX_SLOPE_LSIDE
+    mArrowLength   = tryFloat( prefs,  key[6].key,      key[6].dflt );   // DISTOX_ARROW_LENGTH
+    mAutoSectionPt = prefs.getBoolean( key[7].key, bool(key[7].dflt) );  // DISTOX_AUTO_SECTION_PT
+    // mContinueLine  = tryInt(   prefs,  key[7].key,      key[7].dflt );   // DISTOX_LINE_CONTINUE
+    // mWithLineJoin  = prefs.getBoolean( key[8].key, bool(key[8].dflt) );  // DISTOX_WITH_CONTINUE_LINE
+    mAreaBorder    = prefs.getBoolean(    key[8].key, bool(key[8].dflt) );  // DISTOX_AREA_BORDER
 
-    String[] keyPoint = TDPrefKey.POINT;
-    String[] defPoint = TDPrefKey.POINTdef;
-    mUnscaledPoints = prefs.getBoolean( keyPoint[0], bool(defPoint[0]) ); // DISTOX_UNSCALED_POINTS
-    mUnitIcons     = tryFloat( prefs,   keyPoint[1], defPoint[1] );       // DISTOX_DRAWING_UNIT 
-    mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
-    mScalableLabel = prefs.getBoolean(  keyPoint[3], bool(defPoint[3]) ); // DISTOX_SCALABLE_LABEL
-    mXSectionOffset = tryInt( prefs,    keyPoint[4], defPoint[4] );       // DISTOX_XSECTION_OFFSET
+    key = TDPrefKey.mPoint;
+    mUnscaledPoints = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_UNSCALED_POINTS
+    mUnitIcons     = tryFloat( prefs,   key[1].key,      key[1].dflt );       // DISTOX_DRAWING_UNIT 
+    mLabelSize     = tryFloat( prefs,   key[2].key,      key[2].dflt );       // DISTOX_LABEL_SIZE
+    mScalableLabel = prefs.getBoolean(  key[3].key, bool(key[3].dflt) ); // DISTOX_SCALABLE_LABEL
+    mXSectionOffset = tryInt( prefs,    key[4].key,      key[4].dflt );       // DISTOX_XSECTION_OFFSET
     // FIXME tis should go in SCREEN
 
     // AUTOWALLS
-    // String[] keyWalls = TDPrefKey.WALLS;
-    // String[] defWalls = TDPrefKey.WALLSdef;
-    // mWallsType        = tryInt(   prefs, keyWalls[0], defWalls[0] ); // DISTOX_WALLS_TYPE choice: 0, 1
-    // mWallsPlanThr     = tryFloat( prefs, keyWalls[1], defWalls[1] ); // DISTOX_WALLS_PLAN_THR
-    // mWallsExtendedThr = tryFloat( prefs, keyWalls[2], defWalls[2] ); // DISTOX_WALLS_EXTENDED_THR
-    // mWallsXClose      = tryFloat( prefs, keyWalls[3], defWalls[3] ); // DISTOX_WALLS_XCLOSE
-    // mWallsXStep       = tryFloat( prefs, keyWalls[4], defWalls[4] ); // DISTOX_WALLS_XSTEP
-    // mWallsConcave     = tryFloat( prefs, keyWalls[5], defWalls[5] ); // DISTOX_WALLS_CONCAVE
+    // key = TDPrefKey.mWalls;
+    // mWallsType        = tryInt(   prefs, key[0].key, key[0].dflt ); // DISTOX_WALLS_TYPE choice: 0, 1
+    // mWallsPlanThr     = tryFloat( prefs, key[1].key, key[1].dflt ); // DISTOX_WALLS_PLAN_THR
+    // mWallsExtendedThr = tryFloat( prefs, key[2].key, key[2].dflt ); // DISTOX_WALLS_EXTENDED_THR
+    // mWallsXClose      = tryFloat( prefs, key[3].key, key[3].dflt ); // DISTOX_WALLS_XCLOSE
+    // mWallsXStep       = tryFloat( prefs, key[4].key, key[4].dflt ); // DISTOX_WALLS_XSTEP
+    // mWallsConcave     = tryFloat( prefs, key[5].key, key[5].dflt ); // DISTOX_WALLS_CONCAVE
 
   }
 
@@ -1613,32 +1564,31 @@ public class TDSetting
   private static String updatePrefMain( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
-    String[] key = TDPrefKey.MAIN;
-    String[] def = TDPrefKey.MAINdef;
+    TDPrefKey[] key = TDPrefKey.mMain;
     // TDLog.v("update pref main: " + k );
     // if ( k.equals( key[0] ) ) {// DISTOX_CWD
     //   // handled independently
     //   // TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ), hlp.getString( "DISTOX_CBD", TDPath.getBaseDir() ) );
     //   TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ) /* , TDPath.getCurrentBaseDir() */ );
     // } else 
-    if ( k.equals( key[ 0 ] ) ) {              // DISTOX_TEXT_SIZE
+    if ( k.equals( key[ 0 ].key ) ) {              // DISTOX_TEXT_SIZE
       ret = setTextSize( tryIntValue( hlp, k, v, defaultTextSize ) );
-    } else if ( k.equals( key[ 1 ] ) ) {              // DISTOX_SIZE_BUTTONS (choice)
+    } else if ( k.equals( key[ 1 ].key ) ) {              // DISTOX_SIZE_BUTTONS (choice)
       if ( setSizeButtons( tryIntValue( hlp, k, v, defaultButtonSize ) ) ) {
         TopoDroidApp.resetButtonBar();
       }
-    } else if ( k.equals( key[ 2 ] ) ) {             // DISTOX_SYMBOL_SIZE
+    } else if ( k.equals( key[ 2 ].key ) ) {             // DISTOX_SYMBOL_SIZE
       ret = setSymbolSize( tryFloatValue( hlp, k, v, defaultSymbolSize ) );
-    } else if ( k.equals( key[ 3 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
-      int level = tryIntValue( hlp, k, v, def[3] );
+    } else if ( k.equals( key[ 3 ].key ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
+      int level = tryIntValue( hlp, k, v, key[3].dflt );
       setActivityBooleans( hlp.getSharedPrefs(), level );
-    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
+    } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_LOCAL_MAN (choice)
       // TDLog.v("SETTING handle local man pages - key " + k + " default " + def[6] );
-      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[4] ), true );
-    } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_LOCALE (choice)
-      setLocale( tryStringValue( hlp, k, v, def[5] ), true );
-    } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_ORIENTATION (choice)
-      mOrientation = tryIntValue( hlp, k, v, def[6] );
+      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, key[4].dflt ), true );
+    } else if ( k.equals( key[ 5 ].key ) ) {           // DISTOX_LOCALE (choice)
+      setLocale( tryStringValue( hlp, k, v, key[5].dflt ), true );
+    } else if ( k.equals( key[ 6 ].key ) ) {           // DISTOX_ORIENTATION (choice)
+      mOrientation = tryIntValue( hlp, k, v, key[6].dflt );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
     /* ---- IF_COSURVEY
@@ -1660,35 +1610,34 @@ public class TDSetting
   private static String updatePrefSurvey( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("SETTINGS update pref survey: " + k );
-    String[] key = TDPrefKey.SURVEY;
-    String[] def = TDPrefKey.SURVEYdef;
+    TDPrefKey[] key = TDPrefKey.mSurvey;
     String ret = null;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_TEAM (arbitrary)
-      mDefaultTeam = tryStringValue( hlp, k, v, def[0] );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TEAM_DIALOG (bool)
-      mTeamNames = tryIntValue( hlp, k, v, def[1] ); 
+    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_TEAM (arbitrary)
+      mDefaultTeam = tryStringValue( hlp, k, v, key[0].dflt );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_TEAM_DIALOG (bool)
+      mTeamNames = tryIntValue( hlp, k, v, key[1].dflt ); 
       // TDLog.v("SETTINGS TEAM Names " + mTeamNames );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SURVEY_STATION (choice)
-      parseStationPolicy( hlp, tryStringValue( hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_STATION_NAMES (choice)
-      mStationNames = (tryStringValue( hlp, k, v, def[3]).equals("number"))? 1 : 0;
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_INIT_STATION 
-      mInitStation = tryStringValue( hlp, k, v, def[4] ).replaceAll("\\s+", "");
-      if ( mInitStation.length() == 0 ) mInitStation = def[4];
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_SURVEY_STATION (choice)
+      parseStationPolicy( hlp, tryStringValue( hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_STATION_NAMES (choice)
+      mStationNames = (tryStringValue( hlp, k, v, key[3].dflt).equals("number"))? 1 : 0;
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_INIT_STATION 
+      mInitStation = tryStringValue( hlp, k, v, key[4].dflt ).replaceAll("\\s+", "");
+      if ( mInitStation.length() == 0 ) mInitStation = key[4].dflt;
       DistoXStationName.setInitialStation( mInitStation );
       if ( ! mInitStation.equals( v ) ) { ret = mInitStation; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_THUMBNAIL
-      mThumbSize = tryIntValue( hlp, k, v, def[5] ); 
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_THUMBNAIL
+      mThumbSize = tryIntValue( hlp, k, v, key[5].dflt ); 
       if ( mThumbSize < 80 )       { mThumbSize = 80;  ret = Integer.toString( mThumbSize ); }
       else if ( mThumbSize > 400 ) { mThumbSize = 400; ret = Integer.toString( mThumbSize ); }
     // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_EDITABLE_STATIONS (bool)
-    //   mEditableStations = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
-      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
-      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[7]) );
-    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_DATA_BACKUP (bool)
-    //   mDataBackup = tryBooleanValue( hlp, k, v, bool(def[8]) );
+    //   mEditableStations = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_FIXED_ORIGIN (bool)
+      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SHARED_XSECTIONS (bool)
+      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(key[7].dflt) );
+    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_DATA_BACKUP (bool)
+    //   mDataBackup = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
     } else {
       TDLog.e("missing SURVEY key: " + k );
     }
@@ -1700,37 +1649,36 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref plot: " + k );
-    String[] key = TDPrefKey.PLOT;
-    String[] def = TDPrefKey.PLOTdef;
-    // if ( k.equals( key[ 0 ] ) ) {        // DISTOX_PICKER_TYPE (choice)
-    //   mPickerType = tryIntValue(   hlp, k, v, def[0] );
+    TDPrefKey[] key = TDPrefKey.mPlot;
+    // if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_PICKER_TYPE (choice)
+    //   mPickerType = tryIntValue(   hlp, k, v, key[0].dflt );
     //   if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
-    // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_RECENT_NR (choice)
-    //   mRecentNr = tryIntValue( hlp, k, v, def[1] );
-    // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TRIPLE_TOOLBAR (bool)
-    //   mTripleToolbar = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    // } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_RECENT_NR (choice)
+    //   mRecentNr = tryIntValue( hlp, k, v, key[1].dflt );
+    // } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_TRIPLE_TOOLBAR (bool)
+    //   mTripleToolbar = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
     //   TopoDroidApp.setToolsToolbars();
     // } else 
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SIDE_DRAG (bool)
-      mSideDrag = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_ZOOM_CTRL (choice)
-      // setZoomControls( tryBooleanValue( hlp, k, bool(def[1]) ) );
-      setZoomControls( tryStringValue( hlp, k, v, def[1] ), TDandroid.checkMultitouch( TDInstance.context ) );
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_SIDE_DRAG (bool)
+      mSideDrag = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_ZOOM_CTRL (choice)
+      // setZoomControls( tryBooleanValue( hlp, k, bool(key[1]) ) );
+      setZoomControls( tryStringValue( hlp, k, v, key[1].dflt ), TDandroid.checkMultitouch( TDInstance.context ) );
     // } else if ( k.equals( key[ ? ] ) ) {  // DISTOX_SECTION_STATIONS
-    //   mSectionStations = tryIntValue( hlp, k, v, def[ ] );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_HTHRESHOLD
-      mHThreshold = tryFloatValue( hlp, k, v, def[2] );
+    //   mSectionStations = tryIntValue( hlp, k, v, key[ ].dflt );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_HTHRESHOLD
+      mHThreshold = tryFloatValue( hlp, k, v, key[2].dflt );
       if ( mHThreshold <  0 ) { mHThreshold =  0; ret = TDString.ZERO; }
       if ( mHThreshold > 90 ) { mHThreshold = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_CHECK_ATTACHED (bool)
-      mCheckAttached = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_CHECK_EXTEND (bool)
-      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_TOOLBAR_SIZE
-      mItemButtonSize = tryFloatValue( hlp, k, v, def[5] );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CHECK_ATTACHED (bool)
+      mCheckAttached = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_CHECK_EXTEND (bool)
+      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_TOOLBAR_SIZE
+      mItemButtonSize = tryFloatValue( hlp, k, v, key[5].dflt );
       TopoDroidApp.setToolsToolbarParams();
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_PLOT_CACHE
-      mPlotCache = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_PLOT_CACHE
+      mPlotCache = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
     } else {
       TDLog.e("missing PLOT key: " + k );
     }
@@ -1742,53 +1690,52 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref calib: " + k );
-    String[] key = TDPrefKey.CALIB;
-    String[] def = TDPrefKey.CALIBdef;
-    if ( k.equals( key[ 0 ] ) ) {
-      mGroupBy       = tryIntValue(   hlp, k, v, def[0] );  // DISTOX_GROUP_BY (choice)
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_GROUP_DISTANCE
-      mGroupDistance = tryFloatValue( hlp, k, v, def[1] );
+    TDPrefKey[] key = TDPrefKey.mCalib;
+    if ( k.equals( key[ 0 ].key ) ) {
+      mGroupBy       = tryIntValue(   hlp, k, v, key[0].dflt );  // DISTOX_GROUP_BY (choice)
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_GROUP_DISTANCE
+      mGroupDistance = tryFloatValue( hlp, k, v, key[1].dflt );
       if ( mGroupDistance < 0 ) { mGroupDistance = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_CALIB_EPS
-      mCalibEps      = tryFloatValue( hlp, k, v, def[2] );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_CALIB_EPS
+      mCalibEps      = tryFloatValue( hlp, k, v, key[2].dflt );
       if ( mCalibEps < 0.000001f ) { mCalibEps = 0.000001f; ret = "0.000001"; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_CALIB_MAX_IT
-      mCalibMaxIt    = tryIntValue(   hlp, k, v, def[3] );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CALIB_MAX_IT
+      mCalibMaxIt    = tryIntValue(   hlp, k, v, key[3].dflt );
       if ( mCalibMaxIt < 10 ) { mCalibMaxIt = 10; ret = TDString.TEN; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_CALIB_SHOT_DOWNLOAD (bool)
-      mCalibShotDownload = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_RAW_CDATA
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_CALIB_SHOT_DOWNLOAD (bool)
+      mCalibShotDownload = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_RAW_CDATA
       // mRawData       = tryBooleanValue( hlp, k, v, false );  // DISTOX_RAW_DATA (choice)
-      mRawCData      = tryIntValue( hlp, k, v, def[5] ); 
-    // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CALIB_ALGO (choice)
-    //   mCalibAlgo     = tryIntValue( hlp, k, v, def[6] );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_ALGO_MIN_ALPHA
-      mAlgoMinAlpha   = tryFloatValue( hlp, k, v, def[7] );
+      mRawCData      = tryIntValue( hlp, k, v, key[5].dflt ); 
+    // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_CALIB_ALGO (choice)
+    //   mCalibAlgo     = tryIntValue( hlp, k, v, key[6].dflt );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_ALGO_MIN_ALPHA
+      mAlgoMinAlpha   = tryFloatValue( hlp, k, v, key[7].dflt );
       if ( mAlgoMinAlpha < 0 ) { mAlgoMinAlpha = 0; ret = TDString.ZERO; }
       if ( mAlgoMinAlpha > 1 ) { mAlgoMinAlpha = 1; ret = TDString.ONE; }
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_ALGO_MIN_BETA
-      mAlgoMinBeta    = tryFloatValue( hlp, k, v, def[8] );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_ALGO_MIN_BETA
+      mAlgoMinBeta    = tryFloatValue( hlp, k, v, key[8].dflt );
       if ( mAlgoMinBeta  < 0 ) { mAlgoMinBeta  = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ALGO_MIN_GAMMA
-      mAlgoMinGamma   = tryFloatValue( hlp, k, v, def[9] );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_ALGO_MIN_GAMMA
+      mAlgoMinGamma   = tryFloatValue( hlp, k, v, key[9].dflt );
       if ( mAlgoMinGamma < 0 ) { mAlgoMinGamma = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_ALGO_MIN_DELTA
-      mAlgoMinDelta   = tryFloatValue( hlp, k, v, def[10] ); 
+    } else if ( k.equals( key[ 10 ].key ) ) { // DISTOX_ALGO_MIN_DELTA
+      mAlgoMinDelta   = tryFloatValue( hlp, k, v, key[10].dflt ); 
       if ( mAlgoMinDelta < -10 ) { mAlgoMinDelta = -10; ret = "-10"; }
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_AUTO_CAL_BETA
-      mAutoCalBeta   = tryFloatValue( hlp, k, v, def[11] ); 
+    } else if ( k.equals( key[ 11 ].key ) ) { // DISTOX_AUTO_CAL_BETA
+      mAutoCalBeta   = tryFloatValue( hlp, k, v, key[11].dflt ); 
       if ( mAutoCalBeta < 0.001f ) { mAutoCalBeta = 0.001f; ret = "0.001"; }
       if ( mAutoCalBeta > 0.999f ) { mAutoCalBeta = 0.999f; ret = "0.999"; }
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_AUTO_CAL_ETA
-      mAutoCalEta   = tryFloatValue( hlp, k, v, def[12] ); 
+    } else if ( k.equals( key[ 12 ].key ) ) { // DISTOX_AUTO_CAL_ETA
+      mAutoCalEta   = tryFloatValue( hlp, k, v, key[12].dflt ); 
       if ( mAutoCalEta < 0.01f ) { mAutoCalEta = 0.01f; ret = "0.01"; }
       if ( mAutoCalEta > 0.99f ) { mAutoCalEta = 0.99f; ret = "0.99"; }
-    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_AUTO_CAL_GAMMA
-      mAutoCalGamma   = tryFloatValue( hlp, k, v, def[13] ); 
+    } else if ( k.equals( key[ 13 ].key ) ) { // DISTOX_AUTO_CAL_GAMMA
+      mAutoCalGamma   = tryFloatValue( hlp, k, v, key[13].dflt ); 
       if ( mAutoCalGamma < 0.01f ) { mAutoCalGamma = 0.01f; ret = "0.01"; }
       if ( mAutoCalGamma > 0.99f ) { mAutoCalGamma = 0.99f; ret = "0.99"; }
-    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_AUTO_CAL_DELTA
-      mAutoCalDelta   = tryFloatValue( hlp, k, v, def[14] ); 
+    } else if ( k.equals( key[ 14 ].key ) ) { // DISTOX_AUTO_CAL_DELTA
+      mAutoCalDelta   = tryFloatValue( hlp, k, v, key[14].dflt ); 
       if ( mAutoCalDelta < 0.01f ) { mAutoCalDelta = 0.01f; ret = "0.01"; }
       if ( mAutoCalDelta > 0.99f ) { mAutoCalDelta = 0.99f; ret = "0.99"; }
     } else {
@@ -1801,27 +1748,26 @@ public class TDSetting
   private static String updatePrefDevice( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
-    String[] key = TDPrefKey.DEVICE;
-    String[] def = TDPrefKey.DEVICEdef;
+    TDPrefKey[] key = TDPrefKey.mDevice;
     // DISTOX_DEVICE, unused here
     // DISTOX_DEVICE_TYPE, unused here
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_BLUETOOTH (choice)
-      mCheckBT  = tryIntValue( hlp, k, v, def[0] ); 
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_CONN_MODE (choice)
-      mConnectionMode = tryIntValue( hlp, k, v, def[1] ); 
-    // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_RECONNECT (bool)
-    //   mAutoReconnect = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_HEAD_TAIL (bool)
-      mHeadTail = tryBooleanValue( hlp, k, v, bool(def[2]) ); 
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SOCKET_TYPE (choice)
-      mSockType = tryIntValue( hlp, k, v, def[3] ); // mDefaultSockStrType ); 
-    // } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_Z6_WORKAROUND (bool)
-    //   mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_PAIR (bool)
-      mAutoPair = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_BLUETOOTH (choice)
+      mCheckBT  = tryIntValue( hlp, k, v, key[0].dflt ); 
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_CONN_MODE (choice)
+      mConnectionMode = tryIntValue( hlp, k, v, key[1].dflt ); 
+    // } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_AUTO_RECONNECT (bool)
+    //   mAutoReconnect = tryBooleanValue( hlp, k, v, bool(key[2]) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_HEAD_TAIL (bool)
+      mHeadTail = tryBooleanValue( hlp, k, v, bool(key[2].dflt) ); 
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SOCKET_TYPE (choice)
+      mSockType = tryIntValue( hlp, k, v, key[3].dflt ); // mDefaultSockStrType ); 
+    // } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_Z6_WORKAROUND (bool)
+    //   mZ6Workaround = tryBooleanValue( hlp, k, v, bool(key[4]) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_AUTO_PAIR (bool)
+      mAutoPair = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
       TopoDroidApp.checkAutoPairing();
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_CONNECT_FEEDBACK
-      mConnectFeedback = tryIntValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_CONNECT_FEEDBACK
+      mConnectFeedback = tryIntValue( hlp, k, v, key[6].dflt );
     } else {
       TDLog.e("missing DEVICE key: " + k );
     }
@@ -1834,31 +1780,30 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref cave3d: " + k );
-    String[] key = TDPrefKey.CAVE3D;
-    String[] def = TDPrefKey.CAVE3Ddef;
-    if ( k.equals( key[0] ) ) {  // CAVE3D_NEG_CLINO
-      boolean b = tryBooleanValue( hlp, k, v, bool(def[0]) ); 
+    TDPrefKey[] key = TDPrefKey.mCave3D;
+    if ( k.equals( key[0].key ) ) {  // CAVE3D_NEG_CLINO
+      boolean b = tryBooleanValue( hlp, k, v, bool(key[0].dflt) ); 
       GlRenderer.mMinClino = b ? 90 : 0;
-    } else if ( k.equals( key[1] ) ) { // CAVE3D_STATION_POINTS
-      GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[2] ) ) { // CAVE3D_STATION_POINT_SIZE def=8
-      GlNames.setPointSize( tryIntValue( hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[3] ) ) { // CAVE3D_STATION_TEXT_SIZE def=20
-      GlNames.setTextSize( tryIntValue( hlp, k, v, def[3] ) );
-    } else if ( k.equals( key[4] ) ) { // CAVE3D_SELECTION_RADIUS
-      float radius = tryFloatValue( hlp, k, v, def[4] );
+    } else if ( k.equals( key[1].key ) ) { // CAVE3D_STATION_POINTS
+      GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
+    } else if ( k.equals( key[2].key ) ) { // CAVE3D_STATION_POINT_SIZE def=8
+      GlNames.setPointSize( tryIntValue( hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[3].key ) ) { // CAVE3D_STATION_TEXT_SIZE def=20
+      GlNames.setTextSize( tryIntValue( hlp, k, v, key[3].dflt ) );
+    } else if ( k.equals( key[4].key ) ) { // CAVE3D_SELECTION_RADIUS
+      float radius = tryFloatValue( hlp, k, v, key[4].dflt );
       if ( radius > 10.0f ) TopoGL.mSelectionRadius = radius;
-    } else if ( k.equals( key[5] ) ) { // CAVE3D_MEASURE_DIALOG
-      TopoGL.mMeasureToast = tryBooleanValue( hlp, k, v, bool(def[5]) ); 
-    } else if ( k.equals( key[6] ) ) { // CAVE3D_STATION_TOAST
-      TopoGL.mStationDialog = tryBooleanValue( hlp, k, v, bool(def[6]) ); 
-    } else if ( k.equals( key[7] ) ) { // CAVE3D_GRID_ABOVE
-      GlModel.mGridAbove = tryBooleanValue( hlp, k, v, bool(def[7]) ); 
-    } else if ( k.equals( key[8] ) ) { // CAVE3D_GRID_EXTENT
-      int extent = tryIntValue( hlp, k, v, def[8] ); 
+    } else if ( k.equals( key[5].key ) ) { // CAVE3D_MEASURE_DIALOG
+      TopoGL.mMeasureToast = tryBooleanValue( hlp, k, v, bool(key[5].dflt) ); 
+    } else if ( k.equals( key[6].key ) ) { // CAVE3D_STATION_TOAST
+      TopoGL.mStationDialog = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); 
+    } else if ( k.equals( key[7].key ) ) { // CAVE3D_GRID_ABOVE
+      GlModel.mGridAbove = tryBooleanValue( hlp, k, v, bool(key[7].dflt) ); 
+    } else if ( k.equals( key[8].key ) ) { // CAVE3D_GRID_EXTENT
+      int extent = tryIntValue( hlp, k, v, key[8].dflt ); 
       if ( extent > 1 && extent < 100 ) GlModel.mGridExtent = extent;
-    } else if ( k.equals( key[9] ) ) { // CAVE3D_NAMES_VISIBILITY
-      GlNames.mNamesVisible = tryBooleanValue( hlp, k, v, bool(def[9]) ); 
+    } else if ( k.equals( key[9].key ) ) { // CAVE3D_NAMES_VISIBILITY
+      GlNames.mNamesVisible = tryBooleanValue( hlp, k, v, bool(key[9].dflt) ); 
     } else {
       TDLog.e("missing Cave3D key: " + k );
     }
@@ -1869,22 +1814,20 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref dem3d: " + k );
-    String[] key = TDPrefKey.DEM3D;
-    String[] def = TDPrefKey.DEM3Ddef;
-
-    if ( k.equals( key[0] ) ) { 
-      float buffer = tryFloatValue( hlp, k, v, def[0] );
+    TDPrefKey[] key = TDPrefKey.mDem3D;
+    if ( k.equals( key[0].key ) ) { 
+      float buffer = tryFloatValue( hlp, k, v, key[0].dflt );
       if ( buffer >= 0 )  TopoGL.mDEMbuffer = buffer;
-    } else if ( k.equals( key[1] ) ) { 
-      int size = tryIntValue( hlp, k, v, def[1] ); 
+    } else if ( k.equals( key[1].key ) ) { 
+      int size = tryIntValue( hlp, k, v, key[1].dflt ); 
       if ( size >= 50 )  TopoGL.mDEMmaxsize = size;
-    } else if ( k.equals( key[2] ) ) { 
-      int reduce = tryIntValue( hlp, k, v, def[2] ); 
+    } else if ( k.equals( key[2].key ) ) { 
+      int reduce = tryIntValue( hlp, k, v, key[2].dflt ); 
       if ( reduce == 1 ) TopoGL.mDEMreduce = TopoGL.DEM_SHRINK;
       else               TopoGL.mDEMreduce = TopoGL.DEM_CUT;
-    } else if ( k.equals( key[3] ) ) {
+    } else if ( k.equals( key[3].key ) ) {
       if ( v == null || v.isEmpty() ) {
-        TopoGL.mTextureRoot = def[3];
+        TopoGL.mTextureRoot = key[3].dflt;
       } else {
         TopoGL.mTextureRoot = v;
       }
@@ -1899,36 +1842,35 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref walls3d: " + k );
-    String[] key = TDPrefKey.WALLS3D;
-    String[] def = TDPrefKey.WALLS3Ddef;
-    if ( k.equals( key[0] ) ) { // CAVE3D_SPLAY_USE
-      TglParser.mSplayUse = tryIntValue( hlp, k, v, def[0] ); 
-    } else if ( k.equals( key[1] ) ) { // CAVE3D_ALL_SPLAY
-      GlModel.mAllSplay = tryBooleanValue( hlp, k, v, bool(def[1]) ); 
-    } else if ( k.equals( key[2] ) ) { // CAVE3D_SPLAY_PROJ
-      TopoGL.mSplayProj = tryBooleanValue( hlp, k, v, bool(def[2]) ); 
-    } else if ( k.equals( key[3] ) ) { // CAVE3D_SPLAY_THR
-      TopoGL.mSplayThr = tryFloatValue( hlp, k, v, def[3] );
-    } else if ( k.equals( key[4] ) ) {  // CAVE3D_SPLIT_TRIANGLES
-      GlModel.mSplitTriangles = tryBooleanValue( hlp, k, v, bool(def[4]) ); 
-    } else if ( k.equals( key[5] ) ) {  // CAVE3D_SPLIT_RANDOM
-      float r = tryFloatValue( hlp, k, v, def[5] );
+    TDPrefKey[] key = TDPrefKey.mWalls3D;
+    if ( k.equals( key[0].key ) ) { // CAVE3D_SPLAY_USE
+      TglParser.mSplayUse = tryIntValue( hlp, k, v, key[0].dflt ); 
+    } else if ( k.equals( key[1].key ) ) { // CAVE3D_ALL_SPLAY
+      GlModel.mAllSplay = tryBooleanValue( hlp, k, v, bool(key[1].dflt) ); 
+    } else if ( k.equals( key[2].key ) ) { // CAVE3D_SPLAY_PROJ
+      TopoGL.mSplayProj = tryBooleanValue( hlp, k, v, bool(key[2].dflt) ); 
+    } else if ( k.equals( key[3].key ) ) { // CAVE3D_SPLAY_THR
+      TopoGL.mSplayThr = tryFloatValue( hlp, k, v, key[3].dflt );
+    } else if ( k.equals( key[4].key ) ) {  // CAVE3D_SPLIT_TRIANGLES
+      GlModel.mSplitTriangles = tryBooleanValue( hlp, k, v, bool(key[4].dflt) ); 
+    } else if ( k.equals( key[5].key ) ) {  // CAVE3D_SPLIT_RANDOM
+      float r = tryFloatValue( hlp, k, v, key[5].dflt );
       if ( r > 0.0001f ) {
         GlModel.mSplitRandomizeDelta = r;
         GlModel.mSplitRandomize = true;
       } else {
         GlModel.mSplitRandomize = false;
       }
-    } else if ( k.equals( key[6] ) ) { // CAVE3D_SPLIT_STRETCH
-      float r = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[6].key ) ) { // CAVE3D_SPLIT_STRETCH
+      float r = tryFloatValue( hlp, k, v, key[6].dflt );
       if ( r > 0.0001f ) {
         GlModel.mSplitStretchDelta = r;
         GlModel.mSplitStretch = true;
       } else {
         GlModel.mSplitStretch = false;
       }
-    } else if ( k.equals( key[7] ) ) { // CAVE3D_POWERCRUST_DELTA 
-      float delta = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[7].key ) ) { // CAVE3D_POWERCRUST_DELTA 
+      float delta = tryFloatValue( hlp, k, v, key[7].dflt );
       if ( delta > 0 ) GlModel.mPowercrustDelta = delta;
     } else {
       TDLog.e("missing Walls-3D key: " + k );
@@ -1941,29 +1883,28 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref data: " + k );
-    String[] key = TDPrefKey.GEEK;
-    String[] def = TDPrefKey.GEEKdef;
-    if ( k.equals( key[0] ) ) {
-      mSingleBack = tryBooleanValue( hlp, k, v, bool(def[0]) ); // DISTOX_SINGLE_BACK
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_HIDE_NAVBAR
-      setHideNavBar( tryBooleanValue( hlp, k, v, bool(def[1]) ) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_PALETTES
-      setPalettes( tryBooleanValue( hlp, k, v, bool(def[1]) ) );
+    TDPrefKey[] key = TDPrefKey.mGeek;
+    if ( k.equals( key[0].key ) ) {
+      mSingleBack = tryBooleanValue( hlp, k, v, bool(key[0].dflt) ); // DISTOX_SINGLE_BACK
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_HIDE_NAVBA
+      setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[1].dflt) ) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_PALETTES
+      setPalettes( tryBooleanValue( hlp, k, v, bool(key[1].dflt) ) );
     // } else if ( k.equals( key[1] ) ) { // CLEAR_BACKUPS
-    //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
-    } else if ( k.equals( key[ 3 ] ) ) {           // DISTOX_MKEYBOARD (bool)
-      mKeyboard = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_NO_CURSOR(bool)
-      mNoCursor = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) {
-      mBulkExport = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 5 ] ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[6]) ); // DISTOX_PACKET_LOGGER
-    } else if ( k.equals( key[ 7 ] ) ) {
-      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[7]) ); // DISTOX_TH2_EDIT
+    //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(key[1].dflt) ) ); // DISTOX_BACKUPS_CLEAR
+    } else if ( k.equals( key[ 3 ].key ) ) {           // DISTOX_MKEYBOARD (bool)
+      mKeyboard = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_NO_CURSOR(bool)
+      mNoCursor = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) {
+      mBulkExport = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) {
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); // DISTOX_PACKET_LOGGER
+    } else if ( k.equals( key[ 7 ].key ) ) {
+      mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( TDLevel.isDebugBuild() && k.equals( key[15] ) ) {
-      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[15]) ); // DISTOX_WITH_DEBUG
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[15].key ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[15].dflt) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.e("missing GEEK key: " + k );
@@ -1976,53 +1917,52 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref data: " + k );
-    String[] key = TDPrefKey.GEEKSHOT;
-    String[] def = TDPrefKey.GEEKSHOTdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_DIVING_MODE
-      mDivingMode   = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TAMPERING
-      mEditableShots = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_BACKSIGHT_SPLAY
-      mBacksightSplay = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_RECENT_SHOT
-      mShotRecent   = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_RECENT_TIMEOUT
-      mRecentTimeout = tryIntValue( hlp, k, v, def[4] );
+    TDPrefKey[] key = TDPrefKey.mGeekShot;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_DIVING_MODE
+      mDivingMode   = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_TAMPERING
+      mEditableShots = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_BACKSIGHT_SPLAY
+      mBacksightSplay = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_RECENT_SHOT
+      mShotRecent   = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_RECENT_TIMEOUT
+      mRecentTimeout = tryIntValue( hlp, k, v, key[4].dflt );
       if ( mRecentTimeout < 0 ) { mRecentTimeout = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_EXTEND_FRAC
-      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_BACKSHOT (bool)
-      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BEDDING
-      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
-      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
-      setLoopClosure( tryIntValue( hlp, k, v, def[ 9] ) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_LOOP_THR
-      mLoopThr = tryFloatValue( hlp, k, v, def[10] );
-    } else if ( k.equals( key[11 ] ) ) { // DISTOX_ANDROID_AZIMUTH
-      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[11]) );
-    } else if ( k.equals( key[12  ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_EXTEND_FRAC
+      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(key[ 5].dflt) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_BACKSHOT (bool)
+      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_BEDDING
+      mBedding      = tryBooleanValue( hlp, k, v, bool(key[ 7].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_SENSORS
+      mWithSensors  = tryBooleanValue( hlp, k, v, bool(key[ 8].dflt) );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryIntValue( hlp, k, v, key[ 9].dflt ) );
+    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_LOOP_THR
+      mLoopThr = tryFloatValue( hlp, k, v, key[10].dflt );
+    } else if ( k.equals( key[11 ].key ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(key[11].dflt) );
+    } else if ( k.equals( key[12  ].key ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, key[12].dflt );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      ret = setBeepVolume( tryIntValue( hlp, k, v, def[13] ) );
-    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_BLUNDER_SHOT
-      mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[14]) );
-    } else if ( k.equals( key[ 15 ] ) ) { // DISTOX_SPLAY_STATION 
-      mSplayStation = tryBooleanValue( hlp, k, v, bool(def[15]) );
-    } else if ( k.equals( key[ 16 ] ) ) { // DISTOX_SPLAY_GROUP
-      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(def[16]) );
-    // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
-    //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    } else if ( k.equals( key[ 13 ].key ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      ret = setBeepVolume( tryIntValue( hlp, k, v, key[13].dflt ) );
+    } else if ( k.equals( key[ 14 ].key ) ) { // DISTOX_BLUNDER_SHOT
+      mBlunderShot = tryBooleanValue( hlp, k, v, bool(key[14].dflt) );
+    } else if ( k.equals( key[ 15 ].key ) ) { // DISTOX_SPLAY_STATION 
+      mSplayStation = tryBooleanValue( hlp, k, v, bool(key[15].dflt) );
+    } else if ( k.equals( key[ 16 ].key ) ) { // DISTOX_SPLAY_GROUP
+      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(key[16].dflt) );
+    // } else if ( k.equals( key[13 ].key ) ) { // DISTOX_TDMANAGER
+    //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(key[13].dflt) );
 
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_DIST_TOLERANCE
-    //   mDistTolerance = tryFloatValue( hlp, k, v, def[ 9]  );
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SPLAY_ACTIVE
-    //   mSplayActive  = prefs.getBoolean( key[ 9],  bool(def[ 9]) );
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_WITH_RENAME
-    //   mWithRename   = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
+    // } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_DIST_TOLERANCE
+    //   mDistTolerance = tryFloatValue( hlp, k, v, key[ 9].dflt  );
+    // } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_SPLAY_ACTIVE
+    //   mSplayActive  = prefs.getBoolean( key[ 9],  bool(key[ 9].dflt) );
+    // } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_WITH_RENAME
+    //   mWithRename   = tryBooleanValue( hlp, k, v, bool(key[ 9].dflt) );
     } else {
       TDLog.e("missing GEEK_SHOT key: " + k );
     }
@@ -2042,44 +1982,43 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref data: " + k );
-    String[] key = TDPrefKey.GEEKPLOT;
-    String[] def = TDPrefKey.GEEKPLOTdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_PLOT_SHIFT
-      mPlotShift    = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PLOT_SPLIT
-      mPlotSplit = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_STYLUS_SIZE
-      setStylusSize( tryFloatValue( hlp, k, v, def[ 2] ) ); // STYLUS_MM - LINE ENDS
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_BACKUP_NUMBER
-      mBackupNumber  = tryIntValue( hlp, k, v, def[ 3 ] ); 
+    TDPrefKey[] key = TDPrefKey.mGeekPlot;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_PLOT_SHIFT
+      mPlotShift    = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_PLOT_SPLIT
+      mPlotSplit = tryBooleanValue( hlp, k, v, bool(key[ 1 ].dflt) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_STYLUS_SIZE
+      setStylusSize( tryFloatValue( hlp, k, v, key[ 2].dflt ) ); // STYLUS_MM - LINE ENDS
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_BACKUP_NUMBER
+      mBackupNumber  = tryIntValue( hlp, k, v, key[ 3 ].dflt ); 
       if ( mBackupNumber <  4 ) { mBackupNumber =  4; ret = Integer.toString( mBackupNumber ); }
       else if ( mBackupNumber > 10 ) { mBackupNumber = 10; ret = Integer.toString( mBackupNumber ); }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BACKUP_INTERVAL
-      mBackupInterval = tryIntValue( hlp, k, v, def[ 4 ] );  
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_BACKUP_INTERVAL
+      mBackupInterval = tryIntValue( hlp, k, v, key[ 4 ].dflt );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
       else if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
-    // } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_XSECTIONS
-    //   mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SAVED_STATIONS
-      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LEGONLY_UPDATE
-      mLegOnlyUpdate = tryBooleanValue( hlp, k, v, bool(def[ 6 ]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_FULL_AFFINE
-      mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[ 7 ]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_LEVELS
-      mWithLevels    = tryIntValue( hlp, k, v, def[ 8 ] );
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_GRAPH_PAPER_SCALE - handled by a dialog
-    //   mGraphPaperScale = tryIntValue( hlp, k, v, def[ 9 ] );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SLANT_XSECTION
-      mSlantXSection = tryBooleanValue( hlp, k, v, bool(def[10 ]) );
-    } else if ( k.equals( key[11 ] ) ) { // DISTOX_OBLIQUE_PROJECTED
-      mObliqueMax = tryIntValue( hlp, k, v, def[ 11 ] );
+    // } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AUTO_XSECTIONS
+    //   mAutoXSections = tryBooleanValue( hlp, k, v, bool(key[ 5 ].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_SAVED_STATIONS
+      mSavedStations = tryBooleanValue( hlp, k, v, bool(key[ 5 ].dflt) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LEGONLY_UPDATE
+      mLegOnlyUpdate = tryBooleanValue( hlp, k, v, bool(key[ 6 ].dflt) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_FULL_AFFINE
+      mFullAffine    = tryBooleanValue( hlp, k, v, bool(key[ 7 ].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_LEVELS
+      mWithLevels    = tryIntValue( hlp, k, v, key[ 8 ].dflt );
+    // } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_GRAPH_PAPER_SCALE - handled by a dialog
+    //   mGraphPaperScale = tryIntValue( hlp, k, v, key[ 9 ].dflt );
+    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_SLANT_XSECTION
+      mSlantXSection = tryBooleanValue( hlp, k, v, bool(key[10 ].dflt) );
+    } else if ( k.equals( key[11 ].key ) ) { // DISTOX_OBLIQUE_PROJECTED
+      mObliqueMax = tryIntValue( hlp, k, v, key[ 11 ].dflt );
       if ( mObliqueMax < 10 )  { mObliqueMax = 0; ret = Integer.toString( mObliqueMax ); }
       else if ( mObliqueMax > 80 ) { mObliqueMax = 80; ret = Integer.toString( mObliqueMax ); }
-    } else if ( k.equals( key[12 ] ) ) { // DISTOX_LINE_ENDS
-      mLineEnds = tryIntValue( hlp, k, v, def[12 ] );
+    } else if ( k.equals( key[12 ].key ) ) { // DISTOX_LINE_ENDS
+      mLineEnds = tryIntValue( hlp, k, v, key[12 ].dflt );
     // } else if ( k.equals( key[13 ] ) ) {  // DISTOX_ZOOM_LOWER_BOUND
-    //   mZoomLowerBound = tryFloatValue( hlp, k, v, def[13] );  // DISTOX_ZOOM_LOWER_BOUND
+    //   mZoomLowerBound = tryFloatValue( hlp, k, v, key[13] );  // DISTOX_ZOOM_LOWER_BOUND
     //   if ( mZoomLowerBound < 0.0f ) mZoomLowerBound = 0.0f;
     } else {
       TDLog.e("missing GEEK_PLOT key: " + k );
@@ -2092,44 +2031,43 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref data: " + k );
-    String[] key = TDPrefKey.GEEKSPLAY;
-    String[] def = TDPrefKey.GEEKSPLAYdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SPLAY_CLASSES
-      mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DISCRETE_COLORS was DISTOX_SPLAY_COLOR
-      // mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
-      mDiscreteColors = tryIntValue( hlp, k, v, def[ 1] );
+    TDPrefKey[] key = TDPrefKey.mGeekSplay;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_SPLAY_CLASSES
+      mSplayClasses = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_DISCRETE_COLORS was DISTOX_SPLAY_COLOR
+      // mSplayColor   = tryBooleanValue( hlp, k, v, bool(key[ 1]) );
+      mDiscreteColors = tryIntValue( hlp, k, v, key[ 1].dflt );
       mSplayColor = (mDiscreteColors > 0);
-    // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_AS_DOT
-    //   mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_VERT_THRS
-      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 2] );
+    // } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_SPLAY_AS_DOT
+    //   mSplayAsDot = tryBooleanValue( hlp, k, v, bool(key[ 2]) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_SPLAY_VERT_THRS
+      mSplayVertThrs = tryFloatValue( hlp, k, v, key[ 2].dflt );
       if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
       if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
-      mDashSplay = tryIntValue( hlp, k, v, def[ 3] );      
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_VERT_SPLAY
-      mVertSplay   = tryFloatValue( hlp, k, v, def[ 4] );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SPLAY_DASH (0,1,2)
+      mDashSplay = tryIntValue( hlp, k, v, key[ 3].dflt );      
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_VERT_SPLAY
+      mVertSplay   = tryFloatValue( hlp, k, v, key[ 4].dflt );
       if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
       if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_HORIZ_SPLAY
-      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_HORIZ_SPLAY
+      mHorizSplay  = tryFloatValue( hlp, k, v, key[ 5].dflt );
       if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
       if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
       mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SECTION_SPLAY
-      mSectionSplay = tryFloatValue( hlp, k, v, def[ 6] );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_SECTION_SPLAY
+      mSectionSplay = tryFloatValue( hlp, k, v, key[ 6].dflt );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
       mCosSectionSplay  = TDMath.cosd( mSectionSplay );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_DASH_COLOR
-      mSplayDashColor = tryColorValue( hlp, k, v, def[ 7] ); 
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SPLAY_DASH_COLOR
+      mSplayDashColor = tryColorValue( hlp, k, v, key[ 7].dflt ); 
       BrushManager.setSplayDashColor( mSplayDashColor );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SPLAY_DOT_COLOR
-      mSplayDotColor = tryColorValue( hlp, k, v, def[ 8] ); 
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_SPLAY_DOT_COLOR
+      mSplayDotColor = tryColorValue( hlp, k, v, key[ 8].dflt ); 
       BrushManager.setSplayDotColor( mSplayDotColor );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SPLAY_LATEST_COLOR
-      mSplayLatestColor = tryColorValue( hlp, k, v, def[ 9] ); 
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_SPLAY_LATEST_COLOR
+      mSplayLatestColor = tryColorValue( hlp, k, v, key[ 9].dflt ); 
       BrushManager.setSplayLatestColor( mSplayLatestColor );
     } else {
       TDLog.e("missing GEEK_SPLAY key: " + k );
@@ -2141,43 +2079,42 @@ public class TDSetting
   private static String updatePrefGeekDevice( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
-    String[] key = TDPrefKey.GEEKDEVICE;
-    String[] def = TDPrefKey.GEEKDEVICEdef;
+    TDPrefKey[] key = TDPrefKey.mGeekDevice;
     int j = 0;
-    if ( k.equals( key[ ++j ] ) ) { // DISTOX_UNNAMED_DEVICE 
-      mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(def[j]) ); // BT_NONAME
-    } else if ( k.equals( key[ ++j ] ) ) { // DISTOX_SOCKET_DELAY index 1
-      mConnectSocketDelay = tryIntValue( hlp, k, v, def[j] );  
+    if ( k.equals( key[ ++j ].key ) ) { // DISTOX_UNNAMED_DEVICE 
+      mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(key[j].dflt) ); // BT_NONAME
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_SOCKET_DELAY index 1
+      mConnectSocketDelay = tryIntValue( hlp, k, v, key[j].dflt );  
       if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
       if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = TDString.SIXTY; } // was 100
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_SECOND_DISTOX (bool)
-      mSecondDistoX = tryBooleanValue( hlp, k, v, bool(def[j]) );
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_DATA
-      mWaitData = tryIntValue( hlp, k, v, def[j] ); 
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_SECOND_DISTOX (bool)
+      mSecondDistoX = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_WAIT_DATA
+      mWaitData = tryIntValue( hlp, k, v, key[j].dflt ); 
       if ( mWaitData <    0 ) { mWaitData =    0; ret = Integer.toString( mWaitData ); }
       if ( mWaitData > 2000 ) { mWaitData = 2000; ret = Integer.toString( mWaitData ); }
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_CONN
-      mWaitConn = tryIntValue( hlp, k, v, def[j] );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_WAIT_CONN
+      mWaitConn = tryIntValue( hlp, k, v, key[j].dflt );
       if ( mWaitConn <   50 ) { mWaitConn =   50; ret = Integer.toString( mWaitConn ); }
       if ( mWaitConn > 2000 ) { mWaitConn = 2000; ret = Integer.toString( mWaitConn ); }
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_LASER
-      mWaitLaser = tryIntValue( hlp, k, v, def[j] );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_WAIT_LASER
+      mWaitLaser = tryIntValue( hlp, k, v, key[j].dflt );
       if ( mWaitLaser <  500 ) { mWaitLaser =  500; ret = Integer.toString( mWaitLaser ); }
       if ( mWaitLaser > 5000 ) { mWaitLaser = 5000; ret = Integer.toString( mWaitLaser ); }
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_SHOT
-      mWaitShot  = tryIntValue( hlp, k, v, def[j] );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_WAIT_SHOT
+      mWaitShot  = tryIntValue( hlp, k, v, key[j].dflt );
       if ( mWaitShot <   500 ) { mWaitShot =   500; ret = Integer.toString( mWaitShot ); }
       if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_FIRMWARE_SANITY
-      mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(def[j]) );
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_BRIC_MODE
-      mBricMode = tryIntValue( hlp, k, v, def[j] );
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_BRIC_ZERO_LENGTH
-      mBricZeroLength = tryBooleanValue( hlp, k, v, bool(def[j]) );
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_BRIC_INDEX_IS_ID
-      mBricIndexIsId = tryBooleanValue( hlp, k, v, bool(def[j]) );
-    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_SAP5_BIT16_BUG
-      mSap5Bit16Bug = tryBooleanValue( hlp, k, v, bool(def[j]) );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_FIRMWARE_SANITY
+      mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_BRIC_MODE
+      mBricMode = tryIntValue( hlp, k, v, key[j].dflt );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_BRIC_ZERO_LENGTH
+      mBricZeroLength = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_BRIC_INDEX_IS_ID
+      mBricIndexIsId = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_SAP5_BIT16_BUG
+      mSap5Bit16Bug = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
     } else {
       TDLog.e("missing DEVICE key: " + k );
     }
@@ -2188,30 +2125,29 @@ public class TDSetting
   private static String updatePrefGeekLine( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
-    String[] key = TDPrefKey.GEEKLINE;
-    String[] def = TDPrefKey.GEEKLINEdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_REDUCE_ANGLE
-      ret = setReduceAngle( tryFloatValue(  hlp, k, v, def[0] ) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_LINE_ACCURACY
-      ret = setLineAccuracy( tryFloatValue( hlp, k, v, def[1] ) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LINE_CORNER
-      ret = setLineCorner( tryFloatValue(   hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WEED_DISTANCE
-      ret = setWeedDistance( tryFloatValue(   hlp, k, v, def[3] ) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WEED_LENGTH
-      ret = setWeedLength( tryFloatValue(   hlp, k, v, def[4] ) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WEED_BUFFER
-      ret = setWeedBuffer( tryFloatValue(   hlp, k, v, def[5] ) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_SNAP (bool)
-      mLineSnap = tryBooleanValue(          hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LINE_CURVE (bool)
-      mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LINE_STRAIGHT
-      mLineStraight = tryBooleanValue(      hlp, k, v, bool(def[8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
-      mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(def[9]) );
+    TDPrefKey[] key = TDPrefKey.mGeekLine;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_REDUCE_ANGLE
+      ret = setReduceAngle( tryFloatValue(  hlp, k, v, key[0].dflt ) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_LINE_ACCURACY
+      ret = setLineAccuracy( tryFloatValue( hlp, k, v, key[1].dflt ) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LINE_CORNER
+      ret = setLineCorner( tryFloatValue(   hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_WEED_DISTANCE
+      ret = setWeedDistance( tryFloatValue(   hlp, k, v, key[3].dflt ) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_WEED_LENGTH
+      ret = setWeedLength( tryFloatValue(   hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_WEED_BUFFER
+      ret = setWeedBuffer( tryFloatValue(   hlp, k, v, key[5].dflt ) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_SNAP (bool)
+      mLineSnap = tryBooleanValue(          hlp, k, v, bool(key[6].dflt) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_LINE_CURVE (bool)
+      mLineCurve = tryBooleanValue(         hlp, k, v, bool(key[7].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_LINE_STRAIGHT
+      mLineStraight = tryBooleanValue(      hlp, k, v, bool(key[8].dflt) );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_PATH_MULTISELECT (bool)
+      mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(key[9].dflt) );
     // } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
-    //   mCompositeActions = tryBooleanValue(  hlp, k, v, bool(def[10]) );
+    //   mCompositeActions = tryBooleanValue(  hlp, k, v, bool(key[10].dflt) );
 
     } else {
       TDLog.e("missing DEVICE key: " + k );
@@ -2224,12 +2160,11 @@ public class TDSetting
   private static String updatePrefImport( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref import: " + k );
-    String[] key = TDPrefKey.EXPORT_IMPORT;
-    String[] def = TDPrefKey.EXPORT_IMPORTdef;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_PT_CMAP
+    TDPrefKey[] key = TDPrefKey.mExportImport;
+    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_PT_CMAP
       // not handled here
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_EXTEND (bool)
-      mLRExtend = tryBooleanValue( hlp, k, v, bool(def[ 1]) ); 
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_SPLAY_EXTEND (bool)
+      mLRExtend = tryBooleanValue( hlp, k, v, bool(key[ 1].dflt) ); 
     } else {
       TDLog.e("missing IMPORT key: " + k );
     }
@@ -2238,11 +2173,10 @@ public class TDSetting
 
   private static String updatePrefExportEnable( TDPrefHelper hlp, String k, String v )
   {
-    String[] key = TDPrefKey.EXPORT_ENABLE;
-    String[] def = TDPrefKey.EXPORT_ENABLEdef;
+    TDPrefKey[] key = TDPrefKey.mExportEnable;
     for ( int n = 0; n < key.length; ++ n ) {
-      if ( k.equals( key[n] ) ) {
-        boolean b = tryBooleanValue( hlp, k, v, bool(def[n]) ); 
+      if ( k.equals( key[n].key ) ) {
+        boolean b = tryBooleanValue( hlp, k, v, bool(key[n].dflt) ); 
         TDConst.mSurveyExportEnable[ 1 + n ] = b;
         return b ? TDPrefKey.TRUE : TDPrefKey.FALSE;
       }
@@ -2253,24 +2187,23 @@ public class TDSetting
   private static String updatePrefGeekImport( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref import: " + k );
-    String[] key = TDPrefKey.GEEKIMPORT;
-    String[] def = TDPrefKey.GEEKIMPORTdef;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_ZIP_WITH_SYMBOLS
-      mZipWithSymbols = tryBooleanValue( hlp, k, v, bool(def[ 0]) ); 
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_IMPORT_DATAMODE (choice)
-      mImportDatamode = tryIntValue( hlp, k, v, def[ 1] );
-    } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_AUTO_XSECTIONS
-      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
-    } else if ( k.equals( key[ 3 ] ) ) {        // DISTOX_AUTO_STATIONS
-      mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 3]) ); 
-    } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_LRUD_COUNT
-      mLRUDcount = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
-    } else if ( k.equals( key[ 5 ] ) ) {        // DISTOX_ZIP_SHARE_CATEGORY
-      mZipShareCategory = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
-    // } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT moved to EXPORT
-    //   mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
-    // } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
-    //   mExportTcsx = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
+    TDPrefKey[] key = TDPrefKey.mExport;
+    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_ZIP_WITH_SYMBOLS
+      mZipWithSymbols = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) ); 
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_IMPORT_DATAMODE (choice)
+      mImportDatamode = tryIntValue( hlp, k, v, key[ 1].dflt );
+    } else if ( k.equals( key[ 2 ].key ) ) {        // DISTOX_AUTO_XSECTIONS
+      mAutoXSections = tryBooleanValue( hlp, k, v, bool(key[ 2].dflt) ); 
+    } else if ( k.equals( key[ 3 ].key ) ) {        // DISTOX_AUTO_STATIONS
+      mAutoStations = tryBooleanValue( hlp, k, v, bool(key[ 3].dflt) ); 
+    } else if ( k.equals( key[ 4 ].key ) ) {        // DISTOX_LRUD_COUNT
+      mLRUDcount = tryBooleanValue( hlp, k, v, bool(key[ 4].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) {        // DISTOX_ZIP_SHARE_CATEGORY
+      mZipShareCategory = tryBooleanValue( hlp, k, v, bool(key[ 5].dflt) );
+    // } else if ( k.equals( key[ 4 ].key ) ) {        // DISTOX_AUTO_PLOT_EXPORT moved to EXPORT
+    //   mAutoExportPlotFormat = tryIntValue( hlp, k, v, key[ 4].dflt );
+    // } else if ( k.equals( key[ 2 ].key ) ) {        // DISTOX_TRANSFER_CSURVEY
+    //   mExportTcsx = tryBooleanValue( hlp, k, v, bool(key[ 2].dflt) ); 
     } else {
       TDLog.e("missing GEEK_IMPORT key: " + k );
     }
@@ -2281,30 +2214,29 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref export: " + k );
-    String[] key = TDPrefKey.EXPORT;
-    String[] def = TDPrefKey.EXPORTdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_EXPORT_SHOTS (choice)
-      mExportShotsFormat = tryIntValue( hlp, k, v, def[ 0] );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_EXPORT_PLOT (choice)
-      mExportPlotFormat = tryIntValue( hlp, k, v, def[ 1] );
-    } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT
-      mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 2] );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_ORTHO_LRUD
-      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[ 3] );
+    TDPrefKey[] key = TDPrefKey.mExport;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_EXPORT_SHOTS (choice)
+      mExportShotsFormat = tryIntValue( hlp, k, v, key[ 0].dflt );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_EXPORT_PLOT (choice)
+      mExportPlotFormat = tryIntValue( hlp, k, v, key[ 1].dflt );
+    } else if ( k.equals( key[ 2 ].key ) ) {        // DISTOX_AUTO_PLOT_EXPORT
+      mAutoExportPlotFormat = tryIntValue( hlp, k, v, key[ 2].dflt );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_ORTHO_LRUD
+      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, key[ 3].dflt );
       if ( mOrthogonalLRUDAngle <  0 ) { mOrthogonalLRUDAngle =  0;  ret = TDString.ZERO; }
       if ( mOrthogonalLRUDAngle > 90 ) { mOrthogonalLRUDAngle = 90;  ret = TDString.NINETY; }
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    } else if ( k.equals( key[  4 ] ) ) { // DISTOX_LRUD_VERTICAL
-      mLRUDvertical = tryFloatValue( hlp, k, v, def[ 4] );
+    } else if ( k.equals( key[  4 ].key ) ) { // DISTOX_LRUD_VERTICAL
+      mLRUDvertical = tryFloatValue( hlp, k, v, key[ 4].dflt );
       if ( mLRUDvertical <  0 ) { mLRUDvertical =  0; ret = TDString.ZERO; }
       if ( mLRUDvertical > 91 ) { mLRUDvertical = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[  5 ] ) ) { // DISTOX_LRUD_HORIZONTAL
-      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[  5 ].key ) ) { // DISTOX_LRUD_HORIZONTAL
+      mLRUDhorizontal = tryFloatValue( hlp, k, v, key[ 5].dflt );
       if ( mLRUDhorizontal <  0 ) { mLRUDhorizontal =  0; ret = TDString.ZERO; }
       if ( mLRUDhorizontal > 91 ) { mLRUDhorizontal = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[  6 ] ) ) { // DISTOX_BEZIER_STEP
-      mBezierStep  = tryFloatValue( hlp, k, v, def[ 6] );
+    } else if ( k.equals( key[  6 ].key ) ) { // DISTOX_BEZIER_STEP
+      mBezierStep  = tryFloatValue( hlp, k, v, key[ 6].dflt );
       if ( mBezierStep < 0 ) { mBezierStep = 0; ret = TDString.ZERO; }
       if ( mBezierStep > 3 ) { mBezierStep = 3; ret = TDString.THREE; } // was 2
     } else {
@@ -2317,16 +2249,15 @@ public class TDSetting
   private static String updatePrefSvx( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref SVX: " + k );
-    String[] key = TDPrefKey.EXPORT_SVX;
-    String[] def = TDPrefKey.EXPORT_SVXdef;
-    if ( k.equals( key[0] ) ) { // DISTOX_SURVEX_EOL (choice)
-      mSurvexEol = ( tryStringValue( hlp, k, v, def[0] ).equals(def[0]) )? "\n" : "\r\n";
-    } else if ( k.equals( key[1] ) ) { // DISTOX_SURVEX_SPLAY (bool)
-      mSurvexSplay = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[2] ) ) { // DISTOX_SURVEX_LRUD (bool)
-      mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[3] ) ) { // DISTOX_SURVEX_EPSG (int)
-      mSurvexEPSG = tryIntValue( hlp, k, v, def[3] );
+    TDPrefKey[] key = TDPrefKey.mExportSvx;
+    if ( k.equals( key[0].key ) ) { // DISTOX_SURVEX_EOL (choice)
+      mSurvexEol = ( tryStringValue( hlp, k, v, key[0].dflt ).equals(key[0]) )? "\n" : "\r\n";
+    } else if ( k.equals( key[1].key ) ) { // DISTOX_SURVEX_SPLAY (bool)
+      mSurvexSplay = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
+    } else if ( k.equals( key[2].key ) ) { // DISTOX_SURVEX_LRUD (bool)
+      mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+    } else if ( k.equals( key[3].key ) ) { // DISTOX_SURVEX_EPSG (int)
+      mSurvexEPSG = tryIntValue( hlp, k, v, key[3].dflt );
     } else {
       TDLog.e("missing EXPORT SVX key: " + k );
     }
@@ -2335,12 +2266,11 @@ public class TDSetting
 
   private static String updatePrefPly( TDPrefHelper hlp, String k, String v ) 
   { 
-    String[] key = TDPrefKey.EXPORT_PLY;
-    String[] def = TDPrefKey.EXPORT_PLYdef;
-    if ( k.equals( key[0] ) ) {      // DISTOX_PLY_LRUD
-      mPlyLRUD  = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[1] ) ) { // DISTOX_PLY_MINUS
-      mPlyMinus = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    TDPrefKey[] key = TDPrefKey.mExportPly;
+    if ( k.equals( key[0].key ) ) {      // DISTOX_PLY_LRUD
+      mPlyLRUD  = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[1].key ) ) { // DISTOX_PLY_MINUS
+      mPlyMinus = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
     } else {
       TDLog.e("missing EXPORT PLY key: " + k );
     }
@@ -2351,24 +2281,23 @@ public class TDSetting
   {
     // TDLog.v("update pref TH: " + k );
     String ret = null;
-    String[] key = TDPrefKey.EXPORT_TH;
-    String[] def = TDPrefKey.EXPORT_THdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_THERION_CONFIG (bool)
-      mTherionWithConfig    = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_THERION_MAPS (bool)
-      mTherionMaps      = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
-    // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_STATIONS (bool)
-    //   mAutoStations     = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
-    // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_XTHERION_AREAS (bool)
-    //   mXTherionAreas = tryBooleanValue( hlp, k, v, bool(def[ ]) );   
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_THERION_SPLAYS (bool)
-      mTherionSplays    = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );   
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SURVEX_LRUD (bool)
-      mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(def[ 3 ]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_TH2_SCALE
-      ret = setExportScale( tryIntValue( hlp, k, v, def[4] ) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_TH2_XVI (bool)
-      mTherionXvi = tryBooleanValue( hlp, k, v, bool(def[5]) );
+    TDPrefKey[] key = TDPrefKey.mExportTh;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_THERION_CONFIG (bool)
+      mTherionWithConfig    = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_THERION_MAPS (bool)
+      mTherionMaps      = tryBooleanValue( hlp, k, v, bool(key[ 1 ].dflt) );
+    // } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_AUTO_STATIONS (bool)
+    //   mAutoStations     = tryBooleanValue( hlp, k, v, bool(key[ 2 ].dflt) );
+    // } else if ( k.equals( key[ ? ].key ) ) { // DISTOX_XTHERION_AREAS (bool)
+    //   mXTherionAreas = tryBooleanValue( hlp, k, v, bool(key[ ].dflt) );   
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_THERION_SPLAYS (bool)
+      mTherionSplays    = tryBooleanValue( hlp, k, v, bool(key[ 2 ].dflt) );   
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SURVEX_LRUD (bool)
+      mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(key[ 3 ].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_TH2_SCALE
+      ret = setExportScale( tryIntValue( hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_TH2_XVI (bool)
+      mTherionXvi = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
     } else {
       TDLog.e("missing EXPORT TH key: " + k );
     }
@@ -2379,14 +2308,13 @@ public class TDSetting
   private static String updatePrefDat( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref DAT: " + k );
-    String[] key = TDPrefKey.EXPORT_DAT;
-    String[] def = TDPrefKey.EXPORT_DATdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_STATION_PREFIX (bool)
-      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_COMPASS_SPLAYS (bool)
-      mCompassSplays        = tryBooleanValue( hlp, k, v, bool(def[ 1]) );   
-    } else if ( k.equals( key[  2 ] ) ) { // DISTOX_SWAP_LR (bool)
-      mSwapLR               = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
+    TDPrefKey[] key = TDPrefKey.mExportDat;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_STATION_PREFIX (bool)
+      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_COMPASS_SPLAYS (bool)
+      mCompassSplays        = tryBooleanValue( hlp, k, v, bool(key[ 1].dflt) );   
+    } else if ( k.equals( key[  2 ].key ) ) { // DISTOX_SWAP_LR (bool)
+      mSwapLR               = tryBooleanValue( hlp, k, v, bool(key[ 2].dflt) );
     } else {
       TDLog.e("missing EXPORT DAT key: " + k );
     }
@@ -2396,12 +2324,11 @@ public class TDSetting
   private static String updatePrefSrv( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref DAT: " + k );
-    String[] key = TDPrefKey.EXPORT_SRV;
-    String[] def = TDPrefKey.EXPORT_SRVdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_WALLS_SPLAYS (bool)
-      mWallsSplays  = tryBooleanValue( hlp, k, v, bool(def[0]) );   
+    TDPrefKey[] key = TDPrefKey.mExportSrv;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_WALLS_SPLAYS (bool)
+      mWallsSplays  = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );   
     // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WALLS_UD
-    //   mWallsUD = tryIntValue( hlp, k, v, def[1] );
+    //   mWallsUD = tryIntValue( hlp, k, v, key[1].dflt );
     } else {
       TDLog.e("missing EXPORT SRV key: " + k );
     }
@@ -2411,14 +2338,13 @@ public class TDSetting
   private static String updatePrefTro( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref TRO: " + k );
-    String[] key = TDPrefKey.EXPORT_TRO;
-    String[] def = TDPrefKey.EXPORT_TROdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_VTOPO_SPLAYS (bool)
-      mVTopoSplays     = tryBooleanValue( hlp, k, v, bool(def[ 0]) );   
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_VTOPO_LRUD (bool)
-      mVTopoLrudAtFrom = tryBooleanValue( hlp, k, v, bool(def[ 1]) );   
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_VTOPO_TROX (bool)
-      mVTopoTrox       = tryBooleanValue( hlp, k, v, bool(def[ 2]) );   
+    TDPrefKey[] key = TDPrefKey.mExportTro;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_VTOPO_SPLAYS (bool)
+      mVTopoSplays     = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) );   
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_VTOPO_LRUD (bool)
+      mVTopoLrudAtFrom = tryBooleanValue( hlp, k, v, bool(key[ 1].dflt) );   
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_VTOPO_TROX (bool)
+      mVTopoTrox       = tryBooleanValue( hlp, k, v, bool(key[ 2].dflt) );   
     } else {
       TDLog.e("missing EXPORT TRO key: " + k );
     }
@@ -2428,12 +2354,11 @@ public class TDSetting
   private static String updatePrefKml( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref KML: " + k );
-    String[] key = TDPrefKey.EXPORT_KML;
-    String[] def = TDPrefKey.EXPORT_KMLdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_KML_STATIONS (bool)
-      mKmlStations = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_KML_SPLAYS (bool)
-      mKmlSplays   = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
+    TDPrefKey[] key = TDPrefKey.mExportKml;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_KML_STATIONS (bool)
+      mKmlStations = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_KML_SPLAYS (bool)
+      mKmlSplays   = tryBooleanValue( hlp, k, v, bool(key[ 1 ].dflt) );
     } else {
       TDLog.e("missing EXPORT KML key: " + k );
     }
@@ -2444,10 +2369,9 @@ public class TDSetting
   private static String updatePrefGpx( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref GPX: " + k );
-    String[] key = TDPrefKey.EXPORT_GPX;
-    String[] def = TDPrefKey.EXPORT_GPXdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_GPX_SINGLE_TRACK (bool)
-      mGPXSingleTrack = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    TDPrefKey[] key = TDPrefKey.mExportGpx;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_GPX_SINGLE_TRACK (bool)
+      mGPXSingleTrack = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
     } else {
       TDLog.e("missing EXPORT GPX key: " + k );
     }
@@ -2457,12 +2381,11 @@ public class TDSetting
   private static String updatePrefCsx( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref CSX: " + k );
-    String[] key = TDPrefKey.EXPORT_CSX;
-    String[] def = TDPrefKey.EXPORT_CSXdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_STATION_PREFIX
-      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WITH_MEDIA
-      mExportMedia = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
+    TDPrefKey[] key = TDPrefKey.mExportCsx;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_STATION_PREFIX
+      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_WITH_MEDIA
+      mExportMedia = tryBooleanValue( hlp, k, v, bool(key[ 1 ].dflt) );
     } else {
       TDLog.e("missing EXPORT CSX key: " + k );
     }
@@ -2472,14 +2395,13 @@ public class TDSetting
   private static String updatePrefCsv( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref CSV: " + k );
-    String[] key = TDPrefKey.EXPORT_CSV;
-    String[] def = TDPrefKey.EXPORT_CSVdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_CSV_RAW (bool)
-      mCsvRaw      = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_CSV_SEP (choice)
-      mCsvSeparator = CSV_SEPARATOR[ tryIntValue( hlp, k, v, def[1] ) ]; 
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SURVEX_EOL
-      mSurvexEol = ( tryStringValue( hlp, k, v, def[2] ).equals(def[0]) )? "\n" : "\r\n";
+    TDPrefKey[] key = TDPrefKey.mExportCsv;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_CSV_RAW (bool)
+      mCsvRaw      = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_CSV_SEP (choice)
+      mCsvSeparator = CSV_SEPARATOR[ tryIntValue( hlp, k, v, key[1].dflt ) ]; 
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_SURVEX_EOL
+      mSurvexEol = ( tryStringValue( hlp, k, v, key[2].dflt ).equals(key[2].dflt) )? "\n" : "\r\n";
     } else {
       TDLog.e("missing EXPORT CSV key: " + k );
     }
@@ -2489,10 +2411,9 @@ public class TDSetting
   private static String updatePrefShp( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref DXF: " + k );
-    String[] key = TDPrefKey.EXPORT_SHP;
-    String[] def = TDPrefKey.EXPORT_SHPdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SHP_GEOREF (bool)
-      mShpGeoref = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    TDPrefKey[] key = TDPrefKey.mExportShp;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_SHP_GEOREF (bool)
+      mShpGeoref = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
     } else {
       TDLog.e("missing EXPORT SHP key: " + k );
     }
@@ -2502,22 +2423,21 @@ public class TDSetting
   private static String updatePrefDxf( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref DXF: " + k );
-    String[] key = TDPrefKey.EXPORT_DXF;
-    String[] def = TDPrefKey.EXPORT_DXFdef;
+    TDPrefKey[] key = TDPrefKey.mExportDxf;
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_DXF_SCALE
-    //   mDxfScale = tryFloatValue( hlp, k, v, def[ ] );
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_DXF_BLOCKS (bool)
-      mDxfBlocks = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_ACAD_VERSION (choice)
-      try { mAcadVersion = tryIntValue( hlp, k, v, def[ 1 ] ); } catch ( NumberFormatException e) {
+    //   mDxfScale = tryFloatValue( hlp, k, v, key[ ] );
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_DXF_BLOCKS (bool)
+      mDxfBlocks = tryBooleanValue( hlp, k, v, bool(key[ 0 ].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_ACAD_VERSION (choice)
+      try { mAcadVersion = tryIntValue( hlp, k, v, key[ 1 ].dflt ); } catch ( NumberFormatException e) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ACAD_SPLINE (bool)
-      mAcadSpline = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_DXF_REFERENCE (bool)
-      mDxfReference = tryBooleanValue( hlp, k, v, bool(def[ 3 ]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_ACAD_LAYER (bool)
-      mAcadLayer = tryBooleanValue( hlp, k, v, bool(def[ 4 ]) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_ACAD_SPLINE (bool)
+      mAcadSpline = tryBooleanValue( hlp, k, v, bool(key[ 2 ].dflt) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_DXF_REFERENCE (bool)
+      mDxfReference = tryBooleanValue( hlp, k, v, bool(key[ 3 ].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ACAD_LAYER (bool)
+      mAcadLayer = tryBooleanValue( hlp, k, v, bool(key[ 4 ].dflt) );
     } else {
       TDLog.e("missing EXPORT DXF key: " + k );
     }
@@ -2529,20 +2449,19 @@ public class TDSetting
   // {
   //   String ret = null;
   //   // TDLog.v("update pref PNG: " + k );
-  //   String[] key = TDPrefKey.EXPORT_PNG;
-  //   String[] def = TDPrefKey.EXPORT_PNGdef;
-  //   if ( k.equals( key[ 0 ] ) ) { // DISTOX_BITMAP_SCALE
-  //     mBitmapScale = tryFloatValue( hlp, k, v, def[0] );
+  //   TDPrefKey[] key = TDPrefKey.mExportPng;
+  //   if ( k.equals( key[ 0 ].key ) ) { // DISTOX_BITMAP_SCALE
+  //     mBitmapScale = tryFloatValue( hlp, k, v, key[0].dflt );
   //     if ( mBitmapScale < 0.5f ) { mBitmapScale = 0.5f; ret = "0.5"; }
   //     if ( mBitmapScale >  10f ) { mBitmapScale =  10f; ret = TDString.TEN; }
-  //   } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_BITMAP_BGCOLOR
-  //     return setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, def[1] ), def[1] );
-  //   } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_GRID
-  //     mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[2]) );
-  //   } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_THERION_SPLAYS
-  //     mTherionSplays = tryBooleanValue( hlp, k, v, bool(def[ 3]) );   
-  //   // } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_STATIONS
-  //   //   mAutoStations  = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+  //   } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_BITMAP_BGCOLOR
+  //     return setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, key[1].dflt ), key[1].dflt );
+  //   } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_SVG_GRID
+  //     mSvgGrid = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+  //   } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_THERION_SPLAYS
+  //     mTherionSplays = tryBooleanValue( hlp, k, v, bool(key[ 3].dflt) );   
+  //   // } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_AUTO_STATIONS
+  //   //   mAutoStations  = tryBooleanValue( hlp, k, v, bool(key[ 4].dflt) );
   //   } else {
   //     TDLog.e("missing EXPORT PNG key: " + k );
   //   }
@@ -2554,48 +2473,47 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref SVY: " + k );
-    String[] key = TDPrefKey.EXPORT_SVG;
-    String[] def = TDPrefKey.EXPORT_SVGdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SVG_ROUNDTRIP (bool)
-      mSvgRoundTrip = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SVG_GRID (bool)
-      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_LINE_DIR (bool)
-      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SVG_SPLAYS (bool)
-      mSvgSplays = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SVG_GROUPS (bool)
-      mSvgGroups = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML (bool)
-    // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML (bool)
-    //   mSvgInHtml = tryBooleanValue( hlp, k, bool(def[ ]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SVG_POINT_STROKE
-      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[5] );
+    TDPrefKey[] key = TDPrefKey.mExportSvg;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_SVG_ROUNDTRIP (bool)
+      mSvgRoundTrip = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_SVG_GRID (bool)
+      mSvgGrid = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_SVG_LINE_DIR (bool)
+      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SVG_SPLAYS (bool)
+      mSvgSplays = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_SVG_GROUPS (bool)
+      mSvgGroups = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    // } else if ( k.equals( key[ ? ].key ) ) { // DISTOX_SVG_IN_HTML (bool)
+    // } else if ( k.equals( key[ ? ].key ) ) { // DISTOX_SVG_IN_HTML (bool)
+    //   mSvgInHtml = tryBooleanValue( hlp, k, bool(key[ ].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_SVG_POINT_STROKE
+      mSvgPointStroke    = tryFloatValue( hlp, k, v, key[5].dflt );
       if ( mSvgPointStroke < 0.01f ) { mSvgPointStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SVG_LABEL_STROKE
-      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_SVG_LABEL_STROKE
+      mSvgLabelStroke    = tryFloatValue( hlp, k, v, key[6].dflt );
       if ( mSvgLabelStroke < 0.01f ) { mSvgLabelStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SVG_LINE_STROKE
-      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[7] );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SVG_GRID_STROKE
-      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[8] );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SVG_LINE_STROKE
+      mSvgLineStroke     = tryFloatValue( hlp, k, v, key[7].dflt );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_SVG_GRID_STROKE
+      mSvgGridStroke     = tryFloatValue( hlp, k, v, key[8].dflt );
       if ( mSvgGridStroke < 0.01f ) { mSvgGridStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SVG_SHOT_STROKE
-      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[9] );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_SVG_SHOT_STROKE
+      mSvgShotStroke     = tryFloatValue( hlp, k, v, key[9].dflt );
       if ( mSvgShotStroke < 0.01f ) { mSvgShotStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
-      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[10] );
+    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_SVG_LINEDIR_STROKE
+      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, key[10].dflt );
       if ( mSvgLineStroke < 0.01f ) { mSvgLineStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[11] ) ) {  // DISTOX_SVG_STATION_SIZE
-      mSvgStationSize    = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[11].key ) ) {  // DISTOX_SVG_STATION_SIZE
+      mSvgStationSize    = tryIntValue( hlp, k, v, key[11].dflt );
       if ( mSvgStationSize < 1 ) { mSvgStationSize = 1; ret = "1"; }
-    } else if ( k.equals( key[12] ) ) {  // DISTOX_SVG_LABEL_SIZE
-      mSvgLabelSize    = tryIntValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[12].key ) ) {  // DISTOX_SVG_LABEL_SIZE
+      mSvgLabelSize    = tryIntValue( hlp, k, v, key[12].dflt );
       if ( mSvgLabelSize < 1 ) { mSvgLabelSize = 1; ret = "1"; }
-    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BEZIER_STEP
-    //   mBezierStep  = tryFloatValue( hlp, k, v, def[8] );
-    } else if ( k.equals( key[13] ) ) {  // DISTOX_SVG_PROGRAM
-      mSvgProgram    = tryIntValue( hlp, k, v, def[13] );
+    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_BEZIER_STEP
+    //   mBezierStep  = tryFloatValue( hlp, k, v, key[8].dflt );
+    } else if ( k.equals( key[13].key ) ) {  // DISTOX_SVG_PROGRAM
+      mSvgProgram    = tryIntValue( hlp, k, v, key[13].dflt );
       if ( mSvgProgram < 0 || mSvgProgram > 1 ) mSvgProgram = 0;
       setExportScale( mTherionScale );
     } else {
@@ -2610,38 +2528,37 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref data: " + k );
-    String[] key = TDPrefKey.DATA;
-    String[] def = TDPrefKey.DATAdef;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_CLOSE_DISTANCE
-      mCloseDistance  = tryFloatValue( hlp, k, v, def[0] );
+    TDPrefKey[] key = TDPrefKey.mData;
+    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_CLOSE_DISTANCE
+      mCloseDistance  = tryFloatValue( hlp, k, v, key[0].dflt );
       if ( mCloseDistance < 0.0001f ) { mCloseDistance = 0.0001f; ret = "0.0001"; }
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_MAX_SHOT_LENGTH
-      mMaxShotLength  = tryFloatValue( hlp, k, v, def[1] );  
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_MAX_SHOT_LENGTH
+      mMaxShotLength  = tryFloatValue( hlp, k, v, key[1].dflt );  
       if ( mMaxShotLength < 20 ) { mMaxShotLength = 20; ret = TDString.TWENTY; }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_MIN_LEG_LENGTH
-      mMinLegLength   = tryFloatValue( hlp, k, v, def[2] );  
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_MIN_LEG_LENGTH
+      mMinLegLength   = tryFloatValue( hlp, k, v, key[2].dflt );  
       if ( mMinLegLength < 0 ) { mMinLegLength = 0; ret = TDString.ZERO; }
       if ( mMinLegLength > 5 ) { mMinLegLength = 5; ret = TDString.FIVE; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LEG_SHOTS (choice)
-      mMinNrLegShots  = tryIntValue(   hlp, k, v, def[3] );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_EXTEND_THR2
-      mExtendThr      = tryFloatValue( hlp, k, v, def[4] );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_LEG_SHOTS (choice)
+      mMinNrLegShots  = tryIntValue(   hlp, k, v, key[3].dflt );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_EXTEND_THR2
+      mExtendThr      = tryFloatValue( hlp, k, v, key[4].dflt );
       if ( mExtendThr <  0 ) { mExtendThr =  0; ret = TDString.ZERO; }
       if ( mExtendThr > 90 ) { mExtendThr = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_VTHRESHOLD
-      mVThreshold     = tryFloatValue( hlp, k, v, def[5] );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_VTHRESHOLD
+      mVThreshold     = tryFloatValue( hlp, k, v, key[5].dflt );
       if ( mVThreshold <  0 ) { mVThreshold =  0; ret =  TDString.ZERO; }
       if ( mVThreshold > 90 ) { mVThreshold = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
-      mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(def[6]) ); 
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
+      mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); 
       // TDAzimuth.setAzimuthManual( mAzimuthManual ); // FIXME FIXED_EXTEND 20240603
       TDAzimuth.resetRefAzimuth( TopoDroidApp.mShotWindow, TDAzimuth.mRefAzimuth, mAzimuthManual ); // FIXME FIXED_EXTEND 20240603
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_PREV_NEXT (bool)
-      mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKSIGHT (bool)
-      mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LEG_FEEDBACK
-      mTripleShot   = tryIntValue( hlp, k, v, def[ 9] );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_PREV_NEXT (bool)
+      mPrevNext = tryBooleanValue( hlp, k, v, bool(key[ 7].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_BACKSIGHT (bool)
+      mBacksightInput = tryBooleanValue( hlp, k, v, bool(key[ 8].dflt) );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_LEG_FEEDBACK
+      mTripleShot   = tryIntValue( hlp, k, v, key[ 9].dflt );
     } else {
       TDLog.e("missing DATA key: " + k );
     }
@@ -2652,28 +2569,27 @@ public class TDSetting
   private static String updatePrefUnits( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref units: " + k );
-    String[] key = TDPrefKey.UNITS;
-    String[] def = TDPrefKey.UNITSdef;
-    if ( k.equals( key[ 0 ] ) ) {    // DISTOX_UNIT_LENGTH (choice)
-      if ( tryStringValue( hlp, k, v, def[0] ).equals(def[0]) ) {
+    TDPrefKey[] key = TDPrefKey.mUnits;
+    if ( k.equals( key[ 0 ].key ) ) {    // DISTOX_UNIT_LENGTH (choice)
+      if ( tryStringValue( hlp, k, v, key[0].dflt ).equals(key[0].dflt) ) {
         mUnitLength = 1.0f;
         mUnitLengthStr = "m";
       } else {
         mUnitLength = TDUtil.M2FT;
         mUnitLengthStr = "ft";
       }
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_UNIT_ANGLE (choice)
-      if ( tryStringValue( hlp, k, v, def[1] ).equals(def[1]) ) {
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_UNIT_ANGLE (choice)
+      if ( tryStringValue( hlp, k, v, key[1].dflt ).equals(key[1].dflt) ) {
         mUnitAngle = 1.0f;
         mUnitAngleStr = "deg";
       } else {
         mUnitAngle = TDUtil.DEG2GRAD;
         mUnitAngleStr = "grad";
       }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_UNIT_GRID (choice)
-      mUnitGrid = tryFloatValue( hlp, k, v, def[2] ); 
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_UNIT_MEASURE (choice)
-      mUnitMeasure = tryFloatValue( hlp, k, v, def[3] ); 
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_UNIT_GRID (choice)
+      mUnitGrid = tryFloatValue( hlp, k, v, key[2].dflt ); 
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_UNIT_MEASURE (choice)
+      mUnitMeasure = tryFloatValue( hlp, k, v, key[3].dflt ); 
     } else {
       TDLog.e("missing UNITS key: " + k );
     }
@@ -2684,19 +2600,18 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref accuracy: " + k );
-    String[] key = TDPrefKey.ACCURACY;
-    String[] def = TDPrefKey.ACCURACYdef;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_ACCEL_PERCENT 
-      mAccelerationThr = tryFloatValue( hlp, k, v, def[0] );
+    TDPrefKey[] key = TDPrefKey.mAccuracy;
+    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_ACCEL_PERCENT 
+      mAccelerationThr = tryFloatValue( hlp, k, v, key[0].dflt );
       if ( mAccelerationThr < 0 ) { mAccelerationThr = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_MAG_PERCENT
-      mMagneticThr     = tryFloatValue( hlp, k, v, def[1] );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_MAG_PERCENT
+      mMagneticThr     = tryFloatValue( hlp, k, v, key[1].dflt );
       if ( mMagneticThr < 0 ) { mMagneticThr = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_DIP_THR
-      mDipThr          = tryFloatValue( hlp, k, v, def[2] );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_DIP_THR
+      mDipThr          = tryFloatValue( hlp, k, v, key[2].dflt );
       if ( mDipThr < 0 ) { mDipThr = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SIBLING_PERCENT
-      ret = setSiblingThr( tryFloatValue( hlp, k, v, def[3] ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SIBLING_PERCENT
+      ret = setSiblingThr( tryFloatValue( hlp, k, v, key[3].dflt ) );
     } else {
       TDLog.e("missing ACCURACY key: " + k );
     }
@@ -2708,26 +2623,25 @@ public class TDSetting
   {
     // String ret = null;
     // TDLog.v("update pref location: " + k );
-    String[] key = TDPrefKey.LOCATION;
-    String[] def = TDPrefKey.LOCATIONdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNIT_LOCATION (choice)
-      mUnitLocation  = tryStringValue( hlp, k, v, def[0] ).equals(def[0]) ? TDUtil.DDMMSS : TDUtil.DEGREE;
+    TDPrefKey[] key = TDPrefKey.mLocation;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_UNIT_LOCATION (choice)
+      mUnitLocation  = tryStringValue( hlp, k, v, key[0].dflt ).equals(key[0].dflt) ? TDUtil.DDMMSS : TDUtil.DEGREE;
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitLocation changed " + mUnitLocation );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_ALTITUDE
     //   try {
     //     mEllipAlt = Integer.parseInt( tryStringValue( hlp, k, v, ALTITUDE ) );
     //   } catch ( NumberFormatException e ) { mEllipAlt = _WGS84; }
-    } else if ( k.equals( key[ 1 ] ) ) {
-      mCRS = tryStringValue( hlp, k, v, def[1] );     // DISTOX_CRS (arbitrary)
-    } else if ( k.equals( key[ 2 ] ) ) {    // DISTOX_NEG_ALTITUDE
-      mNegAltitude = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) {    // DISTOX_EDIT_ALTITUDE
-      mEditableHGeo = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) {    // DISTOX_FINE_LOCATION
-      mFineLocation = tryIntValue(  hlp, k, v, def[4] );
+    } else if ( k.equals( key[ 1 ].key ) ) {
+      mCRS = tryStringValue( hlp, k, v, key[1].dflt );     // DISTOX_CRS (arbitrary)
+    } else if ( k.equals( key[ 2 ].key ) ) {    // DISTOX_NEG_ALTITUDE
+      mNegAltitude = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+    } else if ( k.equals( key[ 3 ].key ) ) {    // DISTOX_EDIT_ALTITUDE
+      mEditableHGeo = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) {    // DISTOX_FINE_LOCATION
+      mFineLocation = tryIntValue(  hlp, k, v, key[4].dflt );
       if ( mFineLocation < 0 ) { mFineLocation = 0; } else if ( mFineLocation > 600 ) { mFineLocation = 600; }
-    } else if ( k.equals( key[ 5 ] ) ) {    // DISTOX_GEOPOINT_APP
-      mGeoImportApp = Integer.parseInt( tryStringValue(  hlp, k, v, def[5] ) );
+    } else if ( k.equals( key[ 5 ].key ) ) {    // DISTOX_GEOPOINT_APP
+      mGeoImportApp = Integer.parseInt( tryStringValue(  hlp, k, v, key[5].dflt ) );
     } else {
       TDLog.e("missing LOCATION key: " + k );
     }
@@ -2740,11 +2654,10 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref screen: " + k );
-    String[] key = TDPrefKey.SCREEN;
-    String[] def = TDPrefKey.SCREENdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_FIXED_THICKNESS
+    TDPrefKey[] key = TDPrefKey.mScreen;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_FIXED_THICKNESS
       try {
-        float f = tryFloatValue( hlp, k, v, def[0] );
+        float f = tryFloatValue( hlp, k, v, key[0].dflt );
         if ( f >= 0.5f && f <= 10 && f != mFixedThickness ) {
           mFixedThickness = f;
           BrushManager.setStrokeWidths();
@@ -2752,25 +2665,25 @@ public class TDSetting
        	else if ( f < 0.5f ) { f = 0.5f; ret = "0.5"; }
 	else if ( f > 10f )  { f =  10f; ret = TDString.TEN; }
       } catch ( NumberFormatException e ) { ret = String.format(Locale.US, "%.2f", mFixedThickness ); }
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_STATION_SIZE
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_STATION_SIZE
       try {
-        setStationSize( Float.parseFloat( tryStringValue( hlp, k, v, def[1] ) ), true );
+        setStationSize( Float.parseFloat( tryStringValue( hlp, k, v, key[1].dflt ) ), true );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
       ret = String.format(Locale.US, "%.2f", mStationSize );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_DOT_RADIUS
-      ret = setDotRadius( tryFloatValue( hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_CLOSENESS
-      ret = setSelectness( tryFloatValue( hlp, k, v, def[3] ) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_ERASENESS
-      ret = setEraseness( tryFloatValue( hlp, k, v, def[4] ) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_MIN_SHIFT
-      ret = setMinShift( tryIntValue(  hlp, k, v, def[5] ) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_POINTING
-      ret = setPointingRadius( tryIntValue( hlp, k, v, def[6] ) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_ALPHA
-      mSplayAlpha = tryIntValue( hlp, k, v, def[ 7] ); 
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_DOT_RADIUS
+      ret = setDotRadius( tryFloatValue( hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CLOSENESS
+      ret = setSelectness( tryFloatValue( hlp, k, v, key[3].dflt ) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ERASENESS
+      ret = setEraseness( tryFloatValue( hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_MIN_SHIFT
+      ret = setMinShift( tryIntValue(  hlp, k, v, key[5].dflt ) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_POINTING
+      ret = setPointingRadius( tryIntValue( hlp, k, v, key[6].dflt ) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SPLAY_ALPHA
+      mSplayAlpha = tryIntValue( hlp, k, v, key[ 7].dflt ); 
       if ( mSplayAlpha < 0 ) { mSplayAlpha = 0; ret = Float.toString( mSplayAlpha ); }
       if ( mSplayAlpha > 100 ) { mSplayAlpha = 100; ret = Float.toString( mSplayAlpha ); }
       BrushManager.setSplayAlpha( mSplayAlpha );
@@ -2785,34 +2698,33 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref line: " + k );
-    String[] key = TDPrefKey.LINE;
-    String[] def = TDPrefKey.LINEdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_LINE_THICKNESS
-      ret = setLineThickness( tryStringValue( hlp, k, v, def[0] ) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_LINE_UNITS
+    TDPrefKey[] key = TDPrefKey.mLine;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_LINE_THICKNESS
+      ret = setLineThickness( tryStringValue( hlp, k, v, key[0].dflt ) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_LINE_UNITS
       try {
-        setDrawingUnitLines( tryFloatValue( hlp, k, v, def[1] ) );
+        setDrawingUnitLines( tryFloatValue( hlp, k, v, key[1].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LINE_STYLE (choice)
-      setLineStyleAndType( tryStringValue( hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LINE_SEGMENT
-      ret = setLineSegment( tryIntValue(   hlp, k, v, def[3] ) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_LINE_CLOSE
-      mLineClose = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SLOPE_LSIDE
-      ret = setSlopeLSide( tryIntValue( hlp, k, v, def[5] ) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_ARROW_LENGTH
-      ret = setArrowLength( tryFloatValue( hlp, k, v, def[6] ) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[7]) );
-    // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
-    //   mContinueLine  = tryIntValue( hlp, k, v, def[7] );
-    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
-    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[8]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[8]) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LINE_STYLE (choice)
+      setLineStyleAndType( tryStringValue( hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_LINE_SEGMENT
+      ret = setLineSegment( tryIntValue(   hlp, k, v, key[3].dflt ) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_LINE_CLOSE
+      mLineClose = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_SLOPE_LSIDE
+      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[5].dflt ) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_ARROW_LENGTH
+      ret = setArrowLength( tryFloatValue( hlp, k, v, key[6].dflt ) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[7].dflt) );
+    // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
+    //   mContinueLine  = tryIntValue( hlp, k, v, key[7].dflt );
+    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(key[8].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
     } else {
       TDLog.e("missing LINE key: " + k );
     }
@@ -2824,29 +2736,28 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref point: " + k );
-    String[] key = TDPrefKey.POINT;
-    String[] def = TDPrefKey.POINTdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNSCALED_POINTS (bool)
-      mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT 
+    TDPrefKey[] key = TDPrefKey.mPoint;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_UNSCALED_POINTS (bool)
+      mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_DRAWING_UNIT 
       try {
-        setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) );
+        setDrawingUnitIcons( tryFloatValue( hlp, k, v, key[1].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LABEL_SIZE
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LABEL_SIZE
       try {
-        setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, def[2] ) ), true );
+        setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, key[2].dflt ) ), true );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
       // FIXME changing label size affects only new labels; not existing labels (until they are edited)
       ret = String.format(Locale.US, "%.2f", mLabelSize );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SCALABLE_LABEL
-      mScalableLabel = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_XSECTION_OFFSET
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SCALABLE_LABEL
+      mScalableLabel = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_XSECTION_OFFSET
       try {
-        int value = tryIntValue( hlp, k, v, def[4] );
+        int value = tryIntValue( hlp, k, v, key[4].dflt );
         if ( value > 0 && value < 500 && value != mXSectionOffset ) {
           ret = String.format(Locale.US, "%d", value );
           mXSectionOffset = value;
@@ -2867,26 +2778,25 @@ public class TDSetting
   // {
   //   String ret = null;
   //   // TDLog.v("update pref walls: " + k );
-  //   String[] key = TDPrefKey.WALLS;
-  //   String[] def = TDPrefKey.WALLSdef;
-  //   if ( k.equals( key[ 0 ] ) ) {        // DISTOX_WALLS_TYPE (choice)
-  //     mWallsType = tryIntValue(hlp, k, v, def[0] );
-  //   } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WALLS_PLAN_THR
-  //     mWallsPlanThr = tryFloatValue( hlp, k, v, def[1] );
+  //   TDPrefKey[] key = TDPrefKey.mWalls;
+  //   if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_WALLS_TYPE (choice)
+  //     mWallsType = tryIntValue(hlp, k, v, key[0].dflt );
+  //   } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_WALLS_PLAN_THR
+  //     mWallsPlanThr = tryFloatValue( hlp, k, v, key[1].dflt );
   //     if ( mWallsPlanThr < 0 ) { mWallsPlanThr  =  0; ret = TDString.ZERO; }
   //     if ( mWallsPlanThr > 90 ) { mWallsPlanThr = 90; ret = TDString.NINETY; }
-  //   } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WALLS_EXTENDED_THR
-  //     mWallsExtendedThr = tryFloatValue( hlp, k, v, def[2] );
+  //   } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_WALLS_EXTENDED_THR
+  //     mWallsExtendedThr = tryFloatValue( hlp, k, v, key[2].dflt );
   //     if ( mWallsExtendedThr < 0 ) { mWallsExtendedThr = 0; ret = TDString.ZERO; }
   //     if ( mWallsExtendedThr > 90 ) { mWallsExtendedThr = 90; ret = TDString.NINETY; }
-  //   } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WALLS_XCLOSE
-  //     mWallsXClose = tryFloatValue( hlp, k, v, def[3] );
+  //   } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_WALLS_XCLOSE
+  //     mWallsXClose = tryFloatValue( hlp, k, v, key[3].dflt );
   //     if ( mWallsXClose < 0 ) { mWallsXClose = 0; ret = TDString.ZERO; }
-  //   } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WALLS_CONCAVE
-  //     mWallsConcave = tryFloatValue( hlp, k, v, def[4] );
+  //   } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_WALLS_CONCAVE
+  //     mWallsConcave = tryFloatValue( hlp, k, v, key[4].dflt );
   //     if ( mWallsConcave < 0 ) { mWallsConcave = 0; ret = TDString.ZERO; }
-  //   } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WALLS_XSTEP
-  //     mWallsXStep = tryFloatValue( hlp, k, v, def[5] );
+  //   } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_WALLS_XSTEP
+  //     mWallsXStep = tryFloatValue( hlp, k, v, key[5].dflt );
   //     if ( mWallsXStep < 0 ) { mWallsXStep = 0; ret = TDString.ZERO; }
   //   } else {
   //     TDLog.e("missing WALLS key: " + k );
@@ -2899,42 +2809,41 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref draw: " + k );
-    String[] key = TDPrefKey.DRAW;
-    String[] def = TDPrefKey.DRAWdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNSCALED_POINTS (bool)
-      mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT (choice)
+    TDPrefKey[] key = TDPrefKey.mDraw;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_UNSCALED_POINTS (bool)
+      mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_DRAWING_UNIT (choice)
       try {
-        setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) );
+        setDrawingUnitIcons( tryFloatValue( hlp, k, v, key[1].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LABEL_SIZE
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LABEL_SIZE
       try {
-        setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, def[2] ) ), true );
+        setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, key[2].dflt ) ), true );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
       // FIXME changing label size affects only new labels; not existing labels (until they are edited)
       ret = String.format(Locale.US, "%.2f", mLabelSize );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LINE_THICKNESS
-      ret = setLineThickness( tryStringValue( hlp, k, v, def[3] ) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_LINE_STYLE (choice)
-      setLineStyleAndType( tryStringValue( hlp, k, v, def[4] ) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_LINE_CLOSE
-      mLineClose = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_SEGMENT
-      ret = setLineSegment( tryIntValue(   hlp, k, v, def[6] ) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_ARROW_LENGTH
-      ret = setArrowLength( tryFloatValue( hlp, k, v, def[7] ) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[8]) );
-    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
-    //   mContinueLine  = tryIntValue( hlp, k, v, def[8] );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[9]) );
-    // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_REDUCE_ANGLE
-    //   ret = setReduceAngle( tryFloatValue( hlp, k, v, def[10] ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_LINE_THICKNESS
+      ret = setLineThickness( tryStringValue( hlp, k, v, key[3].dflt ) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_LINE_STYLE (choice)
+      setLineStyleAndType( tryStringValue( hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_LINE_CLOSE
+      mLineClose = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_SEGMENT
+      ret = setLineSegment( tryIntValue(   hlp, k, v, key[6].dflt ) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_ARROW_LENGTH
+      ret = setArrowLength( tryFloatValue( hlp, k, v, key[7].dflt ) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
+    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
+    //   mContinueLine  = tryIntValue( hlp, k, v, key[8].dflt );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[9].dflt) );
+    // } else if ( k.equals( key[ 10 ].key ) ) { // DISTOX_REDUCE_ANGLE
+    //   ret = setReduceAngle( tryFloatValue( hlp, k, v, key[10] ) );
     } else {
       TDLog.e("missing DRAW key: " + k );
     }
@@ -2946,14 +2855,13 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref erase: " + k );
-    String[] key = TDPrefKey.ERASE;
-    String[] def = TDPrefKey.ERASEdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_CLOSENESS
-      ret = setSelectness( tryFloatValue( hlp, k, v, def[0] ) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_ERASENESS
-      ret = setEraseness( tryFloatValue( hlp, k, v, def[1] ) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_POINTING
-      ret = setPointingRadius( tryIntValue(   hlp, k, v, def[2] ) );
+    TDPrefKey[] key = TDPrefKey.mErase;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_CLOSENESS
+      ret = setSelectness( tryFloatValue( hlp, k, v, key[0].dflt ) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_ERASENESS
+      ret = setEraseness( tryFloatValue( hlp, k, v, key[1].dflt ) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_POINTING
+      ret = setPointingRadius( tryIntValue(   hlp, k, v, key[2].dflt ) );
     } else {
       TDLog.e("missing ERASE key: " + k );
     }
@@ -2965,16 +2873,15 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref edit: " + k );
-    String[] key = TDPrefKey.EDIT;
-    String[] def = TDPrefKey.EDITdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_DOT_RADIUS
-      ret = setDotRadius( tryFloatValue( hlp, k, v, def[0] ) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_CLOSENESS
-      ret = setSelectness( tryFloatValue( hlp, k, v, def[1] ) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_MIN_SHIFT
-      ret = setMinShift( tryIntValue(  hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_POINTING
-      ret = setPointingRadius( tryIntValue(   hlp, k, v, def[3] ) );
+    TDPrefKey[] key = TDPrefKey.mEdit;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_DOT_RADIUS
+      ret = setDotRadius( tryFloatValue( hlp, k, v, key[0].dflt ) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_CLOSENESS
+      ret = setSelectness( tryFloatValue( hlp, k, v, key[1].dflt ) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_MIN_SHIFT
+      ret = setMinShift( tryIntValue(  hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_POINTING
+      ret = setPointingRadius( tryIntValue(   hlp, k, v, key[3].dflt ) );
     } else {
       TDLog.e("missing EDIT key: " + k );
     }
@@ -2987,32 +2894,31 @@ public class TDSetting
   {
     String ret = null;
     // TDLog.v("update pref sketch: " + k );
-    String[] key = TDPrefKey.SKETCH;
-    String[] def = TDPrefKey.SKETCHdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_3D_SKETCH
-      m3Dsketch = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    TDPrefKey[] key = TDPrefKey.mSketch;
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_3D_SKETCH
+      m3Dsketch = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
       TDLog.e("3D sketch: " + m3Dsketch );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SKETCH_SPLAY_BUFFER
-      mSplayBuffer = tryFloatValue( hlp, k, v, def[1] );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_SKETCH_SPLAY_BUFFER
+      mSplayBuffer = tryFloatValue( hlp, k, v, key[1].dflt );
       TDLog.e("3D sketch buffer: " + mSplayBuffer );
     } else {
       TDLog.e("missing SKETCH key: " + k );
     }
     /*
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_SKETCH_MODEL_TYPE (choice)
-      mSketchModelType = tryIntValue(  hlp, k, v, def[0] );
-    } else if ( k.equals( key[ 1 ] ) ) { // 0.5 meter // DISTOX_SKETCH_LINE_STEP
-      mSketchSideSize = tryFloatValue( hlp, k, v, def[1] );
+      mSketchModelType = tryIntValue(  hlp, k, v, key[0] );
+    } else if ( k.equals( key[ 1 ].key ) ) { // 0.5 meter // DISTOX_SKETCH_LINE_STEP
+      mSketchSideSize = tryFloatValue( hlp, k, v, key[1] );
       if ( mSketchSideSize < 0.01f ) { mSketchSideSize = 0.01f; ret = "0.01"; }
-    // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_BORDER_STEP
-    //   mSketchBorderStep  = tryFloatValue( hlp, k, v, def[ ] );
-    // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SECTION_STEP
-    //   mSketchSectionStep = tryFloatValue( hlp, k, v, def[ ] );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_DELTA_EXTRUDE
-      mDeltaExtrude = tryFloatValue( hlp, k, v, def[2] );
+    // } else if ( k.equals( key[ ? ].key ) ) { // DISTOX_BORDER_STEP
+    //   mSketchBorderStep  = tryFloatValue( hlp, k, v, key[ ] );
+    // } else if ( k.equals( key[ ? ].key ) ) { // DISTOX_SECTION_STEP
+    //   mSketchSectionStep = tryFloatValue( hlp, k, v, key[ ] );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_DELTA_EXTRUDE
+      mDeltaExtrude = tryFloatValue( hlp, k, v, key[2] );
       if ( mDeltaExtrude < 0.01f ) { mDeltaExtrude = 0.01f; ret = "0.01"; }
-    // } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_COMPASS_READINGS
-    //   mCompassReadings = tryIntValue( hlp, k, v, def[ ] );
+    // } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_COMPASS_READINGS
+    //   mCompassReadings = tryIntValue( hlp, k, v, key[ ] );
     //   if ( mCompassReadings < 1 ) { mCompassReadings = 1; ret = TDString.ONE; }
     } else {
       TDLog.e("missing SKETCH key: " + k );
@@ -3178,12 +3084,12 @@ public class TDSetting
     if ( level == TDLevel.mLevel ) return;
 
     if ( StationPolicy.policyDowngrade( level ) ) {
-      setPreference( prefs, TDPrefKey.SURVEY[POLICY_INDEX], TDString.ONE );
+      setPreference( prefs, TDPrefKey.policyKey(), TDString.ONE );
     }
     TDLevel.setLevel( TDInstance.context, level );
     int policy = StationPolicy.policyUpgrade( level );
     if ( policy > 0 ) {
-      setPreference( prefs, TDPrefKey.SURVEY[POLICY_INDEX], Integer.toString( policy ) );
+      setPreference( prefs, TDPrefKey.policyKey(), Integer.toString( policy ) );
     }
     // if ( ! TDLevel.overExpert ) {
     //   mMagAnomaly = false; // magnetic anomaly compensation requires level overExpert
@@ -3204,11 +3110,11 @@ public class TDSetting
     }
     if ( ! setStationPolicy( policy ) ) {
       // TDLog.v("preference is reset to the last saved policy " + StationPolicy.savedPolicy() );
-      TDPrefHelper.update( TDPrefKey.SURVEY[POLICY_INDEX], Integer.toString( StationPolicy.savedPolicy() ) );
+      TDPrefHelper.update( TDPrefKey.policyKey(), Integer.toString( StationPolicy.savedPolicy() ) );
       if ( TDPrefActivity.mPrefActivitySurvey != null ) TDPrefActivity.mPrefActivitySurvey.reloadPreferences(); // FIXME_PREF
     } else {
       // TDLog.v("preference is set to the policy " + policy );
-      TDPrefHelper.update( TDPrefKey.SURVEY[POLICY_INDEX], Integer.toString( policy ) );
+      TDPrefHelper.update( TDPrefKey.policyKey(), Integer.toString( policy ) );
     }
     // if ( ! mBacksightShot ) clearMagAnomaly( hlp.getSharedPrefs() );
     // TDLog.v("PARSE Policy " + policy + " saved " + StationPolicy.savedPolicy() );
@@ -3708,6 +3614,12 @@ public class TDSetting
 
 
   /** import the settings from the settings file
+   * the file must contain one key for each line, as "type key value"
+   * where type is B, I, or F,
+   *       key  is the name of the setting
+   *       and value its value
+   * The classes of keys are defined in TDPrefKey
+   *   
    * @param prefs   shared preferences
    * @param all     whether to import all settings
    * @return true on success
@@ -3715,8 +3627,8 @@ public class TDSetting
   public static boolean importSettings( Context ctx, SharedPreferences prefs, boolean all )
   {
     // TDLog.v("Setting import settings");
-    String[] keyUnits = TDPrefKey.UNITS;
-    String[] defUnits = TDPrefKey.UNITSdef;
+    // String[] keyUnits = TDPrefKey.UNITS;
+    // String[] defUnits = TDPrefKey.UNITSdef;
     Editor editor = prefs.edit();
     File file = TDFile.getSettingsFile(); // PRIVATE FILE
     int size;
@@ -3733,9 +3645,9 @@ public class TDSetting
           // if ( Long.parseLong( value ) < 500053L ) return false;
           continue;
         }
-        String kay = vals[1];
+        String kay   = vals[1];
         String value = vals[2];
-        int key_type = TDPrefKey.getKeyType( kay ); // FIXME TODO
+        int group    = TDPrefKey.getKeyGroup( kay ); // FIXME TODO
         if ( all ) {
           switch ( kay ) {
             case "DISTOX_SIZE_BUTTONS":
@@ -4296,7 +4208,7 @@ public class TDSetting
             mLoopThr = Float.parseFloat( value ); setPreference( editor, kay, mLoopThr );
             break;
           case "DISTOX_UNIT_LENGTH":
-            if ( value.equals( defUnits[0] ) ) {
+            if ( value.equals( TDPrefKey.mUnits[0].dflt ) ) {
                 mUnitLength = 1.0f;
                 mUnitLengthStr = "m";
               } else {
@@ -4306,7 +4218,7 @@ public class TDSetting
             setPreference( editor, kay, ( mUnitLength > 0.99f ? "meters" : "feet" ) );
             break;
           case "DISTOX_UNIT_ANGLE":
-            if ( value.equals( defUnits[1] ) ) {
+            if ( value.equals( TDPrefKey.mUnits[1].dflt ) ) {
               mUnitAngle = 1.0f;
               mUnitAngleStr = "deg";
             } else {
