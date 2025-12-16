@@ -221,7 +221,7 @@ class TdmEquateNewDialog extends MyDialog
                       // }
                       // if (!old) 
                       if ( ! stations.contains( station ) ) {
-                          boolean good_station = true;
+                          boolean good_station = false;
                           ArrayList<String> sts = new ArrayList<>();
                           int len0 = survey0.length();
                           // while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // ?
