@@ -117,6 +117,17 @@ class TdmEquateNewDialog extends MyDialog
     layout4.invalidate();
   }
 
+  /* some thought about search/all :
+   * The "search" button could show all possible equate (in yellow) and user choose which one to pick by tapping a station.
+   * When the user picks an equate the program recomputes the possible equates and update the yellow equates.
+   * When the user tap the "search" button, if there are possible equates it becomes "clear", otherwise there is a warning toast and the button is disabled.
+   * When the user tap the "clear" button, the set of possible equates is cleared
+   *
+   * We need a local class for PossibleEquate with two survey stations (the two Surveys and the two Stations), even if the station names coincide.
+   * Next we need a method to find all possible equates, and store them in an ArrayList of PossibleEquate.
+   * A boolean function to check whether there are possible equates is useful: this could be a test whether ArrayList is nor empty
+   * (the ArrayList could be instantiated when the dialog is created, and later filled/cleared).
+   */ 
   @Override
   public void onClick(View v) 
   {
