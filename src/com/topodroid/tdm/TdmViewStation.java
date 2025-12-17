@@ -34,7 +34,7 @@ class TdmViewStation
 
   /** cstr
    * @param st      station
-   * @param command ???
+   * @param command view command of the survey
    * @param x0      X coord [canvas]
    * @param y0      Y coord [canvas]
    * @param equated ??? whether the station is equated to another one
@@ -69,6 +69,10 @@ class TdmViewStation
   /** @return the name of the station
    */
   String name() { return mStation.mName; }
+
+  /** @return the survey that contains the station of this view-station
+   */
+  TdmSurvey survey() { return mCommand.mSurvey; }
 
   /** mark the station 
    * @param checked   whether the station is marked "checked"

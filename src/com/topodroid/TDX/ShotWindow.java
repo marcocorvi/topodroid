@@ -958,7 +958,9 @@ public class ShotWindow extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
+      // TDLog.v("Shot activity close");
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
+      // new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
 
@@ -1534,8 +1536,8 @@ public class ShotWindow extends Activity
   public synchronized void onDestroy() 
   {
     super.onDestroy();
-    // TDLog.v( TAG + "on Destroy()" );
-    // new DataStopTask( mApp, this, mDataDownloader ).execute();
+    TDLog.v( "Shot activity on Destroy" );
+    new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217
 
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
@@ -1610,13 +1612,14 @@ public class ShotWindow extends Activity
     }
   };
 
-  void doFinish()
+  private void doFinish()
   {
     new DataStopTask( mApp, this, mDataDownloader ).execute();
     TopoDroidApp.mShotWindow = null;
     finish();
   }
 
+  // back pressed puts the activty on pause
   @Override
   public void onBackPressed () // askClose
   {
@@ -1627,20 +1630,23 @@ public class ShotWindow extends Activity
       return;
     }
     if ( TDSetting.mSingleBack ) {
+      TDLog.v("Shot activity on back pressed - single back");
       DrawingSurface.clearManagersCache();
-      new DataStopTask( mApp, this, mDataDownloader ).execute();
+      // new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
-      super.onBackPressed();
+      super.onBackPressed(); 
     } else if ( doubleBack ) {
+      TDLog.v("Shot activity on back pressed - double back execute");
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       DrawingSurface.clearManagersCache();
-      new DataStopTask( mApp, this, mDataDownloader ).execute();
+      // new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
     } else {
+      TDLog.v("Shot activity on back pressed - double back post runnable");
       doubleBack = true;
       doubleBackToast = TDToast.makeToast( R.string.double_back );
       doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );

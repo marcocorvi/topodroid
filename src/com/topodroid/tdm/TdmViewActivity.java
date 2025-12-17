@@ -73,6 +73,30 @@ public class TdmViewActivity extends Activity
                                       , OnClickListener
                                       , OnItemClickListener
 {
+  /** struct for a possible equate, holding two stations of different surveys
+   */
+  class PossibleEquate
+  {
+    TdmViewStation mStation1;
+    TdmViewStation mStation2;
+
+    /** cstr
+     * @param st1  first station
+     * @param st2  second station
+     * @note the two stations must belong to different surveys
+     */
+    PossibleEquate( TdmViewStation st1, TdmViewStation st2 )
+    {
+      assert( st1.survey() != st2.survey() );
+      mStation1 = st1;
+      mStation2 = st2;
+    }
+  }
+
+  ArrayList< PossibleEquate > mPossibleEquate;
+
+  //----------------------------------------------------------------------
+
   MyHorizontalListView mListView;
   MyHorizontalButtonView mButtonView1;
 
@@ -152,6 +176,7 @@ public class TdmViewActivity extends Activity
 
     protected void setTheTitle()
     {
+      // TODO
     }
 
     ArrayList< TdmViewCommand > getCommands() { return mDrawingSurface.mCommandManager; }
@@ -206,6 +231,8 @@ public class TdmViewActivity extends Activity
       mMenu = (ListView) findViewById( R.id.menu );
       mMenuAdapter = null;
       mMenu.setOnItemClickListener( this );
+
+      mPossibleEquate = new ArrayList<PossibleEquate>();
 
       doStart();
       mDrawingSurface.transform( width/2.0f, height/2.0f, 1 );
@@ -702,4 +729,62 @@ public class TdmViewActivity extends Activity
     super.onConfigurationChanged( new_cfg );
     TDLocale.resetTheLocale();
   }
+
+  /** clear the list of possible equates
+   */
+  void clearPossibleEquates()
+  {
+    mPossibleEquate.clear();
+  }
+  
+  /** add a possible equate
+   * @param st1  first station
+   * @param st2  second station
+   * @return true if success
+   */
+  boolean addPossibleEquate( TdmViewStation st1, TdmViewStation st2 )
+  {
+    if ( st1 == null || st2 == null ) return false;
+    if ( st1.survey() == st2.survey() ) return false; // could test on TdmViewCommands
+    mPossibleEquate.add( new PossibleEquate( st1, st2 ) );
+    return true;
+  }
+
+  /** @return true if there are possible equates
+   */
+  boolean hasPossibeEquate() { return mPossibleEquate.size() > 0; }
+
+  /** compute possible equates:
+   * a possible equate is an eqaute between stations of two surveys with the same name
+   */
+  boolean computePossibleEquates()
+  {
+    clearPossibleEquates();
+    ArrayList< TdmViewCommand > commands = getCommands();
+    int nr_surveys = commands.size();
+    if ( nr_surveys <= 1 ) return false;
+    for ( int i=0; i < nr_surveys; ++i ) {
+      List< TdmViewStation > stations1 = commands.get(i).mStations;
+      for ( int j=i+1; j < nr_surveys; ++j ) {
+        List< TdmViewStation > stations2 = commands.get(j).mStations;
+        ArrayList< TdmViewStation > equated = new ArrayList<>();
+        for ( TdmViewStation st1 : stations1 ) {
+          if ( st1.mEquated ) continue;
+          String name = st1.name();
+          for ( TdmViewStation st2 : stations2 ) {
+            if ( st2.mEquated ) continue;
+            if ( equated.contains( st2 ) ) continue;
+            if ( st2.name().equals( name ) ) {
+              if ( addPossibleEquate( st1, st2 ) ) {
+                equated.add( st2 );
+                break;
+              }
+            }
+          } // stations in survey j
+        } // stations in survey i
+      } // survey j
+    } // survey i
+    return hasPossibeEquate();
+  }
+  
 }
