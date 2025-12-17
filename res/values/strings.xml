@@ -1232,6 +1232,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_export_config">Export project</string>
     <string name="help_delete_config">Delete project</string>
     <string name="help_add_equate">Add surveys equate</string>
+    <string name="help_all_equates">All possible equates</string>
     <string name="help_equates">List surveys equates</string>
     <string name="help_stations_minus">Show fewer stations</string>
     <string name="help_stations_plus">Show more stations</string>

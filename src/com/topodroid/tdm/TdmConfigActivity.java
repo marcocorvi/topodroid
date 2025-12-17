@@ -517,7 +517,11 @@ public class TdmConfigActivity extends Activity
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // INFO
       (new TdmInfoDialog( this, (TopoDroidApp)getApplication(), mTdmConfig)).show();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
-      (new TdmEquatesDialog( this, mTdmConfig, null )).show();
+      if ( mTdmConfig.hasEquates() ) {
+        (new TdmEquatesDialog( this, mTdmConfig, null )).show();
+      } else {
+        TDToast.make( R.string.no_equate );
+      }
     } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D VIEWER
       if ( mTdmConfig.writeTdmConfig( true ) ) {
         try {

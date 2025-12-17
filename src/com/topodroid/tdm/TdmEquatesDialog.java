@@ -11,6 +11,7 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
@@ -49,16 +50,16 @@ class TdmEquatesDialog extends MyDialog
   TdmEquatesDialog( Context context, TdmConfig config, TdmViewActivity activity )
   {
     super( context, null, R.string.TdmEquatesDialog ); // null app
-    mContext = context;
-    mConfig  = config;
+    mContext  = context;
+    mConfig   = config;
     mActivity = activity;
     if ( mConfig != null && mConfig.getEquates() != null ) {
       mEquates = mConfig.getEquates();
-    } else {
-      mEquates = new ArrayList< TdmEquate >();
+      TDLog.v("Equates dialog uses config equates " + mEquates.size() );
     }
     // TDLog.v("Equates Dialog size " + mEquates.size() );
   }
+
 
   @Override
   public void onCreate( Bundle savedInstanceState )
@@ -81,10 +82,12 @@ class TdmEquatesDialog extends MyDialog
   void updateList()
   {
     if ( mEquates != null && mEquates.size() > 0 ) {
+      TDLog.v("Equates dialog updates list");
       mTdmEquateAdapter = new TdmEquateAdapter( mContext, R.layout.tdequate_adapter, mEquates );
       mList.setAdapter( mTdmEquateAdapter );
       // mList.invalidate();
     } else {
+      TDLog.v("Equates dialog no equate");
       hide();
       TDToast.make( R.string.no_equate );
       dismiss();
@@ -93,7 +96,8 @@ class TdmEquatesDialog extends MyDialog
 
   void doRemoveEquate( TdmEquate equate )
   {
-    mEquates.remove( equate );
+    // TDLog.v("Remove equate " + equate.stationsString() );
+    mConfig.removeEquate( equate );
     updateList();
     if ( mActivity != null ) mActivity.updateViewEquates();
   }

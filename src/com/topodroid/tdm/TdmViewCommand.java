@@ -55,6 +55,10 @@ public class TdmViewCommand
     return null;
   }
 
+  /** @return the selected station, or null
+   */
+  TdmViewStation getSelected() { return mSelected; }
+
   /** @return the survey name
    */
   String name() { return mSurvey.mName; }

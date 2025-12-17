@@ -37,6 +37,17 @@ class TdmViewEquate
     mPath = null;
   }
 
+  /** @retyurn true  if the equate contains a station of a given survey
+   * @param cmd   view of the survey
+   */
+  boolean contains( TdmViewCommand cmd ) 
+  {
+    for ( TdmViewStation st : mStations ) {
+      if ( st.mCommand == cmd ) return true;
+    }
+    return false;
+  }
+
   /** add a station-view to this equate-view
    * @param st   station view
    */

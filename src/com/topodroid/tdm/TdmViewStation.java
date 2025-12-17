@@ -70,6 +70,10 @@ class TdmViewStation
    */
   String name() { return mStation.mName; }
 
+  /** @return the full name of the station
+   */
+  String fullname() { return mStation.mName + "@" + mCommand.mSurvey.getName(); } // mCommand.mSurvey.getFullName() ???
+
   /** @return the survey that contains the station of this view-station
    */
   TdmSurvey survey() { return mCommand.mSurvey; }
