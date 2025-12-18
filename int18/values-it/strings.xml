@@ -477,6 +477,7 @@
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_device_add">AGGIUNGI DISP.</string>
     <string name="menu_export">ESPORTA</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">RECUPERA</string>

@@ -481,6 +481,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_device">Dispositivo</string>
     <string name="menu_device_add">Añadir dispositivo</string>
     <string name="menu_export">Exportar</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">Firmware</string>
     <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">Tomas eliminadas</string>

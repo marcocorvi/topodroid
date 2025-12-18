@@ -478,6 +478,7 @@
     <string name="menu_device">设备</string>
     <string name="menu_device_add">添加设备</string>
     <string name="menu_export">输出</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">固件</string>
     <string name="menu_geopoint_app">地理点应用程序</string>
     <string name="menu_recover">恢复</string>

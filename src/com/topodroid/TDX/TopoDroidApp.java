@@ -671,10 +671,10 @@ public class TopoDroidApp extends Application
 
   public void disconnectRemoteDevice( boolean force )
   {
-    // TDLog.v( "TDApp: disconnect remote device. force " + force );
-    // TDLog.Log( TDLog.LOG_COMM, "TDApp disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
+    // TDLog.v( "TDApp: disconnect remote device. force " + force + " listers " + mListerSet.size() );
     if ( force || mListerSet.size() == 0 ) {
       if ( mComm != null && mComm.isConnected() ) {
+        // TDLog.v("TDApp: disconnect comm");
         mComm.disconnectRemoteDevice( ); // FIXME BLE5 to check
       }
     }
@@ -1020,7 +1020,7 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
-    TDLog.v("TDApp on create");
+    // TDLog.v("TDApp on create");
 
     // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE are no longer supported
     // SQLiteDatabase dbase = openOrCreateDatabase("DISTOX14", 0, null );
@@ -1110,7 +1110,7 @@ public class TopoDroidApp extends Application
    */
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
-    TDLog.v("TDApp init env [1] already done " + done_init_env_first );
+    // TDLog.v("TDApp init env [1] already done " + done_init_env_first );
     if ( done_init_env_first ) return;
     // TDLog.v("TDApp Init Env [1]");
     done_init_env_first = true;
@@ -1189,7 +1189,7 @@ public class TopoDroidApp extends Application
    */
   static  boolean initEnvironmentSecond( )
   {
-    TDLog.v("TDApp init env [2] already done " + done_init_env_second );
+    // TDLog.v("TDApp init env [2] already done " + done_init_env_second );
     if ( done_init_env_second ) return true;
     // TDLog.v("TDApp Init Env [2]");
     done_init_env_second = true;
@@ -1207,7 +1207,7 @@ public class TopoDroidApp extends Application
         installSymbols( true );
       }
       String firmware_version = mDData.getValue( "firmware_version" );
-      TDLog.v("APP current firmware version " + firmware_version );
+      // TDLog.v("APP current firmware version " + firmware_version );
       if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
         installFirmware( false ); // false = do not overwrite
       }
@@ -1223,13 +1223,13 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp paths");
     boolean created = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
-    TDLog.v("TD app: env init-2 cwd created " + created );
+    // TDLog.v("TD app: env init-2 cwd created " + created );
     return true;
   }
 
   static boolean initEnvironmentThird()
   {
-    TDLog.v("TDApp init env [3] loaded palette " + done_loaded_palette );
+    // TDLog.v("TDApp init env [3] loaded palette " + done_loaded_palette );
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     // if ( ! with_dialog_r ) {
@@ -1241,7 +1241,7 @@ public class TopoDroidApp extends Application
         Thread loader = new Thread() {
           @Override
           public void run() {
-            TDLog.v("TDApp loading palette");
+            // TDLog.v("TDApp loading palette");
             Resources res = TDInstance.getResources();
             // BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
             // BrushManager.reloadLineLibrary( res );
@@ -1308,7 +1308,7 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd /* , String cbd */ )
   {
     if ( TDString.isNullOrEmpty( cwd ) ) cwd = TDInstance.cwd;
-    TDLog.v( "TDApp set CWD " + cwd /* + " CBD " + cbd */ );
+    // TDLog.v( "TDApp set CWD " + cwd /* + " CBD " + cbd */ );
 
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;
@@ -1318,7 +1318,7 @@ public class TopoDroidApp extends Application
 
     boolean created_cwd = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
     boolean created_db  = mData.openSurveyDatabase( TDInstance.context );
-    TDLog.v("TD app: cwd created " + created_cwd + " db created " + created_db );
+    // TDLog.v("TD app: cwd created " + created_cwd + " db created " + created_db );
     if ( created_db ) done_loaded_palette = false; // 20241018 force reloading palette
 
     if ( mMainActivity != null ) mMainActivity.setTheTitle( );

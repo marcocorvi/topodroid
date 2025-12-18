@@ -484,6 +484,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="menu_device">ZARIADENIE</string>
     <string name="menu_device_add">PRIDAŤ NEPOMENOVANÉ</string> <!-- PONECHAŤ -->
     <string name="menu_export">EXPORTOVAŤ</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GNSS APP</string>
     <string name="menu_recover">OBNOVIŤ</string>

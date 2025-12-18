@@ -475,6 +475,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_device">PÉRIPHÉRIQUE</string>
     <string name="menu_device_add">AJOUT PÉRIPHÉRIQUE</string>
     <string name="menu_export">EXPORTER</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APPLI GEOPOINT</string>
     <string name="menu_recover">RECUPÉRER</string>

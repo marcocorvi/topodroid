@@ -960,7 +960,7 @@ public class ShotWindow extends Activity
     if ( p++ == pos ) { // CLOSE
       // TDLog.v("Shot activity close");
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
-      // new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217
+      // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
 
@@ -1537,7 +1537,7 @@ public class ShotWindow extends Activity
   {
     super.onDestroy();
     TDLog.v( "Shot activity on Destroy" );
-    new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217
+    new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217
 
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
@@ -1614,7 +1614,7 @@ public class ShotWindow extends Activity
 
   private void doFinish()
   {
-    new DataStopTask( mApp, this, mDataDownloader ).execute();
+    new DataStopTask( mApp, this, mDataDownloader ).immediateExecute();
     TopoDroidApp.mShotWindow = null;
     finish();
   }
@@ -1630,23 +1630,23 @@ public class ShotWindow extends Activity
       return;
     }
     if ( TDSetting.mSingleBack ) {
-      TDLog.v("Shot activity on back pressed - single back");
+      // TDLog.v("Shot activity on back pressed - single back");
       DrawingSurface.clearManagersCache();
-      // new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217 
+      // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed(); 
     } else if ( doubleBack ) {
-      TDLog.v("Shot activity on back pressed - double back execute");
+      // TDLog.v("Shot activity on back pressed - double back execute");
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       DrawingSurface.clearManagersCache();
-      // new DataStopTask( mApp, this, mDataDownloader ).execute(); // 20251217 
+      // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
     } else {
-      TDLog.v("Shot activity on back pressed - double back post runnable");
+      // TDLog.v("Shot activity on back pressed - double back post runnable");
       doubleBack = true;
       doubleBackToast = TDToast.makeToast( R.string.double_back );
       doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
@@ -2965,17 +2965,17 @@ public class ShotWindow extends Activity
   void renumberShotsFrom( long bid ) // 20251205
   {
     List< DBlock > shots = mApp_mData.selectAllShotsAfter( bid, TDInstance.sid, TDStatus.NORMAL );
-    TDLog.v("Renumber: shots from " + bid + " size " + shots.size() );
+    // TDLog.v("Renumber: shots from " + bid + " size " + shots.size() );
     if ( shots.isEmpty() ) return;
     // N.B. this set is the leg stations, but it should be ok
     Set< String > stations = mApp_mData.selectAllStationsBefore(  bid, TDInstance.sid );  
-    TDLog.v("Renumber: stations before" + bid + " size " + stations.size() );
+    // TDLog.v("Renumber: stations before" + bid + " size " + stations.size() );
     if ( ! stations.isEmpty() ) {
       String last_station = null;
       for ( String station : stations ) {
         if ( last_station == null || StationName.compareNames( last_station, station ) > 0 ) last_station = station;
       }
-      TDLog.v("Renumber: max station " + last_station );
+      // TDLog.v("Renumber: max station " + last_station );
       HashMap< String, String > station_map = new HashMap<>();
       for ( DBlock b : shots ) {
         String fi = null;

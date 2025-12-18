@@ -453,6 +453,7 @@
     <string name="menu_device">GERÄT</string>
     <string name="menu_device_add">GERÄT HINZUFÜGEN</string>
     <string name="menu_export">EXPORTIEREN</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GPS APP</string>
     <string name="menu_recover">WIEDERHERSTELLEN</string>

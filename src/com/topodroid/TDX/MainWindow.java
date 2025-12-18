@@ -163,7 +163,7 @@ public class MainWindow extends Activity
                           };
 
   private static final int[] menus = {
-                          R.string.menu_close,
+                          R.string.menu_exit,
                           R.string.menu_cwd,
                           R.string.menu_palette,
                           // R.string.menu_logs, // NO_LOGS

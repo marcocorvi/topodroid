@@ -475,6 +475,7 @@
     <string name="menu_device">ПРИБОР</string>
     <string name="menu_device_add">ДОБАВИТЬ УСТРОЙСТВО</string>
     <string name="menu_export">Экспорт</string>
+    <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_geopoint_app">ПРИЛОЖЕНИЕ ГЕОПРИВЯЗКИ</string>
     <string name="menu_recover">Восстановить</string>
