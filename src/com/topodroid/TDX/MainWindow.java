@@ -1417,23 +1417,10 @@ public class MainWindow extends Activity
     super.onBackPressed();
   }
 
-  /** perform full backup - open file picker to select destination */
+  /** perform full backup - create backup and share it */
   private void doFullBackup()
   {
-    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd_HHmmss", java.util.Locale.US);
-    String timestamp = sdf.format(new java.util.Date());
-    String backupName = "TopoDroid-backup-" + timestamp + ".zip";
-    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-    intent.addCategory(Intent.CATEGORY_OPENABLE);
-    intent.setType("application/zip");
-    intent.putExtra(Intent.EXTRA_TITLE, backupName);
-    try {
-      startActivityForResult(intent, TDRequest.REQUEST_FULL_BACKUP);
-    } catch (ActivityNotFoundException e) {
-      TDLog.e("BACKUP file picker not available: " + e.getMessage());
-      // Fallback: save to default location without picker
-      new FullBackupTask(mActivity, null).execute();
-    }
+    new FullBackupTask(mActivity, null, true).execute(); // share=true
   }
 
   /** perform full restore - open file picker to select backup file */

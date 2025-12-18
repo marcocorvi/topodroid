@@ -14,9 +14,13 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.MyFileProvider;
 
 import android.os.AsyncTask;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 
 import java.io.File;
@@ -51,6 +55,7 @@ class FullBackupTask extends AsyncTask<Void, Integer, Boolean>
 
   private final Context mContext;
   private final Uri mUri;
+  private final boolean mShare;
   private String mBackupPath;
   private int mSurveyCount = 0;
   private String mErrorMessage = null;
@@ -62,8 +67,20 @@ class FullBackupTask extends AsyncTask<Void, Integer, Boolean>
    */
   FullBackupTask(Context context, Uri uri)
   {
+    this(context, uri, false);
+  }
+
+  /**
+   * Constructor with share option
+   * @param context  Application context
+   * @param uri      Output URI for the backup file (null for default location)
+   * @param share    Whether to share the backup file after creation
+   */
+  FullBackupTask(Context context, Uri uri, boolean share)
+  {
     mContext = context;
     mUri = uri;
+    mShare = share;
     mBuffer = new byte[BUF_SIZE];
   }
 
@@ -303,15 +320,54 @@ class FullBackupTask extends AsyncTask<Void, Integer, Boolean>
   protected void onPostExecute(Boolean result)
   {
     if (result) {
-      String msg = mContext.getResources().getString(R.string.backup_saved) +
-                   " (" + mSurveyCount + " surveys)";
-      TDToast.make(msg);
+      if (mShare && mBackupPath != null) {
+        // Share the backup file
+        shareBackupFile();
+      } else {
+        String msg = mContext.getResources().getString(R.string.backup_saved) +
+                     " (" + mSurveyCount + " surveys)";
+        TDToast.make(msg);
+      }
     } else {
       String msg = mContext.getResources().getString(R.string.backup_failed);
       if (mErrorMessage != null) {
         msg += ": " + mErrorMessage;
       }
       TDToast.makeBad(msg);
+    }
+  }
+
+  /**
+   * Share the backup file using Android share intent
+   */
+  private void shareBackupFile()
+  {
+    File backupFile = new File(mBackupPath);
+    if (!backupFile.exists()) {
+      TDToast.makeBad(R.string.backup_failed);
+      return;
+    }
+
+    Uri uri = MyFileProvider.fileToUri(mContext, backupFile);
+    Intent intent = new Intent();
+    intent.setAction(Intent.ACTION_SEND);
+    intent.putExtra(Intent.EXTRA_STREAM, uri);
+    intent.setType("application/zip");
+    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+    try {
+      Intent chooser = Intent.createChooser(intent,
+          mContext.getResources().getString(R.string.title_backup));
+      // Force chooser to always show (don't remember choice)
+      chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      if (mContext instanceof Activity) {
+        ((Activity) mContext).startActivity(chooser);
+      } else {
+        mContext.startActivity(chooser);
+      }
+    } catch (ActivityNotFoundException e) {
+      TDLog.e("BACKUP share failed: " + e.getMessage());
+      TDToast.makeBad(R.string.file_share_no_app);
     }
   }
 

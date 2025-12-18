@@ -444,6 +444,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_device_add">INCLUIR DISPOSITIVO</string>
   <!-- KEEP -->
   <string name="menu_export">EXPORTAR</string>
+  <string name="menu_backup">BACKUP COMPLETO</string>
+  <string name="menu_restore">RESTAURAR BACKUP</string>
   <string name="menu_firmware">FIRMWARE</string>
   <string name="menu_geopoint_app">APP GNSS</string>
   <string name="menu_recover">RESTAURAR</string>
@@ -685,8 +687,19 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="zip_saved">Gravado</string>
   <string name="zip_failed">Falha na compressão da topo</string>
   <string name="zip_share_failed">Falha ao compartilhar arquivo zip</string>
-    <!-- TODO string name="file_share_failed">Unable to share file</string -->
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+  <string name="file_share_failed">Falha ao compartilhar arquivo</string>
+  <string name="file_share_no_app">Sem app de compartilhamento</string>
+  <string name="backup_saved">Backup salvo</string>
+  <string name="backup_failed">Backup falhou</string>
+  <string name="restore_completed">Restauração concluída</string>
+  <string name="restore_failed">Restauração falhou</string>
+  <string name="backup_confirm">Criar backup completo de todas as topos e banco de dados?</string>
+  <string name="restore_confirm">Restaurar do backup? Isso substituirá seus dados atuais!</string>
+  <string name="title_backup">Backup completo</string>
+  <string name="title_restore">Restaurar backup</string>
+  <string name="restart_required">Reinício necessário</string>
+  <string name="restart_now">Reiniciar agora</string>
+  <string name="restart_later">Mais tarde</string>
   <string name="unzip_fail">Falha na decompressão da topo</string>
   <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
   <string name="unzip_fail_survey">Falha: nome da topo diferente do nome do arquivo ZIP</string>
@@ -1101,6 +1114,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="help_save">Gravar mudanças nas informações da topo</string -->
   <string name="help_save_calib">Gravar alterações nas informações de calibração</string>
   <string name="help_export_survey">Exportar Topo</string>
+  <string name="help_full_backup">Criar backup completo de todas as topos e banco de dados</string>
+  <string name="help_full_restore">Restaurar todos os dados de um arquivo de backup</string>
   <string name="help_loc">Coordenada GPS</string>
   <string name="help_delete_survey">Apagar topo</string>
   <string name="help_delete_calib">Apagar calibração</string>
