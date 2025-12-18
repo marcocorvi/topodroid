@@ -21,6 +21,7 @@ public class ExportData
   public boolean mSurface;
   public boolean mStation;
   public boolean mOverwrite = true;
+  public boolean mShare = false;  // true to share instead of save to file
   public int mType;    // model type
   public String mMime; // mime type - always application/octet-stream
   public String mExt;
@@ -60,6 +61,7 @@ public class ExportData
     mStation  = export.mStation;
     mSurface  = export.mSurface;
     mOverwrite = export.mOverwrite;
+    mShare    = export.mShare;
     mMime     = export.mMime;
   }
 

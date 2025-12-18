@@ -3080,17 +3080,16 @@ public class TopoGL extends Activity
   void selectExportFile( ExportData export )
   {
     mExport = export;
-    mExport.mName = mSurveyName; 
+    mExport.mName = mSurveyName;
     mExport.debug();
-    // if ( TDSetting.mExportUri ) {
-      // TDLog.v( "export with URI - survey " + mSurveyName );
+    if ( mExport.mShare ) {
+      // Share mode: export to temp file and share
+      (new com.topodroid.c3out.ExportShareTask( this, mParser, mExport )).execute();
+    } else {
+      // File picker mode
       // FIXME mExport.mMime is always "application/octet-stream" therefore index 0 is used
-      // selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
       selectFile( REQUEST_EXPORT_FILE, true, 0, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
-    //} else {
-    //  // TDLog.v( "export with task - survey " + mSurveyName );
-    //  (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
-    //}
+    }
   }
 
   /** file selection

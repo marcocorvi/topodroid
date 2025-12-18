@@ -47,9 +47,14 @@
     android:text="@string/export_walls"
     />
   <CheckBox android:id="@+id/model_surface"
-    android:layout_width="match_parent" 
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/export_surface"
+    />
+  <CheckBox android:id="@+id/model_share"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/export_share"
     />
 
   <LinearLayout android:id="@+id/help"

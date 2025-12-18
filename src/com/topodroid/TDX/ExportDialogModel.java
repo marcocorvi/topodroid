@@ -134,12 +134,13 @@ public class ExportDialogModel extends MyDialog
       // setOptions(); // not necessary
       
       // REMIND public ExportData( String name, boolean splays, boolean walls, boolean surface, boolean station, boolean overwrite )
-      ExportData export = new ExportData( mParser.getName(), 
+      ExportData export = new ExportData( mParser.getName(),
         ((CheckBox) findViewById( R.id.model_splays )).isChecked( ),
         ((CheckBox) findViewById( R.id.model_walls )).isChecked( ),
         ((CheckBox) findViewById( R.id.model_surface )).isChecked( ),
         ((CheckBox) findViewById( R.id.model_stations )).isChecked( ),
         true ); // overwrite
+      export.mShare = ((CheckBox) findViewById( R.id.model_share )).isChecked( );
       // TDLog.v("TOPOGL selected " + mSelectedPos );
       switch ( mSelectedPos ) {
         case 0: export.mType = ModelType.GLTF; break;
