@@ -479,7 +479,7 @@
     <string name="menu_device">MŰSZER</string>
     <string name="menu_device_add">MŰSZER HOZZÁADÁSA</string>
     <string name="menu_export">EXPORTÁLÁS</string>
-    <!-- TODO string name="menu_exit">EXIT</string -->
+    <string name="menu_exit">KILÉP</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GEOPONT APP</string>
     <string name="menu_recover">HELYREÁLLÍT</string>
