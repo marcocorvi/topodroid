@@ -1,0 +1,57 @@
+# Build outputs
+bin/
+gen/
+out/
+build/
+*.apk
+*.ap_
+*.dex
+*.class
+
+# Local configuration
+ant/local.properties
+local.properties
+
+# IDE files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/libraries
+.idea/shelf
+.idea/checkstyle-idea.xml
+*.iml
+.project
+.classpath
+.settings/
+
+# Eclipse metadata
+.metadata/
+
+# Gradle (if used)
+.gradle/
+gradle.properties
+!gradle/wrapper/gradle-wrapper.jar
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# Logs
+*.log
+lint.out
+
+# Claude Code
+CLAUDE.md
+.claude/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak

@@ -1,16 +1,34 @@
-# topodroid
+# TopoDroid
 
 [![Join the chat at https://gitter.im/marcocorvi/topodroid](https://badges.gitter.im/marcocorvi/topodroid.svg)](https://gitter.im/marcocorvi/topodroid?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-TopoDroid code base
 
-This is the TopoDroid app (com.topodroid.TDX) repository.
+**TopoDroid** is a productivity Android app for cave surveying.
 
-TopoDroid is a productivity Android app for cave surveying.
-It is specially designed to do cave surveying with the DistoX (v. 1, 2, and BLE), the Cavway X1, the BRIC (4 and 5), and the SAP (5 and 6)
-although it can be profitably used even without it.
+## Overview
 
-Visit the website https://sites.google.com/site/speleoapps for more informations about TopoDroid, and in particular for the old version changes doc.
+This is the official TopoDroid app (`com.topodroid.TDX`) repository.
 
-The most recent TopoDroid apks, as well as recent version changes info, are on http://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html 
+TopoDroid is specially designed for cave surveying with the following devices:
 
-All the code is provided under GNU General Public Licence v. 3 
+- **DistoX** (v1, v2, and BLE)
+- **Cavway X1**
+- **BRIC** (4 and 5)
+- **SAP** (5 and 6)
+
+The app can also be used profitably without any external device.
+
+## Requirements
+
+- **Android**: 5.0+ (API 21)
+- **Target SDK**: 36 (Android 16)
+
+## Links
+
+- **Website**: [SpeleoApps](https://sites.google.com/site/speleoapps) - Documentation and old version changes
+- **APK Downloads**: [TopoDroid APKs](http://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html) - Latest releases and version info
+
+## License
+
+All code is provided under **GNU General Public License v3.0** (GPL-3.0).
+
+See [COPYING](COPYING) for the full license text.

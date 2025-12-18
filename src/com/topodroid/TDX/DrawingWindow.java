@@ -8729,6 +8729,7 @@ public class DrawingWindow extends ItemDrawer
 
   static private int     mExportIndex;
   static private String  mExportExt;
+  static private boolean mExportSecond; // whether to export second view (for file picker callback)
 
   /**
    * @param export_type  export type
@@ -8743,25 +8744,24 @@ public class DrawingWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex  = TDConst.plotExportIndex( export_type );
     mExportExt    = TDConst.plotExportExt( export_type );
+    mExportSecond = second;
     // TDLog.v( "EXPORT do type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
-    // if ( TDSetting.mExportUri ) {
-      // if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D NO_C3D
-      //   saveWithExt( null, mType, mExportExt );
-      // } else {
-        // APP_OUT_DIR
-        // Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-        // intent.setType( TDConst.getMimeType( mExportIndex ) );
-        // intent.addCategory(Intent.CATEGORY_OPENABLE);
-        // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        // // intent.putExtra( "exporttype", index ); // index is not returned to the app
-        // intent.putExtra( Intent.EXTRA_TITLE, filename );
-        // startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
-        Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
-        // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
-        if ( uri != null ) {
-          doUriExport( uri, second );
-        }
-      // }
+    if ( TDSetting.mPlotExportSaveAs ) {
+      // Use file picker to let user choose save location
+      Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+      intent.setType( TDConst.getMimeType( mExportIndex ) );
+      intent.addCategory(Intent.CATEGORY_OPENABLE);
+      intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+      intent.putExtra( Intent.EXTRA_TITLE, filename );
+      startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.select_export_file ) ), TDRequest.REQUEST_GET_EXPORT );
+    } else {
+      // Save directly to default location
+      Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
+      // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
+      if ( uri != null ) {
+        doUriExport( uri, second );
+      }
+    }
     // } else {
     //   if ( mExportIndex == TDConst.SURVEY_FORMAT_TH2 ) {
     //     doSaveTh2( null, mType, true );
@@ -9565,43 +9565,36 @@ public class DrawingWindow extends ItemDrawer
           // finish();
         }
         break;
-      case TDRequest.REQUEST_GET_EXPORT: // TH2EDIT handle a th2 export
+      case TDRequest.REQUEST_GET_EXPORT: // Handle export with file picker
         // TDLog.v("DRAW export fullname " + mFullName3 );
         if ( resCode == Activity.RESULT_OK ) {
-          if ( TDLevel.overExpert ) {
-            finish();
-          }
-          Uri uri = intent.getData();   // import uri
-          String filename = uri.getLastPathSegment();
-          // TDLog.v( "DRAW URI to export: " + uri.toString() + " filename <" + filename + ">" );
-          // int ros = filename.indexOf(":"); // drop the "content" header
-          // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-          int pos   = filename.lastIndexOf("."); 
-          String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
-          // int qos_1 = filename.lastIndexOf("/") + 1;
-          // String name = (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 );
-          // TDLog.v( "DRAW export ext " + ext );
-          String type = TDPath.checkDrawEditType( ext );
-          if ( type != null ) {
-            // TDLog.v( "DRAW export reader type " + type + " filename " + filename );
-            if ( type.equals(".th2") ) { // N.B. type is extension with '.'
-              // String pathname = (new File( uri )).getAbsolutePath();
-              exportWriter( uri );
+          Uri uri = intent.getData();
+          if ( uri != null ) {
+            if ( mTh2Edit ) {
+              // TH2EDIT mode - handle th2 export
+              if ( TDLevel.overExpert ) {
+                finish();
+              }
+              String filename = uri.getLastPathSegment();
+              int pos   = filename.lastIndexOf(".");
+              String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : "";
+              String type = TDPath.checkDrawEditType( ext );
+              if ( type != null ) {
+                if ( type.equals(".th2") ) {
+                  exportWriter( uri );
+                } else {
+                  TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
+                }
+              } else {
+                TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
+              }
             } else {
-              // TDLog.e("DRAW export unsupported extension " + ext);
-              TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
-              // finish();
+              // Normal export mode - export to user-selected location
+              doUriExport( uri, mExportSecond );
             }
-          // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
-          //   // TDLog.v( "import stream type " + type + " name " + name );
-          //   // importStream( uri, name, type );
-          } else {
-            TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
-            // finish();
           }
         } else {
           TDLog.e("DRAW export canceled");
-          // finish();
         }
         break;
     }
