@@ -66,6 +66,15 @@
     <string name="hsplay">Гор.</string>
     <string name="vsplay">Верт.</string>
 
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
     <string name="paste">ВСТАВИТЬ</string>
@@ -823,6 +832,7 @@
     <string name="ask_gps_service">Включить сервис GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Удалить резервные копии абрисов?</string -->
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add"       >Добавить</string>
     <string name="button_apply"     >Применить</string>
@@ -889,6 +899,7 @@
     <string name="button_left"      >ЛЕВО</string>
     <string name="button_right"     >ПРАВО</string>
     <string name="button_clear"     >Очистить  </string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day" >Очистить 1d  </string>
     <string name="button_clear_week">Очистить 7d  </string>
     <string name="button_clear_memory">Очистить память</string>
@@ -1205,6 +1216,7 @@
     <string name="help_export_config">Экспортировать проект</string>
     <string name="help_delete_config">Удалить проект</string>
     <string name="help_add_equate">Добавить соединение съёмок</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">Список соединений съёмки</string>
     <string name="help_stations_minus">Показать меньше пикетов</string>
     <string name="help_stations_plus">Показать меньше пикетов</string>
@@ -1358,6 +1370,7 @@
     <string name="title_settings_gpx">GPX настройки экспорта</string>
     <string name="title_settings_kml">KML настройки экспорта</string>
     <string name="title_settings_srv">Wallsнастройки экспорта</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">TopoDroid настройки 3d абриса</string>
     <string name="title_settings_survey">TopoDroid настройки топосъёмки</string>
@@ -2115,6 +2128,9 @@
     <string name="title_export">Экспортировать проект как &#8230;</string>
     <string name="title_equates">Соединения в проекте</string>
     <string name="title_equate_new">Добавить соединение &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">Соединить %1$s с %2$s</string>
     <!-- UNUSED string name="title_cwd">Текущий рабочий каталог</string -->
     <string name="title_drop">Удалить съёмки ?</string>

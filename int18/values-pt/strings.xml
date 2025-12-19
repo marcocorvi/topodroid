@@ -55,6 +55,16 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="xsplay">X</string>
   <string name="hsplay">H</string>
   <string name="vsplay">V</string>
+
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
   <string name="cut">CORTAR</string>
   <string name="copy">COPIAR</string>
   <string name="paste">COLAR</string>
@@ -770,6 +780,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="ask_gps_service">Configurar o serviço GPS?</string>
   <!-- UNUSED string name="ask_backups_clear">Apagar backups dos croquis?</string -->
   <string name="ask_manual_update">Atualizar tradução do manual do usuário?\nVersão disponível %1$d Versão instalada %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
   <string name="button_add">Novo</string>
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar</string>
@@ -835,6 +846,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_left">ESQUERDA</string>
   <string name="button_right">DIREITA</string>
   <string name="button_clear">Limpar    </string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
   <string name="button_clear_day">Limpar 1 dia</string>
   <string name="button_clear_week">Limpar 7 dias</string>
   <string name="button_clear_memory">Limpar memória</string>
@@ -1130,6 +1142,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_export_config">Exportar projeto</string>
   <string name="help_delete_config">Apagar projeto</string>
   <string name="help_add_equate">Adicionar \'equates\' das topos</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
   <string name="help_equates">Listar \'equates\' das topos</string>
   <string name="help_stations_minus">Mostrar menos bases</string>
   <string name="help_stations_plus">Mostrar mais bases</string>
@@ -1277,6 +1290,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_settings_gpx">Config export GPX</string>
   <string name="title_settings_kml">Config export KML/GeoJSON/ShapeFile</string>
   <string name="title_settings_srv">Config export Walls</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
   <string name="title_settings_sketch">Config croquis 3D</string>
   <string name="title_settings_survey">Config topo</string>
   <!-- UNUSED string name="title_settings_splay">Config medidas auxiliares</string -->
@@ -1995,6 +2009,9 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_export">Exportar projeto como …</string>
   <string name="title_equates">\'Equates\' do projeto</string>
   <string name="title_equate_new">Incluir \'equate\' …</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
   <string name="title_equate_with">\'Equate\' %1$s e %2$s</string>
   <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
   <string name="title_drop">Excluir topos?</string>

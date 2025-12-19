@@ -67,6 +67,15 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hsplay">Гор.</string>
     <string name="vsplay">Верт.</string>
 
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
     <string name="cut">ИЗРЯЗВАНЕ</string>
     <string name="copy">КОПИРАНЕ</string>
     <string name="paste">ВМЪКВАНЕ</string>
@@ -831,6 +840,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="ask_gps_service">Задаване на GPS \?</string>
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Актуализиране на ръководството за потребителя\?\nТекуща версия  %1$d Инсталирана версия %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add">Добави</string>
     <string name="button_apply">Прилагане</string>
@@ -897,6 +907,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_left">ЛЯВО</string>
     <string name="button_right">ДЯСНО</string>
     <string name="button_clear">Изчисти</string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day">Изчистване на 1 ден</string>
     <string name="button_clear_week">Изчистване на 7 дни</string>
     <string name="button_clear_memory">Изчистване на паметта</string>
@@ -1213,6 +1224,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_export_config">Експортирай проект</string>
     <string name="help_delete_config">Изтрий проект</string>
     <string name="help_add_equate">Добави свързани картировки</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">Дай списък със свързани картировки</string>
     <string name="help_stations_minus">Покажи по-малко репери</string>
     <string name="help_stations_plus">Покажи повече репери</string>
@@ -1366,6 +1378,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_settings_gpx">Настройки за експортиране на GPX</string>
     <string name="title_settings_kml">Настройки за експортиране на KML</string>
     <string name="title_settings_srv">Настройки за експортиране на Walls</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">Настройки на 3D скица</string>
     <string name="title_settings_survey">Настройки на картировката</string>
@@ -2112,6 +2125,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_export">Експортирай проекта в</string>
     <string name="title_equates">Сравнявания в проекта</string>
     <string name="title_equate_new">Добави сравняване &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">Сравни %1$s и %2$s</string>
     <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <string name="title_drop">Извлачване на картировки \?</string>

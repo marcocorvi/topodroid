@@ -68,6 +68,15 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
     <string name="cut">VYSTRIHNÚŤ</string>
     <string name="copy">KOPÍROVAŤ</string>
     <string name="paste">PRILEPIŤ</string>
@@ -837,6 +846,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add"       >Pridať       </string>
     <string name="button_apply"     >Aplikovať</string>
@@ -904,6 +914,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_left"      >Vľavo</string>
     <string name="button_right"     >Vpravo</string>
     <string name="button_clear"     >Vyčistiť  </string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day" >Vyčistiť 1d  </string>
     <string name="button_clear_week">Vyčistiť 7d  </string>
     <string name="button_clear_memory">Vyčistiť pamäť</string>
@@ -1220,6 +1231,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_export_config">Export Projektu</string>
     <string name="help_delete_config">Vymazať Projekt</string>
     <string name="help_add_equate">Pridať Mapovania na porovnanie</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">Zoznam porovnaní</string>
     <string name="help_stations_minus">Zobraziť menej Staničení</string>
     <string name="help_stations_plus">Zobraziť viacej Staničení</string>
@@ -1374,6 +1386,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_settings_gpx">GPX nastavenia Exportu</string>
     <string name="title_settings_kml">KML nastavenia Exportu</string>
     <string name="title_settings_srv">Walls nastavenia Exportu</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">TopoDroid 3D nastavenia</string>
     <string name="title_settings_survey">TopoDroid nastavenie Mapovania</string>
@@ -2097,6 +2110,9 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="title_export">Export projekt ako &#8230;</string>
     <string name="title_equates">Projekt Porovnanie</string>
     <string name="title_equate_new">Pridaj Porovnanie &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">Porovnanie %1$s a %2$s</string>
     <!-- UNUSED string name="title_cwd">Aktuálny Pracovný Adresár</string -->
     <string name="title_drop">Zahodiť Mapovania ?</string>

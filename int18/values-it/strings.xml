@@ -64,6 +64,15 @@
     <string name="hsplay">Ysplay</string>
     <string name="vsplay">Zsplay</string>
 
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
     <string name="paste">INCOLLA</string>
@@ -826,6 +835,7 @@
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Installata v. %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>
@@ -892,6 +902,7 @@
     <string name="button_left"      >SINISTRA</string>
     <string name="button_right"     >DESTRA</string>
     <string name="button_clear"     >Cancella  </string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day" >Pulisci 1g  </string>
     <string name="button_clear_week">Pulisci 7gg  </string>
     <string name="button_clear_memory">Pulisci memoria</string>
@@ -1208,6 +1219,7 @@
     <string name="help_export_config">Esporta progetto</string>
     <string name="help_delete_config">Cancella progetto</string>
     <string name="help_add_equate">Aggiungi rilievi simili</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">Lista rilievi simili</string>
     <string name="help_stations_minus">Mostra meno capisaldi</string>
     <string name="help_stations_plus">Mostra piú capisaldi</string>
@@ -1362,6 +1374,7 @@
     <string name="title_settings_gpx">GPX: impostazioni export</string>
     <string name="title_settings_kml">KML: Imposta export</string>
     <string name="title_settings_srv">Export impostazioni Walls</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>
     <string name="title_settings_survey">Impostazione rilievo</string>
@@ -2123,6 +2136,9 @@
     <string name="title_export">Esporta progetto come &#8230;</string>
     <string name="title_equates">Collegamenti</string>
     <string name="title_equate_new">Aggiungi collegamento &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">Collega %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Cartella di lavoro corrente</string -->
     <string name="title_drop">Cancello rilievi ?</string>

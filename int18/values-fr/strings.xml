@@ -66,6 +66,15 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
     <string name="cut">COUPER</string>
     <string name="copy">COPIER</string>
     <string name="paste">COLLER</string>
@@ -827,6 +836,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="ask_gps_service">Activer le service GPS ?</string>
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update">Mise à jour de la traduction du manuel d\'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add"       >Ajouter</string>
     <string name="button_apply"     >Appliquer</string>
@@ -893,6 +903,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_left"      >GAUCHE</string>
     <string name="button_right"     >DROITE</string>
     <string name="button_clear"     >EFFACER</string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day" >Effacer 1j</string>
     <string name="button_clear_week">Effacer 7j</string>
     <string name="button_clear_memory">Effacer la mémoire</string>
@@ -1208,6 +1219,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_export_config">Exporter le projet</string>
     <string name="help_delete_config">Supprimer le projet</string>
     <string name="help_add_equate">Ajouter des égalités</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">Lister les égalités entre les topographies</string>
     <string name="help_stations_minus">Montrer moins de stations</string>
     <string name="help_stations_plus">Montrer plus de stations</string>
@@ -1361,6 +1373,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_settings_gpx">Paramètres d\'exportation GPX</string>
     <string name="title_settings_kml">Paramètres d\'exportation KML</string>
     <string name="title_settings_srv">Paramètres d\'exportation Walls</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">TopoDroid : paramétrage de croquis 3D</string>
     <string name="title_settings_survey">TopoDroid : paramétrage du relevé topo</string>
@@ -2072,6 +2085,9 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="title_export">Exporter le projet sous &#8230;</string>
     <string name="title_equates">Points de concordance ou égalités du projet</string>
     <string name="title_equate_new">Ajouter l\'égalité &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">Egalité entre %1$s et %2$s</string>
     <!-- UNUSED string name="title_cwd">Répertoire de travail en cours</string -->
     <string name="title_drop">Abandonner les topographies ?</string>

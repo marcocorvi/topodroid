@@ -68,6 +68,15 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="xsplay">Xsplay</string>
     <string name="hsplay">Hsplay</string>
     <string name="vsplay">Vsplay</string>
+
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
 	
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
@@ -828,6 +837,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">¿Actualizar la traducción del manual?\nActual V. %1$d Instalado v. %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add"       >Añadir</string>
     <string name="button_apply"     >Aplicar</string>
@@ -894,6 +904,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_left"      >Izquierdo</string>
     <string name="button_right"     >Derecho</string>
     <string name="button_clear"     >Borrar    </string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day" >limpiar 1d  </string>
     <string name="button_clear_week">limpiar 7d  </string>
     <string name="button_clear_memory">limpiar la memoria</string>
@@ -1208,6 +1219,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_export_config">Exportar topografía</string>
     <string name="help_delete_config">Eliminar topografía</string>
     <string name="help_add_equate">Agregar relieves similares</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">Lista relieves similares</string>
     <string name="help_stations_minus">Mostrar menos estaciones</string>
     <string name="help_stations_plus">Mostrar más estaciones</string>
@@ -1361,6 +1373,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_settings_gpx">GPX: configuración de exportación</string>
     <string name="title_settings_kml">KML: configuración de exportación</string>
     <string name="title_settings_srv">Configuración de exportación de paredes</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
     <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
@@ -2134,6 +2147,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_export">Exportar topografía como &#8230;</string>
     <string name="title_equates">Enlaces</string>
     <string name="title_equate_new">Agregar enlace &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">Enlace %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Carpeta de trabajo actual</string -->
     <string name="title_drop">¿Eliminar relieves? </string>

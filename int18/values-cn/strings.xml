@@ -66,6 +66,15 @@
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
+    <!-- TODO string name="pref_gen">General</string -->
+    <!-- TODO string name="pref_ui">User Interface</string -->
+    <!-- TODO string name="pref_data">Data</string -->
+    <!-- TODO string name="pref_plot">Sketch</string -->
+    <!-- TODO string name="pref_3d">3D viewer</string -->
+    <!-- TODO string name="pref_io">Export</string -->
+    <!-- TODO string name="pref_bt">Bluetooth</string -->
+    <!-- TODO string name="pref_cal">Calibration</string -->
+
     <string name="cut">剪切</string>
     <string name="copy">复制</string>
     <string name="paste">粘贴</string>
@@ -828,6 +837,7 @@
     <string name="ask_gps_service">设置GPS服务?</string>
     <!-- UNUSED string name="ask_backups_clear">删除草图备份?</string -->
     <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
+    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
 
     <string name="button_add"       >添加       </string>
     <string name="button_apply"     >应用</string>
@@ -894,6 +904,7 @@
     <string name="button_left"      >左</string>
     <string name="button_right"     >右</string>
     <string name="button_clear"     >清除     </string>
+    <!-- TODO string name="button_clear_all" >Clear all</string -->
     <string name="button_clear_day" >清除 1天  </string>
     <string name="button_clear_week">清除 1周  </string>
     <string name="button_clear_memory">清除内存</string>
@@ -1210,6 +1221,7 @@
     <string name="help_export_config">输出项目</string>
     <string name="help_delete_config">删除项目</string>
     <string name="help_add_equate">添加等同的测量</string>
+    <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">同等显示测量数据</string>
     <string name="help_stations_minus">显示更少的站点</string>
     <string name="help_stations_plus">显示更多的站点</string>
@@ -1363,6 +1375,7 @@
     <string name="title_settings_gpx">GPX格式输出设置</string>
     <string name="title_settings_kml">KML输出设置</string>
     <string name="title_settings_srv">洞壁输出设定</string>
+    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
     <string name="title_settings_survey">TopoDroid测量设置</string>
@@ -2124,6 +2137,9 @@
     <string name="title_export">项目输出 &#8230;</string>
     <string name="title_equates">相同项目</string>
     <string name="title_equate_new">添加相同 &#8230;</string>
+    <!-- TODO string name="button_equate_all">All</string -->
+    <!-- TODO string name="button_equate_one">One</string -->
+    <!-- TODO string name="button_equate_search">Search</string -->
     <string name="title_equate_with">等同 %1$s and %2$s</string>
     <!-- UNUSED string name="title_cwd">当前工作目录</string -->
     <string name="title_drop">停止测量 ?</string>
