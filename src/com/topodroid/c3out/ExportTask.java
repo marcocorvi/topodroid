@@ -21,8 +21,9 @@ import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TopoDroidApp;
 
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
@@ -148,6 +149,9 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
   {
     if ( res ) {
       TDToast.make( TDInstance.formatString( R.string.ok_export, mExport.mExt ) );
+      if ( TDSetting.mExportModelShare ) {
+        TopoDroidApp.shareUri( mApp, mUri, "application/stream" );
+      }
     } else {
       TDToast.makeBad( TDInstance.formatString( R.string.error_export_failed, mExport.mExt ) );
     }

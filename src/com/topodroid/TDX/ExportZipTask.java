@@ -79,7 +79,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
     if ( res ) {
       // TDToast.make( mSaved + " " + mArchiver.getZipname() );
       if ( mToast ) TDToast.make( R.string.zip_saved );
-      if ( TDSetting.mZipShare ) {
+      if ( TDSetting.mExportDataShare ) { // was mZipShare
         mApp.shareZip( );
       }
     } else {

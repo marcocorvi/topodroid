@@ -396,11 +396,13 @@ public class ExportDialogShot extends MyDialog
    */
   private boolean setOptions()
   {
+    TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.export_share )).isChecked();
+    //mZipShare = TDSetting.mExportDataShare;
     switch ( mSelectedPos ) {
       case TDConst.SURVEY_POS_ZIP: // Zip 
         {
           // TDSetting.mZipWithSymbols = ((CheckBox) findViewById( R.id.zip_symbols )).isChecked();
-          TDSetting.mZipShare = ((CheckBox) findViewById( R.id.zip_share )).isChecked();
+          // TDSetting.mZipShare = ((CheckBox) findViewById( R.id.zip_share )).isChecked();
           TDSetting.mZipOverwrite = ((CheckBox) findViewById( R.id.zip_overwrite )).isChecked();
         }
         break;
@@ -410,7 +412,6 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.compass_splays )).isChecked();
           TDSetting.mSwapLR = ((CheckBox) findViewById( R.id.compass_swap_lr )).isChecked();
           setExportPrefix( ((EditText) findViewById( R.id.compass_prefix )).getText() );
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.compass_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_CSURVEY: // CSurvey
@@ -418,7 +419,6 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.csurvey_prefix )).isChecked();
           TDSetting.mExportMedia = ((CheckBox) findViewById( R.id.csurvey_media )).isChecked();
           // setExportPrefix( ((EditText) findViewById( R.id.csurvey_prefix )).getText() );
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.csurvey_share )).isChecked();
         }
         break;
       // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
@@ -426,7 +426,6 @@ public class ExportDialogShot extends MyDialog
         {
           TDSetting.mPlyLRUD  = ((RadioButton) findViewById( R.id.ply_lrud )).isChecked();
           TDSetting.mPlyMinus = ((RadioButton) findViewById( R.id.ply_minus )).isChecked();
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.polygon_share )).isChecked();
         }
       break;
       case TDConst.SURVEY_POS_SURVEX: // Survex
@@ -439,7 +438,6 @@ public class ExportDialogShot extends MyDialog
               TDSetting.mSurvexEPSG = Integer.parseInt( epsg.getText().toString() ); // TRIM
             } catch ( NumberFormatException e ) { } 
           }
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.survex_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_THERION: // Therion
@@ -448,7 +446,6 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mTherionMaps = ((CheckBox) findViewById( R.id.therion_maps )).isChecked();
           TDSetting.mTherionUncommentedMaps = ((CheckBox) findViewById( R.id.therion_uncommented_maps )).isChecked();
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.therion_lrud )).isChecked();
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.therion_share )).isChecked();
         }
         break;
       // case 7: // Topo
@@ -467,7 +464,6 @@ public class ExportDialogShot extends MyDialog
           mExportFirst = first;
           EditText name = (EditText) findViewById( R.id.trobot_name );
           if ( ! setExportName( TDConst.SURVEY_POS_TOPOROBOT, name ) ) return false;
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.trobot_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_VTOPO: // VTopo
@@ -481,32 +477,27 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
           TDSetting.mVTopoFaverjon   = ((CheckBox) findViewById( R.id.vtopo_faverjon )).isChecked();
           setExportPrefix( ((EditText) findViewById( R.id.vtopo_series )).getText() );
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.vtopo_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_WALLS: // Walls
         {
           TDSetting.mWallsSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.walls_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_WINKARST: // Winkarst
         {
           setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.winkarst_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_CSV: //CSV
         {
           TDSetting.mCsvRaw = ((CheckBox) findViewById( R.id.csv_rawdata )).isChecked();
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.csv_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_DXF: // DXF
         {
           TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
           // TDSetting.mAcadVersion
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.dxf_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_KML: // KML
@@ -515,7 +506,6 @@ public class ExportDialogShot extends MyDialog
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.kml_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.kml_stations )).isChecked();
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.kml_share )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_SHAPEFILE: // Shapefile
@@ -523,7 +513,6 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.shp_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.shp_stations )).isChecked();
           // TDSetting.mShpGeoref = ((CheckBox) findViewById( R.id.shp_georeference )).isChecked();
-          TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.shp_share )).isChecked();
         }
         break;
     }
@@ -534,7 +523,8 @@ public class ExportDialogShot extends MyDialog
    */
   private void initOptions()
   {
-    ((CheckBox) findViewById( R.id.zip_share )).setChecked( TDSetting.mZipShare );
+    ((CheckBox) findViewById( R.id.export_share )).setChecked( TDSetting.mExportDataShare );
+    // ((CheckBox) findViewById( R.id.zip_share )).setChecked( TDSetting.mZipShare );
     ((CheckBox) findViewById( R.id.zip_overwrite )).setChecked( TDSetting.mZipOverwrite );
 
     // ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );
@@ -545,26 +535,21 @@ public class ExportDialogShot extends MyDialog
     }
     ((CheckBox) findViewById( R.id.compass_splays )).setChecked( TDSetting.mCompassSplays );
     ((CheckBox) findViewById( R.id.compass_swap_lr )).setChecked( TDSetting.mSwapLR );
-    ((CheckBox) findViewById( R.id.compass_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     ((CheckBox) findViewById( R.id.csurvey_media )).setChecked( TDSetting.mExportMedia );
-    ((CheckBox) findViewById( R.id.csurvey_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.survex_splay )).setChecked( TDSetting.mSurvexSplay );
     ((CheckBox) findViewById( R.id.survex_lrud )).setChecked( TDSetting.mSurvexLRUD );
     ((EditText) findViewById( R.id.survex_epsg )).setText( Integer.toString( TDSetting.mSurvexEPSG ) );
-    ((CheckBox) findViewById( R.id.survex_share )).setChecked( TDSetting.mExportDataShare );
 
     ((RadioButton) findViewById( R.id.ply_lrud )).setChecked( TDSetting.mPlyLRUD );
     ((RadioButton) findViewById( R.id.ply_minus )).setChecked( TDSetting.mPlyMinus );
-    ((CheckBox) findViewById( R.id.polygon_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.therion_config )).setChecked( TDSetting.mTherionWithConfig );
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );
     ((CheckBox) findViewById( R.id.therion_uncommented_maps )).setChecked( TDSetting.mTherionUncommentedMaps );
     ((CheckBox) findViewById( R.id.therion_lrud )).setChecked( TDSetting.mSurvexLRUD );
-    ((CheckBox) findViewById( R.id.therion_share )).setChecked( TDSetting.mExportDataShare );
     if ( mDiving ) {
       ((CheckBox) findViewById( R.id.vtopo_trox )).setVisibility( View.GONE );
     } else {
@@ -573,37 +558,29 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.vtopo_splays )).setChecked( TDSetting.mVTopoSplays );
     ((CheckBox) findViewById( R.id.vtopo_lrud )).setChecked( TDSetting.mVTopoLrudAtFrom );
     ((CheckBox) findViewById( R.id.vtopo_faverjon )).setChecked( TDSetting.mVTopoFaverjon );
-    ((CheckBox) findViewById( R.id.vtopo_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.walls_splays )).setChecked( TDSetting.mWallsSplays );
-    ((CheckBox) findViewById( R.id.walls_share )).setChecked( TDSetting.mExportDataShare );
 
     if ( TDSetting.mExportStationsPrefix ) {
       ( (EditText) findViewById( R.id.winkarst_prefix )).setText( mSurvey );
     } else {
       mBtnWinkarstSurvey.setText( R.string.export_prefix_set );
     }
-    ((CheckBox) findViewById( R.id.winkarst_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.csv_rawdata )).setChecked( TDSetting.mCsvRaw );
-    ((CheckBox) findViewById( R.id.csv_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
-    ((CheckBox) findViewById( R.id.dxf_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.kml_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.kml_stations )).setChecked( TDSetting.mKmlStations );
-    ((CheckBox) findViewById( R.id.kml_share )).setChecked( TDSetting.mExportDataShare );
 
     ((CheckBox) findViewById( R.id.shp_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.shp_stations )).setChecked( TDSetting.mKmlStations );
     // ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
-    ((CheckBox) findViewById( R.id.shp_share )).setChecked( TDSetting.mExportDataShare );
 
     ((EditText) findViewById( R.id.trobot_name )).setHint( mSurvey + TDPath.TRB );
     ((EditText) findViewById( R.id.trobot_index )).setHint("-1");
     ((CheckBox) findViewById( R.id.jean_botazzi )).setChecked( TDSetting.TRobotJB );
-    ((CheckBox) findViewById( R.id.trobot_share )).setChecked( TDSetting.mExportDataShare );
 
     if ( TDSetting.mExportPrefix != null ) {
       ((EditText)findViewById( R.id.vtopo_series )).setText( TDSetting.mExportPrefix );

@@ -89,7 +89,7 @@ import android.os.RemoteException;
 // import android.database.sqlite.SQLiteDatabase;
 
 import android.app.Application;
-// import android.app.Activity;
+import android.app.Activity;
 // import android.app.Notification;
 // import android.app.NotificationManager;
 // import android.app.KeyguardManager;
@@ -3370,22 +3370,30 @@ public class TopoDroidApp extends Application
     String filepath = TDPath.getOutFile( filename );
     // TDLog.v("Share file " + filepath );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( filepath ) );
-
-    Intent intent = new Intent( );
-    intent.setAction( Intent.ACTION_SEND );
-    intent.putExtra( Intent.EXTRA_STREAM, uri );
-    intent.setType( mimeType );
-    intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
     try {
-      if ( act == 1 && mSurveyWindow != null ) {
-        mSurveyWindow.startActivity( intent );
-      } else if ( act == 2 && mDrawingWindow != null ) {
-        mDrawingWindow.startActivity( intent );
+      if ( act == 1 ) {
+        shareUri( mSurveyWindow, uri, mimeType );
+      } else if ( act == 2 ) {
+        shareUri( mDrawingWindow, uri, mimeType );
       } else {
         TDToast.makeWarn( R.string.file_share_failed );
       }
     } catch ( ActivityNotFoundException e ) {
       TDToast.makeWarn( R.string.file_share_no_app );
+    }
+  }
+
+  public static void shareUri( Activity activity, Uri uri, String mimeType ) throws ActivityNotFoundException
+  {
+    if ( activity != null ) {
+      Intent intent = new Intent( );
+      intent.setAction( Intent.ACTION_SEND );
+      intent.putExtra( Intent.EXTRA_STREAM, uri );
+      intent.setType( mimeType );
+      intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
+      activity.startActivity( intent );
+    } else {
+      TDToast.makeWarn( R.string.file_share_failed );
     }
   }
 

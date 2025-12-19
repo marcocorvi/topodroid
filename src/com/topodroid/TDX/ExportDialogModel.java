@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.c3out.ExportData;
 
 // import android.app.Dialog;
@@ -132,6 +132,7 @@ public class ExportDialogModel extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       // setOptions(); // not necessary
+      TDSetting.mExportModelShare = ((CheckBox) findViewById( R.id.export_share )).isChecked( );
       
       // REMIND public ExportData( String name, boolean splays, boolean walls, boolean surface, boolean station, boolean overwrite )
       ExportData export = new ExportData( mParser.getName(), 
@@ -195,6 +196,8 @@ public class ExportDialogModel extends MyDialog
    */
   private void initOptions()
   {
+    ((CheckBox) findViewById( R.id.export_share )).setChecked( TDSetting.mExportModelShare );
+
     ((CheckBox) findViewById( R.id.model_stations )).setChecked( true );
     ((CheckBox) findViewById( R.id.model_splays )).setChecked( true );
     ((CheckBox) findViewById( R.id.model_walls )).setChecked( false );

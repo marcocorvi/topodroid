@@ -29,11 +29,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_overwrite"
       />
-    <CheckBox android:id="@+id/zip_share"
+    <!-- CheckBox android:id="@+id/zip_share"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_share"
-      />
+      / -->
     <!-- CheckBox android:id="@+id/zip_symbols"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -86,11 +86,6 @@
         android:inputType="text"
         />
     </LinearLayout>
-    <CheckBox android:id="@+id/compass_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_csurvey"
@@ -127,11 +122,6 @@
         android:inputType="text"
         />
     </LinearLayout -->
-    <CheckBox android:id="@+id/csurvey_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <!--// HBPly -->
@@ -166,11 +156,6 @@
           android:text="-"
           />
     </RadioGroup>
-    <CheckBox android:id="@+id/polygon_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
 
@@ -211,11 +196,6 @@
         android:inputType="number"
         />
     </LinearLayout>
-    <CheckBox android:id="@+id/survex_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_therion"
@@ -245,11 +225,6 @@
       android:layout_height="wrap_content"
       android:text="@string/export_lrud"
       />
-    <CheckBox android:id="@+id/therion_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_walls"
@@ -263,11 +238,6 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_splays"
-      />
-    <CheckBox android:id="@+id/walls_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
       />
   </LinearLayout>
 
@@ -314,11 +284,6 @@
       </LinearLayout>
 
       <!-- android:hint="@string/trobot_name_hint" -->
-    <CheckBox android:id="@+id/trobot_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_vtopo"
@@ -355,11 +320,6 @@
       android:importantForAutofill="no"
       android:inputType="text"
       />
-    <CheckBox android:id="@+id/vtopo_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_winkarst"
@@ -386,11 +346,6 @@
         android:inputType="text"
         />
     </LinearLayout>
-    <CheckBox android:id="@+id/winkarst_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_csv"
@@ -405,11 +360,6 @@
       android:layout_height="wrap_content"
       android:text="@string/export_csv_rawdata"
       />
-    <CheckBox android:id="@+id/csv_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_dxf"
@@ -423,11 +373,6 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_dxf_blocks"
-      />
-    <CheckBox android:id="@+id/dxf_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
       />
   </LinearLayout>
 
@@ -447,11 +392,6 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/export_stations"
-      />
-    <CheckBox android:id="@+id/kml_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
       />
   </LinearLayout>
 
@@ -477,12 +417,14 @@
       android:layout_height="wrap_content"
       android:text="@string/export_georeference"
       / -->
-    <CheckBox android:id="@+id/shp_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
+
+  <CheckBox android:id="@+id/export_share"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margintiny"
+    android:text="@string/export_share"
+    />
 
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent" 

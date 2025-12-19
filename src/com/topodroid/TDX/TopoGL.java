@@ -3076,6 +3076,7 @@ public class TopoGL extends Activity
 
   /** export file selection: send a request to select a file, on success return the model is exported
    * @param export   export data-struct
+   * @note called by ExportDialogModel
    */
   void selectExportFile( ExportData export )
   {

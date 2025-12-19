@@ -279,12 +279,13 @@ public class TDSetting
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
   public static String  mExportPrefix         = null;   // export prefix - only for the current run
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
-  public static boolean mZipShare             = false;  // whether to share exported zip
+  // public static boolean mZipShare             = false;  // whether to share exported zip
   public static boolean mZipShareCategory     = false;  // DISTOX_ZIP_SHARE_CATEGORY
   public static boolean mZipOverwrite         = true;   // whether to overwrite exported zip
 
   public static boolean mExportDataShare      = false;  // whether to share exported data file
   public static boolean mExportPlotShare      = false;  // whether to share exported plot file
+  public static boolean mExportModelShare     = false;  // whether to share exported model file
 
   // ------------ THERION
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;

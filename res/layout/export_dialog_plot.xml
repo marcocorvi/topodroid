@@ -79,11 +79,6 @@
         android:importantForAutofill="no"
         />
     </LinearLayout>
-    <CheckBox android:id="@+id/therion_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_svg"
@@ -284,11 +279,6 @@
         android:importantForAutofill="no"
         />
     </LinearLayout -->
-    <CheckBox android:id="@+id/svg_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_dxf"
@@ -354,11 +344,6 @@
       android:layout_height="wrap_content"
       android:text="@string/export_dxf_blocks"
       / -->
-    <CheckBox android:id="@+id/dxf_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
      
   </LinearLayout>
 
@@ -379,11 +364,6 @@
       android:layout_height="wrap_content"
       android:text="@string/export_bothviews"
       />
-    <CheckBox android:id="@+id/shp_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_csurvey"
@@ -402,11 +382,6 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_media"
-      />
-    <CheckBox android:id="@+id/csurvey_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
       />
   </LinearLayout>
 
@@ -512,11 +487,6 @@
         android:importantForAutofill="no"
         />
     </LinearLayout>
-    <CheckBox android:id="@+id/pdf_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_xvi"
@@ -531,12 +501,13 @@
       android:layout_height="wrap_content"
       android:text="@string/export_splays"
       />
-    <CheckBox android:id="@+id/xvi_share"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/export_share"
-      />
   </LinearLayout>
+  <CheckBox android:id="@+id/export_share"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margintiny"
+    android:text="@string/export_share"
+    />
       				  
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent" 

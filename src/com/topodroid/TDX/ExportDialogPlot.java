@@ -262,6 +262,7 @@ public class ExportDialogPlot extends MyDialog
     if ( mParentType == PARENT_OVERVIEW ) {
       if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up - skip csx
     } 
+    TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.export_share )).isChecked();
     if ( selected > 6 ) return; // no options for tnl c3d
     switch ( selected ) {
       case 0: // Therion
@@ -281,14 +282,12 @@ public class ExportDialogPlot extends MyDialog
           } catch ( NumberFormatException e ) {
             TDLog.e("export spacing: bad value");
           }
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.therion_share )).isChecked();
         }
         break;
       case 1: // CSurvey
         {
           TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.csurvey_prefix )).isChecked();
           TDSetting.mExportMedia = ((CheckBox) findViewById( R.id.csurvey_media )).isChecked();
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.csurvey_share )).isChecked();
         }
         break;
       case 2: // DXF
@@ -308,7 +307,6 @@ public class ExportDialogPlot extends MyDialog
           } else {
             TDSetting.mAcadVersion =  9;
           }
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.dxf_share )).isChecked();
         }
         break;
       case 3: // SVG
@@ -329,7 +327,6 @@ public class ExportDialogPlot extends MyDialog
           } catch ( NumberFormatException e ) {
             TDLog.e("Not integer export scale");
           }
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.svg_share )).isChecked();
         }
         break;
       case 4: // Shapefile
@@ -339,7 +336,6 @@ public class ExportDialogPlot extends MyDialog
             mBothViews = ((CheckBox) findViewById( R.id.shp_bothviews )).isChecked();
           }
           // TDLog.v( "shapefile set georef " + TDSetting.mShpGeoref );
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.shp_share )).isChecked();
         }
         break;
       // case 5: // NO_PNG
@@ -368,13 +364,11 @@ public class ExportDialogPlot extends MyDialog
           } catch ( NumberFormatException e ) {
             TDLog.e("Not integer export scale");
           }
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.pdf_share )).isChecked();
         }
         break;
       case 6: // XVI
         {
           TDSetting.mSvgSplays = ((CheckBox) findViewById( R.id.xvi_splays )).isChecked();
-          TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.xvi_share )).isChecked();
           // TDLog.v("SVG splays: " + TDSetting.mSvgSplays );
         }
         break;
@@ -386,22 +380,21 @@ public class ExportDialogPlot extends MyDialog
    */
   private void initOptions()
   {
+    ((CheckBox) findViewById( R.id.export_share )).setChecked( TDSetting.mExportPlotShare );
+
     ((CheckBox) findViewById( R.id.therion_splays )).setChecked( TDSetting.mTherionSplays );
     ((CheckBox) findViewById( R.id.therion_xvi )).setChecked( TDSetting.mTherionXvi );
     ((EditText) findViewById( R.id.therion_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
     ((EditText) findViewById( R.id.therion_spacing )).setText( String.format( Locale.US, "%.2f", TDSetting.mBezierStep ) );
-    ((CheckBox) findViewById( R.id.therion_share )).setChecked( TDSetting.mExportPlotShare );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     ((CheckBox) findViewById( R.id.csurvey_media )).setChecked( TDSetting.mExportMedia );
-    ((CheckBox) findViewById( R.id.csurvey_share )).setChecked( TDSetting.mExportPlotShare );
     
     // ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
     ((CheckBox) findViewById( R.id.dxf_xsections )).setChecked( TDSetting.mAutoXSections );
     ((CheckBox) findViewById( R.id.dxf_reference )).setChecked( TDSetting.mDxfReference );
     ((CheckBox) findViewById( R.id.dxf_layers    )).setChecked( TDSetting.mAcadLayer );
     // TDSetting.mAcadVersion
-    ((CheckBox) findViewById( R.id.dxf_share )).setChecked( TDSetting.mExportPlotShare );
     
     ((CheckBox) findViewById( R.id.svg_roundtrip )).setChecked( TDSetting.mSvgRoundTrip );
     ((CheckBox) findViewById( R.id.svg_grid )).setChecked( TDSetting.mSvgGrid );
@@ -412,7 +405,6 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.svg_xsections )).setChecked( TDSetting.mAutoXSections );
     ((CheckBox) findViewById( R.id.svg_groups)).setChecked( TDSetting.mSvgGroups );
     ((EditText) findViewById( R.id.svg_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
-    ((CheckBox) findViewById( R.id.svg_share )).setChecked( TDSetting.mExportPlotShare );
     
     ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 
@@ -424,10 +416,8 @@ public class ExportDialogPlot extends MyDialog
     // ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     // ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
     ((EditText) findViewById( R.id.pdf_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
-    ((CheckBox) findViewById( R.id.pdf_share )).setChecked( TDSetting.mExportPlotShare );
 
     ((CheckBox) findViewById( R.id.xvi_splays )).setChecked( TDSetting.mSvgSplays );
-    ((CheckBox) findViewById( R.id.xvi_share )).setChecked( TDSetting.mExportPlotShare );
   }
 }
 
