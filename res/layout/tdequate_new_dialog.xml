@@ -47,6 +47,11 @@
               android:layout_marginEnd="@dimen/marginh"
               android:text="@string/button_equate_search"
               />
+           <Button android:id="@+id/button_one"
+              style="@style/button_default"
+              android:layout_marginEnd="@dimen/marginh"
+              android:text="@string/button_equate_one"
+              />
           <Button android:id="@+id/button_all"
               style="@style/button_default"
               android:layout_marginEnd="@dimen/marginh"

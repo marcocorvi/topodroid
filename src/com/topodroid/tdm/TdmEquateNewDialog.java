@@ -54,6 +54,7 @@ class TdmEquateNewDialog extends MyDialog
   private Button mBTback;
   private Button mBTall; // HB EQ all
   private Button mBTsearch; // HB EQ all
+  private Button mBTone; // HB EQ one
   int j0=0; // HB EQ all
   int l0=0; // HB EQ all
 
@@ -87,6 +88,8 @@ class TdmEquateNewDialog extends MyDialog
     mBTall.setOnClickListener( this ); // HB EQ all
     mBTsearch = (Button) findViewById( R.id.button_search ); // HB EQ all
     mBTsearch.setOnClickListener( this ); // HB EQ all
+    mBTone = (Button) findViewById( R.id.button_one ); // HB EQ one
+    mBTone.setOnClickListener( this ); // HB EQ one
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams( 
@@ -171,7 +174,7 @@ class TdmEquateNewDialog extends MyDialog
                   TdmViewCommand vc0 = mCommands.get(j);
                   String survey0 = vc0.name();
                   for (TdmViewStation st : vc0.mStations) {
-                      if (st.mEquated) break; // FIXME break or continue ? it depends on the semantics of "all"
+                      if (st.mEquated) continue; // FIXME break or continue ? it depends on the semantics of "all"
                       String station = st.name();
                       // boolean old = false;
                       // for ( String st0 : stations ) {
@@ -214,6 +217,68 @@ class TdmEquateNewDialog extends MyDialog
               }
               //TDToast.makeWarn(String.format("size %d", size));
           }
+    } else if ( b == mBTone ) { // HB EQ one equation - no loop
+    ArrayList<String> stations = new ArrayList<>(); 
+    int eq_group_nr = 0; 
+    int eq_group_nr_max = 0; 
+    int[] eq_group = new int[size];
+    for (int j = 0; j < ( size ) ; ++j ) eq_group[j]=-1; 
+    if (size > 1) {
+        for (int j = 0; j < ( size - 1 ) ; ++j) { 
+            TdmViewCommand vc0 = mCommands.get(j);
+            String survey0 = vc0.name();
+            for (TdmViewStation st : vc0.mStations) { 
+                if (st.mEquated) break; 
+                String station = st.name(); 
+                if ( ! stations.contains( station ) ) {
+                    boolean good_station = false;
+                    ArrayList<String> sts = new ArrayList<>();
+                    int len0 = survey0.length(); 
+                    //while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // FIXME ! It should also be prohibited when creating the survey! It is allowed there.
+                    sts.add(station + "@" + survey0.substring(0, len0));
+                    for (int k = ( j + 1 ); k < size; ++k) {
+                        TdmViewCommand vc = mCommands.get(k);
+                        String survey = vc.name();
+                        int len = survey.length();
+                        //while (len > 0 && survey.charAt(len - 1) == '.') --len; // ? FIXME ! It should also be prohibited when creating the survey! It is allowed there.
+                        if (station != null && station.length() > 0) { // FIXME this is guaranteed - or the test should be done when station is assigned
+                            if (vc.getViewStation(station) != null) { 
+                                if ((eq_group[j] == eq_group[k]) && (eq_group[j] != -1) ) { // loop
+                                    // loop
+                                } else {
+                                    sts.add(station + "@" + survey.substring(0, len));
+                                    good_station = true; 
+                                    if (eq_group[j] == -1 && eq_group[k] == -1) { // if no group
+                                        eq_group_nr++;
+                                        eq_group_nr_max++;
+                                        eq_group[j] = eq_group_nr;
+                                        eq_group[k] = eq_group_nr;
+                                    } else if (eq_group[j] == -1) {
+                                        eq_group[j] = eq_group[k];
+                                    } else if (eq_group[k] == -1) {
+                                        eq_group[k] = eq_group[j];
+                                    } else { // two group equate
+                                        for (int l = 0; l < ( size ) ; ++l ) if (eq_group[l]==eq_group[k]) eq_group[l]=eq_group[j]; // k -> j
+                                        eq_group_nr_max--;
+                                    }
+                                }
+                            } else {
+                                // TDLog.v("Good station: " + good_station + survey);
+                            }
+                        } else {
+                            //mEdit[k].setError(mContext.getResources().getString(R.string.error_name_required));
+                            //return;
+                        }
+                    }
+                    if (good_station ) {
+                        mParent.makeEquate(sts); // does nothing if sts.size() <= 1
+                        stations.add(station); // station exist equate
+                    }
+                }
+            }
+          }
+          TDToast.makeWarn(String.format("Group %d", eq_group_nr_max));
+        }
       } else if ( b == mBTsearch ) {
           ArrayList<String> stations = new ArrayList<>();
           for (int k = 0; k < size ; ++k) mEdit[k].setText("-");
