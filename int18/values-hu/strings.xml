@@ -2137,6 +2137,7 @@
     <string name="title_equates">Projekt kapcsolódó pontok</string>
     <string name="title_equate_new">Kapcsolódó pont hozzáadás &#8230;</string>
 	<string name="button_equate_all">Mind</string><!-- HB EQ all-->
+	<string name="button_equate_one">Egy</string><!-- HB EQ one-->
     <string name="button_equate_search">Keres</string><!-- HB EQ all-->
     <string name="title_equate_with">Kapcsolódik %1$s és %2$s</string>
     <!-- UNUSED string name="title_cwd">Jelenlegi munka könyvtár</string -->
