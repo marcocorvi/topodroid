@@ -840,7 +840,7 @@
     <string name="ask_gps_service">Bekapcsolja a GNSS-t?</string>
     <!-- UNUSED string name="ask_backups_clear">Törli a vázlat mentéseket?</string -->
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
-    <!string name="ask_clear_equates">Visszavonod az összes kapcsolatot?</string>
+    <string name="ask_clear_equates">Visszavonod az összes kapcsolatot?</string>
 
     <string name="button_add"       >Hozzáad</string>
     <string name="button_apply"     >Alkalmaz</string>
