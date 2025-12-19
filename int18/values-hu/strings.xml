@@ -64,14 +64,14 @@
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
+    <string name="pref_gen">Álltalános</string>
+    <string name="pref_ui">Felhasználói felület</string>
+    <string name="pref_data">Adat</string>
+    <string name="pref_plot">Vázlat</string>
+    <string name="pref_3d">3D megtekintő</string>
+    <string name="pref_io">Export</string>
+    <string name="pref_bt">Bluetooth</string>
+    <string name="pref_cal">Calibrávió</string>
 
     <string name="cut">VÁGÁS</string>
     <string name="copy">MÁSOL</string>
@@ -840,7 +840,7 @@
     <string name="ask_gps_service">Bekapcsolja a GNSS-t?</string>
     <!-- UNUSED string name="ask_backups_clear">Törli a vázlat mentéseket?</string -->
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+    <!string name="ask_clear_equates">Visszavonod az összes kapcsolatot?</string>
 
     <string name="button_add"       >Hozzáad</string>
     <string name="button_apply"     >Alkalmaz</string>
@@ -907,7 +907,7 @@
     <string name="button_left"      >BAL</string>
     <string name="button_right"     >JOBB</string>
     <string name="button_clear"     >Tisztít</string>
-    <!-- TODO string name="button_clear_all" >Clear all</string -->
+    <string name="button_clear_all" >Mindent töröl</string>
     <string name="button_clear_day" >Tisztít 1nap</string>
     <string name="button_clear_week">Tisztít 7nap</string>
     <string name="button_clear_memory">Memória tisztítás</string>
@@ -1225,7 +1225,7 @@
     <string name="help_export_config">Projekt Exportálás</string>
     <string name="help_delete_config">Projekt törlése</string>
     <string name="help_add_equate">Mérések kapcsolódó pontjainak hozzáadása</string>
-    <!-- TODO string name="help_all_equates">All possible equates</string -->
+    <string name="help_all_equates">Ősszes lehetséges kapcsolat</string>
     <string name="help_equates">Kapcsolódó pontok listázása</string>
     <string name="help_stations_minus">Mutass kevesebb pontot</string>
     <string name="help_stations_plus">Mutass több pontot</string>
@@ -1380,7 +1380,7 @@
     <string name="title_settings_gpx">GPX export beállítások</string>
     <string name="title_settings_kml">KML export beállítások</string>
     <string name="title_settings_srv">Walls export beállítások</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+    <string name="title_settings_ply">Polygon export beállítások</string>
 
     <string name="title_settings_sketch">TopoDroid 3d vázlat beállítások</string>
     <string name="title_settings_survey">TopoDroid mérés beállítások</string>
@@ -2149,9 +2149,6 @@
     <string name="title_export">Projekt exportálása a &#8230;</string>
     <string name="title_equates">Projekt kapcsolódó pontok</string>
     <string name="title_equate_new">Kapcsolódó pont hozzáadás &#8230;</string>
-    <!-- TODO string name="button_equate_all">All</string -->
-    <!-- TODO string name="button_equate_one">One</string -->
-    <!-- TODO string name="button_equate_search">Search</string -->
 	<string name="button_equate_all">Mind</string><!-- HB EQ all-->
 	<string name="button_equate_one">Egy</string><!-- HB EQ one-->
     <string name="button_equate_search">Keres</string><!-- HB EQ all-->
