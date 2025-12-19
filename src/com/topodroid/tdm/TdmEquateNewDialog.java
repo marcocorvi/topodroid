@@ -174,7 +174,7 @@ class TdmEquateNewDialog extends MyDialog
                   TdmViewCommand vc0 = mCommands.get(j);
                   String survey0 = vc0.name();
                   for (TdmViewStation st : vc0.mStations) {
-                      if (st.mEquated) break; // FIXME break or continue ? it depends on the semantics of "all"
+                      if (st.mEquated) continue; // FIXME break or continue ? it depends on the semantics of "all"
                       String station = st.name();
                       // boolean old = false;
                       // for ( String st0 : stations ) {
