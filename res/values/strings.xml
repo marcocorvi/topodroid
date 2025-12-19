@@ -71,6 +71,16 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hsplay" copyable="all">H</string>
     <string name="vsplay" copyable="all">V</string>
 
+    <string name="pref_gen">General</string>
+    <string name="pref_ui">User Interface</string>
+    <string name="pref_data">Data</string>
+    <string name="pref_plot">Sketch</string>
+    <string name="pref_3d">3D viewer</string>
+    <string name="pref_io">Export</string>
+    <string name="pref_bt">Bluetooth</string>
+    <string name="pref_cal">Calibration</string>
+    <string name="pref_xt">Special functions</string>
+
     <string name="cut">CUT</string>
     <string name="copy">COPY</string>
     <string name="paste">PASTE</string>

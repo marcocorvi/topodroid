@@ -13,11 +13,14 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDRequest;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
-// import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDConst;
+import com.topodroid.TDX.TDToast;
 // import com.topodroid.TDX.TDPath;
 // import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.CWDActivity;
@@ -26,11 +29,13 @@ import com.topodroid.TDX.R;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 // import android.content.res.Resources;
 // import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.net.Uri;
 
 import android.widget.LinearLayout;
 // import android.widget.ScrollView;
@@ -46,14 +51,15 @@ public class TDPrefActivity extends Activity
   static TDPrefActivity mPrefActivityAll = null;
   static TDPrefActivity mPrefActivitySurvey = null;
 
-  // static final int REQUEST_CWD         = 1;
-  static final int REQUEST_PLOT_SCREEN = 2;
-  static final int REQUEST_TOOL_SCREEN = 3;
-  static final int REQUEST_LOCATION    = 4;
-  static final int REQUEST_ACCURACY    = 5;
-  static final int REQUEST_SHOT_DATA   = 6;
-  static final int REQUEST_PT_CMAP     = 7;
-  static final int REQUEST_GRAPH_PAPER_SCALE = 8;
+  // use high numbers to avoid conflicts with TDRequest
+  // static final int REQUEST_CWD            = 1001;
+  static final int REQUEST_PLOT_SCREEN       = 1002;
+  static final int REQUEST_TOOL_SCREEN       = 1003;
+  static final int REQUEST_LOCATION          = 1004;
+  static final int REQUEST_ACCURACY          = 1005;
+  static final int REQUEST_SHOT_DATA         = 1006;
+  static final int REQUEST_PT_CMAP           = 1007;
+  static final int REQUEST_GRAPH_PAPER_SCALE = 1008;
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
 
@@ -143,6 +149,77 @@ public class TDPrefActivity extends Activity
     setResult( RESULT_OK, null ); // result is always OK
     // finish();
     super.onBackPressed();
+  }
+
+  // ---------------------------------------------------------------------
+  private SharedPreferences mExportPrefs = null;
+  private int mExportFlag = 0;
+
+  void exportSettings( final SharedPreferences prefs, final int flag )
+  {
+    mExportPrefs = prefs;
+    mExportFlag  = flag;
+    Intent intent = TDandroid.getCreateDocumentIntent( TDConst.TEXT_PLAIN );
+    // intent.putExtra( Intent.EXTRA_TITLE, filename );
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.select_export_file ) ), TDRequest.REQUEST_GET_EXPORT );
+    // doExportSettings( mExportPrefs, mExportFlag );
+  }
+
+  private void doExportSettings( final Uri uri, final SharedPreferences prefs, final int flag )
+  {
+    Context ctx = this;
+
+    ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
+      @Override
+      protected Boolean doInBackground(Void... v)
+      {
+        TDLog.v("export settings - flag " + flag );
+        return TDSetting.exportSettings( ctx, uri, /* prefs, */ flag );
+      }
+      @Override
+      protected void onPostExecute( Boolean v )
+      {
+        if ( v ) {
+          // TDToast.make( String.format( TDInstance.getResourceString( R.string.exported_settings ), TDFile.getSettingsFile().getPath() ) );
+          TDToast.make( String.format( TDInstance.getResourceString( R.string.exported_settings ), uri.getPath() ) );
+        } else {
+          TDToast.makeWarn( R.string.export_settings_failed );
+        }
+      }
+    }).execute();
+  }
+
+  void importSettings( SharedPreferences prefs, final int flag )
+  {
+    mExportPrefs = prefs;
+    mExportFlag  = flag;
+    Intent intent = TDandroid.getOpenDocumentIntent( TDConst.TEXT_PLAIN );
+    // intent.putExtra( Intent.EXTRA_TITLE, filename );
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.select_export_file ) ), TDRequest.REQUEST_GET_IMPORT );
+    // doImportSettings( null, mExportPrefs, mExportFlag );
+  }
+  
+  private void doImportSettings( Uri uri, SharedPreferences prefs, final int flag )
+  {
+    Context ctx = this;
+    ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
+      @Override
+      protected Boolean doInBackground(Void... v)
+      {
+        TDLog.v("import settings - flag " + flag );
+        return TDSetting.importSettings( ctx, uri, prefs, flag );
+      }
+      @Override
+      protected void onPostExecute( Boolean v )
+      {
+        if ( v ) {
+          TDToast.make( R.string.imported_settings );
+        } else {
+          TDToast.makeWarn( R.string.imported_settings_failed );
+        }
+        reloadPreferences();
+      }
+    }).execute();
   }
 
   /** set the title of the window
@@ -465,6 +542,22 @@ public class TDPrefActivity extends Activity
           TDPrefHelper pref_hlp = new TDPrefHelper( mCtx ); // TopoDroidApp.mPrefHlp;
           SharedPreferences prefs = pref_hlp.getSharedPrefs();
           TDSetting.setPreference( prefs, "DISTOX_GRAPH_PAPER_SCALE", Integer.toString(density) );
+        }
+        break;
+      case TDRequest.REQUEST_GET_EXPORT: 
+        if ( result == RESULT_OK && intent != null ) {  
+          Uri uri = intent.getData();
+          if ( uri != null && mExportPrefs != null ) {
+            doExportSettings( uri, mExportPrefs, mExportFlag );
+          }
+        }
+        break;
+      case TDRequest.REQUEST_GET_IMPORT: 
+        if ( result == RESULT_OK && intent != null ) {
+          Uri uri = intent.getData();
+          if ( uri != null && mExportPrefs != null ) {
+            doImportSettings( uri, mExportPrefs, mExportFlag );
+          }
         }
         break;
     }

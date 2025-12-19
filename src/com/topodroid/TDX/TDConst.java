@@ -164,6 +164,8 @@ public class TDConst
     "text/plain",               // 38 text
   };
 
+  public final static int TEXT_PLAIN = 38; // text/plain index 
+
   public static String getMimeFromFilename( String filename ) 
   {
     int index = getIndexFromFilename( filename );

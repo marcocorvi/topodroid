@@ -13,12 +13,10 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -37,6 +35,7 @@ public class ExportDialogSettings extends MyDialog
   // private Button   mBtnBack;
   private CheckBox mCBfunctional;
   private int mTitle;
+  int mFlag = 0;
 
   /** cstr
    * @param context context
@@ -60,8 +59,8 @@ public class ExportDialogSettings extends MyDialog
 
     initLayout( R.layout.export_dialog_settings, mTitle );
 
-    mCBfunctional = (CheckBox) findViewById( R.id.cb_functional );
-    mCBfunctional.setChecked( true );
+    // mCBfunctional = (CheckBox) findViewById( R.id.cb_functional );
+    // mCBfunctional.setChecked( true );
 
     mBtnExport = (Button) findViewById(R.id.button_export );
     mBtnImport = (Button) findViewById(R.id.button_import );
@@ -79,49 +78,22 @@ public class ExportDialogSettings extends MyDialog
   public void onClick(View v) 
   {
     // TDLog.v( "CWD Selected " + mSelected );
+    mFlag = 0;
+    if ( ((CheckBox) findViewById( R.id.cb_gen )).isChecked() ) mFlag |=    1;
+    if ( ((CheckBox) findViewById( R.id.cb_ui  )).isChecked() ) mFlag |=    2;
+    if ( ((CheckBox) findViewById( R.id.cb_data)).isChecked() ) mFlag |=    4;
+    if ( ((CheckBox) findViewById( R.id.cb_plot)).isChecked() ) mFlag |=    8;
+    if ( ((CheckBox) findViewById( R.id.cb_ui  )).isChecked() ) mFlag |=   16;
+    if ( ((CheckBox) findViewById( R.id.cb_io  )).isChecked() ) mFlag |=   32;
+    if ( ((CheckBox) findViewById( R.id.cb_bt  )).isChecked() ) mFlag |=   64;
+    if ( ((CheckBox) findViewById( R.id.cb_cal )).isChecked() ) mFlag |=  128;
+    if ( ((CheckBox) findViewById( R.id.cb_xt  )).isChecked() ) mFlag |=  256;
+
     Button b = (Button)v;
     if ( b == mBtnExport ) {
-      ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
-        @Override
-        protected Boolean doInBackground(Void... v)
-        {
-          // TDLog.v("export settings");
-          return TDSetting.exportSettings( mContext, mPrefs );
-        }
-        @Override
-        protected void onPostExecute( Boolean v )
-        {
-          if ( v ) {
-            TDToast.make( String.format( mContext.getResources().getString( R.string.exported_settings ), TDFile.getSettingsFile().getPath() ) );
-          } else {
-            TDToast.makeWarn( R.string.export_settings_failed );
-          }
-        }
-      }).execute();
-
+      mParent.exportSettings( mPrefs, mFlag );
     } else if ( b == mBtnImport ) {
-
-      final boolean functional = mCBfunctional.isChecked();
-      final boolean all = ! functional;
-      ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
-        @Override
-        protected Boolean doInBackground(Void... v)
-        {
-          TDLog.v("import settings - functional " + functional );
-          return TDSetting.importSettings( mContext, mPrefs, all );
-        }
-        @Override
-        protected void onPostExecute( Boolean v )
-        {
-          if ( v ) {
-            TDToast.make( R.string.imported_settings );
-          } else {
-            TDToast.makeWarn( R.string.imported_settings_failed );
-          }
-          mParent.reloadPreferences();
-        }
-      }).execute();
-      
+      mParent.importSettings( mPrefs, mFlag );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

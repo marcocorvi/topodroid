@@ -37,18 +37,30 @@ class TDPrefKey
   static final int T = 4;
   static final int D = 5;
 
+  // setting groups
   static final int NON = 0; // used for forward
-  static final int GEN = 1; // setting type
-  static final int UI  = 2;
+  static final int GEN = 1; // general
+  static final int UI  = 2; // user interface
   static final int DT  = 3; // data
   static final int DR  = 4; // draw
   static final int D3  = 5; // 3D
   static final int XP  = 6; // export
-  static final int BT  = 7;
-  static final int DEV = 8; // device
-  static final int CAL = 9;
-  static final int CX  =10; // calib extra
-  static final int XT  =11; // extra
+  static final int BT  = 7; // bluetooth
+  static final int CAL = 8; // calib
+  static final int XT  = 9; // special functions
+
+  // static final int[] mGroup = {
+  //   -1,
+  //   R.string.pref_gen,
+  //   R.string.pref_ui,
+  //   R.string.pref_data,
+  //   R.string.pref_plot,
+  //   R.string.pref_3d,
+  //   R.string.pref_io,
+  //   R.string.pref_bt,
+  //   R.string.pref_cal,
+  //   R.string.pref_xt
+  // };
 
 // TODO new formulation of leys
 
@@ -210,14 +222,14 @@ class TDPrefKey
     new TDPrefKey( B, LONG, CAL, "DISTOX_CALIB_MAX_IT",        R.string.pref_iter_title,                R.string.pref_iter_summary,                "200"         ),
     new TDPrefKey( A, BOOL, BT,  "DISTOX_CALIB_SHOT_DOWNLOAD", R.string.pref_calib_shot_download_title, R.string.pref_calib_shot_download_summary, TRUE          ),
     new TDPrefKey( A,       UI,  "DISTOX_RAW_CDATA",           R.string.pref_raw_data_title,            R.string.pref_raw_data_summary,            TDString.ZERO, R.array.rawCData, R.array.rawCDataValue ), 
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_ALGO_MIN_ALPHA",      R.string.pref_algo_min_alpha_title,      R.string.pref_algo_min_alpha_summary,      "0.05"        ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_ALGO_MIN_BETA",       R.string.pref_algo_min_beta_title,       R.string.pref_algo_min_beta_summary,       "3.0"         ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_ALGO_MIN_GAMMA",      R.string.pref_algo_min_gamma_title,      R.string.pref_algo_min_gamma_summary,      "0.05"        ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_ALGO_MIN_DELTA",      R.string.pref_algo_min_delta_title,      R.string.pref_algo_min_delta_summary,      "0.05"        ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_AUTO_CAL_BETA",       R.string.pref_auto_cal_beta_title,       R.string.pref_auto_cal_beta_summary,       "0.004"       ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_AUTO_CAL_ETA",        R.string.pref_auto_cal_eta_title,        R.string.pref_auto_cal_eta_summary,        "0.04"        ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_AUTO_CAL_GAMMA",      R.string.pref_auto_cal_gamma_title,      R.string.pref_auto_cal_gamma_summary,      "0.04"        ),
-    new TDPrefKey( D, FLT,  CX,  "DISTOX_AUTO_CAL_DELTA",      R.string.pref_auto_cal_delta_title,      R.string.pref_auto_cal_delta_summary,      "0.04"        )
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_ALGO_MIN_ALPHA",      R.string.pref_algo_min_alpha_title,      R.string.pref_algo_min_alpha_summary,      "0.05"        ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_ALGO_MIN_BETA",       R.string.pref_algo_min_beta_title,       R.string.pref_algo_min_beta_summary,       "3.0"         ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_ALGO_MIN_GAMMA",      R.string.pref_algo_min_gamma_title,      R.string.pref_algo_min_gamma_summary,      "0.05"        ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_ALGO_MIN_DELTA",      R.string.pref_algo_min_delta_title,      R.string.pref_algo_min_delta_summary,      "0.05"        ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_AUTO_CAL_BETA",       R.string.pref_auto_cal_beta_title,       R.string.pref_auto_cal_beta_summary,       "0.004"       ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_AUTO_CAL_ETA",        R.string.pref_auto_cal_eta_title,        R.string.pref_auto_cal_eta_summary,        "0.04"        ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_AUTO_CAL_GAMMA",      R.string.pref_auto_cal_gamma_title,      R.string.pref_auto_cal_gamma_summary,      "0.04"        ),
+    new TDPrefKey( D, FLT,  CAL, "DISTOX_AUTO_CAL_DELTA",      R.string.pref_auto_cal_delta_title,      R.string.pref_auto_cal_delta_summary,      "0.04"        )
   };
 
   /** device settings
@@ -231,7 +243,7 @@ class TDPrefKey
   static TDPrefKey[] mDevice = {
     new TDPrefKey( N,       BT,  "DISTOX_BLUETOOTH",        R.string.pref_checkBT_title,          R.string.pref_checkBT_summary,         TDString.ONE, R.array.deviceBT, R.array.deviceBTValue ),
     new TDPrefKey( B,       BT,  "DISTOX_CONN_MODE",        R.string.pref_conn_mode_title,        R.string.pref_conn_mode_summary,       TDString.ZERO,R.array.connMode, R.array.connModeValue ),
-    new TDPrefKey( B, BOOL, DEV, "DISTOX_HEAD_TAIL",        R.string.pref_head_tail_title,        R.string.pref_head_tail_summary,       FALSE ),
+    new TDPrefKey( B, BOOL, BT,  "DISTOX_HEAD_TAIL",        R.string.pref_head_tail_title,        R.string.pref_head_tail_summary,       FALSE ),
     new TDPrefKey( B,       BT,  "DISTOX_SOCKET_TYPE",      R.string.pref_sock_type_title,        R.string.pref_sock_type_summary,       TDString.ONE, R.array.sockType, R.array.sockTypeValue ),
     new TDPrefKey( A, BOOL, BT,  "DISTOX_AUTO_PAIR",        R.string.pref_auto_pair_title,        R.string.pref_auto_pair_summary,       FALSE ),
     new TDPrefKey( E,       UI,  "DISTOX_CONNECT_FEEDBACK", R.string.pref_connect_feedback_title, R.string.pref_connect_feedback_summary,TDString.ZERO, R.array.feedbackMode, R.array.feedbackModeValue ),
@@ -689,15 +701,15 @@ class TDPrefKey
     new TDPrefKey( T, LONG, UI, "DISTOX_RECENT_TIMEOUT",     R.string.pref_recent_timeout_title,      R.string.pref_recent_timeout_summary,      "30"  ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_EXTEND_FRAC",        R.string.pref_extend_frac_title,         R.string.pref_extend_frac_summary,         FALSE ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_BACKSHOT",           R.string.pref_backshot_title,            R.string.pref_backshot_summary,            FALSE ),
-    new TDPrefKey( T, BOOL, XT, "DISTOX_BEDDING",            R.string.pref_plane_interpolation_title, R.string.pref_plane_interpolation_summary, FALSE ),
+    new TDPrefKey( T, BOOL, DT, "DISTOX_BEDDING",            R.string.pref_plane_interpolation_title, R.string.pref_plane_interpolation_summary, FALSE ),
     new TDPrefKey( A, BOOL, XT, "DISTOX_WITH_SENSORS",       R.string.pref_with_sensors_title,        R.string.pref_with_sensors_summary,        FALSE ),
     new TDPrefKey( E,       DT, "DISTOX_LOOP_CLOSURE_VALUE", R.string.pref_loopClosure_title,         R.string.pref_loopClosure_summary,         TDString.ZERO, R.array.loopClosure, R.array.loopClosureValue ),
     new TDPrefKey( E, FLT,  DT, "DISTOX_LOOP_THRESHOLD",     R.string.pref_loop_thr_title,            R.string.pref_loop_thr_summary,            TDString.ONE ),
     new TDPrefKey( A, BOOL, XT, "DISTOX_ANDROID_AZIMUTH",    R.string.pref_with_android_azimuth_title,R.string.pref_with_android_azimuth_summary,FALSE        ),
     new TDPrefKey( E, LONG, XT, "DISTOX_SHOT_TIMER",         R.string.pref_shot_timer_title,          R.string.pref_shot_timer_summary,          TDString.TEN ),
     new TDPrefKey( E, LONG, XT, "DISTOX_BEEP_VOLUME",        R.string.pref_beep_volume_title,         R.string.pref_beep_volume_summary,         TDString.FIFTY ),
-    new TDPrefKey( T, BOOL, XT, "DISTOX_BLUNDER_SHOT",       R.string.pref_blunder_shot_title,        R.string.pref_blunder_shot_summary,        FALSE ),
-    new TDPrefKey( T, BOOL, XT, "DISTOX_SPLAY_STATION",      R.string.pref_splay_station_title,       R.string.pref_splay_station_summary,       TRUE  ),
+    new TDPrefKey( T, BOOL, DT, "DISTOX_BLUNDER_SHOT",       R.string.pref_blunder_shot_title,        R.string.pref_blunder_shot_summary,        FALSE ),
+    new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_STATION",      R.string.pref_splay_station_title,       R.string.pref_splay_station_summary,       TRUE  ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_GROUP",        R.string.pref_splay_group_title,         R.string.pref_splay_group_summary,         FALSE )
   };
 
@@ -725,10 +737,10 @@ class TDPrefKey
     new TDPrefKey( T, BOOL, UI,  "DISTOX_LEGONLY_UPDATE",   R.string.pref_legonly_update_title,    R.string.pref_legonly_update_summary,    FALSE ),
     new TDPrefKey( T, BOOL, XT,  "DISTOX_FULL_AFFINE",      R.string.pref_full_affine_title,       R.string.pref_full_affine_summary,       FALSE ),
     new TDPrefKey( T,       XT,  "DISTOX_WITH_LEVELS",      R.string.pref_with_levels_title,       R.string.pref_with_levels_summary,       TDString.ZERO, R.array.canvasLevels, R.array.canvasLevelsValue ),
-    new TDPrefKey( T, BTN,  XT,  "DISTOX_GRAPH_PAPER_SCALE",R.string.pref_graph_paper_scale_title, R.string.pref_graph_paper_scale_summary, TDString.ZERO ),
+    new TDPrefKey( T, BTN,  DR,  "DISTOX_GRAPH_PAPER_SCALE",R.string.pref_graph_paper_scale_title, R.string.pref_graph_paper_scale_summary, TDString.ZERO ),
     new TDPrefKey( T, BOOL, XT,  "DISTOX_SLANT_XSECTION",   R.string.pref_slant_xsection_title,    R.string.pref_slant_xsection_summary,    FALSE ),
     new TDPrefKey( T, LONG, XT,  "DISTOX_OBLIQUE_PROJECTED",R.string.pref_oblique_projection_title,R.string.pref_oblique_projection_summary,TDString.ZERO ),
-    new TDPrefKey( T, LONG, XT,  "DISTOX_LINE_ENDS",        R.string.pref_line_ends_title,         R.string.pref_line_ends_summary,         TDString.ZERO )
+    new TDPrefKey( T, LONG, DR,  "DISTOX_LINE_ENDS",        R.string.pref_line_ends_title,         R.string.pref_line_ends_summary,         TDString.ZERO )
   };
 
   /** additional splay settings
@@ -744,8 +756,8 @@ class TDPrefKey
    * color for latest splay 
    */ 
   static TDPrefKey[] mGeekSplay = {
-    new TDPrefKey( E, BOOL, XT, "DISTOX_SPLAY_CLASSES",       R.string.pref_splay_classes_title,     R.string.pref_splay_classes_summary,     FALSE ),
-    new TDPrefKey( T,       XT, "DISTOX_DISCRETE_COLORS",     R.string.pref_splay_color_title,       R.string.pref_splay_color_summary,       TDString.ZERO, R.array.splayColors, R.array.splayColorsValue ),
+    new TDPrefKey( E, BOOL, DT, "DISTOX_SPLAY_CLASSES",       R.string.pref_splay_classes_title,     R.string.pref_splay_classes_summary,     FALSE ),
+    new TDPrefKey( T,       UI, "DISTOX_DISCRETE_COLORS",     R.string.pref_splay_color_title,       R.string.pref_splay_color_summary,       TDString.ZERO, R.array.splayColors, R.array.splayColorsValue ),
     new TDPrefKey( A, LONG, UI, "DISTOX_SPLAY_VERT_THRS",     R.string.pref_plan_vthr_title,         R.string.pref_plan_vthr_summary,          "80" ),
     new TDPrefKey( T,       UI, "DISTOX_SPLAY_DASH",          R.string.pref_dash_splay_title,        R.string.pref_dash_splay_message,         TDString.ZERO, R.array.splayDash, R.array.splayDashValue ),
     new TDPrefKey( T, FLT,  UI, "DISTOX_VERT_SPLAY",          R.string.pref_vert_splay_title,        R.string.pref_vert_splay_message,         TDString.FIFTY ),
@@ -859,19 +871,19 @@ class TDPrefKey
    * SAP5 bit-16 bug workaround
    */
   static TDPrefKey[] mGeekDevice = { 
-    new TDPrefKey( T, BTN,  XT,  "DISTOX_BT_ALIAS",         R.string.pref_bt_alias_title,         -1,                                     null  ),
-    new TDPrefKey( T, BOOL, XT,  "DISTOX_UNNAMED_DEVICE",   R.string.pref_unnamed_device_title,   R.string.pref_unnamed_device_summary,   FALSE ),
+    new TDPrefKey( T, BTN,  BT,  "DISTOX_BT_ALIAS",         R.string.pref_bt_alias_title,         -1,                                     null  ),
+    new TDPrefKey( T, BOOL, BT,  "DISTOX_UNNAMED_DEVICE",   R.string.pref_unnamed_device_title,   R.string.pref_unnamed_device_summary,   FALSE ),
     new TDPrefKey( E, LONG, BT,  "DISTOX_SOCKET_DELAY",     R.string.pref_socket_delay_title,     R.string.pref_socket_delay_summary,     TDString.ZERO ),
-    new TDPrefKey( T, BOOL, XT,  "DISTOX_SECOND_DISTOX",    R.string.pref_second_distox_title,    R.string.pref_second_distox_summary,    FALSE ),
+    new TDPrefKey( T, BOOL, BT,  "DISTOX_SECOND_DISTOX",    R.string.pref_second_distox_title,    R.string.pref_second_distox_summary,    FALSE ),
     new TDPrefKey( A, LONG, BT,  "DISTOX_WAIT_DATA",        R.string.pref_wait_data_title,        R.string.pref_wait_data_summary,        "250" ),
     new TDPrefKey( A, LONG, BT,  "DISTOX_WAIT_CONN",        R.string.pref_wait_conn_title,        R.string.pref_wait_conn_summary,        "500" ),
     new TDPrefKey( A, LONG, BT,  "DISTOX_WAIT_LASER",       R.string.pref_wait_laser_title,       R.string.pref_wait_laser_summary,       "2000" ),
     new TDPrefKey( A, LONG, BT,  "DISTOX_WAIT_SHOT",        R.string.pref_wait_shot_title,        R.string.pref_wait_shot_summary,        "2000" ),
     new TDPrefKey( T, BOOL, GEN, "DISTOX_FIRMWARE_SANITY",  R.string.pref_firmware_sanity_title,  R.string.pref_firmware_sanity_summary,  TRUE ),
-    new TDPrefKey( T,       DEV, "DISTOX_BRIC_MODE",        R.string.pref_bric_mode_title,        R.string.pref_bric_mode_summary,        TDString.THREE, R.array.bricMode, R.array.bricModeValue ),
-    new TDPrefKey( N, BOOL, DEV, "DISTOX_BRIC_ZERO_LENGTH", R.string.pref_bric_zero_length_title, R.string.pref_bric_zero_length_summary, FALSE ),
-    new TDPrefKey( T, BOOL, DEV, "DISTOX_BRIC_INDEX_IS_ID", R.string.pref_bric_index_is_id_title, R.string.pref_bric_index_is_id_summary, FALSE ),
-    new TDPrefKey( T, BOOL, DEV, "DISTOX_SAP5_BIT16_BUG",   R.string.pref_sap5_bit16_bug_title,   R.string.pref_sap5_bit16_bug_summary,   TRUE )
+    new TDPrefKey( T,       BT,  "DISTOX_BRIC_MODE",        R.string.pref_bric_mode_title,        R.string.pref_bric_mode_summary,        TDString.THREE, R.array.bricMode, R.array.bricModeValue ),
+    new TDPrefKey( N, BOOL, BT,  "DISTOX_BRIC_ZERO_LENGTH", R.string.pref_bric_zero_length_title, R.string.pref_bric_zero_length_summary, FALSE ),
+    new TDPrefKey( T, BOOL, BT,  "DISTOX_BRIC_INDEX_IS_ID", R.string.pref_bric_index_is_id_title, R.string.pref_bric_index_is_id_summary, FALSE ),
+    new TDPrefKey( T, BOOL, BT,  "DISTOX_SAP5_BIT16_BUG",   R.string.pref_sap5_bit16_bug_title,   R.string.pref_sap5_bit16_bug_summary,   TRUE )
   };
 
   /** 3D sketch settings
@@ -979,19 +991,36 @@ class TDPrefKey
     return res;
   }
 
-  /** @return the group of a setting (-1 if not found)
+  // /** @return the group of a setting (-1 if not found)
+  //  * @param kay   seting key
+  //  */
+  // static int getKeyGroup( String kay )
+  // {
+  //   for ( TDPrefKey[] keyset : mKeySet ) {
+  //     if ( keyset == null ) continue;
+  //     for ( TDPrefKey k : keyset ) {
+  //       if ( k.key.equals( kay ) ) return k.group;
+  //     }
+  //   }
+  //   return -1;
+  // }
+
+
+  /** @return true the group of the setting is in the groups flag
    * @param kay   seting key
+   * @param flag  groups flag
    */
-  static int getKeyGroup( String kay )
+  static boolean checkKeyGroup( String kay, int flag )
   {
     for ( TDPrefKey[] keyset : mKeySet ) {
       if ( keyset == null ) continue;
       for ( TDPrefKey k : keyset ) {
-        if ( k.key.equals( kay ) ) return k.group;
+        if ( k.key.equals( kay ) ) {
+          return ( flag & (1<<k.group) ) != 0;
+        }
       }
     }
-    return -1;
+    return false;
   }
-
 
 }
