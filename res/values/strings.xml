@@ -2181,6 +2181,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_equates">Project Equates</string>
     <string name="title_equate_new">Add equate &#8230;</string>
     <string name="button_equate_all">All</string><!-- HB EQ all-->
+    <string name="button_equate_one">One</string><!-- HB EQ one-->
     <string name="button_equate_search">Search</string><!-- HB EQ all-->
     <string name="title_equate_with">Equate %1$s and %2$s</string>
     <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
