@@ -36,6 +36,11 @@
           android:layout_marginEnd="@dimen/marginh"
           android:text="@string/button_close"
         />
+        <Button android:id="@+id/button_clear"
+          style="@style/button_default"
+          android:layout_marginEnd="@dimen/marginh"
+          android:text="@string/button_clear_all"
+        />
         <!-- Button android:id="@+id/button_add"
           style="@style/button_default"
           android:layout_marginEnd="@dimen/marginh"

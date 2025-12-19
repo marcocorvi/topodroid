@@ -23,6 +23,7 @@ import android.graphics.PointF;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 // import android.graphics.Bitmap;
+import android.graphics.RectF;
 
 import android.os.Handler;
 import android.os.Message;
@@ -123,6 +124,22 @@ public class TdmViewSurface extends SurfaceView
       if ( eq.contains( cmd1 ) && eq.contains( cmd2 ) ) return true;
     }
     return false;
+  }
+
+  /** @return the bounding box of all the stations
+   */
+  RectF getBoundingBox()
+  {
+    RectF box = new RectF();
+    boolean initialized = false;
+    for ( TdmViewCommand cmd : mCommandManager ) {
+      if ( initialized ) {
+        cmd.updateBoundingBox( box );
+      } else {
+        initialized = cmd.initBoundingBox( box );
+      }
+    }
+    return box;
   }
 
   void changeStationRate( int rate ) 
@@ -325,6 +342,7 @@ public class TdmViewSurface extends SurfaceView
     mXoffset += dx;
     mYoffset += dy;
     mZoom    *= rs;
+    // TDLog.v(" offset " + mXoffset + " " + mYoffset + " zoom " + mZoom );
     for ( TdmViewCommand command : mCommandManager ) command.transform( dx, dy, rs );
     // scale matrix
     mMatrix = new Matrix();

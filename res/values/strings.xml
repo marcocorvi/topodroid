@@ -859,6 +859,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="ask_gps_service">Set GPS service?</string>
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string>
+    <string name="ask_clear_equates">Remove all equates?</string>
 
     <string name="button_add"       >Add       </string>
     <string name="button_apply"     >Apply</string>
@@ -926,6 +927,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_left"      >LEFT</string>
     <string name="button_right"     >RIGHT</string>
     <string name="button_clear"     >Clear</string>
+    <string name="button_clear_all" >Clear all</string>
     <string name="button_clear_day" >Clear 1d</string>
     <string name="button_clear_week">Clear 7d</string>
     <string name="button_clear_memory">Clear memory</string>

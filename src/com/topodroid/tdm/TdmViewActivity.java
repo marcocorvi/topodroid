@@ -37,6 +37,7 @@ import android.content.pm.PackageManager;
 // import android.graphics.Paint;
 // import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
+import android.graphics.RectF;
 // import android.graphics.Path;
 // import android.view.Menu;
 // import android.view.MenuItem;
@@ -129,6 +130,7 @@ public class TdmViewActivity extends Activity
 
     private void changeZoom( float f ) 
     {
+      // TDLog.v("change zoom " + f );
       mDrawingSurface.changeZoom( f );
     }
 
@@ -148,6 +150,19 @@ public class TdmViewActivity extends Activity
     static float sceneToWorldX( float x ) { return x/SCALE_FIX; }
     static float sceneToWorldY( float y ) { return y/SCALE_FIX; }
 
+    void zoomFit( float width, float height )
+    {
+      RectF box = mDrawingSurface.getBoundingBox();
+      float zw = 0.5f * TopoDroidApp.mDisplayWidth / ( box.right - box.left );
+      float zh = 0.5f * TopoDroidApp.mDisplayHeight / ( box.bottom - box.top );
+      float x  = ( box.right + box.left )/2;
+      float y  = ( box.bottom + box.top )/2;
+      TDLog.v("BBox " + box.left + " " + box.right + "   " + box.top + " " + box.bottom + " zw " + zw );
+      float z  = ( zh < zw )? zh : zw;
+      mDrawingSurface.transform( width/(2.0f * z) - x, height/(2.0f * z) - y, z ); // was zoom = 1
+     
+      // mDrawingSurface.changeZoom( zw );
+    }
     
     // --------------------------------------------------------------------------------------
 
@@ -210,7 +225,8 @@ public class TdmViewActivity extends Activity
       mMenu.setOnItemClickListener( this );
 
       doStart();
-      mDrawingSurface.transform( width/2.0f, height/2.0f, 1 );
+      zoomFit( width, height );
+      // mDrawingSurface.transform( width/(2.0f * z), height/(2.0f * z), z ); // was zoom = 1 - moved in zoomFit
     }
 
     @Override
@@ -436,7 +452,7 @@ public class TdmViewActivity extends Activity
                 for ( TdmPossibleEquate eq : eqs ) {
                   final String st1 = eq.getStationFullname( 1 );
                   final String st2 = eq.getStationFullname( 2 );
-                  TDLog.v("make eqauete <" + st1 + "> <" + st2 + ">" );
+                  // TDLog.v("make eqauete <" + st1 + "> <" + st2 + ">" );
                   makeEquate( st1, st2 );
                 }
               }
@@ -691,7 +707,11 @@ public class TdmViewActivity extends Activity
         computePossibleEquates();
       }
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // SHOW EQUATES
-      (new TdmEquatesDialog( this, TdmConfigActivity.mTdmConfig, this )).show();
+      if ( TdmConfigActivity.mTdmConfig.hasEquates() ) {
+        (new TdmEquatesDialog( this, TdmConfigActivity.mTdmConfig, this )).show();
+      } else {
+        TDToast.make( R.string.no_equate );
+      }
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // FEWER STATIONS
       changeStationRate( -1 );
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // MORE STATIONS
@@ -773,7 +793,7 @@ public class TdmViewActivity extends Activity
         } // stations in survey i
       } // survey j
     } // survey i
-    TDLog.v("Possible equates " + mDrawingSurface.nrPossibleEquates() );
+    // TDLog.v("Possible equates " + mDrawingSurface.nrPossibleEquates() );
     return mDrawingSurface.hasPossibeEquates();
   }
   

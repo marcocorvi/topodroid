@@ -40,7 +40,6 @@ class TdmEquatesDialog extends MyDialog
                       implements OnItemClickListener
                       , OnClickListener
 {
-  Context mContext;
   TdmEquateAdapter mTdmEquateAdapter;
   TdmConfig mConfig;
   TdmViewActivity mActivity;
@@ -50,7 +49,6 @@ class TdmEquatesDialog extends MyDialog
   TdmEquatesDialog( Context context, TdmConfig config, TdmViewActivity activity )
   {
     super( context, null, R.string.TdmEquatesDialog ); // null app
-    mContext  = context;
     mConfig   = config;
     mActivity = activity;
     if ( mConfig != null && mConfig.getEquates() != null ) {
@@ -67,10 +65,9 @@ class TdmEquatesDialog extends MyDialog
     super.onCreate( savedInstanceState );
     initLayout( R.layout.tdequates_dialog, R.string.title_equates );
 
-    // Button add  = (Button)findViewById( R.id.button_add );
-    // add.setOnClickListener( this );
-    Button back = (Button)findViewById( R.id.button_back );
-    back.setOnClickListener( this );
+    // ( (Button)findViewById( R.id.button_add ) ).setOnClickListener( this );
+    ( (Button)findViewById( R.id.button_back ) ).setOnClickListener( this );
+    ( (Button)findViewById( R.id.button_clear ) ).setOnClickListener( this );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setDividerHeight( 2 );
@@ -102,6 +99,8 @@ class TdmEquatesDialog extends MyDialog
     if ( mActivity != null ) mActivity.updateViewEquates();
   }
 
+  /** ask whether to remove an eqaute
+   */
   void askRemoveEquate( final TdmEquate equate )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mContext.getResources(), 
@@ -123,6 +122,15 @@ class TdmEquatesDialog extends MyDialog
     }
   }
 
+  /** clear all equates and close dialog
+   */
+  void clearEquates()
+  {
+    TdmConfigActivity.mTdmConfig.clearEquates();
+    if ( mActivity != null ) mActivity.updateViewEquates();
+    dismiss();
+  }
+
   @Override
   public void onClick( View v ) 
   {
@@ -130,6 +138,15 @@ class TdmEquatesDialog extends MyDialog
     // } else if ( v.getId() == R.id.button_add ) {
     //   mActivity.doEquateAddDialog();
     // }
+    if ( v.getId() == R.id.button_clear ) {
+      TopoDroidAlertDialog.makeAlert( mContext, mContext.getResources(), mContext.getResources().getString( R.string.ask_clear_equates ),
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) { clearEquates(); }
+        }
+      );
+      return;
+    }
     dismiss();
   }
       

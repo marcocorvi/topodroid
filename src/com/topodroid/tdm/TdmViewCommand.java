@@ -16,11 +16,13 @@ import com.topodroid.TDX.BrushManager;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.RectF;
 // import android.graphics.Paint.Style;
 // import android.graphics.PointF;
 // import android.graphics.Path;
 // import android.graphics.Path.Direction;
 import android.os.Handler;
+
 
 // import java.util.Iterator;
 import java.util.List;
@@ -118,6 +120,33 @@ public class TdmViewCommand
     mYoff  = yoff;
     mScale = 1.0f;
     // FIXME
+  }
+
+  /** update the bounding box with the stations coords
+   * @param box bounding box
+   */
+  void updateBoundingBox( RectF box ) 
+  {
+    for ( TdmViewStation st : mStations ) {
+      if ( st.x < box.left   ) box.left   = st.x;
+      if ( st.x > box.right  ) box.right  = st.x;
+      if ( st.y < box.top    ) box.top    = st.y;
+      if ( st.y > box.bottom ) box.bottom = st.y;
+    }
+  }
+  
+  /** initialize the bounding box with the stations
+   * @param box bounding box
+   * @return false if there are no stations
+   */
+  boolean initBoundingBox( RectF box )
+  {
+    if ( mStationsArray.size() == 0 ) return false;
+    TdmViewStation st = mStationsArray.get(0);
+    box.left   = box.right  = st.x;
+    box.top    = box.bottom = st.y;
+    updateBoundingBox( box );
+    return true;
   }
 
   /** set the display transform:

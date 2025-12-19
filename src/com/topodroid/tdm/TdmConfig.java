@@ -96,6 +96,13 @@ class TdmConfig extends TdmFile
     // TDLog.v("dropped equates with " + survey + " after " + mEquates.size() );
   }
 
+  /** drop all equates
+   */
+  void clearEquates()
+  {
+    mEquates.clear();
+  }
+
   /** insert an equate
    * @param equate  equate
    */
