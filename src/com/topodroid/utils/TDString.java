@@ -493,7 +493,15 @@ public class TDString
   public static String replaceSpecials( String s )
   {
     return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-");
+  }
+
+  /** @return true if the string contains a special character
+   * @param s input string
+   */
+  public static boolean hasSpecials( String s )
+  {
+    return s.contains("/") || s.contains("\\*") || s.contains("\\\\") || s.contains(":") || s.contains("<") || s.contains(">");
   }
 
   /** @return a string with all spaces dropped

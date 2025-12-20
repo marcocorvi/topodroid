@@ -784,7 +784,12 @@ public class TDFile
   { 
     File oldfile = getExternalTempFile( oldname );
     if ( ! oldfile.exists() ) return true;
-    return renameTempFile( oldfile, getTopoDroidFile( newname ) );
+    File newfile = getTopoDroidFile( newname );
+    if ( newfile == null ) {
+      TDLog.e("cnnot create new File for <" + newname + ">" );
+      return false;
+    }
+    return renameTempFile( oldfile, newfile );
   }
   
 

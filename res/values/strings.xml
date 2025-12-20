@@ -116,6 +116,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bad_sibling">Bad leg sibling</string>
     <string name="bad_station">Bad station: %1$s</string>
     <string name="bad_station_name">Illegal station name</string>
+    <string name="invalid_name">Invalid name</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->

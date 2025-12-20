@@ -124,13 +124,13 @@ public class TDUtil
   public static String toStationFromName( String s )
   {
     if ( s == null ) return null;
-    return s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+    return TDString.replaceSpecials( s );
   }
 
   public static String toStationToName( String s )
   {
     if ( s == null ) return null;
-    s = s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+    s = TDString.replaceSpecials( s );
     if ( s.equals(".") || s.equals("-") ) return "";
     return s;
   }

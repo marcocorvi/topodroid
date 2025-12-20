@@ -158,7 +158,17 @@ class PlotRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnRename ) {
       // TDLog.v("click RENAME");
-      String name = TDString.spacesToUnderscores( mEtName.getText().toString() );
+      String name = mEtName.getText().toString();
+      if ( name != null ) name = name.trim();
+      if ( TDString.isNullOrEmpty( name ) ) {
+        mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+        return;
+      }
+      if ( TDString.hasSpecials( name ) ) {
+        mEtName.setError( mContext.getResources().getString( R.string.invalid_name ) );
+        return;
+      }
+      name = TDString.spacesToUnderscores( name );
       if ( ! mName.equals( name ) ) {
         INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
         if ( maker.hasSurveyPlot( name ) ) {
@@ -216,7 +226,17 @@ class PlotRenameDialog extends MyDialog
   private boolean handleSketchSplit( boolean warning )
   {
     INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
-    String name = TDString.spacesToUnderscores( mEtName.getText().toString() );
+    String name = mEtName.getText().toString();
+    if ( name != null ) name = name.trim();
+    if ( TDString.isNullOrEmpty( name ) ) {
+      mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      return false;
+    }
+    if ( TDString.hasSpecials( name ) ) {
+      mEtName.setError( mContext.getResources().getString( R.string.invalid_name ) );
+      return false;
+    }
+    name = TDString.spacesToUnderscores( name );
     if ( maker.hasSurveyPlot( name ) ) {
       mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;

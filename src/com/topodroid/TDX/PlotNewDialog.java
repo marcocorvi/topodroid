@@ -166,29 +166,33 @@ class PlotNewDialog extends MyDialog
    */
   private boolean handleOK( )
   {
-    String plot_name  = TDString.spacesToUnderscore( mEditName.getText().toString() ); // FIXME TRIM
+    String plot_name  = mEditName.getText().toString(); 
+    if ( plot_name != null ) plot_name = plot_name.trim();
+
     String plot_start = TDString.noSpaces( mEditStart.getText().toString() );
     // String view  = mEditView.getText().toString();
     // String view = null;
 
-    // if ( plot_name == null ) { // CANNOT HAPPEN
-    //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-    //   return false;
-    // }
-    // FIXME why these three checks
-    plot_name = TDUtil.toStationFromName( plot_name );
     if ( TDString.isNullOrEmpty( plot_name ) ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;
     }
-    if ( ! TDUtil.isStationName( plot_name ) ) {
-      mEditName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+    if ( TDString.hasSpecials( plot_name ) ) {
+      mEditName.setError( mContext.getResources().getString( R.string.invalid_name ) );
       return false;
     }
-    if ( mApp.hasSurveyPlotName( plot_name ) ) {
-      mEditName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
+    // if ( mApp.hasSurveyPlotName( plot_name ) ) { // this checks "plot_name"
+    //   mEditName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
+    //   return false;
+    // }
+    if ( mMaker.hasSurveyPlot( plot_name ) ) { // this checks "plot_name" + "p"
+      mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;
     }
+    // if ( ! TDUtil.isStationName( plot_name ) ) {
+    //   mEditName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+    //   return false;
+    // }
 
     // if ( plot_start == null ) { // CANNOT HAPPEN
     //   mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
@@ -202,10 +206,6 @@ class PlotNewDialog extends MyDialog
     } 
     if ( ! TDUtil.isStationName( plot_start ) ) {
       mEditStart.setError( mContext.getResources().getString( R.string.bad_station_name ) );
-      return false;
-    }
-    if ( mMaker.hasSurveyPlot( plot_name ) ) {
-      mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;
     }
     boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();

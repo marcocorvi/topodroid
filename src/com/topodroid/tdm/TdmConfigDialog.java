@@ -31,8 +31,6 @@ public class TdmConfigDialog extends MyDialog
                              implements View.OnClickListener
 {
     private EditText mLabel;
-    private Button mBtnOK;
-    private Button mBtnCancel;
 
     private TdManagerActivity mActivity;
 
@@ -53,12 +51,8 @@ public class TdmConfigDialog extends MyDialog
       initLayout( R.layout.tdconfig_dialog, R.string.title_tdconfig );
 
       mLabel     = (EditText) findViewById(R.id.label_text);
-      mBtnOK     = (Button) findViewById(R.id.label_ok);
-      mBtnCancel = (Button) findViewById(R.id.label_cancel);
-
-      mBtnOK.setOnClickListener( this );
-      mBtnCancel.setOnClickListener( this );
-
+      ( (Button) findViewById(R.id.label_ok) ).setOnClickListener( this );
+      ( (Button) findViewById(R.id.label_cancel) ).setOnClickListener( this );
     }
 
     /** react to a user tap
@@ -67,9 +61,9 @@ public class TdmConfigDialog extends MyDialog
      */
     public void onClick(View view)
     {
-      if (view.getId() == R.id.label_ok ) {
-        String name = mLabel.getText().toString();
-        if ( name != null && name.length() > 0 ) {
+      if ( view.getId() == R.id.label_ok ) {
+        String name = TDString.replaceSpecials( mLabel.getText().toString() );
+        if ( ! TDString.isNullOrEmpty( name ) ) {
           name = TDString.spacesToUnderscore( name );
           if ( ! name.endsWith( ".tdconfig" ) ) {
             name = name + ".tdconfig";

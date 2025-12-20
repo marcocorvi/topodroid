@@ -331,7 +331,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             // TDLog.v("failed rename old " + filename1 + TDPath.BCK_SUFFIX );
           }
           if ( ! TDFile.renameExternalTempFile( tempname1, filename1 ) ) {
-            TDLog.e("failed rename itempfile to " + filename1 );
+            TDLog.e("failed rename tempfile to " + filename1 );
           }
         }
         return true;

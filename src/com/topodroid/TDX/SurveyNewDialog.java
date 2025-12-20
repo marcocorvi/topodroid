@@ -192,12 +192,20 @@ class SurveyNewDialog extends MyDialog
 
       // if ( mEditName.getText() == null ) return;
       String name = mEditName.getText().toString();
-      if ( name != null ) name = TDString.spacesToUnderscore( name );
-      if ( TDString.isNullOrEmpty( name ) ) { // ALWAYS false
+      if ( name != null ) name = name.trim();
+      if ( TDString.isNullOrEmpty( name ) ) {
         mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
-      name = TDString.noSpaces( name ); // FIXME FORCE NAMES WITHOUT UNACCEPTABLE CHARACTERS
+      if ( TDString.hasSpecials( name ) ) {
+        mEditName.setError( mContext.getResources().getString( R.string.invalid_name ) );
+        return;
+      }
+      if ( mApp.hasSurveyName( name ) ) {
+        mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
+        return;
+      }
+      
       if ( ! saveSurvey( name ) ) {
         return;
       }
@@ -225,14 +233,14 @@ class SurveyNewDialog extends MyDialog
   {
     // if ( name == null ) return false; // guaranteed
     // name = TDString.noSpaces( name ); // already checked
-    if ( name.length() == 0 ) {
-      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-      return false;
-    }
-    if ( mApp.hasSurveyName( name ) ) { // name already exists
-      mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
-      return false;
-    }
+    // if ( name.length() == 0 ) {
+    //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+    //   return false;
+    // }
+    // if ( mApp.hasSurveyName( name ) ) { // name already exists
+    //   mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
+    //   return false;
+    // }
 
     String date = TDUtil.stringToDate( mEditDate.getText().toString() );
     String team = mEditTeam.getText().toString();

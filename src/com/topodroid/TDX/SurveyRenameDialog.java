@@ -77,10 +77,15 @@ class SurveyRenameDialog extends MyDialog
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
     if ( b == mBtnRename ) {
-      String name = TDString.spacesToUnderscores( mEtName.getText().toString() );
+      String name = mEtName.getText().toString();
+      if ( name != null ) name = name.trim();
       if ( TDString.isNullOrEmpty( name ) ) {
         mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
 	return;
+      }
+      if ( TDString.hasSpecials( name ) ) {
+        mEtName.setError( mContext.getResources().getString( R.string.invalid_name ) );
+        return;
       }
       if ( ! name.equals( TDInstance.survey ) ) {
         if ( TopoDroidApp.mData.hasSurveyName( name ) ) {

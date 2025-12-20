@@ -26,8 +26,9 @@ In particular it is not possible to have two sketches with names differing only 
 since the two sketches would have the same file because the filesystem is case insensitive.<br><p>
 
 <b>WARNING</b>.
-The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.
-Slashes are replaced with dashes '-'.<br><p>
+The name of the sketch cannot contain special chracters: '/', ':', '&lt;', '&gt;', '*', '\'.<br>'
+The name of the sketch cannot contain spaces.  Spaces are replaced with '_' (underscore).
+<br><p>
 
 <b>Reference station</b><br>
 The reference station (origin) defines how the sketch is translated with respect to the survey midline.
