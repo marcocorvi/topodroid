@@ -488,20 +488,22 @@ public class TDString
   }
 
   /** @return a string with replaced special chars
+   * The forbidden chars in Windows are / (slash), \ (backslash), * (asterisk), : (color), ? (question mark), | (pipe), < (less then), > (greater than)
    * @param s   input string
    */
   public static String replaceSpecials( String s )
   {
     return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-");
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-").replaceAll("|", "+").replaceAll("?", ".").replaceAll("\"", "");
   }
 
   /** @return true if the string contains a special character
+   * The forbidden chars in Windows are /, \, *, :, ?, |, <, >
    * @param s input string
    */
   public static boolean hasSpecials( String s )
   {
-    return s.contains("/") || s.contains("\\*") || s.contains("\\\\") || s.contains(":") || s.contains("<") || s.contains(">");
+    return s.contains("/") || s.contains("\\*") || s.contains("\\\\") || s.contains(":") || s.contains("<") || s.contains(">") || contains('|') || contains('?') || contains('"');
   }
 
   /** @return a string with all spaces dropped
