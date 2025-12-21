@@ -2047,8 +2047,8 @@ public class TDExporter
 
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
-    String uls = ( ul < 1.01f )? "meter"  : "foot"; // FIXME
-    String uas = ( ua < 1.01f )? "degree" : "grad";
+    String uls = ( ul < 1.01f )? "meters"  : "feet"; // HB https://survex.com/docs-1.0/manual/datafile.htm
+    String uas = ( ua < 1.01f )? "degrees" : "grads"; // HB https://survex.com/docs-1.0/manual/datafile.htm
 
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
