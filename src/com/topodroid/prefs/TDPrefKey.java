@@ -317,6 +317,7 @@ class TDPrefKey
   /** cSurvey
    * whether to add cave-name prefix to stations (cSurvey/Compass export)
    * whether export also media
+   * @note 1 key repeated
    */
   static TDPrefKey[] mExportCsx = {
     new TDPrefKey( N, BOOL, XP, "DISTOX_STATION_PREFIX", R.string.pref_station_prefix_title, R.string.pref_station_prefix_summary, FALSE ),
@@ -346,11 +347,12 @@ class TDPrefKey
    * whether to name endpoint of splays in Survex export
    * whether to add LRUD to Survex export
    * EPSG number for cs out
+   * @note 2 key repeated
    */
   static TDPrefKey[] mExportSvx = {
     new TDPrefKey( N,       XP, "DISTOX_SURVEX_EOL",   R.string.pref_survex_eol_title,  R.string.pref_survex_eol_summary,   "lf", R.array.survexEol, R.array.survexEolValue ),
-    new TDPrefKey( A, BOOL, XP, "DISTOX_SURVEX_SPLAY", R.string.pref_survex_splay_title,R.string.pref_survex_splay_summary, FALSE ),
     new TDPrefKey( A, BOOL, XP, "DISTOX_SURVEX_LRUD",  R.string.pref_survex_lrud_title, R.string.pref_survex_lrud_summary,  FALSE ),
+    new TDPrefKey( A, BOOL, XP, "DISTOX_SURVEX_SPLAY", R.string.pref_survex_splay_title,R.string.pref_survex_splay_summary, FALSE ),
     new TDPrefKey( A, LONG, XP, "DISTOX_SURVEX_EPSG",  R.string.pref_survex_epsg_title, R.string.pref_survex_epsg_summary,  TDString.ZERO )
   };
 
@@ -569,17 +571,18 @@ class TDPrefKey
    * length of the tick at the first line-point (when applicable)
    * whether to add section point when tracing a section line
    * area border visibility
+   * @note 7 keys repeated
    */
   static TDPrefKey[] mLine = {
     new TDPrefKey( N, FLT,  UI, "DISTOX_LINE_THICKNESS",  R.string.pref_line_thickness_title, R.string.pref_line_thickness_summary,  TDString.ONE ),
-    new TDPrefKey( N, FLT,  DR, "DISTOX_LINE_UNITS",      R.string.pref_line_units_title,     R.string.pref_line_units_summary,      "1.4" ),
     new TDPrefKey( N,       DR, "DISTOX_LINE_STYLE",      R.string.pref_linestyle_title,      R.string.pref_linestyle_summary,       TDString.TWO, R.array.lineStyle, R.array.lineStyleValue ),
     new TDPrefKey( N, LONG, DR, "DISTOX_LINE_SEGMENT",    R.string.pref_segment_title,        R.string.pref_segment_message,         TDString.TEN ),
     new TDPrefKey( N, BOOL, DR, "DISTOX_LINE_CLOSE",      R.string.pref_line_close_title,     R.string.pref_line_close_summary,      TRUE ),
-    new TDPrefKey( A, LONG, UI, "DISTOX_SLOPE_LSIDE",     R.string.pref_slope_lside_title,    R.string.pref_slope_lside_summary,     "20" ),
     new TDPrefKey( A, FLT,  DR, "DISTOX_ARROW_LENGTH",    R.string.pref_arrow_length_title,   R.string.pref_arrow_length_message,    "8"  ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_AUTO_SECTION_PT", R.string.pref_auto_section_pt_title,R.string.pref_auto_section_pt_summary, TRUE ),
-    new TDPrefKey( N, BOOL, UI, "DISTOX_AREA_BORDER",     R.string.pref_area_border_title,    R.string.pref_area_border_summary,     TRUE )
+    new TDPrefKey( N, BOOL, UI, "DISTOX_AREA_BORDER",     R.string.pref_area_border_title,    R.string.pref_area_border_summary,     TRUE ),
+    new TDPrefKey( N, FLT,  DR, "DISTOX_LINE_UNITS",      R.string.pref_line_units_title,     R.string.pref_line_units_summary,      "1.4" ),
+    new TDPrefKey( A, LONG, UI, "DISTOX_SLOPE_LSIDE",     R.string.pref_slope_lside_title,    R.string.pref_slope_lside_summary,     "20" )
   };
 
   /** point settings
@@ -588,6 +591,7 @@ class TDPrefKey
    * size of labels [pt]
    * 
    * section point offset
+   * @note 3 keys repeated
    */
   static TDPrefKey[] mPoint = {
     new TDPrefKey( N, BOOL, UI, "DISTOX_UNSCALED_POINTS",  R.string.pref_unscaled_points_title,  R.string.pref_unscaled_points_summary,FALSE ),
@@ -629,6 +633,7 @@ class TDPrefKey
    * "select" radius // "select" radius // "select" radius
    * "erase" radius // "erase" radius
    * "size" of a "point touch" (max distance between down and up)
+   * @note all keys repeated
    */
   static TDPrefKey[] mErase = {
     new TDPrefKey( B, LONG,  UI, "DISTOX_CLOSENESS",  R.string.pref_closeness_title, R.string.pref_closeness_message,TDString.TWENTYFOUR ),
@@ -641,6 +646,7 @@ class TDPrefKey
    * "select" radius // "select" radius // "select" radius
    * maximum amount for a shift (to avoid jumps)
    * "size" of a "point touch" (max distance between down and up)
+   * @note all keys repeated
    */ 
   static TDPrefKey[] mEdit = {
     new TDPrefKey( N, FLT,  UI, "DISTOX_DOT_RADIUS",  R.string.pref_dot_radius_title, R.string.pref_dot_radius_message, TDString.FIVE ),
@@ -897,49 +903,49 @@ class TDPrefKey
 
   // the oreder must follow category index in TDPrefCat
   static TDPrefKey[][] mKeySet = {
-    mMain,
+    mMain,   // 0
     mSurvey,
     mPlot,
     mCalib,
-    mDevice,
-    mSketch,
-    mCave3D,
-    mExport,
-    mExportImport,
-    mExportEnable,
-    mExportSvx,
-    mExportTh,
-    mExportDat,
-    mExportCsx,
-    mExportTro,
-    mExportSvg,
-    mExportShp,
-    mExportDxf,
-    mExportGpx,
-    mExportKml,
-    mExportCsv,
-    mExportSrv,
-    mExportPly,
+    mDevice, 
+    mSketch, // 5
     mData,
     mUnits,
     mAccuracy,
-    mLocation,
-    mScreen,                   
+    mLocation, 
+    mScreen,  // 10
     mLine,
-    mPoint,
+    mPoint,   // 12
     mDraw,
     mErase,
-    mEdit,
+    mEdit,     // 15
+    mCave3D,
     mDem3D,
     mWalls3D,
-    mGeek,
-    mGeekShot,
+    mGeek,     // 19
+    mGeekShot, // 20
     mGeekSplay,
     mGeekPlot,
     mGeekLine,
     mGeekDevice,
-    mGeekImport,
+    mGeekImport,  // 25
     // mGeekSketch,
+    mExport,
+    mExportImport,
+    mExportEnable,
+    mExportSvx, // 29
+    mExportTh,  // 30
+    mExportDat,
+    mExportCsx,
+    mExportTro,
+    mExportSvg,
+    mExportShp, // 35
+    mExportDxf,
+    mExportGpx,
+    mExportKml,
+    mExportCsv,
+    mExportSrv, // 40
+    mExportPly,
     null
   };
 
@@ -1022,5 +1028,35 @@ class TDPrefKey
     }
     return false;
   }
+ 
+  /** @return the number of key-sets
+   */
+  static int nrKeySets() { return mKeySet.length; }
+  
+  /** @return the number of keys in a key-sets
+   * @param j   index of the keyset
+   */
+  static int nrKeys( int j ) { return ( mKeySet[j] == null )? 0 : mKeySet[j].length; }
 
+  /** @return a key
+   * @param j   index of keyset
+   * @param k   index of the key
+   */
+  static TDPrefKey getKey( int j, int k ) { return mKeySet[j][k]; }
+
+  /** @return if the key is a repeatition
+   * @param j   index of keyset
+   * @param k   index of the key
+   * @note repeated keys are not exported
+   */
+  static boolean repeatedKey( int j, int k ) 
+  {
+    return ( j ==  3 && k > 5 )  // mCalib : not repeated but not to export
+        || ( j == 11 && k < 7 )  // mLine
+        || ( j == 12 && k < 3 )  // mPoint
+        || ( j == 14 )           // mErase
+        || ( j == 15 )           // mEdit
+        || ( j == 29 && k < 2 )  // mExportSvx
+        || ( j == 32 && k < 1 ); // mExportCsx
+  }
 }

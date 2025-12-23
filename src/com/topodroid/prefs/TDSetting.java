@@ -1235,8 +1235,8 @@ public class TDSetting
 
     key = TDPrefKey.mExportSvx;
     mSurvexEol         = ( prefs.getString(  key[0].key,      key[0].dflt ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    mSurvexSplay       =   prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_SURVEX_SPLAY
-    mSurvexLRUD        =   prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_SURVEX_LRUD
+    mSurvexLRUD        =   prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_SURVEX_LRUD
+    mSurvexSplay       =   prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_SURVEX_SPLAY
     mSurvexEPSG        = tryInt(   prefs,    key[3].key,      key[3].dflt );  // DISTOX_SURVEX_EPSG
     // TDLog.v("SETTING load secondary export SVX done");
 
@@ -1472,16 +1472,16 @@ public class TDSetting
 
     key = TDPrefKey.mLine;
     mLineThickness = tryFloat( prefs,  key[0].key,      key[0].dflt );   // DISTOX_LINE_THICKNESS
-    mUnitLines     = tryFloat( prefs,  key[1].key,      key[1].dflt );   // DISTOX_LINE_UNITS
-    setLineStyleAndType( prefs.getString( key[2].key,   key[2].dflt ) ); // DISTOX_LINE_STYLE
-    setLineSegment( tryInt(    prefs,  key[3].key,      key[3].dflt ) ); // DISTOX_LINE_SEGMENT
-    mLineClose     = prefs.getBoolean( key[4].key, bool(key[4].dflt) );  // DISTOX_LINE_CLOSE
-    mSlopeLSide    = tryInt(   prefs,  key[5].key,      key[5].dflt );   // DISTOX_SLOPE_LSIDE
-    mArrowLength   = tryFloat( prefs,  key[6].key,      key[6].dflt );   // DISTOX_ARROW_LENGTH
-    mAutoSectionPt = prefs.getBoolean( key[7].key, bool(key[7].dflt) );  // DISTOX_AUTO_SECTION_PT
+    setLineStyleAndType( prefs.getString( key[1].key,   key[1].dflt ) ); // DISTOX_LINE_STYLE
+    setLineSegment( tryInt(    prefs,  key[2].key,      key[2].dflt ) ); // DISTOX_LINE_SEGMENT
+    mLineClose     = prefs.getBoolean( key[3].key, bool(key[3].dflt) );  // DISTOX_LINE_CLOSE
+    mArrowLength   = tryFloat( prefs,  key[4].key,      key[4].dflt );   // DISTOX_ARROW_LENGTH
+    mAutoSectionPt = prefs.getBoolean( key[5].key, bool(key[5].dflt) );  // DISTOX_AUTO_SECTION_PT
+    mAreaBorder    = prefs.getBoolean( key[6].key, bool(key[6].dflt) );  // DISTOX_AREA_BORDER
+    mUnitLines     = tryFloat( prefs,  key[7].key,      key[7].dflt );   // DISTOX_LINE_UNITS
+    mSlopeLSide    = tryInt(   prefs,  key[8].key,      key[8].dflt );   // DISTOX_SLOPE_LSIDE
     // mContinueLine  = tryInt(   prefs,  key[7].key,      key[7].dflt );   // DISTOX_LINE_CONTINUE
     // mWithLineJoin  = prefs.getBoolean( key[8].key, bool(key[8].dflt) );  // DISTOX_WITH_CONTINUE_LINE
-    mAreaBorder    = prefs.getBoolean(    key[8].key, bool(key[8].dflt) );  // DISTOX_AREA_BORDER
 
     key = TDPrefKey.mPoint;
     mUnscaledPoints = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_UNSCALED_POINTS
@@ -2257,10 +2257,10 @@ public class TDSetting
     TDPrefKey[] key = TDPrefKey.mExportSvx;
     if ( k.equals( key[0].key ) ) { // DISTOX_SURVEX_EOL (choice)
       mSurvexEol = ( tryStringValue( hlp, k, v, key[0].dflt ).equals(key[0]) )? "\n" : "\r\n";
-    } else if ( k.equals( key[1].key ) ) { // DISTOX_SURVEX_SPLAY (bool)
-      mSurvexSplay = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
-    } else if ( k.equals( key[2].key ) ) { // DISTOX_SURVEX_LRUD (bool)
-      mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+    } else if ( k.equals( key[1].key ) ) { // DISTOX_SURVEX_LRUD (bool)
+      mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
+    } else if ( k.equals( key[2].key ) ) { // DISTOX_SURVEX_SPLAY (bool)
+      mSurvexSplay = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
     } else if ( k.equals( key[3].key ) ) { // DISTOX_SURVEX_EPSG (int)
       mSurvexEPSG = tryIntValue( hlp, k, v, key[3].dflt );
     } else {
@@ -2706,30 +2706,30 @@ public class TDSetting
     TDPrefKey[] key = TDPrefKey.mLine;
     if ( k.equals( key[ 0 ].key ) ) { // DISTOX_LINE_THICKNESS
       ret = setLineThickness( tryStringValue( hlp, k, v, key[0].dflt ) );
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_LINE_UNITS
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_LINE_STYLE (choice)
+      setLineStyleAndType( tryStringValue( hlp, k, v, key[1].dflt ) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LINE_SEGMENT
+      ret = setLineSegment( tryIntValue(   hlp, k, v, key[2].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_LINE_CLOSE
+      mLineClose = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ARROW_LENGTH
+      ret = setArrowLength( tryFloatValue( hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
+    // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
+    //   mContinueLine  = tryIntValue( hlp, k, v, key[7].dflt );
+    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(key[8].dflt) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_LINE_UNITS
       try {
         setDrawingUnitLines( tryFloatValue( hlp, k, v, key[1].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LINE_STYLE (choice)
-      setLineStyleAndType( tryStringValue( hlp, k, v, key[2].dflt ) );
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_LINE_SEGMENT
-      ret = setLineSegment( tryIntValue(   hlp, k, v, key[3].dflt ) );
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_LINE_CLOSE
-      mLineClose = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_SLOPE_LSIDE
-      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[5].dflt ) );
-    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_ARROW_LENGTH
-      ret = setArrowLength( tryFloatValue( hlp, k, v, key[6].dflt ) );
-    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[7].dflt) );
-    // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
-    //   mContinueLine  = tryIntValue( hlp, k, v, key[7].dflt );
-    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
-    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(key[8].dflt) );
-    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_SLOPE_LSIDE
+      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[8].dflt ) );
     } else {
       TDLog.e("missing LINE key: " + k );
     }
@@ -3288,7 +3288,7 @@ public class TDSetting
    * @param prefs settings (unused)
    * @param flag  setting groups flag (unused)
    */
-  public static boolean exportSettings( Context ctx, Uri uri, /* SharedPreferences prefs, */ int flag )
+  public static boolean exportSettings( Context ctx, Uri uri, SharedPreferences prefs, int flag )
   {
     TDLog.v("TD Setting exports settings");
     // File file = TDFile.getSettingsFile(); // PRIVATE FILE
@@ -3319,6 +3319,116 @@ public class TDSetting
       //   }
       // }
       pw.printf(Locale.US, "TopoDroid v. %s %d flag %d\n", TDVersion.string(), TDVersion.code(), flag );
+      // int cnt = 0;
+      int n1 = TDPrefKey.nrKeySets();
+      for ( int j = 0; j < n1; ++ j ) {
+        int n2 = TDPrefKey.nrKeys( j );
+        for ( int k = 0; k < n2; ++k ) {
+          if ( TDPrefKey.repeatedKey( j, k ) ) continue;
+          TDPrefKey kay = TDPrefKey.getKey( j, k );
+          if ( ( flag & (1<<kay.group) ) != 0 ) {
+            String val;
+            boolean bval;
+            switch ( kay.type ) {
+              case TDPrefKey.LONG:
+              case TDPrefKey.COL:
+              case TDPrefKey.ARR:
+                val = prefs.getString( kay.key, kay.dflt );
+                pw.printf(Locale.US, "I %s %s\n", kay.key, val );
+                // ++cnt;
+                break;
+              case TDPrefKey.BOOL:
+              case TDPrefKey.XTR:
+                bval = prefs.getBoolean( kay.key, bool(kay.dflt) );
+                pw.printf(Locale.US, "B %s %s\n", kay.key, tf(bval) );
+                // ++cnt;
+                break;
+              case TDPrefKey.FLT:
+                val = prefs.getString( kay.key, kay.dflt );
+                pw.printf(Locale.US, "F %s %s\n", kay.key, val );
+                // ++cnt;
+                break;
+              case TDPrefKey.STR:
+                val = prefs.getString( kay.key, kay.dflt );
+                pw.printf(Locale.US, "S %s %s\n", kay.key, val );
+                // ++cnt;
+                break;
+              case TDPrefKey.BTN:
+                // TDLog.v("Button key " + kay.key );
+                break;
+              case TDPrefKey.FWRD:
+                continue;
+            }
+          }
+        }
+      }
+      // TDLog.v("Printed " + cnt + " settings");
+/*
+      // this list is incomplete: the following keys are missing - these are probably missing also from importSettings()
+I DISTOX_LOCALE 
+I DISTOX_SURVEY_STATION 1
+F DISTOX_TOOLBAR_SIZE 5
+B DISTOX_PLOT_CACHE true
+F DISTOX_ALGO_MIN_ALPHA 0.05
+F DISTOX_ALGO_MIN_BETA 3.0
+F DISTOX_ALGO_MIN_GAMMA 0.05
+F DISTOX_ALGO_MIN_DELTA 0.05
+F DISTOX_AUTO_CAL_BETA 0.004
+F DISTOX_AUTO_CAL_ETA 0.04
+F DISTOX_AUTO_CAL_GAMMA 0.04
+F DISTOX_AUTO_CAL_DELTA 0.04
+B CAVE3D_NEG_CLINO false
+B CAVE3D_STATION_POINTS false
+I CAVE3D_STATION_POINT_SIZE 8
+I CAVE3D_STATION_TEXT_SIZE 20
+F CAVE3D_SELECTION_RADIUS 50
+B CAVE3D_MEASURE_DIALOG false
+B CAVE3D_STATION_TOAST false
+B CAVE3D_GRID_ABOVE false
+I CAVE3D_GRID_EXTENT 10
+B DISTOX_NAMES_VISIBILITY false
+B EXPORT_DATA_COMPASS true
+B EXPORT_DATA_CSURVEY true
+B EXPORT_DATA_POLYGON false
+B EXPORT_DATA_SURVEX false
+B EXPORT_DATA_THERION true
+B EXPORT_DATA_TOPO false
+B EXPORT_DATA_TOPOROBOT false
+B EXPORT_DATA_VISUALTOPO true
+B EXPORT_DATA_WALLS false
+B EXPORT_DATA_WINKARST false
+B EXPORT_DATA_CVS true
+B EXPORT_DATA_DXF false
+B EXPORT_DATA_KML false
+B EXPORT_DATA_GPX false
+B EXPORT_DATA_SHAPEFILE true
+I DISTOX_SURVEX_EOL lf
+I DISTOX_SVG_PROGRAM 1
+B DISTOX_DXF_REFERENCE false
+F CAVE3D_DEM_BUFFER 200
+I CAVE3D_DEM_MAXSIZE 400
+I CAVE3D_DEM_REDUCE 1
+S CAVE3D_TEXTURE_ROOT /sdcard/
+I CAVE3D_SPLAY_USE 1
+B CAVE3D_ALL_SPLAY true
+B CAVE3D_SPLAY_PROJ false
+F CAVE3D_SPLAY_THR 0.5
+B CAVE3D_SPLIT_TRIANGLES true
+F CAVE3D_SPLIT_RANDOM 0.1
+F CAVE3D_SPLIT_STRETCH 0.1
+F CAVE3D_POWERCRUST_DELTA 0.1
+B DISTOX_SINGLE_BACK true
+B DISTOX_HIDE_NAVBAR false
+B DISTOX_WITH_DEBUG false
+B DISTOX_BACKSIGHT_SPLAY false
+F DISTOX_LOOP_THRESHOLD 1
+I DISTOX_LINE_ENDS 0
+B DISTOX_FIRMWARE_SANITY true
+I DISTOX_BRIC_MODE 3
+B DISTOX_BRIC_ZERO_LENGTH false
+B DISTOX_BRIC_INDEX_IS_ID false
+B DISTOX_SAP5_BIT16_BUG true
+
       String k;
       k="DISTOX_SIZE_BUTTONS";     if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSizeBtns );
       k="DISTOX_TEXT_SIZE";        if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mTextSize );
@@ -3333,6 +3443,7 @@ public class TDSetting
       k="DISTOX_EXPORT_SHOTS";     if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mExportShotsFormat );
       k="DISTOX_EXPORT_PLOT";      if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mExportPlotFormat );
       k="DISTOX_AUTO_PLOT_EXPORT"; if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mAutoExportPlotFormat );
+      TDLog.v("Printed 13 settings");
 
       // pw.printf(Locale.US, "B DISTOX_DATA_BACKUP %s\n", mDataBackup );
       // FIXME pw.printf(Locale.US, "S DISTOX_SURVEX_EOL \"%s\"\n", mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n" );
@@ -3357,6 +3468,7 @@ public class TDSetting
       k="DISTOX_THERION_SPLAYS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",  k, tf(mTherionSplays) );
       k="DISTOX_TH2_XVI";               if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",  k, tf(mTherionXvi) );
       k="DISTOX_TH2_SCALE";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",  k, mTherionScale );
+      TDLog.v("Printed 20 settings");
 
       // k="DISTOX_BITMAP_SCALE";       if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mBitmapScale );
       // k="DISTOX_BITMAP_BGCOLOR";     if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mBitmapBgcolor );
@@ -3384,10 +3496,12 @@ public class TDSetting
       k="DISTOX_KML_SPLAYS";            if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mKmlSplays) );
       k="DISTOX_CSV_RAW";               if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mCsvRaw) );
       k="DISTOX_CSV_SEP";               if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, ( mCsvSeparator == CSV_COMMA )? 0 : ( mCsvSeparator == CSV_PIPE )? 1 : 2 );
+      TDLog.v("Printed 23 settings");
+
       k="DISTOX_BLUETOOTH";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCheckBT );
       k="DISTOX_AUTO_PAIR";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoPair) );
       k="DISTOX_SOCKET_TYPE";           if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSockType );
-      k="DISTOX_SOCKET_TYPE";           if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mConnectSocketDelay );
+      k="DISTOX_SOCKET_DELAY";          if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mConnectSocketDelay );
       k="DISTOX_CONN_MODE";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mConnectionMode );
       // k="DISTOX_Z6_WORKAROUND";      if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mZ6Workaround) );
       k="DISTOX_CONNECT_FEEDBACK";      if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mConnectFeedback );
@@ -3407,11 +3521,12 @@ public class TDSetting
       k="DISTOX_GROUP_BY";              if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mGroupBy );
       k="DISTOX_GROUP_DISTANCE";        if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mGroupDistance );
       // DISTOX_CALIB_ALGOk="";         if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCalibAlgo );
+      TDLog.v("Printed 19 settings");
 
       k="DISTOX_CALIB_EPS";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mCalibEps );
       k="DISTOX_CALIB_MAX_IT";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCalibMaxIt );
       k="DISTOX_CALIB_SHOT_DOWNLOAD";   if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mCalibShotDownload) );
-      k="DISTOX_CALIB_SHOT_DOWNLOAD";   if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mRawCData );
+      k="DISTOX_RAW_CADTA";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mRawCData );
       // k="DISTOX_MIN_ALPHA";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mAlgoMinAlpha );
       // k="DISTOX_MIN_BETA";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mAlgoMinBeta );
       // k="DISTOX_MIN_GAMMA";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mAlgoMinGamma );
@@ -3426,6 +3541,8 @@ public class TDSetting
       k="DISTOX_FINE_LOCATION";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mFineLocation );
       k="DISTOX_GEOPOINT_APP";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mGeoImportApp );
       k="DISTOX_EDIT_ALTITUDE";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mEditableHGeo) );
+      TDLog.v("Printed 14 settings");
+
       k="DISTOX_VTHRESHOLD";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mVThreshold );
       k="DISTOX_HTHRESHOLD";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mHThreshold );
       k="DISTOX_BACKSHOT";              if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mDistoXBackshot) );
@@ -3439,7 +3556,7 @@ public class TDSetting
       k="DISTOX_SPLAY_GROUP";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayOnlyForward) );
       k="DISTOX_LRUD_VERTICAL";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mLRUDvertical );
       k="DISTOX_LRUD_HORIZONTAL";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mLRUDhorizontal );
-      k="DISTOX_LRUD_COUNT";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s'n",   k, tf(mLRUDcount) );
+      k="DISTOX_LRUD_COUNT";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLRUDcount) );
       k="DISTOX_IMPORT_DATAMODE";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mImportDatamode );
       k="DISTOX_ZIP_WITH_SYMBOLS";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mZipWithSymbols) );
       k="DISTOX_ZIP_SHARE_CATEGORY";    if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mZipShareCategory) );
@@ -3455,6 +3572,7 @@ public class TDSetting
       k="DISTOX_SPLAY_VERT_THRS";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mSplayVertThrs );
       k="DISTOX_SPLAY_CLASSES";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayClasses) );
       // k="DISTOX_SPLAY_AS_DOT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayAsDot) );
+      TDLog.v("Printed 28 settings");
 
       k="DISTOX_STATION_NAMES";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mStationNames );
       k="DISTOX_INIT_STATION";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "S %s %s\n",   k, mInitStation );
@@ -3477,6 +3595,8 @@ public class TDSetting
       k="DISTOX_PLOT_SPLIT";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mPlotSplit) );
       k="DISTOX_PLOT_SHIFT";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mPlotShift) );
       k="DISTOX_WITH_LEVELS";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mWithLevels );
+      TDLog.v("Printed 23 settings");
+
       k="DISTOX_FULL_AFFINE";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mFullAffine) );
       k="DISTOX_STYLUS_SIZE";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mStylusSize );
       k="DISTOX_SLANT_XSECTION";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSlantXSection) );
@@ -3502,48 +3622,51 @@ public class TDSetting
       k="DISTOX_LINE_STYLE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mLineStyle );
       k="DISTOX_LINE_SEGMENT";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mLineSegment );
       // k="DISTOX_LINE_CONTINUE";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mContinueLine );
+      TDLog.v("Printed 23 settings again");
 
-      k="DISTOX_ARROW_LENGTH";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mArrowLength );
-      k="DISTOX_LINE_CLOSE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mLineClose) );
-      k="DISTOX_SLOPE_LSIDE";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mSlopeLSide );
-      k="DISTOX_BEZIER_STEP";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mBezierStep );
-      k="DISTOX_LINE_ACCURACY";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mLineAccuracy );
-      k="DISTOX_LINE_CORNER";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mLineCorner );
-      k="DISTOX_WEED_DISTANCE";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f'n", mWeedDistance );
-      k="DISTOX_WEED_LENGTH";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWeedLength );
-      k="DISTOX_WEED_BUFFER";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWeedBuffer );
-      k="DISTOX_AREA_BORDER";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mAreaBorder) );
-      k="DISTOX_BACKUP_NUMBER";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mBackupNumber );
-      k="DISTOX_BACKUP_INTERVAL";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mBackupInterval );
-      // k="DISTOX_BACKUPS_CLEAR";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mBackupsClear) );
-      k="DISTOX_SHARED_XSECTIONS";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mSharedXSections) );
-      k="DISTOX_AUTO_XSECTIONS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mAutoXSections) );
-      k="DISTOX_AUTO_SECTION_PT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mAutoSectionPt) );
-      k="DISTOX_LINE_SNAP";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mLineSnap) );
-      k="DISTOX_LINE_CURVE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mLineCurve) );
+      k="DISTOX_ARROW_LENGTH";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mArrowLength );
+      k="DISTOX_LINE_CLOSE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineClose) );
+      k="DISTOX_SLOPE_LSIDE";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSlopeLSide );
+      k="DISTOX_BEZIER_STEP";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mBezierStep );
+      k="DISTOX_LINE_ACCURACY";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mLineAccuracy );
+      k="DISTOX_LINE_CORNER";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mLineCorner );
+      k="DISTOX_WEED_DISTANCE";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWeedDistance );
+      k="DISTOX_WEED_LENGTH";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWeedLength );
+      k="DISTOX_WEED_BUFFER";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWeedBuffer );
+      k="DISTOX_AREA_BORDER";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAreaBorder) );
+      k="DISTOX_BACKUP_NUMBER";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mBackupNumber );
+      k="DISTOX_BACKUP_INTERVAL";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mBackupInterval );
+      // k="DISTOX_BACKUPS_CLEAR";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mBackupsClear) );
+      k="DISTOX_SHARED_XSECTIONS";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSharedXSections) );
+      k="DISTOX_AUTO_XSECTIONS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoXSections) );
+      k="DISTOX_AUTO_SECTION_PT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoSectionPt) );
+      k="DISTOX_LINE_SNAP";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineSnap) );
+      k="DISTOX_LINE_CURVE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineCurve) );
+      TDLog.v("Printed 17 settings");
 
-      k="DISTOX_LINE_STRAIGHT";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mLineStraight) );
-      k="DISTOX_REDUCE_ANGLE";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n"  , mReduceAngle );
-      k="DISTOX_SPLAY_ALPHA";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mSplayAlpha );
-      // k="DISTOX_SPLAY_COLOR";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   tf(mSplayColor) );
-      k="DISTOX_DISCRETE_COLORS";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mDiscreteColors );
-      k="DISTOX_SPLAY_DASH";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mDashSplay );
-      k="DISTOX_VERT_SPLAY";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mVertSplay );
-      k="DISTOX_HORIZ_SPLAY";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mHorizSplay );
-      k="DISTOX_SECTION_SPLAY";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mSectionSplay );
-      k="DISTOX_SPLAY_DASH_COLOR";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mSplayDashColor );
-      k="DISTOX_SPLAY_DOT_COLOR";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mSplayDotColor );
-      k="DISTOX_SPLAY_LATEST_COLOR";    if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mSplayLatestColor );
-      k="DISTOX_ACCEL_PERCENT";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mAccelerationThr );
-      k="DISTOX_MAG_PERCENT";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mMagneticThr );
-      k="DISTOX_DIP_THR";               if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mDipThr );
-      k="DISTOX_SIBLING_PERCENT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mSiblingThr );
-      // k="DISTOX_WALLS_TYPE";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   mWallsType );
-      // k="DISTOX_WALLS_PLAN_THR";     if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWallsPlanThr );
-      // k="DISTOX_WALLS_EXTENDED_THR"; if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWallsExtendedThr );
-      // k="DISTOX_WALLS_XCLOSE";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWallsXClose );
-      // k="DISTOX_WALLS_XSTEP";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWallsXStep );
-      // k="DISTOX_WALLS_CONCAVE";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", mWallsConcave );
+      k="DISTOX_LINE_STRAIGHT";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineStraight) );
+      k="DISTOX_REDUCE_ANGLE";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mReduceAngle );
+      k="DISTOX_SPLAY_ALPHA";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSplayAlpha );
+      // k="DISTOX_SPLAY_COLOR";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayColor) );
+      k="DISTOX_DISCRETE_COLORS";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mDiscreteColors );
+      k="DISTOX_SPLAY_DASH";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mDashSplay );
+      k="DISTOX_VERT_SPLAY";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mVertSplay );
+      k="DISTOX_HORIZ_SPLAY";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mHorizSplay );
+      k="DISTOX_SECTION_SPLAY";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mSectionSplay );
+      k="DISTOX_SPLAY_DASH_COLOR";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSplayDashColor );
+      k="DISTOX_SPLAY_DOT_COLOR";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSplayDotColor );
+      k="DISTOX_SPLAY_LATEST_COLOR";    if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSplayLatestColor );
+      k="DISTOX_ACCEL_PERCENT";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mAccelerationThr );
+      k="DISTOX_MAG_PERCENT";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mMagneticThr );
+      k="DISTOX_DIP_THR";               if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mDipThr );
+      k="DISTOX_SIBLING_PERCENT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mSiblingThr );
+      // k="DISTOX_WALLS_TYPE";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mWallsType );
+      // k="DISTOX_WALLS_PLAN_THR";     if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsPlanThr );
+      // k="DISTOX_WALLS_EXTENDED_THR"; if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsExtendedThr );
+      // k="DISTOX_WALLS_XCLOSE";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsXClose );
+      // k="DISTOX_WALLS_XSTEP";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsXStep );
+      // k="DISTOX_WALLS_CONCAVE";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsConcave );
+      TDLog.v("Printed 15 settings");
 /*
 */
       // TDLog.exportLogSettings( pw ); // NO_LOGS

@@ -174,7 +174,7 @@ public class TDPrefActivity extends Activity
       protected Boolean doInBackground(Void... v)
       {
         TDLog.v("export settings - flag " + flag );
-        return TDSetting.exportSettings( ctx, uri, /* prefs, */ flag );
+        return TDSetting.exportSettings( ctx, uri, prefs, flag );
       }
       @Override
       protected void onPostExecute( Boolean v )
