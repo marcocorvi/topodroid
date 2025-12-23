@@ -822,7 +822,7 @@ public class TDSetting
   private static float tryFloatValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
     float f = 0;
-    if ( val == null ) { 
+    if ( TDString.isNullOrEmpty( val ) ) { 
       f = Float.parseFloat(def_value);
       TDPrefHelper.update( key, def_value );
     } else {
@@ -841,7 +841,7 @@ public class TDSetting
   private static int tryIntValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
     int i = 0;
-    if ( val == null ) { 
+    if ( TDString.isNullOrEmpty( val ) ) { 
       i = Integer.parseInt(def_value);
       TDPrefHelper.update( key, def_value );
       // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
@@ -879,7 +879,7 @@ public class TDSetting
 
   private static String tryStringValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
-    if ( val == null ) val = def_value;
+    if ( TDString.isNullOrEmpty( val ) ) val = def_value;
     TDPrefHelper.update( key, val );
     return val;
   }
@@ -887,7 +887,7 @@ public class TDSetting
   private static boolean tryBooleanValue( TDPrefHelper hlp, String key, String val, boolean def_value )
   {
     boolean i = def_value;
-    if ( val != null ) {
+    if ( ! TDString.isNullOrEmpty( val ) ) {
       try {
         i = Boolean.parseBoolean( val );
       } catch( NumberFormatException e ) { 
@@ -1058,8 +1058,8 @@ public class TDSetting
 
     key = TDPrefKey.mSurvey;
     mDefaultTeam = prefs.getString( key[0].key, key[0].dflt );               // DISTOX_TEAM
-    mInitStation = prefs.getString( key[4].key, key[4].dflt ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
-    if ( mInitStation.length() == 0 ) mInitStation = key[4].dflt;
+    String s = TDString.noSpacesAndSpecials( prefs.getString( key[4].key, key[4].dflt ) );  // DISTOX_INIT_STATION 
+    if ( TDString.isNullOrEmpty( s ) ) mInitStation = key[4].dflt;
     DistoXStationName.setInitialStation( mInitStation );
 
     key = TDPrefKey.mData;
@@ -1627,8 +1627,8 @@ public class TDSetting
     } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_STATION_NAMES (choice)
       mStationNames = (tryStringValue( hlp, k, v, key[3].dflt).equals("number"))? 1 : 0;
     } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_INIT_STATION 
-      mInitStation = tryStringValue( hlp, k, v, key[4].dflt ).replaceAll("\\s+", "");
-      if ( mInitStation.length() == 0 ) mInitStation = key[4].dflt;
+      String s = TDString.noSpacesAndSpecials( tryStringValue( hlp, k, v, key[4].dflt ) );
+      if ( TDString.isNullOrEmpty( s ) ) mInitStation = key[4].dflt;
       DistoXStationName.setInitialStation( mInitStation );
       if ( ! mInitStation.equals( v ) ) { ret = mInitStation; }
     } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_THUMBNAIL
@@ -1831,7 +1831,7 @@ public class TDSetting
       if ( reduce == 1 ) TopoGL.mDEMreduce = TopoGL.DEM_SHRINK;
       else               TopoGL.mDEMreduce = TopoGL.DEM_CUT;
     } else if ( k.equals( key[3].key ) ) {
-      if ( v == null || v.isEmpty() ) {
+      if ( TDString.isNullOrEmpty( v ) ) {
         TopoGL.mTextureRoot = key[3].dflt;
       } else {
         TopoGL.mTextureRoot = v;

@@ -121,12 +121,20 @@ public class TDUtil
     }
   }
 
+  /** @return the inpuy string with special characters replaced
+   *          N.B. empty string is ok
+   * @param s input string
+   */
   public static String toStationFromName( String s )
   {
     if ( s == null ) return null;
     return TDString.replaceSpecials( s );
   }
 
+  /** @return the inpuy string with special characters replaced
+   *          if the string becomes "." or "-" return the empty string
+   * @param s input string
+   */
   public static String toStationToName( String s )
   {
     if ( s == null ) return null;
@@ -137,7 +145,7 @@ public class TDUtil
 
   public static boolean isStationName( String s )
   {
-    if ( s == null || s.length() == 0 ) return true;
+    if ( TDString.isNullOrEmpty( s ) ) return true;
     int ch = s.codePointAt( s.length() - 1);
     return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) || ch == '.' || ch == '@' );
   }

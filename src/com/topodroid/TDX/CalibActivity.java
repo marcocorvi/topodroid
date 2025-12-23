@@ -374,17 +374,11 @@ public class CalibActivity extends Activity
    */
   private void doSave( )
   {
-    String name = TDString.replaceSpecials( mEditName.getText().toString() ); // SPECIAL CHARS
-    // if ( name == null ) {
-    //   String error = getResources().getString( R.string.error_name_required );
-    //   mEditName.setError( error );
-    //   return;
-    // }
-    if ( TDString.isNullOrEmpty( name ) ) {
-      String error = getResources().getString( R.string.error_name_required );
-      mEditName.setError( error );
+    String name = mEditName.getText().toString(); 
+    if ( ! TDString.checkName( name, mEditName, getResources() ) ) {
       return;
     }
+    name = TDString.spacesToUnderscore( name ); // this trims the string
 
     String date    = TDUtil.stringToDate( mEditDate.getText().toString() ); // trimmed by stringToDate
     String device  = mDeviceAddress; // mEditDevice.getText().toString();

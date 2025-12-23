@@ -37,8 +37,8 @@ class PlotNewDialog extends MyDialog
   private INewPlot mMaker;
   // private boolean notDone;
 
-  private EditText mEditName;
-  private EditText mEditStart;
+  private EditText mEtName;
+  private EditText mEtStart;
   // private EditText mEditProject;
 
   private Button   mBtnOK;
@@ -70,11 +70,11 @@ class PlotNewDialog extends MyDialog
     // requestWindowFeature(Window.FEATURE_NO_TITLE);
     initLayout( R.layout.plot_new_dialog, R.string.plot_new );
 
-    mEditName  = (EditText) findViewById(R.id.edit_plot_name);
-    mEditStart = (EditText) findViewById(R.id.edit_plot_start);
+    mEtName  = (EditText) findViewById(R.id.edit_plot_name);
+    mEtStart = (EditText) findViewById(R.id.edit_plot_start);
     // mEditProject = (EditText) findViewById(R.id.plot_project);
 
-    mEditName.setText( String.format(Locale.US, "%d", mIndex ) );
+    mEtName.setText( String.format(Locale.US, "%d", mIndex ) );
     // if current station is set:
     String station = null;
     if ( TDSetting.mFixedOrigin ) {
@@ -88,8 +88,8 @@ class PlotNewDialog extends MyDialog
       }
     }
     if ( station == null ) station = TDSetting.mInitStation;
-    if ( station != null ) mEditStart.setText( station );
-    mEditStart.setOnLongClickListener( this );
+    if ( station != null ) mEtStart.setText( station );
+    mEtStart.setOnLongClickListener( this );
 
     mBtnOK = (Button) findViewById(R.id.btn_ok );
     mBtnBack = (Button) findViewById(R.id.btn_cancel );
@@ -112,14 +112,14 @@ class PlotNewDialog extends MyDialog
     mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
     if ( TDSetting.mKeyboard ) {
-      MyKeyboard.registerEditText( mKeyboard, mEditName,  MyKeyboard.FLAG_POINT_LCASE_2ND );
+      MyKeyboard.registerEditText( mKeyboard, mEtName,  MyKeyboard.FLAG_POINT_LCASE_2ND );
       int flag = ( TDSetting.mStationNames == 1 ) ? MyKeyboard.FLAG_POINT : MyKeyboard.FLAG_POINT_LCASE_2ND;
-      MyKeyboard.registerEditText( mKeyboard, mEditStart, flag);
+      MyKeyboard.registerEditText( mKeyboard, mEtStart, flag);
       // MyKeyboard.registerEditText( mKeyboard, mEditProject, 0 ); // MyKeyboard.FLAG_POINT );
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mEditStart.setInputType( TDConst.NUMBER_DECIMAL );
+        mEtStart.setInputType( TDConst.NUMBER_DECIMAL );
       }
       // mEditProject.setInputType( TDConst.NUMBER );
     }
@@ -132,7 +132,7 @@ class PlotNewDialog extends MyDialog
   @Override
   public boolean onLongClick(View v) 
   {
-    if ( v.getId() == R.id.edit_plot_start ) { // mEditStart
+    if ( v.getId() == R.id.edit_plot_start ) { // mEtStart
       CutNPaste.makePopup( mContext, (EditText)v );
       return true;
     }
@@ -166,51 +166,46 @@ class PlotNewDialog extends MyDialog
    */
   private boolean handleOK( )
   {
-    String plot_name  = mEditName.getText().toString(); 
-    if ( plot_name != null ) plot_name = plot_name.trim();
+    String plot_name  = mEtName.getText().toString(); 
 
-    String plot_start = TDString.noSpaces( mEditStart.getText().toString() );
+    String plot_start = TDString.noSpaces( mEtStart.getText().toString() );
     // String view  = mEditView.getText().toString();
     // String view = null;
+    if ( ! TDString.checkName( plot_name, mEtName, mContext.getResources() ) ) {
+      return false;
+    }
+    plot_name = TDString.spacesToUnderscore( plot_name ); // this trims the string
 
-    if ( TDString.isNullOrEmpty( plot_name ) ) {
-      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-      return false;
-    }
-    if ( TDString.hasSpecials( plot_name ) ) {
-      mEditName.setError( mContext.getResources().getString( R.string.invalid_name ) );
-      return false;
-    }
     // if ( mApp.hasSurveyPlotName( plot_name ) ) { // this checks "plot_name"
-    //   mEditName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
+    //   mEtName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
     //   return false;
     // }
     if ( mMaker.hasSurveyPlot( plot_name ) ) { // this checks "plot_name" + "p"
-      mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+      mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;
     }
     // if ( ! TDUtil.isStationName( plot_name ) ) {
-    //   mEditName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+    //   mEtName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
     //   return false;
     // }
 
     // if ( plot_start == null ) { // CANNOT HAPPEN
-    //   mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
+    //   mEtStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
     //   return false;
     // }
     
     // plot_start = TDUtil.toStationFromName( plot_start );
     if ( TDString.isNullOrEmpty( plot_start ) ) {
-      mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
+      mEtStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
       return false;
     } 
     if ( ! TDUtil.isStationName( plot_start ) ) {
-      mEditStart.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+      mEtStart.setError( mContext.getResources().getString( R.string.bad_station_name ) );
       return false;
     }
     boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();
     if ( ! ( dangling || mMaker.hasSurveyStation( plot_start ) ) ) {
-      mEditStart.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
+      mEtStart.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
       return false;
     }
 

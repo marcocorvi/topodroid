@@ -78,15 +78,10 @@ class SurveyRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnRename ) {
       String name = mEtName.getText().toString();
-      if ( name != null ) name = name.trim();
-      if ( TDString.isNullOrEmpty( name ) ) {
-        mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      if ( ! TDString.checkName( name, mEtName, mContext.getResources() ) ) {
 	return;
       }
-      if ( TDString.hasSpecials( name ) ) {
-        mEtName.setError( mContext.getResources().getString( R.string.invalid_name ) );
-        return;
-      }
+      name = TDString.spacesToUnderscore( name ); // this trims the string
       if ( ! name.equals( TDInstance.survey ) ) {
         if ( TopoDroidApp.mData.hasSurveyName( name ) ) {
           mEtName.setError( mContext.getResources().getString( R.string.survey_exists ) );

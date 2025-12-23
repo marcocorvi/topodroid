@@ -62,8 +62,10 @@ public class TdmConfigDialog extends MyDialog
     public void onClick(View view)
     {
       if ( view.getId() == R.id.label_ok ) {
-        String name = TDString.replaceSpecials( mLabel.getText().toString() );
-        if ( ! TDString.isNullOrEmpty( name ) ) {
+        String name = mLabel.getText().toString();
+        if ( ! TDString.checkName( name, mLabel, mContext.getResources() ) ) {
+          return;
+        } else {
           name = TDString.spacesToUnderscore( name );
           if ( ! name.endsWith( ".tdconfig" ) ) {
             name = name + ".tdconfig";

@@ -192,15 +192,7 @@ class SurveyNewDialog extends MyDialog
 
       // if ( mEditName.getText() == null ) return;
       String name = mEditName.getText().toString();
-      if ( name != null ) name = name.trim();
-      if ( TDString.isNullOrEmpty( name ) ) {
-        mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-        return;
-      }
-      if ( TDString.hasSpecials( name ) ) {
-        mEditName.setError( mContext.getResources().getString( R.string.invalid_name ) );
-        return;
-      }
+      if ( ! TDString.checkName( name, mEditName, mContext.getResources() ) ) return;
       if ( mApp.hasSurveyName( name ) ) {
         mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
         return;

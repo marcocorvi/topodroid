@@ -11,6 +11,12 @@
  */
 package com.topodroid.utils;
 
+import com.topodroid.TDX.R;
+
+import android.widget.EditText;
+
+import android.content.res.Resources;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +63,7 @@ public class TDString
    */
   public static String spacesToUnderscore( String str )
   {
-    return (str == null)? null : str.replaceAll("\\s+", "_");
+    return (str == null)? null : str.trim().replaceAll("\\s+", "_");
   }
 
   /** @return string with multiple spaces replaced by single space
@@ -65,7 +71,7 @@ public class TDString
    */
   public static String spacesToSpace( String str )
   {
-    return (str == null)? null : str.replaceAll("\\s+", " ");
+    return (str == null)? null : str.trim().replaceAll("\\s+", " ");
   }
 
   /** @return string tokenization on multiple spaces
@@ -73,7 +79,7 @@ public class TDString
    */
   public static String[] splitOnSpaces( String str )
   {
-    return (str == null)? null : str.replaceAll("\\s+", " ").split(" ");
+    return (str == null)? null : str.trim().replaceAll("\\s+", " ").split(" ");
   }
 
   /** split a line on spaces taking into account quoted strings
@@ -161,7 +167,6 @@ public class TDString
   {
     return (str == null)? null : str.replaceAll("_", " ");
   }
-
 
   public static String escape( String str )
   {
@@ -490,20 +495,51 @@ public class TDString
   /** @return a string with replaced special chars
    * The forbidden chars in Windows are / (slash), \ (backslash), * (asterisk), : (color), ? (question mark), | (pipe), < (less then), > (greater than)
    * @param s   input string
+   * @note used only for station names
    */
   public static String replaceSpecials( String s )
   {
+    TDLog.v("replace specials <" + s + ">" );
     return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-").replaceAll("|", "+").replaceAll("?", ".").replaceAll("\"", "");
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-").replaceAll("|", "+").replaceAll("\\?", ".").replaceAll("\"", "");
+  }
+
+  /** @return the string without spaces and special characters
+   */ 
+  public static String noSpacesAndSpecials( String s ) 
+  {
+    TDLog.v("no space specials <" + s + ">" );
+    return ( s == null )? null 
+      : s.replaceAll("\\s+", "").replaceAll("/", "").replaceAll("\\*", "").replaceAll("\\\\", "").replaceAll(":", "").replaceAll(">", "").replaceAll("<", "").replaceAll("|", "").replaceAll("\\?", "").replaceAll("\"", "");
   }
 
   /** @return true if the string contains a special character
-   * The forbidden chars in Windows are /, \, *, :, ?, |, <, >
+   * The forbidden chars in Windows are /, \, *, :, ?, |, <, >, "
+   * Spaces are allowed
    * @param s input string
    */
-  public static boolean hasSpecials( String s )
+  private static boolean hasSpecials( String s )
   {
-    return s.contains("/") || s.contains("\\*") || s.contains("\\\\") || s.contains(":") || s.contains("<") || s.contains(">") || contains('|') || contains('?') || contains('"');
+    TDLog.v("has specials <" + s + ">" );
+    return s.contains("/") || s.contains("*") || s.contains("\\") || s.contains(":") || s.contains("<") || s.contains(">") || s.contains("|") || s.contains("?") || s.contains("\"");
+  }
+
+  /** check that the string is not null or empty and does not contain special characters
+   * @param name   input string
+   * @return true if success
+   */ 
+  public static boolean checkName( String name, EditText et, Resources res )
+  {
+    if ( name != null ) name = name.trim();
+    if ( isNullOrEmpty( name ) ) {
+      et.setError( res.getString( R.string.error_name_required ) );
+      return false;
+    }
+    if ( hasSpecials( name ) ) {
+      et.setError( res.getString( R.string.invalid_name ) );
+      return false;
+    }
+    return true;
   }
 
   /** @return a string with all spaces dropped

@@ -608,9 +608,8 @@ public class SurveyWindow extends Activity
   private boolean saveSurvey( boolean check_team )
   {
     // TDLog.v("Save warn " + mWarnTeam + " check " + check_team );
-    // String name = TDString.spacesToUnderscores( mTextName.getText().toString() ); // RENAME is special
-    // if ( name == null || name.length == 0 ) {
-    // }
+    // String name = mTextName.getText().toString(); // RENAME is special
+    // ...
     String team = mEditTeam.getText().toString();
     // if ( team != null ) team = team.trim();
     if ( TDString.isNullOrEmpty( team ) ) {
