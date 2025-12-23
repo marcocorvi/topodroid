@@ -1513,7 +1513,7 @@ public class TDSetting
    */
   public static String updatePreference( TDPrefHelper hlp, int cat, String k, String v )
   {
-    TDLog.v("SETTINGS update pref " + k + " val " + v );
+    TDLog.v("SETTINGS update cat " + cat + " pref " + k + " val " + v );
     switch ( cat ) {
       case TDPrefCat.PREF_CATEGORY_ALL:    return updatePrefMain( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SURVEY: return updatePrefSurvey( hlp, k, v );
@@ -1627,10 +1627,18 @@ public class TDSetting
     } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_STATION_NAMES (choice)
       mStationNames = (tryStringValue( hlp, k, v, key[3].dflt).equals("number"))? 1 : 0;
     } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_INIT_STATION 
-      String s = TDString.noSpacesAndSpecials( tryStringValue( hlp, k, v, key[4].dflt ) );
-      if ( TDString.isNullOrEmpty( s ) ) mInitStation = key[4].dflt;
-      DistoXStationName.setInitialStation( mInitStation );
-      if ( ! mInitStation.equals( v ) ) { ret = mInitStation; }
+      String s = tryStringValue( hlp, k, v, key[4].dflt );
+      if ( ! TDString.hasSpecials( s ) ) {
+        s = TDString.noSpacesAndSpecials( s );
+        if ( TDUtil.isStationName( s ) ) {
+          // TDLog.v("Valid station name <" + s + ">" );
+          mInitStation = TDString.isNullOrEmpty( s )? key[4].dflt : s;
+          DistoXStationName.setInitialStation( mInitStation );
+        // } else {
+        //   TDLog.v("Invalid station name <" + s + ">" );
+        }
+        if ( ! mInitStation.equals( v ) ) { ret = mInitStation; }
+      }
     } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_THUMBNAIL
       mThumbSize = tryIntValue( hlp, k, v, key[5].dflt ); 
       if ( mThumbSize < 80 )       { mThumbSize = 80;  ret = Integer.toString( mThumbSize ); }

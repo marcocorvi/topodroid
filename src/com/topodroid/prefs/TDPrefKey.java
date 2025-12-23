@@ -901,7 +901,10 @@ class TDPrefKey
     new TDPrefKey( D, FLT,  XT, "DISTOX_SKETCH_SPLAY_BUFFER",R.string.pref_sketch_splay_buffer_title, R.string.pref_sketch_splay_buffer_summary,TDString.TWO )
   };
 
-  // the oreder must follow category index in TDPrefCat
+  static TDPrefKey[] mGeekSketch = {
+  };
+
+  // the order must follow category index in TDPrefCat
   static TDPrefKey[][] mKeySet = {
     mMain,   // 0
     mSurvey,
@@ -929,22 +932,22 @@ class TDPrefKey
     mGeekLine,
     mGeekDevice,
     mGeekImport,  // 25
-    // mGeekSketch,
+    mGeekSketch,
     mExport,
     mExportImport,
     mExportEnable,
-    mExportSvx, // 29
-    mExportTh,  // 30
+    mExportSvx, // 30
+    mExportTh,  // 31
     mExportDat,
     mExportCsx,
     mExportTro,
     mExportSvg,
-    mExportShp, // 35
+    mExportShp, // 36
     mExportDxf,
     mExportGpx,
     mExportKml,
     mExportCsv,
-    mExportSrv, // 40
+    mExportSrv, // 41
     mExportPly,
     null
   };

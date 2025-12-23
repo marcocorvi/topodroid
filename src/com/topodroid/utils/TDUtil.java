@@ -128,7 +128,9 @@ public class TDUtil
   public static String toStationFromName( String s )
   {
     if ( s == null ) return null;
-    return TDString.replaceSpecials( s );
+    s = TDString.replaceSpecials( s );
+    // TDLog.v("From station <" + s + ">");
+    return s;
   }
 
   /** @return the inpuy string with special characters replaced
@@ -139,6 +141,7 @@ public class TDUtil
   {
     if ( s == null ) return null;
     s = TDString.replaceSpecials( s );
+    // TDLog.v("To station <" + s + ">");
     if ( s.equals(".") || s.equals("-") ) return "";
     return s;
   }
@@ -147,7 +150,7 @@ public class TDUtil
   {
     if ( TDString.isNullOrEmpty( s ) ) return true;
     int ch = s.codePointAt( s.length() - 1);
-    return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) || ch == '.' || ch == '@' );
+    return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) || ch == '.' || ch == '@' || ch == '-' || ch == '_' );
   }
 
   // sort strings by name (alphabetical order)

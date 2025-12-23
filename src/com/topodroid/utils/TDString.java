@@ -499,28 +499,29 @@ public class TDString
    */
   public static String replaceSpecials( String s )
   {
-    TDLog.v("replace specials <" + s + ">" );
+    // TDLog.v("replace specials <" + s + ">" );
     return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-").replaceAll("|", "+").replaceAll("\\?", ".").replaceAll("\"", "");
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":", "-").replaceAll(">", "-").replaceAll("<","-").replaceAll("\\|", "+").replaceAll("\\?", ".").replaceAll("\"", "");
   }
 
   /** @return the string without spaces and special characters
    */ 
   public static String noSpacesAndSpecials( String s ) 
   {
-    TDLog.v("no space specials <" + s + ">" );
+    // TDLog.v("no space specials <" + s + ">" );
     return ( s == null )? null 
-      : s.replaceAll("\\s+", "").replaceAll("/", "").replaceAll("\\*", "").replaceAll("\\\\", "").replaceAll(":", "").replaceAll(">", "").replaceAll("<", "").replaceAll("|", "").replaceAll("\\?", "").replaceAll("\"", "");
+      : s.replaceAll("\\s+", "").replaceAll("/", "").replaceAll("\\*", "").replaceAll("\\\\", "").replaceAll(":", "").replaceAll(">", "").replaceAll("<", "").replaceAll("\\|", "").replaceAll("\\?", "").replaceAll("\"", "");
   }
 
   /** @return true if the string contains a special character
    * The forbidden chars in Windows are /, \, *, :, ?, |, <, >, "
    * Spaces are allowed
    * @param s input string
+   * @note used also by TDSetting
    */
-  private static boolean hasSpecials( String s )
+  public static boolean hasSpecials( String s )
   {
-    TDLog.v("has specials <" + s + ">" );
+    // TDLog.v("has specials <" + s + ">" );
     return s.contains("/") || s.contains("*") || s.contains("\\") || s.contains(":") || s.contains("<") || s.contains(">") || s.contains("|") || s.contains("?") || s.contains("\"");
   }
 
