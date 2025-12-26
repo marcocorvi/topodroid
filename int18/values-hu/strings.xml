@@ -71,7 +71,8 @@
     <string name="pref_3d">3D megtekintő</string>
     <string name="pref_io">Export</string>
     <string name="pref_bt">Bluetooth</string>
-    <string name="pref_cal">Calibrávió</string>
+    <string name="pref_cal">Kalibráció</string>
+	<string name="pref_xt">Speciális funkciók</string>
 
     <string name="cut">VÁGÁS</string>
     <string name="copy">MÁSOL</string>
