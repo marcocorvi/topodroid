@@ -174,7 +174,7 @@ public class TglParser
   // TODO VECTOR
   protected double x0, y0, z0;       // model center coords (remain fixed)
 
-  public double emin, emax, nmin, nmax, zmin, zmax; // survey bounds
+  public double emin, emax, nmin, nmax, zmin, zmax; // survey bounds [m]
 
   // ------------------------- LINE UTIL
   static Pattern pattern = Pattern.compile( "\\s+" );

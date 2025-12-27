@@ -87,11 +87,11 @@ public class GlSurface extends GlShape
    */
   boolean initData( ParserDEM dem, double xmed, double ymed, double zmed )
   {
-    int nx = dem.dimX();
+    int nx = dem.dimX(); // this is ParserDEM.mNr1 - number of cells horizontally
     int ny = dem.dimY();
     if ( nx <= 1 || ny <= 1 ) return false;
-    float dx = (float)( dem.cellXSize() );
-    float dy = (float)( dem.cellYSize() );
+    float dx = (float)( dem.cellXSize() ); // this is ParserDEM.mDim1 - horizontal dimension of a cell
+    float dy = (float)( dem.cellYSize() ); // this is ParserDEM.mDim2
     float x0 = (float)( dem.west() - xmed );
     float y0 = (float)( dem.south() + zmed );
     // TDLog.v("DEM " + nx + "x" + ny + " W " + dem.west() + " S " + dem.south() );

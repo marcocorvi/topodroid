@@ -1664,10 +1664,11 @@ public class TopoGL extends Activity
           // TDLog.v("xunit " + xunit + " yunit " + yunit );
           isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
           dem = new DEMasciiParser( isr, pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
-        } else { 
-          return false;
+        } else if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".hgt" ) ) {
+          // TODO support of HGT DEM file has not been debugged
+          // dem = new DEMhgtParser( null, pathname, mDEMmaxsize, mParser.getOrigin() );
         }
-        if ( ! dem.valid() ) return false;
+        if ( dem == null || ! dem.valid() ) return false;
         final double dd = mDEMbuffer;
         // mParser = survey data parser
         // TDLog.v("BBox X " + mParser.emin + " " + mParser.emax + " Y " + mParser.nmin + " " + mParser.nmax + " Z " + mParser.zmin + " " + mParser.zmax );

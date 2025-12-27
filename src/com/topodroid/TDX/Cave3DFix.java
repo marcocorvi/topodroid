@@ -161,7 +161,7 @@ public class Cave3DFix extends Vector3D
   /** @return the south-north radius (multiplied by PI/180)
    * the radius is used for the DEM Y-unit
    */
-  double getSNradius() 
+  public double getSNradius() 
   { 
     return isWGS84()? Geodetic.meridianRadiusExact( latitude, a_ellip ) : 1.0;
     // return isWGS84()? Geodetic.meridianRadiusEllipsoid( latitude, a_ellip ) : 1.0; // FIXME_ELLIPSOID : NO
@@ -170,7 +170,7 @@ public class Cave3DFix extends Vector3D
   /** @return the west-east radius (multiplied by PI/180)
    * the radius is used for the DEM X-unit
    */
-  double getWEradius() 
+  public double getWEradius() 
   { 
     return isWGS84()? Geodetic.parallelRadiusExact( latitude, a_ellip ) : 1.0;
     // return isWGS84()? Geodetic.parallelRadiusEllipsoid( latitude, a_ellip ) : 1.0; // FIXME_ELLIPSOID : NO

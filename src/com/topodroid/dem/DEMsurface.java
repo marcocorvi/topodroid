@@ -258,9 +258,9 @@ public class DEMsurface
 
   /** set the grid data
    * @param grid      array of grid data 
-   * @param xoff      DEM surface X offset
-   * @param yoff      DEM surface Y offset
-   * @param step      cell size
+   * @param xoff      DEM surface X offset in the grid
+   * @param yoff      DEM surface Y offset in the grid
+   * @param step      grid cell size 
    * @param d1_grid   horiz. dimension of the grid
    * @param d2_grid   vert. dimension of the grid
    * @note used to set the grid data to the LoxSurface grid

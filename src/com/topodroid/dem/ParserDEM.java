@@ -53,7 +53,7 @@ public class ParserDEM extends DEMsurface
   public ParserDEM( InputStreamReader isr, String filename, int size ) // FIXME DEM_URI 
   {
     mIsr      = isr;
-    mBr       = new BufferedReader( mIsr );
+    mBr       = ( isr != null )? new BufferedReader( mIsr ) : null;
     mFilename = filename;
     mMaxSize  = size;
     xunit = 1.0f;
@@ -70,7 +70,7 @@ public class ParserDEM extends DEMsurface
   public ParserDEM( InputStreamReader isr, String filename, int size, double xu, double yu )
   {
     mIsr      = isr;
-    mBr       = new BufferedReader( mIsr );
+    mBr       = (isr != null)? new BufferedReader( mIsr ) : null;
     mFilename = filename;
     mMaxSize  = size;
     xunit = xu;
