@@ -55,16 +55,15 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="xsplay">X</string>
   <string name="hsplay">H</string>
   <string name="vsplay">V</string>
-
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
-
+  <string name="pref_gen">Geral</string>
+  <string name="pref_ui">Interface do usuário</string>
+  <string name="pref_data">Dados</string>
+  <string name="pref_plot">Croqui</string>
+  <string name="pref_3d">Visualizador 3D</string>
+  <string name="pref_io">Exportação</string>
+  <string name="pref_bt">Bluetooth</string>
+  <string name="pref_cal">Calibração</string>
+  <string name="pref_xt">Funções especiais</string>
   <string name="cut">CORTAR</string>
   <string name="copy">COPIAR</string>
   <string name="paste">COLAR</string>
@@ -89,13 +88,14 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="missing_station">Base inexistente</string>
   <string name="station_not_found">Base não encontrada</string>
   <string name="station_coords">L %1$.2f | N %2$.2f | Z %3$.2f</string>
-    <!-- TODO string name="station_not_saved">Station not saved</string -->
-    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
+  <string name="station_not_saved">Base não gravada</string>
+  <string name="station_name_conflict">Nomes conflitantes. Continuar mesmo assim?</string>
   <string name="shot_not_found">Medida não encontrada</string>
   <string name="shot_not_saved">Visada não gravada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
   <string name="bad_station">Base ruim: %1$s</string>
   <string name="bad_station_name">Nome de base não suportado</string>
+  <string name="invalid_name">Nome inválido</string>
   <!-- UNUSED string name="missing_area">ÁREA</string -->
   <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
   <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -161,11 +161,11 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="magn_dip">Inclinação mag. …</string>
   <string name="auto_calib" copyable="pt">Auto Calib</string>
   <string name="autocalib_not_supported">Cálculo obrigatório de calibração</string>
+  <!-- lint: unused -->
   <string name="recalibrate_with">Recalcular medidas com %1$s</string>
   <string name="recalibrate_none">Nenhuma calibração selecionada</string>
   <string name="recalibrate_no_cavway">Não é uma calibração Cavway</string>
   <string name="recalibrate_no_coeff">Sem coeficientes de calibração</string>
-
   <string name="algorithm">Algoritmo:</string>
   <string name="auto">auto</string>
   <string name="linear">linear</string>
@@ -200,7 +200,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="device_status_silent_on">Silencioso: on</string>
   <string name="device_status_silent_off">Silencioso: off</string>
   <string name="bt_reset">Reiniciar conexão Bluetooth</string>
-    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
+  <string name="bt_busy">Bluetooth ocupado</string>
   <string name="save_as">Gravar como</string>
   <string name="nickname">Apelido</string>
   <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
@@ -220,11 +220,13 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="splay_at_to">Dados EDTC na base PARA</string>
   <string name="lrud">EDTC</string>
   <string name="strike_dip">Mergulho: direção %1$.0f — inclinação %2$.0f</string>
+  <string name="few_points">Poucos pontos</string>
   <string name="few_data">Não há dados suficientes</string>
   <string name="few_iter">Falha: excesso de iterações</string>
   <string name="few_groups">Não há dados suficientes para os grupos</string>
   <!-- UNUSED string name="found_groups">Encontrados %1$d grupos</string -->
   <string name="regroup">Não reagrupar</string>
+  <!-- lint: unued -->
   <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
   <string name="few_calibs">Quantidade de calibrações insuficiente</string>
   <string name="getting_info">Obtendo info DistoX …</string>
@@ -287,7 +289,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="photo_title">FOTO</string>
   <string name="photo_text">Entre comentário para foto</string>
   <!-- UNUSED string name="photo_failed">Foto falhou</string -->
-  <string name="photo_not_ready">Foto não está pronta. Aguarde &#8230;</string>
+  <string name="photo_not_ready">Foto não está pronta. Aguarde …</string>
   <string name="photo_max_captures">Limite máximo de captura atingido</string>
   <string name="photo_many_pictures">Quantidade excessiva de fotos</string>
   <string name="label_title">Rótulo</string>
@@ -313,7 +315,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
   <!-- UNUSED string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string -->
   <string name="location_start_fine">Posição de início adequada</string>
-    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
+  <string name="location_enabled">Garanta que o serviço LOCALIZAÇÃO está habilitado</string>
   <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
   <string name="error_azimuth_required">Azimute exigido</string>
   <string name="error_length_required">Comprimento exigido</string>
@@ -421,7 +423,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="no_profile_overview">Nenhuma panorâmica para as projeções</string>
   <string name="no_proj4">Proj4 não instalado</string>
   <string name="no_sensors">Topo sem informações de sensores externos</string>
-    <!-- TODO string name="no_stations">Survey has no stations</string -->
+  <string name="no_stations">Topo não tem nenhuma base</string>
   <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
   <string name="no_search_result">Nenhum resultado na pesquisa.</string>
   <string name="no_survey">Nenhuma topo selecionada.</string>
@@ -454,7 +456,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_device_add">INCLUIR DISPOSITIVO</string>
   <!-- KEEP -->
   <string name="menu_export">EXPORTAR</string>
-    <!-- TODO string name="menu_exit">EXIT</string -->
+  <string name="menu_exit">SAIR</string>
   <string name="menu_firmware">FIRMWARE</string>
   <string name="menu_geopoint_app">APP GNSS</string>
   <string name="menu_recover">RESTAURAR</string>
@@ -472,10 +474,11 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_overview">VISÃO GERAL</string>
   <string name="menu_packets">LOG PACOTES</string>
   <string name="menu_calib_auto" copyable="pt">AUTO-CALIB</string>
+  <!-- lint: unused -->
   <!-- UNUSED string name="menu_pair">PAREAR</string -->
   <string name="menu_palette">PALETA</string>
   <string name="menu_photo">FOTO</string>
-    <!-- TODO string name="menu_stations">STATIONS</string -->
+  <string name="menu_stations">BASES</string>
   <string name="menu_sections">CORTES</string>
   <string name="menu_sensor">SENSOR</string>
   <string name="menu_scan">PROCURAR</string>
@@ -493,10 +496,9 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="zoom_fixed">Papel milimetrado</string>
   <string name="start_scan">Começar varredura</string>
   <string name="stop_scan">Parar varredura</string>
-    <!-- TODO string name="scan_started">Discovery started</string -->
-    <!-- TODO string name="scan_finished">Discovery finished</string -->
-    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
-
+  <string name="scan_started">Busca iniciada</string>
+  <string name="scan_finished">Busca finalizada</string>
+  <string name="scanning">Busca em andamento ... Por favor espere</string>
   <!-- UNUSED string name="title_scan">Varredura BLE</string -->
   <!-- UNUSED string name="ble_scan_failed">Busca por dispositivos BLE falhou</string -->
   <!-- UNUSED string name="ble_gatt_failure">Falha no dispositivo BLE</string -->
@@ -627,7 +629,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="shot_note">comentário</string>
   <!-- UNUSED string name="shot_reverse">inverter</string -->
   <string name="shot_to">Para</string>
-    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
+  <string name="shot_refreshed">Atualizar lista de medidas</string>
   <string name="station">Base referência</string>
   <string name="station_ask">Inserir base no arquivo th2 exportado?</string>
   <string name="station_del">Remover base do arquivo th2 exportado?</string>
@@ -696,8 +698,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="zip_saved">Gravado</string>
   <string name="zip_failed">Falha na compressão da topo</string>
   <string name="zip_share_failed">Falha ao compartilhar arquivo zip</string>
-    <!-- TODO string name="file_share_failed">Unable to share file</string -->
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+  <string name="file_share_failed">Falha ao compartilhar arquivo</string>
+  <string name="file_share_no_app">Nenhum app de compartilhamento de arquivo encontrado</string>
   <string name="unzip_fail">Falha na decompressão da topo</string>
   <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
   <string name="unzip_fail_survey">Falha: nome da topo diferente do nome do arquivo ZIP</string>
@@ -737,7 +739,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="stat_surface">Visadas de superfície - Qt: %1$d # %2$d Ext: %3$.1f %4$s</string>
   <!-- UNUSED string name="stat_surface_z">Desnível superfície %1$.1f %2$.1f %3$s</string -->
   <string name="stat_survey_z">Desnível cavidade - topo: %1$.1f %3$s | base: %2$.1f %3$s</string>
-    <!-- TODO string name="stat_survey_length">Survey length %1$.1f %2$s</string -->
+  <string name="stat_survey_length">Comprimento da topo %1$.1f %2$s</string>
   <string name="stat_wens">Oeste: %1$.0f %5$s | Leste: %2$.0f %5$s | Norte: %3$.0f %5$s | Sul: %4$.0f %5$s</string>
   <string name="stat_angle_error">Erro médio azimute visadas: %1$.2f° ± %2$.2f°</string>
   <string name="shot_title">MEDIDA %1$s - %2$s</string>
@@ -780,7 +782,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="ask_gps_service">Configurar o serviço GPS?</string>
   <!-- UNUSED string name="ask_backups_clear">Apagar backups dos croquis?</string -->
   <string name="ask_manual_update">Atualizar tradução do manual do usuário?\nVersão disponível %1$d Versão instalada %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+  <string name="ask_clear_equates">Remover todos os equates?</string>
   <string name="button_add">Novo</string>
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar</string>
@@ -810,7 +812,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
   <string name="button_manual">Manual do Usuário</string>
   <!-- UNUSED string name="button_measure"   >Medir   </string -->
-  <string name="button_photo"   >Foto</string>
+  <string name="button_photo">Foto</string>
   <!-- UNUSED string name="button_sensor"  >Sensores</string -->
   <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
   <!-- UNUSED string name="button_azimuth">Azimute</string -->
@@ -822,17 +824,18 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_prev">Anterior</string>
   <string name="button_new">Novo trecho</string>
   <string name="button_rename">Renomear</string>
-    <!-- TODO string name="button_retake"  >Retake</string -->
+  <string name="button_retake">Repetir foto</string>
   <string name="button_prefix">Prefixo</string>
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
-    <!-- TODO string name="button_no">NO</string -->
+  <!-- lint: unused -->
+  <string name="button_no">NÃO</string>
   <string name="button_ok" copyable="all">OK</string>
   <string name="button_off">não</string>
   <string name="button_on">sim</string>
   <string name="button_open">Abrir     </string>
-  <string name="button_offset"    >Deslocamento</string>
+  <string name="button_offset">Deslocamento</string>
   <string name="button_read">Ler       </string>
   <string name="button_recover">Recuperar</string>
   <string name="button_reverse">Invertidas</string>
@@ -846,12 +849,12 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_left">ESQUERDA</string>
   <string name="button_right">DIREITA</string>
   <string name="button_clear">Limpar    </string>
-    <!-- TODO string name="button_clear_all" >Clear all</string -->
+  <string name="button_clear_all">Limpar tudo</string>
   <string name="button_clear_day">Limpar 1 dia</string>
   <string name="button_clear_week">Limpar 7 dias</string>
   <string name="button_clear_memory">Limpar memória</string>
   <string name="button_save">Gravar    </string>
-  <!-- UNUSED string name="button_select"    >Selecionar    </string -->
+  <string name="button_select">Selecionar    </string>
   <string name="button_leg_station">Visadas</string>
   <string name="button_all_station">Todas</string>
   <string name="button_leg_search">Visadas 2 bases</string>
@@ -861,7 +864,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_scrap">Contornos</string>
   <string name="button_split">Dividir   </string>
   <string name="button_to_sketch">Para croqui</string>
-  <string name="button_to_scrap" >Para trecho</string>
+  <string name="button_to_scrap">Para trecho</string>
   <string name="button_to_buffer">Para armazenamento temporário</string>
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
@@ -889,7 +892,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="mode_station">Bases</string>
   <string name="mode_grid">Grade</string>
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
-    <!-- TODO string name="mode_scrap">Current scrap only</string -->
+  <string name="mode_scrap">Somente trecho atual</string>
   <string name="mode_outline">Contorno</string>
   <string name="mode_scale_ref">Escala</string>
   <string name="mode_sections">Cortes</string>
@@ -951,11 +954,9 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="hint_textsize">tamanho texto</string>
   <string name="hint_units">unidades símbolos</string>
   <string name="hint_value">valor</string>
-
   <string name="calib_measurement_id">Medida %1$d</string>
   <string name="calib_measurement_error">Erro %1$.4f</string>
   <string name="calib_measurement_group">Grupo: </string>
-
   <string name="hint_notes">observações</string>
   <string name="hint_label">Texto do rótulo</string>
   <string name="hint_comment">comentário</string>
@@ -1032,7 +1033,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_refresh">Redesenhar tela</string>
   <string name="help_device">Editar dispositivo em uso</string>
   <string name="help_device_add">Incluir um dispositivo</string>
-  <!-- KEEP -->
+  <!-- lint: unused - KEEP -->
   <string name="help_add_topodroid">Nova topo</string>
   <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
   <string name="help_geopoint_app">Apps GNSS externas</string>
@@ -1063,7 +1064,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UPDATES string name="help_updates">Check for app version updates</string -->
   <string name="help_photo">Fotos</string>
   <string name="help_sensor">Sensores externos</string>
-    <!-- TODO string name="help_stations">Stations</string -->
+  <string name="help_stations">Bases</string>
   <string name="help_3d">App de visualização 3D (Cave3D)</string>
   <!-- UNUSED string name="help_move">Modo mover/zoom</string -->
   <string name="help_draw">Modo DESENHAR</string>
@@ -1114,6 +1115,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="help_save">Gravar mudanças nas informações da topo</string -->
   <string name="help_save_calib">Gravar alterações nas informações de calibração</string>
   <string name="help_export_survey">Exportar Topo</string>
+  <string name="help_export_surveys">Exportar todas as topos</string>
   <string name="help_loc">Coordenada GPS</string>
   <string name="help_delete_survey">Apagar topo</string>
   <string name="help_delete_calib">Apagar calibração</string>
@@ -1138,19 +1140,19 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_drop_surveys">Remover topos</string>
   <string name="help_color_surveys">Mudar a cor das topos</string>
   <string name="help_view_surveys">Mostrar topos</string>
-  <string name="help_view_equates">Listar \'equates\'</string>
+  <string name="help_view_equates">Listar equates</string>
   <string name="help_export_config">Exportar projeto</string>
   <string name="help_delete_config">Apagar projeto</string>
-  <string name="help_add_equate">Adicionar \'equates\' das topos</string>
-    <!-- TODO string name="help_all_equates">All possible equates</string -->
-  <string name="help_equates">Listar \'equates\' das topos</string>
+  <string name="help_add_equate">Adicionar equates das topos</string>
+  <string name="help_all_equates">Todos os equates possíveis</string>
+  <string name="help_equates">Listar equates das topos</string>
   <string name="help_stations_minus">Mostrar menos bases</string>
   <string name="help_stations_plus">Mostrar mais bases</string>
   <!-- UNUSED string name="export_bgcolor">Cor de fundo</string -->
   <string name="export_bothviews">Planta baixa e perfil</string>
   <string name="export_config">Comandos de configuração</string>
   <string name="export_csv_rawdata">Dados brutos CSV</string>
-    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
+  <string name="export_data_batch">Exportado %1$s de %2$d topos</string>
   <string name="export_dxf_blocks">Blocos DXF</string>
   <string name="export_dxf_version">Versão</string>
   <string name="export_georeference">Georeferência</string>
@@ -1163,8 +1165,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_uncommented_maps">Mapas não comentados</string>
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
-    <!-- TODO string name="export_prefix_set">Set</string -->
-    <!-- TODO string name="export_prefix_reset">Reset</string -->
+  <string name="export_prefix_set">Definir</string>
+  <string name="export_prefix_reset">Reinicializar</string>
   <string name="export_media">itens de mídia</string>
   <!-- UNUSED string name="export_suffix_hint">sufixo</string -->
   <string name="export_series_hint">séries</string>
@@ -1184,6 +1186,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_xvi">Images XVI</string>
   <string name="export_with_xsections">Incluir cortes</string>
   <string name="export_grouped">Agrupar elementos em camadas por tipos</string>
+  <string name="export_origin">Base de origem</string>
   <string name="export_with_reference">Incluir referência XY</string>
   <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
   <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -1209,7 +1212,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
-    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
+  <string name="title_bt_search">Busca por Bluetooth</string>
   <string name="title_recalibrate">Calibrações</string>
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
@@ -1222,7 +1225,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
   <string name="title_search">Pesquisa bases e medidas</string>
-    <!-- TODO string name="title_stations">Stations</string -->
+  <string name="title_stations">Bases</string>
   <string name="title_plot_search">Busca por base</string>
   <string name="title_pref_search">Busca por configuração</string>
   <string name="title_gm_search">Pesquisa dados calibração</string>
@@ -1290,7 +1293,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_settings_gpx">Config export GPX</string>
   <string name="title_settings_kml">Config export KML/GeoJSON/ShapeFile</string>
   <string name="title_settings_srv">Config export Walls</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+  <string name="title_settings_ply">Configurações de exportação de polígonos</string>
   <string name="title_settings_sketch">Config croquis 3D</string>
   <string name="title_settings_survey">Config topo</string>
   <!-- UNUSED string name="title_settings_splay">Config medidas auxiliares</string -->
@@ -1330,13 +1333,13 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_survey_new">Nova topo</string>
   <string name="title_survey_export">Exportar topo</string>
   <string name="title_survey_rename">Renomear topo</string>
-    <!-- TODO string name="title_station_photo">Station photo</string -->
+  <string name="title_station_photo">Foto da base</string>
   <string name="title_team_dialog">Nomes integrantes equipe</string>
   <string name="title_plot_rename">Operações em croquis</string>
   <string name="title_plot_zoomfit">Zoom / Orientação</string>
   <string name="title_calib_export">Exportar calibração</string>
   <!-- UNUSED string name="title_zoom">Zoom</string -->
-    <!-- TODO string name="title_read_names">Station names map</string -->
+  <string name="title_read_names">Mapa de nomes de bases</string>
   <string name="title_import_shot">Importar topo</string>
   <string name="title_import_gps">Importar ponto GPS</string>
   <string name="title_import_th2">Arquivo th2 Therion</string>
@@ -1349,8 +1352,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_settings_failed">Falha ao exportar configurações</string>
   <string name="pref_export_settings">IMPORT/EXPORT CONFIGURAÇÕES</string>
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
-  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
-  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
+  <string name="pref_bulk_export_title">Exportação de dados brutos</string>
+  <string name="pref_bulk_export_summary">Exportação de dados brutos de todas as topos</string>
   <string name="pref_export_plot_title">Form export croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
   <string name="pref_export_shots_title">Form export dados</string>
@@ -1451,10 +1454,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12–1" ou como "12 –".</string>
   <string name="pref_walls_splays_title">Med aux Walls</string>
   <string name="pref_walls_splays_summary">Incluir medidas auxiliares nos arquivos Walls exportados</string>
-  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
-  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
+  <string name="pref_ply_lrud_title">Polígono EDTC</string>
+  <string name="pref_ply_lrud_summary">Polígono EDTC</string>
+  <string name="pref_ply_minus_title">Polígono exceto</string>
+  <string name="pref_ply_minus_summary">Polígono exceto</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
   <string name="pref_vtopo_lrud_title">EDTC em DE</string>
@@ -1734,10 +1737,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_label_size_summary">Tamanho dos textos dos rótulos</string>
   <string name="pref_scalable_label_title">Escalonar rótulos</string>
   <string name="pref_scalable_label_summary">Escalonar rótulos ao dar zoom no croqui</string>
-  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
-  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
-  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
-  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
+  <string name="pref_xsection_offset_title">Deslocamento corte</string>
+  <string name="pref_xsection_offset_summary">Deslocamento dos pontos do corte</string>
+  <string name="pref_plot_cache_title">Cache croqui</string>
+  <string name="pref_plot_cache_summary">Habilitar cache de croquis em memória</string>
   <string name="pref_slope_lside_title">Tam desnível</string>
   <string name="pref_slope_lside_summary">Tamanho padrão do desnível em linhas tipo desnível</string>
   <string name="pref_arrow_length_title">Tam marca corte</string>
@@ -1987,7 +1990,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="no_editor">Editor não encontrado</string>
   <string name="no_file">Arquivo não encontrado</string>
   <string name="no_path">Caminho para arquivo inexistente</string>
-  <string name="no_equate">Nenhum \'equate\'</string>
+  <string name="no_equate">Nenhum equate</string>
   <string name="no_surveys">Nenhuma topo</string>
   <string name="no_tdconfig">Arquivo TdConfig inexistente</string>
   <string name="no_th_file">Nenhum arquivo Therion</string>
@@ -1995,7 +1998,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="file_create_fail">Falha na criação de arquivo</string -->
   <!-- UNUSED string name="oom">Alerta: memória cheia.</string -->
   <string name="ask_delete_tdconfig">Apagar arquivo TdConfig</string>
-  <string name="ask_remove_equate">Remover \'equate\' %1$s ?</string>
+  <string name="ask_remove_equate">Remover equate %1$s ?</string>
   <!-- UNUSED string name="equate_no_station">Nenhuma base selecionada</string -->
   <string name="equate_no_stations">Poucas bases</string>
   <string name="equate_no_nearby">Nenhuma base próxima</string>
@@ -2007,12 +2010,15 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="overwrite">sobreescrever</string -->
   <string name="title_export_settings">Configurações de importação/exportação</string>
   <string name="title_export">Exportar projeto como …</string>
-  <string name="title_equates">\'Equates\' do projeto</string>
-  <string name="title_equate_new">Incluir \'equate\' …</string>
-    <!-- TODO string name="button_equate_all">All</string -->
-    <!-- TODO string name="button_equate_one">One</string -->
-    <!-- TODO string name="button_equate_search">Search</string -->
-  <string name="title_equate_with">\'Equate\' %1$s e %2$s</string>
+  <string name="title_equates">Equates do projeto</string>
+  <string name="title_equate_new">Incluir equate …</string>
+  <string name="button_equate_all">Todos</string>
+  <!-- HB EQ all-->
+  <string name="button_equate_one">Um</string>
+  <!-- HB EQ one-->
+  <string name="button_equate_search">Busca</string>
+  <!-- HB EQ all-->
+  <string name="title_equate_with">Equate %1$s e %2$s</string>
   <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
   <string name="title_drop">Excluir topos?</string>
   <string name="title_tdconfig">Insira nome do projeto</string>
@@ -2079,8 +2085,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="legs_surface">Superfície</string>
   <string name="legs_duplicate">Duplicadas</string>
   <string name="legs_commented">Comentadas</string>
-    <!-- TODO string name="legs_backshot">Backshot</string -->
-
+  <string name="legs_backshot">Contravisada</string>
   <string name="proj_perspective">Projeção em perspectiva</string>
   <string name="proj_orthographic">Projeção ortográfica</string>
   <string name="proj_focal">Focal</string>
