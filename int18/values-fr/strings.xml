@@ -83,11 +83,13 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="memoryA3">Mémoire du DistoX A3</string>
     <string name="memoryX310">Mémoire du DistoX X310</string>
     <string name="memoryXBLE">Mémoire du DistoX-BLE (BT Low Energy)</string>
+    <!-- TODO string name="memoryCavway">Cavway memory</string -->
     <!-- UNUSED string name="memory_data">Données du DistoX</string -->
 
     <string name="thp_user">Utilisateur</string>
     <string name="thp_label">Étiquette</string>
     <string name="thp_section">Section</string>
+    <!-- TODO string name="thp_picture">picture</string -->
     <string name="thp_station">Station</string>
     <!-- UNUSED string name="thp_danger">Danger</string -->
     <string name="thl_user">Utilisateur</string>
@@ -108,6 +110,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="bad_sibling">Mauvaise visée parente</string>
     <string name="bad_station">Mauvaise station: %1$s</string>
     <string name="bad_station_name">Nom de station non conforme</string>
+    <!-- TODO string name="invalid_name">Invalid name</string -->
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LIGNE</string -->
@@ -237,6 +240,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- CHANGED string name="strike_dip">Azimut %1$.0f Pendage %2$.0f</string -->
     <string name="strike_dip">Dip direction %1$.0f inclinaison %2$.0f</string>
 
+    <!-- TODO string name="few_points">Too few data points</string -->
     <string name="few_data">Pas assez de données</string>
     <string name="few_iter">Échec de l\'itération</string>
     <string name="few_groups">Pas assez de données dans le groupe</string>
@@ -246,6 +250,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="few_calibs">Pas assez d\'étalonnage</string>
     <string name="getting_info">Obtenir des infos DistoX &#8230;</string>
     <string name="gettingble_info">Obtenir des infos DistoX-BLE (BT Low Energy) &#8230;</string>
+    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import relevé</string>
@@ -1190,6 +1195,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="help_save">Enregistre les modifications d\'infosdu relevé</string -->
     <string name="help_save_calib">Enregistre les modifications d\'infos d\'étalonnage</string>
     <string name="help_export_survey">Exporte le relevé</string>
+    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
     <string name="help_loc">Géolocalisation GPS </string>
     <string name="help_delete_survey">Supprime le relevé</string>
     <string name="help_delete_calib">Supprime l\'étalonnage</string>

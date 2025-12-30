@@ -46,6 +46,7 @@ public class GlLines extends GlShape
   private DataBuffer mDataBuffer = null;
 
   private boolean mDebug = false;
+  private boolean mSplays = false; // whether this set of lines is for splays
   private float[] mData;
   private float[] mCenterData;  // positions of the centers
 
@@ -123,9 +124,16 @@ public class GlLines extends GlShape
     /** set the color (as 4-vector) of this line
      * @param acolor color 4-vector (to be assigned)
      */
-    void getLineColor( float[] acolor )
+    void getLineColor( float[] acolor, boolean is_splay )
     {
       // TDLog.v("Line3D is survey " + isSurvey + " (" + survey + ") color " + mCol );
+      if ( is_splay && mShot != null ) {
+        int flag = DBlock.cavwayFlag( mShot.getFlag() );
+        // TDLog.v("Cavway flag " + flag );
+        if ( flag != 0 ) {
+          if ( TglColor.flagToSplayColor( flag, acolor ) ) { return; }
+        }
+      }
       if ( isSurvey ) { 
         if ( mCol < 0 || mCol >= TglColor.SURVEY_COLOR_NR ) {
           TglColor.colorToSurveyColor( mCol, acolor );
@@ -243,16 +251,18 @@ public class GlLines extends GlShape
    * @param ctx        context
    * @param color_mode color mode
    * @param increment  ... (not used)
+   * @param is_splay   whether this set of lines is for splays
    *
    * @note the vertex data are ( X Y Z R G B A )
    */
-  GlLines( Context ctx, int color_mode, int increment )
+  GlLines( Context ctx, int color_mode, int increment, boolean is_splay )
   {
     super( ctx );
     mColorMode = color_mode; 
     mColor = new TglColor( TglColor.ColorSplay );
     lines = new ArrayList< Line3D >();
     mAlpha = 1.0f;
+    mSplays = is_splay;
     // if ( increment > 0 ) {
     //   mIncremental = true;
     //   createIncrementalDataBuffer( increment );
@@ -263,14 +273,16 @@ public class GlLines extends GlShape
    * @param ctx        context
    * @param color      TGL color 
    * @param increment  ... (not used)
+   * @param is_splay   whether this set of lines is for splays
    */
-  GlLines( Context ctx, TglColor color, int increment )
+  GlLines( Context ctx, TglColor color, int increment, boolean is_splay )
   {
     super( ctx );
     mColorMode = COLOR_SURVEY;
     mColor = color; // mColor will remain constant
     lines = new ArrayList< Line3D >();
     mAlpha = 1.0f;
+    mSplays = is_splay;
     // if ( increment > 0 ) {
     //   mIncremental = true;
     //   createIncrementalDataBuffer( increment );
@@ -281,14 +293,16 @@ public class GlLines extends GlShape
    * @param ctx        context
    * @param color      color, as array of float
    * @param increment  ... (not used)
+   * @param is_splay   whether this set of lines is for splays
    */
-  GlLines( Context ctx, float[] color, int increment )
+  GlLines( Context ctx, float[] color, int increment, boolean is_splay )
   {
     super( ctx );
     mColorMode = COLOR_SURVEY;
     mColor = new TglColor( color ); // mColor will remain constant
     lines = new ArrayList< Line3D >();
     mAlpha = 1.0f;
+    mSplays = is_splay;
     // if ( increment > 0 ) {
     //   mIncremental = true;
     //   createIncrementalDataBuffer( increment );
@@ -519,12 +533,13 @@ public class GlLines extends GlShape
 
     float[] acolor = new float[ COORDS_PER_COLOR ];
     int k = 3; // index in the dataBuffer
+    TDLog.v("lines get survey colors is splay " + mSplays + " count " + lineCount );
     for ( int i = 0; i<lineCount; ++i ) {
       Line3D line = lines.get( i );
       // TDLog.v("line " + i + ": survey " + line.survey + " color " + line.mCol + " max " + max );
       if ( line.survey < max && cols[ line.survey ] != 0 ) {
         line.mCol = cols[ line.survey ];
-        line.getLineColor( acolor );
+        line.getLineColor( acolor, mSplays );
         dataBuffer.put( k, acolor[0] ); k++;
         dataBuffer.put( k, acolor[1] ); k++;
         dataBuffer.put( k, acolor[2] ); k+=5;
@@ -564,15 +579,16 @@ public class GlLines extends GlShape
     mData  = new float[ vertexCount * STRIDE ];
     mCenterData = new float[ lineCount * 4 ];
     float[] acolor = new float[ COORDS_PER_COLOR ];
-    // lines.get(0).getLineColor( acolor );
+    // lines.get(0).getLineColor( acolor, mSplays );
     // TDLog.v("Lines prepare " + lineCount + " acolor " + acolor[0] + " " + acolor[1] + " " + acolor[2] + " " + acolor[3] );
     // TDLog.v("Lines prepare " + lineCount + " zmin " + zmin );
+    TDLog.v("lines prepare data is splay " + mSplays + " count " + lineCount );
     int k = 0;
     int h = 0; // center index
     for ( Line3D line : lines ) {
       Vector3D w1 = line.v1;
       Vector3D w2 = line.v2;
-      line.getLineColor( acolor );
+      line.getLineColor( acolor, mSplays );
       mData[k++] = (float)w1.x; 
       mData[k++] = (float)w1.y;
       mData[k++] = (float)w1.z;

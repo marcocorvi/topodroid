@@ -273,7 +273,9 @@ public class DEMhgtParser extends ParserDEM
     mNorth1 = mOrigin.y + ( mNorth1 - mOrigin.latitude) * (mGridSize-1) / mSNradius;
     mNorth2 = mOrigin.y + ( mNorth2 - mOrigin.latitude) * (mGridSize-1) / mSNradius;
     
-    mDim1 = xunit * mWEradius; // horizontal size of a cell
+    // it might be that the area is wide and the difference od width (horizontal side) between cells at high
+    // and low latitudes must be taken into account
+    mDim1 = xunit * mWEradius; // horizontal size of a cell (at the latitude of the origin)
     mDim2 = yunit * mSNradius; // vertical size of a cell
 
     return true;

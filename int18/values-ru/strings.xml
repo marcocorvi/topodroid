@@ -83,10 +83,12 @@
     <string name="memoryA3">Память DistoX A3</string>
     <string name="memoryX310">Память DistoX X310</string>
     <string name="memoryXBLE">Память DistoX-BLE</string>
+    <!-- TODO string name="memoryCavway">Cavway memory</string -->
     <!-- UNUSED string name="memory_data">DistoX данные</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
     <string name="thp_section">сечение</string>
+    <!-- TODO string name="thp_picture">picture</string -->
     <string name="thp_station">пикет</string>
     <!-- UNUSED string name="thp_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
@@ -106,6 +108,7 @@
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
     <string name="bad_station_name">Недопустимый номер пикета</string>
+    <!-- TODO string name="invalid_name">Invalid name</string -->
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
@@ -237,6 +240,7 @@
     <!-- CHANGED string name="strike_dip">Простирание %1$.0f Падение %2$.0f</string -->
     <string name="strike_dip">Азимут простирания %1$.0f Угол падения %2$.0f</string>
 
+    <!-- TODO string name="few_points">Too few data points</string -->
     <string name="few_data">Недостаточно данных</string>
     <string name="few_iter">Ошибка: Слишком много итераций\nПроверьте данные калибровки</string>
     <string name="few_groups">Недостаточно данных с номером группы</string>
@@ -246,6 +250,7 @@
     <string name="few_calibs">Недостаточно калиб. замеров</string>
     <string name="getting_info">Получение информации о DistoX&#8230;</string>
     <string name="gettingble_info">Получение данных о DistoX-BLE &#8230;</string>
+    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
@@ -1187,6 +1192,7 @@
     <!-- UNUSED string name="help_save">Сохранить нзменения информации о съёмке</string -->
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
     <string name="help_export_survey">Экспорт съёмки</string>
+    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
     <string name="help_loc">GPS привязка</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>

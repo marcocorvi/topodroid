@@ -126,6 +126,11 @@ public class DBlock
    */
   public int cavwayFlag() { return (int)( mFlag >> 16 ); } // { return ( mFlag & FLAG_CAVWAY ) >> 16; }
 
+  /** @return the Cavway part of the flag: 0=none, 7=feature, 6=ridge, 5=backsight, 4=generic
+   * @param flag  input flag
+   */
+  public static int cavwayFlag( long flag ) { return (int)( flag >> 16 ); }
+
   /** @return the cavway bits of the flag
    */
   public long cavwayBits() { return mFlag & FLAG_CAVWAY; }

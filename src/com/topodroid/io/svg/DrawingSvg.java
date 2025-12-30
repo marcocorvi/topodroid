@@ -20,6 +20,7 @@ import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+import com.topodroid.dev.cavway.CavwayConst;
 
 import com.topodroid.TDX.DrawingStationUser;
 import com.topodroid.TDX.DrawingStationName;
@@ -246,13 +247,37 @@ public class DrawingSvg extends DrawingSvgBase
             writeSplays( out, vert,   "v-splays", "lightsteelblue", xoff, yoff );
             writeSplays( out, x_sect, "x-splays", "lightseablue",   xoff, yoff );
           } else {
+            ArrayList< DrawingPath > splay_feature   = new ArrayList<>();
+            ArrayList< DrawingPath > splay_ridge     = new ArrayList<>();
+            ArrayList< DrawingPath > splay_backsight = new ArrayList<>();
+            ArrayList< DrawingPath > splay_generic   = new ArrayList<>();
             for ( DrawingPath sh : plot.getSplays() ) {
               DBlock blk = sh.mBlock;
               if ( blk == null ) continue;
-              normal.add( sh );
+              int flag = blk.cavwayFlag();
+              switch ( flag ) {
+                case CavwayConst.FLAG_FEATURE:
+                  splay_feature.add( sh );
+                  break;
+                case CavwayConst.FLAG_RIDGE:
+                  splay_ridge.add( sh );
+                  break;
+                case CavwayConst.FLAG_BACKSIGHT:
+                  splay_backsight.add( sh );
+                  break;
+                case CavwayConst.FLAG_GENERIC:
+                  splay_generic.add( sh );
+                  break;
+                default:
+                normal.add( sh );
+              }
             }
-            TDLog.v("SVG splays " + normal.size() );
-            writeSplays( out, normal, "splays", "grey", xoff, yoff );
+            // TDLog.v("SVG splays " + normal.size() );
+            writeSplays( out, normal,          "splays",   "grey", xoff, yoff );
+            writeSplays( out, splay_feature,   "splays_f", null, xoff, yoff );  // color is not used
+            writeSplays( out, splay_ridge,     "splays_r", null, xoff, yoff );
+            writeSplays( out, splay_backsight, "splays_b", null, xoff, yoff );
+            writeSplays( out, splay_generic,   "splays_g", null, xoff, yoff );
           }
         }
       }

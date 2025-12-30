@@ -83,11 +83,13 @@
     <string name="memoryA3">DistoX A3 存储器</string>
     <string name="memoryX310">DistoX X310 存储器</string>
     <string name="memoryXBLE">DistoX-BLE 存储器</string>
+    <!-- TODO string name="memoryCavway">Cavway memory</string -->
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">用户</string>
     <string name="thp_label">标注</string>
     <string name="thp_section">剖面</string>
+    <!-- TODO string name="thp_picture">picture</string -->
     <string name="thp_station">站点</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">用户</string>
@@ -107,6 +109,7 @@
     <string name="bad_sibling">坏的测量簇</string>
     <string name="bad_station">坏的站点: %1$s</string>
     <string name="bad_station_name">不合规的站点名</string>
+    <!-- TODO string name="invalid_name">Invalid name</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -239,6 +242,7 @@
     <!-- CHANGED string name="strike_dip">敲击 %1$.0f Dip %2$.0f</string -->
     <string name="strike_dip">磁倾角(Dip)方位 %1$.0f 倾斜角 %2$.0f</string>
 
+    <!-- TODO string name="few_points">Too few data points</string -->
     <string name="few_data">数据不足</string>
     <string name="few_iter">失败:迭代太多</string>
     <string name="few_groups">数据组数据不足</string>
@@ -248,6 +252,7 @@
     <string name="few_calibs">校准数据不足</string>
     <string name="getting_info">获取DistoX信息 &#8230;</string>
     <string name="gettingble_info">获取DistoX-BLE 信息 &#8230;</string>
+    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
 
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>
@@ -1192,6 +1197,7 @@
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">保存修改的校准信息</string>
     <string name="help_export_survey">测量输出</string>
+    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
     <string name="help_loc">GPS 坐标点</string>
     <string name="help_delete_survey">删除测量</string>
     <string name="help_delete_calib">删除校准</string>

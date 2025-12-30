@@ -888,6 +888,10 @@ public class DrawingSvgBase
     out.write( "      .h-splays { stroke: lightseagreen; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
     out.write( "      .v-splays { stroke: lightsteelgreen; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
     out.write( "      .x-splays { stroke: lightseablue; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
+    out.write( "      .splays_f { stroke: #ffee44; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
+    out.write( "      .splays_r { stroke: #ee44ff; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
+    out.write( "      .splays_b { stroke: #66ccee; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
+    out.write( "      .splays_g { stroke: #77ff77; stroke-opacity: 0.4; fill: none; "); out.write( shot_width );
     out.write( "      .stations { stroke: none; text-anchor: middle; "); out.write( text_size );
     out.write( "      .triangle { stroke: red;  fill: none; ");          out.write( triangle_width );
     out.write( "      .circle_point { stroke: black;  fill: none; ");    out.write( point_width );

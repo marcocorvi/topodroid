@@ -101,6 +101,7 @@
     <string name="bad_sibling">Messzug weicht stark ab</string>
     <string name="bad_station">Ungültiger Messpunkt: %1$s</string>
     <string name="bad_station_name">Ungültiger Messpunktname</string>
+    <!-- TODO string name="invalid_name">Invalid name</string -->
     <!-- UNUSED string name="missing_area">FLÄCHE</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->

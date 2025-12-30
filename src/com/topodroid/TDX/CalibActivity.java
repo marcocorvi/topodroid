@@ -376,6 +376,7 @@ public class CalibActivity extends Activity
   {
     String name = mEditName.getText().toString(); 
     if ( ! TDString.checkName( name, mEditName, getResources() ) ) {
+      TDLog.e("failed checkName");
       return;
     }
     name = TDString.spacesToUnderscore( name ); // this trims the string
@@ -390,7 +391,7 @@ public class CalibActivity extends Activity
       TDToast.make( R.string.calib_updated );
     } else { // new calib
       name = TDString.noSpaces( name ); // NOSPACES
-      if ( TDString.isNullOrEmpty( name ) ) { // name != null always true
+      if ( ! TDString.isNullOrEmpty( name ) ) { // name != null always true
         if ( mApp.hasCalibName( name ) ) { // name already exists
           // TDToast.makeBad( R.string.calib_exists );
           String error = getResources().getString( R.string.calib_exists );

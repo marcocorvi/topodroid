@@ -70,6 +70,7 @@ public class CalibExport
       pw.format("# %s\n", ci.comment );
       pw.format("# %d\n", ci.algo );
       pw.format("# %d\n", ci.sensors );
+      pw.format("# index G1x G1y G1z M1x M1y M1z group azimuth clino roll error status - G2x G2y G2z M2x M2y M2z\n");
 
       List< CBlock > list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
       // TDLog.v("calib export: data " + list.size() );
@@ -217,15 +218,21 @@ public class CalibExport
                 algo = Long.parseLong( line.substring(2) );
               } catch ( NumberFormatException e ) { TDLog.v("Error " + e.getMessage() ); }
               line = br.readLine();
-              if ( version > 602078 && line != null && line.charAt(0) == '#' ) { // TWO_SENSORS
+            } 
+            if ( version > 602078 ) {
+              if ( line != null && line.charAt(0) == '#' ) { // TWO_SENSORS
                 try {
                   sensors = Integer.parseInt( line.substring(2) );
                   two_sensors = ( sensors == 2 );
                 } catch ( NumberFormatException e ) { TDLog.v("Error " + e.getMessage() ); }
                 line = br.readLine();
               }
-
-                
+            }
+            if ( version > 603073 ) {
+              if ( line != null && line.charAt(0) == '#' ) { // HEADER
+                /* nothing */
+                line = br.readLine();
+              }
             }
             if ( line == null ) {
               ret = -4;

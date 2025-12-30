@@ -487,7 +487,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mATexCoord, nameBuffer, OFFSET_TEXEL,  COORDS_PER_TEXEL,  STRIDE_TEXEL );
     }
     if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
-      TDLog.v("GL NAMES bind data ABOVE API 28");
+      // TDLog.v("GL NAMES bind data ABOVE API 28");
       if ( visibilityBuffer != null ) {
         GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
       }
@@ -515,7 +515,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mADeltaHL,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
     }
     if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
-      TDLog.v("GL NAMES bind data HL ABOVE API 28");
+      // TDLog.v("GL NAMES bind data HL ABOVE API 28");
       if ( visibilityBuffer != null ) {
         GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
       }
