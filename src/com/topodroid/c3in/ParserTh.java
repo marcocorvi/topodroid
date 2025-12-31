@@ -166,7 +166,7 @@ public class ParserTh extends TglParser
   {
     super( app, filename );
 
-    TDLog.v( "Th parser, file: " + filename + " type " + type );
+    // TDLog.v( "Th parser, file: " + filename + " type " + type );
     mMarks = new ArrayList< String >();
     int pos = filename.indexOf("thconfig");
     if ( pos >= 0 ) {
@@ -243,7 +243,7 @@ public class ParserTh extends TglParser
       return ERR_NO_DB; 
     }
 
-    TDLog.v("TH read survey " + surveyname + " color " + color );
+    // TDLog.v("TH read survey " + surveyname + " color " + color );
     // Toast.makeText( mApp, "Reading " + surveyname, Toast.LENGTH_SHORT ).show();
 
     SurveyInfo info = mData.getSurveyInfo( surveyname );
@@ -322,12 +322,12 @@ public class ParserTh extends TglParser
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, fx.mToUnits, fx.mToVUnits, fx.mConvergence );
 	    fixes.add( mOrigin );
           } else {
-            TDLog.v( "Th origin CS0 " + x0 + " " + y0 + " " + z0 );
+            // TDLog.v( "Th origin CS0 " + x0 + " " + y0 + " " + z0 );
             mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, 1, 1, 0.0); // M_TO_UNITS = 1 - zero convergence
 	    fixes.add( mOrigin );
           }
         } else {
-          TDLog.v( "TH survey: fix " + name + " with " + x0 + " " + y0 + " " + z0 + " cs1 " + ((fx.mCsName!=null)?fx.mCsName:"null") );
+          // TDLog.v( "TH survey: fix " + name + " with " + x0 + " " + y0 + " " + z0 + " cs1 " + ((fx.mCsName!=null)?fx.mCsName:"null") );
           if ( cs1 != null ) {
             if ( cs1.equals( fx.mCsName ) ) {
               x1 = fx.mCsLongitude;
@@ -347,7 +347,7 @@ public class ParserTh extends TglParser
           } else {
             double yy = mOrigin.latToNorth( fx.mLatitude, fx.mEllipAlt ); // north diff to the origin
             double xx = mOrigin.lngToEast( fx.mLongitude, fx.mLatitude, fx.mEllipAlt, yy-mOrigin.y );
-            TDLog.v( "  relative to origin: " + xx + " " + yy + " " + z0 );
+            // TDLog.v( "  relative to origin: " + xx + " " + yy + " " + z0 );
             fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, 1, 1, 0.0 ) ); // M_TO_UNITS = 1 - zero convergence
           }
         }
@@ -595,7 +595,7 @@ public class ParserTh extends TglParser
                         if ( idx < vals.length ) {
                           double z = Double.parseDouble( vals[idx] );
 	                  fixes.add( new Cave3DFix( name, x, y, z, cs, 1, 1, 0.0 ) ); // no WGS84 - FIXME M_TO_UNITS - zero convergence
-                          TDLog.v( "TH adding fix " + name + ": " + x + " " + y + " " + z );
+                          // TDLog.v( "TH adding fix " + name + ": " + x + " " + y + " " + z );
                         }
                       }
                     }
@@ -759,7 +759,7 @@ public class ParserTh extends TglParser
                   if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
                   // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
                 }
-                TDLog.v( "TH load survey " + filename + " color " + color );
+                // TDLog.v( "TH load survey " + filename + " color " + color );
                 if ( mData == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
@@ -794,7 +794,7 @@ public class ParserTh extends TglParser
                   if ( idx < vals.length ) {
 		    String to = makeName( vals[idx], path );
                     shots.add( new Cave3DShot( from, to, 0.0f, 0.0f, 0.0f, 0, 0, mColor ) );
-                    TDLog.v( "Th parser, equate shot" + from + " " + to );
+                    // TDLog.v( "Th parser, equate shot" + from + " " + to );
                   }
                 }
               }
@@ -943,7 +943,7 @@ public class ParserTh extends TglParser
 
     int used_cnt = 0; // number of used shots
     for ( Cave3DFix fix : ok_fixes ) {
-      TDLog.v( "Th checking fix " + fix.getFullName() );
+      // TDLog.v( "Th checking fix " + fix.getFullName() );
       boolean found = false;
       for ( Cave3DStation s1 : stations ) {
         if ( fix.hasName( s1.getFullName() ) ) { found = true; break; }
@@ -989,7 +989,7 @@ public class ParserTh extends TglParser
             if ( sf != null && st != null ) break;
           }
           if ( sf != null && st != null ) {
-            TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + st.getFullName() );
+            // TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + st.getFullName() );
             sh.setUsed(); // LOOP
 	    ++ used_cnt;
             if ( sh.isSurvey() ) {
@@ -1041,7 +1041,8 @@ public class ParserTh extends TglParser
       }
       // TDLog.v( "Th after " + fix.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
     } // for ( Cave3DFix fix : ok_fixes )
-    TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
+    // TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
+
     // for ( Cave3DStation st : stations ) {
     //   TDLog.v("Th station " + st.getFullName() );
     // }

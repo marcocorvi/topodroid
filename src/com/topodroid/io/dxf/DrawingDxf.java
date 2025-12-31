@@ -1208,7 +1208,7 @@ public class DrawingDxf
             break;
           case 'N': // scrap index
             int scrap_index = dis.readInt();
-            TDLog.v( "DXF (tdr to dxf) scrap index " + scrap_index + " scrap flag " + scrap );
+            // TDLog.v( "DXF (tdr to dxf) scrap index " + scrap_index + " scrap flag " + scrap );
             break;
           // case 'G':
           //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data

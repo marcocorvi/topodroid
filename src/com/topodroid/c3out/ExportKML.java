@@ -60,7 +60,7 @@ public class ExportKML extends ExportGeo
     boolean ret = true;
     if ( data == null ) return false; // always false
 
-    TDLog.v( "KML export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
+    // TDLog.v( "KML export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
     if ( ! getGeolocalizedData( data, 0.0 ) ) { // FIXME declination 0.0
       TDLog.e( "KML no geolocalized station");
       return false;
@@ -162,7 +162,7 @@ public class ExportKML extends ExportGeo
         pw.format(Locale.US, "  <name>%s</name>\n", survey_name );
         if ( do_station ) {
           List< Cave3DStation > stations = survey.getStations();
-          TDLog.v("3D-KML stations " + stations.size() );
+          // TDLog.v("3D-KML stations " + stations.size() );
           pw.format(Locale.US, "<Folder>\n");
           pw.format(Locale.US, "  <name>stations</name>\n" );
           // pw.format(Locale.US, "  <MultiGeometry>\n");

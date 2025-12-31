@@ -139,7 +139,7 @@ class LoxFile
           c.data = new byte[ c.data_size ];
           if ( dis.read( c.data, 0, c.data_size ) != c.data_size ) throw new ParserException(filename, linenr);
         }
-        TDLog.v( "LOX Read: bytes " + (4 * Endian.SIZE32 + c.rec_size + c.data_size) );
+        // TDLog.v( "LOX Read: bytes " + (4 * Endian.SIZE32 + c.rec_size + c.data_size) );
         switch ( type ) {
           case 1: // SURVEY
             HandleSurvey( c );

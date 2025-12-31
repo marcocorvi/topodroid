@@ -119,7 +119,7 @@ public class DrawingTh
 
     // TDLog.v( "drawing I/O load therion " );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    TDLog.v( "TH load plot from Therion file " );
+    // TDLog.v( "TH load plot from Therion file " );
     BufferedReader br = new BufferedReader( fr );
     String line = null;
     while ( (line = readLine(br)) != null ) {
@@ -137,7 +137,7 @@ public class DrawingTh
           // String name = vals[1];
           // skip "-projection" vals[2]
           scrap_idx = surface.newScrapIndex( true ); // true = force 
-          TDLog.v("DRAW scrap index " + scrap_idx );
+          // TDLog.v("DRAW scrap index " + scrap_idx );
           int pos = line.indexOf( "scrap" );
           surface.setScrapOptions( scrap_idx, line.substring( pos+6 ) );
         }
@@ -256,7 +256,7 @@ public class DrawingTh
           if ( vals.length >= 6 && thname.equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
             boolean visible = true;
             String area_id = vals[3];
-            TDLog.v( "TH area border id " + area_id );
+            // TDLog.v( "TH area border id " + area_id );
             if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
               visible = false;
             }

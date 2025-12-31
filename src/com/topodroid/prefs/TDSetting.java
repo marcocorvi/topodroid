@@ -973,7 +973,7 @@ public class TDSetting
       case 4: sz = BTN_SIZE_LARGE;  break;
       case 2: sz = BTN_SIZE_HUGE;   break;
     }
-    TDLog.v("SETTING set button size-index " + size + " size: current " + mSizeButtons + " new " + sz );
+    // TDLog.v("SETTING set button size-index " + size + " size: current " + mSizeButtons + " new " + sz );
     mSizeBtns = size;
     if ( sz != mSizeButtons ) {
       mSizeButtons = (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
@@ -1513,7 +1513,7 @@ public class TDSetting
    */
   public static String updatePreference( TDPrefHelper hlp, int cat, String k, String v )
   {
-    TDLog.v("SETTINGS update cat " + cat + " pref " + k + " val " + v );
+    // TDLog.v("SETTINGS update cat " + cat + " pref " + k + " val " + v );
     switch ( cat ) {
       case TDPrefCat.PREF_CATEGORY_ALL:    return updatePrefMain( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SURVEY: return updatePrefSurvey( hlp, k, v );
@@ -2199,8 +2199,8 @@ public class TDSetting
 
   private static String updatePrefGeekImport( TDPrefHelper hlp, String k, String v )
   {
-    // TDLog.v("update pref import: " + k );
-    TDPrefKey[] key = TDPrefKey.mExport;
+    // TDLog.v("update pref geek import: " + k );
+    TDPrefKey[] key = TDPrefKey.mGeekImport;
     if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_ZIP_WITH_SYMBOLS
       mZipWithSymbols = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) ); 
     } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_IMPORT_DATAMODE (choice)
@@ -3093,7 +3093,7 @@ public class TDSetting
 
   private static void setActivityBooleans( SharedPreferences prefs, int level )
   {
-    TDLog.v("Level current " + TDLevel.mLevel + " set " + level );
+    // TDLog.v("Level current " + TDLevel.mLevel + " set " + level );
     if ( level == TDLevel.mLevel ) return;
 
     if ( StationPolicy.policyDowngrade( level ) ) {
@@ -3185,7 +3185,7 @@ public class TDSetting
    */
   public static boolean setPreference( SharedPreferences sp, String name, String value )
   {
-    TDLog.v("SETTING set pref " + name + " " + value );
+    // TDLog.v("SETTING set pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putString( name, value );
     return TDandroid.applyEditor( editor );
@@ -3199,7 +3199,7 @@ public class TDSetting
    */
   private static boolean setPreference( SharedPreferences sp, String name, boolean value )
   {
-    TDLog.v("SETTING set b-pref " + name + " " + value );
+    // TDLog.v("SETTING set b-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putBoolean( name, value );
     return TDandroid.applyEditor( editor );
@@ -3213,7 +3213,7 @@ public class TDSetting
    */
   public static boolean setPreference( SharedPreferences sp, String name, long value )
   {
-    TDLog.v("SETTING set l-pref " + name + " " + value );
+    // TDLog.v("SETTING set l-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putLong( name, value );
     return TDandroid.applyEditor( editor );
@@ -3221,14 +3221,14 @@ public class TDSetting
 
   private static void setPreference( Editor editor, String name, String value )  
   {
-    TDLog.v("SETTING set s-pref " + name + " " + value );
+    // TDLog.v("SETTING set s-pref " + name + " " + value );
     editor.putString( name, value );
   }
   private static void setPreference( Editor editor, String name, boolean value ) { editor.putBoolean( name, value ); }
   // private static void setPreference( Editor editor, String name, long value )    { editor.putLong( name, value ); }
   private static void setPreference( Editor editor, String name, int value )
   {
-    TDLog.v("SETTING set i-pref " + name + " " + value );
+    // TDLog.v("SETTING set i-pref " + name + " " + value );
     editor.putString( name, Integer.toString(value) );
   }
   private static void setPreference( Editor editor, String name, float value )   { editor.putString( name, Float.toString(value) ); }
@@ -3298,7 +3298,7 @@ public class TDSetting
    */
   public static boolean exportSettings( Context ctx, Uri uri, SharedPreferences prefs, int flag )
   {
-    TDLog.v("TD Setting exports settings");
+    // TDLog.v("TD Setting exports settings");
     // File file = TDFile.getSettingsFile(); // PRIVATE FILE
     try {
       // FileWriter fw = new FileWriter( file, false ); // true = append
@@ -3451,7 +3451,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_EXPORT_SHOTS";     if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mExportShotsFormat );
       k="DISTOX_EXPORT_PLOT";      if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mExportPlotFormat );
       k="DISTOX_AUTO_PLOT_EXPORT"; if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mAutoExportPlotFormat );
-      TDLog.v("Printed 13 settings");
 
       // pw.printf(Locale.US, "B DISTOX_DATA_BACKUP %s\n", mDataBackup );
       // FIXME pw.printf(Locale.US, "S DISTOX_SURVEX_EOL \"%s\"\n", mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n" );
@@ -3476,7 +3475,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_THERION_SPLAYS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",  k, tf(mTherionSplays) );
       k="DISTOX_TH2_XVI";               if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",  k, tf(mTherionXvi) );
       k="DISTOX_TH2_SCALE";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",  k, mTherionScale );
-      TDLog.v("Printed 20 settings");
 
       // k="DISTOX_BITMAP_SCALE";       if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mBitmapScale );
       // k="DISTOX_BITMAP_BGCOLOR";     if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mBitmapBgcolor );
@@ -3504,7 +3502,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_KML_SPLAYS";            if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mKmlSplays) );
       k="DISTOX_CSV_RAW";               if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mCsvRaw) );
       k="DISTOX_CSV_SEP";               if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, ( mCsvSeparator == CSV_COMMA )? 0 : ( mCsvSeparator == CSV_PIPE )? 1 : 2 );
-      TDLog.v("Printed 23 settings");
 
       k="DISTOX_BLUETOOTH";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCheckBT );
       k="DISTOX_AUTO_PAIR";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoPair) );
@@ -3529,7 +3526,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_GROUP_BY";              if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mGroupBy );
       k="DISTOX_GROUP_DISTANCE";        if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mGroupDistance );
       // DISTOX_CALIB_ALGOk="";         if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCalibAlgo );
-      TDLog.v("Printed 19 settings");
 
       k="DISTOX_CALIB_EPS";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mCalibEps );
       k="DISTOX_CALIB_MAX_IT";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCalibMaxIt );
@@ -3549,7 +3545,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_FINE_LOCATION";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mFineLocation );
       k="DISTOX_GEOPOINT_APP";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mGeoImportApp );
       k="DISTOX_EDIT_ALTITUDE";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mEditableHGeo) );
-      TDLog.v("Printed 14 settings");
 
       k="DISTOX_VTHRESHOLD";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mVThreshold );
       k="DISTOX_HTHRESHOLD";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mHThreshold );
@@ -3580,7 +3575,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_SPLAY_VERT_THRS";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mSplayVertThrs );
       k="DISTOX_SPLAY_CLASSES";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayClasses) );
       // k="DISTOX_SPLAY_AS_DOT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayAsDot) );
-      TDLog.v("Printed 28 settings");
 
       k="DISTOX_STATION_NAMES";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mStationNames );
       k="DISTOX_INIT_STATION";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "S %s %s\n",   k, mInitStation );
@@ -3603,7 +3597,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_PLOT_SPLIT";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mPlotSplit) );
       k="DISTOX_PLOT_SHIFT";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mPlotShift) );
       k="DISTOX_WITH_LEVELS";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mWithLevels );
-      TDLog.v("Printed 23 settings");
 
       k="DISTOX_FULL_AFFINE";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mFullAffine) );
       k="DISTOX_STYLUS_SIZE";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mStylusSize );
@@ -3630,7 +3623,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_LINE_STYLE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mLineStyle );
       k="DISTOX_LINE_SEGMENT";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mLineSegment );
       // k="DISTOX_LINE_CONTINUE";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mContinueLine );
-      TDLog.v("Printed 23 settings again");
 
       k="DISTOX_ARROW_LENGTH";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mArrowLength );
       k="DISTOX_LINE_CLOSE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineClose) );
@@ -3650,7 +3642,6 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_AUTO_SECTION_PT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoSectionPt) );
       k="DISTOX_LINE_SNAP";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineSnap) );
       k="DISTOX_LINE_CURVE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineCurve) );
-      TDLog.v("Printed 17 settings");
 
       k="DISTOX_LINE_STRAIGHT";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineStraight) );
       k="DISTOX_REDUCE_ANGLE";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mReduceAngle );
@@ -3674,7 +3665,6 @@ B DISTOX_SAP5_BIT16_BUG true
       // k="DISTOX_WALLS_XCLOSE";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsXClose );
       // k="DISTOX_WALLS_XSTEP";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsXStep );
       // k="DISTOX_WALLS_CONCAVE";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mWallsConcave );
-      TDLog.v("Printed 15 settings");
 /*
 */
       // TDLog.exportLogSettings( pw ); // NO_LOGS
@@ -3772,7 +3762,7 @@ B DISTOX_SAP5_BIT16_BUG true
    */
   public static boolean importSettings( Context ctx, Uri uri, SharedPreferences prefs, int flag )
   {
-    TDLog.v("Setting import settings - flag " + flag );
+    // TDLog.v("Setting import settings - flag " + flag );
     if ( flag == 0 ) return true;
     // String[] keyUnits = TDPrefKey.UNITS;
     // String[] defUnits = TDPrefKey.UNITSdef;

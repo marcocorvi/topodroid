@@ -534,7 +534,7 @@ class ShpPointz extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( mShpType );
-      TDLog.v( "SHP POINTZ " + cnt + " offset " + offset + ": " + pt.x + " " + pt.y + " " + pt.z + " ENZ " + getENC(pt) + " " + getNNC(pt) + " " + getZ(pt) );
+      // TDLog.v( "SHP POINTZ " + cnt + " offset " + offset + ": " + pt.x + " " + pt.y + " " + pt.z + " ENZ " + getENC(pt) + " " + getNNC(pt) + " " + getZ(pt) );
       shpBuffer.putDouble( getENC( pt ) );
       shpBuffer.putDouble( getNNC( pt ) );
       shpBuffer.putDouble( getZ( pt ) );
