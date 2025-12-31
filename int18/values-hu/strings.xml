@@ -1198,7 +1198,7 @@
     <!-- UNUSED string name="help_save">Változtatások mentése a mérési informácókba</string -->
     <string name="help_save_calib">Változtatások mentése a kalibrációs információkhoz</string>
     <string name="help_export_survey">Felmérés exportálása</string>
-    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
+    <string name="help_export_surveys">Minden felmérés exportálása</string>
     <string name="help_loc">GNSS koordináta</string>
     <string name="help_delete_survey">Felmérés törlése</string>
     <string name="help_delete_calib">Kalibráció törlése</string>
