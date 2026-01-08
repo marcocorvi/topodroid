@@ -64,14 +64,14 @@
     <string name="hsplay">Ysplay</string>
     <string name="vsplay">Zsplay</string>
 
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
+    <string name="pref_gen">Generale</string>
+    <string name="pref_ui">Interfaccia Utente</string>
+    <string name="pref_data">Dati</string>
+    <string name="pref_plot">Schizzo</string>
+    <string name="pref_3d">Visualizzatore 3D</string>
+    <string name="pref_io">Esporta</string>
+    <string name="pref_bt">Bluetooth</string>
+    <string name="pref_cal">Calibrazione</string>
 
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
@@ -107,7 +107,7 @@
     <string name="bad_sibling">Battuta con dissimili</string>
     <string name="bad_station">Caposaldo non corretto: %1$s</string>
     <string name="bad_station_name">Nome caposaldo non permesso</string>
-    <!-- TODO string name="invalid_name">Invalid name</string -->
+    <string name="invalid_name">Nome non valido</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -487,7 +487,7 @@
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_device_add">AGGIUNGI DISP.</string>
     <string name="menu_export">ESPORTA</string>
-    <!-- TODO string name="menu_exit">EXIT</string -->
+    <string name="menu_exit">USCITA</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">RECUPERA</string>
@@ -671,7 +671,7 @@
     <string name="shot_note">nota</string>
     <!-- UNUSED string name="shot_reverse">inverso</string -->
     <string name="shot_to">a</string>
-    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
+    <string name="shot_refreshed">Lista tiri aggiornata</string>
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>
@@ -745,8 +745,8 @@
     <string name="zip_saved">Salvato </string>
     <string name="zip_failed">Archiviazione rilievo fallita</string>
     <string name="zip_share_failed">Impossibile condivisione zip</string>
-    <!-- TODO string name="file_share_failed">Unable to share file</string -->
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+    <string name="file_share_failed">Impossibile condividere il file</string>
+    <string name="file_share_no_app">No app di condivisione file</string>
     <string name="unzip_fail">Scompattazione rilievo fallita</string>
     <string name="unzip_fail_sqlite">Errore SQL: cancellare il rilievo e riprovare</string>
     <string name="unzip_fail_survey">Fallito: Nome rilievo non corrispondente</string>
@@ -836,7 +836,7 @@
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Installata v. %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+    <string name="ask_clear_equates">Rimuovere tutte le equivalenze?</string>
 
     <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>
@@ -878,7 +878,7 @@
     <string name="button_next"    >Prossimo</string>
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
-    <string name="button_rename"  >Renomina</string>
+    <string name="button_rename"  >Rinomina</string>
     <string name="button_retake"  >Riprendi</string>
     <string name="button_prefix"  >Prefisso</string>
     <string name="button_skip"    >Salta</string>
@@ -903,7 +903,7 @@
     <string name="button_left"      >SINISTRA</string>
     <string name="button_right"     >DESTRA</string>
     <string name="button_clear"     >Cancella  </string>
-    <!-- TODO string name="button_clear_all" >Clear all</string -->
+    <string name="button_clear_all" >Pulisci tutto</string>
     <string name="button_clear_day" >Pulisci 1g  </string>
     <string name="button_clear_week">Pulisci 7gg  </string>
     <string name="button_clear_memory">Pulisci memoria</string>
@@ -1191,7 +1191,7 @@
     <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
     <string name="help_save_calib">Salva i cambiamenti alla calibrazione</string>
     <string name="help_export_survey">Esporta rilievo</string>
-    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
+    <string name="help_export_surveys">Esporta tutti i rilievi</string>
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
     <string name="help_delete_calib">Elimina calibrazione</string>
@@ -1221,7 +1221,7 @@
     <string name="help_export_config">Esporta progetto</string>
     <string name="help_delete_config">Cancella progetto</string>
     <string name="help_add_equate">Aggiungi rilievi simili</string>
-    <!-- TODO string name="help_all_equates">All possible equates</string -->
+    <string name="help_all_equates">Tutte le possibili equivalenze</string>
     <string name="help_equates">Lista rilievi simili</string>
     <string name="help_stations_minus">Mostra meno capisaldi</string>
     <string name="help_stations_plus">Mostra piú capisaldi</string>
@@ -1376,7 +1376,7 @@
     <string name="title_settings_gpx">GPX: impostazioni export</string>
     <string name="title_settings_kml">KML: Imposta export</string>
     <string name="title_settings_srv">Export impostazioni Walls</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+    <string name="title_settings_ply">Impostazioni Esporta Poligoni</string>
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>
     <string name="title_settings_survey">Impostazione rilievo</string>
@@ -1423,7 +1423,7 @@
     <string name="title_survey">Info rilievo</string>
     <string name="title_survey_new">Nuovo rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
-    <string name="title_survey_rename">Renomina rilievo</string>
+    <string name="title_survey_rename">Rinomina rilievo</string>
     <string name="title_station_photo">Foto Caposaldo</string>
     <string name="title_team_dialog">Nomi squadra topo</string>
     <string name="title_plot_rename">Operazioni sul disegno</string>
@@ -1446,8 +1446,8 @@
   <string name="pref_export_settings">Impostazioni Export</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
-  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
+  <string name="pref_bulk_export_title">Esportazione blocco di dati</string>
+  <string name="pref_bulk_export_summary">Esportazione blocco dati di tutti i rilievi</string>
   <string name="pref_export_plot_title">Formato export schizzi</string>
   <string name="pref_export_plot_summary">Formato export schizzi di default</string>
   <string name="pref_export_shots_title">Formato export dati</string>
@@ -2138,9 +2138,9 @@
     <string name="title_export">Esporta progetto come &#8230;</string>
     <string name="title_equates">Collegamenti</string>
     <string name="title_equate_new">Aggiungi collegamento &#8230;</string>
-    <!-- TODO string name="button_equate_all">All</string -->
-    <!-- TODO string name="button_equate_one">One</string -->
-    <!-- TODO string name="button_equate_search">Search</string -->
+    <string name="button_equate_all">Tutto</string>
+    <string name="button_equate_one">Uno</string>
+    <string name="button_equate_search">Cercaa</string>
     <string name="title_equate_with">Collega %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Cartella di lavoro corrente</string -->
     <string name="title_drop">Cancello rilievi ?</string>
