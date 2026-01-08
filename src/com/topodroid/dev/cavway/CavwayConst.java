@@ -27,7 +27,7 @@ public class CavwayConst
   public static final int CALIB_ON         = 0x31;
   public static final int CALIB_CONVERT    = 0x32;
   public static final int SILENT_OFF       = 0x33;
-  public static final int DISTOX_OFF       = 0x34;
+  public static final int DEVICE_OFF       = 0x34;
   public static final int DISTOX_35        = 0x35;
   public static final int LASER_ON         = 0x36;
   public static final int LASER_OFF        = 0x37;

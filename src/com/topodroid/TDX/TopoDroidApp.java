@@ -49,6 +49,7 @@ import com.topodroid.dev.discox.DiscoXComm;
 import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.PairingRequest;
+// import com.topodroid.dev.cavway.CavwayConst;
 import com.topodroid.dev.cavway.CavwayMemoryDialog;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
@@ -2712,6 +2713,22 @@ public class TopoDroidApp extends Application
 
   // --------------------------------------------------------
 
+  // FIXME_CAVWAY
+  /** send a command to the Cavway
+   * @param cmd   command code (@see CavwayConst)
+   */
+  public void sendCavwayCommand( int cmd )
+  { 
+    // boolean ret = false;
+    if ( mComm != null && mComm instanceof CavwayComm ) {
+      TDLog.v( "Cavway app send command " + cmd );
+      mComm.sendCommand( cmd );
+    // } else {
+    //   TDLog.e("Comm is null or not Cavway");
+    }
+    // return ret;
+  }
+
   // FIXME_DISCOX
   /** send a command to the DiscoX
    * @param cmd   command code (@see SapConst)
@@ -2723,7 +2740,7 @@ public class TopoDroidApp extends Application
       TDLog.v( "DiscoX app send command " + cmd );
       mComm.sendCommand( cmd );
     // } else {
-    //   TDLog.e("Comm is null or not SAP6");
+    //   TDLog.e("Comm is null or not DiscoX");
     }
     // return ret;
   }

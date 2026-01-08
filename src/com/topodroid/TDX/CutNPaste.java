@@ -28,6 +28,7 @@ import com.topodroid.dev.bric.BricMode; // MODE
 import com.topodroid.dev.bric.BricConst;
 import com.topodroid.dev.bric.MemoryBricTask;
 import com.topodroid.dev.sap.SapConst;
+import com.topodroid.dev.cavway.CavwayConst;
 
 import java.lang.ref.WeakReference;
 
@@ -470,7 +471,7 @@ public class CutNPaste
                       dismissPopupBT();
                     }
                   } );
-          ww = textview3.getPaint().measureText( text );
+          ww = textview4.getPaint().measureText( text );
           if ( ww > w ) w = ww;
         }
 
@@ -503,6 +504,19 @@ public class CutNPaste
         ww = textview4.getPaint().measureText( text );
         if ( ww > w ) w = ww;
       }
+
+      // ----- TURN OFF
+      //
+      text = res.getString(R.string.popup_do_off);
+      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendCavwayCommand( CavwayConst.DEVICE_OFF );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview4.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
     }
     else if ( TDInstance.isDeviceBric() ) // -----------------------------------------------------
     {

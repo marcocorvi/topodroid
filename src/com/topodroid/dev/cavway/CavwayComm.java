@@ -826,7 +826,7 @@ public class CavwayComm extends TopoDroidComm
         // TDLog.v( TAG + "set laser: " + what + " packet " + to_read + " close BT " + closeBT );
         switch ( what ) {
           case DistoX.DISTOX_OFF:
-            sendCommand( (byte)CavwayConst.DISTOX_OFF );
+            sendCommand( (byte)CavwayConst.DEVICE_OFF );
             break;
           case Device.LASER_ON:
             sendCommand( (byte)CavwayConst.LASER_ON );
