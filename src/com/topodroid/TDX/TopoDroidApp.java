@@ -16,6 +16,7 @@ import com.topodroid.dev.cavway.CavwayInfoDialog;
 import com.topodroid.dev.distox_ble.DistoXBLEComm; // SIWEI_TIAN
 // import com.topodroid.dev.distox_ble.DistoXBLEConst;
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog;
+import com.topodroid.dev.distox.DistoX; // DistoX.DISTOX_OFF
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
@@ -238,12 +239,12 @@ public class TopoDroidApp extends Application
    */
   public void notifyListerStatus( ListerHandler lister, final int status )
   { 
-    // TDLog.v( "TDApp: notify status " + status );
+    TDLog.v( "APP: notify status " + status );
     if ( lister == null ) return;
     if ( mMainActivity == null ) return;
     mMainActivity.runOnUiThread( new Runnable() { 
       public void run () { 
-        // TDLog.v("APP notify " + status + " to listers " + mListerSet.size() );
+        TDLog.v("APP notify " + status + " to listers " + mListerSet.size() );
         // mListerSet.setConnectionStatus( status );
         lister.setConnectionStatus( status );
       }
@@ -927,7 +928,12 @@ public class TopoDroidApp extends Application
     }
 
     if ( TDLevel.overAdvanced ) {
-      if ( TDInstance.isDeviceBric() ) {
+      if ( TDInstance.isDeviceCavway() ) { // CAVWAY
+        if ( TDInstance.hasDeviceRemoteControl() && ! TDSetting.isConnectionModeMulti()) {
+          CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
+          return;
+        }
+      } else if ( TDInstance.isDeviceBric() ) {
         // TDLog.v( "bt button over advanced : BRIC");
         if ( mComm != null && mComm.isConnected() ) { // FIXME BRIC_TESTER
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
@@ -980,6 +986,7 @@ public class TopoDroidApp extends Application
     mDataDownloader.setDownloading( false );
     mDataDownloader.stopDownloadData( lister );
     if ( lister != null ) {
+      TDLog.v("APP notify " + mDataDownloader.getStatus() + " lister " + lister.toString() );
       lister.setConnectionStatus( mDataDownloader.getStatus() );
       // mDataDownloader.notifyConnectionStatus( lister, ConnectionState.CONN_DISCONNECTED );
     }
@@ -2722,14 +2729,15 @@ public class TopoDroidApp extends Application
     // boolean ret = false;
     if ( mComm != null && mComm instanceof CavwayComm ) {
       TDLog.v( "Cavway app send command " + cmd );
-      mComm.sendCommand( cmd );
+      // mComm.sendCommand( cmd );
+      setCavwayLaser( cmd, 1, null, 0, true, true );
     // } else {
     //   TDLog.e("Comm is null or not Cavway");
     }
     // return ret;
   }
 
-  // FIXME_DISCOX
+  // FIXME_DISCOX - not used at the moment
   /** send a command to the DiscoX
    * @param cmd   command code (@see SapConst)
    */
@@ -2913,11 +2921,16 @@ public class TopoDroidApp extends Application
         (new Thread() {
           public void run() {
             ((CavwayComm)mComm).setCavwayLaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+            // notifyDisconnected( lister, data_type );
+            // TDLog.v("shot window cmd " + what + " set connection status " + mDataDownloader.getStatus() );
+            // if ( mShotWindow != null ) mShotWindow.setConnectionStatus( mDataDownloader.getStatus() );
           }
         } ).start();
         return true;
       } else {
-        return ((CavwayComm)mComm).setCavwayLaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+        boolean ret = ((CavwayComm)mComm).setCavwayLaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+        // if ( ret && mShotWindow != null ) mShotWindow.setConnectionStatus( mDataDownloader.getStatus() );
+        return ret;
       }
     } else {
       TDLog.e("set XBLE laser: not XBLE comm");

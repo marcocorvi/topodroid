@@ -1004,7 +1004,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Shot</string>
     <string name="popup_do_clear">Clear</string>
-    <string name="popup_do_off">Off</string>
+    <string name="popup_do_off">Switch off</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Export</string>

@@ -11,6 +11,7 @@
  */
 package com.topodroid.dev.cavway;
 
+
 import java.util.UUID;
 
 public class CavwayConst
@@ -23,15 +24,15 @@ public class CavwayConst
   static final UUID CAVWAY_CHRT_READ_UUID  = UUID.fromString( CAVWAY_CHRT_READ_UUID_STR );
   static final UUID CAVWAY_CHRT_WRITE_UUID = UUID.fromString( CAVWAY_CHRT_WRITE_UUID_STR );
 
-  public static final int CALIB_OFF        = 0x30;
-  public static final int CALIB_ON         = 0x31;
-  public static final int CALIB_CONVERT    = 0x32;
-  public static final int SILENT_OFF       = 0x33;
-  public static final int DEVICE_OFF       = 0x34;
-  public static final int DISTOX_35        = 0x35;
-  public static final int LASER_ON         = 0x36;
-  public static final int LASER_OFF        = 0x37;
-  public static final int MEASURE          = 0x38;
+  // public static final int CALIB_OFF        = DistoX.CALIB_OFF;
+  // public static final int CALIB_ON         = DistoX.CALIB_ON;
+  // public static final int CALIB_CONVERT    = 0x32; // DISTOX.SILENT_ON
+  // public static final int SILENT_OFF       = DistoX.SILENT_OFF;
+  // public static final int DEVICE_OFF       = DistoX.DEVICE_OFF;
+  // public static final int DISTOX_35        = DistoX.DISTOX_35;
+  // public static final int LASER_ON         = DistoX.LASER_ON;
+  // public static final int LASER_OFF        = DistoX.LASER_OFF;
+  // public static final int MEASURE          = DistoX.MEASURE;
 
   public static final int FLAG_FEATURE   = 0x7; // Cavway flags: values are complementary than in the device 
   public static final int FLAG_RIDGE     = 0x6;

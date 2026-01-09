@@ -43,11 +43,11 @@ public class SapConst
 
   static final byte SAP_ACK               = (byte)0x55;
 
-  static final public byte SAP_START_CAL  = (byte)0x31;
-  static final public byte SAP_STOP_CAL   = (byte)0x30;
-  static final public byte SAP_DEVICE_OFF = (byte)0x34;
-  static final public byte SAP_LASER_ON   = (byte)0x36;
-  static final public byte SAP_LASER_OFF  = (byte)0x37;
-  static final public byte SAP_TAKE_SHOT  = (byte)0x38;
+  // static final public byte SAP_STOP_CAL   = (byte)0x30; Device.CALIB_OFF
+  // static final public byte SAP_START_CAL  = (byte)0x31; Device.CALIB_ON
+  // static final public byte SAP_DEVICE_OFF = (byte)0x34; Device.DEVICE_OFF
+  // static final public byte SAP_LASER_ON   = (byte)0x36; Device.LASER_ON
+  // static final public byte SAP_LASER_OFF  = (byte)0x37; Device.LASER_OFF
+  // static final public byte SAP_TAKE_SHOT  = (byte)0x38; Device.MEASURE
 
 }

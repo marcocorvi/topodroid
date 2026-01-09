@@ -87,26 +87,26 @@ public class DistoX310Comm extends DistoXComm
         if ( connectSocket( address, data_type ) ) {
           ret = true;
           switch ( what ) {
-            case DistoX.DISTOX_OFF:
-              sendCommand( (byte)DistoX.DISTOX_OFF );
+            case Device.DEVICE_OFF:
+              sendCommand( (byte)Device.DEVICE_OFF );
               break;
             case Device.LASER_ON:
-              sendCommand( (byte)DistoX.LASER_ON );
+              sendCommand( (byte)Device.LASER_ON );
               break;
             case Device.LASER_OFF:
-              sendCommand( (byte)DistoX.LASER_OFF );
+              sendCommand( (byte)Device.LASER_OFF );
               break;
             case Device.MEASURE:
-              // sendCommand( (byte)DistoX.MEASURE );
+              // sendCommand( (byte)Device.MEASURE );
               // break;
             case Device.MEASURE_DOWNLOAD:
-              sendCommand( (byte)DistoX.MEASURE );
+              sendCommand( (byte)Device.MEASURE );
               break;
-            case DistoX.CALIB_OFF:
-              sendCommand( (byte)DistoX.CALIB_OFF );
+            case Device.CALIB_OFF:
+              sendCommand( (byte)Device.CALIB_OFF );
               break;
-            case DistoX.CALIB_ON:
-              sendCommand( (byte)DistoX.CALIB_ON );
+            case Device.CALIB_ON:
+              sendCommand( (byte)Device.CALIB_ON );
               break;
             default:
               ret = false;

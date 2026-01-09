@@ -26,7 +26,7 @@ import android.content.Context;
 public class DataDownloader
 {
   private final static String TAG = "DOWNLOAD ";
-  private final static boolean LOG = false;
+  private final static boolean LOG = true;
   // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
 
   // private Context mContext; // UNUSED
@@ -45,7 +45,11 @@ public class DataDownloader
 
   /** @return true if it needs to re-connect, ie, it is downloading but not CONNECTED
    */
-  boolean needReconnect() { return mDownloading && mConnected != ConnectionState.CONN_CONNECTED; }
+  boolean needReconnect() 
+  { 
+    if ( LOG ) TDLog.v( TAG +"need reconnect: doenloading " + mDownloading + " connected " + mConnected );
+    return mDownloading && mConnected != ConnectionState.CONN_CONNECTED;
+  }
 
   /** set the "connection" status
    * @param connected   connection status: DISCONNECTED, WAITING, or CONNECTED

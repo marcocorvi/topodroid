@@ -732,26 +732,26 @@ public class DistoXBLEComm extends TopoDroidComm
         // mPacketToRead = to_read; // set the number of packet to read
         // TDLog.v("XBLE set laser: " + what + " packet " + to_read + " close BT " + closeBT );
         switch ( what ) {
-          case DistoX.DISTOX_OFF:
-            sendCommand( (byte)DistoX.DISTOX_OFF );
+          case Device.DEVICE_OFF:
+            sendCommand( (byte)Device.DEVICE_OFF );
             break;
           case Device.LASER_ON:
-            sendCommand( (byte)DistoX.LASER_ON );
+            sendCommand( (byte)Device.LASER_ON );
             break;
           case Device.LASER_OFF:
-            sendCommand( (byte)DistoX.LASER_OFF );
+            sendCommand( (byte)Device.LASER_OFF );
             break;
           case Device.MEASURE:
-            // sendCommand( (byte)DistoX.MEASURE );
+            // sendCommand( (byte)Device.MEASURE );
             // break;
           case Device.MEASURE_DOWNLOAD:
-            sendCommand( (byte)DistoX.MEASURE );
+            sendCommand( (byte)Device.MEASURE );
             break;
-          case DistoX.CALIB_OFF:
-            sendCommand( (byte)DistoX.CALIB_OFF );
+          case Device.CALIB_OFF:
+            sendCommand( (byte)Device.CALIB_OFF );
             break;
-          case DistoX.CALIB_ON:
-            sendCommand( (byte)DistoX.CALIB_ON );
+          case Device.CALIB_ON:
+            sendCommand( (byte)Device.CALIB_ON );
             break;
         }
         if ( LOG ) TDLog.v("XBLE set laser - slow down after send command");
@@ -1054,7 +1054,7 @@ public class DistoXBLEComm extends TopoDroidComm
   private boolean setCalibMode( boolean turn_on )
   {
     // TDLog.v("XBLE set calib " + turn_on );
-    return sendCommand( turn_on? DistoX.CALIB_ON : DistoX.CALIB_OFF );
+    return sendCommand( turn_on? Device.CALIB_ON : Device.CALIB_OFF );
   }
 
   /** batch data download

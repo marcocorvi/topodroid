@@ -72,7 +72,7 @@ public class CavwayComm extends TopoDroidComm
                            implements BleComm 
 {
   private final static String TAG = "CAVWAY COMM ";
-  private final static boolean LOG = false;
+  private final static boolean LOG = true;
   private final static boolean USE_MTU = false; // max MTU 250
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
@@ -143,32 +143,32 @@ public class CavwayComm extends TopoDroidComm
 
   //   public void run()
   //   {
-  //     TDLog.v("Timer Task reconnect device");
+  //     if ( LOG ) TDLog.v("Timer Task reconnect device");
   //     mComm.closeDevice( true );
   //     mComm.connectDevice( mAddress, mLister, mDataType, mTimeout );
   //   }
   // }
 
-  private void resetTimer()
-  {
-    // if ( ! TDSetting.isConnectionModeContinuous() ) return;
-    // TDLog.v("Timer reset ");
-    // if ( mTimer != null ) {
-    //   mTimer.cancel();
-    //   mTimer.purge();
-    // }
-    // mTimer = new Timer();
-    // mTimer.schedule( new CavwayTimerTask( this ), 5000 );
-  }
+  // private void resetTimer()
+  // {
+  //   if ( ! TDSetting.isConnectionModeContinuous() ) return;
+  //   TDLog.v("Timer reset ");
+  //   if ( mTimer != null ) {
+  //     mTimer.cancel();
+  //     mTimer.purge();
+  //   }
+  //   mTimer = new Timer();
+  //   mTimer.schedule( new CavwayTimerTask( this ), 5000 );
+  // }
 
-  private void stopTimer()
-  {
-    // if ( mTimer == null ) return;
-    // TDLog.v("Timer stop ");
-    // mTimer.cancel();
-    // mTimer.purge();
-    // mTimer = null;
-  }
+  // private void stopTimer()
+  // {
+  //   if ( mTimer == null ) return;
+  //   TDLog.v("Timer stop ");
+  //   mTimer.cancel();
+  //   mTimer.purge();
+  //   mTimer = null;
+  // }
 
 
   private void startConsumerThread()
@@ -356,7 +356,8 @@ public class CavwayComm extends TopoDroidComm
   public boolean disconnectDevice()
   {
     if ( LOG ) TDLog.v( TAG + "\"disconnect device\": connected " + mBTConnected );
-    stopTimer();
+    mReconnect = false;
+    // stopTimer();
     return closeDevice( false );
   }
 
@@ -471,7 +472,7 @@ public class CavwayComm extends TopoDroidComm
       CavwayData cw = new CavwayData( 0 );
       cw.setData( chrt.getValue() );
       // TDLog.v( TAG + cw.toString() );
-      resetTimer();
+      // resetTimer();
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
       if ( LOG ) TDLog.v( TAG + "changed write chrt");
       // TDLog.v( TAG + "changed write chrt " + byteArray2String( chrt.getValue() ) );
@@ -488,7 +489,7 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) TDLog.v( TAG + "readed chrt " + bytes.length );
     mQueue.put( DATA_PRIM, bytes );
-    resetTimer();
+    // resetTimer();
   }
 
   /** notified that bytes have been written to the write characteristics
@@ -614,7 +615,7 @@ public class CavwayComm extends TopoDroidComm
       // 202211XX
       mBTConnected  = true;
       notifyStatus( ConnectionState.CONN_CONNECTED );
-      resetTimer();
+      // resetTimer();
       // TODO write a resend-interrupt to the DistoXBLE
     }
     return ret;
@@ -815,36 +816,42 @@ public class CavwayComm extends TopoDroidComm
     // FIXME no need to run on a thread
     // Thread laserThread = new Thread() {
     //   @Override public void run() {
-        if ( ! tryConnectDevice( address, lister, 0 ) ) {
-          TDLog.t( TAG + "set laser - failed connect device");
-          closeDevice( true );
-          mSkipNotify = false;
-          return false; 
+        boolean connected = isConnected();
+        if ( ! connected ) {
+          if ( ! tryConnectDevice( address, lister, 0 ) ) {
+            TDLog.t( TAG + "set laser - failed connect device");
+            closeDevice( true );
+            mSkipNotify = false;
+            return false; 
+          }
         }
         // mNrReadPackets = 0;
         // mPacketToRead = to_read; // set the number of packet to read
-        // TDLog.v( TAG + "set laser: " + what + " packet " + to_read + " close BT " + closeBT );
+        if ( LOG ) TDLog.v( TAG + "set laser: " + what + " packet " + to_read );
         switch ( what ) {
-          case DistoX.DISTOX_OFF:
-            sendCommand( (byte)CavwayConst.DEVICE_OFF );
+          case Device.DEVICE_OFF:
+            mSkipNotify = false;
+            // stopTimer();
+            sendCommand( (byte)Device.DEVICE_OFF );
+            disconnectDevice( );
             break;
           case Device.LASER_ON:
-            sendCommand( (byte)CavwayConst.LASER_ON );
+            sendCommand( (byte)Device.LASER_ON );
             break;
           case Device.LASER_OFF:
-            sendCommand( (byte)CavwayConst.LASER_OFF );
+            sendCommand( (byte)Device.LASER_OFF );
             break;
           case Device.MEASURE:
-            // sendCommand( (byte)DistoX.MEASURE );
+            // sendCommand( (byte)Device.MEASURE );
             // break;
           case Device.MEASURE_DOWNLOAD:
-            sendCommand( (byte)CavwayConst.MEASURE );
+            sendCommand( (byte)Device.MEASURE );
             break;
-          case DistoX.CALIB_OFF:
-            sendCommand( (byte)CavwayConst.CALIB_OFF );
+          case Device.CALIB_OFF:
+            sendCommand( (byte)Device.CALIB_OFF );
             break;
-          case DistoX.CALIB_ON:
-            sendCommand( (byte)CavwayConst.CALIB_ON );
+          case Device.CALIB_ON:
+            sendCommand( (byte)Device.CALIB_ON );
             break;
         }
         if ( LOG ) TDLog.v( TAG + "set laser - slow down after send command");
@@ -911,7 +918,7 @@ public class CavwayComm extends TopoDroidComm
     cmd[3] = (byte)(len);
     mPacketType = CavwayProtocol.PACKET_NONE;
     if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
-      // TDLog.v( "COMM failed enlist memory-write [1]" );
+      // TDLog.v( TAG + "failed enlist memory-write [1]" );
       return null;
     }
     syncWait( 2000, "read memory" );
@@ -958,7 +965,7 @@ public class CavwayComm extends TopoDroidComm
     cmd[6] = data[3];
     mPacketType = CavwayProtocol.PACKET_NONE;
     if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
-      // TDLog.v( "COMM failed enlist memory-write [2]" );
+      // TDLog.v( TAG + "failed enlist memory-write [2]" );
       return false;
     }
     syncWait( 2000, "write memory" );
@@ -1001,7 +1008,7 @@ public class CavwayComm extends TopoDroidComm
       cmd[i+4] = data[i];
     mPacketType = CavwayProtocol.PACKET_NONE;
     if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
-      // TDLog.v( "COMM failed enlist memory-write [3]" );
+      // TDLog.v( TAG + "failed enlist memory-write [3]" );
       return false;
     }
     syncWait( 2000, "write memory" );
@@ -1031,7 +1038,7 @@ public class CavwayComm extends TopoDroidComm
     return enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
     // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
     //   int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
-    //   TDLog.v( TAG + " READ meomry expected got length " + length );
+    //   if ( LOG ) TDLog.v( TAG + " READ meomry expected got length " + length );
     //   return ( (CavwayProtocol) mProtocol).mRepliedData;
     // } else {
     //   TDLog.t( TAG + "read memory: no reply");
@@ -1188,11 +1195,11 @@ public class CavwayComm extends TopoDroidComm
     switch (mode)
     {
       case 0:
-        return sendCommand( CavwayConst.CALIB_OFF );
+        return sendCommand( Device.CALIB_OFF );
       case 1:
-        return sendCommand( CavwayConst.CALIB_ON );
+        return sendCommand( Device.CALIB_ON );
       case 2:
-        return sendCommand( CavwayConst.CALIB_CONVERT );
+        return sendCommand( Device.CALIB_CONVERT );
       default:
         return false;
     }
@@ -1302,7 +1309,7 @@ public class CavwayComm extends TopoDroidComm
       int addr = CavwayDetails.COEFF_ADDRESS + k * 64;
       byte[] coeff_tmp = readMemory( addr, 64 /* CavwayDetails.COEFF_SIZE */ ); // FIXME it can fail 
       if ( coeff_tmp != null && coeff_tmp.length >= 52 ) {
-        // TDLog.v("memory size " + mMemory.size() + " copying coeff-set " + k );
+        // TDLog.v( TAG + "memory size " + mMemory.size() + " copying coeff-set " + k );
         System.arraycopy( coeff_tmp, 0, coeff, k*52, 52 /* CavwayDetails.COEFF_LEN */ );
       } else {
         if ( coeff_tmp == null ) {
@@ -1387,7 +1394,7 @@ public class CavwayComm extends TopoDroidComm
   // public void uploadFirmware( String address, File file, TDProgress progress )
   // {
   //   final boolean DRY_RUN = false; // DEBUG
-  //   TDLog.v( TAG + "upload firmware " + file.getPath() );
+  //   if ( LOG ) TDLog.v( TAG + "upload firmware " + file.getPath() );
   //   // boolean is_log_file = TDLog.isStreamFile();
   //   // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
   //   // int ret = 0;
@@ -1419,10 +1426,10 @@ public class CavwayComm extends TopoDroidComm
   //             int crc16 = calCRC16( buf, 256 );
   //             //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
   //             if (nr <= 0) { // EOF ?
-  //               TDLog.v( TAG + "fw upload: file read " + nr + " - break");
+  //               if ( LOG ) TDLog.v( TAG + "fw upload: file read " + nr + " - break");
   //               break;
   //             }
-  //             TDLog.v( TAG + "fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
+  //             if ( LOG ) TDLog.v( TAG + "fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
   //             //if(addr < 8) continue;
   //             int flashaddr = addr + 8;
   //             cnt += nr;
@@ -1460,7 +1467,7 @@ public class CavwayComm extends TopoDroidComm
   //                 //     long start = System.currentTimeMillis();
   //                 //     mNewDataFlag.wait(5000); // allow long wait for firmware
   //                 //     long millis = System.currentTimeMillis() - start;
-  //                 //     TDLog.v( TAG + "write firmware block waited " + millis + " msec" );
+  //                 //     if ( LOG ) TDLog.v( TAG + "write firmware block waited " + millis + " msec" );
   //                 //   } catch (InterruptedException e) {
   //                 //     e.printStackTrace();
   //                 //   }
@@ -1472,13 +1479,13 @@ public class CavwayComm extends TopoDroidComm
   //                 int ret_crc16 = ((CavwayProtocol) mProtocol).mCheckCRC;
   //                 int ret_code  = ((CavwayProtocol) mProtocol).mFwOpReturnCode;
   //                 if ( ret_crc16 != crc16 || ret_code != 0 ) {
-  //                   TDLog.v( TAG + "fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
+  //                   if ( LOG ) TDLog.v( TAG + "fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
   //                   // ok = false; // without repeat-for uncomment these
   //                   // break;
   //                 } else {
   //                   String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "Cavway", cnt );
   //                   int cnt1 = cnt;
-  //                   TDLog.v( msg1 );
+  //                   if ( LOG ) TDLog.v( TAG + msg1 );
   //                   if ( progress != null ) {
   //                     handler.post( new Runnable() {
   //                       public void run() {
@@ -1503,7 +1510,7 @@ public class CavwayComm extends TopoDroidComm
   //           }
   //           fis.close();
   //         } catch ( EOFException e ) { // OK
-  //           TDLog.v( TAG + "fw update: EOF " + e.getMessage());
+  //           if ( LOG ) TDLog.v( TAG + "fw update: EOF " + e.getMessage());
   //         } catch ( FileNotFoundException e ) {
   //           TDLog.t( TAG + "fw update: Not Found error " + e.getMessage() );
   //           ok = false;
@@ -1514,9 +1521,9 @@ public class CavwayComm extends TopoDroidComm
   //       }
   //       closeDevice( false );     //close ble here
   //       msg = TAG + "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
-  //       TDLog.v( msg );
+  //       if ( LOG ) TDLog.v( TAG + msg );
   //       int ret = ( ok ? cnt : -cnt );
-  //       TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
+  //       if ( LOG ) TDLog.v( TAG + "Dialog Firmware upload result: written " + ret + " bytes of " + len );
   //       boolean ok2 = ok;
   //       String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
   //                                : res.getString(R.string.firmware_file_upload_fail);
@@ -1542,7 +1549,7 @@ public class CavwayComm extends TopoDroidComm
   //  */
   // private byte[] readFirmwareBlock(int addr)
   // {
-  //   TDLog.v( TAG + "fw read block at addr " + addr );
+  //   if ( LOG ) TDLog.v( TAG + "fw read block at addr " + addr );
   //   try {
   //     for (int repeat = 3; repeat > 0; --repeat ) {
   //       byte[] req_buf = new byte[3]; // request buffer
@@ -1557,7 +1564,7 @@ public class CavwayComm extends TopoDroidComm
   //       //     long start = System.currentTimeMillis();
   //       //     mNewDataFlag.wait(5000); // allow long wait for firmware
   //       //     long millis = System.currentTimeMillis() - start;
-  //       //     TDLog.v( TAG + "read firmware block waited " + millis + " msec" );
+  //       //     if ( LOG ) TDLog.v( TAG + "read firmware block waited " + millis + " msec" );
   //       //   } catch (InterruptedException e) {
   //       //     e.printStackTrace();
   //       //   }
@@ -1587,7 +1594,7 @@ public class CavwayComm extends TopoDroidComm
   //  */
   // public void dumpFirmware( String address, File file, TDProgress progress )
   // {
-  //   TDLog.v( TAG + "fw dump: output filepath " + file.getPath() );
+  //   if ( LOG ) TDLog.v( TAG + "fw dump: output filepath " + file.getPath() );
   //   Resources res   = mContext.getResources();
   //   Handler handler = new Handler();
   //   new Thread( new Runnable() {
@@ -1619,7 +1626,7 @@ public class CavwayComm extends TopoDroidComm
   //               if ( k == 256 ) break;
   //               String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "Cavway", cnt );
   //               int cnt1 = cnt;
-  //               TDLog.v( msg1 );
+  //               if ( LOG ) TDLog.v( TAG + msg1 );
   //               if ( progress != null ) {
   //                 handler.post( new Runnable() {
   //                   public void run() {
@@ -1644,7 +1651,7 @@ public class CavwayComm extends TopoDroidComm
   //         ok = false;
   //       }
   //       String msg = "Cavway Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
-  //       TDLog.v( msg );
+  //       if ( LOG ) TDLog.v( TAG + msg );
   //       int ret = ( ok ? cnt : -cnt );
   //       boolean ok2 = ok;
   //       String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_downloaded), filename, ret )

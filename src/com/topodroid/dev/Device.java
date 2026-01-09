@@ -83,13 +83,21 @@ public class Device
   final static String[] mBleModels = { NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_BRIC5_2, NAME_SAP5, NAME_SAP5_2, NAME_SAP6, NAME_SAP6_2, NAME_CAVWAY, NAME_DISCOX };
 
   // DistoX2 / SAP6 commands
-  public static final int LASER_ON         =  1; // 0x36
-  public static final int LASER_OFF        =  0; // 0x37
-  public static final int MEASURE          =  2; // 0x38
-  public static final int MEASURE_DOWNLOAD =  3; // 0x38
-  public static final int CALIB_START      = 11; // 0x31 // FIXME_SAP6
-  public static final int CALIB_STOP       = 10; // 0x30
-  public static final int DEVICE_OFF       = 20; // 0x34
+  // commands
+  public static final int CALIB_OFF        = 0x30; // 10
+  public static final int CALIB_ON         = 0x31; // 11
+  public static final int CALIB_CONVERT    = 0x32; // Cavway same as SILENT_ON 
+  public static final int SILENT_ON        = 0x32; // DistoX2 DistoXBLE
+  public static final int SILENT_OFF       = 0x33;
+  public static final int DEVICE_OFF       = 0x34; // 20
+  public static final int DISTOX_35        = 0x35;
+  public static final int LASER_ON         = 0x36;
+  public static final int LASER_OFF        = 0x37;
+  public static final int MEASURE          = 0x38;
+
+  public static final int MEASURE_DOWNLOAD = 0x39; // 0x38
+  public static final int CALIB_START      = 0x31; // 11 // FIXME_SAP6
+  public static final int CALIB_STOP       = 0x30; // 10
 
   // FIXME VirtualDistoX
   // static final String ZERO_ADDRESS = "00-00-00-00-00-00";

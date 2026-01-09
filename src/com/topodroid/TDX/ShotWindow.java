@@ -394,7 +394,7 @@ public class ShotWindow extends Activity
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    // TDLog.v( TAG + "refresh display " + nr );
+    TDLog.v( "Shot Window refresh display " + nr + " toast " + toast );
     setConnectionStatus( mDataDownloader.getStatus() );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -2919,19 +2919,20 @@ public class ShotWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
       TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     } else {
-      // TDLog.v( TAG + "set button, status " + mBTstatus + " -> " + status );
+      TDLog.v( TAG + "set button, status " + mBTstatus + " -> " + status );
       if ( status != mBTstatus ) {
         mBTstatus = status;
         // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
+        boolean isBricOrCavway = TDInstance.isDeviceBric() || TDInstance.isDeviceCavway();
         switch ( status ) {
           case ConnectionState.CONN_CONNECTED:
             TDFeedback.notifyFeedback( this, true );
             TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
-            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (TDInstance.isDeviceBric() ? mBMbluetooth : mBMbluetooth_no ) );
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (isBricOrCavway ? mBMbluetooth : mBMbluetooth_no ) );
             break;
           case ConnectionState.CONN_WAITING:
             TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_wait );
-            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (TDInstance.isDeviceBric() ? mBMbluetooth : mBMbluetooth_no ) );
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (isBricOrCavway ? mBMbluetooth : mBMbluetooth_no ) );
             break;
           default:
             TDFeedback.notifyFeedback( this, false );

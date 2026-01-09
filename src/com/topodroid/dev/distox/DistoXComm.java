@@ -543,7 +543,7 @@ public class DistoXComm extends TopoDroidComm
   protected boolean setCalibMode( boolean turn_on )
   {
     // return sendCommand( turn_on? 0x31 : 0x30 ); 
-    return sendCommand( turn_on? DistoX.CALIB_ON : DistoX.CALIB_OFF );
+    return sendCommand( turn_on? Device.CALIB_ON : Device.CALIB_OFF );
   }
 
   // /** Toggle device calibration mode - same as TopoDroidComm

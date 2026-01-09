@@ -15,16 +15,6 @@ package com.topodroid.dev.distox;
 
 public class DistoX
 {
-  // commands
-  public static final int CALIB_OFF        = 0x30;
-  public static final int CALIB_ON         = 0x31;
-  public static final int SILENT_ON        = 0x32;
-  public static final int SILENT_OFF       = 0x33;
-  public static final int DISTOX_OFF       = 0x34;
-  public static final int DISTOX_35        = 0x35;
-  public static final int LASER_ON         = 0x36;
-  public static final int LASER_OFF        = 0x37;
-  public static final int MEASURE          = 0x38;
 
   // error codes
   public static final int DISTOX_ERR_OK           =  0; // OK: no error
