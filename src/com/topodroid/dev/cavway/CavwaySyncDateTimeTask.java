@@ -1,4 +1,4 @@
-/* @file DistoCavwayInfoReadTask.java
+/* @file CavwaySyncDateTimeTask.java
  *
  * @author Siwei Tian
  * @date Jul 2024
@@ -16,22 +16,26 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import android.os.AsyncTask;
+import android.content.Context;
 
 import java.lang.ref.WeakReference;
 
-public class CavwayInfoReadTask extends AsyncTask<Void, Integer, Boolean>
+public class CavwaySyncDateTimeTask extends AsyncTask<Void, Integer, Boolean>
 {
-  private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
-  private final WeakReference<CavwayInfoDialog> mDialog;
+  // private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
+  // private final WeakReference<CavwayInfoDialog> mDialog;
+  Context mContext;
+  CavwayComm mComm;
+  String mAddress; // device address
 
   /** cstr
-   * @param app    application
-   * @param dialog info display dialog
+   * @param comm   communication object
    */
-  public CavwayInfoReadTask( TopoDroidApp app, CavwayInfoDialog dialog )
+  public CavwaySyncDateTimeTask( Context ctx, CavwayComm comm, String address )
   {
-    mApp    = new WeakReference<TopoDroidApp>( app );
-    mDialog = new WeakReference<CavwayInfoDialog>( dialog );
+    mContext = ctx;
+    mComm    = comm;
+    mAddress = address;
   }
 
   /** execute the task in background
@@ -39,8 +43,7 @@ public class CavwayInfoReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground( Void... v )
   {
-    if ( mApp.get() == null ) return false;
-    return mApp.get().getCavwayInfo( mDialog.get() );
+    return mComm.syncDateTime( mAddress ); 
   }
 
   // @Override
@@ -52,9 +55,9 @@ public class CavwayInfoReadTask extends AsyncTask<Void, Integer, Boolean>
   protected void onPostExecute( Boolean result )
   {
     if ( result ) {
-      mDialog.get().updateHwFwSync();
+      TDToast.make( mContext.getResources().getString( R.string.cavway_synchronized ) );
     } else {
-      TDToast.makeWarn( R.string.warning_cavway_info );
+      TDToast.make( mContext.getResources().getString( R.string.cavway_sync_failed ) );
     }
   }
 

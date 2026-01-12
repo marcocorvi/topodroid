@@ -879,6 +879,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_current"   >Active</string>
     <string name="button_delete"    >Delete</string>
     <string name="button_duplicate" >Duplicate</string>
+    <string name="button_settime"   >Set time</string>
     <string name="button_surface"    copyable="fr">Surface</string>
     <string name="button_no_extend" >No extend</string>
     <string name="button_eval"      >Raw</string>
@@ -2423,6 +2424,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="warning_no_csv_type">CSV type not specified</string>
     <string name="warning_cavway_info">Failed to get Cavway info</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
+    <string name="cavway_sync_time">Synchronize the Cavway time ?</string>
+    <string name="cavway_sync_failed">Failed to synchronize Cavway time</string>
+    <string name="cavway_synchronized">Synchronized Cavway time</string>
+    <string name="cavway_sync_ok">Cavway time synchronized</string>
+    <string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string>
 
     <string name="done_fractals" translatable="false">Done fractals dims</string>
     <string name="done_convexhull">Done convex-hull walls</string>

@@ -56,6 +56,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 // import java.util.Timer;
@@ -92,6 +93,8 @@ public class CavwayComm extends TopoDroidComm
   private ListerHandler mLister = null;
   private String mAddress;
   private int    mTimeout;
+  public boolean mHasInfo = false;
+  public boolean mHasWritten = false;
 
   BluetoothGattCharacteristic mReadChrt  = null;
   BluetoothGattCharacteristic mWriteChrt = null;
@@ -177,6 +180,7 @@ public class CavwayComm extends TopoDroidComm
       TDLog.e("CONSUMER THREAD start with non-null consumer");
       return;
     }
+    if ( LOG ) TDLog.v("start consumer thread");
     mConsumer = new Thread() { // this is the thread that consumes data on the queue
       @Override public void run() {
         //mThreadConsumerWorking = true;
@@ -215,6 +219,7 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( mConsumer != null ) {
       // put a DATA_QUIT buffer on the queue
+      if ( LOG ) TDLog.v("stop consumer thread");
       mQueue.put( DATA_QUIT, new byte[0] );
     }
     mConsumer = null;
@@ -356,8 +361,7 @@ public class CavwayComm extends TopoDroidComm
   public boolean disconnectDevice()
   {
     if ( LOG ) TDLog.v( TAG + "\"disconnect device\": connected " + mBTConnected );
-    mReconnect = false;
-    // stopTimer();
+    mReconnect = false;  // was stopTimer();
     return closeDevice( false );
   }
 
@@ -472,7 +476,7 @@ public class CavwayComm extends TopoDroidComm
       CavwayData cw = new CavwayData( 0 );
       cw.setData( chrt.getValue() );
       // TDLog.v( TAG + cw.toString() );
-      // resetTimer();
+      // resetTimer(); // resetTimer was empty
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
       if ( LOG ) TDLog.v( TAG + "changed write chrt");
       // TDLog.v( TAG + "changed write chrt " + byteArray2String( chrt.getValue() ) );
@@ -489,7 +493,7 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) TDLog.v( TAG + "readed chrt " + bytes.length );
     mQueue.put( DATA_PRIM, bytes );
-    // resetTimer();
+    // resetTimer();  // resetTimer was empty
   }
 
   /** notified that bytes have been written to the write characteristics
@@ -615,7 +619,7 @@ public class CavwayComm extends TopoDroidComm
       // 202211XX
       mBTConnected  = true;
       notifyStatus( ConnectionState.CONN_CONNECTED );
-      // resetTimer();
+      // resetTimer();  // resetTimer was empty
       // TODO write a resend-interrupt to the DistoXBLE
     }
     return ret;
@@ -779,24 +783,64 @@ public class CavwayComm extends TopoDroidComm
   /** get DistoX-BLE hw/fw info, and display that on the Info dialog
    * @param info     Cavway info dialog
    * @return true on full success
+   * was read-set read-set read-set
    */
   public boolean getCavwayInfo( CavwayInfoDialog info )
   {
     if ( info == null ) return false;
     // TDLog.v( TAG + "get Cavway info");
-    if ( readMemory( CavwayDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
-      // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
-      info.SetVal( CavwayProtocol.PACKET_INFO_FIRMWARE, ((CavwayProtocol)mProtocol).mFirmVer);
-    } else {
-      return false;
+    mHasInfo = false;
+    if ( ! readMemoryNoWait( CavwayDetails.FIRMWARE_ADDRESS, 4 ) ) return false;
+    syncWait(500, "read fw");
+    if ( ! readMemoryNoWait( CavwayDetails.HARDWARE_ADDRESS, 4 ) ) return false;
+    syncWait(500, "read hw");
+    if ( ! readMemoryNoWait( CavwayDetails.TIMESTAMP_ADDRESS, 4 ) ) return false;
+    syncWait(500, "read time");
+    int cnt = 0;
+    while ( mHasInfo == false ) {
+      syncWait(1000, "read info");
+      if ( ++cnt >= 10 ) break;
     }
-    if ( readMemory( CavwayDetails.HARDWARE_ADDRESS, 4 ) != null ) {
-      // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
-      info.SetVal( CavwayProtocol.PACKET_INFO_HARDWARE, ((CavwayProtocol)mProtocol).mHardVer);
-    } else {
-      return false;
-    }
+    TDLog.v("Info fw " +  ((CavwayProtocol)mProtocol).mFirmVer 
+            + " hw " + ((CavwayProtocol)mProtocol).mHardVer
+            + " sync " + ((CavwayProtocol)mProtocol).mTimeStamp );
+    if ( ! mHasInfo ) return false;
+    info.setVal( CavwayProtocol.PACKET_INFO_FIRMWARE, ((CavwayProtocol)mProtocol).mFirmVer);
+    info.setVal( CavwayProtocol.PACKET_INFO_HARDWARE, ((CavwayProtocol)mProtocol).mHardVer);
+    info.setVal( CavwayProtocol.PACKET_INFO_TIMESTAMP, ((CavwayProtocol)mProtocol).mTimeStamp);
     return true;
+  }
+
+  // public Date readDateTime()
+  // {
+  //   byte[] tmp = readMemory( CavwayDetails.TIMESTAMP_ADDRESS, 4 );
+  //   long seconds = tmp[3]; // seconds since the epoch
+  //   seconds = ( seconds << 8 ) | tmp[2];
+  //   seconds = ( seconds << 8 ) | tmp[1];
+  //   seconds = ( seconds << 8 ) | tmp[0];
+  //   return new Date( seconds * 1000L );
+  // }
+
+  public boolean syncDateTime( String address )
+  {
+    if ( LOG ) TDLog.v( TAG + " set datetime address " + address );
+    if ( ! tryConnectDevice( address, null, 0 ) ) {
+      if ( LOG ) TDLog.v(" failed connect ");
+      closeDevice( true );
+      return false;
+    }
+    // no need to startConsumerThread(); - already running
+    Date date = new Date();
+    long seconds = date.getTime() / 1000L + 3601; // round up: add 1 for the millis fraction // FIXME Cavway time is off by 1 hour
+    if ( LOG ) TDLog.v( TAG + " set timestamp " + seconds );
+    byte[] tmp = new byte[4];
+    tmp[0] = (byte)( seconds       & 0xff ); // LSB
+    tmp[1] = (byte)( (seconds>> 8) & 0xff );
+    tmp[2] = (byte)( (seconds>>16) & 0xff );
+    tmp[3] = (byte)( (seconds>>24) & 0xff ); // MSB
+    boolean ret = writeMemory( CavwayDetails.TIMESTAMP_ADDRESS, tmp, 4 );
+    disconnectDevice();
+    return ret;
   }
 
   // --------------------------------------------------------
@@ -902,6 +946,29 @@ public class CavwayComm extends TopoDroidComm
     return null;
   }
 
+  /** read bytes from memory, asynchronously
+   * @param addr memory address
+   * @param len  number of bytes to read (between 0 and 124)
+   * @return true if successfully send the read command
+   * @note used to read FW HW time
+   */
+  private boolean readMemoryNoWait( int addr, int len )
+  {
+    // TDLog.v( TAG + "read memory " + addr + " " + len  );
+    if ( len < 0 || len > 124 ) return false;
+    byte[] cmd = new byte[4];
+    cmd[0] = 0x3d;
+    cmd[1] = (byte)(addr & 0xFF);
+    cmd[2] = (byte)((addr >> 8) & 0xFF);
+    cmd[3] = (byte)(len);
+    mPacketType = CavwayProtocol.PACKET_NONE;
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      TDLog.e( TAG + "failed enlist memory-write [1]" );
+      return false;
+    }
+    return true;
+  }
+
   /** read bytes from memory, synchronously
    * @param addr memory address
    * @param len  number of bytes to read (between 0 and 124)
@@ -918,7 +985,7 @@ public class CavwayComm extends TopoDroidComm
     cmd[3] = (byte)(len);
     mPacketType = CavwayProtocol.PACKET_NONE;
     if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
-      // TDLog.v( TAG + "failed enlist memory-write [1]" );
+      TDLog.e( TAG + "failed enlist memory-write [1]" );
       return null;
     }
     syncWait( 2000, "read memory" );
@@ -946,14 +1013,14 @@ public class CavwayComm extends TopoDroidComm
     return null;
   }
 
-  /** write 4 bytes to memory and wait synchronously for the reply packet
+  /** write 4 bytes to memory and wait synchronously for the reply packet 0x39
    * @param addr   memory address
    * @param data   4-byte array
    * @return true if the bytes have been written to memory 
    */
   public boolean writeMemory( int addr, byte[] data )
   {
-    // TDLog.v( TAG + "write memory " + addr + " bytes " + data.length );
+    if ( LOG ) TDLog.v( TAG + "write memory " + addr + " bytes " + data.length );
     if ( data.length < 4 ) return false;
     byte[] cmd = new byte[7];
     cmd[0] = CavwayData.BYTE_PACKET_REQST; // 0x39;
@@ -963,32 +1030,34 @@ public class CavwayComm extends TopoDroidComm
     cmd[4] = data[1];
     cmd[5] = data[2];
     cmd[6] = data[3];
+    mHasWritten = false;
+    ((CavwayProtocol) mProtocol).resetRepliedData();
     mPacketType = CavwayProtocol.PACKET_NONE;
     if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
-      // TDLog.v( TAG + "failed enlist memory-write [2]" );
+      if ( LOG ) TDLog.v( TAG + "failed enlist memory-write [2]" );
       return false;
     }
     syncWait( 2000, "write memory" );
-    // synchronized ( mNewDataFlag ) {
-    //   try {
-    //     long start = System.currentTimeMillis();
-    //     mNewDataFlag.wait(2000);
-    //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v( TAG + "write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
-    //   } catch ( InterruptedException e ) {
-    //     // TDLog.v( TAG + "interrupted" );
-    //     // e.printStackTrace();
-    //   }
-    // }
+    int cnt = 0;
+    while ( ! mHasWritten ) {
+      syncWait( 1000, "write memory" );
+      if ( cnt++ >= 10 ) break;
+    }
+    if ( ! mHasWritten ) {
+      TDLog.e("failed to write 4-bytes to memory");
+      // return false;
+    } else {
+      if ( LOG ) TDLog.v("write 0x39 OK");
+    }
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
       byte[] repliedbytes = ((CavwayProtocol) mProtocol).mRepliedData;
+      if ( LOG ) for ( int i=0; i<4; ++i) TDLog.v("Byte " + i + " : " + data[i] + " " + repliedbytes[i] );
       return Arrays.equals(data,repliedbytes);
     }
     return false;
   }
 
-
-  /** write an array of bytes to memory, synchronously
+  /** write an array of bytes to memory, synchronously 0x3E
    * @param addr   memory address
    * @param data   byte array (length must be at least len)
    * @param len    number of bytes to write (between 0 and 124)
@@ -1004,19 +1073,33 @@ public class CavwayComm extends TopoDroidComm
     cmd[1] = (byte)(addr & 0xFF);
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = (byte)len;
-    for(int i = 0;i < len;i++)
-      cmd[i+4] = data[i];
-    mPacketType = CavwayProtocol.PACKET_NONE;
+    for ( int i = 0; i < len; i++) cmd[i+4] = data[i];
+    ((CavwayProtocol) mProtocol).resetRepliedData();
+    mHasWritten = false;
+    // mPacketType = CavwayProtocol.PACKET_NONE;
     if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
       // TDLog.v( TAG + "failed enlist memory-write [3]" );
       return false;
     }
     syncWait( 2000, "write memory" );
-    if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
-      byte[] repliedbytes = ((CavwayProtocol) mProtocol).mRepliedData;
-      return Arrays.equals(data,repliedbytes);
+    int cnt = 0;
+    while ( ! mHasWritten ) {
+      syncWait( 1000, "write memory" );
+      if ( cnt++ >= 3 ) break;
     }
-    return false;
+    if ( ! mHasWritten ) { // somehow the protocol does not get a feedback
+      TDLog.e("failed to write 0x3e len " + len + " bytes to memory");
+      // return false;
+    } else {
+      if ( LOG ) TDLog.v("write 0x3E OK");
+    }
+    // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY )
+    if ( len == 4 && CavwayProtocol.PACKET_REPLY == CavwayProtocol.PACKET_REPLY ) {
+      byte[] repliedbytes = ((CavwayProtocol) mProtocol).mRepliedData;
+      for ( int i = 0; i < 4; i++) TDLog.v( String.format("%d %02x %02x", i, data[i], repliedbytes[i] ) );;
+      return Arrays.equals( data, repliedbytes );
+    }
+    return true; // false;
   }
 
   /** 0x38: start reading one data from cavway memory
@@ -1268,7 +1351,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public boolean tryConnectDevice( String address, ListerHandler lister, int data_type )
   {
-    if ( LOG ) TDLog.v( TAG + "try connect " + address );
+    if ( LOG ) TDLog.v( TAG + "try connect " + address + " conneted: " + mBTConnected );
     if ( ! mBTConnected ) {
       int timeout = 10;
       if ( ! connectDevice( address, lister, data_type, timeout ) ) {
@@ -1342,7 +1425,7 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v( TAG + "write coeff: length " + len );
     if ( len != 104 ) return false;
     if( ! tryConnectDevice( address, null, 0 )) {
-      // TDLog.v( TAG + "write coeff: failed connect address " + address );
+      if ( LOG ) TDLog.v( TAG + "write coeff: failed connect address " + address );
       return false;
     }
     boolean ret = true;

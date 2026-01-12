@@ -167,6 +167,22 @@ public class TDUtil
 
   // DATE and TIME -------------------------------------------------------------
 
+  // /** @return the current time [millis after the age]
+  //  */
+  // public static long getMillis()
+  // {
+  //   Date date = new Date();
+  //   return date.getTime();
+  // }
+
+  /** @return the current time [seconds after the age]
+   */
+  public static long getSeconds()
+  {
+    Date date = new Date();
+    return date.getTime() / 1000L; // round down
+  }
+
   /** @return a date string in TopoDroid date format yyyy.mm.dd
    * @param s  input date string 
    * The input date string can use either space, slash, colon, or dash in place of dot

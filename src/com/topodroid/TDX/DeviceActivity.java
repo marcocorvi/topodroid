@@ -1430,5 +1430,12 @@ public class DeviceActivity extends Activity
     progress.show();
   }
 
+  public void syncDateTime() 
+  { 
+    String address = TDInstance.deviceAddress();
+    if ( address != null ) mApp.syncDateTime( this, address );
+  }
+
+
 }
 

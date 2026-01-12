@@ -45,6 +45,7 @@ import com.topodroid.dev.distox1.DeviceA3Info;
 import com.topodroid.dev.distox2.DistoX310Comm;
 import com.topodroid.dev.distox2.DeviceX310Info;
 import com.topodroid.dev.distox2.DeviceX310Details;
+import com.topodroid.dev.cavway.CavwaySyncDateTimeTask;
 import com.topodroid.dev.sap.SapComm;
 import com.topodroid.dev.discox.DiscoXComm;
 import com.topodroid.dev.bric.BricComm;
@@ -3483,5 +3484,13 @@ public class TopoDroidApp extends Application
   //     // }
   //   }
   // }
+
+  public void syncDateTime( Context ctx, final String address )
+  {
+    if ( ! TDInstance.isDeviceCavway() ) return;
+    if ( mComm != null && mComm instanceof CavwayComm ) {
+      (new CavwaySyncDateTimeTask( ctx, (CavwayComm)mComm, address )).execute();
+    }
+  }
 
 }
