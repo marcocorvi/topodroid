@@ -57,6 +57,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 // import java.util.Timer;
@@ -831,8 +833,10 @@ public class CavwayComm extends TopoDroidComm
     }
     // no need to startConsumerThread(); - already running
     Date date = new Date();
-    long seconds = date.getTime() / 1000L + 3601; // round up: add 1 for the millis fraction // FIXME Cavway time is off by 1 hour
-    if ( LOG ) TDLog.v( TAG + " set timestamp " + seconds );
+    Calendar cal = new GregorianCalendar();
+    int timezoneseconds = ( cal.get( Calendar.ZONE_OFFSET ) + cal.get( Calendar.DST_OFFSET ) )/1000;
+    long seconds = date.getTime() / 1000L + timezoneseconds + 1; // round up: add 1 for the millis fraction // FIXME Cavway time is off by 1 hour
+    if ( LOG ) TDLog.v( TAG + " set timestamp " + seconds + " timezone " + timezoneseconds );
     byte[] tmp = new byte[4];
     tmp[0] = (byte)( seconds       & 0xff ); // LSB
     tmp[1] = (byte)( (seconds>> 8) & 0xff );

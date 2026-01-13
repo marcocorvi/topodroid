@@ -32,6 +32,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class CavwayInfoDialog extends MyDialog
         implements View.OnClickListener
@@ -130,8 +132,10 @@ public class CavwayInfoDialog extends MyDialog
     if ( mDone ) return;
     TDLog.v("Set type " + type + " long " + val );
     if ( type == CavwayProtocol.PACKET_INFO_TIMESTAMP ) {
-      mSyncOffset = val - TDUtil.getSeconds() - 3600; // FIXME Cavway time if off by one hour
-      TDLog.v("Sync offset " + mSyncOffset + " : " + TDUtil.getSeconds() + " - " + val );
+      Calendar cal = new GregorianCalendar();
+      int timezoneseconds = ( cal.get( Calendar.ZONE_OFFSET ) + cal.get( Calendar.DST_OFFSET ) )/1000;
+      mSyncOffset = val - TDUtil.getSeconds() - timezoneseconds;
+      TDLog.v("Sync offset " + mSyncOffset + " : " + TDUtil.getSeconds() + " - " + val + " timezoe " + timezoneseconds );
     } else {
       TDLog.v("Unexpected type " + type + " value " + val );
     }
@@ -181,15 +185,7 @@ public class CavwayInfoDialog extends MyDialog
   {
     Button b = (Button)view;
     if ( b == mBTsync ) {
-      TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(),
-                                mParent.getResources().getString( R.string.cavway_sync_time ),
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            mParent.syncDateTime();
-          }
-        }
-      );
+      mParent.syncDateTime();
     } else if ( b == mBTback ) {
       mDone = true;
     }

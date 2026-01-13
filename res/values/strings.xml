@@ -2424,7 +2424,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="warning_no_csv_type">CSV type not specified</string>
     <string name="warning_cavway_info">Failed to get Cavway info</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
-    <string name="cavway_sync_time">Synchronize the Cavway time ?</string>
     <string name="cavway_sync_failed">Failed to synchronize Cavway time</string>
     <string name="cavway_synchronized">Synchronized Cavway time</string>
     <string name="cavway_sync_ok">Cavway time synchronized</string>
