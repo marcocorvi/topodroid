@@ -860,6 +860,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_duplicate" >Dupliquer </string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >Surface   </string>
     <string name="button_no_extend" >Pas d\'extension</string>
     <string name="button_eval"      >Évaluation      </string>
@@ -2312,6 +2313,10 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="warning_no_csv_type">Type de CSV non spécifiéd</string>
     <string name="warning_cavway_info">Échec d\'obtention d\'infos Cavway</string>
     <string name="no_permissions">L\'application ne peut pas fonctionner sans les autorisations requises.</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
     
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>
     <string name="fail_convexhull">Erreur parois enveloppe convexe</string>

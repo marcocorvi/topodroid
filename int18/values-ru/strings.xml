@@ -856,6 +856,7 @@
     <string name="button_current"   >Текущий</string>
     <string name="button_delete"    >Удалить</string>
     <string name="button_duplicate" >Дубликаты</string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >Поверхностные</string>
     <string name="button_no_extend" >Нет напр. развертки </string>
     <string name="button_eval"      >Вычислить    </string>
@@ -2359,6 +2360,10 @@
     <string name="warning_no_csv_type">CSV тип не указан</string>
     <string name="warning_cavway_info">Не удалось считать информацию о Cavway</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
 
     <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->
     <string name="done_convexhull">Завершено convex-hull стены</string>

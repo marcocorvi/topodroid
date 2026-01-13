@@ -858,6 +858,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_current"   >Activa</string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >Superficie   </string>
     <string name="button_no_extend" >No extendida </string>
     <string name="button_eval"      >Eval      </string>
@@ -2385,6 +2386,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="warning_no_csv_type">Tipo CSV no especificado</string>
     <string name="warning_cavway_info">Fallo al obtener la información de Cavway</string>
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->
 	  

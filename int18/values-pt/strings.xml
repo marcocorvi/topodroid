@@ -800,6 +800,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_current">Selecionar</string>
   <string name="button_delete">Apagar     </string>
   <string name="button_duplicate">Duplicadas</string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
   <string name="button_surface">Superfície</string>
   <string name="button_no_extend">Fora perfil</string>
   <string name="button_eval">Brutos</string>
@@ -2210,6 +2211,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="warning_no_csv_type">Tipo de CSV não definido</string>
   <string name="warning_cavway_info">Falha ao obter informações sobre Cavway</string>
   <string name="no_permissions">O app não pode funcionar sem as permissões necessárias</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
   <string name="done_convexhull">Paredes dos planos convexos prontas</string>
   <string name="fail_convexhull">Falha nas paredes dos planos convexos</string>
   <string name="done_powercrust">Paredes do powercrust prontas</string>

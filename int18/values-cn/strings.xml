@@ -861,6 +861,7 @@
     <string name="button_current"   >激活    </string>
     <string name="button_delete"    >删除    </string>
     <string name="button_duplicate" >副本 </string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >表面   </string>
     <string name="button_no_extend" >无延展</string>
     <string name="button_eval"      >复运算      </string>
@@ -2372,6 +2373,10 @@
     <string name="warning_no_csv_type">没有指定CSV类型</string>
     <string name="warning_cavway_info">无法获取Cavway信息</string>
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
 
     <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->
     <string name="done_convexhull">凸起外壳洞壁已完成</string>

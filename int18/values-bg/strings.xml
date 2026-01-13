@@ -861,6 +861,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_current">Активен</string>
     <string name="button_delete">Изтрий</string>
     <string name="button_duplicate">Дубликат</string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface">Повърхност</string>
     <string name="button_no_extend">Без удължаване</string>
     <string name="button_eval">Необработен</string>
@@ -2348,6 +2349,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="warning_no_csv_type">CSV не е посочен</string>
     <string name="warning_cavway_info">Неуспешно получаване на информация за Cavway</string>
     <string name="no_permissions">Приложението не може да работи без необходимите разрешения</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
 
     <string name="done_convexhull">Стените на изпъкналото тяло са готови</string>
     <string name="fail_convexhull">Стените на изпъкналото тяло не могат да бъдат завършени</string>

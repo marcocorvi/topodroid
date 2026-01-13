@@ -855,6 +855,7 @@
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_duplicate" >Duplicato   </string>
+    <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >Superfice   </string>
     <string name="button_no_extend" >Manca Extend</string>
     <string name="button_eval"      >Calcola   </string>
@@ -2367,6 +2368,10 @@
     <string name="warning_no_csv_type">Tipo CSV non specificato</string>
     <string name="warning_cavway_info">Informazioni Cavway fallite</string>
     <string name="no_permissions">L\'app non puó funzionare senza i permessi richiesti</string>
+    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
+    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
+    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
+    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
 
     <!-- UNUSED string name="done_fractals">Dimensione frattale calcolata</string -->
     <string name="done_convexhull">Inviluppo-convesso calcolato</string>
