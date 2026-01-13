@@ -861,7 +861,7 @@
     <string name="button_current"   >Aktív</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
-    <!-- TODO string name="button_settime"   >Set time</string -->
+    <string name="button_settime"   >Óra beállítás</string>
     <string name="button_surface"   >Felület</string>
     <string name="button_no_extend" >Nincs kiterítés</string>
     <string name="button_eval"      >Nyers</string>
@@ -2383,10 +2383,10 @@
     <string name="warning_no_csv_type">CSV típus nincs meghatározva</string>
     <string name="warning_cavway_info">Cavway info lekérés sikertelen</string>
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
-    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
-    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
-    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
-    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
+    <string name="cavway_sync_failed">Nem sikerült szinkronizálni a Cavway óráját</string>
+    <string name="cavway_synchronized">Cavway órájának szinkronizálása</string>
+    <string name="cavway_sync_ok">Cavway órája szinkronizálva</string>
+    <string name="cavway_sync_offset">Cavway idő eltolódás: %1$d [perc]</string>
 
     <!-- UNUSED string name="done_fractals">Kész fraktál dimenziók</string -->
     <string name="done_convexhull">Kész konvex-hajótest falak</string>
