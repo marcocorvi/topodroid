@@ -233,6 +233,7 @@ public class TDSetting
   public static boolean mKeyboard = false;
   public static boolean mNoCursor = true;
   public static boolean mBulkExport = false;
+  public static String  mGeminiApiKey  = null;
   public static boolean mLocalManPages = true;
   public static float mItemButtonSize  = 5.0f;    // used in ItemButton
   // public static float mItemPathScale   = 2.0f; // referred from DrawingWindow
@@ -1052,6 +1053,7 @@ public class TDSetting
     mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( key[4].key, key[4].dflt ), false ); // DISTOX_LOCAL_MAN
     setLocale( prefs.getString( key[5].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
     mOrientation = Integer.parseInt( prefs.getString( key[6].key, key[6].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
+    String mGeminiApiKey = prefs.getString( key[7].key, key[7].dflt );
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1596,6 +1598,8 @@ public class TDSetting
       mOrientation = tryIntValue( hlp, k, v, key[6].dflt );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
+    } else if ( k.equals( key[ 7 ].key ) ) {           // DISTOX_GEMINI
+      mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
     /* ---- IF_COSURVEY
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
@@ -3334,6 +3338,7 @@ public class TDSetting
         for ( int k = 0; k < n2; ++k ) {
           if ( TDPrefKey.repeatedKey( j, k ) ) continue;
           TDPrefKey kay = TDPrefKey.getKey( j, k );
+          if ( kay.key.equals("DISTOX_GEMINI") ) continue; 
           if ( ( flag & (1<<kay.group) ) != 0 ) {
             String val;
             boolean bval;
@@ -3807,6 +3812,9 @@ B DISTOX_SAP5_BIT16_BUG true
               break;
             case "DISTOX_BULK_EXPORT":
               mBulkExport = Boolean.parseBoolean( value ); setPreference( editor, kay, mBulkExport );
+              break;
+            case "DISTOX_GEMINI":
+              /* Gemini API key is not imported */
               break;
             // case "DISTOX_LOCAL_MAN":
             //   setPreference( editor, kay, mLocalManPages );

@@ -45,10 +45,12 @@ public class ExportDialogShot extends MyDialog
                    , View.OnClickListener
 {
   private Button   mBtnOk;
-  private Button   mBtnCompassSurvey;
-  private Button   mBtnWinkarstSurvey;
-  // private Button   mBtnCSurveySurvey;
+  private Button mBtnCompassSurvey;
+  private Button mBtnWinkarstSurvey;
+  // private Button mBtnCSurveySurvey;
   // private Button   mBtnBack;
+  private CheckBox mCBcompassPrefix;
+  private CheckBox mCBwinkarstPrefix;
 
   private final IExporter mParent;
   private String[]  mTypes; // list of types in drop down 
@@ -133,8 +135,12 @@ public class ExportDialogShot extends MyDialog
 
     mBtnCompassSurvey = (Button) findViewById( R.id.compass_prefix_survey );
     mBtnCompassSurvey.setOnClickListener( this );
+    mCBcompassPrefix = (CheckBox) findViewById( R.id.compass_prefix_cb );
+
     mBtnWinkarstSurvey = (Button) findViewById( R.id.winkarst_prefix_survey );
     mBtnWinkarstSurvey.setOnClickListener( this );
+    mCBwinkarstPrefix = (CheckBox) findViewById( R.id.winkarst_prefix_cb );
+
     // mBtnCSurveySurvey = (Button) findViewById( R.id.csurvey_prefix_survey );
     // mBtnCSurveySurvey.setOnClickListener( this );
 
@@ -157,6 +163,13 @@ public class ExportDialogShot extends MyDialog
       // ((EditText) findViewById( R.id.csurvey_prefix )).setFocusable( false );
       ((EditText) findViewById( R.id.trobot_name )).setFocusable( false );
       ((EditText) findViewById( R.id.vtopo_series )).setFocusable( false );
+    }
+
+    if ( ! TDString.isNullOrEmpty( TDSetting.mExportPrefix ) ) {
+      mCBcompassPrefix.setChecked( true );
+      mCBwinkarstPrefix.setChecked( true );
+      ((EditText) findViewById( R.id.compass_prefix )).setText( mSurvey );
+      ((EditText) findViewById( R.id.winkarst_prefix )).setText( mSurvey );
     }
 
     initOptions();
@@ -235,17 +248,20 @@ public class ExportDialogShot extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    Button b = (Button)v;
-    if ( b == mBtnCompassSurvey ) {
-      setPrefix( (EditText) findViewById( R.id.compass_prefix ), b );
+    if ( v.getId() == R.id.compass_prefix_survey ) {
+      setPrefix( (EditText) findViewById( R.id.compass_prefix ), (Button)findViewById(  R.id.compass_prefix_survey ) );
       return;
-    } else if ( b == mBtnWinkarstSurvey ) {
-      setPrefix( (EditText) findViewById( R.id.winkarst_prefix ), b );
+    } 
+    if ( v.getId() == R.id.winkarst_prefix_survey ) {
+      setPrefix( (EditText) findViewById( R.id.winkarst_prefix ), (Button)findViewById(  R.id.winkarst_prefix_survey ) );
       return;
-    // } else if ( b == mBtnCSurveySurvey ) {
+    }
+    // if ( v.getId() == csurvey_prefix_survey ) {
     //   ((EditText) findViewById( R.id.csurvey_prefix )).setText( mSurvey );
     //   return;
-    } else if ( b == mBtnOk && mSelected != null ) {
+    // }
+    Button b = (Button)v;
+    if ( b == mBtnOk && mSelected != null ) {
       if ( ! setOptions() ) return;
       TDLog.v("Survey format selected " + mSelected + " pos " + mSelectedPos + ": " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName  + " prefix " + mExportPrefix );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
@@ -411,7 +427,8 @@ public class ExportDialogShot extends MyDialog
           // TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.compass_prefix )).isChecked();
           TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.compass_splays )).isChecked();
           TDSetting.mSwapLR = ((CheckBox) findViewById( R.id.compass_swap_lr )).isChecked();
-          setExportPrefix( ((EditText) findViewById( R.id.compass_prefix )).getText() );
+          if ( mCBcompassPrefix.isChecked() )
+            setExportPrefix( ((EditText) findViewById( R.id.compass_prefix )).getText() );
         }
         break;
       case TDConst.SURVEY_POS_CSURVEY: // CSurvey
@@ -486,7 +503,8 @@ public class ExportDialogShot extends MyDialog
         break;
       case TDConst.SURVEY_POS_WINKARST: // Winkarst
         {
-          setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
+          if ( mCBwinkarstPrefix.isChecked() )
+            setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
         }
         break;
       case TDConst.SURVEY_POS_CSV: //CSV
@@ -582,7 +600,7 @@ public class ExportDialogShot extends MyDialog
     ((EditText) findViewById( R.id.trobot_index )).setHint("-1");
     ((CheckBox) findViewById( R.id.jean_botazzi )).setChecked( TDSetting.TRobotJB );
 
-    if ( TDSetting.mExportPrefix != null ) {
+    if ( ! TDString.isNullOrEmpty( TDSetting.mExportPrefix ) ) {
       ((EditText)findViewById( R.id.vtopo_series )).setText( TDSetting.mExportPrefix );
     }
   }

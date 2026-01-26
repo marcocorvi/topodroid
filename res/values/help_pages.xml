@@ -25,6 +25,8 @@
   <string name="CWDActivity" translatable="false">page_cwd.htm</string>
   <!-- string name="CBDdialog" translatable="false">page_cwd.htm</string -->
 
+  <string name="AIdialog" translatable="false">page_ai_dialog</string>
+
   <string name="AzimuthDialog" translatable="false">page_azimuth.htm</string>
   <string name="AudioDialog" translatable="false">page_audio.htm</string>
   <string name="AudioListDialog" translatable="false">page_audio_list.htm</string>

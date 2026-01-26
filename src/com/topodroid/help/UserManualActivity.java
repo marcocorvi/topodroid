@@ -37,6 +37,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.net.Uri;
+// import google.android.material.floatingactionbutton.FloatingActionButton;
+// import com.google.ai.client.generativeai.GenerativeModel;
+// import com.google.ai.client.generativeai.type.Content;
+// import com.google.ai.client.generativeai.java.GenerativeModelFeature;
 
 // import android.widget.TextView;
 import android.widget.ImageView;
@@ -260,6 +264,9 @@ public class UserManualActivity extends Activity
     adapter.add( getResources().getString( R.string.man_content ) );
     adapter.add( getResources().getString( R.string.man_index ) );
     adapter.add( getResources().getString( R.string.man_website ) );
+    if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+      adapter.add( getResources().getString( R.string.man_gemini ) );
+    }
  
     mList.setAdapter( adapter );
     mList.setVisibility( View.GONE );
@@ -306,6 +313,10 @@ public class UserManualActivity extends Activity
       }
     } else if ( pos == 18 ) { // website
       viewUrl( WEBSITE );
+    } else if ( pos == 19 ) {
+      if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+        (new AIdialog( this, this, TDSetting.mGeminiApiKey )).show();
+      }
     } else {
       // getManualFromWeb();
       TDToast.makeBad( R.string.no_manual );

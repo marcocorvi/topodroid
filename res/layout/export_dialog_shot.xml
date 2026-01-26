@@ -74,9 +74,16 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
+      <CheckBox android:id="@+id/compass_prefix_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/export_prefix_hint"
+        android:layout_marginEnd="@dimen/margintiny" 
+        />
       <Button android:id="@+id/compass_prefix_survey"
         style="@style/button_default"
         android:text="@string/export_prefix_reset"
+        android:layout_marginEnd="@dimen/margintiny"
         />
       <EditText android:id="@+id/compass_prefix"
         android:layout_width="fill_parent" 
@@ -334,9 +341,16 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
+      <CheckBox android:id="@+id/winkarst_prefix_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/export_prefix_hint"
+        android:layout_marginEnd="@dimen/margintiny" 
+        />
       <Button android:id="@+id/winkarst_prefix_survey"
         style="@style/button_default"
         android:text="@string/export_prefix_reset"
+        android:layout_marginEnd="@dimen/margintiny"
         />
       <EditText android:id="@+id/winkarst_prefix"
         android:layout_width="match_parent" 

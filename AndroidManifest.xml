@@ -46,7 +46,7 @@
        android:targetSdkVersion="36"
        tools:ignore="GradleOverrides,OldTargetApi"
     />
-    <!-- android:maxSdkVersion="29" -->
+    <!-- android:maxSdkVersion="29" min 21 -->
 
     <queries>
       <!-- package android:name="com.topodroid.Cave3D" / -->

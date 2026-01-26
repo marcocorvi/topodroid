@@ -147,6 +147,7 @@ class TDPrefKey
     new TDPrefKey( A,       GEN, "DISTOX_LOCAL_MAN",       R.string.pref_local_help_title,   R.string.pref_local_help_summary,    TDString.ZERO, R.array.localUserMan, R.array.localUserManValue ),
     new TDPrefKey( N,       GEN, "DISTOX_LOCALE",          R.string.pref_locale_title,       R.string.pref_locale_summary,        TDString.EMPTY, R.array.locale, R.array.localeValue ), 
     new TDPrefKey( T,       UI,  "DISTOX_ORIENTATION",     R.string.pref_orientation_title,  R.string.pref_orientation_summary,   TDString.ZERO,  R.array.orientation, R.array.orientationValue ),
+    new TDPrefKey( E, STR,  GEN, "DISTOX_GEMINI",          R.string.pref_gemini_title,       R.string.pref_gemini_summary,        TDString.EMPTY ),
     new TDPrefKey( B,       NON, "DISTOX_EXPORT_PREF",     R.string.pref_cat_import_export ),
     new TDPrefKey( B,       NON, "DISTOX_SURVEY_PREF",     R.string.pref_cat_survey      ),
     new TDPrefKey( B,       NON, "DISTOX_PLOT_PREF",       R.string.pref_cat_drawing     ),
@@ -1054,7 +1055,8 @@ class TDPrefKey
    */
   static boolean repeatedKey( int j, int k ) 
   {
-    return ( j ==  3 && k > 5 )  // mCalib : not repeated but not to export
+    return ( j ==  0 && k == 7 ) // DISTOX_GEMINI is not exported
+        || ( j ==  3 && k > 5 )  // mCalib : not repeated but not to export
         || ( j == 11 && k < 7 )  // mLine
         || ( j == 12 && k < 3 )  // mPoint
         || ( j == 14 )           // mErase
