@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-<!-- IMPORTANT: DO NOT FORGET TO ESCAPE APOSTROIPHE -->
+<!-- IMPORTANT: DO NOT FORGET TO ESCAPE APOSTROPHE -->
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Impossible de récupérer le manuel depuis Internet</string>
