@@ -66,14 +66,14 @@
     <string name="hsplay">Гор.</string>
     <string name="vsplay">Верт.</string>
 
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
+    <string name="pref_gen">Общие</string>
+    <string name="pref_ui">Пользовательский интерфейс</string>
+    <string name="pref_data">Данные</string>
+    <string name="pref_plot">Абрисы</string>
+    <string name="pref_3d">3D вьюер</string>
+    <string name="pref_io">Экспорт</string>
+    <string name="pref_bt">Bluetooth</string>
+    <string name="pref_cal">Калибровка</string>
 
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
@@ -83,12 +83,12 @@
     <string name="memoryA3">Память DistoX A3</string>
     <string name="memoryX310">Память DistoX X310</string>
     <string name="memoryXBLE">Память DistoX-BLE</string>
-    <!-- TODO string name="memoryCavway">Cavway memory</string -->
+    <string name="memoryCavway">Память Cavway</string>
     <!-- UNUSED string name="memory_data">DistoX данные</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
     <string name="thp_section">сечение</string>
-    <!-- TODO string name="thp_picture">picture</string -->
+    <string name="thp_picture">картинка</string>
     <string name="thp_station">пикет</string>
     <!-- UNUSED string name="thp_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
@@ -108,7 +108,7 @@
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
     <string name="bad_station_name">Недопустимый номер пикета</string>
-    <!-- TODO string name="invalid_name">Invalid name</string -->
+    <string name="invalid_name">Неверное имя</string>
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
@@ -240,7 +240,7 @@
     <!-- CHANGED string name="strike_dip">Простирание %1$.0f Падение %2$.0f</string -->
     <string name="strike_dip">Азимут простирания %1$.0f Угол падения %2$.0f</string>
 
-    <!-- TODO string name="few_points">Too few data points</string -->
+    <string name="few_points">Слишком мало данных</string>
     <string name="few_data">Недостаточно данных</string>
     <string name="few_iter">Ошибка: Слишком много итераций\nПроверьте данные калибровки</string>
     <string name="few_groups">Недостаточно данных с номером группы</string>
@@ -250,7 +250,7 @@
     <string name="few_calibs">Недостаточно калиб. замеров</string>
     <string name="getting_info">Получение информации о DistoX&#8230;</string>
     <string name="gettingble_info">Получение данных о DistoX-BLE &#8230;</string>
-    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
+    <string name="gettingCavway_info">Получение информации о Cavway &#8230;</string>
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
@@ -489,7 +489,7 @@
     <string name="menu_device">ПРИБОР</string>
     <string name="menu_device_add">ДОБАВИТЬ УСТРОЙСТВО</string>
     <string name="menu_export">Экспорт</string>
-    <!-- TODO string name="menu_exit">EXIT</string -->
+    <string name="menu_exit">ВЫХОД</string>
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_geopoint_app">ПРИЛОЖЕНИЕ ГЕОПРИВЯЗКИ</string>
     <string name="menu_recover">Восстановить</string>
@@ -746,8 +746,8 @@
     <string name="zip_saved">Сохранено </string>
     <string name="zip_failed">Ошибка survey-zip</string>
     <string name="zip_share_failed">Невозможно поделиться zip-архивом</string>
-    <!-- TODO string name="file_share_failed">Unable to share file</string -->
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+    <string name="file_share_failed">Не удалось поделиться файлом</string>
+    <string name="file_share_no_app">Нет приложения для обмена файлами</string>
     <string name="unzip_fail">Ошибка survey-unzip</string>
     <string name="unzip_fail_sqlite">Ошибка SQL: удалите съёмку и попробуйте снова</string>
     <string name="unzip_fail_survey">Ошибка: несовпадение названия съёмки</string>
@@ -837,7 +837,7 @@
     <string name="ask_gps_service">Включить сервис GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Удалить резервные копии абрисов?</string -->
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+    <string name="ask_clear_equates">Удалить все соединения?</string>
 
     <string name="button_add"       >Добавить</string>
     <string name="button_apply"     >Применить</string>
@@ -856,7 +856,7 @@
     <string name="button_current"   >Текущий</string>
     <string name="button_delete"    >Удалить</string>
     <string name="button_duplicate" >Дубликаты</string>
-    <!-- TODO string name="button_settime"   >Set time</string -->
+    <string name="button_settime"   >Установить время</string>
     <string name="button_surface"   >Поверхностные</string>
     <string name="button_no_extend" >Нет напр. развертки </string>
     <string name="button_eval"      >Вычислить    </string>
@@ -905,7 +905,7 @@
     <string name="button_left"      >ЛЕВО</string>
     <string name="button_right"     >ПРАВО</string>
     <string name="button_clear"     >Очистить  </string>
-    <!-- TODO string name="button_clear_all" >Clear all</string -->
+    <string name="button_clear_all" >Очистить все</string>
     <string name="button_clear_day" >Очистить 1d  </string>
     <string name="button_clear_week">Очистить 7d  </string>
     <string name="button_clear_memory">Очистить память</string>
@@ -1193,7 +1193,7 @@
     <!-- UNUSED string name="help_save">Сохранить нзменения информации о съёмке</string -->
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
     <string name="help_export_survey">Экспорт съёмки</string>
-    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
+    <string name="help_export_surveys">Экспорт всех съемок</string>
     <string name="help_loc">GPS привязка</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
@@ -1223,7 +1223,7 @@
     <string name="help_export_config">Экспортировать проект</string>
     <string name="help_delete_config">Удалить проект</string>
     <string name="help_add_equate">Добавить соединение съёмок</string>
-    <!-- TODO string name="help_all_equates">All possible equates</string -->
+    <string name="help_all_equates">Все возможные соединения</string>
     <string name="help_equates">Список соединений съёмки</string>
     <string name="help_stations_minus">Показать меньше пикетов</string>
     <string name="help_stations_plus">Показать меньше пикетов</string>
@@ -1376,8 +1376,8 @@
     <!-- UNUSED string name="title_settings_png">PNG настройки экспорта</string -->
     <string name="title_settings_gpx">GPX настройки экспорта</string>
     <string name="title_settings_kml">KML настройки экспорта</string>
-    <string name="title_settings_srv">Wallsнастройки экспорта</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+    <string name="title_settings_srv">Walls настройки экспорта</string>
+    <string name="title_settings_ply">настройки экспорта нитки хода</string>
 
     <string name="title_settings_sketch">TopoDroid настройки 3d абриса</string>
     <string name="title_settings_survey">TopoDroid настройки топосъёмки</string>
@@ -1442,8 +1442,8 @@
 
   <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
-  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
+  <string name="pref_bulk_export_title">Пакетный экспорт</string>
+  <string name="pref_bulk_export_summary">Экспорт данных всех съемок в пакетном режиме</string>
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
   <string name="pref_export_plot_summary">Формат по умолчанию для экспорта абрисов</string>
   <string name="pref_export_shots_title">Формат экспорта съёмки</string>
@@ -2135,9 +2135,9 @@
     <string name="title_export">Экспортировать проект как &#8230;</string>
     <string name="title_equates">Соединения в проекте</string>
     <string name="title_equate_new">Добавить соединение &#8230;</string>
-    <!-- TODO string name="button_equate_all">All</string -->
-    <!-- TODO string name="button_equate_one">One</string -->
-    <!-- TODO string name="button_equate_search">Search</string -->
+    <string name="button_equate_all">Все</string>
+    <string name="button_equate_one">Один</string>
+    <string name="button_equate_search">Поиск</string>
     <string name="title_equate_with">Соединить %1$s с %2$s</string>
     <!-- UNUSED string name="title_cwd">Текущий рабочий каталог</string -->
     <string name="title_drop">Удалить съёмки ?</string>
@@ -2360,10 +2360,10 @@
     <string name="warning_no_csv_type">CSV тип не указан</string>
     <string name="warning_cavway_info">Не удалось считать информацию о Cavway</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
-    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
-    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
-    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
-    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
+    <string name="cavway_sync_failed">Не удалось синхронизировать время Cavway</string>
+    <string name="cavway_synchronized">Синхронизиация время Cavway</string>
+    <string name="cavway_sync_ok">Время Cavway синхронизировано</string>
+    <string name="cavway_sync_offset">Смещение времени Cavway: %1$d [min]</string>
 
     <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->
     <string name="done_convexhull">Завершено convex-hull стены</string>
