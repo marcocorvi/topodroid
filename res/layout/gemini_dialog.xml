@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+
+  <EditText android:id="@+id/api_key"
+    style="@style/edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:textSize="@dimen/textsize"
+    android:inputType="text"
+    android:hint="@string/hint_api_key"
+    android:importantForAutofill="no"
+  /> 
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="start"
+    >
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+    />
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_close"
+      />
+      <Button android:id="@+id/button_view"
+        style="@style/button_default"
+        android:text="@string/button_view"
+      />
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,5 @@
 <html><body>
-<h3>[15] 3D VIEWER (Cave3D)</h3>
+<h3>[15] 3D VIEWER</h3>
 
 TopoDroid 3D viewer is designed for use in cave and it does not require internet connection.<br>
 It can load also other file formats: Therion (th, thconfig), Loch (lox), Compass (dat, mak), Survex (3d), and VisualTopo (tro, trox).<br><p>
@@ -188,11 +188,13 @@ along the survey (profile view). Their display is enabled through the "walls" me
 <b>SURFACE</b><br>
 For Topodroid models, a surface (Digital Elevation Model) can be added from a DEM file.
 If externally loaded Therion or Loch models contain surface data (Digital Elevation Model and optionally a texture), the surface can be displayed either gray or with the texture.<br>
-The surface dialog has a button to load a DEM from a file. The supported formats are ascii (.asc or .ascii) and Therion grid (.grid).<br>
+The surface dialog has a button to load a DEM from a file.
+The supported formats are ascii (.asc or .ascii) and Therion grid (.grid).
+Furthermore, there is experimental support for HGT files.<br>
 Only the relevant portion of the DEM file is loaded. The DEM extent must cover the area of the model.<br>
 
 <p>
-The Esri ASCII Format must use a header like in the following example:<br>
+Files in <b>Esri ASCII Format</b> must have a header like in the following example:<br>
 <pre>
   ncols 374
   nrows 225
@@ -205,18 +207,17 @@ The Esri ASCII Format must use a header like in the following example:<br>
 </pre>
 If the number of rows or columns is negative, the data is in reverse order. This option is not included in the original Esri format!<br><p>
   
-A Therion grid file must use a header like in the following example and may contain comments on lines starting with "#":<br>
+<b>Therion grid</b> files must use a header like in the following example and may contain comments on lines starting with "#":<br>
 <pre>
   grid 7.444608 46.947922 0.000213 0.000213 374 225
   567.1 567.2 ...
   ...
 </pre>
+<br><p>
 
-<p>Coordinate Reference Systems (CRS):</p>
-<p>
+<b>Coordinate Reference Systems (CRS):</b><br>
 The fixed stations of the survey and the DEM data file must all be in the same (cartographic) Coordinate Reference System.<br>
 By default, WGS84 is used, so the coordinates and cell size must be entered in degrees (with six or more decimals for good accuracy).<br>
-</p>
 <p>
 To use a different CRS, all fixed stations must be transformed into that other CRS using the "Convert" button in the respective "Geo-Points" dialog.
 Notice: the separately available app "Proj4" must be installed as well (do not use the version from Play Store but the more current one from the Topodroid Website).

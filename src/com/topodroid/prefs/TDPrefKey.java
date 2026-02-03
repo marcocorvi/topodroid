@@ -147,7 +147,6 @@ class TDPrefKey
     new TDPrefKey( A,       GEN, "DISTOX_LOCAL_MAN",       R.string.pref_local_help_title,   R.string.pref_local_help_summary,    TDString.ZERO, R.array.localUserMan, R.array.localUserManValue ),
     new TDPrefKey( N,       GEN, "DISTOX_LOCALE",          R.string.pref_locale_title,       R.string.pref_locale_summary,        TDString.EMPTY, R.array.locale, R.array.localeValue ), 
     new TDPrefKey( T,       UI,  "DISTOX_ORIENTATION",     R.string.pref_orientation_title,  R.string.pref_orientation_summary,   TDString.ZERO,  R.array.orientation, R.array.orientationValue ),
-    new TDPrefKey( E, STR,  GEN, "DISTOX_GEMINI",          R.string.pref_gemini_title,       R.string.pref_gemini_summary,        TDString.EMPTY ),
     new TDPrefKey( B,       NON, "DISTOX_EXPORT_PREF",     R.string.pref_cat_import_export ),
     new TDPrefKey( B,       NON, "DISTOX_SURVEY_PREF",     R.string.pref_cat_survey      ),
     new TDPrefKey( B,       NON, "DISTOX_PLOT_PREF",       R.string.pref_cat_drawing     ),
@@ -835,6 +834,7 @@ class TDPrefKey
     new TDPrefKey( T, BOOL, GEN, "DISTOX_BULK_EXPORT",   R.string.pref_bulk_export_title,   R.string.pref_bulk_export_summary,   FALSE ),
     new TDPrefKey( T, BOOL, BT,  "DISTOX_PACKET_LOGGER", R.string.pref_packet_logger_title, R.string.pref_packet_logger_summary, FALSE ),
     new TDPrefKey( T, BOOL, XT,  "DISTOX_TH2_EDIT",      R.string.pref_th2_edit_title,      R.string.pref_th2_edit_summary,      FALSE ),
+    new TDPrefKey( E, BTN,  GEN, "DISTOX_GEMINI",          R.string.pref_gemini_title,       R.string.pref_gemini_summary,        TDString.EMPTY ),
     new TDPrefKey( A,       NON, "DISTOX_GEEK_SHOT",     R.string.pref_cat_survey        ),
     new TDPrefKey( T,       NON, "DISTOX_GEEK_SPLAY",    R.string.pref_cat_splay         ),           
     new TDPrefKey( A,       NON, "DISTOX_GEEK_PLOT",     R.string.pref_cat_drawing       ),
@@ -843,7 +843,9 @@ class TDPrefKey
     new TDPrefKey( T,       NON, "DISTOX_GEEK_IMPORT",   R.string.pref_cat_import_export ),
     new TDPrefKey( D,       NON, "DISTOX_SKETCH_PREF",   R.string.pref_cat_sketch        ),
     new TDPrefKey( D, XTR,  GEN, "DISTOX_WITH_DEBUG",    R.string.pref_with_debug_title,  R.string.pref_with_debug_summary, FALSE ),
-  };                
+  };
+
+  static final int IDX_DEBUG = 16; // index of DISTOX_WITH_DEBUG
 
   /** additional import settings
    * 

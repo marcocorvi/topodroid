@@ -129,7 +129,6 @@ git-pull:
 help:
 	@echo "Actions: [default] install clean lint, signed md5 pdf symbols, git-add git-pull, log perms"
 
-
 SRC = \
   ./AndroidManifest.xml \
   ./ant/* \
@@ -182,7 +181,19 @@ SRC = \
   ./src/com/topodroid/tdm/*.java \
   ./src/com/topodroid/trb/*.java \
   ./src/com/topodroid/ui/*.java \
-  ./src/com/topodroid/utils/*.java
+  ./src/com/topodroid/utils/*.java \
+  ./libs/arm64-v8a/libnativename.so \
+  ./libs/arm64-v8a/libpowercrust.so \
+  ./libs/arm64-v8a/libtiffdecoder.so \
+  ./libs/arm64-v8a/libtiff.so \
+  ./libs/armeabi-v7a/libnativename.so \
+  ./libs/armeabi-v7a/libpowercrust.so \
+  ./libs/armeabi-v7a/libtiffdecoder.so \
+  ./libs/armeabi-v7a/libtiff.so \
+  ./libs/x86_64/libnativename.so \
+  ./libs/x86_64/libpowercrust.so \
+  ./libs/x86_64/libtiffdecoder.so \
+  ./libs/x86_64/libtiff.so
 
 EXTRA_SRC = \
   ./studio/* \
@@ -196,3 +207,4 @@ archive:
 
 release-archive:
 	tar -chvzf ../topodroidX-`date -I`.tgz --exclude-vcs $(SRC) $(APPVERSION)-$(TARGET_SDK).apk
+

@@ -3,6 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
+    <string name="ai">AI</string>
+    <string name="no_api_key">AI API key has not been set</string>
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation [%1$d]</string>
@@ -1032,6 +1034,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Bluetooth aliases</string>
+    <string name="hint_api_key" copyable="all">API key</string>
     <string name="hint_bt_alias" copyable="sk">BT alias</string>
     <string name="hint_bt_code">Device code</string>
     <string name="bt_alias_missing">BT alias missing</string>
@@ -1321,6 +1324,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="import_diving_datamode">Diving datamode</string>
     <string name="import_therion_path">Stations with survey path</string>
 
+    <string name="title_gemini">Enter your AI API key</string>
+    <string name="title_ai_dialog">AI helper</string>
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_audio_list">Audio records</string>

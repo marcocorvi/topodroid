@@ -5,7 +5,8 @@
 # WARNING use zipalign BEFORE apksigner
 # BUILD_TOOLDIR="../../../build-tools/29.0.3"
 # BUILD_TOOLDIR="../../../build-tools/31.0.0"
-BUILD_TOOLDIR="../../../build-tools/35.0.0"
+# BUILD_TOOLDIR="../../../build-tools/35.0.0"
+BUILD_TOOLDIR="../../../build-tools/36.1.0"
 
 APP_NAME=TopoDroidX
 

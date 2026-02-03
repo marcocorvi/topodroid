@@ -167,6 +167,7 @@ public class UserManualActivity extends Activity
 // -------------------------------------------------------------------
   // SlidingDrawer mDrawer;
   private ImageView     mImage;
+  private ImageView     mAI;
   private ListView      mList;
 
   /** set the settings of the display view
@@ -240,6 +241,12 @@ public class UserManualActivity extends Activity
       TDLog.e( "UserMan load " + page + " Error: " + e.getMessage() );
     }
 
+    mAI  = (ImageView) findViewById( R.id.ai );
+    if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+      mAI.setOnClickListener( this );
+    } else {
+      mAI.setVisibility( View.GONE );
+    }
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     mList = (ListView) findViewById( R.id.content );
@@ -266,6 +273,8 @@ public class UserManualActivity extends Activity
     adapter.add( getResources().getString( R.string.man_website ) );
     if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
       adapter.add( getResources().getString( R.string.man_gemini ) );
+    } else {
+      TDLog.v("Api key: " + TDSetting.mGeminiApiKey );
     }
  
     mList.setAdapter( adapter );
@@ -288,6 +297,10 @@ public class UserManualActivity extends Activity
         mList.setVisibility( View.GONE );
       } else {
         mList.setVisibility( View.VISIBLE );
+      }
+    } else if ( b == mAI ) {
+      if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+        (new AIdialog( this, this, TDSetting.mGeminiApiKey )).show();
       }
     }
   }
@@ -316,6 +329,8 @@ public class UserManualActivity extends Activity
     } else if ( pos == 19 ) {
       if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
         (new AIdialog( this, this, TDSetting.mGeminiApiKey )).show();
+      } else {
+        TDToast.make( R.string.no_api_key );
       }
     } else {
       // getManualFromWeb();

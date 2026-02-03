@@ -102,6 +102,33 @@
          in order to avoid having your file be overridden by tools such as "android update project"
     -->
     <!-- version-tag: 1 -->
+
+    <!-- property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" / -->
+    <property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" />
+
+    <!-- leave the jars files in for the class reference in AIhelper -->
+    <!-- property name="java.compiler.classpath" value="" / -->
+    <!-- property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava.jar:libjars/lifecycle.jar" / -->
+
+    <!-- only JAVA 8 -->
+    <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava.jar" />
+
+    <property name="build.is.signing.debug" value="false" />
+    <!-- <property name="jars.libs.dir" value="libs" /> -->
+
+    <property name="lib.jars" location="/home/programs/android-sdk/samples/android-8/topodroid/ant/lib.jars.sh" />
+    <property name="lib.jars.enabled" value="true" />
+    <!-- property name="project.all.jars.path" value="libs" / -->
+
+    <!--
+    <package-helper>
+       <extra-jars>
+          <jarfolder path="libs" />
+       </extra-jars>
+    </package-helper>
+    -->
+    <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar" />
+
     <import file="${sdk.dir}/tools/ant/build.xml" />
 
 </project>

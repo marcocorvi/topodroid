@@ -14,6 +14,7 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.TDX.TDandroid;
@@ -66,6 +67,7 @@ public class TDPrefActivity extends Activity
   // private TDPref mCwdPref;
   // private TDPref mBtAliasPref;
   private TDPref mPtCmapPref;
+  private TDPref mGeminiPref;
   private TDPref mGraphPaperScalePref;
 
   // private TopoDroidApp mApp;
@@ -340,6 +342,7 @@ public class TDPrefActivity extends Activity
       //     } );
       //   }
       // }
+
       if ( TDLevel.overAdvanced ) {
         TDPref export_settings = findPreference( "DISTOX_EXPORT_SETTINGS" );
         View v = export_settings.getView();
@@ -402,7 +405,22 @@ public class TDPrefActivity extends Activity
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_CAVE3D ) {
       linkPreference( "DISTOX_DEM3D_PREF",          TDPrefCat.PREF_DEM3D );
       linkPreference( "DISTOX_WALLS3D_PREF",        TDPrefCat.PREF_WALLS3D );
+
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_GEEK ) {
+      mGeminiPref = findPreference( "DISTOX_GEMINI" );
+      if ( mGeminiPref != null ) {
+        View v = mGeminiPref.getView();
+	if ( v != null ) {
+          GeminiDialog gemini_dialog = new GeminiDialog( this,  mGeminiPref );
+          v.setOnClickListener( 
+            new OnClickListener() {
+              @Override
+              public void onClick( View v ) { gemini_dialog.show(); }
+          } );
+	}
+        mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "" : "***" );
+      }
+
       // TDLog.v("PREF link GEEK sub-categories");
       linkPreference( "DISTOX_GEEK_SHOT",           TDPrefCat.PREF_GEEK_SHOT );
       linkPreference( "DISTOX_GEEK_SPLAY",          TDPrefCat.PREF_GEEK_SPLAY );
@@ -412,6 +430,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_GEEK_DEVICE",         TDPrefCat.PREF_GEEK_DEVICE );
       linkPreference( "DISTOX_GEEK_IMPORT",         TDPrefCat.PREF_GEEK_IMPORT );
       linkPreference( "DISTOX_SKETCH_PREF",         TDPrefCat.PREF_GEEK_SKETCH ); // FIXME_SKETCH_3D
+
     } else if (mPrefCategory == TDPrefCat.PREF_GEEK_PLOT ) {
       mGraphPaperScalePref = findPreference( "DISTOX_GRAPH_PAPER_SCALE" );
       if ( mGraphPaperScalePref != null ) {

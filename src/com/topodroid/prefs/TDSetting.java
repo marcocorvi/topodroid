@@ -1043,7 +1043,8 @@ public class TDSetting
     mBulkExport = prefs.getBoolean( key[5].key, bool(key[5].dflt) ); // DISTOX_BULK_EXPORT
     mPacketLog = prefs.getBoolean(  key[6].key, bool(key[6].dflt) ); // DISTOX_PACKET_LOGGER
     mTh2Edit   = prefs.getBoolean(  key[7].key, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( key[15].key, bool(key[15].dflt) ) : false; // DISTOX_WITH_DEBUG
+    mGeminiApiKey = prefs.getString( key[8].key, key[8].dflt );      // DISTOX_GEMINI
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( key[TDPrefKey.IDX_DEBUG].key, bool(key[TDPrefKey.IDX_DEBUG].dflt) ) : false; // DISTOX_WITH_DEBUG
 
     key = TDPrefKey.mMain;
     setTextSize( tryInt(    prefs,  key[0].key, key[0].dflt ) );      // DISTOX_TEXT_SIZE
@@ -1053,7 +1054,6 @@ public class TDSetting
     mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( key[4].key, key[4].dflt ), false ); // DISTOX_LOCAL_MAN
     setLocale( prefs.getString( key[5].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
     mOrientation = Integer.parseInt( prefs.getString( key[6].key, key[6].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
-    String mGeminiApiKey = prefs.getString( key[7].key, key[7].dflt );
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1598,8 +1598,6 @@ public class TDSetting
       mOrientation = tryIntValue( hlp, k, v, key[6].dflt );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
-    } else if ( k.equals( key[ 7 ].key ) ) {           // DISTOX_GEMINI
-      mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
     /* ---- IF_COSURVEY
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
@@ -1612,6 +1610,15 @@ public class TDSetting
     }
     if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
+  }
+
+  /** set the value of the Gemini API key
+   * @param value   new vallue
+   */
+  static void setGeminiApiKey( String value ) 
+  { 
+    mGeminiApiKey = value;
+    TDPrefHelper.update( "DISTOX_GEMINI", value );
   }
 
   // return the new string value if the value has been corrected
@@ -1920,8 +1927,11 @@ public class TDSetting
     } else if ( k.equals( key[ 7 ].key ) ) {
       mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( TDLevel.isDebugBuild() && k.equals( key[15].key ) ) {
-      mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[15].dflt) ); // DISTOX_WITH_DEBUG
+    } else if ( k.equals( key[ 8 ].key ) ) {           // DISTOX_GEMINI
+      TDLog.v("Gemini API key is not set normally");
+      // mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[TDPrefKey.IDX_DEBUG].key ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[TDPrefKey.IDX_DEBUG].dflt) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.e("missing GEEK key: " + k );
