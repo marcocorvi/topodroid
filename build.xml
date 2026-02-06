@@ -106,6 +106,8 @@
     <!-- property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" / -->
     <property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" />
 
+    <!-- d8 uses the jars in lind8 -->
+
     <!-- leave the jars files in for the class reference in AIhelper -->
     <!-- property name="java.compiler.classpath" value="" / -->
     <!-- property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava.jar:libjars/lifecycle.jar" / -->
@@ -116,9 +118,13 @@
     <property name="build.is.signing.debug" value="false" />
     <!-- <property name="jars.libs.dir" value="libs" /> -->
 
+    <!-- make this true if want to extract classes from jars in libjars and add then to compiled classes -->
+    <property name="lib.jars.enabled" value="false" />
     <property name="lib.jars" location="/home/programs/android-sdk/samples/android-8/topodroid/ant/lib.jars.sh" />
-    <property name="lib.jars.enabled" value="true" />
     <!-- property name="project.all.jars.path" value="libs" / -->
+
+    <property name="multi.dex.enabled" value="true" />
+    <property name="multi.dex" location="/home/programs/android-sdk/samples/android-8/topodroid/ant/multi.dex.sh" />
 
     <!--
     <package-helper>
@@ -127,8 +133,11 @@
        </extra-jars>
     </package-helper>
     -->
-    <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar" />
+    <!-- -->
+    <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:bin/classes" />
+    
 
     <import file="${sdk.dir}/tools/ant/build.xml" />
+   
 
 </project>

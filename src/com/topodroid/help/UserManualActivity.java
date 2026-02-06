@@ -64,6 +64,22 @@ public class UserManualActivity extends Activity
   private static final String NEEDLE = "DistoX/files/man";
   private WebView mTV_text;
   private int mCloseOnBack = 0;
+  private String mCurrentPage = null;
+
+
+  /** load a man page
+   * @param view webview view - if null use the privale webview
+   * @param filename  page filename
+   * @param increase  whether to increase the closeOnBack counter
+   */
+  void loadAssetPage( WebView view, String filename, boolean increase )
+  {
+    if ( view == null ) view = mTV_text;
+    if ( increase )  ++mCloseOnBack;
+    String page = "/android_asset/man/" + filename;
+    // TDLog.v( "MAN-4 assets page " + page );
+    view.loadUrl( "file://" + page );
+  }
 
   /** load and display a man page
    * @param view     display view
@@ -75,7 +91,7 @@ public class UserManualActivity extends Activity
     // String filepath = TDPath.getManFile( filename );
     // view.loadUrl( filepath );
     // setWebViewSettings( mTVtext );
-    TDLog.v( "MAN-0 filename <" + filename + ">" );
+    // TDLog.v( "MAN-0 filename <" + filename + ">" );
 
     if ( filename.startsWith("http://" ) ) {
       // ++mCloseOnBack;
@@ -105,9 +121,8 @@ public class UserManualActivity extends Activity
       // TDLog.v( "MAN-3 pagename " + pagename );
       // TDLog.v( "MAN-3 pagefile path " + pagefile.getPath() );
       if ( ! ( TDSetting.mLocalManPages && TDFile.hasManFile( filename ) ) ) { // pagefile.exists()
-        String page = "/android_asset/man/" + filename;
-        // TDLog.v( "MAN-4 assets page " + page );
-        view.loadUrl( "file://" + page );
+        loadAssetPage( view, filename, false );
+
       } else {
         // TDLog.v( "MAN-4 local pagefile " + pagefile );
         loadLocal( view, TDFile.getManFileReader( filename ), TDFile.getManFilePath( filename ) );
@@ -206,7 +221,14 @@ public class UserManualActivity extends Activity
     String page = null;
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) page = extras.getString( TDTag.TOPODROID_HELP_PAGE );
-    if ( page == null ) page = "manual00.htm";
+    mCurrentPage = null;
+    if ( page == null ) {
+      page = "manual00.htm";
+      mCurrentPage = page;
+    } else if ( page.startsWith( "manual" ) && page.length() > 7 ) {
+      int nr = 10 * (page.charAt(6) - '0') + (page.charAt(7) - '0');
+      if ( nr < 16 ) mCurrentPage = page;
+    }
 
     setContentView(R.layout.distox_manual_dialog);
     mTV_text   = (WebView) findViewById(R.id.manual_text );
@@ -271,11 +293,9 @@ public class UserManualActivity extends Activity
     adapter.add( getResources().getString( R.string.man_content ) );
     adapter.add( getResources().getString( R.string.man_index ) );
     adapter.add( getResources().getString( R.string.man_website ) );
-    if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-      adapter.add( getResources().getString( R.string.man_gemini ) );
-    } else {
-      TDLog.v("Api key: " + TDSetting.mGeminiApiKey );
-    }
+    // if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+    //   adapter.add( getResources().getString( R.string.man_gemini ) );
+    // }
  
     mList.setAdapter( adapter );
     mList.setVisibility( View.GONE );
@@ -300,7 +320,7 @@ public class UserManualActivity extends Activity
       }
     } else if ( b == mAI ) {
       if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-        (new AIdialog( this, this, TDSetting.mGeminiApiKey )).show();
+        (new AIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
       }
     }
   }
@@ -317,21 +337,24 @@ public class UserManualActivity extends Activity
     // CharSequence item = ((TextView) view).getText();
     // TDLog.v( "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
+    mCurrentPage = null;
     if ( pos <= 17 ) {
       mCloseOnBack = 0;
       try { 
-        load( mTV_text, String.format(Locale.US, "manual%02d.htm", pos ) );
+        mCurrentPage = String.format(Locale.US, "manual%02d.htm", pos );
+        load( mTV_text, mCurrentPage );
       } catch ( IOException e ) {
+        mCurrentPage = null;
         TDLog.e("User-man pos " + pos + " error " + e.getMessage() );
       }
     } else if ( pos == 18 ) { // website
       viewUrl( WEBSITE );
-    } else if ( pos == 19 ) {
-      if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-        (new AIdialog( this, this, TDSetting.mGeminiApiKey )).show();
-      } else {
-        TDToast.make( R.string.no_api_key );
-      }
+    // } else if ( pos == 19 ) {
+    //   if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+    //     (new AIdialog( this, this, TDSetting.mGeminiApiKey, pos )).show();
+    //   } else {
+    //     TDToast.make( R.string.no_api_key );
+    //   }
     } else {
       // getManualFromWeb();
       TDToast.makeBad( R.string.no_manual );

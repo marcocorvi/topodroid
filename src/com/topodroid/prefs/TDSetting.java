@@ -89,6 +89,8 @@ public class TDSetting
   private static int FLAG_LEVEL  = FLAG_BUTTON | FLAG_MENU;
   private static int mMainFlag = 0xff; // Main Window flag
 
+  public static String mLocale = null; // null if default otherwise the chosen locale
+
   public static boolean mWithDebug = false;
 
   /** reset MainWindow flag
@@ -3170,7 +3172,8 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
-    // TDLog.v("SETTING set locale <" + locale + ">" );
+    TDLog.v("SETTING set locale <" + locale + ">" );
+    mLocale = locale;
     TDLocale.setTheLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {

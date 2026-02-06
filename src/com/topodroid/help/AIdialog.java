@@ -11,7 +11,10 @@
  */
 package com.topodroid.help;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
@@ -29,12 +32,22 @@ import android.widget.AdapterView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import  java.io.InputStream;
+import  java.io.InputStreamReader;
+import  java.io.BufferedReader;
+import  java.io.IOException;
+
 public class AIdialog extends MyDialog
                  implements OnClickListener
                  , AdapterView.OnItemSelectedListener
 {
   UserManualActivity mParent;
   AIhelper mHelper;
+  static String mSystemInstruction = null;
+  boolean mLocalContext = true; // whether to include the local context in the query
+
+  static String mLang   = null; // local language
+  static String mJargon = null; // jargon dictionary
 
   // gemini-2.0 will be shut down 2026-03-31
   // gemini-3.0-flash is not jet available
@@ -44,6 +57,8 @@ public class AIdialog extends MyDialog
     "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro",
     "gemini-2.0-flash", "gemini-2.0-pro"
   };
+
+
   final static int IDX_MODEL = 1;
   int mIdxModel = IDX_MODEL;
 
@@ -52,11 +67,25 @@ public class AIdialog extends MyDialog
   // TODO list of help entries
   /** cstr
    */
-  public AIdialog( Context context, UserManualActivity parent, String user_key )
+  public AIdialog( Context context, UserManualActivity parent, String user_key, String page )
   {
     super( context, null, R.string.AIdialog );  // nul app
     mParent = parent;
-    mHelper = new AIhelper( this, user_key );
+    // TDLog.v("Man page " + page );
+    mHelper = new AIhelper( context, this, user_key, page );
+    if ( mSystemInstruction == null ) mSystemInstruction = getOrderedUserManual( context );
+    String lang = TDSetting.mLocale;
+    // TDLog.v("Jargon lang: <" + lang + ">" );
+    if ( TDString.isNullOrEmpty( lang ) || lang.equals("en") ) {
+      if ( mLang != null ) {
+        mLang = null;
+        mJargon = null;
+      }
+    } else if ( ! lang.equals( mLang ) ) {
+      mLang = lang;
+      mJargon = getJargon( context, mLang );
+    }
+    mLocalContext = true;
   }
 
   @Override
@@ -113,7 +142,8 @@ public class AIdialog extends MyDialog
       } else {
         TextView answer = (TextView) findViewById( R.id.answer );
         mHelper.setModel( mModels[mIdxModel] );
-        mHelper.ask( question, answer );
+        mHelper.ask( question, answer, mLocalContext );
+        mLocalContext = false;
       }
     } else if ( v.getId() == R.id.button_clear ) {
       ((TextView) findViewById( R.id.answer )).setText("");
@@ -139,5 +169,86 @@ public class AIdialog extends MyDialog
     answer.setText( response );
   }
 
+  /** get the man pages in the order according to list.txt
+   * @param ctx  context
+   */
+  private String getOrderedUserManual( Context ctx )
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append( ctx.getResources().getString( R.string.ai_user ) )
+      .append( ctx.getResources().getString( R.string.ai_begin_manual ) );
+    try {
+      InputStream is = ctx.getAssets().open("man/list.txt");
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String filename;
+      while ( ( filename = br.readLine() ) != null ) {
+        filename = filename.trim();
+        if ( filename.isEmpty() || ! filename.endsWith(".htm") ) continue;
+        try {
+          InputStream fis = ctx.getAssets().open("man/" + filename );
+          int size = fis.available();
+          byte[] buffer = new byte[ size ];
+          fis.read( buffer );
+          String content = new String( buffer, "UTF-8" );
+          sb.append("\r\n-- SOURCE_FILE ").append( filename ).append(" --\n");
+          sb.append( content );
+        } catch (IOException e ) {
+          TDLog.e("Could not find man page " + filename );
+        }
+        // TDLog.v("Read man page " + filename );
+      }
+      br.close();
+    } catch (IOException e ) {
+      TDLog.e("Error reading list.txt " + e.getMessage() );
+    }
+    sb.append( ctx.getResources().getString( R.string.ai_end_manual ) );
+    return sb.toString();
+  }
+
+
+  void openPageOnParent( String page )
+  {
+    dismiss();
+    mParent.loadAssetPage( null, page, true );
+  }
+
+  /** get the jargon disctionary
+   * @param ctx  context
+   * @param lang language (2-char ISO code lowercase)
+   */
+  private String getJargon( Context ctx, String lang )
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append( String.format( ctx.getResources().getString( R.string.ai_jargon ), lang ) ).append("\n");
+    try {
+      InputStream is = ctx.getAssets().open("ai/dict.txt");
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String line;
+      while ( ( line = br.readLine() ) != null ) {
+        line = line.trim();
+        if ( line.startsWith("{") ) continue;
+        int pos = line.indexOf(":{");
+        String term = line.substring(0,pos);
+        String translation = null;
+        while ( ( line = br.readLine() ) != null ) {  
+          line = line.trim();
+          if ( line.startsWith("}") ) {
+            if ( translation != null ) { // add term-translation
+              sb.append("- ").append( term ).append(" -> ").append( translation ).append("\n");
+              // TDLog.v("- " + term + " -> " + translation );
+            }
+            break;
+          } 
+          if ( translation == null && line.startsWith( lang ) ) {
+            pos = line.indexOf(": ");
+            if ( pos + 2 < line.length() ) translation = line.substring( pos + 2 );
+          }
+        }
+      }
+    } catch (IOException e ) {
+      TDLog.e("Error reading list.txt " + e.getMessage() );
+    }
+    return sb.toString();
+  }
 }
 

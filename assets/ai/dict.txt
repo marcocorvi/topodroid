@@ -1,0 +1,253 @@
+azimuth:{
+  bg: 
+  cn: 
+  de: 
+  es: 
+  fr: 
+  hu: 
+  it: azimut
+  pt: 
+  ru:
+}
+bearing:{
+  bg: 
+  cn: 
+  de: Richtung
+  es: 
+  fr: 
+  hu: 
+  it: direzione
+  pt: 
+  ru:
+}
+closure error:{
+  bg: 
+  cn: 
+  de: Abschlussfehler
+  es: error de cierre
+  fr: erreur de bouclage
+  hu: 
+  it: errore di chiusura
+  pt: .
+  ru:
+}
+compass:{
+  bg: 
+  cn: 
+  de: 
+  es: 
+  fr: 
+  hu: 
+  it: bussola
+  pt: 
+  ru:
+}
+cross-section:{
+  bg: 
+  cn: 
+  de: 
+  es: sección transversal
+  fr: coupe transversale
+  hu: 
+  it: sezione trasversale
+  pt:  
+  ru:
+}
+denivelation:{
+  bg: 
+  cn: 
+  de: Hőhenunterschied
+  es: desnivel
+  fr: dénivelé
+  hu: 
+  it: dislivello
+  pt: desnivel 
+  ru:
+}
+development:{
+  bg: 
+  cn: 
+  de: Gesamtganglänge
+  es: desarrpllo
+  fr: deveppement
+  hu: 
+  it: sviluppo
+  pt:  
+  ru:
+}
+entrance:{
+  bg: 
+  cn: 
+  de: Eingang
+  es: entrada
+  fr: entrée
+  hu: 
+  it: ingresso
+  pt: entrada 
+  ru:
+}
+grid:{
+  bg: 
+  cn: 
+  de: 
+  es: 
+  fr: 
+  hu: 
+  it: reticolato
+  pt: 
+  ru:
+}
+leg:{
+  bg: 
+  cn: 
+  de: Meßstrecke
+  es: tramo
+  fr: visée
+  hu: 
+  it: battuta
+  pt: visada
+  ru:
+}
+loop closure:{
+  bg: 
+  cn: 
+  de:
+  es: cierre de bucle
+  fr: 
+  hu: hurok záródás
+  it: chiusura di anelli
+  pt: 
+  ru:
+}
+midline:{
+  bg: 
+  cn: 
+  de: Meßzug
+  es: poligonal
+  fr: cheminement
+  hu: 
+  it: poligonale
+  pt: poligonal 
+  ru:
+}
+notebook:{
+  bg: 
+  cn: 
+  de: Notizblock
+  es: cuaderno
+  fr: carnet topo
+  hu: 
+  it: tacquino
+  pt:  
+  ru:
+}
+plan:{
+  bg: 
+  cn: 
+  de: Grungriss
+  es: planta
+  fr: plan
+  hu: alaprajz
+  it: pianta
+  pt:  
+  ru:
+}
+profile:{
+  bg: 
+  cn: 
+  de: Langschnitt
+  es: alzado desarrollado
+  fr: coupe developée
+  hu: kifejtett hossz-metszet
+  it: sezione longitudinale
+  pt: corte longitudinal
+  ru:
+}
+projected profile:{
+  bg: 
+  cn: 
+  de: Aufriss
+  es: alzado proyectado
+  fr: coupe projectée
+  hu: 
+  it: sezione proiettata
+  pt: corte
+  ru:
+}
+range:{
+  bg: 
+  cn: 
+  de: Entfernung
+  es: 
+  fr: extension
+  hu: 
+  it: estensione
+  pt:  
+  ru:
+}
+scale:{
+  bg: 
+  cn: 
+  de: Maßstab
+  es: 
+  fr: echelle
+  hu: 
+  it: scala
+  pt:  
+  ru:
+}
+sezione:{
+  bg: 
+  cn: 
+  de: Querschnitt
+  es: alzado
+  fr: coupe
+  hu: hossz-metszet
+  it: sezione
+  pt: 
+  ru:
+}
+splay:{
+  bg: 
+  cn: 
+  de: 
+  es: 
+  fr: 
+  hu: 
+  it: splay
+  pt: 
+  ru:
+}
+station:{
+  bg: 
+  cn: 
+  de: Meßpunkt
+  es: estación
+  fr: station
+  hu: 
+  it: caposaldo
+  pt: base
+  ru:
+}
+surveying:{
+  bg: 
+  cn: 
+  de: Vermessung
+  es: topografia
+  fr: topographie
+  hu: barlangtérkép
+  it: topografia
+  pt:  
+  ru:
+}
+tape:{
+  bg: 
+  cn: 
+  de: Maßband
+  es: cinta
+  fr: decametre
+  hu: 
+  it: bindella
+  pt:  
+  ru:
+}

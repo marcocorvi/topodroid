@@ -4,7 +4,7 @@
   >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="ai">AI</string>
-    <string name="no_api_key">AI API key has not been set</string>
+    <!-- UNUSED string name="no_api_key">AI API key has not been set</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation [%1$d]</string>
@@ -1115,7 +1115,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="man_content">16. Content</string>
     <string name="man_index">17. Index</string>
     <string name="man_website" copyable="all">* Website</string>
-    <string name="man_gemini">AI help</string>
+    <!-- string name="man_gemini">AI help</string -->
 
     <string name="help_help">This help</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
