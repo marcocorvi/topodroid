@@ -12,7 +12,7 @@ Exported data and sketches files are stored in the "out" subfolder of the survey
 
 The destination file of exports of 3D models are chosen with a system filemanager.<br><p>
 
-<!-- 
+<!--
 File for survey import are searched in the <i>import</i> folder.<br>
 Zip archives for import are searched in the <i>zip</i> folder.<br><p>
 
@@ -222,7 +222,7 @@ of the <u>first shot</u> to export.<br><p>
 <b id="vtopo">VisualTopo</b> ".tro", ".trox"<br>
 <i>VisualTopo</i> data file are supported both in import and in export.<br>
 <i>VisualTopo</i> splays are included if enabled.<br>
-By default LRUD are at the TO station, but they can be set at the FROM station.<br> 
+By default LRUD are at the TO station, but they can be set at the FROM station.<br>
 Data units are 'meters' and 'degrees'.<br>
 Survey in <i>diving</i> data-mode are exported in "trox" format.<br><p>
 
@@ -275,19 +275,19 @@ It may happen that the imported sketch is not aligned with the survey data. In t
 
 
 <b id="polygon">Polygon</b> ".cave"<br>
-TopoDroid can export survey data in <i>Polygon</i> format. 
+TopoDroid can export survey data in <i>Polygon</i> format.
 Fixed points are exported as lat-long.<br>
 When exporting, you can choose to convert the splays to LRUD data or number them in S_xx format or add a - sign to the name of the TO point.<br><p>
 
 
-<!-- 
+<!--
 <b id="ghtopo">GHTopo</b> ".gtx"<br>
 TopoDroid can export survey data in <i>GHTopo</i> format (partially tested).<br><p>
 -->
 
-<!-- 
+<!--
 <b id="grottolf">Grottolf</b> ".grt"<br>
-TopoDroid can export survey data in <i>Grottolf</i> format (untested). 
+TopoDroid can export survey data in <i>Grottolf</i> format (untested).
 If the first station has geographical coordinates these are exported, otherwise local coordinates are used.
 The profile at the stations are computed by projecting the splay shots onto a vertical plane perpendicular to the
 leg.<br><p>
@@ -364,7 +364,7 @@ Settings:<ul style="margin-top=0">
 <!--
 <b id="geojson">GeoJSON</b> ".json"<br>
 Survey data can be exported as <i>GeoJSON</i> file (<i>RFC 7946</i>) if you have georeferenced at least a station.
-Shots are exported as <i>LineString</i>, stations as <i>Point</i>. 
+Shots are exported as <i>LineString</i>, stations as <i>Point</i>.
 If the survey contains disjoint pieces, the <i>GeoJSON</i> export includes all the pieces with a georeferenced station.
 Data are corrected with the magnetic declination.<br><p>
 
@@ -382,7 +382,7 @@ The data coordinate system is WGS-84 geographic.
 
 
 <b id="shp">Shapefile</b> ".shz"<br>
-Survey data can be exported as shapefile. 
+Survey data can be exported as shapefile.
 There is a shapefile for the stations and one for the shots (both legs and splays).
 If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
 Data are corrected with the magnetic declination.
@@ -496,7 +496,7 @@ From v. 4.1.2 TopoDroid does not load any more sketches in <i>Therion</i> format
 <!--
 <b id="tunnel">Tunnel</b> ".xml"<br>
 Sketch can be exported in Tunnel XML format. The files are saved in the "tnl" subdirectory.<br>
-The following lines are mapped to Tunnel lines: wall, presumed, pit, chimney, and slope. 
+The following lines are mapped to Tunnel lines: wall, presumed, pit, chimney, and slope.
 All the other lines are mapped to Tunnel line "details".<br>
 Area borders are mapped to Tunnel line "filled".<br>
 The following points are mapped to Tunnel points: air-draught, archeo, blocks, clay, column, curtain, flowstone, gradient,
@@ -671,10 +671,10 @@ otherwise only the user-chosen stations are included</li>
 <li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
 <li><u>round-trip</u>: sketches are exported ready for <i>Walls</i>/<i>Compass</i> round-trip [no]</li>
 <li><u>grid</u> lines added to the export (cell size in the current sketch grid units) [no]</li>
-<li><u>line direction</u> tick [no]</li> 
+<li><u>line direction</u> tick [no]</li>
 <li><u>lines width</u>: labels, icons, lines (and area borders), sketch grid lines, shots, orientation stroke</li>
 <li><u>station size</u>: station names text-size. Default 20</li>
-<li><u>origin</u>: whether to highlight the origin station with a orange cross [only in the export dialog]</li> 
+<li><u>origin</u>: whether to highlight the origin station with a orange cross [only in the export dialog]</li>
 </ul><p>
 
 

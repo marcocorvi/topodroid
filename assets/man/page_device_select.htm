@@ -4,89 +4,90 @@
 
 TopoDroid supports the following device:
 <ul>
-<li>DistoX (first version)</li>
-<li>DistoX2 (second version)</li>
-<li>DistoXBLE (third version)</li>
-<li>Sap5 and Sap6 (Shetland Attack Pony), only models with bluetooth</li>
-<lI>Bric4 and Bric5 (Bluetooth Ruggerized Integrated Cartographer)</li>
-<lI>Cavway X1</li>
+<li><i>DistoX</i> (first version)</li>
+<li><i>DistoX2</i> (second version)</li>
+<li><i>DistoXBLE</i> (third version)</li>
+<li><i>SAP5</i> and <i>SAP6</i> (Shetland Attack Pony), only models with bluetooth</li>
+<lI><i>BRIC4</i> and <i>BRIC5</i> (Bluetooth Ruggerized Integrated Cartographer)</li>
+<lI><i>Cavway X1</i></li>
+<lI><i>DiscoX</i></li>
 </ul>
 
 All devices must be paired with the Android.<br><p>
 
-Normally TopoDroid works with only one device. 
+Normally TopoDroid works with only one device.
 The data can be downloaded continuously (<i>continuous</i> mode) or in batch (<i>on-demand</i> mode).
 The difference between the two modes is that the <i>continuous</i> mode remains active when the data download
 is finished, or the connection with the device is lost, while the <i>on-demand</i> mode is closed. <br><p>
 
-SAP and BRIC download the data only in continuous mode.<br><p>
+<i>SAP</i> and <i>BRIC</i> download the data only in continuous mode.<br><p>
 
-With DistoX's TopoDroid can work with more than one device at once, although 
+With DistoX's TopoDroid can work with more than one device at once, although
 the data are still downloaded from only one device at a tine.<br>
 The <i>data download mode</i> must be set to <i>multi</i>.
 When it is so a long-tap on the <i>download</i> button brings up a dialog to choose from which DistoX to download the data.<br><p>
 
 <b>Shetland Attack Pony (SAP)</b><br>
 
-TopoDroid supports the model of the Shetland Attack Pony, version 5 (Sap5) and 6 (Sap6), with bluetooth.<br>
+TopoDroid supports the model of the Shetland Attack Pony, version 5 (<i>SAP5</i>) and 6 (<i>SAP6</i>), with bluetooth.<br>
 The device must have been previously "paired" with Android, using the <i>Settings</i> app.
 The PIN is "000000" (six zeros).<br>
-Afterward the SAP is listed among the known devices in the <i>Device Window</i>.
-It appears as "SAP XX MAC-address", where "XX" is the two-letter code of the SAP, for example "HG".<br>
-To select the SAP as current device tap on the its entry in the list.<br><p> 
+Afterward the <i>SAP</i> is listed among the known devices in the <i>Device Window</i>.
+It appears as "SAP XX MAC-address", where "XX" is the two-letter code of the <i>SAP</i>, for example "HG".<br>
+To select the <i>SAP</i> as current device tap on the its entry in the list.<br><p>
 
-While connected, the SAP will transfer all shot values to the app, whether or not the shot data
+While connected, the <i>SAP</i> will transfer all shot values to the app, whether or not the shot data
 are stored or discarded on the device.<br><p>
 
-The Sap5 data transmission protocol does not include acknowledgment of the reception of the data. Therefore
+The <i>SAP5</i> data transmission protocol does not include acknowledgment of the reception of the data. Therefore
 <ul>
-<li>if Sap5 is not connected, the shot values are <u>not transferred</u> to the app.</li>
-<li>upon reconnection, the Sap5 does <u>not</u> transfer the shot data stored while not connected.</li>
+<li>if <i>SAP5</i> is not connected, the shot values are <u>not transferred</u> to the app.</li>
+<li>upon reconnection, the <i>SAP5</i> does <u>not</u> transfer the shot data stored while not connected.</li>
 </ul>
 <br><p>
 
-The Sap6 data transmission protocol includes the acknowledgment.<br><p>
+The <i>SAP6</i> data transmission protocol includes the acknowledgment.<br><p>
 
-The SAP keeps in its internal memory the data that have been "stored".
-These can be retrieved as a Survex file, using the Sap PonyTrainer program.<br><p>
+The <i>SAP</i> keeps in its internal memory the data that have been "stored".
+These can be retrieved as a Survex file, using the <i>SAP</i> <i>PonyTrainer</i> program.<br><p>
 
-The calibration of the SAP is done by the device and does not require an external program.<br><p> 
+The calibration of the <i>SAP</i> is done by the device and does not require an external program.<br><p>
 
 <b>BRIC</b><br>
 
-TopoDroid supports the BRIC version 4 and 5.<br>
+TopoDroid supports the <i>BRIC</i> version 4 and 5.<br>
 The device must have been previously "paired" with Android, using the <i>Settings</i> app.<br>
-Afterward the BRIC is listed among the known devices in the <i>Device Window</i>.
-It appears as "BRICX code MAC-address", ('X' being 4 or 5) where the code is the four-digit code of the BRIC, for example "0039".<br>
-To select the BRIC as current device tap on the its entry in the list.<br><p> 
+Afterward the <i>BRIC</i> is listed among the known devices in the <i>Device Window</i>.
+It appears as "<i>BRIC</i> code MAC-address", ('X' being 4 or 5) where the code is the four-digit code of the <i>BRIC</i>, for example "0039".<br>
+To select the <i>BRIC</i> as current device tap on the its entry in the list.<br><p>
 
-Once connected to a client, the BRIC remembers the connection, even if turned off, therefore it stays
+Once connected to a client, the <i>BRIC</i> remembers the connection, even if turned off, therefore it stays
 "always connected".<br>
 When TopoDroid is connected, shot readings are immediately transferred to Android.
 If TopoDroid is not connected, the data are kept in memory, and transferred when the app is
 next connected.<br><p>
 
-The BRIC data transmission protocol includes acknowledgment by Android,
-but it does <u>not</u> include acknowledgment of the reception of the data by the app. 
-The protocol has a few seconds delay between the connection and the first data transfer, 
+The <i>BRIC</i> data transmission protocol includes acknowledgment by Android,
+but it does <u>not</u> include acknowledgment of the reception of the data by the app.
+The protocol has a few seconds delay between the connection and the first data transfer,
 and TopoDroid has a one-second delay after the last data, before closing the connection.
 By this means usually no shot is lost, although this is not guaranteed and shots <u>are lost</u>
 if the app is not notified by Android before the next shot arrives.
-<br><p> 
+<br><p>
 
-The BRIC stores the data in internal memory in CSV files. If connected to a PC via USB, the device
+The <i>BRIC</i> stores the data in internal memory in CSV files. If connected to a PC via USB, the device
 appears as external memory and the CSV files can be copied to the PC.<br><p>
 
-The calibration of the BRIC is done by the device and does not require an external program.<br><p> 
+The calibration of the <i>BRIC</i> is done by the device and does not require an external program.<br><p>
 
-The BRIC can be controlled from the app. In particular it is possible to turn the laser on/off, and to take
-shots. The Bric4 has also a "scan mode" in which readings are taken continuously, about two every second.<br><p>
+The <i>BRIC</i> can be controlled from the app. In particular it is possible to turn the laser on/off, and to take
+shots. The <i>BRIC</i> has also a "scan mode" in which readings are taken continuously, about two every second.<br><p>
 
 TopoDroid can follow three different data protocols (according to a setting in the "custom" set).
-The first receives only the primary data (distance, azimuth and clino) which do not include the data ID number assigned by the Bric4.
+The first receives only the primary data (distance, azimuth and clino) which do not include the data ID number assigned by the <i>BRIC</i>.
 The other two receive the complete data. They differ as whether TopoDroid uses the provided ID number or assigns its own numbers.
 <br>
-When the complete data are received TopoDroid records the BRIC error codes and values in the shot comment.
+When the complete data are received TopoDroid records the <i>BRIC</i> error codes and values in the shot comment.
 <br><p>
 
 <b>Cavway</b><br>
@@ -99,6 +100,6 @@ To select the Cavway as the current device, tap on its entry in the list.<br><p>
 
 The calibration of the Cavway is done by the device and does not require an external program.
 However, the calibration data can also be downloaded in the app, and the calibration can be computed in TopoDroid and uploaded
-to the device. The calibration computation on the Cavway and in TopoDdroid are the same.<br><p> 
+to the device. The calibration computation on the Cavway and in TopoDdroid are the same.<br><p>
 
 </body></html>

@@ -18,27 +18,27 @@ When the <u>Survey Data window</u> is closed the data download connection is ter
 window is paused (the display switches off). If you open a sketch while the download connection is active in <i>continuous</i> mode,
 the connection is maintained and the data are downloaded (and displayed in the sketch).<br><p>
 
-For the <i>Sap5</i> and <i>Bric4</i> data are always downloaded in <i>continuous</i> mode.<br><p>
+For the <i>SAP</i> and <i>BRIC</i> data are always downloaded in <i>continuous</i> mode.<br><p>
 
 <b>DistoXBLE</b><p>
 
 The data download from the DistoXBLE may fail the first time immediately after the <b>Android Bluetooth</b> has been enabled (ie, turned on).
 In this case switch the DistoXBLE off and on, and try again to download data.<br><p>
 
-<b>Bric4</b><br>
+<b>BRIC</b><br>
 
-The data download from the <i>Bric4</i> can be limited to only the essential values (distance, azimuth, clino, and little more), or
-complete, with all the information transferred by the Bric4 protocol.<br><p>
+The data download from the <i>BRIC</i> can be limited to only the essential values (distance, azimuth, clino, and little more), or
+complete, with all the information transferred by the <i>BRIC</i> protocol.<br><p>
 
-The complete protocol includes the "index" of the shot. TopoDroid uses the <i>Bric4 index</i> as data index
-in the database table, if it receives it, and the <i>Bric</i> data mode is set to use also the index.
+The complete protocol includes the "index" of the shot. TopoDroid uses the <i>BRIC index</i> as data index
+in the database table, if it receives it, and the <i>BRIC</i> data mode is set to use also the index.
 Since the data index must be unique, if TopoDroid receives a shot with an index that
-is already in the database, instead of the  <i>Bric4 index</i> it uses a novel value for the data index.<br>
+is already in the database, instead of the  <i>BRIC index</i> it uses a novel value for the data index.<br>
 
-The Bric4 index can be reset with the <i>Advanced menu | Memory clear</i> BRIC4 command.<br>
+The <i>BRIC</i> index can be reset with the <i>Advanced menu | Memory clear</i> <i>BRIC</i> command.<br>
 
-It is possible to disable the use of the <i>Bric4 index</i> [G], and let TopoDroid assign incremental values to the data index.<br><p> 
+It is possible to disable the use of the <i>BRIC index</i> [G], and let TopoDroid assign incremental values to the data index.<br><p>
 
-<!-- u>WARNING</u>. The first shot after a Bric4 "memory clear" does not arrive to TopoDroid.<br><p -->
+<!-- u>WARNING</u>. The first shot after a <i>BRIC4</i> "memory clear" does not arrive to TopoDroid.<br><p -->
 
 </body></html>

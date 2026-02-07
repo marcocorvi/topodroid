@@ -1,18 +1,19 @@
 <html><body>
 <h3>[3] DEVICE WINDOW</h3>
 
-<b>IMPORTANT</b>. 
+<b>IMPORTANT</b>.
 In order to use a supported device with TopoDroid, the device must be first
 <b>connected</b> and <b>paired</b> with Android.<br>
 This can be done with the <i>Settings</i> app.<br>
-If it does not pair automatically the DistoX PIN is "0000", four zeros.<br>
-If it does not pair automatically the Sap5 PIN is "000000", six zeros.<br><p>
+If it does not pair automatically the <i>DistoX</i> PIN is "0000", four zeros.<br>
+If it does not pair automatically the <i>SAP</i> PIN is "000000", six zeros.<br><p>
 
 
 Tap the <i>Device</i> button in the <u>Main window</u> to open the <i>Device Window</i>.
 The list of known devices is shown at the bottom.<br><p>
 
-The supported devices are: DistoX, DistoX2, DistoXBLE, SAP5, SAP6, BRIC4, BRIC5, Cavway X1, and DiscoX.<br>
+The supported devices are: <i>DistoX</i>, <i>DistoX2</i>, <i>DistoXBLE</i>, <i>SAP5</i>, <i>SAP6</i>,
+<i>BRIC4</i>, <i>BRIC5</i>, <i>Cavway X1</i>, and <i>DiscoX</i>.<br>
 <b>TopoDroid does not recognize devices with name that is not one of these.</b><br>
 <img src="btn_devices.png" height="36" border="1"><br><p>
 
@@ -27,16 +28,16 @@ TopoDroid uses only devices connected and paired with the Android system.
 The devices are selected from the list of devices paired with Android based on their bluetooth name.<br>
 The following devices are supported or with support in progress:
 <table>
-<tr><td><b>Device</b></td><td><b>Bluetooth model</b></td><td><b>Support</b></td></tr>  
-<tr><td>DistoX v. 1</td><td>DistoX</td><td>full</td></tr>  
-<tr><td>DistoX v. 2</td><td>DistoX2</td><td>full</td></tr>  
-<tr><td>DistoX BLE</td><td>DistoXBLE</td><td>full</td></tr>  
-<tr><td>BRIC 4</td><td>BRIC4</td><td>full</td></tr>  
-<tr><td>BRIC 5</td><td>BRIC5</td><td>untested</td></tr>  
-<tr><td>SAP 5</td><td>SAP5</td><td>full</td></tr>  
-<tr><td>SAP 6</td><td>SAP6</td><td>partially tested</td></tr>  
-<tr><td>Cavway X1</td><td>Cavway</td><td>full</td></tr>  
-<tr><td>DiscoX</td><td>DiscoX</td><td>under debug [T]</td></tr>  
+<tr><td><b>Device</b></td><td><b>Bluetooth model</b></td><td><b>Support</b></td></tr>
+<tr><td>DistoX v. 1</td><td>DistoX</td><td>full</td></tr>
+<tr><td>DistoX v. 2</td><td>DistoX2</td><td>full</td></tr>
+<tr><td>DistoX BLE</td><td>DistoXBLE</td><td>full</td></tr>
+<tr><td>BRIC 4</td><td>BRIC4</td><td>full</td></tr>
+<tr><td>BRIC 5</td><td>BRIC5</td><td>untested</td></tr>
+<tr><td>SAP 5</td><td>SAP5</td><td>full</td></tr>
+<tr><td>SAP 6</td><td>SAP6</td><td>partially tested</td></tr>
+<tr><td>Cavway X1</td><td>Cavway</td><td>full</td></tr>
+<tr><td>DiscoX</td><td>DiscoX</td><td>under debug [T]</td></tr>
 </table>
 <br><p>
 
@@ -56,7 +57,7 @@ The devices can be given nicknames to distinguish among several devices more eas
 <ul style="margin-top=0">
 <li><img src="btn_bluetooth.png" width="36" border="1"> reset bluetooth connection.</li>
 <li><img src="btn_info.png" width="36" border="1"> device information [N,*]</li>
-<li><img src="btn_memory.png" width="36" border="1"> <a href="page_memory.htm">DistoX</a>, <a href="page_bric_memory.htm">Bric4</a>, or <a href="page_cavway_memory.htm">Cavway</a> memory functions [*]</li>
+<li><img src="btn_memory.png" width="36" border="1"> <a href="page_memory.htm">DistoX</a>, <a href="page_bric_memory.htm">BRIC4</a>, or <a href="page_cavway_memory.htm">Cavway</a> memory functions [*]</li>
 <li><img src="btn_toggle.png" width="36" border="1"> toggle the DistoX calibration mode on and off [*] (only for DistoX)</li>
 <li><img src="btn_compute.png" width="36" border="1"> DistoX <a href="page_calib_dialog.htm">calibrations</a></li>
 <li><img src="btn_read.png" width="36" border="1"> read and display the calibration coefficients from the DistoX [A,*]</li>
@@ -64,13 +65,13 @@ The devices can be given nicknames to distinguish among several devices more eas
 
 [*] These action need communication with the device.<br><p>
 
-For the DistoX all the buttons are active.<br>
-For the Bric4, the first three buttons are active.<br>
-For the Sap5 only the first button is active.<br><p> 
+For the <i>DistoX</i> and the <i>Cavway</i> all the buttons are active.<br>
+For the <i>BRIC</i>, the first three buttons are active.<br>
+For the <i>SAP</i> and the <i>DiscoX</i> only the first button is active.<br><p>
 
-If toggling the DistoX calibration mode fails at the first try, repeat it a second time.<br><p>
+If toggling the <i>DistoX</i> calibration mode fails at the first try, repeat it a second time.<br><p>
 
-Reading the device info fails if TopoDroid is connected and downloading data. 
+Reading the device info fails if TopoDroid is connected and downloading data.
 This can happen when te <u>Device window</u> is opened from the <u>Survey Data window</u>.
 <br><p>
 
@@ -117,15 +118,15 @@ With the "multi" mode, the current DistoX is shown in the title of the <u>Survey
 The connection mode applies only to the data download. Other DistoX functions use a one-shot query mode.
 <br><p>
 
-Sap5 and Bric4 are always connected in <i>continuous</i> mode.<br><p>
+<i>SAP</i>, <i>BRIC</i>, and <i>DiscoX</i> are always connected in <i>continuous</i> mode.<br><p>
 
 <a href="page_geek.htm">Custom settings</a>: <i>Connection delay</i>, <i>Two-DistoX survey</i>, <i>Data pause</i>, <i>Data ready wait delay</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
 
 <a href="page_device_select.htm">Devices</a><br>
 <a href="page_trouble.htm">DistoX troubleshooting</a><br>
 <a href="page_distox.htm">DistoX functions</a><br>
-<a href="page_bric.htm">Bric4 functions</a><br>
-<a href="page_sap.htm">Sap5 functions</a><br>
+<a href="page_bric.htm">BRIC functions</a><br>
+<a href="page_sap.htm">SAP functions</a><br>
 <p>
 
 <a href="manual02.htm">&lt; Main window</a> |

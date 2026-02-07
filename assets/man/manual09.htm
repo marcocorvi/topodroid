@@ -8,7 +8,7 @@ Each sketch can contain multiple scraps.<br><p>
 
 The <u>extended</u> profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". If a leg has the "extend" not set, the midline is not displayed from that leg on.
 Splays are projected on the vertical plane of the shot that is closest in azimuth, unless the user has set a given "extend" through the shot edit dialog.
-For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
+For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>
 
 The <u>projected</u> profile view displays the midline and the splays projected in the vertical plane perpendicular to the projection azimuth, defined when the projected profile sketch is created. The projection direction may differ from the projection azimuth by an angle of obliqueness.<br><p>
 
@@ -17,7 +17,7 @@ The <u>projected</u> profile view displays the midline and the splays projected 
 
 <b>Legs</b><br>
 
-The leg colors are 
+The leg colors are
 <ul>
 <li>normal: white</li>
 <li>anomalous field values: red</li>
@@ -54,15 +54,15 @@ The colors for splays can be chosen among a palette of colors or with a color pi
 A splay is not shown if the shot is marked for no-display in plan or profile view.<br><p>
 
 If splay dashing [G] is not disabled, they can be displayed with a dashed or a dotted line.<br>
-If the splay-dashing is set to <i>azimuth</i> the splay is dashed if the 
+If the splay-dashing is set to <i>azimuth</i> the splay is dashed if the
 angle with the "closest" leg in azimuth is above the dash azimuth-threshold, [default 60&deg;]<br>
-If the splay-dashing is set to <i>clino</i> the splay is dashed if the 
+If the splay-dashing is set to <i>clino</i> the splay is dashed if the
 splay clino is above the dash clino-threshold: dotted (positive clino) and dashed (negative clino).<br>
 If the splay-dashing is set <i>by the view</i> the splays dashed by the clino in the plan view and
-by the azimuth in the extended profile view. In the projected profile the splays are dashed according to the 
+by the azimuth in the extended profile view. In the projected profile the splays are dashed according to the
 angle they form with the direction of projection.<br><p>
 
-Furthermore, in the <u>plan</u> view the splay is not displayed 
+Furthermore, in the <u>plan</u> view the splay is not displayed
 if the inclination of the splay is over the plan-view threshold [default 80&deg;]<br>
 
 For <u>x-sections</u>:
@@ -118,7 +118,7 @@ The remaining buttons differ by the mode.<br><p>
 In the <b>move</b> mode they are:
 <ul style="margin-top=0">
 <li><img src="btn_download.png" width="36" border="1"> data <i>download</i>.  If no device is selected, this button is hidden.
-By default splays and legs are refreshed when a leg is downloaded (and identified). 
+By default splays and legs are refreshed when a leg is downloaded (and identified).
 Use the refresh button to force a centerline refresh.
 The last download shots can be highlighted blue to help distinguish them from the others [G].
 </li>
@@ -172,7 +172,7 @@ Accordingly, the drawing references dialog has no box for the splays.
 <ul style="margin-top=0">
 <li>A long tap on each <i>mode</i> button opens the relevant settings dialog [A].</li>
 <li>The <i>download</i> button switches the device, in multi device mode [E].</li>
-<li>In plan view, a long tap on the <i>extend reference</i> button makes the reference azimuth 
+<li>In plan view, a long tap on the <i>extend reference</i> button makes the reference azimuth
 graphically editable by sliding the finger across the display.  The button turns green [E].</li>
 <li>In the extended profile view, a long tap on the <i>display mode</i> button flips the sketch [N].
 If the checkbox <I>Fix refs</i> of the reference dialog is not set, the "extend" of the shots is also reversed.</li>
@@ -296,8 +296,7 @@ For performance TopoDroid saves the sketches in a binary format.<br><p>
 To do some editing you must select a point: either a point item, a line/area point, a station, or a shot midpoint.<br>
 To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is being edited. You change the "edit" point among the selected set with the <i>previous/next</i> buttons.<br><p>
 
-<p><img src="btn_multiselection_previous.png" width="36" border="1">&nbsp;<img 
-  src="btn_multiselection_next.png" width="36" border="1">
+<p><img src="btn_multiselection_previous.png" width="36" border="1">&nbsp;<img src="btn_multiselection_next.png" width="36" border="1">
 </p>
 
 <h4>Line style</h4>
@@ -321,7 +320,7 @@ The retraced portion of a line/area is not transformed (Bezier spline, weeding, 
 Areas can be "retraced" by tracing a line that starts and ends close to the border af the area.
 The shorter between the two pieces of this border is replaced by the newly traced line.<br>
 The area can be enlarged or shrinked, and a concavity can be filled (figure below).
-<br><p> 
+<br><p>
 
 Retracing can be undone and redone.<br><p>
 
@@ -335,7 +334,7 @@ At the moment the only long-tap action is to <i>insert a point</i> for a line/ar
 The selected point is first moved to the nearby point, next it is duplicated and the new point is put after it in the line/area.
 This allows to retrace a small portion of a path by selecting the last point and inserting points backwards.<br>
 To retrace the path forward switch the selected point after each insertion.
-</div><br><p --> 
+</div><br><p -->
 
 <h4>Portrait/Landscape presentation</h4>
 In portrait presentation the magnetic North and the Vertical are upward in plan and profile view, respectively.
@@ -344,7 +343,7 @@ In landscape presentation they are leftward so that the East is upward in plan v
 In landscape presentation the iconic symbols are rotated so that they appear natural holding the device in portrait mode.<br><p>
 
 The sketches are always saved and exported with the magnetic North and the vertical upward.<br><p>
- 
+
 <b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to refresh it.</b><br><p>
 
 
@@ -355,7 +354,7 @@ The changes are not saved and the sketch must be exported to save them.<br><p>
 
 TopoDroid ".tdr" files are not related to a survey. The stations are loaded from the file as "user station" points.<br><p>
 
-The syntax of <i>Therion</i> ".th2" files is not fully supported. 
+The syntax of <i>Therion</i> ".th2" files is not fully supported.
 In particular areas with multiline border are not supported, because TopoDroid has only single-line border areas.<br><p>
 
 When the <i>Drawing window</i> is opened as editor, the buttons and the menus change.
@@ -377,7 +376,7 @@ The <i>erase</i> and <i>edit</i> modes have the usual buttons.<br><p>
 
 The th2 file can contain more than one scrap.
 As the sketch is not tied to a survey, there is no midline reference, ie, no legs and no splays.
-Stations are present only if the th2 file contains "station" points. 
+Stations are present only if the th2 file contains "station" points.
 In this case they are displayed as dots with the station name nearby.<br><p>
 
 The sketch grid is displayed only when a graph-paper size is set (through the <i>zoom-fit</i> dialog).<br><p>
