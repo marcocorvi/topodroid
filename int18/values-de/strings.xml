@@ -1136,7 +1136,7 @@
     <string name="help_sdcard">DistoX Speicher</string>
     <string name="help_read">Kalibrierungs-Koeffizienten vom DistoX anzeigen</string>
     <string name="help_info_device">Geräte-Infos</string>
-    <!-- UNUSED string name="help_scan">DistoX suchen</string -->
+    <string name="help_scan">DistoX suchen</string>
     <!-- UNUSED string name="help_scan_ble">Nach BLE (Bluetooth Low Energy) Geräten suchen</string -->
     <!-- UNUSED string name="help_pair">Mit DistoX verbinden</string -->
     <string name="help_open_calib">Kalibrierung öffnen</string>

@@ -1203,7 +1203,7 @@
     <string name="help_sdcard">DistoX управление памятью</string>
     <string name="help_read">Загрузить и показать текущие коэффициенты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
-    <!-- UNUSED string name="help_scan">Найти новые устройства DistoX</string -->
+    <string name="help_scan">Найти новые устройства DistoX</string>
     <!-- UNUSED string name="help_scan_ble">Сканирование BT окружения </string -->
     <!-- UNUSED string name="help_pair">Сопряжение текущего устройства DistoX</string -->
     <string name="help_open_calib">Открыть окно данных калибровки</string>

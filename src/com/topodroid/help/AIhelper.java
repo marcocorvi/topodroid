@@ -75,6 +75,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       cb1.setRole("user");
       cb1.addText( mDialog.mSystemInstruction );
       if ( mDialog.mJargon != null ) cb1.addText( mDialog.mJargon ); 
+      if ( mDialog.mNames  != null ) cb1.addText( mDialog.mNames  ); 
       Content mystemInstruction = cb1.build();
 
       Content.Builder cb2 = new Content.Builder();

@@ -1203,7 +1203,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_sdcard">Funciones de memoria DistoX</string>
     <string name="help_read">Descargar calibración de DistoX</string>
     <string name="help_info_device">Información del dispositivo</string>
-    <!-- UNUSED string name="help_scan">Buscando nuevos dispositivos DistoX</string -->
+    <string name="help_scan">Buscando nuevos dispositivos</string>
     <!-- UNUSED string name="help_scan_ble">Escanear en busca de dispositivos BTLE</string -->
     <!-- UNUSED string name="help_pair">Emparejar el dispositivo DistoX actual</string -->
     <string name="help_open_calib">Abrir la calibración</string>

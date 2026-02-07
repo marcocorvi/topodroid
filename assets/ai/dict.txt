@@ -28,7 +28,7 @@ closure error:{
   fr: erreur de bouclage
   hu: 
   it: errore di chiusura
-  pt: .
+  pt: 
   ru:
 }
 compass:{
@@ -248,6 +248,17 @@ tape:{
   fr: decametre
   hu: 
   it: bindella
+  pt:  
+  ru:
+}
+x-section:{
+  bg: 
+  cn: 
+  de: 
+  es: 
+  fr: 
+  hu: 
+  it: sezione
   pt:  
   ru:
 }

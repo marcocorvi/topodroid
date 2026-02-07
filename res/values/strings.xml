@@ -1233,7 +1233,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_sdcard">Memory functions (DistoX)</string>
     <string name="help_read">Read and display device calibration coefficients</string>
     <string name="help_info_device">Device info</string>
-    <!-- UNUSED string name="help_scan">Scan for new devices</string -->
+    <string name="help_scan">Scan for new devices</string>
     <!-- UNUSED string name="help_scan_ble">Scan for BTLE devices</string -->
     <!-- UNUSED string name="help_pair">Pair the active device</string -->
     <string name="help_open_calib">Open calibration</string>

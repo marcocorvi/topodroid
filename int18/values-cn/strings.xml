@@ -1208,7 +1208,7 @@
     <string name="help_sdcard">DistoX 记忆功能</string>
     <string name="help_read">读取和显示DistoX 的校准系数</string>
     <string name="help_info_device">设备信息</string>
-    <!-- UNUSED string name="help_scan">扫描新的DistoX设备</string -->
+    <string name="help_scan">扫描新的DistoX设备</string>
     <!-- UNUSED string name="help_scan_ble">扫描低功耗蓝牙设备</string -->
     <!-- UNUSED string name="help_pair">配对最近的DistoX设备</string -->
     <string name="help_open_calib">打开校准</string>

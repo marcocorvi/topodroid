@@ -1202,7 +1202,7 @@
     <string name="help_sdcard">Funzioni memoria DistoX</string>
     <string name="help_read">Leggi coefficienti calibrazione dal DistoX</string>
     <string name="help_info_device">Dati dispositivo DistoX</string>
-    <!-- UNUSED string name="help_scan">Cerca dispositivi DistoX</string -->
+    <string name="help_scan">Cerca dispositivi DistoX</string>
     <!-- UNUSED string name="help_scan_ble">Ricerca dispositivi BTLE</string -->
     <!-- UNUSED string name="help_pair">Associa il DistoX</string -->
     <string name="help_open_calib">Apri calibrazione</string>

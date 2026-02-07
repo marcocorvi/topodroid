@@ -196,7 +196,7 @@ public class DeviceActivity extends Activity
                         // R.string.help_remote
                      };
   private static final int[] help_menus = {
-                        // R.string.help_scan,
+                        R.string.help_scan,
                         // R.string.help_scan_ble, // FIXME_SCAN_BRIC
                         // R.string.help_pair,
                         R.string.help_detach,

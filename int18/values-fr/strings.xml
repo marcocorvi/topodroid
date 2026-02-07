@@ -1206,7 +1206,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_sdcard">Fonction mémoire du DistoX</string>
     <string name="help_read">Lit les coefficients d\'étalonnage du DistoX</string>
     <string name="help_info_device">Information sur l\'appareil</string>
-    <!-- UNUSED string name="help_scan">Recherche de nouveaux DistoX</string -->
+    <string name="help_scan">Recherche de nouveaux DistoX</string>
     <!-- UNUSED string name="help_scan_ble">Recherche de dispositifs BTLE</string -->
     <!-- UNUSED string name="help_pair">Appairer le DistoX Actuel</string -->
     <string name="help_open_calib">Ouvre l\'étalonnage</string>

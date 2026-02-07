@@ -1126,7 +1126,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_sdcard">Funções de memória da DistoX e do BRIC4</string>
   <string name="help_read">Ler e mostrar os coeficientes de calibração da DistoX</string>
   <string name="help_info_device">Informações do dispositivo</string>
-  <!-- UNUSED string name="help_scan">Procurar por novos dispositivos DistoX</string -->
+  <string name="help_scan">Procurar por novos dispositivos DistoX</string>
   <!-- UNUSED string name="help_scan_ble">Procurar por dispositivos BLE</string -->
   <!-- UNUSED string name="help_pair">Parear o dispositivo DistoX selecionado</string -->
   <string name="help_open_calib">Abrir calibração</string>

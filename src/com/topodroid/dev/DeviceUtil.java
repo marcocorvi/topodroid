@@ -73,7 +73,7 @@ public class DeviceUtil
    */
   public static boolean hasAdapter() { return BluetoothAdapter.getDefaultAdapter() != null; }
 
-  /** @return the set of bonded devices
+  /** @return the set of bonded (paired) devices
    */
   public static Set< BluetoothDevice > getBondedDevices() 
   {

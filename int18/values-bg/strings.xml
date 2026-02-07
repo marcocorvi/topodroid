@@ -1208,7 +1208,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_sdcard">Функции на паметта DistoX</string>
     <string name="help_read">Четене и показване на коефициентите за калибриране на DistoX</string>
     <string name="help_info_device">Информация за устройството</string>
-    <!-- UNUSED string name="help_scan">Scan for new DistoX devices</string -->
+    <!-- TODO string name="help_scan">Scan for new DistoX devices</string -->
     <!-- UNUSED string name="help_scan_ble">Scan for BTLE devices</string -->
     <!-- UNUSED string name="help_pair">Pair the active DistoX device</string -->
     <string name="help_open_calib">Отваряне на калибрацията</string>

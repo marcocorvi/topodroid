@@ -15,7 +15,7 @@ The point tool file contains lines specifying the property of the drawing tool.
 <li>"symbol point" line [mandatory]</li>
 <li>"name NAME", where NAME is the point default name [mandatory]</li>
 <li>translated names, eg, "name-es ..." [translated names are optional]</li>
-<li>"th_name NAME", where NAME is the Therion name. The filename must be the same as the Therion name, without the possible prefix "u": [mandatory]</li>
+<li>"th_name NAME", where NAME is the <i>Therion</i> name. The filename must be the same as the <i>Therion</i> name, without the possible prefix "u": [mandatory]</li>
 <li>"color rgb" (rgb in hex format, for example red is '0xff0000') [mandatory]</li>
 <li>"orientation FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
 <li>"has_text FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
@@ -37,10 +37,10 @@ The point tool file contains lines specifying the property of the drawing tool.
 The English point "name" is mandatory.<br>
 Translation of the name in other languages are optional.<br>
 Names must not contain spaces; use underscore '_' in their place.<br>
-The Therion name must coincide with the filename. This may cause a problem when the Therion name contains
+The <i>Therion</i> name must coincide with the filename. This may cause a problem when the <i>Therion</i> name contains
 a dash '-' and this is an illegal character in filenames. In this case use the equal character '=' in the filename,
 the script that creates the zip archive of the symbols files replaces '=' with '-' in the filenames.<br>
-Therion names and filename must not contain spaces.<br><p>
+<i>Therion</i> names and filename must not contain spaces.<br><p>
 
 <b>Orientation</b><br>
 If the attribute "orientation" is set, the point symbol can be drawn at an angle, and it can be rotated.<br><p>
