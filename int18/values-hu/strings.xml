@@ -382,7 +382,7 @@
     <string name="error_value_required">Érték szükséges</string>
     <string name="error_bad_fixes">A fix pont nincs a mérésben</string>
     <string name="error_bad_name">Módosult fájlnév</string>
-    <!-- TODO string name="error_question">Please, enter a question</string -->
+    <string name="error_question">Írj be egy kérdést</string>
     
     <string name="group_title">Kalibrációs adat csoportok</string>
     <!-- UNUSED string name="group_policy_four">Négyesével csoportosítva</string -->
@@ -917,7 +917,7 @@
     <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
     <string name="button_select"    >Kiválaszt    </string>
-    <!-- TODO string name="button_submit"    >Submit</string -->
+    <string name="button_submit"    >Elküld</string>
     <string name="button_leg_station">Poligon pontok</string>
     <string name="button_all_station">Minden pont</string>
     <string name="button_leg_search">Poligon keresés</string>
@@ -1014,7 +1014,7 @@
     <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
     <string name="bt_alias_title">Bluetooth aliasok</string>
-    <!-- TODO string name="hint_api_key">API key</string -->
+    <string name="hint_api_key">API kulcs</string>
     <string name="hint_bt_alias">BT alias</string>
     <string name="hint_bt_code">Műszer kód</string>
     <string name="bt_alias_missing">BT alias hiányzik</string>
@@ -1302,8 +1302,8 @@
     <string name="import_diving_datamode">Merülési adatmód</string>
     <string name="import_therion_path">Felmérési útvonallal</string>
 
-    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
-    <!-- TODO string name="title_ai_dialog">AI helper</string -->
+    <string name="title_gemini">Ird be a te MI API kulcsodat</string>
+    <string name="title_ai_dialog">MI súgó</string>
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
@@ -1494,8 +1494,8 @@
 
   <string name="pref_locale_title">Nyelv</string>
   <string name="pref_locale_summary">Nyelv</string>
-  <!-- TODO string name="pref_gemini_title">AI key</string -->
-  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
+  <string name="pref_gemini_title">MI kulcs</string>
+  <string name="pref_gemini_summary">Gemini API kulcs</string>
   <string name="pref_orientation_title">Képernyő irány</string>
   <string name="pref_orientation_summary">App képernyő irány</string>
   <string name="pref_single_back_title">Egy vissza</string>
