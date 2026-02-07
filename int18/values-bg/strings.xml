@@ -383,6 +383,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_value_required">Необходима стойност</string>
     <string name="error_bad_fixes">Фиксираните точки не са включени в картировката</string>
     <string name="error_bad_name">Името на файла е променено</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
 
     <string name="group_title">Групиране на данните за калибрацията</string>
     <!-- UNUSED string name="group_policy_four">Групирай по четири</string -->
@@ -915,7 +916,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_clear_week">Изчистване на 7 дни</string>
     <string name="button_clear_memory">Изчистване на паметта</string>
     <string name="button_save">Запази</string>
-    <!-- UNUSED string name="button_select"    >Избери</string -->
+    <string name="button_select"    >Избери</string>
+    <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">Репери в отсечка</string>
     <string name="button_all_station">Всички репери</string>
     <string name="button_leg_search">Търсене на отсечка</string>
@@ -1011,6 +1013,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Bluetooth псевдоними</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">Псевдоним на BT</string>
     <string name="hint_bt_code">Код на устройството</string>
     <string name="bt_alias_missing">Липсва псевдоним на BT</string>
@@ -1297,6 +1300,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="import_diving_datamode">Подводен режим на данни</string>
     <string name="import_therion_path">С картировачен път</string>
 
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
@@ -1474,6 +1479,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_locale_title">Език</string>
   <string name="pref_locale_summary">Език на приложението</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
   <string name="pref_orientation_title">Ориентация на екрана</string>
   <string name="pref_orientation_summary">Ориентация на екрана на приложението</string>
   <string name="pref_single_back_title">Единично докосване</string>

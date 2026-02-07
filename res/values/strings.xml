@@ -3,7 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <string name="ai">AI</string>
+    <string name="ai" translatable="false">AI</string>
     <!-- UNUSED string name="no_api_key">AI API key has not been set</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>

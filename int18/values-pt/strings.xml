@@ -355,6 +355,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="error_value_required">Valor exigido</string>
   <string name="error_bad_fixes">Ponto fixos não estão na topo</string>
   <string name="error_bad_name">Nome do arquivo alterado</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
   <string name="group_title">Grupos dados calibração</string>
   <!-- UNUSED string name="group_policy_four">Regra: agrupar 4 a 4</string -->
   <!-- UNUSED string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string -->
@@ -856,6 +857,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_clear_memory">Limpar memória</string>
   <string name="button_save">Gravar    </string>
   <string name="button_select">Selecionar    </string>
+    <!-- TODO string name="button_submit"    >Submit</string -->
   <string name="button_leg_station">Visadas</string>
   <string name="button_all_station">Todas</string>
   <string name="button_leg_search">Visadas 2 bases</string>
@@ -940,6 +942,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
   <!-- UNUSED string name="clino">Inclinação [deg]</string -->
   <string name="bt_alias_title">ID Bluetooth</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
   <string name="hint_bt_alias">ID BT</string>
   <string name="hint_bt_code">Código do dispositivo</string>
   <string name="bt_alias_missing">ID BT faltando</string>
@@ -1210,6 +1213,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="import_leg_first">Visada antes de EDTC</string>
   <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
   <string name="import_therion_path">Com hierarquia de topos</string>
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
@@ -1379,6 +1384,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   <string name="pref_locale_title">Idioma app</string>
   <string name="pref_locale_summary">Idioma do aplicativo</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
   <string name="pref_orientation_title">Orient tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
   <string name="pref_single_back_title">\u0022Voltar\u0022 único</string>

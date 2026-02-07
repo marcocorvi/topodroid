@@ -363,6 +363,7 @@
     <string name="error_value_required">Wert erforderlich</string>
     <string name="error_bad_fixes">Fixpunkte nicht in der Vermessung enthalten</string>
     <string name="error_bad_name">Dateiname geändert</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
 
     <string name="group_title">Den Kalibrierungsdaten Gruppen zuweisen</string>
     <!-- UNUSED string name="group_policy_four">Jeweils 4 Messungen</string -->
@@ -864,6 +865,7 @@
     <string name="button_clear_memory">Speicher löschen</string>
     <string name="button_save">Speichern</string>
     <string name="button_select">Wählen</string>
+    <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">Nur Messstrecken</string>
     <string name="button_all_station">Alle Messungen</string>
     <string name="button_leg_search">Messstrecke</string>
@@ -948,6 +950,7 @@
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
     <string name="bt_alias_title">Bluetooth Namen</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">BT Name</string>
     <string name="hint_bt_code">Gerätecode</string>
     <string name="bt_alias_missing">BT Name fehlt</string>
@@ -1221,6 +1224,8 @@
     <string name="import_leg_first">Messzug vor LRUD</string>
     <string name="import_diving_datamode">Tauchmodus</string>
     <string name="import_therion_path">Mit Vermessungspfad</string>
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_audio">Audio-Kommentar</string>
     <string name="title_audio_list">Audioaufnahmen</string>
@@ -1391,6 +1396,8 @@
     <!-- UNUSED string name="pref_cat_log">Log Optionen</string -->
     <string name="pref_locale_title">Sprache</string>
     <string name="pref_locale_summary">Auswahl der Sprache</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
     <string name="pref_orientation_title">Bildschirmausrichtung</string>
     <string name="pref_orientation_summary">Bildschirmausrichtung fixieren oder automatisch</string>
     <string name="pref_single_back_title">Dialoge mit einfachem Zurück schliessen</string>

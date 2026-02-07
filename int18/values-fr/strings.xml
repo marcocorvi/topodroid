@@ -382,6 +382,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_value_required">Valeur nécessaire</string>
     <string name="error_bad_fixes">Corriger les points qui ne figurent pas dans le relevé</string>
     <string name="error_bad_name">Nom de fichier modifié</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
     
     <string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
     <!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->
@@ -914,7 +915,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_clear_week">Effacer 7j</string>
     <string name="button_clear_memory">Effacer la mémoire</string>
     <string name="button_save"      >ENREGISTRER</string>
-    <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
+    <string name="button_select"    >Sélectionner    </string>
+    <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">Stations du cheminement</string>
     <string name="button_all_station">Toutes stations</string>
     <string name="button_leg_search">Chercher visées de cheminement</string>
@@ -1009,6 +1011,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="clino">Clino [deg]</string -->
     
     <string name="bt_alias_title">Alias Bluetooth</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">BT alias</string>
     <string name="hint_bt_code">Code de l\'appareil</string>
     <string name="bt_alias_missing">Alias BT manquant</string>
@@ -1295,6 +1298,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="import_diving_datamode">Mode de données plongée</string>
     <string name="import_therion_path">Avec chemin du relevé</string>
 
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_audio_list">Enregistrements audio</string>
@@ -1472,6 +1477,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="pref_locale_title">Langue</string>
     <string name="pref_locale_summary">Langue de l\'application</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
     <string name="pref_orientation_title">Orientation écran</string>
     <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
     <string name="pref_single_back_title">Simple retour arrière</string>

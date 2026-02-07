@@ -384,6 +384,7 @@
     <string name="error_value_required">输入赋值</string>
     <string name="error_bad_fixes">修正点不在测量数据中</string>
     <string name="error_bad_name">文件名已修改</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
 
     <string name="group_title">校准数据组</string>
     <!-- UNUSED string name="group_policy_four">原则: 四个一组</string -->
@@ -915,7 +916,8 @@
     <string name="button_clear_week">清除 1周  </string>
     <string name="button_clear_memory">清除内存</string>
     <string name="button_save"      >保存      </string>
-    <!-- UNUSED string name="button_select"    >Select    </string -->
+    <!-- TODO string name="button_select"    >Select    </string -->
+    <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">主线站点</string>
     <string name="button_all_station">所有站点</string>
     <string name="button_leg_search">主线搜索</string>
@@ -1011,6 +1013,7 @@
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">蓝牙别名</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">蓝牙别名</string>
     <string name="hint_bt_code">设备代码</string>
     <string name="bt_alias_missing">蓝牙别名丢失</string>
@@ -1297,6 +1300,8 @@
     <string name="import_diving_datamode">潜水数据模式</string>
     <string name="import_therion_path">跟随测量路径</string>
 
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
@@ -1487,6 +1492,8 @@
 
   <string name="pref_locale_title">语言</string>
   <string name="pref_locale_summary">软件语言</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
   <string name="pref_orientation_title">屏幕适应</string>
   <string name="pref_orientation_summary">软件屏幕适应</string>
   <string name="pref_single_back_title">单次操作返回</string>

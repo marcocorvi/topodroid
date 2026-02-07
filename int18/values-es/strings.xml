@@ -385,6 +385,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_value_required">Introducir valor</string>
     <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
     <string name="error_bad_name">Nombre de archivo modificado</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
@@ -912,7 +913,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_clear_week">limpiar 7d  </string>
     <string name="button_clear_memory">limpiar la memoria</string>
     <string name="button_save"      >Guardar   </string>
-    <!-- UNUSED string name="button_select"    >Seleccionar </string -->
+    <string name="button_select"    >Seleccionar </string>
+    <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">Estación principal</string>
     <string name="button_all_station">Todas las estaciones</string>
     <string name="button_leg_search">Buscar estaciones</string>
@@ -1007,6 +1009,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Alias ​​de Bluetooth</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Codigo dispositivo</string>
     <string name="bt_alias_missing">Alias desconocido BT</string>
@@ -1292,6 +1295,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_diving_datamode">Modo de datos de inmersión</string>
     <string name="import_therion_path">Con ruta de topografía</string>
 
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_audio_list">Registros de audio</string>
@@ -1469,6 +1474,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Seleccione idioma</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
   <string name="pref_orientation_title">Orientación de Pantalla</string>
   <string name="pref_orientation_summary">Orientación Pantalla App </string>
   <string name="pref_single_back_title">Respaldo Simple</string>

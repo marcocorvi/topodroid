@@ -380,6 +380,7 @@
     <string name="error_value_required">Valore mancante</string>
     <string name="error_bad_fixes">Geo-punti non presenti nel rilievo</string>
     <string name="error_bad_name">Nome file modificato</string>
+    <!-- TODO string name="error_question">Please, enter a question</string -->
     
     <string name="group_title">Assegna i gruppi ai dati calibrazione</string>
     <!-- UNUSED string name="group_policy_four">Metodo: gruppi di quattro</string -->
@@ -910,6 +911,7 @@
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <string name="button_select"    >Seleziona</string>
+    <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">Battute</string>
     <string name="button_all_station">Tutti i capisaldi</string>
     <string name="button_leg_search">Ricerca battuta</string>
@@ -1006,6 +1008,7 @@
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
     <string name="bt_alias_title">Alias Bluetooth</string>
+    <!-- TODO string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Codice Device</string>
     <string name="bt_alias_missing">Alias BT mancante</string>
@@ -1292,6 +1295,8 @@
     <string name="import_diving_datamode">Modo dati da immersione</string>
     <string name="import_therion_path">Con percorso del rilievo</string>
 
+    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
+    <!-- TODO string name="title_ai_dialog">AI helper</string -->
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
@@ -1484,6 +1489,8 @@
 
   <string name="pref_locale_title">Lingua</string>
   <string name="pref_locale_summary">Lingua</string>
+  <!-- TODO string name="pref_gemini_title">AI key</string -->
+  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
   <string name="pref_orientation_title">Orientazione display</string>
   <string name="pref_orientation_summary">Orientazione display</string>
   <string name="pref_single_back_title">Indietro singolo</string>
