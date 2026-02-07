@@ -4,7 +4,7 @@ azimuth:{
   de: 
   es: 
   fr: 
-  hu: 
+  hu: azimut
   it: azimut
   pt: 
   ru:
@@ -15,7 +15,7 @@ bearing:{
   de: Richtung
   es: 
   fr: 
-  hu: 
+  hu: irány
   it: direzione
   pt: 
   ru:
@@ -26,7 +26,7 @@ closure error:{
   de: Abschlussfehler
   es: error de cierre
   fr: erreur de bouclage
-  hu: 
+  hu: záráshiba
   it: errore di chiusura
   pt: 
   ru:
@@ -37,7 +37,7 @@ compass:{
   de: 
   es: 
   fr: 
-  hu: 
+  hu: kompasz
   it: bussola
   pt: 
   ru:
@@ -48,7 +48,7 @@ cross-section:{
   de: 
   es: sección transversal
   fr: coupe transversale
-  hu: 
+  hu: keresztmetszet
   it: sezione trasversale
   pt:  
   ru:
@@ -59,7 +59,7 @@ denivelation:{
   de: Hőhenunterschied
   es: desnivel
   fr: dénivelé
-  hu: 
+  hu: magasságkülönbség
   it: dislivello
   pt: desnivel 
   ru:
@@ -70,7 +70,7 @@ development:{
   de: Gesamtganglänge
   es: desarrpllo
   fr: deveppement
-  hu: 
+  hu: járathossz
   it: sviluppo
   pt:  
   ru:
@@ -81,7 +81,7 @@ entrance:{
   de: Eingang
   es: entrada
   fr: entrée
-  hu: 
+  hu: bejárat
   it: ingresso
   pt: entrada 
   ru:
@@ -92,7 +92,7 @@ grid:{
   de: 
   es: 
   fr: 
-  hu: 
+  hu: rács
   it: reticolato
   pt: 
   ru:
@@ -103,7 +103,7 @@ leg:{
   de: Meßstrecke
   es: tramo
   fr: visée
-  hu: 
+  hu: poligon mérés
   it: battuta
   pt: visada
   ru:
@@ -125,7 +125,7 @@ midline:{
   de: Meßzug
   es: poligonal
   fr: cheminement
-  hu: 
+  hu: poligon vonal
   it: poligonale
   pt: poligonal 
   ru:
@@ -136,7 +136,7 @@ notebook:{
   de: Notizblock
   es: cuaderno
   fr: carnet topo
-  hu: 
+  hu: vázlat füzet
   it: tacquino
   pt:  
   ru:
@@ -158,7 +158,7 @@ profile:{
   de: Langschnitt
   es: alzado desarrollado
   fr: coupe developée
-  hu: kifejtett hossz-metszet
+  hu: kiterített oldalnézet
   it: sezione longitudinale
   pt: corte longitudinal
   ru:
@@ -169,7 +169,7 @@ projected profile:{
   de: Aufriss
   es: alzado proyectado
   fr: coupe projectée
-  hu: 
+  hu: vetített oldalnézet
   it: sezione proiettata
   pt: corte
   ru:
@@ -180,7 +180,7 @@ range:{
   de: Entfernung
   es: 
   fr: extension
-  hu: 
+  hu: távolság
   it: estensione
   pt:  
   ru:
@@ -191,7 +191,7 @@ scale:{
   de: Maßstab
   es: 
   fr: echelle
-  hu: 
+  hu: skála
   it: scala
   pt:  
   ru:
@@ -213,7 +213,7 @@ splay:{
   de: 
   es: 
   fr: 
-  hu: 
+  hu: sün
   it: splay
   pt: 
   ru:
@@ -224,7 +224,7 @@ station:{
   de: Meßpunkt
   es: estación
   fr: station
-  hu: 
+  hu: mérési pont
   it: caposaldo
   pt: base
   ru:
@@ -235,7 +235,7 @@ surveying:{
   de: Vermessung
   es: topografia
   fr: topographie
-  hu: barlangtérkép
+  hu: felmérés
   it: topografia
   pt:  
   ru:
@@ -246,7 +246,7 @@ tape:{
   de: Maßband
   es: cinta
   fr: decametre
-  hu: 
+  hu: mérőszalag
   it: bindella
   pt:  
   ru:
@@ -257,7 +257,7 @@ x-section:{
   de: 
   es: 
   fr: 
-  hu: 
+  hu: keresztmetszet
   it: sezione
   pt:  
   ru:
