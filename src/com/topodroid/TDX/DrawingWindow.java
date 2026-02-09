@@ -7922,10 +7922,10 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
-    if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
-      TDToast.makeBad( R.string.no_feature_pdf );
-      return;
-    }
+    // if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
+    //   TDToast.makeBad( R.string.no_feature_pdf );
+    //   return;
+    // }
     // TDPath.getPdfDir();
     // TDLog.v( "PDF export <" + fullname + ">");
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );

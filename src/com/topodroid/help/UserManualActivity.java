@@ -15,6 +15,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.GeminiDialog;
 import com.topodroid.TDX.TDandroid;
 // import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
@@ -264,11 +265,11 @@ public class UserManualActivity extends Activity
     }
 
     mAI  = (ImageView) findViewById( R.id.ai );
-    if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+    // if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
       mAI.setOnClickListener( this );
-    } else {
-      mAI.setVisibility( View.GONE );
-    }
+    // } else {
+    //   mAI.setVisibility( View.GONE );
+    // }
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     mList = (ListView) findViewById( R.id.content );
@@ -320,7 +321,9 @@ public class UserManualActivity extends Activity
       }
     } else if ( b == mAI ) {
       if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-        (new AIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
+        showAIdialog();
+      } else { // start API key dialog
+        (new GeminiDialog( this, this, null )).show();
       }
     }
   }
@@ -393,6 +396,12 @@ public class UserManualActivity extends Activity
     intent.setClass( context, UserManualActivity.class );
     intent.putExtra( TDTag.TOPODROID_HELP_PAGE, page );
     context.startActivity( intent );
+  }
+
+  public void showAIdialog()
+  {
+    TDToast.make( R.string.ai_internet );
+    (new AIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
   }
 
   // /** react to a change in the configuration

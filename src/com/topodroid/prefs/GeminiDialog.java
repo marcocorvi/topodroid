@@ -13,6 +13,8 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.help.AIhelper;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
@@ -27,10 +29,11 @@ import android.widget.Button;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-class GeminiDialog extends MyDialog
-                   implements OnClickListener
+public class GeminiDialog extends MyDialog
+                          implements OnClickListener
 {
   private TDPref mPref;
+  private UserManualActivity mParent;
 
   // ---------------------------------------------------------------
   /** cstr
@@ -39,10 +42,11 @@ class GeminiDialog extends MyDialog
    * @param downloader data downloader
    * @param lister     data lister
    */
-  GeminiDialog( Context context, TDPref pref )
+  public GeminiDialog( Context context, UserManualActivity parent, TDPref pref )
   {
     super( context, null, 0 ); // 0: no help resource
-    mPref    = pref;
+    mParent = parent;
+    mPref   = pref;
   }
 
   @Override
@@ -68,7 +72,21 @@ class GeminiDialog extends MyDialog
       String key = ((EditText) findViewById( R.id.api_key )).getText().toString();
       if ( key == null ) key = "";
       TDSetting.setGeminiApiKey( key );
-      mPref.setButtonValue( (key.isEmpty())? "" : "***" );
+      if ( ! key.isEmpty() ) {
+        AIhelper.validateApiKey( key, new AIhelper.ValidationCallback() {
+          public void onResult( boolean valid, String response )
+          {
+            if ( valid ) {
+              if ( mPref != null ) mPref.setButtonValue( "***" );
+              if ( mParent != null ) mParent.showAIdialog();
+            } else {
+              TDLog.v( response );
+            }
+          }
+        } );
+      } else { 
+        if ( mPref != null ) mPref.setButtonValue( (key.isEmpty())? "" : "***" );
+      }
     } else if ( v.getId() == R.id.button_view ) {
       if ( TDSetting.mGeminiApiKey != null ) {
         EditText et = (EditText) findViewById( R.id.api_key );

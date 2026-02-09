@@ -60,12 +60,17 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!-- Android-12 replaces BLUETOOTH and BLUETTOTH_ADMIN with the following two -->
+    <!-- Android-12 replaces BLUETOOTH and BLUETTOTH_ADMIN with the following 
+      could add android-maxSdkVersion="30" to the two above, but i want topodroid to turn on bluetooth
+    -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 <!-- IF > 29
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
 -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <!-- android_usesPermissionFlags="neverForLocation"
+         tools_targetApi="s"
+    -->
 
     <!-- Android-12 ignores MANAGE_EXTERNAL_STORAGE: user must grant with adb - nevertheless the uses-permission must be declared -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"/>

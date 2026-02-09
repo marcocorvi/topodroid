@@ -256,7 +256,7 @@ x-section:{
   cn: 
   de: 
   es: 
-  fr: 
+  fr: coupe
   hu: keresztmetszet
   it: sezione
   pt:  

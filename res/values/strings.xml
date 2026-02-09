@@ -4,6 +4,12 @@
   >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="ai" translatable="false">AI</string>
+    <string name="ai_null_chat">Null AI chat</string>
+    <string name="ai_error">AI error %1$s</string>
+    <string name="ai_internet">Warning. AI help requires web connection.</string>
+    <string name="ai_prompt">Type your question</string>
+    <string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string>
+
     <!-- UNUSED string name="no_api_key">AI API key has not been set</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>

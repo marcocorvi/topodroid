@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- TODO string name="ai_null_chat">Null AI chat</string -->
+    <!-- TODO string name="ai_error">AI error %1$s</string -->
+    <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
+    <!-- TODO string name="ai_prompt">Type your question</string -->
+    <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>

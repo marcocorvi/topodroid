@@ -4,6 +4,8 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
+import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
 
 import android.os.Handler;
@@ -28,6 +30,7 @@ import com.google.ai.client.generativeai.type.Content;
 import com.google.ai.client.generativeai.type.GenerationConfig;
 import com.google.ai.client.generativeai.type.RequestOptions;
 import com.google.ai.client.generativeai.type.GenerateContentResponse;
+import com.google.ai.client.generativeai.type.CountTokensResponse;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -95,16 +98,23 @@ public class AIhelper // extends AsyncTask< String, Void, String >
 
       GenerationConfig gc = gcb.build();
 
-      // GenerativeModel.Builder gmb = new GenerativeModel.Builder();
-      // gmb.setModelname( model_name )
-      //    .setApiKey( mUserKey )
-      //    .setGenerationConfig( gc )
-      //    .setSystemInstructions( mystemInstruction );
-      // GenerativeModel gm = gmb.build();
-      GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
+      // try {
+        // GenerativeModel.Builder gmb = new GenerativeModel.Builder();
+        // gmb.setModelname( model_name )
+        //    .setApiKey( mUserKey )
+        //    .setGenerationConfig( gc )
+        //    .setSystemInstructions( mystemInstruction );
+        // GenerativeModel gm = gmb.build();
+        GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
 
-      this.model = GenerativeModelFutures.from( gm );
-      this.chat = this.model.startChat( history );
+        this.model = GenerativeModelFutures.from( gm );
+        this.chat = this.model.startChat( history );
+      // } catch ( ClassNotFoundException e ) {
+      //   // this.model = null;
+      //   // this.chat  = null;
+      //   // TDLog.e("ERROR " + e.getMessage() );
+      //   TDToast.makeBad("System error - please report " + e.getMessage() );
+      // }
     }
     // */
 
@@ -136,38 +146,42 @@ public class AIhelper // extends AsyncTask< String, Void, String >
   public void execute( String user_prompt, TextView tv, boolean local_context )
   {
     mDoReport = true;
-    final WeakReference<TextView> textViewRef = new WeakReference<>(tv);
+    if ( chat != null ) {
+      final String error_format = mContext.getResources().getString( R.string.ai_error );
+      final WeakReference<TextView> textViewRef = new WeakReference<>(tv);
 
-    StringBuilder sb = new StringBuilder();
-    if ( local_context && mRefPage != null ) sb.append("CONTTEXT: The user is currently reading the manual page: \'").append( mRefPage ).append("\'\n");
-    sb.append("QUESTION: ").append( user_prompt ).append("\n");
+      StringBuilder sb = new StringBuilder();
+      if ( local_context && mRefPage != null ) sb.append("CONTTEXT: The user is currently reading the manual page: \'").append( mRefPage ).append("\'\n");
+      sb.append("QUESTION: ").append( user_prompt ).append("\n");
  
-    Content content = new Content.Builder().addText( sb.toString() ).build();
+      Content content = new Content.Builder().addText( sb.toString() ).build();
 
-    // single-shot query
-    // ListenableFuture< GenerateContentResponse > response = model.generateContent( content );
+      // single-shot query
+      // ListenableFuture< GenerateContentResponse > response = model.generateContent( content );
 
-    ListenableFuture< GenerateContentResponse > response = chat.sendMessage( content ); 
+      ListenableFuture< GenerateContentResponse > response = chat.sendMessage( content ); 
 
-    Futures.addCallback(response,
-            new FutureCallback<GenerateContentResponse>() {
-                @Override
-                public void onSuccess(GenerateContentResponse response) {
-                    updateUI(textViewRef, response.getText());
-                }
+      Futures.addCallback(response,
+              new FutureCallback<GenerateContentResponse>() {
+                  @Override
+                  public void onSuccess(GenerateContentResponse response) {
+                    updateUI( textViewRef, response.getText() );
+                  }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    updateUI(textViewRef, "AI error: " + t.getMessage());
-                }
-            }, new Executor() {  // context.getMainExecutor()
-                @Override
-                public void execute(Runnable command) {
-                    command.run();
-                }
-            }
-    );
-    // */
+                  @Override
+                  public void onFailure(Throwable t) {
+                    updateUI( textViewRef, String.format( error_format, t.getMessage() ) );
+                  }
+              }, new Executor() {  // context.getMainExecutor()
+                  @Override
+                  public void execute(Runnable command) {
+                      command.run();
+                  }
+              }
+      );
+    } else {
+      TDToast.makeBad( R.string.ai_null_chat );
+    }
   }
 
   private void updateUI( WeakReference<TextView> tvRef, String message )
@@ -236,6 +250,31 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     if ( mDialog != null ) mDialog.showResponse( sb.toString() );
   }
 */
+
+  public interface ValidationCallback
+  {
+    public void onResult( boolean valid, String response );
+  }
+
+  public static void validateApiKey( final String api_key, final ValidationCallback callback )
+  {
+    GenerativeModel gm = new GenerativeModel( "gemini-2.5-flash", api_key );
+    GenerativeModelFutures model = GenerativeModelFutures.from( gm );
+    Content.Builder cb = new Content.Builder();
+    cb.addText("Hello");
+    Content dummy = cb.build();
+    ListenableFuture< CountTokensResponse > future = model.countTokens( dummy );
+    Futures.addCallback( future,
+      new FutureCallback< CountTokensResponse >() {
+        @Override public void onSuccess( CountTokensResponse result ) { callback.onResult( true, null ); }
+        @Override public void onFailure( Throwable t ) { callback.onResult( false, t.getMessage() ); }
+      }, 
+      new Executor() {  // context.getMainExecutor()
+        @Override
+        public void execute(Runnable command) { command.run(); }
+      }
+    );
+  }
 
 }
   

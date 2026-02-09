@@ -6,6 +6,15 @@
   android:orientation="vertical"
   >
 
+  <TextView 
+    style="@style/text_default"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:singleLine="false"
+    android:text="@string/ai_key_instruction"
+    android:layout_marginTop="@dimen/marginvbig"
+  />
+  
   <EditText android:id="@+id/api_key"
     style="@style/edit_text"
     android:layout_width="match_parent"

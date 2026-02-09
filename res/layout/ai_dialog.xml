@@ -9,14 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:drawSelectorOnTop="true"
-    />
-
-  <EditText android:id="@+id/question" 
-    android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="match_parent"
-    android:ems="25"
-    android:layout_height="wrap_content" 
-    android:singleLine="true"
+    android:layout_marginTop="@dimen/marginv"
   />
 
   <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -25,43 +18,58 @@
     android:layout_weight="1"
     >
     <TextView android:id="@+id/answer" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="match_parent"
-        android:ems="25"
-        android:layout_height="fill_parent" 
-        android:minLines="16"
-        android:scrollHorizontally="true"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="match_parent"
+      android:ems="25"
+      android:layout_height="fill_parent" 
+      android:minLines="16"
+      android:scrollHorizontally="true"
     />
   </ScrollView>
 
-
-   <LinearLayout android:id="@+id/help"
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:gravity="start|bottom"
+    android:orientation="vertical"
+    >
+    <EditText android:id="@+id/question" 
+      android:layout_width="match_parent"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:hint="@string/ai_prompt"
+    />
+    <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_marginTop="@dimen/marginv"
       android:gravity="start|bottom"
+      android:orientation="horizontal"
       >
-    <Button android:id="@+id/button_help"
+      <Button android:id="@+id/button_help"
         style="@style/button_empty"
         android:text="@string/button_help"
-    />
-    <LinearLayout
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="end"
-      >
-      <Button android:id="@+id/button_cancel"
-        style="@style/button_default"
-        android:text="@string/button_close"
-        />
-      <Button android:id="@+id/button_clear"
-        style="@style/button_default"
-        android:text="@string/button_clear"
-        />
-      <Button android:id="@+id/button_submit"
-        style="@style/button_default"
-        android:text="@string/button_submit"
-        />
+     />
+     <LinearLayout
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:gravity="end"
+       >
+       <Button android:id="@+id/button_cancel"
+         style="@style/button_default"
+         android:text="@string/button_close"
+         />
+       <Button android:id="@+id/button_clear"
+         style="@style/button_default"
+         android:text="@string/button_clear"
+         />
+       <Button android:id="@+id/button_submit"
+         style="@style/button_default"
+         android:text="@string/button_submit"
+         />
+      </LinearLayout>
     </LinearLayout>
   </LinearLayout>
 </LinearLayout>

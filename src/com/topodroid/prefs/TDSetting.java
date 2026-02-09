@@ -1614,7 +1614,7 @@ public class TDSetting
     return ret;
   }
 
-  /** set the value of the Gemini API key
+  /** set the value of the Gemini API key and store it
    * @param value   new vallue
    */
   static void setGeminiApiKey( String value ) 

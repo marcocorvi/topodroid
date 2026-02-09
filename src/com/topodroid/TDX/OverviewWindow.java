@@ -849,10 +849,10 @@ public class OverviewWindow extends ItemDrawer
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
-    if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
-      TDToast.makeBad( R.string.no_feature_pdf );
-      return;
-    }
+    // if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
+    //   TDToast.makeBad( R.string.no_feature_pdf );
+    //   return;
+    // }
 
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
 

@@ -390,7 +390,8 @@ public class TDFile
       // TDLog.v("getCBD " + type + " use private dir ");
       ret = getPrivateDir( type ); // FIXME do i need to create ?
     } else {
-      String documents = ( TDandroid.BELOW_API_19 )? "Documents" : Environment.DIRECTORY_DOCUMENTS;
+      // String documents = ( TDandroid.BELOW_API_19 )? "Documents" : Environment.DIRECTORY_DOCUMENTS;
+      String documents = Environment.DIRECTORY_DOCUMENTS;
       if ( type == null ) {
         ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX" );
       } else {

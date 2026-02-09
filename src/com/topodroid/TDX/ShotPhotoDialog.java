@@ -48,7 +48,7 @@ class ShotPhotoDialog extends MyDialog
   private String   mName;          // shot name
   private String   mGeoCode;       // geomorphology code
   // private Button   mButtonCancel;
-  private boolean  cameraAPI;
+  // private boolean  cameraAPIbelow21;
 
   /**
    * @param context   context
@@ -76,7 +76,7 @@ class ShotPhotoDialog extends MyDialog
       TDToast.makeWarn( R.string.warning_nogrant_camera );
       dismiss();
     } else {
-      cameraAPI = TDandroid.BELOW_API_21;
+      // cameraAPIbelow21 = TDandroid.BELOW_API_21;
       // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
       initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
       
@@ -87,7 +87,7 @@ class ShotPhotoDialog extends MyDialog
       mButtonOK.setOnClickListener( this );
 
       // mCamera    = (CheckBox) findViewById(R.id.photo_camera );
-      // if ( cameraAPI ) { // use old Camera API
+      // if ( cameraAPIibelow21 ) { // use old Camera API
       //   mCamera.setVisibility( View.GONE );
       //   mCamera.setChecked( true );  // checked = use old Camera API
       // } else {
@@ -123,8 +123,8 @@ class ShotPhotoDialog extends MyDialog
       // }
       // TDLog.v( "PHOTO comment " + comment );
       int camera = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
-      // int camera = // ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
-      // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
+      // int camera = // ( cameraAPIibelow21 || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
+      // TDLog.v("camera " + camera + " old-API " + cameraAPIibelow21 + ", checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
       mParent.doTakePhoto( mContext, mShotId, "", comment, camera, mGeoCode, MediaInfo.TYPE_SHOT ); // title=""
     } else if ( TDLevel.overExpert && b == mBtnGeoCode ) {
