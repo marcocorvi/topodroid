@@ -177,35 +177,35 @@ class PlotNewDialog extends MyDialog
     plot_name = TDString.spacesToUnderscore( plot_name ); // this trims the string
 
     // if ( mApp.hasSurveyPlotName( plot_name ) ) { // this checks "plot_name"
-    //   mEtName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
+    //   mEtName.setError( resString( R.string.error_name_duplicate ) );
     //   return false;
     // }
     if ( mMaker.hasSurveyPlot( plot_name ) ) { // this checks "plot_name" + "p"
-      mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+      mEtName.setError( resString( R.string.plot_duplicate_name ) );
       return false;
     }
     // if ( ! TDUtil.isStationName( plot_name ) ) {
-    //   mEtName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+    //   mEtName.setError( resString( R.string.bad_station_name ) );
     //   return false;
     // }
 
     // if ( plot_start == null ) { // CANNOT HAPPEN
-    //   mEtStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
+    //   mEtStart.setError( resString( R.string.error_start_required ) );
     //   return false;
     // }
     
     // plot_start = TDUtil.toStationFromName( plot_start );
     if ( TDString.isNullOrEmpty( plot_start ) ) {
-      mEtStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
+      mEtStart.setError( resString( R.string.error_start_required ) );
       return false;
     } 
     if ( ! TDUtil.isStationName( plot_start ) ) {
-      mEtStart.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+      mEtStart.setError( resString( R.string.bad_station_name ) );
       return false;
     }
     boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();
     if ( ! ( dangling || mMaker.hasSurveyStation( plot_start ) ) ) {
-      mEtStart.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
+      mEtStart.setError( resString( R.string.error_station_non_existing ) );
       return false;
     }
 

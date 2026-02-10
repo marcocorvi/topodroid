@@ -84,7 +84,7 @@ class SurveyRenameDialog extends MyDialog
       name = TDString.spacesToUnderscore( name ); // this trims the string
       if ( ! name.equals( TDInstance.survey ) ) {
         if ( TopoDroidApp.mData.hasSurveyName( name ) ) {
-          mEtName.setError( mContext.getResources().getString( R.string.survey_exists ) );
+          mEtName.setError( resString( R.string.survey_exists ) );
 	  return;
         }
         mParent.renameSurvey( name );

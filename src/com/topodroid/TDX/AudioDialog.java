@@ -118,9 +118,9 @@ class AudioDialog extends MyDialog
     // mBtnClose.setOnClickListener( this );
     ( (Button) findViewById( R.id.audio_close ) ).setOnClickListener( this );
     if ( mBlk != null ) {
-      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_shot ), mBlk.mFrom, mBlk.mTo ) );
+      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( resString( R.string.audio_id_shot ), mBlk.mFrom, mBlk.mTo ) );
     } else { 
-      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_plot ), mAudioId ) );
+      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( resString( R.string.audio_id_plot ), mAudioId ) );
     }
 
     mBtnRec    = new MyStateBox( mContext, R.drawable.iz_audio_rec, R.drawable.iz_audio_rec_on );

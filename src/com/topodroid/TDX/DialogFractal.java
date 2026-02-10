@@ -108,7 +108,7 @@ class DialogFractal extends MyDialog
       try {
         mCellSide = Double.parseDouble( mCell.getText().toString() );
       } catch ( NumberFormatException e ) {
-        mCell.setError( mContext.getResources().getString(R.string.illegal_value) );
+        mCell.setError( resString(R.string.illegal_value) );
         return;
       }
       int mode = FractalComputer.COUNT_TOTAL;

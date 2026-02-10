@@ -213,8 +213,7 @@ class SymbolEnableDialog extends MyDialog
     // } else if ( vid == R.id.symbol_reload ) {
     //   String old_version = mApp.mDData.getValue( "symbol_version" );
     //   if ( old_version == null ) old_version = "-";
-    //   String message = String.format( mContext.getResources().getString( R.string.symbols_ask ), 
-    //     mApp.SYMBOL_VERSION, old_version );
+    //   String message = String.format( resString( R.string.symbols_ask ), mApp.SYMBOL_VERSION, old_version );
     //   TopoDroidAlertDialog.makeAlert( mContext, mContext.getResources(), message, // R.string.symbols_ask,
     //     new DialogInterface.OnClickListener() {
     //       @Override

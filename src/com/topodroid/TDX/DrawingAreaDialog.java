@@ -75,7 +75,7 @@ class DrawingAreaDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    String title = String.format( mParent.getResources().getString( R.string.title_draw_area ),
+    String title = String.format( resString( R.string.title_draw_area ),
                                   BrushManager.getAreaName( mArea.mAreaType ) );
     initLayout( R.layout.drawing_area_dialog, title );
 

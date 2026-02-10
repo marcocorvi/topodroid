@@ -121,7 +121,7 @@ class DialogIco extends MyDialog
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format(Locale.US, 
-      mContext.getResources().getString( R.string.viewing_at ), // "Viewing at clino %.0f azimuth %.0f",
+      resString( R.string.viewing_at ), // "Viewing at clino %.0f azimuth %.0f",
       90 - mTheta*180/Math.PI, 
       mPhi*180/Math.PI );
     mText.setText( sw.getBuffer().toString() );

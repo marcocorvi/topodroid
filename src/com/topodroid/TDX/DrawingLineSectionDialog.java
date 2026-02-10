@@ -139,17 +139,17 @@ class DrawingLineSectionDialog extends MyDialog
     // cannot use initLayout
     if ( mFrom != null && mTo != null ) {
       initLayout( R.layout.drawing_line_section_dialog,
-        String.format( mParent.getResources().getString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom + " " + mTo );
+        String.format( resString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom + " " + mTo );
     } else if ( mFrom != null ) {
       initLayout( R.layout.drawing_line_section_dialog, 
-        String.format( mParent.getResources().getString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom );
+        String.format( resString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom );
     } else {
       initLayout( R.layout.drawing_line_section_dialog, 
-        String.format( mParent.getResources().getString( R.string.title_draw_line_no_stations ), mLine.getThName( ) ) );
+        String.format( resString( R.string.title_draw_line_no_stations ), mLine.getThName( ) ) );
     }
 
     mTVoptions = (TextView) findViewById( R.id.line_options );
-    mTVoptions.setText( String.format( mContext.getResources().getString( R.string.fmt_id ), mId ) );
+    mTVoptions.setText( String.format( resString( R.string.fmt_id ), mId ) );
 
     TextView tv_azimuth = (TextView) findViewById( R.id.line_azimuth );
     TextView tv_date    = (TextView) findViewById( R.id.line_date );
@@ -190,7 +190,7 @@ class DrawingLineSectionDialog extends MyDialog
       // File imagefile = TDFile.getTopoDroidFile( mFilename ); // JPEG FILE
       if ( TDFile.hasMSfile( subdir, filename ) ) { // if ( imagefile.exists() )
 	mTdImage = new TDImage( mFilename );
-        tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
+        tv_azimuth.setText( String.format( resString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
         String date = mTdImage.date();
         tv_date.setText( (date != null)? date : "" );
 

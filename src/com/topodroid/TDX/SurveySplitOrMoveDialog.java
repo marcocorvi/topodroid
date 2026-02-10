@@ -117,7 +117,7 @@ class SurveySplitOrMoveDialog extends MyDialog
       );
     } else if ( b == mBtnMove  ) {
       // TDLog.v( "move " + mSelected );
-      String msg = String.format( mParent.getResources().getString( R.string.survey_move ), mSelected );
+      String msg = String.format( resString( R.string.survey_move ), mSelected );
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), msg,
         new DialogInterface.OnClickListener() {
           @Override

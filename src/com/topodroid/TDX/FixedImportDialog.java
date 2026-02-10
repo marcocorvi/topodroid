@@ -229,18 +229,18 @@ class FixedImportDialog extends MyDialog
     if ( b == mBtnOk ) {
       String station = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
       if ( station.length() == 0 ) { // if ( station == null || station.length() == 0 )
-        mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+        mETstation.setError( resString( R.string.error_station_required ) );
         return;
       }
       // station = TDUtil.toStationFromName( station );
       if ( ! TDUtil.isStationName( station ) ) {
-        mETstation.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        mETstation.setError( resString( R.string.bad_station_name ) );
         return;
       }
       // mETstation.setText( station );
       
       if ( mParent.hasFixed( station ) ) {
-        mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
+        mETstation.setError( resString( R.string.error_station_fixed ) );
         return;
       }
       String comment = TDUtil.getTextOrEmpty( mETcomment );

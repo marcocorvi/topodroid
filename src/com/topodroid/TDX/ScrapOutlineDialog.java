@@ -146,9 +146,9 @@ class ScrapOutlineDialog extends MyDialog
 
     // long plot_type = PlotType.PLOT_PLAN;
     // Resources res = mApp.getResources();
-    // if ( res.getString( R.string.plan ).equals( type ) ) {
+    // if ( resString( R.string.plan ).equals( type ) ) {
     //   plot_type = PlotType.PLOT_PLAN;
-    // } else if ( res.getString( R.string.extended ).equals( type ) ) {
+    // } else if ( resString( R.string.extended ).equals( type ) ) {
     //   plot_type = PlotType.PLOT_EXTENDED;
     // }
     mParent.addPlot( mPlots.get( pos ) );

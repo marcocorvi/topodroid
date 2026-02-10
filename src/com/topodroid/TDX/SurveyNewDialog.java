@@ -123,7 +123,7 @@ class SurveyNewDialog extends MyDialog
     mEditDate.setOnClickListener( this );
 
     // mEditStation.setText( TDSetting.mInitStation );
-    mEditStation.setHint( String.format( mContext.getResources().getString( R.string.start_station ), TDSetting.mInitStation ) );
+    mEditStation.setHint( String.format( resString( R.string.start_station ), TDSetting.mInitStation ) );
     mEditStation.setOnLongClickListener( this );
 
     if ( TDSetting.mDefaultTeam.length() > 0 ) {
@@ -194,7 +194,7 @@ class SurveyNewDialog extends MyDialog
       String name = mEditName.getText().toString();
       if ( ! TDString.checkName( name, mEditName, mContext.getResources() ) ) return;
       if ( mApp.hasSurveyName( name ) ) {
-        mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
+        mEditName.setError( resString( R.string.survey_exists ) );
         return;
       }
       
@@ -226,11 +226,11 @@ class SurveyNewDialog extends MyDialog
     // if ( name == null ) return false; // guaranteed
     // name = TDString.noSpaces( name ); // already checked
     // if ( name.length() == 0 ) {
-    //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+    //   mEditName.setError( resString( R.string.error_name_required ) );
     //   return false;
     // }
     // if ( mApp.hasSurveyName( name ) ) { // name already exists
-    //   mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
+    //   mEditName.setError( resString( R.string.survey_exists ) );
     //   return false;
     // }
 
@@ -238,7 +238,7 @@ class SurveyNewDialog extends MyDialog
     String team = mEditTeam.getText().toString();
     if ( TDString.isNullOrEmpty( team ) ) {
       if ( mWarnTeam ) {
-        mEditTeam.setError( mContext.getResources().getString( R.string.error_team_required ) );
+        mEditTeam.setError( resString( R.string.error_team_required ) );
         mWarnTeam = false;
         return false;
       } else {
@@ -248,7 +248,7 @@ class SurveyNewDialog extends MyDialog
     String comment = TDUtil.getTextOrEmpty( mEditComment ); // COMMENT can be empty ?
     double decl = SurveyInfo.declination( mEditDecl );
     // if ( decl >= SurveyInfo.DECLINATION_MAX ) {
-    //   mEditDecl.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
+    //   mEditDecl.setError( resString( R.string.error_invalid_number ) );
     //   return false;
     // }
 

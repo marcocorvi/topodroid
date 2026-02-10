@@ -53,21 +53,21 @@ class DialogMeasure extends MyDialog
       tv.setText( String.format( "%s - %s", mMeasure.st1.getFullName(), mMeasure.st2.getFullName() ) );
 
       tv = ( TextView ) findViewById(R.id.st_east);
-      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_east), mMeasure.de ) );
+      tv.setText( String.format(Locale.US, resString(R.string.cave_east), mMeasure.de ) );
       tv = ( TextView ) findViewById(R.id.st_north);
-      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_north), mMeasure.dn ) );
+      tv.setText( String.format(Locale.US, resString(R.string.cave_north), mMeasure.dn ) );
       tv = ( TextView ) findViewById(R.id.st_vert);
-      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_vert), mMeasure.dz ) );
+      tv.setText( String.format(Locale.US, resString(R.string.cave_vert), mMeasure.dz ) );
       tv = ( TextView ) findViewById(R.id.st_dist);
-      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_distance), mMeasure.d3 ));
+      tv.setText( String.format(Locale.US, resString(R.string.cave_distance), mMeasure.d3 ));
       tv = ( TextView ) findViewById(R.id.st_horz);
-      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.horz_distance), mMeasure.d2 ));
+      tv.setText( String.format(Locale.US, resString(R.string.horz_distance), mMeasure.d2 ));
       tv = ( TextView ) findViewById(R.id.st_angle);
-      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_angle), mMeasure.azimuth, mMeasure.clino ));
+      tv.setText( String.format(Locale.US, resString(R.string.cave_angle), mMeasure.azimuth, mMeasure.clino ));
 
       tv = ( TextView ) findViewById(R.id.st_cave_pathlength);
       if ( mMeasure.dcave > 0 ) {
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_length), mMeasure.dcave, mMeasure.getDistPos(), mMeasure.getDistNeg() ));
+        tv.setText( String.format(Locale.US, resString(R.string.cave_length), mMeasure.dcave, mMeasure.getDistPos(), mMeasure.getDistNeg() ));
       } else {
         tv.setVisibility( View.GONE );
       }

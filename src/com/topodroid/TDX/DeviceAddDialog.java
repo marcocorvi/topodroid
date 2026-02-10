@@ -108,13 +108,13 @@ class DeviceAddDialog extends MyDialog
   {
     if ( v.getId() == R.id.button_ok ) {
       if ( mNumber.getText() == null ) {
-        mNumber.setError( mContext.getResources().getString( R.string.model_missing ) );
+        mNumber.setError( resString( R.string.model_missing ) );
         return;
       }
       String number = TDString.noSpaces( mNumber.getText().toString() );
       Pattern p = Pattern.compile( "[0-9]{4}" );
       if ( ! p.matcher( number ).matches() ) {
-        mNumber.setError( mContext.getResources().getString( R.string.model_invalid ) );
+        mNumber.setError( resString( R.string.model_invalid ) );
         return;
       }
       String address = mAddresses[ mAddress.getSelectedItemPosition() ];

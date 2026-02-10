@@ -338,9 +338,9 @@ class ProjectionDialog extends MyDialog
   private void setTheTitle()
   {
     if ( mWithOblique ) {
-      setTitle( String.format( mContext.getResources().getString(R.string.title_projection_oblique), mAzimuth, mOblique ) );
+      setTitle( String.format( resString(R.string.title_projection_oblique), mAzimuth, mOblique ) );
     } else {
-      setTitle( String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth ) );
+      setTitle( String.format( resString(R.string.title_projection), mAzimuth ) );
     }
   }
 
@@ -349,9 +349,9 @@ class ProjectionDialog extends MyDialog
   private String getTheTitle()
   {
     if ( mWithOblique ) {
-      return String.format( mContext.getResources().getString(R.string.title_projection_oblique), mAzimuth, mOblique );
+      return String.format( resString(R.string.title_projection_oblique), mAzimuth, mOblique );
     } 
-    return String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth );
+    return String.format( resString(R.string.title_projection), mAzimuth );
   }
 
   // --------------------------------------------------------------

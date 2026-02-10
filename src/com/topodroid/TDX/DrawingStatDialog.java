@@ -106,20 +106,17 @@ class DrawingStatDialog extends MyDialog
 
         // mNum.shotsNr() = mNum.stationsNr() - mNum.loopsNr()
 
-        mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
-          mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
-        mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
-          mStat.countDuplicate, mNum.duplicateNr(), mStat.lengthDuplicate * unit, unit_str ) );
-        mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
-          mStat.countSurface, mNum.surfaceNr(), mStat.lengthSurface * unit, unit_str ) );
-        mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay, mNum.splaysNr() ) );
-        mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation, mNum.stationsNr() ) );
-        mTextLegSigma.setText( String.format( res.getString(R.string.stat_leg_sigma), mNum.legSigma()*100 ) );
+        mTextLeg.setText( String.format( resString(R.string.stat_leg), mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
+        mTextDuplicate.setText( String.format( resString(R.string.stat_duplicate), mStat.countDuplicate, mNum.duplicateNr(), mStat.lengthDuplicate * unit, unit_str ) );
+        mTextSurface.setText( String.format( resString(R.string.stat_surface), mStat.countSurface, mNum.surfaceNr(), mStat.lengthSurface * unit, unit_str ) );
+        mTextSplay.setText( String.format( resString(R.string.stat_splay), mStat.countSplay, mNum.splaysNr() ) );
+        mTextStation.setText( String.format( resString(R.string.stat_station), mStat.countStation, mNum.stationsNr() ) );
+        mTextLegSigma.setText( String.format( resString(R.string.stat_leg_sigma), mNum.legSigma()*100 ) );
 
-        mTextSurveyLen.setText( String.format( res.getString(R.string.stat_survey_length), mStat.lengthSurvey * unit, unit_str ) );
+        mTextSurveyLen.setText( String.format( resString(R.string.stat_survey_length), mStat.lengthSurvey * unit, unit_str ) );
 
         if ( mNum.unattachedShotsNr() > 0 ) {
-          mTextDangling.setText( String.format( res.getString(R.string.stat_dangling),
+          mTextDangling.setText( String.format( resString(R.string.stat_dangling),
             mNum.unattachedShotsNr(), mNum.unattachedLength() * unit, unit_str ) );
           mTextDangling.setOnClickListener( this );
         } else {
@@ -127,18 +124,18 @@ class DrawingStatDialog extends MyDialog
         }
 
         if ( mStat.countLoop > 0 ) {
-          mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
+          mTextLoop.setText( String.format( resString(R.string.stat_cycle), mStat.countLoop ) );
         } else {
           mTextLoop.setVisibility( View.GONE );
         }
 
         if ( mStat.countComponent > 1 ) {
-          mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
+          mTextComponent.setText( String.format( resString(R.string.stat_component), mStat.countComponent ) );
         } else {
           mTextComponent.setVisibility( View.GONE );
         }
 
-        mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
+        mTextAngleErr.setText( String.format( resString(R.string.stat_angle_error), mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
         TDLog.v("Leg sigma " + mNum.legSigma() );
 
    
@@ -147,7 +144,7 @@ class DrawingStatDialog extends MyDialog
         if ( nr_loop == 0 ) {
           ((TextView)findViewById( R.id.text_stat_loops )).setText( R.string.loop_none );
         } else {
-          ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( res.getString(R.string.stat_loop), nr_loop, mNum.nrCompensatedLoops, mNum.nrInaccurateLoops ) );
+          ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( resString(R.string.stat_loop), nr_loop, mNum.nrCompensatedLoops, mNum.nrInaccurateLoops ) );
 	  LinearLayout list = (LinearLayout) findViewById( R.id.list );
           LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
 	  for ( NumClosure cl : cls ) {
@@ -171,41 +168,41 @@ class DrawingStatDialog extends MyDialog
         // mBtnBack.setOnClickListener( this );
         ( (Button) findViewById(R.id.btn_back) ).setOnClickListener( this );
 
-        mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
+        mTextOrigin.setText( String.format( resString(R.string.stat_origin), mOrigin ) );
 
         if ( mAzimuth < 0 ) {
           mTextAzimuth.setVisibility( View.GONE );
         } else {
-          mTextAzimuth.setText( String.format( res.getString(R.string.stat_azimuth), mAzimuth ) );
+          mTextAzimuth.setText( String.format( resString(R.string.stat_azimuth), mAzimuth ) );
         }
 
-        mTextLength.setText( String.format( res.getString(R.string.stat_length), mNum.surveyLength() * unit, unit_str ) );
-        mTextExtLen.setText( String.format( res.getString(R.string.stat_extlen), mNum.surveyExtLen() * unit, unit_str ) );
-        mTextProjLen.setText( String.format( res.getString(R.string.stat_projlen), mNum.surveyProjLen() * unit, unit_str ) );
-        mTextWENS.setText( String.format( res.getString(R.string.stat_wens),
+        mTextLength.setText( String.format( resString(R.string.stat_length), mNum.surveyLength() * unit, unit_str ) );
+        mTextExtLen.setText( String.format( resString(R.string.stat_extlen), mNum.surveyExtLen() * unit, unit_str ) );
+        mTextProjLen.setText( String.format( resString(R.string.stat_projlen), mNum.surveyProjLen() * unit, unit_str ) );
+        mTextWENS.setText( String.format( resString(R.string.stat_wens),
                                           mNum.surveyWest()  * unit,
                                           mNum.surveyEast()  * unit,
                                           mNum.surveyNorth() * unit,
                                           mNum.surveySouth() * unit,
                                           unit_str
                           ) );
-        mTextZminmax.setText( String.format( res.getString(R.string.stat_depth), mNum.surveyTop() * unit, unit_str, mNum.surveyBottom() * unit, unit_str ) );
+        mTextZminmax.setText( String.format( resString(R.string.stat_depth), mNum.surveyTop() * unit, unit_str, mNum.surveyBottom() * unit, unit_str ) );
         if ( mNum.surveyZmax() >  mNum.surveyZmin() ) {
-          mTextZsurveyMinmax.setText( String.format( res.getString(R.string.stat_survey_z), mNum.surveyZmax() * unit, mNum.surveyZmin() * unit, unit_str ) );
+          mTextZsurveyMinmax.setText( String.format( resString(R.string.stat_survey_z), mNum.surveyZmax() * unit, mNum.surveyZmin() * unit, unit_str ) );
         } else {
           mTextZsurveyMinmax.setVisibility( View.GONE );
         }
         // if ( mNum.surfaceZmax() >  mNum.surfaceZmin() ) {
-        //   mTextZsurfaceMinmax.setText( String.format( res.getString(R.string.stat_surface_z), mNum.surfaceZmax() * unit, mNum.surfaceZmin() * unit, unit_str ) );
+        //   mTextZsurfaceMinmax.setText( String.format( resString(R.string.stat_surface_z), mNum.surfaceZmax() * unit, mNum.surfaceZmin() * unit, unit_str ) );
         // } else {
         //   mTextZsurfaceMinmax.setVisibility( View.GONE );
         // }
-        // mTextStations.setText(String.format( res.getString(R.string.stat_station), mNum.stationsNr() ) );
+        // mTextStations.setText(String.format( resString(R.string.stat_station), mNum.stationsNr() ) );
 
-        // mTextShots.setText( String.format( res.getString(R.string.stat_shot),
+        // mTextShots.setText( String.format( resString(R.string.stat_shot),
 	//   mNum.shotsNr(), mNum.duplicateNr(), mNum.surfaceNr() ) );
           
-        // mTextSplays.setText( String.format( res.getString(R.string.stat_splay), mNum.splaysNr() ) );
+        // mTextSplays.setText( String.format( resString(R.string.stat_splay), mNum.splaysNr() ) );
 
     }
 

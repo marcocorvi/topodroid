@@ -100,7 +100,7 @@ class PhotoEditDialog extends MyDialog
     // TDLog.v( "photo edit dialog on create. Azimuth " + a + " Clino " + c );
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
-       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), a, c ) );
+       String.format( resString( R.string.photo_azimuth_clino ), a, c ) );
     ((TextView) findViewById( R.id.photo_date )).setText( mPhoto.mDate );
 
     if ( mPhoto.mComment != null ) {

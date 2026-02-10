@@ -621,11 +621,11 @@ class ShotEditDialog extends MyDialog
 
     // tv_stations = (TextView) findViewById( R.id.photo_shot_stations );
     // tv_data = (TextView) findViewById( R.id.photo_shot_data );
-    // tv_stations.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mBlk.Name() ) );
+    // tv_stations.setText( String.format( resString( R.string.shot_name ), mBlk.Name() ) );
     // if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-    //   tv_data.setText( mBlk.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
+    //   tv_data.setText( mBlk.dataStringNormal( resString(R.string.shot_data) ) );
     // } else { // SurveyInfo.DATAMODE_DIVING
-    //   tv_data.setText( mBlk.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
+    //   tv_data.setText( mBlk.dataStringDiving( resString(R.string.shot_data) ) );
     // }
 
   }
@@ -689,13 +689,13 @@ class ShotEditDialog extends MyDialog
     } else {
       shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() ); // NOSPACES this replaces all specials
       if ( ! TDUtil.isStationName( shot_from ) ) {
-        mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        mETfrom.setError( resString( R.string.bad_station_name ) );
         return false;
       }
       // if ( shot_from == null ) { shot_from = ""; }
       shot_to = TDUtil.toStationToName( mETto.getText().toString() ); // NOSPACES this replaces all specials
       if ( ! TDUtil.isStationName( shot_to ) ) {
-        mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        mETto.setError( resString( R.string.bad_station_name ) );
         return false;
       }
       can_do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
@@ -1026,12 +1026,12 @@ class ShotEditDialog extends MyDialog
     } else if ( b == mButtonReverse ) {
       shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() );
       if ( ! TDUtil.isStationName( shot_from ) ) {
-        mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        mETfrom.setError( resString( R.string.bad_station_name ) );
         return;
       }
       shot_to = TDUtil.toStationToName( mETto.getText().toString() );
       if ( ! TDUtil.isStationName( shot_to ) ) {
-        mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        mETto.setError( resString( R.string.bad_station_name ) );
         return;
       }
       if ( shot_to.length() > 0 && shot_from.length() > 0 ) { // TODO REVERSE SPLAY ?

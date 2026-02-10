@@ -81,7 +81,7 @@ class ShotPhotoDialog extends MyDialog
       initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
       
       TextView tv = (TextView) findViewById(R.id.photo_shot_name );
-      tv.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mName ) );
+      tv.setText( String.format( resString( R.string.shot_name ), mName ) );
       mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
       mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
       mButtonOK.setOnClickListener( this );
@@ -118,7 +118,7 @@ class ShotPhotoDialog extends MyDialog
     if ( b == mButtonOK ) {
       String comment = TDUtil.getTextOrEmpty( mETcomment );
       // if ( comment.length() == 0 ) { // this was annoying
-      //   mETcomment.setError(  mContext.getResources().getString( R.string.error_text_required ) );
+      //   mETcomment.setError(  resString( R.string.error_text_required ) );
       //   return;
       // }
       // TDLog.v( "PHOTO comment " + comment );

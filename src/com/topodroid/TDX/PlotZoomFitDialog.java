@@ -166,7 +166,7 @@ class PlotZoomFitDialog extends MyDialog
       } else if ( v.getId() == R.id.button_center_station ) {
         String station = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
 	if ( TDString.isNullOrEmpty( station ) ) {
-          mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+          mETstation.setError( resString( R.string.error_station_required ) );
 	  return;
 	}
 	mParent.centerAtStation( station );

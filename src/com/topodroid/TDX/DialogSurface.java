@@ -68,7 +68,7 @@ class DialogSurface extends MyDialog
     TextView mDemFile = (TextView) findViewById( R.id.dem_file );
     
     if ( mTopoGl.mDEMname != null ) {
-      mDemFile.setText( String.format( mContext.getResources().getString( R.string.dem_file ), mTopoGl.mDEMname ) );
+      mDemFile.setText( String.format( resString( R.string.dem_file ), mTopoGl.mDEMname ) );
     } else {
       mDemFile.setVisibility( View.GONE );
     }
@@ -86,7 +86,7 @@ class DialogSurface extends MyDialog
     // TDLog.v("GL has surface " + mTopoGl.hasSurface() );
     if ( mTopoGl.hasSurface() ) {
       if ( mTopoGl.mTextureName != null ) {
-        mTextureFile.setText( String.format( mContext.getResources().getString( R.string.texture_file ), mTopoGl.mTextureName ) );
+        mTextureFile.setText( String.format( resString( R.string.texture_file ), mTopoGl.mTextureName ) );
         btn_texture.setText( R.string.texture );
       } else {
         mTextureFile.setVisibility( View.GONE );

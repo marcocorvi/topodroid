@@ -55,9 +55,9 @@ class DialogR extends MyDialog
     super(context, null, 0 ); // null app, 0 no help resource
     mParent = parent;
     Resources res = mContext.getResources();
-    mIUnderstood = res.getString( R.string.r_i_understood );
-    // mRContinue   = res.getString( R.string.r_continue );
-    // mRQuit       = res.getString( R.string.r_quit );
+    mIUnderstood = resString( R.string.r_i_understood );
+    // mRContinue   = resString( R.string.r_continue );
+    // mRQuit       = resString( R.string.r_quit );
   }
 
   @Override
@@ -97,7 +97,7 @@ class DialogR extends MyDialog
  
     Resources res = mContext.getResources();
 
-    ((TextView)findViewById( R.id.r_dialog )).setText( String.format( res.getString(R.string.r_dialog), mIUnderstood ) );
+    ((TextView)findViewById( R.id.r_dialog )).setText( String.format( resString(R.string.r_dialog), mIUnderstood ) );
   }
 
   public void onClick( View v )

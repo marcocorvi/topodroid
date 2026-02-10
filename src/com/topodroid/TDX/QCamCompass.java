@@ -103,6 +103,8 @@ class QCamCompass extends Dialog
   private int mCamera;
   private DrawingLinePath mLine = null;
 
+  private String getString( int r ) { return mContext.getResources().getString( r ); }
+
   /** cstr
    * @param context    context
    * @param parent     parent activity (photo: DrawingWindow or ShotWindow; direction ShotWindow)
@@ -352,7 +354,7 @@ class QCamCompass extends Dialog
     }
     enableButtonSave( true );
     TDandroid.setButtonBackground( buttonClick, (mHasShot ? mBDcamera : mBDcameraRed) );
-    // buttonClick.setText( mContext.getString( mHasShot ? R.string.button_redo : R.string.button_eval ) );
+    // buttonClick.setText( getString( mHasShot ? R.string.button_redo : R.string.button_eval ) );
   }
 
   /** react to a user tap
@@ -372,13 +374,13 @@ class QCamCompass extends Dialog
       // TDLog.v( "QCAM compass. Button click, mode CAPTURE. Has shot " + mHasShot );
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
-          TDToast.makeWarn( mContext.getResources().getString( R.string.photo_many_pictures ) );
+          TDToast.makeWarn( getString( R.string.photo_many_pictures ) );
           enableButtonCancel( true );
           enableButtonSave( false ); // FIXME should i do this ?
         } else {
           mHasShot = false;
           TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
-          // buttonClick.setText( mContext.getString( R.string.button_eval ) );
+          // buttonClick.setText( getString( R.string.button_eval ) );
 
           // QCamDrawingSurface.startPreview() when it is created
           if ( mSurface != null ) {
@@ -403,7 +405,7 @@ class QCamCompass extends Dialog
         enableButtonSave( false );
         if ( mTexture != null && ! mTexture.canCapture() ) {
           buttonClick.setVisibility( View.GONE );
-          TDToast.makeWarn( mContext.getResources().getString( R.string.photo_max_captures ) );
+          TDToast.makeWarn( getString( R.string.photo_max_captures ) );
         }
         TimerTask timer = new TimerTask( this, -TimerTask.Z_AXIS, wait, count );
         timer.execute();
@@ -436,9 +438,9 @@ class QCamCompass extends Dialog
               }
             } else {
               // if ( mSurface != null ) {
-                TDToast.makeBad( mContext.getResources().getString( R.string.photo_not_ready ) );
+                TDToast.makeBad( getString( R.string.photo_not_ready ) );
               // } else if ( mTexture != null ) {
-              //   TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
+              //   TDToast.makeBad( getString( R.string.photo_failed ) );
               // }
               dismiss = false;
             }

@@ -95,7 +95,7 @@ class DrawingLineDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    String title = String.format( mParent.getResources().getString( R.string.title_draw_line ), BrushManager.getLineName( mLine.mLineType ) );
+    String title = String.format( resString( R.string.title_draw_line ), BrushManager.getLineName( mLine.mLineType ) );
     initLayout( R.layout.drawing_line_dialog, title );
 
     mETtype = (Spinner) findViewById( R.id.line_type );

@@ -411,14 +411,14 @@ public class TDPrefActivity extends Activity
       if ( mGeminiPref != null ) {
         View v = mGeminiPref.getView();
 	if ( v != null ) {
-          GeminiDialog gemini_dialog = new GeminiDialog( this, null, mGeminiPref ); // null UserManualActivity
+          GeminiDialog gemini_dialog = new GeminiDialog( this, this, mGeminiPref ); // null UserManualActivity
           v.setOnClickListener( 
             new OnClickListener() {
               @Override
               public void onClick( View v ) { gemini_dialog.show(); }
           } );
 	}
-        mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "" : "***" );
+        mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "---" : "***" );
       }
 
       // TDLog.v("PREF link GEEK sub-categories");

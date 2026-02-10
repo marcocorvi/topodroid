@@ -53,7 +53,7 @@ public class MyDialog extends Dialog
     mContext = context;
     mApp     = app;
     if ( help_resource != 0 ) {
-      mHelpPage = mContext.getResources().getString( help_resource );
+      mHelpPage = resString( help_resource );
     }
   }
 
@@ -205,5 +205,9 @@ public class MyDialog extends Dialog
    */
   public void doInit( boolean landscape ) { /* nothing */ }
 
+  /** @return a resource string
+   * @param r   resource id
+   */
+  protected String resString( int r ) { return mContext.getResources().getString( r ); }
 
 }

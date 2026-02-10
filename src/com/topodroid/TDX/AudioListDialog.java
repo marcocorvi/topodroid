@@ -185,7 +185,7 @@ class AudioListDialog extends MyDialog
    */
   private void startPlay( String filepath )
   {
-    // TDToast.make( String.format( mContext.getResources().getString( R.string.playing ), filepath ) );
+    // TDToast.make( String.format( resString( R.string.playing ), filepath ) );
     try {
       mMP = new MediaPlayer();
       mMP.setDataSource( filepath );

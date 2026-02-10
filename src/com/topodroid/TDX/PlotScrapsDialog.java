@@ -63,7 +63,7 @@ class PlotScrapsDialog extends MyDialog
     // int max = mParent.getScrapMaxIndex();
     int nr  = mParent.getScrapNumber();
     int nr0 = mParent.getCurrentScrapNumber() + 1;
-    mTvScraps.setText( String.format( mContext.getResources().getString( R.string.scrap_string ), nr0, nr ) );
+    mTvScraps.setText( String.format( resString( R.string.scrap_string ), nr0, nr ) );
 
     // TDLog.v("Scrap " + nr0 + " of " + nr );
 

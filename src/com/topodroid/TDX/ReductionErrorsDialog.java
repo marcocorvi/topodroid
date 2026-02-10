@@ -84,7 +84,7 @@ public class ReductionErrorsDialog extends MyDialog
         msg.append( sp.toString() );
         // TDLog.v("Bad sibling " + sp.toString() );
       }
-      textMulti.setText( String.format( mContext.getResources().getString( R.string.survey_bad_siblings ), msg.toString() ) );
+      textMulti.setText( String.format( resString( R.string.survey_bad_siblings ), msg.toString() ) );
     }
       
     TextView textMagn   = (TextView) findViewById(R.id.magnetic_bad);
@@ -108,7 +108,7 @@ public class ReductionErrorsDialog extends MyDialog
       badLoops.setVisibility( View.GONE );
       loopList.setVisibility( View.GONE );
     } else {
-      badLoops.setText( String.format( mContext.getResources().getString( R.string.loops_bad ), mNrBadLoops ) );
+      badLoops.setText( String.format( resString( R.string.loops_bad ), mNrBadLoops ) );
       ArrayAdapter<String> adapter = new ArrayAdapter<>( mContext, R.layout.message );
       for ( NumCycle cl : mBadLoops ) adapter.add( cl.toString() );
       loopList.setAdapter( adapter );

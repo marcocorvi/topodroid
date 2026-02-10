@@ -119,8 +119,7 @@ class DrawingShotDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    initLayout( R.layout.drawing_shot_dialog,
-      String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
+    initLayout( R.layout.drawing_shot_dialog, String.format( resString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
 
     TextView mLabel     = (TextView) findViewById(R.id.shot_label);
     mETfrom    = (EditText) findViewById(R.id.shot_from );
@@ -288,13 +287,13 @@ class DrawingShotDialog extends MyDialog
     // }
     StringBuilder sb = new StringBuilder();
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-      sb.append( mBlock.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
+      sb.append( mBlock.dataStringNormal( resString(R.string.shot_data) ) );
     } else { // SurveyInfo.DATAMODE_DIVING
-      sb.append( mBlock.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
+      sb.append( mBlock.dataStringDiving( resString(R.string.shot_data) ) );
     }
     int mark = mBlock.cavwayFlag();
     if ( mark > 0 ) {
-      sb.append(" ").append( mContext.getResources().getString( ShotEditDialog.mShotMark[ (mark < 8)? mark : 8 ] ) );
+      sb.append(" ").append( resString( ShotEditDialog.mShotMark[ (mark < 8)? mark : 8 ] ) );
     }
     mLabel.setText( sb.toString() );
 

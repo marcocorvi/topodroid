@@ -144,7 +144,7 @@ class PlotListDialog extends MyDialog
       }
       // mList.setAdapter( mArrayAdapter );
       mArrayAdapter.clear();
-      // mArrayAdapter.add( res.getString(R.string.back_to_survey) );
+      // mArrayAdapter.add( resString(R.string.back_to_survey) );
       mPlots = 0;
       for ( PlotInfo item : list ) {
         // if ( item.type == PlotType.PLOT_PLAN /* || item.type == PlotType.PLOT_EXTENDED */ ) 

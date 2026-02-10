@@ -303,7 +303,7 @@ class UndeleteDialog extends MyDialog
       // TDLog.v("non-null buffer: size " + buffer_size );
       if ( buffer_size > 0 ) {
         TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
-        text_buffer.setText( String.format( mContext.getResources().getString( R.string.buffer_size ), buffer_size ) );
+        text_buffer.setText( String.format( resString( R.string.buffer_size ), buffer_size ) );
         ((Button) findViewById( R.id.button_buffer_copy )).setOnClickListener( this );
         ((Button) findViewById( R.id.button_buffer_move )).setOnClickListener( this );
       } else {

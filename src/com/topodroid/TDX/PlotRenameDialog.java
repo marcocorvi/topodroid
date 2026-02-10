@@ -166,7 +166,7 @@ class PlotRenameDialog extends MyDialog
       if ( ! mName.equals( name ) ) {
         INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
         if ( maker.hasSurveyPlot( name ) ) {
-          mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+          mEtName.setError( resString( R.string.plot_duplicate_name ) );
           return;
         }
         mParent.renamePlot( name );
@@ -226,7 +226,7 @@ class PlotRenameDialog extends MyDialog
     }
     name = TDString.spacesToUnderscore( name ); // this trims the string
     if ( maker.hasSurveyPlot( name ) ) {
-      mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+      mEtName.setError( resString( R.string.plot_duplicate_name ) );
       return false;
     }
     mParent.splitPlot( name, mStation, ! mCBcopy.isChecked() ); // not mCBcopy == remove

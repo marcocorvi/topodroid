@@ -186,9 +186,9 @@ class FixedDialog extends MyDialog
       double accur_v = mFxd.getAccuracyVert();
       TextView tv = (TextView) findViewById( R.id.fix_accuracy );
       if (accur_v < 0 ) {
-        tv.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), accur ) );
+        tv.setText( String.format(Locale.US, resString( R.string.fmt_error_h ), accur ) );
       } else {
-        tv.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), accur, accur_v ) );
+        tv.setText( String.format(Locale.US, resString( R.string.fmt_error_m ), accur, accur_v ) );
       }
     }
 
@@ -286,12 +286,12 @@ class FixedDialog extends MyDialog
     if ( b == mButtonSave ) {
       String station = TDString.noSpaces( mETstation.getText().toString() ); // no spaces in station names
       if ( /* station == null || */ station.length() == 0 ) { // FIXME this should never happen: mETstation is TextView
-        mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+        mETstation.setError( resString( R.string.error_station_required ) );
         return;
       }
       // station = TDUtil.toStationFromName( station );
       if ( ! TDUtil.isStationName( station ) ) {
-        mETstation.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        mETstation.setError( resString( R.string.bad_station_name ) );
         return;
       }
       // mETstation.setText( station );
@@ -304,7 +304,7 @@ class FixedDialog extends MyDialog
           try {
             mParent.setDeclination( Float.parseFloat( decl_str ) );
           } catch ( NumberFormatException e ) {
-            mTVdecl.setError( mContext.getResources().getString( R.string.error_declination_number ) );
+            mTVdecl.setError( resString( R.string.error_declination_number ) );
             return;
           }
         }

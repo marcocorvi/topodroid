@@ -420,14 +420,14 @@ class ShotNewDialog extends MyDialog
       if ( notDone && mETfrom.getText() != null ) {
         shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() );
         if ( ! TDUtil.isStationName( shot_from ) ) {
-          mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+          mETfrom.setError( resString( R.string.bad_station_name ) );
           return;
         }
       }
       if ( notDone && mETto.getText() != null ) {
         shot_to = TDUtil.toStationToName( mETto.getText().toString() );
         if ( ! TDUtil.isStationName( shot_to ) ) {
-          mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+          mETto.setError( resString( R.string.bad_station_name ) );
           return;
         }
       }
@@ -438,28 +438,28 @@ class ShotNewDialog extends MyDialog
       // }
 
       if ( TDString.isNullOrEmpty( shot_from ) ) {
-        mETfrom.setError( mContext.getResources().getString( R.string.error_from_required ) );
+        mETfrom.setError( resString( R.string.error_from_required ) );
         return;
       }
 
       String distance     = TDString.noSpaces( mETdistance.getText().toString() );
       String backdistance = TDString.noSpaces( mETbackdistance.getText().toString() );
       if ( TDString.isNullOrEmpty( distance ) && TDString.isNullOrEmpty( backdistance ) ) {
-        mETdistance.setError( mContext.getResources().getString( (diving? R.string.error_depth_required : R.string.error_length_required) ) );
+        mETdistance.setError( resString( (diving? R.string.error_depth_required : R.string.error_length_required) ) );
         return;
       }
 
       String bearing     = TDString.noSpaces( mETbearing.getText().toString() );
       String backbearing = TDString.noSpaces( mETbackbearing.getText().toString() );
       if ( TDString.isNullOrEmpty( bearing ) && TDString.isNullOrEmpty( backbearing ) ) {
-        mETbearing.setError( mContext.getResources().getString( R.string.error_azimuth_required ) );
+        mETbearing.setError( resString( R.string.error_azimuth_required ) );
         return;
       }
 
       String clino     = TDString.noSpaces( mETclino.getText().toString() );
       String backclino = TDString.noSpaces( mETbackclino.getText().toString() );
       if ( TDString.isNullOrEmpty( clino ) && TDString.isNullOrEmpty( backclino ) ) {
-        mETclino.setError( mContext.getResources().getString( (diving? R.string.error_length_required : R.string.error_clino_required) ) );
+        mETclino.setError( resString( (diving? R.string.error_length_required : R.string.error_clino_required) ) );
         return;
       }
 
@@ -476,7 +476,7 @@ class ShotNewDialog extends MyDialog
           shot_extend = TDAzimuth.computeLegExtend( bx );
         } catch ( NumberFormatException e ) { 
           // TDLog.e("Non-number bearing");
-          mETbearing.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
+          mETbearing.setError( resString( R.string.error_invalid_number ) );
           return;
         }
       }

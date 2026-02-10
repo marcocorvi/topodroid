@@ -67,7 +67,7 @@ class DeviceNameDialog extends MyDialog
 
     mCBsecondDevice = (CheckBox) findViewById( R.id.second_device );
 
-    // setTitle( mParent.getResources().getString( R.string.device_info ) );
+    // setTitle( resString( R.string.device_info ) );
 
     mTVmodel.setText( mDevice.mModel );
     mTVname.setText( mDevice.mName );

@@ -208,12 +208,12 @@ class MultishotDialog extends MyDialog
     if ( b == mButtonRenumber ) {
       String from = TDUtil.toStationFromName( mETfrom.getText().toString() );
       if ( ! TDUtil.isStationName( from ) ) { 
-        mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );;
+        mETfrom.setError( resString( R.string.bad_station_name ) );;
         return;
       }
       String to   = TDUtil.toStationToName( mETto.getText().toString() );
       if ( ! TDUtil.isStationName( to ) ) {
-        mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );;
+        mETto.setError( resString( R.string.bad_station_name ) );;
         return;
       }
       

@@ -296,7 +296,7 @@ class CurrentStationDialog extends MyDialog
   private boolean storeStation( String name )
   {
     if ( name.length() == 0 ) {
-      mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      mName.setError( resString( R.string.error_name_required ) );
       return false;
     }
     int flag = StationFlag.STATION_NONE;
@@ -374,7 +374,7 @@ class CurrentStationDialog extends MyDialog
 
     } else if ( b == mBtnPop ) { // DELETE saved station and dismiss
       if ( name.length() == 0 ) {
-        mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+        mName.setError( resString( R.string.error_name_required ) );
         return;
       }
       long photoId = TopoDroidApp.mData.deleteStation( TDInstance.sid, name );

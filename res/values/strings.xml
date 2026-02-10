@@ -8,6 +8,7 @@
     <string name="ai_error">AI error %1$s</string>
     <string name="ai_internet">Warning. AI help requires web connection.</string>
     <string name="ai_prompt">Type your question</string>
+    <string name="ai_invalid_key">Invalid API key</string>
     <string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string>
 
     <!-- UNUSED string name="no_api_key">AI API key has not been set</string -->

@@ -125,12 +125,12 @@ class ItemPickerDialog extends MyDialog
     super.onCreate( savedInstanceState );
     // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-    DIMXP = Float.parseFloat( mContext.getResources().getString( R.string.dimxp ) );
-    DIMXL = Float.parseFloat( mContext.getResources().getString( R.string.dimxl ) );
-    DIMYL = Float.parseFloat( mContext.getResources().getString( R.string.dimyl ) );
-    // DIMPD = Integer.parseInt( mContext.getResources().getString( R.string.dimpd ) );
-    DIMMX = Integer.parseInt( mContext.getResources().getString( R.string.dimmx ) );
-    DIMMY = Integer.parseInt( mContext.getResources().getString( R.string.dimmy ) );
+    DIMXP = Float.parseFloat( resString( R.string.dimxp ) );
+    DIMXL = Float.parseFloat( resString( R.string.dimxl ) );
+    DIMYL = Float.parseFloat( resString( R.string.dimyl ) );
+    // DIMPD = Integer.parseInt( resString( R.string.dimpd ) );
+    DIMMX = Integer.parseInt( resString( R.string.dimmx ) );
+    DIMMY = Integer.parseInt( resString( R.string.dimmy ) );
 
     if ( mPointLib == null || mLineLib == null || mAreaLib == null ) {
       dismiss();
@@ -501,17 +501,17 @@ class ItemPickerDialog extends MyDialog
         title.append( "[" ); // FIXME_SCALE
         title.append( PointScale.scaleToStringUC( mScale ) );
         title.append( "] " );
-        title.append( mContext.getResources().getString( R.string.POINT ) );
+        title.append( resString( R.string.POINT ) );
         title.append( " " );
         title.append( BrushManager.getPointName( mSelectedPoint ) );
         break;
       case SymbolType.LINE: 
-        title.append( mContext.getResources().getString( R.string.LINE ) );
+        title.append( resString( R.string.LINE ) );
         title.append( " " );
         title.append( BrushManager.getLineName( mSelectedLine ) );
         break;
       case SymbolType.AREA: 
-        title.append( mContext.getResources().getString( R.string.AREA ) );
+        title.append( resString( R.string.AREA ) );
         title.append( " " );
         title.append( BrushManager.getAreaName( mSelectedArea ) );
         break;

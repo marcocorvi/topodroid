@@ -68,43 +68,43 @@ class DialogInfo extends MyDialog
     Resources res = mTopoGl.getResources();
 
     TextView tv = ( TextView ) findViewById(R.id.info_grid);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_grid_value),  mParser.getGridSize() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_grid_value),  mParser.getGridSize() ) );
 
     tv = ( TextView ) findViewById(R.id.info_azimuth);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_view_value), mRenderer.getYAngle(), mRenderer.getXAngle() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_view_value), mRenderer.getYAngle(), mRenderer.getXAngle() ) );
 
     tv = ( TextView ) findViewById(R.id.info_shot);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_shot_value), mParser.getShotNumber(), mParser.getSplayNumber() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_shot_value), mParser.getShotNumber(), mParser.getSplayNumber() ) );
 
     tv = ( TextView ) findViewById(R.id.info_station);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_station_value), mParser.getStationNumber() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_station_value), mParser.getStationNumber() ) );
 
     tv = ( TextView ) findViewById(R.id.info_survey);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_survey_value), mParser.getSurveyNumber() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_survey_value), mParser.getSurveyNumber() ) );
 
     tv = ( TextView ) findViewById(R.id.info_length);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_length_value), mParser.getCaveLength() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_length_value), mParser.getCaveLength() ) );
 
     tv = ( TextView ) findViewById(R.id.info_surface);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_surface_value), mParser.getSurfaceLength() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_surface_value), mParser.getSurfaceLength() ) );
 
     tv = ( TextView ) findViewById(R.id.info_depth);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_depth_value), mParser.getCaveDepth() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_depth_value), mParser.getCaveDepth() ) );
 
     tv = ( TextView ) findViewById(R.id.info_volume);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_volume_value), mParser.getVolume() ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_volume_value), mParser.getVolume() ) );
 
     tv = ( TextView ) findViewById(R.id.info_origin);
     if ( mParser.hasOrigin() ) {
       Cave3DFix origin = mParser.getOrigin();
-      tv.setText( String.format(Locale.US, res.getString(R.string.info_origin_value), origin.x, origin.y, origin.z ) );
+      tv.setText( String.format(Locale.US, resString(R.string.info_origin_value), origin.x, origin.y, origin.z ) );
       TextView tv1 = ( TextView ) findViewById(R.id.info_lonlat);
       if ( mParser.isWGS84() ) { 
-        tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_geovalue), origin.longitude, origin.latitude ) );
+        tv1.setText( String.format(Locale.US, resString(R.string.info_lonlat_geovalue), origin.longitude, origin.latitude ) );
         TextView tv2 = ( TextView ) findViewById(R.id.info_radii);
-        tv2.setText( String.format(Locale.US, res.getString(R.string.info_radii_value), mParser.getWEradius(), mParser.getSNradius() ) );
+        tv2.setText( String.format(Locale.US, resString(R.string.info_radii_value), mParser.getWEradius(), mParser.getSNradius() ) );
       } else {
-        tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_prjvalue), origin.longitude, origin.latitude ) );
+        tv1.setText( String.format(Locale.US, resString(R.string.info_lonlat_prjvalue), origin.longitude, origin.latitude ) );
         // FIXME origin.y 20230118
         TableRow tr2 = (TableRow) findViewById(R.id.info_row_radii);
         tr2.setVisibility( View.GONE );
@@ -114,13 +114,13 @@ class DialogInfo extends MyDialog
     }
 
     tv = ( TextView ) findViewById(R.id.info_east);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_east_value), mParser.emin, mParser.emax ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_east_value), mParser.emin, mParser.emax ) );
 
     tv = ( TextView ) findViewById(R.id.info_north);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_north_value), mParser.nmin, mParser.nmax ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_north_value), mParser.nmin, mParser.nmax ) );
 
     tv = ( TextView ) findViewById(R.id.info_z);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_z_value), mParser.zmin, mParser.zmax ) );
+    tv.setText( String.format(Locale.US, resString(R.string.info_z_value), mParser.zmin, mParser.zmax ) );
 
     int nr = mParser.getSurveyNumber();
     ListView mList = ( ListView ) findViewById(R.id.surveys_list );

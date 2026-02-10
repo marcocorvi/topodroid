@@ -15,9 +15,11 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.AIhelper;
+import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
+import android.app.Activity;
 
 import android.content.Context;
 // import android.content.DialogInterface;
@@ -33,7 +35,7 @@ public class GeminiDialog extends MyDialog
                           implements OnClickListener
 {
   private TDPref mPref;
-  private UserManualActivity mParent;
+  private Activity mParent;
 
   // ---------------------------------------------------------------
   /** cstr
@@ -42,7 +44,7 @@ public class GeminiDialog extends MyDialog
    * @param downloader data downloader
    * @param lister     data lister
    */
-  public GeminiDialog( Context context, UserManualActivity parent, TDPref pref )
+  public GeminiDialog( Context context, Activity parent, TDPref pref )
   {
     super( context, null, 0 ); // 0: no help resource
     mParent = parent;
@@ -62,6 +64,14 @@ public class GeminiDialog extends MyDialog
     ( (Button) findViewById( R.id.button_view ) ).setOnClickListener( this );
   }
 
+  private boolean isApiKeyFormatValid( String key )
+  {
+    final String apiKeyRegex = "^Alza[y-zA-Z0-9\\-_]{30,50}";
+    if ( key == null ) return false;
+    return key.matches( apiKeyRegex );
+  }
+
+
   /** respond to a user tap - dismiss the dialog
    * @param v  tapped view
    */
@@ -69,23 +79,33 @@ public class GeminiDialog extends MyDialog
   public void onClick(View v) 
   {
     if ( v.getId() == R.id.button_ok ) {
-      String key = ((EditText) findViewById( R.id.api_key )).getText().toString();
-      if ( key == null ) key = "";
-      TDSetting.setGeminiApiKey( key );
-      if ( ! key.isEmpty() ) {
+      String key = ((EditText) findViewById( R.id.api_key )).getText().toString().trim();
+      if ( key == null || key.isEmpty() ) {
+        TDSetting.setGeminiApiKey( "" );
+        if ( mPref != null ) mPref.setButtonValue( (key.isEmpty())? "---" : "***" );
+      } else if ( ! isApiKeyFormatValid( key ) ) {
+        // this could be more informative about the error: too short, not starting with "Alza", invalid charcaters
+        ((EditText) findViewById( R.id.api_key )).setError( resString(R.string.ai_invalid_key) );
+        return;
+      } else {
         AIhelper.validateApiKey( key, new AIhelper.ValidationCallback() {
           public void onResult( boolean valid, String response )
           {
             if ( valid ) {
               if ( mPref != null ) mPref.setButtonValue( "***" );
-              if ( mParent != null ) mParent.showAIdialog();
+              if ( mParent != null && ( mParent instanceof UserManualActivity ) ) ((UserManualActivity)mParent).showAIdialog();
             } else {
+              if ( mParent != null ) {
+                mParent.runOnUiThread( new Runnable() { public void run() {
+                  TDToast.makeWarn( response ); 
+                  if ( mPref != null ) mPref.setButtonValue( "---" );
+                  TDSetting.setGeminiApiKey( "" );
+                } } );
+              }  
               TDLog.v( response );
             }
           }
         } );
-      } else { 
-        if ( mPref != null ) mPref.setButtonValue( (key.isEmpty())? "" : "***" );
       }
     } else if ( v.getId() == R.id.button_view ) {
       if ( TDSetting.mGeminiApiKey != null ) {

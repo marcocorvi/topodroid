@@ -99,7 +99,7 @@ class PlotSearchDialog extends MyDialog
   private boolean checkArgsName( String args, int nr )
   {
     if ( args.length() == 0 ) {
-      mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      mName.setError( resString( R.string.error_name_required ) );
       return false;
     }
     return true;

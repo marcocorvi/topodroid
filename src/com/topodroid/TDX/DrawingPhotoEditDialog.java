@@ -85,7 +85,7 @@ class DrawingPhotoEditDialog extends MyDialog
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
-       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
+       String.format( resString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
     ((TextView) findViewById( R.id.photo_date )).setText( mTdImage.date() );
 
     if ( mPhoto.mPointText != null ) {

@@ -96,7 +96,7 @@ public class ExportDialogShot extends MyDialog
     mTypes    = types;
     mSelected = null;
     mTitle    = title;
-    mSurvey   = with_name? survey : context.getResources().getString( R.string.with_prefix );
+    mSurvey   = with_name? survey : resString( R.string.with_prefix );
     mDiving   = diving;
     mWithName = with_name;
     // mExportPrefix = null; // already in declaration
@@ -378,7 +378,7 @@ public class ExportDialogShot extends MyDialog
         export_name = sb.toString();
         // TDLog.v( "export name " + export_name + " ok " + ok );
         if ( ! ok ) {
-          view.setError( mContext.getResources().getString( R.string.error_bad_name ) );
+          view.setError( resString( R.string.error_bad_name ) );
           view.setText( export_name );
         }
         len = export_name.length();

@@ -196,18 +196,18 @@ class FixedGpsDialog extends MyDialog
   {
     String name = TDString.noSpaces( mETstation.getText().toString() );
     if ( name.length() == 0 ) {
-      mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+      mETstation.setError( resString( R.string.error_station_required ) );
       return false;
     }
     name = TDUtil.toStationFromName( name );
     if ( ! TDUtil.isStationName( name ) ) {
-      mETstation.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+      mETstation.setError( resString( R.string.bad_station_name ) );
       return false;
     }
     mETstation.setText( name );
 
     if ( mParent.hasFixed( name ) ) {
-      mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
+      mETstation.setError( resString( R.string.error_station_fixed ) );
       return false;
     }
     String comment = TDUtil.getTextOrEmpty( mETcomment );
@@ -237,7 +237,7 @@ class FixedGpsDialog extends MyDialog
   //         String str = item.toString();
   //         // check if station has already a location
   //         if ( mApp.mData.hasFixedStation( -1L, TDInstance.sid, str ) ) {
-  //           String error = mContext.getResources().getString( R.string.error_station_already_fixed );
+  //           String error = resString( R.string.error_station_already_fixed );
   //           mETstation.setError( error );
   //           return false;
   //         }
@@ -384,21 +384,21 @@ class FixedGpsDialog extends MyDialog
     mHGeo = mWMM.ellipsoidToGeoid( mLat, mLng, mHEll ); 
     mHasLocation = true;
 
-    // mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
-    // mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
-    mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude_dd_dms ),
+    // mTVlng.setText( String.format( resString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
+    // mTVlat.setText( String.format( resString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
+    mTVlng.setText( String.format( resString( R.string.fmt_longitude_dd_dms ),
       FixedInfo.double2degree( mLng ), FixedInfo.double2ddmmss( mLng ) ) );
-    mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude_dd_dms ),
+    mTVlat.setText( String.format( resString( R.string.fmt_latitude_dd_dms ),
       FixedInfo.double2degree( mLat ), FixedInfo.double2ddmmss( mLat ) ) );
-    // mTVh_ell.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
-    mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
+    // mTVh_ell.setText( String.format(Locale.US, resString( R.string.fmt_h_ellipsoid ), mHEll ) );
+    mTVh_geo.setText( String.format(Locale.US, resString( R.string.fmt_h_geoid ), mHGeo ) );
     if ( errOk && err3 >= 0 /* && err3 < (errMax + errMin)/2 */ ) { 
       if ( TDandroid.BELOW_API_26 ) {
-        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), mErrH ) ); // TODO only if mErrH >= 0
+        mTVerr.setText( String.format(Locale.US, resString( R.string.fmt_error_h ), mErrH ) ); // TODO only if mErrH >= 0
       } else if ( mErrV > 0 ) {
-        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), mErrH, mErrV ) );
+        mTVerr.setText( String.format(Locale.US, resString( R.string.fmt_error_m ), mErrH, mErrV ) );
       } else { 
-        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), mErrH ) );
+        mTVerr.setText( String.format(Locale.US, resString( R.string.fmt_error_h ), mErrH ) );
       }
     } else {
       mTVerr.setText( R.string.error_m );
@@ -414,7 +414,7 @@ class FixedGpsDialog extends MyDialog
 
   private void setGPSoff()
   {
-    mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_start ) );
+    mBtnLoc.setText( resString( R.string.button_gps_start ) );
     mBtnStatus.setBackgroundColor( 0xff3366ff );
     stopLocating();
   }
@@ -437,7 +437,7 @@ class FixedGpsDialog extends MyDialog
   @SuppressLint("MissingPermission")
   private void setGPSon()
   {
-    // mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_stop ) );
+    // mBtnLoc.setText( resString( R.string.button_gps_stop ) );
     mHasLocation = false;
     mBtnStatus.setText( TDString.ZERO );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
