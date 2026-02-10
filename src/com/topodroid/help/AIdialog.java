@@ -99,6 +99,7 @@ public class AIdialog extends MyDialog
     ((Button) findViewById( R.id.button_submit ) ).setOnClickListener( this );
     ((Button) findViewById( R.id.button_clear  ) ).setOnClickListener( this );
     ((Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
+    ((Button) findViewById( R.id.button_reset  ) ).setOnClickListener( this );
 
     Spinner models = (Spinner) findViewById( R.id.model );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
@@ -147,20 +148,21 @@ public class AIdialog extends MyDialog
         mHelper.ask( question, answer, mLocalContext );
         mLocalContext = false;
       }
-    } else if ( v.getId() == R.id.button_clear ) {
-      ((TextView) findViewById( R.id.answer )).setText("");
+    } else if ( v.getId() == R.id.button_reset ) { // reset the chat
+      mHelper.resetChat();
+    } else if ( v.getId() == R.id.button_clear ) { // clear the question text
+      // ((TextView) findViewById( R.id.answer )).setText(""); 
+      ((EditText) findViewById( R.id.question )).setText("");
     } else {
-      if ( mHelper != null ) mHelper.mDoReport = false;
       dismiss();
     }
   }
 
-  @Override
-  public void onBackPressed()
-  {
-    if ( mHelper != null ) mHelper.mDoReport = false;
-    super.onBackPressed();
-  }
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   super.onBackPressed();
+  // }
 
   /** show the response in the answer textbox
    * @param response  response

@@ -24,18 +24,22 @@ import android.app.Activity;
 import android.content.Context;
 // import android.content.DialogInterface;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import android.text.TextWatcher;
+import android.text.Editable;
+
 public class GeminiDialog extends MyDialog
                           implements OnClickListener
 {
   private TDPref mPref;
   private Activity mParent;
+  private EditText mETkey;
 
   // ---------------------------------------------------------------
   /** cstr
@@ -62,6 +66,20 @@ public class GeminiDialog extends MyDialog
     ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
     ( (Button) findViewById( R.id.button_ok ) ).setOnClickListener( this );
     ( (Button) findViewById( R.id.button_view ) ).setOnClickListener( this );
+
+    mETkey = (EditText) findViewById( R.id.api_key );
+    mETkey.addTextChangedListener( new TextWatcher() {
+      @Override public void beforeTextChanged( CharSequence s, int start, int before, int count ) { }
+      @Override public void onTextChanged( CharSequence s, int start, int before, int count ) { }
+      @Override public void afterTextChanged( Editable s ) {
+        String input = s.toString();
+        if ( s.length() > 20 && ! isApiKeyFormatValid( input ) ) {
+          mETkey.setTextColor( 0xffff6666 );
+        } else {
+          mETkey.setTextColor( mContext.getResources().getColor( R.color.text ) );
+        } 
+      }
+    } );
   }
 
   private boolean isApiKeyFormatValid( String key )

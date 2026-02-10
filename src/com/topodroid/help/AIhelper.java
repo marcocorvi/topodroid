@@ -45,7 +45,6 @@ import java.util.ArrayList;
 
 public class AIhelper // extends AsyncTask< String, Void, String >
 {
-  boolean mDoReport = false;
   AIdialog mDialog;
   private Context mContext;
   final String mUserKey;
@@ -68,12 +67,26 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     mRefPage = page;
   }
     
-  // N.B. chat and model can be saved between instanatiations if the model does not change
+  /** set the Gemini model
+   * @param model_name   name of the Gemini model
+   * @note this method must be called everytime a question is asked
+   * N.B. chat and model can be saved between instanatiations if the model does not change
+   */
   void setModel( String model_name )
   {
     if ( ! model_name.equals( mModelName ) ) {
       mModelName = model_name;
-
+      GenerationConfig.Builder gcb = new GenerationConfig.Builder();
+      gcb.temperature = 0.2f; // 0.0 to 1.0 or 2.0
+      gcb.topK = 2; // 1 to 40
+      gcb.topP = 0.95f; // 0.0 to 1.0 allow some natural language
+      gcb.maxOutputTokens = 800; // 1 token = 4 chars
+      GenerationConfig gc = gcb.build();
+      GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
+      this.model = GenerativeModelFutures.from( gm );
+      this.chat = null; // force chat rebuild
+    } 
+    if ( this.chat == null ) {
       Content.Builder cb1 = new Content.Builder();
       cb1.setRole("user");
       cb1.addText( mDialog.mSystemInstruction );
@@ -89,63 +102,24 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       List< Content > history = new ArrayList<>();
       history.add( mystemInstruction );
       history.add( modelInstruction );
-
-      GenerationConfig.Builder gcb = new GenerationConfig.Builder();
-      gcb.temperature = 0.2f; // 0.0 to 1.0 or 2.0
-      gcb.topK = 2; // 1 to 40
-      gcb.topP = 0.95f; // 0.0 to 1.0 allow some natural language
-      gcb.maxOutputTokens = 800; // 1 token = 4 chars
-
-      GenerationConfig gc = gcb.build();
-
-      // try {
-        // GenerativeModel.Builder gmb = new GenerativeModel.Builder();
-        // gmb.setModelname( model_name )
-        //    .setApiKey( mUserKey )
-        //    .setGenerationConfig( gc )
-        //    .setSystemInstructions( mystemInstruction );
-        // GenerativeModel gm = gmb.build();
-        GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
-
-        this.model = GenerativeModelFutures.from( gm );
-        this.chat = this.model.startChat( history );
-      // } catch ( ClassNotFoundException e ) {
-      //   // this.model = null;
-      //   // this.chat  = null;
-      //   // TDLog.e("ERROR " + e.getMessage() );
-      //   TDToast.makeBad("System error - please report " + e.getMessage() );
-      // }
+      this.chat = this.model.startChat( history );
     }
-    // */
-
-    // try {
-    // } catch ( ClassNotFoundException e ) {
-    //   TDLog.v("Class not found ");
-    //   StackTraceElement[] stack = e.getStackTrace();
-    //   for ( StackTraceElement s : stack ) TDLog.v( s.getClassName() + " " + s.getMethodName() );
-    // }
-
-    mDoReport = true;
   }
 
+  /** reset the chat so that the next time a question is posed the chat is rebuiilt
+   */
+  void resetChat()
+  {
+    this.chat = null;
+  }
 
-  public void stop() { mDoReport = false; }
-
-  /**
+  /** ask a question
    * @param user_prompt   user question
    * @param tv            textview for the response
    * @param local_context whether to use local_context
    */
   public void ask( String user_prompt, TextView tv, boolean local_context )
   {
-    if ( mDoReport ) {
-      execute( user_prompt, tv, local_context );
-    }
-  }
-
-  public void execute( String user_prompt, TextView tv, boolean local_context )
-  {
-    mDoReport = true;
     if ( chat != null ) {
       final String error_format = mContext.getResources().getString( R.string.ai_error );
       final WeakReference<TextView> textViewRef = new WeakReference<>(tv);
@@ -162,22 +136,23 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       ListenableFuture< GenerateContentResponse > response = chat.sendMessage( content ); 
 
       Futures.addCallback(response,
-              new FutureCallback<GenerateContentResponse>() {
-                  @Override
-                  public void onSuccess(GenerateContentResponse response) {
-                    updateUI( textViewRef, response.getText() );
-                  }
+        new FutureCallback<GenerateContentResponse>() {
+          @Override
+          public void onSuccess(GenerateContentResponse response) {
+            updateUI( textViewRef, response.getText() );
+          }
 
-                  @Override
-                  public void onFailure(Throwable t) {
-                    updateUI( textViewRef, String.format( error_format, t.getMessage() ) );
-                  }
-              }, new Executor() {  // context.getMainExecutor()
-                  @Override
-                  public void execute(Runnable command) {
-                      command.run();
-                  }
-              }
+          @Override
+          public void onFailure(Throwable t) {
+            updateUI( textViewRef, String.format( error_format, t.getMessage() ) );
+          }
+        },
+        new Executor() {  // context.getMainExecutor()
+          @Override
+          public void execute(Runnable command) {
+              command.run();
+          }
+        }
       );
     } else {
       TDToast.makeBad( R.string.ai_null_chat );
@@ -190,7 +165,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     new Handler( Looper.getMainLooper() ).post( new Runnable() {
       @Override public void run() {
         TextView tv = tvRef.get();
-        if ( mDoReport && tv != null ) {
+        if ( tv != null ) {
           // SpannableString ssb = new SpannableString( message );
           SpannableStringBuilder ssb = new SpannableStringBuilder( message );
           Matcher matcher = mPattern.matcher( message );
@@ -225,37 +200,17 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     });
   }
 
-/*
-  @Override
-  public String doInBackground( String ... user_prompts )
-  {
-      String responses = null;
-      int cnt = user_prompts.length;
-      return null;
-  }
-  // protected void onProgressUpdate( Void ... progress ) { }
-
-  @Override
-  public void onPostExecute( String ... responses )
-  {
-    if ( ! mDoReport ) return;
-    if ( responses == null ) return;
-    int cnt = responses.length;
-    if ( cnt == 0 ) return;
-    StringBuilder sb = new StringBuilder();
-    for ( int i=0; i<cnt; ++i ) {
-      sb.append( responses[i] );
-      if ( i < cnt-1) sb.append("\n");
-    }
-    if ( mDialog != null ) mDialog.showResponse( sb.toString() );
-  }
-*/
-
+  /** API key validation callback
+   */
   public interface ValidationCallback
   {
     public void onResult( boolean valid, String response );
   }
 
+  /** validate an API key
+   * @param api_key   API key
+   * @param callback  validation callback
+   */
   public static void validateApiKey( final String api_key, final ValidationCallback callback )
   {
     GenerativeModel gm = new GenerativeModel( "gemini-2.5-flash", api_key );

@@ -61,6 +61,11 @@
          style="@style/button_default"
          android:text="@string/button_close"
          />
+       <Button android:id="@+id/button_reset"
+         style="@style/button_default"
+         android:text="@string/button_reset"
+         android:layout_marginRight="@dimen/marginh"
+         />
        <Button android:id="@+id/button_clear"
          style="@style/button_default"
          android:text="@string/button_clear"

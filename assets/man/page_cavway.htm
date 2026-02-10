@@ -1,6 +1,116 @@
 <html><body>
-<h4>CAVWAY</h4>
+<h4>CAVWAY REFERENCE GUIDE</h4>
 
-This page needs writing.
+<i>Here is a summary of the <i>Cavway</i> functions.<br>
+The official user manuals are available at http://cavedevice.com</i>
+<br><p>
+
+The <i>Cavway</i> has five buttuns,
+<ul>
+<li>"DIST"</li>
+<li>"Left" (&lt;)</li>
+<li>"Right" (&gt;)</li>
+<li>"Memory/Confirm" (M)</li>
+<li>"Clear" (CLR)</li>
+</ul>
+
+To turn the <i>Cavway</i> on press the "DIST" button.
+To turn it off press and hold the "CLR" button.
+The <i>Cavway</i> goes off by itself after the amount of time on inactivity defined with the <i>Idle off</i> option.
+<br><p>
+
+The switch off and lock the <i>Cavway</i> press and hold the buttons "CLR" and "&gt;".
+To unlock it, after pressing the "DIST" press "M" within two seconds.<br<p>
+
+The <i>Cavway</i> interface is menu based, with several screen-pages.<br><p>
+
+<b>Button Functions</b><br>
+<ul>
+<li>"DIST": turn on the laser; take a mesurement</li>
+<li>"&lt;" and "&gt;" are used mostly as navigation button used to move in the menus</li>
+<li>when in measurement mode a tap on "&lt;" or "&gt;" turns the device in memory mode.</li>
+<li>"M" enters the menu page and is used mostry to confirm choices.</li>
+<li>"CLR" goes back to the previous screen.</li>
+<li>a long tap on "&lt;" shows the details of the current measurement</li>
+<li>a long tap on "&gt;" clears the untransmitted flag on all shots</li>
+</ul>
+
+<b>Measurement</b><br>
+Press "DIST" to turn on the laser. Press it again to take a measurement. The readings are shown on the screen.
+If the <i>Cavway</i> detects an anomaly (a discrepancy between the readings of the two sensor sets), it shown an
+error message on the screen.<br>
+By pressing the "M" button while the laser is on, the user can select among four flags to mark the shot that is
+being taken.<br><p>
+
+<b>Memory mode</b>
+In this mode the <i>Cavway</i> shows the values (distance, azimuth and clino) of five shots.
+The first column contains "E" if an error was detected, or "C" for calibration shots.
+The shot that have not been transferred yet have a "*" to the right.
+Leg shots are in bold.<br>
+
+The shot under cursor has a dark background. The buttons "&lt;" and "&gt;" scroll up and down the list.
+Pressing "M" the details of the shot under cursor and shown: readings, detected errors, and values og G/M/dip.<br><p>
+
+<b>Menu mode</b><br>
+The first menu-screen has five menus
+<ul>
+<li>"Calibration", to start a calibration</li>
+<li>"Clr. Unsent", to clear the not-transmitted flag from all shots</li>
+<li>"Options", to change the device settings</li>
+<li>"Info", to see device informations (fw, hw, serial number, battery voltage, and so on)</li>
+<li>"Advan. Menu" to move to the second menu-screen</li>
+</ul>
+<p>
+
+The second menu-screen has 
+<ul>
+<li>"Shot Options", settings for shots</li>
+<li>"Calib. Options"</li>
+<li>"Time" to set the date and the time</li>
+<li>"Units"</li>
+<li>"Factory Reset"</li>
+</ul>
+<p>
+
+The device options are 
+<ul>
+<li>"Reference" point: rear, (extension) tail, tripod screw, fronjt, custom</li>
+<li>"Shot delay", from 0 to 9 seconds</li>
+<li>"Screen backlight", from 0 (no backlight) to 10</li>
+<li>"Volume" (beep sound), either ON or OFF</li>
+<li>"Ide timeoff", 60, 120, 180, 240, 300 seconds</li>
+</ul>
+The buttons "&lt;" and "&gt;" move among the options. The button "M" cycles through the values of the setting.<br><p>
+
+The shot options are
+<ul>
+<li>"Error detection", either ON or OFF</li>
+<li>"Angle difference" for leg identification</li>
+<li>"ABS G/M" error limit</li>
+<li>"Dip" error limit</li>
+<li>"Reset to default"</li>
+<li>"Reset statistics</li>
+</ul><p>
+
+The calibration options are
+<li>
+<li>"Error detection", either ON or OFF</li>
+<li>"Group detection" angle limit</li>
+</ul><p>
+
+<b>Calibration</b><br>
+The "Calibration" menu turns the <i>Cavway</i> in calibration mode.
+In this mode the device registers raw readings in groups of four, as long as the angle difference between shots
+in the same group is small.
+If more than four shots are taken the device recrds only the last four.<br>
+When a group of four is complete, a new group is started when there is a shot with a different direction.<br>
+The distribtion of group directions is shown on the screen with two circles, one for positive inclinations, the
+other for negative inclinations.<br>
+The group shot count can be reset by pressing the "&gt;" button.<br>
+The <i>Cavway</i> records at most 25 groups.<br>
+The button "M" starts the computation of the calibration coefficients. Afterwards it shows the results of the
+computation: average angle error, std deviation and maximum angle error.<br>
+Another press of the button "M" stores the comuted coefficients.<br>
+The button "CLR" exits from the calibration mode.<br<p>
 
 </body></html>
