@@ -202,7 +202,7 @@ section:{
   de: Querschnitt
   es: alzado
   fr: coupe
-  hu: hossz-metszet
+  hu: metszet
   it: sezione
   pt: 
   ru:
@@ -213,7 +213,7 @@ shot:{
   de: 
   es: 
   fr: visée
-  hu: 
+  hu: mérés
   it: tiro
   pt: 
   ru:
