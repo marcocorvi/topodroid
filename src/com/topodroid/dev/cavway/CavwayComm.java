@@ -29,6 +29,7 @@ import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.ble.BleCallback;
+import com.topodroid.dev.ble.BleOpsQueue;
 import com.topodroid.dev.ble.BleComm;
 import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.dev.ble.BleOpConnect;
@@ -87,7 +88,9 @@ public class CavwayComm extends TopoDroidComm
 
   private static final int BYTE_PER_DATA  = CavwayData.SIZE;
 
-  private ConcurrentLinkedQueue< BleOperation > mOps;
+  // private ConcurrentLinkedQueue< BleOperation > mOps;
+  private BleOpsQueue mQps;
+
   private Context mContext;
   BleCallback mCallback;
   // private String          mRemoteAddress;
@@ -279,19 +282,21 @@ public class CavwayComm extends TopoDroidComm
     if ( LOG ) TDLog.v( TAG + "- connect cavway => status WAITING");
     notifyStatus( ConnectionState.CONN_WAITING );
     mReconnect   = true;
-    mOps         = new ConcurrentLinkedQueue< BleOperation >();
+    // mOps         = new ConcurrentLinkedQueue< BleOperation >();
+    mQps = new BleOpsQueue();
+
     mProtocol    = new CavwayProtocol( mContext, mApp, lister, device, this );
     // mChrtChanged = new BricChrtChanged( this, mQueue );
     // mCallback    = new BleCallback( this, mChrtChanged, false ); // auto_connect false
     mCallback    = new BleCallback( this, false ); // auto_connect false
 
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
-    // clearPending();
+    // mQps.clearPending();
 
     if ( LOG ) TDLog.v( TAG + "connect: enqueue connect" );
-    int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
+    int ret = mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
     // if ( LOG ) TDLog.v( TAG + "connect ... " + ret);
-    clearPending();
+    mQps.clearPending();
     return true;
   }
 
@@ -335,8 +340,10 @@ public class CavwayComm extends TopoDroidComm
    */
   public void disconnected()
   {
-    clearPending();
-    mOps.clear();
+    // clearPending();
+    // mOps.clear();
+    mQps.clear( true );
+
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     mBTConnected = false;
     if ( LOG ) TDLog.v( TAG + "\"disconnected\": status DISCONNECTED");
@@ -347,7 +354,7 @@ public class CavwayComm extends TopoDroidComm
   public void connected()
   {
     if ( LOG ) TDLog.v( TAG + "\"connected\": bond state " + mRemoteBtDevice.getBondState() );
-    clearPending();
+    mQps.clearPending();
   }
 
   public void disconnectGatt()  // called from BleOpDisconnect
@@ -377,68 +384,68 @@ public class CavwayComm extends TopoDroidComm
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
       // TDLog.v( TAG + "close device: enqueue disconnect => status ISCONNECTED");
-      int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
-      doNextOp();
+      int ret = mQps.enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
+      mQps.doNextOp();
       // TDLog.v( TAG + "close Device - disconnect ... ops " + ret );
     }
     return true;
   }
 
   // --------------------------------------------------------------------------
-  private BleOperation mPendingOp = null;
+  // private BleOperation mPendingOp = null;
 
-  /** clear the pending op and do the next if the queue is not empty
-   */
-  private void clearPending()
-  {
-    mPendingOp = null;
-    // if ( ! mOps.isEmpty() || mPendingCommands > 0 ) doNextOp();
-    if ( ! mOps.isEmpty() ) {
-      doNextOp();
-    } else {
-      if ( LOG ) TDLog.v( TAG + "\"clear pending\": no more ops" );
-    }
-  }
+  // /** clear the pending op and do the next if the queue is not empty
+  //  */
+  // private void clearPending()
+  // {
+  //   mPendingOp = null;
+  //   // if ( ! mOps.isEmpty() || mPendingCommands > 0 ) doNextOp();
+  //   if ( ! mOps.isEmpty() ) {
+  //     doNextOp();
+  //   } else {
+  //     if ( LOG ) TDLog.v( TAG + "\"clear pending\": no more ops" );
+  //   }
+  // }
 
-  /** add a BLE op to the queue
-   * @param op   BLE op
-   * @return the length of the ops queue
-   */
-  private int enqueueOp( BleOperation op )
-  {
-    if ( LOG ) {
-      if ( mRemoteBtDevice != null ) {
-        // TDLog.v( TAG + "enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
-      } else {
-        TDLog.v( TAG + "enqueue " + op.name() + " null remote" );
-      }
-    }
-    mOps.add( op );
-    // printOps(); // DEBUG
-    return mOps.size();
-  }
+  // /** add a BLE op to the queue
+  //  * @param op   BLE op
+  //  * @return the length of the ops queue
+  //  */
+  // private int enqueueOp( BleOperation op )
+  // {
+  //   if ( LOG ) {
+  //     if ( mRemoteBtDevice != null ) {
+  //       // TDLog.v( TAG + "enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
+  //     } else {
+  //       TDLog.v( TAG + "enqueue " + op.name() + " null remote" );
+  //     }
+  //   }
+  //   mOps.add( op );
+  //   // printOps(); // DEBUG
+  //   return mOps.size();
+  // }
 
- /** do the next op on the queue
-  * @note access by BricChrtChanged
-  */
-  private void doNextOp()
-  {
-    if ( mPendingOp != null ) {
-      if ( LOG ) TDLog.v( TAG + "next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
-      return;
-    }
-    mPendingOp = mOps.poll();
-    if ( mPendingOp != null ) {
-      if ( LOG ) TDLog.v( TAG + "polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
-      mPendingOp.execute();
-    } else {
-      if ( LOG ) TDLog.v( TAG + "do next op - no op");
-    }
-    // else if ( mPendingCommands > 0 ) {
-    //   enqueueShot( this );
-    //   -- mPendingCommands;
-    // }
-  }
+  // /** do the next op on the queue
+  //  * @note access by BricChrtChanged
+  //  */
+  // private void doNextOp()
+  // {
+  //   if ( mPendingOp != null ) {
+  //     if ( LOG ) TDLog.v( TAG + "next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
+  //     return;
+  //   }
+  //   mPendingOp = mOps.poll();
+  //   if ( mPendingOp != null ) {
+  //     if ( LOG ) TDLog.v( TAG + "polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
+  //     mPendingOp.execute();
+  //   } else {
+  //     if ( LOG ) TDLog.v( TAG + "do next op - no op");
+  //   }
+  //   // else if ( mPendingCommands > 0 ) {
+  //   //   enqueueShot( this );
+  //   //   -- mPendingCommands;
+  //   // }
+  // }
 
   // BleComm interface
 
@@ -449,9 +456,9 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) TDLog.v( TAG + "\"on MTU changed\": mtu " + mtu );
     if ( USE_MTU ) {
-      enqueueOp( new BleOpNotify( mContext, this, CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_READ_UUID, true ) );
+      mQps.enqueueOp( new BleOpNotify( mContext, this, CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_READ_UUID, true ) );
     }
-    clearPending();
+    mQps.clearPending();
   }
 
   /** notified that the remote RSSI has been read (Received Signal Strength Indicator)
@@ -460,7 +467,7 @@ public class CavwayComm extends TopoDroidComm
   public void readedRemoteRssi( int rssi )
   {
     // if ( LOG ) TDLog.v( TAG + "readed remote RSSI");
-    clearPending();
+    mQps.clearPending();
   }
 
   /** notifies that a characteristics has changed
@@ -505,7 +512,7 @@ public class CavwayComm extends TopoDroidComm
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
     // if ( LOG ) TDLog.v( TAG + "written chrt " + bytes.length );
-    clearPending();
+    mQps.clearPending();
   }
 
   /** notified that bytes have been read
@@ -542,7 +549,7 @@ public class CavwayComm extends TopoDroidComm
     } else {
       if ( LOG ) TDLog.v( TAG + "written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
     }
-    clearPending();
+    mQps.clearPending();
   }
 
   /** notified that a reliable write was completed
@@ -591,11 +598,11 @@ public class CavwayComm extends TopoDroidComm
   {
     // if ( LOG ) TDLog.v( TAG + "services discovered");
     if ( USE_MTU ) {
-      enqueueOp( new BleOpRequestMtu( mContext, this, 250 ) ); // exec requestMtu
+      mQps.enqueueOp( new BleOpRequestMtu( mContext, this, 250 ) ); // exec requestMtu
     } else {
-      enqueueOp( new BleOpNotify( mContext, this, CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_READ_UUID, true ) );
+      mQps.enqueueOp( new BleOpNotify( mContext, this, CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_READ_UUID, true ) );
     }
-    doNextOp();
+    mQps.doNextOp();
 
 
     // 20221026 MOVED TO enablePNotify -- 202211XX
@@ -680,7 +687,7 @@ public class CavwayComm extends TopoDroidComm
         TDLog.t( TAG + "***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
-    clearPending();
+    mQps.clearPending();
   }
 
   /** try to recover from an error ... and reconnect
@@ -688,16 +695,18 @@ public class CavwayComm extends TopoDroidComm
   private void reconnectDevice()
   {
     if ( LOG ) TDLog.v( TAG + "reconnect device - close GATT" );
-    mOps.clear();
-    // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
-    clearPending();
+    // mOps.clear();
+    // // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
+    // clearPending();
+    mQps.clear( false );
+
     mCallback.closeGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     if ( mReconnect ) {
       if ( LOG ) TDLog.v( TAG + "reconnect device - reconnecting ... ");
       notifyStatus( ConnectionState.CONN_WAITING );
-      enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-      doNextOp();
+      mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
+      mQps.doNextOp();
       mBTConnected = true;
     } else {
       if ( LOG ) TDLog.v( TAG + "reconnect device - disconnected" );
@@ -717,7 +726,7 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) TDLog.v( TAG + "Failure (" + status + "): disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
-    clearPending();
+    mQps.clearPending();
     closeDevice( false );
     mCallback.closeGatt();
   }
@@ -773,11 +782,11 @@ public class CavwayComm extends TopoDroidComm
       }
       framebytes[i+6] = '\r';
       framebytes[i+7] = '\n';
-      enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, framebytes ) );
+      mQps.enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, framebytes ) );
     } else {
-      enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, bytes ) );
+      mQps.enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, bytes ) );
     }
-    doNextOp();
+    mQps.doNextOp();
     //wait 100ms to let the MCU to receive correct frame, Siwei Tian added
     return true;
   }

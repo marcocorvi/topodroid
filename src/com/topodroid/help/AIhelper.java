@@ -42,6 +42,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public class AIhelper // extends AsyncTask< String, Void, String >
 {
@@ -51,6 +57,8 @@ public class AIhelper // extends AsyncTask< String, Void, String >
 
   final String mRefPage; // refrence section of the user-manual
   Pattern mPattern;
+
+  static private HashMap<String, String> mManualIndex = null;
 
   /* */
   static private String  mModelName = null;
@@ -65,6 +73,42 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     mUserKey = user_key;
     mPattern = Pattern.compile( "\\[([^]]+\\.htm)\\]" );
     mRefPage = page;
+    readManualIndex();
+  }
+
+  /** read the map filenames to titles
+   */
+  private void readManualIndex() // this is not sttaic because it needs Context ...
+  {
+    if ( mManualIndex != null ) return;
+    Pattern pattern = Pattern.compile( "<a\\s+href=\"([^\"]+\\.htm)\">([^<]+)<\\/a>" );
+    mManualIndex = new HashMap<>();
+    try {
+      InputStream is = mContext.getAssets().open("man/manual16.htm");
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String line;
+      while ( ( line = br.readLine() ) != null ) {
+        line = line.trim();
+        if ( ! line.startsWith("<a href") ) continue;
+        Matcher matcher = pattern.matcher( line );
+        if ( matcher.find() ) {
+          mManualIndex.put( matcher.group(1), matcher.group(2) );
+        }
+      }
+      is.close();
+    } catch ( IOException e ) {
+      TDLog.e("Error reading manual16: " + e.getMessage() );
+    }
+  }
+
+  /** @return the totle for a filename - or filename if there is no title
+   * @param filename  filename
+   */
+  private String getTitle( String filename )
+  {
+    if ( mManualIndex == null ) return filename;
+    String title = mManualIndex.get( filename );
+    return ( title == null )? filename : title;
   }
     
   /** set the Gemini model
@@ -159,42 +203,64 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     }
   }
 
+  private class PageLink
+  {
+    int mStart, mEnd;
+    String mFilename;
+    String mLinkText;
+
+    PageLink( int start, int end, String filename )
+    {
+      mStart = start;
+      mEnd   = end;
+      mFilename = filename;
+      mLinkText = null;
+    }
+  }
+
   private void updateUI( WeakReference<TextView> tvRef, String message )
   {
     // Ensure we run on the Main UI Thread
     new Handler( Looper.getMainLooper() ).post( new Runnable() {
       @Override public void run() {
+        mDialog.resetCanSubmit();
         TextView tv = tvRef.get();
         if ( tv != null ) {
-          // SpannableString ssb = new SpannableString( message );
-          SpannableStringBuilder ssb = new SpannableStringBuilder( message );
+          ArrayList< PageLink > pages = new ArrayList<>();
+
+          // SpannableString ssb = new SpannableString( message ); // immutable text
+          SpannableStringBuilder ssb = new SpannableStringBuilder( message ); // mutable text
           Matcher matcher = mPattern.matcher( message );
-          TDLog.v("Message: " + message );
+          // TDLog.v("Message: " + message );
           int len = message.length();
           int offset = 0;
-          while ( matcher.find( offset ) ) {
-            final String filename = matcher.group( 1 );
-            int start = matcher.start();
-            int end   = matcher.end();
-            TDLog.v("Start " + start + " End " + end + " Len " + len + " filename " + filename );
-            ssb.delete( end - 1, end );
-            ssb.delete( start, start + 1 );
-            end -= 2;
+          while ( offset < len && matcher.find( offset ) ) {
+            // TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
+            pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) ) );
+            offset = matcher.end() + 1;
+          }
+          for ( PageLink page : pages ) {
+            page.mLinkText = getTitle( page.mFilename );
+          }
+          offset = 0;
+          for ( PageLink page : pages ) {
+            int linkStart = offset + page.mStart;
+            int linkEnd   = offset + page.mStart + page.mLinkText.length();
+            ssb.delete( linkStart, offset + page.mEnd );
+            ssb.insert( linkStart, page.mLinkText );
+            offset += page.mLinkText.length() - ( page.mEnd - page.mStart );
             ClickableSpan cs = new ClickableSpan() {
-              @Override public void onClick( View v ) { mDialog.openPageOnParent( filename ); }
+              @Override public void onClick( View v ) { mDialog.openPageOnParent( page.mFilename ); }
               @Override public void updateDrawState( TextPaint ds ) {
                 super.updateDrawState( ds );
                 ds.setUnderlineText( true );
                 ds.setColor( TDColor.FIXED_BLUE );
               }
             };
-            ssb.setSpan( cs, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
-            offset  = end;
+            ssb.setSpan( cs, linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
           }
           tv.setText( ssb );
           tv.setMovementMethod( LinkMovementMethod.getInstance() );
-
-          // tv.setText(message);
         }
       }
     });

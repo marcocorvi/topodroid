@@ -21,11 +21,11 @@ import java.util.concurrent.locks.Condition;
 
 public class BleQueue
 {
-  final Lock mLock = new ReentrantLock(); // mutex
-  final Condition notEmpty = mLock.newCondition(); // condition variable
+  final private Lock mLock = new ReentrantLock(); // mutex
+  final private Condition notEmpty = mLock.newCondition(); // condition variable
 
-  BleBuffer mHead = null;
-  BleBuffer mTail = null;
+  private BleBuffer mHead = null;
+  private BleBuffer mTail = null;
   public int size = 0;
 
   /** thread-safe putter

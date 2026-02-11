@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="604002"
-      android:versionName="6.4.2"
+      android:versionCode="604005"
+      android:versionName="6.4.5"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -71,6 +71,8 @@
     <!-- android_usesPermissionFlags="neverForLocation"
          tools_targetApi="s"
     -->
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Android-12 ignores MANAGE_EXTERNAL_STORAGE: user must grant with adb - nevertheless the uses-permission must be declared -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"/>

@@ -14,7 +14,7 @@
 
   <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent"
-    android:layout_height="0dp"
+    android:layout_height="fill_parent"
     android:layout_weight="1"
     >
     <TextView android:id="@+id/answer" 
@@ -23,6 +23,7 @@
       android:ems="25"
       android:layout_height="fill_parent" 
       android:minLines="16"
+      android:maxLines="18"
       android:scrollHorizontally="true"
     />
   </ScrollView>

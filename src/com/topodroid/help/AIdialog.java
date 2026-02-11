@@ -45,6 +45,7 @@ public class AIdialog extends MyDialog
   AIhelper mHelper;
   static String mSystemInstruction = null;
   boolean mLocalContext = true; // whether to include the local context in the query
+  boolean mCanSubmit    = true;
 
   static String mLang   = null; // local language
   static String mJargon = null; // jargon dictionary
@@ -138,15 +139,21 @@ public class AIdialog extends MyDialog
   public void onClick( View v ) 
   {
     if ( v.getId() == R.id.button_submit ) {
-      EditText et = (EditText) findViewById( R.id.question );
-      String question = et.getText().toString();
-      if ( question == null || question.isEmpty() ) {
-        et.setError( mContext.getResources().getString( R.string.error_question ) );
-      } else {
-        TextView answer = (TextView) findViewById( R.id.answer );
-        mHelper.setModel( mModels[mIdxModel] );
-        mHelper.ask( question, answer, mLocalContext );
-        mLocalContext = false;
+      if ( mCanSubmit ) {
+        EditText et = (EditText) findViewById( R.id.question );
+        String question = et.getText().toString();
+        if ( question == null || question.isEmpty() ) {
+          et.setError( mContext.getResources().getString( R.string.error_question ) );
+        } else {
+          mCanSubmit = false;
+          Button b = (Button)findViewById(R.id.button_submit);
+          b.setOnClickListener( null );
+          b.setEnabled( false );
+          TextView answer = (TextView) findViewById( R.id.answer );
+          mHelper.setModel( mModels[mIdxModel] );
+          mHelper.ask( question, answer, mLocalContext );
+          mLocalContext = false;
+        }
       }
     } else if ( v.getId() == R.id.button_reset ) { // reset the chat
       mHelper.resetChat();
@@ -157,6 +164,16 @@ public class AIdialog extends MyDialog
       dismiss();
     }
   }
+
+  void resetCanSubmit()
+  {
+    mCanSubmit = true;
+    Button v = (Button)findViewById(R.id.button_submit);
+    v.setOnClickListener( this );
+    v.setEnabled( true );
+  }
+
+
 
   // @Override
   // public void onBackPressed()
@@ -213,7 +230,7 @@ public class AIdialog extends MyDialog
   void openPageOnParent( String page )
   {
     dismiss();
-    mParent.loadAssetPage( null, page, true );
+    mParent.loadManPage( null, page );
   }
 
   /** get the jargon disctionary

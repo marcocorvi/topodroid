@@ -196,7 +196,7 @@ scale:{
   pt:  
   ru:
 }
-sezione:{
+section:{
   bg: 
   cn: 
   de: Querschnitt
@@ -204,6 +204,17 @@ sezione:{
   fr: coupe
   hu: hossz-metszet
   it: sezione
+  pt: 
+  ru:
+}
+shot:{
+  bg: 
+  cn: 
+  de: 
+  es: 
+  fr: visée
+  hu: 
+  it: tiro
   pt: 
   ru:
 }

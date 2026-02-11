@@ -15,6 +15,7 @@ the filename in brackets, like this [filename.htm]. Only sugest pages that are d
 6. Respond to the user in the same language they use to ask their question. For example if the user asks in French, answer in French, even though the manual provided is in English.\n
 7. If a specific technical term of cave surveying does not have a common translation keep the English term. For example &quot;splay&quot; is not translated.\n
 8. If a term is ambiguous provide the English term in parenthesis, like &quot;poligon záródás (Loop closure)&quot;.\n
+9. In the LEARM MORE section provide only the most relevant one or two files.\n
 CRITICAL:\n
 Never translate filenames inside square bracket. They mustalways remain as they appear in the manual, regardless of the language you are responding in.\n
 </string>
