@@ -7,7 +7,7 @@ azimuth:{
   hu: azimut
   it: azimut
   pt: 
-  ru:
+  ru: азимут
 }
 bearing:{
   bg: 
@@ -18,7 +18,7 @@ bearing:{
   hu: irány
   it: direzione
   pt: 
-  ru:
+  ru: направление
 }
 closure error:{
   bg: 
@@ -29,7 +29,7 @@ closure error:{
   hu: záráshiba
   it: errore di chiusura
   pt: 
-  ru:
+  ru: ошибка закрытия кольца
 }
 compass:{
   bg: 
@@ -40,7 +40,7 @@ compass:{
   hu: kompasz
   it: bussola
   pt: 
-  ru:
+  ru: компас
 }
 cross-section:{
   bg: 
@@ -51,7 +51,7 @@ cross-section:{
   hu: keresztmetszet
   it: sezione trasversale
   pt:  
-  ru:
+  ru: поперечное сечение
 }
 denivelation:{
   bg: 
@@ -62,7 +62,7 @@ denivelation:{
   hu: magasságkülönbség
   it: dislivello
   pt: desnivel 
-  ru:
+  ru: денивеляция
 }
 development:{
   bg: 
@@ -73,7 +73,7 @@ development:{
   hu: járathossz
   it: sviluppo
   pt:  
-  ru:
+  ru: общая длина хода
 }
 entrance:{
   bg: 
@@ -84,7 +84,7 @@ entrance:{
   hu: bejárat
   it: ingresso
   pt: entrada 
-  ru:
+  ru: вход
 }
 grid:{
   bg: 
@@ -95,7 +95,7 @@ grid:{
   hu: rács
   it: reticolato
   pt: 
-  ru:
+  ru: сетка
 }
 leg:{
   bg: 
@@ -106,7 +106,7 @@ leg:{
   hu: poligon mérés
   it: battuta
   pt: visada
-  ru:
+  ru: замер
 }
 loop closure:{
   bg: 
@@ -117,7 +117,7 @@ loop closure:{
   hu: hurok záródás
   it: chiusura di anelli
   pt: 
-  ru:
+  ru: закрытие петли
 }
 midline:{
   bg: 
@@ -128,7 +128,7 @@ midline:{
   hu: poligon vonal
   it: poligonale
   pt: poligonal 
-  ru:
+  ru: нитка хода
 }
 notebook:{
   bg: 
@@ -139,7 +139,7 @@ notebook:{
   hu: vázlat füzet
   it: tacquino
   pt:  
-  ru:
+  ru: заметки
 }
 plan:{
   bg: 
@@ -150,7 +150,7 @@ plan:{
   hu: alaprajz
   it: pianta
   pt:  
-  ru:
+  ru: план
 }
 profile:{
   bg: 
@@ -161,7 +161,7 @@ profile:{
   hu: kiterített oldalnézet
   it: sezione longitudinale
   pt: corte longitudinal
-  ru:
+  ru: разрез развертка
 }
 projected profile:{
   bg: 
@@ -172,7 +172,7 @@ projected profile:{
   hu: vetített oldalnézet
   it: sezione proiettata
   pt: corte
-  ru:
+  ru: разрез проекция
 }
 range:{
   bg: 
@@ -183,7 +183,7 @@ range:{
   hu: távolság
   it: estensione
   pt:  
-  ru:
+  ru: расстояние
 }
 scale:{
   bg: 
@@ -194,7 +194,7 @@ scale:{
   hu: skála
   it: scala
   pt:  
-  ru:
+  ru: масштаб
 }
 section:{
   bg: 
@@ -205,7 +205,7 @@ section:{
   hu: metszet
   it: sezione
   pt: 
-  ru:
+  ru: разрез
 }
 shot:{
   bg: 
@@ -216,7 +216,7 @@ shot:{
   hu: mérés
   it: tiro
   pt: 
-  ru:
+  ru: замер
 }
 splay:{
   bg: 
@@ -227,7 +227,7 @@ splay:{
   hu: sün
   it: splay
   pt: 
-  ru:
+  ru: сплей
 }
 station:{
   bg: 
@@ -238,7 +238,7 @@ station:{
   hu: mérési pont
   it: caposaldo
   pt: base
-  ru:
+  ru: пикет
 }
 surveying:{
   bg: 
@@ -249,7 +249,7 @@ surveying:{
   hu: felmérés
   it: topografia
   pt:  
-  ru:
+  ru: топосъёмка
 }
 tape:{
   bg: 
@@ -260,7 +260,7 @@ tape:{
   hu: mérőszalag
   it: bindella
   pt:  
-  ru:
+  ru: длина
 }
 x-section:{
   bg: 
@@ -271,5 +271,5 @@ x-section:{
   hu: keresztmetszet
   it: sezione
   pt:  
-  ru:
+  ru: поперечное сечение
 }
