@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO string name="ai_null_chat">Null AI chat</string -->
-    <!-- TODO string name="ai_error">AI error %1$s</string -->
-    <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
-    <!-- TODO string name="ai_prompt">Type your question</string -->
-    <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
-    <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
+    <string name="ai_null_chat">Null ИИ чат</string>
+    <string name="ai_error">Ошибка ИИ %1$s</string>
+    <string name="ai_internet">Внимание. Для работы ИИ-помощи требуется подключение к интернету.</string>
+    <string name="ai_prompt">Введите свой вопрос</string>
+    <string name="ai_invalid_key">Недействительный ключ API</string>
+    <string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Невозможно скачать руководство из интернета.</string>
@@ -390,7 +390,7 @@
     <string name="error_value_required">Требуется значение</string>
     <string name="error_bad_fixes">Привязанные точки не принадлежат съёмке</string>
     <string name="error_bad_name">Имя файла изменено</string>
-    <!-- TODO string name="error_question">Please, enter a question</string -->
+    <string name="error_question">Пожалуйста, задайте вопрос</string>
     
     <string name="group_title">Присвоить номера групп калибровочным измерениям</string>
     <!-- UNUSED string name="group_policy_four">Правило: группировать по четыре</string -->
@@ -920,7 +920,7 @@
     <string name="button_clear_memory">Очистить память</string>
     <string name="button_save"      >Сохр.     </string>
     <string name="button_select"    >Выбрать   </string>
-    <!-- TODO string name="button_submit"    >Submit</string -->
+    <string name="button_submit"    >Отправить</string>
     <string name="button_leg_station">Пикеты замера</string>
     <string name="button_all_station">Все пикеты</string>
     <string name="button_leg_search">Поиск замера</string>
@@ -1017,7 +1017,7 @@
     <!-- UNUSED string name="clino">Угол [грд]</string -->
 
     <string name="bt_alias_title">Псевдонимы Bluetooth</string>
-    <!-- TODO string name="hint_api_key">API key</string -->
+    <string name="hint_api_key">Ключ API</string>
     <string name="hint_bt_alias">BT псевдоним</string>
     <string name="hint_bt_code">Код устройства</string>
     <string name="bt_alias_missing">BT псевдоним отсутствует</string>
@@ -1303,8 +1303,8 @@
     <string name="import_diving_datamode">Режим подводной съёмки</string>
     <string name="import_therion_path">Вместе с ниткой хода</string>
 
-    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
-    <!-- TODO string name="title_ai_dialog">AI helper</string -->
+    <string name="title_gemini">Введите ключ API вашего ИИ.</string>
+    <string name="title_ai_dialog">ИИ-помощник</string>
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
@@ -1496,8 +1496,8 @@
   <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
   <string name="pref_locale_title">Язык</string>
   <string name="pref_locale_summary">Переключить язык интерфейса программы</string>
-  <!-- TODO string name="pref_gemini_title">AI key</string -->
-  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
+  <string name="pref_gemini_title">Ключ ИИ</string>
+  <string name="pref_gemini_summary">Ключ API Gemini</string>
   <string name="pref_orientation_title">Ориентация экрана</string>
   <string name="pref_orientation_summary">Настройки ориентации экрана приложения</string>
   <string name="pref_single_back_title">Однократное назад</string>
