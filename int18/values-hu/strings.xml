@@ -130,7 +130,7 @@
     <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
     <string name="failed_append_to_line">Nem sikerült másik vonalhoz kapcsolni</string>
     <string name="failed_zoomfit">Sikertelen teljes nagyítás</string>
-    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
+    <string name="fail_forget_device">Az Android nem tudta elfelejteni a BT eszközt</string>
 
     <string name="bric_device">Műszer %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -853,13 +853,13 @@
     <!-- UNUSED string name="ask_backups_clear">Törli a vázlat mentéseket?</string -->
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
     <string name="ask_clear_equates">Visszavonod az összes kapcsolatot?</string>
-    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <string name="ask_forget_device">Eszköz elfelejtése %1$s?</string>
 
     <string name="button_add"       >Hozzáad</string>
     <string name="button_apply"     >Alkalmaz</string>
     <string name="button_back"      >Vissza</string>
     <string name="button_cancel"    >Mégse</string>
-    <!-- TODO string name="button_forget"    >Forget</string -->
+    <string name="button_forget"    >Elfelejt</string>
     <string name="button_geocode"   >GeoKód</string>
     <!-- UNUSED string name="button_change"    >Változtat</string -->
     <string name="button_clipboard" >Vágólap</string>
