@@ -1315,6 +1315,37 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
   }
 
+
+  void forgetDevice( String address )
+  {
+    // delete * from DEVICE_TABLE where address=\"address\"
+    int nr_calibs = 0;
+    try {
+      myDB.beginTransaction();
+      Cursor cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "id" }, // columns
+                           "device=?",
+                           new String[] { address },
+                           null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        do {
+          long id = cursor.getLong( 0 );
+          // doDeleteCalib( id );
+          myDB.execSQL( "DELETE FROM gms WHERE calibId=" + id );
+          nr_calibs ++;
+        } while (cursor.moveToNext() );
+      }
+      myDB.execSQL( "DELETE FROM calibs WHERE device=\"" + address + "\"" );
+      myDB.execSQL( "DELETE FROM devices WHERE address=\"" + address + "\"" );
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("delete devices", e);
+    // } catch ( IllegalStateException e2 ) { logError("delete devices", e2 );
+    } finally { myDB.endTransaction(); }
+    TDLog.v("deleted device " + address + " - calibs " + nr_calibs ); 
+  }
+
+
   // private void insertDeviceHeadTail( String address, String model, int[] head_tail, String name )
   // {
   //   ContentValues cv = new ContentValues();
@@ -1627,7 +1658,7 @@ public class DeviceHelper extends DataSetObservable
              + " ( id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
              +   " name TEXT, "
              +   " day TEXT, "
-             +   " device TEXT, "
+             +   " device TEXT, " // device MAC address
              +   " comment TEXT, "
              +   " error REAL default 0, "
              +   " max_error REAL default 0, "

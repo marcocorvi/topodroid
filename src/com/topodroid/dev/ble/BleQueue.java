@@ -24,6 +24,12 @@ public class BleQueue
   final private Lock mLock = new ReentrantLock(); // mutex
   final private Condition notEmpty = mLock.newCondition(); // condition variable
 
+  final public static int DATA_QUIT = -1;
+  final public static int DATA_PRIM = 1;
+  final public static int DATA_META = 2;
+  final public static int DATA_ERR  = 3;
+  final public static int DATA_TIME = 4;
+
   private BleBuffer mHead = null;
   private BleBuffer mTail = null;
   public int size = 0;

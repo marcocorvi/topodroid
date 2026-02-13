@@ -9,10 +9,11 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.ui;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.R;
 
 import android.content.Context;
 
@@ -24,19 +25,19 @@ import android.view.LayoutInflater;
 
 // import java.util.ArrayList;
 
-class ListItemAdapter extends ArrayAdapter< String >
+public class ListItemAdapter extends ArrayAdapter< String >
 {
   private final Context context;            // context
 
 
-  ListItemAdapter( Context ctx, int id )
+  public ListItemAdapter( Context ctx, int id )
   {
     super( ctx, id );
     this.context = ctx;
   }
 
 
-  String get( int pos ) { return getItem(pos); }
+  public String get( int pos ) { return getItem(pos); }
  
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )

@@ -39,6 +39,7 @@ import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpChrtRead;
 import com.topodroid.dev.ble.BleOpChrtWrite;
+import com.topodroid.dev.ble.BleOpsQueue;
 
 // import android.os.Handler;
 // import android.os.Looper;
@@ -58,24 +59,23 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 // -----------------------------------------------------------------------------
-public class SapComm extends TopoDroidComm
-                     implements BleComm // , BleChrtChanged
+public class SapComm extends BleComm
 {
+  final static boolean USE_MTU = false;
   // -----------------------------------------------
   // BluetoothAdapter   mAdapter;
   // private BluetoothGatt mGatt = null;
   // BluetoothGattCharacteristic mWriteChrt;
 
-  private UUID mServiceUUID;
-  private UUID mReadUUID;
-  private UUID mWriteUUID;
-  private UUID mNotifyUUID;
+  // private UUID mServiceUuid;
+  // private UUID mChrtReadUuid;
+  // private UUID mChrtWriteUuid;
+  // private UUID mNotifyUuid; // not used
 
-  private ConcurrentLinkedQueue< BleOperation > mOps;
-  protected Context         mContext;
-  private String          mRemoteAddress;
-  private BluetoothDevice mRemoteBtDevice;
-  private BleCallback mCallback;
+  // private ConcurrentLinkedQueue< BleOperation > mOps;
+  // private BleCallback mCallback;
+  // protected Context   mContext;
+
   protected SapProtocol mSapProto;
   // private int mDataType = DataType.DATA_SHOT;
   private int mDataType;
@@ -83,7 +83,6 @@ public class SapComm extends TopoDroidComm
   private ListerHandler mLister;
   private int mConnectionMode = -1;
   private boolean mDisconnecting = false;
-  private BleOperation mPendingOp = null;
 
   BluetoothGattCharacteristic mReadChrt  = null;
   BluetoothGattCharacteristic mWriteChrt = null;
@@ -97,15 +96,22 @@ public class SapComm extends TopoDroidComm
    * @param app        application
    * @param address    SAP address
    * @param bt_device  BT (SAP) device
+   * @note SapComm does not use BleQueue and consumer thread
    */
-  public SapComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
+  public SapComm( TopoDroidApp app, String address, BluetoothDevice bt_device, int model ) 
   {
-    super( app );
+    super( app, USE_MTU, SapConst.SAP6_SERVICE_UUID, SapConst.SAP6_CHRT_READ_UUID, SapConst.SAP6_CHRT_WRITE_UUID );
+    if ( model == 5 ) {
+      mServiceUuid   = SapConst.SAP5_SERVICE_UUID;
+      mChrtReadUuid  = SapConst.SAP5_CHRT_READ_UUID;
+      mChrtWriteUuid = SapConst.SAP5_CHRT_WRITE_UUID;
+    }
     mRemoteAddress  = address;
     mRemoteBtDevice = bt_device;
     // TDLog.v( "SAP comm: cstr, addr " + address );
-    mOps = new ConcurrentLinkedQueue< BleOperation >();
-    clearPending();
+    // mOps = new ConcurrentLinkedQueue< BleOperation >();
+    mQps = new BleOpsQueue();
+    mQps.clearPending();
   }
 
   // void setRemoteDevice( BluetoothDevice device ) 
@@ -117,6 +123,23 @@ public class SapComm extends TopoDroidComm
   // -------------------------------------------------------------
   // CONNECTION AND DATA HANDLING MUST RUN ON A SEPARATE THREAD
   // 
+
+  private boolean assertDevice( Device device )
+  {
+    if ( device.isSap5() ) {
+      assert( mServiceUuid   == SapConst.SAP5_SERVICE_UUID );
+      assert( mChrtReadUuid  == SapConst.SAP5_CHRT_READ_UUID );
+      assert( mChrtWriteUuid == SapConst.SAP5_CHRT_WRITE_UUID );
+    } else if ( device.isSap6() || device.isDiscoX() ) {
+      assert( mServiceUuid   == SapConst.SAP6_SERVICE_UUID );
+      assert( mChrtReadUuid  == SapConst.SAP6_CHRT_READ_UUID );
+      assert( mChrtWriteUuid == SapConst.SAP6_CHRT_WRITE_UUID );
+      // mNotifyUuid    = SapConst.SAP6_DSCR_NOTIFICATION;
+    } else {
+      return false;
+    }
+    return true;
+  }
 
   /** connect the SAP device
    * @param device    SAP device
@@ -132,17 +155,7 @@ public class SapComm extends TopoDroidComm
       // TDToast.makeBad( R.string.ble_no_remote );
       TDLog.e("SAP comm: error: null remote device");
     } else { // FIXME_SAP6
-      if ( device.isSap5() ) {
-        mServiceUUID = SapConst.SAP5_SERVICE_UUID;
-        mReadUUID    = SapConst.SAP5_CHRT_READ_UUID;
-        mWriteUUID   = SapConst.SAP5_CHRT_WRITE_UUID;
-      } else if ( device.isSap6() ) {
-        TDLog.v("SAP6 connect device");
-        mServiceUUID = SapConst.SAP6_SERVICE_UUID;
-        mReadUUID    = SapConst.SAP6_CHRT_READ_UUID;
-        mWriteUUID   = SapConst.SAP6_CHRT_WRITE_UUID;
-        mNotifyUUID  = SapConst.SAP6_DSCR_NOTIFICATION;
-      } else {
+      if ( ! assertDevice( device ) ) {
         TDLog.e("SAP comm: error: not a SAP device");
         return;
       }
@@ -152,8 +165,8 @@ public class SapComm extends TopoDroidComm
       createProtocol( device );
       mCallback = new BleCallback( this, true ); // auto_connect true
       mProtocol = mSapProto;
-      enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
-      doNextOp();
+      mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
+      mQps.doNextOp();
       // mCallback.connectGatt( mContext, mRemoteBtDevice );
     }
   }
@@ -174,8 +187,8 @@ public class SapComm extends TopoDroidComm
     TDLog.v( "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
     if ( mDisconnecting ) return;
     mDisconnecting = true;
-    enqueueOp( new BleOpDisconnect( mContext, this ) );
-    doNextOp();
+    mQps.enqueueOp( new BleOpDisconnect( mContext, this ) );
+    mQps.doNextOp();
     // closeChrt();
     // mCallback.disconnectGatt();
     notifyStatus( ConnectionState.CONN_WAITING );
@@ -188,8 +201,8 @@ public class SapComm extends TopoDroidComm
   {
     TDLog.v( "SAP comm: do connect GATT");
     notifyStatus( ConnectionState.CONN_WAITING );
-    enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
-    doNextOp();
+    mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
+    mQps.doNextOp();
   }
 
   /** set the "connected" status
@@ -233,11 +246,11 @@ public class SapComm extends TopoDroidComm
   private boolean readSapPacket( )
   { 
     TDLog.v( "SAP comm: reading packet");
-    // BluetoothGattService srv = mGatt.getService( mServiceUUID );
-    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( mReadUUID );
+    // BluetoothGattService srv = mGatt.getService( mServiceUuid );
+    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( mChrtReadUuid );
     // return mGatt.readCharacteristic( chrt );
-    enqueueOp( new BleOpChrtRead( mContext, this, mServiceUUID, mReadUUID ) );
-    doNextOp();
+    mQps.enqueueOp( new BleOpChrtRead( mContext, this, mServiceUuid, mChrtReadUuid ) );
+    mQps.doNextOp();
     return true;
     // return mCallback.readCharacteristic( );
   }
@@ -335,70 +348,73 @@ public class SapComm extends TopoDroidComm
   /** try to write: 
    * get a byte array from the write queue of the protocol and put it on the write chracateristic
    */
-  private void writeChrt( )
+  private void writeAgainChrt( )
   {
     byte[] bytes = mSapProto.handleWrite( );
     if ( bytes != null ) {
       TDLog.v( "SAP comm: write chrt - bytes " + bytes.length );
       // mCallback.writeCharacteristic( mWriteChrt );
-      mCallback.writeChrt( mServiceUUID, mWriteUUID, bytes );
+      mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, bytes );
     } else { // done with the buffer writing
       TDLog.v( "SAP comm: write chrt - bytes null");
     }
   }
 
   // -------------------------------------------------------------------------------
+  // private BleOperation mPendingOp = null;
 
-  /** clear the pending operation and execute the next if the queue is not empty
-   */
-  private void clearPending() 
-  { 
-    mPendingOp = null; 
-    if ( ! mOps.isEmpty() ) doNextOp();
-  }
+  // /** clear the pending operation and execute the next if the queue is not empty
+  //  */
+  // private void clearPending() 
+  // { 
+  //   mPendingOp = null; 
+  //   if ( ! mOps.isEmpty() ) doNextOp();
+  // }
 
-  /** add a BLE operation to the queue
-   * @param op   BLE operation
-   * @return the length of the ops queue
-   */
-  private int enqueueOp( BleOperation op ) 
-  {
-    TDLog.v("SAP enqueue op " + op.name() );
-    mOps.add( op );
-    return mOps.size();
-  }
+  // /** add a BLE operation to the queue
+  //  * @param op   BLE operation
+  //  * @return the length of the ops queue
+  //  */
+  // private int enqueueOp( BleOperation op ) 
+  // {
+  //   TDLog.v("SAP enqueue op " + op.name() );
+  //   mOps.add( op );
+  //   return mOps.size();
+  // }
 
-  /** execute the next operation
-   * if no op is available it does nothing
-   */
-  private void doNextOp() 
-  {
-    if ( mPendingOp != null ) {
-      TDLog.v( "SAP comm: next op with pending not null: " + mPendingOp.name() + ", ops " + mOps.size() ); 
-      return;
-    }
-    mPendingOp = mOps.poll();
-    if ( mPendingOp != null ) {
-      TDLog.v( "SAP comm: polled, exec pending " + mPendingOp.name() + ", ops " + mOps.size() );
-      mPendingOp.execute();
-      mPendingOp = null; //Remove the pending op after we execute.  Otherwise, the ops just stack up in the queue
-    } else {
-      TDLog.v( "SAP comm: polled, no pending, ops " + mOps.size() );
-    }
-  }
+  // /** execute the next operation
+  //  * if no op is available it does nothing
+  //  */
+  // private void doNextOp() 
+  // {
+  //   if ( mPendingOp != null ) {
+  //     TDLog.v( "SAP comm: next op with pending not null: " + mPendingOp.name() + ", ops " + mOps.size() ); 
+  //     return;
+  //   }
+  //   mPendingOp = mOps.poll();
+  //   if ( mPendingOp != null ) {
+  //     TDLog.v( "SAP comm: polled, exec pending " + mPendingOp.name() + ", ops " + mOps.size() );
+  //     mPendingOp.execute();
+  //     mPendingOp = null; //Remove the pending op after we execute.  Otherwise, the ops just stack up in the queue
+  //   } else {
+  //     TDLog.v( "SAP comm: polled, no pending, ops " + mOps.size() );
+  //   }
+  // }
   // -------------------------------------------------------------------------------
   // BleComm interface
 
   /** react to a change in the MTU (empty)
    * @param mtu   MTU
-   * @note from the BleCallback
+   * @note called from the BleCallback
    */
+  @Override
   public void changedMtu( int mtu ) { }
 
   /** react to the remote RSSI being read (empty)
    * @param rssi remote RSSI
-   * @note from the BleCallback
+   * @note called from the BleCallback
    */
+  @Override
   public void readedRemoteRssi( int rssi ) { }
 
   /** react to the notification that a characteristic has changed
@@ -408,26 +424,30 @@ public class SapComm extends TopoDroidComm
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
     //TODO: Implement SAP 6 handling of data
-    String uuid_str = chrt.getUuid().toString();
-    if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) || uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) {
+    UUID uuid = chrt.getUuid();
+    // String uuid_str = uuid.toString();
+    // if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) || uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) 
+    if ( uuid.compareTo( mChrtReadUuid ) == 0 ) {
       TDLog.v( "SAP comm: changed chrt READ" );
       int res = mSapProto.handleReadNotify( chrt );
       if ( res == DataType.PACKET_DATA ) {
-        if(uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) {
+        // if ( uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) 
+        if ( uuid.compareTo( SapConst.SAP6_CHRT_READ_UUID ) == 0 ) { // model SAP^ send ack
           byte[] ackByte = mSapProto.handleWrite(); // ACKNOWLEDGMENT
-          mCallback.writeChrt( mServiceUUID, mWriteUUID, ackByte );
+          mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, ackByte );
         }
         handleRegularPacket( res, mLister, DataType.DATA_SHOT );
       }
       // readSapPacket();
-    } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
+    // } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
+    } if ( uuid.compareTo( mChrtWriteUuid ) == 0 ) {
       TDLog.v( "SAP comm: changed chrt WRITE" );
       byte[] bytes = mSapProto.handleWriteNotify( chrt );
       if ( bytes != null ) {
-        mCallback.writeChrt( mServiceUUID, mWriteUUID, bytes );
+        mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, bytes );
       }
     } else {
-      TDLog.e("SAP comm: changed unexpected chrt " + uuid_str );
+      TDLog.e("SAP comm: changed unexpected chrt " + uuid.toString() );
     }
   }
 
@@ -453,23 +473,26 @@ public class SapComm extends TopoDroidComm
    * @param bytes      array of written bytes (unused)
    * @note from the BleCallback
    */
+  @Override
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
     TDLog.v( "SAP comm: written chrt ...");
     if ( ! mWriteInitialized ) { error(-4, uuid_str, "writeInit"); return; }
-    writeChrt( ); // try to write again
+    writeAgainChrt( ); // try to write again
   }
 
-  /** react to the descriptor has been read (empty)
-   * @param uuid_str       ??? UUID
-   * @param uuid_chrt_str  characteristic UUID
-   * @param bytes          array of read bytes
-   * @note from the BleCallback
-   */
-  public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
-  {
-    TDLog.v( "SAP comm: readedDesc" );
-  }
+  // FIXME BleComm has mQps.clearPending();
+  //
+  // /** react to the descriptor has been read (empty)
+  //  * @param uuid_str       ??? UUID
+  //  * @param uuid_chrt_str  characteristic UUID
+  //  * @param bytes          array of read bytes
+  //  * @note from the BleCallback
+  //  */
+  // public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
+  // {
+  //   TDLog.v( "SAP comm: readedDesc" );
+  // }
 
   /** react to the descriptor has been written
    * @param uuid_str       descriptor UUID
@@ -484,13 +507,14 @@ public class SapComm extends TopoDroidComm
     connected( true );
   }
 
-  /** react to the completion of a reliable write (empty)
-   * @note from the BleCallback
-   */
-  public void completedReliableWrite()
-  {
-    TDLog.v( "SAP comm: reliable write" );
-  }
+  // FIXME BleComm has clearPending
+  // /** react to the completion of a reliable write (empty)
+  //  * @note from the BleCallback
+  //  */
+  // public void completedReliableWrite()
+  // {
+  //   TDLog.v( "SAP comm: reliable write" );
+  // }
 
   /** communication disconnected
    * @note from the BleCallback
@@ -498,7 +522,7 @@ public class SapComm extends TopoDroidComm
   public void disconnected()
   {
     TDLog.v( "SAP comm: disconnected ...");
-    clearPending();
+    mQps.clearPending();
     // if ( mDisconnecting ) return;
     mDisconnecting = false;
     mConnectionMode = -1;
@@ -514,10 +538,10 @@ public class SapComm extends TopoDroidComm
   public int servicesDiscovered( BluetoothGatt gatt )
   {
     TDLog.v( "SAP comm: service discovered" );
-    BluetoothGattService srv = gatt.getService( mServiceUUID );
+    BluetoothGattService srv = gatt.getService( mServiceUuid );
 
-    mReadChrt  = srv.getCharacteristic( mReadUUID );
-    mWriteChrt = srv.getCharacteristic( mWriteUUID );
+    mReadChrt  = srv.getCharacteristic( mChrtReadUuid );
+    mWriteChrt = srv.getCharacteristic( mChrtWriteUuid );
 
     // boolean write_has_write = BleUtils.isChrtRWrite( mWriteChrt.getProperties() );
     // boolean write_has_write_no_response = BleUtils.isChrtRWriteNoResp( mWriteChrt.getProperties() );
@@ -542,7 +566,7 @@ public class SapComm extends TopoDroidComm
     // boolean read_has_write  = BleUtils.isChrtPWrite( mReadChrt.getProperties() );
     // TDLog.v( "SAP callback R-chrt has write " + read_has_write );
 
-    clearPending(); // clear "connect" op
+    mQps.clearPending(); // clear "connect" op
 
     byte[] notify = BleUtils.getChrtPNotify( mReadChrt );
     if ( notify == null ) {
@@ -565,30 +589,30 @@ public class SapComm extends TopoDroidComm
     return 0;
   } 
 
-  /** write to a characteristic
-   * @param srv_uuid   service UUID
-   * @param chrt_uuid  characteristic UUID
-   * @param bytes      array of bytes to write
-   * @return ...
-   */
-  public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
-  {
-    TDLog.v( "SAP comm: ##### writeChrt TODO ..." );
-    // return mCallback.writeCharacteristic( mWriteChrt );
-    return mCallback.writeChrt( srv_uuid, chrt_uuid, bytes );
-  }
+  // /** write to a characteristic
+  //  * @param srv_uuid   service UUID
+  //  * @param chrt_uuid  characteristic UUID
+  //  * @param bytes      array of bytes to write
+  //  * @return ...
+  //  */
+  // public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
+  // {
+  //   TDLog.v( "SAP comm: ##### writeChrt TODO ..." );
+  //   // return mCallback.writeCharacteristic( mWriteChrt );
+  //   return mCallback.writeChrt( srv_uuid, chrt_uuid, bytes );
+  // }
 
-  /** read from a characteristic
-   * @param srv_uuid   service UUID
-   * @param chrt_uuid  characteristic UUID
-   * @return ...
-   */
-  public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
-  {
-    TDLog.v( "SAP comm: ##### readChrt" );
-    // return mCallback.readCharacteristic( mReadChrt );
-    return mCallback.readChrt( srv_uuid, chrt_uuid );
-  }
+  // /** read from a characteristic
+  //  * @param srv_uuid   service UUID
+  //  * @param chrt_uuid  characteristic UUID
+  //  * @return ...
+  //  */
+  // public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
+  // {
+  //   TDLog.v( "SAP comm: ##### readChrt" );
+  //   // return mCallback.readCharacteristic( mReadChrt );
+  //   return mCallback.readChrt( srv_uuid, chrt_uuid );
+  // }
 
   /** handle an error
    * @param status   error status code
@@ -608,6 +632,7 @@ public class SapComm extends TopoDroidComm
    * @param extra    failure message
    * @param what     failure source (unused)
    */
+  @Override
   public void failure( int status, String extra, String what )
   {
     TDLog.t("SAP comm: failure " + status + " " + extra );
@@ -626,41 +651,46 @@ public class SapComm extends TopoDroidComm
     mCallback.closeGatt();
   }
 
+  // FIXME BleComm calls mCallback.enablePNotify
   /** enable notify on a characteristic - it does nothing
    * @param srcUuid    service UUID (unused)
    * @param chrtUuid   characteristic UUID (unused)
    * @return always true
    */
+  @Override
   public boolean enablePNotify( UUID srcUuid, UUID chrtUuid )
   {
     TDLog.v( "SAP comm: enable P notify");
     return true;
   }
 
+  // FIXME BleComm calls mCallback.enablePIndicate
   /** enable indicate on a characteristic - it does nothing
    * @param srcUuid    service UUID (unused)
    * @param chrtUuid   characteristic UUID (unused)
    * @return always true
    */
+  @Override
   public boolean enablePIndicate( UUID srcUuid, UUID chrtUuid )
   {
     TDLog.v( "SAP comm: enable P indicate");
     return true;
   }
 
-  /** connect to the GATT
-   * @param ctx     context
-   * @param device  BT (SAP) device
-   */
-  public void connectGatt( Context ctx, BluetoothDevice device )
-  {
-    TDLog.v( "SAP connect Gatt" );
-    closeChrt();
-    mCallback.connectGatt( ctx, device );
-  }
+  // /** connect to the GATT
+  //  * @param ctx     context
+  //  * @param device  BT (SAP) device
+  //  */
+  // public void connectGatt( Context ctx, BluetoothDevice device )
+  // {
+  //   TDLog.v( "SAP connect Gatt" );
+  //   closeChrt();
+  //   mCallback.connectGatt( ctx, device );
+  // }
 
   /** disconnect from the GATT
    */
+  @Override
   public void disconnectGatt()
   {
     TDLog.v( "SAP comm: disconnect Gatt" );
@@ -669,13 +699,15 @@ public class SapComm extends TopoDroidComm
     notifyStatus( ConnectionState.CONN_WAITING );
     mDisconnecting = false;
     TDUtil.slowDown(500);
-    clearPending(); // FIXME 20221028
+    mQps.clearPending(); // FIXME 20221028
   }
 
+  // FIXME BleComm calls mCallback.requestMtu( mtu )
   /** request a new MTU
    * @param mtu   new value
    * @return always false
    */
+  @Override
   public boolean requestMtu( int mtu )
   {
     TDLog.t( "SAP requestMtu not implemented" );
@@ -695,8 +727,8 @@ public class SapComm extends TopoDroidComm
     byte[] command = new byte[1];
     command[0] = (byte)cmd;
     TDLog.v( "SAP6 comm send command " + cmd );
-    enqueueOp( new BleOpChrtWrite( mContext, this, mServiceUUID, mWriteUUID, command ) );
-    doNextOp();
+    mQps.enqueueOp( new BleOpChrtWrite( mContext, this, mServiceUuid, mChrtWriteUuid, command ) );
+    mQps.doNextOp();
     return true;
   }
 

@@ -90,7 +90,7 @@ public class TDInstance
 
   /** @return true if the primary device is set and is of type SAP (SAP5 or SAP6)
    */
-  public static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); } // FIXME_SAP6
+  // public static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); } // FIXME_SAP6
 
   /** @return true if the primary device is set and is of type SAP5
    */

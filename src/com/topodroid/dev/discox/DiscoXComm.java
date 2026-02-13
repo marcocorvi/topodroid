@@ -101,7 +101,7 @@ public class DiscoXComm extends SapComm
    */
   public DiscoXComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
-    super( app, address, bt_device );
+    super( app, address, bt_device, 6 ); // model SAP6
   }
 
   // void setRemoteDevice( BluetoothDevice device ) 

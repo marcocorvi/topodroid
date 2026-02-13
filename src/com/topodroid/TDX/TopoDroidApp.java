@@ -882,11 +882,16 @@ public class TopoDroidApp extends Application
       } else if ( TDInstance.isDeviceA3() ) {
         // TDLog.v( "TDApp: create DistoX1 comm");
         mComm = new DistoXA3Comm( this );
-      } else if ( TDInstance.isDeviceSap() ) {
+      } else if ( TDInstance.isDeviceSap5() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         // TDLog.v( "TDApp: create SAP comm");
-        mComm = new SapComm( this, address, bt_device );
+        mComm = new SapComm( this, address, bt_device, 5 );
+      } else if ( TDInstance.isDeviceSap6() ) {
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
+        // TDLog.v( "TDApp: create SAP comm");
+        mComm = new SapComm( this, address, bt_device, 6 );
       } else if ( TDInstance.isDeviceDiscoX() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
@@ -1862,8 +1867,10 @@ public class TopoDroidApp extends Application
         TDInstance.setBleDevice( bt_device );
         if ( TDInstance.isDeviceDiscoX() ) {
           mComm = new DiscoXComm( this, address, bt_device ); 
-        } else if ( TDInstance.isDeviceSap() ) {
-          mComm = new SapComm( this, address, bt_device ); 
+        } else if ( TDInstance.isDeviceSap5() ) {
+          mComm = new SapComm( this, address, bt_device, 5 ); 
+        } else if ( TDInstance.isDeviceSap6() ) {
+          mComm = new SapComm( this, address, bt_device, 6 ); 
         } else if ( TDInstance.isDeviceBric() ) {
           mComm = new BricComm( this, this, address, bt_device );
         }

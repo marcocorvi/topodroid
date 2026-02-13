@@ -5,7 +5,7 @@
     <string name="ai_error">MI hiba %1$s</string>
     <string name="ai_internet">Figyelem! MI súgóhoz web kapcsolat szükséges.</string>
     <string name="ai_prompt">Írd be a kérdést</string>
-    <!string name="ai_invalid_key">Valótlan API kulcs</string>
+    <string name="ai_invalid_key">Valótlan API kulcs</string>
     <string name="ai_key_instruction">Az API-kulcs az Android belső memóriájában tárolódik, és csak a Google-nak kerül elküldésre.\nKeressen rá az interneten, hogyan szerezhet be Gemini API-kulcsot a Google-tól.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->

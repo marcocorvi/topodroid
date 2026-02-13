@@ -124,33 +124,53 @@ public class Device
   public final static int DISTO_DISCOX   = 11;
 
 
-  // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9        10
+  // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9        10      11
   final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CVWY1", "discox" };
   private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5", "CVWY1", "discox" };
   
+  /** @return the string concise name of the device type
+   * @param type  device type (between 0 and 11)
+   */
   public static String typeToString( int type )
   {
     if ( type < 0 || type >= typeString.length ) return null;
     return typeString[ type ];
   }
 
+  /** @return the MAC address of the device
+   */
   public String getAddress() { return mAddress; }
 
-  // check if this device has given address or nickname
+  /** check if this device has given address
+   * @param addr   address
+   * @return true if the device address is equal to the given address
+   */
   public boolean hasAddress( String addr )
   {
     return mAddress.equals( addr );
   }
 
-  // check if this device has given address or nickname
+  /** check if this device has given address or nickname
+   * @param addr   address or nickname
+   * @return true if the device address or nickname is equal to the given input
+   */
   public boolean hasAddressOrNickname( String addr )
   {
     return mAddress.equals( addr ) || ( mNickname != null && mNickname.equals( addr ) );
   }
 
+  /** @return true if the device is classic BT
+   */
   public boolean isBT( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
+
+  /** @return true if the device is Bluetooth LE
+   */
   public boolean isBLE( ) { return mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 
                                 || mType == DISTO_SAP5 || mType == DISTO_SAP6  || mType == DISTO_CAVWAYX1 || mType == DISTO_DISCOX; } // SIWEI_TIAN
+
+  /** @return true if the device tyeo is Bluetooth LE
+   * @param type   device type
+   */
   public static boolean isBle( int type ) { return type == DISTO_XBLE || type == DISTO_BRIC4 || type == DISTO_BRIC5
                                                ||  type == DISTO_SAP5 || type == DISTO_SAP6  || type == DISTO_CAVWAYX1 || type == DISTO_DISCOX; } // SIWEI_TIAN
 

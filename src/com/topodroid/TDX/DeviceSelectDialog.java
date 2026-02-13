@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.ListItemAdapter;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 

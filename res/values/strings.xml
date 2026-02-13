@@ -876,6 +876,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_apply"     >Apply</string>
     <string name="button_back"      >Back</string>
     <string name="button_cancel"    >Cancel</string>
+    <string name="button_forget"    >Forget</string>
     <string name="button_geocode" copyable="all">GeoCode</string>
     <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard" >Clipboard</string>

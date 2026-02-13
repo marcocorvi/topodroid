@@ -113,7 +113,7 @@
     <!-- property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava.jar:libjars/lifecycle.jar" / -->
 
     <!-- only JAVA 8 -->
-    <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava.jar" />
+    <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar" />
 
     <property name="build.is.signing.debug" value="false" />
     <!-- <property name="jars.libs.dir" value="libs" /> -->

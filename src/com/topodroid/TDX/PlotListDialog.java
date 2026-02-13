@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
+// import com.topodroid.ui.ListItemAdapter;
 import com.topodroid.common.PlotType;
 
 import java.util.List;

@@ -38,6 +38,7 @@ import com.topodroid.dev.ble.BleOpRequestMtu;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleBuffer;
 import com.topodroid.dev.ble.BleQueue;
+import com.topodroid.dev.ble.BleOpsQueue;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.IMemoryDialog;
@@ -66,20 +67,17 @@ import android.os.Handler;
 import android.os.Looper;
 import android.content.res.Resources;
 
-public class DistoXBLEComm extends TopoDroidComm
-                           implements BleComm 
+public class DistoXBLEComm extends BleComm
 {
   private final static boolean LOG = false;
   private final static boolean USE_MTU = false;
 
-  final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
-  final static int DATA_QUIT = -1;  // same as Bric 
-
-  private ConcurrentLinkedQueue< BleOperation > mOps;
-  private Context mContext;
-  BleCallback mCallback;
-  // private String          mRemoteAddress;
-  private BluetoothDevice mRemoteBtDevice;
+  // private ConcurrentLinkedQueue< BleOperation > mOps;
+  // private BleopsQueue mQps;
+  // BleCallback mCallback;
+  // private Context mContext;
+  // private BleQueue mQueue;
+  
   private ListerHandler mLister = null;
   private String mAddress;
   private int    mTimeout;
@@ -98,7 +96,6 @@ public class DistoXBLEComm extends TopoDroidComm
   Thread mConsumer = null;
 
   // final Object mNewDataFlag = new Object();
-  private BleQueue mQueue;
 
   boolean mThreadConsumerWorking = false;
 
@@ -110,13 +107,14 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public DistoXBLEComm(Context ctx,TopoDroidApp app, String address, BluetoothDevice bt_device )
   {
-    super( app );
+    super( app, USE_MTU, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID );
     if ( LOG ) TDLog.v( "XBLE cstr" );
     // mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
     mContext = ctx;
     // mNewDataFlag = new Object();
-    mQueue = new BleQueue();
+    // mQueue = new BleQueue(); done by super
+
     mConsumer = new Thread() { // this is the thread that consumes data on the queue
       @Override public void run() {
         //mThreadConsumerWorking = true;
@@ -124,7 +122,7 @@ public class DistoXBLEComm extends TopoDroidComm
           // TDLog.v( "XBLE comm: Queue size " + mQueue.size );
           BleBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
-          if ( buffer.type == DATA_PRIM ) {
+          if ( buffer.type == BleQueue.DATA_PRIM ) {
             if ( buffer.data == null) {
               TDLog.t( "XBLE comm: buffer PRIM with null data");
               continue;
@@ -138,7 +136,7 @@ public class DistoXBLEComm extends TopoDroidComm
               mPacketType = res;
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
-          } else if ( buffer.type == DATA_QUIT ) {
+          } else if ( buffer.type == BleQueue.DATA_QUIT ) {
             if ( LOG ) TDLog.v( "XBLE comm: buffer QUIT");
             break;
           }
@@ -167,8 +165,8 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     // TDLog.v("XBLE comm terminate");
     if ( mConsumer != null ) {
-      // put a DATA_QUIT buffer on the queue
-      mQueue.put( DATA_QUIT, new byte[0] );
+      // put a BleQueue.DATA_QUIT buffer on the queue
+      mQueue.put( BleQueue.DATA_QUIT, new byte[0] );
     }
   }
   // -------------------------------------------------------------
@@ -196,35 +194,34 @@ public class DistoXBLEComm extends TopoDroidComm
     }
     if ( LOG ) TDLog.v("XBLE comm - connect device status WAITING");
     notifyStatus( ConnectionState.CONN_WAITING );
-    mReconnect   = true;
-    mOps         = new ConcurrentLinkedQueue< BleOperation >();
-    mProtocol    = new DistoXBLEProtocol( mContext, mApp, lister, device, this );
-    // mChrtChanged = new BricChrtChanged( this, mQueue );
-    // mCallback    = new BleCallback( this, mChrtChanged, false ); // auto_connect false
-    mCallback    = new BleCallback( this, false ); // auto_connect false
+    mReconnect = true;
+    mProtocol  = new DistoXBLEProtocol( mContext, mApp, lister, device, this );
+    mCallback  = new BleCallback( this, false ); // auto_connect false
 
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
     if ( LOG ) TDLog.v( "XBLE comm connect device = [3a] status WAITING" );
-    int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
+    // mOps    = new ConcurrentLinkedQueue< BleOperation >();
+    mQps       = new BleOpsQueue();
+    int ret = mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
     if ( LOG ) TDLog.v( "XBLE connect device ... " + ret);
-    clearPending();
+    mQps.clearPending();
     return true;
   }
 
-  /** open connection to the GATT
-   * @param ctx       context
-   * @param bt_device (remote) bluetooth device
-   */
-  public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
-  {
-    if ( LOG ) TDLog.v( "XBLE comm ***** connect GATT");
-    mContext = ctx;
-    mCallback.connectGatt( mContext, bt_device );
-    // setupNotifications(); // FIXME_XBLE
-    if ( LOG ) TDLog.v( "XBLE comm bond state " + bt_device.getBondState() );
-  }
+  // /** open connection to the GATT
+  //  * @param ctx       context
+  //  * @param bt_device (remote) bluetooth device
+  //  */
+  // public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
+  // {
+  //   if ( LOG ) TDLog.v( "XBLE comm ***** connect GATT");
+  //   mContext = ctx;
+  //   mCallback.connectGatt( mContext, bt_device );
+  //   // setupNotifications(); // FIXME_XBLE
+  //   if ( LOG ) TDLog.v( "XBLE comm bond state " + bt_device.getBondState() );
+  // }
 
   /** connect to the remote XBLE device
    * @param address   device address (unused)
@@ -252,8 +249,10 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void disconnected()
   {
-    clearPending();
-    mOps.clear();
+    // clearPending();
+    // mOps.clear();
+    mQps.clear( true );
+
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     mBTConnected = false;
     if ( LOG ) TDLog.v( "XBLE comm disconnected status DISCONNECTED - notify");
@@ -264,15 +263,15 @@ public class DistoXBLEComm extends TopoDroidComm
   public void connected()
   {
     if ( LOG ) TDLog.v( "XBLE comm connected - bond state " + mRemoteBtDevice.getBondState() );
-    clearPending();
+    mQps.clearPending();
   }
 
-  public void disconnectGatt()  // called from BleOpDisconnect
-  {
-    if ( LOG ) TDLog.v( "XBLE comm disconnect GATT - status DISCONNECTED - close GATT");
-    notifyStatus( ConnectionState.CONN_DISCONNECTED );
-    mCallback.closeGatt();
-  }
+  // public void disconnectGatt()  // called from BleOpDisconnect
+  // {
+  //   if ( LOG ) TDLog.v( "XBLE comm disconnect GATT - status DISCONNECTED - close GATT");
+  //   notifyStatus( ConnectionState.CONN_DISCONNECTED );
+  //   mCallback.closeGatt();
+  // }
 
   /** disconnect from the remote device
    */
@@ -293,91 +292,89 @@ public class DistoXBLEComm extends TopoDroidComm
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
       // TDLog.v( "XBLE comm ***** close device");
-      int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
-      doNextOp();
+      int ret = mQps.enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
+      mQps.doNextOp();
       // TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
     }
     return true;
   }
 
   // --------------------------------------------------------------------------
-  private BleOperation mPendingOp = null;
+  // private BleOperation mPendingOp = null;
 
-  /** clear the pending op and do the next if the queue is not empty
-   */
-  private void clearPending()
-  {
-    mPendingOp = null;
-    // if ( ! mOps.isEmpty() || mPendingCommands > 0 ) doNextOp();
-    if ( ! mOps.isEmpty() ) {
-      doNextOp();
-    } else {
-      if ( LOG ) TDLog.v( "XBLE clear pending: no more ops" );
-    }
-  }
+  // /** clear the pending op and do the next if the queue is not empty
+  //  */
+  // private void clearPending()
+  // {
+  //   mPendingOp = null;
+  //   // if ( ! mOps.isEmpty() || mPendingCommands > 0 ) doNextOp();
+  //   if ( ! mOps.isEmpty() ) {
+  //     doNextOp();
+  //   } else {
+  //     if ( LOG ) TDLog.v( "XBLE clear pending: no more ops" );
+  //   }
+  // }
 
-  /** add a BLE op to the queue
-   * @param op   BLE op
-   * @return the length of the ops queue
-   */
-  private int enqueueOp( BleOperation op )
-  {
-    if ( LOG ) {
-      if ( mRemoteBtDevice != null ) {
-        TDLog.v( "XBLE enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
-      } else {
-        TDLog.v( "XBLE enqueue " + op.name() );
-      }
-    }
-    mOps.add( op );
-    // printOps(); // DEBUG
-    return mOps.size();
-  }
+  // /** add a BLE op to the queue
+  //  * @param op   BLE op
+  //  * @return the length of the ops queue
+  //  */
+  // private int enqueueOp( BleOperation op )
+  // {
+  //   if ( LOG ) {
+  //     if ( mRemoteBtDevice != null ) {
+  //       TDLog.v( "XBLE enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
+  //     } else {
+  //       TDLog.v( "XBLE enqueue " + op.name() );
+  //     }
+  //   }
+  //   mOps.add( op );
+  //   // printOps(); // DEBUG
+  //   return mOps.size();
+  // }
 
- /** do the next op on the queue
-  * @note access by BricChrtChanged
-  */
-  private void doNextOp()
-  {
-    if ( mPendingOp != null ) {
-      if ( LOG ) TDLog.v( "XBLE comm: next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
-      return;
-    }
-    mPendingOp = mOps.poll();
-    if ( mPendingOp != null ) {
-      if ( LOG ) TDLog.v( "XBLE comm: polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
-      mPendingOp.execute();
-    } else {
-      if ( LOG ) TDLog.v("XBLE comm: do next op - no op");
-    }
-    // else if ( mPendingCommands > 0 ) {
-    //   enqueueShot( this );
-    //   -- mPendingCommands;
-    // }
-  }
+  // /** do the next op on the queue
+  //  * @note access by BricChrtChanged
+  //  */
+  // private void doNextOp()
+  // {
+  //   if ( mPendingOp != null ) {
+  //     if ( LOG ) TDLog.v( "XBLE comm: next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
+  //     return;
+  //   }
+  //   mPendingOp = mOps.poll();
+  //   if ( mPendingOp != null ) {
+  //     if ( LOG ) TDLog.v( "XBLE comm: polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
+  //     mPendingOp.execute();
+  //   } else {
+  //     if ( LOG ) TDLog.v("XBLE comm: do next op - no op");
+  //   }
+  //   // else if ( mPendingCommands > 0 ) {
+  //   //   enqueueShot( this );
+  //   //   -- mPendingCommands;
+  //   // }
+  // }
 
   // BleComm interface
 
-  /** notified that the MTU (max transmit unit) has changed
-   * @param mtu    max transmit unit
-   */
-  public void changedMtu( int mtu )
-  {
-    if ( LOG ) TDLog.v("XBLE on MTU changed - mtu " + mtu );
-    if ( USE_MTU ) {
-      enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
-    }
-    clearPending();
-  }
+  // /** notified that the MTU (max transmit unit) has changed
+  //  * @param mtu    max transmit unit
+  //  */
+  // public void changedMtu( int mtu )
+  // {
+  //   if ( USE_MTU ) {
+  //     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
+  //   }
+  //   clearPending();
+  // }
 
-  /** notified that the remote RSSI has been read (Received Signal Strength Indicator)
-   * @param rssi   remote rssi
-   */
-  public void readedRemoteRssi( int rssi )
-  {
-    if ( LOG ) TDLog.v("XBLE readed remote RSSI");
-    clearPending();
-  }
+  // /** notified that the remote RSSI has been read (Received Signal Strength Indicator)
+  //  * @param rssi   remote rssi
+  //  */
+  // public void readedRemoteRssi( int rssi ) // from BleComm
+  // {
+  //   clearPending();
+  // }
 
   /** notifies that a characteristics has changed
    * @param chrt    changed characteristics
@@ -385,12 +382,15 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    String uuid_str = chrt.getUuid().toString();
+    UUID uuid = chrt.getUuid();
+    String uuid_str = uuid.toString();
+    // if ( uuid.compareTo( mChrtReadUuid ) == 0 ) 
     if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID_STR ) ) {
       if ( LOG ) TDLog.v( "XBLE comm: changed read chrt" );
       // TODO set buffer type according to the read value[]
-      mQueue.put( DATA_PRIM, chrt.getValue() );
+      mQueue.put( BleQueue.DATA_PRIM, chrt.getValue() );
     } else if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID_STR ) ) {
+    // } else if ( uuid.compareTo( mChrtWriteUuid ) == 0 ) {
       if ( LOG ) TDLog.v( "XBLE comm: changed write chrt" );
     } else {
       TDLog.t( "XBLE comm: changed unknown chrt" );
@@ -406,21 +406,23 @@ public class DistoXBLEComm extends TopoDroidComm
     if ( LOG ) TDLog.v( "XBLE comm: readed chrt " + bytes.length );
   }
 
-  /** notified that bytes have been written to the write characteristics
-   * @param uuid_str  service UUID string
-   * @param bytes     array of written bytes
-   */
-  public void writtenChrt( String uuid_str, byte[] bytes )
-  {
-    if ( LOG ) TDLog.v( "XBLE comm: written chrt " + bytes.length );
-    clearPending();
-  }
+  // /** notified that bytes have been written to the write characteristics
+  //  * @param uuid_str  service UUID string
+  //  * @param bytes     array of written bytes
+  //  */
+  // public void writtenChrt( String uuid_str, byte[] bytes )
+  // {
+  //   if ( LOG ) TDLog.v( "XBLE comm: written chrt " + bytes.length );
+  //   mQps.clearPending();
+  // }
 
+  // FIXME BleComm has mQps.clearPending();
   /** notified that bytes have been read
    * @param uuid_str  service UUID string
    * @param uuid_chrt_str characteristics UUID string
    * @param bytes    array of read bytes 
    */
+  @Override
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     if ( LOG ) TDLog.v( "XBLE comm: readed desc - bytes " + bytes.length );
@@ -450,40 +452,42 @@ public class DistoXBLEComm extends TopoDroidComm
     } else {
       if ( LOG ) TDLog.v( "XBLE comm: written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
     }
-    clearPending();
+    mQps.clearPending();
   }
 
+  // FIXME BleComm has clearPending
   /** notified that a reliable write was completed
    */
+  @Override
   public void completedReliableWrite()
   {
     if ( LOG ) TDLog.v( "DistoXBLE comm: reliable write" );
   }
 
-  /** read a characteristics
-   * @param srvUuid  service UUID
-   * @param chrtUuid characteristics UUID
-   * @return true if successful
-   * @note this is run by BleOpChrtRead
-   */
-  public boolean readChrt(UUID srvUuid, UUID chrtUuid )
-  {
-    if ( LOG ) TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
-    return mCallback.readChrt( srvUuid, chrtUuid );
-  }
+  // /** read a characteristics
+  //  * @param srvUuid  service UUID
+  //  * @param chrtUuid characteristics UUID
+  //  * @return true if successful
+  //  * @note this is run by BleOpChrtRead
+  //  */
+  // public boolean readChrt(UUID srvUuid, UUID chrtUuid )
+  // {
+  //   if ( LOG ) TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
+  //   return mCallback.readChrt( srvUuid, chrtUuid );
+  // }
 
-  /** write a characteristics
-   * @param srvUuid  service UUID
-   * @param chrtUuid characteristics UUID
-   * @param bytes    array of bytes to write
-   * @return true if successful
-   * @note this is run by BleOpChrtWrite
-   */
-  public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
-  {
-    if ( LOG ) TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
-    return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
-  }
+  // /** write a characteristics
+  //  * @param srvUuid  service UUID
+  //  * @param chrtUuid characteristics UUID
+  //  * @param bytes    array of bytes to write
+  //  * @return true if successful
+  //  * @note this is run by BleOpChrtWrite
+  //  */
+  // public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
+  // {
+  //   if ( LOG ) TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
+  //   return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
+  // }
 
   /** react to service discovery
    * @param gatt   bluetooth GATT
@@ -497,13 +501,16 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    if ( LOG ) TDLog.v( "XBLE comm discovered services");
+    // if ( LOG ) TDLog.v( "XBLE comm discovered services");
     if ( USE_MTU ) {
-      enqueueOp( new BleOpRequestMtu( mContext, this, 400 ) ); // exec requestMtu
+      mQps.enqueueOp( new BleOpRequestMtu( mContext, this, 400 ) ); // exec requestMtu
     } else {
-      enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
+      assert( mServiceUuid == DistoXBLEConst.DISTOXBLE_SERVICE_UUID );
+      assert( mChrtReadUuid == DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID );
+      // assert( mChrtWriteUuid == DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID );
+      mQps.enqueueOp( new BleOpNotify( mContext, this, mServiceUuid, mChrtReadUuid, true ) );
     }
-    doNextOp();
+    mQps.doNextOp();
 
     // 20221026 MOVED TO enablePNotify -- 202211XX
     // mBTConnected  = true;
@@ -517,6 +524,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param chrtUuid characteristics UUID
    * @return true if success, false if failure
    */
+  @Override
   public boolean enablePNotify( UUID srvUuid, UUID chrtUuid )
   {
     boolean ret = mCallback.enablePNotify( srvUuid, chrtUuid );
@@ -533,16 +541,16 @@ public class DistoXBLEComm extends TopoDroidComm
     return ret;
   }
 
-  /** enable P-indicate
-   * @param srvUuid  service UUID
-   * @param chrtUuid characteristics UUID
-   * @return true if success, false if failure
-   */
-  public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
-  {
-    if ( LOG ) TDLog.v("XBLE enable P indicate");
-    return mCallback.enablePIndicate( srvUuid, chrtUuid );
-  }
+  // /** enable P-indicate
+  //  * @param srvUuid  service UUID
+  //  * @param chrtUuid characteristics UUID
+  //  * @return true if success, false if failure
+  //  */
+  // public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
+  // {
+  //   // if ( LOG ) TDLog.v("XBLE enable P indicate");
+  //   return mCallback.enablePIndicate( srvUuid, chrtUuid );
+  // }
 
   /** react to an error
    * @param status   GATT error status
@@ -586,7 +594,7 @@ public class DistoXBLEComm extends TopoDroidComm
         TDLog.t("XBLE comm ***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
-    clearPending();
+    mQps.clearPending();
   }
 
   /** try to recover from an error ... and reconnect
@@ -594,16 +602,17 @@ public class DistoXBLEComm extends TopoDroidComm
   private void reconnectDevice()
   {
     if ( LOG ) TDLog.v("XBLE reconnect device - close GATT" );
-    mOps.clear();
-    // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
-    clearPending();
+    // mOps.clear();
+    // // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
+    // clearPending();
+    mQps.clear( false );
     mCallback.closeGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     if ( mReconnect ) {
       if ( LOG ) TDLog.v( "XBLE reconnect device - reconnecting ... ");
       notifyStatus( ConnectionState.CONN_WAITING );
-      enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-      doNextOp();
+      mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
+      mQps.doNextOp();
       mBTConnected = true;
     } else {
       if ( LOG ) TDLog.v( "XBLE reconnect device - disconnected" );
@@ -623,7 +632,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     if ( LOG ) TDLog.v( "XBLE comm Failure: disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
-    clearPending();
+    mQps.clearPending();
     closeDevice( false );
     mCallback.closeGatt();
   }
@@ -679,11 +688,11 @@ public class DistoXBLEComm extends TopoDroidComm
       }
       framebytes[i+6] = '\r';
       framebytes[i+7] = '\n';
-      enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, framebytes ) );
+      mQps.enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, framebytes ) );
     } else {
-      enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, bytes ) );
+      mQps.enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, bytes ) );
     }
-    doNextOp();
+    mQps.doNextOp();
     //wait 100ms to let the MCU to receive correct frame, Siwei Tian added
     return true;
   }
@@ -1587,14 +1596,14 @@ public class DistoXBLEComm extends TopoDroidComm
     return index;
   }
 
-  /** request a new MTU
-   * @param mtu   new value
-   * @return true if success
-   */
-  public boolean requestMtu( int mtu )
-  {
-    return mCallback.requestMtu( mtu );
-  }
+  // /** request a new MTU
+  //  * @param mtu   new value
+  //  * @return true if success
+  //  */
+  // public boolean requestMtu( int mtu )
+  // {
+  //   return mCallback.requestMtu( mtu );
+  // }
 
   /** log
    * @return bond state,or -1 if no permission

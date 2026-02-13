@@ -27,6 +27,7 @@ import com.topodroid.common.ExportInfo;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.ui.ListItemAdapter;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.UserManDownload;

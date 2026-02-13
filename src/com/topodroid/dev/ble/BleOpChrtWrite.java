@@ -44,8 +44,7 @@ public class BleOpChrtWrite extends BleOperation
       return;
     }
     // TDLog.v( "BleOp exec chrt write " );
-    boolean ret = 
-      mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
+    boolean ret = mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
     if ( BleCallback.LOG )TDLog.v( "BleOp exec chrt write: ret " + ret );
   }
 }

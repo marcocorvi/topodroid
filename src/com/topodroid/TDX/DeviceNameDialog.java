@@ -40,6 +40,7 @@ class DeviceNameDialog extends MyDialog
   private EditText mETnickname;
   private CheckBox mCBsecondDevice;
   private Button mBTok;
+  private Button mBTforget;
   // private Button mBTback;
 
   private final DeviceActivity mParent;
@@ -78,6 +79,9 @@ class DeviceNameDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
+
+    mBTforget = (Button) findViewById( R.id.button_forget );
+    mBTforget.setOnClickListener( this );
     // mBTback = (Button) findViewById( R.id.button_cancel );
     // mBTback.setOnClickListener( this );
     ((Button)findViewById( R.id.button_cancel ) ).setOnClickListener( this );
@@ -95,6 +99,8 @@ class DeviceNameDialog extends MyDialog
       if ( mCBsecondDevice.isChecked() ) {
         mParent.setSecondDevice( mDevice.getAddress() );
       }
+    } else if ( b == mBTforget ) {
+      mParent.forgetDevice( mDevice );
     // } else if ( b == mBTback ) {
     //   /* nothing */
     }

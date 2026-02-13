@@ -91,18 +91,18 @@ public class BleCallback extends BluetoothGattCallback
   public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status)
   {
     // TDLog.t("BLE on chrt read: " + status );
+    String uuid_str = chrt.getUuid().toString();
     if ( isSuccess( status, "onCharacteristicRead" ) ) {
-      String uuid_str = chrt.getUuid().toString();
       mComm.readedChrt( uuid_str, chrt.getValue() );
     } else if ( status == BluetoothGatt.GATT_READ_NOT_PERMITTED ) {
       if ( LOG ) TDLog.v("BLE callback on char read NOT PERMITTED - perms " + BleUtils.isChrtRead( chrt ) + " " + chrt.getPermissions() );
-      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead GATT" );
+      mComm.error( status, uuid_str, "onCharacteristicRead GATT" );
     } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
       if ( LOG ) TDLog.v("BLE callback on char read insufficient auth.");
-      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicRead AUTH" );
+      mComm.failure( status, uuid_str, "onCharacteristicRead AUTH" );
     } else {
       if ( LOG ) TDLog.v("BLE callback on char read generic error");
-      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead FAIL" );
+      mComm.error( status, uuid_str, "onCharacteristicRead FAIL" );
     }
   }
 
@@ -115,16 +115,16 @@ public class BleCallback extends BluetoothGattCallback
   public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status)
   {
     // TDLog.t("BLE on chrt write: " + status );
+    String uuid_str = chrt.getUuid().toString();
     if ( isSuccess( status, "onCharacteristicWrite" ) ) {
-      String uuid_str = chrt.getUuid().toString();
       mComm.writtenChrt( uuid_str, chrt.getValue() );
     } else if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) { // 13 or 3
-      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicWrite GATT" );
+      mComm.error( status, uuid_str, "onCharacteristicWrite GATT" );
     } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) { // 5
       if ( LOG ) TDLog.v("BLE callback on char write insufficient auth.");
-      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite AUTH" );
+      mComm.failure( status, uuid_str, "onCharacteristicWrite AUTH" );
     } else {
-      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite FAIL" );
+      mComm.failure( status, uuid_str, "onCharacteristicWrite FAIL" );
     }
   }
   
@@ -445,7 +445,7 @@ public class BleCallback extends BluetoothGattCallback
   {
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) {
-      if ( LOG ) TDLog.v("BLE callback enablePNotify null service " + srvUuid );
+      if ( LOG ) TDLog.v("BLE callback enable P Notify null service " + srvUuid );
       return false;
     }
     return enablePNotify( srvUuid, srv.getCharacteristic( chrtUuid ) );
@@ -487,7 +487,7 @@ public class BleCallback extends BluetoothGattCallback
   {
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) {
-      if ( LOG ) TDLog.v("BLE callback enablePIndicate null service " + srvUuid );
+      if ( LOG ) TDLog.v("BLE callback enable P Indicate null service " + srvUuid );
       return false;
     }
     return enablePIndicate( srvUuid, srv.getCharacteristic( chrtUuid ) );
@@ -540,12 +540,12 @@ public class BleCallback extends BluetoothGattCallback
     // TDLog.t( "BLE write chrt");
     BluetoothGattCharacteristic chrt = getWriteChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
-      TDLog.t( "BLE callback writeChrt null chrt ");
+      TDLog.t( "BLE callback writechrt null chrt ");
       return false;
     }
     int write_type = BleUtils.getChrtWriteType( chrt );
     if ( write_type < 0 ) {
-      TDLog.t( "BLE callback writeChrt neg type " + write_type );
+      TDLog.t( "BLE callback writechrt neg type " + write_type );
       return false;
     }
     chrt.setWriteType( write_type );
@@ -661,7 +661,8 @@ public class BleCallback extends BluetoothGattCallback
   {
     if ( LOG ) TDLog.v( "BLE request MTU " + mtu );
     if ( mGatt == null ) return false;
-    return TDandroid.AT_LEAST_API_21 ? mGatt.requestMtu( mtu ) : false; // 20230118 test for API 21
+    // return TDandroid.AT_LEAST_API_21 ? mGatt.requestMtu( mtu ) : false; // 20230118 test for API 21
+    return mGatt.requestMtu( mtu ); // minApiSdk is 21
   }
 
   /** clear the gatt service cache - NB asynchronous
