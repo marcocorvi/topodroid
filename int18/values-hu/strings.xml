@@ -853,6 +853,7 @@
     <!-- UNUSED string name="ask_backups_clear">Törli a vázlat mentéseket?</string -->
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
     <string name="ask_clear_equates">Visszavonod az összes kapcsolatot?</string>
+    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
 
     <string name="button_add"       >Hozzáad</string>
     <string name="button_apply"     >Alkalmaz</string>

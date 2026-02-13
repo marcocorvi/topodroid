@@ -794,6 +794,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="ask_backups_clear">Apagar backups dos croquis?</string -->
   <string name="ask_manual_update">Atualizar tradução do manual do usuário?\nVersão disponível %1$d Versão instalada %2$d</string>
   <string name="ask_clear_equates">Remover todos os equates?</string>
+    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
   <string name="button_add">Novo</string>
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar</string>

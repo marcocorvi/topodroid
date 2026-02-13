@@ -803,6 +803,7 @@
     <!-- UNUSED string name="ask_backups_clear">Skizzenbackups löschen?</string -->
     <string name="ask_manual_update">Übersetztes Handbuch updaten?\nAktuell v%1$d Installiert v%2$d</string>
     <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
     <string name="button_add">Erstellen</string>
     <string name="button_apply">Anwenden</string>
     <string name="button_back">Zurück</string>

@@ -849,6 +849,7 @@
     <!-- UNUSED string name="ask_backups_clear">Удалить резервные копии абрисов?</string -->
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
     <string name="ask_clear_equates">Удалить все соединения?</string>
+    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
 
     <string name="button_add"       >Добавить</string>
     <string name="button_apply"     >Применить</string>

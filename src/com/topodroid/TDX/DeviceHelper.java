@@ -1315,11 +1315,24 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
   }
 
+  void printDeviceNumber()
+  {
+    final String query = new String("SELECT count() FROM devices" );
+    Cursor cursor = myDB.rawQuery( query, new String[] { } );
+    if (cursor != null ) {
+      if ( cursor.moveToFirst() ) {
+        TDLog.v("Devices " + cursor.getLong( 0 ) );
+      }
+      cursor.close();
+    }
+  }
+
 
   void forgetDevice( String address )
   {
     // delete * from DEVICE_TABLE where address=\"address\"
     int nr_calibs = 0;
+    printDeviceNumber();
     try {
       myDB.beginTransaction();
       Cursor cursor = myDB.query( CALIB_TABLE,
@@ -1338,10 +1351,14 @@ public class DeviceHelper extends DataSetObservable
       myDB.execSQL( "DELETE FROM calibs WHERE device=\"" + address + "\"" );
       myDB.execSQL( "DELETE FROM devices WHERE address=\"" + address + "\"" );
       myDB.setTransactionSuccessful();
+      TDLog.v("delete device " + address + " done " );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("delete devices", e);
     // } catch ( IllegalStateException e2 ) { logError("delete devices", e2 );
-    } finally { myDB.endTransaction(); }
+    } finally {
+      myDB.endTransaction();
+    }
+    printDeviceNumber();
     TDLog.v("deleted device " + address + " - calibs " + nr_calibs ); 
   }
 

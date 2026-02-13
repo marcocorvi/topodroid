@@ -848,6 +848,7 @@
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Installata v. %2$d</string>
     <string name="ask_clear_equates">Rimuovere tutte le equivalenze?</string>
+    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
 
     <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>

@@ -254,11 +254,11 @@ public class DeviceActivity extends Activity
     } else {
       mNonameList.clear();
     }
-    Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
-    if ( device_set == null || device_set.isEmpty() ) return false;
-    for ( BluetoothDevice device : device_set ) {
-      if ( device.getName() == null && device.getType() == 2 ) { // only type 2 (BLE)
-        mNonameList.add( device );
+    Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // get paired devices
+    if ( bt_device_set == null || bt_device_set.isEmpty() ) return false;
+    for ( BluetoothDevice bt_device : bt_device_set ) {
+      if ( bt_device.getName() == null && bt_device.getType() == 2 ) { // only type 2 (BLE)
+        mNonameList.add( bt_device );
       }
     }
     return ! mNonameList.isEmpty();
@@ -383,25 +383,54 @@ public class DeviceActivity extends Activity
     updateList( false );
   }
 
-  void forgetDevice( Device device )
+  /** do forget a device
+   * @param device device to forget
+   */
+  void doForgetDevice( Device device )
   {
     String address = device.getAddress();
+    TDLog.v("forget device " + address );
     mApp_mDData.forgetDevice( address );
     // forget device on Android
     Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
     if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
+      boolean found = false;
       for ( BluetoothDevice bt_device : bt_device_set ) {
         if ( address.equals(  bt_device.getAddress() ) ) {
+          found = true;
           try {
-            Method method = device.getClass().getMethod( "removeBond", (Class[]) null );
-            method.invoke( device, (Object[]) null );
+            Method method = bt_device.getClass().getMethod( "removeBond", (Class[]) null );
+            method.invoke( bt_device, (Object[]) null );
+            TDLog.v("unpair device " + address + " done " );
           } catch ( Exception e ) {
             TDToast.make( R.string.fail_forget_device );
+            TDLog.e("unpair device " + address + " error " + e.getMessage() );
           }
           break;
         }
       }
+      if ( ! found ) {
+        TDLog.v("unpair device " + address + " not found");
+      }
     }
+    removeDeviceFromList( device );
+    if ( currDeviceA().getAddress().equals( address ) ) detachDevice();
+  }
+
+  /** ask whether to forget a device
+   * @param device device to forget
+   */
+  void forgetDevice( final Device device )
+  {
+    TopoDroidAlertDialog.makeAlert( this, getResources(),
+      String.format( getResources().getString(R.string.ask_forget_device), device.getNickname() ),
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          doForgetDevice( device );
+        }
+      }
+    );
   }
 
 
@@ -523,7 +552,7 @@ public class DeviceActivity extends Activity
   }
 
   /** add a device to the list of devices and the adapter
-   * @param dev   device
+   * @param dev   device to add
    */
   private void addDeviceToList( Device dev )
   {
@@ -532,6 +561,20 @@ public class DeviceActivity extends Activity
       mDeviceList.add( dev );
     }
   }
+
+  /** drop a device from the list
+   * @param dev   device to drop
+   */
+  private void removeDeviceFromList( Device dev )
+  {
+    if ( isDeviceOnList( dev.getAddress() ) ) {
+      TDLog.v("remove device " + dev.getAddress() );
+      updateList( false );
+    } else {
+      TDLog.e("remove device " + dev.getAddress() + " not listed");
+    }
+  }
+      
 
   private void updateList( boolean check_noname )
   {
@@ -544,20 +587,18 @@ public class DeviceActivity extends Activity
     // }
     // Map< String, String > bt_aliases = TopoDroid.mDData.selectAllAlias(); // BT_ALIAS
 
-    Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // add bonded devices
-    if ( device_set == null || device_set.isEmpty() ) {
-      // TDToast.make(R.string.no_paired_device );
-    } else { 
+    Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
+    if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
       setTitle( R.string.title_device );
-      for ( BluetoothDevice device : device_set ) {
-        String addr = device.getAddress();
+      for ( BluetoothDevice bt_device : bt_device_set ) {
+        String addr = bt_device.getAddress();
         String bt_name = null;
         try {
-          bt_name = device.getName();
+          bt_name = bt_device.getName();
         } catch( SecurityException e ) {
           TDLog.e("SECURITY " + e.getMessage() );
         }
-        addBluetoothDevice( device, addr, bt_name );
+        addBluetoothDevice( bt_device, addr, bt_name );
       }
     }
     List< Device > devices = mApp_mDData.getDevices(); // now add other devices stored in the database
@@ -599,10 +640,10 @@ public class DeviceActivity extends Activity
    */
   public void notifyScanResult( ScanResult result )
   {
-    BluetoothDevice dev = result.getDevice();
+    BluetoothDevice bt_dev = result.getDevice();
     ScanRecord rec = result.getScanRecord();
     // List< ParcelUuid > uuids = rec.getServiceUuids(); // can use uuid.toString() to get services UUID
-    addBluetoothDevice( dev, dev.getAddress(), dev.getName() );
+    addBluetoothDevice( bt_dev, bt_dev.getAddress(), bt_dev.getName() );
   }
 
   /** add a Bluetooth device to the list
@@ -1181,13 +1222,13 @@ public class DeviceActivity extends Activity
   // -----------------------------------------------------------------------------
 
   // UNUSED
-  // public void addBleDevice( BluetoothDevice device ) // TODO BLEX
+  // public void addBleDevice( BluetoothDevice bt_device ) // TODO BLEX
   // {
-  //   if ( device == null ) return;
-  //   String address = device.getAddress();
+  //   if ( bt_device == null ) return;
+  //   String address = bt_device.getAddress();
   //   String name    = null;
   //   try {
-  //     name = device.getName();
+  //     name = bt_device.getName();
   //   } catch( SecurityException e ) {
   //     TDLog.e("SECURITY " + e.getMessage() );
   //   }

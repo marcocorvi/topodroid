@@ -872,6 +872,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string>
     <string name="ask_clear_equates">Remove all equates?</string>
+    <string name="ask_forget_device">Forget device %1$s?</string>
 
     <string name="button_add"       >Add       </string>
     <string name="button_apply"     >Apply</string>

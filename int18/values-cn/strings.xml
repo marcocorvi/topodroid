@@ -854,6 +854,7 @@
     <!-- UNUSED string name="ask_backups_clear">删除草图备份?</string -->
     <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
     <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
 
     <string name="button_add"       >添加       </string>
     <string name="button_apply"     >应用</string>
