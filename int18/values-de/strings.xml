@@ -77,6 +77,7 @@
     <!-- TODO string name="pref_io">Export</string -->
     <!-- TODO string name="pref_bt">Bluetooth</string -->
     <!-- TODO string name="pref_cal">Calibration</string -->
+    <!-- TODO string name="pref_xt">Special functions</string -->
 
     <string name="cut">AUSSCHNEIDEN</string>
     <string name="copy">KOPIEREN</string>
@@ -123,6 +124,7 @@
     <string name="failed_snap_to_splays">Kein Hilfszug zum Verbinden gefunden</string>
     <string name="failed_append_to_line">Linie fortsetzen fehlgeschlagen</string>
     <string name="failed_zoomfit">Anpassung an Bildschirm fehlgeschlagen</string>
+    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
     <string name="bric_device">Gerät %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
@@ -805,6 +807,7 @@
     <string name="button_apply">Anwenden</string>
     <string name="button_back">Zurück</string>
     <string name="button_cancel">Abbrechen</string>
+    <!-- TODO string name="button_forget"    >Forget</string -->
     <string name="button_geocode">GeoCode</string>
     <!-- UNUSED string name="button_change">Ändern</string -->
     <string name="button_clipboard">Zwischenablage</string>

@@ -80,6 +80,7 @@
     <string name="pref_io">Esporta</string>
     <string name="pref_bt">Bluetooth</string>
     <string name="pref_cal">Calibrazione</string>
+    <!-- TODO string name="pref_xt">Special functions</string -->
 
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
@@ -129,6 +130,7 @@
     <string name="failed_snap_to_splays">Nessun splay vicino su cui agganciare il bordo</string>
     <string name="failed_append_to_line">Errore: collegamento linee</string>
     <string name="failed_zoomfit">Impossibile riscalare alla dimensione schermo</string>
+    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
 
     <string name="bric_device">Dispositivo %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -851,6 +853,7 @@
     <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
+    <!-- TODO string name="button_forget"    >Forget</string -->
     <string name="button_geocode"   >Codice Geo</string>
     <!-- UNUSED string name="button_change"    >Cambia    </string -->
     <string name="button_clipboard" >Appunti</string>

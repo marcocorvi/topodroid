@@ -83,6 +83,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_io">Експорт</string>
     <string name="pref_bt">Bluetooth</string>
     <string name="pref_cal">Калибрация</string>
+    <!-- TODO string name="pref_xt">Special functions</string -->
 
     <string name="cut">ИЗРЯЗВАНЕ</string>
     <string name="copy">КОПИРАНЕ</string>
@@ -132,6 +133,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="failed_snap_to_splays">Няма близки измервания, към които да се прикачи линията</string>
     <string name="failed_append_to_line">Неуспешно прикачане към друга линия</string>
     <string name="failed_zoomfit">Неуспешно побиране на екрана</string>
+    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
 
     <string name="bric_device">Устройство %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -857,6 +859,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_apply">Прилагане</string>
     <string name="button_back">Назад</string>
     <string name="button_cancel">Отказ</string>
+    <!-- TODO string name="button_forget"    >Forget</string -->
     <string name="button_geocode">Геокод</string>
     <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard">Клипборд</string>
@@ -1282,6 +1285,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_xvi">Изображения Xvi</string>
     <string name="export_with_xsections">Включи сечения</string>
     <string name="export_grouped">Групирай елементите в слоеве по тип</string>
+    <!-- TODO string name="export_origin">Origin station</string -->
     <string name="export_with_reference">Включи препратка по XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1439,6 +1443,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_survey_export">Експортирай картировката</string>
     <string name="title_survey_rename">Преименувай картировката</string>
     <string name="title_station_photo">Снимка на репер</string>
+    <!-- TODO string name="title_team_dialog">Team names</string -->
     <string name="title_plot_rename">Операции за скица</string>
     <string name="title_plot_zoomfit">Мащабиране / ориентация</string>
     <string name="title_calib_export">Експортирай калибрацията</string>

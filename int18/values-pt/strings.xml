@@ -72,6 +72,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_bt">Bluetooth</string>
   <string name="pref_cal">Calibração</string>
   <string name="pref_xt">Funções especiais</string>
+
   <string name="cut">CORTAR</string>
   <string name="copy">COPIAR</string>
   <string name="paste">COLAR</string>
@@ -117,6 +118,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="failed_snap_to_splays">Nenhuma medida auxiliar próxima a qual juntar a linha</string>
   <string name="failed_append_to_line">Falha ao conectar a outra linha</string>
   <string name="failed_zoomfit">Falha ao ajustar à tela</string>
+    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
   <string name="bric_device">Dispositivo %1$s</string>
   <string name="bric_ble">BLE %1$s</string>
   <string name="bric_fw">Firmware %1$s</string>
@@ -796,6 +798,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar</string>
   <string name="button_cancel">Cancelar</string>
+    <!-- TODO string name="button_forget"    >Forget</string -->
   <string name="button_geocode">Geocódigo</string>
   <!-- UNUSED string name="button_change">Alterar</string -->
   <string name="button_clipboard">Colar</string>

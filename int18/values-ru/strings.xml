@@ -82,6 +82,7 @@
     <string name="pref_io">Экспорт</string>
     <string name="pref_bt">Bluetooth</string>
     <string name="pref_cal">Калибровка</string>
+    <!-- TODO string name="pref_xt">Special functions</string -->
 
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
@@ -130,6 +131,7 @@
     <string name="failed_snap_to_splays">Рядом нет бокового замера чтобы привязать к нему эту линию</string>
     <string name="failed_append_to_line">Не удалось добавить новую линию к существующей</string>
     <string name="failed_zoomfit">Не удалось вместить в экран</string>
+    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
 
     <string name="bric_device">Прибор %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -852,6 +854,7 @@
     <string name="button_apply"     >Применить</string>
     <string name="button_back"      >Назад</string>
     <string name="button_cancel"    >Отмена</string>
+    <!-- TODO string name="button_forget"    >Forget</string -->
     <string name="button_geocode"   >ГеоКод</string>
     <!-- UNUSED string name="button_change">Изменить</string -->
     <string name="button_clipboard" >Вставить</string>
@@ -1277,6 +1280,7 @@
     <string name="export_xvi">Xvi изображение</string>
     <string name="export_with_xsections">Экспортировать поперечные сечения</string>
     <string name="export_grouped">Сгруппировать элементы в слоях по типу</string>
+    <!-- TODO string name="export_origin">Origin station</string -->
     <string name="export_with_reference">Включить XY точки отсчета</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1434,6 +1438,7 @@
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
     <string name="title_station_photo">Фото пикета</string>
+    <!-- TODO string name="title_team_dialog">Team names</string -->
     <string name="title_plot_rename">Операции с абрисом</string>
     <string name="title_plot_zoomfit">Вместить / Ориентация</string>
     <string name="title_calib_export">Экспорт калибровки как</string>

@@ -81,6 +81,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="pref_io">Export</string -->
     <!-- TODO string name="pref_bt">Bluetooth</string -->
     <!-- TODO string name="pref_cal">Calibration</string -->
+    <!-- TODO string name="pref_xt">Special functions</string -->
 
     <string name="cut">COUPER</string>
     <string name="copy">COPIER</string>
@@ -131,6 +132,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="failed_snap_to_splays">Aucun cheminement assez proche pour attacher la ligne</string>
     <string name="failed_append_to_line">Échec de la jonction à une autre ligne</string>
     <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
+    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
     <string name="bric_device">Appareil %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
@@ -855,6 +857,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_apply"     >Appliquer</string>
     <string name="button_back"      >Retour</string>
     <string name="button_cancel"    >Annuler</string>
+    <!-- TODO string name="button_forget"    >Forget</string -->
     <string name="button_geocode"   >GeoCode</string>
     <!-- UNUSED string name="button_change">Change</string -->
     <string name="button_clipboard" >Presse-papiers</string>
@@ -1279,6 +1282,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
     <string name="export_grouped">Regrouper les éléments en couches par type</string>
+    <!-- TODO string name="export_origin">Origin station</string -->
     <string name="export_with_reference">Inclure les références XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1436,6 +1440,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_survey_export">Exporter le relevé sous</string>
     <string name="title_survey_rename">Renommer le relevé sous</string>
     <!-- TODO string name="title_station_photo">Station photo</string -->
+    <!-- TODO string name="title_team_dialog">Team names</string -->
     <!-- TODO string name="title_plot_rename">Sketch operations</string -->
     <string name="title_plot_zoomfit">Ajustement zoom / Orientation</string>
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
