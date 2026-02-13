@@ -1,4 +1,13 @@
 /** @file AIhelper.java
+ *
+ * @author marco corvi
+ * @date feb 2026
+ *
+ * @brief TopoDroid AI help assistant
+ * --------------------------------------------------------
+ *  Copyright This software is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.help;
 
@@ -203,21 +212,6 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     }
   }
 
-  private class PageLink
-  {
-    int mStart, mEnd;
-    String mFilename;
-    String mLinkText;
-
-    PageLink( int start, int end, String filename )
-    {
-      mStart = start;
-      mEnd   = end;
-      mFilename = filename;
-      mLinkText = null;
-    }
-  }
-
   private void updateUI( WeakReference<TextView> tvRef, String message )
   {
     // Ensure we run on the Main UI Thread
@@ -264,13 +258,6 @@ public class AIhelper // extends AsyncTask< String, Void, String >
         }
       }
     });
-  }
-
-  /** API key validation callback
-   */
-  public interface ValidationCallback
-  {
-    public void onResult( boolean valid, String response );
   }
 
   /** validate an API key

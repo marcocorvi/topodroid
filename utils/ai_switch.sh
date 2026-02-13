@@ -5,9 +5,12 @@ if [ "$1" = "yes" ]; then
   echo "turning AI support ON"
   rm libd8
   ln -s libd8ai libd8
-else
+  touch libd8/AIhelper.java
+elif [ "$1" = "no" ]; then
   echo "turning AI support OFF"
   rm libd8
   ln -s libd8noai libd8
+  touch libd8/AIhelper.java
+else
+  echo "Usage $0 [yes|no]"
 fi
-touch libd8/AIhelper.java

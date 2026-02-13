@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.AIhelper;
+import com.topodroid.help.ValidationCallback;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
@@ -106,7 +107,7 @@ public class GeminiDialog extends MyDialog
         ((EditText) findViewById( R.id.api_key )).setError( resString(R.string.ai_invalid_key) );
         return;
       } else {
-        AIhelper.validateApiKey( key, new AIhelper.ValidationCallback() {
+        AIhelper.validateApiKey( key, new ValidationCallback() {
           public void onResult( boolean valid, String response )
           {
             if ( valid ) {

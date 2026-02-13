@@ -76,7 +76,7 @@ import java.util.ArrayList;
 
 import java.io.File; // private app files (ccsv)
 
-// import java.lang.reflect.Method;
+import java.lang.reflect.Method;
 // import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
@@ -385,8 +385,23 @@ public class DeviceActivity extends Activity
 
   void forgetDevice( Device device )
   {
-    mApp_mDData.forgetDevice( device.getAddress() );
-    // TODO forget device on Android
+    String address = device.getAddress();
+    mApp_mDData.forgetDevice( address );
+    // forget device on Android
+    Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
+    if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
+      for ( BluetoothDevice bt_device : bt_device_set ) {
+        if ( address.equals(  bt_device.getAddress() ) ) {
+          try {
+            Method method = device.getClass().getMethod( "removeBond", (Class[]) null );
+            method.invoke( device, (Object[]) null );
+          } catch ( Exception e ) {
+            TDToast.make( R.string.fail_forget_device );
+          }
+          break;
+        }
+      }
+    }
   }
 
 

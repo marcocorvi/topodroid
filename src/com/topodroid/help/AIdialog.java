@@ -1,7 +1,7 @@
-/* @file AIdialog.java
+/** @file AIdialog.java
  *
  * @author marco corvi
- * @date nov 2013
+ * @date feb 2026
  *
  * @brief TopoDroid help dialog 
  * --------------------------------------------------------

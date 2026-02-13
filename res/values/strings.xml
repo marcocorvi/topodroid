@@ -139,6 +139,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="failed_snap_to_splays">No close splay to snap the line to</string>
     <string name="failed_append_to_line">Failed to attach to another line</string>
     <string name="failed_zoomfit">Failed to fit to screen</string>
+    <string name="fail_forget_device">Android failed to forget BT device</string>
 
     <string name="bric_device">Device %1$s</string>
     <string name="bric_ble" copyable="all">BLE %1$s</string>
