@@ -33,12 +33,23 @@ public class BleScanCallback extends ScanCallback
 {
   DeviceActivity mParent;
   BleScanner mScanner;
+  private int mNrResults;
+  private int mNovelResults;
 
   public BleScanCallback( DeviceActivity parent, BleScanner scanner )
   {
     mParent  = parent;
     mScanner = scanner;
   }
+
+  public void resetCount() 
+  { 
+    mNrResults = 0;
+    mNovelResults = 0;
+  }
+
+  public int getCount() { return mNrResults; }
+  public int getNovel() { return mNovelResults; }
 
   public void onBatchScanResults(List<ScanResult> results) 
   { 
@@ -60,13 +71,14 @@ public class BleScanCallback extends ScanCallback
   // callbackType's CALLBACK_TYPE_ALL_MATCHES, CALLBACK_TYPE_FIRST_MATCH, CALLBACK_TYPE_MATCH_LOST
   public void onScanResult( int callbackType, ScanResult result ) 
   {
+    ++ mNrResults;
     BluetoothDevice dev = result.getDevice();
     ScanRecord rec = result.getScanRecord();
-    List< ParcelUuid > uuids = rec.getServiceUuids();
-    TDLog.v("Scan result " + dev.getName() + " addr " + dev.getAddress() );
-    for ( ParcelUuid uuid : uuids ) TDLog.v("uuid " + uuid.toString() );
+    // List< ParcelUuid > uuids = rec.getServiceUuids();
+    TDLog.v("BLE Scan result " + dev.getName() + " addr " + dev.getAddress() );
+    // for ( ParcelUuid uuid : uuids ) TDLog.v("uuid " + uuid.toString() );
     if ( mParent != null ) {
-      mParent.notifyScanResult( result );
+      if ( mParent.notifyScanResult( result ) ) ++ mNovelResults;
     }
   }
 }

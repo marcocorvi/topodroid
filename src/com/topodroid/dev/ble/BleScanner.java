@@ -13,6 +13,9 @@ package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.TDX.DeviceActivity;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import android.content.Context;
 import android.os.ParcelUuid;
@@ -30,9 +33,11 @@ import java.util.List;
 
 public class BleScanner
 {
+  private Context mContext;
+  private DeviceActivity     mParent;
   private BluetoothLeScanner mBleScanner;
   private ScanSettings       mScanSettings;
-  private ScanCallback       mCallback;
+  private BleScanCallback    mCallback;
   private boolean mScanning;
 
 
@@ -42,8 +47,10 @@ public class BleScanner
   //   return cb;
   // }
 
-  public BleScanner( Context ctx )
+  public BleScanner( Context ctx, DeviceActivity parent )
   {
+    mContext = ctx;
+    mParent  = parent;
     BluetoothManager bt_manager = (BluetoothManager)ctx.getSystemService( Context.BLUETOOTH_SERVICE );
     BluetoothAdapter bt_adapter = bt_manager.getAdapter(); 
     mBleScanner = bt_adapter.getBluetoothLeScanner();
@@ -57,11 +64,14 @@ public class BleScanner
     mScanning = false;
   }
 
-  public void startBleScan( final ScanCallback cb )
+  public void startBleScan( final BleScanCallback cb )
   {
     if ( mScanning ) return;
+    TDToast.makeLong( R.string.scanning );
+    TDLog.v("BLE scanner start");
     mScanning = true;
     mCallback = cb;
+    mCallback.resetCount();
     Thread counter = new Thread() {
       @Override public void run()
       {
@@ -81,8 +91,11 @@ public class BleScanner
   public void stopBleScan( )
   {
     if ( ! mScanning ) return;
+    TDLog.v("BLE scanner stop");
     mScanning = false;
     mBleScanner.stopScan( mCallback );
+    String msg = String.format( mContext.getResources().getString( R.string.scan_result ), mCallback.getNovel() );
+    mParent.runOnUiThread( new Runnable() { public void run() { TDToast.make( msg ); } } );
   }
 
 } 

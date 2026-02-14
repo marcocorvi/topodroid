@@ -20,6 +20,7 @@ package com.topodroid.help;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.prefs.TDPref;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.GeminiDialog;
 import com.topodroid.TDX.TDandroid;
@@ -44,8 +45,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.net.Uri;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 // import google.android.material.floatingactionbutton.FloatingActionButton;
 // import com.google.ai.client.generativeai.GenerativeModel;
 // import com.google.ai.client.generativeai.type.Content;
@@ -67,7 +66,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class UserManualActivity extends Activity
-                                implements OnItemClickListener, OnClickListener
+                                implements OnItemClickListener
+                                , OnClickListener
+                                , IHelpViewer
 {
   private static final String WEBSITE = "https://sites.google.com/site/speleoapps";
   private static final String NEEDLE = "DistoX/files/man";
@@ -79,7 +80,7 @@ public class UserManualActivity extends Activity
    * @param view webview view - if null use the privale webview
    * @param filename  page filename
    */
-  void loadManPage( WebView view, String filename ) 
+  private void loadManPage( WebView view, String filename ) 
   {
     TDLog.v("UserManual load manpage " + filename );
     ++mCloseOnBack;
@@ -229,13 +230,6 @@ public class UserManualActivity extends Activity
     view.getSettings().setSupportZoom( true ); 
   }
 
-  private boolean isOnline( Context ctx )
-  {
-    ConnectivityManager cm = (ConnectivityManager)getSystemService( CONNECTIVITY_SERVICE );
-    if ( cm == null ) return false;
-    NetworkInfo net_info = cm.getActiveNetworkInfo();
-    return ( net_info != null && net_info.isConnectedOrConnecting() );
-  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) 
@@ -258,6 +252,8 @@ public class UserManualActivity extends Activity
     } else if ( page.startsWith( "manual" ) && page.length() > 7 ) {
       int nr = 10 * (page.charAt(6) - '0') + (page.charAt(7) - '0');
       if ( nr < 16 ) mCurrentPage = page;
+    } else if ( page.startsWith("page_") ) {
+      mCurrentPage = page;
     }
 
     setContentView(R.layout.distox_manual_dialog);
@@ -285,7 +281,7 @@ public class UserManualActivity extends Activity
     setTitle( R.string.title_manual );
     load( mTV_text, page );
 
-    boolean is_online = isOnline( this );
+    boolean is_online = TDandroid.isOnline( this );
     mAI  = (ImageView) findViewById( R.id.ai );
     if ( is_online ) {
       mAI.setOnClickListener( this );
@@ -369,7 +365,7 @@ public class UserManualActivity extends Activity
       mCloseOnBack = 0;
       mCurrentPage = String.format(Locale.US, "manual%02d.htm", pos );
       load( mTV_text, mCurrentPage );
-    } else if ( pos == 18 && isOnline(this) ) { // website
+    } else if ( pos == 18 && TDandroid.isOnline(this) ) { // website
       viewUrl( WEBSITE );
     // } else if ( pos == 19 ) {
     //   if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
@@ -419,12 +415,29 @@ public class UserManualActivity extends Activity
   }
 
   /** open the AI dialog
+   * @note IHelpViwer interface
    */
   public void showAIdialog()
   {
     TDToast.make( R.string.ai_internet );
     (new AIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
   }
+
+  public void showManPage( String page )
+  {
+    TDLog.v("User Manual show page " + page );
+    loadManPage( null, page );
+  }
+
+  public void showInvalid( final TDPref pref, final String response )
+  {
+    this.runOnUiThread( new Runnable() { public void run() {
+      TDToast.makeWarn( response ); 
+      if ( pref != null ) pref.setButtonValue( "---" );
+      TDSetting.setGeminiApiKey( "" );
+    } } );
+  }
+  
 
   // /** react to a change in the configuration
   //  * @param cfg   new configuration

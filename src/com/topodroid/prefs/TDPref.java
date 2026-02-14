@@ -42,7 +42,7 @@ import android.text.TextWatcher;
 import android.text.Editable;
 // import android.text.method.KeyListener;
 
-class TDPref implements AdapterView.OnItemSelectedListener
+public class TDPref implements AdapterView.OnItemSelectedListener
                       , View.OnClickListener
 		      , View.OnFocusChangeListener
 		      , TextWatcher
@@ -733,7 +733,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
   /** set the "button" preference value
    * @param val  new value
    */
-  void setButtonValue( String val )
+  public void setButtonValue( String val )
   {
     if ( mView != null ) {
       TextView tv = (TextView) mView.findViewById( R.id.value );

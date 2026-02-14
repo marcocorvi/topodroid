@@ -717,7 +717,7 @@ public class PlotReloadWindow extends ItemDrawer
     // } else if ( p++ == pos ) { // RELOAD : set activity result and return
     //   doReloadPlot();
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(mActivity, mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
  

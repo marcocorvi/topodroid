@@ -1050,7 +1050,7 @@ public class ShotWindow extends Activity
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TDLevel.overNormal ?  mNrButton2 : 0 );
-      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(mActivity, mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 

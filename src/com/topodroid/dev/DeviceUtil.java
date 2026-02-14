@@ -282,24 +282,24 @@ public class DeviceUtil
     }
   }
 
-  /** check that a remote device is paired
-   * @param  address  remote device address
-   */
-  public static void checkPairing( String address )
-  {
-    if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN
-      // TDLog.Log( TDLog.LOG_COMM, " check pairing " + address );
-      BluetoothDevice btDevice = getRemoteDevice( address );
-      // TDLog.Log( TDLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress() + " status " + btDevice.getBondState() );
-      if ( ! isPaired( btDevice ) ) {
-        pairDevice( btDevice );
-        bindDevice( btDevice );
-        for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
-          if ( isPaired( btDevice ) ) break;
-          TDUtil.slowDown( 100 ); // Thread.yield();
-        }
-      }
-    }
-  }
+  // /** check that a remote device is paired
+  //  * @param  address  remote device address
+  //  */
+  // public static void checkPairing( String address )
+  // {
+  //   if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN
+  //     // TDLog.Log( TDLog.LOG_COMM, " check pairing " + address );
+  //     BluetoothDevice btDevice = getRemoteDevice( address );
+  //     // TDLog.Log( TDLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress() + " status " + btDevice.getBondState() );
+  //     if ( ! isPaired( btDevice ) ) {
+  //       pairDevice( btDevice );
+  //       bindDevice( btDevice );
+  //       for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
+  //         if ( isPaired( btDevice ) ) break;
+  //         TDUtil.slowDown( 100 ); // Thread.yield();
+  //       }
+  //     }
+  //   }
+  // }
 
 }

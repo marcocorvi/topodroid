@@ -245,7 +245,8 @@ class TDPrefKey
     new TDPrefKey( B,       BT,  "DISTOX_CONN_MODE",        R.string.pref_conn_mode_title,        R.string.pref_conn_mode_summary,       TDString.ZERO,R.array.connMode, R.array.connModeValue ),
     new TDPrefKey( B, BOOL, BT,  "DISTOX_HEAD_TAIL",        R.string.pref_head_tail_title,        R.string.pref_head_tail_summary,       FALSE ),
     new TDPrefKey( B,       BT,  "DISTOX_SOCKET_TYPE",      R.string.pref_sock_type_title,        R.string.pref_sock_type_summary,       TDString.ONE, R.array.sockType, R.array.sockTypeValue ),
-    new TDPrefKey( A, BOOL, BT,  "DISTOX_AUTO_PAIR",        R.string.pref_auto_pair_title,        R.string.pref_auto_pair_summary,       FALSE ),
+    // FIXME DROP_PAIRING
+    // new TDPrefKey( A, BOOL, BT,  "DISTOX_AUTO_PAIR",        R.string.pref_auto_pair_title,        R.string.pref_auto_pair_summary,       FALSE ),
     new TDPrefKey( E,       UI,  "DISTOX_CONNECT_FEEDBACK", R.string.pref_connect_feedback_title, R.string.pref_connect_feedback_summary,TDString.ZERO, R.array.feedbackMode, R.array.feedbackModeValue ),
     new TDPrefKey( B,       NON, "DISTOX_CALIB_PREF",       R.string.pref_cat_calib )
   };

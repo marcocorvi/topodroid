@@ -751,7 +751,7 @@ public class MainWindow extends Activity
         intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_ALL );
         startActivityForResult( intent, TDRequest.REQUEST_SETTINGS );
       } else if ( p++ == pos ) { // HELP
-        new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
+        new HelpDialog(mActivity, mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
       }
     // }
     // updateDisplay();
@@ -1355,7 +1355,7 @@ public class MainWindow extends Activity
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
 
-    mApp.stopPairingRequest();
+    // mApp.stopPairingRequest(); // FIXME DROP_PAIRING
     if ( TopoDroidApp.sayDialogR() ) {
       android.os.Process.killProcess( android.os.Process.myPid() );
     }

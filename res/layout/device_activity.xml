@@ -22,6 +22,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/iz_empty"
         android:contentDescription="@string/desc_menu"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
       />
     </LinearLayout>
 

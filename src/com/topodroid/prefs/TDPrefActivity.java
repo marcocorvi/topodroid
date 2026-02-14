@@ -17,6 +17,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.help.IHelpViewer;
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
@@ -48,6 +49,7 @@ import android.view.LayoutInflater;
  */
 public class TDPrefActivity extends Activity 
                             implements View.OnLongClickListener
+                            , IHelpViewer
 {
   static TDPrefActivity mPrefActivityAll = null;
   static TDPrefActivity mPrefActivitySurvey = null;
@@ -595,4 +597,16 @@ public class TDPrefActivity extends Activity
   //   }
   // }
 
+  public void showManPage( String page ) {}
+
+  public void showAIdialog() {}
+
+  public void showInvalid( final TDPref pref, final String response )
+  {
+    this.runOnUiThread( new Runnable() { public void run() {
+      TDToast.makeWarn( response ); 
+      if ( pref != null ) pref.setButtonValue( "---" );
+      TDSetting.setGeminiApiKey( "" );
+    } } );
+  }
 }

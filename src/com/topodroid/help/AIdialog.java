@@ -41,7 +41,7 @@ public class AIdialog extends MyDialog
                  implements OnClickListener
                  , AdapterView.OnItemSelectedListener
 {
-  UserManualActivity mParent;
+  IHelpViewer mParent;
   AIhelper mHelper;
   static String mSystemInstruction = null;
   boolean mLocalContext = true; // whether to include the local context in the query
@@ -69,13 +69,16 @@ public class AIdialog extends MyDialog
   // TODO list of help entries
   /** cstr
    */
-  public AIdialog( Context context, UserManualActivity parent, String user_key, String page )
+  public AIdialog( Context context, IHelpViewer parent, String user_key, String page )
   {
     super( context, null, R.string.AIdialog );  // nul app
     mParent = parent;
     // TDLog.v("Man page " + page );
     mHelper = new AIhelper( context, this, user_key, page );
-    if ( mSystemInstruction == null ) mSystemInstruction = getOrderedUserManual( context );
+    if ( mSystemInstruction == null ) {
+      mSystemInstruction = getOrderedUserManual( context );
+      TDLog.v("System instr. length " + mSystemInstruction.length() );
+    }
     String lang = TDSetting.mLocale;
     // TDLog.v("Jargon lang: <" + lang + ">" );
     if ( TDString.isNullOrEmpty( lang ) || lang.equals("en") ) {
@@ -223,14 +226,14 @@ public class AIdialog extends MyDialog
       TDLog.e("Error reading list.txt " + e.getMessage() );
     }
     sb.append( ctx.getResources().getString( R.string.ai_end_manual ) );
-    return sb.toString();
-  }
-
-
-  void openPageOnParent( String page )
-  {
-    dismiss();
-    mParent.loadManPage( null, page );
+    TDLog.v("User manual length " + sb.length() );
+    return sb.toString()
+           .replaceAll( "(?i)<i>(.*?)</i>", "*$1*" )
+           .replaceAll( "(?i)<b>(.*?)</b>", "**$1**" )
+           .replaceAll( "<p>", "\n" )
+           .replaceAll( "</p>", "" )
+           .replaceAll( "<br/?>", "\n" )
+           .replaceAll( "<(?!a|/a|\\*)[^>]+>", "");
   }
 
   /** get the jargon disctionary
@@ -269,7 +272,9 @@ public class AIdialog extends MyDialog
     } catch (IOException e ) {
       TDLog.e("Error reading list.txt " + e.getMessage() );
     }
+    TDLog.v("Jargon length " + sb.length() );
     return sb.toString();
+
   }
 
   /** get the disctionary of proper names
@@ -292,7 +297,14 @@ public class AIdialog extends MyDialog
     } catch (IOException e ) {
       TDLog.e("Error reading list.txt " + e.getMessage() );
     }
+    TDLog.v("Names length " + sb.length() );
     return sb.toString();
+  }
+
+  void openPageOnParent( String page )
+  {
+    dismiss();
+    mParent.showManPage( page );
   }
 
 }

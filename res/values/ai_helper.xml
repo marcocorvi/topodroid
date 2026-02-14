@@ -20,7 +20,7 @@ CRITICAL:\n
 Never translate filenames inside square bracket. They mustalways remain as they appear in the manual, regardless of the language you are responding in.\n
 </string>
   <string name="ai_jargon" translatable="false">JARGON:\nHere is the translation of some technical terms in &quot;%1$s&quot;</string>
-  <string name="ai_names" translatable="false">NAMES:\nHere is a list of terms related to programs. Usually they occur in the manual in italis or bold. Pay attention to the term &quot;Walls&quot; (the program) which can be confused with the plural of &quot;wall&quot;. There is no need to take this list into acount if you are answering in Engish.</string>
+  <string name="ai_names" translatable="false">NAMES:\nHere is a list of terms related to programs. Usually they marked down with * or **.i Do not translate them.</string>
   <string name="ai_model" translatable="false">I have received the TopoDroid manual and I will now act as your technical assistant.
 I will answer questions according to the RULES you set.</string>
     <string name="ai_begin_manual" translatable="false">--- BEGIN MANUAL ---</string>

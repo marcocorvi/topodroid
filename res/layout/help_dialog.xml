@@ -9,14 +9,25 @@
   <ListView android:id="@+id/help_list"
       style="@style/list_help"
   />  
-
-  <Button android:id="@+id/button_manual"
-    android:layout_width="42sp"
-    android:layout_height="42sp"
-    android:background="@drawable/ic_manual"
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_gravity="end"
     android:gravity="end"
-  />
+    android:orientation="horizontal"
+    >
+    <Button android:id="@+id/button_ai"
+      android:layout_width="42sp"
+      android:layout_height="42sp"
+      android:background="@drawable/iz_ai"
+      android:layout_marginRight="@dimen/marginv"
+    />
+    <Button android:id="@+id/button_manual"
+      android:layout_width="42sp"
+      android:layout_height="42sp"
+      android:background="@drawable/ic_manual"
+    />
+  </LinearLayout>
   <!-- android:contextDescription="@string/desc_user_man" -->
 
 </FrameLayout>

@@ -866,7 +866,7 @@ public class TopoGL extends Activity
       // startActivity( new Intent( this, TopoGLPreferences.class ) );
     } else if ( p++ == pos ) { // HELP
       // new DialogHelp(this).show();	    
-      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
+      new HelpDialog(this, this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
 

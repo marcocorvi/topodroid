@@ -8706,16 +8706,16 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v( "Help menu, nn " + nn );
       switch ( mMode ) {
         case MODE_DRAW:
-          new HelpDialog(mActivity, izons_draw, menus, help_icons_draw, help_menus, NR_BUTTON2, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, mActivity, izons_draw, menus, help_icons_draw, help_menus, NR_BUTTON2, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
           break;
         case MODE_ERASE:
-          new HelpDialog(mActivity, izons_erase, menus, help_icons_erase, help_menus, NR_BUTTON5, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, mActivity, izons_erase, menus, help_icons_erase, help_menus, NR_BUTTON5, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
           break;
         case MODE_EDIT:
-          new HelpDialog(mActivity, izons_edit, menus, help_icons_edit, help_menus, NR_BUTTON3, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, mActivity, izons_edit, menus, help_icons_edit, help_menus, NR_BUTTON3, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
           break;
         default: // MODE_MOVE MODE_SPLIT_SKETCH MODE_SPLIT_SCRAP
-          new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, NR_BUTTON1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, mActivity, izons_move, menus, help_icons_move, help_menus, NR_BUTTON1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
       }
     }
   }

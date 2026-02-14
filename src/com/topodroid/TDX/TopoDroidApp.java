@@ -50,7 +50,7 @@ import com.topodroid.dev.sap.SapComm;
 import com.topodroid.dev.discox.DiscoXComm;
 import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.bric.BricInfoDialog;
-import com.topodroid.dev.PairingRequest;
+// import com.topodroid.dev.PairingRequest; // FIXME DROP_PAIRING
 // import com.topodroid.dev.cavway.CavwayConst;
 import com.topodroid.dev.cavway.CavwayMemoryDialog;
 import com.topodroid.common.LegType;
@@ -857,7 +857,7 @@ public class TopoDroidApp extends Application
 
     TDSetting.loadSecondaryPreferences( prefHlp );
     // TDLog.v( "load secondary done");
-    checkAutoPairing();
+    // checkAutoPairing(); // FIXME DROP_PAIRING
 
     // if ( TDLog.LOG_DEBUG ) {
     //   isTracing = true;
@@ -3263,43 +3263,44 @@ public class TopoDroidApp extends Application
   // DISTOX PAIRING
   // cannot be static because register/unregister are not static
 
+  // FIXME DROP_PAIRING
   // active pairing request
-  static PairingRequest mPairingRequest = null;
+  // static PairingRequest mPairingRequest = null;
 
-  public static void checkAutoPairing()
-  {
-    if ( thisApp == null ) return;
-    if ( TDSetting.mAutoPair ) {
-      thisApp.startPairingRequest();
-    } else {
-      thisApp.stopPairingRequest();
-    }
-  }
+  // public static void checkAutoPairing()
+  // {
+  //   if ( thisApp == null ) return;
+  //   if ( TDSetting.mAutoPair ) {
+  //     thisApp.startPairingRequest();
+  //   } else {
+  //     thisApp.stopPairingRequest();
+  //   }
+  // }
 
-  /** terminate a pairing request, if any
-   */
-  void stopPairingRequest()
-  {
-    if ( mPairingRequest != null ) {
-      // TDLog.v( "stop pairing" );
-      unregisterReceiver( mPairingRequest );
-      mPairingRequest = null;
-    }
-  }
+  // /** terminate a pairing request, if any
+  //  */
+  // void stopPairingRequest()
+  // {
+  //   if ( mPairingRequest != null ) {
+  //     // TDLog.v( "stop pairing" );
+  //     unregisterReceiver( mPairingRequest );
+  //     mPairingRequest = null;
+  //   }
+  // }
 
-  /** start a pairing request, if none is ongoing
-   */
-  private void startPairingRequest()
-  {
-    if ( mPairingRequest == null ) {
-      // TDLog.v( "start pairing" );
-      // IntentFilter filter = new IntentFilter( DeviceUtil.ACTION_PAIRING_REQUEST );
-      IntentFilter filter = new IntentFilter( "android.bluetooth.device.action.PAIRING_REQUEST" );
-      // filter.addCategory( Intent.CATEGORY_ALTERNATIVE );
-      mPairingRequest = new PairingRequest();
-      registerReceiver( mPairingRequest, filter );
-    }
-  }
+  // /** start a pairing request, if none is ongoing
+  //  */
+  // private void startPairingRequest()
+  // {
+  //   if ( mPairingRequest == null ) {
+  //     // TDLog.v( "start pairing" );
+  //     // IntentFilter filter = new IntentFilter( DeviceUtil.ACTION_PAIRING_REQUEST );
+  //     IntentFilter filter = new IntentFilter( "android.bluetooth.device.action.PAIRING_REQUEST" );
+  //     // filter.addCategory( Intent.CATEGORY_ALTERNATIVE );
+  //     mPairingRequest = new PairingRequest();
+  //     registerReceiver( mPairingRequest, filter );
+  //   }
+  // }
 
   // ==================================================================
   

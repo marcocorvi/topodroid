@@ -553,13 +553,16 @@ public class DeviceActivity extends Activity
 
   /** add a device to the list of devices and the adapter
    * @param dev   device to add
+   * @return true if the device was not on the list and has been inserted
    */
-  private void addDeviceToList( Device dev )
+  private boolean addDeviceToList( Device dev )
   {
     if ( ! isDeviceOnList( dev.getAddress() ) ) {
       mDeviceListAdapter.add( dev.toString() );
       mDeviceList.add( dev );
+      return true;
     }
+    return false;
   }
 
   /** drop a device from the list
@@ -637,21 +640,23 @@ public class DeviceActivity extends Activity
 
   /** add device returned by a scan
    * @param result  result of the scan
+   * @return true if the device is novel
    */
-  public void notifyScanResult( ScanResult result )
+  public boolean notifyScanResult( ScanResult result )
   {
     BluetoothDevice bt_dev = result.getDevice();
     ScanRecord rec = result.getScanRecord();
     // List< ParcelUuid > uuids = rec.getServiceUuids(); // can use uuid.toString() to get services UUID
-    addBluetoothDevice( bt_dev, bt_dev.getAddress(), bt_dev.getName() );
+    return addBluetoothDevice( bt_dev, bt_dev.getAddress(), bt_dev.getName() );
   }
 
   /** add a Bluetooth device to the list
    * @param bt_device Bluetooth device
    * @param addres    device address
    * @param bt_name   device BT name
+   * @return true if the device has been added (it was not already on the list)
    */
-  private void addBluetoothDevice(  BluetoothDevice bt_device, String address, String bt_name )
+  private boolean addBluetoothDevice(  BluetoothDevice bt_device, String address, String bt_name )
   {
     Device dev = mApp_mDData.getDevice( address );
     // ---- DEBUG
@@ -707,8 +712,9 @@ public class DeviceActivity extends Activity
       // }
     }
     if ( dev != null ) {
-      addDeviceToList( dev );
+      return addDeviceToList( dev );
     }
+    return false;
   }
 
   /** add a device that has been manually entered
@@ -752,6 +758,7 @@ public class DeviceActivity extends Activity
       return;
     }
     CharSequence item = ((TextView) view).getText();
+    TDLog.v("on item click: " + item.toString() );
     StringBuffer buf = new StringBuffer( item );
     int k = buf.lastIndexOf(" ");
     String[] vals = item.toString().split(" ", 3 );
@@ -1340,12 +1347,12 @@ public class DeviceActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // BT_SCAN
       if ( false ) {
-      Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
-      scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
-      startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
-      // TDToast.makeLong(R.string.wait_scan );
+        Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
+        scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
+        startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
+        // TDToast.makeLong(R.string.wait_scan );
       } else {
-        BleScanner scanner = new BleScanner( this );
+        BleScanner scanner = new BleScanner( this, this );
         scanner.startBleScan( new BleScanCallback(this, scanner) );
       }
 
@@ -1389,7 +1396,7 @@ public class DeviceActivity extends Activity
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_DEVICE );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(this, this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     // } else if ( TDLevel.overTester && p++ == pos ) { // CALIB_RESET
     //   doCalibReset();
     }
@@ -1448,13 +1455,20 @@ public class DeviceActivity extends Activity
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    CharSequence item = ((TextView) view).getText();
+    TDLog.v("on item long click " + pos + ": " + item.toString() );
     String item_str = mDeviceListAdapter.getItem(pos); // "model name addr"
-    if ( item_str == null || item_str.equals("X000") ) return true;
+    if ( item_str == null || item_str.equals("X000") ) {
+      TDLog.v("on item long click: pos " + pos + " item " + item_str );
+      return true;
+    }
     String[] vals = item_str.split(" ", 3);
     String address = vals[2]; // address or nickname
     Device device = mApp_mDData.getDevice( address );
     if ( device != null ) {
       (new DeviceNameDialog( this, this, device )).show();
+    } else {
+      TDLog.v("on item long click: address " + address + " not in database" );
     }
     return true;
   }

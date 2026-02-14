@@ -14,8 +14,10 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.help.UserManualActivity;
+import com.topodroid.help.HelpDialog;
 import com.topodroid.help.AIhelper;
 import com.topodroid.help.ValidationCallback;
+import com.topodroid.help.IHelpViewer;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
@@ -39,7 +41,7 @@ public class GeminiDialog extends MyDialog
                           implements OnClickListener
 {
   private TDPref mPref;
-  private Activity mParent;
+  private IHelpViewer mParent;
   private EditText mETkey;
 
   // ---------------------------------------------------------------
@@ -49,7 +51,7 @@ public class GeminiDialog extends MyDialog
    * @param downloader data downloader
    * @param lister     data lister
    */
-  public GeminiDialog( Context context, Activity parent, TDPref pref )
+  public GeminiDialog( Context context, IHelpViewer parent, TDPref pref )
   {
     super( context, null, 0 ); // 0: no help resource
     mParent = parent;
@@ -112,14 +114,11 @@ public class GeminiDialog extends MyDialog
           {
             if ( valid ) {
               if ( mPref != null ) mPref.setButtonValue( "***" );
-              if ( mParent != null && ( mParent instanceof UserManualActivity ) ) ((UserManualActivity)mParent).showAIdialog();
+              if ( mParent != null ) mParent.showAIdialog();
             } else {
               if ( mParent != null ) {
-                mParent.runOnUiThread( new Runnable() { public void run() {
-                  TDToast.makeWarn( response ); 
-                  if ( mPref != null ) mPref.setButtonValue( "---" );
-                  TDSetting.setGeminiApiKey( "" );
-                } } );
+                mParent.showInvalid( mPref, response );
+
               }  
               TDLog.v( response );
             }

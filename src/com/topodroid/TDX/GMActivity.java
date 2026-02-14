@@ -1559,7 +1559,7 @@ public class GMActivity extends Activity
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CALIB );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(this, this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     // } else if ( TDLevel.overTester && p++ == pos ) { // AUTO-CALIB
     //   if ( mCalibration != null ) {
     //     mApp.resetComm();

@@ -465,7 +465,7 @@ public class TDSetting
   public static boolean mAutoReconnect = true;
   public static boolean mSecondDistoX  = false;
   public static boolean mHeadTail      = false; // whether to use readA3HeadTail to download the data (A3 only)
-  public static boolean mAutoPair      = false;
+  // public static boolean mAutoPair      = false; // FIXME DROP_PAIRING
   public static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
 
   public static boolean mFirmwareSanity = true; // enforce firmware sanity checks
@@ -1137,8 +1137,8 @@ public class TDSetting
     // TDLog.v("SETTINGS load dev skip>" + key[ 3].key + ":" +key[ 3].dflt + "<" );
     mSockType        = tryInt( prefs,      key[ 3].key,       key[ 3].dflt ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
     // mZ6Workaround   = prefs.getBoolean( key[ 4].key,  bool(key[ 4].dflt)  ); // DISTOX_Z6_WORKAROUND
-    mAutoPair        = prefs.getBoolean(   key[ 4].key,  bool(key[ 4].dflt) );  // DISTOX_AUTO_PAIR
-    mConnectFeedback = tryInt( prefs,      key[ 6].key,       key[ 5].dflt );   // DISTOX_CONNECT_FEEDBACK
+    // mAutoPair        = prefs.getBoolean(   key[ 4].key,  bool(key[ 4].dflt) );  // DISTOX_AUTO_PAIR // FIXME DROP_PAIRING
+    mConnectFeedback = tryInt( prefs,      key[ 4].key,       key[ 4].dflt );   // DISTOX_CONNECT_FEEDBACK
     // TDLog.v("SETTING load device done");
 
     key = TDPrefKey.mGeekDevice;
@@ -1617,7 +1617,7 @@ public class TDSetting
   /** set the value of the Gemini API key and store it
    * @param value   new vallue
    */
-  static void setGeminiApiKey( String value ) 
+  public static void setGeminiApiKey( String value ) 
   { 
     mGeminiApiKey = value;
     TDPrefHelper.update( "DISTOX_GEMINI", value );
@@ -1789,11 +1789,11 @@ public class TDSetting
       mSockType = tryIntValue( hlp, k, v, key[3].dflt ); // mDefaultSockStrType ); 
     // } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_Z6_WORKAROUND (bool)
     //   mZ6Workaround = tryBooleanValue( hlp, k, v, bool(key[4]) );
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_AUTO_PAIR (bool)
-      mAutoPair = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
-      TopoDroidApp.checkAutoPairing();
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_CONNECT_FEEDBACK
-      mConnectFeedback = tryIntValue( hlp, k, v, key[6].dflt );
+    // } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_AUTO_PAIR (bool) // FIXME DROP_PAIRING
+    //   mAutoPair = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    //   TopoDroidApp.checkAutoPairing();
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_CONNECT_FEEDBACK
+      mConnectFeedback = tryIntValue( hlp, k, v, key[4].dflt );
     } else {
       TDLog.e("missing DEVICE key: " + k );
     }
@@ -3522,7 +3522,7 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_CSV_SEP";               if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, ( mCsvSeparator == CSV_COMMA )? 0 : ( mCsvSeparator == CSV_PIPE )? 1 : 2 );
 
       k="DISTOX_BLUETOOTH";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mCheckBT );
-      k="DISTOX_AUTO_PAIR";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoPair) );
+      // k="DISTOX_AUTO_PAIR";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoPair) ); // FIXME DROP_PAIRING
       k="DISTOX_SOCKET_TYPE";           if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSockType );
       k="DISTOX_SOCKET_DELAY";          if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mConnectSocketDelay );
       k="DISTOX_CONN_MODE";             if ( TDPrefKey.checkKeyGroup(k,flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mConnectionMode );
@@ -3973,9 +3973,9 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_BLUETOOTH":
               mCheckBT  = Integer.parseInt( value ); setPreference( editor, kay, mCheckBT );
               break;
-            case "DISTOX_AUTO_PAIR":
-              mAutoPair = Boolean.parseBoolean( value ); setPreference( editor, kay, mAutoPair );
-              break;
+            // case "DISTOX_AUTO_PAIR": // FIXME DROP_PAIRING
+            //   mAutoPair = Boolean.parseBoolean( value ); setPreference( editor, kay, mAutoPair );
+            //   break;
             case "DISTOX_SOCKET_TYPE":
               mSockType = Integer.parseInt( value ); setPreference( editor, kay, mSockType );
               break;

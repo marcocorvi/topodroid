@@ -133,7 +133,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       gcb.temperature = 0.2f; // 0.0 to 1.0 or 2.0
       gcb.topK = 2; // 1 to 40
       gcb.topP = 0.95f; // 0.0 to 1.0 allow some natural language
-      gcb.maxOutputTokens = 800; // 1 token = 4 chars
+      gcb.maxOutputTokens = 1024; // 1 token = 4 chars
       GenerationConfig gc = gcb.build();
       GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
       this.model = GenerativeModelFutures.from( gm );

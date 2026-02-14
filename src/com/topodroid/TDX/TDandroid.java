@@ -30,6 +30,8 @@ import android.os.Environment;
 
 import android.provider.Settings;
 import android.net.Uri;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 // import android.os.Build.VERSION_CODES;
 import android.content.pm.PackageManager;
@@ -702,5 +704,15 @@ public class TDandroid
     return intent;
   }
 
+  /** @return true if the Android is online
+   * @param ctx  context
+   */
+  public static boolean isOnline( Context ctx )
+  {
+    ConnectivityManager cm = (ConnectivityManager)(ctx.getSystemService( ctx.CONNECTIVITY_SERVICE ));
+    if ( cm == null ) return false;
+    NetworkInfo net_info = cm.getActiveNetworkInfo();
+    return ( net_info != null && net_info.isConnectedOrConnecting() );
+  }
 }
   

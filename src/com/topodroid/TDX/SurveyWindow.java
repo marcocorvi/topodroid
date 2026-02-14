@@ -846,7 +846,7 @@ public class SurveyWindow extends Activity
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_SURVEY );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(mActivity, mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
     // updateDisplay();
   }

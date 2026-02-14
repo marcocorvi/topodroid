@@ -211,7 +211,7 @@ public class TdManagerActivity extends Activity
     if ( p++ == pos ) { // CLOSE
       finish();
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog( this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
+      new HelpDialog( this, this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
 
