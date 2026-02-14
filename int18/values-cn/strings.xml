@@ -4,6 +4,7 @@
     <!-- TODO string name="ai_null_chat">Null AI chat</string -->
     <!-- TODO string name="ai_error">AI error %1$s</string -->
     <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
+    <!-- TODO string name="ai_no_internet">No web connection.</string -->
     <!-- TODO string name="ai_prompt">Type your question</string -->
     <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
     <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
@@ -354,6 +355,7 @@
     <string name="location_start_fine">开始定位</string>
     <string name="location_enabled">请确认手机获取位置已经打开</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
+    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
 
     <string name="error_azimuth_required">输入方位角</string>
     <string name="error_length_required">输入距离</string>
@@ -546,6 +548,7 @@
     <string name="scan_started">开启蓝牙扫描</string>
     <string name="scan_finished">蓝牙扫描结束</string>
     <string name="scanning">扫描中 ... 请等待</string>
+    <!-- TODO string name="scan_result">Found %1$d devices</string -->
 
     <!-- UNUSED string name="title_scan">BLE扫描</string -->
     <!-- UNUSED string name="ble_scan_failed">蓝牙设备扫描失败</string -->

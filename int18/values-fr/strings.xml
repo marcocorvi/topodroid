@@ -5,6 +5,7 @@
     <!-- TODO string name="ai_null_chat">Null AI chat</string -->
     <!-- TODO string name="ai_error">AI error %1$s</string -->
     <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
+    <!-- TODO string name="ai_no_internet">No web connection.</string -->
     <!-- TODO string name="ai_prompt">Type your question</string -->
     <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
     <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
@@ -351,6 +352,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="location_start_fine">Démarre localisation fine</string> <!-- a confirmer dans le contexte -->
     <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
+    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
 
     <string name="error_azimuth_required">Azimut nécessaire</string>
     <string name="error_length_required">Longueur nécessaire</string>
@@ -543,6 +545,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="scan_started">Discovery started</string -->
     <!-- TODO string name="scan_finished">Discovery finished</string -->
     <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+    <!-- TODO string name="scan_result">Found %1$d devices</string -->
 
 
     <!-- UNUSED string name="title_scan">BLE scan</string -->

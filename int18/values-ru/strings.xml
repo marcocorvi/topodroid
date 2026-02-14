@@ -4,6 +4,7 @@
     <string name="ai_null_chat">Null ИИ чат</string>
     <string name="ai_error">Ошибка ИИ %1$s</string>
     <string name="ai_internet">Внимание. Для работы ИИ-помощи требуется подключение к интернету.</string>
+    <!-- TODO string name="ai_no_internet">No web connection.</string -->
     <string name="ai_prompt">Введите свой вопрос</string>
     <string name="ai_invalid_key">Недействительный ключ API</string>
     <string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string>
@@ -352,6 +353,7 @@
     <string name="location_start_fine">Начинаю уточнение позиции</string>
     <string name="location_enabled">Убедитесь, что функция МЕСТОПОЛОЖЕНИЕ включена</string>
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
+    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
@@ -543,6 +545,7 @@
     <string name="scan_started">Начато обнаружение устройств</string>
     <string name="scan_finished">Обнаружение устройств закончено</string>
     <string name="scanning">Сканирование... Пожалуйста, подождите</string>
+    <!-- TODO string name="scan_result">Found %1$d devices</string -->
 
     <!-- UNUSED string name="title_scan">Сканировать BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Сбой сканирования BLE</string -->
