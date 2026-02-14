@@ -363,6 +363,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="location_start_fine">Starting fine position</string>
     <string name="location_enabled">Make sure LOCATION is enabled</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
+    <string name="discovery_error">BT discovery error: %1$s</string>
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>

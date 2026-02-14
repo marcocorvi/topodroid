@@ -15,28 +15,31 @@ import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.prefs.TDSetting;
 
-import android.content.SharedPreferences.Editor;
 
 import android.app.Activity;
+
+import android.content.SharedPreferences.Editor;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
+// import android.content.pm.PackageManager.NameNotFoundException;
 
 // import java.lang.reflect.Method;
 
 import android.os.Build;
 import android.os.Environment;
+// import android.os.Build.VERSION_CODES;
 
 import android.provider.Settings;
+
 import android.net.Uri;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-// import android.os.Build.VERSION_CODES;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageInfo;
-// import android.content.pm.PackageManager.NameNotFoundException;
+import android.location.LocationManager;
 
 import android.hardware.Sensor;
 import android.widget.Button;
@@ -709,10 +712,18 @@ public class TDandroid
    */
   public static boolean isOnline( Context ctx )
   {
-    ConnectivityManager cm = (ConnectivityManager)(ctx.getSystemService( ctx.CONNECTIVITY_SERVICE ));
+    ConnectivityManager cm = (ConnectivityManager)ctx.getSystemService( Context.CONNECTIVITY_SERVICE );
     if ( cm == null ) return false;
     NetworkInfo net_info = cm.getActiveNetworkInfo();
     return ( net_info != null && net_info.isConnectedOrConnecting() );
+  }
+
+  public static boolean hasLocation( Context ctx )
+  {
+    LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
+    boolean gps_enabled = lm.isProviderEnabled( LocationManager.GPS_PROVIDER );
+    // boolean network_enabled = lm.isProviderEnabled( LocationManager.NETWORK_PROVIDER );
+    return gps_enabled;
   }
 }
   

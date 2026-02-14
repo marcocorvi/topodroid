@@ -129,6 +129,9 @@ public class DeviceActivity extends Activity
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
 
+  private BleScanner mBleScanner = null;
+  private DeviceSearch mDeviceSearch = null;
+
   // referrer ( getReferrer() is from API-22 ) // FIXME
   // public final int REFERRER_NONE = 0;
   // public final int REFERRER_MAIN = 1;
@@ -147,7 +150,7 @@ public class DeviceActivity extends Activity
   private TextView mTvAddressB;
 
   private static final int[] izonsno = {
-                        0,
+                        R.drawable.iz_bt_scan, 
                         0,
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_2compute_no,
@@ -172,8 +175,10 @@ public class DeviceActivity extends Activity
   private BitmapDrawable mBMcalib_no;
   private BitmapDrawable mBMread;
   private BitmapDrawable mBMread_no;
+  private BitmapDrawable mBMbt;
+  private BitmapDrawable mBMbt_scan;
 
-  // static final private int IDX_BT     = 0;
+  static final private int IDX_BT     = 0;
   static final private int IDX_INFO   = 1;
   static final private int IDX_TOGGLE = 2;
   static final private int IDX_CALIB  = 3;
@@ -227,6 +232,8 @@ public class DeviceActivity extends Activity
   private Device currDeviceB() { return TDInstance.getDeviceB(); }
 
   private boolean mHasBLE     = false; // BRIC default to false
+
+  private boolean mBTisScanning = false;
 
   private final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
   {
@@ -414,7 +421,8 @@ public class DeviceActivity extends Activity
       }
     }
     removeDeviceFromList( device );
-    if ( currDeviceA().getAddress().equals( address ) ) detachDevice();
+    Device curr_dev = currDeviceA();
+    if ( curr_dev != null && curr_dev.getAddress().equals( address ) ) detachDevice();
   }
 
   /** ask whether to forget a device
@@ -513,6 +521,8 @@ public class DeviceActivity extends Activity
       mBMcalib_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_CALIB] );
       mBMread    = MyButton.getButtonBackground( mApp, res, izons[IDX_READ] );
       mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_READ] );
+      mBMbt      = MyButton.getButtonBackground( mApp, res, izons[IDX_BT] );
+      mBMbt_scan = MyButton.getButtonBackground( mApp, res, izonsno[IDX_BT] );
     // }
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
@@ -656,7 +666,7 @@ public class DeviceActivity extends Activity
    * @param bt_name   device BT name
    * @return true if the device has been added (it was not already on the list)
    */
-  private boolean addBluetoothDevice(  BluetoothDevice bt_device, String address, String bt_name )
+  public boolean addBluetoothDevice(  BluetoothDevice bt_device, String address, String bt_name )
   {
     Device dev = mApp_mDData.getDevice( address );
     // ---- DEBUG
@@ -922,9 +932,20 @@ public class DeviceActivity extends Activity
 
     int k = 0;
     if ( k < mNrButton1 && b == mButton1[k++] ) {         // RESET COMM STATE [This is fast]
-      mApp.resetComm();
-      // setState( false ); // not necessary - moved to the end
-      TDToast.make( R.string.bt_reset );
+      if ( mBTisScanning ) {
+        if ( mDeviceSearch != null ) {
+          mDeviceSearch.resetReceiver();
+          mDeviceSearch = null;
+        }
+        if ( mBleScanner != null ) {
+          mBleScanner.stopBleScan();
+          mBleScanner = null;
+        }
+      } else {
+        mApp.resetComm();
+        // setState( false ); // not necessary - moved to the end
+        TDToast.make( R.string.bt_reset );
+      }
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
       if ( currDeviceA() == null ) {
         TDToast.makeBad( R.string.no_device_address );
@@ -1259,16 +1280,18 @@ public class DeviceActivity extends Activity
   //     case TDRequest.REQUEST_DEVICE:
   //       if ( result == RESULT_OK ) {
   //         String address = extras.getString( TDTag.TOPODROID_DEVICE_ACTION );
-  //         // TDLog.Log(TDLog.LOG_DISTOX, "OK " + address );
   //         if ( address == null ) {
   //           TDLog.e( "onActivityResult REQUEST DEVICE: null address");
-  //         } else if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
-  //           mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
-  //           mApp.setDevicePrimary( address, null, null, null );
-  //           DeviceUtil.checkPairing( address );
-  //           // mCurrDevice = TDInstance.getDeviceA();
-  //           showDistoXButtons();
-  //           setState( true );
+  //         } else {
+  //           TDLog.v( "BT scan result: address " + address );
+  //           // if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
+  //           //   mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
+  //           //   mApp.setDevicePrimary( address, null, null, null );
+  //           //   DeviceUtil.checkPairing( address );
+  //           //   // mCurrDevice = TDInstance.getDeviceA();
+  //           //   showDistoXButtons();
+  //           //   setState( true );
+  //           // }
   //         }
   //       } else if ( result == RESULT_CANCELED ) {
   //         TDLog.e( "CANCELED");
@@ -1338,6 +1361,16 @@ public class DeviceActivity extends Activity
     onMenu = false;
   }
 
+  public void setBtScanning( boolean scanning )
+  {
+    mBTisScanning = scanning;
+    TDandroid.setButtonBackground( mButton1[IDX_BT], (scanning ? mBMbt_scan : mBMbt ) );
+    if ( ! scanning ) {
+      mDeviceSearch = null;
+      mBleScanner   = null;
+    }
+  }
+
   /** handle a tap on a menu
    * @param pos  index of the tapped menu
    */
@@ -1346,17 +1379,27 @@ public class DeviceActivity extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // BT_SCAN
-      if ( false ) {
-        Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
-        scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
-        startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
+      if ( mBTisScanning ) return;
+      if ( TDandroid.BELOW_API_31 ) {
+        // Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
+        // scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
+        // startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
         // TDToast.makeLong(R.string.wait_scan );
+        if ( ! TDandroid.hasLocation( this ) ) { // check if location is enabled
+          TDToast.makeWarn( R.string.location_enabled );
+        } else {
+          mDeviceSearch = new DeviceSearch( this, this ); // ).show();
+          if ( mDeviceSearch.scanBtDevices() ) {
+            setBtScanning( true );
+          } else {
+            mDeviceSearch = null;
+          }
+        }
       } else {
-        BleScanner scanner = new BleScanner( this, this );
-        scanner.startBleScan( new BleScanCallback(this, scanner) );
+        mBleScanner = new BleScanner( this, this );
+        mBleScanner.startBleScan( new BleScanCallback(this, mBleScanner) );
+        setBtScanning( true );
       }
-
- 
 
     // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC BLE_SCAN
     //   BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();

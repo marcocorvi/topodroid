@@ -13,6 +13,7 @@ package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.Timer;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
@@ -39,7 +40,7 @@ public class BleScanner
   private ScanSettings       mScanSettings;
   private BleScanCallback    mCallback;
   private boolean mScanning;
-
+  private Timer mTimer = null;
 
   // public ScanCallback defaultCallback() 
   // { 
@@ -72,17 +73,12 @@ public class BleScanner
     mScanning = true;
     mCallback = cb;
     mCallback.resetCount();
-    Thread counter = new Thread() {
+    mTimer = new Timer( 5000, new Runnable() {
       @Override public void run()
       {
-        for ( int k=0; k<10; ++k ) {
-          TDLog.v("waiting ... " + k );
-          TDUtil.yieldDown( 1000 );
-        }
         stopBleScan( );
       }
-    };
-    counter.start();
+    } );
     mBleScanner.startScan( null, mScanSettings, mCallback );
   }
   // ScanCallback must implement
@@ -94,8 +90,11 @@ public class BleScanner
     TDLog.v("BLE scanner stop");
     mScanning = false;
     mBleScanner.stopScan( mCallback );
-    String msg = String.format( mContext.getResources().getString( R.string.scan_result ), mCallback.getNovel() );
-    mParent.runOnUiThread( new Runnable() { public void run() { TDToast.make( msg ); } } );
+    final String msg = String.format( mContext.getResources().getString( R.string.scan_result ), mCallback.getNovel() );
+    mParent.runOnUiThread( new Runnable() { public void run() { 
+      mParent.setBtScanning( false );
+      TDToast.make( msg ); 
+    } } );
   }
 
 } 

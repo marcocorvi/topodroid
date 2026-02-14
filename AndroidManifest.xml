@@ -223,11 +223,11 @@
           android:exported="false"
         />
 
-        <activity android:name=".DeviceSearch"
+        <!-- activity android:name=".DeviceSearch"
 	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-        />
+        / -->
 
         <!-- MUST LIST WINDOWS -->
         <!-- activity android:name=".ItemDrawer"

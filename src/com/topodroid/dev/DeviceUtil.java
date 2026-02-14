@@ -99,21 +99,25 @@ public class DeviceUtil
   }
 
   /** start BT devices discovery
+   * @return 0 on success or error code
    */
-  public static boolean startDiscovery()
+  public static int startDiscovery()
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-    if ( adapter != null ) {
-      try {
-        boolean ret = adapter.startDiscovery();
-        TDLog.v("start BT discovery: " + ret );
-        return ret;
-      } catch ( SecurityException e ) {
-        TDLog.e("SECURITY start discovery " + e.getMessage() );
-        // TDToast.makeBad("Security error: start discovery");
-      }
+    if ( adapter == null ) return 1;
+    if ( ! adapter.isEnabled() ) return 2;
+    if ( adapter.getState() != 12 ) return 3; // BT off  " [10 off, 12 on]"); 
+    if ( adapter.isDiscovering() ) return 4;
+    try {
+      // TDLog.v("Device util BT scanmode " + adapter.getScanMode() + " [20 none, 21/23 connectable]"); 
+      boolean ret = adapter.startDiscovery();
+      TDLog.v("Device util - start BT discovery: " + ret );
+      return ( ret ? 0 : 5 );
+    } catch ( SecurityException e ) {
+      TDLog.e("Device util - security error " + e.getMessage() );
+      // TDToast.makeBad("Security error: start discovery");
+      return 6;
     }
-    return false;
   }
 
   /** cancel BT devices discovery
