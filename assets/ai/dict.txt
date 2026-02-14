@@ -6,7 +6,7 @@ azimuth:{
   fr: 
   hu: azimut
   it: azimut
-  pt: 
+  pt: azimute
   ru: азимут
 }
 bearing:{
@@ -17,7 +17,7 @@ bearing:{
   fr: 
   hu: irány
   it: direzione
-  pt: 
+  pt: direção
   ru: направление
 }
 closure error:{
@@ -28,7 +28,7 @@ closure error:{
   fr: erreur de bouclage
   hu: záráshiba
   it: errore di chiusura
-  pt: 
+  pt: erro de fechamento
   ru: ошибка закрытия кольца
 }
 compass:{
@@ -39,7 +39,7 @@ compass:{
   fr: 
   hu: kompasz
   it: bussola
-  pt: 
+  pt: bússola
   ru: компас
 }
 cross-section:{
@@ -50,7 +50,7 @@ cross-section:{
   fr: coupe transversale
   hu: keresztmetszet
   it: sezione trasversale
-  pt:  
+  pt: corte
   ru: поперечное сечение
 }
 denivelation:{
@@ -61,7 +61,7 @@ denivelation:{
   fr: dénivelé
   hu: magasságkülönbség
   it: dislivello
-  pt: desnivel 
+  pt: desnível 
   ru: денивеляция
 }
 development:{
@@ -72,7 +72,7 @@ development:{
   fr: deveppement
   hu: járathossz
   it: sviluppo
-  pt:  
+  pt: desenvolvimento
   ru: общая длина хода
 }
 entrance:{
@@ -94,7 +94,7 @@ grid:{
   fr: 
   hu: rács
   it: reticolato
-  pt: 
+  pt: grade
   ru: сетка
 }
 leg:{
@@ -116,7 +116,7 @@ loop closure:{
   fr: 
   hu: hurok záródás
   it: chiusura di anelli
-  pt: 
+  pt: fechamento de poligonal
   ru: закрытие петли
 }
 midline:{
@@ -127,7 +127,7 @@ midline:{
   fr: cheminement
   hu: poligon vonal
   it: poligonale
-  pt: poligonal 
+  pt: linha de trena 
   ru: нитка хода
 }
 notebook:{
@@ -138,7 +138,7 @@ notebook:{
   fr: carnet topo
   hu: vázlat füzet
   it: tacquino
-  pt:  
+  pt: bloco de anotações
   ru: заметки
 }
 plan:{
@@ -149,7 +149,7 @@ plan:{
   fr: plan
   hu: alaprajz
   it: pianta
-  pt:  
+  pt: planta baixa
   ru: план
 }
 profile:{
@@ -160,7 +160,7 @@ profile:{
   fr: coupe developée
   hu: kiterített oldalnézet
   it: sezione longitudinale
-  pt: corte longitudinal
+  pt: perfil retificado
   ru: разрез развертка
 }
 projected profile:{
@@ -171,7 +171,7 @@ projected profile:{
   fr: coupe projectée
   hu: vetített oldalnézet
   it: sezione proiettata
-  pt: corte
+  pt: perfil
   ru: разрез проекция
 }
 range:{
@@ -182,7 +182,7 @@ range:{
   fr: extension
   hu: távolság
   it: estensione
-  pt:  
+  pt: extensão
   ru: расстояние
 }
 scale:{
@@ -193,7 +193,7 @@ scale:{
   fr: echelle
   hu: skála
   it: scala
-  pt:  
+  pt: escala
   ru: масштаб
 }
 section:{
@@ -204,7 +204,7 @@ section:{
   fr: coupe
   hu: metszet
   it: sezione
-  pt: 
+  pt: corte
   ru: разрез
 }
 shot:{
@@ -215,7 +215,7 @@ shot:{
   fr: visée
   hu: mérés
   it: tiro
-  pt: 
+  pt: medida
   ru: замер
 }
 splay:{
@@ -226,7 +226,7 @@ splay:{
   fr: 
   hu: sün
   it: splay
-  pt: 
+  pt: medida auxiliar
   ru: сплей
 }
 station:{
@@ -248,7 +248,7 @@ surveying:{
   fr: topographie
   hu: felmérés
   it: topografia
-  pt:  
+  pt: topografia
   ru: топосъёмка
 }
 tape:{
@@ -259,7 +259,7 @@ tape:{
   fr: decametre
   hu: mérőszalag
   it: bindella
-  pt:  
+  pt: trena
   ru: длина
 }
 x-section:{
@@ -270,6 +270,6 @@ x-section:{
   fr: coupe
   hu: keresztmetszet
   it: sezione
-  pt:  
+  pt: corte
   ru: поперечное сечение
 }
