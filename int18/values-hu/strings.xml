@@ -4,7 +4,7 @@
     <string name="ai_null_chat">Null MI chat</string>
     <string name="ai_error">MI hiba %1$s</string>
     <string name="ai_internet">Figyelem! MI súgóhoz web kapcsolat szükséges.</string>
-    <!-- TODO string name="ai_no_internet">No web connection.</string -->
+    <string name="ai_no_internet">Nincs web kapcsolat.</string>
     <string name="ai_prompt">Írd be a kérdést</string>
     <string name="ai_invalid_key">Valótlan API kulcs</string>
     <string name="ai_key_instruction">Az API-kulcs az Android belső memóriájában tárolódik, és csak a Google-nak kerül elküldésre.\nKeressen rá az interneten, hogyan szerezhet be Gemini API-kulcsot a Google-tól.</string>
@@ -352,7 +352,7 @@
     <string name="location_start_fine">Pontos helymeghatározás kezdés</string>
     <string name="location_enabled">Ellenőrizd a HELYMEGHATÁROZÁS engedélyezését</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
-    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <string name="discovery_error">BT keresési hiba: %1$s</string>
 
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
