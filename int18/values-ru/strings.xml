@@ -228,7 +228,7 @@
     <string name="device_status_silent_on">Без сохранения: вкл</string>
     <string name="device_status_silent_off">Без сохранения: выкл</string>
     <string name="bt_reset">Сброс соединения bluetooth</string>
-    <string name="bt_busy">Bluetooth занят</string>
+    <!-- UNUSED string name="bt_busy">Bluetooth занят</string -->
     <string name="save_as">сохранить как</string>
     <string name="nickname">Псевдоним</string>
     <string name="unknown_device_type">Неизвестный тип устройства %1$d</string>
@@ -378,7 +378,7 @@
     <string name="error_name_required">Требуется название</string>
     <!-- UNUSED string name="error_text_required">Требуется ввести текст</string -->
     <string name="error_station_number">Неверное кол-во пикетов</string>
-    <string name="error_name_duplicate">Повторяющееся имя</string>
+    <!-- UNUSED string name="error_name_duplicate">Повторяющееся имя</string -->
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
     <string name="error_profile_slant_section">Наклонные сечения не включены для разрезов</string>
     <string name="error_team_required">Нужно указать группу съёмки</string>
@@ -452,9 +452,9 @@
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
     <string name="no_device_window">Окно устройств недоступно во время загрузки данных</string>
-    <string name="no_device_found">Прибор не обнаружен</string>
+    <!-- UNUSED string name="no_device_found">Прибор не обнаружен</string -->
     <string name="no_feature_audio">Аудио не поддерживается</string>
-    <string name="no_feature_pdf">PDF не поддерживается</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF не поддерживается</string -->
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_geo_station">Ошибка: отсутствует пикет с координатами</string>
     <!-- UNUSED string name="no_geopoint_app">Нет приложения геопозиционирования</string -->
@@ -540,12 +540,11 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметровая-бумага</string>
 
-    <string name="start_scan">Начать сканирование</string>
-    <string name="stop_scan">Остановить сканирование</string>
-    <string name="scan_started">Начато обнаружение устройств</string>
-    <string name="scan_finished">Обнаружение устройств закончено</string>
-    <string name="scanning">Сканирование... Пожалуйста, подождите</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+    <!-- UNUSED string name="start_scan">Начать сканирование</string -->
+    <!-- UNUSED string name="stop_scan">Остановить сканирование</string -->
+    <!-- UNUSED string name="scan_started">Начато обнаружение устройств</string -->
+    <!-- UNUSED string name="scan_finished">Обнаружение устройств закончено</string -->
+    <string name="scanning">Сканирование&#8230; Пожалуйста, подождите</string>
 
     <!-- UNUSED string name="title_scan">Сканировать BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Сбой сканирования BLE</string -->
@@ -775,7 +774,6 @@
     <string name="trilateration_failure">Трилатерация не удалась %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Ошибка трилатерации %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Трилатерация выполнена: оставшаяся ошибка %1$.2f</string -->
-    <string name="trilateration_success">Трилатерация удалась: %1$d кластеров</string>
 
     <string name="survey_info">Статистика съёмки</string>
     <string name="stat_dates">С %1$s по %2$s</string>
@@ -994,7 +992,7 @@
     <string name="popup_do_splay">Сделать замер</string>
     <string name="popup_do_leg">Сделать три замера</string>
     <string name="popup_do_gm_data">Калибр. замер</string>
-    <string name="popup_do_gm_group">Группа Калибр.</string>
+    <!-- UNUSED string name="popup_do_gm_group">Группа Калибр.</string -->
     <string name="popup_do_laser">Лазер</string>
     <string name="popup_do_scan">Сканировать</string>
     <string name="popup_do_shot">Замер</string>
@@ -1304,7 +1302,6 @@
     <string name="audio_overwrite">Перезаписать ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <string name="import_functional">Импортировать только функциональные настройки</string>
     <string name="import_trox">Формат файла Trox</string>
     <string name="import_lrud">Импорт ЛПВН</string>
     <string name="import_leg_first">Замер перед ЛПВН сплеями</string>
@@ -1316,7 +1313,6 @@
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
-    <string name="title_bt_search">Сканирование Bluetooth</string>
     <string name="title_recalibrate">Калибровки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>

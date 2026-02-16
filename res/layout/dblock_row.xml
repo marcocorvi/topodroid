@@ -26,6 +26,7 @@
     android:inputType="text"
     android:editable="true"
     android:imeOptions="actionDone"
+    android:autofillHints="no"
   /> <!-- editable=true is deprecated and does not help -->
   <!--
     android:importantForAutofill="no"
@@ -47,6 +48,7 @@
     android:inputType="text"
     android:editable="true"
     android:imeOptions="actionDone"
+    android:autofillHints="no"
   /> <!-- editable=true is deprecated and does not help -->
   <!--
     android:hint="@string/hint_to"

@@ -211,7 +211,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="device_status_silent_on">Silencioso: on</string>
   <string name="device_status_silent_off">Silencioso: off</string>
   <string name="bt_reset">Reiniciar conexão Bluetooth</string>
-  <string name="bt_busy">Bluetooth ocupado</string>
+  <!-- UNUSED string name="bt_busy">Bluetooth ocupado</string -->
   <string name="save_as">Gravar como</string>
   <string name="nickname">Apelido</string>
   <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
@@ -352,7 +352,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="error_name_required">Nome exigido</string>
   <!-- UNUSED string name="error_text_required">Text required</string -->
   <string name="error_station_number">Quantidade incorreta de bases</string>
-  <string name="error_name_duplicate">Nome duplicado</string>
+  <!-- UNUSED string name="error_name_duplicate">Nome duplicado</string -->
   <string name="error_no_section_in_section">Corte dentro de corte não suportado</string>
   <string name="error_profile_slant_section">Corte inclinado não habilitado na visualização de perfil</string>
   <string name="error_team_required">Equipe exigida</string>
@@ -420,9 +420,9 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="no_db">Nenhum banco de dados</string>
   <string name="no_device_address">Nenhum dispositivo selecionado</string>
   <string name="no_device_window">Tela Dispositivos não disponível durante download</string>
-  <string name="no_device_found">Nenhum dispositivo encontrado</string>
+  <!-- UNUSED string name="no_device_found">Nenhum dispositivo encontrado</string -->
   <string name="no_feature_audio">Sem suporte para áudio</string>
-  <string name="no_feature_pdf">PDF não suportado</string>
+  <!-- UNUSED string name="no_feature_pdf">PDF não suportado</string -->
   <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
   <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
   <!-- UNUSED string name="no_geopoint_app">No GNSS app</string -->
@@ -507,12 +507,11 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_plot_search">BUSCA BASE</string>
   <!-- FIXED_ZOOM -->
   <string name="zoom_fixed">Papel milimetrado</string>
-  <string name="start_scan">Começar varredura</string>
-  <string name="stop_scan">Parar varredura</string>
-  <string name="scan_started">Busca iniciada</string>
-  <string name="scan_finished">Busca finalizada</string>
-  <string name="scanning">Busca em andamento ... Por favor espere</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+  <!-- UNUSED string name="start_scan">Começar varredura</string -->
+  <!-- UNUSED string name="stop_scan">Parar varredura</string -->
+  <!-- UNUSED string name="scan_started">Busca iniciada</string -->
+  <!-- UNUSED string name="scan_finished">Busca finalizada</string -->
+  <string name="scanning">Busca em andamento &#8230; Por favor espere</string>
   <!-- UNUSED string name="title_scan">Varredura BLE</string -->
   <!-- UNUSED string name="ble_scan_failed">Busca por dispositivos BLE falhou</string -->
   <!-- UNUSED string name="ble_gatt_failure">Falha no dispositivo BLE</string -->
@@ -727,7 +726,6 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="trilateration_failure">Trilateração falhou %1$d / %2$d </string>
   <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
   <!-- UNUSED string name="trilateration_succeeded">Trilateração finalizada com sucesso: erro residual %1$.2f</string -->
-  <string name="trilateration_success">Trilateração finalizada com sucesso: %1$d blocos</string>
   <string name="survey_info">Estatísticas da topo</string>
   <string name="stat_dates">De %1$s até %2$s</string>
   <string name="stat_devices">Dispositivos - %1$d: %2$s</string>
@@ -932,7 +930,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="popup_do_splay">Medida auxiliar</string>
   <string name="popup_do_leg">Visada</string>
   <string name="popup_do_gm_data">Medida de calibração</string>
-  <string name="popup_do_gm_group">Grupo calib</string>
+  <!-- UNUSED string name="popup_do_gm_group">Grupo calib</string -->
   <string name="popup_do_laser">Laser</string>
   <string name="popup_do_scan">Varrer</string>
   <string name="popup_do_shot">Medir</string>
@@ -1222,7 +1220,6 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="audio_delete">Apagar?</string>
   <string name="audio_overwrite">Sobreescrever?</string>
   <!-- UNUSED string name="playing">Playing %1$s</string -->
-  <string name="import_functional">Importar somente configurações funcionais</string>
   <string name="import_trox">Formato de arquivo Trox</string>
   <string name="import_lrud">Importar EDTC</string>
   <string name="import_leg_first">Visada antes de EDTC</string>
@@ -1233,7 +1230,6 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
-  <string name="title_bt_search">Busca por Bluetooth</string>
   <string name="title_recalibrate">Calibrações</string>
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
@@ -1832,8 +1828,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_saved_stations_summary">Apresentar bases gravadas em laranja</string>
   <string name="pref_legonly_update_title">Só visada redesenha</string>
   <string name="pref_legonly_update_summary">Somente recalcular e redesenhar linha de trena quando receber uma nova visada (para modo de download contínuo de dados)</string>
-  <string name="pref_full_affine_title">Transformação afim</string>
-  <string name="pref_full_affine_summary">Habilitar transformação afim em croquis (permite distorcer alterando proporções e posição)</string>
+  <string name="pref_full_affine_title">Transformação a fim</string>
+  <string name="pref_full_affine_summary">Habilitar transformação a fim em croquis (permite distorcer alterando proporções e posição)</string>
   <string name="pref_loopClosure_title">Fech poligonal</string>
   <string name="pref_loopClosure_summary">Compensação de erro de fechamento de poligonais</string>
   <string name="pref_loop_thr_title">Lim poligonal</string>

@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+// import com.topodroid.dev.BtScan;
 import com.topodroid.dev.cavway.CavwayMemoryDialog;
 import com.topodroid.dev.cavway.CavwayInfoDialog;
 import com.topodroid.dev.cavway.CavwayInfoReadTask;
@@ -130,7 +131,7 @@ public class DeviceActivity extends Activity
   private DeviceHelper mApp_mDData;
 
   private BleScanner mBleScanner = null;
-  private DeviceSearch mDeviceSearch = null;
+  // private BtScan mBtScan = null;
 
   // referrer ( getReferrer() is from API-22 ) // FIXME
   // public final int REFERRER_NONE = 0;
@@ -933,10 +934,10 @@ public class DeviceActivity extends Activity
     int k = 0;
     if ( k < mNrButton1 && b == mButton1[k++] ) {         // RESET COMM STATE [This is fast]
       if ( mBTisScanning ) {
-        if ( mDeviceSearch != null ) {
-          mDeviceSearch.resetReceiver();
-          mDeviceSearch = null;
-        }
+        // if ( mBtScan != null ) {
+        //   mBtScan.resetReceiver();
+        //   mBtScan = null;
+        // }
         if ( mBleScanner != null ) {
           mBleScanner.stopBleScan();
           mBleScanner = null;
@@ -1366,7 +1367,7 @@ public class DeviceActivity extends Activity
     mBTisScanning = scanning;
     TDandroid.setButtonBackground( mButton1[IDX_BT], (scanning ? mBMbt_scan : mBMbt ) );
     if ( ! scanning ) {
-      mDeviceSearch = null;
+      // mBtScan = null;
       mBleScanner   = null;
     }
   }
@@ -1381,25 +1382,27 @@ public class DeviceActivity extends Activity
     if ( p++ == pos ) { // BT_SCAN
       if ( mBTisScanning ) return;
       if ( TDandroid.BELOW_API_31 ) {
-        // Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceSearch.class );
-        // scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceSearch.DEVICE_SCAN );
+        // Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, BtScan.class );
+        // scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, BtScan.DEVICE_SCAN );
         // startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
         // TDToast.makeLong(R.string.wait_scan );
         if ( ! TDandroid.hasLocation( this ) ) { // check if location is enabled
           TDToast.makeWarn( R.string.location_enabled );
-        } else {
-          mDeviceSearch = new DeviceSearch( this, this ); // ).show();
-          if ( mDeviceSearch.scanBtDevices() ) {
-            setBtScanning( true );
-          } else {
-            mDeviceSearch = null;
-          }
+          return;
         }
-      } else {
+        // else {
+        //   mBtScan = new BtScan( this, this ); // ).show();
+        //   if ( mBtScan.scanBtDevices() ) {
+        //     setBtScanning( true );
+        //   } else {
+        //     mBtScan = null;
+        //   }
+        // }
+      } // else {
         mBleScanner = new BleScanner( this, this );
         mBleScanner.startBleScan( new BleScanCallback(this, mBleScanner) );
         setBtScanning( true );
-      }
+      // }
 
     // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC BLE_SCAN
     //   BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();

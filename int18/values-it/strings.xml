@@ -227,7 +227,7 @@
     <string name="device_status_silent_on">Silenzioso: on</string>
     <string name="device_status_silent_off">Silenzioso: off</string>
     <string name="bt_reset">Resettare la connessione bluetooth</string>
-    <string name="bt_busy">Bluetooth occupato</string>
+    <!-- UNUSED string name="bt_busy">Bluetooth occupato</string -->
     <string name="save_as">salva come</string>
     <string name="nickname">Nome</string>
     <string name="unknown_device_type">Tipo dispositivo non noto: %1$d</string>
@@ -376,7 +376,7 @@
     <string name="error_name_required">Nome mancante</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Numero caposaldo errato</string>
-    <string name="error_name_duplicate">Nome duplicato</string>
+    <!-- UNUSED string name="error_name_duplicate">Nome duplicato</string -->
     <string name="error_no_section_in_section">No X-section in X-section</string>
     <string name="error_profile_slant_section">Sezioni inclinate disabilitate nel profilo</string>
     <string name="error_team_required">Nomi rilevatori mancanti</string>
@@ -450,9 +450,9 @@
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_window">Finestra dispositivi disabilitata durante scaricamento</string>
-    <string name="no_device_found">Dispositivi non trovati</string>
+    <!-- UNUSED string name="no_device_found">Dispositivi non trovati</string -->
     <string name="no_feature_audio">Audio non supportato</string>
-    <string name="no_feature_pdf">PDF non supportato</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF non supportato</string -->
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
     <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
@@ -538,12 +538,11 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Carta millimetrata</string>
 
-    <string name="start_scan">Inizia scansione</string>
-    <string name="stop_scan">Termina scansione</string>
-    <string name="scan_started">Ricerca iniziata</string>
-    <string name="scan_finished">Ricerca finita</string>
-    <string name="scanning">Scansione ... Attendi</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+    <!-- UNUSED string name="start_scan">Inizia scansione</string -->
+    <!-- UNUSED string name="stop_scan">Termina scansione</string -->
+    <!-- UNUSED string name="scan_started">Ricerca iniziata</string -->
+    <!-- UNUSED string name="scan_finished">Ricerca finita</string -->
+    <string name="scanning">Scansione &#8230; Attendi</string>
 
     <!-- UNUSED string name="title_scan">Scansione BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Scansione BLE fallita</string -->
@@ -774,7 +773,6 @@
     <string name="trilateration_failure">Trilaterazione fallita: %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Trilateratione: errore %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilaterazione: errore rimasto %1$.2f</string -->
-    <string name="trilateration_success">Trilateratione: %1$d clusters</string>
 
     <string name="survey_info">Info rilievo</string>
     <string name="stat_dates">Da %1$s a %2$s</string>
@@ -993,7 +991,7 @@
     <string name="popup_do_splay">Splay</string>
     <string name="popup_do_leg">Battuta</string>
     <string name="popup_do_gm_data">Tiro di calibr.</string>
-    <string name="popup_do_gm_group">Gruppo calibr.</string>
+    <!-- UNUSED string name="popup_do_gm_group">Gruppo calibr.</string -->
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scansione</string>
     <string name="popup_do_shot">Tiro</string>
@@ -1303,7 +1301,6 @@
     <string name="audio_overwrite">Sovrascrivi ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <string name="import_functional">Importa solo impostazioni funzionali</string>
     <string name="import_trox">File formato Trox</string>
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
@@ -1315,7 +1312,6 @@
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
-    <string name="title_bt_search">Scansione Bluetooth</string>
     <string name="title_recalibrate">Calibrazioni</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calibr.</string>

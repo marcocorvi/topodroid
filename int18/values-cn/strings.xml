@@ -230,7 +230,7 @@
     <string name="device_status_silent_on">静音: 开</string>
     <string name="device_status_silent_off">静音: 关</string>
     <string name="bt_reset">重置蓝牙连接</string>
-    <string name="bt_busy">蓝牙忙碌中</string>
+    <!-- UNUSED string name="bt_busy">蓝牙忙碌中</string -->
     <string name="save_as">另存为</string>
     <string name="nickname">别称</string>
     <string name="unknown_device_type">无法识别的设备 %1$d</string>
@@ -380,7 +380,7 @@
     <string name="error_name_required">输入名称</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">错误的站点数</string>
-    <string name="error_name_duplicate">重复名称</string>
+    <!-- UNUSED string name="error_name_duplicate">重复名称</string -->
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
     <string name="error_profile_slant_section">在剖面图视图中没有启用倾斜截面</string>
     <string name="error_team_required">团队规则</string>
@@ -455,9 +455,9 @@
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>
     <string name="no_device_window">下载时设备窗口不可用</string>
-    <string name="no_device_found">未发现设备</string>
+    <!-- UNUSED string name="no_device_found">未发现设备</string -->
     <string name="no_feature_audio">音频不支持</string>
-    <string name="no_feature_pdf">PDF格式不支持</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF格式不支持</string -->
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位测点</string>
     <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
@@ -543,12 +543,11 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">方格纸</string>
 
-    <string name="start_scan">开始扫描</string>
-    <string name="stop_scan">停止扫描</string>
-    <string name="scan_started">开启蓝牙扫描</string>
-    <string name="scan_finished">蓝牙扫描结束</string>
-    <string name="scanning">扫描中 ... 请等待</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+    <!-- UNUSED string name="start_scan">开始扫描</string -->
+    <!-- UNUSED string name="stop_scan">停止扫描</string -->
+    <!-- UNUSED string name="scan_started">开启蓝牙扫描</string -->
+    <!-- UNUSED string name="scan_finished">蓝牙扫描结束</string -->
+    <string name="scanning">扫描中 &#8230; 请等待</string>
 
     <!-- UNUSED string name="title_scan">BLE扫描</string -->
     <!-- UNUSED string name="ble_scan_failed">蓝牙设备扫描失败</string -->
@@ -779,7 +778,6 @@
     <string name="trilateration_failure">三点测距失败 %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <string name="trilateration_success">三点测距成功: %1$d 扇区</string>
 
 
     <string name="survey_info">测量信息</string>
@@ -998,7 +996,7 @@
     <string name="popup_do_splay">侧线测量</string>
     <string name="popup_do_leg">主线测量</string>
     <string name="popup_do_gm_data">校准测量</string>
-    <string name="popup_do_gm_group">校准. 数据组</string>
+    <!-- UNUSED string name="popup_do_gm_group">校准. 数据组</string -->
     <string name="popup_do_laser">激光</string>
     <string name="popup_do_scan">扫描</string>
     <string name="popup_do_shot">测射</string>
@@ -1309,7 +1307,6 @@
     <string name="audio_overwrite">覆盖 ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <string name="import_functional">只导入功能设置</string>
     <string name="import_trox">Trox 文件格式</string>
     <string name="import_lrud">输入 左右上下</string>
     <string name="import_leg_first">主线在左右上下侧线之前</string>
@@ -1321,7 +1318,6 @@
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
-    <string name="title_bt_search">蓝牙扫描</string>
     <string name="title_recalibrate">校准</string>
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>

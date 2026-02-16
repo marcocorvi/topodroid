@@ -228,7 +228,7 @@
     <string name="device_status_silent_on">Csendes mód: be</string>
     <string name="device_status_silent_off">Csendes mód: ki</string>
     <string name="bt_reset">Bluetooth kapcsolat újraindítása</string>
-    <string name="bt_busy">Bluetooth foglalt</string>
+    <!-- UNUSED string name="bt_busy">Bluetooth foglalt</string -->
     <string name="save_as">mentés mint</string>
     <string name="nickname">Becenév</string>
     <string name="unknown_device_type">Ismeretlen műszer típus %1$d</string>
@@ -377,7 +377,7 @@
     <string name="error_name_required">Név szükséges</string>
     <!-- UNUSED string name="error_text_required">Szöveg szükséges</string -->
     <string name="error_station_number">Rossz pont számok</string>
-    <string name="error_name_duplicate">Duplikált név</string>
+    <!-- UNUSED string name="error_name_duplicate">Duplikált név</string -->
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
     <string name="error_profile_slant_section">Döntött ketesztmetszet nem engedélyezett oldalnézetben</string>
     <string name="error_team_required">Csapat szükséges</string>
@@ -452,9 +452,9 @@
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
     <string name="no_device_window">Műszar ablak nem elérhető a letöltés közben</string>
-    <string name="no_device_found">Nem talált műszert</string>
+    <!-- UNUSED string name="no_device_found">Nem talált műszert</string -->
     <string name="no_feature_audio">Hang nem támogatott</string>
-    <string name="no_feature_pdf">PDF nem támogatott</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF nem támogatott</string -->
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
     <!-- UNUSED string name="no_geopoint_app">Nincs helymeghatározó app</string -->
@@ -541,12 +541,11 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Rajz felület</string>
 
-    <string name="start_scan">Keresés indítás</string>
-    <string name="stop_scan">Keresés leállítás</string>
-    <string name="scan_started">Felderítés elkezdődött</string>
-    <string name="scan_finished">Felderítés befejeződött</string>
-    <string name="scanning">Keresés ... Kérlek várj</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+    <!-- UNUSED string name="start_scan">Keresés indítás</string -->
+    <!-- UNUSED string name="stop_scan">Keresés leállítás</string -->
+    <!-- UNUSED string name="scan_started">Felderítés elkezdődött</string -->
+    <!-- UNUSED string name="scan_finished">Felderítés befejeződött</string -->
+    <string name="scanning">Keresés &#8230; Kérlek várj</string>
 
     <!-- UNUSED string name="title_scan">BLE keresés</string -->
     <!-- UNUSED string name="ble_scan_failed">BLE keresés eredménytelen</string -->
@@ -778,7 +777,6 @@
     <string name="trilateration_failure">Ívmetszés sikertelen %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Ívmetszési hiba %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Ívmetszés sikerült: fennmaradó hiba %1$.2f</string -->
-    <string name="trilateration_success">Ívmetszés sikerült: %1$d csoport</string>
 
 	
     <string name="survey_info">Felmérés információ</string>
@@ -997,7 +995,7 @@
     <string name="popup_do_splay">Segéd mérés</string>
     <string name="popup_do_leg">Poligon mérések</string>
     <string name="popup_do_gm_data">Kalibr. mérés</string>
-    <string name="popup_do_gm_group">Kalib. csoport</string>
+    <!-- UNUSED string name="popup_do_gm_group">Kalib. csoport</string -->
     <string name="popup_do_laser">Lézer</string>
     <string name="popup_do_scan">Scan mérés</string>
     <string name="popup_do_shot">Mérés</string>
@@ -1309,7 +1307,6 @@
     <string name="audio_overwrite">Felülírja?</string>
     <!-- UNUSED string name="playing">Lejátszás %1$s</string -->
   
-    <string name="import_functional">Csak a funkcionális beállítások betöltése</string>
     <string name="import_trox">Trox fájl formátum</string>
     <string name="import_lrud">Import BJFL</string>
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
@@ -1321,7 +1318,6 @@
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
-    <string name="title_bt_search">Bluetooth szkennelés</string>
     <string name="title_recalibrate">Klibrációk</string>
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>

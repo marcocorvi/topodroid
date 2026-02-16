@@ -147,20 +147,20 @@
           android:id="@+id/ply_lrud"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="LRUD"
+          android:text="@string/lrud"
           android:checked="true"
           />
       <RadioButton
           android:id="@+id/ply_snumber"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="S1..S1000"
+          android:text="@string/s1_s1000"
           />
       <RadioButton
           android:id="@+id/ply_minus"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="-"
+          android:text="@string/minus"
           />
     </RadioGroup>
   </LinearLayout>

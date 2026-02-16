@@ -190,7 +190,7 @@
     <!-- UNUSED string name="algo_minimum">minimum</string -->
     <!-- UNUSED string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string -->
     <string name="device_address">Adresse %1$s</string>
-    <string name="address">Addresse</string>
+    <string name="address">Adresse</string>
     <string name="model_invalid">Ungültige Nummer</string>
     <string name="model_missing">Fehlende Nummer</string>
     <!-- UNUSED string name="device_busy">Gerät arbeitet</string -->
@@ -217,7 +217,7 @@
     <string name="device_status_silent_on">Lautlos: Ein</string>
     <string name="device_status_silent_off">Lautlos: Aus</string>
     <string name="bt_reset">Bluetooth-Verbindung zurückgesetzt</string>
-    <string name="bt_busy">Bluetooth beschäftigt</string>
+    <!-- UNUSED string name="bt_busy">Bluetooth beschäftigt</string -->
     <string name="save_as">Speichern als</string>
     <string name="nickname">Anzeigename</string>
     <string name="unknown_device_type">Unbekanntes Gerät %1$d</string>
@@ -360,7 +360,7 @@
     <string name="error_name_required">Name erforderlich</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Falsche Anzahl Messpunkte</string>
-    <string name="error_name_duplicate">Name bereits verwendet</string>
+    <!-- UNUSED string name="error_name_duplicate">Name bereits verwendet</string -->
     <string name="error_no_section_in_section">Profil innerhalb eines Profils nicht erlaubt</string>
     <string name="error_profile_slant_section">Geneigtes Profil nicht aktiviert in der Seitenansicht</string>
     <string name="error_team_required">Messteam erforderlich</string>
@@ -429,9 +429,9 @@
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_window">Geräteansicht nicht verfügbar während dem Download</string>
-    <string name="no_device_found">Kein Gerät gefunden</string>
+    <!-- UNUSED string name="no_device_found">Kein Gerät gefunden</string -->
     <string name="no_feature_audio">Audio nicht unterstützt</string>
-    <string name="no_feature_pdf">PDF nicht unterstützt</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF nicht unterstützt</string -->
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_geo_station">Fehler: keine geolokalisierte Station</string>
     <!-- UNUSED string name="no_geopoint_app">No GNSS app</string -->
@@ -513,12 +513,11 @@
     <string name="menu_plot_search">MESSPUNKT SUCHE</string>
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papier-Massstab</string>
-    <string name="start_scan">BLE-Scan starten</string>
-    <string name="stop_scan">BLE-Scan stoppen</string>
-    <string name="scan_started">Suche gestartet</string>
-    <string name="scan_finished">Suche abgeschlossen</string>
-    <string name="scanning">Suchen ... Bitte warten</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+    <!-- UNUSED string name="start_scan">BLE-Scan starten</string -->
+    <!-- UNUSED string name="stop_scan">BLE-Scan stoppen</string -->
+    <!-- UNUSED string name="scan_started">Suche gestartet</string -->
+    <!-- UNUSED string name="scan_finished">Suche abgeschlossen</string -->
+    <string name="scanning">Suchen &#8230; Bitte warten</string>
 
     <!-- UNUSED string name="title_scan">BLE-Scan</string -->
     <!-- UNUSED string name="ble_scan_failed">BLE scan fehlgeschlagen</string -->
@@ -735,7 +734,6 @@
     <string name="trilateration_failure">Trilateration fehlgeschlagen %1$d / %2$d</string>
     <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <string name="trilateration_success">Trilateration erfolgreich: %1$d Cluster</string>
 
     <string name="survey_info">Vermessungsinfo</string>
     <string name="stat_dates">Von %1$s nach %2$s</string>
@@ -940,7 +938,7 @@
     <string name="popup_do_splay">Hilfszug messen</string>
     <string name="popup_do_leg">Messzug messen (n Messungen)</string>
     <string name="popup_do_gm_data">Testmessung</string>
-    <string name="popup_do_gm_group">Kalib. Gruppe</string>
+    <!-- UNUSED string name="popup_do_gm_group">Kalib. Gruppe</string -->
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scannen</string>
     <string name="popup_do_shot">Messen</string>
@@ -990,7 +988,7 @@
     <string name="hint_notes">Notizen</string>
     <string name="hint_label">Beschriftung</string>
     <string name="hint_comment">Kommentar</string>
-    <string name="hint_size">Grösse [m]</string>
+    <string name="hint_size">Größe [m]</string>
     <string name="hint_text">Text</string>
     <string name="hint_options">Optionen</string>
     <string name="hint_name">Name</string>
@@ -1233,7 +1231,6 @@
     <string name="audio_delete">Löschen ?</string>
     <string name="audio_overwrite">Überschreiben ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
-    <string name="import_functional">Importiere nur vorhandene Einstellungen</string>
     <string name="import_trox">Trox Format importieren</string>
     <string name="import_lrud">LRUD importieren</string>
     <string name="import_leg_first">Messzug vor LRUD</string>
@@ -1244,7 +1241,6 @@
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_audio">Audio-Kommentar</string>
     <string name="title_audio_list">Audioaufnahmen</string>
-    <string name="title_bt_search">Bluetooth Suche</string>
     <string name="title_recalibrate">Kalibrierungen</string>
     <string name="title_calib">Kalibrierung</string>
     <string name="title_calib_check">Kalibrierungs-Testmessungen</string>
@@ -1415,8 +1411,8 @@
   <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
     <string name="pref_orientation_title">Bildschirmausrichtung</string>
     <string name="pref_orientation_summary">Bildschirmausrichtung fixieren oder automatisch</string>
-    <string name="pref_single_back_title">Dialoge mit einfachem Zurück schliessen</string>
-    <string name="pref_single_back_summary">Schliesst Dialoge mit einem einzelnen Click auf Zurück</string>
+    <string name="pref_single_back_title">Dialoge mit einfachem Zurück schließen</string>
+    <string name="pref_single_back_summary">Schließt Dialoge mit einem einzelnen Click auf Zurück</string>
     <string name="pref_hide_navbar_title">Navigationsleiste</string>
     <string name="pref_hide_navbar_summary">Versteckt (zeigen durch hochziehen)</string>
     <string name="pref_raw_data_title">Rohdaten anzeigen</string>
@@ -1625,7 +1621,7 @@
     <string name="pref_text_size_title">Schriftgröße</string>
     <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
     <string name="pref_symbol_size_title">Symbolgrösse</string>
-    <string name="pref_symbol_size_summary">Grösse der Symbole in der Symbolleiste unten</string>
+    <string name="pref_symbol_size_summary">Größe der Symbole in der Symbolleiste unten</string>
     <string name="pref_closeness_title">Auswählradius</string>
     <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
     <string name="pref_eraseness_title">Löschradius</string>

@@ -83,7 +83,7 @@ public class GlNames extends GlShape
       mHighlightStations = new ArrayList< Integer >();
       int k = 0;
       for ( GlName name : mNames ) {
-        if ( name.startsWith( prefix ) ) mHighlightStations.add( new Integer(k) ); // lint: Use Integer.valueOf(k) instead
+        if ( name.startsWith( prefix ) ) mHighlightStations.add( Integer.valueOf(k) ); // lint: Use Integer.valueOf(k) instead
         ++k;
       }
     }

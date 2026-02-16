@@ -25,6 +25,8 @@
   <string name="with_prefix" translatable="false">WITH-PREFIX</string>
 
   <string name="epsg" translatable="false">EPSG</string>
+  <!-- string name="lrud" translatable="false">LRUD</string THIS IS TRANSLATABLE -->
+  <string name="s1_s1000" translatable="false">S1..S1000</string>
 
   <!-- UNUSED string name="number_sign" translatable="false"> # </string -->
   <!-- UNUSED string name="char_x" translatable="false"> X </string -->

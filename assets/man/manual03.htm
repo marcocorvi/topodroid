@@ -1,27 +1,14 @@
 <html><body>
 <h3>[3] DEVICE WINDOW</h3>
 
-<b>IMPORTANT</b>.
-In order to use a supported device with TopoDroid, the device must be first
-<b>connected</b> and <b>paired</b> with Android.<br>
-This can be done with the <i>Settings</i> app.<br>
-If it does not pair automatically the <i>DistoX</i> PIN is "0000", four zeros.<br>
-If it does not pair automatically the <i>SAP</i> PIN is "000000", six zeros.<br><p>
-
-
 Tap the <i>Device</i> button in the <u>Main window</u> to open the <i>Device Window</i>.
 The list of known devices is shown at the bottom.<br><p>
 
-The supported devices are: <i>DistoX</i>, <i>DistoX2</i>, <i>DistoXBLE</i>, <i>SAP5</i>, <i>SAP6</i>,
-<i>BRIC4</i>, <i>BRIC5</i>, <i>Cavway X1</i>, and <i>DiscoX</i>.<br>
-<b>TopoDroid does not recognize devices with name that is not one of these.</b><br>
 <img src="btn_devices.png" height="36" border="1"><br><p>
 
 TopoDroid works with one device at a time.
 To select it tap on its entry in the list. The name of the selected device is shown at the top, just below the buttons.
 If no device is selected, there is a red message saying "Device not selected".<br><p>
-
-If the device list is empty, or the device does not show up with its MAC address, it needs to be connected and/or paired with Android first using the system dialog.<br><p>
 
 <b>Supported devices</b><br>
 TopoDroid uses only devices connected and paired with the Android system.
@@ -39,19 +26,22 @@ The following devices are supported or with support in progress:
 <tr><td>Cavway X1</td><td>Cavway</td><td>full</td></tr>
 <tr><td>DiscoX</td><td>DiscoX</td><td>under debug [T]</td></tr>
 </table>
-<br><p>
-
-<b>Device nickname</b><br>
-By default TopoDroid uses the bluetooth MAC address as name for a device.
-The devices can be given nicknames to distinguish among several devices more easily.<br><p>
-
-<i>Note. Buttons and menus marked with [*] are specific for the DistoX and need the device to be on.</i><br><p>
+<br>
+TopoDroid does not recognize devices with name that is not one of these.<br><p>
 
 <h4>ACTIONS</h4>
 <ul style="margin-top=0">
 <li>tap on a device entry makes it the active device</li>
-<li>long tap on a device entry sets the <a href="page_device_name.htm">nickname</a> or set the "second" DistoX</li>
+<li>long tap on a device entry opens a <a href="page_device_name.htm">dialog</a> to edit the device properties</li>
 </ul><br><p>
+
+<b>Device properties</b><br>
+By default TopoDroid uses the bluetooth MAC address as name for a device.
+The devices can be given <b>nicknames</b> to distinguish among several devices more easily.<br>
+iAlthough TopoDroid works with one device at a time, it allows to set a second working device.
+This options makes it faster to switch between the two devices during the surveying.<br>
+Finally it is possible to "forget" a device: this effectively removes the device from TopoDroid database
+and from the Android connected devices (if was bonded).<br><p>
 
 <h4>BUTTONS</h4>
 <ul style="margin-top=0">
@@ -77,7 +67,7 @@ This can happen when te <u>Device window</u> is opened from the <u>Survey Data w
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
-<!-- li><u>Scan</u> for new DistoX devices [N,*]. You might have to try two or three times before the DistoX is found</li -->
+<li><u>Scan</u> for new devices [N,*].</li>
 <!-- li><u>BLE Scan</u> for new BLE devices [N,*].</li -->
 <!-- li><u>Pair</u> the active DistoX with the Android, if not already paired [N,*]</li -->
 <li><u>Disconnect</u> clears the active device [A]</li>
@@ -86,6 +76,17 @@ This can happen when te <u>Device window</u> is opened from the <u>Survey Data w
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ul><br>
+
+<b>Bluetooth scan</b><br>
+If a BLE device does not show up with its MAC address, it can be discovered with the "BT scan" menu.
+To add BLE devices it is enough to do a BT scan with the device on. 
+For up to Android-11 the device is not found unless "Location" is active.
+The scan lasts a few seconds and the discovered devices appear in the list.
+Durin a scan the "Bluetooth" button turns orange, and a press on it ends the scan.<br><p> 
+
+Bluetooth classic devices (DistoX v. 1 and 2) must be connected and paired to Android using the system Setting app.<br>
+The <i>DistoX</i> PIN is "0000", four zeros.<br>
+The <i>SAP</i> PIN is "000000", six zeros.<br><p>
 
 <h4>DEVICE SETTINGS</h4>
 <ul style="margin-top=0">

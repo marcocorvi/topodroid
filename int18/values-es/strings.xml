@@ -230,7 +230,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="device_status_silent_on">Silenciar: on</string>
     <string name="device_status_silent_off">Silenciar: off</string>
     <string name="bt_reset">Reinicio conexión bluetooth</string>
-    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
+    <!-- UNUSED string name="bt_busy">Bluetooth busy</string -->
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
     <string name="unknown_device_type">Tipo de dispositivo desconocido: %1$d</string>
@@ -379,7 +379,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_name_required">Introducir nombre</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Número incorrecto de estaciones</string>
-    <string name="error_name_duplicate">Nombre duplicado</string>
+    <!-- UNUSED string name="error_name_duplicate">Nombre duplicado</string -->
     <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
     <string name="error_profile_slant_section">Tramos inclinados deshabilitados en perfil</string>
     <string name="error_team_required">Faltan nombres de detectores</string>
@@ -453,9 +453,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_window">Ventana del dispositivo deshabilitada durante la descarga</string>
-    <string name="no_device_found">Dispositivo non trovato</string>
+    <!-- UNUSED string name="no_device_found">Dispositivo non trovato</string -->
     <string name="no_feature_audio">Audio no compatible</string>
-    <string name="no_feature_pdf">PDF no soportado</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF no soportado</string -->
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
     <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
@@ -541,12 +541,11 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel cuadriculado</string>
 
-    <string name="start_scan">Inicio escaneo</string>
-    <string name="stop_scan">Fin de escaneo</string>
-    <!-- TODO string name="scan_started">Discovery started</string -->
-    <!-- TODO string name="scan_finished">Discovery finished</string -->
+    <!-- UNUSED string name="start_scan">Inicio escaneo</string -->
+    <!-- UNUSED string name="stop_scan">Fin de escaneo</string -->
+    <!-- UNUSED string name="scan_started">Discovery started</string -->
+    <!-- UNUSED string name="scan_finished">Discovery finished</string -->
     <!-- TODO string name="scanning">Scanning ... Please wait</string -->
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
 
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
@@ -775,7 +774,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="trilateration_failure">Fallo trilateración  %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Error trilateración %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <string name="trilateration_success">Trilateración correcta: %1$d clústeres</string>
 
     <string name="survey_info">Info Topografía</string>
     <string name="stat_dates">De %1$s a %2$s</string>
@@ -992,7 +990,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_do_splay">Tomas radiales</string>
     <string name="popup_do_leg">Tomas principales</string>
     <string name="popup_do_gm_data">Toma de calibración</string>
-    <string name="popup_do_gm_group">grupo calibración</string>
+    <!-- UNUSED string name="popup_do_gm_group">grupo calibración</string -->
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Escanear</string>
     <string name="popup_do_shot">Toma</string>
@@ -1302,7 +1300,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="audio_overwrite">¿Sobrescribir?</string>
     <!-- UNUSED string name="playing">Reproduciendo %1$s</string -->
   
-    <string name="import_functional">Importar solo configuraciones funcionales</string>
     <string name="import_trox">archivo de formato Trox</string>
     <string name="import_lrud">Importar LRUD</string>
     <string name="import_leg_first">Pulsación de tecla antes de los LRUD</string>
@@ -1314,7 +1311,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_audio_list">Registros de audio</string>
-    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
     <!-- TODO string name="title_recalibrate">Calibrations</string -->
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>

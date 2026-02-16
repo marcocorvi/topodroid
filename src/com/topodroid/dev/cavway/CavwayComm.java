@@ -66,6 +66,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 // import java.util.TimerTask;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Handler;
 // import android.os.Message;
@@ -1115,7 +1116,7 @@ public class CavwayComm extends BleComm
     // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY )
     if ( len == 4 && CavwayProtocol.PACKET_REPLY == CavwayProtocol.PACKET_REPLY ) {
       byte[] repliedbytes = ((CavwayProtocol) mProtocol).mRepliedData;
-      for ( int i = 0; i < 4; i++) TDLog.v( String.format("%d %02x %02x", i, data[i], repliedbytes[i] ) );;
+      for ( int i = 0; i < 4; i++) TDLog.v( String.format(Locale.US, "%d %02x %02x", i, data[i], repliedbytes[i] ) );;
       return Arrays.equals( data, repliedbytes );
     }
     return true; // false;

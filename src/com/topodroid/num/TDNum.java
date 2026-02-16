@@ -2192,7 +2192,7 @@ public class TDNum
         TDToast.makeWarn( R.string.trilateration_failed );
       }
     } else if ( nr_success > 0 ) {
-      TDToast.make( String.format( Locale.US, TDInstance.getResourceString(R.string.trilateration_success), nr_success ) );
+      TDToast.make( String.format( Locale.US, TDInstance.getResourceString(R.plurals.trilateration_success), nr_success ) );
     }
   }
 

@@ -27,6 +27,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.ShortBuffer;
 
+import java.util.Locale;
+
 /**
  * Parses SRTM HGT files (16-bit signed integers, Big-Endian).
  * (3-arc-second) data, resulting in 1201x1201 grid. filesize  2884802 B, resolution about 90 m at equator
@@ -236,7 +238,7 @@ public class DEMhgtParser extends ParserDEM
     xunit = 1.0f / mGridSize; // fraction of degree
     yunit = 1.0f / mGridSize;
 
-    filename = filename.toUpperCase();
+    filename = filename.toUpperCase( Locale.US );
 
     int len = filename.length();
     int pos = filename.lastIndexOf('/') + 1;

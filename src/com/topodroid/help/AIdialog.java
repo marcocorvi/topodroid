@@ -228,6 +228,7 @@ public class AIdialog extends MyDialog
     sb.append( ctx.getResources().getString( R.string.ai_end_manual ) );
     TDLog.v("User manual length " + sb.length() );
     return sb.toString()
+           .replaceAll( "<!--(.*)-->", "" )
            .replaceAll( "(?i)<i>(.*?)</i>", "*$1*" )
            .replaceAll( "(?i)<b>(.*?)</b>", "**$1**" )
            .replaceAll( "<p>", "\n" )

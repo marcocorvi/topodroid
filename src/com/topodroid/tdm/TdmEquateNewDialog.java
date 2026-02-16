@@ -39,6 +39,7 @@ import android.widget.EditText;
 // import android.widget.Spinner;
 // import android.widget.ArrayAdapter;
 
+import java.util.Locale;
 
 class TdmEquateNewDialog extends MyDialog
                          implements OnClickListener
@@ -277,7 +278,7 @@ class TdmEquateNewDialog extends MyDialog
                 }
             }
           }
-          TDToast.makeWarn(String.format("Group %d", eq_group_nr_max));
+          TDToast.makeWarn(String.format(Locale.US, "Group %d", eq_group_nr_max));
         }
       } else if ( b == mBTsearch ) {
           ArrayList<String> stations = new ArrayList<>();

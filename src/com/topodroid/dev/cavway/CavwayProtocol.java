@@ -29,6 +29,8 @@ import android.content.Context;
 
 // import java.io.IOException;
 
+import java.util.Locale;
+
 public class CavwayProtocol extends TopoDroidProtocol
 {
   private final static String TAG = "CAVWAY PROTO ";
@@ -355,7 +357,7 @@ public class CavwayProtocol extends TopoDroidProtocol
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
           // if ( LOG ) TDLog.v( TAG + "write reply (3E)");
           if ( LOG ) TDLog.v( TAG + "write reply (3E)");
-          TDLog.v(String.format("PROTO Reply to 0x3e: %d %d %d %d %02x %02x %02x %02x", 
+          TDLog.v(String.format(Locale.US, "PROTO Reply to 0x3e: %d %d %d %d %02x %02x %02x %02x", 
             databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           System.arraycopy( databuf, 4, mRepliedData, 0, 4 );
           mComm.mHasWritten = true;

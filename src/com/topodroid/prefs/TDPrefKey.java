@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+// import android.os.Environment;
+
 class TDPrefKey
 {
   private static final int POLICY_INDEX = 2; // index of station-policy in mSurvey settings
@@ -801,6 +803,7 @@ class TDPrefKey
     new TDPrefKey( N, LONG, D3, "CAVE3D_DEM_MAXSIZE",  R.string.cpref_dem_maxsize_title, R.string.cpref_dem_maxsize_summary, "400" ),
     new TDPrefKey( N,       D3, "CAVE3D_DEM_REDUCE",   R.string.cpref_dem_reduce_title,  R.string.cpref_dem_reduce_summary,  "1", R.array.demReduce, R.array.demReduceValue ),
     new TDPrefKey( N, STR,  D3, "CAVE3D_TEXTURE_ROOT", R.string.cpref_texture_root_title,R.string.cpref_texture_root_summary,"/sdcard/" )
+    // new TDPrefKey( N, STR,  D3, "CAVE3D_TEXTURE_ROOT", R.string.cpref_texture_root_title,R.string.cpref_texture_root_summary, Environment.getExternalStorageDirectory.getPath() );
   };
 
   /** 3D walls settings

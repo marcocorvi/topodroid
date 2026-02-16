@@ -230,7 +230,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="device_status_silent_on">Тих режим включен</string>
     <string name="device_status_silent_off">Тих режим изключен</string>
     <string name="bt_reset">Рестартиране на Bluetooth връзката</string>
-    <string name="bt_busy">Bluetooth е зает</string>
+    <!-- UNUSED string name="bt_busy">Bluetooth е зает</string -->
     <string name="save_as">запис като</string>
     <string name="nickname">Име на устройството</string>
     <string name="unknown_device_type">Непознато устройство %1$d</string>
@@ -379,7 +379,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_name_required">Необходимо е име</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Грешен брой на реперите</string>
-    <string name="error_name_duplicate">Дублирано име</string>
+    <!-- UNUSED string name="error_name_duplicate">Дублирано име</string -->
     <string name="error_no_section_in_section">Сечение в сечение не е позволено</string>
     <string name="error_profile_slant_section">Наклоненото сечение не е активирано в плана</string>
     <string name="error_team_required">Изисква се екип</string>
@@ -454,9 +454,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Устройството не е избрано</string>
     <string name="no_device_window">Прозорецът на устройството не е наличен по време на изтегляне</string>
-    <string name="no_device_found">Не е намерено устройство</string>
+    <!-- UNUSED string name="no_device_found">Не е намерено устройство</string -->
     <string name="no_feature_audio">Аудиото не се поддържа</string>
-    <string name="no_feature_pdf">PDF не се поддържа</string>
+    <!-- UNUSED string name="no_feature_pdf">PDF не се поддържа</string -->
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <!-- UNUSED string name="no_geopoint_app">Няма приложение за GNSS</string -->
@@ -542,12 +542,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметрова хартия</string>
 
-    <string name="start_scan">Стартирай сканиране</string>
-    <string name="stop_scan">Спри сканиране</string>
-    <string name="scan_started">Сканирането е стартирано</string>
-    <string name="scan_finished">Сканирането е завършено</string>
-    <string name="scanning">Сканиране ... Моля изчакайте</string>
-    <!-- TODO string name="scan_result">Found %1$d devices</string -->
+    <!-- UNUSED string name="start_scan">Стартирай сканиране</string -->
+    <!-- UNUSED string name="stop_scan">Спри сканиране</string -->
+    <!-- UNUSED string name="scan_started">Сканирането е стартирано</string -->
+    <!-- UNUSED string name="scan_finished">Сканирането е завършено</string -->
+    <string name="scanning">Сканиране &#8230; Моля изчакайте</string>
 
     <!-- UNUSED string name="title_scan">BLE сканиране</string -->
     <!-- UNUSED string name="ble_scan_failed">Грешка при BLE сканиране</string -->
@@ -779,7 +778,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="trilateration_failure">Неуспешна трилатерация %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Грешка при трилатерация %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <string name="trilateration_success">Успешна трилатерация: %1$d клъстери</string>
 
     <string name="survey_info">Информация за картировката</string>
     <string name="stat_dates">От  %1$s до %2$s</string>
@@ -998,7 +996,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_do_splay">Странични измервания</string>
     <string name="popup_do_leg">Измервания на отсечки</string>
     <string name="popup_do_gm_data">Калиб. измервания</string>
-    <string name="popup_do_gm_group">Калиб. група</string>
+    <!-- UNUSED string name="popup_do_gm_group">Калиб. група</string -->
     <string name="popup_do_laser">Лазер</string>
     <string name="popup_do_scan">Сканиране</string>
     <string name="popup_do_shot">Измерване</string>
@@ -1309,7 +1307,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="audio_overwrite">Презаписване \?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
 
-    <string name="import_functional">Импортирай само функционални настройки</string>
     <string name="import_trox">Файлов формат Trox</string>
     <string name="import_lrud">Импортирай ляво/дясно/горе/долу</string>
     <string name="import_leg_first">Отсечка преди странични измервания ляво/дясно/горе/долу</string>
@@ -1321,7 +1318,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
-    <string name="title_bt_search">Bluetooth търсене</string>
     <string name="title_recalibrate">Калибрации</string>
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Калибриране - проверка на измерванията</string>

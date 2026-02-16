@@ -23,4 +23,19 @@
     <item quantity="one">Grupo encontrado</item>
     <item quantity="other">grupos %1$d encontrados</item>
   </plurals>
+  <!-- TODO plurals name="scan_result">
+    <item quantity="zero">Found no device</item>
+    <item quantity="one">Found %1$d device</item>
+    <item quantity="other">Found %1$d devices</item>
+  </plurals -->
+  <!-- TODO plurals name="trilateration_success">
+    <item quantity="zero">Found no cluster</item>
+    <item quantity="one">Trilateration success: %1$d cluster</item>
+    <item quantity="other">Trilateration success: %1$d clusters</item>
+  </plurals -->
+  <!-- TODO plurals name="export_data_batch">
+    <item quantity="zero">Exported 0 of zero surveys</item>
+    <item quantity="one">Exported %1$s of %2$d survey</item>
+    <item quantity="other">Exported %1$s of %2$d surveys</item>
+  </plurals -->
 </resources>
