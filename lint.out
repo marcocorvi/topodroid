@@ -1,9 +1,4 @@
-.: Error: No .class files were found in project ".", so none of the classfile based checks could be run. Does the project need to be built first? [LintError]
-res/layout/ai_dialog.xml:45: Error: Duplicate id @+id/help, already defined earlier in this layout [DuplicateIds]
-    <LinearLayout android:id="@+id/help"
-                  ~~~~~~~~~~~~~~~~~~~~~~
-    res/layout/ai_dialog.xml:31: Duplicate id @+id/help originally defined here
-res/layout/ai_dialog.xml:24: Warning: This TextView should use android:layout_height="wrap_content" [ScrollViewSize]
+res/layout/ai_dialog.xml:25: Warning: This TextView should use android:layout_height="wrap_content" [ScrollViewSize]
       android:layout_height="fill_parent" 
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/gm_activity.xml:52: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
@@ -12,19 +7,7 @@ res/layout/gm_activity.xml:52: Warning: This ListView should use android:layout_
 res/layout/shot_activity.xml:57: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
         android:layout_width="fill_parent"
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/dev/cavway/CavwayComm.java:1118: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
-      for ( int i = 0; i < 4; i++) TDLog.v( String.format("%d %02x %02x", i, data[i], repliedbytes[i] ) );;
-                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/dev/cavway/CavwayProtocol.java:358: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
-          TDLog.v(String.format("PROTO Reply to 0x3e: %d %d %d %d %02x %02x %02x %02x", 
-                  ^
-src/com/topodroid/dem/DEMhgtParser.java:239: Warning: Implicitly using the default locale is a common source of bugs: Use toUpperCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
-    filename = filename.toUpperCase();
-                        ~~~~~~~~~~~
-src/com/topodroid/tdm/TdmEquateNewDialog.java:280: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
-          TDToast.makeWarn(String.format("Group %d", eq_group_nr_max));
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/prefs/TDPrefKey.java:803: Warning: Do not hardcode "/sdcard/"; use Environment.getExternalStorageDirectory().getPath() instead [SdCardPath]
+src/com/topodroid/prefs/TDPrefKey.java:805: Warning: Do not hardcode "/sdcard/"; use Environment.getExternalStorageDirectory().getPath() instead [SdCardPath]
     new TDPrefKey( N, STR,  D3, "CAVE3D_TEXTURE_ROOT", R.string.cpref_texture_root_title,R.string.cpref_texture_root_summary,"/sdcard/" )
                                                                                                                              ~~~~~~~~~~
 src/com/topodroid/TDX/TopoGL.java:1951: Warning: Do not hardcode "/sdcard/"; use Environment.getExternalStorageDirectory().getPath() instead [SdCardPath]
@@ -33,7 +16,7 @@ src/com/topodroid/TDX/TopoGL.java:1951: Warning: Do not hardcode "/sdcard/"; use
 res/layout/dblock_row.xml:27: Warning: android:editable is deprecated: <EditText> is already editable [Deprecated]
     android:editable="true"
     ~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/dblock_row.xml:48: Warning: android:editable is deprecated: <EditText> is already editable [Deprecated]
+res/layout/dblock_row.xml:49: Warning: android:editable is deprecated: <EditText> is already editable [Deprecated]
     android:editable="true"
     ~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
@@ -63,6 +46,9 @@ res/values-fr/plurals.xml:11: Error: For locale "fr" (French) the following quan
 res/values-fr/plurals.xml:15: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
   <plurals name="found_calib_groups">
   ^
+res/values-ru/plurals.xml:27: Error: For locale "ru" (Russian) the following quantities should also be defined: few, many [MissingQuantity]
+  <plurals name="found_calib_groups" tools:ignore="UnusedQuantity">
+  ^
 res/values/strings.xml:7: Error: "ai_null_chat" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="ai_null_chat">Null AI chat</string>
             ~~~~~~~~~~~~~~~~~~~
@@ -72,7 +58,7 @@ res/values/strings.xml:8: Error: "ai_error" is not translated in "de" (German), 
 res/values/strings.xml:9: Error: "ai_internet" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="ai_internet">Warning. AI help requires web connection.</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:10: Error: "ai_no_internet" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:10: Error: "ai_no_internet" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="ai_no_internet">No web connection.</string>
             ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:11: Error: "ai_prompt" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
@@ -97,7 +83,7 @@ res/values/strings.xml:87: Error: "pref_plot" is not translated in "de" (German)
     <string name="pref_plot">Sketch</string>
             ~~~~~~~~~~~~~~~~
 res/values/strings.xml:88: Error: "pref_3d" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
-    <string name="pref_3d">3D viewer</string>
+    <string name="pref_3d">3D viewer</string><!-- lint unused -->
             ~~~~~~~~~~~~~~
 res/values/strings.xml:89: Error: "pref_io" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="pref_io">Export</string>
@@ -147,9 +133,6 @@ res/values/strings.xml:201: Error: "recalibrate_no_cavway" is not translated in 
 res/values/strings.xml:202: Error: "recalibrate_no_coeff" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="recalibrate_no_coeff">No calibration coefficients</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:239: Error: "bt_busy" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
-    <string name="bt_busy">Bluetooth busy</string>
-            ~~~~~~~~~~~~~~
 res/values/strings.xml:261: Error: "few_points" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="few_points">Too few data points</string>
             ~~~~~~~~~~~~~~~~~
@@ -159,15 +142,12 @@ res/values/strings.xml:271: Error: "gettingCavway_info" is not translated in "cn
 res/values/strings.xml:364: Error: "location_enabled" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="location_enabled">Make sure LOCATION is enabled</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:366: Error: "discovery_error" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:366: Error: "discovery_error" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="discovery_error">BT discovery error: %1$s</string>
             ~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:407: Error: "error_question" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="error_question">Please, enter a question</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:466: Error: "no_device_found" is not translated in "fr" (French) [MissingTranslation]
-    <string name="no_device_found">Found no device</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:482: Error: "no_stations" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="no_stations">Survey has no stations</string>
             ~~~~~~~~~~~~~~~~~~
@@ -186,294 +166,279 @@ res/values/strings.xml:537: Error: "menu_stations" is not translated in "fr" (Fr
 res/values/strings.xml:550: Error: "menu_plot_search" is not translated in "fr" (French) [MissingTranslation]
     <string name="menu_plot_search">STATION SEARCH</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:557: Error: "scan_started" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
-    <string name="scan_started">Discovery started</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:558: Error: "scan_finished" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
-    <string name="scan_finished">Discovery finished</string>
-            ~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:559: Error: "scanning" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="scanning">Scanning ... Please wait</string>
             ~~~~~~~~~~~~~~~
-res/values/strings.xml:560: Error: "scan_result" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
-    <string name="scan_result">Found %1$d devices</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:670: Error: "sensor_title" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:669: Error: "sensor_title" is not translated in "fr" (French) [MissingTranslation]
     <string name="sensor_title">Add sensor measurement</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:692: Error: "shot_rename_unsafe" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:691: Error: "shot_rename_unsafe" is not translated in "fr" (French) [MissingTranslation]
     <string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:702: Error: "shot_refreshed" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:701: Error: "shot_refreshed" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="shot_refreshed">Refreshed shot list</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:723: Error: "survey_copy_all_flags" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:722: Error: "survey_copy_all_flags" is not translated in "fr" (French) [MissingTranslation]
     <string name="survey_copy_all_flags">Shots copyable only if all displayed</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:724: Error: "survey_copy_only_tail" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:723: Error: "survey_copy_only_tail" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="survey_copy_only_tail">Only the final segment of shots is copyable</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:785: Error: "file_share_failed" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:784: Error: "file_share_failed" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="file_share_failed">Unable to share file</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:786: Error: "file_share_no_app" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:785: Error: "file_share_no_app" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="file_share_no_app">No file sharing app</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:827: Error: "stat_survey_length" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:825: Error: "stat_survey_length" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="stat_survey_length">Survey length %1$.1f %2$s</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:861: Error: "display_refresh" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:859: Error: "display_refresh" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="display_refresh">Refreshed display</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:877: Error: "ask_clear_equates" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:875: Error: "ask_clear_equates" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="ask_clear_equates">Remove all equates?</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:878: Error: "ask_forget_device" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:876: Error: "ask_forget_device" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="ask_forget_device">Forget device %1$s?</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:884: Error: "button_forget" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:882: Error: "button_forget" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_forget"    >Forget</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:898: Error: "button_settime" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:896: Error: "button_settime" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_settime"   >Set time</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:924: Error: "button_retake" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:922: Error: "button_retake" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="button_retake"  >Retake</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:925: Error: "button_prefix" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:923: Error: "button_prefix" is not translated in "cn" [MissingTranslation]
     <string name="button_prefix"  >Prefix</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:929: Error: "button_no" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:927: Error: "button_no" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="button_no"  copyable="all">NO</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:934: Error: "button_offset" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:932: Error: "button_offset" is not translated in "fr" (French) [MissingTranslation]
     <string name="button_offset" copyable="it">Offset</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:948: Error: "button_clear_all" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:946: Error: "button_clear_all" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_clear_all" >Clear all</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:953: Error: "button_select" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:951: Error: "button_select" is not translated in "cn" [MissingTranslation]
     <string name="button_select"    >Select</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:954: Error: "button_submit" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:952: Error: "button_submit" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_submit"    >Submit</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:961: Error: "button_scrap" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:959: Error: "button_scrap" is not translated in "cn" [MissingTranslation]
     <string name="button_scrap"     >Outlines</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:963: Error: "button_to_sketch" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:961: Error: "button_to_sketch" is not translated in "fr" (French) [MissingTranslation]
     <string name="button_to_sketch">sketch</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:964: Error: "button_to_scrap" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:962: Error: "button_to_scrap" is not translated in "fr" (French) [MissingTranslation]
     <string name="button_to_scrap" >scrap</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:965: Error: "button_to_buffer" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:963: Error: "button_to_buffer" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="button_to_buffer" copyable="all">buffer</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:969: Error: "button_start" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:967: Error: "button_start" is not translated in "cn" [MissingTranslation]
     <string name="button_start" copyable="all">Start</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:970: Error: "button_stop" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:968: Error: "button_stop" is not translated in "cn" [MissingTranslation]
     <string name="button_stop"  copyable="all">Stop</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:984: Error: "buffer" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:982: Error: "buffer" is not translated in "fr" (French) [MissingTranslation]
     <string name="buffer" copyable="all">Buffer</string>
             ~~~~~~~~~~~~~
-res/values/strings.xml:995: Error: "mode_scrap" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:993: Error: "mode_scrap" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="mode_scrap">Current scrap only</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1050: Error: "hint_api_key" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1048: Error: "hint_api_key" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="hint_api_key" copyable="all">API key</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1079: Error: "hint_prefix" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1077: Error: "hint_prefix" is not translated in "cn" [MissingTranslation]
     <string name="hint_prefix">prefix stations</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1107: Error: "move_items" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1105: Error: "move_items" is not translated in "fr" (French) [MissingTranslation]
     <string name="move_items">Move items to</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1109: Error: "paste_items" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1107: Error: "paste_items" is not translated in "fr" (French) [MissingTranslation]
     <string name="paste_items">Paste</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1185: Error: "help_stations" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1183: Error: "help_stations" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="help_stations">Stations</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1197: Error: "help_plot_search" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1195: Error: "help_plot_search" is not translated in "fr" (French) [MissingTranslation]
     <string name="help_plot_search">Station search</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1239: Error: "help_export_surveys" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1237: Error: "help_export_surveys" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="help_export_surveys">Export all surveys</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1249: Error: "help_scan" is not translated in "bg" (Bulgarian) [MissingTranslation]
+res/values/strings.xml:1247: Error: "help_scan" is not translated in "bg" (Bulgarian) [MissingTranslation]
     <string name="help_scan">Scan for new devices</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1263: Error: "help_color_surveys" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1261: Error: "help_color_surveys" is not translated in "fr" (French) [MissingTranslation]
     <string name="help_color_surveys">Change color of surveys</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1269: Error: "help_all_equates" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1267: Error: "help_all_equates" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="help_all_equates">All possible equates</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1278: Error: "export_data_batch" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
-    <string name="export_data_batch">Exported %1$s of %2$d surveys</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1289: Error: "export_uncommented_maps" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1287: Error: "export_uncommented_maps" is not translated in "fr" (French) [MissingTranslation]
     <string name="export_uncommented_maps">Uncommented map commands</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1292: Error: "export_prefix_set" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1290: Error: "export_prefix_set" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="export_prefix_set">Reset</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1293: Error: "export_prefix_reset" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1291: Error: "export_prefix_reset" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="export_prefix_reset">Set</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1313: Error: "export_origin" is not translated in "ru" (Russian), "bg" (Bulgarian), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1311: Error: "export_origin" is not translated in "ru" (Russian), "bg" (Bulgarian), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="export_origin">Origin station</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1340: Error: "title_gemini" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1337: Error: "title_gemini" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_gemini">Enter your AI API key</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1341: Error: "title_ai_dialog" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1338: Error: "title_ai_dialog" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_ai_dialog">AI helper</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1345: Error: "title_bt_search" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
-    <string name="title_bt_search">Bluetooth scan</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1346: Error: "title_recalibrate" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1342: Error: "title_recalibrate" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="title_recalibrate">Calibrations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1358: Error: "title_stations" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1354: Error: "title_stations" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="title_stations">Stations</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1428: Error: "title_settings_ply" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1424: Error: "title_settings_ply" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_settings_ply">Polygon export settings</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1471: Error: "title_station_photo" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1467: Error: "title_station_photo" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="title_station_photo">Station photo</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1472: Error: "title_team_dialog" is not translated in "ru" (Russian), "bg" (Bulgarian), "cn", "fr" (French) [MissingTranslation]
+res/values/strings.xml:1468: Error: "title_team_dialog" is not translated in "ru" (Russian), "bg" (Bulgarian), "cn", "fr" (French) [MissingTranslation]
     <string name="title_team_dialog">Team names</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1473: Error: "title_plot_rename" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1469: Error: "title_plot_rename" is not translated in "fr" (French) [MissingTranslation]
     <string name="title_plot_rename">Sketch operations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1478: Error: "title_read_names" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1474: Error: "title_read_names" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_read_names">Station names map</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1493: Error: "pref_bulk_export_title" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1489: Error: "pref_bulk_export_title" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_bulk_export_title">Bulk data export</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1494: Error: "pref_bulk_export_summary" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1490: Error: "pref_bulk_export_summary" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_bulk_export_summary">Bulk data export of all surveys</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1535: Error: "pref_gemini_title" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1531: Error: "pref_gemini_title" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_gemini_title">AI key</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1536: Error: "pref_gemini_summary" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1532: Error: "pref_gemini_summary" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_gemini_summary">Gemini API key</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1542: Error: "pref_hide_navbar_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1538: Error: "pref_hide_navbar_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1616: Error: "pref_ply_lrud_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1612: Error: "pref_ply_lrud_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
   <string name="pref_ply_lrud_title" copyable="all">Polygon LRUD</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1617: Error: "pref_ply_lrud_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1613: Error: "pref_ply_lrud_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
   <string name="pref_ply_lrud_summary">LRUD or add TO station to splays in Polygon</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1618: Error: "pref_ply_minus_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1614: Error: "pref_ply_minus_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_ply_minus_title">Polygon splay name</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1619: Error: "pref_ply_minus_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1615: Error: "pref_ply_minus_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_ply_minus_summary">Dash or numbered splays in Polygon</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1640: Error: "pref_survex_epsg_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1636: Error: "pref_survex_epsg_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_survex_epsg_title" copyable="all">EPSG "cs out"</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1641: Error: "pref_survex_epsg_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1637: Error: "pref_survex_epsg_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1650: Error: "pref_svg_groups_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1646: Error: "pref_svg_groups_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_svg_groups_title">Type groups</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1651: Error: "pref_svg_groups_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1647: Error: "pref_svg_groups_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_svg_groups_summary">Group items by type in SVG export</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1753: Error: "pref_symbol_size_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1749: Error: "pref_symbol_size_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
   <string name="pref_symbol_size_title">Symbol size</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1754: Error: "pref_symbol_size_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1750: Error: "pref_symbol_size_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
   <string name="pref_symbol_size_summary">Size of symbols in bottom bar</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1909: Error: "pref_xsection_offset_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1905: Error: "pref_xsection_offset_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
   <string name="pref_xsection_offset_title">XSection offset</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1910: Error: "pref_xsection_offset_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1906: Error: "pref_xsection_offset_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
   <string name="pref_xsection_offset_summary">Offset of section points</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1911: Error: "pref_plot_cache_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1907: Error: "pref_plot_cache_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_plot_cache_title">Sketch cache</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1912: Error: "pref_plot_cache_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1908: Error: "pref_plot_cache_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_plot_cache_summary">Whether to cache sketches in memory</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1944: Error: "pref_line_ends_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1940: Error: "pref_line_ends_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1995: Error: "pref_shot_tampering_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1991: Error: "pref_shot_tampering_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
   <string name="pref_shot_tampering_title">Shot tampering</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1996: Error: "pref_shot_tampering_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1992: Error: "pref_shot_tampering_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
   <string name="pref_shot_tampering_summary">Downloaded shots editing</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2220: Error: "button_equate_all" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2216: Error: "button_equate_all" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_equate_all">All</string><!-- HB EQ all-->
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2221: Error: "button_equate_one" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2217: Error: "button_equate_one" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_equate_one">One</string><!-- HB EQ one-->
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2222: Error: "button_equate_search" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2218: Error: "button_equate_search" is not translated in "de" (German), "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="button_equate_search">Search</string><!-- HB EQ all-->
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2305: Error: "legs_backshot" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2301: Error: "legs_backshot" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
     <string name="legs_backshot">Backshot</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2450: Error: "cavway_sync_failed" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2446: Error: "cavway_sync_failed" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="cavway_sync_failed">Failed to synchronize Cavway time</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2451: Error: "cavway_synchronized" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2447: Error: "cavway_synchronized" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="cavway_synchronized">Synchronized Cavway time</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2452: Error: "cavway_sync_ok" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2448: Error: "cavway_sync_ok" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="cavway_sync_ok">Cavway time synchronized</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2453: Error: "cavway_sync_offset" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2449: Error: "cavway_sync_offset" is not translated in "de" (German), "pt" (Portuguese), "bg" (Bulgarian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2508: Error: "cpref_texture_root_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:2504: Error: "cpref_texture_root_title" is not translated in "cn" [MissingTranslation]
     <string name="cpref_texture_root_title">Texture root</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2509: Error: "cpref_texture_root_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:2505: Error: "cpref_texture_root_summary" is not translated in "cn" [MissingTranslation]
     <string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-de/strings.xml:193: Warning: "Addresse" is a common misspelling; did you mean "Adresse"? [Typos]
-    <string name="address">Addresse</string>
-                           ^
-res/values-de/strings.xml:993: Warning: "Grösse" is a common misspelling; did you mean "Größe"? [Typos]
-    <string name="hint_size">Grösse [m]</string>
-                             ^
-res/values-de/strings.xml:1418: Warning: "schliessen" is a common misspelling; did you mean "schließen"? [Typos]
-    <string name="pref_single_back_title">Dialoge mit einfachem Zurück schliessen</string>
-                                                                       ^
-res/values-de/strings.xml:1419: Warning: "Schliesst" is a common misspelling; did you mean "Schließt"? [Typos]
-    <string name="pref_single_back_summary">Schliesst Dialoge mit einem einzelnen Click auf Zurück</string>
-                                            ^
-res/values-de/strings.xml:1628: Warning: "Grösse" is a common misspelling; did you mean "Größe"? [Typos]
-    <string name="pref_symbol_size_summary">Grösse der Symbole in der Symbolleiste unten</string>
-                                            ^
-res/values-pt/strings.xml:1835: Warning: "afim" is a common misspelling; did you mean "a fim"? [Typos]
-  <string name="pref_full_affine_title">Transformação afim</string>
-                                                      ^
-res/values-pt/strings.xml:1836: Warning: "afim" is a common misspelling; did you mean "a fim"? [Typos]
-  <string name="pref_full_affine_summary">Habilitar transformação afim em croquis (permite distorcer alterando proporções e posição)</string>
-                                                                  ^
+res/values-pt/strings.xml:1172: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+  <string name="export_data_batch">Exportado %1$s de %2$d topos</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-de/strings.xml:1182: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_data_batch">%1$s von %2$d Vermessungen exportiert</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-it/strings.xml:1250: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_data_batch">Esportazione %1$s: %2$d rilievi</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-ru/strings.xml:1251: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_data_batch">Экспортировано %1$s из %2$d съёмок</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1256: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_data_batch">Експортирани %1$s от %2$d картировки</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-cn/strings.xml:1256: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_data_batch">导出  %2$d 中的 %1$s 测量</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-hu/strings.xml:1256: Error: "export_data_batch" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_data_batch">%2$d mérés exportálása %1$s formátumba</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -483,15 +448,6 @@ res/values-pt/plurals.xml:4: Error: The quantity 'one' matches more than one spe
 res/values-pt/plurals.xml:9: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">1 dado lido</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:560: Warning: Formatting %d followed by words ("devices"): This should probably be a plural rather than a string [PluralsCandidate]
-    <string name="scan_result">Found %1$d devices</string>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:800: Warning: Formatting %d followed by words ("clusters"): This should probably be a plural rather than a string [PluralsCandidate]
-    <string name="trilateration_success">Trilateration success: %1$d clusters</string>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1278: Warning: Formatting %d followed by words ("surveys"): This should probably be a plural rather than a string [PluralsCandidate]
-    <string name="export_data_batch">Exported %1$s of %2$d surveys</string>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-bg/plurals.xml:7: Warning: For language "bg" (Bulgarian) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_data">
   ^
@@ -535,7 +491,7 @@ res/layout/survey_stat_dialog.xml:110: Warning: This tag and its children can be
     <LinearLayout 
      ~~~~~~~~~~~~
 res/layout/ai_dialog.xml:17: Warning: Use a layout_height of 0dp instead of fill_parent for better performance [InefficientWeight]
-    android:layout_height="fill_parent"
+    android:layout_height="fill_parent" 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/geocode_dialog.xml:39: Warning: Use a layout_height of 0dp instead of fill_parent for better performance [InefficientWeight]
      android:layout_height="fill_parent" 
@@ -558,73 +514,40 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
+res/values/plurals.xml:30: Warning: The resource R.plurals.export_data_batch appears to be unused [UnusedResources]
+  <plurals name="export_data_batch">
+           ~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:88: Warning: The resource R.string.pref_3d appears to be unused [UnusedResources]
-    <string name="pref_3d">3D viewer</string>
+    <string name="pref_3d">3D viewer</string><!-- lint unused -->
             ~~~~~~~~~~~~~~
 res/values/strings.xml:198: Warning: The resource R.string.autocalib_not_supported appears to be unused [UnusedResources]
     <string name="autocalib_not_supported">Required calibration computation</string><!-- lint: unused -->
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:239: Warning: The resource R.string.bt_busy appears to be unused [UnusedResources]
-    <string name="bt_busy">Bluetooth busy</string>
-            ~~~~~~~~~~~~~~
 res/values/strings.xml:266: Warning: The resource R.string.regroup appears to be unused [UnusedResources]
     <string name="regroup">No regroup</string><!-- lint: unued -->
             ~~~~~~~~~~~~~~
-res/values/strings.xml:322: Warning: The resource R.string.idle appears to be unused [UnusedResources]
-    <string name="idle" translatable="false">&#8230;</string>
-            ~~~~~~~~~~~
-res/values/strings.xml:391: Warning: The resource R.string.error_name_duplicate appears to be unused [UnusedResources]
-    <string name="error_name_duplicate">Duplicate name</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:466: Warning: The resource R.string.no_device_found appears to be unused [UnusedResources]
-    <string name="no_device_found">Found no device</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:468: Warning: The resource R.string.no_feature_pdf appears to be unused [UnusedResources]
-    <string name="no_feature_pdf">PDF not supported</string>
-            ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:533: Warning: The resource R.string.menu_calib_auto appears to be unused [UnusedResources]
     <string name="menu_calib_auto" copyable="pt">AUTO-CALIB</string><!-- lint: unused -->
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:555: Warning: The resource R.string.start_scan appears to be unused [UnusedResources]
-    <string name="start_scan">Start scan</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:556: Warning: The resource R.string.stop_scan appears to be unused [UnusedResources]
-    <string name="stop_scan">Stop scan</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:557: Warning: The resource R.string.scan_started appears to be unused [UnusedResources]
-    <string name="scan_started">Discovery started</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:558: Warning: The resource R.string.scan_finished appears to be unused [UnusedResources]
-    <string name="scan_finished">Discovery finished</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:928: Warning: The resource R.string.button_lrud appears to be unused [UnusedResources]
+res/values/strings.xml:926: Warning: The resource R.string.button_lrud appears to be unused [UnusedResources]
     <string name="button_lrud"  copyable="all">+ LRUD</string><!-- lint: unused -->
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1020: Warning: The resource R.string.popup_do_gm_group appears to be unused [UnusedResources]
-    <string name="popup_do_gm_group">Calib. group</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1154: Warning: The resource R.string.help_device_add appears to be unused [UnusedResources]
+res/values/strings.xml:1152: Warning: The resource R.string.help_device_add appears to be unused [UnusedResources]
     <string name="help_device_add">Add a device</string> <!-- lint: unused - KEEP -->
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1333: Warning: The resource R.string.import_functional appears to be unused [UnusedResources]
-    <string name="import_functional">Import only functional settings</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1345: Warning: The resource R.string.title_bt_search appears to be unused [UnusedResources]
-    <string name="title_bt_search">Bluetooth scan</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1457: Warning: The resource R.string.title_settings_log appears to be unused [UnusedResources]
+res/values/strings.xml:1453: Warning: The resource R.string.title_settings_log appears to be unused [UnusedResources]
     <string name="title_settings_log">Log settings</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1709: Warning: The resource R.string.pref_auto_pair_title appears to be unused [UnusedResources]
+res/values/strings.xml:1705: Warning: The resource R.string.pref_auto_pair_title appears to be unused [UnusedResources]
   <string name="pref_auto_pair_title">Auto pairing</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1710: Warning: The resource R.string.pref_auto_pair_summary appears to be unused [UnusedResources]
+res/values/strings.xml:1706: Warning: The resource R.string.pref_auto_pair_summary appears to be unused [UnusedResources]
   <string name="pref_auto_pair_summary">Pair with device after scan</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1780: Warning: The resource R.string.pref_editable_stations_title appears to be unused [UnusedResources]
+res/values/strings.xml:1776: Warning: The resource R.string.pref_editable_stations_title appears to be unused [UnusedResources]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1781: Warning: The resource R.string.pref_editable_stations_summary appears to be unused [UnusedResources]
+res/values/strings.xml:1777: Warning: The resource R.string.pref_editable_stations_summary appears to be unused [UnusedResources]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/styles.xml:228: Warning: The resource R.style.edit_decimal_light appears to be unused [UnusedResources]
@@ -639,43 +562,16 @@ res/layout/export_dialog_shot.xml:339: Warning: This LinearLayout layout or its 
 res/layout/stations_dialog.xml:14: Warning: This LinearLayout layout or its LinearLayout parent is possibly unnecessary [UselessParent]
     <LinearLayout android:id="@+id/help"
      ~~~~~~~~~~~~
-res/layout/ai_dialog.xml:15: Warning: This namespace declaration is redundant [RedundantNamespace]
-  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/ai_dialog.xml:15: Warning: Unused namespace declaration xmlns:android; already declared on the root element [UnusedNamespace]
-  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-pt/strings.xml:514: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-  <string name="scanning">Busca em andamento ... Por favor espere</string>
-                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-de/strings.xml:520: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="scanning">Suchen ... Bitte warten</string>
-                            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values-it/strings.xml:545: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="scanning">Scansione ... Attendi</string>
-                            ~~~~~~~~~~~~~~~~~~~~~
-res/values-ru/strings.xml:547: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="scanning">Сканирование... Пожалуйста, подождите</string>
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-hu/strings.xml:548: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="scanning">Keresés ... Kérlek várj</string>
-                            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:549: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="scanning">Сканиране ... Моля изчакайте</string>
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-cn/strings.xml:550: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="scanning">扫描中 ... 请等待</string>
-                            ~~~~~~~~~~~
 res/values/strings.xml:559: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
     <string name="scanning">Scanning ... Please wait</string>
                             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-pt/strings.xml:921: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
+res/values-pt/strings.xml:919: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
   <string name="layer_ceil">Cobertura (C)</string>
                             ~~~~~~~~~~~~~
-res/values-fr/strings.xml:982: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
+res/values-fr/strings.xml:980: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
     <string name="layer_ceil">Ceiling (C) plafond</string>
                               ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1004: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
+res/values/strings.xml:1002: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
     <string name="layer_ceil">Ceiling (C)</string>
                               ~~~~~~~~~~~
 res/mipmap-hdpi/ic_launcher_cvwy.png: Warning: The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_cvwy.png [IconDuplicates]
@@ -696,37 +592,16 @@ res/layout/help_dialog.xml:19: Warning: Buttons in button bars should be borderl
 res/layout/help_dialog.xml:25: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
     <Button android:id="@+id/button_manual"
      ~~~~~~
-res/layout/ai_dialog.xml:38: Warning: This text field does not specify an inputType [TextFields]
-    <EditText android:id="@+id/question" 
-     ~~~~~~~~
-res/layout/ai_dialog.xml:38: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/question" 
-     ~~~~~~~~
-res/layout/dblock_row.xml:17: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/from"
-   ~~~~~~~~
-res/layout/dblock_row.xml:38: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/to"
-   ~~~~~~~~
 res/layout/two_columns.xml:18: Warning: Missing autofillHints attribute [Autofill]
   <EditText android:id="@+id/to"
    ~~~~~~~~
 res/layout/dblock_row.xml:17: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText android:id="@+id/from"
    ~~~~~~~~
-res/layout/dblock_row.xml:38: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+res/layout/dblock_row.xml:39: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText android:id="@+id/to"
    ~~~~~~~~
 res/layout/two_columns.xml:18: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText android:id="@+id/to"
    ~~~~~~~~
-res/layout/export_dialog_shot.xml:150: Warning: Hardcoded string "LRUD", should use @string resource [HardcodedText]
-          android:text="LRUD"
-          ~~~~~~~~~~~~~~~~~~~
-res/layout/export_dialog_shot.xml:157: Warning: Hardcoded string "S1..S1000", should use @string resource [HardcodedText]
-          android:text="S1..S1000"
-          ~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/export_dialog_shot.xml:163: Warning: Hardcoded string "-", should use @string resource [HardcodedText]
-          android:text="-"
-          ~~~~~~~~~~~~~~~~
-141 errors, 111 warnings
+140 errors, 70 warnings

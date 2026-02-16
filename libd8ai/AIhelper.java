@@ -266,6 +266,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
    */
   public static void validateApiKey( final String api_key, final ValidationCallback callback )
   {
+    TDLog.v("Validate API key " + api_key );
     GenerativeModel gm = new GenerativeModel( "gemini-2.5-flash", api_key );
     GenerativeModelFutures model = GenerativeModelFutures.from( gm );
     Content.Builder cb = new Content.Builder();

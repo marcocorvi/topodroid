@@ -1621,7 +1621,7 @@ public class TDSetting
   public static void setGeminiApiKey( String value ) 
   { 
     mGeminiApiKey = value;
-    TDLog.v("API key: " + value );
+    // TDLog.v("Set API key: " + value );
     if ( value == null || value.length() < 20 ) {
       mGeminiApiKey = "";
       TDPrefHelper.update( "DISTOX_GEMINI", value );
@@ -1629,28 +1629,34 @@ public class TDSetting
       String enc_key = value;
       try {
         enc_key = TDKey.encrypt( value );
-        TDLog.v("Encrypted API key: " + value );
+        // TDLog.v("Encrypted API key: " + value );
       } catch ( Exception e ) {
         TDLog.e("Failed encription " + e + " saving plain text" );
       }
+      // TDLog.v("Store API key " + enc_key );
       TDPrefHelper.update( "DISTOX_GEMINI", enc_key );
     }
   }
 
   private static void  retrieveGeminiApiKey( String enc_key )
   {
-    TDLog.v("Encrypted API key: " + enc_key );
+    // TDLog.v("Encrypted API key: " + enc_key );
     if ( enc_key == null || enc_key.length() < 20 ) {
       mGeminiApiKey = "";
     } else if ( enc_key.startsWith( "Alza" ) ) {
       mGeminiApiKey =  enc_key;
     } else { 
-      try { 
-        mGeminiApiKey = TDKey.decrypt( enc_key );
-        TDLog.v("API key: " + mGeminiApiKey );
-      } catch ( Exception e ) {
-        TDLog.e("Failed decription " + e + " Gemini API key unset" );
-        mGeminiApiKey = "";
+      if ( enc_key.indexOf(":") > 0 ) {
+        try { 
+          mGeminiApiKey = TDKey.decrypt( enc_key );
+          // TDLog.v("API key: " + mGeminiApiKey );
+        } catch ( Exception e ) {
+          TDLog.e("Failed decription " + e + " Gemini API key unset" );
+          mGeminiApiKey = "";
+        }
+      } else {
+        mGeminiApiKey =  enc_key;
+        // TDLog.v("Key not encrypted: " + mGeminiApiKey );
       }
     }
   }
@@ -1962,7 +1968,7 @@ public class TDSetting
       mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
     } else if ( k.equals( key[ 8 ].key ) ) {           // DISTOX_GEMINI
-      TDLog.v("Gemini API key is not set in normal way");
+      TDLog.e("Gemini API key is not set in normal way");
       // mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
     } else if ( TDLevel.isDebugBuild() && k.equals( key[TDPrefKey.IDX_DEBUG].key ) ) {
       mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[TDPrefKey.IDX_DEBUG].dflt) ); // DISTOX_WITH_DEBUG

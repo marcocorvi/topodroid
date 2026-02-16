@@ -11,7 +11,7 @@ if [ -e $apk ]; then
   echo $code > $code_file
   md5=`md5sum $apk | colrm 33`
   day=`date -I`
-  siz=`ls -l $apk | colrm 33 | colrm 1 25`
+  siz=`ls -l $apk | colrm 34 | colrm 1 25`
   
   line="X $target\t$day\t$siz\t\t$md5"
   

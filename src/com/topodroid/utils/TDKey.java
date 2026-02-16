@@ -45,6 +45,7 @@ public class TDKey
     checkKey( key_store );
     SecretKey sk = (SecretKey)key_store.getKey( GEMINI_KEY_ALIAS, null );
 
+    // TDLog.v("Encrypting <" + plain + ">" );
     Cipher cipher = Cipher.getInstance( "AES/CBC/PKCS7Padding" );
     cipher.init( Cipher.ENCRYPT_MODE, sk );
     byte[] iv = cipher.getIV();
@@ -54,6 +55,7 @@ public class TDKey
 
   public static String decrypt( String encrypted ) throws Exception 
   { 
+    // TDLog.v("Decrypting <" + encrypted + ">" );
     String[] parts = encrypted.split( ":" );
     byte[] iv = Base64.decode( parts[0], Base64.DEFAULT );
     byte[] enc = Base64.decode( parts[1], Base64.DEFAULT );
