@@ -113,6 +113,7 @@ public class GeminiDialog extends MyDialog
           public void onResult( boolean valid, String response )
           {
             if ( valid ) {
+              TDSetting.setGeminiApiKey( key );
               if ( mPref != null ) mPref.setButtonValue( "***" );
               if ( mParent != null ) mParent.showAIdialog();
             } else {
