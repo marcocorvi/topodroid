@@ -26,12 +26,12 @@
     <item quantity="one">Talált %1$d műszert</item>
     <item quantity="other">Talált %1$d műszert</item>
   </plurals>
-  <TODO plurals name="trilateration_success">
+  <plurals name="trilateration_success">
     <item quantity="zero">Nem talált csoportot</item>
     <item quantity="one">Háromszögelés sikeres: %1$d csoport</item>
     <item quantity="other">Háromszögelés sikeres: %1$d csoport</item>
   </plurals>
-  <TODO plurals name="export_data_batch">
+  <plurals name="export_data_batch">
     <item quantity="zero">Exportált 0 a zero mérésből</item>
     <item quantity="one">Exportált %1$s a %2$d mérésből</item>
     <item quantity="other">Exportált %1$s a %2$d mérésből</item>

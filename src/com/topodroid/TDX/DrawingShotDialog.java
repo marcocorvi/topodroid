@@ -471,6 +471,10 @@ class DrawingShotDialog extends MyDialog
       dismiss();
     } else if ( b == mBtnOK ) {
       MyKeyboard.close( mKeyboard );
+      if ( sameString( mETfrom, mETto ) ) {
+        mETto.setError( resString( R.string.equal_station_names ) );
+        return;
+      }
 
       if ( TDLevel.overAdvanced ) {
         if ( mCBfrom != null && mCBfrom.isChecked() ) {
