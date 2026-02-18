@@ -120,6 +120,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="bad_sibling">Toma incorrecta</string>
     <string name="bad_station">Estación incorrecta: %1$s</string>
     <string name="bad_station_name">Nombre de la estación no valida</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
     <!-- TODO string name="invalid_name">Invalid name</string -->
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->

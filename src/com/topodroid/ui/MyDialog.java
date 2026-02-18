@@ -33,6 +33,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.Button;
 
 
@@ -209,5 +210,19 @@ public class MyDialog extends Dialog
    * @param r   resource id
    */
   protected String resString( int r ) { return mContext.getResources().getString( r ); }
+
+  /** @return true if two edittetxt contains equal strings
+   * @param e1  first edittext
+   * @param e2  second edittext
+   */
+  protected static boolean sameString( EditText e1, EditText e2 )  // protected should be enough
+  {
+    if ( e1.getText() == null ) return false;
+    String s1 = e1.getText().toString();
+    if ( s1.length()== 0 ) return false;
+    if ( e2.getText() == null ) return false;
+    return s1.equals( e2.getText().toString() );
+  }
+    
 
 }

@@ -156,7 +156,7 @@ class TdmEquateNewDialog extends MyDialog
               break;
             }
           } else {
-            mEdit[k].setError( mContext.getResources().getString( R.string.error_name_required ) );
+            mEdit[k].setError( resString( R.string.error_name_required ) );
             return;
           }
         }
@@ -205,7 +205,7 @@ class TdmEquateNewDialog extends MyDialog
                                     // TDLog.v("Good station: " + good_station + survey);
                                   }
                               } else {
-                                  //mEdit[k].setError(mContext.getResources().getString(R.string.error_name_required));
+                                  //mEdit[k].setError( resString(R.string.error_name_required) );
                                   //return;
                               }
                           }
@@ -267,7 +267,7 @@ class TdmEquateNewDialog extends MyDialog
                                 // TDLog.v("Good station: " + good_station + survey);
                             }
                         } else {
-                            //mEdit[k].setError(mContext.getResources().getString(R.string.error_name_required));
+                            //mEdit[k].setError( resString(R.string.error_name_required) );
                             //return;
                         }
                     }
@@ -319,7 +319,7 @@ class TdmEquateNewDialog extends MyDialog
                                       //TDLog.v("HBEQ Bad station: " + good_station + survey);
                                   }
                               } else {
-                                  //mEdit[k].setError(mContext.getResources().getString(R.string.error_name_required));
+                                  //mEdit[k].setError( resString(R.string.error_name_required) );
                                   //return;
                               }
                           }

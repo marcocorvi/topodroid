@@ -119,6 +119,7 @@
     <string name="bad_sibling">坏的测量簇</string>
     <string name="bad_station">坏的站点: %1$s</string>
     <string name="bad_station_name">不合规的站点名</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
     <!-- TODO string name="invalid_name">Invalid name</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->

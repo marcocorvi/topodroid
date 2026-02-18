@@ -105,6 +105,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="bad_sibling">Visada irmã inválida</string>
   <string name="bad_station">Base ruim: %1$s</string>
   <string name="bad_station_name">Nome de base não suportado</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
   <string name="invalid_name">Nome inválido</string>
   <!-- UNUSED string name="missing_area">ÁREA</string -->
   <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->

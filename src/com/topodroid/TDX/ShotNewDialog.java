@@ -414,6 +414,10 @@ class ShotNewDialog extends MyDialog
     String val;
 
     if ( b == mBtnOk || b == mBtnSave ) {
+      if ( ShotEditDialog.sameString( mETfrom, mETto ) ) {
+        mETto.setError( resString( R.string.equal_station_names ) );
+        return;
+      }
       String shot_from =  null;
       String shot_to = "";
    

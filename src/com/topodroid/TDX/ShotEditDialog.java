@@ -853,7 +853,6 @@ class ShotEditDialog extends MyDialog
     return true;
   }
 
-
   /** display the CutCopyPaste popup for the given edit text
    * @param v   edit text view
    * 
@@ -1013,12 +1012,20 @@ class ShotEditDialog extends MyDialog
         }
       }
     } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
+      if ( sameString( mETfrom, mETto ) ) {
+        mETto.setError( resString( R.string.equal_station_names ) );
+        return;
+      }
       if ( saveDBlock() ) {
         dismiss();
       } else {
         TDLog.e("OK failed to save block");
       }
     } else if ( b == mButtonSave ) {
+      if ( sameString( mETfrom, mETto ) ) {
+        mETto.setError( resString( R.string.equal_station_names ) );
+        return;
+      }
       if ( ! saveDBlock() ) {
         TDToast.makeWarn( R.string.shot_not_saved );
       }

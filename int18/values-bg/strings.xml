@@ -120,6 +120,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bad_sibling">Лоши измервания</string>
     <string name="bad_station">Лош репер: %1$s</string>
     <string name="bad_station_name">Непозволено име на репер</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
     <string name="invalid_name">Невалидно име</string>
     <!-- UNUSED string name="missing_area">ПЛОЩ</string -->
     <!-- UNUSED string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string -->

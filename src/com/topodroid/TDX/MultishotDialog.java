@@ -206,6 +206,10 @@ class MultishotDialog extends MyDialog
 
     Button b = (Button) v;
     if ( b == mButtonRenumber ) {
+      if ( sameString( mETfrom, mETto ) ) {
+        mETto.setError( resString( R.string.equal_station_names ) );
+        return;
+      }
       String from = TDUtil.toStationFromName( mETfrom.getText().toString() );
       if ( ! TDUtil.isStationName( from ) ) { 
         mETfrom.setError( resString( R.string.bad_station_name ) );;

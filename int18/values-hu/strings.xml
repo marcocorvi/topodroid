@@ -117,6 +117,7 @@
     <string name="bad_sibling">Rossz mérés ismétlés</string>
     <string name="bad_station">Hibás mérési pont: %1$s</string>
     <string name="bad_station_name">Illegális mérési pont név</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
 	<string name="invalid_name">Érvénytelen név</string>
     <!-- UNUSED string name="missing_area">TERÜLET</string -->
     <!-- UNUSED string name="missing_hint">Engedélyezd vagy installáld a hiányzó ezközöket</string -->

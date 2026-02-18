@@ -117,6 +117,7 @@
     <string name="bad_sibling">Battuta con dissimili</string>
     <string name="bad_station">Caposaldo non corretto: %1$s</string>
     <string name="bad_station_name">Nome caposaldo non permesso</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
     <string name="invalid_name">Nome non valido</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->

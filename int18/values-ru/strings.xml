@@ -118,6 +118,7 @@
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
     <string name="bad_station_name">Недопустимый номер пикета</string>
+    <!-- TODO string name="equal_station_names">Equal station names</string -->
     <string name="invalid_name">Неверное имя</string>
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
