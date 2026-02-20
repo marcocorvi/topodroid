@@ -12,6 +12,7 @@
 package com.topodroid.ui;
 
 import com.topodroid.help.UserManualActivity;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
 // import com.topodroid.utils.TDLog;
@@ -212,16 +213,16 @@ public class MyDialog extends Dialog
   protected String resString( int r ) { return mContext.getResources().getString( r ); }
 
   /** @return true if two edittetxt contains equal strings
-   * @param e1  first edittext
-   * @param e2  second edittext
+   * @param e1  first edittext (FROM)
+   * @param e2  second edittext (TO)
    */
   protected static boolean sameString( EditText e1, EditText e2 )  // protected should be enough
   {
     if ( e1.getText() == null ) return false;
-    String s1 = e1.getText().toString();
+    String s1 = TDUtil.toStationFromName( e1.getText().toString() );
     if ( s1.length()== 0 ) return false;
     if ( e2.getText() == null ) return false;
-    return s1.equals( e2.getText().toString() );
+    return s1.equals( TDUtil.toStationToName( e2.getText().toString() ) );
   }
     
 

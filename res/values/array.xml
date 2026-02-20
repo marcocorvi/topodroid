@@ -493,7 +493,7 @@
      <item name="normal">1</item>
      <item name="medium">3</item>
      <item name="large">4</item>
-     <item name="huge">2</item>
+     <item name="huge">5</item>
   </string-array>
 
   <!-- UNUSED string-array name="logStream" translatable="false">

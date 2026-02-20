@@ -24,7 +24,7 @@ import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.TDToast;
 // import com.topodroid.TDX.TDPath;
-// import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.CWDActivity;
 import com.topodroid.TDX.R;
 
@@ -44,6 +44,7 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 
 /**
  */
@@ -226,11 +227,62 @@ public class TDPrefActivity extends Activity
     }).execute();
   }
 
+  static String[] mCategories = {
+    "MAIN",
+    "SURVEY",
+    "SKETCH",
+    "CALIBRATION",
+    "DEVICE",
+    "SKETCH",
+    "DATA",
+    "UNITS",
+    "ACCUACY",
+    "LOCATION",
+    "CANVAS",
+    "LINES",
+    "POINTS",
+    // R.string.title_settings_walls, // 27 AUTOWALLS
+    "SKETCH",
+    "SKETCH",
+    "SKETCH",
+    "3D_VIEWER",
+    "3D_VIEWER",
+    "3D_VIEWER",
+    "MAIN",
+    "SURVEY",
+    "DATA",
+    "SKETCH",
+    "LINES",
+    "DEVICE",
+    "IMPORT",
+    "SKETCH",
+    "EXPORT",
+    "IMPORT",
+    "EXPORT_ENABLE",
+    "EXPORT_SURVEX",
+    "EXPORT_THERION",
+    "EXPORT_COMPASS",
+    "EXPORT_CSURVEY",
+    "EXPORT_VISUALTOPO",
+    "EXPORT_SVG",
+    "EXPORT_SHAPEFILE",
+    "EXPORT_DXF",
+    // R.string.title_settings_png, // 17
+    "EXPORT_GPX",
+    "EXPORT_KML",
+    "EXPORT_CSV",
+    "EXPORT_WALLS",
+    "EXPORT_POLYGON",
+    // R.string.title_settings_log       // 43
+  };
+
+  private String getCategoryName() { return getResources().getString( TDPrefCat.mTitleRes[ mPrefCategory ] ); }
+
   /** set the title of the window
    */
   private void setTheTitle()
   {
-    setTitle( getResources().getString( TDPrefCat.mTitleRes[ mPrefCategory ] ) );
+    setTitle( "[AI]  - " + getCategoryName() );
   }
 
   /** start the dialog to export/import settings
@@ -608,5 +660,20 @@ public class TDPrefActivity extends Activity
       if ( pref != null ) pref.setButtonValue( "---" );
       TDSetting.setGeminiApiKey( "" );
     } } );
+  }
+
+  @Override 
+  public boolean onTouchEvent( MotionEvent ev )
+  {
+    // TDLog.v("Touch at " + ev.getX(0)/TopoDroidApp.mDisplayWidth + " " + ev.getY(0)/TopoDroidApp.mDisplayHeight );
+    if ( ev.getX(0)/TopoDroidApp.mDisplayWidth < 0.1f && ev.getY(0)/TopoDroidApp.mDisplayHeight < 0.04f ) {
+      TDLog.v("Start AI dialog");
+      if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+        (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();
+      } else { // start API key dialog
+        (new GeminiDialog( this, this, null )).show();
+      }
+    }
+    return false;
   }
 }

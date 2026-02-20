@@ -369,7 +369,7 @@ public class UserManualActivity extends Activity
       viewUrl( WEBSITE );
     // } else if ( pos == 19 ) {
     //   if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-    //     (new AIdialog( this, this, TDSetting.mGeminiApiKey, pos )).show();
+    //     (new HelpAIdialog( this, this, TDSetting.mGeminiApiKey, pos )).show();
     //   } else {
     //     TDToast.make( R.string.no_api_key );
     //   }
@@ -420,7 +420,7 @@ public class UserManualActivity extends Activity
   public void showAIdialog()
   {
     TDToast.make( R.string.ai_internet );
-    (new AIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
+    (new HelpAIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
   }
 
   public void showManPage( String page )

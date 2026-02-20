@@ -75,13 +75,17 @@ public class AIhelper // extends AsyncTask< String, Void, String >
   static private ChatFutures chat = null;
   // */
 
-  public AIhelper( Context ctx, AIdialog dialog, String user_key, String page )
+  // private Runnable mUpdater = null;
+
+  public AIhelper( Context ctx, AIdialog dialog, String user_key, String page, Pattern pattern )
   {
     mContext = ctx;
     mDialog  = dialog;
     mUserKey = user_key;
-    mPattern = Pattern.compile( "\\[([^]]+\\.htm)\\]" );
+    mPattern = pattern; // Pattern.compile( "\\[([^]]+\\.htm)\\]" );
+    TDLog.v("pattern " + mPattern.toString() );
     mRefPage = page;
+    // mUpdater = updater;
     readManualIndex();
   }
 
@@ -125,7 +129,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
    * @note this method must be called everytime a question is asked
    * N.B. chat and model can be saved between instanatiations if the model does not change
    */
-  void setModel( String model_name )
+  void setModel( String model_name, int r_ai_model )
   {
     if ( ! model_name.equals( mModelName ) ) {
       mModelName = model_name;
@@ -149,7 +153,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
 
       Content.Builder cb2 = new Content.Builder();
       cb2.setRole("model");
-      cb2.addText( mContext.getResources().getString( R.string.ai_model ) );
+      cb2.addText( mContext.getResources().getString( r_ai_model ) );
       Content modelInstruction  = cb2.build();
 
       List< Content > history = new ArrayList<>();
@@ -229,11 +233,18 @@ public class AIhelper // extends AsyncTask< String, Void, String >
           int len = message.length();
           int offset = 0;
           while ( offset < len && matcher.find( offset ) ) {
-            // TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
-            pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) ) );
+            int cnt = matcher.groupCount();
+            if ( cnt == 1 ) {
+              TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
+              pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) ) );
+            } else if ( cnt == 2 ) {
+              TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) + " " + matcher.group( 2 ) );
+              pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) + ":" + matcher.group( 2 ) ) );
+            }
             offset = matcher.end() + 1;
           }
           for ( PageLink page : pages ) {
+            TDLog.v("page: " + page.mFilename );
             page.mLinkText = getTitle( page.mFilename );
           }
           offset = 0;
@@ -244,7 +255,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
             ssb.insert( linkStart, page.mLinkText );
             offset += page.mLinkText.length() - ( page.mEnd - page.mStart );
             ClickableSpan cs = new ClickableSpan() {
-              @Override public void onClick( View v ) { mDialog.openPageOnParent( page.mFilename ); }
+              @Override public void onClick( View v ) { mDialog.openOnParent( page.mFilename ); }
               @Override public void updateDrawState( TextPaint ds ) {
                 super.updateDrawState( ds );
                 ds.setUnderlineText( true );

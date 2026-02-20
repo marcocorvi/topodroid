@@ -154,7 +154,7 @@ public class HelpDialog extends MyDialog
 
   public void showAIdialog()
   {
-    (new AIdialog( mContext, this, TDSetting.mGeminiApiKey, mPage )).show();
+    (new AIdialog( mContext, this, TDSetting.mGeminiApiKey, mPage, R.string.ai_model_manual )).show();
   }
 
   public void showInvalid( final TDPref pref, final String response )

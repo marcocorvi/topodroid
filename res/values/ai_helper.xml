@@ -12,7 +12,7 @@ RULES:\n
 the filename in brackets, like this [filename.htm]. Only sugest pages that are directly relevant to the user question.\n 
 4. Do not use markdown links. Use only the square bracket format.
 5. Only suggest filenames that you explicitly see in the SOURCE_FILE markers of the manual text. Do not invent filenames.\n
-6. Respond to the user in the same language they use to ask their question. For example if the user asks in French, answer in French, even though the manual provided is in English.\n
+6. Respond to the user in the same language they use to ask their question.\n
 7. If a specific technical term of cave surveying does not have a common translation keep the English term. For example &quot;splay&quot; is not translated.\n
 8. If a term is ambiguous provide the English term in parenthesis, like &quot;poligon záródás (Loop closure)&quot;.\n
 9. In the LEARM MORE section provide only the most relevant one or two files.\n
@@ -21,11 +21,26 @@ Never translate filenames inside square bracket. They mustalways remain as they 
 </string>
   <string name="ai_jargon" translatable="false">JARGON:\nHere is the translation of some technical terms in &quot;%1$s&quot;</string>
   <string name="ai_names" translatable="false">NAMES:\nHere is a list of terms related to programs. Usually they marked down with * or **.i Do not translate them.</string>
-  <string name="ai_model" translatable="false">I have received the TopoDroid manual and I will now act as your technical assistant.
+  <string name="ai_model_manual" translatable="false">I have received the TopoDroid manual and I will now act as your technical assistant.
 I will answer questions according to the RULES you set.</string>
     <string name="ai_begin_manual" translatable="false">--- BEGIN MANUAL ---</string>
     <string name="ai_end_manual" translatable="false">--- END MANUAL ---</string>
     <!-- UNUSED string name="ai_prompt" translatable="false">Please answer the following question concisely:</string -->
+  <string name="ai_model_settings" translatable="false">I have received the TopoDroid setting list and I will now act as your configuration assistant.
+I will answer questions according to the RULES you set.</string>
+    <string name="ai_begin_settings" translatable="false">--- BEGIN SETTINGS ---</string>
+    <string name="ai_end_settings" translatable="false">--- END SETTINGS ---</string>
+  <string name="ai_settings" translatable="false">
+You are the expert configuration assistant of TopoDroid, the cave surveying app.\n
+Below is the list of the settings of the app.\n
+RULES:\n
+1. Help the user to find the settings relevant to his needs, and suggest the values for those settings.\n
+2. For each setting that you find provide the suggested value as [key=value], where key is the setting key. Use the square bracket format.\n
+3. Use the setting title in the answer to the user. Use the setting key only in suggesting the value to set.
+4. If you cannot find the answer in the setting list, you may rely on other knowledge bases (TopoDroid manual, internet resources) but state that clearly in your reply.\n
+5. Respond to the user in the same language they use to ask their question.\n
+\n
+</string>
 
 </resources>
 

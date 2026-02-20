@@ -734,15 +734,28 @@ public class TDSetting
   //   mZoomControls = ctrl;
   //   // FIXME forward setting to DrawingWindow
   // }
-  public static void setZoomControls( String ctrl, boolean is_multitouch ) // PRIVATE
+
+  /** set the zoom control setting
+   * @param ctrl   integer as string (0 none, 1 temporary, 2 permanent)
+   * @param is_multitouch whether the device is multitouch
+   */
+  private static void setZoomControls( String ctrl, boolean is_multitouch ) // PRIVATE
   {
     try {
-      int i = Integer.parseInt( ctrl );
-      if ( i >= 0 && i <= 2 ) mZoomCtrl = i;
-      if ( mZoomCtrl == 0 && ( mStylusOnly || ! is_multitouch ) ) mZoomCtrl = 1;
+      setZoomControlsInt( Integer.parseInt( ctrl ), is_multitouch );
     } catch ( NumberFormatException e ) {
       TDLog.e( e.getMessage() );
     }
+  }
+
+  /** set the zoom control setting
+   * @param ctrl   integer (0 none, 1 temporary, 2 permanent)
+   * @param is_multitouch whether the device is multitouch
+   */
+  public static void setZoomControlsInt( int i, boolean is_multitouch )
+  {
+    if ( i >= 0 && i <= 2 ) mZoomCtrl = i;
+    if ( mZoomCtrl == 0 && ( mStylusOnly || ! is_multitouch ) ) mZoomCtrl = 1;
   }
 
   /** set the sibling thresholds 
@@ -902,6 +915,9 @@ public class TDSetting
     return i;
   }
 
+  /** set the loop closure setting
+   * @param loop_closure  new value (0 none, 1 normal, 3 triangles, 4 weighted, 5 selective)
+   */
   private static void setLoopClosure( int loop_closure )
   {
     mLoopClosure = loop_closure;
@@ -912,6 +928,9 @@ public class TDSetting
     }
   }
 
+  /** set the radius of selection for the sketch canvas
+   * @param s  selection radius
+   */
   private static String setSelectness( float s ) 
   {
     String ret = null;
@@ -920,6 +939,9 @@ public class TDSetting
     return ret;
   }
 
+  /** set the radius of the erase for the sketch canvas
+   * @param s  erase radius
+   */
   private static String setEraseness( float s ) 
   {
     String ret = null;
@@ -928,6 +950,9 @@ public class TDSetting
     return ret;
   }
 
+  /** set the radius of the selection dots for the sketch canvas
+   * @param s  dot radius
+   */
   private static String setDotRadius( float s ) 
   {
     String ret = null;
@@ -937,6 +962,9 @@ public class TDSetting
     return ret;
   }
 
+  /** set the minimum shift for the sketch canvas
+   * @param s  minimum shift [pxl]
+   */
   private static String setMinShift( int s ) 
   {
     String ret = null;
@@ -945,6 +973,11 @@ public class TDSetting
     return ret;
   }
 
+  /** set the radius of the pointing for the sketch canvas
+   * @param s  pointing radius
+   * @note the pointing radius is the max radius of the touch shift for selection
+   * and is also used (min radius) for orientation and size when point items are drawn
+   */
   private static String setPointingRadius( int s ) 
   {
     String ret = null;
@@ -953,6 +986,9 @@ public class TDSetting
     return ret;
   }
 
+  /** set the size of the stylus for the sketch canvas
+   * @param s  stylus size
+   */
   private static String setStylusSize( float s ) // STYLUS_MM
   {
     if ( s <= 0 ) { 
@@ -975,7 +1011,8 @@ public class TDSetting
       case 1: sz = BTN_SIZE_NORMAL; break;
       case 3: sz = BTN_SIZE_MEDIUM; break;
       case 4: sz = BTN_SIZE_LARGE;  break;
-      case 2: sz = BTN_SIZE_HUGE;   break;
+      case 5: sz = BTN_SIZE_HUGE;   break;
+      default: sz = BTN_SIZE_NORMAL;
     }
     // TDLog.v("SETTING set button size-index " + size + " size: current " + mSizeButtons + " new " + sz );
     mSizeBtns = size;
@@ -998,13 +1035,17 @@ public class TDSetting
       case 1: sz = BTN_SIZE_NORMAL; break;
       case 3: sz = BTN_SIZE_MEDIUM; break;
       case 4: sz = BTN_SIZE_LARGE;  break;
-      case 2: sz = BTN_SIZE_HUGE;   break;
+      case 5: sz = BTN_SIZE_HUGE;   break;
+      default: sz = BTN_SIZE_NORMAL;
     }
     return (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
   }
 
   private static boolean bool( String bol) { return bol.equals("true"); }
 
+  /** set the hidden navigation bar
+   * @param hide_navbar whether to hide the navigation bar
+   */
   private static void setHideNavBar( boolean hide_navbar )
   {
     // mHideNavBar = hide_navbar;
@@ -1054,7 +1095,7 @@ public class TDSetting
     setSizeButtons( tryInt( prefs,  key[1].key, key[1].dflt ) );      // DISTOX_SIZE_BUTTONS
     setSymbolSize( tryFloat( prefs, key[2].key, key[2].dflt ) );      // DISTOX_SYMBOL_SIZE
     // skip 3
-    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( key[4].key, key[4].dflt ), false ); // DISTOX_LOCAL_MAN
+    /* mLocalManPages = */ handleLocalUserMan( /* my_app, */ prefs.getString( key[4].key, key[4].dflt ), false ); // DISTOX_LOCAL_MAN
     setLocale( prefs.getString( key[5].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
     mOrientation = Integer.parseInt( prefs.getString( key[6].key, key[6].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
@@ -1358,7 +1399,7 @@ public class TDSetting
     mBedding          = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_BEDDING
     mWithSensors      = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) ); // DISTOX_WITH_SENSORS
     setLoopClosure( tryInt(   prefs,      key[ 9].key,      key[ 9].dflt ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mLoopThr          = tryFloat( prefs,  key[10].key,      key[10].dflt );  // DISTOX_LOOP_THR
+    mLoopThr          = tryFloat( prefs,  key[10].key,      key[10].dflt );  // DISTOX_LOOP_THRESHOLD
     mWithAzimuth      = prefs.getBoolean( key[11].key, bool(key[11].dflt) ); // DISTOX_ANDROID_AZIMUTH
     mTimerWait        = tryInt(   prefs,  key[12].key,      key[12].dflt );  // DISTOX_SHOT_TIMER
     mBeepVolume       = tryInt(   prefs,  key[13].key,      key[13].dflt );  // DISTOX_BEEP_VOLUME
@@ -1594,7 +1635,7 @@ public class TDSetting
       setActivityBooleans( hlp.getSharedPrefs(), level );
     } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_LOCAL_MAN (choice)
       // TDLog.v("SETTING handle local man pages - key " + k + " default " + def[6] );
-      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, key[4].dflt ), true );
+      /* mLocalManPages = */ handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, key[4].dflt ), true );
     } else if ( k.equals( key[ 5 ].key ) ) {           // DISTOX_LOCALE (choice)
       setLocale( tryStringValue( hlp, k, v, key[5].dflt ), true );
     } else if ( k.equals( key[ 6 ].key ) ) {           // DISTOX_ORIENTATION (choice)
@@ -2006,7 +2047,7 @@ public class TDSetting
       mWithSensors  = tryBooleanValue( hlp, k, v, bool(key[ 8].dflt) );
     } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_LOOP_CLOSURE_VALUE
       setLoopClosure( tryIntValue( hlp, k, v, key[ 9].dflt ) );
-    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_LOOP_THR
+    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_LOOP_THRESHOLD
       mLoopThr = tryFloatValue( hlp, k, v, key[10].dflt );
     } else if ( k.equals( key[11 ].key ) ) { // DISTOX_ANDROID_AZIMUTH
       mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(key[11].dflt) );
@@ -2276,6 +2317,33 @@ public class TDSetting
     }
     return null;
   }
+
+  public static String computeLRUDhorizontal( float angle )
+  {
+    mLRUDhorizontal = angle;
+    if ( mLRUDhorizontal <  0 ) { mLRUDhorizontal =  0; return TDString.ZERO; }
+    if ( mLRUDhorizontal > 91 ) { mLRUDhorizontal = 91; return TDString.NINETYONE; }
+    return null;
+  }
+
+  public static String computeLRUDvertical( float angle )
+  {   
+    mLRUDvertical = angle;
+    if ( mLRUDvertical <  0 ) { mLRUDvertical =  0; return TDString.ZERO; }
+    if ( mLRUDvertical > 91 ) { mLRUDvertical = 91; return TDString.NINETYONE; }
+    return null;
+  } 
+    
+  public static String computeLRUDangle( float angle )     
+  {
+    String ret = null;
+    mOrthogonalLRUDAngle = angle;
+    if ( mOrthogonalLRUDAngle <  0 ) { mOrthogonalLRUDAngle =  0;  ret = TDString.ZERO; }
+    if ( mOrthogonalLRUDAngle > 90 ) { mOrthogonalLRUDAngle = 90;  ret = TDString.NINETY; }
+    mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
+    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f );
+    return ret;
+  } 
     
   private static String updatePrefExport( TDPrefHelper hlp, String k, String v )
   {
@@ -2562,6 +2630,7 @@ public class TDSetting
       if ( mSvgLabelStroke < 0.01f ) { mSvgLabelStroke = 0.01f; ret = "0.01"; }
     } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SVG_LINE_STROKE
       mSvgLineStroke     = tryFloatValue( hlp, k, v, key[7].dflt );
+      if ( mSvgLineStroke < 0.01f ) { mSvgLineStroke = 0.01f; ret = "0.01"; }
     } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_SVG_GRID_STROKE
       mSvgGridStroke     = tryFloatValue( hlp, k, v, key[8].dflt );
       if ( mSvgGridStroke < 0.01f ) { mSvgGridStroke = 0.01f; ret = "0.01"; }
@@ -3315,8 +3384,9 @@ public class TDSetting
    *    - the maximum number of user man index must agree with the number of entries in array.xml
    *    - the order on the url resource array must agree with that in array.xml
    */
-  public static boolean handleLocalUserMan( /* Context my_app, */ String man, boolean download ) 
+  public static void handleLocalUserMan( /* Context my_app, */ String man, boolean download ) 
   {
+    mLocalManPages = false;
     int idx = Integer.parseInt( man ); // no throw
     if ( idx > 0 && idx < 8 ) { 
       if ( download && TDandroid.checkInternet( TDInstance.context ) ) { // download user manual 
@@ -3337,9 +3407,8 @@ public class TDSetting
           (new UserManDownload( /* my_app, */ url )).execute();
 	}
       }
-      return true;
+      mLocalManPages = true;
     }
-    return false;
   }
 
   // ============================================================================

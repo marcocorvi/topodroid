@@ -430,6 +430,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    * @param id    id of the given splay-block
    * @param name  expected splay station
    * @note the list is interrupted when there is a splay with station different from the given "name"
+   * @note used by ShotWindow updateSplayShots
    */
   ArrayList< DBlock > getSplaysAtId( long id, String name )
   {
