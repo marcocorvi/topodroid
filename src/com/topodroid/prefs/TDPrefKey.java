@@ -66,6 +66,7 @@ class TDPrefKey
 
 // TODO new formulation of leys
 
+  // settings groups
   static final int LONG = 1; // long
   static final int BOOL = 2;
   static final int FLT  = 3;
@@ -1007,8 +1008,22 @@ class TDPrefKey
     return res;
   }
 
+  /** @return the preference-key of a setting (-1 if not found)
+   * @param kay   setting key
+   */
+  static TDPrefKey getPrefKey( String kay )
+  {
+    for ( TDPrefKey[] keyset : mKeySet ) {
+      if ( keyset == null ) continue;
+      for ( TDPrefKey k : keyset ) {
+        if ( k.key.equals( kay ) ) return k;
+      }
+    }
+    return null;
+  }
+
   // /** @return the group of a setting (-1 if not found)
-  //  * @param kay   seting key
+  //  * @param kay   setting key
   //  */
   // static int getKeyGroup( String kay )
   // {

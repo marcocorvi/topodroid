@@ -26,6 +26,7 @@ import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.TDToast;
 // import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.CWDActivity;
 import com.topodroid.TDX.R;
@@ -34,8 +35,9 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-// import android.content.res.Resources;
+import android.content.res.Resources;
 // import android.content.res.Configuration;
+import android.content.DialogInterface;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -671,7 +673,33 @@ public class TDPrefActivity extends Activity
   //   }
   // }
 
-  public void showManPage( String page ) {}
+  public void showManPage( String page ) 
+  {
+    final String[] vals = page.split(":");
+    if ( vals.length != 2 ) return;
+    TDLog.v( "key <" + vals[0] + "> value <" + vals[1] + ">" );
+    // vals[0] = key
+    // vals[1] = value
+    final TDPrefKey pref = TDPrefKey.getPrefKey( vals[0] );
+    if ( pref != null ) {
+      final TDPrefHelper hlp = new TDPrefHelper( this );
+      Resources res = getResources();
+      TopoDroidAlertDialog.makeAlert( this, res,
+        String.format( res.getString( R.string.format_setting ), res.getString( pref.title ), vals[1] ),
+        new DialogInterface.OnClickListener() {
+          public void onClick( DialogInterface dialog, int btn ) {
+            TDSetting.updatePreference( hlp, pref.cat, vals[0], vals[1] );
+          }
+        }
+      );
+    } else {
+      TDLog.e("PrefKey not found");
+    }
+  }
+
+
+
+
 
   public void showAIdialog() {}
 

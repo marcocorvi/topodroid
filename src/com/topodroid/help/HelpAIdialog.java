@@ -63,11 +63,11 @@ public class HelpAIdialog extends AIdialog
     TDLog.v("HelpAI man page " + page );
     if ( mSystemInstruction == null ) {
       mSystemInstruction = getOrderedUserManual( context );
-      TDLog.v("HelpAI System instr. length " + mSystemInstruction.length() );
+      // TDLog.v("HelpAI System instr. length " + mSystemInstruction.length() );
     }
 
     String lang = TDSetting.mLocale;
-    TDLog.v("HelpAI Jargon lang: <" + lang + ">" );
+    // TDLog.v("HelpAI Jargon lang: <" + lang + ">" );
     if ( TDString.isNullOrEmpty( lang ) || lang.equals("en") ) {
       if ( mLang != null ) {
         mLang   = null;
@@ -76,11 +76,11 @@ public class HelpAIdialog extends AIdialog
     } else if ( ! lang.equals( mLang ) ) {
       mLang = lang;
       mJargon = getJargon( context, mLang );
-      TDLog.v("HelpAI jargon length " + mJargon.length() );
+      // TDLog.v("HelpAI jargon length " + mJargon.length() );
     }
     if ( mNames == null ) {
       mNames = getNames( context );
-      TDLog.v("HelpAI names length " + mNames.length() );
+      // TDLog.v("HelpAI names length " + mNames.length() );
     }
     mLocalContext = true;
 
@@ -126,7 +126,7 @@ public class HelpAIdialog extends AIdialog
       TDLog.e("Error reading list.txt " + e.getMessage() );
     }
     sb.append( ctx.getResources().getString( R.string.ai_end_manual ) );
-    TDLog.v("User manual length " + sb.length() );
+    // TDLog.v("HelpAI User manual length " + sb.length() );
     return sb.toString()
            .replaceAll( "<!--(.*)-->", "" )
            .replaceAll( "(?i)<i>(.*?)</i>", "*$1*" )
@@ -173,7 +173,7 @@ public class HelpAIdialog extends AIdialog
     } catch (IOException e ) {
       TDLog.e("Error reading list.txt " + e.getMessage() );
     }
-    TDLog.v("Jargon length " + sb.length() );
+    // TDLog.v("HelpAI Jargon length " + sb.length() );
     return sb.toString();
 
   }
@@ -198,7 +198,7 @@ public class HelpAIdialog extends AIdialog
     } catch (IOException e ) {
       TDLog.e("Error reading list.txt " + e.getMessage() );
     }
-    TDLog.v("Names length " + sb.length() );
+    // TDLog.v("HelpAI Names length " + sb.length() );
     return sb.toString();
   }
 
@@ -259,7 +259,7 @@ public class HelpAIdialog extends AIdialog
     while ( offset < len && matcher.find( offset ) ) {
       // int cnt = matcher.groupCount();
       // if ( cnt == 1 ) {
-        TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
+        // TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
         pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) ) );
         // TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) + " " + matcher.group( 2 ) );
         //  pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) + ":" + matcher.group( 2 ) ) );
