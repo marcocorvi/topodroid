@@ -72,7 +72,6 @@ class SymbolEnableDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
 
-    // requestWindowFeature(Window.FEATURE_NO_TITLE);
     initLayout(R.layout.symbol_enable_dialog, null );
     // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 

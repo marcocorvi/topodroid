@@ -23,6 +23,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDPref;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.GeminiDialog;
+import com.topodroid.help.AIdialog;
 import com.topodroid.TDX.TDandroid;
 // import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
@@ -322,6 +323,15 @@ public class UserManualActivity extends Activity
     mList.setVisibility( View.GONE );
     mList.invalidate();
     mList.setOnItemClickListener( this );
+  }
+
+  /** lifecycle: activity destroy
+   */
+  @Override
+  public void onDestroy( )
+  {
+    super.onDestroy();
+    AIdialog.resetChat();
   }
 
   /** react to a user tap

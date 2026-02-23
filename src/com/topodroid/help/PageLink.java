@@ -12,13 +12,13 @@
 package com.topodroid.help;
 
 
-class PageLink
+public class PageLink
 {
-  int mStart, mEnd; // start and end position in the AI response text
-  String mFilename; // filename of man-page
-  String mLinkText; // link text
+  public int mStart, mEnd; // start and end position in the AI response text
+  public String mFilename; // filename of man-page
+  public String mLinkText; // link text
 
-  PageLink( int start, int end, String filename )
+  public PageLink( int start, int end, String filename )
   {
     mStart = start;
     mEnd   = end;

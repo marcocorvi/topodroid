@@ -280,7 +280,7 @@
         </activity>
 
 	<activity android:name="com.topodroid.prefs.TDPrefActivity"
-	  android:theme="@style/Theme.NoFullScreen"
+	  android:theme="@style/Theme.NoFullScreenNoTitle"
           android:windowSoftInputMode="stateHidden"
           android:configChanges="orientation|screenSize"
           android:exported="false"

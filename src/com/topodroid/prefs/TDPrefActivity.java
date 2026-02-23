@@ -17,7 +17,9 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;
+import com.topodroid.help.AIdialog;
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
@@ -40,11 +42,15 @@ import android.app.Activity;
 import android.net.Uri;
 
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.Toolbar;
 // import android.widget.ScrollView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
+// import android.view.MotionEvent;
+import android.view.Window;
 
 /**
  */
@@ -77,6 +83,8 @@ public class TDPrefActivity extends Activity
   private Context mCtx;
   private TDPref[] mPrefs;
 
+  private TextView mTitleText = null;
+
   /** find a preference by the name
    * @param name    preference name
    * @return the requested preference (or null if not found)
@@ -99,6 +107,7 @@ public class TDPrefActivity extends Activity
     if ( this == mPrefActivityAll ) mPrefActivityAll = null;
     if ( this == mPrefActivitySurvey ) mPrefActivitySurvey = null;
     // if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) { TopoDroidApp.mPrefActivityAll = null; }
+    AIdialog.resetChat();
   }
 
   /** lifecycle: activity create
@@ -113,6 +122,7 @@ public class TDPrefActivity extends Activity
 
     TDandroid.setScreenOrientation( this );
 
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     // mApp = (TopoDroidApp) getApplication();
     mCtx = TDInstance.context;
@@ -282,7 +292,11 @@ public class TDPrefActivity extends Activity
    */
   private void setTheTitle()
   {
-    setTitle( "[AI]  - " + getCategoryName() );
+    if ( mTitleText != null ) {
+      mTitleText.setText( getCategoryName() );
+    } else {
+      setTitle( "[AI]  - " + getCategoryName() );
+    }
   }
 
   /** start the dialog to export/import settings
@@ -312,9 +326,17 @@ public class TDPrefActivity extends Activity
   private boolean loadPreferences( )
   {
     setContentView( R.layout.pref_activity );
+    // getActionBar().hide(); // setVisibility( View.GONE );
     LinearLayout layout = (LinearLayout) findViewById( R.id.layout );
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     layout.setOnLongClickListener( this );
+    ImageButton button = (ImageButton)findViewById( R.id.title_button );
+    button.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai ) );
+    button.setOnClickListener( new OnClickListener() {
+      @Override public void onClick( View v ) { startGemini(); }
+    } );
+    mTitleText = (TextView)findViewById( R.id.title_text );
+    mTitleText.setTextColor( 0xff6699ff );
 
     mPrefs = null;
     // Resources res = getResources();
@@ -662,18 +684,23 @@ public class TDPrefActivity extends Activity
     } } );
   }
 
-  @Override 
-  public boolean onTouchEvent( MotionEvent ev )
+  public void startGemini()
   {
-    // TDLog.v("Touch at " + ev.getX(0)/TopoDroidApp.mDisplayWidth + " " + ev.getY(0)/TopoDroidApp.mDisplayHeight );
-    if ( ev.getX(0)/TopoDroidApp.mDisplayWidth < 0.1f && ev.getY(0)/TopoDroidApp.mDisplayHeight < 0.04f ) {
-      TDLog.v("Start AI dialog");
-      if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-        (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();
-      } else { // start API key dialog
-        (new GeminiDialog( this, this, null )).show();
-      }
+    if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+      (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();
+    } else { // start API key dialog
+      (new GeminiDialog( this, this, null )).show();
     }
-    return false;
   }
+
+  // @Override 
+  // public boolean onTouchEvent( MotionEvent ev )
+  // {
+  //   // TDLog.v("Touch at " + ev.getX(0)/TopoDroidApp.mDisplayWidth + " " + ev.getY(0)/TopoDroidApp.mDisplayHeight );
+  //   if ( ev.getX(0)/TopoDroidApp.mDisplayWidth < 0.1f && ev.getY(0)/TopoDroidApp.mDisplayHeight < 0.04f ) {
+  //     TDLog.v("Start AI dialog");
+  //     startGemini();
+  //   }
+  //   return false;
+  // }
 }

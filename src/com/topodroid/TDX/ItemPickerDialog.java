@@ -123,7 +123,6 @@ class ItemPickerDialog extends MyDialog
   public void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
-    // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     DIMXP = Float.parseFloat( resString( R.string.dimxp ) );
     DIMXL = Float.parseFloat( resString( R.string.dimxl ) );
@@ -246,8 +245,6 @@ class ItemPickerDialog extends MyDialog
     // }
     // mBTcancel.setOnClickListener( this );
     // mBTok.setOnClickListener( this );
-
-    // requestWindowFeature( Window.FEATURE_NO_TITLE );
 
     // TDLog.v( "ItemPickerDialog ... createAdapters" );
     updateList();

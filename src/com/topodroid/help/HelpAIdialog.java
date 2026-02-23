@@ -13,50 +13,61 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDColor;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.R;
-
-// import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.content.Context;
 
 // import android.widget.Button;
-// import android.widget.TextView;
+import android.widget.TextView;
 // import android.widget.EditText;
 // import android.widget.Spinner;
 // import android.widget.ArrayAdapter;
 // import android.widget.AdapterView;
 
-// import android.view.View;
+import android.view.View;
 // import android.view.View.OnClickListener;
+
+import android.text.TextPaint;
+import android.text.Spanned;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
+import android.text.method.LinkMovementMethod;
+import android.text.SpannableStringBuilder;
 
 import  java.io.InputStream;
 import  java.io.InputStreamReader;
 import  java.io.BufferedReader;
 import  java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.HashMap;
 
 public class HelpAIdialog extends AIdialog
 {
+
   // TODO list of help entries
   /** cstr
    */
   public HelpAIdialog( Context context, IHelpViewer parent, String user_key, String page )
   {
-    super( context, parent, user_key, page, R.string.ai_model_manual, Pattern.compile( "\\[([^]]+\\.htm)\\]" ) );
+    super( context, parent, user_key, page, R.string.ai_model_manual );
+    mPattern = Pattern.compile( "\\[([^]]+\\.htm)\\]" );
     mRtitle = R.string.title_ai_dialog;
 
-    // TDLog.v("Man page " + page );
+    TDLog.v("HelpAI man page " + page );
     if ( mSystemInstruction == null ) {
       mSystemInstruction = getOrderedUserManual( context );
-      TDLog.v("System instr. length " + mSystemInstruction.length() );
+      TDLog.v("HelpAI System instr. length " + mSystemInstruction.length() );
     }
 
     String lang = TDSetting.mLocale;
-    // TDLog.v("Jargon lang: <" + lang + ">" );
+    TDLog.v("HelpAI Jargon lang: <" + lang + ">" );
     if ( TDString.isNullOrEmpty( lang ) || lang.equals("en") ) {
       if ( mLang != null ) {
         mLang   = null;
@@ -65,9 +76,15 @@ public class HelpAIdialog extends AIdialog
     } else if ( ! lang.equals( mLang ) ) {
       mLang = lang;
       mJargon = getJargon( context, mLang );
+      TDLog.v("HelpAI jargon length " + mJargon.length() );
     }
-    if ( mNames == null ) mNames = getNames( context );
+    if ( mNames == null ) {
+      mNames = getNames( context );
+      TDLog.v("HelpAI names length " + mNames.length() );
+    }
     mLocalContext = true;
+
+    readManualIndex();
   }
 
   @Override
@@ -190,6 +207,88 @@ public class HelpAIdialog extends AIdialog
   {
     dismiss();
     mParent.showManPage( page );
+  }
+
+  /** read the map filenames to titles
+   */
+  private void readManualIndex() // this is not sttaic because it needs Context ...
+  {
+    if ( mManualIndex != null ) return;
+    Pattern pattern = Pattern.compile( "<a\\s+href=\"([^\"]+\\.htm)\">([^<]+)<\\/a>" );
+    mManualIndex = new HashMap<>();
+    try {
+      InputStream is = mContext.getAssets().open("man/manual16.htm");
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String line;
+      while ( ( line = br.readLine() ) != null ) {
+        line = line.trim();
+        if ( ! line.startsWith("<a href") ) continue;
+        Matcher matcher = pattern.matcher( line );
+        if ( matcher.find() ) {
+          mManualIndex.put( matcher.group(1), matcher.group(2) );
+        }
+      }
+      is.close();
+    } catch ( IOException e ) {
+      TDLog.e("Error reading manual16: " + e.getMessage() );
+    }
+  }
+
+  /** @return the totle for a filename - or filename if there is no title
+   * @param filename  filename
+   */
+  private String getTitle( String filename )
+  {
+    if ( mManualIndex == null ) return filename;
+    String title = mManualIndex.get( filename );
+    return ( title == null )? filename : title;
+  }
+
+  @Override
+  public void showResponse( String message )
+  {
+    TextView tv = mAnswer;
+    if ( tv == null ) return;
+    ArrayList< PageLink > pages = new ArrayList<>();
+    // SpannableString ssb = new SpannableString( message ); // immutable text
+    SpannableStringBuilder ssb = new SpannableStringBuilder( message ); // mutable text
+    Matcher matcher = mPattern.matcher( message );
+    // TDLog.v("Message: " + message );
+    int len = message.length();
+    int offset = 0;
+    while ( offset < len && matcher.find( offset ) ) {
+      // int cnt = matcher.groupCount();
+      // if ( cnt == 1 ) {
+        TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
+        pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) ) );
+        // TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) + " " + matcher.group( 2 ) );
+        //  pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) + ":" + matcher.group( 2 ) ) );
+      // }
+      offset = matcher.end() + 1;
+    }
+    for ( PageLink page : pages ) {
+      TDLog.v("page: " + page.mFilename );
+      page.mLinkText = getTitle( page.mFilename );
+    }
+    offset = 0;
+    for ( PageLink page : pages ) {
+      int linkStart = offset + page.mStart;
+      int linkEnd   = offset + page.mStart + page.mLinkText.length();
+      ssb.delete( linkStart, offset + page.mEnd );
+      ssb.insert( linkStart, page.mLinkText );
+      offset += page.mLinkText.length() - ( page.mEnd - page.mStart );
+      ClickableSpan cs = new ClickableSpan() {
+        @Override public void onClick( View v ) { openOnParent( page.mFilename ); }
+        @Override public void updateDrawState( TextPaint ds ) {
+          super.updateDrawState( ds );
+          ds.setUnderlineText( true );
+          ds.setColor( TDColor.FIXED_BLUE );
+        }
+      };
+      ssb.setSpan( cs, linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
+    }
+    tv.setText( ssb );
+    tv.setMovementMethod( LinkMovementMethod.getInstance() );
   }
 
 }

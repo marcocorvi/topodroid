@@ -67,7 +67,6 @@ class PlotNewDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // requestWindowFeature(Window.FEATURE_NO_TITLE);
     initLayout( R.layout.plot_new_dialog, R.string.plot_new );
 
     mEtName  = (EditText) findViewById(R.id.edit_plot_name);

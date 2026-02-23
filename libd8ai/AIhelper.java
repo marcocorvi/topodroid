@@ -27,9 +27,10 @@ import android.view.View;
 import android.text.TextPaint;
 import android.text.Spanned;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.style.ClickableSpan;
 import android.text.method.LinkMovementMethod;
+
+import android.view.View;
 
 // for VertexAI replace ai.client.generativeai with firebase.vertexai
 import com.google.ai.client.generativeai.GenerativeModel;
@@ -65,9 +66,6 @@ public class AIhelper // extends AsyncTask< String, Void, String >
   final String mUserKey;
 
   final String mRefPage; // refrence section of the user-manual
-  Pattern mPattern;
-
-  static private HashMap<String, String> mManualIndex = null;
 
   /* */
   static private String  mModelName = null;
@@ -77,53 +75,16 @@ public class AIhelper // extends AsyncTask< String, Void, String >
 
   // private Runnable mUpdater = null;
 
-  public AIhelper( Context ctx, AIdialog dialog, String user_key, String page, Pattern pattern )
+  public AIhelper( Context ctx, AIdialog dialog, String user_key, String page )
   {
     mContext = ctx;
     mDialog  = dialog;
     mUserKey = user_key;
-    mPattern = pattern; // Pattern.compile( "\\[([^]]+\\.htm)\\]" );
-    TDLog.v("pattern " + mPattern.toString() );
     mRefPage = page;
     // mUpdater = updater;
-    readManualIndex();
+    // readManualIndex();
   }
 
-  /** read the map filenames to titles
-   */
-  private void readManualIndex() // this is not sttaic because it needs Context ...
-  {
-    if ( mManualIndex != null ) return;
-    Pattern pattern = Pattern.compile( "<a\\s+href=\"([^\"]+\\.htm)\">([^<]+)<\\/a>" );
-    mManualIndex = new HashMap<>();
-    try {
-      InputStream is = mContext.getAssets().open("man/manual16.htm");
-      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
-      String line;
-      while ( ( line = br.readLine() ) != null ) {
-        line = line.trim();
-        if ( ! line.startsWith("<a href") ) continue;
-        Matcher matcher = pattern.matcher( line );
-        if ( matcher.find() ) {
-          mManualIndex.put( matcher.group(1), matcher.group(2) );
-        }
-      }
-      is.close();
-    } catch ( IOException e ) {
-      TDLog.e("Error reading manual16: " + e.getMessage() );
-    }
-  }
-
-  /** @return the totle for a filename - or filename if there is no title
-   * @param filename  filename
-   */
-  private String getTitle( String filename )
-  {
-    if ( mManualIndex == null ) return filename;
-    String title = mManualIndex.get( filename );
-    return ( title == null )? filename : title;
-  }
-    
   /** set the Gemini model
    * @param model_name   name of the Gemini model
    * @note this method must be called everytime a question is asked
@@ -140,9 +101,9 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       gcb.maxOutputTokens = 1024; // 1 token = 4 chars
       GenerationConfig gc = gcb.build();
       GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
-      this.model = GenerativeModelFutures.from( gm );
-      this.chat = null; // force chat rebuild
-    } 
+      model = GenerativeModelFutures.from( gm );
+      chat = null; // force chat rebuild
+    }
     if ( this.chat == null ) {
       Content.Builder cb1 = new Content.Builder();
       cb1.setRole("user");
@@ -159,15 +120,15 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       List< Content > history = new ArrayList<>();
       history.add( mystemInstruction );
       history.add( modelInstruction );
-      this.chat = this.model.startChat( history );
+      chat = model.startChat( history );
     }
   }
 
   /** reset the chat so that the next time a question is posed the chat is rebuiilt
    */
-  void resetChat()
+  static void resetChat()
   {
-    this.chat = null;
+    chat = null;
   }
 
   /** ask a question
@@ -175,11 +136,11 @@ public class AIhelper // extends AsyncTask< String, Void, String >
    * @param tv            textview for the response
    * @param local_context whether to use local_context
    */
-  public void ask( String user_prompt, TextView tv, boolean local_context )
+  public void ask( String user_prompt, AIdialog dialog, boolean local_context )
   {
     if ( chat != null ) {
       final String error_format = mContext.getResources().getString( R.string.ai_error );
-      final WeakReference<TextView> textViewRef = new WeakReference<>(tv);
+      final WeakReference<AIdialog> dialogRef = new WeakReference<>(dialog);
 
       StringBuilder sb = new StringBuilder();
       if ( local_context && mRefPage != null ) sb.append("CONTTEXT: The user is currently reading the manual page: \'").append( mRefPage ).append("\'\n");
@@ -196,12 +157,12 @@ public class AIhelper // extends AsyncTask< String, Void, String >
         new FutureCallback<GenerateContentResponse>() {
           @Override
           public void onSuccess(GenerateContentResponse response) {
-            updateUI( textViewRef, response.getText() );
+            updateUI( dialogRef, response.getText() );
           }
 
           @Override
           public void onFailure(Throwable t) {
-            updateUI( textViewRef, String.format( error_format, t.getMessage() ) );
+            updateUI( dialogRef, String.format( error_format, t.getMessage() ) );
           }
         },
         new Executor() {  // context.getMainExecutor()
@@ -216,59 +177,17 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     }
   }
 
-  private void updateUI( WeakReference<TextView> tvRef, String message )
+  private void updateUI( WeakReference<AIdialog> ref, String message )
   {
     // Ensure we run on the Main UI Thread
     new Handler( Looper.getMainLooper() ).post( new Runnable() {
       @Override public void run() {
-        mDialog.resetCanSubmit();
-        TextView tv = tvRef.get();
-        if ( tv != null ) {
-          ArrayList< PageLink > pages = new ArrayList<>();
-
-          // SpannableString ssb = new SpannableString( message ); // immutable text
-          SpannableStringBuilder ssb = new SpannableStringBuilder( message ); // mutable text
-          Matcher matcher = mPattern.matcher( message );
-          // TDLog.v("Message: " + message );
-          int len = message.length();
-          int offset = 0;
-          while ( offset < len && matcher.find( offset ) ) {
-            int cnt = matcher.groupCount();
-            if ( cnt == 1 ) {
-              TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) );
-              pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) ) );
-            } else if ( cnt == 2 ) {
-              TDLog.v("Found " + matcher.start() + "-" + matcher.end() + ": " + matcher.group( 1 ) + " " + matcher.group( 2 ) );
-              pages.add( new PageLink( matcher.start(), matcher.end(), matcher.group( 1 ) + ":" + matcher.group( 2 ) ) );
-            }
-            offset = matcher.end() + 1;
-          }
-          for ( PageLink page : pages ) {
-            TDLog.v("page: " + page.mFilename );
-            page.mLinkText = getTitle( page.mFilename );
-          }
-          offset = 0;
-          for ( PageLink page : pages ) {
-            int linkStart = offset + page.mStart;
-            int linkEnd   = offset + page.mStart + page.mLinkText.length();
-            ssb.delete( linkStart, offset + page.mEnd );
-            ssb.insert( linkStart, page.mLinkText );
-            offset += page.mLinkText.length() - ( page.mEnd - page.mStart );
-            ClickableSpan cs = new ClickableSpan() {
-              @Override public void onClick( View v ) { mDialog.openOnParent( page.mFilename ); }
-              @Override public void updateDrawState( TextPaint ds ) {
-                super.updateDrawState( ds );
-                ds.setUnderlineText( true );
-                ds.setColor( TDColor.FIXED_BLUE );
-              }
-            };
-            ssb.setSpan( cs, linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
-          }
-          tv.setText( ssb );
-          tv.setMovementMethod( LinkMovementMethod.getInstance() );
-        }
+        if ( ref == null ) return;
+        AIdialog dialog = ref.get();
+        dialog.resetCanSubmit();
+        dialog.showResponse( message );
       }
-    });
+    } );
   }
 
   /** validate an API key

@@ -29,6 +29,7 @@ import android.app.Activity;
 
 import android.widget.Button;
 import android.widget.ListView;
+// import android.widget.TextView;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -154,7 +155,7 @@ public class HelpDialog extends MyDialog
 
   public void showAIdialog()
   {
-    (new AIdialog( mContext, this, TDSetting.mGeminiApiKey, mPage, R.string.ai_model_manual )).show();
+    (new HelpAIdialog( mContext, this, TDSetting.mGeminiApiKey, mPage )).show();
   }
 
   public void showInvalid( final TDPref pref, final String response )
