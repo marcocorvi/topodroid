@@ -1684,7 +1684,7 @@ public class TDSetting
     // TDLog.v("Encrypted API key: " + enc_key );
     if ( enc_key == null || enc_key.length() < 20 ) {
       mGeminiApiKey = "";
-    } else if ( enc_key.startsWith( "Alza" ) ) {
+    } else if ( enc_key.startsWith( "AIza" ) ) {
       mGeminiApiKey =  enc_key;
     } else { 
       if ( enc_key.indexOf(":") > 0 ) {
