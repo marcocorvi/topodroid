@@ -4,7 +4,7 @@
     <string name="ai_null_chat">Null ИИ чат</string>
     <string name="ai_error">Ошибка ИИ %1$s</string>
     <string name="ai_internet">Внимание. Для работы ИИ-помощи требуется подключение к интернету.</string>
-    <!-- TODO string name="ai_no_internet">No web connection.</string -->
+    <string name="ai_no_internet">Нет подключения к интернету.</string>
     <string name="ai_prompt">Введите свой вопрос</string>
     <string name="ai_invalid_key">Недействительный ключ API</string>
     <string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string>
@@ -83,7 +83,7 @@
     <string name="pref_io">Экспорт</string>
     <string name="pref_bt">Bluetooth</string>
     <string name="pref_cal">Калибровка</string>
-    <!-- TODO string name="pref_xt">Special functions</string -->
+    <string name="pref_xt">Специальные функции</string>
 
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
@@ -118,7 +118,7 @@
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
     <string name="bad_station_name">Недопустимый номер пикета</string>
-    <!-- TODO string name="equal_station_names">Equal station names</string -->
+    <string name="equal_station_names">Одинаковые номера пикетов</string>
     <string name="invalid_name">Неверное имя</string>
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
@@ -133,7 +133,7 @@
     <string name="failed_snap_to_splays">Рядом нет бокового замера чтобы привязать к нему эту линию</string>
     <string name="failed_append_to_line">Не удалось добавить новую линию к существующей</string>
     <string name="failed_zoomfit">Не удалось вместить в экран</string>
-    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
+    <string name="fail_forget_device">Android не удалось удалить устройство Bluetooth</string>
 
     <string name="bric_device">Прибор %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -354,7 +354,7 @@
     <string name="location_start_fine">Начинаю уточнение позиции</string>
     <string name="location_enabled">Убедитесь, что функция МЕСТОПОЛОЖЕНИЕ включена</string>
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
-    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <string name="discovery_error">Ошибка обнаружения BT: %1$s</string>
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
@@ -480,7 +480,7 @@
     <string name="no_undelete_paste">Нет записей для восстановления/вставки</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Уклон %5$.1f"</string>
-    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
+    <string name="format_setting">Переформатировать %1$s в %2$s ?</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
@@ -852,13 +852,13 @@
     <!-- UNUSED string name="ask_backups_clear">Удалить резервные копии абрисов?</string -->
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
     <string name="ask_clear_equates">Удалить все соединения?</string>
-    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <string name="ask_forget_device">Удалить устройство %1$s?</string>
 
     <string name="button_add"       >Добавить</string>
     <string name="button_apply"     >Применить</string>
     <string name="button_back"      >Назад</string>
     <string name="button_cancel"    >Отмена</string>
-    <!-- TODO string name="button_forget"    >Forget</string -->
+    <string name="button_forget"    >Удалить</string>
     <string name="button_geocode"   >ГеоКод</string>
     <!-- UNUSED string name="button_change">Изменить</string -->
     <string name="button_clipboard" >Вставить</string>
@@ -1284,7 +1284,7 @@
     <string name="export_xvi">Xvi изображение</string>
     <string name="export_with_xsections">Экспортировать поперечные сечения</string>
     <string name="export_grouped">Сгруппировать элементы в слоях по типу</string>
-    <!-- TODO string name="export_origin">Origin station</string -->
+    <string name="export_origin">Пикет начала координат</string>
     <string name="export_with_reference">Включить XY точки отсчета</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1312,7 +1312,7 @@
 
     <string name="title_gemini">Введите ключ API вашего ИИ.</string>
     <string name="title_ai_dialog">ИИ-помощник</string>
-    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
+    <string name="title_ai_dialog_pref">Помощь настрек ИИ</string>
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
@@ -1441,7 +1441,7 @@
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
     <string name="title_station_photo">Фото пикета</string>
-    <!-- TODO string name="title_team_dialog">Team names</string -->
+    <string name="title_team_dialog">Имена съёмщиков</string>
     <string name="title_plot_rename">Операции с абрисом</string>
     <string name="title_plot_zoomfit">Вместить / Ориентация</string>
     <string name="title_calib_export">Экспорт калибровки как</string>

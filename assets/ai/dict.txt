@@ -1,8 +1,8 @@
-azimuth:{
+ciónazimuth:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: azimut
   fr: 
   hu: azimut
   it: azimut
@@ -13,7 +13,7 @@ bearing:{
   bg: 
   cn: 
   de: Richtung
-  es: 
+  es: Dirección
   fr: 
   hu: irány
   it: direzione
@@ -35,7 +35,7 @@ compass:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: brújula
   fr: 
   hu: kompasz
   it: bussola
@@ -68,7 +68,7 @@ development:{
   bg: 
   cn: 
   de: Gesamtganglänge
-  es: desarrpllo
+  es: desarrollo
   fr: deveppement
   hu: járathossz
   it: sviluppo
@@ -90,7 +90,7 @@ grid:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: red
   fr: 
   hu: rács
   it: reticolato
@@ -178,7 +178,7 @@ range:{
   bg: 
   cn: 
   de: Entfernung
-  es: 
+  es: extensión
   fr: extension
   hu: távolság
   it: estensione
@@ -189,7 +189,7 @@ scale:{
   bg: 
   cn: 
   de: Maßstab
-  es: 
+  es: escala
   fr: echelle
   hu: skála
   it: scala
@@ -211,18 +211,18 @@ shot:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: toma
   fr: visée
   hu: mérés
   it: tiro
-  pt: medida
+  pt: toma
   ru: замер
 }
 splay:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: toma lateral
   fr: 
   hu: sün
   it: splay
@@ -266,7 +266,7 @@ x-section:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: sección
   fr: coupe
   hu: keresztmetszet
   it: sezione
