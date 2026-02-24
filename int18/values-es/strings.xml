@@ -505,7 +505,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_device">Dispositivo</string>
     <string name="menu_device_add">Añadir dispositivo</string>
     <string name="menu_export">Exportar</string>
-    <!-- TODO string name="menu_exit">EXIT</string -->
+    <string name="menu_exit">SALIR</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">Tomas eliminadas</string>
@@ -686,8 +686,20 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_note">Nota de toma</string>
     <!-- UNUSED string name="shot_reverse">Toma Inversa</string -->
     <string name="shot_to">Toma hasta</string>
-    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
+<!-- Más común y recomendada (neutra y usada en apps técnicas) -->
+<string name="shot_refreshed">Lista de disparos actualizada</string>
 
+<!-- Más corta / directa (ideal para notificaciones o toasts) -->
+<string name="shot_refreshed">Disparos actualizados</string>
+
+<!-- Más explícita (si "shot" se refiere a mediciones o tomas) -->
+<string name="shot_refreshed">Lista de mediciones refresca</string>
+
+<!-- Con verbo en pasado para confirmar acción completada -->
+<string name="shot_refreshed">Se actualizó la lista de disparos</string>
+
+<!-- Versión muy técnica (común en topografía/cavernas/balística) -->
+<string name="shot_refreshed">Lista de tomas actualizada</string>
     <string name="station">Estación</string>
     <string name="station_ask">¿Quiere Insertar estación?</string>
     <string name="station_del">¿Quiere quitar la estación del dibujo?</string>
@@ -834,7 +846,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="landscape">Paisaje</string -->
 
     <string name="display_view">vista</string>
-    <!-- TODO string name="display_refresh">Refreshed display</string -->
+    <string name="display_refresh">Pantalla actualizada</string>
     <string name="plan_view">planta</string>
     <string name="profile_view">sección</string>
 
@@ -850,14 +862,14 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">¿Actualizar la traducción del manual?\nActual V. %1$d Instalado v. %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
-    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <string name="ask_clear_equates">¿Eliminar todas las equivalencias?</string>
+    <string name="ask_forget_device">¿Olvidar el dispositivo %1$s?</string>
 
     <string name="button_add"       >Añadir</string>
     <string name="button_apply"     >Aplicar</string>
     <string name="button_back"      >Atrás</string>
     <string name="button_cancel"    >Cancelar</string>
-    <!-- TODO string name="button_forget"    >Forget</string -->
+    <string name="button_forget">Olvidar</string>
     <string name="button_geocode"   >Código geográfico</string>
     <!-- UNUSED string name="button_change">Cambio</string -->
     <string name="button_clipboard" >Notas</string>
@@ -871,7 +883,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_current"   >Activa</string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
-    <!-- TODO string name="button_settime"   >Set time</string -->
+    <string name="button_settime">Configurar hora</string>
     <string name="button_surface"   >Superficie   </string>
     <string name="button_no_extend" >No extendida </string>
     <string name="button_eval"      >Eval      </string>
@@ -896,12 +908,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >Nuevo exceso</string>
     <string name="button_rename"  >Renombrar</string>
-    <!-- TODO string name="button_retake"  >Retake</string -->
+    <string name="button_retake">Repetir</string>
     <string name="button_prefix"  >Prefijo</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
-    <!-- TODO string name="button_no">NO</string -->
+    <string name="button_no">NO</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >Off</string>
     <string name="button_on"        >On</string>
@@ -920,13 +932,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_left"      >Izquierdo</string>
     <string name="button_right"     >Derecho</string>
     <string name="button_clear"     >Borrar    </string>
-    <!-- TODO string name="button_clear_all" >Clear all</string -->
+    <string name="button_clear_all">Borrar todo</string>
     <string name="button_clear_day" >limpiar 1d  </string>
     <string name="button_clear_week">limpiar 7d  </string>
     <string name="button_clear_memory">limpiar la memoria</string>
     <string name="button_save"      >Guardar   </string>
     <string name="button_select"    >Seleccionar </string>
-    <!-- TODO string name="button_submit"    >Submit</string -->
+    <string name="button_submit">Enviar</string>
     <string name="button_leg_station">Estación principal</string>
     <string name="button_all_station">Todas las estaciones</string>
     <string name="button_leg_search">Buscar estaciones</string>
@@ -966,7 +978,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
-    <!-- TODO string name="mode_scrap">Current scrap only</string -->
+    <string name="mode_scrap">Solo el fragmento actual</string>
     <string name="mode_outline">Solo poligonal</string>
     <string name="mode_scale_ref">Barra de referencia de escala</string>
     <string name="mode_sections">Secciones</string>
@@ -1021,7 +1033,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Alias ​​de Bluetooth</string>
-    <!-- TODO string name="hint_api_key">API key</string -->
+    <string name="hint_api_key">Clave API</string>
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Codigo dispositivo</string>
     <string name="bt_alias_missing">Alias desconocido BT</string>
@@ -1154,7 +1166,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_undelete">Recuperar datos eliminados</string>
     <string name="help_photo">Ajustes de Fotos</string>
     <string name="help_sensor">Ajustes de medidas</string>
-    <!-- TODO string name="help_stations">Stations</string -->
+    <string name="help_stations">Estaciones</string>
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
     <!-- UNUSED string name="help_move">Modo Mover/zoom</string -->
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
@@ -1208,7 +1220,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
     <string name="help_save_calib">Guardar cambios en la información de calibración</string>
     <string name="help_export_survey">Exportar topografía</string>
-    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
+    <string name="help_export_surveys">Exportar todas las topografías</string>
     <string name="help_loc">Posicionamiento GPS</string>
     <string name="help_delete_survey">Eliminar topografía</string>
     <string name="help_delete_calib">Eliminar calibración</string>
@@ -1238,7 +1250,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_export_config">Exportar topografía</string>
     <string name="help_delete_config">Eliminar topografía</string>
     <string name="help_add_equate">Agregar relieves similares</string>
-    <!-- TODO string name="help_all_equates">All possible equates</string -->
+    <string name="help_all_equates">Todas las equivalencias posibles</string>
     <string name="help_equates">Lista relieves similares</string>
     <string name="help_stations_minus">Mostrar menos estaciones</string>
     <string name="help_stations_plus">Mostrar más estaciones</string>
@@ -1247,7 +1259,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_bothviews">Planta y secciones</string>
     <string name="export_config">Comandos de configuración</string>
     <string name="export_csv_rawdata">Datos sin procesar</string>
-    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
+    <string name="export_data_batch">Exportadas %1$s de %2$d Topografías</string>
     <string name="export_dxf_blocks">Bloques DXF</string>
     <string name="export_dxf_version">Versión</string>
     <string name="export_georeference">Georeferencia</string>
