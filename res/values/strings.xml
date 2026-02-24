@@ -491,8 +491,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_undelete_paste">No item to recover/paste</string>
     <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f &#x37; (%9$.1f\u00b0)</string>
     <string name="format_setting">Setting %1$s to %2$s ?</string>
+    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f &#x37; (%9$.1f\u00b0)</string>
 
     <string name="menu_3d" copyable="all">3D</string>
     <string name="menu_about">ABOUT</string>

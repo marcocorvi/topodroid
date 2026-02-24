@@ -482,6 +482,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f\"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f\"</string>
+    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ЗА ПРОГРАМАТА</string>
@@ -1316,6 +1317,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- TODO string name="title_gemini">Enter your AI API key</string -->
     <!-- TODO string name="title_ai_dialog">AI helper</string -->
+    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>

@@ -483,6 +483,7 @@
     <string name="no_undelete_paste">没有要恢复/粘贴的项目</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
+    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
@@ -1316,6 +1317,7 @@
 
     <!-- TODO string name="title_gemini">Enter your AI API key</string -->
     <!-- TODO string name="title_ai_dialog">AI helper</string -->
+    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
