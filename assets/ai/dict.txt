@@ -1,4 +1,4 @@
-azimuth:{
+ciónazimuth:{
   bg: 
   cn: 
   de: 
@@ -178,7 +178,7 @@ range:{
   bg: 
   cn: 
   de: Entfernung
-  es: 
+  es: extensión
   fr: extension
   hu: távolság
   it: estensione
@@ -189,7 +189,7 @@ scale:{
   bg: 
   cn: 
   de: Maßstab
-  es: 
+  es: escala
   fr: echelle
   hu: skála
   it: scala
@@ -211,18 +211,18 @@ shot:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: toma
   fr: visée
   hu: mérés
   it: tiro
-  pt: medida
+  pt: toma
   ru: замер
 }
 splay:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: toma lateral
   fr: 
   hu: sün
   it: splay
@@ -266,7 +266,7 @@ x-section:{
   bg: 
   cn: 
   de: 
-  es: 
+  es: sección
   fr: coupe
   hu: keresztmetszet
   it: sezione
