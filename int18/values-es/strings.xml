@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO string name="ai_null_chat">Null AI chat</string -->
-    <!-- TODO string name="ai_error">AI error %1$s</string -->
-    <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
-    <!-- TODO string name="ai_no_internet">No web connection.</string -->
-    <!-- TODO string name="ai_prompt">Type your question</string -->
-    <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
-    <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
+    <string name="ai_null_chat">Chat de IA nulo / sin contenido</string>
+    <string name="ai_error">Error de IA: %1$s</string>
+    <string name="ai_internet">Atención: la ayuda de IA requiere conexión a internet.</string>
+    <string name="ai_no_internet">No hay conexión a internet.</string>
+    <string name="ai_prompt">Escribe tu pregunta</string>
+    <string name="ai_invalid_key">Clave API no válida</string>
+    <string name="ai_key_instruction">La clave API se guarda en la memoria interna del dispositivo Android\ny solo se envía a Google.\nBusca en internet cómo obtener una clave de API de Gemini de Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
@@ -76,15 +76,15 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hsplay">Hsplay</string>
     <string name="vsplay">Vsplay</string>
 
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
-    <!-- TODO string name="pref_xt">Special functions</string -->
+    <string name="pref_gen">General</string>
+    <string name="pref_ui">Interfaz de usuario</string>
+    <string name="pref_data">Datos</string>
+    <string name="pref_plot">Croquis / Dibujo</string>
+    <string name="pref_3d">Visor 3D</string>
+    <string name="pref_io">Exportar</string>
+    <string name="pref_bt">Bluetooth</string>
+    <string name="pref_cal">Calibración</string>
+    <string name="pref_xt">Funciones especiales</string>
 	
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
