@@ -29,6 +29,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.distox2.DeviceX310TakeShot;
+import com.topodroid.dev.cavway.CavwayCalibInfo;
 import com.topodroid.calib.CBlock;
 import com.topodroid.calib.CBlockAdapter;
 import com.topodroid.calib.CalibComputer;
@@ -339,12 +340,15 @@ public class GMActivity extends Activity
         for ( int k = 0; k < list.size(); ++k ) errors[k] = ( errors[k] + errors2[k] ) / 2;
         // TODO could use discrepancies ?
         byte[] coeff2 = mCalibration2.GetCoeff(); // 52 bytes for the second sensor-set
+
         if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
-        if ( mCalibration2.Delta()   > delta   ) delta   = mCalibration2.Delta();
-        if ( mCalibration2.Delta2()  > delta2  ) delta2  = mCalibration2.Delta2();
+        delta = ( delta + mCalibration2.Delta() )/2;
+        float tmp = mCalibration2.Delta2();
+        delta2 = TDMath.sqrt( delta2*delta2 + tmp*tmp );
         if ( mCalibration2.MaxError() > maxErr ) maxErr  = mCalibration2.MaxError();
         dip  = ( dip + mCalibration2.Dip() )/2;
         roll = ( roll + mCalibration2.Roll() )/2;
+
         mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, coeff2 ) );
         // compare the two calibrations on the data
         int nk = mCalibration.getDataNumber();
@@ -592,6 +596,11 @@ public class GMActivity extends Activity
           byte[]  coeffs = null;
           byte[]  coeff1 = mCalibration.GetCoeff();
           float[] errors = mCalibration.Errors();
+          float deltaBH = mCalibration.DeltaBH();
+          float delta   = mCalibration.Delta();
+          float delta2  = mCalibration.Delta2();
+          float err_max = mCalibration.MaxError();
+          float dip     = mCalibration.Dip();
 
           if ( mCalibration2 != null ) {
             byte[] coeff2 = mCalibration2.GetCoeff();
@@ -600,14 +609,18 @@ public class GMActivity extends Activity
             System.arraycopy( coeff2, 0, coeffs, 52, 52 );
             float[] errors2 = mCalibration2.Errors();
             for ( int k = 0; k < errors.length; ++k ) errors[k] = ( errors[k] + errors2[k] )/2;
+            if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
+            delta   = ( delta   + mCalibration2.Delta() ) / 2;
+            float tmp = mCalibration2.Delta2();
+            delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp ); // this assume zero covariance which is far from correct
+            if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
+            dip = ( dip + mCalibration2.Dip() )/2;
           } else {
             coeffs = new byte[52];
             System.arraycopy( coeff1, 0, coeffs, 0, 52 );
           }
 
-          (new CalibCoeffDialog( this, this, errors, coeffs,
-                                 mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, mCalibration.Dip(), mCalibration.Roll() // FIXME ROLL_DIFFERENCE
+          (new CalibCoeffDialog( this, this, errors, coeffs, deltaBH, delta, delta2, err_max, result, dip, mCalibration.Roll() // FIXME ROLL_DIFFERENCE
                                  /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
@@ -1262,15 +1275,25 @@ public class GMActivity extends Activity
             setTitle( R.string.calib_write_coeffs );
             setTitleColor( TDColor.CONNECTED );
             float delta = mCalibration.Delta();
+            float delta2 = mCalibration.Delta2();
+            float err_max = mCalibration.MaxError();
+            float dip = mCalibration.Dip();
+            
             if ( mTwoSensors ) {
-              if ( mCalibration2.Delta() > delta ) delta = mCalibration2.Delta();
               byte[] coeff12 = new byte[104];
               System.arraycopy( coeff, 0, coeff12, 0, 52 );
               coeff = mCalibration2.GetCoeff();
               System.arraycopy( coeff, 0, coeff12, 52, 52 );
-              uploadCoefficients( delta, coeff12, true, b ); // 20250123 simplified 
+              // if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
+              delta   = ( delta   + mCalibration2.Delta() ) / 2;
+              float tmp = mCalibration2.Delta2();
+              delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp ); // this assume zero covariance which is far from correct
+              if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
+              dip = ( dip + mCalibration2.Dip() )/2; // average dip
+              byte[] cali_info = CavwayCalibInfo.makeCaliInfo( TDUtil.getSeconds(), delta, delta2, err_max, dip );
+              uploadCoefficients( delta, coeff12, true, b, cali_info ); // 20250123 simplified 
             } else {
-              uploadCoefficients( delta, coeff, true, b );
+              uploadCoefficients( delta, coeff, true, b, null );
             }
             resetTitle( );
           }
@@ -1314,7 +1337,7 @@ public class GMActivity extends Activity
    * @param mode    ...
    * @param b       ...
    */
-  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
+  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b, byte[] cali_info )
   {
     // TDLog.v("GM upload coeff, length " + coeff.length );
     String warning = null;
@@ -1332,11 +1355,11 @@ public class GMActivity extends Activity
       TopoDroidAlertDialog.makeAlert( this, getResources(), warning,
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface d, int btn ) {
-            mApp.uploadCalibCoeff( coeff, mode, b );
+            mApp.uploadCalibCoeff( coeff, mode, b, cali_info );
           }
         } );
     } else {
-      mApp.uploadCalibCoeff( coeff, mode, b );
+      mApp.uploadCalibCoeff( coeff, mode, b, cali_info );
     }
   }
 

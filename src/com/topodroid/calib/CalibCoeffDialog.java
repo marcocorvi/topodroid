@@ -15,10 +15,12 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.cavway.CavwayCalibInfo;
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.GMActivity;
 
@@ -78,6 +80,8 @@ public class CalibCoeffDialog extends MyDialog
   private TextView textAMz;
   private TextView textNL;
 
+  private byte[] mCaliInfo = null;
+
   /** cstr
    * @param context    context
    * @param coeffs     coefficients byte array, either 52 bytes or 104 bytes
@@ -118,13 +122,14 @@ public class CalibCoeffDialog extends MyDialog
     makeVectorsAndMatricex( coeff );
 
     setResult( delta_bh, delta, delta2, error, iter, dip, roll );
+    mCaliInfo = CavwayCalibInfo.makeCaliInfo( TDUtil.getSeconds(), delta, delta2, error, dip );
 
     if ( errors != null ) {
       mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, TDColor.BLUE );
     }
   }
  
-  /** set the strings for the result text fields
+  /** set the strings for the result text fields (and prepare the Cavway CaliInfo)
    * @param delta_bh   B. Heeb delta
    * @param delta      average error [degrees]
    * @param delta2     error std-dev [degrees]
@@ -326,7 +331,7 @@ public class CalibCoeffDialog extends MyDialog
       if ( mParent != null ) {
         GMActivity parent = mParent.get();
         if ( parent != null ) {
-          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite ); // 20250123 dropped false (second)
+          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite, mCaliInfo ); // 20250123 dropped false (second)
         } else {
           TDLog.e("Calib Coeff Dialog null parent");
         }

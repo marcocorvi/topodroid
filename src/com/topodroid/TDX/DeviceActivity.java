@@ -1494,7 +1494,14 @@ public class DeviceActivity extends Activity
         coeff[52+46] = low;    coeff[52+47] = high;
         coeff[52+48] = zeroNL; coeff[52+49] = zeroNL; coeff[52+50] = zeroNL; coeff[52+51] = zeroNL;
       }
-      mApp.uploadCalibCoeff( coeff, false, b ); 
+      byte[] cali_info = null;
+      if ( TDInstance.isDeviceCavway() ) {
+        cali_info = new byte[16];
+        cali_info[ 0 ] = (byte)0x55;
+        cali_info[ 1 ] = (byte)0x01;
+        for ( int k = 2; k < 16; ++ k ) cali_info[k] = (byte)0;
+      }
+      mApp.uploadCalibCoeff( coeff, false, b, cali_info ); 
     }
   }
 

@@ -1344,9 +1344,10 @@ public class TopoDroidApp extends Application
    * @param coeff    calibration coefficients
    * @param check    whether to check that the calibration matches the device 
    * @param b        "write" button - to update its state at the end
+   * @param cali_info Cavway cali-info (null for DistoX)
    * @note called by GMActivity and by CalibCoeffDialog and DeviceActivity (to reset coeffs)
    */
-  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b ) // 20250123 dropped second
+  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b, byte[] cali_info ) // 20250123 dropped second
   {
     // TODO this writeCoeff should be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
@@ -1357,6 +1358,11 @@ public class TopoDroidApp extends Application
     } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
       TDToast.makeBad( R.string.write_failed );
     } else {
+      if ( cali_info != null ) {
+        if ( ! mComm.writeCaliInfo( TDInstance.deviceAddress(), cali_info ) ) {
+          TDToast.makeBad( R.string.write_failed );
+        }
+      }
       // write OK: read coeff back and check they were written correctly
       int len = coeff.length;
       byte[] coeff2 = new byte[ len ];

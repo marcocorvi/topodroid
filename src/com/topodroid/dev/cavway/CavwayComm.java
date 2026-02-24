@@ -1859,6 +1859,37 @@ public class CavwayComm extends BleComm
   //   for (int k=0; k < b.length; ++k ) sb.append( String.format("%02x ", b[k] ) );
   //   return sb.toString();
   // }
+
+  /** write 16-byte cali_info to the device
+   * @param cali_info cali info
+   * @return true on success
+   */
+  @Override
+  public boolean writeCaliInfo( String address, byte[] cali_info )
+  {
+    if ( cali_info == null ) {
+      // TDLog.v( TAG + "write coeff: null coeff" );
+      return false;
+    }
+    int  len  = cali_info.length;
+    // TDLog.v( TAG + "write coeff: length " + len );
+    if ( len != 16 ) return false;
+    if( ! tryConnectDevice( address, null, 0 )) {
+      if ( LOG ) TDLog.v( TAG + "write cali_info: failed connect address " + address );
+      return false;
+    }
+    boolean ret = true;
+    byte[] buf = new byte[16];
+    System.arraycopy( cali_info, 0, buf, 0, 16 );
+    if ( ! writeMemory( CavwayDetails.CALIINFO_ADDRESS, buf, 16 ) ) {
+      TDLog.e( TAG + "fail write cali-info " );
+      ret = false;
+      // TDLog.v( TAG + "OK write coeff set " + k );
+    }
+    disconnectDevice();
+    return ret;
+  }
+
 }
 
 

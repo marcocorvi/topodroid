@@ -661,6 +661,8 @@ public class TopoDroidComm
     }
   }
 
+  public boolean writeCaliInfo( String address, byte[] cali_info ) { return false; }
+
   // protected static void notifyWait()
   // {
   //   synchronized ( mNewDataFlag ) {
