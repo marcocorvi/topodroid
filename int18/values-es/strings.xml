@@ -113,15 +113,15 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
-    <!-- TODO string name="station_not_saved">Station not saved</string -->
-    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
+    <string name="station_not_saved">Estación no guardada</string>
+    <string name="station_name_conflict">Nombres en conflicto. ¿Continuar de todos modos?</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
     <string name="shot_not_saved">No se guardo la toma</string>
     <string name="bad_sibling">Toma incorrecta</string>
     <string name="bad_station">Estación incorrecta: %1$s</string>
     <string name="bad_station_name">Nombre de la estación no valida</string>
-    <!-- TODO string name="equal_station_names">Equal station names</string -->
-    <!-- TODO string name="invalid_name">Invalid name</string -->
+    <string name="equal_station_names">Estaciones con el mismo nombre</string>
+    <string name="invalid_name">Nombre no válido</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -134,8 +134,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="failed_snap_to_point">No hay punto cercano al borde</string>
     <string name="failed_snap_to_splays">No se puede cerrar la línea</string>
     <string name="failed_append_to_line">No se puede agregar a otra línea</string>
-    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
-    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
+    <string name="failed_zoomfit">No se pudo ajustar a la pantalla</string>
+    <string name="fail_forget_device">Fallo al olvidar el dispositivo Bluetooth</string>
 
     <string name="bric_device">Dispositivo %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -191,10 +191,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="magn_dip">Dip Magnética: &#8230;</string>
     <string name="auto_calib">Auto Calibración</string>
     <string name="autocalib_not_supported">Cálculo de calibración requerido</string>
-    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
-    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
-    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
-    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+    <string name="recalibrate_with">Recalcular disparos con %1$s</string>
+    <string name="recalibrate_none">No hay calibración seleccionada</string>
+    <string name="recalibrate_no_cavway">No es una calibración Cavway</string>
+    <string name="recalibrate_no_coeff">No hay coeficientes de calibración</string>
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">Auto</string>
@@ -253,7 +253,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="lrud">LRUD</string>
     <string name="strike_dip">Dip dirección %1$.0f inclinación %2$.0f</string>
 
-    <!-- TODO string name="few_points">Too few data points</string -->
+    <string name="few_points">Muy pocos puntos de datos</string>
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
     <string name="few_groups">No hay suficientes datos del grupo</string>
@@ -353,9 +353,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="fmt_h_geoid">Error %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
     <string name="location_start_fine">Inicio de precisión de posicionamiento</string>
-    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
+    <string name="location_enabled">Asegúrate de que la UBICACIÓN esté activada</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
-    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <string name="discovery_error">Error al buscar dispositivos Bluetooth: %1$s</string>
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
@@ -396,7 +396,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_value_required">Introducir valor</string>
     <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
     <string name="error_bad_name">Nombre de archivo modificado</string>
-    <!-- TODO string name="error_question">Please, enter a question</string -->
+    <string name="error_question">Por favor, escribe una pregunta</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
@@ -470,7 +470,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_profile_overview">Sin descripción general de los perfiles proyectados</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
-    <!-- TODO string name="no_stations">Survey has no stations</string -->
+    <string name="no_stations">La Topografía no tiene estaciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
     <string name="no_search_result">No hay resultado de búsqueda.</string>
     <string name="no_survey">Topografía no seleccionada</string>
@@ -481,7 +481,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_undelete_paste">No hay elementos para restaurar</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f rodado %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
-    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
+   <string name="format_setting">¿Configurar %1$s a %2$s?</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">Cave3D</string>
@@ -526,8 +526,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
-    <!-- TODO string name="menu_stations">STATIONS</string -->
-    <string name="menu_sections">Secciones</string>
+    <string name="menu_stations">ESTACIONES</string>    
+	<string name="menu_sections">Secciones</string>
     <string name="menu_sensor">Tomas con sensor</string>
     <string name="menu_scan">Escanear</string>
     <!-- UNUSED string name="menu_scan_ble">Escanear BTLE</string -->
@@ -547,8 +547,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="stop_scan">Fin de escaneo</string -->
     <!-- UNUSED string name="scan_started">Discovery started</string -->
     <!-- UNUSED string name="scan_finished">Discovery finished</string -->
-    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
-
+    <string name="scanning">Escaneando… Por favor, espera</string>
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
@@ -761,8 +760,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="zip_share_failed">No se puede compartir el archivo zip</string>
-    <!-- TODO string name="file_share_failed">Unable to share file</string -->
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+    <string name="file_share_failed">No se pudo compartir el archivo</string>
+    <string name="file_share_no_app">No hay ninguna aplicación para compartir archivos</string>
     <string name="unzip_fail">Error al importar archivo</string>
     <string name="unzip_fail_sqlite">Fallo SQL: elimine la topografía y vuelva a intentarlo</string>
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
@@ -802,8 +801,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">mediciones Superficie %1$d # %2$d %3$.1f %4$s</string -->
     <string name="stat_survey_z">Desnivel de la cueva: Z %1$.1f %2$.1f %3$s</string>
-    <!-- TODO string name="stat_survey_length">Survey length %1$.1f %2$s</string -->
-    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
+    <string name="stat_survey_length">Longitud de la encuesta %1$.1f %2$s</string>    
+	<string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
