@@ -1271,9 +1271,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_uncommented_maps">Mapas sin comentarios</string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
-    <!-- TODO string name="export_prefix_set">Set</string -->
-    <!-- TODO string name="export_prefix_reset">Reset</string -->
-    <string name="export_media">elementos multimedia</string>
+    <string name="export_prefix_set">Establecer</string>
+	<string name="export_prefix_reset">Restablecer</string>
+	<string name="export_media">elementos multimedia</string>
     <!-- UNUSED string name="export_suffix_hint">sufijo</string -->
     <string name="export_series_hint">Serie</string>
     <string name="export_roundtrip">Ida y vuelta </string>
@@ -1292,7 +1292,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_xvi">Imágenes Xvi</string>
     <string name="export_with_xsections">Incluir X-sección</string>
     <string name="export_grouped">Agrupar elementos por tipos de capas</string>
-    <!-- TODO string name="export_origin">Origin station</string -->
+    <string name="export_origin">Estación de origen</string>
     <string name="export_with_reference">Incluir referencias XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke"> Trazo de dirección de línea</string -->
@@ -1318,13 +1318,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_diving_datamode">Modo de datos de inmersión</string>
     <string name="import_therion_path">Con ruta de topografía</string>
 
-    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
-    <!-- TODO string name="title_ai_dialog">AI helper</string -->
-    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
+    <string name="title_gemini">Introduce tu clave de API de IA</string>
+	<string name="title_ai_dialog">Asistente de IA</string>
+	<string name="title_ai_dialog_pref">Ayuda para configurar la IA</string>
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_audio_list">Registros de audio</string>
-    <!-- TODO string name="title_recalibrate">Calibrations</string -->
+    <string name="title_recalibrate">Calibraciones</string>
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1405,7 +1405,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_settings_gpx">GPX: configuración de exportación</string>
     <string name="title_settings_kml">KML: configuración de exportación</string>
     <string name="title_settings_srv">Configuración de exportación de paredes</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+    <string name="title_settings_ply">Configuración de exportación PLY</string>
 
     <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
     <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
@@ -1447,14 +1447,14 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
-    <!-- TODO string name="title_station_photo">Station photo</string -->
+    <string name="title_station_photo">Foto de la estación</string>
     <string name="title_team_dialog">Nombre del grupo</string>
     <string name="title_plot_rename">Operaciones de dibujo</string>
     <string name="title_plot_zoomfit">Ajuste de zoom / Orientación</string>
     <string name="title_calib_export">Exportar topografía como &#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_read_names">Station names map</string -->
+  <string name="title_read_names">Mapa de nombres de estaciones</string>
   <string name="title_import_shot">Importar Topografía</string>
   <string name="title_import_gps">Importar punto GPS</string>
   <string name="title_import_th2">Archivo Therion th2</string>
@@ -1469,8 +1469,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_export_settings">Ajustes de exportación</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
-  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
+  <string name="pref_bulk_export_title">Exportación masiva de datos</string>
+ <string name="pref_bulk_export_summary">Exportación masiva de todas las topografías</string>
   <string name="pref_export_plot_title">Formato de exportación de croquis</string>
   <string name="pref_export_plot_summary">Formato de exportación de croquis predeterminado</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
@@ -1497,8 +1497,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Seleccione idioma</string>
-  <!-- TODO string name="pref_gemini_title">AI key</string -->
-  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
+  <string name="pref_gemini_title">Clave de IA</string>
+  <string name="pref_gemini_summary">Clave de API de Gemini</string>
   <string name="pref_orientation_title">Orientación de Pantalla</string>
   <string name="pref_orientation_summary">Orientación Pantalla App </string>
   <string name="pref_single_back_title">Respaldo Simple</string>
@@ -1572,10 +1572,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_compass_splays_summary">Exportar reproducciones en archivos de Compass</string>
   <string name="pref_walls_splays_title">Muestra walls</string>
   <string name="pref_walls_splays_summary">Exportar reproducciones en archivos de walls</string>
-  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
-  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
+  <string name="pref_ply_lrud_title">LRUD en polígonos</string>
+  <string name="pref_ply_lrud_summary">Incluir datos LRUD en la exportación PLY</string>
+  <string name="pref_ply_minus_title">Resta de polígonos</string>
+  <string name="pref_ply_minus_summary">Restar polígonos durante la exportación</string>
   <string name="pref_vtopo_splays_title">Muestra VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Exportar reproducciones en archivos de VisualTopo</string>
   <string name="pref_vtopo_lrud_title">A partir de LRUD</string>
@@ -1713,8 +1713,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
   <string name="pref_text_size_title">Tamaño del texto</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
-  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
-  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
+  <string name="pref_symbol_size_title">Tamaño de símbolos</string>
+  <string name="pref_symbol_size_summary">Tamaño de los símbolos en la barra inferior</string>
   <string name="pref_closeness_title">Selección nodo</string>
   <string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string>
   <string name="pref_eraseness_title">Tamaño goma de borrar</string>
@@ -1877,10 +1877,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_label_size_summary">Tamaño del texto</string>
   <string name="pref_scalable_label_title">Etiquetas de escala</string>
   <string name="pref_scalable_label_summary">Las etiquetas se escalan con zoom</string>
-  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
-  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
-  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
-  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
+  <string name="pref_xsection_offset_title">Desplazamiento de secciones transversales</string>
+  <string name="pref_xsection_offset_summary">Desplazamiento de los puntos de la sección</string>
+  <string name="pref_plot_cache_title">Caché de bocetos</string>
+  <string name="pref_plot_cache_summary">Almacenar bocetos en memoria</string>
   <string name="pref_slope_lside_title">Línea de pendiente l-lado</string>
   <string name="pref_slope_lside_summary">Líneas de pendiente por defecto l-lado</string>
   <string name="pref_arrow_length_title">Corte seccional</string>
@@ -2181,9 +2181,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_export">Exportar topografía como &#8230;</string>
     <string name="title_equates">Enlaces</string>
     <string name="title_equate_new">Agregar enlace &#8230;</string>
-    <!-- TODO string name="button_equate_all">All</string -->
-    <!-- TODO string name="button_equate_one">One</string -->
-    <!-- TODO string name="button_equate_search">Search</string -->
+    <string name="button_equate_all">Todos</string>
+	<string name="button_equate_one">Uno</string>
+	<string name="button_equate_search">Buscar</string>
     <string name="title_equate_with">Enlace %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Carpeta de trabajo actual</string -->
     <string name="title_drop">¿Eliminar relieves? </string>
@@ -2265,7 +2265,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="legs_surface">Superficiales</string>
     <string name="legs_duplicate">Duplicadas</string>
     <string name="legs_commented">Cometadas</string>
-    <!-- TODO string name="legs_backshot">Backshot</string -->
+    <string name="legs_backshot">Toma inversa</string>
 
     <string name="proj_perspective">Parámetros de perspectiva</string>
     <string name="proj_orthographic">Parámetros ortográficos</string>
@@ -2416,10 +2416,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="warning_no_csv_type">Tipo CSV no especificado</string>
     <string name="warning_cavway_info">Fallo al obtener la información de Cavway</string>
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
-    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
-    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
-    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
-    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
+    <string name="cavway_sync_failed">Fallo al sincronizar la hora de Cavway</string>
+	<string name="cavway_synchronized">Hora de Cavway sincronizada</string>
+	<string name="cavway_sync_ok">Hora de Cavway sincronizada correctamente</string>
+	<string name="cavway_sync_offset">Desfase de hora de Cavway: %1$d [min]</string>
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->
 	  

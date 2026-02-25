@@ -90,7 +90,7 @@ grid:{
   bg: 
   cn: 
   de: 
-  es: red
+  es: cuadrícula
   fr: 
   hu: rács
   it: reticolato
