@@ -186,6 +186,9 @@
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
     <string name="calib_delta_dir">Разн. напр.: %1$.2f ± %2$.2f (max %3$.2f)</string>
+    <!-- TODO string name="calib_acc_thr">Accel. [&#x25;]</string -->
+    <!-- TODO string name="calib_mag_thr">Magn. [&#x25;]</string -->
+    <!-- TODO string name="calib_dip_thr">Dip [&#xb0;]</string -->
     <string name="magn_dip">Магн. наклон &#8230;</string>
     <string name="auto_calib">Авто калибровка</string>
     <string name="autocalib_not_supported">Необходимый расчет калибровки</string>

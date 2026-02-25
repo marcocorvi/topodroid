@@ -188,6 +188,9 @@
     <string name="calib_reset">重置DistoX校准 ?</string>
     <string name="calib_min_error">最小误差</string>
     <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+    <!-- TODO string name="calib_acc_thr">Accel. [&#x25;]</string -->
+    <!-- TODO string name="calib_mag_thr">Magn. [&#x25;]</string -->
+    <!-- TODO string name="calib_dip_thr">Dip [&#xb0;]</string -->
     <string name="magn_dip">磁倾角(dip) &#8230;</string>
     <string name="auto_calib" copyable="pt">自动校准</string>
     <string name="autocalib_not_supported">需要进行校准计算</string>
