@@ -3280,11 +3280,14 @@ public class ShotWindow extends Activity
   /** recompute bearing/clino of survey shots from one shot onwards - only Cavway
    * @param shot_id  first shot to recompute
    * @param calib_name name of the calibration that is used - must be Cavway calibration
+   * @param acc_thr      acceleration threshold [%]
+   * @param mag_thr      magnetic threshold [%]
+   * @param dip_thr      dip threshold [degrees]
    * NOTE this is not for diving-mode
    */
-  void doRecalibrate( long shot_id, String calib_name )
+  void doRecalibrate( long shot_id, String calib_name, float acc_thr, float mag_thr, float dip_thr )
   {
-    // TODO
+    TDLog.v("Recompute shots - Threshold A " + acc_thr + " M " + mag_thr + " Dip " + dip_thr );
     CalibInfo ci = mApp.mDData.selectCalibInfo( calib_name );
     if ( ci == null ) {
       TDToast.make( R.string.recalibrate_none );
@@ -3330,51 +3333,82 @@ public class ShotWindow extends Activity
     for ( RawDBlock b : shots ) {
       float FV = TDUtil.FV;
       if ( b.mRawMx != 0 && b.mRawMy != 0 && b.mRawMz != 0 && b.mRawGx != 0 && b.mRawGy != 0 && b.mRawGz != 0 ) {
+        StringBuilder sb = new StringBuilder();
+        boolean err = false;
         TDVector g1 = new TDVector( MemoryData.longToSignedInt1( b.mRawGx )/FV, MemoryData.longToSignedInt1( b.mRawGy )/FV, MemoryData.longToSignedInt1( b.mRawGz )/FV );
         TDVector m1 = new TDVector( MemoryData.longToSignedInt1( b.mRawMx )/FV, MemoryData.longToSignedInt1( b.mRawMy )/FV, MemoryData.longToSignedInt1( b.mRawMz )/FV );
-        float b1 = computeB( mG1, vG1, mM1, vM1, nL1, g1, m1 );
-        float c1 = computeC( mG1, vG1, nL1, g1 );
+        computeV( mG1, vG1, nL1, g1 );
+        computeV( mM1, vM1, null, m1 );
+        float b1 = computeB( g1, m1 );
+        float c1 = computeC( g1 );
+        TDVector v1 = new TDVector( TDMath.cosd( c1 ) * TDMath.sind( b1 ), TDMath.cosd( c1 ) * TDMath.cosd( b1 ), TDMath.sind( c1 ) );
+        float m1abs = m1.Abs();
+        float g1abs = g1.Abs();
+        float d1 = TDMath.acosd( m1.dot(g1)/(m1abs * g1abs) );
+
         TDVector g2 = new TDVector( MemoryData.longToSignedInt2( b.mRawGx )/FV, MemoryData.longToSignedInt2( b.mRawGy )/FV, MemoryData.longToSignedInt2( b.mRawGz )/FV );
         TDVector m2 = new TDVector( MemoryData.longToSignedInt2( b.mRawMx )/FV, MemoryData.longToSignedInt2( b.mRawMy )/FV, MemoryData.longToSignedInt2( b.mRawMz )/FV );
-        float b2 = computeB( mG2, vG2, mM2, vM2, nL2, g2, m2 );
-        float c2 = computeC( mG2, vG2, nL2, g2 );
-        TDVector v1 = new TDVector( TDMath.cosd( c1 ) * TDMath.sind( b1 ), TDMath.cosd( c1 ) * TDMath.cosd( b1 ), TDMath.sind( c1 ) );
+        computeV( mG2, vG2, nL2, g2 );
+        computeV( mM2, vM2, null, m2 );
+        float b2 = computeB( g2, m2 );
+        float c2 = computeC( g2 );
         TDVector v2 = new TDVector( TDMath.cosd( c2 ) * TDMath.sind( b2 ), TDMath.cosd( c2 ) * TDMath.cosd( b2 ), TDMath.sind( c2 ) );
+        float m2abs = m2.Abs();
+        float g2abs = g2.Abs();
+        float d2 = TDMath.acosd( m2.dot(g2)/(m2abs * g1abs) );
+        float m_err = TDMath.abs(m1abs - m2abs) / m1abs;
+        if ( m_err > mag_thr ) {
+          sb.append("Err:" ).append( String.format(Locale.US, " Mag %.2f", m_err ) );
+          err = true;
+        } 
+        float g_err = TDMath.abs(g1abs - g2abs) / g1abs;
+        if ( g_err > acc_thr ) {
+          if ( ! err ) sb.append("Err:" );
+          sb.append( String.format(Locale.US, " Acc %.2f", g_err ) );
+          err = true;
+        }
+        float d_err = TDMath.abs(d1 - d2);
+        if ( d_err > dip_thr ) {
+          if ( ! err ) sb.append("Err:" );
+          sb.append( String.format(Locale.US, " Dip %.2f", d_err ) );
+        }
+
         TDVector v = v1.plus( v2 );
         // v.normalize();
         float b0 = TDMath.atan2d( v.x, v.y );  if ( b0 < 0 ) b0 += 360;
         float c0 = TDMath.atan2d( v.z, TDMath.sqrt( v.x*v.x + v.y*v.y ) );
         // TDLog.v( "Shot " + b.mId + " B " + b.mBearing + " " + b1 + " " + b2 + " " + b0 + " C " + b.mClino + " " + c1 + " " + c2 + " " + c0 );
         mApp_mData.updateShotBearingClino( b.mId, TDInstance.sid, b0, c0 );
+        mApp_mData.updateShotComment( b.mId, TDInstance.sid, sb.toString() );
       }
     }
   }
     
-  /** @return the clino
+  /** calibrate a vector
    * @param mG    AG calibration matrix
    * @param vG    BG calibration vector
    * @param nL    non-linear coeffs (unused)
-   * @param g0    sensor raw values
+   * @param g0    in-out vector
    */
-  private float computeC( TDMatrix mG, TDVector vG, TDVector nL, TDVector g0 )
+  private void computeV( TDMatrix mG, TDVector vG, TDVector nL, TDVector g0 )
   {
-    TDVector g = vG.plus( mG.timesV( g0 ) );
+    g0 = vG.plus( mG.timesV( g0 ) );
+  }
+
+  /** @return the clino
+   * @param g    sensor calibrated values
+   */
+  private float computeC( TDVector g )
+  {
     return TDMath.atan2d( - g.x, TDMath.sqrt(g.y*g.y + g.z*g.z ) );
   }
 
   /** @return the bearing
-   * @param mG    AG calibration matrix
-   * @param vG    BG calibration vector
-   * @param nL    non-linear coeffs (unused)
-   * @param mM    AM calibration matrix
-   * @param vM    BM calibration vector
-   * @param g0    G sensor raw values
-   * @param m0    M sensor raw values
+   * @param g    G sensor callibrated values
+   * @param m    M sensor callibrated values
    */
-  private float computeB( TDMatrix mG, TDVector vG, TDMatrix mM, TDVector vM, TDVector nL, TDVector g0, TDVector m0 )
+  private float computeB( TDVector g, TDVector m )
   {
-    TDVector g = vG.plus( mG.timesV( g0 ) );  g.normalize();
-    TDVector m = vM.plus( mM.timesV( m0 ) );  m.normalize();
     float sd = g.y * m.z - g.z * m.y; // this is ec[0];
     float cd = m.x - g.x * g.dot( m );
     return TDMath.atan2d( sd, cd );

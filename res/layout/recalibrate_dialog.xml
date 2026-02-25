@@ -16,6 +16,72 @@
       style="@style/text_default"
     />
   </LinearLayout>  
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <TextView 
+      android:layout_width="0dp" 
+      android:layout_weight="50" 
+      android:layout_height="wrap_content"
+      style="@style/text_default"
+      android:text="@string/calib_acc_thr"
+      android:labelFor="@+id/acc"
+    />
+    <EditText android:id="@id/acc"
+      android:layout_width="0dp" 
+      android:layout_weight="50" 
+      android:layout_height="wrap_content"
+      android:inputType="number"
+      android:importantForAutofill="no"
+    />
+  </LinearLayout>  
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <TextView 
+      android:layout_width="0dp" 
+      android:layout_weight="50" 
+      android:layout_height="wrap_content"
+      style="@style/text_default"
+      android:text="@string/calib_mag_thr"
+      android:labelFor="@+id/mag"
+    />
+    <EditText android:id="@id/mag"
+      android:layout_width="0dp" 
+      android:layout_weight="50" 
+      android:layout_height="wrap_content"
+      android:inputType="number"
+      android:importantForAutofill="no"
+    />
+  </LinearLayout>  
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <TextView 
+      android:layout_width="0dp" 
+      android:layout_weight="50" 
+      android:layout_height="wrap_content"
+      style="@style/text_default"
+      android:text="@string/calib_dip_thr"
+      android:labelFor="@+id/dip"
+    />
+    <EditText android:id="@id/dip"
+      android:layout_width="0dp" 
+      android:layout_weight="50" 
+      android:layout_height="wrap_content"
+      android:inputType="number"
+      android:importantForAutofill="no"
+    />
+  </LinearLayout>  
 
   <LinearLayout 
     android:orientation="horizontal"

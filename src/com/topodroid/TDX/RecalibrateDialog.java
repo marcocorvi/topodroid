@@ -14,7 +14,9 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
+import java.util.Locale;
 import java.util.List;
 // import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.EditText;
 
 import android.widget.TextView;
 import android.widget.AdapterView;
@@ -47,6 +50,9 @@ public class RecalibrateDialog extends MyDialog
   private TextView mCalibText;
   private long mShotId;
   private String mCalibName = null;
+  private EditText mETacc;
+  private EditText mETmag;
+  private EditText mETdip;
 
   public RecalibrateDialog( Context context, ShotWindow parent, long shot_id )
   {
@@ -77,6 +83,14 @@ public class RecalibrateDialog extends MyDialog
 
     mCalibText = (TextView) findViewById( R.id.calib_name );
 
+    mETacc = (EditText) findViewById( R.id.acc );
+    mETmag = (EditText) findViewById( R.id.mag );
+    mETdip = (EditText) findViewById( R.id.dip );
+
+    mETacc.setText( String.format( Locale.US, "%.1f", TDSetting.mAccelerationThr ) );
+    mETmag.setText( String.format( Locale.US, "%.1f", TDSetting.mMagneticThr ) );
+    mETdip.setText( String.format( Locale.US, "%.1f", TDSetting.mDipThr ) );
+
     // setTitle( R.string.title_calib );
     updateList();
     setCalibText();
@@ -101,7 +115,13 @@ public class RecalibrateDialog extends MyDialog
     hide();
     if ( b == mBtnOk ) {
       if ( mCalibName != null ) { 
-        mParent.doRecalibrate( mShotId, mCalibName );
+        float acc = TDSetting.mAccelerationThr;
+        float mag = TDSetting.mMagneticThr;
+        float dip = TDSetting.mDipThr;
+        try { acc = Float.parseFloat( mETacc.getText().toString() ); } catch ( NumberFormatException e ) { }
+        try { mag = Float.parseFloat( mETmag.getText().toString() ); } catch ( NumberFormatException e ) { }
+        try { dip = Float.parseFloat( mETdip.getText().toString() ); } catch ( NumberFormatException e ) { }
+        mParent.doRecalibrate( mShotId, mCalibName, acc, mag, dip );
       }
     } else if ( b == mBtnCancel ) {
       /* nothing */

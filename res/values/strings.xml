@@ -194,6 +194,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="calib_reset">Reset device calibration ?</string>
     <string name="calib_min_error">Minimum error</string>
     <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f &#xb0; (max %3$.2f &#xb0;)</string>
+    <string name="calib_acc_thr">Accel. [&#x25;]</string>
+    <string name="calib_mag_thr">Magn. [&#x25;]</string>
+    <string name="calib_dip_thr">Dip [&#xb0;]</string>
     <string name="magn_dip">Magn. dip &#xb0;</string>
     <string name="auto_calib" copyable="pt">Auto Calib</string>
     <string name="autocalib_not_supported">Required calibration computation</string><!-- lint: unused -->

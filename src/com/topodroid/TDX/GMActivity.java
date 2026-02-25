@@ -107,6 +107,7 @@ public class GMActivity extends Activity
   private CBlockAdapter mDataAdapter;  // adapter for the list of GM's
 
   private String mCalibName;
+  private CalibInfo mCalibInfo;
   // private ConnHandler mHandler;
 
   static final private int[] izons = {
@@ -1030,6 +1031,7 @@ public class GMActivity extends Activity
     mListView.setAdapter( mButtonView1.mAdapter );
 
     mCalibName = TDInstance.calib;
+    mCalibInfo = mApp.mDData.selectCalibInfo( mCalibName );
     mAlgo = mApp.getCalibAlgoFromDB();
     // updateDisplay( );
 
@@ -1293,7 +1295,8 @@ public class GMActivity extends Activity
               // delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp - delta2*tmp ); 
               // if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
               // dip = ( dip + mCalibration2.Dip() )/2; // average dip
-              byte[] cali_info = CavwayCalibInfo.makeCaliInfo( TDUtil.getSeconds(), delta, delta2, err_max, dip );
+              long seconds = TDUtil.dateToTimestamp( mCalibInfo.date );
+              byte[] cali_info = CavwayCalibInfo.makeCaliInfo( seconds, delta, delta2, err_max, dip );
               uploadCoefficients( delta, coeff12, true, b, cali_info ); // 20250123 simplified 
             } else {
               uploadCoefficients( delta, coeff, true, b, null );
