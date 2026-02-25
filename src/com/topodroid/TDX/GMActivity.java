@@ -320,7 +320,7 @@ public class GMActivity extends Activity
       float deltaBH = mCalibration.DeltaBH();
       float delta   = mCalibration.Delta();
       float delta2  = mCalibration.Delta2();
-      float maxErr  = mCalibration.MaxError();
+      float err_max = mCalibration.MaxError();
       float dip     = mCalibration.Dip();
       float roll    = mCalibration.Roll();
       byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 bytes, for the first sensor-set
@@ -331,7 +331,7 @@ public class GMActivity extends Activity
       if ( mTwoSensors && mCalibration2 != null ) {
         // TDLog.v("Calib delta  " + delta + " " + mCalibration2.Delta() );
         // TDLog.v("Calib stddev " + delta2 + " " + mCalibration2.Delta2() );
-        // TDLog.v("Calib maxerr " + maxErr + " " + mCalibration2.MaxError() );
+        // TDLog.v("Calib maxerr " + err_max + " " + mCalibration2.MaxError() );
         // TDLog.v("Calib dip    " + dip + " " + mCalibration2.Dip() );
         mCalibration2.rollDifference();  // FIXME ROLL_DIFFERENCE
 
@@ -341,13 +341,14 @@ public class GMActivity extends Activity
         // TODO could use discrepancies ?
         byte[] coeff2 = mCalibration2.GetCoeff(); // 52 bytes for the second sensor-set
 
-        if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
-        delta = ( delta + mCalibration2.Delta() )/2;
-        float tmp = mCalibration2.Delta2();
-        delta2 = TDMath.sqrt( delta2*delta2 + tmp*tmp );
-        if ( mCalibration2.MaxError() > maxErr ) maxErr  = mCalibration2.MaxError();
-        dip  = ( dip + mCalibration2.Dip() )/2;
-        roll = ( roll + mCalibration2.Roll() )/2;
+        // CAVWAY uses the values from first calibration because there are only small difference
+        // if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
+        // delta = ( delta + mCalibration2.Delta() )/2;
+        // float tmp = mCalibration2.Delta2();
+        // delta2 = TDMath.sqrt( delta2*delta2 + tmp*tmp - delta2*tmp );
+        // if ( mCalibration2.MaxError() > err_max ) err_max  = mCalibration2.MaxError();
+        // dip  = ( dip + mCalibration2.Dip() )/2;
+        // roll = ( roll + mCalibration2.Roll() )/2;
 
         mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, coeff2 ) );
         // compare the two calibrations on the data
@@ -376,7 +377,7 @@ public class GMActivity extends Activity
       } else {
         // TDLog.v("Calib delta  " + delta );
         // TDLog.v("Calib stddev " + delta2 );
-        // TDLog.v("Calib maxerr " + maxErr );
+        // TDLog.v("Calib maxerr " + err_max );
         // TDLog.v("Calib dip    " + dip );
         mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, null ) );
       }
@@ -388,7 +389,7 @@ public class GMActivity extends Activity
 
       // FIXME TWO_SENSORS should keep separated the two calibs results ?
       //                   this means seven new columnsto the calibs table
-      mApp_mDData.updateCalibError( cid, deltaBH, delta, delta2, maxErr, dip, roll, iter );
+      mApp_mDData.updateCalibError( cid, deltaBH, delta, delta2, err_max, dip, roll, iter );
 
       // DEBUG:
       // Calibration.logCoeff( coeff );
@@ -609,12 +610,13 @@ public class GMActivity extends Activity
             System.arraycopy( coeff2, 0, coeffs, 52, 52 );
             float[] errors2 = mCalibration2.Errors();
             for ( int k = 0; k < errors.length; ++k ) errors[k] = ( errors[k] + errors2[k] )/2;
-            if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
-            delta   = ( delta   + mCalibration2.Delta() ) / 2;
-            float tmp = mCalibration2.Delta2();
-            delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp ); // this assume zero covariance which is far from correct
-            if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
-            dip = ( dip + mCalibration2.Dip() )/2;
+            // CAVWAY uses the values from first calibration because there are only small difference
+            // if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
+            // delta   = ( delta   + mCalibration2.Delta() ) / 2;
+            // float tmp = mCalibration2.Delta2();
+            // delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp - delta2*tmp ); 
+            // if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
+            // dip = ( dip + mCalibration2.Dip() )/2;
           } else {
             coeffs = new byte[52];
             System.arraycopy( coeff1, 0, coeffs, 0, 52 );
@@ -1275,21 +1277,22 @@ public class GMActivity extends Activity
             setTitle( R.string.calib_write_coeffs );
             setTitleColor( TDColor.CONNECTED );
             float delta = mCalibration.Delta();
-            float delta2 = mCalibration.Delta2();
-            float err_max = mCalibration.MaxError();
-            float dip = mCalibration.Dip();
             
             if ( mTwoSensors ) {
               byte[] coeff12 = new byte[104];
               System.arraycopy( coeff, 0, coeff12, 0, 52 );
               coeff = mCalibration2.GetCoeff();
               System.arraycopy( coeff, 0, coeff12, 52, 52 );
-              // if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
-              delta   = ( delta   + mCalibration2.Delta() ) / 2;
-              float tmp = mCalibration2.Delta2();
-              delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp ); // this assume zero covariance which is far from correct
-              if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
-              dip = ( dip + mCalibration2.Dip() )/2; // average dip
+              float delta2 = mCalibration.Delta2();
+              float err_max = mCalibration.MaxError();
+              float dip = mCalibration.Dip();
+              // CAVWAY uses the values from first calibration because there are only small difference
+              // // if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
+              // delta   = ( delta   + mCalibration2.Delta() ) / 2;
+              // float tmp = mCalibration2.Delta2();
+              // delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp - delta2*tmp ); 
+              // if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
+              // dip = ( dip + mCalibration2.Dip() )/2; // average dip
               byte[] cali_info = CavwayCalibInfo.makeCaliInfo( TDUtil.getSeconds(), delta, delta2, err_max, dip );
               uploadCoefficients( delta, coeff12, true, b, cali_info ); // 20250123 simplified 
             } else {

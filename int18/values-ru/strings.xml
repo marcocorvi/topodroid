@@ -1250,7 +1250,6 @@
     <string name="export_bothviews">План и разрез</string>
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
-    <string name="export_data_batch">Экспортировано %1$s из %2$d съёмок</string>
     <string name="export_dxf_blocks">Блоки DXF</string>
     <string name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопривязка</string>
@@ -1672,8 +1671,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string -->
   <string name="pref_second_distox_title">Съёмка двумя DistoX</string>
   <string name="pref_second_distox_summary">Топосъёмка с одновременным использованием двух DistoX</string>
-  <string name="pref_auto_pair_title">Автоматическое сопряжение</string>
-  <string name="pref_auto_pair_summary">Автоматическое сопряжение устройства DistoX после сканирования</string>
+  <!-- UNUSED string name="pref_auto_pair_title">Автоматическое сопряжение</string -->
+  <!-- UNUSED string name="pref_auto_pair_summary">Автоматическое сопряжение устройства DistoX после сканирования</string -->
   <string name="pref_head_tail_title">Кол-во новых замеров</string>
   <string name="pref_head_tail_summary">Выяснить кол-во новых измерений перед их скачиванием</string>
   <string name="pref_socket_delay_title">Задержка подключения</string>
@@ -1743,8 +1742,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">Авто-экспорт данных</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string -->
-  <string name="pref_editable_stations_title">Редактируемые пикеты</string>
-  <string name="pref_editable_stations_summary">Редактируемые номера пикетов в списке изиерений</string>
+  <!-- UNUSED string name="pref_editable_stations_title">Редактируемые пикеты</string -->
+  <!-- UNUSED string name="pref_editable_stations_summary">Редактируемые номера пикетов в списке изиерений</string -->
   <string name="pref_zipped_symbols_title">Архив условных обозначений</string>
   <string name="pref_zipped_symbols_summary">Добавить/извлечь файлы условных обозначений в/из zip архив</string>
   <string name="pref_fixed_origin_title">Точка отсчета абрисов</string>

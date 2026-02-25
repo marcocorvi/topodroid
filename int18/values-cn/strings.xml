@@ -1255,7 +1255,6 @@
     <string name="export_bothviews">平面图和剖面图</string>
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
-    <string name="export_data_batch">导出  %2$d 中的 %1$s 测量</string>
     <string name="export_dxf_blocks">DXF块</string>
     <string name="export_dxf_version">版本</string>
     <string name="export_georeference">地理参考</string>
@@ -1678,8 +1677,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string -->
   <string name="pref_second_distox_title">双DistoX测量</string>
   <string name="pref_second_distox_summary">用两部DistoX进行测量</string>
-  <string name="pref_auto_pair_title">自动配对</string>
-  <string name="pref_auto_pair_summary">扫描后与设备配对</string>
+  <!-- UNUSED string name="pref_auto_pair_title">自动配对</string -->
+  <!-- UNUSED string name="pref_auto_pair_summary">扫描后与设备配对</string -->
   <string name="pref_head_tail_title">新数据数量</string>
   <string name="pref_head_tail_summary">在下载新数据之前获取它们的数量</string>
   <string name="pref_socket_delay_title">连接延时</string>
@@ -1749,8 +1748,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">数据自动输出</string -->
   <!-- UNUSED string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string -->
-  <string name="pref_editable_stations_title">站点可编辑</string>
-  <string name="pref_editable_stations_summary">在数据列表中站点名可编辑</string>
+  <!-- UNUSED string name="pref_editable_stations_title">站点可编辑</string -->
+  <!-- UNUSED string name="pref_editable_stations_summary">在数据列表中站点名可编辑</string -->
   <string name="pref_zipped_symbols_title">压缩符号文件</string>
   <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>

@@ -28,4 +28,5 @@
     android:editable="true"
     android:imeOptions="actionDone"
   /> <!-- editable=true is deprecated and does not help -->
+     <!-- provide android:hint -->
 </LinearLayout>

@@ -234,14 +234,14 @@
 	<item name="android:textColorHint">@color/hint</item>
     </style>
 
-    <style name="edit_decimal_light">
+    <!-- style name="edit_decimal_light">
       	<item name="android:ems">25</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">numberDecimal</item>
 	<item name="android:textColor">@color/text</item>
 	<item name="android:textColorHint">@color/hint</item>
-    </style>
+    </style -->
 
     <style name="edit_signeddecimal">
       	<item name="android:ems">25</item>

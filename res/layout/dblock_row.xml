@@ -28,6 +28,7 @@
     android:imeOptions="actionDone"
     android:autofillHints="no"
   /> <!-- editable=true is deprecated and does not help -->
+     <!-- provide android:hint -->
   <!--
     android:importantForAutofill="no"
     android:hint="@string/hint_from"
@@ -50,6 +51,7 @@
     android:imeOptions="actionDone"
     android:autofillHints="no"
   /> <!-- editable=true is deprecated and does not help -->
+     <!-- provide android:hint -->
   <!--
     android:hint="@string/hint_to"
     android:importantForAutofill="no"

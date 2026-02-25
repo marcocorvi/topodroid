@@ -1841,7 +1841,7 @@ public class MainWindow extends Activity
             if ( doExport( survey, index, file_name, export_info ) ) ++cnt;
           }
           TDLog.v("Export Thread done");
-          final String res = String.format( TDInstance.getResourceString( R.string.export_data_batch ), type, cnt );
+          final String res = String.format( TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt ) );
           runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
         }
       };

@@ -1255,7 +1255,6 @@
     <string name="export_bothviews">Alaprajz és oldalnézet</string>
     <string name="export_config">Konfigurációs parancsok</string>
     <string name="export_csv_rawdata">Összes adat</string>
-    <string name="export_data_batch">%2$d mérés exportálása %1$s formátumba</string>
     <string name="export_dxf_blocks">Segédmérés végpont</string>
     <string name="export_dxf_version">Verzió</string>
     <string name="export_georeference">Georeferencia</string>
@@ -1679,8 +1678,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">Újrakapcsolódás, ha a kapcsolat megszakad</string -->
   <string name="pref_second_distox_title">Két DistoX mérés</string>
   <string name="pref_second_distox_summary">Mérés két DistoX-el</string>
-  <string name="pref_auto_pair_title">Atomatikus párosítás</string>
-  <string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string>
+  <!-- UNUSED string name="pref_auto_pair_title">Atomatikus párosítás</string -->
+  <!-- UNUSED string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string -->
   <string name="pref_head_tail_title">Új adatok száma</string>
   <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
   <string name="pref_socket_delay_title">Késleltetés</string>
@@ -1750,8 +1749,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">Adat autómatikus export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string -->
-  <string name="pref_editable_stations_title">Átírható pontszám</string>
-  <string name="pref_editable_stations_summary">Módosíthatók a pont nevek a jegyzőkönyvben</string>
+  <!-- UNUSED string name="pref_editable_stations_title">Átírható pontszám</string -->
+  <!-- UNUSED string name="pref_editable_stations_summary">Módosíthatók a pont nevek a jegyzőkönyvben</string -->
   <string name="pref_zipped_symbols_title">Tömörített szimbólum</string>
   <string name="pref_zipped_symbols_summary">Szimbólum fájlok tárolása/beolvasása zip archívumokba/ból</string>
   <string name="pref_fixed_origin_title">Vázlat kezdőpont</string>

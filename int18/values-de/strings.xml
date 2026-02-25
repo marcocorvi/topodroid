@@ -1182,7 +1182,6 @@
     <string name="export_bothviews">Plan and Seitenriss</string>
     <string name="export_config">Therion Konfiguration</string>
     <string name="export_csv_rawdata">Rohdaten</string>
-    <string name="export_data_batch">%1$s von %2$d Vermessungen exportiert</string>
     <string name="export_dxf_blocks">DXF Hilfszügepunkte</string>
     <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Georeferenzierung</string>
@@ -1581,8 +1580,8 @@
     <!-- UNUSED string name="pref_auto_reconnect_summary">Wiederverbindung nach Verbindungsverlust</string -->
     <string name="pref_second_distox_title">2 DistoX</string>
     <string name="pref_second_distox_summary">Vermessen mit zwei verbundenen DistoX</string>
-    <string name="pref_auto_pair_title">Autom. Verbinden</string>
-    <string name="pref_auto_pair_summary">Automatische Verbindung nach dem scannen</string>
+    <!-- UNUSED string name="pref_auto_pair_title">Autom. Verbinden</string -->
+    <!-- UNUSED string name="pref_auto_pair_summary">Automatische Verbindung nach dem scannen</string -->
     <string name="pref_head_tail_title">Anzahl Daten abfragen</string>
     <string name="pref_head_tail_summary">Anzahl Datensätze abfragen vor dem Download</string>
     <string name="pref_socket_delay_title">Verbindungsverzögerung</string>
@@ -1660,8 +1659,8 @@
     <string name="pref_splay_latest_color_summary">Die Farbe der zuletzt geladenen Hilfszüge</string>
     <!-- UNUSED string name="pref_data_backup_title">Auto-Datenexport</string -->
     <!-- UNUSED string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string -->
-    <string name="pref_editable_stations_title">Messpunkte editierbar</string>
-    <string name="pref_editable_stations_summary">Messpunktnamen sind direkt in der Liste editierbar</string>
+    <!-- UNUSED string name="pref_editable_stations_title">Messpunkte editierbar</string -->
+    <!-- UNUSED string name="pref_editable_stations_summary">Messpunktnamen sind direkt in der Liste editierbar</string -->
     <string name="pref_zipped_symbols_title">Gezippte Symbolfiles</string>
     <string name="pref_zipped_symbols_summary">Speichere/Lade Symbole in Zip-Files</string>
     <string name="pref_fixed_origin_title">Skizzen fixieren</string>

@@ -1255,7 +1255,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_bothviews">План и разрез</string>
     <string name="export_config">Конфигурирай команди</string>
     <string name="export_csv_rawdata">Цялостен запис</string>
-    <string name="export_data_batch">Експортирани %1$s от %2$d картировки</string>
     <string name="export_dxf_blocks">Крайни точки на странични измервания</string>
     <string name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопрепратка</string>
@@ -1667,8 +1666,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string -->
   <string name="pref_second_distox_title">Картиране с две DistoX</string>
   <string name="pref_second_distox_summary">Картиране с две устройства DistoX</string>
-  <string name="pref_auto_pair_title">Автоматично сдвояване</string>
-  <string name="pref_auto_pair_summary">Сдвояване с устройството след сканиране</string>
+  <!-- UNUSED string name="pref_auto_pair_title">Автоматично сдвояване</string -->
+  <!-- UNUSED string name="pref_auto_pair_summary">Сдвояване с устройството след сканиране</string -->
   <string name="pref_head_tail_title">Обем нови данни</string>
   <string name="pref_head_tail_summary">Виж обема на новите данните преди изтегляне</string>
   <string name="pref_socket_delay_title">Изчакване на свързването</string>
@@ -1738,8 +1737,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   
   <!-- UNUSED string name="pref_data_backup_title">Data auto-export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
-  <string name="pref_editable_stations_title">Променливи репери</string>
-  <string name="pref_editable_stations_summary">Имена на репери, които подлежат на промяна, в списъка с измервания</string>
+  <!-- UNUSED string name="pref_editable_stations_title">Променливи репери</string -->
+  <!-- UNUSED string name="pref_editable_stations_summary">Имена на репери, които подлежат на промяна, в списъка с измервания</string -->
   <string name="pref_zipped_symbols_title">Архивирани файлове със символи</string>
   <string name="pref_zipped_symbols_summary">Съхраняване/зареждане на файлове със символи в/от zip архив</string>
   <string name="pref_fixed_origin_title">Произход на скицата</string>
