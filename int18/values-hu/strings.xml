@@ -188,9 +188,9 @@
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
     <string name="calib_min_error">Minimális hiba</string>
     <string name="calib_delta_dir">Ir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string>
-    <!-- TODO string name="calib_acc_thr">Accel. [&#x25;]</string -->
-    <!-- TODO string name="calib_mag_thr">Magn. [&#x25;]</string -->
-    <!-- TODO string name="calib_dip_thr">Dip [&#xb0;]</string -->
+    <string name="calib_acc_thr">Gyors. [&#x25;]</string>
+    <string name="calib_mag_thr">Magn. [&#x25;]</string>
+    <string name="calib_dip_thr">Dip [&#xb0;]</string>
     <string name="magn_dip">Mágn. lehajlás &#8230;</string>
     <string name="auto_calib">Auto. Kalib.</string>
     <string name="autocalib_not_supported">Kalibrációs számítás szükséges</string>
@@ -1428,13 +1428,13 @@
     <string name="title_settings_3d">TopoDroid 3D néző beállítások</string>
     <string name="title_settings_dem">TopoDroid DEM beállítások</string>
     <string name="title_settings_walls3d">TopoDroid 3D modell beállítások</string>
-    <string name="title_settings_geek">Szakértői beállítások</string>
-    <string name="title_settings_geek_survey">Szakértői mérés beállítások</string>
-    <string name="title_settings_geek_splay">Szakértői sün beállítások</string>
-    <string name="title_settings_geek_plot">Szakértői vázlat beállítások</string>
-    <string name="title_settings_geek_line">Szakértői vonal beállítások</string>
-    <string name="title_settings_geek_device">Szakértői műszer beállítások</string>
-    <string name="title_settings_geek_import">Szakértői import beállítások</string>
+    <string name="title_settings_geek">Másodlagos beállítások</string>
+    <string name="title_settings_geek_survey">Másodlagos mérés beállítások</string>
+    <string name="title_settings_geek_splay">Másodlagos sün beállítások</string>
+    <string name="title_settings_geek_plot">Másodlagos vázlat beállítások</string>
+    <string name="title_settings_geek_line">Másodlagos vonal beállítások</string>
+    <string name="title_settings_geek_device">Másodlagos műszer beállítások</string>
+    <string name="title_settings_geek_import">Másodlagos import beállítások</string>
     <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>
@@ -1505,7 +1505,7 @@
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">MŰSZEREK</string>
   <string name="pref_cat_cave3d">3D MEGJELENÍTŐ</string>
-  <string name="pref_cat_geek">SZAKÉRTŐI BEÁLLÍTÁSOK</string>
+  <string name="pref_cat_geek">MÁSODLAGOS BEÁLLÍTÁSOK</string>
   <string name="pref_cat_sketch">3D VÁZLAT</string>
   <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
