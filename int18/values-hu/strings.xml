@@ -173,8 +173,8 @@
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
     <string name="using">%1$s használata</string>
-    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
-    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
+    <string name="cali_err">hiba: átlag %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
+    <string name="cali_time">Kalibráció: %1$s</string>
     <string name="calib_error">Átlagos hiba: %1$.2f &#xb0; (BH delta %2$.3f)</string>
     <string name="calib_validate_error">Átlagos hiba: %1$.2f &#xb0;</string>
     <string name="calib_stddev">Hiba szórása:  %1$.4f &#xb0;</string>
