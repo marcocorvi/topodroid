@@ -346,6 +346,7 @@ public class TDInstance
   {
     return String.format( Locale.US, context.getResources().getString( r ), arg );
   }
+
   /** @return the application shared preferences
    */
   public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }

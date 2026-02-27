@@ -176,6 +176,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
     <string name="using">Utilizar %1$s</string>
+    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
+    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
     <string name="calib_error">Error: %1$.2f &#xb0; (BH delta %2$.3f)</string>
     <string name="calib_validate_error">Errore medio: %1$.2f &#xb0;</string>
     <string name="calib_stddev">Error stddev: %1$.4f &#xb0;</string>

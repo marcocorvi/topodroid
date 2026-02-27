@@ -834,14 +834,15 @@ public class DeviceActivity extends Activity
 
 
   /** display calibration coeffs
-   * @param coeffs ...
+   * @param coeffs     calibration coeff array (either 52 or 104 bytes)
+   * @param cali_info  calibration info (16 bytes)
    */
   // @Implements
-  public void displayCoeff( byte[] coeffs )
+  public void displayCoeff( byte[] coeffs, byte[] cali_info )
   { // null coeff, null coeff2
     // FIXME TWO_SENSORS if the device is two-sensors 
     if ( currDeviceA() == null ) return;
-    (new CalibCoeffDialog( this, coeffs ) ).show();
+    (new CalibCoeffDialog( this, coeffs, cali_info ) ).show();
   }
 
   // @Implements

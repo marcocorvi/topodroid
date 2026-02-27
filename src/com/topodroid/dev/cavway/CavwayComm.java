@@ -94,7 +94,7 @@ public class CavwayComm extends BleComm
   private ListerHandler mLister = null;
   private String mAddress;
   private int    mTimeout;
-  public boolean mHasInfo = false;
+  private boolean mHasInfo = false;
   public boolean mHasWritten = false;
 
   BluetoothGattCharacteristic mReadChrt  = null;
@@ -797,10 +797,13 @@ public class CavwayComm extends BleComm
     return true;
   }
 
+  public void setHasInfo() { mHasInfo = true; }
+
   /** get DistoX-BLE hw/fw info, and display that on the Info dialog
    * @param info     Cavway info dialog
    * @return true on full success
    * was read-set read-set read-set
+   * @note called with device connected
    */
   public boolean getCavwayInfo( CavwayInfoDialog info )
   {
@@ -812,8 +815,13 @@ public class CavwayComm extends BleComm
     syncWait(1000, "read fw");
     if ( ! readMemoryNoWait( CavwayDetails.HARDWARE_ADDRESS, 4 ) ) return false;
     syncWait(1000, "read hw");
+    byte[] cali_info = new byte[16];
+    if ( ! readCaliInfo( cali_info ) ) return false;
+    syncWait(1000, "read cali info");
+    // timestamp set mHasInfo to true
     if ( ! readMemoryNoWait( CavwayDetails.TIMESTAMP_ADDRESS, 4 ) ) return false;
     syncWait(1000, "read time");
+  
     int cnt = 0;
     while ( mHasInfo == false ) {
       syncWait(1000, "read info");
@@ -826,6 +834,7 @@ public class CavwayComm extends BleComm
     info.setVal( CavwayProtocol.PACKET_INFO_FIRMWARE, ((CavwayProtocol)mProtocol).mFirmVer);
     info.setVal( CavwayProtocol.PACKET_INFO_HARDWARE, ((CavwayProtocol)mProtocol).mHardVer);
     info.setVal( CavwayProtocol.PACKET_INFO_TIMESTAMP, ((CavwayProtocol)mProtocol).mTimeStamp);
+    info.setVal( cali_info );
     return true;
   }
 
@@ -1890,6 +1899,36 @@ public class CavwayComm extends BleComm
     return ret;
   }
 
+  /** read the calibration info
+   * @param cali_info calibration info [out]
+   * @return true if success
+   * @note called with device connected
+   */
+  public boolean readCaliInfo( /* String address, */ byte[] cali_info )
+  {
+    if ( cali_info == null ) {
+      // TDLog.v( TAG + "write coeff: null coeff" );
+      return false;
+    }
+    int  len  = cali_info.length;
+    // TDLog.v( TAG + "write coeff: length " + len );
+    if ( len != 16 ) return false;
+    // if( ! tryConnectDevice( address, null, 0 )) {
+    //   if ( LOG ) TDLog.v( TAG + "read cali_info: failed connect address " + address );
+    //   return false;
+    // }
+    boolean ret = true;
+    byte[] buf = readMemory( CavwayDetails.CALIINFO_ADDRESS, 16 ); // FIXME it can fail
+    if ( buf == null ) {
+      TDLog.e( TAG + "fail write cali-info " );
+      ret = false;
+      // TDLog.v( TAG + "OK write coeff set " + k );
+    } else {
+      System.arraycopy( buf, 0, cali_info, 0, 16 );
+    }
+    // disconnectDevice();
+    return ret;
+  }
 }
 
 

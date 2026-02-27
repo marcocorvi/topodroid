@@ -11,6 +11,8 @@
  */
 package com.topodroid.dev.cavway;
 
+import com.topodroid.packetX.MemoryData;
+
 public class CavwayCalibInfo
 {
   private static final int CALIINFO_FLAG    =  0;
@@ -50,6 +52,33 @@ public class CavwayCalibInfo
     ret[ CALIINFO_DIP     ] = (byte)( tmp & 0xff );
     ret[ CALIINFO_DIP + 1 ] = (byte)( (tmp>>8) & 0xff );
     return ret;
+  }
+
+  static public int version( byte[] cali_info ) { return (int) cali_info[ CALIINFO_VER ]; }
+
+  static public long seconds( byte[] cali_info )
+  {
+    return MemoryData.toLong( cali_info[ CALIINFO_DATE + 3 ], cali_info[ CALIINFO_DATE + 2 ], cali_info[ CALIINFO_DATE + 1 ], cali_info[ CALIINFO_DATE ] );
+  }
+
+  static public float averageError( byte[] cali_info )
+  {
+    return MemoryData.toInt( cali_info[ CALIINFO_ERR_AVE + 1 ], cali_info[ CALIINFO_ERR_AVE ])/100.0f;
+  }
+
+  static public float stddevError( byte[] cali_info )
+  {
+    return MemoryData.toInt( cali_info[ CALIINFO_ERR_VAR + 1 ], cali_info[ CALIINFO_ERR_VAR ])/100.0f;
+  }
+
+  static public float maxError( byte[] cali_info )
+  {
+    return MemoryData.toInt( cali_info[ CALIINFO_ERR_MAX + 1 ], cali_info[ CALIINFO_ERR_MAX ])/100.0f;
+  }
+
+  static public float dip( byte[] cali_info )
+  {
+    return MemoryData.toInt( cali_info[ CALIINFO_DIP + 1 ], cali_info[ CALIINFO_DIP ])/100.0f;
   }
 
 }

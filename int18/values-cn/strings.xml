@@ -176,6 +176,8 @@
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">使用 %1$s</string>
+    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
+    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
     <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
     <string name="calib_validate_error">平均误差: %1$.2f &#xb0;</string>
     <string name="calib_stddev">标准差: %1$.4f 度</string>

@@ -254,7 +254,8 @@ public class CalibExport
                       long mx = Long.parseLong( vals[4] );
                       long my = Long.parseLong( vals[5] );
                       long mz = Long.parseLong( vals[6] );
-                      long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
+                      long time = TDUtil.dateToTimestamp( date ); // FIXME CALIB DATA TIME
+                      long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz, time );
                       String grp = vals[7].trim();
                       data.updateGMName( gid, cid, grp );  // this sets the "group"
                       if ( vals.length > 12 ) { // status can be only 0:normal or 1:delete

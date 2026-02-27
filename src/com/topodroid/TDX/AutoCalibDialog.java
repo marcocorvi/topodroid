@@ -361,7 +361,7 @@ public class AutoCalibDialog extends MyDialog
 
     mCoeffLen = TDInstance.isDeviceTwoSensors() ? 104 : 52; // 20250123 TWO_SENSORS
     byte[] coeff0 = new byte[ mCoeffLen ];
-    if ( ! mApp.readCalibCoeff( coeff0 ) ) { 
+    if ( ! mApp.readCalibCoeff( coeff0, null ) ) {  // null CaliInfo
       TDLog.v("Error: could not read coeffs");
       mBTstart.setVisibility( View.GONE );
       mBTwrite.setVisibility( View.GONE );
@@ -479,7 +479,7 @@ public class AutoCalibDialog extends MyDialog
         // TODO ask for confirm
         byte[] coeff = mCalib.GetCoeff();
         // TODO 
-        // mApp.uploadCalibCoeff( coeff, false, mBTwrite ); // false: no MAC check
+        // mApp.uploadCalibCoeff( coeff, false, mBTwrite, null ); // false: no MAC check, null CaliInfo
       } else {
         TDToast.make("cannot upload while downloading");
       }

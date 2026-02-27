@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid TopoDroid DistoX2 (X310) communication protocol
+ * @brief TopoDroid TopoDroid DistoX2-specific (X310) communication protocol
  *
  * a DistoX310Protocol is created by the DistoXComm to handle data for DistoX2 X310
  * --------------------------------------------------------

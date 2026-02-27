@@ -1392,13 +1392,17 @@ public class TopoDroidApp extends Application
    * @return true if successful
    * @note called by CalibReadTask.onPostExecute
    */
-  public boolean readCalibCoeff( byte[] coeff ) // 20250123 droped second
+  public boolean readCalibCoeff( byte[] coeff, byte[] cali_info ) // 20250123 droped second
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e("No comm or no device");
       return false;
     }
     boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
+    if ( (cali_info != null ) && (mComm instanceof CavwayComm ) ) {
+      CavwayComm comm = (CavwayComm)mComm;
+      comm.readCaliInfo( cali_info );
+    }
     resetComm();
     return ret;
   }

@@ -78,6 +78,20 @@
     android:layout_height="wrap_content" 
     android:singleLine="true"
   />
+  <TextView android:id="@+id/tv_calitime" 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="match_parent"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+  />
+  <TextView android:id="@+id/tv_calierr" 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="match_parent"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+  />
 
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent"

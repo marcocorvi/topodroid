@@ -158,6 +158,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="connect_failed">Falha de conexão</string -->
   <!-- UNUSED string name="data">Dados</string -->
   <string name="using">Usando %1$s</string>
+    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
+    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
   <string name="calib_error">Erro médio: %1$.2f ° (Delta BH %2$.3f)</string>
   <string name="calib_validate_error">Erro médio: %1$.2f °</string>
   <string name="calib_stddev">Desvio padrão do erro: %1$.2f °</string>

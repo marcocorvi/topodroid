@@ -220,7 +220,8 @@ public class TopoDroidComm
             CavwayData.longToSignedInt1( mProtocol.mGZ ),
             CavwayData.longToSignedInt1( mProtocol.mMX ),
             CavwayData.longToSignedInt1( mProtocol.mMY ),
-            CavwayData.longToSignedInt1( mProtocol.mMZ ) );
+            CavwayData.longToSignedInt1( mProtocol.mMZ ),
+            mProtocol.mTime );
           TopoDroidApp.mDData.updateGMsecond( TDInstance.cid, c_blk, 
             CavwayData.longToSignedInt2( mProtocol.mGX ), 
             CavwayData.longToSignedInt2( mProtocol.mGY ),
@@ -230,7 +231,7 @@ public class TopoDroidComm
             CavwayData.longToSignedInt2( mProtocol.mMZ ) );
         } else {
           c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, 
-            mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
+            mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mTime );
         }
         if ( lister != null && c_blk >= 0 ) {
           Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
@@ -304,7 +305,7 @@ public class TopoDroidComm
       // get G and M from mProtocol and save them to store
       // TDLog.v( "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
       if ( ! lister.hasDialog() ) {
-        long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
+        long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mTime );
         if ( lister != null ) {
           Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
           Bundle bundle = new Bundle();
@@ -662,6 +663,8 @@ public class TopoDroidComm
   }
 
   public boolean writeCaliInfo( String address, byte[] cali_info ) { return false; }
+
+  public boolean readCaliInfo( String address, byte[] cali_info ) { return false; }
 
   // protected static void notifyWait()
   // {

@@ -16,7 +16,7 @@ package com.topodroid.calib;
 
 public interface ICoeffDisplayer
 {
-  void displayCoeff( byte[] coeffs );
+  void displayCoeff( byte[] coeffs, byte[] cali_info );
 
   void enableButtons( boolean b );
   boolean isActivityFinishing();

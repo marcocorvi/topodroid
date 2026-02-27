@@ -60,6 +60,7 @@ public class TopoDroidProtocol
   public long mGX, mGY, mGZ;
   public long mMX, mMY, mMZ;
   public boolean mBackshot;
+  public long mTime;     // data timestamp, either read from the packet or when the packet was received [seconds since the epoch] - FIXME CALLIB TIME
 
   // protected byte[] mBuffer;
   protected byte[] mAddress;        // request-reply address
@@ -86,6 +87,7 @@ public class TopoDroidProtocol
     mContext       = context;
     // mReplyBuffer   = new byte[4];
     // mRequest_Buffer = new byte[8];
+    mTime = 0; // default
   }
 
   public void closeIOstreams() 
@@ -165,9 +167,11 @@ public class TopoDroidProtocol
     // TDLog.v( "TD proto: handle packet type " + type + " " + packetType[ type & 0x7 ] + ": " +
     //      String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
+    long time = TDUtil.getSeconds(); // seconds after the epoch
     // int high, low;
     switch ( type ) {
       case MemoryOctet.BYTE_PACKET_DATA: // Data 0x01
+        mTime = time;
         mBackshot = false;
         int dhh = (int)( buffer[0] & 0x40 );
         double d =  dhh * 1024.0 + MemoryOctet.toInt( buffer[2], buffer[1] );
@@ -220,6 +224,7 @@ public class TopoDroidProtocol
         // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
       case MemoryOctet.BYTE_PACKET_G: // G 0x02
+        mTime = time;
         if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_XBLE || mDeviceType == Device.DISTO_A3 ) { // SIWEI FIXME
           mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
           mGY = MemoryOctet.toInt( buffer[4], buffer[3] );

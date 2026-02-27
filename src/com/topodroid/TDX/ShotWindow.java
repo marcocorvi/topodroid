@@ -3339,9 +3339,10 @@ public class ShotWindow extends Activity
         TDVector m1 = new TDVector( MemoryData.longToSignedInt1( b.mRawMx )/FV, MemoryData.longToSignedInt1( b.mRawMy )/FV, MemoryData.longToSignedInt1( b.mRawMz )/FV );
         computeV( mG1, vG1, nL1, g1 );
         computeV( mM1, vM1, null, m1 );
-        float b1 = computeB( g1, m1 );
-        float c1 = computeC( g1 );
-        TDVector v1 = new TDVector( TDMath.cosd( c1 ) * TDMath.sind( b1 ), TDMath.cosd( c1 ) * TDMath.cosd( b1 ), TDMath.sind( c1 ) );
+        // Cvway uses azimuth and clino computed from the first sensosr set 
+        float b0 = computeB( g1, m1 );
+        float c0 = computeC( g1 );
+
         float m1abs = m1.Abs();
         float g1abs = g1.Abs();
         float d1 = TDMath.acosd( m1.dot(g1)/(m1abs * g1abs) );
@@ -3350,9 +3351,6 @@ public class ShotWindow extends Activity
         TDVector m2 = new TDVector( MemoryData.longToSignedInt2( b.mRawMx )/FV, MemoryData.longToSignedInt2( b.mRawMy )/FV, MemoryData.longToSignedInt2( b.mRawMz )/FV );
         computeV( mG2, vG2, nL2, g2 );
         computeV( mM2, vM2, null, m2 );
-        float b2 = computeB( g2, m2 );
-        float c2 = computeC( g2 );
-        TDVector v2 = new TDVector( TDMath.cosd( c2 ) * TDMath.sind( b2 ), TDMath.cosd( c2 ) * TDMath.cosd( b2 ), TDMath.sind( c2 ) );
         float m2abs = m2.Abs();
         float g2abs = g2.Abs();
         float d2 = TDMath.acosd( m2.dot(g2)/(m2abs * g1abs) );
@@ -3373,11 +3371,6 @@ public class ShotWindow extends Activity
           sb.append( String.format(Locale.US, " Dip %.2f", d_err ) );
         }
 
-        TDVector v = v1.plus( v2 );
-        // v.normalize();
-        float b0 = TDMath.atan2d( v.x, v.y );  if ( b0 < 0 ) b0 += 360;
-        float c0 = TDMath.atan2d( v.z, TDMath.sqrt( v.x*v.x + v.y*v.y ) );
-        // TDLog.v( "Shot " + b.mId + " B " + b.mBearing + " " + b1 + " " + b2 + " " + b0 + " C " + b.mClino + " " + c1 + " " + c2 + " " + c0 );
         mApp_mData.updateShotBearingClino( b.mId, TDInstance.sid, b0, c0 );
         mApp_mData.updateShotComment( b.mId, TDInstance.sid, sb.toString() );
       }

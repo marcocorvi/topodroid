@@ -176,6 +176,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="connect_failed">Няма връзка</string -->
     <!-- UNUSED string name="data"> данни</string -->
     <string name="using">Използвани %1$s</string>
+    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
+    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
     <string name="calib_error">Средна грешка: %1$.2f ° (BH delta %2$.3f)</string>
     <string name="calib_validate_error">Средна грешка: %1$.2f °</string>
     <string name="calib_stddev">Грешка ст. откл: %1$.2f °</string>

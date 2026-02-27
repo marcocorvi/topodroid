@@ -84,7 +84,6 @@ public class CavwayProtocol extends TopoDroidProtocol
 
   private byte[] mPacketBytes;
 
-  public long mTime = 0;
   private int mCavwayFlag = 0; // complementary values than in the device packet
   // 7: feature
   // 6: border
@@ -284,6 +283,7 @@ public class CavwayProtocol extends TopoDroidProtocol
     if ( LOG ) TDLog.v( TAG + " packet byte[0] " + String.format("%02x", databuf[0] ) );
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length ==  CavwayData.SIZE  ) { // shot / calib data
       if ( mComm.isDownloading() ) {
+        mTime = TDUtil.getSeconds(); // not necesary because mTime is set by handleCavwayPacket
         for ( int kk=0; kk< CavwayData.SIZE ; ++kk ) {
           if ( mPacketBytes[kk] != databuf[kk] ) { // new packet data: send ack depends on handling packets
             // CavwayData packet = new CavwayData( 0 );
@@ -338,14 +338,14 @@ public class CavwayProtocol extends TopoDroidProtocol
           //   databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           mTimeStamp = MemoryData.toLong( databuf[7], databuf[6], databuf[5], databuf[4]); // seconds since the epoch
           if ( LOG ) TDLog.v( TAG + "time " + mTimeStamp );
-          mComm.mHasInfo = true;
+          mComm.setHasInfo();
           System.arraycopy( databuf, 4, mRepliedData, 0, 4 );
           mComm.mHasWritten = true;
           return PACKET_INFO_TIMESTAMP;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
           if ( LOG ) TDLog.v( TAG + "reply (3D)");
-          // TDLog.v(String.format("PROTO Reply to 0x3d: %d %d %d %d %02x %02x %02x %02x", 
-          //   databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
+          TDLog.v(String.format("PROTO Reply to 0x3d: %d %d %d %d %02x %02x %02x %02x", 
+            databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           if ( mComm.isReadingMemory() ) {
             if ( LOG ) TDLog.v( TAG + "handle memory read");
             System.arraycopy( databuf, 4, mPacketBytes, 0,  CavwayData.SIZE  );

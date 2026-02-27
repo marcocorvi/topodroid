@@ -1076,11 +1076,12 @@ public class GMActivity extends Activity
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
   /** display calibration coeffs
-   * @param coeffs   calibration coeff array (either 52 or 104 bytes)
+   * @param coeffs     calibration coeff array (either 52 or 104 bytes)
+   * @param cali_info  calibration info (16 bytes)
    */
-  public void displayCoeff( byte[] coeffs )
+  public void displayCoeff( byte[] coeffs, byte[] cali_info )
   { 
-    (new CalibCoeffDialog( this, coeffs ) ).show();
+    (new CalibCoeffDialog( this, coeffs, cali_info ) ).show();
   }
 
   /** enable or disable the buttons
@@ -1295,7 +1296,8 @@ public class GMActivity extends Activity
               // delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp - delta2*tmp ); 
               // if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
               // dip = ( dip + mCalibration2.Dip() )/2; // average dip
-              long seconds = TDUtil.dateToTimestamp( mCalibInfo.date );
+              long seconds = mApp.mDData.selectDataLastTime( TDInstance.cid );
+              if ( seconds == 0 ) seconds = TDUtil.dateToTimestamp( mCalibInfo.date );
               byte[] cali_info = CavwayCalibInfo.makeCaliInfo( seconds, delta, delta2, err_max, dip );
               uploadCoefficients( delta, coeff12, true, b, cali_info ); // 20250123 simplified 
             } else {

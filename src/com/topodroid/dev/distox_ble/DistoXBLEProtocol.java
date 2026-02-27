@@ -3,7 +3,7 @@
  * @author Siwei Tian
  * @date aug 2022
  *
- * @brief TopoDroid DistoX XBLE data protocol
+ * @brief TopoDroid DistoXBLE-specific commiunication protocol
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -18,6 +18,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 
 import android.content.Context;
 // import android.os.Handler;
@@ -104,6 +105,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
       return PACKET_NONE;
     }
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
+      mTime = TDUtil.getSeconds();
       if ( mComm.isDownloading() ) {
         for ( int kk=0; kk<DATA_LEN; ++kk ) {
           if ( mPacketBytes[kk] != databuf[kk] ) { // new packet data: send ack depends on handling packets

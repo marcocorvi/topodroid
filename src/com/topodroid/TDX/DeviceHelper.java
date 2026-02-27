@@ -41,9 +41,9 @@ import java.util.HashMap;
 public class DeviceHelper extends DataSetObservable
 {
 
-  // static final private String DEVICE_DB_VERSION = "28";
-  // static final private int DEVICE_DATABASE_VERSION = 28;
-  // static final private int DEVICE_DATABASE_VERSION_MIN = 21;
+  // static final private String TDVersion.DEVICE_DB_VERSION = "28";
+  // static final private int TDVersion.DEVICE_DATABASE_VERSION = 28;
+  // static final private int TDVersion.DEVICE_DATABASE_VERSION_MIN = 21;
 
   static final String ERROR_NULL_DB = "null device DB ";
 
@@ -279,6 +279,16 @@ public class DeviceHelper extends DataSetObservable
     // // return 0;
   }
   
+  /** update the G-M of the second sensor set
+   * @param cid   callibration ID
+   * @param gmid  GM ID
+   * @param gx    X component of G
+   * @param gy    Y component of G
+   * @param gx    Z component of G
+   * @param mx    X component of M
+   * @param my    Y component of M
+   * @param mz    Z component of M
+   */
   public void updateGMsecond( long cid, long gmid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
@@ -304,9 +314,10 @@ public class DeviceHelper extends DataSetObservable
    * @param mx      M X-component
    * @param my      M Y-component
    * @param mz      M Z-component
+   * @param time    data timestamp (or 0 if not available)
    * @return the new data ID
    */
-  public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
+  public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz, long time )
   {
     if ( myDB == null ) {
       TDLog.e( ERROR_NULL_DB + "insert GM");
@@ -326,6 +337,7 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "grp", 0 );
     cv.put( "error", 0.0 );
     cv.put( "status", 0 );
+    cv.put( "time", time );
     try {
       // this method returns the GM-data ID
       /* long ret = */ myDB.insert( GM_TABLE, null, cv ); // insert returns the nr. of records in the table
@@ -360,6 +372,28 @@ public class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
+  /** @return the time of the last calibration data
+   * @param cid   callibration ID
+   */
+  public long selectDataLastTime( long cid )
+  {
+    if ( myDB == null ) {
+      TDLog.e( ERROR_NULL_DB + "select last time");
+      return 0;
+    }
+    Cursor cursor = null;
+    long ret = 0;
+    try {
+      cursor = myDB.query(GM_TABLE, new String[] { "max(time)" }, "calibId=?", new String[] { Long.toString(cid) }, null, null, null );
+      if ( cursor != null && cursor.moveToFirst()) {
+        ret = cursor.getLong(0);
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
+      
+
   /** @return the list of GM data
    * @param cid      calibration ID
    * @param status   if 0 return only good-data, if 1 all data
@@ -375,8 +409,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query(GM_TABLE,
-                          new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status", 
-                                        "gxt", "gyt", "gzt", "mxt", "myt", "mzt" }, // columns
+                          new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status", "gxt", "gyt", "gzt", "mxt", "myt", "mzt", "time" }, // columns
                           "calibId=?",
                           new String[] { Long.toString(cid) },
                           null, null, "id" );
@@ -1708,7 +1741,8 @@ public class DeviceHelper extends DataSetObservable
              +   " gzt INTEGER default 0, "
              +   " mxt INTEGER default 0, "
              +   " myt INTEGER default 0, "
-             +   " mzt INTEGER default 0 "
+             +   " mzt INTEGER default 0, "
+             +   " time INTEGER default 0 "
              // +   " calibId REFERENCES " + CALIB_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -1783,6 +1817,8 @@ public class DeviceHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE gms ADD COLUMN myt INTEGER default 0" );
              db.execSQL( "ALTER TABLE gms ADD COLUMN mzt INTEGER default 0" );
            case 31:
+             db.execSQL( "ALTER TABLE gms ADD COLUMN time INTEGER default 0" );
+           case 32:
              /* current version */
            default:
              break;

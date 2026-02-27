@@ -167,7 +167,7 @@ public class TDUtil
 
   // DATE and TIME -------------------------------------------------------------
 
-  // /** @return the current time [millis after the age]
+  // /** @return the current time [milliseconds after the epoch]
   //  */
   // public static long getMillis()
   // {
@@ -175,7 +175,7 @@ public class TDUtil
   //   return date.getTime();
   // }
 
-  /** @return the current time [seconds after the age]
+  /** @return the current time [seconds after the epoch]
    */
   public static long getSeconds()
   {
@@ -391,7 +391,7 @@ public class TDUtil
     return date.substring(6,10) + "." + date.substring(3,5) + "." + date.substring(0,2);
   }
 
-  /** @return the time in seconds since the age
+  /** @return the time in milli-seconds since the epoch
    */
   public static long time()
   {
@@ -433,6 +433,17 @@ public class TDUtil
     return String.format(Locale.US, "%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
   }
 
+  /** @return the date from a timestamp [seconds]
+   * @param time  timestamp [s]
+   * @note almost same as millisToDate
+   */
+  public static String timestampToDate( long time )
+  {
+    GregorianCalendar calendar = new GregorianCalendar();
+    calendar.setTimeInMillis( time * 1000L );
+    return String.format(Locale.US, "%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
+  }
+
   /** @return the date-time from a timestamp
    * @param time  timestamp [s]
    */
@@ -442,16 +453,6 @@ public class TDUtil
     calendar.setTimeInMillis( time * 1000L );
     return String.format(Locale.US, "%04d-%02d-%02d %02d:%02d:%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ),
       calendar.get( Calendar.HOUR_OF_DAY ), calendar.get( Calendar.MINUTE ), (int)(calendar.get( Calendar.SECOND )) );
-  }
-
-  /** @return the date from a timestamp
-   * @param time  timestamp [s]
-   */
-  public static String timestampToDate( long time )
-  {
-    GregorianCalendar calendar = new GregorianCalendar();
-    calendar.setTimeInMillis( time * 1000L );
-    return String.format(Locale.US, "%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
   }
 
   /** @return the current year

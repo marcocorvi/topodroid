@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid TopoDroid-DistoX communication protocol
+ * @brief TopoDroid DistoX-specific (A3) communication protocol
  *
  * a DistoXA3Protocol is created by the DistoXComm to handle data for DistoX A3
  * --------------------------------------------------------

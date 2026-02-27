@@ -38,6 +38,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   // public static final int PARENT_AUTO   = 3; // AUTO-CALIB
 
   private byte[]   mCoeff;
+  private byte[]   mCaliInfo = null;
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
   // private final WeakReference<Context> mContext;  // FIXME LEAK
   private final WeakReference< ICoeffDisplayer > mParent;
@@ -54,6 +55,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
     mCoeff  = new byte[len]; 
     mParentType = parent_type;
     mTwoSensors = two_sensors;
+    if ( mTwoSensors ) mCaliInfo = new byte[16]; // FIXME CAVWAY CALI INFO
     // comp_name = "ComponentInfo{com.topodroid.TDX/com.topodroid.DistoX." + act_name + "}";
   }
 
@@ -62,7 +64,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   {
     TDLog.v("Calib Read Task - two sensors " + mTwoSensors + " coeff length " + mCoeff.length );
     if ( mApp.get() == null ) return false;
-    boolean ret = mApp.get().readCalibCoeff( mCoeff ); // 20250123 dropped mTwoSensors
+    boolean ret = mApp.get().readCalibCoeff( mCoeff, mCaliInfo ); // 20250123 dropped mTwoSensors
     return ret;
   }
 
@@ -92,13 +94,13 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
       switch ( mParentType ) {
         case PARENT_DEVICE:
           if ( DeviceActivity.mDeviceActivityVisible && mParent.get() != null && !mParent.get().isActivityFinishing() ) {
-            mParent.get().displayCoeff( mCoeff );
+            mParent.get().displayCoeff( mCoeff, mCaliInfo );
             // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
           if ( GMActivity.mGMActivityVisible && mParent.get() != null && !mParent.get().isActivityFinishing() ) {
-            mParent.get().displayCoeff( mCoeff );
+            mParent.get().displayCoeff( mCoeff, mCaliInfo );
             // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
