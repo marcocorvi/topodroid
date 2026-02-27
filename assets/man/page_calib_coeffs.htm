@@ -11,7 +11,7 @@ It is used in three different situations:
 <li>The <i>Compute</i> button of the <u>Calibration Data window</u> displays the computed coefficients</li>
 </ul>
 
-In the last case the dialog displays also
+If the calibration info (errors, iterations, dip) are available the dialog displays also
 <ul>
 <li>a histogram of the residual errors of the calibration data,</li>
 <li>the average error [degrees]</li>
@@ -23,6 +23,8 @@ In the last case the dialog displays also
 <li>the average difference between the roll angles computed using G vectors of the data in each group and using M vectors [degrees]</li>
 <li>only for double-sensor devices the statistics (average, std-dev, and max [degrees]) of the differences of the device directions between the two sensors.</li>
 </ul><br><p>
+
+In case some calibration info is not known the value 0 is shown.<br><p>
 
 Assuming that the azimuth-clino error distribution is normal, the standard deviation of the errors should be slightly over half the average value.<br><p>
 

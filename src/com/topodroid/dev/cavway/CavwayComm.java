@@ -1929,6 +1929,33 @@ public class CavwayComm extends BleComm
     // disconnectDevice();
     return ret;
   }
+
+  /** read the calibration info
+   * @param address   device address
+   * @param cali_info calibration info [out]
+   * @return true if success
+   */
+  public boolean readCaliInfo( String address, byte[] cali_info )
+  {
+    if ( cali_info == null ) return false;
+    if ( cali_info.length != 16 ) return false;
+    if( ! tryConnectDevice( address, null, 0 )) {
+      if ( LOG ) TDLog.v( TAG + "read cali_info: failed connect address " + address );
+      return false;
+    }
+    boolean ret = true;
+    byte[] buf = readMemory( CavwayDetails.CALIINFO_ADDRESS, 16 ); // FIXME it can fail
+    if ( buf == null ) {
+      TDLog.e( TAG + "fail write cali-info " );
+      ret = false;
+    } else {
+      System.arraycopy( buf, 0, cali_info, 0, 16 );
+    }
+    disconnectDevice();
+    return ret;
+  }
+
+
 }
 
 

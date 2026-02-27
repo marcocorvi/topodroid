@@ -92,14 +92,15 @@ public class CalibCoeffDialog extends MyDialog
     mParent = null;
     mCoeff  = null; // prevent dialog from coeff-upload
     mErrors = null;
-    mWithResult = false;
     makeVectorsAndMatricex( coeffs );
     // mCaliInfo = cali_info;
-    float aveErr  = CavwayCalibInfo.averageError( cali_info );
-    float stdErr = CavwayCalibInfo.stddevError( cali_info );
-    float maxErr = CavwayCalibInfo.maxError( cali_info );
-    float dip    = CavwayCalibInfo.dip( cali_info );
-    setResult( 0, aveErr, stdErr, maxErr, 0, dip, 0 );
+    if ( cali_info != null ) {
+      float aveErr  = CavwayCalibInfo.averageError( cali_info );
+      float stdErr = CavwayCalibInfo.stddevError( cali_info );
+      float maxErr = CavwayCalibInfo.maxError( cali_info );
+      float dip    = CavwayCalibInfo.dip( cali_info );
+      setResult( 0, aveErr, stdErr, maxErr, 0, dip, 0 );
+    }
 
     // mSaturated = saturated;
   }
@@ -124,7 +125,6 @@ public class CalibCoeffDialog extends MyDialog
     mParent = new WeakReference<GMActivity>( parent );
     mCoeff  = coeff;
     mErrors = errors;
-    mWithResult = true;
     makeVectorsAndMatricex( coeff );
 
     setResult( delta_bh, aveErr, stdErr, maxErr, iter, dip, roll );
@@ -153,6 +153,7 @@ public class CalibCoeffDialog extends MyDialog
     mIterStr   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
     mDipStr    = String.format( mContext.getResources().getString( R.string.calib_dip ), dip );
     mRollStr   = String.format( mContext.getResources().getString( R.string.calib_roll ), roll );
+    mWithResult = true;
   }
 
   /** make the text string for the stat of the device direction differences

@@ -1398,10 +1398,12 @@ public class TopoDroidApp extends Application
       TDLog.e("No comm or no device");
       return false;
     }
+    TDLog.v("App read calib coeff");
     boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
     if ( (cali_info != null ) && (mComm instanceof CavwayComm ) ) {
+      TDLog.v("App read calib info");
       CavwayComm comm = (CavwayComm)mComm;
-      comm.readCaliInfo( cali_info );
+      comm.readCaliInfo( TDInstance.deviceAddress(), cali_info );
     }
     resetComm();
     return ret;
