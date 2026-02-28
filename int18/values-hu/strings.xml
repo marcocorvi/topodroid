@@ -760,7 +760,7 @@
     <string name="undelete_check">Ellenőrző mérések</string>
     <string name="undelete_blunder">Baklövések</string>
     <string name="undelete_plot">Vázlatok</string>
-    <string name="delete_whole_leg">Mérés törlése</string>
+    <string name="delete_whole_leg">Egész mérés törlése</string>
     <string name="visible_border">látható határ</string>
     <!-- UNUSED string name="vthreshold">függőleges küszöb</string -->
     <!-- UNUSED string name="wait_scan">Keresés: várj &#8230;</string -->
