@@ -1,7 +1,7 @@
 <html><body>
 <h3>[5] CALIBRATION DATA</h3>
 
-<b>Only for DistoX, DistoX2, and DistoXBLE</b><br><p>
+<b>Only for DistoX, DistoX2, DistoXBLE and Cavway</b><br><p>
 
 The <u>Calibration Data window</u> displays the list of calibration data. If the calibration has no data, the window is empty but for the top buttons. Each calibration data line contains the following data information:
 <ul style="margin-top=0">
@@ -9,7 +9,7 @@ The <u>Calibration Data window</u> displays the list of calibration data. If the
 <li>group: number of the group the data belongs to</li>
 <li>error: the difference between the calibration-corrected direction and the group average direction, in degrees</li>
 <li>azimuth, inclination, and roll, computed from the raw values without any calibration correction</li>
-<li>optionally the raw calibration data values, ie, the components of G and M in the DistoX frame, either as decimal or hex values</li>
+<li>optionally the raw calibration data values, ie, the components of G and M in the device frame, either as decimal or hex values</li>
 </ul><br><p>
 
 <h4>Colors</h4>
@@ -32,14 +32,14 @@ The data values background color are:
 
 <h4>BUTTONS</h4>
 <ul style="margin-top=0">
-<li><img src="btn_toggle.png" width="36" border="1"> toggle the DistoX calibration mode on and off (It may fail at the first try)</li>
-<li><img src="btn_bluetooth.png" width="36" border="1"> reset BT, or control DistoX remotely</li>
+<li><img src="btn_toggle.png" width="36" border="1"> toggle the DistoX calibration mode on and off. It may fail at the first try (DistoX and XBLE)</li>
+<li><img src="btn_bluetooth.png" width="36" border="1"> reset BT, or control the device remotely (DistoX2 XBLE, BRIC, and Cavway)</li>
 <li><img src="btn_download.png" width="36" border="1"> download calibration data from the DistoX</li>
 <li><img src="btn_numbers.png" width="36" border="1"> assign <a href="page_groups.htm">group</a> numbers to the data, or reset the group numbers</li>
 <li><img src="btn_compute.png" width="36" border="1"> compute the <a href="page_calib_coeffs.htm">calibration coefficients</a></li>
 <li><img src="btn_cover.png" width="36" border="1"> <a href="page_calib_distrib.htm">direction distribution</a> of the calibration data</li>
-<li><img src="btn_read.png" width="36" border="1"> read and display the coefficients stored in the DistoX</li>
-<li><img src="btn_write.png" width="36" border="1"> write the calibration coefficients to the DistoX. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the result of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
+<li><img src="btn_read.png" width="36" border="1"> read and display the coefficients stored in the DistoX/Cavway</li>
+<li><img src="btn_write.png" width="36" border="1"> write the calibration coefficients to the DistoX/Cavway. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the result of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
 <li><img src="btn_search.png" width="36" border="1"> opens the search dialog</li>
 </ul><br><p>
 
@@ -49,8 +49,8 @@ Deleted data are not taken into account in the group-number assignment and in th
 
 <h4>Bluetooth</h4>
 This button resets the TopoDroid bluetooth connection.<br>
-It also lets the user control the DistoX remotely [A]: turn on or off the laser, and take a calibration shot.
-The data is immediately downloaded if the the DistoX data connection mode is set to "continuous".<br>
+It also lets the user control the device remotely [A] (if it supports remoce control): turn on or off the laser, and take a calibration shot.
+The data is immediately downloaded if the the device data connection mode is set to "continuous".<br>
 In this case it is also possible to take (and download) a group of four calibration shots with a small delay between them
 (controlled by the settings "Laser pause" and "Shot pause").<br><p>
 

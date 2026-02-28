@@ -19,6 +19,7 @@ import com.topodroid.TDX.R;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.app.ActivityManager;
 import android.content.Context;
 // import android.content.Content.Builder;
 import android.widget.TextView;
@@ -216,7 +217,3 @@ public class AIhelper // extends AsyncTask< String, Void, String >
   }
 
 }
-  
-
-
-

@@ -1,12 +1,12 @@
 <html><body>
 
-<h4>DistoX CALIBRATION COEFFICIENTS</h4>
+<h4>CALIBRATION COEFFICIENTS</h4>
 
 This dialog displays the 24 coefficients of the calibration linear transformations for the <b>G</b> and the <b>M</b> vectors (12 coefficients each) and 3 coefficients of the non-linear terms (only DistoX2 v. 2.3 or higher).<br><p>
 
 It is used in three different situations:
 <ul>
-<li>The <i>Read</i> button of the <u>Device window</u> display the coefficients read from the DistoX.</li>
+<li>The <i>Read</i> button of the <u>Device window</u> display the coefficients read from the DistoX/Cavway.</li>
 <li>The <i>Read</i> button of the <u>Calibration Info window</u> displays the coefficients stored in the database</li>
 <li>The <i>Compute</i> button of the <u>Calibration Data window</u> displays the computed coefficients</li>
 </ul>
@@ -39,8 +39,13 @@ It gives an estimate of the calibration accuracy (precision of the instrument):
 
 The dialog displays also the magnetic dip [degrees] computed by the calibration algorithm.<br><p>
 
-After a computation of the calibration coefficients, the dialog has a button to <b>write</b> the coefficients to the DistoX.<br>
+After a computation of the calibration coefficients, the dialog has a button to <b>write</b> the coefficients to the DistoX/Cavway.<br>
 A warning is given if the data direction distribution is below 95%, or the calibration average error is above 0.5&deg;.
 <br><p>
+
+For the <b>Cavway</b> there is a button to switch between the coefficients of the calibration of the first sensosr set, and those of the second sensor set.<br>
+The reported errors are from the calibration of the first sensor set. Because of the board layout the first sensor set has smaller magnetic influences.
+Nevertheless the differences of direction between the data of the two sensor sets are very small, for a good callibration.<br><p>
+
 
 </body></html>

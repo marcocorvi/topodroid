@@ -725,5 +725,15 @@ public class TDandroid
     // boolean network_enabled = lm.isProviderEnabled( LocationManager.NETWORK_PROVIDER );
     return gps_enabled;
   }
+
+  /** check if arch arm64_v8a is supported
+   */
+  public static boolean isArm64_v8aSupported()
+  {
+    for ( String abi : Build.SUPPORTED_ABIS ) {
+      if ( abi.equals("arm64-v8a") ) return true;
+    }
+    return false;
+  }
 }
   
