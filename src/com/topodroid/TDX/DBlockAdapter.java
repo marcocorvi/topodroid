@@ -571,6 +571,20 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return ( pos < START || pos >= getCount() )? null : (DBlock)( getItem( pos ) );
   }
 
+  /** @return the position of the first block with a station of the given name
+   * @param name  station name
+   */
+  public int getFirstPos( String name )
+  {
+    if ( name == null || name.isEmpty() ) return -1;
+    int cnt = getCount();
+    for ( int pos = 0; pos < cnt; ++pos ) {
+      DBlock blk = (DBlock)( getItem( pos ) );
+      if ( name.equals( blk.mFrom ) || name.equals( blk.mTo ) ) return pos;
+    }
+    return -1;
+  }
+
   // public DBlock getBlockById( long id ) 
   // {
   //   for ( DBlock b : mItems ) if ( b.mId == id ) return b;
@@ -582,7 +596,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
                            , TextView.OnEditorActionListener
   { 
     int      pos;
-    boolean  editing;
+    // boolean  mEditing; // unused
     // long     blkId; // DistoX-EDIT
     TextView tvId;
     EditText tvFrom;
@@ -593,7 +607,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     ViewHolder( TextView id, EditText from, EditText to, TextView len )
     {
       pos       = 0;
-      editing   = false;
+      // mEditing   = false;
       // blkId     = -1; // DistoX-EDIT
       tvId      = id;
       tvFrom    = from;
@@ -635,21 +649,22 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         if ( (TextView)v == tvLength ) {
           mParent.itemClick( v, pos ); // this is ok
         } else { // if ( v instanceof EditText ) // try to add this 20250826
-          if ( TDSetting.mEditableStations ) { // if ( v instanceof EditText ) // try to add this 20250826
-	    // TDLog.v("holder on click editing " + editing );
-            if ( editing ) {
-              mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); // N.B. NOSPACES: no spaces in station names
-              editing = false;
-            } else {
-              editing = true;
-            }
-          } else {
+          // FIXME TDSetting.mEditableStations is fixed false
+          // if ( TDSetting.mEditableStations ) { // if ( v instanceof EditText ) // try to add this 20250826
+	  //   // TDLog.v("holder on click editing " + mEditing );
+          //   if ( mEditing ) {
+          //     mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); // N.B. NOSPACES: no spaces in station names
+          //     mEditing = false;
+          //   } else {
+          //     mEditing = true;
+          //   }
+          // } else {
             String name = ((TextView)v).getText().toString(); // N.B. NOSPACES: no spaces in station names
             // TDLog.v("click " + name );
             if ( ! TDString.isNullOrEmpty( name ) ) {
-              mParent.openSavedStationDialog( name );
+              mParent.openSavedStationDialog( name, pos );
             }
-          }
+          // }
         // } else {
         //   TDLog.v("another view ...");
 	}
@@ -686,7 +701,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             }
           }
         }
-        editing = false;
+        // mEditing = false;
         return true; // action consumed
       }
     // };
@@ -737,19 +752,20 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       // TDLog.v("set view text block " + b.mId );
       setViewData( b );
 
+      // this is old stuff: clicking the textview toggles the display of splays
       // OnClickListener toggle = new OnClickListener() {
       //   public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
       // };
 
+      // inline station editing is disabled
       // FIXME inline station editing: FROM and TO click are not dispatched ...
-      //
       // tvFrom.setOnClickListener( new OnClickListener() {
       //   public void onClick( View v ) {
-      //     if ( editing ) {
+      //     if ( mEditing ) {
       //       mParent.recomputeItems( ((TextView)v).getText().toString(), pos );
-      //       editing = false;
+      //       mEditing = false;
       //     } else {
-      //       editing = true;
+      //       mEditing = true;
       //     }
       //   }
       // } );

@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
@@ -45,7 +46,8 @@ public class AIdialog extends MyDialog
                  , AdapterView.OnItemSelectedListener
 {
   protected IHelpViewer mParent;
-  protected AIhelper mHelper;
+  protected AIhelper mHelper = null; 
+  // protected AIlocalModel mLocalModel = null; // GEMMA3
   protected static String mSystemInstruction = null;
   protected boolean mLocalContext = true; // whether to include the local context in the query
   protected boolean mCanSubmit    = true;
@@ -64,9 +66,17 @@ public class AIdialog extends MyDialog
     "gemini-2.0-flash", "gemini-2.0-pro"
   };
 
+  // GEMMA3
+  // // list of help entries - names must coincide with sections in llm-settings.txt
+  // static final protected String[] mLLMindex = {
+  //   "GENERAL", "DEVICE", "EXPORT_ENABLE", "EXPORT_DATA", "EXPORT_SKETCH",
+  //   "DATA", "DATA_PROCESS", 
+  //   "SKETCH", "SKETCH_EDIT", "SKETCH_DRAW", "3D" 
+  // };
+  // protected static String[] mLLMsystemInstruction = null;
 
   final static int IDX_MODEL = 1;
-  int mIdxModel = IDX_MODEL;
+  int mIdxModel = IDX_MODEL; // index of Gemini model / index of local setting section
 
   private Button mBtnSubmit;
   protected TextView mAnswer;
@@ -82,9 +92,16 @@ public class AIdialog extends MyDialog
   {
     super( context, null, R.string.AIdialog );  // nul app
     mParent = parent;
+    mParent.setAIbuttonEnabled( false );
     mRAImodel = r_ai_model;
-    // TDLog.v("Man page " + page );
-    mHelper = new AIhelper( context, this, user_key, page );
+    TDLog.v("AI dialog: page " + page + " model " + r_ai_model );
+    if ( user_key != null ) {
+      mHelper = new AIhelper( context, this, user_key, page );
+      mIdxModel = IDX_MODEL;
+    // } else { // GEMMA3
+    //   mLocalModel = new AIlocalModel( context, this );
+    //   mIdxModel = 0;
+    }
   }
 
   static public void resetChat()
@@ -104,14 +121,13 @@ public class AIdialog extends MyDialog
     ((Button) findViewById( R.id.button_reset  ) ).setOnClickListener( this );
 
     Spinner models = (Spinner) findViewById( R.id.model );
+    // ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, ( mHelper != null )? mModels : mLLMindex ); // GEMMA3
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
     models.setAdapter( adapter );
     models.setOnItemSelectedListener( this );
+    models.setSelection( mIdxModel );
 
     mAnswer = (TextView) findViewById( R.id.answer );
-
-    mIdxModel = IDX_MODEL;
-    models.setSelection( IDX_MODEL );
   }
 
   /** react to an item selection
@@ -131,7 +147,7 @@ public class AIdialog extends MyDialog
   {
     mIdxModel = IDX_MODEL;
     Spinner models = (Spinner) findViewById( R.id.model );
-    models.setSelection( IDX_MODEL );
+    models.setSelection( mIdxModel );
   }
 
   /** react to a user tap - only the taps on "man book" are taken
@@ -152,17 +168,30 @@ public class AIdialog extends MyDialog
           Button b = (Button)findViewById(R.id.button_submit);
           b.setOnClickListener( null );
           b.setEnabled( false );
-          mHelper.setModel( mModels[mIdxModel], mRAImodel );
-          mHelper.ask( question, this, mLocalContext );
+          if ( mHelper != null ) {
+            mHelper.setModel( mModels[mIdxModel], mRAImodel );
+            mHelper.ask( question, this, mLocalContext );
+          // } else if ( mLocalModel != null ) { // GEMMA3
+          //   mLocalModel.setPreamble( mLLMsystemInstruction[mIdxModel] );
+          //   mLocalModel.askLocalModel( mContext, question, this );
+          } else {
+            TDToast.makeWarn( R.string.ai_no_model );
+          }
           mLocalContext = false;
         }
       }
     } else if ( v.getId() == R.id.button_reset ) { // reset the chat
-      mHelper.resetChat();
-    } else if ( v.getId() == R.id.button_clear ) { // clear the question text
+      if ( mHelper != null ) {
+        mHelper.resetChat();
+      // } else if ( mLocalModel != null ) { // GEMMA3
+      //   mLocalModel.resetChat();
+      }
+    } else if ( v.getId() == R.id.button_clear ) { // clear the question and answer texts
       // ((TextView) findViewById( R.id.answer )).setText(""); 
       ((EditText) findViewById( R.id.question )).setText("");
+      mAnswer.setText("");
     } else {
+      mParent.setAIbuttonEnabled( true );
       dismiss();
     }
   }
@@ -189,10 +218,25 @@ public class AIdialog extends MyDialog
     mAnswer.setText( response );
   }
 
+  /** apend a partila response to the text view
+   * @param response  partial response
+   */
+  public void appendResponse( String response )
+  {
+    mAnswer.append( response );
+  }
+
   public void openOnParent( String page )
   {
     dismiss();
     mParent.showManPage( page );
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    mParent.setAIbuttonEnabled( true );
+    super.onBackPressed();
   }
 
 }

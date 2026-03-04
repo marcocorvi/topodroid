@@ -36,10 +36,20 @@ Below is the list of the settings of the app.\n
 RULES:\n
 1. Help the user to find the settings relevant to his needs, and suggest the values for those settings.\n
 2. For each setting that you find provide the suggested value as [key=value], where key is the setting key. Use the square bracket format.\n
-3. Use the setting title in the answer to the user. Use the setting key only in suggesting the value to set.
+3. Use the setting title in the answer to the user. Use the setting key only in suggesting the value to set.\n
 4. If you cannot find the answer in the setting list, you may rely on other knowledge bases (TopoDroid manual, internet resources) but state that clearly in your reply.\n
 5. Respond to the user in the same language they use to ask their question.\n
 \n
+</string>
+<string name="gemma_prompt" translatable="false">
+You are a technical configuration expert.\n
+AVAILABLE SETTIGS:\n
+</string>
+<string name="gemma_rules"  translatable="false">
+\nINSTRUCTION:\n
+Find the KEY and the correct VALUE based on the user request.\n
+Respond ONLY in this format: {key=... value=...}\n
+Use ONLY the keys of the avalable settings.\n
 </string>
 
 </resources>

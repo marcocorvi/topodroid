@@ -8,6 +8,7 @@
     <string name="ai_error">AI error %1$s</string>
     <string name="ai_internet">Warning. AI help requires web connection.</string>
     <string name="ai_no_internet">No web connection.</string>
+    <string name="ai_no_model">No AI model</string>
     <string name="ai_prompt">Type your question</string>
     <string name="ai_invalid_key">Invalid API key</string>
     <string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string>
@@ -902,6 +903,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_duplicate" >Duplicate</string>
     <string name="button_settime"   >Set time</string>
     <string name="button_surface"    copyable="fr">Surface</string>
+    <string name="button_splay"    copyable="all">Splay</string>
     <string name="button_no_extend" >No extend</string>
     <string name="button_eval"      >Raw</string>
     <string name="button_evalg" copyable="all">G</string>
@@ -2230,7 +2232,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_tdconfig">Enter project name</string>
     <string name="title_surveys">Surveys</string>
 
-    <string name="exported">Saved file %1$s</string>
+    <string name="exported">Exported file %1$s</string>
     <string name="export_failed">Failed export</string>
 
     <string name="image_diagram">Direction diagram</string>

@@ -22,10 +22,10 @@
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="match_parent"
       android:ems="25"
-      android:layout_height="fill_parent" 
+      android:layout_height="0dp" 
       android:minLines="16"
       android:maxLines="18"
-      android:scrollHorizontally="true"
+      android:scrollHorizontally="false"
     />
   </ScrollView>
 

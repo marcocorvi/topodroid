@@ -38,20 +38,20 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   float[] mMVPMatrix;
   TglParser mParser;
   GlModel   mModel;
-  TopoGL    mApp;
+  TopoGL    mTopoGL;
   ParserDEM mDEM;
   TglMeasure mMeasure;  // result of the measure
   String     mFullname; // station name
   Cave3DShot mLeg = null;
 
-  MeasureComputer( TopoGL app, float x, float y, float[] MVPMatrix, TglParser parser, ParserDEM dem, GlModel model )
+  MeasureComputer( TopoGL topoGL, float x, float y, float[] MVPMatrix, TglParser parser, ParserDEM dem, GlModel model )
   {
     mX = x;
     mY = y;
     mMVPMatrix = MVPMatrix;
     mParser    = parser;
     mModel     = model;
-    mApp       = app;
+    mTopoGL    = topoGL;
     mDEM       = dem;
   }
 
@@ -74,8 +74,8 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
         return MEASURE_NO_START; // new Integer( MEASURE_NO_START );
       }
 
-      // if ( ! mApp.mMeasureStation.isChecked() ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
-      if ( ! mApp.isMeasuring ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
+      // if ( ! mTopoGL.mMeasureStation.isChecked() ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
+      if ( ! mTopoGL.isMeasuring ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
 
       Cave3DStation station = mParser.getStation( mFullname );
       if ( station == null ) return MEASURE_NO_STATION; // new Integer( MEASURE_NO_STATION ); // null station
@@ -91,7 +91,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
         }
         // TDLog.v("path size " + path.size() );
         // FIXME INCREMENTAL mModel.clearPath( );
-        mModel.setPath( path, false ); // mModel.setPath( path, mApp.hasBluetoothName() );
+        mModel.setPath( path, false ); // mModel.setPath( path, mTopoGL.hasBluetoothName() );
             
         return MEASURE_OK; // new Integer( MEASURE_OK );
       }
@@ -111,12 +111,12 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
         if ( TopoGL.mMeasureToast ) {
           TDToast.make( mMeasure.getString() );
         } else {
-          (new DialogMeasure( mApp, mMeasure )).show(); // mApp = context
+          (new DialogMeasure( mTopoGL, mMeasure )).show(); // mTopoGL = context
         }
-        mApp.refresh();
+        mTopoGL.refresh();
         break;
       case MEASURE_SAME_STATION:
-        mApp.closeCurrentStation();
+        mTopoGL.closeCurrentStation();
         break;
       // case MEASURE_NO_STATION:
       //   TDLog.w("path: null station" );
@@ -124,29 +124,29 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
       //   break;
       case MEASURE_NO_START:
         if ( TopoGL.mStationDialog ) {
-          (new DialogStation( mApp, mApp, mParser, mFullname, mDEM )).show();
+          (new DialogStation( mTopoGL, mTopoGL, mParser, mFullname, mDEM )).show();
         } else {
           Cave3DStation st = mParser.getStation( mFullname );
           if ( st != null ) {
             DEMsurface surface = (mDEM != null)? mDEM : mParser.getSurface();
-            String msg = String.format(Locale.US, mApp.getResources().getString( R.string.current_station_format ), st.x, st.y, st.z );
+            String msg = String.format(Locale.US, mTopoGL.getResources().getString( R.string.current_station_format ), st.x, st.y, st.z );
             if (surface != null) {
               double zs = surface.computeZ( st.x, st.y );
               if ( zs > -1000 ) {
                 zs -= st.z;
-                mApp.showCurrentStation( st.getShortName() + String.format(Locale.US, " [Depth %.1f]", zs), msg );
+                mTopoGL.showCurrentStation( st.getShortName() + String.format(Locale.US, " [Depth %.1f]", zs), msg );
               } else {
-                mApp.showCurrentStation( st.getShortName(), msg );
+                mTopoGL.showCurrentStation( st.getShortName(), msg );
               }
             } else {
-              mApp.showCurrentStation( st.getShortName(), msg );
+              mTopoGL.showCurrentStation( st.getShortName(), msg );
             }
             // TDToast.make( msg );
           }
         }
         break;
       case MEASURE_SKETCH:
-        mApp.sketchLeg( mLeg );
+        mTopoGL.sketchLeg( mLeg );
         break;
       // case MEASURE_NO_NAME:
       //   // mModel.clearPath( );

@@ -54,7 +54,6 @@ import java.util.regex.Pattern;
 
 public class PrefAIdialog extends AIdialog
 {
-  // TODO list of help entries
   /** cstr
    */
   public PrefAIdialog( Context context, IHelpViewer parent, String user_key, String page )
@@ -63,9 +62,17 @@ public class PrefAIdialog extends AIdialog
     mPattern = Pattern.compile( "\\[([A-Z_]+)=([a-zA-Z0-9.]+)]" );
     mRtitle = R.string.title_ai_dialog_pref;
 
-    if ( mSystemInstruction == null ) {
-      mSystemInstruction = getSettingText( context );
-      // TDLog.v("PrefAI System instr. length " + mSystemInstruction.length() );
+    TDLog.v("Pref AI dialog page " + page );
+
+    if ( user_key != null ) {
+      if ( mSystemInstruction == null ) {
+        mSystemInstruction = getSettingText( context );
+        // TDLog.v("PrefAI System instr. length " + mSystemInstruction.length() );
+      }
+    // } else { // GEMMA3
+    //   if ( mLLMsystemInstruction == null ) {
+    //     loadLLMsettingText( context );
+    //   }
     }
   }
 
@@ -74,6 +81,60 @@ public class PrefAIdialog extends AIdialog
   {
     super.onCreate( savedInstanceState );
   }
+
+  /* GEMMA3
+  private void loadLLMsettingText( Context ctx )
+  {
+    mLLMsystemInstruction = new String[ mLLMindex.length ];
+    int idx = 0;
+    StringBuilder sb = new StringBuilder();
+    try {
+      InputStream is = ctx.getAssets().open("ai/llm-settings.txt");
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String line;
+      int cnt = 1;
+      while ( ( line = br.readLine() ) != null ) {
+        if ( ! line.startsWith("#") ) {
+          int pos = line.indexOf(": ");
+          if ( pos < 0 ) { TDLog.e("BAD end-key " + line ); continue; }
+          String key = line.substring(0,pos);
+          String rem = line.substring( pos+2 );
+          if ( rem.startsWith("Int") ) {
+            pos = rem.indexOf(",");
+            if ( rem.startsWith("Int[") ) pos = rem.indexOf("],");
+          } else if ( rem.startsWith("Float") ) {
+            pos = rem.indexOf(",");
+            if ( rem.startsWith("Float[") ) pos = rem.indexOf("],");
+          } else if ( rem.startsWith("Enum{") ) {
+            pos = rem.indexOf("},");
+          } else {
+            pos = rem.indexOf(",");
+          }
+          if ( pos < 0 ) { TDLog.e("BAD end-type " + line ); continue; }
+          String type = rem.substring(0, pos);
+          rem = rem.substring( pos+3 ); // glob double quotes
+          pos = rem.indexOf("\", ");
+          if ( pos < 0 ) { TDLog.e("BAD end-name " + line ); continue; }
+          String name = rem.substring(0, pos);
+          rem = rem.substring( pos+4 ); // glob double quotes
+          pos = rem.indexOf("\"");
+          if ( pos < 0 ) { TDLog.e("BAD end-desc " + line ); continue; }
+          String desc = rem.substring(0, pos);
+          sb.append( String.format("%d, KEY: \"%s\" | TYPE: %s | DESC: \"%s. %s\n", cnt, key, type, name, desc ) );
+          ++ cnt;
+        } else {
+          mLLMsystemInstruction[ idx ] = sb.toString();
+          sb = new StringBuilder();
+          idx ++;
+        }
+      }
+      br.close();
+      mLLMsystemInstruction[ idx ] = sb.toString();
+    } catch (IOException e ) {
+      TDLog.e("Error reading settings.txt " + e.getMessage() );
+    }
+  }
+  */
 
   private String getSettingText( Context ctx )
   {

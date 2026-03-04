@@ -20,6 +20,7 @@ import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;
 import com.topodroid.help.AIdialog;
+// import com.topodroid.help.AIlocalModel; // GEMMA3
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
@@ -74,6 +75,8 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_GRAPH_PAPER_SCALE = 1008;
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
+  // private boolean mWithLocalModel = false; // GEMMA3
+  // // private boolean mWithLocalModelDialog = false;
 
   // private TDPref mCwdPref;
   // private TDPref mBtAliasPref;
@@ -86,6 +89,7 @@ public class TDPrefActivity extends Activity
   private TDPref[] mPrefs;
 
   private TextView mTitleText = null;
+  private ImageButton mAIbutton;
 
   /** find a preference by the name
    * @param name    preference name
@@ -123,6 +127,8 @@ public class TDPrefActivity extends Activity
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
+    // mWithLocalModel = AIlocalModel.hasLocalModel( this ); // GEMMA3
+    // TDLog.v( "has local LLM " + mWithLocalModel );
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -323,6 +329,19 @@ public class TDPrefActivity extends Activity
     return true;
   }
 
+  public void setAIbuttonEnabled( boolean enabled )
+  {
+    if ( enabled ) {
+      mAIbutton.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai ) );
+      mAIbutton.setOnClickListener( new OnClickListener() {
+        @Override public void onClick( View v ) { startGemini(); }
+      } );
+    } else {
+      mAIbutton.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai_no ) );
+      mAIbutton.setOnClickListener( null );
+    }
+  }
+
   /** load the preferences
    */
   private boolean loadPreferences( )
@@ -332,11 +351,8 @@ public class TDPrefActivity extends Activity
     LinearLayout layout = (LinearLayout) findViewById( R.id.layout );
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     layout.setOnLongClickListener( this );
-    ImageButton button = (ImageButton)findViewById( R.id.title_button );
-    button.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai ) );
-    button.setOnClickListener( new OnClickListener() {
-      @Override public void onClick( View v ) { startGemini(); }
-    } );
+    mAIbutton = (ImageButton)findViewById( R.id.title_button );
+    setAIbuttonEnabled( /* mWithLocalModel || */ TDandroid.isOnline( this ) ); // GEMMA3
     mTitleText = (TextView)findViewById( R.id.title_text );
     mTitleText.setTextColor( 0xff6699ff );
 
@@ -697,10 +713,6 @@ public class TDPrefActivity extends Activity
     }
   }
 
-
-
-
-
   public void showAIdialog() {}
 
   public void showInvalid( final TDPref pref, final String response )
@@ -714,7 +726,16 @@ public class TDPrefActivity extends Activity
 
   public void startGemini()
   {
+    // if ( mWithLocalModel ) { // GEMMA3
+    //   // if ( ! mWithLocalModelDialog ) {
+    //   //   mWithLocalModelDialog = true;
+    //     TDToast.makeLong( "Please wait while the AI starts up" );
+    //     setAIbuttonEnabled( false );
+    //     (new PrefAIdialog( this, this, null, mCategories[ mPrefCategory ] ) ).show();
+    //   // }
+    // } else
     if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+      setAIbuttonEnabled( false );
       (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();
     } else { // start API key dialog
       (new GeminiDialog( this, this, null )).show();

@@ -1859,7 +1859,8 @@ public class ShotWindow extends Activity
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SAVED STATIONS
         if ( TDLevel.overAdvanced ) {
-          openSavedStationDialog( mApp.getCurrentOrLastStation() );
+          String station = mApp.getCurrentOrLastStation();
+          openSavedStationDialog( station, mDataAdapter.getFirstPos( station ) );
           // ArrayList< DBlock > list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
           //   updateDisplay( );
@@ -1942,9 +1943,13 @@ public class ShotWindow extends Activity
     }
   }
 
-  void openSavedStationDialog( String name )
+  /** open the saved stations dialog
+   * @param name   station name
+   * @param pos    position in the adapter of the block with the station (or -1)
+   */
+  void openSavedStationDialog( String name, int pos )
   {
-    (new CurrentStationDialog( mActivity, this, mApp, name )).show();
+    (new CurrentStationDialog( mActivity, this, mApp, name, pos )).show();
   }
 
   // ----------------------------------------------------------------
@@ -2886,6 +2891,10 @@ public class ShotWindow extends Activity
   }
 
 
+  /** toggle the display of the splays with a given station
+   * @param st   station name
+   * @param pos  position of the tapped item in the block list (can be -1)
+   */
   void recomputeItems( String st, int pos )
   {
     // TDLog.v("list recompute items");
@@ -2899,6 +2908,9 @@ public class ShotWindow extends Activity
     }
   }
 
+  /** @return true if the list of station for splay-display contains the specified name
+   * @param name   station name
+   */
   private boolean showSplaysContains( String name ) 
   {
     for ( String st : mShowSplay ) {

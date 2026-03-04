@@ -458,6 +458,8 @@ public class UserManualActivity extends Activity
   //   super.onConfigurationChanged( new_cfg );
   // }
 
+  public void setAIbuttonEnabled( boolean enabled ) { /* nothing */ }
+
 }
 
 

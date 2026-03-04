@@ -59,6 +59,7 @@ class CurrentStationDialog extends MyDialog
   private String mStationName;    // station name
   private EditText mName;
   private EditText mComment;
+  private int mPos; // position of the block with the station
  
   private String mGeoCode = "";
 
@@ -68,6 +69,7 @@ class CurrentStationDialog extends MyDialog
   private Button mBtnClear;
   private Button mBtnGeoCode;
   private Button mBtnPhoto;
+  private Button mBtnSplay;
   // private Button mBtnCancel;
 
   private CheckBox mBtnFixed;
@@ -84,11 +86,12 @@ class CurrentStationDialog extends MyDialog
    * @param app       application (used to set the active station)
    * @param station   station name
    */
-  CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app, String station )
+  CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app, String station, int pos )
   {
     super( context, app, R.string.CurrentStationDialog );
     mParent  = parent;
     mStationName = ( station == null )? mApp.getCurrentOrLastStation() : station ;
+    mPos = pos;
   }
 
   @Override
@@ -130,6 +133,7 @@ class CurrentStationDialog extends MyDialog
     mBtnClear   = (Button) findViewById(R.id.button_clear );
     mBtnGeoCode = (Button) findViewById(R.id.button_code );
     mBtnPhoto   = (Button) findViewById(R.id.button_photo );
+    mBtnSplay   = (Button) findViewById(R.id.button_splay );
 
     if ( TDLevel.overExpert ) {
       GeoCodes geocodes = TopoDroidApp.getGeoCodes();
@@ -152,6 +156,11 @@ class CurrentStationDialog extends MyDialog
     mBtnPop.setOnClickListener( this );  // DELETE
     mBtnOK.setOnClickListener( this );   // OK-SAVE
     mBtnClear.setOnClickListener( this );   // CLEAR
+    if ( mPos < 0 || mParent == null ) {
+      mBtnSplay.setVisibility( View.GONE );
+    } else {
+      mBtnSplay.setOnClickListener( this );   // CLEAR
+    }
 
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
     // mBtnCancel.setOnClickListener( this );
@@ -222,6 +231,8 @@ class CurrentStationDialog extends MyDialog
   {
     if ( TDString.isNullOrEmpty( name ) ) return; // safety check
     mStationName = name;
+    mPos = -1;
+    mBtnSplay.setVisibility( View.GONE ); // switch off toggle SPLAY display
     StationInfo cs = ( name == null )? null : TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
@@ -400,6 +411,10 @@ class CurrentStationDialog extends MyDialog
         (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       }
       return;
+    } else if ( mParent != null && b == mBtnSplay ) { // toggle SPLAY display
+      if ( mPos >= 0 ) {
+        mParent.recomputeItems( mStationName, mPos );
+      }
     } else if ( mParent != null && b == mBtnPhoto ) { // PHOTO
       if ( storeStation( name ) ) {
         StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
@@ -408,7 +423,7 @@ class CurrentStationDialog extends MyDialog
         } else {
           (new StationPhotoDialog( mContext, this, cs )).show();
         }
-      }
+      } 
       return;
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */

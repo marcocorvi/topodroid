@@ -20,4 +20,6 @@ public interface IHelpViewer
   public void showAIdialog();
 
   public void showInvalid( final TDPref pref, final String response );
+
+  public void setAIbuttonEnabled( boolean enabled );
 }

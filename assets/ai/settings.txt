@@ -6,7 +6,7 @@ The setting types are: Int, Bool, Float, String, Enum, Button and Color.
 --- SETTINGS LIST ---
 MAIN {
 DISTOX_TEXT_SIZE: B, Int (>0), "Text size", "Size of text entries in listings. The default is 20sp, Minimum 10sp"
-DISTOX_SIZE_ButtonS: B, Enum{0, 1, 3, 4, 5}, "Button size", "Size of top-bar buttons of the app windows"
+DISTOX_SIZE_BUTTONS: B, Enum{0, 1, 3, 4, 5}, "Button size", "Size of top-bar buttons of the app windows"
 DISTOX_SYMBOL_SIZE: B, Float (>0), "Symbol size", "Size of sketch icon symbols: The size of iconic symbols displayed in the drawings is proportional to this value, The deafult is 1.8. Minimum = 1.0"
 DISTOX_EXTRA_ButtonS: B, Enum{0,1,2,3,4,5}, "Usage profile", "Level of interface and functions, The usage profile determines the number of elements in the user interface and the available actions. For example the result of a button tap can be simple or complex depending on the activity level. The default is 1 (normal). {0 basic, 1 normal, 2 advanced, 3 expert, 4 tester, 5 developer}"
 DISTOX_LOCAL_MAN: A, Enum{0,1,2,3,4,5,6,7}, "Manual translation", "This setting is used to install and enable a translation of the user manual.  The default value (0) is used for the built-in English manual. The default is 0 (English).  { 0: English, 1: Spanish, 2: Italian, 3: Russian, 4: Hungarina, 5: French, 6: Portuguese, 7: Chinese }"
@@ -24,9 +24,9 @@ DISTOX_GEMINI: E, Button, "Gemini key", "Dialog to enter Gemini API key"
 }
 SURVEY {
 DISTOX_TEAM: B, String, "Team", "This setting allows to specify the deafult team, which is set to the survey team whenever a new survey is created. The team can still be modified in the "new survey" dialog, or later editing the survey metadata (Survey Window). The default is an empty string. If the team members are separated by semicolon they are splitted in 'team' commands in the Therion export"
-DISTOX_TEAM_DIALOG: E, Enum{0,1,2), "Team semantics", "This setting defines how the 'team' attribute of the survey is modified and interpreted. It can be either edited as plain text or through a dialog. Then it is interpreted as a plain text (the team members are not parsed), or as a list of team members, separated by semicolon. The possible values are 0 (plain text), 1 (separated text), 2 (dialog). The default is plain text"
+DISTOX_TEAM_DIALOG: E, Enum{0,1,2}, "Team semantics", "This setting defines how the 'team' attribute of the survey is modified and interpreted. It can be either edited as plain text or through a dialog. Then it is interpreted as a plain text (the team members are not parsed), or as a list of team members, separated by semicolon. The possible values are 0 (plain text), 1 (separated text), 2 (dialog). The default is plain text"
 DISTOX_SURVEY_STATION: B, Enum{0,1,2,3,4,5,6,7,8}, "Station assignment policy", "This setting specifies how TopoDroid assigns stations to the incoming data shots. Splay shots have only the FROM station. Leg shots connect two stations and therefore have both FROM and TO stations. TopoDroid recognizes a number (3 by default) of similar consecutive shots as a leg. There are several station assignment policies (in order of enum): [0] 'no assignment'; [1] 'first splays, then forward leg', ie, station assignment is like 1,1,1,1-2,2,2,2,2,2-3, and so on. This is the default; [2] 'splay first, ten backward leg', ie, 2,2,2,2,2-1,3,3,3,3-2, and so on; [3] 'forward leg, then splays' (1-2,1,1,1,2-3,2,2,...); [4] 'backward leg then splays' (2-1,2,2,2,3-2,3,3,3,...); [5] 'backsight' (1,1,1,1-2,2-1,2,2,2,2-3,3-2,3,3,...); [6] 'tripod' (2-1,2,2,2,2-3,4-3,4,4,4,4-5,...); [7] 'toporobot' policy where station name are recorded in TopoRobot style (ie, series and numbers); [8] 'magnetic anomaly', which is like 'backsight' but the backsight shot is used to correct the azimuth for the magnetic anomaly,"
-DISTOX_STATION_NAMES: B, Enum{0,1}, , "Station names type", "Station names can be either alphanumeric [0] of numerical [1]. The default is alphanumeric. This setting is not very important because even with alphanumeric stations, if the names are numerical they are incremented as numbers"
+DISTOX_STATION_NAMES: B, Enum{0,1}, "Station names type", "Station names can be either alphanumeric [0] of numerical [1]. The default is alphanumeric. This setting is not very important because even with alphanumeric stations, if the names are numerical they are incremented as numbers"
 DISTOX_INIT_STATION: B, String, "Default initial station", "When a new survey is created the name for the initial station must be set. This setting is the default choice for the initial station name. The user can change it in the 'New Survey' dialog. This is a convenience setting."
 DISTOX_THUMBNAIL: A, Int in [80..400], "Thumbnail size", "This is the size of the thumbnail of the image in the photo dialogs. The default value is 200 pxl. It must be positive"
 DISTOX_FIXED_ORIGIN: B, Bool, "Fixed sketch origin", "The sketch origin is very important because it says how the sketch drawing places on the centerline. The sketch origin is defined in the 'New Sketch' dialog. Each sketch can have its own origin. Usually TopoDroid propose the last station because one skatches the part of the cave that has been measured last. With this option enabled the initial station is proposed as origin for all the sketches. Default false"
@@ -38,19 +38,19 @@ DISTOX_ZOOM_CTRL: B, ENU{0,1,2}, "Zoom controls", "Sketch zoom is usually done w
 DISTOX_HTHRESHOLD: T, Float (>0), "Horizontal cross-section threshold", "If leg clino is more than the threshold the cross-sections at the leg is horizontal"
 DISTOX_CHECK_ATTACHED: A, Bool, "One component survey", "When this option is enabled the data reduction (which is done every time a sketch is opened) checks whether the survey has a single component or has disconnected pieces. A warning is shown if there are several pieces. Default false"
 DISTOX_CHECK_EXTEND: A, Bool, "Check shot extend", "When this option is set the data reduction checks whether all legs have the 'extend' property set, If there is a leg without the value of 'extent' the 'menu' button of the 'Sketch window" has a top-right red dot. The 'extend' value is very important, because it specifies how the leg is drawn in the extended profile (either to the left, or to the right, or vertical). If a leg has not the 'extend' the program cannot continue the centerline beyond that leg and the centerline is truncated in the profile view. The default is true"
-DISTOX_TOOLBAR_SIZE: T, Float (>0), "Toolbar size", "This is the size of the toolbar (the lower bar with drawing tools) for the 'Sketch window' in drawing mode.  This setting controls the appearance of the interface. Default 5"
+DISTOX_TOOLBAR_SIZE: T, Int (>0), "Toolbar size", "This is the size of the toolbar (the lower bar with drawing tools) for the 'Sketch window' in drawing mode.  This setting controls the appearance of the interface. Default 5"
 DISTOX_PLOT_CACHE: B, Bool, "Sketch cache", "In order to speed up loading the sketches TopoDroid can keep them in cache. The cache is emptied when the survey is closed. The default is true"
 DISTOX_PLOT_SHIFT: T, Bool, "Sketch shitf", "Enable the shifting of the drawing with respect to the centerline"
 DISTOX_PLOT_SPLIT: T, Bool, "Sketch split", "Enable the sketch splitting, that is the selection of a portion of the drawing and copy or move it to a new sketch"
 DISTOX_STYLUS_SIZE: T, Float, "Stylus size", "Maximum diameter of a touch with the stylus. Larger touches are discarded as finger touches, If non-positive stylus is diesabled"
 DISTOX_BACKUP_NUMBER: A, Enum{4,5,6,7,8}, "Backup number", "Number of backup for sketches. TopoDroid saves a number of sketch backups so that the drawing can be recovered if something goes wrong"
 DISTOX_BACKUP_INTERVAL: A, Int in [10,600], "Backup interval", "Minimum interval of time between two backups"
-DISTOX_SAVED_STATIONS" T, Bool, "Color saved stations", "Color saved stations"
+DISTOX_SAVED_STATIONS: T, Bool, "Color saved stations", "Color saved stations"
 DISTOX_LEGONLY_UPDATE: T, Bool, "Leg-only update", "Update the sketch centerline only when there is a new leg, instead at every shot"
 DISTOX_FULL_AFFINE: T, Bool, "Full affine", "Allow sketch shift, rotation, and skew, ie, affine transformation instead of only shift"
 DISTOX_WITH_LEVELS: T, Enum{0,1,2}, "Canvas levels", "Use levels for the drawing items: no levels [0], levels by class (points, lines, areas) [1], levels by item type [2]"
 DISTOX_GRAPH_PAPER_SCALE: T, Button, "Graph paper", "Scale the canvas as if sketching on a graph paper"
-DISTOX_SLANT_XSECTION: T, Bool, "Slant cross-section", "Enable slant cross-sections instead of only vertical or horizontal"
+DISTOX_SLANT_XSECTION: T, Bool, "Slant cross-section", "Enable slanted cross-sections instead of only vertical or horizontal"
 DISTOX_OBLIQUE_PROJECTED: T, Int in [0,80], "Oblique projected profile", "Maximum angle for oblique projected profile view. If less that 10 oblique projection is disabled."
 DISTOX_LINE_ENDS: T, Int (>=0), "Line ends", "Small length (number of points) at the end of the traced curve not included in the line"
 }
@@ -60,7 +60,7 @@ DISTOX_GROUP_DISTANCE: A, Float (>=0), "Within group distance", "Data of the sam
 DISTOX_CALIB_EPS: B, Float (>=0.000001),  "Calibration epsilon", "The computation of the calibration coefficients ends when the adjustment falls below this value"
 DISTOX_CALIB_MAX_IT: B, Int (>10), "Maximum iterartion", "The computation of the calibration coefficients ends when the number of iteration exceeds this value"
 DISTOX_CALIB_SHOT_DOWNLOAD: A, Bool, "Calibration shot download", "Enable download the calibration shots taken by remote control"
-DISTOX_RAW_CDATA: A, Enum{0,1,2,11,12,21,22}, "Raw caibration data", "How to show raw calibration data: don't show [0], decimal [1], hex [2], decimal only G [11], hex only G [12] , decimal only M [21], hex only M [22]"
+DISTOX_RAW_CDATA: A, Enum{0,1,2,11,12,21,22}, "Raw caibration data", "How to show raw calibration data: don't show [0], decimal G-M [1], hex G-M [2], decimal only G [11], hex only G [12] , decimal only M [21], hex only M [22]"
 }
 DEVICE {
 DISTOX_BLUETOOTH: N, Enum{0,1,2}, "Bluetooth check", "Enable checking whether the bluetooth is active: no [0], when the app starts [1], always [2]" 
@@ -68,14 +68,14 @@ DISTOX_CONN_MODE: B, Enum{0,1,2}, "Device connection mode", "The connection mode
 DISTOX_HEAD_TAIL: B, Bool, "Read Head/Tail", "With this oprion TopoDroid in on-demand mode reads the number of data to download before downloading the data.  This options applies only to the DistoX version 1"
 DISTOX_SOCKET_TYPE: B, Enum{0,1}, "Socket type", "The socket type applies only to classic bluetooth. It can be normal [0] or insecure [1]. This setting is irrelevant for BLE devices"
 DISTOX_CONNECT_FEEDBACK: E, Enum{0,1,2}, "Connection feedback", "The connection feedback can be one of: none [0], audio [1], or heptic [2]. Default 0 (none)"
-DISTOX_BT_ALIAS: T, Button, "Bluetooth alias", "Open a window to manually define an alias for a device. The user must enter the dlias and the evice model and code"
+DISTOX_BT_ALIAS: T, Button, "Bluetooth alias", "Open a window to manually define an alias for a device. The user must enter the alias and the evice model and code"
 DISTOX_UNNAMED_DEVICE: T, Bool, "Unnamed devices", "Used to handle devices when Android does not report the name""
-DISTOX_SOCKET_DELAY: E, Int in [0,60], "Socket delay", "Delay for the establishment of classic Bluettooht connection. Tenths of second"
+DISTOX_SOCKET_DELAY: E, Int in [0,60], "Socket delay", "Delay for the establishment of classic Bluetooth connection. Tenths of second"
 DISTOX_SECOND_DISTOX: T, Bool, "Second device", "Enable usage of two devices while surveying"
 DISTOX_WAIT_DATA: A, Int in [0,2000], "Data wait delay", "Delay after receiving a data, to give the user time to see the values. Milliseconds"
-DISTOX_WAIT_CONN: A, Int in [50,2000, "Connection delay", "Delay after establishing the connection with the device. Milliseconds"
-DISTOX_WAIT_LASER: A, Int 500, 5000], "Laser delay", "Delay after sending the command to turn on the laser. Milliseconds"
-DISTOX_WAIT_SHOT: A, Int in [500, 10000], "Shot delay", "Delay after sending the commend to take a shot. Milliseconds"
+DISTOX_WAIT_CONN: A, Int in [50,2000], "Connection delay", "Delay after establishing the connection with the device. Milliseconds"
+DISTOX_WAIT_LASER: A, Int in [500,5000], "Laser delay", "Delay after sending the command to turn on the laser. Milliseconds"
+DISTOX_WAIT_SHOT: A, Int in [500,10000], "Shot delay", "Delay after sending the commend to take a shot. Milliseconds"
 DISTOX_FIRMWARE_SANITY: T, Bool, "Firmware sanity", "Performs firmware sanity checks, before uploading a firmware. These check are designed to prevent uploading a firmware not compatible with the hardware"
 DISTOX_BRIC_MODE: T, Enum{1,3}, "BRIC mode", "BRIC data download mode. TopoDroid can take only the 'primary' [1] packet or all three packets [3] sent by the BRIC"
 DISTOX_BRIC_ZERO_LENGTH: N, Bool, "BRIC zero shot", "Discard BRIC zero-length shots. BRIC sends zero-length shots if there is a distance reading error."
@@ -89,32 +89,23 @@ EXPORT_DATA_POLYGON: B, Bool, "Polygon export", "Enable Polygon data export"
 EXPORT_DATA_SURVEX: B, Bool, "Survex export", "Enable Survex data export"
 EXPORT_DATA_THERION: B, Bool, "Therion export", "Enable Therion data export"
 EXPORT_DATA_TOPO: B, Bool, "Topo export", "Enable Topo data export"
-EXPORT_DATA_TOPOROBOT: B, Bool,  "TopoRobot export", "Enable TopoRobot data export"
-EXPORT_DATA_VISUALTOPO:B, Bool,  "VisualTopo export", "Enable VisualTopo data export"
-EXPORT_DATA_WALLS: B, Bool,  "Walls export", "Enable Walls data export"
-EXPORT_DATA_WINKARST: B, Bool,  "WinKarst export", "Enable WinKarst data export"
-EXPORT_DATA_CVS: B, Bool,  "CSV export", "Enable CSV data export"
-EXPORT_DATA_DXF: B, Bool,  "DXF export", "Enable DXF data export"
-EXPORT_DATA_KML: B, Bool,  "KML export", "Enable KML data export"
-EXPORT_DATA_GPX: B, Bool,  "GPX export", "Enable GPX data export"
-EXPORT_DATA_SHAPEFILE: B, Bool,  "Shapefile export", "Enable shapefile data export"
+EXPORT_DATA_TOPOROBOT: B, Bool, "TopoRobot export", "Enable TopoRobot data export"
+EXPORT_DATA_VISUALTOPO: B, Bool, "VisualTopo export", "Enable VisualTopo data export"
+EXPORT_DATA_WALLS: B, Bool, "Walls export", "Enable Walls data export"
+EXPORT_DATA_WINKARST: B, Bool, "WinKarst export", "Enable WinKarst data export"
+EXPORT_DATA_CVS: B, Bool, "CSV export", "Enable CSV data export"
+EXPORT_DATA_DXF: B, Bool, "DXF export", "Enable DXF data export"
+EXPORT_DATA_KML: B, Bool, "KML export", "Enable KML data export"
+EXPORT_DATA_GPX: B, Bool, "GPX export", "Enable GPX data export"
+EXPORT_DATA_SHAPEFILE: B, Bool, "Shapefile export", "Enable shapefile data export"
 }
 EXPORT {
-DISTOX_EXPORT_SHOTS: N, Enum{-1,0,2,3,4,7,9,16,17,21}, "Preferred data export format",
-  "If set the data export dialog opens with the preferred format selected.
-  The possible values are: unselected [-1], Therion [0], Compass [2], Survex [3], VisualTopo [4], CSV [5], DXF [8], cSurvey [7], Walls [9], Polygon [16], Topo [17], WinKarst [20], TopoRobot [21]".
-DISTOX_EXPORT_PLOT: N, Enum{-1,6,7,13,14.23.24,27}, "Preferred sketch export format",
-  "If set the sketch export dialog opens with the preferred format selected.
-  The possible values are: unselected [-1], DXF [6], cSurvey [7], SVG [13], Therion [14], Shapefile [23], xtherion [24], PDF [27]".
-DISTOX_AUTO_PLOT_EXPORT: N, Enum{-1,6,7,13,14.23.24}, "Auto sketch export format".
-  "If set the sketches are automatically exported in the format when closed.
-  The possible values are: unselected [-1], DXF [6], cSurvey [7], SVG [13], Therion [14], Shapefile [23], xtherion [24]".
-DISTOX_ORTHO_LRUD: A, Float in [0,90], "Angle between leg and splay for the LRUD"
-  "The LRUS are computed using the splays that make an azimuth angle with the leg less than this value"   
-DISTOX_LRUD_VERTICAL: A, Float in [0,90], "Splay clino angle for LRDU up and down",
-  "Splays with clino over this value are used to compute UP and DOWN in the exports".
-DISTOX_LRUD_HORIZONTAL: A, Float in [0,91], "Splay clino angle for LRUD left and right"
-  "Splays with clino below this value are used to compute LEFT and RIGHT in the exports".
+DISTOX_EXPORT_SHOTS: N, Enum{-1,0,2,3,4,7,9,16,17,21}, "Preferred data export format", "If set the data export dialog opens with the preferred format selected.  The possible values are: unselected [-1], Therion [0], Compass [2], Survex [3], VisualTopo [4], CSV [5], DXF [8], cSurvey [7], Walls [9], Polygon [16], Topo [17], WinKarst [20], TopoRobot [21]".
+DISTOX_EXPORT_PLOT: N, Enum{-1,6,7,13,14.23.24,27}, "Preferred sketch export format", "If set the sketch export dialog opens with the preferred format selected.  The possible values are: unselected [-1], DXF [6], cSurvey [7], SVG [13], Therion [14], Shapefile [23], xTherion [24], PDF [27]".
+DISTOX_AUTO_PLOT_EXPORT: N, Enum{-1,6,7,13,14.23.24}, "Auto sketch export format".  "If set the sketches are automatically exported in the format when closed.  The possible values are: unselected [-1], DXF [6], cSurvey [7], SVG [13], Therion [14], Shapefile [23], xtherion [24]".
+DISTOX_ORTHO_LRUD: A, Float in [0,90], "Angle between leg and splay for the LRUD" "The LRUS are computed using the splays that make an azimuth angle with the leg less than this value"   
+DISTOX_LRUD_VERTICAL: A, Float in [0,90], "Splay clino angle for LRDU up and down", "Splays with clino over this value are used to compute UP and DOWN in the exports".
+DISTOX_LRUD_HORIZONTAL: A, Float in [0,91], "Splay clino angle for LRUD left and right" "Splays with clino below this value are used to compute LEFT and RIGHT in the exports".
 DISTOX_ZIP_WITH_SYMBOLS: T, Bool, "Symbols in zips", "Include the symbols used in the drawings in the zip archive"
 DISTOX_LRUD_COUNT: T, Bool, "LRUD count", "Insert LRUD as soon as they are found, instead of checking all relevant splays. This presumes that the first four splays are the LRUD splays"
 DISTOX_ZIP_SHARE_CATEGORY: T, Bool, "Zip share category", "Add a category 'com.topodroid.TDX.CATGORY_SURVEY' to the SEND intent for sharing zips"
@@ -133,20 +124,20 @@ DISTOX_GPX_SINGLE_TRACK: N, Bool, "Single GPX track", "Export the 3D as a single
 }
 EXPORT_CSV {
 DISTOX_CSV_RAW: N, Bool, "Whole data", "Include the raw data values in the CSV export"
-DISTOX_CSV_SEP: A, Enum{i0,1,2}, "Separator", "The CSV separator can be either comma [0], pipe [1], or tab [2]"
+DISTOX_CSV_SEP: A, Enum{0,1,2}, "Separator", "The CSV separator can be either comma [0], pipe [1], or tab [2]"
 DISTOX_SURVEX_EOL: N, Enum{"\n", "\r\n"}, "End of line", "The edn-of-line can be either new-line or cariage-return new-line"
 }
 EXPORT_SURVEX {
 DISTOX_SURVEX_EOL: N, Enum{"\n", "\r\n"}, "End of line", "The edn-of-line can be either new-line or cariage-return new-line, in Survex export"
 DISTOX_SURVEX_LRUD: A, Bool, "LRUD", "Compute LRUD to include in the Survex export"
-DISTOX_SURVEX_SPLAY: A, Bool, "Splays", "Includw splays in the Survex export"
+DISTOX_SURVEX_SPLAY: A, Bool, "Splays", "Include splays in the Survex export"
 DISTOX_SURVEX_EPSG: A, Int, "Survex EPSG", "If defined the Survex export include the 'cs' command with the specified EPSG number"
 }
 EXPORT_THERION {
 DISTOX_THERION_CONFIG: A, Bool, "Therion config", "Create a minimal Therion config file when the survey data are exported in Therion format"
 DISTOX_THERION_MAPS: A, Bool, "Therion map commands", "Put Therion map commands before the centerline or after"
-DISTOX_THERION_SPLAYS: A, Bool, "Therion splays", "Include splays in therion export. This is used to preserve how TopoDroid projected splays in the extended profile."
-DISTOX_SURVEX_LRUD: A, Bool, "LRUD", "Compute the LRUD from the splays and include them in the Therionexport"
+DISTOX_THERION_SPLAYS: A, Bool, "Therion splays", "Include splays in Therion export. This is used to preserve how TopoDroid projected splays in the extended profile."
+DISTOX_SURVEX_LRUD: A, Bool, "LRUD", "Compute the LRUD from the splays and include them in the Therion export"
 DISTOX_TH2_SCALE: E, Int in [40,2000], "Therion scale", "Set the scale to 1:this value in the Therion export"
 DISTOX_TH2_XVI: E, Bool, "Therion xvi image", "Include the reference to the xvi file in the th2 export, so that xtherion loads it as backgrund image"
 DISTOX_AUTO_XSECTIONS: T, Bool, "Auto sections", "Automatically include cross-section scraps in Therion export of sketches"
@@ -162,7 +153,7 @@ DISTOX_SVG_POINT_STROKE: A, Float (>0.01), "Item stroke", "Width of the item pen
 DISTOX_SVG_LABEL_STROKE: A, Float (>0.01), "Label stroke", "Width of the label pen"
 DISTOX_SVG_LINE_STROKE: A, Float (>0.01), "Line stroke", "Width of the line pen"
 DISTOX_SVG_GRID_STROKE: A, Float (>0.01), "Grid stroke", "Width of the grid pen"
-DISTOX_SVG_SHOT_STROKE: A, Float (>0.01), "Shot stroke", "Widt of the data segment pen"
+DISTOX_SVG_SHOT_STROKE: A, Float (>0.01), "Shot stroke", "Width of the data segment pen"
 DISTOX_SVG_LINEDIR_STROKE: A, Float (>0.01), "Line direction stroke", "Width of the line direction pen"
 DISTOX_SVG_STATION_SIZE: A, Int (>=1), "Station size", "Font size of the station names"
 DISTOX_SVG_LABEL_SIZE: A, Int (>=1), "Label size", "Font size of the lebels"
@@ -191,10 +182,10 @@ DISTOX_KML_SPLAYS: E, Bool, "KML splays", "Include the splay lines in the KML ex
 }
 EXPORT_DXF {
 DISTOX_DXF_BLOCKS: N, Bool, "Point blocks", "Export point items as Blocks in DXF export"
-DISTOX_ACAD_VERSION: E, Enum{9,13,16}. "AutoCAD version", "Write the DXF export specific for an AutoCAD version, either R12 [9]  or R13 [13] or R14 [16]"
+DISTOX_ACAD_VERSION: E, Enum{9,13,16}, "AutoCAD version", "Write the DXF export specific for an AutoCAD version, either R12 [9]  or R13 [13] or R14 [16]"
 DISTOX_ACAD_SPLINE: T, Bool, "DXF splines", "Use DXF splines instead of polylines with dense points"
-DISTOX_DXF_REFERENCE: A, Bool, "Reference", "to include the reference in the export"
-DISTOX_ACAD_LAYER: T, Bool, "Layers", "Arrange drawing items in layers"
+DISTOX_DXF_REFERENCE: A, Bool, "Reference", "Include the reference in the DXF export"
+DISTOX_ACAD_LAYER: T, Bool, "Layers", "Arrange drawing items in DXF layers"
 }
 EXPORT_SHAPEFILE {
 DISTOX_SHP_GEOREF: T, Bool, "Georeference", "Export the sketch in planview georeferenced, if the survey is georeferenced"" 
@@ -204,7 +195,7 @@ DISTOX_CLOSE_DISTANCE: B, Float (>0.0001), "Shot similarity distance", "Angular 
 DISTOX_MAX_SHOT_LENGTH: B, Float (>20), "Maximum shot length", "Maximum length of a shos. Longer shots are automatically deleted. Meters"
 DISTOX_MIN_LEG_LENGTH: B, Float in [0,5], "Minimum leg length", Minimum length for a leg. Shorter legs are highlighted orange. Meters"
 DISTOX_LEG_SHOTS: E, Enum{2,3,4}, "Leg shots", "Minimum number of close consecutive shots to make a leg, either 2 or 3 or 4"
-DISTOX_EXTEND_THR2: N, Float in [0,90], "Extend threshold", "Half angle around 90 degrees where splays have 'vert' extend"
+DISTOX_EXTEND_THR2: N, Float in [0,90], "Extend threshold", "Half angle around 90 degrees clino where legs have 'vert' extend"
 DISTOX_VTHRESHOLD: N, Float in [0,90], "V threshold", "If the clino is above this threshold, the LRUD are horizontal West East North South"
 DISTOX_AZIMUTH_MANUAL: A, Bool, "Manual azimuth", "The 'azimuth' button flips between left and right manually, instead of opening a dialog to set the reference azimuth"
 DISTOX_PREV_NEXT: A, Bool, "Previuos-Next", "Show the 'previous' and 'next' navigation buttons in the shot edit dialog"
@@ -221,14 +212,14 @@ DISTOX_BEDDING: T, Bool, "Plane bedding", "Enable the computation of the plane i
 DISTOX_WITH_SENSORS: A, Bool, "Sensors", "Enable the use of Android sensors for azimuth and inclination of manually entered dshot"
 DISTOX_LOOP_CLOSURE_VALUE: E, Enum{0,1,3,4,5}, "Loop closure", "How to close loops: no closure [0], normal [1], triangles [3], weigthed [4], selective [5]"
 DISTOX_LOOP_THRESHOLD: E, Float, "Selective threshold", "Threshold for the selective loop closure"
-DISTOX_ANDROID_AZIMUTH: A, Bool, "Andoid azimuth", "Enable the usage of Android sensors to measure azimuth and clino of manual shots"
+DISTOX_ANDROID_AZIMUTH: A, Bool, "Android azimuth", "Enable the usage of Android sensors to measure azimuth and clino of manual shots"
 DISTOX_SHOT_TIMER: E, Int (>=0), "Shot timer", "Duration of the shot timer in seconds. Zero means timer disabled"
 DISTOX_BEEP_VOLUME: E, Int in [0,100], "Beep volume", "Volume of the 'beep' sound during the shot timer"
 DISTOX_BLUNDER_SHOT: T, Bool, "Blunder shot", "Enable detection of a mistaken shot (blunder) in a leg sequence"
 DISTOX_SPLAY_STATION: T, Bool, "Splay station", "If enabled, splay stations that have already been assigned are maintened when shot stations are recomputed"
 DISTOX_SPLAY_GROUP: T, Bool, "Splay group", "If set update the splay station only for splays after the editing shot"
 DISTOX_SPLAY_CLASSES: E, Bool, "Splay classes", "There can be splay classes for horizontal, vertical, and transversal (cross-section)"
-DISTOX_DISCRETE_ColorS: T, Enum{0,1,2}, "Splay colors", "Assigning colors to splays: no assignment [0], with a color picker [1], from a palette [2]"
+DISTOX_DISCRETE_COLORS: T, Enum{0,1,2}, "Splay colors", "Assigning colors to splays: no assignment [0], with a color picker [1], from a palette [2]"
 DISTOX_SPLAY_VERT_THRS: A, Int in [0,91], "Splay vertical threshold", "Include in the plan view only splays with clino below this value"
 DISTOX_SPLAY_DASH: T, Enum{0,1,2,3}, "Splay dashing", "Splay dashing can be no dash [0], dash by the splay in plan view [1], by the splay in profile view [2], independently in each view [3]"
 DISTOX_VERT_SPLAY: T, Float in [0,91], "Vertical splays", "Minimum clino for 'vertical' splays. Up splays are dotted, Down splays are dashed"
@@ -270,12 +261,10 @@ DISTOX_SPLAY_ALPHA: T, Int in [0,100], "Splay alpha", "Transparency alpha for sp
 }
 LINES {
 DISTOX_LINE_THICKNESS: N, Float in [0.5, 10], "Line width", "Width of sketch lines"
-DISTOX_LINE_STYLE:  N, Enum{0,1,2,3,4}, "Line style", "Line style: Bezier spline [0], fine [1], normal [2], coarse [3], weeded [4].
- The line is created from the points of the traced curve: either with Bezier spline interpolation [0], or keeping all the points [1], or reducing their number [2],
- or even a stronger reduction [3], or finally applying a weeding algorithm [4]"
+DISTOX_LINE_STYLE: N, Enum{0,1,2,3,4}, "Line style", "Line style: Bezier spline [0], fine [1], normal [2], coarse [3], weeded [4].  The line is created from the points of the traced curve: either with Bezier spline interpolation [0], or keeping all the points [1], or reducing their number [2], or even a stronger reduction [3], or finally applying a weeding algorithm [4]"
 DISTOX_LINE_SEGMENT: N, Int (>=1), "Line step", "Minimum distance between consecutive points of lines"
 DISTOX_LINE_CLOSE: N, Bool, "Close closed lines", "Close closed lines. Default true"
-DISTOX_ARROW_LENGTH: A, Float in [1, 40], "Arrow length","Length of cross-section direction segment"
+DISTOX_ARROW_LENGTH: A, Float in [1, 40], "Arrow length", "Length of cross-section direction segment"
 DISTOX_AUTO_SECTION_PT: A, Bool, "Auto section point", "Automatically insert a section point when a section line is traced"
 DISTOX_AREA_BORDER: N, Bool, "Area border", "Draw areas with visible border" 
 DISTOX_LINE_UNITS: N, Float (>0.1), "Line units", "Unit of line symbols"
@@ -294,8 +283,8 @@ DISTOX_PATH_MULTISELECT: T, Bool, "Path multiselection", "Enable selection of mo
 }
 POINTS {
 DISTOX_UNSCALED_POINTS: N, Bool, "Unscaled points", "Draw icon symbols at fixed scale"
-DISTOX_DRAWING_UNIT: B, Float (>0.1), "Point units", "unit of point item symbol"
-DISTOX_LABEL_SIZE: B, Float (>=1), "Label size", "size of labels in pt"
+DISTOX_DRAWING_UNIT: B, Float (>0.1), "Point units", "Unit of point item symbol"
+DISTOX_LABEL_SIZE: B, Float (>=1), "Label size", "Size of labels in pt"
 DISTOX_SCALABLE_LABEL: N, Bool, "Scalable labels", "Scale label texts instead of drawing them at fixed scale"
 DISTOX_XSECTION_OFFSET: N, Int in [1, 500], "Section point offset", "Offset of section points"
 }
@@ -306,21 +295,21 @@ CAVE3D_STATION_POINT_SIZE: A, Int (>1), "Station point size", "Size of the stati
 CAVE3D_STATION_TEXT_SIZE: A, Int (>1), "Station point text size", "Size of the text of the station names"
 CAVE3D_SELECTION_RADIUS: A, Float, "Selection radius", "Radius of selection, in canvas pixels"
 CAVE3D_MEASURE_DIALOG: N, Bool, "Measure dialog", "Show the result of a measurement in a toast, instead of a dialog"
-CAVE3D_STATION_TOAST" N, Bool, "Station toast", "Show the station selection in a dialog, instead of the lower bar"
-CAVE3D_GRID_ABOVE: N, Bool, "Show the horizontal grid over the model instead of underneath"
-CAVE3D_GRID_EXTENT: A, Int in [2,99], "Grod extent", "Extent of the horizontal grid beyond the model bounds"
-DISTOX_NAMES_VISIBILITY: N, Bool, "Station names visibility", "With Android 10 station names has hidden when the survey is not visible"
+CAVE3D_STATION_TOAST: N, Bool, "Station toast", "Show the station selection in a dialog, instead of the lower bar"
+CAVE3D_GRID_ABOVE: N, Bool, "Top grid", "Show the horizontal grid over the model instead of underneath"
+CAVE3D_GRID_EXTENT: A, Int in [2,99], "Grid extent", "Extent of the horizontal grid beyond the model bounds"
+DISTOX_NAMES_VISIBILITY: N, Bool, "Station names visibility", "With Android 10 station names has been hidden when the survey is not visible"
 CAVE3D_DEM_BUFFER: N, Float (>0), "DEM buffer", "Width the DEM extending beyond the bounds of the model"
 CAVE3D_DEM_MAXSIZE: N, Int (>50), "DEM maximum size", "Maximum DEM size (number of cells), in each dimension"
 CAVE3D_DEM_REDUCE: N, Enum{1,2}, "DEM reduction", "DEM is reduced to the maximum size either by subsampling [1] or clipping [2]"
 CAVE3D_TEXTURE_ROOT: N, String, "Texture root", "Folder with textures"
-CAVE3D_SPLAY_USE: N, Enum{0,1,2", "Splay use", "How to use splays: no use [0], normal use [1], for cross-sections [2]"
+CAVE3D_SPLAY_USE: N, Enum{0,1,2}, "Splay use", "How to use splays: no use [0], normal use [1], for cross-sections [2]"
 CAVE3D_ALL_SPLAY: N, Bool, "All splays", "Use all splays for the convex hull"
-CAVE3D_SPLAY_PROJ: N, Bool, "Projected splays", "Compute the hull projection with projected splays instead of 3D vector splays" UNUSED
+CAVE3D_SPLAY_PROJ: N, Bool, "Projected splays", "Compute the hull projection with projected splays instead of 3D vector splays"
 CAVE3D_SPLAY_THR: N, Float (>0.5), "Splay threshold", "Used to check if a splay falls along a 3D vector"
 CAVE3D_SPLIT_TRIANGLES: N, Bool, "Split triangles", "Split triangles in the computation of the convex hull"
 CAVE3D_SPLIT_RANDOM: N, Float (>=0), "Splitting random parameter", "Used to randomize the splitting. If zero split is not randomized"
-CAVE3D_SPLIT_STRETCH: N, Float (>=0), "Splitting stretch parameter", "Splitting stretch parameter. If zerono there is no stretching"
+CAVE3D_SPLIT_STRETCH: N, Float (>=0), "Splitting stretch parameter", "Splitting stretch parameter. If zero there is no stretching"
 CAVE3D_POWERCRUST_DELTA: N, Float (>0), "Powercrust delta parameter", "Powercrust delta parameter"
 }
 END_SETTINGS

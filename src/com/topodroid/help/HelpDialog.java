@@ -180,5 +180,17 @@ public class HelpDialog extends MyDialog
     return true;
   }
 
+  public void setAIbuttonEnabled( boolean enabled )
+  {
+    TDLog.v("Help AI dialog - set button enable " + enabled );
+    if ( enabled ) {
+      mBtnAI.setBackgroundResource( R.drawable.iz_ai );
+      mBtnAI.setOnClickListener( this );
+    } else {
+      mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
+      mBtnAI.setOnClickListener( null );
+    }
+  }
+
 }
 

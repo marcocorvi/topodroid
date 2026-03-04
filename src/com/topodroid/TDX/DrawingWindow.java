@@ -1663,6 +1663,7 @@ public class DrawingWindow extends ItemDrawer
           public void handleMessage(Message msg) {
             // TopoDroidApp.mShotWindow.enableSketchButton( true );
             TopoDroidApp.mEnableZip = true;
+            TDLog.v( "EXPORT plot ... handle message " );
           }
         };
         break;
