@@ -5,6 +5,7 @@
     <string name="ai_error">MI hiba %1$s</string>
     <string name="ai_internet">Figyelem! MI súgóhoz web kapcsolat szükséges.</string>
     <string name="ai_no_internet">Nincs web kapcsolat.</string>
+	<string name="ai_no_model">Nincs MI model</string>
     <string name="ai_prompt">Írd be a kérdést</string>
     <string name="ai_invalid_key">Valótlan API kulcs</string>
     <string name="ai_key_instruction">Az API-kulcs az Android belső memóriájában tárolódik, és csak a Google-nak kerül elküldésre.\nKeressen rá az interneten, hogyan szerezhet be Gemini API-kulcsot a Google-tól.</string>
@@ -883,6 +884,7 @@
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_settime"   >Óra beállítás</string>
     <string name="button_surface"   >Felület</string>
+	<string name="button_splay"     >Sün</string>
     <string name="button_no_extend" >Nincs kiterítés</string>
     <string name="button_eval"      >Nyers</string>
     <string name="button_evalg"     >G</string>
@@ -899,7 +901,7 @@
     <!-- UNUSED string name="button_direction">Irány/Lejtés</string -->
     <!-- UNUSED string name="button_azimuth">Irány</string -->
     <string name="button_plot"    >Rajzol</string>
-    <string name="button_less">Kevesebb</string>
+    <string name="button_less"    >Kevesebb</string>
     <string name="button_more"    >Több</string>
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>
@@ -2186,7 +2188,7 @@
     <string name="title_tdconfig">Adja meg a projekt nevét</string>
     <string name="title_surveys">Mérések</string>
 
-    <string name="exported">Mentett fájl %1$s</string>
+    <string name="exported">Exportált fájl %1$s</string>
     <string name="export_failed">Hibás export</string>
 
     <string name="image_diagram">Irány diagram</string>
