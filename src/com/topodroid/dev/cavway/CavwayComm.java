@@ -75,8 +75,8 @@ import android.content.res.Resources;
 
 public class CavwayComm extends BleComm
 {
-  private final static String TAG = "CAVWAY comm ";
-  private final static boolean LOG = true;
+  private final static String TAG = "CAVWAY COMM ";
+  private final static boolean LOG = false;
   private final static boolean USE_MTU = false; // max MTU 250
 
   private final static int READ_NONE   = 0;
@@ -177,25 +177,25 @@ public class CavwayComm extends BleComm
   private void startConsumerThread()
   {
     if ( mConsumer != null ) {
-      TDLog.e("CONSUMER THREAD start with non-null consumer");
+      TDLog.e("CAVWAY CONSUMER start with non-null consumer");
       return;
     }
     if ( LOG ) TDLog.v("start consumer thread");
     mConsumer = new Thread() { // this is the thread that consumes data on the queue
       @Override public void run() {
         //mThreadConsumerWorking = true;
-        if ( LOG ) TDLog.v("CONSUMER THREAD start");
+        if ( LOG ) TDLog.v("CAVWAY CONSUMER start");
         while ( true ) {
-          if ( LOG ) TDLog.v( "CONSUMER THREAD: Queue size " + mQueue.size );
+          if ( LOG ) TDLog.v( "CAVWAY CONSUMER: Queue size " + mQueue.size );
           BleBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
           if ( buffer.type == BleQueue.DATA_PRIM ) {
             if ( buffer.data == null) {
-              TDLog.t( "CONSUMER THREAD: buffer with null data");
+              TDLog.t( "CAVWAY CONSUMER: buffer with null data");
               continue;
             }
             // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
-            if ( LOG ) TDLog.v( "CONSUMER THREAD: buffer read " + mNrReadPackets );
+            if ( LOG ) TDLog.v( "CAVWAY CONSUMER: buffer read " + mNrReadPackets );
             int res = ((CavwayProtocol)mProtocol).packetProcess( buffer.data );
             if ( res == CavwayProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
@@ -204,12 +204,12 @@ public class CavwayComm extends BleComm
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
           } else if ( buffer.type == BleQueue.DATA_QUIT ) {
-            if ( LOG ) TDLog.v( "CONSUMER THREAD - buffer QUIT");
+            if ( LOG ) TDLog.v( "CAVWAY CONSUMER - buffer QUIT");
             break;
           }
           TDUtil.slowDown(300);
         }
-        if ( LOG ) TDLog.v( "CONSUMER THREAD exit");
+        if ( LOG ) TDLog.v( "CAVWAY CONSUMER exit");
       }
     };
     mConsumer.start();

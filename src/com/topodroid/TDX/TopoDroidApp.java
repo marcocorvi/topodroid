@@ -240,7 +240,7 @@ public class TopoDroidApp extends Application
    */
   public void notifyListerStatus( ListerHandler lister, final int status )
   { 
-    TDLog.v( "APP: notify status " + status );
+    // TDLog.v( "APP: notify status " + status );
     if ( lister == null ) return;
     if ( mMainActivity == null ) return;
     mMainActivity.runOnUiThread( new Runnable() { 

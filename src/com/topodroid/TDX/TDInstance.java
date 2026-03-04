@@ -14,8 +14,9 @@ package com.topodroid.TDX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.common.PlotType;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -427,4 +428,24 @@ public class TDInstance
   //   return ret;
   // }
 
+  /** @return the time of the current calibration [seconds afterthe epoch]
+   */
+  static long getCalibTime()
+  {
+    if ( cid == 0 ) return 0;
+    TDLog.v("Instance seconds: current seconds " + TDUtil.getSeconds() );
+    long seconds = TopoDroidApp.mDData.selectDataLastTime( cid );
+    TDLog.v("  last data time " + seconds );
+    if ( seconds == 0 ) {
+      String date = TopoDroidApp.mDData.selectCalibDate( cid );
+      if ( date != null ) {
+        seconds = TDUtil.dateToTimestamp( date );
+        TDLog.v("  calib date " + date + " " + seconds );
+      } else {
+        seconds = TDUtil.getSeconds();
+        TDLog.v("  get seconds " + seconds );
+      }
+    }
+    return seconds;
+  }
 }

@@ -85,6 +85,7 @@ public class CalibCoeffDialog extends MyDialog
   /** cstr
    * @param context    context
    * @param coeffs     coefficients byte array, either 52 bytes or 104 bytes
+   * @param cali_info  callibration info (or null)
    */
   public CalibCoeffDialog( Context context, byte[] coeffs, byte[] cali_info )
   {
@@ -110,6 +111,7 @@ public class CalibCoeffDialog extends MyDialog
    * @param parent     parent G-M activity
    * @param errors     calib data residual errors [radians]
    * @param coeff      calibration coefficients, 52 bytes for one sensor-pair, 104 bytes for two sensor pairs
+   * @param seconds    calibration datetime [seconds since the epoch]
    * @param delta_bh   B. Heeb delta
    * @param aveErr     average error [degrees]
    * @param stdErr     error std-dev [degrees]
@@ -119,7 +121,7 @@ public class CalibCoeffDialog extends MyDialog
    * @param roll       roll ???
    */
   public CalibCoeffDialog( Context context, GMActivity parent, float[] errors, byte[] coeff,
-                    float delta_bh, float aveErr, float stdErr, float maxErr, long iter, float dip, float roll /*, boolean saturated */ )
+                    long seconds, float delta_bh, float aveErr, float stdErr, float maxErr, long iter, float dip, float roll /*, boolean saturated */ )
   {
     super( context, null, R.string.CalibCoeffDialog ); // null app
     mParent = new WeakReference<GMActivity>( parent );
@@ -128,7 +130,8 @@ public class CalibCoeffDialog extends MyDialog
     makeVectorsAndMatricex( coeff );
 
     setResult( delta_bh, aveErr, stdErr, maxErr, iter, dip, roll );
-    mCaliInfo = CavwayCalibInfo.makeCaliInfo( TDUtil.getSeconds(), aveErr, stdErr, maxErr, dip );
+    if ( seconds == 0 ) seconds = TDUtil.getSeconds();
+    mCaliInfo = CavwayCalibInfo.makeCaliInfo( seconds, aveErr, stdErr, maxErr, dip );
 
     if ( errors != null ) {
       mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, TDColor.BLUE );

@@ -622,8 +622,8 @@ public class GMActivity extends Activity
             coeffs = new byte[52];
             System.arraycopy( coeff1, 0, coeffs, 0, 52 );
           }
-
-          (new CalibCoeffDialog( this, this, errors, coeffs, deltaBH, delta, delta2, err_max, result, dip, mCalibration.Roll() // FIXME ROLL_DIFFERENCE
+          long seconds = TDInstance.getCalibTime();
+          (new CalibCoeffDialog( this, this, errors, coeffs, seconds, deltaBH, delta, delta2, err_max, result, dip, mCalibration.Roll() // FIXME ROLL_DIFFERENCE
                                  /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
@@ -1296,8 +1296,7 @@ public class GMActivity extends Activity
               // delta2  = TDMath.sqrt( delta2*delta2 + tmp * tmp - delta2*tmp ); 
               // if ( mCalibration2.MaxError() > err_max ) err_max = mCalibration2.MaxError();
               // dip = ( dip + mCalibration2.Dip() )/2; // average dip
-              long seconds = mApp.mDData.selectDataLastTime( TDInstance.cid );
-              if ( seconds == 0 ) seconds = TDUtil.dateToTimestamp( mCalibInfo.date );
+              long seconds = TDInstance.getCalibTime();
               byte[] cali_info = CavwayCalibInfo.makeCaliInfo( seconds, delta, delta2, err_max, dip );
               uploadCoefficients( delta, coeff12, true, b, cali_info ); // 20250123 simplified 
             } else {

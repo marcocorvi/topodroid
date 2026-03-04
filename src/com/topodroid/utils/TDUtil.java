@@ -413,8 +413,9 @@ public class TDUtil
     try {
       int year = Integer.parseInt( date.substring(0,4) );
       int month = Integer.parseInt( date. substring(6,7) );
-      if ( date.charAt(5) == '0' ) month += 10;
+      if ( date.charAt(5) == '1' ) month += 10;
       int day = ( date.charAt(8) == '0' )? Integer.parseInt( date.substring(9,10) ) : Integer.parseInt( date.substring(8,10) );
+      TDLog.v("Date to seconds: " + year + " " + month + " " + day );
       GregorianCalendar cal = new GregorianCalendar( year, month-1, day );
       return cal.getTimeInMillis() / 1000L;
     } catch ( NumberFormatException e ) {

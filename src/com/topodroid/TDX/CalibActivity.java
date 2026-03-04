@@ -341,7 +341,8 @@ public class CalibActivity extends Activity
       if ( coeff2 != null ) System.arraycopy( coeff2, 0, coeff, 52, 52 );
       CalibResult res = new CalibResult();
       TopoDroidApp.mDData.selectCalibResult( TDInstance.cid, res ); // FIXME this returns the firts-set error TWO_SENSORS
-      (new CalibCoeffDialog( this, null, null, coeff, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll /*, false */ )).show();
+      long seconds = TDInstance.getCalibTime();
+      (new CalibCoeffDialog( this, null, null, coeff, seconds, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll /*, false */ )).show();
     } else {
       TDToast.make( R.string.calib_no_coeff );
     }

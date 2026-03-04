@@ -34,7 +34,7 @@ import java.util.Locale;
 public class CavwayProtocol extends TopoDroidProtocol
 {
   private final static String TAG = "CAVWAY PROTO ";
-  private final static boolean LOG = true;
+  private final static boolean LOG = false;
 
   private final CavwayComm mComm;
   private final ListerHandler mLister;

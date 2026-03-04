@@ -546,6 +546,31 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return id;
   }
+
+  /** @return the date of a calibration
+   * @param cid   callibration ID
+   */
+  public String selectCalibDate( long cid )
+  {
+    if ( myDB == null ) {
+      TDLog.e( ERROR_NULL_DB + "select calib date");
+      return null;
+    }
+    String ret = null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "day" }, // columns
+                           "id=?",
+                           new String[] { Long.toString(cid) },
+                           null, null, null ); 
+      if ( cursor != null && cursor.moveToFirst()) {
+        ret = cursor.getString( 0 );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
  
   /** @return the info of a calibration given the ID
    * @param cid     calibration ID
