@@ -1683,8 +1683,8 @@
   <string name="pref_conn_mode_summary">A DistoX-el való kapcsolat típusa adatletöltéshez</string>
   <!-- UNUSED string name="pref_auto_reconnect_title">Automatikus újrakapcsolódás</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Újrakapcsolódás, ha a kapcsolat megszakad</string -->
-  <string name="pref_second_distox_title">Két DistoX mérés</string>
-  <string name="pref_second_distox_summary">Mérés két DistoX-el</string>
+  <string name="pref_second_distox_title">Két műszeres mérés</string>
+  <string name="pref_second_distox_summary">Mérés két műszerrel</string>
   <!-- UNUSED string name="pref_auto_pair_title">Atomatikus párosítás</string -->
   <!-- UNUSED string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string -->
   <string name="pref_head_tail_title">Új adatok száma</string>
