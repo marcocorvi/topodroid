@@ -25,13 +25,17 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.content.Context;
+import android.content.SharedPreferences;
 
-// import android.widget.Button;
 import android.widget.TextView;
-// import android.widget.EditText;
 // import android.widget.Spinner;
-// import android.widget.ArrayAdapter;
 // import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
@@ -54,6 +58,16 @@ import java.util.regex.Pattern;
 
 public class PrefAIdialog extends AIdialog
 {
+  private boolean mWithGemini = true;
+
+  // GEMMA3 
+  int mInputType = 0;
+  EditText     mET = null;
+  CheckBox     mCB = null;
+  Spinner      mSP = null;
+  Button mBtOk = null;
+  // END GEMMA3 */
+
   /** cstr
    */
   public PrefAIdialog( Context context, IHelpViewer parent, String user_key, String page )
@@ -65,14 +79,21 @@ public class PrefAIdialog extends AIdialog
     TDLog.v("Pref AI dialog page " + page );
 
     if ( user_key != null ) {
+      mWithGemini = true;
       if ( mSystemInstruction == null ) {
         mSystemInstruction = getSettingText( context );
         // TDLog.v("PrefAI System instr. length " + mSystemInstruction.length() );
       }
-    // } else { // GEMMA3
-    //   if ( mLLMsystemInstruction == null ) {
-    //     loadLLMsettingText( context );
-    //   }
+    // IF GEMMA3
+    } else { 
+      mWithGemini = false;
+      if ( mLLMsystemInstruction == null ) {
+        loadLLMsettingText( context );
+      }
+    /* ELSE GEMMA3 
+    } else {
+      mWithGemini = false;
+    // END GEMMA3 */
     }
   }
 
@@ -80,9 +101,17 @@ public class PrefAIdialog extends AIdialog
   public void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
+    // GEMMA3
+    mLayout = (LinearLayout)findViewById( R.id.pref_layout );
+    mET = (EditText)findViewById( R.id.pref_string );
+    mCB = (CheckBox)findViewById( R.id.pref_bool );
+    mSP = (Spinner)findViewById( R.id.pref_array );
+    mBtOk = (Button)findViewById( R.id.pref_ok );
+    mLayout.setVisibility( View.GONE );
+    // END GEMMA3 */
   }
 
-  /* GEMMA3
+  // GEMMA3 
   private void loadLLMsettingText( Context ctx )
   {
     mLLMsystemInstruction = new String[ mLLMindex.length ];
@@ -98,7 +127,7 @@ public class PrefAIdialog extends AIdialog
           int pos = line.indexOf(": ");
           if ( pos < 0 ) { TDLog.e("BAD end-key " + line ); continue; }
           String key = line.substring(0,pos);
-          String rem = line.substring( pos+2 );
+          String rem = line.substring( pos+5 ); // skip activity level
           if ( rem.startsWith("Int") ) {
             pos = rem.indexOf(",");
             if ( rem.startsWith("Int[") ) pos = rem.indexOf("],");
@@ -120,7 +149,7 @@ public class PrefAIdialog extends AIdialog
           pos = rem.indexOf("\"");
           if ( pos < 0 ) { TDLog.e("BAD end-desc " + line ); continue; }
           String desc = rem.substring(0, pos);
-          sb.append( String.format("%d, KEY: \"%s\" | TYPE: %s | DESC: \"%s. %s\n", cnt, key, type, name, desc ) );
+          sb.append( String.format("%d, KEY: \"%s\" | TYPE: %s | LABEL: \"%s | DESC: %s\n", cnt, key, type, name, desc ) );
           ++ cnt;
         } else {
           mLLMsystemInstruction[ idx ] = sb.toString();
@@ -134,7 +163,7 @@ public class PrefAIdialog extends AIdialog
       TDLog.e("Error reading settings.txt " + e.getMessage() );
     }
   }
-  */
+  // END GEMMA3 */
 
   private String getSettingText( Context ctx )
   {
@@ -179,8 +208,145 @@ public class PrefAIdialog extends AIdialog
   @Override
   public void showResponse( String message )
   {
-    TextView tv = mAnswer;
-    if ( tv == null ) return;
+    if ( mAnswer == null ) return;
+    if ( message == null || message.isEmpty() ) return;
+    if ( mWithGemini ) {
+      showGeminiResponse( message );
+    // GEMMA3
+    } else {
+      showGemmaResponse( message );
+    // END GEMMA3 */
+    }
+  }
+
+  // GEMMA3
+  // handling of GEMMA3 response has not been finished: it should start a dialog to show the setting
+  private void showGemmaResponse( String message )
+  {
+    boolean done = false;
+    int pos = message.indexOf("{");
+    if ( pos >= 0 ) {
+      int qos = message.indexOf( "}", pos );
+      String msg = message.substring( pos+1, qos );
+      // TODO process msg
+      // label=... key=... N.B. label can contain spaces
+      String[] vals = msg.split( " " );
+      for ( int i = 0; i < vals.length; ++i ) TDLog.v( "Item " + i + " <" + vals[i] + ">" );
+      if ( vals.length == 2 ) {
+        pos = vals[0].indexOf("=");
+        String key = vals[0].substring(pos+1).replaceAll("[^A-Z_]", "");
+        pos = vals[1].indexOf("=");
+        String value = vals[1].substring(pos+1).replaceAll("\"", "");
+        TDLog.v("KEY <" + key + "> VALUE <" + value + ">" );
+
+        TDPrefKey setting = TDPrefKey.getPrefKey( key );
+        if ( setting != null ) {
+          mLayout.setVisibility( View.VISIBLE );
+          mET.setVisibility( View.GONE );
+          mCB.setVisibility( View.GONE );
+          mSP.setVisibility( View.GONE );
+          // TDPrefKey[] keyset = TDPrefKey.getPrefKeySet( key );
+          int category = setting.cat;
+          String title = mContext.getResources().getString( setting.title );
+          String summary = mContext.getResources().getString( setting.summary );
+          TDLog.v("key " + key + " category " + category );
+          // get the value and update 
+          TDPrefHelper hlp = new TDPrefHelper( mContext );
+          SharedPreferences prefs = hlp.getSharedPrefs();
+          ((TextView)findViewById( R.id.pref_title )).setText( title );
+          ((TextView)findViewById( R.id.pref_summary )).setText( summary );
+          mBtOk.setOnClickListener( new View.OnClickListener() {
+            public void onClick( View v ) {
+              String str_val = null;
+              if ( mInputType == TDPrefKey.STR ) { // EditText
+                str_val = mET.getText().toString();
+                TDLog.v("Input STRING " + str_val );
+              } else if ( mInputType == TDPrefKey.BOOL ) { // CheckBox
+                boolean bool_val = mCB.isChecked();
+                str_val = bool_val ? "TRUE" : "FALSE";
+                TDLog.v("Input BOOL " + str_val );
+              } else if ( mInputType == TDPrefKey.ARR ) { // ARRAY
+                int array_pos = mSP.getSelectedItemPosition();
+                String[] options = mContext.getResources().getStringArray( setting.label );
+                String[] values = mContext.getResources().getStringArray( setting.value );
+                str_val = values[array_pos];
+                TDLog.v("Input ARRAY " + str_val + " (" + options[array_pos] + ")" );
+              } else if ( mInputType == TDPrefKey.COL ) { // COLOR
+              } else if ( mInputType == TDPrefKey.BTN ) { // BUTTON
+              } else if ( mInputType == TDPrefKey.XTR ) { // EXTRA
+              }
+              mLayout.setVisibility( View.GONE );
+              // if ( str_val != null ) TDSetting.updatePreference( hlp, category, key, str_val );
+            }
+          } );
+
+          ((Button)findViewById( R.id.pref_no )).setOnClickListener( new View.OnClickListener() {
+            public void onClick( View v ) {
+              mLayout.setVisibility( View.GONE );
+            }
+          } );
+          mInputType = -1;
+          boolean implemented = false;
+          switch (setting.type ) {
+            case TDPrefKey.LONG:
+            case TDPrefKey.FLT:
+            case TDPrefKey.STR:
+              mInputType = TDPrefKey.STR;
+              mET.setVisibility( View.VISIBLE );
+              if ( value != null ) mET.setText( value );
+              implemented = true;
+              break;
+            case TDPrefKey.BOOL:
+              mInputType = TDPrefKey.BOOL;
+              mCB.setVisibility( View.VISIBLE );
+              mCB.setChecked( (value != null && value.toUpperCase().charAt(0) == 'T' ) );
+              implemented = true;
+              break;
+            case TDPrefKey.ARR:
+              mInputType = TDPrefKey.ARR;
+              mSP.setVisibility( View.VISIBLE );
+              String[] options = mContext.getResources().getStringArray( setting.label );
+              String[] values = mContext.getResources().getStringArray( setting.value );
+              mSP.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, options ) );
+              if ( values.length == options.length ) {
+                for ( int k = 0; k < values.length; ++ k ) {
+                  if ( value.equalsIgnoreCase( values[k] ) ) {
+                    mSP.setSelection( k );
+                    break;
+                  }
+                }
+              }
+              implemented = true;
+              break;
+            case TDPrefKey.COL:
+              mInputType = TDPrefKey.COL;
+              break;
+            case TDPrefKey.BTN:
+              mInputType = TDPrefKey.BTN;
+              break;
+            case TDPrefKey.XTR:
+              mInputType = TDPrefKey.XTR;
+              break;
+            default:
+          //   /// case FWRD not considered
+          }
+          if ( implemented ) {
+            mAnswer.setText( "Setting \"" + title + "\" - " + summary + ": " + key + " = " + value + "\nPress \"Apply\" to apply the suggested value" );
+          } else {
+            mAnswer.setText( "Setting \"" + title + "\" - " + summary + ": " + key + " = " + value + "\nNot implemented" );
+            mBtOk.setVisibility( View.GONE );
+            // mBtNo.setVisibility( View.GONE );
+          }
+        }
+      }
+    }
+    if ( ! done ) mAnswer.setText( message );
+  }
+  // END GEMMA3 */
+      
+
+  private void showGeminiResponse( String message )
+  {
     ArrayList< PageLink > pages = new ArrayList<>();
     // SpannableString ssb = new SpannableString( message ); // immutable text
     SpannableStringBuilder ssb = new SpannableStringBuilder( message ); // mutable text
@@ -215,8 +381,8 @@ public class PrefAIdialog extends AIdialog
       };
       ssb.setSpan( cs, linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
     }
-    tv.setText( ssb );
-    tv.setMovementMethod( LinkMovementMethod.getInstance() );
+    mAnswer.setText( ssb );
+    mAnswer.setMovementMethod( LinkMovementMethod.getInstance() );
 
   }
 

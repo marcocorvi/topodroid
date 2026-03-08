@@ -41,16 +41,35 @@ RULES:\n
 5. Respond to the user in the same language they use to ask their question.\n
 \n
 </string>
+
+<!-- GEMMA3 -->
 <string name="gemma_prompt" translatable="false">
 You are a technical configuration expert.\n
 AVAILABLE SETTIGS:\n
 </string>
 <string name="gemma_rules"  translatable="false">
 \nINSTRUCTION:\n
-Find the KEY and the correct VALUE based on the user request.\n
+Find the KEY and the VALUE based on the user request.\n
 Respond ONLY in this format: {key=... value=...}\n
 Use ONLY the keys of the avalable settings.\n
+If you cannot relate the user request to a setting, DO NOT provide an explicit setting, but explain briefly why you cannot decide.
 </string>
+<!-- -->
+<!-- GEMMA3 UNUSED 
+<string name="gemma_general" translatable="false">
+DOMAIN: General UI. Map the user functional request to the technical setting.\n
+CONSTRAINT: If you cannot relate the user request to one of these, DO NOT provide an explicit setting, but explain briefly why you cannot decide.
+</string>
+<string name="gemma_device" translatable="false">
+DOMAIN: 
+CONSTRAINT:
+</string>
+<string name="gemma_export_enable" translatable="false">
+DOMAIN: Export formats. This domain handles converting user data into specific file types.
+Only enable a format if the user explicitly asks for a change in the file extension or support for a specific program.\n
+CONSTRAINT: If the user request is vague, DO NOT provide an explicit setting, but explain why you cannot decide.
+</string>
+-->
 
 </resources>
 

@@ -1,4 +1,4 @@
-/* @file TDToast.java
+/** @file TDToast.java
  *
  * @author marco corvi
  * @date nov 2011

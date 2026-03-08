@@ -20,7 +20,7 @@ import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;
 import com.topodroid.help.AIdialog;
-// import com.topodroid.help.AIlocalModel; // GEMMA3
+import com.topodroid.help.AIlocalModel; // GEMMA3
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
@@ -75,8 +75,8 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_GRAPH_PAPER_SCALE = 1008;
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
-  // private boolean mWithLocalModel = false; // GEMMA3
-  // // private boolean mWithLocalModelDialog = false;
+  private boolean mWithLocalModel = false; // GEMMA3
+  // private boolean mWithLocalModelDialog = false;
 
   // private TDPref mCwdPref;
   // private TDPref mBtAliasPref;
@@ -127,8 +127,8 @@ public class TDPrefActivity extends Activity
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
-    // mWithLocalModel = AIlocalModel.hasLocalModel( this ); // GEMMA3
-    // TDLog.v( "has local LLM " + mWithLocalModel );
+    mWithLocalModel = AIlocalModel.hasLocalModel( this ); // GEMMA3
+    TDLog.v( "has local LLM " + mWithLocalModel );
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -352,7 +352,7 @@ public class TDPrefActivity extends Activity
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     layout.setOnLongClickListener( this );
     mAIbutton = (ImageButton)findViewById( R.id.title_button );
-    setAIbuttonEnabled( /* mWithLocalModel || */ TDandroid.isOnline( this ) ); // GEMMA3
+    setAIbuttonEnabled( mWithLocalModel || TDandroid.isOnline( this ) ); // GEMMA3
     mTitleText = (TextView)findViewById( R.id.title_text );
     mTitleText.setTextColor( 0xff6699ff );
 
@@ -726,14 +726,15 @@ public class TDPrefActivity extends Activity
 
   public void startGemini()
   {
-    // if ( mWithLocalModel ) { // GEMMA3
-    //   // if ( ! mWithLocalModelDialog ) {
-    //   //   mWithLocalModelDialog = true;
-    //     TDToast.makeLong( "Please wait while the AI starts up" );
-    //     setAIbuttonEnabled( false );
-    //     (new PrefAIdialog( this, this, null, mCategories[ mPrefCategory ] ) ).show();
-    //   // }
-    // } else
+    TDLog.v("Start Gemini with local AI " + mWithLocalModel );
+    if ( mWithLocalModel ) { // GEMMA3
+      // if ( ! mWithLocalModelDialog ) {
+      //   mWithLocalModelDialog = true;
+        TDToast.makeLong( "Please wait while the AI starts up" );
+        setAIbuttonEnabled( false );
+        (new PrefAIdialog( this, this, null, mCategories[ mPrefCategory ] ) ).show();
+      // }
+    } else
     if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
       setAIbuttonEnabled( false );
       (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();

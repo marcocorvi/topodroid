@@ -1355,7 +1355,7 @@ public class MainWindow extends Activity
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
 
-    // mApp.stopPairingRequest(); // FIXME DROP_PAIRING
+    mApp.stopPairingRequest(); // FIXME DROP_PAIRING
     if ( TopoDroidApp.sayDialogR() ) {
       android.os.Process.killProcess( android.os.Process.myPid() );
     }

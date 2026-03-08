@@ -12,22 +12,77 @@
     android:layout_marginTop="@dimen/marginv"
   />
 
-  <ScrollView 
+  <LinearLayout 
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-    android:layout_weight="1"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
     >
-    <!-- Use a layout_height of 0dp instead of fill_parent -->
-    <TextView android:id="@+id/answer" 
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="match_parent"
-      android:ems="25"
-      android:layout_height="0dp" 
-      android:minLines="16"
-      android:maxLines="18"
-      android:scrollHorizontally="false"
-    />
-  </ScrollView>
+    <!-- GEMMA 3 -->
+    <LinearLayout android:id="@+id/pref_layout"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+      <TextView android:id="@+id/pref_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pref_text"
+      />
+      <TextView android:id="@+id/pref_summary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pref_text"
+        android:layout_marginBottom="@dimen/marginh"
+      />
+      <EditText android:id="@+id/pref_string"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+      />
+      <CheckBox android:id="@+id/pref_bool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      />
+      <Spinner android:id="@+id/pref_array"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/marginh"
+        android:layout_marginBottom="@dimen/marginvbig"
+        >
+        <Button android:id="@+id/pref_no"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+        />
+        <Button android:id="@+id/pref_ok"
+          style="@style/button_default"
+          android:text="@string/button_apply"
+        />
+      </LinearLayout>
+    </LinearLayout>
+    <!-- END GEMMA3 -->
+
+
+    <ScrollView 
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" 
+      android:layout_weight="1"
+      >
+      <!-- Use a layout_height of 0dp instead of fill_parent -->
+      <TextView android:id="@+id/answer" 
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="match_parent"
+        android:ems="25"
+        android:layout_height="0dp" 
+        android:minLines="16"
+        android:maxLines="18"
+        android:scrollHorizontally="false"
+      />
+    </ScrollView>
+  </LinearLayout>
 
   <LinearLayout 
     android:layout_width="match_parent"

@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,7 +48,6 @@ public class AIdialog extends MyDialog
 {
   protected IHelpViewer mParent;
   protected AIhelper mHelper = null; 
-  // protected AIlocalModel mLocalModel = null; // GEMMA3
   protected static String mSystemInstruction = null;
   protected boolean mLocalContext = true; // whether to include the local context in the query
   protected boolean mCanSubmit    = true;
@@ -67,13 +67,16 @@ public class AIdialog extends MyDialog
   };
 
   // GEMMA3
-  // // list of help entries - names must coincide with sections in llm-settings.txt
-  // static final protected String[] mLLMindex = {
-  //   "GENERAL", "DEVICE", "EXPORT_ENABLE", "EXPORT_DATA", "EXPORT_SKETCH",
-  //   "DATA", "DATA_PROCESS", 
-  //   "SKETCH", "SKETCH_EDIT", "SKETCH_DRAW", "3D" 
-  // };
-  // protected static String[] mLLMsystemInstruction = null;
+  // list of help entries - names must coincide with sections in llm-settings.txt
+  static final protected String[] mLLMindex = {
+    "GENERAL", "DEVICE", "CALIBRATION", "EXPORT_TYPES", "EXPORT_DATA", "EXPORT_SKETCH",
+    "SURVEY_DATA", "DATA_PROCESS", 
+    "SKETCH", "SKETCH_UI", "SKETCH_EDIT", "SKETCH_DRAW", "3D" 
+  };
+  protected static String[] mLLMsystemInstruction = null;
+  protected AIlocalModel mLocalModel = null;
+  protected LinearLayout mLayout = null;
+  // END GEMMA3 */
 
   final static int IDX_MODEL = 1;
   int mIdxModel = IDX_MODEL; // index of Gemini model / index of local setting section
@@ -98,9 +101,11 @@ public class AIdialog extends MyDialog
     if ( user_key != null ) {
       mHelper = new AIhelper( context, this, user_key, page );
       mIdxModel = IDX_MODEL;
-    // } else { // GEMMA3
-    //   mLocalModel = new AIlocalModel( context, this );
-    //   mIdxModel = 0;
+    // GEMMA3
+    } else { 
+      mLocalModel = new AIlocalModel( context, this );
+      mIdxModel = 0;
+    // END GEMMA3 */
     }
   }
 
@@ -121,8 +126,11 @@ public class AIdialog extends MyDialog
     ((Button) findViewById( R.id.button_reset  ) ).setOnClickListener( this );
 
     Spinner models = (Spinner) findViewById( R.id.model );
-    // ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, ( mHelper != null )? mModels : mLLMindex ); // GEMMA3
-    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
+    // IF GEMMA3
+    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, ( mHelper != null )? mModels : mLLMindex ); 
+    // ELSE GEMMA3 */
+    // ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
+
     models.setAdapter( adapter );
     models.setOnItemSelectedListener( this );
     models.setSelection( mIdxModel );
@@ -157,6 +165,10 @@ public class AIdialog extends MyDialog
   @Override 
   public void onClick( View v ) 
   {
+    // GEMMA3
+    if ( mLayout != null ) mLayout.setVisibility( View.GONE );
+    // END GEMMA3
+
     if ( v.getId() == R.id.button_submit ) {
       if ( mCanSubmit ) {
         EditText et = (EditText) findViewById( R.id.question );
@@ -171,9 +183,11 @@ public class AIdialog extends MyDialog
           if ( mHelper != null ) {
             mHelper.setModel( mModels[mIdxModel], mRAImodel );
             mHelper.ask( question, this, mLocalContext );
-          // } else if ( mLocalModel != null ) { // GEMMA3
-          //   mLocalModel.setPreamble( mLLMsystemInstruction[mIdxModel] );
-          //   mLocalModel.askLocalModel( mContext, question, this );
+          // GEMMA3
+          } else if ( mLocalModel != null ) {
+            mLocalModel.setPreamble( mLLMsystemInstruction[mIdxModel] );
+            mLocalModel.askLocalModel( mContext, question, this );
+          // END GEMMA3 */
           } else {
             TDToast.makeWarn( R.string.ai_no_model );
           }
@@ -183,8 +197,10 @@ public class AIdialog extends MyDialog
     } else if ( v.getId() == R.id.button_reset ) { // reset the chat
       if ( mHelper != null ) {
         mHelper.resetChat();
-      // } else if ( mLocalModel != null ) { // GEMMA3
-      //   mLocalModel.resetChat();
+      // GEMMA3
+      } else if ( mLocalModel != null ) { 
+        mLocalModel.resetChat();
+      // END GEMMA3 */
       }
     } else if ( v.getId() == R.id.button_clear ) { // clear the question and answer texts
       // ((TextView) findViewById( R.id.answer )).setText(""); 

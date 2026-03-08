@@ -17,6 +17,8 @@ import com.topodroid.prefs.TDSetting;
 
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
 
 import android.content.SharedPreferences.Editor;
 import android.content.ActivityNotFoundException;
@@ -25,6 +27,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageInfo;
+import android.content.pm.ConfigurationInfo;
 // import android.content.pm.PackageManager.NameNotFoundException;
 
 // import java.lang.reflect.Method;
@@ -735,5 +738,27 @@ public class TDandroid
     }
     return false;
   }
+
+  
+  /** @return the levl of AI support
+   * 2 - E4B on GPU
+   * 1 - E4B on CPU
+   * 0 - no support
+   */
+  public static int getAIsupport( Context ctx )
+  {
+    ActivityManager am = (ActivityManager)ctx.getSystemService( Context.ACTIVITY_SERVICE );
+    MemoryInfo mi = new MemoryInfo();
+    am.getMemoryInfo( mi );
+    double ram = mi.totalMem / (double)(1024 * 1024 * 1024 ); // [GB]
+    int openGL_version = am.getDeviceConfigurationInfo().reqGlEsVersion;
+    boolean canGPU = openGL_version >= 0x30001;
+    TDLog.v("RAM " + ram + " OpenGL version " + String.format("%x", openGL_version ) );
+
+    if ( ram > 7.5 && canGPU ) return 2;
+    if ( ram > 5.5 ) return 1;
+    return 0;
+  }
+    
 }
   

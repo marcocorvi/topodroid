@@ -66,7 +66,7 @@ class TDPrefKey
 
 // TODO new formulation of leys
 
-  // settings groups
+  // settings types
   static final int LONG = 1; // long
   static final int BOOL = 2;
   static final int FLT  = 3;
@@ -249,8 +249,8 @@ class TDPrefKey
     new TDPrefKey( B, BOOL, BT,  "DISTOX_HEAD_TAIL",        R.string.pref_head_tail_title,        R.string.pref_head_tail_summary,       FALSE ),
     new TDPrefKey( B,       BT,  "DISTOX_SOCKET_TYPE",      R.string.pref_sock_type_title,        R.string.pref_sock_type_summary,       TDString.ONE, R.array.sockType, R.array.sockTypeValue ),
     // FIXME DROP_PAIRING
-    // new TDPrefKey( A, BOOL, BT,  "DISTOX_AUTO_PAIR",        R.string.pref_auto_pair_title,        R.string.pref_auto_pair_summary,       FALSE ),
     new TDPrefKey( E,       UI,  "DISTOX_CONNECT_FEEDBACK", R.string.pref_connect_feedback_title, R.string.pref_connect_feedback_summary,TDString.ZERO, R.array.feedbackMode, R.array.feedbackModeValue ),
+    new TDPrefKey( A, BOOL, BT,  "DISTOX_AUTO_PAIR",        R.string.pref_auto_pair_title,        R.string.pref_auto_pair_summary,       FALSE ), // FIXME DROP_PAIRING
     new TDPrefKey( B,       NON, "DISTOX_CALIB_PREF",       R.string.pref_cat_calib )
   };
 
@@ -791,7 +791,7 @@ class TDPrefKey
     new TDPrefKey( N, BOOL, D3, "CAVE3D_STATION_TOAST",      R.string.cpref_station_toast_title,     R.string.cpref_station_toast_summary,     FALSE ),
     new TDPrefKey( N, BOOL, D3, "CAVE3D_GRID_ABOVE",         R.string.cpref_grid_above_title,        R.string.cpref_grid_above_summary,        FALSE ),
     new TDPrefKey( A, LONG, D3, "CAVE3D_GRID_EXTENT",        R.string.cpref_grid_extent_title,       R.string.cpref_grid_extent_summary,       "10"  ),
-    new TDPrefKey( N, BOOL, D3, "DISTOX_NAMES_VISIBILITY",   R.string.cpref_names_visibility_title,  R.string.cpref_names_visibility_summary,  "2"   ),
+    new TDPrefKey( N, BOOL, D3, "DISTOX_NAMES_VISIBILITY",   R.string.cpref_names_visibility_title,  R.string.cpref_names_visibility_summary,  FALSE ),
     new TDPrefKey( N,       NON, "DISTOX_DEM3D_PREF",         R.string.cpref_dem3d  ),
     new TDPrefKey( A,       NON, "DISTOX_WALLS3D_PREF",       R.string.cpref_walls3d )
   };
@@ -1021,6 +1021,20 @@ class TDPrefKey
     }
     return null;
   }
+
+  // /** @return the preference-keyset of a setting (-1 if not found)
+  //  * @param kay   setting key
+  //  */
+  // static TDPrefKey[] getPrefKeySet( String kay )
+  // {
+  //   for ( TDPrefKey[] keyset : mKeySet ) {
+  //     if ( keyset == null ) continue;
+  //     for ( TDPrefKey k : keyset ) {
+  //       if ( k.key.equals( kay ) ) return keyset;
+  //     }
+  //   }
+  //   return null;
+  // }
 
   // /** @return the group of a setting (-1 if not found)
   //  * @param kay   setting key

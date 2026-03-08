@@ -669,7 +669,7 @@ public class GlLines extends GlShape
    * @param mvpMatrix   model-view-project matrix
    * @param draw_mode   drawing mode
    * @param points      whether to draw the endpoints
-   * @param acolor       color 4-vector
+   * @param acolor      color 4-vector
    */
   void draw( float[] mvpMatrix, int draw_mode, boolean points, float[] acolor )
   {
