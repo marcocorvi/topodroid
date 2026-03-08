@@ -66,7 +66,7 @@ public class AIdialog extends MyDialog
     "gemini-2.0-flash", "gemini-2.0-pro"
   };
 
-  // GEMMA3
+  /* GEMMA3
   // list of help entries - names must coincide with sections in llm-settings.txt
   static final protected String[] mLLMindex = {
     "GENERAL", "DEVICE", "CALIBRATION", "EXPORT_TYPES", "EXPORT_DATA", "EXPORT_SKETCH",
@@ -101,7 +101,7 @@ public class AIdialog extends MyDialog
     if ( user_key != null ) {
       mHelper = new AIhelper( context, this, user_key, page );
       mIdxModel = IDX_MODEL;
-    // GEMMA3
+    /* GEMMA3
     } else { 
       mLocalModel = new AIlocalModel( context, this );
       mIdxModel = 0;
@@ -126,10 +126,11 @@ public class AIdialog extends MyDialog
     ((Button) findViewById( R.id.button_reset  ) ).setOnClickListener( this );
 
     Spinner models = (Spinner) findViewById( R.id.model );
-    // IF GEMMA3
+    /* IF GEMMA3
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, ( mHelper != null )? mModels : mLLMindex ); 
     // ELSE GEMMA3 */
-    // ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
+    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
+    // END GEMMA3 */
 
     models.setAdapter( adapter );
     models.setOnItemSelectedListener( this );
@@ -165,9 +166,9 @@ public class AIdialog extends MyDialog
   @Override 
   public void onClick( View v ) 
   {
-    // GEMMA3
+    /* GEMMA3
     if ( mLayout != null ) mLayout.setVisibility( View.GONE );
-    // END GEMMA3
+    // END GEMMA3 */
 
     if ( v.getId() == R.id.button_submit ) {
       if ( mCanSubmit ) {
@@ -183,7 +184,7 @@ public class AIdialog extends MyDialog
           if ( mHelper != null ) {
             mHelper.setModel( mModels[mIdxModel], mRAImodel );
             mHelper.ask( question, this, mLocalContext );
-          // GEMMA3
+          /* GEMMA3
           } else if ( mLocalModel != null ) {
             mLocalModel.setPreamble( mLLMsystemInstruction[mIdxModel] );
             mLocalModel.askLocalModel( mContext, question, this );
@@ -197,7 +198,7 @@ public class AIdialog extends MyDialog
     } else if ( v.getId() == R.id.button_reset ) { // reset the chat
       if ( mHelper != null ) {
         mHelper.resetChat();
-      // GEMMA3
+      /* GEMMA3
       } else if ( mLocalModel != null ) { 
         mLocalModel.resetChat();
       // END GEMMA3 */

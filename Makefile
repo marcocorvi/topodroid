@@ -189,11 +189,7 @@ SRC = \
   ./libs/armeabi-v7a/libnativename.so \
   ./libs/armeabi-v7a/libpowercrust.so \
   ./libs/armeabi-v7a/libtiffdecoder.so \
-  ./libs/armeabi-v7a/libtiff.so \
-  ./libs/x86_64/libnativename.so \
-  ./libs/x86_64/libpowercrust.so \
-  ./libs/x86_64/libtiffdecoder.so \
-  ./libs/x86_64/libtiff.so
+  ./libs/armeabi-v7a/libtiff.so 
 
 EXTRA_SRC = \
   ./studio/* \

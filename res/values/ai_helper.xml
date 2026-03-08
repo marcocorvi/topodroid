@@ -42,7 +42,7 @@ RULES:\n
 \n
 </string>
 
-<!-- GEMMA3 -->
+<!-- GEMMA3
 <string name="gemma_prompt" translatable="false">
 You are a technical configuration expert.\n
 AVAILABLE SETTIGS:\n
@@ -54,8 +54,8 @@ Respond ONLY in this format: {key=... value=...}\n
 Use ONLY the keys of the avalable settings.\n
 If you cannot relate the user request to a setting, DO NOT provide an explicit setting, but explain briefly why you cannot decide.
 </string>
-<!-- -->
-<!-- GEMMA3 UNUSED 
+< -->
+<!-- GEMMA3 UNUSED
 <string name="gemma_general" translatable="false">
 DOMAIN: General UI. Map the user functional request to the technical setting.\n
 CONSTRAINT: If you cannot relate the user request to one of these, DO NOT provide an explicit setting, but explain briefly why you cannot decide.

@@ -20,7 +20,7 @@ import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;
 import com.topodroid.help.AIdialog;
-import com.topodroid.help.AIlocalModel; // GEMMA3
+// import com.topodroid.help.AIlocalModel; // GEMMA3
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
@@ -75,8 +75,10 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_GRAPH_PAPER_SCALE = 1008;
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
-  private boolean mWithLocalModel = false; // GEMMA3
+  /* GEMMA3
+  private boolean mWithLocalModel = false;
   // private boolean mWithLocalModelDialog = false;
+  // END GEMMA3 */
 
   // private TDPref mCwdPref;
   // private TDPref mBtAliasPref;
@@ -127,8 +129,10 @@ public class TDPrefActivity extends Activity
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
-    mWithLocalModel = AIlocalModel.hasLocalModel( this ); // GEMMA3
+    /* GEMMA3
+    mWithLocalModel = AIlocalModel.hasLocalModel( this ); 
     TDLog.v( "has local LLM " + mWithLocalModel );
+    // END GEMMA3 */
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -352,7 +356,12 @@ public class TDPrefActivity extends Activity
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     layout.setOnLongClickListener( this );
     mAIbutton = (ImageButton)findViewById( R.id.title_button );
-    setAIbuttonEnabled( mWithLocalModel || TDandroid.isOnline( this ) ); // GEMMA3
+    /* IF GEMMA3
+    setAIbuttonEnabled( mWithLocalModel || TDandroid.isOnline( this ) );
+    // ELSE GEMMA3 */
+    setAIbuttonEnabled( TDandroid.isOnline( this ) );
+    // END GEMMA3 */
+
     mTitleText = (TextView)findViewById( R.id.title_text );
     mTitleText.setTextColor( 0xff6699ff );
 
@@ -726,8 +735,9 @@ public class TDPrefActivity extends Activity
 
   public void startGemini()
   {
+    /* GEMMA3
     TDLog.v("Start Gemini with local AI " + mWithLocalModel );
-    if ( mWithLocalModel ) { // GEMMA3
+    if ( mWithLocalModel ) {
       // if ( ! mWithLocalModelDialog ) {
       //   mWithLocalModelDialog = true;
         TDToast.makeLong( "Please wait while the AI starts up" );
@@ -735,6 +745,7 @@ public class TDPrefActivity extends Activity
         (new PrefAIdialog( this, this, null, mCategories[ mPrefCategory ] ) ).show();
       // }
     } else
+    // END GEMMA3 */
     if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
       setAIbuttonEnabled( false );
       (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();

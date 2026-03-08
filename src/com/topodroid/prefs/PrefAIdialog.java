@@ -60,7 +60,7 @@ public class PrefAIdialog extends AIdialog
 {
   private boolean mWithGemini = true;
 
-  // GEMMA3 
+  /* GEMMA3 
   int mInputType = 0;
   EditText     mET = null;
   CheckBox     mCB = null;
@@ -84,13 +84,13 @@ public class PrefAIdialog extends AIdialog
         mSystemInstruction = getSettingText( context );
         // TDLog.v("PrefAI System instr. length " + mSystemInstruction.length() );
       }
-    // IF GEMMA3
+    /* IF GEMMA3
     } else { 
       mWithGemini = false;
       if ( mLLMsystemInstruction == null ) {
         loadLLMsettingText( context );
       }
-    /* ELSE GEMMA3 
+    // ELSE GEMMA3 */
     } else {
       mWithGemini = false;
     // END GEMMA3 */
@@ -101,7 +101,7 @@ public class PrefAIdialog extends AIdialog
   public void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
-    // GEMMA3
+    /* GEMMA3
     mLayout = (LinearLayout)findViewById( R.id.pref_layout );
     mET = (EditText)findViewById( R.id.pref_string );
     mCB = (CheckBox)findViewById( R.id.pref_bool );
@@ -111,7 +111,7 @@ public class PrefAIdialog extends AIdialog
     // END GEMMA3 */
   }
 
-  // GEMMA3 
+  /* GEMMA3 
   private void loadLLMsettingText( Context ctx )
   {
     mLLMsystemInstruction = new String[ mLLMindex.length ];
@@ -212,14 +212,14 @@ public class PrefAIdialog extends AIdialog
     if ( message == null || message.isEmpty() ) return;
     if ( mWithGemini ) {
       showGeminiResponse( message );
-    // GEMMA3
+    /* GEMMA3
     } else {
       showGemmaResponse( message );
     // END GEMMA3 */
     }
   }
 
-  // GEMMA3
+  /* GEMMA3
   // handling of GEMMA3 response has not been finished: it should start a dialog to show the setting
   private void showGemmaResponse( String message )
   {

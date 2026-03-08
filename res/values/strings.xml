@@ -12,10 +12,10 @@
     <string name="ai_prompt">Type your question</string>
     <string name="ai_invalid_key">Invalid API key</string>
     <string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string>
-    <!-- GEMMA3 -->
+    <!-- GEMMA3
     <string name="ai_init_llm">Initialized local model</string>
     <string name="ai_init_llm_poor">Initialized local model. Degraded performances</string>
-    <!-- string name="ai_request">Your request:</string -->
+    < UNUSED string name="ai_request">Your request:</string -->
 
     <!-- UNUSED string name="no_api_key">AI API key has not been set</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
