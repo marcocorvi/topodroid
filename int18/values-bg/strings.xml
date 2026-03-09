@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO string name="ai_null_chat">Null AI chat</string -->
-    <!-- TODO string name="ai_error">AI error %1$s</string -->
-    <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
-    <!-- TODO string name="ai_no_internet">No web connection.</string -->
-    <!-- TODO string name="ai_prompt">Type your question</string -->
-    <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
-    <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
+    <string name="ai_null_chat">Няма AI чат</string>
+    <string name="ai_error">AI грешка %1$s</string>
+    <string name="ai_internet">Внимание. Помощта с изкуствен интелект изисква интернет връзка.</string>
+    <string name="ai_no_internet">Няма интернет връзка.</string>
+    <string name="ai_prompt">Напиши въпроса си</string>
+    <string name="ai_invalid_key">Невалиден API ключ</string>
+    <string name="ai_key_instruction">API ключът се съхранява във вътрешната памет на Android\nи се изпраща само до Google.\nПотърсете в интернет как да получите Gemini API ключ от Google.</string>
 
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Ръководството не може да бъде изтеглено</string>
@@ -84,7 +84,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_io">Експорт</string>
     <string name="pref_bt">Bluetooth</string>
     <string name="pref_cal">Калибрация</string>
-    <!-- TODO string name="pref_xt">Special functions</string -->
+    <string name="pref_xt">Специални функции</string>
 
     <string name="cut">ИЗРЯЗВАНЕ</string>
     <string name="copy">КОПИРАНЕ</string>
@@ -120,7 +120,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bad_sibling">Лоши измервания</string>
     <string name="bad_station">Лош репер: %1$s</string>
     <string name="bad_station_name">Непозволено име на репер</string>
-    <!-- TODO string name="equal_station_names">Equal station names</string -->
+    <string name="equal_station_names">Еднакви имена на репер</string>
     <string name="invalid_name">Невалидно име</string>
     <!-- UNUSED string name="missing_area">ПЛОЩ</string -->
     <!-- UNUSED string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string -->
@@ -135,7 +135,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="failed_snap_to_splays">Няма близки измервания, към които да се прикачи линията</string>
     <string name="failed_append_to_line">Неуспешно прикачане към друга линия</string>
     <string name="failed_zoomfit">Неуспешно побиране на екрана</string>
-    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
+    <string name="fail_forget_device">Android не успя да забрави BT устройството</string>
 
     <string name="bric_device">Устройство %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -176,8 +176,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="connect_failed">Няма връзка</string -->
     <!-- UNUSED string name="data"> данни</string -->
     <string name="using">Използвани %1$s</string>
-    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
-    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
+    <string name="cali_err">грешка: средно %1$.2f&#xb0;, стандартно %2$.2f&#xb0;. максимално %3$.2f&#xb0;</string>
+    <string name="cali_time">Калибрация: %1$s</string>
     <string name="calib_error">Средна грешка: %1$.2f ° (BH delta %2$.3f)</string>
     <string name="calib_validate_error">Средна грешка: %1$.2f °</string>
     <string name="calib_stddev">Грешка ст. откл: %1$.2f °</string>
@@ -190,9 +190,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="calib_reset">Нулиране на DistoX калибрацията \?</string>
     <string name="calib_min_error">Минимална грешка</string>
     <string name="calib_delta_dir">Разлики м/у две директории: %1$.2f ± %2$.2f (макс. %3$.2f)</string>
-    <!-- TODO string name="calib_acc_thr">Accel. [&#x25;]</string -->
-    <!-- TODO string name="calib_mag_thr">Magn. [&#x25;]</string -->
-    <!-- TODO string name="calib_dip_thr">Dip [&#xb0;]</string -->
+    <string name="calib_acc_thr">Аксел. [&#x25;]</string>
+    <string name="calib_mag_thr">Маг. [&#x25;]</string>
+    <string name="calib_dip_thr">Наклон [&#xb0;]</string>
     <string name="magn_dip">Магнитна точност …</string>
     <string name="auto_calib">Автоматична калибрация</string>
     <string name="autocalib_not_supported">Изисква се изчисление на калибрирането</string>
@@ -360,7 +360,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="location_start_fine">Начална добра позиция</string>
     <string name="location_enabled">Уверете се, че LOCATION (местоположението) е активиран.</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
-    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <string name="discovery_error">Грешка при откриване на BT: %1$s</string>
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -401,7 +401,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_value_required">Необходима стойност</string>
     <string name="error_bad_fixes">Фиксираните точки не са включени в картировката</string>
     <string name="error_bad_name">Името на файла е променено</string>
-    <!-- TODO string name="error_question">Please, enter a question</string -->
+    <string name="error_question">Моля, въведете въпрос</string>
 
     <string name="group_title">Групиране на данните за калибрацията</string>
     <!-- UNUSED string name="group_policy_four">Групирай по четири</string -->
@@ -487,7 +487,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f\"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f\"</string>
-    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
+    <string name="format_setting">Настройка %1$s до %2$s ?</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ЗА ПРОГРАМАТА</string>
@@ -862,13 +862,13 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Актуализиране на ръководството за потребителя\?\nТекуща версия  %1$d Инсталирана версия %2$d</string>
     <string name="ask_clear_equates">Премахване на всички еквиваленти?</string>
-    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <string name="ask_forget_device">Забрави устройство %1$s?</string>
 
     <string name="button_add">Добави</string>
     <string name="button_apply">Прилагане</string>
     <string name="button_back">Назад</string>
     <string name="button_cancel">Отказ</string>
-    <!-- TODO string name="button_forget"    >Forget</string -->
+    <string name="button_forget">Забрави</string>
     <string name="button_geocode">Геокод</string>
     <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard">Клипборд</string>
@@ -882,7 +882,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_current">Активен</string>
     <string name="button_delete">Изтрий</string>
     <string name="button_duplicate">Дубликат</string>
-    <!-- TODO string name="button_settime"   >Set time</string -->
+    <string name="button_settime">Настроване на време</string>
     <string name="button_surface">Повърхност</string>
     <string name="button_no_extend">Без удължаване</string>
     <string name="button_eval">Необработен</string>
@@ -936,8 +936,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_clear_week">Изчистване на 7 дни</string>
     <string name="button_clear_memory">Изчистване на паметта</string>
     <string name="button_save">Запази</string>
-    <string name="button_select"    >Избери</string>
-    <!-- TODO string name="button_submit"    >Submit</string -->
+    <string name="button_select">Избери</string>
+    <string name="button_submit">Изпращане</string>
     <string name="button_leg_station">Репери в отсечка</string>
     <string name="button_all_station">Всички репери</string>
     <string name="button_leg_search">Търсене на отсечка</string>
@@ -1033,7 +1033,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Bluetooth псевдоними</string>
-    <!-- TODO string name="hint_api_key">API key</string -->
+    <string name="hint_api_key">API ключ</string>
     <string name="hint_bt_alias">Псевдоним на BT</string>
     <string name="hint_bt_code">Код на устройството</string>
     <string name="bt_alias_missing">Липсва псевдоним на BT</string>
@@ -1231,7 +1231,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_sdcard">Функции на паметта DistoX</string>
     <string name="help_read">Четене и показване на коефициентите за калибриране на DistoX</string>
     <string name="help_info_device">Информация за устройството</string>
-    <!-- TODO string name="help_scan">Scan for new DistoX devices</string -->
+    <string name="help_scan">Търсене на нови DistoX устройства</string>
     <!-- UNUSED string name="help_scan_ble">Scan for BTLE devices</string -->
     <!-- UNUSED string name="help_pair">Pair the active DistoX device</string -->
     <string name="help_open_calib">Отваряне на калибрацията</string>
@@ -1293,7 +1293,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_xvi">Изображения Xvi</string>
     <string name="export_with_xsections">Включи сечения</string>
     <string name="export_grouped">Групирай елементите в слоеве по тип</string>
-    <!-- TODO string name="export_origin">Origin station</string -->
+    <string name="export_origin">Начален репер</string>
     <string name="export_with_reference">Включи препратка по XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1319,9 +1319,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="import_diving_datamode">Подводен режим на данни</string>
     <string name="import_therion_path">С картировачен път</string>
 
-    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
-    <!-- TODO string name="title_ai_dialog">AI helper</string -->
-    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
+    <string name="title_gemini">Въведи твоя AI API ключ</string>
+    <string name="title_ai_dialog">AI помощник</string>
+    <string name="title_ai_dialog_pref">Pомощ за конфигурацияna AI</string -->
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
@@ -1450,7 +1450,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_survey_export">Експортирай картировката</string>
     <string name="title_survey_rename">Преименувай картировката</string>
     <string name="title_station_photo">Снимка на репер</string>
-    <!-- TODO string name="title_team_dialog">Team names</string -->
+    <string name="title_team_dialog">Имена на картировачите</string>
     <string name="title_plot_rename">Операции за скица</string>
     <string name="title_plot_zoomfit">Мащабиране / ориентация</string>
     <string name="title_calib_export">Експортирай калибрацията</string>
@@ -1499,8 +1499,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_locale_title">Език</string>
   <string name="pref_locale_summary">Език на приложението</string>
-  <!-- TODO string name="pref_gemini_title">AI key</string -->
-  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
+  <string name="pref_gemini_title">AI ключ</string>
+  <string name="pref_gemini_summary">Gemini API ключ</string>
   <string name="pref_orientation_title">Ориентация на екрана</string>
   <string name="pref_orientation_summary">Ориентация на екрана на приложението</string>
   <string name="pref_single_back_title">Единично докосване</string>
@@ -2376,10 +2376,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="warning_no_csv_type">CSV не е посочен</string>
     <string name="warning_cavway_info">Неуспешно получаване на информация за Cavway</string>
     <string name="no_permissions">Приложението не може да работи без необходимите разрешения</string>
-    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
-    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
-    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
-    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
+    <string name="cavway_sync_failed">Синхронизирането на Cavway не бе успешно</string>
+    <string name="cavway_synchronized">Синхронизиране с Cavway</string>
+    <string name="cavway_sync_ok">Синхронизирано с Cavway</string>
+    <string name="cavway_sync_offset">Отместване в Cavway: %1$d [мин]</string>
 
     <string name="done_convexhull">Стените на изпъкналото тяло са готови</string>
     <string name="fail_convexhull">Стените на изпъкналото тяло не могат да бъдат завършени</string>
