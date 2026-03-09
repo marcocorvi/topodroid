@@ -111,6 +111,7 @@
   <string name="SensorEditDialog" translatable="false">page_sensors_edit.htm</string>
   <string name="ShotDeleteDialog" translatable="false">page_shot_edit1.htm</string>
   <string name="ShotEditDialog" translatable="false">page_shot_edit1.htm</string>
+  <string name="ScanShotEditDialog" translatable="false">page_scan_shot.htm</string>
   <string name="ShotDisplayDialog" translatable="false">page_displaymode.htm</string>
   <string name="ShotNewDialog" translatable="false">page_man_data.htm</string>
   <string name="StationsDialog" translatable="false">page_stations_map.htm</string>

@@ -111,6 +111,8 @@ public class TDColor
   public static final int SPLAY_BACKSIGHT = 0xcc66ccee; // blue
   public static final int SPLAY_GENERIC   = 0xcc77ff77; // green
 
+  public static final int SCAN_SHOT       = 0xcc999999; // gray
+
   public static final int SEARCH        = 0xff996600; // search result highlight color
 }
   

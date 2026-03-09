@@ -559,8 +559,12 @@ public class ShotWindow extends Activity
         }
         // mApp_mData.getShotName( TDInstance.sid, blk );
         // TDLog.v( TAG + "data shot window block " + blk.mId + " station assign return " + ret );
+      } else {
+        if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 ) {
+          mSurveyAccuracy.addBlockAMD( blk );
+          mApp.assignScanBlockStation( blk );
+        }
       }
-
       if ( ! ( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE  ) ) {
         mList.post( new Runnable() {
           @Override public void run() {
@@ -620,69 +624,77 @@ public class ShotWindow extends Activity
     int cnt = 0;
     DBlock prev = null;
     boolean prev_is_leg = false;
+    boolean prev_is_scan = false;
     boolean check_recent = TDSetting.mShotRecent && mFlagLatest;
     for ( DBlock item : list ) {
       DBlock cur = item;
       // int t = cur.type();
       // TDLog.Log( TDLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
-
-      if ( cur.isSecLeg() || cur.isRelativeDistance( prev ) ) {
-        // TDLog.v( TAG + "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
-        if ( cur.isBlank() ) {   // FIXME 20140612
-          cur.setTypeSecLeg();
-          mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.EXTRA ); // cur.mType ); // FIXME 20140616
+      if ( cur.isScan() ) {
+        if ( prev_is_scan ) { // skip
+          continue;
         }
-        else if ( ! cur.isSecLeg() ) { // FIXME 20201118
-          // if ( prev != null && prev.isBlank() ) prev.setBlockLegType( DBlock.BLOCK_BLANK_LEG );
-          if ( prev != null ) prev.setTypeBlankLeg();
-        }
+        prev_is_scan = true;
+      } else {
+        prev_is_scan = false;
+        if ( cur.isSecLeg() || cur.isRelativeDistance( prev ) ) {
+          // TDLog.v( TAG + "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+          if ( cur.isBlank() ) {   // FIXME 20140612
+            cur.setTypeSecLeg();
+            mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.EXTRA ); // cur.mType ); // FIXME 20140616
+          }
+          else if ( ! cur.isSecLeg() ) { // FIXME 20201118
+            // if ( prev != null && prev.isBlank() ) prev.setBlockLegType( DBlock.BLOCK_BLANK_LEG );
+            if ( prev != null ) prev.setTypeBlankLeg();
+          }
 
-        if ( mFlagLeg ) { // flag: hide leg extra shots
-          // TDLog.Log( TDLog.LOG_SHOT, "close distance");
+          if ( mFlagLeg ) { // flag: hide leg extra shots
+            // TDLog.Log( TDLog.LOG_SHOT, "close distance");
 
-          if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
-            // prev was skipped: draw it now
-            if ( ! prev_is_leg ) {
-              cur = prev;
-              prev_is_leg = true;
+            if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
+              // prev was skipped: draw it now
+              if ( ! prev_is_leg ) {
+                cur = prev;
+                prev_is_leg = true;
+              } else {
+                continue;
+              }
             } else {
               continue;
             }
-          } else {
-            continue;
-          }
-        } else { // do not hide extra leg-shots
-          if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
-            if ( ! prev_is_leg ) {
-              ++cnt;
-              mDataAdapter.add( prev );
-              prev_is_leg = true;
+          } else { // do not hide extra leg-shots
+            if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
+              if ( ! prev_is_leg ) {
+                ++cnt;
+                mDataAdapter.add( prev );
+                prev_is_leg = true;
+              // } else {
+                /* nothing */
+              }
             // } else {
-              /* nothing */
+            //   /* nothing */
             }
-          // } else {
-          //   /* nothing */
           }
-        }
-      } else {
-        // TDLog.v( TAG + "item not close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
-        // TDLog.Log( TDLog.LOG_SHOT, "not close distance");
-        prev_is_leg = false;
-        if ( cur.isTypeBlank() ) { // DBlock.isTypeBlank(t)
-          prev = cur;
-          if ( mFlagBlank ) continue;
-        } else if ( cur.isSplay() ) { // DBlock.isSplay(t) 
-          prev = null;
-          if ( mFlagSplay ) { // do hide splays, except those that are shown.
-            // boolean skip = true;
-            // for ( String st : mShowSplay ) {
-            //   if ( st.equals( cur.mFrom ) ) { skip = false; break; }
-            // }
-            // if ( skip ) continue;
-            if ( ! ( showSplaysContains( cur.mFrom ) || ( check_recent && cur.isRecent() ) ) ) continue;
+        } else {
+          // TDLog.v( TAG + "item not close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+          // TDLog.Log( TDLog.LOG_SHOT, "not close distance");
+          prev_is_leg = false;
+          if ( cur.isTypeBlank() ) { // DBlock.isTypeBlank(t)
+            prev = cur;
+            if ( mFlagBlank ) continue;
+          } else if ( cur.isSplay() ) { // DBlock.isSplay(t) 
+            prev = null;
+            if ( mFlagSplay ) { // do hide splays, except those that are shown.
+              // boolean skip = true;
+              // for ( String st : mShowSplay ) {
+              //   if ( st.equals( cur.mFrom ) ) { skip = false; break; }
+              // }
+              // if ( skip ) continue;
+              if ( ! ( showSplaysContains( cur.mFrom ) || ( check_recent && cur.isRecent() ) ) ) continue;
+            }
+          } else { // cur.isMainLeg() // t == DBlock.BLOCK_MAIN_LEG
+            prev = cur;
           }
-        } else { // cur.isMainLeg() // t == DBlock.BLOCK_MAIN_LEG
-          prev = cur;
         }
       }
       // TDLog.Log( TDLog.LOG_SHOT, "adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
@@ -793,11 +805,15 @@ public class ShotWindow extends Activity
     if ( mOnOpenDialog ) return;
     mOnOpenDialog = true;
     mShotPos = pos;
-    DBlock prevBlock = null;
-    DBlock nextBlock = null;
-    prevBlock = getPreviousLegShot( blk, false );
-    nextBlock = getNextLegShot( blk, false );
-    (new ShotEditDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
+    if ( blk.isScan() ) {
+      (new ScanShotEditDialog( mActivity, this, blk, pos )).show();
+    } else {
+      DBlock prevBlock = null;
+      DBlock nextBlock = null;
+      prevBlock = getPreviousLegShot( blk, false );
+      nextBlock = getNextLegShot( blk, false );
+      (new ShotEditDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
+    }
   }
 
   /** react to a user long-tap on an item (menu entry)
@@ -2419,9 +2435,16 @@ public class ShotWindow extends Activity
    * @param to     TO station
    * @note package because called by the alert dialog callback
    */
-  void updateShotName( long bid, String from, String to )
+  void updateShotBlockName( DBlock b, String from, String to )
   {
-    mApp_mData.updateShotName( bid, TDInstance.sid, from, to );
+    TDLog.v("update shot " + b.mId );
+    if ( b.isScan() ) {
+      mApp_mData.updateScanBlockName( b.mId, TDInstance.sid, b.mFrom, from );
+      b.mFrom = from;
+    } else {
+      mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to );
+      b.setBlockName( from, to, b.isBackLeg() ); 
+    }
   }
 
   /** update the FROM-TO stations of a shot database record
@@ -2435,8 +2458,8 @@ public class ShotWindow extends Activity
     // TDLog.v( "update Block Name " + blk.mId + " : " + from + " - " + to );
     String sts = checkXSections( blk, from, to );
     if ( sts == null ) {
-      updateShotName( blk.mId, from, to );
-      blk.setBlockName( from, to, blk.isBackLeg() ); 
+      updateShotBlockName( blk, from, to );
+      // blk.setBlockName( from, to, blk.isBackLeg() ); 
     } else {
       Resources res = getResources();
       TopoDroidAlertDialog.makeAlert( mActivity, res,
@@ -2446,8 +2469,8 @@ public class ShotWindow extends Activity
         new DialogInterface.OnClickListener() { // ok handler
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            updateShotName( blk.mId, from, to );
-            blk.setBlockName( from, to, blk.isBackLeg() ); 
+            updateShotBlockName( blk, from, to );
+            // blk.setBlockName( from, to, blk.isBackLeg() ); 
           } },
         null
       );
@@ -2580,11 +2603,11 @@ public class ShotWindow extends Activity
    */
   private void doRenumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
-    // TDLog.v( TAG + "do Renumber Blocks - size " + blks.size() );
+    TDLog.v( "do Renumber Blocks - size " + blks.size() + " FROM <" + from + "> TO <" + to + ">" );
     if ( from.length() == 0 && to.length() == 0 ) {
       for ( DBlock b : blks ) {
-        b.setBlockName( from, to );
-        updateShotName( b.mId, from, to );
+        updateShotBlockName( b, from, to );
+        // b.setBlockName( from, to );
       }
       // updateDisplay();
       mDataAdapter.updateSelectBlocksView(); // REPLACED updateDisplay
@@ -2594,8 +2617,8 @@ public class ShotWindow extends Activity
 
     DBlock blk = blks.get(0); // blk is guaranteed to exists
     if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
-      blk.setBlockName( from, to, blk.isBackLeg() );
-      updateShotName( blk.mId, from, to );
+      updateShotBlockName( blk, from, to );
+      // blk.setBlockName( from, to, blk.isBackLeg() );
     }
     if ( blk.isLeg() ) {
       mApp.assignStationsAfter( blk, blks /*, stations */ );
@@ -2604,10 +2627,12 @@ public class ShotWindow extends Activity
       // mList.invalidate();
       checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
     } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
+      TDLog.v("Block splay " + blk.mId );
       for ( DBlock b : blks ) {
         if ( b == blk ) continue;
-        b.setBlockName( from, to );
-        updateShotName( b.mId, from, to );
+        TDLog.v("Block " + b.mId );
+        updateShotBlockName( b, from, to );
+        // b.setBlockName( from, to );
       }
       // updateDisplay();
       mDataAdapter.updateSelectBlocksView(); // REPLACED updateDisplay
@@ -2650,7 +2675,7 @@ public class ShotWindow extends Activity
       String to   = blk.mFrom;
       // TDLog.v( TAG + "swap block to <" + from + "-" + to + ">" );
       blk.setBlockName( from, to );
-      // updateShotName( blk.mId, from, to );
+      // updateShotBlockName( blk, from, to );
       checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
     }
     mApp_mData.updateShotsName( blks, TDInstance.sid );
@@ -2825,8 +2850,8 @@ public class ShotWindow extends Activity
           // }
         }
       } else {
-        b.setBlockName( from, to );
-        updateShotName( b.mId, from, to ); // FIXME use
+        updateShotBlockName( b, from, to ); // FIXME use
+        // b.setBlockName( from, to );
       }
       mDataAdapter.updateBlockView( b.mId );
     }
@@ -3455,4 +3480,13 @@ public class ShotWindow extends Activity
   // {
   //   TDLog.v("do station click " );
   // }
+
+  void updateScanBlock( DBlock blk, String from, int pos )
+  {
+    mApp_mData.updateScanBlockName( blk.mId, TDInstance.sid, blk.mFrom, from );
+    blk.mFrom = from;
+    // updateShotList( mMyBlocks, mMyPhotos ); // this is overshooting: should update only the scan shot
+    mDataAdapter.updateBlockView( blk.mId );
+  }
+
 }

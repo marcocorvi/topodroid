@@ -113,9 +113,9 @@ public class TopoDroidComm
     // TODO split the data insert in three places: one for each data packet
 
     // TDLog.v( "TD comm: handle BRIC packet " + index + " " + d + " " + b + " " + c + " time " + time );
-    int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
+    int leg_type = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
-    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress(), index, time );
+    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg_type, status, comment, TDInstance.deviceAddress(), index, time );
     // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
     // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
 
@@ -166,15 +166,18 @@ public class TopoDroidComm
   //   }
   // }
   /** handle regular packet
-   * @param res    packet type (as returned by handlePacket / or set by Protocol )
-   * @param lister data lister
+   * @param res       packet type (as returned by handlePacket / or set by Protocol )
+   * @param lister    data lister
    * @param data_type unused
+   * @param comment   data comment (error)
+   * @param is_scan   whether the data is a scan data
    */
-  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment )
+  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment, boolean is_scan )
   {
     assert( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 );
     if ( res == DataType.PACKET_DATA ) {
       ++mNrReadPackets;
+
       int flag = ( mProtocol.getCavwayFlag() << 16 ); // DBlock.FLAG_SURVEY | ( mProtocol.getCavwayFlag() << 16 );
       double d = mProtocol.mDistance;
       double b = mProtocol.mBearing;
@@ -182,8 +185,10 @@ public class TopoDroidComm
       double r = mProtocol.mRoll;
       long time = mProtocol.getTimeStamp();
       long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
+      int leg_type = ( is_scan )? LegType.SCAN : LegType.NORMAL;
+      // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
-              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, LegType.NORMAL, 0, comment, TDInstance.deviceAddress(),
+              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, 0, comment, TDInstance.deviceAddress(),
               mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, time);
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);

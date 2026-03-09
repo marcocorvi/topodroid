@@ -75,7 +75,7 @@ class Scanline
     ++pos; // skip quote character
     int next_pos = nextQuote( quote );
     String ret = (pos == next_pos )? "" : val.substring(pos, next_pos );
-    // TDLog.v( "SCANLINE stringValue " + pos + " " + next_pos + " <" + ret + ">" );
+    // TDLog.v( "ScanLine stringValue " + pos + " " + next_pos + " <" + ret + ">" );
     pos = (next_pos < len )? next_pos + 1 : len;
     skipCommaAndSpaces( );
     return ret;
@@ -87,7 +87,7 @@ class Scanline
   long longValue( long ret )
   {
     int next_pos = nextCommaOrSpace( );
-    // TDLog.v( "SCANLINE longValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
+    // TDLog.v( "ScanLine longValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
     if ( pos < next_pos ) {
       String toParse = val.substring( pos, next_pos ); // N.B. next_pos >= pos --> toParse != null
       if ( ! toParse.equals("\"null\"") ) {

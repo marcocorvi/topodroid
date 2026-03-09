@@ -67,7 +67,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id );
-    // TDLog.v( "DBlock Adapter cstr");
+    TDLog.v( "DBlock Adapter cstr. Items " + items.size() );
     // mContext = ctx;
     mParent  = parent;
     // mItems   = items;

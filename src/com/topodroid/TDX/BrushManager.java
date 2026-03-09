@@ -341,6 +341,8 @@ public class BrushManager
   public static final Paint paintSplayBacksight = makePaint( TDColor.SPLAY_BACKSIGHT, WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint paintSplayGeneric   = makePaint( TDColor.SPLAY_GENERIC,   WIDTH_CURRENT, Paint.Style.STROKE);
 
+  public static final Paint paintScanShot     = makePaint( TDColor.SCAN_SHOT,   WIDTH_CURRENT, Paint.Style.STROKE);
+
   public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);

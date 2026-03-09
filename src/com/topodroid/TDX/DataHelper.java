@@ -1688,6 +1688,28 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
+  void updateScanBlockName(  long id, long sid, String old_st, String new_st )
+  {
+    if ( myDB == null ) return;
+    long id0 = id;
+    Cursor cursor = myDB.rawQuery( qScanShots, new String[] { Long.toString( sid ), Long.toString( id ), old_st } );
+    if (cursor.moveToFirst()) {
+      do { 
+        if ( cursor.getLong( 0 ) != id ) break;
+        ++id;
+      } while (cursor.moveToNext());
+     
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    for ( ; id0<id; ++id0 ) {
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter( sw );
+      pw.format( "UPDATE shots SET fStation=%s WHERE surveyId=%d AND id=%d AND fStation=%s AND leg=6", new_st, sid, id0, old_st );
+      // TDLog.v("updated id " + id0 );
+      doExecShotSQL( id0, sw );
+    }
+  }
+
   int updateShotNameAndData( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment )
   {
     if ( myDB == null ) return -1;
@@ -2990,6 +3012,7 @@ public class DataHelper extends DataSetObservable
 
   private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
   private static final String qShotsByStations = "select id, distance, bearing, clino from shots where surveyId=? AND status=0 AND fStation=? AND tStation=? ";
+  private static final String qScanShots = "select id from shots where surveyId=? AND id>=? AND status=0 AND fStation=? AND leg=6 ORDER BY id ";
 
   // FIXME TODO these can be improved with a JOIN select on sensors and shots
   private static final String qSensors1     = "select id, shotId, title, date, comment, type, value, reftype from sensors where surveyId=? AND status=? ";

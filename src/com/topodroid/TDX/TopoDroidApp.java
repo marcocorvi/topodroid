@@ -2002,6 +2002,16 @@ public class TopoDroidApp extends Application
 
   // static long trobotmillis = 0L; // TROBOT_MILLIS
 
+  /** assign the station to the data block, either the current station of the last station
+   * @param blk  data block
+   */
+  void assignScanBlockStation( DBlock blk )
+  {
+    blk.mFrom = StationName.getCurrentOrLastStation( mData, TDInstance.sid );
+    blk.mTo = "";
+    mData.updateShotName( blk.mId, TDInstance.sid, blk.mFrom, blk.mTo );
+  }
+
   /** called also by ShotWindow::updateBlockList
    * this re-assign stations to shots with station(s) already set
    * the list of stations is ordered by compare

@@ -277,6 +277,10 @@ public class DrawingSplayPath extends DrawingPath
       }
       return true;
     }
+    if ( blk.isScan() ) {
+      mPaint = BrushManager.paintScanShot;
+      return true;
+    }
       
     // if ( blk.isHighlighted() ) {
     //   mPaint = BrushManager.highlightPaint;

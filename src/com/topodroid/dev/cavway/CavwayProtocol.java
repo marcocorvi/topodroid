@@ -146,6 +146,8 @@ public class CavwayProtocol extends TopoDroidProtocol
 
     byte flag = packetdata[1];   // leg, err flag
     mCavwayFlag = ( (flag >> 1) & 0x7 ) ^ 0x7; // cavway flag: this uses the complementary values than in the device
+    // boolean is_scan = (packetdata[1] & (0x01<<6)) == 0;
+    // if ( is_scan ) mCavwayFlag != (1<<4);
     if ( mCavwayFlag != 0 ) TDLog.v("cavway data flag " + mCavwayFlag ); // DEBUG check the flag values
 
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
@@ -280,7 +282,9 @@ public class CavwayProtocol extends TopoDroidProtocol
       TDLog.e( TAG + "handle packet: 0-length data");
       return PACKET_NONE;
     }
-    if ( LOG ) TDLog.v( TAG + " packet byte[0] " + String.format("%02x", databuf[0] ) );
+    if ( LOG ) TDLog.v( TAG + " packet byte[0] " + String.format("%02x", databuf[0] ) + " " + String.format("%02x", databuf[1] ) );
+    // scan mode   01 bf 1011.1111
+    // normal mode 01 ff 1111.1111
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length ==  CavwayData.SIZE  ) { // shot / calib data
       if ( mComm.isDownloading() ) {
         mTime = TDUtil.getSeconds(); // not necesary because mTime is set by handleCavwayPacket
@@ -295,10 +299,11 @@ public class CavwayProtocol extends TopoDroidProtocol
               // mComm.sendCommand( packet.getData(1) | 0x55);
               mComm.sendCommand(mPacketBytes[1] | 0x55);
               if ( res == DataType.PACKET_DATA ) {
-                mComm.handleCavwayPacket(res, mLister, 0, mComment);
+                boolean is_scan = (mPacketBytes[1] & 0x40) == 0;
+                mComm.handleCavwayPacket(res, mLister, 0, mComment, is_scan );
                 return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
               } else if (  res == DataType.PACKET_G ) {
-                mComm.handleCavwayPacket(res, mLister, 0, mComment);
+                mComm.handleCavwayPacket(res, mLister, 0, mComment, false );
                 return PACKET_CALIB_DATA; 
               } else {
                 return PACKET_ERROR;
