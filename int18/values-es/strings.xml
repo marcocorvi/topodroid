@@ -1340,6 +1340,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
     <string name="title_search">Búsqueda de estación/toma</string>
     <!-- TODO string name="title_stations">Stations</string -->
     <string name="title_plot_search">Búsqueda de estaciones</string>
@@ -1671,8 +1672,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   
   <string name="pref_second_distox_title">Topografía con 2 DistoX</string>
   <string name="pref_second_distox_summary">Detectar con 2 DistoX</string>
-  <!-- UNUSED string name="pref_auto_pair_title">Emparejamiento automático</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">Dispositivo emparejado</string -->
+  <string name="pref_auto_pair_title">Emparejamiento automático</string>
+  <string name="pref_auto_pair_summary">Dispositivo emparejado</string>
   <string name="pref_head_tail_title">Número de datos nuevos</string>
   <string name="pref_head_tail_summary">Obtener el número de datos antes de descargarlos</string>
   <string name="pref_socket_delay_title">Retardo en la conexión</string>

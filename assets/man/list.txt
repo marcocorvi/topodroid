@@ -80,6 +80,7 @@ page_displaymode.htm
 manual07.htm
 page_shot_edit1.htm
 page_multishot.htm
+page_scan_shot.htm
 page_reduction_errors.htm
 page_undelete.htm
 page_photo_list.htm

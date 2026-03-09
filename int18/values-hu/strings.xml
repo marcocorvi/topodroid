@@ -1338,6 +1338,7 @@
     <!-- UNUSED string name="title_contour">Körvonal</string -->
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
     <string name="title_search">Pont/Mérés keresés</string>
 	 <string name="title_stations">Pontok</string>
     <string name="title_plot_search">Alappont keresés</string>
@@ -1685,8 +1686,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">Újrakapcsolódás, ha a kapcsolat megszakad</string -->
   <string name="pref_second_distox_title">Két műszeres mérés</string>
   <string name="pref_second_distox_summary">Mérés két műszerrel</string>
-  <!-- UNUSED string name="pref_auto_pair_title">Atomatikus párosítás</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string -->
+  <string name="pref_auto_pair_title">Atomatikus párosítás</string>
+  <string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string>
   <string name="pref_head_tail_title">Új adatok száma</string>
   <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
   <string name="pref_socket_delay_title">Késleltetés</string>

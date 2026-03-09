@@ -1330,6 +1330,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
     <string name="title_search">Ricerca caposaldi/battute</string>
     <string name="title_stations">Capisaldi</string>
     <string name="title_plot_search">Ricerca caposaldo</string>
@@ -1674,8 +1675,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string -->
   <string name="pref_second_distox_title">Rilievo con 2 DistoX</string>
   <string name="pref_second_distox_summary">Rilevare con 2 DistoX</string>
-  <!-- UNUSED string name="pref_auto_pair_title">Associazione automatica</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">Associazione a DistoX dopo ricerca dispositivi</string -->
+  <string name="pref_auto_pair_title">Associazione automatica</string>
+  <string name="pref_auto_pair_summary">Associazione a DistoX dopo ricerca dispositivi</string>
   <string name="pref_head_tail_title">Numero di nuovi dati</string>
   <string name="pref_head_tail_summary">Ottieni il numero di dati prima di scaricarli</string>
   <string name="pref_socket_delay_title">Ritardo di connessione</string>

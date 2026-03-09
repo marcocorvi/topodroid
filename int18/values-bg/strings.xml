@@ -1336,6 +1336,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
     <string name="title_search">Търси репер/отсечка</string>
     <string name="title_stations">Репери</string>
     <string name="title_plot_search">Търсене на репер</string>
@@ -1671,8 +1672,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string -->
   <string name="pref_second_distox_title">Картиране с две DistoX</string>
   <string name="pref_second_distox_summary">Картиране с две устройства DistoX</string>
-  <!-- UNUSED string name="pref_auto_pair_title">Автоматично сдвояване</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">Сдвояване с устройството след сканиране</string -->
+  <string name="pref_auto_pair_title">Автоматично сдвояване</string>
+  <string name="pref_auto_pair_summary">Сдвояване с устройството след сканиране</string>
   <string name="pref_head_tail_title">Обем нови данни</string>
   <string name="pref_head_tail_summary">Виж обема на новите данните преди изтегляне</string>
   <string name="pref_socket_delay_title">Изчакване на свързването</string>

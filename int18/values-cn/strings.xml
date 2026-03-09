@@ -1336,6 +1336,7 @@
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
     <string name="title_search">站点/主线 查找</string>
     <string name="title_stations">站点</string>
     <string name="title_plot_search">测站搜索</string>
@@ -1682,8 +1683,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string -->
   <string name="pref_second_distox_title">双DistoX测量</string>
   <string name="pref_second_distox_summary">用两部DistoX进行测量</string>
-  <!-- UNUSED string name="pref_auto_pair_title">自动配对</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">扫描后与设备配对</string -->
+  <string name="pref_auto_pair_title">自动配对</string>
+  <string name="pref_auto_pair_summary">扫描后与设备配对</string>
   <string name="pref_head_tail_title">新数据数量</string>
   <string name="pref_head_tail_summary">在下载新数据之前获取它们的数量</string>
   <string name="pref_socket_delay_title">连接延时</string>

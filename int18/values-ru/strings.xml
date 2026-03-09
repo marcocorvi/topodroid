@@ -1331,6 +1331,7 @@
     <!-- UNUSED string name="title_contour">Контур</string -->
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
     <string name="title_search">Поиск пикетов/замеров</string>
     <string name="title_stations">Пикеты</string>
     <string name="title_plot_search">Поиск пикета</string>
@@ -1676,8 +1677,8 @@
   <!-- UNUSED string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string -->
   <string name="pref_second_distox_title">Съёмка двумя DistoX</string>
   <string name="pref_second_distox_summary">Топосъёмка с одновременным использованием двух DistoX</string>
-  <!-- UNUSED string name="pref_auto_pair_title">Автоматическое сопряжение</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">Автоматическое сопряжение устройства DistoX после сканирования</string -->
+  <string name="pref_auto_pair_title">Автоматическое сопряжение</string>
+  <string name="pref_auto_pair_summary">Автоматическое сопряжение устройства DistoX после сканирования</string>
   <string name="pref_head_tail_title">Кол-во новых замеров</string>
   <string name="pref_head_tail_summary">Выяснить кол-во новых измерений перед их скачиванием</string>
   <string name="pref_socket_delay_title">Задержка подключения</string>

@@ -1248,6 +1248,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="title_contour">Contorno</string -->
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
+    <!-- TODO string name="title_scan_shot">Scan shots</string -->
   <string name="title_search">Pesquisa bases e medidas</string>
   <string name="title_stations">Bases</string>
   <string name="title_plot_search">Busca por base</string>
@@ -1572,8 +1573,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string -->
   <string name="pref_second_distox_title">2 DistoX</string>
   <string name="pref_second_distox_summary">Topografando com duas DistoX simultaneamente</string>
-  <!-- UNUSED string name="pref_auto_pair_title">Pareamento automático</string -->
-  <!-- UNUSED string name="pref_auto_pair_summary">Parear automaticamente após a busca com os novos dispositivos encontrados</string -->
+  <string name="pref_auto_pair_title">Pareamento automático</string>
+  <string name="pref_auto_pair_summary">Parear automaticamente após a busca com os novos dispositivos encontrados</string>
   <string name="pref_head_tail_title">Obter qt dados novos</string>
   <string name="pref_head_tail_summary">Obter a quantidade de novos dados antes de baixá-los</string>
   <string name="pref_socket_delay_title">Atraso conexão</string>
