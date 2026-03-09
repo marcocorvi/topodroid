@@ -1321,7 +1321,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="title_gemini">Въведи твоя AI API ключ</string>
     <string name="title_ai_dialog">AI помощник</string>
-    <string name="title_ai_dialog_pref">Pомощ за конфигурацияna AI</string -->
+    <string name="title_ai_dialog_pref">Pомощ за конфигурацияna AI</string>
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
