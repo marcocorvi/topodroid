@@ -1285,7 +1285,7 @@ public class DrawingWindow extends ItemDrawer
     return dpath;
   }
 
-  /** used for splays in x-sections
+  /** used for splays in XSections
    * the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
    *     therefore coloring the splays of those blocks does not affect the X-Section splay coloring
    * @param blk    data block
@@ -1305,22 +1305,26 @@ public class DrawingWindow extends ItemDrawer
     if ( paint != null ) {
       dpath.setPathPaint( paint );
     } else if ( blue ) {
-      if ( blk.isXSplay() ) {
+      if ( blk.isScan() ) {
+        dpath.setPathPaint( BrushManager.paintScanShot );    // SCAN
+      } else if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
       } else if ( angle > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXVdot );   // MID_BLUE dashed-4  -- -- -- --
+        dpath.setPathPaint( BrushManager.paintSplayXVdot );   // MID_BLUE dotted-4  -- -- -- --
       } else if ( angle < -TDSetting.mSectionSplay ) {
         dpath.setPathPaint( BrushManager.paintSplayXVdash );  // MID_BLUE dashed-3  --- --- ---
       } else {
         dpath.setPathPaint( BrushManager.paintSplayXViewed ); // MID_BLUE
       }
     } else {
-      if ( blk.isXSplay() ) {
+      if ( blk.isScan() ) {
+        dpath.setPathPaint( BrushManager.paintScanShot );    // SCAN
+      } else if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
       } else if ( angle > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXBdot );   // LIGHT_BLUE dashed-4
+        dpath.setPathPaint( BrushManager.paintSplayXBdot );   // LIGHT_BLUE dotted-4 -- -- -- --
       } else if ( angle < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXBdash );  // LIGHT_BLUE dashed-3
+        dpath.setPathPaint( BrushManager.paintSplayXBdash );  // LIGHT_BLUE dashed-3 --- --- ---
       } else {
         dpath.setPathPaint( BrushManager.paintSplayXB );      // LIGHT_BLUE
       }
@@ -1787,12 +1791,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** compute the plot references
+  /** compute the plot references - only for plan and profile views
    * @param num     data reduction
    * @param type    plot type
    * @param name    plot name
    * @param zoom    zoom factor
-   // * @param can_toast whether the method can toast
+   * @param can_toast whether the method can toast
    * @note this is called only for PLAN / PROFILE
    */
   private boolean computeReferences( TDNum num, int type, String name,
@@ -3416,7 +3420,7 @@ public class DrawingWindow extends ItemDrawer
   //   mDrawingSurface.addDrawingPath( path );
   // }
 
-  /** make the reference for a leg/at-station xsection
+  /** make the reference for a leg/at-station XSection
    * @param list   list of shots of the section
    * @param tt     abscissa of the leg intercept
    * @note called by doRestart, doStart, doRecover
@@ -7012,7 +7016,7 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     } 
 
-    /** set the plot as of type 2
+    /** set the plot as of type 2 (profile)
      * @param params   whether to update XY-zoom values by the plot
      * @param compute ...
      */
@@ -7040,7 +7044,7 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     } 
 
-    /** set the plot as of type 2
+    /** set the plot as of type 1 (plan)
      * @param params   whether to update XY-zoom values by the plot
      * @param compute ...
      * called by setPlotType, switchPlotType and doRecover
