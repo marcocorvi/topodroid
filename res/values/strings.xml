@@ -871,6 +871,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="display_refresh">Refreshed display</string>
     <string name="plan_view" copyable="fr">plan</string>
     <string name="profile_view">profile</string>
+    <string name="xsection_view">x-section</string>
 
     <string name="distox_err_ok" copyable="all">OK</string>
     <string name="distox_err_headtail">Failed DistoX memory-read</string>

@@ -739,6 +739,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           b.mClino   * TDSetting.mUnitAngle,
           b.toNote() ) );
       }
+      if ( b.isXScan() ) { tvLength.append( " X" ); }
+      else if ( b.isHScan() ) { tvLength.append( " H" ); }
+      else if ( b.isVScan() ) { tvLength.append( " V" ); }
     }
 
     /** fill the text-views with the data of a block

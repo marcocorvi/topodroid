@@ -44,6 +44,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.CheckBox;;
 
 import android.view.View;
 // import android.graphics.drawable.BitmapDrawable;
@@ -64,8 +65,11 @@ class ScanShotEditDialog extends MyDialog
   // private EditText mETto;
   // private EditText mETcomment;
   
-  private Button   mButtonOK;
-  private Button   mButtonBack;
+  private Button mButtonOK;
+  private Button mButtonBack;
+  private CheckBox mRBplan;
+  private CheckBox mRBprofile;
+  private CheckBox mRBxsection;
 
   private String shot_from;
   // private String shot_to;
@@ -153,6 +157,25 @@ class ScanShotEditDialog extends MyDialog
     mButtonOK.setOnClickListener( this );
     mButtonBack.setOnClickListener( this );
 
+    mRBplan     = (CheckBox)findViewById( R.id.btn_plan );
+    mRBprofile  = (CheckBox)findViewById( R.id.btn_profile );
+    mRBxsection = (CheckBox)findViewById( R.id.btn_xsection );
+    mRBplan.setOnClickListener( this );
+    mRBprofile.setOnClickListener( this );
+    mRBxsection.setOnClickListener( this );
+
+    switch ( mBlk.getBlockType() ) {
+      case DBlock.BLOCK_XSCAN: 
+        mRBxsection.setChecked( true );
+        break;
+      case DBlock.BLOCK_HSCAN:
+        mRBplan.setChecked( true );
+        break;
+      case DBlock.BLOCK_VSCAN:
+        mRBprofile.setChecked( true );
+        break;
+    }
+
     mParent.mOnOpenDialog = false;
   }
 
@@ -165,7 +188,13 @@ class ScanShotEditDialog extends MyDialog
       mETfrom.setError( resString( R.string.bad_station_name ) );
       return false;
     }
-    if ( ! shot_from.equals( mBlk.mFrom ) ) mParent.updateScanBlock( mBlk, shot_from, mPos );
+    int splay_class = DBlock.BLOCK_SCAN;
+    if ( mRBplan.isChecked() ) { splay_class = DBlock.BLOCK_HSCAN; }
+    else if ( mRBprofile.isChecked() ) { splay_class = DBlock.BLOCK_VSCAN; }
+    else if ( mRBxsection.isChecked() ) { splay_class = DBlock.BLOCK_XSCAN; }
+    
+    // TDLog.v(" FROM " + shot_from + " " + mBlk.mFrom + " Block type " + splay_class + " " + mBlk.mBlockType );
+    if ( ! shot_from.equals( mBlk.mFrom ) || splay_class != mBlk.mBlockType ) mParent.updateScanBlock( mBlk, shot_from, mPos, splay_class );
     return true;
   }
 
@@ -194,8 +223,19 @@ class ScanShotEditDialog extends MyDialog
     // if ( b == mButtonBack ) {
     //   CutNPaste.dismissPopup();
     // }
-
-    if ( b == mButtonOK ) { // OK and SAVE close the keyboard
+    if ( b == mRBplan ) {
+      mRBprofile.setChecked( false );
+      mRBxsection.setChecked( false );
+      return;
+    } else if ( b == mRBprofile ) {
+      mRBplan.setChecked( false );
+      mRBxsection.setChecked( false );
+      return;
+    } else if ( b == mRBxsection ) {
+      mRBplan.setChecked( false );
+      mRBprofile.setChecked( false );
+      return;
+    } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
       // if ( sameString( mETfrom, mETto ) ) {
       //   mETto.setError( resString( R.string.equal_station_names ) );
       //   return;

@@ -64,6 +64,31 @@
       android:importantForAutofill="no"
       / -->
   </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/margintiny"
+    >
+    <CheckBox android:id="@+id/btn_plan"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/margintiny"
+      android:text="@string/plan_view"
+    />
+    <CheckBox android:id="@+id/btn_profile"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/margintiny"
+      android:text="@string/profile_view"
+    />
+    <CheckBox android:id="@+id/btn_xsection"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:text="@string/xsection_view"
+    />
+  </LinearLayout>
    					  
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent" 

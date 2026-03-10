@@ -40,7 +40,6 @@ import android.view.View;
 
 // import android.app.Dialog;
 import android.os.Bundle;
-// import android.widget.RadioButton;
 
 import android.text.method.KeyListener;
 import android.text.InputType;
@@ -80,9 +79,9 @@ class ShotEditDialog extends MyDialog
   private TextView mTVextra;    // Magn Acc Dip
   private TextView mTVshotTime;
 
-  private EditText mETfrom;
+  private EditText mETfrom; // stations
   private EditText mETto;
-  private EditText mETcomment;
+  private EditText mETcomment; // comment
   
   private MyCheckBox mRBdup   = null;
   private MyCheckBox mRBsurf  = null;
@@ -109,7 +108,7 @@ class ShotEditDialog extends MyDialog
   private Button   mButtonMore;
   private Button   mButtonBack;
 
-  private Button   mButtonPrev;
+  private Button   mButtonPrev; // navigation buttons
   private Button   mButtonNext;
   private Button mButtonReverse;
 

@@ -21,6 +21,9 @@ public class LegType
   public static final int HSPLAY  = 4; // horizontal splay
   public static final int VSPLAY  = 5; // vertical splay
   public static final int SCAN    = 6; // scan splay
+  public static final int XSCAN   = 7; // scan splay
+  public static final int HSCAN   = 8; // scan splay
+  public static final int VSCAN   = 9; // scan splay
   // public static final int BLUNDER = 7; // blunder leg
 
   /** @return the next splay type in cycle fashion

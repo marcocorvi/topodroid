@@ -277,11 +277,6 @@ public class DrawingSplayPath extends DrawingPath
       }
       return true;
     }
-    if ( blk.isScan() ) {
-      mPaint = BrushManager.paintScanShot;
-      return true;
-    }
-      
     // if ( blk.isHighlighted() ) {
     //   mPaint = BrushManager.highlightPaint;
     //   return;
@@ -304,6 +299,11 @@ public class DrawingSplayPath extends DrawingPath
         return true;
       } 
     }
+    if ( blk.isScan() ) {
+      mPaint = BrushManager.paintScanShot;
+      return true;
+    }
+      
     mPaint = BrushManager.paintSplayXB; // BLUE
     // TDLog.v("paint: none is false");
     return false;

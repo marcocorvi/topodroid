@@ -1688,11 +1688,19 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  void updateScanBlockName(  long id, long sid, String old_st, String new_st )
+  /**
+   * @param id      id of first block of the scan set
+   * @param sid     survey ID
+   * @param old_st  old station name
+   * @param new_st  new station name
+   * @param old_leg old leg type
+   * @param new_leg new leg type
+   */
+  void updateScanBlockName(  long id, long sid, String old_st, String new_st, long old_leg, long new_leg )
   {
     if ( myDB == null ) return;
     long id0 = id;
-    Cursor cursor = myDB.rawQuery( qScanShots, new String[] { Long.toString( sid ), Long.toString( id ), old_st } );
+    Cursor cursor = myDB.rawQuery( qScanShots, new String[] { Long.toString( sid ), Long.toString( id ), old_st, Long.toString(old_leg) } );
     if (cursor.moveToFirst()) {
       do { 
         if ( cursor.getLong( 0 ) != id ) break;
@@ -1701,13 +1709,12 @@ public class DataHelper extends DataSetObservable
      
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    for ( ; id0<id; ++id0 ) {
-      StringWriter sw = new StringWriter();
-      PrintWriter pw = new PrintWriter( sw );
-      pw.format( "UPDATE shots SET fStation=%s WHERE surveyId=%d AND id=%d AND fStation=%s AND leg=6", new_st, sid, id0, old_st );
-      // TDLog.v("updated id " + id0 );
-      doExecShotSQL( id0, sw );
-    }
+    // TDLog.v("Update scan from " + id0 + " to " + id + " station " + new_st + " leg type " + new_leg );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( "UPDATE shots SET fStation=\"%s\", leg=%d WHERE surveyId=%d AND id>=%d AND id<%d", new_st, new_leg, sid, id0, id );
+    // TDLog.v("SQL exec " + sw.toString() );
+    doExecShotSQL( id0, sw );
   }
 
   int updateShotNameAndData( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment )
@@ -3012,7 +3019,7 @@ public class DataHelper extends DataSetObservable
 
   private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
   private static final String qShotsByStations = "select id, distance, bearing, clino from shots where surveyId=? AND status=0 AND fStation=? AND tStation=? ";
-  private static final String qScanShots = "select id from shots where surveyId=? AND id>=? AND status=0 AND fStation=? AND leg=6 ORDER BY id ";
+  private static final String qScanShots = "select id from shots where surveyId=? AND id>=? AND status=0 AND fStation=? AND leg=? ORDER BY id ";
 
   // FIXME TODO these can be improved with a JOIN select on sensors and shots
   private static final String qSensors1     = "select id, shotId, title, date, comment, type, value, reftype from sensors where surveyId=? AND status=? ";

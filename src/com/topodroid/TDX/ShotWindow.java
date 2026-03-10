@@ -543,6 +543,7 @@ public class ShotWindow extends Activity
     boolean add_block = mDataAdapter.addDataBlock( blk ); // avoid double block-adding
     if ( add_block ) {
       boolean scan = blk.isScan();
+      // TDLog.v(" update block list. Id: " + blk_id + " type " + blk.getBlockType() + " is scan: " + scan );
       boolean ret = false;
       if ( ! scan ) { // normal data
         // 2025-11-04 moved to updateBlockAMDList for X2 and XBLE
@@ -630,6 +631,7 @@ public class ShotWindow extends Activity
       DBlock cur = item;
       // int t = cur.type();
       // TDLog.Log( TDLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+      // TDLog.v(" update block list. Id: " + cur.mId + " type " + cur.getBlockType() + " is scan: " + cur.isScan() );
       if ( cur.isScan() ) {
         if ( prev_is_scan ) { // skip
           continue;
@@ -2439,8 +2441,11 @@ public class ShotWindow extends Activity
   {
     TDLog.v("update shot " + b.mId );
     if ( b.isScan() ) {
-      mApp_mData.updateScanBlockName( b.mId, TDInstance.sid, b.mFrom, from );
+      TDLog.e("THIS SHOULD NOT HAPPEN");
+      long leg_type = b.getLegType();
+      mApp_mData.updateScanBlockName( b.mId, TDInstance.sid, b.mFrom, from, leg_type, leg_type );
       b.mFrom = from;
+      // b.mBlockType remains unchanged
     } else {
       mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to );
       b.setBlockName( from, to, b.isBackLeg() ); 
@@ -3481,10 +3486,19 @@ public class ShotWindow extends Activity
   //   TDLog.v("do station click " );
   // }
 
-  void updateScanBlock( DBlock blk, String from, int pos )
+  /** 
+   * @param blk    first scan block
+   * @param from   new station name
+   * @param pos    position in the list (unused)
+   * @param block_type block_type (BLOCK_SCAN: none, BLOCK_HSCAN: plan, BLOCK_VSCAN2: profile, BLOCK_XSCAN3: xsection)
+   */
+  void updateScanBlock( DBlock blk, String from, int pos, int block_type )
   {
-    mApp_mData.updateScanBlockName( blk.mId, TDInstance.sid, blk.mFrom, from );
+    long leg_type = DBlock.getLegType( block_type );
+    // TDLog.v("update scan set from " + blk.mId + " block type " + block_type + " leg type " + leg_type );
+    mApp_mData.updateScanBlockName( blk.mId, TDInstance.sid, blk.mFrom, from, blk.getLegType(), leg_type );
     blk.mFrom = from;
+    blk.resetBlockType( block_type );
     // updateShotList( mMyBlocks, mMyPhotos ); // this is overshooting: should update only the scan shot
     mDataAdapter.updateBlockView( blk.mId );
   }
