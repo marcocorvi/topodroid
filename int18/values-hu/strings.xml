@@ -1338,7 +1338,7 @@
     <!-- UNUSED string name="title_contour">Körvonal</string -->
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
-    <string name="title_scan_shot">Mérések keresése</string>
+    <string name="title_scan_shot">Szkennelés</string>
     <string name="title_search">Pont/Mérés keresés</string>
 	 <string name="title_stations">Pontok</string>
     <string name="title_plot_search">Alappont keresés</string>
