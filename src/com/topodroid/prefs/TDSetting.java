@@ -3463,7 +3463,7 @@ public class TDSetting
         for ( int k = 0; k < n2; ++k ) {
           if ( TDPrefKey.repeatedKey( j, k ) ) continue;
           TDPrefKey kay = TDPrefKey.getKey( j, k );
-          if ( kay.key.equals("DISTOX_GEMINI") ) continue; 
+          if ( kay.key.equals("DISTOX_GEMINI") ) continue;  // really make sure API_key not exported
           if ( ( flag & (1<<kay.group) ) != 0 ) {
             String val;
             boolean bval;
@@ -3506,6 +3506,7 @@ public class TDSetting
 I DISTOX_LOCALE 
 I DISTOX_SURVEY_STATION 1
 F DISTOX_TOOLBAR_SIZE 5
+I DISTOX_TOOLBAR_UPDATE 0
 B DISTOX_PLOT_CACHE true
 F DISTOX_ALGO_MIN_ALPHA 0.05
 F DISTOX_ALGO_MIN_BETA 3.0
@@ -3928,6 +3929,14 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_SYMBOL_SIZE":
               fsize = Float.parseFloat( value );
               if ( fsize > 0 ) setSymbolSize( fsize ); setPreference( editor, kay, mSymbolSize );
+              break;
+            case "DISTOX_TOOLBAR_SIZE":
+              fsize = Float.parseFloat( value );
+              if ( fsize > 0 ) mItemButtonSize = fsize; setPreference( editor, kay, mItemButtonSize );
+              break;
+            case "DISTOX_TOOLBAR_UPDATE":
+              size = Integer.parseInt( value );
+              if ( size >= 0 && size <= 2) mToolbarUpdate = size; setPreference( editor, kay, mToolbarUpdate );
               break;
             case "DISTOX_MKEYBOARD":
               mKeyboard = Boolean.parseBoolean( value ); setPreference( editor, kay, mKeyboard );

@@ -663,13 +663,12 @@ class TDPrefKey
    * "rock" reducing lines: maximal angle
    * Bezier interpolator param:
    * Bezier interpolator param:
-   *                                                       
-   *                                                       
-   *                                                       
+   * 
    * whether to show line-snap action
    * whether to show line- smooth/straighten action
    * whether to show line-straighten (more "rocky") button
    * enable path multiselection
+   * number of points to cut from the line end
    */ 
   static TDPrefKey[] mGeekLine = {
     new TDPrefKey( T, FLT,  DR, "DISTOX_REDUCE_ANGLE",     R.string.pref_reduce_angle_title,    R.string.pref_reduce_angle_summary,     "45" ),
@@ -736,7 +735,7 @@ class TDPrefKey
    * 0 no, 1 by class, 2 by instance
    *                                                            
    * whether to allow slanted xsections in clino degrees 5 by 5
-   * number of points to cut from the line end
+   * how to update the bottom toolbar with the selected symbol: 0 replace oldest, 1 put in front, 2 drop oldest and put in front
    */ 
   static TDPrefKey[] mGeekPlot = {
     new TDPrefKey( T, BOOL, UI,  "DISTOX_PLOT_SHIFT",       R.string.pref_plot_shift_title,        R.string.pref_plot_shift_summary,        FALSE ),
@@ -854,7 +853,6 @@ class TDPrefKey
   static final int IDX_DEBUG = 16; // index of DISTOX_WITH_DEBUG
 
   /** additional import settings
-   * 
    * 
    * automatically add xsections on export/save
    * whether to add stations to therion th2 exports
