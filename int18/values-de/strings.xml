@@ -1631,6 +1631,8 @@
     <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
     <string name="pref_symbol_size_title">Symbolgrösse</string>
     <string name="pref_symbol_size_summary">Größe der Symbole in der Symbolleiste unten</string>
+  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
+  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
     <string name="pref_closeness_title">Auswählradius</string>
     <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
     <string name="pref_eraseness_title">Löschradius</string>

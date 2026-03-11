@@ -83,6 +83,8 @@ public class TDSetting
   private static String defaultButtonSize = TDString.THREE;
   private static String defaultSymbolSize = "1.8";
 
+  public static int mToolbarUpdate = 0; // how to update toolbars symbols
+
   private static int FLAG_BUTTON = 1;
   private static int FLAG_MENU   = 2;
   private static int FLAG_TEXT   = 4;
@@ -1423,7 +1425,7 @@ public class TDSetting
     mGraphPaperScale = tryInt( prefs,   key[ 9].key,      key[ 9].dflt );  // DISTOX_GRAPH_PAPER_SCALE
     mSlantXSection  = prefs.getBoolean( key[10].key, bool(key[10].dflt) ); // DISTOX_SLANT_XSECTION
     mObliqueMax     = tryInt( prefs,    key[11].key,      key[11].dflt );  // DISTOX_OBLIQUE_PROJECTED
-    mLineEnds       = tryInt( prefs,    key[12].key,      key[12].dflt );  // DISTOX_LINE_ENDS
+    mToolbarUpdate  = tryInt( prefs,    key[12].key,      key[12].dflt );  // DISTOX_TOOLBAR_UPDATE
     // mZoomLowerBound = tryFloat( prefs, key[13].key,      key[13].dflt );  // DISTOX_ZOOM_LOWER_BOUND
     // TDLog.v("SETTING load secondary GEEK plot done");
 
@@ -1459,6 +1461,7 @@ public class TDSetting
     mLineCurve     = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) );  // DISTOX_LINE_CURVE
     mLineStraight  = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) );  // DISTOX_LINE_STRAIGHT
     mPathMultiselect=prefs.getBoolean( key[ 9].key, bool(key[ 9].dflt) );  // DISTOX_PATH_MULTISELECT
+    mLineEnds       = tryInt( prefs,   key[10].key,      key[10].dflt );   // DISTOX_LINE_ENDS
     // mCompositeActions = prefs.getBoolean( key[10].key, bool(key[10].dflt) );  // DISTOX_COMPOSITE_ACTIONS
     // TDLog.v("SETTING load secondary GEEK line done");
 
@@ -2123,8 +2126,8 @@ public class TDSetting
       mObliqueMax = tryIntValue( hlp, k, v, key[ 11 ].dflt );
       if ( mObliqueMax < 10 )  { mObliqueMax = 0; ret = Integer.toString( mObliqueMax ); }
       else if ( mObliqueMax > 80 ) { mObliqueMax = 80; ret = Integer.toString( mObliqueMax ); }
-    } else if ( k.equals( key[12 ].key ) ) { // DISTOX_LINE_ENDS
-      mLineEnds = tryIntValue( hlp, k, v, key[12 ].dflt );
+    } else if ( k.equals( key[12 ].key ) ) { // DISTOX_TOOLBAR_UPDATE
+      mToolbarUpdate = tryIntValue( hlp, k, v, key[12 ].dflt );
     // } else if ( k.equals( key[13 ] ) ) {  // DISTOX_ZOOM_LOWER_BOUND
     //   mZoomLowerBound = tryFloatValue( hlp, k, v, key[13] );  // DISTOX_ZOOM_LOWER_BOUND
     //   if ( mZoomLowerBound < 0.0f ) mZoomLowerBound = 0.0f;
@@ -2254,6 +2257,8 @@ public class TDSetting
       mLineStraight = tryBooleanValue(      hlp, k, v, bool(key[8].dflt) );
     } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_PATH_MULTISELECT (bool)
       mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(key[9].dflt) );
+    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_LINE_ENDS
+      mLineEnds = tryIntValue( hlp, k, v, key[10 ].dflt );
     // } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
     //   mCompositeActions = tryBooleanValue(  hlp, k, v, bool(key[10].dflt) );
 

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <!-- TODO string-array name="toolbarUpdate">
+     <item name="oldest">Replace oldest</item>
+     <item name="front">Put at front</item>
+     <item name="front_oldest">At front, drop oldest</item>
+  </string-array -->
+
   <string-array name="teamNames">
      <item name="plain">Texto sin formato</item>
      <item name="separated">Texto separado</item>

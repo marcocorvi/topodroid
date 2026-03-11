@@ -1372,7 +1372,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** select a point symbol
    * @param k       index of selected point-tool in the symbol-library array
-   * @param update_recent ...
+   * @param update_recent whether to update toolbar tools
    */
   @Override
   public void pointSelected( int k, boolean update_recent )

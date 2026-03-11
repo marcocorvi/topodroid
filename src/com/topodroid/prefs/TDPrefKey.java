@@ -681,7 +681,8 @@ class TDPrefKey
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_SNAP",        R.string.pref_linesnap_title,        R.string.pref_linesnap_summary,         FALSE ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_CURVE",       R.string.pref_linecurve_title,       R.string.pref_linecurve_summary,        FALSE ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_STRAIGHT",    R.string.pref_linestraight_title,    R.string.pref_linestraight_summary,     FALSE ),
-    new TDPrefKey( T, BOOL, UI, "DISTOX_PATH_MULTISELECT", R.string.pref_path_multiselect_title,R.string.pref_path_multiselect_summary, FALSE )
+    new TDPrefKey( T, BOOL, UI, "DISTOX_PATH_MULTISELECT", R.string.pref_path_multiselect_title,R.string.pref_path_multiselect_summary, FALSE ),
+    new TDPrefKey( T, LONG, DR, "DISTOX_LINE_ENDS",        R.string.pref_line_ends_title,       R.string.pref_line_ends_summary,        TDString.ZERO )
   };
 
   /** additional data settings
@@ -750,7 +751,7 @@ class TDPrefKey
     new TDPrefKey( T, BTN,  DR,  "DISTOX_GRAPH_PAPER_SCALE",R.string.pref_graph_paper_scale_title, R.string.pref_graph_paper_scale_summary, TDString.ZERO ),
     new TDPrefKey( T, BOOL, XT,  "DISTOX_SLANT_XSECTION",   R.string.pref_slant_xsection_title,    R.string.pref_slant_xsection_summary,    FALSE ),
     new TDPrefKey( T, LONG, XT,  "DISTOX_OBLIQUE_PROJECTED",R.string.pref_oblique_projection_title,R.string.pref_oblique_projection_summary,TDString.ZERO ),
-    new TDPrefKey( T, LONG, DR,  "DISTOX_LINE_ENDS",        R.string.pref_line_ends_title,         R.string.pref_line_ends_summary,         TDString.ZERO )
+    new TDPrefKey( T,       UI,  "DISTOX_TOOLBAR_UPDATE",   R.string.pref_toolbar_update_title,    R.string.pref_toolbar_update_summary,    TDString.ZERO, R.array.toolbarUpdate, R.array.toolbarUpdateValue )
   };
 
   /** additional splay settings

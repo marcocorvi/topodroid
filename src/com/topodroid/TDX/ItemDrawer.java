@@ -132,6 +132,14 @@ abstract class ItemDrawer extends Activity
     }
   }
 
+  // DEBUG
+  // static void printSymbols( Symbol[] symbols, int[] ages )
+  // {
+  //   TDLog.v("Symbols " + symbols[0].getFullThName() + " " + symbols[1].getFullThName() + " " + symbols[2].getFullThName() + " "
+  //                      + symbols[3].getFullThName() + " " + symbols[4].getFullThName() + " " + symbols[5].getFullThName() );
+  //   TDLog.v("Ages " + ages[0] + " " + ages[1] + " " + ages[2] + " " + ages[3] + " " + ages[4] + " " + ages[5] );
+  // }
+
   /** update a set of recent symbols
    * @param symbol    symbol to update
    * @param symbols   set of recent symbols
@@ -140,18 +148,58 @@ abstract class ItemDrawer extends Activity
    */
   static void updateRecent( Symbol symbol, Symbol[] symbols, int[] ages )
   {
+    // printSymbols( symbols, ages );
     if ( symbol == null ) return;
-    int kmin = 0;
-    for ( int k=0; k<NR_RECENT; ++k ) {
-      if ( symbol == symbols[k] ) {
-        updateAge( k, ages );
-        return;
-      } else if ( ages[k] < ages[kmin] ) {
-        kmin = k;
+    if ( TDSetting.mToolbarUpdate == 1 ) { // 1 put new symbol in front
+      int k0 = 0;
+      for ( ; k0 < symbols.length; ++k0 ) {
+        if ( ( symbols[k0] == null ) || ( symbols[k0].getFullThName().equals( symbol.getFullThName() ) ) ) break;
       }
+      if ( k0 == symbols.length ) --k0;
+      for ( int k = k0; k>0; --k ) {
+        symbols[k] = symbols[k-1];
+        ages[k] = ages[k-1];
+      }
+      symbols[0] = symbol;
+      updateAge( 0, ages );
+    } else if ( TDSetting.mToolbarUpdate == 2 ) { // 2 put new symbol in front - drop the oldest
+      int k0=0;
+      for ( ; k0 < symbols.length; ++k0 ) {
+        if ( ( symbols[k0] == null ) || ( symbols[k0].getFullThName().equals( symbol.getFullThName() ) ) ) {
+          for ( int k=k0; k>0; --k) {
+            symbols[k] = symbols[k-1];
+            ages[k] = ages[k-1];
+          }
+          symbols[0] = symbol;
+          updateAge( 0, ages );
+          // TDLog.v("Found at " + k0 + " new ages " + ages[0] + " " + ages[1] + " " + ages[2] + " " + ages[3] + " " + ages[4] + " " + ages[5] );
+          return;
+        }
+      }
+      k0 = 0; // index min age
+      for ( int k=1; k<NR_RECENT; ++k ) {
+        if ( ages[k] <= ages[k0] ) k0 = k;
+      }
+      for ( int k=k0; k>0; --k) {
+        symbols[k] = symbols[k-1];
+        ages[k] = ages[k-1];
+      }
+      symbols[0] = symbol;
+      updateAge( 0, ages );
+      // TDLog.v("Oldest at " + k0 + " new ages " + ages[0] + " " + ages[1] + " " + ages[2] + " " + ages[3] + " " + ages[4] + " " + ages[5] );
+    } else { // 0: replace oldest
+      int kmin = 0;
+      for ( int k=0; k<NR_RECENT; ++k ) {
+        if ( symbol == symbols[k] ) {
+          updateAge( k, ages );
+          return;
+        } else if ( ages[k] < ages[kmin] ) {
+          kmin = k;
+        }
+      }
+      symbols[kmin] = symbol;
+      updateAge( kmin, ages );
     }
-    symbols[kmin] = symbol;
-    updateAge( kmin, ages );
   }
 
   /** update a recent symbol age

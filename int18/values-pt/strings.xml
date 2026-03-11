@@ -1618,6 +1618,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
   <string name="pref_symbol_size_title">Tam símbolo</string>
   <string name="pref_symbol_size_summary">Tamanho dos símbolos na barra inferior</string>
+  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
+  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
   <string name="pref_closeness_title">Raio seleção</string>
   <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
   <string name="pref_eraseness_title">Tam borracha</string>

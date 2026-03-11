@@ -1718,6 +1718,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_text_size_summary">Размер на текста за списъците</string>
   <string name="pref_symbol_size_title">Размер на символа</string>
   <string name="pref_symbol_size_summary">Размер на символите в долната лента</string>
+  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
+  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
   <string name="pref_closeness_title">Радиус на селекция</string>
   <string name="pref_closeness_message">Радиус на селекция на елемент от скицата</string>
   <string name="pref_eraseness_title">Размер на гумата</string>

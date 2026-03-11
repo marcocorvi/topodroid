@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+// import com.topodroid.prefs.TDSetting;
 
 // import java.lang.ref.WeakReference;
 
@@ -93,6 +94,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
         }
       }
       mData.setValue( "recent_lines", lines.toString() );
+      // TDLog.v("Save recent: " + lines.toString() );
     }
 
     if ( ItemDrawer.mRecentArea[0] != null ) { 
@@ -136,6 +138,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
       }
     }
     names = mData.getValue( "recent_lines" );
+    // TDLog.v("Recent lines: " + names );
     if ( names != null ) {
       String[] lines = names.split(" ");
       for ( String line : lines ) {
