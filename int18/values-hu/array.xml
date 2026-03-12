@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="toolbarUpdate">
-     <item name="oldest">Replace oldest</item>
-     <item name="front">Put at front</item>
-     <item name="front_oldest">At front, drop oldest</item>
-  </string-array -->
+  <string-array name="toolbarUpdate">
+     <item name="oldest">Legrégebbi cseréje</item>
+     <item name="front">Előre helyezés</item>
+     <item name="front_oldest">Előre helyezés, legrégebbi eldobása</item>
+  </string-array>
 
   <string-array name="teamNames">
      <item name="plain">Sima szöveg</item>
