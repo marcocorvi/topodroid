@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.common.LegType;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.ArrayList;
@@ -99,10 +100,26 @@ class UndeleteDialog extends MyDialog
     mSid    = sid;
     mDBlockBuffer = buffer;
     if ( TDUtil.isNonEmpty(shots1) ) {
+      DBlock scan_blk = null;
+      long scan_leg_type = -1L;
       mCanRecover = true;
       mShots1 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots1 ) {
-        mShots1.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_SHOT ) );
+        if ( b.isScan() ) {
+          long leg_type = b.getLegType();
+          if ( scan_blk == null || ! ( scan_blk.mFrom.equals( b.mFrom ) && scan_leg_type == leg_type ) ) {
+            mShots1.add( new UndeleteItem( b.mId,
+              String.format(Locale.US, "%d <%s> %.2f %.1f %.1f %s", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino, LegType.getString( b.getLegType() ) ),
+              UndeleteItem.UNDELETE_SHOT ) );
+            scan_blk = b;
+            scan_leg_type = leg_type;
+          }
+        } else {
+          mShots1.add( new UndeleteItem( b.mId,
+            String.format(Locale.US, "%d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ),
+            UndeleteItem.UNDELETE_SHOT ) );
+          scan_blk = null;
+        }
       }
     }
     if ( TDUtil.isNonEmpty(shots2) ) {

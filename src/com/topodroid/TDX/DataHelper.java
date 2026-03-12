@@ -2045,7 +2045,31 @@ public class DataHelper extends DataSetObservable
   {
     // isMutable checked in child
     // if ( myDB == null ) return;
-    updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
+    String station = null;
+    long leg_type = -1;
+    Cursor cursor = myDB.rawQuery( qShotLegType, new String[] { Long.toString( sid ), Long.toString( id ) } );
+    if (cursor.moveToFirst()) {
+      leg_type = cursor.getLong( 0 );
+      station = cursor.getString(1);
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    if ( leg_type >= LegType.SCAN && leg_type <= LegType.VSCAN ) { // this is like updateScanShotStatus
+      long id0 = id;
+      long id1 = getScanSetEnd( id, sid, station, leg_type );
+      if ( id1 == -1L ) {
+        updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
+      } else {
+        // for ( id = id0; id < id1; ++id ) {
+        //   updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
+        // } 
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter( sw );
+        pw.format( "UPDATE shots SET status=%d WHERE surveyId=%d AND id>=%d AND id<%d", TDStatus.NORMAL, sid, id0, id1 );
+        doExecShotSQL( id0, sw );
+      }
+    } else {
+      updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
+    }
   }
   
   /** import the survey shots
@@ -3071,6 +3095,7 @@ public class DataHelper extends DataSetObservable
   private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
   private static final String qShotsByStations = "select id, distance, bearing, clino from shots where surveyId=? AND status=0 AND fStation=? AND tStation=? ";
   private static final String qScanShots = "select id from shots where surveyId=? AND id>=? AND status=0 AND fStation=? AND leg=? ORDER BY id ";
+  private static final String qShotLegType = "select leg, fStation from shots where surveyId=? AND id>=? ";
 
   // FIXME TODO these can be improved with a JOIN select on sensors and shots
   private static final String qSensors1     = "select id, shotId, title, date, comment, type, value, reftype from sensors where surveyId=? AND status=? ";

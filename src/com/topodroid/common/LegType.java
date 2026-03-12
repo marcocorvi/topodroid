@@ -27,15 +27,15 @@ public class LegType
   // public static final int BLUNDER = 7; // blunder leg
 
   // string presentation of the leg types
-  private static final String[] asString = { "n", "a". "X", "b". "H", "V", "s", "sX", "sH", "sV" };
+  private static final String[] asString = { "n", "a", "X", "b", "H", "V", "s", "sX", "sH", "sV" };
 
   /** @return the short string presentation of a leg type
    * @param leg_type  leg-type
    */
-  public static String getString( int leg_type ) 
+  public static String getString( long leg_type ) 
   {
-    if ( leg_type < 0 || leg_type > 9 ) return null;
-    return asString[ leg_type ];
+    if ( leg_type < 0 || leg_type > 9L ) return null;
+    return asString[ (int)leg_type ];
   }
 
   /** @return the next splay type in cycle fashion
