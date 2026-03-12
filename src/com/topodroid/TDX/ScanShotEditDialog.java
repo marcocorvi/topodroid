@@ -67,6 +67,7 @@ class ScanShotEditDialog extends MyDialog
   
   private Button mButtonOK;
   private Button mButtonBack;
+  private Button mButtonDelete;
   private CheckBox mRBplan;
   private CheckBox mRBprofile;
   private CheckBox mRBxsection;
@@ -154,8 +155,10 @@ class ScanShotEditDialog extends MyDialog
 
     mButtonOK = (Button)findViewById( R.id.btn_ok );
     mButtonBack = (Button)findViewById( R.id.btn_back );
+    mButtonDelete = (Button)findViewById( R.id.btn_delete );
     mButtonOK.setOnClickListener( this );
     mButtonBack.setOnClickListener( this );
+    mButtonDelete.setOnClickListener( this );
 
     mRBplan     = (CheckBox)findViewById( R.id.btn_plan );
     mRBprofile  = (CheckBox)findViewById( R.id.btn_profile );
@@ -244,6 +247,8 @@ class ScanShotEditDialog extends MyDialog
         TDLog.e("OK failed to save block");
         return;
       }
+    } else if ( b == mButtonDelete ) {
+      mParent.deleteScanShot( mBlk );
     } 
     dismiss();
     // onBackPressed();

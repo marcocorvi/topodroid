@@ -3503,4 +3503,30 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
+  /** ask to delete a scan set
+   * @param blk   first block of the scan
+   */
+  void deleteScanShot( final DBlock blk )
+  {
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_scan_delete,
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          doDeleteScanShot( blk.mId, blk.mFrom, blk.getLegType() );
+        }
+    } );
+  }
+
+  /** delete a scan set
+   * @param id   ID of the firts block of the scan
+   * @param st   FROM station
+   * @param leg_type leg-type
+   */
+  void doDeleteScanShot( long id, String st, long leg_type )
+  {
+    if ( mApp_mData.updateScanShotStatus( id, TDInstance.sid, st, leg_type, TDStatus.DELETED  ) ) {
+      updateDisplay();
+    }
+  }
+
 }

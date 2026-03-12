@@ -26,6 +26,18 @@ public class LegType
   public static final int VSCAN   = 9; // scan splay
   // public static final int BLUNDER = 7; // blunder leg
 
+  // string presentation of the leg types
+  private static final String[] asString = { "n", "a". "X", "b". "H", "V", "s", "sX", "sH", "sV" };
+
+  /** @return the short string presentation of a leg type
+   * @param leg_type  leg-type
+   */
+  public static String getString( int leg_type ) 
+  {
+    if ( leg_type < 0 || leg_type > 9 ) return null;
+    return asString[ leg_type ];
+  }
+
   /** @return the next splay type in cycle fashion
    * @param type current type
    * @note scan-splay do not enter the cycle
@@ -38,7 +50,12 @@ public class LegType
       case HSPLAY: return VSPLAY;
       case VSPLAY: return NORMAL;
       case SCAN:   return SCAN;   // scan do not cycle
+      case XSCAN:  return XSCAN;
+      case HSCAN:  return HSCAN;
+      case VSCAN:  return VSCAN;
+      // case EXTRA:  return EXTRA; // others are invalied
+      // case BACK:   return BACK;
+      default: return INVALID;
     }
-    return INVALID;
   }
 }

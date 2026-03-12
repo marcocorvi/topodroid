@@ -1621,9 +1621,9 @@ public class DataHelper extends DataSetObservable
   }
 
   /** update the shot distance
-   * @param id   shot ID
-   * @param sid  survey ID
-   * @param d    distance
+   * @param id  shot ID
+   * @param sid survey ID
+   * @param d   distance
    * @note this is when to add an offset to the distance
    */
   void updateShotDistance( long id, long sid, float d )
@@ -1637,10 +1637,10 @@ public class DataHelper extends DataSetObservable
   }
 
   /** update the shot bearing and clino
-   * @param id   shot ID
-   * @param sid  survey ID
-   * @param b    azimuth
-   * @param c    clino
+   * @param id  shot ID
+   * @param sid survey ID
+   * @param b   azimuth
+   * @param c   clino
    * @note this is an update of a manual-shot data
    */
   void updateShotBearingClino( long id, long sid, float b, float c )
@@ -1654,11 +1654,11 @@ public class DataHelper extends DataSetObservable
   }
 
   /** update the shot data distance, bearing, clino
-   * @param id   shot ID
-   * @param sid  survey ID
-   * @param d    distance
-   * @param b    azimuth
-   * @param c    clino
+   * @param id  shot ID
+   * @param sid survey ID
+   * @param d   distance
+   * @param b   azimuth
+   * @param c   clino
    * @note this is an update of a manual-shot data
    */
   void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c )
@@ -1678,6 +1678,13 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
+  /** update shot diving data values
+   * @param id  shot ID
+   * @param sid survey ID
+   * @param p   depth
+   * @param b   bearing
+   * @param d   distance
+   */
   void updateShotDepthBearingDistance( long id, long sid, float p, float b, float d )
   {
     StringWriter sw = new StringWriter();
@@ -1686,6 +1693,29 @@ public class DataHelper extends DataSetObservable
                "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
                d, b, p, sid, id );
     doExecShotSQL( id, sw );
+  }
+
+  /** @return the ID value at the end (one past the last) of a scan set
+   * @param id      id of first block of the scan set
+   * @param sid     survey ID
+   * @param old_st  old station name
+   * @param old_leg old leg type
+   * @note return -1 if old_leg is not a "scan" leg-type
+   */
+  private long getScanSetEnd( long id, long sid, String old_st, long old_leg )
+  {
+    if ( old_leg < LegType.SCAN || old_leg > LegType.VSCAN ) return -1;
+    Cursor cursor = myDB.rawQuery( qScanShots, new String[] { Long.toString( sid ), Long.toString( id ), old_st, Long.toString(old_leg) } );
+    if (cursor.moveToFirst()) {
+      do { 
+        if ( cursor.getLong( 0 ) != id ) break;
+        ++id;
+      } while (cursor.moveToNext());
+    } else {
+      id ++;
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return id;
   }
 
   /**
@@ -1700,23 +1730,44 @@ public class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return;
     long id0 = id;
-    Cursor cursor = myDB.rawQuery( qScanShots, new String[] { Long.toString( sid ), Long.toString( id ), old_st, Long.toString(old_leg) } );
-    if (cursor.moveToFirst()) {
-      do { 
-        if ( cursor.getLong( 0 ) != id ) break;
-        ++id;
-      } while (cursor.moveToNext());
-     
-    }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    long id1 = getScanSetEnd( id, sid, old_st, old_leg );
+    if ( id1 == -1L ) return;
     // TDLog.v("Update scan from " + id0 + " to " + id + " station " + new_st + " leg type " + new_leg );
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( "UPDATE shots SET fStation=\"%s\", leg=%d WHERE surveyId=%d AND id>=%d AND id<%d", new_st, new_leg, sid, id0, id );
+    pw.format( "UPDATE shots SET fStation=\"%s\", leg=%d WHERE surveyId=%d AND id>=%d AND id<%d", new_st, new_leg, sid, id0, id1 );
     // TDLog.v("SQL exec " + sw.toString() );
     doExecShotSQL( id0, sw );
   }
 
+  /** mark as deleted the scan shots of a scan set
+   * @param id      id of first block of the scan set
+   * @param sid     survey ID
+   * @return true if success
+   */ 
+  boolean updateScanShotStatus( long id, long sid, String st, long leg_type, int status )
+  {
+    if ( myDB == null ) return false;
+    long id0 = id;
+    long id1 = getScanSetEnd( id, sid, st, leg_type );
+    if ( id1 == -1L ) return false;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( "UPDATE shots SET status=%d WHERE surveyId=%d AND id>=%d AND id<%d", status, sid, id0, id1 );
+    // TDLog.v("SQL exec " + sw.toString() );
+    return doExecShotSQL( id0, sw );
+  }
+
+  /** update shot name and data
+   * @param id    Block ID
+   * @param sid   survey ID
+   * @param fStation   FROM station
+   * @param tStation   TO station
+   * @param extend     shot extend
+   * @param flag       shot flag
+   * @param leg        shot leg-type
+   * @param comment    shot comment
+   */
   int updateShotNameAndData( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment )
   {
     if ( myDB == null ) return -1;
