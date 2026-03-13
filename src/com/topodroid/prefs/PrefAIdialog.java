@@ -13,6 +13,7 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDFile;
 // import com.topodroid.utils.TDString;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.help.AIdialog;
@@ -118,7 +119,12 @@ public class PrefAIdialog extends AIdialog
     int idx = 0;
     StringBuilder sb = new StringBuilder();
     try {
-      InputStream is = ctx.getAssets().open("ai/llm-settings.txt");
+      InputStream is = null;
+      if ( TDFile.existPrivateFile( null, "llm-settings.txt" ) ) {
+        is = TDFile.getPrivateFileInputStream( null, "llm-settings.txt" );
+      } else {
+        is = ctx.getAssets().open("ai/llm-settings.txt");
+      }
       BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
       String line;
       int cnt = 1;
@@ -171,7 +177,12 @@ public class PrefAIdialog extends AIdialog
     sb.append( ctx.getResources().getString( R.string.ai_settings ) )
       .append( ctx.getResources().getString( R.string.ai_begin_settings ) );
     try {
-      InputStream is = ctx.getAssets().open("ai/settings.txt");
+      InputStream is = null;
+      if ( TDFile.existPrivateFile( null, "settings.txt" ) ) {
+        is = TDFile.getPrivateFileInputStream( null, "settings.txt" );
+      } else {
+        is = ctx.getAssets().open("ai/settings.txt");
+      }
       BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
       String line;
       while ( ( line = br.readLine() ) != null ) {
