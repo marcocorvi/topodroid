@@ -67,9 +67,9 @@ public class TDFeedback
       if ( on_off ) { // turn on led
         mFeedbackOn = true;
         if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_BELL ) {
-          ringTheBell( 200 );
+          ringTheBell( TDSetting.mBeepLength );
         } else if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_VIBRATE ) {
-          vibrate( ctx, 200 );
+          vibrate( ctx, TDSetting.mBeepLength );
         }
       }
     }
@@ -77,15 +77,12 @@ public class TDFeedback
 
   // LEG FEEDBACK ---------------------------------------------
 
-  private static final int TRIPLE_SHOT_BELL_TIME = 200; // ms
-  private static final int TRIPLE_SHOT_VIBRATE_TIME = 200; // ms
-
   public static  void legFeedback( Context ctx ) 
   {
     if ( TDSetting.mTripleShot == 1 ) {
-      TDFeedback.ringTheBell( TRIPLE_SHOT_BELL_TIME );
+      TDFeedback.ringTheBell( TDSetting.mBeepLength );
     } else if ( TDSetting.mTripleShot == 2 ) {
-      TDFeedback.vibrate( ctx, TRIPLE_SHOT_VIBRATE_TIME );
+      TDFeedback.vibrate( ctx, TDSetting.mBeepLength );
     }
   }
 

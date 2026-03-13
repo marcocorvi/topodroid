@@ -1877,6 +1877,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_shot_timer_summary">Seconds to wait before measuring the shot direction</string>
   <string name="pref_beep_volume_title">Timer-beep volume</string>
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
+  <string name="pref_beep_length_title">Timer-beep length</string>
+  <string name="pref_beep_length_summary">Duration of beep [msec]</string>
   <string name="pref_extend_frac_title">Fractional extend</string>
   <string name="pref_extend_frac_summary">"extend" can have a decimal part</string>
   <string name="pref_recent_shot_title">Recent shots</string>

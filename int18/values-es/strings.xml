@@ -1839,6 +1839,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_shot_timer_summary">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_beep_volume_title">Volumen del sonido del contador</string>
   <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
+  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
+  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
   <string name="pref_extend_frac_title">Extensión fraccional</string>
   <string name="pref_extend_frac_summary">La ampliación puede tener una parte decimal</string>
   <string name="pref_recent_shot_title">Tomas recientes</string>

@@ -1836,6 +1836,8 @@
   <string name="pref_shot_timer_summary">Время задержки при измерении направления на пикет [c]</string>
   <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
   <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
+  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
+  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
   <string name="pref_extend_frac_title">Неполная развертка</string>
   <string name="pref_extend_frac_summary">В случае когда значение "развертки" имеет десятичную часть.</string>
   <string name="pref_recent_shot_title">Недавние замеры</string>

@@ -1841,6 +1841,8 @@
   <string name="pref_shot_timer_summary">几秒钟后再测量射击方向</string>
   <string name="pref_beep_volume_title">定时器提示音量</string>
   <string name="pref_beep_volume_summary">定时器提示音量百分比</string>
+  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
+  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
   <string name="pref_extend_frac_title">部分延展</string>
   <string name="pref_extend_frac_summary">"延展" 小数部分</string>
   <string name="pref_recent_shot_title">最近的测线</string>

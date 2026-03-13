@@ -1833,6 +1833,8 @@
   <string name="pref_shot_timer_summary">Secondi di attesa prima della misura</string>
   <string name="pref_beep_volume_title">Volume timer</string>
   <string name="pref_beep_volume_summary">Percento volume beep timer</string>
+  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
+  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
   <string name="pref_extend_frac_title">Extend frazionario</string>
   <string name="pref_extend_frac_summary">Se gli "extend" possono avere decimali</string>
   <string name="pref_recent_shot_title">Tiri recenti</string>

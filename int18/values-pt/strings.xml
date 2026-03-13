@@ -1722,6 +1722,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_shot_timer_summary">Tempo de espera antes de capturar uma medida através de comandos enviados pelo TopoDroidX para a trena</string>
   <string name="pref_beep_volume_title">Volume bip temporizador</string>
   <string name="pref_beep_volume_summary">Nível  de volume do bip do temporizador de captura de medida</string>
+  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
+  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
   <string name="pref_extend_frac_title">Proj vis escala</string>
   <string name="pref_extend_frac_summary">Define se as visadas poderão ser escalonadas ao serem projetadas nos perfis retificados</string>
   <string name="pref_recent_shot_title">Aux recentes</string>

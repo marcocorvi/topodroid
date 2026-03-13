@@ -718,6 +718,7 @@ class TDPrefKey
     new TDPrefKey( A, BOOL, XT, "DISTOX_ANDROID_AZIMUTH",    R.string.pref_with_android_azimuth_title,R.string.pref_with_android_azimuth_summary,FALSE        ),
     new TDPrefKey( E, LONG, XT, "DISTOX_SHOT_TIMER",         R.string.pref_shot_timer_title,          R.string.pref_shot_timer_summary,          TDString.TEN ),
     new TDPrefKey( E, LONG, XT, "DISTOX_BEEP_VOLUME",        R.string.pref_beep_volume_title,         R.string.pref_beep_volume_summary,         TDString.FIFTY ),
+    new TDPrefKey( E, LONG, XT, "DISTOX_BEEP_LENGTH",        R.string.pref_beep_length_title,         R.string.pref_beep_length_summary,         "100" ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_BLUNDER_SHOT",       R.string.pref_blunder_shot_title,        R.string.pref_blunder_shot_summary,        FALSE ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_STATION",      R.string.pref_splay_station_title,       R.string.pref_splay_station_summary,       TRUE  ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_GROUP",        R.string.pref_splay_group_title,         R.string.pref_splay_group_summary,         FALSE )

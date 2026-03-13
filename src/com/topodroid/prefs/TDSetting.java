@@ -518,7 +518,8 @@ public class TDSetting
   // public static int mScreenTimeout = 60000; // 60 secs
   public static boolean mWithAzimuth  = false;
   public static int mTimerWait        = 10;    // Acc/Mag timer countdown (secs)
-  public static int mBeepVolume       = 50;    // beep volume
+  public static int mBeepVolume       = 50;    // beep volume [0,100]- used in the TimerTask
+  public static int mBeepLength       = 200;   // beep length [ms]
   public static boolean mExtendFrac   = false;    // whether to use fractional extends
   public static boolean mShotRecent   = false;    // whether to highlight recent shots
   // public static int mCompassReadings  = 4;     // number of compass readings to average
@@ -1405,9 +1406,10 @@ public class TDSetting
     mWithAzimuth      = prefs.getBoolean( key[11].key, bool(key[11].dflt) ); // DISTOX_ANDROID_AZIMUTH
     mTimerWait        = tryInt(   prefs,  key[12].key,      key[12].dflt );  // DISTOX_SHOT_TIMER
     mBeepVolume       = tryInt(   prefs,  key[13].key,      key[13].dflt );  // DISTOX_BEEP_VOLUME
-    mBlunderShot      = prefs.getBoolean( key[14].key, bool(key[14].dflt) ); // DISTOX_BLUNDER_SHOT
-    mSplayStation     = prefs.getBoolean( key[15].key, bool(key[15].dflt) ); // DISTOX_SPLAY_STATION
-    mSplayOnlyForward = prefs.getBoolean( key[16].key, bool(key[16].dflt) ); // DISTOX_SPLAY_GROUP
+    mBeepLength       = tryInt(   prefs,  key[14].key,      key[14].dflt );  // DISTOX_BEEP_LENGTH
+    mBlunderShot      = prefs.getBoolean( key[15].key, bool(key[15].dflt) ); // DISTOX_BLUNDER_SHOT
+    mSplayStation     = prefs.getBoolean( key[16].key, bool(key[16].dflt) ); // DISTOX_SPLAY_STATION
+    mSplayOnlyForward = prefs.getBoolean( key[17].key, bool(key[17].dflt) ); // DISTOX_SPLAY_GROUP
     // mWithTdManager = prefs.getBoolean( key[13].key, bool(key[13].dflt) ); // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
@@ -2059,12 +2061,14 @@ public class TDSetting
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 13 ].key ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
       ret = setBeepVolume( tryIntValue( hlp, k, v, key[13].dflt ) );
-    } else if ( k.equals( key[ 14 ].key ) ) { // DISTOX_BLUNDER_SHOT
-      mBlunderShot = tryBooleanValue( hlp, k, v, bool(key[14].dflt) );
-    } else if ( k.equals( key[ 15 ].key ) ) { // DISTOX_SPLAY_STATION 
-      mSplayStation = tryBooleanValue( hlp, k, v, bool(key[15].dflt) );
-    } else if ( k.equals( key[ 16 ].key ) ) { // DISTOX_SPLAY_GROUP
-      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(key[16].dflt) );
+    } else if ( k.equals( key[ 14 ].key ) ) { // DISTOX_BEEP_LENGTH [100 ..]
+      ret = setBeepLength( tryIntValue( hlp, k, v, key[14].dflt ) );
+    } else if ( k.equals( key[ 15 ].key ) ) { // DISTOX_BLUNDER_SHOT
+      mBlunderShot = tryBooleanValue( hlp, k, v, bool(key[15].dflt) );
+    } else if ( k.equals( key[ 16 ].key ) ) { // DISTOX_SPLAY_STATION 
+      mSplayStation = tryBooleanValue( hlp, k, v, bool(key[16].dflt) );
+    } else if ( k.equals( key[ 17 ].key ) ) { // DISTOX_SPLAY_GROUP
+      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(key[17].dflt) );
     // } else if ( k.equals( key[13 ].key ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(key[13].dflt) );
 
@@ -2086,6 +2090,12 @@ public class TDSetting
     if ( volume <   0 ) { mBeepVolume =   0; return TDString.ZERO; }
     if ( volume > 100 ) { mBeepVolume = 100; return "100"; }
     mBeepVolume = volume;
+    return null;
+  }
+
+  private static String setBeepLength( int length )
+  {
+    if ( length < 100 ) { mBeepLength = 100; return "100"; }
     return null;
   }
 
@@ -4426,6 +4436,9 @@ B DISTOX_SAP5_BIT16_BUG true
               break;
             case "DISTOX_BEEP_VOLUME":
               setBeepVolume( Integer.parseInt( value ) ); setPreference( editor, kay, mBeepVolume );
+              break;
+            case "DISTOX_BEEP_LENGTH":
+              setBeepLength( Integer.parseInt( value ) ); setPreference( editor, kay, mBeepLength );
               break;
             case "DISTOX_RECENT_SHOT":
               mShotRecent = Boolean.parseBoolean( value ); setPreference( editor, kay,    mShotRecent );

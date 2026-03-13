@@ -1756,6 +1756,8 @@
     </string>
     <string name="pref_beep_volume_title">Piep Lautstärke</string>
     <string name="pref_beep_volume_summary">Lautstärke des Pieptones bei Messung von Topodroid</string>
+  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
+  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
     <string name="pref_extend_frac_title">Beliebige Ausrichtung</string>
     <string name="pref_extend_frac_summary">Ob die Ausrichtung beliebige Zwischenwerte annehmen kann</string>
     <string name="pref_recent_shot_title">Neueste Messungen</string>
