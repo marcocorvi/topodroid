@@ -696,7 +696,7 @@
     <!-- UNUSED string name="shot_reverse">visszamérés</string -->
     <string name="shot_to">hová</string>
     <string name="shot_refreshed">Mérés lista frissítve</string>
-    <!-- TODO string name="scan_type">Scan type</string -->
+    <string name="scan_type">Szkennelés típus</string>
 
     <string name="station">mérési pont</string>
     <string name="station_ask">Beilleszt mérési pontot a vázlatba?</string>
