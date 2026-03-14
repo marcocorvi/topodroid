@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
+   					  
+  <!-- TextView
+    android:id="@+id/shot_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:textSize="@dimen/textsizebig"
+  / -->
+
+  <EditText android:id="@+id/shot_from"
+    style="@style/edit_text"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:importantForAutofill="no"
+  />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/marginvbig"
+    >
+    <TextView 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:text="@string/scan_type"
+      android:ems="25"
+      android:layout_marginTop="@dimen/marginv"
+    />
+    <Spinner android:id="@+id/shot_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_marginBottom="@dimen/marginv"
+      />
+  </LinearLayout>
+
+  <!-- LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    >
+    <CheckBox android:id="@+id/shot_generic"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_height="wrap_content"
+      android:text="@string/scan_generic"
+    />
+    <CheckBox android:id="@+id/shot_xsection"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_height="wrap_content"
+      android:text="@string/scan_xsection"
+    />
+    <CheckBox android:id="@+id/shot_plan"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_height="wrap_content"
+      android:text="@string/scan_plan"
+    />
+    <CheckBox android:id="@+id/shot_profile"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_height="wrap_content"
+      android:text="@string/scan_profile"
+    />
+  </LinearLayout -->
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:gravity="start" 
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout tools:ignore="ButtonOrder"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/btn_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
+  />
+
+</LinearLayout>
