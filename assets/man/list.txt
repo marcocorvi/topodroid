@@ -81,7 +81,6 @@ manual07.htm
 page_shot_edit1.htm
 page_multishot.htm
 page_scan_shot.htm
-page_plot_scan.htm
 page_reduction_errors.htm
 page_undelete.htm
 page_photo_list.htm
@@ -99,6 +98,7 @@ manual09.htm
 page_new_plot.htm
 page_dangling.htm
 page_plot_list.htm
+page_plot_scan.htm
 page_projection.htm
 page_drawing_refs.htm
 page_scrap_outline.htm
