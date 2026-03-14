@@ -828,6 +828,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hide_leg">Повтарящи се измервания  в отсечка</string>
     <string name="hide_ids">Идентификатори на измервания</string>
     <string name="hide_splay">Странични измервания</string>
+    <!-- TODO string name="hide_scan">Scan sets</string -->
     <string name="slope_lside">Наклон l - страна</string>
 
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->

@@ -70,6 +70,7 @@ class CurrentStationDialog extends MyDialog
   private Button mBtnGeoCode;
   private Button mBtnPhoto;
   private Button mBtnSplay;
+  private Button mBtnScan;
   // private Button mBtnCancel;
 
   private CheckBox mBtnFixed;
@@ -134,6 +135,7 @@ class CurrentStationDialog extends MyDialog
     mBtnGeoCode = (Button) findViewById(R.id.button_code );
     mBtnPhoto   = (Button) findViewById(R.id.button_photo );
     mBtnSplay   = (Button) findViewById(R.id.button_splay );
+    mBtnScan    = (Button) findViewById(R.id.button_scan );
 
     if ( TDLevel.overExpert ) {
       GeoCodes geocodes = TopoDroidApp.getGeoCodes();
@@ -158,8 +160,10 @@ class CurrentStationDialog extends MyDialog
     mBtnClear.setOnClickListener( this );   // CLEAR
     if ( mPos < 0 || mParent == null ) {
       mBtnSplay.setVisibility( View.GONE );
+      mBtnScan.setVisibility( View.GONE );
     } else {
-      mBtnSplay.setOnClickListener( this );   // CLEAR
+      mBtnSplay.setOnClickListener( this );  // SPLAY
+      mBtnScan.setOnClickListener( this );   // SCAN
     }
 
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
@@ -233,6 +237,7 @@ class CurrentStationDialog extends MyDialog
     mStationName = name;
     mPos = -1;
     mBtnSplay.setVisibility( View.GONE ); // switch off toggle SPLAY display
+    mBtnScan.setVisibility( View.GONE ); // switch off toggle SCAN display
     StationInfo cs = ( name == null )? null : TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
@@ -414,6 +419,10 @@ class CurrentStationDialog extends MyDialog
     } else if ( mParent != null && b == mBtnSplay ) { // toggle SPLAY display
       if ( mPos >= 0 ) {
         mParent.recomputeItems( mStationName, mPos );
+      }
+    } else if ( mParent != null && b == mBtnScan ) { // toggle SCANY display
+      if ( mPos >= 0 ) {
+        mParent.recomputeScans( mStationName, mPos );
       }
     } else if ( mParent != null && b == mBtnPhoto ) { // PHOTO
       if ( storeStation( name ) ) {

@@ -773,6 +773,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="hide_leg">Visadas repetidas</string>
   <string name="hide_ids">IDs medidas</string>
   <string name="hide_splay">Medidas auxiliares</string>
+    <!-- TODO string name="hide_scan">Scan sets</string -->
   <string name="slope_lside">Lado l desnível</string>
   <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
   <!-- UNUSED string name="plan">PLANTA</string -->
@@ -824,6 +825,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_duplicate">Duplicadas</string>
     <!-- TODO string name="button_settime"   >Set time</string -->
   <string name="button_surface">Superfície</string>
+    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
+    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
   <string name="button_no_extend">Fora perfil</string>
   <string name="button_eval">Brutos</string>
   <string name="button_evalg">G</string>

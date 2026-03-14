@@ -823,6 +823,7 @@
     <string name="hide_leg">Battute ripetute</string>
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
+    <!-- TODO string name="hide_scan">Scan sets</string -->
     <string name="slope_lside">Pendenza lato sx</string>
 
     <!-- UNUSED string name="plan">PIANTA</string -->
@@ -879,6 +880,8 @@
     <string name="button_duplicate" >Duplicato   </string>
     <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >Superfice   </string>
+    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
+    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
     <string name="button_no_extend" >Manca Extend</string>
     <string name="button_eval"      >Calcola   </string>
     <string name="button_evalg"     >G      </string>

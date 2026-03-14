@@ -829,6 +829,7 @@
     <string name="hide_leg">重复的主线测线</string>
     <string name="hide_ids">测线 IDs</string>
     <string name="hide_splay">辐测侧线</string>
+    <!-- TODO string name="hide_scan">Scan sets</string -->
     <string name="slope_lside">侧线 l-尺寸</string>
 
     <!-- UNUSED string name="plan">平面图</string -->
@@ -885,6 +886,8 @@
     <string name="button_duplicate" >副本 </string>
     <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >表面   </string>
+    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
+    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
     <string name="button_no_extend" >无延展</string>
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>

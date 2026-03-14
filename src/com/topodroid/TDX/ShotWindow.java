@@ -221,11 +221,13 @@ public class ShotWindow extends Activity
   // TODO replace flags with DisplayMode-flag 
   //      N.B. id is in the data adapter
   private boolean mFlagSplay  = true;  //!< whether to hide splay shots
+  private boolean mFlagScan   = true;  //!< whether to hide scan sets
   private boolean mFlagLatest = false; //!< whether to show the latest splay shots
   private boolean mFlagLeg    = true;  //!< whether to hide leg extra shots
   private boolean mFlagBlank  = false; //!< whether to hide blank shots
 
   boolean isFlagSplay()  { return mFlagSplay; }
+  boolean isFlagScan()   { return mFlagScan; }
   boolean isFlagLatest() { return mFlagLatest; }
   boolean isFlagLeg()    { return mFlagLeg; }
   boolean isFlagBlank()  { return mFlagBlank; }
@@ -236,15 +238,16 @@ public class ShotWindow extends Activity
   private boolean testFlagSplayLegBlank() 
   { 
     // TDLog.v("Flags splay " + mFlagSplay + " leg " + mFlagLeg + " blank " + mFlagBlank );
-    return mFlagSplay || mFlagLeg || mFlagBlank; 
+    return mFlagSplay || mFlagLeg || mFlagBlank || mFlagScan; 
   }
 
   // void setShowIds( boolean show ) { mDataAdapter.show_ids = show; }
 
-  void setFlags( boolean ids, boolean splay, boolean latest, boolean leg, boolean blank )
+  void setFlags( boolean ids, boolean splay, boolean scan, boolean latest, boolean leg, boolean blank )
   {
     mDataAdapter.show_ids = ids;
     mFlagSplay = splay;
+    mFlagScan  = scan;
     if ( TDSetting.mShotRecent ) mFlagLatest = latest;
     mFlagLatest = latest;
     mFlagLeg    = leg;
@@ -270,6 +273,7 @@ public class ShotWindow extends Activity
   private DBlockAdapter mDataAdapter;
   // private ArrayAdapter< String > mDataAdapter;
   private ArrayList< String > mShowSplay;
+  private ArrayList< String > mShowScans;
 
 
   // private long mLastExtend; // id of the last-extend-ed splay 
@@ -639,6 +643,9 @@ public class ShotWindow extends Activity
         } 
         scan_idx = cur.mIndex;
         // prev_is_scan = true;
+        if ( mFlagScan ) {
+          if ( ! showScansContains( cur.mFrom ) ) continue;
+        }
       } else {
         scan_idx = -1L;
         // prev_is_scan = false;
@@ -1395,6 +1402,8 @@ public class ShotWindow extends Activity
     // rv.setLayoutManager( lm );
 
     mShowSplay   = new ArrayList<>();
+    mShowScans   = new ArrayList<>();
+
     if ( TDSetting.mEditableStations ) {
        mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList< DBlock >() );
     } else {
@@ -1689,6 +1698,7 @@ public class ShotWindow extends Activity
       mFlagBlank  = ( vals.length > 2 ) && vals[2].equals( TDString.ONE );
       mDataAdapter.show_ids = ( vals.length > 3 ) && vals[3].equals( TDString.ONE );
       mFlagLatest = ( vals.length > 4 ) && vals[4].equals( TDString.ONE );
+      mFlagScan   = ( vals.length > 5 )? vals[5].equals( TDString.ONE ) : mFlagSplay;
     } else {
       TDLog.e( TAG + "no saved data");
     }
@@ -1701,7 +1711,7 @@ public class ShotWindow extends Activity
     (new Thread() {
       public void run() {
         mApp_mData.setValue( "DISTOX_SHOTS",
-          String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, isShowIds()?1:0, mFlagLatest?1:0 ) );
+          String.format(Locale.US, "%d %d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, isShowIds()?1:0, mFlagLatest?1:0, mFlagScan?1:0 ) );
       }
     } ).start();
     // TDLog.v( TAG + "save to data mFlagSplay " + mFlagSplay );
@@ -2941,6 +2951,18 @@ public class ShotWindow extends Activity
     }
   }
 
+  void recomputeScans( String st, int pos )
+  {
+    if ( mFlagScan ) {
+      if ( ! mShowScans.remove( st ) ) {
+        mShowScans.add( st );
+      }
+      updateDisplay( );
+      mList.setSelection( (pos>5)? pos-5 : 0 );
+    }
+  }
+
+
   /** @return true if the list of station for splay-display contains the specified name
    * @param name   station name
    */
@@ -2951,6 +2973,15 @@ public class ShotWindow extends Activity
     }
     return false;
   }
+
+  private boolean showScansContains( String name ) 
+  {
+    for ( String st : mShowScans ) {
+      if ( st.equals( name ) ) return true;
+    }
+    return false;
+  }
+
 
   /** update the connection status feedbacks
    * @param status  new status

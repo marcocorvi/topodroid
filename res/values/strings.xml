@@ -855,6 +855,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hide_leg">Repeated leg shots</string>
     <string name="hide_ids">Shot IDs</string>
     <string name="hide_splay">Splay shots</string>
+    <string name="hide_scan">Scan sets</string>
+
     <string name="slope_lside">Slope l-side</string>
 
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
@@ -913,8 +915,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_delete"    >Delete</string>
     <string name="button_duplicate" >Duplicate</string>
     <string name="button_settime"   >Set time</string>
-    <string name="button_surface"    copyable="fr">Surface</string>
+    <string name="button_surface"  copyable="fr">Surface</string>
     <string name="button_splay"    copyable="all">Splay</string>
+    <string name="button_scan"     copyable="all">Scan</string>
     <string name="button_no_extend" >No extend</string>
     <string name="button_eval"      >Raw</string>
     <string name="button_evalg" copyable="all">G</string>

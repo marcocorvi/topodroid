@@ -783,6 +783,7 @@
     <string name="hide_leg">Wiederholungsmessungen</string>
     <string name="hide_ids">Messungs-ID</string>
     <string name="hide_splay">Hilfszüge</string>
+    <!-- TODO string name="hide_scan">Scan sets</string -->
     <string name="slope_lside">Neigung linke Seite</string>
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
     <!-- UNUSED string name="plan">GRUNDRISS</string -->
@@ -834,6 +835,8 @@
     <string name="button_duplicate">Duplizieren</string>
     <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface">Oberfläche</string>
+    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
+    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
     <string name="button_no_extend">Keine Ausrichtung</string>
     <string name="button_eval">Auswerten</string>
     <string name="button_evalg">Beschleunigung</string>

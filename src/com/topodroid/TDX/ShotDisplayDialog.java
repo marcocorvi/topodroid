@@ -28,6 +28,7 @@ class ShotDisplayDialog extends MyDialog
 {
     private CheckBox mCBids;      // whether to hide ids
     private CheckBox mCBsplay;    // whether to hide splays
+    private CheckBox mCBscan;     // whether to hide scan-sets
     private CheckBox mCBlatest;   // whether to show latest
     private CheckBox mCBblank;    // whether to hide blank
     private CheckBox mCBleg;      // whether to hide repeated leg 
@@ -50,6 +51,7 @@ class ShotDisplayDialog extends MyDialog
 
         mCBids    = (CheckBox) findViewById(R.id.cb_mode_ids);
         mCBsplay  = (CheckBox) findViewById(R.id.cb_mode_splay);
+        mCBscan   = (CheckBox) findViewById(R.id.cb_mode_scan);
         mCBlatest = (CheckBox) findViewById(R.id.cb_mode_latest);
         mCBblank  = (CheckBox) findViewById(R.id.cb_mode_blank);
         mCBleg    = (CheckBox) findViewById(R.id.cb_mode_leg);
@@ -61,6 +63,7 @@ class ShotDisplayDialog extends MyDialog
 
         mCBids.setChecked(     mParent.isShowIds() );
         mCBsplay.setChecked( ! mParent.isFlagSplay() );
+        mCBscan.setChecked( ! mParent.isFlagScan() );
 	if ( TDSetting.mShotRecent ) {
           mCBlatest.setChecked(  mParent.isFlagLatest() );
 	} else {
@@ -103,6 +106,7 @@ class ShotDisplayDialog extends MyDialog
       // mParent.mFlagLeg   = ! mCBleg.isChecked();
       mParent.setFlags( mCBids.isChecked(),
                         ! mCBsplay.isChecked(),
+                        ! mCBscan.isChecked(),
                         mCBlatest.isChecked(),
                         ! mCBleg.isChecked(),
                         ! mCBblank.isChecked() );
