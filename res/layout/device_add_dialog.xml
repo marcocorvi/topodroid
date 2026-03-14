@@ -7,16 +7,16 @@
 
   <TextView 
       android:layout_width="wrap_content"
-      android:ems="25"
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:text="@string/address"
+      android:ems="25"
   />
   <Spinner android:id="@+id/device_address" 
     android:layout_marginTop="@dimen/margintiny"
     android:layout_width="match_parent"
-    android:ems="25"
     android:layout_height="wrap_content" 
+    android:ems="25"
   />
   
   <LinearLayout 

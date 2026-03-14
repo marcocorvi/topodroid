@@ -165,14 +165,19 @@ public class TopoDroidComm
   //     TDLog.e( "TD comm: null Lister");
   //   }
   // }
+
+  static int mScanBit = -1;
+  static long mScanSetIdx = -1L; // ID of the firts block of the scan-set
+
   /** handle regular packet
    * @param res       packet type (as returned by handlePacket / or set by Protocol )
    * @param lister    data lister
    * @param data_type unused
    * @param comment   data comment (error)
    * @param is_scan   whether the data is a scan data
+   * @param scan_bit  toggle bit of scan-set (-1 for non-scan shot)
    */
-  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment, boolean is_scan )
+  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment, boolean is_scan, int scan_bit )
   {
     assert( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 );
     if ( res == DataType.PACKET_DATA ) {
@@ -185,7 +190,17 @@ public class TopoDroidComm
       double r = mProtocol.mRoll;
       long time = mProtocol.getTimeStamp();
       long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-      int leg_type = ( is_scan )? LegType.SCAN : LegType.NORMAL;
+      int leg_type = LegType.NORMAL;
+      boolean update_idx = false;
+      if ( is_scan ) {
+        leg_type = LegType.SCAN;
+        if ( scan_bit != mScanBit ) {
+          mScanBit = scan_bit;
+          update_idx = true;
+        }
+      } else {
+        mScanBit = -1;
+      }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
               mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, 0, comment, TDInstance.deviceAddress(),
@@ -193,6 +208,10 @@ public class TopoDroidComm
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);
       //
+      if ( is_scan ) {
+        if ( update_idx ) mScanSetIdx = mLastShotId;
+        TopoDroidApp.mData.updateShotIdx( mLastShotId, TDInstance.sid, mScanSetIdx );
+      }
 
       // this only updates the mBcakshot: it could be done in the previous call
       TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);

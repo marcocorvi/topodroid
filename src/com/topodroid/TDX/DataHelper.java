@@ -1689,22 +1689,26 @@ public class DataHelper extends DataSetObservable
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( Locale.US,
-               "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
-               d, b, p, sid, id );
+    pw.format( Locale.US, "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d", d, b, p, sid, id );
     doExecShotSQL( id, sw );
   }
 
-  /** @return the ID of the first block in a scan-set (or -1)
-   * @param id      id of first block of the scan set
-   * @param sid     survey ID
-   * @param old_st  old station name
-   * @param old_leg old leg type
-   * @note used only by DrawingWindow
+  /** update shot IDX - used for Cavway scan shots
+   * @param id  shot ID
+   * @param sid survey ID
+   * @param idx shot IDX (=ID of first shot of the scan-set)
    */
-  long getScanSetFirstBlockId( long id, long sid, String st, long leg_type, int status )
+  public void updateShotIdx( long id, long sid, long idx )
   {
-    Cursor cursor = myDB.rawQuery( qScanShotsBefore, new String[] { Long.toString( sid ), Long.toString( id ), Long.toString(status), st, Long.toString(leg_type) } );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET idx=%d WHERE surveyId=%d AND id=%d", sid, id );
+    doExecShotSQL( id, sw );
+  }
+
+  long getShotIdx( long id, long sid )
+  {
+    Cursor cursor = myDB.rawQuery( qShotIdx, new String[] { Long.toString( sid ), Long.toString( id ) } );
     long ret = -1;
     if (cursor.moveToFirst()) {
       ret = cursor.getLong( 0 );
@@ -1712,39 +1716,59 @@ public class DataHelper extends DataSetObservable
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
+  
 
-  /** @return the Block of the first block in a scan-set (or null)
-   * @param id      id of first block of the scan set
-   * @param sid     survey ID
-   * @param old_st  old station name
-   * @param old_leg old leg type
-   */
-  DBlock getScanSetFirstBlock( long id0, long sid, String st, long leg_type, int status )
-  {
-    long id = -1L;
-    Cursor cursor = myDB.rawQuery( qScanShotsBefore, new String[] { Long.toString( sid ), Long.toString( id0 ), Long.toString(status), st, Long.toString(leg_type) } );
-    if (cursor.moveToFirst()) {
-      id = cursor.getLong( 0 );
-    }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    TDLog.v("Scan set first block of " + id0 + " : " + id );
-    if ( id > 0 ) return selectShot( id, sid );
-    return null;
-  }
+
+  // /** @return the ID of the first block in a scan-set (or -1)
+  //  * @param id      id of first block of the scan set
+  //  * @param sid     survey ID
+  //  * @param old_st  old station name
+  //  * @param old_leg old leg type
+  //  * @note used only by DrawingWindow
+  //  */
+  // long getScanSetFirstBlockId( long id, long sid, String st, long leg_type, int status )
+  // {
+  //   TDLog.v("Scan set get first block-ID of " + id + " station " + st + " leg-type " + leg_type );
+  //   Cursor cursor = myDB.rawQuery( qScanShotsBefore, new String[] { Long.toString( sid ), Long.toString( id ), Long.toString(status), st, Long.toString(leg_type) } );
+  //   long ret = -1;
+  //   if (cursor.moveToFirst()) {
+  //     ret = cursor.getLong( 0 );
+  //   }
+  //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  //   return ret;
+  // }
+
+  // /** @return the Block of the first block in a scan-set (or null)
+  //  * @param id      id of first block of the scan set
+  //  * @param sid     survey ID
+  //  * @param old_st  old station name
+  //  * @param old_leg old leg type
+  //  */
+  // DBlock getScanSetFirstBlock( long id0, long sid, String st, long leg_type, int status )
+  // {
+  //   TDLog.v("Scan set get first block of " + id0 + " station " + st + " leg-type " + leg_type );
+  //   long id = -1L;
+  //   Cursor cursor = myDB.rawQuery( qScanShotsBefore, new String[] { Long.toString( sid ), Long.toString( id0 ), Long.toString(status), st, Long.toString(leg_type) } );
+  //   if (cursor.moveToFirst()) {
+  //     id = cursor.getLong( 0 );
+  //   }
+  //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  //   TDLog.v("Scan set first block of " + id0 + " : " + id );
+  //   if ( id > 0 ) return selectShot( id, sid );
+  //   return null;
+  // }
 
   /** @return the ID value at the end (one past the last) of a scan set
    * @param id      id of first block of the scan set
    * @param sid     survey ID
-   * @param old_st  old station name
-   * @param old_leg old leg type
+   * @param idx     scan-set first block ID
    * @param status  scan set status
    * @note return -1 if old_leg is not a "scan" leg-type
    */
-  private long getScanSetEnd( long id0, long sid, String old_st, long old_leg, int status )
+  private long getScanSetEnd( long id0, long sid, long idx, int status )
   {
-    if ( old_leg < LegType.SCAN || old_leg > LegType.VSCAN ) return -1;
     long id = id0;
-    Cursor cursor = myDB.rawQuery( qScanShotsAfter, new String[] { Long.toString( sid ), Long.toString( id0 ), Long.toString(status), old_st, Long.toString(old_leg) } );
+    Cursor cursor = myDB.rawQuery( qScanShotsAfter, new String[] { Long.toString( sid ), Long.toString( id0 ), Long.toString(status), Long.toString(idx) } );
     if (cursor.moveToFirst()) {
       do { 
         long cid = cursor.getLong( 0 );
@@ -1775,7 +1799,7 @@ public class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return;
     long id0 = id;
-    long id1 = getScanSetEnd( id, sid, old_st, old_leg, TDStatus.NORMAL );
+    long id1 = getScanSetEnd( id, sid, id, TDStatus.NORMAL );
     if ( id1 == -1L ) return;
     // TDLog.v("Update scan from " + id0 + " to " + id + " station " + new_st + " leg type " + new_leg );
     StringWriter sw = new StringWriter();
@@ -1791,11 +1815,11 @@ public class DataHelper extends DataSetObservable
    * @return true if success
    * @note this is always called for transition NORMAL to DELETED
    */ 
-  boolean updateScanSetStatus( long id, long sid, String st, long leg_type, int old_status, int new_status )
+  boolean updateScanSetStatus( long id, long sid, int old_status, int new_status )
   {
     if ( myDB == null ) return false;
     long id0 = id;
-    long id1 = getScanSetEnd( id, sid, st, leg_type, old_status );
+    long id1 = getScanSetEnd( id, sid, id, old_status );
     if ( id1 == -1L ) return false;
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
@@ -2102,7 +2126,7 @@ public class DataHelper extends DataSetObservable
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     if ( leg_type >= LegType.SCAN && leg_type <= LegType.VSCAN ) { // this is like updateScanSetStatus
       long id0 = id;
-      long id1 = getScanSetEnd( id, sid, station, leg_type, TDStatus.DELETED );
+      long id1 = getScanSetEnd( id, sid, id, TDStatus.DELETED );
       if ( id1 == -1L ) {
         updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
       } else {
@@ -3142,8 +3166,9 @@ public class DataHelper extends DataSetObservable
 
   private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
   private static final String qShotsByStations = "select id, distance, bearing, clino from shots where surveyId=? AND status=0 AND fStation=? AND tStation=? ";
-  private static final String qScanShotsAfter  = "select id from shots where surveyId=? AND id>=? AND status=? AND fStation=? AND leg=? ORDER BY id ";
-  private static final String qScanShotsBefore = "select id from shots where surveyId=? AND id<=? AND status=? AND fStation=? AND leg=? ORDER BY id ";
+  private static final String qScanShotsAfter  = "select id from shots where surveyId=? AND id>=? AND status=? AND idx=? ORDER BY id ";
+  // private static final String qScanShotsBefore = "select id from shots where surveyId=? AND id<=? AND status=? AND fStation=? AND leg=? ORDER BY id ";
+  private static final String qShotIdx = "select idx from shots where surveyId=? AND id>=? ";
   private static final String qShotLegType = "select leg, fStation from shots where surveyId=? AND id>=? ";
 
   // FIXME TODO these can be improved with a JOIN select on sensors and shots

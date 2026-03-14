@@ -711,6 +711,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">to</string>
     <string name="shot_refreshed">Refreshed shot list</string>
+    <string name="scan_type">Scan type</string>
+    <!-- UNUSED string name="scan_generic">generic</string -->
+    <!-- UNUSED string name="scan_xsection">xsect.</string -->
+    <!-- UNUSED string name="scan_plan">horiz.</string -->
+    <!-- UNUSED string name="scan_profile">vert.</string -->
 
     <string name="mark_no_mark"   translatable="false">( )</string>
     <string name="mark_generic"   translatable="false">(&#x1d52;)</string>

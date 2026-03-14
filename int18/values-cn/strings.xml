@@ -698,6 +698,7 @@
     <!-- UNUSED string name="shot_reverse">反测</string -->
     <string name="shot_to">到</string>
     <string name="shot_refreshed">刷新测点列表</string>
+    <!-- TODO string name="scan_type">Scan type</string -->
 
     <string name="station">测点</string>
     <string name="station_ask">插入测点到草图?</string>

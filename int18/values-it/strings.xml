@@ -692,6 +692,7 @@
     <!-- UNUSED string name="shot_reverse">inverso</string -->
     <string name="shot_to">a</string>
     <string name="shot_refreshed">Lista tiri aggiornata</string>
+    <!-- TODO string name="scan_type">Scan type</string -->
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>

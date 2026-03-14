@@ -650,6 +650,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="shot_reverse">inverter</string -->
   <string name="shot_to">Para</string>
   <string name="shot_refreshed">Atualizar lista de medidas</string>
+    <!-- TODO string name="scan_type">Scan type</string -->
   <string name="station">Base referência</string>
   <string name="station_ask">Inserir base no arquivo th2 exportado?</string>
   <string name="station_del">Remover base do arquivo th2 exportado?</string>

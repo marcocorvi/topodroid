@@ -3518,13 +3518,13 @@ public class ShotWindow extends Activity
   }
 
   /** delete a scan set
-   * @param id   ID of the firts block of the scan
+   * @param id   ID of the first block of the scan
    * @param st   FROM station
    * @param leg_type leg-type
    */
   void doDeleteScanShot( long id, String st, long leg_type )
   {
-    if ( mApp_mData.updateScanSetStatus( id, TDInstance.sid, st, leg_type, TDStatus.NORMAL, TDStatus.DELETED  ) ) {
+    if ( mApp_mData.updateScanSetStatus( id, TDInstance.sid, TDStatus.NORMAL, TDStatus.DELETED  ) ) {
       updateDisplay();
     }
   }

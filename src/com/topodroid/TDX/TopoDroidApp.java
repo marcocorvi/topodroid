@@ -3529,7 +3529,7 @@ public class TopoDroidApp extends Application
   static DBlock getScanSetFirstBlock( DBlock blk, int status ) 
   {
     if ( blk == null || ! blk.isScan() ) return null;
-    return mData.getScanSetFirstBlock( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), status );
+    return mData.selectShot( blk.mId, TDInstance.sid );
   }
 
 }

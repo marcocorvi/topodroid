@@ -659,6 +659,7 @@
     <!-- UNUSED string name="shot_reverse">Richtung umkehren</string -->
     <string name="shot_to">bis</string>
     <string name="shot_refreshed">Messliste aktualisiert</string>
+    <!-- TODO string name="scan_type">Scan type</string -->
     <string name="station">Messpunkt</string>
     <string name="station_ask">Messpunkt in Skizze anlegen?</string>
     <string name="station_del">Messpunkt aus Skizze entfernen?</string>

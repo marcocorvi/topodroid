@@ -4087,9 +4087,10 @@ public class DrawingWindow extends ItemDrawer
   private void deleteSplay( DrawingSplayPath p, SelectionPoint sp, DBlock blk )
   {
     if ( blk.isScan() ) {
-      long id0 = mApp_mData.getScanSetFirstBlockId( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL );
+      // long id0 = mApp_mData.getScanSetFirstBlockId( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL );
+      long id0 = mApp_mData.getShotIdx( blk.mId, TDInstance.sid );
       if ( id0 > 0 ) {
-        mApp_mData.updateScanSetStatus( id0, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL, TDStatus.DELETED );      
+        mApp_mData.updateScanSetStatus( id0, TDInstance.sid, TDStatus.NORMAL, TDStatus.DELETED );      
         recomputeReferences( true );
       }
     } else {
@@ -8375,6 +8376,7 @@ public class DrawingWindow extends ItemDrawer
     // } else if ( PlotType.isProfile( mType ) ) {
     //   computeReferences( num, mPlot1.type, mPlot1.name, zoom, false );
     // }
+    mDrawingSurface.clearShotsAndStations( (int)mType );
     computeReferences( num, (int)mType, mName, zoom, false );
   }
 
@@ -10397,14 +10399,27 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.highlightStation( name );
   }
 
-  void updateScanSetName( DBlock blk, String from, long leg_type )
+  /** update the scan-set station and type
+   * @param id       ID of he first block of the scan-set
+   * @param old_from old scan-set station 
+   * @param new_from new scan-set station (can be equal to the scan-set station)
+   * @param old_leg  old scan-set leg-type
+   * @param new_leg  new scan-set leg-type
+   * @note either station or leg-type must be different from the current values
+   */
+  void updateScanSet( long id, String old_from, String new_from, long old_leg, long new_leg )
   {
-    mApp_mData.updateScanSetName( blk.mId, TDInstance.sid, blk.mFrom, from, blk.getLegType(), leg_type );
-    recomputeReferences( false );
+    mApp_mData.updateScanSetName( id, TDInstance.sid, old_from, new_from, old_leg, new_leg );
+    // NOTE must redu num otherwise the next scanset edit crashes the program
+    recomputeReferences( true );
   }
 
+  /** recompute plan and rofile references
+   * @param redo_num  whether to recompute num
+   */
   private void recomputeReferences( boolean redo_num )
   {
+    mDrawingSurface.clearShotsAndStations( );
     if ( redo_num ) {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );

@@ -696,6 +696,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="shot_reverse">обръщане</string -->
     <string name="shot_to">до</string>
     <string name="shot_refreshed">Обновен списък с измервания</string>
+    <!-- TODO string name="scan_type">Scan type</string -->
 
     <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата\?</string>

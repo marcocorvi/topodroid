@@ -693,6 +693,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_to">Toma hasta</string>
 <!-- Más común y recomendada (neutra y usada en apps técnicas) -->
 <string name="shot_refreshed">Lista de disparos actualizada</string>
+    <!-- TODO string name="scan_type">Scan type</string -->
 
 <!-- Más corta / directa (ideal para notificaciones o toasts) -->
 <!-- string name="shot_refreshed">Disparos actualizados</string -->
