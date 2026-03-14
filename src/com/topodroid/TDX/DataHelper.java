@@ -369,7 +369,7 @@ public class DataHelper extends DataSetObservable
     blk.mRawGx        = (long)( cursor.getLong(21) );
     blk.mRawGy        = (long)( cursor.getLong(22) );
     blk.mRawGz        = (long)( cursor.getLong(23) );
-    blk.mIndex        = (int)(  cursor.getLong(24) );
+    blk.mIndex        = (int)(  cursor.getLong(24) );  // BRIC index - Cavway scan-set ID
     blk.mDeviceTime   = cursor.getLong(25);
   }
 
@@ -407,7 +407,7 @@ public class DataHelper extends DataSetObservable
     blk.mTime     = cursor.getLong(14);
     blk.setPaintColor( (int)cursor.getLong(15) ); // color
     // blk.setStretch( (float)cursor.getDouble(16) ); // already set above
-    blk.mIndex  = (int)cursor.getLong(17);
+    blk.mIndex  = (int)cursor.getLong(17); // BRIC index - Cavway scan-set ID
     blk.mDeviceTime = cursor.getLong(18);
     // blk.setAddress( null ); 
     // TDLog.v("DBlock " + blk.mId + " flag " + blk.getFlag() + " cursor " + cursor.getLong(10) );
@@ -2343,12 +2343,13 @@ public class DataHelper extends DataSetObservable
    * @param rawGx   raw G1,G2 X components
    * @param rawGy   raw G1,G2 Y components
    * @param rawGz   raw G1,G2 Z components
+   * @param idx     scna-set first block id, or 0 (not scan shot), or -1 (first scan shot)
    * @param time    cavway shot time
    * @return inserted shot ID
    */
   public long insertCavwayShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip,
                                 long extend, long flag, int leg, long status, String comment, String addr,
-                                long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long time)
+                                long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long idx, long time)
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // TDLog.v("DH insert Cavway shot ID " + id + " B " + b + " C " + c + " R " + r );
@@ -2358,7 +2359,7 @@ public class DataHelper extends DataSetObservable
       id = -1L;
     }
     return doCavwayInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, d, b, c, r, mag, acc, dip, extend, 0.0,             // color=0, stretch=0.0
-                               flag, leg, status, comment, 0L, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz, time ); // shot_type=0
+                               flag, leg, status, comment, 0L, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz, idx, time ); // shot_type=0
   }
 
   /** insert a BRIC shot
@@ -2923,10 +2924,14 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
+  /**
+   * ...
+   * @param idx     scna-set first block id, or 0 (not scan shot), or -1 (first scan shot)
+   */
   private long doCavwayInsertShot( long sid, long id, long millis, long color, 
                           double d, double b, double c, double r, double mag, double acc, double dip,
                           long extend, double stretch, long flag, long leg, long status, String comment, long shot_type, String addr,
-                          long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long time )
+                          long rawMx, long rawMy, long rawMz, long rawGx, long rawGy, long rawGz, long idx, long time )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
     // TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
@@ -2937,9 +2942,10 @@ public class DataHelper extends DataSetObservable
     } else {
       myNextId = id;
     }
+    if ( idx == -1L ) idx = id;
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
-		    extend, stretch, flag, leg, status, shot_type, comment, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz, 0, time );
+		    extend, stretch, flag, leg, status, shot_type, comment, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz, idx, time );
     if ( ! doInsert( SHOT_TABLE, cv, "cavway insert" ) ) return -1L;
     return id;
   }
@@ -8076,7 +8082,7 @@ public class DataHelper extends DataSetObservable
             +   " rawGx INTEGER default 0, "
             +   " rawGy INTEGER default 0, "
             +   " rawGz INTEGER default 0, "
-            +   " idx INTEGER default 0, "
+            +   " idx INTEGER default 0, " // BRIC index - Cavway scan-set ID
             +   " time INTEGER default 0 " // device time [s]
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "

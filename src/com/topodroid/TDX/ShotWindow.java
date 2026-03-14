@@ -394,7 +394,7 @@ public class ShotWindow extends Activity
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    TDLog.v( "Shot Window refresh display " + nr + " toast " + toast );
+    // TDLog.v( "Shot Window refresh display " + nr + " toast " + toast );
     setConnectionStatus( mDataDownloader.getStatus() );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -624,8 +624,9 @@ public class ShotWindow extends Activity
   {
     int cnt = 0;
     DBlock prev = null;
+    long scan_idx = -1L;
     boolean prev_is_leg = false;
-    boolean prev_is_scan = false;
+    // boolean prev_is_scan = false;
     boolean check_recent = TDSetting.mShotRecent && mFlagLatest;
     for ( DBlock item : list ) {
       DBlock cur = item;
@@ -633,12 +634,14 @@ public class ShotWindow extends Activity
       // TDLog.Log( TDLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
       // TDLog.v(" update block list. Id: " + cur.mId + " type " + cur.getBlockType() + " is scan: " + cur.isScan() );
       if ( cur.isScan() ) {
-        if ( prev_is_scan ) { // skip
+        if ( /* prev_is_scan && */ scan_idx == cur.mIndex ) { // skip
           continue;
-        }
-        prev_is_scan = true;
+        } 
+        scan_idx = cur.mIndex;
+        // prev_is_scan = true;
       } else {
-        prev_is_scan = false;
+        scan_idx = -1L;
+        // prev_is_scan = false;
         if ( cur.isSecLeg() || cur.isRelativeDistance( prev ) ) {
           // TDLog.v( TAG + "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
           if ( cur.isBlank() ) {   // FIXME 20140612
@@ -2439,7 +2442,7 @@ public class ShotWindow extends Activity
    */
   void updateShotBlockName( DBlock b, String from, String to )
   {
-    TDLog.v("update shot " + b.mId );
+    // TDLog.v("update shot " + b.mId );
     if ( b.isScan() ) {
       TDLog.e("THIS SHOULD NOT HAPPEN");
       long leg_type = b.getLegType();
@@ -2608,7 +2611,7 @@ public class ShotWindow extends Activity
    */
   private void doRenumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
-    TDLog.v( "do Renumber Blocks - size " + blks.size() + " FROM <" + from + "> TO <" + to + ">" );
+    // TDLog.v( "do Renumber Blocks - size " + blks.size() + " FROM <" + from + "> TO <" + to + ">" );
     if ( from.length() == 0 && to.length() == 0 ) {
       for ( DBlock b : blks ) {
         updateShotBlockName( b, from, to );
@@ -2632,10 +2635,10 @@ public class ShotWindow extends Activity
       // mList.invalidate();
       checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
     } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
-      TDLog.v("Block splay " + blk.mId );
+      // TDLog.v("Block splay " + blk.mId );
       for ( DBlock b : blks ) {
         if ( b == blk ) continue;
-        TDLog.v("Block " + b.mId );
+        // TDLog.v("Block " + b.mId );
         updateShotBlockName( b, from, to );
         // b.setBlockName( from, to );
       }
@@ -2961,7 +2964,7 @@ public class ShotWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
       TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     } else {
-      TDLog.v( TAG + "set button, status " + mBTstatus + " -> " + status );
+      // TDLog.v( TAG + "set button, status " + mBTstatus + " -> " + status );
       if ( status != mBTstatus ) {
         mBTstatus = status;
         // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );

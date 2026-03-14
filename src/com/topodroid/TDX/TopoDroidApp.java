@@ -245,7 +245,7 @@ public class TopoDroidApp extends Application
     if ( mMainActivity == null ) return;
     mMainActivity.runOnUiThread( new Runnable() { 
       public void run () { 
-        TDLog.v("APP notify " + status + " to listers " + mListerSet.size() );
+        // TDLog.v("APP notify " + status + " to listers " + mListerSet.size() );
         // mListerSet.setConnectionStatus( status );
         lister.setConnectionStatus( status );
       }
@@ -992,7 +992,7 @@ public class TopoDroidApp extends Application
     mDataDownloader.setDownloading( false );
     mDataDownloader.stopDownloadData( lister );
     if ( lister != null ) {
-      TDLog.v("APP notify " + mDataDownloader.getStatus() + " lister " + lister.toString() );
+      // TDLog.v("APP notify " + mDataDownloader.getStatus() + " lister " + lister.toString() );
       lister.setConnectionStatus( mDataDownloader.getStatus() );
       // mDataDownloader.notifyConnectionStatus( lister, ConnectionState.CONN_DISCONNECTED );
     }
@@ -3396,7 +3396,7 @@ public class TopoDroidApp extends Application
   void shareZip( )
   {
     String zipname = TDPath.getSurveyZipFile( TDInstance.survey );
-    TDLog.v("Zip sharing file: " + zipname );
+    // TDLog.v("Zip sharing file: " + zipname );
     // Uri uri = Uri.fromFile( TDFile.getFile( zipname ) );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( zipname ) );
     // TDLog.v("Uri " + uri.toString() );

@@ -167,7 +167,7 @@ public class TopoDroidComm
   // }
 
   static int mScanBit = -1;
-  static long mScanSetIdx = -1L; // ID of the firts block of the scan-set
+  static long mScanSetIdx = 0; // ID of the first block of the scan-set, or 0 not a scan-shot, -1 to be set
 
   /** handle regular packet
    * @param res       packet type (as returned by handlePacket / or set by Protocol )
@@ -195,23 +195,23 @@ public class TopoDroidComm
       if ( is_scan ) {
         leg_type = LegType.SCAN;
         if ( scan_bit != mScanBit ) {
+          TDLog.v("set scan bit from " + mScanBit + " to " + scan_bit );
           mScanBit = scan_bit;
-          update_idx = true;
+          mScanSetIdx = -1;
         }
       } else {
         mScanBit = -1;
+        mScanSetIdx = 0;
       }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
               mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, 0, comment, TDInstance.deviceAddress(),
-              mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, time);
+              mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mScanSetIdx, time);
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);
       //
-      if ( is_scan ) {
-        if ( update_idx ) mScanSetIdx = mLastShotId;
-        TopoDroidApp.mData.updateShotIdx( mLastShotId, TDInstance.sid, mScanSetIdx );
-      }
+      if ( mScanSetIdx == -1 ) mScanSetIdx = mLastShotId;
+      TDLog.v(" last shot id " + mLastShotId + " scan-set id " + mScanSetIdx );
 
       // this only updates the mBcakshot: it could be done in the previous call
       TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);

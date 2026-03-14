@@ -58,6 +58,7 @@ public class DBlock
   public float mDip;       // degrees
   public float mDepth;     // depth at from station (diving mode)
   public String mComment;
+  public long mIdx = 0;
 
   int  mExtend;
   private long mFlag;     
@@ -79,7 +80,7 @@ public class DBlock
   long mRawGy = 0;
   long mRawGz = 0;
 
-  int mIndex = 0;      // device index
+  int mIndex = 0;      // BRIC index | Cavway scan-set
   long mDeviceTime = 0; // device tiem [s]
 
   // ------------------------------------------------------------------
