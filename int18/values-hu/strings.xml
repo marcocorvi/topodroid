@@ -1844,8 +1844,8 @@
   <string name="pref_shot_timer_summary">Hány másodpercig várjon, mielőtt megméri az irányszöget</string>
   <string name="pref_beep_volume_title">Időzítő hangereje</string>
   <string name="pref_beep_volume_summary">Időzítő csipogásának hány százalékos a hangereje</string>
-  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
-  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
+  <string name="pref_beep_length_title">Időzítő sípolás hossza</string>
+  <string name="pref_beep_length_summary">Sípolás időtartama [msec]</string>
   <string name="pref_extend_frac_title">Arányos kiterítés</string>
   <string name="pref_extend_frac_summary">A "kiterítés"-nek lehet-e tizedes része</string>
   <string name="pref_recent_shot_title">Legutóbbi mérés</string>
