@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.SymbolType;
+import com.topodroid.types.SymbolType;
 import com.topodroid.utils.TDLog;
 
 import android.graphics.Paint;

@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;

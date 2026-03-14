@@ -52,10 +52,10 @@ import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
-import com.topodroid.common.ExtendType;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.ExtendType;
+import com.topodroid.types.PlotType;
 import com.topodroid.packetX.MemoryData;
-// import com.topodroid.common.StationFlag;
+// import com.topodroid.types.StationFlag;
 
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;

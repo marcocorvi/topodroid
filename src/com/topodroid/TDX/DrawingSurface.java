@@ -16,7 +16,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 
 import android.content.Context;
 

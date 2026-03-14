@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.common.SymbolType;
+import com.topodroid.types.SymbolType;
 
 import java.util.ArrayList;
 

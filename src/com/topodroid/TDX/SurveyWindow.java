@@ -21,7 +21,7 @@ import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDsafUri;
 // import com.topodroid.utils.TDVersion;
-import com.topodroid.common.ExportInfo;
+import com.topodroid.types.ExportInfo;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -30,7 +30,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.calib.CalibCheckDialog;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 
 import java.util.Locale;
 import java.util.List;

@@ -17,7 +17,7 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.PointScale;
 
 import android.os.Bundle;
 import android.content.Context;

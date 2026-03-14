@@ -1367,6 +1367,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_scan_shot">Scan shots</string>
+    <string name="title_scanset">Scan set</string>
+
     <string name="title_search">Station/Leg search</string>
     <string name="title_stations">Stations</string>
     <string name="title_plot_search">Station search</string>

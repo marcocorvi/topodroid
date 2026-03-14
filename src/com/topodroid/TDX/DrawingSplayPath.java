@@ -21,7 +21,7 @@ package com.topodroid.TDX;
 // import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.ui.TDGreenDot;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 import com.topodroid.dev.cavway.CavwayConst;
 
 // import java.io.PrintWriter;

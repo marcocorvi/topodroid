@@ -18,7 +18,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.prefs.TDSetting;
-// import com.topodroid.common.PlotType;
+// import com.topodroid.types.PlotType;
 
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;

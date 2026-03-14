@@ -19,8 +19,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.common.LegType;
-import com.topodroid.common.StationFlag;
+import com.topodroid.types.LegType;
+import com.topodroid.types.StationFlag;
 
 import java.io.IOException;
 // import java.io.FileInputStream;

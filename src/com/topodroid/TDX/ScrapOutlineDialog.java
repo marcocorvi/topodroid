@@ -15,7 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.ListItemAdapter;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 
 import java.util.List;
 // import java.util.ArrayList;

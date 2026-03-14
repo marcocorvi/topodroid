@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.ItemButton;
-// import com.topodroid.common.SymbolType;
+// import com.topodroid.types.SymbolType;
 
 import java.util.ArrayList;
 

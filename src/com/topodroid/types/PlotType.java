@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.common;
+package com.topodroid.types;
 
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.TDInstance;

@@ -17,8 +17,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.ExtendType;
-import com.topodroid.common.LegType;
+import com.topodroid.types.ExtendType;
+import com.topodroid.types.LegType;
 
 import java.util.List;
 import java.util.Set;

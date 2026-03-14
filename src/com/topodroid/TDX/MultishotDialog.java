@@ -17,7 +17,7 @@ import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.LegType;
+import com.topodroid.types.LegType;
 
 // import java.util.regex.Pattern;
 import java.util.List;

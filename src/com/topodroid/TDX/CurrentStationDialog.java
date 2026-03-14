@@ -21,7 +21,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.StationFlag;
+import com.topodroid.types.StationFlag;
 
 // import androidx.annotation.RecentlyNonNull;
 

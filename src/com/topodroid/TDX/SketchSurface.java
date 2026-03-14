@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 
 import android.content.Context;
 

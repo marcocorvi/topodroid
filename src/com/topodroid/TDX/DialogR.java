@@ -18,8 +18,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.TDLayout;
 // import com.topodroid.prefs.TDSetting;
-// import com.topodroid.common.ExtendType;
-// import com.topodroid.common.PlotType;
+// import com.topodroid.types.ExtendType;
+// import com.topodroid.types.PlotType;
 
 import android.os.Bundle;
 import android.content.Context;

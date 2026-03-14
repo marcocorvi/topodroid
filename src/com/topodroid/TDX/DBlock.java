@@ -18,8 +18,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.LegType;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.LegType;
+import com.topodroid.types.ExtendType;
 import com.topodroid.dev.cavway.CavwayConst;
 
 

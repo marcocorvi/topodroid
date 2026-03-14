@@ -12,7 +12,7 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.ExtendType;
 
 class ParserTherionState
 {

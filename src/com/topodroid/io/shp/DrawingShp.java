@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDMath;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 // import com.topodroid.num.NumStation;
 import com.topodroid.TDX.Archiver;
 import com.topodroid.TDX.GeoReference;

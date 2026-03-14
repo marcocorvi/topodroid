@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.common.StationFlag;
+import com.topodroid.types.StationFlag;
 
 // import androidx.annotation.RecentlyNonNull;
 

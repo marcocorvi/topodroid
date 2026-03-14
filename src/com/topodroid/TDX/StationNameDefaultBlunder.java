@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDStatus;
-// import com.topodroid.common.LegType;
+// import com.topodroid.types.LegType;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;

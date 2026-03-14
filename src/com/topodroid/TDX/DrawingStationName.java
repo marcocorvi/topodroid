@@ -18,8 +18,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.num.NumStation;
 // import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.PointScale;
 
 import java.util.Locale;
 

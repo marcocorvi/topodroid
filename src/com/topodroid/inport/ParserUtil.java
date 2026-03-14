@@ -13,7 +13,7 @@
 package com.topodroid.inport;
 
 import com.topodroid.utils.TDUtil;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.ExtendType;
 
 import java.util.Locale;
 

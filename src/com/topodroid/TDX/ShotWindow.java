@@ -36,9 +36,9 @@ import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.dev.DataType;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.LegType;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.LegType;
+import com.topodroid.types.ExtendType;
 import com.topodroid.calib.CalibInfo;
 import com.topodroid.calib.CalibAlgo;
 import com.topodroid.calib.CalibTransform;
@@ -2443,7 +2443,7 @@ public class ShotWindow extends Activity
     if ( b.isScan() ) {
       TDLog.e("THIS SHOULD NOT HAPPEN");
       long leg_type = b.getLegType();
-      mApp_mData.updateScanBlockName( b.mId, TDInstance.sid, b.mFrom, from, leg_type, leg_type );
+      mApp_mData.updateScanSetName( b.mId, TDInstance.sid, b.mFrom, from, leg_type, leg_type );
       b.mFrom = from;
       // b.mBlockType remains unchanged
     } else {
@@ -3492,11 +3492,11 @@ public class ShotWindow extends Activity
    * @param pos    position in the list (unused)
    * @param block_type block_type (BLOCK_SCAN: none, BLOCK_HSCAN: plan, BLOCK_VSCAN2: profile, BLOCK_XSCAN3: xsection)
    */
-  void updateScanBlock( DBlock blk, String from, int pos, int block_type )
+  void updateScanSet( DBlock blk, String from, int pos, int block_type )
   {
     long leg_type = DBlock.getLegType( block_type );
     // TDLog.v("update scan set from " + blk.mId + " block type " + block_type + " leg type " + leg_type );
-    mApp_mData.updateScanBlockName( blk.mId, TDInstance.sid, blk.mFrom, from, blk.getLegType(), leg_type );
+    mApp_mData.updateScanSetName( blk.mId, TDInstance.sid, blk.mFrom, from, blk.getLegType(), leg_type );
     blk.mFrom = from;
     blk.resetBlockType( block_type );
     // updateShotList( mMyBlocks, mMyPhotos ); // this is overshooting: should update only the scan shot
@@ -3524,7 +3524,7 @@ public class ShotWindow extends Activity
    */
   void doDeleteScanShot( long id, String st, long leg_type )
   {
-    if ( mApp_mData.updateScanShotStatus( id, TDInstance.sid, st, leg_type, TDStatus.DELETED  ) ) {
+    if ( mApp_mData.updateScanSetStatus( id, TDInstance.sid, st, leg_type, TDStatus.NORMAL, TDStatus.DELETED  ) ) {
       updateDisplay();
     }
   }

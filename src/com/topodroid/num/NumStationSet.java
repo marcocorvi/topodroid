@@ -11,7 +11,7 @@
  */
 package com.topodroid.num;
 
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 
 import java.util.Stack;
 import java.util.List;

@@ -19,7 +19,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
-import com.topodroid.common.ExportInfo;
+import com.topodroid.types.ExportInfo;
 
 // import java.lang.ref.WeakReference;
 

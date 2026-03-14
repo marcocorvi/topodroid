@@ -17,8 +17,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
-import com.topodroid.common.LegType;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.LegType;
+import com.topodroid.types.ExtendType;
 
 // import java.io.File;
 import java.io.IOException;

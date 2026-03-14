@@ -23,7 +23,7 @@ import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 
 import android.content.Intent;
 import android.content.res.Resources;

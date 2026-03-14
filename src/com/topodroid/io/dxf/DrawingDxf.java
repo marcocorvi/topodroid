@@ -17,7 +17,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
-// import com.topodroid.common.PlotType;
+// import com.topodroid.types.PlotType;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;

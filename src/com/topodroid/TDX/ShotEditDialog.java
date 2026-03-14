@@ -26,8 +26,8 @@ import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.LegType;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.LegType;
+import com.topodroid.types.ExtendType;
 
 
 

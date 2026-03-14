@@ -20,8 +20,8 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.PointScale;
 
 import com.topodroid.num.TDNum;
 

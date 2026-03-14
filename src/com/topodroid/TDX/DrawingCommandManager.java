@@ -18,7 +18,7 @@ import com.topodroid.ui.TDGreenDot;
 import com.topodroid.num.TDNum;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 // import com.topodroid.math.Point2D; // intersection point
 
 // import android.content.res.Configuration;

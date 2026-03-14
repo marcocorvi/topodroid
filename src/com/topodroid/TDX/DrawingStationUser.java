@@ -16,7 +16,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.PointScale;
 
 import android.graphics.Matrix;
 import android.graphics.Canvas;

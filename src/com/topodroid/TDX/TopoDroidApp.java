@@ -53,10 +53,10 @@ import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.PairingRequest; // FIXME DROP_PAIRING
 // import com.topodroid.dev.cavway.CavwayConst;
 import com.topodroid.dev.cavway.CavwayMemoryDialog;
-import com.topodroid.common.LegType;
-import com.topodroid.common.ExtendType;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.ExportInfo;
+import com.topodroid.types.LegType;
+import com.topodroid.types.ExtendType;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.ExportInfo;
 // import com.topodroid.calib.CalibCoeffDialog;
 // import com.topodroid.calib.CalibReadTask;
 import com.topodroid.calib.CalibInfo;
@@ -3521,6 +3521,15 @@ public class TopoDroidApp extends Application
     if ( mComm != null && mComm instanceof CavwayComm ) {
       (new CavwaySyncDateTimeTask( ctx, (CavwayComm)mComm, address )).execute();
     }
+  }
+
+  /** @return the first block of a scan set
+   * @param blk   block in the scan-set
+   */
+  static DBlock getScanSetFirstBlock( DBlock blk, int status ) 
+  {
+    if ( blk == null || ! blk.isScan() ) return null;
+    return mData.getScanSetFirstBlock( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), status );
   }
 
 }

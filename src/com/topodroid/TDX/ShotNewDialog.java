@@ -21,7 +21,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.ExifInfo;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.ExtendType;
 
 
 import java.util.Locale;

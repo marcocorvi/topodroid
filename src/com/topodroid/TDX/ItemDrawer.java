@@ -14,8 +14,8 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.SymbolType;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.SymbolType;
+import com.topodroid.types.PointScale;
 
 import android.app.Activity;
 

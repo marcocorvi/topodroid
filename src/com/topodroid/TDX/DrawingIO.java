@@ -19,10 +19,10 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+import com.topodroid.types.PlotType;
 import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
-// import com.topodroid.common.PointScale;
+// import com.topodroid.types.PointScale;
 
 import java.io.File;
 import java.io.FileWriter;

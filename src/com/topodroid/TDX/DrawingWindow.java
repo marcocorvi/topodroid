@@ -49,11 +49,11 @@ import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 // import com.topodroid.dev.ConnectionState;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.ExtendType;
-import com.topodroid.common.LegType;
-import com.topodroid.common.SymbolType;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.ExtendType;
+import com.topodroid.types.LegType;
+import com.topodroid.types.SymbolType;
+import com.topodroid.types.PointScale;
 import com.topodroid.io.th.DrawingTh; // TH2EDIT
 
 import java.io.File;
@@ -972,19 +972,11 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotType.isAnySection( mType ) ) return;
     mApp_mData.updatePlotOrigin( TDInstance.sid, mPid1, station );
     mApp_mData.updatePlotOrigin( TDInstance.sid, mPid2, station );
-    List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     String old_station = mPlot1.start;
     mPlot1.start = station;
     mPlot2.start = station;
     mMultiBad = new ArrayList< StringPair >();
-    mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-    // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); 20250321
-    if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
-    mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
-    computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
-
-    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
-    computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+    recomputeReferences( true );
 
     NumStation st = mNum.getStation( old_station );
     if ( st != null ) {
@@ -4094,10 +4086,18 @@ public class DrawingWindow extends ItemDrawer
    */
   private void deleteSplay( DrawingSplayPath p, SelectionPoint sp, DBlock blk )
   {
-    mDrawingSurface.deleteSplay( p, sp ); 
-    mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
-    if ( TopoDroidApp.mShotWindow != null ) {
-      TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+    if ( blk.isScan() ) {
+      long id0 = mApp_mData.getScanSetFirstBlockId( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL );
+      if ( id0 > 0 ) {
+        mApp_mData.updateScanSetStatus( id0, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL, TDStatus.DELETED );      
+        recomputeReferences( true );
+      }
+    } else {
+      mDrawingSurface.deleteSplay( p, sp ); 
+      mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
+      if ( TopoDroidApp.mShotWindow != null ) {
+        TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+      }
     }
   }
 
@@ -7510,7 +7510,11 @@ public class DrawingWindow extends ItemDrawer
                 int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
                 new DrawingShotDialog( mActivity, this, item, flag ).show();
               } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
-                new DrawingShotDialog( mActivity, this, item, 0 ).show();
+                if ( item.mBlock.isScan() ) {
+                  new DrawingScanSetDialog( mActivity, this, item ).show();
+                } else {
+                  new DrawingShotDialog( mActivity, this, item, 0 ).show();
+                }
               }
             }
           } else {
@@ -10392,6 +10396,42 @@ public class DrawingWindow extends ItemDrawer
   {
     mDrawingSurface.highlightStation( name );
   }
+
+  void updateScanSetName( DBlock blk, String from, long leg_type )
+  {
+    mApp_mData.updateScanSetName( blk.mId, TDInstance.sid, blk.mFrom, from, blk.getLegType(), leg_type );
+    recomputeReferences( false );
+  }
+
+  private void recomputeReferences( boolean redo_num )
+  {
+    if ( redo_num ) {
+      List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+      // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); 20250321
+      if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
+      if ( mType == mPlot1.type ) {
+        mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
+        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
+        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
+        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+      } else if ( mType == mPlot2.type ) {
+        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // 20250321
+        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+        mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // 20250321
+        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
+      }
+    } else {
+      if ( mType == mPlot1.type ) {
+        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
+        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+      } else if ( mType == mPlot2.type ) {
+        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
+      }
+    }
+  }
+
 
 
 }

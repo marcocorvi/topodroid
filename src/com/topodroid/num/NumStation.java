@@ -13,7 +13,7 @@ package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
-import com.topodroid.common.ExtendType;
+import com.topodroid.types.ExtendType;
 import com.topodroid.TDX.TDAzimuth;
 
 

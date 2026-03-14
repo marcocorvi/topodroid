@@ -16,9 +16,9 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.ItemButton;
 // import com.topodroid.prefs.TDSetting;
-// import com.topodroid.common.PlotType;
-import com.topodroid.common.SymbolType;
-import com.topodroid.common.PointScale;
+// import com.topodroid.types.PlotType;
+import com.topodroid.types.SymbolType;
+import com.topodroid.types.PointScale;
 
 import java.util.ArrayList;
 

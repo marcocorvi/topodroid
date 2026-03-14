@@ -22,7 +22,7 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.TDX.FixedInfo;
 // import com.topodroid.TDX.CurrentStation;
 
-import com.topodroid.common.LegType;
+import com.topodroid.types.LegType;
 
 import java.io.IOException;
 // import java.io.FileInputStream;

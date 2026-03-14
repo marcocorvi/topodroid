@@ -21,8 +21,8 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.StationFlag;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.StationFlag;
 
 import java.util.List;
 

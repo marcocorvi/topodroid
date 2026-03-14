@@ -42,9 +42,9 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 // import com.topodroid.dev.ConnectionState;
-import com.topodroid.common.PlotType;
-import com.topodroid.common.SymbolType;
-import com.topodroid.common.PointScale;
+import com.topodroid.types.PlotType;
+import com.topodroid.types.SymbolType;
+import com.topodroid.types.PointScale;
 
 import java.util.List;
 import java.util.Set;

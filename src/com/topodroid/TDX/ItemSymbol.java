@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.ui.ItemButton;
-// import com.topodroid.common.SymbolType;
+// import com.topodroid.types.SymbolType;
 import com.topodroid.prefs.TDSetting;
 
 // import java.util.ArrayList;

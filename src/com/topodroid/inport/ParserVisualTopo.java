@@ -18,8 +18,8 @@ import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.ExtendType;
-import com.topodroid.common.LegType;
+import com.topodroid.types.ExtendType;
+import com.topodroid.types.LegType;
 import com.topodroid.TDX.TDAzimuth;
 
 import java.io.IOException;

@@ -22,7 +22,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.CWDfolder;
-import com.topodroid.common.ExportInfo;
+import com.topodroid.types.ExportInfo;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;

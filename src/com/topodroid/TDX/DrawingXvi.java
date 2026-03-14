@@ -19,7 +19,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 // import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
-// import com.topodroid.common.PlotType;
+// import com.topodroid.types.PlotType;
 
 import java.util.Locale;
 
