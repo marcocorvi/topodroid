@@ -92,12 +92,13 @@ class DrawingScanSetDialog extends MyDialog
     initLayout( R.layout.drawing_scanset_dialog, R.string.title_scanset );
 
     // TextView mLabel     = (TextView) findViewById(R.id.shot_label);
+    // mLabel.setText( String.format( mContext.getResources().getString(R.string.scanset_string), mFrom );
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETfrom.setText( mFrom );
     mETfrom.setOnLongClickListener( this );
 
     mSelectedPos = (int)(mLegType - 6);
-    TDLog.v("selected pos " + mSelectedPos );
+    // TDLog.v("selected pos " + mSelectedPos );
     mSPtype = (Spinner) findViewById(R.id.shot_type );
     // ArrayAdapter adapter = new ArrayAdapter<>( this, R.layout.menu, leg_types );
     ArrayAdapter adapter = ArrayAdapter.createFromResource( mContext, R.array.scanLegType, android.R.layout.simple_spinner_item );   

@@ -148,7 +148,9 @@ public class CavwayProtocol extends TopoDroidProtocol
     mCavwayFlag = ( (flag >> 1) & 0x7 ) ^ 0x7; // cavway flag: this uses the complementary values than in the device
     // boolean is_scan = (packetdata[1] & (0x01<<6)) == 0;
     // if ( is_scan ) mCavwayFlag != (1<<4);
-    if ( mCavwayFlag != 0 ) TDLog.v("cavway data flag " + mCavwayFlag ); // DEBUG check the flag values
+    TDLog.v( String.format( "Cavway byte[1] %02X", flag ) ); // DEBUG check the flag values
+    // 0x9F = 1001.1111 = start of scan
+    // 0xBF = 1011.1111 = continue of scan
 
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
     //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);
@@ -299,12 +301,12 @@ public class CavwayProtocol extends TopoDroidProtocol
               // mComm.sendCommand( packet.getData(1) | 0x55);
               mComm.sendCommand(mPacketBytes[1] | 0x55);
               if ( res == DataType.PACKET_DATA ) {
-                boolean is_scan = (mPacketBytes[1] & 0x40) == 0;
-                int scan_bit = mPacketBytes[1] & 0x20;
-                mComm.handleCavwayPacket(res, mLister, 0, mComment, is_scan, scan_bit );
+                // boolean is_scan = (mPacketBytes[1] & 0x40) == 0;
+                int scan_bit = ( ( mPacketBytes[1] ^ 0x60 ) >> 5 ) & 0x03;  // 11 start-scan, 10 continue-scan, 0 not scan
+                mComm.handleCavwayPacket(res, mLister, 0, mComment, scan_bit );
                 return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
               } else if (  res == DataType.PACKET_G ) {
-                mComm.handleCavwayPacket(res, mLister, 0, mComment, false, -1 );
+                mComm.handleCavwayPacket(res, mLister, 0, mComment, 0 );
                 return PACKET_CALIB_DATA; 
               } else {
                 return PACKET_ERROR;

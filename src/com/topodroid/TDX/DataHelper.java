@@ -23,6 +23,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
+// import com.topodroid.utils.TDRange;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.inport.ParserShot;
 import com.topodroid.types.LegType;
@@ -1719,45 +1720,6 @@ public class DataHelper extends DataSetObservable
   
 
 
-  // /** @return the ID of the first block in a scan-set (or -1)
-  //  * @param id      id of first block of the scan set
-  //  * @param sid     survey ID
-  //  * @param old_st  old station name
-  //  * @param old_leg old leg type
-  //  * @note used only by DrawingWindow
-  //  */
-  // long getScanSetFirstBlockId( long id, long sid, String st, long leg_type, int status )
-  // {
-  //   TDLog.v("Scan set get first block-ID of " + id + " station " + st + " leg-type " + leg_type );
-  //   Cursor cursor = myDB.rawQuery( qScanShotsBefore, new String[] { Long.toString( sid ), Long.toString( id ), Long.toString(status), st, Long.toString(leg_type) } );
-  //   long ret = -1;
-  //   if (cursor.moveToFirst()) {
-  //     ret = cursor.getLong( 0 );
-  //   }
-  //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-  //   return ret;
-  // }
-
-  // /** @return the Block of the first block in a scan-set (or null)
-  //  * @param id      id of first block of the scan set
-  //  * @param sid     survey ID
-  //  * @param old_st  old station name
-  //  * @param old_leg old leg type
-  //  */
-  // DBlock getScanSetFirstBlock( long id0, long sid, String st, long leg_type, int status )
-  // {
-  //   TDLog.v("Scan set get first block of " + id0 + " station " + st + " leg-type " + leg_type );
-  //   long id = -1L;
-  //   Cursor cursor = myDB.rawQuery( qScanShotsBefore, new String[] { Long.toString( sid ), Long.toString( id0 ), Long.toString(status), st, Long.toString(leg_type) } );
-  //   if (cursor.moveToFirst()) {
-  //     id = cursor.getLong( 0 );
-  //   }
-  //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-  //   TDLog.v("Scan set first block of " + id0 + " : " + id );
-  //   if ( id > 0 ) return selectShot( id, sid );
-  //   return null;
-  // }
-
   /** @return the ID value at the end (one past the last) of a scan set
    * @param id      id of first block of the scan set
    * @param sid     survey ID
@@ -1785,6 +1747,37 @@ public class DataHelper extends DataSetObservable
     TDLog.v("Scan set end block of " + id0 + " : " + id );
     return id;
   }
+
+  // get the intervals of bearing and of clino
+  // boolean getScanSetAngles( long idx, long sid, TDRange azimuth, TDRange clino )
+  // {  
+  //   Cursor cursor = myDB.rawQuery( qScanShotsAngles, new String[] { Long.toString( sid ), Long.toString( idx ), Long.toString(TDStatus.NORMAL) } );
+  //   if (cursor.moveToFirst()) {
+  //     double a = cursor.getDouble( 0 );
+  //     azimuth.min = azimuth.max = a;
+  //     if ( a < 180 ) a += 360;
+  //     TDRange a360 = new TDRange( a );
+  //     clino.min   = clino.max   = cursor.getDouble( 1 );
+  //     if ( cursor.moveToNext() ) {
+  //       do {
+  //         a = cursor.getDouble( 0 );
+  //         azimuth.update( a );
+  //         if ( a < 180 ) a += 360; 
+  //         a360.update( a );
+  //         clino.update( cursor.getDouble( 1 ) );
+  //       } while (cursor.moveToNext());
+  //     }
+  //     if ( a360.span() < 180 && a360.span() < azimuth.span() && a360.max > 360 && a360.min < 360 ) {
+  //       azimuth.min = a360.max - 360;
+  //       azimuth.max = a360.min;
+  //     }
+  //   } else { 
+  //     return false;
+  //   }
+  //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  //   return true;
+  // }
+ 
 
   /** update the station and leg-type of a scan-set
    * @param id      id of first block of the scan set
@@ -3173,6 +3166,7 @@ public class DataHelper extends DataSetObservable
   private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
   private static final String qShotsByStations = "select id, distance, bearing, clino from shots where surveyId=? AND status=0 AND fStation=? AND tStation=? ";
   private static final String qScanShotsAfter  = "select id from shots where surveyId=? AND id>=? AND status=? AND idx=? ORDER BY id ";
+  private static final String qScanShotsAngles = "select bearing, clino from shots where surveyId=? AND idx=? AND status=? ";
   // private static final String qScanShotsBefore = "select id from shots where surveyId=? AND id<=? AND status=? AND fStation=? AND leg=? ORDER BY id ";
   private static final String qShotIdx = "select idx from shots where surveyId=? AND id>=? ";
   private static final String qShotLegType = "select leg, fStation from shots where surveyId=? AND id>=? ";

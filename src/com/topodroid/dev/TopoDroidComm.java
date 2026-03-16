@@ -166,7 +166,6 @@ public class TopoDroidComm
   //   }
   // }
 
-  static int mScanBit = -1;
   static long mScanSetIdx = 0; // ID of the first block of the scan-set, or 0 not a scan-shot, -1 to be set
 
   /** handle regular packet
@@ -174,10 +173,9 @@ public class TopoDroidComm
    * @param lister    data lister
    * @param data_type unused
    * @param comment   data comment (error)
-   * @param is_scan   whether the data is a scan data
-   * @param scan_bit  toggle bit of scan-set (-1 for non-scan shot)
+   * @param scan_bit  3: start of scan, 2 continue of scan, 0 not scan, 1 unused
    */
-  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment, boolean is_scan, int scan_bit )
+  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment, int scan_bit )
   {
     assert( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 );
     if ( res == DataType.PACKET_DATA ) {
@@ -192,16 +190,15 @@ public class TopoDroidComm
       long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       int leg_type = LegType.NORMAL;
       boolean update_idx = false;
-      if ( is_scan ) {
+      if ( scan_bit > 0 ) {
         leg_type = LegType.SCAN;
-        if ( scan_bit != mScanBit ) {
-          TDLog.v("set scan bit from " + mScanBit + " to " + scan_bit );
-          mScanBit = scan_bit;
-          mScanSetIdx = -1;
+        if ( scan_bit == 3 ) {
+          TDLog.v("start of scan");
+          mScanSetIdx = -1; // set scan-index in the database to the shot index
+        // } else { // nothing mScanSetIndex is positive and will be used to set scan-index in the database
         }
       } else {
-        mScanBit = -1;
-        mScanSetIdx = 0;
+        mScanSetIdx = 0; // do not set scan-index field in the database
       }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,

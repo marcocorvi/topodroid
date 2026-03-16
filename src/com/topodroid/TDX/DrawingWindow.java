@@ -7660,8 +7660,19 @@ public class DrawingWindow extends ItemDrawer
    */
   private void askDeleteSplay( final DrawingSplayPath p, final SelectionPoint sp, final DBlock blk )
   {
-    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
-                              String.format( getResources().getString( R.string.splay_delete ), blk.Name() ), 
+    long id0 = 0;
+    String title;
+    if ( blk.isScan() ) {
+      id0 = mApp_mData.getShotIdx( blk.mId, TDInstance.sid );
+      if ( id0 > 0 ) {
+        title = String.format( getResources().getString( R.string.scanset_delete ), blk.mFrom );
+      } else {
+        title = String.format( getResources().getString( R.string.splay_delete ), blk.Name() );
+      }
+    } else {
+      title = String.format( getResources().getString( R.string.splay_delete ), blk.Name() );
+    }
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), title,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {

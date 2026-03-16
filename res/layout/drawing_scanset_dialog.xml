@@ -6,10 +6,10 @@
   android:orientation="vertical"
   >
    					  
-  <!-- TextView
-    android:id="@+id/shot_label"
+  <!-- TextView android:id="@+id/shot_label"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
+    android:layout_marginTop="@dimen/marginv"
     android:textSize="@dimen/textsizebig"
   / -->
 
