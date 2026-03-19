@@ -696,7 +696,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="shot_reverse">обръщане</string -->
     <string name="shot_to">до</string>
     <string name="shot_refreshed">Обновен списък с измервания</string>
-    <!-- TODO string name="scan_type">Scan type</string -->
+    <string name="scan_type">Тип сканиране</string>
 
     <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата\?</string>
@@ -1337,7 +1337,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
-    <!-- TODO string name="title_scan_shot">Scan shots</string -->
+    <string name="title_scan_shot">Проверка на измерване</string>
     <string name="title_search">Търси репер/отсечка</string>
     <string name="title_stations">Репери</string>
     <string name="title_plot_search">Търсене на репер</string>
@@ -1719,8 +1719,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_text_size_summary">Размер на текста за списъците</string>
   <string name="pref_symbol_size_title">Размер на символа</string>
   <string name="pref_symbol_size_summary">Размер на символите в долната лента</string>
-  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
-  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
+  <string name="pref_toolbar_update_title">Актуализация на лентата с инструменти</string>
+  <string name="pref_toolbar_update_summary">Как да вмъкнете символи в долната лента</string>
   <string name="pref_closeness_title">Радиус на селекция</string>
   <string name="pref_closeness_message">Радиус на селекция на елемент от скицата</string>
   <string name="pref_eraseness_title">Размер на гумата</string>
@@ -1831,8 +1831,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_shot_timer_summary">Секунди за изчакване преди замерване на посоката на измерването</string>
   <string name="pref_beep_volume_title">Сила на звука на таймера</string>
   <string name="pref_beep_volume_summary">Сила на звука на таймера в проценти</string>
-  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
-  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
+  <string name="pref_beep_length_title">Продължителност на звуковия сигнал на таймера</string>
+  <string name="pref_beep_length_summary">Продължителност на звуковия сигнал [msec]</string>
   <string name="pref_extend_frac_title">Фракционно разширение</string>
   <string name="pref_extend_frac_summary">\"разширението\" може да има точка</string>
   <string name="pref_recent_shot_title">Скорошни измервания</string>
