@@ -131,8 +131,8 @@ class ParserPocketTopo extends ImportParser
       float ca = shot.inclination();
       float ra = shot.roll();
       // TDLog.v("Parser PT shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
-      from = from.replaceAll( "^0+", "" );
-      to   = to.replaceAll( "^0+", "" );
+      // from = from.replaceAll( "^0+", "" ); // HBPT
+      // to   = to.replaceAll( "^0+", "" ); // HBPT
       if ( from.equals("-") ) from = "";
       if ( to.equals("-") )   to = "";
       if ( from.equals( from_prev ) && to.equals( to_prev ) && ! to_prev.equals("") ) {
