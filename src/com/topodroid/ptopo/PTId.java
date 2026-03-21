@@ -100,10 +100,10 @@ public class PTId
   {
     if ( isUndef() ) return "-";
     if ( isNumber() ) {
-      return String.format(Locale.US, "%d", _id + 0x80000001 ); // FIXME this is the correct form
+      return String.format(Locale.US, "%d", _id + 0x80000001 -2 ); // HBPT FIXME this is the correct form
       // return new String("-");
     }
-    return String.format(Locale.US, "%04d.%d", _id>>16, _id & 0xffff );
+    return String.format(Locale.US, "%d.%d", _id>>16, _id & 0xffff ); // HBPT
   }
     
   // -----------------------------------------------------------
