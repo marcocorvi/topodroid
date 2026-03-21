@@ -70,7 +70,7 @@ public class PTTrip
 
     private void setDate( )
     {
-      long days = (_time/NANO2SEC) / SEC_PER_DAY;
+      long days = 1 + (_time/NANO2SEC) / SEC_PER_DAY; // HBPT day increment
       int y = 1;
       boolean leap = ( (y % 4) == 0 && ( (y % 100) != 0 || (y % 400) == 0 ) );
       while ( days > (leap ? 366L : 365L ) ) {
