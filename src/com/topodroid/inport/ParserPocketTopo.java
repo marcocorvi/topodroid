@@ -98,6 +98,7 @@ class ParserPocketTopo extends ImportParser
     int nr_trip = ptfile.tripCount();
     // TDLog.v( "PT trip count " + nr_trip );
     mComment = "";
+	mTitle = ""; // HBPT
     // mTeam = "";
     if ( nr_trip > 0 ) { // use only the first trip
       PTTrip trip = ptfile.getTrip(0);
