@@ -62,7 +62,7 @@ import android.graphics.RectF;
 
 class ParserPocketTopo extends ImportParser
 {
-  String mTitle = "";
+  // String mTitle = ""; // HBPT
   String mComment;
   String mStartFrom;
 
@@ -102,7 +102,7 @@ class ParserPocketTopo extends ImportParser
     if ( nr_trip > 0 ) { // use only the first trip
       PTTrip trip = ptfile.getTrip(0);
       mDate = String.format(Locale.US, "%04d-%02d-%02d", trip._year, trip._month, trip._day );
-      if ( trip.hasComment() ) mComment = trip.comment();
+      if ( trip.hasComment() ) mTitle = trip.comment(); // HBPT
       // trip.declination(); NOT USED
       // TODO create a survey
     } else {
