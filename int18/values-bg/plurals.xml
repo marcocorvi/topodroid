@@ -22,7 +22,7 @@
     <item quantity="one">Намерено %1$d устройство</item>
     <item quantity="other">Намерени %1$d устройства</item>
   </plurals>
-  <TODO plurals name="trilateration_success">
+  <plurals name="trilateration_success">
     <item quantity="zero">Не е намерен клъстер</item>
     <item quantity="one">Успех на трилатерацията: %1$d клъстър</item>
     <item quantity="other">Успех на трилатерацията: %1$d клъстери</item>

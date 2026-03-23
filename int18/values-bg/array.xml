@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <TODO string-array name="scanLegType">
+  <string-array name="scanLegType">
      <item name="s">Общо</item>
      <item name="sX">Сечение</item>
      <item name="sH">Хоризонтално</item>
