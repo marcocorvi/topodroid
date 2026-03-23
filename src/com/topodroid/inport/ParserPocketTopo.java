@@ -62,7 +62,7 @@ import android.graphics.RectF;
 
 class ParserPocketTopo extends ImportParser
 {
-  // String mTitle = ""; // HBPT
+  // String mTitle = ""; // HBPT 20260321
   String mComment;
   String mStartFrom;
 
@@ -98,12 +98,12 @@ class ParserPocketTopo extends ImportParser
     int nr_trip = ptfile.tripCount();
     // TDLog.v( "PT trip count " + nr_trip );
     mComment = "";
-	mTitle = ""; // HBPT
+	mTitle = ""; // HBPT 20260321
     // mTeam = "";
     if ( nr_trip > 0 ) { // use only the first trip
       PTTrip trip = ptfile.getTrip(0);
       mDate = String.format(Locale.US, "%04d-%02d-%02d", trip._year, trip._month, trip._day );
-      if ( trip.hasComment() ) mTitle = trip.comment(); // HBPT
+      if ( trip.hasComment() ) mTitle = trip.comment(); // HBPT 20260321
       // trip.declination(); NOT USED
       // TODO create a survey
     } else {
@@ -132,8 +132,8 @@ class ParserPocketTopo extends ImportParser
       float ca = shot.inclination();
       float ra = shot.roll();
       // TDLog.v("Parser PT shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
-      // from = from.replaceAll( "^0+", "" ); // HBPT
-      // to   = to.replaceAll( "^0+", "" ); // HBPT
+      // from = from.replaceAll( "^0+", "" ); // HBPT 20260321
+      // to   = to.replaceAll( "^0+", "" ); // HBPT 20260321
       if ( from.equals("-") ) from = "";
       if ( to.equals("-") )   to = "";
       if ( from.equals( from_prev ) && to.equals( to_prev ) && ! to_prev.equals("") ) {
