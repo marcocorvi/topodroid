@@ -320,7 +320,7 @@ public class BrushManager
   public static final Paint fixedShotPaint   = makePaint( 0xffbbbbbb,           WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint fixedBluePaint   = makePaint( 0xff9999ff,           WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint deepBluePaint    = makePaint( 0xff3366ff,           WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint darkBluePaint    = makePaint( 0xbb3366ff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
+  public static final Paint lightPinkPaint   = makePaint( 0xffb66dff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
   public static final Paint lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
@@ -597,7 +597,7 @@ public class BrushManager
       // fixedShotPaint   = makePaint( 0xffbbbbbb,           WIDTH_CURRENT, Paint.Style.STROKE);
       // fixedBluePaint   = makePaint( 0xff9999ff,           WIDTH_CURRENT, Paint.Style.STROKE);
       // deepBluePaint    = makePaint( 0xff3366ff,           WIDTH_CURRENT, Paint.Style.STROKE);
-      // darkBluePaint    = makePaint( 0x663366ff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
+      // lightPinkPaint   = makePaint( 0x663366ff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
       // lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
       // fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
       // fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
@@ -639,7 +639,7 @@ public class BrushManager
     /* if (fixedShotPaint != null)    */ fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (fixedBluePaint != null)    */ fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (lightBluePaint != null)    */ lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    /* if (darkBluePaint != null)     */ darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (lightPinkPaint != null)    */ lightPinkPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (deepBluePaint != null)     */ deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (paintSplayXB != null)      */ paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (paintSplayXViewed != null) */ paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );

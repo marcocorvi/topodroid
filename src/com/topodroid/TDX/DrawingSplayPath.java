@@ -50,7 +50,7 @@ public class DrawingSplayPath extends DrawingPath
 
   public float xEnd, yEnd; // drawing circle center = endpoint (scene coords)
 
-  private static final Paint H_SPLAY_PAINT = BrushManager.darkBluePaint;
+  private static final Paint H_SPLAY_PAINT = BrushManager.lightPinkPaint;
   private static final Paint V_SPLAY_PAINT = BrushManager.deepBluePaint;
 
   /** toggle the display mode of splays , between LINE and POINT

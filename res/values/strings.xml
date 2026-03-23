@@ -645,7 +645,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="scrap_delete">Delete scrap ?</string>
     <string name="item_delete">Delete item %1$s ?</string>
     <string name="splay_delete">Delete splay %1$s ?</string>
-    <string name="scanset_delete">Delete scan-set at %1$s ?</string>
+    <string name="scanset_delete">Delete scan-set shot at %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>
     <string name="plot_dangling">Dangling sketch</string>
     <string name="plot_name">Sketch name</string>

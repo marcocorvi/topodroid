@@ -4086,20 +4086,20 @@ public class DrawingWindow extends ItemDrawer
    */
   private void deleteSplay( DrawingSplayPath p, SelectionPoint sp, DBlock blk )
   {
-    if ( blk.isScan() ) {
-      // long id0 = mApp_mData.getScanSetFirstBlockId( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL );
-      long id0 = mApp_mData.getShotIdx( blk.mId, TDInstance.sid );
-      if ( id0 > 0 ) {
-        mApp_mData.updateScanSetStatus( id0, TDInstance.sid, TDStatus.NORMAL, TDStatus.DELETED );      
-        recomputeReferences( true );
-      }
-    } else {
+    // if ( blk.isScan() ) {
+    //   // long id0 = mApp_mData.getScanSetFirstBlockId( blk.mId, TDInstance.sid, blk.mFrom, blk.getLegType(), TDStatus.NORMAL );
+    //   long id0 = mApp_mData.getShotIdx( blk.mId, TDInstance.sid );
+    //   if ( id0 > 0 ) {
+    //     mApp_mData.updateScanSetStatus( id0, TDInstance.sid, TDStatus.DELETED );      
+    //     recomputeReferences( true );
+    //   }
+    // } else {
       mDrawingSurface.deleteSplay( p, sp ); 
       mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
       if ( TopoDroidApp.mShotWindow != null ) {
         TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
       }
-    }
+    // }
   }
 
   /** delete a drawing point

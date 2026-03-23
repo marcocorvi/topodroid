@@ -3558,7 +3558,7 @@ public class ShotWindow extends Activity
    */
   void doDeleteScanShot( long id, String st, long leg_type )
   {
-    if ( mApp_mData.updateScanSetStatus( id, TDInstance.sid, TDStatus.NORMAL, TDStatus.DELETED  ) ) {
+    if ( mApp_mData.updateScanSetStatus( id, TDInstance.sid, TDStatus.DELETED  ) ) {
       updateDisplay();
     }
   }

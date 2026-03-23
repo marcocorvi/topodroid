@@ -113,7 +113,7 @@ public class TDColor
   public static final int SPLAY_BACKSIGHT = 0xcc66ccee; // blue
   public static final int SPLAY_GENERIC   = 0xcc77ff77; // green
 
-  public static final int SCAN_SHOT       = 0xcc999999; // gray
+  public static final int SCAN_SHOT       = YELLOW_GREEN; // 0xcc9999ff; // gray
 
   // public static final int YELLOW_GREEN = 0xff99cc3d;
   // public static final int YELLOW_GREEN_X  = 0xff88ff2c;
