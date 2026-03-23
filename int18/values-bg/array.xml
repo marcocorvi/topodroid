@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="scanLegType">
-     <item name="s">Generic</item>
-     <item name="sX">XSection</item>
-     <item name="sH">Horizontal</item>
-     <item name="sV">Vertical</item>
-  </string-array -->
+  <TODO string-array name="scanLegType">
+     <item name="s">Общо</item>
+     <item name="sX">Сечение</item>
+     <item name="sH">Хоризонтално</item>
+     <item name="sV">Вертикално</item>
+  </string-array>
 
-  <!-- TODO string-array name="toolbarUpdate">
-     <item name="oldest">Replace oldest</item>
-     <item name="front">Put at front</item>
-     <item name="front_oldest">At front, drop oldest</item>
-  </string-array -->
+  <string-array name="toolbarUpdate">
+     <item name="oldest">Замени най-старото</item>
+     <item name="front">Постави отпред</item>
+     <item name="front_oldest">Отпред, пусни най-стария</item>
+  </string-array>
 
   <string-array name="teamNames">
      <item name="plain">Обикновен текст</item>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="scanLegType">
-     <item name="s">Generic</item>
-     <item name="sX">XSection</item>
-     <item name="sH">Horizontal</item>
-     <item name="sV">Vertical</item>
-  </string-array -->
+  <string-array name="scanLegType">
+     <item name="s">Általános</item>
+     <item name="sX">Keresztmetszet</item>
+     <item name="sH">Vízszintes</item>
+     <item name="sV">Függőleges</item>
+  </string-array>
 
   <string-array name="toolbarUpdate">
      <item name="oldest">Legrégebbi cseréje</item>
