@@ -144,7 +144,7 @@ public class AIhelper // extends AsyncTask< String, Void, String >
       final WeakReference<AIdialog> dialogRef = new WeakReference<>(dialog);
 
       StringBuilder sb = new StringBuilder();
-      if ( local_context && mRefPage != null ) sb.append("CONTTEXT: The user is currently reading the manual page: \'").append( mRefPage ).append("\'\n");
+      if ( local_context && mRefPage != null ) sb.append("CONTEXT: The user is currently reading the manual page: \'").append( mRefPage ).append("\'\n");
       sb.append("QUESTION: ").append( user_prompt ).append("\n");
  
       Content content = new Content.Builder().addText( sb.toString() ).build();
