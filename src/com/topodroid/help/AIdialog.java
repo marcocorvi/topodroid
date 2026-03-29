@@ -97,7 +97,7 @@ public class AIdialog extends MyDialog
     mParent = parent;
     mParent.setAIbuttonEnabled( false );
     mRAImodel = r_ai_model;
-    TDLog.v("AI dialog: page " + page + " model " + r_ai_model );
+    TDLog.v("AI dialog: cstr page " + page + " user key " + user_key );
     if ( user_key != null ) {
       mHelper = new AIhelper( context, this, user_key, page );
       mIdxModel = IDX_MODEL;
@@ -177,6 +177,7 @@ public class AIdialog extends MyDialog
         if ( question == null || question.isEmpty() ) {
           et.setError( mContext.getResources().getString( R.string.error_question ) );
         } else {
+          TDLog.v("AI dialog: SUBMIT question " + question );
           mCanSubmit = false;
           Button b = (Button)findViewById(R.id.button_submit);
           b.setOnClickListener( null );
@@ -194,8 +195,11 @@ public class AIdialog extends MyDialog
           }
           mLocalContext = false;
         }
+      } else {
+        TDLog.v("AI dialog: SUBMIT cannot submit" );
       }
     } else if ( v.getId() == R.id.button_reset ) { // reset the chat
+      TDLog.v("AI dialog: RESET chat" );
       if ( mHelper != null ) {
         mHelper.resetChat();
       /* GEMMA3
@@ -204,10 +208,12 @@ public class AIdialog extends MyDialog
       // END GEMMA3 */
       }
     } else if ( v.getId() == R.id.button_clear ) { // clear the question and answer texts
+      TDLog.v("AI dialog: CLEAR question and response");
       // ((TextView) findViewById( R.id.answer )).setText(""); 
       ((EditText) findViewById( R.id.question )).setText("");
       mAnswer.setText("");
     } else {
+      TDLog.v("AI dialog: DISMISS" );
       mParent.setAIbuttonEnabled( true );
       dismiss();
     }
@@ -215,6 +221,7 @@ public class AIdialog extends MyDialog
 
   void resetCanSubmit()
   {
+      TDLog.v("AI dialog: reset can submit" );
     mCanSubmit = true;
     Button v = (Button)findViewById(R.id.button_submit);
     v.setOnClickListener( this );

@@ -69,6 +69,7 @@ public class HelpDialog extends MyDialog
   public HelpDialog( Context context, Activity activity, int[] icons, int[] menus, int[] texts1, int[] texts2, int n0, int n1, String page )
   {
     super( context, null, R.string.HelpDialog );  // nul app
+    TDLog.v("Help dialog: cstr" );
     mParent = activity;
     mIcons = icons;
     mMenus = menus;
@@ -91,6 +92,7 @@ public class HelpDialog extends MyDialog
     mBtnManual.setOnLongClickListener( this );
     mBtnAI = (Button) findViewById( R.id.button_ai );
     if ( TDandroid.isOnline( mContext ) ) {
+      TDLog.v("Help dialog: is online" );
       mBtnAI.setOnClickListener( this );
     } else {
       mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );

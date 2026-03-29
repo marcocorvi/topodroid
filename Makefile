@@ -163,7 +163,7 @@ SRC = \
   ./src/com/topodroid/c3in/*.java \
   ./src/com/topodroid/c3out/*.java \
   ./src/com/topodroid/c3walls/*/*.java \
-  ./src/com/topodroid/common/*.java \
+  ./src/com/topodroid/types/*.java \
   ./src/com/topodroid/calib/*.java \
   ./src/com/topodroid/dev/*.java \
   ./src/com/topodroid/dev/*/*.java \

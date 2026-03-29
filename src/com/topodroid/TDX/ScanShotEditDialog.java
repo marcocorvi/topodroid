@@ -19,6 +19,7 @@ import com.topodroid.utils.TDStatus;
 // import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.types.BlockType;
 import com.topodroid.prefs.TDSetting;
 
 import android.view.View;
@@ -168,13 +169,13 @@ class ScanShotEditDialog extends MyDialog
     mRBxsection.setOnClickListener( this );
 
     switch ( mBlk.getBlockType() ) {
-      case DBlock.BLOCK_XSCAN: 
+      case BlockType.XSCAN: 
         mRBxsection.setChecked( true );
         break;
-      case DBlock.BLOCK_HSCAN:
+      case BlockType.HSCAN:
         mRBplan.setChecked( true );
         break;
-      case DBlock.BLOCK_VSCAN:
+      case BlockType.VSCAN:
         mRBprofile.setChecked( true );
         break;
     }
@@ -191,13 +192,13 @@ class ScanShotEditDialog extends MyDialog
       mETfrom.setError( resString( R.string.bad_station_name ) );
       return false;
     }
-    int splay_class = DBlock.BLOCK_SCAN;
-    if ( mRBplan.isChecked() ) { splay_class = DBlock.BLOCK_HSCAN; }
-    else if ( mRBprofile.isChecked() ) { splay_class = DBlock.BLOCK_VSCAN; }
-    else if ( mRBxsection.isChecked() ) { splay_class = DBlock.BLOCK_XSCAN; }
+    int splay_class = BlockType.SCAN;
+    if ( mRBplan.isChecked() ) { splay_class = BlockType.HSCAN; }
+    else if ( mRBprofile.isChecked() ) { splay_class = BlockType.VSCAN; }
+    else if ( mRBxsection.isChecked() ) { splay_class = BlockType.XSCAN; }
     
     // TDLog.v(" FROM " + shot_from + " " + mBlk.mFrom + " Block type " + splay_class + " " + mBlk.mBlockType );
-    if ( ! shot_from.equals( mBlk.mFrom ) || splay_class != mBlk.mBlockType ) mParent.updateScanSet( mBlk, shot_from, mPos, splay_class );
+    if ( ! shot_from.equals( mBlk.mFrom ) || splay_class != mBlk.getBlockType() ) mParent.updateScanSet( mBlk, shot_from, mPos, splay_class );
     return true;
   }
 

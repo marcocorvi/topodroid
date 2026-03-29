@@ -12,12 +12,12 @@
     android:layout_marginTop="@dimen/marginv"
   />
 
+  <!-- GEMMA3 
   <LinearLayout 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     >
-    <!-- GEMMA 3 -->
     <LinearLayout android:id="@+id/pref_layout"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
@@ -63,26 +63,8 @@
         />
       </LinearLayout>
     </LinearLayout>
-    <!-- END GEMMA3 -->
-
-
-    <ScrollView 
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent" 
-      android:layout_weight="1"
-      >
-      <!-- Use a layout_height of 0dp instead of fill_parent -->
-      <TextView android:id="@+id/answer" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="match_parent"
-        android:ems="25"
-        android:layout_height="0dp" 
-        android:minLines="16"
-        android:maxLines="18"
-        android:scrollHorizontally="false"
-      />
-    </ScrollView>
   </LinearLayout>
+  END GEMMA3 -->
 
   <LinearLayout 
     android:layout_width="match_parent"
@@ -136,4 +118,21 @@
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>
+
+    <ScrollView 
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" 
+      android:layout_weight="1"
+      >
+      <!-- Use a layout_height of 0dp instead of fill_parent -->
+      <TextView android:id="@+id/answer" 
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="match_parent"
+        android:ems="25"
+        android:layout_height="0dp" 
+        android:minLines="16"
+        android:maxLines="18"
+        android:scrollHorizontally="false"
+      />
+    </ScrollView>
 </LinearLayout>

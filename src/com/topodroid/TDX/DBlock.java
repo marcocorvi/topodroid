@@ -13,12 +13,12 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.LegType;
+import com.topodroid.types.BlockType;
 import com.topodroid.types.ExtendType;
 import com.topodroid.dev.cavway.CavwayConst;
 
@@ -63,7 +63,8 @@ public class DBlock
   int  mExtend;
   private long mFlag;     
   private long mCavwayFlag = 0;
-  int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY
+  // block type is a superset of the leg-type which is in the database table
+  private int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY 
   private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
   boolean mFailBacksplay;  // whether this splay failed to backsight the preceeding leg
@@ -221,77 +222,6 @@ public class DBlock
   public int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
 
   // ------------------------------------------------------------------
-  // BLOCK TYPE
-
-  private static final int BLOCK_BLANK     =  0;
-  public  static final int BLOCK_MAIN_LEG  =  1; // primary leg shot
-  private static final int BLOCK_SEC_LEG   =  2; // additional shot of a centerline leg
-  private static final int BLOCK_BLANK_LEG =  3; // blank centerline leg-shot
-  private static final int BLOCK_BACK_LEG  =  4; // 
-  // splays must come last
-  private static final int BLOCK_SPLAY     =  5;
-  private static final int BLOCK_X_SPLAY   =  6; // FIXME_X_SPLAY cross splay
-  private static final int BLOCK_H_SPLAY   =  7; // FIXME_H_SPLAY horizontal splay
-  private static final int BLOCK_V_SPLAY   =  8; // FIXME_V_SPLAY vertical splay
-  public  static final int BLOCK_SCAN      =  9; // FIXME_S_SPLAY scan splay
-  public  static final int BLOCK_XSCAN     = 10; // FIXME_S_SPLAY scan splay
-  public  static final int BLOCK_HSCAN     = 11; // FIXME_S_SPLAY scan splay
-  public  static final int BLOCK_VSCAN     = 12; // FIXME_S_SPLAY scan splay
-  // private static final int BLOCK_BLUNDER   = 10; // 
-
-  /** block-type to leg-type table
-   */
-  private static final long[] legOfBlockType = {
-    LegType.NORMAL, // 0 BLANK
-    LegType.NORMAL, // 0 LEG
-    LegType.EXTRA,  // 1 SEC_LEG
-    LegType.NORMAL, // 0 BLANK_LEG
-    LegType.BACK,   // 3 BACK_LEG
-    LegType.NORMAL, // 0 SPLAY
-    LegType.XSPLAY, // 2
-    LegType.HSPLAY, // 4
-    LegType.VSPLAY, // 5
-    LegType.SCAN,   // 6
-    LegType.XSCAN,  // 7
-    LegType.HSCAN,  // 8
-    LegType.VSCAN,  // 9
-    // LegType.BLUNDER,// 3 BLUNDER_LEG
-  };
-
-  /** array of block-type of splays
-   */
-  static final int[] blockOfSplayLegType = {
-    BLOCK_SPLAY,
-    -1, // BLOCK_SEC_LEG, // should never occur
-    BLOCK_X_SPLAY,
-    -1, //  BLOCK_BACK_LEG, // should never occur
-    BLOCK_H_SPLAY,
-    BLOCK_V_SPLAY,
-    BLOCK_SCAN,
-    BLOCK_XSCAN,
-    BLOCK_HSCAN,
-    BLOCK_VSCAN,
-  };
-
-  /** block-type to color-table; used in the shot listing
-   */
-  private static final int[] mTypeColor = {
-    TDColor.LIGHT_PINK,   // 0 blank
-    TDColor.WHITE,        // 1 midline
-    TDColor.LIGHT_GRAY,   // 3 sec. leg
-    TDColor.VIOLET,       // 4 blank leg
-    TDColor.LIGHT_YELLOW, // 6 back leg
-    TDColor.LIGHT_BLUE,   // 2 splay
-    TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
-    TDColor.DARK_BLUE,    // 7 H_SPLAY
-    TDColor.DEEP_BLUE,    // 8 V_SPLAY
-    TDColor.YELLOW_GREEN, // 9 SCAN    // all scan-set are shown yellow-green in the shot list - distinguished by a character at the end
-    TDColor.YELLOW_GREEN, // 10 XSCAN
-    TDColor.YELLOW_GREEN, // 11 HSCAN
-    TDColor.YELLOW_GREEN, // 12 VSCAN
-    TDColor.GREEN
-    // TDColor.VIOLET,       // 4 blunder leg BLUNDER
-  };
 
   /** get the type of this block
    * @return the block type
@@ -300,27 +230,27 @@ public class DBlock
 
   /** set the type "BLANK_LEG" - only if the type was BLANK
    */
-  void setTypeBlankLeg( ) { if ( mBlockType == BLOCK_BLANK ) mBlockType = BLOCK_BLANK_LEG; }
+  void setTypeBlankLeg( ) { if ( mBlockType == BlockType.BLANK ) mBlockType = BlockType.BLANK_LEG; }
 
   /** set the type SEC_LEG
    */
-  void setTypeSecLeg()  { mBlockType = BLOCK_SEC_LEG; }
+  void setTypeSecLeg()  { mBlockType = BlockType.SEC_LEG; }
 
   /** set the type BACK_LEG
    */
-  void setTypeBackLeg() { mBlockType = BLOCK_BACK_LEG; }
+  void setTypeBackLeg() { mBlockType = BlockType.BACK_LEG; }
 
   // /** set the type MAIN_LEG
   //  */
-  // void setTypeMainLeg()  { mBlockType = BLOCK_MAIN_LEG; }
+  // void setTypeMainLeg()  { mBlockType = BlockType.MAIN_LEG; }
 
   /** set the type generic SPLAY
    */
-  void setTypeSplay()   { mBlockType = BLOCK_SPLAY; }
+  void setTypeSplay()   { mBlockType = BlockType.SPLAY; }
   
   /** set the type BLANK
    */
-  void setTypeBlank()   { mBlockType = BLOCK_BLANK; }
+  void setTypeBlank()   { mBlockType = BlockType.BLANK; }
   
   /** set the block type
    * @param type   new block type
@@ -329,124 +259,116 @@ public class DBlock
 
   /** @return true if the block type is BLANK or BLANK_LEG
    */
-  public boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
-
-  /** @return true if the given type is BLANK or BLANK_LEG
-   * @param t   given type
-   */
-  public static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
+  public boolean isTypeBlank() { return mBlockType == BlockType.BLANK || mBlockType == BlockType.BLANK_LEG; }
 
   /** @return true if the block type is BLANK
    */
-  public boolean isBlank() { return mBlockType == BLOCK_BLANK; }
+  public boolean isBlank() { return mBlockType == BlockType.BLANK; }
 
   /** @return true if the block type is MAIN_LEG or BACK_LEG
    */
-  public boolean isLeg() { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
+  public boolean isLeg() { return mBlockType == BlockType.MAIN_LEG || mBlockType == BlockType.BACK_LEG; }
 
   /** @return true if the block type is MAIN_LEG
    */
-  public boolean isMainLeg() { return mBlockType == BLOCK_MAIN_LEG; }
+  public boolean isMainLeg() { return mBlockType == BlockType.MAIN_LEG; }
 
   /** @return true if the block type is BACK_LEG
    */
-  public boolean isBackLeg() { return mBlockType == BLOCK_BACK_LEG; }
+  public boolean isBackLeg() { return mBlockType == BlockType.BACK_LEG; }
 
   /** @return true if the block type is SEC_LEG
    */
-  public boolean isSecLeg() { return mBlockType == BLOCK_SEC_LEG; }
+  public boolean isSecLeg() { return mBlockType == BlockType.SEC_LEG; }
 
   /** @return true if the block type is any LEG
    */
-  public boolean isAnyLeg() { return mBlockType == BLOCK_SEC_LEG || mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
+  public boolean isAnyLeg() { return mBlockType == BlockType.SEC_LEG || mBlockType == BlockType.MAIN_LEG || mBlockType == BlockType.BACK_LEG; }
 
   /** @return true if the given type is (any) SPLAY
    * @param t   given type
    */
-  public static boolean isSplay( int t ) { return t >= BLOCK_SPLAY; }
+  public static boolean isSplay( int t ) { return t >= BlockType.SPLAY; }
 
   /** @return true if the block type is (any) SPLAY
    */
-  public boolean isSplay()      { return mBlockType >= BLOCK_SPLAY; }
+  public boolean isSplay()      { return mBlockType >= BlockType.SPLAY; }
 
   /** @return true if the block type is (any) SPLAY and is reverse
    */
-  public boolean isReverseSplay() { return mBlockType >= BLOCK_SPLAY && TDString.isNullOrEmpty( mFrom ); }
+  public boolean isReverseSplay() { return mBlockType >= BlockType.SPLAY && TDString.isNullOrEmpty( mFrom ); }
 
   /** @return true if the block type is a special SPLAY
    */
-  public boolean isOtherSplay() { return mBlockType >  BLOCK_SPLAY; }
+  public boolean isOtherSplay() { return mBlockType >  BlockType.SPLAY; }
 
   /** @return true if the block type is a generic SPLAY
    */
-  public boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
+  public boolean isPlainSplay() { return mBlockType == BlockType.SPLAY; }
 
   /** @return true if the block type is a cross SPLAY
    */
-  public boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY || mBlockType == BLOCK_XSCAN; }
+  public boolean isXSplay()     { return mBlockType == BlockType.X_SPLAY || mBlockType == BlockType.XSCAN; }
 
   /** @return true if the block type is a horizontal SPLAY
    */
-  public boolean isHSplay()     { return mBlockType == BLOCK_H_SPLAY || mBlockType == BLOCK_HSCAN; }
+  public boolean isHSplay()     { return mBlockType == BlockType.H_SPLAY || mBlockType == BlockType.HSCAN; }
 
   /** @return true if the block type is a vertical SPLAY
    */
-  public boolean isVSplay()     { return mBlockType == BLOCK_V_SPLAY || mBlockType == BLOCK_VSCAN; }
+  public boolean isVSplay()     { return mBlockType == BlockType.V_SPLAY || mBlockType == BlockType.VSCAN; }
 
   /** @return true if the block type is a scan SPLAY
    */
-  public boolean isScan()       { return mBlockType >= BLOCK_SCAN && mBlockType <= BLOCK_VSCAN; }
-  public boolean isXScan()      { return mBlockType == BLOCK_XSCAN; }
-  public boolean isHScan()      { return mBlockType == BLOCK_HSCAN; }
-  public boolean isVScan()      { return mBlockType == BLOCK_VSCAN; }
+  public boolean isScan()       { return mBlockType >= BlockType.SCAN && mBlockType <= BlockType.VSCAN; }
+  public boolean isXScan()      { return mBlockType == BlockType.XSCAN; }
+  public boolean isHScan()      { return mBlockType == BlockType.HSCAN; }
+  public boolean isVScan()      { return mBlockType == BlockType.VSCAN; }
 
   /** @return the block leg-type
    */
-  long getLegType() { return legOfBlockType[ mBlockType ]; }
-
-  /** @return the leg-type for a given block-type
-   * @param block_type  block-type
-   */
-  static long getLegType( int block_type ) { return legOfBlockType[ block_type ]; }
-
-  // {
-  //   if ( mBlockType == BLOCK_SEC_LEG )  return LegType.EXTRA;
-  //   if ( mBlockType == BLOCK_X_SPLAY )  return LegType.XSPLAY;
-  //   if ( mBlockType == BLOCK_H_SPLAY )  return LegType.HSPLAY;
-  //   if ( mBlockType == BLOCK_V_SPLAY )  return LegType.VSPLAY;
-  //   if ( mBlockType == BLOCK_BACK_LEG ) return LegType.BACK;
-  //   if ( mBlockType == BLOCK_BLUNDER )  return LegType.BLUNDER;
-  //   // if ( mBlockType == BLOCK_BLANK    ) return LegType.INVALID;
-  //   return LegType.NORMAL;
-  // }
+  long getLegType() { return LegType.BlockToLeg[ mBlockType ]; }
 
   /** set the block type from the leg-type
    * @param leg_type    leg type
    */
-  void setBlockLegType( int leg_type )
+  void setBlockTypeFromLegType( int leg_type )
   {
-     switch ( leg_type ) {
-       case LegType.EXTRA:   mBlockType = BLOCK_SEC_LEG;     break;
-       case LegType.XSPLAY:  mBlockType = BLOCK_X_SPLAY;     break;
-       case LegType.BACK:    mBlockType = BLOCK_BACK_LEG;    break;
-       case LegType.HSPLAY:  mBlockType = BLOCK_H_SPLAY;     break;
-       case LegType.VSPLAY:  mBlockType = BLOCK_V_SPLAY;     break;
-       case LegType.SCAN:    mBlockType = BLOCK_SCAN;        break;
-       case LegType.XSCAN:   mBlockType = BLOCK_XSCAN;       break;
-       case LegType.HSCAN:   mBlockType = BLOCK_HSCAN;       break;
-       case LegType.VSCAN:   mBlockType = BLOCK_VSCAN;       break;
-       // case LegType.BLUNDER: mBlockType = BLOCK_BLUNDER; break;
-       default: // case LegTypeNORMAL:
+     // switch ( leg_type ) {
+     //   case LegType.EXTRA:   mBlockType = BlockType.SEC_LEG;     break;
+     //   case LegType.XSPLAY:  mBlockType = BlockType.X_SPLAY;     break;
+     //   case LegType.BACK:    mBlockType = BlockType.BACK_LEG;    break;
+     //   case LegType.HSPLAY:  mBlockType = BlockType.H_SPLAY;     break;
+     //   case LegType.VSPLAY:  mBlockType = BlockType.V_SPLAY;     break;
+     //   case LegType.SCAN:    mBlockType = BlockType.SCAN;        break;
+     //   case LegType.XSCAN:   mBlockType = BlockType.XSCAN;       break;
+     //   case LegType.HSCAN:   mBlockType = BlockType.HSCAN;       break;
+     //   case LegType.VSCAN:   mBlockType = BlockType.VSCAN;       break;
+     //   // case LegType.BLUNDER: mBlockType = BlockType.BLUNDER; break;
+     //   default: // case LegTypeNORMAL:
+     //     if ( isSplay() ) {
+     //       mBlockType = BlockType.SPLAY;
+     //     } else if ( isLeg() ) {
+     //       mBlockType = BlockType.MAIN_LEG;
+     //     } else if ( isBlank() ) {
+     //       mBlockType = BlockType.BLANK;
+     //     } else {
+     //       // BlockType.BLANK_LEG not handled FIXME
+     //     }
+     //     break;
+     // }
+     
+     if ( leg_type >= 0 && leg_type < BlockType.LegToBlock.length ) {
+       mBlockType = BlockType.LegToBlock[ leg_type ];
+       if ( mBlockType == BlockType.BLANK ) {
          if ( isSplay() ) {
-           mBlockType = BLOCK_SPLAY;
+           mBlockType = BlockType.SPLAY;
          } else if ( isLeg() ) {
-           mBlockType = BLOCK_MAIN_LEG;
-         } else if ( isBlank() ) {
-           mBlockType = BLOCK_BLANK;
-         } else {
-           // BLOCK_BLANK_LEG not handled FIXME
+           mBlockType = BlockType.MAIN_LEG;
+         // } else if ( isBlank() ) {
+         //   mBlockType = BlockType.BLANK;
          }
-         break;
+       }
      }
   }
   
@@ -455,7 +377,8 @@ public class DBlock
    */
   int getColorByType() { 
     // TDLog.v( "Block " + mId + " color() block type " + mBlockType );
-    return isTampered()? /* mTypeColor[ mBlockType ] | */ 0xffff0000 : mTypeColor[ mBlockType ];
+    return isTampered()? /* BlockType.mTypeColor[ mBlockType ] | */ 0xffff0000
+                       : BlockType.mTypeColor[ mBlockType ];
   }
 
   // ---------------------------------------------------------------
@@ -679,7 +602,7 @@ public class DBlock
   DBlock()
   {
     // ( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
-    this( TDString.EMPTY, TDString.EMPTY, 0, 0, 0, 0, ExtendType.EXTEND_RIGHT, BLOCK_BLANK, 0 );
+    this( TDString.EMPTY, TDString.EMPTY, 0, 0, 0, 0, ExtendType.EXTEND_RIGHT, BlockType.BLANK, 0 );
     // // mPos  = 0;
     // mView    = null; // view is set by the DBlockAdapter
     // mVisible = View.VISIBLE;
@@ -702,7 +625,7 @@ public class DBlock
     // mComment   = TDString.EMPTY;
     // mExtend    = ExtendType.EXTEND_RIGHT;
     // mFlag      = FLAG_SURVEY;
-    // mBlockType = BLOCK_BLANK;
+    // mBlockType = BlockType.BLANK;
     // mShotType  = 0;  // distox
     // mWithPhoto = false;
     // mMultiBad  = false;
@@ -783,15 +706,15 @@ public class DBlock
     mTo   = to.trim();
     if ( mFrom.length() > 0 ) {
       if ( mTo.length() > 0 ) {
-        mBlockType = is_backleg ? BLOCK_BACK_LEG : BLOCK_MAIN_LEG;
+        mBlockType = is_backleg ? BlockType.BACK_LEG : BlockType.MAIN_LEG;
       } else if ( ! isSplay() ) {
-        mBlockType = BLOCK_SPLAY;
+        mBlockType = BlockType.SPLAY;
       }
     } else {
-      if ( mTo.length() == 0 /* && mBlockType != BLOCK_EXTRA */ ) {
-        mBlockType = BLOCK_BLANK;
+      if ( mTo.length() == 0 /* && mBlockType != BlockType.EXTRA */ ) {
+        mBlockType = BlockType.BLANK;
       } else if ( ! isSplay() ) {
-        mBlockType = BLOCK_SPLAY;
+        mBlockType = BlockType.SPLAY;
       }
     }
   }
@@ -813,14 +736,14 @@ public class DBlock
   // {
   //   if ( TDString.isNullOrEmpty( mFrom ) ) {
   //     if ( TDString.isNullOrEmpty( mTo ) ) {
-  //       return BLOCK_BLANK;
+  //       return BlockType.BLANK;
   //     }
-  //     return BLOCK_SPLAY;
+  //     return BlockType.SPLAY;
   //   }
   //   if ( TDString.isNullOrEmpty( mTo ) ) {
-  //     return BLOCK_SPLAY;
+  //     return BlockType.SPLAY;
   //   }
-  //   return BLOCK_MAIN_LEG;
+  //   return BlockType.MAIN_LEG;
   // }
 
   /** @return the relative angle [in radians] between this block and another block (normal mode)

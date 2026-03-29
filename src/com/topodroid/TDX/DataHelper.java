@@ -27,6 +27,7 @@ import com.topodroid.utils.TDStatus;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.inport.ParserShot;
 import com.topodroid.types.LegType;
+// import com.topodroid.types.BlockType;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.PlotType;
 import com.topodroid.dev.Device;
@@ -402,7 +403,7 @@ public class DataHelper extends DataSetObservable
     
     blk.setExtend( (int)cursor.getLong(9), (float)( cursor.getDouble(16) ) );
     blk.resetFlag( cursor.getLong(10) );
-    blk.setBlockLegType( (int)leg );
+    blk.setBlockTypeFromLegType( (int)leg );
     blk.mComment  = cursor.getString(12);
     blk.setShotType( (int)cursor.getLong(13) );
     blk.mTime     = cursor.getLong(14);
@@ -4593,7 +4594,7 @@ public class DataHelper extends DataSetObservable
     long ret = -1;
     long extend = ExtendType.EXTEND_LEFT;
     long flag   = DBlock.FLAG_SURVEY;
-    long leg    = DBlock.BLOCK_MAIN_LEG;
+    long leg    = LegType.NORMAL;  // was BlockType.MAIN_LEG;
     String comment = TDString.EMPTY;
     if ( myDB == null ) return ret;
     Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation", "extend", "flag", "leg", "comment" },
