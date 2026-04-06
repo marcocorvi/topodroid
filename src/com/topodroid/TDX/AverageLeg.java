@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDMath;
 import com.topodroid.math.TDVector;
 
 public class AverageLeg

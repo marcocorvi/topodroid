@@ -11,17 +11,17 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsafUri;
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDKey;
-// import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDsafUri;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDKey;
+// import com.topodroid.util.TDColor;
 import com.topodroid.help.UserManDownload;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;
@@ -1241,6 +1241,7 @@ public class TDSetting
       GlModel.mSplitStretch = false;
     }
     GlModel.mPowercrustDelta = tryFloat( prefs,  key[7].key, key[7].dflt );
+    GlModel.mWallModel = tryInt( prefs, "CAVE3D_WALL_MODEL", "0" ); // default GlModel.WALL_MODEL_BUBBLE
     // TDLog.v("SETTING load model done");
 
     key = TDPrefKey.mSketch;

@@ -11,8 +11,8 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDLog;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.R;

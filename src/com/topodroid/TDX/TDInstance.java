@@ -14,9 +14,9 @@ package com.topodroid.TDX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.types.PlotType;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;

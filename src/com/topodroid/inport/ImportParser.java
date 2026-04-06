@@ -12,9 +12,9 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.DataHelper;
 

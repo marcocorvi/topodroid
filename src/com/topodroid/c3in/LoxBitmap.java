@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

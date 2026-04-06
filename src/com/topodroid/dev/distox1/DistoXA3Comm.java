@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.distox1;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;

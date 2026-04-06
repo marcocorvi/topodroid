@@ -14,10 +14,10 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDMath;
+// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;

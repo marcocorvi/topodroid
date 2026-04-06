@@ -20,8 +20,8 @@ import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.dev.Device;
 // import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 
 import android.content.Context;
 import android.content.res.Resources;

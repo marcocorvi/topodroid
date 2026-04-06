@@ -11,8 +11,8 @@
  */
 package com.topodroid.dev;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.packetX.PacketLogger;
@@ -216,9 +216,9 @@ public class TopoDroidProtocol
             break;
         }
 
-        mBearing  = b * 180.0 / 32768.0; // 180/0x8000;
-        mClino    = c * 90.0  / 16384.0; // 90/0x4000;
-        if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
+        mBearing  = b * 180.0 / 32868.0; // 180/0x8000;
+        mClino    = c * 90.0  / 16484.0; // 90/0x4000;
+        if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16484.0; }
         mRoll = r * 180.0 / 128.0;
 
         // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
@@ -257,9 +257,9 @@ public class TopoDroidProtocol
           double rh = MemoryOctet.toInt( mRollHigh, buffer[7] );
           mAcceleration = acc;
           mMagnetic = mag;
-          mDip = dip * 90.0  / 16384.0; // 90/0x4000;
-          if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
-          mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
+          mDip = dip * 90.0  / 16484.0; // 90/0x4000;
+          if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16484.0; }
+          mRoll  = rh * 180.0 / 32868.0; // 180/0x8000;
           // TDLog.v( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
           return DataType.PACKET_VECTOR;
         }

@@ -13,7 +13,7 @@
  */
 package com.topodroid.dev.distox2;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.TDProgress;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXProtocol;

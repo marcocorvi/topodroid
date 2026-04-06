@@ -25,14 +25,14 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsafUri;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDsafUri;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;

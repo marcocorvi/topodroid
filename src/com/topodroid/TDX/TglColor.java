@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDColor;
 import com.topodroid.dev.cavway.CavwayConst;
 
 public class TglColor

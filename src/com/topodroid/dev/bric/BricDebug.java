@@ -12,7 +12,7 @@
 package com.topodroid.dev.bric;
 
 import com.topodroid.dev.ble.BleUtils;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 class BricDebug
 {

@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3walls.bubble;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.util.ArrayList;
 

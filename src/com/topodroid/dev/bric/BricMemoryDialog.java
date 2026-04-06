@@ -11,8 +11,8 @@
  */
 package com.topodroid.dev.bric;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;

@@ -17,8 +17,8 @@ import com.topodroid.TDX.ListerHandler;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 
 import android.content.Context;
 // import android.os.Handler;

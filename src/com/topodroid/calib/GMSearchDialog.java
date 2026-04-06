@@ -15,15 +15,14 @@
  */
 package com.topodroid.calib;
 
-// import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDString;
+import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.GMActivity;
 import com.topodroid.TDX.R;
-import com.topodroid.utils.TDLog;
 
 import android.os.Bundle;
 // import android.app.Dialog;

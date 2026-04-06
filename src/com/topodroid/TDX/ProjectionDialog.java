@@ -11,10 +11,10 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;

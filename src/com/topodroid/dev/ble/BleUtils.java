@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.ble;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 // import com.topodroid.TDX.TDToast;
 
 // import android.bluetooth.BluetoothDevice;

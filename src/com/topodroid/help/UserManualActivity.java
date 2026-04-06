@@ -17,9 +17,9 @@
  */
 package com.topodroid.help;
 
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
 import com.topodroid.prefs.TDPref;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.GeminiDialog;

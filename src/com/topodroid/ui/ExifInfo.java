@@ -11,9 +11,9 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDVersion;
 import com.topodroid.TDX.TDandroid;
 
 import java.io.IOException;

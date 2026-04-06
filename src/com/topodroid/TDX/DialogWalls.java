@@ -11,11 +11,14 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
 import android.os.Bundle;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import android.view.View;
 import android.widget.Button;
@@ -124,6 +127,46 @@ class DialogWalls extends MyDialog
     }
 
     mCBconvexhull.setOnClickListener( this );
+
+    selectLastWallModel();
+  }
+
+  /** select the checkbox for the stored wall model
+   */
+  private void selectLastWallModel()
+  {
+    mCBbubble.setChecked( false );
+    mCBtube.setChecked( false );
+    mCBhull.setChecked( false );
+    mCBconvexhull.setChecked( false );
+    mCBpowercrust.setChecked( false );
+    switch ( GlModel.mWallModel ) {
+      case GlModel.WALL_MODEL_BUBBLE:
+        if ( mCBbubble.getVisibility() == View.VISIBLE ) mCBbubble.setChecked( true );
+        break;
+      case GlModel.WALL_MODEL_TUBE:
+        if ( mCBtube.getVisibility() == View.VISIBLE ) mCBtube.setChecked( true );
+        break;
+      case GlModel.WALL_MODEL_HULL:
+        if ( mCBhull.getVisibility() == View.VISIBLE ) mCBhull.setChecked( true );
+        break;
+      case GlModel.WALL_MODEL_CONVEXHULL:
+        if ( mCBconvexhull.getVisibility() == View.VISIBLE ) mCBconvexhull.setChecked( true );
+        break;
+      case GlModel.WALL_MODEL_POWERCRUST:
+        if ( mCBpowercrust.getVisibility() == View.VISIBLE ) mCBpowercrust.setChecked( true );
+        break;
+    }
+  }
+
+  /** store the chosen wall model
+   * @param wall_model   wall model
+   */
+  private void storeWallModel( int wall_model )
+  {
+    GlModel.mWallModel = wall_model;
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( mContext );
+    TDSetting.setPreference( sp, "CAVE3D_WALL_MODEL", Integer.toString( wall_model ) );
   }
 
   @Override
@@ -177,14 +220,19 @@ class DialogWalls extends MyDialog
 
       if ( mParser != null ) {
         if ( mCBbubble.isChecked() ) {
+          storeWallModel( GlModel.WALL_MODEL_BUBBLE );
           mParser.makeBubble( );
         } else if ( mCBtube.isChecked() ) {
+          storeWallModel( GlModel.WALL_MODEL_TUBE );
           mParser.makeTube( );
         } else if ( mCBhull.isChecked() ) {
+          storeWallModel( GlModel.WALL_MODEL_HULL );
           mParser.makeHull( );
         } else if ( mCBconvexhull.isChecked() ) {
+          storeWallModel( GlModel.WALL_MODEL_CONVEXHULL );
           mParser.makeConvexHull( );
         } else if ( mCBpowercrust.isChecked() ) {
+          storeWallModel( GlModel.WALL_MODEL_POWERCRUST );
           mParser.makePowercrust( );
         }
       }

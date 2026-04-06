@@ -11,8 +11,8 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDMath;
+// import com.topodroid.util.TDLog;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.BrushManager;
 import com.topodroid.TDX.R;

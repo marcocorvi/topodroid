@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDMath;
 
 // MAG-type_CoordSpherical;
 class MagSpherical

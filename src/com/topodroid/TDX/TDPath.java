@@ -11,10 +11,10 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.CWDfolder;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDString;
+import com.topodroid.util.CWDfolder;
 
 // import android.provider.DocumentsContract;
 
@@ -1170,7 +1170,7 @@ public class TDPath
    * END_SKETCH_3D */
 
   // -----------------------------------------------------------------
-  // utils
+  // utilities
 
   /** @return extension string from a filename
    * @param filename   filename or pathname

@@ -14,7 +14,7 @@ package com.topodroid.dev.ble;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.ConnectionState;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import android.content.Context;
 

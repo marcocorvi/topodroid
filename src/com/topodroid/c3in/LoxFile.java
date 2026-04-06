@@ -26,7 +26,7 @@ import java.util.ArrayList;
 // #include "LoxSurface.h"
 // #include "LoxBitmap.h"
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 class LoxFile
 {

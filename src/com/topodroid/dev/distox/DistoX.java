@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.distox;
 
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 
 public class DistoX
 {

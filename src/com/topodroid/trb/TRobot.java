@@ -11,7 +11,7 @@
  */
 package com.topodroid.trb;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.StationPolicy;
 

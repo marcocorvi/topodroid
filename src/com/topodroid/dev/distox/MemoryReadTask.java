@@ -13,8 +13,8 @@ package com.topodroid.dev.distox;
 
 import com.topodroid.dev.Device;
 
-// import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDFile;
+// import com.topodroid.util.TDFile;
+import com.topodroid.util.TDLog;
 
 import com.topodroid.packetX.MemoryOctet;
 // import com.topodroid.dev.Device;
@@ -22,7 +22,6 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
-import com.topodroid.utils.TDLog;
 
 import java.lang.ref.WeakReference;
 

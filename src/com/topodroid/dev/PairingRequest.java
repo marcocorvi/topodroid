@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.nio.ByteBuffer;
 import java.lang.reflect.Method;

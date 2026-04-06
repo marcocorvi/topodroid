@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDColor;
 
 import android.annotation.SuppressLint;
 import android.widget.Toast;

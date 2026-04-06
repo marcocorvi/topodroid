@@ -13,7 +13,7 @@ package com.topodroid.dev.ble;
 
 // import com.topodroid.dev.ble.BleUtils;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

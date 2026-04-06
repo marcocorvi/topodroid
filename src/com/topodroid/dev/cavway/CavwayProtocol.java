@@ -20,8 +20,8 @@ import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.packetX.MemoryData;
 import com.topodroid.packetX.CavwayData;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

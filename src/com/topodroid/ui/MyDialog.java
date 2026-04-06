@@ -12,10 +12,10 @@
 package com.topodroid.ui;
 
 import com.topodroid.help.UserManualActivity;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDUtil;
+// import com.topodroid.util.TDLog;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
-// import com.topodroid.utils.TDLog;
 
 // import android.app.Activity;
 import android.app.Dialog;

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2019
  *
- * @brief TopoDroid parser utils
+ * @brief TopoDroid parser utility
  *
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
@@ -12,7 +12,7 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDUtil;
 import com.topodroid.types.ExtendType;
 
 import java.util.Locale;

@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.cavway;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.packetX.CavwayData;
 import com.topodroid.TDX.DeviceActivity;

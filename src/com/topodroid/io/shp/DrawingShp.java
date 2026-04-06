@@ -11,9 +11,9 @@
  */
 package com.topodroid.io.shp;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDMath;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PlotType;
 // import com.topodroid.num.NumStation;

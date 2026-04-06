@@ -11,7 +11,7 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.GMActivity;
 

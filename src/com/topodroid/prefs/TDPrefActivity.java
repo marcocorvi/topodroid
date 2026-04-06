@@ -11,11 +11,11 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDRequest;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDRequest;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;

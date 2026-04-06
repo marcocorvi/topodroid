@@ -11,7 +11,7 @@
  */
 package com.topodroid.num;
 
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDMath;
 
 import android.os.AsyncTask;
 

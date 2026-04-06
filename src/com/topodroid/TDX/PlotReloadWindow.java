@@ -11,11 +11,11 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDLocale;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;

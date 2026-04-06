@@ -11,10 +11,10 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDUtil;
+// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDUtil;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 

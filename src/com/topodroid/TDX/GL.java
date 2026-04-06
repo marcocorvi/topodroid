@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.nio.ByteOrder;
 import java.nio.ByteBuffer;

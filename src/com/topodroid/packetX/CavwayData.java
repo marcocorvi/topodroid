@@ -12,14 +12,13 @@
 package com.topodroid.packetX;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDLog;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.Locale;
-import com.topodroid.utils.TDUtil;
 
 public class CavwayData extends MemoryData
 {

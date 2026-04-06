@@ -12,7 +12,7 @@
 package com.topodroid.c3walls.cw;
 
 import com.topodroid.TDX.Vector3D;
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 
 import java.io.PrintWriter;
 // import java.io.PrintStream;

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 //  import android.util.FloatMath;
 // import java.util.List;
@@ -32,7 +32,16 @@ class NativeName
     initLog();
   }
 
-
-
+  static NativeName get()
+  {
+    try {
+      return new NativeName();
+      // TDLog.v( "Using native name lib" );
+    } catch ( java.lang.UnsatisfiedLinkError e ) {
+      TDLog.e("Native link error " + e.getMessage() );
+    }
+    return null;
+  }                            
+    
 }
 

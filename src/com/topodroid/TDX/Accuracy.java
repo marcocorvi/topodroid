@@ -13,10 +13,10 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.Locale;
 
 class Accuracy
 {
-  final static float THRS  = 10.0f; // acc/mag threshold
+  final static float THRS  = 100.0f; // acc/mag threshold
   private final static float BND_1 = 10.0f; // small acc/mag values cutoff function
   private final static float BND_2 =  8.5f;
 

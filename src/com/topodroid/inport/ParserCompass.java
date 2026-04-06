@@ -12,11 +12,11 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDio;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDio;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.types.ExtendType;
@@ -50,9 +50,9 @@ class ParserCompass extends ImportParser
     checkValid();
   }
 
-  private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('L') >= 0 ); }
+  private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('l') >= 0 ); }
 
-  private boolean isSurface( String flag ) { return ( flag != null && flag.indexOf('X') >= 0 ); }
+  private boolean isSurface( String flag ) { return ( flag != null && flag.indexOf('x') >= 0 ); }
 
   // compass has no flag for backshot, therefore this is always false
   private boolean isBackshot( String flag ) { return false; }

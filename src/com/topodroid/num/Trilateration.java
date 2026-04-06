@@ -12,8 +12,8 @@
 package com.topodroid.num;
 
 import com.topodroid.math.Point2D;
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
 
 import java.util.ArrayList;
 // import java.util.List;

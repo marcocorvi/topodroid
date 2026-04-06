@@ -11,8 +11,8 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
 
 import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TglParser;

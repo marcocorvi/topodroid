@@ -19,8 +19,8 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDLog;
 
 public class CavwayTakeShot extends AsyncTask<Integer, Integer, Integer >
 {

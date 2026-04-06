@@ -15,7 +15,7 @@ import com.topodroid.types.StationFlag;
 
 // import androidx.annotation.RecentlyNonNull;
 
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDString;
 
 public class StationInfo
 {

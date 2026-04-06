@@ -21,7 +21,7 @@ import com.topodroid.dev.ble.BleCallback;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.ListerHandler;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 // import android.os.Looper;

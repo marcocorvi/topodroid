@@ -12,8 +12,8 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDStatus;
+import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDStatus;
 // import com.topodroid.types.LegType;
 import com.topodroid.prefs.TDSetting;
 
@@ -63,14 +63,7 @@ class StationNameDefault extends StationName
     String main_from = null;
     String main_to   = null;
 
-    NativeName mNativeName = null;
-    try {
-      mNativeName = new NativeName();
-      // TDLog.v( "Using native name lib" );
-    } catch ( java.lang.UnsatisfiedLinkError e ) {
-      TDLog.e("Native link error " + e.getMessage() );
-      mNativeName = null;
-    }
+    NativeName mNativeName = NativeName.get();
 
     // boolean increment = true;
     // TDLog.v( "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
@@ -203,7 +196,7 @@ class StationNameDefault extends StationName
 
     TDLog.v("Station Name Default assign stations all: list " + list.size() + " stations " + sts.size() );
 
-    NativeName mNativeName = new NativeName();
+    NativeName mNativeName = NativeName.get();
 
     boolean ret = false;
     boolean forward_shots    = ( survey_stations == 1 );

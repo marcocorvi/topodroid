@@ -11,9 +11,9 @@
  */
 package com.topodroid.dev;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.Timer;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.Timer;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;

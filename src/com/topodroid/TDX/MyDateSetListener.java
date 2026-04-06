@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDUtil;
 
 import android.widget.TextView;
 import android.widget.DatePicker;

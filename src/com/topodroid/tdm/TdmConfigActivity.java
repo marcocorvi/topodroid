@@ -11,11 +11,11 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.utils.TDRequest;
-// import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDsafUri;
+import com.topodroid.util.TDRequest;
+// import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDsafUri;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyColorPicker.IColorChanged;

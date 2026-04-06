@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDString;
 import com.topodroid.prefs.TDSetting;
 
 

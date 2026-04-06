@@ -11,9 +11,9 @@
  */
 package com.topodroid.io.shp;
 
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 //  import com.topodroid.num.NumSplay;

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2013
  *
- * @brief TopoDroid dxf const and utils
+ * @brief TopoDroid dxf const and util
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,15 +11,15 @@
  */
 package com.topodroid.io.dxf;
 
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDString;
+// import com.topodroid.util.TDMath;
+// import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDVersion;
 // import com.topodroid.math.Point2D;
 // import com.topodroid.math.BezierCurve;
 // import com.topodroid.prefs.TDSetting;
 // import com.topodroid.types.PlotType;
 
-// import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDVersion;
 // import com.topodroid.num.TDNum;
 
 import java.util.Locale;

@@ -18,15 +18,16 @@ import com.topodroid.dev.distox_ble.DistoXBLEComm; // SIWEI_TIAN
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog;
 import com.topodroid.dev.distox.DistoX; // DistoX.DISTOX_OFF
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.MyFileProvider;
-// import com.topodroid.utils.TDStatus;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.MyFileProvider;
+import com.topodroid.util.Region;
+// import com.topodroid.util.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDProgress;
@@ -1034,7 +1035,6 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
-    // TDLog.v("TDApp on create");
 
     // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE are no longer supported
     // SQLiteDatabase dbase = openOrCreateDatabase("DISTOX14", 0, null );

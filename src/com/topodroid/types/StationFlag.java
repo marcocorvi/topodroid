@@ -23,7 +23,7 @@ public class StationFlag
 
   private int mValue;
 
-  static final private String[] flag_str = { " ", " [F] ", " [P] " };
+  static final private String[] flag_str = { " ", " [F] ", " [P] ", " [G] " };
 
   /** cstr
    * @param flag   flag value

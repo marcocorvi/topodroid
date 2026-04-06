@@ -11,8 +11,8 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;

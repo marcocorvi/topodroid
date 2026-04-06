@@ -11,8 +11,8 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDFile;
+import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDFile;
 
 // import java.util.Locale;
 // import java.util.Stack;

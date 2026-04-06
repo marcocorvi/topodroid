@@ -12,12 +12,12 @@
 package com.topodroid.packetX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.util.TDUtil;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.Locale;
-import com.topodroid.utils.TDUtil;
 
 public class MemoryOctet extends MemoryData
 {

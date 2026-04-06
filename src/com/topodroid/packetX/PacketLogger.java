@@ -15,9 +15,9 @@
  */
 package com.topodroid.packetX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDVersion;
 // import com.topodroid.TDX.TDPath;
 
 // import java.io.File;

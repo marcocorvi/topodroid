@@ -15,8 +15,8 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;

@@ -11,11 +11,13 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDLocale;
-// import com.topodroid.utils.TDString;
-// import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDLocale;
+// import com.topodroid.util.TDString;
+// import com.topodroid.util.TDVersion;
+// import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDsafUri;
 
 // import com.topodroid.TDX.TDandroid;
 
@@ -47,8 +49,6 @@ import com.topodroid.dem.DEMgridParser;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
-// import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDsafUri;
 import com.topodroid.help.HelpDialog;
 
 import com.topodroid.ui.MyButton;

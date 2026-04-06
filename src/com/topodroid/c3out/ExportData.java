@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3out;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 public class ExportData
 {

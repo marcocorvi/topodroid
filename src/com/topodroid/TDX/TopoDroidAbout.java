@@ -12,7 +12,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDVersion;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.TDVersionCheck;
 

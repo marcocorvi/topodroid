@@ -20,8 +20,8 @@
 
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;

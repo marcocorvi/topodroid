@@ -11,18 +11,18 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsafUri;
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDRequest;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDsafUri;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDRequest;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDVersion;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;

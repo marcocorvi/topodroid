@@ -11,7 +11,7 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyColorPicker;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;

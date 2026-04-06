@@ -11,9 +11,9 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDTag;
+// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDTag;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 

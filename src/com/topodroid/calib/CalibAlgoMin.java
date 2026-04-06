@@ -16,8 +16,8 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.prefs.TDSetting;

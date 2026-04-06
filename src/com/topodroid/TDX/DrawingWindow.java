@@ -11,18 +11,18 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsafUri;
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDRequest;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.StringPair;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDsafUri;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDRequest;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.StringPair;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -148,7 +148,7 @@ public class DrawingWindow extends ItemDrawer
                                     , IPhotoInserter
                                     , IAudioInserter
 {
-  public static final int ZOOM_TRANSLATION_1 = -50; // was -42
+  public static final int ZOOM_TRANSLATION_1 = -42;
   // public static final int ZOOM_TRANSLATION_3 = -200;
   private static int ZOOM_TRANSLATION   = ZOOM_TRANSLATION_1;
  
@@ -565,7 +565,7 @@ public class DrawingWindow extends ItemDrawer
   private boolean hasPointActions  = false;
 
   // ZOOM
-  static final float ZOOM_INC = 1.4f;
+  static final float ZOOM_INC = 2.0f;
   static final float ZOOM_DEC = 1.0f/ZOOM_INC;
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;
@@ -3273,7 +3273,12 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("PLOT multileg list size " + list.size() + " stations " + stations.size() + " splays " + list0.size() + " froms " + mFroms.size() + " tos " + mTos.size() );
     return list;
   }
-
+ 
+  /** @return the list of x-section shots
+   * @param type  xsection type
+   * @param from  viewing station or station at-station x-section
+   * @param to    viewed station or null for at-station x-section
+   */
   private List<DBlock> getXSectionShots( long type, String from, String to )
   {
     List< DBlock > list = null;

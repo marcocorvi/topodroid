@@ -11,10 +11,10 @@
  */
 package com.topodroid.dev;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDStatus;
-// import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDStatus;
+// import com.topodroid.util.TDColor;
+import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;

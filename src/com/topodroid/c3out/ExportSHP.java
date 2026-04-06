@@ -11,8 +11,8 @@
  */
 package com.topodroid.c3out;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Triangle3D;
 import com.topodroid.TDX.Vector3D;

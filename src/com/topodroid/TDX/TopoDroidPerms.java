@@ -13,7 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDVersion;
 
 
 import android.content.Context;

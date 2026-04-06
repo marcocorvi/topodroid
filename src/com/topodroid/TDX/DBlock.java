@@ -11,10 +11,10 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.LegType;
@@ -361,22 +361,25 @@ public class DBlock
      if ( leg_type >= 0 && leg_type < BlockType.LegToBlock.length ) {
        mBlockType = BlockType.LegToBlock[ leg_type ];
        if ( mBlockType == BlockType.BLANK ) {
-         if ( isSplay() ) {
+         if ( ! TDString.isNullOrEmpty( mFrom ) ) {
+           if ( TDString.isNullOrEmpty( mTo ) ) {
+             mBlockType = BlockType.SPLAY;
+           } else {
+             mBlockType = BlockType.MAIN_LEG;
+           }
+         } else if ( ! TDString.isNullOrEmpty( mTo ) ) {
            mBlockType = BlockType.SPLAY;
-         } else if ( isLeg() ) {
-           mBlockType = BlockType.MAIN_LEG;
-         // } else if ( isBlank() ) {
-         //   mBlockType = BlockType.BLANK;
          }
        }
      }
+     // TDLog.v( "Block " + mId + " leg type " + leg_type + " ->  block type " + mBlockType + " isSplay " + isSplay() + " isLeg " + isLeg() );
   }
   
   /** @return the color (from the block-type)
    * @note used by the DBlockAdapter
    */
   int getColorByType() { 
-    // TDLog.v( "Block " + mId + " color() block type " + mBlockType );
+    // TDLog.v( "Block " + mId + " block type " + mBlockType + " color " + BlockType.mTypeColor[ mBlockType ] );
     return isTampered()? /* BlockType.mTypeColor[ mBlockType ] | */ 0xffff0000
                        : BlockType.mTypeColor[ mBlockType ];
   }

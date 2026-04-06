@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.SymbolType;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import android.graphics.Paint;
 import android.graphics.Path;

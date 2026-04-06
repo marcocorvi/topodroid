@@ -11,8 +11,8 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;

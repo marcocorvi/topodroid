@@ -12,10 +12,10 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDFeedback;
+// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDFeedback;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;

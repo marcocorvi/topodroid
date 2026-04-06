@@ -22,9 +22,9 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
@@ -155,7 +155,7 @@ public class CalibAlgoBH extends CalibAlgo
     TDMatrix sumG2 = new TDMatrix();
     TDMatrix sumM2 = new TDMatrix();
 
-    float sa = .0f;
+    float sa = 0.0f;
     float ca = 0.0f;
     float invNum = 0.0f;
     for (int i=0; i<nn; ++i ) {

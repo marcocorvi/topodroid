@@ -18,8 +18,8 @@
  */
 package com.topodroid.dev.discox;
 
-// import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDUtil;
+// import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDUtil;
 // // import com.topodroid.prefs.TDSetting;
 // import com.topodroid.TDX.TDInstance;
 // import com.topodroid.TDX.ListerHandler;

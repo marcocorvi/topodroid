@@ -12,11 +12,11 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDio;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDio;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
@@ -49,24 +49,6 @@ class ParserVisualTopoX extends ImportParser
     mLegFirst = leg_first;
     readFile( isr, filename );
     checkValid();
-  }
-
-  /** @return true if duplicate is set in the flag
-   * @param flag   flag
-   */
-  private static boolean isDuplicate( String flag )
-  {
-    if ( flag == null ) return false;
-    return ( flag.indexOf('L') >= 0 );
-  }
-
-  /** @return true if surface is set in the flag
-   * @param flag   flag
-   */
-  private static boolean isSurface( String flag )
-  {
-    if ( flag == null ) return false;
-    return ( flag.indexOf('X') >= 0 );
   }
 
   /** @return angle value
@@ -200,8 +182,8 @@ class ParserVisualTopoX extends ImportParser
     String last_to = "";
 
     int dir_w = 1;  // direction of left/right width
-    int dir_b = 1;  // bearing direction
-    int dir_c = 1;  // clino direction
+    int dir_b = 1;  // bearing direction (unused)
+    int dir_c = 1;  // clino direction (unused)
 
     boolean splayAtFrom = true;
     String comment = "";
@@ -278,8 +260,7 @@ class ParserVisualTopoX extends ImportParser
             if ( isSplay ) {
               addSplay( mFrom, mLength, mBearing, mClino );
             } else {
-              addLeg( mFrom, mTo, mLength, mBearing, mClino, shot_extend, duplicate, surface, backshot, comment,
-                      mStation, mLeft, mRight, mUp, mDown, dir_w );
+              addLeg( mFrom, mTo, mLength, mBearing, mClino, shot_extend, duplicate, surface, backshot, comment, mStation, mLeft, mRight, mUp, mDown, dir_w );
             }
           }
         } else if ( line.startsWith("</Visee>") && inMesures ) { 
@@ -287,8 +268,7 @@ class ParserVisualTopoX extends ImportParser
             if ( isSplay ) {
               addSplay( mFrom, mLength, mBearing, mClino );
             } else {
-              addLeg( mFrom, mTo, mLength, mBearing, mClino, shot_extend, duplicate, surface, backshot, comment,
-                      mStation, mLeft, mRight, mUp, mDown, dir_w );
+              addLeg( mFrom, mTo, mLength, mBearing, mClino, shot_extend, duplicate, surface, backshot, comment, mStation, mLeft, mRight, mUp, mDown, dir_w );
             }
           }
           inVisee = false;

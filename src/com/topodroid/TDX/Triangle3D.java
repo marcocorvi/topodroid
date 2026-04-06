@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 
 import java.util.Locale;
 
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 
 public class Triangle3D
 {

@@ -15,15 +15,15 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDsaf;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDStatus;
-// import com.topodroid.utils.TDRange;
+import com.topodroid.util.TDMath;
+import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDsaf;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDStatus;
+// import com.topodroid.util.TDRange;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.inport.ParserShot;
 import com.topodroid.types.LegType;
@@ -4960,7 +4960,7 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       do {
         int leg = (int)( cursor.getLong(11) );
-        if ( leg == 0 || leg == 2 ) { // skip leg-blocks (11 = "leg" flag): 0==splay, 1==leg, 2==x-splay
+        if ( leg == 0 || leg >= 2 ) { // skip leg-blocks (11 = "leg" flag): 0 normal, 1 repeated-leg, 2 x-splay, 3 backleg, ...
           DBlock block = new DBlock();
           fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL ?
           list.add( block );

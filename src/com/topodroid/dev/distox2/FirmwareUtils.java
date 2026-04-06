@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.distox2;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -140,7 +140,7 @@ public class FirmwareUtils
    * @param fp           firmware file
    * @return true if the checksum passed
    *
-   * ./utils/firmware_checksum ... <-- provides length and checksum
+   * ./util/firmware_checksum ... <-- provides length and checksum
    */
   public static boolean firmwareChecksum( int fw_version, File fp )
   {

@@ -13,8 +13,8 @@ package com.topodroid.TDX;
 
 // import androidx.annotation.RecentlyNonNull;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.mag.MagLatLong;

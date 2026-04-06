@@ -11,8 +11,8 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;

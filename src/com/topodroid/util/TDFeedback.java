@@ -1,0 +1,111 @@
+/* @file TDFeedback.java
+ *
+ * @author marco corvi
+ * @date feb 2021 ( extracted from TopoDroidApp )
+ *
+ * @brief TopoDroid LED & vibration feedbacks
+ * --------------------------------------------------------
+ *  Copyright This software is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
+ */
+package com.topodroid.util;
+
+import com.topodroid.prefs.TDSetting;
+
+import android.content.Context;
+import android.os.Vibrator;
+
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+
+public class TDFeedback
+{
+  static boolean mFeedbackOn = false;
+
+  // Led notification are shown only while the display is off
+  // static final int NOTIFY_LED_ID = 10101;
+  //   NotificationManager manager =
+  //     (NotificationManager)getSystemService( Context.NOTIFICATION_SERVICE );
+  //   Notification notify_led = new Notification( ); // crash
+  //   notify_led.ledARGB = Color
+  //   notify_led.ledOffMS = 800;
+  //   notify_led.ledOnMS  = 200;
+  //   notify_led.flags = notify_led.flags | Notification.FLAG_SHOW_LIGHTS | Notification.FLAG_ONGOING_EVENT;
+  //   manager.notify( NOTIFY_LED_ID, notify_led );
+  //   manager.cancel( NOTIFY_LED_ID );
+  //
+  // an alternative is a vibration (but too frequent vibrations are
+  // considered a bad idea)
+  // manifest must have
+  //   <uses-permission android:name="android.permission.VIBRATE" />
+  // next
+  //   Vibrator vibrator = (Vibrator)getSystemService( Context.VIBRATOR_SERVICE );
+  //   vibrator.vibrate( 500 );
+  // or
+  //   long[] pattern = {400, 200};
+  //   vibrator.vibrate( pattern, 0 ); // 0: repeat fom index 0, use -1 not to repeat
+  //   vibrator.cancel();
+
+  public static void reset()
+  {
+    mFeedbackOn = false;
+  }
+
+  // called only by ShotWindow
+  public static void notifyFeedback( Context ctx, boolean on_off ) 
+  {
+    if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_NONE ) return;
+
+    if ( mFeedbackOn ) {
+      if ( ! on_off ) { // turn off led
+        mFeedbackOn = false;
+      }
+    } else {
+      if ( on_off ) { // turn on led
+        mFeedbackOn = true;
+        if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_BELL ) {
+          ringTheBell( TDSetting.mBeepLength );
+        } else if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_VIBRATE ) {
+          vibrate( ctx, TDSetting.mBeepLength );
+        }
+      }
+    }
+  }
+
+  // LEG FEEDBACK ---------------------------------------------
+
+  public static  void legFeedback( Context ctx ) 
+  {
+    if ( TDSetting.mTripleShot == 1 ) {
+      TDFeedback.ringTheBell( TDSetting.mBeepLength );
+    } else if ( TDSetting.mTripleShot == 2 ) {
+      TDFeedback.vibrate( ctx, TDSetting.mBeepLength );
+    }
+  }
+
+  // HAPTIC FEEDBACK ------------------------------------------
+
+  private static void ringTheBell( int duration )
+  {
+    try {
+      ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
+      toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
+    } catch ( RuntimeException e ) {
+      TDLog.e("ring the bell: exception " + e.getMessage() );
+    }
+  }
+
+  private static void vibrate( Context ctx, int duration )
+  {
+    try {
+      Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
+      vibrator.vibrate(duration);
+    } catch ( NullPointerException e ) {
+      TDLog.e("vibrate: null pointer " + e.getMessage() );
+    } catch ( RuntimeException e ) {
+      TDLog.e("vibrate: exception " + e.getMessage() );
+    }
+  }
+
+}

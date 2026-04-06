@@ -11,8 +11,8 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDVersion;
 import com.topodroid.prefs.TDSetting;
 
 
@@ -34,6 +34,8 @@ import android.content.pm.ConfigurationInfo;
 
 import android.os.Build;
 import android.os.Environment;
+import android.os.Looper;
+import android.os.Bundle;
 // import android.os.Build.VERSION_CODES;
 
 import android.provider.Settings;
@@ -43,15 +45,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import android.location.LocationManager;
+import android.location.Location;
+import android.location.LocationListener;
 
 import android.hardware.Sensor;
 import android.widget.Button;
 import android.widget.SeekBar;
 // import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-// import android.graphics.Point;
+import android.graphics.PointF;
 // import android.view.Display;
 // import android.view.Surface;
+
+import java.util.Locale;
 
 public class TDandroid
 {
@@ -640,7 +646,7 @@ public class TDandroid
   }
   
 
-  /** @return true is MobileTopographer is installed
+  /** @return a flag of the installed GPS apps that are supported
    * @param context   app context
    */
   public static int getImportPointFlag( Context context )
@@ -651,38 +657,39 @@ public class TDandroid
       PackageInfo pi = pm.getPackageInfo( "gr.stasta.mobiletopographer", 0 );
       ret |= FixedActivity.FLAG_MOBILE_TOPOGRAPHER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      // TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "nz.ac.elec.gpsapp", 0 );
       ret |= FixedActivity.FLAG_GPS_POSITION;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      // TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "com.doitintuitively.gpxrecorder", 0 );
       ret |= FixedActivity.FLAG_GPX_RECORDER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      // TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
       ret |= FixedActivity.FLAG_GPS_TEST;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      // TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "eu.basicairdata.graziano.gpslogger", 0 );
       ret |= FixedActivity.FLAG_GPS_LOGGER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      // TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "sk.grecnar.gpspoint", 0 );
       ret |= FixedActivity.FLAG_GPS_POINT;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      // TDLog.e( e.getMessage() );
     }
+    TDLog.v("GPS apps support flag " + ret );
     return ret;
   }
 

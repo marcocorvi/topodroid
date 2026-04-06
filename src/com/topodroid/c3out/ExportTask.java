@@ -24,9 +24,9 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoDroidApp;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsafUri;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDsafUri;
 
 import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;

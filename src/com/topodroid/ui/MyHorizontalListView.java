@@ -15,7 +15,7 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.util.LinkedList;
 import java.util.Queue;

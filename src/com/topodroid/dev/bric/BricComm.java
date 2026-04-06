@@ -36,8 +36,8 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.ListerHandler;
 import com.topodroid.TDX.R;
-// import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 // import android.os.Looper;

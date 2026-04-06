@@ -18,8 +18,8 @@ import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.dem.DEMsurface;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
 
 // import java.io.File;
 import java.io.DataInputStream;

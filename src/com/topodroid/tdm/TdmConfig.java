@@ -11,11 +11,11 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDVersion;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDString;
 import com.topodroid.TDX.TglColor;
 
 // import java.io.File;

@@ -12,7 +12,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.lang.ref.WeakReference;
 

@@ -11,8 +11,8 @@
  */
 package com.topodroid.packetX;
 
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDUtil;
 
 // import java.text.SimpleDateFormat;
 import java.util.Locale;

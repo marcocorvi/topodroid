@@ -11,9 +11,9 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDString;
 import com.topodroid.prefs.TDSetting;
 
 import android.annotation.SuppressLint;
@@ -67,7 +67,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id );
-    TDLog.v( "DBlock Adapter cstr. Items " + items.size() );
+    // TDLog.v( "DBlock Adapter cstr. Items " + items.size() );
     // mContext = ctx;
     mParent  = parent;
     // mItems   = items;

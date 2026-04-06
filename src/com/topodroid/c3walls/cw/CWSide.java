@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import java.util.Locale;
 
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 
 /**
  * oriented side (as seen from outside)

@@ -13,8 +13,8 @@
  */
 package com.topodroid.dev.distox2;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;

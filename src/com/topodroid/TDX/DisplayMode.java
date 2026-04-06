@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDString;
 
 class DisplayMode
 {

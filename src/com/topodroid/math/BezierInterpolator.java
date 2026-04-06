@@ -20,7 +20,7 @@
  */
 package com.topodroid.math;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 // import com.topodroid.math.Point2D;
 
 import java.util.ArrayList;

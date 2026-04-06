@@ -11,8 +11,8 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDColor;
 import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyCheckBox;

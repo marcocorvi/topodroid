@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.dem.DEMsurface;
 import com.topodroid.dem.ParserDEM;
 
@@ -52,6 +52,12 @@ public class GlModel
   static boolean showLegsCommented = true;
   static boolean showLegsBackshot  = true;
 
+  static final int WALL_MODEL_BUBBLE     = 0;
+  static final int WALL_MODEL_TUBE       = 1;
+  static final int WALL_MODEL_HULL       = 2;
+  static final int WALL_MODEL_CONVEXHULL = 3;
+  static final int WALL_MODEL_POWERCRUST = 4;
+  public static int mWallModel = WALL_MODEL_BUBBLE;
   TglParser mParser = null;
   RectF mSurfaceBounds = null;
   // List< GlSketch > glSketches = null; // NO_C3D

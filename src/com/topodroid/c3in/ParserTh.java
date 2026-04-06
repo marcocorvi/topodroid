@@ -13,9 +13,9 @@ package com.topodroid.c3in;
 
 import com.topodroid.TDX.R;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDVersion;
 import com.topodroid.c3db.DataHelper;
 import com.topodroid.c3db.SurveyFixed;
 import com.topodroid.c3db.SurveyInfo;

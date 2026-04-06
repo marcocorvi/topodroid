@@ -11,10 +11,10 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDString;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDString;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;

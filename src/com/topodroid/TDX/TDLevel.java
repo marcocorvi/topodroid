@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
@@ -20,7 +20,6 @@ import android.content.pm.PackageInfo;
 // import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import com.topodroid.utils.TDLog;
 // import android.provider.Settings.Secure;
 
 public class TDLevel

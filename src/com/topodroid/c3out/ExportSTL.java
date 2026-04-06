@@ -17,7 +17,7 @@ import com.topodroid.TDX.Vector3D;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import java.util.ArrayList;
 import java.util.Locale;

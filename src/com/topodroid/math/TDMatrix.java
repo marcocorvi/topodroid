@@ -13,7 +13,7 @@
  */
 package com.topodroid.math;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 public class TDMatrix
 { 

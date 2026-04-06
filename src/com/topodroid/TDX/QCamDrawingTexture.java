@@ -11,8 +11,8 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDThread;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDThread;
 // import com.topodroid.ui.ExifInfo;
 // import com.topodroid.prefs.TDSetting;
 

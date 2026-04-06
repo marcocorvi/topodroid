@@ -11,11 +11,11 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.CWDfolder;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDString;
-// import com.topodroid.utils.TDFile;
+import com.topodroid.util.CWDfolder;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDTag;
+import com.topodroid.util.TDString;
+// import com.topodroid.util.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 

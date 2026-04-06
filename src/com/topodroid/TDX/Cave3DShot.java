@@ -12,9 +12,9 @@
 package com.topodroid.TDX;
 
 import com.topodroid.TDX.DBlock;
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 import com.topodroid.math.TDVector;
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDMath;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;

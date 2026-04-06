@@ -11,8 +11,8 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDTag;
+// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDTag;
 // import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.prefs.TDSetting;

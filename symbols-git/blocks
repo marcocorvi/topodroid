@@ -1,0 +1,35 @@
+encoding utf-8
+symbol point
+name blocks
+name-bg ск._блок
+name-cn 块石
+name-de Blöcke
+name-es bloques
+name-fa بلوک
+name-fr blocs
+name-hu kőtömbök
+name-it blocchi
+name-pt blocos
+name-ro blocuri
+name-ru глыбы
+name-sk bloky
+name-ua блоки
+th_name blocks
+group blocks
+orientation no
+color 0xffcc66
+path
+  moveTo -7 4
+  lineTo 6 6
+  lineTo 8 5
+  lineTo 7 -5
+  lineTo -5 -6
+  lineTo -7 -4
+  lineTo -7 4
+  lineTo 2 -1
+  lineTo 8 5
+  moveTo -7 -4
+  lineTo 2 -1
+  lineTo 7 -5
+endpath
+endsymbol

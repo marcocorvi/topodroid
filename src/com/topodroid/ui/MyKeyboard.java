@@ -11,7 +11,7 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.CutNPaste;
 

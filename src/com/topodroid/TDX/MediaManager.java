@@ -11,9 +11,9 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDFile;
-// import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+// import com.topodroid.util.TDFile;
+// import com.topodroid.util.TDUtil;
 
 // import java.io.File;
 // import java.io.FileOutputStream;

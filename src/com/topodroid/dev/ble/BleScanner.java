@@ -11,9 +11,9 @@
  */
 package com.topodroid.dev.ble;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.Timer;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.Timer;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;

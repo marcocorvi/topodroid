@@ -11,7 +11,7 @@
  */
 package com.topodroid.num;
 
-import com.topodroid.utils.TDMath;
+import com.topodroid.util.TDMath;
 // import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.AverageLeg;

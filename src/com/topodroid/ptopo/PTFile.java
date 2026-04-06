@@ -11,7 +11,7 @@
  */
 package com.topodroid.ptopo;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.TDX.DistoXStationName;
 import com.topodroid.TDX.StationPolicy;
 

@@ -16,9 +16,9 @@
  */
 package com.topodroid.dem;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-// import com.topodroid.utils.TDFile;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+// import com.topodroid.util.TDFile;
 
 // import java.io.FileReader;
 // import java.io.BufferedReader;

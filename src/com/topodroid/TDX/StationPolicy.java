@@ -12,8 +12,8 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDColor;
+import com.topodroid.util.TDLog;
 
 public class StationPolicy
 {

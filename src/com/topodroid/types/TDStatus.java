@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.utils;
+package com.topodroid.util;
 
 public class TDStatus 
 {

@@ -11,7 +11,7 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDColor;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
 

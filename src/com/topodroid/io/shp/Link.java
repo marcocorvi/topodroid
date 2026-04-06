@@ -11,7 +11,7 @@
  */
 package com.topodroid.io.shp;
 
-// import com.topodroid.utils.TDLog;
+// import com.topodroid.util.TDLog;
 import com.topodroid.TDX.DrawingPointPath;
 // import com.topodroid.TDX.DrawingUtil;
 import com.topodroid.TDX.IDrawingLink;

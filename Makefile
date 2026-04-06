@@ -156,9 +156,6 @@ SRC = \
   ./symbols-git/*/*/* \
   ./howto/* \
   ./utils/* \
-  ./save/idea/* \
-  ./save/tdx-icon-0/* \
-  ./save/tdx-icon-1/* \
   ./src/com/topodroid/c3db/*.java \
   ./src/com/topodroid/c3in/*.java \
   ./src/com/topodroid/c3out/*.java \
@@ -181,7 +178,7 @@ SRC = \
   ./src/com/topodroid/tdm/*.java \
   ./src/com/topodroid/trb/*.java \
   ./src/com/topodroid/ui/*.java \
-  ./src/com/topodroid/utils/*.java \
+  ./src/com/topodroid/util/*.java \
   ./libs/arm64-v8a/libnativename.so \
   ./libs/arm64-v8a/libpowercrust.so \
   ./libs/arm64-v8a/libtiffdecoder.so \

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDColor;
+// import com.topodroid.util.TDColor;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.ItemButton;
 import com.topodroid.prefs.TDSetting;

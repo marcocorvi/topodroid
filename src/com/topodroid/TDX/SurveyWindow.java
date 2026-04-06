@@ -11,16 +11,16 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
-// import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDRequest;
-import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDsafUri;
-// import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
+// import com.topodroid.util.TDTag;
+import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDRequest;
+import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDsafUri;
+// import com.topodroid.util.TDVersion;
 import com.topodroid.types.ExportInfo;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;

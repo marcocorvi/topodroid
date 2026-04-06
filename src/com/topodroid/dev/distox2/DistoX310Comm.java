@@ -11,8 +11,8 @@
  */
 package com.topodroid.dev.distox2;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.ui.TDProgress;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.TDX.TDInstance;

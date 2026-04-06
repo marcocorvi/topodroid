@@ -14,8 +14,8 @@
  */
 package com.topodroid.dev.ble;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.dev.ConnectionState;
 // import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDandroid;

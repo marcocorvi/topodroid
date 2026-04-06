@@ -13,11 +13,11 @@ package com.topodroid.calib;
 
 import com.topodroid.TDX.DeviceHelper;
 import com.topodroid.TDX.TDPath;
-import com.topodroid.utils.TDUtil;
+import com.topodroid.util.TDUtil;
 // import com.topodroid.calib.CalibInfo;
-import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDVersion;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDVersion;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.TDMatrix;
 

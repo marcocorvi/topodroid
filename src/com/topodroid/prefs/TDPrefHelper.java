@@ -14,7 +14,7 @@ package com.topodroid.prefs;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDandroid;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;

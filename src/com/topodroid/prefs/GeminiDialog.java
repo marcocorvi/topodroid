@@ -11,7 +11,7 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.HelpDialog;

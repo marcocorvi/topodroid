@@ -11,11 +11,9 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
 // import com.topodroid.TDX.DPoint2D;
-
 import com.topodroid.mag.Geodetic;
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;

@@ -11,8 +11,8 @@
  */
 package com.topodroid.help;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
+import com.topodroid.util.TDLog;
+import com.topodroid.util.TDColor;
 import com.topodroid.TDX.TDToast;
 // import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;

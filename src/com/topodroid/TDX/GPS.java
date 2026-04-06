@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 // WITH-GPS
-import com.topodroid.utils.TDLog;
+import com.topodroid.util.TDLog;
 
 import android.location.Location;
 import android.location.LocationListener;
