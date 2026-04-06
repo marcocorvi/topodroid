@@ -1,5 +1,5 @@
 ciónazimuth:{
-  bg: 
+  bg: азимут
   cn: 
   de: 
   es: azimut
@@ -10,7 +10,7 @@ ciónazimuth:{
   ru: азимут
 }
 bearing:{
-  bg: 
+  bg: направление
   cn: 
   de: Richtung
   es: Dirección
@@ -21,7 +21,7 @@ bearing:{
   ru: направление
 }
 closure error:{
-  bg: 
+  bg: грешка при затваряне
   cn: 
   de: Abschlussfehler
   es: error de cierre
@@ -32,7 +32,7 @@ closure error:{
   ru: ошибка закрытия кольца
 }
 compass:{
-  bg: 
+  bg: компас
   cn: 
   de: 
   es: brújula
@@ -43,7 +43,7 @@ compass:{
   ru: компас
 }
 cross-section:{
-  bg: 
+  bg: напречно сечение
   cn: 
   de: 
   es: sección transversal
@@ -54,7 +54,7 @@ cross-section:{
   ru: поперечное сечение
 }
 denivelation:{
-  bg: 
+  bg: денивелация
   cn: 
   de: Hőhenunterschied
   es: desnivel
@@ -65,7 +65,7 @@ denivelation:{
   ru: денивеляция
 }
 development:{
-  bg: 
+  bg: развитие
   cn: 
   de: Gesamtganglänge
   es: desarrollo
@@ -76,7 +76,7 @@ development:{
   ru: общая длина хода
 }
 entrance:{
-  bg: 
+  bg: вход
   cn: 
   de: Eingang
   es: entrada
@@ -87,7 +87,7 @@ entrance:{
   ru: вход
 }
 grid:{
-  bg: 
+  bg: мрежа
   cn: 
   de: 
   es: cuadrícula
@@ -98,7 +98,7 @@ grid:{
   ru: сетка
 }
 leg:{
-  bg: 
+  bg: измервателна секция
   cn: 
   de: Meßstrecke
   es: tramo
@@ -109,7 +109,7 @@ leg:{
   ru: замер
 }
 loop closure:{
-  bg: 
+  bg: затваряне на полигон
   cn: 
   de:
   es: cierre de bucle
@@ -120,7 +120,7 @@ loop closure:{
   ru: закрытие петли
 }
 midline:{
-  bg: 
+  bg: многоъгълен
   cn: 
   de: Meßzug
   es: poligonal
@@ -131,7 +131,7 @@ midline:{
   ru: нитка хода
 }
 notebook:{
-  bg: 
+  bg: бележки
   cn: 
   de: Notizblock
   es: cuaderno
@@ -142,7 +142,7 @@ notebook:{
   ru: заметки
 }
 plan:{
-  bg: 
+  bg: хоризонтален план
   cn: 
   de: Grungriss
   es: planta
@@ -153,7 +153,7 @@ plan:{
   ru: план
 }
 profile:{
-  bg: 
+  bg: вертикален разрез
   cn: 
   de: Langschnitt
   es: alzado desarrollado
@@ -164,7 +164,7 @@ profile:{
   ru: разрез развертка
 }
 projected profile:{
-  bg: 
+  bg: проектиран разрез
   cn: 
   de: Aufriss
   es: alzado proyectado
@@ -175,7 +175,7 @@ projected profile:{
   ru: разрез проекция
 }
 range:{
-  bg: 
+  bg: разстояние
   cn: 
   de: Entfernung
   es: extensión
@@ -186,7 +186,7 @@ range:{
   ru: расстояние
 }
 scale:{
-  bg: 
+  bg: мащаб
   cn: 
   de: Maßstab
   es: escala
@@ -197,7 +197,7 @@ scale:{
   ru: масштаб
 }
 section:{
-  bg: 
+  bg: разрез
   cn: 
   de: Querschnitt
   es: alzado
@@ -208,7 +208,7 @@ section:{
   ru: разрез
 }
 shot:{
-  bg: 
+  bg: замерване
   cn: 
   de: 
   es: toma
@@ -219,7 +219,7 @@ shot:{
   ru: замер
 }
 splay:{
-  bg: 
+  bg: странични замервания
   cn: 
   de: 
   es: toma lateral
@@ -230,7 +230,7 @@ splay:{
   ru: сплей
 }
 station:{
-  bg: 
+  bg: репер
   cn: 
   de: Meßpunkt
   es: estación
@@ -241,7 +241,7 @@ station:{
   ru: пикет
 }
 surveying:{
-  bg: 
+  bg: топография
   cn: 
   de: Vermessung
   es: topografia
@@ -252,7 +252,7 @@ surveying:{
   ru: топосъёмка
 }
 tape:{
-  bg: 
+  bg: дължина
   cn: 
   de: Maßband
   es: cinta
@@ -263,7 +263,7 @@ tape:{
   ru: длина
 }
 x-section:{
-  bg: 
+  bg: напречно сечение
   cn: 
   de: 
   es: sección
