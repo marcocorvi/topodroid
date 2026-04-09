@@ -143,13 +143,14 @@ class TDPrefKey
    * orientation:  0 unspecified, 1 portrait, 2 landscape
    */
   static TDPrefKey[] mMain = {
+    new TDPrefKey( B,       GEN, "DISTOX_EXTRA_BUTTONS",   R.string.pref_extra_buttons_title,R.string.pref_extra_buttons_summary, TDString.ONE, R.array.extraButtons, R.array.extraButtonsValue ),
     new TDPrefKey( B, LONG, UI,  "DISTOX_TEXT_SIZE",       R.string.pref_text_size_title,    R.string.pref_text_size_summary,     TDString.TWENTY ),
     new TDPrefKey( B,       UI,  "DISTOX_SIZE_BUTTONS",    R.string.pref_size_buttons_title, R.string.pref_size_buttons_summary,  TDString.ONE, R.array.sizeButtons, R.array.sizeButtonsValue ),
     new TDPrefKey( B, FLT,  UI,  "DISTOX_SYMBOL_SIZE",     R.string.pref_symbol_size_title,  R.string.pref_symbol_size_summary,   "1.8"           ),  
-    new TDPrefKey( B,       GEN, "DISTOX_EXTRA_BUTTONS",   R.string.pref_extra_buttons_title,R.string.pref_extra_buttons_summary, TDString.ONE, R.array.extraButtons, R.array.extraButtonsValue ),
-    new TDPrefKey( A,       GEN, "DISTOX_LOCAL_MAN",       R.string.pref_local_help_title,   R.string.pref_local_help_summary,    TDString.ZERO, R.array.localUserMan, R.array.localUserManValue ),
-    new TDPrefKey( N,       GEN, "DISTOX_LOCALE",          R.string.pref_locale_title,       R.string.pref_locale_summary,        TDString.EMPTY, R.array.locale, R.array.localeValue ), 
+    new TDPrefKey( N, BOOL, UI,  "DISTOX_HIDE_NAVBAR",     R.string.pref_hide_navbar_title,  R.string.pref_hide_navbar_summary,   FALSE ),
     new TDPrefKey( T,       UI,  "DISTOX_ORIENTATION",     R.string.pref_orientation_title,  R.string.pref_orientation_summary,   TDString.ZERO,  R.array.orientation, R.array.orientationValue ),
+    new TDPrefKey( N,       GEN, "DISTOX_LOCALE",          R.string.pref_locale_title,       R.string.pref_locale_summary,        TDString.EMPTY, R.array.locale, R.array.localeValue ), 
+    new TDPrefKey( A,       GEN, "DISTOX_LOCAL_MAN",       R.string.pref_local_help_title,   R.string.pref_local_help_summary,    TDString.ZERO, R.array.localUserMan, R.array.localUserManValue ),
     new TDPrefKey( B,       NON, "DISTOX_EXPORT_PREF",     R.string.pref_cat_import_export ),
     new TDPrefKey( B,       NON, "DISTOX_SURVEY_PREF",     R.string.pref_cat_survey      ),
     new TDPrefKey( B,       NON, "DISTOX_PLOT_PREF",       R.string.pref_cat_drawing     ),
@@ -157,7 +158,7 @@ class TDPrefKey
     new TDPrefKey( N,       NON, "DISTOX_CAVE3D_PREF",     R.string.pref_cat_cave3d      ),
     new TDPrefKey( A,       NON, "DISTOX_GEEK_PREF",       R.string.pref_cat_geek        ),
     new TDPrefKey( E,       NON, "DISTOX_EXPORT_SETTINGS", R.string.pref_export_settings )
-  };                                                            
+  };
 
   /** survey settings
    * default team
@@ -833,14 +834,13 @@ class TDPrefKey
    */ 
   static TDPrefKey[] mGeek = {
     new TDPrefKey( A, BOOL, UI,  "DISTOX_SINGLE_BACK",   R.string.pref_single_back_title,   R.string.pref_single_back_summary,   FALSE ),
-    new TDPrefKey( N, BOOL, UI,  "DISTOX_HIDE_NAVBAR",   R.string.pref_hide_navbar_title,   R.string.pref_hide_navbar_summary,   FALSE ),
     new TDPrefKey( T, BOOL, GEN, "DISTOX_PALETTES",      R.string.pref_palettes_title,      R.string.pref_palettes_summary,      FALSE ),
     new TDPrefKey( T, BOOL, UI,  "DISTOX_MKEYBOARD",     R.string.pref_mkeyboard_title,     R.string.pref_mkeyboard_summary,     FALSE ),
     new TDPrefKey( T, BOOL, UI,  "DISTOX_NO_CURSOR",     R.string.pref_no_cursor_title,     R.string.pref_no_cursor_summary,     TRUE  ), 
     new TDPrefKey( T, BOOL, GEN, "DISTOX_BULK_EXPORT",   R.string.pref_bulk_export_title,   R.string.pref_bulk_export_summary,   FALSE ),
     new TDPrefKey( T, BOOL, BT,  "DISTOX_PACKET_LOGGER", R.string.pref_packet_logger_title, R.string.pref_packet_logger_summary, FALSE ),
     new TDPrefKey( T, BOOL, XT,  "DISTOX_TH2_EDIT",      R.string.pref_th2_edit_title,      R.string.pref_th2_edit_summary,      FALSE ),
-    new TDPrefKey( E, BTN,  GEN, "DISTOX_GEMINI",          R.string.pref_gemini_title,       R.string.pref_gemini_summary,        TDString.EMPTY ),
+    new TDPrefKey( E, BTN,  GEN, "DISTOX_GEMINI",        R.string.pref_gemini_title,        R.string.pref_gemini_summary,        TDString.EMPTY ),
     new TDPrefKey( A,       NON, "DISTOX_GEEK_SHOT",     R.string.pref_cat_survey        ),
     new TDPrefKey( T,       NON, "DISTOX_GEEK_SPLAY",    R.string.pref_cat_splay         ),           
     new TDPrefKey( A,       NON, "DISTOX_GEEK_PLOT",     R.string.pref_cat_drawing       ),
@@ -848,10 +848,8 @@ class TDPrefKey
     new TDPrefKey( A,       NON, "DISTOX_GEEK_DEVICE",   R.string.pref_cat_device        ),        
     new TDPrefKey( T,       NON, "DISTOX_GEEK_IMPORT",   R.string.pref_cat_import_export ),
     new TDPrefKey( D,       NON, "DISTOX_SKETCH_PREF",   R.string.pref_cat_sketch        ),
-    new TDPrefKey( D, XTR,  GEN, "DISTOX_WITH_DEBUG",    R.string.pref_with_debug_title,  R.string.pref_with_debug_summary, FALSE ),
+    new TDPrefKey( D, XTR,  GEN, "DISTOX_WITH_DEBUG",    R.string.pref_with_debug_title,  R.string.pref_with_debug_summary, FALSE )
   };
-
-  static final int IDX_DEBUG = 16; // index of DISTOX_WITH_DEBUG
 
   /** additional import settings
    * 

@@ -32,7 +32,7 @@ public class TDLevel
   public static final int DEBUG    = 5;
   // static final private int COMPLETE = 5;
 
-  public static int mLevel = 1; // activity level
+  private static int mLevel = 1; // activity level
 
   public static boolean overBasic    = true;
   public static boolean overNormal   = false;
@@ -54,6 +54,16 @@ public class TDLevel
     }
     return false;
   }
+
+  /** @return true at a specific level
+   * @param level  given level
+   */
+  public static boolean atLevel( int level ) { return mLevel == level; }
+
+  /** @return true at or above a specific level
+   * @param level  given level
+   */
+  public static boolean atLeastLevel( int level ) { return mLevel >= level; }
 
   /** set the activity level
    * @param ctx    context
@@ -77,8 +87,10 @@ public class TDLevel
       mLevel = DEBUG; // N.B. this causes all DEBUG settings FIXME_FIXME
       TDLog.v("LEVEL: over tester");
     }
-    TDLog.v("LEVEL: " + mLevel );
+    TDLog.v("LEVEL: " + mLevel + " tester " + overExpert );
   }
+
+  public static void resetLevel( Context ctx ) { setLevel( ctx, mLevel ); }
 
   public static void setLevelWithDebug( boolean with_debug )
   {

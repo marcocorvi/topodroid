@@ -63,7 +63,7 @@ class StationNameDefault extends StationName
     String main_from = null;
     String main_to   = null;
 
-    NativeName mNativeName = NativeName.get();
+    NativeName native_name = NativeName.get();
 
     // boolean increment = true;
     // TDLog.v( "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
@@ -80,11 +80,11 @@ class StationNameDefault extends StationName
     String station;
     if ( forward_shots ) {
       next = to;
-      next = ( mNativeName != null )? mNativeName.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts );
+      next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? to : from;
     } else {
       next = from;
-      next = ( mNativeName != null )? mNativeName.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts );
+      next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? next : from;
     }
 
@@ -117,12 +117,12 @@ class StationNameDefault extends StationName
         if ( forward_shots ) {
           from = to;
           to   = next;
-          next = ( mNativeName != null )? mNativeName.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts ); // to, sts
+          next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts ); // to, sts
           station = shot_after_splays ? to : from;
         } else {
           to   = from;
           from = next;
-          next = ( mNativeName != null )? mNativeName.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts ); // from, sts
+          next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts ); // from, sts
           station = shot_after_splays ? next : from;
         }
 	main_from = from;
@@ -196,7 +196,7 @@ class StationNameDefault extends StationName
 
     TDLog.v("Station Name Default assign stations all: list " + list.size() + " stations " + sts.size() );
 
-    NativeName mNativeName = NativeName.get();
+    NativeName native_name = NativeName.get();
 
     boolean ret = false;
     boolean forward_shots    = ( survey_stations == 1 );
@@ -288,7 +288,7 @@ class StationNameDefault extends StationName
                 //     if ( t - f > 1 ) {
                 //       TDLog.e("LOG to FILE bad increment " + f + " --> " + t );
                 //       TDLog.setLogStream( TDLog.LOG_FILE );
-                //       TDLog.e("LOG bad increment [1] " + from + " - " + to + " native " + (mNativeName != null) );
+                //       TDLog.e("LOG bad increment [1] " + from + " - " + to + " native " + (native_name != null) );
                 //     } else {
                 //       // TDLog.v("normal increment " + from + " --> " + to );
                 //     }
@@ -310,7 +310,7 @@ class StationNameDefault extends StationName
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
                                                                //                 this-shot-from if splays after shot
                   from = to;                                   // next-shot-from = this-shot-to
-                  to = ( mNativeName != null )? mNativeName.incrementName( to, sts ) : DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
+                  to = ( native_name != null )? native_name.incrementName( to, sts ) : DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
                   // logJump( blk, from, to, sts ); // NO_LOGS
                   // TDLog.v("native increment FWD set station * " + station );
                   if ( current_station == null ) { // DEBUG_NAMES
@@ -320,7 +320,7 @@ class StationNameDefault extends StationName
                       if ( t - f > 1 ) {
                         TDLog.e("LOG to FILE bad increment " + f + " --> " + t );
                         TDLog.setLogStream( TDLog.LOG_FILE );
-                        TDLog.e("LOG bad increment [2] " + from + " - " + to + " sttaion " + station + " native " + (mNativeName != null) );
+                        TDLog.e("LOG bad increment [2] " + from + " - " + to + " sttaion " + station + " native " + (native_name != null) );
                       } else {
                         // TDLog.v("normal increment " + from + " --> " + to );
                       }
@@ -330,7 +330,7 @@ class StationNameDefault extends StationName
                   }
                 } else { // backward_shots
                   to   = from;                                     // next-shot-to   = this-shot-from
-                  from = ( mNativeName != null )? mNativeName.incrementName( from, sts ) : DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
+                  from = ( native_name != null )? native_name.incrementName( from, sts ) : DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
                   station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
                                                                    //                = this-shot-from if splay after shot
                   // logJump( blk, to, from, sts );
@@ -372,7 +372,7 @@ class StationNameDefault extends StationName
           if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
             from = blk.isDistoXBacksight()? blk.mFrom : blk.mTo;
             to   = from;
-            to   = ( mNativeName != null )? mNativeName.incrementName( to, sts ) : DistoXStationName.incrementName( to, sts );
+            to   = ( native_name != null )? native_name.incrementName( to, sts ) : DistoXStationName.incrementName( to, sts );
             // logJump( blk, from, to, sts ); // NO_LOGS
             if ( current_station == null ) {
               if ( blk.isDistoXBacksight() ) {
@@ -391,7 +391,7 @@ class StationNameDefault extends StationName
                 if ( t - f > 1 ) {
                   TDLog.e("LOG to FILE bad increment " + f + " --> " + t );
                   TDLog.setLogStream( TDLog.LOG_FILE );
-                  TDLog.e("LOG bad increment [3] " + from + " - " + to + " station " + station + " native " + (mNativeName != null) );
+                  TDLog.e("LOG bad increment [3] " + from + " - " + to + " station " + station + " native " + (native_name != null) );
                 } else {
                   // TDLog.v("normal increment " + from + " --> " + to );
                 }
@@ -402,7 +402,7 @@ class StationNameDefault extends StationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
             to = blk.isDistoXBacksight()? blk.mTo : blk.mFrom;
             from = to;
-            from = ( mNativeName != null )? mNativeName.incrementName( from, sts ) : DistoXStationName.incrementName( from, sts ); // FIXME it was old from
+            from = ( native_name != null )? native_name.incrementName( from, sts ) : DistoXStationName.incrementName( from, sts ); // FIXME it was old from
             // logJump( blk, to, from, sts );
 
 	    // station must be set even if there is a "currentStation" FIXME FIXME FIXME 20231231

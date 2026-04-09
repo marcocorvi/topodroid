@@ -5,6 +5,7 @@
 sets="speleo archeo anthro bio geo karst mine paleo extra"
 types="point line area"
 
+# the symbols_git directory stays in "topodroid"
 cd "/home/programs/android-sdm/samples/android-8/topodroid/symbols_git"
 
 for t in $types; do

@@ -23,18 +23,50 @@ import android.content.Context;
 
 public class Region
 {
-  boolean mValid = false;
   ArrayList< PointF > mPts; // border
-  float xmin, xmax;
+  float xmin, xmax; // bounding box
   float ymin, ymax;
 
-  /** cstr
+  static private ArrayList< Region > mRegion = new ArrayList<>();
+
+  /** create the regions from a resource
+   * @param ctx  context
+   * @param res  resource
+   */
+  public static void create( Context ctx, int res )
+  {
+    String[] names = ctx.getResources().getStringArray( res );
+    for ( String name : names ) {
+      createRegion( ctx, "region/" + name );
+    }
+  }
+
+  /** @return true if the point is inside one of the regions
+   * @param point  point
+   */
+  static public boolean isInside( String point )
+  {
+    if ( mRegion == null || mRegion.size() == 0 ) return false;
+    String[] vals = point.split( " " );
+    try {
+      float x = Float.parseFloat( vals[0] );
+      float y = Float.parseFloat( vals[1] );
+      for ( Region region : mRegion ) {
+        if ( region.isInside( x, y ) ) return true;
+      }
+    } catch ( NumberFormatException e ) {
+      TDLog.e( e.getMessage() );
+    }
+    return false;
+  }
+
+  /** factory
    * @param ctx  context
    * @param name region asset filename (eg, "ai/c1.txt");
    */
-  public Region( Context ctx, String name )
+  private static void createRegion( Context ctx, String name )
   {
-    mPts = new ArrayList< PointF >();
+    Region ret = new Region();
     try {
       InputStream is = ctx.getAssets().open( name );
       BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
@@ -45,25 +77,29 @@ public class Region
         try {
           float y = Float.parseFloat( vals[0] ); // lat
           float x = Float.parseFloat( vals[1] ); // lon
-          if ( mPts.isEmpty() ) {
-            xmin = xmax = x;
-            ymin = ymax = y;
-          } else {
-            if ( x < xmin ) { xmin = x; } else if ( x > xmax ) { xmax = x; }
-            if ( y < ymin ) { ymin = y; } else if ( y > ymax ) { ymax = y; }
-          }
-          mPts.add( new PointF( x, y ) );
+          ret.insertPoint( x, y );
         } catch ( NumberFormatException e1 ) { }
       }
     } catch ( IOException e ) {
-      TDLog.e("Error reading region " + name );
+      // TDLog.e("Error reading region " + name );
     }
-    mValid = (mPts.size() >= 3);
+    if ( ret.size() >= 3 ) {
+      TDLog.v("Region " + name + " size " + ret.size() );
+      mRegion.add( ret );
+    } else {
+      TDLog.v("Region " + name + " failed " );
+    }
   }
 
-  public boolean isInside( float x, float y )
+  /** cstr
+   */
+  private Region( )
   {
-    if ( ! mValid ) return false;
+    mPts = new ArrayList< PointF >();
+  }
+
+  private boolean isInside( float x, float y )
+  {
     if ( x < xmin || x > xmax ) return false;
     if ( y < ymin || y > ymax ) return false;
     int npts = mPts.size();
@@ -79,9 +115,19 @@ public class Region
     return area > 1.0f;
   }
 
-  public boolean isValid() { return mValid; }
-
   public int size() { return mPts.size(); }
 
+
+  private void insertPoint( float x, float y )
+  {
+    if ( mPts.isEmpty() ) {
+      xmin = xmax = x;
+      ymin = ymax = y;
+    } else {
+      if ( x < xmin ) { xmin = x; } else if ( x > xmax ) { xmax = x; }
+      if ( y < ymin ) { ymin = y; } else if ( y > ymax ) { ymax = y; }
+    }
+    mPts.add( new PointF( x, y ) );
+  }
 }    
   

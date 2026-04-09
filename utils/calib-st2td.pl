@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# convert sexytopo calib file to topodroid calib ccsv
+# convert sexytopo calib file to TopoDroid calib ccsv
 #
 $name = $ARGV[0];
 open( DAT, "$name" ) || die "Cannot open SexyTopo calib file \n";

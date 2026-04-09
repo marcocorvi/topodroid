@@ -95,6 +95,7 @@ public class TDSetting
   public static String mLocale = null; // null if default otherwise the chosen locale
 
   public static boolean mWithDebug = false;
+  public static boolean mAdmaiora  = true;
 
   /** reset MainWindow flag
    */
@@ -1077,30 +1078,30 @@ public class TDSetting
 
     // ------------------- GENERAL PREFERENCES
     TDPrefKey[] key = TDPrefKey.mMain;
-    int level = Integer.parseInt( prefs.getString( key[3].key, key[3].dflt ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
+    int level = Integer.parseInt( prefs.getString( key[0].key, key[0].dflt ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
     key = TDPrefKey.mGeek;
     mSingleBack = prefs.getBoolean(  key[0].key, bool(key[0].dflt) ); // DISTOX_SINGLE_BACK
-    setHideNavBar( prefs.getBoolean( key[1].key, bool(key[1].dflt) ) ); // DISTOX_HIDE_NAVBAR
-    setPalettes(  prefs.getBoolean(  key[2].key, bool(key[2].dflt) ) ); // DISTOX_PALETTES
+    setPalettes(  prefs.getBoolean(  key[1].key, bool(key[1].dflt) ) ); // DISTOX_PALETTES
     // setBackupsClear( prefs.getBoolean( key[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
-    mKeyboard = prefs.getBoolean(   key[3].key, bool(key[3].dflt) ); // DISTOX_MKEYBOARD
-    mNoCursor = prefs.getBoolean(   key[4].key, bool(key[4].dflt) ); // DISTOX_NO_CURSOR
-    mBulkExport = prefs.getBoolean( key[5].key, bool(key[5].dflt) ); // DISTOX_BULK_EXPORT
-    mPacketLog = prefs.getBoolean(  key[6].key, bool(key[6].dflt) ); // DISTOX_PACKET_LOGGER
-    mTh2Edit   = prefs.getBoolean(  key[7].key, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
-    retrieveGeminiApiKey( prefs.getString( key[8].key, key[8].dflt ) );      // DISTOX_GEMINI
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( key[TDPrefKey.IDX_DEBUG].key, bool(key[TDPrefKey.IDX_DEBUG].dflt) ) : false; // DISTOX_WITH_DEBUG
+    mKeyboard = prefs.getBoolean(   key[2].key, bool(key[2].dflt) ); // DISTOX_MKEYBOARD
+    mNoCursor = prefs.getBoolean(   key[3].key, bool(key[3].dflt) ); // DISTOX_NO_CURSOR
+    mBulkExport = prefs.getBoolean( key[4].key, bool(key[4].dflt) ); // DISTOX_BULK_EXPORT
+    mPacketLog = prefs.getBoolean(  key[5].key, bool(key[5].dflt) ); // DISTOX_PACKET_LOGGER
+    mTh2Edit   = prefs.getBoolean(  key[6].key, bool(key[6].dflt) ); // DISTOX_TH2_EDIT
+    retrieveGeminiApiKey( prefs.getString( key[7].key, key[7].dflt ) );      // DISTOX_GEMINI
+    TDPrefKey debug_key = key[ key.length - 1 ];
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( debug_key.key, bool(debug_key.dflt) ) : false; // DISTOX_WITH_DEBUG
 
     key = TDPrefKey.mMain;
-    setTextSize( tryInt(    prefs,  key[0].key, key[0].dflt ) );      // DISTOX_TEXT_SIZE
-    setSizeButtons( tryInt( prefs,  key[1].key, key[1].dflt ) );      // DISTOX_SIZE_BUTTONS
-    setSymbolSize( tryFloat( prefs, key[2].key, key[2].dflt ) );      // DISTOX_SYMBOL_SIZE
-    // skip 3
-    /* mLocalManPages = */ handleLocalUserMan( /* my_app, */ prefs.getString( key[4].key, key[4].dflt ), false ); // DISTOX_LOCAL_MAN
-    setLocale( prefs.getString( key[5].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
-    mOrientation = Integer.parseInt( prefs.getString( key[6].key, key[6].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
+    setTextSize( tryInt(    prefs,  key[1].key, key[1].dflt ) );      // DISTOX_TEXT_SIZE
+    setSizeButtons( tryInt( prefs,  key[2].key, key[2].dflt ) );      // DISTOX_SIZE_BUTTONS
+    setSymbolSize( tryFloat( prefs, key[3].key, key[3].dflt ) );      // DISTOX_SYMBOL_SIZE
+    setHideNavBar(                   prefs.getBoolean( key[4].key, bool(key[4].dflt) ) ); // DISTOX_HIDE_NAVBAR
+    mOrientation = Integer.parseInt( prefs.getString(  key[5].key, key[5].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
+    setLocale(                       prefs.getString(  key[6].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
+    handleLocalUserMan(              prefs.getString(  key[7].key, key[7].dflt ), false ); // DISTOX_LOCAL_MAN
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1628,26 +1629,28 @@ public class TDSetting
     //   // TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ), hlp.getString( "DISTOX_CBD", TDPath.getBaseDir() ) );
     //   TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ) /* , TDPath.getCurrentBaseDir() */ );
     // } else 
-    if ( k.equals( key[ 0 ].key ) ) {              // DISTOX_TEXT_SIZE
+    if ( k.equals( key[ 0 ].key ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
+      int level = tryIntValue( hlp, k, v, key[0].dflt );
+      setActivityBooleans( hlp.getSharedPrefs(), level );
+    } else if ( k.equals( key[ 1 ].key ) ) {              // DISTOX_TEXT_SIZE
       ret = setTextSize( tryIntValue( hlp, k, v, defaultTextSize ) );
-    } else if ( k.equals( key[ 1 ].key ) ) {              // DISTOX_SIZE_BUTTONS (choice)
+    } else if ( k.equals( key[ 2 ].key ) ) {              // DISTOX_SIZE_BUTTONS (choice)
       if ( setSizeButtons( tryIntValue( hlp, k, v, defaultButtonSize ) ) ) {
         TopoDroidApp.resetButtonBar();
       }
-    } else if ( k.equals( key[ 2 ].key ) ) {             // DISTOX_SYMBOL_SIZE
+    } else if ( k.equals( key[ 3 ].key ) ) {             // DISTOX_SYMBOL_SIZE
       ret = setSymbolSize( tryFloatValue( hlp, k, v, defaultSymbolSize ) );
-    } else if ( k.equals( key[ 3 ].key ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
-      int level = tryIntValue( hlp, k, v, key[3].dflt );
-      setActivityBooleans( hlp.getSharedPrefs(), level );
-    } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_LOCAL_MAN (choice)
-      // TDLog.v("SETTING handle local man pages - key " + k + " default " + def[6] );
-      /* mLocalManPages = */ handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, key[4].dflt ), true );
-    } else if ( k.equals( key[ 5 ].key ) ) {           // DISTOX_LOCALE (choice)
-      setLocale( tryStringValue( hlp, k, v, key[5].dflt ), true );
-    } else if ( k.equals( key[ 6 ].key ) ) {           // DISTOX_ORIENTATION (choice)
-      mOrientation = tryIntValue( hlp, k, v, key[6].dflt );
+    } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_HIDE_NAVBAR
+      setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[4].dflt) ) );
+    } else if ( k.equals( key[ 5 ].key ) ) {           // DISTOX_ORIENTATION (choice)
+      mOrientation = tryIntValue( hlp, k, v, key[5].dflt );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
+
+    } else if ( k.equals( key[ 6 ].key ) ) {           // DISTOX_LOCALE (choice)
+      setLocale( tryStringValue( hlp, k, v, key[6].dflt ), true );
+    } else if ( k.equals( key[ 7 ].key ) ) {           // DISTOX_LOCAL_MAN (choice)
+      handleLocalUserMan( tryStringValue( hlp, k, v, key[7].dflt ), true );
     /* ---- IF_COSURVEY
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
@@ -1997,28 +2000,26 @@ public class TDSetting
     TDPrefKey[] key = TDPrefKey.mGeek;
     if ( k.equals( key[0].key ) ) {
       mSingleBack = tryBooleanValue( hlp, k, v, bool(key[0].dflt) ); // DISTOX_SINGLE_BACK
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_HIDE_NAVBA
-      setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[1].dflt) ) );
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_PALETTES
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_PALETTES
       setPalettes( tryBooleanValue( hlp, k, v, bool(key[1].dflt) ) );
     // } else if ( k.equals( key[1] ) ) { // CLEAR_BACKUPS
     //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(key[1].dflt) ) ); // DISTOX_BACKUPS_CLEAR
-    } else if ( k.equals( key[ 3 ].key ) ) {           // DISTOX_MKEYBOARD (bool)
-      mKeyboard = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
-    } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_NO_CURSOR(bool)
-      mNoCursor = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
+    } else if ( k.equals( key[ 2 ].key ) ) {           // DISTOX_MKEYBOARD (bool)
+      mKeyboard = tryBooleanValue( hlp, k, v, bool(key[2].dflt) );
+    } else if ( k.equals( key[ 3 ].key ) ) {           // DISTOX_NO_CURSOR(bool)
+      mNoCursor = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
+    } else if ( k.equals( key[ 4 ].key ) ) {
+      mBulkExport = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
     } else if ( k.equals( key[ 5 ].key ) ) {
-      mBulkExport = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
-    } else if ( k.equals( key[ 5 ].key ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); // DISTOX_PACKET_LOGGER
-    } else if ( k.equals( key[ 7 ].key ) ) {
-      mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[7].dflt) ); // DISTOX_TH2_EDIT
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(key[5].dflt) ); // DISTOX_PACKET_LOGGER
+    } else if ( k.equals( key[ 6 ].key ) ) {
+      mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( k.equals( key[ 8 ].key ) ) {           // DISTOX_GEMINI
+    } else if ( k.equals( key[ 7 ].key ) ) {           // DISTOX_GEMINI
       TDLog.e("Gemini API key is not set in normal way");
       // mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
-    } else if ( TDLevel.isDebugBuild() && k.equals( key[TDPrefKey.IDX_DEBUG].key ) ) {
-      mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[TDPrefKey.IDX_DEBUG].dflt) ); // DISTOX_WITH_DEBUG
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[ key.length - 1 ].key ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[ key.length - 1 ].dflt) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.e("missing GEEK key: " + k );
@@ -3233,7 +3234,7 @@ public class TDSetting
   private static void setActivityBooleans( SharedPreferences prefs, int level )
   {
     // TDLog.v("Level current " + TDLevel.mLevel + " set " + level );
-    if ( level == TDLevel.mLevel ) return;
+    if ( TDLevel.atLevel( level ) ) return;
 
     if ( StationPolicy.policyDowngrade( level ) ) {
       setPreference( prefs, TDPrefKey.policyKey(), TDString.ONE );

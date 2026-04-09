@@ -113,4 +113,8 @@
   <string name="a_my" translatable="false">AMy</string>
   <string name="a_mz" translatable="false">AMz</string>
   <string name="nl_g" translatable="false">nl</string>
+
+  <string-array name="regions" translatable="false">
+  </string-array>
+
 </resources>

@@ -19,6 +19,8 @@ import java.util.Set;
 
 class NativeName
 {
+  static NativeName mNativeName = null; // singleton
+
   public native static String incrementName( String name, Set<String> stations );
 
   public native void initLog();
@@ -27,21 +29,28 @@ class NativeName
     System.loadLibrary( "nativename" );
   }
 
-  NativeName()
+  private NativeName()
   {
     initLog();
   }
 
+  /** factory method
+   * @return the NativeName or null if failed to create
+   */
   static NativeName get()
   {
-    try {
-      return new NativeName();
-      // TDLog.v( "Using native name lib" );
-    } catch ( java.lang.UnsatisfiedLinkError e ) {
-      TDLog.e("Native link error " + e.getMessage() );
+    if ( mNativeName == null ) {
+      try {
+        mNativeName = new NativeName();
+        // TDLog.v( "Using native name lib" );
+      } catch ( java.lang.UnsatisfiedLinkError e ) {
+        TDLog.e("Native link error " + e.getMessage() );
+        mNativeName = null;
+      }
     }
-    return null;
-  }                            
-    
+    return mNativeName;
+  }
+
+
 }
 

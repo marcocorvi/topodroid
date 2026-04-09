@@ -222,8 +222,8 @@ public class DeviceActivity extends Activity
 
   private static final int HELP_PAGE = R.string.DeviceActivity;
 
+  private ArrayList< Device > mDeviceList;    // list of devices
   private ListItemAdapter mDeviceListAdapter; // populated by updateList
-  private ArrayList< Device > mDeviceList;
   private ListView mList;
 
   private ArrayList< BluetoothDevice > mNonameList = null;  // BT_NONAME
@@ -421,9 +421,10 @@ public class DeviceActivity extends Activity
         TDLog.v("unpair device " + address + " not found");
       }
     }
-    removeDeviceFromList( device );
+    boolean ret = removeDeviceFromList( device );
     Device curr_dev = currDeviceA();
     if ( curr_dev != null && curr_dev.getAddress().equals( address ) ) detachDevice();
+    if ( ret ) updateList( false );
   }
 
   /** ask whether to forget a device
@@ -554,38 +555,33 @@ public class DeviceActivity extends Activity
     showDistoXButtons();
   }
 
-  /** clear the list of devices and the adapter
-   */
-  private void clearDeviceList()
-  {
-    mDeviceListAdapter.clear();
-    mDeviceList.clear();
-  }
-
   /** add a device to the list of devices and the adapter
    * @param dev   device to add
    * @return true if the device was not on the list and has been inserted
    */
-  private boolean addDeviceToList( Device dev )
+  private void addDeviceToList( Device dev )
   {
-    if ( ! isDeviceOnList( dev.getAddress() ) ) {
-      mDeviceListAdapter.add( dev.toString() );
+    TDLog.v("add device to list " + dev.toString() );
+    if ( isDeviceOnList( dev.getAddress() ) == null ) {
+      TDLog.v(" not on list ");
       mDeviceList.add( dev );
-      return true;
     }
-    return false;
   }
 
   /** drop a device from the list
    * @param dev   device to drop
    */
-  private void removeDeviceFromList( Device dev )
+  private boolean removeDeviceFromList( Device dev )
   {
-    if ( isDeviceOnList( dev.getAddress() ) ) {
-      TDLog.v("remove device " + dev.getAddress() );
-      updateList( false );
+    // TDLog.v("Remove device from list " + dev.toString() );
+    Device device = isDeviceOnList( dev.getAddress() );
+    if ( device != null ) {
+      // TDLog.v("remove device " + dev.getAddress() );
+      mDeviceList.remove( device );
+      return true;
     } else {
-      TDLog.e("remove device " + dev.getAddress() + " not listed");
+      // TDLog.v("remove device " + dev.getAddress() + " not listed");
+      return false;
     }
   }
       
@@ -594,7 +590,8 @@ public class DeviceActivity extends Activity
   {
     // TDLog.v("device activity update list - check noname " + check_noname );
     if ( check_noname ) mHasNonameDevice = updateNonameList(); // BT_NONAME
-    clearDeviceList();
+    
+    mDeviceList.clear();
     // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
     //   mDeviceListAdapter.add( "X000" );
     //   mdeviceList.add( new Device( ... ) ); // TODO
@@ -603,9 +600,11 @@ public class DeviceActivity extends Activity
 
     Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
     if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
+      // TDLog.v("Bonded devices " + bt_device_set.size() );
       setTitle( R.string.title_device );
       for ( BluetoothDevice bt_device : bt_device_set ) {
         String addr = bt_device.getAddress();
+        // TDLog.v("bonded device " + addr );
         String bt_name = null;
         try {
           bt_name = bt_device.getName();
@@ -614,11 +613,22 @@ public class DeviceActivity extends Activity
         }
         addBluetoothDevice( bt_device, addr, bt_name );
       }
+    } else {
+      // TDLog.v("No bonded devices" );
     }
     List< Device > devices = mApp_mDData.getDevices(); // now add other devices stored in the database
+    // TDLog.v("DB devices " + devices.size() );
     for ( Device device : devices ) {
+      // TDLog.v("DB device " + device.toString() );
       addDeviceToList( device );
     }
+
+    mDeviceListAdapter.clear();
+    TDLog.v("Nr devices " + mDeviceList.size() );
+    for ( Device dev : mDeviceList ) {
+      mDeviceListAdapter.add( dev.toString() );
+    }
+    // mList.setAdapter( mDeviceListAdapter );
   }
 
   /** @return true if the given device is in the database
@@ -627,26 +637,35 @@ public class DeviceActivity extends Activity
   private boolean isDeviceInDatabase( Device dev )
   {
     String address = dev.getAddress();
+    // TDLog.v("Check device in DB " + address );
     if ( address == null ) {
       TDLog.e("Cannot list device with null address"); // pretend it is already on the list
       return true;
     }
     List< Device > devices = mApp_mDData.getDevices();
     for ( Device device : devices ) {
-      if ( address.equals( device.getAddress() ) ) return true;
+      if ( address.equals( device.getAddress() ) ) {
+        // TDLog.v("found device in DB " + address );
+        return true;
+      }
     }
+    // TDLog.v("not found device in DB " + address );
     return false;
   }
 
   /** @return true if the device is on the device list
    * @param address   device address
    */
-  private boolean isDeviceOnList( String address )
+  private Device isDeviceOnList( String address )
   {
     for ( Device device : mDeviceList ) {
-      if ( address.equals( device.getAddress() ) ) return true;
+      if ( address.equals( device.getAddress() ) ) {
+        // TDLog.v("found device on list " + address );
+        return device;
+      }
     }
-    return false;
+    // TDLog.v("not found device on list " + address );
+    return null;
   }
 
   /** add device returned by a scan
@@ -658,7 +677,10 @@ public class DeviceActivity extends Activity
     BluetoothDevice bt_dev = result.getDevice();
     ScanRecord rec = result.getScanRecord();
     // List< ParcelUuid > uuids = rec.getServiceUuids(); // can use uuid.toString() to get services UUID
-    return addBluetoothDevice( bt_dev, bt_dev.getAddress(), bt_dev.getName() );
+    // TDLog.v("Notify scan result " + bt_dev.getAddress() + " " + bt_dev.getName() );
+    boolean ret = addBluetoothDevice( bt_dev, bt_dev.getAddress(), bt_dev.getName() );
+    if ( ret ) updateList( false );
+    return ret;
   }
 
   /** add a Bluetooth device to the list
@@ -687,6 +709,7 @@ public class DeviceActivity extends Activity
     //  }
     // ---- END DEBUG
     if ( dev == null ) {
+      // TDLog.v("device not in DB " + address + " name " + bt_name );
       if ( bt_name == null ) {
         if ( bt_device != null && bt_device.getType() == 2 ) { // Bluetooth LE
           TDToast.makeWarn( String.format( getResources().getString( R.string.device_no_name ), address ) );
@@ -717,13 +740,13 @@ public class DeviceActivity extends Activity
           dev = mApp_mDData.getDevice( address );
         }
       }
+      if ( dev != null ) updateList( false );
+      return true;
     } else {
+      // TDLog.v("device already in DB " + address + " name " + bt_name );
       // if ( ! TDLevel.overExpert ) { // drop SAP and BRIC
       //   if ( dev.isSap() || dev.isBric() ) dev = null;
       // }
-    }
-    if ( dev != null ) {
-      return addDeviceToList( dev );
     }
     return false;
   }
@@ -769,7 +792,7 @@ public class DeviceActivity extends Activity
       return;
     }
     CharSequence item = ((TextView) view).getText();
-    TDLog.v("on item click: " + item.toString() );
+    // TDLog.v("on item click: " + item.toString() );
     StringBuffer buf = new StringBuffer( item );
     int k = buf.lastIndexOf(" ");
     String[] vals = item.toString().split(" ", 3 );

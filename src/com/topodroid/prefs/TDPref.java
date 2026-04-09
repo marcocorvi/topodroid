@@ -669,22 +669,24 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     //   for ( String opt : options ) sb.append(" <").append( opt ).append(">");
     //   TDLog.v( "Pref make list index: val <" + value + "> opts size " + options.length + ":" + sb.toString() );
     // }
+    int ret = -1;
     if ( value == null || value.length() == 0 ) {
       for ( int k=0; k< values.length; ++k ) { 
         if ( values[k].length() == 0 ) {
           i_value = k;
-          return k;
+          ret = k;
         }
       }
     } else {
       for ( int k=0; k< values.length; ++k ) { 
         if ( value.equals( values[k] ) ) {
           i_value = k;
-          return k;
+          ret = k;
         }
       }
     }
-    return -1;
+    while ( ret >= options.length ) ret--;
+    return ret;
   }
 
   // private static String getOptionFromValue( String val, String[] opts, String[] vals )

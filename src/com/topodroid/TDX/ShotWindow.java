@@ -3039,6 +3039,7 @@ public class ShotWindow extends Activity
    */
   void renumberShotsFrom( long bid ) // 20251205
   {
+    NativeName native_name = NativeName.get();
     List< DBlock > shots = mApp_mData.selectAllShotsAfter( bid, TDInstance.sid, TDStatus.NORMAL );
     // TDLog.v("Renumber: shots from " + bid + " size " + shots.size() );
     if ( shots.isEmpty() ) return;
@@ -3059,7 +3060,7 @@ public class ShotWindow extends Activity
         if ( ! TDString.isNullOrEmpty( f ) ) {
           fi = station_map.get( f );
           if ( fi == null ) {
-            fi = NativeName.incrementName( last_station, stations );
+            fi = ( native_name != null )? native_name.incrementName( last_station, stations ) : DistoXStationName.incrementName( last_station, stations );
             last_station = fi;
             stations.add( fi );
             station_map.put( f, fi );
@@ -3069,7 +3070,7 @@ public class ShotWindow extends Activity
         if ( ! TDString.isNullOrEmpty( t ) ) {
           ti = station_map.get( t );
           if ( ti == null ) {
-            ti = NativeName.incrementName( last_station, stations );
+            ti = ( native_name != null )? native_name.incrementName( last_station, stations ): DistoXStationName.incrementName( last_station, stations );
             last_station = ti;
             stations.add( ti );
             station_map.put( t, ti );

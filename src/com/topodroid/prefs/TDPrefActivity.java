@@ -422,7 +422,7 @@ public class TDPrefActivity extends Activity
     int cnt = 0;
     if ( mPrefs != null ) {
       for ( TDPref pref : mPrefs ) {
-	if ( TDLevel.mLevel >= pref.level ) {
+	if ( TDLevel.atLeastLevel( pref.level ) ) {
           LinearLayout.LayoutParams lp = TDLayout.getLayoutParamsFill( 10, 10, 10, 40 );
           layout.addView( pref.getView( this, li, null ), lp );
 	  ++ cnt;

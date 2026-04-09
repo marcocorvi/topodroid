@@ -37,6 +37,7 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.ItemButton;
 import com.topodroid.ui.MotionEventWrap;
+// import com.topodroid.ui.IJoinClickHandler;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
