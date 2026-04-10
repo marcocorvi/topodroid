@@ -694,7 +694,7 @@
     <!-- UNUSED string name="shot_reverse">развернуть</string -->
     <string name="shot_to">№ НА</string>
     <string name="shot_refreshed">Таблица замеров обновлена</string>
-    <!-- TODO string name="scan_type">Scan type</string -->
+    <string name="scan_type">Тип сканирования</string>
 
     <string name="station">пикет</string>
     <string name="station_ask">Добавить пикет в абрис?</string>
@@ -824,7 +824,7 @@
     <string name="hide_leg">Повторные измерения</string>
     <string name="hide_ids">ID замеров</string>
     <string name="hide_splay">Боковые замеры</string>
-    <!-- TODO string name="hide_scan">Scan sets</string -->
+    <string name="hide_scan">Наборы сканирования</string>
     <string name="slope_lside">Уклон l-направление</string>
 
     <!-- UNUSED string name="plan">ПЛАН</string -->
@@ -881,8 +881,8 @@
     <string name="button_duplicate" >Дубликаты</string>
     <string name="button_settime"   >Установить время</string>
     <string name="button_surface"   >Поверхностные</string>
-    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
-    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
+    <string name="button_splay"    copyable="all">Сплей</string>
+    <string name="button_scan"     copyable="all">Скан</string>
     <string name="button_no_extend" >Нет напр. развертки </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_evalg"     >G      </string>
@@ -1727,8 +1727,8 @@
   <string name="pref_text_size_summary">Размер шрифта в списках</string>
   <string name="pref_symbol_size_title">Размер символов</string>
   <string name="pref_symbol_size_summary">Размер символов в нижней панели</string>
-  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
-  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
+  <string name="pref_toolbar_update_title">Обновление панели инструментов</string>
+  <string name="pref_toolbar_update_summary">Как добавлять символы в нижнюю панель</string>
   <string name="pref_closeness_title">Радиус выбора</string>
   <string name="pref_closeness_message">Радиус зоны выбора элемента абриса</string>
   <string name="pref_eraseness_title">Размер ластика</string>
@@ -1840,8 +1840,8 @@
   <string name="pref_shot_timer_summary">Время задержки при измерении направления на пикет [c]</string>
   <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
   <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
-  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
-  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
+  <string name="pref_beep_length_title">Длительность сигнала таймера</string>
+  <string name="pref_beep_length_summary">Длительность звукового сигнала [мсек]</string>
   <string name="pref_extend_frac_title">Неполная развертка</string>
   <string name="pref_extend_frac_summary">В случае когда значение "развертки" имеет десятичную часть.</string>
   <string name="pref_recent_shot_title">Недавние замеры</string>
