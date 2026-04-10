@@ -124,6 +124,8 @@ public class TDPrefActivity extends Activity
   @Override
   public void onCreate(Bundle savedInstanceState)
   {
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+
     super.onCreate( savedInstanceState );
 
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
@@ -134,7 +136,7 @@ public class TDPrefActivity extends Activity
     TDLog.v( "has local LLM " + mWithLocalModel );
     // END GEMMA3 */
 
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    // requestWindowFeature(Window.FEATURE_NO_TITLE); // moved to begin pf method
 
     // mApp = (TopoDroidApp) getApplication();
     mCtx = TDInstance.context;

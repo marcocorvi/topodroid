@@ -66,9 +66,9 @@ class SymbolReload extends MyDialog
   @Override
   protected void onCreate(Bundle savedInstanceState) 
   {
+    // requestWindowFeature(Window.FEATURE_NO_TITLE);
     super.onCreate(savedInstanceState);
 
-    // requestWindowFeature(Window.FEATURE_NO_TITLE);
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );

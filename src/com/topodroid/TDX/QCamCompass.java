@@ -194,8 +194,9 @@ class QCamCompass extends Dialog
   @Override
   public void onCreate(Bundle savedInstanceState) 
   {
-    super.onCreate(savedInstanceState);
     requestWindowFeature( Window.FEATURE_NO_TITLE );
+    super.onCreate(savedInstanceState);
+    // requestWindowFeature( Window.FEATURE_NO_TITLE ); // moved at start of method
     // TDLog.v("QCAM camera " + mCamera );
     if ( mCamera == PhotoInfo.CAMERA_TOPODROID ) {
       setContentView(R.layout.qcam_compass);
