@@ -1260,6 +1260,7 @@ public class MainWindow extends Activity
     }
   }
 
+
   @Override
   public synchronized void onResume() 
   {
@@ -1273,6 +1274,15 @@ public class MainWindow extends Activity
     boolean ok_folder = TopoDroidApp.initEnvironmentThird();
 
     // TDLog.v( "MAIN init environment third done return " + ok_folder );
+
+    String hicsum = TopoDroidApp.mDData.getValue( "hicsum" );
+    if ( hicsum == null ) {
+      PointF pt = new PointF();
+      TDandroid.getCoarseLocation( this, pt );
+    } else {
+      // TDLog.v("Hicsum in db " + hicsum );
+      TopoDroidApp.sineTest( this, hicsum );
+    }
 
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
     //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
@@ -1842,7 +1852,7 @@ public class MainWindow extends Activity
             if ( doExport( survey, index, file_name, export_info ) ) ++cnt;
           }
           TDLog.v("Export Thread done");
-          final String res = String.format( TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt ) );
+          final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );
           runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
         }
       };

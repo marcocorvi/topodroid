@@ -145,13 +145,16 @@ public class GMActivity extends Activity
                      };
 
   static final private int[] menus = {
+                        R.string.menu_close,
                         R.string.menu_show_deleted,
                         R.string.menu_validate,
                         R.string.menu_options, 
                         R.string.menu_help,
-			R.string.menu_hide_deleted     // alternate 0
+			R.string.menu_hide_deleted     // alternate 1
                         // , R.string.menu_calib_auto // AUTO-CALIB
                      };
+
+  static final int MENU_HIDE_DELETED = 5;
 
   static final private int[] help_icons = {
                         R.string.help_toggle,
@@ -165,6 +168,7 @@ public class GMActivity extends Activity
                         R.string.help_search
                       };
   static final private int[] help_menus = {
+                        R.string.help_close,
                         R.string.help_display_calib,
                         R.string.help_validate,
                         R.string.help_prefs,
@@ -1537,10 +1541,11 @@ public class GMActivity extends Activity
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
-    menu_adapter.add( res.getString( (mBlkStatus == 0)? menus[0] : menus[4] ) );
-    if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[1] ) );
-    menu_adapter.add( res.getString( menus[2] ) );
+    menu_adapter.add( res.getString( menus[0] ) );
+    menu_adapter.add( res.getString( (mBlkStatus == 0)? menus[1] : menus[ MENU_HIDE_DELETED ] ) );
+    if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[2] ) );
     menu_adapter.add( res.getString( menus[3] ) );
+    menu_adapter.add( res.getString( menus[4] ) );
     // if ( TDLevel.overTester ) menu_adapter.add( res.getString( menus[5] ) ); // AUTO-CALIB
 
     mMenu.setAdapter( menu_adapter );
@@ -1566,7 +1571,9 @@ public class GMActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( p++ == pos ) { // DISPLAY
+    if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
+    } else if ( p++ == pos ) { // DISPLAY
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
       setMenuAdapter( getResources() );
       updateDisplay( );

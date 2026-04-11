@@ -84,6 +84,7 @@ public class CalibActivity extends Activity
   private BitmapDrawable mBMread_no;
   
   private static final int[] menus = {
+                        R.string.menu_close,
                         R.string.menu_export,
                         R.string.menu_delete,
                         R.string.menu_options,
@@ -96,6 +97,7 @@ public class CalibActivity extends Activity
                         R.string.help_coeff
                       };
   private static final int[] help_menus = {
+                        R.string.help_close,
                         R.string.help_export_calib,
                         R.string.help_delete_calib,
                         R.string.help_prefs,
@@ -485,11 +487,12 @@ public class CalibActivity extends Activity
   private void setMenuAdapter( Resources res )
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
-
-    if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[0] ) );
-    if ( TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[1] ) );
-    menu_adapter.add( res.getString( menus[2] ) );
-    menu_adapter.add( res.getString( menus[3] ) );
+    int k = -1;
+    ++k; menu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[k] ) );
+    ++k; menu_adapter.add( res.getString( menus[k] ) );
+    ++k; menu_adapter.add( res.getString( menus[k] ) );
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
@@ -510,7 +513,9 @@ public class CalibActivity extends Activity
     closeMenu();
     // TDToast.make( item.toString() );
     int p = 0;
-    if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
+    if ( TDLevel.overNormal && p++ == pos ) { // CLOSE
+      super.onBackPressed();
+    } else if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( TDInstance.calib != null ) {
         new ExportDialogCalib( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
       }

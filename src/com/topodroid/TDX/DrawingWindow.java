@@ -151,7 +151,7 @@ public class DrawingWindow extends ItemDrawer
                                     , IPhotoInserter
                                     , IAudioInserter
 {
-  public static final int ZOOM_TRANSLATION_1 = -42;
+  public static final int ZOOM_TRANSLATION_1 = -50; // was -42
   // public static final int ZOOM_TRANSLATION_3 = -200;
   private static int ZOOM_TRANSLATION   = ZOOM_TRANSLATION_1;
  
@@ -568,7 +568,7 @@ public class DrawingWindow extends ItemDrawer
   private boolean hasPointActions  = false;
 
   // ZOOM
-  static final float ZOOM_INC = 2.0f;
+  static final float ZOOM_INC = 1.4f;
   static final float ZOOM_DEC = 1.0f/ZOOM_INC;
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;

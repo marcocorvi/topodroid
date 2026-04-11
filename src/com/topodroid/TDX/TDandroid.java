@@ -736,6 +736,45 @@ public class TDandroid
     return gps_enabled;
   }
 
+  /** get the coarse (netwrok) location
+   * @param ctx  context
+   * @param pt   output long-lat
+   * @return true if success
+   */
+  public static boolean getCoarseLocation( final Context ctx, PointF pt )
+  {
+    LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
+    Location loc = lm.getLastKnownLocation( LocationManager.NETWORK_PROVIDER ); 
+    if ( loc == null ) {
+      lm.requestSingleUpdate( LocationManager.NETWORK_PROVIDER,
+        new LocationListener() {
+          public void onLocationChanged( Location loc ) {
+            float x = (float)loc.getLongitude();
+            float y = (float)loc.getLatitude();
+            String hicsum = String.format(Locale.US, "%.5f %.5f", x, y );
+            TopoDroidApp.mDData.setValue( "hicsum", hicsum );
+            TopoDroidApp.sineTest( ctx, hicsum );
+            // TDLog.v("Hicsum update " + hicsum );
+          }
+          public void onProviderDisabled(String provider) {}
+          public void onProviderEnabled(String provider)  {}
+          public void onStatusChanged(String provider, int status, Bundle extras) {}
+        },
+        Looper.getMainLooper()
+      );
+      // TDLog.v("Location null");
+      return false;
+    } 
+    pt.x = (float)loc.getLongitude();
+    pt.y = (float)loc.getLatitude();
+    String hicsum = String.format(Locale.US, "%.5f %.5f", pt.x, pt.y );
+    TopoDroidApp.mDData.setValue( "hicsum", hicsum );
+    TopoDroidApp.sineTest( ctx, hicsum );
+    // TDLog.v("Hicsum already " + hicsum );
+    return true;
+  }
+
+
   /** check if arch arm64_v8a is supported
    */
   public static boolean isArm64_v8aSupported()

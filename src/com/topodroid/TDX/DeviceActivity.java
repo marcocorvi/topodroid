@@ -187,6 +187,7 @@ public class DeviceActivity extends Activity
   static final private int IDX_MEMORY = 5;
 
   private static final int[] menus = {
+                        R.string.menu_close,
                         R.string.menu_scan, // BT_SCAN
                         // R.string.menu_scan_ble, // FIXME_SCAN_BRIC
                         // R.string.menu_pair,
@@ -209,6 +210,7 @@ public class DeviceActivity extends Activity
                         // R.string.help_remote
                      };
   private static final int[] help_menus = {
+                        R.string.help_close,
                         R.string.help_scan,
                         // R.string.help_scan_ble, // FIXME_SCAN_BRIC
                         // R.string.help_pair,
@@ -1364,6 +1366,7 @@ public class DeviceActivity extends Activity
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = -1;
+    ++k; menu_adapter.add( res.getString( menus[k] ) );         // CLOSE
     ++k; menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
     // ++k; if ( TDLevel.overExpert && mHasBLE ) menu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
@@ -1403,7 +1406,9 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( p++ == pos ) { // BT_SCAN
+    if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
+    } else if ( p++ == pos ) { // BT_SCAN
       if ( mBTisScanning ) return;
       if ( TDandroid.BELOW_API_31 ) {
         // Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, BtScan.class );

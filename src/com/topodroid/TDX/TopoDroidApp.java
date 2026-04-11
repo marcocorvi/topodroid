@@ -1035,6 +1035,7 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
+    Region.create( getApplicationContext(), R.array.regions );
 
     // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE are no longer supported
     // SQLiteDatabase dbase = openOrCreateDatabase("DISTOX14", 0, null );
@@ -3515,6 +3516,10 @@ public class TopoDroidApp extends Application
   //   }
   // }
 
+  /** sync time with the Cavway device
+   * @param ctx context
+   * @param address  device address
+   */
   public void syncDateTime( Context ctx, final String address )
   {
     if ( ! TDInstance.isDeviceCavway() ) return;
@@ -3532,4 +3537,16 @@ public class TopoDroidApp extends Application
     return mData.selectShot( blk.mId, TDInstance.sid );
   }
 
+  /** set sine test
+   * @param ctx context
+   * @param hicsum where
+   */
+  static void sineTest( Context ctx, String hicsum )
+  {
+    TDLog.v("sine test " + hicsum );
+    if ( Region.isInside( hicsum ) ) {
+      TDSetting.mAdmaiora = false;
+      TDLevel.resetLevel( ctx );
+    }
+  }
 }

@@ -90,7 +90,9 @@ public class BleScanner
     TDLog.v("BLE scanner stop");
     mScanning = false;
     mBleScanner.stopScan( mCallback );
-    final String msg = String.format( mContext.getResources().getString( R.plurals.scan_result ), mCallback.getNovel() );
+    int novel =  mCallback.getNovel();
+    TDLog.v("Scan result: " + novel );
+    final String msg = mContext.getResources().getQuantityString( R.plurals.scan_result, novel, novel );
     mParent.runOnUiThread( new Runnable() { public void run() { 
       mParent.setBtScanning( false );
       TDToast.make( msg ); 
