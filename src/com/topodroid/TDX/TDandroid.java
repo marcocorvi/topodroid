@@ -481,6 +481,15 @@ public class TDandroid
     return ret;
   }
 
+  /** @return true if coarse location access is granted
+   * @param context  context
+   */
+  public static boolean checkCoarseLocation( Context context )
+  {
+    PackageManager pm = context.getPackageManager();
+    return hasCallingOrPermission( context, android.Manifest.permission.ACCESS_FINE_LOCATION ) || hasCallingOrPermission( context, android.Manifest.permission.ACCESS_COARSE_LOCATION );
+  }
+
   /** @return true if location access is granted
    * @param context  context
    */
@@ -758,6 +767,7 @@ public class TDandroid
    */
   public static boolean getCoarseLocation( final Context ctx, PointF pt )
   {
+    if ( ! checkCoarseLocation( ctx ) ) return false;
     LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
     Location loc = lm.getLastKnownLocation( LocationManager.NETWORK_PROVIDER ); 
     if ( loc == null ) {

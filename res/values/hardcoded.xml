@@ -114,6 +114,8 @@
   <string name="a_mz" translatable="false">AMz</string>
   <string name="nl_g" translatable="false">nl</string>
 
+  <string name="location_required" translatable="false">LOCATION permission is required</string>
+
   <string-array name="regions" translatable="false">
   </string-array>
 
