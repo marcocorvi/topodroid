@@ -173,6 +173,8 @@ public class TDandroid
   public static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
   public static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
 
+  static String mHicsum = null;
+
   /** apply the changes stored in the editor
    * @param editor   preferences editor
    * @return true if successful
@@ -736,6 +738,19 @@ public class TDandroid
     return gps_enabled;
   }
 
+
+  public static void setHicsum( Context ctx, float x, float y )
+  {
+    mHicsum = String.format(Locale.US, "%.5f %.5f", x, y );
+    if ( TopoDroidApp.mDData != null ) {
+      TopoDroidApp.mDData.setValue( "hicsum", mHicsum );
+      TDLog.v("Hicsum update " + mHicsum );
+    } else { 
+      TDLog.v("Hicsum set " + mHicsum );
+    }
+    TopoDroidApp.sineTest( ctx, mHicsum );
+  }
+
   /** get the coarse (netwrok) location
    * @param ctx  context
    * @param pt   output long-lat
@@ -751,10 +766,7 @@ public class TDandroid
           public void onLocationChanged( Location loc ) {
             float x = (float)loc.getLongitude();
             float y = (float)loc.getLatitude();
-            String hicsum = String.format(Locale.US, "%.5f %.5f", x, y );
-            TopoDroidApp.mDData.setValue( "hicsum", hicsum );
-            TopoDroidApp.sineTest( ctx, hicsum );
-            // TDLog.v("Hicsum update " + hicsum );
+            setHicsum( ctx, x, y );
           }
           public void onProviderDisabled(String provider) {}
           public void onProviderEnabled(String provider)  {}
@@ -767,10 +779,7 @@ public class TDandroid
     } 
     pt.x = (float)loc.getLongitude();
     pt.y = (float)loc.getLatitude();
-    String hicsum = String.format(Locale.US, "%.5f %.5f", pt.x, pt.y );
-    TopoDroidApp.mDData.setValue( "hicsum", hicsum );
-    TopoDroidApp.sineTest( ctx, hicsum );
-    // TDLog.v("Hicsum already " + hicsum );
+    setHicsum( ctx, pt.x, pt.y );
     return true;
   }
 

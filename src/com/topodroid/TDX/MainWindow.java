@@ -1275,13 +1275,12 @@ public class MainWindow extends Activity
 
     // TDLog.v( "MAIN init environment third done return " + ok_folder );
 
-    String hicsum = TopoDroidApp.mDData.getValue( "hicsum" );
-    if ( hicsum == null ) {
+    if ( TDandroid.mHicsum == null ) {
       PointF pt = new PointF();
       TDandroid.getCoarseLocation( this, pt );
     } else {
-      // TDLog.v("Hicsum in db " + hicsum );
-      TopoDroidApp.sineTest( this, hicsum );
+      // TDLog.v("Hicsum in db " + mHicsum );
+      TopoDroidApp.sineTest( this, TDandroid.mHicsum );
     }
 
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29

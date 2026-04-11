@@ -608,6 +608,7 @@ public class TopoDroidApp extends Application
    */
   static SurveyStat getSurveyStat( long sid )
   {
+    if ( mDData == null ) return null;
     List< Device > devices = mDData.getDevices();
     return mData.getSurveyStat( sid, devices );
   }
@@ -1145,6 +1146,7 @@ public class TopoDroidApp extends Application
         setSayDialogR( true );
       }
     }
+    if ( mDData != null ) TDandroid.mHicsum = mDData.getValue( "hicsum" );
 
     // ***** DRAWING TOOLS SYMBOLS
     // TDLog.Profile("TDApp symbols");
