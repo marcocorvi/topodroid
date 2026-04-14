@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO string name="ai_null_chat">Null AI chat</string -->
-    <!-- TODO string name="ai_error">AI error %1$s</string -->
-    <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
-    <!-- TODO string name="ai_no_internet">No web connection.</string -->
-    <!-- TODO string name="ai_prompt">Type your question</string -->
-    <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
-    <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
+    <string name="ai_null_chat">Chat IA nulla</string>
+    <string name="ai_error">Errore IA: %1$s</string>
+    <string name="ai_internet">Warning. l\'help IA richiede connessione web.</string>
+    <string name="ai_no_internet">Connessione web mancante.</string>
+    <string name="ai_prompt">Scrivi la tua domanda</string>
+    <string name="ai_invalid_key">API key non valida</string>
+    <string name="ai_key_instruction">L\'API key e\' memorizzata nella memoria interna Android\n ed e\' inviata solo a Google.\nCerca in internet come ottenere una Gemini API key da Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Scarico manuale utente dal web non riuscito</string>
@@ -81,7 +81,7 @@
     <string name="pref_io">Esporta</string>
     <string name="pref_bt">Bluetooth</string>
     <string name="pref_cal">Calibrazione</string>
-    <!-- TODO string name="pref_xt">Special functions</string -->
+    <string name="pref_xt">Funzioni speciali</string>
 
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
@@ -117,7 +117,7 @@
     <string name="bad_sibling">Battuta con dissimili</string>
     <string name="bad_station">Caposaldo non corretto: %1$s</string>
     <string name="bad_station_name">Nome caposaldo non permesso</string>
-    <!-- TODO string name="equal_station_names">Equal station names</string -->
+    <string name="equal_station_names">Nomi di stazioni uguali</string>
     <string name="invalid_name">Nome non valido</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
@@ -132,7 +132,7 @@
     <string name="failed_snap_to_splays">Nessun splay vicino su cui agganciare il bordo</string>
     <string name="failed_append_to_line">Errore: collegamento linee</string>
     <string name="failed_zoomfit">Impossibile riscalare alla dimensione schermo</string>
-    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
+    <string name="fail_forget_device">Android ha fallito nel dienticare il device BT</string>
 
     <string name="bric_device">Dispositivo %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -173,8 +173,8 @@
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Uso %1$s</string>
-    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
-    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
+    <string name="cali_err">error: medio %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
+    <string name="cali_time">Calibrazione: %1$s</string>
     <string name="calib_error">Errore %1$.2f &#xb0; (BH delta %2$.2f)</string>
     <string name="calib_validate_error">Errore medio: %1$.2f &#xb0;</string>
     <string name="calib_stddev">Errore stddev: %1$.4f &#xb0;</string>
@@ -187,9 +187,9 @@
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
     <string name="calib_min_error">Minimo errore</string>
     <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string>
-    <!-- TODO string name="calib_acc_thr">Accel. [&#x25;]</string -->
-    <!-- TODO string name="calib_mag_thr">Magn. [&#x25;]</string -->
-    <!-- TODO string name="calib_dip_thr">Dip [&#xb0;]</string -->
+    <string name="calib_acc_thr">Accel. [&#x25;]</string>
+    <string name="calib_mag_thr">Magn. [&#x25;]</string>
+    <string name="calib_dip_thr">Dip [&#xb0;]</string>
     <string name="magn_dip">Dip Magnetica &#8230;</string>
     <string name="auto_calib">Auto-calibrazione</string>
     <string name="autocalib_not_supported">Richiesto calcolo calibrazione</string>
@@ -357,7 +357,7 @@
     <string name="location_start_fine">Inizio affinamento posizione</string>
     <string name="location_enabled">Assicurati che LOCATION sia abilitata</string>
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
-    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <string name="discovery_error">Errore individuazione BT: %1$s</string>
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -398,7 +398,7 @@
     <string name="error_value_required">Valore mancante</string>
     <string name="error_bad_fixes">Geo-punti non presenti nel rilievo</string>
     <string name="error_bad_name">Nome file modificato</string>
-    <!-- TODO string name="error_question">Please, enter a question</string -->
+    <string name="error_question">Scrivi una domanda</string>
     
     <string name="group_title">Assegna i gruppi ai dati calibrazione</string>
     <!-- UNUSED string name="group_policy_four">Metodo: gruppi di quattro</string -->
@@ -483,7 +483,7 @@
     <string name="no_undelete_paste">Nessun elemento da ripristinare</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
-    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
+    <string name="format_setting">Impostazione %1$s a %2$s ?</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
@@ -692,7 +692,7 @@
     <!-- UNUSED string name="shot_reverse">inverso</string -->
     <string name="shot_to">a</string>
     <string name="shot_refreshed">Lista tiri aggiornata</string>
-    <!-- TODO string name="scan_type">Scan type</string -->
+    <string name="scan_type">Tipo di scansione</string>
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>
@@ -823,7 +823,7 @@
     <string name="hide_leg">Battute ripetute</string>
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
-    <!-- TODO string name="hide_scan">Scan sets</string -->
+    <string name="hide_scan">Set di scansione</string>
     <string name="slope_lside">Pendenza lato sx</string>
 
     <!-- UNUSED string name="plan">PIANTA</string -->
@@ -858,13 +858,13 @@
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Installata v. %2$d</string>
     <string name="ask_clear_equates">Rimuovere tutte le equivalenze?</string>
-    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <string name="ask_forget_device">Dimentico il device %1$s?</string>
 
     <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
-    <!-- TODO string name="button_forget"    >Forget</string -->
+    <string name="button_forget"    >Dimentica</string>
     <string name="button_geocode"   >Codice Geo</string>
     <!-- UNUSED string name="button_change"    >Cambia    </string -->
     <string name="button_clipboard" >Appunti</string>
@@ -878,10 +878,10 @@
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_duplicate" >Duplicato   </string>
-    <!-- TODO string name="button_settime"   >Set time</string -->
+    <string name="button_settime"   >Set orario</string>
     <string name="button_surface"   >Superfice   </string>
-    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
-    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
+    <string name="button_splay"    copyable="all">Splay</string>
+    <string name="button_scan"     copyable="all">Scan</string>
     <string name="button_no_extend" >Manca Extend</string>
     <string name="button_eval"      >Calcola   </string>
     <string name="button_evalg"     >G      </string>
@@ -935,7 +935,7 @@
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <string name="button_select"    >Seleziona</string>
-    <!-- TODO string name="button_submit"    >Submit</string -->
+    <string name="button_submit"    >Invia</string>
     <string name="button_leg_station">Battute</string>
     <string name="button_all_station">Tutti i capisaldi</string>
     <string name="button_leg_search">Ricerca battuta</string>
@@ -1032,7 +1032,7 @@
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
     <string name="bt_alias_title">Alias Bluetooth</string>
-    <!-- TODO string name="hint_api_key">API key</string -->
+    <string name="hint_api_key">API key</string>
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Codice Device</string>
     <string name="bt_alias_missing">Alias BT mancante</string>
@@ -1317,9 +1317,9 @@
     <string name="import_diving_datamode">Modo dati da immersione</string>
     <string name="import_therion_path">Con percorso del rilievo</string>
 
-    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
-    <!-- TODO string name="title_ai_dialog">AI helper</string -->
-    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
+    <string name="title_gemini">Inserisci la tua API key per IA</string>
+    <string name="title_ai_dialog">Assistente IA</string>
+    <string name="title_ai_dialog_pref">Guida alla configurazione IA</string>
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
@@ -1334,7 +1334,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
-    <!-- TODO string name="title_scan_shot">Scan shots</string -->
+    <string name="title_scan_shot">Tiri di scan</string>
     <string name="title_search">Ricerca caposaldi/battute</string>
     <string name="title_stations">Capisaldi</string>
     <string name="title_plot_search">Ricerca caposaldo</string>
@@ -1512,8 +1512,8 @@
 
   <string name="pref_locale_title">Lingua</string>
   <string name="pref_locale_summary">Lingua</string>
-  <!-- TODO string name="pref_gemini_title">AI key</string -->
-  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
+  <string name="pref_gemini_title">IA key</string>
+  <string name="pref_gemini_summary">Gemini API key</string>
   <string name="pref_orientation_title">Orientazione display</string>
   <string name="pref_orientation_summary">Orientazione display</string>
   <string name="pref_single_back_title">Indietro singolo</string>
@@ -1725,8 +1725,8 @@
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_symbol_size_title">Dimensione simboli</string>
   <string name="pref_symbol_size_summary">Dimensione simboli nella barra</string>
-  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
-  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
+  <string name="pref_toolbar_update_title">Aggiornamento barra strumenti</string>
+  <string name="pref_toolbar_update_summary">Come inserire simboli nella barra inferiore</string>
   <string name="pref_closeness_title">Raggio di selezione</string>
   <string name="pref_closeness_message">Raggio di selezione oggetti disegno</string>
   <string name="pref_eraseness_title">Raggio del cancellino</string>
@@ -1837,8 +1837,8 @@
   <string name="pref_shot_timer_summary">Secondi di attesa prima della misura</string>
   <string name="pref_beep_volume_title">Volume timer</string>
   <string name="pref_beep_volume_summary">Percento volume beep timer</string>
-  <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
-  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
+  <string name="pref_beep_length_title">Lunghezza del beep del timer</string>
+  <string name="pref_beep_length_summary">Durata del beep [msec]</string>
   <string name="pref_extend_frac_title">Extend frazionario</string>
   <string name="pref_extend_frac_summary">Se gli "extend" possono avere decimali</string>
   <string name="pref_recent_shot_title">Tiri recenti</string>
@@ -2402,10 +2402,10 @@
     <string name="warning_no_csv_type">Tipo CSV non specificato</string>
     <string name="warning_cavway_info">Informazioni Cavway fallite</string>
     <string name="no_permissions">L\'app non puó funzionare senza i permessi richiesti</string>
-    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
-    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
-    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
-    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
+    <string name="cavway_sync_failed">Sincronizzazione orario Cavway fallita</string>
+    <string name="cavway_synchronized">Orario Cavway sincronizzato</string>
+    <string name="cavway_sync_ok">Orario Cavway sincronizzato</string>
+    <string name="cavway_sync_offset">Offset orario Cavway: %1$d [min]</string>
 
     <!-- UNUSED string name="done_fractals">Dimensione frattale calcolata</string -->
     <string name="done_convexhull">Inviluppo-convesso calcolato</string>
