@@ -829,7 +829,7 @@
     <string name="hide_leg">Ismételt poligonmérések</string>
     <string name="hide_ids">Mérés azonosítók</string>
     <string name="hide_splay">Segéd mérések</string>
-    <!-- TODO string name="hide_scan">Scan sets</string -->
+    <string name="hide_scan">Szken készlet</string>
     <string name="slope_lside">Lejtő l-side</string>
 
     <!-- UNUSED string name="plan">ALAPRAJZ</string -->
@@ -886,8 +886,8 @@
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_settime"   >Óra beállítás</string>
     <string name="button_surface"   >Felület</string>
-    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
-    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
+    <string name="button_splay"    copyable="all">Sün</string>
+    <string name="button_scan"     copyable="all">Szken</string>
 	<string name="button_splay"     >Sün</string>
     <string name="button_no_extend" >Nincs kiterítés</string>
     <string name="button_eval"      >Nyers</string>
