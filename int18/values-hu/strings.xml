@@ -888,7 +888,6 @@
     <string name="button_surface"   >Felület</string>
     <string name="button_splay"    copyable="all">Sün</string>
     <string name="button_scan"     copyable="all">Szken</string>
-	<string name="button_splay"     >Sün</string>
     <string name="button_no_extend" >Nincs kiterítés</string>
     <string name="button_eval"      >Nyers</string>
     <string name="button_evalg"     >G</string>

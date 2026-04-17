@@ -3574,14 +3574,13 @@ public class TopoDroidApp extends Application
    * @param ctx context
    * @note called from MainWindow only
    */
-  static void checkAnalytics( Context ctx )
+  static void checkAnalytics( final Context ctx )
   {
     if ( ! TDSetting.mAnalytics ) return;
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;
     String today = TDUtil.getDateString( "yyyy.MM.dd" );
     String date = mDData.getValue( "analytics" );
-    mDData.setValue( "analytics", today ); // even if fail will try next month
     if ( date != null ) {
       // int days = TDUtil.dayDifference( date, today );
       // if ( days < 30 ) return;
@@ -3589,18 +3588,18 @@ public class TopoDroidApp extends Application
       int mf = Integer.parseInt( date.substring(5,7) );
       int yt = Integer.parseInt( today.substring(0,4) );
       int mt = Integer.parseInt( today.substring(5,7) );
-      TDLog.v( "today " + yt + " " + mt + " analytics date " + yf + " " + mf );
+      // TDLog.v( "today " + yt + " " + mt + " analytics date " + yf + " " + mf );
       if ( yt < yf || ( yt == yf && mt <= mf ) ) return; // FIXME
       // continue only if year has increased or same year but month has increased
     }
-    /*
+    mDData.setValue( "analytics", today ); // even if upload fails we will try the next month
     Thread analytics_thread = new Thread() { 
       public void run() {
         String analytics = mAnalytic.getAnalytics();
-        TDLog.v("thread analytics " + analytics );
+        // TDLog.v("thread analytics " + analytics );
         if ( analytics == null || analytics.length() < 2 ) return;
         // TODO send analytics to server
-        if ( TDAnalytics.sendAnalytics( analytics ) ) { // if success
+        if ( TDAnalytics.sendAnalytics( ctx, analytics ) ) { // if success
           TDLog.v("thread analytics success");
           mAnalytic.resetAnalytics(); // FIXME
         } else {
@@ -3609,6 +3608,7 @@ public class TopoDroidApp extends Application
       }
     };
     analytics_thread.start();
+  }
     */
   }
 
