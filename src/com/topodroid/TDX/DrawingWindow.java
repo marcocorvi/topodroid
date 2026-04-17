@@ -20,6 +20,7 @@ import com.topodroid.util.TDColor;
 import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDRequest;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.StringPair;
@@ -556,6 +557,7 @@ public class DrawingWindow extends ItemDrawer
   // used only by the DrawingModeDialog
   void setShiftDrawing( boolean shift_drawing, boolean scrap_only ) 
   { 
+    if ( shift_drawing ) TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SHIFT );
     mShiftDrawing = shift_drawing;
     mScrapOnly    = scrap_only;
   }
@@ -4399,6 +4401,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private int affineTransformByEvent( MotionEventWrap ev )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SHIFT );
     int np = ev.getPointerCount();
     if ( np < 3 ) return -1;
     float x0 = ev.getX(0);
@@ -7099,6 +7102,7 @@ public class DrawingWindow extends ItemDrawer
      */
     public void flipProfile( boolean flip_shots, boolean scrap )
     {
+      TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_FLIP );
       // assert( mLastLinePath == null );
       mDrawingSurface.flipProfile( mZoom, scrap );
       if ( flip_shots ) {
@@ -7947,6 +7951,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_PDF2 );
     if ( manager == null ) {
       TDToast.makeBad( R.string.null_bitmap );
       return;
@@ -8010,6 +8015,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSX2 );
     // TDLog.v( "save csx");
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     mApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
@@ -9872,6 +9878,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void splitPlot( String name, String station, boolean remove ) 
   {
+    // TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SPLIT ); in doSplitPlot
     // mLastLinePath = null; // absolutely necessary
 
     // TDLog.v("split plot " + name + " station " + station );
@@ -9902,6 +9909,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void splitScrap( boolean remove, boolean create )
   {
+    // TopoDroidApp.updateAnalytic( TDAnalytics.SCRAP_SPLIT ); // in doSplitScrap
     mSplitName = null;
     mSplitStationName = null;
     mSplitRemove = remove;
@@ -9948,6 +9956,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void pasteSplitBufferToScrap( boolean clear )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.SCRAP_PASTE );
     if ( mSplitPaths != null && mSplitPaths.size() > 0 ) {
       // TDLog.v("merge split paths " + mSplitPaths.size() + " removed " + mSplitRemove );
       boolean copy = true;
@@ -9974,6 +9983,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doMergePlot( PlotInfo plt )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_MERGE );
     // assert( mLastLinePath == null); // obvious
     if ( plt.type != mType ) return;
     NumStation st1 = mNum.getStation( plt.start );
@@ -10004,6 +10014,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSplitPlot( )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SPLIT );
     // mSplitCreate = false;
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
       TDToast.makeWarn( R.string.split_nothing );
@@ -10035,6 +10046,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSplitScrap( )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.SCRAP_SPLIT );
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
       TDToast.makeWarn( R.string.split_nothing );
       return;

@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDString;
 // import com.topodroid.util.TDVersion;
 // import com.topodroid.util.TDVersion;
@@ -1641,6 +1642,7 @@ public class TopoGL extends Activity
    */
   void openDEM( Uri uri )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.DEM );
     // InputStreamReader isr = null;
     // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
@@ -1693,6 +1695,7 @@ public class TopoGL extends Activity
   // TEMPERATURE
   // void openTemperature( Uri uri )
   // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.TEMP );
   //   if ( mRenderer == null ) return;
   //   String pathname = uri.getPath();
   //   try {
@@ -1730,6 +1733,7 @@ public class TopoGL extends Activity
    */
   void openTexture( Uri uri )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.TEXTURE );
     if ( mRenderer == null ) return;
     final RectF  bounds = mRenderer.getSurfaceBounds();
     if ( bounds == null ) return;

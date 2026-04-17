@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
@@ -86,6 +87,7 @@ class AudioDialog extends MyDialog
   AudioDialog( Context ctx, IAudioInserter parent, long audio_id, DBlock blk, long bid, long reftype )
   {
     super( ctx, null, R.string.AudioDialog ); // null app
+    TopoDroidApp.updateAnalytic( TDAnalytics.AUDIO );
 
     mParent   = parent;
     mAudioId  = audio_id;

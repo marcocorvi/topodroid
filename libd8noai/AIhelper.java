@@ -88,6 +88,13 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     tv.showResponse( "AI support not enabled" );
   }
 
+  /** API key validation callback
+   */
+  public interface ValidationCallback
+  {
+    public void onResult( boolean valid, String response );
+  }
+
   /** validate an API key
    * @param api_key   API key
    * @param callback  validation callback

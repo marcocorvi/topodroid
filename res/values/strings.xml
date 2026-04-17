@@ -25,9 +25,9 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
-    <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
-    <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
+    <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee https://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
+    <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on https://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
+    <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on https://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee https://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -1564,6 +1564,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_single_back_summary">Close windows with single back</string>
   <string name="pref_hide_navbar_title">Navigation bar</string>
   <string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string>
+  <string name="pref_analytics_title">Share analytics</string>
+  <string name="pref_analytics_summary">Enable functions analytics sharing</string>
 
   <string name="pref_raw_data_title">Raw data</string>
   <string name="pref_raw_data_summary">Show raw calibration data</string>
@@ -2170,8 +2172,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 \n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
 \n\nHelp: menu "HELP"
 \nMan pages: Book icon in the Help dialog
-\nDocs: http://sites.google.com/site/speleoapps
-\nDownload: http://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html
+\nDocs: https://sites.google.com/site/speleoapps
+\nDownload: https://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html
 \nComments, bug reports, feature requests: marco.corvi@gmail.com
 \n
     </string>

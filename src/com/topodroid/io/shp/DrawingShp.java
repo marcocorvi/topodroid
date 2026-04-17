@@ -14,9 +14,11 @@ package com.topodroid.io.shp;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDMath;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PlotType;
 // import com.topodroid.num.NumStation;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.Archiver;
 import com.topodroid.TDX.GeoReference;
 import com.topodroid.TDX.ICanvasCommand;
@@ -50,6 +52,7 @@ public class DrawingShp
   // @return true if successful
   public static boolean writeShp( OutputStream fos, String dirname, DrawingCommandManager plot, long type, GeoReference station )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SHP2 );
     // TDLog.v( "SHP sketch export dirname " + dirname );
     double xoff = 0;
     double yoff = 0;

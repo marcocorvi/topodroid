@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDStatus;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.types.LegType;
@@ -215,6 +216,7 @@ class UndeleteDialog extends MyDialog
    */
   private void appendBuffer( )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.MULTIPASTE );
     // TDLog.v("Append buffer " + mDBlockBuffer.size() );
     if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
     if ( mCBbufferSortByID.isChecked() ) mDBlockBuffer.sort();

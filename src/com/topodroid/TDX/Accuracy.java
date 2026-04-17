@@ -24,7 +24,7 @@ import java.util.Locale;
 
 class Accuracy
 {
-  final static float THRS  = 100.0f; // acc/mag threshold
+  final static float THRS  = 10.0f; // acc/mag threshold
   private final static float BND_1 = 10.0f; // small acc/mag values cutoff function
   private final static float BND_2 =  8.5f;
 

@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDTag;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
@@ -71,6 +72,7 @@ public class SensorActivity extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
+    TopoDroidApp.updateAnalytic( TDAnalytics.SENSOR );
 
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 

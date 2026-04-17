@@ -17,6 +17,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDMath;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
@@ -25,6 +26,7 @@ import com.topodroid.num.TDNum;
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.ICanvasCommand;
 import com.topodroid.TDX.BrushManager;
 import com.topodroid.TDX.LinePoint;
@@ -386,6 +388,7 @@ public class DrawingDxf
    */
   public static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_DXF2 );
     DXF.mVersion9  = (TDSetting.mAcadVersion == DXF.ACAD_9);
     DXF.mVersion13 = (TDSetting.mAcadVersion == DXF.ACAD_12);
     DXF.mVersion14 = (TDSetting.mAcadVersion == DXF.ACAD_14);

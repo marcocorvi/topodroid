@@ -17,7 +17,9 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TopoDroidApp;
 
 // import com.topodroid.TDX.FixedInfo;
 // import com.topodroid.TDX.CurrentStation;
@@ -74,6 +76,7 @@ class ParserWalls extends ImportParser
   ParserWalls( InputStreamReader isr, String name, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_SRV );
     mFixes = new ArrayList< WallsFix >();
     readFile( isr, name, "" );
     checkValid();

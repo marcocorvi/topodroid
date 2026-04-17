@@ -363,6 +363,10 @@ public class TDFile
    */
   public static File getDeviceDatabase() { return getPrivateFile( null, "device10.sqlite" ); }
 
+  /** @return the analytic database file, in the private folder
+   */
+  public static File getAnalyticDatabase() { return getPrivateFile( null, "analytic.sqlite" ); }
+
   /** @return the packet database file, in the private folder
    */
   public static File getPacketDatabase() { return getPrivateFile( null, "packet10.sqlite" ); }

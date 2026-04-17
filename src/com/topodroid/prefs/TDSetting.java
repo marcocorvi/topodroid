@@ -248,6 +248,7 @@ public class TDSetting
   public static boolean mTh2Edit       = false;
 
   public static int mOrientation = 0; // 0 unspecified, 1 portrait, 2 landscape
+  public static boolean mAnalytics = true;
 
   public static float mPictureMin =   5.0f; 
   public static float mPictureMax = 100.0f;
@@ -1102,6 +1103,7 @@ public class TDSetting
     mOrientation = Integer.parseInt( prefs.getString(  key[5].key, key[5].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
     setLocale(                       prefs.getString(  key[6].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
     handleLocalUserMan(              prefs.getString(  key[7].key, key[7].dflt ), false ); // DISTOX_LOCAL_MAN
+    mAnalytics = prefs.getBoolean(  key[8].key, bool(key[8].dflt) ); // DISTOX_ANALYTICS
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1629,28 +1631,31 @@ public class TDSetting
     //   // TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ), hlp.getString( "DISTOX_CBD", TDPath.getBaseDir() ) );
     //   TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ) /* , TDPath.getCurrentBaseDir() */ );
     // } else 
-    if ( k.equals( key[ 0 ].key ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
+    int h = -1;
+    if ( k.equals( key[ ++h ].key ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
       int level = tryIntValue( hlp, k, v, key[0].dflt );
       setActivityBooleans( hlp.getSharedPrefs(), level );
-    } else if ( k.equals( key[ 1 ].key ) ) {              // DISTOX_TEXT_SIZE
+    } else if ( k.equals( key[ ++h ].key ) ) {              // DISTOX_TEXT_SIZE
       ret = setTextSize( tryIntValue( hlp, k, v, defaultTextSize ) );
-    } else if ( k.equals( key[ 2 ].key ) ) {              // DISTOX_SIZE_BUTTONS (choice)
+    } else if ( k.equals( key[ ++h ].key ) ) {              // DISTOX_SIZE_BUTTONS (choice)
       if ( setSizeButtons( tryIntValue( hlp, k, v, defaultButtonSize ) ) ) {
         TopoDroidApp.resetButtonBar();
       }
-    } else if ( k.equals( key[ 3 ].key ) ) {             // DISTOX_SYMBOL_SIZE
+    } else if ( k.equals( key[ ++h ].key ) ) {             // DISTOX_SYMBOL_SIZE
       ret = setSymbolSize( tryFloatValue( hlp, k, v, defaultSymbolSize ) );
-    } else if ( k.equals( key[ 4 ].key ) ) {           // DISTOX_HIDE_NAVBAR
-      setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[4].dflt) ) );
-    } else if ( k.equals( key[ 5 ].key ) ) {           // DISTOX_ORIENTATION (choice)
-      mOrientation = tryIntValue( hlp, k, v, key[5].dflt );
+    } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_HIDE_NAVBAR
+      setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[h].dflt) ) );
+    } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_ORIENTATION (choice)
+      mOrientation = tryIntValue( hlp, k, v, key[h].dflt );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
 
-    } else if ( k.equals( key[ 6 ].key ) ) {           // DISTOX_LOCALE (choice)
-      setLocale( tryStringValue( hlp, k, v, key[6].dflt ), true );
-    } else if ( k.equals( key[ 7 ].key ) ) {           // DISTOX_LOCAL_MAN (choice)
-      handleLocalUserMan( tryStringValue( hlp, k, v, key[7].dflt ), true );
+    } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_LOCALE (choice)
+      setLocale( tryStringValue( hlp, k, v, key[h].dflt ), true );
+    } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_LOCAL_MAN (choice)
+      handleLocalUserMan( tryStringValue( hlp, k, v, key[h].dflt ), true );
+    } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_ANALYTICS
+      mAnalytics = tryBooleanValue( hlp, k, v, bool(key[h].dflt) );
     /* ---- IF_COSURVEY
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
@@ -3970,6 +3975,9 @@ B DISTOX_SAP5_BIT16_BUG true
               // must run on UI thread
               // TopoDroidApp.setScreenOrientation( );
               TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
+              break;
+            case "DISTOX_ANALYTICS":
+              mAnalytics = Boolean.parseBoolean( value );
               break;
             case "DISTOX_CALIB_SHOT_DOWNLOAD":
               mCalibShotDownload = Boolean.parseBoolean( value ); setPreference( editor, kay, mCalibShotDownload );

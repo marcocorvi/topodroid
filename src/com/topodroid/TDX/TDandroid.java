@@ -142,18 +142,18 @@ public class TDandroid
   // static final String mPermissionManageExternalStorage = android.Manifest.permission.MANAGE_EXTERNAL_STORAGE; // API-30
   static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
-  static final int NR_PERMS_D = 6; // 5 API-31 
-  static final int NR_PERMS   = NR_PERMS_D + 3;
+  static final int NR_PERMS_D = 7; // 5 API-31 
+  static final int NR_PERMS   = NR_PERMS_D + 2;
 
   // private static final int PERM_BT         = 0;
   // private static final int PERM_BT_ADMIN   = 1;
-  private static final int PERM_BT_CONNECT  = 2; // 2 API-31, use -1 to fail test and skip \
-  private static final int PERM_BT_SCAN     = 3; // 3 API-31
-  private static final int PERM_WRITE       = 4;
-  private static final int PERM_READ        = 5; 
-  private static final int PERM_LOCATION   = NR_PERMS_D + 0;
-  private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
-  // private static final int PERM_AUDIO      = NR_PERMS_D + 2;
+  private static final int PERM_BT_CONNECT = 2; // 2 API-31, use -1 to fail test and skip \
+  private static final int PERM_BT_SCAN    = 3; // 3 API-31
+  private static final int PERM_WRITE      = 4;
+  private static final int PERM_READ       = 5; 
+  private static final int PERM_LOCATION   = 6;
+  private static final int PERM_CAMERA     = NR_PERMS_D + 0; 
+  private static final int PERM_AUDIO      = NR_PERMS_D + 1;
   // private static final int PERM_MEDIA      = NR_PERMS_D + 3;
 
   /** app specific code - for callback in MainWindow
@@ -174,6 +174,20 @@ public class TDandroid
   public static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
 
   static String mHicsum = null;
+
+  /** @return the Android make (manufacturer + model)
+   * https://stackoverflow.com/questions/1995439/get-android-phone-model-programmatically-how-to-get-device-name-and-model-prog
+   */
+  public static String getAndroidModel()
+  {
+    String manufacturer = Build.MANUFACTURER;
+    String model = Build.MODEL;
+    if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
+      return model;
+    } else {
+      return manufacturer + "-" + model;
+    }
+  }
 
   /** apply the changes stored in the editor
    * @param editor   preferences editor
@@ -742,6 +756,7 @@ public class TDandroid
   public static boolean hasLocation( Context ctx )
   {
     LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
+    if ( lm == null ) return false;
     boolean gps_enabled = lm.isProviderEnabled( LocationManager.GPS_PROVIDER );
     // boolean network_enabled = lm.isProviderEnabled( LocationManager.NETWORK_PROVIDER );
     return gps_enabled;
@@ -769,6 +784,7 @@ public class TDandroid
   {
     if ( ! checkCoarseLocation( ctx ) ) return false;
     LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
+    if ( lm == null ) return false;
     Location loc = lm.getLastKnownLocation( LocationManager.NETWORK_PROVIDER ); 
     if ( loc == null ) {
       lm.requestSingleUpdate( LocationManager.NETWORK_PROVIDER,

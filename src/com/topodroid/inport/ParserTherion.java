@@ -17,10 +17,12 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.types.LegType;
 import com.topodroid.types.StationFlag;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
 // import java.io.FileInputStream;
@@ -103,6 +105,7 @@ class ParserTherion extends ImportParser
   ParserTherion( InputStreamReader isr, String name, boolean apply_declination, boolean therionPath ) throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TH );
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
     // shots    = new ArrayList<>(); // FROM ImportParser

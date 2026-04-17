@@ -15,8 +15,10 @@ import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.GlModel;
 import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Cave3DStation;
+import com.topodroid.TDX.TopoDroidApp;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class ConvexHullComputer
    */
   public boolean computeWalls( )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.WALL_CW );
     for ( Cave3DShot sh : mShots ) {
       Cave3DStation sf = sh.from_station;
       Cave3DStation st = sh.to_station;

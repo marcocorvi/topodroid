@@ -18,6 +18,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -90,6 +91,7 @@ class CurrentStationDialog extends MyDialog
   CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app, String station, int pos )
   {
     super( context, app, R.string.CurrentStationDialog );
+    TopoDroidApp.updateAnalytic( TDAnalytics.STATION );
     mParent  = parent;
     mStationName = ( station == null )? mApp.getCurrentOrLastStation() : station ;
     mPos = pos;

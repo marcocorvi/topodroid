@@ -17,9 +17,11 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
 // import java.io.FileNotFoundException;
@@ -107,6 +109,7 @@ class ParserSurvex extends ImportParser
   ParserSurvex( InputStreamReader isr, String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_SVX );
     mName    = TDio.extractName( filename );
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();

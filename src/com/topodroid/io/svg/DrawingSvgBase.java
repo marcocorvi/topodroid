@@ -307,7 +307,7 @@ public class DrawingSvgBase
   {
     String th_name = line.getFullThNameEscapedColon( ); 
     // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
-      pw.format(Locale.US, "  <path class=\"l_%s\"", th_name );
+      pw.format(Locale.US, "  <path class=\"l_%s\" fill=\"none\"", th_name );
     // } else {
     //   pw.format(Locale.US, "  <path stroke=\"%s\" stroke-width=\"%.2f\" fill=\"none\" class=\"l_%s\"", color, TDSetting.mSvgLineStroke, th_name );
     // }

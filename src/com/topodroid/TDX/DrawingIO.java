@@ -16,6 +16,7 @@ import com.topodroid.util.TDFile;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
@@ -509,6 +510,7 @@ public class DrawingIO
    */
   static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TH2 );
     // TDLog.Log( TDLog.LOG_IO, "export therion " + fullname + " file " + file.getPath() );
     // TDLog.v( "EXPORT THERION " + fullname + " file " + file.getPath() );
     try {

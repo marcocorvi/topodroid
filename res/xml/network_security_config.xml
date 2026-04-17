@@ -5,5 +5,10 @@
         <domain includeSubdomains="true">marcocorvi.altervista.org</domain>
     </domain-config>
 
-    <base-config cleartextTrafficPermitted="false"/>
+    <base-config cleartextTrafficPermitted="false" >
+       <trust-anchors>
+          <certificate source="system" />
+          <certificate source="user" overridePins="true" />
+       </trust-anchors>
+    </base-config>
 </network-security-config>  

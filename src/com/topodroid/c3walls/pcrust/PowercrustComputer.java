@@ -17,9 +17,11 @@ import com.topodroid.TDX.Triangle3D;
 import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Vector3D;
+import com.topodroid.TDX.DPoint2D;
+import com.topodroid.TDX.TopoDroidApp;
 
 import com.topodroid.util.TDLog;
-import com.topodroid.TDX.DPoint2D;
+import com.topodroid.util.TDAnalytics;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -54,6 +56,7 @@ public class PowercrustComputer
 
   public boolean computePowercrust( )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.WALL_PCRUST );
     double delta = GlModel.mPowercrustDelta;
     try {
       // mCave3D.toast( "computing the powercrust" );

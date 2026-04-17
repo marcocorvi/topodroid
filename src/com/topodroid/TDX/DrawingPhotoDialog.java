@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -49,6 +50,7 @@ class DrawingPhotoDialog extends MyDialog
   DrawingPhotoDialog( Context context, DrawingWindow activity, long pid, float x, float y )
   {
     super(context, null, R.string.DrawingPhotoDialog ); // null app
+    TopoDroidApp.updateAnalytic( TDAnalytics.PHOTO );
     mActivity = activity;
     mPid = pid;
     mX = x; 

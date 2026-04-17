@@ -16,6 +16,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
@@ -36,6 +37,7 @@ import com.topodroid.TDX.SymbolPoint;
 import com.topodroid.TDX.Scrap;
 // import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.DBlock;
 
 import java.util.Locale;
@@ -54,6 +56,7 @@ public class DrawingSvg extends DrawingSvgBase
 {
   public void writeSvg( String filename, BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SVG2 );
     // String wall_group = BrushManager.getLineWallGroup( );
 
     // int handle = 0;

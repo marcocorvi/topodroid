@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDLocale;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.mag.WorldMagneticModel;
@@ -609,6 +610,7 @@ public class FixedActivity extends Activity
    */
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.PROJ4 );
     if ( cs_to == null ) return;
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );

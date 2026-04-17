@@ -17,10 +17,12 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
+import com.topodroid.TDX.TDAzimuth;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,6 +44,7 @@ class ParserCompass extends ImportParser
   ParserCompass( InputStreamReader isr, String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_DAT );
     // TDLog.v( "Parser Compass <" + filename + ">" );
     // mName = survey name is read from the file
     mLrud     = lrud;
@@ -50,9 +53,9 @@ class ParserCompass extends ImportParser
     checkValid();
   }
 
-  private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('l') >= 0 ); }
+  private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('L') >= 0 ); }
 
-  private boolean isSurface( String flag ) { return ( flag != null && flag.indexOf('x') >= 0 ); }
+  private boolean isSurface( String flag ) { return ( flag != null && flag.indexOf('X') >= 0 ); }
 
   // compass has no flag for backshot, therefore this is always false
   private boolean isBackshot( String flag ) { return false; }

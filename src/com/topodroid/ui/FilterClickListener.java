@@ -9,18 +9,20 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.ui;
+
+// import com.topodroid.ui.IFilterClickHandler;
 
 import android.view.View;
 import android.view.View.OnClickListener;
 
-class FilterClickListener implements OnClickListener
+public class FilterClickListener implements OnClickListener
 {
   private final int mIndex;
   private final int mCode;
   private final IFilterClickHandler mParent;
 
-  FilterClickListener( IFilterClickHandler parent, int i, int c ) 
+  public FilterClickListener( IFilterClickHandler parent, int i, int c ) 
   {
     mParent = parent;
     mIndex = i;

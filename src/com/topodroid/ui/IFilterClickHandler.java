@@ -9,11 +9,11 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.TDX;
+package com.topodroid.ui;
 
-interface IFilterClickHandler
+public interface IFilterClickHandler
 {
-  void setButtonFilterMode( int filter_mode, int code );
+  public void setButtonFilterMode( int filter_mode, int code );
 
-  boolean dismissPopupFilter();
+  public boolean dismissPopupFilter();
 }

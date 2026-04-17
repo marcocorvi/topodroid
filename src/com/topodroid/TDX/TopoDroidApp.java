@@ -27,6 +27,7 @@ import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.MyFileProvider;
 import com.topodroid.util.Region;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;
@@ -277,6 +278,7 @@ public class TopoDroidApp extends Application
   public DataDownloader mDataDownloader = null;  // data downloader
   public static DataHelper mData = null;         // database 
   public static DeviceHelper mDData = null;      // device/calib database
+  public static AnalyticsHelper mAnalytic = null;
 
   // public static TDPrefHelper mPrefHlp      = null;
   static SurveyWindow mSurveyWindow          = null; // FIXME ref Survey Activity
@@ -1135,6 +1137,7 @@ public class TopoDroidApp extends Application
     // TDLog.v( "APP init env. first " );
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     mDData = new DeviceHelper( thisApp );
+    mAnalytic = new AnalyticsHelper( thisApp );
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
     // TDLog.v("TDApp load primary prefs");
     TDSetting.loadPrimaryPreferences( TDInstance.getResources(),  prefHlp );
@@ -3555,4 +3558,58 @@ public class TopoDroidApp extends Application
       TDLevel.resetLevel( ctx );
     }
   }
+
+  // ----------------------------------------------------------------------------
+  // ANALYTICS
+
+  /** update the analytics
+   * @param name analytics name to increment
+   */
+  public static void updateAnalytic( String name )
+  {
+    if ( mAnalytic != null ) mAnalytic.updateAnalytic( name );
+  }
+
+  /** check if it time to send the analytics to the server
+   * @param ctx context
+   * @note called from MainWindow only
+   */
+  static void checkAnalytics( Context ctx )
+  {
+    if ( ! TDSetting.mAnalytics ) return;
+    if ( mAnalytic == null ) return;
+    if ( ! TDandroid.checkInternet( ctx ) ) return;
+    String today = TDUtil.getDateString( "yyyy.MM.dd" );
+    String date = mDData.getValue( "analytics" );
+    mDData.setValue( "analytics", today ); // even if fail will try next month
+    if ( date != null ) {
+      // int days = TDUtil.dayDifference( date, today );
+      // if ( days < 30 ) return;
+      int yf = Integer.parseInt( date.substring(0,4) );
+      int mf = Integer.parseInt( date.substring(5,7) );
+      int yt = Integer.parseInt( today.substring(0,4) );
+      int mt = Integer.parseInt( today.substring(5,7) );
+      TDLog.v( "today " + yt + " " + mt + " analytics date " + yf + " " + mf );
+      if ( yt < yf || ( yt == yf && mt <= mf ) ) return; // FIXME
+      // continue only if year has increased or same year but month has increased
+    }
+    /*
+    Thread analytics_thread = new Thread() { 
+      public void run() {
+        String analytics = mAnalytic.getAnalytics();
+        TDLog.v("thread analytics " + analytics );
+        if ( analytics == null || analytics.length() < 2 ) return;
+        // TODO send analytics to server
+        if ( TDAnalytics.sendAnalytics( analytics ) ) { // if success
+          TDLog.v("thread analytics success");
+          mAnalytic.resetAnalytics(); // FIXME
+        } else {
+          TDLog.e("thread analytics failed");
+        }
+      }
+    };
+    analytics_thread.start();
+    */
+  }
+
 }

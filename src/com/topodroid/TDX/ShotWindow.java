@@ -21,6 +21,7 @@ import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDVersion;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
@@ -746,6 +747,7 @@ public class ShotWindow extends Activity
 
   void addOffset( float offset )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.DIST_OFFSET );
     mDataAdapter.addOffset( mApp_mData, offset );
     clearMultiSelect();
   }
@@ -1100,6 +1102,7 @@ public class ShotWindow extends Activity
    */
   long doTakePhoto( Context ctx, long shot_id, String title, String comment, int camera, String code, int reftype )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.PHOTO );
     // camera = 1;
     // TDLog.v("shot window do take photo: shot id " + shot_id + " title " + title + " reftype " + reftype );
     long ret = mMediaManager.prepareNextPhoto( shot_id, title, comment, 1, camera, code, reftype ); // size 1 m
@@ -2110,6 +2113,7 @@ public class ShotWindow extends Activity
    */
   void doMultiCopy()
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.MULTICOPY );
     if ( TDLevel.overAdvanced ) {
       mDBlockBuffer.clear();
       for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
@@ -2738,6 +2742,7 @@ public class ShotWindow extends Activity
    */
   String computeBedding( List< DBlock > blks ) // BEDDING
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.BED_FITTING );
     String strike_dip = getResources().getString(R.string.few_points);
     if ( blks != null && blks.size() > 2 ) {
       DBlock b0 = blks.get(0);

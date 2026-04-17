@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 
 // import android.app.Dialog;
@@ -59,6 +60,7 @@ class SymbolReload extends MyDialog
   SymbolReload( Context context, TopoDroidApp app, boolean all )
   {
     super(context, app, R.string.SymbolReload );
+    TopoDroidApp.updateAnalytic( TDAnalytics.PALETTE );
     mAll = all;
   }
 

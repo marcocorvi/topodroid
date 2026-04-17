@@ -16,11 +16,13 @@ import com.topodroid.util.TDMath;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
 import com.topodroid.TDX.TDAzimuth;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -43,6 +45,7 @@ class ParserVisualTopo extends ImportParser
   ParserVisualTopo( InputStreamReader isr, String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TRO );
     mName = TDio.extractName( filename );
     mLrud = lrud;
     mLegFirst = leg_first;

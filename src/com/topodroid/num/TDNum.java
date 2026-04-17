@@ -13,10 +13,12 @@ package com.topodroid.num;
 
 import com.topodroid.util.TDMath;
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TopoDroidApp; // Analytics
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.StationPolicy;
 import com.topodroid.TDX.SurveyInfo;
@@ -944,6 +946,7 @@ public class TDNum
    */
   private boolean computeNum( List< DBlock > data, String start, String path_fmt, boolean midline_only )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.NUM );
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
@@ -1177,6 +1180,7 @@ public class TDNum
       || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED 
       || TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
       // TDLog.v( "NUM loop closure compensation " + TDSetting.mLoopClosure );
+      TopoDroidApp.updateAnalytic( TDAnalytics.LOOP_CLOSURE );
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
@@ -2072,6 +2076,7 @@ public class TDNum
    */
   private void makeTrilateration( List< TriShot > shots )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.TRILATERATION );
     ArrayList< TriCluster > clusters = new ArrayList<>();
     for ( TriShot sh : shots ) sh.cluster = null;
     boolean repeat = true;

@@ -12,6 +12,7 @@
 package com.topodroid.calib;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.DeviceActivity;
@@ -108,6 +109,7 @@ public class CalibListDialog extends MyDialog
     Button b = (Button) v;
     hide();
     if ( b == mBtnNew ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.CAL_NEW );
       mParent.openCalibration( null );
     } else if ( b == mBtnImport ) {
       mParent.openCalibrationImportDialog();

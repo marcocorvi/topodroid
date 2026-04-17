@@ -11,6 +11,9 @@
  */
 package com.topodroid.c3walls.bubble;
 
+import com.topodroid.util.TDAnalytics;
+import com.topodroid.TDX.TopoDroidApp;
+
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Cave3DStation;
@@ -51,6 +54,7 @@ public class BubbleComputer implements WallComputer
    */
   public boolean computeWalls()
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.WALL_BUBBLE );
     // TDLog.v( "Bubble computer: " + stations.size() + " " + shots.size() + " " + splays.size() );
     ArrayList< Bubble > bubbles = new ArrayList<>();
     // int k_col = 0;

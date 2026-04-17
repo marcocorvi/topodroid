@@ -17,8 +17,10 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.types.LegType;
 import com.topodroid.types.ExtendType;
+import com.topodroid.TDX.TopoDroidApp;
 
 // import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,7 @@ class ParserCaveSniper extends ImportParser
   ParserCaveSniper( InputStreamReader isr, String filename ) throws ParserException
   {
     super( false );  // do not apply_declination
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_SNP );
     readFile( isr, filename );
     int pos = filename.lastIndexOf('/');
     if ( pos >= 0 ) { 

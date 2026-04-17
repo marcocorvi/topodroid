@@ -18,10 +18,12 @@ import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
 import com.topodroid.TDX.TDAzimuth;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -264,6 +266,7 @@ class ParserTopoRobot extends ImportParser
   ParserTopoRobot( InputStreamReader isr, String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TRB );
     mName = TDio.extractName( filename );
     mDate = TDUtil.currentDate();
     readFile( isr, filename );

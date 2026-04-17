@@ -16,6 +16,7 @@ import com.topodroid.util.TDMath;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.num.TDNum;
 import com.topodroid.ptopo.PTFile;
 import com.topodroid.ptopo.PTTrip;
@@ -39,6 +40,7 @@ import com.topodroid.TDX.DrawingLinePath;
 import com.topodroid.TDX.BrushManager;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.PtCmapActivity;
+import com.topodroid.TDX.TopoDroidApp;
 
 // import java.io.File;
 // import java.io.FileWriter;
@@ -72,6 +74,7 @@ class ParserPocketTopo extends ImportParser
                            throws ParserException
   {
     super( apply_declination );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TOP );
     String mStartFrom = null;
     // TDLog.Log( TDLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
     // mName     = surveyname.replace(".top", "");

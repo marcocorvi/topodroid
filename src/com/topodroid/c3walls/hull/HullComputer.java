@@ -17,6 +17,9 @@ import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Triangle3D;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.WallComputer;
+import com.topodroid.TDX.TopoDroidApp;
+
+import com.topodroid.util.TDAnalytics;
 
 import java.util.ArrayList;
 
@@ -46,6 +49,7 @@ public class HullComputer implements WallComputer
    */
   public boolean computeWalls()
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.WALL_HULL );
     ArrayList< Cave3DHull > hulls = new ArrayList<>();
     int k_col = 0;
     for ( Cave3DShot sh : shots ) {

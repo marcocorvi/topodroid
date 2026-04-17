@@ -17,9 +17,11 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDio;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.types.LegType;
 import com.topodroid.types.ExtendType;
 import com.topodroid.TDX.StationPolicy;
+import com.topodroid.TDX.TopoDroidApp;
 
 // import java.io.File;
 import java.io.IOException;
@@ -40,7 +42,8 @@ class ParserCavwayCsv extends ImportParser
   ParserCavwayCsv( InputStreamReader isr, String filename ) throws ParserException
   {
     super( false );  // do not apply_declination
-    TDLog.v("PARSER Cavway file: " + filename );
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_CVWY );
+    // TDLog.v("PARSER Cavway file: " + filename );
     readFile( isr, filename );
     int pos = filename.lastIndexOf('/');
     if ( pos >= 0 ) { 

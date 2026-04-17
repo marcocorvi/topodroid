@@ -33,6 +33,7 @@ import com.topodroid.util.TDsafUri;
 import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -265,6 +266,7 @@ public class TDExporter
    */
   static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String surveyname )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSX );
     int ret = 0; // 0 = failure
     ParcelFileDescriptor pfd = null;
     if ( uri != null ) {
@@ -303,6 +305,7 @@ public class TDExporter
    */
   static int exportSurveyAsCsx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSX );
     int ret = 0; // 0 = failure
     // TDLog.v( "export as csurvey: " + file.getName() );
     String cave   = toXml( info.name.toUpperCase(Locale.US) );
@@ -752,6 +755,7 @@ public class TDExporter
    */
   static int exportSurveyAsKml( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_KML );
     final String name          = "<name>%s</name>\n";
     final String name2         = "  <name>%s</name>\n";
     final String placemark     = "<Placemark>\n";
@@ -920,6 +924,7 @@ public class TDExporter
    */
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SHP );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude, true with convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.e( "Failed SHP export: no geolocalized station");
@@ -1048,6 +1053,7 @@ public class TDExporter
   //  */
   // static int exportSurveyAsJson( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_JSON );
   //   final String name    = "\"name\": ";
   //   final String type    = "\"type\": ";
   //   final String item    = "\"item\": ";
@@ -1160,6 +1166,7 @@ public class TDExporter
    */
   static int exportSurveyAsGpx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_GPX );
     // TDLog.v( "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
@@ -1265,6 +1272,7 @@ public class TDExporter
    *
   static int exportSurveyAsPlt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_PLT );
     // TDLog.v( "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false, false ); // false geoid alt. - false no convergence
     if ( TDUtil.isEmpty(nums) ) {
@@ -1350,6 +1358,7 @@ public class TDExporter
    */
   static int exportSurveyAsTop( OutputStream os, long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TOP );
     // TDLog.v( "export as pockettopo: " + file.getName() );
     PTFile ptfile = new PTFile();
     // TODO add a trip
@@ -1543,6 +1552,7 @@ public class TDExporter
    */
   static int exportSurveyAsTh( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TH  );
     boolean with_thconfig = TDSetting.mTherionWithConfig;
     boolean embed_thconfig = false;
 
@@ -2043,6 +2053,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsSvx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, Device device, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SVX );
     // TDLog.v( "export as survex: " + file.getName() );
 
     float ul = TDSetting.mUnitLength;
@@ -2437,6 +2448,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsRawCsv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSV );
     char sep = TDSetting.mCsvSeparator;
     List< RawDBlock > list = data.selectAllShotsRawData( sid );
     String newline = TDSetting.mSurvexEol;
@@ -2494,6 +2506,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsCsv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSV );
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
     // TDLog.v( "export as CSV: " + file.getName() );
@@ -2658,6 +2671,7 @@ public class TDExporter
 
   // public String exportSurveyAsTlx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname ) // FIXME args
   // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TLX );
   //   File dir = TDFile.getFile( TopoDroidApp.APP_TLX_PATH );
   //   if (!dir.exists()) {
   //     dir.mkdirs();
@@ -3048,6 +3062,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsDat( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String prefix )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_DAT );
     // TDLog.v( "export as compass: " + survey_name + " swap LR " + TDSetting.mSwapLR );
     boolean not_diving = ! info.isDivingMode();
 
@@ -3538,6 +3553,7 @@ public class TDExporter
 
   static int exportSurveyAsTrb( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, long first )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TRB );
     int trip = 1;
     int code = 1;
     List< DBlock > list = data.selectExportShots( sid, TDStatus.NORMAL, first );
@@ -3825,6 +3841,7 @@ public class TDExporter
 
   static int exportSurveyAsSur( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String prefix )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SUR );
     // TDLog.v( "export as winkarst: " + file.getName() + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
@@ -3955,6 +3972,7 @@ public class TDExporter
   //
   // static int exportSurveyAsGtx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_GTX );
   //   String date = info.date.replace( '.', '-' ); // MySQL date format YYYY-MM-DD
   //   try {
   //     // TDLog.Log( TDLog.LOG_IO, "export GHTopo " + file.getName() );
@@ -4258,6 +4276,7 @@ public class TDExporter
 
   // static int exportSurveyAsGrt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String name )
   // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_GRT );
   //   try {
   //     // TDLog.Log( TDLog.LOG_IO, "export Grottolf " + file.getName() );
   //     // BufferedWriter bw = TDFile.getMSwriter( "grt", name + ".grt", "text/grt" );
@@ -4363,6 +4382,7 @@ public class TDExporter
  
   static int exportSurveyAsSrv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SRV );
     // TDLog.v( "export as walls: " + file.getName() );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -4640,6 +4660,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsCav( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CAV );
     // TDLog.v( "export as topo: " + file.getName() );
     String eol = TDSetting.mSurvexEol;
     ArrayList< String > ents = null;
@@ -4793,6 +4814,7 @@ public class TDExporter
    */
   static int exportSurveyAsPlg( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_PLG );
     // TDLog.v("polygon " + file.getName() );
     float ul = 1; // TDSetting.mUnitLength;
     float ua = 1; // TDSetting.mUnitAngle;
@@ -5125,6 +5147,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsDxf( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, TDNum num, String survey_name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_DXF );
     // TDLog.v( "export survey as Dxf " + file.getName() );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export DXF " + file.getName() );
@@ -5531,6 +5554,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsTro( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String vt_series )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TRO );
     // TDLog.v( "export as visualtopo: " + file.getName() );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
@@ -5727,6 +5751,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String vt_series )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TRO );
     boolean diving = info.isDivingMode();
 
     // TDLog.v( "export as visualtopo-X " );

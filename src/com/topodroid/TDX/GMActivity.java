@@ -16,6 +16,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -273,7 +274,8 @@ public class GMActivity extends Activity
    * @return nr of iterations (neg. error)
    */
   private int doComputeCalib( List< CBlock > list )
-  {    
+  {
+    TopoDroidApp.updateAnalytic( TDAnalytics.CAL_COMP );
     long cid = TDInstance.cid;
     int algo = mTwoSensors ? CalibInfo.ALGO_LINEAR : mAlgo;
     switch ( algo ) {
@@ -413,6 +415,7 @@ public class GMActivity extends Activity
    */
   public void validateCalibration( String name )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.CAL_VAL );
     String address = TDInstance.deviceAddress();
     if ( address == null ) return;
     long cid = mApp_mDData.getCalibCID( name, address );

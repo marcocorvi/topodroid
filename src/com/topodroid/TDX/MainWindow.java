@@ -21,6 +21,7 @@ import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.CWDfolder;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDVersion;
 import com.topodroid.types.ExportInfo;
 
@@ -337,6 +338,7 @@ public class MainWindow extends Activity
 	  TDToast.makeBad( R.string.warning_no_palette );
 	}
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
+        TopoDroidApp.updateAnalytic( TDAnalytics.CAVE3D );
         // int check = TDVersion.checkCave3DVersion( this );
         // if ( check < 0 ) {
         //   TDToast.makeBad( R.string.no_cave3d );
@@ -358,6 +360,7 @@ public class MainWindow extends Activity
           TDLog.e( "Td Manager activity not started" );
         }
       } else if ( TDLevel.overExpert && TDSetting.mTh2Edit && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // TH2EDIT DRAWING
+        TopoDroidApp.updateAnalytic( TDAnalytics.TH2_EDIT );
         try {
           Intent plotIntent = new Intent( Intent.ACTION_VIEW ).setClass( this,  DrawingWindow.class );
           plotIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, -1L );
@@ -1258,6 +1261,7 @@ public class MainWindow extends Activity
         // }
       }
     }
+    TopoDroidApp.checkAnalytics( this );
   }
 
 

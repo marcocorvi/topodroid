@@ -856,7 +856,6 @@ public class DataHelper extends DataSetObservable
               ++ nc;
             }
           }
-
         } while ( cursor.moveToNext() );
       }
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
