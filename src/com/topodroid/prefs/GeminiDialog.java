@@ -89,8 +89,13 @@ public class GeminiDialog extends MyDialog
   {
     // TDLog.v("Check format: <" + key + "> len " + key.length() ); 
     final String apiKeyRegex = "^AIza[a-zA-Z0-9\\-_]{30,50}";
-    if ( key == null ) return false;
-    return key.matches( apiKeyRegex );
+    if ( key == null ) {
+      TDLog.v("null API key");
+      return false;
+    }
+    boolean ret = key.matches( apiKeyRegex );
+    TDLog.v("API key regex pass " + ret );
+    return ret;
   }
 
 
@@ -106,7 +111,7 @@ public class GeminiDialog extends MyDialog
         TDSetting.setGeminiApiKey( "" );
         if ( mPref != null ) mPref.setButtonValue( (key.isEmpty())? "---" : "***" );
       } else if ( ! isApiKeyFormatValid( key ) ) {
-        // TDLog.v("API key format not valid");
+        TDLog.v("API key format not valid");
         // this could be more informative about the error: too short, not starting with "Alza", invalid charcaters
         ((EditText) findViewById( R.id.api_key )).setError( resString(R.string.ai_invalid_key) );
         return;
@@ -115,13 +120,14 @@ public class GeminiDialog extends MyDialog
           public void onResult( boolean valid, String response )
           {
             if ( valid ) {
+              TDLog.v("API key is valid");
               TDSetting.setGeminiApiKey( key );
               if ( mPref != null ) mPref.setButtonValue( "***" );
               if ( mParent != null ) mParent.showAIdialog();
             } else {
+              TDLog.v("API key is not valid: " + response );
               if ( mParent != null ) {
                 mParent.showInvalid( mPref, response );
-
               }  
               // TDLog.v( response );
             }

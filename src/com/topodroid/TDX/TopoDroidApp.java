@@ -71,9 +71,11 @@ import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 // import java.io.FileReader;
-
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 
@@ -3552,7 +3554,7 @@ public class TopoDroidApp extends Application
    */
   static void sineTest( Context ctx, String hicsum )
   {
-    TDLog.v("sine test " + hicsum );
+    // TDLog.v("sine test " + hicsum );
     if ( Region.isInside( hicsum ) ) {
       TDSetting.mAdmaiora = false;
       TDLevel.resetLevel( ctx );
@@ -3609,7 +3611,22 @@ public class TopoDroidApp extends Application
     };
     analytics_thread.start();
   }
-    */
+
+  /** @return the analytics URI
+   * @param ctx context
+   * N.B. the usi that collects functions usage must NOT BE on github
+   */
+  public static String getAnalyticsUri( Context ctx )
+  {
+    try {
+      InputStream is = ctx.getAssets().open( "ai/analytics_uri.txt" );
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String line = br.readLine();
+      return line;
+    } catch ( IOException e ) {
+      TDLog.v("analytic uri error " + e.getMessage() );
+      return null;
+    }
   }
 
 }

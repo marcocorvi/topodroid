@@ -7,6 +7,7 @@
     <!-- TODO string name="ai_no_internet">No web connection.</string -->
     <!-- TODO string name="ai_prompt">Type your question</string -->
     <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
+    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
     <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
 
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->

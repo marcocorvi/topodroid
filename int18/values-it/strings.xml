@@ -7,6 +7,7 @@
     <string name="ai_no_internet">Connessione web mancante.</string>
     <string name="ai_prompt">Scrivi la tua domanda</string>
     <string name="ai_invalid_key">API key non valida</string>
+    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
     <string name="ai_key_instruction">L\'API key e\' memorizzata nella memoria interna Android\n ed e\' inviata solo a Google.\nCerca in internet come ottenere una Gemini API key da Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 

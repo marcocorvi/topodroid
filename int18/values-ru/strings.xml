@@ -7,6 +7,7 @@
     <string name="ai_no_internet">Нет подключения к интернету.</string>
     <string name="ai_prompt">Введите свой вопрос</string>
     <string name="ai_invalid_key">Недействительный ключ API</string>
+    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
     <string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->

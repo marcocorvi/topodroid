@@ -6,9 +6,9 @@
     </domain-config>
 
     <base-config cleartextTrafficPermitted="false" >
-       <trust-anchors>
+       <!-- trust-anchors>
           <certificate source="system" />
           <certificate source="user" overridePins="true" />
-       </trust-anchors>
+       </trust-anchors -->
     </base-config>
 </network-security-config>  

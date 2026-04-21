@@ -61,9 +61,8 @@ public class AIdialog extends MyDialog
   // gemini-3.0-flash is not jet available
   final static String[] mModels = { 
     // "gemini-3.0-flash", 
-    "gemini-3.0-flash",
-    "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro",
-    "gemini-2.0-flash", "gemini-2.0-pro"
+    "gemini-3-flash-preview",
+    "gemini-2.5-flash", "gemini-2.5-flash-lite"
   };
 
   /* GEMMA3
@@ -207,6 +206,7 @@ public class AIdialog extends MyDialog
         mLocalModel.resetChat();
       // END GEMMA3 */
       }
+      TDToast.make( R.string.ai_chat_reset );
     } else if ( v.getId() == R.id.button_clear ) { // clear the question and answer texts
       TDLog.v("AI dialog: CLEAR question and response");
       // ((TextView) findViewById( R.id.answer )).setText(""); 
@@ -221,7 +221,7 @@ public class AIdialog extends MyDialog
 
   void resetCanSubmit()
   {
-      TDLog.v("AI dialog: reset can submit" );
+    TDLog.v("AI dialog: reset can submit" );
     mCanSubmit = true;
     Button v = (Button)findViewById(R.id.button_submit);
     v.setOnClickListener( this );
@@ -239,6 +239,11 @@ public class AIdialog extends MyDialog
    */
   public void showResponse( String response )
   {
+    TDLog.v("RESPONSE: " + response );
+    if ( response.startsWith("AI error" ) ) {
+      int pos = response.indexOf( "kotlinx" );
+      if ( pos > 0 ) response = response.substring(0,pos); 
+    }
     mAnswer.setText( response );
   }
 
