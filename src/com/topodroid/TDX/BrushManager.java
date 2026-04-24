@@ -575,6 +575,11 @@ public class BrushManager
     /* if ( paintSplayXBdot   != null ) */ paintSplayXBdot.setAlpha( mAlpha );  // dot splay
     /* if ( paintSplayXVdash  != null ) */ paintSplayXVdash.setAlpha( mAlpha );  // blue dash splay
     /* if ( paintSplayXVdot   != null ) */ paintSplayXVdot.setAlpha( mAlpha );  // blue dot splay
+    paintSplayFeature.setAlpha( mAlpha );
+    paintSplayRidge.setAlpha( mAlpha );
+    paintSplayBacksight.setAlpha( mAlpha );
+    paintSplayGeneric.setAlpha( mAlpha );
+    paintScanShot.setAlpha( mAlpha );
   }
 
   /** guard for doMakePaths()

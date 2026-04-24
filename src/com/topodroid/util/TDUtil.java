@@ -251,52 +251,52 @@ public class TDUtil
     return sdf.format( new Date() );
   }
 
-  /** @return the difference in days between two dates
-   * @param from start date (yyyy.mm.dd)
-   * @param to   end date
-   */
-  public static int dayDifference( String from, String to )
-  {
-    int yt = Integer.parseInt( to.substring(0,4) );
-    int mt = Integer.parseInt( to.substring(5,7) );
-    int dt = Integer.parseInt( to.substring(8,10) );
-    int yf = Integer.parseInt( from.substring(0,4) );
-    int mf = Integer.parseInt( from.substring(5,7) );
-    int df = Integer.parseInt( from.substring(8,10) );
-    int ret = 365 * ( yt - yf );
-    ret += dt;
-    switch ( mt ) {
-      case 12: ret += 30;
-      case 11: ret += 31;
-      case 10: ret += 30;
-      case  9: ret += 31;
-      case  8: ret += 31;
-      case  7: ret += 30;
-      case  6: ret += 31;
-      case  5: ret += 30;
-      case  4: ret += 31;
-      case  3: ret += ( (yt%4) == 0 )? 29 : 28;
-      case  2: ret += 31;
-      default: break;
-    }
-    ret += df;
-    switch ( mf ) {
-      case  1: ret -= 31;
-      case  2: ret -= ( (yf%4) == 0 )? 29 : 28;
-      case  3: ret -= 31;
-      case  4: ret -= 30;
-      case  5: ret -= 31;
-      case  6: ret -= 30;
-      case  7: ret -= 31;
-      case  8: ret -= 31;
-      case  9: ret -= 30;
-      case 10: ret -= 31;
-      case 11: ret -= 30;
-      case 12: ret -= 31;
-      default: break;
-    }
-    return ret;
-  }
+  // /** @return the difference in days between two dates
+  //  * @param from start date (yyyy.mm.dd)
+  //  * @param to   end date
+  //  */
+  // public static int dayDifference( String from, String to )
+  // {
+  //   int yt = Integer.parseInt( to.substring(0,4) );
+  //   int mt = Integer.parseInt( to.substring(5,7) );
+  //   int dt = Integer.parseInt( to.substring(8,10) );
+  //   int yf = Integer.parseInt( from.substring(0,4) );
+  //   int mf = Integer.parseInt( from.substring(5,7) );
+  //   int df = Integer.parseInt( from.substring(8,10) );
+  //   int ret = 365 * ( yt - yf );
+  //   ret += dt;
+  //   switch ( mt ) {
+  //     case 12: ret += 30;
+  //     case 11: ret += 31;
+  //     case 10: ret += 30;
+  //     case  9: ret += 31;
+  //     case  8: ret += 31;
+  //     case  7: ret += 30;
+  //     case  6: ret += 31;
+  //     case  5: ret += 30;
+  //     case  4: ret += 31;
+  //     case  3: ret += ( (yt%4) == 0 )? 29 : 28;
+  //     case  2: ret += 31;
+  //     default: break;
+  //   }
+  //   ret += df;
+  //   switch ( mf ) {
+  //     case  1: ret -= 31;
+  //     case  2: ret -= ( (yf%4) == 0 )? 29 : 28;
+  //     case  3: ret -= 31;
+  //     case  4: ret -= 30;
+  //     case  5: ret -= 31;
+  //     case  6: ret -= 30;
+  //     case  7: ret -= 31;
+  //     case  8: ret -= 31;
+  //     case  9: ret -= 30;
+  //     case 10: ret -= 31;
+  //     case 11: ret -= 30;
+  //     case 12: ret -= 31;
+  //     default: break;
+  //   }
+  //   return ret;
+  // }
   
 
   /** parse a day 2-char string

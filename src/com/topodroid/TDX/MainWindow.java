@@ -1278,7 +1278,7 @@ public class MainWindow extends Activity
     boolean ok_folder = TopoDroidApp.initEnvironmentThird();
 
     // TDLog.v( "MAIN init environment third done return " + ok_folder );
-
+    // FIXME_CT
     if ( TDandroid.mHicsum == null ) {
       if ( ! TDandroid.checkCoarseLocation( this ) ) {
         // TODO request LOCATION permission
@@ -1294,8 +1294,10 @@ public class MainWindow extends Activity
       }
     } else {
       // TDLog.v("Hicsum in db " + mHicsum );
-      TopoDroidApp.sineTest( this, TDandroid.mHicsum );
+      TopoDroidApp.notifyHicsum( this, TDandroid.mHicsum );
     }
+    // FIXME_CT
+    TopoDroidApp.setCT( this );
 
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
     //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
@@ -1346,6 +1348,7 @@ public class MainWindow extends Activity
         TDToast.make( String.format( getResources().getString( R.string.imported_file ), filename ) );
       }
     }
+
   }
 
   @Override

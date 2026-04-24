@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -75,6 +76,7 @@ class FixedAddDialog extends MyDialog
   FixedAddDialog( Context context, FixedActivity parent /* , boolean has_clipboard */ )
   {
     super( context, null, R.string.FixedAddDialog ); // null app
+    TopoDroidApp.updateAnalytic( TDAnalytics.LATLNG );
     mParent = parent;
     // hasClipBoard = has_clipboard; // always false
   }

@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.CT;
 import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
@@ -33,6 +34,7 @@ public class TDLevel
   // static final private int COMPLETE = 5;
 
   private static int mLevel = 1; // activity level
+  public static int mMaior = DEBUG;
 
   public static boolean overBasic    = true;
   public static boolean overNormal   = false;
@@ -72,7 +74,6 @@ public class TDLevel
   public static void setLevel( Context ctx, int level )
   {
     mLevel = level;
-
     // FIXME_DEVELOPER
     mDebug = ( TDSetting.mWithDebug )? isDebugBuild( ) : false;
     overBasic    = mLevel > BASIC;
@@ -109,6 +110,14 @@ public class TDLevel
       } else {
         overTester = false;
       }
+    }
+  }
+
+  public static void setMaior( Context ctx, int maior )
+  {
+    if ( maior != mMaior ) {
+      mMaior = maior;
+      setLevel( ctx, mLevel );
     }
   }
     

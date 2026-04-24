@@ -26,6 +26,7 @@ public class Region
   ArrayList< PointF > mPts; // border
   float xmin, xmax; // bounding box
   float ymin, ymax;
+  String name = null; // region name (optional)
 
   static private ArrayList< Region > mRegion = new ArrayList<>();
 
@@ -41,23 +42,23 @@ public class Region
     }
   }
 
-  /** @return true if the point is inside one of the regions
+  /** @return the name of the region the point is inside
    * @param point  point
    */
-  static public boolean isInside( String point )
+  static public String get( String point )
   {
-    if ( mRegion == null || mRegion.size() == 0 ) return false;
+    if ( mRegion == null || mRegion.size() == 0 ) return null;
     String[] vals = point.split( " " );
     try {
       float x = Float.parseFloat( vals[0] );
       float y = Float.parseFloat( vals[1] );
       for ( Region region : mRegion ) {
-        if ( region.isInside( x, y ) ) return true;
+        if ( region.isInside( x, y ) ) return region.name;
       }
     } catch ( NumberFormatException e ) {
       TDLog.e( e.getMessage() );
     }
-    return false;
+    return null;
   }
 
   /** factory
@@ -71,6 +72,7 @@ public class Region
       InputStream is = ctx.getAssets().open( name );
       BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
       String line;
+      ret.name = br.readLine().trim(); // first line is the region name
       while ( ( line = br.readLine() ) != null ) {
         line = line.trim();
         String[] vals = line.split(" ");

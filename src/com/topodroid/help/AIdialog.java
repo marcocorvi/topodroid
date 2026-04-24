@@ -41,6 +41,7 @@ import  java.io.IOException;
 
 import java.util.regex.Pattern;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class AIdialog extends MyDialog
                  implements OnClickListener
@@ -82,6 +83,10 @@ public class AIdialog extends MyDialog
 
   private Button mBtnSubmit;
   protected TextView mAnswer;
+  private EditText mETtemperature;
+  private EditText mETmaxTokens;
+  private static float mTemperature = 0.2f;
+  private static int mMaxTokens = 1024;
 
   protected int mRtitle = R.string.title_ai_dialog;
   protected int mRAImodel;  // AI model resource
@@ -136,6 +141,11 @@ public class AIdialog extends MyDialog
     models.setSelection( mIdxModel );
 
     mAnswer = (TextView) findViewById( R.id.answer );
+
+    mETtemperature = (EditText) findViewById( R.id.temperature );
+    mETmaxTokens   = (EditText) findViewById( R.id.max_tokens );
+    mETtemperature.setText( String.format(Locale.US, "%.1f", mTemperature ) );
+    mETmaxTokens.setText( Integer.toString( mMaxTokens ) );
   }
 
   /** react to an item selection
@@ -176,13 +186,21 @@ public class AIdialog extends MyDialog
         if ( question == null || question.isEmpty() ) {
           et.setError( mContext.getResources().getString( R.string.error_question ) );
         } else {
-          TDLog.v("AI dialog: SUBMIT question " + question );
+          // TDLog.v("AI dialog: SUBMIT question " + question );
+          try { 
+            mTemperature = Float.parseFloat( mETtemperature.getText().toString() );
+            if ( mTemperature < 0.1f ) { mTemperature = 0.1f; } else if ( mTemperature > 0.9f ) { mTemperature = 0.9f; }
+          } catch ( NumberFormatException e ) { mTemperature = 0.2f; }
+          try {
+            mMaxTokens = Integer.parseInt( mETmaxTokens.getText().toString() );
+            if ( mMaxTokens < 1024 ) { mMaxTokens = 1024; } else if ( mMaxTokens > 9192 ) { mMaxTokens = 9192; }
+          } catch ( NumberFormatException e ) { mTemperature = 0.2f; }
           mCanSubmit = false;
           Button b = (Button)findViewById(R.id.button_submit);
           b.setOnClickListener( null );
           b.setEnabled( false );
           if ( mHelper != null ) {
-            mHelper.setModel( mModels[mIdxModel], mRAImodel );
+            mHelper.setModel( mModels[mIdxModel], mRAImodel, mTemperature, mMaxTokens );
             mHelper.ask( question, this, mLocalContext );
           /* GEMMA3
           } else if ( mLocalModel != null ) {
@@ -240,10 +258,10 @@ public class AIdialog extends MyDialog
   public void showResponse( String response )
   {
     TDLog.v("RESPONSE: " + response );
-    if ( response.startsWith("AI error" ) ) {
-      int pos = response.indexOf( "kotlinx" );
-      if ( pos > 0 ) response = response.substring(0,pos); 
-    }
+    // if ( response.startsWith("AI error" ) ) {
+    //   int pos = response.indexOf( "kotlinx" );
+    //   if ( pos > 0 ) response = response.substring(0,pos); 
+    // }
     mAnswer.setText( response );
   }
 

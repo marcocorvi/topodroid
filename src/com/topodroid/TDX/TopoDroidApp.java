@@ -3548,17 +3548,15 @@ public class TopoDroidApp extends Application
     return mData.selectShot( blk.mId, TDInstance.sid );
   }
 
-  /** set sine test
-   * @param ctx context
-   * @param hicsum where
+  /** notify the app point
+   * @param ctx    context
+   * @param hicsum app point
    */
-  static void sineTest( Context ctx, String hicsum )
+  static void notifyHicsum( Context ctx, String hicsum )
   {
-    // TDLog.v("sine test " + hicsum );
-    if ( Region.isInside( hicsum ) ) {
-      TDSetting.mAdmaiora = false;
-      TDLevel.resetLevel( ctx );
-    }
+    // TDLog.v("with app point " + hicsum );
+    // FIXME_CT
+    // TDAnalytics.setHicsum( Region.get( hicsum ) );
   }
 
   // ----------------------------------------------------------------------------
@@ -3591,7 +3589,7 @@ public class TopoDroidApp extends Application
       int yt = Integer.parseInt( today.substring(0,4) );
       int mt = Integer.parseInt( today.substring(5,7) );
       // TDLog.v( "today " + yt + " " + mt + " analytics date " + yf + " " + mf );
-      if ( yt < yf || ( yt == yf && mt <= mf ) ) return; // FIXME
+      if ( yt != yf || mt != mf ) return; 
       // continue only if year has increased or same year but month has increased
     }
     mDData.setValue( "analytics", today ); // even if upload fails we will try the next month
@@ -3626,6 +3624,34 @@ public class TopoDroidApp extends Application
     } catch ( IOException e ) {
       TDLog.v("analytic uri error " + e.getMessage() );
       return null;
+    }
+  }
+
+  /** store the CT value in the database for analytics
+   * @param ct CT value
+   */
+  public static void storeCT( Context ctx, String ct ) 
+  {
+    if ( ct == null ) return;
+    TDLog.v("Store CT" + ct );
+    if ( mDData != null ) mDData.setValue( "ct", ct );
+    TDAnalytics.setCT( ctx, ct );
+  }
+
+  /** set the CT value, either from the database or retrieving it
+   * @param ctx context
+   */
+  public static void setCT( Context ctx )
+  {
+    if ( TDAnalytics.mCT != null ) return;
+    if ( mDData == null ) return;
+    String ct = mDData.getValue( "ct" );
+    if ( ct == null ) { // send request to retrieve the CT
+      if ( ! TDandroid.checkInternet( ctx ) ) return;
+      TDAnalytics.retrieveCT( ctx );
+    } else {
+      TDLog.v("Store CT" + ct );
+      TDAnalytics.setCT( ctx, ct ); // save the CT
     }
   }
 

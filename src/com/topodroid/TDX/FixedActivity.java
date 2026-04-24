@@ -509,21 +509,27 @@ public class FixedActivity extends Activity
     int request = 0;
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19 - TODO use TDandroid.getOpenDocumentIntent
     if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // point-list file
+      TopoDroidApp.updateAnalytic( TDAnalytics.MOB_TOP );
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_MOBILE_TOPOGRAPHER;
     } else if ( TDSetting.mGeoImportApp == FLAG_GPX_RECORDER  ) { // gpx
+      TopoDroidApp.updateAnalytic( TDAnalytics.GPX_REC );
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_GPX_RECORDER;
     } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POSITION ) { // csv
+      TopoDroidApp.updateAnalytic( TDAnalytics.GPS_POS );
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_POSITION;
     } else if (  TDSetting.mGeoImportApp == FLAG_GPS_TEST ) { // csv
+      TopoDroidApp.updateAnalytic( TDAnalytics.GPS_TST );
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_TEST;
     } else if (  TDSetting.mGeoImportApp == FLAG_GPS_LOGGER ) { // csv
+      TopoDroidApp.updateAnalytic( TDAnalytics.GPS_LOG );
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_LOGGER;
     } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POINT ) { // plain text
+      TopoDroidApp.updateAnalytic( TDAnalytics.GPS_PT );
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_POINT;
     }

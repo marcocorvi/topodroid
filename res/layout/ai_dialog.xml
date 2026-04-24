@@ -4,13 +4,36 @@
   android:layout_height="fill_parent"
   android:orientation="vertical"
   >
-
-  <Spinner android:id="@+id/model"
+  <LinearLayout 
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
-    android:drawSelectorOnTop="true"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
-  />
+    android:gravity="start|bottom"
+    android:orientation="horizontal"
+    >
+    <Spinner android:id="@+id/model"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content" 
+      android:layout_weight="50"
+      android:drawSelectorOnTop="true"
+      android:layout_marginTop="@dimen/marginv"
+    />
+
+    <EditText android:id="@+id/temperature"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="25"
+      android:inputType="text"
+      android:autofillHints="no"
+    />
+    <EditText android:id="@+id/max_tokens"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="25"
+      android:inputType="text"
+      android:autofillHints="no"
+    />
+  </LinearLayout>
 
   <!-- GEMMA3 
   <LinearLayout 

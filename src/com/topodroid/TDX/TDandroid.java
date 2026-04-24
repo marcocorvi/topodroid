@@ -753,6 +753,9 @@ public class TDandroid
     return ( net_info != null && net_info.isConnectedOrConnecting() );
   }
 
+  /** @return true if the app has LOCATION permission
+   * @param ctx context
+   */
   public static boolean hasLocation( Context ctx )
   {
     LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
@@ -762,7 +765,11 @@ public class TDandroid
     return gps_enabled;
   }
 
-
+  /** set the app point 
+   * @param ctx context 
+   * #param x   point abscissa
+   * #param y   point ordinate
+   */
   public static void setHicsum( Context ctx, float x, float y )
   {
     mHicsum = String.format(Locale.US, "%.5f %.5f", x, y );
@@ -772,7 +779,7 @@ public class TDandroid
     } else { 
       TDLog.v("Hicsum set " + mHicsum );
     }
-    TopoDroidApp.sineTest( ctx, mHicsum );
+    TopoDroidApp.notifyHicsum( ctx, mHicsum );
   }
 
   /** get the coarse (netwrok) location

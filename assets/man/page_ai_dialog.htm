@@ -3,11 +3,18 @@
 
 This dialog allows you to ask questions to the AI
 and get help for TopoDroidi and assistance for the app settings.<br>
-Currently only Gemini models are suuported,
+Currently only Gemini models are supported,
 and you need to provide your own API key through the appropriate setting dialog.
 <br><p>
 
-Enter your question in the top row, and press the "Submit" button to
+The top row contains
+<ul>
+<li><i>model</i> selector</li>
+<li>model <i>temperature</i> (between 0 and 1: the lower, the less allucinating) [0.2]</li>
+<li>chat <i>max tokens</i> [1024]</li>
+</ul><p>
+
+Enter your question in the next row, and press the "Submit" button to
 send it to the AI.<br>
 The answer is shown in the central scrollable text box.<br><p>
 
@@ -17,8 +24,9 @@ This local context can be overridden by putting a text file "settings.txt", with
 <br><p>
 
 <b>Notes</b><br>
-To use the AI assistant you need internet connection.
-<br><p>
+To use the AI assistant you need internet connection.<br>
+If you get a "MAX TOKENS" error, try with a short question or a 'lite' model.<br>
+<p>
 
 The button "Reset" resets the chat history.<br>
 The button "Clear" clears the question box.<br>

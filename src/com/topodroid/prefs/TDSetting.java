@@ -95,7 +95,6 @@ public class TDSetting
   public static String mLocale = null; // null if default otherwise the chosen locale
 
   public static boolean mWithDebug = false;
-  public static boolean mAdmaiora  = true;
 
   /** reset MainWindow flag
    */
