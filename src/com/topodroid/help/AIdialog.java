@@ -13,8 +13,10 @@ package com.topodroid.help;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 

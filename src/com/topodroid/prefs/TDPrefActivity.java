@@ -16,6 +16,7 @@ import com.topodroid.util.TDTag;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDRequest;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;
@@ -158,6 +159,7 @@ public class TDPrefActivity extends Activity
       setResult( RESULT_CANCELED );
       finish();
     }
+
   }
 
   /** react to a user tap on the BACK key
@@ -196,8 +198,8 @@ public class TDPrefActivity extends Activity
 
   private void doExportSettings( final Uri uri, final SharedPreferences prefs, final int flag )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_PREFS );
     Context ctx = this;
-
     ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
       @Override
       protected Boolean doInBackground(Void... v)
@@ -230,6 +232,7 @@ public class TDPrefActivity extends Activity
   
   private void doImportSettings( Uri uri, SharedPreferences prefs, final int flag )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_PREFS );
     Context ctx = this;
     ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
       @Override

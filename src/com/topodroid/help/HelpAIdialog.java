@@ -14,8 +14,10 @@ package com.topodroid.help;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDColor;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
@@ -57,10 +59,11 @@ public class HelpAIdialog extends AIdialog
   public HelpAIdialog( Context context, IHelpViewer parent, String user_key, String page )
   {
     super( context, parent, user_key, page, R.string.ai_model_manual );
+    TopoDroidApp.updateAnalytic( TDAnalytics.AI_DIALOG );
     mPattern = Pattern.compile( "\\[([^]]+\\.htm)\\]" );
     mRtitle = R.string.title_ai_dialog;
 
-    TDLog.v("Help AI dialog: cstr man page " + page + " user key " + user_key );
+    // TDLog.v("Help AI dialog: cstr man page " + page + " user key " + user_key );
     if ( mSystemInstruction == null ) {
       mSystemInstruction = getOrderedUserManual( context );
       // TDLog.v("HelpAI System instr. length " + mSystemInstruction.length() );

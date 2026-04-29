@@ -101,16 +101,16 @@ public class TglParser
   TubeComputer tubecomputer = null;
   BubbleComputer bubblecomputer = null;
 
-  
-
   // private ArrayList< CWConvexHull > walls   = null;
   // private ArrayList< CWBorder >     borders = null;
 
   protected DEMsurface mSurface;
   protected LoxBitmap  mBitmap = null;
-  public double mCaveLength = 0.0f;
-  public double mSurfaceLength = 0.0f;
+  protected double mCaveLength = 0.0f;
+  protected double mSurfaceLength = 0.0f;
+  protected double mDuplicateLength = 0.0f;
   protected String mName;     // survey base name
+  protected int mNrEquates = 0;
 
   // Cave3DStation mCenterStation = null;
   protected Cave3DStation mStartStation = null;
@@ -200,10 +200,11 @@ public class TglParser
   // public double getVmax() { return zmax; }
 
   public int getStationNumber()  { return (stations == null)?  0 : stations.size(); }
-  public int getShotNumber()     { return (shots == null)?     0 : shots.size(); }
+  public int getShotNumber()     { return (shots == null)?     0 : shots.size() - mNrEquates; }
   public int getSplayNumber()    { return (splays == null)?    0 : splays.size(); }
   public int getSurveyNumber()   { return (surveys == null)?   0 : surveys.size(); }
   public int getXSectionNumber() { return (xsections == null)? 0 : xsections.size(); }
+  public int getEquateNumber()   { return mNrEquates; }
 
   public ArrayList< Cave3DSurvey >   getSurveys()   { return surveys; }
   public ArrayList< Cave3DShot >     getShots()     { return shots; }
@@ -403,6 +404,10 @@ public class TglParser
   /** @return the length of the surface midline
    */
   public double getSurfaceLength() { return mSurfaceLength; }
+
+  /** @return the length of the duplicate legs
+   */
+  public double getDuplicateLength() { return mDuplicateLength; }
 
   /** @return the array of the station coordinates 
    * for each station the array contains the X, Y, and Z coordinates
@@ -1393,5 +1398,31 @@ public class TglParser
   //   has_temperature = true;
   //   return true;
   // }
+
+  /*
+  protected void logDuplicateShots()
+  {
+    int ns = shots.size();
+    for ( int k=0; k < ns; ++k ) {
+      Cave3DShot sk = shots.get( k );
+      String fk = sk.from;
+      String tk = sk.to;
+      for ( int h=k+1; h < ns; ++h ) {
+        Cave3DShot sh = shots.get( h );
+        String fh = sh.from;
+        String th = sh.to;
+        if ( fk.equals( fh ) ) {
+          if ( tk.equals( th ) ) {
+            TDLog.v("Duplicate 1 " + fk + " " + tk + " : " + sk.len + " " + sh.len );
+          }
+        } else if ( fk.equals( th ) ) {
+          if ( tk.equals( fh ) ) {
+            TDLog.v("Duplicate 2 " + fk + " " + tk + " : " + sk.len + " " + sh.len );
+          }
+        }
+      }
+    }
+  }
+  */
 
 }

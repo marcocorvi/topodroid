@@ -3049,6 +3049,7 @@ public class TopoGL extends Activity
    */
   void selectDEMFile( )
   {
+    TDLog.v("Topo GL select DEM file");
     onDEMloading = true;
     // selectFile( REQUEST_DEM_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file, null ); 
     selectFile( REQUEST_DEM_FILE, false, -1, R.string.select_dem_file, null ); 
@@ -3058,6 +3059,7 @@ public class TopoGL extends Activity
    */
   void selectTextureFile( )
   {
+    TDLog.v("Topo GL select Texture file");
     onDEMloading = true;
     // selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); 
     selectFile( REQUEST_TEXTURE_FILE, false, -1, R.string.select_texture_file, null ); 
@@ -3128,7 +3130,10 @@ public class TopoGL extends Activity
    */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
-    if ( result != Activity.RESULT_OK ) return;
+    if ( result != Activity.RESULT_OK ) {
+      if ( request == REQUEST_DEM_FILE || request == REQUEST_TEXTURE_FILE ) onDEMloading = false;
+      return;
+    }
     Uri uri = intent.getData();
     switch ( request ) {
       case REQUEST_DEM_FILE:
@@ -3205,7 +3210,7 @@ public class TopoGL extends Activity
         || pathname_lc.endsWith( ".tro" )
         || pathname_lc.endsWith( ".trox" )
         || pathname_lc.endsWith( ".3d" ) ) {
-        doOpenFile( uri, pathname, true );
+        if ( doOpenFile( uri, pathname, true ) ) break;
       } else {
         pathname = ( trial == 0 )? getPathFromUri( this, uri ) : null;
         if ( pathname == null ) {

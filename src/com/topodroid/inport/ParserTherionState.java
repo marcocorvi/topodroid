@@ -38,6 +38,7 @@ class ParserTherionState
   float mDeclination;
   boolean mDuplicate;
   boolean mSurface;
+  boolean mSplay = false;
   int mExtend;
   String mPrefix;
   String mSuffix;
@@ -57,6 +58,7 @@ class ParserTherionState
     mDeclination= 0.0f;
     mDuplicate = false;
     mSurface   = false;
+    mSplay     = false;
     mExtend = ExtendType.EXTEND_RIGHT;
     mPrefix = "";
     mSuffix = "";
@@ -103,6 +105,7 @@ class ParserTherionState
     mDeclination= state.mDeclination;
     mDuplicate = state.mDuplicate;
     mSurface   = state.mSurface;
+    mSplay     = state.mSplay;
     mExtend = state.mExtend;
     mPrefix = state.mPrefix;
     mSuffix = state.mSuffix;

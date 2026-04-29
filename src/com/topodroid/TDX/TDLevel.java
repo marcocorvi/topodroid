@@ -43,18 +43,24 @@ public class TDLevel
   public static boolean overTester   = false;
   private static boolean mDebug = false;
 
+  private static boolean isDebug = false;    // whether the build is debug
+  private static boolean hasIsDebug = false; // control to check if build is debug only once
+
   /** @return true if the app is debug-build
    */
   public static boolean isDebugBuild( )
   {
-    Context ctx = TDInstance.context;
-    try {
-      final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
-      return (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-    } catch ( NameNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+    if ( ! hasIsDebug ) {
+      Context ctx = TDInstance.context;
+      try {
+        final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
+        isDebug = (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        hasIsDebug = true;
+      } catch ( NameNotFoundException e ) {
+        TDLog.e( e.getMessage() );
+      }
     }
-    return false;
+    return isDebug;
   }
 
   /** @return true at a specific level

@@ -467,17 +467,21 @@ class ParserTherion extends ImportParser
                 // TDLog.v("Warning: therion instrument ignored" );
               } else if ( cmd.equals("flags") ) {
                 // TDLog.v("Therion flags");
-                if ( vals_len >= 2 ) {
-                  if ( vals[1].startsWith("dup") || vals[1].startsWith("splay") ) {
-                    state.mDuplicate = true;
-                  } else if ( vals[1].startsWith("surf") ) {
-                    state.mSurface = true;
-                  } else if ( vals[1].equals("not") && vals_len >= 3 ) {
-                    if ( vals[2].startsWith("dup") || vals[2].startsWith("splay") ) {
-                      state.mDuplicate = false;
-                    } else if ( vals[2].startsWith("surf") ) {
-                      state.mSurface = false;
+                boolean yes = true;
+                for ( int ii = 1; ii < vals_len; ++ii ) {
+                  if ( vals[ii].equals("not") ) {
+                    yes = false;
+                  } else {
+                    if ( vals[ii].startsWith("splay") ) {
+                      state.mSplay = yes;
+                    } else if ( vals[ii].startsWith("dup") ) {
+                      state.mSurface = yes;
+                    } else if ( vals[ii].startsWith("surf") ) {
+                      state.mDuplicate = yes;
+                    } else {
+                      TDLog.e("Therion unknown flag " + vals[ii] );
                     }
+                    yes = true;
                   }
                 }
               } else if ( cmd.equals("mark") ) { // ***** fix station east north Z (ignored std-dev's)
@@ -693,7 +697,7 @@ class ParserTherion extends ImportParser
                     }
 
                     // TODO add shot
-                    if ( to.equals("-") || to.equals(".") ) { // splay shot
+                    if ( state.mSplay || to.equals("-") || to.equals(".") || to.equals("_") ) { // splay shot
                       // FIXME splays
                       // TDLog.v( "Therion add shot " + from + " -- ");
                       shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );

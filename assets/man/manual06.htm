@@ -17,10 +17,6 @@ The title color depends on the current station assignment policy:
 Shot properties are shown through the foreground and background color of the shot data and station names.
 <br><p>
 
-TopoDroid distinguishes four kinds of shots (displayed with different colors): "leg", "repeated-leg", "splay", and "blank".
-Splays can be further classified as "cross" (X), horizontal (H), vertical (V), and "scan" (shots acquired in scan mode).
-<a href="page_shot_edit1.htm">Splay classes</a> X-H-V are disabled by default [G].<br><p>
-
 Shot data foreground color:
 <ol>
 <li>[white] "leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
@@ -34,6 +30,13 @@ Shot data foreground color:
 <li>[violet]: blank leg</li>
 <li>[red]: tampered shot</li>
 </ol><p>
+
+TopoDroid distinguishes four kinds of shots (displayed with different colors): "leg", "repeated-leg", "splay", and "blank".
+A series of consecutive shots is recognized as a leg if they are close in distance, azimuth and clino.
+By default there must be at least three shots. The first shot is marked s "leg" (and assigned stations), the others are
+"repeated-leg". If the shots are ot enough the first is a splay, and the other are "blank".<br>
+Splays can be further classified as "cross" (X), horizontal (H), vertical (V), and "scan" (shots acquired in scan mode).
+<a href="page_shot_edit1.htm">Splay classes</a> X-H-V are disabled by default [G].<br><p>
 
 Shot data background color:
 <ul>

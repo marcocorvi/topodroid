@@ -2448,7 +2448,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsRawCsv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
-    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSV );
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSVF );
     char sep = TDSetting.mCsvSeparator;
     List< RawDBlock > list = data.selectAllShotsRawData( sid );
     String newline = TDSetting.mSurvexEol;
@@ -5751,7 +5751,7 @@ public class TDExporter
    */ 
   static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String vt_series )
   {
-    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TRO );
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TROX );
     boolean diving = info.isDivingMode();
 
     // TDLog.v( "export as visualtopo-X " );

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 import com.topodroid.dem.DEMsurface;
@@ -89,14 +89,17 @@ public class GlSurface extends GlShape
   {
     int nx = dem.dimX(); // this is ParserDEM.mNr1 - number of cells horizontally
     int ny = dem.dimY();
-    if ( nx <= 1 || ny <= 1 ) return false;
+    if ( nx <= 1 || ny <= 1 ) {
+      TDLog.e("GL Surface nx " + nx + " ny " + ny );
+      return false;
+    }
     float dx = (float)( dem.cellXSize() ); // this is ParserDEM.mDim1 - horizontal dimension of a cell
     float dy = (float)( dem.cellYSize() ); // this is ParserDEM.mDim2
     float x0 = (float)( dem.west() - xmed );
     float y0 = (float)( dem.south() + zmed );
-    // TDLog.v("DEM " + nx + "x" + ny + " W " + dem.west() + " S " + dem.south() );
     isValid = initDataBuffer( dem.data(), nx, ny, dx, dy, x0, y0, (float)ymed ); // ymed = survey data medium elevation
     // logData( dem.data(), nx, ny, x0, (x0+nx*dx), y0, (y0+ny*dy) );
+    TDLog.v("GL Surface " + nx + "x" + ny + " W " + dem.west() + " S " + dem.south() + " valid " + isValid );
     return isValid;
   }
 
@@ -123,9 +126,9 @@ public class GlSurface extends GlShape
     // double z0 =   surface.mNorth1 + zmed; //  GOOD
     float z0 = (float)( flip ? surface.north2() + zmed : surface.north1() + zmed );
 
-    // TDLog.v("SURFACE " + nx + "x" + nz + " E " + surface.east1() + " " + surface.east2() + " " + x0 + " N " + surface.north1() + " " + surface.north2() + " " + z0 + " Dx " + dx + " Dz " + dz );
     isValid = initDataBuffer( surface.Z(), nx, nz, dx, dz, x0, z0, (float)ymed ); // ymed = survey data medium elevation
     // logData( surface.Z(), nx, nz, x0, (x0+nx*dx), z0, (z0+nz*dz) );
+    TDLog.v("GL surface " + nx + "x" + nz + " E " + surface.east1() + " " + surface.east2() + " " + x0 + " N " + surface.north1() + " " + surface.north2() + " " + z0 + " Dx " + dx + " Dz " + dz + " valid " + isValid + " flip " + flip );
     return isValid;
   }
 
@@ -135,7 +138,7 @@ public class GlSurface extends GlShape
    */
   synchronized void setTextureBitmap( Bitmap bitmap ) 
   { 
-    // TDLog.v("GL SURFACE set texture bitmap- bound " + mBitmapBounded );
+    // TDLog.v("GL surface set texture bitmap- bound " + mBitmapBounded );
     if ( mBitmap == bitmap ) return;
     if ( mBitmap != null ) {
       mBitmap.recycle();
@@ -220,6 +223,8 @@ public class GlSurface extends GlShape
     GL.setUniform( mbUAlpha, mAlpha ); // UNUSED
   }
 
+  int once = 0;
+
   /** bind the display data when there is no surface texture bitmap
    * @param mvp_matrix      MVP matrix
    * @param mv_matrix_inv_t inverse transpose of MV matrix
@@ -228,7 +233,10 @@ public class GlSurface extends GlShape
   private void bindDataGray( float[] mvp_matrix, float[] mv_matrix_inv_t, Vector3D light )
   {
     // GLES20.glActiveTexture( 0 );
-
+    if ( once < 10 ) {
+      TDLog.v("GL surface: draw with gray" );
+      once ++;
+    }
     GL.setUniformMatrix( mgUMVPMatrix, mvp_matrix );
     GL.setUniformMatrix( mgUMVMatrixInvT, mv_matrix_inv_t );
     if ( dataBuffer != null ) {
@@ -373,6 +381,7 @@ public class GlSurface extends GlShape
     triangleCount = (nx-1) * (nz-1) * 2;
     vertexCount   = triangleCount * 3;
     mSurfaceData = new float[ STRIDE * vertexCount ];
+    int data_len = mSurfaceData.length;
     float ds = 1.0f/(nx-1);
     float dt = 1.0f/(nz-1);
     int k = 0;
@@ -409,9 +418,12 @@ public class GlSurface extends GlShape
         ++k;
       }
     }
-    // TDLog.v("Surface data length " + mSurfaceData.length );
-    dataBuffer = DataBuffer.getFloatBuffer( mSurfaceData.length );
-    if ( dataBuffer == null ) return false;
+    TDLog.v("Surface data length " + data_len + " triangles " + triangleCount + " vertices " + vertexCount + " Nx " + nx + " Nz " + nz );
+    dataBuffer = DataBuffer.getFloatBuffer( data_len );
+    if ( dataBuffer == null ) {
+      TDLog.e("GL Surface failed to get data buffer" );
+      return false;
+    }
     dataBuffer.put( mSurfaceData );
     return true;
   }

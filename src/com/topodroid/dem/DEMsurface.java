@@ -16,6 +16,7 @@ import com.topodroid.util.TDString;
 // import com.topodroid.util.TDFile;
 import com.topodroid.c3in.ParserException;
 import com.topodroid.c3in.ParserTh;
+import com.topodroid.io.th.ThStatus;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -213,12 +214,12 @@ public class DEMsurface
           if ( vals[idx].equals( "grid_flip" ) ) {
             idx = TDString.nextIndex( vals, idx );
             if ( idx < vals.length ) {
-              flip = ParserTh.parseFlip( vals[idx] );
-              if ( flip == ParserTh.FLIP_HORIZONTAL ) {
+              flip = ThStatus.parseFlip( vals[idx] );
+              if ( flip == ThStatus.FLIP_HORIZONTAL ) {
                 x1 = mNr1-1;
                 x2 = -1;
                 dx = -1;
-              } else if ( flip == ParserTh.FLIP_VERTICAL ) {
+              } else if ( flip == ThStatus.FLIP_VERTICAL ) {
                 // y1 = 0;
                 // y2 = mNr2;
                 // dy = 1;

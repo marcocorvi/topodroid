@@ -14,12 +14,14 @@ package com.topodroid.prefs;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDFile;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDString;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.help.AIdialog;
 import com.topodroid.help.IHelpViewer;
 import com.topodroid.help.PageLink;
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
@@ -74,6 +76,7 @@ public class PrefAIdialog extends AIdialog
   public PrefAIdialog( Context context, IHelpViewer parent, String user_key, String page )
   {
     super( context, parent, user_key, page, R.string.ai_model_settings );
+    TopoDroidApp.updateAnalytic( TDAnalytics.AI_SETTING );
     mPattern = Pattern.compile( "\\[([A-Z_]+)=([a-zA-Z0-9.]+)]" );
     mRtitle = R.string.title_ai_dialog_pref;
 

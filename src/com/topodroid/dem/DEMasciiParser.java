@@ -58,7 +58,7 @@ public class DEMasciiParser extends ParserDEM
   @Override
   public boolean readData( double xwest, double xeast, double ysouth, double ynorth )
   {
-    // TDLog.v("DEM ascii X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
+    TDLog.v("DEM ascii read data: X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
     if ( ! mValid ) {
       TDLog.e("DEM ascii parser read data. Not valid" );
       return mValid;
@@ -73,9 +73,10 @@ public class DEMasciiParser extends ParserDEM
       // fr = TDFile.getFileReader( mFilename );
       // BufferedReader mBr = new BufferedReader( mIsr );
       // for ( int k=0; k<6; ++k) mBr.readLine(); // header MUST have been read already
+      TDLog.v("DEM parser Xll " + xll + " Yll " + yll );
 
       double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint - mDim2 = Y-cell-size
-      // TDLog.v("DEM upper-row midpoint " + y + " " + ynorth + " rows " + rows );
+      TDLog.v("DEM upper-row midpoint Y " + y + " Y-north " + ynorth + " rows " + rows + " dims " + mDim2 );
       int k = 0;
       for ( ; k < rows && y > ynorth; ++k ) {
         mBr.readLine();
@@ -86,14 +87,16 @@ public class DEMasciiParser extends ParserDEM
       // TDLog.v("DEM north " + mNorth2 + " " + ynorth );
       
       double x = xll + mDim1/2; // left-column midpoint
+      TDLog.v("DEM left-col midpoint X " + x + " dims " + mDim1 );
       int i = 0;
       for ( ; i < cols && x < xwest; ++i ) x += mDim1;
       mEast1 = x;
       int xoff = i;
       mNr1 = 0;
+      TDLog.v("DEM east1 " + mEast1 + " north2 " + mNorth2 + " xstart " + xoff );
       for ( ; i < cols && x <= xeast; ++i ) { x += mDim1; ++mNr1; }
       mEast2 = x - mDim1;
-      // TDLog.v("DEM east " + mEast1 + " " + mEast2 );
+      TDLog.v("DEM east " + mEast1 + " " + mEast2 );
 
       if ( mNr1 > mMaxSize ) {
         int d = (mNr1 - mMaxSize)/2;
@@ -107,6 +110,7 @@ public class DEMasciiParser extends ParserDEM
       int kk = k;
       for ( ; kk < rows && y >= ysouth; ++kk ) { y -= mDim2; ++mNr2; }
       mNorth1 = y + mDim2;
+      TDLog.v("DEM north " + mNorth1 + " " + mNorth2 );
 
       if ( mNr2 > mMaxSize ) {
         int d = (mNr2 - mMaxSize)/2;
@@ -120,9 +124,11 @@ public class DEMasciiParser extends ParserDEM
         TDLog.e("DEM size " + mNr1 + "x" + mNr2 + " invalid ");
         mValid = false;
       } else {
-        // TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " E " + mEast1 + " " + mEast2 + " N " + mNorth1 + " " + mNorth2 );
+        TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " E " + mEast1 + " " + mEast2 + " N " + mNorth1 + " " + mNorth2 );
         mZ = new float[ mNr1 * mNr2 ];
         int j = mNr2-1; // rotate by 180 degrees the map stored in mZ
+        TDLog.v("DEM start at K " + k + " J " + j + " ends at k < " + rows + " j >= 0 " );
+        // TDLog.v("DEM flip X " + xhflip + " Y " + yvflip );
         for ( ; k < rows && j >= 0; ++k, --j ) {
           String line = mBr.readLine();
           String[] vals = TDString.splitOnSpaces( line );
@@ -167,6 +173,7 @@ public class DEMasciiParser extends ParserDEM
     // TDLog.v("DEM W " + mEast1 + " E " + mEast2 + " S " + mNorth1 + " N " + mNorth2 );
     // TDLog.v("DEM size " + mNr1 + " " + mNr2 );
     // makeNormal();
+    TDLog.v( "DEM valid " + mValid );
     return mValid;
   }
 
@@ -182,7 +189,7 @@ public class DEMasciiParser extends ParserDEM
     // boolean xdim_degrees = false;
     // boolean ydim_degrees = false;
 
-    // TDLog.v("DEM ascii parser read header " + filename );
+    TDLog.v("DEM ascii parser read header " + filename );
     if ( mBr == null ) return false;
     try {
       // FileReader fr = new FileReader( filename );
@@ -238,7 +245,7 @@ public class DEMasciiParser extends ParserDEM
     /* if ( xdim_degrees ) */ mDim1 *= xunit;
     /* if ( yll_degrees  ) */ yll   *= yunit;
     /* if ( ydim_degrees ) */ mDim2 *= yunit;
-    // TDLog.v("DEM cell " + mDim1 + " X " + xll + " Y " + yll + " Nx " + cols + " Ny " + rows );
+    TDLog.v("DEM cell " + mDim1 + " X " + xll + " Y " + yll + " Nx " + cols + " Ny " + rows + " units " + xunit + " " + yunit );
     return true;
   }
 

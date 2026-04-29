@@ -13,6 +13,7 @@ package com.topodroid.io.svg;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
@@ -32,6 +33,7 @@ import com.topodroid.TDX.SymbolPoint;
 import com.topodroid.TDX.TDExporter;
 import com.topodroid.TDX.Scrap;
 import com.topodroid.TDX.DBlock;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -161,6 +163,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
   {
     // TDLog.v("SvgWalls write " + filename + " type " + type );
     // String wall_group = BrushManager.getLineWallGroup( );
+    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_RTRIP );
 
     // int handle = 0;
     RectF bbox = plot.getBoundingBox( );

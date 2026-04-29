@@ -20,10 +20,12 @@ package com.topodroid.help;
 import com.topodroid.util.TDTag;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDPref;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.GeminiDialog;
 import com.topodroid.help.AIdialog;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDandroid;
 // import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
@@ -83,7 +85,7 @@ public class UserManualActivity extends Activity
    */
   private void loadManPage( WebView view, String filename ) 
   {
-    TDLog.v("UserManual load manpage " + filename );
+    // TDLog.v("UserManual load manpage " + filename );
     ++mCloseOnBack;
     if ( view == null ) view = mTV_text;
     if ( ! ( TDSetting.mLocalManPages && TDFile.hasManFile( filename ) ) ) { // pagefile.exists()
@@ -103,7 +105,7 @@ public class UserManualActivity extends Activity
    */
   private void loadAssetPage( WebView view, String filename )
   {
-    TDLog.v("UserManual load asset " + filename );
+    // TDLog.v("UserManual load asset " + filename );
     String page = "/android_asset/man/" + filename;
     view.loadUrl( "file://" + page );
   }
@@ -323,6 +325,8 @@ public class UserManualActivity extends Activity
     mList.setVisibility( View.GONE );
     mList.invalidate();
     mList.setOnItemClickListener( this );
+
+    TopoDroidApp.updateAnalytic( TDAnalytics.MAN_PAGE );
   }
 
   /** lifecycle: activity destroy

@@ -3567,6 +3567,7 @@ public class TopoDroidApp extends Application
    */
   public static void updateAnalytic( String name )
   {
+    if ( TDLevel.isDebugBuild() ) return;
     if ( mAnalytic != null ) mAnalytic.updateAnalytic( name );
   }
 
