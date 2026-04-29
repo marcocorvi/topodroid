@@ -173,7 +173,8 @@ public class TDandroid
   public static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
   public static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
 
-  static String mHicsum = null;
+  // FIXME_HICSUM
+  // static String mHicsum = null;
 
   /** @return the Android make (manufacturer + model)
    * https://stackoverflow.com/questions/1995439/get-android-phone-model-programmatically-how-to-get-device-name-and-model-prog
@@ -765,56 +766,58 @@ public class TDandroid
     return gps_enabled;
   }
 
-  /** set the app point 
-   * @param ctx context 
-   * #param x   point abscissa
-   * #param y   point ordinate
-   */
-  public static void setHicsum( Context ctx, float x, float y )
-  {
-    mHicsum = String.format(Locale.US, "%.5f %.5f", x, y );
-    if ( TopoDroidApp.mDData != null ) {
-      TopoDroidApp.mDData.setValue( "hicsum", mHicsum );
-      TDLog.v("Hicsum update " + mHicsum );
-    } else { 
-      TDLog.v("Hicsum set " + mHicsum );
-    }
-    TopoDroidApp.notifyHicsum( ctx, mHicsum );
-  }
+  // FIXME_HICSUM
+  // /** set the app point 
+  //  * @param ctx context 
+  //  * #param x   point abscissa
+  //  * #param y   point ordinate
+  //  */
+  // public static void setHicsum( Context ctx, float x, float y )
+  // {
+  //   mHicsum = String.format(Locale.US, "%.5f %.5f", x, y );
+  //   if ( TopoDroidApp.mDData != null ) {
+  //     TopoDroidApp.mDData.setValue( "hicsum", mHicsum );
+  //     TDLog.v("Hicsum update " + mHicsum );
+  //   } else { 
+  //     TDLog.v("Hicsum set " + mHicsum );
+  //   }
+  //   TopoDroidApp.notifyHicsum( ctx, mHicsum );
+  // }
 
-  /** get the coarse (netwrok) location
-   * @param ctx  context
-   * @param pt   output long-lat
-   * @return true if success
-   */
-  public static boolean getCoarseLocation( final Context ctx, PointF pt )
-  {
-    if ( ! checkCoarseLocation( ctx ) ) return false;
-    LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
-    if ( lm == null ) return false;
-    Location loc = lm.getLastKnownLocation( LocationManager.NETWORK_PROVIDER ); 
-    if ( loc == null ) {
-      lm.requestSingleUpdate( LocationManager.NETWORK_PROVIDER,
-        new LocationListener() {
-          public void onLocationChanged( Location loc ) {
-            float x = (float)loc.getLongitude();
-            float y = (float)loc.getLatitude();
-            setHicsum( ctx, x, y );
-          }
-          public void onProviderDisabled(String provider) {}
-          public void onProviderEnabled(String provider)  {}
-          public void onStatusChanged(String provider, int status, Bundle extras) {}
-        },
-        Looper.getMainLooper()
-      );
-      // TDLog.v("Location null");
-      return false;
-    } 
-    pt.x = (float)loc.getLongitude();
-    pt.y = (float)loc.getLatitude();
-    setHicsum( ctx, pt.x, pt.y );
-    return true;
-  }
+  // FIXME_HICSUM
+  // /** get the coarse (netwrok) location
+  //  * @param ctx  context
+  //  * @param pt   output long-lat
+  //  * @return true if success
+  //  */
+  // public static boolean getCoarseLocation( final Context ctx, PointF pt )
+  // {
+  //   if ( ! checkCoarseLocation( ctx ) ) return false;
+  //   LocationManager lm = (LocationManager)ctx.getSystemService( Context.LOCATION_SERVICE );
+  //   if ( lm == null ) return false;
+  //   Location loc = lm.getLastKnownLocation( LocationManager.NETWORK_PROVIDER ); 
+  //   if ( loc == null ) {
+  //     lm.requestSingleUpdate( LocationManager.NETWORK_PROVIDER,
+  //       new LocationListener() {
+  //         public void onLocationChanged( Location loc ) {
+  //           float x = (float)loc.getLongitude();
+  //           float y = (float)loc.getLatitude();
+  //           setHicsum( ctx, x, y );
+  //         }
+  //         public void onProviderDisabled(String provider) {}
+  //         public void onProviderEnabled(String provider)  {}
+  //         public void onStatusChanged(String provider, int status, Bundle extras) {}
+  //       },
+  //       Looper.getMainLooper()
+  //     );
+  //     // TDLog.v("Location null");
+  //     return false;
+  //   } 
+  //   pt.x = (float)loc.getLongitude();
+  //   pt.y = (float)loc.getLatitude();
+  //   setHicsum( ctx, pt.x, pt.y );
+  //   return true;
+  // }
 
 
   /** check if arch arm64_v8a is supported
