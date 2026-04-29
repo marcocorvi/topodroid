@@ -3590,7 +3590,7 @@ public class TopoDroidApp extends Application
       int yt = Integer.parseInt( today.substring(0,4) );
       int mt = Integer.parseInt( today.substring(5,7) );
       // TDLog.v( "today " + yt + " " + mt + " analytics date " + yf + " " + mf );
-      if ( yt != yf || mt != mf ) return; 
+      if ( yt == yf && mt == mf ) return; 
       // continue only if year has increased or same year but month has increased
     }
     mDData.setValue( "analytics", today ); // even if upload fails we will try the next month
