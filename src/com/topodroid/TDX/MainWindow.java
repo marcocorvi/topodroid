@@ -599,11 +599,14 @@ public class MainWindow extends Activity
   {
     // FIXME connect-title string
     TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
+    TDLog.v( "Uri Path " + uri.getPath() );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals( TDPath.TH ) ) {
       setTitleImport();
-      new ImportTherionTask( this, pfd, data ).execute( name, name );
+      String filepath = uri.getPath().replace("document/primary:", "/sdcard/" );
+      TDLog.v( "File Path " + filepath );
+      new ImportTherionTask( this, pfd, data ).execute( name, name, filepath );
     } else if ( type.equals( TDPath.DAT ) ) {
       setTitleImport();
       new ImportCompassTask( this, pfd, data ).execute( name, name );

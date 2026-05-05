@@ -3170,6 +3170,7 @@ public class ShotWindow extends Activity
    */
   public void makeNewPlot( String name, String start, boolean extended, int azimuth, int oblique )
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_NEW );
     long mPIDp = mApp.insert2dPlot( TDInstance.sid, name, start, extended, azimuth, oblique );
 
     if ( mPIDp >= 0 ) {

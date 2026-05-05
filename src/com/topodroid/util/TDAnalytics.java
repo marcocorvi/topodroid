@@ -39,6 +39,7 @@ public class TDAnalytics
   public static final String LOOP_CLOSURE  = "Nloop";
   public static final String TRILATERATION = "Ntrilat";
 
+  public static final String PLOT_NEW      = "1plot";  // new plot
   public static final String PLOT_FLIP     = "1flip";  // flipProfile
   public static final String PLOT_COPY     = "1copy";
   public static final String PLOT_SPLIT    = "1split"; // doSplitPlot
@@ -46,6 +47,9 @@ public class TDAnalytics
   public static final String PLOT_SHIFT    = "1shift"; // setShiftDrawing
   public static final String SCRAP_SPLIT   = "2split"; // doSplitScrap
   public static final String SCRAP_PASTE   = "2paste"; // pasteSplitBufferToScrap
+  public static final String XSECTION_LEG  = "1xleg";
+  public static final String XSECTION_ST   = "1xst";
+  public static final String XSECTION_PHOTO = "1xphoto";
 
   public static final String RENUMBER      = "0renumber";
   public static final String MULTICOPY     = "0copy";
@@ -63,8 +67,11 @@ public class TDAnalytics
   public static final String TEMP    = "3temp";
   // public static final String DIKSTRA = "3dikstra";
 
-  public static final String PHOTO  = "Xphoto";
+  public static final String PHOTO  = "Xphoto"; // Photo dialog
+  public static final String SPHOTO = "Sphoto"; // Photo sketch dialog
   public static final String AUDIO  = "Xaudio";
+  public static final String SAUDIO = "Saudio"; // Audio sketch dialog
+
   public static final String NOTES  = "Xnotes";
   public static final String SENSOR = "Xsensor";
 

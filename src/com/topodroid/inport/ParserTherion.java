@@ -25,7 +25,7 @@ import com.topodroid.types.StationFlag;
 import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
-// import java.io.FileInputStream;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -101,8 +101,9 @@ class ParserTherion extends ImportParser
    * @param name   filename or surveyname ?
    * @param apply_declination whether to apply the declination correction
    * @param therionPath       whether to add survey-path to station names
+   * @param filepath          file path (absolute)
    */
-  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, boolean therionPath ) throws ParserException
+  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, boolean therionPath, String filepath ) throws ParserException
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TH );
@@ -113,7 +114,7 @@ class ParserTherion extends ImportParser
     // // mStates  = new Stack< ParserTherionState >();
     // mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState(); // root of the linked list of states
-    readFile( isr, name, "", state, therionPath );
+    readFile( isr, name, "", state, therionPath, filepath );
     checkValid();
   }
 
@@ -158,9 +159,9 @@ class ParserTherion extends ImportParser
    * @param state    state of the parser
    * @param therionPath       whether to add survey-path to station names
    */
-  private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state, boolean therionPath ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state, boolean therionPath, String filepath ) throws ParserException
   {
-    // TDLog.v("Parser TH file " + filename + " base " + basepath );
+    TDLog.v("Parser TH file " + filename + " base " + basepath );
 
     // StringBuilder path; // path = basepath;   // survey pathname(s)
     // int ks = 0;               // survey index
@@ -184,12 +185,17 @@ class ParserTherion extends ImportParser
     StringBuffer team = new StringBuffer();
     String surveyPath = therionPath? path.toString() : null;
 
+    String dirpath = "./";
+    int i = filepath.lastIndexOf('/');
+    if ( i > 0 ) dirpath = filepath.substring(0, i+1);
+    TDLog.v( "import read Therion dirpath <" + dirpath + ">"  );
+
     try {
       String dirname = "./";
-      int i = filename.lastIndexOf('/');
+      i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
       // System.out.println("readFile dir " + dirname + " filename " + filename );
-      // TDLog.v( "import read Therion file <" + filename + ">" );
+      TDLog.v( "import read Therion file <" + filename + "> dir " + dirname );
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
@@ -229,19 +235,19 @@ class ParserTherion extends ImportParser
               state.in_grade = true;
             } else if ( cmd.equals("input") ) { // ignore
               // TDLog.v("Warning: therion input ignored");
-              // int j = 1;
-              // while ( vals[j] != null ) {
-              //   if ( vals[j].length() > 0 ) {
-              //     filename = vals[j];
-              //     if ( filename.endsWith( ".th" ) ) {
-              //       readFile( dirname + '/' + filename, 
-              //           path,
-              //           use_survey_declination, survey_declination,
-              //           units_len, units_ber, units_cln );
-              //     }
-              //     break;
-              //   }
-              // }
+              int j = 1;
+              while ( vals[j] != null ) {
+                if ( vals[j].length() > 0 ) {
+                  String filename1 = vals[j];
+                  if ( filename1.endsWith( ".th" ) ) {
+                    String filename2 = dirpath + filename1;
+                    TDLog.v("Warning: therion input " + filename1 + " basepath " + filename2 );
+                    InputStreamReader isr1 = new InputStreamReader( new FileInputStream( filename2 ) );
+                    readFile( isr1, filename1, path.toString(), state, therionPath, filename2 );
+                  }
+                  break;
+                }
+              }
             } else if ( cmd.equals("surface") ) {
               // TODO check not already in_surface
               state.in_surface = true;

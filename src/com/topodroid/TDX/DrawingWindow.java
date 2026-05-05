@@ -5817,6 +5817,7 @@ public class DrawingWindow extends ItemDrawer
     float s = mMediaManager.getPhotoSize();
     long id = mMediaManager.getPhotoId();
     int scrap = mDrawingSurface.scrapIndex();
+    TopoDroidApp.updateAnalytic( TDAnalytics.SPHOTO );
     DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), x, y, mPointScale, 
       "", // String.format(Locale.US, "-size %.2f", mMediaManager.getPhotoSize() ),
       id, scrap );
@@ -5995,6 +5996,7 @@ public class DrawingWindow extends ItemDrawer
     DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
     if ( audio == null ) {
       // assert bid == mMediaManager.getAudioId()
+      TopoDroidApp.updateAnalytic( TDAnalytics.SAUDIO );
       audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, audio_id, mDrawingSurface.scrapIndex() );
       audio.mLandscape = mLandscape;
       mDrawingSurface.addDrawingPath( audio );
@@ -6121,7 +6123,7 @@ public class DrawingWindow extends ItemDrawer
         clino = 0;
       }
       // TDLog.v( "new at-station X-section " + xs_id + " station name " + st_name + " nick <" + nick + ">" );
-
+      TopoDroidApp.updateAnalytic( TDAnalytics.XSECTION_ST );
       long pid = mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
       // plot = mApp_mData.getPlotInfo( TDInstance.sid, pid );
       plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
@@ -7717,6 +7719,7 @@ public class DrawingWindow extends ItemDrawer
     long pid = mApp_mData.getPlotId( TDInstance.sid, mSectionName );
     if ( pid < 0 ) { 
       // TDLog.v("insert 2D section");
+      TopoDroidApp.updateAnalytic( TDAnalytics.XSECTION_LEG );
       pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
     }
     return pid;
@@ -7744,6 +7747,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
         TDLog.e("multileg photo xsection not fully supported");
       }
+      TopoDroidApp.updateAnalytic( TDAnalytics.XSECTION_PHOTO );
       // imageFile := survey / photo / sectionId .jpg
       String image_filepath = TDPath.getSurveyJpgFile( TDInstance.survey, id ); // 20230118 local var "image_filepath"
       // File imagefile = TDFile.getTopoDroidFile( image_filepath );
