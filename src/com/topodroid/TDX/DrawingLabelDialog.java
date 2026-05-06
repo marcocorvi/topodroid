@@ -65,7 +65,7 @@ class DrawingLabelDialog extends MyDialog
     super.onCreate(savedInstanceState);
     initLayout( R.layout.drawing_label_dialog, R.string.label_title );
 
-    mLabel     = (EditText) findViewById(R.id.label_text);
+    mLabel = (EditText) findViewById(R.id.label_text);
 
     ((Button) findViewById(R.id.label_ok)).setOnClickListener( this );
     ((Button) findViewById(R.id.label_cancel)).setOnClickListener( this );
@@ -139,6 +139,7 @@ class DrawingLabelDialog extends MyDialog
     }
     dismiss();
   }
+
 }
         
 

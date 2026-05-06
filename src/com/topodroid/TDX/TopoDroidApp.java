@@ -3577,6 +3577,7 @@ public class TopoDroidApp extends Application
    */
   static void checkAnalytics( final Context ctx )
   {
+    if ( TDLevel.isDebugBuild() ) return;
     if ( ! TDSetting.mAnalytics ) return;
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;

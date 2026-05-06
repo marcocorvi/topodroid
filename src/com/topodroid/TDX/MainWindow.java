@@ -390,7 +390,7 @@ public class MainWindow extends Activity
 
   void startSplitSurvey( long old_sid, long old_id )
   {
-    TDLog.v( "start split survey");
+    TDLog.v( "MAIN split survey");
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
@@ -402,7 +402,7 @@ public class MainWindow extends Activity
    */
   void startMoveSurvey( long old_sid, long old_id, String new_survey )
   {
-    TDLog.v( "start move survey");
+    TDLog.v( "MAIN move survey");
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
       mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     // } else {
@@ -598,14 +598,13 @@ public class MainWindow extends Activity
   public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
-    TDLog.v( "Uri Path " + uri.getPath() );
+    TDLog.v( "MAIN import with reader <" + name + "> type <" + type + "> + Uri path " +  uri.getPath() );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals( TDPath.TH ) ) {
       setTitleImport();
-      String filepath = uri.getPath().replace("document/primary:", "/sdcard/" );
-      TDLog.v( "File Path " + filepath );
+      String filepath = uri.getPath().replace("document/primary:", "/sdcard/" ); // FIXME_IMPORT
+      TDLog.v( "MAIN import File Path " + filepath );
       new ImportTherionTask( this, pfd, data ).execute( name, name, filepath );
     } else if ( type.equals( TDPath.DAT ) ) {
       setTitleImport();
@@ -861,7 +860,7 @@ public class MainWindow extends Activity
   {
     TDLog.v( "INIT dialogs - already done: " + done_init_dialogs /* + " say_dialog_r " + say_dialog_r */ );
     if ( TDandroid.PRIVATE_STORAGE && TopoDroidApp.sayDialogR() ) { // FIXME_R
-      TDLog.v( "DIALOG R: delaying init environment second");
+      TDLog.v( "MAIN Dialog R: delaying init environment second");
       (new DialogR( this, this)).show();
       // TopoDroidApp.setSayDialogR( false );
       return;
@@ -950,7 +949,7 @@ public class MainWindow extends Activity
       Thread loader = new Thread() {
         @Override
         public void run() {
-          TDLog.v("Main: app start-up step 2");
+          TDLog.v("MAIN: app start-up step 2");
           mApp.startupStep2();
           WorldMagneticModel.loadEGM9615( mApp );
         }
@@ -1008,7 +1007,7 @@ public class MainWindow extends Activity
   void resetButtonBar()
   {
     int size = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    TDLog.v("Main Activity: reset button cache, size " + size );
+    TDLog.v("MAIN reset button cache. Size " + size );
     MyButton.resetButtonCache( size );
 
     // TDToast.make( "SIZE " + size );
@@ -1150,7 +1149,7 @@ public class MainWindow extends Activity
   public void onStart()
   {
     super.onStart();
-    TDLog.v( "Main Activity on Start " );
+    TDLog.v( "MAIN on Start " );
     // restoreInstanceFromFile();
     // TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
@@ -1272,7 +1271,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    TDLog.v( "Main Activity on Resume " );
+    TDLog.v( "MAIN on Resume " );
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1359,7 +1358,7 @@ public class MainWindow extends Activity
   protected synchronized void onPause() 
   { 
     super.onPause();
-    TDLog.v("Main Activity on Pause");
+    TDLog.v("MAIN on Pause");
     // TDLog.Log( TDLog.LOG_MAIN, "onPause " );
     mApp.suspendComm();
   }
@@ -1368,7 +1367,7 @@ public class MainWindow extends Activity
   public void onStop()
   {
     super.onStop();
-    TDLog.v("Main Activity on Stop");
+    TDLog.v("MAIN on Stop");
     // if ( TopoDroidApp.isTracing ) {
     //   Debug.stopMethodTracing();
     // }
@@ -1462,12 +1461,12 @@ public class MainWindow extends Activity
       case TDRequest.REQUEST_CWD:
         if ( result == RESULT_OK && extras != null ) {
           String cwd = extras.getString( TDTag.TOPODROID_CWD );
-          TDLog.v("got CWD <" + cwd + ">" );
+          TDLog.v("MAIN got CWD <" + cwd + ">" );
           if ( ! TDString.isNullOrEmpty( cwd ) ) {
             TopoDroidApp.setCWDPreference( CWDfolder.folderName( cwd ) );
           }
         } else if ( result == RESULT_CANCELED ) {
-	  TDLog.e("could not set CWD");
+	  TDLog.e("MAIN could not set CWD");
 	}
         break;
       case TDRequest.REQUEST_ENABLE_BT:
@@ -1851,7 +1850,7 @@ public class MainWindow extends Activity
 
   public void doExport( final String type, final String filename, final String prefix, final long first, boolean second )
   { 
-    TDLog.v("Type " + type + " filename " + filename + " prefix " + prefix );
+    TDLog.v("MAIN export Type " + type + " filename " + filename + " prefix " + prefix );
     TDSetting.mExportPrefix = prefix; // save export-prefix
     int index = TDConst.surveyFormatIndex( type );
     String extension = filename.substring( filename.lastIndexOf(".") );
@@ -1859,19 +1858,19 @@ public class MainWindow extends Activity
       // N.B. zip export not supported
       Thread export_thread = new Thread() {
         public void run() {
-          TDLog.v("Export Thread run");
+          TDLog.v("MAIN Export Thread run");
           List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
           ExportInfo export_info = new ExportInfo( index, null, null, first );
           int cnt = 0; 
           for ( String survey : survey_list ) {
             String file_name = survey + extension;
-            TDLog.v("Index " + index + " Exporting " + file_name + " prefix " + prefix );
+            TDLog.v("MAIN Export Thread Index " + index + " Exporting " + file_name + " prefix " + prefix );
             if ( prefix != null ) export_info.prefix = survey;
             export_info.name = file_name;
             mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
             if ( doExport( survey, index, file_name, export_info ) ) ++cnt;
           }
-          TDLog.v("Export Thread done");
+          TDLog.v("MAIN Export Thread done");
           final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );
           runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
         }

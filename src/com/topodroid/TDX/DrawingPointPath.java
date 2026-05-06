@@ -839,5 +839,18 @@ public class DrawingPointPath extends DrawingPath
     pw.format( Locale.US, "POINT %s %.1f %f %f %f\n", name, mOrientation, vv.x,  vv.y, -vv.z );
   }
 
+  /** add a char to the text
+   * @param ch char
+   */
+  void addTextChar( char[] chs )
+  {
+    if ( mPointText == null ) {
+      mPointText = new String( chs ); 
+    } else {
+      mPointText = mPointText + (new String( chs ) );
+    }
+    // TDLog.v("point text <" + mPointText + ">" );
+  }
+
 }
 

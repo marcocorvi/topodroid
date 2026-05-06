@@ -98,6 +98,12 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.BaseInputConnection;
+
+import android.text.InputType;
 //
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -490,6 +496,8 @@ public class DrawingWindow extends ItemDrawer
   // private DataHelper mData;
   private Activity mActivity = null;
   private int mBTstatus; // status of bluetooth buttons (download and reset)
+  private DrawingLabelPath mLabelPath = null; // temporary label with text-editing
+  private View myView;
 
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
@@ -2565,7 +2573,8 @@ public class DrawingWindow extends ItemDrawer
   {
     super.onCreate(savedInstanceState);
 
-    getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
+    myView = getWindow().getDecorView();
+    myView.setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
 
@@ -3220,6 +3229,10 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doPause() // saveInstanceToData
   {
+    if ( mLabelPath != null ) {
+      mLabelPath = null;
+      hideSoftKeyboard();
+    }
     switchZoomCtrl( 0 );
     mDrawingSurface.setDrawing( false );
     if ( mPid >= 0 ) {
@@ -4609,7 +4622,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** react to a touch event
-   * @param view  touched view
+   * @param view  touched view (not used)
    * @param rawEvent raw event
    * @return ...
    *
@@ -5029,7 +5042,11 @@ public class DrawingWindow extends ItemDrawer
               xs = mSaveX/mZoom - mOffset.x;
               ys = mSaveY/mZoom - mOffset.y;
               if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
-                new DrawingLabelDialog( mActivity, this, xs, ys ).show();
+                // TDLog.v("make label path at " + xs + " " + ys );
+                // new DrawingLabelDialog( mActivity, this, xs, ys ).show();
+                mLabelPath = makeLabelPath( "", xs, ys, DrawingLevel.LEVEL_DEFAULT );
+                // open keyboard
+                showSoftKeyboard();
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
                 new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
               } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
@@ -5163,6 +5180,11 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchDown( float xc, float yc, float xs, float ys )
   {
+    if ( mLabelPath != null ) {
+      mLabelPath = null; // end entering label text
+      hideSoftKeyboard();
+      return true;
+    }
     HBXP_PointDown = false; // HBXP
     mDrawingSurface.endEraser();
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
@@ -5343,12 +5365,12 @@ public class DrawingWindow extends ItemDrawer
                 xs = mSaveX/mZoom - mOffset.x;
                 ys = mSaveY/mZoom - mOffset.y;
                 if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
-                  //new DrawingLabelDialog( mActivity, this, xs, ys ).show(); // HBXP ? dummy text create
+                  // new DrawingLabelDialog( mActivity, this, xs, ys ).show(); // HBXP ? dummy text create
                 } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
-                  //new DrawingPhotoDialog( mActivity, this, xs, ys ).show(); // HBXP
+                  // new DrawingPhotoDialog( mActivity, this, xs, ys ).show(); // HBXP
                 } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
                   if ( audioCheck ) {
-                    //addAudioPoint( xs, ys ); // HBXP
+                    // addAudioPoint( xs, ys ); // HBXP
                   } else {
                     TDToast.makeWarn( R.string.no_feature_audio );
                   }
@@ -5789,19 +5811,33 @@ public class DrawingWindow extends ItemDrawer
    * @param x      X coord
    * @param y      Y coord
    * @param level  canvas level of the point
+   *
+   * N.B. called by DrawingLabelDialog if label is still null
    */
   public void addLabel( String label, float x, float y, int level )
   {
     // assert( mLastLinePath == null );
     if ( label != null && label.length() > 0 ) {
-      if ( mLandscape ) { float t=x; x=-y; y=t; }
-      DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
-      label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
-      label_path.mLandscape = mLandscape;
-      label_path.mLevel = level;
-      mDrawingSurface.addDrawingPath( label_path );
-      modified();
-    } 
+      makeLabelPath( label, x, y, level );
+    }
+  }
+
+  /** create a therion label point
+   * @param label  text
+   * @param x      X coord
+   * @param y      Y coord
+   * @param level  canvas level of the point
+   */
+  private DrawingLabelPath makeLabelPath( String label, float x, float y, int level )
+  {
+    if ( mLandscape ) { float t=x; x=-y; y=t; }
+    DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
+    label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
+    label_path.mLandscape = mLandscape;
+    label_path.mLevel = level;
+    mDrawingSurface.addDrawingPath( label_path );
+    modified();
+    return label_path;
   }
 
   // private String mMediaComment = null;
@@ -8465,6 +8501,11 @@ public class DrawingWindow extends ItemDrawer
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
         TDLog.e( "key down: code " + code );
+        if ( mLabelPath != null ) {
+          int code_point = event.getUnicodeChar();
+          // TDLog.v("event " + code_point );
+          mLabelPath.addTextChar( Character.toChars( code_point ) );
+        }
     }
     return false;
   }
@@ -10482,6 +10523,22 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** show the soft keyboard for the drawing surface (view)
+   */
+  private void showSoftKeyboard( )
+  { 
+    // TDLog.v("shot soft keyboard");
+    InputMethodManager imm = getSystemService( InputMethodManager.class );
+    imm.showSoftInput( myView, InputMethodManager.SHOW_IMPLICIT );
+  }
 
+  /** hide the soft keyboard for the drawing surface (view)
+   */
+  private void hideSoftKeyboard( )
+  { 
+    // TDLog.v("hide soft keyboard");
+    InputMethodManager imm = getSystemService( InputMethodManager.class );
+    imm.hideSoftInputFromWindow( myView.getWindowToken(), 0 );
+  }
 
 }

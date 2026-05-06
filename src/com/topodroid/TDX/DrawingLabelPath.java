@@ -347,5 +347,11 @@ public class DrawingLabelPath extends DrawingPointPath
     }
   }
 
+  void addTextChar( char[] chs )
+  {
+    super.addTextChar( chs );
+    makeLabelPath();
+  }
+
 }
 
