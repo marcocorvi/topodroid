@@ -1168,6 +1168,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_color">Clear splay colors</string>
     <string name="help_cwd">Current work folder</string>
     <string name="help_join">Join lines</string>
+    <string name="help_text">Insert text</string>
     <!-- UNUSED string name="help_continue">Continue drawing a line</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Saved stations</string>

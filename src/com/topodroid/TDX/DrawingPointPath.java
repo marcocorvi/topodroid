@@ -852,5 +852,13 @@ public class DrawingPointPath extends DrawingPath
     // TDLog.v("point text <" + mPointText + ">" );
   }
 
+  /** delete the last char from the text
+   */
+  void delTextChar()
+  {
+    if ( TDString.isNullOrEmpty( mPointText ) ) return;
+    mPointText = mPointText.substring(0, mPointText.length() - 1 );
+  }
+
 }
 

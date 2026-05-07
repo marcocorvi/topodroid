@@ -69,10 +69,13 @@ public class AIhelper // extends AsyncTask< String, Void, String >
 
   /** set the Gemini model
    * @param model_name   name of the Gemini model
+   * @param r_ai_model
+   * @param temp         temperature
+   * @param max_tokens   maximum nmber of tokens
    * @note this method must be called everytime a question is asked
    * N.B. chat and model can be saved between instanatiations if the model does not change
    */
-  void setModel( String model_name, int r_ai_model ) { }
+  void setModel( String model_name, int r_ai_model, float temp, int max_tokens ) { }
 
   /** reset the chat so that the next time a question is posed the chat is rebuiilt
    */

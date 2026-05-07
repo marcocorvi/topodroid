@@ -37,10 +37,13 @@ abstract class ItemDrawer extends Activity
   int mCurrentPoint = -1;
   int mCurrentLine  = -1;
   int mCurrentArea  = -1;
+  protected int mSavedCurrentPoint = -1;
+
   protected int mPointScale;
   protected int mLinePointStep = 1;
 
   protected int mSymbol = SymbolType.LINE; // kind of symbol being drawn
+  protected int mSavedSymbol = SymbolType.LINE; 
 
   // -----------------------------------------------------------
   static final int NR_RECENT = 6; // max is 6
@@ -403,5 +406,25 @@ abstract class ItemDrawer extends Activity
     }
   }
 
+  protected boolean saveTool()
+  {
+    if ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) ) {
+      TDLog.v("Save tool and set Symbol-point label");
+      mSavedSymbol = mSymbol;
+      mSavedCurrentPoint = mCurrentPoint;
+      mSymbol = SymbolType.POINT;
+      mCurrentPoint = 1;
+      setTheTitle();
+      return true;
+    }
+    return false;
+  }
+
+  protected void restoreTool()
+  {
+    mSymbol = mSavedSymbol;
+    mCurrentPoint = mSavedCurrentPoint;
+    setTheTitle();
+  }
 
 }

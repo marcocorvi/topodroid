@@ -178,16 +178,17 @@ public class DrawingWindow extends ItemDrawer
   // private static final int IC_REDO         = 11;
   private static final int IC_TOOLS_LINE   = 12;
   private static final int IC_SPLAYS_LINE  = 13;
-  private static final int IC_JOIN_NONE    = 14;  // index of continue-no icon
-  private static final int IC_PREV         = 15;
-  private static final int IC_NEXT         = 16;
-  private static final int IC_DELETE_OFF   = 17;
-  private static final int IC_ATTRIBS      = 18;
-  // private static final int IC_SNAP         = 19;
-  private static final int IC_RANGE_NO     = 20;
-  // private static final int IC_SELECT_ALL   = 21;
-  private static final int IC_ERASE_ALL    = 22;
-  private static final int IC_MEDIUM       = 23;
+  private static final int IC_TEXT         = 14;
+  private static final int IC_JOIN_NONE    = 15;  // index of continue-no icon
+  private static final int IC_PREV         = 16;
+  private static final int IC_NEXT         = 17;
+  private static final int IC_DELETE_OFF   = 18;
+  private static final int IC_ATTRIBS      = 19;
+  // private static final int IC_SNAP         = 20;
+  private static final int IC_RANGE_NO     = 21;
+  // private static final int IC_SELECT_ALL   = 22;
+  private static final int IC_ERASE_ALL    = 23;
+  private static final int IC_MEDIUM       = 24;
 
   private static final int IC_MENU          = IC_MEDIUM+1;
   private static final int IC_EXTEND        = IC_MEDIUM+2;
@@ -221,6 +222,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_TOOLS_LINE_TILDE = IC_MEDIUM+29;
   private static final int IC_TOOLS_AREA_TILDE = IC_MEDIUM+30;
   private static final int IC_MENU_RED        = IC_MEDIUM+31;
+  private static final int IC_TEXT_ON         = IC_MEDIUM+32;
 
   private static final int BTN_DOWNLOAD  = 3; // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -230,7 +232,8 @@ public class DrawingWindow extends ItemDrawer
 
   private static final int BTN_TOOL   = 5;    // index of mButton2 tools
   private static final int BTN_SPLAYS = 6;    // index of mButton2 splays
-  private static final int BTN_JOIN2  = 7;    // index of mButton2 join button (level > normal) // TH2EDIT was final
+  private static final int BTN_TEXT   = 7;    // index of mButton2 text button (level > normal) // TH2EDIT was final
+  private static final int BTN_JOIN2  = 8;    // index of mButton2 join button (level > normal) // TH2EDIT was final
 
   private static final int BTN_REMOVE = 5;    // index of mButton3 remove
   private static final int BTN_ATTRIB = 6;    // index of mButton3 attributes
@@ -262,50 +265,52 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_redo,          // 11
                         R.drawable.iz_tools_line,    // 12
                         R.drawable.iz_splays_line,   // 13
-                        R.drawable.iz_cont_none,     // 14
+                        R.drawable.iz_text,          // 14
+                        R.drawable.iz_cont_none,     // 15
 
-                        R.drawable.iz_back,          // 15 EDIT Nr 3+6
+                        R.drawable.iz_back,          // 16 EDIT Nr 3+6
                         R.drawable.iz_forw,
-                        R.drawable.iz_delete_off,    // 17
+                        R.drawable.iz_delete_off,    // 18
                         R.drawable.iz_attrib,          
                         R.drawable.iz_join,
-                        R.drawable.iz_range_no,      // 20
+                        R.drawable.iz_range_no,      // 21
 
                         R.drawable.iz_select_all,    // only for help
-                        R.drawable.iz_erase_all,     // 22 ERASE Nr 3+2
-                        R.drawable.iz_medium,        // 23
+                        R.drawable.iz_erase_all,     // 23 ERASE Nr 3+2
+                        R.drawable.iz_medium,        // 24
 
-                        R.drawable.iz_menu,          // 23+1
-                        R.drawable.iz_extended,      // 23+2
-                        -1, // R.drawable.iz_join_no,      // 23+3 // 2023-03-10  no-point-actions (unused)
-                        -1, // R.drawable.iz_cont_start,   // 23+4 
-                        -1, // R.drawable.iz_cont_end,     // 23+5
+                        R.drawable.iz_menu,          // 24+1
+                        R.drawable.iz_extended,      // 24+2
+                        -1, // R.drawable.iz_join_no,      // 24+3 // 2023-03-10  no-point-actions (unused)
+                        -1, // R.drawable.iz_cont_start,   // 24+4 
+                        -1, // R.drawable.iz_cont_end,     // 24+5
                         R.drawable.iz_cont_both,
                         -1, // R.drawable.iz_cont_continue,
-                        R.drawable.iz_plus,            // 23+8
-                        R.drawable.iz_range_ok,        // 23+9
-                        R.drawable.iz_range_box,       // 23+10
-                        R.drawable.iz_range_item,      // 23+11
-                        R.drawable.iz_erase_point,     // 23+12
-                        R.drawable.iz_erase_line,      // 23+13
-                        R.drawable.iz_erase_area,      // 23+14
-                        R.drawable.iz_small,           // 23+15
-                        R.drawable.iz_large,           // 23+16
-                        R.drawable.iz_select_all,      // 23+17 all
-                        R.drawable.iz_select_point,    // 23+18 point
-                        R.drawable.iz_select_line,     // 23+19 line
-                        R.drawable.iz_select_area,     // 23+20 area
-                        R.drawable.iz_select_shot,     // 23+21 shot
-                        R.drawable.iz_select_station,  // 23+22 station
-                        R.drawable.iz_cont_off,        // 23+23 continuation off // 2023-03-10
-			R.drawable.iz_delete,          // 23+24 do delete
-                        R.drawable.iz_dial_on,         // 23+25 set dial
-                        R.drawable.iz_splays_point,    // 23+26
-                        R.drawable.iz_tools_point,     // 23+27
-                        R.drawable.iz_tools_area,      // 23+28
-                        R.drawable.iz_tools_line_cont, // 23+28
-                        R.drawable.iz_tools_area_cont, // 23+30 // 2023-03-10
-                        R.drawable.iz_menu_red,        // 23+31
+                        R.drawable.iz_plus,            // 24+8
+                        R.drawable.iz_range_ok,        // 24+9
+                        R.drawable.iz_range_box,       // 24+10
+                        R.drawable.iz_range_item,      // 24+11
+                        R.drawable.iz_erase_point,     // 24+12
+                        R.drawable.iz_erase_line,      // 24+13
+                        R.drawable.iz_erase_area,      // 24+14
+                        R.drawable.iz_small,           // 24+15
+                        R.drawable.iz_large,           // 24+16
+                        R.drawable.iz_select_all,      // 24+17 all
+                        R.drawable.iz_select_point,    // 24+18 point
+                        R.drawable.iz_select_line,     // 24+19 line
+                        R.drawable.iz_select_area,     // 24+20 area
+                        R.drawable.iz_select_shot,     // 24+21 shot
+                        R.drawable.iz_select_station,  // 24+22 station
+                        R.drawable.iz_cont_off,        // 24+23 continuation off // 2023-03-10
+			R.drawable.iz_delete,          // 24+24 do delete
+                        R.drawable.iz_dial_on,         // 24+25 set dial
+                        R.drawable.iz_splays_point,    // 24+26
+                        R.drawable.iz_tools_point,     // 24+27
+                        R.drawable.iz_tools_area,      // 24+28
+                        R.drawable.iz_tools_line_cont, // 24+28
+                        R.drawable.iz_tools_area_cont, // 24+30 // 2023-03-10
+                        R.drawable.iz_menu_red,        // 24+31
+                        R.drawable.iz_text_on,         // 24+32
                       };
   private static final int[] menus = {
                         R.string.menu_switch,     // 0
@@ -357,7 +362,7 @@ public class DrawingWindow extends ItemDrawer
                       };
 */
   private static final int NR_BUTTON1 = 10; // move
-  private static final int NR_BUTTON2 =  8; // draw 2023-09-23
+  private static final int NR_BUTTON2 =  9; // draw 2023-09-23
   private static final int NR_BUTTON3 =  9; // edit
   private static final int NR_BUTTON5 =  7; // erase
 
@@ -396,6 +401,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_redo,          // 10
                         R.drawable.iz_tools,         // 11
                         R.drawable.iz_splays_line,
+                        R.drawable.iz_text,
                         R.drawable.iz_cont_none
   };
   private static final int[] help_icons_draw = {
@@ -406,6 +412,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_redo,
                         R.string.help_symbol_plot,
                         R.string.help_splays,
+                        R.string.help_text,
                         R.string.help_join
                       };
 
@@ -871,6 +878,8 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMtoolsLineCont;
   private BitmapDrawable mBMtoolsArea;
   private BitmapDrawable mBMtoolsAreaCont;
+  private BitmapDrawable mBMdrawTextOn;
+  private BitmapDrawable mBMdrawTextOff;
   // FIXME_AZIMUTH_DIAL 1,2
   private Bitmap mBMdial;
   private Bitmap mDialOn;
@@ -1525,6 +1534,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onBackPressed () // askClose
   {
+    checkLabelPath();
     if ( dismissPopups() != DISMISS_NONE ) return;
     if ( mTh2Edit ) { // TH2EDIT
       super.onBackPressed();
@@ -2463,6 +2473,8 @@ public class DrawingWindow extends ItemDrawer
     mBMtoolsArea     = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_AREA] );
     mBMtoolsLineCont = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_LINE_TILDE] );
     mBMtoolsAreaCont = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_AREA_TILDE] );
+    mBMdrawTextOn    = MyButton.getButtonBackground( this, res, izons[IC_TEXT_ON] );
+    mBMdrawTextOff   = MyButton.getButtonBackground( this, res, izons[IC_TEXT] );
     // mBMsnap         = MyButton.getButtonBackground( this, res, izons[IC_SNAP] );
 
     // if ( ! TDLevel.overNormal ) mNrButton3 -= 2; // item_properties point_actions 
@@ -2575,6 +2587,8 @@ public class DrawingWindow extends ItemDrawer
 
     myView = getWindow().getDecorView();
     myView.setSystemUiVisibility( TDSetting.mUiVisibility );
+    // myView.setFocusable( true ); // these two are not necessary for the keyboard
+    // myView.setFocusableInTouchMode( true );
 
     TDandroid.setScreenOrientation( this );
 
@@ -3229,10 +3243,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doPause() // saveInstanceToData
   {
-    if ( mLabelPath != null ) {
-      mLabelPath = null;
-      hideSoftKeyboard();
-    }
+    checkLabelPath();
     switchZoomCtrl( 0 );
     mDrawingSurface.setDrawing( false );
     if ( mPid >= 0 ) {
@@ -5045,7 +5056,6 @@ public class DrawingWindow extends ItemDrawer
                 // TDLog.v("make label path at " + xs + " " + ys );
                 // new DrawingLabelDialog( mActivity, this, xs, ys ).show();
                 mLabelPath = makeLabelPath( "", xs, ys, DrawingLevel.LEVEL_DEFAULT );
-                // open keyboard
                 showSoftKeyboard();
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
                 new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
@@ -5180,11 +5190,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchDown( float xc, float yc, float xs, float ys )
   {
-    if ( mLabelPath != null ) {
-      mLabelPath = null; // end entering label text
-      hideSoftKeyboard();
-      return true;
-    }
+    if ( checkLabelPath() ) return true;
     HBXP_PointDown = false; // HBXP
     mDrawingSurface.endEraser();
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
@@ -7202,6 +7208,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public boolean onLongClick( View view ) 
   {
+    checkLabelPath();
     Button b = (Button)view;
     if ( TDLevel.overAdvanced && BTN_DOWNLOAD < mNrButton1 && b == mButton1[ BTN_DOWNLOAD ] ) {
       if ( mDataDownloader != null ) { // TH2EDIT added this test 
@@ -7345,6 +7352,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onClick( View view )
   {
+    checkLabelPath();
     if ( onMenu ) {
       closeMenu();
       return;
@@ -7407,6 +7415,12 @@ public class DrawingWindow extends ItemDrawer
         // }
       } else if ( ( ! mTh2Edit) && k2 < mNrButton2 && b == mButton2[k2++] ) { // SPLAYS TH2EDIT
         toggleSplayMode();
+      } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { //  TEXT label point
+        if ( saveTool() ) {
+          setTextButton( true );
+        } else {
+          TDLog.v("TEXT label point: failed to set");
+        }
       } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
         toggleButtonContinue(); 
       }
@@ -8485,9 +8499,11 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // cannot intercept arrow-down ley event
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
+    // TDLog.v("on key down: code " + code );
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
@@ -8499,12 +8515,18 @@ public class DrawingWindow extends ItemDrawer
         takeScreenshot( mDrawingSurface );
         return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+        return true;
       default:
-        TDLog.e( "key down: code " + code );
+        // TDLog.v( "key down: code " + code );
         if ( mLabelPath != null ) {
           int code_point = event.getUnicodeChar();
-          // TDLog.v("event " + code_point );
-          mLabelPath.addTextChar( Character.toChars( code_point ) );
+          // TDLog.v("key event unicode " + code_point );
+          // TODO suppress invalid characters
+          if ( code == KeyEvent.KEYCODE_DEL ) {
+            mLabelPath.delTextChar( );
+          } else {
+            mLabelPath.addTextChar( Character.toChars( code_point ) );
+          }
         }
     }
     return false;
@@ -8916,6 +8938,7 @@ public class DrawingWindow extends ItemDrawer
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    checkLabelPath();
     if ( mMenu == (ListView)parent ) { // MENU
       handleMenu( pos );
     }
@@ -8931,6 +8954,7 @@ public class DrawingWindow extends ItemDrawer
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    checkLabelPath();
     if ( mMenu == (ListView)parent ) { // MENU
       return handleMenuLongClick( pos );
     }
@@ -10539,6 +10563,31 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("hide soft keyboard");
     InputMethodManager imm = getSystemService( InputMethodManager.class );
     imm.hideSoftInputFromWindow( myView.getWindowToken(), 0 );
+  }
+
+  /** check if the label-path contains some text and delete it if it is empty
+   * @return true if the label path is not null
+   */
+  private boolean checkLabelPath()
+  {
+    if ( mLabelPath == null ) {
+      // TDLog.v("check label path: null");
+      return false;
+    }
+    // TDLog.v("check label path: <" + mLabelPath.mPointText + ">" );
+    if ( TDString.isNullOrEmpty( mLabelPath.mPointText ) ) { // delete the label point
+      mDrawingSurface.deletePath( mLabelPath ); 
+    }
+    mLabelPath = null; // end entering label text
+    hideSoftKeyboard();
+    restoreTool();
+    setTextButton( false );
+    return true;
+  }
+
+  private void setTextButton( boolean on )
+  {
+    setButton2( BTN_TEXT, on ? mBMdrawTextOn : mBMdrawTextOff );
   }
 
 }

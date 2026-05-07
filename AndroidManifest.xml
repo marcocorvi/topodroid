@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="604038"
-      android:versionName="6.4.38"
+      android:versionCode="604040"
+      android:versionName="6.4.40"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -242,6 +242,7 @@
           android:configChanges="orientation|screenSize"
           android:exported="true"
           >
+          <!-- android:windowSoftInputMode="stateVisible" -->
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
