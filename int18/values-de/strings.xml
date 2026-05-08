@@ -1067,6 +1067,7 @@
     <string name="help_color">Hilfszug-Farben löschen</string>
     <string name="help_cwd">Aktueller Arbeitsordner</string>
     <string name="help_join">Linie fortsetzen</string>
+    <!-- TODO string name="help_text">Insert text</string -->
     <!-- UNUSED string name="help_continue">Linien fortsetzen</string -->
     <!-- UNUSED string name="help_contour">Konturen bearbeiten</string -->
     <string name="help_current_station">Gespeicherte Messpunkte</string>

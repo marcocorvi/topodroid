@@ -1055,6 +1055,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
   <string name="help_cwd">Diretório base atual</string>
   <string name="help_join">Unir linhas</string>
+    <!-- TODO string name="help_text">Insert text</string -->
   <!-- UNUSED string name="help_continue">Continuar desenho de uma linha</string -->
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
   <string name="help_current_station">Bases gravadas</string>

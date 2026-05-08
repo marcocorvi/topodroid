@@ -1140,6 +1140,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_color">Colores claros</string>
     <string name="help_cwd">Carpeta de trabajo actual</string>
     <string name="help_join">Unir líneas</string>
+    <!-- TODO string name="help_text">Insert text</string -->
     <!-- UNUSED string name="help_continue">Continuar el dibujo de una línea</string -->
     <!-- UNUSED string name="help_contour">Editar Contorno</string -->
     <string name="help_current_station">Última estación guardada</string>

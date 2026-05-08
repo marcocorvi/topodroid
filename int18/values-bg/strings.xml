@@ -1133,6 +1133,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_color">Изчистване на цветовете</string>
     <string name="help_cwd">Настояща работна папка</string>
     <string name="help_join">Обединение на линии</string>
+    <!-- TODO string name="help_text">Insert text</string -->
     <!-- UNUSED string name="help_continue">Continue drawing a line</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Запазени репери</string>

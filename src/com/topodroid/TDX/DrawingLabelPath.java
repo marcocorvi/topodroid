@@ -35,6 +35,7 @@ public class DrawingLabelPath extends DrawingPointPath
 {
   private final static float PDF_SCALE = 0.4f;
   private float mTextSize;
+  private Path mCrossPath; // a cross when the text is empty
 
   /** cstr
    * @param text     label text
@@ -61,6 +62,11 @@ public class DrawingLabelPath extends DrawingPointPath
     // makeStraightPath( 0, 0, 20*mPointText.length(), 0, cx, cy );
     mTextSize = TDSetting.mLabelSize;
     doSetScale( mScale );
+    mCrossPath = new Path();
+    mCrossPath.moveTo( cx-1, cy );
+    mCrossPath.lineTo( cx+1, cy );
+    mCrossPath.moveTo( cx, cy+1 );
+    mCrossPath.lineTo( cx, cy-1 );
   }
 
   /** deserialize from an input stream
@@ -122,6 +128,15 @@ public class DrawingLabelPath extends DrawingPointPath
   //   }
   // }
 
+  private void drawOnCanvas( Canvas canvas, Path path )
+  {
+    if ( mPointText.length() == 0 ) {
+      canvas.drawPath( path, mPaint );
+    } else {
+      canvas.drawTextOnPath( mPointText, path, 0f, 0f, mPaint );
+    }
+  }
+
   /** draw the label on the screen
    * @param canvas   canvas
    * @param bbox     clipping rectangle
@@ -131,7 +146,11 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw " + mPointText );
-      canvas.drawTextOnPath( mPointText, mPath, 0f, 0f, mPaint );
+      if ( mPointText.length() == 0 ) {
+        drawOnCanvas( canvas, mCrossPath );
+      } else {
+        drawOnCanvas( canvas, mPath );
+      }
     }
   }
 
@@ -151,14 +170,18 @@ public class DrawingLabelPath extends DrawingPointPath
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
       if ( TDSetting.mScalableLabel ) mTextSize = TDSetting.mLabelSize * 0.1f / scale;
       setTextSize( );
-      mTransformedPath = new Path( mPath );
+      if ( mPointText.length() == 0 ) { 
+        mTransformedPath = new Path( mCrossPath );
+      } else {
+        mTransformedPath = new Path( mPath );
+      }
       if ( mLandscape ) {
         Matrix rot = new Matrix();
 	rot.postRotate( 90, cx, cy );
         mTransformedPath.transform( rot );
       }
       mTransformedPath.transform( matrix );
-      canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, mPaint );
+      drawOnCanvas( canvas, mTransformedPath );
     }
   }
 
@@ -178,7 +201,11 @@ public class DrawingLabelPath extends DrawingPointPath
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
       setTextSize();
-      mTransformedPath = new Path( mPath );
+      if ( mPointText.length() == 0 ) { 
+        mTransformedPath = new Path( mCrossPath );
+      } else {
+        mTransformedPath = new Path( mPath );
+      }
       if ( mLandscape ) {
         Matrix rot = new Matrix();
         rot.postRotate( 90, cx, cy );
@@ -187,7 +214,7 @@ public class DrawingLabelPath extends DrawingPointPath
       mTransformedPath.transform( matrix );
       Paint paint = xorPaint( mPaint, xor_color );
       paint.setTextSize( PDF_SCALE * paint.getTextSize() );
-      canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, paint );
+      drawOnCanvas( canvas, mTransformedPath );
     }
   }
 

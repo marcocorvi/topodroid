@@ -38,6 +38,8 @@ public class TDAnalytics
   public static final String NUM           = "Nnum";
   public static final String LOOP_CLOSURE  = "Nloop";
   public static final String TRILATERATION = "Ntrilat";
+  public static final String DIVING        = "Ndive";
+  public static final String BLUNDER       = "Nblunder";
 
   public static final String PLOT_NEW      = "1plot";  // new plot
   public static final String PLOT_FLIP     = "1flip";  // flipProfile
@@ -94,6 +96,7 @@ public class TDAnalytics
   public static final String TH2_EDIT  = "Mth2edit";
   public static final String CAVE3D    = "Mcave3d";
   public static final String PALETTE   = "Mpalette";
+  public static final String KEYBOARD  = "Mkbdr";
 
   public static final String EXPORT_TH  = "1th";  // Therion
   public static final String EXPORT_DAT = "1dat"; // Comapass

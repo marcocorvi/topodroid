@@ -1130,6 +1130,7 @@
     <string name="help_color">Pulisci i colori degli splay</string>
     <string name="help_cwd">Folder di lavoro</string>
     <string name="help_join">Unione linee</string>
+    <!-- TODO string name="help_text">Insert text</string -->
     <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>

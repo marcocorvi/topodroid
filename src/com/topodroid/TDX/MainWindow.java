@@ -1263,6 +1263,9 @@ public class MainWindow extends Activity
         // }
       }
     }
+    if ( TDSetting.mDivingMode ) TopoDroidApp.updateAnalytic( TDAnalytics.DIVING );
+    if ( TDSetting.mBlunderShot ) TopoDroidApp.updateAnalytic( TDAnalytics.BLUNDER );
+    if ( TDSetting.mKeyboard ) TopoDroidApp.updateAnalytic( TDAnalytics.KEYBOARD );
     TopoDroidApp.checkAnalytics( this );
   }
 

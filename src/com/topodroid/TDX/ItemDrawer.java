@@ -43,7 +43,7 @@ abstract class ItemDrawer extends Activity
   protected int mLinePointStep = 1;
 
   protected int mSymbol = SymbolType.LINE; // kind of symbol being drawn
-  protected int mSavedSymbol = SymbolType.LINE; 
+  protected int mSavedSymbol = SymbolType.UNDEF;
 
   // -----------------------------------------------------------
   static final int NR_RECENT = 6; // max is 6
@@ -424,6 +424,8 @@ abstract class ItemDrawer extends Activity
   {
     mSymbol = mSavedSymbol;
     mCurrentPoint = mSavedCurrentPoint;
+    mSavedCurrentPoint = -1;
+    mSavedSymbol = SymbolType.UNDEF;
     setTheTitle();
   }
 

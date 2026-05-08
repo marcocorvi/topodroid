@@ -1131,6 +1131,7 @@
     <string name="help_color">Сбросить цвет сплеев</string>
     <string name="help_cwd">Текущий рабочий каталог</string>
     <string name="help_join">Соединить линии</string>
+    <!-- TODO string name="help_text">Insert text</string -->
     <!-- UNUSED string name="help_continue">Продолжить рисовать линию</string -->
     <!-- UNUSED string name="help_contour">Редактировать контуры</string -->
     <string name="help_current_station">Сохраненные пикеты</string>

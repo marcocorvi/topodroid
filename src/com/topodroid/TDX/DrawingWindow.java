@@ -812,7 +812,7 @@ public class DrawingWindow extends ItemDrawer
   private Button[] mButton5; // eraser
   private int mNrButton1 = TDLevel.overNormal? NR_BUTTON1 : 8; // main-primary [8: if level <= normal]
   private int mNrButton1x;
-  private int mNrButton2 = TDLevel.overNormal? NR_BUTTON2 : 7; // draw
+  private int mNrButton2 = TDLevel.overNormal? NR_BUTTON2 : 8; // draw
   private int mNrButton3 = TDLevel.overAdvanced ? NR_BUTTON3 : ( TDLevel.overNormal ? 8 : 6); // edit [6 if level <= normal, 8 if level <= advanced]
   private int mNrButton5 = NR_BUTTON5; // erase
   private MyHorizontalButtonView mButtonView1;
@@ -1527,6 +1527,7 @@ public class DrawingWindow extends ItemDrawer
   void doClose()
   {
     // TDLog.v( "menu close ...");
+    checkLabelPath();
     super.onBackPressed();
   }
 
@@ -4728,6 +4729,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchUp( float xc, float yc, float xs, float ys )
   {
+    if ( checkLabelPath() ) return true;
     if ( onMenu ) {
       closeMenu();
       return true;
@@ -5053,10 +5055,22 @@ public class DrawingWindow extends ItemDrawer
               xs = mSaveX/mZoom - mOffset.x;
               ys = mSaveY/mZoom - mOffset.y;
               if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
-                // TDLog.v("make label path at " + xs + " " + ys );
-                // new DrawingLabelDialog( mActivity, this, xs, ys ).show();
-                mLabelPath = makeLabelPath( "", xs, ys, DrawingLevel.LEVEL_DEFAULT );
-                showSoftKeyboard();
+                // TDLog.v("make label path at " + xs + " " + ys + " / " + ysmax );
+                if ( mSavedCurrentPoint == -1 ) {
+                  new DrawingLabelDialog( mActivity, this, xs, ys ).show();
+                } else {
+                  int ysmax = (int)(TopoDroidApp.mDisplayHeight * 0.67f );
+                  if ( mSaveY > ysmax ) {
+                    int sy = (int)(TopoDroidApp.mDisplayHeight * 0.33f );
+                    mSaveY -= sy;
+                    mOffset.y -= sy / mZoom; 
+                    // ys = mSaveY/mZoom - mOffset.y;
+                    // saveReference( mPlot, mPid ); // save ref in DB
+                    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+                  }
+                  mLabelPath = makeLabelPath( "", xs, ys, DrawingLevel.LEVEL_DEFAULT );
+                  showSoftKeyboard();
+                }
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
                 new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
               } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
@@ -5190,7 +5204,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchDown( float xc, float yc, float xs, float ys )
   {
-    if ( checkLabelPath() ) return true;
+    if ( mLabelPath != null ) return true;
     HBXP_PointDown = false; // HBXP
     mDrawingSurface.endEraser();
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
@@ -5323,6 +5337,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event )
   {
+    if ( mLabelPath != null ) return true;
     // TDLog.v( "STYLUS action MOVE mode " + mMode + " touch " + mTouchMode + " (" + xc + " " + yc + ") " );
     if ( mTouchMode == MODE_MOVE) {
       float x_shift = xc - mSaveX; // compute shift
@@ -8507,15 +8522,15 @@ public class DrawingWindow extends ItemDrawer
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
-        return true;
+        break; // return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
-        return true;
+        break; // return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
         takeScreenshot( mDrawingSurface );
-        return true;
+        break; // return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
-        return true;
+        break; // return true;
       default:
         // TDLog.v( "key down: code " + code );
         if ( mLabelPath != null ) {
@@ -8527,9 +8542,14 @@ public class DrawingWindow extends ItemDrawer
           } else {
             mLabelPath.addTextChar( Character.toChars( code_point ) );
           }
+          // mDrawingSurface.setBackgroundColor( 0 ); // this makes grey for all modes
+          // mDrawingSurface.setBackgroundDrawable( null ); // this makes grey for all modes
+          // getWindow().setBackgroundDrawableResource( R.drawable.black );
+
+          // return true;
         }
     }
-    return false;
+    return false; // do not track the event to its key-up
   }
 
   // ---------------------------------------------------------
@@ -8662,6 +8682,7 @@ public class DrawingWindow extends ItemDrawer
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
+      doClose();
     } else if ( p++ == pos ) { // EXPORT - SAVE
     } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
     } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
@@ -8696,10 +8717,10 @@ public class DrawingWindow extends ItemDrawer
         if ( TDLevel.overNormal ) {
           new PlotListDialog( mActivity, null, mApp, this ).show();
         } else {
-          super.onBackPressed();
+          doClose();
         }
       } else { // close
-        super.onBackPressed();
+        doClose();
       }
     } else if ( p++ == pos ) { // EXPORT - SAVE
       if ( mTh2Edit ) { // TH2EDIT export Therion
@@ -10553,7 +10574,10 @@ public class DrawingWindow extends ItemDrawer
   { 
     // TDLog.v("shot soft keyboard");
     InputMethodManager imm = getSystemService( InputMethodManager.class );
-    imm.showSoftInput( myView, InputMethodManager.SHOW_IMPLICIT );
+    // imm.showSoftInput( myView, InputMethodManager.SHOW_IMPLICIT ); // these two do not work for the second label point
+    // imm.showSoftInput( myView, InputMethodManager.SHOW_FORCED );
+    imm.toggleSoftInput( InputMethodManager.SHOW_FORCED, 0 ); // this works
+    myView.requestFocus();
   }
 
   /** hide the soft keyboard for the drawing surface (view)
@@ -10562,7 +10586,8 @@ public class DrawingWindow extends ItemDrawer
   { 
     // TDLog.v("hide soft keyboard");
     InputMethodManager imm = getSystemService( InputMethodManager.class );
-    imm.hideSoftInputFromWindow( myView.getWindowToken(), 0 );
+    imm.hideSoftInputFromWindow( myView.getWindowToken(), 0 ); // this works
+    // imm.toggleSoftInput( 0, InputMethodManager.SHOW_FORCED ); // this too works - and it removes the line glitch, sometimes
   }
 
   /** check if the label-path contains some text and delete it if it is empty

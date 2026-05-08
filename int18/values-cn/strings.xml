@@ -1135,6 +1135,7 @@
     <string name="help_color">清除副线颜色</string>
     <string name="help_cwd">当前工作目录</string>
     <string name="help_join">加入线</string>
+    <!-- TODO string name="help_text">Insert text</string -->
     <!-- UNUSED string name="help_continue">继续画线</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">保存测点</string>
