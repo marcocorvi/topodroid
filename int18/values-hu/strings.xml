@@ -1138,7 +1138,7 @@
     <string name="help_color">Mérés szín törlése</string>
     <string name="help_cwd">Jelenlegi munka könyvtár</string>
     <string name="help_join">Vonal csatlakozás</string>
-    <!-- TODO string name="help_text">Insert text</string -->
+    <string name="help_text">Szöveg beillesztés</string>
     <!-- UNUSED string name="help_continue">Vonal folytatása</string -->
     <!-- UNUSED string name="help_contour">Körvonal szerkesztése</string -->
     <string name="help_current_station">Elmentett mérési pontok</string>
