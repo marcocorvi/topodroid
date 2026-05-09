@@ -130,6 +130,7 @@
   <!-- string name="TopoDroidAlertDialog"></string -->
   <string name="TopoDroidPerms" translatable="false">page_perms.htm</string>
   <string name="UndeleteDialog" translatable="false">page_undelete.htm</string>
+  <string name="ShotPasteDialog" translatable="false">page_shot_paste.htm</string>
   <string name="TDPrefSearchDialog" translatable="false">page_pref_search.htm</string>
 
   <string name="SetupTextSizeDialog" translatable="false">page_setup.htm</string>

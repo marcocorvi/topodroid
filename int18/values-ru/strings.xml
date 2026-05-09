@@ -754,6 +754,7 @@
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
     <string name="undelete_paste_text">Восстановить/вставить записи</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Замеры</string>
     <string name="undelete_overshoot">Сл.длинные замеры</string>
     <string name="undelete_check">Проверочные</string>
@@ -880,6 +881,7 @@
     <string name="button_current"   >Текущий</string>
     <string name="button_delete"    >Удалить</string>
     <string name="button_duplicate" >Дубликаты</string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <string name="button_settime"   >Установить время</string>
     <string name="button_surface"   >Поверхностные</string>
     <string name="button_splay"    copyable="all">Сплей</string>

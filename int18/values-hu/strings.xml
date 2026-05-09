@@ -758,6 +758,7 @@
     <string name="toggle_ok">DistoX kalibrációs üzemmód váltás</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
     <string name="undelete_paste_text">Elem visszaállít/beilleszt</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Mérések</string>
     <string name="undelete_overshoot">Túlmérések</string>
     <string name="undelete_check">Ellenőrző mérések</string>
@@ -885,6 +886,7 @@
     <string name="button_current"   >Aktív</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <string name="button_settime"   >Óra beállítás</string>
     <string name="button_surface"   >Felület</string>
     <string name="button_splay"    copyable="all">Sün</string>

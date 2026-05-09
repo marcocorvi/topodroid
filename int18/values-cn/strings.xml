@@ -758,6 +758,7 @@
     <string name="toggle_ok">触发DistoX校准模式</string>
     <string name="undelete_text">点击项目恢复</string>
     <string name="undelete_paste_text">恢复/粘贴 项目</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">测线</string>
     <string name="undelete_overshoot">无效测线</string>
     <string name="undelete_check">检测</string>
@@ -885,6 +886,7 @@
     <string name="button_current"   >激活    </string>
     <string name="button_delete"    >删除    </string>
     <string name="button_duplicate" >副本 </string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface"   >表面   </string>
     <!-- TODO string name="button_splay"    copyable="all">Splay</string -->

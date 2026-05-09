@@ -758,6 +758,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="toggle_ok">Превключен в режим на калибриране DistoX</string>
     <string name="undelete_text">Възстановяване</string>
     <string name="undelete_paste_text">Възстановяване/поставяне</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Измервания</string>
     <string name="undelete_overshoot">Повишени измервания</string>
     <string name="undelete_check">Проверки</string>
@@ -885,6 +886,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_current">Активен</string>
     <string name="button_delete">Изтрий</string>
     <string name="button_duplicate">Дубликат</string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <string name="button_settime">Настроване на време</string>
     <string name="button_surface">Повърхност</string>
     <string name="button_no_extend">Без удължаване</string>

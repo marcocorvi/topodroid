@@ -715,6 +715,7 @@
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
     <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
     <string name="undelete_paste_text">Wiederherstellen</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Messungen</string>
     <string name="undelete_overshoot">Zu lange Messungen</string>
     <string name="undelete_check">Kalibrierungstests</string>
@@ -834,6 +835,7 @@
     <string name="button_current">Hier fortsetzen</string>
     <string name="button_delete">Löschen</string>
     <string name="button_duplicate">Duplizieren</string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <!-- TODO string name="button_settime"   >Set time</string -->
     <string name="button_surface">Oberfläche</string>
     <!-- TODO string name="button_splay"    copyable="all">Splay</string -->

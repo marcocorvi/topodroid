@@ -765,6 +765,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="toggle_ok">Cambiar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
     <string name="undelete_paste_text">Restaurar / Pegar elementos</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Toma</string>
     <string name="undelete_overshoot">Exceso</string>
     <string name="undelete_check">Verificar</string>
@@ -891,6 +892,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_current"   >Activa</string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <string name="button_settime">Configurar hora</string>
     <string name="button_surface"   >Superficie   </string>
     <!-- TODO string name="button_splay"    copyable="all">Splay</string -->

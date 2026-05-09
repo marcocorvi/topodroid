@@ -706,6 +706,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="toggle_ok">Estado de calibração da DistoX trocado</string>
   <string name="undelete_text">Toque no item para restaurá-lo</string>
   <string name="undelete_paste_text">Recuperar/colar itens</string>
+    <!-- TODO string name="shot_paste_text">Shot paste</string -->
   <string name="undelete_shot">Medidas</string>
   <string name="undelete_overshoot">Medidas erradas</string>
   <string name="undelete_check">Verificações</string>
@@ -824,6 +825,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_current">Selecionar</string>
   <string name="button_delete">Apagar     </string>
   <string name="button_duplicate">Duplicadas</string>
+    <!-- TODO string name="button_empty"     >Empty</string -->
     <!-- TODO string name="button_settime"   >Set time</string -->
   <string name="button_surface">Superfície</string>
     <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
