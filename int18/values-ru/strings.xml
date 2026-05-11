@@ -7,7 +7,7 @@
     <string name="ai_no_internet">Нет подключения к интернету.</string>
     <string name="ai_prompt">Введите свой вопрос</string>
     <string name="ai_invalid_key">Недействительный ключ API</string>
-    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
+    <string name="ai_chat_reset">Чат сброшен</string>
     <string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
@@ -754,7 +754,7 @@
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
     <string name="undelete_paste_text">Восстановить/вставить записи</string>
-    <!-- TODO string name="shot_paste_text">Shot paste</string -->
+    <string name="shot_paste_text">Вставить замер</string>
     <string name="undelete_shot">Замеры</string>
     <string name="undelete_overshoot">Сл.длинные замеры</string>
     <string name="undelete_check">Проверочные</string>
@@ -881,7 +881,7 @@
     <string name="button_current"   >Текущий</string>
     <string name="button_delete"    >Удалить</string>
     <string name="button_duplicate" >Дубликаты</string>
-    <!-- TODO string name="button_empty"     >Empty</string -->
+    <string name="button_empty"     >Пустой</string>
     <string name="button_settime"   >Установить время</string>
     <string name="button_surface"   >Поверхностные</string>
     <string name="button_splay"    copyable="all">Сплей</string>
@@ -1133,7 +1133,7 @@
     <string name="help_color">Сбросить цвет сплеев</string>
     <string name="help_cwd">Текущий рабочий каталог</string>
     <string name="help_join">Соединить линии</string>
-    <!-- TODO string name="help_text">Insert text</string -->
+    <string name="help_text">Вставить текст</string>
     <!-- UNUSED string name="help_continue">Продолжить рисовать линию</string -->
     <!-- UNUSED string name="help_contour">Редактировать контуры</string -->
     <string name="help_current_station">Сохраненные пикеты</string>
