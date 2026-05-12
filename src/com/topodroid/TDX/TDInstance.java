@@ -105,6 +105,10 @@ public class TDInstance
    */
   public static boolean isDeviceDiscoX() { return deviceA != null && deviceA.isDiscoX(); }
 
+  /** @return true if the primary device is set and is a JedEye
+   */
+  public static boolean isDeviceJedeye() { return deviceA != null && deviceA.isJedeye(); }
+
   /** @return true if the primary device is set and is of type BRIC (BRIC4 or BRIC5)
    */
   public static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
@@ -189,7 +193,7 @@ public class TDInstance
   /** @return true if the primary device is LE
    * SIWEI_TIAN
    */
-  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE() || deviceA.isCavway() ); }
+  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE() || deviceA.isCavway() || deviceA.isJedeye() ); }
 
   public static boolean isDeviceCavway()   { return deviceA != null && deviceA.isCavway(); }
 
@@ -199,7 +203,7 @@ public class TDInstance
    * @param device   bluetooth device
    * SIWEI_TIAN
    */
-  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE() || device.isCavway() ); }
+  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE() || device.isCavway() || device.isJedeye() ); }
 
   /** @return true if the connection is set in continuous mode
    */

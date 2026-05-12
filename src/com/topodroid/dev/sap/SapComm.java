@@ -124,7 +124,7 @@ public class SapComm extends BleComm
   // CONNECTION AND DATA HANDLING MUST RUN ON A SEPARATE THREAD
   // 
 
-  private boolean assertDevice( Device device )
+  protected boolean assertDevice( Device device )
   {
     if ( device.isSap5() ) {
       assert( mServiceUuid   == SapConst.SAP5_SERVICE_UUID );

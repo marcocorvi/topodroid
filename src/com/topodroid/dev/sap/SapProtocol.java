@@ -105,7 +105,7 @@ public class SapProtocol extends TopoDroidProtocol
         if ( (buffer[2] & 0x80) == 0x80 ) buffer[0] &= 0xbf; // clear 0x40
       }
       return handlePacket( buffer );
-    } else if ( Device.isSap6( mDeviceType ) ) { // FIXME_SAP6
+    } else if ( Device.isSap6( mDeviceType ) || Device.isJedeye( mDeviceType ) ) { // FIXME_SAP6 // JedEye reuses SAP6 wire format
       {
         StringBuilder sb = new StringBuilder();
         for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );

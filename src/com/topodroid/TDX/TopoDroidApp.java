@@ -50,6 +50,7 @@ import com.topodroid.dev.distox2.DeviceX310Details;
 import com.topodroid.dev.cavway.CavwaySyncDateTimeTask;
 import com.topodroid.dev.sap.SapComm;
 import com.topodroid.dev.discox.DiscoXComm;
+import com.topodroid.dev.jedeye.JedeyeComm;
 import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.PairingRequest; // FIXME DROP_PAIRING
@@ -923,6 +924,10 @@ public class TopoDroidApp extends Application
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new CavwayComm( this,this, address, bt_device );
+      } else if ( TDInstance.isDeviceJedeye() ) {
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
+        mComm = new JedeyeComm( this, address, bt_device );
       }
     // }
   }
@@ -1896,6 +1901,8 @@ public class TopoDroidApp extends Application
           mComm = new SapComm( this, address, bt_device, 6 ); 
         } else if ( TDInstance.isDeviceBric() ) {
           mComm = new BricComm( this, this, address, bt_device );
+        } else if ( TDInstance.isDeviceJedeye() ) {
+          mComm = new JedeyeComm( this, address, bt_device );
         }
       } else { // addr, null, null
         // boolean create = Device.isBle( TDInstance.deviceType() );
