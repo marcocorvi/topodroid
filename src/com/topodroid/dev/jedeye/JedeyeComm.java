@@ -18,7 +18,6 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.sap.SapComm;
 
-import android.content.Context;
 import android.bluetooth.BluetoothDevice;
 
 public class JedeyeComm extends SapComm
