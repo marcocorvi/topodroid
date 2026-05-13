@@ -37,6 +37,7 @@ page_bric_calib.htm
 page_bric_info.htm
 page_bric_memory.htm
 page_sap.htm
+page_jedeye.htm
 page_memory.htm
 page_packets.htm
 manual04.htm

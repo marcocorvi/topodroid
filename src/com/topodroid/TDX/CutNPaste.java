@@ -618,7 +618,12 @@ public class CutNPaste
       ww = textview4.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 */
-    } else if ( TDInstance.deviceType() == Device.DISTO_SAP6 ) {
+    } else if ( TDInstance.deviceType() == Device.DISTO_SAP6 || TDInstance.isDeviceJedeye() ) {
+      // JedEye speaks the SAP6 wire format and accepts the same single-byte
+      // command set, so it shares the SAP6 remote-control popup. The
+      // sendSap6Command() path routes via mComm.sendCommand(), which
+      // JedeyeComm inherits from SapComm; the swapped GATT UUIDs route the
+      // bytes to the JedEye command characteristic.
       // ----- TURN LASER ON
       //
       text = res.getString(R.string.remote_on);

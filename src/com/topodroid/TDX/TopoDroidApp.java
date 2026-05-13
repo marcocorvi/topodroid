@@ -961,10 +961,15 @@ public class TopoDroidApp extends Application
         // TDLog.v( "bt button over advanced : SAP5");
       } else if ( TDInstance.isDeviceSap6() ) { // FIXME_SAP6
         TDLog.v( "SAP6 do bt button");
-        // if ( TDInstance.hasDeviceRemoteControl() ) { // test not necessary 
+        // if ( TDInstance.hasDeviceRemoteControl() ) { // test not necessary
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
           return;
         // }
+      } else if ( TDInstance.isDeviceJedeye() ) {
+        // JedEye speaks the SAP6 wire format; reuse the SAP6 BT popup so the
+        // user can drive LASER_ON / LASER_OFF / MEASURE / DEVICE_OFF remotely.
+        CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
+        return;
       } else { // DistoX
         // TDLog.v( "bt button over advanced : DistoX");
         if ( ! isDownloading() ) {
