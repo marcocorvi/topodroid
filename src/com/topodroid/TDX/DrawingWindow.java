@@ -504,6 +504,7 @@ public class DrawingWindow extends ItemDrawer
   private Activity mActivity = null;
   private int mBTstatus; // status of bluetooth buttons (download and reset)
   private DrawingLabelPath mLabelPath = null; // temporary label with text-editing
+  private boolean isTextOn = false; // whether button "text" is on
   private View myView;
 
   // long getSID() { return TDInstance.sid; }
@@ -7367,16 +7368,21 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onClick( View view )
   {
-    checkLabelPath();
     if ( onMenu ) {
+      checkLabelPath();
       closeMenu();
       return;
     }
-    // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onClick() " + view.toString() );
-    // TDLog.Log( TDLog.LOG_PLOT, "DrawingWindow onClick() point " + mCurrentPoint + " symbol " + mSymbol );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow on Click() " + view.toString() );
+    // TDLog.Log( TDLog.LOG_PLOT, "DrawingWindow on Click() point " + mCurrentPoint + " symbol " + mSymbol );
     int dismiss = dismissPopups();
-
     Button b = (Button)view;
+    if ( mMode != MODE_DRAW || b != mButton2[ BTN_TEXT ] ) {
+      // TDLog.v("mode not DRAW or button not TEXT");
+      checkLabelPath();
+    // } else {
+    //   TDLog.v("mode DRAW and button TEXT - is Text On " + isTextOn );
+    }
     if ( b == mMenuImage ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {
         mMenu.setVisibility( View.GONE );
@@ -7431,10 +7437,15 @@ public class DrawingWindow extends ItemDrawer
       } else if ( ( ! mTh2Edit) && k2 < mNrButton2 && b == mButton2[k2++] ) { // SPLAYS TH2EDIT
         toggleSplayMode();
       } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { //  TEXT label point
-        if ( saveTool() ) {
-          setTextButton( true );
+        if ( isTextOn ) {
+          restoreTool();
+          setTextButton( false );
         } else {
-          TDLog.v("TEXT label point: failed to set");
+          if ( saveTool() ) {
+            setTextButton( true );
+          } else {
+            TDLog.e("TEXT label point: failed to set");
+          }
         }
       } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
         toggleButtonContinue(); 
@@ -8682,7 +8693,15 @@ public class DrawingWindow extends ItemDrawer
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      doClose();
+      if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
+        if ( TDLevel.overNormal ) {
+          new PlotListDialog( mActivity, null, mApp, this ).show();
+        } else {
+          doClose();
+        }
+      } else { // close
+        doClose();
+      }
     } else if ( p++ == pos ) { // EXPORT - SAVE
     } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
     } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
@@ -8713,15 +8732,7 @@ public class DrawingWindow extends ItemDrawer
     closeMenu();
     int p = 0;
     if ( p++ == pos ) {
-      if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
-        if ( TDLevel.overNormal ) {
-          new PlotListDialog( mActivity, null, mApp, this ).show();
-        } else {
-          doClose();
-        }
-      } else { // close
-        doClose();
-      }
+      doClose();
     } else if ( p++ == pos ) { // EXPORT - SAVE
       if ( mTh2Edit ) { // TH2EDIT export Therion
         // int th_pos = 0; // Therion index, unused? - 20230118 local var "th_pos"
@@ -10406,6 +10417,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setHighlight( int type, int index )
   {
+    checkLabelPath();
     // TDLog.v("PLOT highlight " + type + " from " + highlightType + "/" + highlightIndex + " to " + index );
     if ( highlightIndex >= 0 && highlightIndex < NR_RECENT ) { // clear previous highlight
       switch ( highlightType ) { // switch off highlighted symbol
@@ -10595,6 +10607,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean checkLabelPath()
   {
+    setTextButton( false );
     if ( mLabelPath == null ) {
       // TDLog.v("check label path: null");
       return false;
@@ -10606,13 +10619,15 @@ public class DrawingWindow extends ItemDrawer
     mLabelPath = null; // end entering label text
     hideSoftKeyboard();
     restoreTool();
-    setTextButton( false );
     return true;
   }
 
   private void setTextButton( boolean on )
   {
-    setButton2( BTN_TEXT, on ? mBMdrawTextOn : mBMdrawTextOff );
+    if ( isTextOn != on ) {
+      setButton2( BTN_TEXT, on ? mBMdrawTextOn : mBMdrawTextOff );
+      isTextOn = on;
+    }
   }
 
 }

@@ -48,8 +48,8 @@ class UndeleteDialog extends MyDialog
   private long mSid;
   private final DataHelper mData;
   private final ShotWindow mParent;
-  private DBlockBuffer mDBlockBuffer = null;
-  private CheckBox     mCBbufferSortByID;
+  // private DBlockBuffer mDBlockBuffer = null;
+  // private CheckBox     mCBbufferSortByID;
 
   // private Button mBtnCancel;
   private Button mBtnStatus;
@@ -93,13 +93,13 @@ class UndeleteDialog extends MyDialog
    */
   UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
                          List< DBlock > shots1, List< DBlock > shots2, List< DBlock > shots3, List< DBlock > shots4,
-                         List< PlotInfo > plots, DBlockBuffer buffer )
+                         List< PlotInfo > plots ) // , DBlockBuffer buffer )
   {
     super( context, null, R.string.UndeleteDialog ); // null app
     mParent = parent;
     mData   = data;
     mSid    = sid;
-    mDBlockBuffer = buffer;
+    // mDBlockBuffer = buffer;
     if ( TDUtil.isNonEmpty(shots1) ) {
       DBlock scan_blk = null;
       long scan_leg_type = -1L;
@@ -178,14 +178,14 @@ class UndeleteDialog extends MyDialog
       return;
     } else if ( v.getId() == R.id.button_ok ) {
       recoverData();
-    } else if ( mDBlockBuffer != null && mDBlockBuffer.size() > 0 ) { 
-      TDLog.v("BUFFER append: size " + mDBlockBuffer.size() );
-      if ( v.getId() == R.id.button_buffer_copy ) {
-        appendBuffer( );
-      } else if ( v.getId() == R.id.button_buffer_move ) {
-        appendBuffer( );
-        mDBlockBuffer.clear();
-      }
+    // } else if ( mDBlockBuffer != null && mDBlockBuffer.size() > 0 ) { 
+    //   TDLog.v("BUFFER append: size " + mDBlockBuffer.size() );
+    //   if ( v.getId() == R.id.button_buffer_copy ) {
+    //     appendBuffer( );
+    //   } else if ( v.getId() == R.id.button_buffer_move ) {
+    //     appendBuffer( );
+    //     mDBlockBuffer.clear();
+    //   }
     } else {
       // TDLog.v( "UndeleteDialog onClick()" );
     }
@@ -212,25 +212,25 @@ class UndeleteDialog extends MyDialog
   //   updateList();
   // }
 
-  /** move the data from the buffer to the survey - the buffer is not cleared 
-   */
-  private void appendBuffer( )
-  {
-    TopoDroidApp.updateAnalytic( TDAnalytics.MULTIPASTE );
-    // TDLog.v("Append buffer " + mDBlockBuffer.size() );
-    if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
-    if ( mCBbufferSortByID.isChecked() ) mDBlockBuffer.sort();
-    long bid = -1L;
-    for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
-      if ( bid == -1L ) {
-        bid = mData.insertDBlockShot( mSid, blk );
-      } else {
-        mData.insertDBlockShot( mSid, blk );
-      }
-    }
-    if ( bid >= 0 ) mParent.renumberShotsFrom( bid ); // 20251205
-    mParent.updateDisplay(); // this recomputes DistoX accuracy
-  }
+  // /** move the data from the buffer to the survey - the buffer is not cleared 
+  //  */
+  // private void appendBuffer( )
+  // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.MULTIPASTE );
+  //   // TDLog.v("Append buffer " + mDBlockBuffer.size() );
+  //   if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
+  //   if ( mCBbufferSortByID.isChecked() ) mDBlockBuffer.sort();
+  //   long bid = -1L;
+  //   for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
+  //     if ( bid == -1L ) {
+  //       bid = mData.insertDBlockShot( mSid, blk );
+  //     } else {
+  //       mData.insertDBlockShot( mSid, blk );
+  //     }
+  //   }
+  //   if ( bid >= 0 ) mParent.renumberShotsFrom( bid ); // 20251205
+  //   mParent.updateDisplay(); // this recomputes DistoX accuracy
+  // }
 
   /** recover a shot or a plot
    */
@@ -289,7 +289,7 @@ class UndeleteDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
 
-    initLayout(R.layout.undelete_dialog, ((mDBlockBuffer != null)? R.string.undelete_paste_text : R.string.undelete_text ) );
+    initLayout(R.layout.undelete_dialog, /* (mDBlockBuffer != null)? R.string.undelete_paste_text : */  R.string.undelete_text );
 
     if ( mPlots  != null ) mArrayAdapter0 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mPlots );
     if ( mShots1 != null ) mArrayAdapter1 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots1 );
@@ -315,23 +315,23 @@ class UndeleteDialog extends MyDialog
       ((Button) findViewById( R.id.button_ok )).setVisibility( View.GONE );
     }
 
-    mCBbufferSortByID = (CheckBox) findViewById( R.id.buffer_sorted );
-    LinearLayout layout_buffer = (LinearLayout)findViewById( R.id.buffer );
-    if ( mDBlockBuffer != null ) {
-      int buffer_size = mDBlockBuffer.size();
-      // TDLog.v("non-null buffer: size " + buffer_size );
-      if ( buffer_size > 0 ) {
-        TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
-        text_buffer.setText( String.format( resString( R.string.buffer_size ), buffer_size ) );
-        ((Button) findViewById( R.id.button_buffer_copy )).setOnClickListener( this );
-        ((Button) findViewById( R.id.button_buffer_move )).setOnClickListener( this );
-      } else {
-        layout_buffer.setVisibility( View.GONE );
-      }
-    } else {
-      // TDLog.v("null buffer" );
-      layout_buffer.setVisibility( View.GONE );
-    }
+    // mCBbufferSortByID = (CheckBox) findViewById( R.id.buffer_sorted );
+    // LinearLayout layout_buffer = (LinearLayout)findViewById( R.id.buffer );
+    // if ( mDBlockBuffer != null ) {
+    //   int buffer_size = mDBlockBuffer.size();
+    //   // TDLog.v("non-null buffer: size " + buffer_size );
+    //   if ( buffer_size > 0 ) {
+    //     TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
+    //     text_buffer.setText( String.format( resString( R.string.buffer_size ), buffer_size ) );
+    //     ((Button) findViewById( R.id.button_buffer_copy )).setOnClickListener( this );
+    //     ((Button) findViewById( R.id.button_buffer_move )).setOnClickListener( this );
+    //   } else {
+    //     layout_buffer.setVisibility( View.GONE );
+    //   }
+    // } else {
+    //   // TDLog.v("null buffer" );
+    //   layout_buffer.setVisibility( View.GONE );
+    // }
 
     mStatus = 0;
     incrementStatus(); // calls updateList();

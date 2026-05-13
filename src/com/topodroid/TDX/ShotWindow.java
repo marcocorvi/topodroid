@@ -786,6 +786,26 @@ public class ShotWindow extends Activity
     if ( closeMenu() ) return;
   }
 
+  /** react to a user long-tap on an item (menu entry)
+   * @param parent   ...
+   * @param view     tapped view
+   * @param pos      item position
+   * @param id       ...
+   */
+  @Override 
+  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    if ( CutNPaste.dismissPopupBT() ) return true;
+    if ( mSkipItemClick ) {
+      mSkipItemClick = false;
+      return true;
+    }
+    if ( parent != null && mMenu == (ListView)parent ) {
+      return handleMenuLongClick( pos );
+    }
+    return false;
+  }
+
   /** implement user tap on a shot data
    * @param view  tapped view
    * @param pos   item position
@@ -828,21 +848,6 @@ public class ShotWindow extends Activity
       nextBlock = getNextLegShot( blk, false );
       (new ShotEditDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
     }
-  }
-
-  /** react to a user long-tap on an item (menu entry)
-   * @param parent   ...
-   * @param view     tapped view
-   * @param pos      item position
-   * @param id       ...
-   */
-  @Override 
-  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
-  {
-    // TDLog.v( "shot window: on item long click " + pos );
-    if ( closeMenu() ) return true;
-    if ( CutNPaste.dismissPopupBT() ) return true;
-    return false;
   }
 
   /** implement a user long-tap of a shot data item: start a multiselection
@@ -981,6 +986,29 @@ public class ShotWindow extends Activity
   // ----------------------------------------------------------------------------
   // MENU
 
+  private boolean handleMenuLongClick( int pos )
+  {
+    int p = 0;
+    if ( p++ == pos ) { // CLOSE
+    } else if ( p++ == pos ) { // SURVEY ACTIVITY
+    } else if ( TDLevel.overBasic && p++ == pos ) { // RECOVER | PASTE
+      TDLog.v("menu long click: Shot Paste Dialog");
+      if ( TDLevel.overAdvanced && mDBlockBuffer.size() > 0 ) {
+        closeMenu();
+        ( new ShotPasteDialog( this, this, mApp_mData, TDInstance.sid, mDBlockBuffer ) ).show();
+        return true;
+      }
+    // } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
+    // } else if ( TDLevel.overExpert && p++ == pos ) { // AUDIO
+    // } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
+    // } else if ( TDLevel.overBasic && p++ == pos ) { // 3D
+    // } else if ( TDLevel.overNormal && (! TDInstance.isDivingMode()) && p++ == pos ) { // DEVICE
+    // } else  if ( p++ == pos ) { // OPTIONS
+    // } else if ( p++ == pos ) { // HELP
+    }
+    return false;
+  }
+
   private void handleMenu( int pos )
   {
     closeMenu();
@@ -1008,19 +1036,19 @@ public class ShotWindow extends Activity
       List< DBlock > shots4 = (TDLevel.overExpert && TDSetting.mBlunderShot)? mApp_mData.selectAllShots( TDInstance.sid, TDStatus.BLUNDER ) : null;
       List< PlotInfo > plots   = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       // the list of deleted plots contains an even number of items: plan-profile pairs
-      if (  TDLevel.overAdvanced ) {
-        if ( TDUtil.isEmpty(shots1) && TDUtil.isEmpty(shots2) && TDUtil.isEmpty(shots3) && TDUtil.isEmpty(shots4) && TDUtil.isEmpty(plots) && mDBlockBuffer.size() == 0 ) {
-          TDToast.makeWarn( R.string.no_undelete_paste );
-        } else {
-          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, shots4, plots, mDBlockBuffer ) ).show();
-        }
-      } else {
-        if ( TDUtil.isEmpty(shots1) && TDUtil.isEmpty(shots2) && TDUtil.isEmpty(shots3) && TDUtil.isEmpty(shots4) && TDUtil.isEmpty(plots) ) {
-          TDToast.makeWarn( R.string.no_undelete );
-        } else {
-          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, shots4, plots, null ) ).show();
-        }
-      }
+      // if (  TDLevel.overAdvanced ) {
+      //   if ( TDUtil.isEmpty(shots1) && TDUtil.isEmpty(shots2) && TDUtil.isEmpty(shots3) && TDUtil.isEmpty(shots4) && TDUtil.isEmpty(plots) && mDBlockBuffer.size() == 0 ) {
+      //     TDToast.makeWarn( R.string.no_undelete_paste );
+      //   } else {
+      //     (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, shots4, plots, mDBlockBuffer ) ).show();
+      //   }
+      // } else {
+      //   if ( TDUtil.isEmpty(shots1) && TDUtil.isEmpty(shots2) && TDUtil.isEmpty(shots3) && TDUtil.isEmpty(shots4) && TDUtil.isEmpty(plots) ) {
+      //     TDToast.makeWarn( R.string.no_undelete );
+      //   } else {
+          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, shots4, plots /* , null */ ) ).show();
+      //   }
+      // }
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
       // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
@@ -1536,6 +1564,7 @@ public class ShotWindow extends Activity
 
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
+    mMenu.setOnItemLongClickListener( this );
     // setMenuAdapter( getResources() );
     // onMenu = true; // force close menu
     // closeMenu();
