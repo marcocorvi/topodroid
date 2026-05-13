@@ -1,8 +1,71 @@
 <html><body>
 <h4>JedEye</h4>
 
-JedEye is an Arduino-based handheld instrument (Nano RP2040 Connect / NINA-W102 radio) that measures azimuth, clino, roll and distance. Its firmware uses the same 17-byte shot frame as the SAP6 (sequence byte + four little-endian float32: bearing, clino, roll, distance in metres), but advertises its own 128-bit GATT service UUIDs so it has a distinct identity in BLE scanners.<br><p>
+The <i>JedEye</i> is an Arduino-based handheld instrument
+designed for dry cave surveying. It measures azimuth (compass), clino, roll, and
+direct distance (lidar). A full user
+manual is published at <a href="https://sebkister.github.io/JedEye-Documentation/">https://sebkister.github.io/JedEye-Documentation/</a>.
+<br><p>
 
-TODO CONTINUE.
+Internally, the <i>JedEye</i> runs on a Nano RP2040 Connect with a u-blox
+NINA-W102 radio module, a Meskernel LDJ-200 lidar, an LSM6DSOX IMU, an
+RM3100 magnetometer, and a 128x128 color OLED. It is operated through two
+buttons labelled <i>Next</i> (move the menu cursor) and <i>Select</i>
+(activate). USB-C is used for charging and firmware updates.<br><p>
+
+<b>Bluetooth pairing</b><br>
+The <i>JedEye</i> uses Bluetooth Low Energy only - there is no PIN-based
+pairing. To make it visible to TopoDroid, switch the device to its
+<i>Distance Meter</i> screen via the on-device menu. It then advertises
+as <i>JedEye_&lt;serial&gt;</i>, where <i>&lt;serial&gt;</i> is the
+16-hex-digit unique ID of the underlying Nano RP2040 Connect (e.g.
+<i>JedEye_009315501C7B8A58</i>).<br><p>
+
+In TopoDroid, open the <i>Devices</i> activity, tap <i>Add new device</i>,
+and start a <i>BLE scan</i>. The <i>JedEye</i> appears in the list with
+model "<i>JedEye</i>". Tap it to add it; TopoDroid records the MAC address
+and the device type. The pairing only needs to be done once - subsequent
+connections are automatic when the device is back in the
+<i>Distance Meter</i> screen.<br><p>
+
+<b>Taking a shot</b><br>
+On the <i>Distance Meter</i> screen the OLED shows the current lidar
+distance and the current heading and clino in real time. A small Bluetooth
+icon in the bottom-right corner indicates that BLE advertising is active.
+<br><p>
+
+To capture a measurement, point the device at the target and invoke
+<i>Measure</i> with the <i>Next</i> / <i>Select</i> buttons. The captured
+values (distance, heading, clino, roll) are frozen on the OLED as the
+"saved" reading and simultaneously streamed to TopoDroid as a single shot.
+If TopoDroid's shot window is open, the new shot appears immediately in
+the list and is auto-assigned a station name like any other leg shot.
+<br><p>
+
+TopoDroid can also send a remote <i>MEASURE</i> command (over the BLE
+command characteristic) to trigger a shot from the app side - useful when
+the device is mounted on a tripod or otherwise out of reach.<br><p>
+
+<b>Connection mode</b><br>
+The <i>JedEye</i> is always connected in <i>continuous</i> mode. Each
+measurement is transferred to TopoDroid as soon as it is taken. Shots
+taken while the device is not connected are <i>not</i> buffered or
+re-transmitted later - the <i>JedEye</i> does not currently expose its
+internal survey memory over BLE. The device is therefore best used in
+sessions where it can remain connected to the Android throughout.<br><p>
+
+<b>Battery</b><br>
+The <i>JedEye</i> runs on an internal battery and charges over USB-C. The
+current battery level is shown in the device's <i>Info</i> screen and as
+a small icon on the main display.<br><p>
+
+<b>Firmware notes</b><br>
+The <i>JedEye</i> firmware speaks a BLE protocol that reuses TopoDroid's
+SAP6 shot-frame format (a 17-byte notification: sequence byte plus four
+little-endian float32 values - bearing, clino, roll, and distance in
+metres), but exposes it under JedEye-specific 128-bit GATT service UUIDs.
+The on-device firmware does not implement the SAP6 ACK handshake; TopoDroid
+takes this into account and does not write per-shot ACKs to <i>JedEye</i>
+devices.<br><p>
 
 </body></html>
