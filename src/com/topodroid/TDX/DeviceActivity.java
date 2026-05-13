@@ -377,6 +377,9 @@ public class DeviceActivity extends Activity
         } else if ( Device.isCavwayX1( model ) ) {
           mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_CAVWAY + "0000" );
           device.mType = model;
+        } else if ( Device.isJedeye( model ) ) {
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_JEDEYE + "0000" );
+          device.mType = model;
         }
       }
       updateList( false );
@@ -738,6 +741,9 @@ public class DeviceActivity extends Activity
           mApp_mDData.insertDevice( address, bt_name, name, null );
           dev = mApp_mDData.getDevice( address );
         } else if ( Device.isDiscoX( bt_name ) ) { // discox
+          mApp_mDData.insertDevice( address, bt_name, name, null );
+          dev = mApp_mDData.getDevice( address );
+        } else if ( Device.isJedeye( bt_name ) ) { // JedEye
           mApp_mDData.insertDevice( address, bt_name, name, null );
           dev = mApp_mDData.getDevice( address );
         }

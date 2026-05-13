@@ -124,7 +124,7 @@ public class SapComm extends BleComm
   // CONNECTION AND DATA HANDLING MUST RUN ON A SEPARATE THREAD
   // 
 
-  private boolean assertDevice( Device device )
+  protected boolean assertDevice( Device device )
   {
     if ( device.isSap5() ) {
       assert( mServiceUuid   == SapConst.SAP5_SERVICE_UUID );
@@ -431,8 +431,8 @@ public class SapComm extends BleComm
       TDLog.v( "SAP comm: changed chrt READ" );
       int res = mSapProto.handleReadNotify( chrt );
       if ( res == DataType.PACKET_DATA ) {
-        // if ( uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) 
-        if ( uuid.compareTo( SapConst.SAP6_CHRT_READ_UUID ) == 0 ) { // model SAP^ send ack
+        // if ( uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR ))
+        if ( uuid.compareTo( SapConst.SAP6_CHRT_READ_UUID ) == 0 ) { // model SAP6: send ack (JedEye does not use the ACK handshake)
           byte[] ackByte = mSapProto.handleWrite(); // ACKNOWLEDGMENT
           mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, ackByte );
         }
@@ -440,7 +440,7 @@ public class SapComm extends BleComm
       }
       // readSapPacket();
     // } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
-    } if ( uuid.compareTo( mChrtWriteUuid ) == 0 ) {
+    } else if ( uuid.compareTo( mChrtWriteUuid ) == 0 ) {
       TDLog.v( "SAP comm: changed chrt WRITE" );
       byte[] bytes = mSapProto.handleWriteNotify( chrt );
       if ( bytes != null ) {
