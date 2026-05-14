@@ -3,6 +3,7 @@
 package com.topodroid.help;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.help.ValidationCallback;
 // import com.topodroid.util.TDColor;
 // import com.topodroid.TDX.TDToast;
 // import com.topodroid.TDX.TopoDroidApp;
@@ -91,12 +92,12 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     tv.showResponse( "AI support not enabled" );
   }
 
-  /** API key validation callback
-   */
-  public interface ValidationCallback
-  {
-    public void onResult( boolean valid, String response );
-  }
+  // /** API key validation callback
+  //  */
+  // public interface ValidationCallback
+  // {
+  //   public void onResult( boolean valid, String response );
+  // }
 
   /** validate an API key
    * @param api_key   API key
