@@ -3,6 +3,7 @@
 package com.topodroid.help;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.help.ValidationCallback;
 // import com.topodroid.util.TDColor;
 // import com.topodroid.TDX.TDToast;
 // import com.topodroid.TDX.TopoDroidApp;
