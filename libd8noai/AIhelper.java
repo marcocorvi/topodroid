@@ -91,16 +91,13 @@ public class AIhelper // extends AsyncTask< String, Void, String >
     tv.showResponse( "AI support not enabled" );
   }
 
-  /** API key validation callback
-   */
-  public interface ValidationCallback
-  {
-    public void onResult( boolean valid, String response );
-  }
-
   /** validate an API key
    * @param api_key   API key
    * @param callback  validation callback
+   * Uses the standalone com.topodroid.help.ValidationCallback (same package),
+   * matching libd8ai/AIhelper and the call sites (e.g.
+   * com.topodroid.prefs.GeminiDialog), so the AI / no-AI variants stay
+   * signature-compatible.
    */
   public static void validateApiKey( final String api_key, final ValidationCallback callback )
   {
