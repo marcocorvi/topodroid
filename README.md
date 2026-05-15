@@ -13,4 +13,4 @@ Visit the website https://sites.google.com/site/speleoapps for more informations
 
 The most recent TopoDroid apks, as well as recent version changes info, are on http://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html 
 
-All the code is provided under GNU General Public Licence v. 3 
+All the code on this repository is provided under GNU General Public Licence v. 3. 
