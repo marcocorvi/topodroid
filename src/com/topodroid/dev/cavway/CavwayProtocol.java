@@ -22,6 +22,7 @@ import com.topodroid.packetX.MemoryData;
 import com.topodroid.packetX.CavwayData;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.prefs.TDSetting;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -209,7 +210,11 @@ public class CavwayProtocol extends TopoDroidProtocol
          : PACKET_NONE;
   }
 
-  @SuppressLint("DefaultLocale")
+  /** report only errors above 1 % (abs of G and M) or 1 degree (dip) or 0.4 degree (angle diff.)
+   * The threshold can be set on the Cavway
+   * @param errbytes   error info bytes (9 bytes)
+   * @return error string - empty if no error above threshold
+   */
   private String parseErrInfo(byte[] errbytes)
   {
     // if ( LOG ) {
@@ -220,49 +225,64 @@ public class CavwayProtocol extends TopoDroidProtocol
 
     //string error_type = "";
     if ( errbytes[0] == 0xFF ) {
-      return "No error";
+      return ""; // No error
     }
+    // TDLog.v("ERROR " + ((errbytes[0]>>7)&1) + " " + ((errbytes[0]>>6)&1) + " " + ((errbytes[0]>>5)&1) + " " + ((errbytes[0]>>4)&1) + " len " + errbytes.length );
     StringBuilder res = new StringBuilder();
-    int err_cnt = 0;
-    if ( ( (errbytes[0] >> 7) & 0x1 ) == 0x00 ) { //absG error
-      if ( err_cnt == 0 ) res.append( "Error. " );
-      res.append( "G: " );
-      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE) );
-      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE) );
-      err_cnt++;
-      // if (err_cnt == 2) return res.toString();
+    int cnt = 0; // error count
+    int idx = 0; // index in errbytes
+    if ( ( ( (errbytes[0] >> 7) & 0x1 ) == 0x00 ) /* && (4 * cnt + 4 < 9 ) */ ) { // absG error
+      float g1 = MemoryOctet.toInt(errbytes[idx + 2], errbytes[idx + 1]) / ABSSCALE;
+      float g2 = MemoryOctet.toInt(errbytes[idx + 4], errbytes[idx + 3]) / ABSSCALE;
+      // TDLog.v("G " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " " + errbytes[idx + 3] + " " + errbytes[idx + 4] + " = " + g1 + " " + g2 );
+      cnt ++ ;
+      idx += 4;
+      float dg = (float)(200*Math.abs(g1-g2)/(g1+g2));
+      if ( dg >= TDSetting.mCvwyAbs ) {
+        if ( cnt == 1 ) res.append( "E: " );
+        res.append( String.format(Locale.US, "G %.1f ", dg ) );
+      }
+      // if (cnt == 2) return res.toString();
     }
-    if ( ( (errbytes[0] >> 6) & 0x1) == 0x00 ) {  //absM error
-      if ( err_cnt == 0 ) res.append( "Error. " );
-      res.append( "M: " );
-      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE) );
-      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE) );
-      err_cnt++;
-      if (err_cnt == 2) return res.toString();
-    }
-
-    if ( ( (errbytes[0] >> 5) & 0x1 ) == 0x00 ){  //dip error
-      if ( err_cnt == 0 ) res.append( "Error. " );
-      float ftmp;
-      res.append( "Dip: ");
-      ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 2],errbytes[4 * err_cnt + 1]) * ANGLESCALE;
-      if(ftmp > 180) ftmp -= 360f;      //The 2 bytes should be negative here
-      res.append( String.format("%.2f ",ftmp) );
-      ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 4],errbytes[4 * err_cnt + 3]) * ANGLESCALE;
-      if(ftmp > 180) ftmp -= 360f;      //The 2 bytes should be negative here
-      res.append( String.format("%.2f ", ftmp) );
-      err_cnt++;
-      if (err_cnt == 2) return res.toString();
+    if ( ( ( (errbytes[0] >> 6) & 0x1) == 0x00 ) /* && (4 * cnt + 4 < 9 ) */ ) {  // absM error
+      float m1 = MemoryOctet.toInt(errbytes[idx + 2], errbytes[idx + 1]) / ABSSCALE;
+      float m2 = MemoryOctet.toInt(errbytes[idx + 4], errbytes[idx + 3]) / ABSSCALE;
+      // TDLog.v("M " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " " + errbytes[idx + 3] + " " + errbytes[idx + 4] + " = " + m1 + " " + m2 );
+      cnt++;
+      idx += 4;
+      float dm = (float)(200*Math.abs(m1-m2)/(m1+m2));
+      if ( dm >= TDSetting.mCvwyAbs ) {
+        if ( cnt == 1 ) res.append( "E: " );
+        res.append( String.format(Locale.US, "M %.1f ", dm ) );
+        if (cnt == 2) return res.toString();
+      }
     }
 
-    if ( ( (errbytes[0] >> 4) & 0x1 ) == 0x00 ) { //angle error
-      if ( err_cnt == 0 ) res.append( "Error. " );
-      float ftmp;
-      res.append( "Angle: ");
-      ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 2],errbytes[4 * err_cnt + 1]) * ANGLESCALE;
-      res.append( String.format("%.2f ",ftmp) );
-      err_cnt++;
-      // if (err_cnt == 2) return res.toString();
+    if ( ( ( (errbytes[0] >> 5) & 0x1 ) == 0x00 ) && (4 * cnt + 4 < 9 ) ) {  // dip error
+      float d1 = MemoryOctet.toInt(errbytes[idx + 2], errbytes[idx + 1]) * ANGLESCALE;
+      float d2 = MemoryOctet.toInt(errbytes[idx + 4], errbytes[idx + 3]) * ANGLESCALE;
+      // TDLog.v("D " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " " + errbytes[idx + 3] + " " + errbytes[idx + 4] + " = " + d1 + " " + d2 );
+      cnt++;
+      idx += 4;
+      if ( d1 > 180 ) d1 -= 360f;      //The 2 bytes should be negative here
+      if ( d2 > 180 ) d2 -= 360f;      //The 2 bytes should be negative here
+      if ( Math.abs(d1) >= TDSetting.mCvwyDip || Math.abs(d2) > TDSetting.mCvwyDip ) {
+        if ( cnt == 1 ) res.append( "E: " );
+        res.append( String.format(Locale.US, "D %.1f %.1f", d1, d2 ) );
+        if (cnt == 2) return res.toString();
+      }
+    }
+
+    if ( ( ( (errbytes[0] >> 4) & 0x1 ) == 0x00 ) && (4 * cnt + 2 < 9 ) ) { // angle error
+      float a1 = MemoryOctet.toInt(errbytes[idx + 2], errbytes[idx + 1]) * ANGLESCALE;
+      // TDLog.v("A " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " = " + a1 );
+      cnt++;
+      // idx += 2;
+      if ( Math.abs(a1) > TDSetting.mCvwyAngle ) {
+        if ( cnt == 1 ) res.append( "E: " );
+        res.append( String.format(Locale.US, "A %.1f ", a1) );
+        // if (cnt == 2) return res.toString();
+      }
     }
     return res.toString();
   }

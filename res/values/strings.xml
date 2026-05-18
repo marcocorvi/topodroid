@@ -1766,6 +1766,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
   <string name="pref_sap5_bit16_bug_title" copyable="all">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary" copyable="bg">SAP5 bit-16 bug workaround</string>
+  <string name="pref_cvwy_abs_title" copyable="all">Cavway ABS threshold</string>
+  <string name="pref_cvwy_abs_summary" copyable="bg">Cavway shot accuracy ABS threshold</string>
+  <string name="pref_cvwy_dip_title" copyable="all">Cavway Dip threshold</string>
+  <string name="pref_cvwy_dip_summary" copyable="bg">Cavway shot accuracy Dip threshold</string>
+  <string name="pref_cvwy_angle_title" copyable="all">Cavway Angle threshold</string>
+  <string name="pref_cvwy_angle_summary" copyable="bg">Cavway shot accuracy Angle threshold</string>
 
   <string name="pref_plot_screen_title">SKETCH</string>
   <string name="pref_tool_line_title">LINES</string>

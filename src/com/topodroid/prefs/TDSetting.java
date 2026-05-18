@@ -477,6 +477,9 @@ public class TDSetting
   public static boolean mBricZeroLength = false; // whether to handle 0-length data
   public static boolean mBricIndexIsId  = false; // whether to display BRIC index instead of id
   public static boolean mSap5Bit16Bug   = true;  // whether to apply SAP5 bit-16 bug workaround
+  public static float mCvwyAbs   = 1;
+  public static float mCvwyDip   = 1;
+  public static float mCvwyAngle = 0.3f;
 
   // public static final boolean CHECK_BT = true;
   public static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
@@ -840,6 +843,29 @@ public class TDSetting
     return tryInt( prefs, key, def_value );
   }
 
+  private static float tryFloatValue( TDPrefHelper hlp, String key, String val, String def_value, float min_val )
+  {
+    float f = 0;
+    if ( TDString.isNullOrEmpty( val ) ) { 
+      f = Float.parseFloat(def_value);
+      TDPrefHelper.update( key, def_value );
+    } else {
+      try {
+        f = Float.parseFloat( val );
+        if ( f < min_val ) {
+          f = min_val;
+          val = Float.toString( min_val );
+        }
+        TDPrefHelper.update( key, val );
+      } catch ( NumberFormatException e ) {
+        TDLog.e("Float Format Error. Key " + key + " " + e.getMessage() );
+        f = Float.parseFloat(def_value);
+        TDPrefHelper.update( key, def_value );
+      }
+    }
+    return f;
+  }
+
   private static float tryFloatValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
     float f = 0;
@@ -1197,10 +1223,13 @@ public class TDSetting
     mWaitLaser      = tryInt( prefs,    key[ 6].key,      key[ 6].dflt );   // DISTOX_WAIT_LASER
     mWaitShot       = tryInt( prefs,    key[ 7].key,      key[ 7].dflt );   // DISTOX_WAIT_SHOT
     mFirmwareSanity = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) );  // DISTOX_FIRMWARE_SANITY
-    mBricMode       = tryInt( prefs,    key[ 9].key,      key[ 9].dflt );   // DISTOX_BRIC_MODE
-    mBricZeroLength = prefs.getBoolean( key[10].key, bool(key[10].dflt) );  // DISTOX_BRIC_ZERO_LENGTH
-    mBricIndexIsId  = prefs.getBoolean( key[11].key, bool(key[11].dflt) );  // DISTOX_BRIC_INDEX_IS_ID
-    mSap5Bit16Bug   = prefs.getBoolean( key[12].key, bool(key[12].dflt) );  // DISTOX_SAP5_BIT16_BUG
+    mCvwyAbs        = tryFloat( prefs,  key[ 9].key,      key[ 9].dflt );   // DISTOX_CVWY_ABS
+    mCvwyDip        = tryFloat( prefs,  key[10].key,      key[10].dflt );   // DISTOX_CVWY_DIP
+    mCvwyAngle      = tryFloat( prefs,  key[11].key,      key[11].dflt );   // DISTOX_CVWY_ANGLE
+    mBricMode       = tryInt( prefs,    key[12].key,      key[12].dflt );   // DISTOX_BRIC_MODE
+    mBricZeroLength = prefs.getBoolean( key[13].key, bool(key[13].dflt) );  // DISTOX_BRIC_ZERO_LENGTH
+    mBricIndexIsId  = prefs.getBoolean( key[14].key, bool(key[14].dflt) );  // DISTOX_BRIC_INDEX_IS_ID
+    mSap5Bit16Bug   = prefs.getBoolean( key[15].key, bool(key[15].dflt) );  // DISTOX_SAP5_BIT16_BUG
     // TDLog.v("SETTING load geek device done");
 
     key = TDPrefKey.mCave3D;
@@ -2234,6 +2263,12 @@ public class TDSetting
       if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
     } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_FIRMWARE_SANITY
       mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_CVWY_ABS
+      mCvwyAbs = tryFloatValue( hlp, k, v, key[j].dflt, 0.1f ); // enforce min value
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_CVWY_DIP
+      mCvwyDip = tryFloatValue( hlp, k, v, key[j].dflt, 0.1f ); // enforce min value
+    } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_CVWY_ANGLE
+      mCvwyAngle = tryFloatValue( hlp, k, v, key[j].dflt, 0.1f ); // enforce min value
     } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_BRIC_MODE
       mBricMode = tryIntValue( hlp, k, v, key[j].dflt );
     } else if ( k.equals( key[ ++j].key ) ) { // DISTOX_BRIC_ZERO_LENGTH
@@ -4329,6 +4364,27 @@ B DISTOX_SAP5_BIT16_BUG true
               break;
             case "DISTOX_WAIT_CONN":
                 mWaitConn    = Integer.parseInt( value ); setPreference( editor, kay,  mWaitConn );
+              break;
+            case "DISTOX_BRIC_MODE":
+                mBricMode    = Integer.parseInt( value ); setPreference( editor, kay, mBricMode );
+              break;
+            case "DISTOX_BRIC_ZERO_LENGTH":
+                mBricZeroLength = Boolean.parseBoolean( value ); setPreference( editor, kay, mBricZeroLength );
+              break;
+            case "DISTOX_BRIC_INDEX_IS_ID":
+                mBricIndexIsId  = Boolean.parseBoolean( value ); setPreference( editor, kay, mBricIndexIsId );
+              break;
+            case "DISTOX_SAP5_BIT16_BUG":
+                mSap5Bit16Bug = Boolean.parseBoolean( value ); setPreference( editor, kay, mSap5Bit16Bug );
+              break;
+            case "DISTOX_CVWY_ABS":
+                mCvwyAbs = Float.parseFloat( value ); setPreference( editor, kay, mCvwyAbs );
+              break;
+            case "DISTOX_CVWY_DIP":
+                mCvwyDip = Float.parseFloat( value ); setPreference( editor, kay, mCvwyDip );
+              break;
+            case "DISTOX_CVWY_ANGLE":
+                mCvwyAngle = Float.parseFloat( value ); setPreference( editor, kay, mCvwyAngle );
               break;
             // case "DISTOX_WAIT_COMMAND":
             //   mWaitCommand = Integer.parseInt( value ); setPreference( editor, kay, mWaitCommand );
