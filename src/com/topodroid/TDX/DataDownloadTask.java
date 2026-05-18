@@ -13,7 +13,10 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.calib.CalibInfo;
+import com.topodroid.dev.Device;
 import com.topodroid.dev.ConnectionState;
+import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 
 import java.lang.ref.WeakReference;
 
@@ -30,6 +33,8 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   private final ListerHandler mLister; // FIXME_LISTER
   private int mDataType;
 
+  private static String myDate = null;
+
   /** cstr
    * @param app       TopoDroid app
    * @param lister    data lister
@@ -43,6 +48,25 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     mGMactivity = new WeakReference<GMActivity>( gm_activity );
     mLister = lister;
     mDataType = data_type;
+    String date = TDUtil.currentDate();
+    String today = app.mDData.getValue( "today" );
+    if ( ! date.equals( today ) ) {
+      app.mDData.setValue( "today", date );
+      int dev = TDInstance.deviceType();
+      switch ( dev ) {
+        case Device.DISTO_CAVWAYX1: TopoDroidApp.updateAnalytic( TDAnalytics.D_CVWY1 ); break;
+        case Device.DISTO_XBLE:     TopoDroidApp.updateAnalytic( TDAnalytics.D_XBLE ); break;
+        case Device.DISTO_X310:     TopoDroidApp.updateAnalytic( TDAnalytics.D_X310 ); break;
+        case Device.DISTO_BRIC5:    TopoDroidApp.updateAnalytic( TDAnalytics.D_BRIC5 ); break;
+        case Device.DISTO_BRIC4:    TopoDroidApp.updateAnalytic( TDAnalytics.D_BRIC4 ); break;
+        case Device.DISTO_SAP6:     TopoDroidApp.updateAnalytic( TDAnalytics.D_SAP6 ); break;
+        case Device.DISTO_DISCOX:   TopoDroidApp.updateAnalytic( TDAnalytics.D_DISCO ); break;
+        case Device.DISTO_JEDEYE:   TopoDroidApp.updateAnalytic( TDAnalytics.D_JEDEYE ); break;
+        case Device.DISTO_A3:       TopoDroidApp.updateAnalytic( TDAnalytics.D_A3 ); break;
+        case Device.DISTO_SAP5:     TopoDroidApp.updateAnalytic( TDAnalytics.D_SAP5 ); break;
+        default:                    TopoDroidApp.updateAnalytic( TDAnalytics.D_UNKWN ); 
+      }
+    }
   }
 
 // -------------------------------------------------------------------

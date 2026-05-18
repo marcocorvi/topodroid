@@ -150,6 +150,19 @@ public class TDAnalytics
   public static final String AI_DIALOG  = "Haid"; 
   public static final String AI_SETTING = "Hais"; 
 
+  public static final String D_A3       = "Da3";
+  public static final String D_X310     = "Dx310";
+  public static final String D_XBLE     = "Dxble";
+  public static final String D_BRIC4    = "Dbric4";
+  public static final String D_BRIC5    = "Dbric5";
+  public static final String D_SAP5     = "Dsap5";
+  public static final String D_SAP6     = "Dsap6";
+  public static final String D_DISCO    = "Ddisco";
+  public static final String D_JEDEYE   = "Djedeye";
+  public static final String D_CVWY1    = "Dcvwy1";
+  public static final String D_UNKWN    = "Dunkwn";
+
+
   private static final String QUERY = "analytics=";
   public static String  mCT = null;
 

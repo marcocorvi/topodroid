@@ -237,10 +237,14 @@ public class CavwayProtocol extends TopoDroidProtocol
       // TDLog.v("G " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " " + errbytes[idx + 3] + " " + errbytes[idx + 4] + " = " + g1 + " " + g2 );
       cnt ++ ;
       idx += 4;
-      float dg = (float)(200*Math.abs(g1-g2)/(g1+g2));
-      if ( dg >= TDSetting.mCvwyAbs ) {
-        if ( cnt == 1 ) res.append( "E: " );
-        res.append( String.format(Locale.US, "G %.1f ", dg ) );
+	  g1 = (g1 - 1)*100;
+	  g2 = (g2 - 1)*100;
+	  if ( cnt == 1 ) res.append( "E: " );
+      if ( Math.abs(g1) >= TDSetting.mCvwyAbs ) {
+        res.append( String.format(Locale.US, "G1 %.1f ", g1 ) );
+      }
+	  if ( Math.abs(g2) >= TDSetting.mCvwyAbs ) {
+        res.append( String.format(Locale.US, "G2 %.1f ", g2 ) );
       }
       // if (cnt == 2) return res.toString();
     }
@@ -250,12 +254,16 @@ public class CavwayProtocol extends TopoDroidProtocol
       // TDLog.v("M " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " " + errbytes[idx + 3] + " " + errbytes[idx + 4] + " = " + m1 + " " + m2 );
       cnt++;
       idx += 4;
-      float dm = (float)(200*Math.abs(m1-m2)/(m1+m2));
-      if ( dm >= TDSetting.mCvwyAbs ) {
-        if ( cnt == 1 ) res.append( "E: " );
-        res.append( String.format(Locale.US, "M %.1f ", dm ) );
-        if (cnt == 2) return res.toString();
+	  m1 = (m1 - 1)*100;
+	  m1 = (m2 - 1)*100;
+	  if ( cnt == 1 ) res.append( "E: " );
+      if ( Math.abs(m1) >= TDSetting.mCvwyAbs ) {
+        res.append( String.format(Locale.US, "M1 %.1f ", m1 ) );
       }
+	  if ( Math.abs(m2) >= TDSetting.mCvwyAbs ) {
+        res.append( String.format(Locale.US, "M2 %.1f ", m2 ) );
+      }
+	  if (cnt == 2) return res.toString();
     }
 
     if ( ( ( (errbytes[0] >> 5) & 0x1 ) == 0x00 ) && (4 * cnt + 4 < 9 ) ) {  // dip error
@@ -264,13 +272,16 @@ public class CavwayProtocol extends TopoDroidProtocol
       // TDLog.v("D " + cnt + ": " + errbytes[idx + 1] + " " + errbytes[idx + 2] + " " + errbytes[idx + 3] + " " + errbytes[idx + 4] + " = " + d1 + " " + d2 );
       cnt++;
       idx += 4;
+	  if ( cnt == 1 ) res.append( "E: " );
       if ( d1 > 180 ) d1 -= 360f;      //The 2 bytes should be negative here
       if ( d2 > 180 ) d2 -= 360f;      //The 2 bytes should be negative here
-      if ( Math.abs(d1) >= TDSetting.mCvwyDip || Math.abs(d2) > TDSetting.mCvwyDip ) {
-        if ( cnt == 1 ) res.append( "E: " );
-        res.append( String.format(Locale.US, "D %.1f %.1f", d1, d2 ) );
-        if (cnt == 2) return res.toString();
-      }
+      if ( Math.abs(d1) > TDSetting.mCvwyDip ) {
+	    res.append( String.format(Locale.US, "D1 %.1f", d1 ) );
+	  }
+	  if ( Math.abs(d2) > TDSetting.mCvwyDip ) {
+        res.append( String.format(Locale.US, "D2 %.1f ", d2 ) );
+	  }
+      if (cnt == 2) return res.toString();
     }
 
     if ( ( ( (errbytes[0] >> 4) & 0x1 ) == 0x00 ) && (4 * cnt + 2 < 9 ) ) { // angle error
