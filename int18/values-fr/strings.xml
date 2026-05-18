@@ -2,10 +2,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 <!-- IMPORTANT: DO NOT FORGET TO ESCAPE APOSTROIPHE -->
 
-    <string name="ai_null_chat">Null AI chat</string>
+    <string name="ai_null_chat">Chat IA null</string>
     <string name="ai_error">Erreur AI %1$s</string>
-    <string name="ai_internet">Attention. L\'aide AI à besoin d\'une connection web.</string>
-    <string name="ai_no_internet">Aucune connection internet.</string>
+    <string name="ai_internet">Attention. L\'aide IA à besoin d\'une connexion web.</string>
+    <string name="ai_no_internet">Aucune connexion internet.</string>
     <string name="ai_prompt">Saisissez votre question</string>
     <string name="ai_invalid_key">Clé API invalide</string>
     <string name="ai_key_instruction">La clé API est stockée dans la mémoire interne d\’Android et est uniquement envoyée à Google.\nCherchez sur internet comment obtenir une clé API Gemini auprès de Google.</string -->
@@ -81,7 +81,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_3d">Vue 3D</string>
     <string name="pref_io">Export</string>
     <string name="pref_bt">Bluetooth</string>
-    <string name="pref_cal">Calibration</string>
+    <string name="pref_cal">Étalonnage</string>
     <string name="pref_xt">Fonctions spéciales</string>
 
     <string name="cut">COUPER</string>
@@ -189,9 +189,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="auto_calib">Étalonnage automatique</string>
     <string name="autocalib_not_supported">Calcul de l\'étalonnage requis</string>
     <string name="recalibrate_with">Nouveau calcul des visées avec %1$s</string>
-    <string name="recalibrate_none">Aucune calibration sélectionnée</string>
-    <string name="recalibrate_no_cavway">Aucune calibration Cavway</string>
-    <string name="recalibrate_no_coeff">Aucun coefficient de calibration</string>
+    <string name="recalibrate_none">Aucun étalonnage sélectionné</string>
+    <string name="recalibrate_no_cavway">Aucun étalonnage Cavway</string>
+    <string name="recalibrate_no_coeff">Aucun coefficient d'étalonnage</string>
 
     <string name="algorithm">algorithme:</string>
     <string name="auto">automatique</string>
@@ -393,7 +393,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_value_required">Valeur nécessaire</string>
     <string name="error_bad_fixes">Corriger les points qui ne figurent pas dans le relevé</string>
     <string name="error_bad_name">Nom de fichier modifié</string>
-    <string name="error_question">Merci de pose une question</string>
+    <string name="error_question">Merci de saisir une question</string>
     
     <string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
     <!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->
@@ -468,7 +468,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_profile_overview">Pas d\'apercu pour les coupes projetées</string>
     <string name="no_proj4">*Proj$* non installé</string>
     <string name="no_sensors">Le relevé ne contient aucune mesure</string>
-    <string name="no_stations">Le relevé ne contient aucune stations</string>
+    <string name="no_stations">Le relevé ne contient aucune station</string>
     <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
     <string name="no_search_result">Aucun résultat de recherche.</string>
     <string name="no_survey">Aucun relevé sélectionné.</string>
@@ -762,7 +762,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="zip_failed">Échec lors de la compression du relevé</string>
     <string name="zip_share_failed">Impossible de partager l\'archive zip</string>
     <string name="file_share_failed">Impossible de partager le fichier</string>
-    <string name="file_share_no_app">Aucun fichier app partagé</string>
+    <string name="file_share_no_app">Aucune App de partage de fichier</string>
     <string name="unzip_fail">Échec lors de la décompression du relevé</string>
     <string name="unzip_fail_sqlite">Erreur SQL : effacez le relevé et réessayez</string>
     <string name="unzip_fail_survey">Échec : nom du relevé incorrect</string>
@@ -922,7 +922,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_left"      >GAUCHE</string>
     <string name="button_right"     >DROITE</string>
     <string name="button_clear"     >EFFACER</string>
-    <string name="button_clear_all" >effacer tout</string>
+    <string name="button_clear_all" >Effacer tout</string>
     <string name="button_clear_day" >Effacer 1j</string>
     <string name="button_clear_week">Effacer 7j</string>
     <string name="button_clear_memory">Effacer la mémoire</string>
@@ -957,7 +957,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">Section Transverse</string>
-    <string name="buffer">Buffer</string>
+    <string name="buffer">Mémoire tampon</string>
     <string name="buffer_size">Mémoire tampon: %1$d données</string>
     <string name="buffer_sorted">trié</string>
     <!-- UNUSED string name="buffer_unsorted">non trié</string -->
@@ -1250,7 +1250,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_bothviews">Plan et coupe</string>
     <string name="export_config">Commandes de configuration</string>
     <string name="export_csv_rawdata">Données brutes</string>
-    <string name="export_data_batch">Export %1$s de %2$d relevés</string>
+    <string name="export_data_batch">%1$s de %2$d relevés exportés</string>
     <string name="export_dxf_blocks">Blocs DXF</string>
     <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Géoréférence</string>
@@ -1310,8 +1310,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="import_diving_datamode">Mode de données plongée</string>
     <string name="import_therion_path">Avec chemin du relevé</string>
 
-    <string name="title_gemini">Entrer votre clé API AI</string>
-    <string name="title_ai_dialog">Aide AI</string>
+    <string name="title_gemini">Entrer votre clé API IA</string>
+    <string name="title_ai_dialog">Aide IA</string>
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_audio_list">Enregistrements audio</string>
@@ -1489,7 +1489,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="pref_locale_title">Langue</string>
     <string name="pref_locale_summary">Langue de l\'application</string>
-    <string name="pref_gemini_title">Clé AI</string>
+    <string name="pref_gemini_title">Clé IA</string>
     <string name="pref_gemini_summary">Clé API Gemini</string>
     <string name="pref_orientation_title">Orientation écran</string>
     <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
@@ -2032,7 +2032,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="welcome_db_version">Base de données v. %1$d, %2$d</string>
     <string name="welcome_text">
 \nMerci d\'avoir choisi TopoDroid.
-\n\nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX, un BRIC, un SAP et u Cavway.
+\n\nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX, un BRIC, un SAP ou un Cavway.
 \n\nAucune garantie : en utilisant ce logiciel vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit d\'autre.
 \n\nAide disponible via la touche MENU -> AIDE.
 \nPages de manuel : Icône de livre dans la boîte de dialogue d\'aide
