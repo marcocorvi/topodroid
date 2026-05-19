@@ -492,7 +492,7 @@ class TDPrefKey
    */
   static TDPrefKey[] mData = {
     new TDPrefKey( B, FLT, DT, "DISTOX_CLOSE_DISTANCE",  R.string.pref_leg_title,            R.string.pref_leg_summary,            "0.05" ),        
-    new TDPrefKey( B, FLT, DT, "DISTOX_MAX_SHOT_LENGTH", R.string.pref_max_shot_title,       R.string.pref_max_shot_summary,       TDString.FIFTY ),
+    new TDPrefKey( B, FLT, DT, "DISTOX_MAX_SHOT_LENGTH", R.string.pref_max_shot_title,       R.string.pref_max_shot_summary,       TDString.FORTY ),
     new TDPrefKey( B, FLT, DT, "DISTOX_MIN_LEG_LENGTH",  R.string.pref_min_leg_title,        R.string.pref_min_leg_summary,        TDString.ZERO  ),
     new TDPrefKey( E,      DT, "DISTOX_LEG_SHOTS",       R.string.pref_leg_shots_title,      R.string.pref_leg_shots_summary,      TDString.THREE, R.array.legShots, R.array.legShotsValue ),
     new TDPrefKey( N, FLT, DR, "DISTOX_EXTEND_THR2",     R.string.pref_ethr_title,           R.string.pref_ethr_summary,           TDString.TEN  ),

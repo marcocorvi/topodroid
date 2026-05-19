@@ -1415,7 +1415,7 @@ public class TDSetting
     mMinNrLegShots = tryInt(   prefs,          key[ 3].key,      key[ 3].dflt );  // DISTOX_LEG_SHOTS choice: 2, 3, 4
     mExtendThr     = tryFloat( prefs,          key[ 4].key,      key[ 4].dflt  ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs,          key[ 5].key,      key[ 5].dflt  ); // DISTOX_VTHRESHOLD
-    // DISTOX_AZIMUTH_MANUAL [7] handled in the first pass
+    // DISTOX_AZIMUTH_MANUAL [6] handled in the first pass
     mPrevNext      = prefs.getBoolean(         key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_PREV_NEXT
     mBacksightInput = prefs.getBoolean(        key[ 8].key, bool(key[ 8].dflt) ); // DISTOX_BACKSIGHT
     mTripleShot     = tryInt(  prefs,          key[ 9].key,      key[ 9].dflt  ); // DISTOX_LEG_FEEDBACK
