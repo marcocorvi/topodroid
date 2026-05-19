@@ -12,7 +12,7 @@
     <string name="ai_prompt">Saisissez votre question</string>
     <string name="ai_invalid_key">Clé API invalide</string>
 	 <string name="ai_chat_reset">Chat effacé</string>
-    <string name="ai_key_instruction">La clé API est stockée dans la mémoire interne d\’Android et est uniquement envoyée à Google.\nCherchez sur internet comment obtenir une clé API Gemini auprès de Google.</string -->
+    <string name="ai_key_instruction">La clé API est stockée dans la mémoire interne d\’Android et est uniquement envoyée à Google.\nCherchez sur internet comment obtenir une clé API Gemini auprès de Google.</string>
     <!-- GEMMA3
     <string name="ai_init_llm">Initialized local model</string>
     <string name="ai_init_llm_poor">Initialized local model. Degraded performances</string>
@@ -133,7 +133,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bad_station">Mauvaise station: %1$s</string>
     <string name="bad_station_name">Nom de station non conforme</string>
 	 <string name="equal_station_names">Nom des stations identique</string>
-    <string name="invalid_name">Nom non conforme</string -->
+    <string name="invalid_name">Nom non conforme</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -211,7 +211,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="recalibrate_with">Nouveau calcul des visées avec %1$s</string>
     <string name="recalibrate_none">Aucun étalonnage sélectionné</string>
     <string name="recalibrate_no_cavway">Aucun étalonnage Cavway</string>
-    <string name="recalibrate_no_coeff">Aucun coefficient d'étalonnage</string>
+    <string name="recalibrate_no_coeff">Aucun coefficient d\'étalonnage</string>
 
     <string name="algorithm">algorithme:</string>
     <string name="auto">automatique</string>
@@ -569,7 +569,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="stop_scan">Stop scan</string -->
     <!-- UNUSED string name="scan_started">Discovery started</string -->
     <!-- UNUSED string name="scan_finished">Discovery finished</string -->
-    <string name="scanning">Recherche... Patientez</string -->
+    <string name="scanning">Recherche... Patientez</string>
 
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
@@ -680,7 +680,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="section_line_not_allowed">Ligne de section non autorisée</string>
 
     <!-- UNUSED string name="sensor">capteur</string -->
-	 <string name="sensor_title">Ajout d'un capteur de mesure</string>
+	 <string name="sensor_title">Ajout d\'un capteur de mesure</string>
     <string name="sensor_gravity">Gravité</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">Luminosité</string>
@@ -896,8 +896,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update">Mise à jour de la traduction du manuel d\'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
     <string name="ask_clear_equates">Supprimer tous les equates?</string>
-    <string name="ask_forget_device">Oublier l'appareil %1$s?</string>
-	  <string name="ask_scan_delete">Effacer scan-set?</string>   <!-- TODO Traduction ? -->
+    <string name="ask_forget_device">Oublier l\'appareil %1$s?</string>
+   <string name="ask_scan_delete">Effacer scan-set?</string>   <!-- TODO Traduction ? -->
 
     <string name="button_add"       >Ajouter</string>
     <string name="button_apply"     >Appliquer</string>
@@ -917,10 +917,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_duplicate" >Dupliquer </string>
-	 <string name="button_empty"     >Vider</string>
-    <string name="button_settime"   >Régler l'heure</string>
+    <string name="button_empty"     >Vider</string>
+    <string name="button_settime"   >Régler l\'heure</string>
     <string name="button_surface"   >Surface   </string>
-	 <string name="button_splay"     >Habillage</string>
+    <string name="button_splay"     >Habillage</string>
     <string name="button_scan"      >Scan</string>
     <string name="button_no_extend" >Pas d\'extension</string>
     <string name="button_eval"      >Évaluation      </string>
@@ -1497,7 +1497,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_survey_export">Exporter le relevé sous</string>
     <string name="title_survey_rename">Renommer le relevé sous</string>
     <string name="title_station_photo">Station photo</string>
-    <string name="title_team_dialog">Noms de l'équipe</string>
+    <string name="title_team_dialog">Noms de l\'équipe</string>
     <string name="title_plot_rename">Operations croquis</string>
     <string name="title_plot_zoomfit">Ajustement zoom / Orientation</string>
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
@@ -1943,7 +1943,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_xsection_offset_title">Décalage XSection</string>
     <string name="pref_xsection_offset_summary">Décalage des points</string>
     <string name="pref_plot_cache_title">Cache des croquis</string>
-    <string name="pref_plot_cache_summary">Indique s'il faut mettre en cache les croquis en mémoire</string>
+    <string name="pref_plot_cache_summary">Indique s\'il faut mettre en cache les croquis en mémoire</string>
     <string name="pref_slope_lside_title">Lignes de pente côté gauche</string>
     <string name="pref_slope_lside_summary">Lignes de pente par défaut du côté gauche</string>
     <string name="pref_arrow_length_title">Ligne de section pointillée</string>
@@ -2484,7 +2484,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cavway_sync_failed">Échec de la synchronisation de l\'heure du Cavway</string>
     <string name="cavway_synchronized">Heure du Cavway synchronisée</string>
     <string name="cavway_sync_ok">Heure du Cavway synchronisée</string>
-    <string name="cavway_sync_offset">Décalage de l'heure du Cavway: %1$d [min]</string>
+    <string name="cavway_sync_offset">Décalage de l\'heure du Cavway: %1$d [min]</string>
     
     <!-- <string name="done_fractals" translatable="false">Done fractals dims</string> -->
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>

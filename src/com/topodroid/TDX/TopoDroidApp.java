@@ -60,6 +60,7 @@ import com.topodroid.types.LegType;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.PlotType;
 import com.topodroid.types.ExportInfo;
+import com.topodroid.types.ShotType;
 // import com.topodroid.calib.CalibCoeffDialog;
 // import com.topodroid.calib.CalibReadTask;
 import com.topodroid.calib.CalibInfo;
@@ -2398,7 +2399,7 @@ public class TopoDroidApp extends Application
     long time = TDUtil.getTimeStamp();
     distance = distance / TDSetting.mUnitLength;
     // TDLog.v( "[2] duplicate-shot Data " + distance + " " + bearing + " " + clino );
-    long id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend, 0.0, DBlock.FLAG_DUPLICATE, LegType.NORMAL, 1 );
+    long id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend, 0.0, DBlock.FLAG_DUPLICATE, LegType.NORMAL, ShotType.MANUAL );
     if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
       // TDLog.v("APP insert duplicate leg detect bad sibling");
       TDToast.makeWarn( R.string.bad_sibling );
@@ -2467,11 +2468,11 @@ public class TopoDroidApp extends Application
         // extend = TDAzimuth.computeSplayExtend( 270 );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [2]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       } else {
         float b = bearing - 90.0f;
@@ -2480,11 +2481,11 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : ExtendType.EXTEND_UNSET;
         // b = in360( b );
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, l, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, l, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [3]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, l, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, l, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
@@ -2496,11 +2497,11 @@ public class TopoDroidApp extends Application
         // extend = TDAzimuth.computeSplayExtend( 90 );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [4]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       } else {
         // float b = bearing + 90.0f; if ( b >= 360.0f ) b -= 360.0f;
@@ -2508,11 +2509,11 @@ public class TopoDroidApp extends Application
         // extend = TDAzimuth.computeSplayExtend( b );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, r, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, r, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [5]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, r, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, r, b, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
@@ -2523,19 +2524,19 @@ public class TopoDroidApp extends Application
       ok = true;
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [6]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [7]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
@@ -2545,19 +2546,19 @@ public class TopoDroidApp extends Application
       ok = true;
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [8]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
           // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [9]" );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, DBlock.FLAG_SURVEY, LegType.XSPLAY, ShotType.MANUAL );
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
@@ -2624,10 +2625,10 @@ public class TopoDroidApp extends Application
 
           if ( distance > 0.0f ) {
             if ( at >= 0L ) {
-              id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+              id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, ShotType.MANUAL );
               // TDLog.v("APP insert at " + at + " return " + id );
             } else {
-              id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+              id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, ShotType.MANUAL );
             }
             // String name = from + "-" + to;
             mData.updateShotName( id, TDInstance.sid, from, to );
@@ -2643,11 +2644,11 @@ public class TopoDroidApp extends Application
           // TDLog.v( "[2] manual-shot Data " + distance + " " + bearing + " " + clino );
           if ( distance > 0.0f ) {
             if ( at >= 0L ) {
-              id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+              id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, ShotType.MANUAL );
               // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [1]" );
               ++ at;
             } else {
-              id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, 1 );
+              id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, flag0, LegType.NORMAL, ShotType.MANUAL );
             }
             // String name = from + "-" + to;
             mData.updateShotName( id, TDInstance.sid, from, to );

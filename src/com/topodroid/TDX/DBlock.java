@@ -20,6 +20,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.LegType;
 import com.topodroid.types.BlockType;
 import com.topodroid.types.ExtendType;
+import com.topodroid.types.ShotType;
 import com.topodroid.dev.cavway.CavwayConst;
 
 
@@ -660,23 +661,23 @@ public class DBlock
 
   /** @return true if the shot type is "DistoX"
    */
-  boolean isDistoX() { return mShotType <= 0; }
+  boolean isDistoX() { return mShotType <= 0; } // either ShotType.BACKSIGHT or ShotType.FORESIGHT
 
   /** @return true if the shot type is "DistoX - backsight" and the setting "backshot" is set
    */
-  boolean isDistoXBacksight() { return TDSetting.mDistoXBackshot && mShotType == -1; }
+  boolean isDistoXBacksight() { return TDSetting.mDistoXBackshot && mShotType == ShotType.BACKSIGHT; }
 
   /** @return true if the shot type is "DistoX - foresight"
    */
-  boolean isForesight() { return mShotType == 0; }
+  boolean isForesight() { return mShotType == ShotType.FORESIGHT; }
 
   /** @return true if the shot type is "DistoX - backsight"
    */
-  boolean isBacksight() { return mShotType == -1; }
+  boolean isBacksight() { return mShotType == ShotType.BACKSIGHT; }
 
   /** @return true if the shot type is "manual"
    */
-  boolean isManual() { return mShotType > 0; }
+  boolean isManual() { return mShotType == ShotType.MANUAL; } // was > 0
 
   /** set the block ID
    * @param shot_id     shot (block) ID
@@ -938,7 +939,7 @@ public class DBlock
   String bearingString()
   {
     if ( mShotType == -1 ) {
-    return String.format(Locale.US, "%.1f*", mBearing * TDSetting.mUnitAngle );
+      return String.format(Locale.US, "%.1f*", mBearing * TDSetting.mUnitAngle );
     }
     return String.format(Locale.US, "%.1f", mBearing * TDSetting.mUnitAngle );
   }

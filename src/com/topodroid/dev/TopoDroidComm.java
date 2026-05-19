@@ -202,7 +202,7 @@ public class TopoDroidComm
       }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
-              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, 0, comment, TDInstance.deviceAddress(),
+              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, status, comment, TDInstance.deviceAddress(),
               mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mScanSetIdx, time);
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);

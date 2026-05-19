@@ -35,6 +35,7 @@ public class TDString
   public static final String TEN   = "10";
   public static final String TWENTY    = "20";
   public static final String TWENTYFOUR = "24";
+  public static final String FORTY     = "40";
   public static final String FIFTY     = "50";
   public static final String SIXTY     = "60";
   public static final String NINETY    = "90";
