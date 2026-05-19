@@ -32,4 +32,5 @@
     <item quantity="one">Export d\'%1$s relevé sur %2$d</item>
     <item quantity="other">Export d\'%1$s relevé sur %2$d</item>
   </plurals>
+  
 </resources>
