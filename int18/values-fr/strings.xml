@@ -2371,7 +2371,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="dem_failed">Échec du chargement MNE</string>
     <string name="dem_ok">Lecture données MNE</string> 
     <string name="dem">MNE</string>
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
+    <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">Chargement de la texture</string>
     <string name="texture_failed">Échec du chargement de la texture</string>
     <string name="texture_ok">Lecture du fichier de texture</string>

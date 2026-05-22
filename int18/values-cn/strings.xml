@@ -2302,6 +2302,7 @@
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
     <string name="dem">DEM</string>
+    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
     <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">载入纹理</string>
     <string name="texture_failed">纹理载入失败</string>

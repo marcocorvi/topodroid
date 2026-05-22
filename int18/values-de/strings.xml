@@ -2181,6 +2181,8 @@
     <string name="dem_failed">Laden des DEM fehlgeschlagen</string>
     <string name="dem_ok">Lese DEM Daten</string>
     <string name="dem">DEM</string>
+    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
+    <!-- NO string name="texture_file" translatable="false">%1$s</string -->
     <string name="texture_load">DTM laden</string>
     <string name="texture_failed">Laden des DTM fehlgeschlagen</string>
     <string name="texture_ok">Lese DTM Daten</string>
