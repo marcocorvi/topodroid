@@ -2319,7 +2319,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="dem_failed">ERROR: DEM cargando</string>
     <string name="dem_ok">Lectura DEM</string>
     <string name="dem">DEM</string>
-    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
     <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">cargando texturas</string>
     <string name="texture_failed">ERROR: carga de textura</string>

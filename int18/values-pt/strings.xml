@@ -2154,7 +2154,6 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="dem_failed">Falha ao carregar DEM</string>
   <string name="dem_ok">Ler dados DEM</string>
   <string name="dem">DEM</string>
-    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
     <!-- NO string name="texture_file">%1$s</string -->
   <string name="texture_load">carregar textura</string>
   <string name="texture_failed">Falha ao carregar textura</string>

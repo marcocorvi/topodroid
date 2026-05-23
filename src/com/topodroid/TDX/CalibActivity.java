@@ -243,8 +243,10 @@ public class CalibActivity extends Activity
         mTVdip.setText( String.format(Locale.US, getResources().getString( R.string.calib_dip), info.dip ) );
       }
     } else {
-      mEditName.setHint( R.string.name );
-      mEditDate.setText( TDUtil.currentDate() );
+      // mEditName.setHint( R.string.name );
+      String today = TDUtil.currentDate();
+      mEditName.setText( today );
+      mEditDate.setText( today );
       mDeviceAddress = TDInstance.deviceAddress();
       // mEditDevice.setText( mDeviceAddress );
 

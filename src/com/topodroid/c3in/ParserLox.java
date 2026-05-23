@@ -176,6 +176,8 @@ public class ParserLox extends TglParser
       int dim2 = surface.Height();
       // Log.v("TopoGL-LOX", "lox surface orig " + surface.East1() + " N " + surface.North1() );
       // Log.v("TopoGL-LOX", "lox surface orig " + dim1 + "x" + dim2 + " dim " + surface.DimEast() + "x" + surface.DimNorth() );
+
+      // FIXME TODO check that DEM maxsize is properly handled
       if ( TopoGL.mDEMreduce == TopoGL.DEM_SHRINK ) {
         while ( dim1 > TopoGL.mDEMmaxsize || dim2 > TopoGL.mDEMmaxsize ) {
           dim1 /= 2;

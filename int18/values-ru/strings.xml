@@ -2294,7 +2294,6 @@
     <string name="dem_failed">Ошибка загрузки DEM</string>
     <string name="dem_ok">Прочитать данные DEM</string>
     <string name="dem">DEM</string>
-    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
     <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">загрузить текстуру</string>
     <string name="texture_failed">Ошибка загрузки текстуры</string>

@@ -2279,7 +2279,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="dem_failed">Неуспешно зареждане на дигитален модел на височините</string>
     <string name="dem_ok">Четене на данни за дигитален модел на височините</string>
     <string name="dem">Дигитален модел на височините (DEM)</string>
-    <!-- UNUSED string name="dem_undersize">Model size exceeds DEM max size</string -->
     <!-- NO string name="texture_file" translatable="false">%1$s</string -->
     <string name="texture_load">Зареди дигитален теренен модел</string>
     <string name="texture_failed">Неуспешно зареждане на дигитален теренен модел</string>
