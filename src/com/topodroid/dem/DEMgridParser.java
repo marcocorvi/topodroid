@@ -33,8 +33,9 @@ public class DEMgridParser extends ParserDEM
   private boolean flip_horz; // flip_horz: columns are east-to-west
 
   /** cstr
+   * @param isr        input stream reader for the grid
    * @param filename   file fullpath
-   * @param maxsize    ...
+   * @param maxsize    max DEM size in each direction
    */
   public DEMgridParser( InputStreamReader isr, String filename, int maxsize ) // FIXME DEM_URI
   {

@@ -318,11 +318,11 @@ public class TopoGL extends Activity
           // Cave3DFile.setTopoDroidPaths( mSurveyBase ); // BLUETOOTH
 
           if ( mThconfigName != null ) { // used by TdManager
-            TDLog.v("TdManager input tdconfig " + mThconfigName );
+            // TDLog.v("TdManager input tdconfig " + mThconfigName );
             mFileDialog = false;
             doOpenFile( null, mThconfigName, true ); // asynch
           } else if ( mSurveyName != null ) {
-            TDLog.v("TopoDroid input survey " + mSurveyName + " mSurveyBase " + mSurveyBase);
+            // TDLog.v("TopoDroid input survey " + mSurveyName + " mSurveyBase " + mSurveyBase);
             if ( doOpenSurvey( mSurveyName, mSurveyBase ) ) {
               doSketches = true;
               mFileDialog = false;
@@ -371,7 +371,7 @@ public class TopoGL extends Activity
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     // TDLog.v("on create: Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 );
-    TDLog.v("GL on create - texture root: " + mTextureRoot );
+    // TDLog.v("GL on create - texture root: " + mTextureRoot );
     checkPreferences();
 
     mHasC3d     &= TDLevel.overExpert;
@@ -476,7 +476,7 @@ public class TopoGL extends Activity
   protected void onStart()
   {
     super.onStart();
-    TDLog.v("TopoGL on Start");
+    // TDLog.v("TopoGL on Start");
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
       TDandroid.requestExternalStorage( this, this );
     }
@@ -521,7 +521,7 @@ public class TopoGL extends Activity
   protected void onResume()
   {
     super.onResume();
-    TDLog.v("TopoGL on Resume");
+    // TDLog.v("TopoGL on Resume");
     if ( rendererSet ) {
       // TDLog.v("TopoGL on resume");
       // glSurfaceView.setMinimumWidth( mLayout.getWidth() );
@@ -1162,7 +1162,7 @@ public class TopoGL extends Activity
    */
   private void setButtonStation()
   {
-    TDLog.v("GL set button station - select " + mSelectStation + " station " + GlNames.getStationMode() );
+    // TDLog.v("GL set button station - select " + mSelectStation + " station " + GlNames.getStationMode() );
     if ( mSelectStation ) {
       switch ( GlNames.getStationMode() ) {
         case GlNames.STATION_NONE:
@@ -1501,11 +1501,11 @@ public class TopoGL extends Activity
     if ( uri == null ) {
       // String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
-      TDLog.v("TopoGL input stream from tdconfig " + pathname + " path " + path );
+      // TDLog.v("TopoGL input stream from tdconfig " + pathname + " path " + path );
       // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE ?
       try {
         // final InputStream is = new FileInputStream( path );
-        TDLog.v("GL get input stream of path " + path );
+        // TDLog.v("GL get input stream of path " + path );
         InputStream is = TDFile.getTopoDroidFileInputStream( path );
         if ( is == null ) {
           TDToast.makeBad( R.string.no_file );
@@ -1544,7 +1544,7 @@ public class TopoGL extends Activity
       }
     } else {
       String path = pathname; // uri.getPath();
-      TDLog.v("TopoGL input stream from uri " + path );
+      // TDLog.v("TopoGL input stream from uri " + path );
       try { 
         final InputStream is = this.getContentResolver().openInputStream( uri );
         if ( initRendering2( is, path, mSurveyName ) ) {
@@ -1640,7 +1640,7 @@ public class TopoGL extends Activity
   /** open a DEM file
    * @param uri   file URI
    */
-  void openDEM( Uri uri )
+  private void openDEM( Uri uri )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.DEM );
     // InputStreamReader isr = null;
@@ -2244,7 +2244,7 @@ public class TopoGL extends Activity
    */
   private boolean initRendering1( String survey, String base ) 
   {
-    TDLog.v("TopoGL init rendering " + survey + " base " + base );
+    // TDLog.v("TopoGL init rendering " + survey + " base " + base );
     doSketches = false;
     try {
       // FIXME null InputStream
@@ -2276,18 +2276,18 @@ public class TopoGL extends Activity
     doSketches = false;
     String ext  = TDPath.getExtension( filepath );
     String name = TDPath.getMainname( filepath );
-    TDLog.v("init rendering (2) file " + filepath + " survey " + surveyname + " name " + name + " ext " + ext );
+    // TDLog.v("init rendering (2) file " + filepath + " survey " + surveyname + " name " + name + " ext " + ext );
     try {
       mParser = null;
       if ( mRenderer != null ) mRenderer.clearModel();
       // resetAllPaths();
       if ( ext.equals( "tdconfig" ) ) { // isr not used  // FIXME may null pointer
-        TDLog.v("init rendering (2) TDCONGIF"); // TopoDroid TDM projects
+        // TDLog.v("init rendering (2) TDCONGIF"); // TopoDroid TDM projects
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.TDCONFIG ); // tdconfig files are saved with therion syntax
         doSketches = true;
       } else if ( ext.equals( "thconfig" ) ) { // isr not used
-        TDLog.v("init rendering (2) THCONGIF");
+        // TDLog.v("init rendering (2) THCONGIF");
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.THCONFIG ); 
       } else if ( ext.equals( "th" ) ) { // isr not used
@@ -3049,7 +3049,7 @@ public class TopoGL extends Activity
    */
   void selectDEMFile( )
   {
-    TDLog.v("Topo GL select DEM file");
+    // TDLog.v("Topo GL select DEM file");
     onDEMloading = true;
     // selectFile( REQUEST_DEM_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file, null ); 
     selectFile( REQUEST_DEM_FILE, false, -1, R.string.select_dem_file, null ); 
@@ -3059,7 +3059,7 @@ public class TopoGL extends Activity
    */
   void selectTextureFile( )
   {
-    TDLog.v("Topo GL select Texture file");
+    // TDLog.v("Topo GL select Texture file");
     onDEMloading = true;
     // selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); 
     selectFile( REQUEST_TEXTURE_FILE, false, -1, R.string.select_texture_file, null ); 
@@ -3223,7 +3223,7 @@ public class TopoGL extends Activity
   void sketchLeg( Cave3DShot leg ) 
   {
     if ( leg == null ) return; // safety check
-    TDLog.v("TopoGL - sketch leg: " + leg.from + " " + leg.to );
+    // TDLog.v("TopoGL - sketch leg: " + leg.from + " " + leg.to );
     setSketchLeg( leg );
     Intent intent = new Intent( this, com.topodroid.TDX.SketchWindow.class );
     intent.putExtra( "TOPOGL_SKETCH_VERTICAL", true );

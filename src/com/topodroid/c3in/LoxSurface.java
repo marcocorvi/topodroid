@@ -19,13 +19,37 @@ class LoxSurface
   private final double[] calib;
   private final double[] grid;
 
+  /** @return West bound
+   */
   double East1()    { return (calib[0]); }
+
+  /** @return North bound
+   */
   double North1()   { return (calib[1]); } // loch data are written north-to-south
-  int NrEast()     { return ww; }
-  int NrNorth()    { return hh; }
+
+  /** @return West-East size
+   */
   double DimEast()  { return (calib[2]); }
+
+  /** @return North-South size
+   */
   double DimNorth() { return (calib[5]); }
 
+  /** @return number of cells in East direction
+   */
+  int NrEast()     { return ww; }
+
+  /** @return number of cells in North direction
+   */
+  int NrNorth()    { return hh; }
+
+  /** cstr
+   * @param _id ???
+   * @param w   surface width (nr. or cells)
+   * @param h   surface height
+   * @param c   surface calibration matrix: translation + rotation
+   * @param g   surface data
+   */
   LoxSurface( int _id, int w, int h, double[] c, double[] g )
   {
     id = _id;
@@ -38,11 +62,20 @@ class LoxSurface
   }
 
   // int Id()      { return id; }
+
+  /** @return the surface width (nr of cells)
+   */
   int Width()   { return ww; }
+
+  /** @return the surface height (nr of cells)
+   */
   int Height()  { return hh; }
 
   // double Calib( int k )  { return calib[k]; }
   // double Z( int i, int j )  { return grid[ j * ww + i ]; }
+
+  /** @return pointer to the surface data
+   */
   double[] Grid() { return grid; }
 
 }

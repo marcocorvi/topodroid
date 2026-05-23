@@ -19,6 +19,11 @@ package com.topodroid.dem;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 // import com.topodroid.util.TDFile;
+// import com.topodroid.TDX.TDInstance;
+// import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.R;
+
+// import android.app.Activity;
 
 // import java.io.FileReader;
 // import java.io.BufferedReader;
@@ -30,6 +35,7 @@ import java.io.InputStreamReader;
  */
 public class DEMasciiParser extends ParserDEM
 {
+  // private Activity mParent;
   private double  xll,  yll;  // Lower-left corner of lower-left cell
   private int     cols, rows; // columns, rows
   private boolean flip_horz;  // whether to flip lines horizontally
@@ -76,7 +82,7 @@ public class DEMasciiParser extends ParserDEM
       TDLog.v("DEM parser Xll " + xll + " Yll " + yll );
 
       double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint - mDim2 = Y-cell-size
-      TDLog.v("DEM upper-row midpoint Y " + y + " Y-north " + ynorth + " rows " + rows + " dims " + mDim2 );
+      // TDLog.v("DEM upper-row midpoint Y " + y + " Y-north " + ynorth + " rows " + rows + " dims " + mDim2 );
       int k = 0;
       for ( ; k < rows && y > ynorth; ++k ) {
         mBr.readLine();
@@ -93,10 +99,10 @@ public class DEMasciiParser extends ParserDEM
       mEast1 = x;
       int xoff = i;
       mNr1 = 0;
-      TDLog.v("DEM east1 " + mEast1 + " north2 " + mNorth2 + " xstart " + xoff );
+      // TDLog.v("DEM east1 " + mEast1 + " north2 " + mNorth2 + " xstart " + xoff );
       for ( ; i < cols && x <= xeast; ++i ) { x += mDim1; ++mNr1; }
       mEast2 = x - mDim1;
-      TDLog.v("DEM east " + mEast1 + " " + mEast2 );
+      // TDLog.v("DEM east " + mEast1 + " " + mEast2 );
 
       if ( mNr1 > mMaxSize ) {
         int d = (mNr1 - mMaxSize)/2;

@@ -29,7 +29,7 @@ import java.io.FileOutputStream;
 
 abstract class ItemDrawer extends Activity
 {
-  static final int POINT_MAX = 32678;
+  static final int POINT_MAX = 32768;
   static final int PDF_MARGIN = 40;
 
   protected Activity mActivity = null;
