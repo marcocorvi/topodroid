@@ -483,8 +483,8 @@
     <string name="no_symbols">Nincs szimbólum paletta.</string>
     <!-- UNUSED string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string -->
     <!-- UNUSED string name="no_db_viewer">A DB_viewer alkalmazás nem található</string -->
-    <string name="no_undelete">Nincs helyreállítható részlet</string>
-    <string name="no_undelete_paste">Nincs visszaállítható/beilleszthető elem</string>
+    <!-- UNUSED string name="no_undelete">Nincs helyreállítható részlet</string -->
+    <!-- UNUSED string name="no_undelete_paste">Nincs visszaállítható/beilleszthető elem</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Az. %5$.1f</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Le. %5$.1f</string>
     <string name="format_setting">Beállítások %1$s -tól %2$s -ig ?</string>
@@ -757,7 +757,6 @@
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX kalibrációs üzemmód váltás</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
-    <string name="undelete_paste_text">Elem visszaállít/beilleszt</string>
     <string name="shot_paste_text">Mérés beillesztés</string>
     <string name="undelete_shot">Mérések</string>
     <string name="undelete_overshoot">Túlmérések</string>

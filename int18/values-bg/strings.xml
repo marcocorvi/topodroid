@@ -484,8 +484,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_symbols">Няма палитра със символи.</string>
     <!-- UNUSED string name="no_thmanager">ThManager не е инсталиран</string -->
     <!-- UNUSED string name="no_db_viewer">Приложението DB_viewer не е намерено</string -->
-    <string name="no_undelete">Няма елементи за възстановяване</string>
-    <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
+    <!-- UNUSED string name="no_undelete">Няма елементи за възстановяване</string -->
+    <!-- UNUSED string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f\"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f\"</string>
     <string name="format_setting">Настройка %1$s до %2$s ?</string>
@@ -757,7 +757,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="toggle_failed">Неуспешно превключване на DistoX</string>
     <string name="toggle_ok">Превключен в режим на калибриране DistoX</string>
     <string name="undelete_text">Възстановяване</string>
-    <string name="undelete_paste_text">Възстановяване/поставяне</string>
     <string name="shot_paste_text">Постави измерването</string>
     <string name="undelete_shot">Измервания</string>
     <string name="undelete_overshoot">Повишени измервания</string>

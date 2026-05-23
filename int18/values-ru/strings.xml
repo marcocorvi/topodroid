@@ -482,8 +482,8 @@
     <string name="no_symbols">Нет палитры для символа.</string>
     <!-- UNUSED string name="no_thmanager">ThManager не установлен</string -->
     <!-- UNUSED string name="no_db_viewer">Приложение просмотра баз данных не найдено</string -->
-    <string name="no_undelete">Нечего восстанавливать</string>
-    <string name="no_undelete_paste">Нет записей для восстановления/вставки</string>
+    <!-- UNUSED string name="no_undelete">Нечего восстанавливать</string -->
+    <!-- UNUSED string name="no_undelete_paste">Нет записей для восстановления/вставки</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Уклон %5$.1f"</string>
     <string name="format_setting">Переформатировать %1$s в %2$s ?</string>
@@ -753,7 +753,6 @@
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
-    <string name="undelete_paste_text">Восстановить/вставить записи</string>
     <string name="shot_paste_text">Вставить замер</string>
     <string name="undelete_shot">Замеры</string>
     <string name="undelete_overshoot">Сл.длинные замеры</string>

@@ -459,8 +459,8 @@
     <string name="no_symbols">Keine Palette</string>
     <!-- UNUSED string name="no_thmanager">Keine ThManager App</string -->
     <!-- UNUSED string name="no_db_viewer">Keine DB_viewer App</string -->
-    <string name="no_undelete">Nichts wiederherzustellen</string>
-    <string name="no_undelete_paste">Nichts einzufügen</string>
+    <!-- UNUSED string name="no_undelete">Nichts wiederherzustellen</string -->
+    <!-- UNUSED string name="no_undelete_paste">Nichts einzufügen</string -->
     <string name="format_measure_plan">Dist %1$.2f (Total %2$.2f) ∠ %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <string name="format_measure_profile">Dist %1$.2f (Total %2$.2f) ∠ %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
@@ -714,7 +714,6 @@
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
     <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
-    <string name="undelete_paste_text">Wiederherstellen</string>
     <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Messungen</string>
     <string name="undelete_overshoot">Zu lange Messungen</string>

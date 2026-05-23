@@ -275,7 +275,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>
     <string name="few_groups">Not enough data with group</string>
     <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
-    <string name="regroup">No regroup</string><!-- lint: unued -->
+    <string name="regroup">No regroup</string><!-- lint: unused -->
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
     <string name="getting_info">Getting DistoX info &#8230;</string>
@@ -498,8 +498,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_symbols">No symbol palette.</string>
     <!-- UNUSED string name="no_thmanager">ThManager not installed</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
-    <string name="no_undelete">No item to recover</string>
-    <string name="no_undelete_paste">No item to recover/paste</string>
+    <!-- UNUSED string name="no_undelete">No item to recover</string -->
+    <!-- UNUSED string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <string name="format_setting">Setting %1$s to %2$s ?</string>
@@ -785,7 +785,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="toggle_failed">Failed to toggle DistoX</string>
     <string name="toggle_ok">Toggled DistoX calibration mode</string>
     <string name="undelete_text">Recover items</string>
-    <string name="undelete_paste_text">Recover/paste items</string>
     <string name="shot_paste_text">Shot paste</string>
     <string name="undelete_shot">Shots</string>
     <string name="undelete_overshoot">Overshoots</string>
@@ -1482,7 +1481,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_settings_geek_line">Secondary lines settings</string>
     <string name="title_settings_geek_device">Secondary device settings</string>
     <string name="title_settings_geek_import">Secondary import/export settings</string>
-    <string name="title_settings_log">Log settings</string>
+    <string name="title_settings_log">Log settings</string> <!-- lint: unused -->
 
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>

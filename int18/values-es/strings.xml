@@ -483,8 +483,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_symbols">Sin paleta de símbolos.</string>
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
-    <string name="no_undelete">No hay medida para recuperar</string>
-    <string name="no_undelete_paste">No hay elementos para restaurar</string>
+    <!-- UNUSED string name="no_undelete">No hay medida para recuperar</string -->
+    <!-- UNUSED string name="no_undelete_paste">No hay elementos para restaurar</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f rodado %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
    <string name="format_setting">¿Configurar %1$s a %2$s?</string>
@@ -764,7 +764,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="toggle_failed">Error al conectar con DistoX</string>
     <string name="toggle_ok">Cambiar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
-    <string name="undelete_paste_text">Restaurar / Pegar elementos</string>
     <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Toma</string>
     <string name="undelete_overshoot">Exceso</string>

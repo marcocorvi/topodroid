@@ -498,8 +498,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_symbols">Pas de palette symboles.</string>
     <!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
-    <string name="no_undelete">Aucun élément à récupérer</string>
-    <string name="no_undelete_paste">Aucun élément à récupérer/coller</string>
+    <!-- UNUSED string name="no_undelete">Aucun élément à récupérer</string -->
+    <!-- UNUSED string name="no_undelete_paste">Aucun élément à récupérer/coller</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
     <string name="format_setting">Paramètres %1$s vers %2$s ?</string>
@@ -785,7 +785,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
-    <string name="undelete_paste_text">Récupérer/copier éléments</string>
 	 <string name="shot_paste_text">Visée collée</string>
     <string name="undelete_shot">Visées</string>
     <string name="undelete_overshoot">Dépassements</string>

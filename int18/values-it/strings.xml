@@ -480,8 +480,8 @@
     <string name="no_symbols">Nessuna palette di strumenti</string>
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
-    <string name="no_undelete">Nessun oggetto da riprendere</string>
-    <string name="no_undelete_paste">Nessun elemento da ripristinare</string>
+    <!-- UNUSED string name="no_undelete">Nessun oggetto da riprendere</string -->
+    <!-- UNUSED string name="no_undelete_paste">Nessun elemento da ripristinare</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
     <string name="format_setting">Impostazione %1$s a %2$s ?</string>
@@ -752,7 +752,6 @@
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
-    <string name="undelete_paste_text">Elementi Ripristina/Incolla</string>
     <!-- TODO string name="shot_paste_text">Shot paste</string -->
     <string name="undelete_shot">Tiri</string>
     <string name="undelete_overshoot">Tiri lunghi</string>
