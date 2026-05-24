@@ -1159,6 +1159,7 @@ class ShotEditDialog extends MyDialog
     //   onBackPressed();
   }
 
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

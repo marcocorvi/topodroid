@@ -727,6 +727,7 @@ public class Archiver
     return ret;
   }
 
+  @SuppressWarnings("unchecked") // ClassCastExeption is caught
   public int unArchive( TopoDroidApp app, String filename, boolean force )
   {
     TDLog.v("ZIP 7 un-archive file " + filename );

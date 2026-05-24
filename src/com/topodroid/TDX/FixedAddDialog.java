@@ -363,6 +363,7 @@ class FixedAddDialog extends MyDialog
 
   /** react to BACK tap: dismiss the dialog
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

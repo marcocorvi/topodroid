@@ -74,7 +74,7 @@ import java.util.List;
 // import java.util.Set;
 import java.util.Locale;
 
-// import android.os.Environment;
+import android.os.Environment;
 import android.os.Build; // FINERPRINT and MODEL
 import android.os.Bundle;
 import android.os.Handler;
@@ -1673,7 +1673,7 @@ public class TopoGL extends Activity
         if ( dem == null || ! dem.valid() ) return false;
         final double dd = mDEMbuffer;
         // mParser = survey data parser
-        // TDLog.v("BBox X " + mParser.emin + " " + mParser.emax + " Y " + mParser.nmin + " " + mParser.nmax + " Z " + mParser.zmin + " " + mParser.zmax );
+        // TDLog.v("BBox X " + mParser.emin + " " + mParser.emax + " Y " + mParser.nmin + " " + mParser.nmax + " Z " + mParser.zmin + " " + mParser.zmax + " DEM buffer " + dd );
         dem.readData( mParser.emin - dd, mParser.emax + dd, mParser.nmin - dd, mParser.nmax + dd );
         return dem.valid();
       }
@@ -1743,7 +1743,7 @@ public class TopoGL extends Activity
     // TDLog.v("Texture Path " + pathname + " file " + filename );
     // get the model tie-point (upper left corner), the width-height, and the pixel scale
     
-    TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
+    // TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
 
@@ -1778,11 +1778,11 @@ public class TopoGL extends Activity
           TDLog.e( e.getMessage() );
           return 1; 
         }
-        if ( bitmap != null ) {
-          TDLog.v("texture [2] " + filepath + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
-        } else {
-          TDLog.v("texture [3] " + filepath + " null bitmap ");
-        }
+        // if ( bitmap != null ) {
+        //   TDLog.v("texture [2] " + filepath + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
+        // } else {
+        //   TDLog.v("texture [3] " + filepath + " null bitmap ");
+        // }
 
         return (bitmap != null)? 0 : 2;
       }
@@ -1952,7 +1952,8 @@ public class TopoGL extends Activity
   public static float mDEMbuffer  = 200;
   public static int   mDEMmaxsize = 400;
   public static int   mDEMreduce  = DEM_SHRINK;
-  public static String mTextureRoot = "/sdcard/"; // Environment.getExternalStorageDirectory().getPath();
+  // public static String mTextureRoot = "/sdcard/"; 
+  public static String mTextureRoot = Environment.getExternalStorageDirectory().getPath();
   // static boolean mWallConvexHull = false;
   // static boolean mWallPowercrust = false;
   // static boolean mWallDelaunay   = false;

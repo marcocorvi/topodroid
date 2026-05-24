@@ -7644,8 +7644,8 @@ public class DrawingWindow extends ItemDrawer
         updateReference();
         if ( TDInstance.getDeviceA() == null ) {
           DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
-          (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
-          // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
+          (new ShotNewDialog( mActivity, mActivity, mApp, this, last_blk, -1L )).show();
+          // (new ShotNewDialog( mActivity, mActivity, mApp, this, null, -1L )).show();
         } else {
           mDataDownloader.toggleDownloading();
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
@@ -7679,8 +7679,8 @@ public class DrawingWindow extends ItemDrawer
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend ); // flip fixed extend left/right
           } else {
-            (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
-            // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
+            (new AzimuthDialog( mActivity, mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
+            // (new AzimuthDialog( mActivity, mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
           }
         }
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH

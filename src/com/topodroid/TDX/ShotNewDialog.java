@@ -32,6 +32,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import android.os.Bundle;
+import android.app.Activity;
+
 import android.widget.RadioButton;
 
 import android.content.Context;
@@ -672,6 +674,7 @@ class ShotNewDialog extends MyDialog
 
   /** implements user back-press
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

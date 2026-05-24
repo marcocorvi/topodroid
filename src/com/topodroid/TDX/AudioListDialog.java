@@ -208,6 +208,7 @@ class AudioListDialog extends MyDialog
 
   /** implements user back-press
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

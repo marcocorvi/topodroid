@@ -126,6 +126,7 @@ class PlotSearchDialog extends MyDialog
     dismiss();
   }
 
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

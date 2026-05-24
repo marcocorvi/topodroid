@@ -583,7 +583,7 @@ public class CalibTransform
     float mv = v.maxAbsValue() * TDUtil.FV;
     float mm = m.maxAbsValue() * TDUtil.FM;
     if ( mv > mm ) mm = mv;
-    if ( mm > 32768 ) { 
+    if ( mm > 32768 ) { // 32768 = 256*128 = 1<<15 = 0x010000
       mv = 32768 / mm;
       m.timesEqual( mv );
       v.timesEqual( mv );

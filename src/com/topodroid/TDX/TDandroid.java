@@ -183,7 +183,7 @@ public class TDandroid
   {
     String manufacturer = Build.MANUFACTURER;
     String model = Build.MODEL;
-    if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
+    if (model.toLowerCase( Locale.US ).startsWith(manufacturer.toLowerCase( Locale.US ))) {
       return model;
     } else {
       return manufacturer + "-" + model;

@@ -843,6 +843,7 @@ class ProjectionDialog extends MyDialog
 
   /** react to a user tap on BACK: stop drawing and close the dialog with no further action
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

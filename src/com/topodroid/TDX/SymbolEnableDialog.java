@@ -233,6 +233,8 @@ class SymbolEnableDialog extends MyDialog
 
   // static SaveSymbols mSaveSymbols = null; // new SaveSymbols();
 
+  // @SuppressLint("deprecation")
+  @Override
   public void onBackPressed()
   {
     SaveSymbols save = new SaveSymbols();

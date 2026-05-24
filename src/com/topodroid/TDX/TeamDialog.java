@@ -125,11 +125,12 @@ class TeamDialog extends MyDialog
     }
   }
 
-  @Override
-  public void onBackPressed()
-  {
-    super.onBackPressed();
-  }
+  // @SuppressLint("deprecation")
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   super.onBackPressed();
+  // }
 
 }
 

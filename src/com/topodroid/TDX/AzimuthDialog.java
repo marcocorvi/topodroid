@@ -273,6 +273,7 @@ class AzimuthDialog extends MyDialog
 
   /** react to a tap on BACK - cancel the timer and close the dialog
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

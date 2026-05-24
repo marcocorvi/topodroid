@@ -1186,7 +1186,7 @@ public class ShotWindow extends Activity
   //  */
   // void dialogInsertShotAt( DBlock blk )
   // {
-  //   (new ShotNewDialog( this, mApp, this, blk, blk.mId )).show();
+  //   (new ShotNewDialog( this, this, mApp, this, blk, blk.mId )).show();
   // }
 
   // /** insert a manual intermediate leg - called by ShotEditDialog// INTERMEDIATE_DATA
@@ -1906,15 +1906,15 @@ public class ShotWindow extends Activity
         if ( TDLevel.overBasic ) {
           // mSearch = null; // invalidate search
           DBlock last_blk = mApp_mData.selectLastShotWithFromStation( TDInstance.sid );
-          (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
+          (new ShotNewDialog( mActivity, mActivity, mApp, this, last_blk, -1L )).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
         if ( TDLevel.overNormal ) {
           if ( TDSetting.mAzimuthManual ) { // toggle between LEFT and RIGHT "extend"
             setRefAzimuth( TDAzimuth.mRefAzimuth, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
-            // FIXME_AZIMUTH_DIAL (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
+            (new AzimuthDialog( mActivity, mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            // FIXME_AZIMUTH_DIAL (new AzimuthDialog( mActivity, mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
 

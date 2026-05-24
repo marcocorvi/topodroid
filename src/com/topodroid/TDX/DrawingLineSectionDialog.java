@@ -266,6 +266,7 @@ class DrawingLineSectionDialog extends MyDialog
     mTdImage = null;
   }
 
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {    

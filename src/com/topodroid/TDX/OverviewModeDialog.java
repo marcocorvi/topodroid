@@ -97,6 +97,7 @@ class OverviewModeDialog extends MyDialog
       dismiss();
     }
 
+    // @SuppressLint("deprecation")
     // @Override
     // public void onBackPressed ()
     // {

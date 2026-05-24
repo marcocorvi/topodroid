@@ -159,6 +159,7 @@ class StationPhotoDialog extends MyDialog
 
   /** react to a user tap on BACK - recycle the image
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

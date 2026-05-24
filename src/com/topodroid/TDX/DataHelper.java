@@ -2152,6 +2152,7 @@ public class DataHelper extends DataSetObservable
 
     InsertHelper ih = new InsertHelper( myDB, SHOT_TABLE ); // DEPRECATED API-17
     // TODO use SQliteStatement
+    
     final int surveyIdCol = ih.getColumnIndex( "surveyId" );
     final int idCol       = ih.getColumnIndex( "id" );
     final int fStationCol = ih.getColumnIndex( "fStation" );

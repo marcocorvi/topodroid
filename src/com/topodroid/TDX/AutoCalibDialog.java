@@ -488,6 +488,7 @@ public class AutoCalibDialog extends MyDialog
     }
   }
 
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

@@ -183,6 +183,7 @@ class DrawingModeDialog extends MyDialog
       dismiss();
     }
 
+    // @SuppressLint("deprecation")
     // @Override
     // public void onBackPressed ()
     // {

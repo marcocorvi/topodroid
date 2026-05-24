@@ -222,6 +222,7 @@ class PlotNewDialog extends MyDialog
 
   /** handle a press on the BACK button
    */
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

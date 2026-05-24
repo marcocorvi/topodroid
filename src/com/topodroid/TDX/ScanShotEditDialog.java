@@ -255,6 +255,7 @@ class ScanShotEditDialog extends MyDialog
     // onBackPressed();
   }
 
+  // @SuppressLint("deprecation")
   // @Override
   // public void onBackPressed()
   // {

@@ -133,6 +133,7 @@ class HighlightDialog extends MyDialog
     dismiss();
   }
 
+  // @SuppressLint("deprecation")
   @Override
   public void onBackPressed()
   {

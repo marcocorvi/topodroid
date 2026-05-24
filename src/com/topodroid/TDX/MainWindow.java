@@ -70,6 +70,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 
+import android.os.Environment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
@@ -604,7 +605,8 @@ public class MainWindow extends Activity
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals( TDPath.TH ) ) {
       setTitleImport();
-      String filepath = uri.getPath().replace("document/primary:", "/sdcard/" ); // FIXME_IMPORT
+      // String filepath = uri.getPath().replace("document/primary:", "/sdcard/" ); // FIXME_IMPORT
+      String filepath = uri.getPath().replace("document/primary:", Environment.getExternalStorageDirectory().getPath() ); // FIXME_IMPORT
       TDLog.v( "MAIN import File Path " + filepath );
       new ImportTherionTask( this, pfd, data ).execute( name, name, filepath );
     } else if ( type.equals( TDPath.DAT ) ) {

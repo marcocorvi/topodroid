@@ -373,7 +373,7 @@ public class CavwayProtocol extends TopoDroidProtocol
           if ( LOG ) TDLog.v( TAG + "hw v. " + mHardVer );
           return PACKET_INFO_HARDWARE;
         } else if ( addr == CavwayDetails.TIMESTAMP_ADDRESS ) {
-          // TDLog.v(String.format("Reply %d %d %d %d %02x %02x %02x %02x", 
+          // TDLog.v(String.format(Locale.US, "Reply %d %d %d %d %02x %02x %02x %02x", 
           //   databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           mTimeStamp = MemoryData.toLong( databuf[7], databuf[6], databuf[5], databuf[4]); // seconds since the epoch
           if ( LOG ) TDLog.v( TAG + "time " + mTimeStamp );
@@ -383,7 +383,7 @@ public class CavwayProtocol extends TopoDroidProtocol
           return PACKET_INFO_TIMESTAMP;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
           if ( LOG ) TDLog.v( TAG + "reply (3D)");
-          TDLog.v(String.format("PROTO Reply to 0x3d: %d %d %d %d %02x %02x %02x %02x", 
+          TDLog.v(String.format(Locale.US, "PROTO Reply to 0x3d: %d %d %d %d %02x %02x %02x %02x", 
             databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           if ( mComm.isReadingMemory() ) {
             if ( LOG ) TDLog.v( TAG + "handle memory read");
