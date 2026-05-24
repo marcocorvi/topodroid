@@ -281,7 +281,7 @@ public class DrawingSplayPath extends DrawingPath
     //   mPaint = BrushManager.highlightPaint;
     //   return;
     // }
-    if ( TDLevel.overAdvanced ) {
+    if ( TDLevel.overExpert ) {
       if ( blk.isCommented() ) { // FIXME_COMMENTED
         mPaint = BrushManager.paintSplayComment; // VERYDARK_GRAY
         return true;
@@ -318,7 +318,7 @@ public class DrawingSplayPath extends DrawingPath
   private void setSplayPaintAzimuth( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
   {
     if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
-    if (cosine >= 0 ) {
+    if ( cosine > 0 ) {
       if ( cosine < TDSetting.mCosHorizSplay ) {
         mPaint = BrushManager.paintSplayXBdot;
         // TDLog.v("paint DOT cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
@@ -341,7 +341,7 @@ public class DrawingSplayPath extends DrawingPath
   private void setSplayPaintClino( DBlock blk, Paint h_paint, Paint v_paint )
   {
     if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
-    if (blk.mClino > TDSetting.mVertSplay ) {
+    if ( blk.mClino > TDSetting.mVertSplay ) {
       // TDLog.v("paint DOT clino " + blk.mClino + " " + TDSetting.mVertSplay );
       mPaint= BrushManager.paintSplayXBdot;
     } else if (blk.mClino < -TDSetting.mVertSplay) {
@@ -361,7 +361,7 @@ public class DrawingSplayPath extends DrawingPath
   private void setSplayPaintProjected( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
   {
     if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
-    if (cosine >= 0 ) {
+    if ( cosine > 0 ) {
       if ( cosine > TDSetting.mCosHorizSplay ) {
         mPaint = BrushManager.paintSplayXBdot;
         // TDLog.v("paint DOT cosine " + cosine+ " " + TDSetting.mCosHorizSplay );

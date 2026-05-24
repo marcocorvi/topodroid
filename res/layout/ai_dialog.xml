@@ -25,6 +25,7 @@
       android:layout_weight="25"
       android:inputType="text"
       android:autofillHints="no"
+      android:hint="@string/ai_temperature"
     />
     <EditText android:id="@+id/max_tokens"
       android:layout_width="0dp"
@@ -32,6 +33,7 @@
       android:layout_weight="25"
       android:inputType="text"
       android:autofillHints="no"
+      android:hint="@string/ai_max_tokens"
     />
   </LinearLayout>
 

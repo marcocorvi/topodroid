@@ -127,7 +127,7 @@ class DrawingShotDialog extends MyDialog
     mETcomment = (EditText) findViewById(R.id.shot_comment );
     TextView tv_type    = (TextView) findViewById(R.id.shot_type ); // 20230118 local var "tv_type"
     // TextView tv_mark    = (TextView) findViewById(R.id.shot_mark ); // cavway flag
-    if (mBlock.isBacksight() ) {
+    if ( mBlock.isBacksight() ) {
       tv_type.setText( R.string.type_b );
     } else if (mBlock.isForesight() ) {
       tv_type.setText( R.string.type_d );
@@ -135,7 +135,7 @@ class DrawingShotDialog extends MyDialog
       tv_type.setText( R.string.type_m );
     }
 
-    if (mBlock.isMultiBad() ) {
+    if ( mBlock.isMultiBad() ) {
       tv_type.setTextColor( TDColor.DARK_ORANGE );
     } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( mBlock ) ) {
       tv_type.setTextColor( TDColor.FIXED_RED );

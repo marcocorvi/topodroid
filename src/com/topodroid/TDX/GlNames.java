@@ -151,7 +151,7 @@ public class GlNames extends GlShape
    */
   Vector3D getCenter()
   {
-    if ( mHighlight < 0 ) return null;
+    if ( mHighlight <= 0 ) return null;
     int k = 4 * mHighlight;
     return new Vector3D( mData[k], mData[k+1], mData[k+2] );
   }
@@ -164,7 +164,7 @@ public class GlNames extends GlShape
    */
   public static void setPointSize( float size )
   { 
-    if ( size <= 1 ) return;
+    if ( size < 1 ) return;
     // TDLog.v("GL NAME point size " + size );
     mPointSize  = size;
     mPointSize4 = 2*size;
@@ -175,7 +175,7 @@ public class GlNames extends GlShape
    */
   public static void setTextSize( int size ) 
   { 
-    if ( size <= 1 ) return;
+    if ( size < 1 ) return;
     mTextSizeP = size / 20.0f; 
     mTextSizeO = size / 40.0f;  // half size
     // TDLog.v("GL NAMES text size " + mTextSizeP + " " + mTextSizeO );
@@ -428,7 +428,7 @@ public class GlNames extends GlShape
       GL.useProgram( mProgram );
       bindData( mvpMatrix ); 
       GL.drawTriangle( 0, nameCount*2 );
-      if ( mHighlight >= 0 && mHighlight < nameCount ) {
+      if ( mHighlight > 0 && mHighlight < nameCount ) {
         // TDLog.v("box-highlight " + mHighlight + " " + mNames.get( mHighlight ).name );
         GL.useProgram( mProgramHL );
         bindDataHL( mvpMatrix ); 
@@ -439,7 +439,7 @@ public class GlNames extends GlShape
       GL.useProgram( mProgramPos );
       bindDataPos( mvpMatrix );
       GL.drawPoint( 0, nameCount );
-      if ( mHighlight >= 0 && mHighlight < nameCount ) {
+      if ( mHighlight > 0 && mHighlight < nameCount ) {
         // TDLog.v("point-highlight " + mHighlight + " " + mNames.get( mHighlight ).name );
         GL.useProgram( mProgramPosHL );
         bindDataPosHL( mvpMatrix ); 

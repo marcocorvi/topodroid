@@ -26,7 +26,7 @@ import android.content.Context;
 public class DataDownloader
 {
   private final static String TAG = "DOWNLOAD ";
-  private final static boolean LOG = true;
+  private final static boolean LOG = false;
   // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
 
   // private Context mContext; // UNUSED

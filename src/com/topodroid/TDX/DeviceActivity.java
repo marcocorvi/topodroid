@@ -406,7 +406,7 @@ public class DeviceActivity extends Activity
     mApp_mDData.forgetDevice( address );
     // forget device on Android
     Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
-    if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
+    if ( bt_device_set != null && bt_device_set.isEmpty() ) {
       boolean found = false;
       for ( BluetoothDevice bt_device : bt_device_set ) {
         if ( address.equals(  bt_device.getAddress() ) ) {
@@ -502,8 +502,8 @@ public class DeviceActivity extends Activity
     Resources res = getResources();
     // if ( mMode == MODE_NORMAL ) {
       mNrButton1 = 4;
-      if ( TDLevel.overNormal )   mNrButton1 += 1; // CALIB-READ
-      if ( TDLevel.overAdvanced ) mNrButton1 += 1; // MEMORY
+      if ( TDLevel.overAdvanced )   mNrButton1 += 1; // CALIB-READ
+      if ( TDLevel.overExpert )     mNrButton1 += 1; // MEMORY
     // } else { // if ( mMode == MODE_SELECT ) 
     //   mNrButton1 = 1; // only BT reset
     // }
