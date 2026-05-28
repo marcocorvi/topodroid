@@ -767,8 +767,10 @@
     <string name="visible_border">可见边框</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <!-- UNUSED string name="wait_scan">扫描: 等待 &#8230;</string -->
-    <string name="write_failed">DistoX写入失败</string>
-    <string name="write_ok">校准已输入DistoX</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_ok">校准已输入DistoX</string>
     <string name="zip_saved">已保存 </string>
     <string name="zip_failed">文件压缩失败</string>
     <string name="zip_share_failed">不能分享zip档案</string>

@@ -183,19 +183,19 @@ class DrawingModeDialog extends MyDialog
       dismiss();
     }
 
-    // @SuppressLint("deprecation")
-    // @Override
-    // public void onBackPressed ()
-    // {
-    //   int mode = DisplayMode.DISPLAY_NONE;
-    //   if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
-    //   if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
-    //   if ( mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
-    //   if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
-    //   if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
-    //   mSurface.setDisplayMode( mode );
-    //   cancel();
-    // }
+  // @SuppressWarnings("deprecated")
+  // @Override
+  // public void onBackPressed ()
+  // {
+  //   int mode = DisplayMode.DISPLAY_NONE;
+  //   if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
+  //   if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
+  //   if ( mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
+  //   if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
+  //   if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
+  //   mSurface.setDisplayMode( mode );
+  //   cancel();
+  // }
 }
         
 

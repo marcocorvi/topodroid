@@ -159,7 +159,7 @@ class DrawingPhotoEditDialog extends MyDialog
 
   /** react to user tap on the hardware back button
    */
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed()
   {

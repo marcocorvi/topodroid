@@ -797,8 +797,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="visible_border">visible border</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <!-- UNUSED string name="wait_scan">Scanning: wait &#8230;</string -->
-    <string name="write_failed">Failed device-write</string>
-    <string name="write_ok">Written calibration to device</string>
+    <string name="calib_write_failed">Calib. upload: failed write</string>
+    <string name="calib_read_failed">Calib. upload: failed read back</string>
+    <string name="calib_check_failed">Calib. upload: failed check</string>
+    <string name="calib_write_ok">Written calibration to device</string>
     <string name="zip_saved">Saved zip archive</string>
     <string name="zip_failed">Failed survey-zip</string>
     <string name="zip_share_failed">Unable to share zip-archive</string>

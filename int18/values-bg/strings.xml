@@ -767,8 +767,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="visible_border">видима граница</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <!-- UNUSED string name="wait_scan">Scanning: wait &#8230;</string -->
-    <string name="write_failed">Неуспешен DistoX - запис</string>
-    <string name="write_ok">Записана калибрация в DistoX</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_ok">Записана калибрация в DistoX</string>
     <string name="zip_saved">Запазен zip архив</string>
     <string name="zip_failed">Неуспешно архивиране на картировка</string>
     <string name="zip_share_failed">Неуспешно споделяне на zip - архив</string>

@@ -479,7 +479,7 @@ public class AutoCalibDialog extends MyDialog
         // TODO ask for confirm
         byte[] coeff = mCalib.GetCoeff();
         // TODO 
-        // mApp.uploadCalibCoeff( coeff, false, mBTwrite, null ); // false: no MAC check, null CaliInfo
+        // mApp.uploadCalibCoeff( mContext, coeff, false, mBTwrite, null ); // false: no MAC check, null CaliInfo
       } else {
         TDToast.make("cannot upload while downloading");
       }
@@ -488,7 +488,7 @@ public class AutoCalibDialog extends MyDialog
     }
   }
 
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated") // from API-33 use android.window.OnBackInvokedDispatcher to register android.window.OnBackInvokedCallback
   @Override
   public void onBackPressed()
   {

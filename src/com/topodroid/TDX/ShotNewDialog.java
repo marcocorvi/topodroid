@@ -55,6 +55,7 @@ class ShotNewDialog extends MyDialog
 {
   // private ShotWindow mParent;
   private final ILister mLister;
+  private Activity mParent;
   private DBlock mPrevBlk;
   private boolean  notDone;
   private long mAt; // id of the shot where to add new shot (-1 end)
@@ -101,9 +102,10 @@ class ShotNewDialog extends MyDialog
    * @param last_blk   last data block
    * @param at         ID where to insert the new data
    */
-  ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
+  ShotNewDialog( Context context, Activity parent, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
     super( context, app, R.string.ShotNewDialog );
+    mParent  = parent;
     mLister  = lister;
     mPrevBlk = last_blk;
     notDone  = true;
@@ -661,7 +663,7 @@ class ShotNewDialog extends MyDialog
         dismiss();
       }
     } else if ( sensorCheck && b == mBtnSensor ) {
-      mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+      mTimer = new TimerTask( mParent, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
       new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
@@ -674,7 +676,7 @@ class ShotNewDialog extends MyDialog
 
   /** implements user back-press
    */
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed()
   {

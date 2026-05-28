@@ -159,7 +159,7 @@ class PhotoEditDialog extends MyDialog
 
   /** react to a user tap on BACK - recycle the image
    */
-  // @SuppressLint("deprecation")
+  // @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed()
   {

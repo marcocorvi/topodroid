@@ -767,8 +767,10 @@
     <string name="visible_border">látható határ</string>
     <!-- UNUSED string name="vthreshold">függőleges küszöb</string -->
     <!-- UNUSED string name="wait_scan">Keresés: várj &#8230;</string -->
-    <string name="write_failed">Nem sikerült felülírni a kalibrációt</string>
-    <string name="write_ok">DistoX kalibrációja felülírva</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_ok">DistoX kalibrációja felülírva</string>
     <string name="zip_saved">Zip archívum mentve</string>
     <string name="zip_failed">Nem sikerült a felmérés tömörítése</string>
     <string name="zip_share_failed">Nem lehet megosztani a zip-archívumot</string>

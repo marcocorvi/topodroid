@@ -1640,7 +1640,7 @@ public class TopoGL extends Activity
   /** open a DEM file
    * @param uri   file URI
    */
-  private void openDEM( Uri uri )
+  private void openDEM( /* final Activity activity, */ Uri uri )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.DEM );
     // InputStreamReader isr = null;
@@ -1663,12 +1663,12 @@ public class TopoGL extends Activity
           // origin.log();
           double xunit = mParser.getWEradius(); // radius * PI/180
           double yunit = mParser.getSNradius(); // radius * PI/180
-          // TDLog.v("xunit " + xunit + " yunit " + yunit );
+          // TDLog.v("xunit " + xunit + " yunit " + yunit /* + " max size " + mDEMmaxsize */ );
           isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
           dem = new DEMasciiParser( isr, pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
         } else if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".hgt" ) ) {
           // TODO support of HGT DEM file has not been debugged
-          // dem = new DEMhgtParser( null, pathname, mDEMmaxsize, mParser.getOrigin() );
+          // dem = new DEMhgtParser( null, pathname, /* mDEMmaxsize, */ mParser.getOrigin() );
         }
         if ( dem == null || ! dem.valid() ) return false;
         final double dd = mDEMbuffer;
@@ -1953,7 +1953,7 @@ public class TopoGL extends Activity
   public static int   mDEMmaxsize = 400;
   public static int   mDEMreduce  = DEM_SHRINK;
   // public static String mTextureRoot = "/sdcard/"; 
-  public static String mTextureRoot = Environment.getExternalStorageDirectory().getPath();
+  public static String mTextureRoot = Environment.getExternalStorageDirectory().getPath() + "/";
   // static boolean mWallConvexHull = false;
   // static boolean mWallPowercrust = false;
   // static boolean mWallDelaunay   = false;
@@ -3139,7 +3139,7 @@ public class TopoGL extends Activity
     switch ( request ) {
       case REQUEST_DEM_FILE:
         if ( uri != null ) {
-          openDEM( uri );
+          openDEM( /* this, */ uri );
         } else {
           onDEMloading = false;
         }

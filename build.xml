@@ -139,8 +139,9 @@
 
     <!-- GEMMA3
         <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/genai-0.10.32.jar:libjars/tasks-core-0.10.32.jar:bin/classes" />
-    -->
-        <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:bin/classes" />
+   -->
+   <!-- -Xlint:deprecation -->
+        <property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:bin/classes" />
 
     <import file="${sdk.dir}/tools/ant/build.xml" />
    

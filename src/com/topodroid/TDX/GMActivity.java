@@ -60,7 +60,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.os.Bundle;
 
-// import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.Configuration;
@@ -1366,14 +1366,15 @@ public class GMActivity extends Activity
     }
 
     if ( warning != null ) {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), warning,
+      final Context context = this;
+      TopoDroidAlertDialog.makeAlert( context, getResources(), warning,
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface d, int btn ) {
-            mApp.uploadCalibCoeff( coeff, mode, b, cali_info );
+            mApp.uploadCalibCoeff( context, coeff, mode, b, cali_info );
           }
         } );
     } else {
-      mApp.uploadCalibCoeff( coeff, mode, b, cali_info );
+      mApp.uploadCalibCoeff( this, coeff, mode, b, cali_info );
     }
   }
 

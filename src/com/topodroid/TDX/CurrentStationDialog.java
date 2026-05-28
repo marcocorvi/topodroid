@@ -443,7 +443,7 @@ class CurrentStationDialog extends MyDialog
   }
     
 
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated") // from API-33 use android.window.OnBackInvokedDispatcher to register android.window.OnBackInvokedCallback
   @Override
   public void onBackPressed()
   {

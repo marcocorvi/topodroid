@@ -291,7 +291,7 @@ class SurveyNewDialog extends MyDialog
     return true;
   }
 
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed()
   {

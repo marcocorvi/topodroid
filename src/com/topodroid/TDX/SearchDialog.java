@@ -196,7 +196,7 @@ class SearchDialog extends MyDialog
     dismiss();
   }
 
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed()
   {

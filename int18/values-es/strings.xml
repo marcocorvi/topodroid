@@ -774,8 +774,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->
     <!-- UNUSED string name="wait_scan">Buscando: espere&#8230;</string -->
-    <string name="write_failed">Error al escribir en DistoX</string>
-    <string name="write_ok">Calibración Escrita en DistoX</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_ok">Calibración Escrita en DistoX</string>
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="zip_share_failed">No se puede compartir el archivo zip</string>

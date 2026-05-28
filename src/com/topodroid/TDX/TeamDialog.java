@@ -125,7 +125,7 @@ class TeamDialog extends MyDialog
     }
   }
 
-  // @SuppressLint("deprecation")
+  // @SuppressWarnings("deprecated")
   // @Override
   // public void onBackPressed()
   // {

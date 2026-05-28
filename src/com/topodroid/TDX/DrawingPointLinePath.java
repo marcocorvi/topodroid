@@ -647,6 +647,20 @@ public class DrawingPointLinePath extends DrawingPath
    */
   void retracePath()
   {
+    // TDLog.v("PointLine retrace path: closed " + mClosed );
+    // int size = mPoints.size();
+    // if ( size == 0 ) return;
+    // mPath = new Path();
+    // LinePoint lp = mPoints.get(0);
+    // mPath.moveTo( lp.x, lp.y );
+    // for ( int k=1; k<size; ++k ) {
+    //   lp = mPoints.get(k);
+    //   if ( lp.has_cp ) {
+    //     mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+    //   } else {
+    //     mPath.lineTo( lp.x, lp.y );
+    //   }
+    // }
     if ( mSize == 0 ) return;
     mPath = new Path();
     LinePoint lp  = mFirst;

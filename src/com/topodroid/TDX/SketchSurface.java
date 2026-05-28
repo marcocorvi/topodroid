@@ -50,9 +50,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-// import java.util.Timer;
-// import java.util.TimerTask;
-
 /**
  */
 public class SketchSurface extends SurfaceView
@@ -99,9 +96,6 @@ public class SketchSurface extends SurfaceView
    */
   float getLegViewRotationAlpha() { return ( commandManager == null )? 0 : commandManager.getLegViewRotationAlpha(); }
   float getLegViewRotationBeta() { return ( commandManager == null )? 0 : commandManager.getLegViewRotationBeta(); }
-
-  // private Timer mTimer;
-  // private TimerTask mTask;
 
   // /** test if the surface is selectable - UNUSED
   //  * @return true if the surface items are selectable

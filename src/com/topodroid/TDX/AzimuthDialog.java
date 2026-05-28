@@ -40,6 +40,8 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 
+import android.app.Activity;
+
 class AzimuthDialog extends MyDialog
                     implements View.OnClickListener
                     , IBearingAndClino
@@ -48,6 +50,7 @@ class AzimuthDialog extends MyDialog
   // there are two attempts to the azimuth dial 
   // the first (1) uses a bitmap, the second (2) a turn-bitmap
 
+  private final Activity mActivity;
   private final ILister mParent;
   private float mAzimuth;
   private Bitmap mBMdial;
@@ -71,13 +74,15 @@ class AzimuthDialog extends MyDialog
 
   /** cstr
    * @param context  context
+   * @param activity parent activity (coincide with the context)
    * @param parent   shot-lister parent (ShotWindow)
    * @param azimuth  ???
    * @param dial     ???
    */
-  AzimuthDialog( Context context, ILister parent, float azimuth, Bitmap dial ) // FIXME_AZIMUTH_DIAL 1
+  AzimuthDialog( Context context, Activity activity, ILister parent, float azimuth, Bitmap dial ) // FIXME_AZIMUTH_DIAL 1
   {
-    super(context, null, R.string.AzimuthDialog ); // null app
+    super( context, null, R.string.AzimuthDialog ); // null app
+    mActivity = activity;
     mParent  = parent;
     mAzimuth = azimuth;
     // mDialBitmap = dial;
@@ -245,7 +250,7 @@ class AzimuthDialog extends MyDialog
       updateEditText();
     // } else if ( id == mBTsensor.getId() ) {
     } else if ( (Button)v == mBTsensor ) {
-      mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+      mTimer = new TimerTask( mActivity, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( id == R.id.btn_ok ) {
       mParent.setRefAzimuth( mAzimuth, 0 );
@@ -273,7 +278,7 @@ class AzimuthDialog extends MyDialog
 
   /** react to a tap on BACK - cancel the timer and close the dialog
    */
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated") // from API-33 use android.window.OnBackInvokedDispatcher to register android.window.OnBackInvokedCallback
   @Override
   public void onBackPressed()
   {

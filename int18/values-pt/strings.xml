@@ -715,8 +715,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="visible_border">borda visível</string>
   <!-- UNUSED string name="vthreshold">limite vertical</string -->
   <!-- UNUSED string name="wait_scan">Procurando: espere &#8230;</string -->
-  <string name="write_failed">Falha ao gravar na DistoX</string>
-  <string name="write_ok">Calibração gravada na DistoX</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+  <string name="calib_write_ok">Calibração gravada na DistoX</string>
   <string name="zip_saved">Gravado</string>
   <string name="zip_failed">Falha na compressão da topo</string>
   <string name="zip_share_failed">Falha ao compartilhar arquivo zip</string>

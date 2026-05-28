@@ -408,7 +408,7 @@ class QCamCompass extends Dialog
           buttonClick.setVisibility( View.GONE );
           TDToast.makeWarn( getString( R.string.photo_max_captures ) );
         }
-        TimerTask timer = new TimerTask( this, -TimerTask.Z_AXIS, wait, count );
+        TimerTask timer = new TimerTask( mParent, this, -TimerTask.Z_AXIS, wait, count );
         timer.execute();
         mIsCapturing = false;
       }

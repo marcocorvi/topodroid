@@ -289,7 +289,7 @@ class UndeleteDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
 
-    initLayout(R.layout.undelete_dialog, /* (mDBlockBuffer != null)? R.string.undelete_paste_text : */  R.string.undelete_text );
+    initLayout(R.layout.undelete_dialog, R.string.undelete_text );
 
     if ( mPlots  != null ) mArrayAdapter0 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mPlots );
     if ( mShots1 != null ) mArrayAdapter1 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots1 );

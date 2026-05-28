@@ -49,9 +49,6 @@ import java.io.PrintWriter;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
 
-// import java.util.Timer;
-// import java.util.TimerTask;
-
 /**
  */
 public class DrawingSurface extends SurfaceView // TH2EDIT was package
@@ -271,9 +268,6 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /** @return the sketch drawing scale
    */
   float getScale() { return (commandManager == null) ? 1.0f  : commandManager.getScale(); }
-
-  // private Timer mTimer;
-  // private TimerTask mTask;
 
   // /** test if the surface is selectable - UNUSED
   //  * @return true if the surface items are selectable

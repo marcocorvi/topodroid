@@ -1363,50 +1363,56 @@ public class TopoDroidApp extends Application
 // -----------------------------------------------------------------
 
   /** upload the calibration coefficients to the DistoX
+   * @param ctx      context
    * @param coeff    calibration coefficients
    * @param check    whether to check that the calibration matches the device 
    * @param b        "write" button - to update its state at the end
    * @param cali_info Cavway cali-info (null for DistoX)
    * @note called by GMActivity and by CalibCoeffDialog and DeviceActivity (to reset coeffs)
    */
-  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b, byte[] cali_info ) // 20250123 dropped second
+  public void uploadCalibCoeff( Context ctx, byte[] coeff, boolean check, Button b, byte[] cali_info ) // 20250123 dropped second
   {
     // TODO this writeCoeff should be run in an AsyncTask
+    int res = 0; // failure resource (0 success)
     if ( b != null ) b.setEnabled( false );
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDToast.makeBad( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
       TDToast.makeBad( R.string.calib_device_mismatch );
     } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
-      TDToast.makeBad( R.string.write_failed );
+      res = R.string.calib_write_failed;
     } else {
       if ( cali_info != null ) {
         if ( ! mComm.writeCaliInfo( TDInstance.deviceAddress(), cali_info ) ) {
-          TDToast.makeBad( R.string.write_failed );
-        }
-      }
-      // write OK: read coeff back and check they were written correctly
-      int len = coeff.length;
-      byte[] coeff2 = new byte[ len ];
-      if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2 ) ) {
-        TDToast.makeBad( R.string.read_failed );
-      } else {
-        boolean success = true;
-        for ( int k=0; k<len; ++k ) {
-          if ( coeff2[k] != coeff[k] ) {
-            success = false;
-            break;
-          }
-        }
-        if ( success ) { 
-          TDToast.make( R.string.write_ok );
+          res = R.string.calib_write_failed;
         } else {
-          TDToast.makeBad( R.string.write_failed );
+          // write OK: read coeff back and check they were written correctly
+          int len = coeff.length;
+          byte[] coeff2 = new byte[ len ];
+          if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2 ) ) {
+            res = R.string.calib_read_failed;
+          } else {
+            boolean success = true;
+            for ( int k=0; k<len; ++k ) {
+              if ( coeff2[k] != coeff[k] ) {
+                success = false;
+                break;
+              }
+            }
+            if ( success ) { 
+              TDToast.make( R.string.calib_write_ok );
+            } else {
+              res = R.string.calib_check_failed;
+            }
+          }
         }
       } 
     }
     if ( b != null ) b.setEnabled( true );
     resetComm();
+    if ( res != 0 ) {
+      TopoDroidAlertDialog.makeAlert( ctx, getResources(), res );
+    }
   }
 
   /** read the calibration coefficients from the DistoX

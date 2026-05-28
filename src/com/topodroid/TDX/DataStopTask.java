@@ -16,10 +16,7 @@ import com.topodroid.util.TDLog;
 
 import java.lang.ref.WeakReference;
 
-// import android.os.AsyncTask;
-// import android.os.Handler;
-
-class DataStopTask // extends AsyncTask< String, Void, Void >
+class DataStopTask 
 {
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
   // private static DataStopTask running = null; // static reference to an instance if this class - used to lock/unlock

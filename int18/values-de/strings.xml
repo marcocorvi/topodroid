@@ -724,8 +724,10 @@
     <string name="visible_border">Sichtbare Grenze</string>
     <!-- UNUSED string name="vthreshold">Vertikale Schwelle</string -->
     <!-- UNUSED string name="wait_scan">Scannen: warten&#8230;</string -->
-    <string name="write_failed">DistoX Schreiben fehgeschlagen</string>
-    <string name="write_ok">DistoX Schreiben erfolgreich</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_ok">DistoX Schreiben erfolgreich</string>
     <string name="zip_saved">Zip-Datei gespeichert</string>
     <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
     <string name="zip_share_failed">Fehler beim teilen der Zip-Datei</string>

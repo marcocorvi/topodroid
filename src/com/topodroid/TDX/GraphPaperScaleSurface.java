@@ -73,8 +73,6 @@ public class GraphPaperScaleSurface extends SurfaceView
      */
     public int height() { return mHeight; }
 
-    // private Timer mTimer;
-    // private TimerTask mTask;
     // void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
 
     /** cstr

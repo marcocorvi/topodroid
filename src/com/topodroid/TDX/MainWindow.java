@@ -606,7 +606,7 @@ public class MainWindow extends Activity
     if ( type.equals( TDPath.TH ) ) {
       setTitleImport();
       // String filepath = uri.getPath().replace("document/primary:", "/sdcard/" ); // FIXME_IMPORT
-      String filepath = uri.getPath().replace("document/primary:", Environment.getExternalStorageDirectory().getPath() ); // FIXME_IMPORT
+      String filepath = uri.getPath().replace("document/primary:", Environment.getExternalStorageDirectory().getPath() + "/" ); // FIXME_IMPORT
       TDLog.v( "MAIN import File Path " + filepath );
       new ImportTherionTask( this, pfd, data ).execute( name, name, filepath );
     } else if ( type.equals( TDPath.DAT ) ) {

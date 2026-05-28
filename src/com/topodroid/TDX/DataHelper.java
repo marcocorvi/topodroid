@@ -8270,13 +8270,15 @@ public class DataHelper extends DataSetObservable
 
         // Iterate through the result set to check for the column name
         if (cursor != null) {
-          int nameIndex = cursor.getColumnIndex("name");
-          while (cursor.moveToNext()) {
-            String currentColumn = cursor.getString(nameIndex);
-            if (currentColumn.equalsIgnoreCase(columnName)) {
-              return true;
+          try {
+            int nameIndex = cursor.getColumnIndexOrThrow("name");
+            while (cursor.moveToNext()) {
+              String currentColumn = cursor.getString(nameIndex);
+              if (currentColumn.equalsIgnoreCase(columnName)) {
+                return true;
+              }
             }
-          }
+          } catch (IllegalArgumentException e ) { /* nothing */ }
         }
       } finally {
         if (cursor != null) {

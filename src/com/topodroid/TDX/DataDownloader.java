@@ -265,7 +265,7 @@ public class DataDownloader
       //   TDLog.e( TAG + "no survey selected" );
       // // } else {
       //   // DBlock last_blk = mApp.mData.selectLastLegShot( TDInstance.sid );
-      //   // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();
+      //   // (new ShotNewDialog( mContext, mActivity, mApp, lister, last_blk, -1L )).show(); // FIXME need the activity
       // }
     }
   }

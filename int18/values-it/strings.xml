@@ -762,8 +762,10 @@
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <!-- UNUSED string name="wait_scan">Scanning: attendi &#8230;</string -->
-    <string name="write_failed">Scrittura su DistoX fallita</string>
-    <string name="write_ok">Calibrazione scritta sul DistoX</string>
+    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
+    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
+    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_ok">Calibrazione scritta sul DistoX</string>
     <string name="zip_saved">Salvato </string>
     <string name="zip_failed">Archiviazione rilievo fallita</string>
     <string name="zip_share_failed">Impossibile condivisione zip</string>

@@ -139,7 +139,7 @@ class SetupButtonSizeDialog extends MyDialog
      }
    }
 
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated")
    @Override
    public void onBackPressed()
    {

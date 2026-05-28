@@ -227,7 +227,7 @@ class DrawingScanSetDialog extends MyDialog
 
   /** implements a user BACK press
    */
-  // @SuppressLint("deprecation")
+  @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed()
   {
