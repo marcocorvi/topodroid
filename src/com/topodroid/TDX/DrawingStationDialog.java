@@ -396,7 +396,7 @@ class DrawingStationDialog extends MyDialog
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, false, nick );
       } else if ( b == mBtnXDelete ) {
         if ( mSensors ) {
-          TimerTask timer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+          TimerTask timer = new TimerTask( mParent, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
           timer.execute();
           return;
         } else {

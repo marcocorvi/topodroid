@@ -1104,34 +1104,37 @@ public class TDSetting
 
     // ------------------- GENERAL PREFERENCES
     TDPrefKey[] key = TDPrefKey.mMain;
-    int level = Integer.parseInt( prefs.getString( key[0].key, key[0].dflt ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
+    int k = 0;
+    int level = Integer.parseInt( prefs.getString( key[k].key, key[k].dflt ) ); ++k; // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
     key = TDPrefKey.mGeek;
-    mSingleBack = prefs.getBoolean(  key[0].key, bool(key[0].dflt) ); // DISTOX_SINGLE_BACK
-    setPalettes(  prefs.getBoolean(  key[1].key, bool(key[1].dflt) ) ); // DISTOX_PALETTES
-    // setBackupsClear( prefs.getBoolean( key[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
-    mKeyboard = prefs.getBoolean(   key[2].key, bool(key[2].dflt) ); // DISTOX_MKEYBOARD
-    mNoCursor = prefs.getBoolean(   key[3].key, bool(key[3].dflt) ); // DISTOX_NO_CURSOR
-    mBulkExport = prefs.getBoolean( key[4].key, bool(key[4].dflt) ); // DISTOX_BULK_EXPORT
-    mPacketLog = prefs.getBoolean(  key[5].key, bool(key[5].dflt) ); // DISTOX_PACKET_LOGGER
-    mTh2Edit   = prefs.getBoolean(  key[6].key, bool(key[6].dflt) ); // DISTOX_TH2_EDIT
-    retrieveGeminiApiKey( prefs.getString( key[7].key, key[7].dflt ) );      // DISTOX_GEMINI
+    k = 0;
+    mSingleBack = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );   ++k; // DISTOX_SINGLE_BACK
+    setPalettes(  prefs.getBoolean(  key[k].key, bool(key[k].dflt) ) ); ++k; // DISTOX_PALETTES
+    // setBackupsClear( prefs.getBoolean( key[k], bool(defGeek[k]) ) ); ++k; // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
+    mKeyboard = prefs.getBoolean(   key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_MKEYBOARD
+    mNoCursor = prefs.getBoolean(   key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_NO_CURSOR
+    mBulkExport = prefs.getBoolean( key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_BULK_EXPORT
+    mPacketLog = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_PACKET_LOGGER
+    mTh2Edit   = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_TH2_EDIT
+    retrieveGeminiApiKey( prefs.getString( key[k].key, key[k].dflt ) ); ++k; // DISTOX_GEMINI
     TDPrefKey debug_key = key[ key.length - 1 ];
     mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( debug_key.key, bool(debug_key.dflt) ) : false; // DISTOX_WITH_DEBUG
 
     key = TDPrefKey.mMain;
-    setTextSize( tryInt(    prefs,  key[1].key, key[1].dflt ) );      // DISTOX_TEXT_SIZE
-    setSizeButtons( tryInt( prefs,  key[2].key, key[2].dflt ) );      // DISTOX_SIZE_BUTTONS
-    setSymbolSize( tryFloat( prefs, key[3].key, key[3].dflt ) );      // DISTOX_SYMBOL_SIZE
-    setHideNavBar(                   prefs.getBoolean( key[4].key, bool(key[4].dflt) ) ); // DISTOX_HIDE_NAVBAR
-    mOrientation = Integer.parseInt( prefs.getString(  key[5].key, key[5].dflt ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
-    setLocale(                       prefs.getString(  key[6].key, TDString.EMPTY ), false ); // DISTOX_LOCALE
-    handleLocalUserMan(              prefs.getString(  key[7].key, key[7].dflt ), false ); // DISTOX_LOCAL_MAN
-    mAnalytics = prefs.getBoolean(  key[8].key, bool(key[8].dflt) ); // DISTOX_ANALYTICS
-    // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
+    k = 1; // skip 0
+    setTextSize( tryInt(    prefs,  key[k].key, key[k].dflt ) ); ++k; // DISTOX_TEXT_SIZE
+    setSizeButtons( tryInt( prefs,  key[k].key, key[k].dflt ) ); ++k; // DISTOX_SIZE_BUTTONS
+    setSymbolSize( tryFloat( prefs, key[k].key, key[k].dflt ) ); ++k; // DISTOX_SYMBOL_SIZE
+    setHideNavBar(                   prefs.getBoolean( key[k].key, bool(key[k].dflt) ) );     ++k; // DISTOX_HIDE_NAVBAR
+    mOrientation = Integer.parseInt( prefs.getString(  key[k].key, key[k].dflt ) );           ++k; // DISTOX_ORIENTATION choice: 0, 1, 2
+    setLocale(                       prefs.getString(  key[k].key, TDString.EMPTY ), false ); ++k; // DISTOX_LOCALE
+    handleLocalUserMan(              prefs.getString(  key[k].key, key[k].dflt ), false );    ++k; // DISTOX_LOCAL_MAN
+    mAnalytics = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );  ++k; // DISTOX_ANALYTICS
+    // setLocale( prefs.getString( keyMain[k], defMain[k] ), false ); ++k; // DISTOX_LOCALE
     // TDLog.Profile("locale");
-    // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
+    // boolean co_survey = prefs.getBoolean( keyMain[k], bool(defMain[k]) ); ++k; // DISTOX_COSURVEY 
 
     key = TDPrefKey.mSurvey;
     mDefaultTeam = prefs.getString( key[0].key, key[0].dflt );               // DISTOX_TEAM
@@ -1156,432 +1159,473 @@ public class TDSetting
     SharedPreferences prefs = pref_hlp.getSharedPrefs();
 
     TDPrefKey[] key = TDPrefKey.mSurvey;
+    int k = 0;
+    // skip 0
     // int old = mTeamNames;
-    mTeamNames    = tryInt(   prefs,     key[1].key,      key[1].dflt );       // DISTOX_TEAM_DIALOG
+    ++k; mTeamNames    = tryInt(   prefs,     key[k].key,      key[k].dflt ); // DISTOX_TEAM_DIALOG
     // TDLog.v("SETTING load secondary TEAM DIALOG " + old + " -> " + mTeamNames + " default " + key[1].dflt );
-    parseStationPolicy( pref_hlp, prefs.getString( key[2].key, key[2].dflt ) ); // DISTOX_SURVEY_STATION
-    mStationNames = (prefs.getString(    key[3].key,      key[3].dflt ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
-    mThumbSize    = tryInt(   prefs,     key[5].key,      key[5].dflt );       // DISTOX_THUMBNAIL
-    // mEditableStations = prefs.getBoolean(key[6].key, bool(key[6].dflt) ); // DISTOX_EDITABLE_STATIONS
-    mFixedOrigin  = prefs.getBoolean(    key[6].key, bool(key[6].dflt) ); // DISTOX_FIXED_ORIGIN
-    mSharedXSections = prefs.getBoolean( key[7].key, bool(key[7].dflt) ); // DISTOX_SHARED_XSECTIONS
-    // mDataBackup   = prefs.getBoolean(    key[8].key, bool(key[8].dflt) ); // DISTOX_DATA_BACKUP
+    ++k; parseStationPolicy( pref_hlp, prefs.getString( key[k].key, key[k].dflt ) ); // DISTOX_SURVEY_STATION
+    ++k; mStationNames = (prefs.getString(    key[k].key,      key[k].dflt ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
+    ++k; // 4
+    ++k; mThumbSize    = tryInt(   prefs,     key[k].key,      key[k].dflt );  // DISTOX_THUMBNAIL
+    // ++k; mEditableStations = prefs.getBoolean(key[k].key, bool(key[k].dflt) );  // DISTOX_EDITABLE_STATIONS
+    ++k; mFixedOrigin  = prefs.getBoolean(    key[k].key, bool(key[k].dflt) );  // DISTOX_FIXED_ORIGIN
+    ++k; mSharedXSections = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SHARED_XSECTIONS
+    // ++k; mDataBackup   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) );  // DISTOX_DATA_BACKUP
     // TDLog.v("SETTING load survey done");
 
     key = TDPrefKey.mPlot;
-    // mPickerType = tryInt( prefs,       key[0].key,      key[0].dflt );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
+    k = 0;
+    //    mPickerType      = tryInt( prefs,       key[k].key,      key[k].dflt );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
     // if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
-    // mTripleToolbar   = prefs.getBoolean(    key[1].key, bool(key[1].dflt) ); // DISTOX_TRIPLE_TOOLBAR
-    // mRecentNr   = tryInt( prefs,       key[ ].key,      key[ ].dflt );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
-    mSideDrag   = prefs.getBoolean(    key[0].key, bool(key[0].dflt) ); // DISTOX_SIDE_DRAG
-    // setZoomControls( prefs.getBoolean( key[ ].key, bool(key[ ].dflt) ) ); // DISTOX_ZOOM_CONTROLS
-    setZoomControls( prefs.getString(  key[1].key,      key[1].dflt ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
-    // mSectionStations  = tryInt( prefs, key[ ].key, "3");      // DISTOX_SECTION_STATIONS
-    mHThreshold    = tryFloat( prefs,  key[2].key,      key[2].dflt );  // DISTOX_HTHRESHOLD
-    mCheckAttached = prefs.getBoolean( key[3].key, bool(key[3].dflt) ); // DISTOX_CHECK_ATTACHED
-    mCheckExtend   = prefs.getBoolean( key[4].key, bool(key[4].dflt) ); // DISTOX_CHECK_EXTEND
-    mItemButtonSize= tryFloat( prefs,  key[5].key,      key[5].dflt );  // DISTOX_TOOLBAR_SIZE
-    mPlotCache     = prefs.getBoolean( key[6].key, bool(key[6].dflt) ); // DISTOX_PLOT_CACHE
+    // ++k; mTripleToolbar   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) ); // DISTOX_TRIPLE_TOOLBAR
+    // ++k; mRecentNr        = tryInt( prefs,       key[k].key,      key[k].dflt );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
+         mSideDrag   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) ); // DISTOX_SIDE_DRAG
+    // ++k; setZoomControls( prefs.getBoolean( key[k].key, bool(key[k].dflt) ) ); // DISTOX_ZOOM_CONTROLS
+    ++k; setZoomControls( prefs.getString(  key[k].key,      key[k].dflt ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
+    // ++k; mSectionStations  = tryInt( prefs, key[k].key, "3");      // DISTOX_SECTION_STATIONS
+    ++k; mHThreshold    = tryFloat( prefs,  key[k].key,      key[k].dflt );  // DISTOX_HTHRESHOLD
+    ++k; mCheckAttached = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_CHECK_ATTACHED
+    ++k; mCheckExtend   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_CHECK_EXTEND
+    ++k; mItemButtonSize= tryFloat( prefs,  key[k].key,      key[k].dflt );  // DISTOX_TOOLBAR_SIZE
+    ++k; mPlotCache     = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_PLOT_CACHE
     // TDLog.v("SETTING load plot done");
 
     key = TDPrefKey.mCalib;
-    mGroupBy       = tryInt(   prefs,      key[ 0].key,     key[ 0].dflt );  // DISTOX_GROUP_BY choice: 0, 1, 2
-    mGroupDistance = tryFloat( prefs,      key[ 1].key,     key[ 1].dflt );  // DISTOX_GROUP_DISTANCE
-    mCalibEps      = tryFloat( prefs,      key[ 2].key,     key[ 2].dflt );  // DISTOX_CAB_EPS
-    mCalibMaxIt    = tryInt(   prefs,      key[ 3].key,     key[ 3].dflt );  // DISTOX_CALIB_MAX_IT
-    mCalibShotDownload = prefs.getBoolean( key[ 4].key,bool(key[ 4].dflt) ); // DISTOX_CALIB_SHOT_DOWNLOAD
-    // mRawData       = prefs.getBoolean(  key[  ].key,bool(key[  ].dflt) );    // DISTOX_RAW_DATA 20
-    mRawCData      = tryInt( prefs,        key[ 5].key,     key[ 5].dflt );  // DISTOX_RAW_CDATA 20
-    // mCalibAlgo     = tryInt( prefs,     key[ 6].key,     key[ 6].dflt );  // DISTOX_CALIB_ALGO choice: 0, 1, 2
-    mAlgoMinAlpha  = tryFloat( prefs,      key[ 6].key,     key[ 6].dflt );  // DISTOX_ALGO_MIN_ALPHA
-    mAlgoMinBeta   = tryFloat( prefs,      key[ 7].key,     key[ 7].dflt );  // DISTOX_ALGO_MIN_BETA
-    mAlgoMinGamma  = tryFloat( prefs,      key[ 8].key,     key[ 8].dflt );  // DISTOX_ALGO_MIN_GAMMA
-    mAlgoMinDelta  = tryFloat( prefs,      key[ 9].key,     key[ 9].dflt ); // DISTOX_ALGO_MIN_DELTA
-    mAutoCalBeta   = tryFloat( prefs,      key[10].key,     key[10].dflt ); // DISTOX_AUTO_CAL_BETA
-    mAutoCalEta    = tryFloat( prefs,      key[11].key,     key[11].dflt ); // DISTOX_AUTO_CAL_ETA
-    mAutoCalGamma  = tryFloat( prefs,      key[12].key,     key[12].dflt ); // DISTOX_AUTO_CAL_GAMMA
-    mAutoCalDelta  = tryFloat( prefs,      key[13].key,     key[13].dflt ); // DISTOX_AUTO_CAL_DELTA
+    k = 0;
+         mGroupBy       = tryInt(   prefs,      key[k].key,     key[k].dflt ); // DISTOX_GROUP_BY choice: 0, 1, 2
+    ++k; mGroupDistance = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_GROUP_DISTANCE
+    ++k; mCalibEps      = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_CAB_EPS
+    ++k; mCalibMaxIt    = tryInt(   prefs,      key[k].key,     key[k].dflt ); // DISTOX_CALIB_MAX_IT
+    ++k; mCalibShotDownload = prefs.getBoolean( key[k].key,bool(key[k].dflt) );// DISTOX_CALIB_SHOT_DOWNLOAD
+    // ++k; mRawData       = prefs.getBoolean(  key[k].key,bool(key[k].dflt) ); // DISTOX_RAW_DATA 20
+    ++k; mRawCData      = tryInt( prefs,        key[k].key,     key[k].dflt ); // DISTOX_RAW_CDATA 20
+    // ++k; mCalibAlgo     = tryInt( prefs,     key[k].key,     key[k].dflt ); // DISTOX_CALIB_ALGO choice: 0, 1, 2
+    ++k; mAlgoMinAlpha  = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_ALGO_MIN_ALPHA
+    ++k; mAlgoMinBeta   = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_ALGO_MIN_BETA
+    ++k; mAlgoMinGamma  = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_ALGO_MIN_GAMMA
+    ++k; mAlgoMinDelta  = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_ALGO_MIN_DELTA
+    ++k; mAutoCalBeta   = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_AUTO_CAL_BETA
+    ++k; mAutoCalEta    = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_AUTO_CAL_ETA
+    ++k; mAutoCalGamma  = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_AUTO_CAL_GAMMA
+    ++k; mAutoCalDelta  = tryFloat( prefs,      key[k].key,     key[k].dflt ); // DISTOX_AUTO_CAL_DELTA
     // TDLog.v("SETTING load calib done");
 
     key = TDPrefKey.mDevice;
-    mConnectionMode  = tryInt( prefs,      key[ 1].key,       key[ 1].dflt );   // DISTOX_CONN_MODE choice: 0, 1, 2
-    // mAutoReconnect  = prefs.getBoolean( key[ 2].key,  bool(key[ 2].dflt) );  // DISTOX_AUTO_RECONNECT
-    mHeadTail        = prefs.getBoolean(   key[ 2].key,  bool(key[ 2].dflt) );  // DISTOX_HEAD_TAIL
-    // TDLog.v("SETTINGS load dev skip>" + key[ 3].key + ":" +key[ 3].dflt + "<" );
-    mSockType        = tryInt( prefs,      key[ 3].key,       key[ 3].dflt ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
-    // mZ6Workaround   = prefs.getBoolean( key[ 4].key,  bool(key[ 4].dflt)  ); // DISTOX_Z6_WORKAROUND
-    mConnectFeedback = tryInt( prefs,      key[ 4].key,       key[ 4].dflt );   // DISTOX_CONNECT_FEEDBACK
-    mAutoPair        = prefs.getBoolean(   key[ 5].key,  bool(key[ 5].dflt) );  // DISTOX_AUTO_PAIR // FIXME DROP_PAIRING
+    k = 0; 
+         // skip 0
+    ++k; mConnectionMode  = tryInt( prefs,      key[k].key,       key[k].dflt );   // DISTOX_CONN_MODE choice: 0, 1, 2
+    // ++k; mAutoReconnect  = prefs.getBoolean( key[k].key,  bool(key[k].dflt) );  // DISTOX_AUTO_RECONNECT
+    ++k; mHeadTail        = prefs.getBoolean(   key[k].key,  bool(key[k].dflt) );  // DISTOX_HEAD_TAIL
+    // TDLog.v("SETTINGS load dev skip>" + key[k].key + ":" +key[k].dflt + "<" ); 
+    ++k; mSockType        = tryInt( prefs,      key[k].key,       key[k].dflt );   // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
+    // ++k; mZ6Workaround   = prefs.getBoolean( key[k].key,  bool(key[k].dflt)  ); // DISTOX_Z6_WORKAROUND
+    ++k; mConnectFeedback = tryInt( prefs,      key[k].key,       key[k].dflt );   // DISTOX_CONNECT_FEEDBACK
+    ++k; mAutoPair        = prefs.getBoolean(   key[k].key,  bool(key[k].dflt) );  // DISTOX_AUTO_PAIR // FIXME DROP_PAIRING
     // TDLog.v("SETTING load device done");
 
     key = TDPrefKey.mGeekDevice;
-    mUnnamedDevice  = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt)  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
-    mConnectSocketDelay = tryInt(prefs, key[ 2].key,      key[ 2].dflt );   // DISTOX_SOCKET_DELAY
-    mSecondDistoX   = prefs.getBoolean( key[ 3].key, bool(key[ 3].dflt) );  // DISTOX_SECOND_DISTOX
-    mWaitData       = tryInt( prefs,    key[ 4].key,      key[ 4].dflt );   // DISTOX_WAIT_DATA
-    mWaitConn       = tryInt( prefs,    key[ 5].key,      key[ 5].dflt );   // DISTOX_WAIT_CONN
-    mWaitLaser      = tryInt( prefs,    key[ 6].key,      key[ 6].dflt );   // DISTOX_WAIT_LASER
-    mWaitShot       = tryInt( prefs,    key[ 7].key,      key[ 7].dflt );   // DISTOX_WAIT_SHOT
-    mFirmwareSanity = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) );  // DISTOX_FIRMWARE_SANITY
-    mCvwyAbs        = tryFloat( prefs,  key[ 9].key,      key[ 9].dflt );   // DISTOX_CVWY_ABS
-    mCvwyDip        = tryFloat( prefs,  key[10].key,      key[10].dflt );   // DISTOX_CVWY_DIP
-    mCvwyAngle      = tryFloat( prefs,  key[11].key,      key[11].dflt );   // DISTOX_CVWY_ANGLE
-    mBricMode       = tryInt( prefs,    key[12].key,      key[12].dflt );   // DISTOX_BRIC_MODE
-    mBricZeroLength = prefs.getBoolean( key[13].key, bool(key[13].dflt) );  // DISTOX_BRIC_ZERO_LENGTH
-    mBricIndexIsId  = prefs.getBoolean( key[14].key, bool(key[14].dflt) );  // DISTOX_BRIC_INDEX_IS_ID
-    mSap5Bit16Bug   = prefs.getBoolean( key[15].key, bool(key[15].dflt) );  // DISTOX_SAP5_BIT16_BUG
+    k = 0;
+         // skip 0
+    ++k; mUnnamedDevice  = prefs.getBoolean( key[k].key, bool(key[k].dflt)  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
+    ++k; mConnectSocketDelay = tryInt(prefs, key[k].key,      key[k].dflt );   // DISTOX_SOCKET_DELAY
+    ++k; mSecondDistoX   = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SECOND_DISTOX
+    ++k; mWaitData       = tryInt( prefs,    key[k].key,      key[k].dflt );   // DISTOX_WAIT_DATA
+    ++k; mWaitConn       = tryInt( prefs,    key[k].key,      key[k].dflt );   // DISTOX_WAIT_CONN
+    ++k; mWaitLaser      = tryInt( prefs,    key[k].key,      key[k].dflt );   // DISTOX_WAIT_LASER
+    ++k; mWaitShot       = tryInt( prefs,    key[k].key,      key[k].dflt );   // DISTOX_WAIT_SHOT
+    ++k; mFirmwareSanity = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_FIRMWARE_SANITY
+    ++k; mCvwyAbs        = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_CVWY_ABS
+    ++k; mCvwyDip        = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_CVWY_DIP
+    ++k; mCvwyAngle      = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_CVWY_ANGLE
+    ++k; mBricMode       = tryInt( prefs,    key[k].key,      key[k].dflt );   // DISTOX_BRIC_MODE
+    ++k; mBricZeroLength = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BRIC_ZERO_LENGTH
+    ++k; mBricIndexIsId  = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BRIC_INDEX_IS_ID
+    ++k; mSap5Bit16Bug   = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SAP5_BIT16_BUG
     // TDLog.v("SETTING load geek device done");
 
     key = TDPrefKey.mCave3D;
-    boolean b = prefs.getBoolean( key[0].key, bool(key[0].dflt) );
-    GlRenderer.mMinClino = b ? 90 : 0;
-    GlModel.mStationPoints  = prefs.getBoolean( key[1].key, bool(key[1].dflt) );
-    GlNames.setPointSize( tryInt(   prefs,      key[2].key,      key[2].dflt ) );
-    GlNames.setTextSize( tryInt(   prefs,       key[3].key,      key[3].dflt ) );
-    TopoGL.mSelectionRadius = tryFloat( prefs,  key[4].key,      key[4].dflt );
-    TopoGL.mMeasureToast    = prefs.getBoolean( key[5].key, bool(key[5].dflt) );
-    TopoGL.mStationDialog   = prefs.getBoolean( key[6].key, bool(key[6].dflt) );
-    GlModel.mGridAbove      = prefs.getBoolean( key[7].key, bool(key[7].dflt) );
-    GlModel.mGridExtent     = tryInt(   prefs,  key[8].key,      key[8].dflt );
-    GlNames.mNamesVisible   = prefs.getBoolean( key[9].key, bool(key[9].dflt) );
+    k = 0;
+         boolean b = prefs.getBoolean( key[k].key, bool(key[k].dflt) );
+         GlRenderer.mMinClino = b ? 90 : 0;
+    ++k; GlModel.mStationPoints  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
+    ++k; GlNames.setPointSize( tryInt(   prefs,      key[k].key,      key[k].dflt ) );
+    ++k; GlNames.setTextSize( tryInt(   prefs,       key[k].key,      key[k].dflt ) );
+    ++k; TopoGL.mSelectionRadius = tryFloat( prefs,  key[k].key,      key[k].dflt );  
+    ++k; TopoGL.mMeasureToast    = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
+    ++k; TopoGL.mStationDialog   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
+    ++k; GlModel.mGridAbove      = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
+    ++k; GlModel.mGridExtent     = tryInt(   prefs,  key[k].key,      key[k].dflt );  
+    ++k; GlNames.mNamesVisible   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
 
     key = TDPrefKey.mDem3D;
-    TopoGL.mDEMbuffer   = tryFloat( prefs, key[0].key, key[0].dflt );
-    TopoGL.mDEMmaxsize  = tryInt(   prefs, key[1].key, key[1].dflt );
-    TopoGL.mDEMreduce   = tryInt(   prefs, key[2].key, key[2].dflt );
-    TopoGL.mTextureRoot = prefs.getString( key[3].key, key[3].dflt );
+    k = 0;
+         TopoGL.mDEMbuffer   = tryFloat( prefs, key[k].key, key[k].dflt );
+    ++k; TopoGL.mDEMmaxsize  = tryInt(   prefs, key[k].key, key[k].dflt );
+    ++k; TopoGL.mDEMreduce   = tryInt(   prefs, key[k].key, key[k].dflt );
+    ++k; TopoGL.mTextureRoot = prefs.getString( key[k].key, key[k].dflt );
 
     key = TDPrefKey.mWalls3D;
-    TglParser.mSplayUse = tryInt(   prefs,  key[0].key,      key[0].dflt );
-    GlModel.mAllSplay   = prefs.getBoolean( key[1].key, bool(key[1].dflt) );
-    TopoGL.mSplayProj   = prefs.getBoolean( key[2].key, bool(key[2].dflt) );
-    TopoGL.mSplayThr    = tryFloat( prefs,  key[3].key,      key[3].dflt );
-    GlModel.mSplitTriangles = prefs.getBoolean( key[4].key, bool(key[4].dflt) );
-    float r = tryFloat( prefs,  key[5].key, key[5].dflt );
-    if ( r > 0.0001f ) {
-      GlModel.mSplitRandomizeDelta = r;
-      GlModel.mSplitRandomize = true;
-    } else {
-      GlModel.mSplitRandomize = false;
-    }
-    r = tryFloat( prefs,  key[6].key, key[6].dflt );
-    if ( r > 0.0001f ) {
-      GlModel.mSplitStretchDelta = r;
-      GlModel.mSplitStretch = true;
-    } else {
-      GlModel.mSplitStretch = false;
-    }
-    GlModel.mPowercrustDelta = tryFloat( prefs,  key[7].key, key[7].dflt );
+    k = 0;
+         TglParser.mSplayUse = tryInt(   prefs,  key[k].key,      key[k].dflt ); 
+    ++k; GlModel.mAllSplay   = prefs.getBoolean( key[k].key, bool(key[k].dflt) );
+    ++k; TopoGL.mSplayProj   = prefs.getBoolean( key[k].key, bool(key[k].dflt) );
+    ++k; TopoGL.mSplayThr    = tryFloat( prefs,  key[k].key,      key[k].dflt ); 
+    ++k; GlModel.mSplitTriangles = prefs.getBoolean( key[k].key, bool(key[k].dflt) );
+    ++k; float r = tryFloat( prefs,  key[k].key, key[k].dflt );
+         if ( r > 0.0001f ) {
+           GlModel.mSplitRandomizeDelta = r;
+           GlModel.mSplitRandomize = true;
+         } else {
+           GlModel.mSplitRandomize = false;
+         }
+    ++k; r = tryFloat( prefs,  key[k].key, key[k].dflt );
+         if ( r > 0.0001f ) {
+           GlModel.mSplitStretchDelta = r;
+           GlModel.mSplitStretch = true;
+         } else {
+           GlModel.mSplitStretch = false;
+         }
+    ++k; GlModel.mPowercrustDelta = tryFloat( prefs,  key[k].key, key[k].dflt );
     GlModel.mWallModel = tryInt( prefs, "CAVE3D_WALL_MODEL", "0" ); // default GlModel.WALL_MODEL_BUBBLE
     // TDLog.v("SETTING load model done");
 
     key = TDPrefKey.mSketch;
-    m3Dsketch    = prefs.getBoolean( key[0].key, bool(key[0].dflt) );
-    mSplayBuffer = tryFloat( prefs,  key[1].key,      key[1].dflt );
+    k = 0;
+         m3Dsketch    = prefs.getBoolean( key[k].key, bool(key[k].dflt) );
+    ++k; mSplayBuffer = tryFloat( prefs,  key[k].key,      key[k].dflt );
 
     key = TDPrefKey.mExportImport;
-    // keyImport[ 0 ] // DISTOX_PT_CMAP
-    mLRExtend          = prefs.getBoolean(     key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_SPLAY_EXTEND
+    k = 0; 
+         // skip 0 DISTOX_PT_CMAP
+    ++k; mLRExtend          = prefs.getBoolean(     key[ k].key, bool(key[ k].dflt) ); // DISTOX_SPLAY_EXTEND
     // TDLog.v("SETTING load secondary export import done");
 
     key = TDPrefKey.mGeekImport;
-    mZipWithSymbols = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_ZIP_WITH_SYMBOLS
-    mImportDatamode = tryInt(   prefs,  key[ 1].key,      key[ 1].dflt );  // DISTOX_IMPORT_DATAMODE
-    mAutoXSections  = prefs.getBoolean( key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_AUTO_XSECTIONS
-    mAutoStations   = prefs.getBoolean( key[ 3].key, bool(key[ 3].dflt) ); // DISTOX_AUTO_STATIONS
-    mLRUDcount      = prefs.getBoolean( key[ 4].key, bool(key[ 4].dflt) ); // DISTOX_LRUD_COUNT
-    mZipShareCategory = prefs.getBoolean( key[ 5].key, bool(key[ 5].dflt) ); // DISTOX_ZIP_SHARE_CATEGORY
-    // mAutoExportPlotFormat = tryInt( prefs,  key[ 4].key,      key[ 4].dflt );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
-    // mExportTcsx     = prefs.getBoolean(     key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_TRANSFER_CSURVEY
+    k = 0;
+         mZipWithSymbols = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_ZIP_WITH_SYMBOLS
+    ++k; mImportDatamode = tryInt(   prefs,  key[k].key,      key[k].dflt );  // DISTOX_IMPORT_DATAMODE
+    ++k; mAutoXSections  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_AUTO_XSECTIONS
+    ++k; mAutoStations   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_AUTO_STATIONS
+    ++k; mLRUDcount      = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_LRUD_COUNT
+    ++k; mZipShareCategory = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_ZIP_SHARE_CATEGORY
+    // ++k; mAutoExportPlotFormat = tryInt( prefs,  key[k].key,      key[k].dflt );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    // ++k; mExportTcsx     = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
 
     key = TDPrefKey.mExportEnable;
-    for ( int k = 0; k < key.length; ++ k ) {
+    for ( k = 0; k < key.length; ++ k ) {
       b = prefs.getBoolean( key[ k].key, bool(key[ k].dflt) );
       TDConst.mSurveyExportEnable[ 1 + k ] = b;
       // TDLog.v("SETTING enable " + (1+k) + " " + b );
     }
 
     key = TDPrefKey.mExport;
-    mExportShotsFormat = tryInt(   prefs,      key[ 0].key,      key[ 0].dflt );  // DISTOX_EXPORT_SHOTS choice: 
-    mExportPlotFormat  = tryInt(   prefs,      key[ 1].key,      key[ 1].dflt );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
-    mAutoExportPlotFormat = tryInt(  prefs,    key[ 2].key,      key[ 2].dflt );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
-    mOrthogonalLRUDAngle = tryFloat( prefs,    key[ 3].key,      key[ 3].dflt );  // DISTOX_ORTHO_LRUD
-    mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
-    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    mLRUDvertical      = tryFloat( prefs,      key[ 4].key,      key[ 4].dflt );  // DISTOX_LRUD_VERTICAL
-    mLRUDhorizontal    = tryFloat( prefs,      key[ 5].key,      key[ 5].dflt );  // DISTOX_LRUD_HORIZONTAL
-    mBezierStep        = tryFloat( prefs,      key[ 6].key,      key[ 6].dflt );  // DISTOX_BEZIER_STEP
+    k = 0;
+         mExportShotsFormat = tryInt(   prefs,      key[k].key,      key[k].dflt ); // DISTOX_EXPORT_SHOTS choice: 
+    ++k; mExportPlotFormat  = tryInt(   prefs,      key[k].key,      key[k].dflt ); // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
+    ++k; mAutoExportPlotFormat = tryInt(  prefs,    key[k].key,      key[k].dflt ); // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    ++k; mOrthogonalLRUDAngle = tryFloat( prefs,    key[k].key,      key[k].dflt ); // DISTOX_ORTHO_LRUD
+         mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
+         mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
+    ++k; mLRUDvertical      = tryFloat( prefs,      key[k].key,      key[k].dflt ); // DISTOX_LRUD_VERTICAL
+    ++k; mLRUDhorizontal    = tryFloat( prefs,      key[k].key,      key[k].dflt ); // DISTOX_LRUD_HORIZONTAL
+    ++k; mBezierStep        = tryFloat( prefs,      key[k].key,      key[k].dflt ); // DISTOX_BEZIER_STEP
     // TDLog.v("SETTING load secondary export done");
 
     key = TDPrefKey.mExportSvx;
-    mSurvexEol         = ( prefs.getString(  key[0].key,      key[0].dflt ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    mSurvexLRUD        =   prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_SURVEX_LRUD
-    mSurvexSplay       =   prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_SURVEX_SPLAY
-    mSurvexEPSG        = tryInt(   prefs,    key[3].key,      key[3].dflt );  // DISTOX_SURVEX_EPSG
+    k = 0;
+          mSurvexEol         = ( prefs.getString(  key[k].key,      key[k].dflt ).equals("LF") )? "\n" : "\r\n"; // DISTOX_SURVEX_EOL
+    ++k; mSurvexLRUD        =   prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SURVEX_LRUD
+    ++k; mSurvexSplay       =   prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SURVEX_SPLAY
+    ++k; mSurvexEPSG        = tryInt(   prefs,    key[k].key,      key[k].dflt );  // DISTOX_SURVEX_EPSG
     // TDLog.v("SETTING load secondary export SVX done");
 
     key = TDPrefKey.mExportPly;
-    mPlyLRUD  = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_PLY_LRUD
-    mPlyMinus = prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_PLY_MINUS
+    k = 0;
+         mPlyLRUD  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_PLY_LRUD
+    ++k; mPlyMinus = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_PLY_MINUS
 
     key = TDPrefKey.mExportTh;
-    mTherionWithConfig = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_THERION_CONFIG
-    mTherionMaps       = prefs.getBoolean( key[1].key, bool(key[1].dflt) ); // DISTOX_THERION_MAPS
-    // mAutoStations   = prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_AUTO_STATIONS 
-    // mXTherionAreas  = prefs.getBoolean( key[ ].key, bool(key[ ].dflt) ); // DISTOX_XTHERION_AREAS
-    mTherionSplays     = prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_THERION_SPLAYS
-    // mSurvexLRUD     = prefs.getBoolean( key[3].key, bool(key[3].dflt) ); // DISTOX_SURVEX_LRUD
-    mTherionScale      = tryInt( prefs,    key[4].key,      key[4].dflt );  // DISTOX_TH2_SCALE
-    mTherionXvi        = prefs.getBoolean( key[5].key, bool(key[5].dflt) ); // DISTOX_TH2_XVI
+    k = 0;
+         mTherionWithConfig = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_THERION_CONFIG
+    ++k; mTherionMaps       = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_THERION_MAPS
+    // ++k; mAutoStations   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_AUTO_STATIONS 
+    // ++k; mXTherionAreas  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_XTHERION_AREAS
+    ++k; mTherionSplays     = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_THERION_SPLAYS
+    ++k; // mSurvexLRUD     = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SURVEX_LRUD done in mExportSvx
+    ++k; mTherionScale      = tryInt( prefs,    key[k].key,      key[k].dflt );  // DISTOX_TH2_SCALE
+    ++k; mTherionXvi        = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_TH2_XVI
     // TDLog.v("SETTING load secondary export TH done");
 
     key = TDPrefKey.mExportDat;
-    mExportStationsPrefix =  prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_STATION_PREFIX
-    mCompassSplays     = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_COMPASS_SPLAYS
-    mSwapLR            = prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_SWAP_LR
+    k = 0;
+         mExportStationsPrefix =  prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_STATION_PREFIX
+    ++k; mCompassSplays     = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_COMPASS_SPLAYS
+    ++k; mSwapLR            = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SWAP_LR
     
     key = TDPrefKey.mExportSrv;
-    mWallsSplays       = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_WALLS_SPLAYS
-    // mWallsUD           = tryInt( prefs, key[1].key,      key[1].dflt );  // DISTOX_WALLS_UD
+    k = 0;
+          mWallsSplays       = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_WALLS_SPLAYS
+    // ++k; mWallsUD           = tryInt( prefs, key[k].key,      key[k].dflt );  // DISTOX_WALLS_UD
     
     key = TDPrefKey.mExportTro;
-    mVTopoSplays       = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_VTOPO_SPLAYS
-    mVTopoLrudAtFrom   = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_VTOPO_LRUD
-    mVTopoTrox         = prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_VTOPO_TROX
+    k = 0;
+         mVTopoSplays       = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_VTOPO_SPLAYS
+    ++k; mVTopoLrudAtFrom   = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_VTOPO_LRUD
+    ++k; mVTopoTrox         = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_VTOPO_TROX
 
     key = TDPrefKey.mExportSvg;
-    mSvgRoundTrip      = prefs.getBoolean(     key[0].key, bool(key[9].dflt) ); // DISTOX_SVG_ROUNDTRIP
-    mSvgGrid           = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_SVG_GRID
-    mSvgLineDirection  = prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_SVG_LINE_DIR
-    mSvgSplays         = prefs.getBoolean(     key[3].key, bool(key[3].dflt) ); // DISTOX_SVG_SPLAYS
-    mSvgGroups         = prefs.getBoolean(     key[4].key, bool(key[4].dflt) ); // DISTOX_SVG_GROUPS
-    // mSvgInHtml      = prefs.getBoolean(     key[ ].key, bool(key[ ].dflt) ); // DISTOX_SVG_IN_HTML
-    mSvgPointStroke    = tryFloat( prefs,      key[ 5].key,     key[ 5].dflt );  // DISTOX_SVG_POINT_STROKE
-    mSvgLabelStroke    = tryFloat( prefs,      key[ 6].key,     key[ 6].dflt );  // DISTOX_SVG_LABEL_STROKE
-    mSvgLineStroke     = tryFloat( prefs,      key[ 7].key,     key[ 7].dflt );  // DISTOX_SVG_LINE_STROKE
-    mSvgGridStroke     = tryFloat( prefs,      key[ 8].key,     key[ 8].dflt );  // DISTOX_SVG_GRID_STROKE
-    mSvgShotStroke     = tryFloat( prefs,      key[ 9].key,     key[ 9].dflt );  // DISTOX_SVG_SHOT_STROKE
-    mSvgLineDirStroke  = tryFloat( prefs,      key[10].key,     key[10].dflt ); // DISTOX_SVG_LINEDIR_STROKE
-    mSvgStationSize    = tryInt(   prefs,      key[11].key,     key[11].dflt ); // DISTOX_SVG_STATION_SIZE
-    mSvgLabelSize      = tryInt  ( prefs,      key[12].key,     key[12].dflt ); // DISTOX_SVG_LABEL_SIZE
-    mSvgProgram        = tryInt(   prefs,      key[13].key,     key[13].dflt );  // DISTOX_SVG_PROGRAM
+    k = 0;
+         mSvgRoundTrip      = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SVG_ROUNDTRIP
+    ++k; mSvgGrid           = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SVG_GRID
+    ++k; mSvgLineDirection  = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SVG_LINE_DIR
+    ++k; mSvgSplays         = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SVG_SPLAYS
+    ++k; mSvgGroups         = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SVG_GROUPS
+    // ++k; mSvgInHtml      = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SVG_IN_HTML
+    ++k; mSvgPointStroke    = tryFloat( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_POINT_STROKE
+    ++k; mSvgLabelStroke    = tryFloat( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_LABEL_STROKE
+    ++k; mSvgLineStroke     = tryFloat( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_LINE_STROKE
+    ++k; mSvgGridStroke     = tryFloat( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_GRID_STROKE
+    ++k; mSvgShotStroke     = tryFloat( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_SHOT_STROKE
+    ++k; mSvgLineDirStroke  = tryFloat( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_LINEDIR_STROKE
+    ++k; mSvgStationSize    = tryInt(   prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_STATION_SIZE
+    ++k; mSvgLabelSize      = tryInt  ( prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_LABEL_SIZE
+    ++k; mSvgProgram        = tryInt(   prefs,      key[k].key,       key[k].dflt ); // DISTOX_SVG_PROGRAM
     // TDLog.v("SETTING load secondary export SVG done");
 
     // having mTherionScale and mSvgProgram we can set export scale
     setExportScale( mTherionScale );
 
     key = TDPrefKey.mExportKml;
-    mKmlStations       = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_KML_STATIONS
-    mKmlSplays         = prefs.getBoolean(     key[1].key, bool(key[1].dflt) ); // DISTOX_KML_SPLAYS
+    k = 0;
+         mKmlStations       = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_KML_STATIONS
+    ++k; mKmlSplays         = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_KML_SPLAYS
     // TDLog.v("SETTING load secondary export KML done");
 
     key = TDPrefKey.mExportCsx;
-    // mExportStationsPrefix = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_STATION_PREFIX
-    mExportMedia       =  prefs.getBoolean(      key[1].key, bool(key[1].dflt) ); // DISTOX_WITH_MEDIA
+    k = 0; 
+    //      mExportStationsPrefix = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_STATION_PREFIX done in mExportDatn
+    ++k; mExportMedia       =  prefs.getBoolean(      key[k].key, bool(key[k].dflt) ); // DISTOX_WITH_MEDIA
 
     key = TDPrefKey.mExportGpx;
-    mGPXSingleTrack    = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_GPX_STATION_TRACK
+    k = 0;
+         mGPXSingleTrack    = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_GPX_STATION_TRACK
 
     key = TDPrefKey.mExportCsv;
-    mCsvRaw            = prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_CSV_RAW
-    mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, key[1].key, key[1].dflt ) ]; // DISTOX_CSV_SEP
+    k = 0;
+         mCsvRaw            = prefs.getBoolean(             key[k].key, bool(key[k].dflt) );  // DISTOX_CSV_RAW
+    ++k; mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, key[k].key,      key[k].dflt ) ]; // DISTOX_CSV_SEP
 
     /* NO_PNG
     keyExp = TDPrefKey.EXPORT_PNG;
     defExp = TDPrefKey.EXPORT_PNGdef;
-    mBitmapScale       = tryFloat( prefs,      keyExp[0], defExp[0] );  // DISTOX_BITMAP_SCALE 
-    setBitmapBgcolor( prefs, keyExp[1], prefs.getString(keyExp[1], defExp[1]), defExp[1] );  // DISTOX_BITMAP_BGCOLOR
+    k = 0;
+         mBitmapScale       = tryFloat( prefs,      keyExp[k], defExp[k] ); // DISTOX_BITMAP_SCALE 
+    ++k; setBitmapBgcolor( prefs, keyExp[1], prefs.getString(keyExp[1], defExp[k]), defExp[k] ); // DISTOX_BITMAP_BGCOLOR
     // TDLog.v("SETTING load secondary export PNG done");
     */
 
     key = TDPrefKey.mExportDxf;
-    // mDxfScale     = tryFloat( prefs,    key[ ].key,      key[ ].dflt );  // DISTOX_DXF_SCALE
-    mDxfBlocks    =  prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_DXF_BLOCKS
-    mAcadVersion  = tryInt(   prefs,       key[1].key,      key[1].dflt );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
-    mAcadSpline   =  prefs.getBoolean(     key[2].key, bool(key[2].dflt) ); // DISTOX_ACAD_SPLINE
-    mDxfReference =  prefs.getBoolean(     key[3].key, bool(key[3].dflt) ); // DISTOX_DXF_REFERENCE
-    mAcadLayer    =  prefs.getBoolean(     key[4].key, bool(key[4].dflt) ); // DISTOX_ACAD_LAYER
+    k = 0;
+    // mDxfScale     = tryFloat( prefs,    key[k].key,      key[k].dflt );  // DISTOX_DXF_SCALE
+         mDxfBlocks    =  prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_DXF_BLOCKS
+    ++k; mAcadVersion  = tryInt(   prefs,       key[k].key,      key[k].dflt );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
+    ++k; mAcadSpline   =  prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_ACAD_SPLINE
+    ++k; mDxfReference =  prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_DXF_REFERENCE
+    ++k; mAcadLayer    =  prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_ACAD_LAYER
     // TDLog.v("SETTING load secondary export DXF done");
   
     key = TDPrefKey.mExportShp;
-    mShpGeoref   =  prefs.getBoolean(     key[0].key, bool(key[0].dflt) ); // DISTOX_SHP_GEOREF
+    k = 0;
+         mShpGeoref   =  prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SHP_GEOREF
     // TDLog.v("SETTING load secondary export SHP done");
 
     key = TDPrefKey.mData;
-    mCloseDistance = tryFloat( prefs,          key[ 0].key,      key[ 0].dflt );  // DISTOX_CLOSE_DISTANCE
-    mMaxShotLength = tryFloat( prefs,          key[ 1].key,      key[ 1].dflt );  // DISTOX_MAX_SHOT_LENGTH
-    mMinLegLength  = tryFloat( prefs,          key[ 2].key,      key[ 2].dflt );  // DISTOX_MIN_LEG_LENGTH
-    mMinNrLegShots = tryInt(   prefs,          key[ 3].key,      key[ 3].dflt );  // DISTOX_LEG_SHOTS choice: 2, 3, 4
-    mExtendThr     = tryFloat( prefs,          key[ 4].key,      key[ 4].dflt  ); // DISTOX_EXTEND_THR2
-    mVThreshold    = tryFloat( prefs,          key[ 5].key,      key[ 5].dflt  ); // DISTOX_VTHRESHOLD
-    // DISTOX_AZIMUTH_MANUAL [6] handled in the first pass
-    mPrevNext      = prefs.getBoolean(         key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_PREV_NEXT
-    mBacksightInput = prefs.getBoolean(        key[ 8].key, bool(key[ 8].dflt) ); // DISTOX_BACKSIGHT
-    mTripleShot     = tryInt(  prefs,          key[ 9].key,      key[ 9].dflt  ); // DISTOX_LEG_FEEDBACK
-    // mTimerWait     = tryInt(   prefs,       key[10].key,      key[10].dflt );  // DISTOX_SHOT_TIMER
-    // mBeepVolume    = tryInt(   prefs,       key[11].key,      key[11].dflt );  // DISTOX_BEEP_VOLUME
+    k = 0;
+         mCloseDistance = tryFloat( prefs,          key[k].key,      key[k].dflt );  // DISTOX_CLOSE_DISTANCE
+    ++k; mMaxShotLength = tryFloat( prefs,          key[k].key,      key[k].dflt );  // DISTOX_MAX_SHOT_LENGTH
+    ++k; mMinLegLength  = tryFloat( prefs,          key[k].key,      key[k].dflt );  // DISTOX_MIN_LEG_LENGTH
+    ++k; mMinNrLegShots = tryInt(   prefs,          key[k].key,      key[k].dflt );  // DISTOX_LEG_SHOTS choice: 2, 3, 4
+    ++k; mExtendThr     = tryFloat( prefs,          key[k].key,      key[k].dflt  ); // DISTOX_EXTEND_THR2
+    ++k; mVThreshold    = tryFloat( prefs,          key[k].key,      key[k].dflt  ); // DISTOX_VTHRESHOLD
+    ++k; // DISTOX_AZIMUTH_MANUAL [6] handled in the first pass
+    ++k; mPrevNext      = prefs.getBoolean(         key[k].key, bool(key[k].dflt) ); // DISTOX_PREV_NEXT
+    ++k; mBacksightInput = prefs.getBoolean(        key[k].key, bool(key[k].dflt) ); // DISTOX_BACKSIGHT
+    ++k; mTripleShot     = tryInt(  prefs,          key[k].key,      key[k].dflt  ); // DISTOX_LEG_FEEDBACK
+    // ++k; mTimerWait     = tryInt(   prefs,       key[k].key,      key[k].dflt );  // DISTOX_SHOT_TIMER
+    // ++k; mBeepVolume    = tryInt(   prefs,       key[k].key,      key[k].dflt );  // DISTOX_BEEP_VOLUME
     // TDLog.v("SETTING load secondary data done");
 
     key = TDPrefKey.mGeekShot;
-    mDivingMode       = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_DIVING_MODE
-    mEditableShots    = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_TAMPERING
-    mBacksightSplay   = prefs.getBoolean( key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_BACKSIGHT_SPLAY
-    mShotRecent       = prefs.getBoolean( key[ 3].key, bool(key[ 3].dflt) ); // DISTOX_RECENT_SHOT
-    mRecentTimeout    = tryInt(   prefs,  key[ 4].key,      key[ 4].dflt );  // DISTOX_RECENT_TIMEOUT
-    mExtendFrac       = prefs.getBoolean( key[ 5].key, bool(key[ 5].dflt) ); // DISTOX_EXTEND_FRAC
-    mDistoXBackshot   = prefs.getBoolean( key[ 6].key, bool(key[ 6].dflt) ); // DISTOX_BACKSHOT
-    mBedding          = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_BEDDING
-    mWithSensors      = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) ); // DISTOX_WITH_SENSORS
-    setLoopClosure( tryInt(   prefs,      key[ 9].key,      key[ 9].dflt ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mLoopThr          = tryFloat( prefs,  key[10].key,      key[10].dflt );  // DISTOX_LOOP_THRESHOLD
-    mWithAzimuth      = prefs.getBoolean( key[11].key, bool(key[11].dflt) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait        = tryInt(   prefs,  key[12].key,      key[12].dflt );  // DISTOX_SHOT_TIMER
-    mBeepVolume       = tryInt(   prefs,  key[13].key,      key[13].dflt );  // DISTOX_BEEP_VOLUME
-    mBeepLength       = tryInt(   prefs,  key[14].key,      key[14].dflt );  // DISTOX_BEEP_LENGTH
-    mBlunderShot      = prefs.getBoolean( key[15].key, bool(key[15].dflt) ); // DISTOX_BLUNDER_SHOT
-    mSplayStation     = prefs.getBoolean( key[16].key, bool(key[16].dflt) ); // DISTOX_SPLAY_STATION
-    mSplayOnlyForward = prefs.getBoolean( key[17].key, bool(key[17].dflt) ); // DISTOX_SPLAY_GROUP
-    // mWithTdManager = prefs.getBoolean( key[13].key, bool(key[13].dflt) ); // DISTOX_TDMANAGER
+    k = 0;
+         mDivingMode       = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_DIVING_MODE
+    ++k; mEditableShots    = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_TAMPERING
+    ++k; mBacksightSplay   = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BACKSIGHT_SPLAY
+    ++k; mShotRecent       = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_RECENT_SHOT
+    ++k; mRecentTimeout    = tryInt(   prefs,  key[k].key,      key[k].dflt );   // DISTOX_RECENT_TIMEOUT
+    ++k; mExtendFrac       = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_EXTEND_FRAC
+    ++k; mDistoXBackshot   = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BACKSHOT
+    ++k; mBedding          = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BEDDING
+    ++k; mWithSensors      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_WITH_SENSORS
+    ++k; setLoopClosure( tryInt(   prefs,      key[k].key,      key[k].dflt ) ); // DISTOX_LOOP_CLOSURE_VALUE
+    ++k; mLoopThr          = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LOOP_THRESHOLD
+    ++k; mWithAzimuth      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_ANDROID_AZIMUTH
+    ++k; mTimerWait        = tryInt(   prefs,  key[k].key,      key[k].dflt );   // DISTOX_SHOT_TIMER
+    ++k; mBeepVolume       = tryInt(   prefs,  key[k].key,      key[k].dflt );   // DISTOX_BEEP_VOLUME
+    ++k; mBeepLength       = tryInt(   prefs,  key[k].key,      key[k].dflt );   // DISTOX_BEEP_LENGTH
+    ++k; mBlunderShot      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BLUNDER_SHOT
+    ++k; mSplayStation     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SPLAY_STATION
+    ++k; mSplayOnlyForward = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SPLAY_GROUP
+    // ++k; mWithTdManager = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
     key = TDPrefKey.mGeekPlot;
-    mPlotShift     = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_PLOT_SHIFT
-    mPlotSplit     = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_PLOT_SPLIT
-    setStylusSize(  tryFloat( prefs,   key[ 2].key,      key[ 2].dflt ) );  // DISTOX_STYLUS_SIZE // STYLUS_MM
-    mBackupNumber   = tryInt( prefs,   key[ 3].key,      key[ 3].dflt );  // DISTOX_BACKUP_NUMBER
-    mBackupInterval = tryInt( prefs,   key[ 4].key,      key[ 4].dflt );  // DISTOX_BACKUP_INTERVAL
-    // mAutoXSections  = prefs.getBoolean( key[ 5].key, bool(key.dflt[ 5].dflt) ); // DISTOX_AUTO_XSECTIONS
-    mSavedStations  = prefs.getBoolean( key[ 5].key, bool(key[ 5].dflt) ); // DISTOX_SAVED_STATIONS
-    mLegOnlyUpdate  = prefs.getBoolean( key[ 6].key, bool(key[ 6].dflt) ); // DISTOX_LEGONLY_UPDATE
-    mFullAffine     = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) ); // DISTOX_FULL_UPDATE
-    mWithLevels     = tryInt( prefs,    key[ 8].key,      key[ 8].dflt );   // DISTOX_WITH_LEVELS
-    mGraphPaperScale = tryInt( prefs,   key[ 9].key,      key[ 9].dflt );  // DISTOX_GRAPH_PAPER_SCALE
-    mSlantXSection  = prefs.getBoolean( key[10].key, bool(key[10].dflt) ); // DISTOX_SLANT_XSECTION
-    mObliqueMax     = tryInt( prefs,    key[11].key,      key[11].dflt );  // DISTOX_OBLIQUE_PROJECTED
-    mToolbarUpdate  = tryInt( prefs,    key[12].key,      key[12].dflt );  // DISTOX_TOOLBAR_UPDATE
-    // mZoomLowerBound = tryFloat( prefs, key[13].key,      key[13].dflt );  // DISTOX_ZOOM_LOWER_BOUND
+    k = 0;
+         mPlotShift     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_PLOT_SHIFT
+    ++k; mPlotSplit     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_PLOT_SPLIT
+    ++k; setStylusSize(  tryFloat( prefs,   key[k].key,      key[k].dflt ) ); // DISTOX_STYLUS_SIZE // STYLUS_MM
+    ++k; mBackupNumber   = tryInt( prefs,   key[k].key,      key[k].dflt );   // DISTOX_BACKUP_NUMBER
+    ++k; mBackupInterval = tryInt( prefs,   key[k].key,      key[k].dflt );   // DISTOX_BACKUP_INTERVAL
+    // ++k; mAutoXSections  = prefs.getBoolean( key[k].key, bool(key.dflt[k].dflt) ); // DISTOX_AUTO_XSECTIONS
+    ++k; mSavedStations  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SAVED_STATIONS
+    ++k; mLegOnlyUpdate  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_LEGONLY_UPDATE
+    ++k; mFullAffine     = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_FULL_UPDATE
+    ++k; mWithLevels     = tryInt( prefs,    key[k].key,      key[k].dflt );  // DISTOX_WITH_LEVELS
+    ++k; mGraphPaperScale = tryInt( prefs,   key[k].key,      key[k].dflt );  // DISTOX_GRAPH_PAPER_SCALE
+    ++k; mSlantXSection  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SLANT_XSECTION
+    ++k; mObliqueMax     = tryInt( prefs,    key[k].key,      key[k].dflt );  // DISTOX_OBLIQUE_PROJECTED
+    ++k; mToolbarUpdate  = tryInt( prefs,    key[k].key,      key[k].dflt );  // DISTOX_TOOLBAR_UPDATE
+    // ++k; mZoomLowerBound = tryFloat( prefs, key[k].key,      key[k].dflt ); // DISTOX_ZOOM_LOWER_BOUND
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     key = TDPrefKey.mGeekSplay;
-    mSplayClasses  = prefs.getBoolean( key[ 0].key, bool(key[ 0].dflt) ); // DISTOX_SPLAY_CLASSES
-    // mSplayColor = prefs.getBoolean( key[ 1].key, bool(key[ 1].dflt) ); // DISTOX_SPLAY_COLOR
-    mDiscreteColors = tryInt( prefs,   key[ 1].key,      key[ 1].dflt );  // DISTOX_DISCRETE_COLORS
-    mSplayColor = (mDiscreteColors > 0);
-    // mSplayAsDot = prefs.getBoolean( key[ 2].key, bool(key[ 2].dflt) ); // DISTOX_SPLAY_AS_DOT
-    mSplayVertThrs  = tryFloat( prefs, key[ 2].key,      key[ 2].dflt  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay      = tryInt( prefs,   key[ 3].key,      key[ 3].dflt );  // DISTOX_SPLAY_DASH
-    mVertSplay      = tryFloat( prefs, key[ 4].key,      key[ 4].dflt );  // DISTOX_VERT_SPLAY
-    mHorizSplay     = tryFloat( prefs, key[ 5].key,      key[ 5].dflt );  // DISTOX_HORIZ_SPLAY
-    mCosHorizSplay = TDMath.cosd( mHorizSplay );  
-    mSectionSplay   = tryFloat( prefs, key[ 6].key,      key[ 6].dflt );  // DISTOX_SECTION_SPLAY
-    mCosSectionSplay  = TDMath.cosd( mSectionSplay );
-    mSplayDashColor   = tryColor( prefs, key[ 7].key,    key[ 7].dflt );  // DISTOX_SPLAY_DASH_COLOR
-    BrushManager.setSplayDashColor( mSplayDashColor );
-    mSplayDotColor    = tryColor( prefs, key[ 8].key,    key[ 8].dflt );  // DISTOX_SPLAY_DOT_COLOR
-    BrushManager.setSplayDotColor( mSplayDotColor );
-    mSplayLatestColor = tryColor( prefs, key[ 9].key,    key[ 9].dflt );  // DISTOX_SPLAY_LATEST_COLOR
-    BrushManager.setSplayLatestColor( mSplayLatestColor );
+    k = 0;
+         mSplayClasses  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SPLAY_CLASSES
+    // ++k; mSplayColor = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SPLAY_COLOR
+    ++k; mDiscreteColors = tryInt( prefs,   key[k].key,      key[k].dflt );  // DISTOX_DISCRETE_COLORS
+         mSplayColor = (mDiscreteColors > 0);
+    // ++k; mSplayAsDot = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SPLAY_AS_DOT
+    ++k; mSplayVertThrs  = tryFloat( prefs, key[k].key,      key[k].dflt  ); // DISTOX_SPLAY_VERT_THRS
+    ++k; mDashSplay      = tryInt( prefs,   key[k].key,      key[k].dflt );  // DISTOX_SPLAY_DASH
+    ++k; mVertSplay      = tryFloat( prefs, key[k].key,      key[k].dflt );  // DISTOX_VERT_SPLAY
+    ++k; mHorizSplay     = tryFloat( prefs, key[k].key,      key[k].dflt );  // DISTOX_HORIZ_SPLAY
+         mCosHorizSplay = TDMath.cosd( mHorizSplay );  
+    ++k; mSectionSplay   = tryFloat( prefs, key[k].key,      key[k].dflt );  // DISTOX_SECTION_SPLAY
+         mCosSectionSplay  = TDMath.cosd( mSectionSplay );
+    ++k; mSplayDashColor   = tryColor( prefs, key[k].key,    key[k].dflt );  // DISTOX_SPLAY_DASH_COLOR
+         BrushManager.setSplayDashColor( mSplayDashColor );
+    ++k; mSplayDotColor    = tryColor( prefs, key[k].key,    key[k].dflt );  // DISTOX_SPLAY_DOT_COLOR
+         BrushManager.setSplayDotColor( mSplayDotColor );
+    ++k; mSplayLatestColor = tryColor( prefs, key[k].key,    key[k].dflt );  // DISTOX_SPLAY_LATEST_COLOR
+         BrushManager.setSplayLatestColor( mSplayLatestColor );
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     key = TDPrefKey.mGeekLine;
-    setReduceAngle( tryFloat(  prefs,  key[ 0].key,      key[ 0].dflt ) ); // DISTOX_REDUCE_ANGLE
-    mLineAccuracy  = tryFloat( prefs,  key[ 1].key,      key[ 1].dflt );   // DISTOX_LINE_ACCURACY
-    mLineCorner    = tryFloat( prefs,  key[ 2].key,      key[ 2].dflt );   // DISTOX_LINE_CORNER
-    mWeedDistance  = tryFloat( prefs,  key[ 3].key,      key[ 3].dflt );   // DISTOX_WEED_DISTANCE
-    mWeedLength    = tryFloat( prefs,  key[ 4].key,      key[ 4].dflt );   // DISTOX_WEED_LENGTH
-    mWeedBuffer    = tryFloat( prefs,  key[ 5].key,      key[ 5].dflt );   // DISTOX_WEED_BUFFER
-    mLineSnap      = prefs.getBoolean( key[ 6].key, bool(key[ 6].dflt) );  // DISTOX_LINE_SNAP
-    mLineCurve     = prefs.getBoolean( key[ 7].key, bool(key[ 7].dflt) );  // DISTOX_LINE_CURVE
-    mLineStraight  = prefs.getBoolean( key[ 8].key, bool(key[ 8].dflt) );  // DISTOX_LINE_STRAIGHT
-    mPathMultiselect=prefs.getBoolean( key[ 9].key, bool(key[ 9].dflt) );  // DISTOX_PATH_MULTISELECT
-    mLineEnds       = tryInt( prefs,   key[10].key,      key[10].dflt );   // DISTOX_LINE_ENDS
-    // mCompositeActions = prefs.getBoolean( key[10].key, bool(key[10].dflt) );  // DISTOX_COMPOSITE_ACTIONS
+    k = 0;
+         setReduceAngle( tryFloat(  prefs,  key[k].key,      key[k].dflt ) ); // DISTOX_REDUCE_ANGLE
+    ++k; mLineAccuracy  = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_ACCURACY
+    ++k; mLineCorner    = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_CORNER
+    ++k; mWeedDistance  = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_WEED_DISTANCE
+    ++k; mWeedLength    = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_WEED_LENGTH
+    ++k; mWeedBuffer    = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_WEED_BUFFER
+    ++k; mLineSnap      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_SNAP
+    ++k; mLineCurve     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_CURVE
+    ++k; mLineStraight  = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_STRAIGHT
+    ++k; mPathMultiselect=prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_PATH_MULTISELECT
+    ++k; mLineEnds       = tryInt( prefs,   key[k].key,      key[k].dflt );   // DISTOX_LINE_ENDS
+    // ++k; mCompositeActions = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_COMPOSITE_ACTIONS
     // TDLog.v("SETTING load secondary GEEK line done");
 
     key = TDPrefKey.mUnits;
-    if ( prefs.getString( key[0].key, key[0].dflt ).equals( key[0].dflt ) ) {
-      mUnitLength = 1.0f;
-      mUnitLengthStr = "m";
-    } else {
-      mUnitLength = TDUtil.M2FT;
-      mUnitLengthStr = "ft";
-    }
-    if ( prefs.getString( key[1].key,  key[1].dflt ).equals( key[1].dflt ) ) {
-      mUnitAngle = 1.0f;
-      mUnitAngleStr = "deg";
-    } else {
-      mUnitAngle = TDUtil.DEG2GRAD;
-      mUnitAngleStr = "grad";
-    }
-
-    mUnitGrid       = tryFloat(  prefs, key[2].key, key[2].dflt );      // DISTOX_UNIT_GRID
-    mUnitMeasure    = tryFloat(  prefs, key[3].key, key[3].dflt );      // DISTOX_UNIT_MEASURE
+    k = 0;
+         if ( prefs.getString( key[k].key, key[k].dflt ).equals( key[k].dflt ) ) {
+           mUnitLength = 1.0f;
+           mUnitLengthStr = "m";
+         } else {
+           mUnitLength = TDUtil.M2FT;
+           mUnitLengthStr = "ft";
+         }
+    ++k; if ( prefs.getString( key[k].key,  key[k].dflt ).equals( key[k].dflt ) ) {
+           mUnitAngle = 1.0f;
+           mUnitAngleStr = "deg";
+         } else {
+           mUnitAngle = TDUtil.DEG2GRAD;
+           mUnitAngleStr = "grad";
+         }
+    ++k; mUnitGrid       = tryFloat(  prefs, key[k].key, key[k].dflt );      // DISTOX_UNIT_GRID
+    ++k; mUnitMeasure    = tryFloat(  prefs, key[k].key, key[k].dflt );      // DISTOX_UNIT_MEASURE
     // TDLog.v("SETTING units grid " + mUnitGrid );
   
     key = TDPrefKey.mAccuracy;
-    mAccelerationThr = tryFloat( prefs, key[0].key, key[0].dflt ); // DISTOX_ACCEL_PERCENT
-    mMagneticThr     = tryFloat( prefs, key[1].key, key[1].dflt ); // DISTOX_MAG_PERCENT
-    mDipThr          = tryFloat( prefs, key[2].key, key[2].dflt ); // DISTOX_DIP_THR
-    setSiblingThr( tryFloat( prefs,     key[3].key, key[3].dflt ) ); // DISTOX_SIBLING_PERCENT
+    k = 0;
+         mAccelerationThr = tryFloat( prefs, key[k].key, key[k].dflt );   // DISTOX_ACCEL_PERCENT
+    ++k; mMagneticThr     = tryFloat( prefs, key[k].key, key[k].dflt );   // DISTOX_MAG_PERCENT
+    ++k; mDipThr          = tryFloat( prefs, key[k].key, key[k].dflt );   // DISTOX_DIP_THR
+    ++k; setSiblingThr( tryFloat( prefs,     key[k].key, key[k].dflt ) ); // DISTOX_SIBLING_PERCENT
 
     key = TDPrefKey.mLocation;
-    mUnitLocation  = (prefs.getString( key[0].key,      key[0].dflt ).equals(key[0].dflt)) ? TDUtil.DDMMSS  // DISTOX_UNIT_LOCATION
+    k = 0;
+         mUnitLocation  = (prefs.getString( key[k].key,      key[k].dflt ).equals(key[k].dflt)) ? TDUtil.DDMMSS  // DISTOX_UNIT_LOCATION
                                                                            : TDUtil.DEGREE;
-    mCRS           = prefs.getString(  key[1].key,      key[1].dflt );       // DISTOX_CRS
-    mNegAltitude   = prefs.getBoolean( key[2].key, bool(key[2].dflt) ); // DISTOX_NEG_ALTITUDE
-    mEditableHGeo  = prefs.getBoolean( key[3].key, bool(key[3].dflt) ); // DISTOX_EDIT_ALTITUDE
-    mFineLocation  = tryInt( prefs,    key[4].key,      key[4].dflt );       // DISTOX_FINE_LOCATION
-    // mGeoImportApp  = tryInt( prefs, key[4].key,      key[4].dflt );       // DISTOX_GEOPOINT_APP
+    ++k; mCRS           = prefs.getString(  key[k].key,      key[k].dflt );  // DISTOX_CRS
+    ++k; mNegAltitude   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_NEG_ALTITUDE
+    ++k; mEditableHGeo  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_EDIT_ALTITUDE
+    ++k; mFineLocation  = tryInt( prefs,    key[k].key,      key[k].dflt );  // DISTOX_FINE_LOCATION
+    // ++k; mGeoImportApp  = tryInt( prefs, key[k].key,      key[k].dflt );  // DISTOX_GEOPOINT_APP
     // TDLog.v("PREFS key <" + keyLoc[4] + "> val <" + defLoc[4] + ">" );
-    try {
-      mGeoImportApp = Integer.parseInt( prefs.getString( key[5].key, key[5].dflt ) );
-    } catch ( RuntimeException e ) {
-      TDLog.v("ERROR " + e.getMessage() );
-    } catch ( Exception ee ) {
-      TDLog.v("EXCEPT " + ee.getMessage() );
-    }
+    ++k; try {
+           mGeoImportApp = Integer.parseInt( prefs.getString( key[k].key, key[k].dflt ) );
+         } catch ( RuntimeException e ) {
+           TDLog.v("ERROR " + e.getMessage() );
+         } catch ( Exception ee ) {
+           TDLog.v("EXCEPT " + ee.getMessage() );
+         }
 
     key = TDPrefKey.mScreen;
-    mFixedThickness = tryFloat( prefs, key[ 0].key, key[ 0].dflt );  // DISTOX_FIXED_THICKNESS
-    mStationSize    = tryFloat( prefs, key[ 1].key, key[ 1].dflt );  // DISTOX_STATION_SIZE
-    mDotRadius      = tryFloat( prefs, key[ 2].key, key[ 2].dflt );  // DISTOX_DOT_RADIUS
-    mSelectness     = tryFloat( prefs, key[ 3].key, key[ 3].dflt );  // DISTOX_CLOSENESS
-    mEraseness      = tryFloat( prefs, key[ 4].key, key[ 4].dflt );  // DISTOX_ERASENESS
-    mMinShift       = tryInt(   prefs, key[ 5].key, key[ 5].dflt );  // DISTOX_MIN_SHIFT
-    mPointingRadius = tryInt(   prefs, key[ 6].key, key[ 6].dflt );  // DISTOX_POINTING
-    mSplayAlpha     = tryInt(   prefs, key[ 7].key, key[ 7].dflt );  // DISTOX_SPLAY_ALPHA
+    k = 0;
+         mFixedThickness = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_FIXED_THICKNESS
+    ++k; mStationSize    = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_STATION_SIZE
+    ++k; mDotRadius      = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_DOT_RADIUS
+    ++k; mSelectness     = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_CLOSENESS
+    ++k; mEraseness      = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_ERASENESS
+    ++k; mMinShift       = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_MIN_SHIFT
+    ++k; mPointingRadius = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_POINTING
+    ++k; mSplayAlpha     = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_SPLAY_ALPHA
     BrushManager.setSplayAlpha( mSplayAlpha );
 
     key = TDPrefKey.mLine;
-    mLineThickness = tryFloat( prefs,  key[0].key,      key[0].dflt );   // DISTOX_LINE_THICKNESS
-    setLineStyleAndType( prefs.getString( key[1].key,   key[1].dflt ) ); // DISTOX_LINE_STYLE
-    setLineSegment( tryInt(    prefs,  key[2].key,      key[2].dflt ) ); // DISTOX_LINE_SEGMENT
-    mLineClose     = prefs.getBoolean( key[3].key, bool(key[3].dflt) );  // DISTOX_LINE_CLOSE
-    mArrowLength   = tryFloat( prefs,  key[4].key,      key[4].dflt );   // DISTOX_ARROW_LENGTH
-    mAutoSectionPt = prefs.getBoolean( key[5].key, bool(key[5].dflt) );  // DISTOX_AUTO_SECTION_PT
-    mAreaBorder    = prefs.getBoolean( key[6].key, bool(key[6].dflt) );  // DISTOX_AREA_BORDER
-    mUnitLines     = tryFloat( prefs,  key[7].key,      key[7].dflt );   // DISTOX_LINE_UNITS
-    mSlopeLSide    = tryInt(   prefs,  key[8].key,      key[8].dflt );   // DISTOX_SLOPE_LSIDE
-    // mContinueLine  = tryInt(   prefs,  key[7].key,      key[7].dflt );   // DISTOX_LINE_CONTINUE
-    // mWithLineJoin  = prefs.getBoolean( key[8].key, bool(key[8].dflt) );  // DISTOX_WITH_CONTINUE_LINE
+    k = 0;
+         mLineThickness = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_THICKNESS
+    ++k; setLineStyleAndType( prefs.getString( key[k].key,   key[k].dflt ) ); // DISTOX_LINE_STYLE
+    ++k; setLineSegment( tryInt(    prefs,  key[k].key,      key[k].dflt ) ); // DISTOX_LINE_SEGMENT
+    ++k; mLineClose     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_CLOSE
+    ++k; mArrowLength   = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_ARROW_LENGTH
+    ++k; mAutoSectionPt = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_AUTO_SECTION_PT
+    ++k; mAreaBorder    = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_AREA_BORDER
+    ++k; mUnitLines     = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_UNITS
+    ++k; mSlopeLSide    = tryInt(   prefs,  key[k].key,      key[k].dflt );   // DISTOX_SLOPE_LSIDE
+    // ++k; mContinueLine  = tryInt(   prefs,  key[k].key,      key[k].dflt );  // DISTOX_LINE_CONTINUE
+    // ++k; mWithLineJoin  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_WITH_CONTINUE_LINE
 
     key = TDPrefKey.mPoint;
-    mUnscaledPoints = prefs.getBoolean( key[0].key, bool(key[0].dflt) ); // DISTOX_UNSCALED_POINTS
-    mUnitIcons     = tryFloat( prefs,   key[1].key,      key[1].dflt );       // DISTOX_DRAWING_UNIT 
-    mLabelSize     = tryFloat( prefs,   key[2].key,      key[2].dflt );       // DISTOX_LABEL_SIZE
-    mScalableLabel = prefs.getBoolean(  key[3].key, bool(key[3].dflt) ); // DISTOX_SCALABLE_LABEL
-    mXSectionOffset = tryInt( prefs,    key[4].key,      key[4].dflt );       // DISTOX_XSECTION_OFFSET
+    k = 0;
+         mUnscaledPoints = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_UNSCALED_POINTS
+    ++k; mUnitIcons     = tryFloat( prefs,   key[k].key,      key[k].dflt );  // DISTOX_DRAWING_UNIT 
+    ++k; mLabelSize     = tryFloat( prefs,   key[k].key,      key[k].dflt );  // DISTOX_LABEL_SIZE
+    ++k; mScalableLabel = prefs.getBoolean(  key[k].key, bool(key[k].dflt) ); // DISTOX_SCALABLE_LABEL
+    ++k; mXSectionOffset = tryInt( prefs,    key[k].key,      key[k].dflt );  // DISTOX_XSECTION_OFFSET
     // FIXME tis should go in SCREEN
 
     // AUTOWALLS
     // key = TDPrefKey.mWalls;
-    // mWallsType        = tryInt(   prefs, key[0].key, key[0].dflt ); // DISTOX_WALLS_TYPE choice: 0, 1
-    // mWallsPlanThr     = tryFloat( prefs, key[1].key, key[1].dflt ); // DISTOX_WALLS_PLAN_THR
-    // mWallsExtendedThr = tryFloat( prefs, key[2].key, key[2].dflt ); // DISTOX_WALLS_EXTENDED_THR
-    // mWallsXClose      = tryFloat( prefs, key[3].key, key[3].dflt ); // DISTOX_WALLS_XCLOSE
-    // mWallsXStep       = tryFloat( prefs, key[4].key, key[4].dflt ); // DISTOX_WALLS_XSTEP
-    // mWallsConcave     = tryFloat( prefs, key[5].key, key[5].dflt ); // DISTOX_WALLS_CONCAVE
+    // k = 0;
+    //      mWallsType        = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_WALLS_TYPE choice: 0, 1
+    // ++k; mWallsPlanThr     = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_WALLS_PLAN_THR
+    // ++k; mWallsExtendedThr = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_WALLS_EXTENDED_THR
+    // ++k; mWallsXClose      = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_WALLS_XCLOSE
+    // ++k; mWallsXStep       = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_WALLS_XSTEP
+    // ++k; mWallsConcave     = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_WALLS_CONCAVE
 
   }
 

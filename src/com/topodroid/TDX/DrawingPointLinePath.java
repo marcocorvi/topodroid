@@ -671,7 +671,7 @@ public class DrawingPointLinePath extends DrawingPath
     left = right  = lp.x;
     top  = bottom = lp.y;
     mPath.moveTo( lp.x, lp.y );
-    for ( lp = lp.mNext; lp != null || lp != mFirst; lp = lp.mNext ) {
+    for ( lp = lp.mNext; lp != null && lp != mFirst; lp = lp.mNext ) {
       if ( lp.has_cp ) {
         mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {

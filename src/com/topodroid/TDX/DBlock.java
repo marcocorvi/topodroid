@@ -68,7 +68,7 @@ public class DBlock
   private int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY 
   private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
-  boolean mFailBacksplay;  // whether this splay failed to backsight the preceeding leg
+  private boolean mFailBacksplay;  // whether this splay failed to backsight the preceeding leg
 
   private boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
@@ -95,8 +95,9 @@ public class DBlock
   static final long FLAG_NO_PLAN    =  8;
   static final long FLAG_NO_PROFILE = 16;
   static final long FLAG_NONE       = 24; // 16 | 8
-  static final long FLAG_BACKSHOT   = 32; // BACKSHOT
+  static final long FLAG_BACKSHOT   = 32; // BACKSHOT - backsight leg
   static final long FLAG_TAMPERED   = 64;
+  static final long FLAG_BACKSPLAY  =128; // 1 << 7 - backsight splay
 
   static final long FLAG_SURFACE_DUPLICATE_COMMENTED = 7; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED 
   static final long FLAG_SURFACE_DUPLICATE_COMMENTED_BACKSHOT = 39; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED | FLAG_BACKSHOT
@@ -145,8 +146,9 @@ public class DBlock
   public boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public boolean isNone()      { return (mFlag & FLAG_NONE)       == FLAG_NONE; }
-  public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT
+  public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT LEG
   public boolean isTampered()  { return (mFlag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
+  public boolean isBackSplay() { return (mFlag & FLAG_BACKSPLAY ) == FLAG_BACKSPLAY; } // BACKSIGHT SPLAY
 
   /** @return true if the cavway flag has the requested value
    * @param f   requested flag value
@@ -160,12 +162,27 @@ public class DBlock
   public static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public static boolean isNone(long flag)      { return (flag & FLAG_NONE)       == FLAG_NONE; }
-  public static boolean isBackshot(long flag)  { return (flag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT
+  public static boolean isBackshot(long flag)  { return (flag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT LEG
   public static boolean isTampered(long flag)  { return (flag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
+  public static boolean isBackSplay(long flag) { return (flag & FLAG_BACKSPLAY ) == FLAG_BACKSPLAY; } // BACKSIGHT SPLAY
 
   public void setTampered() { mFlag |= FLAG_TAMPERED; }
   public void clearTampered() { mFlag &= ~FLAG_TAMPERED; }
 
+  /** set the backsplay flag-bit
+   */
+  public void setBackSplay() { mFlag |= FLAG_BACKSPLAY; }
+
+  /** clear the backsplay flag-bit and set the backsight-check failure to false
+   */
+  public void clearBackSplay()
+  { 
+    mFlag &= ~FLAG_BACKSPLAY;
+    mFailBacksplay = false;
+  }
+
+  /** @return whether the shot failed the backsight-splay check
+   */
   public boolean failBacksplay()  { return mFailBacksplay; }
 
   void clearFlagDuplicateSurfaceCommented() { mFlag &= ~FLAG_SURFACE_DUPLICATE_COMMENTED; }
@@ -1062,25 +1079,33 @@ public class DBlock
   }
 
   /** check if this shot is a splay backsight check for a leg
-   * @param b  leg shot
+   * @param b    leg shot
+   * @param skip forse set fail to false (the shot may not  be a splay)
    */ 
-  void doBacksightSplayCheck( DBlock b ) 
+  boolean doBacksightSplayCheck( DBlock b, boolean skip ) 
   {
-    float cc, sc, cb, sb;
-    float alen = mLength;
-    cc = TDMath.cosd( mClino );
-    sc = TDMath.sind( mClino );
-    cb = TDMath.cosd( mBearing ); 
-    sb = TDMath.sind( mBearing ); 
-    TDVector v1 = new TDVector( alen * cc * sb, alen * cc * cb, alen * sc );
-    float blen = b.mLength;
-    cc =   TDMath.cosd( b.mClino );
-    sc = - TDMath.sind( b.mClino );
-    cb = - TDMath.cosd( b.mBearing ); 
-    sb = - TDMath.sind( b.mBearing ); 
-    TDVector v2 = new TDVector( blen * cc * sb, blen * cc * cb, blen * sc );
-    float d = (v1.minus(v2)).length();
-    mFailBacksplay = ( d/alen + d/blen > 2 * TDSetting.mCloseDistance );
+    // setBackSplay();
+    if ( ! TDSetting.mBacksightSplay ) {
+      mFailBacksplay = false;
+    } else if ( b != null ) {
+      float cc, sc, cb, sb;
+      float alen = mLength;
+      cc = TDMath.cosd( mClino );
+      sc = TDMath.sind( mClino );
+      cb = TDMath.cosd( mBearing ); 
+      sb = TDMath.sind( mBearing ); 
+      TDVector v1 = new TDVector( alen * cc * sb, alen * cc * cb, alen * sc );
+      float blen = b.mLength;
+      cc =   TDMath.cosd( b.mClino );
+      sc = - TDMath.sind( b.mClino );
+      cb = - TDMath.cosd( b.mBearing ); 
+      sb = - TDMath.sind( b.mBearing ); 
+      TDVector v2 = new TDVector( blen * cc * sb, blen * cc * cb, blen * sc );
+      float d = (v1.minus(v2)).length();
+      mFailBacksplay = ( d/alen + d/blen > 2 * TDSetting.mCloseDistance );
+      TDLog.v("Fail backsight splay: " + mFailBacksplay + " D " + (d/alen + d/blen) + " thrs " + 2*TDSetting.mCloseDistance ); 
+    }
+    return mFailBacksplay;
   }
 
   /** update AMD from another block

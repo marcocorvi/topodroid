@@ -357,7 +357,7 @@ public class DataHelper extends DataSetObservable
     blk.mAcceleration = (float)( cursor.getDouble(7) );
     blk.mMagnetic     = (float)( cursor.getDouble(8) );
     blk.mDip          = (float)( cursor.getDouble(9) );
-    blk.setShotType( (int)(  cursor.getLong(10) ) );
+    blk.setShotType( (int)(  cursor.getLong(10) ) ); // shot type: DistoX, Manual, ...
     blk.mTime         = (long)( cursor.getLong(11) );
     blk.mAddress      = cursor.getString(12);
     blk.mExtend       = (int)(  cursor.getLong(13) );
@@ -405,7 +405,7 @@ public class DataHelper extends DataSetObservable
     blk.resetFlag( cursor.getLong(10) );
     blk.setBlockTypeFromLegType( (int)leg );
     blk.mComment  = cursor.getString(12);
-    blk.setShotType( (int)cursor.getLong(13) );
+    blk.setShotType( (int)cursor.getLong(13) ); // shot type: DistoX, manual, ..
     blk.mTime     = cursor.getLong(14);
     blk.setPaintColor( (int)cursor.getLong(15) ); // color
     // blk.setStretch( (float)cursor.getDouble(16) ); // already set above
@@ -419,11 +419,15 @@ public class DataHelper extends DataSetObservable
    * @param sid     survey ID
    * @param blk     data block
    * @param cursor  values cursor
+   * @param prev_leg immediately previous leg - can be null
    */
-  private void fullFillBlock( long sid, DBlock blk, Cursor cursor )
+  private void fullFillBlock( long sid, DBlock blk, Cursor cursor, DBlock prev_leg )
   {
     fillBlock( sid, blk, cursor );
     blk.setAddress( cursor.getString(19) );
+    if ( prev_leg != null ) {
+      if ( blk.isBackSplay() ) blk.doBacksightSplayCheck( prev_leg, ! blk.isSplay() );
+    }
   }
 
   // ----------------------------------------------------------------------
@@ -4665,7 +4669,7 @@ public class DataHelper extends DataSetObservable
     DBlock block = null;
     if (cursor.moveToFirst()) {
       block = new DBlock();
-      fullFillBlock( sid, block, cursor );
+      fullFillBlock( sid, block, cursor, null );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // TDLog.v( "A6 select one shot id " + id + " block leg " + block.getLegType() );
@@ -4686,7 +4690,7 @@ public class DataHelper extends DataSetObservable
     DBlock block = null;
     if (cursor.moveToLast()) {
       block = new DBlock();
-      fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+      fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // TDLog.v( "A6 select one shot id " + id + " block leg " + block.getLegType() );
@@ -4709,7 +4713,7 @@ public class DataHelper extends DataSetObservable
     DBlock block = null;
     if (cursor.moveToLast()) {
       block = new DBlock();
-      fullFillBlock( sid, block, cursor );
+      fullFillBlock( sid, block, cursor, null );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // TDLog.v( "A6 select one shot id " + id + " block leg " + block.getLegType() );
@@ -4747,7 +4751,7 @@ public class DataHelper extends DataSetObservable
         String str1 = cursor.getString(1);
         if ( str0 != null && str1 != null && str0.length() > 0 && str1.length() > 0 ) {
           block = new DBlock();
-          fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+          fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
         }  
       } while (block == null && cursor.moveToNext());
     }
@@ -4770,7 +4774,7 @@ public class DataHelper extends DataSetObservable
   //     do {
   //       if ( cursor.getString(0).length() > 0 && cursor.getString(1).length() > 0 ) {
   //         block = new DBlock();
-  //         fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+  //         fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
   //       }  
   //     } while (block == null && cursor.moveToNext());
   //   }
@@ -4813,6 +4817,7 @@ public class DataHelper extends DataSetObservable
   // {
   //   List< DBlock > list = new ArrayList<>();
   //   if ( myDB == null ) return list;
+  //   DBlock prev_leg = null;
   //   Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
   //                   "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
   //                   new String[] { Long.toString(sid), TDStatus.NORMAL_STR, st1, st2, st2, st1 },
@@ -4820,8 +4825,9 @@ public class DataHelper extends DataSetObservable
   //   if (cursor.moveToFirst()) {
   //     do {
   //       DBlock block = new DBlock();
-  //       fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+  //       fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL
   //       list.add( block );
+  //       if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
   //     } while (cursor.moveToNext());
   //   }
   //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -4839,6 +4845,7 @@ public class DataHelper extends DataSetObservable
     // TDLog.v( "B1 select shots after id " + id );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     "surveyId=? and status=? and id>?",
                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, Long.toString(id) },
@@ -4846,8 +4853,9 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       do {
         DBlock block = new DBlock();
-        fullFillBlock( sid, block, cursor );
+        fullFillBlock( sid, block, cursor, prev_leg );
         list.add( block );
+        if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
       } while (cursor.moveToNext());
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -4858,7 +4866,7 @@ public class DataHelper extends DataSetObservable
    * in the case of legs, select only "independent" legs (one for each neighbor station)
    * @param sid     survey ID
    * @param station station name
-   * @param leg     whether to select only legs
+   * @param leg     whether to select only legs instead of only splay
    * @return the list of shots at a station
    * @note used by DrawingWindow
    */
@@ -4867,6 +4875,7 @@ public class DataHelper extends DataSetObservable
     List< DBlock > list = new ArrayList<>();
     if ( TDString.isNullOrEmpty( station ) ) return list;
     if ( myDB == null ) return list;
+    // DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     "surveyId=? and status=? and (fStation=? or tStation=?)",
                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station, station },
@@ -4889,14 +4898,14 @@ public class DataHelper extends DataSetObservable
             }
             if ( independent ) {
               DBlock block = new DBlock();
-              fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+              fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
               list.add( block );
             }
           }
         } else { // splays only
           if ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) { 
             DBlock block = new DBlock();
-            fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+            fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
             list.add( block );
           }
         }
@@ -4918,6 +4927,7 @@ public class DataHelper extends DataSetObservable
   //   List< DBlock > list = new ArrayList<>();
   //   if ( TDString.isNullOrEmpty( station ) ) return list;
   //   if ( myDB == null ) return list;
+  //   DBlock prev_leg = null;
   //   Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
   //                   "surveyId=? and status=? and (fStation=? or tStation=?)",
   //                   new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station, station },
@@ -4928,8 +4938,13 @@ public class DataHelper extends DataSetObservable
   //       int tl = cursor.getString(2).length();
   //       if ( !leg && ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) ) { // splay only
   //         DBlock block = new DBlock();
-  //         fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL ?
+  //         fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL ?
   //         list.add( block );
+  //         prev_leg = null;
+  //       } else {
+  //         DBlock blk = new DBlock();
+  //         fullFillBlock( sid, blk, cursor, null );
+  //         if ( ! blk.isSecLeg() ) prev_leg = blk.isMainLeg()? blk : null;
   //       }
   //     } while (cursor.moveToNext());
   //   }
@@ -4948,11 +4963,10 @@ public class DataHelper extends DataSetObservable
   List< DBlock > selectAllShotsAtStations( long sid, String station1, String station2 )
   {
     if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
-
     List< DBlock > list = new ArrayList<>();
     if ( station1 == null ) return list;
-
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query( SHOT_TABLE, mShotFullFields,
       "surveyId=? and status=? and ( fStation=? or tStation=? or fStation=? or tStation=? )",
       new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station1, station2, station2, station1 },
@@ -4962,8 +4976,9 @@ public class DataHelper extends DataSetObservable
         int leg = (int)( cursor.getLong(11) );
         if ( leg == 0 || leg >= 2 ) { // skip leg-blocks (11 = "leg" flag): 0 normal, 1 repeated-leg, 2 x-splay, 3 backleg, ...
           DBlock block = new DBlock();
-          fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL ?
+          fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL ?
           list.add( block );
+          if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
         }
       } while (cursor.moveToNext());
     }
@@ -4986,6 +5001,7 @@ public class DataHelper extends DataSetObservable
   //   if ( sz == 0 ) return list;
   //   if ( sz == 1 ) return selectAllShotsAtStation( sid, stations.get(0) );
   //   if ( sz == 2 ) return selectAllShotsAtStations( sid, stations.get(0), stations.get(1) );
+  //   DBlock prev_leg = null;
   //   for ( String station : stations ) {
   //     Cursor cursor = myDB.query( SHOT_TABLE, mShotFullFields,
   //       "surveyId=? and status=? and ( fStation=? or tStation=? )",
@@ -4995,16 +5011,18 @@ public class DataHelper extends DataSetObservable
   //       do {
   //         if ( cursor.getLong(11) == 0 ) { // non-leg blocks
   //           DBlock block = new DBlock();
-  //           fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL ?
+  //           fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL ?
   //           list.add( block );
+  //           prev_leg = null;
   //         } else if ( with_legs ) { // leg blocks
   //           long id = cursor.getLong(0);
   //           boolean contains = false;
   //           for ( DBlock b : list ) if ( b.mId == id ) { contains = true; break; }
   //           if ( ! contains ) {
   //             DBlock block = new DBlock();
-  //             fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL ?
+  //             fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL ?
   //             list.add( block );
+  //             if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
   //           }
   //         }
   //       } while (cursor.moveToNext());
@@ -5027,6 +5045,7 @@ public class DataHelper extends DataSetObservable
     if ( stations == null || myDB == null ) return list;
     int sz = stations.size();
     if ( sz == 0 ) return list;
+    DBlock prev_leg = null;
     for ( String station : stations ) {
       Cursor cursor = myDB.query( SHOT_TABLE, mShotFullFields,
         "surveyId=? and status=? and fStation=? and tStation=\"\"",
@@ -5036,8 +5055,9 @@ public class DataHelper extends DataSetObservable
         do {
           // if ( cursor.getLong(11) == 0 ) { // non-leg blocks
             DBlock block = new DBlock();
-            fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+            fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL
             list.add( block );
+            if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
           // }
         } while (cursor.moveToNext());
       }
@@ -5055,8 +5075,8 @@ public class DataHelper extends DataSetObservable
   {
     List< DBlock > list = new ArrayList<>();
     if ( station == null ) return list;
-
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     "surveyId=? and status=? and fStation=?", 
                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station },
@@ -5065,8 +5085,14 @@ public class DataHelper extends DataSetObservable
       do {
         if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
           DBlock block = new DBlock();
-          fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+          fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL
           list.add( block );
+          if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
+          prev_leg = null;
+        } else {
+          DBlock blk = new DBlock();
+          fullFillBlock( sid, blk, cursor, prev_leg );
+          if ( ! blk.isSecLeg() ) prev_leg = blk.isMainLeg()? blk : null;
         }
       } while (cursor.moveToNext());
     }
@@ -5133,9 +5159,10 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShotsAfter( long id, long sid )
   {
-    // TDLog.v( "B2 select shots after id " + id );
+    TDLog.v( "DB select all shots after id " + id );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     "id>=? and surveyId=? ",
                     new String[] { Long.toString(id), Long.toString(sid) },
@@ -5143,8 +5170,9 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       do {
         DBlock block = new DBlock();
-        fullFillBlock( sid, block, cursor );
+        fullFillBlock( sid, block, cursor, prev_leg );
         list.add( block );
+        if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
@@ -5160,9 +5188,10 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShotsAfter( long id, long sid, long status )
   {
-    // TDLog.v( "B2 select shots after id " + id + " status " + status );
+    TDLog.v( "DB select shots after id " + id + " status " + status );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     "id>=? and surveyId=? and status=?",
                     new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
@@ -5170,8 +5199,9 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       do {
         DBlock block = new DBlock();
-        fullFillBlock( sid, block, cursor );
+        fullFillBlock( sid, block, cursor, prev_leg );
         list.add( block );
+        if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
@@ -5248,7 +5278,7 @@ public class DataHelper extends DataSetObservable
    */
   List< RawDBlock > selectAllShotsRawData( long sid )
   {
-    // TDLog.v( "B3 select shots all");
+    TDLog.v( "DB select all raw shots");
     List< RawDBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotRawDataFields, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, "id" );
@@ -5297,20 +5327,23 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShots( long sid, long status ) // ANDROID-11 SQLiteDiskIOException
   {
-    // TDLog.v( "B3 select shots all");
+    TDLog.v( "BD select all shots. status " + status );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
                     null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
         DBlock block = new DBlock();
-        fullFillBlock( sid, block, cursor );
+        fullFillBlock( sid, block, cursor, prev_leg );
+        TDLog.v("Block " + block.mId + " flag " + block.getFlagFully() + " is leg " + block.isLeg() + " is backSplay " + block.isBackSplay() );
         list.add( block );
+        if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
       } while (cursor.moveToNext());
     }
-    // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
+    TDLog.v( "DB select all shots. list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // FIXME catch ( SQLiteCantOpenDatabaseException e )
     return list;
@@ -5323,17 +5356,19 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllExportShots( long sid, long status )
   {
-    // TDLog.v( "B3 select shots all");
+    // TDLog.v( "DB select all export shots. status " + status );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
+    // DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
                     null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
         DBlock block = new DBlock();
-        fullFillBlock( sid, block, cursor );
+        fullFillBlock( sid, block, cursor, null ); // prev_leg = null
         list.add( block );
+        // if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null; // no need to update prev_leg
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
@@ -5353,14 +5388,16 @@ public class DataHelper extends DataSetObservable
     // TDLog.v( "B3 select shots all");
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
+    DBlock prev_leg = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFullFields,
                     WHERE_SID_STATUS_FROM, new String[]{ Long.toString(sid), Long.toString(status), Long.toString(first) },
                     null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
         DBlock block = new DBlock();
-        fullFillBlock( sid, block, cursor );
+        fullFillBlock( sid, block, cursor, prev_leg );
         list.add( block );
+        if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null; // might not need to update prev_leg
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
@@ -5386,7 +5423,7 @@ public class DataHelper extends DataSetObservable
       // TDLog.v( "got the last leg " + cursor.getLong(0) + " " + cursor.getString(1) + " - " + cursor.getString(2) );
       DBlock block = new DBlock();
       do { 
-        fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+        fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
         if ( block.isDistoXBacksight() ) {
           if ( block.mTo != null && block.mTo.length() > 0 ) { ret = block; break; }
         } else {
@@ -5414,7 +5451,7 @@ public class DataHelper extends DataSetObservable
       do {
         if ( cursor.getString(1).length() > 0 && cursor.getString(2).length() > 0 ) {
           DBlock block = new DBlock();
-          fullFillBlock( sid, block, cursor ); // FIXME FULL_FILL
+          fullFillBlock( sid, block, cursor, null ); // FIXME FULL_FILL
           list.add( block );
         }
       } while (cursor.moveToNext());

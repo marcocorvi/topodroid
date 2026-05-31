@@ -64,9 +64,9 @@ public class DEMhgtParser extends ParserDEM
   // latToNorth( lat ) = O.y + (lat - O.latitude) * O.getSNradius()
   // lngToEast( lng )  = O.x + (lng - O.longitude) * O.getWEradius();
 
-  public DEMhgtParser( String filename, int max_size, Cave3DFix origin )
+  public DEMhgtParser( String filename, /* int max_size, */ Cave3DFix origin )
   {
-    super( null, filename, max_size ); // null InputStreamReader
+    super( null, filename /* , max_size */ ); // null InputStreamReader
     mOrigin = origin;
     mSNradius = origin.getSNradius(); // radius * PI / 180
     mWEradius = origin.getWEradius();

@@ -1657,7 +1657,7 @@ public class TopoGL extends Activity
         InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
         String pathname = uri[0].getPath();
         if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".grid" ) ) {
-          dem = new DEMgridParser( isr, pathname, mDEMmaxsize );
+          dem = new DEMgridParser( isr, pathname /* , mDEMmaxsize */ );
         } else if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".asc" ) || pathname.toLowerCase( Locale.getDefault() ).endsWith(".ascii") ) {
           Cave3DFix origin = mParser.getOrigin();
           // origin.log();
@@ -1665,7 +1665,7 @@ public class TopoGL extends Activity
           double yunit = mParser.getSNradius(); // radius * PI/180
           // TDLog.v("xunit " + xunit + " yunit " + yunit /* + " max size " + mDEMmaxsize */ );
           isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
-          dem = new DEMasciiParser( isr, pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
+          dem = new DEMasciiParser( /* activity, */ isr, pathname, /* mDEMmaxsize, */ false, xunit, yunit ); // false: flip horz
         } else if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".hgt" ) ) {
           // TODO support of HGT DEM file has not been debugged
           // dem = new DEMhgtParser( null, pathname, /* mDEMmaxsize, */ mParser.getOrigin() );

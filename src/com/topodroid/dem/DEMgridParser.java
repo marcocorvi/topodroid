@@ -35,11 +35,11 @@ public class DEMgridParser extends ParserDEM
   /** cstr
    * @param isr        input stream reader for the grid
    * @param filename   file fullpath
-   * @param maxsize    max DEM size in each direction
+   * @param maxsize    max DEM size in each direction - UNUSED
    */
-  public DEMgridParser( InputStreamReader isr, String filename, int maxsize ) // FIXME DEM_URI
+  public DEMgridParser( InputStreamReader isr, String filename /* , int maxsize */ ) // FIXME DEM_URI
   {
-    super( isr, filename, maxsize );
+    super( isr, filename /* , maxsize */ );
   }
 
   /** read the DEM data
@@ -79,13 +79,13 @@ public class DEMgridParser extends ParserDEM
       for ( ; i < cols && x <= xeast; ++i ) { x += mDim1; ++mNr1; }
       mEast2 = x - mDim1; // X-coord of last data
     }
-    if ( mNr1 > mMaxSize ) {
-      int d = (mNr1 - mMaxSize)/2;
-      xoff += d;
-      mNr1 -= 2 * d;
-      mEast2 -= d * mDim1;
-      mEast1 += d * mDim1;
-    }
+    // if ( mNr1 > mMaxSize ) {
+    //   int d = (mNr1 - mMaxSize)/2;
+    //   xoff += d;
+    //   mNr1 -= 2 * d;
+    //   mEast2 -= d * mDim1;
+    //   mEast1 += d * mDim1;
+    // }
 
     if ( ! flip_vert ) { // yll is TOP-LEFT
       double y = yll + mDim2/2 + (rows-1) * mDim2;
@@ -106,13 +106,13 @@ public class DEMgridParser extends ParserDEM
       for ( ; j < rows && y <= ynorth; ++j ) { y += mDim2; ++mNr2; }
       mNorth2 = y - mDim2;
     }
-    if ( mNr2 > mMaxSize ) {
-      int d = (mNr2 - mMaxSize)/2;
-      yoff += d;
-      mNr2 -= 2 * d;
-      mNorth2 -= d * mDim2;
-      mNorth1 += d * mDim2;
-    }
+    // if ( mNr2 > mMaxSize ) {
+    //   int d = (mNr2 - mMaxSize)/2;
+    //   yoff += d;
+    //   mNr2 -= 2 * d;
+    //   mNorth2 -= d * mDim2;
+    //   mNorth1 += d * mDim2;
+    // }
 
     // TDLog.v("DEM bounds " + mNr1 + "x" + mNr2 + " offset " + xoff + "-" + yoff + " E " + mEast1 + " " + mEast2 + " N " + mNorth1 + " " + mNorth2 ); 
     if ( mNr1 <= 1 || mNr2 <= 1 ) {

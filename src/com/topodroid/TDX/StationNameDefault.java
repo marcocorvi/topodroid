@@ -148,6 +148,7 @@ class StationNameDefault extends StationName
 	if ( ! blk.isRelativeDistance( prev ) ) {
           sec_legs.add( blk );
         } else {
+          // prev.clearBackSplay(); // TODO needed ? 
           setSecLegName( blk );
         }
       }
@@ -264,6 +265,7 @@ class StationNameDefault extends StationName
             if ( prev.isRelativeDistance( blk ) ) {
               if ( TDLog.isStreamFile() ) TDLog.e("  close to prev " + id(prev) + ": sec-leg " + id(blk) + " nr. legs " + nrLegShots );
               // TDLog.v("  close to prev " + id(prev) + ": sec-leg " + id(blk) + " nr. legs " + nrLegShots );
+              prev.clearBackSplay();
               sec_legs.add( blk );
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
@@ -350,7 +352,9 @@ class StationNameDefault extends StationName
               }
             } else { // distance from prev > "closeness" setting
               if ( backsight_splay && first_splay != null ) {
-                blk.doBacksightSplayCheck( first_splay );
+                blk.setBackSplay();
+                mData.updateShotFlag( blk.mId, mSid, blk.getFlagFully() );
+                blk.doBacksightSplayCheck( first_splay, false );
                 first_splay = null;
               }
               if ( TDLog.isStreamFile() ) TDLog.e("  set splay " + id(blk) + " : " + station + " / prev " + id(prev) + " => " + id(blk) );

@@ -515,7 +515,7 @@ public class CalibActivity extends Activity
     closeMenu();
     // TDToast.make( item.toString() );
     int p = 0;
-    if ( TDLevel.overNormal && p++ == pos ) { // CLOSE
+    if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( TDInstance.calib != null ) {

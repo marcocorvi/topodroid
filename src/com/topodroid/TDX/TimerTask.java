@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2014
  *
- * @brief TopoDroid timer
+ * @brief TopoDroid timer task
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -14,13 +14,16 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDMath;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.AsyncTask;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
 import java.lang.ref.WeakReference;
 
 import android.content.Context;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
+import android.app.Activity;
+
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.hardware.SensorManager;
@@ -28,7 +31,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-class TimerTask extends AsyncTask<String, Integer, Long >
+/** TimerTask is used to compute the direction:
+ * - AzimuthDialog for the reference azimuth (long size direction)
+ * - DrawingStationDialog for the azimuth of a xsection (in-screen direction)
+ * - QCamCompass for taking photos (long side direction)
+ * - ShotNewDialog for the azimuth/clino (long side direction)
+ */
+class TimerTask extends AsyncTask<Long >
                 implements SensorEventListener
 {
   final static int TYPE_MAG = Sensor.TYPE_MAGNETIC_FIELD;
@@ -50,7 +59,10 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private int mCount; // measures to count
   private int mMagAccuracy;
   private int mAccAccuracy;
-  private boolean mTakeReading = false; // whether to take readings or not
+  private boolean mTakeReading = false;  // whether to take readings or not
+  private boolean mIsRegistered = false; // whether it is registered with sensor manager
+  // private boolean mIsCancelled = false;  // whether it is cancelled
+  // private final Activity mActivity;
 
   /** cstr
    * @param parent   parent activity/dialog
@@ -58,8 +70,9 @@ class TimerTask extends AsyncTask<String, Integer, Long >
    * @param wait     number of seconds to wait before taking measurements
    * @param count    number of readings to average
    */
-  TimerTask( IBearingAndClino parent, int axis, int wait, int count )
+  TimerTask( Activity activity, IBearingAndClino parent, int axis, int wait, int count )
   {
+    super( activity );
     mParent  = new WeakReference<IBearingAndClino>( parent );
     mRun     = true;
     mAxis    = axis;
@@ -71,12 +84,28 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mAccAccuracy = 0;
   }
 
+  // void execute()
+  // {
+  //   mIsCancelled = false;
+  //   (new Thread() {
+  //     public void run() {
+  //       Long ret = doInBackground();
+  //       onPostExecute( ret );
+  //     };
+  //   } ).start();
+  // }
+
+  // void cancel( boolean what )
+  // {
+  //   mIsCancelled = true;
+  // }
+
   /** task execution
    * @param str ...
    * @return 0 on success, neg. error (-1 no-run, -2 no sensor manager, -3 no sensors, -4 cancelled )
    */
   @Override
-  protected Long doInBackground( String... str )
+  protected Long doInBackground() // doInBackground( String... str )
   {
     // TDLog.v( "timer task in bkgr");
     // TDLog.Log( TDLog.LOG_PHOTO, "Timer task in background - run " + mRun );
@@ -98,13 +127,13 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mTakeReading = false;
     mSensorManager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
     mSensorManager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
+    mIsRegistered = true;
     for ( int i=0; i<mWait && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       TDUtil.slowDown( 1000 - duration );
-      if ( isCancelled() ) {
+      if ( mIsCancelled ) { // isCancelled()
         TDLog.e( "Timer task: cancelled" );
         mRun = false;
-        mSensorManager.unregisterListener( this );
         return -4L;
       }
     }
@@ -118,20 +147,24 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       -- cnt;
       TDUtil.slowDown( 100 );
+      if ( mIsCancelled ) { // isCancelled()
+        TDLog.e( "Timer task: cancelled" );
+        mRun = false;
+        return -4L;
+      }
     }
     mTakeReading = false;
-    mSensorManager.unregisterListener( this );
     
     // TDLog.v( "timer task bkgr done");
     return 0L;
   }
 
-  /** progress update (empty)
-   */
-  @Override
-  protected void onProgressUpdate(Integer... progress) 
-  {
-  }
+  // /** progress update (empty)
+  //  */
+  // @Override
+  // protected void onProgressUpdate(Integer... progress) 
+  // {
+  // }
 
   /** post execution
    * @param result   execution result (unused)
@@ -139,31 +172,38 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected void onPostExecute(Long result) 
   {
-    // TDLog.Log( TDLog.LOG_PHOTO, "Timer task post exec. Acc " + mCntGrv + " Mag " + mCntMag + " run " + mRun );
-    // TDLog.v( "Timer task post exec. " + result + " Acc " + mCntGrv + " Mag " + mCntMag );
-    if ( result == 0 ) {
-      if ( mCntGrv > 0 && mCntMag > 0 && mRun ) {
-        mValGrv[0] /= mCntGrv;
-        mValGrv[1] /= mCntGrv;
-        mValGrv[2] /= mCntGrv;
-        mValMag[0] /= mCntMag;
-        mValMag[1] /= mCntMag;
-        mValMag[2] /= mCntMag;
-        computeBearingAndClino();
-        toastAccuracy( mMagAccuracy );
-        // TDLog.v( "Timer task. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
-      } else {
-        mValGrv[0] = 0;
-        mValGrv[1] = 0;
-        mValGrv[2] = 0;
-        mValMag[0] = 0;
-        mValMag[1] = 0;
-        mValMag[2] = 0;
-        TDLog.e( "Timer task null direction. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
-        TDToast.makeWarn( R.string.sensor_no_readings );
-      }
-    } else {
-      TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.sensor_failure ), result.longValue() ) );
+    if ( mIsRegistered ) mSensorManager.unregisterListener( this );
+    if ( mActivity != null ) {
+      mActivity.runOnUiThread( new Runnable() {
+        public void run() {
+          // TDLog.Log( TDLog.LOG_PHOTO, "Timer task post exec. Acc " + mCntGrv + " Mag " + mCntMag + " run " + mRun );
+          // TDLog.v( "Timer task post exec. " + result + " Acc " + mCntGrv + " Mag " + mCntMag );
+          if ( result == 0 ) {
+            if ( mCntGrv > 0 && mCntMag > 0 && mRun ) {
+              mValGrv[0] /= mCntGrv;
+              mValGrv[1] /= mCntGrv;
+              mValGrv[2] /= mCntGrv;
+              mValMag[0] /= mCntMag;
+              mValMag[1] /= mCntMag;
+              mValMag[2] /= mCntMag;
+              computeBearingAndClino();
+              toastAccuracy( mMagAccuracy );
+              TDLog.v( "Timer task. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
+            } else {
+              mValGrv[0] = 0;
+              mValGrv[1] = 0;
+              mValGrv[2] = 0;
+              mValMag[0] = 0;
+              mValMag[1] = 0;
+              mValMag[2] = 0;
+              TDLog.e( "Timer task null direction. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
+              TDToast.makeWarn( R.string.sensor_no_readings );
+            }
+          } else {
+            TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.sensor_failure ), result.longValue() ) );
+          }
+        }
+      } );
     }
   }
 

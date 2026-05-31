@@ -170,6 +170,7 @@ class ShotEditDialog extends MyDialog
   private MyCheckBox mButtonSensor = null;
   // private MyCheckBox mButtonShot   = null; // INTERMEDIATE_DATA
   private MyCheckBox mButtonSurvey = null;
+  private MyCheckBox mButtonBackSplay = null;
 
   private MyCheckBox mButtonDelete = null;
   private MyCheckBox mButtonCheck  = null;
@@ -1115,6 +1116,9 @@ class ShotEditDialog extends MyDialog
     // } else if ( b == mButtonShot ) {  // INSERT NEW SHOT // INTERMEDIATE_DATA
     //   mParent.dialogInsertShotAt( mBlk );
     //   dismiss();
+    } else if ( mButtonBackSplay != null && b == mButtonBackSplay ) { // BACKSPLAY clear backsight flag
+      mParent.clearBacksightFlag( mBlk );
+      dismiss();
     } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT
       if ( TDLevel.overExpert ) {
         mParent.doSplitOrMoveDialog( mBlk.mId );
@@ -1212,7 +1216,7 @@ class ShotEditDialog extends MyDialog
 
   private void createMoreButtons( int size )
   {
-    int nr_buttons = 5; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
+    int nr_buttons = 6; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
 
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     // mButtonPlot.setOnClickListener( this );
@@ -1241,6 +1245,14 @@ class ShotEditDialog extends MyDialog
       -- nr_buttons;
     }
 
+    if ( TDSetting.mBacksightSplay && mBlk.isBackSplay() ) {
+      mButtonBackSplay = new MyCheckBox( mContext, size, R.drawable.iz_backsplay, R.drawable.iz_backsplay );
+      mButtonBackSplay.setOnClickListener( this );
+    } else {
+      mButtonBackSplay = null;
+      -- nr_buttons;
+    }
+
     // mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg ); // INTERMEDIATE_DATA
     // mButtonShot.setOnClickListener( this );
 
@@ -1257,6 +1269,7 @@ class ShotEditDialog extends MyDialog
     if ( mButtonAudio  != null ) mButtonX[pos++] = mButtonAudio;
     if ( mButtonSensor != null ) mButtonX[pos++] = mButtonSensor;
     // if ( mButtonShot   != null ) mButtonX[pos++] = mButtonShot; // INTERMEDIATE_DATA
+    if ( mButtonBackSplay != null ) mButtonX[pos++] = mButtonBackSplay;
     if ( mButtonSurvey != null ) mButtonX[pos++] = mButtonSurvey;
 
     LinearLayout layout4x = (LinearLayout) findViewById( R.id.layout4x );

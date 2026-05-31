@@ -25,7 +25,7 @@ import java.io.IOException;
 public class ParserDEM extends DEMsurface
 {
   protected boolean mValid;    // header is valid
-  protected int   mMaxSize;    // max DEM size (in each direction)
+  // protected int   mMaxSize;    // max DEM size (in each direction) [only for lox]
   // double mDim1; protected double   xcell;     // cell size
   // double mDim2; protected double   ycell;     // cell size
   // float[] mZ; protected float[] mData;     // DEM data
@@ -46,14 +46,14 @@ public class ParserDEM extends DEMsurface
   /** cstr
    * @param isr        input reader
    * @param filename   file fullpath
-   * @param size       max DEM size
+   * @param size       max DEM size - UNUSED
    */
-  public ParserDEM( InputStreamReader isr, String filename, int size ) // FIXME DEM_URI 
+  public ParserDEM( InputStreamReader isr, String filename /* , int size */ ) // FIXME DEM_URI 
   {
     mIsr      = isr;
     mBr       = ( isr != null )? new BufferedReader( mIsr ) : null;
     mFilename = filename;
-    mMaxSize  = size;
+    // mMaxSize  = size;
     xunit = 1.0f;
     yunit = 1.0f;
     mValid = readHeader( mFilename );
@@ -61,16 +61,16 @@ public class ParserDEM extends DEMsurface
 
   /** cstr
    * @param filename   file fullpath
-   * @param size       max DEM size
+   * @param size       max DEM size - UNUSED
    * @param xu         X units
    * @param yu         Y units
    */
-  public ParserDEM( InputStreamReader isr, String filename, int size, double xu, double yu )
+  public ParserDEM( InputStreamReader isr, String filename, /* int size, */ double xu, double yu )
   {
     mIsr      = isr;
     mBr       = (isr != null)? new BufferedReader( mIsr ) : null;
     mFilename = filename;
-    mMaxSize  = size;
+    // mMaxSize  = size;
     xunit = xu;
     yunit = yu;
     mValid = readHeader( mFilename );

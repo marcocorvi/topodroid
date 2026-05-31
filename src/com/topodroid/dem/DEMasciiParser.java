@@ -38,20 +38,21 @@ public class DEMasciiParser extends ParserDEM
   // private Activity mParent;
   private double  xll,  yll;  // Lower-left corner of lower-left cell
   private int     cols, rows; // columns, rows
-  private boolean flip_horz;  // whether to flip lines horizontally
+  private boolean flip_horz;  // whether to flip lines horizontally - FIXME unused
 
   /** cstr
    * @param isr        input reader
    * @param filename   fullpath of the DEM file
-   * @param maxsize    ...
-   * @param hflip      flip horizontally
+   * @param maxsize    max DEM size in each direction - UNUSED
+   * @param hflip      flip horizontally - UNUSED
    * @param xu         X unit factor (either 1 for m, or R*PI/180 for dec-degrees)
    * @param yu         Y unit factor
    */
-  public DEMasciiParser( InputStreamReader isr, String filename, int maxsize, boolean hflip, double xu, double yu ) // FIXME DEM_URI
+  public DEMasciiParser( /* Activity parent, */ InputStreamReader isr, String filename, /* int maxsize, */ boolean hflip, double xu, double yu ) // FIXME DEM_URI
   {
-    super( isr, filename, maxsize, xu, yu );
+    super( isr, filename, /* maxsize, */ xu, yu );
     flip_horz = hflip;
+    // mParent = parent;
   }
 
   /** read the DEM data
@@ -84,7 +85,8 @@ public class DEMasciiParser extends ParserDEM
       double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint - mDim2 = Y-cell-size
       // TDLog.v("DEM upper-row midpoint Y " + y + " Y-north " + ynorth + " rows " + rows + " dims " + mDim2 );
       int k = 0;
-      for ( ; k < rows && y > ynorth; ++k ) {
+      for ( ; k < rows; ++k ) {
+        if ( y <= ynorth ) break;
         mBr.readLine();
         y -= mDim2;
       }
@@ -95,36 +97,48 @@ public class DEMasciiParser extends ParserDEM
       double x = xll + mDim1/2; // left-column midpoint
       TDLog.v("DEM left-col midpoint X " + x + " dims " + mDim1 );
       int i = 0;
-      for ( ; i < cols && x < xwest; ++i ) x += mDim1;
+      for ( ; i < cols; ++i ) {
+        if ( x >= xwest ) break;
+        x += mDim1;
+      }
       mEast1 = x;
       int xoff = i;
       mNr1 = 0;
       // TDLog.v("DEM east1 " + mEast1 + " north2 " + mNorth2 + " xstart " + xoff );
-      for ( ; i < cols && x <= xeast; ++i ) { x += mDim1; ++mNr1; }
+      for ( ; i < cols; ++i ) {
+        if ( x > xeast ) break;
+        x += mDim1;
+        ++mNr1;
+      }
       mEast2 = x - mDim1;
       // TDLog.v("DEM east " + mEast1 + " " + mEast2 );
 
-      if ( mNr1 > mMaxSize ) {
-        int d = (mNr1 - mMaxSize)/2;
-        xoff += d;
-        mNr1 -= 2 * d;
-        mEast1 += d * mDim1;
-        mEast2 -= d * mDim1;
-      }
+      // if ( mNr1 > mMaxSize ) {
+      //   int d = (mNr1 - mMaxSize)/2;
+      //   xoff += d;
+      //   mNr1 -= 2 * d;
+      //   mEast1 += d * mDim1;
+      //   mEast2 -= d * mDim1;
+      // }
       
       mNr2 = 0;
-      int kk = k;
-      for ( ; kk < rows && y >= ysouth; ++kk ) { y -= mDim2; ++mNr2; }
-      mNorth1 = y + mDim2;
-      TDLog.v("DEM north " + mNorth1 + " " + mNorth2 );
-
-      if ( mNr2 > mMaxSize ) {
-        int d = (mNr2 - mMaxSize)/2;
-        k += d;
-        mNr2 -= 2 * d;
-        mNorth1 += d * mDim2;
-        mNorth2 -= d * mDim2;
+      for ( int kk = k; kk < rows; ++kk ) {
+        if ( y < ysouth ) break;
+        y -= mDim2;
+        ++mNr2;
       }
+      mNorth1 = y + mDim2;
+      // TDLog.v("DEM north " + mNorth1 + " " + mNorth2 + " Y " + y + " Ysouth " + ysouth );
+
+      // if ( mNr2 > mMaxSize ) {
+      //   int d = (mNr2 - mMaxSize);
+      //   // k += d;
+      //   mNr2 -= d;
+      //   mNorth1 += d * mDim2;
+      //   // mNorth2 -= d * mDim2;
+      //   final String res = TDInstance.getResources().getString( R.string.TODO );
+      //   mParent.runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
+      // }
 
       if ( mNr1 <= 1 || mNr2 <= 1 ) {
         TDLog.e("DEM size " + mNr1 + "x" + mNr2 + " invalid ");

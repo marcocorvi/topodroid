@@ -1164,6 +1164,9 @@ public class ShotWindow extends Activity
     return ret;
   }
 
+  /** start the sensor acquisition activity at a shot
+   * @param blk  shot
+   */
   void askSensor( DBlock blk )
   {
     mSensorId = mApp_mData.nextSensorId( TDInstance.sid );
@@ -1171,6 +1174,22 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
     Intent intent = new Intent( mActivity, SensorActivity.class );
     startActivityForResult( intent, TDRequest.SENSOR_ACTIVITY_SHOTWINDOW );
+  }
+
+  /** clear the backsight flag of a shot
+   * @param blk  shot
+   */
+  void clearBacksightFlag( DBlock blk )
+  {
+    blk.clearBackSplay();
+    mApp_mData.updateShotFlag( blk.mId, TDInstance.sid, blk.getFlagFully() );
+    // blk.invalidate();
+    // redraw blk.getView();
+    View v = blk.getView();
+    if ( v != null ) { 
+      EditText from = (EditText)v.findViewById( R.id.from );
+      from.setBackgroundColor( 0xff000000 );
+    }
   }
 
   // void askExternal( )
