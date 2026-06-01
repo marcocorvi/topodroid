@@ -45,6 +45,9 @@ DISTOX_BRIC_MODE: T, Enum{1 only primary data packet, 3 all data packet}, "BRIC 
 DISTOX_BRIC_ZERO_LENGTH: N, Bool, "BRIC zero shot", "Discard BRIC zero-length shots. BRIC sends zero-length shots if there is a distance reading error."
 DISTOX_BRIC_INDEX_IS_ID: T, Bool, "BRIC index as ID", "Use BRIC index as shot ID in the data table"
 DISTOX_SAP5_BIT16_BUG: T, Bool, "SAP5 bit 16 bug", "Workaround the SAP5 bit-16 bug"
+DISTOX_CVWY_ABS: A, Float[0,], "Cavway abs threshold", "Cavway error detection threshold for abs values of G and M, as percent deviation"
+DISTOX_CVWY_DIP: A, Float[0,], "Cavway dip thershold", "Cavway error detection threshold for values of dip, as degrees of deviation"
+DISTOX_CVWY_ANGLE: A, Float[0,], "Cavway angle thershold", "Cavway error detection threshold for difference of angles computed by the two sensor sets, in degrees"
 }
 CALIBRATION {
 DISTOX_GROUP_BY: A, Enum{1 TopoDroid mode, 2 PocketTopo mode}, "Calibration groups", "How to divide calibration data in groups. Either all data in groups of four [1], or only the first 16 data [2]" 
