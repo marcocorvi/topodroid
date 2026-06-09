@@ -1241,7 +1241,7 @@
     <string name="help_sdcard">DistoX memória funkciók</string>
     <string name="help_read">DistoX kalibrációs együtthatójának kiolvasása és megjelenítése</string>
     <string name="help_info_device">Műszer információ</string>
-    <string name="help_scan">Újabb DistoX-ek keresése</string>
+    <string name="help_scan">Újabb DST-k keresése</string>
     <!-- UNUSED string name="help_scan_ble">BLE műszer keresése</string -->
     <!-- UNUSED string name="help_pair">Párosítás a kiválasztott DistoX-el</string -->
     <string name="help_open_calib">Kalibráció megnyitása</string>
@@ -1353,7 +1353,7 @@
     <string name="title_pref_search">Beállítások keresése</string>
     <string name="title_gm_search">Kalibrációs adat keresés</string>
     <string name="title_dangling">Csatolatlan mérés</string>
-    <string name="title_device">DistoX-ek</string>
+    <string name="title_device">DST Műszerek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
     <string name="title_device_add">Műszer hozzáadása</string>
     <!-- UNUSED string name="title_discover">DistoX műszerek keresése &#8230; várj!</string -->
