@@ -354,6 +354,7 @@ public class MainWindow extends Activity
           }
         // }
       } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER TdManager
+        TopoDroidApp.updateAnalytic( TDAnalytics.TD_MANAGER );
         try {
           intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.tdm.TdManagerActivity.class );
           startActivity( intent );
@@ -392,7 +393,8 @@ public class MainWindow extends Activity
 
   void startSplitSurvey( long old_sid, long old_id )
   {
-    TDLog.v( "MAIN split survey");
+    // TDLog.v( "MAIN split survey");
+    TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_SPLIT );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
@@ -404,7 +406,8 @@ public class MainWindow extends Activity
    */
   void startMoveSurvey( long old_sid, long old_id, String new_survey )
   {
-    TDLog.v( "MAIN move survey");
+    // TDLog.v( "MAIN move survey");
+    TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_MOVE );
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
       mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     // } else {
@@ -466,18 +469,18 @@ public class MainWindow extends Activity
     // if ( TDInstance.isDeviceSap() ) {
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning,
     //     new DialogInterface.OnClickListener() {
-    //       @Override public void onClick( DialogInterface dialog, int btn ) { startShowWindow( item ); }
+    //       @Override public void onClick( DialogInterface dialog, int btn ) { startShotWindow( item ); }
     //     }
     //   );
     // } else {
-      startShowWindow( item );
+      startShotWindow( item );
     // }
   }
 
   /** start the shot window activity
    * @param item   survey name
    */
-  public void startShowWindow( CharSequence item )
+  private void startShotWindow( CharSequence item )
   {
     mApp.setSurveyFromName( item.toString(), -1, true, true ); 
     Intent intent = new Intent( this, ShotWindow.class );
@@ -1336,10 +1339,6 @@ public class MainWindow extends Activity
     updateDisplay( ); // this was already done
     ((ListView) findViewById(R.id.td_list)).invalidate();
 
-    // TDLog.v( "onResume runs on " + TDLog.threadId() );
-
-    // TDLog.Profile("TDActivity onResume");
-    // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
     mApp.resumeComm();
 
     // restoreInstanceFromFile();
@@ -1463,8 +1462,6 @@ public class MainWindow extends Activity
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.v( "Main Window on Activity Result " + request + " " + result );
-    // TDLog.v( "onActivityResult runs on " + TDLog.threadId() );
-    // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case TDRequest.REQUEST_CWD:

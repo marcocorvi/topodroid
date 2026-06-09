@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDColor;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyButton;
@@ -113,6 +114,7 @@ class DrawingShotDialog extends MyDialog
     mFlag    = flag;
     mIntExtend = mBlock.getReducedIntExtend();
     mStretch = mBlock.getStretch();
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SHOT );
   }
 
   @Override
@@ -232,15 +234,22 @@ class DrawingShotDialog extends MyDialog
       mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
       mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
-      mRBbcks     = new MyCheckBox( mContext, size, R.drawable.iz_backsight_ok, R.drawable.iz_backsight_no ); // BACKSHOT
       layout3.addView( mRBdup,  lp );
       layout3.addView( mRBsurf, lp );
       layout3.addView( mRBcmtd, lp );
-      layout3.addView( mRBbcks, lp ); // BACKSHOT
       mRBdup.setOnClickListener( this );
       mRBsurf.setOnClickListener( this );
       mRBcmtd.setOnClickListener( this );
-      mRBbcks.setOnClickListener( this ); // BACKSHOT
+      // BACKSHOT flag only applies to legs, not splays
+      if ( mBlock.isLeg() ) {
+        mRBbcks     = new MyCheckBox( mContext, size, R.drawable.iz_backsight_ok, R.drawable.iz_backsight_no ); 
+        layout3.addView( mRBbcks, lp ); // BACKSHOT
+        mRBbcks.setOnClickListener( this ); 
+      // } else if ( TDSetting.mBacksightSplay && mBlock.isSplay() ) {
+      //   mRBbcks = new MyCheckBox( mContext, size, R.drawable.iz_backsplay, R.drawable.iz_backsplay );
+      //   layout3.addView( mRBbcks, lp ); // BACKSIGHT splay
+      //   mRBbcks.setOnClickListener( this );
+      }
       if ( TDLevel.overAdvanced && mBlock.isOtherSplay() ) {
         mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
         mCBxSplay.setChecked( false ); // ??? setState( false );

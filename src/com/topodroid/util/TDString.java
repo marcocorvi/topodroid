@@ -244,6 +244,17 @@ public class TDString
     for ( int i=0; i<mSize; ++i ) if ( mChr[i] != str.at(i) ) return false;
     return true;
   }
+
+  /** compare two strings
+   * @param s1 first string
+   * @param s2 second string
+   * @return true is the two string are both null-or-empty or they are equal
+   */
+  static public boolean equals( String s1, String s2 )
+  {
+    if ( isNullOrEmpty( s1 ) ) return isNullOrEmpty( s2 );
+    return s1.equals( s2 );
+  }
     
   /** @return -1 if this string is lexicographically smaller than the given string
    *          +1 if this string is lexicographically larger than the given string

@@ -16,6 +16,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyButton;
@@ -82,7 +83,8 @@ class DrawingScanSetDialog extends MyDialog
     mIdx     = TopoDroidApp.mData.getShotIdx( shot.mBlock.mId, TDInstance.sid );
     mLegType = shot.mBlock.getLegType();
     mFrom    = shot.mBlock.mFrom;
-    TDLog.v("Scan-set dialog ID " + mIdx + " FROM " + mFrom + " leg-type " + mLegType );
+    // TDLog.v("Scan-set dialog ID " + mIdx + " FROM " + mFrom + " leg-type " + mLegType );
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SCAN );
   }
 
   @Override

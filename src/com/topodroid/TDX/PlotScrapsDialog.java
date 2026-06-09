@@ -65,7 +65,7 @@ class PlotScrapsDialog extends MyDialog
     int nr0 = mParent.getCurrentScrapNumber() + 1;
     mTvScraps.setText( String.format( resString( R.string.scrap_string ), nr0, nr ) );
 
-    // TDLog.v("Scrap " + nr0 + " of " + nr );
+    // TDLog.v("plot scrap dialog " + nr0 + " of " + nr );
 
     if ( nr <= 1 ) { 
       mBtnDelete.setVisibility( View.GONE );
@@ -95,8 +95,10 @@ class PlotScrapsDialog extends MyDialog
     Button b = (Button) v;
 
     if ( b == mBtnNext ) {
+      // TDLog.v(" next scrap");
       mParent.scrapNext( );
     } else if ( b == mBtnPrev ) {
+      // TDLog.v(" prev scrap");
       mParent.scrapPrev( );
     } else if ( b == mBtnNew ) {
       mParent.scrapNew( );

@@ -65,7 +65,7 @@ public class DBlock
   private long mFlag;     
   private long mCavwayFlag = 0;
   // block type is a superset of the leg-type which is in the database table
-  private int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY 
+  private int  mBlockType;     // data type: 0=BLANK, 1=LEG, 2=SEC_LEG, 3=BLANK_LEG, 4=BACK_LEG, 5=BUNDER, 6=SPLAY, ... 
   private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
   private boolean mFailBacksplay;  // whether this splay failed to backsight the preceeding leg
@@ -1103,7 +1103,7 @@ public class DBlock
       TDVector v2 = new TDVector( blen * cc * sb, blen * cc * cb, blen * sc );
       float d = (v1.minus(v2)).length();
       mFailBacksplay = ( d/alen + d/blen > 2 * TDSetting.mCloseDistance );
-      TDLog.v("Fail backsight splay: " + mFailBacksplay + " D " + (d/alen + d/blen) + " thrs " + 2*TDSetting.mCloseDistance ); 
+      // TDLog.v("Backsight splay check: " + mId + " fail " + mFailBacksplay + " D " + (d/alen + d/blen) + " thrs " + 2*TDSetting.mCloseDistance ); 
     }
     return mFailBacksplay;
   }

@@ -18,6 +18,7 @@ import com.topodroid.util.TDMath;
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
@@ -102,6 +103,7 @@ class DrawingStationDialog extends MyDialog
       // mGlobalXSections = global_xsections;
       mBlk       = blk;
       // sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
+      TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_STATION );
     }
 
     @Override

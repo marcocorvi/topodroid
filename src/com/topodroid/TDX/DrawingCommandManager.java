@@ -227,9 +227,10 @@ public class DrawingCommandManager
   /** set the current scrap
    * @param nr   order-number of the scrap in the list (neg: first, more than size: last)
    */
-  private void setCurrentScrapByNr( int nr )
+  private void setCurrentScrapByNr( boolean th2_edit, int nr )
   {
-    if ( mMode >= 3 ) return;
+    // TDLog.v("set current scrap: " + nr + " mode " + mMode + " size " + mScraps.size() );
+    if ( mMode >= 3 && ! th2_edit ) return;
     int size = mScraps.size();
     if ( size == 0 ) return;
     if ( nr >= size ) { nr = 0; } 
@@ -266,37 +267,37 @@ public class DrawingCommandManager
   }
 
   /** change current scrap
-   * @param force  ...
+   * @param th2_edit whether is th2 edit
    * @param k   advance step (in the list)
    * @return the cuurent scrap index
    */
-  int toggleScrapIndex( boolean force, int k ) // TH2EDIT no force
+  int toggleScrapIndex( boolean th2_edit, int k ) // TH2EDIT no force
   { 
-    if ( force || mMode < 3 ) { // TH2EDIT no force
+    if ( th2_edit || mMode < 3 ) { // TH2EDIT no force
       if ( isMultiselection() ) { // implicit multiselection store
         mSavedScrap = mCurrentScrap;
         // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
       }
       int nr = getScrapNr( mCurrentScrap.mScrapIdx ) + k;
-      // TDLog.v("toggle scrap nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
-      setCurrentScrapByNr( nr );
+      // TDLog.v("toggle scrap (" + k + ") to nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
+      setCurrentScrapByNr( th2_edit, nr );
     }
     return mCurrentScrap.mScrapIdx;
   }
 
   /** delete the current scrap
-   * @param force  ...
+   * @param th2_edit  ...
    * @return true if the scrap has been deleted
    */
-  boolean deleteCurrentScrap( boolean force ) // TH2EDIT no force
+  boolean deleteCurrentScrap( boolean th2_edit ) // TH2EDIT no force
   { 
-    if ( ( ! force ) && mMode >= 3 ) return false; // TH2EDIT no force
+    if ( ( ! th2_edit ) && mMode >= 3 ) return false; // TH2EDIT no force
     if ( mScraps.size() <= 1 ) return false;
     int idx = mCurrentScrap.mScrapIdx;
     for ( Scrap s : mScraps ) {
       if ( s.mScrapIdx == idx ) {
         mScraps.remove( s );
-        setCurrentScrapByNr( 0 );
+        setCurrentScrapByNr( th2_edit, 0 );
         return true;
       }    
     }
@@ -304,12 +305,12 @@ public class DrawingCommandManager
   }
   
   /** get a new scrap index
-   * @param force  ...
+   * @param th2_edit  ...
    * @return the new scrap index
    */
-  int newScrapIndex( boolean force )  // TH2EDIT no force
+  int newScrapIndex( boolean th2_edit )  // TH2EDIT no force
   { 
-    if ( force || mMode < 3 ) { // TH2EDIT no force
+    if ( th2_edit || mMode < 3 ) { // TH2EDIT no force
       if ( isMultiselection() ) { // implicit multiselection store
         mSavedScrap = mCurrentScrap;
         // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );

@@ -35,6 +35,7 @@ public class TDAnalytics
 {
   // public static final String NAME = "name";
   // the string must contain only alphanumeric char (a-Z, 0-9)
+  // IMPORTANT once set these names must not be changed
   public static final String NUM           = "Nnum";
   public static final String LOOP_CLOSURE  = "Nloop";
   public static final String TRILATERATION = "Ntrilat";
@@ -47,17 +48,26 @@ public class TDAnalytics
   public static final String PLOT_SPLIT    = "1split"; // doSplitPlot
   public static final String PLOT_MERGE    = "1merge"; // doMergePlot
   public static final String PLOT_SHIFT    = "1shift"; // setShiftDrawing
+  public static final String PLOT_OVERVIEW = "1over";  // OverviewWindow
   public static final String SCRAP_SPLIT   = "2split"; // doSplitScrap
   public static final String SCRAP_PASTE   = "2paste"; // pasteSplitBufferToScrap
   public static final String XSECTION_LEG  = "1xleg";
   public static final String XSECTION_ST   = "1xst";
   public static final String XSECTION_PHOTO = "1xphoto";
 
+  public static final String SHOT_EDIT     = "0edit";
+  public static final String SHOT_MULTI    = "0multi";
+  public static final String SHOT_SPLIT    = "0split";
+  public static final String SHOT_MOVE     = "0move";
   public static final String RENUMBER      = "0renumber";
   public static final String MULTICOPY     = "0copy";
   public static final String MULTIPASTE    = "0paste";
   public static final String BED_FITTING   = "0bed";
   public static final String DIST_OFFSET   = "0offset";
+
+  public static final String SEARCH_STATION = "Qstation";
+  public static final String SEARCH_SHOT    = "Qshot";
+  public static final String SEARCH_LEG     = "Qleg";
 
   public static final String WALL_BUBBLE = "3bubble";
   public static final String WALL_CW     = "3cw";
@@ -82,6 +92,9 @@ public class TDAnalytics
   public static final String GEOCODE = "Sgeo";
   public static final String PROJ4   = "Sproj4";
   public static final String STATION = "Sstation";
+  public static final String PLOT_STATION = "Pstation";
+  public static final String PLOT_SCAN    = "Pscan";
+  public static final String PLOT_SHOT    = "Pshot";
   public static final String MOB_TOP = "Smobtop";
   public static final String GPX_REC = "Sgpxrec";
   public static final String GPS_POS = "Sgpspos";
@@ -97,6 +110,7 @@ public class TDAnalytics
   public static final String CAVE3D    = "Mcave3d";
   public static final String PALETTE   = "Mpalette";
   public static final String KEYBOARD  = "Mkbdr";
+  public static final String TD_MANAGER = "Mtdm";
 
   public static final String EXPORT_TH  = "1th";  // Therion
   public static final String EXPORT_DAT = "1dat"; // Comapass
@@ -142,6 +156,28 @@ public class TDAnalytics
   public static final String IMPORT_TOP = "0top";
   public static final String IMPORT_BRIC = "0bric"; // BRIC
   public static final String IMPORT_CVWY = "0cvwy"; // Cavway
+
+  public static final String IMPORT_3D   = "3in";
+  public static final String IMPORT_3D_TH   = "30th";
+  public static final String IMPORT_3D_THCONFIG = "30thcdg";
+  public static final String IMPORT_3D_TDCONFIG = "30tdcfg";
+  public static final String IMPORT_3D_LOX   = "30loz";
+  public static final String IMPORT_3D_MAK   = "30mak";
+  public static final String IMPORT_3D_DAT   = "30dat";
+  public static final String IMPORT_3D_TRO   = "30tro";
+  public static final String IMPORT_3D_TROX  = "30trox";
+  public static final String IMPORT_3D_3D    = "303d";
+
+  public static final String EXPORT_3D     = "3out";
+  public static final String EXPORT_3D_GPX = "31gpx";
+  public static final String EXPORT_3D_DXF = "31dxf";
+  public static final String EXPORT_3D_LAS = "31las";
+  public static final String EXPORT_3D_CGAL= "31cgal";
+  public static final String EXPORT_3D_KML = "31kml";
+  public static final String EXPORT_3D_STL = "31stl";
+  public static final String EXPORT_3D_STL_BIN = "31stlb";
+  public static final String EXPORT_3D_SHP  = "31shp";
+  public static final String EXPORT_3D_GLTF = "31gltf";
 
   public static final String IMPORT_PREFS = "prefsimp";
   public static final String EXPORT_PREFS = "prefsexp";

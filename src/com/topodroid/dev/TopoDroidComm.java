@@ -208,7 +208,7 @@ public class TopoDroidComm
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);
       //
       if ( mScanSetIdx == -1 ) mScanSetIdx = mLastShotId;
-      TDLog.v(" last shot id " + mLastShotId + " scan-set id " + mScanSetIdx );
+      // TDLog.v(" last shot id " + mLastShotId + " scan-set id " + mScanSetIdx );
 
       // this only updates the mBcakshot: it could be done in the previous call
       TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);

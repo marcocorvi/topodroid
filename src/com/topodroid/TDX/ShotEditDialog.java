@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDStatus;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDColor;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
@@ -64,6 +65,8 @@ class ShotEditDialog extends MyDialog
                      , View.OnLongClickListener
                      , MyColorPicker.IColorChanged
 {
+  private static final boolean LOG = false;
+
   private final ShotWindow mParent;
   private DBlock mBlk;
   private DBlock mPrevBlk;
@@ -213,6 +216,7 @@ class ShotEditDialog extends MyDialog
     // TDLog.v("splay type " + splay_type );
     mColor  = mBlk.getPaintColor();
     hasAudio = TDandroid.checkMicrophone( mContext );
+    TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_EDIT );
   }
 
   /** load a shot and fill the fields of the interface
@@ -653,8 +657,8 @@ class ShotEditDialog extends MyDialog
     // TDLog.v("SAVE block");
 
     boolean can_do_backleg = false;
-    boolean backleg_val = mCBbackLeg != null && mCBbackLeg.isChecked();
-    boolean all_splay = mCBallSplay.isChecked();
+    boolean backleg_val = mCBbackLeg != null  && mCBbackLeg.isChecked();
+    boolean all_splay   = mCBallSplay != null && mCBallSplay.isChecked();
     // FIXME_X2_SPLAY
     int set_xsplay = -1;
     if ( splay_type >= 0 ) {
@@ -719,8 +723,8 @@ class ShotEditDialog extends MyDialog
     // else                            { flag = DBlock.FLAG_SURVEY; }
     if ( mBlk.isTampered() ) flag |= DBlock.FLAG_TAMPERED;
     // flag |= mBlk.cavwayBits(); // cavway bits are restored by resetFlag()
-    shot_flag = mBlk.resetFlag( flag );
-    // TDLog.v("shot flag " + shot_flag );
+    shot_flag = mBlk.resetFlag( flag ); // set the block flag - retain TAMPERED and Cavway bits
+    if ( LOG ) TDLog.v("shot " + mBlk.mId + " reset flag with " + flag + " -> " + shot_flag );
 
     shot_extend = mBlk.getIntExtend();
     if ( mRBleft.isChecked() )       { shot_extend = ExtendType.EXTEND_LEFT; }
@@ -774,6 +778,7 @@ class ShotEditDialog extends MyDialog
     if ( shot_from.length() > 0 ) {
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
+        if ( LOG ) TDLog.v("renumber " + renumber + " all_splay " + all_splay + " is set to false");
         if ( TDSetting.mSplayClasses ) splay_classes = all_splay;
         all_splay = false;
         set_xsplay = -1;
@@ -786,8 +791,7 @@ class ShotEditDialog extends MyDialog
     }
 
     // TDLog.v("renumber " + renumber + " comment " + comment );
-
-    // TDLog.v( "all_splay " + all_splay + " set_xsplay " + set_xsplay + " splay_type " + splay_type );
+    if ( LOG ) TDLog.v( "renumber " + renumber + " all_splay " + all_splay + " splay classes " + splay_classes + " set_xsplay " + set_xsplay + " splay_type " + splay_type );
 
     if ( all_splay ) {
       if ( set_xsplay >= 0 ) {
@@ -846,7 +850,7 @@ class ShotEditDialog extends MyDialog
     }
 
     // if ( renumber ) {
-    //   TDLog.v( "renumber shots after block id " + mBlk.mId );
+    //   if ( LOG ) TDLog.v( "renumber shots after block id " + mBlk.mId );
     //   mParent.renumberShotsAfter( mBlk );
     // }
 

@@ -1543,6 +1543,17 @@ public class TopoGL extends Activity
         TDLog.e("io error: " + e.getMessage() );
       }
     } else {
+      String pathname_lc = pathname.toLowerCase( Locale.getDefault() );
+      if ( pathname_lc.endsWith( ".th" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_TH ); }
+      else if ( pathname_lc.endsWith( "thconfig" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_THCONFIG ); }
+      else if ( pathname_lc.endsWith( "tdconfig" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_TDCONFIG ); }
+      else if ( pathname_lc.endsWith( ".lox" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_LOX ); }
+      else if ( pathname_lc.endsWith( ".mak" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_MAK ); }
+      else if ( pathname_lc.endsWith( ".dat" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_DAT ); }
+      else if ( pathname_lc.endsWith( ".tro" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_TRO ); }
+      else if ( pathname_lc.endsWith( ".trox" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_TROX ); }
+      else if ( pathname_lc.endsWith( ".3d" ) ) { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D_3D ); }
+      else { TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_3D ); }
       String path = pathname; // uri.getPath();
       // TDLog.v("TopoGL input stream from uri " + path );
       try { 

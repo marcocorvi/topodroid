@@ -243,7 +243,7 @@ public class DataHelper extends DataSetObservable
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( myDB != null ) {
-      TDLog.v( "DB open: app already has database " + db_name );
+      TDLog.e( "DB open: app already has database " + db_name );
       return false;
     }
     int k = 1;
@@ -272,10 +272,10 @@ public class DataHelper extends DataSetObservable
     }
     
     try {
-      TDLog.v("DB ... try to open RW+CREATE " + db_name );
+      // TDLog.v("DB ... try to open RW+CREATE " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
       if ( myDB != null ) {
-        TDLog.v( "DB opened: create tables");
+        // TDLog.v( "DB opened: create tables");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
       } else {
@@ -1588,7 +1588,7 @@ public class DataHelper extends DataSetObservable
    */
   private void saveShotOriginals( long sid, long id, long flag, float d, float b, float c, float p, int mode )
   {
-    TDLog.v("DB save originals " + sid + "/" + id + " flag " + flag );
+    TDLog.v("DB save shot originals " + sid + "/" + id + " flag " + flag );
     try {
       myDB.beginTransaction();
       myDB.execSQL( "UPDATE shots SET flag=" + flag + " WHERE surveyId=" + sid + " AND id=" + id );
@@ -1596,11 +1596,11 @@ public class DataHelper extends DataSetObservable
       long ret = 0;
       if ( cursor.moveToFirst() ) { 
         ret = cursor.getLong(0);
-        TDLog.v("DB count " + ret );
+        // TDLog.v("DB count " + ret );
       }
       if ( ! cursor.isClosed() ) cursor.close();
       if ( ret == 0 ) {
-        TDLog.v("DB insert original " + d + " " + b + " " + c + " " + p );
+        // TDLog.v("DB insert original " + d + " " + b + " " + c + " " + p );
         ContentValues cv = makeOriginalContentValues( sid, id, d, b, c, p, mode );
         myDB.insert( ORIGINALS, null, cv ); 
       }
@@ -1739,7 +1739,7 @@ public class DataHelper extends DataSetObservable
       id = cursor.getLong( 0 ) + 1;
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    TDLog.v("Scan set end block of " + id0 + " : " + id );
+    // TDLog.v("Scan set end block of " + id0 + " : " + id );
     return id;
   }
 
@@ -1794,7 +1794,7 @@ public class DataHelper extends DataSetObservable
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( "UPDATE shots SET fStation=\"%s\", leg=%d WHERE surveyId=%d AND id>=%d AND id<%d", new_st, new_leg, sid, id0, id1 );
-    TDLog.v("Scan set: " + sw.toString() );
+    // TDLog.v("Scan set: " + sw.toString() );
     doExecShotSQL( id0, sw );
   }
 
@@ -1815,7 +1815,7 @@ public class DataHelper extends DataSetObservable
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( "UPDATE shots SET status=%d WHERE surveyId=%d AND id>=%d AND id<%d", new_status, sid, id0, id1 );
-    TDLog.v("Scan set: " + sw.toString() );
+    // TDLog.v("Scan set: " + sw.toString() );
     return doExecShotSQL( id0, sw );
   }
 
@@ -2112,7 +2112,7 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       leg_type = cursor.getLong( 0 );
       station = cursor.getString(1);
-      TDLog.v("undelete ID " + id + " station " + station + " leg type " + leg_type );
+      TDLog.v("undelete shot ID " + id + " station " + station + " leg type " + leg_type );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     if ( leg_type >= LegType.SCAN && leg_type <= LegType.VSCAN ) { // this is like updateScanSetStatus( ... TDStatus.NORMAL )
@@ -2130,7 +2130,7 @@ public class DataHelper extends DataSetObservable
           StringWriter sw = new StringWriter();
           PrintWriter pw = new PrintWriter( sw );
           pw.format( "UPDATE shots SET status=%d WHERE surveyId=%d AND id>=%d AND id<%d", TDStatus.NORMAL, sid, id, id1 );
-          TDLog.v("Scan set: " + sw.toString() );
+          // TDLog.v("Scan set: " + sw.toString() );
           doExecShotSQL( id0, sw );
         }
       }
@@ -5159,7 +5159,7 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShotsAfter( long id, long sid )
   {
-    TDLog.v( "DB select all shots after id " + id );
+    // TDLog.v( "DB select all shots after id " + id );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     DBlock prev_leg = null;
@@ -5188,7 +5188,7 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShotsAfter( long id, long sid, long status )
   {
-    TDLog.v( "DB select shots after id " + id + " status " + status );
+    // TDLog.v( "DB select shots after id " + id + " status " + status );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     DBlock prev_leg = null;
@@ -5278,7 +5278,7 @@ public class DataHelper extends DataSetObservable
    */
   List< RawDBlock > selectAllShotsRawData( long sid )
   {
-    TDLog.v( "DB select all raw shots");
+    // TDLog.v( "DB select all raw shots");
     List< RawDBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotRawDataFields, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, "id" );
@@ -5327,7 +5327,7 @@ public class DataHelper extends DataSetObservable
    */
   List< DBlock > selectAllShots( long sid, long status ) // ANDROID-11 SQLiteDiskIOException
   {
-    TDLog.v( "BD select all shots. status " + status );
+    // TDLog.v( "BD select all shots. status " + status );
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     DBlock prev_leg = null;
@@ -5338,12 +5338,12 @@ public class DataHelper extends DataSetObservable
       do {
         DBlock block = new DBlock();
         fullFillBlock( sid, block, cursor, prev_leg );
-        TDLog.v("Block " + block.mId + " flag " + block.getFlagFully() + " is leg " + block.isLeg() + " is backSplay " + block.isBackSplay() );
+        // TDLog.v("Block " + block.mId + " flag " + block.getFlagFully() + " is leg " + block.isLeg() + " is backSplay " + block.isBackSplay() + " leg " + cursor.getLong(11) + " type " + block.getBlockType() );
         list.add( block );
         if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
       } while (cursor.moveToNext());
     }
-    TDLog.v( "DB select all shots. list size " + list.size() );
+    // TDLog.v( "DB select all shots. list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // FIXME catch ( SQLiteCantOpenDatabaseException e )
     return list;
@@ -7290,7 +7290,7 @@ public class DataHelper extends DataSetObservable
        BufferedReader br = new BufferedReader( fr );
        // first line is survey
        line = br.readLine();
-       TDLog.v( "DB load: " + line );
+       // TDLog.v( "DB load: " + line );
        String[] vals = line.split(" ", 4); 
        // if ( vals.length != 4 ) { TODO } // FIXME
        String table = vals[2];
@@ -7550,7 +7550,7 @@ public class DataHelper extends DataSetObservable
 	         if ( db_version > 34 ) cs_n_dec = scanline1.longValue( 8 ); // nr. of decimals
 
 	         if ( db_version > 46 ) conv = scanline1.doubleValue( 0.0 ); // convergence
-                 TDLog.v("CS " + cs + " lng " + cs_lng + " lat " + cs_lat + " source_type " + source_type + " conv " + conv );
+                 // TDLog.v("CS " + cs + " lng " + cs_lng + " lat " + cs_lat + " source_type " + source_type + " conv " + conv );
 	         if ( db_version > 47 ) {
                    accur   = scanline1.doubleValue( -1 );
                    accur_v = scanline1.doubleValue( -1 );

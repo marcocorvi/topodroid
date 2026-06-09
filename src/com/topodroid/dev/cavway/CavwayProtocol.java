@@ -149,7 +149,7 @@ public class CavwayProtocol extends TopoDroidProtocol
     mCavwayFlag = ( (flag >> 1) & 0x7 ) ^ 0x7; // cavway flag: this uses the complementary values than in the device
     // boolean is_scan = (packetdata[1] & (0x01<<6)) == 0;
     // if ( is_scan ) mCavwayFlag != (1<<4);
-    TDLog.v( String.format( "Cavway byte[1] %02X", flag ) ); // DEBUG check the flag values
+    // TDLog.v( String.format( "Cavway byte[1] %02X", flag ) ); // DEBUG check the flag values
     // 0x9F = 1001.1111 = start of scan
     // 0xBF = 1011.1111 = continue of scan
 
@@ -382,9 +382,8 @@ public class CavwayProtocol extends TopoDroidProtocol
           mComm.mHasWritten = true;
           return PACKET_INFO_TIMESTAMP;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
-          if ( LOG ) TDLog.v( TAG + "reply (3D)");
-          TDLog.v(String.format(Locale.US, "PROTO Reply to 0x3d: %d %d %d %d %02x %02x %02x %02x", 
-            databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
+          if ( LOG ) TDLog.v(String.format(Locale.US, "PROTO Reply to 0x3d: %d %d %d %d %02x %02x %02x %02x", 
+                             databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           if ( mComm.isReadingMemory() ) {
             if ( LOG ) TDLog.v( TAG + "handle memory read");
             System.arraycopy( databuf, 4, mPacketBytes, 0,  CavwayData.SIZE  );
@@ -395,9 +394,8 @@ public class CavwayProtocol extends TopoDroidProtocol
           return PACKET_REPLY;
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
           // if ( LOG ) TDLog.v( TAG + "write reply (3E)");
-          if ( LOG ) TDLog.v( TAG + "write reply (3E)");
-          TDLog.v(String.format(Locale.US, "PROTO Reply to 0x3e: %d %d %d %d %02x %02x %02x %02x", 
-            databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
+          if ( LOG ) TDLog.v(String.format(Locale.US, "PROTO Reply to 0x3e: %d %d %d %d %02x %02x %02x %02x", 
+                             databuf[4], databuf[5], databuf[6], databuf[7], databuf[4], databuf[5], databuf[6], databuf[7] ) );
           System.arraycopy( databuf, 4, mRepliedData, 0, 4 );
           mComm.mHasWritten = true;
           return PACKET_WRITE_REPLY;

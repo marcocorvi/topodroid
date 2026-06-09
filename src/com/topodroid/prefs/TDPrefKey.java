@@ -147,7 +147,7 @@ class TDPrefKey
     new TDPrefKey( B, LONG, UI,  "DISTOX_TEXT_SIZE",       R.string.pref_text_size_title,    R.string.pref_text_size_summary,     TDString.TWENTY ),
     new TDPrefKey( B,       UI,  "DISTOX_SIZE_BUTTONS",    R.string.pref_size_buttons_title, R.string.pref_size_buttons_summary,  TDString.ONE, R.array.sizeButtons, R.array.sizeButtonsValue ),
     new TDPrefKey( B, FLT,  UI,  "DISTOX_SYMBOL_SIZE",     R.string.pref_symbol_size_title,  R.string.pref_symbol_size_summary,   "1.8"           ),  
-    new TDPrefKey( N, BOOL, UI,  "DISTOX_HIDE_NAVBAR",     R.string.pref_hide_navbar_title,  R.string.pref_hide_navbar_summary,   FALSE ),
+    // new TDPrefKey( N, BOOL, UI,  "DISTOX_HIDE_NAVBAR",     R.string.pref_hide_navbar_title,  R.string.pref_hide_navbar_summary,   FALSE ),
     new TDPrefKey( T,       UI,  "DISTOX_ORIENTATION",     R.string.pref_orientation_title,  R.string.pref_orientation_summary,   TDString.ZERO,  R.array.orientation, R.array.orientationValue ),
     new TDPrefKey( N,       GEN, "DISTOX_LOCALE",          R.string.pref_locale_title,       R.string.pref_locale_summary,        TDString.EMPTY, R.array.locale, R.array.localeValue ), 
     new TDPrefKey( A,       GEN, "DISTOX_LOCAL_MAN",       R.string.pref_local_help_title,   R.string.pref_local_help_summary,    TDString.ZERO, R.array.localUserMan, R.array.localUserManValue ),

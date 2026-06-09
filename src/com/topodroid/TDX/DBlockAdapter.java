@@ -1144,5 +1144,23 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return false;
   }
 
+  /** refresh backsight-check splays
+   * @note called from ShotWindow
+   */
+  void refreshBacksightFlag()
+  {
+    // if ( ! TDSetting.mBacksightSplay ) return; // already in ShotWindow
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
+      if ( b.failBacksplay() ) {
+        View v = b.getView();
+        if ( v != null ) {
+          EditText from = (EditText)v.findViewById( R.id.from );
+          from.setBackgroundColor( TDColor.VIOLET );
+        }
+      }
+    }
+  }
 }
 

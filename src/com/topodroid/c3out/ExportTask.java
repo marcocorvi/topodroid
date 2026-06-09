@@ -27,6 +27,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDsafUri;
+import com.topodroid.util.TDAnalytics;
 
 import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
@@ -80,51 +81,61 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
     try {
       switch ( mExport.mType ) {
         case ModelType.GLTF:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_GLTF );
           // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".glz" ) );
           dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mApp.exportGltfModel( mExport.mType, dos, pathname, mExport );
           break;
         case ModelType.SHP_ASCII: // SHP export is only with its file and folder
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_SHP );
           // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".shz" ) );
           dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mApp.exportShpModel( mExport.mType, dos, pathname, mExport );
           break;
         case ModelType.STL_BINARY:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_STL_BIN );
           // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".stl" ) );
           dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mParser.exportModelBinary( mExport.mType, dos, mExport );
           break;
         case ModelType.STL_ASCII:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_STL );
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".stl" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.KML_ASCII:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_KML );
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".kml" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.CGAL_ASCII:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_CGAL );
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".cgal" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.LAS_BINARY:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_LAS );
           // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".las" ) );
           dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mParser.exportModelBinary( mExport.mType, dos, mExport );
           break;
         case ModelType.DXF_ASCII:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_DXF );
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".dxf" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.GPX_ASCII:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D_GPX );
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".kml" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.SERIAL:
+          TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_3D );
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".txt" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );

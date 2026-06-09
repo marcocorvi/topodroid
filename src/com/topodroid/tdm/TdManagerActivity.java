@@ -19,6 +19,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDLocale;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
