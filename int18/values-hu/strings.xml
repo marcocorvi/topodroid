@@ -511,9 +511,10 @@
     <string name="menu_device">MŰSZER</string>
     <string name="menu_device_add">MŰSZER HOZZÁADÁSA</string>
     <string name="menu_export">EXPORTÁLÁS</string>
+	<string name="menu_bulkops">CSOPORTOS MŰV.</string>
     <string name="menu_exit">KILÉP</string>
     <string name="menu_firmware">FIRMWARE</string>
-    <string name="menu_geopoint_app">GEOPONT APP</string>
+    <string name="menu_geopoint_app">GNSS APP</string>
     <string name="menu_recover">HELYREÁLLÍT</string>
     <string name="menu_recover_paste">HELYREÁLLÍT/BEILLESZT</string>
     <string name="menu_reload">ÚJRATÖLT</string>
@@ -1232,6 +1233,7 @@
     <string name="help_save_calib">Változtatások mentése a kalibrációs információkhoz</string>
     <string name="help_export_survey">Felmérés exportálása</string>
     <!-- UNUSED string name="help_export_surveys">Minden felmérés exportálása</string -->
+	<string name="help_bulkops_surveys">Csoportos mérés műveletek</string>
     <string name="help_loc">GNSS koordináta</string>
     <string name="help_delete_survey">Felmérés törlése</string>
     <string name="help_delete_calib">Kalibráció törlése</string>
@@ -1487,8 +1489,8 @@
   <string name="pref_export_settings">Beállítások exportálása/importálása</string>
  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <string name="pref_bulk_export_title">Tömeges adatexportálás</string>
-  <string name="pref_bulk_export_summary">Az összes felmérés tömeges exportálása</string>
+  <string name="pref_bulk_export_title">Csoportos adatexportálás</string>
+  <string name="pref_bulk_export_summary">Felmérés csoportos exportálása</string>
   <string name="pref_export_plot_title">Vázlat export formátum</string>
   <string name="pref_export_plot_summary">Alapértelmezett vázlat export formátum</string>
   <string name="pref_export_shots_title">Adat export formátum</string>
@@ -2119,7 +2121,8 @@
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nKöszönjük, hogy a TopoDroidot választotta.
-\nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC, SAP, Cavway és DiscoX  műszerekkel történő barlangfelmérésre.
+\nTopoDroid egy Nyílt forráskódú Android alkalmazás digitális integrált műszerekkel történő barlangfelmérésre.
+\nTámogatott műszerek: DistoX, BRIC, SAP, Cavway, DiscoX és JedEye
 \n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
 \n\nSegítség: menü "súgó, ?"
 \nFelhasználói kézikönyv: Könyv ikon a súgó ablakban
