@@ -60,6 +60,7 @@ class FixedAddDialog extends MyDialog
   private Button   mBtnNS;
   private Button   mBtnEW;
   private Button   mBtnOK;
+  private Button   mBtnCancel;
   private Button   mBtnProj4;
   private Button   mBtnView;
   private Button   mBtnClipboard;
@@ -145,6 +146,8 @@ class FixedAddDialog extends MyDialog
     mBtnEW.setOnClickListener( this );
     mBtnOK = (Button) findViewById(R.id.button_ok);
     mBtnOK.setOnClickListener( this );
+    mBtnCancel = (Button) findViewById(R.id.button_cancel);
+    mBtnCancel.setOnClickListener( this );
     mBtnProj4 = (Button) findViewById(R.id.button_proj4);
     mBtnProj4.setOnClickListener( this );
     mBtnView = (Button) findViewById(R.id.button_view);
@@ -357,6 +360,8 @@ class FixedAddDialog extends MyDialog
       } else {
         return;
       }
+    // } else if ( b == mBtnCancel ) {
+    //   /* nothing */
     }
     onBackPressed();
   }

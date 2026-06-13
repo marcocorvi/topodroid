@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<LinearLayout
+    -->
+  <LinearLayout
     style="@style/base_padding"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_below="@id/title"
     >
 
     <!-- RadioGroup 
@@ -39,89 +47,88 @@
         android:text="@string/button_save"
       />
 
-     </RadioGroup -->
+    </RadioGroup -->
 
-      <TextView android:id="@+id/tv_address" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="200dp"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-      />
+    <TextView android:id="@+id/tv_address" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="200dp"
+    	android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+    />
 
-      <TextView android:id="@+id/tv_serial" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="200dp"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-      />
+    <TextView android:id="@+id/tv_serial" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="200dp"
+    	android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+    />
 
-      <TextView android:id="@+id/tv_status_angle" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="200dp"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-      />
-      <TextView android:id="@+id/tv_status_compass" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="200dp"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-      />
-      <TextView android:id="@+id/tv_status_calib" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="200dp"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-      />
-      <TextView android:id="@+id/tv_status_silent" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="200dp"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-      />
+    <TextView android:id="@+id/tv_status_angle" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="200dp"
+    	android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+    />
+    <TextView android:id="@+id/tv_status_compass" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="200dp"
+    	android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+    />
+    <TextView android:id="@+id/tv_status_calib" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="200dp"
+    	android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+    />
+    <TextView android:id="@+id/tv_status_silent" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="200dp"
+    	android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+    />
 
-      <Button android:id="@+id/btn_reset_memory"
-        android:layout_marginTop="@dimen/marginv" 
-        style="@style/button_default"
-        android:text="@string/button_clear_memory"
-      />
+    <Button android:id="@+id/btn_reset_memory"
+      android:layout_marginTop="@dimen/marginv" 
+      style="@style/button_default"
+      android:text="@string/button_clear_memory"
+    />
 
-  <!-- LinearLayout 
-     android:layout_width="match_parent" 
-     android:layout_height="wrap_content"
-     android:orientation="vertical"
-     android:layout_marginTop="@dimen/margintiny"
-     android:paddingBottom="@dimen/paddingv" -->
+    <!-- LinearLayout 
+       android:layout_width="match_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:layout_marginTop="@dimen/margintiny"
+       android:paddingBottom="@dimen/paddingv" -->
 
-   <!-- /LinearLayout -->
+     <!-- /LinearLayout -->
 
-   <LinearLayout android:id="@+id/help"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="start"
-      >
-    <Button android:id="@+id/button_help"
+     <LinearLayout android:id="@+id/help"
+       style="@style/help_layout"
+       >
+      <Button android:id="@+id/button_help"
         style="@style/button_empty"
         android:text="@string/button_help"
-    />
-    <LinearLayout
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="end"
-      >
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:text="@string/button_close"
-        />
+        android:text="@string/button_cancel"
+      />
+      <!-- LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+      </LinearLayout -->
     </LinearLayout>
-  </LinearLayout>
 
-</LinearLayout>
-</ScrollView>
+  </LinearLayout>
+  <!-- /ScrollView -->
+</RelativeLayout>

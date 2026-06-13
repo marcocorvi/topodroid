@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
   >
-  
-  <GridView android:id="@+id/list"
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:stackFromBottom="false"
-    android:transcriptMode="alwaysScroll"
-    android:layout_weight="1"
-    android:layout_marginTop="@dimen/marginv"
-    android:textSize="@dimen/textsize"
-    android:numColumns="2"
-    android:divider="@color/divider"
-    android:dividerHeight="@dimen/margintiny"
-  />  
-
-  <LinearLayout 
-    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginv"
-    android:layout_marginTop="@dimen/marginv"
-    android:orientation="horizontal"
+    android:layout_below="@id/title"
     >
-    <Button android:id="@+id/plot_new"
-      style="@style/button_default"
-      android:text="@string/plot_new"
-      android:layout_marginEnd="@dimen/marginhsmall"
-    />
-
+    
+    <GridView android:id="@+id/list"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:stackFromBottom="false"
+      android:transcriptMode="alwaysScroll"
+      android:layout_weight="1"
+      android:layout_marginTop="@dimen/marginv"
+      android:textSize="@dimen/textsize"
+      android:numColumns="2"
+      android:divider="@color/divider"
+      android:dividerHeight="@dimen/margintiny"
+    />  
+  
     <!-- FIXME_SKETCH_3D 
     <Button android:id="@+id/sketch3d_new"
       style="@style/button_default"
@@ -38,25 +33,33 @@
       android:layout_marginEnd="@dimen/marginhsmall"
     />
     -->
-
+  
     <LinearLayout android:id="@+id/help"
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="start"
-      android:orientation="horizontal"
+      style="@style/help_layout"
       >
       <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_back"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginhsmall"
+      />
+      <Button android:id="@+id/btn_close"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginhsmall"
       />
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:gravity="end"
         >
-        <Button android:id="@+id/btn_back"
+        <Button android:id="@+id/plot_new"
           style="@style/button_default"
-          android:text="@string/button_cancel"
+          android:text="@string/plot_new"
           android:layout_marginEnd="@dimen/marginhsmall"
         />
         <!-- Button android:id="@+id/btn_open"
@@ -64,11 +67,7 @@
           android:text="@string/button_open"
           android:layout_marginEnd="@dimen/marginhsmall"
         / --> <!-- TH2EDIT -->
-        <Button android:id="@+id/btn_close"
-          style="@style/button_default"
-          android:text="@string/button_close"
-        />
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

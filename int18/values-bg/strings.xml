@@ -1228,7 +1228,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">Запазване на промените в информацията за калибриране</string>
     <string name="help_export_survey">Експортирай картировката</string>
-    <string name="help_export_surveys">Експорт на всички картировки</string>
+    <!-- UNUSED string name="help_export_surveys">Експорт на всички картировки</string -->
     <string name="help_loc">GPS местоположение</string>
     <string name="help_delete_survey">Изтриване на картировката</string>
     <string name="help_delete_calib">Изтриване на калибрацията</string>
@@ -1333,6 +1333,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
     <string name="title_recalibrate">Калибрации</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Калибриране - проверка на измерванията</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1383,6 +1384,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_photo_comment">Данни за снимката</string>
     <string name="title_photo_list">Снимки</string>
     <string name="title_photo_view">Снимка</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Експортирай скицата</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">Reload sketch</string -->
@@ -1447,6 +1450,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="title_shift">Отместване</string>
     <string name="title_shot_delete">Изтриване на измерването \?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Сензор</string>
     <string name="title_sensor_list">Данни от сензор</string>
     <string name="title_split">Разделяне на скицата</string>

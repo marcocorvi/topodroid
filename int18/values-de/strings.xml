@@ -1159,7 +1159,7 @@
     <!-- UNUSED string name="help_save">Änderungen der Vermessung speichern</string -->
     <string name="help_save_calib">Änderungen speichern</string>
     <string name="help_export_survey">Vermessung speichern</string>
-    <string name="help_export_surveys">Alle Vermessungen speichern</string>
+    <!-- UNUSED string name="help_export_surveys">Alle Vermessungen speichern</string -->
     <string name="help_loc">GPS-Position</string>
     <string name="help_delete_survey">Vermessung löschen</string>
     <string name="help_delete_calib">Kalibrierung löschen</string>
@@ -1259,6 +1259,7 @@
     <string name="title_audio">Audio-Kommentar</string>
     <string name="title_audio_list">Audioaufnahmen</string>
     <string name="title_recalibrate">Kalibrierungen</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Kalibrierung</string>
     <string name="title_calib_check">Kalibrierungs-Testmessungen</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1309,6 +1310,8 @@
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_photo_list">Fotos</string>
     <string name="title_photo_view">Foto</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Skizze speichern als</string>
     <!-- UNUSED string name="title_plot_merge">Skizze einfügen</string -->
     <!-- UNUSED string name="title_plot_reload">Skizzenbackup wiederherstellen</string -->
@@ -1371,6 +1374,8 @@
     <string name="title_settings_log">Einstellungen: Log</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Sensoren</string>
     <string name="title_sensor_list">Sensordaten</string>
     <string name="title_split">Skizze aufteilen</string>

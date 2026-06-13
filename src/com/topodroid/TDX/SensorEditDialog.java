@@ -47,7 +47,7 @@ class SensorEditDialog extends MyDialog
   private EditText mETcomment;  // sensor comment
   private Button   mButtonOK;
   private Button   mButtonDelete;
-  // private Button   mButtonCancel;
+  private Button   mButtonCancel;
 
   /**
    * @param context   context
@@ -74,7 +74,7 @@ class SensorEditDialog extends MyDialog
     mETcomment    = (EditText) findViewById( R.id.sensor_comment );
     mButtonOK     = (Button) findViewById( R.id.sensor_ok );
     mButtonDelete = (Button) findViewById( R.id.sensor_delete );
-    // mButtonCancel = (Button) findViewById( R.id.sensor_cancel );
+    mButtonCancel = (Button) findViewById( R.id.button_cancel );
 
     tVtitle.setText( mSensor.mTitle );
     tVtype.setText( mSensor.getSensorType() );
@@ -87,7 +87,7 @@ class SensorEditDialog extends MyDialog
 
     mButtonOK.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
+    mButtonCancel.setOnClickListener( this );
   }
 
   public void onClick(View v) 
@@ -99,6 +99,8 @@ class SensorEditDialog extends MyDialog
       mParent.updateSensor( mSensor, comment );
     } else if ( b == mButtonDelete ) {
       mParent.dropSensor( mSensor );
+    // } else if ( b == mButtonCancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

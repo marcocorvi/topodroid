@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    -->
+  <LinearLayout
+    android:id="@+id/top"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
+    android:padding="0dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
-<LinearLayout
-  android:id="@+id/top"
-  android:layout_width="match_parent" 
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  android:padding="0dp"
-  android:focusable="true"
-  android:focusableInTouchMode="true"
-  >
-  <EditText android:id="@+id/edit_name" 
-    style="@style/edit_text"
-    android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="match_parent"
-    android:hint="@string/station"
-    android:nextFocusDown="@+id/edit_long"
-    android:importantForAutofill="no"
-  />
-
-  <LinearLayout android:id="@+id/layout1"
+    <EditText android:id="@+id/edit_name" 
+      style="@style/edit_text"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="match_parent"
+      android:hint="@string/station"
+      android:nextFocusDown="@+id/edit_long"
+      android:importantForAutofill="no"
+    />
+  
+    <LinearLayout android:id="@+id/layout1"
       android:layout_below="@id/edit_name"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -30,9 +38,9 @@
       <Button android:id="@+id/button_EW"
         style="@style/label_default"
         android:layout_weight="20"
-	android:text="@string/east"
-	android:layout_marginEnd="@dimen/marginh"
-        />
+        android:text="@string/east"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <EditText android:id="@id/edit_long" 
         style="@style/edit_text"
         android:layout_marginTop="@dimen/margintiny"
@@ -41,10 +49,10 @@
         android:hint="@string/longitude_hint"
         android:nextFocusDown="@+id/edit_lat"
         android:importantForAutofill="no"
-        />
-  </LinearLayout>
-
-  <LinearLayout android:id="@+id/layout2"
+      />
+    </LinearLayout>
+  
+    <LinearLayout android:id="@+id/layout2"
       android:layout_below="@id/layout1"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -53,9 +61,9 @@
       <Button android:id="@+id/button_NS"
         style="@style/label_default"
         android:layout_weight="20"
-	android:text="@string/north"
-	android:layout_marginEnd="@dimen/marginh"
-        />
+        android:text="@string/north"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <EditText android:id="@id/edit_lat"
         style="@style/edit_text"
         android:layout_marginTop="@dimen/margintiny"
@@ -64,10 +72,10 @@
         android:hint="@string/latitude_hint"
         android:nextFocusDown="@+id/edit_h_geo"
         android:importantForAutofill="no"
-        />
-  </LinearLayout>
-  		
-  <!-- LinearLayout android:id="@+id/layout3a"
+      />
+    </LinearLayout>
+    		
+    <!-- LinearLayout android:id="@+id/layout3a"
       android:layout_below="@id/layout2"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -85,15 +93,15 @@
       <EditText android:id="@id/edit_h_ell"
         style="@style/edit_text"
         android:layout_width="0dp"
-	android:layout_weight="40"
+        android:layout_weight="40"
         android:hint="@string/h_ellipsoid_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_h_geo"
         android:importantForAutofill="no"
-        />
-  </LinearLayout -->
-  		
-  <LinearLayout android:id="@+id/layout3b"
+      />
+    </LinearLayout -->
+    		
+    <LinearLayout android:id="@+id/layout3b"
       android:layout_below="@id/layout2"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -107,11 +115,11 @@
         android:layout_marginEnd="@dimen/marginh"
         android:layout_gravity="start"
         android:text=""
-        />
+      />
       <EditText android:id="@id/edit_h_geo"
         style="@style/edit_text"
         android:layout_width="0dp"
-	android:layout_weight="57"
+        android:layout_weight="57"
         android:layout_height="wrap_content" 
       	android:ems="25"
         android:singleLine="true"
@@ -119,10 +127,10 @@
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_accuracy"
         android:importantForAutofill="no"
-        />
-  </LinearLayout>
-  		
-  <LinearLayout android:id="@+id/layout3c"
+      />
+    </LinearLayout>
+    		
+    <LinearLayout android:id="@+id/layout3c"
       android:layout_below="@id/layout3b"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -136,77 +144,77 @@
         android:layout_marginEnd="@dimen/marginh"
         android:layout_gravity="start"
         android:text=""
-        />
+      />
       <EditText android:id="@id/edit_accuracy"
         style="@style/edit_text"
         android:layout_width="0dp"
-	android:layout_weight="57"
+        android:layout_weight="57"
         android:layout_height="wrap_content" 
-      	android:ems="25"
+        android:ems="25"
         android:singleLine="true"
         android:hint="@string/accuracy_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_comment"
         android:importantForAutofill="no"
-        />
-  </LinearLayout>
-
-  <EditText android:id="@id/edit_comment" 
-    style="@style/edit_text_light"
-    android:layout_below="@id/layout3c"
-    android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="match_parent"
-    android:hint="@string/comment"
-    android:nextFocusDown="@id/top"
-    android:importantForAutofill="no"
-  />
-
-  <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/edit_comment"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" 
-    android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="start"
-    >
-    <Button android:id="@+id/button_help"
+      />
+    </LinearLayout>
+  
+    <EditText android:id="@id/edit_comment" 
+      android:layout_below="@id/layout3c"
+      style="@style/edit_text_light"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="match_parent"
+      android:hint="@string/comment"
+      android:nextFocusDown="@id/top"
+      android:importantForAutofill="no"
+    />
+  
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      android:layout_below="@id/edit_comment"
+      >
+      <Button android:id="@+id/button_help"
         style="@style/button_empty"
         android:text="@string/button_help"
-    />
-    <LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="end"
-      >
-      <Button android:id="@+id/button_clipboard"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:text="@string/button_clipboard"
-        />
-      <Button android:id="@+id/button_view"
-        style="@style/button_default"
-        android:text="@string/button_view"
-        />
-      <Button android:id="@+id/button_proj4"
-        style="@style/button_default"
-        android:layout_marginStart="@dimen/marginh"
-	android:text="@string/proj4"
-        />
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <LinearLayout 
-        android:layout_width="fill_parent"
+        android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:gravity="end"
         >
+        <Button android:id="@+id/button_clipboard"
+          style="@style/button_default"
+          android:text="@string/button_clipboard"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_view"
+          style="@style/button_default"
+          android:text="@string/button_view"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_proj4"
+          style="@style/button_default"
+          android:layout_marginStart="@dimen/marginh"
+  	  android:text="@string/proj4"
+          android:layout_marginEnd="@dimen/marginh"
+        />
         <Button android:id="@+id/button_ok"
           style="@style/button_default"
           android:text="@string/button_save"
-          />
+        />
       </LinearLayout>
     </LinearLayout>
+  
+    <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+      style="@style/keyboard"
+    />
+  
   </LinearLayout>
-
-  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
-    style="@style/keyboard"
-  />
-
-</LinearLayout>
-</ScrollView>
+  <!-- /ScrollView -->
+</RelativeLayout>

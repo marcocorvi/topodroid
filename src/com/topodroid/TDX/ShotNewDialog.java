@@ -266,7 +266,7 @@ class ShotNewDialog extends MyDialog
 
     mBtnOk    = (Button) findViewById(R.id.button_ok_shot_name );
     mBtnSave  = (Button) findViewById(R.id.button_save_shot_name );
-    mBtnBack  = (Button) findViewById(R.id.button_cancel_name );
+    mBtnBack  = (Button) findViewById(R.id.button_cancel );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );

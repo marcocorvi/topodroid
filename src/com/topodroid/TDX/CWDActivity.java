@@ -15,12 +15,14 @@ import com.topodroid.util.CWDfolder;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDTag;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 
 // import java.io.File;
 import java.util.Locale;
+import java.util.Arrays;
 // import java.util.List;
 // import java.util.ArrayList;
 
@@ -117,6 +119,7 @@ public class CWDActivity extends Activity
   {
     // File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
     String[] dirs = TDPath.getTopoDroidFiles( TDInstance.cbd );
+    Arrays.sort( dirs, 0, dirs.length );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
     if ( dirs != null ) {
       for ( String item : dirs ) {
@@ -216,6 +219,7 @@ public class CWDActivity extends Activity
     updateDisplay();
 
     setTitle( R.string.cwd );
+    // setTitleColor( TDColor.TITLE_NORMAL );
   }
 
   // @Override
@@ -251,4 +255,19 @@ public class CWDActivity extends Activity
     return false;
   }
 
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }

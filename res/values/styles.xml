@@ -16,7 +16,8 @@
 
 
 <!--suppress AndroidDomInspection -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools"
+  >
   <!-- style name="titleBackground">
     <item name="android:background">#333333</item>
   </style -->
@@ -299,6 +300,41 @@
       <item name="android:layout_height">wrap_content</item>
       <item name="android:layout_width">wrap_content</item>
       <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="text_title_base">
+      <item name="android:layout_width">match_parent</item>
+      <item name="android:layout_height">wrap_content</item>
+      <item name="android:background">?android:attr/colorPrimary</item>
+      <item name="android:paddingTop">@dimen/paddingmedium</item>
+      <item name="android:paddingBottom">@dimen/paddingmedium</item>
+      <item name="android:textSize">@dimen/titletextsize</item>
+      <item name="android:textColor">@color/title</item>
+      <item name="android:gravity">center</item>
+    </style>
+
+    <style name="text_title" parent="text_title_base">
+      <item name="android:background">@drawable/text_roundcorner</item>
+      <item name="android:paddingLeft">16dp</item>
+      <item name="android:paddingRight">16dp</item>
+      <item name="android:textColor">#ffffffff</item>
+    </style>
+
+    <style name="root_view">
+      <item name="android:background">@drawable/text_rounduppercorner</item>
+      <item name="android:layout_width">match_parent</item>
+      <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="help_layout">
+      <item name="android:background">@color/dialog_background</item>
+      <item name="android:layout_width">match_parent</item>
+      <item name="android:layout_height">wrap_content</item>
+      <item name="android:layout_gravity">end</item>
+      <item name="android:orientation">horizontal</item>
+      <item name="android:layout_marginTop">@dimen/marginvbig</item>
+      <item name="android:layout_marginBottom">@dimen/marginvbig</item>
+      <item name="android:gravity">start</item>
     </style>
 
     <!-- UNUSED style name="item_text">

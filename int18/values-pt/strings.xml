@@ -1148,7 +1148,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="help_save">Gravar mudanças nas informações da topo</string -->
   <string name="help_save_calib">Gravar alterações nas informações de calibração</string>
   <string name="help_export_survey">Exportar Topo</string>
-  <string name="help_export_surveys">Exportar todas as topos</string>
+  <!-- UNUSED string name="help_export_surveys">Exportar todas as topos</string -->
   <string name="help_loc">Coordenada GPS</string>
   <string name="help_delete_survey">Apagar topo</string>
   <string name="help_delete_calib">Apagar calibração</string>
@@ -1247,6 +1247,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
   <string name="title_recalibrate">Calibrações</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
   <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1297,6 +1298,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_photo_comment">Dados da foto</string>
   <string name="title_photo_list">Fotos</string>
   <string name="title_photo_view">Foto</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
   <string name="title_plot_save">Exportar croqui</string>
   <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
   <!-- UNUSED string name="title_plot_reload">Recarregar croqui</string -->
@@ -1358,6 +1361,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_settings_log">Config log</string>
   <string name="title_shift">Deslocar</string>
   <string name="title_shot_delete">Apagar medida?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
   <string name="title_sensor_edit">Edição de medida de sensor</string>
   <string name="title_sensor_list">Dados sensores</string>
   <string name="title_split">Dividir croqui</string>

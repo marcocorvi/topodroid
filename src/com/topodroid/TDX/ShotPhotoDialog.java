@@ -47,7 +47,7 @@ class ShotPhotoDialog extends MyDialog
   private long     mShotId;           // shot id
   private String   mName;          // shot name
   private String   mGeoCode;       // geomorphology code
-  // private Button   mButtonCancel;
+  private Button   mButtonCancel;
   // private boolean  cameraAPIbelow21;
 
   /**
@@ -105,8 +105,8 @@ class ShotPhotoDialog extends MyDialog
       } else {
         mBtnGeoCode.setVisibility( View.GONE );
       }
-      // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
-      // mButtonCancel.setOnClickListener( this );
+      mButtonCancel = (Button) findViewById(R.id.button_cancel );
+      mButtonCancel.setOnClickListener( this );
       ( (Button) findViewById(R.id.photo_comment_cancel ) ).setOnClickListener( this );
     }
   }

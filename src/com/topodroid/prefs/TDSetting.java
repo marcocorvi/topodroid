@@ -1073,25 +1073,25 @@ public class TDSetting
 
   private static boolean bool( String bol) { return bol.equals("true"); }
 
-  // /** set the hidden navigation bar
-  //  * @param hide_navbar whether to hide the navigation bar
-  //  */
-  // private static void setHideNavBar( boolean hide_navbar )
-  // {
-  //   // mHideNavBar = hide_navbar;
-  //   mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-  //                 | View.SYSTEM_UI_FLAG_FULLSCREEN;                // remove the appbar
-  //   // if ( hide_navbar ) mUiVisibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-  //
-  //   // | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-  //   // | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
-  //   // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
-  //   // | View.SYSTEM_UI_FLAG_IMMERSIVE
-  //   // | View.SYSTEM_UI_FLAG_LAYOUT_STABLE           // remove to have the layout appear under the appbar
-  //   // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-  //   // | View.SYSTEM_UI_FLAG_LOW_PROFILE
-  //   TopoDroidApp.resetUiVisibility();
-  // }
+  /** set the hidden navigation bar
+   * @param hide_navbar whether to hide the navigation bar
+   */
+  private static void setHideNavBar( boolean hide_navbar )
+  {
+    // mHideNavBar = hide_navbar;
+    mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                  | View.SYSTEM_UI_FLAG_FULLSCREEN;                // remove the appbar
+    if ( hide_navbar ) mUiVisibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+  
+    // | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+    // | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
+    // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
+    // | View.SYSTEM_UI_FLAG_IMMERSIVE
+    // | View.SYSTEM_UI_FLAG_LAYOUT_STABLE           // remove to have the layout appear under the appbar
+    // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+    // | View.SYSTEM_UI_FLAG_LOW_PROFILE
+    TopoDroidApp.resetUiVisibility();
+  }
 
   // ---------------------------------------------------------------------------------
   //
@@ -1128,7 +1128,7 @@ public class TDSetting
     setTextSize( tryInt(    prefs,  key[k].key, key[k].dflt ) ); ++k; // DISTOX_TEXT_SIZE
     setSizeButtons( tryInt( prefs,  key[k].key, key[k].dflt ) ); ++k; // DISTOX_SIZE_BUTTONS
     setSymbolSize( tryFloat( prefs, key[k].key, key[k].dflt ) ); ++k; // DISTOX_SYMBOL_SIZE
-    // setHideNavBar(                   prefs.getBoolean( key[k].key, bool(key[k].dflt) ) );     ++k; // DISTOX_HIDE_NAVBAR
+    setHideNavBar(                   prefs.getBoolean( key[k].key, bool(key[k].dflt) ) );     ++k; // DISTOX_HIDE_NAVBAR
     mOrientation = Integer.parseInt( prefs.getString(  key[k].key, key[k].dflt ) );           ++k; // DISTOX_ORIENTATION choice: 0, 1, 2
     setLocale(                       prefs.getString(  key[k].key, TDString.EMPTY ), false ); ++k; // DISTOX_LOCALE
     handleLocalUserMan(              prefs.getString(  key[k].key, key[k].dflt ), false );    ++k; // DISTOX_LOCAL_MAN
@@ -1716,8 +1716,8 @@ public class TDSetting
       }
     } else if ( k.equals( key[ ++h ].key ) ) {             // DISTOX_SYMBOL_SIZE
       ret = setSymbolSize( tryFloatValue( hlp, k, v, defaultSymbolSize ) );
-    // } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_HIDE_NAVBAR
-    //   setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[h].dflt) ) );
+    } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_HIDE_NAVBAR
+      setHideNavBar( tryBooleanValue( hlp, k, v, bool(key[h].dflt) ) );
     } else if ( k.equals( key[ ++h ].key ) ) {           // DISTOX_ORIENTATION (choice)
       mOrientation = tryIntValue( hlp, k, v, key[h].dflt );
       TopoDroidApp.setScreenOrientation( );

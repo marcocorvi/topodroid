@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<LinearLayout
-  style="@style/base_padding"
-  android:layout_width="match_parent" 
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  >
-
+    -->
   <LinearLayout
-    android:layout_width="wrap_content" 
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/marginv"
+    android:layout_below="@id/title"
     >
-    <TextView android:id="@+id/shot_shot_stations" 
-      android:maxLines="1" 
-      android:layout_marginBottom="@dimen/marginsmall"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:ems="25"
-    />
 
-    <TextView android:id="@+id/shot_shot_data" 
-      android:maxLines="1" 
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:ems="25"
-    />
-  </LinearLayout>
-
-  <CheckBox android:id="@+id/leg"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:text="@string/delete_whole_leg"
-  />
-
-  <LinearLayout android:id="@+id/help"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="@dimen/marginv"
-    android:layout_marginBottom="@dimen/marginv"
-    android:gravity="start"
-    >
-    <Button android:id="@+id/button_help"
-        style="@style/button_empty"
-        android:text="@string/button_help"
-    />
-    <LinearLayout 
-      android:layout_width="fill_parent" 
+    <LinearLayout
+      android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:gravity="end"
+      android:orientation="vertical"
+      android:layout_marginBottom="@dimen/marginv"
       >
-      <Button android:id="@+id/button_cancel"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        android:layout_marginEnd="@dimen/marginh"
+      <TextView android:id="@+id/shot_shot_stations" 
+        android:maxLines="1" 
+        android:layout_marginBottom="@dimen/marginsmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:ems="25"
       />
-      <Button android:id="@+id/shot_delete"
-        style="@style/button_default"
-        android:text="@string/button_delete"
-        android:textColor="@color/textdelete"
+
+      <TextView android:id="@+id/shot_shot_data" 
+        android:maxLines="1" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:ems="25"
       />
     </LinearLayout>
-  </LinearLayout>
 
-</LinearLayout>
-</ScrollView>
+    <CheckBox android:id="@+id/leg"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/delete_whole_leg"
+    />
+
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      >
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+        <Button android:id="@+id/button_cancel"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/shot_delete"
+          style="@style/button_default"
+          android:text="@string/button_delete"
+          android:textColor="@color/textdelete"
+        />
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+  <!-- /ScrollView -->
+</RelativeLayout>

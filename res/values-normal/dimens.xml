@@ -12,6 +12,7 @@
   <dimen name="sizeplus">16sp</dimen>
 
   <dimen name="titlesize">18sp</dimen>
+  <dimen name="titletextsize">20sp</dimen>
 
   <dimen name="textsize">14sp</dimen>
   <dimen name="textsizesmall">12sp</dimen>

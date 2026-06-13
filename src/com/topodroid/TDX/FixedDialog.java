@@ -72,6 +72,7 @@ class FixedDialog extends MyDialog
   private Button   mButtonView;
   // private Button   mButtonWmm;
   private Button   mButtonSave;
+  private Button   mButtonCancel;
 
   private Button   mButtonClearConvert;
   private Button   mButtonConvert;
@@ -83,8 +84,6 @@ class FixedDialog extends MyDialog
   private boolean editable;
   private boolean editable_h; // editable altitude
   private int mUnitLocation;
-
-  // private Button   mButtonCancel;
 
   private final WorldMagneticModel mWMM;
 
@@ -195,7 +194,7 @@ class FixedDialog extends MyDialog
     mButtonSave = (Button) findViewById( R.id.fix_save );
     mButtonDrop    = (Button) findViewById(R.id.fix_drop );
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
-    // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
+    mButtonCancel  = (Button) findViewById(R.id.button_cancel );
     // TDLog.v("FIXED info " + mFxd.lng + " " + mFxd.lat );
     int flag = MyKeyboard.FLAG_POINT_DEGREE;
     mUnitLocation = TDSetting.mUnitLocation;
@@ -245,7 +244,7 @@ class FixedDialog extends MyDialog
     mButtonSave.setOnClickListener( this );
     mButtonClearConvert.setOnClickListener( this );
     mButtonConvert.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
+    mButtonCancel.setOnClickListener( this );
 
     showConvertedCoords( );
   }

@@ -1225,7 +1225,7 @@
     <!-- UNUSED string name="help_save">Сохранить нзменения информации о съёмке</string -->
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
     <string name="help_export_survey">Экспорт съёмки</string>
-    <string name="help_export_surveys">Экспорт всех съемок</string>
+    <!-- UNUSED string name="help_export_surveys">Экспорт всех съемок</string -->
     <string name="help_loc">GPS привязка</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
@@ -1330,6 +1330,7 @@
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
     <string name="title_recalibrate">Калибровки</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1380,6 +1381,8 @@
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_photo_list">Фото</string>
     <string name="title_photo_view">Фото</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Сохранить абрис как</string>
     <!-- UNUSED string name="title_plot_merge">Присоединить к абрису</string -->
     <!-- UNUSED string name="title_plot_reload">Перезагрузить абрис</string -->
@@ -1444,6 +1447,8 @@
 
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Сенсор</string>
     <string name="title_sensor_list">Данные сенсоров</string>
     <string name="title_split">Разделить абрис</string>

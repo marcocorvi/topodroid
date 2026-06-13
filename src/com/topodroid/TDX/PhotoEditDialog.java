@@ -92,7 +92,7 @@ class PhotoEditDialog extends MyDialog
     Button buttonOK     = (Button) findViewById( R.id.photo_ok );
     Button buttonDelete = (Button) findViewById( R.id.photo_delete );
     Button buttonCode = (Button) findViewById( R.id.photo_geocode );
-    // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
+    Button buttonCancel = (Button) findViewById( R.id.button_cancel );
     
     float a = mTdImage.azimuth();
     float c = mTdImage.clino();
@@ -129,7 +129,7 @@ class PhotoEditDialog extends MyDialog
     //   buttonDelete.setVisibility( View.GONE );
     // }
 
-    // mButtonCancel.setOnClickListener( this );
+    buttonCancel.setOnClickListener( this );
     
     // TDLog.v( "photo edit dialog on create done");
   }
@@ -152,6 +152,8 @@ class PhotoEditDialog extends MyDialog
     } else if ( vid == R.id.photo_geocode ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
+    // } else if ( vid == R.id.button_cancel ) {
+    //   /* nothing */
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();

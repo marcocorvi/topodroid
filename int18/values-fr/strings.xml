@@ -1263,7 +1263,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="help_save">Enregistre les modifications d\'infosdu relevé</string -->
     <string name="help_save_calib">Enregistre les modifications d\'infos d\'étalonnage</string>
     <string name="help_export_survey">Exporte le relevé</string>
-    <string name="help_export_surveys">Exporte tous les relevés</string>
+    <!-- UNUSED string name="help_export_surveys">Exporte tous les relevés</string -->
     <string name="help_loc">Géolocalisation GPS </string>
     <string name="help_delete_survey">Supprime le relevé</string>
     <string name="help_delete_calib">Supprime l\'étalonnage</string>
@@ -1370,6 +1370,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_audio_list">Enregistrements audio</string>
     <string name="title_recalibrate">Calibrations</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Étalonnage</string>
     <string name="title_calib_check">Visée de contrôle étalonnage</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1422,6 +1423,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_photo_comment">Commentaire photo</string>
     <string name="title_photo_list">Photos</string>
     <string name="title_photo_view">Photo</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Enregistrer le croquis sous</string>
     <!-- UNUSED string name="title_plot_merge">Fusionner Esquisse</string -->
     <!-- UNUSED string name="title_plot_reload">Recharger le croquis</string -->
@@ -1487,6 +1490,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Capteur</string>
     <string name="title_sensor_list">Données de capteur</string>
     <string name="title_split">Diviser le croquis</string>

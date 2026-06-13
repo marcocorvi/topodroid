@@ -259,7 +259,7 @@ public class UserManualActivity extends Activity
       mCurrentPage = page;
     }
 
-    setContentView(R.layout.distox_manual_dialog);
+    setContentView(R.layout.user_manual_activity);
     mTV_text   = (WebView) findViewById(R.id.manual_text );
  
     setWebViewSettings( mTV_text );

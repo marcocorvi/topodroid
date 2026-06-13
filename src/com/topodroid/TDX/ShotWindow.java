@@ -21,6 +21,7 @@ import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDColor;
 import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDVersion;
 import com.topodroid.math.TDMatrix;
@@ -84,6 +85,7 @@ import android.widget.ListView;
 import android.widget.EditText;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.TextView;
 
 
 // import android.provider.MediaStore;
@@ -474,7 +476,7 @@ public class ShotWindow extends Activity
     }
 
     if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) { // IMMUTABLE
-      mActivity.setTitleColor( 0xffff3333 );
+      mActivity.setTitleColor( TDColor.TITLE_MUTABLE );
     } else {
       setTitleColor( StationPolicy.mTitleColor );
     }
@@ -3624,4 +3626,18 @@ public class ShotWindow extends Activity
     }
   }
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.title )).setTextColor( color );
+  }
 }

@@ -64,6 +64,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 // import android.graphics.RectF;
 // import android.print.PrintAttributes;
@@ -291,12 +292,6 @@ public class OverviewWindow extends ItemDrawer
 
     // --------------------------------------------------------------------------------------
 
-    // @Override // overridden method is empty
-    // public void setTheTitle()
-    // {
-    //   // setTitle( res.getString( R.string.title_move ) );
-    // }
-
   private void computeReferences( int type,
                                   // float xoff, float yoff,
                                   float zoom )
@@ -505,8 +500,6 @@ public class OverviewWindow extends ItemDrawer
       mButtonView1 = new MyHorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
 
-      setTheTitle();
-
       mData         = TopoDroidApp.mData; 
       Bundle extras = getIntent().getExtras();
       if ( extras == null ) { finish(); return; } // extra can be null [ Galaxy S7, Galaxy A30s ] 
@@ -532,7 +525,16 @@ public class OverviewWindow extends ItemDrawer
       mOffset.x   += extras.getFloat( TDTag.TOPODROID_PLOT_XOFF );
       mOffset.y   += extras.getFloat( TDTag.TOPODROID_PLOT_YOFF );
       mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+
+      // setTitleColor( TDColor.TITLE_NORMAL );
+      setTheTitle();
     }
+
+  @Override
+  public void setTheTitle()
+  {
+    setTitle( getResources().getString( ( mType == PlotType.PLOT_PLAN )? R.string.title_plan : R.string.title_profile ) );
+  }
 
   /** react to the activity "resume"
    */
@@ -753,7 +755,7 @@ public class OverviewWindow extends ItemDrawer
    * @param second        whether to export the second view (unused)
    * @note called by the ExportPlotDialog
    */
-  public void doExport( String export_type, String filename, String prefix, long first, boolean second ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, long first, boolean second, List<String> unused ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
@@ -1191,7 +1193,8 @@ public class OverviewWindow extends ItemDrawer
           DrawingMeasureEndPath path = new DrawingMeasureEndPath( mStartX, mStartY, x, y, 5 * TDSetting.mDotRadius * mOverviewSurface.getScale() * mZoom );
           mOverviewSurface.setSecondReference( path );
         }
-        mActivity.setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
+        // mActivity.
+        setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
       }
     // ---------------------------------------- MOVE
 
@@ -1291,6 +1294,7 @@ public class OverviewWindow extends ItemDrawer
         TDandroid.setButtonBackground( mButton1[IC_SELECT], mBMselect );
         mOverviewSurface.setFirstReference( null );
         mOverviewSurface.setSecondReference( null );
+        setTheTitle();
       } else if ( mOnMeasure == MEASURE_START ) {
         TDandroid.setButtonBackground( mButton1[IC_SELECT], mBMselectOn );
         mDDtotal = 0;
@@ -1372,7 +1376,8 @@ public class OverviewWindow extends ItemDrawer
       getResources().getString( R.string.format_measure_plan ) :
       getResources().getString( R.string.format_measure_profile );
 
-    mActivity.setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
+    // mActivity.
+    setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
   }
 
   private void toggleIsContinue( )
@@ -1466,4 +1471,19 @@ public class OverviewWindow extends ItemDrawer
     mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    TDLog.v("OVERVIEW set title " + t );
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }

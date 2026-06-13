@@ -1,122 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  android:layout_width="match_parent" 
-  android:layout_height="match_parent"
-  android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
   >
-
-  <LinearLayout 
-    android:id="@+id/layout1"
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      -->
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/marginvbig"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
     >
-    <EditText android:id="@+id/gm_bearing"
-      style="@style/edit_decimal"
-      android:layout_width="0dp"
-      android:layout_weight="30"
-      android:textSize="@dimen/textsizebig"
-      android:layout_marginEnd="@dimen/marginh"
-      android:hint="@string/hint_azimuth"
-      android:importantForAutofill="no"
-    />
-    <EditText android:id="@+id/gm_clino"
-      style="@style/edit_signeddecimal"
-      android:layout_width="0dp"
-      android:layout_weight="30"
-      android:textSize="@dimen/textsizebig"
-      android:layout_marginEnd="@dimen/marginh"
-      android:hint="@string/hint_clino"
-      android:importantForAutofill="no"
-    />
-    <EditText android:id="@+id/gm_roll"
-      style="@style/edit_decimal"
-      android:layout_width="0dp"
-      android:layout_weight="30"
-      android:textSize="@dimen/textsizebig"
-      android:hint="@string/hint_roll"
-      android:importantForAutofill="no"
-    />
-  </LinearLayout>
 
-  <TextView android:id="@+id/gm_error"
-    android:layout_below="@id/layout1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="@dimen/textsizebig"
-    android:layout_marginTop="@dimen/margintiny"
-  />
+    <LinearLayout 
+      android:id="@+id/layout1"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:orientation="horizontal"
+      >
+      <EditText android:id="@+id/gm_bearing"
+        style="@style/edit_decimal"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:textSize="@dimen/textsizebig"
+        android:layout_marginEnd="@dimen/marginh"
+        android:hint="@string/hint_azimuth"
+        android:importantForAutofill="no"
+      />
+      <EditText android:id="@+id/gm_clino"
+        style="@style/edit_signeddecimal"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:textSize="@dimen/textsizebig"
+        android:layout_marginEnd="@dimen/marginh"
+        android:hint="@string/hint_clino"
+        android:importantForAutofill="no"
+      />
+      <EditText android:id="@+id/gm_roll"
+        style="@style/edit_decimal"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:textSize="@dimen/textsizebig"
+        android:hint="@string/hint_roll"
+        android:importantForAutofill="no"
+      />
+    </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout_group"
-      android:layout_below="@id/gm_error"
+    <TextView android:id="@+id/gm_error"
+      android:layout_below="@id/layout1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
+      android:textSize="@dimen/textsizebig"
       android:layout_marginTop="@dimen/margintiny"
-      >
-    <TextView android:id="@+id/gm_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textsizebig"
-        android:layout_marginTop="@dimen/margintiny"
-        android:text="@string/calib_measurement_group"
-        />
-    <EditText android:id="@+id/gm_name"
-      style="@style/edit_number"
-      android:maxLines="1"
-      android:layout_width="wrap_content"
-      android:layout_marginTop="@dimen/margintiny"
-      android:hint="@string/hint_name"
-      android:importantForAutofill="no"
     />
-  </LinearLayout>
-   		
-  <LinearLayout android:id="@+id/layout2"
-    android:layout_below="@id/layout_group"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" 
-    android:layout_marginTop="@dimen/marginhuge" 
-    >
-  </LinearLayout>
 
-  <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/layout2"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" 
-    android:layout_marginTop="@dimen/marginvbig" 
-    android:gravity="start"
-    >
-    <Button android:id="@+id/button_help"
-      style="@style/button_empty"
-      android:text="@string/button_help"
-    />
-    <LinearLayout 
-      android:layout_width="fill_parent" 
+    <LinearLayout android:id="@+id/layout_group"
+        android:layout_below="@id/gm_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margintiny"
+        >
+      <TextView android:id="@+id/gm_group"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/textsizebig"
+          android:layout_marginTop="@dimen/margintiny"
+          android:text="@string/calib_measurement_group"
+          />
+      <EditText android:id="@+id/gm_name"
+        style="@style/edit_number"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margintiny"
+        android:hint="@string/hint_name"
+        android:importantForAutofill="no"
+      />
+    </LinearLayout>
+     		
+    <LinearLayout android:id="@+id/layout2"
+      android:layout_below="@id/layout_group"
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:gravity="end"
+      android:orientation="horizontal" 
+      android:layout_marginTop="@dimen/marginhuge" 
       >
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      android:layout_below="@id/layout2"
+      >
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/gm_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginEnd="@dimen/marginh" 
       />
-      <Button android:id="@+id/gm_ok"
-        style="@style/button_default"
-        android:text="@string/button_save"
-      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/gm_ok"
+          style="@style/button_default"
+          android:text="@string/button_save"
+        />
+      </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
 
-  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
-    style="@style/keyboard"
-  />
+    <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+      style="@style/keyboard"
+    />
 
+  </RelativeLayout>
+  <!-- /ScrollView -->
 </RelativeLayout>
-<!-- /ScrollView -->

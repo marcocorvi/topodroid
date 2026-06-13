@@ -12,7 +12,9 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
+import com.topodroid.ui.MyDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.TDVersionCheck;
 
@@ -27,30 +29,41 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 // import android.net.Uri;
 
-class TopoDroidAbout extends Dialog
+import android.os.Bundle;
+
+class TopoDroidAbout extends MyDialog
                      implements OnClickListener
 {
   // private Button mBTok;
   // private Button mBTman;
-  private Context mContext;
   // private MainWindow mParent;
+  // private Context mContext; // inherited from MyDialog
   private int mSetup;
 
   int nextSetup() { return mSetup + 1; }
 
   TopoDroidAbout( Context context, MainWindow parent, int setup )
   {
-    super( context );
-    mContext = context;
+    super( context, null, 0 ); // null app, no help resource
+    // mContext = context;
     // mParent  = parent;
     mSetup   = setup;
+  }
+
+  @Override
+  protected void onCreate( Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    // initLayout( R.layout.welcome, -1 );
     setContentView(R.layout.welcome);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    setTitle( String.format( context.getResources().getString(R.string.welcome_title), TDVersion.fullString() ) );
+    String title = String.format( mContext.getResources().getString(R.string.welcome_title), TDVersion.fullString() );
+    setTitle( title );
+    TDLog.v("About: title <" + title + ">" );
 
     TextView version = (TextView) findViewById( R.id.TextView02 );
-    version.setText( String.format( context.getResources().getString(R.string.welcome_db_version), TDVersion.DATABASE_VERSION, TDVersion.DEVICE_DATABASE_VERSION ) );
+    version.setText( String.format( mContext.getResources().getString(R.string.welcome_db_version), TDVersion.DATABASE_VERSION, TDVersion.DEVICE_DATABASE_VERSION ) );
 
     ((Button)findViewById(R.id.btn_ok)).setOnClickListener( this );
     ((Button)findViewById(R.id.btn_manual)).setOnClickListener( this );

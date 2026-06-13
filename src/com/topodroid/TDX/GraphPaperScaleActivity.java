@@ -184,4 +184,19 @@ public class GraphPaperScaleActivity extends Activity
 
   }
 
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }

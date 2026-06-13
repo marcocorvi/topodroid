@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
+  android:id="@+id/root_view"
+  style="@style/root_view"
   >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    -->
   <LinearLayout 
     style="@style/base_padding"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_below="@id/title"
     >
 
-  <TextView 
-    android:layout_marginTop="@dimen/marginv"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center|bottom"
-    android:text="@string/north"
+    <TextView 
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center|bottom"
+      android:text="@string/north"
     />
-  <LinearLayout
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:layout_gravity="center|center_vertical"
-    >
+    <LinearLayout
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_gravity="center|center_vertical"
+      >
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="96dp"
@@ -43,24 +51,24 @@
         android:gravity="start|center_vertical"
         android:text="@string/east"
       />
-  </LinearLayout>
-  <TextView 
-    android:layout_marginBottom="@dimen/marginv"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center|top"
-    android:text="@string/south"
+    </LinearLayout>
+    <TextView 
+      android:layout_marginBottom="@dimen/marginv"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center|top"
+      android:text="@string/south"
     />
 
     <SeekBar android:id="@+id/seekbar"
-      android:layout_gravity="center"
-      android:layout_width="match_parent"
-      android:layout_height="20dp" 
-      android:max="360"
-      android:background="#666666"
-      android:progressDrawable="@xml/progress2"
-      android:layout_marginTop="@dimen/marginv"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" 
+        android:max="360"
+        android:background="#666666"
+        android:progressDrawable="@xml/progress2"
+        android:layout_marginTop="@dimen/marginv"
     />
 
     <LinearLayout android:id="@+id/layout4"
@@ -110,30 +118,27 @@
         android:text="@string/button_right"
       />
     </LinearLayout>
-   					  
+     					  
     <LinearLayout android:id="@+id/help"
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_gravity="end"
-      android:gravity="start"
-      android:layout_marginTop="@dimen/marginvbig"
+      style="@style/help_layout"
       >
       <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
       />
-      <LinearLayout 
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+      />
+      <!-- LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:gravity="end"
         >
-        <Button android:id="@+id/button_cancel"
-          style="@style/button_default"
-          android:text="@string/button_cancel"
-        />
-      </LinearLayout>
+      </LinearLayout -->
     </LinearLayout>
    					  
   </LinearLayout>
-</ScrollView>
+  <!-- /ScrollView -->
+</RelativeLayout>

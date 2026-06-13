@@ -7908,7 +7908,7 @@ public class DataHelper extends DataSetObservable
       // info.mImmutable  = ( cursor.getLong( 10 ) == 1 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    info.mImmutable = checkSurveyInfoImmutable( info.id );
+    if ( info != null ) info.mImmutable = checkSurveyInfoImmutable( info.id );
     return info;
   }
 

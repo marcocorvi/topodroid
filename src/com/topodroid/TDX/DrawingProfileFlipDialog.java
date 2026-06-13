@@ -39,6 +39,7 @@ class DrawingProfileFlipDialog extends MyDialog
 {
   private final DrawingWindow mParent;
   private Button mBtnOK;
+  private Button mBtnCancel;
 
   DrawingProfileFlipDialog( Context context, DrawingWindow parent )
   {
@@ -55,6 +56,8 @@ class DrawingProfileFlipDialog extends MyDialog
 
     mBtnOK   = (Button) findViewById(R.id.button_ok );
     mBtnOK.setOnClickListener( this );   // OK-SAVE
+    mBtnCancel = (Button) findViewById(R.id.button_close );
+    mBtnCancel.setOnClickListener( this ); 
   }
 
   @Override
@@ -65,6 +68,8 @@ class DrawingProfileFlipDialog extends MyDialog
       CheckBox cb_shots = (CheckBox) findViewById( R.id.shots );
       CheckBox cb_scrap = (CheckBox) findViewById( R.id.scrap );
       mParent.flipProfile( cb_shots.isChecked(), cb_scrap.isChecked() );
+    // } else if ( b == mBtnCancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

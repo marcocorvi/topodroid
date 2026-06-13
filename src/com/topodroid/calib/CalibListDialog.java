@@ -47,7 +47,7 @@ public class CalibListDialog extends MyDialog
   private ArrayAdapter<String> mArrayAdapter;
   private Button mBtnNew;
   private Button mBtnImport;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
   private Button mBtnReset;
 
   private ListView mList;
@@ -76,7 +76,7 @@ public class CalibListDialog extends MyDialog
     mBtnNew    = (Button) findViewById(R.id.button_new);
     mBtnImport = (Button) findViewById(R.id.button_import);
     mBtnReset  = (Button) findViewById(R.id.button_reset);
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel);
+    mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
     mBtnNew.setOnClickListener( this );
     mBtnImport.setOnClickListener( this );
@@ -85,7 +85,7 @@ public class CalibListDialog extends MyDialog
     } else {
       mBtnReset.setVisibility( View.GONE );
     }
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
 
     // setTitle( R.string.title_calib );
     updateList();

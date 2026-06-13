@@ -792,12 +792,11 @@ public class DBlock
    */
   private boolean checkRelativeDistance( DBlock b )
   {
-    float cc, sc, cb, sb;
     float alen = mLength;
-    cc = TDMath.cosd( mClino );
-    sc = TDMath.sind( mClino );
-    cb = TDMath.cosd( mBearing ); 
-    sb = TDMath.sind( mBearing ); 
+    float cc = TDMath.cosd( mClino );
+    float sc = TDMath.sind( mClino );
+    float cb = TDMath.cosd( mBearing ); 
+    float sb = TDMath.sind( mBearing ); 
     TDVector v1 = new TDVector( alen * cc * sb, alen * cc * cb, alen * sc );
     float blen = b.mLength;
     cc = TDMath.cosd( b.mClino );
@@ -815,10 +814,9 @@ public class DBlock
    */
   private boolean checkRelativeDistanceDiving( DBlock b )
   {
-    float cb, sb;
     float alen = mLength;
-    cb = TDMath.cosd( mBearing ); 
-    sb = TDMath.sind( mBearing ); 
+    float cb = TDMath.cosd( mBearing ); 
+    float sb = TDMath.sind( mBearing ); 
     TDVector v1 = new TDVector( alen * sb, alen * cb, mDepth );
     float blen = b.mLength;
     cb = TDMath.cosd( b.mBearing ); 
@@ -828,6 +826,48 @@ public class DBlock
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
+  /** @return true if the relative distance between this block and the another block is smaller that CloseDistance setting (normal mode)
+   * @param b  the other block
+   * @note blocks are in normal mode
+   */
+  private boolean checkRelativeAngle( DBlock b )
+  {
+    float cc = TDMath.cosd( mClino );
+    float sc = TDMath.sind( mClino );
+    float cb = TDMath.cosd( mBearing ); 
+    float sb = TDMath.sind( mBearing ); 
+    TDVector v1 = new TDVector( cc * sb, cc * cb, sc );
+    cc = TDMath.cosd( b.mClino );
+    sc = TDMath.sind( b.mClino );
+    cb = TDMath.cosd( b.mBearing ); 
+    sb = TDMath.sind( b.mBearing ); 
+    TDVector v2 = new TDVector( cc * sb, cc * cb, sc );
+    float d = (v1.minus(v2)).length();
+    return ( d < 2 * TDSetting.mCloseDistance );
+  }
+
+  /** @return true if the relative distance between this block and the another block is smaller that CloseDistance setting (diving mode)
+   * @param b  the other block
+   * @note blocks are in diving mode
+   */
+  private boolean checkRelativeAngleDiving( DBlock b )
+  {
+    float alen = mLength;
+    float cb = TDMath.cosd( mBearing ); 
+    float sb = TDMath.sind( mBearing ); 
+    float sc = mDepth / alen;
+    float cc = TDMath.sqrt( 1 - sc*sc );
+    TDVector v1 = new TDVector( cc * sb, cc * cb, sc );
+    float blen = b.mLength;
+    cb = TDMath.cosd( b.mBearing ); 
+    sb = TDMath.sind( b.mBearing ); 
+    sc = b.mDepth / blen;
+    cc = TDMath.sqrt( 1 - sc*sc );
+    TDVector v2 = new TDVector( cc * sb, cc * cb, sc );
+    float d = (v1.minus(v2)).length();
+    return ( d < 2 * TDSetting.mCloseDistance );
+  }
+
   /** @return true if this shot is within relative distance from another shot
    * @param b   the other shot
    */
@@ -835,6 +875,15 @@ public class DBlock
   {
     if ( b == null ) return false;
     return ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? checkRelativeDistanceDiving( b ) : checkRelativeDistance( b );
+  }
+
+  /** @return true if this shot is within relative direction angle from another shot
+   * @param b   the other shot
+   */
+  public boolean isRelativeAngle( DBlock b )
+  {
+    if ( b == null ) return false;
+    return ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? checkRelativeAngleDiving( b ) : checkRelativeAngle( b );
   }
 
   // -------------------------------------------------------------

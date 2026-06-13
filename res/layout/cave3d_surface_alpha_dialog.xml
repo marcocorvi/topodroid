@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<LinearLayout
+    android:layout_below="@id/title"
+    -->
+  <LinearLayout
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_below="@id/title"
     android:paddingStart="6dip"
     android:paddingEnd="6dip"
     android:paddingBottom="3dip">
@@ -107,7 +116,7 @@
         android:hint="@string/surface_east"
         android:inputType="numberSigned|numberDecimal"
         android:importantForAutofill="no"
-        />
+      />
       <EditText android:id="@+id/north"
         android:layout_width="0dp" 
         android:layout_weight="50" 
@@ -116,46 +125,38 @@
         android:hint="@string/surface_north"
         android:inputType="numberSigned|numberDecimal"
         android:importantForAutofill="no"
-        />
+      />
     </LinearLayout>
 
-  <LinearLayout android:id="@+id/help"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="start"
-    > 
-    <!-- android:layout_below="@id/layout7" -->
-    <Button android:id="@+id/button_help"
-      style="@style/button_empty"
-      android:text="@string/button_help"
-    />
-    <LinearLayout
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      >
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      > 
+      <!-- android:layout_below="@id/layout7" -->
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:layout_width="0dp" 
+        android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:layout_weight="50"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:text="@string/button_cancel"
-        />
-      <Button android:id="@+id/button_ok"
-        style="@style/button_default"
-        android:layout_width="0dp" 
+      />
+      <LinearLayout
+        android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:layout_weight="50"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/button_ok"
+        android:orientation="horizontal"
+        >
+        <Button android:id="@+id/button_ok"
+          style="@style/button_default"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content"
+          android:text="@string/button_ok"
         />
-     </LinearLayout>
-   </LinearLayout>
+      </LinearLayout>
+    </LinearLayout>
 
-</LinearLayout>
-</ScrollView>
+  </LinearLayout>
+  <!-- /ScrollView -->
+</RelativeLayout>

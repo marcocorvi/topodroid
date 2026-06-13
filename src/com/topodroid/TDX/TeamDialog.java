@@ -40,7 +40,7 @@ class TeamDialog extends MyDialog
                   implements View.OnClickListener
 {
   private Button mBtnConfirm;
-  // private Button mBtnClose;
+  private Button mBtnCancel;
   private Button mBtnPlus;
 
   private final ITeamText mParent;
@@ -77,8 +77,8 @@ class TeamDialog extends MyDialog
     super.onCreate(savedInstanceState);
     initLayout( R.layout.team_dialog, R.string.title_team_dialog );
 
-    // mBtnClose = (Button) findViewById( R.id.button_cancel );
-    // mBtnClose.setOnClickListener( this );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     mBtnConfirm = (Button) findViewById( R.id.button_ok );
     mBtnConfirm.setOnClickListener( this );
@@ -122,6 +122,8 @@ class TeamDialog extends MyDialog
       mNames.add( et );
       mTeamLayout.addView( et );
       mTeamLayout.invalidate();
+    } else if ( v.getId() == R.id.button_cancel ) {
+      dismiss();
     }
   }
 

@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDColor;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 
@@ -128,7 +129,8 @@ public class SensorListActivity extends Activity
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    setTitle( R.string.title_sensor_list );
+    setTitle( getResources().getString( R.string.title_sensor_list ) );
+    // setTitleColor( TDColor.TITLE_NORMAL );
     updateDisplay( );
   }
 
@@ -184,4 +186,19 @@ public class SensorListActivity extends Activity
     super.onConfigurationChanged( cfg );
     TDLocale.resetTheLocale();
   }
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }

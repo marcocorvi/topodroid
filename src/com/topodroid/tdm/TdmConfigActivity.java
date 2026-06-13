@@ -57,6 +57,7 @@ import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 // import android.widget.LinearLayout;
 // import android.widget.LinearLayout.LayoutParams;
 
@@ -146,7 +147,7 @@ public class TdmConfigActivity extends Activity
         mTdmConfig = new TdmConfig( path, false ); // false: no save 
         if ( mTdmConfig != null ) {
           mTdmConfig.readTdmConfig();
-          setTitle( String.format( getResources().getString(R.string.project),  mTdmConfig.toString() ) );
+          // setTitle( String.format( getResources().getString(R.string.project),  mTdmConfig.toString() ) );
         } else {
           TDToast.make( R.string.no_file );
         }
@@ -160,6 +161,7 @@ public class TdmConfigActivity extends Activity
     } else {
       // TDLog.v( "TdmConfig " + mTdmConfig.toString() );
       setContentView(R.layout.tdconfig_activity);
+      setTitle( String.format( getResources().getString(R.string.project),  mTdmConfig.toString() ) );
       // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
       mList = (ListView) findViewById(R.id.th_list);
@@ -549,7 +551,7 @@ public class TdmConfigActivity extends Activity
    * @param second     whether to export the second view (unused: only for plan or profile in DrawingWindow)
    * @note implements IExporter
    */
-  public void doExport( String type, String surveyname, String prefix, long first, boolean second )
+  public void doExport( String type, String surveyname, String prefix, long first, boolean second, List<String> unused )
   {
     String filename = null;
     int pos = surveyname.lastIndexOf('.');
@@ -670,6 +672,21 @@ public class TdmConfigActivity extends Activity
   {
     super.onConfigurationChanged( new_cfg );
     TDLocale.resetTheLocale();
+  }
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.title )).setTextColor( color );
   }
 
 }

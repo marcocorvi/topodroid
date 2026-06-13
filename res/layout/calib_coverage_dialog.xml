@@ -1,124 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<LinearLayout 
-  style="@style/base_padding"
-  android:layout_width="match_parent" 
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  >
-
-  <!-- TextView android:id="@+id/coverage_title"
-    android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent" 
-    android:text="@string/title_coverage"
-    / -->
-  <GridLayout 
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:rowCount="2"
-    android:columnCount="2"
-    ><!-- FIXME-23 FIXME-16
-    android:rowCount="2"
-    android:columnCount="2"
-    FIXME-8 no rowCount columnCount
     -->
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/UP"
-      />
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/DOWN"
-      />
-    <ImageView android:id="@+id/coverage_image_up"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/marginv"
-      android:contentDescription="@string/angle_distribution"
-      />
-    <ImageView android:id="@+id/coverage_image_down"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/marginv"
-      android:contentDescription="@string/angle_distribution"
-      />
-  </GridLayout>
-
-  <TextView android:id="@+id/coverage_value"
-    android:layout_marginTop="@dimen/margintiny"
+  <LinearLayout 
+    style="@style/base_padding"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginv"
-    android:text="@string/title_coverage"
-  />
-
-  <LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="@dimen/marginv"
-    android:layout_gravity="end"
-    android:gravity="end"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
     >
-    <Button android:id="@+id/coverage_eval"
-      style="@style/button_default"
-      android:layout_marginEnd="@dimen/marginh"
-      android:text="@string/button_eval"
-    />
-    <Button android:id="@+id/coverage_g"
-      style="@style/button_default"
-      android:layout_marginEnd="@dimen/marginh"
-      android:text="@string/button_evalg"
-    />
-    <Button android:id="@+id/coverage_m"
-      style="@style/button_default"
-      android:layout_marginEnd="@dimen/marginh"
-      android:text="@string/button_evalm"
-    />
-    <Button android:id="@+id/coverage_roll"
-      style="@style/button_default"
-      android:layout_marginEnd="@dimen/marginh"
-      android:text="@string/button_evalroll"
-    />
-
-    <Button android:id="@+id/coverage_eval_cal"
-      style="@style/button_default"
-      android:text="@string/button_eval_cal"
-    />
-  </LinearLayout>
-
-  <LinearLayout android:id="@+id/help"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="start"
-    >
-    <Button android:id="@+id/button_help"
-      style="@style/button_empty"
-      android:text="@string/button_help"
-    />
-    <LinearLayout 
-      android:layout_width="fill_parent" 
+    <!-- TextView android:id="@+id/coverage_title"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent" 
+      android:text="@string/title_coverage"
+      / -->
+    <GridLayout 
+      android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:rowCount="2"
+      android:columnCount="2"
+      ><!-- FIXME-23 FIXME-16
+      android:rowCount="2"
+      android:columnCount="2"
+      FIXME-8 no rowCount columnCount
+      -->
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/UP"
+      />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DOWN"
+      />
+      <ImageView android:id="@+id/coverage_image_up"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginv"
+        android:contentDescription="@string/angle_distribution"
+      />
+      <ImageView android:id="@+id/coverage_image_down"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginv"
+        android:contentDescription="@string/angle_distribution"
+      />
+    </GridLayout>
+  
+    <TextView android:id="@+id/coverage_value"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/marginv"
+      android:text="@string/title_coverage"
+    />
+  
+    <LinearLayout 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_gravity="end"
       android:gravity="end"
       >
-      <Button android:id="@+id/coverage_back"
-        android:layout_gravity="start"
+      <Button android:id="@+id/coverage_eval"
         style="@style/button_default"
-        android:text="@string/button_close"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_eval"
+      />
+      <Button android:id="@+id/coverage_g"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_evalg"
+      />
+      <Button android:id="@+id/coverage_m"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_evalm"
+      />
+      <Button android:id="@+id/coverage_roll"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_evalroll"
+      />
+  
+      <Button android:id="@+id/coverage_eval_cal"
+        style="@style/button_default"
+        android:text="@string/button_eval_cal"
       />
     </LinearLayout>
+  
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      >
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/coverage_back"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+      />
+      <!-- LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+      </LinearLayout -->
+    </LinearLayout>
+  
   </LinearLayout>
-
-</LinearLayout>
-</ScrollView>
+  <!-- /ScrollView -->
+</RelativeLayout>

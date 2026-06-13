@@ -117,7 +117,7 @@ class AudioListDialog extends MyDialog
     }
     mList.setAdapter( arrayAdapter );
     
-    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( new View.OnClickListener() {
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( new View.OnClickListener() {
       @Override public void onClick(View v) 
       {
         // TDLog.v( "audio list on click");

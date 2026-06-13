@@ -59,7 +59,7 @@ class TdmInfoDialog extends MyDialog
     super.onCreate( savedInstanceState );
     initLayout( R.layout.tdminfo_dialog, R.string.title_infos );
 
-    Button back = (Button)findViewById( R.id.button_back );
+    Button back = (Button)findViewById( R.id.button_cancel );
     back.setOnClickListener( this );
 
     mList = (ListView) findViewById(R.id.list);
@@ -85,7 +85,7 @@ class TdmInfoDialog extends MyDialog
   @Override
   public void onClick( View v ) 
   {
-    // if ( v.getId() == R.id.button_back ) {
+    // if ( v.getId() == R.id.button_cancel ) {
     // }
     dismiss();
   }

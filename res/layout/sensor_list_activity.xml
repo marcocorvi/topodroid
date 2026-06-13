@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:fitsSystemWindows="true"
   >
+  <TextView android:id="@+id/title"
+    style="@style/text_title_base"
+  />
   <ListView android:id="@+id/list"
     style="@style/list_bottom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android_layout_below="@id/title"
   />  
 </RelativeLayout>
 

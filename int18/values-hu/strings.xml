@@ -1231,7 +1231,7 @@
     <!-- UNUSED string name="help_save">Változtatások mentése a mérési informácókba</string -->
     <string name="help_save_calib">Változtatások mentése a kalibrációs információkhoz</string>
     <string name="help_export_survey">Felmérés exportálása</string>
-    <string name="help_export_surveys">Minden felmérés exportálása</string>
+    <!-- UNUSED string name="help_export_surveys">Minden felmérés exportálása</string -->
     <string name="help_loc">GNSS koordináta</string>
     <string name="help_delete_survey">Felmérés törlése</string>
     <string name="help_delete_calib">Kalibráció törlése</string>
@@ -1336,6 +1336,7 @@
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
     <string name="title_recalibrate">Klibrációk</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
     <!-- UNUSED string name="title_check">Kalibrációs ellenőrzés</string -->
@@ -1386,6 +1387,8 @@
     <string name="title_photo_comment">Fénykép megjegyzés</string>
     <string name="title_photo_list">Fotók</string>
 	<string name="title_photo_view">Fénykép</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Vázlat exportálása</string>
     <!-- UNUSED string name="title_plot_merge">Vázlatban egyesít</string -->
     <!-- UNUSED string name="title_plot_reload">Vázlat újratöltése</string -->
@@ -1450,6 +1453,8 @@
 
     <string name="title_shift">Váltás</string>
     <string name="title_shot_delete">Mérés törlése?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Szenzor</string>
     <string name="title_sensor_list">Szenzor adat</string>
     <string name="title_split">Vázlat megosztása</string>

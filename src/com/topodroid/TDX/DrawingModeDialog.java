@@ -105,7 +105,7 @@ class DrawingModeDialog extends MyDialog
       // mCBscrap = (CheckBox) findViewById(R.id.cb_scrap);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
-      ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
+      ((Button) findViewById(R.id.button_cancel)).setOnClickListener( this );
 
       int mode = mSurface.getDisplayMode();
       if ( mParent != null && mParent.isAnySection() ) {
@@ -175,7 +175,7 @@ class DrawingModeDialog extends MyDialog
         //   mParent.scrapOutlineDialog();
         // }
         if ( TDSetting.mWithLevels > 0 ) setLevels();
-      } else if ( vid == R.id.button_back ) {
+      } else if ( vid == R.id.button_cancel ) {
       //   /* nothing */
       // } else if ( vid == R.id.button_mode_cancel ) {
       //   /* nothing */

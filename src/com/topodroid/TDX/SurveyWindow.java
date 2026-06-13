@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDTag;
 import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
@@ -286,6 +287,7 @@ public class SurveyWindow extends Activity
 
     setContentView(R.layout.survey_activity);
     setTitle( R.string.title_survey );
+    setTitleColor( TDColor.TITLE_NORMAL );
     mTextName    = (EditText) findViewById(R.id.survey_name);
     mEditDate    = (Button) findViewById(R.id.survey_date);
     mEditTeam    = (EditText) findViewById(R.id.survey_team);
@@ -370,7 +372,9 @@ public class SurveyWindow extends Activity
     setTitle( // mApp.getConnectionStateTitleStr() + // IF_COSURVEY
               getResources().getString( R.string.title_survey ) );
     if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) { // IMMUTABLE
-      mActivity.setTitleColor( 0xffff3333 );
+      mActivity.setTitleColor( TDColor.TITLE_MUTABLE );
+    } else {
+      mActivity.setTitleColor( TDColor.TITLE_NORMAL );
     }
   }
 
@@ -648,7 +652,7 @@ public class SurveyWindow extends Activity
    * @param second    whether to export the second view (unused: only plan or profile in DrawingWindow) - not used here
    * @note interface IExporter
    */
-  public void doExport( String type, String filename, String prefix, long first, boolean second )
+  public void doExport( String type, String filename, String prefix, long first, boolean second, List<String> unused )
   {
     TDLog.v( "SURVEY do export - name " + filename + " prefix " + prefix );
     if ( ! saveSurvey( false ) ) {
@@ -751,7 +755,6 @@ public class SurveyWindow extends Activity
     // // TDPath.deleteSurveyOverviewFiles( survey );
 
     TDPath.deleteSurveyDir( survey );
-
     mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, true ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
@@ -818,7 +821,7 @@ public class SurveyWindow extends Activity
     } else if ( p++ == pos ) { // EXPORT
       boolean diving = (mDatamode == SurveyInfo.DATAMODE_DIVING );
       String[] types = TDConst.surveyExportTypes( mApp_mData.hasFixed( TDInstance.sid, TDStatus.NORMAL) );
-      new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, diving, true ).show(); // with_name = true
+      new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, null, diving, true ).show(); // with_name = true
     } else if ( TDLevel.overExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();
     } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE
@@ -996,4 +999,18 @@ public class SurveyWindow extends Activity
     }
   }
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.title )).setTextColor( color );
+  }
 }

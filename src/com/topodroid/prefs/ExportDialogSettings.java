@@ -66,9 +66,9 @@ public class ExportDialogSettings extends MyDialog
     mBtnImport = (Button) findViewById(R.id.button_import );
     mBtnExport.setOnClickListener( this );
     mBtnImport.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.button_back );
+    // mBtnBack = (Button) findViewById(R.id.button_cancel );
     // mBtnBack.setOnClickListener( this );
-    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
   }
 
   /** implements click listener

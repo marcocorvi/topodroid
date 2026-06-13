@@ -74,9 +74,9 @@ public class ExportDialogCalib extends MyDialog
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.button_back );
+    // mBtnBack = (Button) findViewById(R.id.button_cancel );
     // mBtnBack.setOnClickListener( this );
-    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
@@ -107,7 +107,7 @@ public class ExportDialogCalib extends MyDialog
     // TDLog.v("CALIB selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      mParent.doExport( mSelected, TDInstance.calib, null, -1L, false ); // calib name is not used, null prefix, -1=first
+      mParent.doExport( mSelected, TDInstance.calib, null, -1L, false, null ); // calib name is not used, null prefix, -1=first
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

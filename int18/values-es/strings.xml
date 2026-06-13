@@ -1234,7 +1234,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
     <string name="help_save_calib">Guardar cambios en la información de calibración</string>
     <string name="help_export_survey">Exportar topografía</string>
-    <string name="help_export_surveys">Exportar todas las topografías</string>
+    <!-- UNUSED string name="help_export_surveys">Exportar todas las topografías</string -->
     <string name="help_loc">Posicionamiento GPS</string>
     <string name="help_delete_survey">Eliminar topografía</string>
     <string name="help_delete_calib">Eliminar calibración</string>
@@ -1339,6 +1339,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_audio_list">Registros de audio</string>
     <string name="title_recalibrate">Calibraciones</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1389,6 +1390,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_photo_list">Fotos</string>
     <string name="title_photo_view">Foto</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Guardar dibujo como</string>
     <!-- UNUSED string name="title_plot_merge">Combinar dibujo</string -->
     <!-- UNUSED string name="title_plot_reload">Actualizar dibujo</string -->
@@ -1453,6 +1456,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar la toma?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Sensor</string>
     <string name="title_sensor_list">Datos Sensor</string>
     <string name="title_split">Dividir dibujo</string>

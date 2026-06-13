@@ -40,6 +40,8 @@ import android.view.View;
 // import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 
+import java.util.List;
+
 public class ExportDialogShot extends MyDialog
                    implements AdapterView.OnItemSelectedListener
                    , View.OnClickListener
@@ -58,6 +60,7 @@ public class ExportDialogShot extends MyDialog
   private String    mSelected;
   private final int mTitle;
   private int mSelectedPos;
+  private List<String> mSurveys;
   private String    mSurvey;
   private String    mExportPrefix = null;
   private String    mExportName   = null;
@@ -89,13 +92,14 @@ public class ExportDialogShot extends MyDialog
    * @param diving      whether survey is diving-mode
    * @param with_name   whether to use survey name
    */
-  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey, boolean diving, boolean with_name )
+  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey, List<String> surveys, boolean diving, boolean with_name )
   {
     super( context, null, R.string.ExportDialog ); // null app
     mParent   = parent;
     mTypes    = types;
     mSelected = null;
     mTitle    = title;
+    mSurveys  = surveys;
     mSurvey   = with_name? survey : resString( R.string.with_prefix );
     mDiving   = diving;
     mWithName = with_name;
@@ -146,9 +150,9 @@ public class ExportDialogShot extends MyDialog
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.button_back );
+    // mBtnBack = (Button) findViewById(R.id.button_cancel );
     // mBtnBack.setOnClickListener( this );
-    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
@@ -266,9 +270,9 @@ public class ExportDialogShot extends MyDialog
       TDLog.v("Survey format selected " + mSelected + " pos " + mSelectedPos + ": " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName  + " prefix " + mExportPrefix );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
-        mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false ); // second = false
+        mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false, mSurveys ); // second = false
       } else {
-        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, mExportFirst, false ); // second = false
+        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, mExportFirst, false, mSurveys ); // second = false
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */

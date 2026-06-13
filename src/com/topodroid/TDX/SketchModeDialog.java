@@ -64,7 +64,7 @@ class SketchModeDialog extends MyDialog
       mCBscaleRef = (CheckBox) findViewById(R.id.cb_mode_ref);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
-      ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
+      ((Button) findViewById(R.id.button_cancel)).setOnClickListener( this );
 
       int mode = mSurface.getDisplayMode();
       // mCBleg.setChecked(   (mode & DisplayMode.DISPLAY_LEG) != 0 );
@@ -92,9 +92,7 @@ class SketchModeDialog extends MyDialog
         if ( mCBscaleRef.isChecked() ) mode |= DisplayMode.DISPLAY_SCALEBAR;
         // TDLog.e( "Mode " + mode );
         mSurface.setDisplayMode( mode );
-      } else if ( vid == R.id.button_back ) {
-      //   /* nothing */
-      // } else if ( vid == R.id.button_mode_cancel ) {
+      } else if ( vid == R.id.button_cancel ) {
       //   /* nothing */
       }
       dismiss();

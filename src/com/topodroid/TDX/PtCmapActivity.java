@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.TextView;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -228,5 +229,20 @@ public class PtCmapActivity extends Activity
     super.onConfigurationChanged( new_cfg );
     TDLocale.resetTheLocale();
   }
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }
 

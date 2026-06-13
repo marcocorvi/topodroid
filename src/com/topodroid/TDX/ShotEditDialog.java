@@ -424,7 +424,7 @@ class ShotEditDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     // boolean photoCheck = TDandroid.checkCamera( mContext );
 
-    initLayout( R.layout.shot_dialog, null );
+    initLayout( R.layout.shot_dialog, R.string.title_shot_edit );
 
     mETdistance = (EditText) findViewById(R.id.shot_distance);
     mETbearing  = (EditText) findViewById(R.id.shot_bearing);

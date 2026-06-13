@@ -113,9 +113,9 @@ public class ImportDialogShot extends MyDialog
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.button_back );
+    // mBtnBack = (Button) findViewById(R.id.button_cancel );
     // mBtnBack.setOnClickListener( this );
-    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );

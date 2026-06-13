@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDColor;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -32,6 +33,7 @@ import com.topodroid.calib.CalibCoeffDialog;
 
 // import java.util.ArrayList;
 import java.util.Locale;
+import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -264,6 +266,9 @@ public class CalibActivity extends Activity
 
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
+
+    setTitle( getResources().getString( R.string.title_calibration ) );
+    // setTitleColor( TDColor.TITLE_NORMAL );
   }
 
   @Override
@@ -545,7 +550,7 @@ public class CalibActivity extends Activity
    * @param second  whether to export the second view (unused)
    * @note implements IExporter
    */
-  public void doExport( String type, String name, String prefix, long first, boolean second )
+  public void doExport( String type, String name, String prefix, long first, boolean second, List<String> unused )
   {
     int index = TDConst.calibExportIndex( type );
     if ( index >= 0 ) {
@@ -602,4 +607,19 @@ public class CalibActivity extends Activity
     TDLocale.resetTheLocale();
   }
 
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }

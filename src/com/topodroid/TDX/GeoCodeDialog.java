@@ -73,7 +73,7 @@ class GeoCodeDialog extends MyDialog
     list.setDividerHeight( 2 );
 
     if ( mGeoCodes.size() > 0 ) {
-      mAdapter = new GeoCodeAdapter( mContext, R.layout.geocode_row, mGeoCodes.getGeoCodes() );
+      mAdapter = new GeoCodeAdapter( mContext, R.layout.select_text_row, mGeoCodes.getGeoCodes() );
       list.setAdapter( mAdapter );
     }
   }

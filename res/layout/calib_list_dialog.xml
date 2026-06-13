@@ -1,70 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
   >
-  <LinearLayout 
-    android:orientation="horizontal"
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginv"
+    android:layout_below="@id/title"
     >
-
-    <Button android:id="@+id/button_new"
-      android:layout_height="match_parent"
-      style="@style/button_default"
-      android:text="@string/calib_new"
-    />
-
-    <LinearLayout android:id="@+id/help"
-      android:layout_width="match_parent" 
+  
+    <ListView android:id="@+id/list"
+      style="@style/list_top"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="end"
-      android:gravity="start"
-      android:orientation="horizontal"
+    />  
+  
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
       >
       <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
       />
       <LinearLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:gravity="end"
         >
+        <Button android:id="@+id/button_new"
+          style="@style/button_default"
+          android:text="@string/calib_new"
+          android:layout_marginEnd="@dimen/marginh"
+        />
         <Button android:id="@+id/button_import"
           style="@style/button_default"
-          android:layout_height="match_parent"
           android:layout_marginEnd="@dimen/marginh"
           android:text="@string/btn_import"
         />
         <Button android:id="@+id/button_reset"
           style="@style/button_default"
-          android:layout_height="match_parent"
           android:text="@string/button_reset"
         />
       </LinearLayout>
     </LinearLayout>
-
+  
   </LinearLayout>
-   
-  <ListView android:id="@+id/list"
-    style="@style/list_top"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-  />  
-
-  <!-- LinearLayout 
-         android:layout_width="match_parent" 
-         android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/marginvbig"
-         android:layout_gravity="start"
-         >
-      <Button android:id="@+id/button_cancel"
-            style="@style/button_default"
-            android:text="@string/button_cancel"
-      />
-  </LinearLayout -->
-
-</LinearLayout>
+</RelativeLayout>

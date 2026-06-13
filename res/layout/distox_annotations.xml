@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  style="@style/base_padding"
-  android:layout_width="match_parent" 
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
   >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
+    android:background="@color/background"
+    >
 
     <!-- TextView android:id="@+id/note_title"
         android:layout_marginTop="@dimen/margintiny"
@@ -62,5 +71,5 @@
         />
       </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+  </LinearLayout>
+</RelativeLayout>

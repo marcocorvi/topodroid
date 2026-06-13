@@ -117,6 +117,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.TextView;
 
 // import android.provider.MediaStore;
 
@@ -1505,7 +1506,9 @@ public class DrawingWindow extends ItemDrawer
     //   sb.append( mActivity.getTitle() + " [!s]" );
     // }
     if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) { // IMMUTABLE
-      mActivity.setTitleColor( 0xffff3333 );
+      mActivity.setTitleColor( TDColor.TITLE_MUTABLE );
+    } else {
+      mActivity.setTitleColor( TDColor.TITLE_NORMAL );
     }
     mActivity.setTitle( sb.toString() );
   }
@@ -8735,6 +8738,7 @@ public class DrawingWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
         if ( TDLevel.overNormal ) {
+          TDLog.v(" long tap menu: switch ");
           new PlotListDialog( mActivity, null, mApp, this ).show();
         } else {
           doClose();
@@ -8742,6 +8746,7 @@ public class DrawingWindow extends ItemDrawer
       } else { // close
         doClose();
       }
+      return true;
     } else if ( p++ == pos ) { // EXPORT - SAVE
     } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
     } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
@@ -8914,7 +8919,7 @@ public class DrawingWindow extends ItemDrawer
    * @param second       whether to export the second view instead of the current view (only for plan or profile)
    * @note called from ExportDialogPlot to do the export
    */
-  public void doExport( String export_type, String filename, String prefix, long first, boolean second ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, long first, boolean second, List<String> unused ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex  = TDConst.plotExportIndex( export_type );
@@ -10671,4 +10676,18 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.title )).setTextColor( color );
+  }
 }

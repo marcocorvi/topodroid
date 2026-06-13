@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  style="@style/base_padding"
-  android:layout_width="match_parent" 
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
   >
-  <ScrollView 
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    >
-    <LinearLayout android:id="@+id/list"
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-    />
-  </ScrollView>
-
-  <LinearLayout android:id="@+id/help"
-    android:layout_width="match_parent"
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="start"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
     >
-    <Button android:id="@+id/button_help"
-      style="@style/button_empty"
-      android:text="@string/button_help"
-    />
-    <LinearLayout
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="end"
+    <ScrollView 
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
       >
+      <LinearLayout android:id="@+id/list"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+      />
+    </ScrollView>
+  
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      >
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/btn_back"
         style="@style/button_default"
-        android:text="@string/button_close"
+        android:text="@string/button_cancel"
       />
+      <!-- LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+      </LinearLayout -->
     </LinearLayout>
+  
   </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -51,6 +51,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 // import java.io.File; // TDR FILE
 import java.util.ArrayList;
@@ -275,7 +276,7 @@ public class PlotReloadWindow extends ItemDrawer
     // int width = dm widthPixels;
     int width = getResources().getDisplayMetrics().widthPixels;
 
-    setContentView(R.layout.overview_activity);
+    setContentView( R.layout.overview_activity );
     mApp = (TopoDroidApp)getApplication();
     mActivity = this;
     Resources res = getResources();
@@ -757,5 +758,21 @@ public class PlotReloadWindow extends ItemDrawer
     TDLocale.resetTheLocale();
     mReloadSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
+
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 
 }

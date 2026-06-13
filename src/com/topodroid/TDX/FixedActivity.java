@@ -16,6 +16,7 @@ import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDAnalytics;
+import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDLocale;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.mag.WorldMagneticModel;
@@ -63,7 +64,7 @@ import android.app.Activity;
 import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 
-// import android.widget.TextView;
+import android.widget.TextView;
 // import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ListView;
@@ -254,6 +255,7 @@ public class FixedActivity extends Activity
       default:
         setTitle( R.string.title_fixed );
     }
+    // setTitleColor( TDColor.TITLE_NORMAL );
   }
 
   /** life-cycle - on resume
@@ -950,5 +952,19 @@ public class FixedActivity extends Activity
     TDLocale.resetTheLocale();
   }
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }
 

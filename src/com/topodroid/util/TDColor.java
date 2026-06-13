@@ -83,6 +83,7 @@ public class TDColor
   public static final int TITLE_TRIPOD     = TDandroid.TITLE_TRIPOD; // PINK
   public static final int TITLE_TOPOROBOT  = TDandroid.TITLE_TOPOROBOT; // ORANGE
   public static final int TITLE_ANOMALY    = TDandroid.TITLE_ANOMALY; // BRIGHT RED
+  public static final int TITLE_MUTABLE    = 0xffff3333;
 
   public static final int TOAST_NORMAL  = TOAST_BLUE; // 0xff7faaff; // FIXED_BLUE=0xff6699ff;
   public static final int TOAST_WARNING = ORANGE; // 0xfffdf322; // 0xffebe110;

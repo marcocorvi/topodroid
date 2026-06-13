@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:isScrollContainer="true"
     android:paddingStart="6dip"
     android:paddingEnd="6dip"
-    android:paddingBottom="3dip">
+    android:paddingBottom="3dip"
+    android:layout_below="@id/title"
+    >
    					  
     <!-- TextView 
       android:layout_width="wrap_content" 
@@ -331,33 +340,28 @@
       />  
 
 
-  <LinearLayout android:id="@+id/help"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="start"
-    > 
-    <!-- android:layout_below="@id/surveys_list" -->
-    <Button android:id="@+id/button_help"
-      style="@style/button_empty"
-      android:text="@string/button_help"
-    />
-    <LinearLayout
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="end"
-      >
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      > 
+      <!-- android:layout_below="@id/surveys_list" -->
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/button_close"
           style="@style/button_default"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="10dp"
-          android:layout_marginEnd="10dp"
-          android:text="@string/button_close"
+          android:text="@string/button_cancel"
       />
+      <!-- LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+      </LinearLayout -->
     </LinearLayout>
   </LinearLayout>
-
-</LinearLayout>
-<!-- /ScrollView -->
+  <!-- /ScrollView -->
+</RelativeLayout>

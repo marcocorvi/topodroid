@@ -114,8 +114,8 @@ public class ReductionErrorsDialog extends MyDialog
       loopList.setAdapter( adapter );
     }
 
-    Button button_back  = (Button) findViewById( R.id.button_back );
-    button_back.setOnClickListener( this );
+    Button button_cancel  = (Button) findViewById( R.id.button_cancel );
+    button_cancel.setOnClickListener( this );
   }
 
   @Override

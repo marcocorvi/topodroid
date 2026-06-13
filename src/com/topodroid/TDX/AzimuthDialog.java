@@ -87,6 +87,7 @@ class AzimuthDialog extends MyDialog
     mAzimuth = azimuth;
     // mDialBitmap = dial;
     mBMdial = dial;
+    TDLog.v("azimuth dialog cstr");
   }
 
   /** @return the source bitmap CW rotated by an angle 

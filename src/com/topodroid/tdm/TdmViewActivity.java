@@ -51,6 +51,7 @@ import android.view.View.OnClickListener;
 // import android.widget.LinearLayout.LayoutParams;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 // import android.widget.TextView;
 import android.widget.ZoomControls;
 // import android.widget.ZoomButton;
@@ -797,4 +798,19 @@ public class TdmViewActivity extends Activity
     return mDrawingSurface.hasPossibeEquates();
   }
   
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.title )).setTextColor( color );
+  }
 }

@@ -89,7 +89,7 @@ class MultishotDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    initLayout( R.layout.multishot_dialog, null );
+    initLayout( R.layout.multishot_dialog, R.string.title_multishot );
 
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );

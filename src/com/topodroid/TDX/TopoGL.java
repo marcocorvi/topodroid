@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDAnalytics;
+import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDString;
 // import com.topodroid.util.TDVersion;
 // import com.topodroid.util.TDVersion;
@@ -118,6 +119,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 // import android.widget.CheckBox;
 // import android.widget.TextView;
 import android.widget.LinearLayout;
@@ -609,6 +611,7 @@ public class TopoGL extends Activity
     //   setTitle( str ); 
     // } else {
       setTitle( str ); 
+      // setTitleColor( TDColor.TITLE_NORMAL );
     // }
   }
 
@@ -692,6 +695,7 @@ public class TopoGL extends Activity
   boolean    onMenu = false;
 
   private static final int[] menus = {
+    R.string.menu_close,       // 0
     R.string.cmenu_open,       // 0
     R.string.menu_export,
     // R.string.cmenu_ble, // FIXME BLUETOOTH  MENU
@@ -712,6 +716,7 @@ public class TopoGL extends Activity
   };
 
   private static final int[] help_menus = {
+                          R.string.help_close,
                           R.string.help_open_3d,
                           R.string.help_export_3d,
                           R.string.help_info_3d,
@@ -765,7 +770,9 @@ public class TopoGL extends Activity
     closeMenu();
     // TDToast.make( item.toString() );
     int p = 0;
-    if ( p++ == pos ) { // OPEN
+    if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
+    } else if ( p++ == pos ) { // OPEN
       // (new DialogOpenFile( this, this )).show();
       selectImportFile();
     } else if ( p++ == pos ) { // EXPORT
@@ -1461,6 +1468,7 @@ public class TopoGL extends Activity
     } else {
       setTitle( "C A V E _ 3 D ");
     }
+    // setTitleColor( TDColor.TITLE_NORMAL );
   }
 
   /** open a TopoDroid survey
@@ -3242,4 +3250,19 @@ public class TopoGL extends Activity
     startActivity( intent );
   }
 
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }

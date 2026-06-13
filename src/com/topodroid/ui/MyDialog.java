@@ -36,6 +36,10 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.TextView;
+
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 
 
 public class MyDialog extends Dialog
@@ -98,6 +102,8 @@ public class MyDialog extends Dialog
     // } else {
     //   // TDLog.v( "null button help");
     }
+
+    if ( getWindow() != null ) getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
   }
 
   /** initialize the layout - utility method for derived classes
@@ -224,6 +230,27 @@ public class MyDialog extends Dialog
     if ( e2.getText() == null ) return false;
     return s1.equals( TDUtil.toStationToName( e2.getText().toString() ) );
   }
-    
+
+  @Override
+  public void setTitle( int res )
+  {
+    TextView t = (TextView)findViewById( R.id.title );
+    if ( t == null ) {
+      super.setTitle( res );
+    } else {
+      t.setText( mContext.getResources().getString( res ) );
+    }
+  }
+
+  @Override
+  public void setTitle( CharSequence tit )
+  {
+    TextView t = (TextView)findViewById( R.id.title );
+    if ( t == null ) {
+      super.setTitle( tit );
+    } else {
+      t.setText( tit );
+    }
+  }
 
 }

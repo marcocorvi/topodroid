@@ -103,6 +103,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.PointF;
+import android.graphics.Color;
 
 import java.util.Locale;
 
@@ -175,7 +176,7 @@ public class MainWindow extends Activity
 			  // R.string.menu_backups, // CLEAR_BACKUPS
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
-                          R.string.menu_export, // EXPORT
+                          R.string.menu_bulkops, // EXPORT
                           R.string.menu_about,
                           R.string.menu_options,
                           R.string.menu_help,
@@ -198,7 +199,7 @@ public class MainWindow extends Activity
 			  // R.string.help_backups, // CLEAR_BACKUPS
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
-                          R.string.help_export_surveys, // EXPORT
+                          R.string.help_bulkops_surveys, // EXPORT
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
                           R.string.help_help,
@@ -498,6 +499,7 @@ public class MainWindow extends Activity
     setTitleColor( TDColor.TITLE_NORMAL );
     // TDLog.v( "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
+    
 
   // ---------------------------------------------------------------
   // FILE IMPORT
@@ -657,8 +659,6 @@ public class MainWindow extends Activity
   private Button     mMenuImage;
   private ListView   mMenu;
   
-  // FIXME TOOLBAR Toolbar mToolbar;
-  
   private boolean mWithPalette  = false;
   private boolean mWithPalettes = false;
   // private boolean mWithLogs     = false; // NO_LOGS
@@ -751,9 +751,7 @@ public class MainWindow extends Activity
       //   // (new TDUpdatesDialog( mActivity, mApp )).show();
 
       } else if ( TDLevel.overExpert && TDSetting.mBulkExport && p++ == pos ) {  // EXPORT
-        String[] types = TDConst.surveyExportTypes( false ); // with_geo=false
-        new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, false, false ).show(); // diving=false
-
+        new SurveysDialog( mActivity, this ).show();
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
@@ -780,7 +778,11 @@ public class MainWindow extends Activity
     super.onCreate( savedInstanceState );
     // TDLog.v("MAIN on Create");
 
+    // androidx.core.view.WindowCompat.setDecorFitsSystemWindows( getWindow(), false );
+    // getWindpw().setStatusBarColor( Color.TRANSPARENT );
+
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
+    // getWindow().addFlags( android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS );
 
     TDandroid.setScreenOrientation( this );
 
@@ -820,10 +822,6 @@ public class MainWindow extends Activity
     // setMenuAdapter( );
     // closeMenu();
 
-    // FIXME TOOLBAR mToolbar = (Toolbar) findViewById( R.id.toolbar );
-    // setActionBar( mToolbar );
-    // resetToolbar();
-
     // if ( ! TDandroid.canRun( this, this ) ) {
     //   // TDLog.v("PERM " + "cannot run");
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), "Required Permissions not granted", 
@@ -855,6 +853,27 @@ public class MainWindow extends Activity
     //                  | Intent.FLAG_GRANT_READ_URI_PERMISSION );
     //   startActivityForResult( intent, TDRequest.REQUEST_TREE_URI );
     // }
+
+    final View contentView = findViewById( R.id.td_layout );
+
+    getWindow().getDecorView().setOnApplyWindowInsetsListener(
+      new View.OnApplyWindowInsetsListener()
+      {
+        @Override 
+        public android.view.WindowInsets onApplyWindowInsets( View v, android.view.WindowInsets insets )
+        {
+          contentView.setPadding( contentView.getPaddingLeft(), 
+                                  0, // insets.getSystemWindowInsetTop(), 
+                                  contentView.getPaddingRight(),
+                                  0 // contentView.getPaddingBottom()
+                                );
+          return insets;
+          // toolbar.getLayoutParams().height = 
+          //   v.getContext().getTheme().obtainStyledAttributes( new int[] { android.R.attr.actionBarSize } )
+          //    .getDimensionPixelSize( 0, 0 ) + insets.getSystemWindowInsetTop();
+          // return insets.consumeSystemWindowInsets();
+        }
+      } );
   }
 
   static private boolean done_init_dialogs = false;
@@ -1056,28 +1075,6 @@ public class MainWindow extends Activity
     setButtonDevice();
     // mRelLayout.invalidate();
   }
-
-  // FIXME TOOLBAR void resetToolbar()
-  // {
-  //   int size = TDSetting.mSizeButtons;
-  //   MyButton.resetCache( size );
-
-  //   LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
-  //   // FIXME THMANAGER
-  //   mNrButton1 = 4;
-  //   if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
-  //   mButton1 = new Button[mNrButton1];
-
-  //   for (int k=0; k<mNrButton1; ++k ) {
-  //     mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
-  //     mToolbar.addView( mButton1[k], params );
-  //   }
-
-  //   mMenuImage = MyButton.getButton( mActivity, this, R.drawable.iz_menu );
-  //   TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, getResources(), R.drawable.iz_menu ) );
-  //   mToolbar.addView( mMenuImage, params );
-  // }
 
   /** set the icon of the "device" button
    */
@@ -1854,7 +1851,67 @@ public class MainWindow extends Activity
 
   // EXPORT -----------------------------------------------------------------
 
-  public void doExport( final String type, final String filename, final String prefix, final long first, boolean second )
+  /** export a bunch of surveys
+   * @param surveys  list of the surveys to export
+   */
+  void exportSurveys( final List<String> surveys )
+  {
+    String[] types = TDConst.surveyExportTypes( false ); // with_geo=false
+    new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, surveys, false, false ).show(); // diving=false
+  }
+
+  /** delete a bunch of surveys
+   * @param surveys  list of the surveys to delete
+   */
+  void deleteSurveys( final List<String> surveys )
+  {
+    askDelete( surveys );
+  }
+
+  /** ask confirm for bulk delete
+   * @param surveys    list of surveys to delete
+   */
+  private void askDelete( final List<String> surveys )
+  {
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.survey_delete,
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          doDelete( surveys );
+        }
+    } );
+  }
+
+  /** do delete a list of surveys
+   * @param surveys    list of surveys to delete
+   */
+  public void doDelete( List<String> surveys )
+  {
+    // Thread delete_thread = new Thread() {
+    //   public void run() {
+        for ( String survey : surveys ) {
+          long sid = TopoDroidApp.mData.getSurveyId( survey );
+          if ( sid > 0 ) {
+            TDPath.deleteSurveyDir( survey );
+            TopoDroidApp.mData.doDeleteSurvey( sid );
+          }
+        }
+        // mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, true ); // tell app to clear survey name and id - not needed
+        updateList( TopoDroidApp.mData.selectAllSurveys() );
+    //   }
+    // };
+    // delete_thread.start();
+    
+  }
+
+  /** batch export
+   * @param type     export type (format)
+   * @param filename usedonly to get the filename extension
+   * @param prefix   export prefix
+   * @param first    index of first shot to export (-1: export all shos)
+   * @param second   unused
+   */
+  public void doExport( final String type, final String filename, final String prefix, final long first, boolean second, final List<String> survey_list )
   { 
     TDLog.v("MAIN export Type " + type + " filename " + filename + " prefix " + prefix );
     TDSetting.mExportPrefix = prefix; // save export-prefix
@@ -1865,7 +1922,7 @@ public class MainWindow extends Activity
       Thread export_thread = new Thread() {
         public void run() {
           TDLog.v("MAIN Export Thread run");
-          List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
+          // List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
           ExportInfo export_info = new ExportInfo( index, null, null, first );
           int cnt = 0; 
           for ( String survey : survey_list ) {
@@ -1874,7 +1931,7 @@ public class MainWindow extends Activity
             if ( prefix != null ) export_info.prefix = survey;
             export_info.name = file_name;
             mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
-            if ( doExport( survey, index, file_name, export_info ) ) ++cnt;
+            if ( doExportOne( survey, index, file_name, export_info ) ) ++cnt;
           }
           TDLog.v("MAIN Export Thread done");
           final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );
@@ -1893,7 +1950,7 @@ public class MainWindow extends Activity
    * @param prefix    station name prefix (Compass, VTopo, Winkarst)
    * @note called from the public doExport()
    */
-  private boolean doExport( String survey, int index, String filename, ExportInfo export_info )
+  private boolean doExportOne( String survey, int index, String filename, ExportInfo export_info )
   {
     // TDLog.v( "MAIN do export " + survey + " filename " + filename );
     // if ( index >= 0 ) {
@@ -1910,6 +1967,21 @@ public class MainWindow extends Activity
     //   TDLog.e("Main Window export - negative index " + index );
     // }
     return false;
+  }
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.title )).setTextColor( color );
   }
 
 }

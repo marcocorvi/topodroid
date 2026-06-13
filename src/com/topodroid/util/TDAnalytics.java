@@ -303,7 +303,7 @@ public class TDAnalytics
             if ( pos > 0 ) {
               pos += 8;
               String ct = response.substring( pos, pos+2 );
-              TDLog.v("Code " + ct );
+              setCT( ct );
               TopoDroidApp.storeCT( ctx, ct );
             }
           // } else {
@@ -331,7 +331,7 @@ public class TDAnalytics
   public static void setCT( Context ctx, String ct )
   {
     if ( ct == null ) return;
-    mCT = ct;
+    setCT( ct );
     TDLevel.setMaior( ctx, CT.maior( ct ) );
   }
 
@@ -344,6 +344,12 @@ public class TDAnalytics
   //   if ( hs == null ) return;
   //   // TODO
   // }
+
+  private static void setCT( String ct )
+  {
+    // TDLog.v("Code <" + ct + ">" );
+    mCT = ct;
+  }
 
 
 } 

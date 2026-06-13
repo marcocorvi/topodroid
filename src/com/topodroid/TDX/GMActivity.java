@@ -66,6 +66,7 @@ import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.DialogInterface;
 
+import android.widget.TextView;
 import android.widget.ArrayAdapter;
 // import android.widget.TextView;
 import android.widget.ListView;
@@ -1625,4 +1626,18 @@ public class GMActivity extends Activity
   // {
   // }
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.gm_title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.gm_title )).setTextColor( color );
+  }
 }

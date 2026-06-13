@@ -83,7 +83,7 @@ class TdmEquateNewDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
-    mBTback = (Button) findViewById( R.id.button_back );
+    mBTback = (Button) findViewById( R.id.button_cancel );
     mBTback.setOnClickListener( this );
     mBTall = (Button) findViewById( R.id.button_all ); // HB EQ all
     mBTall.setOnClickListener( this ); // HB EQ all

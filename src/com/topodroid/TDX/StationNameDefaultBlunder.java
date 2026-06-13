@@ -48,7 +48,8 @@ class StationNameDefaultBlunder extends StationName
   // ------------------------------------------------------------------------------------------------
 
   /** reset shot references
-   * @param reset_leg whether to reset the leg reference and leg number
+   * @param reset_leg  whether to reset the leg reference and leg number
+   * @param reset_prev whether to reset the prev reference to null
    */
   private void resetRefs( boolean reset_leg, boolean reset_prev )
   {
@@ -152,6 +153,12 @@ class StationNameDefaultBlunder extends StationName
     blunder = null;
   }
 
+  /** commit the leg
+   * @param blk  current data shot (only for log)
+   * @param msg  log message
+   * @param reset_leg  whether to reset the leg reference and leg number
+   * @param reset_prev whether to set the "prev" data to null
+   */
   private void flushLeg( DBlock blk, String msg, boolean reset_leg, boolean reset_prev )
   {
     if ( nrLegShots > 0 ) {
@@ -177,6 +184,11 @@ class StationNameDefaultBlunder extends StationName
     }
   }
 
+  /** increase the number of leg shots
+   * @param blk  current data to add to the leg
+   * @param sts  list of station names, used to increase the station name
+   * @param msg  log message
+   */
   private void increaseNrLegShots( DBlock blk, Set< String > sts, String msg ) 
   {
     if ( TDLog.isStreamFile() ) TDLog.e( msg + " increase leg shots at " + id(blk) + " leg " + id(leg) + " prev " + id(prev) );
@@ -260,6 +272,7 @@ class StationNameDefaultBlunder extends StationName
     shot_after_splay = StationPolicy.mShotAfterSplays;
     current_station  = mCurrentStationName; // steal current station name
     mCurrentStationName = null;
+    boolean backsight_splay  = ( StationPolicy.mSurveyStations == 1 ) && StationPolicy.mShotAfterSplays && TDSetting.mBacksightSplay;
 
     mRet = false;
     resetRefs( true, true );
@@ -308,7 +321,7 @@ class StationNameDefaultBlunder extends StationName
           }
           // if ( leg == null ) setLeg( "from pref", prev, 0 );
           increaseNrLegShots( blk, sts, "[close to prev]" );
-        } else if ( prev_prev != null && prev_prev.isRelativeDistance( blk ) ) {
+        } else if ( prev_prev != null && prev.isRelativeAngle( prev_prev ) && prev_prev.isRelativeDistance( blk ) ) {
           setLeg( "from prev_prev", prev_prev, 0 ); // nrLegShots = 0; it will be set in increaseNrLegShots
           blunder = prev;
           increaseNrLegShots(  blk, sts, "[close to prev_prev]" );
@@ -316,10 +329,16 @@ class StationNameDefaultBlunder extends StationName
         } else {
           if ( blunder != null ) { // two splays in a row
             blunder = null;        // clear blunder before flush
-            flushLeg(blk, "[new splay]", true, true );
+            flushLeg( blk, "[new splay]", true, true );
           } else if ( leg != null ) { // first splay after a leg
-            blunder = blk; // tentative blunder
-            flushLeg(blk, "[new splay]", false, true );
+            if ( backsight_splay ) {
+              blk.setBackSplay();
+              mData.updateShotFlag( blk.mId, mSid, blk.getFlagFully() );
+              blk.doBacksightSplayCheck( leg, false );
+            } else {
+              blunder = blk; // tentative blunder
+            }
+            flushLeg( blk, "[new splay]", false, true );
           }
           markSplay( blk );
           setPrev( blk );

@@ -116,9 +116,9 @@ class AudioDialog extends MyDialog
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
 
     // mBtnDelete = (Button) findViewById( R.id.audio_delete );
-    // mBtnClose = (Button) findViewById( R.id.audio_close );
+    // mBtnClose = (Button) findViewById( R.id.button_cancel );
     // mBtnClose.setOnClickListener( this );
-    ( (Button) findViewById( R.id.audio_close ) ).setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
     if ( mBlk != null ) {
       ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( resString( R.string.audio_id_shot ), mBlk.mFrom, mBlk.mTo ) );
     } else { 
@@ -168,7 +168,7 @@ class AudioDialog extends MyDialog
    */
   public void onClick(View v) 
   {
-    if ( v.getId() == R.id.audio_close ) {
+    if ( v.getId() == R.id.button_cancel ) {
       stopRecPlay( false );
       dismiss();
     }

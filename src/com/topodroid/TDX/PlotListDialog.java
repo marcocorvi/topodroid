@@ -40,6 +40,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
+/** PlotListDialog is called by
+ *  - ShotWindow to open a plot / create a new plot
+ *  - DrawingWindow to switch plot
+ */
 class PlotListDialog extends MyDialog
                      implements OnItemClickListener
                      // , OnItemLongClickListener
@@ -75,6 +79,7 @@ class PlotListDialog extends MyDialog
     mParent  = parent;
     mParent2 = parent2;
     mDoNew = ( mParent2 == null );
+    TDLog.v("plot list new: new " + mDoNew );
   }
 
   @Override
@@ -176,9 +181,9 @@ class PlotListDialog extends MyDialog
   // @Override
   public void onClick(View v) 
   {
-    // TDLog.Log(  TDLog.LOG_INPUT, "PlotListDialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnPlotNew ) {
+      TDLog.v( "plot list dialog onClick() NEW ");
       if ( ! TDInstance.isSurveyMutable ) { // IMMUTABLE
         TDToast.makeWarn("Immutable survey");
         return;
@@ -189,10 +194,12 @@ class PlotListDialog extends MyDialog
         new PlotNewDialog( mContext, mApp, mParent, idx ).show();
       }
     } else if ( b == mBtnClose ) {
+      TDLog.v( "plot list dialog onClick() CLOSE ");
       if ( mParent2 != null ) {
         mParent2.doClose();
       }
     } else if ( b == mBtnBack ) {
+      TDLog.v( "plot list dialog onClick() BACK ");
       /* nothing */
     /* FIXME_SKETCH_3D *
     } else if ( TopoDroidApp.mSketches && b == mBtnSketch3dNew ) {
@@ -204,6 +211,8 @@ class PlotListDialog extends MyDialog
 
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
+    } else {
+      TDLog.v( "plot list dialog onClick() UNKNOWN ");
     }
     dismiss();
   }

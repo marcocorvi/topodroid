@@ -124,7 +124,7 @@ class GeoCodeAdapter extends ArrayAdapter< GeoCode >
 
     ViewHolder holder; // = null;
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.geocode_row, parent, false );
+      convertView = mLayoutInflater.inflate( R.layout.select_text_row, parent, false );
       holder = new ViewHolder( 
         (CheckBox)convertView.findViewById( R.id.selected ),
         (TextView)convertView.findViewById( R.id.desc ) );

@@ -16,6 +16,7 @@ import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDTag;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDAnalytics;
+import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
@@ -34,6 +35,7 @@ import android.content.res.Configuration;
 import android.widget.RadioButton;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.view.View;
 import android.view.KeyEvent;
 
@@ -79,7 +81,6 @@ public class SensorActivity extends Activity
     TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.sensor_activity);
-    setTitle(R.string.sensor_title);
     // mApp = (TopoDroidApp) getApplication();
     mSensorManager = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
 
@@ -154,6 +155,7 @@ public class SensorActivity extends Activity
     ( ( Button ) findViewById( R.id.sensor_ok ) ).setOnClickListener( this );
     ( ( Button ) findViewById( R.id.sensor_cancel ) ).setOnClickListener( this );
 
+    setTitle( getResources().getString( R.string.sensor_title ) );
     // setTitleColor( TDColor.TITLE_NORMAL );
 
     // mETtype.setText( null );
@@ -363,6 +365,21 @@ public class SensorActivity extends Activity
     return false;
   }
 
+
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.title )).setText( t );
+  }
+
+  // @Override
+  // public void setTitleColor( int color )
+  // {
+  //   ((TextView)findViewById( R.id.title )).setTextColor( color );
+  // }
 }
 
 

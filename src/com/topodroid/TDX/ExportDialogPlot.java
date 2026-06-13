@@ -130,9 +130,9 @@ public class ExportDialogPlot extends MyDialog
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.button_back );
+    // mBtnBack = (Button) findViewById(R.id.button_cancel );
     // mBtnBack.setOnClickListener( this );
-    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
@@ -200,12 +200,12 @@ public class ExportDialogPlot extends MyDialog
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
       if ( mParentType == PARENT_DRAWING ) { // plot
-        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, -1L, false );  // null prefix, -1=first
+        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, -1L, false, null );  // null prefix, -1=first
         if ( mBothViews && mPlotName2 != null ) {
-          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, -1L, true );  // null prefix, -1=first
+          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, -1L, true, null );  // null prefix, -1=first
         }
       } else { // overview
-        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, -1L, false ); // null prefix, -1=first
+        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, -1L, false, null ); // null prefix, -1=first
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */

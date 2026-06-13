@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
+  android:layout_height="wrap_content"
   android:orientation="vertical"
+  android:layout_below="@id/title"
   >
    					  
   <!-- TextView android:id="@+id/shot_label"
@@ -76,26 +84,23 @@
   </LinearLayout -->
 
   <LinearLayout android:id="@+id/help"
-    android:layout_marginTop="@dimen/marginvbig"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" 
-    android:gravity="start" 
+      style="@style/help_layout"
     >
     <Button android:id="@+id/button_help"
-        style="@style/button_empty"
-        android:text="@string/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/btn_cancel"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
     />
     <LinearLayout tools:ignore="ButtonOrder"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:gravity="end"
       >
-      <Button android:id="@+id/btn_cancel"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        android:layout_marginEnd="@dimen/marginh"
-      />
       <Button android:id="@+id/btn_ok"
         style="@style/button_default"
         android:text="@string/button_save"
@@ -110,3 +115,4 @@
   />
 
 </LinearLayout>
+</RelativeLayout>

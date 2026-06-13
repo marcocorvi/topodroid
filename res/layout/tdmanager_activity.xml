@@ -1,73 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   android:fitsSystemWindows="true"
   >
-
-  <RelativeLayout
+  <TextView android:id="@+id/title"
+    style="@style/text_title_base"
+  />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/title"
     >
-   
-    <LinearLayout android:id="@+id/right"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentEnd="true"
-      android:background="#111"
-      >
-      <Button android:id="@+id/handle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iz_empty"
-      />
-    </LinearLayout>
-
-    <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
+  
+    <RelativeLayout
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_toStartOf="@id/right"
-    />
-
-  </RelativeLayout>
-
-  <!-- LinearLayout android:id="@+id/list_layout"
-    style="@style/list_horiz"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-  / -->
-
-  <FrameLayout 
-    style="@style/base_padding"
-    android:layout_width="match_parent" 
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <ListView android:id="@+id/th_list"
-      style="@style/list_data"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:paddingTop="@dimen/marginvbig"
-      android:stackFromBottom="false"
-    />  
-    <!--  android:transcriptMode="alwaysScroll" -->
-
-    <ListView android:id="@+id/menu"
-      android:layout_width="150dp"
+      android:orientation="horizontal"
+      >
+     
+      <LinearLayout android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="#111"
+        >
+        <Button android:id="@+id/handle"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/iz_empty"
+        />
+      </LinearLayout>
+  
+      <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/right"
+      />
+  
+    </RelativeLayout>
+  
+    <!-- LinearLayout android:id="@+id/list_layout"
+      style="@style/list_horiz"
+      android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:choiceMode="singleChoice"
-      android:divider="@android:color/transparent"
-      android:dividerHeight="10dp"
-      android:background="#111"
+      android:orientation="horizontal"
+    / -->
+  
+    <FrameLayout 
+      style="@style/base_padding"
+      android:layout_width="match_parent" 
+      android:layout_height="match_parent"
       android:orientation="vertical"
-      android:layout_gravity="end"
-      android:gravity="end"
-    />
-
-  </FrameLayout>
-</LinearLayout>
+      >
+  
+      <ListView android:id="@+id/th_list"
+        style="@style/list_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/marginvbig"
+        android:stackFromBottom="false"
+      />  
+      <!--  android:transcriptMode="alwaysScroll" -->
+  
+      <ListView android:id="@+id/menu"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:background="#111"
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:gravity="end"
+      />
+  
+    </FrameLayout>
+  </LinearLayout>
+</RelativeLayout>
 

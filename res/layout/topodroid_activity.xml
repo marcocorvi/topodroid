@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title_base"
+  />
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:id="@+id/td_layout"
-     android:layout_width="match_parent"
+     android:layout_width="fill_parent"
      android:layout_height="match_parent"
      android:orientation="vertical"
-     android:fitsSystemWindows="true"
+     android:layout_below="@id/title"
      >
 
      <!-- Toolbar android:id="@+id/toolbar"
@@ -46,14 +56,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-  
-    <ListView android:id="@+id/td_list"
-      style="@style/list_data"
+    <!-- HorizontalScrollView 
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingTop="@dimen/marginvbig"
-    />  
-
+      -->
+      <ListView android:id="@+id/td_list"
+        style="@style/list_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#ff666666"
+      />  
+      <!--
+        android:paddingTop="@dimen/marginvbig"
+      -->
+    <!-- /HorizontalScrollView -->
     <ListView android:id="@+id/menu"
       style="@style/menu_default"
     />
@@ -69,4 +85,5 @@
      <include android:id="@+id/toolbar" layout="@layout/toolbar" />
    </LinearLayout -->
 
-</LinearLayout>
+  </LinearLayout>
+</RelativeLayout>

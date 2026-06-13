@@ -86,7 +86,7 @@ class FixedGpsDialog extends MyDialog
   private Button   mBtnView;
 
   private Button   mBtnStatus;
-  // private Button   mBtnCancel;
+  private Button   mBtnCancel;
 
   private double mLat = 0;  // decimal degrees
   private double mLng = 0;  // decimal degrees
@@ -168,10 +168,12 @@ class FixedGpsDialog extends MyDialog
     mBtnStatus = mBtnLoc;
     mBtnAdd = (Button) findViewById(R.id.button_add );
     mBtnView = (Button) findViewById( R.id.button_view );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
 
     mBtnLoc.setOnClickListener( this );
     mBtnAdd.setOnClickListener( this );
     mBtnView.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
 
     mLocating = false;
     mWMM = new WorldMagneticModel( mContext );
@@ -296,6 +298,8 @@ class FixedGpsDialog extends MyDialog
         errOk  = false;
         retStart = -1L;
       }
+    } else if ( b == mBtnCancel ) {
+      dismiss();
     }
     if ( do_toast ) {
       TDToast.makeBad( R.string.no_location_data );

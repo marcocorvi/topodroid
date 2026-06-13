@@ -607,6 +607,7 @@ public class DeviceActivity extends Activity
     if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
       // TDLog.v("Bonded devices " + bt_device_set.size() );
       setTitle( R.string.title_device );
+      setTitleColor( TDColor.TITLE_NORMAL );
       for ( BluetoothDevice bt_device : bt_device_set ) {
         String addr = bt_device.getAddress();
         // TDLog.v("bonded device " + addr );
@@ -1682,6 +1683,20 @@ public class DeviceActivity extends Activity
   }
 
 
+  // ----------------------------------------------------------------
+  // TITLE BAR
+
+  @Override
+  public void setTitle( CharSequence t )
+  {
+    ((TextView)findViewById( R.id.device_title )).setText( t );
+  }
+
+  @Override
+  public void setTitleColor( int color )
+  {
+    ((TextView)findViewById( R.id.device_title )).setTextColor( color );
+  }
 
 }
 

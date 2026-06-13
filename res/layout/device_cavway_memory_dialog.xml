@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  style="@style/base_padding"
-  android:layout_width="match_parent" 
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  android:isScrollContainer="true"
-  >
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:isScrollContainer="true"
+    android:layout_below="@id/title"
+    >
 
   <LinearLayout 
     android:layout_width="wrap_content" 
@@ -52,5 +60,6 @@
     android:layout_height="match_parent"
   />  
 
-</LinearLayout>
-<!-- /ScrollView -->
+  </LinearLayout>
+  <!-- /ScrollView -->
+</RelativeLayout>

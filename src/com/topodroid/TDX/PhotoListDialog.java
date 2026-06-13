@@ -166,7 +166,7 @@ public class PhotoListDialog extends MyDialog
 
     updateDisplay( );
 
-    ( (Button)findViewById( R.id.button_back )).setOnClickListener( new View.OnClickListener() {
+    ( (Button)findViewById( R.id.button_cancel )).setOnClickListener( new View.OnClickListener() {
       @Override public void onClick( View v ) 
       {
         dismiss();

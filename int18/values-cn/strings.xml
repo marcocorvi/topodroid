@@ -1230,7 +1230,7 @@
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">保存修改的校准信息</string>
     <string name="help_export_survey">测量输出</string>
-    <!-- TODO string name="help_export_surveys">Export all surveys</string -->
+    <!-- UNUSED string name="help_export_surveys">Export all surveys</string -->
     <string name="help_loc">GPS 坐标点</string>
     <string name="help_delete_survey">删除测量</string>
     <string name="help_delete_calib">删除校准</string>
@@ -1335,6 +1335,7 @@
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
     <string name="title_recalibrate">校准</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1385,6 +1386,8 @@
     <string name="title_photo_comment">照片注释</string>
     <string name="title_photo_list">照片</string>
     <string name="title_photo_view">照片</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">重新导入草图</string -->
@@ -1449,6 +1452,8 @@
 
     <string name="title_shift">转换</string>
     <string name="title_shot_delete">删除测线 ?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">传感器</string>
     <string name="title_sensor_list">传感器设置</string>
     <string name="title_split">草图分割</string>

@@ -1224,7 +1224,7 @@
     <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
     <string name="help_save_calib">Salva i cambiamenti alla calibrazione</string>
     <string name="help_export_survey">Esporta rilievo</string>
-    <string name="help_export_surveys">Esporta tutti i rilievi</string>
+    <!-- UNUSED string name="help_export_surveys">Esporta tutti i rilievi</string -->
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
     <string name="help_delete_calib">Elimina calibrazione</string>
@@ -1329,6 +1329,7 @@
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
     <string name="title_recalibrate">Calibrazioni</string>
+    <!-- TODO string name="title_calibration">Calibration</string -->
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calibr.</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1379,6 +1380,8 @@
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_photo_list">Foto</string>
     <string name="title_photo_view">Foto</string>
+    <!-- TODO string name="title_plan">Plan view</string -->
+    <!-- TODO string name="title_profile">Profile view</string -->
     <string name="title_plot_save">Salva disegno come </string>
     <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
     <!-- UNUSED string name="title_plot_reload">Ricarica disegno</string -->
@@ -1443,6 +1446,8 @@
 
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
+    <!-- TODO string name="title_shot_edit">Shot edit</string -->
+    <!-- TODO string name="title_multishot">Shots operations</string -->
     <string name="title_sensor_edit">Sensore</string>
     <string name="title_sensor_list">Dati di sensori</string>
     <string name="title_split">Divisione disegno</string>

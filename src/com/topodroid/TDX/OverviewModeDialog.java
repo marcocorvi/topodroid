@@ -64,7 +64,7 @@ class OverviewModeDialog extends MyDialog
       mCBoutline = (CheckBox) findViewById(R.id.cb_mode_outline);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
-      ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
+      ((Button) findViewById(R.id.button_cancel)).setOnClickListener( this );
 
       int mode = mSurface.getDisplayMode();
       mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
@@ -89,9 +89,7 @@ class OverviewModeDialog extends MyDialog
         if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
         // TDLog.e( "Mode " + mode );
         mSurface.setDisplayMode( mode );
-      // } else if ( vid == R.id.button_back ) {
-      //   /* nothing */
-      // } else if ( vid == R.id.button_mode_cancel ) {
+      // } else if ( vid == R.id.button_cancel ) {
       //   /* nothing */
       }
       dismiss();
