@@ -313,6 +313,7 @@ public class PlotReloadWindow extends ItemDrawer
     mLandscape    = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
     String filename = extras.getString( TDTag.TOPODROID_PLOT_FILENAME ); // survey-1p without ".tdr"
     populateBackups( filename );
+    
     // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : (new DrawingUtilPortrait());
     // mDrawingUtil = new DrawingUtilPortrait();
 
@@ -370,6 +371,10 @@ public class PlotReloadWindow extends ItemDrawer
     // mZoom     = info.zoom;
     mReloadSurface.setDrawing( true );
     switchZoomCtrl( TDSetting.mZoomCtrl );
+    if ( mBackups.size() == 0 ) {
+      TDToast.make( R.string.plot_no_backups );
+      onBackPressed();
+    }
   }
 
   private void doPause()
@@ -390,14 +395,15 @@ public class PlotReloadWindow extends ItemDrawer
 
   // boolean mAllSymbols = true;
 
-  private void loadFile( )
+  private boolean loadFile( )
   {
-    if ( mPos < 0 || mPos >= mBackups.size() ) return;
+    if ( mPos < 0 || mPos >= mBackups.size() ) return false;
     PlotBackup plot = mBackups.get( mPos );
     mReloadSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
     setTitle( plot.desc );
     // TDLog.v("Reload file pos " + mPos + " " + plot.tdr );
     mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename ); // save plot name in paths
+    return true;
   } 
 
   private float mSave0X, mSave0Y;

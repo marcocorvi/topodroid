@@ -672,6 +672,10 @@ public class DBlock
    */
   void setShotType( int type ) { mShotType = type; }
 
+  /** set the block comment
+   */
+  void setComment( String str ) { mComment = str; }
+
   /** @return the type of the shot: -1 DistoX-backsight, 0 DistoX, 1 manual
    */
   int  getShotType( ) { return mShotType; }

@@ -659,6 +659,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Origin station</string>
+    <string name="plot_no_backups">No sketch backup</string>
     <!-- UNUSED string name="plot_view">Viewed station</string -->
     <string name="read_fail_with_code">Read failure: error code </string>
     <string name="read_failed">Failed device-read</string>
@@ -981,6 +982,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_save"      >Save</string>
     <string name="button_select"    >Select</string>
     <string name="button_toggle"    >Toggle</string>
+    <string name="button_import"    >Import</string>
     <string name="button_submit"    >Submit</string>
     <string name="button_leg_station">Leg stations</string>
     <string name="button_all_station">All stations</string>
@@ -1519,6 +1521,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
     <string name="title_import_th2" copyable="all">Therion th2 file</string>
+    <string name="title_import_surveys">Surveys folder</string>
     <string name="title_infos">Surveys geo-points</string>
     <string name="title_graph_paper">Graph paper 1:100 scale</string>
     <string name="graph_paper_scale">Adjust the line to be 5 cm long</string>
@@ -2278,6 +2281,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_drop">Drop surveys ?</string>
     <string name="title_tdconfig">Enter project name</string>
     <string name="title_surveys">Surveys</string>
+    <string name="title_symbols">Active tools</string>
 
     <string name="exported">Exported file %1$s</string>
     <string name="export_failed">Failed export</string>

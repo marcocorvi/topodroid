@@ -107,7 +107,7 @@ class ShotPhotoDialog extends MyDialog
       }
       mButtonCancel = (Button) findViewById(R.id.button_cancel );
       mButtonCancel.setOnClickListener( this );
-      ( (Button) findViewById(R.id.photo_comment_cancel ) ).setOnClickListener( this );
+      ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
     }
   }
 

@@ -65,7 +65,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.List;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -76,6 +76,7 @@ import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -86,6 +87,9 @@ import android.content.res.Configuration;
 import android.content.pm.PackageManager;
 
 // import android.provider.Settings;
+import android.provider.DocumentsContract;
+
+import android.database.Cursor;
 
 import android.net.Uri;
 
@@ -104,6 +108,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.PointF;
 import android.graphics.Color;
+
 
 import java.util.Locale;
 
@@ -1498,12 +1503,55 @@ public class MainWindow extends Activity
         break;
       case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
         if ( result == Activity.RESULT_OK ) {
-          importFile( intent );
+          if ( mImportData.mType == -1 ) {
+            importFolder( intent );
+          } else { 
+            importFile( intent );
+          }
         } else {
           TDLog.e("IMPORT canceled");
         }
         break;
     }
+  }
+
+  private void importFolder( Intent intent )
+  {
+    Uri uri = intent.getData();   // import uri - may NullPointerException
+    // final take_flag = intent.getFlags() & ( Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION );
+    final int take_flag = intent.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION ;
+    ContentResolver cr = this.getContentResolver();
+    cr.takePersistableUriPermission( uri, take_flag );
+    String dirname = uri.getLastPathSegment();
+    TDLog.v("import folder <" + dirname + ">" );
+    String dir_id = DocumentsContract.getTreeDocumentId( uri );
+    Uri child = DocumentsContract.buildChildDocumentsUriUsingTree( uri, dir_id );
+    String[] projection = new String[] {
+      DocumentsContract.Document.COLUMN_DISPLAY_NAME, 
+      DocumentsContract.Document.COLUMN_MIME_TYPE,
+      DocumentsContract.Document.COLUMN_DOCUMENT_ID
+    };
+    int cnt = 0;
+    try ( Cursor cursor = cr.query( child, projection, null, null, null) ) {
+      if ( cursor != null ) {
+        while ( cursor.moveToNext() ) {
+          String name = cursor.getString( 0 );
+          String mime = cursor.getString( 1 );
+          String id   = cursor.getString( 2 );
+          boolean is_zip = "application/zip".equalsIgnoreCase( mime ) || "application/x-zip-compressed".equalsIgnoreCase( mime ); 
+          boolean is_ext = name != null && name.toLowerCase().endsWith( ".zip" );
+          if ( is_zip && is_ext ) {
+            Uri file = DocumentsContract.buildDocumentUriUsingTree( uri, id );
+            TDLog.v("ZIP <" + id + ">" );
+            if ( importOneZip( file, false ) ) ++cnt;
+          }
+        }
+      }
+    } catch ( Exception e ) { 
+      // TODO
+    }
+    String result = getResources().getQuantityString( R.plurals.surveys_import, cnt, cnt );
+    TDToast.make( result );
   }
 
   /** IMPORT: import data from a file
@@ -1548,51 +1596,8 @@ public class MainWindow extends Activity
       String name = TDString.spacesToUnderscore( (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 ) );
       TDLog.v( "MAIN import URI: filename " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
       if ( mimetype.equals("application/zip") ) {
-        ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
-        FileInputStream fis = TDsafUri.docFileInputStream( pfd );
-        // if ( fis.markSupported() ) fis.mark();
-        int manifest_ok = Archiver.getOkManifest( mApp, fis );
-        try { fis.close(); } catch ( IOException e ) {
-          TDLog.e( e.getMessage() );
-        }
-        TDsafUri.closeFileDescriptor( pfd );
-        if ( manifest_ok >= 0 ) {
-          ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
-          FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
-          int ret = Archiver.unArchive( mApp, fis2 ); 
-          try { fis2.close(); } catch ( IOException e ) {
-            TDLog.e( e.getMessage() );
-          }
-          TDsafUri.closeFileDescriptor( pfd2 );
-          if ( ret > 0 ) { // Archiver.ERR_OK_WITH_COLOR_RESET
-            TDToast.makeWarn( R.string.archive_reset_color );
-          }
-        } else {
-          TDLog.e("ZIP import: failed manifest error " + manifest_ok );
-          int bad = -1;
-          switch ( -manifest_ok ) {
-            case  1: bad = R.string.bad_manifest_zip;      break;
-            case  2: bad = R.string.bad_manifest_td;       break;
-            case  3: bad = R.string.bad_manifest_db_old;   break;
-            case  4: bad = R.string.bad_manifest_db_new;   break;
-            // case  5: bad = R.string.bad_manifest_name;     break;
-            case  6: bad = R.string.bad_manifest_present;  break;
-            case  7: bad = R.string.bad_manifest_db;       break;
-            case  8: bad = R.string.bad_manifest_sql;      break;
-            case  9: bad = R.string.bad_manifest_number;   break;
-            case 10: bad = R.string.bad_manifest_manifest; break;
-            case 11: bad = R.string.bad_manifest_file;     break;
-            case 12: bad = R.string.bad_manifest_error;    break;
-            case 13: bad = R.string.bad_manifest_missing;  break;
-            case 14: bad = R.string.bad_manifest_other;    break;
-            default:
-              TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
-          }
-          if ( bad > 0 ) {
-            TDToast.makeBad( bad );
-          }
-          return null;
-        }
+        importOneZip( uri, true );
+        return null;
       } else {
         // TDLog.v( "MAIN import non-zip: ext " + ext + " mime " + mimetype );
         String type = TDPath.checkImportTypeStream( ext );
@@ -1613,6 +1618,66 @@ public class MainWindow extends Activity
       }
     }
     return filename;
+  }
+
+  /** import one zip file
+   * @param uri   zip uri
+   * @param toast wheter to toast
+   * @return true if success
+   */
+  private boolean importOneZip( Uri uri, boolean toast )
+  {
+    boolean ret = false;
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    FileInputStream fis = TDsafUri.docFileInputStream( pfd );
+    // if ( fis.markSupported() ) fis.mark();
+    int manifest_ok = Archiver.getOkManifest( mApp, fis );
+    try { fis.close(); } catch ( IOException e ) {
+      TDLog.e( e.getMessage() );
+      return false;
+    }
+    TDsafUri.closeFileDescriptor( pfd );
+    if ( manifest_ok >= 0 ) {
+      ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
+      FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
+      int err = Archiver.unArchive( mApp, fis2 ); 
+      try { 
+        fis2.close();
+        ret = true;
+      } catch ( IOException e ) {
+        TDLog.e( e.getMessage() );
+      }
+      TDsafUri.closeFileDescriptor( pfd2 );
+      if ( err > 0 && toast ) { // Archiver.ERR_OK_WITH_COLOR_RESET
+        TDToast.makeWarn( R.string.archive_reset_color );
+      }
+      return ret;
+    } else {
+      TDLog.e("ZIP import: failed manifest error " + manifest_ok );
+      int bad = -1;
+      switch ( -manifest_ok ) {
+        case  1: bad = R.string.bad_manifest_zip;      break;
+        case  2: bad = R.string.bad_manifest_td;       break;
+        case  3: bad = R.string.bad_manifest_db_old;   break;
+        case  4: bad = R.string.bad_manifest_db_new;   break;
+        // case  5: bad = R.string.bad_manifest_name;     break;
+        case  6: bad = R.string.bad_manifest_present;  break;
+        case  7: bad = R.string.bad_manifest_db;       break;
+        case  8: bad = R.string.bad_manifest_sql;      break;
+        case  9: bad = R.string.bad_manifest_number;   break;
+        case 10: bad = R.string.bad_manifest_manifest; break;
+        case 11: bad = R.string.bad_manifest_file;     break;
+        case 12: bad = R.string.bad_manifest_error;    break;
+        case 13: bad = R.string.bad_manifest_missing;  break;
+        case 14: bad = R.string.bad_manifest_other;    break;
+        default:
+          if ( toast ) TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
+      }
+      if ( bad > 0 && toast ) {
+        TDToast.makeBad( bad );
+      }
+      return false;
+    }
   }
 
   /** handle a HW key press
@@ -1860,12 +1925,24 @@ public class MainWindow extends Activity
     new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, surveys, false, false ).show(); // diving=false
   }
 
+  /** bulk import of surveys
+   */
+  void importSurveys()
+  {
+    Intent intent = TDandroid.getOpenDocumentIntent( -1 ); 
+    // mImportData = data;
+    mImportData.mType = -1;
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_surveys ) ), TDRequest.REQUEST_GET_IMPORT );
+  }
+
   /** delete a bunch of surveys
    * @param surveys  list of the surveys to delete
    */
   void deleteSurveys( final List<String> surveys )
   {
-    askDelete( surveys );
+    if ( surveys.size() > 0 ) {
+      askDelete( surveys );
+    }
   }
 
   /** ask confirm for bulk delete
@@ -1873,7 +1950,9 @@ public class MainWindow extends Activity
    */
   private void askDelete( final List<String> surveys )
   {
-    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.survey_delete,
+    int k = surveys.size();
+    String question = getResources().getQuantityString( R.plurals.surveys_delete, k, k );
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), question,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {

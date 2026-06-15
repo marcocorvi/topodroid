@@ -492,6 +492,17 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  /** remove a block from the items
+   * @param id  id of the block to remove
+   */
+  public void dropItem( long id )
+  {
+    for ( int k = getCount() - 1; k >= 0; --k ) {
+      DBlock blk = (DBlock)( getItem( k ) );
+      if ( id == blk.mId ) remove( blk );
+    }
+  }
+
   /** @return true if the block was already in the list
    */
   private boolean hasBlock( long id )

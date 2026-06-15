@@ -576,7 +576,7 @@ public class ShotWindow extends Activity
       if ( ! ( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE  ) ) {
         mList.post( new Runnable() {
           @Override public void run() {
-            // TDLog.v( TAG + "list runnable: notify data set changed " + mDataAdapter.getCount() );
+            TDLog.v( TAG + "list runnable: notify data set changed " + mDataAdapter.getCount() );
             // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
             mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
             mList.setSelection( mDataAdapter.getCount() - 1 );

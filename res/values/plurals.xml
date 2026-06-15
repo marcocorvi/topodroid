@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <plurals name="surveys_import">
+    <item quantity="zero">No survey imported</item>
+    <item quantity="one">Imported one survey</item>
+    <item quantity="other">Imported %1$d surveys</item>
+  </plurals>
+  <plurals name="surveys_delete">
+    <item quantity="one">Delete one survey ?</item>
+    <item quantity="other">Delete %1$d surveys ?</item>
+  </plurals>
   <plurals name="calib_saturated_values">
     <item quantity="one">WARNING. One saturated data</item>
     <item quantity="other" >WARNING. %1$d saturated data</item>

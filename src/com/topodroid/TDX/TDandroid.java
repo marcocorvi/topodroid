@@ -724,10 +724,16 @@ public class TDandroid
    */
   public static Intent getOpenDocumentIntent( int index )
   {
-    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
-    intent.setType(  TDConst.getMimeType( index ) );
-    intent.addCategory(Intent.CATEGORY_OPENABLE);
-    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
+    Intent intent = null;
+    if ( index >= 0 ) {
+      intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
+      intent.setType( TDConst.getMimeType( index ) );
+      intent.addCategory(Intent.CATEGORY_OPENABLE);
+      intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
+    } else {
+      intent = new Intent( Intent.ACTION_OPEN_DOCUMENT_TREE ); // API_19
+      // intent.setType( "vnd.android.document/directory" );
+    }
     return intent;
   }
 

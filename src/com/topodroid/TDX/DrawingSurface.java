@@ -83,6 +83,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   private DrawingStationSplay mStationSplay; // splays on/off at stations
 
 
+  /** @return true if the surface has a commang-manager
+   */
+  boolean hasCommandManager() { return commandManager != null; }
+
+
   // -----------------------------------------------------
   // SCRAPS 
 
@@ -874,15 +879,15 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /** set the zoom "fixed"
    * @param fixed_zoom  value if fixed-zoom (0 = non-fixed)
    */
-  void setFixedZoom( int fixed_zoom ) { commandManager.setFixedZoom( fixed_zoom ); }
+  void setFixedZoom( int fixed_zoom ) { if ( commandManager != null ) commandManager.setFixedZoom( fixed_zoom ); }
 
   /** @return the value of current fixed-zoom (0 = non-fixed)
    */
-  int getFixedZoom( ) { return commandManager.getFixedZoom(); }
+  int getFixedZoom( ) { return ( commandManager != null )? commandManager.getFixedZoom(): 0; }
 
   /** @return true if the zoom of the current manager is fixed
    */
-  boolean isFixedZoom() { return commandManager.isFixedZoom(); }
+  boolean isFixedZoom() { return commandManager != null && commandManager.isFixedZoom(); }
 
   // UNUSED : only for X-Sections autowalls
   // List< DrawingSplayPath > getSplays() { return commandManager.getSplays(); }
@@ -890,11 +895,13 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // called by DrawingActivity::addFixedLine
   void addFixedSplayPath( DrawingSplayPath path, boolean selectable )
   {
+    if ( commandManager == null || path == null ) return;
     commandManager.addTmpSplayPath( path, selectable );
   }
 
   void addFixedLegPath( DrawingPath path, boolean selectable )
   {
+    if ( commandManager == null || path == null ) return;
     commandManager.addTmpLegPath( path, selectable );
   }
 
@@ -920,46 +927,83 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    * @param path  new north line 
    * @note  used only by DrawingWindow for H-Section
    */
-  public void setNorthPath( DrawingPath path ) { commandManager.setNorthLine( path ); }
+  public void setNorthPath( DrawingPath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.setNorthLine( path );
+  }
 
   /** set the path for the first point of a measurement
    * @param path   path for the first point
    */
-  public void setFirstReference( DrawingMeasureStartPath path ) { commandManager.setFirstReference( path ); }
+  public void setFirstReference( DrawingMeasureStartPath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.setFirstReference( path );
+  }
 
   /** set the path for the second point of a measurement
    * @param path   path for the second point
    */
-  public void setSecondReference( DrawingMeasureEndPath path ) { commandManager.setSecondReference( path ); }
+  public void setSecondReference( DrawingMeasureEndPath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.setSecondReference( path );
+  }
 
   /** add the path for the second point of a measurement
    * @param x  X coord of the point added to the second reference
    * @param y  Y coord of the point added to the second reference
    */
-  public void addSecondReference( float x, float y ) { commandManager.addSecondReference( x, y ); }
+  public void addSecondReference( float x, float y )
+  {
+    if ( commandManager == null ) return;
+    commandManager.addSecondReference( x, y );
+  }
 
   // k : grid type 1, 10, 100
-  public void addGridPath( DrawingPath path, int k ) { commandManager.addTmpGrid( path, k ); }
+  public void addGridPath( DrawingPath path, int k )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.addTmpGrid( path, k );
+  }
 
   // DEBUG
   // public int getGrid1Size() { return commandManager.getGrid1().size(); }
   // public int getGrid10Size() { return commandManager.getGrid10().size(); }
 
   /** add a drawing item
-   * @param drawingPath  drawing item
+   * @param path  drawing item
    */
-  public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
+  public void addDrawingPath (DrawingPath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.addCommand( path );
+  }
 
-  // public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
-  public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
+  // public void addDrawingDotPath (DrawingPath path) { commandManager.addDotCommand(path); }
+  public void addDrawingDotPath ( DrawingPath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.addDotCommand( path );
+  }
 
-  public void addScrapOutlinePath( DrawingLinePath path ) { commandManager.addScrapOutlinePath( path ); }
+  public void addScrapOutlinePath( DrawingLinePath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.addScrapOutlinePath( path );
+  }
 
-  public void addXSectionOutlinePath( DrawingOutlinePath path ) { commandManager.addXSectionOutlinePath( path ); } 
+  public void addXSectionOutlinePath( DrawingOutlinePath path )
+  {
+    if ( commandManager == null || path == null ) return;
+    commandManager.addXSectionOutlinePath( path );
+  } 
 
   // return true if point has been deleted
   void deleteSectionPoint( String scrap_name )
   {
+    if ( commandManager == null || scrap_name == null ) return;
     commandManager.deleteSectionPoint( scrap_name, null ); // null eraseCommand
   }
   
@@ -977,8 +1021,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     commandManager.undo();
   }
 
-  boolean hasMoreRedo()
-  { return commandManager!= null && commandManager.hasMoreRedo(); }
+  boolean hasMoreRedo() { return commandManager!= null && commandManager.hasMoreRedo(); }
 
   // UNUSED
   // boolean hasMoreUndo()

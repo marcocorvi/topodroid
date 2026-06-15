@@ -672,6 +672,7 @@ class ShotEditDialog extends MyDialog
     if ( mCBlegPrev.isChecked() ) {
       // secondary leg shot have empty FROM, TO, ignore EXTEND, no STRETCH, survey FLAG, extra LEG_TYPE, no COMMENT
       mBlk.setTypeSecLeg();
+      mBlk.setComment("");
       mParent.updateShotNameAndFlags( "", "", ExtendType.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk, false );
       return true;
       // shot_from = "";

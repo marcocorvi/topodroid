@@ -757,7 +757,7 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------------
   // STATUS items
 
-  private String mName;      // current-plot name
+  private String mName = null; // current-plot name
   private String mName1;     // first name (PLAN)
   private String mName2;     // second name (EXTENDED/PROJECTED)
   private String mName3;     // third name (SECTION)
@@ -1464,8 +1464,10 @@ public class DrawingWindow extends ItemDrawer
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
-    sb.append(mName);
-    sb.append(": ");
+    if ( mName != null ) {
+      sb.append(mName);
+      sb.append(": ");
+    }
     
     if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
       sb.append( "{" );
