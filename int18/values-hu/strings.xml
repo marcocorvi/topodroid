@@ -641,7 +641,7 @@
     <!-- UNUSED string name="plot_null_start">Hiányzó alap pont</string -->
     <!-- UNUSED string name="plot_recover">Visszaolvassuk a vázlatot a mentésből?</string -->
     <string name="plot_start">Vázlat kezdőpontja</string>
-    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
+    <string name="plot_no_backups">Nincs mentett vázlat</string>
     <!-- UNUSED string name="plot_view">Megtekintett pont</string -->
         <string name="read_fail_with_code">Olvasási hiba: hiba kód </string>
     <string name="read_failed">DistoX kiolvasása nem sikerült</string>
@@ -947,8 +947,8 @@
     <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
     <string name="button_select"    >Kiválaszt    </string>
-    <!-- TODO string name="button_toggle"    >Toggle</string -->
-    <!-- TODO string name="button_import"    >Import</string -->
+    <string name="button_toggle"    >Vált</string>
+    <string name="button_import"    >Import</string>
     <string name="button_submit"    >Elküld</string>
     <string name="button_leg_station">Poligon pontok</string>
     <string name="button_all_station">Minden pont</string>
@@ -2211,7 +2211,7 @@
     <string name="title_drop">Eldobja a mérést?</string>
     <string name="title_tdconfig">Adja meg a projekt nevét</string>
     <string name="title_surveys">Mérések</string>
-    <!-- TODO string name="title_symbols">Active tools</string -->
+    <string name="title_symbols">Aktív eszközök</string>
 
     <string name="exported">Exportált fájl %1$s</string>
     <string name="export_failed">Hibás export</string>
