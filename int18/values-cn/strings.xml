@@ -513,6 +513,7 @@
     <string name="menu_device">设备</string>
     <string name="menu_device_add">添加设备</string>
     <string name="menu_export">输出</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">固件</string>
     <string name="menu_geopoint_app">地理点应用程序</string>
@@ -642,6 +643,7 @@
     <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">起始测点</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Viewed station</string -->
     <string name="read_fail_with_code">读取错误: 错误代码 </string>
     <string name="read_failed">DistoX读取错误</string>
@@ -945,6 +947,8 @@
     <string name="button_clear_memory">清除内存</string>
     <string name="button_save"      >保存      </string>
     <!-- TODO string name="button_select"    >Select    </string -->
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">主线站点</string>
     <string name="button_all_station">所有站点</string>
@@ -1231,6 +1235,7 @@
     <string name="help_save_calib">保存修改的校准信息</string>
     <string name="help_export_survey">测量输出</string>
     <!-- UNUSED string name="help_export_surveys">Export all surveys</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">GPS 坐标点</string>
     <string name="help_delete_survey">删除测量</string>
     <string name="help_delete_calib">删除校准</string>
@@ -2198,6 +2203,7 @@
     <string name="title_drop">停止测量 ?</string>
     <string name="title_tdconfig">输入项目名称</string>
     <string name="title_surveys">测量</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
 
     <string name="exported">保存文件 %1$s</string>
     <string name="export_failed">输出失败</string>

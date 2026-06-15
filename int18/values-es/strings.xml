@@ -511,6 +511,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_device">Dispositivo</string>
     <string name="menu_device_add">Añadir dispositivo</string>
     <string name="menu_export">Exportar</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <string name="menu_exit">SALIR</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_geopoint_app">APP GNSS</string>
@@ -636,6 +637,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
     <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
     <string name="plot_start">Punto de origen</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Punto de referencia</string -->
     <string name="read_fail_with_code">Fallo de lectura: código de error </string>
     <string name="read_failed">Error al leer DistoX</string>
@@ -951,6 +953,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_clear_memory">limpiar la memoria</string>
     <string name="button_save"      >Guardar   </string>
     <string name="button_select"    >Seleccionar </string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <string name="button_submit">Enviar</string>
     <string name="button_leg_station">Estación principal</string>
     <string name="button_all_station">Todas las estaciones</string>
@@ -1235,6 +1239,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_save_calib">Guardar cambios en la información de calibración</string>
     <string name="help_export_survey">Exportar topografía</string>
     <!-- UNUSED string name="help_export_surveys">Exportar todas las topografías</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">Posicionamiento GPS</string>
     <string name="help_delete_survey">Eliminar topografía</string>
     <string name="help_delete_calib">Eliminar calibración</string>
@@ -2213,6 +2218,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_drop">¿Eliminar relieves? </string>
     <string name="title_tdconfig">Escribir nombre de la Topografía</string>
     <string name="title_surveys">Relieves</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
 
     <string name="exported">Archivo guardado %1$s</string>
     <string name="export_failed">Exportación fallida</string>

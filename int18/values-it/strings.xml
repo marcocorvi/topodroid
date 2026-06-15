@@ -508,6 +508,7 @@
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_device_add">AGGIUNGI DISP.</string>
     <string name="menu_export">ESPORTA</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <string name="menu_exit">USCITA</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APP GNSS</string>
@@ -636,6 +637,7 @@
     <!-- UNUSED string name="plot_null_start">Caposaldo di riferimento mancante</string -->
     <!-- UNUSED string name="plot_recover">Ricaricare il disegno dal backup?</string -->
     <string name="plot_start">Caposaldo di origine</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Caposaldo puntato</string -->
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
@@ -939,6 +941,8 @@
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <string name="button_select"    >Seleziona</string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <string name="button_submit"    >Invia</string>
     <string name="button_leg_station">Battute</string>
     <string name="button_all_station">Tutti i capisaldi</string>
@@ -1225,6 +1229,7 @@
     <string name="help_save_calib">Salva i cambiamenti alla calibrazione</string>
     <string name="help_export_survey">Esporta rilievo</string>
     <!-- UNUSED string name="help_export_surveys">Esporta tutti i rilievi</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
     <string name="help_delete_calib">Elimina calibrazione</string>
@@ -2191,6 +2196,7 @@
     <string name="title_drop">Cancello rilievi ?</string>
     <string name="title_tdconfig">Inserisci nome progetto</string>
     <string name="title_surveys">Rilievi</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
 
     <string name="exported">Salvato file %1$s</string>
     <string name="export_failed">Esportazione fallita</string>

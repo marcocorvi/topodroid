@@ -526,6 +526,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_device">PÉRIPHÉRIQUE</string>
     <string name="menu_device_add">AJOUT PÉRIPHÉRIQUE</string>
     <string name="menu_export">EXPORTER</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <string name="menu_exit">SORTIE</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APPLI GEOPOINT</string>
@@ -656,6 +657,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="plot_null_start">Station de base manquante</string -->
     <!-- UNUSED string name="plot_recover">Recuperer relevé de la sauvegarde?</string -->
     <string name="plot_start">Station d\'origne</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Station consultée</string -->
     <string name="read_fail_with_code">Echec de lecture: code d\'erreur </string>
     <string name="read_failed">Échec lors de la lecture du DistoX</string>
@@ -977,6 +979,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_clear_memory">Effacer la mémoire</string>
     <string name="button_save"      >ENREGISTRER</string>
     <string name="button_select"    >Sélectionner    </string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <string name="button_submit"    >Envoyer</string>
     <string name="button_leg_station">Stations du cheminement</string>
     <string name="button_all_station">Toutes stations</string>
@@ -1264,6 +1268,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_save_calib">Enregistre les modifications d\'infos d\'étalonnage</string>
     <string name="help_export_survey">Exporte le relevé</string>
     <!-- UNUSED string name="help_export_surveys">Exporte tous les relevés</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">Géolocalisation GPS </string>
     <string name="help_delete_survey">Supprime le relevé</string>
     <string name="help_delete_calib">Supprime l\'étalonnage</string>
@@ -2265,6 +2270,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="title_drop">Abandonner les topographies ?</string>
     <string name="title_tdconfig">Entrer le nom du projet</string>
     <string name="title_surveys">Topographies</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
 
     <string name="exported">Fichier enregistré %1$s</string>
     <string name="export_failed">Échec de l\'exportation</string>

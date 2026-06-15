@@ -477,6 +477,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="menu_device_add">INCLUIR DISPOSITIVO</string>
   <!-- KEEP -->
   <string name="menu_export">EXPORTAR</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
   <string name="menu_exit">SAIR</string>
   <string name="menu_firmware">FIRMWARE</string>
   <string name="menu_geopoint_app">APP GNSS</string>
@@ -597,6 +598,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="plot_null_start">Croqui sem base inicial</string -->
   <!-- UNUSED string name="plot_recover">Recarregar o croqui do backup?</string -->
   <string name="plot_start">Base inicial</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
   <!-- UNUSED string name="plot_view">Base visualizada</string -->
   <string name="read_fail_with_code">Erro de leitura: código do erro </string>
   <string name="read_failed">Falha na leitura da DistoX</string>
@@ -885,6 +887,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="button_clear_memory">Limpar memória</string>
   <string name="button_save">Gravar    </string>
   <string name="button_select">Selecionar    </string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <!-- TODO string name="button_submit"    >Submit</string -->
   <string name="button_leg_station">Visadas</string>
   <string name="button_all_station">Todas</string>
@@ -1149,6 +1153,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_save_calib">Gravar alterações nas informações de calibração</string>
   <string name="help_export_survey">Exportar Topo</string>
   <!-- UNUSED string name="help_export_surveys">Exportar todas as topos</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
   <string name="help_loc">Coordenada GPS</string>
   <string name="help_delete_survey">Apagar topo</string>
   <string name="help_delete_calib">Apagar calibração</string>
@@ -2068,6 +2073,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_drop">Excluir topos?</string>
   <string name="title_tdconfig">Insira nome do projeto</string>
   <string name="title_surveys">Topos</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
   <string name="exported">Arquivo %1$s gravado</string>
   <string name="export_failed">Exportação falhou</string>
   <string name="image_diagram">Diagrama direção</string>

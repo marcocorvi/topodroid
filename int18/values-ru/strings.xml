@@ -510,6 +510,7 @@
     <string name="menu_device">ПРИБОР</string>
     <string name="menu_device_add">ДОБАВИТЬ УСТРОЙСТВО</string>
     <string name="menu_export">Экспорт</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <string name="menu_exit">ВЫХОД</string>
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_geopoint_app">ПРИЛОЖЕНИЕ ГЕОПРИВЯЗКИ</string>
@@ -638,6 +639,7 @@
     <!-- UNUSED string name="plot_null_start">Отсутствует базовый пикет</string -->
     <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Просмотренный пикет</string -->
     <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
@@ -940,6 +942,8 @@
     <string name="button_clear_memory">Очистить память</string>
     <string name="button_save"      >Сохр.     </string>
     <string name="button_select"    >Выбрать   </string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <string name="button_submit"    >Отправить</string>
     <string name="button_leg_station">Пикеты замера</string>
     <string name="button_all_station">Все пикеты</string>
@@ -1226,6 +1230,7 @@
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
     <string name="help_export_survey">Экспорт съёмки</string>
     <!-- UNUSED string name="help_export_surveys">Экспорт всех съемок</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">GPS привязка</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
@@ -2189,6 +2194,7 @@
     <string name="title_drop">Удалить съёмки ?</string>
     <string name="title_tdconfig">Введине название проекта</string>
     <string name="title_surveys">Съёмки</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
 
     <string name="exported">Файл сохранен %1$s</string>
     <string name="export_failed">Ошибка экспорта</string>

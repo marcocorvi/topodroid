@@ -511,6 +511,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_device">УСТРОЙСТВО</string>
     <string name="menu_device_add">ДОБАВЯНЕ НА НЕПОЗНАТ</string> <!-- KEEP -->
     <string name="menu_export">ЕКСПОРТИРАНЕ</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <string name="menu_exit">ИЗХОД</string>
     <string name="menu_firmware">ФЪРМУЕР</string>
     <string name="menu_geopoint_app">GNSS ПРИЛОЖЕНИЕ</string>
@@ -640,6 +641,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="plot_null_start">Липсва начален репер</string -->
     <!-- UNUSED string name="plot_recover">Зареди скица от резервно копие?</string -->
     <string name="plot_start">Начален репер</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Разгледай репери/string -->
     <string name="read_fail_with_code">Грешка при четене: грешен код </string>
     <string name="read_failed">Неуспешно четене на DistoX</string>
@@ -943,6 +945,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_clear_memory">Изчистване на паметта</string>
     <string name="button_save">Запази</string>
     <string name="button_select">Избери</string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <string name="button_submit">Изпращане</string>
     <string name="button_leg_station">Репери в отсечка</string>
     <string name="button_all_station">Всички репери</string>
@@ -1229,6 +1233,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_save_calib">Запазване на промените в информацията за калибриране</string>
     <string name="help_export_survey">Експортирай картировката</string>
     <!-- UNUSED string name="help_export_surveys">Експорт на всички картировки</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">GPS местоположение</string>
     <string name="help_delete_survey">Изтриване на картировката</string>
     <string name="help_delete_calib">Изтриване на калибрацията</string>

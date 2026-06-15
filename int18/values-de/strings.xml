@@ -486,6 +486,7 @@
     <string name="menu_device">GERÄT</string>
     <string name="menu_device_add">GERÄT HINZUFÜGEN</string>
     <string name="menu_export">EXPORTIEREN</string>
+    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
     <!-- TODO string name="menu_exit">EXIT</string -->
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GPS APP</string>
@@ -605,6 +606,7 @@
     <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Skizze aus dem Backup laden?</string -->
     <string name="plot_start">Basismesspunkt</string>
+    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
     <!-- UNUSED string name="plot_view">Viewed station</string -->
     <string name="read_fail_with_code">Lesefehler: Fehlercode</string>
     <string name="read_failed">Fehler beim Lesen vom DistoX</string>
@@ -894,6 +896,8 @@
     <string name="button_clear_memory">Speicher löschen</string>
     <string name="button_save">Speichern</string>
     <string name="button_select">Wählen</string>
+    <!-- TODO string name="button_toggle"    >Toggle</string -->
+    <!-- TODO string name="button_import"    >Import</string -->
     <!-- TODO string name="button_submit"    >Submit</string -->
     <string name="button_leg_station">Nur Messstrecken</string>
     <string name="button_all_station">Alle Messungen</string>
@@ -1160,6 +1164,7 @@
     <string name="help_save_calib">Änderungen speichern</string>
     <string name="help_export_survey">Vermessung speichern</string>
     <!-- UNUSED string name="help_export_surveys">Alle Vermessungen speichern</string -->
+    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
     <string name="help_loc">GPS-Position</string>
     <string name="help_delete_survey">Vermessung löschen</string>
     <string name="help_delete_calib">Kalibrierung löschen</string>
@@ -2094,6 +2099,7 @@
     <string name="title_drop">Vermessungen entfernen?</string>
     <string name="title_tdconfig">Projektname</string>
     <string name="title_surveys">Vermessungen</string>
+    <!-- TODO string name="title_symbols">Active tools</string -->
     <string name="exported">Gespeichert als %1$s</string>
     <string name="export_failed">Export fehlgeschlagen</string>
     <string name="image_diagram">Richtungsdiagramm</string>
