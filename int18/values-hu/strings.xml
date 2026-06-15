@@ -947,7 +947,7 @@
     <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
     <string name="button_select"    >Kiválaszt    </string>
-    <string name="button_toggle"    >Vált</string>
+    <string name="button_toggle"    >Átvált</string>
     <string name="button_import"    >Import</string>
     <string name="button_submit"    >Elküld</string>
     <string name="button_leg_station">Poligon pontok</string>
