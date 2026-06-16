@@ -119,10 +119,16 @@ public class SapProtocol extends TopoDroidProtocol
       byte[] buffer = new byte[16];
       System.arraycopy( bytes, 1, buffer, 0, 16 );
 
-      // ACKNOWLEDGMENT
-      byte[] ack = new byte[1];
-      ack[0] = (byte)( bytes[0] + 0x55 ); // SapConst.SAP_ACK
-      addToWriteBuffer( ack );
+      // ACKNOWLEDGMENT (SAP6 only). JedEye reuses the SAP6 shot frame but does
+      // NOT use the ACK handshake (SapComm.changedChrt only sends the ACK when
+      // the read UUID is the SAP6 one). Buffering an ACK that is never popped
+      // would leak into mWriteBuffer and later get flushed at the wrong time by
+      // writeAgainChrt(), stalling the remote-command queue.
+      if ( Device.isSap6( mDeviceType ) ) {
+        byte[] ack = new byte[1];
+        ack[0] = (byte)( bytes[0] + 0x55 ); // SapConst.SAP_ACK
+        addToWriteBuffer( ack );
+      }
 
       // DATA
       ByteBuffer byte_buffer = ByteBuffer.wrap( buffer ).order(ByteOrder.LITTLE_ENDIAN);
