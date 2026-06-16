@@ -345,19 +345,21 @@ public class SapComm extends BleComm
   // public void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );
   // public void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc );
 
-  /** try to write: 
+  /** try to write:
    * get a byte array from the write queue of the protocol and put it on the write chracateristic
+   * @return true if a buffered write was issued, false if the protocol write buffer was empty
    */
-  private void writeAgainChrt( )
+  private boolean writeAgainChrt( )
   {
     byte[] bytes = mSapProto.handleWrite( );
     if ( bytes != null ) {
       TDLog.v( "SAP comm: write chrt - bytes " + bytes.length );
       // mCallback.writeCharacteristic( mWriteChrt );
       mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, bytes );
-    } else { // done with the buffer writing
-      TDLog.v( "SAP comm: write chrt - bytes null");
+      return true;
     }
+    TDLog.v( "SAP comm: write chrt - bytes null");
+    return false;
   }
 
   // -------------------------------------------------------------------------------
@@ -478,7 +480,17 @@ public class SapComm extends BleComm
   {
     TDLog.v( "SAP comm: written chrt ...");
     if ( ! mWriteInitialized ) { error(-4, uuid_str, "writeInit"); return; }
-    writeAgainChrt( ); // try to write again
+    // A characteristic write just completed. If the protocol still has buffered
+    // bytes (e.g. a multi-part SAP6 ACK) send the next chunk; otherwise advance
+    // the BLE ops queue so the next queued operation can run. The base
+    // BleComm.writtenChrt() clears the pending op for exactly this reason;
+    // omitting it here left mQps.mPendingOp set after the first sendCommand()
+    // write, so every later remote command (LASER_ON / LASER_OFF / MEASURE /
+    // DEVICE_OFF) queued forever and never executed -> SAP6/JedEye remote
+    // control and remote "take shot" were dead after the first button press.
+    if ( ! writeAgainChrt( ) ) {
+      mQps.clearPending();
+    }
   }
 
   // FIXME BleComm has mQps.clearPending();
