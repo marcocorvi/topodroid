@@ -22,10 +22,13 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import android.content.Context;
-// import android.view.View;
+
+import android.view.View;
 
 class StationNameDefaultBlunder extends StationName
 {
+  private static final boolean LOG = false;
+
   private int survey_stations;
   private boolean forward_shots;
   private boolean shot_after_splay;
@@ -34,7 +37,8 @@ class StationNameDefaultBlunder extends StationName
   private DBlock prev;
   private DBlock leg;  // tentative leg / leg
   private DBlock blunder;
-  private int nrLegShots;
+  private DBlock old_leg;
+  // private int nrLegShots;
   private ArrayList< DBlock > sec_legs;
   private String from, to, station, current_station;
   private boolean mRet;
@@ -47,31 +51,17 @@ class StationNameDefaultBlunder extends StationName
 
   // ------------------------------------------------------------------------------------------------
 
-  /** reset shot references
-   * @param reset_leg  whether to reset the leg reference and leg number
-   * @param reset_prev whether to reset the prev reference to null
-   */
-  private void resetRefs( boolean reset_leg, boolean reset_prev )
-  {
-    prev_prev  = null;
-    if ( reset_prev ) {
-      prev = null;
-    }
-    if ( reset_leg ) {
-      blunder = null;
-      leg = null;
-      nrLegShots = 0;
-      sec_legs.clear();
-    }
-  }
-
   /** set the prev/prev_prev shots
    * @param blk   new prev shot
    * @note prev_prev is set with the old prev
    */
   private void setPrev( DBlock blk ) 
   {
-    prev_prev = prev;
+    if ( prev != null && blk != null && blk.isRelativeAngle( prev ) ) {
+      prev_prev = prev;
+    } else {
+      prev_prev = null;
+    }
     prev = blk;
   }
 
@@ -80,30 +70,88 @@ class StationNameDefaultBlunder extends StationName
    * @note clears prev_prev
    * @note if leg coincide with the tentative blunder this is cleared
    */
-  private void setLeg( String msg, DBlock blk, int nr_legs ) 
+  private void setLeg( String msg, DBlock blk )
   {
-    if ( TDLog.isStreamFile() ) TDLog.e("set leg " + id(leg) + " " + msg + " -> " + id(blk) + " nr legs " + nr_legs );
+    if ( LOG ) TDLog.v("set leg " + id(leg) + " " + msg + " -> " + id(blk) );
     if ( leg == null ) {
       leg = blk;
       if ( leg == blunder ) blunder = null;
     }
-    nrLegShots = nr_legs;
+    // nrLegShots = nr_legs;
+    // nrLegShots = 1 + sec_legs.size();
     prev_prev = null;
   }
 
   /** mark the leg main-shot 
    */
-  private void markLeg()
+  private boolean markLeg( Set<String> sts )
   {
-    if ( leg == null ) return; // safety protection
+    old_leg = leg;
+    if ( leg == null ) return true; // safety protection
     if ( leg.isLeg() ) {
-      if ( TDLog.isStreamFile() ) TDLog.e( "mark leg " + name(leg) + " is already leg" );
-      return;
+      if ( LOG ) TDLog.v( "==> leg " + name(leg) + " is already leg" );
+      setFTS( leg.mFrom, leg.mTo, sts, "[1]" );
+      return true;
     }
-    if ( TDLog.isStreamFile() ) TDLog.e( "mark leg " + id(leg) + " : " + from + "-" + to );
+    if ( LOG ) TDLog.v( "==> leg " + id(leg) + " mark: " + from + "-" + to );
     setLegName( leg, from, to );
     setLegExtend( leg );
     // leg = null;
+    return false;
+  }
+
+  private void setFTS( String f, String t, Set< String > sts, String msg )
+  {
+    TDLog.v("set FTS: " + f + " " + t + " " + msg );
+    if ( forward_shots ) {
+      station = shot_after_splay  ? t : f;     // splay-station = this-shot-to if splays before shot
+                                                   //                 this-shot-from if splays after shot
+      from = t;                                   // next-shot-from = this-shot-to
+      to   = DistoXStationName.incrementName( t, sts );  // next-shot-to   = increment next-shot-from
+      // logJump( blk, from, to, sts ); // NO_LOGS
+    } else { // backward_shots
+      to   = f;                                     // next-shot-to   = this-shot-from
+      from = DistoXStationName.incrementName( f, sts ); // next-shot-from = increment this-shot-from
+      station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
+                                                       //                = this-shot-from if splay after shot
+      // logJump( blk, to, from, sts );
+    }
+    TDLog.v("----- " + msg + " set FTS " + FTS() );
+  }
+ 
+  private void setFTS( DBlock blk, Set< String > sts, String msg )
+  {
+    TDLog.v("set FTS: blk " + blk.mFrom + " " + blk.mTo + " " + msg );
+    if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
+      from = blk.isDistoXBacksight()? blk.mFrom : blk.mTo;
+      to   = from;
+      to   = DistoXStationName.incrementName( to, sts );
+      // logJump( blk, from, to, sts ); // NO_LOGS
+      if ( current_station == null ) {
+        if ( blk.isDistoXBacksight() ) {
+          station = shot_after_splay ? blk.mFrom
+                                     : blk.mTo;
+        } else {
+          station = shot_after_splay ? blk.mTo    // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
+                                     : blk.mFrom; // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
+        }
+      } // otherwise station = current_station
+      TDLog.v("----- " + msg + " forward blk set: FTS " + FTS() );
+    } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
+      to = blk.isDistoXBacksight()? blk.mTo : blk.mFrom;
+      from = to;
+      from = DistoXStationName.incrementName( from, sts ); // FIXME it was old from
+      // logJump( blk, to, from, sts );
+
+      // station must be set even if there is a "currentStation"
+      if ( blk.isDistoXBacksight() ) {
+        station = shot_after_splay ? from   
+                                   : blk.mTo;
+      } else {
+        station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
+                                   : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
+      }
+    }
   }
 
   /** mark a shot as splay
@@ -114,10 +162,8 @@ class StationNameDefaultBlunder extends StationName
     if ( blk == null ) return; // safety protection
     if ( blk.isAnyLeg() ) return;
     if ( blk.mFrom.length() > 0 ) return; // skip splay already marked 20220907
-    if ( ! station.equals( blk.mFrom ) ) {
-      if ( TDLog.isStreamFile() ) TDLog.e( "mark splay " + id(blk) + " : " + blk.mFrom + " -> " + station );
-      setSplayName( blk, station ); // saved to DB
-    }
+    if ( LOG ) TDLog.v( "==> splay " + id(blk) + " : " + station );
+    setSplayName( blk, station ); // saved to DB
   }
 
   /** mark shot as secondary leg
@@ -125,30 +171,24 @@ class StationNameDefaultBlunder extends StationName
    */
   private void markSecLeg( DBlock blk )
   {
+    if ( blk == null ) return;
+    if ( LOG ) TDLog.v( "==> secLeg " + id(blk) );
     setSecLegName( blk );
   }
 
-  /** mark shot as secondary leg or splay according to whether it is close to the leg
-   * @param leg    leg
-   * @param blk    shot
+  /** if the blunder reference is not null and it is not equal to leg, mark it as BLUNDER
    */
-  private void markSecLegOrSplay( DBlock leg, DBlock blk )
-  {
-    if ( blk.isRelativeDistance( leg ) ) {
-      markSecLeg( blk );
-    } else {
-      markSplay( blk );
-    }
-  }
-
-  /** if the blunder reference is not null mark it as BLUNDER
-   */
-  private void markBlunder(String msg)
+  private void markBlunder( String msg )
   {
     if ( blunder == null ) return; // safety protection
     if ( blunder != leg ) {
-      if ( TDLog.isStreamFile() ) TDLog.e( msg + " mark blunder " + id(blunder) );
+      if ( LOG ) TDLog.v( msg + "==> blunder " + id(blunder) );
       setBlunderName( blunder ); // saved to DB
+      View view = blunder.getView();
+      if ( view != null ) { 
+        blunder.setView( null );
+        // mParent.dropBlock( blunder );
+      }
     }
     blunder = null;
   }
@@ -156,31 +196,27 @@ class StationNameDefaultBlunder extends StationName
   /** commit the leg
    * @param blk  current data shot (only for log)
    * @param msg  log message
-   * @param reset_leg  whether to reset the leg reference and leg number
-   * @param reset_prev whether to set the "prev" data to null
    */
-  private void flushLeg( DBlock blk, String msg, boolean reset_leg, boolean reset_prev )
+  private void flushLeg( DBlock blk, Set<String> sts, String msg )
   {
-    if ( nrLegShots > 0 ) {
-      StringBuilder sb = new StringBuilder();
-      sb.append( ": " + id(leg) + "." + id(prev) + "." + id(blunder) + " (" );
-      for ( DBlock b : sec_legs ) sb.append( " " ).append( id(b) );
-      if ( TDLog.isStreamFile() ) TDLog.e( msg + " flush at " + id(blk) + " legs " + nrLegShots + "/" + sec_legs.size() + " " + sb.toString() + " ) reset legs " + reset_leg );
-      if ( nrLegShots < TDSetting.mMinNrLegShots ) {
-        // if ( prev_prev != null ) markSplay( prev_prev );
-        if ( blunder != null ) markSplay( blunder );
-        // if ( leg != null && leg.isLeg() ) { // FIXME_BLUNDER this is not necessary
-        //   if ( prev    != null ) markSecLegOrSplay( leg, prev );
-        //   for ( DBlock b : sec_legs ) markSecLegOrSplay( leg, b );
-        // } else {
-          if ( prev    != null ) markSplay( prev );
-          for ( DBlock b : sec_legs ) markSplay( b );
-        // }
-      } else {
-        markLeg();
-        for ( DBlock b : sec_legs ) markSecLeg( b );
+    old_leg = null;
+    if ( sec_legs.size() > 1 ) { // ( nrLegShots > 0 ) 
+      if ( LOG ) {
+        StringBuilder sb = new StringBuilder();
+        sb.append( ": " + id(leg) + "." + id(prev) + "." + id(blunder) + " (" );
+        for ( DBlock b : sec_legs ) sb.append( " " ).append( id(b) );
+        TDLog.v( msg + " flush leg at " + id(blk) + " sec_legs " + sec_legs.size() + ": " + sb.toString() );
       }
-      resetRefs( reset_leg, reset_prev );
+      if ( sec_legs.size() + 1 < TDSetting.mMinNrLegShots ) { // ( nrLegShots < TDSetting.mMinNrLegShots )
+        markSplay( blunder );
+        markSplay( prev );
+        markSplay( prev_prev );
+        for ( DBlock b : sec_legs ) markSplay( b );
+      } else {
+        markLeg( sts );
+        for ( DBlock b : sec_legs ) markSecLeg( b );
+        // old_leg = leg; // done in markLeg
+      }
     }
   }
 
@@ -191,9 +227,9 @@ class StationNameDefaultBlunder extends StationName
    */
   private void increaseNrLegShots( DBlock blk, Set< String > sts, String msg ) 
   {
-    if ( TDLog.isStreamFile() ) TDLog.e( msg + " increase leg shots at " + id(blk) + " leg " + id(leg) + " prev " + id(prev) );
+    if ( LOG ) TDLog.v( msg + " increase leg shots at " + id(blk) + " " + LPB() + " FTS " + FTS() );
     sec_legs.add( blk );
-    if ( nrLegShots == 0 ) {
+    if ( sec_legs.size() == 1 ) { // first sec-leg
       // checkCurrentStationName
       if ( current_station != null ) {
         if ( forward_shots ) { 
@@ -201,40 +237,30 @@ class StationNameDefaultBlunder extends StationName
         } else if ( survey_stations == 2 ) {
           to = current_station;
         }
+        station = current_station;
+        TDLog.v("----- set from current: " + FTS() + " " + current_station );
       }
-      setLeg( "from increase", prev, 2 ); // nrLegShots = 2; prev and this shot
+      setLeg( "from increase", leg ); // nrLegShots = 2: leg and this shot
       // prev_prev = null; 
       // prev      = null;
-      if ( TDLog.isStreamFile() ) TDLog.e( msg + " started nr_leg " + nrLegShots + "/" + sec_legs.size() + " at " + id(blk) + " leg " + id(leg) );
-      // TDLog.Log( TDLog.LOG_DATA, "leg-2 F " + from + " T " + to + " S " + station );
+      if ( LOG ) TDLog.v( msg + " started sec_legs " + sec_legs.size() + " at " + id(blk) + " " + LPB() );
     } else {
-      nrLegShots ++;  // one more centerline shot
-      if ( TDLog.isStreamFile() ) TDLog.e( msg + " increased nr_leg " + nrLegShots + "/" + sec_legs.size() + " at " + id(blk) );
+      // nrLegShots ++;  // one more centerline shot
+      if ( LOG ) TDLog.v( msg + " increased sec_legs " + sec_legs.size() + " at " + id(blk) + " " + LPB() );
     }
-
-    if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+    if ( sec_legs.size() + 1 == TDSetting.mMinNrLegShots ) { // ( nrLegShots == TDSetting.mMinNrLegShots )
       legFeedback( );
       current_station = null;
-      markLeg();
+      markLeg( sts );
+      prev      = null;
+      prev_prev = null;
       // do not clear lef reference
       mRet = true;
-      if ( forward_shots ) {
-        station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
-                                                     //                 this-shot-from if splays after shot
-        from = to;                                   // next-shot-from = this-shot-to
-        to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
-        // logJump( blk, from, to, sts ); // NO_LOGS
-      } else { // backward_shots
-        to   = from;                                     // next-shot-to   = this-shot-from
-        from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
-        station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
-                                                         //                = this-shot-from if splay after shot
-        // logJump( blk, to, from, sts );
-      }
+      // setFTS( from, to, sts, "[3]" );
+      TDLog.v("----- set at minNrLeg: FTS " + FTS() + " " + current_station + " leg " + name(leg) );
       for ( DBlock b : sec_legs ) markSecLeg( b );
-      sec_legs.clear();
-      markBlunder("[incr.nr.leg]");
-    } else if ( nrLegShots > TDSetting.mMinNrLegShots ) {
+      markBlunder( "[incr.nr.leg]" );
+    } else if ( sec_legs.size() + 1 > TDSetting.mMinNrLegShots ) { // ( nrLegShots > TDSetting.mMinNrLegShots )
       markSecLeg( blk );
     }
   }
@@ -249,7 +275,7 @@ class StationNameDefaultBlunder extends StationName
   //       if ( Math.abs(i2-i1) != 1 ) {
   //         StringBuilder sb = new StringBuilder();
   //         for ( String st : sts ) sb.append(st).append("," );
-  //         TDLog.e( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+  //         TDLog.v( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
   //       }
   //     } catch ( NumberFormatException e ) { }
   //   }
@@ -275,7 +301,11 @@ class StationNameDefaultBlunder extends StationName
     boolean backsight_splay  = ( StationPolicy.mSurveyStations == 1 ) && StationPolicy.mShotAfterSplays && TDSetting.mBacksightSplay;
 
     mRet = false;
-    resetRefs( true, true );
+    blunder   = null;
+    prev_prev = null;
+    prev      = null;
+    leg       = null;
+    old_leg   = null;
 
     from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                             : DistoXStationName.mSecondStation;
@@ -284,101 +314,87 @@ class StationNameDefaultBlunder extends StationName
     station = ( current_station != null )? current_station
             : (shot_after_splay ? from : "");  // splays station
 
-    if ( TDLog.isStreamFile() ) {
+    if ( LOG ) {
       StringBuilder sb = new StringBuilder();
       for ( DBlock b : list ) sb.append( name(b) ).append( " " );
-      TDLog.e( "{F " + from + " T " + to + " S} " + station + " List " + sb.toString() );
+      TDLog.v( "----- start at F " + from + " T " + to + " S " + station + " List " + sb.toString() );
     }
 
     for ( DBlock blk : list ) {
-      if ( TDLog.isStreamFile() ) TDLog.e("process " + name(blk) + " " + id(leg) + "." + id(prev) + "." + id(blunder) );
+      if ( LOG ) TDLog.v("process " + id(blk) + " " + name(blk) + " LPB " + LPB() );
       if ( blk.isSecLeg() && prev != null && ! prev.isSplay() ) { // 20250719 new test
+        if ( LOG ) TDLog.v("blk " + id(blk) + " secLeg and prev " + id(prev) + " not splay: continue" );
         continue;
       }
       if ( blk.mTo.length() == 0 ) {
-        if ( blk.mFrom.length() == 0 ) {
+        // if ( blk.mFrom.length() == 0 ) {
+          markSplay( blk );
           if ( blk.isScan() ) {
-            flushLeg(blk, "[scan splay]", true, true ); // true = reset leg & nr_legs
-            markSplay( blk );
+            flushLeg( blk, sts, id(blk) + " scan splay" );
+            old_leg = null;
             continue;
           }
-        }
-        if ( prev == null ) { // FIXME_BLUNDER this block came first among the if's, but it can be also second after the "leg"
-          if ( TDLog.isStreamFile() ) TDLog.e("null prev at " + id(blk) );
-          setPrev( blk );
-          // blk.mFrom = station;
-          markSplay( blk );
-        } else if ( leg != null && leg.isRelativeDistance( blk ) ) {
-          markBlunder("[close to leg]");
-          increaseNrLegShots( blk, sts, "[close to leg]" );
-          // if ( leg.isLeg() ) markSecLeg( blk ); // FIXME_BLUNDER not necessary
-        } else if ( /* prev != null && */ prev.isRelativeDistance( blk ) ) {
-          flushLeg(blk, "[close to prev]", false, false ); // true = reset leg & nr_legs
-          if ( leg != null && ! prev.isRelativeDistance( leg ) ) {
-            if ( TDLog.isStreamFile() ) TDLog.e("clear leg " + id(leg) );
-            leg = null;
-            nrLegShots = 0;
-          }
-          // if ( leg == null ) setLeg( "from pref", prev, 0 );
-          increaseNrLegShots( blk, sts, "[close to prev]" );
-        } else if ( prev_prev != null && prev.isRelativeAngle( prev_prev ) && prev_prev.isRelativeDistance( blk ) ) {
-          setLeg( "from prev_prev", prev_prev, 0 ); // nrLegShots = 0; it will be set in increaseNrLegShots
-          blunder = prev;
-          increaseNrLegShots(  blk, sts, "[close to prev_prev]" );
-          prev = blk;
-        } else {
-          if ( blunder != null ) { // two splays in a row
-            blunder = null;        // clear blunder before flush
-            flushLeg( blk, "[new splay]", true, true );
-          } else if ( leg != null ) { // first splay after a leg
-            if ( backsight_splay ) {
+          if ( blk.isRelativeDistance( prev_prev ) ) {  // prev_prev( leg ) ... blunder (prev) blk
+            TDLog.v( id(blk) + "> rel dist prev_prev " + id(prev_prev) );
+            blunder   = prev;
+            prev      = prev_prev;
+            prev_prev = null;
+            leg       = prev;
+            increaseNrLegShots( blk, sts, "close to " + id(leg) );
+          } else if ( blk.isRelativeDistance( leg ) ) {
+            TDLog.v( id(blk) + "> rel dist leg " + id(leg) );
+            markBlunder(  "close to " + id(leg) );
+            increaseNrLegShots( blk, sts, "close to " + id(leg) );
+          } else if ( blk.isRelativeDistance( prev ) ) {
+            TDLog.v( id(blk) + "> rel dist prev " + id(prev) );
+            markBlunder(  "close to " + id(prev) );
+            markSecLeg( blk );
+            prev_prev = null;
+            leg       = prev;
+            increaseNrLegShots( blk, sts, "close to " + id(leg) );
+          } else if ( blk.isRelativeAngle( leg ) ) {
+            TDLog.v( id(blk) + "> rel angle leg " + id(leg) );
+            markBlunder(  "angle to " + id(leg) );
+            blunder   = blk;
+          } else if ( blk.isRelativeAngle( prev ) ) {
+            TDLog.v( id(blk) + "> rel angle prev " + id(prev) );
+            prev_prev = prev;
+            prev      = blk;
+            leg       = null;
+            blunder   = null;
+            old_leg   = null;
+          } else {
+            if ( backsight_splay && old_leg != null ) {
+              TDLog.v( id(blk) + " back splay ");
               blk.setBackSplay();
               mData.updateShotFlag( blk.mId, mSid, blk.getFlagFully() );
-              blk.doBacksightSplayCheck( leg, false );
-            } else {
-              blunder = blk; // tentative blunder
+              blk.doBacksightSplayCheck( old_leg, false );
             }
-            flushLeg( blk, "[new splay]", false, true );
+            flushLeg( blk, sts, "not close" );
+            sec_legs.clear();
+            old_leg   = null; // important
+            blunder   = null;
+            prev_prev = null;
+            leg       = null; // no tentative leg
+            prev      = blk;
           }
-          markSplay( blk );
-          setPrev( blk );
-        }
+        // } else { // FROM != null   TO == null
+        //   if ( LOG ) TDLog.v( "already splay " + id(blk) + " " + blk.mFrom );
+        //   if ( blk.isRelativeAngle( prev ) ) prev_prev = prev;
+        //   prev = blk;
+        // }
       } else { // blk.mTo.length > 0
         if ( blk.mFrom.length() > 0 ) { // FROM non-empty, TO non-empty --> LEG
-          leg = blk;
-          if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
-            from = blk.isDistoXBacksight()? blk.mFrom : blk.mTo;
-            to   = from;
-            to   = DistoXStationName.incrementName( to, sts );
-            // logJump( blk, from, to, sts ); // NO_LOGS
-            if ( current_station == null ) {
-              if ( blk.isDistoXBacksight() ) {
-                station = shot_after_splay ? blk.mFrom
-                                           : blk.mTo;
-              } else {
-                station = shot_after_splay ? blk.mTo    // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
-                                           : blk.mFrom; // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
-              }
-            } // otherwise station = current_station
-          } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
-            to = blk.isDistoXBacksight()? blk.mTo : blk.mFrom;
-            from = to;
-            from = DistoXStationName.incrementName( from, sts ); // FIXME it was old from
-            // logJump( blk, to, from, sts );
-
-	    // station must be set even if there is a "currentStation"
-            if ( blk.isDistoXBacksight() ) {
-              station = shot_after_splay ? from   
-                                         : blk.mTo;
-            } else {
-              station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
-                                         : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
-            }
-          }
-          nrLegShots = TDSetting.mMinNrLegShots;
+          TDLog.v("existing leg " + id(blk) + " " + name(blk) );
+          leg     = blk;
+          old_leg = leg;
+          // setFTS( blk, sts );
+          setFTS( leg.mFrom, leg.mTo, sts, "[2]" );
+          // nrLegShots = TDSetting.mMinNrLegShots;
         } else { // FROM empty, TO non-empty --> rev-SPLAY
-          if ( TDLog.isStreamFile() ) TDLog.e( id(blk) + " rev splay - clear nr_legs ");
-          nrLegShots = 0;
+          if ( LOG ) TDLog.v( id(blk) + " rev splay - clear nr_legs ");
+          sec_legs.clear();
+          // nrLegShots = 0;
           setPrev( blk );
         }
       }
@@ -507,4 +523,7 @@ class StationNameDefaultBlunder extends StationName
 //     return mRet;
 //   }
 
+     private String FTS() { return from + "/" + to + "/" + station; }
+
+     private String LPB() { return id(leg) + "/" + id(old_leg) + "." + id(prev) + "/" + id(prev_prev) + "." + id(blunder); }
 }

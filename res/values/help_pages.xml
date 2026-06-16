@@ -127,7 +127,7 @@
   <string name="SurveyStatDialog" translatable="false">page_stat1.htm</string>
   <string name="SurveysDialog" translatable="false">page_surveys.htm</string>
   <string name="SymbolEnableDialog" translatable="false">page_tools.htm</string>
-  <string name="SymbolReload" translatable="false">page_symbol_reload.htm</string>
+  <string name="SymbolReloadDialog" translatable="false">page_symbol_reload.htm</string>
   <!-- string name="TopoDroidAlertDialog"></string -->
   <string name="TopoDroidPerms" translatable="false">page_perms.htm</string>
   <string name="UndeleteDialog" translatable="false">page_undelete.htm</string>

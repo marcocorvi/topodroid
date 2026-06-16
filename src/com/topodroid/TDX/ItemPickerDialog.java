@@ -167,7 +167,7 @@ class ItemPickerDialog extends MyDialog
     //   // mGrid.setDividerHeight( 2 );
     //   mList = null;
     // } else { // PICKER_LIST || PICKER_RECENT
-      initLayout( R.layout.item_picker_dialog, R.string.title_symbols );
+      initLayout( R.layout.item_picker_dialog, R.string.title_symbol_choose );
       getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ); // NullPointerException
 
       // * mList = (ListView) findViewById(R.id.item_list);

@@ -1,4 +1,4 @@
-/* @file SymbolReload.java
+/* @file SymbolReloadDialog.java
  *
  * @author marco corvi
  * @date jan 2017 
@@ -33,7 +33,7 @@ import android.view.View;
 // import android.widget.LinearLayout;
 
 
-class SymbolReload extends MyDialog
+class SymbolReloadDialog extends MyDialog
                    implements View.OnClickListener
 {
   private Button mBtnInstall;
@@ -57,9 +57,9 @@ class SymbolReload extends MyDialog
    * @param app      application
    * @param all      whether to display checkboxes for all palettes, instead of only for speleo palette
    */
-  SymbolReload( Context context, TopoDroidApp app, boolean all )
+  SymbolReloadDialog( Context context, TopoDroidApp app, boolean all )
   {
-    super(context, app, R.string.SymbolReload );
+    super(context, app, R.string.SymbolReloadDialog );
     TopoDroidApp.updateAnalytic( TDAnalytics.PALETTE );
     mAll = all;
   }
@@ -74,7 +74,7 @@ class SymbolReload extends MyDialog
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
-    initLayout( R.layout.symbol_reload, R.string.symbol_reload );
+    initLayout( R.layout.symbol_reload_dialog, R.string.symbol_reload );
 
     TextView tv = (TextView) findViewById( R.id.text_version );
 

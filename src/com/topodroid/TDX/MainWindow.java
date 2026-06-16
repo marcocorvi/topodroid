@@ -739,7 +739,7 @@ public class MainWindow extends Activity
         startActivityForResult( intent, TDRequest.REQUEST_CWD );
       } else if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // (new SymbolEnableDialog( mActivity )).show();
-        (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
+        (new SymbolReloadDialog( mActivity, mApp, mWithPalettes )).show();
       // } else if ( mWithLogs && p++ == pos ) { // NO_LOGS
       //   intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       //   intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_LOG );

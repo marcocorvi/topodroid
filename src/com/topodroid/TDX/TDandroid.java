@@ -35,6 +35,7 @@ import android.content.pm.ConfigurationInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
+import android.os.Handler;
 import android.os.Bundle;
 // import android.os.Build.VERSION_CODES;
 
@@ -824,6 +825,15 @@ public class TDandroid
   //   setHicsum( ctx, pt.x, pt.y );
   //   return true;
   // }
+
+  /** post a runnable on the queue of the main looper thread
+   * @param runnable  runnable to run on the main thread
+   */
+  public static void runOnMainThread( Runnable runnable )
+  {
+    Handler handler = new Handler( Looper.getMainLooper() );
+    handler.post( runnable );
+  }
 
 
   /** check if arch arm64_v8a is supported

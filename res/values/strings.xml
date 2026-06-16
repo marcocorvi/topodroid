@@ -2282,6 +2282,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_tdconfig">Enter project name</string>
     <string name="title_surveys">Surveys</string>
     <string name="title_symbols">Active tools</string>
+    <string name="title_symbol_choose">Tool selection</string>
 
     <string name="exported">Exported file %1$s</string>
     <string name="export_failed">Failed export</string>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/title"
+    >
+        
+    <TextView android:id="@+id/text_version"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_marginStart="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+    />
+  
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      >
+      <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <CheckBox android:id="@+id/ckb_speleo"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_speleo"
+        />
+    
+        <CheckBox android:id="@+id/ckb_extra"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_extra"
+        />
+                	
+        <CheckBox android:id="@+id/ckb_mine"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_mine"
+        />
+                	
+        <CheckBox android:id="@+id/ckb_geo"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_geo"
+        />
+                	
+        <CheckBox android:id="@+id/ckb_archeo"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_archeo"
+        />
+                	
+        <CheckBox android:id="@+id/ckb_anthro"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_anthro"
+        />
+  
+        <CheckBox android:id="@+id/ckb_paleo"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_paleo"
+        />
+    
+        <CheckBox android:id="@+id/ckb_bio"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_bio"
+        />
+    
+        <CheckBox android:id="@+id/ckb_karst"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+          android:layout_marginStart="@dimen/marginh"
+          android:layout_marginTop="@dimen/marginv"
+          android:text="@string/symbol_karst"
+        />
+      </LinearLayout>
+    </ScrollView>
+            	
+    <LinearLayout android:id="@+id/help"
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:gravity="start"
+      >
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/button_replace"
+          style="@style/button_default"
+          android:text="@string/button_replace"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_add"
+          style="@style/button_default"
+          android:text="@string/btn_install"
+        />
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
+</RelativeLayout>

@@ -3444,11 +3444,19 @@ public class TopoDroidApp extends Application
       if ( mSurveyWindow != null ) {
         mSurveyWindow.startActivity( intent );
       } else {
-        TDToast.makeWarn( R.string.zip_share_failed );
+        TDandroid.runOnMainThread( new Runnable() {
+          public void run() {
+            TDToast.makeWarn( R.string.zip_share_failed );
+          }
+        } );
       }
       // mSurveyWindow.startActivity( Intent.createChooser( intent, "chooser title" ) );
     } catch ( ActivityNotFoundException e ) {
-      TDToast.makeWarn( R.string.zip_share_failed );
+      TDandroid.runOnMainThread( new Runnable() {
+        public void run() {
+          TDToast.makeWarn( R.string.zip_share_failed );
+        }
+      } );
     }
   }
 
@@ -3597,7 +3605,7 @@ public class TopoDroidApp extends Application
   static void checkAnalytics( final Context ctx )
   {
     if ( TDLevel.isDebugBuild() ) return;
-    if ( ! TDSetting.mAnalytics ) return;
+    // if ( ! TDSetting.mAnalytics ) return; // FIXME debug force analytics
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;
     String today = TDUtil.getDateString( "yyyy.MM.dd" );
