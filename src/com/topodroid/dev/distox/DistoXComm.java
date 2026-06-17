@@ -18,6 +18,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.ListerHandler;
+// import com.topodroid.TDX.TDandroid;
 // import com.topodroid.TDX.TDToast;
 
 import com.topodroid.dev.Device;
@@ -454,8 +455,9 @@ public class DistoXComm extends TopoDroidComm
           } catch ( IOException e ) {
             // Toast must run on UI Thread
             // not sure this is good because it shows also when reconnection is interrupted
-            // TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
-            //   public void run() {
+            // // TopoDroidApp.mActivity.runOnUiThread(
+            // TDandroid.runOnMainThread(
+            //   new Runnable() { public void run() {
             //     TDToast.makeBad( R.string.connection_error  );
             //   }
             // } );

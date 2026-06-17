@@ -65,8 +65,9 @@ class GlSurfaceView extends GLSurfaceView
     final float dx0 = dx * TOUCH_TRANSLATE_FACTOR;
     final float dy0 = dy * TOUCH_TRANSLATE_FACTOR;
     // queueEvent
-    mApp.runOnUiThread( new Runnable() {
-      @Override public void run() {
+    // mApp.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { @Override public void run() {
         mRenderer.setScaleTranslation( s0, dy0, dx0 );
         mApp.setTheTitle( mRenderer.getAngleString() );
       }
@@ -79,8 +80,9 @@ class GlSurfaceView extends GLSurfaceView
     final float dax = dy * TOUCH_ANGLE_FACTOR;
     final float day = dx * TOUCH_ANGLE_FACTOR;
     // queueEvent
-    mApp.runOnUiThread( new Runnable() {
-      @Override public void run() {
+    // mApp.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { @Override public void run() {
         GlRenderer.setXYLight( dax, day );
         mApp.setTheTitle( mRenderer.getAngleString() );
       }
@@ -92,8 +94,9 @@ class GlSurfaceView extends GLSurfaceView
     final float dax = dy * TOUCH_ANGLE_FACTOR;
     final float day = dx * TOUCH_ANGLE_FACTOR;
     // queueEvent
-    mApp.runOnUiThread( new Runnable() {
-      @Override public void run() {
+    // mApp.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { @Override public void run() {
         mRenderer.setXYAngle( dax, day );
         mApp.setTheTitle( mRenderer.getAngleString() );
       }

@@ -249,8 +249,9 @@ public class TopoDroidApp extends Application
     // TDLog.v( "APP: notify status " + status );
     if ( lister == null ) return;
     if ( mMainActivity == null ) return;
-    mMainActivity.runOnUiThread( new Runnable() { 
-      public void run () { 
+    // mMainActivity.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run () { 
         // TDLog.v("APP notify " + status + " to listers " + mListerSet.size() );
         // mListerSet.setConnectionStatus( status );
         lister.setConnectionStatus( status );
@@ -456,8 +457,9 @@ public class TopoDroidApp extends Application
   public static void resetButtonBar() 
   { 
     if ( mMainActivity == null ) return;
-    mMainActivity.runOnUiThread( new Runnable() { 
-      public void run () { 
+    // mMainActivity.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run () { 
         mMainActivity.resetButtonBar(); 
       }
     } );
@@ -466,8 +468,9 @@ public class TopoDroidApp extends Application
   public static void resetUiVisibility()
   {
     if ( mMainActivity == null ) return;
-    mMainActivity.runOnUiThread( new Runnable() { 
-      public void run () {
+    // mMainActivity.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run () {
         mMainActivity.resetUiVisibility();
       }
     } ); 
@@ -487,8 +490,9 @@ public class TopoDroidApp extends Application
   // public static void setMenuAdapter( ) 
   // { 
   //   if ( mMainActivity == null ) return;
-  //   mMainActivity.runOnUiThread( new Runnable() { 
-  //     public void run () { 
+  //   // mMainActivity.runOnUiThread(
+  //   TDandroid.runOnMainThread(
+  //     new Runnable() { public void run () { 
   //       mMainActivity.setMenuAdapter( TDInstance.getResources() ); 
   //     }
   //   } );

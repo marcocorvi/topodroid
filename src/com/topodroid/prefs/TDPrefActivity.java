@@ -731,11 +731,14 @@ public class TDPrefActivity extends Activity
 
   public void showInvalid( final TDPref pref, final String response )
   {
-    this.runOnUiThread( new Runnable() { public void run() {
-      TDToast.makeWarn( response ); 
-      if ( pref != null ) pref.setButtonValue( "---" );
-      TDSetting.setGeminiApiKey( "" );
-    } } );
+    // this.runOnUiThread( 
+    TDandroid.runOnMainThread( 
+      new Runnable() { public void run() {
+        TDToast.makeWarn( response ); 
+        if ( pref != null ) pref.setButtonValue( "---" );
+        TDSetting.setGeminiApiKey( "" );
+      }
+    } );
   }
 
   public void startGemini()

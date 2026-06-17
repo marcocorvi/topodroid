@@ -2014,7 +2014,12 @@ public class MainWindow extends Activity
           }
           TDLog.v("MAIN Export Thread done");
           final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );
-          runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
+          // runOnUiThread( 
+          TDandroid.runOnMainThread(
+            new Runnable() { public void run() {
+              TDToast.make( res );
+            }
+          } );
         }
       };
       export_thread.start();

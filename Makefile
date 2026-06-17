@@ -20,7 +20,7 @@ LOGNAME = topodroid-X
 PACKAGE = com.topodroid.$(APPCODE)
 VERSION_TARGET = $(VERSION)-$(TARGET_SDK)
 
-LANGS := cn fr hu it pt ru
+LANGS := bg cn de fr es hu it pt ru
 
 default: debug-signed
 

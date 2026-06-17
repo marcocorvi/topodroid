@@ -169,9 +169,9 @@ class QCamCompass extends Dialog
   void enableButtonsOnUiThread( final boolean enable ) // TEXTURE
   {
     if ( mParent != null ) {
-      mParent.runOnUiThread( new Runnable() {
-        @Override
-        public void run() { 
+      // mParent.runOnUiThread(
+      TDandroid.runOnMainThread(
+        new Runnable() { @Override public void run() { 
           enableButtonCancel( enable );
           enableButtonSave( enable );
         }

@@ -352,7 +352,7 @@ public class TopoDroidComm
       if ( ! mHasG ) {
         TDLog.e( "data without G packet " + mNrReadPackets /* getNrReadPackets() */ );
         // if ( TopoDroidApp.mActivity != null ) { // skip toast
-        //   TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+        //   TDandroid.runOnMainThread( new Runnable() {
         //     public void run() {
         //       TDToast.makeBG("data without G: " + mNrReadPackets /* getNrReadPackets() */, TDColor.FIXED_RED );
         //     }

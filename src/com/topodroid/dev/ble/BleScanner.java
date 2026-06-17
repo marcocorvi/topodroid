@@ -16,6 +16,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.Timer;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.R;
 
 import android.content.Context;
@@ -93,10 +94,13 @@ public class BleScanner
     int novel =  mCallback.getNovel();
     TDLog.v("Scan result: " + novel );
     final String msg = mContext.getResources().getQuantityString( R.plurals.scan_result, novel, novel );
-    mParent.runOnUiThread( new Runnable() { public void run() { 
-      mParent.setBtScanning( false );
-      TDToast.make( msg ); 
-    } } );
+    // mParent.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run() { 
+        mParent.setBtScanning( false );
+        TDToast.make( msg ); 
+      }
+    } );
   }
 
 } 

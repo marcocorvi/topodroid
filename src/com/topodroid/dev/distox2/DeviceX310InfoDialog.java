@@ -14,6 +14,7 @@ package com.topodroid.dev.distox2;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.dev.Device;
 import com.topodroid.TDX.DeviceActivity;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
@@ -94,8 +95,9 @@ public class DeviceX310InfoDialog extends MyDialog
   void updateInfo( final DeviceX310Info info )
   {
     // if ( info == null ) return;
-    mParent.runOnUiThread( new Runnable() {
-      public void run() {
+    // mParent.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run() {
         if ( info == null ) {
           tv_code.setText( mParent.getResources().getString( R.string.read_failed ) );
         } else {

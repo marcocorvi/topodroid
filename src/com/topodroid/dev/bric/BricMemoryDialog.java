@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.R;
 
 import com.topodroid.ui.MyDialog;
@@ -68,8 +69,9 @@ public class BricMemoryDialog extends MyDialog
 
   public void updateMMSS()
   {
-    mParent.runOnUiThread( new Runnable(){
-      public void run() {
+    // mParent.runOnUiThread( 
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run() {
         String[] mmss = TDUtil.currentMinuteSecond().split(":");
         // TDLog.v( "timer tick " + mmss[0] + ":" + mmss[1] );
         if ( tv_minute != null ) tv_minute.setText( mmss[0] );

@@ -174,8 +174,9 @@ class TimerTask extends AsyncTask<Long >
   {
     if ( mIsRegistered ) mSensorManager.unregisterListener( this );
     if ( mActivity != null ) {
-      mActivity.runOnUiThread( new Runnable() {
-        public void run() {
+      // mActivity.runOnUiThread(
+      TDandroid.runOnMainThread(
+        new Runnable() { public void run() {
           // TDLog.Log( TDLog.LOG_PHOTO, "Timer task post exec. Acc " + mCntGrv + " Mag " + mCntMag + " run " + mRun );
           // TDLog.v( "Timer task post exec. " + result + " Acc " + mCntGrv + " Mag " + mCntMag );
           if ( result == 0 ) {

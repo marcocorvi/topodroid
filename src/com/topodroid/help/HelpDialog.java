@@ -162,7 +162,8 @@ public class HelpDialog extends MyDialog
 
   public void showInvalid( final TDPref pref, final String response )
   {
-    mParent.runOnUiThread( new Runnable() { public void run() {
+    // mParent.runOnUiThread(
+    TDandroid.runOnMainThread( new Runnable() { public void run() {
       TDToast.makeWarn( response ); 
       if ( pref != null ) pref.setButtonValue( "---" );
       TDSetting.setGeminiApiKey( "" );

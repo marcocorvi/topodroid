@@ -314,8 +314,9 @@ public class FixedActivity extends Activity
                               final double alt,  // ellipsoid meters
                               final double acc ) // accuracy
   {
-    runOnUiThread( new Runnable() {
-      public void run() {
+    // runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run() {
         WorldMagneticModel wmm = new WorldMagneticModel( TDInstance.context );
         double geo = wmm.ellipsoidToGeoid( lat, lng, alt ); 
         int nr = 0;

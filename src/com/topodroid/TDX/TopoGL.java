@@ -166,8 +166,9 @@ public class TopoGL extends Activity
   // public void sendMessage( final Message msg ) 
   // {
   //   final TopoGL app = this;
-  //   runOnUiThread( new Runnable() {
-  //     @Override public void run() {
+  //   // runOnUiThread(
+  //   TDandroid.runOnMainThread(
+  //     new Runnable() { @Override public void run() {
   //       // TDLog.v("TopoGL got message - type " + msg.what );
   //       if ( msg == null ) return;
   //       Bundle data = msg.getData();

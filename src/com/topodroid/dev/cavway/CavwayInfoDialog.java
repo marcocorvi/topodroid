@@ -16,6 +16,7 @@ import com.topodroid.TDX.R;
 // import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TopoDroidAlertDialog;
+import com.topodroid.TDX.TDandroid;
 // import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 // import com.topodroid.dev.ble.BleUtils;
@@ -182,8 +183,9 @@ public class CavwayInfoDialog extends MyDialog
   // {
   //   if ( info == null ) return;
   //   if ( mDone ) return;
-  //   mParent.runOnUiThread( new Runnable() {
-  //     public void run() {
+  //   // mParent.runOnUiThread(
+  //   TDandroid.runOnMainThread(
+  //     new Runnable() public void run() {
   //       tv_code.setText(     info.mCode );
   //       tv_firmware.setText( info.mFirmware );
   //       tv_hardware.setText( info.mHardware );

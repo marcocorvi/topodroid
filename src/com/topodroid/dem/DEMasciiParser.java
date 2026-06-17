@@ -137,7 +137,7 @@ public class DEMasciiParser extends ParserDEM
       //   mNorth1 += d * mDim2;
       //   // mNorth2 -= d * mDim2;
       //   final String res = TDInstance.getResources().getString( R.string.TODO );
-      //   mParent.runOnUiThread( new Runnable() { public void run() { TDToast.make( res ); } } );
+      //   TDandroid.runOnMainThread( new Runnable() { public void run() { TDToast.make( res ); } } );
       // }
 
       if ( mNr1 <= 1 || mNr2 <= 1 ) {

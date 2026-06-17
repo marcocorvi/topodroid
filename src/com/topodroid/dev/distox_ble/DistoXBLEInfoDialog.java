@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.topodroid.TDX.DeviceActivity;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.R;
 // import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
@@ -131,8 +132,9 @@ public class DistoXBLEInfoDialog extends MyDialog
   {
     if ( info == null ) return;
     if ( mDone ) return;
-    mParent.runOnUiThread( new Runnable() {
-      public void run() {
+    // mParent.runOnUiThread(
+    TDandroid.runOnMainThread(
+      new Runnable() { public void run() {
         tv_code.setText(     info.mCode );
         tv_firmware.setText( info.mFirmware );
         tv_hardware.setText( info.mHardware );

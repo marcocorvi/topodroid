@@ -33,7 +33,12 @@ public class TDAzimuth
     mFixedExtend = ( azimuth_manual )? 1L : 0L;
     // TDLog.v( "reset Ref Azimuth: " + azimuth + " fixed: " + mFixedExtend + " < " +  TDSetting.mAzimuthManual );
     if ( window != null ) {
-      window.runOnUiThread( new Runnable() { public void run() { window.setRefAzimuthButton(); } } );
+      // window.runOnUiThread(
+      TDandroid.runOnMainThread(
+        new Runnable() { public void run() {
+          window.setRefAzimuthButton();
+        }
+      } );
     }
     // DrawingWindow does not have the RefAzimuth setting
   }

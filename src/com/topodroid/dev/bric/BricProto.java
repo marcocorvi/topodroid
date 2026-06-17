@@ -20,6 +20,7 @@ import com.topodroid.dev.ble.BleCallback;
 // import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.ListerHandler;
 import com.topodroid.util.TDLog;
 import com.topodroid.prefs.TDSetting;
@@ -155,8 +156,11 @@ public class BricProto extends TopoDroidProtocol
         TDLog.e("BRIC proto: missed data, last " + mLastIndex + " current " + mIndex );
         if ( TDSetting.mBricMode != BricMode.MODE_PRIM_ONLY && TopoDroidApp.mMainActivity != null ) {
           final String lost = "missed " + (mIndex - mLastIndex -1) + " data";
-          TopoDroidApp.mMainActivity.runOnUiThread( new Runnable() { 
-            public void run() { TDToast.makeBad( lost ); }
+          // TopoDroidApp.mMainActivity.runOnUiThread(
+          TDandroid.runOnMainThread(
+            new Runnable() { public void run() {
+              TDToast.makeBad( lost );
+            }
           } );
         }
       }
