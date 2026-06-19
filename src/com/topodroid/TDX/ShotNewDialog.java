@@ -395,7 +395,7 @@ class ShotNewDialog extends MyDialog
         bx = 360 - Float.parseFloat( b.replace(',','.') ); // DIVING_BEARING
         if ( bx >= 360 ) bx -= 360;
       } catch ( NumberFormatException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Shot new " + e.getMessage() );
       }
     }
     return bx;

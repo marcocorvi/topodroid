@@ -30,6 +30,7 @@ import com.topodroid.help.UserManualActivity;
 // import java.util.Locale;
 
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 
 import android.content.Context;
 // import android.content.ComponentName;
@@ -143,6 +144,21 @@ public class FixedActivity extends Activity
 
 
 // -------------------------------------------------------------------
+  /** DEBUG 
+   * @param k flag of he current GPS app
+   * @return the name of the current GPS app
+   */
+  private String getGpsAppName( int k ) 
+  {
+    if ( k == FLAG_MOBILE_TOPOGRAPHER ) { return "MobileTopographer"; }
+    if ( k == FLAG_GPX_RECORDER       ) { return "GPX Recorder"; }
+    if ( k == FLAG_GPS_POSITION       ) { return "GPS position"; }
+    if ( k == FLAG_GPS_TEST           ) { return "GPStest"; }
+    if ( k == FLAG_GPS_LOGGER         ) { return "GPS logger"; }
+    if ( k == FLAG_GPS_POINT          ) { return "GPS point"; }
+    return "unknown";
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) 
   {
@@ -159,12 +175,14 @@ public class FixedActivity extends Activity
     hasGPSTest  = TDandroid.hasPackage( this, "com.android.gpstest" );
     mImportFlag = TDandroid.getImportPointFlag( this );
     mImportAppNr = 0;
-    // TDLog.v("FIXED import flag " + mImportFlag );
+    // TDLog.v("FIXED activity: import flag " + mImportFlag + " has GPStest " + hasGPSTest + " has GPS " + hasGps );
     if ( mImportFlag > 0 ) {
       int app = TDSetting.mGeoImportApp;
+      // TDLog.v("FIXED activity: import app [1] " + app );
       for ( int k=1; k<= FLAG_GPS_MAX; k<<=1 ) {
         if ( ( mImportFlag & k ) > 0 ) { ++mImportAppNr; } else if ( app == k ) { app = 0; }
       }
+      // TDLog.v("FIXED activity: import app [2] " + app );
       if ( app == 0 ) {
         if ( ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) { app =  1; }
         else if ( ( mImportFlag & FLAG_GPX_RECORDER  ) > 0 ) { app =  2; }
@@ -175,6 +193,7 @@ public class FixedActivity extends Activity
         TDSetting.setGeoImportApp( this, app );
         // setTheTitle();
       }
+      TDLog.v("FIXED activity: import app " + app + ": " + getGpsAppName( app ) );
     }
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
@@ -511,7 +530,7 @@ public class FixedActivity extends Activity
     TDLog.v("FIXED import app " + TDSetting.mGeoImportApp );
     int request = 0;
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19 - TODO use TDandroid.getOpenDocumentIntent
-    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // point-list file
+    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // point-list file ".pts"
       TopoDroidApp.updateAnalytic( TDAnalytics.MOB_TOP );
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_MOBILE_TOPOGRAPHER;
@@ -875,25 +894,56 @@ public class FixedActivity extends Activity
         Uri uri = intent.getData();
         try { 
           boolean ok = true;
+          String filepath = uri.getPath();
+          TDLog.v("Import MT <" + filepath + ">" );
+          // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+          // FileReader fr = TDsafUri.docFileReader( pfd );
+          // BufferedReader br = new BufferedReader( fr );
+
           InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
           BufferedReader br = new BufferedReader( isr );
           String line = br.readLine();
           if ( line != null ) {
-            // TDLog.v( "read " + line );
             ArrayList< String > gps_points = new ArrayList<>();
-            do {
-              // syntax: name, lat, lng, h_ell, h_geo
-              // units:        dec.degree meters
-              String[] vals = line.split(",");
-              int len = vals.length;
-              if ( len != 5 ) {
-                ok = false;
-                break;
+            if ( filepath.endsWith(".txt") ) { // |pt|lat|long|alt|E|N|Z|height|
+              while ( line != null && ! line.startsWith( "|Point" ) ) {
+                line = br.readLine();
+                TDLog.v("Import MT 1 <" + line.trim() + ">" );
               }
-              gps_points.add( line.trim() ); // add the whole line - needed for item click processing
               line = br.readLine();
-              // TDLog.v( "read " + line );
-            } while ( line != null );
+              TDLog.v("Import MT 2 <" + line.trim() + ">" );
+              line = br.readLine();
+              TDLog.v("Import MT <" + line.trim() + ">" );
+              while ( line != null ) {
+                String[] vals = line.split("|");
+                int len = vals.length;
+                TDLog.v("length " + len );
+                if ( len != 10 ) {
+                  ok = false;
+                  break;
+                }
+                gps_points.add( vals[1] + ", " + vals[2] + ", " + vals[3] + ", " + vals[4] + ", " + vals[8] );
+                line = br.readLine();
+                TDLog.v("Import MT <" + line.trim() + ">" );
+              }
+            } else if ( filepath.endsWith(".pts") ) {
+              TDLog.v( "read " + line );
+              do {
+                // syntax: name, lat, lng, h_ell, h_geo
+                // units:        dec.degree meters
+                String[] vals = line.split(",");
+                int len = vals.length;
+                if ( len != 5 ) {
+                  ok = false;
+                  break;
+                }
+                gps_points.add( line.trim() ); // add the whole line - needed for item click processing
+                line = br.readLine();
+                // TDLog.v( "read " + line );
+              } while ( line != null );
+            } else {
+              TDToast.make("Not a MobileTopographer file");
+            }
             if ( ! ok ) {
               TDToast.makeBad( R.string.MT_bad_file );
             } else if ( gps_points.size() > 0 ) {

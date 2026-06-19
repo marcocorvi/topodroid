@@ -96,7 +96,7 @@ public class Cave3DSurvey
       nm = dis.readUTF();
       col = dis.readInt();
     } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "3D deserialize: " + e.getMessage() );
     }
     // TDLog.v("Cave3D survey deserialized " + id + " " + nm + " color " + col );
     return new Cave3DSurvey( nm, id, -1, col );

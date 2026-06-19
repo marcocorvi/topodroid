@@ -147,7 +147,7 @@ public class DrawingShp
       (new Archiver()).compressFiles( fos, dirname, files );
 
     } catch ( IOException e ) {
-      TDLog.e( "SHP io-exception " + e.getMessage() );
+      TDLog.e( "SHP i/o " + e.getMessage() );
       return false;
     } finally {
       TDFile.deleteMSdir( dirname ); // delete temporary shape-dir

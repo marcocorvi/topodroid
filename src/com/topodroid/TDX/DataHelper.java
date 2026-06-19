@@ -2294,7 +2294,7 @@ public class DataHelper extends DataSetObservable
           float depth = depths.get(from).floatValue() - shot.len * TDMath.sind(shot.cln);
           depths.put(to, Float.valueOf(depth));
         } catch ( NullPointerException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "insert import shot diving: " + e.getMessage() );
         }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + to + "> depth " + depth );
       }
@@ -2308,7 +2308,7 @@ public class DataHelper extends DataSetObservable
           float depth = depths.get(to).floatValue() + shot.len * TDMath.sind(shot.cln);
           depths.put( from, Float.valueOf( depth ) );
         } catch ( NullPointerException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "insert import shot diving: " + e.getMessage() );
         }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + from + "> depth " + depth );
       }
@@ -6566,7 +6566,7 @@ public class DataHelper extends DataSetObservable
       cursor = myDB.rawQuery( query, new String[] { } );
       ret = ( cursor != null && cursor.moveToFirst() ); 
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( RuntimeException e ) { TDLog.e( e.getMessage() );
+    } catch ( RuntimeException e ) { TDLog.e( "DB has name: " + e.getMessage() );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
@@ -7600,9 +7600,9 @@ public class DataHelper extends DataSetObservable
        }
        fr.close();
      } catch ( FileNotFoundException e ) { // DistoX-SAF
-       TDLog.e( e.getMessage() );
+       TDLog.e( "DB load from file: " + e.getMessage() );
      } catch ( IOException e ) {
-       TDLog.e( e.getMessage() );
+       TDLog.e( "DB load from file: " + e.getMessage() );
      }
      // TDLog.v( "DB success: " + success + " SID " + sid );
 

@@ -79,21 +79,21 @@ class SurveyCalibrationDialog extends MyDialog
         try {
           ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() ) / TDSetting.mUnitLength;
         } catch ( NumberFormatException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "Survey calib length " + e.getMessage() );
         }
       }
       if ( mETazimuth.getText() != null ) {
         try {
           ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() ) / TDSetting.mUnitAngle;
         } catch ( NumberFormatException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "Survey calib azimuth " + e.getMessage() );
         }
       }
       if ( mETclino.getText() != null ) {
         try {
           ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() ) / TDSetting.mUnitAngle;
         } catch ( NumberFormatException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "Survey calib clino " + e.getMessage() );
         }
       }
       ManualCalibration.mLRUD = mCBlrud.isChecked();

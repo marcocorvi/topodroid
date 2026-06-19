@@ -171,7 +171,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // bw.flush(); // FIXME system error
         bw.close();
       } catch ( IOException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Save plot " + e.getMessage() );
         e.printStackTrace(); 
         return false;
       } finally {
@@ -196,7 +196,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         bw.close();
         mTherionExported = true;
       } catch ( IOException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Save plot " + e.getMessage() );
         e.printStackTrace(); 
         return false;
       } finally {

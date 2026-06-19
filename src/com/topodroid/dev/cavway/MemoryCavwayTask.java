@@ -129,7 +129,7 @@ public class MemoryCavwayTask extends AsyncTask<Void, Integer, Integer>
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TDLog.e("IO error " + e.getMessage() );
+      TDLog.e("Cavway mem i/o " + e.getMessage() );
     }
   }
 }

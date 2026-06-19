@@ -260,7 +260,7 @@ public class MainWindow extends Activity
   {
     if ( DeviceUtil.hasAdapter() ) {
       if ( DeviceUtil.isAdapterEnabled() ) {
-        // TDLog.Debug( "start device window");
+        // TDLog.Debug( "Main start device window");
         startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       } else {
         TDToast.makeBad( R.string.not_enabled );
@@ -306,7 +306,7 @@ public class MainWindow extends Activity
   @Override
   public void onClick(View view)
   { 
-    // TDLog.Log( TDLog.LOG_INPUT, "MainWindow onClick() " + view.toString() );
+    // TDLog.v( "Main on click " + view.toString() );
     if ( onMenu ) {
       closeMenu();
       return;
@@ -366,7 +366,7 @@ public class MainWindow extends Activity
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           // TDToast.makeBad( R.string.no_thmanager );
-          TDLog.e( "Td Manager activity not started" );
+          TDLog.e( "Main TdManager not started" );
         }
       } else if ( TDLevel.overExpert && TDSetting.mTh2Edit && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // TH2EDIT DRAWING
         TopoDroidApp.updateAnalytic( TDAnalytics.TH2_EDIT );
@@ -376,7 +376,7 @@ public class MainWindow extends Activity
           startActivity( plotIntent );
         } catch ( ActivityNotFoundException e ) {
           // TDToast.makeBad( R.string.no_thmanager );
-          TDLog.e( "Th2 edit activity not started" );
+          TDLog.e( "Main Th2-edit not started" );
         }
       }
     }
@@ -399,7 +399,7 @@ public class MainWindow extends Activity
 
   void startSplitSurvey( long old_sid, long old_id )
   {
-    // TDLog.v( "MAIN split survey");
+    // TDLog.v( "Main split survey");
     TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_SPLIT );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
@@ -412,7 +412,7 @@ public class MainWindow extends Activity
    */
   void startMoveSurvey( long old_sid, long old_id, String new_survey )
   {
-    // TDLog.v( "MAIN move survey");
+    // TDLog.v( "Main move survey");
     TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_MOVE );
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
       mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
@@ -468,7 +468,7 @@ public class MainWindow extends Activity
     }
 
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.e("import view instance of " + view.toString() );
+      TDLog.e("Main view instance of " + view.toString() );
       return;
     }
     final CharSequence item = ((TextView) view).getText();
@@ -502,7 +502,7 @@ public class MainWindow extends Activity
     // setTitle( // mApp.getConnectionStateTitleStr() + TDInstance.cwd ); // IF_COSURVEY
     setTitle( TDInstance.cwd );
     setTitleColor( TDColor.TITLE_NORMAL );
-    // TDLog.v( "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
+    // TDLog.v( "Main set title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
     
 
@@ -531,7 +531,7 @@ public class MainWindow extends Activity
 
   // public void importFile( String filename )
   // {
-  //   // TDLog.v( "import file " + filename );
+  //   // TDLog.v( "Main import file " + filename );
   //   // FIXME connect-title string
   //   if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".th") ) {
   //     String filepath = TDPath.getImportFile( filename );
@@ -587,7 +587,7 @@ public class MainWindow extends Activity
   public void importStream( Uri uri, String name, String type )
   {
     // FIXME connect-title string
-    // TDLog.v( "import with uri stream <" + name + "> type <" + type + ">" );
+    // TDLog.v( "Main import with uri stream <" + name + "> type <" + type + ">" );
     if ( type.equals(".top") ) {
       setTitleImport();
       new ImportPocketTopoTask( this, uri ).execute( null, name );  // null filename (use fis); name = surveyname
@@ -610,14 +610,14 @@ public class MainWindow extends Activity
   public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    TDLog.v( "MAIN import with reader <" + name + "> type <" + type + "> + Uri path " +  uri.getPath() );
+    TDLog.v( "Main import with reader <" + name + "> type <" + type + "> + Uri path " +  uri.getPath() );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals( TDPath.TH ) ) {
       setTitleImport();
       // String filepath = uri.getPath().replace("document/primary:", "/sdcard/" ); // FIXME_IMPORT
       String filepath = uri.getPath().replace("document/primary:", Environment.getExternalStorageDirectory().getPath() + "/" ); // FIXME_IMPORT
-      TDLog.v( "MAIN import File Path " + filepath );
+      TDLog.v( "Main import File Path " + filepath );
       new ImportTherionTask( this, pfd, data ).execute( name, name, filepath );
     } else if ( type.equals( TDPath.DAT ) ) {
       setTitleImport();
@@ -625,7 +625,7 @@ public class MainWindow extends Activity
       // (new ImportDatDialog( this, this, pfd, name )).show();
     } else if ( type.equals( TDPath.TRO ) || type.equals( TDPath.TROX ) ) {
       setTitleImport();
-      // TDLog.v("type " + type + " data.trox " + data.mTrox );
+      // TDLog.v( "Main type " + type + " data.trox " + data.mTrox );
       new ImportVisualTopoTask( this, pfd, data ).execute( name, name );
       // (new ImportTroDialog( this, this, pfd, name )).show();
     } else if ( type.equals( TDPath.SVX ) ) {
@@ -647,7 +647,7 @@ public class MainWindow extends Activity
       } else if ( data.mCsv == ImportData.CSV_CAVWAY ) {
         new ImportCavwayCsvTask( this, pfd ).execute( name ); 
       } else { // sould not occur
-        TDLog.e( "no CSV type specified" );
+        TDLog.e( "Main no CSV type specified" );
         // TDToast.makeWarn( R.string.warning_no_csv_type );
       }
     // } else {
@@ -676,7 +676,7 @@ public class MainWindow extends Activity
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
-    // TDLog.v("MAIN config changed");
+    // TDLog.v("Main config changed");
     TDLocale.resetTheLocale();
   }
 
@@ -684,7 +684,7 @@ public class MainWindow extends Activity
    */
   void setMenuAdapter( )
   {
-    // TDLog.v("MAIN set menu adapter");
+    // TDLog.v("Main set menu adapter");
     Resources res = getResources();
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<String >(mActivity, R.layout.menu );
 
@@ -781,7 +781,7 @@ public class MainWindow extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    // TDLog.v("MAIN on Create");
+    // TDLog.v("Main on Create");
 
     // androidx.core.view.WindowCompat.setDecorFitsSystemWindows( getWindow(), false );
     // getWindpw().setStatusBarColor( Color.TRANSPARENT );
@@ -791,7 +791,7 @@ public class MainWindow extends Activity
 
     TDandroid.setScreenOrientation( this );
 
-    // TDLog.Profile("TDActivity onCreate");
+    // TDLog.Profile("Main on create);
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
     mActivity = this;
@@ -811,7 +811,7 @@ public class MainWindow extends Activity
     list.setOnItemLongClickListener( this );
     list.setDividerHeight( 2 );
 
-    // TDLog.Profile("TDActivity menu");
+    // TDLog.Profile("Main menu");
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
@@ -819,7 +819,7 @@ public class MainWindow extends Activity
     // setMenuAdapter( ); // in on Start()
     // closeMenu();
 
-    // TDLog.Profile("TDActivity buttons");
+    // TDLog.Profile("Main buttons");
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlaceholder( true );
 
@@ -828,12 +828,12 @@ public class MainWindow extends Activity
     // closeMenu();
 
     // if ( ! TDandroid.canRun( this, this ) ) {
-    //   // TDLog.v("PERM " + "cannot run");
+    //   // TDLog.v("Main PERM " + "cannot run");
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), "Required Permissions not granted", 
     //     new DialogInterface.OnClickListener() {
     //       @Override
     //       public void onClick( DialogInterface dialog, int btn ) { 
-    //         // TDLog.v("PERM " + "create perms");
+    //         // TDLog.v("Main PERM " + "create perms");
     //         ++ mRequestPermissionTime;
     //         TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
     //       }
@@ -842,7 +842,7 @@ public class MainWindow extends Activity
 
     // mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
 
-    // TDLog.v("VERSION " + TDVersion.string() );
+    // TDLog.v("Main VERSION " + TDVersion.string() );
 
     // The following is good to get permission to the document-tree
     // which does not present a File API to the files
@@ -850,8 +850,8 @@ public class MainWindow extends Activity
     //     content://com.android.externalstorage.documents/tree/primary%3ADocuments
     // 
     // if ( ! TDInstance.hasFolderPermission() ) {
-    //   // TDLog.v("no folder permission ");
-    //   // TDLog.v("request TREE URI");
+    //   // TDLog.v("Main no folder permission ");
+    //   // TDLog.v("Main request TREE URI");
     //   Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT_TREE );
     //   intent.addFlags( Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
     //                  | Intent.FLAG_GRANT_WRITE_URI_PERMISSION 
@@ -888,24 +888,24 @@ public class MainWindow extends Activity
    */
   void showInitDialogs( ) // PRIVATE_STORAGE dropped arg say_dialog_r effectively unused
   {
-    TDLog.v( "INIT dialogs - already done: " + done_init_dialogs /* + " say_dialog_r " + say_dialog_r */ );
+    TDLog.v( "Main INIT dialogs - already done: " + done_init_dialogs /* + " say_dialog_r " + say_dialog_r */ );
     if ( TDandroid.PRIVATE_STORAGE && TopoDroidApp.sayDialogR() ) { // FIXME_R
-      TDLog.v( "MAIN Dialog R: delaying init environment second");
+      TDLog.v( "Main Dialog R: delaying init environment second");
       (new DialogR( this, this)).show();
       // TopoDroidApp.setSayDialogR( false );
       return;
     } 
     if ( done_init_dialogs ) return;
     String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
-    // TDLog.v( "INIT dialogs: app_dir <" + app_dir + ">" );
+    // TDLog.v( "Main INIT dialogs: app_dir <" + app_dir + ">" );
     done_init_dialogs = true;
-    // TDLog.v( "INIT environment second");
+    // TDLog.v( "Main INIT environment second");
     // boolean ok_folder = 
     TopoDroidApp.initEnvironmentSecond( );
 
-    // TDLog.v( "INIT environment second done " + ok_folder );
+    // TDLog.v( "Main INIT environment second done " + ok_folder );
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
-    //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
+    //   // TDLog.v( "Main init environment target " + TDVersion.targetSdk() );
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), ( ok_folder ? R.string.target_sdk : R.string.target_sdk_stale ),
     //     new DialogInterface.OnClickListener() {
     //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
@@ -927,7 +927,7 @@ public class MainWindow extends Activity
     //   );
     // }
 
-    // TDLog.v( "INIT welcome screen");
+    // TDLog.v( "Main INIT welcome screen");
     if ( mApp.mWelcomeScreen ) {
       TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
       mApp.mWelcomeScreen = false;
@@ -944,7 +944,7 @@ public class MainWindow extends Activity
       }
     }
     
-    // TDLog.v( "INIT symbols");
+    // TDLog.v( "Main INIT symbols");
     // FIXME INSTALL_SYMBOL
     // if ( mApp.askSymbolUpdate ) {
     //   // (new TopoDroidVersionDialog(this, mApp)).show();
@@ -973,7 +973,7 @@ public class MainWindow extends Activity
     //     return null;
     //   }
     // };
-    // TDLog.Profile("TDActivity thread");
+    // TDLog.Profile("Main thread");
     // if ( mApp_mCheckPerms >= 0 )
     {
       Thread loader = new Thread() {
@@ -989,14 +989,14 @@ public class MainWindow extends Activity
     }
     setTheTitle();
 
-    // TDLog.v( "INIT check intent");
+    // TDLog.v( "Main INIT check intent");
     Intent intent = getIntent();
     if ( intent != null ) {
       Bundle extras = intent.getExtras();
       if ( extras != null ) {
         String action = intent.getExtras().getString("action");
         if ( action != null ) {
-          // TDLog.v("SHORT action " + action);
+          // TDLog.v("Main SHORT action " + action);
           if ( action.equals("new_survey") ) {
             startSurveyDialog( );
           } else if ( action.equals("distox") ) {
@@ -1015,7 +1015,7 @@ public class MainWindow extends Activity
   //     @Override
   //     public void run() { 
   //       File dir = TDPath.getTdrDir();
-  //       // TDLog.v( "clear tdr backups from " + dir.getPath() );
+  //       // TDLog.v( "Main clear tdr backups from " + dir.getPath() );
   //       File[] files = dir.listFiles( new FileFilter() { 
   //         public boolean accept( File f ) { 
   //             return f.getName().matches( ".*tdr.bck.?" );
@@ -1037,7 +1037,7 @@ public class MainWindow extends Activity
   void resetButtonBar()
   {
     int size = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    TDLog.v("MAIN reset button cache. Size " + size );
+    TDLog.v("Main reset button cache. Size " + size );
     MyButton.resetButtonCache( size );
 
     // TDToast.make( "SIZE " + size );
@@ -1160,11 +1160,11 @@ public class MainWindow extends Activity
   public void onStart()
   {
     super.onStart();
-    TDLog.v( "MAIN on Start " );
+    TDLog.v( "Main on Start " );
     // restoreInstanceFromFile();
-    // TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
+    // TDLog.v( "Main on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
-      // TDLog.v("MAIN cannot manage external storage");
+      // TDLog.v("Main cannot manage external storage");
       TDandroid.requestExternalStorage( this, this );
     }
 
@@ -1179,7 +1179,7 @@ public class MainWindow extends Activity
               // enableIntent.setAction( Intent.ACTION_DEFAULT ); // SDK-35
               startActivityForResult(enableIntent, TDRequest.REQUEST_ENABLE_BT);
             } catch ( SecurityException e ) {
-              // TDLog.e("SECURITY request bluetooth " + e.getMessage() );
+              // TDLog.e("Main SECURITY request bluetooth " + e.getMessage() );
               TDToast.makeBad("Security error: request bluetooth");
             }
           } else {
@@ -1200,27 +1200,27 @@ public class MainWindow extends Activity
     // if ( ! TDLevel.mDeveloper ) new TDVersionDownload( this ).execute(); 
 
     // if ( ! TDandroid.canManageExternalStorage( this ) ) {
-    //   // TDLog.v("MAIN cannot manage external storage");
+    //   // TDLog.v("Main cannot manage external storage");
     //   (new DialogR( this, this)).show(); // FIXME_R
     // } else
     {
       // the database is opened after the second step of envs initialization
-      // TDLog.v("MAIN can manage external storage - has db " + TopoDroidApp.hasTopoDroidDatabase() );
+      // TDLog.v("Main can manage external storage - has db " + TopoDroidApp.hasTopoDroidDatabase() );
       // int perms = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
 
       if ( TDandroid.canRun( mApp, mActivity ) && ! TDandroid.PRIVATE_STORAGE ) {
-        // TDLog.v("MAIN can run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " init envs first [1]");
+        // TDLog.v("Main can run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " init envs first [1]");
         mApp.initEnvironmentFirst( );
-        // TDLog.v("MAIN show init dialogs [1]");
+        // TDLog.v("Main show init dialogs [1]");
         showInitDialogs( );
         // resetButtonBar();
       } else {
         // if ( TDandroid.PRIVATE_STORAGE && ! TopoDroidApp.hasTopoDroidDatabase() ) TopoDroidApp.setSayDialogR( true );
-        TDLog.v("MAIN: has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
+        TDLog.v("Main: has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
         if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
-          // TDLog.v("MAIN can run - init envs first [2]");
+          // TDLog.v("Main can run - init envs first [2]");
           mApp.initEnvironmentFirst( );
-          // TDLog.v("MAIN show init dialogs [2]");
+          // TDLog.v("Main show init dialogs [2]");
           showInitDialogs( );
           // resetButtonBar();
         // } else {  // the followings are delayed after the permissions have been granted
@@ -1267,9 +1267,9 @@ public class MainWindow extends Activity
         //   Uri data = intent.getData();
         //   if ( data != null ) {
         //     mZipIntent = intent;
-        //     TDLog.v("MAIN got intent " + action + " - mZipPath " + data.getPath() );
+        //     TDLog.v("Main got intent " + action + " - mZipPath " + data.getPath() );
         //   } else {
-        //     TDLog.v("MAIN got intent " + action + " - null data");
+        //     TDLog.v("Main got intent " + action + " - null data");
         //   }
         // }
       }
@@ -1285,7 +1285,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    TDLog.v( "MAIN on Resume " );
+    TDLog.v( "Main on Resume " );
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1293,7 +1293,7 @@ public class MainWindow extends Activity
     // TODO OPEN DATABASE HERE
     boolean ok_folder = TopoDroidApp.initEnvironmentThird();
 
-    // TDLog.v( "MAIN init environment third done return " + ok_folder );
+    // TDLog.v( "Main init environment third done return " + ok_folder );
     // FIXME_HICSUM
     // if ( TDandroid.mHicsum == null ) {
     //   if ( ! TDandroid.checkCoarseLocation( this ) ) {
@@ -1309,7 +1309,7 @@ public class MainWindow extends Activity
     //     TDandroid.getCoarseLocation( this, pt );
     //   }
     // } else {
-    //   // TDLog.v("Hicsum in db " + mHicsum );
+    //   // TDLog.v("Main Hicsum in db " + mHicsum );
     //   TopoDroidApp.notifyHicsum( this, TDandroid.mHicsum );
     // }
 
@@ -1317,7 +1317,7 @@ public class MainWindow extends Activity
     TopoDroidApp.setCT( this );
 
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
-    //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
+    //   // TDLog.v( "Main init environment target " + TDVersion.targetSdk() );
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), ( ok_folder ? R.string.target_sdk : R.string.target_sdk_stale ),
     //     new DialogInterface.OnClickListener() {
     //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
@@ -1368,8 +1368,7 @@ public class MainWindow extends Activity
   protected synchronized void onPause() 
   { 
     super.onPause();
-    TDLog.v("MAIN on Pause");
-    // TDLog.Log( TDLog.LOG_MAIN, "onPause " );
+    TDLog.v("Main on Pause");
     mApp.suspendComm();
   }
 
@@ -1377,7 +1376,7 @@ public class MainWindow extends Activity
   public void onStop()
   {
     super.onStop();
-    TDLog.v("MAIN on Stop");
+    TDLog.v("Main on Stop");
     // if ( TopoDroidApp.isTracing ) {
     //   Debug.stopMethodTracing();
     // }
@@ -1390,7 +1389,7 @@ public class MainWindow extends Activity
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
     }
-    TDLog.v( "MAIN on Destroy " );
+    TDLog.v( "Main on Destroy " );
     // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
@@ -1419,7 +1418,7 @@ public class MainWindow extends Activity
   @Override
   public void onBackPressed () // askClose
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "MainWindow onBackPressed()" );
+    // TDLog.v( "Main on back pressed" );
     if ( onMenu ) {
       closeMenu();
       return;
@@ -1450,7 +1449,7 @@ public class MainWindow extends Activity
   @Override
   protected void attachBaseContext( Context ctx )
   {
-    // TDLog.v("MAIN attach base context");
+    // TDLog.v("Main attach base context");
     TDInstance.context = ctx;
     TDLocale.resetTheLocale( );
     super.attachBaseContext( TDInstance.context );
@@ -1463,18 +1462,18 @@ public class MainWindow extends Activity
    */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
-    // TDLog.v( "Main Window on Activity Result " + request + " " + result );
+    // TDLog.v( "Main on Activity Result " + request + " " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case TDRequest.REQUEST_CWD:
         if ( result == RESULT_OK && extras != null ) {
           String cwd = extras.getString( TDTag.TOPODROID_CWD );
-          TDLog.v("MAIN got CWD <" + cwd + ">" );
+          TDLog.v("Main got CWD <" + cwd + ">" );
           if ( ! TDString.isNullOrEmpty( cwd ) ) {
             TopoDroidApp.setCWDPreference( CWDfolder.folderName( cwd ) );
           }
         } else if ( result == RESULT_CANCELED ) {
-	  TDLog.e("MAIN could not set CWD");
+	  TDLog.e("Main could not set CWD");
 	}
         break;
       case TDRequest.REQUEST_ENABLE_BT:
@@ -1494,11 +1493,11 @@ public class MainWindow extends Activity
       case TDRequest.REQUEST_SETTINGS:
         if ( result == Activity.RESULT_OK ) {
           if ( TDSetting.isFlagMenu() ) {
-            // TDLog.v("MAIN setting activity result: menu flag");
+            // TDLog.v("Main setting activity result: menu flag");
             setMenuAdapter( );
           }
         } else {
-          TDLog.e("SETTINGS canceled");
+          TDLog.e("Main SETTINGS canceled");
         }
         break;
       case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
@@ -1509,7 +1508,7 @@ public class MainWindow extends Activity
             importFile( intent );
           }
         } else {
-          TDLog.e("IMPORT canceled");
+          TDLog.e("Main IMPORT canceled");
         }
         break;
     }
@@ -1523,7 +1522,7 @@ public class MainWindow extends Activity
     ContentResolver cr = this.getContentResolver();
     cr.takePersistableUriPermission( uri, take_flag );
     String dirname = uri.getLastPathSegment();
-    TDLog.v("import folder <" + dirname + ">" );
+    TDLog.v("Main import folder <" + dirname + ">" );
     String dir_id = DocumentsContract.getTreeDocumentId( uri );
     Uri child = DocumentsContract.buildChildDocumentsUriUsingTree( uri, dir_id );
     String[] projection = new String[] {
@@ -1542,7 +1541,7 @@ public class MainWindow extends Activity
           boolean is_ext = name != null && name.toLowerCase().endsWith( ".zip" );
           if ( is_zip && is_ext ) {
             Uri file = DocumentsContract.buildDocumentUriUsingTree( uri, id );
-            TDLog.v("ZIP <" + id + ">" );
+            TDLog.v("Main ZIP <" + id + ">" );
             if ( importOneZip( file, false ) ) ++cnt;
           }
         }
@@ -1570,47 +1569,47 @@ public class MainWindow extends Activity
         filename = uri.getLastPathSegment();
         int ros = filename.indexOf(":"); // drop the "content" header
         if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-          TDLog.v("MAIN import: path NULL, pathname " + filename );
+          TDLog.v("Main import: path NULL, pathname " + filename );
         // if ( filename != null ) { // always true
           int pos = filename.lastIndexOf("/");
           filename = filename.substring( pos+1 );
         // }
-        // TDLog.v( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
+        // TDLog.v( "Main URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
       // } else { // 2025-11-26
       //   // filename = (new File(path)).getName(); // FILE to get the survey name
       //   int pos = path.lastIndexOf('/');
       //   filename = ( pos >= 0 )? path.substring(pos+1) : path;
       //   int ros = filename.indexOf(":"); // drop the "content" header
       //   if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-      //   TDLog.v("MAIN import: path " + path + " filename " + filename );
-      //   // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
+      //   TDLog.v("Main import: path " + path + " filename " + filename );
+      //   // TDLog.v( "Main URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
       // }
     } else { // mime not null
       filename = uri.getLastPathSegment();
-      // TDLog.v( "MAIN import: uri " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );
+      // TDLog.v( "Main import: uri " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );
       int ros = filename.indexOf(":"); // drop the "content" header
       if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
       int pos   = filename.lastIndexOf("."); 
       int qos_1 = filename.lastIndexOf("/") + 1;
       String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
       String name = TDString.spacesToUnderscore( (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 ) );
-      TDLog.v( "MAIN import URI: filename " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
+      TDLog.v( "Main import URI: filename " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
       if ( mimetype.equals("application/zip") ) {
         importOneZip( uri, true );
         return null;
       } else {
-        // TDLog.v( "MAIN import non-zip: ext " + ext + " mime " + mimetype );
+        // TDLog.v( "Main import non-zip: ext " + ext + " mime " + mimetype );
         String type = TDPath.checkImportTypeStream( ext );
         if ( type != null ) {
-          TDLog.v( "MAIN import stream: type " + type + " name " + name );
+          TDLog.v( "Main import stream: type " + type + " name " + name );
           importStream( uri, name, type );
         } else {
           type = TDPath.checkImportTypeReader( ext );
           if ( type != null ) {
-            TDLog.v( "MAIN import reader: type " + type + " filename " + filename );
+            TDLog.v( "Main import reader: type " + type + " filename " + filename );
             importReader( uri, name, type, mImportData );
           } else {
-            TDLog.e("MAIN import reader: unsupported type NULL - filename " + filename + " ext " + ext );
+            TDLog.e("Main import reader: unsupported type NULL - filename " + filename + " ext " + ext );
             TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
             return null;
           }
@@ -1633,7 +1632,7 @@ public class MainWindow extends Activity
     // if ( fis.markSupported() ) fis.mark();
     int manifest_ok = Archiver.getOkManifest( mApp, fis );
     try { fis.close(); } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "Main 1-zip close " + e.getMessage() );
       return false;
     }
     TDsafUri.closeFileDescriptor( pfd );
@@ -1645,7 +1644,7 @@ public class MainWindow extends Activity
         fis2.close();
         ret = true;
       } catch ( IOException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Main 1-zip close-2 " + e.getMessage() );
       }
       TDsafUri.closeFileDescriptor( pfd2 );
       if ( err > 0 && toast ) { // Archiver.ERR_OK_WITH_COLOR_RESET
@@ -1653,7 +1652,7 @@ public class MainWindow extends Activity
       }
       return ret;
     } else {
-      TDLog.e("ZIP import: failed manifest error " + manifest_ok );
+      TDLog.e( "Main 1-zip manifest " + manifest_ok );
       int bad = -1;
       switch ( -manifest_ok ) {
         case  1: bad = R.string.bad_manifest_zip;      break;
@@ -1698,7 +1697,7 @@ public class MainWindow extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.e( "key down: code " + code );
+        // TDLog.e( "Main key down: code " + code );
     }
     return false;
   }
@@ -1709,19 +1708,19 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    // TDLog.v(  "MAIN perm request result " + results.length + " request time " + mRequestPermissionTime );
+    // TDLog.v(  "Main perm request result " + results.length + " request time " + mRequestPermissionTime );
     ++ mRequestPermissionTime;
     if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
         int granted = 0;
 	for ( int k = 0; k < results.length; ++ k ) {
 	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  // TDLog.v( "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
+	  // TDLog.v( "Main perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
         ++ mRequestPermissionTime;
         int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
         if ( ! TDandroid.canRun( mApp, this ) ) { // if ( not_granted > 0 /* && ! TopoDroidApp.sayDialogR() */ )
-          TDLog.e("MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
+          TDLog.e("Main perm " + not_granted + " not granted at time " + mRequestPermissionTime );
           // TDToast.makeLong( "Permissions not granted. Goodbye" );
           if ( mRequestPermissionTime > 2 ) { 
             finish();
@@ -1797,16 +1796,16 @@ public class MainWindow extends Activity
               try {
                 version = Integer.parseInt( token[1] );
               } catch ( NumberFormatException e ) {
-                TDLog.e( e.getMessage() );
+                TDLog.e( "Main man version " + e.getMessage() );
               }
             }
           }
         }
         br.close();
       } catch ( FileNotFoundException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Main man file " + e.getMessage() );
       } catch ( IOException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Main man i/o " + e.getMessage() );
       }
       // TDLog.v("MAN manifest " + lang + " " + version );
       if ( lang != null && version > 0 ) {
@@ -1841,7 +1840,7 @@ public class MainWindow extends Activity
           int current = Integer.parseInt( getResources().getString( res ) );
           if ( current > version ) { // prompt user
             final String url = getResources().getString( man );
-            // TDLog.Log( TDLog.LOG_PREFS, "User Manual lang " + lang + " res " + res + " url " + url );
+            // TDLog.v( "Main man lang " + lang + " res " + res + " url " + url );
             String msg = String.format( getResources().getString( R.string.ask_manual_update ), current, version );
             TopoDroidAlertDialog.makeAlert( this, getResources(), msg, 
               new DialogInterface.OnClickListener() {
@@ -1870,7 +1869,7 @@ public class MainWindow extends Activity
   public void doImport( String type, ImportData data )
   {
     int index = TDConst.surveyImportFormatIndex( type ); // get the format index as in TDConst
-    TDLog.v( "MAIN import type " + type + " index " + index );
+    TDLog.v( "Main import type " + type + " index " + index );
     selectImportFromProvider( index, data );
   }
 
@@ -1882,7 +1881,7 @@ public class MainWindow extends Activity
   private void selectImportFromProvider( int index, ImportData data ) // IMPORT
   {
     if ( index < 0 || index >= TDConst.getMimeTypeLength() ) {
-      TDLog.e("Bad import index " + index );
+      TDLog.e("Main import bad index " + index );
       TDToast.makeBad( String.format( getResources().getString( R.string.index_oob ), index ) );
       return;
     } 
@@ -1905,7 +1904,7 @@ public class MainWindow extends Activity
   void resultR( boolean res )
   {
     if ( ! TDandroid.PRIVATE_STORAGE ) return;
-    // TDLog.v("MAIN result R " + res );
+    // TDLog.v("Main result R " + res );
     if ( ! res ) {
       TopoDroidApp.setSayDialogR( true );
       finish();
@@ -1992,7 +1991,7 @@ public class MainWindow extends Activity
    */
   public void doExport( final String type, final String filename, final String prefix, final long first, boolean second, final List<String> survey_list )
   { 
-    TDLog.v("MAIN export Type " + type + " filename " + filename + " prefix " + prefix );
+    TDLog.v("Main export Type " + type + " filename " + filename + " prefix " + prefix );
     TDSetting.mExportPrefix = prefix; // save export-prefix
     int index = TDConst.surveyFormatIndex( type );
     String extension = filename.substring( filename.lastIndexOf(".") );
@@ -2000,19 +1999,19 @@ public class MainWindow extends Activity
       // N.B. zip export not supported
       Thread export_thread = new Thread() {
         public void run() {
-          TDLog.v("MAIN Export Thread run");
+          // TDLog.v("Main Export Thread run");
           // List< String > survey_list = TopoDroidApp.mData.selectAllSurveys();
           ExportInfo export_info = new ExportInfo( index, null, null, first );
           int cnt = 0; 
           for ( String survey : survey_list ) {
             String file_name = survey + extension;
-            TDLog.v("MAIN Export Thread Index " + index + " Exporting " + file_name + " prefix " + prefix );
+            // TDLog.v("Main Export Thread Index " + index + " Exporting " + file_name + " prefix " + prefix );
             if ( prefix != null ) export_info.prefix = survey;
             export_info.name = file_name;
             mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
             if ( doExportOne( survey, index, file_name, export_info ) ) ++cnt;
           }
-          TDLog.v("MAIN Export Thread done");
+          // TDLog.v("Main Export Thread done");
           final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );
           // runOnUiThread( 
           TDandroid.runOnMainThread(
@@ -2036,7 +2035,7 @@ public class MainWindow extends Activity
    */
   private boolean doExportOne( String survey, int index, String filename, ExportInfo export_info )
   {
-    // TDLog.v( "MAIN do export " + survey + " filename " + filename );
+    // TDLog.v( "Main 1-export " + survey + " filename " + filename );
     // if ( index >= 0 ) {
       if ( TDInstance.sid < 0 ) {
         // TDToast.makeBad( R.string.no_survey );
@@ -2048,7 +2047,7 @@ public class MainWindow extends Activity
         }
       }
     // } else {
-    //   TDLog.e("Main Window export - negative index " + index );
+    //   TDLog.e("Main 1-export neg. index " + index );
     // }
     return false;
   }

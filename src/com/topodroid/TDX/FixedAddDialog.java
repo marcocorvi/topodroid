@@ -352,7 +352,7 @@ class FixedAddDialog extends MyDialog
             try {
               accur = Double.parseDouble( accur_str );
             } catch ( NumberFormatException e ) {
-              TDLog.e( e.getMessage() );
+              TDLog.e( "Fixed add dialog: " + e.getMessage() );
             }
           }
         }

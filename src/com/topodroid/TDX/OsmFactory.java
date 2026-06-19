@@ -206,7 +206,7 @@ public class OsmFactory
     try {
       return Double.parseDouble( getValue( line, pos ) );
     } catch ( NumberFormatException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "OSM factoryy (double) " + e.getMessage() );
     }
     return 0;
   }
@@ -325,11 +325,11 @@ public class OsmFactory
         }
       }
     } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "OSM factory (bitmap) " + e.getMessage() );
     } finally {
       if ( isr != null ) {
         try { isr.close(); } catch ( IOException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "OSM factory (bitmap) " + e.getMessage() );
         }
       }
     }

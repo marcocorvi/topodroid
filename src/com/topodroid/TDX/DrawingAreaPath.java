@@ -81,7 +81,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
         mAreaCnt = Integer.parseInt( id.substring( pos ) );
         mPrefix  = id.substring(0, pos);
       } catch ( NumberFormatException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Drawing area path: " + e.getMessage() );
       }
     }
     // TDLog.v("AREA " + id + " count " + mPrefix + " " + mAreaCnt );

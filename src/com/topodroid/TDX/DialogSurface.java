@@ -140,7 +140,7 @@ class DialogSurface extends MyDialog
           double n = Double.parseDouble( mNorth.getText().toString() );
           mTopoGl.addGPSpoint( e, n );
         } catch ( NumberFormatException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "Dialog surface on click: " + e.getMessage() );
         }
       }
 

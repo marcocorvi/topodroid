@@ -441,7 +441,7 @@ public class SymbolLibrary
       // dos.writeInt( str_len );
       dos.writeUTF( sb.toString() );
     } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "Symbol lib " + e.getMessage() );
     }
   }
 

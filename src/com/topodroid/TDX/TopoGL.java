@@ -1573,7 +1573,7 @@ public class TopoGL extends Activity
           if ( mRenderer != null ) mRenderer.setParser( mParser, true );
         }
       } catch ( FileNotFoundException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "TopoGL open file " + e.getMessage() );
       }
       return ( mFilename != null );
     }
@@ -1795,7 +1795,7 @@ public class TopoGL extends Activity
         try { 
           bitmap = (Bitmap)( TiffFactory.getBitmap( filepath, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
         } catch ( java.lang.UnsatisfiedLinkError e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "TopoGL geotif " + e.getMessage() );
           return 1; 
         }
         // if ( bitmap != null ) {
@@ -1860,7 +1860,7 @@ public class TopoGL extends Activity
           try {
             isr.close();
           } catch ( IOException e ) {
-            TDLog.e( e.getMessage() );
+            TDLog.e( "TopoGL OSM " + e.getMessage() );
           }
         }
         if ( b ) {

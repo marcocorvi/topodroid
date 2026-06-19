@@ -97,7 +97,7 @@ public class QCamDrawingSurface extends SurfaceView
       DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
       mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
     } catch ( ClassCastException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "QCam drawing " + e.getMessage() );
     }
     // TDLog.v("QCAM Surface cstr");
   }

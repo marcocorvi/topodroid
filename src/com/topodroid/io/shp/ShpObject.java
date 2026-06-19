@@ -176,7 +176,7 @@ class ShpObject
         mFiles.add( name + ".cpg" ); // HBshp
       }
     } catch ( IOException e ) {
-      TDLog.e("output streams " + e.getMessage() );
+      TDLog.e("SHP open i/o " + e.getMessage() );
       throw e;
     }
   }
@@ -215,7 +215,7 @@ class ShpObject
       dbfChannel.position(0);
       cpgChannel.position(0); // HBshp
     } catch ( IOException e ) {
-      TDLog.e("position 0 buffers " + e.getMessage() );
+      TDLog.e("SHP reset channels " + e.getMessage() );
       throw e;
     }
   }
@@ -251,7 +251,7 @@ class ShpObject
       while (buffer.remaining() > 0) channel.write(buffer);
       buffer.flip().limit(buffer.capacity()); // set limit to capacity and pos to 0
     } catch ( IOException e ) {
-      TDLog.e("drain buffers " + e.getMessage() );
+      TDLog.e("SHP drain " + e.getMessage() );
       throw e;
     }
   }
@@ -270,28 +270,28 @@ class ShpObject
       if (shpChannel != null && shpChannel.isOpen()) shpChannel.close();
       shpFos.close();
     } catch ( IOException e ) {
-      TDLog.e("close shp buffer " + e.getMessage() );
+      TDLog.e("SHP close " + e.getMessage() );
       throw e;
     }
     try {
       if (shxChannel != null && shxChannel.isOpen()) shxChannel.close();
       shxFos.close();
     } catch ( IOException e ) {
-      TDLog.e("close shx buffer " + e.getMessage() );
+      TDLog.e("SHX close " + e.getMessage() );
       throw e;
     }
     try {
       if (dbfChannel != null && dbfChannel.isOpen()) dbfChannel.close();
       dbfFos.close();
     } catch ( IOException e ) {
-      TDLog.e("close dbf buffer " + e.getMessage() );
+      TDLog.e("DBF close " + e.getMessage() );
       throw e;
     }
     try { // HBshp
       if (cpgChannel != null && cpgChannel.isOpen()) cpgChannel.close();
       cpgFos.close();
     } catch ( IOException e ) {
-      TDLog.e("close cpg buffer " + e.getMessage() );
+      TDLog.e("CPG close " + e.getMessage() );
       throw e;
     }
 

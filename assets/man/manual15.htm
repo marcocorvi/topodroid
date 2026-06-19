@@ -134,7 +134,15 @@ The exported file is selected with the Android file manager.
 <br><p>
 
 The export dialog has options to include splays, walls, stations and surface.
-(Walls and surface are not supported in all export formats).<br>
+Not all items are supported in all export formats,
+in particular walls and surface:<br>
+<ul>
+<li>STL: Walls</li>
+<li>GPX: Legs, Splays, Stations</li>
+<li>KML: Legs, Splays, Stations, Walls</li>
+<li>SHP: Legs, Splays, Stations, Walls</li>
+<li>DXF: Legs, Splays, Walls (Stations export is to be implemented)</li>
+</ul>
 The model can be also serialized in a text file.<br><p>
 
 The GPX export of projects can have all the project surveys in a single track, or include a track

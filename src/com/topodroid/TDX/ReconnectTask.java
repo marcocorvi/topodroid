@@ -59,7 +59,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
           // TDLog.v( "RECONNECT TASK status " + mDownloader.isDownloading() );
           mDownloader.tryConnect( mLister, mDataType ); 
         } catch ( InterruptedException e ) {
-          TDLog.e( e.getMessage() );
+          TDLog.e( "Reconnect task " + e.getMessage() );
         }
       }
     }

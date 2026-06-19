@@ -1057,7 +1057,7 @@ public class DrawingDxf
       try {
         color = DxfColor.rgbToIndex( line2.getColor() );
       } catch ( NullPointerException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "DXF " + e.getMessage() );
       }
       // TDLog.v( "HBX_DXF <" + line.getThName() + "> " + String.format("%X %X ", ref_handle, color) + layer + layer2+" "+color);
     } else {
@@ -1114,7 +1114,7 @@ public class DrawingDxf
       try {
         DxfColor.rgbToIndex(area2.getColor());
       } catch ( NullPointerException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "DXF " + e.getMessage() );
       }
     } else {
       linetype = DXF.lt_byLayer;

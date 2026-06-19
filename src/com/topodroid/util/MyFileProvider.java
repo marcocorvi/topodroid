@@ -282,7 +282,7 @@ public class MyFileProvider extends ContentProvider
         final String tag  = in.getName();
         final String name = in.getAttributeValue( null, ATTR_NAME );
         if ( TextUtils.isEmpty( name ) ) {
-          TDLog.e("File Provider EMPTY name for tag " + tag );
+          TDLog.e("File Provider EMPTY name for tag <" + tag + ">" );
           continue;
         }
         File target = null;
@@ -308,7 +308,7 @@ public class MyFileProvider extends ContentProvider
           TDLog.v("File Provider Path Strategy: TODO tag \"paths\" - no root added"); 
           // target = Environment.getExternalStorageDirectory(); 
         } else {
-          TDLog.e("File Provider Path Strategy: unsupported tag " + tag );
+          TDLog.e("File Provider Path Strategy: unsupported tag <" + tag + ">" );
         }
         if ( target != null ) {
           String path = in.getAttributeValue( null, ATTR_PATH );

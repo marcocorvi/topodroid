@@ -6,11 +6,11 @@
   <TextView android:id="@+id/title"
     style="@style/text_title"
   />
-<!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -34,7 +34,6 @@
  
     <EditText android:id="@+id/comment"
       style="@style/edit_text_light"
-      android:layout_below="@id/station"
       android:layout_marginTop="@dimen/marginv"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" 
@@ -46,8 +45,57 @@
       android:importantForAutofill="no"
       />
 
+    <TextView android:id="@+id/longitude"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/longitude"
+        />
+   					  
+    <TextView android:id="@+id/latitude"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/latitude"
+        />
+   					  
+    <!-- TextView android:id="@+id/h_ellipsoid"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/h_ellipsoid"
+        / -->
+
+    <TextView android:id="@+id/h_geoid"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/h_geoid"
+        />
+
+    <TextView android:id="@+id/error"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/error_m"
+        />
+
+    <!-- TextView android:id="@+id/accuracy"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/accuracy_m"
+        / -->
+
+    <!-- ListView android:id="@+id/list"
+      style="@style/list_top"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      / -->  
+
     <LinearLayout android:id="@+id/help"
       style="@style/help_layout"
+      android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -64,100 +112,27 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         >
-        <LinearLayout 
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="start"
-          >
-          <Button android:id="@+id/button_loc"
-            android:layout_gravity="start"
-            style="@style/button_default"
-            android:text="@string/button_gps_start"
-            />
-          <Button android:id="@+id/button_view"
-            android:layout_gravity="start"
-            android:text="@string/button_view"
-            style="@style/button_default"
-            />
-        </LinearLayout>
-
-        <LinearLayout 
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="end"
-          >
-          <Button android:id="@+id/button_add"
-            android:layout_gravity="end"
-            style="@style/button_default"
-            android:text="@string/button_save"
-            />
-        </LinearLayout>
+        <Button android:id="@+id/button_loc"
+          android:layout_gravity="start"
+          style="@style/button_default"
+          android:text="@string/button_gps_start"
+        />
+        <Button android:id="@+id/button_view"
+          android:layout_gravity="start"
+          android:text="@string/button_view"
+          style="@style/button_default"
+        />
+        <Button android:id="@+id/button_add"
+          android:layout_gravity="end"
+          style="@style/button_default"
+          android:text="@string/button_save"
+        />
       </LinearLayout>
     </LinearLayout>
 
-    <TextView android:id="@+id/longitude"
-        android:layout_below="@id/help"
-        android:layout_marginTop="@dimen/marginv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/longitude"
-        />
-   					  
-    <TextView android:id="@+id/latitude"
-        android:layout_below="@id/longitude"
-        android:layout_marginTop="@dimen/marginsmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/latitude"
-        />
-   					  
-    <!-- TextView android:id="@+id/h_ellipsoid"
-        android:layout_below="@id/latitude"
-        android:layout_marginTop="@dimen/marginsmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/h_ellipsoid"
-        / -->
-
-    <TextView android:id="@+id/h_geoid"
-        android:layout_below="@id/latitude"
-        android:layout_marginTop="@dimen/marginsmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/h_geoid"
-        />
-
-    <TextView android:id="@+id/error"
-        android:layout_below="@id/h_geoid"
-        android:layout_marginTop="@dimen/marginsmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/error_m"
-        />
-
-    <!-- TextView android:id="@+id/accuracy"
-        android:layout_below="@id/error"
-        android:layout_marginTop="@dimen/marginsmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/accuracy_m"
-        / -->
-
-    <!-- ListView android:id="@+id/list"
-      style="@style/list_top"
-      android:layout_below="@id/error"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      / -->  
-
-
+  </LinearLayout>
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
     style="@style/keyboard"
   />
-
-
-</RelativeLayout>
-<!-- /ScrollView -->
+  <!-- /ScrollView -->
 </RelativeLayout>

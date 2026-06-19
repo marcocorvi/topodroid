@@ -845,7 +845,7 @@ class ShotEditDialog extends MyDialog
           mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
 	}
       } catch (NumberFormatException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Shot edit " + e.getMessage() );
         return false;
       }
     }

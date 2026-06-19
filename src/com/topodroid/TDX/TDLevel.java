@@ -57,7 +57,7 @@ public class TDLevel
         isDebug = (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         hasIsDebug = true;
       } catch ( NameNotFoundException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "TD level " + e.getMessage() );
       }
     }
     return isDebug;

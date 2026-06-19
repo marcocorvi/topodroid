@@ -765,7 +765,7 @@ public class TglParser
         dos.flush();
         dos.close();
       } catch ( IOException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Tgl parser " + e.getMessage() );
       }
     }
     return ret;
@@ -860,7 +860,7 @@ public class TglParser
         osw.flush();
         osw.close();
       } catch ( IOException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "Tgl parser " + e.getMessage() );
       }
     }
     return ret;

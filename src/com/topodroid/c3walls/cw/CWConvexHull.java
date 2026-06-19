@@ -201,7 +201,7 @@ public class CWConvexHull
       // for ( Cave3DShot s2 : splays2 ) {
       //   vt.sum( s2.toVector3D() ).dump();
       // }
-      TDLog.e( "CW-Hull error " + e.getMessage() );
+      TDLog.e( "CW-Hull " + e.getMessage() );
       throw e;
     }
     // TDLog.v( "CW-Hull " + sf.short_name + "-" + st.short_name 

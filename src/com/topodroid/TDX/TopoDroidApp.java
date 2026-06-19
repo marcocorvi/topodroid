@@ -85,6 +85,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 // import java.util.Stack;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 // import android.os.Environment;
 // import android.os.Build;
@@ -141,6 +143,8 @@ import android.bluetooth.BluetoothDevice;
 // SIWEI_TIAN changed on Jun 2022
 public class TopoDroidApp extends Application
 {
+  static final private Pattern country = Pattern.compile("[A-Z][A-Z]");
+
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
@@ -547,7 +551,7 @@ public class TopoDroidApp extends Application
         msg.what = w;
         new Messenger( hdl ).send( msg );
       } catch ( RemoteException e ) {
-        TDLog.e( e.getMessage() );
+        TDLog.e( "TD app conn state " + e.getMessage() );
       }
     }
   }
@@ -2171,7 +2175,7 @@ public class TopoDroidApp extends Application
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "TD app " + e.getMessage() );
     }
     mDData.setValue( "firmware_version", TDVersion.FIRMWARE_VERSION );
   }
@@ -2323,9 +2327,9 @@ public class TopoDroidApp extends Application
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "TD app symbol " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "TD app symbol " + e.getMessage() );
     }
   }
 
@@ -2367,9 +2371,9 @@ public class TopoDroidApp extends Application
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "TD app fw " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.e( e.getMessage() );
+      TDLog.e( "TD app fw " + e.getMessage() );
     }
   }
 
@@ -3609,7 +3613,7 @@ public class TopoDroidApp extends Application
   static void checkAnalytics( final Context ctx )
   {
     if ( TDLevel.isDebugBuild() ) return;
-    // if ( ! TDSetting.mAnalytics ) return; // FIXME debug force analytics
+    if ( ! TDSetting.mAnalytics ) return; // N.B. send report only if user has not opted out
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;
     String today = TDUtil.getDateString( "yyyy.MM.dd" );
@@ -3679,13 +3683,16 @@ public class TopoDroidApp extends Application
     if ( TDAnalytics.mCT != null ) return;
     if ( mDData == null ) return;
     String ct = mDData.getValue( "ct" );
-    if ( ct == null ) { // send request to retrieve the CT
-      if ( ! TDandroid.checkInternet( ctx ) ) return;
-      TDAnalytics.retrieveCT( ctx );
-    } else {
-      TDLog.v("Store CT" + ct );
-      TDAnalytics.setCT( ctx, ct ); // save the CT
+    if ( ct != null ) {
+      Matcher matcher = country.matcher( ct );
+      if ( matcher.matches() ) {
+        // TDLog.v( "country pattern matches: " + ct );
+        TDAnalytics.setCT( ctx, ct ); // set and save the CT
+        return;
+      }
     }
+    if ( ! TDandroid.checkInternet( ctx ) ) return;
+    TDAnalytics.retrieveCT( ctx ); // send request to retrieve the CT
   }
 
 }

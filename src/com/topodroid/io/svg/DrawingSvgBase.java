@@ -269,7 +269,7 @@ public class DrawingSvgBase
         out.write( sw.getBuffer().toString() );
         out.flush();
       } catch ( IOException e ) {
-        TDLog.e( "SVG grid io-exception " + e.getMessage() );
+        TDLog.e( "SVG grid i/o " + e.getMessage() );
       }
     }
   }

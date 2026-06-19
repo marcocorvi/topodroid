@@ -486,7 +486,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TDLog.e( "SVG io-exception " + e.getMessage() );
+      TDLog.e( "SVG i/o " + e.getMessage() );
     }
   }
 

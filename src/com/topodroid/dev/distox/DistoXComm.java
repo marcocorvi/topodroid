@@ -85,7 +85,7 @@ public class DistoXComm extends TopoDroidComm
     try {
       mApp.unregisterReceiver( mBTReceiver );
     } catch ( IllegalArgumentException e ) {
-      TDLog.e( "unregister BT receiver error " + e.getMessage() );
+      TDLog.e( "unregister BT receiver " + e.getMessage() );
     }
     mBTReceiver = null;
   }
@@ -336,7 +336,7 @@ public class DistoXComm extends TopoDroidComm
               mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( SERVICE_UUID );
             } catch ( SecurityException e ) {
               TDLog.e("SECURITY RFcomm socket " + e.getMessage() );
-              // TDToast.makeBad("Security error: RFcomm socket");
+              // TDToast.makeBad("Security: RFcomm socket");
             }
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5b] createInsecureRfcommSocketToServiceRecord " );
@@ -395,7 +395,7 @@ public class DistoXComm extends TopoDroidComm
             mProtocol = createProtocol( in, out );
             mAddress = address;
           } catch ( IOException e ) {
-            TDLog.e( "[6d] create Socket stream error " + e.getMessage() );
+            TDLog.e( "[6d] create Socket stream " + e.getMessage() );
             mAddress = null;
             try {
               mBTSocket.close();
@@ -450,7 +450,7 @@ public class DistoXComm extends TopoDroidComm
             mBTConnected = true;
           } catch ( SecurityException e ) {
             TDLog.e("SECURITY connect socket " + e.getMessage() );
-            // TDToast.makeBad("Security error: connect socket");
+            // TDToast.makeBad("Security: connect socket");
             closeSocket();
           } catch ( IOException e ) {
             // Toast must run on UI Thread
@@ -461,7 +461,7 @@ public class DistoXComm extends TopoDroidComm
             //     TDToast.makeBad( R.string.connection_error  );
             //   }
             // } );
-            TDLog.e( "connect socket() (trial " + trial + ") IO error " + e.getMessage() );
+            TDLog.e( "connect socket() (trial " + trial + ") i/o " + e.getMessage() );
             // TDLog.LogStackTrace( e );
             closeSocket();
             // mBTSocket = null;
