@@ -820,8 +820,8 @@ public class TglParser
             TDToast.makeWarn (R.string.powercrust_dxf_not_supported );
             return false;
           }
-        }                              // legs  splays          walls          version13
-        ret = dxf.exportASCII( osw, this, true, export.mSplays, export.mWalls, true ); // true = version13
+        }                              // legs  splays          walls          stations         version13
+        ret = dxf.exportASCII( osw, this, true, export.mSplays, export.mWalls, export.mStation, true ); // true = version13, stations HB
       // } else if ( type == ModelType.SHP_ASCII ) { // SHP
       //   ExportSHP shp = new ExportSHP();
       //   if ( export.mWalls ) {
