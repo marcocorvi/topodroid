@@ -510,7 +510,7 @@
     <string name="menu_device">ПРИБОР</string>
     <string name="menu_device_add">ДОБАВИТЬ УСТРОЙСТВО</string>
     <string name="menu_export">Экспорт</string>
-    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
+    <string name="menu_bulkops">МУЛЬТИ ДЕЙСТВИЯ</string>
     <string name="menu_exit">ВЫХОД</string>
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_geopoint_app">ПРИЛОЖЕНИЕ ГЕОПРИВЯЗКИ</string>
@@ -639,7 +639,7 @@
     <!-- UNUSED string name="plot_null_start">Отсутствует базовый пикет</string -->
     <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
-    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
+    <string name="plot_no_backups">Нет бекапа абриса</string>
     <!-- UNUSED string name="plot_view">Просмотренный пикет</string -->
     <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
@@ -765,9 +765,9 @@
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
     <!-- UNUSED string name="wait_scan">Сканирование: ждите &#8230;</string -->
-    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
-    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
-    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_failed">Запись калибровки: ошибка записи</string>
+    <string name="calib_read_failed">Запись калибровки: не удалось прочитать обратно</string>
+    <string name="calib_check_failed">Запись калибровки: проверка не пройдена</string>
     <string name="calib_write_ok">Запись калибровки в DistoX</string>
     <string name="zip_saved">Сохранено </string>
     <string name="zip_failed">Ошибка survey-zip</string>
@@ -942,8 +942,8 @@
     <string name="button_clear_memory">Очистить память</string>
     <string name="button_save"      >Сохр.     </string>
     <string name="button_select"    >Выбрать   </string>
-    <!-- TODO string name="button_toggle"    >Toggle</string -->
-    <!-- TODO string name="button_import"    >Import</string -->
+    <string name="button_toggle"    >Переключить</string>
+    <string name="button_import"    >Импорт</string>
     <string name="button_submit"    >Отправить</string>
     <string name="button_leg_station">Пикеты замера</string>
     <string name="button_all_station">Все пикеты</string>
@@ -1230,7 +1230,7 @@
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
     <string name="help_export_survey">Экспорт съёмки</string>
     <!-- UNUSED string name="help_export_surveys">Экспорт всех съемок</string -->
-    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
+    <string name="help_bulkops_surveys">Множественные операции со съёмками</string>
     <string name="help_loc">GPS привязка</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
@@ -1335,7 +1335,7 @@
     <string name="title_audio">Аудио заметка</string>
     <string name="title_audio_list">Аудио заметки</string>
     <string name="title_recalibrate">Калибровки</string>
-    <!-- TODO string name="title_calibration">Calibration</string -->
+    <string name="title_calibration">Калибровка</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1386,8 +1386,8 @@
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_photo_list">Фото</string>
     <string name="title_photo_view">Фото</string>
-    <!-- TODO string name="title_plan">Plan view</string -->
-    <!-- TODO string name="title_profile">Profile view</string -->
+    <string name="title_plan">План</string>
+    <string name="title_profile">Профиль</string>
     <string name="title_plot_save">Сохранить абрис как</string>
     <!-- UNUSED string name="title_plot_merge">Присоединить к абрису</string -->
     <!-- UNUSED string name="title_plot_reload">Перезагрузить абрис</string -->
@@ -1452,8 +1452,8 @@
 
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
-    <!-- TODO string name="title_shot_edit">Shot edit</string -->
-    <!-- TODO string name="title_multishot">Shots operations</string -->
+    <string name="title_shot_edit">Редактирование замера</string>
+    <string name="title_multishot">Операции с замерами</string>
     <string name="title_sensor_edit">Сенсор</string>
     <string name="title_sensor_list">Данные сенсоров</string>
     <string name="title_split">Разделить абрис</string>
@@ -2194,7 +2194,7 @@
     <string name="title_drop">Удалить съёмки ?</string>
     <string name="title_tdconfig">Введине название проекта</string>
     <string name="title_surveys">Съёмки</string>
-    <!-- TODO string name="title_symbols">Active tools</string -->
+    <string name="title_symbols">Активные инструменты</string>
 
     <string name="exported">Файл сохранен %1$s</string>
     <string name="export_failed">Ошибка экспорта</string>
