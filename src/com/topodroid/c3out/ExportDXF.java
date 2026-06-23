@@ -399,7 +399,7 @@ public class ExportDXF
     return handle;
   }
 
-  public boolean exportASCII( BufferedWriter osw, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls, boolean version13 )
+  public boolean exportASCII( BufferedWriter osw, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls, boolean b_stations, boolean version13 ) // stations HB
   {
     if ( data == null ) return false;
     List< Cave3DStation> stations = data.getStations();
@@ -917,7 +917,7 @@ public class ExportDXF
         }
         
         // station text (HB)
-       // if ( b_stations ) // FIXME stations boolean
+        if ( b_stations )
         {
           StringWriter sw4 = new StringWriter();
           PrintWriter pw4  = new PrintWriter(sw4);
@@ -925,8 +925,8 @@ public class ExportDXF
           handle = printText( pw4, handle, st.getFullName(),
               st.x, st.y, st.z, 0.0f, 1.0f,"STATION", "TXT" );
           }
-        out.write( sw4.getBuffer().toString() );
-        out.flush();
+          out.write( sw4.getBuffer().toString() );
+          out.flush();
         }
 
         // centerline data

@@ -267,6 +267,32 @@ public class Cave3DShot
       return null;
     }
   }
+  
+ /** // HB_conv
+   * @param st station
+   * @param conv meridian convergence in degrees
+   */
+  public Cave3DStation getStationFromStation( Cave3DStation st, double conv ) // HB_conv
+  {
+    double convr = conv * DEG2RAD;
+    if ( st.getFullName().equals( from ) ) {
+      double dz = len * Math.sin( cln );
+      double dh = len * Math.cos( cln );
+      return new Cave3DStation( to,
+              st.x + (dh * Math.sin(ber - convr)),
+              st.y + (dh * Math.cos(ber - convr)),
+              st.z + (dz) );
+    } else if ( st.getFullName().equals( to ) ) {
+      double dz = len * Math.sin( cln );
+      double dh = len * Math.cos( cln );
+      return new Cave3DStation( from,
+              st.x - (dh * Math.sin(ber - convr)),
+              st.y - (dh * Math.cos(ber - convr)),
+              st.z - (dz) );
+    } else {
+      return null;
+    }
+  }
 
   // average depth of the shot
   double depth()
