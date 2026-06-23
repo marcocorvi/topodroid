@@ -8,6 +8,7 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * mod HB_conv
  */
 package com.topodroid.c3in;
 
@@ -349,7 +350,7 @@ public class ParserTh extends TglParser
           }
         }
       }
-      declination -= conv; // correct declination with -convergence
+      // declination -= conv; // correct declination with -convergence // HB_conv
       if ( nocs != null ) {
         TDLog.e("Fix points without CS <" + cs1.name + ">: " + nocs.toString() );
         TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.error_fixes_nocs ), cs1.name, nocs.toString() ) );
@@ -899,6 +900,7 @@ public class ParserTh extends TglParser
     // TDLog.v( "Th shots " + shots.size() + " stations " + stations.size() + " fixes " + fixes.size() );
     ArrayList< Cave3DFix > ok_fixes = new ArrayList<>(); // array of fixed stations that are in the survey
 
+	double conv = 0; // HB_conv meridial convergence
     int bad_fixes = 0;
     for ( Cave3DFix fix : fixes ) {
       boolean found = false; 
@@ -950,6 +952,7 @@ public class ParserTh extends TglParser
       }
       // TDLog.v( "Th add start station " + fix.getFullName() + " N " + fix.y + " E " + fix.x + " Z " + fix.z );
       stations.add( new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z ) );
+	  conv = fix.mConvergence;  // HB_conv
       // sh.from_station = s0;
 
       boolean repeat = true;
@@ -996,7 +999,7 @@ public class ParserTh extends TglParser
               mDuplicateLength += sh.length();
             }
             // make a fake station
-            Cave3DStation s = sh.getStationFromStation( sf );
+            Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
             stations.add( s );
             s.addToName( mLoopCnt ); // s.name = s.name + "-" + mLoopCnt;
             ++ mLoopCnt;
@@ -1006,7 +1009,7 @@ public class ParserTh extends TglParser
           } else if ( sf != null && st == null ) {
             // TDLog.v( "TH shot found from " + sh.from + " no station to "  + sh.to );
             // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " null" );
-            Cave3DStation s = sh.getStationFromStation( sf );
+            Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
             stations.add( s );
             sh.to_station = s;
             // TDLog.v( "Th add station TO " + sh.from + " " + sh.to + " " + sh.to_station.getFullName() );
@@ -1023,7 +1026,7 @@ public class ParserTh extends TglParser
           } else if ( sf == null && st != null ) {
             // TDLog.v( "TH shot found to " + sh.to + " no station from "  + sh.from );
             // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.getFullName() );
-            Cave3DStation s = sh.getStationFromStation( st );
+            Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
             stations.add( s );
             sh.from_station = s;
             // TDLog.v( "Th add station FR " + sh.from + " " + sh.to + " " + sh.from_station.name  );
@@ -1070,7 +1073,7 @@ public class ParserTh extends TglParser
           if ( s.hasName( sh.from ) ) {
             sh.from_station = s;
             sh.setUsed();
-            sh.to_station = sh.getStationFromStation( s );
+            sh.to_station = sh.getStationFromStation( s, conv ); // HB_conv
             station_splays.add( sh.toPoint3D() );
           }
         }
