@@ -174,6 +174,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="calib_read_coeffs">Lectura de coeficientes en curso</string -->
     <string name="calib_write_coeffs">Escritura de coeficientes en curso</string>
     <string name="calib_validation">Validación de %1$s vs %2$s</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
     <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
     <string name="using">Utilizar %1$s</string>
@@ -268,8 +270,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
-    <string name="gettingble_info">Descargando información de DistoX-BLE &#8230;</string>
-    <string name="gettingCavway_info">Obtener información de Cavway &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>

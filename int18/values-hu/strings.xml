@@ -172,6 +172,8 @@
     <!-- UNUSED string name="calib_read_coeffs">Kalibrációs együtthatók beolvasása &#8230;</string -->
     <string name="calib_write_coeffs">Kalibrációs egyKalibrációs együtthatók beolvasásaütthatók felülírása &#8230;</string>
     <string name="calib_validation">%1$s és %2$s összehasonlítása</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
     <string name="using">%1$s használata</string>
@@ -266,8 +268,6 @@
     <!-- UNUSED string name="few_plots">Nincs elég vázlat</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
     <string name="getting_info">DistoX információk letöltése &#8230;</string>
-    <string name="gettingble_info">DistoX-BLE információk letöltése &#8230;</string>
-    <string name="gettingCavway_info">Cavway információk letöltése &#8230;</string>
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>

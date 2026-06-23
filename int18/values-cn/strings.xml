@@ -174,6 +174,8 @@
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
     <string name="calib_write_coeffs">校准数据写入 &#8230;</string>
     <string name="calib_validation">确认校准 %1$s vs %2$s</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">使用 %1$s</string>
@@ -269,8 +271,6 @@
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">校准数据不足</string>
     <string name="getting_info">获取DistoX信息 &#8230;</string>
-    <string name="gettingble_info">获取DistoX-BLE 信息 &#8230;</string>
-    <!-- TODO string name="gettingCavway_info">Getting Cavway info &#8230;</string -->
 
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>

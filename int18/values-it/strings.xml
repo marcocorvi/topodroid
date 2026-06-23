@@ -171,6 +171,8 @@
     <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
     <string name="calib_write_coeffs">Scrittura coefficienti in corso</string>
     <string name="calib_validation">Validatione di %1$s vs %2$s</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Uso %1$s</string>
@@ -265,8 +267,6 @@
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
     <string name="getting_info">Scaricando info DistoX&#8230;</string>
-    <string name="gettingble_info">Scaricando info DistoX-BLE &#8230;</string>
-    <string name="gettingCavway_info">Scaricando info Cavway &#8230;</string>
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>

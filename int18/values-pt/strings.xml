@@ -156,6 +156,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="calib_read_coeffs">Lendo coeficientes de calibração &#8230;</string -->
   <string name="calib_write_coeffs">Escrevendo coeficientes de calibração …</string>
   <string name="calib_validation">Validação de %1$s vs %2$s</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
   <!-- UNUSED string name="connect_failed">Falha de conexão</string -->
   <!-- UNUSED string name="data">Dados</string -->
   <string name="using">Usando %1$s</string>
@@ -248,8 +250,6 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
   <string name="few_calibs">Quantidade de calibrações insuficiente</string>
   <string name="getting_info">Obtendo info DistoX …</string>
-  <string name="gettingble_info">Obtendo info DistoX-BLE …</string>
-  <string name="gettingCavway_info">Obtendo info da Cavway …</string>
   <string name="calib_import_title">Importar calibração</string>
   <string name="import_title">Importar topo</string>
   <!-- UNUSED string name="export_data_title">Exportar dados</string -->

@@ -172,6 +172,8 @@
     <!-- UNUSED string name="calib_read_coeffs">Считывание коэффициентов калибровки &#8230;</string -->
     <string name="calib_write_coeffs">Запись коэффициентов калибровки &#8230;</string>
     <string name="calib_validation">Проверить %1$s относительно %2$s</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s</string>
@@ -267,8 +269,6 @@
     <!-- UNUSED string name="few_plots">Недостаточно абрисов</string -->
     <string name="few_calibs">Недостаточно калиб. замеров</string>
     <string name="getting_info">Получение информации о DistoX&#8230;</string>
-    <string name="gettingble_info">Получение данных о DistoX-BLE &#8230;</string>
-    <string name="gettingCavway_info">Получение информации о Cavway &#8230;</string>
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>

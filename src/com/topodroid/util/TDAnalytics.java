@@ -332,7 +332,6 @@ public class TDAnalytics
   {
     if ( ct == null ) return;
     setCT( ct );
-    TDLevel.setMaior( ctx, CT.maior( ct ) );
   }
 
   // FXIME_HICSUM

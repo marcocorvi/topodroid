@@ -185,6 +185,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients de Calibration &#8230;</string -->
     <string name="calib_write_coeffs">Écriture des coefficients d\'étalonnage…</string>
     <string name="calib_validation">Validation de %1$s vs %2$s</string>
+    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+
     <!-- UNUSED string name="connect_failed">Echec de la connexion</string -->
     <!-- UNUSED string name="data"> données</string -->
     <string name="using">Utilisation de %1$s</string>
@@ -279,8 +281,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="few_plots">Pas assez de Points</string -->
     <string name="few_calibs">Pas assez d\'étalonnage</string>
     <string name="getting_info">Obtenir les infos du DistoX &#8230;</string>
-    <string name="gettingble_info">Obtenir les infos du DistoX-BLE (BT Low Energy) &#8230;</string>
-    <string name="gettingCavway_info">Obtenir les infos du Cavway &#8230;</string>
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import relevé</string>
