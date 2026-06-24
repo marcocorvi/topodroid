@@ -402,7 +402,7 @@ public class DeviceActivity extends Activity
   void doForgetDevice( Device device )
   {
     String address = device.getAddress();
-    TDLog.v("forget device " + address );
+    // TDLog.v("forget device " + address );
     mApp_mDData.forgetDevice( address );
     // forget device on Android
     Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
@@ -414,7 +414,7 @@ public class DeviceActivity extends Activity
           try {
             Method method = bt_device.getClass().getMethod( "removeBond", (Class[]) null );
             method.invoke( bt_device, (Object[]) null );
-            TDLog.v("unpair device " + address + " done " );
+            // TDLog.v("unpair device " + address + " done " );
           } catch ( Exception e ) {
             TDToast.make( R.string.fail_forget_device );
             TDLog.e("unpair device " + address + " error " + e.getMessage() );
@@ -422,9 +422,9 @@ public class DeviceActivity extends Activity
           break;
         }
       }
-      if ( ! found ) {
-        TDLog.v("unpair device " + address + " not found");
-      }
+      // if ( ! found ) {
+      //   TDLog.v("unpair device " + address + " not found");
+      // }
     }
     boolean ret = removeDeviceFromList( device );
     Device curr_dev = currDeviceA();
@@ -566,9 +566,9 @@ public class DeviceActivity extends Activity
    */
   private void addDeviceToList( Device dev )
   {
-    TDLog.v("add device to list " + dev.toString() );
+    //nTDLog.v("add device to list " + dev.toString() );
     if ( isDeviceOnList( dev.getAddress() ) == null ) {
-      TDLog.v(" not on list ");
+      //nTDLog.v(" not on list ");
       mDeviceList.add( dev );
     }
   }
@@ -630,7 +630,7 @@ public class DeviceActivity extends Activity
     }
 
     mDeviceListAdapter.clear();
-    TDLog.v("Nr devices " + mDeviceList.size() );
+    //nTDLog.v("Nr devices " + mDeviceList.size() );
     for ( Device dev : mDeviceList ) {
       mDeviceListAdapter.add( dev.toString() );
     }
@@ -1531,13 +1531,15 @@ public class DeviceActivity extends Activity
         coeff[52+48] = zeroNL; coeff[52+49] = zeroNL; coeff[52+50] = zeroNL; coeff[52+51] = zeroNL;
       }
       byte[] cali_info = null;
+      //nTDLog.v("Device type " + TDInstance.deviceType() );
       if ( TDInstance.isDeviceCavway() ) {
+        // TDLog.v("Device is Cavway ");
         cali_info = new byte[16];
         cali_info[ 0 ] = (byte)0x55;
         cali_info[ 1 ] = (byte)0x01;
         for ( int k = 2; k < 16; ++ k ) cali_info[k] = (byte)0;
       }
-      mApp.uploadCalibCoeff( this, coeff, false, b, cali_info ); 
+      mApp.uploadCalibCoeff( this, coeff, false, b, cali_info );
     }
   }
 
@@ -1545,10 +1547,10 @@ public class DeviceActivity extends Activity
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
     CharSequence item = ((TextView) view).getText();
-    TDLog.v("on item long click " + pos + ": " + item.toString() );
+    // TDLog.v("on item long click " + pos + ": " + item.toString() );
     String item_str = mDeviceListAdapter.getItem(pos); // "model name addr"
     if ( item_str == null || item_str.equals("X000") ) {
-      TDLog.v("on item long click: pos " + pos + " item " + item_str );
+      // TDLog.v("on item long click: pos " + pos + " item " + item_str );
       return true;
     }
     String[] vals = item_str.split(" ", 3);
@@ -1556,8 +1558,8 @@ public class DeviceActivity extends Activity
     Device device = mApp_mDData.getDevice( address );
     if ( device != null ) {
       (new DeviceNameDialog( this, this, device )).show();
-    } else {
-      TDLog.v("on item long click: address " + address + " not in database" );
+    // } else {
+    //   TDLog.v("on item long click: address " + address + " not in database" );
     }
     return true;
   }

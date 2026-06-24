@@ -298,7 +298,7 @@ class FixedDialog extends MyDialog
       String comment = TDUtil.getTextOrEmpty( mETcomment );
       if ( mButtonDecl.isChecked() && mTVdecl.getText() != null ) {
         String decl_str = mTVdecl.getText().toString();
-        if ( TDString.isNullOrEmpty( decl_str ) ) {
+        if ( ! TDString.isNullOrEmpty( decl_str ) ) {
           decl_str = TDString.commaToPoint( decl_str );
           try {
             mParent.setDeclination( Float.parseFloat( decl_str ) );

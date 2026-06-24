@@ -100,7 +100,7 @@ public class CavwayInfoDialog extends MyDialog
     tv_calierr  = (TextView) findViewById( R.id.tv_calierr  );
 
     tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.getAddress() ) );
-    tv_code.setText( res.getString( R.string.gettingCavway_info ) );
+    tv_code.setText( res.getString( R.string.getting_info ) );
     // tv_firmware.setText( TDString.EMPTY );
     // tv_hardware.setText( TDString.EMPTY );
     // mParent.readXBLEInfo( this )

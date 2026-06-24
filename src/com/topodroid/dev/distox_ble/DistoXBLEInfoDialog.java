@@ -85,7 +85,7 @@ public class DistoXBLEInfoDialog extends MyDialog
     tv_hardware = (TextView) findViewById( R.id.tv_hardware );
 
     tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.getAddress() ) );
-    tv_code.setText( res.getString( R.string.gettingble_info ) );
+    tv_code.setText( res.getString( R.string.getting_info ) );
     // tv_firmware.setText( TDString.EMPTY );
     // tv_hardware.setText( TDString.EMPTY );
     // mParent.readXBLEInfo( this )

@@ -378,7 +378,7 @@ public class GMActivity extends Activity
         }
         a1 /= nk;
         a2 = TDMath.sqrt(a2/nk - a1*a1);
-        TDLog.v("Delta orientation average " + a1 + " stddev " + a2 + " max " + am + " N " + nk );
+        // TDLog.v("Delta orientation average " + a1 + " stddev " + a2 + " max " + am + " N " + nk );
         mDeltaDirAve = a1;
         mDeltaDirStd = a2;
         mDeltaDirMax = am;
@@ -1376,6 +1376,7 @@ public class GMActivity extends Activity
         } );
     } else {
       mApp.uploadCalibCoeff( this, coeff, mode, b, cali_info );
+
     }
   }
 

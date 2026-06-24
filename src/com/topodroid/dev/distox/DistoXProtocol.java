@@ -512,7 +512,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     try {
       int k = 0;
       while ( k < len ) {
-        // TDLog.Log( TDLog.LOG_PROTO, "write calibration " + k + " of " + len );
+        // TDLog.v( "distox write " + k + " of " + len );
         buffer[0] = MemoryOctet.BYTE_PACKET_REQST; // 0x39
         buffer[1] = (byte)( addr & 0xff );
         buffer[2] = (byte)( (addr>>8) & 0xff );
@@ -527,7 +527,7 @@ public class DistoXProtocol extends TopoDroidProtocol
         if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
         // checkDataType( buffer[0], data_type );
 
-        // TDLog.v( "write calibration " +
+        // TDLog.v( "distox write calib " +
         //   String.format(Locale.US, "%d (addr %04x) %02x %02x %02x %02x %02x %02x %02x %02x", (k-4), addr, buffer[0], buffer[1], buffer[2],
         //   buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
         if ( buffer[0] != MemoryOctet.BYTE_PACKET_REPLY ) { return false; } // 0x38
@@ -536,10 +536,10 @@ public class DistoXProtocol extends TopoDroidProtocol
         addr += 4;
       }
     } catch ( EOFException e ) {
-      // TDLog.e( "write calibration EOF failed" );
+      TDLog.e( "distox write calib EOF " + e.getMessage() );
       return false;
     } catch (IOException e ) {
-      // TDLog.e( "write calibration IO failed" );
+      TDLog.e( "distox write calib i/o " + e.getMessage() );
       return false;
     }
     return true;  
@@ -555,6 +555,7 @@ public class DistoXProtocol extends TopoDroidProtocol
   public boolean readCalibration( byte[] calib )
   {
     if ( calib == null ) return false;
+    // TDLog.v("distox read calibration");
     int  len  = calib.length;
     if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
     byte[] buffer = new byte[8];

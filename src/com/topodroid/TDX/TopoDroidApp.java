@@ -929,7 +929,7 @@ public class TopoDroidApp extends Application
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );
-      } else if (TDInstance.isDeviceCavway()){
+      } else if ( TDInstance.isDeviceCavway() ){
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new CavwayComm( this,this, address, bt_device );
@@ -1050,7 +1050,7 @@ public class TopoDroidApp extends Application
     mBorderBottom     = (int)( (dm.heightPixels * 7) / 8 ) + DrawingWindow.ZOOM_TRANSLATION_1;
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
-    TDLog.v("ConfigChange set display params " + mDisplayWidth + " " + mDisplayHeight + " density " + density + " dim " + dim );
+    // TDLog.v("ConfigChange set display params " + mDisplayWidth + " " + mDisplayHeight + " density " + density + " dim " + dim );
   }
 
   @Override
@@ -1388,10 +1388,13 @@ public class TopoDroidApp extends Application
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
       TDToast.makeBad( R.string.calib_device_mismatch );
     } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
+      // TDLog.v("write coeff fail");
       res = R.string.calib_write_failed;
     } else {
-      if ( cali_info != null ) {
+      if ( cali_info != null && TDInstance.isDeviceCavway() ) {
+        // TDLog.v("cali info not null and cavway");
         if ( ! mComm.writeCaliInfo( TDInstance.deviceAddress(), cali_info ) ) {
+          // TDLog.v("write cali info fail");
           res = R.string.calib_write_failed;
         } else {
           // write OK: read coeff back and check they were written correctly
@@ -1414,12 +1417,20 @@ public class TopoDroidApp extends Application
             }
           }
         }
+      } else {
+        // TDLog.v("null cali info or not cavway");
       } 
     }
     if ( b != null ) b.setEnabled( true );
     resetComm();
     if ( res != 0 ) {
       TopoDroidAlertDialog.makeAlert( ctx, getResources(), res );
+    } else {
+      TDandroid.runOnMainThread( new Runnable() { 
+        public void run() {
+          TDToast.make( R.string.calib_write_ok );
+        }
+      } );
     }
   }
 
@@ -1434,10 +1445,10 @@ public class TopoDroidApp extends Application
       TDLog.e("No comm or no device");
       return false;
     }
-    TDLog.v("App read calib coeff");
+    // TDLog.v("App read calib coeff");
     boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
     if ( (cali_info != null ) && (mComm instanceof CavwayComm ) ) {
-      TDLog.v("App read calib info");
+      // TDLog.v("App read calib info");
       CavwayComm comm = (CavwayComm)mComm;
       comm.readCaliInfo( TDInstance.deviceAddress(), cali_info );
     }
@@ -2171,7 +2182,7 @@ public class TopoDroidApp extends Application
    */
   static private void installFirmware( boolean overwrite )
   {
-    TDLog.v("APP FW install firmware. overwrite: " + overwrite );
+    // TDLog.v("APP FW install firmware. overwrite: " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) {
@@ -2797,7 +2808,7 @@ public class TopoDroidApp extends Application
   { 
     // boolean ret = false;
     if ( mComm != null && mComm instanceof CavwayComm ) {
-      TDLog.v( "Cavway app send command " + cmd );
+      // TDLog.v( "Cavway app send command " + cmd );
       // mComm.sendCommand( cmd );
       setCavwayLaser( cmd, 1, null, 0, true, true );
     // } else {
@@ -2814,7 +2825,7 @@ public class TopoDroidApp extends Application
   { 
     // boolean ret = false;
     if ( mComm != null && mComm instanceof DiscoXComm ) {
-      TDLog.v( "DiscoX app send command " + cmd );
+      // TDLog.v( "DiscoX app send command " + cmd );
       mComm.sendCommand( cmd );
     // } else {
     //   TDLog.e("Comm is null or not DiscoX");
@@ -2830,7 +2841,7 @@ public class TopoDroidApp extends Application
   { 
     // boolean ret = false;
     if ( mComm != null && mComm instanceof SapComm ) {
-      TDLog.v( "SAP6 app send command " + cmd );
+      // TDLog.v( "SAP6 app send command " + cmd );
       mComm.sendCommand( cmd );
     // } else {
     //   TDLog.e("Comm is null or not SAP6");
@@ -3667,12 +3678,18 @@ public class TopoDroidApp extends Application
   /** store the CT value in the database for analytics
    * @param ct CT value
    */
-  public static void storeCT( Context ctx, String ct ) 
+  public static boolean storeCT( Context ctx, String ct ) 
   {
-    if ( ct == null ) return;
     TDLog.v("Store CT" + ct );
-    if ( mDData != null ) mDData.setValue( "ct", ct );
-    TDAnalytics.setCT( ctx, ct );
+    if ( ct != null && mDData != null ) {
+      Matcher matcher = country.matcher( ct );
+      if ( matcher.matches() ) {
+        mDData.setValue( "ct", ct );
+        TDAnalytics.setCT( ctx, ct );
+        return true;
+      }
+    }
+    return false;
   }
 
   /** set the CT value, either from the database or retrieving it
