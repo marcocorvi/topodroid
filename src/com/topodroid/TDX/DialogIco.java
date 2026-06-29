@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.TDLayout;
 
@@ -249,9 +250,10 @@ class DialogIco extends MyDialog
     mTheta += y;
     if ( mTheta < Math.PI/2 ) mTheta = Math.PI/2;
     if ( mTheta > Math.PI ) mTheta = Math.PI;
-    mPhi += x;
-    if ( mPhi < 0 ) mPhi += 2*Math.PI;
-    if ( mPhi > 2*Math.PI ) mPhi -= 2*Math.PI;
+    mPhi = TDMath.in2PI( mPhi + x);
+    // mPhi += x;
+    // if ( mPhi < 0 ) mPhi += 2*Math.PI;
+    // if ( mPhi > 2*Math.PI ) mPhi -= 2*Math.PI;
   }
    
 }

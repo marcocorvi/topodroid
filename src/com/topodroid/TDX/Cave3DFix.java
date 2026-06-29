@@ -33,7 +33,7 @@ public class Cave3DFix extends Vector3D
   public double latitude; 
   public double a_ellip = 0.0; // NOTE ellipsoidic altitude - used to compute radii
   // private double a_geoid = 0.0; // geodetic altitude (not used)
-  public boolean hasWGS84;
+  public boolean mHasWGS84 = false;
   public double mToUnits = 1.0;
   public double mToVUnits = 1.0;
   public double mConvergence;
@@ -53,6 +53,7 @@ public class Cave3DFix extends Vector3D
     dos.writeDouble( mToUnits );
     dos.writeDouble( mToVUnits );
     dos.writeDouble( mConvergence );
+    dos.writeBoolean( mHasWGS84 );
     // dos.writeDouble( a_geoid ); // 20221203 inserted this
   }
 
@@ -73,8 +74,9 @@ public class Cave3DFix extends Vector3D
     double m_to_units  = dis.readDouble( ); // NOTE these break backward compatibility
     double m_to_vunits = dis.readDouble( );
     double conv = dis.readDouble( );
+    boolean wgs84 = dis.readBoolean();
     // double h_geo = dis.readDouble( ); // 20221203 inserted this
-    return new Cave3DFix( name, x, y, z, null, lng, lat, h_ell /*, h_geo */, m_to_units, m_to_vunits, conv );
+    return new Cave3DFix( name, x, y, z, null, lng, lat, h_ell /*, h_geo */, m_to_units, m_to_vunits, conv, wgs84 );
   }
     
 
@@ -98,9 +100,10 @@ public class Cave3DFix extends Vector3D
    * @param m_to_units cs h units
    * @param m_to_vunits cs v units
    * @param conv  meridian convergence
+   * @param wgs84 whether the fix has WGS84 coords
    */
   public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_ell /* , double h_geo */,
-                    double m_to_units, double m_to_vunits, double conv )
+                    double m_to_units, double m_to_vunits, double conv, boolean wgs84 )
   {
     super( e0, n0, z0 );
     name = nm;
@@ -109,7 +112,7 @@ public class Cave3DFix extends Vector3D
     latitude  = lat;
     a_ellip   = h_ell;
     // a_geoid   = h_geo;
-    hasWGS84  = true;
+    mHasWGS84 = wgs84;
     mToUnits  = m_to_units;
     mToVUnits = m_to_vunits;
     mConvergence = conv;
@@ -137,8 +140,7 @@ public class Cave3DFix extends Vector3D
     // latitude  = 0;
     // a_ellip  = 0;
     // // a_geoid  = 0;
-    this( nm, e0, n0, z0, cs0, 0, 0, 0 /*, 0 */, m_to_units, m_to_vunits, conv );
-    hasWGS84 = false;
+    this( nm, e0, n0, z0, cs0, 0, 0, 0 /*, 0 */, m_to_units, m_to_vunits, conv, false );
   }
 
   /** @return true if the 3D fix has a name
@@ -178,7 +180,7 @@ public class Cave3DFix extends Vector3D
 
   /** @return true if the 3D fix has WGS84 coords
    */
-  boolean hasWGS84() { return hasWGS84; }
+  public boolean hasWGS84() { return mHasWGS84; }
 
   /** @return north (Y) coord of a point from its latitude and altitude
    * @param lat   WGS84 latitude
@@ -187,11 +189,11 @@ public class Cave3DFix extends Vector3D
   public double latToNorth( double lat, double h_ell ) 
   {
     double s_radius = Geodetic.meridianRadiusExact( lat, h_ell ); // this is the radius * PI/180
-    return hasWGS84()? y + (lat - latitude) * s_radius : 0.0;
+    return mHasWGS84 ? y + (lat - latitude) * s_radius : 0.0;
 // FIXME_ELLIPSOID
     // double s_radius = Geodetic.meridianRadiusEllipsoid( lat, h_ell ); 
     // TDLog.v(" lat to N s_radius " + s_radius );
-    // return hasWGS84()? y + (lat - latitude) * s_radius : 0.0;
+    // return mHasWGS84 ? y + (lat - latitude) * s_radius : 0.0;
   }
 
   /** @return east (X) coord of a point from its longitude, latitude, altitude
@@ -218,13 +220,13 @@ public class Cave3DFix extends Vector3D
     double conv = Geodetic.meridianConvergenceFactor( latitude );
     double e_radius = Geodetic.parallelRadiusExact( lat, h_ell ); // this is the radius * PI/180
     // double e0_radius = Geodetic.parallelRadiusExact( latitude, a_ellip ); 
-    return hasWGS84()? x + (lng - longitude) * e_radius * (1 + north*conv) : 0.0;
-    // return hasWGS84()? x + (lng * e_radius - longitude * e0_radius) * (1 + north*conv) : 0.0;
+    return mHasWGS84 ? x + (lng - longitude) * e_radius * (1 + north*conv) : 0.0;
+    // return mHasWGS84 ? x + (lng * e_radius - longitude * e0_radius) * (1 + north*conv) : 0.0;
  // FIXME_ELLIPSOID
     // double e_radius = Geodetic.parallelRadiusEllipsoid( lat, h_ell ); 
     // double e0_radius = Geodetic.parallelRadiusEllipsoid( latitude, a_ellip );
     // TDLog.v(" lng to E radius = " + e_radius + " " + e0_radius + " north " + north + " conv " + conv );
-    // return hasWGS84()? x + (lng * e_radius - longitude * e0_radius) * (1 + north*conv) : 0.0;
+    // return mHasWGS84 ? x + (lng * e_radius - longitude * e0_radius) * (1 + north*conv) : 0.0;
   }
 
 }

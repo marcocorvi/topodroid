@@ -65,6 +65,8 @@ import java.io.StringWriter;
 // import java.io.FileOutputStream;
 // import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.io.FileReader;
+import java.io.BufferedReader;
 // import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.BufferedInputStream;
@@ -278,12 +280,12 @@ public class TDExporter
       BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( TDPath.getOutFile( surveyname + ".csx" ) ) );
       // BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
       ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
-      bw.flush();
+      bw.flush(); // not necessary
       bw.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.e("file not found");
+      TDLog.e("CSX file not found");
     } catch ( IOException e ) {
-      TDLog.e( "io error " + e.getMessage() );
+      TDLog.e( "CSX io error " + e.getMessage() );
     } finally {
       if ( pfd != null ) {
         TDsafUri.closeFileDescriptor( pfd );
@@ -348,6 +350,7 @@ public class TDExporter
       }
     }
 
+    // TDLog.v("CSX hedaer");
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", survey_name + ".csx", "text/csx" );
       PrintWriter pw = new PrintWriter( bw );
@@ -367,10 +370,36 @@ public class TDExporter
       pw.format(      "creatid=\"TopoDroid\" creatversion=\"%s\" creatdate=\"%s\" ", TDVersion.string(), date );
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" calculateversion=\"-1\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
-      pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\">\n");
+      pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\"");
+      pw.format(      ">\n");
+      // survey notes
+      String note_file = TDPath.getSurveyNoteFile( info.name );
+      if ( TDFile.hasTopoDroidFile( note_file ) ) {
+        // TDLog.v("CSX with note " + note_file );
+        pw.format("    <note>");
+        try {
+          FileReader fr = TDFile.getFileReader( note_file );
+          BufferedReader br = new BufferedReader( fr );
+          String line = br.readLine();
+          while ( line != null ) {
+            // pw.format( line.replaceAll("\"", "\\\"") + "\n" );
+            pw.format( line + "\n" );
+            line = br.readLine();
+          }
+          fr.close();
+        } catch ( IOException e ) {
+          TDLog.e(  "CSX load IOexception " + e.toString() );
+        }
+        pw.format("</note>\n");
+      } else {
+        // TDLog.v("CSX without note " + note_file );
+        pw.format("    <note />\n");
+      }
+   
       
 
    // ============== SESSIONS
+      // TDLog.v("CSX session");
       String info_date = info.date.replaceAll("[\\.,-,/]", "");
       pw.format("    <sessions>\n");
       pw.format("      <session date=\"%s\" ", info.date); // yyyy-mm-dd or any other format is ok
@@ -392,6 +421,7 @@ public class TDExporter
       session = session.toLowerCase(Locale.US);
 
    // ============== CAVE INFOS and BRANCHES
+      // TDLog.v("CSX cave info");
       pw.format("    <caveinfos>\n");
       pw.format("      <caveinfo name=\"%s\" color=\"1724697804\"", cave );
       // pw.format( " color=\"\"");
@@ -416,6 +446,7 @@ public class TDExporter
       pw.format("  </properties>\n");
 
 // ++++++++++++++++ SHOTS
+      // TDLog.v("CSX shots");
       pw.format("  <segments>\n");
 
       for ( DBlock blk : c_list ) { // calib-check shots
@@ -606,6 +637,7 @@ public class TDExporter
       pw.format("  </segments>\n");
 
       // ============= TRIG POINTS
+      // TDLog.v("CSX trigs");
       pw.format("  <trigpoints>\n");
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
@@ -618,6 +650,7 @@ public class TDExporter
       pw.format("  </trigpoints>\n");
 
       // ============= PLOTS
+      // TDLog.v("CSX plots");
       if ( psd1 != null ) {
         DrawingWindow.exportAsCsx( sid, pw, survey, cave, branch /*, session */, psd1, psd2 );
       } else {
@@ -629,12 +662,11 @@ public class TDExporter
         pw.format("  </profile>\n");
       }
       pw.format("</csurvey>\n");
-
-      bw.flush();
+      // TDLog.v("CSX close csurvey");
       bw.close();
       ret = 1;
     } catch ( IOException e ) {
-      TDLog.e( "Failed cSurvey export: " + e.getMessage() );
+      TDLog.e( "CSX failed export: " + e.getMessage() );
     }
     return ret;
   }
@@ -784,7 +816,7 @@ public class TDExporter
     // TDLog.v( "export as KML " + file.getFilename() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.e( "Failed KML export: no geolocalized station");
+      TDLog.e( "KML failed export: no geolocalized station");
       return 2;
     }
 
@@ -907,7 +939,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.e( "Failed KML export: " + e.getMessage() );
+      TDLog.e( "KML failed KML export: " + e.getMessage() );
       return 0;
     }
   }
@@ -927,7 +959,7 @@ public class TDExporter
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SHP );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude, true with convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.e( "Failed SHP export: no geolocalized station");
+      TDLog.e( "SHP failed export: no geolocalized station");
       return 0;
     }
 
@@ -1030,7 +1062,7 @@ public class TDExporter
         (new Archiver()).compressFiles( os, dirname, files );
       }
     } catch ( IOException e ) {
-      TDLog.e( "Failed SHP export: " + e.getMessage() );
+      TDLog.e( "SHP failed export: " + e.getMessage() );
       return 0;
     } finally {
       // TDLog.v( "delete dir " + dirname );
@@ -1063,7 +1095,7 @@ public class TDExporter
   //   // TDLog.v( "export as GeoJSON " + file.getName() );
   //   List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude, false no convergence
   //   if ( TDUtil.isEmpty(nums) ) {
-  //     TDLog.e( "Failed GeoJSON export: no geolocalized station");
+  //     TDLog.e( "GeoJSON failed export: no geolocalized station");
   //     return 2;
   //   }
 
@@ -1131,7 +1163,7 @@ public class TDExporter
   //     bw.close();
   //     return 1;
   //   } catch ( IOException e ) {
-  //     TDLog.e( "Failed GeoJSON export: " + e.getMessage() );
+  //     TDLog.e( "GeoJSON failed export: " + e.getMessage() );
   //     return 0;
   //   }
   // }
@@ -1170,7 +1202,7 @@ public class TDExporter
     // TDLog.v( "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.e( "Failed KML export: no geolocalized station");
+      TDLog.e( "KML failed export: no geolocalized station");
       return 2;
     }
 
@@ -1253,7 +1285,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.e( "Failed GPX export: " + e.getMessage() );
+      TDLog.e( "GPX failed export: " + e.getMessage() );
       return 0;
     }
   }
@@ -2327,7 +2359,7 @@ public class TDExporter
                     writeSurvexLRUD( pw, blk.mTo, computeLRUD( blk, list, false ), ul );
                     st_name = blk.mTo;
                   } else {
-                    TDLog.e("ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
+                    TDLog.e("unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
                     break;
                   }
                 }

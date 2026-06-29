@@ -69,6 +69,16 @@ public class TDMath
     return f;
   }
 
+  /** @return the value of an angle mod( 2 PI )
+   * @param x  angle [radians]
+   */
+  static public double in2PI( double x )
+  { 
+    while ( x >= 2*Math.PI ) x -= 2*Math.PI;
+    while ( x < 0 ) x += 2*Math.PI;
+    return x;
+  } 
+
   /** @return the value of an angle mod(360)
    * @param f  angle [deg.]
    */

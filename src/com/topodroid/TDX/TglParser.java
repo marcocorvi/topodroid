@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDMath;
 import com.topodroid.util.TDString;
 // import com.topodroid.util.TDFile;
 import com.topodroid.c3out.ExportData;
@@ -57,6 +58,7 @@ import java.util.Locale;
 // import android.widget.Toast;
 
 import android.os.AsyncTask;
+import android.content.Context;
 
 // import android.net.Uri;
 
@@ -86,6 +88,7 @@ public class TglParser
 
   boolean do_render; // whether ready to render
   protected TopoGL mApp;
+  // protected Context mContext; use mApp as context
   // boolean has_temperature = false; // TEMPERATURE
 
   protected ArrayList< Cave3DSurvey >   surveys;
@@ -546,8 +549,7 @@ public class TglParser
         ret.add( shot );
       } else if ( shot.to_station == station ) {
         if ( reverse ) {
-          double b = shot.ber + Math.PI;
-          if ( b > 2*Math.PI ) b -= 2*Math.PI;
+          double b = TDMath.in2PI( shot.ber + Math.PI );
           // N.B. no cavway bits
           ret.add( new Cave3DShot( station, shot.from_station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) );
         } else {
@@ -575,16 +577,14 @@ public class TglParser
           ret.add( shot );
         } else {
           // TDLog.v( "add other shot " + shot.to + "-" + shot.from );
-          double b = shot.ber + Math.PI;
-          if ( b > 2*Math.PI ) b -= 2*Math.PI;
+          double b = TDMath.in2PI( shot.ber + Math.PI );
           // N.B. no cavway bits
           ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) ); // stations not important
         }
       } else if ( shot.to_station == station ) {
         if ( shot.from_station == other ) {
           // TDLog.v( "add reversed shot " + shot.to + "-" + shot.from );
-          double b = shot.ber + Math.PI;
-          if ( b > 2*Math.PI ) b -= 2*Math.PI;
+          double b = TDMath.in2PI( shot.ber + Math.PI );
           // N.B. no cavway bits
           ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) ); // stations not important
         } else {
@@ -610,8 +610,7 @@ public class TglParser
       } else if ( shot.to_station == station ) {
         if ( shot.from_station != other ) {
           // TDLog.v( "add reversed shot " + shot.to + "-" + shot.from );
-          double b = shot.ber + Math.PI;
-          if ( b > 2*Math.PI ) b -= 2*Math.PI;
+          double b = TDMath.in2PI( shot.ber + Math.PI );
           // N.B. no cavway bits
           ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor) ); // stations not important
         } 
@@ -633,8 +632,7 @@ public class TglParser
         if ( shot.from_station == station ) {
           ret.add( shot );
         } else if ( shot.to_station == station ) {
-          double b = shot.ber + Math.PI;
-          if ( b > 2*Math.PI ) b -= 2*Math.PI;
+          double b = TDMath.in2PI( shot.ber + Math.PI );
           // N.B. no cavway bits
           ret.add( new Cave3DShot( station, null, shot.len, b, -shot.cln, shot.getFlag(), shot.mMillis, mColor ) ); // stations not important
         }

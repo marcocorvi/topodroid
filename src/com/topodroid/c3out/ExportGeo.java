@@ -106,7 +106,7 @@ public class ExportGeo
 
     origin = null;
     for ( Cave3DFix fix : fixes ) {
-      if ( ! fix.hasWGS84 ) continue;
+      if ( ! fix.hasWGS84() ) continue;
       // if ( fix.cs == null ) continue;
       // if ( ! fix.cs.name.equals("long-lat") ) continue;
       for ( Cave3DStation st : data.getStations() ) {

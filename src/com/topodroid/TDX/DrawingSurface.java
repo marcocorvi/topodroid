@@ -1375,11 +1375,13 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
                            DrawingCommandManager cm, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
     if ( PlotType.isProfile( type ) ) {
+      TDLog.v("CSX profile ...");
       // FIXME OK PROFILE to check
       if ( cm != null ) {
         cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
     } else if ( type == PlotType.PLOT_PLAN ) {
+      TDLog.v("CSX plan  ...");
       if ( cm != null ) {
         cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }

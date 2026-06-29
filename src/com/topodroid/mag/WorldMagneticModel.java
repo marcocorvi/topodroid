@@ -31,27 +31,25 @@ import android.content.Context;
 public class WorldMagneticModel
 {
   // private int nMax;
+  private static final int n_max = 12;
+  private static final int n_terms = MagUtil.CALCULATE_NUMTERMS( n_max );
   // private int numTerms;
-  private MagModel mModel;
-  private static MagDate  mStartEpoch = null;
+  private static MagModel mModel2025 = null; // magnetic models are static and loaded first only when they are used
+  private static MagModel mModel2020 = null;
+  private static MagModel mModel2015 = null;
+  private static MagModel mModel2010 = null;
+  private static MagModel mModel2005 = null;
+
+  private Context mContext;
   private static float[]  mGeoidHeightBuffer = null;
-  private static WMMcoeff[] mWmmCoeff = null;
   private MagEllipsoid mEllipsoid;
   private MagGeoid     mGeoid;
 
   public WorldMagneticModel( Context context )
   {
     // TDLog.v( "WMM cstr" );
-    int n_max = 12;
-    int n_terms = MagUtil.CALCULATE_NUMTERMS( n_max );
-    loadWMM( context, n_terms );
+    mContext = context;
     loadEGM9615( context );
-
-    mModel = new MagModel( n_terms, n_max, n_max );
-    mModel.setEpoch( mStartEpoch );
-    // mModel.epoch = 2020.0;
-    // mModel.CoefficientFileEndDate = mModel.epoch + 5;
-    mModel.setCoeffs( mWmmCoeff );
     mEllipsoid = new MagEllipsoid(); // default values
     mGeoid = new MagGeoid( mGeoidHeightBuffer );
   }
@@ -98,7 +96,12 @@ public class WorldMagneticModel
 
   // ============================================================================
   
-  // height = ellipsoid height [M]
+  /** @return magnetic element at a certain date or null if before 2015
+   * @param latitude   latitude [dec. degree]
+   * @param longitude  longitude
+   * @param height     ellipsoid height [M]
+   * @param date       date when to compute the nagnetid element
+   */
   private MagElement doComputeMagElement( double latitude, double longitude, double height, MagDate date )
   {
     MagGeodetic geodetic = new MagGeodetic();
@@ -110,7 +113,33 @@ public class WorldMagneticModel
     // mGeoid.convertEllipsoidToGeoidHeight( geodetic ); // FIXME
 
     MagSpherical spherical = mEllipsoid.geodeticToSpherical( geodetic ); // geodetic to Spherical Eqs. 17-18
-    MagModel timedModel    = mModel.getTimelyModifyModel( date );
+    // TODO get the timed model using the appropriate wmm-model
+    MagModel timedModel = null;
+    double dy = date.DecimalYear;
+    if ( dy >= 2025 ) {
+      TDLog.v("WMM using 2025");
+      if ( mModel2025 == null ) mModel2025 = loadWMM( mContext, n_terms, "wmm/wmm2025.cof" );
+      timedModel = mModel2025.getTimelyModifyModel( date );
+    } else if ( dy >= 2020 ) {
+      TDLog.v("WMM using 2020");
+      if ( mModel2020 == null ) mModel2020 = loadWMM( mContext, n_terms, "wmm/wmm2020.cof" );
+      timedModel = mModel2020.getTimelyModifyModel( date );
+    } else if ( dy >= 2015 ) {
+      TDLog.v("WMM using 2015");
+      if ( mModel2015 == null ) mModel2015 = loadWMM( mContext, n_terms, "wmm/wmm2015.cof" );
+      timedModel = mModel2015.getTimelyModifyModel( date );
+    } else if ( dy >= 2010 ) {
+      TDLog.v("WMM using 2010");
+      if ( mModel2010 == null ) mModel2010 = loadWMM( mContext, n_terms, "wmm/wmm2010.cof" );
+      timedModel = mModel2010.getTimelyModifyModel( date );
+    } else if ( dy >= 2005 ) {
+      TDLog.v("WMM using 2005");
+      if ( mModel2005 == null ) mModel2005 = loadWMM( mContext, n_terms, "wmm/wmm2005.cof" );
+      timedModel = mModel2005.getTimelyModifyModel( date );
+    } else {
+      // TODO too old
+      return null;
+    }
 
     // date.debugDate();
     // timedModel.debugModel();
@@ -195,7 +224,7 @@ public class WorldMagneticModel
     return (int)( (((int)b[2]) << 4) | ((int)b[1] & 0x0F) );
   }
   
-
+  // called by MainWindow
   static public void loadEGM9615( Context context )
   {
     // TDLog.v( "load EGM9615");
@@ -271,22 +300,28 @@ public class WorldMagneticModel
     // TDLog.v( "load EGM9615 done");
   }
 
-  static private void loadWMM( Context context, int num_terms )
+  /** called only by doComputeMagElement
+   * @param context  context
+   * @param num_terms number of terms of the model
+   * @param wmm_file   model file
+   * @return magnetic model
+   */
+  static private MagModel loadWMM( Context context, int num_terms, String wmm_file )
   {
     // TDLog.v( "WMM load WMM coeff " + num_terms );
     {
-      if ( mWmmCoeff != null ) return;
-      mWmmCoeff = new WMMcoeff[ num_terms ];
-      for ( int k=0; k<num_terms; ++k ) mWmmCoeff[k] = null;
+      WMMcoeff[] wmm_coeff = new WMMcoeff[ num_terms ];
+      for ( int k=0; k<num_terms; ++k ) wmm_coeff[k] = null;
       
+      MagDate start_epoch = null;
       try {
-        InputStreamReader fr = new InputStreamReader( context.getAssets().open( "wmm/wmm.cof" ) );
+        InputStreamReader fr = new InputStreamReader( context.getAssets().open( wmm_file ) );
         BufferedReader br = new BufferedReader( fr );
         String line = br.readLine().trim();
         String[] vals = line.split(" ");
         double start = Double.parseDouble( vals[0] );
         // System.out.println("Start Epoch " + start );
-        mStartEpoch = new MagDate( start );
+        start_epoch = new MagDate( start );
         for ( ; ; ) {
           line = br.readLine().trim();
           if ( line.startsWith("99999") ) break;
@@ -304,14 +339,23 @@ public class WorldMagneticModel
           ++j; while ( vals[j].length() == 0 ) ++j;
           double v3 = Double.parseDouble( vals[j] );
           int index = WMMcoeff.index( n, m );
-          mWmmCoeff[index] = new WMMcoeff( n, m, v0, v1, v2, v3 );
+          wmm_coeff[index] = new WMMcoeff( n, m, v0, v1, v2, v3 );
           // TDLog.v( "WMM N,M " + n + " " + m + " " + v0 + " " + v1 + " " + v2 + " " + v3 );
         }
         fr.close();
       } catch( IOException e ) {
         // TODO 
+        TDLog.e("WMM load " + wmm_file + " " + e.getMessage() );
+        return null;
       }
+      if ( start_epoch == null ) return null;
       // System.out.println("loaded WMM");
+      MagModel mag_model = new MagModel( num_terms, n_max, n_max );
+      mag_model.setEpoch( start_epoch );
+      // mag_model.epoch = 2025.0;
+      // mag_model.CoefficientFileEndDate = mModel2025.epoch + 5;
+      mag_model.setCoeffs( wmm_coeff );
+      return mag_model;
     }
   }
 }

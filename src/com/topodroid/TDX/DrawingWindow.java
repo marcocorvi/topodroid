@@ -9129,6 +9129,8 @@ public class DrawingWindow extends ItemDrawer
       // } else {
       //   DrawingSurface.exportAsCsx( pw, PlotType.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
       // }
+    } else {
+      TDLog.v("CSX psd2 null");
     }
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");

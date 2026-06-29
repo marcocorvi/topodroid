@@ -3624,7 +3624,7 @@ public class TopoDroidApp extends Application
   static void checkAnalytics( final Context ctx )
   {
     if ( TDLevel.isDebugBuild() ) return;
-    if ( ! TDSetting.mAnalytics ) return; // N.B. send report only if user has not opted out
+    // if ( ! TDSetting.mAnalytics ) return; // FIXME debug force analytics
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;
     String today = TDUtil.getDateString( "yyyy.MM.dd" );

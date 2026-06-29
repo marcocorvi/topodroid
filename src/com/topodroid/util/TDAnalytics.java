@@ -272,6 +272,8 @@ public class TDAnalytics
   {
     Thread thread = new Thread() {
       @Override public void run() {
+        boolean success = false;
+        String ct = null;
         HttpURLConnection urlConnection = null;
         try {
           // URL url = new URL( ANALYTICS_SERVER + "?" + msg );
@@ -302,9 +304,9 @@ public class TDAnalytics
             int pos = response.indexOf( "code\": \"" );
             if ( pos > 0 ) {
               pos += 8;
-              String ct = response.substring( pos, pos+2 );
-              setCT( ct );
-              TopoDroidApp.storeCT( ctx, ct );
+              ct = response.substring( pos, pos+2 );
+              // doSetCT( ctx, ct );
+              success = TopoDroidApp.storeCT( ctx, ct );
             }
           // } else {
           //   TDLog.v("response code " + ret_code );
@@ -320,6 +322,7 @@ public class TDAnalytics
         } finally {
           if ( urlConnection != null ) urlConnection.disconnect();
         }
+        if ( ! success ) doSetCT( ctx, ct );
       }
     };
     thread.start();
@@ -330,8 +333,9 @@ public class TDAnalytics
    */
   public static void setCT( Context ctx, String ct )
   {
+    // TDLog.v("analyics set CT [1] " + ct );
     if ( ct == null ) return;
-    setCT( ct );
+    doSetCT( ctx, ct );
   }
 
   // FXIME_HICSUM
@@ -344,10 +348,13 @@ public class TDAnalytics
   //   // TODO
   // }
 
-  private static void setCT( String ct )
+  private static void doSetCT( Context ctx, String ct )
   {
-    // TDLog.v("Code <" + ct + ">" );
-    mCT = ct;
+    // TDLog.v("analyics set CT [2] " + ct );
+    if ( ct != null && ct.length() == 2 ) {
+      mCT = ct;
+      TDLevel.setMaior( ctx, CT.maior( ct ) );
+    }
   }
 
 

@@ -15,6 +15,7 @@ package com.topodroid.c3in;
 import com.topodroid.TDX.R;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDVersion;
 import com.topodroid.c3db.DataHelper;
@@ -33,6 +34,8 @@ import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.TDX.Cave3DFix;
 // import com.topodroid.TDX.Cave3DXSection;
 import com.topodroid.mag.Geodetic;
+import com.topodroid.mag.MagElement;
+import com.topodroid.mag.WorldMagneticModel;
 import com.topodroid.TDX.Vector3D;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDInstance;
@@ -261,12 +264,23 @@ public class ParserTh extends TglParser
 
     boolean use_centerline_declination = false;
     double declination = 0.0f;
+    int fix_year  = 0;
+    int fix_month = 0;
+    int fix_day   = 0;
+    boolean compute_declination = false;
     if ( info.hasDeclination() ) {
       use_centerline_declination = true;
       declination = info.declination;
-      // TDLog.v("survey declination " + declination );
+      TDLog.v("survey declination " + declination );
     } else if ( usd ) {
       declination = sd;
+      TDLog.v("survey does not have declination: using " + declination );
+    } else { // COMPUTE DECLINATION from date nd fix
+      fix_year  = TDUtil.dateParseYear( info.date ); // yyyy.mm.dd
+      fix_month = TDUtil.dateParseMonth1( info.date ); // yyyy.mm.dd
+      fix_day   = TDUtil.dateParseDay( info.date ); // yyyy.mm.dd
+      compute_declination = true;
+      TDLog.v("survey does not have declination: will compute");
     }
 
     // int[] survey_pos = new int[50]; // FIXME max 50 levels - UNUSED
@@ -317,11 +331,11 @@ public class ParserTh extends TglParser
             z1 = fx.mCsGeoidAlt;
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
             conv = fx.mConvergence;
-            mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, fx.mToUnits, fx.mToVUnits, fx.mConvergence );
+            mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, fx.mToUnits, fx.mToVUnits, fx.mConvergence, true );
 	    fixes.add( mOrigin );
           } else {
             // TDLog.v( "Th origin CS0 " + x0 + " " + y0 + " " + z0 );
-            mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, 1, 1, 0.0); // M_TO_UNITS = 1 - zero convergence
+            mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, 1, 1, 0.0, true ); // M_TO_UNITS = 1 - zero convergence
 	    fixes.add( mOrigin );
           }
         } else {
@@ -333,7 +347,7 @@ public class ParserTh extends TglParser
               z1 = fx.mCsGeoidAlt;
               conv = fx.mConvergence;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
-	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, fx.mToUnits, fx.mToVUnits, fx.mConvergence ) );
+	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, fx.mToUnits, fx.mToVUnits, fx.mConvergence, true ) );
             } else {
               if ( nocs == null ) {
                 nocs = new StringBuilder();
@@ -346,8 +360,15 @@ public class ParserTh extends TglParser
             double yy = mOrigin.latToNorth( fx.mLatitude, fx.mEllipAlt ); // north diff to the origin
             double xx = mOrigin.lngToEast( fx.mLongitude, fx.mLatitude, fx.mEllipAlt, yy-mOrigin.y );
             // TDLog.v( "  relative to origin: " + xx + " " + yy + " " + z0 );
-            fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, 1, 1, 0.0 ) ); // M_TO_UNITS = 1 - zero convergence
+            fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */, 1, 1, 0.0, true ) ); // M_TO_UNITS = 1 - zero convergence
           }
+        }
+        if ( compute_declination && fix_year > 0 ) { // COMPUTE DECLINATION USING THE survey date and the fix coords
+          WorldMagneticModel wmm = new WorldMagneticModel( mApp );
+          MagElement elem = wmm.computeMagElement( fx.mLatitude, fx.mLongitude, fx.mEllipAlt, fix_year, fix_month, fix_day );
+          declination = elem.Decl;
+          TDLog.v("survey computed declination " + declination );
+          compute_declination = false;
         }
       }
       // declination -= conv; // correct declination with -convergence // HB_conv
@@ -359,7 +380,7 @@ public class ParserTh extends TglParser
 
     for ( DBlock blk : blks ) {
       if ( blk.mFrom.length() > 0 ) {
-        double ber = blk.mBearing + declination;
+        double ber = blk.mBearing + declination; // apply declination
         if ( ber >= 360 ) ber -= 360; else if ( ber < 0 ) ber += 360;
         String from = ThStatus.makeName( blk.mFrom, path );
         if ( blk.mTo.length() > 0 ) {
@@ -394,8 +415,8 @@ public class ParserTh extends TglParser
   }
   
   /** read input file
-   * @param usd   whether to use given declination
-   * @param sd    declination
+   * @param usd   whether to use given (survey) declination
+   * @param sd    declination value
    * @param ul units of length (as multiple of 1 degree)
    * @param ub units of bearing (as multiple of 1 degree)
    * @param uc units of clino
@@ -438,6 +459,11 @@ public class ParserTh extends TglParser
 
     int nr_leg    = 0;
     int nr_splay  = 0;
+
+    int fix_year  = 0;
+    int fix_month = 0;
+    int fix_day   = 0;
+    double computed_declination = 0;
 
     try {
       String dirname = "./";  // dirname has the trailing '/'
@@ -484,13 +510,17 @@ public class ParserTh extends TglParser
                 if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) {
                   String date = vals[idx];
                   if ( date.length() >= 10 ) {
-                    int yy = Integer.parseInt( date.substring( 0, 4 ) );
+                    fix_year = Integer.parseInt( date.substring( 0, 4 ) );
                     String m = date.substring(5,7);
                     String d = date.substring(8,10);
-                    int mm = (m.charAt(0)-'0')*10 + (m.charAt(1)-'0');
-                    int dd = (d.charAt(0)-'0')*10 + (d.charAt(1)-'0');
-                    Calendar cal = new GregorianCalendar( yy, mm, dd );
+                    fix_month = (m.charAt(0)-'0')*10 + (m.charAt(1)-'0'); // MAG counts months from 1=Jan
+                    fix_day   = (d.charAt(0)-'0')*10 + (d.charAt(1)-'0');
+                    Calendar cal = new GregorianCalendar( fix_year, fix_month, fix_day );
                     millis = cal.get( Calendar.MILLISECOND );
+                    // decimal_year = TDUtil.toDecimalYear( fix_year, fix_month, fix_day );
+                  } else {
+                    fix_year = 0;
+                    // decimal_year = 0;
                   }
                 }
               } else if ( cmd.equals("flags") ) { 
@@ -504,7 +534,9 @@ public class ParserTh extends TglParser
                     double decl = Double.parseDouble( vals[idx] );
                     use_centerline_declination = true;
                     centerline_declination = decl;
+                    TDLog.v("centerline has declination " + centerline_declination );
                   } catch ( NumberFormatException e ) {
+                    use_centerline_declination = false;
                     TDLog.e( "Th Number error: centerline declination number format exception" );
                   }
                 }
@@ -585,7 +617,17 @@ public class ParserTh extends TglParser
                 }
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z
                 Cave3DFix fix = thStatus.handleFix( vals, idx, path, cs );
-                if ( fix != null ) fixes.add( fix );
+                if ( fix != null ) {
+                  fixes.add( fix );
+                  if ( ! ( use_survey_declination || use_centerline_declination ) ) {
+                    if ( fix_year > 0 && fix.hasWGS84() ) { // COMPUTE DECLINATION
+                      WorldMagneticModel wmm = new WorldMagneticModel( mApp );
+                      MagElement elem = wmm.computeMagElement( fix.latitude, fix.longitude, fix.a_ellip, fix_year, fix_month, fix_day );
+                      computed_declination = elem.Decl;
+                      TDLog.v("fix has WGS84: computed declination " + computed_declination );
+                    }
+                  }        
+                }
               } else if ( vals.length >= 5 ) {
                 if ( thStatus.in_data == ThStatus.DATA_NORMAL ) {
                   String from = vals[idx];
@@ -600,6 +642,7 @@ public class ParserTh extends TglParser
                         idx = TDString.nextIndex( vals, idx );
                         if ( idx < vals.length ) {
                           setDataValue( type1, Double.parseDouble( vals[idx] ), thStatus );
+
                           idx = TDString.nextIndex( vals, idx );
                           if ( idx < vals.length ) {
                             setDataValue( type2, Double.parseDouble( vals[idx] ), thStatus );
@@ -610,7 +653,10 @@ public class ParserTh extends TglParser
                                 bearing += centerline_declination;
                               } else if ( use_survey_declination ) {
                                 bearing += survey_declination;
+                              } else {
+                                bearing += computed_declination;
                               }
+                              
                               if ( thStatus.in_splay || to.equals("-") || to.equals(".") || to.equals("_") ) { // add splay shot
                                 if ( mSplayUse > SPLAY_USE_SKIP ) {
                                   from = ThStatus.makeName( from, path );
@@ -714,8 +760,10 @@ public class ParserTh extends TglParser
                 if ( idx < vals.length ) {
                   use_survey_declination = true;
                   survey_declination = Double.parseDouble( vals[idx] );
+                  TDLog.v( "survey has declination " + survey_declination ); 
                 }
               } catch ( NumberFormatException e ) {
+                use_survey_declination = false;
                 TDLog.e( "Th survey declination " + e.getMessage() );
               }
             } else if ( cmd.equals("input") ) {
@@ -900,7 +948,7 @@ public class ParserTh extends TglParser
     // TDLog.v( "Th shots " + shots.size() + " stations " + stations.size() + " fixes " + fixes.size() );
     ArrayList< Cave3DFix > ok_fixes = new ArrayList<>(); // array of fixed stations that are in the survey
 
-	double conv = 0; // HB_conv meridial convergence
+    double conv = 0; // HB_conv meridial convergence
     int bad_fixes = 0;
     for ( Cave3DFix fix : fixes ) {
       boolean found = false; 
@@ -952,7 +1000,7 @@ public class ParserTh extends TglParser
       }
       // TDLog.v( "Th add start station " + fix.getFullName() + " N " + fix.y + " E " + fix.x + " Z " + fix.z );
       stations.add( new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z ) );
-	  conv = fix.mConvergence;  // HB_conv
+      conv = fix.mConvergence;  // HB_conv
       // sh.from_station = s0;
 
       boolean repeat = true;

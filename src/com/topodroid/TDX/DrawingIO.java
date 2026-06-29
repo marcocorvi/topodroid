@@ -2370,19 +2370,26 @@ public class DrawingIO
   static void doExportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
                              List< DrawingPath > paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
+    // TDLog.v("CSX paths " + paths.size() 
+    //   + " auto-sections " +  TDSetting.mAutoXSections + " all-sections " + ((all_sections != null)? all_sections.size() : "null")
+    //   + " sections " + ((sections != null)? sections.size() : "null" ) );
     int csxIndex = 0;
     for ( DrawingPath p : paths ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        // TDLog.v("CSV area");
         DrawingAreaPath ap = (DrawingAreaPath)p;
   // system and special points
         ap.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
       } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        // TDLog.v("CSV line");
         DrawingLinePath lp = (DrawingLinePath)p;
         lp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       } else if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        // TDLog.v("CSV point");
         DrawingPointPath pp = (DrawingPointPath)p;
         String section_info = null;
         if ( TDSetting.mAutoXSections && all_sections != null && BrushManager.isPointSection( pp.mPointType ) ) {
+          // TDLog.v("CSV section point");
           // option: -scrap survey-xx# 
           PlotInfo section = null;
           String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) );
@@ -2415,11 +2422,13 @@ public class DrawingIO
           pp.toTCsurvey( pw, survey, cave, branch, bind, section_info, section );
         } else {
           if ( TDSetting.mExportMedia || ! BrushManager.isPointMedia( pp.mPointType ) ) {
+            // TDLog.v("CSX media");
             pp.toTCsurvey( pw, survey, cave, branch, bind );
           }
         }
       }
     }
+    // TDLog.v("CSX do export as TCsx done");
   }
 
   // static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,

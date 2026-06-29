@@ -383,10 +383,10 @@ public class TDUtil
     return 1970;
   }
 
-  /** @return the month from a topodroid date string
+  /** @return the 1-based month from a topodroid date string
    * @param date   topodroid date string (yyyy.mm.dd)
    */
-  public static int dateParseMonth( String date )
+  public static int dateParseMonth1( String date )
   {
     int ret = 0;
     if ( date != null && date.length() >= 7 ) {
@@ -394,6 +394,16 @@ public class TDUtil
       char ch = date.charAt(6);
       if ( ch >= '0' && ch <= '9' ) ret += (ch - '0');
     }
+    return ret;
+  }
+
+  /** @return the 0-based month from a topodroid date string
+   * @param date   topodroid date string (yyyy.mm.dd)
+   * @note used only in calls to DatePickerDialog
+   */
+  public static int dateParseMonth( String date )
+  {  
+    int ret = dateParseMonth1( date );
     return (ret > 0)? ret-1 : 0;
   }
 
@@ -411,6 +421,40 @@ public class TDUtil
     }
     return Math.max(ret, 0);
   }
+
+  // /** @return the value of the decimal year
+  //  * @param date  string presentation YYYY.MM.DD of the date
+  //  */
+  // public static double toDecimalYear( String date )
+  // {
+  //   return toDecimalYear( dateParseYear( date ), dateParseMonth1( date ), dateParseDay( date ) );
+  // }
+
+  // /** @return the value of the decimal year
+  //  * @param yy  year
+  //  * @param mm  month
+  //  * @param dd  day
+  //  */
+  // public static double toDecimalYear( int yy, int mm, int dd )
+  // {
+  //   boolean leap = (yy % 4) == 0; // 2000 is leap year
+  //   int days = dd;
+  //   switch( mm ) {
+  //     case 12: days += 30;
+  //     case 11: days += 31;
+  //     case 10: days += 30;
+  //     case  9: days += 31;
+  //     case  8: days += 31;
+  //     case  7: days += 30;
+  //     case  6: days += 31;
+  //     case  5: days += 30;
+  //     case  4: days += 31;
+  //     case  3: days += leap ? 29 : 28;
+  //     case  2: days += 31;
+  //     default: break;
+  //   }
+  //   return yy + days / ( leap ? 366.0 : 365.0 );
+  // }
 
   /** @return the topodroid date string
    * @param y  year
