@@ -7,7 +7,7 @@
     <string name="ai_no_internet">Connessione web mancante.</string>
     <string name="ai_prompt">Scrivi la tua domanda</string>
     <string name="ai_invalid_key">API key non valida</string>
-    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
+    <string name="ai_chat_reset">Chat resettata</string>
     <string name="ai_key_instruction">L\'API key e\' memorizzata nella memoria interna Android\n ed e\' inviata solo a Google.\nCerca in internet come ottenere una Gemini API key da Google.</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
@@ -171,7 +171,7 @@
     <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
     <string name="calib_write_coeffs">Scrittura coefficienti in corso</string>
     <string name="calib_validation">Validatione di %1$s vs %2$s</string>
-    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+    <string name="calib_reset_ok">Calibrazione resettata</string>
 
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
@@ -508,7 +508,7 @@
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_device_add">AGGIUNGI DISP.</string>
     <string name="menu_export">ESPORTA</string>
-    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
+    <string name="menu_bulkops">Opzioni BULK</string>
     <string name="menu_exit">USCITA</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APP GNSS</string>
@@ -637,7 +637,7 @@
     <!-- UNUSED string name="plot_null_start">Caposaldo di riferimento mancante</string -->
     <!-- UNUSED string name="plot_recover">Ricaricare il disegno dal backup?</string -->
     <string name="plot_start">Caposaldo di origine</string>
-    <!-- TODO string name="plot_no_backups">No sketch backup</string -->
+    <string name="plot_no_backups">Nessun backup disegno</string>
     <!-- UNUSED string name="plot_view">Caposaldo puntato</string -->
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
@@ -754,7 +754,7 @@
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
-    <!-- TODO string name="shot_paste_text">Shot paste</string -->
+    <string name="shot_paste_text">Incolla Tiro</string>
     <string name="undelete_shot">Tiri</string>
     <string name="undelete_overshoot">Tiri lunghi</string>
     <string name="undelete_check">Controlli</string>
@@ -764,9 +764,9 @@
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <!-- UNUSED string name="wait_scan">Scanning: attendi &#8230;</string -->
-    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
-    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
-    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_failed">Carica Calib.: scrittura fallita</string>
+    <string name="calib_read_failed">Carica Calib.: Rilettura fallita</string>
+    <string name="calib_check_failed">Carica Calib.: check fallito</string>
     <string name="calib_write_ok">Calibrazione scritta sul DistoX</string>
     <string name="zip_saved">Salvato </string>
     <string name="zip_failed">Archiviazione rilievo fallita</string>
@@ -883,7 +883,7 @@
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_duplicate" >Duplicato   </string>
-    <!-- TODO string name="button_empty"     >Empty</string -->
+    <string name="button_empty"     >Vuoto</string>
     <string name="button_settime"   >Set orario</string>
     <string name="button_surface"   >Superfice   </string>
     <string name="button_splay"    copyable="all">Splay</string>
@@ -941,8 +941,8 @@
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <string name="button_select"    >Seleziona</string>
-    <!-- TODO string name="button_toggle"    >Toggle</string -->
-    <!-- TODO string name="button_import"    >Import</string -->
+    <string name="button_toggle"    >Attiva/disattiva</string>
+    <string name="button_import"    >Importa</string>
     <string name="button_submit"    >Invia</string>
     <string name="button_leg_station">Battute</string>
     <string name="button_all_station">Tutti i capisaldi</string>
@@ -1138,7 +1138,7 @@
     <string name="help_color">Pulisci i colori degli splay</string>
     <string name="help_cwd">Folder di lavoro</string>
     <string name="help_join">Unione linee</string>
-    <!-- TODO string name="help_text">Insert text</string -->
+    <string name="help_text">Inserisci testo</string>
     <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
@@ -1230,7 +1230,7 @@
     <string name="help_save_calib">Salva i cambiamenti alla calibrazione</string>
     <string name="help_export_survey">Esporta rilievo</string>
     <!-- UNUSED string name="help_export_surveys">Esporta tutti i rilievi</string -->
-    <!-- TODO string name="help_bulkops_surveys">Surveys bulk operations</string -->
+    <string name="help_bulkops_surveys">Operazioni massive Rilievo</string>
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
     <string name="help_delete_calib">Elimina calibrazione</string>
@@ -1335,7 +1335,7 @@
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
     <string name="title_recalibrate">Calibrazioni</string>
-    <!-- TODO string name="title_calibration">Calibration</string -->
+    <string name="title_calibration">Calibrazione</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calibr.</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1386,8 +1386,8 @@
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_photo_list">Foto</string>
     <string name="title_photo_view">Foto</string>
-    <!-- TODO string name="title_plan">Plan view</string -->
-    <!-- TODO string name="title_profile">Profile view</string -->
+    <string name="title_plan">Vista in pianta</string>
+    <string name="title_profile">Vista in sezione</string>
     <string name="title_plot_save">Salva disegno come </string>
     <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
     <!-- UNUSED string name="title_plot_reload">Ricarica disegno</string -->
@@ -1452,8 +1452,8 @@
 
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
-    <!-- TODO string name="title_shot_edit">Shot edit</string -->
-    <!-- TODO string name="title_multishot">Shots operations</string -->
+    <string name="title_shot_edit">Modifica tiro</string>
+    <string name="title_multishot">Operazioni sui tiri</string>
     <string name="title_sensor_edit">Sensore</string>
     <string name="title_sensor_list">Dati di sensori</string>
     <string name="title_split">Divisione disegno</string>
@@ -2197,7 +2197,7 @@
     <string name="title_drop">Cancello rilievi ?</string>
     <string name="title_tdconfig">Inserisci nome progetto</string>
     <string name="title_surveys">Rilievi</string>
-    <!-- TODO string name="title_symbols">Active tools</string -->
+    <string name="title_symbols">Strumenti attivi</string>
 
     <string name="exported">Salvato file %1$s</string>
     <string name="export_failed">Esportazione fallita</string>
