@@ -1074,7 +1074,7 @@ public class ParserTh extends TglParser
           } else if ( sf == null && st != null ) {
             // TDLog.v( "TH shot found to " + sh.to + " no station from "  + sh.from );
             // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.getFullName() );
-            Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
+            Cave3DStation s = sh.getStationFromStation( st, conv ); // HB_conv
             stations.add( s );
             sh.from_station = s;
             // TDLog.v( "Th add station FR " + sh.from + " " + sh.to + " " + sh.from_station.name  );

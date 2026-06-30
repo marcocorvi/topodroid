@@ -604,6 +604,15 @@ public class DrawingPath extends RectF
     }
   }
 
+  /** draw the path elevation on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param bbox     clipping rectangle
+   */
+  public void draw( Canvas canvas, RectF bbox, boolean elevation )
+  {
+    draw( canvas, bbox );
+  }
+
   /** draw the path on a canvas
    * @param canvas   canvas - N.B. canvas is guaranteed not null
    * @param bbox     clipping rectangle
@@ -633,6 +642,16 @@ public class DrawingPath extends RectF
       mTransformedPath.transform( matrix );
       drawPath( mTransformedPath, canvas );
     }
+  }
+
+  /** draw the path elevation on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param bbox     clipping rectangle
+   */
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox, boolean elevation )
+  {
+    draw( canvas, matrix, bbox );
   }
 
   /** draw the path on a canvas

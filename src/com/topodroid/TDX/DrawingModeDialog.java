@@ -34,6 +34,7 @@ class DrawingModeDialog extends MyDialog
     private CheckBox mCBsplay;    // whether to show splays
     private CheckBox mCBlatest;   // whether to show latest shots
     private CheckBox mCBstation;  // whether to show stations
+    private CheckBox mCBelevation;  // whether to show station elevations
     private CheckBox mCBgrid;     // whether to show the grid
     private CheckBox mCBfixed;    // whether to keep centerline fixed, ie, shift the drawing
     private CheckBox mCBscrap;    // whether to shift only the current scrap
@@ -74,6 +75,7 @@ class DrawingModeDialog extends MyDialog
       mCBsplay   = (CheckBox) findViewById(R.id.cb_mode_splay);
       mCBlatest  = (CheckBox) findViewById(R.id.cb_mode_latest);
       mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
+      mCBelevation = (CheckBox) findViewById(R.id.cb_mode_elevation);
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
       mCBscrap   = (CheckBox) findViewById(R.id.cb_mode_scrap);
@@ -132,6 +134,7 @@ class DrawingModeDialog extends MyDialog
       }
       mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
       mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
+      mCBelevation.setChecked( (mode & DisplayMode.DISPLAY_ELEVATION) != 0 );
       mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
       mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALEBAR) != 0);
     }
@@ -167,6 +170,7 @@ class DrawingModeDialog extends MyDialog
         }
         if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
         if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
+        if ( mCBelevation.isChecked() ) mode |= DisplayMode.DISPLAY_ELEVATION;
         if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
         if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
         // TDLog.e( "Mode " + mode );
@@ -192,6 +196,7 @@ class DrawingModeDialog extends MyDialog
   //   if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
   //   if ( mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
   //   if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
+  //   if ( mCBelevation.isChecked() ) mode |= DisplayMode.DISPLAY_ELEVATION;
   //   if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
   //   mSurface.setDisplayMode( mode );
   //   cancel();

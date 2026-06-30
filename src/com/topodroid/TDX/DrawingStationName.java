@@ -39,6 +39,7 @@ public class DrawingStationName extends DrawingPointPath
   private final static float PDF_SCALE = 0.3f;
 
   private String mName; // station name
+  private String mElevation = null;
   private NumStation mStation;
   // float mX;     // scene coordinates (cx, cy)
   // float mY;
@@ -75,7 +76,7 @@ public class DrawingStationName extends DrawingPointPath
 
     setCenter( x, y ); // scene coords
     mDuplicate = false;
-    makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
+    makeStraightPath( 0, 0, 2*TDSetting.mStationSize*(1+mName.length()), 0, cx, cy );
     mPaint = BrushManager.fixedStationPaint;
   }
 
@@ -94,6 +95,7 @@ public class DrawingStationName extends DrawingPointPath
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = num_st;
     mName = (num_st.name == null)? "" : num_st.name;
+    mElevation = String.format( Locale.US, "%.1f", -num_st.v );
     mXSectionType = PlotType.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
@@ -101,8 +103,12 @@ public class DrawingStationName extends DrawingPointPath
                                   : BrushManager.fixedStationPaint;
     setCenter( x, y ); // scene coords
     mDuplicate = num_st.mDuplicate;
-    
-    makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
+    int len  = 1+mName.length(); 
+    if ( mElevation != null ) {
+      int len2 = 1+mElevation.length();
+      if ( len2 > len ) len = len2;
+    }
+    makeStraightPath( 0, 0, 2*TDSetting.mStationSize*len, 0, cx, cy );
   }
 
   void highlightName( boolean on_off ) { mHighlight = on_off; }
@@ -168,10 +174,75 @@ public class DrawingStationName extends DrawingPointPath
   /** draw the station on the screen
    * @param canvas   canvas
    * @param bbox     clipping box
+   * @param elevation whether to write elevation istead of name
+   */
+  @Override
+  public void draw( Canvas canvas, RectF bbox, boolean elevation  )
+  {
+    if ( intersects( bbox ) ) {
+      // TDLog.v( "PLOT station name " + mName );
+      Paint paint = mPaint;
+      if ( mHighlight ) {
+        paint = new Paint( mPaint );
+        paint.setColor( 0xffffffff );
+      }
+      if ( elevation && mElevation != null ) {
+        canvas.drawTextOnPath( mElevation, mPath, 0f, 0f, paint );
+      } else {
+        canvas.drawTextOnPath( mName, mPath, 0f, 0f, paint );
+      }
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
+        Path path = new Path();
+        path.moveTo( cx, cy );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
+        canvas.drawPath( path, BrushManager.mSectionPaint );
+      }
+    }
+  }
+
+  /** draw the station on the screen
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param bbox     clipping box
+   * @param elevation whether to write elevation istead of name
+   */
+  @Override
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox, boolean elevation )
+  {
+    if ( intersects( bbox ) ) {
+      // TDLog.v( "PLOT station name " + mName + " with matrix" );
+      if ( mName != null && mPaint != null ) {
+        Paint paint = mPaint;
+        if ( mHighlight ) {
+          paint = new Paint( mPaint );
+          paint.setColor( 0xffffffff );
+        }
+        mTransformedPath = new Path( mPath );
+        mTransformedPath.transform( matrix );
+        if ( elevation && mElevation != null ) {
+          canvas.drawTextOnPath( mElevation, mTransformedPath, 0f, 0f, paint );
+        } else {
+          canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, paint );
+        }
+      }
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
+        Path path = new Path();
+        path.moveTo( cx, cy );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
+        path.transform( matrix );
+        canvas.drawPath( path, BrushManager.mSectionPaint );
+      }
+    }
+  }
+
+  /** draw the station on the screen
+   * @param canvas   canvas
+   * @param bbox     clipping box
    */
   @Override
   public void draw( Canvas canvas, RectF bbox )
   {
+    // this.draw( canvas, bbox, false );
     if ( intersects( bbox ) ) {
       // TDLog.v( "PLOT station name " + mName );
       Paint paint = mPaint;
@@ -226,6 +297,7 @@ public class DrawingStationName extends DrawingPointPath
   @Override
   public void draw( Canvas canvas, Matrix matrix, RectF bbox )
   {
+    // this.draw( canvas, matrix, bbox, false );
     if ( intersects( bbox ) ) {
       // TDLog.v( "PLOT station name " + mName + " with matrix" );
       if ( mName != null && mPaint != null ) {
@@ -267,7 +339,11 @@ public class DrawingStationName extends DrawingPointPath
         paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
-        canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, paint );
+        // if ( elevation && mElevation != null ) {
+        //   canvas.drawTextOnPath( mElevation, mTransformedPath, 0f, 0f, paint );
+        // } else {
+          canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, paint );
+        // }
       }
       if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();

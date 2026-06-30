@@ -142,7 +142,7 @@ public class TdmConfigActivity extends Activity
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) {
       String path = extras.getString( TDRequest.TDCONFIG_PATH );
-      // TDLog.v("TDM config " + path );
+      // TDLog.v("TDM-config " + path );
       if ( path != null ) {
         mTdmConfig = new TdmConfig( path, false ); // false: no save 
         if ( mTdmConfig != null ) {

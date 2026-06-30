@@ -982,6 +982,7 @@
     <string name="mode_splay">Splay</string>
     <string name="mode_latest">Ultimi splay</string>
     <string name="mode_station">Capisaldi</string>
+    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
     <string name="mode_scrap">Solo scrap attivo</string>

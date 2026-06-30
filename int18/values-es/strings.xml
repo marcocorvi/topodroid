@@ -993,6 +993,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="mode_splay">Radiales</string>
     <string name="mode_latest">Últimas reproducciones</string>
     <string name="mode_station">Estaciones</string>
+    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
     <string name="mode_scrap">Solo el fragmento actual</string>

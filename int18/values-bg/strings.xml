@@ -986,6 +986,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="mode_splay">Странични измервания</string>
     <string name="mode_latest">Последни странични измервания</string>
     <string name="mode_station">Репери</string>
+    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
     <string name="mode_grid">Решетка</string>
     <string name="mode_fixed">Коригиране на референции</string>
     <string name="mode_scrap">Само текущ отрязък</string>

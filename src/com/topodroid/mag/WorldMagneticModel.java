@@ -39,6 +39,7 @@ public class WorldMagneticModel
   private static MagModel mModel2015 = null;
   private static MagModel mModel2010 = null;
   private static MagModel mModel2005 = null;
+  private static MagModel mModel2000 = null;
 
   private Context mContext;
   private static float[]  mGeoidHeightBuffer = null;
@@ -136,6 +137,10 @@ public class WorldMagneticModel
       TDLog.v("WMM using 2005");
       if ( mModel2005 == null ) mModel2005 = loadWMM( mContext, n_terms, "wmm/wmm2005.cof" );
       timedModel = mModel2005.getTimelyModifyModel( date );
+    } else if ( dy >= 2000 ) {
+      TDLog.v("WMM using 2000");
+      if ( mModel2000 == null ) mModel2000 = loadWMM( mContext, n_terms, "wmm/wmm2000.cof" );
+      timedModel = mModel2000.getTimelyModifyModel( date );
     } else {
       // TODO too old
       return null;

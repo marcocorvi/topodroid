@@ -934,6 +934,7 @@
     <string name="mode_splay">Hilfszüge</string>
     <string name="mode_latest">Letzte Hilfszüge</string>
     <string name="mode_station">Messpunkte</string>
+    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>
     <string name="mode_scrap">Nur aktuelle Skizze</string>

@@ -1021,6 +1021,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="mode_splay" copyable="all">Splays</string>
     <string name="mode_latest">Latest splays</string>
     <string name="mode_station" copyable="fr">Stations</string>
+    <string name="mode_elevation" copyable="fr">Elevation</string>
     <string name="mode_grid">Grid</string>
     <string name="mode_fixed">Fix refs</string>
     <string name="mode_scrap">Current scrap only</string>

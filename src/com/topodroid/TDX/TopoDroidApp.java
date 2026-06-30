@@ -1763,7 +1763,7 @@ public class TopoDroidApp extends Application
    * @param new_survey new survey name
    * @return true if success
    */
-  boolean moveSurveyData( long old_sid, long old_id, String new_survey )
+  static boolean moveSurveyData( long old_sid, long old_id, String new_survey )
   {
     if ( mData == null ) return false;
     long new_sid = mData.getSurveyId( new_survey );
@@ -1776,7 +1776,7 @@ public class TopoDroidApp extends Application
    * @param name   survey name
    * @return true if the survey exists
    */
-  boolean hasSurveyName( String name )
+  public static boolean hasSurveyName( String name )
   {
     return ( mData != null ) && mData.hasSurveyName( name );
   }
@@ -1785,7 +1785,7 @@ public class TopoDroidApp extends Application
    * @param name   plot name
    * @return true if the plot exists
    */
-  boolean hasSurveyPlotName( String name )
+  static boolean hasSurveyPlotName( String name )
   {
     return ( mData != null ) && mData.hasSurveyPlotName( TDInstance.sid, name );
   }
@@ -1795,7 +1795,7 @@ public class TopoDroidApp extends Application
    * @param name   calibration name
    * @return true if the calibration exists
    */
-  boolean hasCalibName( String name )
+  static boolean hasCalibName( String name )
   {
     return ( mDData != null ) && mDData.hasCalibName( name );
   }

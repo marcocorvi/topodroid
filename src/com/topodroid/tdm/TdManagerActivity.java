@@ -255,7 +255,7 @@ public class TdManagerActivity extends Activity
     String[] td_configs = TDPath.scanTdconfigDir(); // full pathnames
     if ( td_configs != null ) {
       for ( String td_config : td_configs ) {
-        // TDLog.v( "activity update: path <" + td_config + ">" );
+        // TDLog.v( "TDM update: path <" + td_config + ">" );
         mTdmConfigAdapter.add( new TdmConfig( td_config, false ) ); // false: no save
       }
     } else {

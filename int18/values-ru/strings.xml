@@ -983,6 +983,7 @@
     <string name="mode_splay">Сплеи</string>
     <string name="mode_latest">Последние сплеи</string>
     <string name="mode_station">Пикеты</string>
+    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
     <string name="mode_scrap">Только текущий абрис</string>

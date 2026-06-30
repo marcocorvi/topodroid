@@ -1711,6 +1711,7 @@ public class DrawingCommandManager
     boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
     boolean latest   = ( (mDisplayMode & DisplayMode.DISPLAY_LATEST  ) != 0 ) && TDSetting.mShotRecent;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
+    boolean elevation = (mDisplayMode & DisplayMode.DISPLAY_ELEVATION ) != 0;
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
     boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALEBAR ) != 0;
@@ -1918,7 +1919,7 @@ public class DrawingCommandManager
           if ( inverted_colors ) {
             for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox, 1 );
           } else {
-            for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox );
+            for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox, elevation );
           }
         }
       }

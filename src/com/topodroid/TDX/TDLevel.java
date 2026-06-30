@@ -119,4 +119,11 @@ public class TDLevel
     }
   }
 
+  public static void setMaior( Context ctx, int maior )
+  {
+    if ( maior != mMaior ) {
+      mMaior = maior;
+    }
+  }
+    
 }

@@ -17,6 +17,7 @@ import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.TDX.TglColor;
+import com.topodroid.TDX.TopoDroidApp;
 
 // import java.io.File;
 import java.io.IOException;
@@ -45,8 +46,8 @@ class TdmConfig extends TdmFile
   private boolean mSave;        // whether this Tdm_Config needs to be saved
 
   /** cstr
-   * @param filepath ...
-   * @param save     ...
+   * @param filepath tdconfig (short) filename
+   * @param save     whether this tdconfig needs saving
    */
   public TdmConfig( String filepath, boolean save )
   {
@@ -435,19 +436,21 @@ class TdmConfig extends TdmFile
                 // TDLog.v("vals[" + k + "]: <" + vals[k] );
                 if ( vals[k].length() > 0 ) {
                   String surveyname = vals[k];
-                  int color = TglColor.getSurveyColor(); // random color
-                  for ( ++k; k<vals.length; ++k ) {
-                    if ( vals[k].length() > 0 ) {
-                      if ( vals[k].equals("-color") ) {
-                        ++k;
-                        if ( k < vals.length ) {
-                          color = 0xff000000 | Integer.parseInt( vals[k] );
+                  if ( TopoDroidApp.hasSurveyName( surveyname ) ) {
+                    int color = TglColor.getSurveyColor(); // random color
+                    for ( ++k; k<vals.length; ++k ) {
+                      if ( vals[k].length() > 0 ) {
+                        if ( vals[k].equals("-color") ) {
+                          ++k;
+                          if ( k < vals.length ) {
+                            color = 0xff000000 | Integer.parseInt( vals[k] );
+                          }
                         }
+                        // break;
                       }
-                      // break;
                     }
+                    insertInput( surveyname, color );
                   }
-                  insertInput( surveyname, color );
                   break;
                 }
               }    
@@ -459,10 +462,16 @@ class TdmConfig extends TdmFile
               TdmEquate equate = new TdmEquate();
               for (int k=1; k<vals.length; ++k ) {
                 if ( vals[k].length() > 0 ) {
-                  equate.addStation( vals[k] );
+                  int qos = vals[k].indexOf("@");
+                  if ( qos > 0 ) {
+                    String surveyname = vals[k].substring( qos+1 );
+                    if ( TopoDroidApp.hasSurveyName( surveyname ) ) {
+                      equate.addStation( vals[k] );
+                    }
+                  }
                 }
               }
-              mEquates.add( equate );
+              if ( equate.size() > 1 ) mEquates.add( equate );
             }
           }
         }

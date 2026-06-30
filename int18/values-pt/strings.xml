@@ -925,6 +925,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="mode_splay">Medidas auxiliares</string>
   <string name="mode_latest">Últimas medidas auxiliares</string>
   <string name="mode_station">Bases</string>
+    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
   <string name="mode_grid">Grade</string>
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
   <string name="mode_scrap">Somente trecho atual</string>
