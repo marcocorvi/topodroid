@@ -172,7 +172,7 @@
     <!-- UNUSED string name="calib_read_coeffs">Считывание коэффициентов калибровки &#8230;</string -->
     <string name="calib_write_coeffs">Запись коэффициентов калибровки &#8230;</string>
     <string name="calib_validation">Проверить %1$s относительно %2$s</string>
-    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+    <string name="calib_reset_ok">Калибровка сброшена</string>
 
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
@@ -983,7 +983,7 @@
     <string name="mode_splay">Сплеи</string>
     <string name="mode_latest">Последние сплеи</string>
     <string name="mode_station">Пикеты</string>
-    <!-- UNUSED string name="mode_elevation">Elevation</string -->
+    <!-- UNUSED string name="mode_elevation">Превышение</string -->
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
     <string name="mode_scrap">Только текущий абрис</string>
