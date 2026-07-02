@@ -1020,7 +1020,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="mode_splay">Visées latérales d\'habillage</string>
     <string name="mode_latest">Dernières visées latérales d\'habillage</string>
     <string name="mode_station">Stations</string>
-    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
+    <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">Grille</string>
     <string name="mode_fixed">Références fixes</string>
     <string name="mode_scrap">Scrap courant uniquement</string>

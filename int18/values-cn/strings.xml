@@ -988,7 +988,7 @@
     <string name="mode_splay">辐测</string>
     <string name="mode_latest">最新辐测</string>
     <string name="mode_station">测点</string>
-    <!-- TODO string name="mode_elevation" copyable="fr">Elevation</string -->
+    <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">修复refs文件</string>
     <!-- TODO string name="mode_scrap">Current scrap only</string -->

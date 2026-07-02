@@ -988,7 +988,7 @@
     <string name="mode_splay">Sünök</string>
     <string name="mode_latest">Utolsó mérés</string>
     <string name="mode_station">Mérési pontok</string>
-    <string name="mode_elevation" copyable="fr">Magasság</string>
+    <!-- UNUSED string name="mode_elevation">Magasság</string -->
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Fix ref.</string>
     <string name="mode_scrap">Cak a jelenlegi szint</string>
