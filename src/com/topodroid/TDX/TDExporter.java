@@ -382,8 +382,10 @@ public class TDExporter
           BufferedReader br = new BufferedReader( fr );
           String line = br.readLine();
           while ( line != null ) {
-            // pw.format( line.replaceAll("\"", "\\\"") + "\n" );
-            pw.format( line + "\n" );
+            if ( ! "</note>".equals( line.trim() ) ) {
+              // pw.format( line.replaceAll("\"", "\\\"") + "\n" );
+              pw.format( line + "\n" );
+            }
             line = br.readLine();
           }
           fr.close();

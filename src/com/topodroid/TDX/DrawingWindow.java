@@ -224,9 +224,11 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_TOOLS_AREA_TILDE = IC_MEDIUM+30;
   private static final int IC_MENU_RED        = IC_MEDIUM+31;
   private static final int IC_TEXT_ON         = IC_MEDIUM+32;
+  private static final int IC_ELEV            = IC_MEDIUM+33;
 
   private static final int BTN_DOWNLOAD  = 3; // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
+  private static final int BTN_REFS      = 5; // index of mButton1 display refs mode button
   private static final int BTN_PLAN      = 6; // index of mButton1 plot button
   private static final int BTN_DIAL      = 8; // index of mButton1 azimuth button (level > normal)
   private static final int BTN_REFRESH   = 9; // index of mButton1 azimuth button (level > normal)
@@ -312,6 +314,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_tools_area_cont, // 24+30 // 2023-03-10
                         R.drawable.iz_menu_red,        // 24+31
                         R.drawable.iz_text_on,         // 24+32
+                        R.drawable.iz_mode_elev,       // 24+33
                       };
   private static final int[] menus = {
                         R.string.menu_switch,     // 0
@@ -834,6 +837,8 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMedit_box  = null;
   private BitmapDrawable mBMedit_ok   = null;
   private BitmapDrawable mBMedit_no   = null;
+  private BitmapDrawable mBMmodeStations  = null;
+  private BitmapDrawable mBMmodeElevation = null;
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
   // // 2023-03-10 DROPPED - 2023-09-23 REINSTATED
@@ -2445,7 +2450,8 @@ public class DrawingWindow extends ItemDrawer
         }
         if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( this, res, izons[ic] ); }
         else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( this, res, izons[ic] ); }
-        else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( this, res, izons[ic] ); }
+        else if ( ic == IC_REFS ) { mBMmodeStations   = MyButton.getButtonBackground( this, res, izons[ic] ); }
+        else if ( ic == IC_PLAN ) { mBMplan           = MyButton.getButtonBackground( this, res, izons[ic] ); }
       }
     }
     mButton1[ mNrButton1 ]   = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
@@ -2457,7 +2463,8 @@ public class DrawingWindow extends ItemDrawer
     mDialOn          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_on ); 
     mDialBitmap      = MyTurnBitmap.getTurnBitmap( res );
 
-    mBMextend        = MyButton.getButtonBackground( this, res, izons[IC_EXTEND] ); 
+    mBMmodeElevation = MyButton.getButtonBackground( this, res, izons[ IC_ELEV ] );
+    mBMextend        = MyButton.getButtonBackground( this, res, izons[ IC_EXTEND ] ); 
     mBMdownload_on   = MyButton.getButtonBackground( this, res, R.drawable.iz_download_on );
     mBMdownload_wait = MyButton.getButtonBackground( this, res, R.drawable.iz_download_wait );
     mBMleft          = MyButton.getButtonBackground( this, res, R.drawable.iz_left );
@@ -2744,6 +2751,7 @@ public class DrawingWindow extends ItemDrawer
     // setConnectionStatus( mDataDownloader.getStatus() ); // 20201123 this is done in onResume
     if ( TDLevel.overBasic ) {
       if ( BTN_PLAN   < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( this );
+      if ( BTN_REFS   < mNrButton1 ) mButton1[BTN_REFS].setOnLongClickListener( this );
       if ( BTN_REMOVE < mNrButton3 ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
     if ( TDLevel.overNormal ) {
@@ -3036,6 +3044,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  private void setButtonRefs()
+  {
+    int display_mode = mDrawingSurface.getDisplayMode();
+    setButton1( BTN_REFS, ( (display_mode & DisplayMode.DISPLAY_ELEVATION ) != 0 )? mBMmodeElevation : mBMmodeStations );
+  }
+
   /** update the display of the splays - for XSections
    * @param mode  splay display mode
    */
@@ -3183,6 +3197,7 @@ public class DrawingWindow extends ItemDrawer
       mDataDownloader.onResume();
       setConnectionStatus( mDataDownloader.getStatus() );
     }
+    setButtonRefs();
     // TDLog.TimeEnd( "drawing activity ready" );
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on resume done");
   }
@@ -7275,6 +7290,11 @@ public class DrawingWindow extends ItemDrawer
         setButtonAzimuth();
       } else {
         onClick( view );
+      }
+    } else if ( BTN_PLAN < mNrButton1 && b == mButton1[ BTN_REFS ] ) {
+      if ( PlotType.isSketch2D( mType ) ) {
+        mDrawingSurface.toggleStationsRefs();
+        setButtonRefs();
       }
     } else if ( BTN_PLAN < mNrButton1 && b == mButton1[ BTN_PLAN ] ) {
       if ( PlotType.isSketch2D( mType ) ) {

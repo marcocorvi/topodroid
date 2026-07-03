@@ -247,7 +247,7 @@ public class TDSetting
   public static boolean mTh2Edit       = false;
 
   public static int mOrientation = 0; // 0 unspecified, 1 portrait, 2 landscape
-  public static boolean mAnalytics = true;
+  public static boolean mAnalytics = true;  // whether to enable analytics (true = enabled)
 
   public static float mPictureMin =   5.0f; 
   public static float mPictureMax = 100.0f;

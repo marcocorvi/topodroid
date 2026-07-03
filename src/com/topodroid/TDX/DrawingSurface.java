@@ -362,6 +362,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   public int getDisplayMode( ) { return DrawingCommandManager.getDisplayMode(); }
 
+  /** if stations are displayed toggle between names and elevations
+   */
+  void  toggleStationsRefs() { DrawingCommandManager.toggleStationsRefs(); }
+
   /** set the transform in the current manager
    * @param act    activity
    * @param dx     X shift

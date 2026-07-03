@@ -26,7 +26,11 @@ class NativeName
   public native void initLog();
 
   static {
-    System.loadLibrary( "nativename" );
+    try {
+      System.loadLibrary( "nativename" );
+    } catch ( UnsatisfiedLinkError e ) {
+      // TODO ?
+    }
   }
 
   private NativeName()

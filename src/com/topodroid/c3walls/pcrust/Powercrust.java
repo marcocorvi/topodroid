@@ -46,7 +46,11 @@ class Powercrust
   public native void release();
 
   static {
-    System.loadLibrary( "powercrust" );
+    try {
+      System.loadLibrary( "powercrust" );
+    } catch ( UnsatisfiedLinkError e ) {
+      // TODO ?
+    }
   }
 
   int color; // DEBUG

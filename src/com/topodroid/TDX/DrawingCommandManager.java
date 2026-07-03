@@ -164,6 +164,18 @@ public class DrawingCommandManager
    */
   static int getDisplayMode( ) { return mDisplayMode; }
 
+  /** for stations display toggle between names and elevations
+   */
+  static void toggleStationsRefs() 
+  { 
+    if ( ( mDisplayMode & DisplayMode.DISPLAY_ELEVATION ) == 0 ) {
+      mDisplayMode |= DisplayMode.DISPLAY_ELEVATION;
+    } else {
+      mDisplayMode &= ~DisplayMode.DISPLAY_ELEVATION;
+    }
+  }
+
+
   // FIXED_ZOOM
   /** set whether the zoom is fixed
    * @param fixed_zoom whether the zoom is fixed
