@@ -1,6 +1,7 @@
 encoding utf-8
 symbol line
 name wall_flowstone
+name-cz sintrová_stěna
 name-de Sinterwand
 name-es pared_de_colada
 name-fr paroi_stalagmitique

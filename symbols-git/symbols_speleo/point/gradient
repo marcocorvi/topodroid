@@ -3,6 +3,7 @@ symbol point
 name gradient
 name-bg наклон
 name-cn 坡向
+name-cz směr_svahu
 name-de Gefälle
 name-es pendiente
 name-fa شیب

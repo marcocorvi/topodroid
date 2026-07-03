@@ -1,6 +1,7 @@
 encoding utf-8
 symbol line
 name wall-pit
+name-cz stěna_propasti
 name-de Schachtwand
 name-es pozo_pared
 name-fr paroi_de_puits

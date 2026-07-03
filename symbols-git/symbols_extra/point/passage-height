@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name passage-height
+name-cz výška_chodby
 name-de Ganghöhe
 name-es altura_de_paso
 name-fr hauteur_de_passage

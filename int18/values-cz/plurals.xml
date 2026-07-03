@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <plurals name="surveys_import">
+    <item quantity="zero">Nebylo importováno žádné zaměření</item>
+    <item quantity="one">Importováno jedno zaměření</item>
+    <item quantity="few">Importována %1$d zaměření</item>
+    <item quantity="other">Importováno %1$d zaměření</item>
+  </plurals>
+  <plurals name="surveys_delete">
+    <item quantity="one">Smazat jedno zaměření?</item>
+    <item quantity="few">Smazat %1$d zaměření?</item>
+    <item quantity="other">Smazat %1$d zaměření?</item>
+  </plurals>
+  <plurals name="calib_saturated_values">
+    <item quantity="one">VAROVÁNÍ. Jedna saturovaná hodnota</item>
+    <item quantity="few">VAROVÁNÍ. %1$d saturované hodnoty</item>
+    <item quantity="other">VAROVÁNÍ. %1$d saturovaných hodnot</item>
+  </plurals>
+  <plurals name="read_data">
+    <item quantity="zero">Nenačtena žádná data</item>
+    <item quantity="one">Načtena %1$d data</item>
+    <item quantity="few">Načtena %1$d data</item>
+    <item quantity="other">Načteno %1$d dat</item>
+  </plurals>
+  <plurals name="read_calib_data">
+    <item quantity="zero">Nenačtena žádná kalibrační data</item>
+    <item quantity="one">Načtena %1$d data (%2$d paket)</item>
+    <item quantity="few">Načtena %1$d data (%2$d pakety)</item>
+    <item quantity="other">Načteno %1$d dat (%2$d paketů)</item>
+  </plurals>
+  <plurals name="found_calib_groups">
+    <item quantity="zero">Nenalezena žádná skupina</item>
+    <item quantity="one">Nalezena %1$d skupina</item>
+    <item quantity="few">Nalezeny %1$d skupiny</item>
+    <item quantity="other">Nalezeno %1$d skupin</item>
+  </plurals>
+  <plurals name="scan_result">
+    <item quantity="zero">Nenalezeno žádné zařízení</item>
+    <item quantity="one">Nalezeno %1$d zařízení</item>
+    <item quantity="few">Nalezena %1$d zařízení</item>
+    <item quantity="other">Nalezeno %1$d zařízení</item>
+  </plurals>
+  <plurals name="trilateration_success">
+    <item quantity="zero">Nenalezen žádný shluk</item>
+    <item quantity="one">Trilaterace úspěšná: %1$d shluk</item>
+    <item quantity="few">Trilaterace úspěšná: %1$d shluky</item>
+    <item quantity="other">Trilaterace úspěšná: %1$d shluků</item>
+  </plurals>
+  <plurals name="export_data_batch">
+  </plurals>
+
+</resources>

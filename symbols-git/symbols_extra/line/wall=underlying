@@ -2,6 +2,7 @@ encoding utf-8
 symbol line
 name wall_below
 name-bg по-ниско_разположена_стена
+name-cz níže_položená_stěna
 name-de Wand_unterhalb
 name-es pared_galeria_inferior
 name-fr sol_ou_plancher

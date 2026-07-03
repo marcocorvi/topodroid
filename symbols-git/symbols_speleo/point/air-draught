@@ -3,6 +3,7 @@ symbol point
 name air-draught
 name-bg въздушно_течение
 name-cn 气流方向
+name-cz směr_proudění_vzduchu
 name-de Luftzug
 name-es corriente_de_aire
 name-fa هوا_مسدود

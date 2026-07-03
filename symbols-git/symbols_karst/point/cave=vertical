@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name cave_vertical
 name-bg вертикална_пещера
+name-cz vertikální_jeskyně
 name-de Vertikale_Höhle
 name-es sima
 name-fr cavité_verticale

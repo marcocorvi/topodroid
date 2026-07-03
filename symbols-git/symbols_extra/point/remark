@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name remark
+name-cz poznámka
 name-de Notiz
 name-es observación
 name-fr observation

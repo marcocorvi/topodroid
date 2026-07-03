@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name stairs
+name-cz žebřík
 name-de Leiter
 name-es escalera
 name-fr échelle

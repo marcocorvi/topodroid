@@ -1,6 +1,7 @@
 encoding utf-8
 symbol line
 name polie-rim
+name-cz okraj_pole
 name-de Polierter_Rand
 name-es aro_pulido
 name-fr bord_de_poljé

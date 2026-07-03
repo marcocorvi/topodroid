@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name flowstone-floor
+name-cz sintrová_podlaha
 name-de Sinterboden
 name-hu cseppköves_talaj
 name-pt escorrimento_(piso)

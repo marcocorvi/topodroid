@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name plus
 name-bg плюс
+name-cz plus
 name-de Plus
 name-hu plusz
 name-pt mais

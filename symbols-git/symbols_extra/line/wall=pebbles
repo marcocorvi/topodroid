@@ -1,6 +1,7 @@
 encoding utf-8
 symbol line
 name wall_pebbles
+name-cz štěrková_stěna
 name-de Kieswand
 name-es pared_cantos_rodados
 name-fr paroi_de_galets

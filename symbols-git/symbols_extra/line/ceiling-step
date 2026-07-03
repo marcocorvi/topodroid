@@ -1,6 +1,7 @@
 encoding utf-8
 symbol line
 name ceiling-step
+name-cz stropní_stupeň
 name-de Deckenstufe
 name-es resalte_techo
 name-fr décrochement-de-plafond

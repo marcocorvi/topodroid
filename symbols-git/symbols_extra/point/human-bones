@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name human-bones
+name-cz lidské_kosti
 name-de Menschliche_Knochen
 name-hu emberi_csontok
 name-pt ossos_humanos
