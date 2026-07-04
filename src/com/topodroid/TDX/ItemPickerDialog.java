@@ -653,13 +653,16 @@ class ItemPickerDialog extends MyDialog
     }
   }
 
+  /** handle BACK key
+   */
   @SuppressWarnings("deprecated")
   @Override
   public void onBackPressed ()
   {
-    // TDLog.v( "onBackPressed type " + mItemType );
-    itemSelected();
-    cancel();
+    TDLog.v( "Item Picker: onB back pressed - type " + mItemType );
+    closeDialog();
+    // itemSelected();
+    // cancel();
   }
 
   private void itemSelected()
@@ -814,8 +817,12 @@ class ItemPickerDialog extends MyDialog
     return index;
   } 
 
+  /** set the selected type and close the dialog
+   * @note IItemPicker implementation
+   */
   public void closeDialog()
   {  
+    TDLog.v( "Item picker: close dialog" );
     itemSelected();
     dismiss();
   }

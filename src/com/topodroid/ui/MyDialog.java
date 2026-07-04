@@ -13,7 +13,7 @@ package com.topodroid.ui;
 
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.util.TDUtil;
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
 
@@ -161,7 +161,7 @@ public class MyDialog extends Dialog
   // public boolean onKeyLongPress( int code, KeyEvent ev )
   public boolean onKeyDown( int code, KeyEvent ev )
   {
-    // TDLog.v( "Key code " + code );
+    TDLog.v( "My Dialog key down: code " + code );
     if ( code == KeyEvent.KEYCODE_BACK ) {
       onBackPressed();
       return true;

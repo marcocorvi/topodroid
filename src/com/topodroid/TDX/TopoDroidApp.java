@@ -28,6 +28,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.MyFileProvider;
 import com.topodroid.util.Region;
 import com.topodroid.util.TDAnalytics;
+import com.topodroid.util.CT;
 // import com.topodroid.util.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;

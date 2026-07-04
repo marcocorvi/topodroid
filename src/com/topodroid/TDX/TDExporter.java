@@ -829,12 +829,14 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-      pw.format("<kml xmlnx=\"http://www.opengis.net/kml/2.2\">\n");
+      pw.format("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n");
       pw.format("<Document>\n");
 
       pw.format(name, info.name );
-      pw.format("<description>%s - TopoDroid v %s</description>\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-      pw.format("<TimeStamp><when>%s</when></TimeStamp>\n", info.date );
+      pw.format("<description>\n");
+      pw.format("  <![CDATA{%s - TopoDroid v %s<br>\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("  Survey %s date %s]]>\n", info.name, info.date );
+      pw.format("</description>\n");
 
       pw.format(style, "centerline");
       pw.format(linestyle);
