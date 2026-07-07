@@ -81,6 +81,8 @@ public class TDsafUri
     if ( uri != null ) {
       try {
         return TDInstance.getContentResolver().openFileDescriptor( uri, "r" );
+      } catch ( IllegalArgumentException e ) {
+        e.printStackTrace();
       } catch ( IOException e ) {
         e.printStackTrace();
       }

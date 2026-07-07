@@ -721,19 +721,21 @@ public class TDandroid
   }
 
   /** @return an open-document intent - requires API_19 - 20230118 new method
-   * @param index  index of mime type
+   * @param index  index of mime type - use 0xffffff to open a folder
+   * @note folder is used for bulk-import of surveys
    */
   public static Intent getOpenDocumentIntent( int index )
   {
+    TDLog.v("TD android open index " + index );
     Intent intent = null;
-    if ( index >= 0 ) {
+    if ( index == TDConst.FOLDER ) {
+      intent = new Intent( Intent.ACTION_OPEN_DOCUMENT_TREE ); // API_19
+      // intent.setType( "vnd.android.document/directory" );
+    } else {
       intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
       intent.setType( TDConst.getMimeType( index ) );
       intent.addCategory(Intent.CATEGORY_OPENABLE);
       intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
-    } else {
-      intent = new Intent( Intent.ACTION_OPEN_DOCUMENT_TREE ); // API_19
-      // intent.setType( "vnd.android.document/directory" );
     }
     return intent;
   }

@@ -30,6 +30,7 @@ import com.topodroid.c3walls.cw.CWTriangle;
 import com.topodroid.c3walls.cw.CWBorder;
 import com.topodroid.c3walls.cw.CWConvexHull;
 import com.topodroid.c3walls.cw.ConvexHullComputer;
+import com.topodroid.c3walls.pcrust.Powercrust;
 import com.topodroid.c3walls.pcrust.PowercrustComputer;
 import com.topodroid.dem.DEMsurface;
 
@@ -1084,6 +1085,10 @@ public class TglParser
   {
     if ( shots == null ) return;
     if ( WALL_POWERCRUST < WALL_MAX /* && Cave3D.mWallPowercrust */ ) {
+      if ( ! Powercrust.hasLib ) {
+        TDToast.make( R.string.no_native_lib );
+        return;
+      }
       powercrustcomputer = new PowercrustComputer( this, stations, shots );
       (new AsyncTask<Void, Void, Boolean>() {
           public Boolean doInBackground( Void ... v ) {

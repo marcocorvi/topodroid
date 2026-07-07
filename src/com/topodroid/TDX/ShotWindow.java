@@ -3123,7 +3123,7 @@ public class ShotWindow extends Activity
         if ( ! TDString.isNullOrEmpty( f ) ) {
           fi = station_map.get( f );
           if ( fi == null ) {
-            fi = ( native_name != null )? native_name.incrementName( last_station, stations ) : DistoXStationName.incrementName( last_station, stations );
+            fi = NativeName.nextName( native_name, last_station, stations );
             last_station = fi;
             stations.add( fi );
             station_map.put( f, fi );
@@ -3133,7 +3133,7 @@ public class ShotWindow extends Activity
         if ( ! TDString.isNullOrEmpty( t ) ) {
           ti = station_map.get( t );
           if ( ti == null ) {
-            ti = ( native_name != null )? native_name.incrementName( last_station, stations ): DistoXStationName.incrementName( last_station, stations );
+            ti = NativeName.nextName( native_name, last_station, stations );
             last_station = ti;
             stations.add( ti );
             station_map.put( t, ti );

@@ -20,6 +20,7 @@ import java.util.Set;
 class NativeName
 {
   static NativeName mNativeName = null; // singleton
+  static boolean hasLib = false;
 
   public native static String incrementName( String name, Set<String> stations );
 
@@ -28,6 +29,7 @@ class NativeName
   static {
     try {
       System.loadLibrary( "nativename" );
+      hasLib = true;
     } catch ( UnsatisfiedLinkError e ) {
       // TODO ?
     }
@@ -53,6 +55,17 @@ class NativeName
       }
     }
     return mNativeName;
+  }
+
+  /** utility method to get the next name
+   * @param native_name  NativeName object - can be null
+   * @param name         name string
+   * @param sts          set of names in use
+   * @return the next usable name
+   */
+  static String nextName( NativeName native_name, String name, Set<String> sts )
+  {
+    return  ( native_name != null )? native_name.incrementName( name, sts ) : DistoXStationName.incrementName( name, sts );
   }
 
 

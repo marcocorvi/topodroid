@@ -1667,13 +1667,14 @@ public class TopoGL extends Activity
     // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
-    // TDLog.v("DEM Path " + pathname + " file " + filename );
+    TDLog.v("DEM Path " + pathname + " file " + filename );
     mDEMname = filename;
     (new AsyncTask< Uri, Void, Boolean>() {
       ParserDEM dem = null;
       public Boolean doInBackground( Uri ... uri ) 
       {
         ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri[0] );
+        if ( pfd == null ) return false;
         InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
         String pathname = uri[0].getPath();
         if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".grid" ) ) {
@@ -1765,13 +1766,17 @@ public class TopoGL extends Activity
     
     // TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
-    InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
-
-    mTextureName = filename;
-    if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".osm" ) ) {
-      loadTextureOSM( isr, pathname, bounds );
-    } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".tif" ) || filename.toLowerCase( Locale.getDefault() ).endsWith( ".tiff" )) {
-      loadTextureGeotiff( isr, pathname, bounds );
+    if ( pfd != null ) {
+      InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+      mTextureName = filename;
+      if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".osm" ) ) {
+        loadTextureOSM( isr, pathname, bounds );
+      } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".tif" ) || filename.toLowerCase( Locale.getDefault() ).endsWith( ".tiff" )) {
+        loadTextureGeotiff( isr, pathname, bounds );
+      }
+    } else {
+      // TODO 
+      TDToast.makeBad( "failed I/O" );
     }
   }
 
@@ -1782,6 +1787,10 @@ public class TopoGL extends Activity
    */
   private void loadTextureGeotiff( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
+    if ( ! TiffFactory.hasLib ) {
+      TDToast.make( R.string.no_native_lib );
+      return;
+    }
     TDToast.makeLong("TIFF " + pathname );
     String filepath = pathname.replaceFirst(".*:", mTextureRoot ); // new File( file ).getAbsolutePath();
     (new AsyncTask<String, Void, Integer>() {
@@ -3073,7 +3082,7 @@ public class TopoGL extends Activity
     // TDLog.v("Topo GL select DEM file");
     onDEMloading = true;
     // selectFile( REQUEST_DEM_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file, null ); 
-    selectFile( REQUEST_DEM_FILE, false, -1, R.string.select_dem_file, null ); 
+    selectFile( REQUEST_DEM_FILE, false, TDConst.NO_TYPE, R.string.select_dem_file, null ); 
   }
 
   /** request selection of a texture file
@@ -3083,7 +3092,7 @@ public class TopoGL extends Activity
     // TDLog.v("Topo GL select Texture file");
     onDEMloading = true;
     // selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); 
-    selectFile( REQUEST_TEXTURE_FILE, false, -1, R.string.select_texture_file, null ); 
+    selectFile( REQUEST_TEXTURE_FILE, false, TDConst.NO_TYPE, R.string.select_texture_file, null ); 
   }
 
   /** request selection of an import file
@@ -3091,7 +3100,7 @@ public class TopoGL extends Activity
   void selectImportFile( )  
   {
     // selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file,  null );
-    selectFile( REQUEST_IMPORT_FILE,  false, -1, R.string.select_survey_file,  null );
+    selectFile( REQUEST_IMPORT_FILE,  false, TDConst.NO_TYPE, R.string.select_survey_file,  null );
   }
 
   // /** request selection of an attribute (temperature) file
@@ -3125,14 +3134,14 @@ public class TopoGL extends Activity
   /** file selection
    * @param request   selection request type (code)
    * @param create    whether to create (or open) a file
-   * @param mime      index of file mime type 
+   * @param mime      index of file mime type (0: octet-stream)
    * @param res       dialog title resource
    * @param filename  suggested filename (optional)
    */
   // void selectFile( int request, String action, String mime, int res, String filename )
   void selectFile( int request, boolean create, int mime, int res, String filename )
   {
-    // TDLog.v("TopoGL select file");
+    // TDLog.v("TopoGL select file: create " + create + " name " + filename + " mime " + mime );
     // Intent intent = new Intent( action );
     // intent.setType( (mime == null)? "*/*" : mime );
     // intent.addCategory( Intent.CATEGORY_OPENABLE );
@@ -3158,6 +3167,7 @@ public class TopoGL extends Activity
     Uri uri = intent.getData();
     switch ( request ) {
       case REQUEST_DEM_FILE:
+        TDLog.v("requested DEM file");
         if ( uri != null ) {
           openDEM( /* this, */ uri );
         } else {

@@ -20,10 +20,11 @@ import com.topodroid.TDX.Triangle3D;
 // import java.util.List;
 import java.util.ArrayList;
 
-class Powercrust
+public class Powercrust
 {
   int np;
   int nf; 
+  public static boolean hasLib = false;
 
   public native int nrPoles();
   public native int nextPole();
@@ -48,6 +49,7 @@ class Powercrust
   static {
     try {
       System.loadLibrary( "powercrust" );
+      hasLib = true;
     } catch ( UnsatisfiedLinkError e ) {
       // TODO ?
     }

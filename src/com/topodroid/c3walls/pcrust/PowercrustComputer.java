@@ -29,12 +29,12 @@ import java.util.ArrayList;
 public class PowercrustComputer
 {
   TglParser mParser;
-  List<Cave3DStation> mStations;
-  List<Cave3DShot>    mShots;
+  List<Cave3DStation> mStations = null;
+  List<Cave3DShot>    mShots    = null;
   ArrayList<PCPolygon> mPlanview    = null;
   ArrayList<PCSegment> mProfilearcs = null;
-  ArrayList<Triangle3D> mTriangles;
-  PCSite[] mVertices;
+  ArrayList<Triangle3D> mTriangles  = null;
+  PCSite[] mVertices = null;
 
   // private Powercrust powercrust = null;
 
@@ -56,6 +56,7 @@ public class PowercrustComputer
 
   public boolean computePowercrust( )
   {
+    if ( ! Powercrust.hasLib ) return false;
     TopoDroidApp.updateAnalytic( TDAnalytics.WALL_PCRUST );
     double delta = GlModel.mPowercrustDelta;
     try {
@@ -397,6 +398,7 @@ public class PowercrustComputer
 
   public double getVolume()
   {
+    if ( ! Powercrust.hasLib ) return 0;
     if ( mTriangles == null || mVertices == null ) return 0;
     Vector3D cm = new Vector3D();
     int nv = mVertices.length;

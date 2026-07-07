@@ -88,7 +88,7 @@ public class GeminiDialog extends MyDialog
   private boolean isApiKeyFormatValid( String key )
   {
     // TDLog.v("Check format: <" + key + "> len " + key.length() ); 
-    final String apiKeyRegex = "^AIza[a-zA-Z0-9\\-_]{30,50}";
+    final String apiKeyRegex = "^(AIza|AQ)[a-zA-Z0-9i\\.\\-_]{30,50}";
     if ( key == null ) {
       TDLog.v("null API key");
       return false;

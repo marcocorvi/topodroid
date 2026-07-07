@@ -82,11 +82,11 @@ class StationNameDefault extends StationName
     String station;
     if ( forward_shots ) {
       next = to;
-      next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts );
+      next = NativeName.nextName( native_name, next, sts );
       station = shot_after_splays ? to : from;
     } else {
       next = from;
-      next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts );
+      next = NativeName.nextName( native_name, next, sts );
       station = shot_after_splays ? next : from;
     }
 
@@ -119,12 +119,12 @@ class StationNameDefault extends StationName
         if ( forward_shots ) {
           from = to;
           to   = next;
-          next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts ); // to, sts
+          next = NativeName.nextName( native_name, next, sts ); // to, sts
           station = shot_after_splays ? to : from;
         } else {
           to   = from;
           from = next;
-          next = ( native_name != null )? native_name.incrementName( next, sts ) : DistoXStationName.incrementName( next, sts ); // from, sts
+          next = NativeName.nextName( native_name, next, sts ); // from, sts
           station = shot_after_splays ? next : from;
         }
 	main_from = from;
@@ -315,7 +315,7 @@ class StationNameDefault extends StationName
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
                                                                //                 this-shot-from if splays after shot
                   from = to;                                   // next-shot-from = this-shot-to
-                  to = ( native_name != null )? native_name.incrementName( to, sts ) : DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
+                  to = NativeName.nextName( native_name, to, sts );  // next-shot-to   = increment next-shot-from
                   // logJump( blk, from, to, sts ); // NO_LOGS
                   if ( LOG ) TDLog.v("  native increment FWD set station * " + station );
                   if ( current_station == null ) { // DEBUG_NAMES
@@ -335,7 +335,7 @@ class StationNameDefault extends StationName
                   }
                 } else { // backward_shots
                   to   = from;                                     // next-shot-to   = this-shot-from
-                  from = ( native_name != null )? native_name.incrementName( from, sts ) : DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
+                  from = NativeName.nextName( native_name, from, sts ); // next-shot-from = increment this-shot-from
                   station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
                                                                    //                = this-shot-from if splay after shot
                   // logJump( blk, to, from, sts );
@@ -380,7 +380,7 @@ class StationNameDefault extends StationName
             if ( LOG ) TDLog.v("  FWD " + blk.mId + " from " + blk.mFrom + " to " + blk.mTo + " is DistoX backsight " + blk.isDistoXBacksight() );
             from = blk.isDistoXBacksight()? blk.mFrom : blk.mTo;
             to   = from;
-            to   = ( native_name != null )? native_name.incrementName( to, sts ) : DistoXStationName.incrementName( to, sts );
+            to   = NativeName.nextName( native_name, to, sts );
             // logJump( blk, from, to, sts ); // NO_LOGS
             if ( current_station == null ) {
               if ( blk.isDistoXBacksight() ) {
@@ -410,7 +410,7 @@ class StationNameDefault extends StationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
             to = blk.isDistoXBacksight()? blk.mTo : blk.mFrom;
             from = to;
-            from = ( native_name != null )? native_name.incrementName( from, sts ) : DistoXStationName.incrementName( from, sts ); // FIXME it was old from
+            from = NativeName.nextName( native_name, from, sts ); // FIXME it was old from
             // logJump( blk, to, from, sts );
 
 	    // station must be set even if there is a "currentStation" FIXME FIXME FIXME 20231231

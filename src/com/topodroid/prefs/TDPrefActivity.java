@@ -220,6 +220,10 @@ public class TDPrefActivity extends Activity
     }).execute();
   }
 
+  /** import the settings from a file
+   * @param prefs  shared preferences
+   * @param flag   flag of the settings that must import
+   */
   void importSettings( SharedPreferences prefs, final int flag )
   {
     mExportPrefs = prefs;
@@ -230,6 +234,11 @@ public class TDPrefActivity extends Activity
     // doImportSettings( null, mExportPrefs, mExportFlag );
   }
   
+  /** import the settings from a file
+   * @param uri    settings file uri
+   * @param prefs  shared preferences
+   * @param flag   flag of the settings that must import
+   */
   private void doImportSettings( Uri uri, SharedPreferences prefs, final int flag )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_PREFS );
@@ -254,6 +263,8 @@ public class TDPrefActivity extends Activity
     }).execute();
   }
 
+  /** settings categories
+   */
   static String[] mCategories = {
     "MAIN",
     "SURVEY",

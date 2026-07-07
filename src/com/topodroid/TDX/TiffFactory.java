@@ -19,11 +19,14 @@ import android.graphics.Bitmap;
 
 public class TiffFactory
 {
+  static boolean hasLib = false;
+
   static {
     // TDLog.v("load TIFF library" );
     try {
       System.loadLibrary( "tiff" );
       System.loadLibrary( "tiffdecoder" );
+      hasLib = true;
     } catch ( UnsatisfiedLinkError e ) {
       // TODO ?
     }

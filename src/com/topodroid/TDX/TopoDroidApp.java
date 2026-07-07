@@ -150,6 +150,7 @@ public class TopoDroidApp extends Application
   static private TopoDroidApp thisApp = null;
 
   static private GeoCodes mGeoCodes = null; // singleton
+  static private boolean mDebugTest = false; // DO NOT SYNC
 
   static synchronized GeoCodes getGeoCodes()
   {
@@ -1172,6 +1173,10 @@ public class TopoDroidApp extends Application
         setSayDialogR( true );
       }
     }
+
+    // DO NOT SYNC
+    mDebugTest = CT.isDebugTest( mDData.getValue( "holl" ) );
+    TDLog.v("TD is debug test: " + mDebugTest );
 
     // ***** DRAWING TOOLS SYMBOLS
     // TDLog.Profile("TDApp symbols");
@@ -3625,7 +3630,8 @@ public class TopoDroidApp extends Application
   static void checkAnalytics( final Context ctx )
   {
     if ( TDLevel.isDebugBuild() ) return;
-    if ( ! TDSetting.mAnalytics ) return; // TODO framework debug 
+    if ( mDebugTest ) return; // DO NOT SYNC
+    if ( ! TDSetting.mAnalytics ) return; // DO NOT SYNC
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;
     String today = TDUtil.getDateString( "yyyy.MM.dd" );

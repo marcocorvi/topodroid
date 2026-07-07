@@ -85,9 +85,11 @@ import java.util.Set;
 public class DrawingSvgBase
 {
   // FIXME station scale is 0.3
-  static final protected int POINT_SCALE  = 10;
-  static final protected int POINT_RADIUS = 10;
-  static final protected int RADIUS = 3;
+  // FIXME_SYMBOL
+  static final protected float POINT_SCALE  = 2.5f; // was 10
+  static final protected float LABEL_SCALE  = 0.5f; // was POINT_SCALE/10
+  static final protected float POINT_RADIUS = 10.0f;
+  static final protected float RADIUS = 3.0f;
   // float SCALE_FIX = util.SCALE_FIX; // 20.0f
 
   protected static final String end_grp = "</g>\n";
@@ -437,8 +439,9 @@ public class DrawingSvgBase
     if ( name.equals( SymbolLibrary.LABEL ) ) {
       // assert( point instanceof DrawingLabelPath );
       float o = (float)(point.mOrientation);
-      float s = POINT_SCALE * TDMath.sind( o ) * scale / 10.0f;
-      float c = POINT_SCALE * TDMath.cosd( o ) * scale / 10.0f;
+	  // FIXME_SYMBOL
+      float s = LABEL_SCALE * TDMath.sind( o ) * scale;
+      float c = LABEL_SCALE * TDMath.cosd( o ) * scale;
       DrawingLabelPath label = (DrawingLabelPath)point;
       // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy + " text " + label.mPointText );
       // printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
@@ -471,16 +474,21 @@ public class DrawingSvgBase
         //   (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg, POINT_SCALE, point.mOrientation );
 
         float o = (float)(point.mOrientation);
-        float s = POINT_SCALE * TDMath.sind( o ) * scale;
-        float c = POINT_SCALE * TDMath.cosd( o ) * scale;
-        pw.format(Locale.US, "<g" );
-        printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
+		pw.format(Locale.US, "<g" );
+		// FXIME_SYMBOL
+        // float s = POINT_SCALE * TDMath.sind( o ) * scale;
+        // float c = POINT_SCALE * TDMath.cosd( o ) * scale;
+        // printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
+        printMatrix( pw, 1, 0, (xoff+point.cx), (yoff+point.cy) );
         pw.format(Locale.US, " >\n" );
         // pw.format( "%s\n", sp.getSvg() );
         // float a = (float)( point.mOrientation ) / 2.0f;
-        float x = 0.1f;
-        float y = 0.0f;
-        pw.format(Locale.US, "  <path d=\"M 0 0 L %.2f %.2f\" marker-start=\"url(#%s)\" />\n", x, y, name ); 
+        // FIXME_SYMBOL
+        // float x = 0.1f;
+        // float y = 0.0f;
+        // pw.format(Locale.US, "  <path d=\"M 0 0 L %.2f %.2f\" marker-start=\"url(#%s)\" />\n", x, y, name ); 
+        pw.format(Locale.US, "  <use xlink:href=\"#%s\" x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" ", name );
+        pw.format(Locale.US, "transform=\"rotate(%.0f) scale(%.1f)\" />/n", o, POINT_SCALE+scale );
         pw.format( end_grp );
         pw.format( end_grp );
       } else {
@@ -946,12 +954,20 @@ public class DrawingSvgBase
       String stroke = String.format( Locale.US, "stroke-width=\"0.3\" fill=\"none\" stroke=\"%s\" />\n", pathToColor( color ) );
       // TDLog.v("SVG point marker " + pt.getFullThNameEscapedColon() );
       // "    <marker id=\"" + name + "\" markerWidth=\"40\" markerHeight=\"40\" viewBox=\"0 0 40 40\" refX=\"20\" refY=\"20\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n");
-      out.write(
-        String.format(Locale.US, "    <marker id=\"%s\" markerWidth=\"%d\" markerHeight=\"%d\" viewBox=\"%s\" refX=\"%d\" refY=\"%d\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n",
-        name, SymbolPoint.SVG_M_SIDE, SymbolPoint.SVG_M_SIDE, SymbolPoint.SVG_M_VBOX, SymbolPoint.SVG_M_REF, SymbolPoint.SVG_M_REF ) );
+      // FIXME_SYMBOL
+      // out.write(
+      //   String.format(Locale.US, "    <marker id=\"%s\" markerWidth=\"%d\" markerHeight=\"%d\" viewBox=\"%s\" refX=\"%d\" refY=\"%d\" orient=\"auto\" markerUnits=\"strokeWidth\" >\n",
+      //   name, SymbolPoint.SVG_M_SIDE, SymbolPoint.SVG_M_SIDE, SymbolPoint.SVG_M_VBOX, SymbolPoint.SVG_M_REF, SymbolPoint.SVG_M_REF ) );
+      // out.write( "      " );
+      // out.write( pt.getSvg().replaceAll("/>", stroke ) );
+      // out.write( "    </marker>\n");
+      out.write( String.format(Locale.US,
+        "     <symbol id=\"%s\" viewBox=\"%s\" preserveAspectRatio=\"xMidyMid meet\" >\n",
+        name, SymbolPoint.SVG_M_VBOX ) );
       out.write( "      " );
-      out.write( pt.getSvg().replaceAll("/>", stroke ) );
-      out.write( "    </marker>\n");
+      out.write( pt.getSvg() );
+      out.write("\n");
+      out.write( "    </symbol>\n");
     }
     out.write( "  </defs>\n");
     out.flush();

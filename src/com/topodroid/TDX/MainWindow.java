@@ -154,7 +154,7 @@ public class MainWindow extends Activity
   private BitmapDrawable  mButtonSap5;
   private BitmapDrawable  mButtonSap6;
   private BitmapDrawable  mButtonBric4;
-  private BitmapDrawable  mButtonBric5;
+  // private BitmapDrawable  mButtonBric5;
   private BitmapDrawable  mButtonCavwayX1;
   private BitmapDrawable  mButtonDiscoX;
   private BitmapDrawable  mButtonJedeye;
@@ -1070,8 +1070,8 @@ public class MainWindow extends Activity
     mButtonDistoX3 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto3b );
     mButtonSap5    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap5 );
     mButtonSap6    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap6 );
-    mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric4 );
-    mButtonBric5   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric5 );
+    mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric );
+    // mButtonBric5   = mButtonBric4; // MyButton.getButtonBackground( this, res, R.drawable.iz_bric );
     mButtonCavwayX1 = MyButton.getButtonBackground( this, res, R.drawable.iz_cavwayx1 );
     mButtonDiscoX   = MyButton.getButtonBackground( this, res, R.drawable.iz_discox );
     mButtonJedeye   = MyButton.getButtonBackground( this, res, R.drawable.iz_jedeye );
@@ -1091,10 +1091,10 @@ public class MainWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX3 );
     } else if ( TDInstance.isDeviceA3() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX1 );
-    } else if ( TDInstance.isDeviceBric4() ) {
+    } else if ( TDInstance.isDeviceBric() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric4 );
-    } else if ( TDInstance.isDeviceBric5() ) {
-      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric5 );
+    // } else if ( TDInstance.isDeviceBric5() ) {
+    //   TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric5 );
     } else if ( TDInstance.isDeviceSap5() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap5 );
     } else if ( TDInstance.isDeviceSap6() ) {
@@ -1502,7 +1502,7 @@ public class MainWindow extends Activity
         break;
       case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
         if ( result == Activity.RESULT_OK ) {
-          if ( mImportData.mType == -1 ) {
+          if ( mImportData.mType == TDConst.FOLDER ) {
             importFolder( intent );
           } else { 
             importFile( intent );
@@ -1928,9 +1928,9 @@ public class MainWindow extends Activity
    */
   void importSurveys()
   {
-    Intent intent = TDandroid.getOpenDocumentIntent( -1 ); 
+    Intent intent = TDandroid.getOpenDocumentIntent( TDConst.FOLDER );
     // mImportData = data;
-    mImportData.mType = -1;
+    mImportData.mType = TDConst.FOLDER;
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_surveys ) ), TDRequest.REQUEST_GET_IMPORT );
   }
 

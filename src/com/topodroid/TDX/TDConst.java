@@ -165,6 +165,8 @@ public class TDConst
   };
 
   public final static int TEXT_PLAIN = 38; // text/plain index 
+  public final static int FOLDER     = 0xffffff;
+  public final static int NO_TYPE    = -1;
 
   public static String getMimeFromFilename( String filename ) 
   {
