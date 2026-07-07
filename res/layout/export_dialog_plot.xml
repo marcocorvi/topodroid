@@ -6,16 +6,16 @@
   <TextView android:id="@+id/title"
     style="@style/text_title"
   />
-<!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:layout_below="@id/title"
+ >
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   style="@style/base_padding"
   android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
-  android:layout_below="@id/title"
   >
 
   <Spinner android:id="@+id/spin"
@@ -543,6 +543,6 @@
     </LinearLayout>
   </LinearLayout>
    		
-</LinearLayout>
-<!-- /ScrollView -->
+ </LinearLayout>
+</ScrollView>
 </RelativeLayout>
