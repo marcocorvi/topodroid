@@ -197,7 +197,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="calib_validate_error">Average error: %1$.2f &#xb0;</string>
     <string name="calib_stddev">Error stddev: %1$.2f&#xb0;</string>
     <string name="calib_max_error">Max. error: %1$.2f&#xb0;</string>
-    <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2 &#xb0;</string>
+    <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2f &#xb0;</string>
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_dip">Magn. dip: %1$.1f&#xb0;</string>
@@ -354,7 +354,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <!-- UNUSED string name="h_ellipsoid">H ellipsoid </string -->
-    <string name="h_geoid" copyable="sk">H geoid </string>
+    <string name="h_geoid" copyable="cs sk">H geoid </string>
     <string name="latitude" copyable="pt">Latitude </string>
     <string name="longitude" copyable="pt">Longitude </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H ellipsoid [m]</string -->
@@ -509,7 +509,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_3d" copyable="all">3D</string>
     <string name="menu_about">ABOUT</string>
     <string name="menu_area" copyable="it">AREA</string>
-    <string name="menu_audio" copyable="fr it sk">AUDIO</string>
+    <string name="menu_audio" copyable="cs fr it sk">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -526,7 +526,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_hide_deleted">HIDE DELETED</string>
     <string name="menu_device">DEVICE</string>
     <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
-    <string name="menu_export">EXPORT</string>
+    <string name="menu_export" copyable="cs">EXPORT</string>
     <string name="menu_bulkops">BULK OPS.</string>
     <string name="menu_exit">EXIT</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
@@ -2304,7 +2304,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="cmenu_files">Surveys</string -->
     <!-- UNUSED string name="cmenu_frame">Frame</string -->
     <!-- UNUSED string name="cmenu_color">Color</string -->
-    <string name="cmenu_info" copyable="fr it pt sk">INFO</string>
+    <string name="cmenu_info" copyable="cs fr it pt sk">INFO</string>
     <string name="cmenu_ico">3D-ROSE DIAGRAM</string>
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>

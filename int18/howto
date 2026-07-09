@@ -6,8 +6,19 @@ Howto add a translation
 
 [3] add the directory int18/values-XX for your translation (replace "XX" with the two-letter country code of the language)
 
-[4] copy res/values/strings.xml res/values/array.xml and res/values/plurals.xml in the translation directory.
-    edit the three files and replace the english strings with the translations in your language save them with utf-8 encoding
+[4] Copy 
+       res/values/strings.xml 
+       res/values/array.xml 
+       res/values/plurals.xml 
+  in the translation directory.
+  Edit the three files and replace the english strings with the translations in your language.
+  N.B. 
+    1.  strings marked translatable="false" MUST NOT be translated and it is better to drop them
+        from the translation file
+          s/.* translatable="false".*//
+    2.  remove the attribute 'copyable':
+          s/ copyable="[a-z ]*"//
+  Save the translation files with utf-8 encoding
 
 [4] you can use the PERL script utils/strings_prepare.pl, by R. Severo, to prepare the translation files for your language.
 

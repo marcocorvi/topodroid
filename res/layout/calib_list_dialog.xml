@@ -6,7 +6,11 @@
   <TextView android:id="@+id/title"
     style="@style/text_title"
   />
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  <!-- ScrollView // do not use ScrollView but adjust layout_height and layout_weight of ListView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    -->
+  <LinearLayout 
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,7 +20,8 @@
     <ListView android:id="@+id/list"
       style="@style/list_top"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="0dp"
+      android:layout_weight="1"
     />  
   
     <LinearLayout android:id="@+id/help"
@@ -52,6 +57,6 @@
         />
       </LinearLayout>
     </LinearLayout>
-  
   </LinearLayout>
+  <!-- /ScrollView -->
 </RelativeLayout>

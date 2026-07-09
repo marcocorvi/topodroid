@@ -283,6 +283,7 @@
      <item name="chinese">中文</item>
      <!-- item name="ukrainian">Українська</item -->
      <item name="hungarian">Magyar</item>
+     <item name="czech">Czech</item>
   </string-array>
   <string-array name="localeValue" translatable="false">
      <item name="default"></item>
@@ -301,6 +302,7 @@
      <item name="chinese">cn</item>
      <!-- item name="ukrainian">ua</item -->
      <item name="hungarian">hu</item>
+     <item name="czech">cs</item>
   </string-array>
 
   <!-- DISTOX_LOCAL_HELP -->
