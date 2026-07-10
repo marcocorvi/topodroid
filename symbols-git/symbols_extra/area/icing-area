@@ -1,6 +1,7 @@
 encoding utf-8
 symbol area
 name icing-area
+name-cs ledová_plocha
 name-de Eisfläche
 name-hu jeges_terület
 name-pt área_congelável

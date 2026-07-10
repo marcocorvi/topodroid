@@ -1525,7 +1525,7 @@
     <string name="pref_with_levels_summary">Vrstvy kreslicího plátna</string>
     <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
     <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
-    <string name="pref_palettes_title">Palettes</string>
+    <string name="pref_palettes_title">Palety symbolů</string>
     <string name="pref_palettes_summary">Povolit doplňkové palety symbolů</string>
     <string name="pref_packet_logger_title">Protokol paketů</string>
     <string name="pref_packet_logger_summary">Povolit ukládání záznamu datových paketů</string>
