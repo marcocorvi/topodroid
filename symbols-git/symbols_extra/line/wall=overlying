@@ -2,7 +2,7 @@ encoding utf-8
 symbol line
 name wall_above
 name-bg по-високо_разположена_стена
-name-cz výše_položená_stěna
+name-cs výše_položená_stěna
 name-de Wand_oberhalb
 name-es pared_galeria_superior
 name-fr voûte

@@ -1,7 +1,7 @@
 encoding utf-8
 symbol point
 name station-name
-name-cz název_měřického_bodu
+name-cs název_měřického_bodu
 name-de Messpunkt-Name
 name-ru имя_пикета
 th_name station-name
