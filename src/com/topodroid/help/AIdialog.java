@@ -65,7 +65,8 @@ public class AIdialog extends MyDialog
   final static String[] mModels = { 
     // "gemini-3.0-flash", 
     "gemini-3-flash-preview",
-    "gemini-2.5-flash", "gemini-2.5-flash-lite"
+    "gemini-2.5-flash", "gemini-2.5-flash-lite",  //These models (2.5) are supported until October 16, 2026
+    "gemini-3.1-flash-lite","gemini-3.5-flash"    //Recommended replacement: 3.1 and 3.5
   };
 
   /* GEMMA3
