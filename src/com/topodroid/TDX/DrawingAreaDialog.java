@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.TDLayout;
@@ -75,6 +76,7 @@ class DrawingAreaDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_AREA );
     String title = String.format( resString( R.string.title_draw_area ),
                                   BrushManager.getAreaName( mArea.mAreaType ) );
     initLayout( R.layout.drawing_area_dialog, title );

@@ -510,6 +510,7 @@ public class GMActivity extends Activity
     err1 *= TDMath.RAD2DEG;
     err2 *= TDMath.RAD2DEG;
     errmax *= TDMath.RAD2DEG;
+    TDLog.v("Validate errs " + err1 + " " + err2 + " max " + errmax );
     new CalibValidateResultDialog( this, errors0, errors1, errors,
                                    ave0, std0, ave1, std1, err1, err2, errmax, name, TDInstance.calib ).show();
   }

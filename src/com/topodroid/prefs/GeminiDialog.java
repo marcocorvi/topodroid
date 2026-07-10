@@ -85,16 +85,22 @@ public class GeminiDialog extends MyDialog
     } );
   }
 
+  /** @return true if the api key passes a formal test
+   * @param key    input api key
+   * @note Google keys start with AIza and are between 30 and 50 char long, , and include alphanumeric, dash
+   *       Studio keys start with AQ and are between 40 and 60 char long, and include alphanumeric, dash, underscore, period
+   */
   private boolean isApiKeyFormatValid( String key )
   {
     // TDLog.v("Check format: <" + key + "> len " + key.length() ); 
-    final String apiKeyRegex = "^(AIza|AQ)[a-zA-Z0-9i\\.\\-_]{30,50}";
+    final String geminiRegex = "^AIza[a-zA-Z0-9\\-_]{30,50}";
+    final String studioRegex = "^AQ[a-zA-Z0-9\\.\\-_]{40,60}";
     if ( key == null ) {
       TDLog.v("null API key");
       return false;
     }
-    boolean ret = key.matches( apiKeyRegex );
-    TDLog.v("API key regex pass " + ret );
+    boolean ret = key.matches( geminiRegex ) || key.matches( studioRegex );
+    // TDLog.v("API key regex pass " + ret );
     return ret;
   }
 

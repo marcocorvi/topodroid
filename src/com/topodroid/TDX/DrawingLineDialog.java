@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyStateBox;
@@ -94,6 +95,7 @@ class DrawingLineDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_LINE );
 
     String title = String.format( resString( R.string.title_draw_line ), BrushManager.getLineName( mLine.mLineType ) );
     initLayout( R.layout.drawing_line_dialog, title );

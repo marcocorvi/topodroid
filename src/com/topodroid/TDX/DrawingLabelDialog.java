@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -63,6 +64,7 @@ class DrawingLabelDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_LABEL );
     initLayout( R.layout.drawing_label_dialog, R.string.label_title );
 
     mLabel = (EditText) findViewById(R.id.label_text);

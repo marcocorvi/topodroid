@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDString;
 import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.MyDialog;
@@ -84,6 +85,7 @@ class DrawingPointDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_POINT );
     
     initLayout(R.layout.drawing_point_dialog, resString(R.string.POINT) + " " + BrushManager.getPointName( mPoint.mPointType ) );
 

@@ -11,6 +11,7 @@
  */
 package com.topodroid.calib;
 
+import com.topodroid.util.TDLog;
 import com.topodroid.util.TDColor;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
@@ -56,6 +57,8 @@ public class CalibValidateResultDialog extends MyDialog
     errors0 = errs0;
     errors1 = errs1;
     errors2 = errs2;
+    TDLog.v("accuracy " + a0 + " ± " + s0 + " " + a1 + " ± " + s1 );
+    TDLog.v("error " + e1 + " ± " + e2 + " max " + em ); 
     ave_std0 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a0, s0 );
     ave_std1 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a1, s1 );
     err1  = String.format( mContext.getResources().getString( R.string.calib_validate_error ), e1 );

@@ -1391,7 +1391,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_photo_list">Снимки</string>
     <string name="title_photo_view">Снимка</string>
     <string name="title_plan">План</string>
-    <string name="title_profile">Разрез/string>
+    <string name="title_profile">Разрез</string>
     <string name="title_plot_save">Експортирай скицата</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">Reload sketch</string -->

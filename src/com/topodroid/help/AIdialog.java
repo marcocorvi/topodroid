@@ -60,12 +60,10 @@ public class AIdialog extends MyDialog
   protected static String mNames  = null; // dictionary of names
   protected static HashMap<String, String> mManualIndex = null;
 
-  // gemini-2.0 will be shut down 2026-03-31
-  // gemini-3.0-flash is not jet available
   final static String[] mModels = { 
-    // "gemini-3.0-flash", 
-    "gemini-3-flash-preview",
-    "gemini-2.5-flash", "gemini-2.5-flash-lite"
+    "gemini-3.5-flash",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite"
   };
 
   /* GEMMA3

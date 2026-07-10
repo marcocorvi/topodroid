@@ -1537,7 +1537,7 @@ public class DrawingWindow extends ItemDrawer
 
   void doClose()
   {
-    // TDLog.v( "menu close ...");
+    TDLog.v( "Drawing Window do close ...");
     checkLabelPath();
     super.onBackPressed();
   }
@@ -1546,6 +1546,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onBackPressed () // askClose
   {
+    TDLog.v( "Drawing Window on back pressed ... single-back " + TDSetting.mSingleBack + " double-back " + doubleBack );
     checkLabelPath();
     if ( dismissPopups() != DISMISS_NONE ) return;
     if ( mTh2Edit ) { // TH2EDIT
@@ -2958,6 +2959,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void popInfo()
   {
+    TDLog.v( "Drawing Window pop info" );
     // TODO save plot offset and zoom
     if ( mPid3 >= 0 ) {
       // TDLog.v( "update xsection pid " + mPid3 + " X " + mOffset.x + " Y " + mOffset.y + " zoom " + mZoom );
@@ -3403,6 +3405,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doStart( boolean do_load, float tt, Vector3D center )
   {
+    TDLog.v( "Drawing Window do start" );
     if ( mApp_mData == null ) {
       TDLog.e("DrawingWindow start with null DB");
       finish();
@@ -8594,7 +8597,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
-    // TDLog.v("on key down: code " + code );
+    TDLog.v("Drawing Window on key down: code " + code );
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();

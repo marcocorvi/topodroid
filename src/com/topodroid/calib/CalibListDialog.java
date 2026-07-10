@@ -99,6 +99,7 @@ public class CalibListDialog extends MyDialog
       for ( String item : list ) {
         mArrayAdapter.add( item );
       }
+      mList.setAdapter( mArrayAdapter );
     }
   }
  

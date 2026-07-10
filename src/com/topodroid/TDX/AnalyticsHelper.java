@@ -185,7 +185,7 @@ public class AnalyticsHelper extends DataSetObservable
         boolean first = true;
         sb.append("{\"android\": \"").append( TDandroid.getAndroidModel() ).append("\", ")
           .append("\"TD\": \"").append( TDVersion.string() ).append("\", ")
-          .append("\"country\": \"").append( (TDAnalytics.mCT == null)? "--" : TDAnalytics.mCT ).append("\", ");
+          .append("\"country\": \"").append( TDAnalytics.getCountry() ).append("\", ");
         do {
           if ( ! first ) sb.append(", ");
           sb.append("\"").append( cursor.getString(0) ).append("\": \"").append( cursor.getLong(1) ).append("\"");

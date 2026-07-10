@@ -54,6 +54,13 @@ public class TDAnalytics
   public static final String XSECTION_LEG  = "1xleg";
   public static final String XSECTION_ST   = "1xst";
   public static final String XSECTION_PHOTO = "1xphoto";
+  public static final String PLOT_POINT    = "2point";
+  public static final String PLOT_LABEL    = "2label";
+  public static final String PLOT_LINE     = "2line";
+  public static final String PLOT_AREA     = "2area";
+  // public static final String PLOT_SECTION  = "2section";
+  // public static final String PLOT_AUDIO    = "2audio";
+  // public static final String PLOT_PHOTO    = "2photo";
 
   public static final String SHOT_EDIT     = "0edit";
   public static final String SHOT_MULTI    = "0multi";
@@ -357,6 +364,11 @@ public class TDAnalytics
     }
   }
 
+  public static String getCountry()
+  {
+    if ( mCT != null ) return mCT;
+    return "--";
+  }
 
 } 
 

@@ -659,7 +659,7 @@ class ItemPickerDialog extends MyDialog
   @Override
   public void onBackPressed ()
   {
-    TDLog.v( "Item Picker: onB back pressed - type " + mItemType );
+    TDLog.v( "Item Picker: on back pressed - type " + mItemType );
     closeDialog();
     // itemSelected();
     // cancel();
