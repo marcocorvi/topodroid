@@ -13,22 +13,14 @@
      <item name="front">Přesunout na začátek</item>
      <item name="front_oldest">Na začátek, odstranit nejstarší</item>
   </string-array>
-  <string-array name="toolbarUpdateValue" translatable="false">
-     <item name="oldest">0</item>
-     <item name="front">1</item>
-     <item name="front_oldest">2</item>
-  </string-array>
+
 
   <string-array name="teamNames">
      <item name="plain">Prostý text</item>
      <item name="separated">Oddělený text</item>
      <item name="dialog">Dialog</item>
   </string-array>
-  <string-array name="teamNamesValue" translatable="false">
-     <item name="plain">0</item>
-     <item name="separated">1</item>
-     <item name="dialog">2</item>
-  </string-array>
+
 
   <string-array name="bricMode">
      <item name="prim_only">Pouze primární</item>
@@ -37,13 +29,7 @@
      <!-- item name="all_zero">All + Zero</ite -->
      <!-- item name="no_index">All except index</item -->
   </string-array>
-  <string-array name="bricModeValue" translatable="false">
-     <item name="prim_only">1</item>
-     <!-- item name="sequence">2</item -->
-     <item name="all">3</item>
-     <!-- item name="all_zero">4</item -->
-     <!-- item name="no_index">5</item -->
-  </string-array>
+
   
   <string-array name="geoImportApp">
      <item name="none">neuvedeno</item>
@@ -53,25 +39,14 @@
      <item name="gps_test">GPSTest</item>
      <item name="gps_logger">GPS Logger</item>
   </string-array>
-  <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActivity -->
-     <item name="none">0</item>
-     <item name="mobile_topographer">1</item>
-     <item name="gpx_recorder">2</item>
-     <item name="gps_position">4</item>
-     <item name="gps_test">8</item>
-     <item name="gps_logger">16</item>
-  </string-array>
+
   
   <string-array name="orientation">
      <item name="unspecified">Nespecifikovaná</item>
      <item name="portrait">Na výšku</item>
      <item name="landscape">Na šířku</item>
   </string-array>
-  <string-array name="orientationValue" translatable="false">
-     <item name="unspecified">0</item>
-     <item name="portrait">1</item>
-     <item name="landscape">2</item>
-  </string-array>
+
   
   <string-array name="splayDash">
      <item name="none">nic</item>
@@ -79,56 +54,35 @@
      <item name="profile">azimuh</item>
      <item name="view">pohled</item>
   </string-array>
-  <string-array name="splayDashValue" translatable="false">
-     <item name="none">0</item>
-     <item name="plan">1</item>
-     <item name="profile">2</item>
-     <item name="view">3</item>
-  </string-array>
+
   
   <string-array name="splayColors">
      <item name="none">nic</item>
      <item name="all">výběr</item>
      <item name="palette">paleta</item>
   </string-array>
-  <string-array name="splayColorsValue" translatable="false">
-     <item name="none">0</item>
-     <item name="all">1</item>
-     <item name="palette">2</item>
-  </string-array>
+
 
   <string-array name="feedbackMode">
      <item name="none">nic</item>
      <item name="sound">zvuk</item>
      <item name="haptic">vibrace</item>
   </string-array>
-  <string-array name="feedbackModeValue" translatable="false">
-     <item name="none">0</item>
-     <item name="sound">1</item>
-     <item name="haptic">2</item>
-  </string-array>
+
   
   <string-array name="canvasLevels">
      <item name="none">nic</item>
      <item name="class">podle symbolu</item>
      <item name="instance">podle položky</item>
   </string-array>
-  <string-array name="canvasLevelsValue" translatable="false">
-     <item name="none">0</item>
-     <item name="class">1</item>
-     <item name="instance">2</item>
-  </string-array>
+
 
   <string-array name="csvSeparator">
      <item name="comma">čárka ,</item>
      <item name="pipe">pipe |</item>
      <item name="tab">tabulátor</item>
   </string-array>
-  <string-array name="csvSeparatorValue" translatable="false">
-     <item name="comma">0</item>
-     <item name="pipe">1</item>
-     <item name="tab">2</item>
-  </string-array>
+
 
   <!-- UNUSED string-array name="lineContinue">
      <item name="none">none</item>
@@ -151,23 +105,14 @@
      <item name="two_tf">2 stopy</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
-  <string-array name="unitGridValue" translatable="false">
-     <item name="meter">1.0</item>
-     <item name="yard">0.914</item>
-     <item name="two_tf">0.6096</item>
-     <item name="ten_cm">0.1</item>
-  </string-array>
+
 
   <string-array name="unitMeasure">
      <item name="grid_cell">buňka mřížky</item>
      <item name="meter">metr</item>
      <item name="tf">stopa</item>
   </string-array>
-  <string-array name="unitMeasureValue" translatable="false">
-     <item name="grid_cell">-1.0</item>
-     <item name="meter">1.0</item>
-     <item name="tf">0.3048</item>
-  </string-array>
+
 
   <string-array name="loopClosure">
      <item name="none">Žádné</item>
@@ -176,22 +121,13 @@
      <item name="selective">Vybrané</item>
      <item name="triangles">Trojůhelníky</item>
   </string-array>
-  <string-array name="loopClosureValue" translatable="false">
-     <item name="none">0</item>
-     <item name="normal">1</item>
-     <item name="weighted">4</item>
-     <item name="selective">5</item>
-     <item name="triangles">3</item>
-  </string-array>
+
 
   <string-array name="survexEol">
      <item name="lf">Linux</item>
      <item name="lfcr">Windows</item>
   </string-array>
-  <string-array name="survexEolValue" translatable="false">
-     <item name="lf">LF</item>
-     <item name="lfcr">LFCR</item>
-  </string-array>
+
 
   <!-- string-array name="exportScale">
      <item name="s50">1:50</item>
@@ -206,14 +142,7 @@
      <item name="s500">500</item>
   </string-array -->
 
-  <string-array name="svgProgram" translatable="false">
-     <item name="inkscape">Inkscape</item>
-     <item name="illustrator">Illustrator</item>
-  </string-array>
-  <string-array name="svgProgramValue" translatable="false">
-     <item name="inkscape">0</item>
-     <item name="illustrator">1</item>
-  </string-array>
+
 
   <!-- string-array name="wallsType">
      <item name="none">None</item>
@@ -226,36 +155,20 @@
      <item name="delaunay">2</item>
   </string-array -->
 
-  <string-array name="acadVersion" translatable="false">
-     <item name="9">R12 (AC1009)</item>
-     <item name="13">R13 (AC1012)</item>
-     <item name="16">R14 (AC1014)</item>
-  </string-array>
-  <string-array name="acadVersionValue" translatable="false">
-     <item name="9">9</item>
-     <item name="13">13</item>
-     <item name="16">16</item>
-  </string-array>
+
 
   <string-array name="zoomCtrl">
      <item name="0">Vypnuto</item>
      <item name="1">Dočasně</item>
      <item name="2">Trvale</item>
   </string-array>
-  <string-array name="zoomCtrlValue" translatable="false">
-     <item name="0">0</item>
-     <item name="1">1</item>
-     <item name="2">2</item>
-  </string-array>
+
 
   <string-array name="stationNames">
      <item name="alpha">písmena-čísla</item>
      <item name="number">čísla</item>
   </string-array>
-  <string-array name="stationNamesValue" translatable="false">
-     <item name="alpha">alpha</item>
-     <item name="number">number</item>
-  </string-array>
+
 
   <!-- UNUSED string-array name="extend_name">
      <item>Left</item>
@@ -265,76 +178,16 @@
   </string-array -->
 
   <!-- DISTOX_LOCALE -->
-  <string-array name="locale" translatable="false">
-     <item name="default">default</item>
-     <item name="english">English</item>
-     <!-- item name="french">Français</item -->
-     <item name="spanish">Español</item>
-     <item name="italian">Italiano</item>
-     <item name="russian">Русский</item>
-     <item name="german">Deutsch</item>
-     <!-- item name="polish">Polski</item -->
-     <item name="portuguese">Português</item>
-     <!-- item name="romanian">Română</item -->
-     <!-- item name="slovak">Slovenčina</item -->
-     <!-- item name="slovenian">Slovenščina</item -->
-     <item name="bulgarian">Български</item>
-     <item name="chinese">中文</item>
-     <!-- item name="ukrainian">Українська</item -->
-     <item name="hungarian">Magyar</item>
-  </string-array>
-  <string-array name="localeValue" translatable="false">
-     <item name="default"/>
-     <item name="english">en</item>
-     <!-- item name="french">fr</item -->
-     <item name="spanish">es</item>
-     <item name="italian">it</item>
-     <item name="russian">ru</item>
-     <item name="german">de</item>
-     <!-- item name="polish">pl</item -->
-     <item name="portuguese">pt</item>
-     <!-- item name="romanian">ro</item -->
-     <!-- item name="slovak">sk</item -->
-     <!-- item name="slovenian">sl</item -->
-     <item name="bulgarian">bg</item>
-     <item name="chinese">cn</item>
-     <!-- item name="ukrainian">ua</item -->
-     <item name="hungarian">hu</item>
-  </string-array>
 
   <!-- DISTOX_LOCAL_HELP -->
-  <string-array name="localUserMan" translatable="false">
-     <item name="english">English</item>
-     <item name="spanish">Español</item>
-     <item name="italian">Italiano</item>
-     <item name="russian">Русский</item>
-     <item name="hungarian">Magyar</item>
-     <item name="french">Français</item>
-     <item name="portuguese">Português</item>
-     <item name="chinese">中文</item>
-     <!-- item name="slovak">Slovenčina</item -->
-  </string-array>
-  <string-array name="localUserManValue" translatable="false">
-     <item name="english">0</item>
-     <item name="spanish">1</item>
-     <item name="italian">2</item>
-     <item name="russian">3</item>
-     <item name="hungarian">4</item>
-     <item name="french">5</item>
-     <item name="portuguese">6</item>
-     <item name="chinese">7</item>
-     <!-- item name="slovak">6</item -->
-  </string-array>
+  
 
   <string-array name="importDatamode">
      <item name="normal">normalní</item>
      <item name="diving">potápěčský</item>
   </string-array>
 
-  <string-array name="importDatamodeValue" translatable="false"> <!-- see SurveyInfo.DATAMODE_xxx -->
-     <item name="normal">0</item>
-     <item name="diving">1</item>
-  </string-array>
+
 
   <!-- shot default export -->
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
@@ -360,28 +213,7 @@
      <!-- item name="json">GeoJSON</item -->
      <!-- item name="shp">Shapefile</item -->
   </string-array>
-  <string-array name="exportShotsValue" translatable="false">
-     <item name="none">-1</item>
-     <item name="therion">0</item>
-     <item name="compass">2</item>
-     <item name="csurvey">7</item>
-     <!-- UNUSED item name="ghtopo">19</item -->
-     <!-- UNUSED item name="grottolf">18</item -->
-     <!-- UNUSED item name="pockettopo">8</item -->
-     <item name="polygon">16</item>
-     <item name="survex">3</item>
-     <item name="topo">17</item>
-     <item name="toporobot">21</item>
-     <item name="visualtopo">4</item>
-     <item name="walls">9</item>
-     <item name="winkarst">20</item>
-     <item name="csv">5</item>
-     <item name="dxf">6</item>
-     <!-- item name="kml">10</item -->
-     <!-- item name="track">11</item -->
-     <!-- item name="json">22</item -->
-     <!-- item name="shp">23</item -->
-  </string-array>
+ 
 
   <!-- plot default export -->
   <string-array name="exportPlot">
@@ -397,19 +229,7 @@
      <item name="pdf">PDF</item>
      <!-- item name="c3d">Cave3D</item -->
   </string-array>
-  <string-array name="exportPlotValue" translatable="false">
-     <item name="none">-1</item>
-     <item name="therion">14</item>
-     <item name="csurvey">7</item>
-     <!-- item name="tunnel">25</item -->
-     <item name="xtherion">24</item>
-     <item name="dxf">6</item>
-     <item name="svg">13</item>
-     <item name="shp">23</item>
-     <!-- item name="png">12</item -->
-     <item name="pdf">27</item>
-     <!-- item name="c3d">26</item -->
-  </string-array>
+
 
 
   <!-- plot auto export -->
@@ -425,18 +245,7 @@
      <!-- item name="png">PNG</item -->
      <!-- item name="pdf">PDF</item --> 
   </string-array>
-  <string-array name="exportPlotAutoValue" translatable="false">
-     <item name="none">-1</item>
-     <item name="therion">14</item>
-     <item name="csurvey">7</item>
-     <!-- item name="tunnel">25</item -->
-     <item name="xtherion">24</item>
-     <item name="dxf">6</item>
-     <item name="svg">13</item>
-     <item name="shp">23</item>
-     <!-- item name="png">12</item -->
-     <!-- item name="pdf">27</item --> 
-  </string-array>
+
    
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
@@ -455,31 +264,7 @@
      <item name="svg">12</item>
   </string-array -->
 
-  <string-array name="legShots" translatable="false">
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="four">4</item>
-  </string-array>
-  <string-array name="legShotsValue" translatable="false">
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="four">4</item>
-  </string-array>
 
-  <string-array name="backupNumber" translatable="false">
-     <item name="four">4</item>
-     <item name="five">5</item>
-     <item name="six">6</item>
-     <item name="seven">7</item>
-     <item name="eight">8</item>
-  </string-array>
-  <string-array name="backupNumberValue" translatable="false">
-     <item name="four">4</item>
-     <item name="five">5</item>
-     <item name="six">6</item>
-     <item name="seven">7</item>
-     <item name="eight">8</item>
-  </string-array>
 
   <string-array name="extraButtons">
      <item name="basic">Basic</item>
@@ -489,14 +274,7 @@
      <item name="tester">Tester</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
-  <string-array name="extraButtonsValue" translatable="false">
-     <item name="basic">0</item>
-     <item name="normal">1</item>
-     <item name="advanced">2</item>
-     <item name="expert">3</item>
-     <item name="tester">4</item>
-     <!-- item name="complete">5</item -->
-  </string-array>
+
 
   <string-array name="sizeButtons">
      <item name="small">S-malá</item>
@@ -505,13 +283,7 @@
      <item name="large">L-velká</item>
      <item name="huge">H-obrovská</item>
   </string-array>
-  <string-array name="sizeButtonsValue" translatable="false">
-     <item name="small">0</item>
-     <item name="normal">1</item>
-     <item name="medium">3</item>
-     <item name="large">4</item>
-     <item name="huge">5</item>
-  </string-array>
+
 
   <!-- UNUSED string-array name="logStream" translatable="false">
      <item name="android">System log</item>
@@ -527,11 +299,7 @@
      <item name="continuous">Nepřetržitý</item>
      <item name="multi">Multi</item>
   </string-array>
-  <string-array name="connModeValue" translatable="false">
-     <item name="batch">0</item>
-     <item name="continuous">1</item>
-     <item name="multi">2</item>
-  </string-array>
+
 
   <string-array name="sockType">
      <item name="default">Default</item>
@@ -539,12 +307,7 @@
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
-  <string-array name="sockTypeValue" translatable="false">
-     <item name="default">0</item>
-     <item name="Insecure">1</item>
-     <!-- item name="Port">2</item -->
-     <!-- item name="InsecurePort">3</item -->
-  </string-array>
+
 
   <!--
        the order of options must be increasing with the enabling level
@@ -594,17 +357,7 @@
   </string-array>
 -->
 
-  <string-array name="surveyStationsValue" translatable="false">
-     <item name="no">0</item>
-     <item name="for">1</item>
-     <item name="back">2</item>
-     <item name="backsight">5</item>
-     <item name="tripod">6</item>
-     <item name="anomaly">8</item>
-     <item name="for2">3</item>
-     <item name="back2">4</item>
-     <item name="toporobot">7</item>
-  </string-array>
+
 
   <!-- string-array name="pickerType">
      <item name="recent">Most recent</item>
@@ -653,11 +406,7 @@
      <item name="1">Na vyžádání</item>
      <item name="2">Zapnuto</item>
   </string-array>
-  <string-array name="deviceBTValue" translatable="false">
-     <item name="0">0</item>
-     <item name="1">1</item>
-     <item name="2">2</item>
-  </string-array>
+
 
   <!-- string-array name="exportType">
      <item name="th">Therion</item>
@@ -679,24 +428,14 @@
      <item name="bezier">Bezier křivka</item>
      <item name="simplified">Zjednodušené</item>
   </string-array>
-  <string-array name="lineStyleValue" translatable="false">
-     <item name="none">1</item>
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="bezier">0</item>
-     <item name="simplified">4</item>
-  </string-array>
+  
 
   <string-array name="groupBy">
      <!-- item name="distance">Distance</item -->
      <item name="four">čtveřice(skupiny po 4)</item>
      <item name="only16">Pouze prvních 16</item>
   </string-array>
-  <string-array name="groupByValue" translatable="false">
-     <!-- item name="distance">0</item -->
-     <item name="four">1</item>
-     <item name="only16">2</item>
-  </string-array>
+
 
   <string-array name="unitLength">
      <item name="meters">metry</item>
@@ -751,15 +490,7 @@
      <item name="decm">M Decimal</item>
      <item name="hexm">M Hex</item>
   </string-array>
-  <string-array name="rawCDataValue" translatable="false">
-     <item name="none">0</item>
-     <item name="dec">1</item>
-     <item name="hex">2</item>
-     <item name="decg">11</item>
-     <item name="hexg">12</item>
-     <item name="decm">21</item>
-     <item name="hexm">22</item>
-  </string-array>
+
 
   <!-- FIXME_SKETCH_3D string-array name="modelType">
      <item name="none">None</item>
@@ -778,21 +509,14 @@
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
   </string-array>
-  <string-array name="demReduceValue" translatable="false">
-     <item name="shrink">1</item>
-     <item name="cut">2</item>
-  </string-array>
+
 
   <string-array name="splayUse">
      <item name="skip">Nic</item>
      <item name="normal">Normalní</item>
      <item name="xsection">Příčný řez</item>
   </string-array>
-  <string-array name="splayUseValue" translatable="false">
-     <item name="skip">0</item>
-     <item name="normal">1</item>
-     <item name="xsection">2</item>
-  </string-array>
+
 
 
 </resources>

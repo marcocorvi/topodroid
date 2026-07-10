@@ -62,7 +62,8 @@ public class AIdialog extends MyDialog
 
   final static String[] mModels = { 
     "gemini-3.5-flash",
-    "gemini-2.5-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash", // models (2.5) supported until October 16, 2026
     "gemini-2.5-flash-lite"
   };
 
