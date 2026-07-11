@@ -1314,7 +1314,7 @@ public class MainWindow extends Activity
     // }
 
     // FIXME_CT
-    TopoDroidApp.setCT( this );
+    TopoDroidApp.checkCT( this );
 
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
     //   // TDLog.v( "Main init environment target " + TDVersion.targetSdk() );

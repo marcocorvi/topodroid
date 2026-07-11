@@ -78,8 +78,8 @@ class DrawingPhotoDialog extends MyDialog
     //   mCamera.setChecked( true );
     // }
 
-    ((Button) findViewById(R.id.photo_ok)).setOnClickListener( this );
-    ((Button) findViewById(R.id.photo_cancel)).setOnClickListener( this );
+    ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
+    ((Button) findViewById(R.id.button_cancel)).setOnClickListener( this );
     if ( TDLevel.overExpert ) {
       GeoCodes geocodes = TopoDroidApp.getGeoCodes();
       if ( geocodes.size() > 0 ) {
@@ -99,7 +99,7 @@ class DrawingPhotoDialog extends MyDialog
   public void onClick(View view)
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Photo Dialog onClick() " + view.toString() );
-    if (view.getId() == R.id.photo_ok ) {
+    if (view.getId() == R.id.button_ok ) {
       int camera = TDandroid.AT_LEAST_API_21 ? PhotoInfo.CAMERA_TOPODROID_2 : PhotoInfo.CAMERA_TOPODROID;
       // int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
 
@@ -117,7 +117,7 @@ class DrawingPhotoDialog extends MyDialog
     } else if ( view.getId() == R.id.photo_code ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
-    // } else if ( view.getId() == R.id.photo_cancel ) {
+    // } else if ( view.getId() == R.id.button_cancel ) {
     //   /* nothing */
     }
     dismiss();

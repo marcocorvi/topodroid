@@ -103,7 +103,12 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    * @param pos    item position (index)
    * @param angle  orientation angle [degrees]
    */
-  void setItemOrientation( int pos, int angle ) { if ( isValid(pos) ) { mItems.get( pos ).setAngle( angle ); } }
+  void setItemOrientation( int pos, int angle ) 
+  {
+    if ( isValid(pos) ) {
+      mItems.get( pos ).setAngle( angle );
+    }
+  }
 
   /** set whether to show selected item
    * @param s   whether to show selected item or not

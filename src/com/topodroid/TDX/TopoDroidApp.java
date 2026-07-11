@@ -3684,11 +3684,13 @@ public class TopoDroidApp extends Application
 
   /** store the CT value in the database for analytics
    * @param ct CT value
+   * @note called by TDAnalytics on successful retirveCT
    */
   public static boolean storeCT( Context ctx, String ct ) 
   {
     TDLog.v("Store CT" + ct );
     if ( ct != null && mDData != null ) {
+      ct = ct.toUpperCase();
       Matcher matcher = country.matcher( ct );
       if ( matcher.matches() ) {
         mDData.setValue( "ct", ct );
@@ -3701,8 +3703,9 @@ public class TopoDroidApp extends Application
 
   /** set the CT value, either from the database or retrieving it
    * @param ctx context
+   * @note called from MainWindow
    */
-  public static void setCT( Context ctx )
+  public static void checkCT( Context ctx )
   {
     if ( TDAnalytics.mCT != null ) return;
     if ( mDData == null ) return;

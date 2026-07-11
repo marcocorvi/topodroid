@@ -162,16 +162,37 @@ public class MyDialog extends Dialog
   public boolean onKeyDown( int code, KeyEvent ev )
   {
     TDLog.v( "My Dialog key down: code " + code );
-    if ( code == KeyEvent.KEYCODE_BACK ) {
-      onBackPressed();
-      return true;
-    } else if ( code == KeyEvent.KEYCODE_MENU || code == KeyEvent.KEYCODE_VOLUME_UP ) {
+    if ( code == KeyEvent.KEYCODE_MENU || code == KeyEvent.KEYCODE_VOLUME_UP ) {
       if ( mHelpPage != null ) {
         UserManualActivity.showHelpPage( mContext, mHelpPage );
       }
       return true;
+    } else if ( code == KeyEvent.KEYCODE_BACK ) {
+      onBackPressed(); // issue 167
+      // ev.startTracking();
+      return true;
     }
     return false;
+  }
+
+  @Override // issue 167
+  public boolean onKeyUp( int code, KeyEvent ev )
+  {
+    TDLog.v("My Dialog key up: code " + code );
+    if ( code == KeyEvent.KEYCODE_BACK ) {
+      // if ( ev.isTracking() && ! ev.isCanceled() ) {
+        return true;
+      // }
+    }
+    return false;
+  }
+  
+
+  // override in subclases
+  @Override
+  public void onBackPressed()
+  {
+    dismiss();
   }
 
   // public void onWindowAttributesChanged(WindowManager.LayoutParams params)

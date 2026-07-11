@@ -138,10 +138,26 @@ public class SymbolPoint extends Symbol
    * @NOTE used for symbol tollbar, picker, enabler 
    * scaledPath could be precomputed, if recomputed every time symbolSize setting changes
    */
+  @Override
   public Path getScaledPath()
   {
     return makeScaledPath( mPathStr, TDSetting.mSymbolSize );
   }
+
+  // showing orientation makes UI a bit confusing
+  @Override
+  public Path getScaledOrientedPath()
+  {
+    Path ret = makeScaledPath( mPathStr, TDSetting.mSymbolSize );
+    if ( mOrientable ) {
+      Matrix m = new Matrix();
+      m.preRotate( (float)mOrientation );
+      ret.transform( m );
+    }
+    return ret;
+  }
+
+  
  
   /** @return the point paint
    */

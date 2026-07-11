@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 // import com.topodroid.util.TDColor;
 import com.topodroid.ui.ItemButton;
 // import com.topodroid.types.SymbolType;
@@ -78,7 +78,7 @@ class ItemSymbol
     // }
     lllp.setMargins(2,1,2,1);
 
-    mButton = new ItemButton( context, mSymbol.getPaint(), mSymbol.getScaledPath(), sx, sy, pad );
+    mButton = new ItemButton( context, mSymbol.getPaint(), mSymbol.getScaledOrientedPath(), sx, sy, pad );
     ll.addView( mButton, lllp );
 
     // if ( mUseText ) {
@@ -143,9 +143,9 @@ class ItemSymbol
    */
   void setAngle( float angle )
   {
-    // TDLog.v( "item " + mType + "/" + mIndex + " " + mSymbol.getName() + " set angle " + angle );
     if ( mSymbol.setAngle( angle ) ) {
-      mButton.resetPath( mSymbol.getScaledPath(), sx, sy );
+      TDLog.v( "item " + mType + "/" + mIndex + " " + mSymbol.getName() + " set angle " + angle );
+      mButton.resetPath( mSymbol.getScaledOrientedPath(), sx, sy );
       mButton.invalidate();
     }
   }

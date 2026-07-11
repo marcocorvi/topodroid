@@ -90,7 +90,7 @@ class StationPhotoDialog extends MyDialog
     // mETcomment    = (EditText) findViewById( R.id.photo_comment );
     Button buttonRetake = (Button) findViewById( R.id.photo_retake );
     Button buttonDelete = (Button) findViewById( R.id.photo_delete );
-    // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
+    Button buttonCancel = (Button) findViewById( R.id.button_cancel );
     
     if ( mTdImage != null ) {
       float a = mTdImage.azimuth();
@@ -121,8 +121,7 @@ class StationPhotoDialog extends MyDialog
     }
 
     buttonRetake.setOnClickListener( this );
-
-    // mButtonCancel.setOnClickListener( this );
+    buttonCancel.setOnClickListener( this );
     
     // TDLog.v( "photo edit dialog on create done");
   }
@@ -152,6 +151,8 @@ class StationPhotoDialog extends MyDialog
     } else if ( vid == R.id.photo_image ) {
       (new PhotoViewDialog( mContext, mPhoto )).show();
       return;
+    } else if ( vid == R.id.button_cancel ) {
+      /* nothing */
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();

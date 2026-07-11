@@ -57,7 +57,7 @@
           android:background="@drawable/ic_redo"
         / -->
     </LinearLayout>
-    <LinearLayout 
+    <LinearLayout androidLid="@+id/layout_properties"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"

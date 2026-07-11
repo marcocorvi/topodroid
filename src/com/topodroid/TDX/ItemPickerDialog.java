@@ -30,8 +30,9 @@ import android.content.Context;
 import android.graphics.*;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.KeyEvent;
 import android.widget.Button;
-// import android.widget.LinearLayout;
+import android.widget.LinearLayout;
 
 // FIXME_SCALE
 import android.widget.SeekBar;
@@ -71,6 +72,7 @@ class ItemPickerDialog extends MyDialog
   // private  Button mBTcancel;
   // private  Button mBTok;
   private SeekBar mSeekBar;     // FIXME_SCALE
+  private LinearLayout mLayoutProperties;
 
   // private DrawingWindow mParent;
   private WeakReference<ItemDrawer> mParent;
@@ -197,6 +199,7 @@ class ItemPickerDialog extends MyDialog
     mBTarea  = (Button) findViewById(R.id.item_area );
     mBTsize  = (Button) findViewById(R.id.size);     // FIXME_SCALE
     mBTsize.setOnClickListener( this );
+    mLayoutProperties = (LinearLayout) findViewById( R.id.layout_properties );
     // mBTleft  = (Button) findViewById(R.id.item_left );
     // mBTright = (Button) findViewById(R.id.item_right );
     // mBTcancel  = (Button) findViewById(R.id.item_cancel );
@@ -281,12 +284,14 @@ class ItemPickerDialog extends MyDialog
     ItemSymbol item = null;
     Symbol[] symbols = null;
     if ( mItemType == SymbolType.POINT && mPointAdapter != null ) {
+      TDLog.v("Item Picker set point angle " + angle );
       int pos = mPointAdapter.getSelectedPos();
       item = mPointAdapter.get( pos );
       symbols = ItemDrawer.mRecentPoint;
       mPointAdapter.setItemOrientation( pos, angle );
       // setPointOrientation( pos, angle );
     } else if ( mItemType == SymbolType.AREA && mAreaAdapter != null ) {
+      // TDLog.v("Item Picker set arae angle " + angle );
       int pos = mAreaAdapter.getSelectedPos();
       item = mAreaAdapter.get( pos );
       symbols = ItemDrawer.mRecentArea;
@@ -531,6 +536,9 @@ class ItemPickerDialog extends MyDialog
     ItemSymbol is;
     switch ( type ) {
       case SymbolType.POINT: 
+        // mLayoutProperties.setVisibility( View.VISIBLE );
+        mBTsize.setVisibility( View.VISIBLE );
+        mSeekBar.setVisibility( View.VISIBLE );
         if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
           // TDLog.v( "set TypeAndItem type point pos " + index + " index " + is.mIndex );
@@ -543,6 +551,9 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case SymbolType.LINE: 
+        // mLayoutProperties.setVisibility( View.GONE );
+        mBTsize.setVisibility( View.GONE );
+        mSeekBar.setVisibility( View.GONE );
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
@@ -555,6 +566,9 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case SymbolType.AREA: 
+        // mLayoutProperties.setVisibility( View.GONE );
+        mBTsize.setVisibility( View.GONE );
+        mSeekBar.setVisibility( View.VISIBLE );
         if ( mAreaAdapter != null /* && TDLevel.overBasic */ ) {
           // mAreaPos = index;
           is = mAreaAdapter.get( index );
@@ -579,6 +593,7 @@ class ItemPickerDialog extends MyDialog
     // TDLog.v("set type from current ");
     switch ( mItemType ) {
       case SymbolType.POINT: 
+        // mLayoutProperties.setVisibility( View.VISIBLE ); // not necessary
         // if ( TDLevel.overBasic ) 
         {
           // mParent.get().pointSelected( mSelectedPoint, false );
@@ -590,6 +605,7 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case SymbolType.LINE: 
+        // mLayoutProperties.setVisibility( View.GONE ); // not necessary
         // if ( ! PlotType.isAnySection( mPlotType ) ) {
         //   mParent.get().lineSelected( mSelectedLine, false );
         // } else {
@@ -600,6 +616,7 @@ class ItemPickerDialog extends MyDialog
         mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         break;
       case SymbolType.AREA: 
+        // mLayoutProperties.setVisibility( View.GONE ); // not necessary
         // if ( TDLevel.overBasic ) 
         {
           // mParent.get().areaSelected( mSelectedArea, false );
@@ -623,35 +640,37 @@ class ItemPickerDialog extends MyDialog
   //   }
   // }
 
-  // FIXME_SCALE
-  private void setPointOrientation( int pos, int angle )
-  {
-    if ( mPointAdapter == null ) return;
-    if ( /* TDLevel.overBasic && */ mItemType == SymbolType.POINT ) {
-      mPointAdapter.setItemOrientation( pos, angle );
-      // ItemSymbol item = mPointAdapter.getSelectedItem();
-      // if ( item != null ) {
-      //   item.setAngle( angle );
-      //   // angle -= (int) item.mSymbol.getAngle();
-      //   // mPointAdapter.rotateItem( pos, angle );
-      // }
-    }
-  }
+  // FIXME_SCALE - not used
+  // private void setPointOrientation( int pos, int angle )
+  // {
+  //   if ( mPointAdapter == null ) return;
+  //   if ( /* TDLevel.overBasic && */ mItemType == SymbolType.POINT ) {
+  //     TDLog.v("Item Picker point " + pos + " orientation " + angle );
+  //     mPointAdapter.setItemOrientation( pos, angle );
+  //     // ItemSymbol item = mPointAdapter.getSelectedItem();
+  //     // if ( item != null ) {
+  //     //   item.setAngle( angle );
+  //     //   // angle -= (int) item.mSymbol.getAngle();
+  //     //   // mPointAdapter.rotateItem( pos, angle );
+  //     // }
+  //   }
+  // }
 
-  // FIXME_SCALE
-  private void setAreaOrientation( int pos, int angle )
-  {
-    if ( mAreaAdapter == null ) return;
-    if ( /* TDLevel.overBasic && */ mItemType == SymbolType.AREA ) {
-      mAreaAdapter.setItemOrientation( pos, angle );
-      // ItemSymbol item = mAreaAdapter.getSelectedItem();
-      // if ( item != null ) {
-      //   item.setAngle( angle );
-      //   // angle -= (int) item.mSymbol.getAngle();
-      //   // mAreaAdapter.rotateItem( pos, angle );
-      // }
-    }
-  }
+  // FIXME_SCALE - not used
+  // private void setAreaOrientation( int pos, int angle )
+  // {
+  //   if ( mAreaAdapter == null ) return;
+  //   if ( /* TDLevel.overBasic && */ mItemType == SymbolType.AREA ) {
+  //     TDLog.v("Item Picker area " + pos + " orientation " + angle );
+  //     mAreaAdapter.setItemOrientation( pos, angle );
+  //     // ItemSymbol item = mAreaAdapter.getSelectedItem();
+  //     // if ( item != null ) {
+  //     //   item.setAngle( angle );
+  //     //   // angle -= (int) item.mSymbol.getAngle();
+  //     //   // mAreaAdapter.rotateItem( pos, angle );
+  //     // }
+  //   }
+  // }
 
   /** handle BACK key
    */
@@ -826,4 +845,15 @@ class ItemPickerDialog extends MyDialog
     itemSelected();
     dismiss();
   }
+
+  // @Override
+  // public boolean onKeyDown( int code, KeyEvent ev )
+  // { 
+  //   if ( code == KeyEvent.KEYCODE_BACK ) {
+  //     closeDialog();
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
 }

@@ -21,4 +21,6 @@ public class CT
   {
     return TDLevel.DEBUG;
   }
+
+  public static boolean isDebugTest( String what ) { return false; }
 }

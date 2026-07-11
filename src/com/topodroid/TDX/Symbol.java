@@ -217,6 +217,10 @@ public class Symbol implements SymbolInterface
    */
   public Path   getScaledPath() { return getPath(); }
 
+  /** @return the symbol scaled and oriented path - default to getPath()
+   */
+  public Path   getScaledOrientedPath() { return getScaledPath(); }
+
   // /** @return the original path
   //  */
   // public Path   getOrigPath()       { return null; }
