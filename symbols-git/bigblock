@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name bigblock
+name-cs bloky
 name-cn 块石
 name-es bloques
 name-pt blocos

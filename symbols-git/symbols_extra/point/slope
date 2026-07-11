@@ -1,7 +1,7 @@
 encoding utf-8
 symbol point
 name slope
-name-cz sklon_svahu
+name-cs sklon_svahu
 name_de Abhang
 th_name slope
 orientation yes

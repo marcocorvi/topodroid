@@ -2,7 +2,7 @@ encoding utf-8
 symbol point
 name water-drip
 name-bg капеща_вода
-name-cz kapky/skap
+name-cs kapky/skap
 name-de Wassertropfen
 name-fr goutte_d'eau
 name-hu csepegés

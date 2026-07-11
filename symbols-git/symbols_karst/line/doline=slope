@@ -1,7 +1,7 @@
 encoding utf-8
 symbol line
 name doline_slope
-name-cz svah_závrtu
+name-cs svah_závrtu
 name-de Dolinenabhang
 name-es rampa_de_dolina
 name-fr pente_de_doline
