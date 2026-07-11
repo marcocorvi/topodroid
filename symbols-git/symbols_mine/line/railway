@@ -1,7 +1,7 @@
 encoding utf-8
 symbol line
 name railway
-name-cs kolajnice
+name-cs kolejnice
 name-de Eisenbahn
 name-es rail_vagoneta
 name-fr rails
