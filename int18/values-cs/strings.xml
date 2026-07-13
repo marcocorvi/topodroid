@@ -953,8 +953,8 @@
     <string name="buffer_sorted">seřazeno</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
 
-    <string name="mode_leg">Tahy</string>
-    <string name="mode_splay">Paprsky</string>
+    <string name="mode_leg">Tahy (polygon)</string>
+    <string name="mode_splay">Paprsky (pomocné záměry)</string>
     <string name="mode_latest">Nejnovější paprsky</string>
     <string name="mode_station">Měřické body</string>
     <!-- UNUSED string name="mode_elevation">Výškový profil</string -->
