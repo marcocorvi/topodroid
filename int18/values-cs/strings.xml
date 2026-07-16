@@ -400,8 +400,8 @@
     <!-- UNUSED string name="reversed">reversed</string -->
     <string name="options">možnosti</string>
     <string name="outline">obrys</string>
-    <string name="out">ven</string>
-    <string name="in">dovnitř</string>
+    <string name="out">vnější (OUT)</string>
+    <string name="in">vnitřní (IN)</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Hide following shots</string -->
     <string name="hide_from">Skrýt od</string>
@@ -953,8 +953,8 @@
     <string name="buffer_sorted">seřazeno</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
 
-    <string name="mode_leg">Tahy</string>
-    <string name="mode_splay">Paprsky</string>
+    <string name="mode_leg">Tahy (polygon)</string>
+    <string name="mode_splay">Paprsky (pomocné záměry)</string>
     <string name="mode_latest">Nejnovější paprsky</string>
     <string name="mode_station">Měřické body</string>
     <!-- UNUSED string name="mode_elevation">Výškový profil</string -->
