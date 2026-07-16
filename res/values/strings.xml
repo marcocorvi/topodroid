@@ -24,6 +24,7 @@
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation [%1$d]</string>
+    <string name="db_not_ready">Survey database not ready</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->

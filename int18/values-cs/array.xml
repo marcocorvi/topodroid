@@ -119,7 +119,7 @@
      <item name="normal">Normalní</item>
      <item name="weighted">Vážené</item>
      <item name="selective">Vybrané</item>
-     <item name="triangles">Trojůhelníky</item>
+     <!-- item name="triangles">Trojůhelníky</item -->
   </string-array>
 
 

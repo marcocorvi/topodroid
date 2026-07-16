@@ -94,7 +94,6 @@ page_sensors_list.htm
 page_sensors.htm
 page_sensors_edit.htm
 page_geocode.htm
-page_trilateration.htm
 manual09.htm
 page_new_plot.htm
 page_dangling.htm

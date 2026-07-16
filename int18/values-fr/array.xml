@@ -101,7 +101,7 @@
      <item name="normal">Normale</item>
      <item name="weighted">Pondérée</item>
 	 <item name="selective">Sélective</item>
-     <item name="triangles">Triangles</item>
+     <!-- item name="triangles">Triangles</item -->
   </string-array>
 
   <string-array name="survexEol">
