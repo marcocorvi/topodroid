@@ -96,6 +96,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteDatabase myDB = null;
   private long           myNextId;   // id of next shot
   private long           myNextCId;  // id of next calib-data
+  private static boolean mDBready = false; // issue 168
 
   // private SQLiteStatement updateConfig = null;
 
@@ -194,6 +195,10 @@ public class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // DATABASE
 
+  /** @return true if the database is ready
+   */
+  static public boolean isDBready() { return mDBready; } // issue 168
+
   // private final TopoDroidApp mApp; // unused
 
   // UNUSED
@@ -244,8 +249,10 @@ public class DataHelper extends DataSetObservable
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( myDB != null ) {
       TDLog.e( "DB open: app already has database " + db_name );
+      mDBready = true; // issue 168
       return false;
     }
+    mDBready = false; // issue 168
     int k = 1;
     for ( ; k<=3; ++k ) {
       try {
@@ -262,6 +269,7 @@ public class DataHelper extends DataSetObservable
             // TDUtil.slowDown( 1500 ); // wait 1.5 seconds
             // TopoDroidApp.mMainActivity.finish();
           }
+          mDBready = true; // issue 168
           return false;
         }
       } catch ( SQLiteException e ) {
@@ -278,6 +286,7 @@ public class DataHelper extends DataSetObservable
         // TDLog.v( "DB opened: create tables");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
+        mDBready = true; // issue 168
       } else {
         TDLog.e( "ERROR DB " + db_name + " failed open/create" );
       }

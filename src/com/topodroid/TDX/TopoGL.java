@@ -578,11 +578,11 @@ public class TopoGL extends Activity
       return;
     }
     if ( TDSetting.mSingleBack ) {
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else {
       doubleBack = true;
       doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
@@ -772,7 +772,7 @@ public class TopoGL extends Activity
     // TDToast.make( item.toString() );
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( p++ == pos ) { // OPEN
       // (new DialogOpenFile( this, this )).show();
       selectImportFile();

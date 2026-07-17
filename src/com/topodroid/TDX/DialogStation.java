@@ -102,7 +102,8 @@ class DialogStation extends MyDialog
   public void onBackPressed()
   {
     mTopoGl.closeCurrentStation();
-    super.onBackPressed();
+    // super.onBackPressed(); // issue 167
+    dismiss();
   }
 }
 

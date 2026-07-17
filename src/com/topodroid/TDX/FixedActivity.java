@@ -426,7 +426,7 @@ public class FixedActivity extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE 
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( mImportAppNr > 1 && p++ == pos ) { // IMPORT APP
       int app = TDSetting.mGeoImportApp; // app cannot be 0 because mImportFlag > 0 
       do { 
@@ -470,7 +470,7 @@ public class FixedActivity extends Activity
     //   doHelp();
     //   return;
     // } else if ( b == mBtClose ) {
-    //   super.onBackPressed();
+    //   super.onBackPressed(); // FIXME issue 167
     //   return;
     // }
 
@@ -975,7 +975,7 @@ public class FixedActivity extends Activity
         doHelp();
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed();
+        super.onBackPressed(); // FIXME issue 167
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

@@ -39,7 +39,7 @@ class TriShot
   TriShot sibling;  // sibling shot with same stations
   ArrayList< DBlock > blocks;
   AverageLeg mAvgLeg;
-  TriCluster cluster;
+  // TriCluster mCluster; // TRILATERATION
 
   // void dump()
   // {
@@ -76,7 +76,7 @@ class TriShot
     blocks.add( blk );
     mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
     mAvgLeg.set( blk );
-    cluster = null;
+    // mCluster = null; // TRILATERATION
   }
 
   /** @return the shot length

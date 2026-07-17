@@ -15,6 +15,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDLog;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.R;
 
 // import android.app.Activity;
@@ -22,6 +23,9 @@ import android.app.Dialog;
 // import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
+
+import android.window.OnBackInvokedDispatcher;
+import android.window.OnBackInvokedCallback;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -41,6 +45,8 @@ import android.widget.TextView;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import androidx.annotation.RequiresApi;
+
 
 public class MyDialog extends Dialog
                       // implements View.OnClickListener
@@ -48,6 +54,29 @@ public class MyDialog extends Dialog
   protected final Context mContext;
   protected final TopoDroidApp mApp;
   private String mHelpPage = null;
+
+  // issua 167 - this should be implemente from API 33 onward
+  @RequiresApi( 36 )
+  private static class Api33
+  {
+    private static final java.util.Map< MyDialog, OnBackInvokedCallback > sCallbacks = new java.util.WeakHashMap<>();
+
+    static void registerBack( MyDialog d )
+    {
+      OnBackInvokedCallback cb = d::onBackPressed;
+      sCallbacks.put( d, cb );
+      d.getOnBackInvokedDispatcher().registerOnBackInvokedCallback( OnBackInvokedDispatcher.PRIORITY_DEFAULT, cb );
+    }
+
+    static void unregisterBack( MyDialog d )
+    {
+      OnBackInvokedCallback cb = sCallbacks.remove( d );
+      if ( cb != null ) {
+        d.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback( cb );
+      }
+    }
+  }
+  
 
   /** cstr
    * @param context       context
@@ -167,9 +196,9 @@ public class MyDialog extends Dialog
         UserManualActivity.showHelpPage( mContext, mHelpPage );
       }
       return true;
-    } else if ( code == KeyEvent.KEYCODE_BACK ) {
-      onBackPressed(); // issue 167
-      // ev.startTracking();
+    } else if ( TDandroid.BELOW_API_36 && code == KeyEvent.KEYCODE_BACK ) { // issue 167
+      onBackPressed(); 
+      ev.startTracking();
       return true;
     }
     return false;
@@ -179,10 +208,10 @@ public class MyDialog extends Dialog
   public boolean onKeyUp( int code, KeyEvent ev )
   {
     TDLog.v("My Dialog key up: code " + code );
-    if ( code == KeyEvent.KEYCODE_BACK ) {
-      // if ( ev.isTracking() && ! ev.isCanceled() ) {
+    if ( TDandroid.BELOW_API_36 && code == KeyEvent.KEYCODE_BACK ) {
+      if ( ev.isTracking() && ! ev.isCanceled() ) {
         return true;
-      // }
+      }
     }
     return false;
   }
@@ -216,16 +245,24 @@ public class MyDialog extends Dialog
   //   TDLog.v("DIALOG onContentChanged");
   // }
 
+  @Override
   public void onAttachedToWindow()
   {
     // TDLog.v("DIALOG onAttachedToWindow");
     if ( mApp != null ) mApp.pushDialog( this );
+    if ( TDandroid.AT_LEAST_API_36 ) {
+      Api33.registerBack( this );
+    }
   }
 
+  @Override
   public void onDetachedFromWindow()
   {
     // TDLog.v("DIALOG onDetachedFromWindow");
     if ( mApp != null ) mApp.popDialog( );
+    if ( TDandroid.AT_LEAST_API_36 ) {
+      Api33.unregisterBack( this );
+    }
   }
 
   /** (re)do the initialization

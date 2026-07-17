@@ -1019,7 +1019,7 @@ public class ShotWindow extends Activity
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217
       TopoDroidApp.mShotWindow = null;
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
 
     } else if ( p++ == pos ) { // SURVEY ACTIVITY
       Intent intent = new Intent( this, SurveyWindow.class );
@@ -1714,7 +1714,7 @@ public class ShotWindow extends Activity
       // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
-      super.onBackPressed(); 
+      super.onBackPressed();  // FIXME issue 167
     } else if ( doubleBack ) {
       // TDLog.v( TAG + "on back pressed - double back execute");
       if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -1723,7 +1723,7 @@ public class ShotWindow extends Activity
       // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       TopoDroidApp.mShotWindow = null;
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else {
       // TDLog.v( TAG + "on back pressed - double back post runnable");
       doubleBack = true;
@@ -2942,7 +2942,7 @@ public class ShotWindow extends Activity
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) issue 167
         onBackPressed();
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)

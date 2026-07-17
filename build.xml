@@ -116,6 +116,7 @@
     <!-- GEMMA3
         <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar:libjars/genai-0.10.32.jar" />
     -->
+        <!-- property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar:libjars/support-annotations-28.0.0.jar" / -->
         <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar" />
 
     <property name="build.is.signing.debug" value="false" />
@@ -141,6 +142,7 @@
         <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/genai-0.10.32.jar:libjars/tasks-core-0.10.32.jar:bin/classes" />
    -->
    <!-- -Xlint:deprecation -->
+   <!-- property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/support-annotations-28.0.0.jar:bin/classes" / -->
         <property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:bin/classes" />
 
     <import file="${sdk.dir}/tools/ant/build.xml" />

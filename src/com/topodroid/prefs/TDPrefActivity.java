@@ -178,8 +178,8 @@ public class TDPrefActivity extends Activity
       }
     }
     setResult( RESULT_OK, null ); // result is always OK
+    super.onBackPressed(); // FIXME issue 167
     // finish();
-    super.onBackPressed();
   }
 
   // ---------------------------------------------------------------------

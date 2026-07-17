@@ -473,7 +473,7 @@ public class CalibActivity extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed();
+        super.onBackPressed(); // FIXME issue 167
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
@@ -521,7 +521,7 @@ public class CalibActivity extends Activity
     // TDToast.make( item.toString() );
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( TDInstance.calib != null ) {
         new ExportDialogCalib( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();

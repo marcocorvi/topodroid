@@ -169,10 +169,10 @@ public class GraphPaperScaleActivity extends Activity
   @Override
   public void onBackPressed()
   {
-    super.onBackPressed();
     mSurface.stopDrawingThread();
     setResult( RESULT_CANCELED );
-    finish();
+    super.onBackPressed(); // FIXME issue 167
+    // finish();
   }
 
   /** display help

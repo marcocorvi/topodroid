@@ -246,12 +246,6 @@ public class AIdialog extends MyDialog
     v.setEnabled( true );
   }
 
-  // @Override
-  // public void onBackPressed()
-  // {
-  //   super.onBackPressed();
-  // }
-
   /** show the response in the answer textbox
    * @param response  response
    */
@@ -283,7 +277,8 @@ public class AIdialog extends MyDialog
   public void onBackPressed()
   {
     mParent.setAIbuttonEnabled( true );
-    super.onBackPressed();
+    // super.onBackPressed(); // issue 167
+    dismiss();
   }
 
 }

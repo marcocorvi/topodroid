@@ -167,7 +167,7 @@ public class SensorListActivity extends Activity
         /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed();
+        super.onBackPressed(); // FIXME issue 167
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

@@ -126,12 +126,5 @@ class DeviceAddDialog extends MyDialog
     dismiss();
   }
 
-  // @SuppressWarnings("deprecated")
-  // @Override
-  // public void onBackPressed()
-  // {
-  //   super.onBackPressed();
-  // }
-
 }
 

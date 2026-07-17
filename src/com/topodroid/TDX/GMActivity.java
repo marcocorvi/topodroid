@@ -1526,7 +1526,7 @@ public class GMActivity extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed();
+        super.onBackPressed(); // FIXME issue 167
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
@@ -1579,7 +1579,7 @@ public class GMActivity extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( p++ == pos ) { // DISPLAY
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
       setMenuAdapter( getResources() );

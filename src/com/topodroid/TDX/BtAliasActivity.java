@@ -243,7 +243,7 @@ public class BtAliasActivity extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed();
+        super.onBackPressed(); // FIXME issue 167
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.BtAliasActivity );

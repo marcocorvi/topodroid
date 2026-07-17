@@ -251,8 +251,7 @@ class ScanShotEditDialog extends MyDialog
     } else if ( b == mButtonDelete ) {
       mParent.deleteScanShot( mBlk );
     } 
-    dismiss();
-    // onBackPressed();
+    onBackPressed();
   }
 
   // @SuppressWarnings("deprecated")
@@ -261,7 +260,8 @@ class ScanShotEditDialog extends MyDialog
   // {
   //   // if ( CutNPaste.dismissPopup() ) return;
   //   // if ( MyKeyboard.close( mKeyboard ) ) return;
-  //   super.onBackPressed();
+  //   // super.onBackPressed(); // issue 167
+  //   dismiss();
   // }
 
 }

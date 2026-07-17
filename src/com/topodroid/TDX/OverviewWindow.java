@@ -1392,7 +1392,7 @@ public class OverviewWindow extends ItemDrawer
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed();
+        super.onBackPressed(); // FIXME issue 167
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
@@ -1431,7 +1431,7 @@ public class OverviewWindow extends ItemDrawer
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( TDLevel.overExpert && p++ == pos ) { // EXPORT THERION
       String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
       new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, fullname, null ).show();

@@ -75,6 +75,9 @@ public class TDandroid
   final static public boolean BELOW_API_30 = ( Build.VERSION.SDK_INT < 30 ) ; // Build.VERSION_CODES.R );
   final static public boolean BELOW_API_31 = ( Build.VERSION.SDK_INT < 31 ) ; // Build.VERSION_CODES.S ); Android-12
   final static public boolean BELOW_API_33 = ( Build.VERSION.SDK_INT < 33 ) ; // Android-13
+  // final static public boolean BELOW_API_34 = ( Build.VERSION.SDK_INT < 34 ) ; // Android-14
+  // final static public boolean BELOW_API_35 = ( Build.VERSION.SDK_INT < 35 ) ; // Android-15
+  final static public boolean BELOW_API_36 = ( Build.VERSION.SDK_INT < 36 ) ; // Android-16
 
   // final static public boolean ABOVE_API_16 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLYBEAN );
   final static public boolean ABOVE_API_21 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP );
@@ -90,6 +93,9 @@ public class TDandroid
   final static public boolean AT_LEAST_API_24 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ); // Android-6 Nougat
   // final static public boolean AT_LEAST_API_31 = ( Build.VERSION.SDK_INT >= 31 ); 
   final static public boolean AT_LEAST_API_33 = ( Build.VERSION.SDK_INT >= 33 );
+  // final static public boolean AT_LEAST_API_34 = ( Build.VERSION.SDK_INT >= 34 );
+  // final static public boolean AT_LEAST_API_35 = ( Build.VERSION.SDK_INT >= 35 );
+  final static public boolean AT_LEAST_API_36 = ( Build.VERSION.SDK_INT >= 36 );
 
   final static public boolean PRIVATE_STORAGE = false;
 

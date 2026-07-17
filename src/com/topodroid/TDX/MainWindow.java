@@ -1424,11 +1424,11 @@ public class MainWindow extends Activity
       return;
     }
     if ( TDSetting.mSingleBack ) {
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else {
       doubleBack = true;
       doubleBackToast = TDToast.makeToast( R.string.double_back );
@@ -1438,7 +1438,7 @@ public class MainWindow extends Activity
 
   public void doCloseApp()
   {
-    super.onBackPressed();
+    super.onBackPressed(); // FIXME issue 167
   }
 
   // ------------------------------------------------------------------

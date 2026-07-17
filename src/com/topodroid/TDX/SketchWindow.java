@@ -872,7 +872,7 @@ public class SketchWindow extends ItemDrawer
   void doClose()
   {
     // TDLog.v( "menu close ...");
-    super.onBackPressed();
+    super.onBackPressed(); // FIXME issue 167
   }
 
   // @note doSaveTdr( ) is already called by onPause
@@ -881,12 +881,12 @@ public class SketchWindow extends ItemDrawer
   {
     // if ( dismissPopups() != DISMISS_NONE ) return;
     if ( TDSetting.mSingleBack ) {
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       // TDLog.v( "double back pressed ...");
-      super.onBackPressed();
+      super.onBackPressed(); // FIXME issue 167
     } else {
       doubleBack = true;
       doubleBackToast = TDToast.makeToast( R.string.double_back );
@@ -2400,7 +2400,7 @@ public class SketchWindow extends ItemDrawer
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) issue 167
         onBackPressed();
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
