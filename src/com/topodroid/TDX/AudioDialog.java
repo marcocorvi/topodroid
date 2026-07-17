@@ -262,7 +262,8 @@ class AudioDialog extends MyDialog
   {
     stopRecPlay( false );
     if ( hadNoFile && hasFile ) deleteAudio();
-    super.onBackPressed();
+    // super.onBackPressed(); // issue 167
+    dismiss();
   }
 
   /** delete audio file

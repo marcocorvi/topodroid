@@ -272,6 +272,10 @@ public class MainWindow extends Activity
 
   private void startSurveyDialog()
   {
+    if ( ! DataHelper.isDBready() ) { // issue 168
+      TDToast.makeWarn( R.string.db_not_ready );
+      return;
+    }
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
     (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
   }
@@ -1868,6 +1872,10 @@ public class MainWindow extends Activity
    */
   public void doImport( String type, ImportData data )
   {
+    if ( ! DataHelper.isDBready() ) { // issue 168
+      TDToast.makeWarn( R.string.db_not_ready );
+      return;
+    }
     int index = TDConst.surveyImportFormatIndex( type ); // get the format index as in TDConst
     TDLog.v( "Main import type " + type + " index " + index );
     selectImportFromProvider( index, data );

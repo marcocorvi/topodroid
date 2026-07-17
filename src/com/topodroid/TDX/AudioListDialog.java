@@ -213,7 +213,8 @@ class AudioListDialog extends MyDialog
   public void onBackPressed()
   {
     releaseMP();
-    super.onBackPressed();
+    // super.onBackPressed(); // issue 167
+    dismiss();
   }
 
   /** release the media player

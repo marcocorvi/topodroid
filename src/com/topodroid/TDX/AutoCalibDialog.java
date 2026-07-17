@@ -503,7 +503,8 @@ public class AutoCalibDialog extends MyDialog
     if ( mPw != null ) {
       mPw.close();
     }
-    super.onBackPressed();
+    // super.onBackPressed(); // issue 167
+    dismiss();
   }
 
   // public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, TDVector bg2, TDMatrix ag2, TDVector bm2, TDMatrix am2, TDVector nl2 )

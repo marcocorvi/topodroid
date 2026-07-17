@@ -131,7 +131,8 @@ class TeamDialog extends MyDialog
   // @Override
   // public void onBackPressed()
   // {
-  //   super.onBackPressed();
+  //   // super.onBackPressed(); // issue 167
+  //   dismiss();
   // }
 
 }
