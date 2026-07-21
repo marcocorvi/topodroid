@@ -11,5 +11,5 @@ void main() {
   gl_Position = uMVPMatrix * aPosition;
   gl_PointSize = uPointSize;
   vColor   = aColor;
-  vColor.a = 1.0f;
+  vColor.a = 1.0;
 }
