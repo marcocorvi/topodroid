@@ -282,7 +282,7 @@ class ParserTopoRobot extends ImportParser
     } else {
       pw.println( "    -5     1   1   1   1        0.00        0.00        0.00     1     0" );
     }
-    pw.println( String.format("    -4     1   1   1   1 %s TopoDroid v. %s", TDUtil.currentDateTimeTRobot(), TDVersion.string() ) );
+    pw.println( String.format("    -4     1   1   1   1 %s %s v. %s", TDUtil.currentDateTimeTRobot(), TDVersion.APP_NAME, TDVersion.string() ) );
     pw.println( "    -3     1   1   1   1");
     for ( TRobotTrip trip : trips ) pw.println( trip.toString() );
     // for ( TRobotCode code : codes ) pw.println( code.toString() );

@@ -212,7 +212,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write( "  id=\"svg46\"\n" );
       out.write( "  sodipodi:docname=\"" + filename + "\"\n" );
       out.write( "  inkscape:version=\"0.92.4 (5da689c313, 2019-01-14)\">\n" );
-      out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
+      out.write( "<!-- SVG created by " + TDVersion.APP_NAME + " v. " + TDVersion.string() + " -->\n" );
       out.write(    metadata );
       out.write(      rdf );
       out.write(        dc_format );

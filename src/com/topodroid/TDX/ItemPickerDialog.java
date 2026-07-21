@@ -66,7 +66,7 @@ class ItemPickerDialog extends MyDialog
   private  Button mBTpoint;
   private  Button mBTline;
   private  Button mBTarea;
-  private  Button mBTsize;     // FIXME_SCALE
+  // private  Button mBTsize;     // FIXME_SCALE
   // private  Button mBTleft;
   // private  Button mBTright;
   // private  Button mBTcancel;
@@ -197,8 +197,8 @@ class ItemPickerDialog extends MyDialog
     mBTpoint = (Button) findViewById(R.id.item_point);
     mBTline  = (Button) findViewById(R.id.item_line );
     mBTarea  = (Button) findViewById(R.id.item_area );
-    mBTsize  = (Button) findViewById(R.id.size);     // FIXME_SCALE
-    mBTsize.setOnClickListener( this );
+    // mBTsize  = (Button) findViewById(R.id.size);     // FIXME_SCALE
+    // mBTsize.setOnClickListener( this );
     mLayoutProperties = (LinearLayout) findViewById( R.id.layout_properties );
     // mBTleft  = (Button) findViewById(R.id.item_left );
     // mBTright = (Button) findViewById(R.id.item_right );
@@ -537,7 +537,7 @@ class ItemPickerDialog extends MyDialog
     switch ( type ) {
       case SymbolType.POINT: 
         // mLayoutProperties.setVisibility( View.VISIBLE );
-        mBTsize.setVisibility( View.VISIBLE );
+        // mBTsize.setVisibility( View.VISIBLE ); // FXIME_SCALE
         mSeekBar.setVisibility( View.VISIBLE );
         if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
@@ -552,7 +552,7 @@ class ItemPickerDialog extends MyDialog
         break;
       case SymbolType.LINE: 
         // mLayoutProperties.setVisibility( View.GONE );
-        mBTsize.setVisibility( View.GONE );
+        // mBTsize.setVisibility( View.GONE ); // FXIME_SCALE
         mSeekBar.setVisibility( View.GONE );
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
@@ -567,7 +567,7 @@ class ItemPickerDialog extends MyDialog
         break;
       case SymbolType.AREA: 
         // mLayoutProperties.setVisibility( View.GONE );
-        mBTsize.setVisibility( View.GONE );
+        // mBTsize.setVisibility( View.GONE ); // FXIME_SCALE
         mSeekBar.setVisibility( View.VISIBLE );
         if ( mAreaAdapter != null /* && TDLevel.overBasic */ ) {
           // mAreaPos = index;
@@ -742,13 +742,13 @@ class ItemPickerDialog extends MyDialog
           setTypeFromCurrent( );
         }
       }
-    } else if ( vid == R.id.size ) { // FIXME_SCALE
-      ++ mScale;
-      if ( mScale > PointScale.SCALE_XL ) {
-        mScale = PointScale.SCALE_XS;
-      }
-      if ( mParent.get() != null && ! mParent.get().isFinishing() ) mParent.get().setPointScale( mScale );
-      setTheTitle();
+    // } else if ( vid == R.id.size ) { // FIXME_SCALE
+    //   ++ mScale;
+    //   if ( mScale > PointScale.SCALE_XL ) {
+    //     mScale = PointScale.SCALE_XS;
+    //   }
+    //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) mParent.get().setPointScale( mScale );
+    //   setTheTitle();
     }
 
     // if ( mRecent != null ) { // this select the symbol and closes the dialog

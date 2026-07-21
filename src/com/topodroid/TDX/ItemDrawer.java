@@ -39,7 +39,7 @@ abstract class ItemDrawer extends Activity
   int mCurrentArea  = -1;
   protected int mSavedCurrentPoint = -1;
 
-  protected int mPointScale;
+  // protected int mPointScale;
   protected int mLinePointStep = 1;
 
   protected int mSymbol = SymbolType.LINE; // kind of symbol being drawn
@@ -57,12 +57,12 @@ abstract class ItemDrawer extends Activity
   static float mRecentDimX;
   static float mRecentDimY;
 
-  void setPointScale( int scale )
-  {
-    if ( scale >= PointScale.SCALE_XS && scale <= PointScale.SCALE_XL ) mPointScale = scale;
-  }
+  // void setPointScale( int scale )
+  // {
+  //   if ( scale >= PointScale.SCALE_XS && scale <= PointScale.SCALE_XL ) mPointScale = scale;
+  // }
 
-  int getPointScale() { return mPointScale; }
+  int getPointScale() { return 0; /* mPointScale; */ }
 
   // --------------------------------------------------------------
   // MOST RECENT SYMBOLS

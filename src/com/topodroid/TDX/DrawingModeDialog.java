@@ -50,6 +50,7 @@ class DrawingModeDialog extends MyDialog
     // private CheckBox mCBtext  = null;
 
     private CheckBox mCBscaleRef; // whether to show the scale reference bar
+    private CheckBox mCBsections; // whether to show the xsections outline
 
     // private Button mBtnOK;
     // private Button mBtnBack;
@@ -79,6 +80,7 @@ class DrawingModeDialog extends MyDialog
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
       mCBscrap   = (CheckBox) findViewById(R.id.cb_mode_scrap);
+      mCBsections= (CheckBox) findViewById(R.id.cb_mode_sections);
 
       if ( TDSetting.mWithLevels > 0 ) {
         mCBfloor = (CheckBox) findViewById(R.id.cb_layer_floor);
@@ -104,6 +106,7 @@ class DrawingModeDialog extends MyDialog
       }
 
       mCBscaleRef = (CheckBox) findViewById(R.id.cb_mode_scale_ref);
+      mCBsections = (CheckBox) findViewById(R.id.cb_mode_sections);
       // mCBscrap = (CheckBox) findViewById(R.id.cb_scrap);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
@@ -115,6 +118,7 @@ class DrawingModeDialog extends MyDialog
         mCBlatest.setVisibility( View.GONE );
         mCBfixed.setVisibility( View.GONE );
         mCBscrap.setVisibility( View.GONE );
+        mCBsections.setVisibility( View.GONE );
         // mCBscrap.setVisibility( View.GONE );
       } else {
         mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
@@ -137,6 +141,7 @@ class DrawingModeDialog extends MyDialog
       // mCBelevation.setChecked( (mode & DisplayMode.DISPLAY_ELEVATION) != 0 );
       mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
       mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALEBAR) != 0);
+      mCBsections.setChecked((mode & DisplayMode.DISPLAY_SECTIONS) != 0);
     }
 
     // called only if mWithLevels > 0
@@ -173,6 +178,7 @@ class DrawingModeDialog extends MyDialog
         // if ( mCBelevation.isChecked() ) mode |= DisplayMode.DISPLAY_ELEVATION;
         if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
         if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
+        if ( mCBsections.isChecked() )mode |= DisplayMode.DISPLAY_SECTIONS;
         // TDLog.e( "Mode " + mode );
         mSurface.setDisplayMode( mode );
         // if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {

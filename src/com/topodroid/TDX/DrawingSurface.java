@@ -780,12 +780,16 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       // setStationPaint( st, saved, commandManager );
       if ( commandManager == mCommandManager1 ) {
         st0 = mCommandManager2.getStation( st.getName() );
-        st0.setPathPaint( BrushManager.fixedStationActivePaint );
+        if ( st0 != null ) {
+          st0.setPathPaint( BrushManager.fixedStationActivePaint );
+        }
         mCommandManager2.setCurrentStationName( st0 );
         // setStationPaint( st0, saved, mCommandManager2 );
       } else {
         st0 = mCommandManager1.getStation( st.getName() );
-        st0.setPathPaint( BrushManager.fixedStationActivePaint );
+        if ( st0 != null ) {
+          st0.setPathPaint( BrushManager.fixedStationActivePaint );
+        } 
         mCommandManager1.setCurrentStationName( st0 );
         // setStationPaint( st0, saved, mCommandManager1 );
       }
@@ -927,7 +931,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     cmd.dropLastSplayPath( );
   }
 
-  /** set the north line
+  /** set the north arrow line
    * @param path  new north line 
    * @note  used only by DrawingWindow for H-Section
    */

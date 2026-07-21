@@ -74,19 +74,22 @@ public class DrawingLinePath extends DrawingPointLinePath
   /** cstr
    * @param line_type   type of the line
    * @param scrap       index of the scrap of this line
+   * @param scale       line scale
    */
-  public DrawingLinePath( int line_type, int scrap )
+  public DrawingLinePath( int line_type, int scrap, int scale )
   {
     // visible = true,  closed = false
     super( DrawingPath.DRAWING_PATH_LINE, true, false, scrap );
     // mCnt = ++ mCount;
-    // TDLog.Log( TDLog.LOG_PATH, "DrawingLinePath " + mCnt + " cstr type " + line_type );
+    TDLog.v( "Drawing Line Path cstr: type " + line_type + " scale " + scale );
 
     mLineType = line_type;
     mReversed = false;
     mOutline  = ( BrushManager.isLineWall(mLineType) )? OUTLINE_OUT : OUTLINE_NONE;
     setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
-    mLevel     = BrushManager.getLineLevel( mLineType );
+    mLevel    = BrushManager.getLineLevel( mLineType );
+    mScale    = scale;
+    setScale( scale );
   }
 
   /** factory: deserialize a line from a data stream
@@ -103,6 +106,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     int level = DrawingLevel.LEVEL_DEFAULT;
     int scrap = 0;
     int lside = -1;
+    int scale = 0;
     String thname, options;
     String group = null;
     try {
@@ -115,6 +119,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       if ( version >= 602055 ) lside = dis.readInt();
       if ( version >= 401090 ) level = dis.readInt();
       if ( version >= 401160 ) scrap = dis.readInt();
+      if ( version >= 604088 ) scale = dis.readInt();
       options = dis.readUTF();
 
       // BrushManager.tryLoadMissingLine( thname ); // LOAD_MISSING
@@ -126,7 +131,7 @@ public class DrawingLinePath extends DrawingPointLinePath
         options = (options != null)? options + " -symbol " + thname : "-symbol " + thname;
       }
 
-      DrawingLinePath ret = new DrawingLinePath( type, scrap );
+      DrawingLinePath ret = new DrawingLinePath( type, scrap, scale );
       ret.mOutline  = outline;
       ret.mLevel    = level;
       ret.mOptions  = options;
@@ -238,6 +243,26 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
     }
   }
+  
+  @Override
+  void setScale( int scale )
+  {
+    float width = BrushManager.WIDTH_FIXED;
+    switch ( scale ) {
+      case -2: width /= 2; break;
+      case -1: width /= 1.4; break;
+      case  1: width *= 1.7; break;
+      case  2: width *= 3.0; break;
+    }
+    TDLog.v("Line set scale " + width );
+    mPaint.setStrokeWidth( width );
+  }
+
+  // @override
+  // void resetPath( float f )
+  // {
+  //   mPaint.setStrokeWidth( f );
+  // }
 
   /** split the line at a point
    * @param lp0   splitting point
@@ -410,6 +435,16 @@ public class DrawingLinePath extends DrawingPointLinePath
    */
   public String getFullThNameEscapedColon() { return  BrushManager.getLineFullThNameEscapedColon( mLineType ); }
 
+  /** set the line paint
+   * @param paint  line piant copyed in this line paint 
+   */
+  @Override
+  void setPathPaint( Paint paint )
+  {
+    mPaint = new Paint( paint );
+    setScale( mScale );
+  }
+
   /** draw the line with the specified paint
    * @param canvas   canvas
    * @param matrix   transform matrix
@@ -427,6 +462,16 @@ public class DrawingLinePath extends DrawingPointLinePath
       canvas.drawPath( mTransformedPath, paint );
     }
   }
+
+  // public void drawWithPaint( Canvas canvas, Matrix matrix, RectF bbox )
+  // {
+  //   if ( intersects( bbox ) ) 
+  //   {
+  //     mTransformedPath = new Path( mPath );
+  //     mTransformedPath.transform( matrix );
+  //     canvas.drawPath( mTransformedPath, mPaint );
+  //   }
+  // }
 
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
@@ -547,6 +592,8 @@ public class DrawingLinePath extends DrawingPointLinePath
         dos.writeInt( mLevel );
       // if ( version >= 401160 )
         dos.writeInt( (scrap >= 0)? scrap : mScrap );
+      // if ( version >= 604088 )
+        dos.writeInt( mScale );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       
       int npt = size(); // number of line points

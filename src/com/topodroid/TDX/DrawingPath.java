@@ -77,6 +77,7 @@ public class DrawingPath extends RectF
 
   protected Path mPath;
   protected Path mTransformedPath;
+  protected int mScale;
 
   Paint mPaint;          // drawing path paint
   public int mType;      // path type
@@ -145,6 +146,7 @@ public class DrawingPath extends RectF
   public DrawingPath( int type, DBlock blk, int scrap ) // TH2EDIT package
   {
     mType    = type;
+    mScale   = 0;
     mOptions = null;
     mBlock   = blk; 
     mScrap   = scrap;
@@ -159,6 +161,26 @@ public class DrawingPath extends RectF
     mPlotName = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
+
+
+  /** set the scale index
+   * @param scale   new scale index
+   */
+  void setScale( int scale )
+  {
+    if ( scale != mScale ) {
+      mScale = scale;
+      resetPath( 1.0f );
+    }
+  }
+
+  /** get the scale index
+   * @return the scale index
+   */
+  public int getScale() { return mScale; }
+
+  // to be overridden
+  void resetPath( float scale ) { /* nothing */ }
 
   // boolean isDeletable( ) 
   // {

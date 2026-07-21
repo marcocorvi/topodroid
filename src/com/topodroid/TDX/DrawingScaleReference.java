@@ -36,7 +36,7 @@ class DrawingScaleReference
   private static final float MAX_WIDTH_PERCENT = 1.0f;
   private static final int HEIGHT_BARS = 6;
 
-  private Point mLocation;
+  private Point mLocation; // where to draw the scale bar
   private float mMaxWidthPercent;
   private Paint mPaint;
   // private String mUnits;
@@ -61,8 +61,8 @@ class DrawingScaleReference
 
   /** cstr
    * @param p   paint used to draw the scale reference. If null, a default painter will be used
-   * @param loc bottom-right location of the scale reference on the screen
-   *            (negative values are allowed with the meaning of negative offset from screen bottom-right)
+   * @param loc negative-Y: bottom-right location of the scale reference on the screen
+   *            positive-Y" top-right location
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    * @param decl declination [degrees]
@@ -81,8 +81,8 @@ class DrawingScaleReference
       mPaint = p;
     }
 
-    if(widthPercent < MIN_WIDTH_PERCENT) mMaxWidthPercent = MIN_WIDTH_PERCENT;
-    else if(widthPercent > MAX_WIDTH_PERCENT) mMaxWidthPercent = MAX_WIDTH_PERCENT;
+    if (widthPercent < MIN_WIDTH_PERCENT) mMaxWidthPercent = MIN_WIDTH_PERCENT;
+    else if (widthPercent > MAX_WIDTH_PERCENT) mMaxWidthPercent = MAX_WIDTH_PERCENT;
     else mMaxWidthPercent = widthPercent;
 
     mHasDecl = (Math.abs(decl) > 0.01); 
@@ -169,8 +169,6 @@ class DrawingScaleReference
     {
       float canvasUnit = DrawingUtil.SCALE_FIX * zoom; /* Length of 1 unit at zoom */
 
-      float arrowlen = (float)canvas.getWidth() / 10;
-      float arrowtip = arrowlen / 5;
 
       /* Calculate reference scale */
       float referenceLen = getReferenceLength( canvas.getWidth(), canvasUnit, sketch_unit );
@@ -188,18 +186,27 @@ class DrawingScaleReference
         float locY = (locy > 0) ? locy : canvas.getHeight() + locy;
 	// TDLog.v( "reference " + referenceLen + units );
 
-        canvas.drawLine( locX, locY, locX + canvasLen, locY, mPaint);
-        canvas.drawLine( locX, locY, locX, locY - HEIGHT_BARS, mPaint);
-        canvas.drawLine( locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, mPaint);
-        canvas.drawText( refstr, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
+        float arrowlen = (float)canvas.getWidth() / 10;
+        // if ( landscape ) {
+        //   locX *= 8;
+        //   arrowlen = (float)canvas.getHeight() / 10; // /= 4;
+        // }
+        float arrowtip = arrowlen / 5;
 
+        float x = 2 * locX;
+        float y = locY;
+
+        canvas.drawLine( x, y, x + canvasLen, y, mPaint);
+        canvas.drawLine( x, y, x, y - HEIGHT_BARS, mPaint);
+        canvas.drawLine( x + canvasLen, y, x + canvasLen, y - HEIGHT_BARS, mPaint);
+        canvas.drawText( refstr, x + canvasLen / 2, y - HEIGHT_BARS, mPaint);
+
+        // North arrow line
 	if ( landscape ) {
-	  float x = locX + arrowlen;
-          float y = locY - 8 * HEIGHT_BARS;	  
+	  x = locX/2 + arrowlen;
+          y = locY + 0.8f * arrowlen; // - 8 * HEIGHT_BARS;	  
           if ( mSdecl > 0 ) y -= arrowlen * mSdecl;
-          canvas.drawLine( x, y, x - arrowlen, y, mPaint);
-          canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, mPaint);
-          canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, mPaint);
+          drawArrowTipLandscape( canvas, x, y, arrowlen, arrowtip, mPaint );
           if ( mHasDecl ) {
             float xd = x - arrowlen * mCdecl;
             float yd = y + arrowlen * mSdecl;
@@ -209,12 +216,10 @@ class DrawingScaleReference
           //   canvas.drawLine( x, y, x - TDMath.cosd( TDAzimuth.mRefAzimuth ), y - TDMath.sind( TDAzimuth.mRefAzimuth ), mPaint );
           // }
         } else {
-          float x = locX;
-          float y = locY - 4 * HEIGHT_BARS;
+          x = locX/2 + HEIGHT_BARS;
+          y = locY + 0.4f * arrowlen; // - 4 * HEIGHT_BARS;
           if ( mSdecl > 0 ) x += arrowlen * mSdecl;
-          canvas.drawLine( x, y, x, y - arrowlen, mPaint);
-          canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
-          canvas.drawLine( x+arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
+          drawArrowTipPortrait( canvas, x, y, arrowlen, arrowtip, mPaint );
           if ( mHasDecl ) {
             float xd = x - arrowlen * mSdecl;
             float yd = y - arrowlen * mCdecl;
@@ -226,6 +231,22 @@ class DrawingScaleReference
         }
       }
     }
+  }
+
+  /** draw tip of North arrow
+   */
+  private void drawArrowTipLandscape( Canvas canvas, float x, float y, float arrow_len, float arrow_tip, Paint paint )
+  {
+    canvas.drawLine( x, y, x - arrow_len, y, paint);
+    canvas.drawLine( x - arrow_len + arrow_tip, y - arrow_tip, x - arrow_len, y, paint);
+    canvas.drawLine( x - arrow_len + arrow_tip, y + arrow_tip, x - arrow_len, y, paint);
+  }
+
+  private void drawArrowTipPortrait( Canvas canvas, float x, float y, float arrow_len, float arrow_tip, Paint paint )
+  {
+    canvas.drawLine( x, y, x, y - arrow_len, paint);
+    canvas.drawLine( x - arrow_tip, y - arrow_len + arrow_tip, x, y - arrow_len, paint);
+    canvas.drawLine( x + arrow_tip, y - arrow_len + arrow_tip, x, y - arrow_len, paint);
   }
 
   /** display the scale reference
@@ -256,9 +277,6 @@ class DrawingScaleReference
     {
       float canvasUnit = DrawingUtil.SCALE_FIX * zoom; /* Length of 1 unit at zoom */
 
-      float arrowlen = (float)canvas.getWidth() / 10;
-      float arrowtip = arrowlen / 5;
-
       /* Calculate reference scale */
       float referenceLen = getReferenceLength( canvas.getWidth(), canvasUnit, sketch_unit );
 
@@ -277,17 +295,25 @@ class DrawingScaleReference
         float locY = (locy > 0) ? locy : canvas.getHeight() + locy;
 	// TDLog.v( "reference " + referenceLen + units );
 
+        float arrowlen = (float)canvas.getWidth() / 10;
+        // if ( landscape ) {
+        //   locX *= 8;
+        //   arrowlen = (float)canvas.getHeight() / 10; // /= 4;
+        // }
+        float arrowtip = arrowlen / 5;
+
+        float x = 2 * locX;
+        float y = locY;
+
         canvas.drawLine( locX, locY, locX + canvasLen, locY, paint);
         canvas.drawLine( locX, locY, locX, locY - HEIGHT_BARS, paint);
         canvas.drawLine( locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, paint);
         canvas.drawText( refstr, locX + canvasLen / 2, locY - HEIGHT_BARS, paint);
 
 	if ( landscape ) {
-	  float x = locX + arrowlen;
-          float y = locY - 8 * HEIGHT_BARS;	  
-          canvas.drawLine( x, y, x - arrowlen, y, paint);
-          canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, paint);
-          canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, paint);
+	  x = locX/2 + arrowlen;
+          y = locY + 0.8f * arrowlen; // - 8 * HEIGHT_BARS;	  
+          drawArrowTipLandscape( canvas, x, y, arrowlen, arrowtip, paint );
           if ( mHasDecl ) {
             float xd = x - arrowlen * mCdecl; // FIXME might be wrong
             float yd = y + arrowlen * mSdecl;
@@ -297,11 +323,9 @@ class DrawingScaleReference
           //   canvas.drawLine( x, y, x - TDMath.cosd( TDAzimuth.mRefAzimuth ), y - TDMath.sind( TDAzimuth.mRefAzimuth ), paint );
           // }
         } else {
-          float x = locX;
-          float y = locY - 4 * HEIGHT_BARS;
-          canvas.drawLine( x, y, x, y - arrowlen, paint);
-          canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, paint);
-          canvas.drawLine( x+arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, paint);
+          x = locX/2 + HEIGHT_BARS;
+          y = locY + 0.4f * arrowlen;
+          drawArrowTipPortrait( canvas, x, y, arrowlen, arrowtip, paint );
           if ( mHasDecl ) {
             float xd = x - arrowlen * mSdecl;
             float yd = y - arrowlen * mCdecl;

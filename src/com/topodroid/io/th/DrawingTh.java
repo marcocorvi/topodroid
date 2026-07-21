@@ -362,7 +362,7 @@ public class DrawingTh
             // TODO insert new line-path
             line = readLine( br );
             if ( ! line.equals( "endline" ) ) {  // FIXME may null pointer
-              path = new DrawingLinePath( lnType, scrap_idx );
+              path = new DrawingLinePath( lnType, scrap_idx, 0 ); // FIXME_SCALE
               path.setClosed( closed );
               path.setReversed( reversed );
               if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;

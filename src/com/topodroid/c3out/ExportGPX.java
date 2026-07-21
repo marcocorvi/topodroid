@@ -13,6 +13,7 @@ package com.topodroid.c3out;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDVersion;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Triangle3D;
 import com.topodroid.TDX.Vector3D;
@@ -101,7 +102,7 @@ public class ExportGPX extends ExportGeo
       PrintWriter pw = new PrintWriter( osw );
 
       pw.format(Locale.US, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-      pw.format(Locale.US, "<gpx version=\"1.1\" creator=\"TopoDroid\" xmlns=\"http://www.topografix.com/GPX/1/1\"\n"); 
+      pw.format(Locale.US, "<gpx version=\"1.1\" creator=\"%s %s\" xmlns=\"http://www.topografix.com/GPX/1/1\"\n", TDVersion.APP_NAME, TDVersion.string() ); 
       pw.format(Locale.US, "    xmlns:osmand=\"https://osmand.net\"\n"); 
       pw.format(Locale.US, "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"); 
       pw.format(Locale.US, "    xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n");

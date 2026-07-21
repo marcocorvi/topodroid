@@ -429,8 +429,8 @@ public class Scrap
     syncClearSelected();
 
     boolean is_split = false; // 20230118 local var "is_split"
-    DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
-    DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
+    DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx, line.mScale );
+    DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx, line.mScale );
     line1.setOptions( line.getOptions() );
     line2.setOptions( line.getOptions() );
 
@@ -514,8 +514,8 @@ public class Scrap
    */
   private void doSplitLine( DrawingLinePath line, LinePoint lp, EraseCommand eraseCmd )
   {
-    DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
-    DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
+    DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx, line.mScale );
+    DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx, line.mScale );
     line1.setOptions( line.getOptions() );
     line2.setOptions( line.getOptions() );
 
@@ -1719,7 +1719,7 @@ public class Scrap
   void addLineToLine( DrawingLinePath line1, DrawingLinePath line0 )
   {
     // TDLog.v( "add line to line" );
-    DrawingLinePath line = new DrawingLinePath( line0.mLineType, mScrapIdx );
+    DrawingLinePath line = new DrawingLinePath( line0.mLineType, mScrapIdx, line0.mScale );
     boolean added = false;
     try {
       boolean prepend = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
@@ -1987,7 +1987,7 @@ public class Scrap
     DrawingLinePath line2 = (DrawingLinePath)spmin.mItem;
 
     //
-    DrawingLinePath line = new DrawingLinePath( line2.mLineType, mScrapIdx );
+    DrawingLinePath line = new DrawingLinePath( line2.mLineType, mScrapIdx, line2.mScale );
     boolean appended = false;
     try {
       boolean reversed1 = ( pt1 == line1.mLast );
@@ -3031,9 +3031,10 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
-            cmd.draw( canvas, matrix, scale, bbox, xor_color );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
+              // Paint paint = new Paint( line.mPaint
+              line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 Paint paint = new Paint( BrushManager.mSectionPaint );
                 // paint.setColor( xor_color ^ paint.getColor() );
@@ -3046,6 +3047,8 @@ public class Scrap
                 float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
                 drawDirectionTick( canvas, matrix, line, lside*0.5f, paint ); // lside is divided by 2 to make it roughly long as in therion pdf
               }
+            } else {
+              cmd.draw( canvas, matrix, scale, bbox, xor_color );
             }
           }
         }
@@ -3054,9 +3057,9 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-              cmd.draw( canvas, matrix, scale, bbox, xor_color );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
+                line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   Paint paint = new Paint( BrushManager.mSectionPaint );
                   // paint.setColor( xor_color ^ paint.getColor() );
@@ -3069,6 +3072,8 @@ public class Scrap
                   float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
                   drawDirectionTick( canvas, matrix, line, lside*0.5f, paint );
                 }
+              } else {
+                cmd.draw( canvas, matrix, scale, bbox, xor_color );
               }
             }
           }

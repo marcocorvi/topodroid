@@ -45,7 +45,6 @@ public class DrawingPointPath extends DrawingPath
   // float mXpos;        // scene coords
   // float mYpos;
   public int mPointType;      // symbol point type (index in symbol-point lib)
-  protected int mScale;       // symbol scale
   public double mOrientation; // orientation [degrees]
   public String mPointText;   // point text value (if any)
   public IDrawingLink mLink;  // linked drawing item
@@ -123,7 +122,6 @@ public class DrawingPointPath extends DrawingPath
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
-    // mScale   = PointScale.SCALE_NONE;
     mOrientation = 0.0;
     mOptions   = BrushManager.getPointDefaultOptions( mPointType );
     mPointText = null; // getTextFromOptions( options ); // this can also reset mOptions
@@ -153,7 +151,6 @@ public class DrawingPointPath extends DrawingPath
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
-    // mScale   = PointScale.SCALE_NONE;
     mOrientation = 0.0;
     mOptions   = options;
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
@@ -482,22 +479,6 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
-  /** set the scale index
-   * @param scale   new scale index
-   */
-  void setScale( int scale )
-  {
-    if ( scale != mScale ) {
-      mScale = scale;
-      resetPath( 1.0f );
-    }
-  }
-
-  /** get the scale index
-   * @return the scale index
-   */
-  public int getScale() { return mScale; }
-
   /** get the scale value
    * @return the scale value
    */
@@ -515,7 +496,8 @@ public class DrawingPointPath extends DrawingPath
   /** recreate the symbol path
    * @param f   post-scale factor
    */
-  private void resetPath( float f )
+  @Override
+  void resetPath( float f )
   {
     // TDLog.v( "Reset path " + mOrientation + " scale " + mScale );
     Matrix m = new Matrix();

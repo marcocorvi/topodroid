@@ -38,6 +38,7 @@ import com.topodroid.math.Point2D;
 // import com.topodroid.dln.DLNSite;
 // import com.topodroid.dln.DLNSideList;
 import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyButtonBar;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.MyTurnBitmap;
@@ -158,6 +159,7 @@ public class DrawingWindow extends ItemDrawer
                                     // , IJoinClickHandler
                                     , IPhotoInserter
                                     , IAudioInserter
+                                    , MyButtonBar.IButtonBarListener
 {
   public static final int ZOOM_TRANSLATION_1 = -50; // was -42
   // public static final int ZOOM_TRANSLATION_3 = -200;
@@ -609,12 +611,13 @@ public class DrawingWindow extends ItemDrawer
   private LinearLayout mLayoutToolsP;
   private LinearLayout mLayoutToolsL;
   private LinearLayout mLayoutToolsA;
-  private LinearLayout mLayoutScale;
+  // private LinearLayout mLayoutScale; // FIXME_SCALE
   // private ItemButton[] mBtnRecent;
   private ItemButton[] mBtnRecentP;
   private ItemButton[] mBtnRecentL;
   private ItemButton[] mBtnRecentA;
-  private SeekBar      mScaleBar;
+  // private SeekBar      mScaleBar;
+  private MyButtonBar  mScaleBar;
 
   // window mode
   // static final int MODE_NONE  = 0; // initial mode
@@ -1180,7 +1183,7 @@ public class DrawingWindow extends ItemDrawer
    * @param x2    X coord of second point (0)
    * @param y2    Y coord of second point
    * @param decl  declination [degrees]
-   * @note used by H-Sections for the North line
+   * @note used by H-Sections for the North arrow line
    */
   private void addFixedSpecial( float x1, float y1, float x2, float y2, float decl ) // float xoff, float yoff )
   {
@@ -2085,6 +2088,8 @@ public class DrawingWindow extends ItemDrawer
 	  deletable = true;
           if ( mHotPath instanceof DrawingPointPath ) {
             setScaleToolbar( (DrawingPointPath)mHotPath );
+          } else if ( mHotPath instanceof DrawingLinePath ) {
+            setScaleToolbar( (DrawingPointPath)mHotPath );
           } else {
             setScaleToolbar( null );
           }
@@ -2648,7 +2653,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "Microphone perm : " + audioCheck );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
-    mPointScale = PointScale.SCALE_M;
+    // mPointScale = PointScale.SCALE_M; // FIXME_SCALE
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
@@ -2804,7 +2809,8 @@ public class DrawingWindow extends ItemDrawer
     mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
     mLayoutToolsL = (LinearLayout) findViewById( R.id.layout_tool_l );
     mLayoutToolsA = (LinearLayout) findViewById( R.id.layout_tool_a );
-    mLayoutScale  = (LinearLayout) findViewById( R.id.layout_scale  );
+    // mLayoutScale  = (LinearLayout) findViewById( R.id.layout_scale  ); // FIXME_SCALE
+    /*
     mScaleBar     = (SeekBar)findViewById( R.id.scalebar );
     mScaleBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
@@ -2817,6 +2823,14 @@ public class DrawingWindow extends ItemDrawer
       public void onStartTrackingTouch(SeekBar seekbar) { }
       public void onStopTrackingTouch(SeekBar seekbar) { }
     } );
+    */
+    Button[] scale_buttons = new Button[5];
+    scale_buttons[0] = (Button) findViewById( R.id.scale_xs );
+    scale_buttons[1] = (Button) findViewById( R.id.scale_s  );
+    scale_buttons[2] = (Button) findViewById( R.id.scale_m  );
+    scale_buttons[3] = (Button) findViewById( R.id.scale_l  );
+    scale_buttons[4] = (Button) findViewById( R.id.scale_xl );
+    mScaleBar = new MyButtonBar( this, this, scale_buttons, /* mPointScale + */ 2 );
     mLayoutTools.setVisibility( View.INVISIBLE );
 
     resetRecentTools();
@@ -3301,10 +3315,11 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     // TODO exec this line in a Thread
-    // TDLog.v("save drawing display mode");
+    final int display_mode = DrawingCommandManager.getDisplayMode();
+    TDLog.v(String.format(Locale.US, "save drawing display mode %04X", display_mode ) );
     (new Thread() {
        public void run() {
-         mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( DrawingCommandManager.getDisplayMode() ) );
+         mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( display_mode ) );
        }
     } ).start();
     doSaveTdr( ); // do not alert-dialog on mAllSymbols
@@ -3549,7 +3564,7 @@ public class DrawingWindow extends ItemDrawer
           // if ( mLandscape ) {
           //   addFixedSpecial( -d, 0, 0, 0, decl);
           // } else {
-            addFixedSpecial( 0, -d, 0, 0, decl ); 
+            addFixedSpecial( 0, -d, 0, 0, decl ); // TODO FIXME NORTH_ARROW
           // }
         }
       }
@@ -4747,8 +4762,8 @@ public class DrawingWindow extends ItemDrawer
 
     float x_canvas = event.getX(id);
     float y_canvas = event.getY(id);
-    float x_scene = x_canvas/mZoom - mOffset.x;
-    float y_scene = y_canvas/mZoom - mOffset.y;
+    float x_scene  = x_canvas/mZoom - mOffset.x;
+    float y_scene  = y_canvas/mZoom - mOffset.y;
     // TDLog.v("STYLUS action " + action + " at " + x_canvas + " " + y_canvas + " scene " + x_scene + " " + y_scene );
 
     if (action == MotionEvent.ACTION_DOWN) { // ---------------------------------------- DOWN
@@ -4848,8 +4863,8 @@ public class DrawingWindow extends ItemDrawer
                   if ( ! joined_line ) {
                     // TODO this is useful for STYLUS-ONLY, it might be better to skip for complex line modes
                     if ( /* TDSetting.mStylusOnly && */ TDSetting.mLineEnds > 0 ) mCurrentLinePath.dropEndPoints( TDSetting.mLineEnds );
-
-                    DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
+                    int line_scale = mScaleBar.getActive() - 2;
+                    DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex(), line_scale );
                     lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
                     if ( BrushManager.isLineStraight( mCurrentLine ) ) {
                       lp1.addStartPoint( mCurrentLinePath.mFirst.x, mCurrentLinePath.mFirst.y );
@@ -5126,8 +5141,9 @@ public class DrawingWindow extends ItemDrawer
                   TDToast.makeWarn( R.string.no_feature_audio );
                 }
               } else {
+                int point_scale = mScaleBar.getActive() - 2; // mPointScale
     	        if ( mLandscape ) {
-                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, mDrawingSurface.scrapIndex() );
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, point_scale, mDrawingSurface.scrapIndex() );
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
 		    if ( shift > TDSetting.mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
@@ -5138,7 +5154,7 @@ public class DrawingWindow extends ItemDrawer
     	          }
                   mDrawingSurface.addDrawingPath( point );
     	        } else {
-                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, mDrawingSurface.scrapIndex() ); // no text, no options
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, point_scale, mDrawingSurface.scrapIndex() ); // no text, no options
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
 		    if ( shift > TDSetting.mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
@@ -5287,7 +5303,8 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
       mPointCnt = 0;
       if ( mSymbol == SymbolType.LINE ) {
-        mCurrentLinePath = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
+        int line_scale = mScaleBar.getActive() - 2;
+        mCurrentLinePath = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex(), line_scale );
         // mCurrentLinePat.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
         mCurrentLinePath.addStartPoint( xs, ys );
         mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
@@ -5442,8 +5459,9 @@ public class DrawingWindow extends ItemDrawer
                     TDToast.makeWarn( R.string.no_feature_audio );
                   }
                 } else {
+                  int point_scale = mScaleBar.getActive() - 2; // mPointScale
                   if ( mLandscape ) {
-                    DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, mDrawingSurface.scrapIndex() );
+                    DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, point_scale, mDrawingSurface.scrapIndex() );
                     if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
                       if ( shift > TDSetting.mPointingRadius ) {
                         angle = TDMath.atan2d( x_shift, -y_shift );
@@ -5466,7 +5484,7 @@ public class DrawingWindow extends ItemDrawer
                         }
                     }
                   } else {
-                    DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, mDrawingSurface.scrapIndex() ); // no text, no options
+                    DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, point_scale, mDrawingSurface.scrapIndex() ); // no text, no options
                     if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
                       if ( shift > TDSetting.mPointingRadius ) {
                         angle = TDMath.atan2d( x_shift, -y_shift );
@@ -5897,8 +5915,9 @@ public class DrawingWindow extends ItemDrawer
    */
   private DrawingLabelPath makeLabelPath( String label, float x, float y, int level )
   {
+    int point_scale = mScaleBar.getActive() - 2; // mPointScale
     if ( mLandscape ) { float t=x; x=-y; y=t; }
-    DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
+    DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, point_scale, null, mDrawingSurface.scrapIndex() );
     label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
     label_path.mLandscape = mLandscape;
     label_path.mLevel = level;
@@ -5921,7 +5940,8 @@ public class DrawingWindow extends ItemDrawer
     long id = mMediaManager.getPhotoId();
     int scrap = mDrawingSurface.scrapIndex();
     TopoDroidApp.updateAnalytic( TDAnalytics.SPHOTO );
-    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), x, y, mPointScale, 
+    int point_scale = mScaleBar.getActive() - 2; // mPointScale
+    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), x, y, point_scale,
       "", // String.format(Locale.US, "-size %.2f", mMediaManager.getPhotoSize() ),
       id, scrap );
     photo.mLandscape = mLandscape;
@@ -6100,7 +6120,8 @@ public class DrawingWindow extends ItemDrawer
     if ( audio == null ) {
       // assert bid == mMediaManager.getAudioId()
       TopoDroidApp.updateAnalytic( TDAnalytics.SAUDIO );
-      audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, audio_id, mDrawingSurface.scrapIndex() );
+      int point_scale = mScaleBar.getActive() - 2; // mPointScale
+      audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), point_scale, null, audio_id, mDrawingSurface.scrapIndex() );
       audio.mLandscape = mLandscape;
       mDrawingSurface.addDrawingPath( audio );
       modified();
@@ -10283,7 +10304,7 @@ public class DrawingWindow extends ItemDrawer
       mLayoutToolsP.setVisibility( View.VISIBLE );
       mLayoutToolsL.setVisibility( View.GONE );
       mLayoutToolsA.setVisibility( View.GONE );
-      mLayoutScale.setVisibility( View.GONE );
+      // mLayoutScale.setVisibility( View.GONE ); // FIXME_SCALE
       k = getCurrentPointIndex();
       // TDLog.v("Set tools toolbars: Current point index " + k );
       pointSelected( mCurrentPoint, false );
@@ -10293,7 +10314,7 @@ public class DrawingWindow extends ItemDrawer
       mLayoutToolsP.setVisibility( View.GONE );
       mLayoutToolsL.setVisibility( View.VISIBLE );
       mLayoutToolsA.setVisibility( View.GONE );
-      mLayoutScale.setVisibility( View.GONE );
+      // mLayoutScale.setVisibility( View.GONE ); // FIXME_SCALE
       k = getCurrentLineIndex();
       // TDLog.v("Set tools toolbars: Current line index " + k );
       lineSelected( mCurrentLine, false );
@@ -10303,7 +10324,7 @@ public class DrawingWindow extends ItemDrawer
       mLayoutToolsP.setVisibility( View.GONE );
       mLayoutToolsL.setVisibility( View.GONE );
       mLayoutToolsA.setVisibility( View.VISIBLE );
-      mLayoutScale.setVisibility( View.GONE );
+      // mLayoutScale.setVisibility( View.GONE ); // FIXME_SCALE
       k = getCurrentAreaIndex();
       // TDLog.v("Set tools toolbars: Current area index " + k );
       areaSelected( mCurrentArea, false );
@@ -10316,49 +10337,71 @@ public class DrawingWindow extends ItemDrawer
   /**
    * @param path  selected (point) path, or null
    */
-  private void setScaleToolbar( DrawingPointPath path )
+  private void setScaleToolbar( DrawingPath path )
   {
     if ( path != null ) {
-      int progress = 20 + 35 * ( 2 + path.getScale() );
-      mScaleBar.setProgress( progress );
+      // int progress = 20 + 35 * ( 2 + path.getScale() );
+      // mScaleBar.setProgress( progress );
+      mScaleBar.setActive( 2 + path.getScale() );
       // TDLog.v("set scale bar - progress " + progress + " scale " + path.getScale() + " visible " );
       mLayoutTools.setVisibility( View.VISIBLE );
       mLayoutToolsP.setVisibility( View.GONE );
       mLayoutToolsL.setVisibility( View.GONE );
       mLayoutToolsA.setVisibility( View.GONE );
-      mLayoutScale.setVisibility( View.VISIBLE );
+      // mLayoutScale.setVisibility( View.VISIBLE ); // FIXME_SCALE
     } else {
       // TDLog.v("set scale bar - invisible " );
       mLayoutTools.setVisibility( View.INVISIBLE );
     }
   }
 
-  /** set the hot-item point scale
-   * @param progress  scalebar progress value
-   * @return true if the progress need to be reset
-   */
-  boolean setPointScaleProgress( int progress )
+  // /** set the hot-item point scale
+  //  * @param progress  scalebar progress value
+  //  * @return true if the progress need to be reset
+  //  */
+  // boolean setPointScaleProgress( int progress )
+  // {
+  //   if ( mHotPath == null ) return false;
+  //   if ( mHotPath instanceof DrawingPicturePath ) {
+  //     DrawingPicturePath picture = (DrawingPicturePath)mHotPath;
+  //     float scale = 1 + 0.001f * (progress - 100);
+  //     picture.scalePhotoSize( scale );
+  //     return true;
+  //   } else if ( mHotPath instanceof DrawingPointPath ) {
+  //     int scale = (int)((progress-1)/ 40) - 2;
+  //     ((DrawingPointPath)mHotPath).setScale( scale );
+  //     // TDLog.v("set point scale " + progress + " scale " + scale );
+  //   }
+  //   return false;
+  // }
+
+  public void onButtonBarClick( int idx, boolean on_off )
   {
-    if ( mHotPath == null ) return false;
+    if ( mHotPath == null ) return;
     if ( mHotPath instanceof DrawingPicturePath ) {
       DrawingPicturePath picture = (DrawingPicturePath)mHotPath;
-      float scale = 1 + 0.001f * (progress - 100);
+      float scale = 1 + 0.1f * (idx - 2);
       picture.scalePhotoSize( scale );
-      return true;
+      // return true;
     } else if ( mHotPath instanceof DrawingPointPath ) {
-      int scale = (int)((progress-1)/ 40) - 2;
-      ((DrawingPointPath)mHotPath).setScale( scale );
-      // TDLog.v("set point scale " + progress + " scale " + scale );
+      ((DrawingPointPath)mHotPath).setScale( idx - 2 ); 
+    } else if ( mHotPath instanceof DrawingLinePath ) {
+      ((DrawingLinePath)mHotPath).setScale( idx - 2 ); 
     }
-    return false;
+    // setPointScale( idx - 2 );
   }
     
-  void setPointScale( int scale )
-  {
-    if ( scale >= PointScale.SCALE_XS && scale <= PointScale.SCALE_XL ) {
-      mPointScale = scale;
-    }
-  }
+  // @Override
+  // void setPointScale( int scale )
+  // {
+  //   if ( scale >= PointScale.SCALE_XS && scale <= PointScale.SCALE_XL ) {
+  //     // mPointScale = scale;
+  //     mScaleBar.setActive( 2 + scale );
+  //   }
+  // }
+
+  @Override
+  int getPointScale() { return mScaleBar.getActive() - 2; }
 
   // --------------------- from ItemDrawer
   /** set the recent symbol buttons of a symbol class

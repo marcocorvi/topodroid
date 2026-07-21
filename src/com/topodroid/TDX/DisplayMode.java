@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDLog;
 
 class DisplayMode
 {
@@ -27,6 +28,7 @@ class DisplayMode
   static final int DISPLAY_ID        = 0x100; 
   static final int DISPLAY_BLANK     = 0x200; 
   static final int DISPLAY_ELEVATION = 0x400; 
+  static final int DISPLAY_SECTIONS  = 0x800; // whether to display xsections
 
   // static final int DISPLAY_SHOT     = 0x0313; // leg splay latest blank id
   static final int DISPLAY_PLOT     = 0x2f;
@@ -35,7 +37,8 @@ class DisplayMode
   static final int DISPLAY_OVERVIEW = 0x2f; //        0x20 |        0x08 | 0x04 | 0x02 | 0x01 skip outline and latest 
   static final int DISPLAY_FULL     = 0x032f; 
 
-  static final int DISPLAY_SKETCH   = DISPLAY_SPLAY | DISPLAY_STATION | DISPLAY_GRID | DISPLAY_SCALEBAR | DISPLAY_OUTLINE | DISPLAY_WALLS;
+  static final int DISPLAY_SKETCH   = DISPLAY_SPLAY | DISPLAY_STATION | DISPLAY_GRID | DISPLAY_SCALEBAR | DISPLAY_OUTLINE | DISPLAY_WALLS 
+| DISPLAY_SECTIONS;
 
   static boolean isLeg( int mode )     { return ( mode & DISPLAY_LEG     ) == DISPLAY_LEG; }
   static boolean isSplay( int mode )   { return ( mode & DISPLAY_SPLAY   ) == DISPLAY_SPLAY; }
@@ -44,6 +47,7 @@ class DisplayMode
   static boolean isLatest( int mode )  { return ( mode & DISPLAY_LATEST  ) == DISPLAY_LATEST; }
   static boolean isScalebar( int mode ){ return ( mode & DISPLAY_SCALEBAR) == DISPLAY_SCALEBAR; }
   static boolean isOutline( int mode ) { return ( mode & DISPLAY_OUTLINE ) == DISPLAY_OUTLINE; }
+  static boolean isSections( int mode ){ return ( mode & DISPLAY_SECTIONS) == DISPLAY_SECTIONS; }
   static boolean isId( int mode )      { return ( mode & DISPLAY_ID )      == DISPLAY_ID; }
   static boolean isBlank( int mode )   { return ( mode & DISPLAY_BLANK )   == DISPLAY_BLANK; }
 
@@ -58,11 +62,12 @@ class DisplayMode
     sb.append( ( ( mode & DISPLAY_LATEST )   == DISPLAY_LATEST   )? TDString.ONE : TDString.ZERO );
     sb.append( ( ( mode & DISPLAY_SCALEBAR ) == DISPLAY_SCALEBAR )? TDString.ONE : TDString.ZERO );
     sb.append("0");  // sb.append( ( ( mode & DISPLAY_OUTLINE )  == DISPLAY_OUTLINE )? "1" : "0" );
-    sb.append("0");
+    sb.append("0");  // DISPLAY_WALLS
 
     sb.append( ( ( mode & DISPLAY_ID        ) == DISPLAY_ID        )? TDString.ONE : TDString.ZERO );
     sb.append( ( ( mode & DISPLAY_BLANK     ) == DISPLAY_BLANK     )? TDString.ONE : TDString.ZERO );
     sb.append( ( ( mode & DISPLAY_ELEVATION ) == DISPLAY_ELEVATION )? TDString.ONE : TDString.ZERO );
+    sb.append( ( ( mode & DISPLAY_SECTIONS ) == DISPLAY_SECTIONS )? TDString.ONE : TDString.ZERO );
 
     return sb.toString();
   }
@@ -70,6 +75,7 @@ class DisplayMode
   static int parseString( String str )
   {
     if ( str == null ) return DISPLAY_FULL;
+    TDLog.v( "Parse display mode " + str );
     int ret = 0;
     int len = str.length();
     if ( len > 0 && str.charAt(0) == '1' ) ret |= DISPLAY_LEG;
@@ -80,10 +86,12 @@ class DisplayMode
     if ( len > 4 && str.charAt(4) == '1' ) ret |= DISPLAY_LATEST;
     if ( len > 5 && str.charAt(5) == '1' ) ret |= DISPLAY_SCALEBAR;
     // OUTLINE not saved
+    // WALLS not saved
 
     if ( len >  8 && str.charAt( 8) == '1' ) ret |= DISPLAY_ID;
     if ( len >  9 && str.charAt( 9) == '1' ) ret |= DISPLAY_BLANK;
     if ( len > 10 && str.charAt(10) == '1' ) ret |= DISPLAY_ELEVATION;
+    if ( len > 11 && str.charAt(11) == '1' ) ret |= DISPLAY_SECTIONS;
     return ret;
   }
 

@@ -64,8 +64,8 @@ public class DrawingCommandManager
   private DrawingMeasureStartPath mFirstReference;
   private DrawingMeasureEndPath   mSecondReference;
 
-  private DrawingPath mNorthLine;
-  private DrawingScaleReference      mScaleRef; /*[AR] this is the instance of scale reference line*/
+  private DrawingPath mNorthLine;    // North arrow line
+  private DrawingScaleReference      mScaleRef; /* [AR] this is the instance of scale reference line */
   private List< DrawingPath >        mGridStack1;
   private List< DrawingPath >        mGridStack10;
   private List< DrawingPath >        mGridStack100;
@@ -805,14 +805,15 @@ public class DrawingCommandManager
   }
 
 
-  /** add the scalebar
+  /** add the scalebar reference
    * @param decl   declination [degrees]
    * @note this is the only place DrawingScaleReference is instantiated
    */
   void addScaleRef( float decl ) // boolean with_azimuth
   {
     DrawingScaleReference scale_ref = new DrawingScaleReference( BrushManager.referencePaint, 
-      new Point(20,-(int)(20+40*Float.parseFloat( TDInstance.getResources().getString( R.string.dimmy ) ) )),
+      // new Point(20,-(int)(20+80*Float.parseFloat( TDInstance.getResources().getString( R.string.dimmy ) ) )),
+      new Point(20,(int)(20+80*Float.parseFloat( TDInstance.getResources().getString( R.string.dimmy ) ) )),
       0.33f,
       decl ); // with_azimuth
     synchronized ( TDPath.mGridsLock ) { mScaleRef = scale_ref; }
@@ -1409,7 +1410,7 @@ public class DrawingCommandManager
   //   }
   // }
  
-  /** set the north line
+  /** set the north arrow line
    * @param path  new north line 
    * @note used only by H-Sections
    */
@@ -1727,6 +1728,7 @@ public class DrawingCommandManager
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
     boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALEBAR ) != 0;
+    boolean sections = (mDisplayMode & DisplayMode.DISPLAY_SECTIONS ) != 0;
 
     boolean spoints   = false;
     boolean slines    = false;
@@ -1914,7 +1916,7 @@ public class DrawingCommandManager
           for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, null /* bbox */ );
         }
       }
-      if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
+      if ( sections && mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
         synchronized( TDPath.mXSectionsLock )  {
           for ( DrawingOutlinePath path : mXSectionOutlines ) {
             if ( path.isScrapId( mCurrentScrap.mScrapIdx ) ) {

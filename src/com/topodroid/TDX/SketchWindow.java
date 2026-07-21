@@ -1172,7 +1172,7 @@ public class SketchWindow extends ItemDrawer
     // TDLog.v( "Microphone perm : " + audioCheck );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
-    mPointScale = PointScale.SCALE_M;
+    // mPointScale = PointScale.SCALE_M; // FIXME_SCALE
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 

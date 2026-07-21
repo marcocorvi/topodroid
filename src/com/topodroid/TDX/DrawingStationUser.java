@@ -120,7 +120,8 @@ public class DrawingStationUser extends DrawingPath
   /** set the point scale (XS, S, M, L, or XL)
    * @param scale  new point scale
    */
-  private void setScale( int scale )
+  @Override
+  void setScale( int scale )
   {
     if ( scale != mScale ) {
       // TDLog.e( "set scale " + scale );

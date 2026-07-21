@@ -428,7 +428,7 @@ public class ExportDXF
       BufferedWriter out = new BufferedWriter( osw );
 
       // HEADERS
-      writeComment( out, "DXF created by TopoDroid v. " + TDVersion.string() );
+      writeComment( out, "DXF created by " + TDVersion.APP_NAME + " v. " + TDVersion.string() );
       writeSection( out, "HEADER" );
 
       // ACAD versions: 1006 (R10) 1009 (R11 R12) 1012 (R13) 1014 (R14)

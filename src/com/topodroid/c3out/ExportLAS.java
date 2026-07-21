@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3out;
 
-
+import com.topodroid.util.TDVersion;
 import com.topodroid.TDX.TglParser;
 
 // import com.topodroid.util.TDLog;
@@ -219,7 +219,7 @@ public class ExportLAS
     // bit-5-15 reserved, must be 0
                // 1        0         0         0  "
     String sys = "OTHER";
-    String sw  = "TopoDroid";
+    String sw  = TDVersion.APP_NAME;
 
     Calendar calendar = Calendar.getInstance();
     short day  = (short)calendar.get(Calendar.DAY_OF_YEAR);
