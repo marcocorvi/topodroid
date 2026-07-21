@@ -29,6 +29,7 @@ import com.topodroid.util.MyFileProvider;
 import com.topodroid.util.Region;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.CT;
+// import com.topodroid.util.CWDFolder; // TDSKETCH
 // import com.topodroid.util.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;
@@ -62,6 +63,7 @@ import com.topodroid.types.ExtendType;
 import com.topodroid.types.PlotType;
 import com.topodroid.types.ExportInfo;
 import com.topodroid.types.ShotType;
+import com.topodroid.types.SymbolType;
 // import com.topodroid.calib.CalibCoeffDialog;
 // import com.topodroid.calib.CalibReadTask;
 import com.topodroid.calib.CalibInfo;
@@ -331,6 +333,42 @@ public class TopoDroidApp extends Application
   {
     if ( mDrawingWindow != null ) mDrawingWindow.setToolsToolbarParams();
   }
+
+// TDSKETCH
+  public static void refreshDrawingAfterLineLibraryReload() // TDSKETCH
+  { 
+    refreshDrawingAfterSymbolLibraryReload( SymbolType.LINE, null );
+  }
+
+  public static void refreshDrawingAfterSymbolLibraryReload( int type ) // TDSKETCH
+  {
+    refreshDrawingAfterSymbolLibraryReload( type, null );
+  }
+
+  public static void refreshDrawingAfterSymbolLibraryReload( int type, final int[] indexMap ) // TDSKETCH
+  {
+    final DrawingWindow window = mDrawingWindow;
+    if ( window != null ) {
+      window.runOnUiThread( new Runnable() {
+        @Override public void run() { 
+          // window.refreshAfterSymolLibraryReload( type, indexMap );
+        }
+      } );
+    }
+  }
+
+  public static void refreshDrawingAfterGridSettingChange( boolean rebuildReferences ) // TDSKETCH
+  {
+    final DrawingWindow window = mDrawingWindow;
+    if ( window != null ) {
+      window.runOnUiThread( new Runnable() {
+        @Override public void run() { 
+          // window.refreashAfterGridSettingChange( rebuildReferences );
+        }
+      } );
+    }
+  }
+// END TDSKETCH
 
   // -------------------------------------------------------------------------------------
   // static SIZE methods

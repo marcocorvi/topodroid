@@ -114,17 +114,47 @@
     />
     <LinearLayout android:id="@+id/layout_scale"
       android:layout_width="match_parent"
-      android:layout_height="16dp"
+      android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:background="#666666"
       >
-      <SeekBar android:id="@+id/scalebar"
+      <!-- SeekBar android:id="@+id/scalebar"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
         android:max="200"
         android:background="#666666"
         android:progressDrawable="@xml/progress3"
+      / -->
+      <Button android:id="@+id/scale_xs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="XS"
+      />
+      <Button android:id="@+id/scale_s"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="S"
+      />
+      <Button android:id="@+id/scale_m"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="M"
+      />
+      <Button android:id="@+id/scale_l"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="L"
+      />
+      <Button android:id="@+id/scale_xl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="XL"
       />
     </LinearLayout>
   </LinearLayout>

@@ -367,7 +367,7 @@ class TdmConfig extends TdmFile
   private void writeTd( PrintWriter pw ) throws IOException
   {
     // TDLog.v("save config " + mSurveyName );
-    pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
+    pw.format("# created by %s %s - %s\n", TDVersion.APP_NAME_MANAGER, TDVersion.string(), TDUtil.currentDate() );
     pw.format("source\n");
     pw.format("  survey \"%s\"\n", mSurveyName );
     for ( TdmInput input : mInputs ) {
@@ -496,7 +496,7 @@ class TdmConfig extends TdmFile
    */
   String exportTherion( boolean overwrite, PrintWriter bw ) throws IOException
   {
-    bw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
+    bw.format("# created by %s %s - %s\n", TDVersion.APP_NAME_MANAGER, TDVersion.string(), TDUtil.currentDate() );
     bw.format("source\n");
     bw.format("  survey \"%s\"\n", mSurveyName );
     for ( TdmInput input : mInputs ) {
@@ -522,7 +522,7 @@ class TdmConfig extends TdmFile
    */
   String exportSurvex( boolean overwrite, PrintWriter bw ) throws IOException
   {
-    bw.format("; created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
+    bw.format("# created by %s %s - %s\n", TDVersion.APP_NAME_MANAGER, TDVersion.string(), TDUtil.currentDate() );
     // TODO EXPORT
     for ( TdmInput s : mInputs ) {
       String path = "../svx/" + s.getSurveyName() + ".svx";

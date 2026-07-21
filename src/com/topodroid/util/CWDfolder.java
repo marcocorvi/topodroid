@@ -15,6 +15,8 @@ import java.util.Locale;
 
 public class CWDfolder
 {
+  public static final String DEFAULT_FOLDER = "TopoDroid";
+
   static final public int NAME_OK    = 0;
   static final public int NAME_EMPTY = 1;
   static final public int NAME_BAD   = 2;
@@ -34,13 +36,13 @@ public class CWDfolder
    */
   public static boolean isNameOk( String name ) { return checkName( name ) == NAME_OK; }
 
-  /** @return the folder name for a given string, ie, the string itself or "TopoDroid" if the string is empty.
+  /** @return the folder name for a given string, ie, the string itself or the default folder if the string is empty.
    * @param name   input name
    */
   public static String folderName( String name )
   {
     if ( checkName( name ) == NAME_OK ) return name;
-    return "TopoDroid";
+    return DEFAULT_FOLDER;
     // if ( name.equals("TopoDroid") ) return name; // "TopoDroid" is OK
     // if ( ! name.toUpperCase(Locale.US).startsWith( "TOPODROID" ) ) { // other folders have name "TopoDroid-XXX"
     //   return "TopoDroid-" + name;

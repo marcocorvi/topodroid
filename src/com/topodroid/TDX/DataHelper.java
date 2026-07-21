@@ -308,9 +308,17 @@ public class DataHelper extends DataSetObservable
     boolean need_upgrade = myDB.needUpgrade( TDVersion.DATABASE_VERSION ); 
     TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
     if ( oldVersion < newVersion ) {
-      // TDLog.v( "DB updating tables ...");
-      DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
-      myDB.setVersion( TDVersion.DATABASE_VERSION );
+      boolean transectionStarted = false;
+      try {
+        myDB.beginTransaction();
+        transectionStarted = true;
+        // TDLog.v( "DB updating tables ...");
+        DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+        myDB.setVersion( TDVersion.DATABASE_VERSION );
+        myDB.setTransactionSuccessful();
+      } finally {
+        if ( transectionStarted ) myDB.endTransaction();
+      }
     }
     return true;
   }
@@ -7323,9 +7331,9 @@ public class DataHelper extends DataSetObservable
          String init_station = ( db_version > 22)? TDString.unescape( scanline0.stringValue( ) ) : "0";
          int xsections = ( db_version > 29)? (int)( scanline0.longValue( SurveyInfo.XSECTION_SHARED ) )
                                            : SurveyInfo.XSECTION_SHARED; // old at-station x-sections were "shared"
-	 int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
+	     int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
                                            : SurveyInfo.DATAMODE_NORMAL;
-	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
+	      int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
                                             : SurveyInfo.SURVEY_EXTEND_NORMAL;
          long created = TDUtil.getTimeStamp();
          if ( db_version > 55) {
@@ -7333,6 +7341,13 @@ public class DataHelper extends DataSetObservable
            long temp = scanline0.longValue( 0 ); // immutable is discarded
          }
          boolean immutable = TDSetting.WITH_IMMUTABLE; // imported surveys are always immutable FIXME_IMMUTABLE
+
+         if ( hasSurveyName( name ) ) {
+           TDLog.e("DB load file: survey already exists  <" + name + ">" );
+           br.close();
+           fr.close();
+           return -1L;
+         }
 
          sid = setSurvey( name, datamode );
 
@@ -8488,9 +8503,9 @@ public class DataHelper extends DataSetObservable
                    db.execSQL( "DROP TABLE originals " );
                    db.execSQL( "ALTER TABLE temp RENAME TO originals " );
                    db.setTransactionSuccessful();
-                 } catch ( SQLiteDiskIOException e0 ) { TDLog.v( e0.getMessage() );
-                 } catch ( SQLiteException e1 )       { TDLog.v( e1.getMessage() );
-                 } catch ( IllegalStateException e2 ) { TDLog.v( e2.getMessage() );
+                 } catch ( SQLiteDiskIOException e0 ) { TDLog.v( e0.getMessage() ); throw( e0 ); // TDSKETCH rethrow
+                 } catch ( SQLiteException e1 )       { TDLog.v( e1.getMessage() ); throw( e1 );
+                 } catch ( IllegalStateException e2 ) { TDLog.v( e2.getMessage() ); throw( e2 );
                  } finally { db.endTransaction(); }
                }
              }

@@ -56,7 +56,8 @@ public class MyFileProvider extends ContentProvider
 
   private static final String META_DATA_FILE_PROVIDER_PATHS = "android.support.FILE_PROVIDER_PATHS";
 
-  private static final String FILEPROVIDER_AUTHORITY = "com.topodroid.fileprovider";
+  // private static final String FILEPROVIDER_AUTHORITY = "com.topodroid.TDX.fileprovider"; // TDSKETCH
+  private static final String FILEPROVIDER_AUTHORITY_SUFFIX = ".fileprovider";
 
   private static final File DEVICE_ROOT = new File("/");
 
@@ -107,7 +108,8 @@ public class MyFileProvider extends ContentProvider
    */
   static public Uri fileToUri( Context context, File file )
   {
-    return getUriForFile( context, FILEPROVIDER_AUTHORITY, file );
+    // return getUriForFile( context, FILEPROVIDER_AUTHORITY, file ); // TDSKETC
+    return getUriForFile( context, context.getPackageName() + FILEPROVIDER_AUTHORITY_SUFFIX, file ); // => com.topodroid.TDX.fileprovider
   } 
 
   /** @return content URI for a given file. 

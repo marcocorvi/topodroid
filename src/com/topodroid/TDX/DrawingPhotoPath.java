@@ -199,7 +199,8 @@ public class DrawingPhotoPath extends DrawingPointPath
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"photo\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
         if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
-        pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
+        String options = getExportOptions(); // TDSKETCH
+        pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((options   == null)? "" : options) );
         pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
           Base64.encodeToString( buf, Base64.NO_WRAP ),
           ((mPointText==null)?"":mPointText)

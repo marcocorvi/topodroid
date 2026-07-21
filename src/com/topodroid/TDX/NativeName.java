@@ -21,19 +21,40 @@ class NativeName
 {
   static NativeName mNativeName = null; // singleton
   static boolean hasLib = false;
+  // static boolean triedLib = false; // TDSKETCH
 
   public native static String incrementName( String name, Set<String> stations );
 
   public native void initLog();
 
+  // nativename is so important that we load it immediately
   static {
     try {
       System.loadLibrary( "nativename" );
       hasLib = true;
     } catch ( UnsatisfiedLinkError e ) {
-      // TODO ?
+      TDLog.e("Failed load nativename lib");
+      hasLib = false; // make sure it is false if failed
     }
   }
+ 
+/* TDSKETCH
+  // this could be done lazy instead at static time
+  static boolean checkNativeLib()
+  {
+    if ( ! triedLib ) {
+      triedLib = true;
+      try {
+        System.loadLibrary( "nativename" );
+        hasLib = true;
+      } catch ( UnsatisfiedLinkError e ) {
+        TDLog.e("Failed load nativename lib");
+        hasLib = false; // make sure it is false if failed
+      }
+    }
+    return hasLib;
+  }
+*/
 
   private NativeName()
   {
@@ -45,6 +66,7 @@ class NativeName
    */
   static NativeName get()
   {
+    // if ( ! checkNativeLib() ) return null; // TDSKETCH
     if ( mNativeName == null ) {
       try {
         mNativeName = new NativeName();
@@ -52,6 +74,7 @@ class NativeName
       } catch ( java.lang.UnsatisfiedLinkError e ) {
         TDLog.e("Native link error " + e.getMessage() );
         mNativeName = null;
+        hasLib = false;
       }
     }
     return mNativeName;

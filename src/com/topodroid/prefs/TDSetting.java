@@ -193,7 +193,7 @@ public class TDSetting
   {
     if ( f > 0.1f && f != mUnitIcons ) {
       mUnitIcons = f;
-      BrushManager.reloadPointLibrary( TDInstance.context, TDInstance.getResources() );
+      BrushManager.reloadPointLibrary( TDInstance.context, TDInstance.getResources(), true ); // TDSKETCH
     }
   }
 
@@ -204,7 +204,7 @@ public class TDSetting
   {
     if ( f > 0.1f && f != mUnitLines ) {
       mUnitLines = f;
-      BrushManager.reloadLineLibrary( TDInstance.getResources() );
+      BrushManager.reloadLineLibrary( TDInstance.getResources(), true ); // TDSKETCH
     }
   }
 
@@ -3224,7 +3224,7 @@ public class TDSetting
       else if ( f > 10 ) { f = 10; ret = "10.0"; }
       if ( f != mLineThickness ) {
         mLineThickness = f;
-        BrushManager.reloadLineLibrary( TDInstance.getResources() );
+        BrushManager.reloadLineLibrary( TDInstance.getResources(), true ); // TDSKETCH
       } 
     } catch ( NumberFormatException e ) { ret = String.format(Locale.US, "%.1f", mLineThickness); }
     return ret;
@@ -3387,9 +3387,9 @@ public class TDSetting
     TDLocale.setTheLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {
-      BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
-      BrushManager.reloadLineLibrary( res );
-      BrushManager.reloadAreaLibrary( res );
+      BrushManager.reloadPointLibrary( TDInstance.context, res, false ); // reload symbols
+      BrushManager.reloadLineLibrary( res, false );
+      BrushManager.reloadAreaLibrary( res, true );
     }
     // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
     TDPrefActivity.reloadPreferences();

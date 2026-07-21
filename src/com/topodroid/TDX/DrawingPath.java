@@ -17,6 +17,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
@@ -79,7 +80,7 @@ public class DrawingPath extends RectF
 
   Paint mPaint;          // drawing path paint
   public int mType;      // path type
-  String mOptions;       // therion options
+  String mOptions;       // therion options - TODO use hashmap
   public float x1, y1, x2, y2;  // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   public DBlock mBlock;
@@ -851,6 +852,60 @@ public class DrawingPath extends RectF
     return null;
   }
 
+// BEGIN TDSKETCH
+  /** @return true if the given string is an option key
+   * @param key   input string
+   */
+  private static boolean isOptionKey( String key )
+  {
+    return ( key != null ) && key.length() > 0 && key.charAt(0) == '-';
+  }
+
+  /** set or replace the value of an option
+   * @param key   option key
+   * @param value option value
+   */
+  public void setOption( String key, String value )
+  {
+    if ( TDString.isNullOrEmpty( key ) || ( key.charAt(0) != '-' ) ) return;
+    StringBuilder sb = new StringBuilder();
+    boolean skip = false;
+    if ( mOptions != null ) {
+      String[] vals = mOptions.split(" ");
+      for ( String val : vals ) {
+        if ( TDString.isNullOrEmpty( val ) ) continue;
+        if ( key.equals( val ) ) {
+          skip = true;
+          continue;
+        }
+        if ( skip && isOptionKey( val ) ) continue;
+        /* if ( skip ) */ skip = false;
+        if ( sb.length() > 0 ) sb.append(' ');
+        sb.append( val );
+      }
+    }
+    if ( value != null ) {
+      if ( sb.length() > 0 ) sb.append(' ');
+      sb.append( key ).append(' ').append( value );
+    }
+    mOptions = ( sb.length() == 0 )? null : sb.toString();
+  }
+
+  /** remove an option from the option string
+   * @param key   option key
+   */
+  public void removeOption( String key )
+  {
+    setOption( key, null );
+  }
+
+  /** @return the export options string
+   * by default it return the opions string - derived clases can override
+   */
+  public String getExportOptions() { return mOptions; }
+
+// END TDSKETCH
+      
   /** @return the options string, or empty if it is null
    */
   public String getOptionString() { return ( mOptions == null )? "" : mOptions; }

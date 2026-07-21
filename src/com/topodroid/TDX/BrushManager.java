@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.types.SymbolType;
 
 // import java.lang.Math;
 
@@ -197,6 +198,8 @@ public class BrushManager
   static Paint getPointPaint( int idx ) { return (mPointLib == null)? errorPaint : mPointLib.getSymbolPaint( idx ); }
   static Paint getLinePaint(  int idx ) { return (mLineLib  == null)? errorPaint : mLineLib.getSymbolPaint( idx ); }
   static Paint getLinePaint(  int idx, boolean reversed ) { return (mLineLib  == null)? errorPaint : mLineLib.getLinePaint( idx, reversed ); }
+  // static float[] getLineDashBase( int idx ) { return  (mLineLib  == null)? null : mLineLib.getLineDashBase( idx ); } // TDSKETCH
+  // static LineSymbolEffect getLineEffect( int idx ) { return  (mLineLib  == null)? null : mLineLib.getLineEffect( idx ); }
   static Paint getAreaPaint(  int idx ) { return (mAreaLib  == null)? errorPaint : mAreaLib.getSymbolPaint( idx ); }
 
   static int getPointColor(  int idx ) { return (mPointLib  == null)? 0xffffffff : mPointLib.getSymbolPaint( idx ).getColor(); }
@@ -208,6 +211,7 @@ public class BrushManager
   public static int getAreaLibSize()  { return ( mAreaLib  == null )? 0 : mAreaLib.size(); }
 
   public static boolean hasLineEffect( int index ) { return mLineLib != null && mLineLib.hasEffect( index ); }
+  // public static boolean hasLinePathEffect( int index ) { return mLineLib != null && mLineLib.hasPathEffect( index ); } // TDSKETCH
   static int getLineStyleX( int index ) { return (mLineLib == null)? 1 : mLineLib.getStyleX( index ); }
 
   static boolean isAreaCloseHorizontal( int index ) { return mAreaLib != null && mAreaLib.isCloseHorizontal( index ); }
@@ -241,6 +245,7 @@ public class BrushManager
 
   public static boolean isPointDeclinable( int index )  { return mPointLib != null && mPointLib.isSymbolDeclinable( index ); } // TH2EDIT package
   public static boolean isPointOrientable( int index )  { return mPointLib != null && mPointLib.isSymbolOrientable( index ); } // TH2EDIT package
+  // public static boolean isPointScalable( int index ) { return mPointLib != null && mPointLib.isSymolScalable( index ); } // TDSKETCH
   static double getPointOrientation( int index ) { return (mPointLib == null)? 0 : mPointLib.getPointOrientation( index ); }
   // test should not be necessary but Xperia Z Ultra Android 5.1 crashed 2019-10-07
   public static void resetPointOrientations( )              { if ( mPointLib != null ) mPointLib.resetOrientations(); } // TH2EDIT package
@@ -255,6 +260,7 @@ public class BrushManager
   public static boolean isPointAudio( int index )   { return mPointLib != null && index == mPointLib.mPointAudioIndex; }
   public static boolean isPointSection( int index ) { return mPointLib != null && index == mPointLib.mPointSectionIndex; }
   public static boolean isPointPicture( int index ) { return mPointLib != null && index == mPointLib.mPointPictureIndex; }
+  // public static boolean isPointReference( int index ) { return mPointLib != null && index == mPointLib.mPointReferenceIndex; } // TDSKETCH
 
   public static boolean isPointMedia( int index )
   { return mPointLib != null && ( index == mPointLib.mPointPictureIndex || index == mPointLib.mPointPhotoIndex || index == mPointLib.mPointAudioIndex ); }
@@ -268,6 +274,7 @@ public class BrushManager
   static int getPointAudioIndex()   { return (mPointLib == null)? 0 : mPointLib.mPointAudioIndex; }
   static int getPointSectionIndex() { return (mPointLib == null)? 2 : mPointLib.mPointSectionIndex; }
   static int getPointPictureIndex() { return (mPointLib == null)? 0 : mPointLib.mPointPictureIndex; }
+  // static int getPointReferenceIndex() { return (mPointLib == null)? 0 : mPointLib.mPointReferenceIndex; } // TDSKETCH
 
   static String getPointName( int idx ) { return (mPointLib == null)? "" : mPointLib.getSymbolName( idx ); } 
   static String getLineName( int idx )  { return (mLineLib  == null)? "" : mLineLib.getSymbolName( idx ); } 
@@ -346,6 +353,7 @@ public class BrushManager
   public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint outlinePaint      = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);
 
   public static final Paint fixedStationPaint = makePaint( TDColor.REDDISH,     WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static final Paint fixedStationSavedPaint   = makePaint( TDColor.ORANGE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
@@ -405,9 +413,9 @@ public class BrushManager
     // TDLog.v("BRUSH load libraries" );
     // mHasSymbolLibraries = false; // TODO FIXME needed ?
     makeStationSymbol( res );
-    reloadPointLibrary( ctx, res );
-    reloadLineLibrary( res );
-    reloadAreaLibrary( res );
+    reloadPointLibrary( ctx, res, false ); // TDSKETCH
+    reloadLineLibrary( res, false );
+    reloadAreaLibrary( res, true );
     // mHasSymbolLibraries = true;
   }
 
@@ -423,32 +431,38 @@ public class BrushManager
   /** reload the point symbols
    * @param ctx   context
    * @param res   resources
+   * @param refresh whether to refresh drawing
    */
-  public static void reloadPointLibrary( Context ctx, Resources res )
+  public static void reloadPointLibrary( Context ctx, Resources res, boolean refresh ) // TDSKETCH
   {
     // TDLog.v("BRUSH load point library" );
     mPointLib = new SymbolPointLibrary( ctx, res );
     // mPointLib.loadUserPoints();
+    if ( refresh ) TopoDroidApp.refreshDrawingAfterSymbolLibraryReload( SymbolType.POINT ); // TDSKETCH
   }
 
   /** reload the line symbols
    * @param res   resources
+   * @param refresh whether to refresh drawing
    */
-  public static void reloadLineLibrary( Resources res )
+  public static void reloadLineLibrary( Resources res, boolean refresh ) // TDSKETCH
   {
     // TDLog.v("BRUSH load line library" );
     mLineLib = new SymbolLineLibrary( res );
     // mLineLib.loadUserLines();
+    if ( refresh ) TopoDroidApp.refreshDrawingAfterSymbolLibraryReload( SymbolType.LINE ); // TDSKETCH
   }
 
   /** reload the area symbols
    * @param res   resources
+   * @param refresh whether to refresh drawing
    */
-  public static void reloadAreaLibrary( Resources res )
+  public static void reloadAreaLibrary( Resources res, boolean refresh ) // TDSKETCH
   {
     // TDLog.v("BRUSH load area library" );
     mAreaLib = new SymbolAreaLibrary( res );
     // mAreaLib.loadUserAreas();
+    if ( refresh ) TopoDroidApp.refreshDrawingAfterSymbolLibraryReload( SymbolType.AREA ); // TDSKETCH
   }
 
   /** make the list of enabled symbols starting from a palette
@@ -648,7 +662,68 @@ public class BrushManager
     /* if (deepBluePaint != null)     */ deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (paintSplayXB != null)      */ paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     /* if (paintSplayXViewed != null) */ paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+
+    // setGridPaints(); // TDSKETCH
   }
+
+// TDSKETCH NOT USED unless setGridPaints() uncommented
+  private static int makeColor( int rgb, int alpha )
+  {
+    return ( ( alpha & 0xff ) << 24 ) | ( rgb & 0x00ffffff );
+  }
+
+  private static int darkerColor( int col )
+  {
+    int alpha  = ( col >> 24 ) & 0xff;
+    int red    = ( ( col >> 16 ) & 0xff ) * 2 / 3; // guaranteed less than 0xff
+    int green  = ( ( col >>  8 ) & 0xff ) * 2 / 3;
+    int blue   = (   col         & 0xff ) * 2 / 3;
+    return makeColor( (red << 16) | (green << 8) | blue, alpha );
+  }
+
+  private static int darkerColor( int rgb, int alpha )
+  {
+    int red    = ( ( rgb >> 16 ) & 0xff ) * 2 / 3; // guaranteed less than 0xff
+    int green  = ( ( rgb >>  8 ) & 0xff ) * 2 / 3;
+    int blue   = (   rgb         & 0xff ) * 2 / 3;
+    return makeColor( (red << 16) | (green << 8) | blue, alpha );
+  }
+
+  private static int lighterColor( int col )
+  {
+    int alpha  = ( col >> 24 ) & 0xff;
+    int red    = ( col >> 16 ) & 0xff;
+    int green  = ( col >> 16 ) & 0xff;
+    int blue   = ( col >> 16 ) & 0xff;
+    red   = red   + ( 255 - red   ) / 2;
+    green = green + ( 255 - green ) / 2;
+    blue  = blue  + ( 255 - blue  ) / 2;
+    return makeColor( (red << 16) | (green << 8) | blue, alpha );
+  }
+
+  private static int lighterColor( int rgb, int alpha )
+  {
+    int red    = ( rgb >> 16 ) & 0xff;
+    int green  = ( rgb >> 16 ) & 0xff;
+    int blue   = ( rgb >> 16 ) & 0xff;
+    red   = red   + ( 255 - red   ) / 2;
+    green = green + ( 255 - green ) / 2;
+    blue  = blue  + ( 255 - blue  ) / 2;
+    return makeColor( (red << 16) | (green << 8) | blue, alpha );
+  }
+
+  public static void setGridPaints() 
+  {
+    int rgb = TDSetting.mSketchGridColor & 0x00ffffff;
+    float width = ( TDSetting.mSketchGridWidth > 0 )? TDSetting.mSketchGridWidth : WIDTH_FIXED;
+    fixedGridPaint.setColor( darkerColor( rgb, 0x99 ) );
+    fixedGrid10Paint.setColor( makeColor( rgb, 0x99 ) );
+    fixedGrid100Paint.setColor( lighterColor( rgb, 0x99 ) );
+    fixedGridPaint.setStrokeWidth( width );
+    fixedGrid10Paint.setStrokeWidth( width );
+    fixedGrid100Paint.setStrokeWidth( width );
+  }
+// END NOT USED
 
   /** set the text size of certain paints according to the relevant settings
    */

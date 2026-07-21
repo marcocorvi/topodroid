@@ -24,6 +24,9 @@ public class TDVersion
 {
   public static int TARGET_SDK = 0;
 
+  public static final String APP_NAME = "TopoDroid";
+  public static final String APP_NAME_MANAGER = APP_NAME + "Manager";
+
   // symbol version of installed symbols is stored in the database
   // symbol version of the current  symbols is in the app
   public static final String SYMBOL_VERSION = "45";

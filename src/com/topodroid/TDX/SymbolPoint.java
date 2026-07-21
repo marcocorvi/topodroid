@@ -62,6 +62,7 @@ public class SymbolPoint extends Symbol
 
   int mHasText;                // whether the point has a text (1), value (2), or none (0)
   boolean mOrientable;         // PRIVATE
+  boolean mScalable = false;   // TDSKETCH
   double mOrientation;         // orientation [degrees]
   boolean mDeclinable = false; // whether the symbol should be rotated by the declination (must be orientable)
   // SymbolPointBasic mPoint1; // basic point
@@ -76,6 +77,11 @@ public class SymbolPoint extends Symbol
   /** @return true if the point is declinable
    */
   @Override public boolean isDeclinable() { return mDeclinable; }
+
+  /** @return true if the point is scalable
+   */
+  @Override
+  public boolean isScalable() { return mScalable; } // TDSKETCH
 
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
@@ -177,6 +183,7 @@ public class SymbolPoint extends Symbol
   {
     super( Symbol.TYPE_POINT, null, null, fname, Symbol.W2D_DETAIL_SYM );
     mOrientable = false;
+    mScalable   = false; // TDSKETCH
     mHasText = 0;
     mOrientation = 0.0;
     readFile( pathname, locale, iso );
@@ -205,6 +212,7 @@ public class SymbolPoint extends Symbol
     // mScaledPath = makeScaledPath( path, TDSetting.mSymbolSize );
     
     mOrientable  = orientable;
+    mScalable    = false; // TDSKETCH
     mHasText     = 0;
     mOrientation = 0.0;
     mDeclinable  = mOrientable && ( mHasText == 0 );
@@ -235,6 +243,7 @@ public class SymbolPoint extends Symbol
     // mScaledPath = makeScaledPath( path, TDSetting.mSymbolSize );
 
     mOrientable  = orientable;
+    mScalable    = false; // TDSKETCH
     mHasText     = has_text;
     mDeclinable  = mOrientable && ( mHasText == 0 );
     mOrientation = 0.0;
@@ -280,7 +289,8 @@ public class SymbolPoint extends Symbol
    *      has_text yes | NO
    *      has_value yes | NO
    *      orientation yes | NO
-   *      color 0xHHHHHH_COLOR
+   *      scalable yes | NO    // TDSKETCH
+   *      color 0xHHHHHH_COLOR allow optional 0xAA alpha
    *      style fill | STROKE 
    *      path
    *        MULTILINE_PATH_STRING
@@ -295,7 +305,8 @@ public class SymbolPoint extends Symbol
     String th_name = null;
     String group   = null;
     int color      = 0;
-    int color2     = 0; // HBX
+    // int color2     = 0; // HBX
+    int alpha      = 0xff;
     Paint.Style style = Paint.Style.STROKE;
     String path    = null;
     String options = null;
@@ -322,6 +333,7 @@ public class SymbolPoint extends Symbol
               th_name = null;
               color = TDColor.TRANSPARENT;
               path = null;
+              // mScalable = false; // TDSKETCH
               in_symbol = true;
             }
           } else {
@@ -380,6 +392,13 @@ public class SymbolPoint extends Symbol
                   mOrientable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
                 }
               }
+            } else if ( vals[k].equals("scalable") ) { // TDSKETCH
+              if ( cnt == 0 ) {
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mScalable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
+                }
+              }
             } else if ( vals[k].equals("declination") ) {
               if ( cnt == 0 ) {
                 ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -420,7 +439,16 @@ public class SymbolPoint extends Symbol
                 try {
                   color = Integer.decode( vals[k] ) | 0xff000000;
                 } catch ( NumberFormatException e ) {
-                  TDLog.e("Non-integer color");
+                  TDLog.e("Non-integer color: " + vals[k] );
+                }
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k; // optional alpha TDSKETCH
+                if ( k < s ) {
+                  try {
+                    alpha = Integer.decode( vals[k] ) & 0xff;
+                    color = (color & 0xffffff) | ( alpha << 24 );
+                  } catch ( NumberFormatException e ) {
+                    TDLog.e("Non-integer alpha: " + vals[k] );
+                  }
                 }
               }
             } else if ( vals[k].equals("csurvey") ) {

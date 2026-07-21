@@ -62,6 +62,12 @@ class EnableSymbol implements View.OnClickListener
    */
   String getGroupName()  { return mSymbol.getGroupName(); }
 
+  // TDSKETCH to be used
+  int getType () { return mType; }
+
+  // TDSKETCH to be used
+  SymbolInterface getSymbol() { return mSymbol; }
+
   // boolean getEnabled() { return mSymbol.isEnabled(); }
   // void setEnabled( boolean enabled ) { mSymbol.mEnabled = enabled; }
 

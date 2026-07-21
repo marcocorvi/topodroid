@@ -13,6 +13,7 @@ package com.topodroid.tdm;
 
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDVersion;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -464,10 +465,10 @@ public class TdmViewActivity extends Activity
             } else {
               mWithStation = 1;
               mSelectedCommand = mDrawingSurface.selectedCommand();
-              setTitle( "TopoDroid Manager " + mDrawingSurface.selectedCommandName() + " " + mDrawingSurface.selectedStationName() );
+              setTitle( TDVersion.APP_NAME_MANAGER + " " + mDrawingSurface.selectedCommandName() + " " + mDrawingSurface.selectedStationName() );
             }
           } else {
-            setTitle( "TopoDroid Manager" );
+            setTitle( TDVersion.APP_NAME_MANAGER );
           }
         } else if ( mWithStation == 1 ) {
           mWithStation = 2;

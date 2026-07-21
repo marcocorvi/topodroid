@@ -209,6 +209,10 @@ public class Symbol implements SymbolInterface
    */
   public Paint  getPaint()      { return null; } // Overridden
 
+  /** @return the symbol paint for the preview - default to getPaint() 
+   */
+  public Paint getPreviewPaint() { return getPaint(); } // TDSKETCH
+
   /** @return the symbol path - default to null
    */
   public Path   getPath()       { return null; }
@@ -232,6 +236,10 @@ public class Symbol implements SymbolInterface
   /** @return true if the symbol is declinable - default to false
    */
   public boolean isDeclinable() { return false; }
+
+  /** @return true if the symbol is scalable - default to true
+   */
+  public boolean isScalable() { return true; } // TDSKETCH
 
   /** @return the symbol color - either the paint color of full white
    */

@@ -994,7 +994,7 @@ public class DrawingIO
           if (    in_scrap && path != null 
                && ( BrushManager.isLineWallGroup( path.mLineType ) || path.hasOutline() ) ) {
             // TDLog.v("outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
-            path.setPathPaint( BrushManager.fixedGrid100Paint );
+            path.setPathPaint( BrushManager.outlinePaint );
             if ( name != null ) { // xsection outline
               surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path, scrap_id ) );
             } else {
@@ -1455,7 +1455,7 @@ public class DrawingIO
         scale*(xoff+bb.xmin), scale*(yoff-bb.ymax), name ); // this is fine is sketch origin is first station
     }
     pw.format("\n");
-    pw.format("# %s created by TopoDroid v. %s\n\n", TDUtil.currentDate(), TDVersion.string() );
+    pw.format("# %s created by %s v. %s\n\n", TDVersion.APP_NAME, TDUtil.currentDate(), TDVersion.string() );
     out.write( sw.getBuffer().toString() );
   }
 
@@ -2806,7 +2806,8 @@ public class DrawingIO
                     String station = scrap.substring( prefix.length() );
                     if ( station.length() > 0 ) {
                       for ( StationMap sm : name_map ) if ( sm.mFrom.equals( station ) ) {
-                        point_path.mOptions = TDString.OPTION_SCRAP + " " + prefix + sm.mTo;
+		                // point_path.mOptions = TDString.OPTION_SCRAP + " " + prefix + sm.mTo;
+                        point_path.setOptions( TDString.OPTION_SCRAP + " " + prefix + sm.mTo ); // TDSKETCH
                         break;
                       }
                     }

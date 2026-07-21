@@ -326,6 +326,7 @@ class DrawingXvi
 
     if ( BrushManager.isPointSection( idx ) ) return;
     if ( BrushManager.isPointPicture( idx ) ) return;
+    // if ( BrushManager.isPointReference( idx ) ) return; // TDSKETCH
     if ( BrushManager.isPointLabel( idx ) ) {
       String label = point.getPointText().toUpperCase( Locale.getDefault() );
       int len = label.length();

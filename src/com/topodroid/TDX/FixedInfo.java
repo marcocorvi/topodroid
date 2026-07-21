@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDVersion;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.mag.MagLatLong;
@@ -217,7 +218,7 @@ public class FixedInfo extends MagLatLong
   public String getSource() 
   {
     switch ( (int)source ) {
-      case 1: return "TopoDroid";
+      case 1: return TDVersion.APP_NAME; // TDSKETCH
       case 2: return "manual";
       case 3: return "Mobile-Topographer";
       case 4: return "GPX recorder";

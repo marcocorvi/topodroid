@@ -339,7 +339,8 @@ public class DrawingLabelPath extends DrawingPointPath
     pw.format("<item type=\"point\" name=\"label\" cave=\"%s\" branch=\"%s\" text=\"%s\" ",
       cave, branch, mPointText );
     if ( bind != null ) pw.format( " bind=\"%s\"", bind );
-    pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions==null)? "" : mOptions) );
+    String options = getExportOptions(); // TDSKETCH
+    pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((options==null)? "" : options) );
     float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
     float y = DrawingUtil.sceneToWorldY( cx, cy );
     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );

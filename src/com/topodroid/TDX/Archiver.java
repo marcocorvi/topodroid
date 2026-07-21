@@ -87,7 +87,7 @@ public class Archiver
   private final static String[] mManifestError = {
      "ok",
      "IO error",
-     "TopoDroid version mismatch",
+     "archive version mismatch",
      "database version mismatch: manifest_DB_version < min_DB_version",
      "database version mismatch: manifest_DB_version > current DB_version",
      "survey name does not match filename",
@@ -570,7 +570,7 @@ public class Archiver
    * @return
    *  >=0 ok
    * -1 IO error
-   * -2 TopoDroid version mismatch
+   * -2 archive version mismatch
    * -3 database version mismatch: manifest_DB_version < min_DB_version
    * -4 database version mismatch: manifest_DB_version > current DB_version
    * -5 survey name does not match filename
@@ -690,7 +690,7 @@ public class Archiver
              || ( major == TDVersion.MAJOR_MIN && minor < TDVersion.MINOR_MIN )
              || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
           ) {
-          TDLog.e( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
+          TDLog.e( "archive version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
           return ERR_TD_OLD;
         }
         if (    ( major > TDVersion.MAJOR ) 
@@ -711,7 +711,7 @@ public class Archiver
         try {
           version_code = Integer.parseInt( ver[0] );
           if ( version_code < TDVersion.CODE_MIN ) {
-            TDLog.e( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
+            TDLog.e( "archive version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
             return ERR_TD_OLD;
           }
         } catch ( NumberFormatException e ) {
@@ -797,22 +797,27 @@ public class Archiver
             pathname = TDPath.getSurveyAudioDir( mManifestSurveyname );
             TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getSurveyAudioFile( mManifestSurveyname, ze.getName() );
-          } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
+          } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS JPG
             // FIXME need survey dir
             pathname = TDPath.getSurveyPhotoDir( mManifestSurveyname );
             TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getSurveyJpgFile( mManifestSurveyname, ze.getName() );
+          } else if ( ze.getName().endsWith( ".png" ) ) { // PHOTOS PNG
+            // FIXME need survey dir
+            pathname = TDPath.getSurveyPhotoDir( mManifestSurveyname );
+            TDFile.makeTopoDroidDir( pathname );
+            pathname = TDPath.getSurveyPngFile( mManifestSurveyname, ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
             if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {
-              BrushManager.reloadPointLibrary( app, app.getResources() );
+              BrushManager.reloadPointLibrary( app, app.getResources(), false ); // TDSKETCH
             }
           } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
             if ( uncompressSymbols( zin, TDPath.getSymbolLineDirname(), "l_" ) ) {
-              BrushManager.reloadLineLibrary( app.getResources() );
+              BrushManager.reloadLineLibrary( app.getResources(), false ); // TDSKETCH
             }
           } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
             if ( uncompressSymbols( zin, TDPath.getSymbolAreaDirname(), "a_" ) ) {
-              BrushManager.reloadAreaLibrary( app.getResources() );
+              BrushManager.reloadAreaLibrary( app.getResources(), false ); // TDSKETCH
             }
           } else {
             TDLog.e("ZIP 7 unexpected file type " + ze.getName() );
@@ -959,15 +964,15 @@ public class Archiver
             pathname = TDPath.getJpgFile( ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
             if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {
-              BrushManager.reloadPointLibrary( app, app.getResources() );
+              BrushManager.reloadPointLibrary( app, app.getResources(), false ); // TDSKETCH
             }
           } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
             if ( uncompressSymbols( zin, TDPath.getSymbolLineDirname(), "l_" ) ) {
-              BrushManager.reloadLineLibrary( app.getResources() );
+              BrushManager.reloadLineLibrary( app.getResources(), false ); // TDSKETCH
             }
           } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
             if ( uncompressSymbols( zin, TDPath.getSymbolAreaDirname(), "a_" ) ) {
-              BrushManager.reloadAreaLibrary( app.getResources() );
+              BrushManager.reloadAreaLibrary( app.getResources(), false ); // TDSKETCH
             }
           } else {
             // TDLog.e("unexpected file type " + ze.getName() );

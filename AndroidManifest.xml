@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="604087"
-      android:versionName="6.4.87"
+      android:versionCode="604088"
+      android:versionName="6.4.88"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -393,7 +393,7 @@
       <!-- MyFileProvider used by zip-sharing -->
       <provider 
         android:name="com.topodroid.util.MyFileProvider" 
-        android:authorities="com.topodroid.fileprovider" 
+        android:authorities="com.topodroid.TDX.fileprovider" 
         android:exported="false" 
         android:grantUriPermissions="true"> 
         <meta-data 

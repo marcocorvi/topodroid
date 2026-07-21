@@ -110,7 +110,8 @@ public class DrawingAudioPath extends DrawingPointPath
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"audio\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
         if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
-        pw.format(Locale.US, "scale=\"%d\" orientation=\"0.0\" options=\"%s\" >\n", mScale, ((mOptions   == null)? "" : mOptions) );
+        String options = getExportOptions(); // TDSKETCH
+        pw.format(Locale.US, "scale=\"%d\" orientation=\"0.0\" options=\"%s\" >\n", mScale, ((options   == null)? "" : options) );
         pw.format(" <attachment dataformat\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n", 
           Base64.encodeToString( buf, Base64.NO_WRAP ) );
         float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.

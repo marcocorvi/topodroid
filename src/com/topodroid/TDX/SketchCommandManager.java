@@ -154,7 +154,7 @@ public class SketchCommandManager
    */
   void makeWall( TDVector u )
   {
-    mWall = new SketchWall( BrushManager.fixedGrid100Paint );
+    mWall = new SketchWall( BrushManager.outlinePaint );
     for ( SketchSection section : mSections ) {
       if ( section != mView ) mWall.appendSection( section );
       mWall.makeLines( u );

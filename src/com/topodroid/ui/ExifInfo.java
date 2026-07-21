@@ -119,7 +119,7 @@ public class ExifInfo
       int rot = toRotation( mOrientation );
       // TDLog.v( "EXIF write orientation " + mOrientation + " rotation " + rot + " camera " + mCamera );
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
-        exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
+        exif.setAttribute( ExifInterface.TAG_SOFTWARE, TDVersion.APP_NAME + " " + TDVersion.string() );
       }
       if ( mCamera == 1 ) {
         exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
