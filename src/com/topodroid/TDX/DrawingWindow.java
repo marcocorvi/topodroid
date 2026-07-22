@@ -4349,6 +4349,16 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** make a line a straight segment
+   * @param line   drawing line item to close
+   */
+  void straightLine( DrawingLinePath line )
+  {
+    // assert( mLastLinePath == null );
+    mDrawingSurface.straightPointLine( line );
+    modified();
+  }
+
   /** reduce the points of an area border
    * @param area         drawing area item to reduce
    * @param decimation   out of how many points to keep one

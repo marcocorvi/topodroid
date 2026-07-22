@@ -251,7 +251,8 @@ class ScanShotEditDialog extends MyDialog
     } else if ( b == mButtonDelete ) {
       mParent.deleteScanShot( mBlk );
     } 
-    onBackPressed();
+    // onBackPressed(); // issue 167
+    dismiss();
   }
 
   // @SuppressWarnings("deprecated")

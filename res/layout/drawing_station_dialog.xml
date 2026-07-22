@@ -70,7 +70,7 @@
     android:orientation="horizontal" 
     >
 
-    <Button android:id="@+id/btn_set" 
+    <Button android:id="@+id/btn_active" 
       android:layout_marginEnd="@dimen/marginh"
       style="@style/button_default"
       android:text="@string/button_apply"

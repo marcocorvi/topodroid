@@ -1455,7 +1455,7 @@ public class DrawingIO
         scale*(xoff+bb.xmin), scale*(yoff-bb.ymax), name ); // this is fine is sketch origin is first station
     }
     pw.format("\n");
-    pw.format("# %s created by %s v. %s\n\n", TDVersion.APP_NAME, TDUtil.currentDate(), TDVersion.string() );
+    pw.format("# %s created by %s v. %s\n\n", TDUtil.currentDate(), TDVersion.APP_NAME, TDVersion.string() );
     out.write( sw.getBuffer().toString() );
   }
 
@@ -1586,6 +1586,111 @@ public class DrawingIO
       }
     }
   }
+
+  /** load the drawing commands of a section sketch // TDSKETCH
+   * @param filename    xsection tdr filename
+   * @param survey_name survey name used to fix scrap options
+   * @param dx          X shift
+   * @param dy          Y shift
+   * @return cached drawing paths
+   *
+  static ArrayList< DrawingPath > loadDataStreamPaths( String filename, String survey_name, float dx, float dy )
+  {
+    ArrayList< DrawingPath > paths = new ArrayList<>();
+    synchronized ( TDPath.mTdrLock ) {
+      try {
+        int version = 0;
+        boolean in_scrap = false;
+        int scrap_index = 0;
+        DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
+        if ( dis == null ) return paths;
+        boolean todo = true;
+        while ( todo ) {
+          DrawingPath path = null;
+          int what = dis.read();
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              break;
+            case 'I':
+              dis.readFloat();
+              dis.readFloat();
+              dis.readFloat();
+              dis.readFloat();
+              if ( dis.readInt() == 1 ) {
+                dis.readFloat();
+                dis.readFloat();
+                dis.readFloat();
+                dis.readFloat();
+              }
+              break;
+            case 'S':
+              dis.readUTF();
+              {
+                int type = dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) {
+                  dis.readInt();
+                }
+              }
+              dis.readUTF();
+              dis.readUTF();
+              dis.readUTF();
+              in_scrap = true;
+              break;
+            case 'N':
+              scrap_index = dis.readInt();
+              break;
+            case 'P':
+              path = DrawingPointPath.loadDataStream( version, dis, dx, dy );
+              if ( path != null ) path = ((DrawingPointPath)path).fixScrap( survey_name );
+              break;
+            case 'T':
+              path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'Y':
+              path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'Z':
+              path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'L':
+              path = DrawingLinePath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'A':
+              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'J':
+              path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'U':
+              DrawingStationUser.loadDataStream( version, dis );
+              break;
+            case 'X':
+              DrawingStationName.loadDataStream( version, dis );
+              break;
+            case 'F':
+            case 'E':
+              todo = false;
+              break;
+            default:
+              todo = false;
+              break;
+          }
+          if ( path != null && in_scrap && path.mScrap == scrap_index ) {
+            if ( path instanceof DrawingSpecialPath ) {
+              if ( ((DrawingSpecialPath)path).isSpecialType( DrawingSpecialPath.SPECIAL_DOT ) ) continue;
+            }
+            paths.add( path );
+          }
+        }
+        dis.close();
+      } catch ( IOException e ) {
+        TDLog.e( "load section paths failed " + e.getMessage() );
+      }
+    }
+    return paths;
+  }
+  */ // END TDSKETCH
 
   /** export a line item to therion file
    * @param out   output writer

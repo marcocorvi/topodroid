@@ -315,10 +315,7 @@ public class MyDialog extends Dialog
    * @param cb    checkbox
    * @param state new checkbox state
    */
-  protected void setState( MyCheckBox cb, boolean state )
-  {
-    if ( cb != null ) cb.setState( state );
-  }
+  protected void setState( MyCheckBox cb, boolean state ) { if ( cb != null ) cb.setState( state ); }
 
   /** @return true if s checkbox is not null and checked
    * @param cb    checkbox

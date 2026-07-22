@@ -618,6 +618,23 @@ public class Scrap
     }
   }
 
+  /** make the line a segment
+   * @param line   line
+   */
+  void straightPointLine( DrawingPointLinePath line )
+  {
+    synchronized( TDPath.mCommandsLock ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.removePath( line );
+        clearSelected();
+      }
+      line.makeStraight( );
+      synchronized ( TDPath.mSelectionLock ) {
+        mSelection.insertPath( line );
+      }
+    }
+  }
+
   // ERASE ACTIONS -----------------------------------------------
   /** 
    * return result code:

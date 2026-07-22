@@ -99,6 +99,8 @@ public class TDExporter
   private static double mERadius = Geodetic.EARTH_A;
   private static double mSRadius = Geodetic.EARTH_A;
 
+  private static String creator = TDVersion.APP_NAME + " " + TDVersion.string();
+
   private static void checkShotsClino( List< DBlock > list )
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
@@ -357,7 +359,7 @@ public class TDExporter
       String date = TDUtil.getDateString( "yyyy-MM-dd" );
 
       pw.format("<csurvey version=\"1.11\" id=\"\">\n");
-      pw.format("<!-- %s created by TopoDroid v %s -->\n", date, TDVersion.string() );
+      pw.format("<!-- %s created by %s -->\n", date, creator );
 
 // ++++++++++++++++ PROPERTIES
       // FIXME origin = origin of Num
@@ -367,7 +369,7 @@ public class TDExporter
         pw.format("  <properties id=\"\" name=\"\" origin=\"%s\" ", origin );
       }
       // FIXME TODO_CSURVEY
-      pw.format(      "creatid=\"TopoDroid\" creatversion=\"%s\" creatdate=\"%s\" ", TDVersion.string(), date );
+      pw.format(      "creatid=\"%s\" creatversion=\"%s\" creatdate=\"%s\" ", creator, date );
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" calculateversion=\"-1\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
       pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\"");
@@ -834,7 +836,7 @@ public class TDExporter
 
       pw.format(name, info.name );
       pw.format("<description>\n");
-      pw.format("  <![CDATA{%s - TopoDroid v %s<br>\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("  <![CDATA{%s - %s<br>\n",  TDUtil.getDateString("yyyy.MM.dd"), creator );
       pw.format("  Survey %s date %s]]>\n", info.name, info.date );
       pw.format("</description>\n");
 
@@ -1111,7 +1113,7 @@ public class TDExporter
 
   //     pw.format("const geojsonObject = {\n");
   //     pw.format("  \"name\": \"%s\",\n", info.name );
-  //     pw.format("  \"created\": \"%s - TopoDroid v %s\",\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+  //     pw.format("  \"created\": \"%s - %s\",\n",  TDUtil.getDateString("yyyy.MM.dd"), creator );
   //     pw.format("  %s \"FeatureCollection\",\n", type );
   //     pw.format("  \"features\": [\n");
   //     
@@ -1221,7 +1223,7 @@ public class TDExporter
       pw.format("  xmlns=\"http://www.topografix.com/GPX/1/1\"\n" );
       pw.format("  xmlns:xsi=\"http://www.w3c.org/2001/XMLSchema-instance\"\n" );
       pw.format("  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1\"\n" );
-      pw.format("  version=\"1.1\" creator=\"TopoDroid %s\">\n", TDVersion.string() );
+      pw.format("  version=\"1.1\" creator=\"%s\">\n", creator );
       pw.format("<metadata>\n");
       pw.format("<name>%s</name>\n", surveyname );
       pw.format("<time>%s</time>\n", TDUtil.getDateString("yyyy-MM-dd") );
@@ -1331,7 +1333,7 @@ public class TDExporter
       // track-type: 0=normal, 10=closed_polygon, 20=alarm_zone
       // fill-style: 0=solid, 1=clear, 2=Bdiag, 3=Fdiag, 4=cross, 5=diag_cross, 6=horiz, 7=vert
       //
-      pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376,-1,0\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("0,2,1677690,%s %s,0,0,0,8421376,-1,0\r\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
 
       int tot_stations = 0;
       for ( TDNum num : nums ) {
@@ -1605,7 +1607,7 @@ public class TDExporter
           BufferedWriter bcw = new BufferedWriter( new FileWriter( thconfig ) );
           PrintWriter pcw = new PrintWriter( bcw );
           pcw.format("encoding utf-8\n");
-          pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+          pcw.format("# %s created by %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
           pcw.format("source \"./%s.th\"\n\n", info.name );
           pcw.format("layout topodroid\n");
           pcw.format("  legend on\n");
@@ -1651,7 +1653,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("encoding utf-8\n");
-      pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("# %s created by %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
 
       if ( embed_thconfig /* && TDSetting.mExportUri */ ) { // embed thconfig
         pw.format("layout topodroid\n");
@@ -2108,7 +2110,7 @@ public class TDExporter
       // BufferedWriter bw = TDFile.getMSwriter( "svx", survey_name + ".svx", "text/svx" );
       PrintWriter pw = new PrintWriter( bw );
 
-      pw.format("; %s created by TopoDroid v %s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("; %s created by %s", TDUtil.getDateString("yyyy.MM.dd"), creator );
       writeSurvexEOL( pw );
 
       pw.format("; %s", info.name );
@@ -2414,7 +2416,7 @@ public class TDExporter
 
   static private void writeCsvHeader( PrintWriter pw, SurveyInfo info, String uls, String uas, String newline )
   {
-    pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
+    pw.format("# %s [*] created by %s%s", TDUtil.getDateString("yyyy.MM.dd"), creator, newline );
     pw.format("# name: %s%s", info.name, newline );
     pw.format("# date: %s%s", info.date, newline );
     pw.format("# team: %s%s", info.team, newline );
@@ -2720,7 +2722,7 @@ public class TDExporter
   //     // BufferedWriter bw = TDFile.getMSwriter( "tlx", surveyname + ".tlx", "text/tlx" );
   //     PrintWriter pw = new PrintWriter( bw );
   //     pw.format("tlx2\n");
-  //     pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+  //     pw.format("# %s created by %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
   //     pw.format("# date %s \n", mData.getSurveyDate( sid ) );
   //     pw.format("# %s \n", mData.getSurveyComment( sid ) );
   //     int n = 0;
@@ -3110,7 +3112,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
-      // pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      // pw.format("# %s created by %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
 
       pw.format("%s\r\n", info.name ); // export as single survey
       pw.format("SURVEY NAME: %s\r\n", info.name );
@@ -3602,7 +3604,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
-      // pw.format("# TopoDroid v %s\r\n", TDVersion.string() );
+      // pw.format("# %s\r\n", creator );
       // pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
 
       //           5 11 15 19 23
@@ -3653,7 +3655,7 @@ public class TDExporter
       if ( TDSetting.TRobotJB ) {
         /* nothing */
       } else {
-        pw.format(Locale.US, "    -4\t1\t1\t1\t1\t$s TopoDroid v %s - %s\r\n",   TDUtil.currentDateTimeTRobot(), TDVersion.string() );
+        pw.format(Locale.US, "    -4\t1\t1\t1\t1\t$s %s %s\r\n",   TDUtil.currentDateTimeTRobot(), creator );
         pw.format("    -3\t1\t1\t1\t1\r\n"); // not used - legacy 
       }
       String team = (info.team != null)? info.team : "-";
@@ -3887,7 +3889,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
-      pw.format("#FILE AUTHOR: TopoDroid v %s\r\n", TDVersion.string() );
+      pw.format("#FILE AUTHOR: %s\r\n", creator );
       pw.format("#FILE DATE: %s\r\n", TDUtil.getDateString("MM dd yyyy") );
       pw.format("\r\n"); 
       pw.format("#SURVEY NAME: %s\r\n", info.name );
@@ -4015,7 +4017,7 @@ public class TDExporter
   //     // BufferedWriter bw = TDFile.getMSwriter( "gtx", survey_name + ".gtx", "text/gtx" );
   //     PrintWriter pw = new PrintWriter( bw );
   //     pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
-  //     pw.format("<!-- %s created by TopoDroid v %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+  //     pw.format("<!-- %s created by %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
   //     pw.format("<GHTopo>\n");
   //     // mandatory - cave name
   //     pw.format("<General>\n");
@@ -4320,7 +4322,7 @@ public class TDExporter
   // 
   //     pw.format("%s\n", info.name );
   //     pw.format(";\n");
-  //     pw.format("; %s created by TopoDroid v %s \n", TDUtil.getDateString("yyyy/MM/dd"), TDVersion.string() );
+  //     pw.format("; %s created by %s \n", TDUtil.getDateString("yyyy/MM/dd"), creator );
   //     pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.getDeclination() ); // degrees degrees decl. meters
 
   //     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -4433,7 +4435,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
   
       pw.format("; %s\n", info.name );
-      pw.format("; created by TopoDroid v %s - %s \n", TDVersion.string(), TDUtil.getDateString("yyyy.MM.dd") );
+      pw.format("; created by %s - %s \n", creator, TDUtil.getDateString("yyyy.MM.dd") );
 
       String date = info.date;
       int y = 0;
@@ -4707,7 +4709,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("#cave %s%s", info.name, eol );
-      pw.format("%% Made by: TopoDroid %s - %s%s", TDVersion.string(), TDUtil.currentDate(), eol );
+      pw.format("%% Made by: %s - %s%s", creator, TDUtil.currentDate(), eol );
 
       String date = info.date;
       int y = 0;
@@ -4876,7 +4878,7 @@ public class TDExporter
       pw.format("Project name: %s", info.name );    printPolygonEOL( pw );  // FIXME char coding
       pw.format("Project place: %s", "" );          printPolygonEOL( pw ); // HBPly
       pw.format("Project code: ");                  printPolygonEOL( pw ); // HBPly
-      pw.format("Made by: TopoDroid %s", TDVersion.string() );   printPolygonEOL( pw );
+      pw.format("Made by: %s", creator );           printPolygonEOL( pw );
       pw.format(Locale.US, "Made date: %f", TDUtil.getDatePlg() ); printPolygonEOL( pw );
       pw.format("Last modi: 0");   printPolygonEOL( pw ); // no modification
       pw.format("AutoCorrect: 0"); printPolygonEOL( pw ); // HBPly no closed loops
@@ -5190,7 +5192,7 @@ public class TDExporter
       // BufferedWriter bw = TDFile.getMSwriter( "dxf", survey_name + ".dxf", "text/dxf" );
       PrintWriter out = new PrintWriter( bw );
       // TODO
-      out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s ", TDVersion.string(), TDUtil.getDateString("yyyy.MM.dd") );
+      out.printf(Locale.US, "999\nDXF created by %s - %s ", creator, TDUtil.getDateString("yyyy.MM.dd") );
       if ( info.hasDeclination() ) {
         out.printf(Locale.US, "(declination %.4f)\n", info.getDeclination() ); // DECLINATION DXF
       } else {
@@ -5604,7 +5606,7 @@ public class TDExporter
       PrintWriter  psw = new PrintWriter( sw );
   
       pw.format("Version 5.02\r\n\r\n");
-      pw.format("; %s created by TopoDroid v %s\r\n\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("; %s created by %s\r\n\r\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
       if ( fixed.size() > 0 ) { 
         FixedInfo fix = fixed.get(0);
         pw.format(Locale.US, "; Trou %s,%.7f,%.7f,LT2E\r\n", info.name, fix.lat, fix.lng );
@@ -5804,7 +5806,7 @@ public class TDExporter
       PrintWriter  psw = new PrintWriter( sw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n" );
-      pw.format("<!-- %s created by TopoDroid v %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("<!-- %s created by %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), creator );
       pw.format("<VisualTopo>\r\n");
       pw.format("<Version>5.15</Version>\r\n");
       pw.format("<Lignes>%d</Lignes>\r\n", lignes );

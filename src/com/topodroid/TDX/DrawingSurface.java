@@ -496,6 +496,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void closePointLine( DrawingPointLinePath line ) { commandManager.closePointLine( line ); }
 
+  /** make the line a straight segment
+   * @param line   line
+   */
+  void straightPointLine( DrawingPointLinePath line ) { commandManager.straightPointLine( line ); }
+
   /** finish an erase command, in the current manager
    */
   void endEraser() { commandManager.endEraser(); }

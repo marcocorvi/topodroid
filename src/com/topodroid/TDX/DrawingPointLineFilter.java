@@ -72,6 +72,26 @@ class DrawingPointLineFilter
     return true;
   }
 
+  /** make a straight segment path // TDSKETCH
+   * @param first    first segment point
+   * @param last     last segment point
+   * @param path     path where the segment is placed
+   * @return true on success
+   */
+  static boolean straight( LinePoint first, LinePoint last, DrawingPointLinePath path )
+  {
+    if ( first == last || first.mNext == null ) return false;
+    if ( last == null ) {
+      last = first.mNext; 
+      while ( last.mNext != null ) last = last.mNext;
+    }
+    if ( first == last ) return false;
+    // if ( Math.abs( first.x - last.x ) < 1.e-5 && Math.abs( first.y - last.y ) < 1.e-5 ) return false;
+    path.addStartPoint( first.x, first.y );
+    path.addPoint( last.x, last.y );
+    return true;
+  }
+
   /** compute the weeding of a string of line points and puth it inside a path
    * @param first    first line point
    * @param last     last line point (can be null)

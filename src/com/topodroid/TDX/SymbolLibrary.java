@@ -410,11 +410,12 @@ public class SymbolLibrary
    */
   void setRecentSymbols( Symbol[] recent )
   {
+    for ( int k = 0; k < recent.length; ++k ) recent[k] = null;
     int k = 0;
     for ( Symbol symbol : mSymbols ) {
       if ( symbol.isEnabled() ) {
         recent[k++] = symbol;
-        if ( k >= ItemDrawer.NR_RECENT ) break;
+        if ( k >= ItemDrawer.NR_RECENT ) break; // do not overfill recent[]
       }
     }
   }

@@ -1273,6 +1273,11 @@ public class DrawingCommandManager
    */
   void closePointLine( DrawingPointLinePath line ) { mCurrentScrap.closePointLine( line ); }
 
+  /** make the line a segment
+   * @param line   line
+   */
+  void straightPointLine( DrawingPointLinePath line ) { mCurrentScrap.straightPointLine( line ); }
+
   // ----------------------------------------------------------
 
   // FIXME LEGS_SPLAYS

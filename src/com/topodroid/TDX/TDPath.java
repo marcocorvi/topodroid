@@ -123,8 +123,8 @@ public class TDPath
   // private static String PATH_CB_DIR  = EXTERNAL_STORAGE_PATH;
   // FIXME PRIVATE_STORAGE
   private static String PATH_CB_DIR   = TDandroid.PRIVATE_STORAGE ? TDFile.getPrivateDir( null ).getAbsolutePath() : TDFile.getExternalDir(null).getPath(); // fullpath (< 33) or null (for 33+)
-  private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";     // fullpath 
-  private static String ROOT_CW_DIR   = TDandroid.PRIVATE_STORAGE ? "TopoDroid" : PATH_CW_DIR;
+  private static String PATH_CW_DIR   = PATH_CB_DIR + "/" + CWDfolder.DEFAULT_FOLDER;     // fullpath 
+  private static String ROOT_CW_DIR   = TDandroid.PRIVATE_STORAGE ? CWDfolder.DEFAULT_FOLDER : PATH_CW_DIR;
 
   private static String ROOT_ZIP      = ROOT_CW_DIR + "/zip";
   private static String ROOT_TMP      = ROOT_CW_DIR + "/tmp";
@@ -462,10 +462,24 @@ public class TDPath
    */
   public static String getZipFile( String name ) { return ROOT_ZIP     + "/" + name; }
 
+  // /** @return tmp directory file
+  //  */
+  // public static File getTmpDirFile() // TDSKETCH
+  // {
+  //   if ( TDandroid.PRIVATE_STORAGE ) return TDFile.getPrivateDir( ROOT_TMP );
+  //   checkFilesystemDirs( ROTT_TMP );
+  //   return TDFile.getTopoDroidFile( ROOT_TMP );
+  // }
+
   // /** @return full pathname of a temporary file, in the tmp folder
   //  * @param name   temp-file name
   //  */
-  // public static String getTmpFile( String name ) { return ROOT_TMP     + "/" + name; }
+  // public static String getTmpFile( String name ) // TDSKETCH
+  // { 
+  //   if ( name == null ) return null;
+  //   return ROOT_TMP + "/" + name;
+  //   // return TDFile.getTopoDroidFile( getPathname( ROOT_TMP, name ) );
+  // }
 
   /** @return full pathname of a tdr file, in the tdr folder
    * @param name   tdr-file name
