@@ -81,7 +81,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     // visible = true,  closed = false
     super( DrawingPath.DRAWING_PATH_LINE, true, false, scrap );
     // mCnt = ++ mCount;
-    TDLog.v( "Drawing Line Path cstr: type " + line_type + " scale " + scale );
+    // TDLog.v( "Drawing Line Path cstr: type " + line_type + " scale " + scale );
 
     mLineType = line_type;
     mReversed = false;
@@ -254,7 +254,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       case  1: width *= 1.7; break;
       case  2: width *= 3.0; break;
     }
-    TDLog.v("Line set scale " + width );
+    // TDLog.v("Line set scale " + width );
     mPaint.setStrokeWidth( width );
   }
 

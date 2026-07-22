@@ -96,7 +96,7 @@
      <item name="normal">Normale</item>
      <item name="weighted">Pesata</item>
      <item name="selective">Selettiva</item>
-     <!-- item name="triangles">Triangoli</item -->
+     <item name="triangles">Triangoli</item>
   </string-array>
 
 

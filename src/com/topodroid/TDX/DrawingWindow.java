@@ -1822,6 +1822,165 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /**
+   * @param num
+   * @param type  plot type
+   * @param cosp  cosine projection angle
+   * @param sinp  sine projection angle
+   * @param name  plot name
+   */
+  private void computeStationReferences( TDNum num, int type, float cosp, float sinp, String name )
+  {
+    String parent = ( TDInstance.xsections? null : name );
+    List< NumStation > stations = num.getStations();
+    if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
+      // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
+      //      could use PlotType.isStationSectionPrivate and PlotInfo.getXSectionParent
+      List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION, parent );
+      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      for ( NumStation st : stations ) {
+        if ( st.show() ) {
+          // DrawingStationName dst =
+          mDrawingSurface.addDrawingStationName( name, st,
+                  DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections, saved );
+        }
+      }
+    } else if ( type == PlotType.PLOT_EXTENDED ) { // ------------- EXTENDED PROFILE -----------------
+      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
+      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      for ( NumStation st : stations ) {
+        // TDLog.v("EXTEND station " + st.name + " has extend " + st.hasExtend() );
+        if ( st.hasExtend() && st.show() ) {
+          // DrawingStationName dst =
+          mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
+        }
+      }
+    } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
+      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
+      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      for ( NumStation st : stations ) {
+        if ( st.show() ) {
+          double h1 = st.e * cosp + st.s * sinp;
+          // DrawingStationName dst =
+          mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
+        // } else {
+        //   // TDLog.v("PLOT station not showing " + st.name );
+        }
+      }
+    }
+  }
+
+  /**
+   * @param num
+   * @param type  plot type
+   * @param cosp  cosine projection angle
+   * @param sinp  sine projection angle
+   */
+  private void computeSplayReferences( TDNum num, int type, float cosp, float sinp )
+  {
+    List< NumSplay > splays     = num.getSplays();
+    if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
+      for ( NumSplay sp : splays ) {
+        if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
+          NumStation st = sp.from;
+          if ( st.show() ) {
+            DBlock blk = sp.getBlock();
+            if ( ! ( blk.isNoPlan() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
+              // TDLog.v("SPLAY cosine " + sp.getCosine() );
+              addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
+            }
+          }
+        }
+      }
+    } else if ( type == PlotType.PLOT_EXTENDED ) { // ------------- EXTENDED PROFILE -----------------
+      for ( NumSplay sp : splays ) {
+        NumStation st = sp.from;
+        if ( st.hasExtend() && st.show() ) {
+          DBlock blk = sp.getBlock();
+          if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
+            addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
+          }
+        }
+      }
+    } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
+      for ( NumSplay sp : splays ) {
+        NumStation st = sp.from;
+        if ( st.show() ) {
+          DBlock blk = sp.getBlock();
+          if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
+            double h1 = st.e * cosp + st.s * sinp;
+            double h2 = sp.e * cosp + sp.s * sinp;
+            // cosine of the angle between the splay and the direction of projection
+            float cosine = TDMath.sind( blk.mBearing ) * sinp + TDMath.cosd( blk.mBearing ) * cosp; // instead of sp.getCosine()
+            // TDLog.v("splay " + blk.mBearing + " cosine " + cosine + " " + cosp + " " + sinp );
+            addFixedLine( type, blk, h1, st.v, h2, sp.v, cosine, true, true );
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @param num
+   * @param type  plot type
+   * @param cosp  cosine projection angle
+   * @param sinp  sine projection angle
+   */
+  private void computeShotReferences( TDNum num, int type, float cosp, float sinp )
+  {
+    List< NumShot > shots       = num.getShots();
+    if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
+      for ( NumShot sh : shots ) {
+        DBlock blk = sh.getFirstBlock();
+        // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+          if ( st1.show() && st2.show() ) {
+            DrawingPath path = addFixedLine( type, blk, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
+            if ( sh.isBadLoop() ) {
+              path.setPathPaint( BrushManager.badLoopPaint );
+            }
+          }
+        // }
+      }
+    }
+    else if ( type == PlotType.PLOT_EXTENDED ) // ------------- EXTENDED PROFILE -----------------
+    {
+      for ( NumShot sh : shots ) {
+        if  ( ! sh.mIgnoreExtend ) {
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+	  DBlock blk = sh.getFirstBlock();
+          if ( blk != null /* && ! blk.isCommented() */ ) { // FIXME_COMMENTED
+            if ( st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
+              DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
+              if ( sh.isBadLoop() ) {
+                path.setPathPaint( BrushManager.badLoopPaint );
+              }
+            }
+          }
+        }
+      } 
+    } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
+      for ( NumShot sh : shots ) {
+        // TDLog.v( "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
+        NumStation st1 = sh.from;
+        NumStation st2 = sh.to;
+        if ( st1.show() && st2.show() ) {
+          double h1 = st1.e * cosp + st1.s * sinp;
+          double h2 = st2.e * cosp + st2.s * sinp;
+          DBlock blk = sh.getFirstBlock();
+          // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
+            DrawingPath path = addFixedLine( type, blk, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
+            if ( sh.isBadLoop() ) {
+              path.setPathPaint( BrushManager.badLoopPaint );
+            }
+          // }
+        }
+      } 
+    }
+  }
+
   /** compute the plot references - only for plan and profile views
    * @param num     data reduction
    * @param type    plot type
@@ -1879,131 +2038,13 @@ public class DrawingWindow extends ItemDrawer
       sinp = sina - gamma * cosa;
     }
 
-    List< NumStation > stations = num.getStations();
-    List< NumShot > shots       = num.getShots();
-    List< NumSplay > splays     = num.getSplays();
-
-    String parent = ( TDInstance.xsections? null : name );
 
     mMultiBad.clear(); // nr_multi_bad = 0;
     nr_magnetic_bad = 0;
-    if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
-      for ( NumShot sh : shots ) {
-        DBlock blk = sh.getFirstBlock();
-        // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
-          NumStation st1 = sh.from;
-          NumStation st2 = sh.to;
-          if ( st1.show() && st2.show() ) {
-            DrawingPath path = addFixedLine( type, blk, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
-            if ( sh.isBadLoop() ) {
-              path.setPathPaint( BrushManager.badLoopPaint );
-            }
-          }
-        // }
-      }
-      for ( NumSplay sp : splays ) {
-        if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
-          NumStation st = sp.from;
-          if ( st.show() ) {
-            DBlock blk = sp.getBlock();
-            if ( ! ( blk.isNoPlan() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
-              // TDLog.v("SPLAY cosine " + sp.getCosine() );
-              addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
-            }
-          }
-        }
-      }
-      // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
-      //      could use PlotType.isStationSectionPrivate and PlotInfo.getXSectionParent
-      List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION, parent );
-      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
-      for ( NumStation st : stations ) {
-        if ( st.show() ) {
-          // DrawingStationName dst =
-          mDrawingSurface.addDrawingStationName( name, st,
-                  DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections, saved );
-        }
-      }
-    }
-    else if ( type == PlotType.PLOT_EXTENDED ) // ------------- EXTENDED PROFILE -----------------
-    {
-      for ( NumShot sh : shots ) {
-        if  ( ! sh.mIgnoreExtend ) {
-          NumStation st1 = sh.from;
-          NumStation st2 = sh.to;
-	  DBlock blk = sh.getFirstBlock();
-          if ( blk != null /* && ! blk.isCommented() */ ) { // FIXME_COMMENTED
-            if ( st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
-              DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
-              if ( sh.isBadLoop() ) {
-                path.setPathPaint( BrushManager.badLoopPaint );
-              }
-            }
-          }
-        }
-      } 
-      for ( NumSplay sp : splays ) {
-        NumStation st = sp.from;
-        if ( st.hasExtend() && st.show() ) {
-          DBlock blk = sp.getBlock();
-          if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
-            addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
-          }
-        }
-      }
-      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
-      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
-      for ( NumStation st : stations ) {
-        // TDLog.v("EXTEND station " + st.name + " has extend " + st.hasExtend() );
-        if ( st.hasExtend() && st.show() ) {
-          // DrawingStationName dst =
-          mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
-        }
-      }
-    } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
-      double h1, h2;
-      for ( NumShot sh : shots ) {
-        // TDLog.v( "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
-        NumStation st1 = sh.from;
-        NumStation st2 = sh.to;
-        if ( st1.show() && st2.show() ) {
-          h1 = st1.e * cosp + st1.s * sinp;
-          h2 = st2.e * cosp + st2.s * sinp;
-          DBlock blk = sh.getFirstBlock();
-          // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
-            DrawingPath path = addFixedLine( type, blk, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
-            if ( sh.isBadLoop() ) {
-              path.setPathPaint( BrushManager.badLoopPaint );
-            }
-          // }
-        }
-      } 
-      for ( NumSplay sp : splays ) {
-        NumStation st = sp.from;
-        if ( st.show() ) {
-          DBlock blk = sp.getBlock();
-          if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
-            h1 = st.e * cosp + st.s * sinp;
-            h2 = sp.e * cosp + sp.s * sinp;
-            // cosine of the angle between the splay and the direction of projection
-            float cosine = TDMath.sind( blk.mBearing ) * sinp + TDMath.cosd( blk.mBearing ) * cosp; // instead of sp.getCosine()
-            // TDLog.v("splay " + blk.mBearing + " cosine " + cosine + " " + cosp + " " + sinp );
-            addFixedLine( type, blk, h1, st.v, h2, sp.v, cosine, true, true );
-          }
-        }
-      }
-      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
-      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
-      for ( NumStation st : stations ) {
-        if ( st.show() ) {
-          h1 = st.e * cosp + st.s * sinp;
-          // DrawingStationName dst =
-          mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
-        // } else {
-        //   // TDLog.v("PLOT station not showing " + st.name );
-        }
-      }
-    }
+
+    computeShotReferences( num, type, cosp, sinp );
+    computeSplayReferences( num, type, cosp, sinp );
+    computeStationReferences( num, type, cosp, sinp, name );
 
     mDrawingSurface.commitReferences();
 
@@ -10507,7 +10548,7 @@ public class DrawingWindow extends ItemDrawer
       Symbol p = recents[k];
       if ( p == null || buttons[k] == null ) break;
       if ( p.isPoint() && p.isSection() ) continue;
-      if ( p.isPoint() ) TDLog.v("SET button point " + p.getThName() );
+      // if ( p.isPoint() ) TDLog.v("SET button point " + p.getThName() );
       buttons[kk].resetPaintPath( p.getPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY );
       buttons[kk].invalidate();
       ++kk;

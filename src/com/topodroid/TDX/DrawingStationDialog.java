@@ -15,7 +15,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDMath;
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDAnalytics;
@@ -48,8 +48,8 @@ class DrawingStationDialog extends MyDialog
     // private TextView mHiddenLabel;
     // private TextView mCoords;
     private Button mBtnOK;
-    private Button mBtnCurrent;
-    private TextView mTextCurrent;
+    private Button mBtnActive;
+    private TextView mTextActive;
     private Button mBtnBarrier;
     private Button mBtnHidden;
     private CheckBox mCbSplaysOn;
@@ -125,8 +125,8 @@ class DrawingStationDialog extends MyDialog
       mCbSplaysOn  = (CheckBox) findViewById(R.id.btn_splays_on );
       mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
       mBtnOK       = (Button) findViewById(R.id.btn_ok);
-      mBtnCurrent  = (Button) findViewById(R.id.btn_set);
-      mTextCurrent = (TextView) findViewById(R.id.station_set);
+      mBtnActive   = (Button) findViewById(R.id.btn_active);
+      mTextActive  = (TextView) findViewById(R.id.station_set);
       mBtnSaved    = (Button) findViewById(R.id.btn_saved);
       mBtnCancel   = (Button) findViewById(R.id.btn_cancel);
 
@@ -160,7 +160,7 @@ class DrawingStationDialog extends MyDialog
       if ( mParent.isAnySection() ) {
         mBtnOK.setVisibility( View.GONE );
         ((LinearLayout)findViewById( R.id.layout_set )).setVisibility( View.GONE );
-        // mBtnCurrent.setVisibility( View.GONE );
+        // mBtnActive.setVisibility( View.GONE );
         // ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
         ((LinearLayout)findViewById( R.id.layout_barrier )).setVisibility( View.GONE );
         // mBtnBarrier.setVisibility( View.GONE );
@@ -192,9 +192,11 @@ class DrawingStationDialog extends MyDialog
           }
           mBtnOK.setOnClickListener( this );
         }
-        mBtnCurrent.setOnClickListener( this );
+        mBtnActive.setOnClickListener( this );
+        String current_station = StationName.getCurrentStationName();
+        TDLog.v("Station " + mStationName + " current " + current_station );
         if ( mStationName.equals( StationName.getCurrentStationName() ) ) {
-          mTextCurrent.setText( R.string.station_reset );
+          mTextActive.setText( R.string.station_reset );
         }
         mCbSplaysOn.setOnClickListener( this );
         mCbSplaysOff.setOnClickListener( this );
@@ -376,7 +378,8 @@ class DrawingStationDialog extends MyDialog
         return;
       } else if ( b == mBtnCancel ) {
         /* nothing */
-      } else if ( b == mBtnCurrent ) {
+      } else if ( b == mBtnActive ) {
+        TDLog.v("Set Station " + mStationName );
         mParent.setCurrentStationName( mStationName, mStation );
       } else if ( b == mBtnBarrier ) {
         mParent.toggleStationBarrier( mStationName, mIsBarrier );

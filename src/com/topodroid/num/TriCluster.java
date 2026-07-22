@@ -41,7 +41,7 @@ class TriCluster
   void addTmpShot( TriShot ts )
   {
     shots.add( ts );
-    ts.cluster = this;
+    ts.mCluster = this;
   }
 
   /** add a station to the cluster

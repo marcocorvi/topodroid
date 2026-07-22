@@ -762,9 +762,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void setCurrentStation( DrawingStationName st, List< StationInfo > saved )
   {
+    // TDLog.v("Set current station now " + ( (st == null)? "null" : st.getName() ) );
     DrawingStationName st0 = commandManager.getCurrentStationName();
     if ( st0 != null /* && st0 != st */ ) {
-      TDLog.v("Set current station - old " + st0.getName() );
+      // TDLog.v("Clear current station old " + st0.getName() );
       DrawingStationName st1 = mCommandManager1.getCurrentStationName();
       mCommandManager1.setCurrentStationName( null );
       setStationPaint( st1, saved, mCommandManager1 );
@@ -779,10 +780,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       TDLog.v("Current station null");
     }
     if ( st != null ) {
-      TDLog.v("Set current station - new " + st.getName() );
-      st.setPathPaint( BrushManager.fixedStationActivePaint );
-      commandManager.setCurrentStationName( st );
-      // setStationPaint( st, saved, commandManager );
+      // TDLog.v("Set current station new " + st.getName() );
+      st0 = commandManager.getStation( st.getName() );
+      st0.setPathPaint( BrushManager.fixedStationActivePaint );
+      commandManager.setCurrentStationName( st0 ); // this only saves the current-station object
+      // setStationPaint( st0, saved, commandManager );
       if ( commandManager == mCommandManager1 ) {
         st0 = mCommandManager2.getStation( st.getName() );
         if ( st0 != null ) {

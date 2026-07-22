@@ -1010,10 +1010,10 @@ public class TDNum
 
     // for ( TriShot tsh : tmp_shots ) tsh.dump();
 
-    // DROP TRILATERATION
-    // if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
-    //   TrilaterationHelper.makeTrilateration( tmp_shots );
-    // }
+    // TRILATERATION
+    if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
+      TrilaterationHelper.makeTrilateration( tmp_shots );
+    }
 
     // for ( TriShot tsh : tmp_shots ) tsh.dump();
 

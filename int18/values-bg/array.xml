@@ -97,7 +97,7 @@
      <item name="normal">Нормално</item>
      <item name="weighted">Спряно</item>
      <item name="selective">Селективно</item>
-     <!-- item name="triangles">Триангулация</item -->
+     <item name="triangles">Триангулация</item>
   </string-array>
   
   <!-- UNUSED string-array name="wallsType">
