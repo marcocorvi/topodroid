@@ -1206,15 +1206,15 @@
     <string name="help_write">Zapsat kalibrační koeficienty do zařízení (DistoX)</string>
     <string name="help_splays">Paprsky segmentu/bodu</string>
 
-    <string name="help_add_project">Pridat jeskynní projekt</string>
-    <string name="help_add_surveys">Přidat měření</string>
-    <string name="help_drop_surveys">Odebrat měření</string>
+    <string name="help_add_project">Vytvořit jeskynní projekt</string>
+    <string name="help_add_surveys">Přidat měření do projektu</string>
+    <string name="help_drop_surveys">Odebrat měření z projektu</string>
     <string name="help_color_surveys">Změnit barvu měření</string>
     <string name="help_view_surveys">Zobrazit měření</string>
     <string name="help_view_equates">Seznam propojení bodů (equates)</string>
     <string name="help_export_config">Exportovat projekt</string>
     <string name="help_delete_config">Smazat projekt</string>
-    <string name="help_add_equate">Přidat propojení ěření (equate)</string>
+    <string name="help_add_equate">Přidat propojení měření (equate)</string>
     <string name="help_all_equates">Všechna možná propojení bodů</string>
     <string name="help_equates">Seznam propojení měření</string>
     <string name="help_stations_minus">Zobrazit méně měřických bodů</string>
