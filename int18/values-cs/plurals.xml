@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="surveys_import">
-    <item quantity="zero">Nebylo importováno žádné zaměření</item>
-    <item quantity="one">Importováno jedno zaměření</item>
-    <item quantity="few">Importována %1$d zaměření</item>
-    <item quantity="other">Importováno %1$d zaměření</item>
+    <item quantity="zero">Nebylo importováno žádné měření</item>
+    <item quantity="one">Importováno jedno měření</item>
+    <item quantity="few">Importována %1$d měření</item>
+    <item quantity="other">Importováno %1$d měření</item>
   </plurals>
   <plurals name="surveys_delete">
-    <item quantity="one">Smazat jedno zaměření?</item>
-    <item quantity="few">Smazat %1$d zaměření?</item>
-    <item quantity="other">Smazat %1$d zaměření?</item>
+    <item quantity="one">Smazat jedno měření?</item>
+    <item quantity="few">Smazat %1$d měření?</item>
+    <item quantity="other">Smazat %1$d měření?</item>
   </plurals>
   <plurals name="calib_saturated_values">
     <item quantity="one">VAROVÁNÍ. Jedna saturovaná hodnota</item>
