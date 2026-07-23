@@ -1552,8 +1552,7 @@ public class DrawingWindow extends ItemDrawer
   {
     TDLog.v( "Drawing Window " + mType + " do close ...");
     checkLabelPath();
-    // super.onBackPressed();
-    finish();
+    handleClosing();
   }
 
   private void performImmediateBackAction() // TDSKETCH
@@ -1564,6 +1563,11 @@ public class DrawingWindow extends ItemDrawer
       closeMenu();
       return;
     }
+    handleClosing();
+  }
+
+  private void handleClosing()
+  {
     if ( mTh2Edit ) { // TH2EDIT
       super.onBackPressed();
     } else {
@@ -3389,7 +3393,6 @@ public class DrawingWindow extends ItemDrawer
   @Override
   protected synchronized void onDestroy()
   {
-    super.onDestroy();
     // TDLog.v( "Drawing activity onDestroy");
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
@@ -3400,6 +3403,7 @@ public class DrawingWindow extends ItemDrawer
     //   mApp.disconnectRemoteDevice( false );
     // }
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on destroy done");
+    super.onDestroy();
   }
 
   /** lifecycle: implement RESUME

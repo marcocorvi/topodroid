@@ -124,6 +124,10 @@
           >
           <!-- android:usesCleartextTraffic="true" -->
 
+          <!-- ONCE ALL ACTIVITIES ARE READY
+          android:enableOnBackInvokedCallback="true"
+          -->
+
           <!-- request legacy is not necessary on android-11 but it is ok to leave it in
 	  android:requestLegacyExternalStorage="true"
 	  android:preserveLegacyExternalStorage="true" DO NOT ADD THIS: it breaks the database 
@@ -241,6 +245,7 @@
 	  android:theme="@style/Theme.NoFullScreenNoTitle"
           android:configChanges="orientation|screenSize"
           android:exported="true"
+          android:enableOnBackInvokedCallback="true"
           >
           <!--
           android:windowSoftInputMode="stateVisible"
@@ -256,6 +261,7 @@
 	  android:theme="@style/Theme.NoFullScreenNoTitle"
           android:configChanges="orientation|screenSize"
           android:exported="true"
+          android:enableOnBackInvokedCallback="true"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />

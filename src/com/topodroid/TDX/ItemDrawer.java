@@ -19,6 +19,8 @@ import com.topodroid.types.PointScale;
 
 import android.app.Activity;
 
+import android.os.Bundle;
+
 import android.graphics.pdf.PdfDocument.PageInfo;
 import android.graphics.RectF;
 import android.graphics.Bitmap;

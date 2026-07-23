@@ -429,6 +429,12 @@ public class OverviewWindow extends ItemDrawer
     static final private int ROD = 10; // measure path size
 
     @Override
+    public void onDestroy()
+    {
+      super.onDestroy(); // necessary
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) 
     {
       super.onCreate(savedInstanceState);

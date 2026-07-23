@@ -31,10 +31,11 @@ import java.util.Iterator;
 class GPS implements LocationListener
           , GpsStatus.Listener
 {
+  private Context mContext;
   private LocationManager locManager = null;
   private GpsStatus mStatus = null;
 
-  boolean mIsLocating;
+  boolean mIsLocating = false; // whether the GPS is getting a location
   // boolean mHasLocation;
   private double mLat  = 0;  // decimal degrees
   private double mLng  = 0;  // decimal degrees
@@ -50,6 +51,16 @@ class GPS implements LocationListener
   // private double mErr2 = -1; // location error [m]
   private int mNrSatellites = 0;
   private double mDelta;
+
+  /** @return true if the GPS has a location manager
+   */
+  boolean canLocate() 
+  { 
+    if ( locManager == null ) {
+      tryGetLocManager();
+    }
+    return locManager != null;
+  }
 
   interface GPSListener
   {
@@ -75,11 +86,21 @@ class GPS implements LocationListener
 
   GPS( Context ctx )
   {
-    mDelta = 1.0e-7;
+    mContext    = ctx;
+    mDelta      = 1.0e-7;
     mIsLocating = false;
+    mStatus     = null;
+    locManager  = null;
     // mNrSatellites = 0;
-    if ( checkLocation( ctx ) ) { // CHECK_PERMISSIONS
-      locManager = (LocationManager) ctx.getSystemService( Context.LOCATION_SERVICE );
+    tryGetLocManager( );
+	TDLog.v("GPS cstr: mIsLocating " + mIsLocating + " locManager " + ( (locManager == null)? "null" : "non-null" ) );
+  }
+
+  private void tryGetLocManager( )
+  {
+    if ( checkLocation( mContext ) ) { // CHECK_PERMISSIONS
+      TDLog.v("GPS check permission/features OK");
+      locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
       if ( locManager != null ) {
         try { 
           mStatus = locManager.getGpsStatus( null );
@@ -87,16 +108,19 @@ class GPS implements LocationListener
           mStatus = null;
           // setGPSoff();
           locManager = null;
-          // TDLog.e( TODO );
+          TDLog.e( "GPS failed to get GpsStatus" );
         } catch ( UnsupportedOperationException e ) {
           mStatus = null;
           locManager = null;
-          // TDLog.e( TODO );
+          TDLog.e( "GPS unsupported op " + e.getMessage() );
         }
+      } else {
+        TDLog.e("GPS cannot get LOCATION SERVICE - no permission or features");
       }
     }
     // mHasLocation = false;
   }
+    
 
   // private final double mW0 = 0.8;
   // private final double mW1 = 1 - mW0;
@@ -142,7 +166,8 @@ class GPS implements LocationListener
   @SuppressLint("MissingPermission")
   void setGPSoff()
   {
-    if ( locManager != null ) {
+    if ( canLocate() ) {
+      TDLog.v("GPS off can locate - is locating " + mIsLocating );
       try {
         locManager.removeUpdates( this );
         locManager.removeGpsStatusListener( this );
@@ -160,16 +185,25 @@ class GPS implements LocationListener
     // mHasLocation = false;
     // mErr2 = -1; // restart location averaging
     resetSums();
-    if ( locManager == null ) return false;
-    try {
-      locManager.addGpsStatusListener( this );
-      locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
-      mIsLocating = true;
-    } catch ( SecurityException e ) {
-      TDLog.e( "Location manager error-2 " + e.getMessage() );
-    }
-    mNrSatellites = 0;
-    return true;
+	mNrSatellites = 0;
+    if ( canLocate() ) {
+      TDLog.v("GPS on can locate - is locating " + mIsLocating );
+      // if ( ! mIsLocating ) 
+      {
+        try {
+          locManager.addGpsStatusListener( this );
+          locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
+          mIsLocating = true;
+        } catch ( SecurityException e ) {
+          TDLog.e( "Location manager error-2 " + e.getMessage() );
+        }
+      }
+      TDLog.v("GPS on - return " + mIsLocating );
+      return mIsLocating;
+    } 
+    TDLog.v("GPS on cannot locate - return false ");
+    mIsLocating = false;
+    return false;
   }
 
   private void resetSums()
@@ -199,16 +233,36 @@ class GPS implements LocationListener
     // TDLog.v("GPS onStatusChanged status " + status );
   }
 
+  // called from onGpsStatusChanged
   @SuppressLint("MissingPermission")
   private int getNrSatellites()
   {
     locManager.getGpsStatus( mStatus );
     Iterator< GpsSatellite > sats = mStatus.getSatellites().iterator();
     int  nr = 0;
-    while( sats.hasNext() ) {
+	while( sats.hasNext() ) {
       GpsSatellite sat = sats.next();
       if ( sat.usedInFix() ) ++nr;
+	}
+	/*
+    if ( locManager != null ) {
+      GpsStatus mGpsStatus = null;
+      try { 
+        mGpsStatus = locManager.getGpsStatus( mGpsStatus );
+      } catch ( SecurityException e ) {
+        TDLog.e( "GPS failed to get GpsStatus - security error" );
+      } catch ( UnsupportedOperationException e ) {
+        TDLog.e( "GPS failed to get GpsStatus - unsupported op" );
+      }
+      if ( mGpsStatus != null ) {
+        Iterator< GpsSatellite > sats = mGpsStatus.getSatellites().iterator();
+        while( sats.hasNext() ) {
+          GpsSatellite sat = sats.next();
+          if ( sat.usedInFix() ) ++nr;
+        }
+      }
     }
+	*/
     return nr;
   }
 

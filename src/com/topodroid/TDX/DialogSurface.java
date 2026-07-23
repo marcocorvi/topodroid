@@ -105,6 +105,7 @@ class DialogSurface extends MyDialog
     mCBproj.setChecked( GlModel.surfaceLegsMode );
     mCBtexture.setChecked( GlModel.surfaceTexture );
     if ( mHasLocation ) { // WITH-GPS
+      TDLog.v("Dialog Surface GPS status " + mTopoGl.getGPSstatus() );
       mCBgps.setChecked( mTopoGl.getGPSstatus() );
     } else {
       mCBgps.setVisibility( View.GONE );
@@ -132,6 +133,7 @@ class DialogSurface extends MyDialog
       GlModel.surfaceTexture  = mCBtexture.isChecked();
 
       if ( mHasLocation ) { // WITH-GPS
+        TDLog.v( "Dialog surface GPS has location - set status " + ( mCBgps.isChecked() ? "ON" : "OFF" ) );
         mTopoGl.setGPSstatus( mCBgps.isChecked() );
       }
       if ( mEast.getText() != null && mNorth.getText() != null ) {
@@ -140,7 +142,7 @@ class DialogSurface extends MyDialog
           double n = Double.parseDouble( mNorth.getText().toString() );
           mTopoGl.addGPSpoint( e, n );
         } catch ( NumberFormatException e ) {
-          TDLog.e( "Dialog surface on click: " + e.getMessage() );
+          TDLog.v( "Dialog surface add point: " + e.getMessage() );
         }
       }
 
