@@ -1538,49 +1538,133 @@ public class DrawingWindow extends ItemDrawer
     }
   };
 
+  private void cancelDoubleBackPrompt() // TDSKETCH
+  {
+    doubleBack = false;
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
+    if ( doubleBackToast != null ) doubleBackToast.cancel();
+    doubleBackToast = null;
+  }
+
   void doClose()
   {
-    TDLog.v( "Drawing Window do close ...");
+    TDLog.v( "Drawing Window " + mType + " do close ...");
     checkLabelPath();
-    super.onBackPressed();
+    // super.onBackPressed();
+    finish();
   }
+
+  private void performImmediateBackAction() // TDSKETCH
+  {
+    cancelDoubleBackPrompt();
+    if ( dismissPopups() != DISMISS_NONE ) return;
+    if ( onMenu ) { 
+      closeMenu();
+      return;
+    }
+    if ( mTh2Edit ) { // TH2EDIT
+      super.onBackPressed();
+    } else {
+      if ( PlotType.isAnySection( mType ) ) {
+        exitSectionSketch();
+      } else {
+        super.onBackPressed();
+      }
+    }
+  }
+
+  private void exitSectionSketch() 
+  {
+    String scrap_name = mFullName3;
+    startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber + 2, TDPath.NR_BACKUP );
+    // TDSKETCH
+	// if ( ! ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) ) {
+    //   queuePendingSectionOverlayRefresh( scrap_name );
+    // } else {
+    //   mPendingSectionOverlayRefreshName = null;
+    // }
+    popInfo();
+    doStart( false, -1, null );
+    if ( mSectionPt == null ) { // NOT TDSKETCH
+      mSectionPt = findSectionPoint( scrap_name );
+    }
+    if ( mSectionPt != null ) {
+      setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+      mSectionPt = null; 
+    }
+    mSectionPt = null;
+  }
+
+  // private String mPendingSectionOverlayRefreshName = null; // TDSKETCH
+
+  // private void queuePendingSectionOverlayRefresh( String scrap_name ) // TDSKETCH
+  // {
+  //   mPendingSectionOverlayRefreshName = scrap_name;
+  // }
+
+  // private void flushPendingSectionOverlayRefresh( boolean success ) // TDSKETCH
+  // {
+  //   String scrap_name = mPendingSectionOverlayRefreshName;
+  //   mPendingSectionOverlayRefreshName = null;
+  //   if ( ! success || scrap_name != null || ! PlotType.isSketch2D( mType ) ) return;
+  //   DrawingPointPath pt = findSectionPoint( scrap_name );
+  //   if ( pt != null ) refreshSectionOverlay( pt );
+  // }
+
 
   // @note doSaveTdr( ) is already called by onPause
   @Override
   public void onBackPressed () // askClose
   {
-    TDLog.v( "Drawing Window on back pressed ... single-back " + TDSetting.mSingleBack + " double-back " + doubleBack );
+    TDLog.v("Drawing Window " + mType + " BACK pressed" );
+    hanbleBackPressed();
+  }
+
+  void hanbleBackPressed()
+  {
+    TDLog.v( "Drawing Window " + mType + " handle back ... single-back " + TDSetting.mSingleBack + " double-back " + doubleBack );
     checkLabelPath();
     if ( dismissPopups() != DISMISS_NONE ) return;
     if ( mTh2Edit ) { // TH2EDIT
       super.onBackPressed();
     } else {
       if ( PlotType.isAnySection( mType ) ) {
-        // Modified = true; // force saving
-        startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
-        // TODO make sure the xsection has been written to file
-        popInfo();
-        doStart( false, -1, null );
-        // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
-        if ( mSectionPt == null ) {
-          // TODO find section point and redraw the outline
-          // the section point has option "-scrap mFullName3"
-          // (1) find the section point
-          mSectionPt = findSectionPoint( mFullName3 );
-        }
-        if ( /* TDSetting.mFixmeXSection && */ mSectionPt != null ) {
-          // TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
-          setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
-          mSectionPt = null; 
-        }
+        exitSectionSketch();
+
+        // moved into exitSectionSketch
+        // // Modified = true; // force saving
+        // startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
+        // // TODO make sure the xsection has been written to file
+        // popInfo();
+        // doStart( false, -1, null );
+        // // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
+        // if ( mSectionPt == null ) {
+        //   // TODO find section point and redraw the outline
+        //   // the section point has option "-scrap mFullName3"
+        //   // (1) find the section point
+        //   mSectionPt = findSectionPoint( mFullName3 );
+        // }
+        // if ( /* TDSetting.mFixmeXSection && */ mSectionPt != null ) {
+        //   // TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+        //   setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+        //   mSectionPt = null; 
+        // }
+
       } else {
         if ( TDSetting.mSingleBack ) {
-          super.onBackPressed();
+          TDLog.v( "Drawing Window " + mType + " single back finish");
+          // super.onBackPressed();
+          finish();
         } else if ( doubleBack ) {
+          TDLog.v( "Drawing Window " + mType + " double back finish");
           if ( doubleBackToast != null ) doubleBackToast.cancel();
           doubleBackToast = null;
-          super.onBackPressed();
+          // super.onBackPressed();
+          finish();
         } else {
+          TDLog.v( "Drawing Window " + mType + " double back start");
           doubleBack = true;
           doubleBackToast = TDToast.makeToast( R.string.double_back );
           doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
@@ -1709,6 +1793,7 @@ public class DrawingWindow extends ItemDrawer
           public void handleMessage(Message msg) {
             // TopoDroidApp.mShotWindow.enableSketchButton( true );
             TopoDroidApp.mEnableZip = true;
+            // flushPendingSectionOverlayRefresh( msg.what == 661 ); // TDSKETCH
           }
         };
         break;
@@ -3014,7 +3099,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void popInfo()
   {
-    TDLog.v( "Drawing Window pop info" );
+    TDLog.v( "Drawing Window " + mType + " pop info" );
     // TODO save plot offset and zoom
     if ( mPid3 >= 0 ) {
       // TDLog.v( "update xsection pid " + mPid3 + " X " + mOffset.x + " Y " + mOffset.y + " zoom " + mZoom );
@@ -3461,7 +3546,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doStart( boolean do_load, float tt, Vector3D center )
   {
-    TDLog.v( "Drawing Window do start" );
+    TDLog.v( "Drawing Window " + mType + " do start" );
     if ( mApp_mData == null ) {
       TDLog.e("DrawingWindow start with null DB");
       finish();
@@ -4987,6 +5072,7 @@ public class DrawingWindow extends ItemDrawer
                     }
                     if ( add && ap != null && ap.size() > 2 ) {
                       ap.closePath();
+                      ap.setScale( mScaleBar.getActive() -2 );
                       ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                       mDrawingSurface.addDrawingPath( ap );
                     }
@@ -5051,6 +5137,7 @@ public class DrawingWindow extends ItemDrawer
                         }
                         if ( ! tryAndJoin( ap, mCurrentAreaPath ) ) {
                           ap.closePath();
+                          ap.setScale( mScaleBar.getActive() -2 );
                           ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                           mDrawingSurface.addDrawingPath( ap );
                         }
@@ -5102,6 +5189,7 @@ public class DrawingWindow extends ItemDrawer
                         }
                         if ( ! tryAndJoin( ap, mCurrentAreaPath ) ) {
                           ap.closePath();
+                          ap.setScale( mScaleBar.getActive() -2 );
                           ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                           mDrawingSurface.addDrawingPath( ap );
                         }
@@ -5142,6 +5230,7 @@ public class DrawingWindow extends ItemDrawer
                   if ( mCurrentAreaPath != null ) {
                     if ( ! tryAndJoin( mCurrentAreaPath, mCurrentAreaPath ) ) {
                       mCurrentAreaPath.closePath();
+                      mCurrentAreaPath.setScale( mScaleBar.getActive() -2 );
                       mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                       mDrawingSurface.addDrawingPath( mCurrentAreaPath );
                     }
@@ -8665,27 +8754,32 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // cannot intercept arrow-down ley event
+  /** handle key down event
+   * @param code  key code
+   * @param ev    key event
+   * @note cannot intercept arrow-down ley event
+   */
   @Override
-  public boolean onKeyDown( int code, KeyEvent event )
+  public boolean onKeyDown( int code, KeyEvent ev)
   {
-    TDLog.v("Drawing Window on key down: code " + code );
+    TDLog.v("Drawing Window " + mType + " on key down: code " + code );
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
-        break; // return true;
+        ev.startTracking(); // issue 169
+        return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
-        break; // return true;
+        return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
         takeScreenshot( mDrawingSurface );
-        break; // return true;
+        return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
-        break; // return true;
+        return true;
       default:
         // TDLog.v( "key down: code " + code );
         if ( mLabelPath != null ) {
-          int code_point = event.getUnicodeChar();
+          int code_point = ev.getUnicodeChar();
           // TDLog.v("key event unicode " + code_point );
           // TODO suppress invalid characters
           if ( code == KeyEvent.KEYCODE_DEL ) {
@@ -8697,10 +8791,26 @@ public class DrawingWindow extends ItemDrawer
           // mDrawingSurface.setBackgroundDrawable( null ); // this makes grey for all modes
           // getWindow().setBackgroundDrawableResource( R.drawable.black );
 
-          // return true;
+          return true;
         }
     }
     return false; // do not track the event to its key-up
+  }
+
+  /** handle key up event
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override
+  public boolean onKeyUp( int code, KeyEvent ev ) // issue 169
+  {
+    TDLog.v("Drawing Window key up: code " + code );
+    if ( TDandroid.BELOW_API_36 && code == KeyEvent.KEYCODE_BACK ) {
+      if ( ev.isTracking() && ! ev.isCanceled() ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   // ---------------------------------------------------------

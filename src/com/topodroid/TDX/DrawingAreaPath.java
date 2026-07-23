@@ -17,7 +17,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDMath;
 import com.topodroid.math.TDVector;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.num.TDNum;
 
@@ -28,6 +28,8 @@ import android.graphics.Matrix;
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapShader;
 import android.graphics.Shader;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 // import android.graphics.Shader.TileMode;
 
 import java.io.PrintWriter;
@@ -44,6 +46,11 @@ import java.util.Locale;
  */
 public class DrawingAreaPath extends DrawingPointLinePath
 {
+  // TDSKETCH
+  private static final PorterDuffXfermode XFERMODE_AREA_FILL           = new PorterDuffXfermode( PorterDuff.Mode.DST_OVER );
+  private static final PorterDuffXfermode XFERMODE_AREA_OVERLAP_DARKEN = new PorterDuffXfermode( PorterDuff.Mode.SRC_ATOP );
+
+
   // private static int area_id_cnt = 0;
   // private static String makeId()
   // {
@@ -332,10 +339,22 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mOrientation = TDMath.in360( angle );
     resetPathPaint();
   }
+  
+  final static float[] mScaleFactor = { 0.5f, 0.7f, 1.0f, 1.7f, 3.0f };
+
+  /** @return the scale fcator
+   * @param scale   input scale (in [-2,2]
+   */
+  float getScaleFactor( int scale )
+  {
+    if ( scale < -2 || scale > 2 ) return 1;
+    return mScaleFactor[ 2 + scale ];
+  }
 
   void shiftShaderBy( float dx, float dy, float s )
   {
     if ( mLocalShader != null ) {
+      s *= getScaleFactor( mScale ); // AREA SCALE
       // TDLog.v( "shift shader by " + dx + " " + dy + " scale " + s + " orient " + mOrientation );
       Matrix mat = new Matrix();
       // shader.getLocalMatrix( mat ); // set shader matrix even if shader did not have one
@@ -369,11 +388,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   void drawPath( Path path, Canvas canvas )
   {
     if ( mPaint != null ) {
-      canvas.save();
-      canvas.clipPath( path );
-      canvas.drawPaint( mPaint );
-      if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint ); // ??? NullPointerException reported here`
-      canvas.restore();
+      drawPath( path, canvas, mPaint );
     }
   }
 
@@ -381,13 +396,25 @@ public class DrawingAreaPath extends DrawingPointLinePath
   void drawPath( Path path, Canvas canvas, int xor_color )
   {
     if ( mPaint != null ) {
-      canvas.save();
-      canvas.clipPath( path );
-      canvas.drawPaint( xorPaint( mPaint, xor_color ) );
-      if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint ); // ??? NullPointerException reported here`
-      canvas.restore();
+      Paint paint = xorPaint( mPaint, xor_color );
+      drawPath( path, canvas, paint );
     }
   }
+
+  private void drawPath( Path path, Canvas canvas, Paint paint )
+  {
+    canvas.save();
+    canvas.clipPath( path );
+    if ( TDSetting.mAreaOvrelapDarken ) { // TDSKETCH
+      canvas.drawPaint( makeAreaOverlapDarkenPaint( paint ) );
+      canvas.drawPaint( makeAreaFillPaint( paint ) );
+    } else {
+      canvas.drawPaint( paint );
+    }
+    if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint ); // ??? NullPointerException reported here`
+    canvas.restore();
+  }
+
 
   @Override
   String toTherion( )
@@ -557,6 +584,20 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
     mFirst.toCave3D( pw, type, V1, V2 );
     pw.format( Locale.US, "ENDAREA\n" );
+  }
+
+  private static Paint makeAreaOverlapDarkenPaint( Paint paint ) // TDSKETCH
+  {
+    Paint ret = new Paint( paint );
+    ret.setXfermode( XFERMODE_AREA_OVERLAP_DARKEN );
+    return ret;
+  }
+
+  private static Paint makeAreaFillPaint( Paint paint ) // TDSKETCH
+  {
+    Paint ret = new Paint( paint );
+    ret.setXfermode( XFERMODE_AREA_FILL );
+    return ret;
   }
 
 }

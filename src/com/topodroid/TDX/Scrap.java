@@ -2974,7 +2974,7 @@ public class Scrap
 
   // AREA ACTIONS ----------------------------------------------------
 
-  void shiftAreaShaders( float dx, float dy, float s, boolean landscape )
+  void shiftAreaShaders( float dx, float dy, float s, boolean landscape ) // AREA SCALE ?
   {
     synchronized ( TDPath.mCommandsLock ) {
       for ( ICanvasCommand c : mCurrentStack ) {

@@ -71,6 +71,7 @@ public class TDSetting
   // TDSKETCH referenced by darken-lighten
   public static float mSketchGridWidth = 0; 
   public static int mSketchGridColor = 0xffffffff; // WHITE TDSKETC
+  public static boolean mAreaOvrelapDarken = true;
 
   public static final int FEEDBACK_NONE = 0;
   public static final int FEEDBACK_BELL = 1;
