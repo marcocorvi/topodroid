@@ -1,0 +1,151 @@
+
+
+  // --------------------------------------------------------------
+
+  private boolean doubleBack = false;
+  private Handler doubleBackHandler = new Handler();
+  private Toast   doubleBackToast = null;
+
+  private final Runnable doubleBackRunnable = new Runnable() {
+    @Override 
+    public void run() {
+      doubleBack = false;
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+    }
+  };
+
+  private void cancelDoubleBackPrompt() // TDSKETCH
+  {
+    doubleBack = false;
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
+    if ( doubleBackToast != null ) doubleBackToast.cancel();
+    doubleBackToast = null;
+  }
+
+  void doClose()
+  {
+    TDLog.v( "Drawing Window " + mType + " do close ...");
+    checkLabelPath();
+    // super.onBackPressed();
+    finish();
+  }
+
+  private void performImmediateBackAction() // TDSKETCH not used yet
+  {
+    cancelDoubleBackPrompt();
+    if ( dismissPopups() != DISMISS_NONE ) return;
+    if ( onMenu ) { 
+      closeMenu();
+      return;
+    }
+    if ( mTh2Edit ) { // TH2EDIT
+      super.onBackPressed();
+    } else {
+      if ( PlotType.isAnySection( mType ) ) {
+        exitSectionSketch();
+      } else {
+        super.onBackPressed();
+      }
+    }
+  }
+
+  private void exitSectionSketch() 
+  {
+    String scrap_name = mFullName3;
+    startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber + 2, TDPath.NR_BACKUP );
+    // TDSKETCH
+	// if ( ! ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) ) {
+    //   queuePendingSectionOverlayRefresh( scrap_name );
+    // } else {
+    //   mPendingSectionOverlayRefreshName = null;
+    // }
+    popInfo();
+    doStart( false, -1, null );
+    if ( mSectionPt == null ) { // NOT TDSKETCH
+      mSectionPt = findSectionPoint( scrap_name );
+    }
+    if ( mSectionPt != null ) {
+      setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+      mSectionPt = null; 
+    }
+    mSectionPt = null;
+  }
+
+  // private String mPendingSectionOverlayRefreshName = null; // TDSKETCH
+
+  // private void queuePendingSectionOverlayRefresh( String scrap_name ) // TDSKETCH
+  // {
+  //   mPendingSectionOverlayRefreshName = scrap_name;
+  // }
+
+  // private void flushPendingSectionOverlayRefresh( boolean success ) // TDSKETCH
+  // {
+  //   String scrap_name = mPendingSectionOverlayRefreshName;
+  //   mPendingSectionOverlayRefreshName = null;
+  //   if ( ! success || scrap_name != null || ! PlotType.isSketch2D( mType ) ) return;
+  //   DrawingPointPath pt = findSectionPoint( scrap_name );
+  //   if ( pt != null ) refreshSectionOverlay( pt );
+  // }
+
+
+  // @note doSaveTdr( ) is already called by onPause
+  @Override
+  public void onBackPressed () // askClose
+  {
+    TDLog.v("Drawing Window " + mType + " BACK pressed" );
+    hanbleBackPressed();
+  }
+
+  void hanbleBackPressed()
+  {
+    TDLog.v( "Drawing Window " + mType + " handle back ... single-back " + TDSetting.mSingleBack + " double-back " + doubleBack );
+    checkLabelPath();
+    if ( dismissPopups() != DISMISS_NONE ) return;
+    if ( mTh2Edit ) { // TH2EDIT
+      super.onBackPressed();
+    } else {
+      if ( PlotType.isAnySection( mType ) ) {
+        exitSectionSketch();
+
+        // moved into exitSectionSketch
+        // // Modified = true; // force saving
+        // startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
+        // // TODO make sure the xsection has been written to file
+        // popInfo();
+        // doStart( false, -1, null );
+        // // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
+        // if ( mSectionPt == null ) {
+        //   // TODO find section point and redraw the outline
+        //   // the section point has option "-scrap mFullName3"
+        //   // (1) find the section point
+        //   mSectionPt = findSectionPoint( mFullName3 );
+        // }
+        // if ( /* TDSetting.mFixmeXSection && */ mSectionPt != null ) {
+        //   // TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+        //   setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+        //   mSectionPt = null; 
+        // }
+
+      } else {
+        if ( TDSetting.mSingleBack ) {
+          TDLog.v( "Drawing Window " + mType + " single back finish");
+          // super.onBackPressed();
+          finish();
+        } else if ( doubleBack ) {
+          TDLog.v( "Drawing Window " + mType + " double back finish");
+          if ( doubleBackToast != null ) doubleBackToast.cancel();
+          doubleBackToast = null;
+          // super.onBackPressed();
+          finish();
+        } else {
+          TDLog.v( "Drawing Window " + mType + " double back start");
+          doubleBack = true;
+          doubleBackToast = TDToast.makeToast( R.string.double_back );
+          doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+        }
+      }
+    }
+  }
