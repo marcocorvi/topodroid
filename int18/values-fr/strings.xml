@@ -374,6 +374,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string -->
     <string name="location_start_fine">Démarre localisation fine</string> <!-- a confirmer dans le contexte -->
     <string name="location_enabled">Vérifier que la LOCALISATION est autorisée</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
     <string name="discovery_error">Erreur de recherche BT: %1$s</string>
 

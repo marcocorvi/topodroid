@@ -360,6 +360,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Начална добра позиция</string>
     <string name="location_enabled">Уверете се, че LOCATION (местоположението) е активиран.</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">Грешка при откриване на BT: %1$s</string>
 

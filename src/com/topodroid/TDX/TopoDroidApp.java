@@ -3669,7 +3669,7 @@ public class TopoDroidApp extends Application
   {
     if ( TDLevel.isDebugBuild() ) return;
     if ( mDebugTest ) return; // DO NOT SYNC
-    if ( ! TDSetting.mAnalytics ) return; // DO NOT SYNC
+    if ( ! TDSetting.mAnalytics ) return;
     if ( mAnalytic == null ) return;
     if ( ! TDandroid.checkInternet( ctx ) ) return;
     String today = TDUtil.getDateString( "yyyy.MM.dd" );

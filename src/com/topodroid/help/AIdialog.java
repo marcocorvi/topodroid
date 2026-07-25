@@ -81,15 +81,15 @@ public class AIdialog extends MyDialog
   final static int IDX_MODEL = 1;
   int mIdxModel = IDX_MODEL; // index of Gemini model / index of local setting section
 
-  private Button mBtnSubmit;
-  protected TextView mAnswer;
-  private EditText mETtemperature;
-  private EditText mETmaxTokens;
+  private Button mBtnSubmit = null;
+  protected TextView mAnswer = null;
+  private EditText mETtemperature = null;
+  private EditText mETmaxTokens = null;
   private static float mTemperature = 0.2f;
   private static int mMaxTokens = 1024;
 
   protected int mRtitle = R.string.title_ai_dialog;
-  protected int mRAImodel;  // AI model resource
+  protected int mRAImodel = -1;  // AI model resource
   protected Pattern mPattern = null;
 
   // TODO list of help entries
@@ -98,18 +98,20 @@ public class AIdialog extends MyDialog
   public AIdialog( Context context, IHelpViewer parent, String user_key, String page, int r_ai_model )
   {
     super( context, null, R.string.AIdialog );  // nul app
-    mParent = parent;
-    mParent.setAIbuttonEnabled( false );
-    mRAImodel = r_ai_model;
-    TDLog.v("AI dialog: cstr page " + page + " user key " + user_key );
-    if ( user_key != null ) {
-      mHelper = new AIhelper( context, this, user_key, page );
-      mIdxModel = IDX_MODEL;
-    /* GEMMA3
-    } else { 
-      mLocalModel = new AIlocalModel( context, this );
-      mIdxModel = 0;
-    // END GEMMA3 */
+    if ( AIhelper.HAS_AI ) {
+      mParent = parent;
+      mParent.setAIbuttonEnabled( false );
+      mRAImodel = r_ai_model;
+      TDLog.v("AI dialog: cstr page " + page + " user key " + user_key );
+      if ( user_key != null ) {
+        mHelper = new AIhelper( context, this, user_key, page );
+        mIdxModel = IDX_MODEL;
+      /* GEMMA3
+      } else { 
+        mLocalModel = new AIlocalModel( context, this );
+        mIdxModel = 0;
+      // END GEMMA3 */
+      }
     }
   }
 
@@ -124,28 +126,30 @@ public class AIdialog extends MyDialog
     super.onCreate( savedInstanceState );
     initLayout(R.layout.ai_dialog, mRtitle );
 
-    ((Button) findViewById( R.id.button_submit ) ).setOnClickListener( this );
-    ((Button) findViewById( R.id.button_clear  ) ).setOnClickListener( this );
-    ((Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
-    ((Button) findViewById( R.id.button_reset  ) ).setOnClickListener( this );
+    if ( AIhelper.HAS_AI ) {
+      ((Button) findViewById( R.id.button_submit ) ).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_clear  ) ).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_reset  ) ).setOnClickListener( this );
 
-    Spinner models = (Spinner) findViewById( R.id.model );
-    /* IF GEMMA3
-    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, ( mHelper != null )? mModels : mLLMindex ); 
-    // ELSE GEMMA3 */
-    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
-    // END GEMMA3 */
+      Spinner models = (Spinner) findViewById( R.id.model );
+      /* IF GEMMA3
+      ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, ( mHelper != null )? mModels : mLLMindex ); 
+      // ELSE GEMMA3 */
+      ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mModels );
+      // END GEMMA3 */
 
-    models.setAdapter( adapter );
-    models.setOnItemSelectedListener( this );
-    models.setSelection( mIdxModel );
+      models.setAdapter( adapter );
+      models.setOnItemSelectedListener( this );
+      models.setSelection( mIdxModel );
 
-    mAnswer = (TextView) findViewById( R.id.answer );
+      mAnswer = (TextView) findViewById( R.id.answer );
 
-    mETtemperature = (EditText) findViewById( R.id.temperature );
-    mETmaxTokens   = (EditText) findViewById( R.id.max_tokens );
-    mETtemperature.setText( String.format(Locale.US, "%.1f", mTemperature ) );
-    mETmaxTokens.setText( Integer.toString( mMaxTokens ) );
+      mETtemperature = (EditText) findViewById( R.id.temperature );
+      mETmaxTokens   = (EditText) findViewById( R.id.max_tokens );
+      mETtemperature.setText( String.format(Locale.US, "%.1f", mTemperature ) );
+      mETmaxTokens.setText( Integer.toString( mMaxTokens ) );
+    }
   }
 
   /** react to an item selection
@@ -157,15 +161,19 @@ public class AIdialog extends MyDialog
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
-    mIdxModel = pos; 
+    if ( AIhelper.HAS_AI ) {
+      mIdxModel = pos; 
+    }
   }
 
   @Override
   public void onNothingSelected( AdapterView av )
   {
-    mIdxModel = IDX_MODEL;
-    Spinner models = (Spinner) findViewById( R.id.model );
-    models.setSelection( mIdxModel );
+    if ( AIhelper.HAS_AI ) {
+      mIdxModel = IDX_MODEL;
+      Spinner models = (Spinner) findViewById( R.id.model );
+      models.setSelection( mIdxModel );
+    }
   }
 
   /** react to a user tap - only the taps on "man book" are taken
@@ -175,6 +183,8 @@ public class AIdialog extends MyDialog
   @Override 
   public void onClick( View v ) 
   {
+    if ( ! AIhelper.HAS_AI ) dismiss();
+
     /* GEMMA3
     if ( mLayout != null ) mLayout.setVisibility( View.GONE );
     // END GEMMA3 */
@@ -199,7 +209,7 @@ public class AIdialog extends MyDialog
           Button b = (Button)findViewById(R.id.button_submit);
           b.setOnClickListener( null );
           b.setEnabled( false );
-          if ( mHelper != null ) {
+          if ( mHelper != null && mRAImodel >= 0 ) {
             mHelper.setModel( mModels[mIdxModel], mRAImodel, mTemperature, mMaxTokens );
             mHelper.ask( question, this, mLocalContext );
           /* GEMMA3
@@ -239,11 +249,13 @@ public class AIdialog extends MyDialog
 
   void resetCanSubmit()
   {
-    TDLog.v("AI dialog: reset can submit" );
-    mCanSubmit = true;
-    Button v = (Button)findViewById(R.id.button_submit);
-    v.setOnClickListener( this );
-    v.setEnabled( true );
+    if ( AIhelper.HAS_AI ) {
+      TDLog.v("AI dialog: reset can submit" );
+      mCanSubmit = true;
+      Button v = (Button)findViewById(R.id.button_submit);
+      v.setOnClickListener( this );
+      v.setEnabled( true );
+    }
   }
 
   /** show the response in the answer textbox
@@ -251,12 +263,14 @@ public class AIdialog extends MyDialog
    */
   public void showResponse( String response )
   {
-    TDLog.v("RESPONSE: " + response );
-    // if ( response.startsWith("AI error" ) ) {
-    //   int pos = response.indexOf( "kotlinx" );
-    //   if ( pos > 0 ) response = response.substring(0,pos); 
-    // }
-    mAnswer.setText( response );
+    if ( AIhelper.HAS_AI ) {
+      TDLog.v("RESPONSE: " + response );
+      // if ( response.startsWith("AI error" ) ) {
+      //   int pos = response.indexOf( "kotlinx" );
+      //   if ( pos > 0 ) response = response.substring(0,pos); 
+      // }
+      mAnswer.setText( response );
+    }
   }
 
   /** apend a partila response to the text view
@@ -264,20 +278,25 @@ public class AIdialog extends MyDialog
    */
   public void appendResponse( String response )
   {
-    mAnswer.append( response );
+    if ( AIhelper.HAS_AI ) {
+      mAnswer.append( response );
+    }
   }
 
   public void openOnParent( String page )
   {
     dismiss();
-    mParent.showManPage( page );
+    if ( AIhelper.HAS_AI ) {
+      mParent.showManPage( page );
+    }
   }
 
   @Override
   public void onBackPressed()
   {
-    mParent.setAIbuttonEnabled( true );
-    // super.onBackPressed(); // issue 167
+    if ( AIhelper.HAS_AI ) {
+      mParent.setAIbuttonEnabled( true );
+    }
     dismiss();
   }
 

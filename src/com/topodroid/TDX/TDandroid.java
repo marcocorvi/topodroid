@@ -245,14 +245,16 @@ public class TDandroid
 
     int not_granted = 0;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
-      // TDLog.v("PERM Create permission " + permNames[k] );
+      // TDLog.v("PERM Create permission " + k + ": " + permNames[k] );
 
       if ( k == PERM_BT_CONNECT && BELOW_API_31 ) { // BT_CONNECT only for API >= 31 - API-31
+        // TDLog.v("PERM Create permission " + k + ": " + permNames[k] + " granted below 31" );
         GrantedPermission[k] = true;
         continue;
       } 
 
       if ( k == PERM_BT_SCAN && BELOW_API_31 ) { // BT_SCAN only for API >= 31 - API-31
+        // TDLog.v("PERM Create permission " + k + ": " + permNames[k] + " granted below 31" );
         GrantedPermission[k] = true;
         continue;
       } 
@@ -263,13 +265,14 @@ public class TDandroid
       // }
 
       if ( (k == PERM_WRITE || k == PERM_READ) && (PRIVATE_STORAGE || AT_LEAST_API_33) ) {
+        // TDLog.v("PERM Create permission " + k + ": " + permNames[k] + " not granted above 33" );
         // GrantedPermission[k] = false;
         continue;
       }
 
       GrantedPermission[k] = hasPermission( context, perms[k] );
       if ( ! GrantedPermission[k] ) {
-        TDLog.v( "PERM " + permNames[k] + " not granted ");
+        TDLog.v( "PERM " + permNames[k] + " not granted - request time " + time );
         if ( time > 1 ) {
           activity.requestPermissions( new String[] { perms[k] }, REQUEST_PERMISSIONS );
           GrantedPermission[k] = hasPermission( context, perms[k] );
@@ -278,8 +281,8 @@ public class TDandroid
           ++not_granted;
         }
         // if ( k < NR_PERMS_D ) MustRestart = true;
-      // } else {
-      //   // TDLog.v( "Perm " + permNames[k] + " granted ");
+      } else {
+        // TDLog.v( "PERM " + k + ": " + permNames[k] + " granted ");
       }
     }
     TDLog.v("PERM create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS );
@@ -369,7 +372,7 @@ public class TDandroid
       if ( (k == PERM_WRITE || k == PERM_READ ) && ( PRIVATE_STORAGE || AT_LEAST_API_33 ) ) continue;
       // if ( k == PERM_CAMERA && AT_LEAST_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) {
-        TDLog.v("TD cannot perm " + permShortNames[k] + " - canRun() returns false" );
+        // TDLog.v("TD cannot perm " + k + ": " + permShortNames[k] + " - canRun() returns false" );
         // TDToast.makeLong( permShortNames[k] + " is needed to run. Bye.");
         return false;
       }

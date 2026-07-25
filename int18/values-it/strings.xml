@@ -357,6 +357,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Errore %1$.0f m</string -->
     <string name="location_start_fine">Inizio affinamento posizione</string>
     <string name="location_enabled">Assicurati che LOCATION sia abilitata</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
     <string name="discovery_error">Errore individuazione BT: %1$s</string>
 

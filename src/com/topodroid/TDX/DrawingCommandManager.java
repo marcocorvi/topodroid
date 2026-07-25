@@ -2548,5 +2548,11 @@ public class DrawingCommandManager
     return ret;
   }
 
+  /** recover the symbols types
+   */
+  void recoverSymbols() 
+  {
+    for ( Scrap scrap : mScraps ) scrap.recoverSymbols(); 
+  }
   
 }

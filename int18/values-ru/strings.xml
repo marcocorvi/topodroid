@@ -359,6 +359,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string -->
     <string name="location_start_fine">Начинаю уточнение позиции</string>
     <string name="location_enabled">Убедитесь, что функция МЕСТОПОЛОЖЕНИЕ включена</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
     <string name="discovery_error">Ошибка обнаружения BT: %1$s</string>
 

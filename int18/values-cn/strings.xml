@@ -361,6 +361,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string -->
     <string name="location_start_fine">开始定位</string>
     <string name="location_enabled">请确认手机获取位置已经打开</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
     <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
 

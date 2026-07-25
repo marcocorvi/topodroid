@@ -17,7 +17,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.SymbolType;
 import com.topodroid.types.PointScale;
 
-import android.app.Activity;
+// import android.app.Activity;
 
 import android.os.Bundle;
 
@@ -26,20 +26,17 @@ import android.graphics.RectF;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-import android.window.OnBackInvokedDispatcher;
-import android.window.OnBackInvokedCallback;
-
-import androidx.annotation.RequiresApi;
+// import android.window.OnBackInvokedDispatcher;
+// import android.window.OnBackInvokedCallback;
+// import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
-abstract class ItemDrawer extends Activity
+abstract class ItemDrawer extends MyActivity
 {
   static final int POINT_MAX = 32768;
   static final int PDF_MARGIN = 40;
-
-  protected Activity mActivity = null;
 
   int mCurrentPoint = -1;
   int mCurrentLine  = -1;
@@ -436,36 +433,27 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
   }
 
-  // issua 169 - this should be implemente from API 33 onward
-  @RequiresApi( 33 )
-  private static class Api33
-  {
-    private static final java.util.Map< ItemDrawer, OnBackInvokedCallback > sCallbacks = new java.util.WeakHashMap<>();
-
-    static void registerBack( ItemDrawer d )
-    {
-      TDLog.v("*** Item Drawer register BACK");
-      OnBackInvokedCallback cb = d::onBackPressed;
-      sCallbacks.put( d, cb );
-      d.getOnBackInvokedDispatcher().registerOnBackInvokedCallback( OnBackInvokedDispatcher.PRIORITY_DEFAULT, cb );
-    }
-
-    static void unregisterBack( ItemDrawer d )
-    {
-      TDLog.v("*** Item Drawer unregister BACK");
-      OnBackInvokedCallback cb = sCallbacks.remove( d );
-      if ( cb != null ) {
-        d.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback( cb );
-      }
-    }
-  }
+ 
 
   @Override
   public void onBackPressed()
   {
     TDLog.v("*** Item Drawer BACK pressed");
-    // finish();
+    super.onBackPressed();
   }
-  
 
+// issue 170
+  @Override
+  protected void onCreate( Bundle savedInstanceState )
+  {
+    super.onCreate( savedInstanceState );
+  }
+
+  @Override
+  protected void onDestroy() 
+  {
+    super.onDestroy();
+  }
+
+  
 }

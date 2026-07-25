@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // WITH-GPS
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -182,10 +183,11 @@ class GPS implements LocationListener
   @SuppressLint("MissingPermission")
   boolean setGPSon()
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.GPS_TRACK );
     // mHasLocation = false;
     // mErr2 = -1; // restart location averaging
     resetSums();
-	mNrSatellites = 0;
+    mNrSatellites = 0; // Initialize before requesting updates
     if ( canLocate() ) {
       TDLog.v("GPS on can locate - is locating " + mIsLocating );
       // if ( ! mIsLocating ) 

@@ -18,6 +18,7 @@ import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDString;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.help.AIdialog;
+import com.topodroid.help.AIhelper;
 import com.topodroid.help.IHelpViewer;
 import com.topodroid.help.PageLink;
 // import com.topodroid.prefs.TDSetting;
@@ -38,7 +39,7 @@ import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;;
+import android.widget.LinearLayout;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
@@ -61,7 +62,7 @@ import java.util.regex.Pattern;
 
 public class PrefAIdialog extends AIdialog
 {
-  private boolean mWithGemini = true;
+  private boolean mWithGemini = AIhelper.HAS_AI;
 
   /* GEMMA3 
   int mInputType = 0;
@@ -76,28 +77,30 @@ public class PrefAIdialog extends AIdialog
   public PrefAIdialog( Context context, IHelpViewer parent, String user_key, String page )
   {
     super( context, parent, user_key, page, R.string.ai_model_settings );
-    TopoDroidApp.updateAnalytic( TDAnalytics.AI_SETTING );
-    mPattern = Pattern.compile( "\\[([A-Z_]+)=([a-zA-Z0-9.]+)]" );
-    mRtitle = R.string.title_ai_dialog_pref;
+    if ( AIhelper.HAS_AI ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.AI_SETTING );
+      mPattern = Pattern.compile( "\\[([A-Z_]+)=([a-zA-Z0-9.]+)]" );
+      mRtitle = R.string.title_ai_dialog_pref;
 
-    TDLog.v("Pref AI dialog page " + page );
+      TDLog.v("Pref AI dialog page " + page );
 
-    if ( user_key != null ) {
-      mWithGemini = true;
-      if ( mSystemInstruction == null ) {
-        mSystemInstruction = getSettingText( context );
-        // TDLog.v("PrefAI System instr. length " + mSystemInstruction.length() );
+      if ( user_key != null ) {
+        mWithGemini = true;
+        if ( mSystemInstruction == null ) {
+          mSystemInstruction = getSettingText( context );
+          // TDLog.v("PrefAI System instr. length " + mSystemInstruction.length() );
+        }
+      /* IF GEMMA3
+      } else { 
+        mWithGemini = false;
+        if ( mLLMsystemInstruction == null ) {
+          loadLLMsettingText( context );
+        }
+      // ELSE GEMMA3 */
+      } else {
+        mWithGemini = false;
+      // END GEMMA3 */
       }
-    /* IF GEMMA3
-    } else { 
-      mWithGemini = false;
-      if ( mLLMsystemInstruction == null ) {
-        loadLLMsettingText( context );
-      }
-    // ELSE GEMMA3 */
-    } else {
-      mWithGemini = false;
-    // END GEMMA3 */
     }
   }
 
@@ -176,6 +179,7 @@ public class PrefAIdialog extends AIdialog
 
   private String getSettingText( Context ctx )
   {
+    if ( ! AIhelper.HAS_AI ) return null;
     StringBuilder sb = new StringBuilder();
     sb.append( ctx.getResources().getString( R.string.ai_settings ) )
       .append( ctx.getResources().getString( R.string.ai_begin_settings ) );
@@ -222,6 +226,7 @@ public class PrefAIdialog extends AIdialog
   @Override
   public void showResponse( String message )
   {
+    if ( ! AIhelper.HAS_AI ) return;
     if ( mAnswer == null ) return;
     if ( message == null || message.isEmpty() ) return;
     if ( mWithGemini ) {
@@ -361,6 +366,7 @@ public class PrefAIdialog extends AIdialog
 
   private void showGeminiResponse( String message )
   {
+    if ( ! AIhelper.HAS_AI ) return;
     ArrayList< PageLink > pages = new ArrayList<>();
     // SpannableString ssb = new SpannableString( message ); // immutable text
     SpannableStringBuilder ssb = new SpannableStringBuilder( message ); // mutable text

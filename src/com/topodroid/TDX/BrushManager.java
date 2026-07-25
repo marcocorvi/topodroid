@@ -297,6 +297,7 @@ public class BrushManager
   static int getLineWallIndex()             { return (mLineLib == null)? 1 : mLineLib.mLineWallIndex; }
   static int getLineSlopeIndex()            { return (mLineLib == null)? -1 : mLineLib.mLineSlopeIndex; }
 
+  static boolean isAreaUser( int idx )      { return mAreaLib != null && idx == mAreaLib.mAreaUserIndex; }
   // FIXME AREA_ORIENT
   static boolean isAreaOrientable( int index )      { return mAreaLib != null && mAreaLib.isSymbolOrientable( index ); }
   static double getAreaOrientation( int index )     { return (mAreaLib == null)? 0 : mAreaLib.getAreaOrientation( index ); }

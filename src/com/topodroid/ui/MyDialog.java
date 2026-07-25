@@ -190,7 +190,7 @@ public class MyDialog extends Dialog
   // public boolean onKeyLongPress( int code, KeyEvent ev )
   public boolean onKeyDown( int code, KeyEvent ev )
   {
-    TDLog.v( "My Dialog key down: code " + code );
+    // TDLog.v( "My Dialog key down: code " + code );
     if ( code == KeyEvent.KEYCODE_MENU || code == KeyEvent.KEYCODE_VOLUME_UP ) {
       if ( mHelpPage != null ) {
         UserManualActivity.showHelpPage( mContext, mHelpPage );
@@ -207,7 +207,7 @@ public class MyDialog extends Dialog
   @Override // issue 167
   public boolean onKeyUp( int code, KeyEvent ev )
   {
-    TDLog.v("My Dialog key up: code " + code );
+    // TDLog.v("My Dialog key up: code " + code );
     if ( TDandroid.BELOW_API_36 && code == KeyEvent.KEYCODE_BACK ) {
       if ( ev.isTracking() && ! ev.isCanceled() ) {
         return true;

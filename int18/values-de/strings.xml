@@ -342,6 +342,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Fehler %1$.0f m</string -->
     <string name="location_start_fine">Starte genaue Lokalisierung</string>
     <string name="location_enabled">Lokalisierung nicht erlaubt</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Warnung: Fehler bei der Tiefe</string -->
     <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
     <string name="error_azimuth_required">Azimut erforderlich</string>

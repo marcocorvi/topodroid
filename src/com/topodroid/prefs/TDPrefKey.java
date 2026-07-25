@@ -13,12 +13,14 @@ package com.topodroid.prefs;
 
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDLog;
+import com.topodroid.help.AIhelper;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.R;
 
 import java.util.Locale;
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -971,9 +973,19 @@ class TDPrefKey
       }
       ++ cat;
     }
+    if ( ! AIhelper.HAS_AI ) {
+      int len = mGeek.length; 
+      for ( int i = 0; i < len; ++i ) {
+        TDPrefKey k = mGeek[ i ];
+        if ( k != null && k.key.equals( "DISTOX_GEMINI" ) ) {
+          for ( ; i+1 < len; ++i ) mGeek[ i ] = mGeek[ i+1 ];
+          mGeek = Arrays.copyOf( mGeek, len-1 );
+        }
+      }
+    }
     if ( TDLevel.isDebugBuild() ) {
       for ( TDPrefKey k : mGeek ) {
-        if ( k.key.equals( "DISTOX_WITH_DEBUG" ) ) k.level = T;
+        if ( k != null && k.key.equals( "DISTOX_WITH_DEBUG" ) ) k.level = T;
       }
     }
   }
@@ -1018,7 +1030,7 @@ class TDPrefKey
     for ( TDPrefKey[] keyset : mKeySet ) {
       if ( keyset == null ) continue;
       for ( TDPrefKey k : keyset ) {
-        if ( k.key.equals( kay ) ) return k;
+        if ( k != null && k.key.equals( kay ) ) return k;
       }
     }
     return null;
@@ -1032,7 +1044,7 @@ class TDPrefKey
   //   for ( TDPrefKey[] keyset : mKeySet ) {
   //     if ( keyset == null ) continue;
   //     for ( TDPrefKey k : keyset ) {
-  //       if ( k.key.equals( kay ) ) return keyset;
+  //       if ( k != null && k.key.equals( kay ) ) return keyset;
   //     }
   //   }
   //   return null;
@@ -1046,7 +1058,7 @@ class TDPrefKey
   //   for ( TDPrefKey[] keyset : mKeySet ) {
   //     if ( keyset == null ) continue;
   //     for ( TDPrefKey k : keyset ) {
-  //       if ( k.key.equals( kay ) ) return k.group;
+  //       if ( k != null && k.key.equals( kay ) ) return k.group;
   //     }
   //   }
   //   return -1;
@@ -1062,7 +1074,7 @@ class TDPrefKey
     for ( TDPrefKey[] keyset : mKeySet ) {
       if ( keyset == null ) continue;
       for ( TDPrefKey k : keyset ) {
-        if ( k.key.equals( kay ) ) {
+        if ( k != null && k.key.equals( kay ) ) {
           return ( flag & (1<<k.group) ) != 0;
         }
       }

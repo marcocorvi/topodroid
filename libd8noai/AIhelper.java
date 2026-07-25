@@ -52,6 +52,8 @@ import android.view.View;
 
 public class AIhelper // extends AsyncTask< String, Void, String >
 {
+  final static public boolean HAS_AI = false;
+
   AIdialog mDialog;
   private Context mContext;
   final String mUserKey;

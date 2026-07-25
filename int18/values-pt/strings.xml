@@ -334,6 +334,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string -->
   <string name="location_start_fine">Posição de início adequada</string>
   <string name="location_enabled">Garanta que o serviço LOCALIZAÇÃO está habilitado</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
   <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
     <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
   <string name="error_azimuth_required">Azimute exigido</string>

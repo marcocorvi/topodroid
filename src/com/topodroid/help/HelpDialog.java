@@ -53,7 +53,7 @@ public class HelpDialog extends MyDialog
   private final String mPage;
 
   private Button mBtnManual;
-  private Button mBtnAI;
+  private Button mBtnAI = null;
 
   // TODO list of help entries
   /** cstr
@@ -91,11 +91,15 @@ public class HelpDialog extends MyDialog
     mBtnManual.setOnClickListener( this );
     mBtnManual.setOnLongClickListener( this );
     mBtnAI = (Button) findViewById( R.id.button_ai );
-    if ( TDandroid.isOnline( mContext ) ) {
-      TDLog.v("Help dialog: is online" );
-      mBtnAI.setOnClickListener( this );
+    if ( AIhelper.HAS_AI ) {
+      if ( TDandroid.isOnline( mContext ) ) {
+        TDLog.v("Help dialog: is online" );
+        mBtnAI.setOnClickListener( this );
+      } else {
+        mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
+      }
     } else {
-      mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
+      mBtnAI.setVisibility( View.GONE );
     }
 
     mList = (ListView) findViewById(R.id.help_list);
@@ -185,13 +189,15 @@ public class HelpDialog extends MyDialog
 
   public void setAIbuttonEnabled( boolean enabled )
   {
-    TDLog.v("Help AI dialog - set button enable " + enabled );
-    if ( enabled ) {
-      mBtnAI.setBackgroundResource( R.drawable.iz_ai );
-      mBtnAI.setOnClickListener( this );
-    } else {
-      mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
-      mBtnAI.setOnClickListener( null );
+    if ( AIhelper.HAS_AI ) {
+      TDLog.v("Help AI dialog - set button enable " + enabled );
+      if ( enabled ) {
+        mBtnAI.setBackgroundResource( R.drawable.iz_ai );
+        mBtnAI.setOnClickListener( this );
+      } else {
+        mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
+        mBtnAI.setOnClickListener( null );
+      }
     }
   }
 

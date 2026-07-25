@@ -61,6 +61,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
+    <string name="symbols_recover">Recover drawing tools ?</string>
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
@@ -376,6 +377,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Starting fine position</string>
     <string name="location_enabled">Make sure LOCATION is enabled</string>
+    <string name="location_no_permission">No LOCATION permision</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">BT discovery error: %1$s</string>
 

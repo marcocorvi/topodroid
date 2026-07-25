@@ -8960,7 +8960,14 @@ public class DrawingWindow extends ItemDrawer
       return true;
     } else if ( p++ == pos ) { // EXPORT - SAVE
     } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
-    } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
+    } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN = RECOVER SYMBOLS
+      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.symbols_recover, R.string.button_ok, R.string.button_cancel,
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) { mDrawingSurface.recoverSymbols(); }
+        },
+        null
+      );
+      return true;
     } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
     } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT
     } else if ( TDLevel.overTester && p++ == pos ) { // STATION SEARCH and HIGHLIGHT

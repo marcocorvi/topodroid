@@ -3700,4 +3700,43 @@ public class Scrap
     return null;
   }
 
+  /** recover the symbols types // FIXME NOT TESTED
+   */
+  void recoverSymbols() 
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( ( cmd instanceof DrawingPointPath ) && ( BrushManager.mPointLib != null ) ) {
+        DrawingPointPath point = (DrawingPointPath)cmd;
+        if ( BrushManager.isPointUser( point.mPointType ) ) {
+          String name = point.getOption( TDString.OPTION_SYMBOL );
+          if ( name != null ) {
+            // Symbol symbol = BrushManager.mPointLib.get( name );
+            int idx = BrushManager.mPointLib.getSymbolIndexByThName( name );
+            if ( idx >= 0 ) point.setPointType( idx );
+          }
+        }
+      } else if ( ( cmd instanceof DrawingLinePath ) && ( BrushManager.mLineLib != null ) ) {
+        DrawingLinePath line = (DrawingLinePath)cmd;
+        if ( BrushManager.isLineUser( line.mLineType ) ) {
+	  String name = line.getOption( TDString.OPTION_SYMBOL );
+	  if ( name != null ) {
+	    // Symbol symbol = BrushManager.mLineLib.get( name );
+	    int idx = BrushManager.mLineLib.getSymbolIndexByThName( name );
+            if ( idx >= 0 ) line.setLineType( idx );
+	  }
+        }
+      } else if ( ( cmd instanceof DrawingAreaPath ) && ( BrushManager.mAreaLib != null ) ) {
+        DrawingAreaPath area = (DrawingAreaPath)cmd;
+        if ( BrushManager.isAreaUser( area.mAreaType ) ) {
+	  String name = area.getOption( TDString.OPTION_SYMBOL );
+	  if ( name != null ) {
+	    // Symbol symbol = BrushManager.mLineLib.get( name );
+	    int idx = BrushManager.mAreaLib.getSymbolIndexByThName( name );
+            if ( idx >= 0 ) area.setAreaType( idx );
+	  }
+        }
+      }
+    }
+  }
+
 }

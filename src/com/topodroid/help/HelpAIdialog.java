@@ -59,35 +59,37 @@ public class HelpAIdialog extends AIdialog
   public HelpAIdialog( Context context, IHelpViewer parent, String user_key, String page )
   {
     super( context, parent, user_key, page, R.string.ai_model_manual );
-    TopoDroidApp.updateAnalytic( TDAnalytics.AI_DIALOG );
-    mPattern = Pattern.compile( "\\[([^]]+\\.htm)\\]" );
-    mRtitle = R.string.title_ai_dialog;
+    if ( AIhelper.HAS_AI ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.AI_DIALOG );
+      mPattern = Pattern.compile( "\\[([^]]+\\.htm)\\]" );
+      mRtitle = R.string.title_ai_dialog;
 
-    // TDLog.v("Help AI dialog: cstr man page " + page + " user key " + user_key );
-    if ( mSystemInstruction == null ) {
-      mSystemInstruction = getOrderedUserManual( context );
-      // TDLog.v("HelpAI System instr. length " + mSystemInstruction.length() );
-    }
-
-    String lang = TDSetting.mLocale;
-    // TDLog.v("HelpAI Jargon lang: <" + lang + ">" );
-    if ( TDString.isNullOrEmpty( lang ) || lang.equals("en") ) {
-      if ( mLang != null ) {
-        mLang   = null;
-        mJargon = null;
+      // TDLog.v("Help AI dialog: cstr man page " + page + " user key " + user_key );
+      if ( mSystemInstruction == null ) {
+        mSystemInstruction = getOrderedUserManual( context );
+        // TDLog.v("HelpAI System instr. length " + mSystemInstruction.length() );
       }
-    } else if ( ! lang.equals( mLang ) ) {
-      mLang = lang;
-      mJargon = getJargon( context, mLang );
-      // TDLog.v("HelpAI jargon length " + mJargon.length() );
-    }
-    if ( mNames == null ) {
-      mNames = getNames( context );
-      // TDLog.v("HelpAI names length " + mNames.length() );
-    }
-    mLocalContext = true;
 
-    readManualIndex();
+      String lang = TDSetting.mLocale;
+      // TDLog.v("HelpAI Jargon lang: <" + lang + ">" );
+      if ( TDString.isNullOrEmpty( lang ) || lang.equals("en") ) {
+        if ( mLang != null ) {
+          mLang   = null;
+          mJargon = null;
+        }
+      } else if ( ! lang.equals( mLang ) ) {
+        mLang = lang;
+        mJargon = getJargon( context, mLang );
+        // TDLog.v("HelpAI jargon length " + mJargon.length() );
+      }
+      if ( mNames == null ) {
+        mNames = getNames( context );
+        // TDLog.v("HelpAI names length " + mNames.length() );
+      }
+      mLocalContext = true;
+
+      readManualIndex();
+    }
   }
 
   @Override
@@ -101,6 +103,7 @@ public class HelpAIdialog extends AIdialog
    */
   private String getOrderedUserManual( Context ctx )
   {
+    if ( ! AIhelper.HAS_AI ) return null;
     StringBuilder sb = new StringBuilder();
     sb.append( ctx.getResources().getString( R.string.ai_user ) )
       .append( ctx.getResources().getString( R.string.ai_begin_manual ) );
@@ -146,6 +149,7 @@ public class HelpAIdialog extends AIdialog
    */
   private String getJargon( Context ctx, String lang )
   {
+    if ( ! AIhelper.HAS_AI ) return null;
     StringBuilder sb = new StringBuilder();
     sb.append( String.format( ctx.getResources().getString( R.string.ai_jargon ), lang ) ).append("\n");
     try {
@@ -186,6 +190,7 @@ public class HelpAIdialog extends AIdialog
    */
   private String getNames( Context ctx )
   {
+    if ( ! AIhelper.HAS_AI ) return null;
     StringBuilder sb = new StringBuilder();
     sb.append( ctx.getResources().getString( R.string.ai_names ) ).append("\n");
     try {
@@ -209,48 +214,16 @@ public class HelpAIdialog extends AIdialog
   public void openOnParent( String page )
   {
     dismiss();
-    mParent.showManPage( page );
-  }
-
-  /** read the map filenames to titles
-   */
-  private void readManualIndex() // this is not sttaic because it needs Context ...
-  {
-    if ( mManualIndex != null ) return;
-    Pattern pattern = Pattern.compile( "<a\\s+href=\"([^\"]+\\.htm)\">([^<]+)<\\/a>" );
-    mManualIndex = new HashMap<>();
-    try {
-      InputStream is = mContext.getAssets().open("man/manual16.htm");
-      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
-      String line;
-      while ( ( line = br.readLine() ) != null ) {
-        line = line.trim();
-        if ( ! line.startsWith("<a href") ) continue;
-        Matcher matcher = pattern.matcher( line );
-        if ( matcher.find() ) {
-          mManualIndex.put( matcher.group(1), matcher.group(2) );
-        }
-      }
-      is.close();
-    } catch ( IOException e ) {
-      TDLog.e("Error reading manual16: " + e.getMessage() );
+    if ( AIhelper.HAS_AI ) {
+      mParent.showManPage( page );
     }
-  }
-
-  /** @return the totle for a filename - or filename if there is no title
-   * @param filename  filename
-   */
-  private String getTitle( String filename )
-  {
-    if ( mManualIndex == null ) return filename;
-    String title = mManualIndex.get( filename );
-    return ( title == null )? filename : title;
   }
 
   @Override
   public void showResponse( String message )
   {
-      TDLog.v("Help AI dialog: response " + message );
+    if ( ! AIhelper.HAS_AI ) return;
+    TDLog.v("Help AI dialog: response " + message );
     TextView tv = mAnswer;
     if ( tv == null ) return;
     ArrayList< PageLink > pages = new ArrayList<>();
@@ -293,6 +266,43 @@ public class HelpAIdialog extends AIdialog
     }
     tv.setText( ssb );
     tv.setMovementMethod( LinkMovementMethod.getInstance() );
+  }
+
+  /** read the map filenames to titles
+   * @note protected in AIhelper.HAS_AI
+   */
+  private void readManualIndex() // this is not sttaic because it needs Context ...
+  {
+    if ( mManualIndex != null ) return;
+    Pattern pattern = Pattern.compile( "<a\\s+href=\"([^\"]+\\.htm)\">([^<]+)<\\/a>" );
+    mManualIndex = new HashMap<>();
+    try {
+      InputStream is = mContext.getAssets().open("man/manual16.htm");
+      BufferedReader br = new BufferedReader( new InputStreamReader( is ) );
+      String line;
+      while ( ( line = br.readLine() ) != null ) {
+        line = line.trim();
+        if ( ! line.startsWith("<a href") ) continue;
+        Matcher matcher = pattern.matcher( line );
+        if ( matcher.find() ) {
+          mManualIndex.put( matcher.group(1), matcher.group(2) );
+        }
+      }
+      is.close();
+    } catch ( IOException e ) {
+      TDLog.e("Error reading manual16: " + e.getMessage() );
+    }
+  }
+
+  /** @return the totle for a filename - or filename if there is no title
+   * @param filename  filename
+   * @note protected in AIhelper.HAS_AI
+   */
+  private String getTitle( String filename )
+  {
+    if ( mManualIndex == null ) return filename;
+    String title = mManualIndex.get( filename );
+    return ( title == null )? filename : title;
   }
 
 }

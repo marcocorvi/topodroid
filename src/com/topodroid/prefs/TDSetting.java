@@ -23,6 +23,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDKey;
 // import com.topodroid.util.TDColor;
 import com.topodroid.help.UserManDownload;
+import com.topodroid.help.AIhelper;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.TDandroid;
@@ -827,7 +828,7 @@ public class TDSetting
   private static int tryInt( SharedPreferences prefs, String key, String def_value )
   {
     int i = 0;
-    // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+    // if ( key != null && key.equals("DISTOX_TEAM_DIALOG" ) ) {
     //   TDLog.v( "try int TEAM DIALOG " + key + ": default " + def_value + " value " + prefs.getString( key, def_value ) );
     // }
     try { i = Integer.parseInt( prefs.getString( key, def_value ) ); }
@@ -836,7 +837,7 @@ public class TDSetting
       i = Integer.parseInt(def_value);
       setPreference( prefs, key, def_value );
     }
-    // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+    // if ( key != null && key.equals("DISTOX_TEAM_DIALOG" ) ) {
     //   TDLog.v( "try int TEAM DIALOG " + key + ": return " + i );
     // }
     return i;
@@ -896,14 +897,14 @@ public class TDSetting
     if ( TDString.isNullOrEmpty( val ) ) { 
       i = Integer.parseInt(def_value);
       TDPrefHelper.update( key, def_value );
-      // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+      // if ( key != null && key.equals("DISTOX_TEAM_DIALOG" ) ) {
       //   TDLog.v("TEAM DIALOG: null value - update " + key + ": " + def_value );
       // }
     } else {
       try {
         i = Integer.parseInt( val );
         TDPrefHelper.update( key, val );
-        // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+        // if ( key != null && key.equals("DISTOX_TEAM_DIALOG" ) ) {
         //   TDLog.v("TEAM DIALOG: update " + key + ": " + val );
         // }
       } catch( NumberFormatException e ) { 
@@ -1126,9 +1127,16 @@ public class TDSetting
     mBulkExport = prefs.getBoolean( key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_BULK_EXPORT
     mPacketLog = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_PACKET_LOGGER
     mTh2Edit   = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_TH2_EDIT
-    retrieveGeminiApiKey( prefs.getString( key[k].key, key[k].dflt ) ); ++k; // DISTOX_GEMINI
-    TDPrefKey debug_key = key[ key.length - 1 ];
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( debug_key.key, bool(debug_key.dflt) ) : false; // DISTOX_WITH_DEBUG
+    int debug_index = key.length - 1;
+    if ( AIhelper.HAS_AI ) {
+      retrieveGeminiApiKey( prefs.getString( key[k].key, key[k].dflt ) ); ++k; // DISTOX_GEMINI
+      debug_index --;
+    }
+    TDPrefKey debug_key = key[ debug_index ];
+    mWithDebug = false;
+    if ( debug_key != null && TDLevel.isDebugBuild() ) {
+      mWithDebug = prefs.getBoolean( debug_key.key, bool(debug_key.dflt) ); // DISTOX_WITH_DEBUG
+    }
 
     key = TDPrefKey.mMain;
     k = 1; // skip 0
@@ -2100,7 +2108,7 @@ public class TDSetting
     } else if ( k.equals( key[ 6 ].key ) ) {
       mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( k.equals( key[ 7 ].key ) ) {           // DISTOX_GEMINI
+    } else if ( AIhelper.HAS_AI && k.equals( key[ 7 ].key ) ) {   // DISTOX_GEMINI
       TDLog.e("Gemini API key is not set in normal way");
       // mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
     } else if ( TDLevel.isDebugBuild() && k.equals( key[ key.length - 1 ].key ) ) {
@@ -3566,7 +3574,7 @@ public class TDSetting
         for ( int k = 0; k < n2; ++k ) {
           if ( TDPrefKey.repeatedKey( j, k ) ) continue;
           TDPrefKey kay = TDPrefKey.getKey( j, k );
-          if ( kay.key.equals("DISTOX_GEMINI") ) continue;  // really make sure API_key not exported
+          if ( kay != null && kay.key.equals("DISTOX_GEMINI") ) continue;  // really make sure API_key not exported
           if ( ( flag & (1<<kay.group) ) != 0 ) {
             String val;
             boolean bval;

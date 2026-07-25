@@ -315,10 +315,10 @@ public class TopoGL extends Activity
     if ( TDandroid.checkLocation( this ) ) {
       mGPS = new GPS( this ); // WITH-GPS
       if ( ! mGPS.canLocate() ) {
-        TDToast.make("GPS cannot get a location");
+        TDToast.make( R.string.location_enabled );
       }
     } else {
-	  TDToast.make("No LOCATION permision" );
+      TDToast.make( R.string.location_no_permission );
     }
 
     if ( mHasExtra ) {
@@ -2512,7 +2512,7 @@ public class TopoGL extends Activity
       return;
     }
 
-    TDLog.v("TopoGL GPS set status " + status );
+    // TDLog.v("TopoGL GPS set status " + status );
     if ( status ) {
       mGPS.setGPSon();
       mGPS.setListener( this );
@@ -2526,7 +2526,7 @@ public class TopoGL extends Activity
    */  
   boolean getGPSstatus()
   {
-    TDLog.v("Topo GL get GPS status: GPS " + ( (mGPS == null)? "null" : "islocating " + mGPS.mIsLocating ) );
+    // TDLog.v("Topo GL get GPS status: GPS " + ( (mGPS == null)? "null" : "islocating " + mGPS.mIsLocating ) );
     return mGPS != null && mGPS.mIsLocating;
   }
 

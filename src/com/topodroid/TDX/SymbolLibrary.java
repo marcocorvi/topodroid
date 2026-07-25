@@ -142,6 +142,7 @@ public class SymbolLibrary
 
   protected Symbol get( String name ) 
   {
+    if ( name == null || name.length() == 0 ) return null;
     return ( mRoot == null )? null : mRoot.get( Symbol.deprefix_u(name) );
   }
 
@@ -149,6 +150,7 @@ public class SymbolLibrary
 
   int getSymbolIndex( Symbol symbol )
   {
+    if ( symbol == null ) return -1;
     int nr = mSymbols.size();
     for ( int k=0; k<nr; ++k ) {
       if ( symbol == mSymbols.get(k) ) return k;
@@ -161,9 +163,11 @@ public class SymbolLibrary
    */
   int getSymbolIndexByThName( String name )
   {
-    String th_name = Symbol.deprefix_u( name );
-    int nr = mSymbols.size();
-    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
+    if ( name != null && name.length() > 0 ) {
+      String th_name = Symbol.deprefix_u( name );
+      int nr = mSymbols.size();
+      for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
+    }
     return -1;
   }
 
@@ -173,11 +177,15 @@ public class SymbolLibrary
    */
   int getSymbolIndexByThNameOrGroup( String name, String group )
   {
-    String th_name = Symbol.deprefix_u( name );
     int nr = mSymbols.size();
-    // TDLog.v("ThName <" + th_name + "> group <" + ( (group == null)? "null" : group ) + ">" );
-    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
-    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasGroup( group) ) return k;
+    if ( name != null && name.length() > 0 ) {
+      String th_name = Symbol.deprefix_u( name );
+      // TDLog.v("ThName <" + th_name + "> group <" + ( (group == null)? "null" : group ) + ">" );
+      for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
+    }
+    if ( group != null && group.length() > 0 ) {
+      for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasGroup( group) ) return k;
+    }
     return -1;
   }
 

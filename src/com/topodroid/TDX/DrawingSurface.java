@@ -1576,4 +1576,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     mCommandManager2.shiftXSections( 20*(float)st.h, 20*(float)st.v );
   }
 
+  /** recover the symbols types
+   */
+  void recoverSymbols() { commandManager.recoverSymbols(); }
+
 }

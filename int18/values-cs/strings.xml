@@ -346,6 +346,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Spouštím přesné určování polohy</string>
     <string name="location_enabled">Ujistěte se, že jsou zapnuté POLOHOVÉ SLUŽBY</string>
+    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">Chyba vyhledávání BT: %1$s</string>
 
