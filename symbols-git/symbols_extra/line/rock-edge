@@ -2,7 +2,7 @@ encoding utf-8
 symbol line
 name rock-edge
 name-cn 岩石边界
-name-cs skalní_hrana(na bloku)
+name-cs skalní_hrana_(na_bloku)
 name-de Felsabhang
 name-es bloque_aristas
 name-fr arête_rocheuse
