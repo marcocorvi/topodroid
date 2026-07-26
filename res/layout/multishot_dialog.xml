@@ -27,20 +27,20 @@
     <Button android:id="@+id/renumber"
       style="@style/button_default"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="100"
       android:text="@string/button_renumber"
       />
-    <EditText android:id="@id/shot_from" 
+    <EditText android:id="@id/shot_from"
       style="@style/edit_text"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="40"
       android:hint="@string/hint_from"
       android:importantForAutofill="no"
       />
-    <EditText android:id="@id/shot_to" 
+    <EditText android:id="@id/shot_to"
       style="@style/edit_text"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="40"
       android:hint="@string/hint_to"
       android:importantForAutofill="no"
       />
@@ -76,13 +76,13 @@
     <Button android:id="@+id/offset"
       style="@style/button_default"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="100"
       android:text="@string/button_offset"
       />
-    <EditText android:id="@+id/value_offset" 
+    <EditText android:id="@+id/value_offset"
       style="@style/edit_signeddecimal"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="80"
       android:importantForAutofill="no"
       />
    </LinearLayout>
@@ -97,13 +97,13 @@
     <Button android:id="@+id/swap"
       style="@style/button_default"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="100"
       android:text="@string/button_swap"
       />
     <TextView android:id="@+id/swap_text"
       style="@style/edit_text"
       android:layout_width="0sp"
-      android:layout_weight="100"
+      android:layout_weight="80"
       android:text=""
       />
   </LinearLayout>				  
@@ -118,13 +118,13 @@
     <Button android:id="@+id/color"
       style="@style/button_default"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="100"
       android:text="@string/button_color"
       />
     <TextView android:id="@+id/unused_color"
       style="@style/edit_text"
       android:layout_width="0sp"
-      android:layout_weight="100"
+      android:layout_weight="80"
       android:text=""
       />
   </LinearLayout>				  
@@ -136,11 +136,11 @@
     android:orientation="vertical" 
     android:layout_marginTop="@dimen/marginv"
     >
-    <Button android:id="@+id/splays"
-      style="@style/button_default"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/button_splays"
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dividersmall"
+      android:background="@color/pref_divider"
+      android:layout_marginBottom="@dimen/marginv"
       />
     <RadioGroup android:id="@+id/group_xsplay"
       android:layout_width="fill_parent"
@@ -189,7 +189,20 @@
 	    android:text="@string/profile_view"
             />
     </LinearLayout>
-  </LinearLayout>				  
+    <Button android:id="@+id/splays"
+      style="@style/button_default"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/button_splays"
+      />
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dividersmall"
+      android:background="@color/pref_divider"
+      android:layout_marginTop="@dimen/marginv"
+      />
+  </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_bedding"
     android:layout_below="@id/layout_splays"
@@ -201,13 +214,13 @@
     <Button android:id="@+id/bedding"
       style="@style/button_default"
       android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_weight="100"
       android:text="@string/button_bedding"
       />
-    <TextView android:id="@+id/strike_dip" 
+    <TextView android:id="@+id/strike_dip"
       style="@style/edit_text"
       android:layout_width="0sp"
-      android:layout_weight="100"
+      android:layout_weight="80"
       android:text=""
       />
   </LinearLayout>				  

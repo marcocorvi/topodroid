@@ -232,8 +232,8 @@ class MultishotDialog extends MyDialog
         EditText et_offset  = (EditText) findViewById(R.id.value_offset );
         String offset_str = TDUtil.getTextOrNull( et_offset );
         if ( offset_str  != null ) {
-          float offset = Float.parseFloat( offset_str );
-          mParent.addOffset( offset ); 
+          float offset = Float.parseFloat( offset_str ) / TDSetting.mUnitLength;
+          mParent.addOffset( offset );
         } else {
           // TODO et_offset.setError("bad offset value");
         }
