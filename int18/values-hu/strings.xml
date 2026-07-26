@@ -359,7 +359,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string -->
     <string name="location_start_fine">Pontos helymeghatározás kezdés</string>
     <string name="location_enabled">Ellenőrizd a HELYMEGHATÁROZÁS engedélyezését</string>
-    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
+    <string name="location_no_permission">Nincs helymeghatározás engedély</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
     <string name="discovery_error">BT keresési hiba: %1$s</string>
 
