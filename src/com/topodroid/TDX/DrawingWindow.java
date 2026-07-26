@@ -1328,7 +1328,10 @@ public class DrawingWindow extends ItemDrawer
     Paint paint = blk.getPaint();
     if ( paint != null ) {
       dpath.setPathPaint( paint );
-    } else if ( blue ) {
+      return;
+    }
+    if ( dpath.setSplayPaintCavwayFlag( blk ) ) return; // try Cavway flag paint 
+    if ( blue ) {
       if ( blk.isScan() ) {
         dpath.setPathPaint( BrushManager.paintScanShot );    // SCAN
       } else if ( blk.isXSplay() ) {

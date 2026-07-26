@@ -197,6 +197,16 @@ public class DrawingPath extends RectF
    */
   void setPathPaint( Paint paint ) { mPaint = paint; }
 
+  /** copy the path paint
+   * @param paint   paint to copy in this path paint
+   * @param alpha   path paint alpha
+   */
+  void copyPathPaint( Paint paint, int alpha ) 
+  { 
+    mPaint = new Paint( paint );
+    mPaint.setAlpha( alpha & 0xff );
+  }
+
   /** get the path color (or white)
    * @return the color of the path
    */

@@ -52,7 +52,7 @@ class DrawThread extends  Thread
         Thread.yield();
         TDUtil.slowDown( 1 ); // NECESSARY
       } else {
-        TDUtil.slowDown( 100 );
+        TDUtil.slowDown( 10 );
       }
     }
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread exit");

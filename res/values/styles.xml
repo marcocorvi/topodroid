@@ -142,7 +142,7 @@
        <item name="android:layout_gravity">right</item>
        <item name="android:gravity">right</item>
        <item name="android:choiceMode">singleChoice</item>
-       <item name="android:layout_width">150sp</item>
+       <item name="android:layout_width">@dimen/menuwidth</item>
        <item name="android:layout_height">wrap_content</item>
     </style>
 

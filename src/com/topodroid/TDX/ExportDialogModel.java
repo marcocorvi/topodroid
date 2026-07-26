@@ -209,6 +209,12 @@ public class ExportDialogModel extends MyDialog
       ((CheckBox) findViewById( R.id.model_surface )).setVisibility( View.GONE );
     }
   }
+
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   dismiss();
+  // }
 }
 
 

@@ -609,6 +609,12 @@ public class ExportDialogShot extends MyDialog
     }
   }
 
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   dismiss();
+  // }
+
 }
 
 

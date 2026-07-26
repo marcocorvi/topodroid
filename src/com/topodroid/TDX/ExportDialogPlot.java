@@ -419,6 +419,12 @@ public class ExportDialogPlot extends MyDialog
 
     ((CheckBox) findViewById( R.id.xvi_splays )).setChecked( TDSetting.mSvgSplays );
   }
+
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   dismiss();
+  // }
 }
 
 

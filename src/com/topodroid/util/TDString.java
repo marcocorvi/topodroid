@@ -42,6 +42,7 @@ public class TDString
   public static final String NINETYONE = "91";
 
   public static final String OPTION_SCRAP = "-scrap";
+  public static final String OPTION_SYMBOL = "-symbol";
 
   /** @return true is the given string is null or empty
    * @param str    string

@@ -17,14 +17,22 @@ if [ "$1" = "yes" ]; then
   ln -s libd8ai libd8
   rm build.xml
   ln -s build-ai.xml build.xml
-  touch libd8/AIhelper.java
+  cd src/com/topodroid/help
+  rm AIhelper.java
+  ln -s ../../../../AIhelp/ai/AIhelper.java .
+  touch AIhelper.java
+  cd -
 elif [ "$1" = "no" ]; then
   echo "turning AI support OFF"
   rm libd8
   ln -s libd8noai libd8
   rm build.xml
   ln -s build-noai.xml build.xml
-  touch libd8/AIhelper.java
+  cd src/com/topodroid/help
+  rm AIhelper.java
+  ln -s ../../../../AIhelp/no/AIhelper.java .
+  touch AIhelper.java
+  cd -
 else
   echo "Usage $0 [yes|no]"
 fi

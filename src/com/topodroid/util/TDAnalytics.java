@@ -85,6 +85,7 @@ public class TDAnalytics
   public static final String TEXTURE = "3texture";
   public static final String TEMP    = "3temp";
   // public static final String DIKSTRA = "3dikstra";
+  public static final String GPS_TRACK = "3trk";
 
   public static final String PHOTO  = "Xphoto"; // Photo dialog
   public static final String SPHOTO = "Sphoto"; // Photo sketch dialog

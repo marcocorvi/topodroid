@@ -1631,7 +1631,7 @@ public class TDExporter
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
 
-    String uls = ( ul < 1.01f )? "meter"  : "foot"; // FIXME
+    String uls = ( ul < 1.01f )? "meter"  : "feet";
     String uas = ( ua < 1.01f )? "degree" : "grad";
     // String uls = TDSetting.mUnitLengthStr;
     // String uas = TDSetting.mUnitAngleStr;
@@ -2553,7 +2553,7 @@ public class TDExporter
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
-    String uls = ( ul < 1.01f )? "meter"  : "foot"; // FIXME
+    String uls = ( ul < 1.01f )? "meter"  : "feet";
     String uas = ( ua < 1.01f )? "degree" : "grad";
     try {
       // TDLog.Log( TDLog.LOG_IO, "export CSV " + file.getName() );
