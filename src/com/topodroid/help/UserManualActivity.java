@@ -60,6 +60,7 @@ import android.widget.ArrayAdapter;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+// import android.view.WindowInsets;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -240,6 +241,8 @@ public class UserManualActivity extends Activity
     super.onCreate(savedInstanceState);
 
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
+    // alternative not full-screen
+    // getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_VISIBLE );
 
     TDandroid.setScreenOrientation( this );
 
@@ -263,6 +266,14 @@ public class UserManualActivity extends Activity
     mTV_text   = (WebView) findViewById(R.id.manual_text );
  
     setWebViewSettings( mTV_text );
+
+    mTV_text.setOnApplyWindowInsetsListener( (v, insets) ->
+      {
+        int bottom_inset = insets.getSystemWindowInsetBottom();
+        v.setPadding( v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), bottom_inset );
+        return insets;
+      }
+    );
 
     mTV_text.setWebViewClient( new WebViewClient() {
       @Override 

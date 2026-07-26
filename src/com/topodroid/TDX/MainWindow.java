@@ -823,6 +823,18 @@ public class MainWindow extends Activity
     // setMenuAdapter( ); // in on Start()
     // closeMenu();
 
+    // // HOWTO adjust size programmatically
+    // 
+    // String lang = Locale.getDefault().language;
+    // int widthDp = 150;
+    // if ( lang.equals("de") ) { widthDp = 200; }
+    // // else if ( ... )
+    // int pxl = (int)( widthDp * getResources().getSystem().getDisplayMetrics().density );
+    // LayoutParam params = mMenu.getLayoutarams();
+    // params.width = pxl;
+    // // params.weight = ...
+    // mMenu.setLayoutParams( params );
+
     // TDLog.Profile("Main buttons");
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlaceholder( true );
