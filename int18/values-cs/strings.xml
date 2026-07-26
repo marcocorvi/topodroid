@@ -346,7 +346,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Spouštím přesné určování polohy</string>
     <string name="location_enabled">Ujistěte se, že jsou zapnuté POLOHOVÉ SLUŽBY</string>
-    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
+    <string name="location_no_permission">Chybí oprávnění android k určení polohy</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">Chyba vyhledávání BT: %1$s</string>
 
@@ -1118,8 +1118,8 @@
     <string name="help_azimuth">Referenční azimut rozvinutého profilu (extend)</string>
     <string name="help_refresh">Aktualizovat zobrazení</string>
     <string name="help_device">Výběr měřícího zařízení, párování atd.. </string>
-    <string name="help_device_add">Přidat zařízení</string> <string name="help_add_topodroid">Nové měření</string>
-    <!-- TODO string name="help_add_topodroid">New survey</string -->
+    <string name="help_device_add">Přidat zařízení</string>
+    <string name="help_add_topodroid">Nové měření</string>
     <string name="help_import">Importovat ZIP archiv nebo soubor měření</string>
     <string name="help_geopoint_app">Externí aplikace GNSS</string>
     <string name="help_symbol">Výběr sady kreslicích nástrojů. Které symboly se mají používat. Instalace palet symbolů.</string>
