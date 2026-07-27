@@ -7,13 +7,22 @@ This dialog is opened by the "light bulb" button from the <u>Surevy Data window<
 
 It has the following actions
 <ul>
-<li>renumbering the shots stations. The first selected shot must be a leg</li>
+<li>renumbering the shots stations. The first selected shot must be a leg<br>
+    The stations of the first shot are used to seed the renumbering. They can be changed in the dialog.
+    If both stations are entered, the first selected shot is a leg and the following selected shots are renumbered consistently.
+    If only the FROM station is entered (and the TO station is left empty), all the shots are renumbered as splay.
+</li>
 <li>swapping stations</li>
-<li>adding an <b>offset</b> (positive or negative) to the length of the shots (in the configured unit). An offset larger than 0.1 m marks the shots as "tampered", ie, displayed in red</li>
-<li>coloring the splays [T]</li>
+<li>adding a length <b>offset</b> (positive or negative) to the shots (in the configured unit). An offset larger than 0.1 m marks the shots as "tampered", ie, displayed in red</li>
+<li>coloring the splays [T]<br>
+    Setting the color of splays is enabled if only splays have been selected, otherwise it is disabled.<br>
+</li>
 <li>marking the splays as either regular (-), x-section (X), horizontal (H) or vertical (V). [T]</li>
 <li>hiding the splays in either the plan, or the profile view, or both. [T]</li>
-<li>computing the plane that fits the shots. [T]</li>
+<li>computing the plane that fits the shots (only if the <u>Plane interpolation</u> option is enabled) [T]<br>
+    The computation of strike and dip of the bedding plane requires that all the selected shots have the same FROM station. Otherwise, it is disabled.
+    The result is shown in the dialog and added to (replaced if already present) the comment of the first selected shot.
+</li>
 </ul>
 <br><p>
 

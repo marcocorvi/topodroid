@@ -27,18 +27,23 @@ Properties buttons:
 <ul>
 <li><img src="btn_duplicate.png" width="36" border="1" > "duplicate" flag [A]</li>
 <li><img src="btn_surface.png" width="36" border="1" > "surface" flag [A]</li>
-<li><img src="btn_comment.png" width="36" border="1" > "commented" flag [A] Commented shots are not displayed in the sketches.</li>
+<li><img src="btn_comment.png" width="36" border="1" > "commented" flag [A] Commented shots are only displayed very dimmed in the sketches and are excluded from the cave length calculation.</li>
 <li><img src="btn_backsight.png" width="36" border="1" > "backshot" flag.</li>
 <li><img src="btn_leg_after.png" width="36" border="1" > the shot belongs to the immediately preceding leg.</li>
 <li><img src="btn_leg_before.png" width="36" border="1" > the shot belongs to the immediately following leg.</li>
-<li><img src="btn_backleg.png" width="36" border="1" > the shot is a backsight leg (ie, marked as "backleg" type).</li>
+<li><img src="btn_backleg.png" width="36" border="1" > the shot is a backsight leg, a second leg being taken in the reverse direction (ie, marked as "backleg" type and excluded from the cave length calculation).</li>
 <li><img src="btn_numbers.png" width="36" border="1" > reassign shot stations from this leg onward following the current station naming policy. Only for legs: both FROM and TO stations must have been specified</li>
 <li><img src="btn_splays_no.png" width="36" border="1" > apply the station change to all splays in the group of the splay shot that has the same station as the splay. Only for splays.</li>
 <li><img src="btn_plan_profile.png" width="36" border="1" > hide the splay in either the plan, or the profile view, or both (splay only) [A]</li>
 <li><img src="btn_xsplay.png" width="36" border="1" > clear (or set) splay class for this splay, and possibly the previous splays [A]</li>
 </ul>
 
-Note. Changing station to a backsight-check splay, clears the backsight-check flag.<br><p>
+<b>Backsight-check splay</b><br>
+If the secondary setting <i>Backsight splay</i> is enabled, the first splay after a leg is taken as a
+backsight check of that leg: it is compared with the reversed leg and, if the two disagree, the station
+is highlighted in violet.<br>
+Changing the station of such a splay clears the backsight-check flag,
+as does the <img src="btn_backsplay.png" width="36" border="1"> button among the additional actions.<br><p>
 
 Action buttons:
 <ul>
@@ -51,14 +56,14 @@ Action buttons:
 
 <b>Station names</b><br>
 Station names cannot contain special characters ('/'. '\'. '?', '&lt;', '&gt;', '|', ':', '"'),
-and must end with an alphanumeric charactere or
+and must end with an alphanumeric character or
 one of '-' '.' '_' '@'.
 <br><p>
 
 For <i>BRIC</i> shots the date and time are the values downloaded with the shot data from the device.
 For other devices and for manually entered shots, they are the time of download/insertion.<br><p>
 
-The shot flags, "duplicate", "surface" and "commented", are mutually exclusive.
+The shot flags, "duplicate", "surface", "commented" and "backshot", are mutually exclusive.
 The survey data info takes into account these flags.
 The export of the shot is also affected by the shot flag, either with an export flag, if the format supports it, or as comment.<br><p>
 
@@ -106,15 +111,15 @@ If the secondary setting "Splay group" is set, only the splays after the editing
 <b>Splay classes</b><br>
 Splay classes are enabled with a secondary setting. There are four classes:
 <ul>
-<li><i>normal</i>, generic, splays. Blue</li>
-<li><i>x-section</i> splays. Green</li>
-<li><i>horizontal</i>, plan-view, splays. Dark blue</li>
-<li><i>vertical</i>, profile-view, splays. Violet</li>
+<li><i>normal</i> splays: Blue</li>
+<li><i>x-section</i> splays: Green</li>
+<li><i>horizontal</i>, plan-view, splays: Dark blue</li>
+<li><i>vertical</i>, profile-view, splays: Violet</li>
 </ul>
 
 The <i>Splay class</i> button cycles through these four classes.
-The splay shot is set to the chosen class, when the data are saved.
-If the "all splay" button is checked, the class is set also to all previous contiguous
+The splay shot is set to the chosen class when the data is saved.
+If the <img src="btn_splays_no.png" width="36" border="1"> "all splays" button is checked, the class is set also to all previous contiguous
 "normal" splays.<br><p>
 
 Splay classes can also be set with the "multi-shot" selection.
@@ -137,6 +142,7 @@ At higher usage profiles it has more buttons:<p>
 <li><img src="btn_photo.png" width="36" border="1" > <a href="page_photo_dialog.htm">photo</a></li>
 <li><img src="btn_audio.png" width="36" border="1" > <a href="page_audio.htm">audio</a> comment</li>
 <li><img src="btn_sensor.png" width="36" border="1" > <a href="page_sensors.htm">Sensor measurements</a></li>
+<li><img src="btn_backsplay.png" width="36" border="1" > clear the backsight-check flag (only for a backsight-check splay, and if the <i>Backsight splay</i> setting is enabled)</li>
 <!-- li><img src="btn_shot.png" width="36" border="1" > add a shot before this (manually entering the data)</li -->
 <li><img src="btn_split.png" width="36" border="1" > <a href="page_survey_split_move.htm">split the survey</a> at this shot (creating a new survey or append to another survey)</li>
 <li><b>Color</b>, only for splays</li>
