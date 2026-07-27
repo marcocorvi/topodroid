@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <!-- German labels are longer than the English ones: make the menu wider (defaulkt: 150sp) -->
+  <dimen name="menuwidth">210sp</dimen>
+
+  <!-- Make the button labels of the multi-shot dialog (multishot_dialog.xml) wider -->
+  <string name="labelweight">100</string>
+  <string name="stationweight">40</string>
+  <string name="valueweight">80</string>
+</resources>
