@@ -895,6 +895,7 @@ public class MainWindow extends Activity
           // return insets.consumeSystemWindowInsets();
         }
       } );
+
   }
 
   static private boolean done_init_dialogs = false;

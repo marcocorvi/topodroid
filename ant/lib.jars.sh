@@ -6,6 +6,10 @@ if [ -d bin/classes ]; then
     echo "Extracting classes from $i"
     jar --extract --file $i
   done
+  # for i in ../../libjarx/*.jar ; do
+  #   echo "Extracting classes from $i"
+  #   jar --extract --file $i
+  # done
   rm -rf META-INF
   cd -
 else

@@ -214,7 +214,7 @@ public class TdmViewActivity extends Activity
 
       setTheTitle();
 
-      Bundle extras = getIntent().getExtras();
+      // Bundle extras = getIntent().getExtras();
 
       mListView = (MyHorizontalListView) findViewById(R.id.listview);
       resetButtonBar();

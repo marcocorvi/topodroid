@@ -197,13 +197,24 @@ public class TdmSurvey
    * data reduction consumes the equates that are resolved inside the survey stations
    * without considering the child surveys
    */
-  void reduce()
+  void reduce( List< TdmSurvey > surveys )
   {
-    computeStations();
-    for ( TdmSurvey s : mSurveys ) s.reduce();
+    TDLog.v("reduce " + getFullName() );
+    if ( computeStations() ) {
+      surveys.add( this );
+    }
+    for ( TdmSurvey s : mSurveys ) s.reduce( surveys );
   }
 
-  // void addShot( TdmShot shot ) { mShots.add( shot ); }
+  /** add a shot from another survey
+   * @param shot shot to add
+   */
+  private void addShot( TdmShot shot ) { mShots.add( shot ); }
+
+  // /** remove a shot from this survey
+  //  * @param shot shot to remove
+  //  */
+  // private void removeShot( TdmShot shot ) { mShots.remove( shot ); }
 
   /** add a shot to the survey
    * @param from     FROM station
@@ -265,15 +276,18 @@ public class TdmSurvey
 
   /** compute the stations coordinates (for data reduction)
    */
-  private void computeStations()
+  private boolean computeStations()
   {
     mStations = new ArrayList< TdmStation >();
-    mStartStation = null;
-    if ( mShots.size() == 0 ) return;
+    if ( mShots.size() == 0 ) return false;
 
     // reset shots stations
     for ( TdmShot sh : mShots ) sh.setTdmStations( null, null );
 
+    int shots_size = mShots.size();
+    int used_shots = 0;
+
+    mStartStation = null;
     TdmStation fs=null, ts=null;
     boolean repeat = true;
     while ( repeat ) {
@@ -282,7 +296,7 @@ public class TdmSurvey
         if ( sh.mFromStation != null ) continue; // shot already got stations
         if ( mStartStation == null ) {
           fs = new TdmStation( sh.mFrom, 0, 0, 0, 0, this );
-	  mStartStation = fs;
+          mStartStation = fs;
           mStations.add( mStartStation );
           // angles are already in radians
           float h = (float)Math.cos( sh.mClino ) * sh.mLength;
@@ -292,6 +306,7 @@ public class TdmSurvey
           ts = new TdmStation( sh.mTo, e, s, h*sh.mExtend, v, this );
           mStations.add( ts );
           sh.setTdmStations( fs, ts );
+          used_shots ++;
           repeat = true;
         } else {
           // TDLog.v("Shot " + sh.mFrom + " " + ( ( sh.mTo == null )? "-" : sh.mTo ) );
@@ -307,9 +322,10 @@ public class TdmSurvey
               mStations.add( ts );
               repeat = true;
             } else {
-	          // skip: both shot stations exist
-	        }
+                  // skip: both shot stations exist
+                }
             sh.setTdmStations( fs, ts );
+            used_shots ++;
           } else if ( ts != null ) { // FROM does not exist, but TO exists
             float h = (float)Math.cos( sh.mClino ) * sh.mLength;
             float v = (float)Math.sin( sh.mClino ) * sh.mLength;
@@ -318,14 +334,15 @@ public class TdmSurvey
             fs = new TdmStation( sh.mFrom, ts.e-e, ts.s-s, ts.h-h*sh.mExtend, ts.v-v, this );
             mStations.add( fs );
             sh.setTdmStations( fs, ts );
+            used_shots ++;
             repeat = true;
           } else { // the two shot stations do not exist: check equates
-	    boolean skip_equate = false;
-	    for ( TdmEquate eq : mEquates ) {
-	      if ( skip_equate ) break;
-	      if ( eq.contains( sh.mFrom ) ) {
-		for ( String st : eq.mStations ) if ( ! st.equals( sh.mFrom  ) ) {
-		  if ( ( fs = getStation( st ) ) != null ) {
+            boolean skip_equate = false;
+            for ( TdmEquate eq : mEquates ) {
+              if ( skip_equate ) break;
+              if ( eq.contains( sh.mFrom ) ) {
+        	for ( String st : eq.mStations ) if ( ! st.equals( sh.mFrom  ) ) {
+        	  if ( ( fs = getStation( st ) ) != null ) {
                     float h = (float)Math.cos( sh.mClino ) * sh.mLength;
                     float v = (float)Math.sin( sh.mClino ) * sh.mLength;
                     float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
@@ -333,13 +350,14 @@ public class TdmSurvey
                     ts = new TdmStation( sh.mTo, fs.e+e, fs.s+s, fs.h+h*sh.mExtend, fs.v+v, this );
                     mStations.add( ts );
                     sh.setTdmStations( fs, ts );
-		    skip_equate = true;
-		    break;
-		  }
-		}
+                    used_shots ++;
+        	    skip_equate = true;
+        	    break;
+        	  }
+        	}
               } else if ( eq.contains( sh.mTo ) ) {
-	        for ( String st : eq.mStations ) if ( ! st.equals( sh.mTo ) ) {
-		  if ( ( ts = getStation( st ) ) != null ) {
+                for ( String st : eq.mStations ) if ( ! st.equals( sh.mTo ) ) {
+        	  if ( ( ts = getStation( st ) ) != null ) {
                     float h = (float)Math.cos( sh.mClino ) * sh.mLength;
                     float v = (float)Math.sin( sh.mClino ) * sh.mLength;
                     float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
@@ -347,17 +365,35 @@ public class TdmSurvey
                     fs = new TdmStation( sh.mFrom, ts.e-e, ts.s-s, ts.h-h*sh.mExtend, ts.v-v, this );
                     mStations.add( fs );
                     sh.setTdmStations( fs, ts );
-		    skip_equate = true;
-		    break;
+                    used_shots ++;
+        	    skip_equate = true;
+        	    break;
                   }
                 }
               }
             }
-	    if ( skip_equate ) repeat = true;
-	  }
+            if ( skip_equate ) repeat = true;
+          }
         }
       }
     }
+    if ( used_shots < shots_size ) {
+      TDLog.v("shots used " + used_shots + " of " + shots_size );
+      TdmSurvey survey = new TdmSurvey( mName + "_" );
+      ArrayList< TdmShot > shots = new ArrayList<>();
+      for ( TdmShot sh : mShots ) {
+        if ( sh.mFromStation == null ) {
+          survey.addShot( sh );
+          sh.mSurvey = survey;
+        } else {
+          shots.add( sh );
+        }
+      }
+      addSurvey( survey );
+      mShots = shots;
+    }
+    TDLog.v("Compute stations " + mStations.size() + " shots " + mShots.size() );
+    return ( used_shots > 0 ); // or mStations.size() > 0 ?
   }
 
   /** set the input color

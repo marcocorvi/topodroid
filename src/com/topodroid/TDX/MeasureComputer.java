@@ -134,12 +134,12 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
               double zs = surface.computeZ( st.x, st.y );
               if ( zs > -1000 ) {
                 zs -= st.z;
-                mTopoGL.showCurrentStation( st.getShortName() + String.format(Locale.US, " [Depth %.1f]", zs), msg );
+                mTopoGL.showCurrentStation( st.getFullName() + String.format(Locale.US, " [Depth %.1f]", zs), msg );
               } else {
-                mTopoGL.showCurrentStation( st.getShortName(), msg );
+                mTopoGL.showCurrentStation( st.getFullName(), msg );
               }
             } else {
-              mTopoGL.showCurrentStation( st.getShortName(), msg );
+              mTopoGL.showCurrentStation( st.getFullName(), msg );
             }
             // TDToast.make( msg );
           }

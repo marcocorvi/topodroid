@@ -627,7 +627,7 @@ public class TDSetting
   // public static int mPickerType = PICKER_LIST;
   // public static int mRecentNr     = 4;        // nr. most recent symbols
   public static boolean mSingleBack = false; // with single back
-  // public static boolean mHideNavBar = false; // hide nav_bar
+  public static boolean mHideNavBar = false; // hide nav_bar
   public static int     mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
   public static boolean mPalettes = false;   // extra tools palettes
   // public static boolean mCompositeActions = false;
@@ -1086,7 +1086,7 @@ public class TDSetting
    */
   private static void setHideNavBar( boolean hide_navbar )
   {
-    // mHideNavBar = hide_navbar;
+    mHideNavBar = hide_navbar;
     mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                   | View.SYSTEM_UI_FLAG_FULLSCREEN;                // remove the appbar
     if ( hide_navbar ) mUiVisibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;

@@ -49,7 +49,8 @@ class TdmEquateNewDialog extends MyDialog
   // String[] mStation;
   // Spinner[] mSpinner;
   EditText[] mEdit;
-  int size;
+  int mSize;
+  int mCommandsSize;
 
   private Button mBTok;
   private Button mBTback;
@@ -64,11 +65,13 @@ class TdmEquateNewDialog extends MyDialog
     super( context, null, R.string.TdmEquateNewDialog ); // null app
     mParent   = parent;
     mCommands = commands;
-    size = mCommands.size();
-    // mStation = new String[size];
-    mEdit = new EditText[size];
-    // mSpinner = new Spinner[size];
-    for ( int k=0; k<size; ++k ) {
+    mCommandsSize = mCommands.size();
+    mSize = mCommandsSize;
+    if ( mSize == 1 ) mSize = 2;
+    // mStation = new String[ mSize ];
+    mEdit = new EditText[ mSize ];
+    // mSpinner = new Spinner[ mSize ];
+    for ( int k = 0; k < mSize; ++k ) {
       // mStation[k] = null;
       mEdit[k] = null;
       // mSpinner[k] = null;
@@ -100,8 +103,8 @@ class TdmEquateNewDialog extends MyDialog
       LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp2.setMargins( 0, 10, 20, 10 );
 
-    for ( int k=0; k<size; ++k ) {
-      TdmViewCommand vc = mCommands.get( k );
+    for ( int k=0; k<mSize; ++k ) {
+      TdmViewCommand vc = mCommands.get( ( (mCommandsSize == 1)? 0 : k ) );
       // List< TdmViewStation > vs = vc.mStations;
       
       LinearLayout layout = new LinearLayout( mContext );
@@ -139,8 +142,8 @@ class TdmEquateNewDialog extends MyDialog
     if ( b == mBTok ) {
       String bad_station = null;
       ArrayList< String > sts = new ArrayList<>();
-      for ( int k=0; k<size; ++k ) {
-        TdmViewCommand vc = mCommands.get( k );
+      for ( int k=0; k<mSize; ++k ) {
+        TdmViewCommand vc = mCommands.get( ( (mCommandsSize == 1) ? 0 : k ) );
         String survey = vc.name();
         int len = survey.length();
         // while ( len > 0 && survey.charAt( len - 1 ) == '.' ) -- len;
@@ -169,8 +172,8 @@ class TdmEquateNewDialog extends MyDialog
       }
     } else if ( b == mBTall ) { // HB EQ all
           ArrayList<String> stations = new ArrayList<>();
-          if (size > 1) {
-              for (int j = 0; j < ( size - 1 ) ; ++j) {
+          if (mSize > 1) {
+              for (int j = 0; j < ( mSize - 1 ) ; ++j) {
                   // int good_station = 0; FIXME moved inside and replaced with a boolean
                   TdmViewCommand vc0 = mCommands.get(j);
                   String survey0 = vc0.name();
@@ -189,8 +192,8 @@ class TdmEquateNewDialog extends MyDialog
                           int len0 = survey0.length();
                           // while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0;
                           sts.add(station + "@" + survey0.substring(0, len0));
-                          for (int k = ( j + 1 ); k < size; ++k) {
-                              TdmViewCommand vc = mCommands.get(k);
+                          for (int k = ( j + 1 ); k < mSize; ++k) {
+                              TdmViewCommand vc = mCommands.get( ( (k < mCommandsSize)? 0 : k ) );
                               String survey = vc.name();
                               TDLog.v("survey <" + survey + ">" );
                               int len = survey.length();
@@ -216,16 +219,16 @@ class TdmEquateNewDialog extends MyDialog
                       }
                   }
               }
-              //TDToast.makeWarn(String.format("size %d", size));
+              //TDToast.makeWarn(String.format("size %d", mSize));
           }
     } else if ( b == mBTone ) { // HB EQ one equation - no loop
     ArrayList<String> stations = new ArrayList<>(); 
     int eq_group_nr = 0; 
     int eq_group_nr_max = 0; 
-    int[] eq_group = new int[size];
-    for (int j = 0; j < ( size ) ; ++j ) eq_group[j]=-1; 
-    if (size > 1) {
-        for (int j = 0; j < ( size - 1 ) ; ++j) { 
+    int[] eq_group = new int[mSize];
+    for (int j = 0; j < ( mSize ) ; ++j ) eq_group[j]=-1; 
+    if (mSize > 1) {
+        for (int j = 0; j < ( mSize - 1 ) ; ++j) { 
             TdmViewCommand vc0 = mCommands.get(j);
             String survey0 = vc0.name();
             for (TdmViewStation st : vc0.mStations) { 
@@ -237,8 +240,8 @@ class TdmEquateNewDialog extends MyDialog
                     int len0 = survey0.length(); 
                     //while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // FIXME ! It should also be prohibited when creating the survey! It is allowed there.
                     sts.add(station + "@" + survey0.substring(0, len0));
-                    for (int k = ( j + 1 ); k < size; ++k) {
-                        TdmViewCommand vc = mCommands.get(k);
+                    for (int k = ( j + 1 ); k < mSize; ++k) {
+                        TdmViewCommand vc = mCommands.get( ( (k < mCommandsSize)? 0 : k) );
                         String survey = vc.name();
                         int len = survey.length();
                         //while (len > 0 && survey.charAt(len - 1) == '.') --len; // ? FIXME ! It should also be prohibited when creating the survey! It is allowed there.
@@ -259,7 +262,7 @@ class TdmEquateNewDialog extends MyDialog
                                     } else if (eq_group[k] == -1) {
                                         eq_group[k] = eq_group[j];
                                     } else { // two group equate
-                                        for (int l = 0; l < ( size ) ; ++l ) if (eq_group[l]==eq_group[k]) eq_group[l]=eq_group[j]; // k -> j
+                                        for (int l = 0; l < ( mSize ) ; ++l ) if (eq_group[l]==eq_group[k]) eq_group[l]=eq_group[j]; // k -> j
                                         eq_group_nr_max--;
                                     }
                                 }
@@ -282,13 +285,13 @@ class TdmEquateNewDialog extends MyDialog
         }
       } else if ( b == mBTsearch ) {
           ArrayList<String> stations = new ArrayList<>();
-          for (int k = 0; k < size ; ++k) mEdit[k].setText("-");
-          if (size > 1) {
-              for (int j = j0; j < ( size - 1 ) ; ++j) {
+          for ( int k = 0; k < mSize ; ++k) mEdit[k].setText("-");
+          if ( mSize > 1 ) {
+              for (int j = j0; j < ( mSize - 1 ) ; ++j) {
                   // int good_station = 0; FIXME same as above
                   TdmViewCommand vc0 = mCommands.get(j);
                   String survey0 = vc0.name();
-                  for (int l=l0;l<vc0.mStations.size(); ++l ){
+                  for ( int l = l0; l < vc0.mStations.size(); ++l ){
                       TdmViewStation st = vc0.mStations.get(l);
                       if (st.mEquated) break; // FIXME break or continue ?
                       String station = st.name();
@@ -302,8 +305,8 @@ class TdmEquateNewDialog extends MyDialog
                           ArrayList<String> sts = new ArrayList<>();
                           int len0 = survey0.length();
                           // while (len0 > 0 && survey0.charAt(len0 - 1) == '.') --len0; // ?
-                          for (int k = j+1; k < size; ++k) {
-                              TdmViewCommand vc = mCommands.get(k);
+                          for (int k = j+1; k < mSize; ++k) {
+                              TdmViewCommand vc = mCommands.get( ( (k < mCommandsSize)? 0 : k ) );
                               String survey = vc.name();
                               int len = survey.length();
                               TDLog.v("survey <" + survey + ">" );
@@ -324,11 +327,11 @@ class TdmEquateNewDialog extends MyDialog
                               }
                           }
                           if (good_station ) { // if (good_station > 0) 
-                              j0=j;
-                              l0=l+1;
-                              if (l0>=vc0.mStations.size()) {
-                                  j0=j+1;
-                                  l0=0;
+                              j0 = j;
+                              l0 = l+1;
+                              if (l0 >= vc0.mStations.size() ) {
+                                  j0 = j+1;
+                                  l0 = 0;
                               }
                               // good_station = 0; // FIXME why reset the local variable ?
                               return;
@@ -336,8 +339,8 @@ class TdmEquateNewDialog extends MyDialog
                       }
                   }
               }
-              //TDToast.makeWarn(String.format("size %d", size));
-              l0=0;
+              //TDToast.makeWarn(String.format("size %d", mSize));
+              l0 = 0;
           }
       }
 //-------------------------------------------------------------------------------HB EQ all

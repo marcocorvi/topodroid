@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android" 
-  >
-  <!-- RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android" 
     >
-    <TextView android:id="@+id/title"
+    <!-- TextView android:id="@+id/title"
       style="@style/text_title_base"
-    />
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="fill_parent"
-      android:layout_below="@id/title"
-      -->
+    / -->
+   <LinearLayout android:id="@+id/manual_layout"
+      android:layout_width="fill_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:fitsSystemWindows="false"
+      >
+      <!-- android:layout_below="@id/title" -->
       <WebView android:id="@+id/manual_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +57,5 @@
             android:contentDescription="@string/submit"
             android:layout_margin="16dp" / -->
   
-    <!-- /LinearLayout>
-  </RelativeLayout -->
+    </LinearLayout>
 </merge>
