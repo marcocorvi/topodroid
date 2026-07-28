@@ -33,8 +33,8 @@ Shot data foreground color:
 
 TopoDroid distinguishes four kinds of shots (displayed with different colors): "leg", "repeated-leg", "splay", and "blank".
 A series of consecutive shots is recognized as a leg if they are close in distance, azimuth and clino.
-By default there must be at least three shots. The first shot is marked s "leg" (and assigned stations), the others are
-"repeated-leg". If the shots are ot enough the first is a splay, and the other are "blank".<br>
+By default, there must be at least three shots. The first shot is marked as "leg" (and assigned stations), the others are
+"repeated-leg". If the shots are not close enough, the first is a splay, and the other are "blank".<br>
 Splays can be further classified as "cross" (X), horizontal (H), vertical (V), and "scan" (shots acquired in scan mode).
 <a href="page_shot_edit1.htm">Splay classes</a> X-H-V are disabled by default [G].<br><p>
 
@@ -58,6 +58,8 @@ Station names background color:
 <li>[violet] backsight-check splay, with failed check</li>
 </ul><p>
 
+Shot data: see <a href="manual07.htm">SHOT LIST</a> for more information about each entry.<p>
+
 <img src="shots_list.png" alt="shots list"/><p>
 
 <h4>Station names</h4>
@@ -73,7 +75,7 @@ is changed.<br><p>
 <h4>ACTIONS</h4>
 <ul style="margin-top:0">
 <li>tap on the shot data: opens the shot <a href="page_shot_edit1.htm">edit dialog</a></li>
-<li>long tap on the shot data: start multi-shot select</li>
+<li>long tap on the shot data: start <a href="page_multishot.htm">multi-shot</a> select</li>
 <!--li>tap on a shot clino: shot <a href="page_shot_edit2.htm">secondary actions</a></li-->
 <li>tap on a station: opens the <a href="page_saved_station.htm">Saved stations</a> dialog (here you can enable the display of the splays belonging to the station)</li>
 <li>long tap on a station: select/deselect the <a href="page_current.htm">"active" station</a></li>
@@ -108,9 +110,9 @@ Multi-shot selection buttons:<br>
 <li><img src="btn_multishot_flip_extend.png"     width="36" border="1"> flip the shots extend</li>
 <li><img src="btn_right.png"  width="36" border="1"> set the shots extend to <i>right</i></li>
 <li><img src="btn_multishot_special_actions.png" width="36" border="1"> special actions dialog [T]</li>
-<li><img src="btn_delete.png" width="36" border="1"> delete the shots and put them in the shot-buffer.
-Hidden secondary-leg shots are deleted and added to the shot-buffer when the corresponding leg shot is deleted</li>
-<li><img src="btn_copy.png"   width="36" border="1"> copy the shots to the shot-buffer</li>
+<li><img src="btn_delete.png" width="36" border="1"> delete the shots and put them in the <a href="page_shot_paste.htm">shot-buffer</a>.
+Hidden secondary-leg shots are deleted and added to the <a href="page_shot_paste.htm">shot-buffer</a> when the corresponding leg shot is deleted</li>
+<li><img src="btn_copy.png"   width="36" border="1"> copy the shots to the <a href="page_shot_paste.htm">shot-buffer</a></li>
 <li><img src="btn_clear.png"  width="36" border="1"> close the multi-shot selection</li>
 </ul><br><p>
 
@@ -129,7 +131,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 <ul style="margin-top:0">
 <li><u>Close</u>: closes the current survey</li>
 <li><u>Survey info</u>: opens the <u>Survey Info window</u></li>
-<li><u>Recover | paste</u>: deleted item (shot or sketch) <a href="page_undelete.htm">recovery</a>, or shot buffer paste [N]/[E]</li>
+<li><u>Recover | Paste</u>: <a href="page_undelete.htm">recover</a> a deleted item (shot or sketch), or <a href="page_shot_paste.htm">shot-buffer paste</a> (long press) [N]/[E]</li>
 <li><u>Photo</u>: pictures taken for this survey [A]</li>
 <li><u>Audio</u>: audios recorded in this survey [T]</li>
 <li><u>Sensor</u>: sensor data taken for this survey [E]</li>
@@ -138,9 +140,6 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 <li><u>Settings</u></li>
 <li><u>Help</u> [N]</li>
 </ul><br><p>
-
-With a short tap the <u>Recover/paste</u> menu opens the <a href="page_undelete.htm"><i>Recover Dialog</i></a>.
-With a long tap it opens the <a href="page_shot_paste.htm"><i>Shot paste Dialog</i></a>.<br><p>
 
 <h4>SURVEY SETTINGS</h4>
 <ul style="margin-top:0">

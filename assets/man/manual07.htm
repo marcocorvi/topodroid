@@ -55,32 +55,12 @@ The button bar changes to the buttons for the multi-shot actions:
 <li><img src="btn_left.png"     width="36" border="1"> set the shots extend to <i>left</i></li>
 <li><img src="btn_multishot_flip_extend.png"     width="36" border="1"> flip the shots extend</li>
 <li><img src="btn_right.png"  width="36" border="1"> set the shots extend to <i>right</i></li>
-<li><img src="btn_multishot_special_actions.png" width="36" border="1"> special actions dialog [T]</li>
-<li><img src="btn_delete.png" width="36" border="1"> delete the shots and put them in the shot-buffer. Warning: hidden secondary-leg shots are deleted when the corresponding leg shot is deleted</li>
-<li><img src="btn_copy.png"   width="36" border="1"> copy the shots to the shot-buffer</li>
+<li><img src="btn_multishot_special_actions.png" width="36" border="1"> <a href="page_multishot.htm">special actions</a> dialog [T]</li>
+<li><img src="btn_delete.png" width="36" border="1"> delete the shots and put them in the <a href="page_shot_paste.htm">shot-buffer</a>. Warning: hidden secondary-leg shots are deleted when the corresponding leg shot is deleted</li>
+<li><img src="btn_copy.png"   width="36" border="1"> copy the shots to the <a href="page_shot_paste.htm">shot-buffer</a> (can be copied to any survey using a long-click on the "recover" menu item)</li>
 <li><img src="btn_clear.png"  width="36" border="1"> close the multi-shot selection</li>
 </ul>
 <br><p>
-
-The special actions dialog includes [T]:
-<ul>
-<li>renumber the selected shots</li>
-<li>swap the stations of each shot</li>
-<li>set the sketch color of the selected splay shots</li>
-<li>mark the splays as X-splay or H/V-splay (or make them normal)</li>
-<li>compute the strike and dip of the plane containing the shots (only if the <u>Plane interpolation</u> option is enabled)</li>
-</ul>
-
-The stations of the first shot are used to seed the renumbering. They can be changed in the dialog.
-If both stations are entered, the first selected shot is a leg and the following selected shots are renumbered consistently.
-If only the FROM station is entered (and the TO station is left empty), all the shots are renumbered as splay.
-<br><p>
-
-<div style="font-size:90%">
-Setting the color of splays is enabled if only splays have been selected, otherwise it is disabled.<br>
-The computation of strike and dip of the bedding plane requires that all the selected shots have the same FROM station. Otherwise, it is disabled.
-The result is shown in the dialog and added to (replaced if already present) the comment of the first selected shot.
-</div><br><p>
 
 <a href="manual06.htm">&lt; Survey data</a> |
 <a href="manual08.htm">Survey info &gt;</a>
