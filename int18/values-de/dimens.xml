@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <dimen name="menuwidth">150sp</dimen>
+  <string name="labelweight">100</string>
+  <string name="valueweight">80</string>
+  <string name="stationweight">40</string>
+
+</resources>
