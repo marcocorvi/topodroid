@@ -52,7 +52,7 @@ class TdmConfig extends TdmFile
   public TdmConfig( String filepath, boolean save )
   {
     super( filepath, null );
-    TDLog.v("Tdm_Config cstr filepath " + filepath );
+    // TDLog.v("Tdm_Config cstr filepath " + filepath );
     // mParentDir = (new File( filepath )).getParentFile().getName() + "/";
     // mSurvey    = null;
     mInputs    = new ArrayList< TdmInput >();
@@ -71,15 +71,17 @@ class TdmConfig extends TdmFile
    */
   void populateViewSurveys( ArrayList< TdmSurvey > surveys )
   {
+    // TDLog.v("Tdm config populate surveys " + surveys.size() );
     mViewSurveys = new ArrayList< TdmSurvey >(); // current view surveys
     ArrayList< TdmSurvey > reduced_surveys = new ArrayList<>();
     for ( TdmSurvey survey : surveys ) {
       // TDLog.v("Populate survey " + survey.getName() );
       survey.reduce( reduced_surveys );
-      for ( TdmSurvey reduced_survey : reduced_surveys ) {
-        mViewSurveys.add( reduced_survey );
-      }
     }
+    for ( TdmSurvey reduced_survey : reduced_surveys ) {
+      mViewSurveys.add( reduced_survey );
+    }
+    // TDLog.v("Tdm config populate reduced surveys " + reduced_surveys.size() );
   }
 
   /** drop the equates with a given survey
@@ -87,7 +89,7 @@ class TdmConfig extends TdmFile
    */
   void dropEquates( String survey )
   {
-    TDLog.v("drop equates with " + survey );
+    // TDLog.v("drop equates with " + survey );
     if ( survey == null || survey.length() == 0 ) return;
     ArrayList< TdmEquate > equates = new ArrayList<>();
     for ( TdmEquate equate : mEquates ) {
@@ -115,7 +117,7 @@ class TdmConfig extends TdmFile
     if ( equate == null ) return;
     mEquates.add( equate );
     setSave();
-    TDLog.v("add eqaute " + equate.stationsString() + " Nr. equates " + mEquates.size() );
+    // TDLog.v("add eqaute " + equate.stationsString() + " Nr. equates " + mEquates.size() );
   }
 
   /** unconditionally remove an equate
@@ -123,7 +125,7 @@ class TdmConfig extends TdmFile
    */
   void removeEquate( TdmEquate equate ) 
   { 
-    TDLog.v("Config remove equate " + equate.stationsString() );
+    // TDLog.v("Config remove equate " + equate.stationsString() );
     mEquates.remove( equate );
     setSave();
   }
@@ -380,7 +382,7 @@ class TdmConfig extends TdmFile
       pw.format("    load \"%s\" -color %d\n", path, (input.getColor() & 0xffffff) );
     }
     for ( TdmEquate equate : mEquates ) {
-      TDLog.v("EQUATE >" + equate.stationsString() + "<" );
+      // TDLog.v("EQUATE >" + equate.stationsString() + "<" );
       pw.format("    equate");
       for ( String st : equate.mStations ) pw.format(" \"%s\"", st );
       pw.format("\n");

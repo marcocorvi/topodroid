@@ -91,7 +91,7 @@ class TdmViewEquate
     }
   }
 
-  // void dump( )
+  // void dumpViewEquate( )
   // {
   //   TDLog.v("equate (size " + mStations.size() + ")" );
   //   for ( TdmViewStation vst : mStations )

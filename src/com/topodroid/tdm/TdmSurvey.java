@@ -48,7 +48,7 @@ public class TdmSurvey
    */
   TdmSurvey( String name )
   {
-    mName   = name;
+    mName = name;
     mParent = null;
     mShots    = new ArrayList< TdmShot >();
     mStations = null;
@@ -124,7 +124,7 @@ public class TdmSurvey
     if ( mLoadedData == 1 ) return true;
     if ( mLoadedData == 0 ) return false;
 
-    TDLog.v("TdManager load survey data <" + mName + ">" );
+    // TDLog.v("TdManager load survey data <" + mName + ">" );
     
     if ( mInfo == null ) {
       mInfo = data.getSurveyInfo( mName );
@@ -156,8 +156,9 @@ public class TdmSurvey
    */
   void addSurvey( TdmSurvey survey )
   {
-    mSurveys.add( survey );
     survey.mParent = this;
+    mSurveys.add( survey );
+    // TDLog.v("Tdm survey " + getFullName() + " added survey " + survey.getFullName() );
   }
 
   /** get the (last) name of this survey
@@ -199,10 +200,12 @@ public class TdmSurvey
    */
   void reduce( List< TdmSurvey > surveys )
   {
-    TDLog.v("reduce " + getFullName() );
+    // TDLog.v("Tdm survey " + getFullName() + " reducing ...");
     if ( computeStations() ) {
       surveys.add( this );
+      // TDLog.v("Tdm survey reduce added to list " + getFullName() + " size " + surveys.size() );
     }
+    // TDLog.v("Tdm survey " + getFullName() + " reduce subsurvey " + mSurveys.size() );
     for ( TdmSurvey s : mSurveys ) s.reduce( surveys );
   }
 
@@ -378,8 +381,8 @@ public class TdmSurvey
       }
     }
     if ( used_shots < shots_size ) {
-      TDLog.v("shots used " + used_shots + " of " + shots_size );
-      TdmSurvey survey = new TdmSurvey( mName + "_" );
+      // TDLog.v("shots used " + used_shots + " of " + shots_size );
+      TdmSurvey survey = new TdmSurvey( mName );
       ArrayList< TdmShot > shots = new ArrayList<>();
       for ( TdmShot sh : mShots ) {
         if ( sh.mFromStation == null ) {
@@ -389,10 +392,10 @@ public class TdmSurvey
           shots.add( sh );
         }
       }
-      addSurvey( survey );
+      addSurvey( survey ); // the split survey becomes a subsurvey of this
       mShots = shots;
     }
-    TDLog.v("Compute stations " + mStations.size() + " shots " + mShots.size() );
+    // TDLog.v("Compute stations " + mStations.size() + " shots " + mShots.size() );
     return ( used_shots > 0 ); // or mStations.size() > 0 ?
   }
 

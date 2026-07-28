@@ -192,6 +192,7 @@ public class TdmViewSurface extends SurfaceView
   public TdmViewSurface(Context context, AttributeSet attrs) 
   {
     super(context, attrs);
+    // TDLog.v("Tdm view surface cstr");
     mWidth = 0;
     mHeight = 0;
 
@@ -253,7 +254,7 @@ public class TdmViewSurface extends SurfaceView
    */
   void addEquates( ArrayList< TdmEquate > equates )
   {
-    // TDLog.v("View surface: add equates: size " + equates.size() );
+    // TDLog.v("View surface: add equates: size " + equates.size() + " cmd " + mCommandManager.size() );
     synchronized( mEquates ) {
       mEquates.clear();
       for ( TdmViewCommand command : mCommandManager ) {
@@ -263,21 +264,28 @@ public class TdmViewSurface extends SurfaceView
 
     ArrayList< TdmViewEquate > tmp_equates = new ArrayList<>();
     for ( TdmEquate equate : equates ) {
+      // equate.dumpEquate();
       ArrayList< TdmViewStation > vst = new ArrayList<>();
       for ( TdmViewCommand command : mCommandManager ) {
-        String survey_name = command.mSurvey.mName;
-        int len = survey_name.length();
-        // while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len; // 2025-12-15
-        survey_name = survey_name.substring( 0, len );
-        String st = equate.getSurveyStation( survey_name );
-        if ( st != null ) {
-          TdmViewStation vt = command.getViewStation( st );
-          if ( vt != null ) {
-            vst.add( vt );
-          } else {
-            TDLog.e("TdManager survey " + survey_name + " station " + st + " not in cmd-manager" );
-          }
+        TdmViewStation vt = equate.getCommandStation( command );
+        if ( vt != null ) {
+          vst.add( vt );
+          // TDLog.v("added view station " + vt.mStation.mName );
         }
+        // String survey_name = command.mSurvey.mName;
+        // int len = survey_name.length();
+        // // while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len; // 2025-12-15
+        // survey_name = survey_name.substring( 0, len );
+        // String st = equate.getSurveyStation( survey_name );
+        // TDLog.v("Try to get station " + st + " with cmd for " + survey_name + " " + command.mStations.size() + " stations " + command.dumpStations() );
+        // if ( st != null ) {
+        //   TdmViewStation vt = command.getViewStation( st );
+        //   if ( vt != null ) {
+        //     vst.add( vt );
+        //   } else {
+        //     TDLog.e("TdManager survey " + survey_name + " station " + st + " not in cmd-manager" );
+        //   }
+        // }
       }
       if ( vst.size() > 1 ) {
         TdmViewEquate veq = new TdmViewEquate( equate );
@@ -300,19 +308,22 @@ public class TdmViewSurface extends SurfaceView
    * @param yoff      Y offset
    * @param equates   ...
    */
-  void addSurvey( TdmSurvey survey, int color, float xoff, float yoff, ArrayList< TdmEquate > equates )
+  void addTdmSurvey( TdmSurvey survey, int color, float xoff, float yoff, ArrayList< TdmEquate > equates )
   {
-    TdmViewCommand command = new TdmViewCommand( survey, color, xoff, yoff );
-    ArrayList< String > equate_stations = new ArrayList<>();
-
     String survey_name = survey.getName();
     int len = survey_name.length();
     // while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len; // 2025-12-15
     survey_name = survey_name.substring( 0, len );
+
+    // TDLog.v("Tdm view surface add cmd " + survey.getFullName() + " equates " + equates.size() );
+    TdmViewCommand command = new TdmViewCommand( survey, color, xoff, yoff );
+    ArrayList< String > equate_stations = new ArrayList<>();
+
     for ( TdmEquate equate : equates ) {
+      // equate.dumpEquate();
       String station = equate.getSurveyStation( survey_name );
       if ( station != null ) {
-        // TDLog.v("View surface: equate station " + station + " survey <" + survey_name  + ">" );
+        // TDLog.v("Tdm view surface: equate station " + station + " survey <" + survey.getFullName()  + ">" );
         equate_stations.add( station );
       }
     }

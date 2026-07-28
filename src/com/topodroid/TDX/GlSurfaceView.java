@@ -34,12 +34,19 @@ class GlSurfaceView extends GLSurfaceView
   static boolean mLightMode = false;   // light/move vs turn
   static void toggleLightMode( ) { mLightMode = ! mLightMode; }
 
+  /** cstr
+   * @param ctx   context
+   * @param app   activity
+   */
   GlSurfaceView( Context ctx, TopoGL app ) 
   {
     super( ctx );
     mApp = app;
   }
 
+  /** set the rendered for this surface view
+   * @param renderer renderer
+   */
   void setRenderer( GlRenderer renderer ) 
   {
     super.setRenderer( renderer );
@@ -60,6 +67,11 @@ class GlSurfaceView extends GLSurfaceView
   //   }
   // }
 
+  /** scale and translate the model
+   * @param s0   scale 
+   * @param dx   X displacement 
+   * @param dy   Y displacement
+   */
   private void doScaleTranslate( final float s0, float dx, float dy ) 
   {
     final float dx0 = dx * TOUCH_TRANSLATE_FACTOR;
@@ -75,6 +87,10 @@ class GlSurfaceView extends GLSurfaceView
     // requestRender();
   }
 
+  /** rotate the light
+   * @param dx   X displacement (to be converted to angle)
+   * @param dy   Y displacement
+   */
   private void doRotateLight( float dx, float dy )
   {
     final float dax = dy * TOUCH_ANGLE_FACTOR;
@@ -89,6 +105,10 @@ class GlSurfaceView extends GLSurfaceView
     } );
   }
 
+  /** rotate the model
+   * @param dx   X displacement (to be converted to angle)
+   * @param dy   Y displacement
+   */
   private void doRotateModel( float dx, float dy )
   {
     final float dax = dy * TOUCH_ANGLE_FACTOR;
@@ -120,7 +140,8 @@ class GlSurfaceView extends GLSurfaceView
       case MotionEvent.ACTION_DOWN:
       case MotionEvent.ACTION_POINTER_UP:
         doRotate = false;
-        if ( e.getPointerCount() == 1 ) { // rotate
+        // TDLog.v("Action up pointers " + e.getPointerCount() );
+        if ( e.getPointerCount() == 1 ) { 
           final float xx = e.getX();
           final float yy = e.getY();
           mPreviousX = xx;

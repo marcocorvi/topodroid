@@ -159,7 +159,7 @@ public class TdmViewActivity extends Activity
       float zh = 0.5f * TopoDroidApp.mDisplayHeight / ( box.bottom - box.top );
       float x  = ( box.right + box.left )/2;
       float y  = ( box.bottom + box.top )/2;
-      TDLog.v("BBox " + box.left + " " + box.right + "   " + box.top + " " + box.bottom + " zw " + zw );
+      // TDLog.v("BBox " + box.left + " " + box.right + "   " + box.top + " " + box.bottom + " zw " + zw );
       float z  = ( zh < zw )? zh : zw;
       mDrawingSurface.transform( width/(2.0f * z) - x, height/(2.0f * z) - y, z ); // was zoom = 1
      
@@ -286,6 +286,7 @@ public class TdmViewActivity extends Activity
         TDToast.make( R.string.no_survey );
         return;
       }
+      // TDLog.v("Tdm view activity start - config surveys " + surveys.size() );
       // TdmConfig config = mApp.mConfig;
       ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
 
@@ -307,7 +308,7 @@ public class TdmViewActivity extends Activity
       // color[5] = 0xff00ff00;
       // int k = 0;
       for ( TdmSurvey survey : surveys ) {
-        mDrawingSurface.addSurvey( survey, survey.getColor(), 0, 0, equates );
+        mDrawingSurface.addTdmSurvey( survey, survey.getColor(), 0, 0, equates );
         // ++k;
       }
       updateViewEquates();

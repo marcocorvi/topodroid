@@ -11,6 +11,9 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.util.TDLog;
+
+import java.util.List;
 import java.util.ArrayList;
 
 class TdmEquate
@@ -48,6 +51,33 @@ class TdmEquate
       if ( names.length > 1 && survey.equals( names[1] ) ) return names[0];
     }
     return null;
+  }
+
+  /** @return the first view-station of a command for a station in this equate
+   * @param cmd   view-command
+   */
+  TdmViewStation getCommandStation( TdmViewCommand cmd )
+  {
+    String survey_name = cmd.mSurvey.mName;
+    for (  TdmViewStation st : cmd.mStations ) {
+      String station = st.getName() + "@" + survey_name;
+      for ( String name : mStations ) if ( name.equals( station ) ) return st;
+    }
+    return null;
+  }
+
+  /** @return the view-stations of a command for the stations in this equate
+   * @param cmd   view-command
+   */
+  List< TdmViewStation > getCommandAllStation( TdmViewCommand cmd )
+  { 
+    ArrayList< TdmViewStation > ret = new ArrayList<>();
+    String survey_name = cmd.mSurvey.mName;
+    for (  TdmViewStation st : cmd.mStations ) {
+      String station = st.getName() + "@" + survey_name; 
+      for ( String name : mStations ) if ( name.equals( station ) ) ret.add( st );
+    }
+    return ret;
   }
 
   /** remove the stations of a given survey
@@ -98,4 +128,9 @@ class TdmEquate
     sb.deleteCharAt( sb.length() - 1 );
     return sb.toString();
   }
+
+  // void dumpEquate()
+  // {
+  //   TDLog.v("Equate "  + mStations.size() + ": " + stationsString() );
+  // }
 }

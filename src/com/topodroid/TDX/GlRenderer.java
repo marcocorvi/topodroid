@@ -398,6 +398,7 @@ public class GlRenderer implements Renderer
     // TDLog.v("GL renderer on Touch() " + x + " " + y );
     // if ( ! GlNames.showStationNames() ) return;
     if ( GlNames.hiddenStations() ) return;
+    if ( MeasureComputer.closeDialogStation() ) return;
     if ( mMeasureCompute ) return;
     mMeasureCompute = true;
 

@@ -310,7 +310,7 @@ public class TdmConfigActivity extends Activity
   {
     TdmSurvey mySurvey = new TdmSurvey( "." );
 
-    // TDLog.v( "start Config activity. inputs " + mTdmConfig.getInputsSize() );
+    // TDLog.v( "Tdm start config activity. inputs " + mTdmConfig.getInputsSize() );
     for ( TdmInput input : mTdmConfig.getInputs() ) {
       if ( input.isChecked() ) {
         // DataHelper mAppData = TopoDroidApp.mData;
@@ -328,6 +328,7 @@ public class TdmConfigActivity extends Activity
       return;
     }
     // list of display surveys
+    // TDLog.v("Tdm config activity surveys " + mySurvey.mSurveys.size() );
     mTdmConfig.populateViewSurveys( mySurvey.mSurveys );
 
     // TODO start drawing activity with reduced surveys

@@ -175,5 +175,8 @@ class TdmViewStation
     path.transform( matrix );
     canvas.drawPath( path, paint );
   }
+
+  // dump
+  String getName() { return ( mStation == null )? "null" : mStation.mName; }
   
 }

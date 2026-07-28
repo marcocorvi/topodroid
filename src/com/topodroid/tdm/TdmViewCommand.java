@@ -11,6 +11,7 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.util.TDLog;
 import com.topodroid.TDX.BrushManager;
 
 import android.graphics.Canvas;
@@ -46,13 +47,47 @@ public class TdmViewCommand
   float mXoff, mYoff;
   float mScale;
 
+  /** cstr
+   * @param survey   displayed survey
+   * @param color    display color
+   * @param xoff     X offset [canvas ?]
+   * @param yoff     Y offset
+   * @note the scale is set to 1
+   */ 
+  public TdmViewCommand( TdmSurvey survey, int color, float xoff, float yoff )
+  {
+    // TDLog.v("Tdm view command cstr - survey " + survey.mName );
+    mSurvey = survey;
+    mSelected = null;
+    mFixedStack   = Collections.synchronizedList(new ArrayList< TdmViewPath >());
+    mStationsArray  = new ArrayList< TdmViewStation >();
+    mStations     = Collections.synchronizedList( mStationsArray );
+    mMatrix = new Matrix(); // identity
+    mPaint = BrushManager.makePaint( color, 2, Paint.Style.STROKE );
+    mFillPaint = BrushManager.makePaint( color & 0x99cccccc, 2, Paint.Style.FILL );
+    mXoff  = xoff;
+    mYoff  = yoff;
+    mScale = 1.0f;
+    // FIXME
+  }
+
   /** @return a station-view (null if not found)
    * @param name   station name
    */
   TdmViewStation getViewStation( String name )
   {
+    if ( name == null ) return null;
+    // TDLog.v("Tdm view cmd get <" + name + ">" );
+    // byte[] b1 = name.getBytes();
+    // int len = b1.length;
     for ( TdmViewStation st : mStations ) {
-      if ( st.mStation.mName.equals( name ) ) return st;
+      if ( st.getName().equals( name ) ) return st;
+      // if ( st.getName().compareTo( name ) == 0 ) return st;
+      // byte[] b2 = st.getName().getBytes();
+      // if ( b2.length != len ) continue;
+      // int k = 0;
+      // for ( ; k < len; ++k ) if ( b1[k] != b2[k] ) break;
+      // if ( k == len ) return st;
     }
     return null;
   }
@@ -97,29 +132,6 @@ public class TdmViewCommand
     mYoff += dy;
     mScale *= rs;
     setTransform();
-  }
-
-  /** cstr
-   * @param survey   displayed survey
-   * @param color    display color
-   * @param xoff     X offset [canvas ?]
-   * @param yoff     Y offset
-   * @note the scale is set to 1
-   */ 
-  public TdmViewCommand( TdmSurvey survey, int color, float xoff, float yoff )
-  {
-    mSurvey = survey;
-    mSelected = null;
-    mFixedStack   = Collections.synchronizedList(new ArrayList< TdmViewPath >());
-    mStationsArray  = new ArrayList< TdmViewStation >();
-    mStations     = Collections.synchronizedList( mStationsArray );
-    mMatrix = new Matrix(); // identity
-    mPaint = BrushManager.makePaint( color, 2, Paint.Style.STROKE );
-    mFillPaint = BrushManager.makePaint( color & 0x99cccccc, 2, Paint.Style.FILL );
-    mXoff  = xoff;
-    mYoff  = yoff;
-    mScale = 1.0f;
-    // FIXME
   }
 
   /** update the bounding box with the stations coords
@@ -267,6 +279,24 @@ public class TdmViewCommand
   //   ret.setStrokeWidth( 2 );
   //   ret.setTextSize(24);
   //   return ret;
+  // }
+ 
+  // String dumpStations()
+  // {
+  //   StringBuilder sb = new StringBuilder();
+  //   for ( TdmViewStation st : mStations ) {
+  //     sb.append( "<" + st.getName() + ">");
+  //   }
+  //   return sb.toString();
+  // }
+
+  // DEBUG
+  // static private String toByte( String str )
+  // {
+  //   StringBuilder sb = new StringBuilder();
+  //   byte[] bytes = str.getBytes();
+  //   for ( byte b : bytes ) sb.append( String.format( "%X ", b ) );
+  //   return sb.toString();
   // }
 
 }

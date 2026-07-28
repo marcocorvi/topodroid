@@ -90,6 +90,9 @@ class DialogStation extends MyDialog
 
   }
 
+  /** close the current station and dismiss the dialog
+   * @param view   unused
+   */
   @Override
   public void onClick(View v)
   {
@@ -98,6 +101,8 @@ class DialogStation extends MyDialog
     dismiss();
   }
 
+  /** close the current station and dismiss the dialog
+   */
   @Override
   public void onBackPressed()
   {

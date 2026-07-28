@@ -94,16 +94,16 @@ public class AIhelper // extends AsyncTask< String, Void, String >
    * @note this method must be called everytime a question is asked
    * N.B. chat and model can be saved between instanatiations if the model does not change
    */
-  void setModel( String model_name, int r_ai_model )
+  void setModel( String model_name, int r_ai_model, float temperature, int max_tokens )
   {
     TDLog.v("AI helper: set model " + model_name );
     if ( ! model_name.equals( mModelName ) ) {
       mModelName = model_name;
       GenerationConfig.Builder gcb = new GenerationConfig.Builder();
-      gcb.temperature = 0.2f; // 0.0 to 1.0 or 2.0
+      gcb.temperature = temperature; // 0.2f; // 0.0 to 1.0 or 2.0
       gcb.topK = 2; // 1 to 40
       gcb.topP = 0.95f; // 0.0 to 1.0 allow some natural language
-      gcb.maxOutputTokens = 1024; // 1 token = 4 chars
+      gcb.maxOutputTokens = max_tokens; // 1024; // 1 token = 4 chars
       GenerationConfig gc = gcb.build();
       GenerativeModel gm = new GenerativeModel( model_name, mUserKey, gc, null, new RequestOptions() );
       model = GenerativeModelFutures.from( gm );
