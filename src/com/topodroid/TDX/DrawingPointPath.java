@@ -521,7 +521,15 @@ public class DrawingPointPath extends DrawingPath
   //   setCenter( x, y );
   // }
 
-  // void setPointType( int t ) { mPointType = t; }
+  /** restore the point type
+   * @param t  point type
+   */
+  void setPointType( int t )
+  { 
+    mPointType = t;
+    resetPath( getScaleValue() );
+    setPathPaint( BrushManager.getPointPaint( mPointType ) );
+  }
 
   /** get the type of the point
    * @return the point type

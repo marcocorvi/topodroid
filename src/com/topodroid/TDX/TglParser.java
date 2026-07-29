@@ -55,6 +55,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 import java.util.Locale;
+import java.util.TreeSet;
+import java.util.Iterator;
+// import java.util.HashTable;
 
 // import android.widget.Toast;
 
@@ -98,6 +101,7 @@ public class TglParser
   protected ArrayList< Cave3DShot >     shots;   // centerline shots
   protected ArrayList< Cave3DShot >     splays;  // splay shots
   protected ArrayList< Cave3DXSection > xsections = null;
+  protected ArrayList< String > mEquateTable = null;
 
   PowercrustComputer powercrustcomputer = null;
   ConvexHullComputer convexhullcomputer = null;
@@ -216,6 +220,39 @@ public class TglParser
   public ArrayList< Cave3DStation >  getStations()  { return stations; }
   public ArrayList< Cave3DFix >      getFixes()     { return fixes; }
   public ArrayList< Cave3DXSection > getXSections() { return xsections; }
+ 
+
+  /** @return the string of the stations equated to a given station
+   * @param station  input station qualified name (eg station@survey)
+   */
+  String getEquates( String station )
+  {
+    if ( station == null ) return null;
+    if ( mEquateTable.size() == 0 ) return null;
+    station = station.trim();
+    if ( station.isEmpty() ) return null;
+    // TDLog.v("Tgl parser getEquates for <" + station + ">" );
+    TreeSet< String > ret = null;
+    for ( String equate : mEquateTable ) {
+      if ( equate.startsWith( station ) || equate.contains( station ) ) {
+        if ( ret == null ) ret = new TreeSet< String >();
+        String[] stations = equate.split( " " );
+        for ( String st : stations ) {
+          String st1 = st.trim();
+          if ( st.length() > 0 && ! station.equals( st ) ) ret.add( st );
+        }
+      }
+    }
+    if ( ret == null || ret.size() == 0 ) return null;
+    StringBuilder sb = new StringBuilder();
+    sb.append( station );
+    Iterator<String> it = ret.iterator();
+    while ( it.hasNext() ) {
+      sb.append(" ").append( it.next() );
+    }
+    // TDLog.v("Tgl parser getEquates returns " + sb.toString() );
+    return sb.toString();
+  }
 
   /** @return an array with the splays at two stations
    * @param st    station (ignored if null)
@@ -690,6 +727,7 @@ public class TglParser
     surveys   = new ArrayList< Cave3DSurvey >();
     stations  = new ArrayList< Cave3DStation >();
     xsections = new ArrayList< Cave3DXSection >();
+    mEquateTable = new ArrayList< String >();
   }
 
   /** compute the bounding box of the 3D model

@@ -1269,7 +1269,7 @@ public class TDSetting
     ++k; GlNames.setTextSize( tryInt(   prefs,       key[k].key,      key[k].dflt ) );
     ++k; TopoGL.mSelectionRadius = tryFloat( prefs,  key[k].key,      key[k].dflt );  
     ++k; TopoGL.mMeasureToast    = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
-    ++k; TopoGL.mStationDialog   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
+    // ++k; TopoGL.mStationDialog   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
     ++k; GlModel.mGridAbove      = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
     ++k; GlModel.mGridExtent     = tryInt(   prefs,  key[k].key,      key[k].dflt );  
     ++k; GlNames.mNamesVisible   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); 
@@ -1988,29 +1988,30 @@ public class TDSetting
     String ret = null;
     // TDLog.v("update pref cave3d: " + k );
     TDPrefKey[] key = TDPrefKey.mCave3D;
-    if ( k.equals( key[0].key ) ) {  // CAVE3D_NEG_CLINO
-      boolean b = tryBooleanValue( hlp, k, v, bool(key[0].dflt) ); 
+    int h = -1;
+    if ( k.equals( key[++h].key ) ) {  // CAVE3D_NEG_CLINO
+      boolean b = tryBooleanValue( hlp, k, v, bool(key[h].dflt) ); 
       GlRenderer.mMinClino = b ? 90 : 0;
-    } else if ( k.equals( key[1].key ) ) { // CAVE3D_STATION_POINTS
-      GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
-    } else if ( k.equals( key[2].key ) ) { // CAVE3D_STATION_POINT_SIZE def=8
-      GlNames.setPointSize( tryIntValue( hlp, k, v, key[2].dflt ) );
-    } else if ( k.equals( key[3].key ) ) { // CAVE3D_STATION_TEXT_SIZE def=20
-      GlNames.setTextSize( tryIntValue( hlp, k, v, key[3].dflt ) );
-    } else if ( k.equals( key[4].key ) ) { // CAVE3D_SELECTION_RADIUS
-      float radius = tryFloatValue( hlp, k, v, key[4].dflt );
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_STATION_POINTS
+      GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(key[h].dflt) );
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_STATION_POINT_SIZE def=8
+      GlNames.setPointSize( tryIntValue( hlp, k, v, key[h].dflt ) );
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_STATION_TEXT_SIZE def=20
+      GlNames.setTextSize( tryIntValue( hlp, k, v, key[h].dflt ) );
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_SELECTION_RADIUS
+      float radius = tryFloatValue( hlp, k, v, key[h].dflt );
       if ( radius > 10.0f ) TopoGL.mSelectionRadius = radius;
-    } else if ( k.equals( key[5].key ) ) { // CAVE3D_MEASURE_DIALOG
-      TopoGL.mMeasureToast = tryBooleanValue( hlp, k, v, bool(key[5].dflt) ); 
-    } else if ( k.equals( key[6].key ) ) { // CAVE3D_STATION_TOAST
-      TopoGL.mStationDialog = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); 
-    } else if ( k.equals( key[7].key ) ) { // CAVE3D_GRID_ABOVE
-      GlModel.mGridAbove = tryBooleanValue( hlp, k, v, bool(key[7].dflt) ); 
-    } else if ( k.equals( key[8].key ) ) { // CAVE3D_GRID_EXTENT
-      int extent = tryIntValue( hlp, k, v, key[8].dflt ); 
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_MEASURE_DIALOG
+      TopoGL.mMeasureToast = tryBooleanValue( hlp, k, v, bool(key[h].dflt) ); 
+    // } else if ( k.equals( key[++k].key ) ) { // CAVE3D_STATION_TOAST
+    //   TopoGL.mStationDialog = tryBooleanValue( hlp, k, v, bool(key[h].dflt) ); 
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_GRID_ABOVE
+      GlModel.mGridAbove = tryBooleanValue( hlp, k, v, bool(key[h].dflt) ); 
+    } else if ( k.equals( key[++h].key ) ) { // CAVE3D_GRID_EXTENT
+      int extent = tryIntValue( hlp, k, v, key[h].dflt ); 
       if ( extent > 1 && extent < 100 ) GlModel.mGridExtent = extent;
-    } else if ( k.equals( key[9].key ) ) { // DISTOX_NAMES_VISIBILITY
-      GlNames.mNamesVisible = tryBooleanValue( hlp, k, v, bool(key[9].dflt) ); 
+    } else if ( k.equals( key[++h].key ) ) { // DISTOX_NAMES_VISIBILITY
+      GlNames.mNamesVisible = tryBooleanValue( hlp, k, v, bool(key[h].dflt) ); 
     } else {
       TDLog.e("missing Cave3D key: " + k );
     }

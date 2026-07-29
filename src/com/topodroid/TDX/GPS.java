@@ -53,6 +53,8 @@ class GPS implements LocationListener
   private int mNrSatellites = 0;
   private double mDelta;
 
+  private boolean useGps = true;
+
   /** @return true if the GPS has a location manager
    */
   boolean canLocate() 
@@ -103,17 +105,19 @@ class GPS implements LocationListener
       TDLog.v("GPS check permission/features OK");
       locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
       if ( locManager != null ) {
-        try { 
-          mStatus = locManager.getGpsStatus( null );
-        } catch ( SecurityException e ) {
-          mStatus = null;
-          // setGPSoff();
-          locManager = null;
-          TDLog.e( "GPS failed to get GpsStatus" );
-        } catch ( UnsupportedOperationException e ) {
-          mStatus = null;
-          locManager = null;
-          TDLog.e( "GPS unsupported op " + e.getMessage() );
+        if ( useGps ) {
+          try { 
+            mStatus = locManager.getGpsStatus( null );
+          } catch ( SecurityException e ) {
+            mStatus = null;
+            // setGPSoff();
+            locManager = null;
+            TDLog.e( "GPS failed to get GpsStatus" );
+          } catch ( UnsupportedOperationException e ) {
+            mStatus = null;
+            locManager = null;
+            TDLog.e( "GPS unsupported op " + e.getMessage() );
+          }
         }
       } else {
         TDLog.e("GPS cannot get LOCATION SERVICE - no permission or features");
@@ -171,7 +175,9 @@ class GPS implements LocationListener
       TDLog.v("GPS off can locate - is locating " + mIsLocating );
       try {
         locManager.removeUpdates( this );
-        locManager.removeGpsStatusListener( this );
+        if ( useGps ) {
+          locManager.removeGpsStatusListener( this );
+        }
       } catch ( SecurityException e ) {
         TDLog.e( "Location manager error-1 " + e.getMessage() );
       }
@@ -191,14 +197,14 @@ class GPS implements LocationListener
     if ( canLocate() ) {
       TDLog.v("GPS on can locate - is locating " + mIsLocating );
       // if ( ! mIsLocating ) 
-      {
-        try {
+      try {
+        if ( useGps ) {
           locManager.addGpsStatusListener( this );
-          locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
-          mIsLocating = true;
-        } catch ( SecurityException e ) {
-          TDLog.e( "Location manager error-2 " + e.getMessage() );
         }
+        locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
+        mIsLocating = true;
+      } catch ( SecurityException e ) {
+        TDLog.e( "Location manager error-2 " + e.getMessage() );
       }
       TDLog.v("GPS on - return " + mIsLocating );
       return mIsLocating;
@@ -242,7 +248,7 @@ class GPS implements LocationListener
     locManager.getGpsStatus( mStatus );
     Iterator< GpsSatellite > sats = mStatus.getSatellites().iterator();
     int  nr = 0;
-	while( sats.hasNext() ) {
+    while( sats.hasNext() ) {
       GpsSatellite sat = sats.next();
       if ( sat.usedInFix() ) ++nr;
 	}
@@ -271,7 +277,7 @@ class GPS implements LocationListener
   public void onGpsStatusChanged( int event ) 
   {
     if ( event == GpsStatus.GPS_EVENT_SATELLITE_STATUS ) {
-      if ( locManager == null ) return;
+      if ( locManager == null || ! useGps ) return;
       mNrSatellites = getNrSatellites();
       // TDLog.v("GPS Status Changed nr satellites used in fix " + mNrSatellites );
       if ( mNrSatellites > 4 ) {

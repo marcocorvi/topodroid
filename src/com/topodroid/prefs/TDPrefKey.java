@@ -793,7 +793,7 @@ class TDPrefKey
     new TDPrefKey( A, LONG, D3, "CAVE3D_STATION_TEXT_SIZE",  R.string.cpref_station_text_size_title, R.string.cpref_station_text_size_summary, "20" ),
     new TDPrefKey( A, FLT,  D3, "CAVE3D_SELECTION_RADIUS",   R.string.cpref_selection_radius_title,  R.string.cpref_selection_radius_summary,  "50" ),
     new TDPrefKey( N, BOOL, D3, "CAVE3D_MEASURE_DIALOG",     R.string.cpref_measure_dialog_title,    R.string.cpref_measure_dialog_summary,    FALSE ),
-    new TDPrefKey( N, BOOL, D3, "CAVE3D_STATION_TOAST",      R.string.cpref_station_toast_title,     R.string.cpref_station_toast_summary,     FALSE ),
+    // new TDPrefKey( N, BOOL, D3, "CAVE3D_STATION_TOAST",      R.string.cpref_station_toast_title,     R.string.cpref_station_toast_summary,     FALSE ),
     new TDPrefKey( N, BOOL, D3, "CAVE3D_GRID_ABOVE",         R.string.cpref_grid_above_title,        R.string.cpref_grid_above_summary,        FALSE ),
     new TDPrefKey( A, LONG, D3, "CAVE3D_GRID_EXTENT",        R.string.cpref_grid_extent_title,       R.string.cpref_grid_extent_summary,       "10"  ),
     new TDPrefKey( N, BOOL, D3, "DISTOX_NAMES_VISIBILITY",   R.string.cpref_names_visibility_title,  R.string.cpref_names_visibility_summary,  FALSE ),

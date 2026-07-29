@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief Cave3D drawing infos dialog
+ * @brief Cave3D drawing infos dialog for a station
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.dem.DEMsurface;
 
@@ -38,6 +38,7 @@ class DialogStation extends MyDialog
   private final TglParser  mParser;
   private final Cave3DStation  mStation;
   private final DEMsurface  mSurface;
+  private final String      mEquates = null;
 
   public DialogStation( Context context, TopoGL topogl, TglParser parser, String fullname, DEMsurface surface )
   {
@@ -45,6 +46,7 @@ class DialogStation extends MyDialog
     mTopoGl  = topogl;
     mParser  = parser;
     mStation = mParser.getStation( fullname );
+    mEquates = mParser.getEquates( fullname );
     mSurface = ( surface != null )? surface : parser.getSurface();
   }
 
@@ -55,7 +57,11 @@ class DialogStation extends MyDialog
       initLayout( R.layout.cave3d_station_dialog, R.string.STATIONS );
 
       TextView tv = ( TextView ) findViewById(R.id.st_name);
-      tv.setText( mStation.getFullName() );
+      if ( mEquates == null ) {
+        tv.setText( mStation.getFullName() );
+      } else {
+        tv.setText( mEquates );
+      }
 
       StringWriter sw1 = new StringWriter();
       PrintWriter  pw1 = new PrintWriter( sw1 );
@@ -92,11 +98,12 @@ class DialogStation extends MyDialog
 
   /** close the current station and dismiss the dialog
    * @param view   unused
+   * @note only for button_close
    */
   @Override
   public void onClick(View v)
   {
-    // only for button_close
+    TDLog.v("Dialog station on click");
     mTopoGl.closeCurrentStation();
     dismiss();
   }
@@ -106,6 +113,7 @@ class DialogStation extends MyDialog
   @Override
   public void onBackPressed()
   {
+    TDLog.v("Dialog station on back pressed");
     mTopoGl.closeCurrentStation();
     // super.onBackPressed(); // issue 167
     dismiss();

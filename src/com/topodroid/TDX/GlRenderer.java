@@ -68,7 +68,7 @@ public class GlRenderer implements Renderer
   static final float FAR_O_MIN  = 0.0f;
   static final float FAR_O_MAX  = 10000.0f;
 
-  private TopoGL mApp;
+  private TopoGL mTopoGl;
   private GlModel mModel = null;
   private TglParser mParser = null;
   private ParserDEM mDEM = null;
@@ -184,7 +184,7 @@ public class GlRenderer implements Renderer
    */
   private void prepareModel( TglParser parser, boolean reduce )
   {
-    // mModel = new GlModel( mApp, mHalfWidth*2, mHalfHeight*2, parser );
+    // mModel = new GlModel( mTopoGl, mHalfWidth*2, mHalfHeight*2, parser );
     // if ( mModel == null ) return;
     mModel.prepareModel( parser, reduce );
     float d = (float)mModel.getDiameter();
@@ -226,7 +226,7 @@ public class GlRenderer implements Renderer
   // FIXME BLUETOOTH INCREMENTAL
   // private void prepareEmptyModel( TglParser parser )
   // {
-  //   // mModel = new GlModel( mApp, mHalfWidth*2, mHalfHeight*2, parser );
+  //   // mModel = new GlModel( mTopoGl, mHalfWidth*2, mHalfHeight*2, parser );
   //   // if ( mModel == null ) return;
   //   mModel.prepareEmptyModel( parser );
   //   mScale0 = 1.0f / 10.0f;
@@ -247,11 +247,11 @@ public class GlRenderer implements Renderer
    * @param app    3D activity
    * @param model  3D model
    */
-  public GlRenderer( TopoGL app, GlModel model )
+  public GlRenderer( TopoGL topogl, GlModel model )
   {
     super();
-    mApp = app;
-    mModel = model;
+    mTopoGl = topogl;
+    mModel  = model;
   }
 
   /** @return the point-of-view / lighting-direction as a string
@@ -374,7 +374,7 @@ public class GlRenderer implements Renderer
   // FIXME BLUETOOTH INCREMENTAL
   // void setModelPath( ArrayList< Cave3DStation > path )
   // { 
-  //   if ( mModel != null ) mModel.setPath( path, mApp.hasBluetoothName() ); 
+  //   if ( mModel != null ) mModel.setPath( path, mTopoGl.hasBluetoothName() ); 
   // }
 
   /** highlight station search
@@ -393,12 +393,17 @@ public class GlRenderer implements Renderer
     mCenter = null;
   }
 
-  void onTouch( float x, float y )
+  /** perform a touch event to select a station
+   * @param x   X position
+   * @param y   Y position
+   * @param long_press whether the event is a long-press
+   */
+  void onTouch( float x, float y, boolean long_press )
   {
     // TDLog.v("GL renderer on Touch() " + x + " " + y );
     // if ( ! GlNames.showStationNames() ) return;
     if ( GlNames.hiddenStations() ) return;
-    if ( MeasureComputer.closeDialogStation() ) return;
+    if ( mTopoGl.closeDialogStation() ) return;
     if ( mMeasureCompute ) return;
     mMeasureCompute = true;
 
@@ -416,7 +421,7 @@ public class GlRenderer implements Renderer
       normalize( zf );
       final String fullname = mModel.checkNames( zn, zf, TopoGL.mSelectionRadius, (mParser.mStartStation == null) );
       */
-      new MeasureComputer( mApp, x, y, mMVPMatrix, mParser, mDEM, mModel ).execute();
+      new MeasureComputer( mTopoGl, x, y, mMVPMatrix, mParser, mDEM, mModel, long_press ).execute();
     // }
   }
 
@@ -663,7 +668,7 @@ public class GlRenderer implements Renderer
   //   mDYP = 0; 
   //   mDXO = 0; 
   //   mDYO = 0; 
-  //   // mApp.setTheTitle( String );
+  //   // mTopoGl.setTheTitle( String );
   // }
 
   // ---------------------------------------------------------------------------
@@ -753,7 +758,7 @@ public class GlRenderer implements Renderer
   void notifyTexture( Bitmap bitmap )
   {
     if ( mModel != null && bitmap != null ) {
-      // (new DialogBitmap( mApp, bitmap )).show();
+      // (new DialogBitmap( mTopoGl, bitmap )).show();
       mModel.prepareTexture( bitmap );
     }
   }

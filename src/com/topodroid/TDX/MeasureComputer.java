@@ -43,10 +43,19 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   TglMeasure mMeasure;  // result of the measure
   String     mFullname; // station name
   Cave3DShot mLeg = null;
-  static DialogStation mDialogStation = null;
+  final boolean mLongPress;
 
-
-  MeasureComputer( TopoGL topoGL, float x, float y, float[] MVPMatrix, TglParser parser, ParserDEM dem, GlModel model )
+  /** cstr
+   * @param topoGL    parent activity
+   * @param x         X position
+   * @param y         Y position
+   * @param MVPMatrix MVP matrix
+   * @param parser    parser with model data
+   * @param dem       D.E.M.
+   * @param model     3D model
+   * @param long_press whether this class was called after a long-press
+   */
+  MeasureComputer( TopoGL topoGL, float x, float y, float[] MVPMatrix, TglParser parser, ParserDEM dem, GlModel model, boolean long_press )
   {
     mX = x;
     mY = y;
@@ -55,20 +64,8 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
     mModel     = model;
     mTopoGL    = topoGL;
     mDEM       = dem;
+    mLongPress = long_press;
   }
-
-
-  /** try to close the station dialog
-   * @return true if the dialog was successfully closed
-   */
-  static boolean closeDialogStation()
-  {
-    if ( mDialogStation == null ) return false;
-    mDialogStation.onClick( null );
-    mDialogStation = null;
-    return true;
-  }
-  
 
   @Override
   protected Integer doInBackground( Void ... v ) 
@@ -138,9 +135,8 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
       //   // mModel.clearPath( );
       //   break;
       case MEASURE_NO_START:
-        if ( TopoGL.mStationDialog ) {
-          mDialogStation = new DialogStation( mTopoGL, mTopoGL, mParser, mFullname, mDEM );
-          mDialogStation.show();
+        if ( mLongPress /* TopoGL.mStationDialog */ ) {
+          mTopoGL.openDialogStation( mParser, mFullname, mDEM );
         } else {
           Cave3DStation st = mParser.getStation( mFullname );
           if ( st != null ) {

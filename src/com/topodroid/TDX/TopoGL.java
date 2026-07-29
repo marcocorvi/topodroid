@@ -261,7 +261,7 @@ public class TopoGL extends Activity
   String mDEMname = null;
   String mTextureName = null;
 
-  static boolean mSelectStation = true;
+  // static boolean mSelectStation = true; // STATION_TRUE
   static boolean mHasC3d = false;
   // static boolean mHasFractal = false; // FRACTAL
   // static boolean mHasTemperature = false; // TEMPERATURE
@@ -827,7 +827,7 @@ public class TopoGL extends Activity
       GlModel.resetModes();
       GlNames.resetStations();
       if ( mRenderer != null ) mRenderer.resetTopGeometry();
-      mSelectStation = true;
+      // mSelectStation = true; // STATION_TRUE
       resetButtons();
     } else if ( p++ == pos ) { // VIEWPOINT
       if ( mParser != null ) {
@@ -917,7 +917,7 @@ public class TopoGL extends Activity
   private static final int[] izons = {
     R.drawable.iz_light,
     R.drawable.iz_orthogonal,
-    R.drawable.iz_station_no_dot,
+    R.drawable.iz_station_no, // R.drawable.iz_station_no_dot,
     R.drawable.iz_splays_none,
     R.drawable.iz_wall_no,
     R.drawable.iz_surface_off,
@@ -979,16 +979,16 @@ public class TopoGL extends Activity
   BitmapDrawable mBMorthogonal;
   BitmapDrawable mBMsurface;
 
-  BitmapDrawable mBMstationNo;
+  BitmapDrawable mBMstationNo; // STATION_TRUE
   BitmapDrawable mBMstationPoint;
   BitmapDrawable mBMstationName;
   BitmapDrawable mBMstationLeg;
   // BitmapDrawable mBMstation;
-  BitmapDrawable mBMstationNoDot;
-  BitmapDrawable mBMstationPointDot;
-  BitmapDrawable mBMstationNameDot;
-  BitmapDrawable mBMstationLegDot;
-  // BitmapDrawable mBMstationDot;
+  // BitmapDrawable mBMstationNoDot; // STATION_TRUE
+  // BitmapDrawable mBMstationPointDot;
+  // BitmapDrawable mBMstationNameDot;
+  // BitmapDrawable mBMstationLegDot;
+  // // BitmapDrawable mBMstationDot;
 
   BitmapDrawable mBMsplaysNo;
   BitmapDrawable mBMsplaysLine;
@@ -1030,7 +1030,7 @@ public class TopoGL extends Activity
 
       // mButton1[ 0 ].setOnLongClickListener( this );
       mButton1[ 1 ].setOnLongClickListener( this ); // projection params
-      mButton1[ 2 ].setOnLongClickListener( this ); // stations
+      // mButton1[ 2 ].setOnLongClickListener( this ); // stations
       mButton1[ 3 ].setOnLongClickListener( this ); // splays: new manual leg
       mButton1[ 6 ].setOnLongClickListener( this ); // surveys
       mButton1[ 7 ].setOnLongClickListener( this ); // frame: leg-visibility
@@ -1043,13 +1043,13 @@ public class TopoGL extends Activity
       mBMorthogonal  = MyButton.getButtonBackground( this, size, R.drawable.iz_orthogonal);
       mBMperspective = MyButton.getButtonBackground( this, size, R.drawable.iz_perspective);
 
-      mBMstationNoDot   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no_dot );
-      mBMstationPointDot= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point_dot );
-      mBMstationNameDot = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name_dot );
-      mBMstationLegDot  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg_dot );
-      // mBMstationDot     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_dot );
+      // mBMstationNoDot   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no_dot ); // STATION_TRUE
+      // mBMstationPointDot= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point_dot );
+      // mBMstationNameDot = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name_dot );
+      // mBMstationLegDot  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg_dot );
+      // // mBMstationDot     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_dot );
 
-      mBMstationNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no );
+      mBMstationNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no ); // STATION_TRUE
       mBMstationPoint= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point );
       mBMstationName = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name );
       mBMstationLeg  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg );
@@ -1132,11 +1132,11 @@ public class TopoGL extends Activity
     if ( b == mButton1[ BTN_PROJECT ] ) {
       if ( GlRenderer.projectionMode != GlRenderer.PROJ_PERSPECTIVE ) return false;
       new DialogProjection( this, mRenderer ).show();
-    } else if ( b == mButton1[ BTN_STATION ] ) {
-      mSelectStation = ! mSelectStation;
-      // TDLog.v("TopoGL on long click " + mSelectStation );
-      setButtonStation();
-      closeCurrentStation();
+    // } else if ( b == mButton1[ BTN_STATION ] ) { // STATION_TRUE
+    //   mSelectStation = ! mSelectStation;
+    //   // TDLog.v("TopoGL on long click " + mSelectStation );
+    //   setButtonStation();
+    //   closeCurrentStation();
     } else if ( b == mButton1[ BTN_SPLAYS ] ) {
       // if ( BLUETOOTH && mWithBluetooth ) {
       //   new DialogManualLeg( this, this ).show();
@@ -1178,25 +1178,25 @@ public class TopoGL extends Activity
   private void setButtonStation()
   {
     // TDLog.v("GL set button station - select " + mSelectStation + " station " + GlNames.getStationMode() );
-    if ( mSelectStation ) {
-      switch ( GlNames.getStationMode() ) {
-        case GlNames.STATION_NONE:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNoDot );
-          break;
-        case GlNames.STATION_POINT:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationPointDot );
-          break;
-        case GlNames.STATION_NAME:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNameDot );
-          break;
-        case GlNames.STATION_LEG:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLegDot );
-          break;
-        // case GlNames.STATION_ALL:
-        //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationDot );
-        //   break;
-      }
-    } else {
+    // if ( mSelectStation ) { // STATION_TRUE
+    //   switch ( GlNames.getStationMode() ) {
+    //     case GlNames.STATION_NONE:
+    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNoDot );
+    //       break;
+    //     case GlNames.STATION_POINT:
+    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationPointDot );
+    //       break;
+    //     case GlNames.STATION_NAME:
+    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNameDot );
+    //       break;
+    //     case GlNames.STATION_LEG:
+    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLegDot );
+    //       break;
+    //     // case GlNames.STATION_ALL:
+    //     //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationDot );
+    //     //   break;
+    //   }
+    // } else {
       switch ( GlNames.getStationMode() ) {
         case GlNames.STATION_NONE:
           mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNo );
@@ -1214,7 +1214,7 @@ public class TopoGL extends Activity
         //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstation );
         //   break;
       }
-    }
+    // }
   }
 
   /** set the FRAME button, according to the frame-mode
@@ -1994,7 +1994,7 @@ public class TopoGL extends Activity
   // static boolean mWallPowercrust = false;
   // static boolean mWallDelaunay   = false;
   // static boolean mWallHull       = false;
-  public static boolean mStationDialog  = false;
+  // public static boolean mStationDialog  = false;
   // static boolean mUseSplayVector = true; // ??? Hull with 3D splays or 2D splay projections
   public static boolean mMeasureToast   = false;
   // static boolean mWithBluetooth  = false; // FIXME BLUETOOTH  SETTING
@@ -2190,7 +2190,7 @@ public class TopoGL extends Activity
     } catch ( NumberFormatException e ) {
       mSelectionRadius = 50;
     }
-    mStationDialog = sp.getBoolean( CAVE3D_STATION_TOAST, false );
+    // mStationDialog = sp.getBoolean( CAVE3D_STATION_TOAST, false );
     GlModel.mStationPoints = sp.getBoolean( CAVE3D_STATION_POINTS, false );
     try {
       GlNames.setPointSize( Integer.parseInt( sp.getString( CAVE3D_STATION_POINT_SIZE, "8" ) ) );
@@ -3288,4 +3288,24 @@ public class TopoGL extends Activity
   // {
   //   ((TextView)findViewById( R.id.title )).setTextColor( color );
   // }
+
+  // ------------------------------------------------------------------------
+  // STATION DIALOG
+
+  private static DialogStation mDialogStation = null;
+
+  void openDialogStation( TglParser parser, String fullname, ParserDEM dem )
+  {
+    if ( mDialogStation != null ) return;
+    mDialogStation = new DialogStation( this, this, parser, fullname, dem );
+    mDialogStation.show();
+  }
+
+  boolean closeDialogStation()
+  {
+    if ( mDialogStation == null ) return false;
+    mDialogStation.onClick( null );
+    mDialogStation = null;
+    return true;
+  }
 }

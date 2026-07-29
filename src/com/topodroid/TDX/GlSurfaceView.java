@@ -17,9 +17,12 @@ import com.topodroid.util.TDLog;
 
 import android.content.Context;
 
+import android.graphics.PointF;
+
 import android.opengl.GLSurfaceView;
 
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 
 class GlSurfaceView extends GLSurfaceView
 {
@@ -29,19 +32,24 @@ class GlSurfaceView extends GLSurfaceView
   private float mPreviousY;
   private float mDistance;
   private GlRenderer mRenderer;
-  private TopoGL mApp;
+  private TopoGL mTopoGl;
 
   static boolean mLightMode = false;   // light/move vs turn
   static void toggleLightMode( ) { mLightMode = ! mLightMode; }
+  private int mTouchSlop; // pxl
+  private int mLongPress; // msec
 
   /** cstr
    * @param ctx   context
    * @param app   activity
    */
-  GlSurfaceView( Context ctx, TopoGL app ) 
+  GlSurfaceView( Context ctx, TopoGL topogl ) 
   {
     super( ctx );
-    mApp = app;
+    mTopoGl = topogl;
+    ViewConfiguration view_config = ViewConfiguration.get( ctx );
+    mTouchSlop = view_config.getScaledTouchSlop();
+    mLongPress = view_config.getLongPressTimeout();
   }
 
   /** set the rendered for this surface view
@@ -77,11 +85,11 @@ class GlSurfaceView extends GLSurfaceView
     final float dx0 = dx * TOUCH_TRANSLATE_FACTOR;
     final float dy0 = dy * TOUCH_TRANSLATE_FACTOR;
     // queueEvent
-    // mApp.runOnUiThread(
+    // mTopoGl.runOnUiThread(
     TDandroid.runOnMainThread(
       new Runnable() { @Override public void run() {
         mRenderer.setScaleTranslation( s0, dy0, dx0 );
-        mApp.setTheTitle( mRenderer.getAngleString() );
+        mTopoGl.setTheTitle( mRenderer.getAngleString() );
       }
     } );
     // requestRender();
@@ -96,11 +104,11 @@ class GlSurfaceView extends GLSurfaceView
     final float dax = dy * TOUCH_ANGLE_FACTOR;
     final float day = dx * TOUCH_ANGLE_FACTOR;
     // queueEvent
-    // mApp.runOnUiThread(
+    // mTopoGl.runOnUiThread(
     TDandroid.runOnMainThread(
       new Runnable() { @Override public void run() {
         GlRenderer.setXYLight( dax, day );
-        mApp.setTheTitle( mRenderer.getAngleString() );
+        mTopoGl.setTheTitle( mRenderer.getAngleString() );
       }
     } );
   }
@@ -114,16 +122,56 @@ class GlSurfaceView extends GLSurfaceView
     final float dax = dy * TOUCH_ANGLE_FACTOR;
     final float day = dx * TOUCH_ANGLE_FACTOR;
     // queueEvent
-    // mApp.runOnUiThread(
+    // mTopoGl.runOnUiThread(
     TDandroid.runOnMainThread(
       new Runnable() { @Override public void run() {
         mRenderer.setXYAngle( dax, day );
-        mApp.setTheTitle( mRenderer.getAngleString() );
+        mTopoGl.setTheTitle( mRenderer.getAngleString() );
       }
     } );
   }
 
-  /*
+  /** var used to track the one-pointer down position
+   * there was the suggestion to use two variables
+   *      mIsDragging and mHadMultitouch initialized to false
+   * end save the event DOWN position (as here)
+   *
+   * in event MOVE
+   * mIsDragging is set to true if the event position duffer from the saved DOWN position more than mTouchSlop^2
+   *   if ( ! mIsDragging && (x - xDown)^2 + (y-yDown)^2 > mTouchSlop^2 ) mIsDragging = true
+   * then if ( mIsDragging ) do normal stuff
+   * 
+   * mHadMultitouch is set to true if ( event.getPointerCount() == 2 )
+   *
+   * Finally, in event UP
+   * if ( ! mIsDragging && ! mHadMultitouch ) call mRendered.onTouch
+   *   and (a potential) performClick
+   */
+  private PointF mOnePointerDown = null;
+  private long   mOnePointerTime;
+
+  /** @return true if the position is near the one-pointer down
+   * otherwise return false and reset the one-pointer down tracker to null
+   * @param x   X position
+   * @param y   Y position
+   */
+  private boolean isNearOnePointerDown( float x, float y )
+  {
+    if ( mOnePointerDown == null ) {
+      // TDLog.v("Near one-pointer : null" );
+      return false;
+    }
+    x -= mOnePointerDown.x;
+    y -= mOnePointerDown.y;
+    boolean ret = ( x*x + y*y ) < mTouchSlop * mTouchSlop;
+    if ( ! ret ) {
+      // TDLog.v("Reset one-pointer 1 : null" );
+      mOnePointerDown = null;
+    }
+    return ret;
+  } 
+
+  /** handle a touch event
    * @param e touch event
    * @return true if event has been handled
    *
@@ -132,12 +180,28 @@ class GlSurfaceView extends GLSurfaceView
   @Override
   public boolean onTouchEvent( MotionEvent e) // override from SurfaceView
   {
-    mApp.closeMenu();
+    mTopoGl.closeMenu();
     if ( e == null ) return true;
-    // TDLog.v("GL surface view on touch " + e.getX() + " " + e.getY() );
+    TDLog.v("GL surface view on touch " + e.getX() + " " + e.getY() );
+    // mTopoGl.closeDialogStation();
     float x0, y0, x1, y1, dx, dy;
     switch (e.getAction()) {
       case MotionEvent.ACTION_DOWN:
+        doRotate = false;
+        // mIsDragging = false;
+        // mHadMultitouch = false;
+        if ( e.getPointerCount() == 1 ) {
+          mPreviousX = e.getX();
+          mPreviousY = e.getY();
+          // TDLog.v("Set one-pointer " + mPreviousX + " " + mPreviousY );
+          mOnePointerDown = new PointF( mPreviousX, mPreviousY );
+          mOnePointerTime = System.currentTimeMillis();
+        } else { // this never occurs
+          // TDLog.v("Reset one-pointer 2 : null" );
+          mOnePointerDown = null;
+        }
+        return true;
+      case MotionEvent.ACTION_UP:
       case MotionEvent.ACTION_POINTER_UP:
         doRotate = false;
         // TDLog.v("Action up pointers " + e.getPointerCount() );
@@ -146,13 +210,19 @@ class GlSurfaceView extends GLSurfaceView
           final float yy = e.getY();
           mPreviousX = xx;
           mPreviousY = yy;
-          if ( TopoGL.mSelectStation ) mRenderer.onTouch( xx, yy );
+          // TDLog.v("Action up " + xx + " " + yy + " " + TopoGL.mSelectStation );
+          if ( /* TopoGL.mSelectStation && */ isNearOnePointerDown( xx, yy ) ) { // STATION_TRUE
+            // TDLog.v("Try mRenderer on Touch");
+            boolean long_press = (System.currentTimeMillis() - mOnePointerTime) > mLongPress;
+            mRenderer.onTouch( xx, yy, long_press );
+          }
         }
         return true;
       case MotionEvent.ACTION_MOVE:
         if ( e.getPointerCount() == 1 ) { // rotate
           x0 = e.getX();
           y0 = e.getY();
+          isNearOnePointerDown( x0, y0 );
           dx = x0 - mPreviousX;
           dy = y0 - mPreviousY;
           if ( doRotate ) {
@@ -171,6 +241,8 @@ class GlSurfaceView extends GLSurfaceView
           mPreviousY = y0;
           doRotate = true;
         } else if ( e.getPointerCount() == 2 ) { // translate+scale
+          // TDLog.v("Reset one-pointer 3 : null" );
+          mOnePointerDown = null;
           doRotate = false;
           x0 = e.getX(0);
           y0 = e.getY(0);
@@ -192,6 +264,8 @@ class GlSurfaceView extends GLSurfaceView
         }
         return true;
       case MotionEvent.ACTION_POINTER_DOWN: 
+        // TDLog.v("Reset one-pointer 4 : null" );
+        mOnePointerDown = null;
         doRotate = false;
         if ( e.getPointerCount() == 2 ) {
           x0 = e.getX(0);
