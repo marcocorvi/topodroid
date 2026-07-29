@@ -2207,8 +2207,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_walls3d">MODEL STĚN</string>
     <string name="cpref_selection_radius_title">Poloměr výběru</string>
     <string name="cpref_selection_radius_summary">Poloměr citlivosti dotyku pro výběr [výchozí: 20 pxl]</string>
-    <string name="cpref_station_toast_title">Podrobnosti o bodu v dialogu</string>
-    <string name="cpref_station_toast_summary">Zobrazovat data měřického bodu v dialogovém okně namísto infoboxu</string>
+    <!-- UNUSED string name="cpref_station_toast_title">Podrobnosti o bodu v dialogu</string -->
+    <!-- UNUSED string name="cpref_station_toast_summary">Zobrazovat data měřického bodu v dialogovém okně namísto infoboxu</string -->
     <string name="cpref_station_points_title">Zobrazovat body</string>
     <string name="cpref_station_points_summary">Vždy trvale zobrazovat měřické body</string>
     <string name="cpref_station_point_size_title">Velikost bodů</string>

@@ -2320,8 +2320,8 @@
   <!-- UNUSED string name="cpref_size_buttons_summary">Buttons size</string -->
   <string name="cpref_selection_radius_title">Auswahlradius</string>
   <string name="cpref_selection_radius_summary">Auswahlradius [20 px]</string>
-  <string name="cpref_station_toast_title">Messpunkt Dialog</string>
-  <string name="cpref_station_toast_summary">Dialog mit Messpunktdaten statt einer Box [n]</string>
+  <!-- UNUSED string name="cpref_station_toast_title">Messpunkt Dialog</string -->
+  <!-- UNUSED string name="cpref_station_toast_summary">Dialog mit Messpunktdaten statt einer Box [n]</string -->
   <string name="cpref_station_points_title">Messpunkt anzeigen</string>
   <string name="cpref_station_points_summary">Messpunkte immer anzeigen [n]</string>
   <string name="cpref_station_point_size_title">Messpunkt Größe</string>

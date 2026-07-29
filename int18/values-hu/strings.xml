@@ -2472,8 +2472,8 @@
     <!-- UNUSED string name="cpref_size_buttons_summary">Gomb méret</string -->
     <string name="cpref_selection_radius_title">Kiválasztási sugár</string>
     <string name="cpref_selection_radius_summary">Kiválasztási sugár [20 pxl]</string>
-    <string name="cpref_station_toast_title">Pont párbeszéd ablak</string>
-    <string name="cpref_station_toast_summary">Pont párbeszédpanel helyett doboz [n]</string>
+    <!-- UNUSED string name="cpref_station_toast_title">Pont párbeszéd ablak</string -->
+    <!-- UNUSED string name="cpref_station_toast_summary">Pont párbeszédpanel helyett doboz [n]</string -->
     <string name="cpref_station_points_title">Mérési pont</string>
     <string name="cpref_station_points_summary">Mindig mutassa a pontokat [n]</string>
     <string name="cpref_station_point_size_title">Mérési pont mérete</string>

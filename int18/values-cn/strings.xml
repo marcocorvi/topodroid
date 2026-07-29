@@ -2461,8 +2461,8 @@
     <!-- UNUSED string name="cpref_size_buttons_summary">Buttons size</string -->
     <string name="cpref_selection_radius_title">选择边界范围</string>
     <string name="cpref_selection_radius_summary">选择半径 [20 pxl]</string>
-    <string name="cpref_station_toast_title">站点对话框</string>
-    <string name="cpref_station_toast_summary">站点数据对话框代替框 [n]</string>
+    <!-- UNUSED string name="cpref_station_toast_title">站点对话框</string -->
+    <!-- UNUSED string name="cpref_station_toast_summary">站点数据对话框代替框 [n]</string -->
     <string name="cpref_station_points_title">站点</string>
     <string name="cpref_station_points_summary">总是显示站点 [n]</string>
     <string name="cpref_station_point_size_title">站点尺寸</string>

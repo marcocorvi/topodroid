@@ -2434,8 +2434,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="cpref_size_buttons_summary">Buttons size</string -->
     <string name="cpref_selection_radius_title">Радиус на селекция</string>
     <string name="cpref_selection_radius_summary">Радиус на селекция [20 pxl]</string>
-    <string name="cpref_station_toast_title">Диалогов прозорец на репера</string>
-    <string name="cpref_station_toast_summary">Диалогов прозорец с данни за репера вместо кутия [n]</string>
+    <!-- UNUSED string name="cpref_station_toast_title">Диалогов прозорец на репера</string -->
+    <!-- UNUSED string name="cpref_station_toast_summary">Диалогов прозорец с данни за репера вместо кутия [n]</string -->
     <string name="cpref_station_points_title">Точки на репер</string>
     <string name="cpref_station_points_summary">Винаги показвай реперите [n]</string>
     <string name="cpref_station_point_size_title">Размер на точката на репера</string>

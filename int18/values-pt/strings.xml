@@ -2293,8 +2293,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="cpref_size_buttons_summary">Tamanho dos botões</string -->
   <string name="cpref_selection_radius_title">Raio seleção</string>
   <string name="cpref_selection_radius_summary">Raio da ferramenta de seleção</string>
-  <string name="cpref_station_toast_title">Caixa Diálogo base</string>
-  <string name="cpref_station_toast_summary">Usar caixa de diálogo no lugar de caixa de edição</string>
+  <!-- UNUSED string name="cpref_station_toast_title">Caixa Diálogo base</string -->
+  <!-- UNUSED string name="cpref_station_toast_summary">Usar caixa de diálogo no lugar de caixa de edição</string -->
   <string name="cpref_station_points_title">Ponto base</string>
   <string name="cpref_station_points_summary">Sempre mostrar pontos (verdes) representando bases</string>
   <string name="cpref_station_point_size_title">Raio ponto base</string>

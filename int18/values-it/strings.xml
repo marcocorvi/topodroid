@@ -2455,8 +2455,8 @@
     <string name="cpref_selection_radius_title">Raggio di selezione</string>
     <string name="cpref_selection_radius_summary">Raggio di selezione</string>
 
-    <string name="cpref_station_toast_title">Dialog caposaldo</string>
-    <string name="cpref_station_toast_summary">Dati caposaldo in dialog invece che in box [n]</string>
+    <!-- UNUSED string name="cpref_station_toast_title">Dialog caposaldo</string -->
+    <!-- UNUSED string name="cpref_station_toast_summary">Dati caposaldo in dialog invece che in box [n]</string -->
     <string name="cpref_station_points_title">Punti capisaldi</string>
     <string name="cpref_station_points_summary">Mostra sempre capisaldi [n]</string>
     <string name="cpref_station_point_size_title">Grandezza punti capisaldi</string>

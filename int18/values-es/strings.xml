@@ -2488,8 +2488,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cpref_selection_radius_title">Selección radio</string>
     <string name="cpref_selection_radius_summary">Selección radio</string>
 
-    <string name="cpref_station_toast_title">Diálogo de puntos de referencia</string>
-    <string name="cpref_station_toast_summary">Datos de destino en el cuadro de diálogo en lugar del cuadro [n]</string>
+    <!-- UNUSED string name="cpref_station_toast_title">Diálogo de puntos de referencia</string -->
+    <!-- UNUSED string name="cpref_station_toast_summary">Datos de destino en el cuadro de diálogo en lugar del cuadro [n]</string -->
     <string name="cpref_station_points_title">Puntos de referencia</string>
     <string name="cpref_station_points_summary">Mostrar siempre los puntos [n]</string>
     <string name="cpref_station_point_size_title">Tamaño del punto objetivo</string>
