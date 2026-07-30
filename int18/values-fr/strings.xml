@@ -2336,7 +2336,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="info_length_value" copyable="all">%1$.1f m</string>
     <string name="info_surface_value" copyable="all">%1$.1f m</string>
     <string name="info_depth_value" copyable="all">%1$.1f m</string>
-    <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m³; C. %2$.0f m³;</string -->
     <string name="info_volume_value" copyable="all">%1$.0f m³</string>
     <string name="info_east_value" copyable="all">W %1$.1f E %2$.1f</string>
     <string name="info_north_value" copyable="all">S %1$.1f N %2$.1f</string>
