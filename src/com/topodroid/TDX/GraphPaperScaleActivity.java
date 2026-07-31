@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDTag;
+import com.topodroid.util.TDAnalytics;
 // import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.prefs.TDSetting;
@@ -72,6 +73,7 @@ public class GraphPaperScaleActivity extends MyActivity
   {
     super.onCreate(savedInstanceState);
 
+    TopoDroidApp.updateAnalytic( TDAnalytics.GRAPH_PAPER );
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );

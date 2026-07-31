@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDTag;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 
@@ -119,7 +120,7 @@ public class PtCmapActivity extends MyActivity
   public void onCreate( Bundle b )
   {
     super.onCreate( b );
-
+    TopoDroidApp.updateAnalytic( TDAnalytics.PT_CMAP );
     getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
