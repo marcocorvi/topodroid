@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 <!-- IMPORTANT: DO NOT FORGET TO ESCAPE APOSTROIPHE -->
@@ -2607,6 +2608,5 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="help_surface_3d">Terrain</string>
     <string name="help_color_3d">Couleurs</string>
     <string name="help_frame_3d">Cadre</string>
-   
    
 </resources>

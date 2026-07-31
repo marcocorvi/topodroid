@@ -2245,7 +2245,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m³; C. %2$.0f m³;</string -->
     <string name="info_volume_value">%1$.0f m³</string>
     <string name="info_east_value">З %1$.1f И %2$.1f</string>
     <string name="info_north_value">Ю %1$.1f С %2$.1f</string>
