@@ -824,15 +824,19 @@ public class ParserTh extends TglParser
               idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 String from = ThStatus.makeName( vals[idx], path );
+                StringBuilder sb = new StringBuilder();
+                sb.append( from );
                 while ( idx < vals.length ) {
                   idx = TDString.nextIndex( vals, idx );
                   if ( idx < vals.length ) {
 		    String to = ThStatus.makeName( vals[idx], path );
+                    sb.append(" ").append(to);
                     shots.add( new Cave3DShot( from, to, 0.0f, 0.0f, 0.0f, 0, 0, mColor ) );
                     ++mNrEquates;
                     // TDLog.v( "Th parser, equate shot: " + from + " " + to );
                   }
                 }
+                mEquateTable.add( sb.toString() );
               }
             } else if ( cmd.equals("fix" ) ) { // fix allowed outside centerline block
               // TDLog.v( "TH command fix");

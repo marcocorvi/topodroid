@@ -18,6 +18,7 @@ import com.topodroid.util.TDAnalytics;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.GnssStatus; // FIXME NO-SYNC
 import android.location.GpsStatus;
 import android.location.GpsSatellite;
 // import android.location.GpsStatus.Listener;
@@ -35,6 +36,8 @@ class GPS implements LocationListener
   private Context mContext;
   private LocationManager locManager = null;
   private GpsStatus mStatus = null;
+  private GnssStatus.Callback mGnssStatusCallback = null;
+
 
   boolean mIsLocating = false; // whether the GPS is getting a location
   // boolean mHasLocation;
@@ -53,7 +56,7 @@ class GPS implements LocationListener
   private int mNrSatellites = 0;
   private double mDelta;
 
-  private boolean useGps = true;
+  private boolean useGps = TDandroid.BELOW_API_24;
 
   /** @return true if the GPS has a location manager
    */
@@ -177,6 +180,11 @@ class GPS implements LocationListener
         locManager.removeUpdates( this );
         if ( useGps ) {
           locManager.removeGpsStatusListener( this );
+        } else {
+          if ( mGnssStatusCallback != null ) {
+            locManager.unregisterGnssStatusCallback( mGnssStatusCallback );
+            mGnssStatusCallback = null;
+          }
         }
       } catch ( SecurityException e ) {
         TDLog.e( "Location manager error-1 " + e.getMessage() );
@@ -200,6 +208,28 @@ class GPS implements LocationListener
       try {
         if ( useGps ) {
           locManager.addGpsStatusListener( this );
+        } else {
+          if ( mGnssStatusCallback == null ) {
+            mGnssStatusCallback = new GnssStatus.Callback() { 
+              @Override
+              public void onSatelliteStatusChanged( GnssStatus status )
+              {
+                int nr = status.getSatelliteCount(); 
+                int nr_sat = 0;
+                for ( int k = 0; k < nr; ++k ) {
+                  if ( status.usedInFix( k ) ) nr_sat++;
+                }
+                mNrSatellites = nr_sat;
+              }
+
+              @Override public void onFirstFix( int millis ) { }
+
+              @Override public void onStarted() { }
+
+              @Override public void onStopped() { }
+            };
+          }
+          locManager.registerGnssStatusCallback( mGnssStatusCallback );
         }
         locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
         mIsLocating = true;

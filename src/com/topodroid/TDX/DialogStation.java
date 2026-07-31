@@ -38,7 +38,7 @@ class DialogStation extends MyDialog
   private final TglParser  mParser;
   private final Cave3DStation  mStation;
   private final DEMsurface  mSurface;
-  private final String      mEquates = null;
+  private final String      mEquates;
 
   public DialogStation( Context context, TopoGL topogl, TglParser parser, String fullname, DEMsurface surface )
   {

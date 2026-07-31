@@ -137,7 +137,7 @@ import android.net.Uri;
 
 // import android.opengl.GLSurfaceView;
 
-public class TopoGL extends Activity 
+public class TopoGL extends MyActivity 
                     implements OnClickListener
                     , OnLongClickListener
                     , OnItemClickListener
@@ -364,16 +364,6 @@ public class TopoGL extends Activity
   }
 
   @Override
-  public void onDestroy( )
-  {
-    super.onDestroy();
-    ((TopoDroidApp)getApplication()).mTopoGL = null;
-    if ( doubleBackHandler != null ) {
-      doubleBackHandler.removeCallbacks( doubleBackRunnable );
-    }
-  }
-
-  @Override
   public void onCreate( Bundle savedInstanceState ) 
   {
     super.onCreate(savedInstanceState);
@@ -573,6 +563,18 @@ public class TopoGL extends Activity
       doubleBackToast = null;
     }
   };
+
+  @Override
+  protected void onDestroy( )
+  {
+    ((TopoDroidApp)getApplication()).mTopoGL = null;
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
+    super.onDestroy();
+  }
+
+  // N.B. no onKeyDown onKeyUp
 
   /** react to a BACK key tap
    */

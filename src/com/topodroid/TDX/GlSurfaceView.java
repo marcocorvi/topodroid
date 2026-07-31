@@ -183,7 +183,7 @@ class GlSurfaceView extends GLSurfaceView
     mTopoGl.closeMenu();
     if ( e == null ) return true;
     TDLog.v("GL surface view on touch " + e.getX() + " " + e.getY() );
-    // mTopoGl.closeDialogStation();
+    mTopoGl.closeDialogStation();
     float x0, y0, x1, y1, dx, dy;
     switch (e.getAction()) {
       case MotionEvent.ACTION_DOWN:
