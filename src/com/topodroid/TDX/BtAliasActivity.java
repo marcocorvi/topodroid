@@ -48,7 +48,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.Map;
 
-public class BtAliasActivity extends Activity
+public class BtAliasActivity extends MyActivity
                          implements OnClickListener
                          , AdapterView.OnItemSelectedListener
                          , OnItemClickListener
@@ -232,19 +232,28 @@ public class BtAliasActivity extends Activity
   //   super.onStop();
   // }
 
+  @Override
+  protected void onDestroy() { super.onDestroy(); }
+
+  @Override
+  public void onBackPressed() { super.onBackPressed(); }
+
+  // /** handle key up event // alternative-169
+  //  * @param code  key code
+  //  * @param ev    key event
+  //  */
   // @Override
-  // public void onBackPressed()
-  // {
-  //   finish();
-  // }
+  // public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
 
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed(); // FIXME issue 167
-        return true;
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      //   onBackPressed(); // FIXME issue 167
+      //   return true;
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) // alternative-169
+      //   return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.BtAliasActivity );
         /* if ( help_page != null ) always true */ UserManualActivity.showHelpPage( this, help_page );

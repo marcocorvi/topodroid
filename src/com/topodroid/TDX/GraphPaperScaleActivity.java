@@ -37,7 +37,7 @@ import android.widget.TextView;
 
 /**
  */
-public class GraphPaperScaleActivity extends Activity
+public class GraphPaperScaleActivity extends MyActivity
                           implements View.OnClickListener
 {
   // private TDPrefActivity mParent;
@@ -158,7 +158,7 @@ public class GraphPaperScaleActivity extends Activity
       setResult( RESULT_OK, intent );
       finish();
     } else if ( b == mBtnCancel ) {
-      onBackPressed();
+      super.onBackPressed();
     } else if ( b == mBtnHelp ) {
       doHelp();
     }
@@ -174,6 +174,18 @@ public class GraphPaperScaleActivity extends Activity
     super.onBackPressed(); // FIXME issue 167
     // finish();
   }
+
+  @Override
+  protected void onDestroy() { super.onDestroy(); }
+
+  // N.B. no onKeyDown onKeyUp
+  // @Override public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
+
+  // @Override public boolean onKeyDown( int code, KeyEvent event )
+  // { 
+  //   if ( code == KEYCODE_BACK ) return backKeyDown( code, event );
+  //   return false;
+  // }
 
   /** display help
    */

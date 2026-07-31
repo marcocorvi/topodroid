@@ -45,7 +45,7 @@ import android.view.View;
 import android.view.KeyEvent;
 // import android.view.View.OnClickListener;
 
-public class SensorListActivity extends Activity
+public class SensorListActivity extends MyActivity
                                 implements OnItemClickListener
 {
   // private TopoDroidApp mApp;
@@ -159,15 +159,30 @@ public class SensorListActivity extends Activity
   }
 
   @Override
+  protected void onDestroy() { super.onDestroy(); }
+
+  @Override
+  public void onBackPressed() { super.onBackPressed(); }
+
+  /** handle key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override
+  public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
+
+  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      //   onBackPressed(); // FIXME issue 167
+      //   return true;
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) // alternative-169
+        return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.SensorListActivity );
         /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
-        return true;
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed(); // FIXME issue 167
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

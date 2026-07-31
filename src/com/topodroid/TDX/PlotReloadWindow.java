@@ -390,7 +390,10 @@ public class PlotReloadWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
     // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
     mPos = 0;
-    loadFile( ); 
+    if ( ! loadFile( ) ) {
+      TDToast.makeBad( R.string.tdr_load_fail );
+      finish();
+    }
   }
 
   // boolean mAllSymbols = true;
@@ -402,8 +405,11 @@ public class PlotReloadWindow extends ItemDrawer
     mReloadSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
     setTitle( plot.desc );
     // TDLog.v("Reload file pos " + mPos + " " + plot.tdr );
-    mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename ); // save plot name in paths
-    return true;
+    boolean ret = mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename ); // save plot name in paths
+    if ( ! ret ) {
+      TDToast.makeBad( R.string.tdr_load_fail );
+    }
+    return ret;
   } 
 
   private float mSave0X, mSave0Y;
@@ -671,14 +677,15 @@ public class PlotReloadWindow extends ItemDrawer
     }
   }
 
+  @Override
+  public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
 
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        onBackPressed();
-        return true;
+        return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;

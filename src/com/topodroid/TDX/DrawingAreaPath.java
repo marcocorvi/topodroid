@@ -64,7 +64,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   double mOrientation;
   public String mPrefix;      // border/area name prefix (= scrap name) // TH2EDIT package
   // boolean mVisible; // visible border in DrawingPointLinePath
-  private Shader mLocalShader = null;
+  private Shader mLocalShader = null; // area pattern
 
   // FIXME-COPYPATH
   // @Override
@@ -123,12 +123,33 @@ public class DrawingAreaPath extends DrawingPointLinePath
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       // FIXME AREA_ORIENT 
       mOrientation = BrushManager.getAreaOrientation( type );
-
       mLocalShader = BrushManager.cloneAreaShader( mAreaType );
       resetPathPaint();
       mPaint.setShader( mLocalShader );
     }
     mLevel = BrushManager.getAreaLevel( type );
+  }
+
+  @Override
+  void setScale( int scale )
+  {
+    // TDLog.v("AREA set scale: " + mScale + " -> " + scale );
+    if ( scale == mScale ) return;
+    mScale = scale;
+    if ( mLocalShader != null ) {
+      shiftShaderBy( 0, 0, 1 );
+      resetPathPaint();
+      mPaint.setShader( mLocalShader );
+    } else {
+      int alpha = BrushManager.getAreaPaint( mAreaType ).getAlpha();
+      switch (scale) {
+        case -2: alpha = (int)(alpha/2); break;
+        case -1: alpha = (int)(alpha/1.4f); break;
+        case 1: alpha += (int)((255-alpha)/1.4f); break;
+        case 2: alpha += (int)((255-alpha)/2); break;
+      }
+      mPaint.setAlpha( alpha );
+    }
   }
 
   // @param id   string "area id" (mPrefix + mAreaCnt )
@@ -170,6 +191,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     float orientation;
     int level = DrawingLevel.LEVEL_DEFAULT;
     int scrap = 0;
+    int scale = 0;
     String thname, prefix;
     String group = null;
     String options = null;
@@ -182,6 +204,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       orientation = dis.readFloat( );
       if ( version >= 401090 ) level = dis.readInt();
       if ( version >= 401160 ) scrap = dis.readInt();
+      if ( version >= 604096 ) scale = dis.readInt();
       int npt = dis.readInt( );
 
       
@@ -200,6 +223,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       ret.addOption( options ); // does nothing is options is null
       ret.mLevel       = level;
       ret.mOrientation = orientation;
+      ret.setScale( scale );
       // setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
 
       int has_cp;
@@ -340,7 +364,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
     resetPathPaint();
   }
   
-  final static float[] mScaleFactor = { 0.5f, 0.7f, 1.0f, 1.7f, 3.0f };
+  /** scale factors for the area pattern
+   */
+  private final static float[] mScaleFactor = { 0.5f, 0.7f, 1.0f, 1.7f, 3.0f };
 
   /** @return the scale fcator
    * @param scale   input scale (in [-2,2]
@@ -373,13 +399,6 @@ public class DrawingAreaPath extends DrawingPointLinePath
     if ( mLocalShader != null ) {
       Matrix mat = new Matrix();
       mat.postRotate( (float)mOrientation );
-      // int w = bitmap.getWidth();
-      // int h = bitmap.getHeight();
-      // Bitmap bitmap1 = Bitmap.createBitmap( bitmap, 0, 0, w, h, mat, true );
-      // Bitmap bitmap2 = Bitmap.createBitmap( bitmap1, w/4, h/4, w/2, h/2 );
-      // BitmapShader shader = new BitmapShader( bitmap2,
-      //   BrushManager.getAreaXMode( mAreaType ), BrushManager.getAreaYMode( mAreaType ) );
-      // mPaint.setShader( shader );
       mLocalShader.setLocalMatrix( mat );
     }
   }
@@ -535,6 +554,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
         dos.writeInt( mLevel );
       // if ( version >= 401160 )
         dos.writeInt( (scrap >= 0)? scrap : mScrap );
+      // if ( version >= 604096 )
+        dos.writeInt( mScale );
 
       int npt = size(); // number of line points
       dos.writeInt( npt );

@@ -62,7 +62,7 @@ import android.view.KeyEvent;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-public class CalibActivity extends Activity
+public class CalibActivity extends MyActivity
                            implements OnItemClickListener
                            , View.OnClickListener
                            , IExporter
@@ -463,6 +463,20 @@ public class CalibActivity extends Activity
     finish();
   }
 
+  @Override public void onBackPressed() { super.onBackPressed(); }
+
+  @Override protected void onDestroy() { super.onDestroy(); }
+
+  /** handle BACK key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override public boolean onKeyUp(  int code, KeyEvent event )
+  {
+    TDLog.v("Calib Window key up: code " + code );
+    return backKeyUp( code, event );
+  }
+
   /** respond to a key event
    * @param code   key code
    * @param event  key event
@@ -472,9 +486,9 @@ public class CalibActivity extends Activity
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
+      // ----- alternative-169
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed(); // FIXME issue 167
-        return true;
+        return backKeyDown( code, event ); // FIXME issue 167
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;

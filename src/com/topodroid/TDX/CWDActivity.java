@@ -51,7 +51,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-public class CWDActivity extends Activity
+public class CWDActivity extends MyActivity
                          implements OnItemClickListener
                                   , OnItemLongClickListener
                                   , OnClickListener
@@ -228,20 +228,36 @@ public class CWDActivity extends Activity
   //   super.onStop();
   // }
 
+  @Override
+  protected void onDestroy()
+  { 
+    super.onDestroy();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    // setCwdPreference();
+    super.onBackPressed();
+  }
+
+  // /** handle key up event // alternative-169
+  //  * @param code  key code
+  //  * @param ev    key event
+  //  */
   // @Override
-  // public void onBackPressed()
-  // {
-  //   // setCwdPreference();
-  //   finish();
-  // }
+  // public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
 
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed(); // FIXME issue 167
-        return true;
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      //   onBackPressed(); // FIXME issue 167
+      //   return true;
+      // ----- alternative-169
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      //   return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.CWDActivity );
         /* if ( help_page != null ) always true */ UserManualActivity.showHelpPage( this, help_page );

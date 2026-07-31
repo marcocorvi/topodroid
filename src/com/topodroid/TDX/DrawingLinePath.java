@@ -40,7 +40,6 @@ public class DrawingLinePath extends DrawingPointLinePath
   public static final int OUTLINE_NONE = 0;
   public static final int OUTLINE_UNDEF = -2;
 
-
   /** test whether the line has the outline
    * @return true if the line has either outline OUT or IN
    */
@@ -88,8 +87,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     mOutline  = ( BrushManager.isLineWall(mLineType) )? OUTLINE_OUT : OUTLINE_NONE;
     setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
     mLevel    = BrushManager.getLineLevel( mLineType );
-    mScale    = scale;
-    setScale( scale );
+    setScale( scale ); // this sets also mScale
   }
 
   /** factory: deserialize a line from a data stream
@@ -248,13 +246,14 @@ public class DrawingLinePath extends DrawingPointLinePath
   void setScale( int scale )
   {
     float width = BrushManager.WIDTH_FIXED;
+    mScale = scale;
     switch ( scale ) {
       case -2: width /= 2; break;
       case -1: width /= 1.4; break;
       case  1: width *= 1.7; break;
       case  2: width *= 3.0; break;
     }
-    // TDLog.v("Line set scale " + width );
+    // TDLog.v("Line set scale " + scale + " width " + width );
     mPaint.setStrokeWidth( width );
   }
 

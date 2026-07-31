@@ -91,8 +91,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 // import android.net.Uri.Builder;
 
-public class SurveyWindow extends Activity
-                            implements IExporter
+public class SurveyWindow extends MyActivity
+                          implements IExporter
                             , ITeamText
                             , OnItemClickListener
                             , View.OnClickListener
@@ -758,20 +758,42 @@ public class SurveyWindow extends Activity
     mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, true ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
-    TopoDroidApp.mSurveyWindow = null;
-    super.onBackPressed(); // FIXME issue 167
+    onBackPressed(); // FIXME issue 167
     // finish();
   }
 
-  @Override
-  public boolean onKeyDown( int code, KeyEvent event )
+  @Override public void onBackPressed()
+  {
+    TopoDroidApp.mSurveyWindow = null;
+    saveSurvey( true );
+    super.onBackPressed();
+  }
+
+  @Override protected void onDestroy() { super.onDestroy(); }
+
+  /** handle key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override public boolean onKeyUp( int code, KeyEvent event )
+  {
+    TDLog.v("Survey Window key up: code " + code );
+    return backKeyUp( code, event );
+  }
+
+  @Override public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) // drop: issue 169
+      //   if ( ! saveSurvey( true ) ) return true;
+      //   TopoDroidApp.mSurveyWindow = null;
+      //   super.onBackPressed(); // FIXME issue 167
+      //   return true;
+      // ----- alternative-169
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        if ( ! saveSurvey( true ) ) return true;
         TopoDroidApp.mSurveyWindow = null;
-        super.onBackPressed(); // FIXME issue 167
-        return true;
+        saveSurvey( true );
+        return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
@@ -816,7 +838,6 @@ public class SurveyWindow extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      TopoDroidApp.mSurveyWindow = null;
       super.onBackPressed(); // issue 167
     } else if ( p++ == pos ) { // EXPORT
       boolean diving = (mDatamode == SurveyInfo.DATAMODE_DIVING );

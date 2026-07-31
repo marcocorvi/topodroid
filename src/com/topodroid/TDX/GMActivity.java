@@ -81,7 +81,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.graphics.drawable.BitmapDrawable;
 
-public class GMActivity extends Activity
+public class GMActivity extends MyActivity
                         implements ILister
                         , ICoeffDisplayer
                         , OnClickListener
@@ -1464,12 +1464,6 @@ public class GMActivity extends Activity
     // TDLog.v( "GM Activity stop");
   }
 
-  @Override
-  public synchronized void onDestroy() 
-  {
-    super.onDestroy();
-    // TDLog.v( "GM Activity destroy");
-  }
 
   // ------------------------------------------------------------------
 
@@ -1516,18 +1510,37 @@ public class GMActivity extends Activity
     updateDisplay( );
   }
 
+  @Override public void onBackPressed() { super.onBackPressed(); }
+
+  @Override protected void onDestroy()
+  {
+    // TDLog.v( "GM Activity destroy");
+    super.onDestroy();
+  }
+
+  /** handle BACK key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override public boolean onKeyUp(  int code, KeyEvent event )
+  {
+    TDLog.v("GM Window key up: code " + code );
+    return backKeyUp( code, event );
+  }
+
   /** handle key DOWN event
    * @param code   key-event code
    * @param event  key event
    * @return true if event has been consumed
    */
-  @Override
-  public boolean onKeyDown( int code, KeyEvent event )
+  @Override public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed(); // FIXME issue 167
-        return true;
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      //   onBackPressed(); // FIXME issue 167
+      //   return true;
+      case KeyEvent.KEYCODE_BACK: // alternative-169
+        return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;

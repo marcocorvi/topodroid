@@ -700,7 +700,7 @@ public class SketchWindow extends ItemDrawer
     try {
       dos = TDFile.getTopoDroidFileOutputStream( filename );
       dos.write( 'V' ); // version
-      dos.writeInt( TDVersion.code() );
+      dos.writeInt( TDVersion.VERSION_TDR );
       dos.write( 'S' );
       dos.writeUTF( name );
       dos.writeInt( mVertical? 0 : 1 ); 

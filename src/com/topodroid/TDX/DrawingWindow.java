@@ -2211,45 +2211,46 @@ public class DrawingWindow extends ItemDrawer
       switch ( mHotItemType ) {
         case DrawingPath.DRAWING_PATH_FIXED:
           mActivity.setTitle( title + " " + mHotPath.mBlock.mFrom + "=" + mHotPath.mBlock.mTo );
+          setScaleToolbar( null );
           break;
         case DrawingPath.DRAWING_PATH_SPLAY:
           mActivity.setTitle( title + " " + mHotPath.mBlock.mFrom + "-." );
+          setScaleToolbar( null );
           break;
         case DrawingPath.DRAWING_PATH_POINT:
           mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)mHotPath).mPointType ) );
           hasPointActions = true;
 	  deletable = true;
-          if ( mHotPath instanceof DrawingPointPath ) {
-            setScaleToolbar( (DrawingPointPath)mHotPath );
-          } else if ( mHotPath instanceof DrawingLinePath ) {
-            setScaleToolbar( (DrawingPointPath)mHotPath );
-          } else {
-            setScaleToolbar( null );
-          }
+          setScaleToolbar( mHotPath );
           break;
         case DrawingPath.DRAWING_PATH_LINE:
           mActivity.setTitle( title + " " + BrushManager.getLineName( ((DrawingLinePath)mHotPath).mLineType ) );
           hasPointActions = true;
           // bm = mBMsnap;
 	  deletable = true;
+          setScaleToolbar( mHotPath );
           break;
         case DrawingPath.DRAWING_PATH_AREA:
           mActivity.setTitle( title + " " + BrushManager.getAreaName( ((DrawingAreaPath)mHotPath).mAreaType ) );
           hasPointActions = true;
           // bm = mBMsnap;
 	  deletable = true;
+          setScaleToolbar( mHotPath );
           break;
         case DrawingPath.DRAWING_PATH_STATION:
           title = getResources().getString( R.string.title_edit_user_station );
           mActivity.setTitle( title + " " + ((DrawingStationUser)mHotPath).name() );
 	  deletable = true;
+          setScaleToolbar( null );
           break;
         case DrawingPath.DRAWING_PATH_NAME:
           title = getResources().getString( R.string.title_edit_station );
           mActivity.setTitle( title + " " + ((DrawingStationName)mHotPath).getName() );
+          setScaleToolbar( null );
           break;
         default:
           mActivity.setTitle( title );
+          setScaleToolbar( null );
       }
     } else {
       mHotPath     = null;
@@ -4007,13 +4008,17 @@ public class DrawingWindow extends ItemDrawer
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
         // TDLog.v( "modeload data stream 1 " + mName1 + " " + mFullName1);
         // mAllSymbols =
-        mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ );
+        if ( ! mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ ) ) {
+          TDToast.makeBad( R.string.tdr_load_fail );
+        }
         // DrawingSurface.addManagerToCache( mFullName1 );
       }
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotType.isExtended(mPlot2.type) ) ) {
         // TDLog.v( "modeload data stream 2");
         // mAllSymbols = mAllSymbols &&
-        mDrawingSurface.modeloadDataStream( filename2b, mFullName2, false /*, FIXME-MISSING missingSymbols */ );
+        if ( ! mDrawingSurface.modeloadDataStream( filename2b, mFullName2, false /*, FIXME-MISSING missingSymbols */ ) ) {
+          TDToast.makeBad( R.string.tdr_load_fail );
+        }
         // DrawingSurface.addManagerToCache( mFullName2 );
       }
       
@@ -4045,8 +4050,11 @@ public class DrawingWindow extends ItemDrawer
       mTo = ( PlotType.isLegSection( type ) )? mPlot3.view : "";
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
-      mDrawingSurface.modeloadDataStream( filename3b, null, false /*, FIXME-MISSING missingSymbols */ );
-      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type, 0 );
+      if ( mDrawingSurface.modeloadDataStream( filename3b, null, false /*, FIXME-MISSING missingSymbols */ ) ) {
+        mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type, 0 );
+      } else {
+        TDToast.makeBad( R.string.tdr_load_fail );
+      }
     }
 
     // if ( ! mAllSymbols ) {
@@ -8771,10 +8779,12 @@ public class DrawingWindow extends ItemDrawer
   {
     TDLog.v("Drawing Window " + mType + " on key down: code " + code );
     switch ( code ) {
-      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        onBackPressed();
-        ev.startTracking(); // issue 169
-        return true;
+      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+      //   onBackPressed();
+      //   ev.startTracking(); // issue 169
+      //   return true;
+      case KeyEvent.KEYCODE_BACK: 
+        return backKeyDown( code, ev );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
@@ -8812,12 +8822,7 @@ public class DrawingWindow extends ItemDrawer
   public boolean onKeyUp( int code, KeyEvent ev ) // issue 169
   {
     TDLog.v("Drawing Window key up: code " + code );
-    if ( TDandroid.BELOW_API_36 && code == KeyEvent.KEYCODE_BACK ) {
-      if ( ev.isTracking() && ! ev.isCanceled() ) {
-        return true;
-      }
-    }
-    return false;
+    return backKeyUp( code, ev );
   }
 
   // ---------------------------------------------------------
@@ -9272,19 +9277,25 @@ public class DrawingWindow extends ItemDrawer
     if ( type == PlotType.PLOT_PLAN ) {
       if ( mPlot1 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
-        mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols, true = linkSections
-        // DrawingSurface.addManagerToCache( mFullName1 );
-        setPlotType1( COMPUTE_YES, PARAMS_YES );
+        if ( mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ) ) { // no missing symbols, true = linkSections
+          // DrawingSurface.addManagerToCache( mFullName1 );
+          setPlotType1( COMPUTE_YES, PARAMS_YES );
+        } else {
+          TDToast.makeBad( R.string.tdr_load_fail );
+        }
       } else {
         TDLog.e("null Plot 1");
       }
     } else if ( PlotType.isProfile( type ) ) {
       if ( mPlot2 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotType.isExtended(type) );
-        mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ ); // true = linkSections
-        // DrawingSurface.addManagerToCache( mFullName2 );
-        // now switch to extended view FIXME-VIEW
-        setPlotType2( COMPUTE_YES, PARAMS_YES );
+        if ( mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ ) ) { // true = linkSections
+          // DrawingSurface.addManagerToCache( mFullName2 );
+          // now switch to extended view FIXME-VIEW
+          setPlotType2( COMPUTE_YES, PARAMS_YES );
+        } else {
+          TDToast.makeBad( R.string.tdr_load_fail );
+        }
       } else {
         TDLog.e("null Plot 2");
       }
@@ -9292,18 +9303,21 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v("doRecover section" );
       if ( mPlot3 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
-        mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
-        setPlotType3( true ); // true reset display-params
-        // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-        List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
-        if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
-          if ( PlotType.isMultilegSection( mType, mTo ) ) {
-            // TDLog.v("PLOT recover multileg list " + list.size() );
-            makeMultilegSectionReferences( list, mPlot3.center );
-          } else {
-            // float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
-            makeSinglelegSectionReferences( list, mPlot3.intercept );
+        if ( mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ) ) { // sections are not cached
+          setPlotType3( true ); // true reset display-params
+          // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+          List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
+          if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
+            if ( PlotType.isMultilegSection( mType, mTo ) ) {
+              // TDLog.v("PLOT recover multileg list " + list.size() );
+              makeMultilegSectionReferences( list, mPlot3.center );
+            } else {
+              // float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
+              makeSinglelegSectionReferences( list, mPlot3.intercept );
+            }
           }
+        } else {
+          TDToast.makeBad( R.string.tdr_load_fail );
         }
       } else {
         TDLog.e("null Plot 3");
@@ -10562,6 +10576,8 @@ public class DrawingWindow extends ItemDrawer
       ((DrawingPointPath)mHotPath).setScale( idx - 2 ); 
     } else if ( mHotPath instanceof DrawingLinePath ) {
       ((DrawingLinePath)mHotPath).setScale( idx - 2 ); 
+    } else if ( mHotPath instanceof DrawingAreaPath ) {
+      ((DrawingAreaPath)mHotPath).setScale( idx - 2 ); 
     }
     // setPointScale( idx - 2 );
   }

@@ -670,6 +670,7 @@ public class DrawingIO
     return (flag == 0x07)? version : 0;
   }
 
+  // called by DrawingSurface
   static boolean doLoadDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy,
@@ -746,6 +747,7 @@ public class DrawingIO
           switch ( what ) {
             case 'V':
               version = dis.readInt();
+              if ( version > TDVersion.VERSION_TDR ) return false;
               // TDLog.Log( TDLog.LOG_PLOT, "TDR version " + version );
               break;
             case 'I': // plot info: bounding box
@@ -1245,7 +1247,7 @@ public class DrawingIO
   {
     try { 
       dos.write( 'V' ); // version
-      dos.writeInt( TDVersion.code() );
+      dos.writeInt( TDVersion.VERSION_TDR );
       dos.write( 'S' ); // scrap
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
@@ -1340,7 +1342,7 @@ public class DrawingIO
     // TDLog.v( "cstack size " + cstack.size() );
     try { 
       dos.write( 'V' ); // version
-      dos.writeInt( TDVersion.code() );
+      dos.writeInt( TDVersion.VERSION_TDR );
       dos.write( 'S' ); // scrap
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
