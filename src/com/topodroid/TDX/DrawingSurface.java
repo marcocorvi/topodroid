@@ -1310,6 +1310,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   boolean modeloadDataStream( String tdr1, String fullname, boolean link_sections /*, SymbolsPalette missingSymbols */ )
   {
+    // TDLog.v("Surface mode load " + fullname );
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();

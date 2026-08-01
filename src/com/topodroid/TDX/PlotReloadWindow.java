@@ -387,11 +387,10 @@ public class PlotReloadWindow extends ItemDrawer
 
   private void doStart()
   {
-    // TDLog.Log( TDLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
     // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
     mPos = 0;
     if ( ! loadFile( ) ) {
-      TDToast.makeBad( R.string.tdr_load_fail );
+      TDLog.e( "Plot recover do Start at zero failure" );
       finish();
     }
   }
@@ -404,10 +403,10 @@ public class PlotReloadWindow extends ItemDrawer
     PlotBackup plot = mBackups.get( mPos );
     mReloadSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
     setTitle( plot.desc );
-    // TDLog.v("Reload file pos " + mPos + " " + plot.tdr );
     boolean ret = mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename ); // save plot name in paths
     if ( ! ret ) {
-      TDToast.makeBad( R.string.tdr_load_fail );
+      TDLog.e("Reload file pos " + mPos + " " + plot.tdr );
+      // TDToast.makeBad( R.string.tdr_load_fail );
     }
     return ret;
   } 

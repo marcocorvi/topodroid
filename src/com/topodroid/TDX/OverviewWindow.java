@@ -685,7 +685,8 @@ public class OverviewWindow extends ItemDrawer
 
       String tdr = TDPath.getTdrFileWithExt( fullName );
       if ( ! mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ) ) { // save plot fullname in paths
-        TDToast.makeBad( R.string.tdr_load_fail );
+        TDLog.e("Overview load failure " + fullName );
+        // TDToast.makeBad( R.string.tdr_load_fail );
       }
     }
 

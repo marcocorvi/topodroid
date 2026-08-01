@@ -4005,11 +4005,12 @@ public class DrawingWindow extends ItemDrawer
         // finish();
       }
 
+      int load_failure = 0;
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
         // TDLog.v( "modeload data stream 1 " + mName1 + " " + mFullName1);
         // mAllSymbols =
         if ( ! mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ ) ) {
-          TDToast.makeBad( R.string.tdr_load_fail );
+          ++ load_failure;
         }
         // DrawingSurface.addManagerToCache( mFullName1 );
       }
@@ -4017,9 +4018,13 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v( "modeload data stream 2");
         // mAllSymbols = mAllSymbols &&
         if ( ! mDrawingSurface.modeloadDataStream( filename2b, mFullName2, false /*, FIXME-MISSING missingSymbols */ ) ) {
-          TDToast.makeBad( R.string.tdr_load_fail );
+          ++ load_failure;
         }
         // DrawingSurface.addManagerToCache( mFullName2 );
+      }
+      if ( load_failure >= 2 ) {
+        TDLog.e("Drawing window load files failure");
+        // TDToast.makeBad( R.string.tdr_load_fail );
       }
       
       String parent = ( TDInstance.xsections? null : mName);
@@ -4053,7 +4058,8 @@ public class DrawingWindow extends ItemDrawer
       if ( mDrawingSurface.modeloadDataStream( filename3b, null, false /*, FIXME-MISSING missingSymbols */ ) ) {
         mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type, 0 );
       } else {
-        TDToast.makeBad( R.string.tdr_load_fail );
+        TDLog.e("mode load x-section failure");
+        // TDToast.makeBad( R.string.tdr_load_fail );
       }
     }
 
@@ -9273,6 +9279,7 @@ public class DrawingWindow extends ItemDrawer
 
   void doRecover( String filename, long type )
   {
+    // TDLog.v("Drawing recover " + filename + " type " + type );
     // mLastLinePath = null; // absolutely necessary
     float x = mOffset.x;
     float y = mOffset.y;
@@ -9287,7 +9294,8 @@ public class DrawingWindow extends ItemDrawer
           // DrawingSurface.addManagerToCache( mFullName1 );
           setPlotType1( COMPUTE_YES, PARAMS_YES );
         } else {
-          TDToast.makeBad( R.string.tdr_load_fail );
+          TDLog.e("Drawing recover " + filename + " type plan failure");
+          // TDToast.makeBad( R.string.tdr_load_fail );
         }
       } else {
         TDLog.e("null Plot 1");
@@ -9300,13 +9308,13 @@ public class DrawingWindow extends ItemDrawer
           // now switch to extended view FIXME-VIEW
           setPlotType2( COMPUTE_YES, PARAMS_YES );
         } else {
-          TDToast.makeBad( R.string.tdr_load_fail );
+          TDLog.e("Drawing recover " + filename + " type profile failure");
+          // TDToast.makeBad( R.string.tdr_load_fail );
         }
       } else {
         TDLog.e("null Plot 2");
       }
     } else {
-      // TDLog.v("doRecover section" );
       if ( mPlot3 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
         if ( mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ) ) { // sections are not cached
@@ -9323,7 +9331,8 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         } else {
-          TDToast.makeBad( R.string.tdr_load_fail );
+          TDLog.e("Drawing recover section failure" );
+          // TDToast.makeBad( R.string.tdr_load_fail );
         }
       } else {
         TDLog.e("null Plot 3");
