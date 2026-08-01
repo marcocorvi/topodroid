@@ -12,7 +12,6 @@
 package com.topodroid.dev;
 
 import com.topodroid.util.TDLog;
-import com.topodroid.util.TDStatus;
 // import com.topodroid.util.TDColor;
 import com.topodroid.util.TDUtil;
 import com.topodroid.prefs.TDSetting;
@@ -23,6 +22,7 @@ import com.topodroid.TDX.ListerHandler;
 // import com.topodroid.TDX.DBlock;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
+import com.topodroid.types.TDStatus;
 // import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.cavway.CavwayProtocol;
 import com.topodroid.packetX.CavwayData;

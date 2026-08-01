@@ -13,8 +13,8 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDMath;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDUtil;
+import com.topodroid.types.TDStatus;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;

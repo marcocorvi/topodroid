@@ -17,13 +17,13 @@ import com.topodroid.util.TDFile;
 import com.topodroid.util.TDsafUri;
 import com.topodroid.util.TDTag;
 import com.topodroid.util.TDColor;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.StringPair;
+import com.topodroid.types.TDStatus;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -8769,6 +8769,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+
   /** handle key down event
    * @param code  key code
    * @param ev    key event
@@ -8777,7 +8778,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public boolean onKeyDown( int code, KeyEvent ev)
   {
-    TDLog.v("Drawing Window " + mType + " on key down: code " + code );
+    // TDLog.v("Drawing Window " + mType + " on key down: code " + code );
     switch ( code ) {
       // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
       //   onBackPressed();
@@ -8789,7 +8790,6 @@ public class DrawingWindow extends ItemDrawer
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
-        takeScreenshot( mDrawingSurface );
         return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
         return true;
@@ -8822,7 +8822,13 @@ public class DrawingWindow extends ItemDrawer
   public boolean onKeyUp( int code, KeyEvent ev ) // issue 169
   {
     TDLog.v("Drawing Window key up: code " + code );
-    return backKeyUp( code, ev );
+    if ( code == KeyEvent.KEYCODE_BACK ) {
+      return backKeyUp( code, ev );
+    } else if ( code == KeyEvent.KEYCODE_VOLUME_UP ) {
+      takeScreenshot( mDrawingSurface );
+      return true;
+    }
+    return false;
   }
 
   // ---------------------------------------------------------

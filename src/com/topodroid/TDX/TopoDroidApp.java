@@ -30,7 +30,6 @@ import com.topodroid.util.Region;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.CT;
 // import com.topodroid.util.CWDFolder; // TDSKETCH
-// import com.topodroid.util.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDProgress;
@@ -64,6 +63,7 @@ import com.topodroid.types.PlotType;
 import com.topodroid.types.ExportInfo;
 import com.topodroid.types.ShotType;
 import com.topodroid.types.SymbolType;
+// import com.topodroid.types.TDStatus;
 // import com.topodroid.calib.CalibCoeffDialog;
 // import com.topodroid.calib.CalibReadTask;
 import com.topodroid.calib.CalibInfo;

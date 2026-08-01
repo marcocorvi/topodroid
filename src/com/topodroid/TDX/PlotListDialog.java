@@ -12,8 +12,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDUtil;
+import com.topodroid.types.TDStatus;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.ListItemAdapter;
 import com.topodroid.types.PlotType;

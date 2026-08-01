@@ -13,11 +13,11 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDLocale;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDLocale;
+import com.topodroid.types.TDStatus;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.mag.WorldMagneticModel;
 // import com.topodroid.ui.MyMenuAdapter;

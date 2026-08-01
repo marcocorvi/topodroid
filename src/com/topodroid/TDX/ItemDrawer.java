@@ -13,6 +13,8 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDFile;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.SymbolType;
 import com.topodroid.types.PointScale;
@@ -30,8 +32,7 @@ import android.graphics.Canvas;
 // import android.window.OnBackInvokedCallback;
 // import androidx.annotation.RequiresApi;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.DataOutputStream;
 
 abstract class ItemDrawer extends MyActivity
 {
@@ -380,6 +381,8 @@ abstract class ItemDrawer extends MyActivity
     long millis = TDUtil.time();
     if ( millis < mScreenshotTime ) return;
     mScreenshotTime = millis + 1500;
+    TopoDroidApp.updateAnalytic( TDAnalytics.SCREENSHOT );
+    // TDLog.v("take screenshot");
     try {
       // create bitmap screen capture
       // View v1 = getWindow().getDecorView().getRootView();
@@ -387,25 +390,38 @@ abstract class ItemDrawer extends MyActivity
       // Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
       // v1.setDrawingCacheEnabled(false);
 
+      Canvas canvas = null;
       Bitmap bitmap = Bitmap.createBitmap( (int)(TopoDroidApp.mDisplayWidth), (int)(TopoDroidApp.mDisplayHeight), Bitmap.Config.ARGB_4444 );
-      Canvas canvas = new Canvas( bitmap );
-      if ( drawing_surface.drawCanvas( canvas ) ) {
-        String now = TDUtil.currentDateTimeFull();
-        String path = TDPath.getOutFile( now + ".png" );
-        File imageFile = new File(path);
-        FileOutputStream outputStream = new FileOutputStream(imageFile);
-        int quality = 100;
-        // bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-        bitmap.compress(Bitmap.CompressFormat.PNG, quality, outputStream);
-        outputStream.flush();
-        outputStream.close();
-        TDToast.make( String.format( getResources().getString( R.string.screenshot_saved ), path ) );
+      if ( bitmap == null ) {
+        TDLog.e("Screenshot: cannot get bitmap");
       } else {
-        TDLog.e( "failed drawing canvas" );
+        canvas = new Canvas( bitmap );
+      }
+      if ( canvas == null ) {
+        TDLog.e("Screenshot: cannot get canvas");
+      }
+      if ( canvas != null && drawing_surface.drawCanvas( canvas ) ) {
+        String now = TDUtil.currentDateTimePath();
+        String path = TDPath.getOutFile( now + ".png" );
+        DataOutputStream dos = TDFile.getTopoDroidFileOutputStream( path );
+        if ( dos != null ) {
+          int quality = 100;
+          // bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+          bitmap.compress( Bitmap.CompressFormat.PNG, quality, dos );
+          dos.flush();
+          dos.close();
+          TDToast.make( String.format( getResources().getString( R.string.screenshot_saved ), path ) );
+        } else {
+          TDLog.e("Screenshot: cannot get output stream");
+        }
+      } else {
+        TDLog.e( "Screenshot: failed drawing canvas" );
+        TDToast.makeWarn( R.string.screenshot_failed );
       }
     } catch (Throwable e) {
       // Several error may come out with file handling or DOM
-      e.printStackTrace();
+      // e.printStackTrace();
+      TDLog.e("Screenshot: " + e.getMessage() );
       TDToast.makeWarn( R.string.screenshot_failed );
     }
   }

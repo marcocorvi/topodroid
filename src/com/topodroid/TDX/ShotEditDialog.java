@@ -14,7 +14,6 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDAnalytics;
 // import com.topodroid.util.TDColor;
 import com.topodroid.ui.MyKeyboard;
@@ -29,6 +28,7 @@ import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.LegType;
 import com.topodroid.types.ExtendType;
+import com.topodroid.types.TDStatus;
 
 
 

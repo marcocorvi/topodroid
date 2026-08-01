@@ -123,6 +123,7 @@ public class TDAnalytics
   public static final String BT_ALIAS    = "BTal";
   public static final String GRAPH_PAPER = "Graph";
   public static final String PT_CMAP     = "PTmap";
+  public static final String SCREENSHOT  = "Screen";
 
   public static final String EXPORT_TH  = "1th";  // Therion
   public static final String EXPORT_DAT = "1dat"; // Comapass

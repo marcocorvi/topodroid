@@ -30,7 +30,6 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDsafUri;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDAnalytics;
@@ -55,6 +54,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.PlotType;
+import com.topodroid.types.TDStatus;
 import com.topodroid.packetX.MemoryData;
 // import com.topodroid.types.StationFlag;
 

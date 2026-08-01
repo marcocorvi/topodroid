@@ -13,7 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
-// import com.topodroid.util.TDStatus;
+// import com.topodroid.types.TDStatus;
 // import com.topodroid.types.LegType;
 import com.topodroid.prefs.TDSetting;
 

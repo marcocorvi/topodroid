@@ -218,6 +218,14 @@ public class TDUtil
     return sdf.format( new Date() );
   }
 
+  /** @return the current date-time - path format "yyyy-mm-dd_hh-mm"
+   */
+  public static String currentDateTimePath()
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss", Locale.US );
+    return sdf.format( new Date() );
+  }
+
   /** @return the current date-time - Bric4 format "yyyy mm dd hh mm ss"
    */
   public static String currentDateTimeBric()

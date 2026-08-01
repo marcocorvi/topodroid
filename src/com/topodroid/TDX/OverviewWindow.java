@@ -16,7 +16,6 @@ import com.topodroid.util.TDMath;
 import com.topodroid.util.TDTag;
 import com.topodroid.util.TDsafUri;
 // import com.topodroid.util.TDRequest;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDColor;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
@@ -34,6 +33,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.types.PlotType;
+import com.topodroid.types.TDStatus;
 
 import android.content.Intent;
 import android.content.res.Resources;

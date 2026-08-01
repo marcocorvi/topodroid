@@ -16,7 +16,6 @@ import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDTag;
-import com.topodroid.util.TDStatus;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDUtil;
@@ -32,6 +31,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.calib.CalibCheckDialog;
 import com.topodroid.types.PlotType;
+import com.topodroid.types.TDStatus;
 
 import java.util.Locale;
 import java.util.List;

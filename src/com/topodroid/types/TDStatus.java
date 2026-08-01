@@ -9,7 +9,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.util;
+package com.topodroid.types;
+
+import com.topodroid.util.TDString;
 
 public class TDStatus 
 {

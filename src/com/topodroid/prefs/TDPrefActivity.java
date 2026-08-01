@@ -350,9 +350,10 @@ public class TDPrefActivity extends Activity
     return true;
   }
 
+  // @note calls are already conditioned to HAS_AI true
   public void setAIbuttonEnabled( boolean enabled )
   {
-    if ( AIhelper.HAS_AI ) {
+    if ( AIhelper.HAS_AI ) { // not really necessary
       if ( enabled ) {
         mAIbutton.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai ) );
         mAIbutton.setOnClickListener( new OnClickListener() {
@@ -533,18 +534,20 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_WALLS3D_PREF",        TDPrefCat.PREF_WALLS3D );
 
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_GEEK ) {
-      mGeminiPref = findPreference( "DISTOX_GEMINI" );
-      if ( mGeminiPref != null ) {
-        View v = mGeminiPref.getView();
-	if ( v != null ) {
-          GeminiDialog gemini_dialog = new GeminiDialog( this, this, mGeminiPref ); // null UserManualActivity
-          v.setOnClickListener( 
-            new OnClickListener() {
-              @Override
-              public void onClick( View v ) { gemini_dialog.show(); }
-          } );
-	}
-        mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "---" : "***" );
+      if ( AIhelper.HAS_AI ) {
+        mGeminiPref = findPreference( "DISTOX_GEMINI" );
+        if ( mGeminiPref != null ) {
+          View v = mGeminiPref.getView();
+          if ( v != null ) {
+            GeminiDialog gemini_dialog = new GeminiDialog( this, this, mGeminiPref ); // null UserManualActivity
+            v.setOnClickListener( 
+              new OnClickListener() {
+                @Override
+                public void onClick( View v ) { gemini_dialog.show(); }
+            } );
+          }
+          mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "---" : "***" );
+        }
       }
 
       // TDLog.v("PREF link GEEK sub-categories");
@@ -577,6 +580,7 @@ public class TDPrefActivity extends Activity
       if ( mBtAliasPref != null ) {
         View v = mBtAliasPref.getView();
         if ( v != null ) {
+          TDLog.v("Graph Paper Scale Intent prepared");
           final Intent bt_alias_intent = new Intent( mCtx, com.topodroid.TDX.BtAliasActivity.class ); // this
           v.setOnClickListener( new OnClickListener() {
             @Override
@@ -759,6 +763,7 @@ public class TDPrefActivity extends Activity
     } );
   }
 
+  // @note called only by setAIbuttoEnabled
   public void startGemini()
   {
     if ( ! AIhelper.HAS_AI ) return;
