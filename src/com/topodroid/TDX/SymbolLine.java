@@ -42,6 +42,10 @@ public class SymbolLine extends Symbol
   boolean mStyleStraight;
   boolean mClosed;
   int mStyleX;            // X times (one out of how many point to use)
+  Path mPathDir = null;
+  Path mPathRev = null;
+  float mEffectLen = 0;
+  float[] mDashX = null;
 
   @Override public String getName()  { return mName; }
   // @Override public String getThName( ) { return mThName; } // same as in Symbol.java
@@ -178,10 +182,10 @@ public class SymbolLine extends Symbol
     int color  = 0;
     int alpha  = 0xcc;
     float width  = 1;
-    Path path_dir = null;
-    Path path_rev = null;
+    mPathDir = null;
+    mPathRev = null;
     DashPathEffect dash = null;
-    PathDashPathEffect effect = null;
+    PathDashPathEffect dir_effect = null;
     PathDashPathEffect rev_effect = null;
     float xmin=0, xmax=0;
     float ymin=0, ymax=0;
@@ -307,15 +311,15 @@ public class SymbolLine extends Symbol
                 n_dash = n_dash - (n_dash % 2);
                 if ( n_dash > 0 ) {
                   try {
-                    float[] x = new float[n_dash];
-  	            x[0] = Float.parseFloat( vals[k] ) * unit;
+                    mDashX = new float[n_dash];
+                    mDashX[0] = Float.parseFloat( vals[k] ) * unit;
                     k_val = k;
                     for (int n=1; n<n_dash; ++n ) {
-  	              x[n] = nextFloat( vals, s, unit );
+                      mDashX[n] = nextFloat( vals, s, unit );
                       // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	              // x[n] = Float.parseFloat( vals[k] ) * unit;
+                      // mDashX[n] = Float.parseFloat( vals[k] ) * unit;
                     }  
-                    dash = new DashPathEffect( x, 0 );
+                    dash = new DashPathEffect( mDashX, 0 );
                   } catch ( NumberFormatException e ) {
                    TDLog.e( filename + " parse dash error: " + line );
                   }
@@ -337,10 +341,10 @@ public class SymbolLine extends Symbol
               }
   	    } else if ( vals[k].equals("effect") ) {
               // TDLog.v("SL effect begins");
-              path_dir = new Path();
-              path_rev = new Path();
-              // path_dir.moveTo(0,0);
-              // path_rev.moveTo(0,0);
+              mPathDir = new Path();
+              mPathRev = new Path();
+              // mPathDir.moveTo(0,0);
+              // mPathRev.moveTo(0,0);
               boolean moved_to = false;
               while ( (line = br.readLine() ) != null ) {
                 line = line.trim();
@@ -355,8 +359,8 @@ public class SymbolLine extends Symbol
                         k_val = k;
                         float x = nextFloat( vals, s, unit );
                         float y = nextFloat( vals, s, unit );
-                        path_dir.moveTo( x, y );
-                        path_rev.moveTo( x, -y );
+                        mPathDir.moveTo( x, y );
+                        mPathRev.moveTo( x, -y );
                         if ( ! moved_to ) {
                           xmin = xmax = x;
                           moved_to = true;
@@ -368,8 +372,8 @@ public class SymbolLine extends Symbol
   	                //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	                //   if ( k < s ) {
   	                //      float y = Float.parseFloat( vals[k] ) * unit;
-                        //      path_dir.moveTo( x, y );
-                        //      path_rev.moveTo( x, -y );
+                        //      mPathDir.moveTo( x, y );
+                        //      mPathRev.moveTo( x, -y );
                         //      xmin = xmax = x;
                         //      moved_to = true;
                         //   }
@@ -383,8 +387,8 @@ public class SymbolLine extends Symbol
                       k_val = k;
                       float x = nextFloat( vals, s, unit );
                       float y = nextFloat( vals, s, unit );
-                      path_dir.lineTo( x, y );
-                      path_rev.lineTo( x, -y );
+                      mPathDir.lineTo( x, y );
+                      mPathRev.lineTo( x, -y );
                       if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
 	              if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
 
@@ -394,8 +398,8 @@ public class SymbolLine extends Symbol
   	              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              //   if ( k < s ) {
   	              //     float y = Float.parseFloat( vals[k] ) * unit;
-                      //     path_dir.lineTo( x, y );
-                      //     path_rev.lineTo( x, -y );
+                      //     mPathDir.lineTo( x, y );
+                      //     mPathRev.lineTo( x, -y );
                       //     if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
                       //   }
                       // }
@@ -411,8 +415,8 @@ public class SymbolLine extends Symbol
                       float y2 = nextFloat( vals, s, unit );
                       float x3 = nextFloat( vals, s, unit );
                       float y3 = nextFloat( vals, s, unit );
-                      path_dir.cubicTo( x1,  y1, x2,  y2, x3,  y3 );
-                      path_rev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
+                      mPathDir.cubicTo( x1,  y1, x2,  y2, x3,  y3 );
+                      mPathRev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
                       if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
                       if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
                       if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
@@ -438,8 +442,8 @@ public class SymbolLine extends Symbol
   	              //           ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              //           if ( k < s ) {
   	              //             float y3 = Float.parseFloat( vals[k] ) * unit;
-                      //             path_dir.cubicTo( x1, y1, x2, y2, x3, y3 );
-                      //             path_rev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
+                      //             mPathDir.cubicTo( x1, y1, x2, y2, x3, y3 );
+                      //             mPathRev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
                       //             if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
                       //             if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
                       //             if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
@@ -458,8 +462,8 @@ public class SymbolLine extends Symbol
                       float x = nextFloat( vals, s, unit );
                       float y = nextFloat( vals, s, unit );
                       float r = nextFloat( vals, s, unit );
-                      path_dir.addCircle( x,  y, r, Path.Direction.CCW );
-                      path_rev.addCircle( x, -y, r, Path.Direction.CCW );
+                      mPathDir.addCircle( x,  y, r, Path.Direction.CCW );
+                      mPathRev.addCircle( x, -y, r, Path.Direction.CCW );
                       if ( x-r < xmin ) xmin = x-r;
                       if ( x+r > xmax ) xmax = x+r;
 	              if ( y+r > ymax ) { ymax = y+r; } else if ( y-r < ymin ) { ymin = y-r; }
@@ -468,10 +472,11 @@ public class SymbolLine extends Symbol
                     }
                   } else if ( vals[k].equals("endeffect") ) {
                     // TDLog.v("SL effect ends");
-                    // path_dir.close();
-                    // path_rev.close();
-                    effect     = new PathDashPathEffect( path_dir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
-                    rev_effect = new PathDashPathEffect( path_rev, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
+                    // mPathDir.close();
+                    // mPathRev.close();
+                    mEffectLen = xmax-xmin;
+                    dir_effect = new PathDashPathEffect( mPathDir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
+                    rev_effect = new PathDashPathEffect( mPathRev, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
                     break;
                   }
                 }
@@ -491,15 +496,15 @@ public class SymbolLine extends Symbol
                 mPaint.setStrokeJoin(Paint.Join.ROUND);
                 mPaint.setStrokeCap(Paint.Cap.ROUND);
                 mRevPaint = new Paint( mPaint );
-                if ( effect != null ) {
+                if ( dir_effect != null ) {
                   mHasEffect = true;
                   // mPaint.setStrokeWidth( 4 );
                   // mRevPaint.setStrokeWidth( 4 );
                   if ( dash != null ) {
-                    mPaint.setPathEffect( new ComposePathEffect( effect, dash ) );
+                    mPaint.setPathEffect( new ComposePathEffect( dir_effect, dash ) );
                     mRevPaint.setPathEffect( new ComposePathEffect( rev_effect, dash ) );
                   } else {
-                    mPaint.setPathEffect( effect );
+                    mPaint.setPathEffect( dir_effect );
                     mRevPaint.setPathEffect( rev_effect );
                   }
                 } else if ( dash != null ) {

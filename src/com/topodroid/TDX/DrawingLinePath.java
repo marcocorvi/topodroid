@@ -24,6 +24,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.graphics.DashPathEffect;
+import android.graphics.ComposePathEffect;
+import android.graphics.PathDashPathEffect;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -241,12 +244,16 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
     }
   }
+
+  final static float[] mEffectScale = { 0.5f, 0.75f, 1.0f, 1.7f, 3.0f };
   
+  /** set the line scale
+   * @param scale  new line scale (in [-2,2] )
+   */
   @Override
   void setScale( int scale )
   {
     float width = BrushManager.WIDTH_FIXED;
-    mScale = scale;
     switch ( scale ) {
       case -2: width /= 2; break;
       case -1: width /= 1.4; break;
@@ -255,6 +262,39 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     // TDLog.v("Line set scale " + scale + " width " + width );
     mPaint.setStrokeWidth( width );
+    mScale = scale;
+    if ( scale >= -2 && scale <= 2 ) setPathEffectScale( mEffectScale[ 2 + scale ] );
+  }
+
+  private void setPathEffectScale( float s )
+  {
+    if ( ! BrushManager.hasLineEffect( mLineType ) ) return;
+    // TODO scale the path effect
+    // TDLog.v("set path effect scale " + s );
+    Matrix m = new Matrix();
+    m.setScale( s, s );
+    DashPathEffect dash_effect = null;
+    float[] dash0 = BrushManager.getLineLib().getLineDash( mLineType );
+    if ( dash0 != null ) {
+      float[] dash = new float[ dash0.length ];
+      for (int i=0; i<dash0.length; ++i ) dash[i] = dash0[i]*s;
+      dash_effect = new DashPathEffect( dash, 0 );
+    }
+    Path base_effect = BrushManager.getLineLib().getLineEffectPath( mLineType, mReversed );
+    if ( base_effect != null ) {
+      Path line_effect = new Path( base_effect );
+      float len = BrushManager.getLineLib().getLineEffectLength( mLineType );
+      line_effect.transform( m );
+      len *= s;
+      PathDashPathEffect path_effect = new PathDashPathEffect( line_effect, len, 0, PathDashPathEffect.Style.MORPH );
+      if ( dash_effect != null ) {
+        mPaint.setPathEffect( new ComposePathEffect( path_effect, dash_effect ) );
+      } else {
+        mPaint.setPathEffect( path_effect );
+      }
+    } else if ( dash_effect != null ) {
+      mPaint.setPathEffect( dash_effect );
+    }
   }
 
   // @override
@@ -435,7 +475,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   public String getFullThNameEscapedColon() { return  BrushManager.getLineFullThNameEscapedColon( mLineType ); }
 
   /** set the line paint
-   * @param paint  line piant copyed in this line paint 
+   * @param paint  line paint copyed in this line paint 
    */
   @Override
   void setPathPaint( Paint paint )

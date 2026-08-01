@@ -22,7 +22,9 @@ import com.topodroid.util.TDLocale;
 import java.io.File; // external app files
 
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.DashPathEffect;
+import android.graphics.ComposePathEffect;
 import android.content.res.Resources;
 
 public class SymbolLineLibrary extends SymbolLibrary
@@ -74,6 +76,37 @@ public class SymbolLineLibrary extends SymbolLibrary
     if ( k < 0 || k >= size() ) return BrushManager.errorPaint;
     SymbolLine s = (SymbolLine)mSymbols.get(k);
     return reversed ? s.mRevPaint : s.mPaint;
+  }
+
+  /** return the lne path effect, or null
+   * @param k        line index
+   * @param reversed whether to return the reversed effect
+   */
+  Path getLineEffectPath( int k, boolean reversed )
+  {
+    if ( k < 0 || k >= size() ) return null;
+    SymbolLine line = (SymbolLine)mSymbols.get(k);
+    if ( line == null ) return null;
+    return reversed ? line.mPathRev : line.mPathDir;
+  }
+ 
+  /** return the lne path effect length, or zero
+   * @param k        line index
+   */
+  float getLineEffectLength( int k )
+  {
+    if ( k < 0 || k >= size() ) return 0;
+    SymbolLine line = (SymbolLine)mSymbols.get(k);
+    if ( line == null ) return 0;
+    return line.mEffectLen;
+  }
+
+  float[] getLineDash( int k )
+  {
+     if ( k < 0 || k >= size() ) return null;
+    SymbolLine line = (SymbolLine)mSymbols.get(k);
+    if ( line == null ) return null;
+    return line.mDashX;
   }
 
   // ========================================================================

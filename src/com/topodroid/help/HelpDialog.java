@@ -140,7 +140,7 @@ public class HelpDialog extends MyDialog
     dismiss();
     if ( v.getId() == R.id.button_manual ) {
       showManPage( mPage );
-    } else if ( v.getId() == R.id.button_ai ) {
+    } else if ( AIhelper.HAS_AI && v.getId() == R.id.button_ai ) {
       if ( TDandroid.isOnline( mContext ) ) {
         if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
           showAIdialog();
@@ -187,9 +187,10 @@ public class HelpDialog extends MyDialog
     return true;
   }
 
+  // @note calls are already conditioned to HAS_AI true
   public void setAIbuttonEnabled( boolean enabled )
   {
-    if ( AIhelper.HAS_AI ) {
+    if ( AIhelper.HAS_AI ) { // not really necessary
       TDLog.v("Help AI dialog - set button enable " + enabled );
       if ( enabled ) {
         mBtnAI.setBackgroundResource( R.drawable.iz_ai );
