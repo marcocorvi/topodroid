@@ -24,6 +24,7 @@ import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.MyActivity;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
@@ -43,8 +44,10 @@ import android.graphics.RectF;
 // import android.view.Menu;
 // import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 // import android.view.ViewGroup.LayoutParams;
 // import android.view.ViewGroup;
 // import android.view.Display;
@@ -66,14 +69,16 @@ import android.widget.AdapterView.OnItemClickListener;
 // import android.util.DisplayMetrics;
 
 import java.util.List;
+import java.util.HashSet;
 import java.util.ArrayList;
 
 /**
  */
-public class TdmViewActivity extends Activity
+public class TdmViewActivity extends MyActivity
                            implements View.OnTouchListener
                                       , OnZoomListener
                                       , OnClickListener
+                                      , OnLongClickListener
                                       , OnItemClickListener
 {
 
@@ -116,6 +121,7 @@ public class TdmViewActivity extends Activity
   private PointF mOffset  = new PointF( 0f, 0f );
   // private PointF mOffset0 = new PointF( 0f, 0f );
   private boolean doMove = false;
+  private int mNrSurveys = 0; // number of surveys
 
   @Override
   public void onVisibilityChanged(boolean visible)
@@ -175,6 +181,18 @@ public class TdmViewActivity extends Activity
 
     ArrayList< TdmViewCommand > getCommands() { return mDrawingSurface.mCommandManager; }
 
+    /** @return true if the set of surveys contans a disconnected survey
+     */
+    private boolean isMultipleSurvey() 
+    {
+      HashSet< String > names = new HashSet<>();
+      for ( TdmViewCommand cmd : mDrawingSurface.mCommandManager ) {
+        String name = cmd.name();
+        if ( names.contains( name ) ) return true;
+        names.add( name );
+      }
+      return false;
+    }
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -276,6 +294,29 @@ public class TdmViewActivity extends Activity
     {
     }
 
+  @Override public void onDestroy() { super.onDestroy(); }
+
+  @Override public void onBackPressed() { super.onBackPressed(); }
+
+  /** handle key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override public boolean onKeyUp( int code, KeyEvent event )
+  {
+    TDLog.v("Tdm view Window key up: code " + code );
+    return backKeyUp( code, event );
+  }
+
+  @Override public boolean onKeyDown( int code, KeyEvent event )
+  {
+    TDLog.v("Tdm view Window key down: code " + code );
+    if ( code == KeyEvent.KEYCODE_BACK ) {
+      return backKeyDown( code, event );
+    }
+    return false;
+  }
+
 // ----------------------------------------------------------------------------
 
 
@@ -286,6 +327,7 @@ public class TdmViewActivity extends Activity
         TDToast.make( R.string.no_survey );
         return;
       }
+      mNrSurveys = surveys.size();
       // TDLog.v("Tdm view activity start - config surveys " + surveys.size() );
       // TdmConfig config = mApp.mConfig;
       ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
@@ -339,7 +381,7 @@ public class TdmViewActivity extends Activity
     // }
     
 
-    float spacing( MotionEventWrap ev )
+    private float getEventPointerSpacing( MotionEventWrap ev )
     {
       int np = ev.getPointerCount();
       if ( np < 2 ) return 0.0f;
@@ -348,7 +390,7 @@ public class TdmViewActivity extends Activity
       return (float)Math.sqrt(x*x + y*y);
     }
 
-    void saveEventPoint( MotionEventWrap ev )
+    private void saveEventPoint( MotionEventWrap ev )
     {
       int np = ev.getPointerCount();
       if ( np >= 1 ) {
@@ -364,8 +406,7 @@ public class TdmViewActivity extends Activity
       }
     }
 
-    
-    void shiftByEvent( MotionEventWrap ev )
+    private void shiftByEvent( MotionEventWrap ev )
     {
       float x0 = 0.0f;
       float y0 = 0.0f;
@@ -423,7 +464,7 @@ public class TdmViewActivity extends Activity
 
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
         mTouchMode = MODE_ZOOM;
-        oldDist = spacing( event );
+        oldDist = getEventPointerSpacing( event );
         saveEventPoint( event );
         // TDLog.v( "POINTER DOWN old dist " + oldDist );
         doMove = false;
@@ -494,7 +535,7 @@ public class TdmViewActivity extends Activity
           }
           doMove = true;
         } else { // mTouchMode == MODE_ZOOM
-          float newDist = spacing( event );
+          float newDist = getEventPointerSpacing( event );
           // TDLog.v( "MOVE (zoom) dist " + newDist );
           if ( newDist > 16.0f && oldDist > 16.0f ) {
             float factor = newDist/oldDist;
@@ -509,8 +550,10 @@ public class TdmViewActivity extends Activity
       // ---------------------------------------- UP
       } else if (action == MotionEvent.ACTION_UP) {
         // TDLog.v( "UP");
-        if ( mWithStation == 2 ) {
+        if ( mWithStation != 1 ) {
           mDrawingSurface.resetStation();
+        }
+        if ( mWithStation == 2 ) {
           mWithStation = 0;
           mSelectedCommand = null;
         }
@@ -526,13 +569,14 @@ public class TdmViewActivity extends Activity
 
   // -------------------------------------------------
   boolean onMenu;
-  int mNrButton1 = 5;
+  int mNrButton1 = 6;
   private static int[] izons = { 
     R.drawable.iz_equate,
     R.drawable.iz_equate_all,
     R.drawable.iz_equates,
     R.drawable.iz_numbers_minus,
     R.drawable.iz_numbers_plus,
+    R.drawable.iz_surveys,
     // R.drawable.iz_exit,
   };
   private static final int[] help_icons = {
@@ -541,6 +585,7 @@ public class TdmViewActivity extends Activity
     R.string.help_equates,
     R.string.help_stations_minus,
     R.string.help_stations_plus,
+    R.string.help_equate_surveys,
   };
 
   int mNrMenus   = 2;
@@ -579,6 +624,7 @@ public class TdmViewActivity extends Activity
         mButton1[k] = MyButton.getButton( this, this, izons[k] );
         // layout.addView( mButton1[k], lp );
       }
+      mButton1[5].setOnLongClickListener( this );
 
       mButtonView1 = new MyHorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
@@ -619,33 +665,48 @@ public class TdmViewActivity extends Activity
     if ( mSelectedCommand == null ) {
       // TDToast.make( R.string.equate_no_station );
       // manually add equate
-      new TdmEquateNewDialog( this, this, mDrawingSurface.mCommandManager ).show();
+      if ( mNrSurveys <= 1 ) {
+         /* nothing */
+      } else if ( isMultipleSurvey() ) {
+        // TDToast.make( R.string.tdm_disconnected_survey );
+      } else {
+        new TdmEquateNewDialog( this, this, mDrawingSurface.mCommandManager ).show();
+      }
     } else {
+      boolean ok = false;
       // TdmViewCommand cmd1 = mSelectedCommand;
       // TdmSurvey srv1 = cmd1.mSurvey;
       TdmViewStation vst1 = mSelectedCommand.mSelected;
-      // TdmStation stn1 = vts1.mStation;
-      float x = vst1.x + mSelectedCommand.mXoff;
-      float y = vst1.y + mSelectedCommand.mYoff;
-      // TDLog.v( "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y );
-
-      final String st1 = mDrawingSurface.selectedStationName() + "@" + mDrawingSurface.selectedCommandName();
-      if ( mDrawingSurface.getSurveyAt( x, y, mSelectedCommand ) ) {
-        // TdmViewCommand cmd2 = mDrawingSurface.selectedCommand();
-        // TdmSurvey srv2 = cmd2.mSurvey;
-        // TdmViewStation vst2 = mDrawingSurface.selectedStation();
-        // TdmStation stn2 = vts2.mStation;
-        final String st2 = mDrawingSurface.selectedStationName() + "@" + mDrawingSurface.selectedCommandName();
-
-        // String title = "Equate " + st1 + " with " + st2;
-        String title = String.format( getResources().getString( R.string.title_equate_with ), st1, st2 );
-        TopoDroidAlertDialog.makeAlert( this, getResources(), title, 
-          new DialogInterface.OnClickListener() {
-            @Override public void onClick( DialogInterface dialog, int btn ) {
-              makeEquate( st1, st2 );
+      if ( vst1 != null ) {
+        // TdmStation stn1 = vts1.mStation;
+        float x = vst1.x + mSelectedCommand.mXoff;
+        float y = vst1.y + mSelectedCommand.mYoff;
+        String name1 = mDrawingSurface.selectedStationName();
+        TDLog.v( "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y + " name " + name1 );
+        if ( name1 != null ) {
+          final String st1 = name1 + "@" + mDrawingSurface.selectedCommandName();
+          if ( mDrawingSurface.getSurveyAt( x, y, mSelectedCommand ) ) {
+            // TdmViewCommand cmd2 = mDrawingSurface.selectedCommand();
+            // TdmSurvey srv2 = cmd2.mSurvey;
+            // TdmViewStation vst2 = mDrawingSurface.selectedStation();
+            // TdmStation stn2 = vts2.mStation;
+            String name2 = mDrawingSurface.selectedStationName();
+            if ( name2 != null ) {
+              final String st2 = name2 + "@" + mDrawingSurface.selectedCommandName();
+              // String title = "Equate " + st1 + " with " + st2;
+              String title = String.format( getResources().getString( R.string.title_equate_with ), st1, st2 );
+              TopoDroidAlertDialog.makeAlert( this, getResources(), title, 
+                new DialogInterface.OnClickListener() {
+                  @Override public void onClick( DialogInterface dialog, int btn ) {
+                    makeEquate( st1, st2 );
+                  }
+                }
+              );
             }
-          } );
-      } else {
+          }
+        }
+      }
+      if ( ! ok ) { 
         TDToast.make( R.string.equate_no_nearby );
       }
     }
@@ -674,15 +735,24 @@ public class TdmViewActivity extends Activity
     updateViewEquates();
   }
 
-
-
   void updateViewEquates()
   {
     mDrawingSurface.addEquates( TdmConfigActivity.mTdmConfig.getEquates() );
   }
 
   @Override
-  public void onClick(View view)
+  public boolean onLongClick( View view ) 
+  {
+    Button b0 = (Button)view;
+    if ( b0 == mButton1[5] ) {
+      showAllSurveys();
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public void onClick( View view )
   { 
     if ( onMenu ) {
       closeMenu();
@@ -719,6 +789,8 @@ public class TdmViewActivity extends Activity
       changeStationRate( -1 );
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // MORE STATIONS
       changeStationRate( 1 );
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // SINGLE SURVEY STATIONS
+      makeSurveysDialog();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EXIT
       finish();
     }
@@ -759,9 +831,36 @@ public class TdmViewActivity extends Activity
   boolean hasPossibeEquates() { return mDrawingSurface.hasPossibeEquates(); }
 
   
+  void makeSurveysDialog()
+  {
+    ArrayList< TdmViewCommand > commands = getCommands();
+    int nr_surveys = commands.size();
+    if ( nr_surveys <= 1 ) return;
+    ArrayList< String > surveys = new ArrayList<>();
+    for ( int i=0; i < nr_surveys; ++i ) {
+      TdmViewCommand cmd = commands.get(i);
+      surveys.add( cmd.name() );
+    }
+    (new TdmSurveysDialog( this, this, surveys )).show();
+  }
 
+  void showOnlySurvey( String name )
+  {
+    ArrayList< TdmViewCommand > commands = getCommands();
+    for ( TdmViewCommand cmd : commands ) {
+      cmd.setShowStations( cmd.name().equals( name ) );
+    }
+  }
 
+  void showAllSurveys()
+  {
+    ArrayList< TdmViewCommand > commands = getCommands();
+    for ( TdmViewCommand cmd : commands ) {
+      cmd.setShowStations( true );
+    }
+  }
 
+    
   /** compute possible equates:
    * a possible equate is an eqaute between stations of two surveys with the same name
    */

@@ -29,6 +29,7 @@ import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.MyActivity;
 import com.topodroid.TDX.R;
 
 // import java.io.File;
@@ -54,6 +55,7 @@ import android.widget.Button;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 // import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
@@ -70,7 +72,7 @@ import android.app.Activity;
 // import android.view.MenuItem;
 // import android.view.MenuInflater;
 
-public class TdManagerActivity extends Activity
+public class TdManagerActivity extends MyActivity
                        implements OnItemClickListener
                        // , OnItemLongClickListener
                        , OnClickListener
@@ -234,6 +236,29 @@ public class TdManagerActivity extends Activity
   // {
   //   super.onResume();
   // }
+
+  @Override public void onDestroy() { super.onDestroy(); }
+
+  @Override public void onBackPressed() { super.onBackPressed(); }
+
+  /** handle key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override public boolean onKeyUp( int code, KeyEvent event )
+  {
+    TDLog.v("Tdm Window key up: code " + code );
+    return backKeyUp( code, event );
+  }
+
+  @Override public boolean onKeyDown( int code, KeyEvent event )
+  {
+    TDLog.v("Tdm Window key down: code " + code );
+    if ( code == KeyEvent.KEYCODE_BACK ) {
+      return backKeyDown( code, event );
+    }
+    return false;
+  }
     
   /** update the list of projects configuration
    */

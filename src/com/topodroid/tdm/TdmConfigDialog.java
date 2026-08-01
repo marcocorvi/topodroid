@@ -30,53 +30,53 @@ import android.widget.EditText;
 public class TdmConfigDialog extends MyDialog 
                              implements View.OnClickListener
 {
-    private EditText mLabel;
+  private EditText mLabel;
 
-    private TdManagerActivity mActivity;
+  private TdManagerActivity mActivity;
 
-    /** cstr
-     * @param context    context
-     * @param activity parent activity
-     */
-    public TdmConfigDialog( Context context, TdManagerActivity activity )
-    {
-      super(context, null, R.string.TdmConfigDialog); // null app
-      mActivity = activity;
-    }
+  /** cstr
+   * @param context    context
+   * @param activity parent activity
+   */
+  public TdmConfigDialog( Context context, TdManagerActivity activity )
+  {
+    super(context, null, R.string.TdmConfigDialog); // null app
+    mActivity = activity;
+  }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-      super.onCreate(savedInstanceState);
-      initLayout( R.layout.tdconfig_dialog, R.string.title_tdconfig );
+  @Override
+  protected void onCreate(Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    initLayout( R.layout.tdconfig_dialog, R.string.title_tdconfig );
 
-      mLabel     = (EditText) findViewById(R.id.label_text);
-      ( (Button) findViewById(R.id.label_ok) ).setOnClickListener( this );
-      ( (Button) findViewById(R.id.label_cancel) ).setOnClickListener( this );
-    }
+    mLabel     = (EditText) findViewById(R.id.label_text);
+    ( (Button) findViewById(R.id.label_ok) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.label_cancel) ).setOnClickListener( this );
+  }
 
-    /** react to a user tap
-     * @param view tapped view
-     * if the view is the button "OK" a new cave-project is added
-     */
-    public void onClick(View view)
-    {
-      if ( view.getId() == R.id.label_ok ) {
-        String name = mLabel.getText().toString();
-        if ( ! TDString.checkName( name, mLabel, mContext.getResources() ) ) {
-          return;
-        } else {
-          name = TDString.spacesToUnderscore( name );
-          if ( ! name.endsWith( ".tdconfig" ) ) {
-            name = name + ".tdconfig";
-          }
-          mActivity.addTdmConfig( name );
+  /** react to a user tap
+   * @param view tapped view
+   * if the view is the button "OK" a new cave-project is added
+   */
+  public void onClick(View view)
+  {
+    if ( view.getId() == R.id.label_ok ) {
+      String name = mLabel.getText().toString();
+      if ( ! TDString.checkName( name, mLabel, mContext.getResources() ) ) {
+        return;
+      } else {
+        name = TDString.spacesToUnderscore( name );
+        if ( ! name.endsWith( ".tdconfig" ) ) {
+          name = name + ".tdconfig";
         }
-      // } else ( view.getId() == R.id.label_cancel ) {
-      //   // nothing
+        mActivity.addTdmConfig( name );
       }
-      dismiss();
+    // } else ( view.getId() == R.id.label_cancel ) {
+    //   // nothing
     }
+    dismiss();
+  }
 }
         
 

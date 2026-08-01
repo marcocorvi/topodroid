@@ -425,6 +425,10 @@ public class GlRenderer implements Renderer
     // }
   }
 
+  /** @return access to the DEM
+   * @nore used by TopoGL
+   */
+  ParserDEM getDEM() { return mDEM; }
 
   void setAngles( float azimuth, float clino )
   {

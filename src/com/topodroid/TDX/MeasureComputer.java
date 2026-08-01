@@ -41,9 +41,9 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   TopoGL    mTopoGL;
   ParserDEM mDEM;
   TglMeasure mMeasure;  // result of the measure
-  String     mFullname; // station name
   Cave3DShot mLeg = null;
   final boolean mLongPress;
+  static String mFullname = null; // station name
 
   /** cstr
    * @param topoGL    parent activity
@@ -66,6 +66,8 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
     mDEM       = dem;
     mLongPress = long_press;
   }
+
+  static String getStationFullname() { return mFullname; }
 
   @Override
   protected Integer doInBackground( Void ... v ) 

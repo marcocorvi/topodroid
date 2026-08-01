@@ -46,6 +46,7 @@ public class TdmViewCommand
   Paint mFillPaint;
   float mXoff, mYoff;
   float mScale;
+  private boolean mShowStations = true;
 
   /** cstr
    * @param survey   displayed survey
@@ -70,6 +71,8 @@ public class TdmViewCommand
     mScale = 1.0f;
     // FIXME
   }
+
+  void setShowStations( boolean show ) { mShowStations = show; }
 
   /** @return a station-view (null if not found)
    * @param name   station name
@@ -99,6 +102,10 @@ public class TdmViewCommand
   /** @return the survey name
    */
   String name() { return mSurvey.mName; }
+
+  // /** @return the survey full-name without the project name
+  //  */
+  // String fullname() { return mSurvey.getFullName(); }
 
   /** shift the drawing
    * @param dx  X shift [canvas ?]
@@ -212,22 +219,24 @@ public class TdmViewCommand
       for ( TdmViewPath path : mFixedStack ) path.draw( canvas, mMatrix, mPaint );
     }
     synchronized( mStations ) { // FIXME SYNCH_ON_NON_FINAL
-      float zoom = mScale / 50;
-      int cnt = 0;
-      for ( TdmViewStation st : mStations ) {
-        // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
-        if ( ( cnt % station_rate ) == 0 ) {
-          st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+      if ( mShowStations ) {
+        float zoom = mScale / 50;
+        int cnt = 0;
+        for ( TdmViewStation st : mStations ) {
+          // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
+          if ( ( cnt % station_rate ) == 0 ) {
+            st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+          }
+          ++cnt;
         }
-        ++cnt;
-      }
-      int n = mStations.size() - 1;
-      if ( n > 0 ) {
-        mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-      }
-      if ( mSelected != null ) {
-        mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-        mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );
+        int n = mStations.size() - 1;
+        if ( n > 0 ) {
+          mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+        }
+        if ( mSelected != null ) {
+          mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+          mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );
+        }
       }
     }
   }

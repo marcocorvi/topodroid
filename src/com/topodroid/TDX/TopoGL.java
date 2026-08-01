@@ -243,6 +243,7 @@ public class TopoGL extends MyActivity
   private BitmapDrawable mBMfixOn;
   private BitmapDrawable mBMfixOff;
   private BitmapDrawable mBMclose;
+  private BitmapDrawable mBMinfo;
 
   static int mCheckPerms = -1;
 
@@ -281,6 +282,7 @@ public class TopoGL extends MyActivity
   Button mMeasureStation;
   Button mFixStation;
   Button mCloseStation;
+  Button mInfoStation;
   boolean isMeasuring = false;
   boolean isFixed = false;
 
@@ -402,9 +404,11 @@ public class TopoGL extends MyActivity
     mMeasureStation = (Button) findViewById( R.id.measure_station );
     mFixStation = (Button) findViewById( R.id.fix_station );
     mCloseStation = (Button) findViewById( R.id.close_station );
+    mInfoStation = (Button) findViewById( R.id.info_station );
     mMeasureStation.setOnClickListener( this );
     mFixStation.setOnClickListener( this );
     mCloseStation.setOnClickListener( this );
+    mInfoStation.setOnClickListener( this );
 
     mLayoutStation.setVisibility( View.GONE );
     // mLayoutStation.setOnLongClickListener( this ); // 20250113 replaced with "close" button
@@ -1105,6 +1109,7 @@ public class TopoGL extends MyActivity
       mBMfixOn      = MyButton.getButtonBackground( this, size, R.drawable.iz_station_on );
       mBMfixOff     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_off );
       mBMclose      = MyButton.getButtonBackground( this, size, R.drawable.iz_clear_green );
+      mBMinfo       = MyButton.getButtonBackground( this, size, R.drawable.iz_info_green );
     }
     return size;
   }
@@ -1333,6 +1338,22 @@ public class TopoGL extends MyActivity
     mMeasureStation.setBackground( mBMmeasureOff );
     mFixStation.setBackground( mBMfixOff );
     mCloseStation.setBackground( mBMclose );
+    mInfoStation.setBackground( mBMinfo );
+  }
+
+  /** start the station dialog from the station bar
+   * @param fullname  station fullname
+   */
+  private void startStationDialog( )
+  {
+    String fullname = MeasureComputer.getStationFullname();
+    if ( fullname != null ) {
+      mLayoutStation.setVisibility( View.GONE );
+      isMeasuring = false;
+      isFixed = false;
+      if ( mParser   != null ) mParser.clearStartStation();
+      openDialogStation( mParser, fullname, mRenderer.getDEM() );
+    }
   }
  
   /** hide the selected station
@@ -1444,6 +1465,8 @@ public class TopoGL extends MyActivity
       }
     } else if ( b0 == mCloseStation ) {
       closeCurrentStation();
+    } else if ( b0 == mInfoStation ) {
+      startStationDialog();
     }
   }
 
@@ -3296,6 +3319,11 @@ public class TopoGL extends MyActivity
 
   private static DialogStation mDialogStation = null;
 
+  /** open the station dialog
+   * @param parser    data parser
+   * @param fullname  station fullname
+   * @param dem       DEM
+   */
   void openDialogStation( TglParser parser, String fullname, ParserDEM dem )
   {
     if ( mDialogStation != null ) return;

@@ -356,7 +356,7 @@ public class TglParser
             double cln  = Math.abs(leg.cln) * 180.0 / Math.PI; // degrees
             if ( cln > 10.0 ) {
               double dz = leg.len * Math.sin( leg.cln );
-              if ( cln < 30.0 ) dz *= ( 30.0 - cln )/20.0;
+              if ( cln < 30.0 ) dz *= ( cln - 10.0 )/20.0;
               if ( s0 == leg.to_station ) dz = -dz; // if leg = s3--s0 reverse dz
               if ( dz < 0 ) {
                 dneg += dz;

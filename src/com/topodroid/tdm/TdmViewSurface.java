@@ -31,8 +31,8 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 // import android.view.View;
-
 // import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 
 import java.util.ArrayList;
 // import java.util.TreeSet;
@@ -46,51 +46,6 @@ public class TdmViewSurface extends SurfaceView
                             implements SurfaceHolder.Callback
 {
 
-  final List< TdmPossibleEquate > mPossibleEquates;
-
-  /** clear the list of possible equates
-   */
-  void clearPossibleEquates()
-  {
-    synchronized( mPossibleEquates ) {
-      mPossibleEquates.clear();
-    }
-  }
-  
-  /** add a possible equate
-   * @param st1  first station
-   * @param st2  second station
-   * @return true if success
-   */
-  boolean addPossibleEquate( TdmViewStation st1, TdmViewStation st2 )
-  {
-    if ( st1 == null || st2 == null ) return false;
-    if ( st1.survey() == st2.survey() ) return false; // could test on TdmViewCommands
-    synchronized( mPossibleEquates ) {
-      mPossibleEquates.add( new TdmPossibleEquate( st1, st2 ) );
-    }
-    return true;
-  }
-
-  /** @return true if there are possible equates
-   */
-  boolean hasPossibeEquates() { return mPossibleEquates.size() > 0; }
-
-  /** @return the number of possible equates
-   */
-  int nrPossibleEquates() { return mPossibleEquates.size(); }
-
-  List< TdmPossibleEquate > getPossibleEquates( TdmViewStation st ) 
-  {
-    ArrayList<TdmPossibleEquate> ret = new ArrayList<>();
-    for ( TdmPossibleEquate eq : mPossibleEquates ) {
-      if ( eq.contains( st ) ) ret.add( eq );
-    }
-    return ret;
-  }
-
-  // --------------------------------------------------------------
-
   private Boolean _run;
   protected DrawThread thread;
   public boolean isDrawing = true;
@@ -102,10 +57,12 @@ public class TdmViewSurface extends SurfaceView
   int mHeight;           // canvas height
   private PointF mDisplayCenter;
   private int mStationRate = 1;
+  private int mTouchSlop; // pxl
 
   ArrayList< TdmViewCommand > mCommandManager; // FIXME not private only to export DXF
   TdmViewCommand mCommand = null;
   final List< TdmViewEquate > mEquates;
+  final List< TdmPossibleEquate > mPossibleEquates;
 
   float mXoffset;
   float mYoffset;
@@ -113,6 +70,54 @@ public class TdmViewSurface extends SurfaceView
   private Matrix mMatrix;
   private Paint  mPaint;  // equate paint
   private Paint  mPaint2; // possible equate paint
+
+  /** cstr
+   * @param context  context
+   * @param attrs    ???
+   */
+  public TdmViewSurface(Context context, AttributeSet attrs) 
+  {
+    super(context, attrs);
+    // TDLog.v("Tdm view surface cstr");
+    mWidth = 0;
+    mHeight = 0;
+
+    ViewConfiguration view_config = ViewConfiguration.get( context );
+    mTouchSlop = view_config.getScaledTouchSlop() * 10;
+    TDLog.v("Surface touch slop " + mTouchSlop );
+
+    mXoffset = 0;
+    mYoffset = 0;
+    mZoom    = 1;
+    mStationRate = 1;
+    mMatrix = new Matrix();
+    mPaint  = new Paint();
+    mPaint.setDither(true);
+    mPaint.setColor( 0xffff3333 ); // dark red
+    mPaint.setStyle( Paint.Style.STROKE );
+    mPaint.setPathEffect( new DashPathEffect( new float[]{ 10, 20 }, 0 ) );
+    mPaint.setStrokeJoin(Paint.Join.ROUND);
+    mPaint.setStrokeCap(Paint.Cap.ROUND);
+    mPaint.setStrokeWidth( 2 );
+
+    mPaint2  = new Paint();
+    mPaint2.setDither(true);
+    mPaint2.setColor( 0xffffff33 ); // dark yellow
+    mPaint2.setStyle( Paint.Style.STROKE );
+    mPaint2.setPathEffect( new DashPathEffect( new float[]{ 10, 20 }, 0 ) );
+    mPaint2.setStrokeJoin(Paint.Join.ROUND);
+    mPaint2.setStrokeCap(Paint.Cap.ROUND);
+    mPaint2.setStrokeWidth( 2 );
+
+    thread = null;
+    mContext = context;
+    mAttrs   = attrs;
+    mHolder = getHolder();
+    mHolder.addCallback(this);
+    mCommandManager = new ArrayList< TdmViewCommand >();
+    mEquates = Collections.synchronizedList( new ArrayList< TdmViewEquate >() );
+    mPossibleEquates = Collections.synchronizedList( new ArrayList<TdmPossibleEquate>() );
+  }
 
   /** @return true if there is an equate between the two surveys 
    * @param cmd1   view of the first survey
@@ -184,51 +189,6 @@ public class TdmViewSurface extends SurfaceView
    * @param act   parent activity
    */
   void setActivity( TdmViewActivity act ) { mActivity = act; }
-
-  /** cstr
-   * @param context  context
-   * @param attrs    ???
-   */
-  public TdmViewSurface(Context context, AttributeSet attrs) 
-  {
-    super(context, attrs);
-    // TDLog.v("Tdm view surface cstr");
-    mWidth = 0;
-    mHeight = 0;
-
-    mXoffset = 0;
-    mYoffset = 0;
-    mZoom    = 1;
-    mStationRate = 1;
-    mMatrix = new Matrix();
-    mPaint  = new Paint();
-    mPaint.setDither(true);
-    mPaint.setColor( 0xffff3333 ); // dark red
-    mPaint.setStyle( Paint.Style.STROKE );
-    mPaint.setPathEffect( new DashPathEffect( new float[]{ 10, 20 }, 0 ) );
-    mPaint.setStrokeJoin(Paint.Join.ROUND);
-    mPaint.setStrokeCap(Paint.Cap.ROUND);
-    mPaint.setStrokeWidth( 2 );
-
-    mPaint2  = new Paint();
-    mPaint2.setDither(true);
-    mPaint2.setColor( 0xffffff33 ); // dark yellow
-    mPaint2.setStyle( Paint.Style.STROKE );
-    mPaint2.setPathEffect( new DashPathEffect( new float[]{ 10, 20 }, 0 ) );
-    mPaint2.setStrokeJoin(Paint.Join.ROUND);
-    mPaint2.setStrokeCap(Paint.Cap.ROUND);
-    mPaint2.setStrokeWidth( 2 );
-
-    thread = null;
-    mContext = context;
-    mAttrs   = attrs;
-    mHolder = getHolder();
-    mHolder.addCallback(this);
-    mCommandManager = new ArrayList< TdmViewCommand >();
-    mEquates = Collections.synchronizedList( new ArrayList< TdmViewEquate >() );
-    mPossibleEquates = Collections.synchronizedList( new ArrayList<TdmPossibleEquate>() );
-
-  }
 
   /** clear selected station
    */
@@ -310,6 +270,7 @@ public class TdmViewSurface extends SurfaceView
    */
   void addTdmSurvey( TdmSurvey survey, int color, float xoff, float yoff, ArrayList< TdmEquate > equates )
   {
+    TDLog.v("TDM view add survey " + survey.getFullName() );
     String survey_name = survey.getName();
     int len = survey_name.length();
     // while ( len > 0 && survey_name.charAt( len-1 ) == '.' ) --len; // 2025-12-15
@@ -394,7 +355,7 @@ public class TdmViewSurface extends SurfaceView
     for ( TdmViewCommand command : mCommandManager ) {
       if ( command != cmd ) {
         double d = command.getStationAt( x, y );
-        if ( d < 40 && d < dmin ) {
+        if ( d < mTouchSlop && d < dmin ) {
           dmin = d;
           mCommand = command;
         }
@@ -418,7 +379,8 @@ public class TdmViewSurface extends SurfaceView
    */
   String selectedStationName()
   { 
-    return ( mCommand == null )? null : mCommand.mSelected.name();
+    if ( mCommand == null || mCommand.mSelected == null ) return null;
+    return mCommand.mSelected.name();
   }
 
   /** @return the name of the selected command
@@ -525,7 +487,6 @@ public class TdmViewSurface extends SurfaceView
   // ---------------------------------------------------------------------
   // SELECT - EDIT
 
-
   public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceChanged " );
@@ -557,5 +518,51 @@ public class TdmViewSurface extends SurfaceView
     }
     thread = null;
   }
+
+  // --------------------------------------------------------------
+  // POSSIBLE EQUATES 
+
+  /** clear the list of possible equates
+   */
+  void clearPossibleEquates()
+  {
+    synchronized( mPossibleEquates ) {
+      mPossibleEquates.clear();
+    }
+  }
+  
+  /** add a possible equate
+   * @param st1  first station
+   * @param st2  second station
+   * @return true if success
+   */
+  boolean addPossibleEquate( TdmViewStation st1, TdmViewStation st2 )
+  {
+    if ( st1 == null || st2 == null ) return false;
+    if ( st1.survey() == st2.survey() ) return false; // could test on TdmViewCommands
+    synchronized( mPossibleEquates ) {
+      mPossibleEquates.add( new TdmPossibleEquate( st1, st2 ) );
+    }
+    return true;
+  }
+
+  /** @return true if there are possible equates
+   */
+  boolean hasPossibeEquates() { return mPossibleEquates.size() > 0; }
+
+  /** @return the number of possible equates
+   */
+  int nrPossibleEquates() { return mPossibleEquates.size(); }
+
+  List< TdmPossibleEquate > getPossibleEquates( TdmViewStation st ) 
+  {
+    ArrayList<TdmPossibleEquate> ret = new ArrayList<>();
+    for ( TdmPossibleEquate eq : mPossibleEquates ) {
+      if ( eq.contains( st ) ) ret.add( eq );
+    }
+    return ret;
+  }
+
+  // --------------------------------------------------------------
 
 }

@@ -36,6 +36,7 @@ import com.topodroid.TDX.ExportDialogTdm;
 import com.topodroid.TDX.IExporter;
 // import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDConst;
+import com.topodroid.TDX.MyActivity;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ import java.io.PrintWriter;
 import android.net.Uri;
 
 import android.view.View;
+import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
 
@@ -71,7 +73,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.ParcelFileDescriptor;
 
-public class TdmConfigActivity extends Activity
+public class TdmConfigActivity extends MyActivity
                               implements OnClickListener
                               , OnItemClickListener
                               , IExporter
@@ -199,7 +201,7 @@ public class TdmConfigActivity extends Activity
   protected void onPause()
   {
     super.onPause();
-    // TDLog.v( "TdmConfig activity on pause");
+    TDLog.v( "TdmConfig activity on pause");
     if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // no check on return value
   }
 
@@ -291,6 +293,8 @@ public class TdmConfigActivity extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) {        // CLOSE
+      TDLog.v("CLOSE menu");
+      // if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // already done by onPause
       onBackPressed();
     } else if ( p++ == pos ) {  // EXPORT
       if ( mTdmConfig != null ) {
@@ -464,15 +468,38 @@ public class TdmConfigActivity extends Activity
 
   // ---------------------- SAVE -------------------------------------
 
+  @Override public void onDestroy() { super.onDestroy(); }
+
   /** react to a BACK press
    */
   @Override
   public void onBackPressed()
   {
-    // TDLog.v( "TdmConfig activity back pressed");
+    TDLog.v( "TdmConfig activity back pressed");
     // if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // already done by onPause
     doFinish( TDRequest.RESULT_TDCONFIG_OK );
   }
+
+  /** handle key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override public boolean onKeyUp( int code, KeyEvent event )
+  {
+    TDLog.v("Tdm Config Window key up: code " + code );
+    return backKeyUp( code, event );
+  }
+
+  @Override public boolean onKeyDown( int code, KeyEvent event )
+  {
+    TDLog.v("Tdm Config Window key down: code " + code );
+    if ( code == KeyEvent.KEYCODE_BACK ) {
+      // if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // already done by onPause
+      return backKeyDown( code, event );
+    }
+    return false;
+  }
+
 
   /** react to a user tap 
    * @param view   tapped view

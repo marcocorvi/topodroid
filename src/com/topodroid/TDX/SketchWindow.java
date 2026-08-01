@@ -154,7 +154,7 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_section_ok,    // 14
                         R.drawable.iz_section_no,    // 15
                         R.drawable.iz_open,          // 16
-                        R.drawable.iz_clear,         // 17
+                        R.drawable.iz_clear_blue,    // 17
                         R.drawable.iz_select_station,
                         R.drawable.iz_select_line,
                         R.drawable.iz_menu,

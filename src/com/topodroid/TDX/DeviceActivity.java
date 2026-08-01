@@ -1357,12 +1357,12 @@ public class DeviceActivity extends MyActivity
     super.onBackPressed();
   }
 
-  // /** handle key up event // alternative-169
-  //  * @param code  key code
-  //  * @param ev    key event
-  //  */
-  // @Override
-  // public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
+  /** handle key up event // alternative-169
+   * @param code  key code
+   * @param ev    key event
+   */
+  @Override
+  public boolean onKeyUp( int code, KeyEvent event ) { return backKeyUp( code, event ); }
 
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
@@ -1371,8 +1371,8 @@ public class DeviceActivity extends MyActivity
       // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
       //   onBackPressed(); // FIXME issue 167
       //   return true;
-      // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) // alternative-169
-      //   return backKeyDown( code, event );
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) // alternative-169
+        return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ) );
         return true;

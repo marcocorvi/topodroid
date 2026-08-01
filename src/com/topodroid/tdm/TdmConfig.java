@@ -107,6 +107,7 @@ class TdmConfig extends TdmFile
   void clearEquates()
   {
     mEquates.clear();
+    setSave();
   }
 
   /** insert an equate
@@ -334,7 +335,7 @@ class TdmConfig extends TdmFile
    */
   boolean writeTdmConfig( boolean force )
   {
-    // TDLog.v( "save tdconfig " + this + " save " + mSave + " force " + force );
+    TDLog.v( "save tdconfig " + this + " save " + mSave + " force " + force );
     boolean ret = false;
     if ( mSave || force ) { // was mRead || force
       String filepath = getFilepath();

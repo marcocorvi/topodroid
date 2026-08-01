@@ -251,7 +251,7 @@ class QCamCompass extends Dialog
     }
     buttonSave   = MyButton.getButton( mContext, this, R.drawable.iz_save_off );
     ll_buttons.addView( buttonSave, lp );
-    buttonCancel = MyButton.getButton( mContext, this, R.drawable.iz_clear ); // iz_cancel_transp
+    buttonCancel = MyButton.getButton( mContext, this, R.drawable.iz_clear_blue ); // iz_cancel_transp
     ll_buttons.addView( buttonCancel, lp );
 
     enableButtonSave( false );

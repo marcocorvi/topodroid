@@ -78,7 +78,8 @@
     android:background="#990099ff"
     >
     <LinearLayout
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_weight="100"
       android:layout_height="wrap_content"
       android:layout_gravity="start"
       android:paddingStart="10dp"
@@ -91,21 +92,30 @@
         android:layout_height="wrap_content"
         android:background="#990066cc"
         android:textColor="#ffffffff"
+        android:singleLine="true"
       />
       <Button android:id="@+id/current_coords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#990066cc"
         android:textColor="#ffffffff"
+        android:singleLine="true"
       />
     </LinearLayout>
     <LinearLayout
-      android:layout_width="fill_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="end"
       android:gravity="end"
       android:orientation="horizontal"
       >
+      <Button android:id="@+id/close_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="3dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/iz_clear_green"
+        />
       <Button android:id="@+id/fix_station"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,12 +130,12 @@
         android:paddingEnd="3dp"
         android:background="@drawable/iz_ruler_off"
         />
-      <Button android:id="@+id/close_station"
+      <Button android:id="@+id/info_station"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="3dp"
         android:paddingEnd="8dp"
-        android:background="@drawable/iz_clear_green"
+        android:background="@drawable/iz_info_green"
         />
     </LinearLayout>
   </LinearLayout>

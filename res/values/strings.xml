@@ -54,6 +54,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="tdm_title" copyable="all">TopoDroid Manager</string>
     <string name="tdm_config_project" copyable="all">project.tdconfig</string>
     <string name="double_back">Click BACK again to exit</string>
+    <string name="tdm_disconnected_survey">Disconnected survey</string>
 
     <string name="new_survey_label">New survey</string>
     <string name="distox_label" translatable="false">Survey Device</string>
@@ -1306,6 +1307,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_add_equate">Add surveys equate</string>
     <string name="help_all_equates">All possible equates</string>
     <string name="help_equates">List surveys equates</string>
+    <string name="help_equate_surveys">List equating surveys</string>
     <string name="help_stations_minus">Show fewer stations</string>
     <string name="help_stations_plus">Show more stations</string>
 
@@ -2284,6 +2286,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <string name="title_drop">Drop surveys ?</string>
     <string name="title_tdconfig">Enter project name</string>
+    <string name="title_tdsurveys">Select survey</string>
     <string name="title_surveys">Surveys</string>
     <string name="title_symbols">Active tools</string>
     <string name="title_symbol_choose">Tool selection</string>
