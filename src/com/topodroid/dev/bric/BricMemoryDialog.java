@@ -211,5 +211,9 @@ public class BricMemoryDialog extends MyDialog
     dismiss();
   }
 
+  // @Override public void onDestroy() { super.onDestroy(); }
+  // @Override public boolean onKeyUp( int code, KeyEvent event ) {}
+  // @Override public boolean onKeyDown( int code, KeyEvent event ) {}
+
 
 }

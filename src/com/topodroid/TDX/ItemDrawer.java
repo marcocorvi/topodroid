@@ -465,11 +465,6 @@ abstract class ItemDrawer extends MyActivity
     super.onCreate( savedInstanceState );
   }
 
-  @Override
-  protected void onDestroy() 
-  {
-    super.onDestroy();
-  }
-
+  @Override protected void onDestroy() { super.onDestroy(); }
   
 }

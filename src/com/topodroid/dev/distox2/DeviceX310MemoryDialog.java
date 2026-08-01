@@ -150,4 +150,9 @@ public class DeviceX310MemoryDialog extends MyDialog
     mETdumpfrom.setText( String.format( Locale.US, "%d", index ) );
   }
 
+  // @Override public void onBackPressed() { super.onBackPressed(); }
+  // @Override public void onDestroy() { super.onDestroy(); }
+  // @Override public boolean onKeyUp( int code, KeyEvent event ) {}
+  // @Override public boolean onKeyDown( int code, KeyEvent event ) {}
+
 }

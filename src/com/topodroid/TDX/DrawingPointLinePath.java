@@ -218,23 +218,20 @@ public class DrawingPointLinePath extends DrawingPath
       mFirst.mPrev.mNext = null;
       mFirst.mPrev = null;
     }
-    // THIS SHOULD NOT BE NECESSARY
+    // this should not be necessary but it is here for safety
     if ( mLast != null && mLast.mNext != null ) { // make sure mLast has no next
       if ( mLast.mNext.mPrev == mLast ) mLast.mNext.mPrev = null;
       mLast.mNext = null;
     }
 
-    // THIS SHOULD NOT BE NECESSARY
-    // LinePoint prev = mFirst;
+    // LinePoint prev = mFirst; // should not be necessary
     for ( LinePoint p = mFirst.mNext; p != null; p = p.mNext ) {
-      // THIS SHOULD NOT BE NECESSARY
-      // p.mPrev = prev;
+      // p.mPrev = prev; // should not be necessary
       // prev = p;
       ++ mSize;
       if ( p.mNext == mFirst ) p.mNext = null; // make sure we don't come back to mFirst
     }
-    // THIS SHOULD NOT BE NECESSARY
-    // mLast = prev;
+    // mLast = prev; // should not be necessary
 
     // CHECK;
     // int size = 1;

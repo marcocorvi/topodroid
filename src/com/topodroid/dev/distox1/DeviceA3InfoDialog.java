@@ -174,4 +174,9 @@ public class DeviceA3InfoDialog extends MyDialog
   //   }
   // }
 
+  // @Override public void onBackPressed() { super.onBackPressed(); }
+  // @Override public void onDestroy() { super.onDestroy(); }
+  // @Override public boolean onKeyUp( int code, KeyEvent event ) {}
+  // @Override public boolean onKeyDown( int code, KeyEvent event ) {}
+
 }

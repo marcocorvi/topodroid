@@ -66,8 +66,7 @@ abstract public class MyActivity extends Activity
     registerBackCallback();
   }
 
-  @Override
-  protected void onDestroy() 
+  @Override protected void onDestroy() 
   {
     unregisterBackCallback();
     super.onDestroy();

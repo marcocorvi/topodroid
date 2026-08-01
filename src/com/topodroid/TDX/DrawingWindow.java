@@ -7283,7 +7283,7 @@ public class DrawingWindow extends ItemDrawer
     private void switchPlotType()
     {
       // TDLog.v( "switch plot type ");
-      // mLastLinePath = null; // necessary
+      // mLastLinePath = null; // necessary ?
       if ( mModified ) doSaveTdr( ); // this sets Modified = false after spawning the saving task
       updateReference();
       if ( mType == PlotType.PLOT_PLAN ) {
@@ -9280,7 +9280,7 @@ public class DrawingWindow extends ItemDrawer
   void doRecover( String filename, long type )
   {
     // TDLog.v("Drawing recover " + filename + " type " + type );
-    // mLastLinePath = null; // absolutely necessary
+    // mLastLinePath = null; // necessary ?
     float x = mOffset.x;
     float y = mOffset.y;
     float z = mZoom;
@@ -10277,8 +10277,8 @@ public class DrawingWindow extends ItemDrawer
    */
   void splitPlot( String name, String station, boolean remove ) 
   {
-    // TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SPLIT ); in doSplitPlot
-    // mLastLinePath = null; // absolutely necessary
+    // TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_SPLIT ); // done in doSplitPlot
+    // mLastLinePath = null; // necessary ?
 
     // TDLog.v("split plot " + name + " station " + station );
     // get the DrawingStation of station

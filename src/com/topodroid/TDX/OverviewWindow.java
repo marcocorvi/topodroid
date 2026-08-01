@@ -429,12 +429,6 @@ public class OverviewWindow extends ItemDrawer
     static final private int ROD = 10; // measure path size
 
     @Override
-    public void onDestroy()
-    {
-      super.onDestroy(); // necessary
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) 
     {
       super.onCreate(savedInstanceState);
@@ -1395,14 +1389,26 @@ public class OverviewWindow extends ItemDrawer
     TDandroid.setButtonBackground( mButton1[IC_CONTINUE], (mIsContinue? mBMcontinueOn : mBMcontinueNo) );
   }
 
+  // @Override public void onBackPressed() { super.onBackPressed(); }
+
+  @Override protected void onDestroy()
+  {
+    super.onDestroy(); // NECESSARY ? isn't enough that of ItemDrawer ?
+  }
+
+  @Override public boolean onKeyUp( int code, KeyEvent event )
+  {
+    return backKeyUp( code, event );
+  }
 
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        super.onBackPressed(); // FIXME issue 167
-        return true;
+      //   super.onBackPressed(); // FIXME issue 167
+      //   return true;
+        return backKeyDown( code, event );
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
