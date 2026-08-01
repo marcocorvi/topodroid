@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TopoDroidX" default="help">
+
+    <!-- The local.properties file is created and updated by the 'android' tool.
+         It contains the path to the SDK. It should *NOT* be checked into
+         Version Control Systems. -->
+    <property environment="env" />
+
+    <property file="ant/local.properties" />
+
+    <property file="ant/build.properties" />
+
+    <!-- The ant.properties file can be created by you. It is only edited by the
+         'android' tool to add properties to it.
+         This is the place to change some Ant specific build properties.
+         Here are some properties you may want to change/update:
+
+         source.dir
+             The name of the source directory. Default is 'src'.
+         out.dir
+             The name of the output directory. Default is 'bin'.
+
+         For other overridable properties, look at the beginning of the rules
+         files in the SDK, at tools/ant/build.xml
+
+         Properties related to the SDK location or the project target should
+         be updated using the 'android' tool with the 'update' action.
+
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems.
+
+         -->
+    <!-- property file="ant.properties" / -->
+
+    <!-- The project.properties file is created and updated by the 'android'
+         tool, as well as ADT.
+
+         This contains project specific properties such as project target, and library
+         dependencies. Lower level build properties are stored in ant.properties
+         (or in .classpath for Eclipse projects).
+
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems. -->
+
+    <loadproperties srcFile="project.properties" />
+
+    <!-- quick check on sdk.dir -->
+    <fail
+            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
+            unless="sdk.dir"
+    />
+
+
+<!-- extension targets. Uncomment the ones where you want to do custom work
+     in between standard targets -->
+
+<!--
+    <target name="kotlin-compile">
+	<path id="project.javac.classpath">
+		<path refid="project.all.jars.path" />
+		<path refid="tested.project.classpath" />
+		<path path="${java.compiler.classpath}" />
+		<path path="${project.target.android.jar}" />
+		<path path="${out.classes.absolute.dir}" />
+	</path>
+	<kotlinc src="src" output="bin/classes"
+                 classpathref="project.javac.classpath" >
+	</kotlinc>
+    </target>
+
+    <target name="-pre-compile" depends="kotlin-compile">
+    </target>
+-->
+
+<!--
+    <target name="-pre-build">
+    </target>
+
+    /* This is typically used for code obfuscation.
+       Compiled code location: ${out.classes.absolute.dir}
+       If this is not done in place, override ${out.dex.input.absolute.dir} */
+    <target name="-post-compile">
+    </target>
+-->
+
+    <!-- Import the actual build file.
+
+         To customize existing targets, there are two options:
+         - Customize only one target:
+             - copy/paste the target into this file, *before* the
+               <import> task.
+             - customize it to your needs.
+         - Customize the whole content of build.xml
+             - copy/paste the content of the rules files (minus the top node)
+               into this file, replacing the <import> task.
+             - customize to your needs.
+
+         ***********************
+         ****** IMPORTANT ******
+         ***********************
+         In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
+         in order to avoid having your file be overridden by tools such as "android update project"
+    -->
+    <!-- version-tag: 1 -->
+
+    <!-- property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" / -->
+    <property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" />
+
+    <!-- d8 uses the jars in lind8 -->
+
+    <!-- leave the jars files in for the class reference in AIhelper -->
+    <!-- property name="java.compiler.classpath" value="" / -->
+    <!-- property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava.jar:libjars/lifecycle.jar" / -->
+
+    <!-- only JAVA 8 -->
+    <!-- GEMMA3
+        <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar:libjars/genai-0.10.32.jar" />
+    -->
+    <!-- property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar:libjars/support-annotations-28.0.0.jar" / -->
+    <property name="java.compiler.classpath" value="libjars/generativeai.jar:libjars/guava-33.0.0-android.jar" />
+
+    <property name="build.is.signing.debug" value="false" />
+    <!-- <property name="jars.libs.dir" value="libs" /> -->
+
+    <!-- make this true if want to extract classes from jars in libjars and add then to compiled classes -->
+    <property name="lib.jars.enabled" value="false" />
+    <property name="lib.jars" location="/home/programs/android-sdk/samples/android-8/topodroid/ant/lib.jars.sh" />
+    <!-- property name="project.all.jars.path" value="libs" / -->
+
+    <property name="multi.dex.enabled" value="true" />
+    <property name="multi.dex" location="/home/programs/android-sdk/samples/android-8/topodroid/ant/multi.dex.sh" />
+
+    <!--
+    <package-helper>
+       <extra-jars>
+          <jarfolder path="libs" />
+       </extra-jars>
+    </package-helper>
+    -->
+
+    <!-- GEMMA3
+        <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/genai-0.10.32.jar:libjars/tasks-core-0.10.32.jar:bin/classes" />
+   -->
+   <!-- -Xlint:deprecation -->
+   <!-- property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/support-annotations-28.0.0.jar:bin/classes" / -->
+   <property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:bin/classes" />
+
+   <import file="${sdk.dir}/tools/ant/build.xml" />
+   
+
+</project>
