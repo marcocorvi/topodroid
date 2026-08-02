@@ -61,14 +61,15 @@ public class ShpPolyline extends ShpObject
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
 
-    int n_fld = 4; // type from to flag comment
+    int n_fld = 5; // type from to flag comment //HBShp
     String[] fields = new String[ n_fld ];
     fields[0] = "type";
     fields[1] = "name";
     fields[2] = "levels";
     fields[3] = "scrap";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { SIZE_TYPE, SIZE_NAME, SIZE_LEVELS, SIZE_SCRAP };
+	fields[4] = "scale"; //HBShp
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC }; // use only strings //HBShp
+    int[]    flens  = { SIZE_TYPE, SIZE_NAME, SIZE_LEVELS, SIZE_SCRAP, SIZE_SCALE }; //HBShp
 
     int shpLength = 50;
     for ( DrawingPointLinePath ln : lns ) {
@@ -102,20 +103,23 @@ public class ShpPolyline extends ShpObject
 	if ( ln.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath line = (DrawingLinePath)ln;
           fields[0] = "line";
-	  fields[1] = line.getThName( );
+	      fields[1] = line.getThName( );
           fields[2] = Integer.toString( line.mLevel );
           fields[3] = Integer.toString( line.mScrap );
+		  fields[4] = Integer.toString( line.getScale() ); //HBShp
 	} else if ( ln.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath area = (DrawingAreaPath)ln;
           fields[0] = "area";
-	  fields[1] = area.getThName( );
+	      fields[1] = area.getThName( );
           fields[2] = Integer.toString( area.mLevel );
           fields[3] = Integer.toString( area.mScrap );
+		  fields[4] = Integer.toString( area.getScale() ); //HBShp
 	} else {
-	  fields[0] = "undef";
+	      fields[0] = "undef";
           fields[1] = "undef";
           fields[2] = "0";
           fields[3] = "0";
+		  fields[4] = "0"; //HBShp
 	}
         int close = ( ln.mType == DrawingPath.DRAWING_PATH_AREA || ln.isClosed() )? 1 : 0;
 	int shp_len = getShpRecordLength( ln.size() + close );
