@@ -16,10 +16,10 @@ import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDsafUri;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyColorPicker.IColorChanged;
-import com.topodroid.TDX.TDLevel;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -34,6 +34,7 @@ import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.ExportDialogTdm;
 import com.topodroid.TDX.IExporter;
+import com.topodroid.TDX.TDLevel;
 // import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.MyActivity;
@@ -378,6 +379,7 @@ public class TdmConfigActivity extends MyActivity
    */
   void doDelete()
   {
+    TopoDroidApp.updateAnalytic( TDAnalytics.TDM_DELETE );
     // if ( ! TdManagerApp.deleteTdmConfigFile( mTdmConfig.getFilepath() ) ) { 
     //   TDToast.make( "delete FAILED" );
     // } else {

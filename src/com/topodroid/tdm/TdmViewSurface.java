@@ -212,7 +212,7 @@ public class TdmViewSurface extends SurfaceView
   /** add a set of equates to the scene
    * @param equates   list of equates to add to the scene
    */
-  void addEquates( ArrayList< TdmEquate > equates )
+  void addViewEquates( ArrayList< TdmEquate > equates )
   {
     // TDLog.v("View surface: add equates: size " + equates.size() + " cmd " + mCommandManager.size() );
     synchronized( mEquates ) {

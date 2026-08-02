@@ -2198,6 +2198,7 @@
     <!-- UNUSED string name="equate_no_station">Nincs kiválasztott pont</string -->
     <string name="equate_no_stations">Túl kevés pont</string>
     <string name="equate_no_nearby">Nincs közelben pont</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
 
     <!-- UNUSED string name="menu_new">ÚJ</string -->
     <!-- UNUSED string name="menu_equate">KAPCSOLÓDÁSOK HOZZÁADÁSA</string -->

@@ -1131,7 +1131,7 @@ public class TopoGL extends MyActivity
     //   return true;
     // }
     // if ( v.getId() == R.id.layout_station ) { // 20250113 replaced with "close" button
-    //   closeCurrentStation();
+    //   closeCurrentStation( false );
     //   return true;
     // }
 
@@ -1143,7 +1143,7 @@ public class TopoGL extends MyActivity
     //   mSelectStation = ! mSelectStation;
     //   // TDLog.v("TopoGL on long click " + mSelectStation );
     //   setButtonStation();
-    //   closeCurrentStation();
+    //   closeCurrentStation( false );
     } else if ( b == mButton1[ BTN_SPLAYS ] ) {
       // if ( BLUETOOTH && mWithBluetooth ) {
       //   new DialogManualLeg( this, this ).show();
@@ -1343,28 +1343,32 @@ public class TopoGL extends MyActivity
 
   /** start the station dialog from the station bar
    * @param fullname  station fullname
+   * @note called only from station-bar button (i)
    */
   private void startStationDialog( )
   {
     String fullname = MeasureComputer.getStationFullname();
     if ( fullname != null ) {
-      mLayoutStation.setVisibility( View.GONE );
-      isMeasuring = false;
-      isFixed = false;
-      if ( mParser   != null ) mParser.clearStartStation();
+      // mLayoutStation.setVisibility( View.GONE );
+      // isMeasuring = false;
+      // isFixed = false;
+      // if ( mParser   != null ) mParser.clearStartStation();
       openDialogStation( mParser, fullname, mRenderer.getDEM(), true );
     }
   }
  
   /** hide the selected station
+   * @param caller_is_bar whether the call comes from the station-dialog on behalf of the station-bar
    */
-  void closeCurrentStation()
+  void closeCurrentStation( boolean caller_is_bar )
   {
-    mLayoutStation.setVisibility( View.GONE );
     isMeasuring = false;
     isFixed = false;
-    if ( mRenderer != null ) mRenderer.clearStationHighlight();
-    if ( mParser   != null ) mParser.clearStartStation();
+    if ( ! caller_is_bar ) {
+      mLayoutStation.setVisibility( View.GONE );
+      if ( mRenderer != null ) mRenderer.clearStationHighlight();
+      if ( mParser   != null ) mParser.clearStartStation();
+    }
     GlNames.setHLcolorG( 0.0f );
   }
 
@@ -1405,7 +1409,7 @@ public class TopoGL extends MyActivity
       return;
     } 
     // if ( id == R.id.current_station ) {
-    //   closeCurrentStation();
+    //   closeCurrentStation( false );
     //   return;
     // }
 
@@ -1447,7 +1451,7 @@ public class TopoGL extends MyActivity
     //   // TDLog.v("TopoGL BT button click ");
     //   if ( hasBluetoothName() ) doBluetoothClick();
 
-    } else if ( b0 == mMeasureStation ) {
+    } else if ( b0 == mMeasureStation ) { // STATION MEASURE
       if ( isMeasuring ) {
         mMeasureStation.setBackground( mBMmeasureOff );
         isMeasuring = false;
@@ -1455,7 +1459,7 @@ public class TopoGL extends MyActivity
         mMeasureStation.setBackground( mBMmeasureOn );
         isMeasuring = true;
       }
-    } else if ( b0 == mFixStation ) {
+    } else if ( b0 == mFixStation ) { // STATION FIX
       if ( centerAtCurrentStation() ) {
         mFixStation.setBackground( mBMfixOn );
         isFixed = true;
@@ -1463,9 +1467,9 @@ public class TopoGL extends MyActivity
         mFixStation.setBackground( mBMfixOff );
         isFixed = false;
       }
-    } else if ( b0 == mCloseStation ) {
-      closeCurrentStation();
-    } else if ( b0 == mInfoStation ) {
+    } else if ( b0 == mCloseStation ) { // STATION CLOSE
+      closeCurrentStation( false );
+    } else if ( b0 == mInfoStation ) { // STATION INFO
       startStationDialog();
     }
   }
@@ -3335,7 +3339,8 @@ public class TopoGL extends MyActivity
   boolean closeDialogStation()
   {
     if ( mDialogStation == null ) return false;
-    mDialogStation.onClick( null );
+    // mDialogStation.onClick( null );
+    mDialogStation.onBackPressed();
     mDialogStation = null;
     return true;
   }

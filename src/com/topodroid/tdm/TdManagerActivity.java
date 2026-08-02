@@ -296,6 +296,7 @@ public class TdManagerActivity extends MyActivity
   void startTdmConfigActivity( TdmConfig tdconfig )
   {
     // TDLog.v( "start tdconfig activity for " + tdconfig.toString() );
+    TopoDroidApp.updateAnalytic( TDAnalytics.TDM_OPEN );
     Intent intent = new Intent( this, TdmConfigActivity.class );
     intent.putExtra( TDRequest.TDCONFIG_PATH, tdconfig.getFilepath() );
     try {
@@ -323,6 +324,7 @@ public class TdManagerActivity extends MyActivity
       TDToast.make( R.string.error_name_exists );
       return;
     }
+    TopoDroidApp.updateAnalytic( TDAnalytics.TDM_NEW );
     TdmConfig tdconfig = new TdmConfig( path, true ); // true: save
     // updateTdmConfigList();
     mTdmConfigAdapter.add( tdconfig );

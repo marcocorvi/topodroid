@@ -2171,6 +2171,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="equate_no_station">No station selected</string -->
     <string name="equate_no_stations">Прекалено малко репери</string>
     <string name="equate_no_nearby">Няма близки репери</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
 
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->

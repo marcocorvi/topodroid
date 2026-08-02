@@ -2255,6 +2255,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <!-- UNUSED string name="equate_no_station">Aucune station sélectionnée</string -->
     <string name="equate_no_stations">Trop peu de stations</string>
     <string name="equate_no_nearby">Pas de station à proximité</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
 
     <!-- UNUSED string name="menu_new">NOUVEAU</string -->
     <!-- UNUSED string name="menu_equate">AJOUT EGALITE</string -->

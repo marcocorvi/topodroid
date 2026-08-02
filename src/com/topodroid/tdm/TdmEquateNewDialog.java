@@ -12,8 +12,10 @@
 package com.topodroid.tdm;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
 
 // import java.util.List;
@@ -76,6 +78,7 @@ class TdmEquateNewDialog extends MyDialog
       mEdit[k] = null;
       // mSpinner[k] = null;
     }
+    TopoDroidApp.updateAnalytic( TDAnalytics.TDM_EQ_DIALOG );
   }
 
   public void onCreate( Bundle bundle )
@@ -109,7 +112,7 @@ class TdmEquateNewDialog extends MyDialog
       
       LinearLayout layout = new LinearLayout( mContext );
       TextView text = new TextView( mContext );
-      text.setText( vc.name() );
+      text.setText( vc.fullname() );
       mEdit[k] = new EditText( mContext );
       mEdit[k].setHint( R.string.ellipsis );
       

@@ -2179,6 +2179,7 @@
     <!-- UNUSED string name="equate_no_station">Пикеты не выбраны</string -->
     <string name="equate_no_stations">Слишком мало пикетов</string>
     <string name="equate_no_nearby">Нет пикета поблизости</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
 
     <!-- UNUSED string name="menu_new">НОВЫЙ</string -->
     <!-- UNUSED string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string -->

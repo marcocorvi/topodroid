@@ -2060,6 +2060,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="equate_no_station">Nenhuma base selecionada</string -->
   <string name="equate_no_stations">Poucas bases</string>
   <string name="equate_no_nearby">Nenhuma base próxima</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
   <!-- UNUSED string name="menu_new">NEW</string -->
   <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
   <!-- UNUSED string name="menu_equates">EQUATES</string -->

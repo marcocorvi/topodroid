@@ -1310,26 +1310,6 @@ public class MainWindow extends Activity
     // TODO OPEN DATABASE HERE
     boolean ok_folder = TopoDroidApp.initEnvironmentThird();
 
-    // TDLog.v( "Main init environment third done return " + ok_folder );
-    // FIXME_HICSUM
-    // if ( TDandroid.mHicsum == null ) {
-    //   if ( ! TDandroid.checkCoarseLocation( this ) ) {
-    //     // TODO request LOCATION permission
-    //     // requestPermissions( new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS ); 
-    //     TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.location_required, 
-    //       new DialogInterface.OnClickListener() {
-    //         @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
-    //       }
-    //     );
-    //   } else {
-    //     PointF pt = new PointF();
-    //     TDandroid.getCoarseLocation( this, pt );
-    //   }
-    // } else {
-    //   // TDLog.v("Main Hicsum in db " + mHicsum );
-    //   TopoDroidApp.notifyHicsum( this, TDandroid.mHicsum );
-    // }
-
     // FIXME_CT
     TopoDroidApp.checkCT( this );
 

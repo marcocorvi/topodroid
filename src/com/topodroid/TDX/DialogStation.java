@@ -107,9 +107,7 @@ class DialogStation extends MyDialog
   public void onClick(View v)
   {
     if ( v.getId() == R.id.button_close ) {
-      if ( ! mCallerIsBar ) {
-        mTopoGl.closeCurrentStation();
-      }
+      mTopoGl.closeCurrentStation( false );
     } else if ( v.getId() == R.id.button_cancel ) {
       // nothing
     }
@@ -122,9 +120,7 @@ class DialogStation extends MyDialog
   public void onBackPressed()
   {
     TDLog.v("Dialog station on back pressed");
-    if ( ! mCallerIsBar ) {
-      mTopoGl.closeCurrentStation();
-    }
+    mTopoGl.closeCurrentStation( mCallerIsBar );
     // super.onBackPressed(); // issue 167
     dismiss();
   }

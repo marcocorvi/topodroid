@@ -61,7 +61,7 @@ public class ShpPolyline extends ShpObject
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
 
-    int n_fld = 5; // type from to flag comment //HBShp
+    int n_fld = 5; // type name levels scrap scale //HBShp
     String[] fields = new String[ n_fld ];
     fields[0] = "type";
     fields[1] = "name";

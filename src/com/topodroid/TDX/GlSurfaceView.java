@@ -182,11 +182,12 @@ class GlSurfaceView extends GLSurfaceView
   {
     mTopoGl.closeMenu();
     if ( e == null ) return true;
-    TDLog.v("GL surface view on touch " + e.getX() + " " + e.getY() );
+    // TDLog.v("GL surface view on touch " + e.getX() + " " + e.getY() + " action " + e.getAction() );
     mTopoGl.closeDialogStation();
     float x0, y0, x1, y1, dx, dy;
     switch (e.getAction()) {
       case MotionEvent.ACTION_DOWN:
+        // TDLog.v("ACTION DOWN");
         doRotate = false;
         // mIsDragging = false;
         // mHadMultitouch = false;
@@ -197,14 +198,14 @@ class GlSurfaceView extends GLSurfaceView
           mOnePointerDown = new PointF( mPreviousX, mPreviousY );
           mOnePointerTime = System.currentTimeMillis();
         } else { // this never occurs
-          // TDLog.v("Reset one-pointer 2 : null" );
+          // TDLog.v("Reset one-pointer on two : null" );
           mOnePointerDown = null;
         }
         return true;
       case MotionEvent.ACTION_UP:
       case MotionEvent.ACTION_POINTER_UP:
+        // TDLog.v("ACTION UP pointers " + e.getPointerCount() );
         doRotate = false;
-        // TDLog.v("Action up pointers " + e.getPointerCount() );
         if ( e.getPointerCount() == 1 ) { 
           final float xx = e.getX();
           final float yy = e.getY();
@@ -225,6 +226,7 @@ class GlSurfaceView extends GLSurfaceView
           isNearOnePointerDown( x0, y0 );
           dx = x0 - mPreviousX;
           dy = y0 - mPreviousY;
+          // TDLog.v("ACTION MOVE 1-ptr " + x0 + " " + y0 + " -> " + dx + " " + dy );
           if ( doRotate ) {
             if ( mLightMode ) { // light/move
               if ( mRenderer.hasSurface() ) {
@@ -241,7 +243,7 @@ class GlSurfaceView extends GLSurfaceView
           mPreviousY = y0;
           doRotate = true;
         } else if ( e.getPointerCount() == 2 ) { // translate+scale
-          // TDLog.v("Reset one-pointer 3 : null" );
+          // TDLog.v("ACTION MOVE two pointers : Reset one-pointer 3 : null" );
           mOnePointerDown = null;
           doRotate = false;
           x0 = e.getX(0);
@@ -261,10 +263,16 @@ class GlSurfaceView extends GLSurfaceView
           mDistance = dist;
           mPreviousX = x0;
           mPreviousY = y0;
+        } else {
+          TDLog.v("ACTION MOVE many pointers : Reset one-pointer 3 : null" );
+          mOnePointerDown = null;
+          doRotate = false;
+          mPreviousX = e.getX(0);
+          mPreviousY = e.getY(0);
         }
         return true;
       case MotionEvent.ACTION_POINTER_DOWN: 
-        // TDLog.v("Reset one-pointer 4 : null" );
+        // TDLog.v("ACTION POINTER DOWN Reset one-pointer 4 : null" );
         mOnePointerDown = null;
         doRotate = false;
         if ( e.getPointerCount() == 2 ) {
@@ -279,6 +287,8 @@ class GlSurfaceView extends GLSurfaceView
           mPreviousY = (y0 + y1)/2;
         }
         return true;
+      default:
+        TDLog.e("ACTION " + e.getAction() + " not handled" );
     }
     return false;
   }

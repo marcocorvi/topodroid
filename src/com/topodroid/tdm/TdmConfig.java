@@ -16,6 +16,7 @@ import com.topodroid.util.TDFile;
 import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.TDX.TglColor;
 import com.topodroid.TDX.TopoDroidApp;
 
@@ -28,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
+import java.util.List;
 import java.util.ArrayList;
 // import java.util.Date;
 // import java.text.SimpleDateFormat;
@@ -82,6 +84,9 @@ class TdmConfig extends TdmFile
       mViewSurveys.add( reduced_survey );
     }
     // TDLog.v("Tdm config populate reduced surveys " + reduced_surveys.size() );
+    if ( reduced_surveys.size() > 0 ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.TDM_DISCONNECED );
+    }
   }
 
   /** drop the equates with a given survey
@@ -129,6 +134,35 @@ class TdmConfig extends TdmFile
     // TDLog.v("Config remove equate " + equate.stationsString() );
     mEquates.remove( equate );
     setSave();
+  }
+
+  /** @return true if there is already an equate between two stations
+   * @param st1  first station fullname
+   * @param st2  second station fullname
+   */
+  boolean hasEquate( String st1, String st2 )
+  {
+    for ( TdmEquate eq : mEquates ) {
+      if ( eq.contains( st1 ) && eq.contains( st2 ) ) return true;
+    }
+    return false;
+  }
+
+  /** @return true if there is already an equate between two of the stations
+   * @param sts  list of station fullnames
+   */
+  boolean hasEquate( List<String> sts )
+  {
+    for ( TdmEquate eq : mEquates ) {
+      boolean one_station = false;
+      for ( String st : sts ) {
+        if ( eq.contains( st ) ) {
+          if ( one_station ) return true;
+          one_station = true;
+        }
+      }
+    }
+    return false;
   }
     
   /** @return true if the cave-project has a given input

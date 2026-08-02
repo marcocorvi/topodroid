@@ -2188,6 +2188,7 @@
     <!-- UNUSED string name="equate_no_station">无选定的测量点</string -->
     <string name="equate_no_stations">测量点太少</string>
     <string name="equate_no_nearby">无附近测量点</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
 
     <!-- UNUSED string name="menu_new">新建</string -->
     <!-- UNUSED string name="menu_equate">添加相同</string -->

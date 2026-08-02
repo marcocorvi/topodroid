@@ -42,6 +42,13 @@ public class TDAnalytics
   public static final String DIVING        = "Ndive";
   public static final String BLUNDER       = "Nblunder";
 
+  public static final String TDM_NEW       = "CPnew";
+  public static final String TDM_OPEN      = "CPopn";
+  public static final String TDM_DELETE    = "CPdel";
+  public static final String TDM_EQ_DIALOG = "CPeqd";  // equate-new dialog
+  public static final String TDM_EQ_VIEW   = "CPeqv";  // equate view
+  public static final String TDM_DISCONNECED = "CPdisc";
+
   public static final String PLOT_NEW      = "1plot";  // new plot
   public static final String PLOT_FLIP     = "1flip";  // flipProfile
   public static final String PLOT_COPY     = "1copy";
@@ -350,16 +357,6 @@ public class TDAnalytics
     if ( ct == null ) return;
     doSetCT( ctx, ct );
   }
-
-  // FXIME_HICSUM
-  // /** handle the app place
-  //  * @param hs   karst area of the app
-  //  */
-  // public static void setHicsum( String hs )
-  // {
-  //   if ( hs == null ) return;
-  //   // TODO
-  // }
 
   private static void doSetCT( Context ctx, String ct )
   {

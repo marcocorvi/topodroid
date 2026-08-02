@@ -2203,6 +2203,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="equate_no_station">No se seleccionó ningún punto de referencia</string -->
     <string name="equate_no_stations">Muy pocos puntos fuertes</string>
     <string name="equate_no_nearby">No hay punto fuerte</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
 
     <!-- UNUSED string name="menu_new">Nuevo</string -->
     <!-- UNUSED string name="menu_equate">Agregar equivalente</string -->

@@ -149,7 +149,7 @@ public class TdmSurvey
   /** add an equate to the survey
    * @param equate   equate to add
    */
-  void addEquate( TdmEquate equate ) { mEquates.add( equate ); }
+  void addSurveyEquate( TdmEquate equate ) { mEquates.add( equate ); }
 
   /** add a sub-survey to the survey
    * @param survey   sub-survey to add
@@ -197,6 +197,7 @@ public class TdmSurvey
   /** data reduction
    * data reduction consumes the equates that are resolved inside the survey stations
    * without considering the child surveys
+   * @param surveys  list to append surveys and child surveys
    */
   void reduce( List< TdmSurvey > surveys )
   {

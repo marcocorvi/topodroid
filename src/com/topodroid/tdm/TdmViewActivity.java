@@ -14,6 +14,7 @@ package com.topodroid.tdm;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
+import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -199,6 +200,7 @@ public class TdmViewActivity extends MyActivity
     {
       super.onCreate(savedInstanceState);
 
+      TopoDroidApp.updateAnalytic( TDAnalytics.TDM_EQ_VIEW );
       getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
       // Display display = getWindowManager().getDefaultDisplay();
@@ -667,8 +669,8 @@ public class TdmViewActivity extends MyActivity
       // manually add equate
       if ( mNrSurveys <= 1 ) {
          /* nothing */
-      } else if ( isMultipleSurvey() ) {
-        // TDToast.make( R.string.tdm_disconnected_survey );
+      // } else if ( isMultipleSurvey() ) {
+      //   // TDToast.make( R.string.tdm_disconnected_survey );
       } else {
         new TdmEquateNewDialog( this, this, mDrawingSurface.mCommandManager ).show();
       }
@@ -714,6 +716,10 @@ public class TdmViewActivity extends MyActivity
 
   void makeEquate( String st1, String st2 )
   {
+    if ( TdmConfigActivity.mTdmConfig.hasEquate( st1, st2 ) ) {
+      TDToast.make(  R.string.equate_exists );
+      return;
+    }
     TdmEquate equate = new TdmEquate();
     equate.addStation( st1 );
     equate.addStation( st2 );
@@ -728,6 +734,10 @@ public class TdmViewActivity extends MyActivity
       TDToast.make( R.string.equate_no_stations );
       return;
     }
+    if ( TdmConfigActivity.mTdmConfig.hasEquate( sts ) ) {
+      TDToast.make(  R.string.equate_exists );
+      return;
+    }
     TdmEquate equate = new TdmEquate();
     for ( String st : sts ) equate.addStation( st );
     // TDLog.v( "add equate: " + equate.stationsString() );
@@ -737,7 +747,7 @@ public class TdmViewActivity extends MyActivity
 
   void updateViewEquates()
   {
-    mDrawingSurface.addEquates( TdmConfigActivity.mTdmConfig.getEquates() );
+    mDrawingSurface.addViewEquates( TdmConfigActivity.mTdmConfig.getEquates() );
   }
 
   @Override

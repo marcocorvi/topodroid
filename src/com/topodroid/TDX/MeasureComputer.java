@@ -130,7 +130,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
         mTopoGL.refresh();
         break;
       case MEASURE_SAME_STATION:
-        mTopoGL.closeCurrentStation();
+        mTopoGL.closeCurrentStation( false );
         break;
       // case MEASURE_NO_STATION:
       //   TDLog.w("path: null station" );

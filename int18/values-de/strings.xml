@@ -2089,6 +2089,7 @@
   <!-- UNUSED string name="equate_no_station">Kein Messpunkt ausgewählt</string -->
   <string name="equate_no_stations">Zu wenige Messpunkte</string>
   <string name="equate_no_nearby">Kein Messpunkt in der Nähe</string>
+    <!-- TODO string name="equate_exists">Stations already equated</string -->
   <!-- UNUSED string name="menu_new">NEU</string -->
   <!-- UNUSED string name="menu_equate">NEUE ÜBERSCHNEIDUNG</string -->
   <!-- UNUSED string name="menu_equates">ÜBERSCHNEIDUNGEN</string -->

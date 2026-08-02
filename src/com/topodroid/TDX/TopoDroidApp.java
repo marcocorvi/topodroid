@@ -1265,7 +1265,6 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp device etc.");
     if ( mDData != null ) { 
-      // TDandroid.mHicsum = mDData.getValue( "hicsum" ); // FIXME_HICSUM
       TDInstance.setDeviceA( mDData.getDevice( prefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) ) );
     }
 
@@ -3639,17 +3638,6 @@ public class TopoDroidApp extends Application
     if ( blk == null || ! blk.isScan() ) return null;
     return mData.selectShot( blk.mId, TDInstance.sid );
   }
-
-  // FIXME_HICSUM
-  // /** notify the app point
-  //  * @param ctx    context
-  //  * @param hicsum app point
-  //  */
-  // static void notifyHicsum( Context ctx, String hicsum )
-  // {
-  //   // TDLog.v("with app point " + hicsum );
-  //   TDAnalytics.setHicsum( Region.get( hicsum ) );
-  // }
 
   // ----------------------------------------------------------------------------
   // ANALYTICS

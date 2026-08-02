@@ -2267,6 +2267,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="equate_no_station">No station selected</string -->
     <string name="equate_no_stations">Too few stations</string>
     <string name="equate_no_nearby">No station nearby</string>
+    <string name="equate_exists">Stations already equated</string>
 
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->

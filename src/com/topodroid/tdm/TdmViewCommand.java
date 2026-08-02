@@ -103,9 +103,9 @@ public class TdmViewCommand
    */
   String name() { return mSurvey.mName; }
 
-  // /** @return the survey full-name without the project name
-  //  */
-  // String fullname() { return mSurvey.getFullName(); }
+  /** @return the survey full-name without the project name
+   */
+  String fullname() { return mSurvey.getFullName(); }
 
   /** shift the drawing
    * @param dx  X shift [canvas ?]
