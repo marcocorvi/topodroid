@@ -382,7 +382,7 @@ public class TdmSurvey
     }
     if ( used_shots < shots_size ) {
       // TDLog.v("shots used " + used_shots + " of " + shots_size );
-      TdmSurvey survey = new TdmSurvey( mName );
+      TdmSurvey survey = new TdmSurvey( mName, mColor ); // child survey inherits color
       ArrayList< TdmShot > shots = new ArrayList<>();
       for ( TdmShot sh : mShots ) {
         if ( sh.mFromStation == null ) {

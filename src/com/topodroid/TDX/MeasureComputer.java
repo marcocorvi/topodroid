@@ -138,7 +138,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
       //   break;
       case MEASURE_NO_START:
         if ( mLongPress /* TopoGL.mStationDialog */ ) {
-          mTopoGL.openDialogStation( mParser, mFullname, mDEM );
+          mTopoGL.openDialogStation( mParser, mFullname, mDEM, false );
         } else {
           Cave3DStation st = mParser.getStation( mFullname );
           if ( st != null ) {

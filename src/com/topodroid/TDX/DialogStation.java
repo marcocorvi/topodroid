@@ -39,8 +39,9 @@ class DialogStation extends MyDialog
   private final Cave3DStation  mStation;
   private final DEMsurface  mSurface;
   private final String      mEquates;
+  private final boolean     mCallerIsBar; // whether the caller is the station-bar
 
-  public DialogStation( Context context, TopoGL topogl, TglParser parser, String fullname, DEMsurface surface )
+  public DialogStation( Context context, TopoGL topogl, TglParser parser, String fullname, DEMsurface surface, boolean caller_is_bar )
   {
     super(context, null, R.string.DialogStation ); // null app
     mTopoGl  = topogl;
@@ -48,6 +49,7 @@ class DialogStation extends MyDialog
     mStation = mParser.getStation( fullname );
     mEquates = mParser.getEquates( fullname );
     mSurface = ( surface != null )? surface : parser.getSurface();
+    mCallerIsBar = caller_is_bar;
   }
 
   @Override
@@ -81,6 +83,7 @@ class DialogStation extends MyDialog
       tv.setText( sw3.getBuffer().toString() );
 
       ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
 
       mTvSurface  = (TextView) findViewById( R.id.st_surface );
       if ( mSurface != null ) {
@@ -88,7 +91,7 @@ class DialogStation extends MyDialog
         // TDLog.v("Surface station " + mStation.z + " surface " + zs );
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter( sw );
-        pw.format(Locale.US, "Depth %.1f", zs - mStation.z );
+        pw.format(Locale.US, mContext.getResources().getString( R.string.depth_format), zs - mStation.z );
         mTvSurface.setText( sw.getBuffer().toString() );
       } else {
         mTvSurface.setVisibility( View.GONE );
@@ -103,8 +106,13 @@ class DialogStation extends MyDialog
   @Override
   public void onClick(View v)
   {
-    TDLog.v("Dialog station on click");
-    mTopoGl.closeCurrentStation();
+    if ( v.getId() == R.id.button_close ) {
+      if ( ! mCallerIsBar ) {
+        mTopoGl.closeCurrentStation();
+      }
+    } else if ( v.getId() == R.id.button_cancel ) {
+      // nothing
+    }
     dismiss();
   }
 
@@ -114,7 +122,9 @@ class DialogStation extends MyDialog
   public void onBackPressed()
   {
     TDLog.v("Dialog station on back pressed");
-    mTopoGl.closeCurrentStation();
+    if ( ! mCallerIsBar ) {
+      mTopoGl.closeCurrentStation();
+    }
     // super.onBackPressed(); // issue 167
     dismiss();
   }

@@ -135,7 +135,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="shot_not_found">No shot found</string>
     <string name="shot_not_saved">Shot not saved</string>
     <string name="bad_sibling">Bad leg sibling</string>
-    <string name="bad_station">Bad station: %1$s</string>
+    <!-- UNUSED string name="bad_station">Bad station: %1$s</string -->
     <string name="bad_station_name">Illegal station name</string>
     <string name="equal_station_names">Equal station names</string>
     <string name="invalid_name">Invalid name</string>
@@ -381,6 +381,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="location_no_permission">No LOCATION permision</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">BT discovery error: %1$s</string>
+    <string name="depth_format">Depth %1$.1f</string>
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>
@@ -406,7 +407,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Wrong number of stations</string>
     <!-- UNUSED string name="error_name_duplicate">Duplicate name</string -->
-    <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
+    <string name="error_no_section_in_sectior">Xsection in xsection not allowed</string>
     <string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string>
     <string name="error_team_required">Team required</string>
 
@@ -2286,8 +2287,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <string name="title_drop">Drop surveys ?</string>
     <string name="title_tdconfig">Enter project name</string>
-    <string name="title_tdsurveys">Select survey</string>
     <string name="title_surveys">Surveys</string>
+    <string name="title_tdsurveys">Select survey</string>
     <string name="title_symbols">Active tools</string>
     <string name="title_symbol_choose">Tool selection</string>
 

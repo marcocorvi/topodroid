@@ -97,10 +97,10 @@ class TdmEquateNewDialog extends MyDialog
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp1.setMargins( 0, 10, 20, 10 );
     LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp2.setMargins( 0, 10, 20, 10 );
 
     for ( int k=0; k<mSize; ++k ) {
@@ -111,7 +111,7 @@ class TdmEquateNewDialog extends MyDialog
       TextView text = new TextView( mContext );
       text.setText( vc.name() );
       mEdit[k] = new EditText( mContext );
-      mEdit[k].setHint( "..." );
+      mEdit[k].setHint( R.string.ellipsis );
       
       // mSpinner[k] = new Spinner( mContext );
       // ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, mTypes );
@@ -140,23 +140,24 @@ class TdmEquateNewDialog extends MyDialog
   {
     Button b = (Button) v;
     if ( b == mBTok ) {
-      String bad_station = null;
+      // String bad_station = null; // UNUSED
       ArrayList< String > sts = new ArrayList<>();
       for ( int k=0; k<mSize; ++k ) {
         TdmViewCommand vc = mCommands.get( ( (mCommandsSize == 1) ? 0 : k ) );
         String survey = vc.name();
-        int len = survey.length();
+        // int len = survey.length(); // UNUSED
         // while ( len > 0 && survey.charAt( len - 1 ) == '.' ) -- len;
         String station = mEdit[k].getText().toString();
         if ( ! station.equals("-") ) {// HB EQ all
           if ( station != null && station.length() > 0 ) {
             if ( vc.getViewStation( station ) != null ) {
-              sts.add( station + "@" + survey.substring(0,len) );
-              TDLog.v("added station: " + sts.size() + " survey <" + survey + ">" );
+              sts.add( station + "@" + survey ); // survey.substring(0,len) );
+              // TDLog.v("added station: " + sts.size() + " survey <" + survey + ">" );
             } else {
-              bad_station = station + "@" + survey.substring(0,len);
-              TDLog.v("Bad station: " + bad_station + " survey <" + survey + ">" );
-              break;
+              // bad_station = station + "@" + survey ); // survey.substring(0,len);
+              // TDLog.v("Bad station: " + bad_station + " survey <" + survey + ">" );
+              mEdit[k].setError( resString( R.string.bad_station_name ) );
+              return;
             }
           } else {
             mEdit[k].setError( resString( R.string.error_name_required ) );
@@ -164,12 +165,13 @@ class TdmEquateNewDialog extends MyDialog
           }
         }
       }
-      if ( bad_station == null ) {
-        mParent.makeEquate( sts ); // does nothing if sts.size() <= 1
-      } else {
-        TDToast.makeWarn( String.format( mContext.getResources().getString( R.string.bad_station ), bad_station ) );
-        return;
-      }
+      // if ( bad_station == null ) {
+      //   mParent.makeEquate( sts ); // does nothing if sts.size() <= 1
+      // } else {
+      //   TDToast.makeWarn( String.format( mContext.getResources().getString( R.string.bad_station ), bad_station ) );
+      //   return;
+      // }
+      mParent.makeEquate( sts ); // does nothing if sts.size() <= 1
     } else if ( b == mBTall ) { // HB EQ all
           ArrayList<String> stations = new ArrayList<>();
           if (mSize > 1) {

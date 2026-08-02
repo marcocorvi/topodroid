@@ -1352,7 +1352,7 @@ public class TopoGL extends MyActivity
       isMeasuring = false;
       isFixed = false;
       if ( mParser   != null ) mParser.clearStartStation();
-      openDialogStation( mParser, fullname, mRenderer.getDEM() );
+      openDialogStation( mParser, fullname, mRenderer.getDEM(), true );
     }
   }
  
@@ -3323,11 +3323,12 @@ public class TopoGL extends MyActivity
    * @param parser    data parser
    * @param fullname  station fullname
    * @param dem       DEM
+   * @param caller_is_bar whether caller is station-bar
    */
-  void openDialogStation( TglParser parser, String fullname, ParserDEM dem )
+  void openDialogStation( TglParser parser, String fullname, ParserDEM dem, boolean caller_is_bar )
   {
     if ( mDialogStation != null ) return;
-    mDialogStation = new DialogStation( this, this, parser, fullname, dem );
+    mDialogStation = new DialogStation( this, this, parser, fullname, dem, caller_is_bar );
     mDialogStation.show();
   }
 
