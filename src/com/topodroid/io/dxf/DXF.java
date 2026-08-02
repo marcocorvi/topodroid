@@ -604,7 +604,7 @@ public class DXF
   {
     String linetype = lt_byLayer;
     int color = BY_LAYER;
-    return printPolylineHeader( pw, handle, ref, layer, closed, npt, linetype, color, 0, false );
+    return printPolylineHeader( pw, handle, ref, layer, closed, npt, linetype, color, 0, false, 0 );  //HBDxf not use
   }
 
   /** write a polyline header
@@ -618,9 +618,10 @@ public class DXF
    * @param color    color
    * @param z        DXF z height
    * @param p3D      3d polyline
+   * @param size     width size //HBDxf
    */
   static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed,
-                                  int npt, String linetype, int color, float z, boolean p3D )
+                                  int npt, String linetype, int color, float z, boolean p3D, int size ) //HBDxf
   {
     if ( mVersion14 ) {
       printString( pw, 0, "LWPOLYLINE" );
@@ -629,7 +630,8 @@ public class DXF
       // printString( pw, 8, layer );
       // printString( pw, 6, linetype ); // lt_byLayer );
       // printInt( pw, 62, color ); // HBX_DXF
-      printInt( pw, 43, 0 ); // width 0: constant
+      // printInt( pw, 43, 0 ); // width 0: constant //HBDxf not work
+      printInt( pw, 370, DXFsize ); //HBDxf In R14, the code is incorrect - but it works
       printFloat( pw, 38, z ); // elevation
       // printInt( pw, 62, BY_LAYER );
       printInt( pw, 90, npt );
@@ -745,7 +747,8 @@ public class DXF
 
       printXYZ( pw, 0f, 0f, 0f, 0 );
       printXYZ( pw, 0f, 0f, 1f, 200 );  // extrusion direction, default 0,0,1
-      printString( pw, 2, "_USER" );    // hatch pattern name
+      // printString( pw, 2, "_USER" );    // hatch pattern name
+      printString( pw, 2, linetype );    //HBDxf hatch pattern name
 
       printInt( pw, 70, 1 );            // 1:solid fill, 0:pattern-fill
       printInt( pw, 71, 0 );            // 1:associative 0:non-associative
