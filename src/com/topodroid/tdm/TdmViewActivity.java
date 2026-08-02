@@ -119,7 +119,7 @@ public class TdmViewActivity extends MyActivity
   private float mSave0Y;
   private float mSave1X;  // second pointer saved coords
   private float mSave1Y;
-  private PointF mOffset  = new PointF( 0f, 0f );
+  // private PointF mOffset  = new PointF( 0f, 0f );
   // private PointF mOffset0 = new PointF( 0f, 0f );
   private boolean doMove = false;
   private int mNrSurveys = 0; // number of surveys
@@ -426,18 +426,18 @@ public class TdmViewActivity extends MyActivity
           y1 = y0;
         } 
       }
-      float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
-      float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
+      float x_shft = ( x0 - mSave0X + x1 - mSave1X ) / 2;
+      float y_shft = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
       mSave0X = x0;
       mSave0Y = y0;
       mSave1X = x1;
       mSave1Y = y1;
     
       float zoom = mDrawingSurface.mZoom;
-      if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
-        x_shift /= zoom;               // add shift to offset
-        y_shift /= zoom; 
-        mDrawingSurface.transform( x_shift, y_shift, 1 );
+      if ( Math.abs( x_shft ) < 60 && Math.abs( y_shft ) < 60 ) {
+        x_shft /= zoom; // add shift to offset
+        y_shft /= zoom; 
+        mDrawingSurface.transform( x_shft, y_shft, 1 );
       }
     }
 
@@ -447,6 +447,7 @@ public class TdmViewActivity extends MyActivity
 
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
+      // TDLog.v("onTouch enter");
       MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
       // dumpEvent( event );
 
@@ -464,49 +465,38 @@ public class TdmViewActivity extends MyActivity
 
       int action = event.getAction() & MotionEvent.ACTION_MASK;
 
-      if (action == MotionEvent.ACTION_POINTER_DOWN) {
-        mTouchMode = MODE_ZOOM;
-        oldDist = getEventPointerSpacing( event );
-        saveEventPoint( event );
-        // TDLog.v( "POINTER DOWN old dist " + oldDist );
-        doMove = false;
-
-      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
-        mTouchMode = MODE_MOVE;
-        /* nothing */
-        doMove = false;
-        mSaveX = x_canvas;
-        mSaveY = y_canvas;
-        // TDLog.v( "POINTER UP " + mSaveX + " " + mSaveY );
-
       // ---------------------------------------- DOWN
-      } else if (action == MotionEvent.ACTION_DOWN) {
+      if (action == MotionEvent.ACTION_DOWN) {
         // check if selected a station
         mSaveX = x_canvas;
         mSaveY = y_canvas;
         doMove = true;
+        // TDLog.v( "DOWN at " + mSaveX + " " + mSaveY + " has possible eq. " + hasPossibeEquates() + " with station " + mWithStation );
         if ( mWithStation == 0 ) {
-          boolean ret = mDrawingSurface.getSurveyAt( mSaveX, mSaveY, null );
-          // TDLog.v( "DOWN at " + mSaveX + " " + mSaveY + " at " + ret );
+          boolean ret = mDrawingSurface.getSurveyAt( mSaveX, mSaveY, null ); // this uses getStationAt
           if ( ret ) {
+            // TDLog.v("got survey at point");
             boolean added = false;
             if ( hasPossibeEquates() ) {
               TdmViewStation st = mDrawingSurface.selectedStation();
-              List<TdmPossibleEquate> eqs = mDrawingSurface.getPossibleEquates( st );
+              List< TdmPossibleEquate > eqs = mDrawingSurface.getPossibleEquates( st );
+              // TDLog.v("possible eqs size " + eqs.size() );
               if ( eqs.size() > 0 ) {
                 added = true;
                 for ( TdmPossibleEquate eq : eqs ) {
                   final String st1 = eq.getStationFullname( 1 );
                   final String st2 = eq.getStationFullname( 2 );
-                  // TDLog.v("make eqauete <" + st1 + "> <" + st2 + ">" );
+                  // TDLog.v("make equate <" + st1 + "> <" + st2 + ">" );
                   makeEquate( st1, st2 );
                 }
               }
             }
             if ( added ) {
+              // TDLog.v("compute possible equates");
               clearPossibleEquates();
               computePossibleEquates();
             } else {
+              // TDLog.v("set with station 1");
               mWithStation = 1;
               mSelectedCommand = mDrawingSurface.selectedCommand();
               setTitle( TDVersion.APP_NAME_MANAGER + " " + mDrawingSurface.selectedCommandName() + " " + mDrawingSurface.selectedStationName() );
@@ -520,16 +510,16 @@ public class TdmViewActivity extends MyActivity
 
       // ---------------------------------------- MOVE
       } else if ( action == MotionEvent.ACTION_MOVE ) {
+        // TDLog.v( "MOVE (move) to " + x_canvas + " " + y_canvas );
         if ( mTouchMode == MODE_MOVE) {
-          // TDLog.v( "MOVE (move) to " + x_canvas + " " + y_canvas );
-          float x_shift = x_canvas - mSaveX; // compute shift
-          float y_shift = y_canvas - mSaveY;
+          float x_shft = x_canvas - mSaveX; // compute shift
+          float y_shft = y_canvas - mSaveY;
           if ( doMove ) {
-            if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+            if ( Math.abs( x_shft ) < 60 && Math.abs( y_shft ) < 60 ) {
               float zoom = mDrawingSurface.mZoom;
-              x_shift /= zoom;                // add shift to offset
-              y_shift /= zoom; 
-              mDrawingSurface.shift( x_shift, y_shift );
+              x_shft /= zoom;                // add shift to offset
+              y_shft /= zoom; 
+              mDrawingSurface.shift( x_shft, y_shft );
               // mDrawingSurface.refresh();
               mSaveX = x_canvas; 
               mSaveY = y_canvas;
@@ -565,7 +555,30 @@ public class TdmViewActivity extends MyActivity
         // mSaveX = x_canvas; 
         // mSaveY = y_canvas;
         doMove = false;
+      } else if (action == MotionEvent.ACTION_POINTER_DOWN) {
+        mTouchMode = MODE_ZOOM;
+        oldDist = getEventPointerSpacing( event );
+        saveEventPoint( event );
+        // TDLog.v( "POINTER DOWN old dist " + oldDist );
+        doMove = false;
+
+      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+        mTouchMode = MODE_MOVE;
+        /* nothing */
+        doMove = false;
+        mSaveX = x_canvas;
+        mSaveY = y_canvas;
+        // TDLog.v( "POINTER UP " + mSaveX + " " + mSaveY );
+      } else if ( action == MotionEvent.ACTION_CANCEL ) {
+        // TDLog.v( "CANCEL action");
+        doMove = false;
+        mTouchMode = MODE_MOVE;
+        mMode   = MODE_SHIFT;
+      } else {
+        // TDLog.v( "UNKNOWN action " + action );
+        // return false;
       }
+      // TDLog.v("onTouch return");
       return true;
     }
 
@@ -684,7 +697,7 @@ public class TdmViewActivity extends MyActivity
         float x = vst1.x + mSelectedCommand.mXoff;
         float y = vst1.y + mSelectedCommand.mYoff;
         String name1 = mDrawingSurface.selectedStationName();
-        TDLog.v( "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y + " name " + name1 );
+        // TDLog.v( "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y + " name " + name1 );
         if ( name1 != null ) {
           final String st1 = name1 + "@" + mDrawingSurface.selectedCommandName();
           if ( mDrawingSurface.getSurveyAt( x, y, mSelectedCommand ) ) {

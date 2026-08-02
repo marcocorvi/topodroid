@@ -407,7 +407,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Wrong number of stations</string>
     <!-- UNUSED string name="error_name_duplicate">Duplicate name</string -->
-    <string name="error_no_section_in_sectior">Xsection in xsection not allowed</string>
+    <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
     <string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string>
     <string name="error_team_required">Team required</string>
 

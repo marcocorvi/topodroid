@@ -41,12 +41,15 @@ public class TdmViewCommand
   List< TdmViewPath >    mFixedStack;
   ArrayList< TdmViewStation > mStationsArray;
   List< TdmViewStation > mStations;
+  List< TdmViewStationBucket > mBuckets;
   Matrix mMatrix;
   Paint mPaint;
   Paint mFillPaint;
   float mXoff, mYoff;
   float mScale;
   private boolean mShowStations = true;
+  private final static float mBucketSize = 40;
+  private RectF mBBox = null;
 
   /** cstr
    * @param survey   displayed survey
@@ -63,6 +66,7 @@ public class TdmViewCommand
     mFixedStack   = Collections.synchronizedList(new ArrayList< TdmViewPath >());
     mStationsArray  = new ArrayList< TdmViewStation >();
     mStations     = Collections.synchronizedList( mStationsArray );
+    mBuckets      = new ArrayList< TdmViewStationBucket >();
     mMatrix = new Matrix(); // identity
     mPaint = BrushManager.makePaint( color, 2, Paint.Style.STROKE );
     mFillPaint = BrushManager.makePaint( color & 0x99cccccc, 2, Paint.Style.FILL );
@@ -116,7 +120,9 @@ public class TdmViewCommand
     mXoff += dx;
     mYoff += dy;
     for ( TdmViewStation st : mStations ) st.shift( dx, dy );
+    for ( TdmViewStationBucket bk : mBuckets ) bk.shift( dx, dy ); // bucket bbox change as stations
     setTransform();
+    // shiftBBox( dx, dy );  // shift bbox the opposite
   }
 
   /** rescale the drawing
@@ -126,6 +132,7 @@ public class TdmViewCommand
   { 
     mScale *= rs;
     setTransform();
+    // rescaleBBox( rs ); // scale the bbox the inverse
   }
 
   /** transform the drawing
@@ -139,6 +146,8 @@ public class TdmViewCommand
     mYoff += dy;
     mScale *= rs;
     setTransform();
+    // shiftBBox( dx, dy ); 
+    // rescaleBBox( rs );
   }
 
   /** update the bounding box with the stations coords
@@ -146,13 +155,51 @@ public class TdmViewCommand
    */
   void updateBoundingBox( RectF box ) 
   {
-    for ( TdmViewStation st : mStations ) {
-      if ( st.x < box.left   ) box.left   = st.x;
-      if ( st.x > box.right  ) box.right  = st.x;
-      if ( st.y < box.top    ) box.top    = st.y;
-      if ( st.y > box.bottom ) box.bottom = st.y;
+    if ( mStationsArray.size() == 0 ) return;
+    if ( initBBox() ) {
+      if ( mBBox.left   < box.left   ) box.left   = mBBox.left;
+      if ( mBBox.right  > box.right  ) box.right  = mBBox.right;
+      if ( mBBox.top    < box.top    ) box.top    = mBBox.top;
+      if ( mBBox.bottom > box.bottom ) box.bottom = mBBox.bottom;
     }
+    // TDLog.v("updated bbox");
   }
+
+  private boolean initBBox()
+  {
+    if ( mBBox == null && mStations.size() > 0 ) {
+      TdmViewStation st0 = mStations.get(0);
+      mBBox = new RectF( st0.x, st0.y, st0.x, st0.y );
+      for ( TdmViewStation st : mStations ) {
+        if ( st.x < mBBox.left   ) mBBox.left   = st.x;
+        if ( st.x > mBBox.right  ) mBBox.right  = st.x;
+        if ( st.y < mBBox.top    ) mBBox.top    = st.y;
+        if ( st.y > mBBox.bottom ) mBBox.bottom = st.y;
+      }
+      // TDLog.v("init bbox " + mBBox.left + " " + mBBox.right + " Y " + mBBox.top + " " + mBBox.bottom );
+    } 
+    return mBBox != null;
+  }
+
+  // private void shiftBBox( float dx, float dy )
+  // {
+  //   if ( mBBox != null ) { // BBOX
+  //     mBBox.left   += dx;
+  //     mBBox.right  += dx;
+  //     mBBox.top    += dy;
+  //     mBBox.bottom += dy;
+  //   }
+  // }
+
+  // private void rescaleBBox( float inv_rs )
+  // {
+  //   if ( mBBox != null ) { // BBOX
+  //     mBBox.left   *= inv_rs;
+  //     mBBox.right  *= inv_rs;
+  //     mBBox.top    *= inv_rs;
+  //     mBBox.bottom *= inv_rs;
+  //   }
+  // }
   
   /** initialize the bounding box with the stations
    * @param box bounding box
@@ -160,11 +207,12 @@ public class TdmViewCommand
    */
   boolean initBoundingBox( RectF box )
   {
-    if ( mStationsArray.size() == 0 ) return false;
-    TdmViewStation st = mStationsArray.get(0);
-    box.left   = box.right  = st.x;
-    box.top    = box.bottom = st.y;
-    updateBoundingBox( box );
+    // if ( mStationsArray.size() == 0 ) return false;
+    if ( ! initBBox() ) return false;
+    box.left   = mBBox.left;
+    box.right  = mBBox.right;
+    box.top    = mBBox.top;
+    box.bottom = mBBox.bottom;
     return true;
   }
 
@@ -206,15 +254,37 @@ public class TdmViewCommand
    */
   public void addStation( TdmStation st, boolean equated )
   {
-    mStations.add( new TdmViewStation( st, this, st.e, st.s, equated ) );
+    // TODO BUCKET 
+    TdmViewStation stv = new TdmViewStation( st, this, st.e, st.s, equated );
+    mStations.add( stv );
+    boolean in_bucket = false;
+    for ( TdmViewStationBucket bk : mBuckets ) {
+      if ( bk.coverPoint( st.e, st.s ) ) {
+        bk.insertStation( stv );
+        in_bucket = true;
+        break;
+      }
+    }
+    if ( ! in_bucket ) {
+      TdmViewStationBucket bucket = new TdmViewStationBucket( st.e - mBucketSize, st.e + mBucketSize, st.s - mBucketSize, st.s + mBucketSize );
+      bucket.insertStation( stv );
+      mBuckets.add( bucket );
+    }
   }
+
+  int getBucketNumber() { return mBuckets.size(); }
 
   /** draw the survey on the display
    * @param canvas   display canvas
    * @param preview_handler  preview handler (unused)
+   * @param station_rate     rate of station displayed
+   * @param bbox             clipping bbox
    */
-  public void executeAll( Canvas canvas, Handler preview_handler, int station_rate )
+  public int executeAll( Canvas canvas, Handler preview_handler, int station_rate, RectF bbox )
   {
+    int nr_buckets = 0;
+    // TODO use bbox
+    // TODO BUCKET stations and paths
     synchronized( mFixedStack ) { // FIXME SYNCH_ON_NON_FINAL
       for ( TdmViewPath path : mFixedStack ) path.draw( canvas, mMatrix, mPaint );
     }
@@ -222,23 +292,29 @@ public class TdmViewCommand
       if ( mShowStations ) {
         float zoom = mScale / 50;
         int cnt = 0;
-        for ( TdmViewStation st : mStations ) {
-          // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
-          if ( ( cnt % station_rate ) == 0 ) {
-            st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+        for ( TdmViewStationBucket bk : mBuckets ) {
+          if ( ! bk.intersects( bbox ) ) continue;
+          nr_buckets ++;
+          for ( TdmViewStation st : bk.mStations ) {
+            // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
+            if ( ( cnt % station_rate ) == 0 ) {
+              st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+            }
+            ++cnt;
           }
-          ++cnt;
+          int n = mStations.size() - 1;
+          if ( n > 0 ) {
+            mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+          }
+          if ( mSelected != null ) {
+            mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+            mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );
+          }
         }
-        int n = mStations.size() - 1;
-        if ( n > 0 ) {
-          mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-        }
-        if ( mSelected != null ) {
-          mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-          mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );
-        }
+        // TDLog.v("used " + nr_buckets + " buckets ");
       }
     }
+    return nr_buckets;
   }
 
   /** find the stations close to a canvas point (closest than 40 [scene])
@@ -247,34 +323,46 @@ public class TdmViewCommand
    * @return the (rescaled) station(s) closest distance from the point - 80 if no station is found
    * @note the found station is stored in mSelected
    */
-  public double getStationAt( float x, float y )
+  public double getStationAt( float x, float y, float tolerance )
   {
-    // TDLog.v("get station at: scale " + mScale );
+    // TDLog.v("get station at: scale " + mScale + " nr. buckets " + getBucketNumber() + " tolerance " + tolerance );
 
     x = (x - mXoff); // /mScale;
     y = (y - mYoff); // /mScale;
     double d0 = 40.0 / mScale;
     mSelected = null;
     double dmin = 100000; // FIXME a very large number
+    float xmin = x - tolerance * mScale;
+    float xmax = x + tolerance * mScale;
+    float ymin = y - tolerance * mScale;
+    float ymax = y + tolerance * mScale;
 
-    // TDLog.v("get station at: " + name() + " get station at " + x + " " + y );
+    // TODO BUCKET stations for a faster search
     synchronized ( mStations ) { // FIXME SYNCH_ON_NON_FINAL
-      for ( TdmViewStation st : mStations ) {
-        // TDLog.v("get station at " + name() + " station " + st.mStation.mName + " " + st.x + " " + st.y );
-        double d = Math.abs( st.x - x ) + Math.abs( st.y - y );
-        if ( d < d0 ) {
-          if ( mSelected == null || d < dmin ) {
-            mSelected = st;
-            dmin = d;
-          } 
+      // int cnt = 0;
+      for ( TdmViewStationBucket bk : mBuckets ) {
+        if ( ! bk.intersects( xmin, xmax, ymin, ymax ) ) continue;
+        // ++ cnt;
+        for ( TdmViewStation st : bk.mStations ) {
+          if ( st.x > xmin && st.x < xmax && st.y > ymin && st.y < ymax ) {
+            // TDLog.v("get station at " + name() + " station " + st.mStation.mName + " " + st.x + " " + st.y );
+            double d = Math.abs( st.x - x ) + Math.abs( st.y - y );
+            if ( d < d0 ) {
+              if ( mSelected == null || d < dmin ) {
+                mSelected = st;
+                dmin = d;
+              } 
+            }
+          }
         }
       }
+      // TDLog.v("get station at checked " + cnt + " buckets");
     }
     if ( mSelected != null ) {
       mSelected.d = dmin * mScale;
       return mSelected.d;
     }
-    return 2 * 40.0;
+    return 2 * tolerance;
   }
     
   // private Paint makePaint( int color, Style style )
