@@ -35,6 +35,7 @@
     <string name="tdm_title">Gestione Progetti</string>
     <string name="tdm_config_project">progetto.tdconfig</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
 
     <string name="new_survey_label">Nuovo rilievo</string>
     <!-- NO string name="distox_label">DistoX</string -->
@@ -42,6 +43,7 @@
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
     <!-- UNUSED string name="version_check">Ultima versione</string -->
     <!-- UNUSED string name="version_check_failed">Verifica versione fallita</string -->
     <!-- UNUSED string name="version_check_latest">Versione già ultima</string -->
@@ -116,7 +118,7 @@
     <string name="shot_not_found">Trovato nessun tiro</string>
     <string name="shot_not_saved">Tiro non salvato</string>
     <string name="bad_sibling">Battuta con dissimili</string>
-    <string name="bad_station">Caposaldo non corretto: %1$s</string>
+    <!-- UNUSED string name="bad_station">Caposaldo non corretto: %1$s</string -->
     <string name="bad_station_name">Nome caposaldo non permesso</string>
     <string name="equal_station_names">Nomi di stazioni uguali</string>
     <string name="invalid_name">Nome non valido</string>
@@ -723,6 +725,7 @@
     <string name="saturated_coeffs">ATTENZIONE: Dati calibrazione saturati</string>
     <string name="out_of_memory">ATTENZIONE: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
     
     <string name="toporobot_warning">TopoRobot e\' sperimentale !</string>
     <string name="anomaly_warning">La compensazione di anomalia magnetica e\' liv. esperto !</string>
@@ -1263,6 +1266,7 @@
     <string name="help_add_equate">Aggiungi rilievi simili</string>
     <string name="help_all_equates">Tutte le possibili equivalenze</string>
     <string name="help_equates">Lista rilievi simili</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
     <string name="help_stations_minus">Mostra meno capisaldi</string>
     <string name="help_stations_plus">Mostra piú capisaldi</string>
 
@@ -2198,7 +2202,9 @@
     <string name="title_drop">Cancello rilievi ?</string>
     <string name="title_tdconfig">Inserisci nome progetto</string>
     <string name="title_surveys">Rilievi</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
     <string name="title_symbols">Strumenti attivi</string>
+    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
 
     <string name="exported">Salvato file %1$s</string>
     <string name="export_failed">Esportazione fallita</string>

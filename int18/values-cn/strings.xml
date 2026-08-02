@@ -30,6 +30,7 @@
     <string name="tdm_title">TopoDroid管理</string>
     <string name="tdm_config_project">TD配置项目</string>
     <string name="double_back">再次点击返回键退出</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
 
     <string name="new_survey_label">新建测量</string>
     <!-- NO string name="distox_label">DistoX</string -->
@@ -44,6 +45,7 @@
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
@@ -118,7 +120,7 @@
     <string name="shot_not_found">未发现测线数据</string>
     <string name="shot_not_saved">测点没有被保存</string>
     <string name="bad_sibling">坏的测量簇</string>
-    <string name="bad_station">坏的站点: %1$s</string>
+    <!-- UNUSED string name="bad_station">坏的站点: %1$s</string -->
     <string name="bad_station_name">不合规的站点名</string>
     <!-- TODO string name="equal_station_names">Equal station names</string -->
     <!-- TODO string name="invalid_name">Invalid name</string -->
@@ -729,6 +731,7 @@
     <string name="saturated_coeffs">警告:饱和校正系数</string>
     <string name="out_of_memory">警告:内存不足!</string>
     <string name="disk_io_error">危险:磁盘读写错误!</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
 
     <string name="toporobot_warning">TopoRobot原则是实验性的!</string>
     <string name="anomaly_warning">磁力异常补偿需专业操作 !</string>
@@ -1269,6 +1272,7 @@
     <string name="help_add_equate">添加等同的测量</string>
     <!-- TODO string name="help_all_equates">All possible equates</string -->
     <string name="help_equates">同等显示测量数据</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
     <string name="help_stations_minus">显示更少的站点</string>
     <string name="help_stations_plus">显示更多的站点</string>
 
@@ -2205,7 +2209,9 @@
     <string name="title_drop">停止测量 ?</string>
     <string name="title_tdconfig">输入项目名称</string>
     <string name="title_surveys">测量</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
     <!-- TODO string name="title_symbols">Active tools</string -->
+    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
 
     <string name="exported">保存文件 %1$s</string>
     <string name="export_failed">输出失败</string>

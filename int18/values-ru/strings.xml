@@ -30,6 +30,7 @@
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">project.tdconfig</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
 
     <string name="new_survey_label">Новая съёмка</string>
     <!-- NO string name="distox_label">Псевдоним DistoX</string -->
@@ -44,6 +45,7 @@
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <string name="symbols_ask">Установить инструменты рисования v.%1$s?\n(Текущая v.%2$s)</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
     <!-- UNUSED string name="version_check">Последняя версия</string -->
     <!-- UNUSED string name="version_check_failed">Сбой проверки версии</string -->
     <!-- UNUSED string name="version_check_latest">Установлена самая последняя версия</string -->
@@ -117,7 +119,7 @@
     <string name="shot_not_found">Замеры не найдены</string>
     <string name="shot_not_saved">Замер не сохранен</string>
     <string name="bad_sibling">Плохой замер в группе</string>
-    <string name="bad_station">Плохой пикет: %1$s</string>
+    <!-- UNUSED string name="bad_station">Плохой пикет: %1$s</string -->
     <string name="bad_station_name">Недопустимый номер пикета</string>
     <string name="equal_station_names">Одинаковые номера пикетов</string>
     <string name="invalid_name">Неверное имя</string>
@@ -725,6 +727,7 @@
     <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
     <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
 
     <string name="toporobot_warning">ВНИМАНИЕ: нумерация пикетов TopoRobot экспериментальняа функция!</string>
     <string name="anomaly_warning">Компенсация магнитной аномалии доступна в экспертном уровне!</string>
@@ -1264,6 +1267,7 @@
     <string name="help_add_equate">Добавить соединение съёмок</string>
     <string name="help_all_equates">Все возможные соединения</string>
     <string name="help_equates">Список соединений съёмки</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
     <string name="help_stations_minus">Показать меньше пикетов</string>
     <string name="help_stations_plus">Показать меньше пикетов</string>
 
@@ -2196,7 +2200,9 @@
     <string name="title_drop">Удалить съёмки ?</string>
     <string name="title_tdconfig">Введине название проекта</string>
     <string name="title_surveys">Съёмки</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
     <string name="title_symbols">Активные инструменты</string>
+    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
 
     <string name="exported">Файл сохранен %1$s</string>
     <string name="export_failed">Ошибка экспорта</string>

@@ -39,9 +39,11 @@
   <string name="tdm_title">TopoDroid Manager</string>
   <string name="tdm_config_project">project.tdconfig</string>
   <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
   <string name="new_survey_label">Neue Vermessung</string>
   <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
   <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
   <string name="symbols_recover">Zeichenwerkzeuge wiederherstellen?</string>
   <!-- UNUSED string name="version_check">Last version</string -->
   <!-- UNUSED string name="version_check_failed">Failed version check</string -->
@@ -106,7 +108,7 @@
   <string name="shot_not_found">Keine Messung gefunden</string>
   <string name="shot_not_saved">Messung nicht gespeichert</string>
   <string name="bad_sibling">Messzug weicht stark ab</string>
-  <string name="bad_station">Ungültiger Messpunkt: %1$s</string>
+  <!-- UNUSED string name="bad_station">Ungültiger Messpunkt: %1$s</string -->
   <string name="bad_station_name">Ungültiger Messpunktname</string>
   <string name="equal_station_names">Messpunkte verbinden</string>
   <string name="invalid_name">Ungültiger Name</string>
@@ -683,6 +685,8 @@
   <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
   <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
   <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+
   <string name="toporobot_warning">WARNUNG: TopoRobot ist experimentell !</string>
   <string name="anomaly_warning">Magnetische Anomalie-Kompensation ist Expertenlevel!</string>
   <string name="tripod_warning">Stativmessungen sind Fortgeschrittenenlevel!</string>
@@ -1190,6 +1194,7 @@
   <string name="help_add_equate">Verbindungen hinzufügen</string>
   <string name="help_all_equates">Alle möglichen Verbindungen</string>
   <string name="help_equates">Verbindungspunkte</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
   <string name="help_stations_minus">Weniger Messpunkte</string>
   <string name="help_stations_plus">Mehr Messpunkte</string>
   <!-- UNUSED string name="export_bgcolor">Hintergrundfarbe</string -->
@@ -2102,8 +2107,10 @@
   <string name="title_drop">Vermessungen entfernen?</string>
   <string name="title_tdconfig">Projektname</string>
   <string name="title_surveys">Vermessungen</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
   <string name="title_symbols">Aktive Symbole</string>
   <string name="title_symbol_choose">Symbolauswahl</string>
+
   <string name="exported">Gespeichert als %1$s</string>
   <string name="export_failed">Export fehlgeschlagen</string>
   <string name="image_diagram">Richtungsdiagramm</string>

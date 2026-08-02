@@ -36,9 +36,12 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="tdm_title">Gerenciador de Projetos</string>
   <string name="tdm_config_project">projeto.tdconfig</string>
   <string name="double_back">Clicar novamente em VOLTAR para sair</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
+
   <string name="new_survey_label">Nova topo</string>
   <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroidX.\nQuer re-instalar os símbolos?</string -->
   <string name="symbols_ask">Instalar símbolos versão %1$s?\n(Versão atual %2$s)</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
   <!-- UNUSED string name="version_check">Last version</string -->
   <!-- UNUSED string name="version_check_failed">Failed version check</string -->
   <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
@@ -104,7 +107,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="shot_not_found">Medida não encontrada</string>
   <string name="shot_not_saved">Visada não gravada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
-  <string name="bad_station">Base ruim: %1$s</string>
+  <!-- UNUSED string name="bad_station">Base ruim: %1$s</string -->
   <string name="bad_station_name">Nome de base não suportado</string>
     <!-- TODO string name="equal_station_names">Equal station names</string -->
   <string name="invalid_name">Nome inválido</string>
@@ -680,6 +683,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
   <string name="out_of_memory">ALERTA: sem memória!</string>
   <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+
   <string name="toporobot_warning">Política para o TopoRobot é \'Testador\'!</string>
   <string name="anomaly_warning">Compensação de anomalias magnéticas é "Especialista"!</string>
   <string name="tripod_warning">Política para tripés é "Avançado"!</string>
@@ -1186,6 +1191,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="help_add_equate">Adicionar equates das topos</string>
   <string name="help_all_equates">Todos os equates possíveis</string>
   <string name="help_equates">Listar equates das topos</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
   <string name="help_stations_minus">Mostrar menos bases</string>
   <string name="help_stations_plus">Mostrar mais bases</string>
   <!-- UNUSED string name="export_bgcolor">Cor de fundo</string -->
@@ -2075,7 +2081,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_drop">Excluir topos?</string>
   <string name="title_tdconfig">Insira nome do projeto</string>
   <string name="title_surveys">Topos</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
     <!-- TODO string name="title_symbols">Active tools</string -->
+    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
+
   <string name="exported">Arquivo %1$s gravado</string>
   <string name="export_failed">Exportação falhou</string>
   <string name="image_diagram">Diagrama direção</string>

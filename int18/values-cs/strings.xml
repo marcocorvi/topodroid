@@ -53,12 +53,14 @@
     <string name="tdm_title">Správce TopoDroid</string>
     <string name="tdm_config_project">project.tdconfig</string>
     <string name="double_back">Pro ukončení stiskněte ZPĚT ještě jednou.</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
 
     <string name="new_survey_label">Nové měření</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
 
     <string name="symbols_ask">Nainstalovat kreslicí symboly v.%1$s?\n(Aktuální verze %2$s)</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
 
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
@@ -130,7 +132,7 @@
     <string name="shot_not_found">Nebyla nalezena žádná záměra</string>
     <string name="shot_not_saved">Záměra nebyla uložena</string>
     <string name="bad_sibling">Neplatná navazující záměra</string>
-    <string name="bad_station">Neplatné stanoviště: %1$s</string>
+    <!-- UNUSED string name="bad_station">Neplatné stanoviště: %1$s</string -->
     <string name="bad_station_name">Neplatný název stanoviště</string>
     <string name="equal_station_names">Shodné názvy stanovišť</string>
     <string name="invalid_name">Neplatný název</string>
@@ -719,6 +721,7 @@
     <string name="saturated_coeffs">VAROVÁNÍ: saturované kalibrační koeficienty</string>
     <string name="out_of_memory">VAROVÁNÍ: nedostatek paměti !</string>
     <string name="disk_io_error">KRITICKÉ: chyba vstupu/výstupu disku !</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
 
     <string name="toporobot_warning">Pravidla TopoRobot vyžadují úroveň uživatele: tester !</string>
     <string name="anomaly_warning">Kompenzace magnetických anomálií vyžaduje úroveň uživatele: expert !</string>
@@ -1218,6 +1221,7 @@
     <string name="help_add_equate">Přidat propojení měření (equate)</string>
     <string name="help_all_equates">Všechna možná propojení bodů</string>
     <string name="help_equates">Seznam propojení měření</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
     <string name="help_stations_minus">Zobrazit méně měřických bodů</string>
     <string name="help_stations_plus">Zobrazit více měřických bodů</string>
 
@@ -2037,6 +2041,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_drop">Zahodit měření?</string>
     <string name="title_tdconfig">Zadejte název projektu</string>
     <string name="title_surveys">Měření</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
     <string name="title_symbols">Aktivní nástroje</string>
     <string name="title_symbol_choose">Výběr kreslicích nástrojů</string>
 

@@ -42,6 +42,7 @@
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">proyecto.tdconfig</string>
     <string name="double_back">Para salir presione ATRÁS nuevamente</string>
+    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
 
     <string name="new_survey_label">Nueva topografía</string>
     <!-- NO string name="distox_label">DistoX</string -->
@@ -49,6 +50,7 @@
 
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
+    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
     <!-- UNUSED string name="version_check">Ultima versión</string -->
     <!-- UNUSED string name="version_check_failed">Comprobación de versión fallida</string -->
     <!-- UNUSED string name="version_check_latest">Esta es la última versión</string -->
@@ -119,7 +121,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
     <string name="shot_not_saved">No se guardo la toma</string>
     <string name="bad_sibling">Toma incorrecta</string>
-    <string name="bad_station">Estación incorrecta: %1$s</string>
+    <!-- UNUSED string name="bad_station">Estación incorrecta: %1$s</string -->
     <string name="bad_station_name">Nombre de la estación no valida</string>
     <string name="equal_station_names">Estaciones con el mismo nombre</string>
     <string name="invalid_name">Nombre no válido</string>
@@ -735,6 +737,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="saturated_coeffs">ATENCIÓN: coeficientes de calibración saturados</string>
     <string name="out_of_memory">ATENCIÓN: sin memoria!</string>
     <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
+    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
     
     <string name="toporobot_warning">¡La política de TopoRobot es experimental!</string>
     <string name="anomaly_warning">¡La compensación de anomalías magnéticas es modo experto!</string>
@@ -1273,6 +1276,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_add_equate">Agregar relieves similares</string>
     <string name="help_all_equates">Todas las equivalencias posibles</string>
     <string name="help_equates">Lista relieves similares</string>
+    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
     <string name="help_stations_minus">Mostrar menos estaciones</string>
     <string name="help_stations_plus">Mostrar más estaciones</string>
 
@@ -2220,7 +2224,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_drop">¿Eliminar relieves? </string>
     <string name="title_tdconfig">Escribir nombre de la Topografía</string>
     <string name="title_surveys">Relieves</string>
+    <!-- TODO string name="title_tdsurveys">Select survey</string -->
     <!-- TODO string name="title_symbols">Active tools</string -->
+    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
 
     <string name="exported">Archivo guardado %1$s</string>
     <string name="export_failed">Exportación fallida</string>
