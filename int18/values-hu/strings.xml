@@ -31,7 +31,7 @@
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">projekt.tdconfig</string>
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
-    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
+    <string name="tdm_disconnected_survey">Nem kapcsolt felmérés</string>
 
     <string name="new_survey_label">Új mérés</string>
     <!-- NO string name="distox_label">DistoX</string -->
@@ -44,7 +44,7 @@
 
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
-    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
+    <string name="symbols_recover">Visszaállítsam a rajzeszközöket?</string>
     <!-- UNUSED string name="version_check">Utolsó verzió</string -->
     <!-- UNUSED string name="version_check_failed">Verzió ellenőrzés nem sikerült</string -->
     <!-- UNUSED string name="version_check_latest">Ez már a legújabb verzió</string -->
@@ -729,7 +729,7 @@
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
-    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+    <string name="tdr_load_fail">TDR fájl betöltési hiba</string>
     
     <string name="toporobot_warning">A TopoRobot szabályzat tesztelői szintet igényel!</string>
     <string name="anomaly_warning">A mágneses anomália kompenzációja szakértői szintet igényel!</string>
@@ -1273,7 +1273,7 @@
     <string name="help_add_equate">Mérések kapcsolódó pontjainak hozzáadása</string>
     <string name="help_all_equates">Ősszes lehetséges kapcsolat</string>
     <string name="help_equates">Kapcsolódó pontok listázása</string>
-    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
+    <string name="help_equate_surveys">Kapcsolt felmérések listája</string>
     <string name="help_stations_minus">Mutass kevesebb pontot</string>
     <string name="help_stations_plus">Mutass több pontot</string>
 
@@ -2220,9 +2220,9 @@
     <string name="title_drop">Eldobja a mérést?</string>
     <string name="title_tdconfig">Adja meg a projekt nevét</string>
     <string name="title_surveys">Mérések</string>
-    <!-- TODO string name="title_tdsurveys">Select survey</string -->
+    <string name="title_tdsurveys">Felmérés választása</string>
     <string name="title_symbols">Aktív eszközök</string>
-    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
+    <string name="title_symbol_choose">Eszköz választás</string>
 
     <string name="exported">Exportált fájl %1$s</string>
     <string name="export_failed">Hibás export</string>
