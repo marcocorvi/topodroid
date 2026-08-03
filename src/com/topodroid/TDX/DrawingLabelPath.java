@@ -213,6 +213,7 @@ public class DrawingLabelPath extends DrawingPointPath
       }
       mTransformedPath.transform( matrix );
       Paint paint = xorPaint( mPaint, xor_color );
+	  mPaint = paint; //HB PDF txt
       paint.setTextSize( PDF_SCALE * paint.getTextSize() );
       drawOnCanvas( canvas, mTransformedPath );
     }
