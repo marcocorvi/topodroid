@@ -128,12 +128,12 @@ public class DrawingLabelPath extends DrawingPointPath
   //   }
   // }
 
-  private void drawOnCanvas( Canvas canvas, Path path )
+  private void drawOnCanvas( Canvas canvas, Path path, Paint paint ) // HB PDF
   {
     if ( mPointText.length() == 0 ) {
-      canvas.drawPath( path, mPaint );
+      canvas.drawPath( path, paint ); // HB PDF
     } else {
-      canvas.drawTextOnPath( mPointText, path, 0f, 0f, mPaint );
+      canvas.drawTextOnPath( mPointText, path, 0f, 0f, paint ); // HB PDF
     }
   }
 
@@ -147,9 +147,9 @@ public class DrawingLabelPath extends DrawingPointPath
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw " + mPointText );
       if ( mPointText.length() == 0 ) {
-        drawOnCanvas( canvas, mCrossPath );
+        drawOnCanvas( canvas, mCrossPath, mPaint ); // HB PDF
       } else {
-        drawOnCanvas( canvas, mPath );
+        drawOnCanvas( canvas, mPath, mPaint ); // HB PDF
       }
     }
   }
@@ -181,7 +181,7 @@ public class DrawingLabelPath extends DrawingPointPath
         mTransformedPath.transform( rot );
       }
       mTransformedPath.transform( matrix );
-      drawOnCanvas( canvas, mTransformedPath );
+      drawOnCanvas( canvas, mTransformedPath, mPaint ); // HB PDF
     }
   }
 
@@ -214,7 +214,7 @@ public class DrawingLabelPath extends DrawingPointPath
       mTransformedPath.transform( matrix );
       Paint paint = xorPaint( mPaint, xor_color );
       paint.setTextSize( PDF_SCALE * paint.getTextSize() );
-      drawOnCanvas( canvas, mTransformedPath );
+      drawOnCanvas( canvas, mTransformedPath, paint ); // HB PDF
     }
   }
 
