@@ -24,7 +24,13 @@ import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
+
 import android.view.View;
+import android.view.ViewGroup;
 
 class PlotScrapsDialog extends MyDialog
                        implements View.OnClickListener
@@ -35,6 +41,7 @@ class PlotScrapsDialog extends MyDialog
   private Button   mBtnPrev;
   private Button   mBtnNew;
   private Button   mBtnDelete;
+  private Button   mBtnSelect;
 
   private final DrawingWindow mParent;
 
@@ -62,8 +69,54 @@ class PlotScrapsDialog extends MyDialog
     // int idx = mParent.getScrapIndex() + 1; // people count from 1
     // int max = mParent.getScrapMaxIndex();
     int nr  = mParent.getScrapNumber();
-    int nr0 = mParent.getCurrentScrapNumber() + 1;
+    int nr0 = mParent.getCurrentScrapNumber() + 1; // indices are displyed from 1 to NR included
     mTvScraps.setText( String.format( resString( R.string.scrap_string ), nr0, nr ) );
+
+    if ( nr > 2 ) {
+      final RadioGroup r_grp = new RadioGroup( mContext ); // Create RadioGroup for selecting scraps
+      r_grp.setOrientation( RadioGroup.VERTICAL );
+      for ( int i = 1; i <= nr; i++ ) {
+        final RadioButton r_btn = new RadioButton( mContext );
+        r_btn.setText( String.format( mContext.getResources().getString(R.string.scrap_index), i) );
+        r_btn.setId( i - 1 ); // indices start from 0, so subtract 1
+        r_btn.setChecked( (i == nr0) );
+        r_grp.addView( r_btn );
+      }
+
+      mBtnSelect = new Button( mContext ); // Create the "Select" button
+      mBtnSelect.setText( R.string.button_select );
+
+      mBtnSelect.setOnClickListener( new View.OnClickListener() {
+        @Override public void onClick( View v )
+        {
+          int id = r_grp.getCheckedRadioButtonId(); // Find out which ID (index) is currently checked in the RadioGroup
+          if ( id != -1 ) {
+            mParent.setScrapIndex( id ); 
+          }
+          dismiss();
+        }
+      });
+
+      // Container for the radio buttons and the new Select button, arranged vertically
+      LinearLayout container = new LinearLayout( mContext );
+      container.setOrientation( LinearLayout.VERTICAL );
+      container.addView( r_grp );
+      container.addView( mBtnSelect );
+
+      // Insert the container below the mTvScraps title
+      if (mTvScraps != null && mTvScraps.getParent() instanceof ViewGroup) {
+        ViewGroup parentGroup = (ViewGroup) mTvScraps.getParent();
+        int index = parentGroup.indexOfChild(mTvScraps);
+        parentGroup.addView(container, index + 1);
+      } else {
+        View dialogView = findViewById(android.R.id.content);
+        if (dialogView instanceof ViewGroup) {
+          ((ViewGroup) dialogView).addView(container);
+        }
+      }
+    }
+    // ///////////////////////////////////////////////////////////
+
 
     // TDLog.v("plot scrap dialog " + nr0 + " of " + nr );
 

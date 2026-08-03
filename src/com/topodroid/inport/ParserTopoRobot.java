@@ -357,9 +357,13 @@ class ParserTopoRobot extends ImportParser
         } else if ( token.length >= 5 ) {
           if ( line.startsWith("(") ) { // comment
             is_comment = true;
-            StringBuilder sb = new StringBuilder();
-            for ( int k = 6; k < token.length; ++k ) sb.append( token[k] ).append(" ");
-            comment = sb.toString();
+            if ( token.length > 6 ) {
+              StringBuilder sb = new StringBuilder();
+              for ( int k = 6; k < token.length; ++k ) sb.append( token[k] ).append(" ");
+              comment = sb.toString();
+            } else {
+              comment = "";
+            }
           } else {
             is_comment = false;
           }
@@ -388,25 +392,27 @@ class ParserTopoRobot extends ImportParser
           } else if ( series == -2 ) { // trip
             trips.add( new TRobotTrip( token, names ) );
           } else if ( series == -1 ) { // code
-            if ( names != null ) {
-              StringBuilder sb = new StringBuilder();
-              for ( String name : names ) sb.append( name ).append(" ");
-              mTeam = sb.toString().trim();;
-              if ( TR_LOG)  TDLog.v("TR parser: " + line_nr + " team " + mTeam );
-              names = null;
-              // for ( int k = trips.size()-1; k>=0; --k ) { // set the date
-              //   TRobotTrip trip = trips.get(k);
-              //   if ( isValidDate( trip.date ) ) {
-              //     break;
-              //   }
-              // }
-            }
-            try {
-              TRobotCode code = new TRobotCode( token );
-              codes.add( code );
-            } catch ( NumberFormatException e ) { // TODO mark parser invalid
-              TDLog.e("TR parser: " + line_nr + " bad code " + token[1] );
-              return;
+            if ( ! is_comment ) {
+              if ( names != null ) {
+                StringBuilder sb = new StringBuilder();
+                for ( String name : names ) sb.append( name ).append(" ");
+                mTeam = sb.toString().trim();;
+                if ( TR_LOG)  TDLog.v("TR parser: " + line_nr + " team " + mTeam );
+                names = null;
+                // for ( int k = trips.size()-1; k>=0; --k ) { // set the date
+                //   TRobotTrip trip = trips.get(k);
+                //   if ( isValidDate( trip.date ) ) {
+                //     break;
+                //   }
+                // }
+              }
+              try {
+                TRobotCode code = new TRobotCode( token );
+                codes.add( code );
+              } catch ( NumberFormatException e ) { // TODO mark parser invalid
+                TDLog.e("TR parser: " + line_nr + " bad code " + token[1] );
+                return;
+              }
             }
           } else { // survey data
             point = tag.point;

@@ -1690,14 +1690,7 @@
     <string name="pref_cvwy_dip_summary">Práh přesnosti měření Cavway pro sklon (Dip)</string>
     <string name="pref_cvwy_angle_title">Práh úhlu pro Cavway</string>
     <string name="pref_cvwy_angle_summary">Práh přesnosti měření Cavway pro úhel</string>
-    <string name="pref_cvwy_abs_title">Cavway ABS threshold</string>
-    <string name="pref_cvwy_abs_summary">Cavway shot accuracy ABS threshold</string>
-    <string name="pref_cvwy_dip_title">Cavway Dip threshold</string>
-    <string name="pref_cvwy_dip_summary">Cavway shot accuracy Dip threshold</string>
-    <string name="pref_cvwy_angle_title">Cavway Angle threshold</string>
-    <string name="pref_cvwy_angle_summary">Cavway shot accuracy Angle threshold</string>
 
-    <string name="pref_plot_screen_title">NÁČRT</string>
     <string name="pref_tool_line_title">LINIE</string>
     <string name="pref_tool_point_title">BODY</string>
     <string name="pref_location_title">POLOHA</string>

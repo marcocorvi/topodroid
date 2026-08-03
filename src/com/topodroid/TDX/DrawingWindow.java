@@ -10144,6 +10144,17 @@ public class DrawingWindow extends ItemDrawer
 
   /** make a new scrap in the current plot 
    */
+// ///////////////////////
+  /** switch to a specific scrap index
+   */
+  void setScrapIndex( int index ) {
+    int current = getCurrentScrapNumber(); // nebo mDrawingSurface.currentScrapNumber()
+    int diff = index - current;
+    if ( diff != 0 ) {
+      mDrawingSurface.toggleScrapIndex( mTh2Edit, diff );
+    }
+  }
+  // ///////////////////////
   void scrapNew() 
   { 
     int scrap_idx = mDrawingSurface.newScrapIndex( false ); // TH2EDIT no false param

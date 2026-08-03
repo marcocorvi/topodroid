@@ -280,19 +280,21 @@ public class DrawingCommandManager
 
   /** change current scrap
    * @param th2_edit whether is th2 edit
-   * @param k   advance step (in the list)
+   * @param k   advance step (in the list) - 0: no change
    * @return the cuurent scrap index
    */
   int toggleScrapIndex( boolean th2_edit, int k ) // TH2EDIT no force
   { 
-    if ( th2_edit || mMode < 3 ) { // TH2EDIT no force
-      if ( isMultiselection() ) { // implicit multiselection store
-        mSavedScrap = mCurrentScrap;
-        // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
+    if ( k != 0 ) {
+      if ( th2_edit || mMode < 3 ) { // TH2EDIT no force
+        if ( isMultiselection() ) { // implicit multiselection store
+          mSavedScrap = mCurrentScrap;
+          // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
+        }
+        int nr = getScrapNr( mCurrentScrap.mScrapIdx ) + k;
+        // TDLog.v("toggle scrap (" + k + ") to nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
+        setCurrentScrapByNr( th2_edit, nr );
       }
-      int nr = getScrapNr( mCurrentScrap.mScrapIdx ) + k;
-      // TDLog.v("toggle scrap (" + k + ") to nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
-      setCurrentScrapByNr( th2_edit, nr );
     }
     return mCurrentScrap.mScrapIdx;
   }
