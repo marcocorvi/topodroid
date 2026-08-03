@@ -1684,6 +1684,12 @@
     <string name="pref_bric_index_is_id_summary">Použít index BRIC jako ID záměry</string>
     <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
     <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
+  <!-- TODO string name="pref_cvwy_abs_title" copyable="all">Cavway ABS threshold</string -->
+  <!-- TODO string name="pref_cvwy_abs_summary" copyable="bg">Cavway shot accuracy ABS threshold</string -->
+  <!-- TODO string name="pref_cvwy_dip_title" copyable="all">Cavway Dip threshold</string -->
+  <!-- TODO string name="pref_cvwy_dip_summary" copyable="bg">Cavway shot accuracy Dip threshold</string -->
+  <!-- TODO string name="pref_cvwy_angle_title" copyable="all">Cavway Angle threshold</string -->
+  <!-- TODO string name="pref_cvwy_angle_summary" copyable="bg">Cavway shot accuracy Angle threshold</string -->
     <string name="pref_cvwy_abs_title">Cavway ABS threshold</string>
     <string name="pref_cvwy_abs_summary">Cavway shot accuracy ABS threshold</string>
     <string name="pref_cvwy_dip_title">Cavway Dip threshold</string>

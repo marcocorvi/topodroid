@@ -1729,6 +1729,12 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_index_is_id_summary">Usar el índice BRIC como ID de toma</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
+  <!-- TODO string name="pref_cvwy_abs_title" copyable="all">Cavway ABS threshold</string -->
+  <!-- TODO string name="pref_cvwy_abs_summary" copyable="bg">Cavway shot accuracy ABS threshold</string -->
+  <!-- TODO string name="pref_cvwy_dip_title" copyable="all">Cavway Dip threshold</string -->
+  <!-- TODO string name="pref_cvwy_dip_summary" copyable="bg">Cavway shot accuracy Dip threshold</string -->
+  <!-- TODO string name="pref_cvwy_angle_title" copyable="all">Cavway Angle threshold</string -->
+  <!-- TODO string name="pref_cvwy_angle_summary" copyable="bg">Cavway shot accuracy Angle threshold</string -->
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
   <string name="pref_tool_line_title">Ajustes de línea</string>
   <string name="pref_tool_point_title">Ajustes de Puntos</string>
