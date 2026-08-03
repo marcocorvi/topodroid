@@ -112,9 +112,18 @@ class TdmEquateNewDialog extends MyDialog
       
       LinearLayout layout = new LinearLayout( mContext );
       TextView text = new TextView( mContext );
-      text.setText( vc.fullname() );
+      text.setText( vc.name() ); // vc.fullname()
       mEdit[k] = new EditText( mContext );
-      mEdit[k].setHint( R.string.ellipsis );
+      if ( vc.isParentRoot() ) {
+        mEdit[k].setHint( R.string.ellipsis );
+      } else {
+        String name = vc.firstStation();
+        if ( name == null ) {
+          mEdit[k].setHint( R.string.ellipsis );
+        } else {
+          mEdit[k].setHint( name );
+        }
+      }
       
       // mSpinner[k] = new Spinner( mContext );
       // ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, mTypes );

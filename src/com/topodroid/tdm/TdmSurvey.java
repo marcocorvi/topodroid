@@ -409,6 +409,8 @@ public class TdmSurvey
    */
   public int getColor() { return mColor; }
 
+  boolean isParentRoot() { return mParent != null && mParent.mName.equals("."); }
+
 }
 
 

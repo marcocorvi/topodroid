@@ -83,7 +83,7 @@ public class TdmViewSurface extends SurfaceView
     mHeight = 0;
 
     ViewConfiguration view_config = ViewConfiguration.get( context );
-    mTouchSlop = view_config.getScaledTouchSlop();
+    mTouchSlop = 50; // view_config.getScaledTouchSlop();
     // TDLog.v("Surface touch slop " + mTouchSlop );
 
     mXoffset = 0;
@@ -385,6 +385,7 @@ public class TdmViewSurface extends SurfaceView
     mSelectedCommand = null;
     double dmin = 100000; // FIXME a large number
     for ( TdmViewCommand command : mCommandManager ) {
+      if ( ! command.isShowingStations () ) continue;
       if ( command != cmd ) {
         double d = command.getStationAt( x, y, mTouchSlop );
         if ( d < mTouchSlop && d < dmin ) {

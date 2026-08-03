@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.BrushManager;
 
 import android.graphics.Canvas;
@@ -76,7 +77,14 @@ public class TdmViewCommand
     // FIXME
   }
 
+  /** set whether to show the station names
+   * @param show whether to show the station names
+   */
   void setShowStations( boolean show ) { mShowStations = show; }
+
+  /** @return true is station names are being shown
+   */
+  boolean isShowingStations() { return mShowStations; }
 
   /** @return a station-view (null if not found)
    * @param name   station name
@@ -289,6 +297,13 @@ public class TdmViewCommand
       for ( TdmViewPath path : mFixedStack ) path.draw( canvas, mMatrix, mPaint );
     }
     synchronized( mStations ) { // FIXME SYNCH_ON_NON_FINAL
+      float radius = 1.5f * TDSetting.mDotRadius / mScale;
+      for ( TdmViewStationBucket bk : mBuckets ) {
+        if ( ! bk.intersects( bbox ) ) continue;
+        for ( TdmViewStation st : bk.mStations ) {
+          st.drawDot( canvas, mMatrix, BrushManager.highlightPaint2, radius );
+        }
+      }
       if ( mShowStations ) {
         float zoom = mScale / 50;
         int cnt = 0;
@@ -306,9 +321,12 @@ public class TdmViewCommand
           if ( n > 0 ) {
             mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
           }
-          if ( mSelected != null ) {
-            mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-            mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );
+          {
+            TdmViewStation selected = mSelected;
+            if ( selected != null ) {
+              selected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+              selected.drawCircle( canvas, mMatrix, mPaint, zoom );
+            }
           }
         }
         // TDLog.v("used " + nr_buckets + " buckets ");
@@ -396,4 +414,15 @@ public class TdmViewCommand
   //   return sb.toString();
   // }
 
+  /** @return true if the parent survey is the root
+   */
+  boolean isParentRoot() { return mSurvey.isParentRoot(); }
+
+  /** @return the name of the first station
+   */
+  String firstStation()
+  {
+    if ( mStations == null || mStations.size() == 0 ) return null;
+    return mStations.get(0).name();
+  }
 }

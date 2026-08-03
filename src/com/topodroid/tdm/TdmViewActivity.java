@@ -862,7 +862,9 @@ public class TdmViewActivity extends MyActivity
     ArrayList< String > surveys = new ArrayList<>();
     for ( int i=0; i < nr_surveys; ++i ) {
       TdmViewCommand cmd = commands.get(i);
-      surveys.add( cmd.name() );
+      if ( cmd.isParentRoot() ) {
+        surveys.add( cmd.name() );
+      }
     }
     (new TdmSurveysDialog( this, this, surveys )).show();
   }

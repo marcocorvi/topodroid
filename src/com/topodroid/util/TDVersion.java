@@ -32,7 +32,7 @@ public class TDVersion
   public static final String SYMBOL_VERSION = "46";
 
   // version of TopoDroid where TDR format was changed last  
-  public static final int VERSION_TDR = 604096;
+  public static final int VERSION_TDR = 604098;
 
   // increase to install last version of DistoX2 firmware
   public static final String FIRMWARE_VERSION = "28";

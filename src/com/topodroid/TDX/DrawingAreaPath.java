@@ -205,6 +205,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       if ( version >= 401090 ) level = dis.readInt();
       if ( version >= 401160 ) scrap = dis.readInt();
       if ( version >= 604096 ) scale = dis.readInt();
+      if ( version >= 604098 ) options = dis.readUTF();
       int npt = dis.readInt( );
 
       
@@ -216,7 +217,11 @@ public class DrawingAreaPath extends DrawingPointLinePath
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( thname );
         type = 0;
-        options = "-symbol " + thname;
+        if ( options == null ) {
+          options = "-symbol " + thname;
+        } else {
+          options = options + " -symbol " + thname;
+        }
       }
 
       DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible, scrap );
@@ -556,6 +561,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
         dos.writeInt( (scrap >= 0)? scrap : mScrap );
       // if ( version >= 604096 )
         dos.writeInt( mScale );
+      // if ( version >= 604098 )
+        dos.writeUTF( (mOptions != null)? mOptions : "" );
 
       int npt = size(); // number of line points
       dos.writeInt( npt );
