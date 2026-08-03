@@ -624,6 +624,7 @@ public class DXF
                                   int npt, String linetype, int color, float z, boolean p3D, int size ) //HBDxf
   {
     if ( mVersion14 ) {
+      int DXFsize = (int) (size+2)*25; // HBDxf
       printString( pw, 0, "LWPOLYLINE" );
       handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
       printLayerLinetypeColor( pw, layer, linetype, color );
