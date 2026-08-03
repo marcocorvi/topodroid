@@ -39,11 +39,10 @@
   <string name="tdm_title">TopoDroid Manager</string>
   <string name="tdm_config_project">project.tdconfig</string>
   <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
-    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
+  <string name="tdm_disconnected_survey">Vermessung ignoriert</string>
   <string name="new_survey_label">Neue Vermessung</string>
   <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
   <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
-    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
   <string name="symbols_recover">Zeichenwerkzeuge wiederherstellen?</string>
   <!-- UNUSED string name="version_check">Last version</string -->
   <!-- UNUSED string name="version_check_failed">Failed version check</string -->
@@ -685,7 +684,7 @@
   <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
   <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
   <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
-    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+  <string name="tdr_load_fail">Fehler beim lesen des TDR Files</string>
 
   <string name="toporobot_warning">WARNUNG: TopoRobot ist experimentell !</string>
   <string name="anomaly_warning">Magnetische Anomalie-Kompensation ist Expertenlevel!</string>
@@ -876,7 +875,7 @@
   <string name="button_off">aus</string>
   <string name="button_on">ein</string>
   <string name="button_open">Öffnen</string>
-  <string name="button_offset">Offset</string>
+  <string name="button_offset">Länge hinzufügen</string>
   <string name="button_read">Lesen</string>
   <string name="button_recover">Wiederherstellen</string>
   <string name="button_reverse">Rückgängig</string>
@@ -1012,7 +1011,7 @@
   <string name="hint_name">Name</string>
   <string name="hint_prefix">Prefix zu Messpunkten hinzufügen</string>
   <string name="hint_from">von</string>
-  <string name="hint_to">zu</string>
+  <string name="hint_to">nach</string>
   <string name="hint_azimuth">Azimuth</string>
   <string name="hint_clino">Clino</string>
   <string name="hint_roll">Rollwinkel</string>
@@ -1194,7 +1193,7 @@
   <string name="help_add_equate">Verbindungen hinzufügen</string>
   <string name="help_all_equates">Alle möglichen Verbindungen</string>
   <string name="help_equates">Verbindungspunkte</string>
-    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
+  <string name="help_equate_surveys">Passende Vermessungen anzeigen</string>
   <string name="help_stations_minus">Weniger Messpunkte</string>
   <string name="help_stations_plus">Mehr Messpunkte</string>
   <!-- UNUSED string name="export_bgcolor">Hintergrundfarbe</string -->
@@ -2089,7 +2088,7 @@
   <!-- UNUSED string name="equate_no_station">Kein Messpunkt ausgewählt</string -->
   <string name="equate_no_stations">Zu wenige Messpunkte</string>
   <string name="equate_no_nearby">Kein Messpunkt in der Nähe</string>
-    <!-- TODO string name="equate_exists">Stations already equated</string -->
+  <string name="equate_exists">Messpunkte bereits verbunden</string>
   <!-- UNUSED string name="menu_new">NEU</string -->
   <!-- UNUSED string name="menu_equate">NEUE ÜBERSCHNEIDUNG</string -->
   <!-- UNUSED string name="menu_equates">ÜBERSCHNEIDUNGEN</string -->
@@ -2108,7 +2107,7 @@
   <string name="title_drop">Vermessungen entfernen?</string>
   <string name="title_tdconfig">Projektname</string>
   <string name="title_surveys">Vermessungen</string>
-    <!-- TODO string name="title_tdsurveys">Select survey</string -->
+  <string name="title_tdsurveys">Vermessung auswählen</string>
   <string name="title_symbols">Aktive Symbole</string>
   <string name="title_symbol_choose">Symbolauswahl</string>
 
@@ -2232,9 +2231,9 @@
   <string name="cave_east">E: %1$.2f</string>
   <string name="cave_north">N: %1$.2f</string>
   <string name="cave_vert">Z: %1$.2f</string>
-  <string name="cave_distance">3D-Distanz: %1$.2f</string>
-  <string name="horz_distance">2D horizontale Distanz: %1$.2f</string>
-  <string name="cave_length">Höhlenlänge: %1$.1f D+ %2$.1f D- %3$.1f</string>
+  <string name="cave_distance">3D-Distanz: %1$.2fm</string>
+  <string name="horz_distance">2D horizontale Distanz: %1$.2fm</string>
+  <string name="cave_length">Länge: %1$.1fm (D+: %2$.1fm, D-: %3$.1fm)</string>
   <string name="cave_angle">Azimut: %1$.1f Clino: %2$.1f</string>
   <string name="east">E</string>
   <string name="north">N</string>

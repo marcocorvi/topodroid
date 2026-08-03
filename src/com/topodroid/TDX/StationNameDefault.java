@@ -325,7 +325,7 @@ class StationNameDefault extends StationName
                       if ( t - f > 1 ) {
                         TDLog.e("LOG to FILE bad increment " + f + " --> " + t );
                         TDLog.setLogStream( TDLog.LOG_FILE );
-                        TDLog.e("LOG bad increment [2] " + from + " - " + to + " sttaion " + station + " native " + (native_name != null) );
+                        TDLog.e("LOG bad increment [2] " + from + " - " + to + " station " + station + " native " + (native_name != null) );
                       } else {
                         // TDLog.v("normal increment " + from + " --> " + to );
                       }

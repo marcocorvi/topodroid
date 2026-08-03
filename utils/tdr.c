@@ -279,7 +279,7 @@ void readUserStation( FILE * fp ) // user station has no group
   int s = readInt( fp );       // scale
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   int scrap = (VERSION >= 401160 )? readInt( fp ) : 0;
-  printf("%ld= USER-STTAION:\n", pos);
+  printf("%ld= USER-STATION:\n", pos);
   readString( "  Name ", fp );            // name
   // if ( VERSION >= 401147 ) readString( "  Group ", fp ); // no group
   printf("  Scale %d X %.2f Y %.2f Level %02x Scrap %d\n", s, x, y, lvl, scrap );
