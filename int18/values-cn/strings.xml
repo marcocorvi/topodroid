@@ -363,7 +363,7 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string -->
     <string name="location_start_fine">开始定位</string>
     <string name="location_enabled">请确认手机获取位置已经打开</string>
-    <string name="location_no_permission">没开位置权限</string -->
+    <string name="location_no_permission">没开位置权限</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
     <string name="discovery_error">蓝牙发现错误: %1$s</string>
 
@@ -1761,7 +1761,7 @@
   <string name="pref_symbol_size_title">符号大小</string>
   <string name="pref_symbol_size_summary">底部栏符号大小</string>
   <string name="pref_toolbar_update_title">工具栏更新</string>
-  <string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
+  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
   <string name="pref_closeness_title">选择边界范围</string>
   <string name="pref_closeness_message">草图项目选择半径</string>
   <string name="pref_eraseness_title">橡皮擦尺寸</string>
