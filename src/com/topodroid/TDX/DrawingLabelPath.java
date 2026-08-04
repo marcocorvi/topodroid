@@ -298,7 +298,7 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\"", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mPointText );
+    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\" -align right", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mPointText );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");

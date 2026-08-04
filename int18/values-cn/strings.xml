@@ -78,15 +78,15 @@
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
-    <!-- TODO string name="pref_xt">Special functions</string -->
+    <string name="pref_gen">通用</string>
+    <string name="pref_ui">用户界面</string>
+    <string name="pref_data">数据</string>
+    <string name="pref_plot">草图</string>
+    <string name="pref_3d">3D查看器</string>
+    <string name="pref_io">导出</string>
+    <string name="pref_bt">蓝牙</string>
+    <string name="pref_cal">校准</string>
+    <string name="pref_xt">特殊功能</string>
 
     <string name="cut">剪切</string>
     <string name="copy">复制</string>
@@ -96,7 +96,7 @@
     <string name="memoryA3">DistoX A3 存储器</string>
     <string name="memoryX310">DistoX X310 存储器</string>
     <string name="memoryXBLE">DistoX-BLE 存储器</string>
-    <!-- TODO string name="memoryCavway">Cavway memory</string -->
+    <string name="memoryCavway">Cavway内存</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">用户</string>
@@ -122,8 +122,8 @@
     <string name="bad_sibling">坏的测量簇</string>
     <!-- UNUSED string name="bad_station">坏的站点: %1$s</string -->
     <string name="bad_station_name">不合规的站点名</string>
-    <!-- TODO string name="equal_station_names">Equal station names</string -->
-    <!-- TODO string name="invalid_name">Invalid name</string -->
+    <string name="equal_station_names">等效站点名称</string>
+    <string name="invalid_name">非法命名</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -137,7 +137,7 @@
     <string name="failed_snap_to_splays">未发现连线要连接的闭合副线</string>
     <string name="failed_append_to_line">未能追加到另一线段</string>
     <string name="failed_zoomfit">适应屏幕失败</string>
-    <!-- TODO string name="fail_forget_device">Android failed to forget BT device</string -->
+    <string name="fail_forget_device">Android系统删除蓝牙配对设备失败</string>
 
     <string name="bric_device">设备 %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -176,13 +176,13 @@
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
     <string name="calib_write_coeffs">校准数据写入 &#8230;</string>
     <string name="calib_validation">确认校准 %1$s vs %2$s</string>
-    <!-- TODO string name="calib_reset_ok">Resetted calibration</string -->
+    <string name="calib_reset_ok">重置校准参数</string>
 
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">使用 %1$s</string>
-    <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
-    <!-- TODO string name="cali_time">Calibration: %1$s</string -->
+    <string name="cali_err">误差: 平均 %1$.2f&#xb0;, 标准 %2$.2f&#xb0;. 最大 %3$.2f&#xb0;</string>
+    <string name="cali_time">校准: %1$s</string>
     <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
     <string name="calib_validate_error">平均误差: %1$.2f &#xb0;</string>
     <string name="calib_stddev">标准差: %1$.4f 度</string>
@@ -194,10 +194,10 @@
     <string name="calib_roll">滚转角差值: %1$.2f &#xb0;</string>
     <string name="calib_reset">重置DistoX校准 ?</string>
     <string name="calib_min_error">最小误差</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
-    <!-- TODO string name="calib_acc_thr">Accel. [&#x25;]</string -->
-    <!-- TODO string name="calib_mag_thr">Magn. [&#x25;]</string -->
-    <!-- TODO string name="calib_dip_thr">Dip [&#xb0;]</string -->
+    <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string>
+    <string name="calib_acc_thr">加速度计 [&#x25;]</string>
+    <string name="calib_mag_thr">地磁计 [&#x25;]</string>
+    <string name="calib_dip_thr">磁倾角 [&#xb0;]</string>
     <string name="magn_dip">磁倾角(dip) &#8230;</string>
     <string name="auto_calib" copyable="pt">自动校准</string>
     <string name="autocalib_not_supported">需要进行校准计算</string>
@@ -264,7 +264,7 @@
     <!-- CHANGED string name="strike_dip">敲击 %1$.0f Dip %2$.0f</string -->
     <string name="strike_dip">磁倾角(Dip)方位 %1$.0f 倾斜角 %2$.0f</string>
 
-    <!-- TODO string name="few_points">Too few data points</string -->
+    <string name="few_points">测点过少</string>
     <string name="few_data">数据不足</string>
     <string name="few_iter">失败:迭代太多</string>
     <string name="few_groups">数据组数据不足</string>
@@ -363,9 +363,9 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string -->
     <string name="location_start_fine">开始定位</string>
     <string name="location_enabled">请确认手机获取位置已经打开</string>
-    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
+    <string name="location_no_permission">没开位置权限</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
-    <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <string name="discovery_error">蓝牙发现错误: %1$s</string>
 
     <string name="error_azimuth_required">输入方位角</string>
     <string name="error_length_required">输入距离</string>
@@ -406,7 +406,7 @@
     <string name="error_value_required">输入赋值</string>
     <string name="error_bad_fixes">修正点不在测量数据中</string>
     <string name="error_bad_name">文件名已修改</string>
-    <!-- TODO string name="error_question">Please, enter a question</string -->
+    <string name="error_question">请输入问题</string>
 
     <string name="group_title">校准数据组</string>
     <!-- UNUSED string name="group_policy_four">原则: 四个一组</string -->
@@ -492,7 +492,7 @@
     <!-- UNUSED string name="no_undelete_paste">没有要恢复/粘贴的项目</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <!-- TODO string name="format_setting">Setting %1$s to %2$s ?</string -->
+    <string name="format_setting">设置 %1$s to %2$s ?</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
@@ -516,8 +516,8 @@
     <string name="menu_device">设备</string>
     <string name="menu_device_add">添加设备</string>
     <string name="menu_export">输出</string>
-    <!-- TODO string name="menu_bulkops">BULK OPS.</string -->
-    <!-- TODO string name="menu_exit">EXIT</string -->
+    <string name="menu_bulkops">BULK OPS.</string>
+    <string name="menu_exit">推出</string>
     <string name="menu_firmware">固件</string>
     <string name="menu_geopoint_app">地理点应用程序</string>
     <string name="menu_recover">恢复</string>
@@ -704,7 +704,7 @@
     <!-- UNUSED string name="shot_reverse">反测</string -->
     <string name="shot_to">到</string>
     <string name="shot_refreshed">刷新测点列表</string>
-    <!-- TODO string name="scan_type">Scan type</string -->
+    <string name="scan_type">扫描类型</string>
 
     <string name="station">测点</string>
     <string name="station_ask">插入测点到草图?</string>
@@ -719,7 +719,7 @@
     <string name="survey_delete">删除测量 ?</string>
     <string name="survey_move">移动测射到测量里 %1$s ?</string>
     <string name="survey_copy_all_flags">测点只有在显示的时候才允许复制</string>
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+    <string name="survey_copy_only_tail">只有最终测点才可以拷贝</string>
     <string name="survey_split">拆分测量 ?</string>
     <string name="survey_not_attached">警告:未连接的测量</string>
     <string name="survey_not_extend">警告:未设置测线扩展</string>
@@ -731,7 +731,7 @@
     <string name="saturated_coeffs">警告:饱和校正系数</string>
     <string name="out_of_memory">警告:内存不足!</string>
     <string name="disk_io_error">危险:磁盘读写错误!</string>
-    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+    <string name="tdr_load_fail">读取TDR文件失败</string>
 
     <string name="toporobot_warning">TopoRobot原则是实验性的!</string>
     <string name="anomaly_warning">磁力异常补偿需专业操作 !</string>
@@ -763,7 +763,7 @@
     <string name="toggle_failed">DistoX触发失败</string>
     <string name="toggle_ok">触发DistoX校准模式</string>
     <string name="undelete_text">点击项目恢复</string>
-    <!-- TODO string name="shot_paste_text">Shot paste</string -->
+    <string name="shot_paste_text">粘贴测点</string>
     <string name="undelete_shot">测线</string>
     <string name="undelete_overshoot">无效测线</string>
     <string name="undelete_check">检测</string>
@@ -773,15 +773,15 @@
     <string name="visible_border">可见边框</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <!-- UNUSED string name="wait_scan">扫描: 等待 &#8230;</string -->
-    <!-- TODO string name="calib_write_failed">Calib. upload: failed write</string -->
-    <!-- TODO string name="calib_read_failed">Calib. upload: failed read back</string -->
-    <!-- TODO string name="calib_check_failed">Calib. upload: failed check</string -->
+    <string name="calib_write_failed">校准参数上传: 写入失败</string>
+    <string name="calib_read_failed">校准参数上传: 回读失败</string>
+    <string name="calib_check_failed">校准参数上传: 校验失败</string>
     <string name="calib_write_ok">校准已输入DistoX</string>
     <string name="zip_saved">已保存 </string>
     <string name="zip_failed">文件压缩失败</string>
     <string name="zip_share_failed">不能分享zip档案</string>
     <string name="file_share_failed">无法分享文件</string>
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+    <string name="file_share_no_app">没有可分享的应用</string>
     <string name="unzip_fail">文件解压失败</string>
     <string name="unzip_fail_sqlite">错误 SQL: 删除测量项目并重试</string>
     <string name="unzip_fail_survey">错误:测量名称不匹配</string>
@@ -838,7 +838,7 @@
     <string name="hide_leg">重复的主线测线</string>
     <string name="hide_ids">测线 IDs</string>
     <string name="hide_splay">辐测侧线</string>
-    <!-- TODO string name="hide_scan">Scan sets</string -->
+    <string name="hide_scan">扫描集</string>
     <string name="slope_lside">侧线 l-尺寸</string>
 
     <!-- UNUSED string name="plan">平面图</string -->
@@ -872,14 +872,14 @@
     <string name="ask_gps_service">设置GPS服务?</string>
     <!-- UNUSED string name="ask_backups_clear">删除草图备份?</string -->
     <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
-    <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <string name="ask_clear_equates">Remove all equates?</string>
+    <string name="ask_forget_device">移除设备 %1$s?</string>
 
     <string name="button_add"       >添加       </string>
     <string name="button_apply"     >应用</string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >取消    </string>
-    <!-- TODO string name="button_forget"    >Forget</string -->
+    <string name="button_forget"    >移除</string>
     <string name="button_geocode"   >地理编码</string>
     <!-- UNUSED string name="button_change"    >更换    </string -->
     <string name="button_clipboard" >剪贴板 </string>
@@ -893,11 +893,11 @@
     <string name="button_current"   >激活    </string>
     <string name="button_delete"    >删除    </string>
     <string name="button_duplicate" >副本 </string>
-    <!-- TODO string name="button_empty"     >Empty</string -->
-    <!-- TODO string name="button_settime"   >Set time</string -->
+    <string name="button_empty"     >空</string>
+    <string name="button_settime"   >设置时间</string>
     <string name="button_surface"   >表面   </string>
-    <!-- TODO string name="button_splay"    copyable="all">Splay</string -->
-    <!-- TODO string name="button_scan"     copyable="all">Scan</string -->
+    <string name="button_splay"    copyable="all">侧线</string>
+    <string name="button_scan"     copyable="all">扫描</string>
     <string name="button_no_extend" >无延展</string>
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>
@@ -950,10 +950,10 @@
     <string name="button_clear_week">清除 1周  </string>
     <string name="button_clear_memory">清除内存</string>
     <string name="button_save"      >保存      </string>
-    <!-- TODO string name="button_select"    >Select    </string -->
-    <!-- TODO string name="button_toggle"    >Toggle</string -->
-    <!-- TODO string name="button_import"    >Import</string -->
-    <!-- TODO string name="button_submit"    >Submit</string -->
+    <string name="button_select"    >选择    </string>
+    <string name="button_toggle"    >触发</string>
+    <string name="button_import"    >导入</string>
+    <string name="button_submit"    >提交</string>
     <string name="button_leg_station">主线站点</string>
     <string name="button_all_station">所有站点</string>
     <string name="button_leg_search">主线搜索</string>
@@ -964,7 +964,7 @@
     <string name="button_split"     >分割     </string>
     <string name="button_to_sketch">To sketch</string>
     <string name="button_to_scrap" >To scrap</string>
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+    <string name="button_to_buffer">缓存</string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
     <string name="button_swap"      >交换      </string>
@@ -995,7 +995,7 @@
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">修复refs文件</string>
-    <!-- TODO string name="mode_scrap">Current scrap only</string -->
+    <string name="mode_scrap">只有当前scrap</string>
     <string name="mode_outline">只显示轮廓</string>
     <string name="mode_scale_ref">比例尺参考</string>
     <string name="mode_sections">截面</string>
@@ -1050,7 +1050,7 @@
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">蓝牙别名</string>
-    <!-- TODO string name="hint_api_key">API key</string -->
+    <string name="hint_api_key">API密钥</string>
     <string name="hint_bt_alias">蓝牙别名</string>
     <string name="hint_bt_code">设备代码</string>
     <string name="bt_alias_missing">蓝牙别名丢失</string>
@@ -1147,7 +1147,7 @@
     <string name="help_color">清除副线颜色</string>
     <string name="help_cwd">当前工作目录</string>
     <string name="help_join">加入线</string>
-    <!-- TODO string name="help_text">Insert text</string -->
+    <string name="help_text">输入文字</string>
     <!-- UNUSED string name="help_continue">继续画线</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">保存测点</string>
@@ -1313,7 +1313,7 @@
     <string name="export_xvi">Xvi 图像</string>
     <string name="export_with_xsections">包含横断面</string>
     <string name="export_grouped">不同标志分在不同图层</string>
-    <!-- TODO string name="export_origin">Origin station</string -->
+    <string name="export_origin">原始站点</string>
     <string name="export_with_reference">包含 XY 参考</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1339,14 +1339,14 @@
     <string name="import_diving_datamode">潜水数据模式</string>
     <string name="import_therion_path">跟随测量路径</string>
 
-    <!-- TODO string name="title_gemini">Enter your AI API key</string -->
-    <!-- TODO string name="title_ai_dialog">AI helper</string -->
-    <!-- TODO string name="title_ai_dialog_pref">AI configuration help</string -->
+    <string name="title_gemini">输入你的AI API密钥</string>
+    <string name="title_ai_dialog">AI助手</string>
+    <string name="title_ai_dialog_pref">AI配置帮助</string>
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
     <string name="title_recalibrate">校准</string>
-    <!-- TODO string name="title_calibration">Calibration</string -->
+    <string name="title_calibration">校准</string>
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1357,7 +1357,7 @@
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
-    <!-- TODO string name="title_scan_shot">Scan shots</string -->
+    <string name="title_scan_shot">扫描测点</string>
     <string name="title_search">站点/主线 查找</string>
     <string name="title_stations">站点</string>
     <string name="title_plot_search">测站搜索</string>
@@ -1397,8 +1397,8 @@
     <string name="title_photo_comment">照片注释</string>
     <string name="title_photo_list">照片</string>
     <string name="title_photo_view">照片</string>
-    <!-- TODO string name="title_plan">Plan view</string -->
-    <!-- TODO string name="title_profile">Profile view</string -->
+    <string name="title_plan">平面图</string>
+    <string name="title_profile">剖面图</string>
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">重新导入草图</string -->
@@ -1430,7 +1430,7 @@
     <string name="title_settings_gpx">GPX格式输出设置</string>
     <string name="title_settings_kml">KML输出设置</string>
     <string name="title_settings_srv">洞壁输出设定</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+    <string name="title_settings_ply">多边形输出设定</string>
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
     <string name="title_settings_survey">TopoDroid测量设置</string>
@@ -1463,8 +1463,8 @@
 
     <string name="title_shift">转换</string>
     <string name="title_shot_delete">删除测线 ?</string>
-    <!-- TODO string name="title_shot_edit">Shot edit</string -->
-    <!-- TODO string name="title_multishot">Shots operations</string -->
+    <string name="title_shot_edit">测点编辑</string>
+    <string name="title_multishot">测点操作</string>
     <string name="title_sensor_edit">传感器</string>
     <string name="title_sensor_list">传感器设置</string>
     <string name="title_split">草图分割</string>
@@ -1476,13 +1476,13 @@
     <string name="title_survey_export">输出测量</string>
     <string name="title_survey_rename">测量重命名</string>
     <string name="title_station_photo">站点照片</string>
-    <!-- TODO string name="title_team_dialog">Team names</string -->
+    <string name="title_team_dialog">团队名称</string>
     <string name="title_plot_rename">绘制操作</string>
     <string name="title_plot_zoomfit">缩放适应 / 定向缩放</string>
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_read_names">Station names map</string -->
+    <string name="title_read_names">站点名称地图</string>
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
     <string name="title_import_th2">Therion th2 文件</string>
@@ -1538,8 +1538,8 @@
 
   <string name="pref_locale_title">语言</string>
   <string name="pref_locale_summary">软件语言</string>
-  <!-- TODO string name="pref_gemini_title">AI key</string -->
-  <!-- TODO string name="pref_gemini_summary">Gemini API key</string -->
+  <string name="pref_gemini_title">AI密钥</string>
+  <string name="pref_gemini_summary">Gemini API密钥</string>
   <string name="pref_orientation_title">屏幕适应</string>
   <string name="pref_orientation_summary">软件屏幕适应</string>
   <string name="pref_single_back_title">单次操作返回</string>
@@ -1639,8 +1639,8 @@
   <string name="pref_survex_splay_summary">在Survex中添加测点到辐测中</string>
   <string name="pref_survex_lrud_title">Survex/Therion的左右上下</string>
   <string name="pref_survex_lrud_summary">添加左右上下到Survex/Therion输出</string>
-  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
-  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
+  <string name="pref_survex_epsg_title">EPSG "cs out"</string>
+  <string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string>
   <string name="pref_svg_program_title">SVG 程序</string>
   <string name="pref_svg_program_summary">SVG程序目标</string>
   <string name="pref_svg_grid_title">参考线</string>
@@ -1649,8 +1649,8 @@
   <string name="pref_svg_roundtrip_summary">延迟确定 SVG 输出</string>
   <string name="pref_svg_splays_title">SVG 副线</string>
   <string name="pref_svg_splays_summary">将辐测线添加到SVG输出</string>
-  <!-- TODO string name="pref_svg_groups_title">Type groups</string -->
-  <!-- TODO string name="pref_svg_groups_summary">Group items by type in SVG export</string -->
+  <string name="pref_svg_groups_title">类型组</string>
+  <string name="pref_svg_groups_summary">在SVG导出根据类型分组</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
   <string name="pref_svg_pointstroke_title">点选择</string>
@@ -1738,12 +1738,12 @@
   <string name="pref_bric_index_is_id_summary">使用BRIC序号作为测站编号</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug解决方案</string>
-  <!-- TODO string name="pref_cvwy_abs_title" copyable="all">Cavway ABS threshold</string -->
-  <!-- TODO string name="pref_cvwy_abs_summary" copyable="bg">Cavway shot accuracy ABS threshold</string -->
-  <!-- TODO string name="pref_cvwy_dip_title" copyable="all">Cavway Dip threshold</string -->
-  <!-- TODO string name="pref_cvwy_dip_summary" copyable="bg">Cavway shot accuracy Dip threshold</string -->
-  <!-- TODO string name="pref_cvwy_angle_title" copyable="all">Cavway Angle threshold</string -->
-  <!-- TODO string name="pref_cvwy_angle_summary" copyable="bg">Cavway shot accuracy Angle threshold</string -->
+  <string name="pref_cvwy_abs_title" copyable="all">Cavway模值阈值</string>
+  <string name="pref_cvwy_abs_summary" copyable="bg">Cavway测点精度模值阈值</string>
+  <string name="pref_cvwy_dip_title" copyable="all">Cavway磁倾角阈值</string>
+  <string name="pref_cvwy_dip_summary" copyable="bg">Cavway测点精度磁倾角阈值</string>
+  <string name="pref_cvwy_angle_title" copyable="all">Cavway角度误差阈值</string>
+  <string name="pref_cvwy_angle_summary" copyable="bg">Cavway测点精度角度误差阈值</string>
 
   <string name="pref_plot_screen_title">草图</string>
   <string name="pref_tool_line_title">线</string>
@@ -1760,8 +1760,8 @@
   <string name="pref_text_size_summary">列表中字体大小</string>
   <string name="pref_symbol_size_title">符号大小</string>
   <string name="pref_symbol_size_summary">底部栏符号大小</string>
-  <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
-  <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
+  <string name="pref_toolbar_update_title">工具栏更新</string>
+  <string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
   <string name="pref_closeness_title">选择边界范围</string>
   <string name="pref_closeness_message">草图项目选择半径</string>
   <string name="pref_eraseness_title">橡皮擦尺寸</string>
@@ -1873,7 +1873,7 @@
   <string name="pref_beep_volume_title">定时器提示音量</string>
   <string name="pref_beep_volume_summary">定时器提示音量百分比</string>
   <!-- TODO string name="pref_beep_length_title">Timer-beep length</string -->
-  <!-- TODO string name="pref_beep_length_summary">Duration of beep [msec]</string -->
+  <string name="pref_beep_length_summary">蜂鸣时长 [msec]</string>
   <string name="pref_extend_frac_title">部分延展</string>
   <string name="pref_extend_frac_summary">"延展" 小数部分</string>
   <string name="pref_recent_shot_title">最近的测线</string>
@@ -2440,10 +2440,10 @@
     <string name="warning_no_csv_type">没有指定CSV类型</string>
     <string name="warning_cavway_info">无法获取Cavway信息</string>
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
-    <!-- TODO string name="cavway_sync_failed">Failed to synchronize Cavway time</string -->
-    <!-- TODO string name="cavway_synchronized">Synchronized Cavway time</string -->
-    <!-- TODO string name="cavway_sync_ok">Cavway time synchronized</string -->
-    <!-- TODO string name="cavway_sync_offset">Cavway time offset: %1$d [min]</string -->
+    <string name="cavway_sync_failed">同步Cavway时间失败</string>
+    <string name="cavway_synchronized">同步Cavway时间</string>
+    <string name="cavway_sync_ok">Cavway时间已同步</string>
+    <string name="cavway_sync_offset">Cavway时间偏差: %1$d [min]</string>
 
     <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->
     <string name="done_convexhull">凸起外壳洞壁已完成</string>
