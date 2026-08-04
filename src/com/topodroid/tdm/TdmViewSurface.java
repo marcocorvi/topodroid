@@ -198,11 +198,12 @@ public class TdmViewSurface extends SurfaceView
 
   /** clear selected station
    */
-  void resetStation()
+  void clearSelectedStation()
   {
-    for ( TdmViewCommand command : mCommandManager ) {
-      command.mSelected = null;
+    for ( TdmViewCommand command : mCommandManager ) { // this is needed when there is an equate selection
+      command.clearSelected();
     }
+    // if ( mSelectedCommand != null ) mSelectedCommand.clearSelected();
     mSelectedCommand = null;
   }
 
@@ -369,14 +370,14 @@ public class TdmViewSurface extends SurfaceView
   }
 
   /** get the survey at a point (x,y)
-   * @param x   X coordinate (canvas)
-   * @param y   Y coordinate
-   * @param cmd excluded drawing item (null: no exclusion)
+   * @param x    X coordinate (canvas)
+   * @param y    Y coordinate
+   * @param cmds excluded drawing items (null: no exclusion)
    * @return true if a drawing item has been found (and saved in mSelectedCommand)
    */
-  boolean getSurveyAt( float x, float y, TdmViewCommand cmd )
+  boolean getSurveyAt( float x, float y, List<TdmViewCommand> cmds )
   {
-    if ( cmd == null ) {
+    if ( cmds == null ) {
       x = x / mZoom; // canvasToSceneX( x );
       y = y / mZoom; // canvasToSceneY( y );
     } // else 
@@ -386,10 +387,20 @@ public class TdmViewSurface extends SurfaceView
     double dmin = 100000; // FIXME a large number
     for ( TdmViewCommand command : mCommandManager ) {
       if ( ! command.isShowingStations () ) continue;
-      if ( command != cmd ) {
+      if ( cmds != null ) {
+        if ( cmds.contains( command ) ) continue;
+        double d = command.getStationAt( x, y, mTouchSlop );
+        if ( d < mTouchSlop ) {
+          mSelectedCommand = command;
+          break;
+        }
+      } else { // find the best
         double d = command.getStationAt( x, y, mTouchSlop );
         if ( d < mTouchSlop && d < dmin ) {
           dmin = d;
+          if ( mSelectedCommand != null ) {
+            mSelectedCommand.clearSelected();
+          }
           mSelectedCommand = command;
         }
       }
@@ -401,7 +412,7 @@ public class TdmViewSurface extends SurfaceView
    */
   TdmViewStation selectedStation()
   {
-    return ( mSelectedCommand == null )? null : mSelectedCommand.mSelected;
+    return ( mSelectedCommand == null )? null : mSelectedCommand.getSelected();
   }
 
   /** @return the selected command
@@ -412,8 +423,7 @@ public class TdmViewSurface extends SurfaceView
    */
   String selectedStationName()
   { 
-    if ( mSelectedCommand == null || mSelectedCommand.mSelected == null ) return null;
-    return mSelectedCommand.mSelected.name();
+    return ( mSelectedCommand == null )? null : mSelectedCommand.getSelectedName();
   }
 
   /** @return the name of the selected command

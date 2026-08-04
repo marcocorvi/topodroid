@@ -36,7 +36,7 @@ import android.util.ArraySet;
 
 class ParserTopoRobot extends ImportParser
 {
-  private static boolean TR_LOG = false; 
+  private static boolean TR_LOG = false;
 
   private class TRobotTags
   {  
@@ -345,12 +345,13 @@ class ParserTopoRobot extends ImportParser
     codes = new ArrayList< TRobotCode >();
 
     int line_nr = 0;
+    // int shot_nr = 0;
     try {
       line = nextLine( br ); ++ line_nr;
       if ( TR_LOG)  TDLog.v("TR parser " + line_nr + " first line length " + line.length() );
       while ( line != null ) {
         line = line.trim();
-        if ( TR_LOG)  TDLog.v( "LINE: " + line );
+        if ( TR_LOG)  TDLog.v( "LINE " + line_nr + ": " + line );
         token = splitLine( line );
         if ( ( token.length >= 6 && token[5].startsWith("1-") ) ) {
           // ignore
@@ -486,6 +487,8 @@ class ParserTopoRobot extends ImportParser
                       } else {
                         shots.add( new ParserShot( from, station, length, azimuth, clino, 0.0f, extend, LegType.NORMAL, false, false, false, "" ) );
                       }
+                      // ++ shot_nr;
+                      // TDLog.v( shot_nr + " <" + line_nr + ">: " + from + " " + station + " " + length + " " + azimuth + " " + clino );
                       from = station;
                       if ( left > 0.0f ) {
 	                float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );

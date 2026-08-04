@@ -29,7 +29,7 @@ public class TDVersion
 
   // symbol version of installed symbols is stored in the database
   // symbol version of the current  symbols is in the app
-  public static final String SYMBOL_VERSION = "46";
+  public static final String SYMBOL_VERSION = "47";
 
   // version of TopoDroid where TDR format was changed last  
   public static final int VERSION_TDR = 604098;

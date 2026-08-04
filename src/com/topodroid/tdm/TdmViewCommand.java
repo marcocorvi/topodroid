@@ -37,7 +37,7 @@ import java.util.ArrayList;
 public class TdmViewCommand 
 {
   TdmSurvey  mSurvey;
-  TdmViewStation mSelected;
+  private TdmViewStation mSelected;
   TdmViewStation mEquateStation;
   List< TdmViewPath >    mFixedStack;
   ArrayList< TdmViewStation > mStationsArray;
@@ -110,6 +110,14 @@ public class TdmViewCommand
   /** @return the selected station, or null
    */
   TdmViewStation getSelected() { return mSelected; }
+
+  /** @return the name of the selected station or null
+   */
+  String getSelectedName() { return ( mSelected == null )? null : mSelected.name(); }
+
+  /** clear selected station
+   */
+  void clearSelected() { mSelected = null; }
 
   /** @return the survey name
    */
@@ -382,6 +390,7 @@ public class TdmViewCommand
     }
     return 2 * tolerance;
   }
+
     
   // private Paint makePaint( int color, Style style )
   // {

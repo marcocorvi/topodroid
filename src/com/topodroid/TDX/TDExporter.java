@@ -369,7 +369,7 @@ public class TDExporter
         pw.format("  <properties id=\"\" name=\"\" origin=\"%s\" ", origin );
       }
       // FIXME TODO_CSURVEY
-      pw.format(      "creatid=\"%s\" creatversion=\"%s\" creatdate=\"%s\" ", creator, date );
+      pw.format(      "creatid=\"%s\" creatversion=\"%s\" creatdate=\"%s\" ", TDVersion.APP_NAME, TDVersion.string(), date );
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" calculateversion=\"-1\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
       pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\"");
