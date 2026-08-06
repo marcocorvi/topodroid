@@ -1,0 +1,46 @@
+encoding utf-8
+symbol point
+name map-connection
+name-cs spojení_map
+th_name map-connection
+color 0xffffff
+path
+  addCircle 0 0 6
+  moveTo -12 0
+  lineTo -6 0
+  moveTo 6 0
+  lineTo 12 0
+  moveTo 0 -12
+  lineTo 0 -6
+  moveTo 0 6
+  lineTo 0 12
+  moveTo -4.25 -4.25
+  lineTo  4.25 4.25
+  moveTo -4.25 4.25
+  lineTo  4.25 -4.25
+  moveTo 4.25 -4.25
+  lineTo 4.5 -6
+  moveTo 4.25 -4.25
+  lineTo 6 -4.5
+  moveTo 4.5 -4.5
+  lineTo 4.5 -6
+  moveTo 4.5 -4.5
+  lineTo 6 -4.5
+  moveTo 4.25 -4.25
+  lineTo 5 -5
+  moveTo 5.5 -5.5
+  lineTo 6 -6
+  moveTo 6.5 -6.5
+  lineTo 7 -7
+  moveTo 7.5 -7.5
+  lineTo 8 -8
+  moveTo 8.5 -8.5
+  lineTo 9 -9
+  lineTo 9.5 -9
+  moveTo 10 -9
+  lineTo 10.5 -9
+  moveTo 11 -9
+  lineTo 11.5 -9
+  addCircle 0 0 3
+endpath
+endsymbol

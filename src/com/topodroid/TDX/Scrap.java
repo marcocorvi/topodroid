@@ -3026,7 +3026,9 @@ public class Scrap
           DrawingPath path = (DrawingPath)cmd;
           if ( path.isLine() ) { // path instanceof DrawingLinePath
             DrawingLinePath line = (DrawingLinePath)path;
-            if ( line.hasOutline() ) line.drawWithPaint( canvas, mat, bbox, BrushManager.fixedGrid100Paint );
+            if ( line.hasOutline() ) {
+              line.drawWithPaint( canvas, mat, bbox, BrushManager.fixedGrid100Paint );
+            }
           }
         }
       }
@@ -3040,7 +3042,7 @@ public class Scrap
    * @param bbox      clipping rectangle
    * @param xor_color xor colors
    */
-  void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
+  void drawAll( Canvas canvas, Matrix matrix, float scale, float zoom, RectF bbox, int xor_color )
   {
     if ( mCurrentStack == null ) return;
     synchronized( TDPath.mCommandsLock ) {
@@ -3051,6 +3053,7 @@ public class Scrap
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               // Paint paint = new Paint( line.mPaint
+              line.zoomPathEffect( zoom );
               line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 Paint paint = new Paint( BrushManager.mSectionPaint );
@@ -3076,6 +3079,7 @@ public class Scrap
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
+                line.zoomPathEffect( zoom );
                 line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   Paint paint = new Paint( BrushManager.mSectionPaint );
@@ -3122,7 +3126,7 @@ public class Scrap
    * @param scale    rescaling factor
    * @param bbox     clipping rectangle
    */
-  void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  void drawAll( Canvas canvas, Matrix matrix, float scale, float zoom, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
     synchronized( TDPath.mCommandsLock ) {
@@ -3133,6 +3137,7 @@ public class Scrap
             cmd.draw( canvas, matrix, scale, bbox );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
+              line.zoomPathEffect( zoom );
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, BrushManager.mSectionPaint );
               } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
@@ -3150,6 +3155,7 @@ public class Scrap
               cmd.draw( canvas, matrix, scale, bbox );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
+                line.zoomPathEffect( zoom );
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, BrushManager.mSectionPaint );
                 } else if ( BrushManager.isLineSlope( line.mLineType ) ) {

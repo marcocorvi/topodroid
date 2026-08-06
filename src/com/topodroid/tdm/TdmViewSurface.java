@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDUtil;
 
 import android.content.Context;
 
@@ -32,13 +33,12 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 // import android.view.View;
 // import android.view.MotionEvent;
-import android.view.ViewConfiguration;
 
+import java.util.List;
 import java.util.ArrayList;
 // import java.util.TreeSet;
 import java.util.Collections;
 // import java.util.Iterator;
-import java.util.List;
 
 /**
  */
@@ -57,10 +57,10 @@ public class TdmViewSurface extends SurfaceView
   int mHeight;           // canvas height
   private PointF mDisplayCenter;
   private int mStationRate = 1;
-  private int mTouchSlop; // pxl
+
 
   ArrayList< TdmViewCommand > mCommandManager; // FIXME not private only to export DXF
-  TdmViewCommand mSelectedCommand = null;
+  TdmViewCommand mSelectedCommand = null;      // command with selected station
   final List< TdmViewEquate > mEquates;
   final List< TdmPossibleEquate > mPossibleEquates;
 
@@ -81,10 +81,6 @@ public class TdmViewSurface extends SurfaceView
     // TDLog.v("Tdm view surface cstr");
     mWidth = 0;
     mHeight = 0;
-
-    ViewConfiguration view_config = ViewConfiguration.get( context );
-    mTouchSlop = 50; // view_config.getScaledTouchSlop();
-    // TDLog.v("Surface touch slop " + mTouchSlop );
 
     mXoffset = 0;
     mYoffset = 0;
@@ -117,6 +113,19 @@ public class TdmViewSurface extends SurfaceView
     mCommandManager = new ArrayList< TdmViewCommand >();
     mEquates = Collections.synchronizedList( new ArrayList< TdmViewEquate >() );
     mPossibleEquates = Collections.synchronizedList( new ArrayList<TdmPossibleEquate>() );
+  }
+
+  /** @return the list of commands with a selected station
+   */
+  List< TdmViewCommand > getAllSelectedCommands()
+  {
+    ArrayList< TdmViewCommand > ret = new ArrayList<>();
+    for ( TdmViewCommand cmd : mCommandManager ) {
+      if ( cmd.hasSelected() ) {
+        ret.add( cmd );
+      }
+    }
+    return ret;
   }
 
   /** @return true if there is an equate between the two surveys 
@@ -200,6 +209,7 @@ public class TdmViewSurface extends SurfaceView
    */
   void clearSelectedStation()
   {
+    // TDLog.v("Surface clear all selected");
     for ( TdmViewCommand command : mCommandManager ) { // this is needed when there is an equate selection
       command.clearSelected();
     }
@@ -375,32 +385,30 @@ public class TdmViewSurface extends SurfaceView
    * @param cmds excluded drawing items (null: no exclusion)
    * @return true if a drawing item has been found (and saved in mSelectedCommand)
    */
-  boolean getSurveyAt( float x, float y, List<TdmViewCommand> cmds )
+  boolean getSurveyAt( float x, float y, List<TdmViewCommand> cmds, float tolerance )
   {
     if ( cmds == null ) {
       x = x / mZoom; // canvasToSceneX( x );
       y = y / mZoom; // canvasToSceneY( y );
     } // else 
       // x,y are scene coords
-    // TDLog.v("View surface: get survey at " + x + " " + y );
+    // TDLog.v("View surface: get survey at " + x + " " + y + ( (cmds != null)? " all" : " best") );
     mSelectedCommand = null;
     double dmin = 100000; // FIXME a large number
     for ( TdmViewCommand command : mCommandManager ) {
       if ( ! command.isShowingStations () ) continue;
       if ( cmds != null ) {
         if ( cmds.contains( command ) ) continue;
-        double d = command.getStationAt( x, y, mTouchSlop );
-        if ( d < mTouchSlop ) {
+        double d = command.getStationAt( x, y, tolerance );
+        if ( d < tolerance ) {
           mSelectedCommand = command;
           break;
         }
       } else { // find the best
-        double d = command.getStationAt( x, y, mTouchSlop );
-        if ( d < mTouchSlop && d < dmin ) {
+        double d = command.getStationAt( x, y, tolerance );
+        if ( d < tolerance && d < dmin ) {
           dmin = d;
-          if ( mSelectedCommand != null ) {
-            mSelectedCommand.clearSelected();
-          }
+          // if ( mSelectedCommand != null ) mSelectedCommand.clearSelected(); // leave the other selection to highlight the equate
           mSelectedCommand = command;
         }
       }
@@ -467,6 +475,9 @@ public class TdmViewSurface extends SurfaceView
    */
   void refresh()
   {
+    if ( TdmViewActivity.resetTouched() ) {
+      TDUtil.slowDown( 10 );
+    }
     Canvas canvas = null;
     try {
       canvas = mHolder.lockCanvas();

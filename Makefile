@@ -187,7 +187,19 @@ SRC = \
   ./libs/armeabi-v7a/libnativename.so \
   ./libs/armeabi-v7a/libpowercrust.so \
   ./libs/armeabi-v7a/libtiffdecoder.so \
-  ./libs/armeabi-v7a/libtiff.so 
+  ./libs/armeabi-v7a/libtiff.so \
+  ./jni/*.mk \
+  ./jni/*.c \
+  ./jni/*.h \
+  ./jni/jpeg/* \
+  ./jni/png/* \
+  ./jni/libs/arm64-v8a/* \
+  ./jni/libs/armeabi-v7a/* \
+  ./jni/tiff/*.mk \
+  ./jni/tiff/libtiff/* \
+  ./jni/tiff/config/* ./jni/tiff/configure* ./jni/tiff/Makefile* ./jni/tiff/autogen.sh ./jni/tiff/aclocal.m4 \
+  ./jni/tiff/port/* ./jni/tiff/m4/* ./jni/tiff/nmake.opt \
+  ./jni/tiff/README* ./jni/tiff/VERSION ./jni/tiff/COPYRIGHT ./jni/tiff/HOWTO-RELEASE ./jni/tiff/SConstruct
 
 EXTRA_SRC = \
   ./studio/* \

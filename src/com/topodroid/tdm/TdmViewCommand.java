@@ -37,7 +37,7 @@ import java.util.ArrayList;
 public class TdmViewCommand 
 {
   TdmSurvey  mSurvey;
-  private TdmViewStation mSelected;
+  private TdmViewStation mSelected; // selected station
   TdmViewStation mEquateStation;
   List< TdmViewPath >    mFixedStack;
   ArrayList< TdmViewStation > mStationsArray;
@@ -117,7 +117,15 @@ public class TdmViewCommand
 
   /** clear selected station
    */
-  void clearSelected() { mSelected = null; }
+  void clearSelected() 
+  { 
+    // TDLog.v( name() + " clear selected");
+    mSelected = null;
+  }
+
+  /** @return true if this command has a selected station
+   */
+  boolean hasSelected() { return mSelected != null; }
 
   /** @return the survey name
    */
@@ -346,7 +354,8 @@ public class TdmViewCommand
   /** find the stations close to a canvas point (closest than 40 [scene])
    * @param x   X coord [scene ?]
    * @param y   Y coord [scene ?]
-   * @return the (rescaled) station(s) closest distance from the point - 80 if no station is found
+   * @param tolerane closeness tolearnce [pxl]
+   * @return the (rescaled) station(s) closest distance from the point 
    * @note the found station is stored in mSelected
    */
   public double getStationAt( float x, float y, float tolerance )
@@ -382,7 +391,7 @@ public class TdmViewCommand
           }
         }
       }
-      // TDLog.v("get station at checked " + cnt + " buckets");
+      // TDLog.v( name() + " get station at: selected " + ( ( mSelected == null )? "null" : mSelected.name() ) );
     }
     if ( mSelected != null ) {
       mSelected.d = dmin * mScale;

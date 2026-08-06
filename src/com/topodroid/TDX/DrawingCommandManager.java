@@ -105,7 +105,7 @@ public class DrawingCommandManager
   private boolean mDisplayPoints;
 
   private Matrix  mMatrix;
-  private float   mScale; // current zoom: value of 1 pl in scene space
+  private float   mScale; // current zoom: value of 1 pxl in scene space
   private boolean mLandscape = false;
   private String  mPlotName;
 
@@ -1713,6 +1713,9 @@ public class DrawingCommandManager
    * @param zoom   used for scalebar and selection points (use negative zoom for pdf print)
    * @param station_splay ??? whether to draw splays as dots
    * @param inverted_colors   whether colors must be inverted
+   * 
+   * small zoom = small drawing on the screen = larger scale
+   * mScale is approximately the inverse of zoom 
    */
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay, boolean inverted_colors )
   {
@@ -1963,9 +1966,9 @@ public class DrawingCommandManager
       } else {
         synchronized( mSyncScrap ) {
           if ( inverted_colors ) {
-            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox, 1 );
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, zoom/2, bbox, 1 );
           } else {
-            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox );
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, zoom/2, bbox );
           }
         }
       }
@@ -1977,9 +1980,9 @@ public class DrawingCommandManager
             scrap.drawGreyOutline( canvas, mm, bbox );
           }
           if ( inverted_colors ) {
-            mCurrentScrap.drawAll( canvas, mm, scale, bbox, 1 );
+            mCurrentScrap.drawAll( canvas, mm, scale, zoom/2, bbox, 1 );
           } else { 
-            mCurrentScrap.drawAll( canvas, mm, scale, bbox );
+            mCurrentScrap.drawAll( canvas, mm, scale, zoom/2, bbox );
           }
         }
         if ( sidebars && mDisplayPoints ) {

@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.graphics.PathEffect;
 import android.graphics.DashPathEffect;
 import android.graphics.ComposePathEffect;
 import android.graphics.PathDashPathEffect;
@@ -54,6 +55,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   public int mOutline; // TH2EDIT package
   private boolean mReversed;
   private int mLSide = -1;
+  private PathEffect mPathEffect = null;
 
   // FIXME-COPYPATH
   // @Override 
@@ -263,16 +265,21 @@ public class DrawingLinePath extends DrawingPointLinePath
     // TDLog.v("Line set scale " + scale + " width " + width );
     mPaint.setStrokeWidth( width );
     mScale = scale;
-    if ( scale >= -2 && scale <= 2 ) setPathEffectScale( mEffectScale[ 2 + scale ] );
+    if ( scale >= -2 && scale <= 2 ) {
+      if ( BrushManager.hasLineEffect( mLineType ) ) {
+        float s  = mEffectScale[ 2 + scale ];
+        setPathEffectScale( s );
+      }
+    }
   }
 
+  /** rescale path-effect
+   * @param s scale factor (greater than 1: make effect bigger)
+   */
   private void setPathEffectScale( float s )
   {
     if ( ! BrushManager.hasLineEffect( mLineType ) ) return;
-    // TODO scale the path effect
     // TDLog.v("set path effect scale " + s );
-    Matrix m = new Matrix();
-    m.setScale( s, s );
     DashPathEffect dash_effect = null;
     float[] dash0 = BrushManager.getLineLib().getLineDash( mLineType );
     if ( dash0 != null ) {
@@ -282,19 +289,32 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     Path base_effect = BrushManager.getLineLib().getLineEffectPath( mLineType, mReversed );
     if ( base_effect != null ) {
+      Matrix m = new Matrix();
+      m.setScale( s, s );
       Path line_effect = new Path( base_effect );
       float len = BrushManager.getLineLib().getLineEffectLength( mLineType );
       line_effect.transform( m );
       len *= s;
       PathDashPathEffect path_effect = new PathDashPathEffect( line_effect, len, 0, PathDashPathEffect.Style.MORPH );
       if ( dash_effect != null ) {
-        mPaint.setPathEffect( new ComposePathEffect( path_effect, dash_effect ) );
+        mPathEffect = new ComposePathEffect( path_effect, dash_effect );
       } else {
-        mPaint.setPathEffect( path_effect );
+        mPathEffect = path_effect;
       }
     } else if ( dash_effect != null ) {
-      mPaint.setPathEffect( dash_effect );
+      mPathEffect = dash_effect;
     }
+    mPaint.setPathEffect( mPathEffect );
+  }
+
+  /**
+   * @param scale   zoom scale
+   */
+  void zoomPathEffect( float scale )
+  {
+    if ( ! BrushManager.hasLineEffect( mLineType ) ) return;
+    float s  = mEffectScale[ 2 + mScale ] * scale;
+    setPathEffectScale( s );
   }
 
   // @override

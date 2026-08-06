@@ -28,7 +28,7 @@ class TdmViewStation
   float y;
   Path mPath;
   boolean mEquated;
-  double d;  // distance on selection
+  double d;  // distance on selection [pxl]
   boolean mChecked;
   CheckBox mCB;
   private float xoff; // equate: command offsets

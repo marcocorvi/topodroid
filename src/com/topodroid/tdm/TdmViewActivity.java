@@ -49,6 +49,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewConfiguration;
 // import android.view.ViewGroup.LayoutParams;
 // import android.view.ViewGroup;
 // import android.view.Display;
@@ -123,6 +124,12 @@ public class TdmViewActivity extends MyActivity
   // private PointF mOffset0 = new PointF( 0f, 0f );
   private boolean doMove = false;
   private int mNrSurveys = 0; // number of surveys
+
+  private int mWithStation = 0;
+  private TdmViewCommand mSelectedCommand = null;
+
+  private float mTouchSlop; // pxl
+  private float mTouchSlop3; // pxl
 
   @Override
   public void onVisibilityChanged(boolean visible)
@@ -202,6 +209,11 @@ public class TdmViewActivity extends MyActivity
 
       TopoDroidApp.updateAnalytic( TDAnalytics.TDM_EQ_VIEW );
       getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
+
+      ViewConfiguration view_config = ViewConfiguration.get( this );
+      mTouchSlop = 2 * view_config.getScaledTouchSlop(); // was 50
+      mTouchSlop3 = mTouchSlop * 3;
+      // TDLog.v("View touch slop " + mTouchSlop );
 
       // Display display = getWindowManager().getDefaultDisplay();
       // DisplayMetrics dm = new DisplayMetrics();
@@ -441,14 +453,20 @@ public class TdmViewActivity extends MyActivity
       }
     }
 
+    private static boolean mTouched = false;
 
-    int mWithStation = 0;
-    TdmViewCommand mSelectedCommand = null;
+    static boolean resetTouched()
+    {
+      boolean ret = mTouched;
+      mTouched = false;
+      return ret;
+    }
 
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
       // TDLog.v("onTouch enter");
       MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
+      mTouched = true;
       // dumpEvent( event );
 
       float x_canvas = event.getX();
@@ -471,9 +489,9 @@ public class TdmViewActivity extends MyActivity
         mSaveX = x_canvas;
         mSaveY = y_canvas;
         doMove = true;
-        // TDLog.v( "DOWN at " + mSaveX + " " + mSaveY + " has possible eq. " + hasPossibeEquates() + " with station " + mWithStation );
+        // TDLog.v( "DOWN at " + mSaveX + " " + mSaveY + " with station " + mWithStation );
         if ( mWithStation == 0 ) {
-          boolean ret = mDrawingSurface.getSurveyAt( mSaveX, mSaveY, null ); // this uses getStationAt
+          boolean ret = mDrawingSurface.getSurveyAt( mSaveX, mSaveY, null, mTouchSlop ); // this uses getStationAt
           if ( ret ) {
             // TDLog.v("got survey at point");
             boolean added = false;
@@ -515,7 +533,7 @@ public class TdmViewActivity extends MyActivity
           float x_shft = x_canvas - mSaveX; // compute shift
           float y_shft = y_canvas - mSaveY;
           if ( doMove ) {
-            if ( Math.abs( x_shft ) < 60 && Math.abs( y_shft ) < 60 ) {
+            if ( Math.abs( x_shft ) < mTouchSlop3 && Math.abs( y_shft ) < mTouchSlop3 ) {
               float zoom = mDrawingSurface.mZoom;
               x_shft /= zoom;                // add shift to offset
               y_shft /= zoom; 
@@ -523,9 +541,15 @@ public class TdmViewActivity extends MyActivity
               // mDrawingSurface.refresh();
               mSaveX = x_canvas; 
               mSaveY = y_canvas;
+            } else {
+              doMove = false;
+              mDrawingSurface.clearSelectedStation();
+              mWithStation = 0;
+              mSelectedCommand = null;
             }
+          } else {
+            doMove = true;
           }
-          doMove = true;
         } else { // mTouchMode == MODE_ZOOM
           float newDist = getEventPointerSpacing( event );
           // TDLog.v( "MOVE (zoom) dist " + newDist );
@@ -541,8 +565,9 @@ public class TdmViewActivity extends MyActivity
 
       // ---------------------------------------- UP
       } else if (action == MotionEvent.ACTION_UP) {
-        // TDLog.v( "UP");
+        TDLog.v( "UP withStation " + mWithStation );
         if ( mWithStation != 1 ) {
+          TDLog.v(" clear selected stations" );
           mDrawingSurface.clearSelectedStation();
         }
         if ( mWithStation == 2 ) {
@@ -689,25 +714,21 @@ public class TdmViewActivity extends MyActivity
       }
     } else {
       boolean ok = false;
-      // TdmViewCommand cmd1 = mSelectedCommand;
-      // TdmSurvey srv1 = cmd1.mSurvey;
+      TdmViewCommand cmd1 = mSelectedCommand;
       TdmViewStation vst1 = mSelectedCommand.getSelected();
+      // TdmSurvey srv1 = cmd1.mSurvey;
       if ( vst1 != null ) {
         // TdmStation stn1 = vts1.mStation;
         float x = vst1.x + mSelectedCommand.mXoff;
         float y = vst1.y + mSelectedCommand.mYoff;
         String name1 = mDrawingSurface.selectedStationName();
-        // TDLog.v( "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y + " name " + name1 );
+        // TDLog.v( "handle equate: selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y + " name " + name1 );
         if ( name1 != null ) {
           final String st1 = name1 + "@" + mDrawingSurface.selectedCommandName();
           boolean tried_equate = false;
-          ArrayList< TdmViewCommand > excluded_cmd = new ArrayList<>();
-          excluded_cmd.add( mSelectedCommand );
-          while ( mDrawingSurface.getSurveyAt( x, y, excluded_cmd ) ) {
-            TdmViewCommand cmd = mDrawingSurface.selectedCommand();
-            if ( cmd == null ) break;
-            tried_equate = true;
-            excluded_cmd.add( cmd );
+          List< TdmViewCommand > cmds = mDrawingSurface.getAllSelectedCommands();
+          for ( TdmViewCommand cmd : cmds ) {
+            if ( cmd == cmd1 ) continue;
             String name2 = mDrawingSurface.selectedStationName();
             if ( name2 != null ) {
               final String st2 = name2 + "@" + mDrawingSurface.selectedCommandName();
@@ -722,9 +743,33 @@ public class TdmViewActivity extends MyActivity
               );
             }
           }
-          if ( tried_equate ) {
-            mDrawingSurface.clearSelectedStation();
-          }
+          mDrawingSurface.clearSelectedStation();
+
+          // ArrayList< TdmViewCommand > excluded_cmd = new ArrayList<>();
+          // excluded_cmd.add( mSelectedCommand );
+          // while ( mDrawingSurface.getSurveyAt( x, y, excluded_cmd, mTouchSlop/2 ) ) {
+          //   TdmViewCommand cmd = mDrawingSurface.selectedCommand();
+          //   if ( cmd == null ) break;
+          //   tried_equate = true;
+          //   excluded_cmd.add( cmd );
+          //   String name2 = mDrawingSurface.selectedStationName();
+          //   if ( name2 != null ) {
+          //     final String st2 = name2 + "@" + mDrawingSurface.selectedCommandName();
+          //     TDLog.v( "Equate " + st1 + " with " + st2 );
+          //     String title = String.format( getResources().getString( R.string.title_equate_with ), st1, st2 );
+          //     TopoDroidAlertDialog.makeAlert( this, getResources(), title, 
+          //       new DialogInterface.OnClickListener() {
+          //         @Override public void onClick( DialogInterface dialog, int btn ) {
+          //           makeEquate( st1, st2 );
+          //         }
+          //       }
+          //     );
+          //   }
+          // }
+          // if ( tried_equate ) {
+          //   TDLog.v("tried equate: clear selected stations" );
+          //   mDrawingSurface.clearSelectedStation();
+          // }
         }
       }
       if ( ! ok ) { 
