@@ -684,6 +684,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="section_name">section comment</string>
     <!-- UNUSED string name="scrap_outline">Sketch outline</string -->
     <string name="scrap_string">Sketch scrap: %1$d / %2$d</string>
+    <string name="scrap_index">Scrap %1$d</string>
     <string name="section_point_not_allowed">section point not allowed</string>
     <string name="section_line_not_allowed">section line not allowed</string>
 
@@ -2268,6 +2269,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="equate_no_stations">Too few stations</string>
     <string name="equate_no_nearby">No station nearby</string>
     <string name="equate_exists">Stations already equated</string>
+    <string name="equate_same_station">Cannot equate a station with itself</string>
 
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->

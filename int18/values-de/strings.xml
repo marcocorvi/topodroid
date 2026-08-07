@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="ai_null_chat">Kein KI Chat konfiguriert</string>
   <string name="ai_error">KI Fehler: %1$s</string>
   <string name="ai_internet">Warnung: KI benötigt eine Internetverbindung.</string>
@@ -1636,11 +1636,11 @@
   <string name="pref_bric_index_is_id_summary">BRIC-Index als Messpunktename verwenden</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 Bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 Bug Workaround</string>
-  <string name="pref_cvwy_abs_title">Cavway ABS Schwellenwert</string>
+  <string name="pref_cvwy_abs_title">Cavway Distanz Schwellenwert</string>
   <string name="pref_cvwy_abs_summary">Cavway Distanz-Genauigkeit Schwellenwert</string>
   <string name="pref_cvwy_dip_title">Cavway Neigung Schwellenwert</string>
   <string name="pref_cvwy_dip_summary">Cavway Neigungs-Genauigkeit Schwellenwert</string>
-  <string name="pref_cvwy_angle_title">Cavway Winkel threshold</string>
+  <string name="pref_cvwy_angle_title">Cavway Winkel Schwellenwert</string>
   <string name="pref_cvwy_angle_summary">Cavway Winkel-Genauigkeit Schwellenwert</string>
   <string name="pref_plot_screen_title">Skizze</string>
   <string name="pref_tool_line_title">Linien</string>
