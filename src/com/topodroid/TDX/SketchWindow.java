@@ -299,11 +299,6 @@ public class SketchWindow extends ItemDrawer
 
   // ERASE - EDIT mode and size
 
-  private int mEraseScale  = 1; // set in makeButtons
-  private int mSelectScale = 1;
-  private float mEraseSize  = TDSetting.mEraseness;
-  private float mSelectSize = TDSetting.mSelectness;
-
   private boolean mSelectStation;
 
   // protected static int mEditRadius = 0; 
@@ -966,15 +961,15 @@ public class SketchWindow extends ItemDrawer
     // TDLog.v("SKETCH erase scale " + mEraseScale );
     switch ( mEraseScale ) {
       case Drawing.SCALE_SMALL:
-        mEraseSize = 0.5f * TDSetting.mEraseness;
+        mEraseSize = 0.75f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
-        mEraseSize = TDSetting.mEraseness;
+        mEraseSize = 1.5f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
-        mEraseSize = 2.0f * TDSetting.mEraseness;
+        mEraseSize = 3.0f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMlarge );
         break;
     }
@@ -997,15 +992,15 @@ public class SketchWindow extends ItemDrawer
     // TDLog.v("SKETCH select scale " + mSelectScale );
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
-        mSelectSize = 0.5f * TDSetting.mSelectness;
+        mSelectSize = 0.5f * mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_SIZE, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
-        mSelectSize = TDSetting.mSelectness;
+        mSelectSize = mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_SIZE, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
-        mSelectSize = 2.0f * TDSetting.mSelectness;
+        mSelectSize = 2.0f * mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_SIZE, mBMlarge );
         break;
     }

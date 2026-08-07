@@ -14,6 +14,7 @@
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario [%1$d]</string>
+    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
 	
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -365,6 +366,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
     <string name="discovery_error">Error al buscar dispositivos Bluetooth: %1$s</string>
+    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
@@ -631,6 +633,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="scrap_delete">¿Eliminar dibujo?</string>
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
+    <!-- TODO string name="scanset_delete">Delete scan-set shot at %1$s ?</string -->
     <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
     <string name="plot_dangling">dibujo colgado</string>
     <string name="plot_name">Nombre dibujo</string>
@@ -661,6 +664,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="section_name">comentario de la sección</string>
     <!-- UNUSED string name="scrap_outline">Contornos de otros croquis</string -->
     <string name="scrap_string">Diseño descartado: %1$d / %2$d</string>
+    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
     <string name="section_point_not_allowed">Punto de sección no permitido</string>
     <string name="section_line_not_allowed">Línea de sección no permitida</string>
 
@@ -865,6 +869,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="display_refresh">Pantalla actualizada</string>
     <string name="plan_view">planta</string>
     <string name="profile_view">sección</string>
+    <!-- TODO string name="xsection_view">x-section</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
@@ -880,6 +885,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="ask_manual_update">¿Actualizar la traducción del manual?\nActual V. %1$d Instalado v. %2$d</string>
     <string name="ask_clear_equates">¿Eliminar todas las equivalencias?</string>
     <string name="ask_forget_device">¿Olvidar el dispositivo %1$s?</string>
+    <!-- TODO string name="ask_scan_delete">Delete scan-set?</string -->
 
     <string name="button_add"       >Añadir</string>
     <string name="button_apply"     >Aplicar</string>
@@ -1362,6 +1368,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <!-- TODO string name="title_scan_shot">Scan shots</string -->
+    <!-- TODO string name="title_scanset">Scan set</string -->
+
     <string name="title_search">Búsqueda de estación/toma</string>
     <!-- TODO string name="title_stations">Stations</string -->
     <string name="title_plot_search">Búsqueda de estaciones</string>
@@ -1489,6 +1497,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="title_import_shot">Importar Topografía</string>
   <string name="title_import_gps">Importar punto GPS</string>
   <string name="title_import_th2">Archivo Therion th2</string>
+    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
   <string name="title_infos">info topografía</string>
   <string name="title_graph_paper">Papel milimétrico en escala 1: 100</string>
   <string name="graph_paper_scale">Ajusta la línea a 5 cm</string>
@@ -1536,6 +1545,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_single_back_summary">Cerrar ventanas con respaldo simple</string>
   <string name="pref_hide_navbar_title">barra de navegación</string>
   <string name="pref_hide_navbar_summary">Oculto. Se muestra deslizándose hacia arriba.</string>
+  <!-- TODO string name="pref_analytics_title">Share analytics</string -->
+  <!-- TODO string name="pref_analytics_summary">Enable functions analytics sharing</string -->
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
@@ -1754,10 +1765,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_symbol_size_summary">Tamaño de los símbolos en la barra inferior</string>
   <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
   <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
-  <string name="pref_closeness_title">Selección nodo</string>
-  <string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string>
-  <string name="pref_eraseness_title">Tamaño goma de borrar</string>
-  <string name="pref_eraseness_message">Introduce el tamaño de la goma de borrar</string>
+  <!-- UNUSED string name="pref_closeness_title">Selección nodo</string -->
+  <!-- UNUSED string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string -->
+  <!-- UNUSED string name="pref_eraseness_title">Tamaño goma de borrar</string -->
+  <!-- UNUSED string name="pref_eraseness_message">Introduce el tamaño de la goma de borrar</string -->
   <string name="pref_min_shift_title">Sensibilidad pantalla</string>
   <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
   <string name="pref_pointing_title">Orientación nodo</string>
@@ -2210,6 +2221,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="equate_no_stations">Muy pocos puntos fuertes</string>
     <string name="equate_no_nearby">No hay punto fuerte</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
+    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">Nuevo</string -->
     <!-- UNUSED string name="menu_equate">Agregar equivalente</string -->

@@ -611,8 +611,8 @@ public class TDSetting
   // selection_radius = cutoff + closeness / zoom
   public static final float mCloseCutoff = 0.01f; // minimum selection radius
 
-  public static float mSelectness = 24f;            // selection radius
-  public static float mEraseness = 36f;             // eraser radius
+  // public static float mSelectness = 24f;            // selection radius
+  // public static float mEraseness = 36f;             // eraser radius
   public static int mMinShift = 60;                 // shift sensitivity
   public static int mPointingRadius = 24;
   public static boolean mStylusOnly = false;        // stylus only sketching - false by default
@@ -966,27 +966,27 @@ public class TDSetting
     }
   }
 
-  /** set the radius of selection for the sketch canvas
-   * @param s  selection radius
-   */
-  private static String setSelectness( float s ) 
-  {
-    String ret = null;
-    if ( s < 1 ) { s = 1; ret = TDString.ONE; }
-    mSelectness = s;
-    return ret;
-  }
+  // /** set the radius of selection for the sketch canvas
+  //  * @param s  selection radius
+  //  */
+  // private static String setSelectness( float s ) 
+  // {
+  //   String ret = null;
+  //   if ( s < 1 ) { s = 1; ret = TDString.ONE; }
+  //   // mSelectness = s;
+  //   return ret;
+  // }
 
-  /** set the radius of the erase for the sketch canvas
-   * @param s  erase radius
-   */
-  private static String setEraseness( float s ) 
-  {
-    String ret = null;
-    if ( s < 1 ) { s = 1; ret = TDString.ONE; }
-    mEraseness = s;
-    return ret;
-  }
+  // /** set the radius of the erase for the sketch canvas
+  //  * @param s  erase radius
+  //  */
+  // private static String setEraseness( float s ) 
+  // {
+  //   String ret = null;
+  //   if ( s < 1 ) { s = 1; ret = TDString.ONE; }
+  //   // mEraseness = s;
+  //   return ret;
+  // }
 
   /** set the radius of the selection dots for the sketch canvas
    * @param s  dot radius
@@ -1603,8 +1603,8 @@ public class TDSetting
          mFixedThickness = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_FIXED_THICKNESS
     ++k; mStationSize    = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_STATION_SIZE
     ++k; mDotRadius      = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_DOT_RADIUS
-    ++k; mSelectness     = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_CLOSENESS
-    ++k; mEraseness      = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_ERASENESS
+    ++k; // mSelectness     = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_CLOSENESS
+    ++k; // mEraseness      = tryFloat( prefs, key[k].key, key[k].dflt ); // DISTOX_ERASENESS
     ++k; mMinShift       = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_MIN_SHIFT
     ++k; mPointingRadius = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_POINTING
     ++k; mSplayAlpha     = tryInt(   prefs, key[k].key, key[k].dflt ); // DISTOX_SPLAY_ALPHA
@@ -2927,16 +2927,16 @@ public class TDSetting
       ret = String.format(Locale.US, "%.2f", mStationSize );
     } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_DOT_RADIUS
       ret = setDotRadius( tryFloatValue( hlp, k, v, key[2].dflt ) );
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CLOSENESS
-      ret = setSelectness( tryFloatValue( hlp, k, v, key[3].dflt ) );
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ERASENESS
-      ret = setEraseness( tryFloatValue( hlp, k, v, key[4].dflt ) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_MIN_SHIFT
-      ret = setMinShift( tryIntValue(  hlp, k, v, key[5].dflt ) );
-    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_POINTING
-      ret = setPointingRadius( tryIntValue( hlp, k, v, key[6].dflt ) );
-    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SPLAY_ALPHA
-      mSplayAlpha = tryIntValue( hlp, k, v, key[ 7].dflt ); 
+    // } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CLOSENESS
+    //   ret = setSelectness( tryFloatValue( hlp, k, v, key[3].dflt ) );
+    // } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ERASENESS
+    //   ret = setEraseness( tryFloatValue( hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_MIN_SHIFT
+      ret = setMinShift( tryIntValue(  hlp, k, v, key[3].dflt ) );
+    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_POINTING
+      ret = setPointingRadius( tryIntValue( hlp, k, v, key[4].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_SPLAY_ALPHA
+      mSplayAlpha = tryIntValue( hlp, k, v, key[ 5].dflt ); 
       if ( mSplayAlpha < 0 ) { mSplayAlpha = 0; ret = Float.toString( mSplayAlpha ); }
       if ( mSplayAlpha > 100 ) { mSplayAlpha = 100; ret = Float.toString( mSplayAlpha ); }
       BrushManager.setSplayAlpha( mSplayAlpha );
@@ -3109,12 +3109,13 @@ public class TDSetting
     String ret = null;
     // TDLog.v("update pref erase: " + k );
     TDPrefKey[] key = TDPrefKey.mErase;
-    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_CLOSENESS
-      ret = setSelectness( tryFloatValue( hlp, k, v, key[0].dflt ) );
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_ERASENESS
-      ret = setEraseness( tryFloatValue( hlp, k, v, key[1].dflt ) );
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_POINTING
-      ret = setPointingRadius( tryIntValue(   hlp, k, v, key[2].dflt ) );
+    // if ( k.equals( key[ 0 ].key ) ) { // DISTOX_CLOSENESS
+    //   ret = setSelectness( tryFloatValue( hlp, k, v, key[0].dflt ) );
+    // } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_ERASENESS
+    //   ret = setEraseness( tryFloatValue( hlp, k, v, key[1].dflt ) );
+    // } else 
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_POINTING
+      ret = setPointingRadius( tryIntValue(   hlp, k, v, key[0].dflt ) );
     } else {
       TDLog.e("missing ERASE key: " + k );
     }
@@ -3129,12 +3130,12 @@ public class TDSetting
     TDPrefKey[] key = TDPrefKey.mEdit;
     if ( k.equals( key[ 0 ].key ) ) { // DISTOX_DOT_RADIUS
       ret = setDotRadius( tryFloatValue( hlp, k, v, key[0].dflt ) );
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_CLOSENESS
-      ret = setSelectness( tryFloatValue( hlp, k, v, key[1].dflt ) );
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_MIN_SHIFT
-      ret = setMinShift( tryIntValue(  hlp, k, v, key[2].dflt ) );
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_POINTING
-      ret = setPointingRadius( tryIntValue(   hlp, k, v, key[3].dflt ) );
+    // } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_CLOSENESS
+    //   ret = setSelectness( tryFloatValue( hlp, k, v, key[1].dflt ) );
+    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_MIN_SHIFT
+      ret = setMinShift( tryIntValue(  hlp, k, v, key[1].dflt ) );
+    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_POINTING
+      ret = setPointingRadius( tryIntValue(   hlp, k, v, key[2].dflt ) );
     } else {
       TDLog.e("missing EDIT key: " + k );
     }
@@ -3855,12 +3856,12 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_LINE_THICKNESS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mLineThickness );
       k="DISTOX_SCALABLE_LABEL";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, mScalableLabel );
       k="DISTOX_XSECTION_OFFSET";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mXSectionOffset );
-      k="DISTOX_CLOSENESS";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mSelectness );
+      // k="DISTOX_CLOSENESS";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mSelectness );
       k="DISTOX_POINTING";              if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mPointingRadius );
       k="DISTOX_MIN_SHIFT";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mMinShift );
       k="DISTOX_DOT_RADIUS";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mDotRadius );
       k="DISTOX_PATH_MULTISELECT";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mPathMultiselect) );
-      k="DISTOX_ERASENESS";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mEraseness );
+      // k="DISTOX_ERASENESS";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mEraseness );
       // k="DISTOX_PICKER_TYPE";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mPickerType );
       k="DISTOX_UNSCALED_POINTS";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mUnscaledPoints) ); 
       k="DISTOX_LINE_STYLE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mLineStyle );
@@ -4136,9 +4137,9 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_XSECTION_OFFSET":
               mXSectionOffset = Integer.parseInt( value ); setPreference( editor, kay, mXSectionOffset );
               break;
-            case "DISTOX_CLOSENESS":
-              mSelectness = Float.parseFloat( value );  setPreference( editor, kay, mSelectness );
-              break;
+            // case "DISTOX_CLOSENESS":
+            //   mSelectness = Float.parseFloat( value );  setPreference( editor, kay, mSelectness );
+            //   break;
             case "DISTOX_POINTING":
               mPointingRadius = Integer.parseInt( value );   setPreference( editor, kay, mPointingRadius );
               break;
@@ -4151,9 +4152,9 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_PATH_MULTISELECT":
               mPathMultiselect = Boolean.parseBoolean( value ); setPreference( editor, kay, mPathMultiselect );
               break;
-            case "DISTOX_ERASENESS":
-              mEraseness = Float.parseFloat( value ); setPreference( editor, kay, mEraseness );
-              break;
+            // case "DISTOX_ERASENESS":
+            //   mEraseness = Float.parseFloat( value ); setPreference( editor, kay, mEraseness );
+            //   break;
             // case "DISTOX_PICKER_TYPE":
             //   mPickerType = Integer.parseInt( value ); setPreference( editor, kay, mPickerType );
             //   break;

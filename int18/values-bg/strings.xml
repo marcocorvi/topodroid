@@ -14,6 +14,7 @@
     <string name="no_manual">Ръководството не може да бъде изтеглено</string>
     <string name="user_man_ok">Преведеното ръководство е инсталирано</string>
     <string name="user_man_fail">Грешка при инсталиране на ръководството [%1$d]</string>
+    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -365,6 +366,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">Грешка при откриване на BT: %1$s</string>
+    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -635,6 +637,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="scrap_delete">Изтриване на отрязък\?</string>
     <string name="item_delete">Изтриване на елемент %1$s \?</string>
     <string name="splay_delete">Изтриване на странично измерване %1$s \?</string>
+    <!-- TODO string name="scanset_delete">Delete scan-set shot at %1$s ?</string -->
     <string name="plot_duplicate_name">Дублирано име на скица</string>
     <string name="plot_dangling">Висяща скица</string>
     <string name="plot_name">Име на картировката</string>
@@ -665,6 +668,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="section_name">коментар за сечението</string>
     <!-- UNUSED string name="scrap_outline">Контур на скица</string -->
     <string name="scrap_string">Отрязък от скица: %1$d / %2$d</string>
+    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
     <string name="section_point_not_allowed">точката в сечението не е разрешена</string>
     <string name="section_line_not_allowed">линията в сечението не е разрешена</string>
 
@@ -859,6 +863,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="display_refresh">Обновен дисплей</string>
     <string name="plan_view">план</string>
     <string name="profile_view">профил</string>
+    <!-- TODO string name="xsection_view">x-section</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Неуспешно четене на паметта на DistoX</string>
@@ -874,6 +879,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Актуализиране на ръководството за потребителя\?\nТекуща версия  %1$d Инсталирана версия %2$d</string>
     <string name="ask_clear_equates">Премахване на всички еквиваленти?</string>
     <string name="ask_forget_device">Забрави устройство %1$s?</string>
+    <!-- TODO string name="ask_scan_delete">Delete scan-set?</string -->
+
 
     <string name="button_add">Добави</string>
     <string name="button_apply">Прилагане</string>
@@ -1356,6 +1363,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
     <string name="title_scan_shot">Проверка на измерване</string>
+    <!-- TODO string name="title_scanset">Scan set</string -->
+
     <string name="title_search">Търси репер/отсечка</string>
     <string name="title_stations">Репери</string>
     <string name="title_plot_search">Търсене на репер</string>
@@ -1484,6 +1493,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_import_shot">Импортирай картировка</string>
     <string name="title_import_gps">Импортирай GPS точка</string>
     <string name="title_import_th2">Therion th2 файл</string>
+    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
     <string name="title_infos">Географски точки за картировката</string>
     <string name="title_graph_paper">Милиметрова хартия в мащаб 1:100</string>
     <string name="graph_paper_scale">Направи линията с дължина 5 cm</string>
@@ -1531,6 +1541,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_single_back_summary">Затвори прозорците с единично докосване</string>
   <string name="pref_hide_navbar_title">Навигационна лента</string>
   <string name="pref_hide_navbar_summary">Скрита. Показване с плъзгане нагоре</string>
+  <!-- TODO string name="pref_analytics_title">Share analytics</string -->
+  <!-- TODO string name="pref_analytics_summary">Enable functions analytics sharing</string -->
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Покажи необработени данни за калибриране</string>
@@ -1750,10 +1762,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_symbol_size_summary">Размер на символите в долната лента</string>
   <string name="pref_toolbar_update_title">Актуализация на лентата с инструменти</string>
   <string name="pref_toolbar_update_summary">Как да вмъкнете символи в долната лента</string>
-  <string name="pref_closeness_title">Радиус на селекция</string>
-  <string name="pref_closeness_message">Радиус на селекция на елемент от скицата</string>
-  <string name="pref_eraseness_title">Размер на гумата</string>
-  <string name="pref_eraseness_message">Радиус на изтриване на елемент от скица</string>
+  <!-- UNUSED string name="pref_closeness_title">Радиус на селекция</string -->
+  <!-- UNUSED string name="pref_closeness_message">Радиус на селекция на елемент от скицата</string -->
+  <!-- UNUSED string name="pref_eraseness_title">Размер на гумата</string -->
+  <!-- UNUSED string name="pref_eraseness_message">Радиус на изтриване на елемент от скица</string -->
   <string name="pref_min_shift_title">Чувствителност на отместване</string>
   <string name="pref_min_shift_message">Максимална скорост на отметстване [pxl/стъпка]</string>
   <string name="pref_pointing_title">Толеранс на посочване</string>
@@ -2179,6 +2191,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="equate_no_stations">Прекалено малко репери</string>
     <string name="equate_no_nearby">Няма близки репери</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
+    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->

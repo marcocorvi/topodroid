@@ -14,6 +14,8 @@
   <string name="no_manual">Não é possível obter o manual do usuário na internet</string>
   <string name="user_man_ok">Manual traduzido instalado</string>
   <string name="user_man_fail">Instalação do manual traduzido falhou [%1$d]</string>
+    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
+
   <!-- UNUSED string name="string_false">false</string -->
   <!-- UNUSED string name="string_true">true</string -->
   <!-- UNUSED string name="target_sdk" translatable="false">TopoDroidX official app is on http://marcocorvi.altervista.com/TopoDroidX.html\nFinish ?</string -->
@@ -340,6 +342,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
     <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
   <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
     <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
+    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
+
   <string name="error_azimuth_required">Azimute exigido</string>
   <string name="error_length_required">Comprimento exigido</string>
   <string name="error_depth_required">Profundidade exigida</string>
@@ -593,6 +597,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="scrap_delete">Apagar desenho?</string>
   <string name="item_delete">Apagar item %1$s?</string>
   <string name="splay_delete">Apagar medida auxiliar %1$s ?</string>
+    <!-- TODO string name="scanset_delete">Delete scan-set shot at %1$s ?</string -->
   <string name="plot_duplicate_name">Nome de croqui repetido</string>
   <string name="plot_dangling">Croqui solto</string>
   <string name="plot_name">Nome do croqui</string>
@@ -622,6 +627,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="section_name">comentário sobre corte</string>
   <!-- UNUSED string name="scrap_outline">Contorno</string -->
   <string name="scrap_string">Trecho do croqui: %1$d / %2$d</string>
+    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
   <string name="section_point_not_allowed">ponto tipo corte não permitido</string>
   <string name="section_line_not_allowed">linha tipo corte não permitida</string>
   <!-- UNUSED string name="sensor">sensor</string -->
@@ -803,6 +809,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="display_refresh">Exibição atualizada</string>
   <string name="plan_view">planta baixa</string>
   <string name="profile_view">perfil</string>
+    <!-- TODO string name="xsection_view">x-section</string -->
+
   <string name="distox_err_ok">OK</string>
   <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>
   <string name="distox_err_headtail_io">Erro de I/O na memória da DistoX</string>
@@ -816,6 +824,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="ask_manual_update">Atualizar tradução do manual do usuário?\nVersão disponível %1$d Versão instalada %2$d</string>
   <string name="ask_clear_equates">Remover todos os equates?</string>
     <!-- TODO string name="ask_forget_device">Forget device %1$s?</string -->
+    <!-- TODO string name="ask_scan_delete">Delete scan-set?</string -->
+
   <string name="button_add">Novo</string>
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar</string>
@@ -1272,6 +1282,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
     <!-- TODO string name="title_scan_shot">Scan shots</string -->
+    <!-- TODO string name="title_scanset">Scan set</string -->
+
   <string name="title_search">Pesquisa bases e medidas</string>
   <string name="title_stations">Bases</string>
   <string name="title_plot_search">Busca por base</string>
@@ -1395,6 +1407,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="title_import_shot">Importar topo</string>
   <string name="title_import_gps">Importar ponto GPS</string>
   <string name="title_import_th2">Arquivo th2 Therion</string>
+    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
   <string name="title_infos">Geopontos da topo</string>
   <string name="title_graph_paper">Papel milimetrado escala 1:100</string>
   <string name="graph_paper_scale">Ajuste a linha para que tenha 5 cm de comprimento</string>
@@ -1438,6 +1451,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_single_back_summary">fechar janelas com um único clique no botão \u0022Voltar\u0022 do dispositivo Android</string>
   <string name="pref_hide_navbar_title">Barra navegação</string>
   <string name="pref_hide_navbar_summary">Ocultar. Mostre deslizando para cima.</string>
+  <!-- TODO string name="pref_analytics_title">Share analytics</string -->
+  <!-- TODO string name="pref_analytics_summary">Enable functions analytics sharing</string -->
   <string name="pref_raw_data_title">Dado bruto</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
   <string name="pref_calib_shot_download_title">Download dado remoto</string>
@@ -1653,10 +1668,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_symbol_size_summary">Tamanho dos símbolos na barra inferior</string>
   <!-- TODO string name="pref_toolbar_update_title">Toolbar update</string -->
   <!-- TODO string name="pref_toolbar_update_summary">How to insert symbols in bottom bar</string -->
-  <string name="pref_closeness_title">Raio seleção</string>
-  <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
-  <string name="pref_eraseness_title">Tam borracha</string>
-  <string name="pref_eraseness_message">Raio da ferramenta borracha</string>
+  <!-- UNUSED string name="pref_closeness_title">Raio seleção</string -->
+  <!-- UNUSED string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string -->
+  <!-- UNUSED string name="pref_eraseness_title">Tam borracha</string -->
+  <!-- UNUSED string name="pref_eraseness_message">Raio da ferramenta borracha</string -->
   <string name="pref_min_shift_title">Sensib desloc</string>
   <string name="pref_min_shift_message">Sensibilidade do deslocamento [pxl/passo]</string>
   <string name="pref_pointing_title">Desloc máx selec</string>
@@ -2067,6 +2082,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="equate_no_stations">Poucas bases</string>
   <string name="equate_no_nearby">Nenhuma base próxima</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
+    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
+
   <!-- UNUSED string name="menu_new">NEW</string -->
   <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
   <!-- UNUSED string name="menu_equates">EQUATES</string -->

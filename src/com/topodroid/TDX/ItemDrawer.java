@@ -28,6 +28,8 @@ import android.graphics.RectF;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import android.view.ViewConfiguration;
+
 // import android.window.OnBackInvokedDispatcher;
 // import android.window.OnBackInvokedCallback;
 // import androidx.annotation.RequiresApi;
@@ -49,6 +51,13 @@ abstract class ItemDrawer extends MyActivity
 
   protected int mSymbol = SymbolType.LINE; // kind of symbol being drawn
   protected int mSavedSymbol = SymbolType.UNDEF;
+
+  protected int mEraseScale  = 1;;
+  protected int mSelectScale = 1;;
+
+  protected float mEraseSize; //  = TDSetting.mEraseness;
+  protected float mSelectSize; // = TDSetting.mSelectness;
+  protected float mTouchSlop;
 
   // -----------------------------------------------------------
   static final int NR_RECENT = 6; // max is 6
@@ -463,6 +472,12 @@ abstract class ItemDrawer extends MyActivity
   protected void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
+
+    ViewConfiguration view_config = ViewConfiguration.get( this );
+    mTouchSlop = view_config.getScaledTouchSlop();
+    mEraseSize  = mTouchSlop * 1.5f; // TDSetting.mEraseness;
+    mSelectSize = mTouchSlop; // TDSetting.mSelectness;
+
   }
 
   @Override protected void onDestroy() { super.onDestroy(); }

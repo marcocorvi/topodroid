@@ -562,8 +562,8 @@ class TDPrefKey
     new TDPrefKey( B, FLT,  UI, "DISTOX_FIXED_THICKNESS", R.string.pref_fixed_thickness_title,R.string.pref_fixed_thickness_summary,TDString.ONE ),
     new TDPrefKey( B, FLT,  UI, "DISTOX_STATION_SIZE",    R.string.pref_station_size_title,   R.string.pref_station_size_summary,   TDString.TWENTY ),
     new TDPrefKey( N, FLT,  UI, "DISTOX_DOT_RADIUS",      R.string.pref_dot_radius_title,     R.string.pref_dot_radius_message,     TDString.FIVE ), 
-    new TDPrefKey( B, LONG, UI, "DISTOX_CLOSENESS",       R.string.pref_closeness_title,      R.string.pref_closeness_message,      TDString.TWENTYFOUR ),
-    new TDPrefKey( B, LONG, UI, "DISTOX_ERASENESS",       R.string.pref_eraseness_title,      R.string.pref_eraseness_message,      "36" ),
+    // new TDPrefKey( B, LONG, UI, "DISTOX_CLOSENESS",       R.string.pref_closeness_title,      R.string.pref_closeness_message,      TDString.TWENTYFOUR ),
+    // new TDPrefKey( B, LONG, UI, "DISTOX_ERASENESS",       R.string.pref_eraseness_title,      R.string.pref_eraseness_message,      "36" ),
     new TDPrefKey( E, LONG, UI, "DISTOX_MIN_SHIFT",       R.string.pref_min_shift_title,      R.string.pref_min_shift_message,      TDString.SIXTY ),
     new TDPrefKey( E, LONG, UI, "DISTOX_POINTING",        R.string.pref_pointing_title,       R.string.pref_pointing_message,       TDString.TWENTYFOUR ),
     new TDPrefKey( T, LONG, UI, "DISTOX_SPLAY_ALPHA",     R.string.pref_splay_alpha_title,    R.string.pref_splay_alpha_summary,    "80" )
@@ -644,8 +644,8 @@ class TDPrefKey
    * @note all keys repeated
    */
   static TDPrefKey[] mErase = {
-    new TDPrefKey( B, LONG,  UI, "DISTOX_CLOSENESS",  R.string.pref_closeness_title, R.string.pref_closeness_message,TDString.TWENTYFOUR ),
-    new TDPrefKey( B, LONG,  UI, "DISTOX_ERASENESS",  R.string.pref_eraseness_title, R.string.pref_eraseness_message,"36" ),
+    // new TDPrefKey( B, LONG,  UI, "DISTOX_CLOSENESS",  R.string.pref_closeness_title, R.string.pref_closeness_message,TDString.TWENTYFOUR ),
+    // new TDPrefKey( B, LONG,  UI, "DISTOX_ERASENESS",  R.string.pref_eraseness_title, R.string.pref_eraseness_message,"36" ),
     new TDPrefKey( E, LONG,  UI, "DISTOX_POINTING",   R.string.pref_pointing_title,  R.string.pref_pointing_message, TDString.TWENTYFOUR )
   };
 
@@ -658,7 +658,7 @@ class TDPrefKey
    */ 
   static TDPrefKey[] mEdit = {
     new TDPrefKey( N, FLT,  UI, "DISTOX_DOT_RADIUS",  R.string.pref_dot_radius_title, R.string.pref_dot_radius_message, TDString.FIVE ),
-    new TDPrefKey( B, LONG, UI, "DISTOX_CLOSENESS",   R.string.pref_closeness_title,  R.string.pref_closeness_message,  TDString.TWENTYFOUR ),
+    // new TDPrefKey( B, LONG, UI, "DISTOX_CLOSENESS",   R.string.pref_closeness_title,  R.string.pref_closeness_message,  TDString.TWENTYFOUR ),
     new TDPrefKey( E, LONG, UI, "DISTOX_MIN_SHIFT",   R.string.pref_min_shift_title,  R.string.pref_min_shift_message,  TDString.SIXTY ),
     new TDPrefKey( E, LONG, UI, "DISTOX_POINTING",    R.string.pref_pointing_title,   R.string.pref_pointing_message,   TDString.TWENTYFOUR )
   };

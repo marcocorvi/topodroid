@@ -2119,6 +2119,7 @@ public class DrawingCommandManager
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size, DrawingStationSplay station_splay )
   {
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
+
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
@@ -2127,7 +2128,8 @@ public class DrawingCommandManager
     return mCurrentScrap.getItemsAt( x, y, radius, mode, legs, splays, stations, station_splay, mSelectionFixed ); // FIXME-HIDE
   }
     
-  void addItemAt( float x, float y, float zoom, float size ) { 
+  void addItemAt( float x, float y, float zoom, float size )
+  { 
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
     mCurrentScrap.addItemAt( x, y, radius );
   }

@@ -14,6 +14,7 @@
     <string name="no_manual">Невозможно скачать руководство из интернета.</string>
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства [%1$d]</string>
+    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
 
     <!-- UNUSED string name="string_false">неверно</string -->
     <!-- UNUSED string name="string_true">верно</string -->
@@ -364,6 +365,7 @@
     <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
     <string name="discovery_error">Ошибка обнаружения BT: %1$s</string>
+    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
@@ -633,6 +635,7 @@
     <string name="scrap_delete">Удалить скрап ?</string>
     <string name="item_delete">Удалить пункт %1$s ?</string>
     <string name="splay_delete">Удалить сплей %1$s ?</string>
+    <!-- TODO string name="scanset_delete">Delete scan-set shot at %1$s ?</string -->
     <string name="plot_duplicate_name">Абрис с таким названием уже существует</string>
     <string name="plot_dangling">Непривязанный абрис</string>
     <string name="plot_name">Название абриса</string>
@@ -663,6 +666,7 @@
     <string name="section_name">Комментарий сечения</string>
     <!-- UNUSED string name="scrap_outline">Контуры другого абриса</string -->
     <string name="scrap_string">Абрис скрап: %1$d / %2$d</string>
+    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
     <string name="section_point_not_allowed">точка сечения недопустима</string>
     <string name="section_line_not_allowed">точка сечения недопустима</string>
 
@@ -854,6 +858,7 @@
     <string name="display_refresh">Обновить дисплей</string>
     <string name="plan_view">план</string>
     <string name="profile_view">разрез</string>
+    <!-- TODO string name="xsection_view">x-section</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
@@ -869,6 +874,7 @@
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
     <string name="ask_clear_equates">Удалить все соединения?</string>
     <string name="ask_forget_device">Удалить устройство %1$s?</string>
+    <!-- TODO string name="ask_scan_delete">Delete scan-set?</string -->
 
     <string name="button_add"       >Добавить</string>
     <string name="button_apply"     >Применить</string>
@@ -1353,6 +1359,8 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_scan_shot">Сканирующий замер</string>
+    <!-- TODO string name="title_scanset">Scan set</string -->
+
     <string name="title_search">Поиск пикетов/замеров</string>
     <string name="title_stations">Пикеты</string>
     <string name="title_plot_search">Поиск пикета</string>
@@ -1481,6 +1489,7 @@
     <string name="title_import_shot">Импорт съёмки</string>
     <string name="title_import_gps">Импорт точки GPS</string>
     <string name="title_import_th2">Therion th2 файл</string>
+    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
     <string name="title_infos">Инфо о съёмках</string>
     <string name="title_graph_paper">Масштаб миллиметровки 1:100</string>
     <string name="graph_paper_scale">Отрегулируйте длину линии до 5см.</string>
@@ -1542,6 +1551,8 @@
   <string name="pref_single_back_summary">Закрыть окна однократным нажатием кнопки назад</string>
   <string name="pref_hide_navbar_title">Панель навигации</string>
   <string name="pref_hide_navbar_summary">Скрыта. Показать жестом вверх</string>
+  <!-- TODO string name="pref_analytics_title">Share analytics</string -->
+  <!-- TODO string name="pref_analytics_summary">Enable functions analytics sharing</string -->
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показывать сырые данные калибровочных измерений</string>
@@ -1756,10 +1767,10 @@
   <string name="pref_symbol_size_summary">Размер символов в нижней панели</string>
   <string name="pref_toolbar_update_title">Обновление панели инструментов</string>
   <string name="pref_toolbar_update_summary">Как добавлять символы в нижнюю панель</string>
-  <string name="pref_closeness_title">Радиус выбора</string>
-  <string name="pref_closeness_message">Радиус зоны выбора элемента абриса</string>
-  <string name="pref_eraseness_title">Размер ластика</string>
-  <string name="pref_eraseness_message">Радиус инструмента стирания</string>
+  <!-- UNUSED string name="pref_closeness_title">Радиус выбора</string -->
+  <!-- UNUSED string name="pref_closeness_message">Радиус зоны выбора элемента абриса</string -->
+  <!-- UNUSED string name="pref_eraseness_title">Размер ластика</string -->
+  <!-- UNUSED string name="pref_eraseness_message">Радиус инструмента стирания</string -->
   <string name="pref_min_shift_title">Чувствительность к сдвигу</string>
   <string name="pref_min_shift_message">Максимальная скорость сдвига абриса [пикс/шаг]</string>
   <string name="pref_pointing_title">Допуск указания</string>
@@ -2186,6 +2197,7 @@
     <string name="equate_no_stations">Слишком мало пикетов</string>
     <string name="equate_no_nearby">Нет пикета поблизости</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
+    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">НОВЫЙ</string -->
     <!-- UNUSED string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string -->

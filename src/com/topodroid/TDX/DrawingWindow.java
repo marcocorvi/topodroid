@@ -558,10 +558,6 @@ public class DrawingWindow extends ItemDrawer
 
   private int mEraseScale  = 0;
   private int mSelectScale = 0;
-
-  private float mEraseSize  = TDSetting.mEraseness;
-  private float mSelectSize = TDSetting.mSelectness;
-
   // protected static int mEditRadius = 0; 
   private int mDoEditRange = SelectionRange.RANGE_POINT; // 0 no, 1 smooth, 2 boxed
 
@@ -2443,15 +2439,15 @@ public class DrawingWindow extends ItemDrawer
     mEraseScale = scale % Drawing.SCALE_MAX;
     switch ( mEraseScale ) {
       case Drawing.SCALE_SMALL:
-        mEraseSize = 0.5f * TDSetting.mEraseness;
+        mEraseSize = 0.75f * mTouchSlop; // 0.5f * TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
-        mEraseSize = TDSetting.mEraseness;
+        mEraseSize = 1.5f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
-        mEraseSize = 2.0f * TDSetting.mEraseness;
+        mEraseSize = 3.0f * mTouchSlop; // 2.0f * TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMlarge );
         break;
     }
@@ -2473,15 +2469,15 @@ public class DrawingWindow extends ItemDrawer
     mSelectScale = scale % Drawing.SCALE_MAX;
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
-        mSelectSize = 0.5f * TDSetting.mSelectness;
+        mSelectSize = 0.5f * mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_NEXT, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
-        mSelectSize = TDSetting.mSelectness;
+        mSelectSize = mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_NEXT, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
-        mSelectSize = 2.0f * TDSetting.mSelectness;
+        mSelectSize = 2.0f * mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_NEXT, mBMlarge );
         break;
     }
@@ -4181,7 +4177,6 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } 
-      // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mSelectness / mZoom;
       SelectionSet selection = mDrawingSurface.getItemsAt( x, y, mZoom, mSelectMode, size );
       mHasSelected = mDrawingSurface.hasSelected();
       setButton3PrevNext();
@@ -6886,7 +6881,7 @@ public class DrawingWindow extends ItemDrawer
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
-                mDrawingSurface.joinMultiselection( TDSetting.mSelectness/2 );
+                mDrawingSurface.joinMultiselection( mTouchSlop/2 ); // TDSetting.mSelectness/2
                 modified();
                 dismissPopupEdit();
               }
@@ -6928,7 +6923,7 @@ public class DrawingWindow extends ItemDrawer
               if ( mHotItemType == DrawingPath.DRAWING_PATH_POINT ||
                    mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
                    mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // SNAP to nearest point POINT/LINE/AREA
-                if ( mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 ) ) {
+                if ( mDrawingSurface.moveHotItemToNearestPoint( mTouchSlop/ 2 ) ) { // TDSetting.mSelectness/2 
                   clearSelected( true );
                   modified();
                 } else {
@@ -7020,7 +7015,7 @@ public class DrawingWindow extends ItemDrawer
           //   myTextView2.setOnLongClickListener( new View.OnLongClickListener() {
           //     public boolean onLongClick( View v ) {
           //       if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
-          //         mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 );
+          //         mDrawingSurface.moveHotItemToNearestPoint( mTouchSlop/2 ); // TDSetting.mSelectness/2
           //         mDrawingSurface.splitPointHotItem();
           //         modified();
           //       }

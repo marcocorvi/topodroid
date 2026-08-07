@@ -22,6 +22,7 @@
     <string name="no_manual">Impossible de récupérer le manuel depuis Internet</string>
     <string name="user_man_ok">Traduction du manuel utilisateur installée</string>
     <string name="user_man_fail">Échec de l\'installation de la traduction du manuel [%1$d]</string>
+    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -379,6 +380,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
     <string name="discovery_error">Erreur de recherche BT: %1$s</string>
+    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
 
     <string name="error_azimuth_required">Azimut nécessaire</string>
     <string name="error_length_required">Longueur nécessaire</string>
@@ -1393,6 +1395,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
 	 <string name="title_scan_shot">Recherche visées</string>     <!-- TODO Traduction ? -->
+    <!-- TODO string name="title_scanset">Scan set</string -->
+
     <string name="title_scanset">recherche données</string>    <!-- TODO Traduction ? -->
 
     <string name="title_search">Recherche Station/cheminement</string>
@@ -1524,6 +1528,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_import_shot">Importation relevé</string>
     <string name="title_import_gps">Importation point GPS</string>
     <string name="title_import_th2">Fichier Therion th2</string>
+    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
     <string name="title_infos">Points géolocalisés du relevé</string>
     <string name="title_graph_paper">Papier millimétré à l\'échelle 1:100</string>
     <string name="graph_paper_scale">Ajuster la ligne à 5 cm de longueur</string>
@@ -1807,10 +1812,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_symbol_size_summary">Taille des symboles dans la barre inférieure</string>
     <string name="pref_toolbar_update_title">Mise à jour de la barre d\'outils</string>
     <string name="pref_toolbar_update_summary">Comment ajouter des symboles dans la barre inférieure</string>
-	 <string name="pref_closeness_title">Rayon de sélection</string>
-    <string name="pref_closeness_message">Portée de la zone de sélection</string>
-    <string name="pref_eraseness_title">Taille de la gomme</string>
-    <string name="pref_eraseness_message">Rayon de supression d\éléments du croquis</string>
+	 <!-- UNUSED string name="pref_closeness_title">Rayon de sélection</string -->
+    <!-- UNUSED string name="pref_closeness_message">Portée de la zone de sélection</string -->
+    <!-- UNUSED string name="pref_eraseness_title">Taille de la gomme</string -->
+    <!-- UNUSED string name="pref_eraseness_message">Rayon de supression d\éléments du croquis</string -->
     <string name="pref_min_shift_title">Décalage sensibilité</string>
     <string name="pref_min_shift_message">Décalage de la sensibilité</string>
     <string name="pref_pointing_title">Rayon de pointage</string>
@@ -2262,6 +2267,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="equate_no_stations">Trop peu de stations</string>
     <string name="equate_no_nearby">Pas de station à proximité</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
+    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">NOUVEAU</string -->
     <!-- UNUSED string name="menu_equate">AJOUT EGALITE</string -->

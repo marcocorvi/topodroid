@@ -163,6 +163,7 @@ public class OverviewWindow extends ItemDrawer
   private boolean mZoomBtnsCtrlOn = false;
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private View mZoomView;
+
     // ZoomControls mZoomCtrl;
     // ZoomButton mZoomOut;
     // ZoomButton mZoomIn;
@@ -1067,7 +1068,7 @@ public class OverviewWindow extends ItemDrawer
    */
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
-    float d0 = TDSetting.mCloseCutoff + TDSetting.mSelectness / mZoom;
+    float d0 = TDSetting.mCloseCutoff + mTouchSlop / mZoom; // TDSetting.mSelectness / mZoom;
     checkZoomBtnsCtrl();
 
     MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
