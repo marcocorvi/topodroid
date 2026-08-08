@@ -1671,12 +1671,10 @@
   <!-- UNUSED string name="pref_closeness_message">Skizzenelement Auswahl Radius</string -->
   <!-- UNUSED string name="pref_eraseness_title">Löschradius</string -->
   <!-- UNUSED string name="pref_eraseness_message">Radius des Lösch-Tools (Standard: 36px)</string -->
-  <string name="pref_min_shift_title">Sensitivität Versch.</string>
-  <string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei
-        Multitouch.
-    </string>
-  <string name="pref_pointing_title">Radius für Tippen</string>
-  <string name="pref_pointing_message">Radius für Objekterkennung beim Antippen</string>
+  <!-- UNUSED string name="pref_min_shift_title">Sensitivität Versch.</string -->
+  <!-- UNUSED string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei Multitouch.  </string -->
+  <!-- UNUSED string name="pref_pointing_title">Radius für Tippen</string -->
+  <!-- UNUSED string name="pref_pointing_message">Radius für Objekterkennung beim Antippen</string -->
   <string name="pref_dash_splay_title">Hilfszüge Gestrichelt</string>
   <string name="pref_dash_splay_message">Welche Hilfszüge sollen abhängig vom Grenzwert gestrichelt dargestellt
         werden

@@ -1714,10 +1714,10 @@
     <!-- UNUSED string name="pref_closeness_message">Poloměr pro výběr položek v náčrtu</string -->
     <!-- UNUSED string name="pref_eraseness_title">Velikost gumy</string -->
     <!-- UNUSED string name="pref_eraseness_message">Poloměr mazání položek v náčrtu</string -->
-    <string name="pref_min_shift_title">Citlivost posunu</string>
-    <string name="pref_min_shift_message">Maximální rychlost posunu [px/krok]</string>
-    <string name="pref_pointing_title">Tolerance dotyku</string>
-    <string name="pref_pointing_message">Tolerance mezi stisknutím a uvolněním pro výběr bodu</string>
+    <!-- UNUSED string name="pref_min_shift_title">Citlivost posunu</string -->
+    <!-- UNUSED string name="pref_min_shift_message">Maximální rychlost posunu [px/krok]</string -->
+    <!-- UNUSED string name="pref_pointing_title">Tolerance dotyku</string -->
+    <!-- UNUSED string name="pref_pointing_message">Tolerance mezi stisknutím a uvolněním pro výběr bodu</string -->
     <string name="pref_dash_splay_title">Čárkování paprsků</string>
     <string name="pref_dash_splay_message">Čárkovat čáry paprsků podle půdorysu, profilu nebo nezávisle</string>
     <string name="pref_vert_splay_title">Prahový sklon pro čárkování paprsků</string>

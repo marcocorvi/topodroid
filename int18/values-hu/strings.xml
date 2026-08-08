@@ -1779,10 +1779,10 @@
   <!-- UNUSED string name="pref_closeness_message">Vázlat elemek kijelölési sugara</string -->
   <!-- UNUSED string name="pref_eraseness_title">Radír méret</string -->
   <!-- UNUSED string name="pref_eraseness_message">Vázlat elemek törlésének sugara</string -->
-  <string name="pref_min_shift_title">Elmozdulás érzékenyég</string>
-  <string name="pref_min_shift_message">Maximális mozgatási sebesség [pxl/step]</string>
-  <string name="pref_pointing_title">Mutató sugara</string>
-  <string name="pref_pointing_message">Lenyomás/felengedés érzékenység a pont kiválasztáskor</string>
+  <!-- UNUSED string name="pref_min_shift_title">Elmozdulás érzékenyég</string -->
+  <!-- UNUSED string name="pref_min_shift_message">Maximális mozgatási sebesség [pxl/step]</string -->
+  <!-- UNUSED string name="pref_pointing_title">Mutató sugara</string -->
+  <!-- UNUSED string name="pref_pointing_message">Lenyomás/felengedés érzékenység a pont kiválasztáskor</string -->
   <string name="pref_dash_splay_title">Sün szaggatás összhang</string>
   <string name="pref_dash_splay_message">Segédmérések szaggatásának összefüggése az alaprajz és az oldalnézet között</string>
   <string name="pref_vert_splay_title">Sün lejtszög szaggatás</string>

@@ -1766,10 +1766,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_closeness_message">Радиус на селекция на елемент от скицата</string -->
   <!-- UNUSED string name="pref_eraseness_title">Размер на гумата</string -->
   <!-- UNUSED string name="pref_eraseness_message">Радиус на изтриване на елемент от скица</string -->
-  <string name="pref_min_shift_title">Чувствителност на отместване</string>
-  <string name="pref_min_shift_message">Максимална скорост на отметстване [pxl/стъпка]</string>
-  <string name="pref_pointing_title">Толеранс на посочване</string>
-  <string name="pref_pointing_message">Допустимо отклонение при докосване надолу/повдигане за избор на точка</string>
+  <!-- UNUSED string name="pref_min_shift_title">Чувствителност на отместване</string -->
+  <!-- UNUSED string name="pref_min_shift_message">Максимална скорост на отметстване [pxl/стъпка]</string -->
+  <!-- UNUSED string name="pref_pointing_title">Толеранс на посочване</string -->
+  <!-- UNUSED string name="pref_pointing_message">Допустимо отклонение при докосване надолу/повдигане за избор на точка</string -->
   <string name="pref_dash_splay_title">Начертаване на измерване</string>
   <string name="pref_dash_splay_message">Начертаване на измерване по план, разрез или независимо</string>
   <string name="pref_vert_splay_title">Ограничения по наклона на начертано измерване</string>

@@ -1816,10 +1816,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="pref_closeness_message">Portée de la zone de sélection</string -->
     <!-- UNUSED string name="pref_eraseness_title">Taille de la gomme</string -->
     <!-- UNUSED string name="pref_eraseness_message">Rayon de supression d\éléments du croquis</string -->
-    <string name="pref_min_shift_title">Décalage sensibilité</string>
-    <string name="pref_min_shift_message">Décalage de la sensibilité</string>
-    <string name="pref_pointing_title">Rayon de pointage</string>
-    <string name="pref_pointing_message">Rayon de sélection d\'éléments du croquis</string>
+    <!-- UNUSED string name="pref_min_shift_title">Décalage sensibilité</string -->
+    <!-- UNUSED string name="pref_min_shift_message">Décalage de la sensibilité</string -->
+    <!-- UNUSED string name="pref_pointing_title">Rayon de pointage</string -->
+    <!-- UNUSED string name="pref_pointing_message">Rayon de sélection d\'éléments du croquis</string -->
     <string name="pref_dash_splay_title">Cohérence visées latérales d\'habillage</string>
     <string name="pref_dash_splay_message">Cohérence des visées lat. d\'habillage entre le plan et la coupe</string>
     <string name="pref_vert_splay_title">Seuil incl. visées lat. pointillés</string>

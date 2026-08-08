@@ -1769,10 +1769,10 @@
   <!-- UNUSED string name="pref_closeness_message">Raggio di selezione oggetti disegno</string -->
   <!-- UNUSED string name="pref_eraseness_title">Raggio del cancellino</string -->
   <!-- UNUSED string name="pref_eraseness_message">Raggio di cancellazione di un elemento del disegno</string -->
-  <string name="pref_min_shift_title">Sensibilita\' allo spostamento</string>
-  <string name="pref_min_shift_message">Sensibilita\' allo spostamento</string>
-  <string name="pref_pointing_title">Raggio di puntamento</string>
-  <string name="pref_pointing_message">Raggio di puntamento</string>
+  <!-- UNUSED string name="pref_min_shift_title">Sensibilita\' allo spostamento</string -->
+  <!-- UNUSED string name="pref_min_shift_message">Sensibilita\' allo spostamento</string -->
+  <!-- UNUSED string name="pref_pointing_title">Raggio di puntamento</string -->
+  <!-- UNUSED string name="pref_pointing_message">Raggio di puntamento</string -->
   <string name="pref_dash_splay_title">Coerenza tratteggio Splay</string>
   <string name="pref_dash_splay_message">Splay tratteggiati coerentemente tra pianta e sezione</string>
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>

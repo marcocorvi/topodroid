@@ -1769,10 +1769,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- UNUSED string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string -->
   <!-- UNUSED string name="pref_eraseness_title">Tamaño goma de borrar</string -->
   <!-- UNUSED string name="pref_eraseness_message">Introduce el tamaño de la goma de borrar</string -->
-  <string name="pref_min_shift_title">Sensibilidad pantalla</string>
-  <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
-  <string name="pref_pointing_title">Orientación nodo</string>
-  <string name="pref_pointing_message">Sensibilidad para orientar el punto verde (nodo)</string>
+  <!-- UNUSED string name="pref_min_shift_title">Sensibilidad pantalla</string -->
+  <!-- UNUSED string name="pref_min_shift_message">Sensibilidad para mover dibujo</string -->
+  <!-- UNUSED string name="pref_pointing_title">Orientación nodo</string -->
+  <!-- UNUSED string name="pref_pointing_message">Sensibilidad para orientar el punto verde (nodo)</string -->
   <string name="pref_dash_splay_title">Los trazos con coherencia del guion</string>
   <string name="pref_dash_splay_message">Los trazos se alinearon coherentemente entre el plan y el perfil.</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
