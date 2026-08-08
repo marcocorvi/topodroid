@@ -128,7 +128,7 @@ public class DataDownloader
     return mDownloading;
   }
 
-  /** download data
+  /** download data: either start or stop data-download
    * @param lister       ...
    * @param data_type    expected type of the data
    */

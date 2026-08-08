@@ -55,6 +55,8 @@ abstract class ItemDrawer extends MyActivity
   protected int mEraseScale  = 1;;
   protected int mSelectScale = 1;;
 
+  protected float mMinShift;
+  protected float mPointingRadius;
   protected float mEraseSize; //  = TDSetting.mEraseness;
   protected float mSelectSize; // = TDSetting.mSelectness;
   protected float mTouchSlop;
@@ -477,7 +479,8 @@ abstract class ItemDrawer extends MyActivity
     mTouchSlop = view_config.getScaledTouchSlop();
     mEraseSize  = mTouchSlop * 1.5f; // TDSetting.mEraseness;
     mSelectSize = mTouchSlop; // TDSetting.mSelectness;
-
+    mPointingRadius = mTouchSlop;
+    mMinShift   = mTouchSlop * 2.0f;
   }
 
   @Override protected void onDestroy() { super.onDestroy(); }

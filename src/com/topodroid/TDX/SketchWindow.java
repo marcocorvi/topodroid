@@ -1733,7 +1733,7 @@ public class SketchWindow extends ItemDrawer
     mSave1X = x1;
     mSave1Y = y1;
   
-    if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+    if ( Math.abs( x_shift ) < mMinShift && Math.abs( y_shift ) < mMinShift ) {
       float zoom = mSketchSurface.getZoom();
       mOffset.x += x_shift / zoom;                // add shift to offset
       mOffset.y += y_shift / zoom; 
@@ -1748,7 +1748,7 @@ public class SketchWindow extends ItemDrawer
    */
   private void moveCanvas( float x_shift, float y_shift )
   {
-    if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+    if ( Math.abs( x_shift ) < mMinShift && Math.abs( y_shift ) < mMinShift ) {
       float zoom = mSketchSurface.getZoom();
       mOffset.x += x_shift / zoom;                // add shift to offset
       mOffset.y += y_shift / zoom; 
@@ -1931,8 +1931,8 @@ public class SketchWindow extends ItemDrawer
         mPointerDown = false;
         modified();
       } else if ( mMode == MODE_EDIT ) {
-        // TDLog.v("SKETCH touch up on edit at " + xc + " " + yc + " radius " + TDSetting.mPointingRadius );
-        if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+        // TDLog.v("SKETCH touch up on edit at " + xc + " " + yc + " radius " + mSelectSize );
+        if ( Math.abs(mStartX - xc) < mSelectSize && Math.abs(mStartY - yc) < mSelectSize ) {
           doSelectAt( xc, yc, mSelectSize );
         }
         // mEditMove = false;

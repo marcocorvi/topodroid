@@ -804,7 +804,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static TDPref[] makeLinePrefs( Context ctx, TDPrefHelper hlp )         { return makePrefs( TDPrefKey.mLine, ctx, hlp ); }
   static TDPref[] makePointPrefs( Context ctx, TDPrefHelper hlp )        { return makePrefs( TDPrefKey.mPoint, ctx, hlp ); }
   static TDPref[] makeDrawPrefs( Context ctx, TDPrefHelper hlp )         { return makePrefs( TDPrefKey.mDraw, ctx, hlp ); }
-  static TDPref[] makeErasePrefs( Context ctx, TDPrefHelper hlp )        { return makePrefs( TDPrefKey.mErase, ctx, hlp ); }
+  // static TDPref[] makeErasePrefs( Context ctx, TDPrefHelper hlp )        { return makePrefs( TDPrefKey.mErase, ctx, hlp ); }
   static TDPref[] makeEditPrefs( Context ctx, TDPrefHelper hlp )         { return makePrefs( TDPrefKey.mEdit, ctx, hlp ); }
   static TDPref[] makeGeekDevicePrefs( Context ctx, TDPrefHelper hlp )   { return makePrefs( TDPrefKey.mGeekDevice, ctx, hlp ); }
   static TDPref[] makeGeekLinePrefs( Context ctx, TDPrefHelper hlp )     { return makePrefs( TDPrefKey.mGeekLine, ctx, hlp ); }

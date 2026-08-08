@@ -427,7 +427,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_TOOL_POINT:         mPrefs = TDPref.makePointPrefs(    this, hlp ); break;
       // case TDPrefCat.PREF_PLOT_WALLS:         mPrefs = TDPref.makeWallsPrefs(    this, hlp ); break; // AUTOWALLS
       case TDPrefCat.PREF_PLOT_DRAW:          mPrefs = TDPref.makeDrawPrefs(     this, hlp ); break;
-      case TDPrefCat.PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs(    this, hlp ); break;
+      // case TDPrefCat.PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs(    this, hlp ); break;
       case TDPrefCat.PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_CAVE3D:    mPrefs = TDPref.makeCave3DPrefs(   this, hlp ); break;
       case TDPrefCat.PREF_DEM3D:              mPrefs = TDPref.makeDem3DPrefs(    this, hlp ); break;

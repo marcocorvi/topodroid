@@ -33,7 +33,7 @@ public class TDPrefCat
   public static final int PREF_TOOL_POINT         = 12; 
   // public static final int PREF_PLOT_WALLS         = 29;  // AUTOWALLS UNUSED
   public static final int PREF_PLOT_DRAW          = 13; 
-  public static final int PREF_PLOT_ERASE         = 14; 
+  // public static final int PREF_PLOT_ERASE         = 14; 
   public static final int PREF_PLOT_EDIT          = 15;
   public static final int PREF_CATEGORY_CAVE3D    = 16;
   public static final int PREF_DEM3D              = 17;

@@ -762,8 +762,13 @@ public class TopoDroidApp extends Application
   // }
 
   // FIXME_COMM
-  // @param address   device address
-  // @param data_type data type ...
+  /** connect to a (DistoX) device
+   * @param lister    data lister
+   * @param address   device address
+   * @param data_type data type ...
+   * @param timeout   connection timeout
+   * @return true on success
+   */
   public boolean connectDevice( ListerHandler lister, String address, int data_type, int timeout ) 
   {
     // TDLog.v( "TDApp: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
@@ -772,6 +777,9 @@ public class TopoDroidApp extends Application
     return mComm != null && mComm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
   }
 
+  /** disconnect from a decive
+   * @return true on success, false if there is no connected device, or fail to disconnect
+   */
   public boolean disconnectComm()
   {
     // TDLog.v( "TDApp: disconnect. comm is " + ((mComm==null)? "null" : "non-null") );

@@ -556,8 +556,6 @@ public class DrawingWindow extends ItemDrawer
   private int mEraseMode  = Drawing.FILTER_ALL;
   private int mSelectMode = Drawing.FILTER_ALL;
 
-  private int mEraseScale  = 0;
-  private int mSelectScale = 0;
   // protected static int mEditRadius = 0; 
   private int mDoEditRange = SelectionRange.RANGE_POINT; // 0 no, 1 smooth, 2 boxed
 
@@ -4617,7 +4615,7 @@ public class DrawingWindow extends ItemDrawer
     mSave1X = x1;
     mSave1Y = y1;
   
-    if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+    if ( Math.abs( x_shift ) < mMinShift && Math.abs( y_shift ) < mMinShift ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
       // TDLog.v( "PLOT shift event " + mOffset.x + " " + mOffset.y + " " + mZoom );
@@ -4698,7 +4696,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void moveCanvas( float x_shift, float y_shift )
   {
-    if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+    if ( Math.abs( x_shift ) < mMinShift && Math.abs( y_shift ) < mMinShift ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
       // TDLog.v( "PLOT move event " + mOffset.x + " " + mOffset.y + " " + mZoom );
@@ -5266,7 +5264,7 @@ public class DrawingWindow extends ItemDrawer
         { // SymbolType.POINT
           // mLastLinePath = null;
           if ( (! mPointerDown) && (!HBXP_PointDown)) { // HBXP
-            float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * TDSetting.mPointingRadius;
+            float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * mPointingRadius;
 	    float shift = Math.abs( x_shift ) + Math.abs( y_shift );
 	    if ( shift < radius ) {
               xs = mSaveX/mZoom - mOffset.x;
@@ -5301,7 +5299,7 @@ public class DrawingWindow extends ItemDrawer
     	        if ( mLandscape ) {
                   DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, point_scale, mDrawingSurface.scrapIndex() );
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
-		    if ( shift > TDSetting.mPointingRadius ) {
+		    if ( shift > mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
                       point.setOrientation( angle );
 		      // TDLog.v("L orientation " + angle + " shift " + shift + " radius " + radius );
@@ -5312,7 +5310,7 @@ public class DrawingWindow extends ItemDrawer
     	        } else {
                   DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, point_scale, mDrawingSurface.scrapIndex() ); // no text, no options
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
-		    if ( shift > TDSetting.mPointingRadius ) {
+		    if ( shift > mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
                       point.setOrientation( angle );
 		      // TDLog.v("P orientation " + angle + " shift " + shift + " radius " + radius );
@@ -5330,8 +5328,8 @@ public class DrawingWindow extends ItemDrawer
         mPointerDown = false;
         modified();
       } else if ( mMode == MODE_EDIT ) {
-        if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius 
-          && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+        if ( Math.abs(mStartX - xc) < mPointingRadius 
+          && Math.abs(mStartY - yc) < mPointingRadius ) {
           doSelectAt( xs, ys, mSelectSize );
         }
         mEditMove = false;
@@ -5342,7 +5340,7 @@ public class DrawingWindow extends ItemDrawer
             DrawingPath path = hot.mItem;
     	    if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) { // FIXME_EXTEND
     	      DBlock blk = path.mBlock;
-    	      float msz = TopoDroidApp.mDisplayWidth/(mZoom*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
+    	      float msz = TopoDroidApp.mDisplayWidth/(mZoom*DrawingUtil.SCALE_FIX); // mMinShift / 2;
     	      if ( mLandscape ) {
     	        float y = (path.y1 + path.y2)/2; // midpoint (scene)
     	        if ( Math.abs( y - xs ) < msz ) {
@@ -5369,7 +5367,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
         if ( mShiftMove ) {
-          if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+          if ( Math.abs(mStartX - xc) < mPointingRadius && Math.abs(mStartY - yc) < mPointingRadius ) {
             // mEditMove = false;
 	    // PATH_MULTISELECTION
 	    if ( ! mDrawingSurface.isMultiselection() ) {
@@ -5599,7 +5597,7 @@ public class DrawingWindow extends ItemDrawer
             // mLastLinePath = null;
             if ( ! mPointerDown ) {
               float angle = 0;
-              float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * TDSetting.mPointingRadius;
+              float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * mPointingRadius;
               float shift = Math.abs( x_shift ) + Math.abs( y_shift );
               if ( shift > radius ) { // HBXP if big move, short move is original function
                 xs = mSaveX/mZoom - mOffset.x;
@@ -5619,7 +5617,7 @@ public class DrawingWindow extends ItemDrawer
                   if ( mLandscape ) {
                     DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, point_scale, mDrawingSurface.scrapIndex() );
                     if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
-                      if ( shift > TDSetting.mPointingRadius ) {
+                      if ( shift > mPointingRadius ) {
                         angle = TDMath.atan2d( x_shift, -y_shift );
                         point.setOrientation( angle );
                         //TDLog.v(" HBXP L orientation " + angle + " shift " + shift + " radius " + radius );
@@ -5642,7 +5640,7 @@ public class DrawingWindow extends ItemDrawer
                   } else {
                     DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, point_scale, mDrawingSurface.scrapIndex() ); // no text, no options
                     if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
-                      if ( shift > TDSetting.mPointingRadius ) {
+                      if ( shift > mPointingRadius ) {
                         angle = TDMath.atan2d( x_shift, -y_shift );
                         point.setOrientation( angle );
                         // TDLog.v("P orientation " + angle + " shift " + shift + " radius " + radius );
@@ -5725,7 +5723,7 @@ public class DrawingWindow extends ItemDrawer
         float x_shift = xc - mSaveX; // compute shift
         float y_shift = yc - mSaveY;
         if ( TDLevel.overNormal ) {
-          if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+          if ( Math.abs( x_shift ) < mMinShift && Math.abs( y_shift ) < mMinShift ) {
     	    if ( mLandscape ) {
               mDrawingSurface.shiftDrawing( -y_shift/mZoom, x_shift/mZoom, mScrapOnly );
     	    } else {
@@ -7559,10 +7557,10 @@ public class DrawingWindow extends ItemDrawer
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_DRAW );
       mActivity.startActivity( intent );
-    } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
-      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
-      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_ERASE );
-      mActivity.startActivity( intent );
+    // } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
+    //   Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+    //   intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_ERASE );
+    //   mActivity.startActivity( intent );
     } else if ( TDLevel.overNormal && b == mButton3[2] ) { // edit properties
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_EDIT );

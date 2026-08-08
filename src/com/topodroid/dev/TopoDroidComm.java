@@ -583,7 +583,7 @@ public class TopoDroidComm
   /** connect to a device 
    * @param address   device address
    * @param lister    data lister
-   * @param data_type ???
+   * @param data_type expected type of data to read
    * @param timeout   timeout (unused)
    * @return always false (ie, failure) by default
    */

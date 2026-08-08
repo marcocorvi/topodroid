@@ -36,7 +36,8 @@ class GlSurfaceView extends GLSurfaceView
 
   static boolean mLightMode = false;   // light/move vs turn
   static void toggleLightMode( ) { mLightMode = ! mLightMode; }
-  private int mTouchSlop; // pxl
+  private float mTouchSlop; // pxl
+  private float mTouchSlop2; // pxl
   private int mLongPress; // msec
 
   /** cstr
@@ -49,6 +50,7 @@ class GlSurfaceView extends GLSurfaceView
     mTopoGl = topogl;
     ViewConfiguration view_config = ViewConfiguration.get( ctx );
     mTouchSlop = view_config.getScaledTouchSlop();
+    mTouchSlop2 = 2.0f * mTouchSlop;
     mLongPress = view_config.getLongPressTimeout();
   }
 
@@ -255,8 +257,8 @@ class GlSurfaceView extends GLSurfaceView
           float dist = (float)Math.sqrt( dx*dx + dy*dy );
           x0 = (x0 + x1)/2;
           y0 = (y0 + y1)/2;
-          dx = x0 - mPreviousX; if ( Math.abs(dx) > 40 ) dx = 0;
-          dy = y0 - mPreviousY; if ( Math.abs(dy) > 40 ) dy = 0;
+          dx = x0 - mPreviousX; if ( Math.abs(dx) > mTouchSlop2 ) dx = 0;
+          dy = y0 - mPreviousY; if ( Math.abs(dy) > mTouchSlop2 ) dy = 0;
           float s = dist/mDistance; if ( Math.abs( s - 1 ) > 0.1 ) s = 1;
           // TDLog.v("Surface View: D " + dx + " " + dy + " scale " + s );
           doScaleTranslate( s, dx, dy );

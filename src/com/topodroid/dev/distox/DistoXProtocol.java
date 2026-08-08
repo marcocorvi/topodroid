@@ -208,10 +208,31 @@ public class DistoXProtocol extends TopoDroidProtocol
     return dataRead[0];
   }
 
-  /**
+  /** RFCOMM readPacket
    * @param no_timeout  whether not to timeout
    * @param data_type   expected packet datatype (either shot or calib)
    * @return packet type (if successful)
+   *
+   * chain of call
+   *    DataDownloader.startDownloadData calls
+   *      ReconnectTask
+   *        --: DataDownloader.tryConnect()
+   *      tryConnect which calls TopoDroidApp.connectDevice()
+   *        --: TopoDroidComm.connectDevice() which must be overridden
+   *            DistoXComm.connectDevice calls startCommThread
+   *      tryDownloadData which calls DataDownloadTask
+   *        --: TopoDroidApp.downloadDataBatch()
+   *              --: TopoDroidComm.downloadData()
+   *
+   *    startCommThread is called in DistoXComm:
+   *        connectDevice()
+   *        downloadData()
+   *      and in DistoX310Comm: for setX310Laser()
+   *
+   *    DistoXComm.startCommThread creates CommThread and starts it
+   *    CommThread.run calls mComm.readingPacket() both for GATT and RFCOMM
+   *    TopoDroidComm.readingPacket call mProtocol.readPacket()
+   *      this is RFCOMM readPacket
    */
   @Override // TopoDroidProtocol
   public int readPacket( boolean no_timeout, int data_type )
