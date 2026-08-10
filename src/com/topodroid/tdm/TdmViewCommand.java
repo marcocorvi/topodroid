@@ -31,6 +31,7 @@ import java.util.List;
 // import java.util.Locale;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  */
@@ -42,6 +43,7 @@ public class TdmViewCommand
   List< TdmViewPath >    mFixedStack;
   ArrayList< TdmViewStation > mStationsArray;
   List< TdmViewStation > mStations;
+  private HashMap< String, TdmViewStation > mStationMap; // station name -> station
   List< TdmViewStationBucket > mBuckets;
   Matrix mMatrix;
   Paint mPaint;
@@ -67,6 +69,7 @@ public class TdmViewCommand
     mFixedStack   = Collections.synchronizedList(new ArrayList< TdmViewPath >());
     mStationsArray  = new ArrayList< TdmViewStation >();
     mStations     = Collections.synchronizedList( mStationsArray );
+    mStationMap   = new HashMap< String, TdmViewStation >();
     mBuckets      = new ArrayList< TdmViewStationBucket >();
     mMatrix = new Matrix(); // identity
     mPaint = BrushManager.makePaint( color, 2, Paint.Style.STROKE );
@@ -93,18 +96,7 @@ public class TdmViewCommand
   {
     if ( name == null ) return null;
     // TDLog.v("Tdm view cmd get <" + name + ">" );
-    // byte[] b1 = name.getBytes();
-    // int len = b1.length;
-    for ( TdmViewStation st : mStations ) {
-      if ( st.getName().equals( name ) ) return st;
-      // if ( st.getName().compareTo( name ) == 0 ) return st;
-      // byte[] b2 = st.getName().getBytes();
-      // if ( b2.length != len ) continue;
-      // int k = 0;
-      // for ( ; k < len; ++k ) if ( b1[k] != b2[k] ) break;
-      // if ( k == len ) return st;
-    }
-    return null;
+    return mStationMap.get( name );
   }
 
   /** @return the selected station, or null
@@ -281,6 +273,7 @@ public class TdmViewCommand
     // TODO BUCKET 
     TdmViewStation stv = new TdmViewStation( st, this, st.e, st.s, equated );
     mStations.add( stv );
+    mStationMap.put( st.mName, stv );
     boolean in_bucket = false;
     for ( TdmViewStationBucket bk : mBuckets ) {
       if ( bk.coverPoint( st.e, st.s ) ) {
