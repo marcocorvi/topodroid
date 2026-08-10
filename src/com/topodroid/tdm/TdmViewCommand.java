@@ -333,17 +333,16 @@ public class TdmViewCommand
             }
             ++cnt;
           }
-          int n = mStations.size() - 1;
-          if ( n > 0 ) {
-            mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-          }
-          {
-            TdmViewStation selected = mSelected;
-            if ( selected != null ) {
-              selected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
-              selected.drawCircle( canvas, mMatrix, mPaint, zoom );
-            }
-          }
+        }
+        // the last station and the selected station are always drawn once
+        int n = mStations.size() - 1;
+        if ( n > 0 ) {
+          mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+        }
+        TdmViewStation selected = mSelected;
+        if ( selected != null ) {
+          selected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+          selected.drawCircle( canvas, mMatrix, mPaint, zoom );
         }
         // TDLog.v("used " + nr_buckets + " buckets ");
       }
@@ -351,10 +350,10 @@ public class TdmViewCommand
     return nr_buckets;
   }
 
-  /** find the stations close to a canvas point (closest than 40 [scene])
+  /** find the stations close to a canvas point (closer than 40 [scene])
    * @param x   X coord [scene ?]
    * @param y   Y coord [scene ?]
-   * @param tolerane closeness tolearnce [pxl]
+   * @param tolerance closeness tolerance [pxl]
    * @return the (rescaled) station(s) closest distance from the point 
    * @note the found station is stored in mSelected
    */
