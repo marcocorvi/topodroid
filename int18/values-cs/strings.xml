@@ -24,7 +24,7 @@
     <string name="no_manual">Nepodařilo se stáhnout uživatelskou příručku z internetu.</string>
     <string name="user_man_ok">Překlad uživatelské příručky byl nainstalován.</string>
     <string name="user_man_fail">Instalace překladu uživatelské příručky selhala [%1$d]</string>
-    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
+    <string name="db_not_ready">Databáze měření není připravena</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -352,7 +352,7 @@
     <string name="location_no_permission">Chybí oprávnění android k určení polohy</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">Chyba vyhledávání BT: %1$s</string>
-    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
+    <string name="depth_format">Hloubka %1$.1f</string>
 
     <string name="error_azimuth_required">Je vyžadován azimut</string>
     <string name="error_length_required">Je vyžadována délka</string>
@@ -654,7 +654,7 @@
     <string name="section_name">komentář k řezu</string>
     <!-- UNUSED string name="scrap_outline">Sketch outline</string -->
     <string name="scrap_string">Dílčí náčrt (scrap): %1$d / %2$d</string>
-    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
+    <string name="scrap_index">Náčrt %1$d</string>
     <string name="section_point_not_allowed">bod příčného řezu zde není povolen</string>
     <string name="section_line_not_allowed">linie příčného řezu zde není povolena</string>
 
@@ -2030,7 +2030,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="equate_no_stations">Příliš málo měřických bodů</string>
     <string name="equate_no_nearby">Žádný měřický bod poblíž</string>
     <string name="equate_exists">Body jsou již propojeny</string>
-    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
+    <string name="equate_same_station">Nelze ztotožnit stanici se samou sebou</string>
 
     <string name="menu_open">OTEVŘÍT</string>
     <string name="menu_save">ULOŽIT</string>
