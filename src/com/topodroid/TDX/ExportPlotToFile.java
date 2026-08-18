@@ -160,6 +160,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       }
       return ret;
     } catch (Exception e) {
+      TDLog.e("EXPORT plot to file failed: " + e);
       e.printStackTrace();
     } finally {
       if ( pfd != null ) {
