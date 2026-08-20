@@ -743,7 +743,7 @@ public class OverviewWindow extends ItemDrawer
         }
         SurveyInfo info = mData.selectSurveyInfo( mSid );
         // null PlotInfo, null FixedInfo, true toast
-        (new ExportPlotToFile( mApp, this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
+        (new ExportPlotToFile( mApp, this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, TDSetting.mExportPlotShare, station )).execute();
       }
     }
   }

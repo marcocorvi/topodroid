@@ -775,7 +775,7 @@ public class DrawingSvgBase
             final StringWriter sw52 = new StringWriter();
             final PrintWriter pw52  = new PrintWriter(sw52);
             printPointWithCXCY( pw52, "<circle", xoff+xx, yoff+yy );
-            pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
+            pw52.format(Locale.US, " r=\"%.2f\" ", RADIUS );
             // if ( TDSetting.mFixmeClass ) {
               pw52.format(Locale.US, " class=\"circle_label\" />\n" );
             // } else {

@@ -94,7 +94,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         StringWriter sw5 = new StringWriter();
         PrintWriter pw5  = new PrintWriter(sw5);
         printPointWithCXCY( pw5, "<circle", xx, yy );
-        pw5.format(Locale.US, " r=\"%d\" ", RADIUS );
+        pw5.format(Locale.US, " r=\"%.2f\" ", RADIUS );
         // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
         // if ( TDSetting.mFixmeClass ) {
           pw5.format(Locale.US, " class=\"circle_label\" />\n" );

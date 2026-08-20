@@ -721,17 +721,17 @@ public class TdmViewActivity extends MyActivity
         // TdmStation stn1 = vts1.mStation;
         float x = vst1.x + mSelectedCommand.mXoff;
         float y = vst1.y + mSelectedCommand.mYoff;
-        String name1 = mDrawingSurface.selectedStationName();
+        String name1 = cmd1.getSelectedName();
         // TDLog.v( "handle equate: selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y + " name " + name1 );
         if ( name1 != null ) {
-          final String st1 = name1 + "@" + mDrawingSurface.selectedCommandName();
-          boolean tried_equate = false;
+          final String st1 = name1 + "@" + cmd1.name();
+          // boolean tried_equate = false;
           List< TdmViewCommand > cmds = mDrawingSurface.getAllSelectedCommands();
           for ( TdmViewCommand cmd : cmds ) {
             if ( cmd == cmd1 ) continue;
-            String name2 = mDrawingSurface.selectedStationName();
+            String name2 = cmd.getSelectedName();
             if ( name2 != null ) {
-              final String st2 = name2 + "@" + mDrawingSurface.selectedCommandName();
+              final String st2 = name2 + "@" + cmd.name();
               TDLog.v( "Equate " + st1 + " with " + st2 );
               String title = String.format( getResources().getString( R.string.title_equate_with ), st1, st2 );
               TopoDroidAlertDialog.makeAlert( this, getResources(), title, 
@@ -741,6 +741,7 @@ public class TdmViewActivity extends MyActivity
                   }
                 }
               );
+              ok = true; // a station to equate with has been found and the user has been asked
             }
           }
           mDrawingSurface.clearSelectedStation();
@@ -942,7 +943,7 @@ public class TdmViewActivity extends MyActivity
 
     
   /** compute possible equates:
-   * a possible equate is an eqaute between stations of two surveys with the same name
+   * a possible equate is an equate between stations of two surveys with the same name
    */
   boolean computePossibleEquates()
   {
@@ -952,26 +953,19 @@ public class TdmViewActivity extends MyActivity
     if ( nr_surveys <= 1 ) return false;
     for ( int i=0; i < nr_surveys; ++i ) {
       TdmViewCommand cmd1 = commands.get(i);
-      List< TdmViewStation > stations1 = cmd1.mStations;
       for ( int j=i+1; j < nr_surveys; ++j ) {
         TdmViewCommand cmd2 = commands.get(j);
-        // skip if surveys have an equate 
+        // skip if surveys have an equate
         if ( mDrawingSurface.hasEquated( cmd1, cmd2 ) ) continue;
-        List< TdmViewStation > stations2 = cmd2.mStations;
-        ArrayList< TdmViewStation > equated = new ArrayList<>();
-        for ( TdmViewStation st1 : stations1 ) {
-          if ( st1.mEquated ) continue; // skip eqauted stations
-          String name = st1.name();
-          for ( TdmViewStation st2 : stations2 ) {
-            if ( st2.mEquated ) continue;
-            if ( equated.contains( st2 ) ) continue;
-            if ( st2.name().equals( name ) ) {
-              if ( mDrawingSurface.addPossibleEquate( st1, st2 ) ) {
-                equated.add( st2 );
-                break;
-              }
-            }
-          } // stations in survey j
+        HashSet< TdmViewStation > equated = new HashSet<>();
+        for ( TdmViewStation st1 : cmd1.mStations ) {
+          if ( st1.mEquated ) continue; // skip equated stations
+          TdmViewStation st2 = cmd2.getViewStation( st1.name() );
+          if ( st2 == null || st2.mEquated ) continue;
+          if ( equated.contains( st2 ) ) continue;
+          if ( mDrawingSurface.addPossibleEquate( st1, st2 ) ) {
+              equated.add( st2 );
+          }
         } // stations in survey i
       } // survey j
     } // survey i

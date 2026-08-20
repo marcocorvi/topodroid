@@ -481,6 +481,7 @@ public class TdmViewSurface extends SurfaceView
     Canvas canvas = null;
     try {
       canvas = mHolder.lockCanvas();
+      if ( canvas == null ) return; // the surface is not ready (or has been destroyed)
       canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
       mWidth  = canvas.getWidth();
@@ -526,6 +527,7 @@ public class TdmViewSurface extends SurfaceView
   class DrawThread extends  Thread
   {
     private SurfaceHolder mSurfaceHolder;
+    private static final long FRAME_DELAY = 40; // [ms] max ~25 frames/sec
 
     public DrawThread(SurfaceHolder surfaceHolder)
     {
@@ -542,7 +544,16 @@ public class TdmViewSurface extends SurfaceView
     {
       while ( _run ) {
         if ( isDrawing ) {
-          refresh();
+          try {
+            refresh();
+          } catch ( Exception e ) { // do not let the drawing thread die: the display would freeze
+            TDLog.e("TdManager view refresh failed " + e.getMessage() );
+          }
+          // pace the frames: refresh() holds the station locks that the touch handler needs,
+          // therefore a continuous redraw starves the UI thread
+          try {
+            sleep( FRAME_DELAY );
+          } catch ( InterruptedException e ) { TDLog.v("Interrupted"); }
         } else {
           try {
             // TDLog.v( "View surface: drawing thread sleeps ..." );

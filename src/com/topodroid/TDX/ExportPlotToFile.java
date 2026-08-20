@@ -44,6 +44,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
   private final String mExt; // extension
   // private String filename = null;
   private final boolean mToast;
+  private final boolean mShare; // whether to share the exported file, captured at construction time
   private final String mFormat;
   private final GeoReference mStation; // for shp
   private final FixedInfo mFixedInfo;  // for c3d
@@ -63,11 +64,12 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
    * @param name    full filename
    * @param ext     extension, used to decide how to export the plot data
    * @param toast   whether to toast
+   * @param share   whether to share the exported file (false for auto-export, not an explicit user request)
    * @param station georeference station
    */
   ExportPlotToFile( TopoDroidApp app, Context context, Uri uri, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
                     TDNum num, DrawingCommandManager command,
-                    long type, String name, String ext, boolean toast, GeoReference station )
+                    long type, String name, String ext, boolean toast, boolean share, GeoReference station )
   {
     // TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
     // FIXME assert( ext != null );
@@ -83,6 +85,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     mFullName  = name;
     mExt       = ext;
     mToast     = toast;
+    mShare     = share;
     mStation   = station;
   }
 
@@ -160,6 +163,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       }
       return ret;
     } catch (Exception e) {
+      TDLog.e("EXPORT plot to file failed: " + e);
       e.printStackTrace();
     } finally {
       if ( pfd != null ) {
@@ -184,7 +188,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         TDToast.makeBad( R.string.saving_file_failed );
       }
     }
-    if ( bool && TDSetting.mExportPlotShare && mApp != null ) {
+    if ( bool && mShare && mApp != null ) {
       String filename = mFullName + "." + mExt;
       String mimetype = TDConst.getMimeFromExtension( mExt );
       // TDLog.v("sharing PLOT file " + filename + " mime " + mimetype );
