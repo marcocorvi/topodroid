@@ -967,9 +967,17 @@ class TDPrefKey
   static {
     int cat = 0;
     for ( TDPrefKey[] keyset : mKeySet ) {
-      if ( keyset == null ) break;
-      for ( TDPrefKey k : keyset ) {
-        k.cat = cat;
+      // note: mKeySet can contain "null" placeholders for removed settings screens
+      // (e.g. the former mErase, kept as a placeholder to preserve index alignment
+      // with TDPrefCat's category constants) - skip them, don't stop the loop, or
+      // every category after the first null placeholder never gets its .cat fixed
+      // up from the TDPrefKey constructors' default of -1, silently breaking
+      // persistence for every setting in it (found 2026-08-19, regressed by
+      // 4bd252fe9 "more view config" which turned mErase into such a placeholder)
+      if ( keyset != null ) {
+        for ( TDPrefKey k : keyset ) {
+          k.cat = cat;
+        }
       }
       ++ cat;
     }
