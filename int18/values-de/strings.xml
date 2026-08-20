@@ -2095,7 +2095,7 @@
   <string name="equate_no_stations">Zu wenige Messpunkte</string>
   <string name="equate_no_nearby">Kein Messpunkt in der Nähe</string>
   <string name="equate_exists">Messpunkte bereits verbunden</string>
-    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
+    <!-- UNUSED string name="equate_same_station">Cannot equate a station with itself</string -->
   <!-- UNUSED string name="menu_new">NEU</string -->
   <!-- UNUSED string name="menu_equate">NEUE ÜBERSCHNEIDUNG</string -->
   <!-- UNUSED string name="menu_equates">ÜBERSCHNEIDUNGEN</string -->

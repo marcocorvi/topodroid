@@ -2199,7 +2199,7 @@
     <string name="equate_no_stations">Troppo pochi capisaldi</string>
     <string name="equate_no_nearby">Nessun caposaldo vicino</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
-    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
+    <!-- UNUSED string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">NUOVO</string -->
     <!-- UNUSED string name="menu_equate">AGGIUNGI EQUIVALENTE</string -->

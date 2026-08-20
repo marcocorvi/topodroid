@@ -2214,7 +2214,7 @@
     <string name="equate_no_stations">Túl kevés pont</string>
     <string name="equate_no_nearby">Nincs közelben pont</string>
     <string name="equate_exists">A pontok már kapcsoltak</string>
-    <string name="equate_same_station">Nem lehet a mérési pontot saját magával kapcsolni</string>
+    <!-- UNUSED string name="equate_same_station">Nem lehet a mérési pontot saját magával kapcsolni</string -->
 
     <!-- UNUSED string name="menu_new">ÚJ</string -->
     <!-- UNUSED string name="menu_equate">KAPCSOLÓDÁSOK HOZZÁADÁSA</string -->

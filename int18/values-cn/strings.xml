@@ -2206,7 +2206,7 @@
     <string name="equate_no_stations">测量点太少</string>
     <string name="equate_no_nearby">无附近测量点</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
-    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
+    <!-- UNUSED string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">新建</string -->
     <!-- UNUSED string name="menu_equate">添加相同</string -->

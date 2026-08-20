@@ -2221,7 +2221,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="equate_no_stations">Muy pocos puntos fuertes</string>
     <string name="equate_no_nearby">No hay punto fuerte</string>
     <!-- TODO string name="equate_exists">Stations already equated</string -->
-    <!-- TODO string name="equate_same_station">Cannot equate a station with itself</string -->
+    <!-- UNUSED string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">Nuevo</string -->
     <!-- UNUSED string name="menu_equate">Agregar equivalente</string -->
