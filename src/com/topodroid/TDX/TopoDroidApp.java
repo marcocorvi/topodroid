@@ -2182,8 +2182,9 @@ public class TopoDroidApp extends Application
    * @param psd1      plot data
    * @param psd2      profile data
    * @param toast     whether to toast to result
+   * @param share     whether to share the exported file (false for auto-export, not an explicit user request)
    */
-  void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
+  void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast, boolean share )
   {
     SurveyInfo survey_info = getSurveyInfo();
     if ( survey_info == null ) {
@@ -2196,8 +2197,8 @@ public class TopoDroidApp extends Application
     // String filename = TDPath.getSurveyCsxFile( fullname );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
-    (new SaveFullFileTask( this, context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname, 
-       /* TDPath.getCsxFile(""), */ toast )).execute();
+    (new SaveFullFileTask( this, context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname,
+       /* TDPath.getCsxFile(""), */ toast, share )).execute();
   }
 
   // FIXME_SYNC might be a problem with big surveys

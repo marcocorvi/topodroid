@@ -221,25 +221,25 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           case TDConst.SURVEY_FORMAT_DXF:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) { // APP_OUT_DIR was ! parent.isFinishing()
               // TDLog.v("EXPORT AUTO dxf " + mFullName );
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "dxf", false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "dxf", false, false );
             }
             break;
           case TDConst.SURVEY_FORMAT_SVG:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
               // TDLog.v("EXPORT AUTO svg " + mFullName );
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "svg", false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "svg", false, false );
             }
             break;
           case TDConst.SURVEY_FORMAT_SHP:
             // TDLog.v("EXPORT AUTO shz " + mFullName );
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shz", false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shz", false, false );
             }
             break;
           case TDConst.SURVEY_FORMAT_XVI:
             // TDLog.v("EXPORT AUTO xvi " + mFullName );
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false, false );
             }
             break;
           // case TDConst.SURVEY_FORMAT_C3D: // NO_C3D
@@ -252,7 +252,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             // TDLog.v("EXPORT AUTO csx " + mFullName );
             if ( PlotType.isSketch2D( mType ) ) {
               if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-                mParent.get().doSaveCsx( null, origin, psd1, psd2, false );
+                mParent.get().doSaveCsx( null, origin, psd1, psd2, false, false );
               }
               break;
             } else { // X-Section cSurvey are exported as PNG
