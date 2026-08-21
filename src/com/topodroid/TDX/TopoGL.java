@@ -791,8 +791,8 @@ public class TopoGL extends MyActivity
       selectImportFile();
     } else if ( p++ == pos ) { // EXPORT
       if ( mParser != null ) {
-        // (new DialogExport( this, this, mParser )).show(); // this calls selectExportFile( export );
-        if ( mParser.hasFixes() ) { // this calls selectExportFile( export );
+        // (new DialogExport( this, this, mParser )).show(); // this calls selectExportFile( export, shared );
+        if ( mParser.hasFixes() ) { // this calls selectExportFile( export, shared );
           (new ExportDialogModel( this, this, mParser, TDConst.mModelExportTypes, R.string.export_model_title)).show();
         } else {
           (new ExportDialogModel( this, this, mParser, TDConst.mModelExportTypesNoGeo, R.string.export_model_title)).show();

@@ -31,11 +31,12 @@ import android.view.View;
  */
 public class PhotoSurface extends SurfaceView
                           implements SurfaceHolder.Callback
+                          , IDrawingSurface
                           // , OnTouchListener
 {
   private boolean mSurfaceCreated = false;
   private DrawThread mDrawThread;
-  private volatile boolean isDrawing = true;
+  private volatile boolean mIsDrawing = true;
   private SurfaceHolder mHolder = null; // canvas holder
   // private final Context mContext;
   // private IZoomer mZoomer = null;
@@ -151,7 +152,7 @@ public class PhotoSurface extends SurfaceView
   //   @Override
   //   public void handleMessage(Message msg) { 
   //     // TDLog.v( "preview done handler" );
-  //     isDrawing = false;
+  //     mIsDrawing = false;
   //   }
   // };
 
@@ -159,36 +160,38 @@ public class PhotoSurface extends SurfaceView
    */
   void clearDrawing() { mCommandManager.clearDrawing(); }
 
-  /** drawing thread
-   */
-  class DrawThread extends  Thread
-  {
-    private volatile boolean mRunning;
-    private SurfaceHolder mSurfaceHolder;
+  // /** drawing thread
+  //  * TODO use com.topodroid.TDX.DrawThread
+  //  */
+  // class DrawThread extends  Thread
+  // {
+  //   private volatile boolean mRunning;
+  //   private SurfaceHolder mSurfaceHolder;
 
-    DrawThread(SurfaceHolder holder) { mSurfaceHolder = holder; }
+  //   DrawThread( SurfaceHolder holder ) { mSurfaceHolder = holder; }
 
-    void stopRunning() { mRunning = false; }
+  //   void stopRunning() { mRunning = false; }
 
-    @Override
-    public void run() 
-    {
-      // TDLog.v( "drawing thread run");
-      mRunning = true;
-      while ( mRunning ) {
-        if ( isDrawing ) {
-          refreshSurface( mSurfaceHolder );
-        } else {
-          try {
-            sleep(100);
-          } catch ( InterruptedException e ) {
-              // TDLog.e( "Interrupt");
-          }
-        }
-      }
-      // TDLog.v( "drawing thread exit");
-    }
-  }
+  //   @Override
+  //   public void run() 
+  //   {
+  //     // TDLog.v( "drawing thread run");
+  //     mRunning = true;
+  //     while ( mRunning ) {
+  //       if ( isDrawing() ) {
+  //         refreshSurface( mSurfaceHolder );
+  //         TDUtil.yieldDown( 20 );
+  //       } else {
+  //         TDUtil.yieldDown( 40 );
+  //       }
+  //     }
+  //     // TDLog.v( "drawing thread exit");
+  //   }
+  // }
+
+  public boolean isDrawing() { return mIsDrawing; }
+
+  public void refresh( SurfaceHolder holder ) { refreshSurface( holder ); }
 
   // ---------------------------------------------------------------------
 
@@ -215,10 +218,10 @@ public class PhotoSurface extends SurfaceView
     // holder.addCallback(this);
 
     if ( mDrawThread == null ) {
-      mDrawThread = new DrawThread(holder);
+      mDrawThread = new DrawThread( this, holder );
       mDrawThread.start();
     }
-    isDrawing = true;
+    mIsDrawing = true;
     mSurfaceCreated = true;
   }
 
@@ -228,7 +231,7 @@ public class PhotoSurface extends SurfaceView
   public void surfaceDestroyed(SurfaceHolder holder) 
   {
     TDLog.v( "photo surface destroyed");
-    isDrawing = false;
+    mIsDrawing = false;
     mSurfaceCreated = false;
     suspendDrawingThread();
   }
@@ -238,7 +241,7 @@ public class PhotoSurface extends SurfaceView
   synchronized void suspendDrawingThread()
   {
     // TDLog.v( "drawing thread suspend");
-    isDrawing = false;
+    mIsDrawing = false;
   }
 
   /** stop the drawing thread
@@ -246,7 +249,7 @@ public class PhotoSurface extends SurfaceView
   synchronized void stopDrawingThread()
   {
     // TDLog.v( "drawing thread stop");
-    isDrawing = false;
+    mIsDrawing = false;
     if ( mDrawThread != null ) {
       boolean retry = true;
       mDrawThread.stopRunning();

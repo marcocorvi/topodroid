@@ -278,17 +278,19 @@ public class DrawingSvgBase
 
   static protected void toSvgLabel( PrintWriter pw, DrawingLabelPath label, String color, float xoff, float yoff )
   {
+    String text = TDString.replaceNul( label.getPointText() );
+    if ( text == null ) return;
     String name = label.getThName();
     float scale = label.getScaleValue();
-    // TDLog.v("label: " + name + " " + scale + " text " + label.mPointText );
+    // TDLog.v("label: " + name + " " + scale + " text " + text );
     pw.format("<!-- label %s -->\n", name );
     if ( name.equals( SymbolLibrary.LABEL ) ) {
       printPointWithXY( pw, "<text", xoff+label.cx, yoff+label.cy );
       pw.format(Locale.US, " font-size=\"%.1f\"", TDSetting.mSvgLabelSize * scale );
       // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
-        pw.format(Locale.US, " class=\"label\">%s</text>\n", label.mPointText );
+        pw.format(Locale.US, " class=\"label\">%s</text>\n", text );
       // } else {
-      //   pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
+      //   pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, text );
       // }
     }
   }
@@ -436,15 +438,17 @@ public class DrawingSvgBase
     String name = point.getFullThNameEscapedColon( );
     // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy );
     // if ( BrushManager.isPointReference( idx ) ) return; // TDSKETCH
-    pw.format("<!-- point %s -->\n", name );
     if ( name.equals( SymbolLibrary.LABEL ) ) {
+      // DrawingLabelPath label = (DrawingLabelPath)point;
+      String text = TDString.replaceNul( point.getPointText() );
+      if ( text == null ) return;
+      pw.format("<!-- point %s -->\n", name );
       // assert( point instanceof DrawingLabelPath );
       float o = (float)(point.mOrientation);
 	  // FIXME_SYMBOL
       float s = LABEL_SCALE * TDMath.sind( o ) * scale;
       float c = LABEL_SCALE * TDMath.cosd( o ) * scale;
-      DrawingLabelPath label = (DrawingLabelPath)point;
-      // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy + " text " + label.mPointText );
+      // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy + " text " + text );
       // printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
       printPointWithXY( pw, "<text", 0, 0 );
       pw.format(Locale.US, " font-size=\"%.2f\"", TDSetting.mSvgLabelSize * scale );
@@ -454,7 +458,7 @@ public class DrawingSvgBase
       //   pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\"", TDSetting.mSvgLabelStroke * scale );
       // }
       printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
-      pw.format( " >%s</text>\n", label.mPointText );
+      pw.format( " >%s</text>\n", text );
     // } else if ( name.equals("continuation") ) {
     //   printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\">\?</text>\n", TDSetting.mSvgLabelStroke );
@@ -464,6 +468,7 @@ public class DrawingSvgBase
     } else if ( BrushManager.isPointSection( idx ) ) {
       /* nothing */
     } else {
+      pw.format("<!-- point %s -->\n", name );
       SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
       if ( sp != null ) {
         // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS

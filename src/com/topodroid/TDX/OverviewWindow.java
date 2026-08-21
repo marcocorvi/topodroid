@@ -700,9 +700,10 @@ public class OverviewWindow extends ItemDrawer
   /** export drawing 
    // * @param uri    URI of the export file
    * @param ext    export type (ie, extension)
+   * @param shared whether to share export
    * @note called only by export menu
    */
-  private void saveWithExt( /* Uri uri, */ final String ext ) // FIXME 20251206
+  private void saveWithExt( /* Uri uri, */ final String ext, boolean shared ) // FIXME 20251206
   {
     TDNum num = mNum;
     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
@@ -716,7 +717,7 @@ public class OverviewWindow extends ItemDrawer
     // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
 
     if ( "pdf".equals( ext ) ) {
-      savePdf( uri );
+      savePdf( uri, shared );
     } else {
       if ( ext.equals("th2") ) {
         Handler th2Handler = new Handler() {
@@ -734,7 +735,7 @@ public class OverviewWindow extends ItemDrawer
         // oblique = 0
         // save = OVERVIEW
         // rotate  = 0
-        (new SavePlotFileTask( mApp, this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, 0, PlotSave.OVERVIEW, 0, false )).execute(); // TH2EDIT false
+        (new SavePlotFileTask( mApp, this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, 0, PlotSave.OVERVIEW, 0, false, shared )).execute(); // TH2EDIT false
       } else {
         GeoReference station = null;
         if ( mType == PlotType.PLOT_PLAN && ext.equals("shz") ) {
@@ -743,7 +744,7 @@ public class OverviewWindow extends ItemDrawer
         }
         SurveyInfo info = mData.selectSurveyInfo( mSid );
         // null PlotInfo, null FixedInfo, true toast
-        (new ExportPlotToFile( mApp, this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, TDSetting.mExportPlotShare, station )).execute();
+        (new ExportPlotToFile( mApp, this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station, shared )).execute();
       }
     }
   }
@@ -757,9 +758,11 @@ public class OverviewWindow extends ItemDrawer
    * @param prefix        station name prefix (not used)
    * @param first         not used
    * @param second        whether to export the second view (unused)
+   * @param unused
+   * @param shared        whether to share export
    * @note called by the ExportPlotDialog
    */
-  public void doExport( String export_type, String filename, String prefix, long first, boolean second, List<String> unused ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, long first, boolean second, List<String> unused, boolean shared ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
@@ -779,7 +782,7 @@ public class OverviewWindow extends ItemDrawer
     // intent.putExtra( Intent.EXTRA_TITLE, filename );
     // startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
 
-    saveWithExt( mExportExt );
+    saveWithExt( mExportExt, shared );
   }
 
   // /** react to a called activity result ---- APP_OUT_DIR
@@ -832,12 +835,12 @@ public class OverviewWindow extends ItemDrawer
   /** export drawing as PDF
    * @param uri   export URI
    */
-  private void savePdf( Uri uri ) 
+  private void savePdf( Uri uri, boolean shared ) 
   {
     String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
     if ( fullname != null ) { // always true
       DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
-      doSavePdf( uri, manager, fullname );
+      doSavePdf( uri, manager, fullname, shared );
     } else {
       TDLog.e("ERROR PDF fullname is null");
     }
@@ -849,7 +852,7 @@ public class OverviewWindow extends ItemDrawer
    * @param fullname export "name" - used only in the toast
    * TODO with background task
    */
-  private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
+  private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname, boolean shared )
   {
     if ( manager == null ) {
       TDToast.makeBad( R.string.null_bitmap );
@@ -888,11 +891,12 @@ public class OverviewWindow extends ItemDrawer
       pdf.close();
       /* if ( fos != null ) */ fos.close(); // test always true
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) ); // PDF
-      if ( TDSetting.mExportPlotShare ) {
+      if ( shared /* TDSetting.mExportPlotShare */ ) {
         String filename = fullname + ".pdf";
         // TDLog.v("sharing PDF filename " + filename );
         String mimetype = TDConst.getMimeFromExtension("pdf");
         mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity FIXME 20251206
+        // TDSetting.mExportPlotShare = false; // reset the share flag
       }
     } catch ( IOException e ) {
       TDLog.e("Failed PDF export " + e.getMessage() );

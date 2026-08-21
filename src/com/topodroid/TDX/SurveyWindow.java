@@ -650,9 +650,11 @@ public class SurveyWindow extends MyActivity
    * @param prefix    station name prefix (Compass, VTopo, Winkarst)
    * @param first     not used
    * @param second    whether to export the second view (unused: only plan or profile in DrawingWindow) - not used here
+   * @param unused
+   * @param shared    whether to share export
    * @note interface IExporter
    */
-  public void doExport( String type, String filename, String prefix, long first, boolean second, List<String> unused )
+  public void doExport( String type, String filename, String prefix, long first, boolean second, List<String> unused, boolean shared )
   {
     TDLog.v( "SURVEY do export - name " + filename + " prefix " + prefix );
     if ( ! saveSurvey( false ) ) {
@@ -685,7 +687,7 @@ public class SurveyWindow extends MyActivity
         //  mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
         //}
         // 20251208 since there is no need for the "if"
-        mApp.doExportDataAsync( getApplicationContext(), export_info, true, false ); // uri = null
+        mApp.doExportDataAsync( getApplicationContext(), export_info, true, false, shared ); // uri = null
       }
     } else {
       TDLog.e("Survey Window export - negative index " + index );

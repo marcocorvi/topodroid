@@ -1827,14 +1827,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mApp, mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.clino, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+        (new SavePlotFileTask( mApp, mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.clino, psd2.suffix, r, mTh2Edit, false )).execute(); // TH2EDIT
       } catch ( RejectedExecutionException e ) { 
         TDLog.e("rejected exec save plot " + psd2.filename );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mApp, mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.clino, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+      (new SavePlotFileTask( mApp, mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.clino, psd1.suffix, r, mTh2Edit, false )).execute(); // TH2EDIT
     } catch ( RejectedExecutionException e ) { 
       TDLog.e("rejected exec save plot " + psd1.filename );
       -- mNrSaveTh2Task;
@@ -8248,7 +8248,7 @@ public class DrawingWindow extends ItemDrawer
    * @param uri      export URI
    * @param type     plot type
    */
-  private void savePdf( Uri uri, long type ) 
+  private void savePdf( Uri uri, long type, boolean shared ) 
   {
     String fullname = null;
     if ( PlotType.isAnySection( type ) ) { 
@@ -8262,7 +8262,7 @@ public class DrawingWindow extends ItemDrawer
     if ( fullname != null ) {
       DrawingCommandManager manager = mDrawingSurface.getManager( type );
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      doSavePdf( uri, manager, fullname );
+      doSavePdf( uri, manager, fullname, shared );
     }
   }
 
@@ -8272,7 +8272,7 @@ public class DrawingWindow extends ItemDrawer
    * @param manager  drawing items
    * @param fullname plot fullname, for the toast and for filesystem-based export
    */
-  private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
+  private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname, final boolean shared )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_PDF2 );
     if ( manager == null ) {
@@ -8313,11 +8313,12 @@ public class DrawingWindow extends ItemDrawer
       pdf.close();
       fos.close();
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) );
-      if ( TDSetting.mExportPlotShare ) {
+      if ( shared )  { // TDSetting.mExportPlotShare
         String filename = fullname + ".pdf";
         // TDLog.v("sharing PDF filename " + filename );
         String mimetype = TDConst.getMimeFromExtension("pdf");
         mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity
+        // TDSetting.mExportPlotShare = false; // reset the share flag
       }
     // } catch ( NoSuchMethodException e ) {
     } catch ( IOException e ) {
@@ -8334,15 +8335,15 @@ public class DrawingWindow extends ItemDrawer
    * @param psd1    plan plot save-data
    * @param psd2    profile plot save-data
    * @param toast   whether to toast
-   * @param share   whether to share the exported file (false for auto-export, not an explicit user request)
+   * @param shared  whether to share export
    * @note used also by SavePlotFileTask
    */
-  void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast, boolean share )
+  void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast, boolean shared )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_CSX2 );
     // TDLog.v( "save csx");
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-    mApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast, share );
+    mApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast, shared );
   }
 
 
@@ -8350,8 +8351,9 @@ public class DrawingWindow extends ItemDrawer
    * @param uri   export URI
    * @param type  export type
    * @param ext   extension
+   * @param shared  whether to share export
    */
-  private void saveWithExt( Uri uri, long type, String ext ) 
+  private void saveWithExt( Uri uri, long type, String ext, boolean shared ) 
   {
     TDNum num = mNum;
     // TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
@@ -8361,7 +8363,7 @@ public class DrawingWindow extends ItemDrawer
     //   savePng( uri, type );
     // } else
     if ( "pdf".equals( ext ) ) {
-      savePdf( uri, type );
+      savePdf( uri, type, shared );
     } else {
       if ( PlotType.isAnySection( type ) ) { 
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
@@ -8369,28 +8371,28 @@ public class DrawingWindow extends ItemDrawer
         if ( "csx".equals( ext ) /* || "png".equals( ext ) */ ) { // NO_PNG
           // doSavePng( uri, manager, type, fullname );  // NO_PNG
         } else {
-          doSaveWithExt( uri, num, manager, type, fullname, ext, true, TDSetting.mExportPlotShare ); 
+          doSaveWithExt( uri, num, manager, type, fullname, ext, true, shared ); 
         }
       } else {
         if ( ext.equals("c3d") ) {
           DrawingCommandManager manager = mDrawingSurface.getManager( type );
           if ( PlotType.isProfile( type ) ) {
-            doSaveWithExt( uri, num, manager, type, mFullName2, ext, true, TDSetting.mExportPlotShare ); 
+            doSaveWithExt( uri, num, manager, type, mFullName2, ext, true, false );  // C3D is not shared
           } else if ( type == PlotType.PLOT_PLAN ) {
-            doSaveWithExt( uri, num, manager, type, mFullName1, ext, true, TDSetting.mExportPlotShare ); 
+            doSaveWithExt( uri, num, manager, type, mFullName1, ext, true, false ); 
           } else {
             // TDLog.v( "save xsection as c3d");
-            doSaveWithExt( uri, num, manager, type, mFullName3, ext, true, TDSetting.mExportPlotShare ); 
+            doSaveWithExt( uri, num, manager, type, mFullName3, ext, true, false ); 
           }
         } else {
           if ( PlotType.isProfile( type ) ) {
             DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
             String fullname2 = mFullName2;
-            doSaveWithExt( uri, num, manager2, mPlot2.type, fullname2, ext, true, TDSetting.mExportPlotShare ); 
+            doSaveWithExt( uri, num, manager2, mPlot2.type, fullname2, ext, true, shared ); 
           } else if ( type == PlotType.PLOT_PLAN ) {
             DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
             String fullname1 = mFullName1;
-            doSaveWithExt( uri, num, manager1, mPlot1.type, fullname1, ext, true, TDSetting.mExportPlotShare ); 
+            doSaveWithExt( uri, num, manager1, mPlot1.type, fullname1, ext, true, shared ); 
           }
         }
       }
@@ -8401,7 +8403,7 @@ public class DrawingWindow extends ItemDrawer
   // ext can be dxf, svg
   // FIXME OK PROFILE
   // used also by SavePlotFileTask
-  void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast, boolean share )
+  void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast, boolean shared )
   {
     // TDLog.v( "SAVE with ext: filename " + filename + " ext " + ext + " type " + type );
     // mActivity = context (only to toast)
@@ -8422,7 +8424,7 @@ public class DrawingWindow extends ItemDrawer
     //   if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0, -1, -1 ); // NOTE ACCURACY -1 (unset)
     }
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-    new ExportPlotToFile( mApp, mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, share, station ).execute();
+    new ExportPlotToFile( mApp, mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station, shared ).execute();
   }
 
   // static private Handler th2Handler = null;
@@ -8435,7 +8437,7 @@ public class DrawingWindow extends ItemDrawer
    * called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols
    * no backup_rotate (rotate = 0)
    */
-  private void doSaveTh2( Uri uri, long type, final boolean toast )
+  private void doSaveTh2( Uri uri, long type, final boolean toast, final boolean shared )
   {
     DrawingCommandManager manager = mDrawingSurface.getManager( type );
     if ( manager == null ) return;
@@ -8479,9 +8481,9 @@ public class DrawingWindow extends ItemDrawer
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       if ( mTh2Edit ) { // TH2EDIT 
         // set type by the scrap projection 
-        (new SavePlotFileTask( mApp, mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, 0, PlotSave.EXPORT, 0, true )).execute();
+        (new SavePlotFileTask( mApp, mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, 0, PlotSave.EXPORT, 0, true, shared )).execute();
       } else {
-        (new SavePlotFileTask( mApp, mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, oblique, PlotSave.EXPORT, 0, false )).execute();
+        (new SavePlotFileTask( mApp, mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, oblique, PlotSave.EXPORT, 0, false, shared )).execute();
       }
     } catch ( RejectedExecutionException e ) {
       TDLog.e("Sketch saving exec rejected");
@@ -9149,9 +9151,11 @@ public class DrawingWindow extends ItemDrawer
    * @param prefix       station names export-prefix (not used)
    * @param first        not-used
    * @param second       whether to export the second view instead of the current view (only for plan or profile)
+   * @param unused
+   * @param shared       whether to share export (unused)
    * @note called from ExportDialogPlot to do the export
    */
-  public void doExport( String export_type, String filename, String prefix, long first, boolean second, List<String> unused ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, long first, boolean second, List<String> unused, boolean shared ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex  = TDConst.plotExportIndex( export_type );
@@ -9172,7 +9176,7 @@ public class DrawingWindow extends ItemDrawer
         Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
         // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
         if ( uri != null ) {
-          doUriExport( uri, second );
+          doUriExport( uri, second, shared );
         }
       // }
     // } else {
@@ -9197,8 +9201,9 @@ public class DrawingWindow extends ItemDrawer
   /** 
    * @param uri     export URI
    * @param second  whether to export the second view (only for plan or profile)
+   * @param shared  whether to share export
    */
-  private void doUriExport( Uri uri, boolean second ) 
+  private void doUriExport( Uri uri, boolean second, boolean shared ) 
   {
     // if ( ! TDSetting.mExportUri ) return;
     // TDLog.v( "do URI export. index " + mExportIndex );
@@ -9212,30 +9217,30 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     switch ( mExportIndex ) {
-      case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, type, true ); break;
+      case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, type, true, shared ); break;
       case TDConst.SURVEY_FORMAT_CSX: 
         if ( ! PlotType.isAnySection( type ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
             String origin = mPlot1.start;
 	    PlotSaveData psd1 = makePlotSaveData( 1, PlotSave.EXPORT, 0 );
 	    PlotSaveData psd2 = makePlotSaveData( 2, PlotSave.EXPORT, 0 );
-            doSaveCsx( uri, origin, psd1, psd2, true, TDSetting.mExportPlotShare );
+            doSaveCsx( uri, origin, psd1, psd2, true, shared );
 	  }
           break;
         } // else fall-through and savePng
       // case TDConst.SURVEY_FORMAT_PNG: savePng( uri, type ); break; // NO_PNG
       // case TDConst.SURVEY_FORMAT_PNM: savePnm( uri, type ); break; // NO_PNM
-      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, type, "dxf" ); break;
-      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, type, "svg" ); break;
-      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, type, "shz" ); break;
-      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, type, "xvi" ); break;
+      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, type, "dxf", shared ); break;
+      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, type, "svg", shared ); break;
+      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, type, "shz", shared ); break;
+      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, type, "xvi", shared ); break;
       // case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, type, "xml" ); break; // NO_TUNNEL
       // case TDConst.SURVEY_FORMAT_C3D: // NO_C3D
       //   // TDLog.v("export c3d");
       //   // if ( ! PlotType.isAnySection( type ) )
       //     saveWithExt( uri, type, "c3d" );
       //   break;
-      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri, type ); break; 
+      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri, type, shared ); break; 
     }
   }
 
@@ -10074,7 +10079,7 @@ public class DrawingWindow extends ItemDrawer
     if ( pfd != null ) {
       FileWriter fw = TDsafUri.docFileWriter( pfd );
       // DrawingTh.doLoadTherion( mDrawingSurface, fw, 0, 0 );
-      doSaveTh2( uri, mType, true ); // true = toast
+      doSaveTh2( uri, mType, true, false ); // true toast, false shared
       return true;
     } else {
       TDLog.e("DRAW null fd");

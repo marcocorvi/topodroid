@@ -13,13 +13,13 @@ package com.topodroid.TDX;
 
 import android.view.SurfaceHolder;
 
-interface IDrawingSurface 
+public interface IDrawingSurface 
 {
   /** refresh the surface
    * @param holder surface holder
    */
-  void refresh( SurfaceHolder holder );
+  public void refresh( SurfaceHolder holder );
 
-  boolean isDrawing();
+  public boolean isDrawing();
 
 }

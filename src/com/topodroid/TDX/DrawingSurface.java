@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDUtil;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PlotType;
@@ -666,6 +667,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
         holder.unlockCanvasAndPost( canvas ); // FIXME IllegalArgumentException ???
       }
     }
+    TDUtil.yieldDown( 20 );
   }
 
   /** check if the surface is drawing

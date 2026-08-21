@@ -58,6 +58,7 @@ public class ExportDialogPlot extends MyDialog
   private String mPlotName1;
   private String mPlotName2 = null;
   private boolean mBothViews = false; // whether to export both views (local - independently set for each export) 
+  private boolean mShared = false;
 
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutCSurvey;
@@ -200,12 +201,12 @@ public class ExportDialogPlot extends MyDialog
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
       if ( mParentType == PARENT_DRAWING ) { // plot
-        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, -1L, false, null );  // null prefix, -1=first
+        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, -1L, false, null, mShared );  // null prefix, -1=first
         if ( mBothViews && mPlotName2 != null ) {
-          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, -1L, true, null );  // null prefix, -1=first
+          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, -1L, true, null, mShared );  // null prefix, -1=first
         }
       } else { // overview
-        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, -1L, false, null ); // null prefix, -1=first
+        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, -1L, false, null, mShared ); // null prefix, -1=first
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
@@ -262,7 +263,7 @@ public class ExportDialogPlot extends MyDialog
     if ( mParentType == PARENT_OVERVIEW ) {
       if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up - skip csx
     } 
-    TDSetting.mExportPlotShare =  ((CheckBox) findViewById( R.id.export_share )).isChecked();
+    mShared /* TDSetting.mExportPlotShare */ =  ((CheckBox) findViewById( R.id.export_share )).isChecked();
     if ( selected > 6 ) return; // no options for tnl c3d
     switch ( selected ) {
       case 0: // Therion
@@ -380,7 +381,7 @@ public class ExportDialogPlot extends MyDialog
    */
   private void initOptions()
   {
-    ((CheckBox) findViewById( R.id.export_share )).setChecked( TDSetting.mExportPlotShare );
+    ((CheckBox) findViewById( R.id.export_share )).setChecked( false ); // ( TDSetting.mExportPlotShare );
 
     ((CheckBox) findViewById( R.id.therion_splays )).setChecked( TDSetting.mTherionSplays );
     ((CheckBox) findViewById( R.id.therion_xvi )).setChecked( TDSetting.mTherionXvi );

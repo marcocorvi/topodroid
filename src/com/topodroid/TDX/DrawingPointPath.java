@@ -46,7 +46,7 @@ public class DrawingPointPath extends DrawingPath
   // float mYpos;
   public int mPointType;      // symbol point type (index in symbol-point lib)
   public double mOrientation; // orientation [degrees]
-  public String mPointText;   // point text value (if any)
+  protected String mPointText;   // point text value (if any)
   public IDrawingLink mLink;  // linked drawing item
 
   // FIXME-COPYPATH
@@ -553,7 +553,7 @@ public class DrawingPointPath extends DrawingPath
     resetPath( 1.0f );
   }
 
-  /** get the text of the point
+  /** get the text of the point - can be null
    * @return the point text
    */
   public String getPointText() { return mPointText; }

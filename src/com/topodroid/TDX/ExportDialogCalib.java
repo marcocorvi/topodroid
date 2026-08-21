@@ -107,7 +107,7 @@ public class ExportDialogCalib extends MyDialog
     // TDLog.v("CALIB selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      mParent.doExport( mSelected, TDInstance.calib, null, -1L, false, null ); // calib name is not used, null prefix, -1=first
+      mParent.doExport( mSelected, TDInstance.calib, null, -1L, false, null, false ); // calib name is not used, null prefix, -1=first, ..., false shared
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

@@ -3050,9 +3050,11 @@ public class TDExporter
     pw.format( "\r\n" );
   }
 
+  // @note called only with TDSetting.mCompassSplays true
   private static void printSplayToDat( PrintWriter pw, String prefix, String from, String to, DBlock blk, boolean reverse )
   {
-    if ( ! TDSetting.mCompassSplays ) return;
+    // if ( ! TDSetting.mCompassSplays ) return;
+    // if ( TDSetting.mCompassSplayMode == 0 ) return;
     float b = blk.mBearing;
     float c = blk.mClino;
     if ( reverse ) {
@@ -3159,7 +3161,8 @@ public class TDExporter
       boolean duplicate = false;
       LRUD lrud;
 
-      HashMap<String, Integer > splay_stations = TDSetting.mCompassSplays ?  new HashMap<String, Integer >() : null;
+      HashMap<String, Integer > splay_stations = ( TDSetting.mCompassSplays )?  new HashMap<String, Integer >() : null;
+      boolean with_splays = TDSetting.mCompassSplays && not_diving;
 
       for ( DBlock item : list ) {
         String from = item.mFrom;
@@ -3178,9 +3181,13 @@ public class TDExporter
               duplicate = false;
               ref_item = null; 
             }
-	    if ( TDSetting.mCompassSplays && not_diving ) {
+	    if ( with_splays ) {
 	      int ii = nextSplayInt( splay_stations, to );
-	      printSplayToDat( pw, prefix, to, to + "ss" + ii, item, true ); // reverse
+          // if ( TDSetting.mCompassSplayMode == 1 ) {
+	      //   printSplayToDat( pw, prefix, to, to + "ss" + ii, item, true ); // reverse
+          // } else { // TDSetting.mCompassSplayModes ==  2
+            printSplayToDat( pw, prefix, to, ")" + to + ii, item, true ); // reverse
+          // }
 	    }
           }
         } else { // with FROM station
@@ -3192,9 +3199,13 @@ public class TDExporter
               duplicate = false;
               ref_item = null; 
             }
-	    if ( TDSetting.mCompassSplays && not_diving ) {
+	    if ( with_splays ) {
 	      int ii = nextSplayInt( splay_stations, from );
-	      printSplayToDat( pw, prefix, from, from + "ss" + ii, item, false ); // not reverse
+          // if ( TDSetting.mCompassSplayMode == 1 ) {
+	      //   printSplayToDat( pw, prefix, from, from + "ss" + ii, item, false ); // not reverse
+          // } else { // TDSetting.mCompassSplayMode ==  2
+	        printSplayToDat( pw, prefix, from, ")" + from + ii, item, false ); // not reverse
+          // }
 	    }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {

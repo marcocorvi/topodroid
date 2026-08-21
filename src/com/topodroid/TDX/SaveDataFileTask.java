@@ -51,6 +51,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   private boolean mToast;
   private Uri mUri = null;
   private TopoDroidApp mApp = null;
+  private boolean mShared = false;
 
   /**
    * @param app         TopoDroidApp reference (for sharing)
@@ -63,8 +64,9 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
    * @param device      active device (A) - only for SVX
    * @param export_info export info (type, prefix, name ...)
    * @param toast       whether to toast
+   * @param shared      whether to share export 
    */
-  SaveDataFileTask( TopoDroidApp app, Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, ExportInfo export_info, boolean toast )
+  SaveDataFileTask( TopoDroidApp app, Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, ExportInfo export_info, boolean toast, boolean shared )
   {
     mApp     = app;
     /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
@@ -76,6 +78,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     mDevice  = device;
     mExportInfo = export_info;
     mToast   = toast;
+    mShared  = shared;
     setSurveyName();
     // TDLog.v( "save data file task - type " + export_info.index + " name " + export_info.name );
   }
@@ -295,7 +298,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         TDToast.make( String.format(mFormat, filename) );
       }
     }
-    if ( TDSetting.mExportDataShare && mApp != null ) { // Share file if enabled
+    if ( mShared /* TDSetting.mExportDataShare */ && mApp != null ) { // Share file if enabled
       if ( ! TDString.isNullOrEmpty( filename ) ) { 
         String mimetype = TDConst.getMimeFromFilename( filename );
         // TDLog.v("mime " + mimetype );
@@ -304,6 +307,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         }
       }
     }
+    // TDSetting.mExportDataShare = false; // reset the share flag
   }
 
 }

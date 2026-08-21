@@ -414,7 +414,8 @@ class TDPrefKey
    */
   static TDPrefKey[] mExportDat = {
     new TDPrefKey( N, BOOL, XP, "DISTOX_STATION_PREFIX", R.string.pref_station_prefix_title,R.string.pref_station_prefix_summary, FALSE ),
-    new TDPrefKey( A, BOOL, XP, "DISTOX_COMPASS_SPLAYS", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TRUE  ),    
+    // new TDPrefKey( A, BOOL, XP, "DISTOX_COMPASS_SPLAYS", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TRUE  ),    
+    new TDPrefKey( A,       XP, "DISTOX_COMPASS_SPLAY_MODE", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TDString.ONE, R.array.compassSplayMode, R.array.compassSplayModeValue  ),    
     new TDPrefKey( N, BOOL, XP, "DISTOX_SWAP_LR",        R.string.pref_swapLR_title,        R.string.pref_swapLR_summary,         FALSE )  
   };
 
@@ -637,17 +638,17 @@ class TDPrefKey
     new TDPrefKey( N, BOOL, UI, "DISTOX_AREA_BORDER",     R.string.pref_area_border_title,     R.string.pref_area_border_summary,     TRUE )
   };
 
-  /** eraser settings
+  /** eraser settings // EMPTY
    * "select" radius // "select" radius // "select" radius
    * "erase" radius // "erase" radius
    * "size" of a "point touch" (max distance between down and up)
    * @note all keys repeated
    */
-  // static TDPrefKey[] mErase = {
+  static TDPrefKey[] mErase = {
   //   new TDPrefKey( B, LONG,  UI, "DISTOX_CLOSENESS",  R.string.pref_closeness_title, R.string.pref_closeness_message,TDString.TWENTYFOUR ),
   //   new TDPrefKey( B, LONG,  UI, "DISTOX_ERASENESS",  R.string.pref_eraseness_title, R.string.pref_eraseness_message,"36" ),
   //   new TDPrefKey( E, LONG,  UI, "DISTOX_POINTING",   R.string.pref_pointing_title,  R.string.pref_pointing_message, TDString.TWENTYFOUR )
-  // };
+  };
 
   /** edit settings
    * radius of green dots
@@ -932,7 +933,7 @@ class TDPrefKey
     mLine,
     mPoint,   // 12
     mDraw,
-    null, // mErase,
+    mErase,    // EMPTY
     mEdit,     // 15
     mCave3D,
     mDem3D,
@@ -967,13 +968,6 @@ class TDPrefKey
   static {
     int cat = 0;
     for ( TDPrefKey[] keyset : mKeySet ) {
-      // note: mKeySet can contain "null" placeholders for removed settings screens
-      // (e.g. the former mErase, kept as a placeholder to preserve index alignment
-      // with TDPrefCat's category constants) - skip them, don't stop the loop, or
-      // every category after the first null placeholder never gets its .cat fixed
-      // up from the TDPrefKey constructors' default of -1, silently breaking
-      // persistence for every setting in it (found 2026-08-19, regressed by
-      // 4bd252fe9 "more view config" which turned mErase into such a placeholder)
       if ( keyset != null ) {
         for ( TDPrefKey k : keyset ) {
           k.cat = cat;

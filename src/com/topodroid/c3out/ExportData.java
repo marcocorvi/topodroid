@@ -24,6 +24,7 @@ public class ExportData
   public int mType;    // model type
   public String mMime; // mime type - always application/octet-stream
   public String mExt;
+  public boolean mShared = false;
 
   /** cstr
    * @param name      survey name
@@ -32,8 +33,9 @@ public class ExportData
    * @param surface   include surface
    * @param station   include stations
    * @param overwrite (unused)
+   * @param shared    whether to share export
    */
-  public ExportData( String name, boolean splays, boolean walls, boolean surface, boolean station, boolean overwrite )
+  public ExportData( String name, boolean splays, boolean walls, boolean surface, boolean station, boolean overwrite, boolean shared )
   {
     mName     = name;
     mType     = 0; // ModelType.NONE
@@ -43,6 +45,7 @@ public class ExportData
     mStation  = station;
     mSurface  = surface;
     mOverwrite = overwrite;
+    mShared    = shared;
     mMime     = "application/octet-stream";
   }
 
@@ -61,6 +64,7 @@ public class ExportData
     mSurface  = export.mSurface;
     mOverwrite = export.mOverwrite;
     mMime     = export.mMime;
+    mShared   = export.mShared;
   }
 
   public void debug()

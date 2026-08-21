@@ -508,7 +508,7 @@ public class DrawingIO
    * @param multisketch multisketch ...
    * @param th2_edit    therion th2 editor TH2EDIT
    */
-  static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit )
+  static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit, boolean shared )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TH2 );
     // TDLog.Log( TDLog.LOG_IO, "export therion " + fullname + " file " + file.getPath() );
@@ -516,7 +516,7 @@ public class DrawingIO
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      exportTherion( manager, type, bw, fullname, projname, proj_dir, oblique, multisketch, th2_edit ); // TH2EDIT
+      exportTherion( manager, type, bw, fullname, projname, proj_dir, oblique, multisketch, th2_edit, shared ); // TH2EDIT
     } catch ( IOException e ) {
       TDLog.e( "THERION export i/o error [1] " + e.getMessage() );
     }
@@ -524,8 +524,11 @@ public class DrawingIO
 
   /**
    * @param oblique   oblique projection angle (not used)
+   * @param multisketch
+   * @param th2_edit
+   * @param shared    whether to share export (not used)
    */
-  static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit )  // TH2EDIT
+  static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit, boolean shared )  // TH2EDIT
   {
     try {
       manager.exportTherion( type, bw, fullname, projname, proj_dir, oblique, multisketch, th2_edit );  // TH2EDIT

@@ -17,21 +17,21 @@ import com.topodroid.util.TDUtil;
 import android.view.SurfaceHolder;
 
 
-class DrawThread extends  Thread
+public class DrawThread extends  Thread
 {
   private volatile SurfaceHolder mHolder;
   private volatile boolean mRunning;
 
   private final IDrawingSurface mParent;
 
-  DrawThread( IDrawingSurface parent, SurfaceHolder holder)
+  public DrawThread( IDrawingSurface parent, SurfaceHolder holder)
   {
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread cstr");
     mParent = parent;
     mHolder = holder;
   }
 
-  void setHolder( SurfaceHolder holder )
+  public void setHolder( SurfaceHolder holder )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread set holder " + ( ( holder == null )? "null" : "non-null" ) );
     mHolder = holder;
@@ -41,6 +41,8 @@ class DrawThread extends  Thread
 
   public boolean isRunning() { return mRunning; }
 
+  public void stopRunning() { mRunning = false; }
+
   @Override
   public void run() 
   {
@@ -49,10 +51,9 @@ class DrawThread extends  Thread
     while ( mRunning ) {
       if ( mHolder != null && mParent.isDrawing() ) {
         mParent.refresh( mHolder );
-        Thread.yield();
-        TDUtil.slowDown( 1 ); // NECESSARY
+        TDUtil.yieldDown( 20 ); // NECESSARY
       } else {
-        TDUtil.slowDown( 10 );
+        TDUtil.yieldDown( 40 );
       }
     }
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread exit");

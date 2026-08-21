@@ -33,7 +33,7 @@ public class TDPrefCat
   public static final int PREF_TOOL_POINT         = 12; 
   // public static final int PREF_PLOT_WALLS         = 29;  // AUTOWALLS UNUSED
   public static final int PREF_PLOT_DRAW          = 13; 
-  // public static final int PREF_PLOT_ERASE         = 14; 
+  public static final int PREF_PLOT_ERASE         = 14;  // UNUSED
   public static final int PREF_PLOT_EDIT          = 15;
   public static final int PREF_CATEGORY_CAVE3D    = 16;
   public static final int PREF_DEM3D              = 17;
@@ -83,7 +83,7 @@ public class TDPrefCat
     R.string.title_settings_point,    // 12
     // R.string.title_settings_walls, // 27 AUTOWALLS
     R.string.title_settings_draw,
-    R.string.title_settings_erase,    // 14
+    -1, // R.string.title_settings_erase,    // 14
     R.string.title_settings_edit,
     R.string.title_settings_3d,
     R.string.title_settings_dem,
@@ -113,6 +113,57 @@ public class TDPrefCat
     R.string.title_settings_csv,
     R.string.title_settings_srv,      // 41
     R.string.title_settings_ply,
+    // R.string.title_settings_log       // 43
+  };
+
+  /** settings categories
+   */
+  static String[] mCategories = {
+    "MAIN",                 // 0 PREF_CATEGORY_ALL
+    "SURVEY",
+    "SKETCH",
+    "CALIBRATION",
+    "DEVICE",               // 4 PREF_CATEGORY_DEVICE
+    "SKETCH",
+    "DATA",
+    "UNITS",
+    "ACCUACY",
+    "LOCATION",             // 9 PREF_LOCATION
+    "CANVAS",
+    "LINES",
+    "POINTS",
+    // R.string.title_settings_walls, // 27 AUTOWALLS
+    "SKETCH",
+    "SKETCH",               // 14 UNUSED
+    "SKETCH",               // 15 PREF_PLOT_EDIT
+    "3D_VIEWER",
+    "3D_VIEWER",
+    "3D_VIEWER",            // 18 PREF_WALLS3D
+    "MAIN",                 // 19 PREF_CATEGORY_GEEK
+    "SURVEY",
+    "DATA",
+    "SKETCH",               // 22 PREF_GEEK_PLOT
+    "LINES",
+    "DEVICE",
+    "IMPORT",
+    "SKETCH",
+    "EXPORT",               // 27 PREF_CATEGORY_EXPORT
+    "IMPORT",
+    "EXPORT_ENABLE",
+    "EXPORT_SURVEX",        // 30 PREF_CATEGORY_SVX
+    "EXPORT_THERION",
+    "EXPORT_COMPASS",
+    "EXPORT_CSURVEY",
+    "EXPORT_VISUALTOPO",
+    "EXPORT_SVG",
+    "EXPORT_SHAPEFILE",
+    "EXPORT_DXF",
+    // R.string.title_settings_png, // 17
+    "EXPORT_GPX",           // 38 PREF_CATEGORY_GPX
+    "EXPORT_KML",
+    "EXPORT_CSV",
+    "EXPORT_WALLS",
+    "EXPORT_POLYGON",
     // R.string.title_settings_log       // 43
   };
 }

@@ -67,6 +67,7 @@ public class ExportDialogShot extends MyDialog
   private long      mExportFirst  = -1L; // index of first shot to export
   private boolean   mDiving = false; // diving-mode survey
   private boolean   mWithName = true;
+  private boolean   mExportDataShare = false; // whether to share export
 
   private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
@@ -270,9 +271,9 @@ public class ExportDialogShot extends MyDialog
       TDLog.v("Survey format selected " + mSelected + " pos " + mSelectedPos + ": " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName  + " prefix " + mExportPrefix );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
-        mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false, mSurveys ); // second = false
+        mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false, mSurveys, mExportDataShare ); // second = false
       } else {
-        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, mExportFirst, false, mSurveys ); // second = false
+        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, mExportFirst, false, mSurveys, mExportDataShare ); // second = false
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
@@ -416,7 +417,7 @@ public class ExportDialogShot extends MyDialog
    */
   private boolean setOptions()
   {
-    TDSetting.mExportDataShare = ((CheckBox) findViewById( R.id.export_share )).isChecked();
+    mExportDataShare = ((CheckBox) findViewById( R.id.export_share )).isChecked();
     //mZipShare = TDSetting.mExportDataShare;
     switch ( mSelectedPos ) {
       case TDConst.SURVEY_POS_ZIP: // Zip 
@@ -430,6 +431,12 @@ public class ExportDialogShot extends MyDialog
         {
           // TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.compass_prefix )).isChecked();
           TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.compass_splays )).isChecked();
+          // TDSetting.mCompassSplayMode = 0;
+          // if ( ((CheckBox) findViewById( R.id.compass_splays_old )).isChecked() ) { 
+          //   TDSetting.mCompassSplayMode = 1;
+          // } else if ( ((CheckBox) findViewById( R.id.compass_splays_new )).isChecked() ) {
+          //   TDSetting.mCompassSplayMode = 2;
+          // }
           TDSetting.mSwapLR = ((CheckBox) findViewById( R.id.compass_swap_lr )).isChecked();
           if ( mCBcompassPrefix.isChecked() )
             setExportPrefix( ((EditText) findViewById( R.id.compass_prefix )).getText() );
@@ -545,7 +552,7 @@ public class ExportDialogShot extends MyDialog
    */
   private void initOptions()
   {
-    ((CheckBox) findViewById( R.id.export_share )).setChecked( TDSetting.mExportDataShare );
+    ((CheckBox) findViewById( R.id.export_share )).setChecked( false ); // ( TDSetting.mExportDataShare );
     // ((CheckBox) findViewById( R.id.zip_share )).setChecked( TDSetting.mZipShare );
     ((CheckBox) findViewById( R.id.zip_overwrite )).setChecked( TDSetting.mZipOverwrite );
 
@@ -555,7 +562,16 @@ public class ExportDialogShot extends MyDialog
     } else {
       mBtnCompassSurvey.setText( R.string.export_prefix_set );
     }
+
     ((CheckBox) findViewById( R.id.compass_splays )).setChecked( TDSetting.mCompassSplays );
+    // if ( TDSetting.mCompassSplayMode == 0 ) {
+    //   ((RadioButton) findViewById( R.id.compass_splays_none )).setChecked( true );
+    // } else if ( TDSetting.mCompassSplayMode == 1 ) {
+    //   ((RadioButton) findViewById( R.id.compass_splays_old )).setChecked( true );
+    // } else if ( TDSetting.mCompassSplayMode == 2 ) {
+    //   ((RadioButton) findViewById( R.id.compass_splays_new )).setChecked( true );
+    // }
+
     ((CheckBox) findViewById( R.id.compass_swap_lr )).setChecked( TDSetting.mSwapLR );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );

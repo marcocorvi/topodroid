@@ -160,12 +160,13 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
   {
     if ( res ) {
       TDToast.make( TDInstance.formatString( R.string.ok_export, mExport.mExt ) );
-      if ( TDSetting.mExportModelShare ) {
+      if ( mExport.mShared /* TDSetting.mExportModelShare */ ) {
         TopoDroidApp.shareUri( mApp, mUri, "application/stream" );
       }
     } else {
       TDToast.makeBad( TDInstance.formatString( R.string.error_export_failed, mExport.mExt ) );
     }
+    // TDSetting.mExportModelShare = false; // reset the share flag
   }
 
 }

@@ -96,7 +96,11 @@ public class TdmViewCommand
   {
     if ( name == null ) return null;
     // TDLog.v("Tdm view cmd get <" + name + ">" );
-    return mStationMap.get( name );
+
+    // for ( TdmViewStation st : mStations ) {
+    //   if ( st.getName().equals( name ) ) return st;
+    // return null;
+	return mStationMap.get( name );
   }
 
   /** @return the selected station, or null

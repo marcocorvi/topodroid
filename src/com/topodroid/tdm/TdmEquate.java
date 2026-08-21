@@ -71,7 +71,11 @@ class TdmEquate
   TdmViewStation getCommandStation( TdmViewCommand cmd )
   {
     String survey_name = cmd.mSurvey.mName;
-    for ( String name : mStations ) {
+    // for (  TdmViewStation st : cmd.mStations ) {
+    //   String station = st.getName() + "@" + survey_name;
+    //   for ( String name : mStations ) if ( name.equals( station ) ) return st;
+    // }
+	for ( String name : mStations ) {
       String station = stationOfSurvey( name, survey_name );
       if ( station == null ) continue;
       TdmViewStation st = cmd.getViewStation( station );
@@ -87,7 +91,11 @@ class TdmEquate
   {
     ArrayList< TdmViewStation > ret = new ArrayList<>();
     String survey_name = cmd.mSurvey.mName;
-    for ( String name : mStations ) {
+    // for (  TdmViewStation st : cmd.mStations ) {
+    //   String station = st.getName() + "@" + survey_name; 
+    //   for ( String name : mStations ) if ( name.equals( station ) ) ret.add( st );
+    // }
+	for ( String name : mStations ) {
       String station = stationOfSurvey( name, survey_name );
       if ( station == null ) continue;
       TdmViewStation st = cmd.getViewStation( station );

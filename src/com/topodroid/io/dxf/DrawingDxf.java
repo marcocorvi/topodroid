@@ -844,7 +844,7 @@ public class DrawingDxf
               DXF.printFloat(pw5, 40, point.getScaleValue() * 1.4f / 5 );
               DXF.printFloat(pw5, 50, 360.0f - (float)(point.mOrientation));
               DXF.printFloat(pw5, 51, 0.0f );
-              DXF.printString(pw5, 1, label.mPointText);
+              DXF.printString(pw5, 1, label.getPointText() );
               if ( DXF.mVersion13_14 ) {
                 DXF.printString(pw5, 100, "AcDbText" );
               }
@@ -1003,7 +1003,7 @@ public class DrawingDxf
       DrawingLabelPath label = (DrawingLabelPath)point;
       // TDLog.v( "LABEL PATH label <" + label.mPointText + ">" );
       return DXF.printText( pw, handle, ref_handle,
-              label.mPointText,
+              label.getPointText(),
               (point.cx+xoff)*scale,
               -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
               LABEL_SCALE,

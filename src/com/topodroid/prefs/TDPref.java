@@ -104,6 +104,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */
   private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, String def_val, Context ctx, TDPrefHelper hlp )
   {
+    // TDLog.v("Pref cstr: cat " + cat + " name " + nm + " widget " + wt );
     name  = nm;
     widget_type = wt;
     context = ctx;
@@ -277,7 +278,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       if ( ! value.equals( val ) ) {
         setValue( val /*, name.equals("DISTOX_TEAM_DIALOG") */ );
         String text = TDSetting.updatePreference( helper, category, name, value );
-        // TDLog.v( "Pref [commitValueString] " + name + " value " + val + " text " + text );
+        // TDLog.v( "Pref [commitValueString]: cat " + category + " name " + name + " value " + value + " text " + text );
 	if ( text != null ) {
 	  // TDLog.v("commit value <" + text + ">" );
 	  mEdittext.setText( text );
@@ -308,7 +309,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     if ( vid == R.id.checkbox ) { // click always switches the checkbox
       b_value = ((CheckBox)v).isChecked();
       value  = ( b_value? "true" : "false" );
-      // TDLog.v( "Pref [onClick] checkbox: " + name + " val " + value );
+      // TDLog.v( "Pref [onClick] checkbox: cat " + category + " name " + name + " val " + value );
       TDSetting.updatePreference( helper, category, name, value );
     } else if ( vid == R.id.title ) {
       /* nothing */
@@ -324,7 +325,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   public void colorChanged( int color )
   {
     setColor( color );
-    // TDLog.v(name + " update color " + i_value + " " + color );
+    // TDLog.v(name + " update color: cat "  + category + " i_value "+ i_value + " " + color );
     TDSetting.updatePreference( helper, category, name, Integer.toString( i_value ) );
   }
 
@@ -339,7 +340,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   {
     value  = options[pos];
     if ( i_value != pos ) {
-      // TDLog.v( "Pref [onItemSelected]: " + name + " index " + i_value + "->" + pos + " val " + values[pos] );
+      // TDLog.v( "Pref [onItemSelected]: cat " + category + " name " + name + " index " + i_value + "->" + pos + " val " + values[pos] );
       i_value = pos;
       TDSetting.updatePreference( helper, category, name, values[ i_value ] ); // options store the selected value
     }
@@ -774,12 +775,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return makePrefs( prefs, ctx, hlp, prefs.length );
   }
 
-  static TDPref[] makeMainPrefs( Context ctx, TDPrefHelper hlp )   { return makePrefs( TDPrefKey.mMain, ctx, hlp ); }
-  static TDPref[] makeSurveyPrefs( Context ctx, TDPrefHelper hlp ) { return makePrefs( TDPrefKey.mSurvey, ctx, hlp ); }
-  static TDPref[] makePlotPrefs( Context ctx, TDPrefHelper hlp )   { return makePrefs( TDPrefKey.mPlot, ctx, hlp ); }
-  static TDPref[] makeCalibPrefs( Context ctx, TDPrefHelper hlp )  { return makePrefs( TDPrefKey.mCalib, ctx, hlp ); }
-  static TDPref[] makeDevicePrefs( Context ctx, TDPrefHelper hlp ) { return makePrefs( TDPrefKey.mDevice, ctx, hlp ); }
-  static TDPref[] makeExportPrefs( Context ctx, TDPrefHelper hlp ) { return makePrefs( TDPrefKey.mExport, ctx, hlp ); }
+  static TDPref[] makeMainPrefs( Context ctx, TDPrefHelper hlp )         { return makePrefs( TDPrefKey.mMain, ctx, hlp ); }
+  static TDPref[] makeSurveyPrefs( Context ctx, TDPrefHelper hlp )       { return makePrefs( TDPrefKey.mSurvey, ctx, hlp ); }
+  static TDPref[] makePlotPrefs( Context ctx, TDPrefHelper hlp )         { return makePrefs( TDPrefKey.mPlot, ctx, hlp ); }
+  static TDPref[] makeCalibPrefs( Context ctx, TDPrefHelper hlp )        { return makePrefs( TDPrefKey.mCalib, ctx, hlp ); }
+  static TDPref[] makeDevicePrefs( Context ctx, TDPrefHelper hlp )       { return makePrefs( TDPrefKey.mDevice, ctx, hlp ); }
+  static TDPref[] makeExportPrefs( Context ctx, TDPrefHelper hlp )       { return makePrefs( TDPrefKey.mExport, ctx, hlp ); }
   static TDPref[] makeExportEnablePrefs( Context ctx, TDPrefHelper hlp ) { return makePrefs( TDPrefKey.mExportEnable, ctx, hlp ); }
   static TDPref[] makeImportPrefs( Context ctx, TDPrefHelper hlp )       { return makePrefs( TDPrefKey.mExportImport, ctx, hlp ); }
   static TDPref[] makeGeekImportPrefs( Context ctx, TDPrefHelper hlp )   { return makePrefs( TDPrefKey.mGeekImport, ctx, hlp ); }

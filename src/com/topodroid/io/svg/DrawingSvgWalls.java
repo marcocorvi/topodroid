@@ -362,12 +362,13 @@ public class DrawingSvgWalls extends DrawingSvgBase
         out.write( sw4.getBuffer().toString() );
         out.flush();
       }
-      if ( TDSetting.mSvgSplays && TDSetting.mCompassSplays ) {
+      if ( TDSetting.mSvgSplays && ( TDSetting.mCompassSplays > 0 ) ) {
         HashMap<String, Integer> splay_station = new HashMap<String,Integer>();
         for ( DrawingPath sh : plot.getSplays() ) {
           DBlock blk = sh.mBlock;
           if ( blk == null ) continue;
-          String id = blk.mFrom + "_" + blk.mFrom + "ss" + TDExporter.nextSplayInt( splay_station, blk.mFrom );
+          String id = ( TDSetting.mCompassSplays == 1 )? blk.mFrom + "_" + blk.mFrom + "ss" + TDExporter.nextSplayInt( splay_station, blk.mFrom )
+                                                       : blk.mFrom + "_)" + blk.mFrom + TDExporter.nextSplayInt( splay_station, blk.mFrom ) ;
           StringWriter sw41 = new StringWriter();
           PrintWriter pw41  = new PrintWriter(sw41);
           // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS

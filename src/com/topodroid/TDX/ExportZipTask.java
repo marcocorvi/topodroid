@@ -28,6 +28,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   private final TopoDroidApp mApp;
   private final Uri mUri;
   private final boolean mToast;
+  private boolean mShared;
   
   /** cstr
    * @param context   context (unused)
@@ -36,11 +37,12 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
    * @note if uri is null the zip is exported in the default path (topodroid/zip/survey.zip)
    *       currently (v. 6.3.0) uri is always null
    */
-  ExportZipTask( Context context, TopoDroidApp app, Uri uri, boolean toast )
+  ExportZipTask( Context context, TopoDroidApp app, Uri uri, boolean toast, boolean shared )
   {
     mApp   = app;
     mUri   = uri;
     mToast = toast;
+    mShared = shared;
     // mSaved    = context.getResources().getString( R.string.zip_saved );
   }
 
@@ -79,12 +81,13 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
     if ( res ) {
       // TDToast.make( mSaved + " " + mArchiver.getZipname() );
       if ( mToast ) TDToast.make( R.string.zip_saved );
-      if ( TDSetting.mExportDataShare ) { // was mZipShare
+      if ( mShared ) { // TDSetting.mExportDataShare // was mZipShare
         mApp.shareZip( );
       }
     } else {
       if ( mToast ) TDToast.makeBad( R.string.zip_failed );
     }
+    // TDSetting.mExportDataShare = false; // reset the share flag
   }
 }
 

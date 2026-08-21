@@ -44,6 +44,8 @@ import android.net.Uri;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
+  private final static boolean NO_SHARED = false;
+
   private TopoDroidApp mApp = null;
   private String mFormat; 
   private Handler mHandler;
@@ -66,6 +68,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private Uri mUri;
   private boolean mTh2Edit = false; // TH2EDIT
   private boolean mTherionExported = false;
+  private boolean mShared = false;
 
   /**
    * @param context  context
@@ -80,11 +83,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
    * @param proj_dir projection direction (only for projected profile)
    * @param suffix   plot save-mode: EXPORT (th2), SAVE (tdr), OVERVIEW (overview export th2)
    * @param rotate   whether to rotate the backups (only for TDR)
+   * @param th2_edit
+   * @param shared
    */
   SavePlotFileTask( TopoDroidApp app, Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    DrawingCommandManager manager, PlotInfo info,
-                    String fullname, long type, int proj_dir, int oblique, int suffix, int rotate, boolean th2_edit )
+                    String fullname, long type, int proj_dir, int oblique, int suffix, int rotate, boolean th2_edit, boolean shared )
   {
      mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -102,6 +107,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = suffix;    // plot save mode
      mRotate   = rotate;
      mTh2Edit  = th2_edit;
+     mShared   = shared;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
@@ -141,6 +147,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
      mTh2Edit  = false;
+     mShared   = false;
      // TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
   }
 
@@ -167,7 +174,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         }
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false, mTh2Edit ); // single sketch
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false, mTh2Edit, NO_SHARED ); // single sketch
         // bw.flush(); // FIXME system error
         bw.close();
       } catch ( IOException e ) {
@@ -191,7 +198,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       try {
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, true, false ); // multi-sketch, no th2_edit
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, true, false, NO_SHARED ); // multi-sketch, no th2_edit
         // bw.flush(); // FIXME necessary ???
         bw.close();
         mTherionExported = true;
@@ -205,7 +212,6 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       return true;
 
     } else { // ( mSuffix == PlotSave.SAVE || mSuffix == PlotSave.CREATE )
-
       // boolean ret1 = true; // false = png failed
       // boolean ret2 = true; // false = binary cancelled
       // TDLog.v( "save plot SAVE (no action) " + mFullName );
@@ -216,43 +222,44 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           case TDConst.SURVEY_FORMAT_TH2:
             // TDLog.v("EXPORT AUTO th2 " + mFullName );
             File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
-            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false, false ); // false= single sketch
+            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false, false, NO_SHARED );
+                // false = single sketch, false shared
             break;
           case TDConst.SURVEY_FORMAT_DXF:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) { // APP_OUT_DIR was ! parent.isFinishing()
               // TDLog.v("EXPORT AUTO dxf " + mFullName );
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "dxf", false, false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "dxf", false, NO_SHARED );
             }
             break;
           case TDConst.SURVEY_FORMAT_SVG:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
               // TDLog.v("EXPORT AUTO svg " + mFullName );
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "svg", false, false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "svg", false, NO_SHARED );
             }
             break;
           case TDConst.SURVEY_FORMAT_SHP:
             // TDLog.v("EXPORT AUTO shz " + mFullName );
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shz", false, false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shz", false, NO_SHARED );
             }
             break;
           case TDConst.SURVEY_FORMAT_XVI:
             // TDLog.v("EXPORT AUTO xvi " + mFullName );
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false, false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false, NO_SHARED );
             }
             break;
           // case TDConst.SURVEY_FORMAT_C3D: // NO_C3D
           //   // TDLog.v("EXPORT AUTO c3d " + mFullName );
           //   if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-          //     mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "c3d", false );
+          //     mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "c3d", false, NO_SHARED );
           //   }
           //   break;
           case TDConst.SURVEY_FORMAT_CSX: // IMPORTANT CSX must come before PNG
             // TDLog.v("EXPORT AUTO csx " + mFullName );
             if ( PlotType.isSketch2D( mType ) ) {
               if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-                mParent.get().doSaveCsx( null, origin, psd1, psd2, false, false );
+                mParent.get().doSaveCsx( null, origin, psd1, psd2, false, NO_SHARED );
               }
               break;
             } else { // X-Section cSurvey are exported as PNG
@@ -348,16 +355,18 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     if ( mHandler != null ) {
       mHandler.sendEmptyMessage( bool? 661 : 660 );
     }
-    if ( mTherionExported && TDSetting.mExportPlotShare && mApp != null ) {
-      if ( ! TDString.isNullOrEmpty( mFullName ) ) { 
-        String filename = mFullName + ".th2";
-        String mimetype = TDConst.getMimeFromExtension( "th2" );
-        // TDLog.v("filename " + filename + " mime " + mimetype );
-        if ( mimetype != null ) {
-          mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity
-        }
-      }
-    }
+    // DROP sharing therion save
+    // if ( mTherionExported && mShared /* TDSetting.mExportPlotShare */ && mApp != null ) {
+    //   if ( ! TDString.isNullOrEmpty( mFullName ) ) { 
+    //     String filename = mFullName + ".th2";
+    //     String mimetype = TDConst.getMimeFromExtension( "th2" );
+    //     // TDLog.v("filename " + filename + " mime " + mimetype );
+    //     if ( mimetype != null ) {
+    //       mApp.shareFile( filename, mimetype, 2 ); // 2 DrawingActivity
+    //     }
+    //   }
+    // }
+    // // TDSetting.mExportPlotShare = false; // reset the share flag
   }
 }
 

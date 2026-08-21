@@ -1989,8 +1989,10 @@ public class MainWindow extends Activity
    * @param prefix   export prefix
    * @param first    index of first shot to export (-1: export all shos)
    * @param second   unused
+   * @param survey_list ...
+   * @param shared   unused
    */
-  public void doExport( final String type, final String filename, final String prefix, final long first, boolean second, final List<String> survey_list )
+  public void doExport( final String type, final String filename, final String prefix, final long first, boolean second, final List<String> survey_list, boolean shared )
   { 
     TDLog.v("Main export Type " + type + " filename " + filename + " prefix " + prefix );
     TDSetting.mExportPrefix = prefix; // save export-prefix
@@ -2010,7 +2012,7 @@ public class MainWindow extends Activity
             if ( prefix != null ) export_info.prefix = survey;
             export_info.name = file_name;
             mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
-            if ( doExportOne( survey, index, file_name, export_info ) ) ++cnt;
+            if ( doExportOne( survey, index, file_name, export_info, false ) ) ++cnt;   // false shared
           }
           // TDLog.v("Main Export Thread done");
           final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );
@@ -2034,7 +2036,7 @@ public class MainWindow extends Activity
    * @param prefix    station name prefix (Compass, VTopo, Winkarst)
    * @note called from the public doExport()
    */
-  private boolean doExportOne( String survey, int index, String filename, ExportInfo export_info )
+  private boolean doExportOne( String survey, int index, String filename, ExportInfo export_info, boolean shared )
   {
     // TDLog.v( "Main 1-export " + survey + " filename " + filename );
     // if ( index >= 0 ) {
@@ -2042,9 +2044,9 @@ public class MainWindow extends Activity
         // TDToast.makeBad( R.string.no_survey );
       } else {
         if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-          return mApp.doExportDataAsync( getApplicationContext(), export_info, false, true ); // uri = null
+          return mApp.doExportDataAsync( getApplicationContext(), export_info, false, true, shared ); // uri = null
         } else {
-          return mApp.doExportDataAsync( getApplicationContext(), export_info, false, false ); // uri = null
+          return mApp.doExportDataAsync( getApplicationContext(), export_info, false, false, shared ); // uri = null
         }
       }
     // } else {

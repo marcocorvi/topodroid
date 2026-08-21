@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 // import com.topodroid.util.TDFile;
+import com.topodroid.prefs.TDSetting;
 
 // import java.lang.ref.WeakReference;
 
@@ -40,12 +41,12 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private String mOrigin = null;
   private PlotSaveData mPsd1 = null;
   private PlotSaveData mPsd2 = null;
-  private boolean mToast;
-  private boolean mShare; // whether to share the exported file, captured at construction time
+  private boolean mToast = false;
   private String mFormat;
   private Uri mUri;
+  private boolean mShared = false;
 
-  /**
+  /** 
    * @param context   context
    * @param uri       export URI or null (to export to private folder)
    * @param sid       survey ID
@@ -54,12 +55,12 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
    * @param psd1      plot data
    * @param psd2      profile data
    * @param origin    sketch origin
-   * @param fullname  file name, either "survey" or "survey-plot"
+   * @param fullname  file name, either "survey" or "survey-plot" 
    * @param toast     whether to toast to result
-   * @param share     whether to share the exported file (false for auto-export, not an explicit user request)
+   * @param shared    whether to share export
    */
   SaveFullFileTask( TopoDroidApp app, Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, // String filename,
-                    String fullname, /* String dirname, */ boolean toast, boolean share )
+                    String fullname, /* String dirname, */ boolean toast, boolean shared )
   {
     mApp      = app;
     mUri      = uri;
@@ -73,7 +74,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     mPsd1     = psd1;
     mPsd2     = psd2;
     mToast    = toast;
-    mShare    = share;
+    mShared   = shared;
     mFormat   = context.getResources().getString(R.string.saved_file_1);
   }
 
@@ -109,13 +110,14 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     } else {
       // TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );
       if ( mToast ) TDToast.make( String.format( mFormat, "csx" ) ); // was filename
-      if ( mShare ) {
+      if ( mShared /* TDSetting.mExportPlotShare */ ) {
         String filename2 = filename + ".csx";
         // TDLog.v("sharing CSX filename " + filename2 );
         String mimetype = TDConst.getMimeFromExtension( "csx" );
         mApp.shareFile( filename2, mimetype, 2 );
       }
     }
+    // TDSetting.mExportPlotShare = false; // reset the share flag
   }
 
 }

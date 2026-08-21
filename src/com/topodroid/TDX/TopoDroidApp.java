@@ -2182,9 +2182,9 @@ public class TopoDroidApp extends Application
    * @param psd1      plot data
    * @param psd2      profile data
    * @param toast     whether to toast to result
-   * @param share     whether to share the exported file (false for auto-export, not an explicit user request)
+   * @param shared    whether to share export
    */
-  void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast, boolean share )
+  void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast, boolean shared )
   {
     SurveyInfo survey_info = getSurveyInfo();
     if ( survey_info == null ) {
@@ -2197,8 +2197,8 @@ public class TopoDroidApp extends Application
     // String filename = TDPath.getSurveyCsxFile( fullname );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
-    (new SaveFullFileTask( this, context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname,
-       /* TDPath.getCsxFile(""), */ toast, share )).execute();
+    (new SaveFullFileTask( this, context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname, 
+       /* TDPath.getCsxFile(""), */ toast, shared )).execute();
   }
 
   // FIXME_SYNC might be a problem with big surveys
@@ -3466,17 +3466,17 @@ public class TopoDroidApp extends Application
    * @param in_foreground   whether to run in foreground (only ZIP export)
    * @note called by SurveyWindow on export
    */
-  boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast, boolean in_foreground )
+  boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast, boolean in_foreground, boolean shared )
   {
     // TDLog.v( "APP async-export - index " + export_info.index + " name " + export_info.name );
     if ( export_info.index < 0 ) return false; // extra safety
     if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       if ( in_foreground ) {
-        ExportZipTask zip_export = new ExportZipTask( context, this, null, toast );
+        ExportZipTask zip_export = new ExportZipTask( context, this, null, toast, shared );
         return zip_export.doInForeground();
       } else {
-        (new ExportZipTask( context, this, null, toast )).execute();
+        (new ExportZipTask( context, this, null, toast, shared )).execute();
         return true;
       }
     } else {
@@ -3488,7 +3488,7 @@ public class TopoDroidApp extends Application
       Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
       if ( uri != null ) {
         // TDLog.v("EXPORT " + filename + " info " + export_info.index + " " + export_info.name );
-        (new SaveDataFileTask( this, uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
+        (new SaveDataFileTask( this, uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast, shared )).execute();
         return true;
       }
     }

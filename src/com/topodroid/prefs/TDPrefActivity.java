@@ -146,12 +146,13 @@ public class TDPrefActivity extends Activity
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) {
       mPrefCategory = extras.getInt( TDPrefCat.PREF_CATEGORY );
+      // TDLog.v("Pref activity Category " + mPrefCategory );
       if ( mPrefCategory < TDPrefCat.PREF_CATEGORY_ALL || mPrefCategory > TDPrefCat.PREF_CATEGORY_MAX ) {
         mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL;
       }
     }
 
-    // TDLog.v( "TDPrefActivity::onCreate category " + mPrefCategory );
+    // TDLog.v( "Pref activity on create: category " + mPrefCategory );
     if ( loadPreferences() ) {
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL )    { mPrefActivityAll    = this; }
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
@@ -263,57 +264,6 @@ public class TDPrefActivity extends Activity
       }
     }).execute();
   }
-
-  /** settings categories
-   */
-  static String[] mCategories = {
-    "MAIN",
-    "SURVEY",
-    "SKETCH",
-    "CALIBRATION",
-    "DEVICE",
-    "SKETCH",
-    "DATA",
-    "UNITS",
-    "ACCUACY",
-    "LOCATION",
-    "CANVAS",
-    "LINES",
-    "POINTS",
-    // R.string.title_settings_walls, // 27 AUTOWALLS
-    "SKETCH",
-    "SKETCH",
-    "SKETCH",
-    "3D_VIEWER",
-    "3D_VIEWER",
-    "3D_VIEWER",
-    "MAIN",
-    "SURVEY",
-    "DATA",
-    "SKETCH",
-    "LINES",
-    "DEVICE",
-    "IMPORT",
-    "SKETCH",
-    "EXPORT",
-    "IMPORT",
-    "EXPORT_ENABLE",
-    "EXPORT_SURVEX",
-    "EXPORT_THERION",
-    "EXPORT_COMPASS",
-    "EXPORT_CSURVEY",
-    "EXPORT_VISUALTOPO",
-    "EXPORT_SVG",
-    "EXPORT_SHAPEFILE",
-    "EXPORT_DXF",
-    // R.string.title_settings_png, // 17
-    "EXPORT_GPX",
-    "EXPORT_KML",
-    "EXPORT_CSV",
-    "EXPORT_WALLS",
-    "EXPORT_POLYGON",
-    // R.string.title_settings_log       // 43
-  };
 
   private String getCategoryName() { return getResources().getString( TDPrefCat.mTitleRes[ mPrefCategory ] ); }
 
@@ -774,13 +724,13 @@ public class TDPrefActivity extends Activity
       //   mWithLocalModelDialog = true;
         TDToast.makeLong( "Please wait while the AI starts up" );
         setAIbuttonEnabled( false );
-        (new PrefAIdialog( this, this, null, mCategories[ mPrefCategory ] ) ).show();
+        (new PrefAIdialog( this, this, null, TDPrefCat.mCategories[ mPrefCategory ] ) ).show();
       // }
     } else
     // END GEMMA3 */
     if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
       setAIbuttonEnabled( false );
-      (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, mCategories[ mPrefCategory ] ) ).show();
+      (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, TDPrefCat.mCategories[ mPrefCategory ] ) ).show();
     } else { // start API key dialog
       (new GeminiDialog( this, this, null )).show();
     }

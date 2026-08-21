@@ -628,6 +628,8 @@ public class TDUtil
     return true;
   }
 
+  // -------------------------------------------------------
+
   /** replace a xsection prefix in the scrap name and prepend the survey name
    * @param surveyname   name of the survey
    * @param scrapname    name of the Xsection scrap

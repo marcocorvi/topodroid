@@ -13,6 +13,8 @@ package com.topodroid.tdm;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.TDX.DrawThread;
+import com.topodroid.TDX.IDrawingSurface;
 
 import android.content.Context;
 
@@ -44,11 +46,12 @@ import java.util.Collections;
  */
 public class TdmViewSurface extends SurfaceView
                             implements SurfaceHolder.Callback
+                            , IDrawingSurface
 {
 
   private Boolean _run;
   protected DrawThread thread;
-  public boolean isDrawing = true;
+  boolean mIsDrawing = true;
   private SurfaceHolder mHolder; // canvas holder
   private Context mContext;
   private TdmViewActivity mActivity;
@@ -434,6 +437,15 @@ public class TdmViewSurface extends SurfaceView
     return ( mSelectedCommand == null )? null : mSelectedCommand.getSelectedName();
   }
 
+  /** @return the selected station of the given command, or null 
+   * @param cmd   view-command
+   */
+  String selectedStationName( TdmViewCommand cmd )
+  {
+    if ( cmd == null || !  cmd.hasSelected() ) return null;
+    return cmd.getSelectedName();
+  }
+
   /** @return the name of the selected command
    */
   String selectedCommandName()
@@ -470,17 +482,27 @@ public class TdmViewSurface extends SurfaceView
   static float mXoffsetOld = 0;
   static float mZoomOld = 0;
 
+  void setDrawing( boolean val ) { mIsDrawing = val; }
+
   // ------------------------------------------------------------------------
+  // interface IDrawingSurface
+
+  /** @return true if it is drawing 
+   */
+  public boolean isDrawing() { return mIsDrawing; }
+
+  public void refresh( SurfaceHolder holder ) { refreshCanvas( holder ); }
+
   /** refresh the canvas
    */
-  void refresh()
+  void refreshCanvas( SurfaceHolder holder )
   {
     if ( TdmViewActivity.resetTouched() ) {
       TDUtil.slowDown( 10 );
     }
     Canvas canvas = null;
     try {
-      canvas = mHolder.lockCanvas();
+      canvas = holder.lockCanvas();
       if ( canvas == null ) return; // the surface is not ready (or has been destroyed)
       canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
@@ -509,7 +531,7 @@ public class TdmViewSurface extends SurfaceView
       }
     } finally {
       if ( canvas != null ) {
-        mHolder.unlockCanvasAndPost( canvas );
+        holder.unlockCanvasAndPost( canvas );
       }
     }
   }
@@ -518,51 +540,40 @@ public class TdmViewSurface extends SurfaceView
   {
     @Override
     public void handleMessage(Message msg) {
-      isDrawing = false;
+      mIsDrawing = false;
     }
   };
 
-  /** canvas drawing thread
-   */
-  class DrawThread extends  Thread
-  {
-    private SurfaceHolder mSurfaceHolder;
-    private static final long FRAME_DELAY = 40; // [ms] max ~25 frames/sec
+  // /** canvas drawing thread
+  //  * TODO use com.topodroid.TDX.DrawThread
+  //  */
+  // class DrawThread extends  Thread
+  // {
+  //   private SurfaceHolder mSurfaceHolder;
 
-    public DrawThread(SurfaceHolder surfaceHolder)
-    {
-      mSurfaceHolder = surfaceHolder;
-    }
+  //   public DrawThread(SurfaceHolder surfaceHolder)
+  //   {
+  //     mSurfaceHolder = surfaceHolder;
+  //   }
 
-    public void setRunning(boolean run)
-    {
-      _run = run;
-    }
+  //   public void setRunning(boolean run)
+  //   {
+  //     _run = run;
+  //   }
 
-    @Override
-    public void run() 
-    {
-      while ( _run ) {
-        if ( isDrawing ) {
-          try {
-            refresh();
-          } catch ( Exception e ) { // do not let the drawing thread die: the display would freeze
-            TDLog.e("TdManager view refresh failed " + e.getMessage() );
-          }
-          // pace the frames: refresh() holds the station locks that the touch handler needs,
-          // therefore a continuous redraw starves the UI thread
-          try {
-            sleep( FRAME_DELAY );
-          } catch ( InterruptedException e ) { TDLog.v("Interrupted"); }
-        } else {
-          try {
-            // TDLog.v( "View surface: drawing thread sleeps ..." );
-            sleep(100);
-          } catch ( InterruptedException e ) { TDLog.v("Interrupted"); }
-        }
-      }
-    }
-  }
+  //   @Override
+  //   public void run() 
+  //   {
+  //     while ( _run ) {
+  //       if ( isDrawing() ) {
+  //         refreshCanvas();
+  //         TDUtil.yieldDown( 20 );
+  //       } else {
+  //         TDUtil.yieldDown( 40 );
+  //       }
+  //     }
+  //   }
+  // }
 
   // ---------------------------------------------------------------------
   // SELECT - EDIT
@@ -577,13 +588,13 @@ public class TdmViewSurface extends SurfaceView
   {
     // TDLog.v( "View surface: created " );
     if (thread == null ) {
-      thread = new DrawThread(mHolder);
+      thread = new DrawThread( this, mHolder );
     }
     thread.setRunning(true);
     thread.start();
   }
 
-  public void surfaceDestroyed(SurfaceHolder mHolder) 
+  public void surfaceDestroyed( SurfaceHolder holder ) 
   {
     // TDLog.v( "View surface: destroyed " );
     boolean retry = true;

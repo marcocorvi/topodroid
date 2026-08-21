@@ -195,6 +195,16 @@ public class TDString
     return str.replace( separator, replacement ); // replace each comma with backslash-comma
   }
 
+  /** replace the nul character with space
+   * @param str   input string - can be null
+   * @return replacement string, or null if input is null
+   */
+  public static String replaceNul( String str )
+  {
+    if ( str == null ) return null;
+    return str.replace( '\0', ' ' );
+  }
+
   // -----------------------------------------------------------
   // mutable string
 
