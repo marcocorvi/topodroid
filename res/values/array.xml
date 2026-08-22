@@ -2,6 +2,19 @@
 
 <!--suppress CheckTagEmptyBody -->
 <resources>
+  <!--
+  <string-array name="compassSplayMode">
+     <item name="none">None</item>
+     <item name="ss_number">Old</item>
+     <item name="parenthesis">8-14-26</item>
+  </string-array>
+  <string-array name="compassSplayModeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="ss_number">1</item>
+     <item name="parenthesis">2</item>
+  </string-array>
+  -->
+
   <string-array name="scanLegType">
      <item name="s">Generic</item>
      <item name="sX">XSection</item>

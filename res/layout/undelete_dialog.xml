@@ -82,6 +82,11 @@
           android:text="@string/undelete_shot"
           android:layout_marginEnd="@dimen/marginh"
         />
+        <Button android:id="@+id/button_ids"
+          style="@style/button_empty"
+          android:text="@string/reset_ids"
+          android:layout_marginEnd="@dimen/marginh"
+        />
         <Button android:id="@+id/button_ok"
           style="@style/button_default"
           android:text="@string/button_recover"

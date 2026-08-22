@@ -104,7 +104,7 @@
     <!-- version-tag: 1 -->
 
     <!-- property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" / -->
-    <property name="dex" location="/home/programs/android-sdk/build-tools/36.1.0/d8" />
+    <property name="dex" location="/home/programs/android-sdk/build-tools/37.0.0/d8" />
 
     <!-- d8 uses the jars in lind8 -->
 
@@ -142,12 +142,12 @@
     -->
 
     <!-- GEMMA3
-        <property name="java.compilerargs" value="-cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/genai-0.10.32.jar:libjars/tasks-core-0.10.32.jar:bin/classes" />
+        <property name="java.compilerargs" value="-cp ../../../platforms/android-37/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/genai-0.10.32.jar:libjars/tasks-core-0.10.32.jar:bin/classes" />
    -->
    <!-- -Xlint:deprecation -->
-   <!-- property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/support-annotations-28.0.0.jar:bin/classes" / -->
-   <!-- property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:bin/classes:libandroidx/annotation-1.10.0.jar:libandroidx/core-1.19.0-classes.jar" / -->
-   <property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-36/android.jar:bin/classes" />
+   <!-- property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-37/android.jar:libjars/generativeai.jar:libjars/guava.jar:libjars/support-annotations-28.0.0.jar:bin/classes" / -->
+   <!-- property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-37/android.jar:bin/classes:libandroidx/annotation-1.10.0.jar:libandroidx/core-1.19.0-classes.jar" / -->
+   <property name="java.compilerargs" value="-Xlint:unchecked -cp ../../../platforms/android-37/android.jar:bin/classes" />
 
    <import file="${sdk.dir}/tools/ant/build.xml" />
    

@@ -72,6 +72,41 @@
       android:importantForAutofill="no"
       android:inputType="text"
       / -->
+    <!-- LinearLayout android:id="@+id/compass_splay_mode"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splays"
+      />
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RadioButton
+          android:id="@+id/compass_splays_none"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/splays_none"
+        />
+        <RadioButton
+          android:id="@+id/compass_splays_old"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/splays_old"
+          android:checked="true"
+        />
+        <RadioButton
+          android:id="@+id/compass_splays_new"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/splays_new"
+        />
+      </RadioGroup>
+    </LinearLayout -->
     <CheckBox android:id="@+id/compass_swap_lr"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
