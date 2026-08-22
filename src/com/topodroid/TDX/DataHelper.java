@@ -475,6 +475,7 @@ public class DataHelper extends DataSetObservable
 
   // private static final String qCountDevices = " select count( distinct address ) from shots where surveyId=? AND status=0 AND address != \"\" ";
   private static final String qDevices = " select distinct address from shots where surveyId=? AND status=0 AND address != \"\" ";
+  // private static final String qCountShots = "select count() from shots where surveyId=? ";
 
   /** @return the name of the survey initial station
    * @param sid   survey ID
@@ -8518,4 +8519,53 @@ public class DataHelper extends DataSetObservable
          }
       }
    }
+
+  /** reset the survey data ID's wit hincremental values
+   * @param sid  survey ID
+   */
+  void resetIds( long sid )
+  {
+    int cnt = 0;
+    try {
+      myDB.beginTransaction();
+      Cursor cursor = myDB.rawQuery( "select count() from shots where surveyId = ?", new String[] { Long.toString(sid) } );
+      if ( cursor != null ) {
+        if (cursor.moveToFirst()) {
+          cnt = (int)( cursor.getLong(0) );
+        }
+        if ( ! cursor.isClosed() ) cursor.close();
+      }
+      TDLog.v("shot number " + cnt );
+      if ( cnt > 0 ) {
+        long[] rawid = new long[ cnt ];
+        long[] id = new long[ cnt ];
+        int idx = 0;
+        cursor = myDB.rawQuery( "select rowid, id from shots where surveyId = ?", new String[] { Long.toString(sid) } );
+        if ( cursor != null ) {
+          if (cursor.moveToFirst()) {
+            do {
+              rawid[ idx ] = cursor.getLong(0);
+              id[ idx ] = cursor.getLong(1);
+              TDLog.v("Index " + idx + " rawid " + rawid[idx] + " id " + id[idx] );
+              ++idx;
+            } while ( cursor.moveToNext() );
+          }
+          if ( ! cursor.isClosed() ) cursor.close();
+        }
+        TDLog.v( "Index " + idx + " count " + cnt );
+        if ( idx == cnt ) {
+          for ( int k = 1; k <= cnt; ++k ) {
+            String where = "set shotId=" + k + " where shotId=" + id[k-1] + " AND surveyId=" + sid; 
+            myDB.execSQL( "update audios " + where );
+            myDB.execSQL( "update photos " + where );
+            myDB.execSQL( "update sensors " + where );
+            myDB.execSQL( "update originals " + where );
+            myDB.execSQL( "update shots set id=" + k + " where rowid=" + rawid[k-1] + " AND surveyId=" + sid );
+          }
+        }
+      }
+      myDB.setTransactionSuccessful();
+    } finally { myDB.endTransaction(); }
+  }
+     
 }

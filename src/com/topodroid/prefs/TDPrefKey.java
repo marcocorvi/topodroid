@@ -414,8 +414,8 @@ class TDPrefKey
    */
   static TDPrefKey[] mExportDat = {
     new TDPrefKey( N, BOOL, XP, "DISTOX_STATION_PREFIX", R.string.pref_station_prefix_title,R.string.pref_station_prefix_summary, FALSE ),
-    // new TDPrefKey( A, BOOL, XP, "DISTOX_COMPASS_SPLAYS", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TRUE  ),    
-    new TDPrefKey( A,       XP, "DISTOX_COMPASS_SPLAY_MODE", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TDString.ONE, R.array.compassSplayMode, R.array.compassSplayModeValue  ),    
+    new TDPrefKey( A, BOOL, XP, "DISTOX_COMPASS_SPLAYS", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TRUE  ),    
+    // new TDPrefKey( A,       XP, "DISTOX_COMPASS_SPLAY_MODE", R.string.pref_compass_splays_title,R.string.pref_compass_splays_summary, TDString.ONE, R.array.compassSplayMode, R.array.compassSplayModeValue  ),    
     new TDPrefKey( N, BOOL, XP, "DISTOX_SWAP_LR",        R.string.pref_swapLR_title,        R.string.pref_swapLR_summary,         FALSE )  
   };
 

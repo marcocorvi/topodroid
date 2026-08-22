@@ -315,7 +315,8 @@ public class TDSetting
   public static boolean mTherionXvi    = false; // whether to add xvi image to th2
 
   // ------------ COMPASS WALLS
-  public static int mCompassSplays = 1;  // whether to add splays to Compass export: 0 no, 1 TOss#, 2 )TO#
+  public static boolean mCompassSplays = true;  // whether to add splays to Compass export
+  // public static int     mCompassSplayMode = 2;  // whether to add splays to Compass export: 0 none, 1 Xss#, 2 )X#
 
   public static boolean mWallsSplays   = true;  // whether to add splays to Walls export instead of wall shots
   // public static int     mWallsUD     = 80;      // walls UD threshold: Up/Down (angle - degrees)
@@ -1378,8 +1379,8 @@ public class TDSetting
     key = TDPrefKey.mExportDat;
     k = 0;
          mExportStationsPrefix =  prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_STATION_PREFIX
-    // ++k; mCompassSplays     = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_COMPASS_SPLAYS
-    ++k; mCompassSplays     = tryInt( prefs,        key[k].key,      key[k].dflt  ); // DISTOX_COMPASS_SPLAY_MODE
+    ++k; mCompassSplays     = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_COMPASS_SPLAYS
+    // ++k; mCompassSplayMode  = tryInt( prefs,        key[k].key,      key[k].dflt  ); // DISTOX_COMPASS_SPLAY_MODE
     ++k; mSwapLR            = prefs.getBoolean(     key[k].key, bool(key[k].dflt) ); // DISTOX_SWAP_LR
     
     key = TDPrefKey.mExportSrv;
@@ -2568,9 +2569,9 @@ public class TDSetting
     TDPrefKey[] key = TDPrefKey.mExportDat;
     if ( k.equals( key[ 0 ].key ) ) { // DISTOX_STATION_PREFIX (bool)
       mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) );
-    } else if ( k.equals( key[ 1 ].key ) ) {  // DISTOX_COMPASS_SPLAY_MODE
-      // mCompassSplays        = tryBooleanValue( hlp, k, v, bool(key[ 1].dflt) );   // DISTOX_COMPASS_SPLAYS (bool)
-      mCompassSplays        = tryIntValue( hlp, k, v, key[ 1].dflt );   
+    } else if ( k.equals( key[ 1 ].key ) ) {  
+      mCompassSplays        = tryBooleanValue( hlp, k, v, bool(key[ 1].dflt) );   // DISTOX_COMPASS_SPLAYS (bool)
+      // mCompassSplayMode     = tryIntValue( hlp, k, v, key[ 1].dflt );   // DISTOX_COMPASS_SPLAY_MODE
     } else if ( k.equals( key[  2 ].key ) ) { // DISTOX_SWAP_LR (bool)
       mSwapLR               = tryBooleanValue( hlp, k, v, bool(key[ 2].dflt) );
     } else {
@@ -4293,11 +4294,11 @@ B DISTOX_SAP5_BIT16_BUG true
               mExportStationsPrefix = Boolean.parseBoolean( value ); setPreference( editor, kay, mExportStationsPrefix );
               break;
             case "DISTOX_COMPASS_SPLAYS":
-              mCompassSplays = Boolean.parseBoolean( value )? 1 : 0; setPreference( editor, kay, mCompassSplays );
+              mCompassSplays = Boolean.parseBoolean( value ); setPreference( editor, kay, mCompassSplays );
               break;
-            case "DISTOX_COMPASS_SPLAY_MODE":
-              mCompassSplays = Integer.parseInt( value ); setPreference( editor, kay, mCompassSplays );
-              break;
+            // case "DISTOX_COMPASS_SPLAY_MODE":
+            //   mCompassSplayMode = Integer.parseInt( value ); setPreference( editor, kay, mCompassSplayMode );
+            //   break;
             case "DISTOX_WITH_MEDIA":
                 mExportMedia = Boolean.parseBoolean( value ); setPreference( editor, kay, mExportMedia );
               break;

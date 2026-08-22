@@ -301,7 +301,7 @@ public class DistoXComm extends TopoDroidComm
       // FIXME PAIRING
       // TDLog.Log( TDLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
-        // TDLog.v( "Disto comm: pairing device " );
+        // TDLog.v( "Disto comm: device not paired, pairing ... " );
         DeviceUtil.pairDevice( mBTDevice );
         // }
 
@@ -319,7 +319,7 @@ public class DistoXComm extends TopoDroidComm
           // TDLog.Log( TDLog.LOG_BT, "[4] pairing device: trial " + n );
 	  TDUtil.yieldDown( 100 );
           if ( DeviceUtil.isPaired( mBTDevice ) ) {
-            // TDLog.Log( TDLog.LOG_BT, "[4a] device paired at time " + n );
+            // TDLog.v( "[4a] device paired at trial " + n );
             break;
           }
         }
@@ -339,17 +339,17 @@ public class DistoXComm extends TopoDroidComm
               // TDToast.makeBad("Security: RFcomm socket");
             }
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC ) {
-            // TDLog.Log( TDLog.LOG_COMM, "[5b] createInsecureRfcommSocketToServiceRecord " );
+            // TDLog.v( "[5b] createInsecureRfcommSocketToServiceRecord " );
             Method m3 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocketToServiceRecord", classes2 );
             mBTSocket = (BluetoothSocket) m3.invoke( mBTDevice, SERVICE_UUID );
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC_PORT ) {
-            // TDLog.Log( TDLog.LOG_COMM, "[5c] invoke createInsecureRfcommSocket " );
+            // TDLog.v( "[5c] invoke createInsecureRfcommSocket " );
             Method m1 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocket", classes1 );
             mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, port );
             // mBTSocket = mBTDevice.createInsecureRfcommSocket( port );
             // mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_PORT ) {
-            // TDLog.Log( TDLog.LOG_COMM, "[5d] invoke createRfcommSocket " );
+            // TDLog.v( "[5d] invoke createRfcommSocket " );
             Method m2 = mBTDevice.getClass().getMethod( "createRfcommSocket", classes1 );
             mBTSocket = (BluetoothSocket) m2.invoke( mBTDevice, port );
           }
@@ -377,7 +377,7 @@ public class DistoXComm extends TopoDroidComm
 
       mProtocol = null;
       if ( mBTSocket != null ) {
-        // TDLog.Log( TDLog.LOG_COMM, "[6a] create Socket OK: create I/O streams");
+        // TDLog.v( "[6a] create Socket OK: create I/O streams");
         // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
         if ( TDInstance.getDeviceA() == null ) {
           TDLog.e( "[6b] create Socket on null device ");
@@ -443,9 +443,9 @@ public class DistoXComm extends TopoDroidComm
       while ( ! mBTConnected && trial < TDSetting.mCommRetry ) {
         ++ trial;
         if ( mBTSocket != null ) {
-          // TDLog.Log( TDLog.LOG_COMM, "connect socket() trial " + trial );
+          // TDLog.v( "connect socket() trial " + trial );
           try {
-            // TDLog.Log( TDLog.LOG_BT, "[3] device state " + mBTDevice.getBondState() );
+            // TDLog.v( "[3] device state " + mBTDevice.getBondState() );
             mBTSocket.connect();
             mBTConnected = true;
           } catch ( SecurityException e ) {
@@ -470,7 +470,7 @@ public class DistoXComm extends TopoDroidComm
         if ( mBTSocket == null && trial < TDSetting.mCommRetry ) { // retry: create the socket again
           createSocket( address );
         }
-        // TDLog.Log( TDLog.LOG_COMM, "connect socket() trial " + trial + " connected " + mBTConnected );
+        // TDLog.v( "connect socket() trial " + trial + " connected " + mBTConnected );
       }
     } else {
       TDLog.e( "connect socket() null socket");

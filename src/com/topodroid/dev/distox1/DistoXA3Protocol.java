@@ -137,7 +137,7 @@ public class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( buffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // TDLog.v( "A3 read A3 head-tail: " + String.format(" %02x", buffer[0] ) );
+      TDLog.v( "A3 read A3 head-tail: " + String.format(" %02x", buffer[0] ) );
 
       if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return null; } // 0x38
       if ( buffer[1] != command[1] ) { return null; }

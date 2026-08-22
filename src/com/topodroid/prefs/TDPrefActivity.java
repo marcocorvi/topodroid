@@ -303,17 +303,6 @@ public class TDPrefActivity extends Activity
   // @note calls are already conditioned to HAS_AI true
   public void setAIbuttonEnabled( boolean enabled )
   {
-    if ( AIhelper.HAS_AI ) { // not really necessary
-      if ( enabled ) {
-        mAIbutton.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai ) );
-        mAIbutton.setOnClickListener( new OnClickListener() {
-          @Override public void onClick( View v ) { startGemini(); }
-        } );
-      } else {
-        mAIbutton.setImageDrawable( MyButton.getButtonBackground( this, getResources(), R.drawable.iz_ai_no ) );
-        mAIbutton.setOnClickListener( null );
-      }
-    }
   }
 
   /** load the preferences

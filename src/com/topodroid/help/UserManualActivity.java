@@ -308,18 +308,6 @@ public class UserManualActivity extends MyActivity
     TDandroid.setScreenOrientation( this );
 
     boolean is_online = TDandroid.isOnline( this );
-    if ( AIhelper.HAS_AI ) {
-      mAI  = (ImageView) findViewById( R.id.ai );
-      if ( mAI != null ) {
-        if ( is_online ) {
-          mAI.setOnClickListener( this );
-          // mAI.setImageResource( R.drawable.iz_ai );
-        } else {
-          // mAI.setVisibility( View.GONE );
-          mAI.setImageResource( R.drawable.iz_ai_no );
-        }
-      }
-    }
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     mList = (ListView) findViewById( R.id.content );

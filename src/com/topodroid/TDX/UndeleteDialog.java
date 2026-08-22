@@ -176,6 +176,8 @@ class UndeleteDialog extends MyDialog
     if ( v.getId() == R.id.button_status ) {
       incrementStatus( );
       return;
+    } else if ( v.getId() == R.id.button_ids ) {
+      resetIds();
     } else if ( v.getId() == R.id.button_ok ) {
       recoverData();
     // } else if ( mDBlockBuffer != null && mDBlockBuffer.size() > 0 ) { 
@@ -231,6 +233,15 @@ class UndeleteDialog extends MyDialog
   //   if ( bid >= 0 ) mParent.renumberShotsFrom( bid ); // 20251205
   //   mParent.updateDisplay(); // this recomputes DistoX accuracy
   // }
+
+
+  /** reset shots ids
+   */
+  private void resetIds()
+  {
+    mData.resetIds( mSid );
+    mParent.updateDisplay();
+  }
 
   /** recover a shot or a plot
    */
@@ -313,6 +324,11 @@ class UndeleteDialog extends MyDialog
       mList.setVisibility( View.GONE );
       mBtnStatus.setVisibility( View.GONE );
       ((Button) findViewById( R.id.button_ok )).setVisibility( View.GONE );
+    }
+    if ( TDLevel.overExpert ) {
+      ((Button) findViewById( R.id.button_ids )).setOnClickListener( this );
+    } else {
+      ((Button) findViewById( R.id.button_ids )).setVisibility( View.GONE );
     }
 
     // mCBbufferSortByID = (CheckBox) findViewById( R.id.buffer_sorted );

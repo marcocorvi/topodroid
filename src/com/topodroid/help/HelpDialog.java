@@ -90,17 +90,6 @@ public class HelpDialog extends MyDialog
     mBtnManual = (Button) findViewById( R.id.button_manual );
     mBtnManual.setOnClickListener( this );
     mBtnManual.setOnLongClickListener( this );
-    mBtnAI = (Button) findViewById( R.id.button_ai );
-    if ( AIhelper.HAS_AI ) {
-      if ( TDandroid.isOnline( mContext ) ) {
-        TDLog.v("Help dialog: is online" );
-        mBtnAI.setOnClickListener( this );
-      } else {
-        mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
-      }
-    } else {
-      mBtnAI.setVisibility( View.GONE );
-    }
 
     mList = (ListView) findViewById(R.id.help_list);
     // mList.setOnItemClickListener( this );
@@ -140,16 +129,6 @@ public class HelpDialog extends MyDialog
     dismiss();
     if ( v.getId() == R.id.button_manual ) {
       showManPage( mPage );
-    } else if ( AIhelper.HAS_AI && v.getId() == R.id.button_ai ) {
-      if ( TDandroid.isOnline( mContext ) ) {
-        if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-          showAIdialog();
-        } else {
-          (new GeminiDialog( mContext, this, null )).show();
-        }
-      } else {
-        TDToast.make( R.string.ai_no_internet );
-      }
     }
   }
 
@@ -190,16 +169,6 @@ public class HelpDialog extends MyDialog
   // @note calls are already conditioned to HAS_AI true
   public void setAIbuttonEnabled( boolean enabled )
   {
-    if ( AIhelper.HAS_AI ) { // not really necessary
-      TDLog.v("Help AI dialog - set button enable " + enabled );
-      if ( enabled ) {
-        mBtnAI.setBackgroundResource( R.drawable.iz_ai );
-        mBtnAI.setOnClickListener( this );
-      } else {
-        mBtnAI.setBackgroundResource( R.drawable.iz_ai_no );
-        mBtnAI.setOnClickListener( null );
-      }
-    }
   }
 
 }

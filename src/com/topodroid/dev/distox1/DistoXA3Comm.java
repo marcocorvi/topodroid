@@ -95,6 +95,7 @@ public class DistoXA3Comm extends DistoXComm
   // @return HeadTail string, null on failure
   public String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
+    TDLog.v("DistoXA3 read head-tail" );
     if ( ! isCommThreadNull() ) return null;
     String res = null;
     // if ( TDInstance.deviceType() == Device.DISTO_A3 ) {

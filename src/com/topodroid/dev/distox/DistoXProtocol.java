@@ -165,7 +165,7 @@ public class DistoXProtocol extends TopoDroidProtocol
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
-        // TDLog.Log( TDLog.LOG_PROTO, "reader thread done " + dataRead[0] + "/" + toRead[0] );
+        // TDLog.v( "reader thread done " + dataRead[0] + "/" + toRead[0] );
       }
     };
     reader.start();
@@ -255,7 +255,7 @@ public class DistoXProtocol extends TopoDroidProtocol
           // while ( ( available = mIn.available() ) == 0 && timeout < max_timeout )
           while ( ( available = mIn.available() ) < min_available && timeout < max_timeout ) {
             ++ timeout;
-            // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + max_timeout );
+            // TDLog.v( "Proto read packet sleep " + timeout + "/" + max_timeout );
             TDUtil.slowDown( 100, "Proto read packet InterruptedException" );
           }
         }
@@ -334,7 +334,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     int ret = 0;
     mError = DistoX.DISTOX_ERR_OK;
     try {
-      // TDLog.v("send command " + command + " and read reply" );
+      // TDLog.v("readToRead: send command " + command + " and read reply" );
       byte[] buffer = new byte[8];
       mOut.write( command, 0, 3 );
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
@@ -585,7 +585,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     try {
       int k = 0;
       while ( k < len ) { 
-        // TDLog.Log( TDLog.LOG_PROTO, "read calibration " + k + " of 52");
+        // TDLog.v( "read calibration " + k + " of 52");
         buffer[0] = MemoryOctet.BYTE_PACKET_REPLY; // 0x38
         buffer[1] = (byte)( addr & 0xff );
         buffer[2] = (byte)( (addr>>8) & 0xff );
