@@ -1796,10 +1796,10 @@
   <string name="pref_zipped_symbols_summary">Salva/Carica simboli a/da archivio ZIP</string>
   <string name="pref_fixed_origin_title">Origine disegno</string>
   <string name="pref_fixed_origin_summary">Origine disegno fissa</string>
-  <string name="pref_shared_xsections_title">X-section condivise</string>
-  <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
-  <string name="xsections_shared">X-section condivise</string>
-  <string name="xsections_private">X-section private</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">X-section condivise</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string -->
+  <!-- UNUSED string name="xsections_shared">X-section condivise</string -->
+  <!-- UNUSED string name="xsections_private">X-section private</string -->
   <string name="pref_reduce_angle_title">Angolo di raddrizzamento</string>
   <string name="pref_reduce_angle_summary">Minimo angolo della linea in un punto per eliminarlo</string>
 

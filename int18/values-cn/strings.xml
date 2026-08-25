@@ -1804,10 +1804,10 @@
   <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>
   <string name="pref_fixed_origin_summary">修复草图原点</string>
-  <string name="pref_shared_xsections_title">共享横截面</string>
-  <string name="pref_shared_xsections_summary">在不同草图上共享同测点的横截面</string>
-  <string name="xsections_shared">共享横截面</string>
-  <string name="xsections_private">私有横截面</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">共享横截面</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">在不同草图上共享同测点的横截面</string -->
+  <!-- UNUSED string name="xsections_shared">共享横截面</string -->
+  <!-- UNUSED string name="xsections_private">私有横截面</string -->
   <string name="pref_reduce_angle_title">矫正角度</string>
   <string name="pref_reduce_angle_summary">直线的最小转角</string>
 

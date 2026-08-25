@@ -1806,10 +1806,10 @@
   <string name="pref_zipped_symbols_summary">Szimbólum fájlok tárolása/beolvasása zip archívumokba/ból</string>
   <string name="pref_fixed_origin_title">Vázlat kezdőpont</string>
   <string name="pref_fixed_origin_summary">Rögzített vázlat kezdőpont</string>
-  <string name="pref_shared_xsections_title">Megosztott metszet</string>
-  <string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string>
-  <string name="xsections_shared">Megosztott metszet</string>
-  <string name="xsections_private">Saját metszet</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">Megosztott metszet</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string -->
+  <!-- UNUSED string name="xsections_shared">Megosztott metszet</string -->
+  <!-- UNUSED string name="xsections_private">Saját metszet</string -->
   <string name="pref_reduce_angle_title">Simítási szög</string>
   <string name="pref_reduce_angle_summary">Minimális segmens-szög síma vonalaknál</string>
 

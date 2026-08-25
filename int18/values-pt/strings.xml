@@ -1698,10 +1698,10 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_zipped_symbols_summary">Armazenar e carregar arquivos de símbolos em/de arquivo zip</string>
   <string name="pref_fixed_origin_title">Origem fixa croqui</string>
   <string name="pref_fixed_origin_summary">Mesma origem sugerida para todos os croquis</string>
-  <string name="pref_shared_xsections_title">Cortes compartilhados</string>
-  <string name="pref_shared_xsections_summary">Cortes em bases compartilhados entre croquis</string>
-  <string name="xsections_shared">Cortes compartilhados</string>
-  <string name="xsections_private">Cortes não compartilhados</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">Cortes compartilhados</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">Cortes em bases compartilhados entre croquis</string -->
+  <!-- UNUSED string name="xsections_shared">Cortes compartilhados</string -->
+  <!-- UNUSED string name="xsections_private">Cortes não compartilhados</string -->
   <string name="pref_reduce_angle_title">Âng endireitar</string>
   <string name="pref_reduce_angle_summary">Ângulo máximo das quinas para transformar em segmentos de reta</string>
   <string name="pref_survey_stations_title">Nomear bases</string>

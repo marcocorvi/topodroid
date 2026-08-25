@@ -1741,10 +1741,10 @@
     <string name="pref_zipped_symbols_summary">Ukládat a načítat soubory symbolů do/z ZIP archivu</string>
     <string name="pref_fixed_origin_title">Počátek náčrtu</string>
     <string name="pref_fixed_origin_summary">Pevný bod počátku náčrtu</string>
-    <string name="pref_shared_xsections_title">Sdílené příčné řezy</string>
-    <string name="pref_shared_xsections_summary">Příčné řezy na měřických bodech sdílené mezi více náčrty</string>
-    <string name="xsections_shared">Sdílené příčné řezy</string>
-    <string name="xsections_private">Soukromé příčné řezy</string>
+    <!-- UNUSED string name="pref_shared_xsections_title">Sdílené příčné řezy</string -->
+    <!-- UNUSED string name="pref_shared_xsections_summary">Příčné řezy na měřických bodech sdílené mezi více náčrty</string -->
+    <!-- UNUSED string name="xsections_shared">Sdílené příčné řezy</string -->
+    <!-- UNUSED string name="xsections_private">Soukromé příčné řezy</string -->
     <string name="pref_reduce_angle_title">Úhel napřímení linie</string>
     <string name="pref_reduce_angle_summary">Minimální úhel zlomu pro vyhlazení/napřímení linií</string>
 

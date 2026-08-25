@@ -1688,9 +1688,7 @@
         Standardwert: 60
     </string>
   <string name="pref_section_splay_title">Grenzwert Hilfszüge in Profil</string>
-  <string name="pref_section_splay_message">Grenzwert in Profilen ab welchem Hilfszüge gestrichelt dargestellt werden;
-        Standardwert: 60
-    </string>
+  <string name="pref_section_splay_message">Grenzwert in Profilen ab welchem Hilfszüge gestrichelt dargestellt werden; Standardwert: 60 </string>
   <string name="pref_splay_dash_color_title">Farbe gestrichelter Hilfszüge</string>
   <string name="pref_splay_dash_color_summary">Die Farbe der gestrichelten Hilfszüge</string>
   <string name="pref_splay_dot_color_title">Farbe gepunkteter Hilfszüge</string>
@@ -1705,26 +1703,21 @@
   <string name="pref_zipped_symbols_summary">Speichere/Lade Symbole in Zip-Files</string>
   <string name="pref_fixed_origin_title">Skizzen fixieren</string>
   <string name="pref_fixed_origin_summary">Skizzen haben einen fixen Verankerungspunkt</string>
-  <string name="pref_shared_xsections_title">Profil-Sichtbarkeit</string>
-  <string name="pref_shared_xsections_summary">Profile nur auf einer oder auf allen Skizzen</string>
-  <string name="xsections_shared">Auf allen Skizzen</string>
-  <string name="xsections_private">Nur auf einer Skizze</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">Profil-Sichtbarkeit</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">Profile nur auf einer oder auf allen Skizzen</string -->
+  <!-- UNUSED string name="xsections_shared">Auf allen Skizzen</string -->
+  <!-- UNUSED string name="xsections_private">Nur auf einer Skizze</string -->
   <string name="pref_reduce_angle_title">Min. Begradigungswinkel</string>
   <string name="pref_reduce_angle_summary">Minimaler Winkel um Linien zu begradigen</string>
+
   <string name="pref_survey_stations_title">Strategie</string>
   <string name="pref_survey_stations_summary">Art der Vermessung und Zuweisung der Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
-  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal
-        zu markieren (%)
-    </string>
+  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren (%) </string>
   <string name="pref_mag_thr_title">Magnetfeldtoleranz</string>
-  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu
-        markieren (%)
-    </string>
+  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren (%) </string>
   <string name="pref_dip_thr_title">Inklinationstoleranz</string>
-  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als
-        anomal zu markieren (%)
-    </string>
+  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren (%) </string>
   <string name="pref_sibling_thr_title">Mehrfachmessung Toleranz</string>
   <string name="pref_sibling_thr_summary">Toleranz um eine Messung als Mehrfachmessung zu betrachten [%]</string>
   <string name="pref_leg_title">Messzug Toleranz</string>

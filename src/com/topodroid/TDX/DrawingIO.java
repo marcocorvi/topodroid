@@ -902,7 +902,7 @@ public class DrawingIO
     boolean in_scrap = false;
     // int scrap_index = 0;
 
-    // TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
+    // TDLog.v( "load outline tdr file " + filename );
     // TLog.v("drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
     synchronized( TDPath.mTdrLock ) { // FIXME-THREAD_SAFE
       try {
@@ -1001,6 +1001,7 @@ public class DrawingIO
             // TDLog.v("outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
             path.setPathPaint( BrushManager.outlinePaint );
             if ( name != null ) { // xsection outline
+              // TDLog.v("Drawing IO add xsection outline: " + name + " scrap ID " + scrap_id );
               surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path, scrap_id ) );
             } else {
               surface.addScrapOutlinePath( path );

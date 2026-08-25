@@ -1843,10 +1843,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_zipped_symbols_summary">Stocker/télécharger des fichiers de symboles vers/depuis une archive zip</string>
     <string name="pref_fixed_origin_title">Origine croquis</string>
     <string name="pref_fixed_origin_summary">Origine de croquis fixe</string>
-    <string name="pref_shared_xsections_title">Partage des sections transverses</string>
-    <string name="pref_shared_xsections_summary">À la station VERS les sections transverses sont partagées entre les différents croquis</string>
-    <string name="xsections_shared">Sections transverses partagées</string>
-    <string name="xsections_private">Sections transverses privées</string>
+    <!-- UNUSED string name="pref_shared_xsections_title">Partage des sections transverses</string -->
+    <!-- UNUSED string name="pref_shared_xsections_summary">À la station VERS les sections transverses sont partagées entre les différents croquis</string -->
+    <!-- UNUSED string name="xsections_shared">Sections transverses partagées</string -->
+    <!-- UNUSED string name="xsections_private">Sections transverses privées</string -->
     <string name="pref_reduce_angle_title">Angle redressement</string>
     <string name="pref_reduce_angle_summary">Angle de segment minimal pour obtenir un redressement des lignes</string>
     

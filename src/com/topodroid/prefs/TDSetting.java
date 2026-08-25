@@ -586,6 +586,7 @@ public class TDSetting
   public static boolean mSplayStation = true;   // re-assign station to splays, even if already have it, 
   public static boolean mSplayOnlyForward = false;  // assign station to splay group only forward
   public static boolean mBacksightSplay   = false;  // whether first splay is backsight check
+  public static boolean mResetIDs         = false;  // whether to show button Reset_IDs 
 
   public static int mThumbSize = 200;           // thumbnail size
   public static boolean mWithSensors = false;   // whether sensors are enabled
@@ -677,7 +678,7 @@ public class TDSetting
   public static int   mBackupInterval  = 60;
   // public static boolean mBackupsClear = false; // CLEAR_BACKUPS
   public static boolean mFixedOrigin     = false; 
-  public static boolean mSharedXSections = false; // default value
+  // public static boolean mSharedXSections = false; // default value
   public static boolean mAutoXSections   = true;  // auto save/export xsections with section points
   public static boolean mSavedStations   = false;
   public static boolean mPlotCache       = true;  // default value
@@ -1188,7 +1189,7 @@ public class TDSetting
     ++k; mThumbSize    = tryInt(   prefs,     key[k].key,      key[k].dflt );  // DISTOX_THUMBNAIL
     // ++k; mEditableStations = prefs.getBoolean(key[k].key, bool(key[k].dflt) );  // DISTOX_EDITABLE_STATIONS
     ++k; mFixedOrigin  = prefs.getBoolean(    key[k].key, bool(key[k].dflt) );  // DISTOX_FIXED_ORIGIN
-    ++k; mSharedXSections = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SHARED_XSECTIONS
+    // ++k; mSharedXSections = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SHARED_XSECTIONS
     // ++k; mDataBackup   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) );  // DISTOX_DATA_BACKUP
     // TDLog.v("SETTING load survey done");
 
@@ -1496,6 +1497,7 @@ public class TDSetting
     ++k; mBlunderShot      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_BLUNDER_SHOT
     ++k; mSplayStation     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SPLAY_STATION
     ++k; mSplayOnlyForward = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_SPLAY_GROUP
+    ++k; mResetIDs         = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_RESET_IDS
     // ++k; mWithTdManager = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
@@ -1844,8 +1846,8 @@ public class TDSetting
     //   mEditableStations = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
     } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_FIXED_ORIGIN (bool)
       mFixedOrigin = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
-    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SHARED_XSECTIONS (bool)
-      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(key[7].dflt) );
+    // } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SHARED_XSECTIONS (bool)
+    //   mSharedXSections  = tryBooleanValue( hlp, k, v, bool(key[7].dflt) );
     // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_DATA_BACKUP (bool)
     //   mDataBackup = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
     } else {
@@ -2168,6 +2170,8 @@ public class TDSetting
       mSplayStation = tryBooleanValue( hlp, k, v, bool(key[16].dflt) );
     } else if ( k.equals( key[ 17 ].key ) ) { // DISTOX_SPLAY_GROUP
       mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(key[17].dflt) );
+    } else if ( k.equals( key[ 18 ].key ) ) { // DISTOX_RESET_IDS
+      mResetIDs = tryBooleanValue( hlp, k, v, bool(key[18].dflt) );
     // } else if ( k.equals( key[13 ].key ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(key[13].dflt) );
 
@@ -3888,7 +3892,7 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_BACKUP_NUMBER";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mBackupNumber );
       k="DISTOX_BACKUP_INTERVAL";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mBackupInterval );
       // k="DISTOX_BACKUPS_CLEAR";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mBackupsClear) );
-      k="DISTOX_SHARED_XSECTIONS";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSharedXSections) );
+      // k="DISTOX_SHARED_XSECTIONS";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSharedXSections) );
       k="DISTOX_AUTO_XSECTIONS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoXSections) );
       k="DISTOX_AUTO_SECTION_PT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoSectionPt) );
       k="DISTOX_LINE_SNAP";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineSnap) );
@@ -4550,6 +4554,9 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_SPLAY_GROUP":
               mSplayOnlyForward = Boolean.parseBoolean( value ); setPreference( editor, kay, mSplayOnlyForward );
               break;
+            case "DISTOX_RESET_IDS":
+              mResetIDs = Boolean.parseBoolean( value ); setPreference( editor, kay, mResetIDs );
+              break;
             case "DISTOX_LRUD_VERTICAL":
               mLRUDvertical   = Float.parseFloat( value ); setPreference( editor, kay,   mLRUDvertical );
               break;
@@ -4686,9 +4693,9 @@ B DISTOX_SAP5_BIT16_BUG true
               mObliqueMax = Integer.parseInt( value ); setPreference( editor, kay, mObliqueMax );
               break;
 
-            case "DISTOX_SHARED_XSECTIONS":
-              mSharedXSections = Boolean.parseBoolean( value ); setPreference( editor, kay, mSharedXSections );
-              break;
+            // case "DISTOX_SHARED_XSECTIONS":
+            //   mSharedXSections = Boolean.parseBoolean( value ); setPreference( editor, kay, mSharedXSections );
+            //   break;
             case "DISTOX_AUTO_XSECTIONS":
               mAutoXSections   = Boolean.parseBoolean( value ); setPreference( editor, kay, mAutoXSections );
               break;

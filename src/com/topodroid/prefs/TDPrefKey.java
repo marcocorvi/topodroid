@@ -181,7 +181,7 @@ class TDPrefKey
     new TDPrefKey( B, STR,  DT,  "DISTOX_INIT_STATION",     R.string.pref_init_station_title,     R.string.pref_init_station_summary,    TDString.ZERO ),
     new TDPrefKey( A, LONG, UI,  "DISTOX_THUMBNAIL",        R.string.pref_thumbnail_title,        R.string.pref_thumbnail_summary,       "200"         ),
     new TDPrefKey( B, BOOL, DR,  "DISTOX_FIXED_ORIGIN",     R.string.pref_fixed_origin_title,     R.string.pref_fixed_origin_summary,    FALSE         ),
-    new TDPrefKey( B, BOOL, DR,  "DISTOX_SHARED_XSECTIONS", R.string.pref_shared_xsections_title, R.string.pref_shared_xsections_summary, FALSE       ),
+    // new TDPrefKey( B, BOOL, DR,  "DISTOX_SHARED_XSECTIONS", R.string.pref_shared_xsections_title, R.string.pref_shared_xsections_summary, FALSE       ),
     new TDPrefKey( B,       NON, "DISTOX_SHOT_UNITS_SCREEN",R.string.pref_shot_units_title ), 
     new TDPrefKey( B,       NON, "DISTOX_SHOT_DATA_SCREEN", R.string.pref_shot_data_title  ),
     new TDPrefKey( N,       NON, "DISTOX_LOCATION_SCREEN",  R.string.pref_location_title   ), 
@@ -726,7 +726,8 @@ class TDPrefKey
     new TDPrefKey( E, LONG, XT, "DISTOX_BEEP_LENGTH",        R.string.pref_beep_length_title,         R.string.pref_beep_length_summary,         "100" ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_BLUNDER_SHOT",       R.string.pref_blunder_shot_title,        R.string.pref_blunder_shot_summary,        FALSE ),
     new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_STATION",      R.string.pref_splay_station_title,       R.string.pref_splay_station_summary,       TRUE  ),
-    new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_GROUP",        R.string.pref_splay_group_title,         R.string.pref_splay_group_summary,         FALSE )
+    new TDPrefKey( T, BOOL, DT, "DISTOX_SPLAY_GROUP",        R.string.pref_splay_group_title,         R.string.pref_splay_group_summary,         FALSE ),
+    new TDPrefKey( T, BOOL, DT, "DISTOX_RESET_IDS",          R.string.pref_reset_ids_title,           R.string.pref_reset_ids_summary,           FALSE )
   };
 
   /** additional plot settings

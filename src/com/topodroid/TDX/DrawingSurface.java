@@ -1013,6 +1013,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   public void addXSectionOutlinePath( DrawingOutlinePath path )
   {
+    // TDLog.v("Drawing Surface: add XSection outline to command Manager" );
     if ( commandManager == null || path == null ) return;
     commandManager.addXSectionOutlinePath( path );
   } 
@@ -1285,6 +1286,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   boolean addLoadDataStream( String tdr, float xdelta, float ydelta, /* SymbolsPalette missingSymbols, */ String plotname )
   {
+    // TDLog.v("Surface add load " + plotname +  " TDR " + tdr );
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
     if ( (TDFile.getTopoDroidFile(tdr)).exists() ) {
@@ -1312,7 +1314,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   boolean modeloadDataStream( String tdr1, String fullname, boolean link_sections /*, SymbolsPalette missingSymbols */ )
   {
-    // TDLog.v("Surface mode load " + fullname );
+    // TDLog.v("Surface mode load " + fullname + " TDR " + tdr1 + " link-sections " + link_sections );
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
@@ -1378,10 +1380,15 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /** link xsections to station names
    * @param name   name of xsections parent plot
    */
-  private void linkSections( String name ) { commandManager.linkSections( name ); }
+  private void linkSections( String name ) 
+  { 
+    // TDLog.v("Drawing Surface: link sections " + name );
+    commandManager.linkSections( name );
+  }
 
   void linkAllSections( String name1, String name2 ) 
   {
+    // TDLog.v("Drawing Surface: link sections " + name1 + " " + name2 );
     mCommandManager1.linkSections( name1 );
     mCommandManager2.linkSections( name2 );
   }
@@ -1493,6 +1500,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   
   void setStationXSections( List< PlotInfo > xsection_plan, List< PlotInfo > xsection_ext, long type2 )
   {
+    // TDLog.v("Drawing Surface: set station X sections " +  xsection_plan.size() + " " + xsection_ext.size() );
     mCommandManager1.setStationXSections( xsection_plan, PlotType.PLOT_PLAN );
     mCommandManager2.setStationXSections( xsection_ext,  type2 );
   }
@@ -1538,6 +1546,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void setXSectionOutline( String name, int scrap_id, String tdr, float xdelta, float ydelta )
   {
+    // TDLog.v("Drawing Surface: set XSection outline " + name );
     DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name, scrap_id );
   }
 
@@ -1552,7 +1561,9 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   void setAllXSectionOutlines( DrawingWindow window, int cm )
   {
+    // TDLog.v("Drawing Surface: set all XSection outlines: CM " + cm );
     // PROBLEM: section points are in scraps, xsection outlines are in command manager
+
     List< DrawingPointPath > pts = ( cm == 1 )? mCommandManager1.getSectionPoints()
                                               : mCommandManager2.getSectionPoints();
     for ( DrawingPointPath pt : pts ) {

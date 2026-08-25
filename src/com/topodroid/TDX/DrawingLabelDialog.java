@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
@@ -131,7 +131,12 @@ class DrawingLabelDialog extends MyDialog
     if (view.getId() == R.id.label_ok ) {
       String label = TDUtil.getTextOrNull( mLabel );
       if ( label != null ) {
-        mActivity.addLabel( mLabel.getText().toString(), mX, mY, getLevel() );
+        label = mLabel.getText().toString().trim();
+        if ( label.length() > 0 ) {
+          mActivity.addLabel( label, mX, mY, getLevel() );
+        } else {
+          TDLog.e("refrain from adding an empty label");
+        }
       } else { // TODO warning
         mLabel.setError( "missing label" );
         return;

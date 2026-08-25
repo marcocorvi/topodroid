@@ -2285,18 +2285,19 @@ public class DrawingCommandManager
   /** assign xsections to station names
    * @param xsections   set of xsections
    * @param type   type of the plot
-   * @note this is not efficient: the station names should be stored in a tree (key = name) for log-time search
+   * @note this is not efficient: the station names should be stored in a hashmap (key = name) for log-time search
    */
   void setStationXSections( List< PlotInfo > xsections, long type )
   {
-    for ( DrawingStationName st : mStations ) {
-      String name = st.getName();
-      // TDLog.v( "Station <" + name + ">" );
-      for ( PlotInfo plot : xsections ) {
-        if ( name.equals( plot.start ) ) {
-          st.setXSection( plot.azimuth, plot.clino, type );
-          break;
-        }
+    // TDLog.v("Drawing Cmd Manager: " + mPlotName + " type " + type + " set station xsections " + xsections.size() );
+    for ( PlotInfo pi : xsections ) TDLog.v(" xsection " + pi.name + " start " + pi.start );
+    for ( PlotInfo plot : xsections ) {
+      DrawingStationName st = getStation( plot.start );
+      if ( st != null ) {
+        // TDLog.v("  set xsection " + plot.name + " at " + plot.start );
+        st.setXSection( plot.azimuth, plot.clino, type );
+      } else {
+        TDLog.e("station xsection " + plot.name + " at " + plot.start + " without station");
       }
     }
   }
@@ -2320,6 +2321,7 @@ public class DrawingCommandManager
    */
   void linkSections( String name ) 
   { 
+    // TDLog.v("Drawing Cmd Manager: link sections " + name );
     // mCurrentScrap.linkSections( mStations, name );
     for ( Scrap scrap : mScraps ) {
       scrap.linkSections( mStations, name );
@@ -2349,9 +2351,13 @@ public class DrawingCommandManager
   //   }
   // }
 
-  /** clear te set of xsection outlines
+  /** clear the set of xsection outlines
    */
-  void clearXSectionsOutline() { synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); } }
+  void clearXSectionsOutline() 
+  {
+    // TDLog.v( mPlotName + " clear all XSections outlines");
+    synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); }
+  }
 
   /** @return true if the specified scrap is contained in the xsection outlines
    * @param name   scrap name
@@ -2375,7 +2381,7 @@ public class DrawingCommandManager
     synchronized( TDPath.mXSectionsLock ) {
       mXSectionOutlines.add( path );
     }
-    // TDLog.v("sections outline " + mXSectionOutlines.size() );
+    // TDLog.v( "Cmd Manager: " + mPlotName + " add XSection outline: nr. " + mXSectionOutlines.size() );
   }
 
   /** remove a xsection outline from the set of xsection outlines
@@ -2387,13 +2393,14 @@ public class DrawingCommandManager
     synchronized( TDPath.mXSectionsLock ) {
       for ( DrawingOutlinePath path : mXSectionOutlines  ) {
         if ( ! path.isScrapName( name ) ) {
-          TDLog.v("clear XSection outline: retain " + name );
+          // TDLog.v( "Cmd Manager: " + mPlotName + " clear XSection outline: retain " + name );
           xsection_outlines.add( path );
         }
       }
       mXSectionOutlines.clear(); // not necessary
     }
     mXSectionOutlines = xsection_outlines;
+    // TDLog.v( "Cmd Manager: " + mPlotName + " clear XSection outline " + name + " remaining " + mXSectionOutlines.size() );
   }
 
   // -----------------------------------------------------------------------

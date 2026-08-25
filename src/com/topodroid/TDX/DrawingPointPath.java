@@ -614,7 +614,7 @@ public class DrawingPointPath extends DrawingPath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
     String name = getThName( );
-    pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
+    pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : TDString.escapeQuotes( mPointText ) ) );
     if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
     float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
@@ -636,7 +636,7 @@ public class DrawingPointPath extends DrawingPath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, String extra, PlotInfo section )
   { 
     String name = getThName( );
-    pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
+    pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : TDString.escapeQuotes( mPointText ) ) );
     if ( bind != null ) pw.format("bind=\"%s\" ", bind );
     if ( extra != null ) pw.format("%s ", extra );
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
@@ -657,7 +657,7 @@ public class DrawingPointPath extends DrawingPath
           pw.format("    <crosssectionfile>\n" );
           pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
             Base64.encodeToString( buf, Base64.NO_WRAP ),
-            ((mPointText==null)?"":mPointText)
+            ((mPointText==null)?"": TDString.escapeQuotes( mPointText ) )
           );
           pw.format("    </crosssectionfile>\n" );
         }
@@ -721,7 +721,7 @@ public class DrawingPointPath extends DrawingPath
   {
     if ( mPointText != null && mPointText.length() > 0 ) {
       if ( BrushManager.pointHasText(mPointType) ) { // label, remark
-        pw.format(" -text \"%s\"", mPointText );
+        pw.format(" -text \"%s\"", TDString.escapeQuotes( mPointText ) );
       } else if ( BrushManager.pointHasValue(mPointType) ) { // passage-height
         pw.format(" -value %s", mPointText );
       }

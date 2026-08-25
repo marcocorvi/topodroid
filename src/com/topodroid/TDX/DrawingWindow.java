@@ -3548,9 +3548,9 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doStart( boolean do_load, float tt, Vector3D center )
   {
-    TDLog.v( "Drawing Window " + mType + " do start" );
+    // TDLog.v( "Drawing Window: type " + mType + " do start, load " + do_load );
     if ( mApp_mData == null ) {
-      TDLog.e("DrawingWindow start with null DB");
+      TDLog.e("Drawing Window start with null DB");
       finish();
       return;
     }
@@ -3938,7 +3938,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean loadFiles( long type, List< DBlock > list )
   {
-    // TDLog.v( "load files - type " + type );
+    // TDLog.v( "Drawing Window: load files - type " + type );
     // assert( mLastLinePath == null ); // guaranteed when called
     // String filename1  = null;
     String filename1b = null;
@@ -3948,7 +3948,7 @@ public class DrawingWindow extends ItemDrawer
     String filename3b = null;
 
     if ( PlotType.isSketch2D( type ) ) {
-      // TDLog.v( "load files type " + type + " " + mName1 + " " + mName2 );
+      // TDLog.v( "load files sketch-2D " + mName1 + " " + mName2 );
       mPlot1 = mApp_mData.getPlotInfo( mSid, mName1 );
       mPlot2 = mApp_mData.getPlotInfo( mSid, mName2 );
       if ( mPlot1 == null ) return false;
@@ -3961,7 +3961,7 @@ public class DrawingWindow extends ItemDrawer
       filename1b = TDPath.getTdrFileWithExt( mFullName1 );
       // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
       filename2b = TDPath.getTdrFileWithExt( mFullName2 );
-      // TDLog.v( "PLOT load files " + filename1b + " " + filename2b );
+      // TDLog.v( "Drawing Window: load files " + filename1b + " " + filename2b );
     } else {
       mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
       if ( mPlot3 == null ) return false;
@@ -4009,7 +4009,7 @@ public class DrawingWindow extends ItemDrawer
         // DrawingSurface.addManagerToCache( mFullName1 );
       }
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotType.isExtended(mPlot2.type) ) ) {
-        // TDLog.v( "modeload data stream 2");
+        // TDLog.v( "modeload data stream 2 " + mName2 + " " + mFullName2 );
         // mAllSymbols = mAllSymbols &&
         if ( ! mDrawingSurface.modeloadDataStream( filename2b, mFullName2, false /*, FIXME-MISSING missingSymbols */ ) ) {
           ++ load_failure;
@@ -4021,9 +4021,15 @@ public class DrawingWindow extends ItemDrawer
         // TDToast.makeBad( R.string.tdr_load_fail );
       }
       
-      String parent = ( TDInstance.xsections? null : mName);
-      List< PlotInfo > xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION,  parent );
-      List< PlotInfo > xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
+      // String parent = ( TDInstance.xsections? null : mName);
+      // X-Sections at station in plan view
+      List< PlotInfo > xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION,  mName1 /* parent */ );
+      // X-sections at station in plofile view
+      List< PlotInfo > xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, mName2 /* parent */ );
+      TDLog.v("Drawing Window: parent " + mName1 + " xsections X " + xsection_plan.size() );
+      for ( PlotInfo pi : xsection_plan ) TDLog.v("  xsection " + pi.name + " " + pi.type );
+      TDLog.v("Drawing Window: parent " + mName2 + " xsections XH " + xsection_ext.size() );
+      for ( PlotInfo pi : xsection_ext ) TDLog.v("  xsection " + pi.name + " " + pi.type );
 
       if ( mNum == null ) {
         TDToast.makeBad( R.string.survey_no_data_reduction );
@@ -6056,8 +6062,11 @@ public class DrawingWindow extends ItemDrawer
   public void addLabel( String label, float x, float y, int level )
   {
     // assert( mLastLinePath == null );
-    if ( label != null && label.length() > 0 ) {
-      makeLabelPath( label, x, y, level );
+    if ( label != null ) {
+      label = label.trim();
+      if ( label.length() > 0 ) {
+        makeLabelPath( label, x, y, level );
+      }
     }
   }
 
@@ -10947,6 +10956,11 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("check label path: <" + mLabelPath.mPointText + ">" );
     if ( TDString.isNullOrEmpty( mLabelPath.mPointText ) ) { // delete the label point
       mDrawingSurface.deletePath( mLabelPath ); 
+    } else {
+      String text = mLabelPath.mPointText.trim();
+      if ( text.length() == 0 ) {
+        mDrawingSurface.deletePath( mLabelPath );
+      }
     }
     mLabelPath = null; // end entering label text
     hideSoftKeyboard();

@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDMath;
+import com.topodroid.util.TDString;
 import com.topodroid.util.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PointScale;
@@ -298,7 +299,7 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\" -align right", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mPointText );
+    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\" -align right", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, TDString.escapeQuotes( mPointText ) );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");
@@ -315,7 +316,7 @@ public class DrawingLabelPath extends DrawingPointPath
 //     pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"8\" category=\"81\" transparency=\"0.00\"",
 //       cave, branch );
 //     if ( bind != null ) pw.format( " bind=\"%s\"", bind );
-//     pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mPointText );
+//     pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", TDString.escapeQuotes( mPointText ) );
 //     pw.format("  <pen type=\"10\" />\n");
 //     pw.format("  <brush type=\"7\" />\n");
 //     float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
@@ -337,7 +338,7 @@ public class DrawingLabelPath extends DrawingPointPath
   { 
     // int size = mScale - PointScale.SCALE_XS;
     pw.format("<item type=\"point\" name=\"label\" cave=\"%s\" branch=\"%s\" text=\"%s\" ",
-      cave, branch, mPointText );
+      cave, branch, TDString.escapeQuotes( mPointText ) );
     if ( bind != null ) pw.format( " bind=\"%s\"", bind );
     String options = getExportOptions(); // TDSKETCH
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((options==null)? "" : options) );

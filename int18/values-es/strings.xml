@@ -1797,10 +1797,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_zipped_symbols_summary">Guardar / Cargar símbolos a / desde archivo ZIP</string>
   <string name="pref_fixed_origin_title">Origen del dibujo</string>
   <string name="pref_fixed_origin_summary">Origen de dibujo fijo</string>
-  <string name="pref_shared_xsections_title">Secciones x compartidas</string>
-  <string name="pref_shared_xsections_summary">At-estación x-secciones compartidas entre dibujos</string>
-  <string name="xsections_shared">Secciones-X compartidas</string>
-  <string name="xsections_private">Secciones-X privadas</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">Secciones x compartidas</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">At-estación x-secciones compartidas entre dibujos</string -->
+  <!-- UNUSED string name="xsections_shared">Secciones-X compartidas</string -->
+  <!-- UNUSED string name="xsections_private">Secciones-X privadas</string -->
   <string name="pref_reduce_angle_title">Ángulo de enderezamiento</string>
   <string name="pref_reduce_angle_summary">Líneas de enderezamiento de ángulo de segmento mínimo</string>
 

@@ -57,7 +57,7 @@ class SurveyNewDialog extends MyDialog
   private EditText mEditDecl;
   private EditText mEditStation;
   private EditText mEditComment;
-  private CheckBox mCBxsections;
+  // private CheckBox mCBxsections; // checkbox whether xsections are private
   private CheckBox mCBdatamode;
 
   private MyDateSetListener mDateListener;
@@ -103,8 +103,8 @@ class SurveyNewDialog extends MyDialog
     mEditStation = (EditText) findViewById(R.id.survey_station);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
-    mCBxsections = (CheckBox) findViewById(R.id.survey_xsections);
-    mCBxsections.setChecked( TDSetting.mSharedXSections );
+    // mCBxsections = (CheckBox) findViewById(R.id.survey_xsections);
+    // mCBxsections.setChecked( ! TDSetting.mSharedXSections );
     mCBdatamode  = (CheckBox) findViewById(R.id.survey_datamode);
     if ( ! ( TDLevel.overExpert && TDSetting.mDivingMode ) ) mCBdatamode.setVisibility( View.GONE );
 
@@ -268,8 +268,7 @@ class SurveyNewDialog extends MyDialog
     /* if ( team != null ) */ { team = team.trim(); } // else { team = TDString.EMPTY; }
     // /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
-    int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
-                                             : SurveyInfo.XSECTION_SHARED;
+    int xsections = 1; // mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE : SurveyInfo.XSECTION_SHARED;
 
     int datamode  = SurveyInfo.DATAMODE_NORMAL;
     if ( TDLevel.overExpert && TDSetting.mDivingMode && mCBdatamode.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;

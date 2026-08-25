@@ -1793,10 +1793,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_zipped_symbols_summary">Съхраняване/зареждане на файлове със символи в/от zip архив</string>
   <string name="pref_fixed_origin_title">Произход на скицата</string>
   <string name="pref_fixed_origin_summary">Фиксиран произход на скицата</string>
-  <string name="pref_shared_xsections_title">Споделени сечения</string>
-  <string name="pref_shared_xsections_summary">Сеченията на репера се споделят сред другите скици</string>
-  <string name="xsections_shared">Споделени сечения</string>
-  <string name="xsections_private">Несподелени сечения</string>
+  <!-- UNUSED string name="pref_shared_xsections_title">Споделени сечения</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">Сеченията на репера се споделят сред другите скици</string -->
+  <!-- UNUSED string name="xsections_shared">Споделени сечения</string -->
+  <!-- UNUSED string name="xsections_private">Несподелени сечения</string -->
   <string name="pref_reduce_angle_title">Изправяне на ъгъл</string>
   <string name="pref_reduce_angle_summary">Минимален ъгъл за изправени линии</string>
 

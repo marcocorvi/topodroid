@@ -176,7 +176,7 @@ class UndeleteDialog extends MyDialog
     if ( v.getId() == R.id.button_status ) {
       incrementStatus( );
       return;
-    } else if ( v.getId() == R.id.button_ids ) {
+    } else if ( TDSetting.mResetIDs && v.getId() == R.id.button_ids ) {
       resetIds();
     } else if ( v.getId() == R.id.button_ok ) {
       recoverData();
@@ -325,7 +325,7 @@ class UndeleteDialog extends MyDialog
       mBtnStatus.setVisibility( View.GONE );
       ((Button) findViewById( R.id.button_ok )).setVisibility( View.GONE );
     }
-    if ( TDLevel.overExpert ) {
+    if ( TDLevel.overExpert && TDSetting.mResetIDs ) {
       ((Button) findViewById( R.id.button_ids )).setOnClickListener( this );
     } else {
       ((Button) findViewById( R.id.button_ids )).setVisibility( View.GONE );

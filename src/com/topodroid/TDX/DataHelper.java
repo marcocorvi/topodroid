@@ -1184,11 +1184,12 @@ public class DataHelper extends DataSetObservable
    * @param decl         declination
    * @param comment      survey comment
    * @param init_station initial station
-   * @param xsections     xsection mode (private or shared)
+   * @param xsections    xsection mode (1: privatei, 0: shared)
    */
   private ContentValues makeSurveyInfoContentValues( String date, String team, double decl, String comment,
                                 String init_station, int xsections ) // datamode cannot be updated
   {
+    // TDLog.v("make survey info content - xsections " + xsections );
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
     cv.put( "team", ((team != null)? team : TDString.EMPTY ) );
@@ -1257,7 +1258,7 @@ public class DataHelper extends DataSetObservable
    * @param decl         declination
    * @param comment      survey comment
    * @param init_station initial station
-   * @param xsections     xsection mode (private or shared)
+   * @param xsections     xsection mode (1: private, 0: shared)
    */
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
                          String init_station, int xsections )
@@ -1266,6 +1267,7 @@ public class DataHelper extends DataSetObservable
     // if ( myDB == null ) return; checked by isSurveyMutable
     if ( ! isSurveyMutable( sid, "updateSurveyInfo" ) ) return;
     // TDLog.v("DB update survey, init station <" + init_station + ">" );
+    // TDLog.v("update survey info - xsections " + xsections );
     ContentValues cv = makeSurveyInfoContentValues( date, team, decl, comment, init_station, xsections );
     try {
       myDB.beginTransaction();
@@ -5507,7 +5509,8 @@ public class DataHelper extends DataSetObservable
       info.declination = (float)(cursor.getDouble( 3 ));
       info.comment = cursor.getString( 4 );
       info.initStation = cursor.getString( 5 );
-      info.xsections   = (int)cursor.getLong( 6 );
+      info.setSharedXSections( SurveyInfo.XSECTION_PRIVATE ); // not necessary
+      // info.xsections   = (int)cursor.getLong( 6 );
       info.datamode    = (int)cursor.getLong( 7 );
       info.mExtend     = (int)cursor.getLong( 8 );
       info.mImmutable  = immutable;
@@ -7332,9 +7335,9 @@ public class DataHelper extends DataSetObservable
          String init_station = ( db_version > 22)? TDString.unescape( scanline0.stringValue( ) ) : "0";
          int xsections = ( db_version > 29)? (int)( scanline0.longValue( SurveyInfo.XSECTION_SHARED ) )
                                            : SurveyInfo.XSECTION_SHARED; // old at-station x-sections were "shared"
-	     int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
+	 int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
                                            : SurveyInfo.DATAMODE_NORMAL;
-	      int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
+	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
                                             : SurveyInfo.SURVEY_EXTEND_NORMAL;
          long created = TDUtil.getTimeStamp();
          if ( db_version > 55) {
@@ -7351,6 +7354,8 @@ public class DataHelper extends DataSetObservable
          }
 
          sid = setSurvey( name, datamode );
+
+         // TDLog.v("Load survey info from file - xsections " + xsections );
 
          try {
            myDB.beginTransaction();
@@ -7932,7 +7937,8 @@ public class DataHelper extends DataSetObservable
       info.declination = (float)(cursor.getDouble( 4 ));
       info.comment = cursor.getString( 5 );
       info.initStation = cursor.getString( 6 );
-      info.xsections   = (int)cursor.getLong( 7 );
+      info.setSharedXSections( SurveyInfo.XSECTION_PRIVATE ); // not necessary
+      // info.xsections   = (int)cursor.getLong( 7 );
       info.datamode    = (int)cursor.getLong( 8 );
       info.mExtend     = (int)cursor.getLong( 9 );
       // info.mImmutable  = ( cursor.getLong( 10 ) == 1 );

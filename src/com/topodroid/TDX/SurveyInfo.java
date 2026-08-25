@@ -41,7 +41,7 @@ public class SurveyInfo
   float  declination;  // declination [degree]
   String comment;      // comment - description
   String initStation;  // start station
-  int xsections;       // 0: shared, 1: private
+  private int xsections = 1; // 0: shared, 1: private
   int datamode;        // normal or diving
   int mExtend;         // survey extend
   boolean mImmutable = false; // whether the survey has been imported
@@ -62,6 +62,14 @@ public class SurveyInfo
     ret.mImmutable  = mImmutable;
     return ret;
   }
+
+  void setSharedXSections( int value ) 
+  { 
+    xsections = ( value >= 0 && value <= 1 )? value : 1;
+  }
+
+  boolean isSharedXSections() { return xsections == XSECTION_SHARED; }
+
 
   /** @return true if the data-mode is diving
    */

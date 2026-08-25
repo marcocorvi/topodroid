@@ -156,7 +156,7 @@ public class SurveyWindow extends MyActivity
   private EditText mEditTeam;
   private EditText mEditDecl;
   private EditText mEditComment;
-  private TextView mTVxsections;
+  // private TextView mTVxsections;
   private TextView mTVdatamode;
 
   private MyDateSetListener mDateListener;
@@ -226,9 +226,10 @@ public class SurveyWindow extends MyActivity
     mTextName.setText( info.name );
     mTextName.setTextColor( mNameColor );
     mInitStation = info.initStation;
-    mXSections   = info.xsections;
+    mXSections   = SurveyInfo.XSECTION_PRIVATE; // info.isSharedXSections() ? SurveyInfo.XSECTION_SHARED : SurveyInfo.XSECTION_PRIVATE;
     mDatamode    = info.datamode;
     // mExtend      = info.getExtend(); // info.mExtend; // FIXME NOT USED
+    // TDLog.v("XSections " + mXSections );
 
     mEditDate.setText( info.date );
     if ( info.comment != null && info.comment.length() > 0 ) {
@@ -247,7 +248,7 @@ public class SurveyWindow extends MyActivity
     } 
     setDeclination( info.declination );
 
-    mTVxsections.setText( (mXSections == SurveyInfo.XSECTION_SHARED)? R.string.xsections_shared : R.string.xsections_private );
+    // mTVxsections.setText( (mXSections == SurveyInfo.XSECTION_SHARED)? R.string.xsections_shared : R.string.xsections_private );
     if ( TDSetting.mDivingMode ) {
       mTVdatamode.setText( (mDatamode == SurveyInfo.DATAMODE_NORMAL)? R.string.datamode_normal : R.string.datamode_diving );
     } else {
@@ -293,7 +294,7 @@ public class SurveyWindow extends MyActivity
     mEditTeam    = (EditText) findViewById(R.id.survey_team);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
-    mTVxsections = (TextView) findViewById(R.id.survey_xsections);
+    // mTVxsections = (TextView) findViewById(R.id.survey_xsections);
     mTVdatamode  = (TextView) findViewById(R.id.survey_datamode);
 
     mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
