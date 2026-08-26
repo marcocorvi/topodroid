@@ -11,6 +11,7 @@
  */
 package com.topodroid.util;
 
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDandroid;
@@ -666,6 +667,18 @@ public class TDFile
    */
   public static boolean deleteFile( String pathname ) 
   { 
+    return deleteFile( getTopoDroidFile( pathname ) ); // DistoXFile;
+  }
+
+  /** delete a topodroid file and its backup files: only for tdr files
+   * @param pathname  tdr pathname
+   */
+  public static boolean deleteFileWithBackups( String pathname )
+  { 
+    deleteFile( getTopoDroidFile( pathname + ".bck" ) );
+    for ( int k = 0; k < TDSetting.mBackupNumber; ++k ) {
+      deleteFile( getTopoDroidFile( pathname + ".bck" + k ) );
+    }
     return deleteFile( getTopoDroidFile( pathname ) ); // DistoXFile;
   }
 

@@ -535,7 +535,7 @@ public class DrawingWindow extends ItemDrawer
   // private Paint mCurrentPaint;
   private DrawingBrush mCurrentBrush;
   // private Path  mCurrentPath;
-  private DrawingPointPath mSectionPt = null;
+  private DrawingPointPath mSectionPt = null; // saved section point
 
   // private static boolean mRecentToolsForward = true;
 
@@ -1592,8 +1592,7 @@ public class DrawingWindow extends ItemDrawer
       mSectionPt = findSectionPoint( scrap_name );
     }
     if ( mSectionPt != null ) {
-      setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
-      mSectionPt = null; 
+      setXSectionOutline( mSectionPt, mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
     }
     mSectionPt = null;
   }
@@ -1649,7 +1648,7 @@ public class DrawingWindow extends ItemDrawer
         // }
         // if ( /* TDSetting.mFixmeXSection && */ mSectionPt != null ) {
         //   // TDLog.v("set XSection outline: name " + mName3 + " full " + mFullName3 + " at " + mSectionPt.cx + " " + mSectionPt.cy );
-        //   setXSectionOutline( mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+        //   setXSectionOutline( mSectionPt, mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
         //   mSectionPt = null; 
         // }
 
@@ -4366,8 +4365,9 @@ public class DrawingWindow extends ItemDrawer
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       String section = point.getOption( TDString.OPTION_SCRAP );
       if ( section != null ) {
-        // TDLog.v("Delete section point: Clear XSection outline: " + section );
-        mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, section ) );
+        TDLog.v("Delete section point: Clear XSection outline: " + section );
+        mDrawingSurface.clearXSectionOutline( point, TDUtil.replacePrefix( TDInstance.survey, section ) );
+        // FIX_XSECTION the xsection is not deleted
       }
     }
     modified();
@@ -4429,6 +4429,8 @@ public class DrawingWindow extends ItemDrawer
   {
     String xs_id = line.getOption( "-id" );
     String scrap_name = TDInstance.survey + "-" + xs_id;
+
+    TDLog.v("Delete section line: scrap_name " + scrap_name + " xs_id " + xs_id );
     mDrawingSurface.deleteSectionLine( line, scrap_name );
     // TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
     TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
@@ -4444,10 +4446,15 @@ public class DrawingWindow extends ItemDrawer
     }
     // section point is deleted automatically
     // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
-    mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
+    // FIX_XSECTION the next line does not do anything: commented out
+    // mDrawingSurface.clearXSectionOutline( null, scrap_name ); // clear outline if any
     PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
     if ( plot != null ) {
+      String filename = TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id );
+      TDLog.v("Drop plot " + plot.name + " filename " + filename );
       mApp_mData.dropPlot( plot.id, TDInstance.sid );
+      // FIX_XSECTION TODO delete files
+      TDFile.deleteFileWithBackups( filename );
     } else {
       TDLog.e("Delete section line. No plot NAME " + xs_id + " SID " + TDInstance.sid );
     }
@@ -6326,13 +6333,15 @@ public class DrawingWindow extends ItemDrawer
       TDLog.e("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
       return;
     }
+    if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
 
+    String filename = TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id );
+    // TDLog.v("Plot " + name + " delete xsection " + xs_id + " file " + filename );
     st.resetXSection();
     mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
     // drop the files
-    TDFile.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
+    TDFile.deleteFileWithBackups( filename );
     // TDFile.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
-    // TODO delete backup files
 
     deleteSectionPoint( xs_id ); 
   }
@@ -6345,8 +6354,10 @@ public class DrawingWindow extends ItemDrawer
     // assert( mLastLinePath == null );
     if ( xs_id == null ) return;
     String scrap_name = TDInstance.survey + "-" + xs_id;
+    if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
+    TDLog.v("delete section point: scrap " + scrap_name + " xs_id " + xs_id );
     mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
-    mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
+    // mDrawingSurface.clearXSectionOutline( null, scrap_name ); // FIX_XSECTION clear outline if any
   }
 
   /** @return the station xsection comment according to the parent sketch type
@@ -7808,7 +7819,7 @@ public class DrawingWindow extends ItemDrawer
                   String section = point.getOption(TDString.OPTION_SCRAP);
                   if ( section != null ) {
                     String section_name = TDUtil.replacePrefix( TDInstance.survey, section );
-                    openXSectionDraw( section_name );
+                    openXSectionDraw( point, section_name );
                     set_mode_edit = false;
                   }
                 // } else {
@@ -7862,7 +7873,7 @@ public class DrawingWindow extends ItemDrawer
         DrawingPointPath point = ( item != null && item instanceof DrawingPointPath )? (DrawingPointPath) item : null;
         if ( point != null && BrushManager.isPointSection( point.mPointType ) ) { // open x-section sketch
           String xsection_name = TDUtil.replacePrefix( TDInstance.survey, point.getOption(TDString.OPTION_SCRAP) ); 
-          openXSectionDraw( xsection_name ); 
+          openXSectionDraw( point, xsection_name ); 
         } else if ( hasPointActions ) {
           makePopupEdit( b, dismiss );
         // } else {
@@ -8117,13 +8128,15 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** open the xsection scrap in the window
+   * @param point     section point
    * @param scrapname fullname of the scrap
    *
    * the name can be the scrap-name or the section-name (plot name)
-   * @note called only by DrawingPointDialog and onLongClick()
+   * @note called also only by DrawingPointSectionDialog 
    */
-  void openXSectionDraw( String scrapname )
+  void openXSectionDraw( DrawingPointPath point, String scrapname )
   { 
+    mSectionPt = point; // FIX_XSECTION
     // remove survey name from scrap-name (if necessary)
     int pos = TDInstance.survey.length() + 1; // TDInstance.survey + "-" (at the beginning)
     String name = scrapname.substring( pos );
@@ -10257,17 +10270,18 @@ public class DrawingWindow extends ItemDrawer
 
   // TODO move this to DrawingSurface ?
   /** add/drop the outline of a xsection
+   * @param point    section point
    * @param name     xsection fullname
    * @param scrap_id id of the scrap of the section point
    * @param on_off   whether to add or to drop
    * @param x        X coordinate of the point where to put the xsection (canvas frame)
    * @param y        Y coordinate
    */
-  void setXSectionOutline( String name, int scrap_id, boolean on_off, float x, float y )
+  void setXSectionOutline( DrawingPointPath point, String name, int scrap_id, boolean on_off, float x, float y )
   { 
     // assert( mLastLinePath == null );
 
-    mDrawingSurface.clearXSectionOutline( name );
+    mDrawingSurface.clearXSectionOutline( point, name );
     // TDLog.v("set XSection outline: name " + name + " on/off " + on_off + " at " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
@@ -10282,6 +10296,12 @@ public class DrawingWindow extends ItemDrawer
   private DrawingPointPath findSectionPoint( String scrap_name )
   {
     return mDrawingSurface.findSectionPoint( scrap_name );
+  }
+
+  // not used
+  private DrawingLinePath findSectionLine( String scrap_name )
+  {
+    return mDrawingSurface.findSectionLine( scrap_name );
   }
 
   // ------------------------------------------------------------------

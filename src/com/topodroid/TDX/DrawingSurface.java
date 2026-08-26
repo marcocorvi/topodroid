@@ -1011,11 +1011,15 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     commandManager.addScrapOutlinePath( path );
   }
 
+  /** add an outline path
+   * @param path     outline path
+   * @note called only by DrawingIO::doLoadOutlineDataStream
+   */
   public void addXSectionOutlinePath( DrawingOutlinePath path )
   {
-    // TDLog.v("Drawing Surface: add XSection outline to command Manager" );
+    TDLog.v("Drawing Surface: add XSection outline to command Manager" );
     if ( commandManager == null || path == null ) return;
-    commandManager.addXSectionOutlinePath( path );
+    // commandManager.addXSectionOutlinePath( path );  // FIX_XSECTION
   } 
 
   // return true if point has been deleted
@@ -1555,7 +1559,14 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   DrawingPointPath findSectionPoint( String scrap_name )
   {
+    TDLog.v("find section point " + scrap_name );
     return commandManager.findSectionPoint( scrap_name );
+  }
+
+  DrawingLinePath findSectionLine( String scrap_name )
+  {
+    TDLog.v("find section line " + scrap_name );
+    return commandManager.findSectionLine( scrap_name );
   }
 
 
@@ -1563,21 +1574,27 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   {
     // TDLog.v("Drawing Surface: set all XSection outlines: CM " + cm );
     // PROBLEM: section points are in scraps, xsection outlines are in command manager
+    DrawingCommandManager save_cmd = commandManager;
+    commandManager = ( cm == 1 )? mCommandManager1 : mCommandManager2;
 
-    List< DrawingPointPath > pts = ( cm == 1 )? mCommandManager1.getSectionPoints()
-                                              : mCommandManager2.getSectionPoints();
+    List< DrawingPointPath > pts = commandManager.getSectionPoints();
+
     for ( DrawingPointPath pt : pts ) {
+      if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue; 
       String name = pt.getOption( TDString.OPTION_SCRAP );
       if ( name != null ) {
         String tdr = TDPath.getTdrFileWithExt( name );
         int scrap_id = pt.mScrap;
-        setXSectionOutline( name, scrap_id, tdr, pt.cx-DrawingUtil.CENTER_X, pt.cy-DrawingUtil.CENTER_Y );
+        List<DrawingLinePath> outline = setXSectionOutline( name, scrap_id, tdr, pt.cx-DrawingUtil.CENTER_X, pt.cy-DrawingUtil.CENTER_Y );
+        pt.setOutline( outline ); // FIX_XSECTION
       }
     }
+
+    commandManager = save_cmd;
   }
     
   // @param name xsection scrap name ( survey_name + "-" + xsection_id )
-  void clearXSectionOutline( String name )
+  void clearXSectionOutline( DrawingPointPath point, String name )
   {
     commandManager.clearXSectionOutline( name );
   }

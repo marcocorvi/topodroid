@@ -3706,6 +3706,23 @@ public class Scrap
     return null;
   }
 
+  /** @return the section line of a given x-section, or null if not found
+   * @param scrap_name    X-section fullname
+   */
+  DrawingLinePath findSectionLine( String scrap_name )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingLinePath ) {
+        DrawingLinePath path = (DrawingLinePath)cmd;
+        if ( BrushManager.isLineSection( path.mLineType )  ) {
+          if ( scrap_name.equals( path.getOption( TDString.OPTION_SCRAP ) ) ) return path;
+        }
+      }
+    }
+    TDLog.v("failed find section line " + scrap_name );
+    return null;
+  }
+
   /** recover the symbols types // FIXME NOT TESTED
    */
   void recoverSymbols() 

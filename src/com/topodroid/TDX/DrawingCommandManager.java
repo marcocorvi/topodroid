@@ -2310,6 +2310,13 @@ public class DrawingCommandManager
     return mCurrentScrap.findSectionPoint( scrap_name );
   }
 
+  // not used
+  DrawingLinePath findSectionLine( String scrap_name )
+  {
+    return mCurrentScrap.findSectionLine( scrap_name );
+  }
+
+
   /** compute the area of the xsection
    * @return the computed area
    */

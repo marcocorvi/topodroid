@@ -893,14 +893,16 @@ public class DrawingIO
    * @param dy
    * @param name       xsection name
    * @param scrap_id   index of the scrap of the section point
+   * @return list of outline paths
    */
-  static void doLoadOutlineDataStream( DrawingSurface surface,
+  static List<DrawingLinePath> doLoadOutlineDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy, String name, int scrap_id )
   {
     int version = 0;
     boolean in_scrap = false;
     // int scrap_index = 0;
+    List<DrawingLinePath> ret = new ArrayList<>();
 
     // TDLog.v( "load outline tdr file " + filename );
     // TLog.v("drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
@@ -911,7 +913,7 @@ public class DrawingIO
         // BufferedInputStream bfis = new BufferedInputStream( fis );
         // DataInputStream dis = new DataInputStream( bfis );
         DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
-        if ( dis == null ) return;
+        if ( dis == null ) return null;
         boolean todo = true;
         while ( todo ) {
           DrawingLinePath path = null;
@@ -1006,6 +1008,7 @@ public class DrawingIO
             } else {
               surface.addScrapOutlinePath( path );
             }
+            ret.add( path );
           }
         }
         dis.close();
@@ -1017,6 +1020,7 @@ public class DrawingIO
       }
       // TDLog.v( "read: " + sb.toString() );
     }
+    return ret;
   }
 
   /** change the scrap name into a tdr file

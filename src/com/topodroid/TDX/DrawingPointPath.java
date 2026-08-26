@@ -37,6 +37,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.List;
 
 import android.util.Base64;
 
@@ -48,6 +49,7 @@ public class DrawingPointPath extends DrawingPath
   public double mOrientation; // orientation [degrees]
   protected String mPointText;   // point text value (if any)
   public IDrawingLink mLink;  // linked drawing item
+  private List<DrawingLinePath> mOutline = null; // xsection outline
 
   // FIXME-COPYPATH
   // @Override
@@ -57,6 +59,8 @@ public class DrawingPointPath extends DrawingPath
   //   copyTo( ret );
   //   return ret;
   // }
+
+  void setOutline( List<DrawingLinePath> outline ) { mOutline = outline; }
 
   // FIXME SECTION_RENAME
   /** fix the scrap name in the option string replacing the survey-prefix
@@ -256,6 +260,9 @@ public class DrawingPointPath extends DrawingPath
    */
   void setCenter( float x, float y )
   {
+    if ( mOutline != null ) {
+      for ( DrawingLinePath path : mOutline ) path.shiftBy( x - cx, y - cy );
+    }
     cx = x;
     cy = y;
     left   = x; 
@@ -283,6 +290,9 @@ public class DrawingPointPath extends DrawingPath
   @Override
   void shiftBy( float dx, float dy )
   {
+    if ( mOutline != null ) {
+      for ( DrawingLinePath path : mOutline ) path.shiftBy( dx, dy );
+    }
     cx += dx;
     cy += dy;
     mPath.offset( dx, dy );
@@ -316,8 +326,12 @@ public class DrawingPointPath extends DrawingPath
   void affineTransformBy( float[] mm, Matrix m )
   {
     float x = mm[0] * cx + mm[1] * cy + mm[2];
-         cy = mm[3] * cx + mm[4] * cy + mm[5];
-         cx = x;
+    float y = mm[3] * cx + mm[4] * cy + mm[5];
+    if ( mOutline != null ) {
+      for ( DrawingLinePath path : mOutline ) path.shiftBy( x-cx, y-cy );
+    }
+    cx = x;
+    cx = y;
     mPath.transform( m );
     left   = cx;   // simplified
     right  = cx+1;
