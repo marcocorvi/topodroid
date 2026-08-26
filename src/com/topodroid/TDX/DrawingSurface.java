@@ -1532,10 +1532,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void clearPlotOutline() { commandManager.clearPlotOutline(); }
 
-  void addScrapDataStream( String tdr, float xdelta, float ydelta )
+  List<DrawingLinePath> addScrapDataStream( String tdr, float xdelta, float ydelta )
   {
     commandManager.clearPlotOutline( );
-    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, null, -1 );
+    return DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, null, -1 );
   }
 
   // @param name xsection scrap name ( survey_name + "-" + xsection_id )
@@ -1548,10 +1548,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    * @param xdelta     ???
    * @param ydelta     ???
    */
-  void setXSectionOutline( String name, int scrap_id, String tdr, float xdelta, float ydelta )
+  List<DrawingLinePath> setXSectionOutline( String name, int scrap_id, String tdr, float xdelta, float ydelta )
   {
     // TDLog.v("Drawing Surface: set XSection outline " + name );
-    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name, scrap_id );
+    return DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name, scrap_id );
   }
 
   /** @return the section point of a given x-section

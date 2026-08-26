@@ -1849,10 +1849,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string>
   <string name="pref_fixed_origin_title">Sketch origin</string>
   <string name="pref_fixed_origin_summary">Fixed sketch origin</string>
-  <string name="pref_shared_xsections_title">Shared x-sections</string>
-  <string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string>
-  <string name="xsections_shared">Shared X-sections</string>
-  <string name="xsections_private">Private X-sections</string>
+  
+  <!-- UNUSED string name="pref_shared_xsections_title">Shared x-sections</string -->
+  <!-- UNUSED string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
+  <!-- UNUSED string name="xsections_shared">Shared X-sections</string -->
+  <!-- UNUSED string name="xsections_private">Private X-sections</string -->
+
   <string name="pref_reduce_angle_title">Straightening angle</string>
   <string name="pref_reduce_angle_summary">Minimal corner-angle for straightened lines</string>
 
@@ -2074,6 +2076,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_plot_shift_summary">Enable sketch shift and scale</string>
   <string name="pref_splay_alpha_title">Splay transparency</string>
   <string name="pref_splay_alpha_summary">Splay opacity [0: transparent, 100: opaque]</string>
+  <string name="pref_reset_ids_title">ID\'s reset</string>
+  <string name="pref_reset_ids_summary">Enable reset survey ID\'s</string>
 
   <!-- UNUSED string name="pref_picker_type_title">Drawing tool picker</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Drawing tool picker type</string -->

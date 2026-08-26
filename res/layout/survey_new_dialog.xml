@@ -78,13 +78,13 @@
           android:importantForAutofill="no"
         />
   
-        <CheckBox android:id="@+id/survey_xsections" 
+        <!-- CheckBox android:id="@+id/survey_xsections" 
           android:layout_marginTop="@dimen/margintiny"
           android:layout_width="wrap_content"
           android:ems="25"
           android:layout_height="wrap_content" 
           android:text="@string/xsections_private"
-        />
+        / -->
   
         <CheckBox android:id="@+id/survey_datamode" 
           android:layout_marginTop="@dimen/margintiny"
