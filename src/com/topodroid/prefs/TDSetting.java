@@ -673,7 +673,7 @@ public class TDSetting
   public static boolean mScalableLabel = false; // whether labels scale with the drawing
   public static float mFixedThickness  = 1;    // width of fixed lines
   public static float mLineThickness   = 1;    // width of drawing lines
-  public static boolean mAutoSectionPt = false;
+  // public static boolean mAutoSectionPt = true;
   public static int   mBackupNumber    = 5;
   public static int   mBackupInterval  = 60;
   // public static boolean mBackupsClear = false; // CLEAR_BACKUPS
@@ -1622,7 +1622,7 @@ public class TDSetting
     ++k; setLineSegment( tryInt(    prefs,  key[k].key,      key[k].dflt ) ); // DISTOX_LINE_SEGMENT
     ++k; mLineClose     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_CLOSE
     ++k; mArrowLength   = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_ARROW_LENGTH
-    ++k; mAutoSectionPt = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_AUTO_SECTION_PT
+    // ++k; mAutoSectionPt = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_AUTO_SECTION_PT
     ++k; mAreaBorder    = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_AREA_BORDER
     ++k; mUnitLines     = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_UNITS
     ++k; mSlopeLSide    = tryInt(   prefs,  key[k].key,      key[k].dflt );   // DISTOX_SLOPE_LSIDE
@@ -2973,22 +2973,22 @@ public class TDSetting
       mLineClose = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
     } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ARROW_LENGTH
       ret = setArrowLength( tryFloatValue( hlp, k, v, key[4].dflt ) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
+    // } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+    //   mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
     // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
     //   mContinueLine  = tryIntValue( hlp, k, v, key[7].dflt );
     // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
     //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(key[8].dflt) );
-    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
-    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_LINE_UNITS
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_UNITS
       try {
-        setDrawingUnitLines( tryFloatValue( hlp, k, v, key[1].dflt ) );
+        setDrawingUnitLines( tryFloatValue( hlp, k, v, key[6].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_SLOPE_LSIDE
-      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[8].dflt ) );
+    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SLOPE_LSIDE
+      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[7].dflt ) );
     } else {
       TDLog.e("missing LINE key: " + k );
     }
@@ -3100,12 +3100,12 @@ public class TDSetting
       ret = setLineSegment( tryIntValue(   hlp, k, v, key[6].dflt ) );
     } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_ARROW_LENGTH
       ret = setArrowLength( tryFloatValue( hlp, k, v, key[7].dflt ) );
-    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
+    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+    //   mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
     // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
     //   mContinueLine  = tryIntValue( hlp, k, v, key[8].dflt );
-    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[9].dflt) );
+    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[8].dflt) );
     // } else if ( k.equals( key[ 10 ].key ) ) { // DISTOX_REDUCE_ANGLE
     //   ret = setReduceAngle( tryFloatValue( hlp, k, v, key[10] ) );
     } else {
@@ -3894,7 +3894,7 @@ B DISTOX_SAP5_BIT16_BUG true
       // k="DISTOX_BACKUPS_CLEAR";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mBackupsClear) );
       // k="DISTOX_SHARED_XSECTIONS";      if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSharedXSections) );
       k="DISTOX_AUTO_XSECTIONS";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoXSections) );
-      k="DISTOX_AUTO_SECTION_PT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoSectionPt) );
+      // k="DISTOX_AUTO_SECTION_PT";       if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mAutoSectionPt) );
       k="DISTOX_LINE_SNAP";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineSnap) );
       k="DISTOX_LINE_CURVE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineCurve) );
 
@@ -4699,9 +4699,9 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_AUTO_XSECTIONS":
               mAutoXSections   = Boolean.parseBoolean( value ); setPreference( editor, kay, mAutoXSections );
               break;
-            case "DISTOX_AUTO_SECTION_PT":
-              mAutoSectionPt   = Boolean.parseBoolean( value ); setPreference( editor, kay, mAutoSectionPt );
-              break;
+            // case "DISTOX_AUTO_SECTION_PT":
+            //   mAutoSectionPt   = Boolean.parseBoolean( value ); setPreference( editor, kay, mAutoSectionPt );
+            //   break;
             case "DISTOX_LINE_SNAP":
               mLineSnap     = Boolean.parseBoolean( value ); setPreference( editor, kay, mLineSnap );
               break;

@@ -2039,8 +2039,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <string name="pref_area_border_title">Видимост на границите на площта</string>
   <string name="pref_area_border_summary">Видимост на границите на площта по подразбиране</string>
-  <string name="pref_auto_section_pt_title">Точки в сечението</string>
-  <string name="pref_auto_section_pt_summary">Добави точка към линиите на сечението</string>
+  <!-- UNUSED string name="pref_auto_section_pt_title">Точки в сечението</string -->
+  <!-- UNUSED string name="pref_auto_section_pt_summary">Добави точка към линиите на сечението</string -->
 
   <string name="pref_unit_length_title">Мерни единици за дължина</string>
   <string name="pref_unit_length_summary">Показвай мерните единици за дължина</string>

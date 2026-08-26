@@ -240,7 +240,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_TEXT   = 7;    // index of mButton2 text button (level > normal) // TH2EDIT was final
   private static final int BTN_JOIN2  = 8;    // index of mButton2 join button (level > normal) // TH2EDIT was final
 
-  private static final int BTN_REMOVE = 5;    // index of mButton3 remove
+  private static final int BTN_REMOVE = 5;    // index of mButton3 remove (delete)
   private static final int BTN_ATTRIB = 6;    // index of mButton3 attributes
   // private static final int BTN_JOIN3  = 7;    // index of mButton3 join button (unused)
   private static final int BTN_BORDER = 8;    // line border-editing (level > advanced)
@@ -512,6 +512,7 @@ public class DrawingWindow extends ItemDrawer
   private DrawingLabelPath mLabelPath = null; // temporary label with text-editing
   private boolean isTextOn = false; // whether button "text" is on
   private View myView;
+  private boolean mButtonDeleteOn = false;
 
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
@@ -2213,7 +2214,8 @@ public class DrawingWindow extends ItemDrawer
         case DrawingPath.DRAWING_PATH_POINT:
           mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)mHotPath).mPointType ) );
           hasPointActions = true;
-	  deletable = true;
+          DrawingPointPath point = (DrawingPointPath)mHotPath;
+          deletable =  ( ! BrushManager.isPointSection( point.mPointType ) );
           setScaleToolbar( mHotPath );
           break;
         case DrawingPath.DRAWING_PATH_LINE:
@@ -2250,7 +2252,7 @@ public class DrawingWindow extends ItemDrawer
       mHotItemType = -1;
       mActivity.setTitle( title );
     }
-    setButton3( BTN_REMOVE, (deletable ? mBMdelete_on : mBMdelete_off) );
+    setButtonDelete( deletable );
     // if ( TDLevel.overNormal ) setButton3( BTN_JOIN3, bm );
   }
 
@@ -2451,11 +2453,14 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** set button "delete" on/off
-   * @param on    ON or OFF
+   * @param on_off    ON or OFF
    */
-  private void setButtonDelete( boolean on ) 
+  private void setButtonDelete( boolean on_off ) 
   {
-    setButton3( BTN_REMOVE, (on ? mBMdelete_on : mBMdelete_off) );
+    if ( on_off != mButtonDeleteOn ) {
+      mButtonDeleteOn = on_off;
+      setButton3( BTN_REMOVE, (mButtonDeleteOn ? mBMdelete_on : mBMdelete_off ) );
+    }
   }
 
   /** set button "size" to display a given scale
@@ -6038,7 +6043,7 @@ public class DrawingWindow extends ItemDrawer
     currentLine.addOption( "-id " + section_id );
     mDrawingSurface.addDrawingPath( currentLine );
 
-    if ( TDSetting.mAutoSectionPt && section_id != null ) {
+    if ( /* TDSetting.mAutoSectionPt && */ section_id != null ) {
       float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
       float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
       // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
@@ -6429,7 +6434,7 @@ public class DrawingWindow extends ItemDrawer
       // add x-section to station-name
 
       st.setXSection( azimuth, clino, type );
-      if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
+      // if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
         int offset = TDSetting.mXSectionOffset;
         float x5 = st.getXSectionX( offset ); 
         float y5 = st.getXSectionY( offset );
@@ -6441,7 +6446,7 @@ public class DrawingWindow extends ItemDrawer
       						    null, scrap_option, mDrawingSurface.scrapIndex() ); // no text
         mSectionPt.setLink( st );
         mDrawingSurface.addDrawingPath( mSectionPt );
-      }
+      // }
     } else {
       updatePlotNick( plot, nick );
     }
@@ -7519,7 +7524,9 @@ public class DrawingWindow extends ItemDrawer
         String name = null;
         if ( t == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pp = (DrawingPointPath)sp.mItem;
-          askDeleteItem( pp, t, BrushManager.getPointName( pp.mPointType ) );
+          if ( ! BrushManager.isPointSection( pp.mPointType ) ) {
+            askDeleteItem( pp, t, BrushManager.getPointName( pp.mPointType ) );
+          }
         } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)sp.mItem;
           if ( lp.size() <= 2 ) {
@@ -7757,11 +7764,14 @@ public class DrawingWindow extends ItemDrawer
           if ( t == DrawingPath.DRAWING_PATH_POINT ||
                t == DrawingPath.DRAWING_PATH_LINE  ||
                t == DrawingPath.DRAWING_PATH_AREA  ) {
-            String name = "";
+            String name = null;
             DrawingPath p = sp.mItem;
             switch ( t ) {
               case DrawingPath.DRAWING_PATH_POINT:
-                name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
+                DrawingPointPath point = ((DrawingPointPath)p);
+                if ( ! BrushManager.isPointSection( point.mPointType ) ) {
+                  name = BrushManager.getPointName( point.mPointType );
+                }
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
                 name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
@@ -7770,7 +7780,9 @@ public class DrawingWindow extends ItemDrawer
                 name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
                 break;
             }
-            askDeleteItem( p, t, name );
+            if ( name != null ) {
+              askDeleteItem( p, t, name );
+            }
           } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
             if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
               DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
@@ -7977,6 +7989,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void askDeleteItem( final DrawingPath p, final int t, final String name )
   {
+    // if ( name == null ) return;
     TopoDroidAlertDialog.makeAlert( mActivity, getResources(), String.format( getResources().getString( R.string.item_delete ), name ), 
       new DialogInterface.OnClickListener() {
         @Override
@@ -10286,7 +10299,8 @@ public class DrawingWindow extends ItemDrawer
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
       // TDLog.v("XSection set " + name + " tdr-file " + tdr );
-      mDrawingSurface.setXSectionOutline( name, scrap_id, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
+      List<DrawingLinePath> outline = mDrawingSurface.setXSectionOutline( name, scrap_id, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
+      point.setOutline( outline );
     }
   }
 

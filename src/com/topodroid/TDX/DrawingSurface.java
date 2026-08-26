@@ -1596,7 +1596,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // @param name xsection scrap name ( survey_name + "-" + xsection_id )
   void clearXSectionOutline( DrawingPointPath point, String name )
   {
-    commandManager.clearXSectionOutline( name );
+    if ( point != null ) {
+      point.setOutline( null );
+    }
+    // commandManager.clearXSectionOutline( name ); // FIX_XSECTION
   }
 
   // shift X-Sections in the plan and in the profile

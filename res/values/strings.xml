@@ -2099,8 +2099,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <string name="pref_area_border_title">Area border visibility</string>
   <string name="pref_area_border_summary">Area border default visibility</string>
-  <string name="pref_auto_section_pt_title">Section points</string>
-  <string name="pref_auto_section_pt_summary">Add section point to section lines</string>
+  <!-- UNUSED string name="pref_auto_section_pt_title">Section points</string -->
+  <!-- UNUSED string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
 
   <string name="pref_unit_length_title">Length units</string>
   <string name="pref_unit_length_summary">Display units for lengths</string>

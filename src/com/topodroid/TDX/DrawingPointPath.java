@@ -452,6 +452,11 @@ public class DrawingPointPath extends DrawingPath
         link.transform( matrix );
         canvas.drawPath( link, BrushManager.fixedOrangePaint );
       }
+      if ( mOutline != null ) {
+        for ( DrawingLinePath path : mOutline ) {
+          path.draw( canvas, matrix, scale, bbox );
+        }
+      }
     }
   }
 
@@ -489,6 +494,11 @@ public class DrawingPointPath extends DrawingPath
 	}
         link.transform( matrix );
         canvas.drawPath( link, BrushManager.fixedOrangePaint );
+      }
+      if ( mOutline != null ) {
+        for ( DrawingLinePath path : mOutline ) {
+          path.draw( canvas, matrix, scale, bbox, xor_color );
+        }
       }
     }
   }

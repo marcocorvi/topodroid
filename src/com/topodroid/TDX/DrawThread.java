@@ -51,9 +51,9 @@ public class DrawThread extends  Thread
     while ( mRunning ) {
       if ( mHolder != null && mParent.isDrawing() ) {
         mParent.refresh( mHolder );
-        TDUtil.yieldDown( 20 ); // NECESSARY
+        TDUtil.slowDown( 20 ); // NECESSARY
       } else {
-        TDUtil.yieldDown( 40 );
+        TDUtil.slowDown( 40 );
       }
     }
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread exit");

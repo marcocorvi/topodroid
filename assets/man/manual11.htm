@@ -19,7 +19,7 @@ You can choose between a photo x-section, and a sketch x-section. In the first c
 
 In the second case you sketch the x-section on a canvas with the usual drawing tools of TopoDroid. As a reference TopoDroid displays the leg shot traversed by the x-section and the splay shots at its endpoints. The station in front (the one that the x-section is looking at) is centered in the sketch grid. The splay shots in front are light grey, those behind are thinner darker grey. All the shots are displayed projected on the plane of the x-section. A white dot marks where the section plane intersects the leg [T].<br><p>
 
-Leg x-sections can be re-opened and modified by selecting, in "edit" mode, the section line or the section point, and tapping the <i>edit</i> button.<br><p>
+Leg x-sections can be re-opened and modified by selecting, in "edit" mode, the section-line or the section-point, and tapping the <i>edit</i> button.<br><p>
 
 <b>X-sections in plan view</b><br>
 X-sections defined in the plan view are always in a vertical plane (zero inclination). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the magnetic North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
@@ -52,11 +52,11 @@ The leg is shown at its azimuth<br><p>
 <img src="hsection.png" >
 <br><p>
 
-If the "Slant xsections" setting is enabled it is possible to define profile-view x-sections in planes at variable inclination (a multiple of 10&deg; close to the slope of the section line).<br><p>
+If the "Slant x-sections" setting is enabled it is possible to define profile-view x-sections in planes at variable inclination (a multiple of 10&deg; close to the slope of the section line).<br><p>
 
 In extended profile view the leg x-section must cross a single leg.
-Multileg xsections are allowed in projected profile views.
-For vertical x-sections the azimuth of the xsection plane is orthogonal to that of the profile view for projected profiles and orthogonal to the crossed leg for extended profiles.<br><p>
+Multileg x-sections are allowed in projected profile views.
+For vertical x-sections the azimuth of the x-section plane is orthogonal to that of the profile view for projected profiles and orthogonal to the crossed leg for extended profiles.<br><p>
 
 <img src="profile-xsection.png" >
 <br><p>
@@ -90,19 +90,24 @@ The x-section plane can be oriented with the <i>compass</i> button.
 If the station has only two legs the plane is oriented along the bisecant of the angles formed by the (horizontal projections of the) legs. If there is only one leg it is oriented orthogonal to that. If there are more than two legs you have to use the
 <i>compass</i> button.<br><p>
 
-Station x-sections can be re-opened and modified by selecting, in "edit" mode, the station or the section point, and tapping the <i>X-Section</i> button.<br><p>
+Station x-sections can be re-opened and modified by selecting, in "edit" mode, the station or the section-point, and tapping the <i>X-Section</i> button.<br><p>
 
-<b>Section points</b><br>
-When you insert a x-section, either by drawing a section-line or inserting it at a station, a related section point is added to the sketch.
-This point marks the place of the xsection on the sketch.
-Section points are displayed as a white small cross and an orange line connecting them to the relative section line or station.<br>
-If the x-section is deleted, the corresponding section point is also deleted.<br><p>
+<b>Section-points</b><br>
+When you insert a x-section, either by drawing a section-line or inserting it at a station, a related section-point is added to the sketch.
+This point marks the place of the x-section on the sketch.
+Section-points are displayed as a white small cross and an orange line connecting them to the relative section-line or station.<br>
+If the x-section is deleted, the corresponding section-point is also deleted.<br><p>
 
-The outline of the xsection is displayed at the section point.<br>
-The outline can be moved by selecting the section point (in edit mode) and dragging it around.<br>
-Tapping the "properties" button, when a section point is selected, opens the xsection sketch for drawing.<br><p>
+The outline of the x-section is displayed at the section-point.<br>
+The outline can be moved by selecting the section-point (in edit mode) and dragging it around.<br>
+Tapping the "properties" button, when a section-point is selected, opens the x-section sketch for drawing.<br><p>
 
-Deleting the <i>section-point</i> does not remove the x-section. This is deleted only deleting the <i>section-line</i>, for
+<!--
+Deleting the <i>section-point</i> does not remove the x-section. 
+-->
+<i>Section-point</i> items cannot be delete directly.
+They are removed when the x-section is deleted.
+The x-section is deleted only deleting the <i>section-line</i>, for
 leg x-sections, or through the station dialog, for station x-sections.<br><p>
 
 <b>X-section files</b><br>
@@ -110,7 +115,7 @@ Each x-section is saved in a separate file in the "tdr" subfolder. The files get
 The file is deleted when a x-section is deleted.<br><p>
 
 X-sections can be exported in other formats just like the other sketches, except in <i>cSurvey</i> format.
-X-sections are included in the sketch exports in the DXF, SVG, <i>cSurvey</i>, provided there is the associated section point.<br><p>
+X-sections are included in the sketch exports in the DXF, SVG, <i>cSurvey</i>, at the associated section-point.<br><p>
 
 See also<br>
 <a href="page_sketch_station.htm">Sketch station edit dialog</a>,<br>
