@@ -50,6 +50,9 @@ public class DrawingPointPath extends DrawingPath
   protected String mPointText;   // point text value (if any)
   public IDrawingLink mLink;  // linked drawing item
   private List<DrawingLinePath> mOutline = null; // xsection outline
+  private boolean mDrawOutline = true;  // whether to draw xsection outline
+
+  void setDrawOutline( boolean on_off ) { mDrawOutline = on_off; }
 
   // FIXME-COPYPATH
   // @Override
@@ -452,7 +455,7 @@ public class DrawingPointPath extends DrawingPath
         link.transform( matrix );
         canvas.drawPath( link, BrushManager.fixedOrangePaint );
       }
-      if ( mOutline != null ) {
+      if ( mOutline != null && mDrawOutline ) {
         for ( DrawingLinePath path : mOutline ) {
           path.draw( canvas, matrix, scale, bbox );
         }
@@ -495,7 +498,7 @@ public class DrawingPointPath extends DrawingPath
         link.transform( matrix );
         canvas.drawPath( link, BrushManager.fixedOrangePaint );
       }
-      if ( mOutline != null ) {
+      if ( mOutline != null && mDrawOutline ) {
         for ( DrawingLinePath path : mOutline ) {
           path.draw( canvas, matrix, scale, bbox, xor_color );
         }

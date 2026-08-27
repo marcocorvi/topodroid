@@ -1005,6 +1005,20 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     commandManager.addDotCommand( path );
   }
 
+  /** @return the list of section outlines shifted by (dx,dy)
+   * @param dx  X shift
+   * @param dy  Y shift
+   * @param name section name
+   */
+  List<DrawingLinePath> getSectionOutline( float dx, float dy, String name )
+  {
+    if ( mCommandManager3 == null ) return null;
+    return mCommandManager3.getSectionOutline( dx, dy, name );
+  }
+
+  /** add a scrap outline 
+   * @param path  scrap outline
+   */
   public void addScrapOutlinePath( DrawingLinePath path )
   {
     if ( commandManager == null || path == null ) return;
@@ -1539,7 +1553,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   }
 
   // @param name xsection scrap name ( survey_name + "-" + xsection_id )
-  boolean hasXSectionOutline( String name ) { return commandManager.hasXSectionOutline( name ); }
+  // boolean hasXSectionOutline( String name ) { return commandManager.hasXSectionOutline( name ); }
 
   /** insert the outline of a xsection
    * @param name       xsection scrap name ( survey_name + "-" + xsection_id )

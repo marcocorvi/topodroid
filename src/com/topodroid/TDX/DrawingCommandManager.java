@@ -76,7 +76,6 @@ public class DrawingCommandManager
   // private List< DrawingFixedName >   mFixeds;      // survey stations
 
   private List< DrawingLinePath >    mPlotOutline; // scrap outline
-  private List< DrawingOutlinePath > mXSectionOutlines;  // xsections outlines
 
   // buffer references
   private List< DrawingPath >        mTmpGridStack1   = null;
@@ -86,7 +85,6 @@ public class DrawingCommandManager
   private List< DrawingSplayPath >   mTmpSplaysStack  = null;
   private List< DrawingStationName > mTmpStations     = null;    // survey stations
   // private List< DrawingLinePath >    mTmpPlotOutline; // scrap outline
-  // private List< DrawingOutlinePath > mTmpXSectionOutlines;  // xsections outlines
 
   float mOffx = 0;
   float mOffy = 0;
@@ -133,7 +131,6 @@ public class DrawingCommandManager
     mSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingSplayPath >());
     mStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
     mPlotOutline  = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
-    mXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
 
     mPlotName     = plot_name;
     mScraps       = Collections.synchronizedList(new ArrayList< Scrap >());
@@ -716,7 +713,6 @@ public class DrawingCommandManager
     }
     // FIXME 
     synchronized( mSyncOutline ) { mPlotOutline.clear(); }
-    synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); }
  
     synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationName st : mStations ) st.flipXAxis(z);
@@ -873,7 +869,6 @@ public class DrawingCommandManager
       
     }
     synchronized( mSyncOutline )            { mPlotOutline.clear(); }
-    synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( TDPath.mStationsLock )    { mStations.clear(); }
     // synchronized( TDPath.mFixedsLock   )    { mFixeds.clear(); }
     syncClearSelected();
@@ -900,11 +895,9 @@ public class DrawingCommandManager
     mTmpStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
 
     // mTmpPlotOutline  = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
-    // mTmpXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
     // mFixeds       = Collections.synchronizedList(new ArrayList< DrawingFixedName >());
 
     synchronized( mSyncOutline )            { mPlotOutline.clear(); }
-    synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     // synchronized( TDPath.mFixedsLock   )    { mTmpFixeds.clear(); }
 
     syncClearSelected();
@@ -1926,15 +1919,6 @@ public class DrawingCommandManager
           for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, null /* bbox */ );
         }
       }
-      if ( sections && mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
-        synchronized( TDPath.mXSectionsLock )  {
-          for ( DrawingOutlinePath path : mXSectionOutlines ) {
-            if ( path.isScrapId( mCurrentScrap.mScrapIdx ) ) {
-              path.mPath.draw( canvas, mm, null /* bbox */ );
-            }
-          }
-        }
-      }
     }
  
     if ( stations ) {
@@ -1966,9 +1950,9 @@ public class DrawingCommandManager
       } else {
         synchronized( mSyncScrap ) {
           if ( inverted_colors ) {
-            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, zoom/2, bbox, 1 );
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, zoom/2, bbox, sections, 1 );
           } else {
-            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, zoom/2, bbox );
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, zoom/2, bbox, sections  );
           }
         }
       }
@@ -1980,9 +1964,9 @@ public class DrawingCommandManager
             scrap.drawGreyOutline( canvas, mm, bbox );
           }
           if ( inverted_colors ) {
-            mCurrentScrap.drawAll( canvas, mm, scale, zoom/2, bbox, 1 );
+            mCurrentScrap.drawAll( canvas, mm, scale, zoom/2, bbox, sections, 1 );
           } else { 
-            mCurrentScrap.drawAll( canvas, mm, scale, zoom/2, bbox );
+            mCurrentScrap.drawAll( canvas, mm, scale, zoom/2, bbox, sections );
           }
         }
         if ( sidebars && mDisplayPoints ) {
@@ -2191,7 +2175,7 @@ public class DrawingCommandManager
   void rotateHotItem( float dy ) { mCurrentScrap.rotateHotItem( dy ); }
 
   // void shiftHotItem( float dx, float dy, float range ) 
-  void shiftHotItem( float dx, float dy ) { mCurrentScrap.shiftHotItem( dx, dy, mXSectionOutlines ); }
+  void shiftHotItem( float dx, float dy ) { mCurrentScrap.shiftHotItem( dx, dy ); }
 
   SelectionPoint nextHotItem() { return mCurrentScrap.nextHotItem(); }
   SelectionPoint prevHotItem() { return mCurrentScrap.prevHotItem(); }
@@ -2358,57 +2342,21 @@ public class DrawingCommandManager
   //   }
   // }
 
-  /** clear the set of xsection outlines
+  /** @return the list of outlines shifted by (dx,dy)
+   * @param dx  X shift
+   * @param dy  Y shift
+   * @param name section name
    */
-  void clearXSectionsOutline() 
+  List<DrawingLinePath> getSectionOutline( float dx, float dy, String name )
   {
-    // TDLog.v( mPlotName + " clear all XSections outlines");
-    synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); }
-  }
-
-  /** @return true if the specified scrap is contained in the xsection outlines
-   * @param name   scrap name
-   */
-  boolean hasXSectionOutline( String name ) 
-  { 
-    if ( TDUtil.isEmpty(mXSectionOutlines) ) return false;
-    synchronized( TDPath.mXSectionsLock )  {
-      for ( DrawingOutlinePath path : mXSectionOutlines ) {
-        if ( path.isScrapName( name ) ) return true;
-      }
+    ArrayList<DrawingLinePath> ret = new ArrayList<>();
+    // TDLog.v("get section outline - scraps " + mScraps.size() );
+    for ( Scrap scrap : mScraps ) {
+      scrap.addOutline( ret, dx, dy, name );
     }
-    return false;
+    return ret;
   }
-
-  /** add an outline path to the set of xsection outlines
-   * @param path    xsection outline path
-   */
-  void addXSectionOutlinePath( DrawingOutlinePath path )
-  {
-    synchronized( TDPath.mXSectionsLock ) {
-      mXSectionOutlines.add( path );
-    }
-    // TDLog.v( "Cmd Manager: " + mPlotName + " add XSection outline: nr. " + mXSectionOutlines.size() );
-  }
-
-  /** remove a xsection outline from the set of xsection outlines
-   * @param name   name of the xsection outline to remove
-   */
-  void clearXSectionOutline( String name )
-  {
-    List< DrawingOutlinePath > xsection_outlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
-    synchronized( TDPath.mXSectionsLock ) {
-      for ( DrawingOutlinePath path : mXSectionOutlines  ) {
-        if ( ! path.isScrapName( name ) ) {
-          // TDLog.v( "Cmd Manager: " + mPlotName + " clear XSection outline: retain " + name );
-          xsection_outlines.add( path );
-        }
-      }
-      mXSectionOutlines.clear(); // not necessary
-    }
-    mXSectionOutlines = xsection_outlines;
-    // TDLog.v( "Cmd Manager: " + mPlotName + " clear XSection outline " + name + " remaining " + mXSectionOutlines.size() );
-  }
+    
 
   // -----------------------------------------------------------------------
 

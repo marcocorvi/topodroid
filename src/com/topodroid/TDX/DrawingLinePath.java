@@ -95,6 +95,34 @@ public class DrawingLinePath extends DrawingPointLinePath
     setScale( scale ); // this sets also mScale
   }
 
+  /** cstr of a shifted outline, copy of the given line
+   * @param line   given line
+   * @param dx     X shift 
+   * @param dy     Y shift 
+   */
+  DrawingLinePath( DrawingLinePath line, float dx, float dy )
+  {
+    super( DrawingPath.DRAWING_PATH_LINE, true, false, line.mScrap );
+    mLineType = line.mLineType;
+    mReversed = line.mReversed;
+    setPathPaint( BrushManager.outlinePaint );
+    mOutline  = line.mOutline;
+    mLevel    = line.mLevel;
+    setScale( line.mScale );
+    LinePoint lp = line.mFirst; 
+    this.addStartPoint( lp.x + dx, lp.y + dy );
+    for ( lp=lp.mNext; lp != null; lp = lp.mNext ) 
+    {
+      if ( lp.has_cp ) {
+        this.addPoint3( lp.x1+dx, lp.y1+dy, lp.x2+dx, lp.y2+dy, lp.x+dx, lp.y+dy );
+      } else {
+        this.addPoint( lp.x+dx, lp.y+dy );
+      }
+    }
+    // TDLog.v( "line " + mCnt + " split: " + size() + " --> " + line1.size() + " + " + line2.size() );
+    this.computeUnitNormal();
+  }
+
   /** factory: deserialize a line from a data stream
    * @param version   serialized version
    * @param dis       data input stream

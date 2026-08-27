@@ -1593,7 +1593,10 @@ public class DrawingWindow extends ItemDrawer
       mSectionPt = findSectionPoint( scrap_name );
     }
     if ( mSectionPt != null ) {
-      setXSectionOutline( mSectionPt, mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
+      List<DrawingLinePath> outline = mDrawingSurface.getSectionOutline( mSectionPt.cx-DrawingUtil.CENTER_X, mSectionPt.cy-DrawingUtil.CENTER_Y, mFullName3 );
+      TDLog.v("outline size " + outline.size() + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+      setXSectionOutline( mSectionPt, mFullName3, outline );
+      // setXSectionOutline( mSectionPt, mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
     }
     mSectionPt = null;
   }
@@ -10275,11 +10278,11 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.addScrapDataStream( tdr, xdelta, ydelta );
   }
 
-  /** @return true if the plot has the xsection outline
-   * @param name xsection scrap_name = survey_name + "-" + xsection_id
-   *                      tdr_path = tdr_dir + scrap_name + ".tdr"
-   */
-  boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
+  // /** @return true if the plot has the xsection outline
+  //  * @param name xsection scrap_name = survey_name + "-" + xsection_id
+  //  *                      tdr_path = tdr_dir + scrap_name + ".tdr"
+  //  */
+  // boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
 
   // TODO move this to DrawingSurface ?
   /** add/drop the outline of a xsection
@@ -10302,6 +10305,12 @@ public class DrawingWindow extends ItemDrawer
       List<DrawingLinePath> outline = mDrawingSurface.setXSectionOutline( name, scrap_id, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
       point.setOutline( outline );
     }
+  }
+
+  void setXSectionOutline( DrawingPointPath point, String name, List<DrawingLinePath> outline )
+  {
+    mDrawingSurface.clearXSectionOutline( point, name );
+    point.setOutline( outline );
   }
 
   /** @return the section point of a given x-section

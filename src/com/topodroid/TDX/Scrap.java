@@ -2665,41 +2665,34 @@ public class Scrap
     }
   }
 
+
+  /** shift the hot item
+   * @param dx  X shift
+   * @param dy  Y shift
+   */
   // void shiftHotItem( float dx, float dy, float range ) 
-  void shiftHotItem( float dx, float dy, List< DrawingOutlinePath > xsections )
+  void shiftHotItem( float dx, float dy )
   { 
     synchronized( TDPath.mSelectionLock ) {
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
       if ( sp != null ) {
-        DrawingPath path = sp.mItem;
-        if ( path.isPoint() ) { // path instanceof DrawingPointPath
-          DrawingPointPath pt = (DrawingPointPath)path;
-          if ( BrushManager.isPointSection( pt.mPointType )  ) {
-            String scrap_name = TDUtil.replacePrefix( TDInstance.survey, pt.getOption( TDString.OPTION_SCRAP ) );
-            if ( scrap_name != null ) {
-              // TDLog.v("Shift " + scrap_name + " X-section " + xsections.size() );
-              synchronized( TDPath.mXSectionsLock ) {
-                for ( DrawingOutlinePath xsection : xsections ) {
-                  if ( xsection.isScrapName( scrap_name ) ) {
-                    xsection.mPath.shiftBy( dx, dy );
-                    // break;
-                  }
-                }
-              }
-            }
-          }
-        }
         mSelection.checkBucket( sp );
       }
     }
   }
 
+  /** @return the next selected point
+   */
   SelectionPoint nextHotItem() { return mSelected.nextHotItem(); }
+
+  /** @return the previous selected point
+   */
   SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
 
-  // compute the bounding box for a scrap index or the global one
-  // @param scrap   scrap index (-1 for global bbox)
+  /** compute the bounding box for this scrap
+   * @return the scrap bounding box
+   */
   RectF computeBBox( )
   {
     float xmin=1000000f, xmax=-1000000f, 
@@ -2719,13 +2712,18 @@ public class Scrap
     return mBBox;
   }
 
-  // get the bounding box: must have been previously computed with computeBBox()
-  // this is done by the command manager getBoundingBox()
+  /** @return the scrap bounding box: must have been previously computed with computeBBox()
+   * @note this is done by the command manager getBoundingBox()
+   */
   RectF getBBox() 
   {
     return mBBox;
   }
 
+  /** get an audio point 
+   * @param bid  audio ID of the point
+   * @return the audio point or null
+   */
   DrawingAudioPath getAudioPoint( long bid )
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -2745,6 +2743,8 @@ public class Scrap
     return null;
   }
 
+  /** @return the are of a x-section
+   */
   float computeSectionArea()
   {
     float ret = 0;
@@ -2832,6 +2832,8 @@ public class Scrap
     }
   }
 
+  /** redo a drawing action
+   */
   public void redo()
   {
     final int length = mRedoStack.toArray().length;
@@ -2990,6 +2992,30 @@ public class Scrap
     }
   }
 
+  /** add the (shifted) outlines to the list
+   * @param outines   list of outlines
+   * @param dx        X shift
+   * @param dy        Y shift
+   * @param name      unused
+   */
+  void addOutline( ArrayList<DrawingLinePath> outlines, float dx, float dy, String name )
+  {
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand cmd : mCurrentStack  ) {
+        if ( cmd.commandType() == 0 ) {
+          DrawingPath path = (DrawingPath)cmd;
+          if ( path.isLine() ) { // path instanceof DrawingLinePath
+            DrawingLinePath line = (DrawingLinePath)path;
+            if ( line.hasOutline() ) {
+              DrawingLinePath outline = new DrawingLinePath( line, dx, dy );
+              outlines.add( outline );
+            }
+          }
+        }
+      }
+    }
+  }
+
   // DRAW ACTIONS --------------------------------------------------------
 
   /** draw the outline
@@ -3042,7 +3068,7 @@ public class Scrap
    * @param bbox      clipping rectangle
    * @param xor_color xor colors
    */
-  void drawAll( Canvas canvas, Matrix matrix, float scale, float zoom, RectF bbox, int xor_color )
+  void drawAll( Canvas canvas, Matrix matrix, float scale, float zoom, RectF bbox, boolean sections, int xor_color )
   {
     if ( mCurrentStack == null ) return;
     synchronized( TDPath.mCommandsLock ) {
@@ -3050,6 +3076,10 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
+            if ( path.isPoint() ) {
+              DrawingPointPath point = (DrawingPointPath)path;
+              point.setDrawOutline( sections );
+            }  
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               // Paint paint = new Paint( line.mPaint
@@ -3077,6 +3107,10 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+              if ( path.isPoint() ) {
+                DrawingPointPath point = (DrawingPointPath)path;
+                point.setDrawOutline( sections );
+              }  
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
                 line.zoomPathEffect( zoom );
@@ -3125,8 +3159,9 @@ public class Scrap
    * @param matrix   transform matrix
    * @param scale    rescaling factor
    * @param bbox     clipping rectangle
+   * @param sections whether to display x-sections
    */
-  void drawAll( Canvas canvas, Matrix matrix, float scale, float zoom, RectF bbox )
+  void drawAll( Canvas canvas, Matrix matrix, float scale, float zoom, RectF bbox, boolean sections )
   {
     if ( mCurrentStack == null ) return;
     synchronized( TDPath.mCommandsLock ) {
@@ -3134,6 +3169,10 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
+            if ( path.isPoint() ) {
+              DrawingPointPath point = (DrawingPointPath)path;
+              point.setDrawOutline( sections );
+            }  
             cmd.draw( canvas, matrix, scale, bbox );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
@@ -3152,6 +3191,10 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+              if ( path.isPoint() ) {
+                DrawingPointPath point = (DrawingPointPath)path;
+                point.setDrawOutline( sections );
+              }  
               cmd.draw( canvas, matrix, scale, bbox );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
