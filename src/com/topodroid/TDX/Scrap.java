@@ -2789,7 +2789,7 @@ public class Scrap
           // get the line/station
           String scrap = TDUtil.replacePrefix( TDInstance.survey, p.getOption( TDString.OPTION_SCRAP ) );
           if ( scrap != null ) {
-            TDLog.v( "link xsection: point scrap " + scrap );
+            // TDLog.v( "link xsection: point scrap " + scrap );
             int pos = scrap.lastIndexOf( "-xx" );
             if ( pos > 0 ) {
               String id = scrap.substring(pos+1); // line id

@@ -180,7 +180,7 @@ class DrawingModeDialog extends MyDialog
         if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
         if ( mCBsections.isChecked() )mode |= DisplayMode.DISPLAY_SECTIONS;
         // TDLog.e( "Mode " + mode );
-        mSurface.setDisplayMode( mode );
+        DrawingSurface.setDisplayMode( mode );
         // if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
         //   mParent.scrapOutlineDialog();
         // }
@@ -204,7 +204,7 @@ class DrawingModeDialog extends MyDialog
   //   if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
   //   if ( mCBelevation.isChecked() ) mode |= DisplayMode.DISPLAY_ELEVATION;
   //   if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
-  //   mSurface.setDisplayMode( mode );
+  //   DrawingSurface.setDisplayMode( mode );
   //   cancel();
   // }
 }

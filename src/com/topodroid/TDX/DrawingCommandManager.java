@@ -155,11 +155,19 @@ public class DrawingCommandManager
   /** set the mode of display
    * @param mode  ...
    */
-  static void setDisplayMode( int mode ) { mDisplayMode = mode; }
+  static void setDisplayMode( int mode )
+  {
+    mDisplayMode = mode;
+    // TDLog.v("Display Mode set " + String.format( "%x", mDisplayMode ) );
+  }
 
   /** @return the mode of display
    */
-  static int getDisplayMode( ) { return mDisplayMode; }
+  static int getDisplayMode( ) 
+  { 
+    // TDLog.v("Display Mode get " + String.format( "%x", mDisplayMode ) );
+    return mDisplayMode;
+  }
 
   /** for stations display toggle between names and elevations
    */
@@ -2274,7 +2282,7 @@ public class DrawingCommandManager
   void setStationXSections( List< PlotInfo > xsections, long type )
   {
     // TDLog.v("Drawing Cmd Manager: " + mPlotName + " type " + type + " set station xsections " + xsections.size() );
-    for ( PlotInfo pi : xsections ) TDLog.v(" xsection " + pi.name + " start " + pi.start );
+    // for ( PlotInfo pi : xsections ) TDLog.v(" xsection " + pi.name + " start " + pi.start );
     for ( PlotInfo plot : xsections ) {
       DrawingStationName st = getStation( plot.start );
       if ( st != null ) {

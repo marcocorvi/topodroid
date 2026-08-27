@@ -1548,7 +1548,7 @@ public class DrawingWindow extends ItemDrawer
 
   void doClose()
   {
-    TDLog.v( "Drawing Window " + mType + " do close ...");
+    // TDLog.v( "Drawing Window " + mType + " do close ...");
     checkLabelPath();
     handleClosing();
   }
@@ -1594,7 +1594,7 @@ public class DrawingWindow extends ItemDrawer
     }
     if ( mSectionPt != null ) {
       List<DrawingLinePath> outline = mDrawingSurface.getSectionOutline( mSectionPt.cx-DrawingUtil.CENTER_X, mSectionPt.cy-DrawingUtil.CENTER_Y, mFullName3 );
-      TDLog.v("outline size " + outline.size() + " at " + mSectionPt.cx + " " + mSectionPt.cy );
+      // TDLog.v("outline size " + outline.size() + " at " + mSectionPt.cx + " " + mSectionPt.cy );
       setXSectionOutline( mSectionPt, mFullName3, outline );
       // setXSectionOutline( mSectionPt, mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
     }
@@ -1622,13 +1622,13 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onBackPressed () // askClose
   {
-    TDLog.v("Drawing Window " + mType + " BACK pressed" );
+    // TDLog.v("Drawing Window " + mType + " BACK pressed" );
     hanbleBackPressed();
   }
 
   void hanbleBackPressed()
   {
-    TDLog.v( "Drawing Window " + mType + " handle back ... single-back " + TDSetting.mSingleBack + " double-back " + doubleBack );
+    // TDLog.v( "Drawing Window " + mType + " handle back ... single-back " + TDSetting.mSingleBack + " double-back " + doubleBack );
     checkLabelPath();
     if ( dismissPopups() != DISMISS_NONE ) return;
     if ( mTh2Edit ) { // TH2EDIT
@@ -1658,17 +1658,17 @@ public class DrawingWindow extends ItemDrawer
 
       } else {
         if ( TDSetting.mSingleBack ) {
-          TDLog.v( "Drawing Window " + mType + " single back finish");
+          // TDLog.v( "Drawing Window " + mType + " single back finish");
           // super.onBackPressed();
           finish();
         } else if ( doubleBack ) {
-          TDLog.v( "Drawing Window " + mType + " double back finish");
+          // TDLog.v( "Drawing Window " + mType + " double back finish");
           if ( doubleBackToast != null ) doubleBackToast.cancel();
           doubleBackToast = null;
           // super.onBackPressed();
           finish();
         } else {
-          TDLog.v( "Drawing Window " + mType + " double back start");
+          // TDLog.v( "Drawing Window " + mType + " double back start");
           doubleBack = true;
           doubleBackToast = TDToast.makeToast( R.string.double_back );
           doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
@@ -3108,7 +3108,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void popInfo()
   {
-    TDLog.v( "Drawing Window " + mType + " pop info" );
+    // TDLog.v( "Drawing Window " + mType + " pop info" );
     // TODO save plot offset and zoom
     if ( mPid3 >= 0 ) {
       // TDLog.v( "update xsection pid " + mPid3 + " X " + mOffset.x + " Y " + mOffset.y + " zoom " + mZoom );
@@ -3176,6 +3176,7 @@ public class DrawingWindow extends ItemDrawer
     mAzimuth = azimuth;
     mClino   = clino;
     mSavedMode = mDrawingSurface.getDisplayMode();
+    // TDLog.v("Drawing window save mode " + String.format("%x", mSavedMode) );
     // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
     mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
     resetStatus();
@@ -3419,6 +3420,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("restore drawing display mode");
     String mode = mApp_mData.getValue( "DISTOX_PLOT_MODE" );
     DrawingCommandManager.setDisplayMode( DisplayMode.parseString( mode ) );
+    // TDLog.v("Drawing Window resume: mode 3 " + String.format("%x", DrawingCommandManager.getDisplayMode() ) );
     // mLastLinePath = null; // necessary ??? these two were at the end
     switchZoomCtrl( TDSetting.mZoomCtrl );
 
@@ -3451,7 +3453,7 @@ public class DrawingWindow extends ItemDrawer
     }
     // TODO exec this line in a Thread
     final int display_mode = DrawingCommandManager.getDisplayMode();
-    TDLog.v(String.format(Locale.US, "save drawing display mode %04X", display_mode ) );
+    // TDLog.v(String.format(Locale.US, "save drawing display mode %04X", display_mode ) );
     (new Thread() {
        public void run() {
          mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( display_mode ) );
@@ -4033,10 +4035,10 @@ public class DrawingWindow extends ItemDrawer
       List< PlotInfo > xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION,  mName1 /* parent */ );
       // X-sections at station in plofile view
       List< PlotInfo > xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, mName2 /* parent */ );
-      TDLog.v("Drawing Window: parent " + mName1 + " xsections X " + xsection_plan.size() );
-      for ( PlotInfo pi : xsection_plan ) TDLog.v("  xsection " + pi.name + " " + pi.type );
-      TDLog.v("Drawing Window: parent " + mName2 + " xsections XH " + xsection_ext.size() );
-      for ( PlotInfo pi : xsection_ext ) TDLog.v("  xsection " + pi.name + " " + pi.type );
+      // TDLog.v("Drawing Window: parent " + mName1 + " xsections X " + xsection_plan.size() );
+      // for ( PlotInfo pi : xsection_plan ) TDLog.v("  xsection " + pi.name + " " + pi.type );
+      // TDLog.v("Drawing Window: parent " + mName2 + " xsections XH " + xsection_ext.size() );
+      // for ( PlotInfo pi : xsection_ext ) TDLog.v("  xsection " + pi.name + " " + pi.type );
 
       if ( mNum == null ) {
         TDToast.makeBad( R.string.survey_no_data_reduction );
@@ -4054,8 +4056,8 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.linkAllSections( mName1, mName2 );
       // if ( TDSetting.mFixmeXSection ) { // add all section point XSection outlines 
         // the XSection outlines are stored in the command manager: they must be loaded separately for command managers 1 and 2
-        mDrawingSurface.setAllXSectionOutlines( this, 1 );
-        mDrawingSurface.setAllXSectionOutlines( this, 2 );
+        mDrawingSurface.setAllXSectionOutlines( 1 );
+        mDrawingSurface.setAllXSectionOutlines( 2 );
       // }
     } else { // X_SECTION
       resetReference( mPlot3, true );
@@ -4373,7 +4375,7 @@ public class DrawingWindow extends ItemDrawer
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       String section = point.getOption( TDString.OPTION_SCRAP );
       if ( section != null ) {
-        TDLog.v("Delete section point: Clear XSection outline: " + section );
+        // TDLog.v("Delete section point: Clear XSection outline: " + section );
         mDrawingSurface.clearXSectionOutline( point, TDUtil.replacePrefix( TDInstance.survey, section ) );
         // FIX_XSECTION the xsection is not deleted
       }
@@ -4438,7 +4440,7 @@ public class DrawingWindow extends ItemDrawer
     String xs_id = line.getOption( "-id" );
     String scrap_name = TDInstance.survey + "-" + xs_id;
 
-    TDLog.v("Delete section line: scrap_name " + scrap_name + " xs_id " + xs_id );
+    // TDLog.v("Delete section line: scrap_name " + scrap_name + " xs_id " + xs_id );
     mDrawingSurface.deleteSectionLine( line, scrap_name );
     // TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
     TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
@@ -4459,7 +4461,7 @@ public class DrawingWindow extends ItemDrawer
     PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
     if ( plot != null ) {
       String filename = TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id );
-      TDLog.v("Drop plot " + plot.name + " filename " + filename );
+      // TDLog.v("Drop plot " + plot.name + " filename " + filename );
       mApp_mData.dropPlot( plot.id, TDInstance.sid );
       // FIX_XSECTION TODO delete files
       TDFile.deleteFileWithBackups( filename );
@@ -4706,7 +4708,7 @@ public class DrawingWindow extends ItemDrawer
       f = (det12 * y0 + det20 * y1 + det01 * y2)/det;
     } 
     // apply affine transform to sketch
-    TDLog.v("Affine Transform C " + c + " F " + f ); 
+    // TDLog.v("Affine Transform C " + c + " F " + f ); 
     mDrawingSurface.affineTransformDrawing( a, b, c, d, e, f, mScrapOnly );
     return 0;
   }
@@ -4889,7 +4891,7 @@ public class DrawingWindow extends ItemDrawer
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
         // could use also getTouchMajor() however these methods are not supported by most devices
-        TDLog.v("STYLUS tool " + id + "/" + np + " size " + rawEvent.getSize( id ) + " major " + rawEvent.getToolMajor( id ) ); 
+        // TDLog.v("STYLUS tool " + id + "/" + np + " size " + rawEvent.getSize( id ) + " major " + rawEvent.getToolMajor( id ) ); 
         if ( rawEvent.getToolMajor( id ) < mStylusSizeDpi ) {
           break;
         }
@@ -6363,7 +6365,7 @@ public class DrawingWindow extends ItemDrawer
     if ( xs_id == null ) return;
     String scrap_name = TDInstance.survey + "-" + xs_id;
     if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
-    TDLog.v("delete section point: scrap " + scrap_name + " xs_id " + xs_id );
+    // TDLog.v("delete section point: scrap " + scrap_name + " xs_id " + xs_id );
     mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
     // mDrawingSurface.clearXSectionOutline( null, scrap_name ); // FIX_XSECTION clear outline if any
   }
@@ -8861,7 +8863,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public boolean onKeyUp( int code, KeyEvent ev ) // issue 169
   {
-    TDLog.v("Drawing Window key up: code " + code );
+    // TDLog.v("Drawing Window key up: code " + code );
     if ( code == KeyEvent.KEYCODE_BACK ) {
       return backKeyUp( code, ev );
     } else if ( code == KeyEvent.KEYCODE_VOLUME_UP ) {
@@ -9003,7 +9005,7 @@ public class DrawingWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
         if ( TDLevel.overNormal ) {
-          TDLog.v(" long tap menu: switch ");
+          // TDLog.v(" long tap menu: switch ");
           new PlotListDialog( mActivity, null, mApp, this ).show();
         } else {
           doClose();

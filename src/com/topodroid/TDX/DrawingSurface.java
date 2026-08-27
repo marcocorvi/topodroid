@@ -356,12 +356,16 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /** set the global display mode
    * @param mode   display mode
    */
-  public void setDisplayMode( int mode ) { DrawingCommandManager.setDisplayMode(mode); }
+  static void setDisplayMode( int mode ) 
+  { 
+    // TDLog.v("Display Mode set " + String.format( "%d: %x", k, mode ) );
+    DrawingCommandManager.setDisplayMode(mode);
+  }
 
   /** get the global display mode
    * @return the global display mode
    */
-  public int getDisplayMode( ) { return DrawingCommandManager.getDisplayMode(); }
+  static int getDisplayMode( ) { return DrawingCommandManager.getDisplayMode(); }
 
   /** if stations are displayed toggle between names and elevations
    */
@@ -775,11 +779,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       mCommandManager2.setCurrentStationName( null );
       setStationPaint( st1, saved, mCommandManager2 );
       if ( st == st0 ) {
-        TDLog.v("Set current station - same as old " + st0.getName() );
+        // TDLog.v("Set current station - same as old " + st0.getName() );
         return;
       }
     } else {
-      TDLog.v("Current station null");
+      // TDLog.v("Current station null");
     }
     if ( st != null ) {
       // TDLog.v("Set current station new " + st.getName() );
@@ -1031,7 +1035,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   public void addXSectionOutlinePath( DrawingOutlinePath path )
   {
-    TDLog.v("Drawing Surface: add XSection outline to command Manager" );
+    // TDLog.v("Drawing Surface: add XSection outline to command Manager" );
     if ( commandManager == null || path == null ) return;
     // commandManager.addXSectionOutlinePath( path );  // FIX_XSECTION
   } 
@@ -1265,6 +1269,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     mDrawThread = null;
   }
 
+  // OverviewWindow uses CommandManager3
   DrawingCommandManager getManager( long type )
   {
     if ( PlotType.isProfile( type ) ) return mCommandManager2;
@@ -1407,8 +1412,12 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   void linkAllSections( String name1, String name2 ) 
   {
     // TDLog.v("Drawing Surface: link sections " + name1 + " " + name2 );
-    mCommandManager1.linkSections( name1 );
-    mCommandManager2.linkSections( name2 );
+    if ( name2 == null ) { // OverviewWindow
+      mCommandManager3.linkSections( name1 );
+    } else {
+      mCommandManager1.linkSections( name1 );
+      mCommandManager2.linkSections( name2 );
+    }
   }
 
   // -----------------------------------------------------------------------------
@@ -1418,13 +1427,13 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
                            DrawingCommandManager cm, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
     if ( PlotType.isProfile( type ) ) {
-      TDLog.v("CSX profile ...");
+      // TDLog.v("CSX profile ...");
       // FIXME OK PROFILE to check
       if ( cm != null ) {
         cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
     } else if ( type == PlotType.PLOT_PLAN ) {
-      TDLog.v("CSX plan  ...");
+      // TDLog.v("CSX plan  ...");
       if ( cm != null ) {
         cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
@@ -1516,19 +1525,34 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void hideStationSplays( String station ) { mStationSplay.hideStationSplays( station ); }
   
+  /** set the station xsection to the section points
+   * @param xsection_plan  plan-view xsectiond or overview xsections
+   * @param xsection_ext   profile-view xsections or null
+   * @param type2          type of profile or type of view
+   */
   void setStationXSections( List< PlotInfo > xsection_plan, List< PlotInfo > xsection_ext, long type2 )
   {
     // TDLog.v("Drawing Surface: set station X sections " +  xsection_plan.size() + " " + xsection_ext.size() );
-    mCommandManager1.setStationXSections( xsection_plan, PlotType.PLOT_PLAN );
-    mCommandManager2.setStationXSections( xsection_ext,  type2 );
+    if ( xsection_ext  == null ) { // OverviewWindow
+      mCommandManager3.setStationXSections( xsection_plan, type2 );
+    } else { // DrawingWindow
+      mCommandManager1.setStationXSections( xsection_plan, PlotType.PLOT_PLAN );
+      mCommandManager2.setStationXSections( xsection_ext,  type2 );
+    }
   }
 
-  // only for sections
+  /** @return the section area
+   * @note only for x-sections
+   */
   float computeSectionArea()
   {
     return commandManager.computeSectionArea();
   }
 
+  /** delete a section-line
+   * @param line   section-line
+   * @param scrap  name of the scrap of the line
+   */
   void deleteSectionLine( DrawingLinePath line, String scrap )
   {
     isDrawing = true;
@@ -1573,23 +1597,32 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   DrawingPointPath findSectionPoint( String scrap_name )
   {
-    TDLog.v("find section point " + scrap_name );
+    // TDLog.v("find section point " + scrap_name );
     return commandManager.findSectionPoint( scrap_name );
   }
 
+  /** @return the section line of a given x-section
+   * @param scrap_name    X-section fullname
+   */
   DrawingLinePath findSectionLine( String scrap_name )
   {
-    TDLog.v("find section line " + scrap_name );
+    // TDLog.v("find section line " + scrap_name );
     return commandManager.findSectionLine( scrap_name );
   }
 
-
-  void setAllXSectionOutlines( DrawingWindow window, int cm )
+  /** set all leg xsection outlines
+   * @param cm  command manage index (1 plan, 2 profile, 3 overview)
+   */
+  void setAllXSectionOutlines( int cm )
   {
     // TDLog.v("Drawing Surface: set all XSection outlines: CM " + cm );
     // PROBLEM: section points are in scraps, xsection outlines are in command manager
     DrawingCommandManager save_cmd = commandManager;
-    commandManager = ( cm == 1 )? mCommandManager1 : mCommandManager2;
+    if ( cm == 3 ) { // OverviewWindpw
+      commandManager = mCommandManager3;
+    } else {
+      commandManager = ( cm == 1 )? mCommandManager1 : mCommandManager2;
+    }
 
     List< DrawingPointPath > pts = commandManager.getSectionPoints();
 
@@ -1607,7 +1640,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     commandManager = save_cmd;
   }
     
-  // @param name xsection scrap name ( survey_name + "-" + xsection_id )
+  /** clear an xsection outline
+   * @param point section point
+   * @param name xsection scrap name ( survey_name + "-" + xsection_id ) - unused
+   */
   void clearXSectionOutline( DrawingPointPath point, String name )
   {
     if ( point != null ) {

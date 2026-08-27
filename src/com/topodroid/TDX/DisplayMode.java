@@ -31,10 +31,10 @@ class DisplayMode
   static final int DISPLAY_SECTIONS  = 0x800; // whether to display xsections
 
   // static final int DISPLAY_SHOT     = 0x0313; // leg splay latest blank id
-  static final int DISPLAY_PLOT     = 0x2f;
+  static final int DISPLAY_PLOT     = 0x82f;
   static final int DISPLAY_SECTION  = 0x3d; //        0x20 | 0x10 | 0x08 | 0x04 |        0x01
   // static final int DISPLAY_XXXXXXXX = 0x6d; // 0x40 | 0x20 |        0x08 | 0x04 |        0x01
-  static final int DISPLAY_OVERVIEW = 0x2f; //        0x20 |        0x08 | 0x04 | 0x02 | 0x01 skip outline and latest 
+  static final int DISPLAY_OVERVIEW = 0x82f; //   0x800 | 0x20 |        0x08 | 0x04 | 0x02 | 0x01 skip outline and latest 
   static final int DISPLAY_FULL     = 0x032f; 
 
   static final int DISPLAY_SKETCH   = DISPLAY_SPLAY | DISPLAY_STATION | DISPLAY_GRID | DISPLAY_SCALEBAR | DISPLAY_OUTLINE | DISPLAY_WALLS 
