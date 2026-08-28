@@ -12,7 +12,7 @@
     style="@style/list_bottom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android_layout_below="@id/title"
+    android:layout_below="@id/title"
   />  
 </RelativeLayout>
 

@@ -1388,7 +1388,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       String filename = fullname;
       String survey_name = "survey";
       String plot_name   = "plot";
-      ret = DrawingIO.doLoadDataInputStream( this, dis, 0, 0, survey_name, filename, localPalette, null, true, plot_name );
+      ret = DrawingIO.doLoadDataInputStream( this, dis, 0, 0, survey_name, filename, localPalette, null, true, plot_name ); 
       if ( ret ) {
         BrushManager.makeEnabledListFromPalette( localPalette, false ); // ENABLED_LIST false: do not reset symbols "enabled"
       } else {

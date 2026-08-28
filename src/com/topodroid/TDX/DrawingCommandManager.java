@@ -1740,6 +1740,7 @@ public class DrawingCommandManager
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
     boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALEBAR ) != 0;
     boolean sections = (mDisplayMode & DisplayMode.DISPLAY_SECTIONS ) != 0;
+    DrawingPointPath.setDrawOutline( sections );
 
     boolean spoints   = false;
     boolean slines    = false;

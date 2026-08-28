@@ -50,9 +50,9 @@ public class DrawingPointPath extends DrawingPath
   protected String mPointText;   // point text value (if any)
   public IDrawingLink mLink;  // linked drawing item
   private List<DrawingLinePath> mOutline = null; // xsection outline
-  private boolean mDrawOutline = true;  // whether to draw xsection outline
+  private static boolean mDrawOutline = true;  // whether to draw xsection outline
 
-  void setDrawOutline( boolean on_off ) { mDrawOutline = on_off; }
+  static void setDrawOutline( boolean on_off ) { mDrawOutline = on_off; }
 
   // FIXME-COPYPATH
   // @Override

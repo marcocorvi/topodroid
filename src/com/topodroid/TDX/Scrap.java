@@ -3076,10 +3076,6 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
-            if ( path.isPoint() ) {
-              DrawingPointPath point = (DrawingPointPath)path;
-              point.setDrawOutline( sections );
-            }  
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               // Paint paint = new Paint( line.mPaint
@@ -3107,10 +3103,6 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-              if ( path.isPoint() ) {
-                DrawingPointPath point = (DrawingPointPath)path;
-                point.setDrawOutline( sections );
-              }  
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
                 line.zoomPathEffect( zoom );
@@ -3169,10 +3161,6 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
-            if ( path.isPoint() ) {
-              DrawingPointPath point = (DrawingPointPath)path;
-              point.setDrawOutline( sections );
-            }  
             cmd.draw( canvas, matrix, scale, bbox );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
@@ -3191,10 +3179,6 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-              if ( path.isPoint() ) {
-                DrawingPointPath point = (DrawingPointPath)path;
-                point.setDrawOutline( sections );
-              }  
               cmd.draw( canvas, matrix, scale, bbox );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
