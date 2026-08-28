@@ -10,6 +10,8 @@
     <string name="ai_invalid_key">Valótlan API kulcs</string>
     <string name="ai_chat_reset">Csevegés visszaállítva</string>
     <string name="ai_key_instruction">Az API-kulcs az Android belső memóriájában tárolódik, és csak a Google-nak kerül elküldésre.\nKeressen rá az interneten, hogyan szerezhet be Gemini API-kulcsot a Google-tól.</string>
+	<string name="ai_temperature">hőmérséklet</string>
+    <string name="ai_max_tokens">max. tokenek</string>
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
@@ -432,6 +434,7 @@
     <!-- UNUSED string name="including_splays">segédmérések is</string -->
     <string name="with_splays">sünökkel</string>
     <string name="cell_size">Cella méret [m]</string>
+	<string name="reset_ids">ID-k visszaállítása</string>
 
     <string name="legs">Poligon mérések</string>
     <string name="stations">Poligon-pont</string>
@@ -2031,6 +2034,8 @@
   <string name="pref_plot_shift_summary">Vázlat mozgatás és nagyítás engedélyezése</string>
   <string name="pref_splay_alpha_title">Segédmérés átlátszóság</string>
   <string name="pref_splay_alpha_summary">Segédmérés fedettség [0: átlátszó, 100: fedett]</string>
+  <string name="pref_reset_ids_title">ID-k visszaállítása</string>
+  <string name="pref_reset_ids_summary">Felmérés ID visszaállításának engedélyezése</string>
 
   <!-- UNUSED string name="pref_picker_type_title">Rajzeszköz választó</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Rajzeszköz választó típusa</string -->
