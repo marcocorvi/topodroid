@@ -198,9 +198,9 @@
   </string-array -->
 
   <string-array name="connMode">
-     <item name="batch">Ha szükséges</item>
+     <item name="batch">Igény szerint</item>
      <item name="continuous">Folyamatos</item>
-     <item name="multi">Multi</item>
+     <item name="multi">Több</item>
   </string-array>
 
   <string-array name="sockType">
