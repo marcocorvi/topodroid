@@ -3528,7 +3528,7 @@ public class ShotWindow extends MyActivity
   /** calibrate a vector
    * @param mG    AG calibration matrix
    * @param vG    BG calibration vector
-   * @param nL    non-linear coeffs (unused)
+   * @param nL    non-linear coeffs (FIXME to-be-used)
    * @param g0    in-out vector
    */
   private void computeV( TDMatrix mG, TDVector vG, TDVector nL, TDVector g0 )
@@ -3592,11 +3592,12 @@ public class ShotWindow extends MyActivity
   //   TDLog.v( TAG + "do station click " );
   // }
 
-  /** 
+  /** update a scan-set
    * @param blk    first scan block
    * @param from   new station name
    * @param pos    position in the list (unused)
    * @param block_type block_type (BLOCK_SCAN: none, BLOCK_HSCAN: plan, BLOCK_VSCAN2: profile, BLOCK_XSCAN3: xsection)
+   * @note called only be ScanShotEditDialog
    */
   void updateScanSet( DBlock blk, String from, int pos, int block_type )
   {

@@ -228,7 +228,7 @@ public class DistoXBLEComm extends BleComm
    * @param address   device address (unused)
    * @param lister    data lister
    * @param data_type expected type of data (unused)
-   * @param timeout   ...
+   * @param timeout   connection timeout
    * @return true if success
    */
   @Override
@@ -1136,7 +1136,7 @@ public class DistoXBLEComm extends BleComm
    * @param address   device address
    * @param lister    data lister
    * @param data_type expected type of data
-   * @return ...
+   * @return true if success
    */
   public boolean tryConnectDevice( String address, ListerHandler lister, int data_type )
   {

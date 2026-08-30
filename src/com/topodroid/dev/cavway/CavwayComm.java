@@ -310,7 +310,7 @@ public class CavwayComm extends BleComm
    * @param address   device address (unused)
    * @param lister    data lister
    * @param data_type expected type of data (unused)
-   * @param timeout   ...
+   * @param timeout   connection timeout
    * @return true if success
    */
   @Override

@@ -198,7 +198,9 @@ class ScanShotEditDialog extends MyDialog
     else if ( mRBxsection.isChecked() ) { splay_class = BlockType.XSCAN; }
     
     // TDLog.v(" FROM " + shot_from + " " + mBlk.mFrom + " Block type " + splay_class + " " + mBlk.mBlockType );
-    if ( ! shot_from.equals( mBlk.mFrom ) || splay_class != mBlk.getBlockType() ) mParent.updateScanSet( mBlk, shot_from, mPos, splay_class );
+    if ( ! shot_from.equals( mBlk.mFrom ) || splay_class != mBlk.getBlockType() ) {
+      mParent.updateScanSet( mBlk, shot_from, mPos, splay_class ); // FIXME mPos is not used
+    }
     return true;
   }
 
