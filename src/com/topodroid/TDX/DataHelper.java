@@ -399,7 +399,7 @@ public class DataHelper extends DataSetObservable
    */
   private void fillBlock( long sid, DBlock blk, Cursor cursor )
   {
-    long leg = cursor.getLong(11);
+    long leg = cursor.getLong(11); // leg-type
     blk.setId( cursor.getLong(0), sid );
     blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
     blk.mLength       = (float)( cursor.getDouble(3) );  // distance [meters]
@@ -420,7 +420,7 @@ public class DataHelper extends DataSetObservable
     
     blk.setExtend( (int)cursor.getLong(9), (float)( cursor.getDouble(16) ) );
     blk.resetFlag( cursor.getLong(10) );
-    blk.setBlockTypeFromLegType( (int)leg );
+    blk.setBlockTypeFromLegType( (int)leg ); // to be called after setting the block name
     blk.mComment  = cursor.getString(12);
     blk.setShotType( (int)cursor.getLong(13) ); // shot type: DistoX, manual, ..
     blk.mTime     = cursor.getLong(14);
@@ -2029,7 +2029,11 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  // "leg" flag: 0 splay, 1 leg, 2 x-splay
+  /** update the shot leg-flag
+   * @param id   shot ID
+   * @param sid  survey ID
+   * @param leg  "leg" flag: 0 splay, 1 leg, 2 x-splay 
+   */
   void updateShotLeg( long id, long sid, long leg )
   {
     // TDLog.v( "A1 update shot leg. id " + id + " leg " + leg ); 
@@ -4998,8 +5002,10 @@ public class DataHelper extends DataSetObservable
       null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
-        int leg = (int)( cursor.getLong(11) );
-        if ( leg == 0 || leg >= 2 ) { // skip leg-blocks (11 = "leg" flag): 0 normal, 1 repeated-leg, 2 x-splay, 3 backleg, ...
+        int leg = (int)( cursor.getLong(11) ); 
+        // if ( leg == 0 || leg >= 2 ) // skip leg-blocks (11 = "leg" flag): 0 normal, 1 repeated-leg, 2 x-splay, 3 backleg, ...
+        // @see LegType
+        if ( leg >= 0 && leg != LegType.EXTRA ) {
           DBlock block = new DBlock();
           fullFillBlock( sid, block, cursor, prev_leg ); // FIXME FULL_FILL ?
           list.add( block );
@@ -8135,7 +8141,7 @@ public class DataHelper extends DataSetObservable
             +   " dip REAL, "
             +   " extend INTEGER, " // LEFT VERT RIGHT IGNORE etc.
             +   " flag INTEGER, "   // NONE DUPLICATE SURFACE COMMENTED etc.
-            +   " leg INTEGER, "    // MAIN SEC SPLAY XSPLAY BACK ...
+            +   " leg INTEGER, "    // MAIN SEC SPLAY XSPLAY BACK ... @see LegType
             +   " status INTEGER, " // NORMAL DELETED OVERSHOOT
             +   " comment TEXT, "
             +   " type INTEGER, "     // DISTOX MANUAL

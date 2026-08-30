@@ -1308,13 +1308,12 @@ public class DrawingWindow extends ItemDrawer
    * @param x1,y1  first endpoint
    * @param x2,y2  second endpoint
    * @param angle  angle between splay and the plane [degrees]
-   * @param blue   true for splays at TO station
+   * @param at_to   true for splays at TO station
    */
   private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float angle,
-                                     // float xoff, float yoff, 
-                                     boolean blue )
+                                     boolean at_to )
   {
-    // TDLog.v("add fixed section splay " + blue );
+    // TDLog.v("add fixed section splay " + at_to );
     DrawingSplayPath dpath = new DrawingSplayPath( blk, mDrawingSurface.scrapIndex() );
     dpath.setCosine( angle ); 
     Paint paint = blk.getPaint();
@@ -1323,7 +1322,7 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     if ( dpath.setSplayPaintCavwayFlag( blk ) ) return; // try Cavway flag paint 
-    if ( blue ) {
+    if ( at_to ) {
       if ( blk.isScan() ) {
         dpath.setPathPaint( BrushManager.paintScanShot );    // SCAN
       } else if ( blk.isXSplay() ) {
@@ -1348,7 +1347,7 @@ public class DrawingWindow extends ItemDrawer
         dpath.setPathPaint( BrushManager.paintSplayXB );      // LIGHT_BLUE
       }
     }
-    // dpath.setPathPaint( blue? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
+    // dpath.setPathPaint( at_to? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
     // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
     DrawingUtil.makeDrawingSplayPath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedSplayPath( dpath, false ); // false SELECTABLE
@@ -3809,11 +3808,9 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v( "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
       if ( splay_station == 1 ) {
         // N.B. this must be guaranteed for X_SECTION
-        // addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, 0, 0, false );
-        addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, a, false );
+        addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, a, false ); // false at_TO_station
       } else { // if ( splay_station == 2
-        // addFixedSectionSplay( b, xto, yto, xto+x, yto+y, 0, 0, true );
-        addFixedSectionSplay( b, xto, yto, xto+x, yto+y, a, true );
+        addFixedSectionSplay( b, xto, yto, xto+x, yto+y, a, true ); // true at_TO_station
       }
     }
     // mSectionSkip = cnt;

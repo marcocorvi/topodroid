@@ -349,21 +349,22 @@ public class DBlock
 
   /** set the block type from the leg-type
    * @param leg_type    leg type
+   * @note keeping the distinction between leg-type (DB flag) and block-type is one of the LEGACY ISSUES
    */
   void setBlockTypeFromLegType( int leg_type )
   {
-     // switch ( leg_type ) {
-     //   case LegType.EXTRA:   mBlockType = BlockType.SEC_LEG;     break;
-     //   case LegType.XSPLAY:  mBlockType = BlockType.X_SPLAY;     break;
-     //   case LegType.BACK:    mBlockType = BlockType.BACK_LEG;    break;
-     //   case LegType.HSPLAY:  mBlockType = BlockType.H_SPLAY;     break;
-     //   case LegType.VSPLAY:  mBlockType = BlockType.V_SPLAY;     break;
-     //   case LegType.SCAN:    mBlockType = BlockType.SCAN;        break;
+     // switch ( leg_type ) { // @see LegType
+     //   case LegType.EXTRA:   mBlockType = BlockType.SEC_LEG;     break; // 1
+     //   case LegType.XSPLAY:  mBlockType = BlockType.X_SPLAY;     break; // 2
+     //   case LegType.BACK:    mBlockType = BlockType.BACK_LEG;    break; // 3
+     //   case LegType.HSPLAY:  mBlockType = BlockType.H_SPLAY;     break; // 4
+     //   case LegType.VSPLAY:  mBlockType = BlockType.V_SPLAY;     break; // 5
+     //   case LegType.SCAN:    mBlockType = BlockType.SCAN;        break; // 6
      //   case LegType.XSCAN:   mBlockType = BlockType.XSCAN;       break;
      //   case LegType.HSCAN:   mBlockType = BlockType.HSCAN;       break;
-     //   case LegType.VSCAN:   mBlockType = BlockType.VSCAN;       break;
-     //   // case LegType.BLUNDER: mBlockType = BlockType.BLUNDER; break;
-     //   default: // case LegTypeNORMAL:
+     //   case LegType.VSCAN:   mBlockType = BlockType.VSCAN;       break; // 9
+     //   // case LegType.BLUNDER: mBlockType = BlockType.BLUNDER; break;  // 10
+     //   default: // case LegTypeNORMAL: // 0
      //     if ( isSplay() ) {
      //       mBlockType = BlockType.SPLAY;
      //     } else if ( isLeg() ) {
@@ -378,7 +379,7 @@ public class DBlock
      
      if ( leg_type >= 0 && leg_type < BlockType.LegToBlock.length ) {
        mBlockType = BlockType.LegToBlock[ leg_type ];
-       if ( mBlockType == BlockType.BLANK ) {
+       if ( mBlockType == BlockType.BLANK ) { // @see BlockType
          if ( ! TDString.isNullOrEmpty( mFrom ) ) {
            if ( TDString.isNullOrEmpty( mTo ) ) {
              mBlockType = BlockType.SPLAY;
