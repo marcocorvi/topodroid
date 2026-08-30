@@ -242,10 +242,10 @@ public class SymbolLibrary
    */
   Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? BrushManager.errorPaint : mSymbols.get(k).getPaint(); }
 
-  /** #return the path of the k-th symbol 
-   * @param k  symbol index
-   */
-  Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPath(); }
+  // /** #return the path of the k-th symbol - UNUSED
+  //  * @param k  symbol index
+  //  */
+  // Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getSymbolPath(); }
 
   /** #return true if the k-th symbol is orientable
    * @param k  symbol index

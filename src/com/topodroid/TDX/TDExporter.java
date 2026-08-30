@@ -1384,90 +1384,91 @@ public class TDExporter
   // POCKETTOPO EXPORT PocketTopo
   //   NOTE shot flags are ignored
 
-  /** export data in PocketTopo format (.top)
-   * @param os    output stream
-   * @param sid   survey ID
-   * @param data  database helper object
-   * @param info  survey info
-   * @param sketch     sketching window (not used: sketches are not exported)
-   * @param origin     sketch origin
-   * @param survey_name survey name (unused)
-   * @return 1 success, 0 fail
-   */
-  static int exportSurveyAsTop( OutputStream os, long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String survey_name )
-  {
-    TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TOP );
-    // TDLog.v( "export as pockettopo: " + file.getName() );
-    PTFile ptfile = new PTFile();
-    // TODO add a trip
-    // date --> year, month, day --> _time
-    // _declination (0)
-    // _comment
+  // /** export data in PocketTopo format (.top)
+  //  * @param os    output stream
+  //  * @param sid   survey ID
+  //  * @param data  database helper object
+  //  * @param info  survey info
+  //  * @param sketch     sketching window (not used: sketches are not exported)
+  //  * @param origin     sketch origin
+  //  * @param survey_name survey name (unused)
+  //  * @return 1 success, 0 fail
+  //  */
+  // static int exportSurveyAsTop( OutputStream os, long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String survey_name )
+  // {
+  //   TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_TOP );
+  //   // TDLog.v( "export as pockettopo: " + file.getName() );
+  //   PTFile ptfile = new PTFile();
+  //   // TODO add a trip
+  //   // date --> year, month, day --> _time
+  //   // _declination (0)
+  //   // _comment
 
-    // TODO add shots
-    // _from, _to
-    // _dist, _azimuth, _inclination, _roll
-    // extend left --> shot._flags bit-0
-    // _trip_index (0)
-    // _comment
-    String[] vals = info.date.split( "\\." );
-    try {
-      ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), info.getDeclination(), info.comment );
-    } catch ( NumberFormatException e ) {
-      TDLog.e( "export survey as TOP date parse error " + info.date );
-    }
+  //   // TODO add shots
+  //   // _from, _to
+  //   // _dist, _azimuth, _inclination, _roll
+  //   // extend left --> shot._flags bit-0
+  //   // _trip_index (0)
+  //   // _comment
+  //   String[] vals = info.date.split( "\\." );
+  //   try {
+  //     ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), info.getDeclination(), info.comment );
+  //   } catch ( NumberFormatException e ) {
+  //     TDLog.e( "export survey as TOP date parse error " + info.date );
+  //   }
 
-    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
-    checkShotsClino( list );
-    int extend = 0;  // current extend
-    DBlock ref_item = null;
-    int fromId, toId;
+  //   List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+  //   checkShotsClino( list );
+  //   int extend = 0;  // current extend
+  //   DBlock ref_item = null;
+  //   int fromId, toId;
 
-    for ( DBlock item : list ) {
-      String from = item.mFrom;
-      String to   = item.mTo;
-      extend = item.getIntExtend();
-      if ( from == null || from.length() == 0 ) {
-        from = "";
-        if ( to == null || to.length() == 0 ) {
-          to = "";
-          if ( ref_item != null 
-            && ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
-            from = ref_item.mFrom;
-            to   = ref_item.mTo;
-            extend = ref_item.getIntExtend();
-          } else {
-            ref_item = null;
-          }
-        } else { // only TO station
-          ref_item = null;
-        }
-      } else { // with FROM station
-        if ( to == null || to.length() == 0 ) { // splay shot
-          to = "";
-          ref_item = null;
-        } else {
-          ref_item = item;
-        }
-      }
-      ptfile.addShot( (short)0, from, to, item.mLength, item.mBearing, item.mClino, item.mRoll, extend, item.mComment );
-    }
+  //   for ( DBlock item : list ) {
+  //     String from = item.mFrom;
+  //     String to   = item.mTo;
+  //     extend = item.getIntExtend();
+  //     if ( from == null || from.length() == 0 ) {
+  //       from = "";
+  //       if ( to == null || to.length() == 0 ) {
+  //         to = "";
+  //         if ( ref_item != null 
+  //           && ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
+  //           from = ref_item.mFrom;
+  //           to   = ref_item.mTo;
+  //           extend = ref_item.getIntExtend();
+  //         } else {
+  //           ref_item = null;
+  //         }
+  //       } else { // only TO station
+  //         ref_item = null;
+  //       }
+  //     } else { // with FROM station
+  //       if ( to == null || to.length() == 0 ) { // splay shot
+  //         to = "";
+  //         ref_item = null;
+  //       } else {
+  //         ref_item = item;
+  //       }
+  //     }
+  //     ptfile.addShot( (short)0, from, to, item.mLength, item.mBearing, item.mClino, item.mRoll, extend, item.mComment );
+  //   }
 
-    // if ( sketch != null ) {
-    //   // TODO add sketch
-    // }
+  //   // if ( sketch != null ) {
+  //   //   // TODO add sketch
+  //   // }
 
-    try {
-      // FileOutputStream fos = TDFile.getFileOutputStream( file );
-      // OutputStream os = TDFile.getMSoutput( "top", survey_name + ".top", "application/octet-stream" );
-      ptfile.write( os );
-      os.close();
-      return 1;
-    } catch ( IOException e ) {
-      TDLog.e( "Failed PocketTopo export: " + e.getMessage() );
-      return 0;
-    }
-  }
+  //   try {
+  //     // FileOutputStream fos = TDFile.getFileOutputStream( file );
+  //     // OutputStream os = TDFile.getMSoutput( "top", survey_name + ".top", "application/octet-stream" );
+  //     ptfile.write( os );
+  //     os.close();
+  //     return 1;
+  //   } catch ( IOException e ) {
+  //     TDLog.e( "Failed PocketTopo export: " + e.getMessage() );
+  //     return 0;
+  //   }
+  // }
+
   // =======================================================================
   // THERION EXPORT Therion
   //   NOTE handled flags: duplicate surface

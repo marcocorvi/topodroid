@@ -129,7 +129,7 @@ public class SymbolPoint extends Symbol
 
   /** @return the point path
    */
-  @Override public Path getPath( ) { return mPath; }
+  @Override public Path getSymbolPath( ) { return mPath; }
 
   /** @return the point original path
    * @NOTE origPath could be stored with the path is computed

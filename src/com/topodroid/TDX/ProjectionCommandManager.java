@@ -52,12 +52,12 @@ class ProjectionCommandManager
   //   final Iterator i1 = paths.iterator();
   //   while ( i1.hasNext() ){
   //     final DrawingPath drawingPath = (DrawingPath) i1.next();
-  //     drawingPath.flipXAxis( z );
+  //     drawingPath.flipXAxis( );
   //   }
   // }
 
   // from ICanvasCommand
-  // public void flipXAxis(float z)
+  // public void flipXAxis( )
   // {
   //   synchronized( mGridStack1 ) {
   //     flipXAxes( mGridStack1 );
@@ -70,7 +70,7 @@ class ProjectionCommandManager
   //   }
   //   synchronized( TDPath.mStationsLock ) {
   //     for ( DrawingStationName st : mStations ) {
-  //       st.flipXAxis(z);
+  //       st.flipXAxis( );
   //     }
   //   }
   // }

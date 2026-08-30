@@ -109,7 +109,7 @@ class EraseCommand implements ICanvasCommand
   // ------------- from ICanvasCommand
   /** flip X axis - it does nothing
    */
-  public void flipXAxis(float z) { } 
+  public void flipXAxis( ) { } 
 
   /** shift - it does nothing
    * @param x  X shift

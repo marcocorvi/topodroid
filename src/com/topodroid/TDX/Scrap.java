@@ -1069,7 +1069,7 @@ public class Scrap
    * @param size ???
    * @return true if the line lp1 has been added to a line in the sketch
    */
-  boolean getLineToContinue( DrawingLinePath ap, LinePoint lq1, LinePoint lq2,  int type, float zoom, float size ) 
+  boolean tryToContinueLine( DrawingLinePath ap, LinePoint lq1, LinePoint lq2,  int type, float zoom, float size ) 
   {
     float delta = 2 * size / zoom;
     // TDLog.v("get line to continue, type " + type + " delta " + delta );
@@ -1843,16 +1843,15 @@ public class Scrap
   // }
 
   /** flip horizontally
-   * @param z   ???
    */
-  void flipXAxis( float z )
+  void flipXAxis( )
   {
     if ( mCurrentStack != null ) {
       Selection selection = new Selection();
       synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           if ( cmd.commandType() == 0 ) {
-            cmd.flipXAxis(z);
+            cmd.flipXAxis( );
             DrawingPath path = (DrawingPath)cmd;
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               ((DrawingLinePath)path).flipReversed();
@@ -1867,7 +1866,7 @@ public class Scrap
     }
     synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationUser p : mUserStations ) {
-        p.flipXAxis(z);
+        p.flipXAxis( );
       }
     }
   }

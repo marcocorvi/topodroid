@@ -403,7 +403,7 @@ public class PlotReloadWindow extends ItemDrawer
     PlotBackup plot = mBackups.get( mPos );
     mReloadSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
     setTitle( plot.desc );
-    boolean ret = mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename, false ); // save plot name in paths
+    boolean ret = mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename ); // save plot name in paths
     if ( ! ret ) {
       TDLog.e("Reload file pos " + mPos + " " + plot.tdr );
       // TDToast.makeBad( R.string.tdr_load_fail );

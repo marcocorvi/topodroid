@@ -589,13 +589,12 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // }
 
   /** flip the profile - only profile manager
-   * @param z   ???
    * @param scrap  whether ti flip only the current scrap
    */
-  void flipProfile( float z, boolean scrap )
+  void flipProfile( boolean scrap )
   {
     if ( mCommandManager2 == null ) return;
-    mCommandManager2.flipXAxis( z, scrap );
+    mCommandManager2.flipXAxis( scrap );
   }
 
   // static Handler previewDoneHandler = new Handler()

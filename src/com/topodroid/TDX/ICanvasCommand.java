@@ -30,7 +30,7 @@ public interface ICanvasCommand
 
     // public void undoCommand();
 
-    void flipXAxis(float z);
+    void flipXAxis( );
     void shiftPathBy( float x, float y );
     void scalePathBy( float z, Matrix m );
     void affineTransformPathBy( float[] mm, Matrix m );

@@ -54,7 +54,7 @@ public class SymbolArea extends Symbol
   //  */
   // @Override public int getColor() { return (mPaint == null)? 0 : mPaint.getColor(); }
 
-  @Override public Path   getPath()  { return mPath; }
+  @Override public Path   getSymbolPath()  { return mPath; }
 
   @Override public boolean isOrientable() { return mOrientable; }
 

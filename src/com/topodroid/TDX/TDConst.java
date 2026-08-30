@@ -81,7 +81,7 @@ public class TDConst
     if ( ext.equalsIgnoreCase("csv") ) return SURVEY_FORMAT_CSV;
     if ( ext.equalsIgnoreCase("dxf") ) return SURVEY_FORMAT_DXF;
     if ( ext.equalsIgnoreCase("csx") ) return SURVEY_FORMAT_CSX;
-    // if ( ext.equalsIgnoreCase("top") ) return SURVEY_FORMAT_TOP;
+    if ( ext.equalsIgnoreCase("top") ) return SURVEY_FORMAT_TOP;
     if ( ext.equalsIgnoreCase("srv") ) return SURVEY_FORMAT_SRV;
     if ( ext.equalsIgnoreCase("kml") ) return SURVEY_FORMAT_KML;
     // if ( ext.equalsIgnoreCase("plt") ) return SURVEY_FORMAT_PLT;
@@ -295,6 +295,7 @@ public class TDConst
 
   // ======= DATA EXPORT  ======
 
+  // index in the array mSurveyExportEnable
   public final static int SURVEY_POS_ZIP       = 0;
   public final static int SURVEY_POS_COMPASS   =  1;
   public final static int SURVEY_POS_CSURVEY   =  2;

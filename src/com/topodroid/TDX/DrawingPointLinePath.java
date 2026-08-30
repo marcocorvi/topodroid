@@ -193,14 +193,13 @@ public class DrawingPointLinePath extends DrawingPath
   }
 
   /** flip the path horizontally
-   * @param z   actually unused
    */
   // from ICanvasCommand
   @Override
-  public void flipXAxis( float z )
+  public void flipXAxis( )
   {
-    super.flipXAxis(z);
-    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) lp.flipXAxis(z);
+    super.flipXAxis( );
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) lp.flipXAxis( );
     retracePath();
   }
 

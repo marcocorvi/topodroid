@@ -685,9 +685,9 @@ public class DrawingCommandManager
    */
   private void flipXAxes( List< DrawingPath > paths )
   {
-    final float z = 1/mScale;
+    // final float z = 1/mScale;
     for ( DrawingPath path : paths ) {
-      path.flipXAxis( z );
+      path.flipXAxis( );
     }
   }
 
@@ -696,9 +696,9 @@ public class DrawingCommandManager
    */
   private void flipSplayXAxes( List< DrawingSplayPath > paths )
   {
-    final float z = 1/mScale;
+    // final float z = 1/mScale;
     for ( DrawingSplayPath path : paths ) {
-      ((DrawingPath)path).flipXAxis( z ); // IS THIS OK ???
+      ((DrawingPath)path).flipXAxis( ); // IS THIS OK ???
     }
   }
 
@@ -707,11 +707,11 @@ public class DrawingCommandManager
    * @param flip_scrap  whether to flip only current scrap
    * @note from ICanvasCommand
    */
-  public void flipXAxis( float z, boolean flip_scrap )
+  public void flipXAxis( /* float z, */ boolean flip_scrap )
   {
     synchronized( TDPath.mGridsLock ) {
       flipXAxes( mGridStack1 );
-      if ( mNorthLine != null ) mNorthLine.flipXAxis(z);
+      if ( mNorthLine != null ) mNorthLine.flipXAxis( );
       flipXAxes( mGridStack10 );
       flipXAxes( mGridStack100 );
     }
@@ -723,14 +723,14 @@ public class DrawingCommandManager
     synchronized( mSyncOutline ) { mPlotOutline.clear(); }
  
     synchronized( TDPath.mStationsLock ) {
-      for ( DrawingStationName st : mStations ) st.flipXAxis(z);
-      // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis(z);
+      for ( DrawingStationName st : mStations ) st.flipXAxis( );
+      // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis( );
     }
     synchronized( mSyncScrap ) {
       if ( flip_scrap ) {
-        if ( mCurrentScrap != null ) mCurrentScrap.flipXAxis( z );
+        if ( mCurrentScrap != null ) mCurrentScrap.flipXAxis( );
       } else {
-        for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
+        for ( Scrap scrap : mScraps ) scrap.flipXAxis( );
       }
     }
   }
@@ -1682,7 +1682,7 @@ public class DrawingCommandManager
    */
   boolean getLineToContinue( DrawingLinePath lp, LinePoint lp1, LinePoint lp2,  int type, float zoom, float size ) 
   {
-    return mCurrentScrap.getLineToContinue( lp, lp1, lp2, type, zoom, size );
+    return mCurrentScrap.tryToContinueLine( lp, lp1, lp2, type, zoom, size );
   }
 
   /** get the line to continue

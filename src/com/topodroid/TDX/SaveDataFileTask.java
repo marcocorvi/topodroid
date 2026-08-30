@@ -257,12 +257,12 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             // TDToast.make( "WARNING TopoRobot export is untested" );
             ret = TDExporter.exportSurveyAsTrb( bw, mSid, mData, mInfo, mSurveyName, mExportInfo.first );
             break;
-          case TDConst.SURVEY_FORMAT_TOP: // PocketTopo
-            // fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getTopFileWithExt( mSurvey ) );
-            fos = TDsafUri.docFileOutputStream( pfd );
-            pathname = mSurvey + TDPath.TOP;
-            ret = TDExporter.exportSurveyAsTop( fos, mSid, mData, mInfo, null, null, mSurvey );
-            break;
+          // case TDConst.SURVEY_FORMAT_TOP: // PocketTopo
+          //   // fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getTopFileWithExt( mSurvey ) );
+          //   fos = TDsafUri.docFileOutputStream( pfd );
+          //   pathname = mSurvey + TDPath.TOP;
+          //   ret = TDExporter.exportSurveyAsTop( fos, mSid, mData, mInfo, null, null, mSurvey );
+          //   break;
           case TDConst.SURVEY_FORMAT_TH: // Therion
           default:
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getThFileWithExt( mSurvey ) ) );

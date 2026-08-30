@@ -57,10 +57,9 @@ public class LinePoint extends Point2D
   }
 
   /** flip horizontally
-   * @param z   unused
    * @note from ICanvasCommand
    */
-  public void flipXAxis(float z)
+  public void flipXAxis( )
   {
     float dx = 2 * DrawingUtil.CENTER_X;
     x1 = dx - x1;

@@ -281,10 +281,9 @@ public class DrawingPath extends RectF
   }
   
   /** flip horizontally
-   * @param z   unused
    * @note from ICanvasCommand
    */
-  public void flipXAxis( float z )
+  public void flipXAxis( )
   {
     float dx = 2 * DrawingUtil.CENTER_X;
     float offx = dx - 2 * cx; // OK for non-orientable points

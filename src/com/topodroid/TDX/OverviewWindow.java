@@ -679,7 +679,7 @@ public class OverviewWindow extends ItemDrawer
       // TDLog.v( "load tdr file " + fullName );
 
       String tdr = TDPath.getTdrFileWithExt( fullName );
-      if ( ! mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName, true ) ) { // save plot fullname in paths
+      if ( ! mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ) ) { // save plot fullname in paths
         TDLog.e("Overview load failure " + fullName );
         // TDToast.makeBad( R.string.tdr_load_fail );
       } else {

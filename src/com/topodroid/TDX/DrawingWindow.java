@@ -1197,20 +1197,20 @@ public class DrawingWindow extends ItemDrawer
    * @param cosine  used only for splays: cosine of the angle (splay,leg) or (splay,plane)
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
+   * @return the newly created path
    */
   private DrawingPath addFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                              float cosine, boolean splay, boolean selectable )
   {
-    DrawingPath path = null;
     if ( splay ) { 
       DrawingSplayPath dpath = makeFixedSplay( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine );
       mDrawingSurface.addFixedSplayPath( dpath, selectable );
-      path = dpath; // not needed UNUSED
+      return dpath; 
     } else { // DrawingPath
-      path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
+      DrawingPath path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
       mDrawingSurface.addFixedLegPath( path, selectable );
+      return path;
     }
-    return path;
   }
 
   /** used to append legs and splays to the respective list
@@ -1222,20 +1222,17 @@ public class DrawingWindow extends ItemDrawer
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
    */
-  private DrawingPath appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
+  private void appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                                 float cosine, boolean splay, boolean selectable )
   {
-    DrawingPath path = null;
     int typ = PlotType.isPlan( type )? DrawingSurface.DRAWING_PLAN : DrawingSurface.DRAWING_PROFILE;
     if ( splay ) { 
       DrawingSplayPath dpath = makeFixedSplay( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine );
       mDrawingSurface.appendFixedSplayPath( typ, dpath, selectable );
-      path = dpath; // not needed UNUSED
     } else { // DrawingPath
-      path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
+      DrawingPath path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
       mDrawingSurface.appendFixedLegPath( typ, path, selectable );
     }
-    return path;
   }
 
   /** @return a drawing splay path
@@ -7414,7 +7411,7 @@ public class DrawingWindow extends ItemDrawer
     {
       TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_FLIP );
       // assert( mLastLinePath == null );
-      mDrawingSurface.flipProfile( mZoom, scrap );
+      mDrawingSurface.flipProfile( scrap );
       if ( flip_shots ) {
         DBlock blk;
         for ( NumShot sh : mNum.getShots() ) {
@@ -10468,7 +10465,7 @@ public class DrawingWindow extends ItemDrawer
     ydelta *= DrawingUtil.SCALE_FIX;
     String fullName = TDInstance.survey + "-" + plt.name;
     String tdr = TDPath.getTdrFileWithExt( fullName );
-    boolean ret = mDrawingSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ null, false ); // do not save plot name in paths
+    boolean ret = mDrawingSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ null ); // do not save plot name in paths
   }
 
   /** split the current plot: selected items are moved or copied to a new plot

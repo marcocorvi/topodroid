@@ -454,15 +454,13 @@ public class DrawingStationName extends DrawingPointPath
   // }
 
   /** flip horizontally
-   * @param z   ???
    * @note from ICanvasCommand
    */
   @Override
-  public void flipXAxis( float z )
+  public void flipXAxis( )
   {
-    super.flipXAxis(z);
+    super.flipXAxis( );
     // mPath.offset( -2 * cx, 0 );
-
     if ( mXSectionType != PlotType.PLOT_NULL ) {
       mDX = - mDX; // FLIP flip direction
     }

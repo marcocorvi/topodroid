@@ -130,7 +130,7 @@ public class SymbolPointLibrary extends SymbolLibrary
    */
   Path getPointPath( int k ) 
   {
-    return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getPath( );
+    return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getSymbolPath( );
   }
 
   /** @return the original drawing path of a point

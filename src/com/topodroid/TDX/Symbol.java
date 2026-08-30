@@ -215,13 +215,13 @@ public class Symbol implements SymbolInterface
 
   /** @return the symbol path - default to null
    */
-  public Path   getPath()       { return null; }
+  public Path   getSymbolPath()       { return null; }
 
-  /** @return the symbol scaled path - default to getPath()
+  /** @return the symbol scaled path - default to getSymbolPath()
    */
-  public Path   getScaledPath() { return getPath(); }
+  public Path   getScaledPath() { return getSymbolPath(); }
 
-  /** @return the symbol scaled and oriented path - default to getPath()
+  /** @return the symbol scaled and oriented path - default to getScaledPath()
    */
   public Path   getScaledOrientedPath() { return getScaledPath(); }
 
