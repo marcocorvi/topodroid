@@ -122,7 +122,7 @@ class ShotEditDialog extends MyDialog
   private String shot_clino;     // clino    - distance
   // private boolean shot_manual;
   private boolean editable;      // whether the shot data are editable
-  private float shot_stretch; // FIXME_STRETCH
+  private float shot_stretch;    // fractional part of the shot extend - FIXME_STRETCH
 
   private String shot_extra;
   private int  shot_extend;

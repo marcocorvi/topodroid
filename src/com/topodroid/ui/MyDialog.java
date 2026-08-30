@@ -48,8 +48,8 @@ import android.graphics.drawable.ColorDrawable;
 import androidx.annotation.RequiresApi;
 
 
-public class MyDialog extends Dialog
-                      // implements View.OnClickListener
+abstract public class MyDialog extends Dialog
+                               // implements View.OnClickListener
 {
   protected final Context mContext;
   protected final TopoDroidApp mApp;

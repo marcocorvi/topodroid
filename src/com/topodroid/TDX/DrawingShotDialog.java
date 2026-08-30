@@ -89,7 +89,7 @@ class DrawingShotDialog extends MyDialog
   private DrawingPath mPath;
   private int mFlag; // can barrier/hidden FROM and TO
   private int mIntExtend; // used to set the progress in the Stretch Bar
-  private float mStretch; // FIXME_STRETCH use a slider
+  private float mStretch; // fractional part of the extend - FIXME_STRETCH use a slider
 
   // 0x01 can barrier FROM
   // 0x02 can hidden  FROM

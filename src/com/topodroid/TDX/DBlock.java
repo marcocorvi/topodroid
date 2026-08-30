@@ -66,13 +66,13 @@ public class DBlock
   private long mCavwayFlag = 0;
   // block type is a superset of the leg-type which is in the database table
   private int  mBlockType;     // data type: 0=BLANK, 1=LEG, 2=SEC_LEG, 3=BLANK_LEG, 4=BACK_LEG, 5=BUNDER, 6=SPLAY, ... 
-  private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
+  private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot ... @see ShotType
   boolean mWithPhoto;
   private boolean mFailBacksplay;  // whether this splay failed to backsight the preceeding leg
 
   private boolean mMultiBad; // whether it disagree with siblings
-  private float mStretch;
-  private String mAddress; // DistoX address - used only in exports
+  private float mStretch;    // fractional part of the extend - FIXME_STRETCH
+  private String mAddress;   // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
 
   long mRawMx = 0; // (M1x,M2x) in four bytes of a long: M1x.high M1x.low M2x.high M2x.low
@@ -441,7 +441,9 @@ public class DBlock
   // void setStretch( float stretch ) { mStretch = stretch; } // UNUSED
   public float getStretch() { return mStretch; }
 
-  public float getStretchedExtend() { return mExtend + mStretch; } // UNUSED
+  // /** @return the float extend - UNUSED
+  //  */
+  // public float getStretchedExtend() { return mExtend + mStretch; }
 
   /** flip the block extend and stretch
    * @note called only by ShotWindow
