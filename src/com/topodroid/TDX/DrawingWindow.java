@@ -1589,7 +1589,7 @@ public class DrawingWindow extends ItemDrawer
       mSectionPt = findSectionPoint( scrap_name );
     }
     if ( mSectionPt != null ) {
-      List<DrawingLinePath> outline = mDrawingSurface.getSectionOutline( mSectionPt.cx-DrawingUtil.CENTER_X, mSectionPt.cy-DrawingUtil.CENTER_Y, mFullName3 );
+      List<DrawingLinePath> outline = mDrawingSurface.getSectionOutline( mSectionPt.cx-DrawingUtil.CENTER_X, mSectionPt.cy-DrawingUtil.CENTER_Y );
       // TDLog.v("outline size " + outline.size() + " at " + mSectionPt.cx + " " + mSectionPt.cy );
       setXSectionOutline( mSectionPt, mFullName3, outline );
       // setXSectionOutline( mSectionPt, mFullName3, mSectionPt.mScrap, true, mSectionPt.cx, mSectionPt.cy );
@@ -6057,7 +6057,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // TDLog.v( "PLOT line section dialog TT " + tt + " line type " + mCurrentLine );
-    new DrawingLineSectionDialog( mActivity, this, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt, center ).show();
+    new DrawingLineSectionDialog( mActivity, this, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt, center, null ).show();
   }
 
   // -------------------------------------------------------------
@@ -6434,9 +6434,8 @@ public class DrawingWindow extends ItemDrawer
 
       st.setXSection( azimuth, clino, type );
       // if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
-        int offset = TDSetting.mXSectionOffset;
-        float x5 = st.getXSectionX( offset ); 
-        float y5 = st.getXSectionY( offset );
+        float x5 = st.getXSectionX( TDSetting.mXSectionOffset ); 
+        float y5 = st.getXSectionY( TDSetting.mXSectionOffset );
         if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
         // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
         String scrap_option = TDString.OPTION_SCRAP + " " + TDInstance.survey + "-" + xs_id;
@@ -6621,7 +6620,42 @@ public class DrawingWindow extends ItemDrawer
       recomputeReferences( mNum, mZoom );
     }
   }
+
+  /** insert a section-point for at-station xsection
+   * @param st    station point
+   * @param section_name  scrap name of the x-section
+   */
+  void addStationSectionPoint( DrawingStationName st, String section_name )
+  {
+    float x5 = st.getXSectionX( TDSetting.mXSectionOffset );
+    float y5 = st.getXSectionY( TDSetting.mXSectionOffset );
+    addSectionPoint( st, x5, y5, section_name );
+  }
+
+  void addLegSectionPoint( DrawingLinePath line, String section_name )
+  {
+    float x5 = line.mLast.x + line.mDx * 20; 
+    float y5 = line.mLast.y + line.mDy * 20; 
+    addSectionPoint( line, x5, y5, section_name );
+  }
   
+  private void addSectionPoint( IDrawingLink link, float x5, float y5, String section_name )
+  {
+    String scrap_option = TDString.OPTION_SCRAP + " " + section_name;
+    DrawingPointPath point = new DrawingPointPath( BrushManager.getPointSectionIndex(),
+                                                   x5, y5, PointScale.SCALE_M, 
+                                                   null, // no text 
+                                                   scrap_option, mDrawingSurface.scrapIndex() );
+    point.setLink( link );
+    mDrawingSurface.addDrawingPath( point );
+    String tdr  = TDPath.getTdrFile( section_name + ".tdr" );
+    TDLog.v("add station section-point: scrap " + section_name + " tdr " + tdr );
+    List<DrawingLinePath> outline = DrawingIO.doLoadOutlineDataStream( null, tdr,
+                                      point.cx-DrawingUtil.CENTER_X, point.cy-DrawingUtil.CENTER_Y,
+                                      section_name, -1 ); // -1: scrap_id (not used)
+    setXSectionOutline( point, section_name, outline );
+  }
+
   /** add a therion station point
    * @param st    (user) station point
    */
@@ -7780,7 +7814,10 @@ public class DrawingWindow extends ItemDrawer
                 break;
             }
             if ( name != null ) {
+              // TDLog.v("ask delete name " + name );
               askDeleteItem( p, t, name );
+            // } else {
+            //   TDLog.v("ask delete name null");
             }
           } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
             if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
@@ -7804,7 +7841,7 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( st.getName() );
               boolean hidden  = mNum.isHidden( st.getName() );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs, section_name ).show();
             } else if ( item instanceof DrawingPointPath ) {
               DrawingPointPath point = (DrawingPointPath)(item);
               // TDLog.v( "edit point type " + point.mPointType );
@@ -9310,6 +9347,10 @@ public class DrawingWindow extends ItemDrawer
     return false;
   }
 
+  /** 
+   * @param filename   tdr-filename (with ".tdr" extension)
+   * @param type       plot type
+   */
   void doRecover( String filename, long type )
   {
     // TDLog.v("Drawing recover " + filename + " type " + type );

@@ -113,7 +113,7 @@ public class DrawingStationName extends DrawingPointPath
 
   void highlightName( boolean on_off ) { mHighlight = on_off; }
 
-  /** @return the station name
+  /** @return the station name ( num name )
    */
   public String getName() { return mName; }
 

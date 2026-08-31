@@ -194,6 +194,11 @@
       <Button android:id="@+id/btn_xdelete"
         style="@style/button_default"
         android:text="@string/button_delete"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_xpoint"
+        style="@style/button_default"
+        android:text="@string/button_xpoint"
       />
     </LinearLayout>
 

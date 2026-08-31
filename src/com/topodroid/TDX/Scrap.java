@@ -2995,9 +2995,8 @@ public class Scrap
    * @param outines   list of outlines
    * @param dx        X shift
    * @param dy        Y shift
-   * @param name      unused
    */
-  void addOutline( ArrayList<DrawingLinePath> outlines, float dx, float dy, String name )
+  void addOutline( ArrayList<DrawingLinePath> outlines, float dx, float dy )
   {
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack  ) {
@@ -3787,5 +3786,29 @@ public class Scrap
       }
     }
   }
+
+  /** @returni true if there is a sectioon-point at a given scrap name
+   * @param name  section scrap name, ie,  <survey_name>-[xs|xh]-<station_name>-<plot_name>
+   * @note this method scans all the items and is not efficient: somehow the scrap should keep a list of the section-points
+   */
+  boolean hasSectionPointWithScrapName( String name ) 
+  {
+    if ( name == null || name.length() == 0 ) return false;
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( ( cmd instanceof DrawingPointPath ) ) {
+        DrawingPointPath pt = (DrawingPointPath)cmd;
+        if ( BrushManager.isPointSection( pt.mPointType ) ) {
+          if ( name.equals( pt.getOption( TDString.OPTION_SCRAP ) ) ) {
+            TDLog.v("SectionPoint options " + pt.getOptions() + " scrap " + name + " --> TRUE");
+            return true;
+          } else {
+            TDLog.v("SectionPoint options " + pt.getOptions() + " scrap " + name + " --> FALSE");
+          }
+        }
+      }
+    }
+    return false;
+  }
+
 
 }

@@ -412,7 +412,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_team_required">Team required</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory already exists</string -->
-    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
+    <!-- UNUSED string name="error_nick_required">X-section name required</string -->
     <string name="error_start_required">Reference station required</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
     <string name="error_station_required">Station required</string>
@@ -1022,8 +1022,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
 
     <string name="button_write"     >Upload</string>
-    <string name="button_xsection" copyable="fr">X-Section</string>
-    <string name="xsection" copyable="fr">X-Section</string>
+    <string name="button_xsection" copyable="fr">X-section</string>
+    <string name="button_xpoint">Section-Point</string>
+    <string name="xsection" copyable="fr">X-section</string>
     <string name="buffer" copyable="all">Buffer</string>
     <string name="buffer_size">Buffer size: %1$d</string>
     <string name="buffer_sorted">sorted</string>
@@ -2083,8 +2084,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_picker_type_summary">Drawing tool picker type</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
   <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
-  <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->
-  <!-- UNUSED string name="pref_section_stations_summary">X-Section reference stations</string -->
+  <!-- UNUSED string name="pref_section_stations_title">X-section stations</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">X-section reference stations</string -->
   <string name="pref_station_size_title">Station name size</string>
   <string name="pref_station_size_summary">Size of station names</string>
   <string name="pref_zoom_controls_title">Zoom controls</string>

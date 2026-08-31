@@ -887,12 +887,12 @@ public class DrawingIO
   }
 
   /** load the outline of a xection scrap
-   * @param surface    drawing surface
+   * @param surface    drawing surface (can be null)
    * @param filename   xsection filename
-   * @param dx
-   * @param dy
+   * @param dx         X offset
+   * @param dy         Y offset
    * @param name       xsection name
-   * @param scrap_id   index of the scrap of the section point
+   * @param scrap_id   index of the scrap of the section point (used only if surface is not null)
    * @return list of outline paths
    */
   static List<DrawingLinePath> doLoadOutlineDataStream( DrawingSurface surface,
@@ -1002,11 +1002,13 @@ public class DrawingIO
                && ( BrushManager.isLineWallGroup( path.mLineType ) || path.hasOutline() ) ) {
             // TDLog.v("outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
             path.setPathPaint( BrushManager.outlinePaint );
-            if ( name != null ) { // xsection outline
-              // TDLog.v("Drawing IO add xsection outline: " + name + " scrap ID " + scrap_id );
-              surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path, scrap_id ) );
-            } else {
-              surface.addScrapOutlinePath( path );
+            if ( surface != null ) {
+              if ( name != null ) { // xsection outline
+                // TDLog.v("Drawing IO add xsection outline: " + name + " scrap ID " + scrap_id );
+                surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path, scrap_id ) );
+              } else {
+                surface.addScrapOutlinePath( path );
+              }
             }
             ret.add( path );
           }

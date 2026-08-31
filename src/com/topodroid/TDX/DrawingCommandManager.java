@@ -2354,14 +2354,14 @@ public class DrawingCommandManager
   /** @return the list of outlines shifted by (dx,dy)
    * @param dx  X shift
    * @param dy  Y shift
-   * @param name section name
+   * @note used for XSection manager only
    */
-  List<DrawingLinePath> getSectionOutline( float dx, float dy, String name )
+  List<DrawingLinePath> getSectionOutline( float dx, float dy )
   {
     ArrayList<DrawingLinePath> ret = new ArrayList<>();
     // TDLog.v("get section outline - scraps " + mScraps.size() );
     for ( Scrap scrap : mScraps ) {
-      scrap.addOutline( ret, dx, dy, name );
+      scrap.addOutline( ret, dx, dy );
     }
     return ret;
   }
@@ -2533,4 +2533,9 @@ public class DrawingCommandManager
     for ( Scrap scrap : mScraps ) scrap.recoverSymbols(); 
   }
   
+  /** @return true if there is a sectioon-point at a given scrap name
+   * @param name   xsection scrap name
+   */
+  boolean hasSectionPointWithScrapName( String name ) { return (mCurrentScrap == null)? false : mCurrentScrap.hasSectionPointWithScrapName( name ); }
+
 }

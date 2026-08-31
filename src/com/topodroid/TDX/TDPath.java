@@ -482,7 +482,7 @@ public class TDPath
   // }
 
   /** @return full pathname of a tdr file, in the tdr folder
-   * @param name   tdr-file name
+   * @param name   tdr-file name (with ".tdr" extension)
    */
   public static String getTdrFile( String name ) { return APP_TDR_PATH + "/" + name; }
 

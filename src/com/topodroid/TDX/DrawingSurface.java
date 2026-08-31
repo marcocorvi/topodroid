@@ -1011,12 +1011,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /** @return the list of section outlines shifted by (dx,dy)
    * @param dx  X shift
    * @param dy  Y shift
-   * @param name section name
    */
-  List<DrawingLinePath> getSectionOutline( float dx, float dy, String name )
+  List<DrawingLinePath> getSectionOutline( float dx, float dy )
   {
     if ( mCommandManager3 == null ) return null;
-    return mCommandManager3.getSectionOutline( dx, dy, name );
+    return mCommandManager3.getSectionOutline( dx, dy );
   }
 
   /** add a scrap outline 

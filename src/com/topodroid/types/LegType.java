@@ -34,8 +34,7 @@ public class LegType
    */
   public static String getString( long leg_type ) 
   {
-    if ( leg_type < 0 || leg_type > 9L ) return null;
-    return asString[ (int)leg_type ];
+    return ( leg_type < 0 || leg_type > asString.length )? null : asString[ (int)leg_type ];
   }
 
   /** block-type to leg-type table
