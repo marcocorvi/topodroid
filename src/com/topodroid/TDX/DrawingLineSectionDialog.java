@@ -223,6 +223,14 @@ class DrawingLineSectionDialog extends MyDialog
       TDLayout.setMargins( mBtnSave, 0, -10, 40, 10 );
       mBtnSave.setOnClickListener( this );
     }
+
+    if ( mSectionName != null ) {
+      mBtnXPoint = new MyCheckBox( mContext, size, R.drawable.iz_xpoint, R.drawable.iz_xpoint );
+      button_list.addView( mBtnXPoint );
+      TDLayout.setMargins( mBtnXPoint, 0, -10, 40, 10 );
+      mBtnXPoint.setOnClickListener( this );
+    }
+
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
 

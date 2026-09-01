@@ -1662,4 +1662,14 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void recoverSymbols() { commandManager.recoverSymbols(); }
 
+  /** @returni true if there is a sectioon-point at a given scrap name
+   * @param name   xsection scrap name
+   */
+  boolean hasSectionPointWithScrapName( String name ) { return (commandManager == null)? false : commandManager.hasSectionPointWithScrapName( name ); }
+
+  /** clip a line to the scrap outline
+   * @param line  line to clip
+   */
+  void clipLine( DrawingLinePath line ) { if ( commandManager != null ) commandManager.clipLine( line ); }
+
 }

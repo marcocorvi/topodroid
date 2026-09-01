@@ -1009,8 +1009,10 @@ public class DrawingPointLinePath extends DrawingPath
   void setLast( LinePoint lp2 )
   {
     if ( lp2 != mLast ) { // 20230518 added test
-      mLast = lp2; // (2)
+      lp2.mPrev = mLast.mPrev;
+      if ( mLast.mPrev != null ) mLast.mPrev.mNext = lp2;
       if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
+      mLast = lp2; // (2)
       mLast.mNext = null;
     }
   }

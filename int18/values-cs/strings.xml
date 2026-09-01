@@ -1875,6 +1875,8 @@
     <string name="pref_linecurve_summary">Povolit funkci pro lokální vyhlazení nebo narovnání úseku linie</string>
     <string name="pref_linestraight_title">Narovnat celé linie</string>
     <string name="pref_linestraight_summary">Povolit funkci pro napřímení linie v celé její délce</string>
+  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
+  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
     <string name="pref_path_multiselect_title">Hromadný výběr cest</string>
     <string name="pref_path_multiselect_summary">Povolit nástroj pro vícenásobný výběr nakreslených křivek</string>
     <string name="pref_plane_interpolation_title">Proložení rovinou</string>

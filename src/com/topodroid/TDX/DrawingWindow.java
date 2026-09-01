@@ -626,6 +626,9 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_SPLIT_SKETCH = 8;  // split the plot
   static final int MODE_SPLIT_SCRAP  = 9;  // split the scrap
 
+  // LOG
+  static final String[] modeStr = { "DRAW", "MOVE", "EDIT", "ZOOM", "SHFT", "ERAS", "ROT.", "SPL1", "SPL2" };
+
   private int mMode         = MODE_MOVE; // MODE_NONE;
   private int mTouchMode    = MODE_MOVE;
 
@@ -2214,7 +2217,8 @@ public class DrawingWindow extends ItemDrawer
           mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)mHotPath).mPointType ) );
           hasPointActions = true;
           DrawingPointPath point = (DrawingPointPath)mHotPath;
-          deletable =  ( ! BrushManager.isPointSection( point.mPointType ) );
+          // deletable =  ( ! BrushManager.isPointSection( point.mPointType ) ); // DELETE SECTION-POINT
+          deletable = true;
           setScaleToolbar( mHotPath );
           break;
         case DrawingPath.DRAWING_PATH_LINE:
@@ -3338,7 +3342,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    TDLog.v( "Drawing Activity on Resume " );
+    // TDLog.v( "Drawing Activity on Resume " );
     // TDLog.v( "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     doResume();
     if ( mDataDownloader != null ) {
@@ -3355,7 +3359,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   protected synchronized void onPause() 
   { 
-    TDLog.v( "Drawing Activity onPause " );
+    // TDLog.v( "Drawing Activity onPause " );
     doPause();
     super.onPause();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on pause done");
@@ -3367,7 +3371,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    TDLog.v("Drawing Activity on Start " );
+    // TDLog.v("Drawing Activity on Start " );
     TDLocale.resetTheLocale();
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
@@ -3384,7 +3388,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStop()
   {
     super.onStop();
-    TDLog.v("Drawing Activity onStop ");
+    // TDLog.v("Drawing Activity onStop ");
     saveRecentSymbols( mApp_mData );
     // doStop();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on stop done");
@@ -4904,6 +4908,7 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v("STYLUS action " + action + " of " + act );
     } else {
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
+        // TDLog.v("on Touch POINTER DOWN mode " + mMode + " " + mTouchMode );
         if ( mTouchMode == MODE_MOVE ) {
           if ( mMode == MODE_ERASE ) {
             finishErasing();
@@ -4916,6 +4921,7 @@ public class DrawingWindow extends ItemDrawer
         return true;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         int np = event.getPointerCount();
+        // TDLog.v("on Touch POINTER UP " + np + " mode " + mMode + " " + mTouchMode );
         if ( np > 2 ) return true;
         mTouchMode = MODE_MOVE;
         id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
@@ -4934,12 +4940,17 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("STYLUS action " + action + " at " + x_canvas + " " + y_canvas + " scene " + x_scene + " " + y_scene );
 
     if (action == MotionEvent.ACTION_DOWN) { // ---------------------------------------- DOWN
-      return onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
+      // TDLog.v("on Touch DOWN");
+      boolean ret = onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
+      // TDLog.v("on touch DOWN return " + ret + " mode " + modeStr[mMode] );
+      return ret;
 
     } else if ( action == MotionEvent.ACTION_MOVE ) { // ------------------------------- MOVE
+      // TDLog.v("on Touch MOVE");
       return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event );
 
     } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
+      // TDLog.v("on Touch UP");
       return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
     } else {
       TDLog.e("on touch - unhandled action " + action );
@@ -4957,6 +4968,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchUp( float xc, float yc, float xs, float ys )
   {
+    // TDLog.v("on touch up mode " + modeStr[mMode] + " " + modeStr[mTouchMode] );
     if ( checkLabelPath() ) return true;
     if ( onMenu ) {
       closeMenu();
@@ -5022,6 +5034,7 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 boolean add = true;
                 if ( mSymbol == SymbolType.LINE ) {
+                  if ( TDSetting.mLineClip && BrushManager.isLineClippable( mCurrentLine ) ) mDrawingSurface.clipLine( mCurrentLinePath );
                   boolean closed_line = TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine );
                   boolean joined_line = false;
                   if ( ! closed_line ) {
@@ -5345,6 +5358,7 @@ public class DrawingWindow extends ItemDrawer
         mPointerDown = false;
         modified();
       } else if ( mMode == MODE_EDIT ) {
+        // TDLog.v("do select");
         if ( Math.abs(mStartX - xc) < mPointingRadius 
           && Math.abs(mStartY - yc) < mPointingRadius ) {
           doSelectAt( xs, ys, mSelectSize );
@@ -5441,9 +5455,8 @@ public class DrawingWindow extends ItemDrawer
     HBXP_PointDown = false; // HBXP
     mDrawingSurface.endEraser();
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
-    // TDLog.v( "on touch down. mode " + mMode + " " + mTouchMode );
+    // TDLog.v( "on touch down. mode " + modeStr[mMode] + " " + modeStr[mTouchMode] );
 
-    // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " 
     // TDLog.v( "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " + yc + " [" + TopoDroidApp.mBorderTop + " " + TopoDroidApp.mBorderBottom + "]" );
 
     // float bottom = TopoDroidApp.mBorderBottom - mZoomTranslate;
@@ -5451,15 +5464,18 @@ public class DrawingWindow extends ItemDrawer
 
     if ( yc > TopoDroidApp.mBorderBottom ) {
       if ( ( ! mDrawingSurface.isFixedZoom() ) && mZoomBtnsCtrlOn && xc > TopoDroidApp.mBorderInnerLeft && xc < TopoDroidApp.mBorderInnerRight ) {
+        // TDLog.v("zoom controls");
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       } else if ( TDSetting.mSideDrag && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
+        // TDLog.v("set touchmode ZOOM");
         mTouchMode = MODE_ZOOM;
       }
     } else if ( TDSetting.mSideDrag && (yc < TopoDroidApp.mBorderTop) && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
       mTouchMode = MODE_ZOOM;
       SelectionPoint sp = mDrawingSurface.hotItem();
+      // TDLog.v("set touchmode ZOOM and get hotItem " + ( (sp == null)? "null" : "non-null" ) );
       if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
         DrawingPointPath path = (DrawingPointPath)(sp.mItem);
         if ( BrushManager.isPointOrientable(path.mPointType) ) {
@@ -5504,23 +5520,28 @@ public class DrawingWindow extends ItemDrawer
     } else if ( mMode == MODE_ERASE ) {
       startErasing( xs, ys, xc, yc );
     } else if ( mMode == MODE_EDIT ) {
+      // TDLog.v("mode EDIT");
       mStartX = xc;
       mStartY = yc;
       mEditMove = true;
       SelectionPoint pt = mDrawingSurface.hotItem();
       if ( pt != null ) {
+        // TDLog.v("non-null selection point " + pt.X() + " " + pt.Y() );
         if ( mLandscape ) {
           mEditMove = ( pt.distance( -ys, xs ) < d0 );
         } else {
           mEditMove = ( pt.distance( xs, ys ) < d0 );
         }
-      } 
+      // } else {
+        // TDLog.v("null selection point ");
+      }
       // doSelectAt( xs, ys, mSelectSize );
       mSaveX = xc;
       mSaveY = yc;
       // return false;
 
     } else if ( mMode == MODE_SHIFT ) {
+      // TDLog.v("shift");
       mShiftMove = true; // whether to move canvas in point-shift mode
                          // false if moving the hot point
       mStartX = xc;
@@ -6043,8 +6064,8 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.addDrawingPath( currentLine );
 
     if ( /* TDSetting.mAutoSectionPt && */ section_id != null ) {
-      float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
-      float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
+      float x5 = currentLine.mLast.x + currentLine.mDx * TDSetting.mXSectionOffset; 
+      float y5 = currentLine.mLast.y + currentLine.mDy * TDSetting.mXSectionOffset; 
       // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
       // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + section_id;
       String scrap_option = TDString.OPTION_SCRAP + " " + TDInstance.survey + "-" + section_id;
@@ -6634,8 +6655,8 @@ public class DrawingWindow extends ItemDrawer
 
   void addLegSectionPoint( DrawingLinePath line, String section_name )
   {
-    float x5 = line.mLast.x + line.mDx * 20; 
-    float y5 = line.mLast.y + line.mDy * 20; 
+    float x5 = line.mLast.x + line.mDx * TDSetting.mXSectionOffset; 
+    float y5 = line.mLast.y + line.mDy * TDSetting.mXSectionOffset; 
     addSectionPoint( line, x5, y5, section_name );
   }
   
@@ -6649,7 +6670,7 @@ public class DrawingWindow extends ItemDrawer
     point.setLink( link );
     mDrawingSurface.addDrawingPath( point );
     String tdr  = TDPath.getTdrFile( section_name + ".tdr" );
-    TDLog.v("add station section-point: scrap " + section_name + " tdr " + tdr );
+    // TDLog.v("add station section-point: scrap " + section_name + " tdr " + tdr );
     List<DrawingLinePath> outline = DrawingIO.doLoadOutlineDataStream( null, tdr,
                                       point.cx-DrawingUtil.CENTER_X, point.cy-DrawingUtil.CENTER_Y,
                                       section_name, -1 ); // -1: scrap_id (not used)
@@ -6791,7 +6812,7 @@ public class DrawingWindow extends ItemDrawer
         case MODE_SPLIT_SCRAP:
           break;
         default:
-          TDLog.v("set mode unknown: no change");
+          TDLog.e("set mode unknown: no change");
           break;
       }
       setTheTitle();
@@ -7557,9 +7578,10 @@ public class DrawingWindow extends ItemDrawer
         String name = null;
         if ( t == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pp = (DrawingPointPath)sp.mItem;
-          if ( ! BrushManager.isPointSection( pp.mPointType ) ) {
+          // TDLog.v("ask delete point type " + pp.mPointType );
+          // if ( ! BrushManager.isPointSection( pp.mPointType ) ) { // DELETE SECTION-POINT
             askDeleteItem( pp, t, BrushManager.getPointName( pp.mPointType ) );
-          }
+          // }
         } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)sp.mItem;
           if ( lp.size() <= 2 ) {
@@ -7802,9 +7824,9 @@ public class DrawingWindow extends ItemDrawer
             switch ( t ) {
               case DrawingPath.DRAWING_PATH_POINT:
                 DrawingPointPath point = ((DrawingPointPath)p);
-                if ( ! BrushManager.isPointSection( point.mPointType ) ) {
+                // if ( ! BrushManager.isPointSection( point.mPointType ) ) { // DELETE SECTION-POINT
                   name = BrushManager.getPointName( point.mPointType );
-                }
+                // }
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
                 name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
@@ -7841,6 +7863,16 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( st.getName() );
               boolean hidden  = mNum.isHidden( st.getName() );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
+              DrawingPointPath point = null;
+              String section_name = null;
+              if ( PlotType.isPlan( mType ) ) {
+                section_name = TDInstance.survey + "-xs-" + st.getName() + "-" + mName;
+              } else if ( PlotType.isProfile( mType ) ) {
+                section_name = TDInstance.survey + "-xh-" + st.getName() + "-" + mName;
+              }
+              if ( section_name != null ) {
+                if ( mDrawingSurface.hasSectionPointWithScrapName( section_name ) ) section_name = null;
+              }
               new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs, section_name ).show();
             } else if ( item instanceof DrawingPointPath ) {
               DrawingPointPath point = (DrawingPointPath)(item);
@@ -7883,9 +7915,12 @@ public class DrawingWindow extends ItemDrawer
                 // cross-section exists already
                 boolean h_section = PlotType.isProfile( mType ); // not really necessary
                 String id = line.getOption( "-id" );
-                // TDLog.v( "edit section line, id <" + id + ">" ); // default azimuth = 0 clino = 0
                 if ( id != null ) {
-                  new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null ).show();
+                  String section_name = TDInstance.survey + "-" + id;
+                  // TDLog.v( "edit section line, id <" + id + ">i section name " + section_name ); // default azimuth = 0 clino = 0
+                  if ( mDrawingSurface.hasSectionPointWithScrapName( section_name ) ) section_name = null;
+                  // null FROM, null TO, 0 AZIMUTH, 0 CLINO, null TT, null CENTER
+                  new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null, section_name ).show();
                 } else {
                   TDLog.e("edit section line with null id" );
                 }

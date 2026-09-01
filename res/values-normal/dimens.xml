@@ -13,9 +13,9 @@
 
   <dimen name="menumanpage">150sp</dimen>
   <dimen name="menuwidth">150sp</dimen>
-  <string name="labelweight" translatable="false">50</string>
-  <string name="valueweight" translatable="false">100</string>
-  <string name="stationweight" translatable="false">50</string>
+  <string name="labelweight">50</string>
+  <string name="valueweight">100</string>
+  <string name="stationweight">50</string>
 
   <dimen name="titlesize">18sp</dimen>
   <dimen name="titletextsize">20sp</dimen>

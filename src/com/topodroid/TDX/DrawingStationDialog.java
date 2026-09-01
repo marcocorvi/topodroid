@@ -317,6 +317,11 @@ class DrawingStationDialog extends MyDialog
             mBtnXSection.setOnClickListener( this );
             mCBhorizontal.setVisibility( View.GONE );
             mBtnXDelete.setOnClickListener( this );
+            if ( mXSectionName != null ) { 
+              mBtnXPoint.setOnClickListener( this );
+            } else {
+              mBtnXPoint.setVisibility( View.GONE );
+            }
             mBtnDirect.setVisibility( View.GONE );
             mBtnInverse.setVisibility( View.GONE );
           } 
@@ -379,6 +384,8 @@ class DrawingStationDialog extends MyDialog
       } else if ( /* TDLevel.overExpert && */ b == mBtnGeoCode ) {
         (new GeoCodeDialog( mContext, this, mGeoCode )).show();
         return;
+      } else if ( TDLevel.overNormal && b == mBtnXPoint ) {
+        mParent.addStationSectionPoint( mStation, mXSectionName );
       } else if ( /* TDLevel.overExpert && */ b == mBtnOkComment ) {
         boolean fail = true;
         String comment = TDUtil.getTextOrNull( mComment );

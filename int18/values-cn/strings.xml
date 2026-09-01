@@ -1951,6 +1951,8 @@
   <string name="pref_linecurve_summary">启用线段动作平稳/伸直</string>
   <string name="pref_linestraight_title">伸直线</string>
   <string name="pref_linestraight_summary">启用伸直所有线操作</string>
+  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
+  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
   <string name="pref_path_multiselect_title">路径的多个选项</string>
   <string name="pref_path_multiselect_summary">启用路径的多个选项操作</string>
   <!-- UNUSED string name="pref_composite_actions_title">合并操作</string -->

@@ -282,6 +282,7 @@ public class BrushManager
 
   // LINE CLOSED
   static boolean isLineClosed( int index )  { return mLineLib != null && mLineLib.isClosed( index ); }
+  static boolean isLineClippable( int index ) { return mLineLib != null && mLineLib.isClippable( index ); }
   static boolean isLineSection( int index ) { return mLineLib != null && index == mLineLib.mLineSectionIndex; }
   static boolean isLineUser( int idx )      { return mLineLib != null && idx == mLineLib.mLineUserIndex; }
   static boolean isLineWall( int idx )      { return mLineLib != null && idx == mLineLib.mLineWallIndex; }

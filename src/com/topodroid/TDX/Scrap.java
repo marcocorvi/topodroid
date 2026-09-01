@@ -3744,7 +3744,7 @@ public class Scrap
         }
       }
     }
-    TDLog.v("failed find section line " + scrap_name );
+    // TDLog.v("failed find section line " + scrap_name );
     return null;
   }
 
@@ -3799,10 +3799,10 @@ public class Scrap
         DrawingPointPath pt = (DrawingPointPath)cmd;
         if ( BrushManager.isPointSection( pt.mPointType ) ) {
           if ( name.equals( pt.getOption( TDString.OPTION_SCRAP ) ) ) {
-            TDLog.v("SectionPoint options " + pt.getOptions() + " scrap " + name + " --> TRUE");
+            // TDLog.v("SectionPoint options " + pt.getOptions() + " scrap " + name + " --> TRUE");
             return true;
-          } else {
-            TDLog.v("SectionPoint options " + pt.getOptions() + " scrap " + name + " --> FALSE");
+          // } else {
+          //   TDLog.v("SectionPoint options " + pt.getOptions() + " scrap " + name + " --> FALSE");
           }
         }
       }
@@ -3810,5 +3810,12 @@ public class Scrap
     return false;
   }
 
+  /** clip a line to this scrap outline
+   * @param line  line to clip
+   */
+  void clipLine( DrawingLinePath line ) 
+  {
+
+  }
 
 }

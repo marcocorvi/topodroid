@@ -599,6 +599,7 @@ public class TDSetting
 
   public static float mReduceAngle  = 45;    // minimal angle between segments of "straightened" lines
   public static float mReduceCosine = 0.7f;  // cosine of mReduceAngle
+  public static boolean mLineClip  = false; // whether to clip lines
 
   // public static boolean mZoomControls = false;
   public static int mZoomCtrl = 0; // 0: gone, 1: temporary, 2: permanent
@@ -684,8 +685,8 @@ public class TDSetting
   public static boolean mPlotCache       = true;  // default value
   public static float mDotRadius      = 5;  // radius of selection dots - splay dots are 1.5 as big
   public static float mArrowLength    = 8;
-  public static int   mSlopeLSide     = 20;  // l-side of slope lines
-  public static int   mXSectionOffset = 20;  // offset of section point
+  public static int   mSlopeLSide     = 20;  // l-side of slope lines [pxl] = 0.5 m
+  public static int   mXSectionOffset = 80;  // offset of section point [pxl = 2 m
 
 
   // NOTE not used, but could set a default for section splays
@@ -1553,6 +1554,7 @@ public class TDSetting
     ++k; mLineSnap      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_SNAP
     ++k; mLineCurve     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_CURVE
     ++k; mLineStraight  = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_STRAIGHT
+    ++k; mLineClip      = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_CLIP
     ++k; mPathMultiselect=prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_PATH_MULTISELECT
     ++k; mLineEnds       = tryInt( prefs,   key[k].key,      key[k].dflt );   // DISTOX_LINE_ENDS
     // ++k; mCompositeActions = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_COMPOSITE_ACTIONS
@@ -2374,10 +2376,12 @@ public class TDSetting
       mLineCurve = tryBooleanValue(         hlp, k, v, bool(key[7].dflt) );
     } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_LINE_STRAIGHT
       mLineStraight = tryBooleanValue(      hlp, k, v, bool(key[8].dflt) );
-    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_PATH_MULTISELECT (bool)
-      mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(key[9].dflt) );
-    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_LINE_ENDS
-      mLineEnds = tryIntValue( hlp, k, v, key[10 ].dflt );
+    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_LINE_CLIP
+      mLineClip = tryBooleanValue(      hlp, k, v, bool(key[9].dflt) );
+    } else if ( k.equals( key[10 ].key ) ) { // DISTOX_PATH_MULTISELECT (bool)
+      mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(key[10].dflt) );
+    } else if ( k.equals( key[11 ].key ) ) { // DISTOX_LINE_ENDS
+      mLineEnds = tryIntValue( hlp, k, v, key[110 ].dflt );
     // } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
     //   mCompositeActions = tryBooleanValue(  hlp, k, v, bool(key[10].dflt) );
 
@@ -3899,6 +3903,7 @@ B DISTOX_SAP5_BIT16_BUG true
       k="DISTOX_LINE_CURVE";            if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineCurve) );
 
       k="DISTOX_LINE_STRAIGHT";         if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineStraight) );
+      k="DISTOX_LINE_CLIP";             if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mLineClip) );
       k="DISTOX_REDUCE_ANGLE";          if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "F %s %.4f\n", k, mReduceAngle );
       k="DISTOX_SPLAY_ALPHA";           if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "I %s %d\n",   k, mSplayAlpha );
       // k="DISTOX_SPLAY_COLOR";        if ( TDPrefKey.checkKeyGroup(k, flag) ) pw.printf(Locale.US, "B %s %s\n",   k, tf(mSplayColor) );
@@ -4710,6 +4715,9 @@ B DISTOX_SAP5_BIT16_BUG true
               break;
             case "DISTOX_LINE_STRAIGHT":
               mLineStraight = Boolean.parseBoolean( value ); setPreference( editor, kay, mLineStraight );
+              break;
+            case "DISTOX_LINE_CLIP":
+              mLineClip = Boolean.parseBoolean( value ); setPreference( editor, kay, mLineClip );
               break;
             case "DISTOX_REDUCE_ANGLE":
               setReduceAngle( Float.parseFloat( value ) ); setPreference( editor, kay, mReduceAngle );

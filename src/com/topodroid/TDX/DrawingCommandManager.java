@@ -2538,4 +2538,10 @@ public class DrawingCommandManager
    */
   boolean hasSectionPointWithScrapName( String name ) { return (mCurrentScrap == null)? false : mCurrentScrap.hasSectionPointWithScrapName( name ); }
 
+  /** clip a line to the scrap outline
+   * @param line  line to clip
+   */
+  void clipLine( DrawingLinePath line ) { if ( mCurrentScrap != null ) mCurrentScrap.clipLine( line ); }
+
+
 }

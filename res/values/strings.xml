@@ -1999,6 +1999,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_linecurve_summary">Enable smooth/straighten line segment action</string>
   <string name="pref_linestraight_title">Straighten lines</string>
   <string name="pref_linestraight_summary">Enable straighten whole line action</string>
+  <string name="pref_lineclip_title">iClip lines</string>
+  <string name="pref_lineclip_summary">Enable line clipping to outline</string>
   <string name="pref_path_multiselect_title">Path multiselection</string>
   <string name="pref_path_multiselect_summary">Enable path multiselection action</string>
   <!-- UNUSED string name="pref_composite_actions_title">Composite actions</string -->

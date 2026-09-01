@@ -40,7 +40,8 @@ public class SymbolLine extends Symbol
   boolean mHasEffect; // whether the line paint has path-effect
   Path mPath;
   boolean mStyleStraight;
-  boolean mClosed;
+  boolean mClosed = false;
+  boolean mClippable = true;
   int mStyleX;            // X times (one out of how many point to use)
   Path mPathDir = null;
   Path mPathRev = null;
@@ -108,9 +109,10 @@ public class SymbolLine extends Symbol
     mPaint.setStrokeCap(Paint.Cap.ROUND);
     mPaint.setStrokeWidth( width * TDSetting.mLineThickness );
     mRevPaint = new Paint (mPaint );
-    mHasEffect = false;
+    mHasEffect     = false;
     mStyleStraight = false;
-    mClosed = false;
+    mClosed        = false;
+    mClippable     = true;
     mStyleX = 1;
   }
 
@@ -118,9 +120,11 @@ public class SymbolLine extends Symbol
   {
     super( Symbol.TYPE_LINE, null, null, fname, Symbol.W2D_DETAIL_SHP );
     mStyleStraight = false;
-    mClosed = false;
+    mClosed        = false;
+    mClippable     = true;
     mStyleX = 1;
     readFile( filepath, locale, iso );
+    if ( mClosed ) mClippable = false; // enforce closed lines are not clippable
     makeLinePath();
   }
 
@@ -164,6 +168,8 @@ public class SymbolLine extends Symbol
    *      group GROUP_NAME
    *      color 0xHHHHHH_COLOR 0xAA_ALPHA
    *      width WIDTH
+   *      clippable no
+   *      closed yes
    *      dash x1 y1 x2 y2 ...
    *      style straight | xN
    *      effect
@@ -267,6 +273,11 @@ public class SymbolLine extends Symbol
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s && vals[k].equals("yes") ) {
                 mClosed = true;
+              }
+            } else if ( vals[k].equals("clip") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s && vals[k].equals("no") ) {
+                mClippable = false;
               }
             } else if ( vals[k].equals("csurvey") ) {
               // syntax: csurvey <layer> <type> <category> <pen>

@@ -607,7 +607,7 @@ class TDPrefKey
     new TDPrefKey( B, FLT,  DR, "DISTOX_DRAWING_UNIT",     R.string.pref_drawing_unit_title,     R.string.pref_drawing_unit_summary,   "1.2" ),
     new TDPrefKey( B, FLT,  UI, "DISTOX_LABEL_SIZE",       R.string.pref_label_size_title,       R.string.pref_label_size_summary,     TDString.TWENTYFOUR ),
     new TDPrefKey( N, BOOL, UI, "DISTOX_SCALABLE_LABEL",   R.string.pref_scalable_label_title,   R.string.pref_scalable_label_summary, FALSE ),
-    new TDPrefKey( N, LONG, DR, "DISTOX_XSECTION_OFFSET",  R.string.pref_xsection_offset_title,  R.string.pref_xsection_offset_summary,"20" )
+    new TDPrefKey( N, LONG, DR, "DISTOX_XSECTION_OFFSET",  R.string.pref_xsection_offset_title,  R.string.pref_xsection_offset_summary,"80" )
   };
   
   // static TDPrefKey() mWals = {
@@ -685,6 +685,7 @@ class TDPrefKey
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_SNAP",        R.string.pref_linesnap_title,        R.string.pref_linesnap_summary,         FALSE ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_CURVE",       R.string.pref_linecurve_title,       R.string.pref_linecurve_summary,        FALSE ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_STRAIGHT",    R.string.pref_linestraight_title,    R.string.pref_linestraight_summary,     FALSE ),
+    new TDPrefKey( T, BOOL, UI, "DISTOX_LINE_CLIP",        R.string.pref_lineclip_title,        R.string.pref_lineclip_summary,         FALSE ),
     new TDPrefKey( T, BOOL, UI, "DISTOX_PATH_MULTISELECT", R.string.pref_path_multiselect_title,R.string.pref_path_multiselect_summary, FALSE ),
     new TDPrefKey( T, LONG, DR, "DISTOX_LINE_ENDS",        R.string.pref_line_ends_title,       R.string.pref_line_ends_summary,        TDString.ZERO )
   };
