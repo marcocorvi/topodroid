@@ -67,7 +67,7 @@
   <string name="DrawingPhotoDialog" translatable="false">page_photo_dialog.htm</string>
   <string name="DrawingPhotoEditDialog" translatable="false">page_photo_edit_dialog.htm</string>
   <string name="DrawingLineDialog" translatable="false">page_line_dialog.htm</string>
-  <string name="DrawingLineSectionDialog" translatable="false">manual11.htm</string>
+  <string name="DrawingLineSectionDialog" translatable="false">page_line_section_dialog.htm</string>
   <string name="DrawingModeDialog" translatable="false">page_drawing_refs.htm</string>
   <string name="DrawingPointDialog" translatable="false">page_drawing_point.htm</string>
   <!-- string name="DrawingPointSectionDialog" translatable="false">page_section_point.htm</string -->

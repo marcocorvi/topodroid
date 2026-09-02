@@ -58,14 +58,14 @@
         />
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout_cavesniper"
+    <!-- LinearLayout android:id="@+id/layout_cavesniper"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="vertical" 
       android:layout_marginTop="@dimen/marginvbig"
       android:layout_marginBottom="@dimen/marginvbig"
       >
-    </LinearLayout>
+    </LinearLayout -->
 
     <LinearLayout android:id="@+id/layout_survex"
       android:layout_width="match_parent" 
@@ -123,14 +123,14 @@
       >
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout_pockettopo"
+    <!-- LinearLayout android:id="@+id/layout_pockettopo"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="vertical" 
       android:layout_marginTop="@dimen/marginvbig"
       android:layout_marginBottom="@dimen/marginvbig"
       >
-    </LinearLayout>
+    </LinearLayout -->
 
     <LinearLayout android:id="@+id/layout_toporobot"
       android:layout_width="match_parent" 
