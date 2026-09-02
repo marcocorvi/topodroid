@@ -102,6 +102,7 @@
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
     <string name="thp_section">сечение</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <string name="thp_picture">картинка</string>
     <string name="thp_station">пикет</string>
     <!-- UNUSED string name="thp_danger">опасность</string -->
@@ -432,6 +433,7 @@
     <!-- UNUSED string name="including_splays">бок. замеры</string -->
     <string name="with_splays">со сплеями</string>
     <string name="cell_size">Размер сетки [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">Замеры м-у пикетами</string>
     <string name="stations">Пикет</string>
@@ -983,6 +985,7 @@
 
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">Сечение</string>
     <string name="buffer">Буфер</string>
     <string name="buffer_size">Буфер: %1$d записей</string>
@@ -1759,8 +1762,8 @@
   <string name="pref_shot_units_title">ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
   <!-- UNUSED string name="pref_cwd_title">Рабочий каталог</string -->
   <!-- UNUSED string name="pref_cwd_summary">Каталог в котором TopoDroid хранит съёмки</string -->
-  <string name="pref_pt_color_map_title">Преобразование цветов PocketTopo</string>
-  <string name="pref_pt_color_map_summary">Соответствие цветов PocketTopo типам объектов в TopoDtoid при импорте</string>
+  <!-- UNUSED string name="pref_pt_color_map_title">Преобразование цветов PocketTopo</string -->
+  <!-- UNUSED string name="pref_pt_color_map_summary">Соответствие цветов PocketTopo типам объектов в TopoDtoid при импорте</string -->
   <string name="pref_text_size_title">Размер текста</string>
   <string name="pref_text_size_summary">Размер шрифта в списках</string>
   <string name="pref_symbol_size_title">Размер символов</string>
@@ -2022,6 +2025,8 @@
   <string name="pref_plot_shift_summary">Включить режим смещения и масштабирования абриса относительно нитки</string>
   <string name="pref_splay_alpha_title">Прозрачность сплеев</string>
   <string name="pref_splay_alpha_summary">Прозрачность сплеев [0: прозрачные, 100: видимые]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
   <!-- UNUSED string name="pref_picker_type_title">Вид меню инструментов рисования</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Тип меню инструментов рисования</string -->

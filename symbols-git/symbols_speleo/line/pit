@@ -18,6 +18,7 @@ name-ua колодязь
 th_name pit
 group floor
 color 0xff00ff 0xff
+clip both
 width 8
 effect
   moveTo 0 1

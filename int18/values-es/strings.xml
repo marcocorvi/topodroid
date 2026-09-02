@@ -104,6 +104,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <string name="thp_section">Sección</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <string name="thp_picture">Imagen</string>
     <string name="thp_station">Estación</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
@@ -433,6 +434,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="including_splays">incluyendo tomas laterales</string -->
     <string name="with_splays">Con tomas laterales</string>
     <string name="cell_size">Tamaño de la celda [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">Líneas</string>
     <string name="stations">Estaciones</string>
@@ -993,6 +995,7 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >Secciones transversales</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">Secciones transversales</string>
     <string name="buffer">búfer</string>
     <string name="buffer_size">Búfer: %1$d datos</string>
@@ -1757,8 +1760,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 	  
   <!-- UNUSED string name="pref_cwd_summary">Introducir el directorio principal TopoDroid</string -->
 	  
-  <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
-  <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
+  <!-- UNUSED string name="pref_pt_color_map_title">PocketTopo color mapa</string -->
+  <!-- UNUSED string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string -->
   <string name="pref_text_size_title">Tamaño del texto</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_symbol_size_title">Tamaño de símbolos</string>
@@ -2039,6 +2042,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_plot_shift_summary">Habilitar cambio de croquis y escala</string>
   <string name="pref_splay_alpha_title">Transparencia de tomas secundarias</string>
   <string name="pref_splay_alpha_summary">Transparencia de tomas secundarias [0: transparencia, 100: opaco]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
   <!-- UNUSED string name="pref_picker_type_title">Selector de simbología</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Tipo de selector de simbología</string -->

@@ -115,6 +115,7 @@
     <string name="thp_user">uživatelský</string>
     <string name="thp_label">popisek</string>
     <string name="thp_section">řez</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <string name="thp_picture">obrázek</string>
     <string name="thp_station">stanoviště</string>
 
@@ -419,6 +420,7 @@
     <!-- UNUSED string name="including_splays">including splays</string -->
     <string name="with_splays">včetně paprsků</string>
     <string name="cell_size">Velikost mřížky [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">Tahové záměry</string>
     <string name="stations">Měřické body</string>
@@ -955,6 +957,7 @@
 
     <string name="button_write"     >Nahrát</string>
     <string name="button_xsection">Příčný řez</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">Příčný řez</string>
     <string name="buffer">Vyrovnávací paměť</string>
     <string name="buffer_size">Velikost vyrovnávací paměti: %1$d</string>
@@ -1702,8 +1705,8 @@
     <string name="pref_shot_units_title">JEDNOTKY</string>
     <!-- UNUSED string name="pref_cwd_title">Work Directory</string -->
     <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-    <string name="pref_pt_color_map_title">Barevná mapa PocketTopo</string>
-    <string name="pref_pt_color_map_summary">Barevné mapování prvků při importu z PocketTopo</string>
+    <!-- UNUSED string name="pref_pt_color_map_title">Barevná mapa PocketTopo</string -->
+    <!-- UNUSED string name="pref_pt_color_map_summary">Barevné mapování prvků při importu z PocketTopo</string -->
     <string name="pref_text_size_title">Velikost textu</string>
     <string name="pref_text_size_summary">Velikost textu v seznamech</string>
     <string name="pref_symbol_size_title">Velikost symbolů</string>
@@ -1937,6 +1940,8 @@
     <string name="pref_plot_shift_summary">Povolit nástroje pro ruční posun a změnu měřítka celého výkresu</string>
     <string name="pref_splay_alpha_title">Průhlednost paprsků</string>
     <string name="pref_splay_alpha_summary">Úroveň neprůhlednosti pomocných paprsků [0: plně průhledné, 100: neprůhledné]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
 
 <string name="pref_station_size_title">Velikost názvů bodů</string>

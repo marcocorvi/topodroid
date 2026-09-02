@@ -18,6 +18,7 @@ name-ua камін
 th_name chimney
 group ceiling
 color 0xff99ff 0xff
+clip both
 width 1
 dash 15 5
 effect

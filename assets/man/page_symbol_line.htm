@@ -18,6 +18,7 @@ The line tool file contains lines specifying the property of the drawing tool.
 <lI>"group GROUP", specifies the group this line belongs to [optional, default no group]</li>
 <li>"color rgb alpha" (rgb and alpha in hex format, for example '0x00ff00' is green, and '0xff' is fully opaque) [rgb mandatory, alpha is optional,
 if not specified 0xff is taken]</li>
+<li>"clip", how the line is clipped to the outline: not-clipped ("no"), at the end ("yes"), at both ends ("both"). [optional, default "no"]</li>
 <li>"width SIZE", line width in units of the <i>line width</i> setting [optional, default 1]</li>
 <li>"dash PATTERN", example "15 5" [optional dash pattern]</li>
 <li>"style STYLE" where STYLE can be 'straight' or 'xN' [optional]</li>

@@ -103,6 +103,7 @@
     <string name="thp_user">用户</string>
     <string name="thp_label">标注</string>
     <string name="thp_section">剖面</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <!-- TODO string name="thp_picture">picture</string -->
     <string name="thp_station">站点</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
@@ -434,6 +435,7 @@
     <!-- UNUSED string name="including_splays">副线</string -->
     <string name="with_splays">侧线跟随</string>
     <string name="cell_size">单元尺寸 [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">主线</string>
     <string name="stations">站点</string>
@@ -988,6 +990,7 @@
 
     <string name="button_write"     >上载</string>
     <string name="button_xsection"  >截面</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">截面</string>
     <string name="buffer">缓存</string>
     <string name="buffer_size">缓存: %1$d 数据</string>
@@ -1765,8 +1768,8 @@
   <string name="pref_shot_units_title">单位</string>
   <!-- UNUSED string name="pref_cwd_title">工作目录</string -->
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <string name="pref_pt_color_map_title">PocketTopo地图颜色</string>
-  <string name="pref_pt_color_map_summary">PocketTopo地图颜色(PocketTopo输入)</string>
+  <!-- UNUSED string name="pref_pt_color_map_title">PocketTopo地图颜色</string -->
+  <!-- UNUSED string name="pref_pt_color_map_summary">PocketTopo地图颜色(PocketTopo输入)</string -->
   <string name="pref_text_size_title">字体大小</string>
   <string name="pref_text_size_summary">列表中字体大小</string>
   <string name="pref_symbol_size_title">符号大小</string>
@@ -2029,6 +2032,8 @@
   <string name="pref_plot_shift_summary">启用草图转变和规模</string>
   <string name="pref_splay_alpha_title">副线透明度</string>
   <string name="pref_splay_alpha_summary">副线透明度 [0: 透明, 100: 不透明]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
   <!-- UNUSED string name="pref_picker_type_title">绘图工具选择</string -->
   <!-- UNUSED string name="pref_picker_type_summary">绘图工具选择样式</string -->

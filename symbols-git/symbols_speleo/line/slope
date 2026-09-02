@@ -18,6 +18,7 @@ name-ua нахил
 th_name slope
 group slope
 color 0xffcc00 0xff
+clip both
 width 1
 dash 17 15
 effect

@@ -114,6 +114,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="thp_user">Utilisateur</string>
     <string name="thp_label">Étiquette</string>
     <string name="thp_section">Section</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <string name="thp_picture">photo</string>
     <string name="thp_station">Station</string>
     <!-- UNUSED string name="thp_danger">Danger</string -->
@@ -447,6 +448,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="including_splays">including splays</string -->
     <string name="with_splays">Avec visées d\'habillage</string>
     <string name="cell_size">Taille de cellule [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">Visées de cheminement</string>
     <string name="stations">Station</string>
@@ -1016,6 +1018,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 	
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">Section Transverse</string>
     <string name="buffer">Mémoire tampon</string>
     <string name="buffer_size">Mémoire tampon: %1$d données</string>
@@ -1804,8 +1807,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_shot_units_title">UNITÉS</string>
     <!-- UNUSED string name="pref_cwd_title">Répertoire TopoDroid</string -->
     <!-- UNUSED string name="pref_cwd_summary">Répertoire TopoDroid</string -->
-    <string name="pref_pt_color_map_title">Couleur topo PocketTopo</string>
-    <string name="pref_pt_color_map_summary">Couleur de la topo PocketTopo (PocketTopo import)</string>
+    <!-- UNUSED string name="pref_pt_color_map_title">Couleur topo PocketTopo</string -->
+    <!-- UNUSED string name="pref_pt_color_map_summary">Couleur de la topo PocketTopo (PocketTopo import)</string -->
     <string name="pref_text_size_title">Taille du texte</string>
     <string name="pref_text_size_summary">Taille du texte des éléments de liste</string>
     <string name="pref_symbol_size_title">Taille du symbole</string>
@@ -2070,6 +2073,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_plot_shift_summary">Activer le changement d\'échelle du croquis</string>
     <string name="pref_splay_alpha_title">Transparence des visées d\'habillage</string>
     <string name="pref_splay_alpha_summary">Transparence des visées d\'habillage [0: transparent, 100: opaque]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
     <!-- UNUSED string name="pref_picker_type_title">Sélectionneur de symbole</string -->
     <!-- UNUSED string name="pref_picker_type_summary">Type sélectionneur symbole</string -->

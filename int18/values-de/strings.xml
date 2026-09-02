@@ -90,6 +90,7 @@
   <string name="thp_user">Nutzer</string>
   <string name="thp_label">Beschriftung</string>
   <string name="thp_section">Sektion</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
   <string name="thp_picture">Bild</string>
   <string name="thp_station">Station</string>
   <!-- UNUSED string name="thp_danger">Gefahr</string -->
@@ -401,6 +402,7 @@
   <!-- UNUSED string name="including_splays">including splays</string -->
   <string name="with_splays">mit Hilfszügen</string>
   <string name="cell_size">Zellengröße [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
   <string name="legs">Messzüge</string>
   <string name="stations">Messpunkte</string>
   <string name="splays">Hilfszüge</string>
@@ -929,6 +931,7 @@
   <string name="button_wait">Warten</string>
   <string name="button_write">Hochladen</string>
   <string name="button_xsection">Profil</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
   <string name="xsection">Querschnitt</string>
   <string name="buffer">Zwischenspeicher</string>
   <string name="buffer_size">Zwischenspeicher: %1$d Daten</string>
@@ -1659,8 +1662,8 @@
   <string name="pref_shot_units_title">Einheiten</string>
   <!-- UNUSED string name="pref_cwd_title">TopoDroid Ordner</string -->
   <!-- UNUSED string name="pref_cwd_summary">Die TopoDroid Ordner stellen</string -->
-  <string name="pref_pt_color_map_title">PocketTopo Farbkarte</string>
-  <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
+  <!-- UNUSED string name="pref_pt_color_map_title">PocketTopo Farbkarte</string -->
+  <!-- UNUSED string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string -->
   <string name="pref_text_size_title">Schriftgröße</string>
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
   <string name="pref_symbol_size_title">Symbolgrösse</string>
@@ -1929,6 +1932,9 @@
   <string name="pref_plot_shift_summary">Skizze kann verschoben/skaliert werden</string>
   <string name="pref_splay_alpha_title">Hilfszug-Transparent</string>
   <string name="pref_splay_alpha_summary">Transparenz der Hilfszüge [0: transparent, 100: Opak]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
+
   <!-- UNUSED string name="pref_picker_type_title">Zeichenwerkzeuge</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Darstellung der Zeichenwerkzeuge</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Drei Zeichenwerkzeugreihen</string -->

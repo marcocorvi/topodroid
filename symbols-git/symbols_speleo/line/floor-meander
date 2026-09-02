@@ -18,6 +18,7 @@ name-ua меандр_в_підлозі
 th_name floor-meander
 group floor
 color 0xff00ff 0xff
+clip both
 width 1
 dash 15 5
 effect

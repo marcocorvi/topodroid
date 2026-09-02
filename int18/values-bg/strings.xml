@@ -104,6 +104,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="thp_user">потребител</string>
     <string name="thp_label">надпис</string>
     <string name="thp_section">сечение</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <string name="thp_picture">снимка</string>
     <string name="thp_station">репер</string>
     <!-- UNUSED string name="thp_danger">опасност</string -->
@@ -433,6 +434,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="including_splays">включително странични измервания</string -->
     <string name="with_splays">със странични измервания</string>
     <string name="cell_size">Размер [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">Отсечка</string>
     <string name="stations">Репер</string>
@@ -987,6 +989,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="button_write">Качване</string>
     <string name="button_xsection">Сечение</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">Сечение</string>
     <string name="buffer">Буфер</string>
     <string name="buffer_size">Размер на буфера: %1$d</string>
@@ -1754,8 +1757,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_shot_units_title">МЕРНИ ЕДИНИЦИ</string>
   <!-- UNUSED string name="pref_cwd_title">Работна директория</string -->
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <string name="pref_pt_color_map_title">Цветна карта PocketTopo</string>
-  <string name="pref_pt_color_map_summary">Цветна карта PocketTopo (импорт от PocketTopo)</string>
+  <!-- UNUSED string name="pref_pt_color_map_title">Цветна карта PocketTopo</string -->
+  <!-- UNUSED string name="pref_pt_color_map_summary">Цветна карта PocketTopo (импорт от PocketTopo)</string -->
   <string name="pref_text_size_title">Размер на текста</string>
   <string name="pref_text_size_summary">Размер на текста за списъците</string>
   <string name="pref_symbol_size_title">Размер на символа</string>
@@ -2020,6 +2023,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_plot_shift_summary">Активирай отместване/мащабиране на скица</string>
   <string name="pref_splay_alpha_title">Прозрачност на странични измервания</string>
   <string name="pref_splay_alpha_summary">Непрозрачност на странични измервания [0: прозрачни, 100: непрозрачни]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
   <!-- UNUSED string name="pref_picker_type_title">Drawing tool picker</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Drawing tool picker type</string -->

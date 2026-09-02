@@ -101,6 +101,7 @@
     <string name="thp_user">utente</string>
     <string name="thp_label">testo</string>
     <string name="thp_section">sezione</string>
+    <!-- TODO string name="thp_section_point">section-point</string -->
     <string name="thp_picture">foto</string>
     <string name="thp_station">caposaldo</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
@@ -430,6 +431,7 @@
     <!-- UNUSED string name="including_splays">inclusi splay</string -->
     <string name="with_splays">con splays</string>
     <string name="cell_size">Lato cella [m]</string>
+    <!-- TODO string name="reset_ids">Reset IDs</string -->
 
     <string name="legs">Battute</string>
     <string name="stations">Caposaldo</string>
@@ -982,6 +984,7 @@
 
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Sezione trasversale</string>
+    <!-- TODO string name="button_xpoint">Section-Point</string -->
     <string name="xsection">Sezione trasversale</string>
     <string name="buffer">Buffer</string>
     <string name="buffer_size">Buffer: %1$d dati</string>
@@ -1757,8 +1760,8 @@
   <string name="pref_shot_units_title">OPZIONI UNITA\'</string>
   <!-- UNUSED string name="pref_cwd_title">Directory di lavoro</string -->
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
-  <string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string>
-  <string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string>
+  <!-- UNUSED string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string -->
+  <!-- UNUSED string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string -->
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_symbol_size_title">Dimensione simboli</string>
@@ -2021,6 +2024,8 @@
   <string name="pref_plot_shift_summary">Spostamento/ridimensione disegno</string>
   <string name="pref_splay_alpha_title">Trasparenza splay</string>
   <string name="pref_splay_alpha_summary">Trasparenza splay [0: transparente, 100: opaco]</string>
+  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
+  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
 
   <!-- UNUSED string name="pref_picker_type_title">Dialogo scelta prototipo</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string -->
