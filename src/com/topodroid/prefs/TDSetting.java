@@ -1317,8 +1317,8 @@ public class TDSetting
 
     key = TDPrefKey.mExportImport;
     k = 0; 
-         // skip 0 DISTOX_PT_CMAP
-    ++k; mLRExtend          = prefs.getBoolean(     key[ k].key, bool(key[ k].dflt) ); // DISTOX_SPLAY_EXTEND
+         // dropped 0 DISTOX_PT_CMAP
+         mLRExtend          = prefs.getBoolean(     key[ k].key, bool(key[ k].dflt) ); // DISTOX_SPLAY_EXTEND
     // TDLog.v("SETTING load secondary export import done");
 
     key = TDPrefKey.mGeekImport;
@@ -2397,10 +2397,11 @@ public class TDSetting
   {
     // TDLog.v("update pref import: " + k );
     TDPrefKey[] key = TDPrefKey.mExportImport;
-    if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_PT_CMAP
-      // not handled here
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_SPLAY_EXTEND (bool)
-      mLRExtend = tryBooleanValue( hlp, k, v, bool(key[ 1].dflt) ); 
+    // if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_PT_CMAP
+    //   // not handled here
+    // } else
+    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_SPLAY_EXTEND (bool)
+      mLRExtend = tryBooleanValue( hlp, k, v, bool(key[ 0].dflt) ); 
     } else {
       TDLog.e("missing IMPORT key: " + k );
     }

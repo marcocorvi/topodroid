@@ -318,7 +318,7 @@ class TDPrefKey
    * whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
    */
   static TDPrefKey[] mExportImport = {
-    new TDPrefKey( N, BTN,  XP, "DISTOX_PT_CMAP",      R.string.pref_pt_color_map_title, R.string.pref_pt_color_map_summary, TDString.EMPTY ),
+    // new TDPrefKey( N, BTN,  XP, "DISTOX_PT_CMAP",      R.string.pref_pt_color_map_title, R.string.pref_pt_color_map_summary, TDString.EMPTY ),
     new TDPrefKey( A, BOOL, XP, "DISTOX_SPLAY_EXTEND", R.string.pref_LRExtend_title,     R.string.pref_LRExtend_summary,     TRUE )
   };
 

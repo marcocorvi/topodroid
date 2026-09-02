@@ -73,7 +73,7 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_LOCATION          = 1004;
   static final int REQUEST_ACCURACY          = 1005;
   static final int REQUEST_SHOT_DATA         = 1006;
-  static final int REQUEST_PT_CMAP           = 1007;
+  // static final int REQUEST_PT_CMAP           = 1007;
   static final int REQUEST_GRAPH_PAPER_SCALE = 1008;
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
@@ -427,19 +427,19 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_CAVE3D_PREF", TDPrefCat.PREF_CATEGORY_CAVE3D );
       linkPreference( "DISTOX_GEEK_PREF",   TDPrefCat.PREF_CATEGORY_GEEK );
       // TDLog.v( "PREF category ALL done");
-    } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_IMPORT ) {
-      mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
-      if ( mPtCmapPref != null ) {
-        View v = mPtCmapPref.getView();
-	if ( v != null ) {
-          final Intent pt_intent = new Intent( mCtx, com.topodroid.TDX.PtCmapActivity.class ); // this
-          v.setOnClickListener( 
-            new OnClickListener() {
-              @Override
-              public void onClick( View v ) { startActivityForResult( pt_intent, REQUEST_PT_CMAP ); }
-          } );
-	}
-      }
+    // } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_IMPORT ) {
+    //   mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
+    //   if ( mPtCmapPref != null ) {
+    //     View v = mPtCmapPref.getView();
+    //     if ( v != null ) {
+    //       final Intent pt_intent = new Intent( mCtx, com.topodroid.TDX.PtCmapActivity.class ); // this
+    //       v.setOnClickListener( 
+    //         new OnClickListener() {
+    //           @Override
+    //           public void onClick( View v ) { startActivityForResult( pt_intent, REQUEST_PT_CMAP ); }
+    //       } );
+    //     }
+    //   }
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_EXPORT ) {
       linkPreference( "DISTOX_EXPORT_ENABLE_PREF",  TDPrefCat.PREF_CATEGORY_EXPORT_ENABLE );
       linkPreference( "DISTOX_EXPORT_IMPORT_PREF",  TDPrefCat.PREF_CATEGORY_IMPORT );
@@ -614,12 +614,12 @@ public class TDPrefActivity extends Activity
       case REQUEST_ACCURACY:
       case REQUEST_SHOT_DATA:
         break;
-      case REQUEST_PT_CMAP:
-        if ( extras != null ) {
-          String cmap = extras.getString( TDTag.TOPODROID_CMAP );
-          // mPtCmapPref.
-        }
-        break;
+      // case REQUEST_PT_CMAP:
+      //   if ( extras != null ) {
+      //     String cmap = extras.getString( TDTag.TOPODROID_CMAP );
+      //     // mPtCmapPref.
+      //   }
+      //   break;
       case REQUEST_GRAPH_PAPER_SCALE:
         if ( result == RESULT_OK && extras != null ) {  
           int density = (int)(intent.getIntExtra( TDTag.TOPODROID_GRAPH_PAPER_SCALE, -1 ));
