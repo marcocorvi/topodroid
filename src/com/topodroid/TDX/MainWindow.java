@@ -41,11 +41,11 @@ import com.topodroid.inport.ImportCavwayCsvTask;
 import com.topodroid.inport.ImportCompassTask;
 import com.topodroid.inport.ImportVisualTopoTask;
 import com.topodroid.inport.ImportTherionTask;
-import com.topodroid.inport.ImportPocketTopoTask;
+// import com.topodroid.inport.ImportPocketTopoTask;
 import com.topodroid.inport.ImportSurvexTask;
 import com.topodroid.inport.ImportWallsTask;
 import com.topodroid.inport.ImportTRobotTask;
-import com.topodroid.inport.ImportCaveSniperTask;
+// import com.topodroid.inport.ImportCaveSniperTask;
 import com.topodroid.inport.ImportZipTask;
 // import com.topodroid.inport.ImportDialog;
 // import com.topodroid.inport.ImportDatDialog;
@@ -592,13 +592,13 @@ public class MainWindow extends Activity
   {
     // FIXME connect-title string
     // TDLog.v( "Main import with uri stream <" + name + "> type <" + type + ">" );
-    if ( type.equals(".top") ) {
-      setTitleImport();
-      new ImportPocketTopoTask( this, uri ).execute( null, name );  // null filename (use fis); name = surveyname
-    } else if ( type.equals(".zip") ) {
+    if ( type.equals(".zip") ) {
       // TDToast.makeLong( R.string.import_zip_wait );
       setTitleImport();
       new ImportZipTask( this, uri, false ) .execute( name ); // force = true (skip version checks)
+    // } else if ( type.equals(".top") ) {
+    //   setTitleImport();
+    //   new ImportPocketTopoTask( this, uri ).execute( null, name );  // null filename (use fis); name = surveyname
     // } else {
     //   setTheTitle( );
     }
@@ -641,9 +641,9 @@ public class MainWindow extends Activity
     } else if ( type.equals( TDPath.TRB ) ) {
       setTitleImport();
       new ImportTRobotTask( this, pfd ).execute( name ); 
-    } else if ( type.equals( TDPath.CSN ) ) {
-      setTitleImport();
-      new ImportCaveSniperTask( this, pfd ).execute( name ); 
+    // } else if ( type.equals( TDPath.CSN ) ) {
+    //   setTitleImport();
+    //   new ImportCaveSniperTask( this, pfd ).execute( name ); 
     } else if ( type.equals( TDPath.CSV ) ) {
       setTitleImport();
       if ( data.mCsv == ImportData.CSV_BRIC ) {

@@ -41,7 +41,7 @@ public class SymbolLine extends Symbol
   Path mPath;
   boolean mStyleStraight;
   boolean mClosed = false;
-  boolean mClippable = true;
+  int mClippable = 0;  // 0: no, 1: normal, 2: both
   int mStyleX;            // X times (one out of how many point to use)
   Path mPathDir = null;
   Path mPathRev = null;
@@ -112,7 +112,7 @@ public class SymbolLine extends Symbol
     mHasEffect     = false;
     mStyleStraight = false;
     mClosed        = false;
-    mClippable     = true;
+    mClippable     = 0;
     mStyleX = 1;
   }
 
@@ -121,10 +121,10 @@ public class SymbolLine extends Symbol
     super( Symbol.TYPE_LINE, null, null, fname, Symbol.W2D_DETAIL_SHP );
     mStyleStraight = false;
     mClosed        = false;
-    mClippable     = true;
+    mClippable     = 0;
     mStyleX = 1;
     readFile( filepath, locale, iso );
-    if ( mClosed ) mClippable = false; // enforce closed lines are not clippable
+    if ( mClosed ) mClippable = 0; // enforce closed lines are not clippable
     makeLinePath();
   }
 
@@ -276,8 +276,14 @@ public class SymbolLine extends Symbol
               }
             } else if ( vals[k].equals("clip") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s && vals[k].equals("no") ) {
-                mClippable = false;
+              if ( k < s ) {
+                if ( vals[k].equals("no") ) {
+                  mClippable = 0;
+                } else if ( vals[k].equals("yes") ) {
+                  mClippable = 1;
+                } else if ( vals[k].equals("both") ) {
+                  mClippable = 2;
+                }
               }
             } else if ( vals[k].equals("csurvey") ) {
               // syntax: csurvey <layer> <type> <category> <pen>

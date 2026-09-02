@@ -33,10 +33,6 @@ import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
 // import com.topodroid.math.BezierCurve;
 // import com.topodroid.math.BezierInterpolator;
-// import com.topodroid.dln.DLNWall;
-// import com.topodroid.dln.DLNSide;
-// import com.topodroid.dln.DLNSite;
-// import com.topodroid.dln.DLNSideList;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyButtonBar;
 import com.topodroid.ui.MyHorizontalListView;
@@ -5034,7 +5030,10 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 boolean add = true;
                 if ( mSymbol == SymbolType.LINE ) {
-                  if ( TDSetting.mLineClip && BrushManager.isLineClippable( mCurrentLine ) ) mDrawingSurface.clipLine( mCurrentLinePath );
+                  if ( TDSetting.mLineClip ) {
+                    int clip_mode = BrushManager.getLineClippable( mCurrentLine );
+                    if ( clip_mode > 0 ) mDrawingSurface.clipLine( mCurrentLinePath, clip_mode );
+                  }
                   boolean closed_line = TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine );
                   boolean joined_line = false;
                   if ( ! closed_line ) {
@@ -7580,7 +7579,9 @@ public class DrawingWindow extends ItemDrawer
           DrawingPointPath pp = (DrawingPointPath)sp.mItem;
           // TDLog.v("ask delete point type " + pp.mPointType );
           // if ( ! BrushManager.isPointSection( pp.mPointType ) ) { // DELETE SECTION-POINT
-            askDeleteItem( pp, t, BrushManager.getPointName( pp.mPointType ) );
+            String point_name = ( BrushManager.isPointSection( pp.mPointThType )? getResources().getString( R.string.thp_section_point )
+                                                                                :  BrushManager.getPointName( pp.mPointType );
+            askDeleteItem( pp, t, point_name );
           // }
         } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)sp.mItem;
@@ -9622,7 +9623,7 @@ public class DrawingWindow extends ItemDrawer
   // {
   //   if ( TDSetting.mWallsType == TDSetting.WALLS_NONE ) return;
   //   if ( ! PlotType.isLegSection( mType ) ) return;
-  //   ArrayList< DLNSite > sites = null;
+  //   ArrayList< com.topodroid.algo.dln.DLNSite > sites = null;
   //   sites = new ArrayList<>();
   //   List< DrawingPath > splays = mDrawingSurface.getSplays();
   //   // float len2 = 0;
@@ -9634,8 +9635,8 @@ public class DrawingWindow extends ItemDrawer
   //     // len = 6.28 * TDMath.sqrt( len2 );
   //     // if ( allSplay ) {
   //       if (sites != null) {
-  //         // sites.add( new DLNSite( sp.x1, sp.y1 ) );
-  //         sites.add( new DLNSite( sp.x2, sp.y2 ) );
+  //         // sites.add( new com.topodroid.algo.dln.DLNSite( sp.x1, sp.y1 ) );
+  //         sites.add( new com.topodroid.algo.dln.DLNSite( sp.x2, sp.y2 ) );
   //       }
   //     // } else {
   //     //   if (pos != null) pos.add( new PointF(sp.x2, sp.y2) );
@@ -9686,14 +9687,14 @@ public class DrawingWindow extends ItemDrawer
 
     ArrayList< PointF > pos = null;
     ArrayList< PointF > neg = null;
-    ArrayList< DLNSite > sites = null;
+    ArrayList< com.topodroid.algo.dln.DLNSite > sites = null;
     if ( TDSetting.mWallsType == TDSetting.WALLS_CONVEX ) {
       pos = new ArrayList<>(); // positive v
       neg = new ArrayList<>(); // negative v
     } else {
       sites = new ArrayList<>();
-      sites.add( new DLNSite( x0, y0 ) );
-      sites.add( new DLNSite( x1, y1 ) );
+      sites.add( new com.topodroid.algo.dln.DLNSite( x0, y0 ) );
+      sites.add( new com.topodroid.algo.dln.DLNSite( x1, y1 ) );
     }
     List< NumSplay > splays = mNum.getSplays();
     float xs=0, ys=0;
@@ -9730,7 +9731,7 @@ public class DrawingWindow extends ItemDrawer
         }
         if ( ok ) {
           if ( allSplay ) {
-            if (sites != null) sites.add( new DLNSite( xs, ys ) );
+            if (sites != null) sites.add( new com.topodroid.algo.dln.DLNSite( xs, ys ) );
           } else {
             // xs = (float)(sp.e) - x0;
             // yv = (float)(sp.s) - y0;
@@ -9762,7 +9763,7 @@ public class DrawingWindow extends ItemDrawer
             }
             if ( ok ) {
               if ( allSplay ) {
-                if (sites != null) sites.add( new DLNSite( xs, ys ) );
+                if (sites != null) sites.add( new com.topodroid.algo.dln.DLNSite( xs, ys ) );
               } else {
                 float u = ( xs * uu.x + ys * uu.y );
                 float v = ( xs * vv.x + ys * vv.y );
@@ -9811,13 +9812,13 @@ public class DrawingWindow extends ItemDrawer
   */
 
   /* AUTOWALLS
-  private void makeDlnWall( ArrayList< DLNSite > sites, float x0, float y0, float x1, float y1 ) // , float len, PointF uu, PointF vv
+  private void makeDlnWall( ArrayList< com.topodroid.algo.dln.DLNSite > sites, float x0, float y0, float x1, float y1 ) // , float len, PointF uu, PointF vv
   {
-    DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
+    com.topodroid.algo.dln.DLNWall dln_wall = new com.topodroid.algo.dln.DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
     if ( dln_wall.mPosHull.size() > 0 ) {
-      DLNSideList hpos = dln_wall.mPosHull.get(0);
-      DLNSide side = hpos.side;
+      com.topodroid.algo.dln.DLNSideList hpos = dln_wall.mPosHull.get(0);
+      com.topodroid.algo.dln.DLNSide side = hpos.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
       int idx = BrushManager.getLineWallIndex();
@@ -9825,7 +9826,7 @@ public class DrawingWindow extends ItemDrawer
       path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
 
       path.addStartPoint( xx, yy );
-      for ( DLNSideList hp : dln_wall.mPosHull ) {
+      for ( com.topodroid.algo.dln.DLNSideList hp : dln_wall.mPosHull ) {
         side = hp.side;
         float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
         float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
@@ -9838,8 +9839,8 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.addDrawingPath( path );
     }
     if ( dln_wall.mNegHull.size() > 0 ) {
-      DLNSideList hneg = dln_wall.mNegHull.get(0);
-      DLNSide side = hneg.side;
+      com.topodroid.algo.dln.DLNSideList hneg = dln_wall.mNegHull.get(0);
+      com.topodroid.algo.dln.DLNSide side = hneg.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
       int idx = BrushManager.getLineWallIndex();
@@ -9847,7 +9848,7 @@ public class DrawingWindow extends ItemDrawer
       path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
 
       path.addStartPoint( xx, yy );
-      for ( DLNSideList hn : dln_wall.mNegHull ) {
+      for ( com.topodroid.algo.dln.DLNSideList hn : dln_wall.mNegHull ) {
         side = hn.side;
         float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
         float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
@@ -9863,12 +9864,12 @@ public class DrawingWindow extends ItemDrawer
   */
 
   /* AUTOWALLS - OLD
-  void makeDlnWall( ArrayList< DLNSite > sites, double x0, double y0, double x1, double y1, double len, PointF uu, PointF vv )
+  void makeDlnWall( ArrayList< com.topodroid.algo.dln.DLNSite > sites, double x0, double y0, double x1, double y1, double len, PointF uu, PointF vv )
   {
-    DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
+    com.topodroid.algo.dln.DLNWall dln_wall = new com.topodroid.algo.dln.DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
-    DLNSideList hull = dln_wall.getBorderHead();
-    DLNSide side = hull.side;
+    com.topodroid.algo.dln.DLNSideList hull = dln_wall.getBorderHead();
+    com.topodroid.algo.dln.DLNSide side = hull.side;
     float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
     float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
     DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );

@@ -3812,10 +3812,12 @@ public class Scrap
 
   /** clip a line to this scrap outline
    * @param line  line to clip
+   * @param clip_mode  clipping mode
    */
-  void clipLine( DrawingLinePath line ) 
+  void clipLine( DrawingLinePath line, int clip_mode ) 
   {
-
+    com.topodroid.algo.Clip.toOutline( mCurrentStack, line, clip_mode );
   }
 
 }
+

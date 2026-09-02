@@ -918,7 +918,7 @@ public class TopoDroidApp extends Application
 
     // mData.compileStatements(); // this method is now empty (and commented)
 
-    PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
+    // PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
     // TDLog.v( "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
@@ -1889,14 +1889,14 @@ public class TopoDroidApp extends Application
     setCWD( cwd /*, cbd */ ); 
   }
 
-  /** set the PT map preference
-   * @param cmap  PT map - PocketTopo color map
-   */
-  static void setPtCmapPreference( String cmap )
-  {
-    TDPrefHelper.update( "DISTOX_PT_CMAP", cmap ); 
-    PtCmapActivity.setMap( cmap );
-  }
+  // /** set the PT map preference
+  //  * @param cmap  PT map - PocketTopo color map
+  //  */
+  // static void setPtCmapPreference( String cmap )
+  // {
+  //   TDPrefHelper.update( "DISTOX_PT_CMAP", cmap ); 
+  //   PtCmapActivity.setMap( cmap );
+  // }
 
   // unused
   // void setAccuracyPreference( float acceleration, float magnetic, float dip )

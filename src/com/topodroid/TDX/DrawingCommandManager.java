@@ -2540,8 +2540,9 @@ public class DrawingCommandManager
 
   /** clip a line to the scrap outline
    * @param line  line to clip
+   * @param clip_mode  clipping mode
    */
-  void clipLine( DrawingLinePath line ) { if ( mCurrentScrap != null ) mCurrentScrap.clipLine( line ); }
+  void clipLine( DrawingLinePath line, int clip_mode ) { if ( mCurrentScrap != null ) mCurrentScrap.clipLine( line, clip_mode ); }
 
 
 }

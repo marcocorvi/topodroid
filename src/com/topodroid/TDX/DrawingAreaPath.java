@@ -522,7 +522,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  LinePoint next( LinePoint lp )
+  public LinePoint next( LinePoint lp )
   {
     if ( lp == null ) return null;
     if ( lp.mNext == null ) return mFirst;
@@ -530,7 +530,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  LinePoint prev( LinePoint lp )
+  public LinePoint prev( LinePoint lp )
   {
     if ( lp == null ) return null;
     if ( lp.mPrev == null ) return mLast;

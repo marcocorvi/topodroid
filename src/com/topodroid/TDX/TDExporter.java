@@ -39,7 +39,7 @@ import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
 import com.topodroid.num.NumBranch;
 import com.topodroid.mag.Geodetic;
-import com.topodroid.ptopo.PTFile;
+// import com.topodroid.ptopo.PTFile;
 import com.topodroid.io.shp.ShpPointz;
 import com.topodroid.io.shp.ShpPolylinez;
 import com.topodroid.io.shp.ShpNamez;

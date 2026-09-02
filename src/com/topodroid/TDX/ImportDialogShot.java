@@ -53,12 +53,12 @@ public class ImportDialogShot extends MyDialog
 
   private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
-  private LinearLayout mLayoutCaveSniper;
+  // private LinearLayout mLayoutCaveSniper;
   private LinearLayout mLayoutSurvex;
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutVTopo;
   // private LinearLayout mLayoutVTopoX;
-  private LinearLayout mLayoutPTopo;
+  // private LinearLayout mLayoutPTopo;
   private LinearLayout mLayoutWalls;
   private LinearLayout mLayoutTRobot;
   private LinearLayout mLayoutCsv;
@@ -101,13 +101,13 @@ public class ImportDialogShot extends MyDialog
 
     mLayoutZip     = (LinearLayout) findViewById( R.id.layout_zip );
     mLayoutCompass = (LinearLayout) findViewById( R.id.layout_compass );
-    mLayoutCaveSniper = (LinearLayout) findViewById( R.id.layout_cavesniper );
+    // mLayoutCaveSniper = (LinearLayout) findViewById( R.id.layout_cavesniper );
     mLayoutSurvex  = (LinearLayout) findViewById( R.id.layout_survex );
     mLayoutTherion = (LinearLayout) findViewById( R.id.layout_therion );
     mLayoutVTopo   = (LinearLayout) findViewById( R.id.layout_vtopo );
     // mLayoutVTopoX  = (LinearLayout) findViewById( R.id.layout_vtopox );
     mLayoutWalls   = (LinearLayout) findViewById( R.id.layout_walls );
-    mLayoutPTopo   = (LinearLayout) findViewById( R.id.layout_pockettopo );
+    // mLayoutPTopo   = (LinearLayout) findViewById( R.id.layout_pockettopo );
     mLayoutTRobot  = (LinearLayout) findViewById( R.id.layout_toporobot );
     mLayoutCsv     = (LinearLayout) findViewById( R.id.layout_csv );
 
@@ -169,26 +169,26 @@ public class ImportDialogShot extends MyDialog
     // TDLog.v( "update layout: selected " + mSelectedPos );
     mLayoutZip.setVisibility( View.GONE );
     mLayoutCompass.setVisibility( View.GONE );
-    mLayoutCaveSniper.setVisibility( View.GONE );
+    // mLayoutCaveSniper.setVisibility( View.GONE );
     mLayoutSurvex.setVisibility( View.GONE );
     mLayoutTherion.setVisibility( View.GONE );
     mLayoutVTopo.setVisibility( View.GONE );
     // mLayoutVTopoX.setVisibility( View.GONE );
-    mLayoutPTopo.setVisibility( View.GONE );
+    // mLayoutPTopo.setVisibility( View.GONE );
     mLayoutTRobot.setVisibility( View.GONE );
     mLayoutCsv.setVisibility( View.GONE );
     switch ( mSelectedPos ) {
       case 0: mLayoutZip.setVisibility( View.VISIBLE );        break;
       case 1: mLayoutCompass.setVisibility( View.VISIBLE );    break;
-      case 2: mLayoutCaveSniper.setVisibility( View.VISIBLE ); break;
-      case 3: mLayoutSurvex.setVisibility( View.VISIBLE );     break;
-      case 4: mLayoutTherion.setVisibility( View.VISIBLE );    break;
-      case 5: mLayoutVTopo.setVisibility( View.VISIBLE );      break;
+      // case x: mLayoutCaveSniper.setVisibility( View.VISIBLE ); break;
+      case 2: mLayoutSurvex.setVisibility( View.VISIBLE );     break;
+      case 3: mLayoutTherion.setVisibility( View.VISIBLE );    break;
+      case 4: mLayoutVTopo.setVisibility( View.VISIBLE );      break;
       // case x: mLayoutVTopoX.setVisibility( View.VISIBLE );  break;
-      case 6: mLayoutWalls.setVisibility( View.VISIBLE );      break;
-      case 7: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
-      case 8: mLayoutTRobot.setVisibility( View.VISIBLE );      break;
-      case 9: mLayoutCsv.setVisibility( View.VISIBLE );      break;
+      case 5: mLayoutWalls.setVisibility( View.VISIBLE );      break;
+      // case x: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
+      case 6: mLayoutTRobot.setVisibility( View.VISIBLE );      break;
+      case 7: mLayoutCsv.setVisibility( View.VISIBLE );      break;
     }
   }
 
@@ -208,16 +208,16 @@ public class ImportDialogShot extends MyDialog
           if ( TDLevel.overExpert ) mImportData.setDiving( mCBdivingDat.isChecked() );
         }
         break;
-      case 2: // CaveSniper
+      // case 2: // CaveSniper
+      //   break;
+      case 2: // Survex
         break;
-      case 3: // Survex
-        break;
-      case 4: // Therion
+      case 3: // Therion
         {
           if ( TDLevel.overExpert ) mImportData.mTherionPath = mCBtherionPath.isChecked();
         }
         break;
-      case 5: // VTopo
+      case 4: // VTopo
         {
           // TDLog.v("set VTopo options");
           mImportData.mLrud = mCBlrudTro.isChecked();
@@ -225,13 +225,13 @@ public class ImportDialogShot extends MyDialog
           mImportData.mTrox = mCBtroxTro.isChecked();
         }
         break;
-      case 6: // Walls
+      case 5: // Walls
         break;
-      case 7: // PTopo
+      // case 7: // PTopo
+      //   break;
+      case 6: // TRobot
         break;
-      case 8: // TRobot
-        break;
-      case 9: // CSV
+      case 7: // CSV
         {
           mImportData.mCsv = ( mCsvBric.isChecked() )? ImportData.CSV_BRIC : ( mCsvCavway.isChecked() )? ImportData.CSV_CAVWAY : ImportData.CSV_NONE;
           if ( mImportData.mCsv == ImportData.CSV_NONE ) {

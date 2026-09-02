@@ -199,13 +199,13 @@ public class TDConst
   public static final String[] mSurveyImportTypes = { 
     "ZIP", 
     "Compass",
-    "CaveSniper",
+    // "CaveSniper",
     "Survex",
     "Therion",
     "VisualTopo",
     // "VisualTopo-X",
     "Walls",
-    "PocketTopo",
+    // "PocketTopo",
     "TopoRobot",
     "CSV"
   };
@@ -213,13 +213,13 @@ public class TDConst
   private static final int[] mSurveyImportIndex = {
     SURVEY_FORMAT_ZIP,
     SURVEY_FORMAT_DAT,
-    SURVEY_FORMAT_SNP,
+    // SURVEY_FORMAT_SNP,
     SURVEY_FORMAT_SVX,
     SURVEY_FORMAT_TH,
     SURVEY_FORMAT_TRO,
     // SURVEY_FORMAT_TROX,
     SURVEY_FORMAT_SRV,
-    SURVEY_FORMAT_TOP,
+    // SURVEY_FORMAT_TOP,
     SURVEY_FORMAT_TRB,
     SURVEY_FORMAT_CSV
   };

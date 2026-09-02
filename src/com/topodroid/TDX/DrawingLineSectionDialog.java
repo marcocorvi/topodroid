@@ -141,14 +141,11 @@ class DrawingLineSectionDialog extends MyDialog
     super.onCreate(savedInstanceState);
     // cannot use initLayout
     if ( mFrom != null && mTo != null ) {
-      initLayout( R.layout.drawing_line_section_dialog,
-        String.format( resString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom + " " + mTo );
+      initLayout( R.layout.drawing_line_section_dialog, String.format( resString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom + " " + mTo );
     } else if ( mFrom != null ) {
-      initLayout( R.layout.drawing_line_section_dialog, 
-        String.format( resString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom );
+      initLayout( R.layout.drawing_line_section_dialog, String.format( resString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom );
     } else {
-      initLayout( R.layout.drawing_line_section_dialog, 
-        String.format( resString( R.string.title_draw_line_no_stations ), mLine.getThName( ) ) );
+      initLayout( R.layout.drawing_line_section_dialog, String.format( resString( R.string.title_draw_line_no_stations ), mLine.getThName( ) ) );
     }
 
     mTVoptions = (TextView) findViewById( R.id.line_options );

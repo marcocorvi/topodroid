@@ -1669,7 +1669,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   /** clip a line to the scrap outline
    * @param line  line to clip
+   * @param clip_mode  clipping mode
    */
-  void clipLine( DrawingLinePath line ) { if ( commandManager != null ) commandManager.clipLine( line ); }
+  void clipLine( DrawingLinePath line, int clip_mode ) { if ( commandManager != null ) commandManager.clipLine( line, clip_mode ); }
 
 }

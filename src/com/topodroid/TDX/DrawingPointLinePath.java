@@ -67,12 +67,22 @@ public class DrawingPointLinePath extends DrawingPath
    * @return the first point of the path
    * @note access to mFirst mLast is used only by Selection
    */
-
   public LinePoint first() { return mFirst; }
+
   /** last point of the path
    * @return the last point of the path
    */
   public LinePoint last()  { return mLast; }
+
+  /** middle point of the path
+   * @return the middle point of the path
+   */
+  public LinePoint middle()
+  {
+    LinePoint ret = mFirst;
+    for ( int k = (mSize-1)/2; k>0; --k ) ret = ret.mNext;
+    return ret;
+  }
 
   /** check if a point is not the first nor the last point of the path
    * @param lp   line point
@@ -310,7 +320,7 @@ public class DrawingPointLinePath extends DrawingPath
    * @return the line point after the given line point, or null
    * @note not static because DrawingAreaPath
    */
-  LinePoint next( LinePoint lp )
+  public LinePoint next( LinePoint lp )
   {
     if ( lp == null ) return null;
     return lp.mNext;
@@ -321,7 +331,7 @@ public class DrawingPointLinePath extends DrawingPath
    * @return the line point before the given line point, or null
    * @note not static because DrawingAreaPath
    */
-  LinePoint prev( LinePoint lp )
+  public LinePoint prev( LinePoint lp )
   {
     if ( lp == null ) return null;
     return lp.mPrev;
@@ -997,6 +1007,12 @@ public class DrawingPointLinePath extends DrawingPath
     setLast( lp2 );
   }
 
+  /** set the first line point
+   * @param lp1 line point that becomes first
+   * old   o <-- First <--> 2-nd <--> 3-rd <--> ...
+   * new   o <-- point <--> 2-nd ==> o
+   *                             o <== First <--> ...
+   */
   void setFirst( LinePoint lp1 ) 
   {
     if ( lp1 != mFirst ) { // 20230518 added test
@@ -1006,13 +1022,17 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
+  /** set the last line point
+   * @param lp2 line point that becomes last
+   * old  ... <--> 3-rd <--> 2-nd <--> Last --> o
+   * new           Last ==> o
+   *                   o <== 2-nd <--> point --> o
+   */
   void setLast( LinePoint lp2 )
   {
     if ( lp2 != mLast ) { // 20230518 added test
-      lp2.mPrev = mLast.mPrev;
-      if ( mLast.mPrev != null ) mLast.mPrev.mNext = lp2;
+      mLast = lp2;
       if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
-      mLast = lp2; // (2)
       mLast.mNext = null;
     }
   }

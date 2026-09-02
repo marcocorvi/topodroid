@@ -63,7 +63,7 @@ public class SymbolLineLibrary extends SymbolLibrary
 
   boolean isClosed( int k ) { return k >= 0 && k < size() && ((SymbolLine)mSymbols.get(k)).mClosed; }
 
-  boolean isClippable( int k ) { return k >= 0 && k < size() && ((SymbolLine)mSymbols.get(k)).mClippable; }
+  int getClippable( int k ) { return (k >= 0 && k < size())? ((SymbolLine)mSymbols.get(k)).mClippable : 0; }
 
   int getStyleX( int k ) { return ( k < 0 || k >= size() )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }
 
@@ -130,7 +130,7 @@ public class SymbolLineLibrary extends SymbolLibrary
     DashPathEffect dash = new DashPathEffect( x, 0 );
     // String section = res.getString ( R.string.p_section );
     symbol = new SymbolLine( res.getString( R.string.thl_section ), SECTION, null, SECTION, 0xffcccccc, 1, dash, dash, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
-    symbol.mClippable = false;
+    symbol.mClippable = 0;
     addSymbol( symbol );
 
     // mSymbolNr = mSymbols.size();
