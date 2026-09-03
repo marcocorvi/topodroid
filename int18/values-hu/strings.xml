@@ -1956,8 +1956,8 @@
   <string name="pref_linecurve_summary">Sima/Kiegyenesített vonal szakasz lehetőség</string>
   <string name="pref_linestraight_title">Kiegyenesített vonal</string>
   <string name="pref_linestraight_summary">Egyenesítse az egész vonalat</string>
-  <string name="pref_lineclip_title">iClip vonal</string>
-  <string name="pref_lineclip_summary">Vonalvágás engedélyezése körvonalhoz</string>
+  <string name="pref_lineclip_title">Vonal levágás</string>
+  <string name="pref_lineclip_summary">Vonalvágás engedélyezése körvonalnál</string>
   <string name="pref_path_multiselect_title">Útvonalas kiválasztás</string>
   <string name="pref_path_multiselect_summary">Útvonalas többes kiválasztás lehetőség</string>
   <!-- UNUSED string name="pref_composite_actions_title">Összetett lehetőség</string -->
