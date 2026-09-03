@@ -13,7 +13,7 @@ package com.topodroid.prefs;
 
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDLog;
-import com.topodroid.help.AIhelper;
+// import com.topodroid.help.AIhelper; // GEMINI
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.R;
@@ -846,7 +846,7 @@ class TDPrefKey
     new TDPrefKey( T, BOOL, GEN, "DISTOX_BULK_EXPORT",   R.string.pref_bulk_export_title,   R.string.pref_bulk_export_summary,   FALSE ),
     new TDPrefKey( T, BOOL, BT,  "DISTOX_PACKET_LOGGER", R.string.pref_packet_logger_title, R.string.pref_packet_logger_summary, FALSE ),
     new TDPrefKey( T, BOOL, XT,  "DISTOX_TH2_EDIT",      R.string.pref_th2_edit_title,      R.string.pref_th2_edit_summary,      FALSE ),
-    new TDPrefKey( E, BTN,  GEN, "DISTOX_GEMINI",        R.string.pref_gemini_title,        R.string.pref_gemini_summary,        TDString.EMPTY ),
+    // new TDPrefKey( E, BTN,  GEN, "DISTOX_GEMINI",        R.string.pref_gemini_title,        R.string.pref_gemini_summary,        TDString.EMPTY ),
     new TDPrefKey( A,       NON, "DISTOX_GEEK_SHOT",     R.string.pref_cat_survey        ),
     new TDPrefKey( T,       NON, "DISTOX_GEEK_SPLAY",    R.string.pref_cat_splay         ),           
     new TDPrefKey( A,       NON, "DISTOX_GEEK_PLOT",     R.string.pref_cat_drawing       ),
@@ -977,16 +977,16 @@ class TDPrefKey
       }
       ++ cat;
     }
-    if ( ! AIhelper.HAS_AI ) {
-      int len = mGeek.length; 
-      for ( int i = 0; i < len; ++i ) {
-        TDPrefKey k = mGeek[ i ];
-        if ( k != null && k.key.equals( "DISTOX_GEMINI" ) ) {
-          for ( ; i+1 < len; ++i ) mGeek[ i ] = mGeek[ i+1 ];
-          mGeek = Arrays.copyOf( mGeek, len-1 );
-        }
-      }
-    }
+    // if ( ! AIhelper.HAS_AI ) { // GEMINI
+    //   int len = mGeek.length; 
+    //   for ( int i = 0; i < len; ++i ) {
+    //     TDPrefKey k = mGeek[ i ];
+    //     if ( k != null && k.key.equals( "DISTOX_GEMINI" ) ) {
+    //       for ( ; i+1 < len; ++i ) mGeek[ i ] = mGeek[ i+1 ];
+    //       mGeek = Arrays.copyOf( mGeek, len-1 );
+    //     }
+    //   }
+    // }
     if ( TDLevel.isDebugBuild() ) {
       for ( TDPrefKey k : mGeek ) {
         if ( k != null && k.key.equals( "DISTOX_WITH_DEBUG" ) ) k.level = T;
@@ -1108,7 +1108,8 @@ class TDPrefKey
    */
   static boolean repeatedKey( int j, int k ) 
   {
-    return ( j ==  0 && k == 7 ) // DISTOX_GEMINI is not exported
+    return false
+        // || ( j == 19 && k == 7 ) // DISTOX_GEMINI is not exported
         || ( j ==  3 && k > 5 )  // mCalib : not repeated but not to export
         || ( j == 11 && k < 7 )  // mLine
         || ( j == 12 && k < 3 )  // mPoint

@@ -17,7 +17,6 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDMath;
 import com.topodroid.util.TDLog;
 import com.topodroid.math.Point2D;
-import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 
 import android.graphics.Path;
@@ -215,7 +214,7 @@ public class DrawingPointLinePath extends DrawingPath
 
   /** count the number of points of the path
    */
-  void recount() // throws Exception
+  public void recount() // throws Exception
   {
     if ( mFirst == null ) {
       mSize = 0;
@@ -651,7 +650,7 @@ public class DrawingPointLinePath extends DrawingPath
 
   /** retrace the path
    */
-  void retracePath()
+  public void retracePath()
   {
     // TDLog.v("PointLine retrace path: closed " + mClosed );
     // int size = mPoints.size();
@@ -859,7 +858,7 @@ public class DrawingPointLinePath extends DrawingPath
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
 	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	  if ( np > 1 ) {
-	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	    com.topodroid.algo.bezier.BezierCurve bc = new com.topodroid.algo.bezier.BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	    for ( int n=1; n < np; ++n ) {
 	      Point2D p = bc.evaluate( (float)n / (float)np );
               pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
@@ -896,7 +895,7 @@ public class DrawingPointLinePath extends DrawingPath
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
 	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	  if ( np > 1 ) {
-	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	    com.topodroid.algo.bezier.BezierCurve bc = new com.topodroid.algo.bezier.BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	    for ( int n=1; n < np; ++n ) {
 	      Point2D p = bc.evaluate( (float)n / (float)np );
               pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
@@ -1013,7 +1012,7 @@ public class DrawingPointLinePath extends DrawingPath
    * new   o <-- point <--> 2-nd ==> o
    *                             o <== First <--> ...
    */
-  void setFirst( LinePoint lp1 ) 
+  public void setFirst( LinePoint lp1 ) 
   {
     if ( lp1 != mFirst ) { // 20230518 added test
       mFirst = lp1; // (1)
@@ -1028,7 +1027,7 @@ public class DrawingPointLinePath extends DrawingPath
    * new           Last ==> o
    *                   o <== 2-nd <--> point --> o
    */
-  void setLast( LinePoint lp2 )
+  public void setLast( LinePoint lp2 )
   {
     if ( lp2 != mLast ) { // 20230518 added test
       mLast = lp2;

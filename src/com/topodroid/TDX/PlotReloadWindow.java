@@ -103,7 +103,6 @@ public class PlotReloadWindow extends ItemDrawer
 
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
-  // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mReloadSurface;
 
   private boolean mZoomBtnsCtrlOn = false;

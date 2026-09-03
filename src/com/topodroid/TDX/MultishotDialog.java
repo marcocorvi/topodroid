@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.text.InputType;
 
 import android.content.Context;
-// import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -103,7 +102,6 @@ class MultishotDialog extends MyDialog
     // mETfrom.setOnLongClickListener( this );
     // mETto.setOnLongClickListener( this );
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
     if ( TDSetting.mKeyboard ) {

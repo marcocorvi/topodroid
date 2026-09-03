@@ -17,9 +17,9 @@ public interface IHelpViewer
 {
   public void showManPage( String page );
 
-  public void showAIdialog();
+  // public void showAIdialog(); // GEMINI
 
-  public void showInvalid( final TDPref pref, final String response );
+  // public void showInvalid( final TDPref pref, final String response ); // GEMINI
 
-  public void setAIbuttonEnabled( boolean enabled );
+  // public void setAIbuttonEnabled( boolean enabled ); GEMINI
 }

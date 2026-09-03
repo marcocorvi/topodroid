@@ -18,7 +18,6 @@ import com.topodroid.util.TDString;
 // import com.topodroid.util.TDTag;
 import com.topodroid.util.TDColor;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.math.BezierCurve;
 import com.topodroid.math.Point2D;
 import com.topodroid.io.dxf.SymbolPointDxf;
 import com.topodroid.io.dxf.DxfColor;
@@ -634,7 +633,7 @@ public class SymbolPoint extends Symbol
          //    DrawingDxf.printInt( pw, 70, 8 + 0 ); // polyline flag 8 = 3D polyline, 1 = closed 
          //    DrawingDxf.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
          //    DrawingDxf.printXYZ( pw, 0.0f, 0.0f, 0.0f, 0 ); // position
-         //    BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
+         //    com.topodroid.algo.bezier.BezierCurve bc = new com.topodroid.algo.bezier.BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
          //    DrawingDxf.printString( pw, 0, "VERTEX" ); 
          //    DrawingDxf.printString( pw, 8, p_name ); // layer
          //    DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
@@ -662,7 +661,7 @@ public class SymbolPoint extends Symbol
            float[] yy = new float[ np+1 ];
            xx[0] =  x00;
            yy[0] = -y00;
-           BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
+           com.topodroid.algo.bezier.BezierCurve bc = new com.topodroid.algo.bezier.BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
            for ( int n=1; n < np; ++n ) { 
              Point2D pb = bc.evaluate( (float)n / (float)np );
              // TDLog.v( "point " + n + " " + pb.x + " " + pb.y );

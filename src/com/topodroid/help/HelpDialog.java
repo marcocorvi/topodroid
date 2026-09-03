@@ -13,7 +13,7 @@ package com.topodroid.help;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.prefs.GeminiDialog;
+// import com.topodroid.prefs.GeminiDialog; // GEMINI
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPref;
 import com.topodroid.TDX.TDandroid;
@@ -138,20 +138,20 @@ public class HelpDialog extends MyDialog
     UserManualActivity.showHelpPage( mContext, page );
   }
 
-  public void showAIdialog()
-  {
-    (new HelpAIdialog( mContext, this, TDSetting.mGeminiApiKey, mPage )).show();
-  }
+  // public void showAIdialog() // GEMINI
+  // {
+  //   (new HelpAIdialog( mContext, this, TDSetting.mGeminiApiKey, mPage )).show();
+  // }
 
-  public void showInvalid( final TDPref pref, final String response )
-  {
-    // mParent.runOnUiThread(
-    TDandroid.runOnMainThread( new Runnable() { public void run() {
-      TDToast.makeWarn( response ); 
-      if ( pref != null ) pref.setButtonValue( "---" );
-      TDSetting.setGeminiApiKey( "" );
-    } } );
-  }
+  // public void showInvalid( final TDPref pref, final String response ) // GEMINI
+  // {
+  //   // mParent.runOnUiThread(
+  //   TDandroid.runOnMainThread( new Runnable() { public void run() {
+  //     TDToast.makeWarn( response ); 
+  //     if ( pref != null ) pref.setButtonValue( "---" );
+  //     TDSetting.setGeminiApiKey( "" );
+  //   } } );
+  // }
   
 
   /** react to a user long tap - only the taps on "man book" are taken
@@ -167,9 +167,7 @@ public class HelpDialog extends MyDialog
   }
 
   // @note calls are already conditioned to HAS_AI true
-  public void setAIbuttonEnabled( boolean enabled )
-  {
-  }
+  // public void setAIbuttonEnabled( boolean enabled ) { } // GEMINI
 
 }
 

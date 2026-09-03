@@ -45,7 +45,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 
 // import android.text.InputType;
-// import android.inputmethodservice.KeyboardView;
 
 class DrawingScanSetDialog extends MyDialog
                            implements View.OnClickListener
@@ -121,7 +120,6 @@ class DrawingScanSetDialog extends MyDialog
     // mCBplan.setOnClickListener( this );
     // mCBprofile.setOnClickListener( this );
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
     mKeyboard= MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
 
     mBtnOK     = (Button) findViewById(R.id.btn_ok);

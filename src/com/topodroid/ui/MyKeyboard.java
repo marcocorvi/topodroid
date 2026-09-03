@@ -76,7 +76,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
 
   private Context  mContext;
   private EditText mEdit; 
-  private KeyboardView mKeyboardView;
+  private KeyboardView mKeyboardView; // FIXME
   private Keyboard mKeyboard;
   private Keyboard mKeyboard1;
   private Keyboard mKeyboard2; // secondary kbd

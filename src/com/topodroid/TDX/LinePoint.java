@@ -17,7 +17,7 @@
  *
  * 2016-06-16
  * control points coords renamed from mX1 to x1, etc.
- * following similar renaming for coords of Point2D (ie. BezierPoint)
+ * following similar renaming for coords of Point2D 
  */
 package com.topodroid.TDX;
 

@@ -23,7 +23,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDKey;
 // import com.topodroid.util.TDColor;
 import com.topodroid.help.UserManDownload;
-import com.topodroid.help.AIhelper;
+// import com.topodroid.help.AIhelper; // GEMINI
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.TDandroid;
@@ -1132,10 +1132,10 @@ public class TDSetting
     mPacketLog = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_PACKET_LOGGER
     mTh2Edit   = prefs.getBoolean(  key[k].key, bool(key[k].dflt) );    ++k; // DISTOX_TH2_EDIT
     int debug_index = key.length - 1;
-    if ( AIhelper.HAS_AI ) {
-      retrieveGeminiApiKey( prefs.getString( key[k].key, key[k].dflt ) ); ++k; // DISTOX_GEMINI
-      debug_index --;
-    }
+    // if ( AIhelper.HAS_AI ) {
+    //   retrieveGeminiApiKey( prefs.getString( key[k].key, key[k].dflt ) ); ++k; // DISTOX_GEMINI
+    //   debug_index --;
+    // }
     TDPrefKey debug_key = key[ debug_index ];
     mWithDebug = false;
     if ( debug_key != null && TDLevel.isDebugBuild() ) {
@@ -1765,51 +1765,51 @@ public class TDSetting
     return ret;
   }
 
-  /** set the value of the Gemini API key and store it
-   * @param value   new vallue
-   */
-  public static void setGeminiApiKey( String value ) 
-  { 
-    mGeminiApiKey = value;
-    // TDLog.v("Set API key: " + value );
-    if ( value == null || value.length() < 20 ) {
-      mGeminiApiKey = "";
-      TDPrefHelper.update( "DISTOX_GEMINI", value );
-    } else {
-      String enc_key = value;
-      try {
-        enc_key = TDKey.encrypt( value );
-        // TDLog.v("Encrypted API key: " + value );
-      } catch ( Exception e ) {
-        TDLog.e("Failed encription " + e + " saving plain text" );
-      }
-      // TDLog.v("Store API key " + enc_key );
-      TDPrefHelper.update( "DISTOX_GEMINI", enc_key );
-    }
-  }
+  // /** set the value of the Gemini API key and store it
+  //  * @param value   new vallue
+  //  */
+  // public static void setGeminiApiKey( String value ) 
+  // { 
+  //   mGeminiApiKey = value;
+  //   // TDLog.v("Set API key: " + value );
+  //   if ( value == null || value.length() < 20 ) {
+  //     mGeminiApiKey = "";
+  //     TDPrefHelper.update( "DISTOX_GEMINI", value );
+  //   } else {
+  //     String enc_key = value;
+  //     try {
+  //       enc_key = TDKey.encrypt( value );
+  //       // TDLog.v("Encrypted API key: " + value );
+  //     } catch ( Exception e ) {
+  //       TDLog.e("Failed encription " + e + " saving plain text" );
+  //     }
+  //     // TDLog.v("Store API key " + enc_key );
+  //     TDPrefHelper.update( "DISTOX_GEMINI", enc_key );
+  //   }
+  // }
 
-  private static void  retrieveGeminiApiKey( String enc_key )
-  {
-    // TDLog.v("Encrypted API key: " + enc_key );
-    if ( enc_key == null || enc_key.length() < 20 ) {
-      mGeminiApiKey = "";
-    } else if ( enc_key.startsWith( "AIza" ) || enc_key.startsWith( "AQ") ) {
-      mGeminiApiKey =  enc_key;
-    } else { 
-      if ( enc_key.indexOf(":") > 0 ) {
-        try { 
-          mGeminiApiKey = TDKey.decrypt( enc_key );
-          // TDLog.v("API key: " + mGeminiApiKey );
-        } catch ( Exception e ) {
-          TDLog.e("Failed decription " + e + " Gemini API key unset" );
-          mGeminiApiKey = "";
-        }
-      } else {
-        mGeminiApiKey =  enc_key;
-        // TDLog.v("Key not encrypted: " + mGeminiApiKey );
-      }
-    }
-  }
+  // private static void  retrieveGeminiApiKey( String enc_key )
+  // {
+  //   // TDLog.v("Encrypted API key: " + enc_key );
+  //   if ( enc_key == null || enc_key.length() < 20 ) {
+  //     mGeminiApiKey = "";
+  //   } else if ( enc_key.startsWith( "AIza" ) || enc_key.startsWith( "AQ") ) {
+  //     mGeminiApiKey =  enc_key;
+  //   } else { 
+  //     if ( enc_key.indexOf(":") > 0 ) {
+  //       try { 
+  //         mGeminiApiKey = TDKey.decrypt( enc_key );
+  //         // TDLog.v("API key: " + mGeminiApiKey );
+  //       } catch ( Exception e ) {
+  //         TDLog.e("Failed decription " + e + " Gemini API key unset" );
+  //         mGeminiApiKey = "";
+  //       }
+  //     } else {
+  //       mGeminiApiKey =  enc_key;
+  //       // TDLog.v("Key not encrypted: " + mGeminiApiKey );
+  //     }
+  //   }
+  // }
 
   // return the new string value if the value has been corrected
   //        otherwise returns null
@@ -2116,9 +2116,9 @@ public class TDSetting
     } else if ( k.equals( key[ 6 ].key ) ) {
       mTh2Edit = tryBooleanValue( hlp, k, v, bool(key[6].dflt) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( AIhelper.HAS_AI && k.equals( key[ 7 ].key ) ) {   // DISTOX_GEMINI
-      TDLog.e("Gemini API key is not set in normal way");
-      // mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
+    // } else if ( AIhelper.HAS_AI && k.equals( key[ 7 ].key ) ) {   // DISTOX_GEMINI
+    //   TDLog.e("Gemini API key is not set in normal way");
+    //   // mGeminiApiKey = tryStringValue( hlp, k, v, key[7].dflt );
     } else if ( TDLevel.isDebugBuild() && k.equals( key[ key.length - 1 ].key ) ) {
       mWithDebug =  tryBooleanValue( hlp, k, v, bool(key[ key.length - 1 ].dflt) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
@@ -3592,7 +3592,7 @@ public class TDSetting
         for ( int k = 0; k < n2; ++k ) {
           if ( TDPrefKey.repeatedKey( j, k ) ) continue;
           TDPrefKey kay = TDPrefKey.getKey( j, k );
-          if ( kay != null && kay.key.equals("DISTOX_GEMINI") ) continue;  // really make sure API_key not exported
+          // if ( kay != null && kay.key.equals("DISTOX_GEMINI") ) continue;  // really make sure API_key not exported
           if ( ( flag & (1<<kay.group) ) != 0 ) {
             String val;
             boolean bval;
@@ -4077,9 +4077,9 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_BULK_EXPORT":
               mBulkExport = Boolean.parseBoolean( value ); setPreference( editor, kay, mBulkExport );
               break;
-            case "DISTOX_GEMINI":
-              /* Gemini API key is not imported */
-              break;
+            // case "DISTOX_GEMINI":
+            //   /* Gemini API key is not imported */
+            //   break;
             // case "DISTOX_LOCAL_MAN":
             //   setPreference( editor, kay, mLocalManPages );
             //   break;

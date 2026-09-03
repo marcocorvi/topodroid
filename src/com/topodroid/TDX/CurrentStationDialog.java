@@ -37,7 +37,6 @@ import android.content.res.Configuration;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.inputmethodservice.KeyboardView;
 
 // import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -172,7 +171,6 @@ class CurrentStationDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
     ( (Button) findViewById(R.id.button_cancel) ).setOnClickListener( this );
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
     if ( TDSetting.mKeyboard ) {

@@ -142,6 +142,7 @@ public class CalibGMDialog extends MyDialog
 
     mET_name.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
 
+    // FIXME
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, -1 );
     if ( TDSetting.mKeyboard ) {
       MyKeyboard.registerEditText( mKeyboard, mET_name, MyKeyboard.FLAG_SIGN );

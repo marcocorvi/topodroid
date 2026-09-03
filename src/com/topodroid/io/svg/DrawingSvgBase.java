@@ -19,7 +19,6 @@ import com.topodroid.util.TDFile;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.math.Point2D;
-import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.TDX.TDPath;
@@ -412,7 +411,7 @@ public class DrawingSvgBase
 	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
 	int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	if ( np > 1 ) {
-	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	  com.topodroid.algo.bezier.BezierCurve bc = new com.topodroid.algo.bezier.BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	  for ( int n=1; n < np; ++n ) {
 	    Point2D pb = bc.evaluate( (float)n / (float)np );
             printPoint( pw, " L", pb.x, pb.y );

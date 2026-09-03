@@ -20,8 +20,8 @@ import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyButton;
 import com.topodroid.help.IHelpViewer;
-import com.topodroid.help.AIdialog;
-import com.topodroid.help.AIhelper;
+// import com.topodroid.help.AIdialog; // GEMINI
+// import com.topodroid.help.AIhelper;
 // import com.topodroid.help.AIlocalModel; // GEMMA3
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
@@ -84,8 +84,8 @@ public class TDPrefActivity extends Activity
 
   // private TDPref mCwdPref;
   // private TDPref mBtAliasPref;
-  private TDPref mPtCmapPref;
-  private TDPref mGeminiPref;
+  // private TDPref mPtCmapPref;
+  // private TDPref mGeminiPref;
   private TDPref mGraphPaperScalePref;
 
   // private TopoDroidApp mApp;
@@ -117,7 +117,7 @@ public class TDPrefActivity extends Activity
     if ( this == mPrefActivityAll ) mPrefActivityAll = null;
     if ( this == mPrefActivitySurvey ) mPrefActivitySurvey = null;
     // if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) { TopoDroidApp.mPrefActivityAll = null; }
-    AIdialog.resetChat();
+    // AIdialog.resetChat();
   }
 
   /** lifecycle: activity create
@@ -301,9 +301,7 @@ public class TDPrefActivity extends Activity
   }
 
   // @note calls are already conditioned to HAS_AI true
-  public void setAIbuttonEnabled( boolean enabled )
-  {
-  }
+  // public void setAIbuttonEnabled( boolean enabled ) { } // GEMINI
 
   /** load the preferences
    */
@@ -314,16 +312,16 @@ public class TDPrefActivity extends Activity
     LinearLayout layout = (LinearLayout) findViewById( R.id.layout );
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     layout.setOnLongClickListener( this );
-    mAIbutton = (ImageButton)findViewById( R.id.title_button );
-    if ( AIhelper.HAS_AI ) {
-      /* IF GEMMA3
-      setAIbuttonEnabled( mWithLocalModel || TDandroid.isOnline( this ) );
-      // ELSE GEMMA3 */
-      setAIbuttonEnabled( TDandroid.isOnline( this ) );
-      // END GEMMA3 */
-    } else {
-      mAIbutton.setVisibility( View.GONE );
-    }
+    // mAIbutton = (ImageButton)findViewById( R.id.title_button ); // GEMINI
+    // if ( AIhelper.HAS_AI ) {
+    //   /* IF GEMMA3
+    //   setAIbuttonEnabled( mWithLocalModel || TDandroid.isOnline( this ) );
+    //   // ELSE GEMMA3 */
+    //   setAIbuttonEnabled( TDandroid.isOnline( this ) );
+    //   // END GEMMA3 */
+    // } else {
+    //   mAIbutton.setVisibility( View.GONE );
+    // }
 
     mTitleText = (TextView)findViewById( R.id.title_text );
     mTitleText.setTextColor( 0xff6699ff );
@@ -473,21 +471,21 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_WALLS3D_PREF",        TDPrefCat.PREF_WALLS3D );
 
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_GEEK ) {
-      if ( AIhelper.HAS_AI ) {
-        mGeminiPref = findPreference( "DISTOX_GEMINI" );
-        if ( mGeminiPref != null ) {
-          View v = mGeminiPref.getView();
-          if ( v != null ) {
-            GeminiDialog gemini_dialog = new GeminiDialog( this, this, mGeminiPref ); // null UserManualActivity
-            v.setOnClickListener( 
-              new OnClickListener() {
-                @Override
-                public void onClick( View v ) { gemini_dialog.show(); }
-            } );
-          }
-          mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "---" : "***" );
-        }
-      }
+      // if ( AIhelper.HAS_AI ) {
+      //   mGeminiPref = findPreference( "DISTOX_GEMINI" );
+      //   if ( mGeminiPref != null ) {
+      //     View v = mGeminiPref.getView();
+      //     if ( v != null ) {
+      //       GeminiDialog gemini_dialog = new GeminiDialog( this, this, mGeminiPref ); // null UserManualActivity
+      //       v.setOnClickListener( 
+      //         new OnClickListener() {
+      //           @Override
+      //           public void onClick( View v ) { gemini_dialog.show(); }
+      //       } );
+      //     }
+      //     mGeminiPref.setButtonValue( TDString.isNullOrEmpty( TDSetting.mGeminiApiKey )? "---" : "***" );
+      //   }
+      // }
 
       // TDLog.v("PREF link GEEK sub-categories");
       linkPreference( "DISTOX_GEEK_SHOT",           TDPrefCat.PREF_GEEK_SHOT );
@@ -688,42 +686,42 @@ public class TDPrefActivity extends Activity
     }
   }
 
-  public void showAIdialog() {}
+  // public void showAIdialog() {} // GEMINI
 
-  public void showInvalid( final TDPref pref, final String response )
-  {
-    // this.runOnUiThread( 
-    TDandroid.runOnMainThread( 
-      new Runnable() { public void run() {
-        TDToast.makeWarn( response ); 
-        if ( pref != null ) pref.setButtonValue( "---" );
-        TDSetting.setGeminiApiKey( "" );
-      }
-    } );
-  }
+  // public void showInvalid( final TDPref pref, final String response ) // GEMINI
+  // {
+  //   // this.runOnUiThread( 
+  //   TDandroid.runOnMainThread( 
+  //     new Runnable() { public void run() {
+  //       TDToast.makeWarn( response ); 
+  //       if ( pref != null ) pref.setButtonValue( "---" );
+  //       TDSetting.setGeminiApiKey( "" );
+  //     }
+  //   } );
+  // }
 
-  // @note called only by setAIbuttoEnabled
-  public void startGemini()
-  {
-    if ( ! AIhelper.HAS_AI ) return;
-    /* GEMMA3
-    TDLog.v("Start Gemini with local AI " + mWithLocalModel );
-    if ( mWithLocalModel ) {
-      // if ( ! mWithLocalModelDialog ) {
-      //   mWithLocalModelDialog = true;
-        TDToast.makeLong( "Please wait while the AI starts up" );
-        setAIbuttonEnabled( false );
-        (new PrefAIdialog( this, this, null, TDPrefCat.mCategories[ mPrefCategory ] ) ).show();
-      // }
-    } else
-    // END GEMMA3 */
-    if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-      setAIbuttonEnabled( false );
-      (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, TDPrefCat.mCategories[ mPrefCategory ] ) ).show();
-    } else { // start API key dialog
-      (new GeminiDialog( this, this, null )).show();
-    }
-  }
+  // // @note called only by setAIbuttoEnabled // GEMINI
+  // public void startGemini()
+  // {
+  //   if ( ! AIhelper.HAS_AI ) return;
+  //   /* GEMMA3
+  //   TDLog.v("Start Gemini with local AI " + mWithLocalModel );
+  //   if ( mWithLocalModel ) {
+  //     // if ( ! mWithLocalModelDialog ) {
+  //     //   mWithLocalModelDialog = true;
+  //       TDToast.makeLong( "Please wait while the AI starts up" );
+  //       setAIbuttonEnabled( false );
+  //       (new PrefAIdialog( this, this, null, TDPrefCat.mCategories[ mPrefCategory ] ) ).show();
+  //     // }
+  //   } else
+  //   // END GEMMA3 */
+  //   if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+  //     setAIbuttonEnabled( false );
+  //     (new PrefAIdialog( this, this, TDSetting.mGeminiApiKey, TDPrefCat.mCategories[ mPrefCategory ] ) ).show();
+  //   } else { // start API key dialog
+  //     (new GeminiDialog( this, this, null )).show();
+  //   }
+  // }
 
   // @Override 
   // public boolean onTouchEvent( MotionEvent ev )

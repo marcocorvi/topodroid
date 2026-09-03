@@ -74,7 +74,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.TextView.OnEditorActionListener;
 
-// import android.inputmethodservice.KeyboardView;
 
 // import android.location.Location;
 // import android.location.LocationListener;

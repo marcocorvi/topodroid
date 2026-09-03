@@ -73,6 +73,7 @@ public class GMSearchDialog extends MyDialog
 
     ( (Button) findViewById(R.id.btn_close) ).setOnClickListener( this ); // CLOSE
 
+    // FIXME
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {

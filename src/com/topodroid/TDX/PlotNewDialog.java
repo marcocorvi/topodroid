@@ -23,7 +23,6 @@ import java.util.Locale;
 import android.os.Bundle;
 
 import android.content.Context;
-// import android.inputmethodservice.KeyboardView;
 
 import android.widget.EditText;
 import android.widget.Button;
@@ -107,7 +106,6 @@ class PlotNewDialog extends MyDialog
       mCBdangling.setVisibility( View.GONE );
     }
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
     if ( TDSetting.mKeyboard ) {

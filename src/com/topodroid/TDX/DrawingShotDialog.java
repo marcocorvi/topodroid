@@ -46,7 +46,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 // import android.text.InputType;
-// import android.inputmethodservice.KeyboardView;
 
 class DrawingShotDialog extends MyDialog
                         implements View.OnClickListener
@@ -146,7 +145,6 @@ class DrawingShotDialog extends MyDialog
     mETfrom.setOnLongClickListener( this );
     mETto.setOnLongClickListener( this );
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
     mKeyboard= MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
 
     mBtnOK     = (Button) findViewById(R.id.btn_ok);

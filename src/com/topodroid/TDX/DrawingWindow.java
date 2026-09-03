@@ -31,8 +31,6 @@ import com.topodroid.num.NumSplay;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
-// import com.topodroid.math.BezierCurve;
-// import com.topodroid.math.BezierInterpolator;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyButtonBar;
 import com.topodroid.ui.MyHorizontalListView;
@@ -523,7 +521,7 @@ public class DrawingWindow extends ItemDrawer
   private String mSectionName;
   private String mMoveTo; // station of highlighted splay
 
-  // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
+  // private static com.topodroid.algo.bezier.BezierInterpolator mInterpolator = new BezierInterpolator();
   private DrawingSurface  mDrawingSurface;
   private DrawingLinePath mCurrentLinePath;
   // private DrawingLinePath mLastLinePath = null;
@@ -2834,7 +2832,7 @@ public class DrawingWindow extends ItemDrawer
     // redoBtn.setEnabled(false);
     // undoBtn.setEnabled(false); // let undo always be there
 
-    // mBezierInterpolator = new BezierInterpolator( );
+    // mInterpolator = new com.topodroid.algo.bezier.BezierInterpolator( );
 
     String pathname = null;
     Bundle extras = getIntent().getExtras();
@@ -5139,12 +5137,12 @@ public class DrawingWindow extends ItemDrawer
                     for ( ; lp != null; lp = lp.mNext ) {
                       pts.add( new Point2D( lp.x, lp.y ) );
                     }
-                    mBezierInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
-                    ArrayList< BezierCurve > curves = mBezierInterpolator.getCurves();
+                    mInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
+                    ArrayList< com.topodroid.algo.bezier.BezierCurve > curves = mInterpolator.getCurves();
                     int k0 = curves.size();
                     // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
                     if ( k0 > 0 ) {
-                      BezierCurve c = curves.get(0);
+                      com.topodroid.algo.bezier.BezierCurve c = curves.get(0);
                       Point2D p0 = c.getPoint(0);
                       if ( mSymbol == SymbolType.LINE ) {
                         DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
@@ -7579,8 +7577,8 @@ public class DrawingWindow extends ItemDrawer
           DrawingPointPath pp = (DrawingPointPath)sp.mItem;
           // TDLog.v("ask delete point type " + pp.mPointType );
           // if ( ! BrushManager.isPointSection( pp.mPointType ) ) { // DELETE SECTION-POINT
-            String point_name = ( BrushManager.isPointSection( pp.mPointThType )? getResources().getString( R.string.thp_section_point )
-                                                                                :  BrushManager.getPointName( pp.mPointType );
+            String point_name = BrushManager.isPointSection( pp.mPointType )? getResources().getString( R.string.thp_section_point )
+                                                                            : BrushManager.getPointName( pp.mPointType );
             askDeleteItem( pp, t, point_name );
           // }
         } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {

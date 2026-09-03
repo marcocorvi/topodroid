@@ -39,7 +39,6 @@ import android.text.InputType;
 import android.content.Context;
 // import android.content.res.Resources;
 import android.content.DialogInterface;
-// import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
 import android.widget.EditText;

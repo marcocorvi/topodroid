@@ -47,7 +47,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   /** test whether the line has the outline
    * @return true if the line has either outline OUT or IN
    */
-  boolean hasOutline() { return mOutline == OUTLINE_OUT || mOutline == OUTLINE_IN; }
+  public boolean hasOutline() { return mOutline == OUTLINE_OUT || mOutline == OUTLINE_IN; }
 
   // static int mCount = 0;
   // int mCnt;

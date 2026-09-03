@@ -48,7 +48,6 @@ import android.widget.EditText;
 import android.content.Context;
 import android.content.Intent;
 
-// import android.inputmethodservice.KeyboardView;
 
 import android.net.Uri;
 
@@ -130,7 +129,6 @@ class FixedImportDialog extends MyDialog
     // mBtnCancel = (Button)findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
     mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
 
     if ( TDSetting.mKeyboard ) {

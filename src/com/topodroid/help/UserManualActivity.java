@@ -23,8 +23,8 @@ import com.topodroid.util.TDFile;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.prefs.TDPref;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.prefs.GeminiDialog;
-import com.topodroid.help.AIdialog;
+// import com.topodroid.prefs.GeminiDialog;
+// import com.topodroid.help.AIdialog;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDandroid;
 // import com.topodroid.TDX.TDPath;
@@ -402,12 +402,12 @@ public class UserManualActivity extends MyActivity
         mList.setVisibility( View.VISIBLE );
         mOnContents = true;;
       }
-    } else if ( AIhelper.HAS_AI && mAI != null && b == mAI ) {
-      if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
-        showAIdialog();
-      } else { // start API key dialog
-        (new GeminiDialog( this, this, null )).show();
-      }
+    // } else if ( AIhelper.HAS_AI && mAI != null && b == mAI ) { // GEMINI
+    //   if ( TDSetting.mGeminiApiKey != null && ! TDSetting.mGeminiApiKey.isEmpty() ) {
+    //     showAIdialog();
+    //   } else { // start API key dialog
+    //     (new GeminiDialog( this, this, null )).show();
+    //   }
     }
   }
 
@@ -471,16 +471,16 @@ public class UserManualActivity extends MyActivity
     context.startActivity( intent );
   }
 
-  /** open the AI dialog
-   * @note IHelpViwer interface
-   */
-  public void showAIdialog()
-  {
-    if ( AIhelper.HAS_AI ) {
-      TDToast.make( R.string.ai_internet );
-      (new HelpAIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
-    }
-  }
+  // /** open the AI dialog // GEMINI
+  //  * @note IHelpViwer interface
+  //  */
+  // public void showAIdialog()
+  // {
+  //   if ( AIhelper.HAS_AI ) {
+  //     TDToast.make( R.string.ai_internet );
+  //     (new HelpAIdialog( this, this, TDSetting.mGeminiApiKey, mCurrentPage )).show();
+  //   }
+  // }
 
   public void showManPage( String page )
   {
@@ -488,15 +488,15 @@ public class UserManualActivity extends MyActivity
     loadManPage( null, page );
   }
 
-  public void showInvalid( final TDPref pref, final String response )
-  {
-    // this.runOnUiThread( 
-    TDandroid.runOnMainThread( new Runnable() { public void run() {
-      TDToast.makeWarn( response ); 
-      if ( pref != null ) pref.setButtonValue( "---" );
-      TDSetting.setGeminiApiKey( "" );
-    } } );
-  }
+  // public void showInvalid( final TDPref pref, final String response ) // GEMINI
+  // {
+  //   // this.runOnUiThread( 
+  //   TDandroid.runOnMainThread( new Runnable() { public void run() {
+  //     TDToast.makeWarn( response ); 
+  //     if ( pref != null ) pref.setButtonValue( "---" );
+  //     TDSetting.setGeminiApiKey( "" );
+  //   } } );
+  // }
   
 
   // /** react to a change in the configuration
@@ -508,7 +508,7 @@ public class UserManualActivity extends MyActivity
   //   super.onConfigurationChanged( new_cfg );
   // }
 
-  public void setAIbuttonEnabled( boolean enabled ) { /* nothing */ }
+  // public void setAIbuttonEnabled( boolean enabled ) { /* nothing */ } // GEMINI
 
 
   /** lifecycle: activity destroy
@@ -516,7 +516,7 @@ public class UserManualActivity extends MyActivity
   @Override
   public void onDestroy( )
   {
-    if ( AIhelper.HAS_AI ) AIdialog.resetChat();
+    // if ( AIhelper.HAS_AI ) AIdialog.resetChat(); // GEMINI
     super.onDestroy();
   }
 

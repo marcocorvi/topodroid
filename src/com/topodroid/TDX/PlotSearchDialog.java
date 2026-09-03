@@ -29,7 +29,6 @@ import android.content.Context;
 import android.view.View;
 // import android.view.View.OnClickListener;
 // import android.view.ViewGroup.LayoutParams;
-// import android.inputmethodservice.KeyboardView;
 
 import android.widget.EditText;
 import android.widget.Button;
@@ -67,7 +66,6 @@ class PlotSearchDialog extends MyDialog
     ( (Button) findViewById(R.id.btn_clear) ).setOnClickListener( this ); // CLEAR
     ( (Button) findViewById(R.id.btn_cancel) ).setOnClickListener( this ); // CANCEL
 
-    // mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     mKeyboard = MyKeyboard.getMyKeyboard( mContext, findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
     if ( TDSetting.mKeyboard ) {

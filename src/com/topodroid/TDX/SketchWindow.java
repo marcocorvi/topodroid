@@ -25,8 +25,6 @@ import com.topodroid.util.TDVersion;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
-// import com.topodroid.math.BezierCurve;
-// import com.topodroid.math.BezierInterpolator;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -279,7 +277,7 @@ public class SketchWindow extends ItemDrawer
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
 
-  // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
+  // private static com.topodroid.algo.bezier.BezierInterpolator mInterpolator = new Interpolator();
   private SketchSurface  mSketchSurface;
   // private DrawingAreaPath mCurrentAreaPath = null;
   // private SketchPath mFixedDrawingPath;

@@ -19,7 +19,6 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.math.Point2D;
-import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 // import com.topodroid.types.PlotType;
 import com.topodroid.num.TDNum;
@@ -153,7 +152,7 @@ public class DrawingDxf
 	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
 	int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	if ( np > 1 ) {
-	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	  com.topodroid.algo.bezier.BezierCurve bc = new com.topodroid.algo.bezier.BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
           if ( layer != null ) {
 	    for ( int n=1; n < np; ++n ) {
 	      Point2D pb = bc.evaluate( (float)n / (float)np );

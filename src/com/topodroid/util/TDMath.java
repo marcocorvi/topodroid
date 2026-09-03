@@ -34,6 +34,7 @@ public class TDMath
   static public float acosd( float x )  { return (float)( RAD2DEG * Math.acos( x ) ); }
   static public float asind( float x )  { return (float)( RAD2DEG * Math.asin( x ) ); }
   static public float sqrt( float x )   { return (float)Math.sqrt( x ); }
+  static public float pow( float x, float y ) { return (float)Math.pow( x, y ); }
 
   static public double cosD(  double x  ) { return Math.cos( x ); }
   static public double cosDd( double xd ) { return Math.cos( xd * DEG2RAD ); }
