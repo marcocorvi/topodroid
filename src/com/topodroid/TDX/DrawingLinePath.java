@@ -68,11 +68,16 @@ public class DrawingLinePath extends DrawingPointLinePath
   //   return ret;
   // }
 
+  /** set the line l-side
+   * @param lside  l-side value ( if less than 1 l-side is unset )
+   */
   void setLSide( int lside ) 
   {
     mLSide = ( lside < 1 )? -1 : lside;
   }
 
+  /** @return the l-side value
+   */
   int getLSide() { return mLSide; }
 
   /** cstr

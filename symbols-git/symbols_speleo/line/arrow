@@ -18,6 +18,7 @@ name-ua стрілка
 th_name arrow
 style straight x0
 color 0xcccccc 0xff
+clip no
 width 1
 effect
   moveTo 0 0

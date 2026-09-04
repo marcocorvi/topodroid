@@ -46,6 +46,14 @@ public class LinePoint extends Point2D
   public LinePoint mPrev; // previous LinePoint on the line
   public LinePoint mNext; // next LinePoint on the line
 
+  /** @return the first control point - or null
+   */
+  public Point2D cp1() { return has_cp ? null : new Point2D( x1, y1 ); }
+
+  /** @return the second control point - or null
+   */
+  public Point2D cp2() { return has_cp ? null : new Point2D( x2, y2 ); }
+
   /** change presentation from landscape to portrait
    */
   void landscapeToPortrait()

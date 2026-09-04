@@ -18,5 +18,6 @@ name-ua границя
 th_name border
 group border
 color 0x00cc00 0xff
+clip yes
 width 1
 endsymbol

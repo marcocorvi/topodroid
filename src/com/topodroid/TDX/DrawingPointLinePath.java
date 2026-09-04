@@ -57,6 +57,16 @@ public class DrawingPointLinePath extends DrawingPath
     mDx = mDy = 0;
   }
 
+  /** @return true if the line has a cubic piece
+   */
+  public boolean isCubic()
+  {
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
+      if ( lp.has_cp ) return true;
+    }
+    return false;
+  }
+
   /** path size
    * @return the number of points of the path
    */
