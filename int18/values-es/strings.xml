@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="ai_null_chat">Chat de IA nulo / sin contenido</string>
-    <string name="ai_error">Error de IA: %1$s</string>
-    <string name="ai_internet">Atención: la ayuda de IA requiere conexión a internet.</string>
-    <string name="ai_no_internet">No hay conexión a internet.</string>
-    <string name="ai_prompt">Escribe tu pregunta</string>
-    <string name="ai_invalid_key">Clave API no válida</string>
-    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
-    <string name="ai_key_instruction">La clave API se guarda en la memoria interna del dispositivo Android\ny solo se envía a Google.\nBusca en internet cómo obtener una clave de API de Gemini de Google.</string>
+    <!-- UNUSED string name="ai_null_chat">Chat de IA nulo / sin contenido</string -->
+    <!-- UNUSED string name="ai_error">Error de IA: %1$s</string -->
+    <!-- UNUSED string name="ai_internet">Atención: la ayuda de IA requiere conexión a internet.</string -->
+    <!-- UNUSED string name="ai_no_internet">No hay conexión a internet.</string -->
+    <!-- UNUSED string name="ai_prompt">Escribe tu pregunta</string -->
+    <!-- UNUSED string name="ai_invalid_key">Clave API no válida</string -->
+    <!-- UNUSED string name="ai_chat_reset">Chat resetted</string -->
+    <!-- UNUSED string name="ai_key_instruction">La clave API se guarda en la memoria interna del dispositivo Android\ny solo se envía a Google.\nBusca en internet cómo obtener una clave de API de Gemini de Google.</string -->
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>

@@ -4,15 +4,15 @@
 
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     
-	 <string name="ai_null_chat">Chat IA null</string>
-    <string name="ai_error">Erreur AI %1$s</string>
-    <string name="ai_internet">Attention. L\'aide IA à besoin d\'une connexion web.</string>
-    <string name="ai_no_internet">Aucune connexion internet.</string>
-	 <string name="ai_no_model">Aucun modèle IA</string>
-    <string name="ai_prompt">Saisissez votre question</string>
-    <string name="ai_invalid_key">Clé API invalide</string>
-	 <string name="ai_chat_reset">Chat effacé</string>
-    <string name="ai_key_instruction">La clé API est stockée dans la mémoire interne d\’Android et est uniquement envoyée à Google.\nCherchez sur internet comment obtenir une clé API Gemini auprès de Google.</string>
+	 <!-- UNUSED string name="ai_null_chat">Chat IA null</string -->
+    <!-- UNUSED string name="ai_error">Erreur AI %1$s</string -->
+    <!-- UNUSED string name="ai_internet">Attention. L\'aide IA à besoin d\'une connexion web.</string -->
+    <!-- UNUSED string name="ai_no_internet">Aucune connexion internet.</string -->
+	 <!-- UNUSED string name="ai_no_model">Aucun modèle IA</string -->
+    <!-- UNUSED string name="ai_prompt">Saisissez votre question</string -->
+    <!-- UNUSED string name="ai_invalid_key">Clé API invalide</string -->
+	 <!-- UNUSED string name="ai_chat_reset">Chat effacé</string -->
+    <!-- UNUSED string name="ai_key_instruction">La clé API est stockée dans la mémoire interne d\’Android et est uniquement envoyée à Google.\nCherchez sur internet comment obtenir une clé API Gemini auprès de Google.</string -->
     <!-- GEMMA3
     <string name="ai_init_llm">Initialized local model</string>
     <string name="ai_init_llm_poor">Initialized local model. Degraded performances</string>

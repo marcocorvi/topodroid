@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO string name="ai_null_chat">Null AI chat</string -->
-    <!-- TODO string name="ai_error">AI error %1$s</string -->
-    <!-- TODO string name="ai_internet">Warning. AI help requires web connection.</string -->
-    <!-- TODO string name="ai_no_internet">No web connection.</string -->
-    <!-- TODO string name="ai_prompt">Type your question</string -->
-    <!-- TODO string name="ai_invalid_key">Invalid API key</string -->
-    <!-- TODO string name="ai_chat_reset">Chat resetted</string -->
-    <!-- TODO string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
+    <!-- UNUSED string name="ai_null_chat">Null AI chat</string -->
+    <!-- UNUSED string name="ai_error">AI error %1$s</string -->
+    <!-- UNUSED string name="ai_internet">Warning. AI help requires web connection.</string -->
+    <!-- UNUSED string name="ai_no_internet">No web connection.</string -->
+    <!-- UNUSED string name="ai_prompt">Type your question</string -->
+    <!-- UNUSED string name="ai_invalid_key">Invalid API key</string -->
+    <!-- UNUSED string name="ai_chat_reset">Chat resetted</string -->
+    <!-- UNUSED string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
 
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">无法从网络检索用户手册</string>

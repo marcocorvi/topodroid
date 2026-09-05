@@ -3,17 +3,17 @@
   xmlns:tools="http://schemas.android.com/tools"
   >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <string name="ai_null_chat">Prázdná konverzace AI</string>
-    <string name="ai_error">Chyba AI: %1$s</string>
-    <string name="ai_internet">Upozornění. Nápověda AI vyžaduje připojení k internetu.</string>
-    <string name="ai_no_internet">Není připojení k internetu.</string>
-    <string name="ai_no_model">Není vybrán model AI.</string>
-    <string name="ai_prompt">Zadejte svůj dotaz</string>
-    <string name="ai_invalid_key">Neplatný API klíč</string>
-    <string name="ai_chat_reset">Konverzace byla obnovena</string>
-    <string name="ai_key_instruction">API klíč je uložen ve vnitřní paměti zařízení Android\na odesílá se pouze společnosti Google.\nNa internetu vyhledejte postup, jak získat API klíč Gemini od společnosti Google.</string>
-    <string name="ai_temperature">Teplota</string>
-    <string name="ai_max_tokens">Max. počet tokenů</string>
+    <!-- UNUSED string name="ai_null_chat">Prázdná konverzace AI</string -->
+    <!-- UNUSED string name="ai_error">Chyba AI: %1$s</string -->
+    <!-- UNUSED string name="ai_internet">Upozornění. Nápověda AI vyžaduje připojení k internetu.</string -->
+    <!-- UNUSED string name="ai_no_internet">Není připojení k internetu.</string -->
+    <!-- UNUSED string name="ai_no_model">Není vybrán model AI.</string -->
+    <!-- UNUSED string name="ai_prompt">Zadejte svůj dotaz</string -->
+    <!-- UNUSED string name="ai_invalid_key">Neplatný API klíč</string -->
+    <!-- UNUSED string name="ai_chat_reset">Konverzace byla obnovena</string -->
+    <!-- UNUSED string name="ai_key_instruction">API klíč je uložen ve vnitřní paměti zařízení Android\na odesílá se pouze společnosti Google.\nNa internetu vyhledejte postup, jak získat API klíč Gemini od společnosti Google.</string -->
+    <!-- UNUSED string name="ai_temperature">Teplota</string -->
+    <!-- UNUSED string name="ai_max_tokens">Max. počet tokenů</string -->
 
     <!-- GEMMA3
     <string name="ai_init_llm">Initialized local model</string>

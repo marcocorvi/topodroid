@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="ai_null_chat">Kein KI Chat konfiguriert</string>
-  <string name="ai_error">KI Fehler: %1$s</string>
-  <string name="ai_internet">Warnung: KI benötigt eine Internetverbindung.</string>
-  <string name="ai_no_internet">Keine Internetverbindung.</string>
-  <string name="ai_no_model">Kein KI Modell</string>
-  <string name="ai_prompt">Tippe deine Frage</string>
-  <string name="ai_invalid_key">Ungültiger API-Schlüssel</string>
-  <string name="ai_chat_reset">Chat zurückgesetzt</string>
-  <string name="ai_key_instruction">Der API-Schlüssel ist im internen Speicher abgelegt\nund wird nur an Google gesendet.\nSuche im Internet wie ein Gemini API-Schlüssel von Google ausgestellt werden kann.</string>
-  <string name="ai_temperature">Temperatur</string>
-  <string name="ai_max_tokens">Max. Tokens</string>
+  <!-- UNUSED string name="ai_null_chat">Kein KI Chat konfiguriert</string -->
+  <!-- UNUSED string name="ai_error">KI Fehler: %1$s</string -->
+  <!-- UNUSED string name="ai_internet">Warnung: KI benötigt eine Internetverbindung.</string -->
+  <!-- UNUSED string name="ai_no_internet">Keine Internetverbindung.</string -->
+  <!-- UNUSED string name="ai_no_model">Kein KI Modell</string -->
+  <!-- UNUSED string name="ai_prompt">Tippe deine Frage</string -->
+  <!-- UNUSED string name="ai_invalid_key">Ungültiger API-Schlüssel</string -->
+  <!-- UNUSED string name="ai_chat_reset">Chat zurückgesetzt</string -->
+  <!-- UNUSED string name="ai_key_instruction">Der API-Schlüssel ist im internen Speicher abgelegt\nund wird nur an Google gesendet.\nSuche im Internet wie ein Gemini API-Schlüssel von Google ausgestellt werden kann.</string -->
+  <!-- UNUSED string name="ai_temperature">Temperatur</string -->
+  <!-- UNUSED string name="ai_max_tokens">Max. Tokens</string -->
+
   <string name="no_manual">Handbuch konnte nicht heruntergeladen werden.</string>
   <string name="user_man_ok">Übersetztes Handbuch installiert</string>
   <string name="user_man_fail">Fehler beim Installieren des übersetzten Handbuchs [%1$d]</string>

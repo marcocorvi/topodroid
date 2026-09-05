@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="ai_null_chat">Null ИИ чат</string>
-    <string name="ai_error">Ошибка ИИ %1$s</string>
-    <string name="ai_internet">Внимание. Для работы ИИ-помощи требуется подключение к интернету.</string>
-    <string name="ai_no_internet">Нет подключения к интернету.</string>
-    <string name="ai_prompt">Введите свой вопрос</string>
-    <string name="ai_invalid_key">Недействительный ключ API</string>
-    <string name="ai_chat_reset">Чат сброшен</string>
-    <string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string>
+    <!-- UNUSED string name="ai_null_chat">Null ИИ чат</string -->
+    <!-- UNUSED string name="ai_error">Ошибка ИИ %1$s</string -->
+    <!-- UNUSED string name="ai_internet">Внимание. Для работы ИИ-помощи требуется подключение к интернету.</string -->
+    <!-- UNUSED string name="ai_no_internet">Нет подключения к интернету.</string -->
+    <!-- UNUSED string name="ai_prompt">Введите свой вопрос</string -->
+    <!-- UNUSED string name="ai_invalid_key">Недействительный ключ API</string -->
+    <!-- UNUSED string name="ai_chat_reset">Чат сброшен</string -->
+    <!-- UNUSED string name="ai_key_instruction">Ключ API хранится во внутренней памяти Android и отправляется только в Google. \nНайдите в интернете информацию о том, как получить ключ API Gemini от Google.</string -->
 	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Невозможно скачать руководство из интернета.</string>

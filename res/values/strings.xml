@@ -3,18 +3,18 @@
   xmlns:tools="http://schemas.android.com/tools"
   >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <string name="ai" translatable="false">AI</string>
-    <string name="ai_null_chat">Null AI chat</string>
-    <string name="ai_error">AI error %1$s</string>
-    <string name="ai_internet">Warning. AI help requires web connection.</string>
-    <string name="ai_no_internet">No web connection.</string>
-    <string name="ai_no_model">No AI model</string>
-    <string name="ai_prompt">Type your question</string>
-    <string name="ai_invalid_key">Invalid API key</string>
-    <string name="ai_chat_reset">Chat resetted</string>
-    <string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string>
-    <string name="ai_temperature">temperature</string>
-    <string name="ai_max_tokens">max. tokens</string>
+    <!-- UNUSED string name="ai" translatable="false">AI</string -->
+    <!-- UNUSED string name="ai_null_chat">Null AI chat</string -->
+    <!-- UNUSED string name="ai_error">AI error %1$s</string -->
+    <!-- UNUSED string name="ai_internet">Warning. AI help requires web connection.</string -->
+    <!-- UNUSED string name="ai_no_internet">No web connection.</string -->
+    <!-- UNUSED string name="ai_no_model">No AI model</string -->
+    <!-- UNUSED string name="ai_prompt">Type your question</string -->
+    <!-- UNUSED string name="ai_invalid_key">Invalid API key</string -->
+    <!-- UNUSED string name="ai_chat_reset">Chat resetted</string -->
+    <!-- UNUSED string name="ai_key_instruction">The API key is stored on the Android internal memory\nand is only sent to Google.\nSearch internet about how to obtain a Gemini API key from Google.</string -->
+    <!-- UNUSED string name="ai_temperature">temperature</string -->
+    <!-- UNUSED string name="ai_max_tokens">max. tokens</string -->
     <!-- GEMMA3
     <string name="ai_init_llm">Initialized local model</string>
     <string name="ai_init_llm_poor">Initialized local model. Degraded performances</string>
