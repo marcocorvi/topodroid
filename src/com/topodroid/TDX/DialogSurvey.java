@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.TDX.SurveyAdapter;
 
 // import java.util.ArrayList;
 import java.util.Locale;

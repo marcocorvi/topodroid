@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
+import com.topodroid.TDX.Cave3DSurvey;
+import com.topodroid.TDX.R;
 
 import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyButton;

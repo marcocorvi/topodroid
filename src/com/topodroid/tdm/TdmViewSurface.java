@@ -165,6 +165,9 @@ public class TdmViewSurface extends SurfaceView
     return mBoundingBox;
   }
 
+  /** change the display-frequency of the station names
+   * @param change   display-frequency change
+   */
   void changeStationRate( int rate ) 
   { 
     if ( rate < 0 ) {
@@ -174,6 +177,10 @@ public class TdmViewSurface extends SurfaceView
     }
     if ( mStationRate < 1 ) mStationRate = 1;
   }
+
+  /** reset display-frequency of station names to 1
+   */
+  void resetStationRate() { mStationRate = 1; }
 
   /** @return X scene coord from the X canvas coord
    * @param x_canvas   X canvas coord

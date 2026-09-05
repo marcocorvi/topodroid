@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.SurveysAdapter;
 
 
 import android.os.Bundle;

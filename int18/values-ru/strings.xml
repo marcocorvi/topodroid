@@ -918,6 +918,7 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
     <string name="button_less">Меньше</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
     <string name="button_more"    >Ещё</string>
     <string name="button_move"    >Переместить</string>
     <string name="button_next"    >Далее</string>

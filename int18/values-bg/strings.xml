@@ -922,6 +922,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot">Рисунка</string>
     <string name="button_less">По-малко</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
     <string name="button_more">Още</string>
     <string name="button_move">Премести</string>
     <string name="button_next">Следващ</string>

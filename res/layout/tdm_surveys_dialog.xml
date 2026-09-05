@@ -6,7 +6,7 @@
   <TextView android:id="@+id/title"
     style="@style/text_title"
   />
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/body"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_below="@id/title"
@@ -17,27 +17,40 @@
     android:layout_height="fill_parent"
   />  
 
-  <LinearLayout android:id="@+id/help"
-    style="@style/help_layout"
-    >
-    <Button android:id="@+id/button_help"
-      style="@style/button_empty"
-      android:text="@string/button_help"
-      android:layout_marginEnd="@dimen/marginh"
-    />
-    <Button android:id="@+id/button_cancel"
-      style="@style/button_default"
-      android:text="@string/button_cancel"
-      android:layout_marginEnd="@dimen/marginh"
-    />
-    <!-- LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:gravity="end"
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
       >
-    </LinearLayout -->
-  </LinearLayout>
+      <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/button_fewer"
+          style="@style/button_default"
+          android:text="@string/button_fewer"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_more"
+          style="@style/button_default"
+          android:text="@string/button_more"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_reset"
+          style="@style/button_default"
+          android:text="@string/button_reset"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+      </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
-
-
 </RelativeLayout>

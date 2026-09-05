@@ -929,6 +929,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
     <string name="button_less"    >Menos</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
     <string name="button_more"    >Más</string>
     <string name="button_move"    >Mueve</string>
     <string name="button_next"    >Siguiente</string>

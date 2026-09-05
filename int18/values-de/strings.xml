@@ -866,6 +866,7 @@
   <!-- UNUSED string name="button_azimuth">Azimut</string -->
   <string name="button_plot">Skizze</string>
   <string name="button_less">Weniger</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
   <string name="button_more">Mehr</string>
   <string name="button_move">Verschieben</string>
   <string name="button_next">Nächste</string>

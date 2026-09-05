@@ -280,7 +280,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
-  final static float[] mEffectScale = { 0.5f, 0.75f, 1.0f, 1.7f, 3.0f };
+  final static float[] mEffectScale = { 0.42f, 0.55f, 0.71f, 0.92f, 1.27f };
   
   /** set the line scale
    * @param scale  new line scale (in [-2,2] )
@@ -290,10 +290,10 @@ public class DrawingLinePath extends DrawingPointLinePath
   {
     float width = BrushManager.WIDTH_FIXED;
     switch ( scale ) {
-      case -2: width /= 2; break;
-      case -1: width /= 1.4; break;
-      case  1: width *= 1.7; break;
-      case  2: width *= 3.0; break;
+      case -2: width /= 1.7f; break;
+      case -1: width /= 1.3f; break;
+      case  1: width *= 1.3f; break;
+      case  2: width *= 1.7f; break;
     }
     // TDLog.v("Line set scale " + scale + " width " + width );
     mPaint.setStrokeWidth( width );

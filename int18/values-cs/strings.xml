@@ -895,6 +895,7 @@
     <string name="button_photo">Foto</string>
     <string name="button_plot"    >Kreslit</string>
     <string name="button_less"    >Méně</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
     <string name="button_more"    >Více</string>
     <string name="button_move"    >Přesunout</string>
     <string name="button_next"    >Další</string>

@@ -925,6 +925,7 @@
     <!-- UNUSED string name="button_azimuth">Irány</string -->
     <string name="button_plot"    >Rajzol</string>
     <string name="button_less"    >Kevesebb</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
     <string name="button_more"    >Több</string>
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>

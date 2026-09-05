@@ -917,6 +917,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_less">Meno</string>
+    <!-- TODO string name="button_fewer"   >Fewer</string -->
     <string name="button_more"    >Altro</string>
     <string name="button_move"    >Muovi</string>
     <string name="button_next"    >Prossimo</string>

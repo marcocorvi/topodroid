@@ -150,10 +150,17 @@ public class TdmViewActivity extends MyActivity
       mDrawingSurface.changeZoom( f );
     }
 
+    /** change the display-frequency of the station names
+     * @param change   display-frequency change (log-2)
+     */
     public void changeStationRate( int change ) 
     {
       mDrawingSurface.changeStationRate( change );
     }
+
+    /** reset display-frequency of station names to 1
+     */
+    public void resetStationRate() { mDrawingSurface.resetStationRate(); }
 
     public void zoomIn()  { changeZoom( ZOOM_INC ); }
     public void zoomOut() { changeZoom( ZOOM_DEC ); }
@@ -609,8 +616,10 @@ public class TdmViewActivity extends MyActivity
 
   // -------------------------------------------------
   boolean onMenu;
-  int mNrButton1 = 6;
-  private static int[] izons = { 
+  private final static int mNrButton1 = 6;
+  private final static int BTN_SURVEYS = 5;
+
+  private final static int[] izons = { 
     R.drawable.iz_equate,
     R.drawable.iz_equate_all,
     R.drawable.iz_equates,
@@ -619,7 +628,7 @@ public class TdmViewActivity extends MyActivity
     R.drawable.iz_surveys,
     // R.drawable.iz_exit,
   };
-  private static final int[] help_icons = {
+  private final static int[] help_icons = {
     R.string.help_add_equate,
     R.string.help_all_equates,
     R.string.help_equates,
@@ -628,8 +637,8 @@ public class TdmViewActivity extends MyActivity
     R.string.help_equate_surveys,
   };
 
-  int mNrMenus   = 2;
-  private static int[] menus = { 
+  private final static int mNrMenus   = 2;
+  private final static int[] menus = { 
     // R.string.menu_equate,
     // R.string.menu_equates,
     R.string.menu_close,
@@ -664,7 +673,7 @@ public class TdmViewActivity extends MyActivity
         mButton1[k] = MyButton.getButton( this, this, izons[k] );
         // layout.addView( mButton1[k], lp );
       }
-      mButton1[5].setOnLongClickListener( this );
+      // mButton1[ BTN_SURVEYS ].setOnLongClickListener( this );
 
       mButtonView1 = new MyHorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
@@ -873,7 +882,7 @@ public class TdmViewActivity extends MyActivity
       changeStationRate( -1 );
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // MORE STATIONS
       changeStationRate( 1 );
-    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // SINGLE SURVEY STATIONS
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // SURVEY STATIONS
       makeSurveysDialog();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EXIT
       finish();
@@ -930,6 +939,9 @@ public class TdmViewActivity extends MyActivity
     (new TdmSurveysDialog( this, this, surveys )).show();
   }
 
+  /** show the stations of onle one survey
+   * @param name  survey name
+   */
   void showOnlySurvey( String name )
   {
     ArrayList< TdmViewCommand > commands = getCommands();
@@ -938,6 +950,8 @@ public class TdmViewActivity extends MyActivity
     }
   }
 
+  /** show stations of all surveys
+   */
   void showAllSurveys()
   {
     ArrayList< TdmViewCommand > commands = getCommands();

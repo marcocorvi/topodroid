@@ -957,6 +957,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Draw</string>
     <string name="button_less"    >Less</string>
+    <string name="button_fewer"   >Fewer</string>
     <string name="button_more"    >More</string>
     <string name="button_move"    >Move</string>
     <string name="button_next"    >Next</string>
@@ -2304,7 +2305,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_drop">Drop surveys ?</string>
     <string name="title_tdconfig">Enter project name</string>
     <string name="title_surveys">Surveys</string>
-    <string name="title_tdsurveys">Select survey</string>
+
+    <string name="title_tdsurveys">Select stations survey</string>
     <string name="title_symbols">Active tools</string>
     <string name="title_symbol_choose">Tool selection</string>
 
