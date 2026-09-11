@@ -16,6 +16,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.math.Vector3D;
 
 // import java.nio.ByteOrder;
 // import java.nio.ByteBuffer;

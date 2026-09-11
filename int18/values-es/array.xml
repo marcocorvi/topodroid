@@ -82,14 +82,15 @@
   <string-array name="unitGrid">
      <item name="meter">metros</item>
      <item name="yard">yarda</item>
-     <item name="two_tf">2 piés</item>
+     <item name="two_ft">2 piés</item>
+     <item name="one_ft">1 pié</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
 
   <string-array name="unitMeasure">
      <item name="grid_cell">Cuadricula</item>
      <item name="meter">metros</item>
-     <item name="tf">piés</item>
+     <item name="feet">piés</item>
   </string-array>
 
   <string-array name="loopClosure">

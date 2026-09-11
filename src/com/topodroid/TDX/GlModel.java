@@ -12,17 +12,19 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.math.Triangle3D;
+import com.topodroid.math.Vector3D;
 import com.topodroid.dem.DEMsurface;
 import com.topodroid.dem.ParserDEM;
 
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch; // NO_C3D
-import com.topodroid.c3walls.cw.CWConvexHull;
-import com.topodroid.c3walls.cw.CWTriangle;
-import com.topodroid.c3walls.cw.ConvexHullComputer;
-import com.topodroid.c3walls.pcrust.PowercrustComputer;
-import com.topodroid.c3walls.pcrust.PCSegment;
-import com.topodroid.c3walls.pcrust.PCPolygon;
+import com.topodroid.algo.cw.CWConvexHull;
+import com.topodroid.algo.cw.CWTriangle;
+import com.topodroid.algo.cw.ConvexHullComputer;
+import com.topodroid.algo.pcrust.PowercrustComputer;
+import com.topodroid.algo.pcrust.PCSegment;
+import com.topodroid.algo.pcrust.PCPolygon;
 
 import android.content.Context;
 

@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 // WITH-GPS
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDAnalytics;
+// import com.topodroid.math.Vector3D;
 
 import android.location.Location;
 import android.location.LocationListener;

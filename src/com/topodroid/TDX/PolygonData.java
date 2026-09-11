@@ -43,9 +43,9 @@ class PolygonData
     comment = cmt;
   }
 
-  /** reverse the shot
+  /** reverse the shot 
    */
-  void reverse()
+  void reverseShot()
   {
     String tmp = from;  from   = to;      to     = tmp;
     float  t = lrud.l;  lrud.l = lrud.r;  lrud.r = t;

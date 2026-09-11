@@ -262,6 +262,7 @@ The following actions are started with a long tap:
     <li><i>Style</i>: fine, normal, coarse, "splines" (interpolated-curve), simplified [normal]</li>
     <li><i>Close</i>: whether to close lines of "closed" type. [yes]</li>
     <li><i>Line-point spacing</i>: distance between line points in normal style [10 px] </li>
+    <li><i>Line-clipping</i>: clipping lines to the outline [no] </li>
     <li>Section line <i>direction tick length</i>: size of the section line tick [5 px]</li>
     <li><i>Section points</i>: whether to add a "section" point automatically for "section" lines [yes]</li>
     <li>Area <i>border visibility</i> [on]</li>
@@ -330,34 +331,6 @@ To this aim you tap near the point you want. However if there are several points
 
 <p><img src="btn_multiselection_previous.png" width="36" border="1">&nbsp;<img src="btn_multiselection_next.png" width="36" border="1">
 </p>
-
-<h4>Line style</h4>
-TopoDroid has five line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
-With the fifth line style the traced lines are simplified using a point-weeding algorithm.
-If you export the drawing in dxf with DXF version 6 do not use splines because they get exported as polylines.<br><p>
-
-<h4>Retracing</h4>
-If the path-tracing style is not complex (Bezier or weeding), line and areas can be drawn in "retracing" mode.
-<br>
-A long tap on the <i>tools</i> button turns retracing on/off.<br>
-When retrace drawing is active the line/area in the respective <i>tool</i> button is white.<br>
-Line retracing and line joining are mutually exclusive.<br>
-Lines of type "section" and of closed line types cannot be retraced.
-<br><p>
-
-To retrace a portion of a line, trace a line that starts and or ends close to the line.<br>
-The retraced portion of a line/area is not transformed (Bezier spline, weeding, decimation, etc.).
-<br><p>
-
-Areas can be "retraced" by tracing a line that starts and ends close to the border af the area.
-The shorter between the two pieces of this border is replaced by the newly traced line.<br>
-The area can be enlarged or shrinked, and a concavity can be filled (figure below).
-<br><p>
-
-Retracing can be undone and redone.<br><p>
-
-<img src="area_concavity.png" width="360" border="1">
-<br><p>
 
 <!-- div style="font-size:90%">
 <h4>Composite actions [T]</h4>

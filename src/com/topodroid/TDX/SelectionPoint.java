@@ -215,7 +215,7 @@ public class SelectionPoint
           }
           break;
       }
-      item.retracePath();
+      retraceItemPath( );
     } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
       mItem.shiftBy( dx, dy );
     }
@@ -230,8 +230,7 @@ public class SelectionPoint
       //  default: mPoint.shiftBy( dx, dy ); break;
       // }
       mPoint.shiftBy( dx, dy ); 
-      DrawingPointLinePath item = (DrawingPointLinePath)mItem;
-      item.retracePath();
+      retraceItemPath( );
     } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
       mItem.shiftBy( dx, dy );
     }
@@ -246,11 +245,16 @@ public class SelectionPoint
       //  default: mPoint.shiftBy( dx, dy ); break;
       // }
       mPoint.scaleBy( z, m );
-      DrawingPointLinePath item = (DrawingPointLinePath)mItem;
-      item.retracePath();
+      retraceItemPath( );
     } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
       mItem.scaleBy( z, m );
     }
+  }
+
+  private void retraceItemPath( )
+  {
+    DrawingPointLinePath item = (DrawingPointLinePath)mItem;
+    item.retracePath( );
   }
 
   void affineTransformSelectionBy( float[] mm, Matrix m )
@@ -262,8 +266,7 @@ public class SelectionPoint
       //  default: mPoint.shiftBy( dx, dy ); break;
       // }
       mPoint.affineTransformBy( mm, m );
-      DrawingPointLinePath item = (DrawingPointLinePath)mItem;
-      item.retracePath();
+      retraceItemPath();
     } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
       mItem.affineTransformBy( mm, m );
     }

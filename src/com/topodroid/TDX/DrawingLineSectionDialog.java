@@ -19,6 +19,7 @@ import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.TDImage;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PlotType;
+import com.topodroid.math.Vector3D;
 
 // import java.io.File; // JPEG FILE
 // import java.io.IOException;

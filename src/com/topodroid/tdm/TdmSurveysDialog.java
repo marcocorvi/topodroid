@@ -29,14 +29,14 @@ import android.widget.ListView;
 import android.widget.LinearLayout;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 class TdmSurveysDialog extends MyDialog
                        implements android.view.View.OnClickListener
                                 , android.widget.AdapterView.OnItemClickListener
 {
-  TdmViewActivity mParent;
-  ArrayList<String> mSurveys;
+  private TdmViewActivity mParent;
+  private List<String> mSurveys;
   // private Button mBtnFewer;
   // private Button mBtnMore;
   // private Button mBtnReset;
@@ -47,7 +47,7 @@ class TdmSurveysDialog extends MyDialog
    * @param parent parent activity
    * @param names  survey names
    */
-  TdmSurveysDialog( Context ctx, TdmViewActivity parent, ArrayList<String> names )
+  TdmSurveysDialog( Context ctx, TdmViewActivity parent, List<String> names )
   {
     super( ctx, null, R.string.TdmSurveysDialog );
     mParent  = parent;

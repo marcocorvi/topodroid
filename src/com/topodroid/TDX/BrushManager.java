@@ -282,6 +282,7 @@ public class BrushManager
 
   // LINE CLOSED
   static boolean isLineClosed( int index )  { return mLineLib != null && mLineLib.isClosed( index ); }
+  static boolean isLineReverse( int index ) { return mLineLib != null && mLineLib.isReverse( index ); }
   static int getLineClippable( int index )  { return (mLineLib != null)? mLineLib.getClippable( index ) : 0; }
   static boolean isLineSection( int index ) { return mLineLib != null && index == mLineLib.mLineSectionIndex; }
   static boolean isLineUser( int idx )      { return mLineLib != null && idx == mLineLib.mLineUserIndex; }

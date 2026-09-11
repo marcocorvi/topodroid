@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
+import com.topodroid.math.Vector3D;
 
 // import java.io.StringWriter;
 // import java.io.PrintWriter;

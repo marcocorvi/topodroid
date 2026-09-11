@@ -14,6 +14,7 @@ package com.topodroid.tdm;
 
 import com.topodroid.TDX.R;
 
+import java.util.List;
 import java.util.ArrayList;
 // import java.util.Iterator;
 
@@ -31,11 +32,11 @@ import android.view.LayoutInflater;
 
 class TdmEquateAdapter extends ArrayAdapter< TdmEquate >
 {
-  private ArrayList< TdmEquate > mItems;
+  private List< TdmEquate > mItems;
   private Context mContext;
   private LayoutInflater mLayoutInflater;
 
-  public TdmEquateAdapter( Context ctx, int id, ArrayList< TdmEquate > items )
+  public TdmEquateAdapter( Context ctx, int id, List< TdmEquate > items )
   {
     super( ctx, id, items );
     mContext = ctx;

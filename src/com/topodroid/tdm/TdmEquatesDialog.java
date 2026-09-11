@@ -17,7 +17,7 @@ import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
-import java.util.ArrayList;
+import java.util.List;
 // import java.io.File;
 
 import android.content.DialogInterface;
@@ -40,11 +40,11 @@ class TdmEquatesDialog extends MyDialog
                       implements OnItemClickListener
                       , OnClickListener
 {
-  TdmEquateAdapter mTdmEquateAdapter;
-  TdmConfig mConfig;
-  TdmViewActivity mActivity;
-  ListView mList;
-  ArrayList< TdmEquate > mEquates;
+  private TdmEquateAdapter mTdmEquateAdapter;
+  private TdmConfig mConfig;
+  private TdmViewActivity mActivity;
+  private ListView mList;
+  private List< TdmEquate > mEquates;
 
   TdmEquatesDialog( Context context, TdmConfig config, TdmViewActivity activity )
   {

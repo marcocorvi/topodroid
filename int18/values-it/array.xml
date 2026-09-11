@@ -81,14 +81,15 @@
   <string-array name="unitGrid">
      <item name="meter">metri</item>
      <item name="yard">iarde</item>
-     <item name="two_tf">2 piedi</item>
+     <item name="two_ft">2 piedi</item>
+     <item name="one_ft">1 piede</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
 
   <string-array name="unitMeasure">
      <item name="grid_cell">cella di griglia</item>
      <item name="meter">metri</item>
-     <item name="tf">piedi</item>
+     <item name="feet">piedi</item>
   </string-array>
 
   <string-array name="loopClosure">

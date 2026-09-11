@@ -767,7 +767,7 @@ public class Scrap
                 // ret = 7;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 doRemoveLinePoint( area, pt.mPoint, pt );
-                area.retracePath();
+                area.retracePath( );
               }
             }
           } else if ( path.isPoint() ) { // path  instanceof DrawingPointPath
@@ -1604,7 +1604,7 @@ public class Scrap
               }
               // TODO update mSelection
               area.recomputeSize();
-              area.retracePath();
+              area.retracePath( );
               mSelection.insertPath( area );
               // area.dump( "af" );
               // TDLog.v("AREA new size " + area.size() );
@@ -2635,7 +2635,7 @@ public class Scrap
       }
 
       // area.mPoints = pts2;
-      area.retracePath();
+      area.retracePath( );
       
       if ( ret == 0 ) {
         synchronized( TDPath.mSelectionLock ) {
@@ -3574,7 +3574,7 @@ public class Scrap
 	    retrace = true;
 	  }
 	  if ( retrace ) {
-            l1.retracePath();
+            l1.retracePath( );
 	  }
         }
       }
@@ -3816,7 +3816,7 @@ public class Scrap
    */
   void clipLine( DrawingLinePath line, int clip_mode ) 
   {
-    com.topodroid.algo.Clip.toOutline( mCurrentStack, line, clip_mode );
+    com.topodroid.algo.clip.Clip.toOutline( mCurrentStack, line, clip_mode );
   }
 
 }

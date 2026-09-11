@@ -14,7 +14,7 @@ package com.topodroid.c3out;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DShot;
-import com.topodroid.TDX.Vector3D;
+import com.topodroid.math.Vector3D;
 
 // import com.topodroid.util.TDLog;
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 class TdmEquate
 {
-  ArrayList< String > mStations; // full station names
+  ArrayList< String > mStations; // station fullnames
 
   /** cstr
    */
@@ -28,7 +28,7 @@ class TdmEquate
   }
 
   /** return true if the equate contains the given station
-   * @param name   station name
+   * @param name   station fullname
    */
   boolean contains( String name )
   {

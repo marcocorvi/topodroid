@@ -12,10 +12,10 @@
 package com.topodroid.c3out;
 
 // import com.topodroid.TDX.TopoGL;
-import com.topodroid.TDX.Triangle3D;
-import com.topodroid.TDX.Vector3D;
-import com.topodroid.c3walls.cw.CWFacet;
-import com.topodroid.c3walls.cw.CWPoint;
+import com.topodroid.math.Triangle3D;
+import com.topodroid.math.Vector3D;
+import com.topodroid.algo.cw.CWFacet;
+import com.topodroid.algo.cw.CWPoint;
 
 import com.topodroid.util.TDLog;
 

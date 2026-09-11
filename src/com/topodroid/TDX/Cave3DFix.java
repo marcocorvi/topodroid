@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.mag.Geodetic;
+import com.topodroid.math.Vector3D;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;

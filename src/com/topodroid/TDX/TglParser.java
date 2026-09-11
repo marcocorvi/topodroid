@@ -15,6 +15,8 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDMath;
 import com.topodroid.util.TDString;
 // import com.topodroid.util.TDFile;
+// import com.topodroid.math.Triangle3D;
+import com.topodroid.math.Vector3D;
 import com.topodroid.c3out.ExportData;
 import com.topodroid.c3out.ExportKML;
 import com.topodroid.c3out.ExportCGAL;
@@ -24,14 +26,13 @@ import com.topodroid.c3out.ExportGPX;
 import com.topodroid.c3out.ExportSHP;
 import com.topodroid.c3out.ExportSTL;
 import com.topodroid.c3in.LoxBitmap;
-import com.topodroid.c3walls.bubble.BubbleComputer;
-import com.topodroid.c3walls.hull.HullComputer;
-import com.topodroid.c3walls.cw.CWTriangle;
-import com.topodroid.c3walls.cw.CWBorder;
-import com.topodroid.c3walls.cw.CWConvexHull;
-import com.topodroid.c3walls.cw.ConvexHullComputer;
-import com.topodroid.c3walls.pcrust.Powercrust;
-import com.topodroid.c3walls.pcrust.PowercrustComputer;
+import com.topodroid.algo.hull.HullComputer;
+import com.topodroid.algo.cw.CWTriangle;
+import com.topodroid.algo.cw.CWBorder;
+import com.topodroid.algo.cw.CWConvexHull;
+import com.topodroid.algo.cw.ConvexHullComputer;
+import com.topodroid.algo.pcrust.Powercrust;
+import com.topodroid.algo.pcrust.PowercrustComputer;
 import com.topodroid.dem.DEMsurface;
 
 // import java.io.File;
@@ -107,7 +108,7 @@ public class TglParser
   ConvexHullComputer convexhullcomputer = null;
   HullComputer hullcomputer = null;
   TubeComputer tubecomputer = null;
-  BubbleComputer bubblecomputer = null;
+  com.topodroid.algo.bubble.BubbleComputer bubblecomputer = null;
 
   // private ArrayList< CWConvexHull > walls   = null;
   // private ArrayList< CWBorder >     borders = null;
@@ -1030,7 +1031,7 @@ public class TglParser
     }
     // TDLog.v("make bubble");
     if ( WALL_BUBBLE < WALL_MAX ) {
-      bubblecomputer = new BubbleComputer( this );
+      bubblecomputer = new com.topodroid.algo.bubble.BubbleComputer( this );
       if ( bubblecomputer != null ) {
         // TDLog.v("compute bubble");
         (new AsyncTask< Void, Void, Boolean >() {

@@ -211,7 +211,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       if ( closed ) {
         ret.closePath();
       }
-      ret.retracePath();
+      ret.retracePath( );
       return ret;
     } catch ( IOException e ) {
       TDLog.e( "LINE in error " + e.getMessage() );
@@ -752,6 +752,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     pw.format( Locale.US, "ENDLINE\n" );
   }
+
 
 }
 

@@ -36,10 +36,10 @@ import android.os.Bundle;
 class TdmSourcesDialog extends MyDialog
                        implements OnClickListener
 {
-  TdmSourceAdapter mTdmSourceAdapter;
-  TdmConfigActivity mParent;
-  ListView mList;
-  ArrayList< TdmSource > mSources;
+  private TdmSourceAdapter mTdmSourceAdapter;
+  private TdmConfigActivity mParent;
+  private ListView mList;
+  private ArrayList< TdmSource > mSources;
 
   /** cstr
    * @param context context

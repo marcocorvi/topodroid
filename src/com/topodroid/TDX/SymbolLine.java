@@ -40,7 +40,8 @@ public class SymbolLine extends Symbol
   boolean mHasEffect; // whether the line paint has path-effect
   Path mPath;
   boolean mStyleStraight;
-  boolean mClosed = false;
+  boolean mClosed  = false;
+  boolean mReverse = false;
   int mClippable = 0;  // 0: no, 1: normal, 2: both
   int mStyleX;            // X times (one out of how many point to use)
   Path mPathDir = null;
@@ -113,6 +114,7 @@ public class SymbolLine extends Symbol
     mStyleStraight = false;
     mClosed        = false;
     mClippable     = 0;
+    mReverse       = false;
     mStyleX = 1;
   }
 
@@ -122,6 +124,7 @@ public class SymbolLine extends Symbol
     mStyleStraight = false;
     mClosed        = false;
     mClippable     = 0;
+    mReverse       = false;
     mStyleX = 1;
     readFile( filepath, locale, iso );
     if ( mClosed ) mClippable = 0; // enforce closed lines are not clippable
@@ -131,8 +134,13 @@ public class SymbolLine extends Symbol
   private void makeLinePath()
   {
     mPath = new Path();
-    mPath.moveTo(-50, 0 );
-    mPath.lineTo( 50, 0 );
+    if ( mReverse ) {
+      mPath.moveTo( 50, 0 );
+      mPath.lineTo(-50, 0 );
+    } else {
+      mPath.moveTo(-50, 0 );
+      mPath.lineTo( 50, 0 );
+    }
   }
 
 
@@ -284,6 +292,11 @@ public class SymbolLine extends Symbol
                 } else if ( vals[k].equals("both") ) {
                   mClippable = 2;
                 }
+              }
+            } else if ( vals[k].equals("reverse") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s && vals[k].equals("yes") ) {
+                mReverse = true;
               }
             } else if ( vals[k].equals("csurvey") ) {
               // syntax: csurvey <layer> <type> <category> <pen>

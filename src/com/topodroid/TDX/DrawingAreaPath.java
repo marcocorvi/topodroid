@@ -259,7 +259,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
           ret.addPoint( x0, y0 );
         }
       }
-      ret.retracePath();
+      ret.retracePath( );
       return  ( npt < 3 )? null : ret;
     } catch ( IOException e ) {
       TDLog.e( "AREA in error " + e.getMessage() );

@@ -320,7 +320,7 @@ public class DrawingPointLinePath extends DrawingPath
     lp.mNext = null;
     lp.mPrev = null;
     -- mSize;
-    retracePath();
+    retracePath( );
     computeUnitNormal();
   }
 
@@ -370,7 +370,7 @@ public class DrawingPointLinePath extends DrawingPath
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
       lp.has_cp = false;
     }
-    retracePath();
+    retracePath( );
   }
 
   /** decimate the path points
@@ -406,13 +406,13 @@ public class DrawingPointLinePath extends DrawingPath
     if ( mSize < min_size ) {
       throw new RuntimeException("PointLine makeReduce: small final size " + mSize );
     } 
-    retracePath();
+    retracePath( );
   }
 
   /** make the path "rock"-like
    * @note called by Scrap rockPointLine
    */
-  void makeRock()
+  void makeRock( )
   {
     if ( mSize > 2 ) {
       int size = 1;
@@ -437,7 +437,7 @@ public class DrawingPointLinePath extends DrawingPath
       ++ size; // for the mLast point
       mSize = size;     
     }    
-    retracePath();
+    retracePath( );
   }
 
   /** make the path close
@@ -456,7 +456,7 @@ public class DrawingPointLinePath extends DrawingPath
         }
         mLast.x = mFirst.x;
         mLast.y = mFirst.y;
-        retracePath();
+        retracePath( );
       }
     }    
   }
@@ -644,7 +644,7 @@ public class DrawingPointLinePath extends DrawingPath
     pp.mNext = next;
     if ( next != null ) next.mPrev = pp;
     // mPoints.add(index, pp);
-    retracePath();
+    retracePath( );
     return pp;
   }
 
@@ -658,9 +658,29 @@ public class DrawingPointLinePath extends DrawingPath
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) ++ mSize;
   }
 
+
+  /** reverse line points
+   */
+  void reverseLinePoints()
+  {
+    LinePoint lp0 = mLast;
+    LinePoint prev = null;
+    LinePoint lp = lp0; 
+    while ( lp != null ) {
+      LinePoint lpp = lp.mPrev;
+      lp.mNext = lpp;
+      lp.mPrev = prev;
+      if ( prev != null ) prev.mNext = lp;
+      prev = lp;
+      lp = lpp;
+    }
+    mFirst = lp0;
+    mLast  = prev;
+  }
+
   /** retrace the path
    */
-  public void retracePath()
+  public void retracePath( )
   {
     // TDLog.v("PointLine retrace path: closed " + mClosed );
     // int size = mPoints.size();
@@ -679,6 +699,7 @@ public class DrawingPointLinePath extends DrawingPath
     if ( mSize == 0 ) return;
     mPath = new Path();
     LinePoint lp  = mFirst;
+    // if ( reverse ) lp = mLast;
     if ( lp == null ) { // should not happen but it did 20201227
       mSize = 0;
       return;
@@ -686,16 +707,31 @@ public class DrawingPointLinePath extends DrawingPath
     left = right  = lp.x;
     top  = bottom = lp.y;
     mPath.moveTo( lp.x, lp.y );
-    for ( lp = lp.mNext; lp != null && lp != mFirst; lp = lp.mNext ) {
-      if ( lp.has_cp ) {
-        mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
-      } else {
-        mPath.lineTo( lp.x, lp.y );
+    // if ( reverse ) {
+    //   LinePoint lp0 = (lp.has_cp)? lp : null;
+    //   for ( lp = lp.mPrev; lp != null && lp != mLast; lp = lp.mPrev ) {
+    //     if ( lp0 != null ) {
+    //       mPath.cubicTo( lp0.x2, lp0.y2, lp0.x1, lp0.y1, lp.x, lp.y );
+    //     } else {
+    //       mPath.lineTo( lp.x, lp.y );
+    //     }
+    //     lp0 = (lp.has_cp)? lp : null;
+    //     if ( lp.x < left ) { left = lp.x; } else if ( lp.x > right  ) { right  = lp.x; }
+    //     if ( lp.y < top  ) { top  = lp.y; } else if ( lp.y > bottom ) { bottom = lp.y; }
+    //     // if ( lp == mFirst ) break; // FIXME-AREA-SNAP mFirst should have mPrev ====  null
+    //   }
+    // } else {
+      for ( lp = lp.mNext; lp != null && lp != mFirst; lp = lp.mNext ) {
+        if ( lp.has_cp ) {
+          mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+        } else {
+          mPath.lineTo( lp.x, lp.y );
+        }
+        if ( lp.x < left ) { left = lp.x; } else if ( lp.x > right  ) { right  = lp.x; }
+        if ( lp.y < top  ) { top  = lp.y; } else if ( lp.y > bottom ) { bottom = lp.y; }
+        // if ( lp == mLast ) break; // FIXME-AREA-SNAP mLast should have mNext ====  null
       }
-      if ( lp.x < left ) { left = lp.x; } else if ( lp.x > right  ) { right  = lp.x; }
-      if ( lp.y < top  ) { top  = lp.y; } else if ( lp.y > bottom ) { bottom = lp.y; }
-      // if ( lp == mLast ) break; // FIXME-AREA-SNAP mLast should have mNext ====  null
-    }
+    // }
     if ( mClosed ) mPath.close();
     computeUnitNormal();
   }
@@ -703,7 +739,7 @@ public class DrawingPointLinePath extends DrawingPath
   /** reverse the pointline path 
    * @note the drawing path is not retraced
    */
-  void reverse()
+  void reversePath()
   {
     if ( mSize == 0 ) return;
     LinePoint lf = mFirst;
@@ -1066,18 +1102,40 @@ public class DrawingPointLinePath extends DrawingPath
   void dropEndPoints( int nr )
   {
     if ( mSize < nr + 4 ) return;
-    while ( nr > 0 &&  mLast.mPrev != mFirst.mNext ) {
-      mSize -= 2;
-      -- nr;
-      mLast = mLast.mPrev;
-      // if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
-      mLast.mNext = null;
-      mFirst = mFirst.mNext;
-      // if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
-      mFirst.mPrev = null;
-    }
-    retracePath();
+    // boolean reverse = isSymbolReverse();
+    // if ( reverse ) {
+    //   while ( nr > 0 &&  mFirst.mNext != mLast.mPrev ) {
+    //     mSize -= 2;
+    //     -- nr;
+    //     mFirst = mFirst.mNext;
+    //     // if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
+    //     mFirst.mPrev = null;
+    //     mLast = mLast.mPrev;
+    //     // if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
+    //     mLast.mNext = null;
+    //   }
+    // } else {
+      while ( nr > 0 &&  mLast.mPrev != mFirst.mNext ) {
+        mSize -= 2;
+        -- nr;
+        mLast = mLast.mPrev;
+        // if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
+        mLast.mNext = null;
+        mFirst = mFirst.mNext;
+        // if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
+        mFirst.mPrev = null;
+      }
+    // }
+    retracePath( );
   }
+
+  // private boolean isSymbolReverse()
+  // {
+  //   // if ( this instanceof DrawingLinePath ) {
+  //   //   return BrushManager.isLineReverse( ((DrawingLinePath) this).mLineType );
+  //   // }
+  //   return false;
+  // }
     
 
 

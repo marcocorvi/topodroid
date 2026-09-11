@@ -20,6 +20,7 @@ import com.topodroid.util.TDColor;
 // import com.topodroid.util.TDVersion;
 // import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDsafUri;
+import com.topodroid.math.Vector3D;
 
 // import com.topodroid.TDX.TDandroid;
 
@@ -42,8 +43,6 @@ import com.topodroid.c3in.ParserException;
 
 import com.topodroid.c3out.ExportData;
 import com.topodroid.c3out.ExportTask;
-
-import com.topodroid.c3walls.cw.CWConvexHull;
 
 import com.topodroid.dem.ParserDEM;
 import com.topodroid.dem.DEMasciiParser;
@@ -1567,7 +1566,7 @@ public class TopoGL extends MyActivity
           //     {
           //       if ( b ) {
           //         mFilename = path;
-          //         CWConvexHull.resetCounters();
+          //         com.topodroid.algo.cw.CWConvexHull.resetCounters();
           //         if ( mRenderer != null ) mRenderer.setParser( mParser, true );
           //       }
           //     }
@@ -1576,7 +1575,7 @@ public class TopoGL extends MyActivity
           // } else { // synchronous
           if ( initRendering2( is, path, mSurveyName ) ) {
             mFilename = path;
-            CWConvexHull.resetCounters();
+            com.topodroid.algo.cw.CWConvexHull.resetCounters();
             if ( mRenderer != null ) mRenderer.setParser( mParser, true );
           }
           // }
@@ -1605,7 +1604,7 @@ public class TopoGL extends MyActivity
         final InputStream is = this.getContentResolver().openInputStream( uri );
         if ( initRendering2( is, path, mSurveyName ) ) {
           mFilename = path;
-          CWConvexHull.resetCounters();
+          com.topodroid.algo.cw.CWConvexHull.resetCounters();
           if ( mRenderer != null ) mRenderer.setParser( mParser, true );
         }
       } catch ( FileNotFoundException e ) {
@@ -2315,7 +2314,7 @@ public class TopoGL extends MyActivity
     try {
       // FIXME null InputStream
       mParser = new ParserTh( this, null, survey, base ); // survey data directly from TopoDroid database
-      CWConvexHull.resetCounters();
+      com.topodroid.algo.cw.CWConvexHull.resetCounters();
       if ( mRenderer != null ) {
         mRenderer.clearModel();
         mRenderer.setParser( mParser, true );
@@ -2382,7 +2381,7 @@ public class TopoGL extends MyActivity
       } else {
         return false;
       }
-      // CWConvexHull.resetCounters();
+      // com.topodroid.algo.cw.CWConvexHull.resetCounters();
       // if ( mRenderer != null ) mRenderer.setParser( mParser, true );
       // TDLog.v("Station " + mParser.getStationNumber() + " shot " + mParser.getShotNumber() + " splay " + mParser.getSplayNumber() + " surveys " + mParser.getSurveyNumber() );
     } catch ( ParserException e ) {

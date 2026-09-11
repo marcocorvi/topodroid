@@ -79,6 +79,47 @@ Editing an orientable point, its icon can be rotated also with a swipe from the 
 
 A survey shot (leg or splay) has a green dot in the middle to select it. When a leg is selected in the profile view, a horizontal yellow segment is also displayed on the side opposite to the leg "extend", or on both sides if the leg is extended vertically. The leg extend can be set by tapping the left or right end of this segment, or the middle.<br><p>
 
+
+<h4>Line style</h4>
+TopoDroid has five line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
+With the fifth line style the traced lines are simplified using a point-weeding algorithm.
+If you export the drawing in dxf with DXF version 6 do not use splines because they get exported as polylines.<br><p>
+
+<h4>Line clipping</h4>
+If the <i>Line Clipping</i> setting is enabled, lines may be clipped to the sketch outline.<br>
+Only lines of types supporting "clipping" are clipped to the outline.<br>
+The type "clipping" attribute specifies whether the line is clipped at the end,
+or both at the end and the start, or not clipped (which is the default.
+If clipped at both sides the portion of the line that is retained starts
+from the middle and is increased towards both ends until an outline line is encountered.
+Otherwise the portion of line retained starts at one end and increased towards the other.<br>
+Clipping may fail, especially in presence of cubic (Bezier) curves.<br><p>
+
+Clipping does not apply to areas.<br><p>
+
+<h4>Retracing</h4>
+If the path-tracing style is not complex (Bezier or weeding), line and areas can be drawn in "retracing" mode.
+<br>
+A long tap on the <i>tools</i> button turns retracing on/off.<br>
+When retrace drawing is active the line/area in the respective <i>tool</i> button is white.<br>
+Line retracing and line joining are mutually exclusive.<br>
+Lines of type "section" and of closed line types cannot be retraced.
+<br><p>
+
+To retrace a portion of a line, trace a line that starts and or ends close to the line.<br>
+The retraced portion of a line/area is not transformed (Bezier spline, weeding, decimation, etc.).
+<br><p>
+
+Areas can be "retraced" by tracing a line that starts and ends close to the border af the area.
+The shorter between the two pieces of this border is replaced by the newly traced line.<br>
+The area can be enlarged or shrinked, and a concavity can be filled (figure below).
+<br><p>
+
+Retracing can be undone and redone.<br><p>
+
+<img src="area_concavity.png" width="360" border="1">
+<br><p>
+
 <h4>Point-wise edit actions [A]</h4>
 
 The point-wise edit actions (fourth to the right button) apply only to drawing items.

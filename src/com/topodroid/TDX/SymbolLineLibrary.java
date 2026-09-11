@@ -63,6 +63,8 @@ public class SymbolLineLibrary extends SymbolLibrary
 
   boolean isClosed( int k ) { return k >= 0 && k < size() && ((SymbolLine)mSymbols.get(k)).mClosed; }
 
+  boolean isReverse( int k ) { return k >= 0 && k < size() && ((SymbolLine)mSymbols.get(k)).mReverse; }
+
   int getClippable( int k ) { return (k >= 0 && k < size())? ((SymbolLine)mSymbols.get(k)).mClippable : 0; }
 
   int getStyleX( int k ) { return ( k < 0 || k >= size() )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }

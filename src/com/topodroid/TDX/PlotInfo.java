@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.util.TDLog;
 import com.topodroid.types.PlotType;
+import com.topodroid.math.Vector3D;
 
 // import android.content.res.Resources;
 

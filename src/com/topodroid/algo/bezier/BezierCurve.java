@@ -79,7 +79,15 @@ public class BezierCurve
   {
     splitIndex = (last - first + 1)/2;
     float maxDist = 0.0f;
-
+    for (int i = first + 1; i < last; i++) {
+      Point2D P = evaluate( u[i-first] );
+      Point2D v = P.sub( d.get(i) ); // vector from point to curve
+      float dist = v.squareLength();
+      if ( dist >= maxDist ) {
+        maxDist = dist;
+        splitIndex = i; 
+      }
+    }
     return maxDist;
   }
 
@@ -92,7 +100,14 @@ public class BezierCurve
    */
   void reparametrize( ArrayList< Point2D > d, int first, int last, float[] u )
   {
- 
+    // int nPts = last-first+1;
+    // float[] uPrime = new float[ nPts ]; /*  New parameter values	*/
+  
+    for (int i = first; i <= last; i++) {
+      // uPrime[i-first] = findRootNewtonRaphson( d[i], u[i-first] );
+      u[i-first] = findRootNewtonRaphson( d.get(i), u[i-first] );
+    }
+    // return uPrime;
   }
 
   /**  Bezier: Evaluate a Bezier curve at a particular parameter value
@@ -104,11 +119,53 @@ public class BezierCurve
 
   private Point2D evaluate( int degree, Point2D[] V, float t )
   {
+    float t1 = 1.0f - t;
     for (int i = 0; i <= degree; i++) { // copy array
       v_temp[i].set( V[i] );
+    }
+    //  triangle computation: 
+    //    if degree == 3: t1^3 V0 + 3 t1^2 t V1 + 3 t1 t^2 V2 + t^3 V3
+    //    if degree == 2: t1^2 V0 + 2 t1 t V1 + t^2 V2
+    //    if degree == 1: t1 V0 + t V1
+    for (int i = 1; i <= degree; i++) {
+      for (int j = 0; j <= degree-i; j++) {
+        v_temp[j].x = t1 * v_temp[j].x + t * v_temp[j+1].x;
+        v_temp[j].y = t1 * v_temp[j].y + t * v_temp[j+1].y;
+      }
     }
     return v_temp[0];
   }
 
-
+  /**  findRootNewtonRaphson: Use Newton-Raphson iteration to find better root.
+   * @param P	digitized point		
+   * @param u	parameter value for "P"	
+   * @return improved 'u'
+   */
+  private float findRootNewtonRaphson( Point2D P, float u)
+  {
+    Point2D[] Q1 = new Point2D[3]; // Q'
+    Point2D[] Q2 = new Point2D[2]; // Q"
+    
+    /* Generate control vertices for Q'	*/
+    for (int i = 0; i < 3; i++) {
+      Q1[i] = c[i+1].sub( c[i] ).times( 3.0f );
+    }
+    
+    /* Generate control vertices for Q'' */
+    for (int i = 0; i < 2; i++) {
+      Q2[i] = Q1[i+1].sub( Q1[i] ).times( 2.0f );
+    }
+    
+    Point2D Q_u  = evaluate(u);        // Compute Q(u) = cubic with points c[]
+    Point2D Q1_u = evaluate(2, Q1, u); // Q'(u) = 3 ( c[i+1] - c[i] ) quadratic 
+    Point2D Q2_u = evaluate(1, Q2, u); // Q"(u) = 6 ( c[i+2] - c[i] ) linear
+    
+    /* Compute f(u)/f'(u) */
+    float num = (Q_u.x - P.x) * (Q1_u.x) + (Q_u.y - P.y) * (Q1_u.y);
+    float den = (Q1_u.x)      * (Q1_u.x) + (Q1_u.y)      * (Q1_u.y) 
+              + (Q_u.x - P.x) * (Q2_u.x) + (Q_u.y - P.y) * (Q2_u.y);
+    
+    /* u = u - f(u)/f'(u) improved u */
+    return u - num / den;
+  }
 }

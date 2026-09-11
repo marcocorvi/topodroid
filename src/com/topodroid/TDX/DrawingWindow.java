@@ -31,6 +31,7 @@ import com.topodroid.num.NumSplay;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
+import com.topodroid.math.Vector3D;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyButtonBar;
 import com.topodroid.ui.MyHorizontalListView;
@@ -5043,6 +5044,7 @@ public class DrawingWindow extends ItemDrawer
                     int line_scale = mScaleBar.getActive() - 2;
                     DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex(), line_scale );
                     lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
+                    if ( BrushManager.isLineReverse( mCurrentLine ) ) mCurrentLinePath.reverseLinePoints();
                     if ( BrushManager.isLineStraight( mCurrentLine ) ) {
                       lp1.addStartPoint( mCurrentLinePath.mFirst.x, mCurrentLinePath.mFirst.y );
                       float nx = BrushManager.getLineStyleX( mCurrentLine ) * 2.0f;

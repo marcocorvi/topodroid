@@ -82,14 +82,15 @@
   <string-array name="unitGrid">
      <item name="meter">Метри</item>
      <item name="yard">Ярдове</item>
-     <item name="two_tf">2 фута</item>
+     <item name="two_ft">2 фута</item>
+     <item name="one_ft">1 фута</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
 
   <string-array name="unitMeasure">
      <item name="grid_cell">мрежова клетка</item>
      <item name="meter">метри</item>
-     <item name="tf">футове</item>
+     <item name="feet">футове</item>
   </string-array>
 
     <string-array name="loopClosure">

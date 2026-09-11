@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+// import com.topodroid.math.Triangle3D;
+import com.topodroid.math.Vector3D;
 
 //  import android.util.FloatMath;
 

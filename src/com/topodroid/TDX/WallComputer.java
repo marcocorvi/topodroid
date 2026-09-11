@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.math.Triangle3D;
+
 import java.util.ArrayList;
 
 /** wall-computer interface

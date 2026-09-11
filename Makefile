@@ -211,8 +211,8 @@ version:
 	echo $(VERSION)
 
 archive:
-	tar -chvzf ../topodroid-`date -I`.tgz --exclude-vcs $(SRC)
+	echo -n "cannot make archive from this folder"
 
 release-archive:
-	tar -chvzf ../topodroidX-`date -I`.tgz --exclude-vcs $(SRC) $(APPVERSION)-$(TARGET_SDK).apk
+	echo -n "cannot make archive from this folder"
 

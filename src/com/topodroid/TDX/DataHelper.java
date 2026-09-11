@@ -31,6 +31,7 @@ import com.topodroid.types.TDStatus;
 import com.topodroid.types.ExtendType;
 import com.topodroid.types.PlotType;
 import com.topodroid.dev.Device;
+import com.topodroid.math.Vector3D;
 
 // import java.io.File;
 import java.io.FileNotFoundException;

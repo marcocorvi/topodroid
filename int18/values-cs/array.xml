@@ -102,7 +102,8 @@
   <string-array name="unitGrid">
      <item name="meter">metery</item>
      <item name="yard">yardy</item>
-     <item name="two_tf">2 stopy</item>
+     <item name="two_ft">2 stopy</item>
+     <item name="one_ft">1 stopy</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
 
@@ -110,7 +111,7 @@
   <string-array name="unitMeasure">
      <item name="grid_cell">buňka mřížky</item>
      <item name="meter">metr</item>
-     <item name="tf">stopa</item>
+     <item name="feet">stopa</item>
   </string-array>
 
 

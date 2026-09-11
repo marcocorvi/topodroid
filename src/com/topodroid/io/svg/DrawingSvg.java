@@ -277,10 +277,10 @@ public class DrawingSvg extends DrawingSvgBase
             }
             // TDLog.v("SVG splays " + normal.size() );
             writeSplays( out, normal,          "splays",   "grey", xoff, yoff );
-            writeSplays( out, splay_feature,   "splays_f", null, xoff, yoff );  // color is not used
-            writeSplays( out, splay_ridge,     "splays_r", null, xoff, yoff );
-            writeSplays( out, splay_backsight, "splays_b", null, xoff, yoff );
-            writeSplays( out, splay_generic,   "splays_g", null, xoff, yoff );
+            writeSplays( out, splay_feature,   "splays-f", null, xoff, yoff );  // color is not used
+            writeSplays( out, splay_ridge,     "splays-r", null, xoff, yoff );
+            writeSplays( out, splay_backsight, "splays-b", null, xoff, yoff );
+            writeSplays( out, splay_generic,   "splays-g", null, xoff, yoff );
           }
         }
       }
@@ -333,7 +333,7 @@ public class DrawingSvg extends DrawingSvgBase
         ArrayList< DrawingPath > paths = new ArrayList<>();
 
         int scrapId = scrap.mScrapIdx;
-        out.write( "<g id=\"scrap_" + scrapId + "\"" + group_mode_open );
+        out.write( "<g id=\"scrap-" + scrapId + "\"" + group_mode_open );
         scrap.addCommandsToList( paths );
 
         writeScrapContent( out, paths, String.valueOf(scrapId), xoff, yoff, TDSetting.mAutoXSections );
@@ -376,10 +376,10 @@ public class DrawingSvg extends DrawingSvgBase
         StringWriter sw41x = new StringWriter();
         PrintWriter pw41x  = new PrintWriter(sw41x);
         // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
-          // pw41x.format(Locale.US, "  <path class=\"%s\" stroke=\"%s\" id=\"splay_%s_%d\" d=\"", group, color, group, count++ );
-          pw41x.format(Locale.US, "  <path id=\"splay_%s_%d\" d=\"", group, count++ );
+          // pw41x.format(Locale.US, "  <path class=\"%s\" stroke=\"%s\" id=\"splay-%s-%d\" d=\"", group, color, group, count++ );
+          pw41x.format(Locale.US, "  <path id=\"splay-%s-%d\" d=\"", group, count++ );
         // } else {
-        //   pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay_%s_%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
+        //   pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay-%s-%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
         // }
         printSegmentWithClose( pw41x, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         pw41x.format("\n");

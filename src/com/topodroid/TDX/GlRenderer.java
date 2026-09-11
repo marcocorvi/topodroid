@@ -17,6 +17,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.c3out.ExportGltf;
 import com.topodroid.c3out.ExportData;
 import com.topodroid.dem.ParserDEM;
+import com.topodroid.math.Vector3D;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

@@ -4321,7 +4321,7 @@ public class TDExporter
             break;
           }
           if (d0.to.equals(first_from) && !d0.from.equals("-")) { // backward to GPS
-            d0.reverse();
+            d0.reverseShot();
             printPolygonData( pw, d0 );
             d0.used = true;
             break;
@@ -4348,7 +4348,7 @@ public class TDExporter
                   break;
                 }
                 if ( to.equals( d1.to ) || to.equals( d1.from ) ) { // try reversed
-                  d2.reverse();
+                  d2.reverseShot();
                   printPolygonData( pw, d2 );
                   d2.used = true;
                   break;

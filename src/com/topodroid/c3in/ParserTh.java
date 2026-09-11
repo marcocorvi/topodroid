@@ -36,7 +36,7 @@ import com.topodroid.TDX.Cave3DFix;
 import com.topodroid.mag.Geodetic;
 import com.topodroid.mag.MagElement;
 import com.topodroid.mag.WorldMagneticModel;
-import com.topodroid.TDX.Vector3D;
+import com.topodroid.math.Vector3D;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDInstance;
 

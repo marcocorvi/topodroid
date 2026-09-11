@@ -19,9 +19,6 @@ import com.topodroid.TDX.R;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
 
-// import java.util.List;
-import java.util.ArrayList;
-
 // import android.app.Activity;
 // import android.app.Dialog;
 import android.os.Bundle;
@@ -43,17 +40,19 @@ import android.widget.EditText;
 // import android.widget.ArrayAdapter;
 
 import java.util.Locale;
+import java.util.List;
+import java.util.ArrayList;
 
 class TdmEquateNewDialog extends MyDialog
                          implements OnClickListener
 {
-  TdmViewActivity mParent;
-  ArrayList< TdmViewCommand > mCommands;
+  private TdmViewActivity mParent;
+  private List< TdmViewCommand > mCommands;
   // String[] mStation;
   // Spinner[] mSpinner;
-  EditText[] mEdit;
-  int mSize;
-  int mCommandsSize;
+  private EditText[] mEdit;
+  private int mSize;
+  private int mCommandsSize;
 
   private Button mBTok;
   private Button mBTback;
@@ -63,7 +62,7 @@ class TdmEquateNewDialog extends MyDialog
   int j0=0; // HB EQ all
   int l0=0; // HB EQ all
 
-  TdmEquateNewDialog( Context context, TdmViewActivity parent, ArrayList< TdmViewCommand > commands )
+  TdmEquateNewDialog( Context context, TdmViewActivity parent, List< TdmViewCommand > commands )
   {
     super( context, null, R.string.TdmEquateNewDialog ); // null app
     mParent   = parent;
@@ -144,9 +143,9 @@ class TdmEquateNewDialog extends MyDialog
    * When the user tap the "clear" button, the set of possible equates is cleared
    *
    * We need a local class for PossibleEquate with two survey stations (the two Surveys and the two Stations), even if the station names coincide.
-   * Next we need a method to find all possible equates, and store them in an ArrayList of PossibleEquate.
-   * A boolean function to check whether there are possible equates is useful: this could be a test whether ArrayList is nor empty
-   * (the ArrayList could be instantiated when the dialog is created, and later filled/cleared).
+   * Next we need a method to find all possible equates, and store them in an List of PossibleEquate.
+   * A boolean function to check whether there are possible equates is useful: this could be a test whether List is nor empty
+   * (the List could be instantiated when the dialog is created, and later filled/cleared).
    */ 
   @Override
   public void onClick(View v) 
@@ -155,7 +154,7 @@ class TdmEquateNewDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBTok ) {
       // String bad_station = null; // UNUSED
-      ArrayList< String > sts = new ArrayList<>();
+      ArrayList< String > sts = new ArrayList< >();
       for ( int k=0; k<mSize; ++k ) {
         TdmViewCommand vc = mCommands.get( ( (mCommandsSize == 1) ? 0 : k ) );
         String survey = vc.name();
@@ -232,8 +231,36 @@ class TdmEquateNewDialog extends MyDialog
       int eq_group_nr = 0; // incremental value of equate group
       int eq_group_nr_max = 0; // debug: number of equate groups
       int[] eq_group = new int[mSize];
-	  // FIXME eq_group should be initialized according to existing equates
       for (int j = 0; j < ( mSize ) ; ++j ) eq_group[j]=-1; 
+      List< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates(); // MC 2026-09--6
+      for ( TdmEquate eq : equates ) {
+        ArrayList< Integer > eq_surveys = new ArrayList<>();
+        for ( int j = 0; j < mSize; ++j ) {
+          TdmViewCommand vc = mCommands.get(j);
+          if ( eq.getSurveyStation( vc.name() ) != null ) eq_surveys.add( j );
+        }
+        if ( eq_surveys.size() > 1 ) {
+          int group = -1;
+          for ( Integer ii : eq_surveys ) {
+            if ( eq_group[ ii ] == -1 ) { // eq_group of ii not assigned
+              if ( group == -1 ) { // group index not set
+                ++ eq_group_nr;
+                ++ eq_group_nr_max;
+                group = eq_group_nr;
+              }
+              eq_group[ ii ] = group;
+            } else { // eq_group of ii already assigned
+              if ( group != -1 ) { // group index already set: renumber all eq_group[] equal to group
+                for ( int k = 0; k < mSize; ++k ) {
+                  if ( eq_group[k] == group ) eq_group[k] = eq_group[ ii ];
+                }
+                -- eq_group_nr_max;
+              }
+              group = eq_group[ ii ]; // reset group index
+            }
+          }
+        }
+      }
       if ( mSize > 1 ) {
         for ( int j = 0; j < ( mSize - 1 ) ; ++j ) { 
           TdmViewCommand vc0 = mCommands.get(j);

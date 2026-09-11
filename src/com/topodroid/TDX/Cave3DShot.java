@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.TDX.DBlock;
 // import com.topodroid.util.TDLog;
 import com.topodroid.math.TDVector;
+import com.topodroid.math.Vector3D;
 import com.topodroid.util.TDMath;
 
 import java.io.DataOutputStream;
