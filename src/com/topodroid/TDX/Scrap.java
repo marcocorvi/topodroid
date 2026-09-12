@@ -3816,7 +3816,7 @@ public class Scrap
    */
   void clipLine( DrawingLinePath line, int clip_mode ) 
   {
-    com.topodroid.algo.clip.Clip.toOutline( mCurrentStack, line, clip_mode );
+    com.topodroid.algo.Clip.toOutline( mCurrentStack, line, clip_mode );
   }
 
 }
