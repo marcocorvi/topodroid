@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.algo.clip.Clip;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
@@ -1014,7 +1015,7 @@ public class Scrap
   //       }
   //     }
   //   }
-  //   return ( lp10 != null && lp20 != null );
+  //   return ( 0 != null && lp20 != null );
   // }
 
   private LinePoint moveBack1( LinePoint lp, Point2D q, LinePoint lq, float delta )
@@ -1463,7 +1464,7 @@ public class Scrap
 
   /** fine the area to continue
    * @param ap     area path
-   * @param lp1    area start point
+   * @param lq1    area start point
    * @param lq2    area end point
    * @param type   area type
    * @param zoom   display zoom
@@ -3533,7 +3534,7 @@ public class Scrap
   }
 
   /** join the lines in the multiselction
-   * @param dcim   maximum gap for join
+   * @param dmin   maximum gap for join
    */
   void joinMultiselection( float dmin )
   {
@@ -3816,7 +3817,7 @@ public class Scrap
    */
   void clipLine( DrawingLinePath line, int clip_mode ) 
   {
-    com.topodroid.algo.Clip.toOutline( mCurrentStack, line, clip_mode );
+    Clip.toOutline( mCurrentStack, line, clip_mode );
   }
 
 }
