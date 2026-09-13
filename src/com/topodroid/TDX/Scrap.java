@@ -1015,7 +1015,7 @@ public class Scrap
   //       }
   //     }
   //   }
-  //   return ( 0 != null && lp20 != null );
+  //   return ( lp10 != null && lp20 != null );
   // }
 
   private LinePoint moveBack1( LinePoint lp, Point2D q, LinePoint lq, float delta )
