@@ -157,18 +157,17 @@ SRC = \
   ./symbols-git/*/*/* \
   ./howto/* \
   ./utils/* \
-  ./src/androidx/annotation/* \
+  ./src/androidx/annotation/*.java \
+  ./src/com/topodroid/algo/*/*.java \
   ./src/com/topodroid/c3db/*.java \
   ./src/com/topodroid/c3in/*.java \
   ./src/com/topodroid/c3out/*.java \
-  ./src/com/topodroid/c3walls/*/*.java \
   ./src/com/topodroid/types/*.java \
   ./src/com/topodroid/calib/*.java \
   ./src/com/topodroid/dem/*.java \
   ./src/com/topodroid/dev/*.java \
   ./src/com/topodroid/dev/*/*.java \
   ./src/com/topodroid/$(APPCODE)/*.java \
-  ./src/com/topodroid/dln/*.java \
   ./src/com/topodroid/help/*.java \
   ./src/com/topodroid/inport/*.java \
   ./src/com/topodroid/io/*/*.java \
@@ -177,7 +176,6 @@ SRC = \
   ./src/com/topodroid/num/*.java \
   ./src/com/topodroid/packetX/*.java \
   ./src/com/topodroid/prefs/*.java \
-  ./src/com/topodroid/ptopo/*.java \
   ./src/com/topodroid/tdm/*.java \
   ./src/com/topodroid/trb/*.java \
   ./src/com/topodroid/ui/*.java \

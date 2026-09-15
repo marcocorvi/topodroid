@@ -341,9 +341,10 @@ public class TDSetting
   public static float   SVG_SCALE = SVG_SCALE_AI;
   public static float   mToSvg     = SVG_SCALE / 100;
 
-  public static final int SVG_INKSCAPE    = 0;
-  public static final int SVG_ILLUSTRATOR = 1;
-  public static int mSvgProgram = SVG_ILLUSTRATOR;
+  public static final int SVG_INKSCAPE = 0;
+  public static final int SVG_ADOBE_CC = 1;
+  public static final int SVG_ADOBE_CS = 2;
+  public static int mSvgProgram = SVG_INKSCAPE;
 
   public static boolean mSvgRoundTrip  = false;
   public static boolean mSvgGrid       = false;
@@ -2783,7 +2784,7 @@ public class TDSetting
     //   mBezierStep  = tryFloatValue( hlp, k, v, key[8].dflt );
     } else if ( k.equals( key[13].key ) ) {  // DISTOX_SVG_PROGRAM
       mSvgProgram    = tryIntValue( hlp, k, v, key[13].dflt );
-      if ( mSvgProgram < 0 || mSvgProgram > 1 ) mSvgProgram = 0;
+      if ( mSvgProgram < SVG_INKSCAPE || mSvgProgram > SVG_ADOBE_CS ) mSvgProgram = SVG_INKSCAPE;
       setExportScale( mTherionScale );
     } else {
       TDLog.e("missing EXPORT_SVG key: " + k );
@@ -4409,12 +4410,12 @@ B DISTOX_SAP5_BIT16_BUG true
             case "DISTOX_SVG_GROUPS":
               mSvgGroups = Boolean.parseBoolean( value );         setPreference( editor, kay, mSvgGroups );
               break;
-            // case  "DISTOX_SVG_PROGRAM":
-            //   mSvgProgram     = Integer.parseInt( value );
-            //   if ( mSvgProgram != 1 ) mSvgProgram = 0;  // either 1 (Illustrator) or 0 (Inkscape) 
-            //   setPreference( editor, kay, mSvgProgram );
-            //   setExportScale( mTherionScale );
-            // break;
+            case  "DISTOX_SVG_PROGRAM":
+              mSvgProgram     = Integer.parseInt( value );
+              if ( mSvgProgram < SVG_INKSCAPE || mSvgProgram > SVG_ADOBE_CS ) mSvgProgram = SVG_INKSCAPE; // 0: Inkscape, 1: AdobeCC, 2: AdobeCS
+              setPreference( editor, kay, mSvgProgram );
+              setExportScale( mTherionScale );
+            break;
             case "DISTOX_SHP_GEOREF":
               mShpGeoref = Boolean.parseBoolean( value ); setPreference( editor, kay, mShpGeoref );
               break;
@@ -4806,7 +4807,7 @@ B DISTOX_SAP5_BIT16_BUG true
     String ret = null;
     if ( scale < 40 )   { scale = 40;   ret = "40"; }
     if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
-    SVG_SCALE = ( mSvgProgram == 1 )? SVG_SCALE_AI : SVG_SCALE_INK;
+    SVG_SCALE = ( mSvgProgram == SVG_INKSCAPE )? SVG_SCALE_INK : SVG_SCALE_AI;
     mTherionScale = scale;
     mToTherion = THERION_SCALE / mTherionScale;
     mToSvg     = SVG_SCALE / mTherionScale;

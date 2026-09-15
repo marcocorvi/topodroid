@@ -30,12 +30,13 @@ import java.io.BufferedReader;
 // import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.Locale;
-// import java.util.regex.Pattern;
+import java.util.regex.Pattern;
 
 class ParserCompass extends ImportParser
 {
   private boolean mLrud;
   private boolean mLegFirst;
+  private static final Pattern mPatternSS = Pattern.compile( ".+ss\\d+$" );
 
   /** Compass parser
    * @param filename name of the file to parse
@@ -117,6 +118,7 @@ class ParserCompass extends ImportParser
 
             mFrom = vals[k]; ++k;
             mTo   = vals[k]; ++k;
+            if ( mTo.startsWith(")") || mTo.endsWith(")") || mPatternSS.matcher( mTo ).matches() ) mTo=TDString.EMPTY;
             try {
               mLength  = Float.parseFloat(vals[k]) * TDUtil.FT2M; ++k;
               mBearing = Float.parseFloat(vals[k]); ++k;

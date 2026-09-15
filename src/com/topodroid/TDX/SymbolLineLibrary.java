@@ -30,13 +30,14 @@ import android.content.res.Resources;
 public class SymbolLineLibrary extends SymbolLibrary
 {
   static final private String[] DefaultLines = {
-    ARROW, BORDER, CHIMNEY, PIT, WALL_PRESUMED, ROCK_BORDER, SLOPE
+    ARROW, BORDER, CHIMNEY, PIT, WALL_PRESUMED, ROCK_BORDER, SLOPE, GRADIENT,
   };
 
   int mLineUserIndex; // PRIVATE
   int mLineWallIndex;
   int mLineSlopeIndex;
   int mLineSectionIndex;
+  // int mLineGradientIndex;
 
   SymbolLineLibrary( Resources res )
   {
@@ -45,6 +46,7 @@ public class SymbolLineLibrary extends SymbolLibrary
     mLineWallIndex    = -1;
     mLineSlopeIndex   = -1;
     mLineSectionIndex = -1;
+    // mLineGradientIndex   = -1;
     loadSystemLines( res );
     loadUserLines();
     initIndices();
@@ -235,10 +237,11 @@ public class SymbolLineLibrary extends SymbolLibrary
   @Override
   protected void makeSpecialIndices()
   {    
-    mLineUserIndex    = getSymbolIndexByThName( USER );
-    mLineWallIndex    = getSymbolIndexByThName( WALL );
-    mLineSlopeIndex   = getSymbolIndexByThName( SLOPE );
-    mLineSectionIndex = getSymbolIndexByThName( SECTION );
+    mLineUserIndex     = getSymbolIndexByThName( USER );
+    mLineWallIndex     = getSymbolIndexByThName( WALL );
+    mLineSlopeIndex    = getSymbolIndexByThName( SLOPE );
+    mLineSectionIndex  = getSymbolIndexByThName( SECTION );
+    // mLineGradientIndex = getSymbolIndexByThName( GRADIENT );
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )

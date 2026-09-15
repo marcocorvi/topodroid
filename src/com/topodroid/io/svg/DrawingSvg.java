@@ -59,6 +59,8 @@ public class DrawingSvg extends DrawingSvgBase
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SVG2 );
     // String wall_group = BrushManager.getLineWallGroup( );
 
+    // TODO get width/height from the grid
+
     // int handle = 0;
     RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
@@ -87,12 +89,11 @@ public class DrawingSvg extends DrawingSvgBase
 
       // header
       out.write( svg_header );
-      out.write( String.format(Locale.US, " width=\"%fpx\" height=\"%fpx\"\n", (width*TDSetting.mToSvg), (height*TDSetting.mToSvg) ) );
+      out.write( widthHeight( width, height ) );
       // out.write( " viewBox=\"0 0 " + width + " " + height + "\"\n" );
       // out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n"); // already in the svg_header
       // out.write( "   xmlns=\"http://www.w3.org/2000/svg\");
-      out.write( "  version=\"1.1\"\n" );
-      out.write( "  id=\"svg46\"\n" );
+      out.write( "  version=\"1.1\" id=\"svg46\"\n" );
       out.write( "  sodipodi:docname=\"" + filename + "\"\n" );
       out.write( "  inkscape:version=\"0.92.4 (5da689c313, 2019-01-14)\">\n" );
       out.write( "<!-- SVG created by " + TDVersion.APP_NAME + " v. " + TDVersion.string() + " -->\n" );
@@ -195,7 +196,7 @@ public class DrawingSvg extends DrawingSvgBase
           PrintWriter pw4  = new PrintWriter(sw4);
           // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
             // pw4.format(Locale.US, "  <path class=\"legs\" d=\"" );
-            pw4.format(Locale.US, "  <path d=\"" );
+            pw4.format(Locale.US, "<path d=\"" );
           // } else {
           //   pw4.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
           // }
@@ -286,27 +287,7 @@ public class DrawingSvg extends DrawingSvgBase
       }
 
       // TDLog.v( "SVG stations " + plot.getStations().size() );
-      out.write("<g id=\"stations\"" + group_mode_open);
-      if ( TDSetting.mAutoStations ) {
-        if ( TDSetting.mSvgStations ) {
-          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            StringWriter sw61 = new StringWriter();
-            PrintWriter pw61  = new PrintWriter(sw61);
-            toSvg( pw61, name, xoff, yoff );
-            out.write( sw61.getBuffer().toString() );
-            out.flush();
-          }
-        }
-      } else {
-        for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
-          StringWriter sw62 = new StringWriter();
-          PrintWriter pw62 = new PrintWriter(sw62);
-          toSvg(pw62, st_path, xoff, yoff);
-          out.write(sw62.getBuffer().toString());
-          out.flush();
-        }
-      }
-      out.write(end_grp); // stations
+      writeStations( out, plot, xoff, yoff );
 
       out.write(end_grp); // centerline
 
@@ -331,13 +312,10 @@ public class DrawingSvg extends DrawingSvgBase
       // TDLog.v( "SVG scraps " + plot.getScraps().size() );
       for ( Scrap scrap : plot.getScraps() ) {
         ArrayList< DrawingPath > paths = new ArrayList<>();
-
+        scrap.addCommandsToList( paths );
         int scrapId = scrap.mScrapIdx;
         out.write( "<g id=\"scrap-" + scrapId + "\"" + group_mode_open );
-        scrap.addCommandsToList( paths );
-
         writeScrapContent( out, paths, String.valueOf(scrapId), xoff, yoff, TDSetting.mAutoXSections );
-
         out.write( end_grp ); // scrap_
         out.flush();
       }
@@ -377,9 +355,9 @@ public class DrawingSvg extends DrawingSvgBase
         PrintWriter pw41x  = new PrintWriter(sw41x);
         // if ( TDSetting.mFixmeClass ) { // FIXME_CLASS
           // pw41x.format(Locale.US, "  <path class=\"%s\" stroke=\"%s\" id=\"splay-%s-%d\" d=\"", group, color, group, count++ );
-          pw41x.format(Locale.US, "  <path id=\"splay-%s-%d\" d=\"", group, count++ );
+          pw41x.format(Locale.US, "<path id=\"splay-%s-%d\" d=\"", group, count++ );
         // } else {
-        //   pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay-%s-%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
+        //   pw41x.format(Locale.US, "<path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay-%s-%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
         // }
         printSegmentWithClose( pw41x, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         pw41x.format("\n");

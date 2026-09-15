@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
+import com.topodroid.util.TDString;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -129,7 +130,7 @@ class DrawingLabelDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
     if (view.getId() == R.id.label_ok ) {
-      String label = TDUtil.getTextOrNull( mLabel );
+      String label = TDString.replaceNul( TDUtil.getTextOrNull( mLabel ) );
       if ( label != null ) {
         label = mLabel.getText().toString().trim();
         if ( label.length() > 0 ) {

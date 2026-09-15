@@ -3424,8 +3424,9 @@ public class DrawingWindow extends ItemDrawer
       mOffset.x = info.xoffset;
       mOffset.y = info.yoffset;
       mZoom     = info.zoom;
-      // TDLog.v("PLOT resume: " + mOffset.x + " " + mOffset.y + " " + mZoom );
-      setPlotType( mType, PARAMS_YES );
+      TDLog.v("PLOT resume 1: " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      setPlotType( mType, false ); // PARAMS_YES overrites the above params - it seems it is not necessary
+      TDLog.v("PLOT resume 2: " + mOffset.x + " " + mOffset.y + " " + mZoom );
     }
     mDrawingSurface.setDrawing( true );
     // TDLog.v( "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
@@ -4348,8 +4349,9 @@ public class DrawingWindow extends ItemDrawer
 
   /** delete a drawing point
    * @param point   drawing point item
+   * @note used also by DrawingPointDialog to delete an empty label-point
    */
-  private void deletePoint( DrawingPointPath point )
+  void deletePoint( DrawingPointPath point )
   {
     if ( point == null ) return;
     // assert( mLastLinePath == null );

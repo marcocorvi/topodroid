@@ -224,11 +224,13 @@
 
   <string-array name="svgProgram" translatable="false">
      <item name="inkscape">Inkscape</item>
-     <item name="illustrator">Illustrator</item>
+     <item name="illustrator">Adobe CC</item>
+     <item name="illustrator_cs">Adobe CS</item>
   </string-array>
   <string-array name="svgProgramValue" translatable="false">
      <item name="inkscape">0</item>
      <item name="illustrator">1</item>
+     <item name="illustrator_cs">2</item>
   </string-array>
 
   <!-- string-array name="wallsType">

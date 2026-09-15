@@ -499,6 +499,11 @@ public class DrawingLinePath extends DrawingPointLinePath
    */
   public boolean isReversed() { return mReversed; }
 
+
+  /** @return true if the linetype is reverse
+   */
+  public boolean isReverse() { return BrushManager.isLineReverse( mLineType ); }
+
   /** get the line type
    * @return the type of the line
    */
