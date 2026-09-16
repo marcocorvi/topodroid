@@ -58,7 +58,7 @@ class ItemPickerDialog extends MyDialog
   private int mLinePos;   // item line  position
   private int mAreaPos;   // item area  position
   private long mPlotType;
-  private int mScale;     // FIXME_SCALE
+  // private int mScale;     // FIXME_SCALE
   private int mSelectedPoint;
   private int mSelectedLine;
   private int mSelectedArea;
@@ -71,8 +71,8 @@ class ItemPickerDialog extends MyDialog
   // private  Button mBTright;
   // private  Button mBTcancel;
   // private  Button mBTok;
-  private SeekBar mSeekBar;     // FIXME_SCALE
-  private LinearLayout mLayoutProperties;
+  // private SeekBar mSeekBar;     // FIXME_ORIENTATION
+  // private LinearLayout mLayoutProperties; // FIXME_SCALE FIXME_ORIENTATION
 
   // private DrawingWindow mParent;
   private WeakReference<ItemDrawer> mParent;
@@ -114,7 +114,7 @@ class ItemPickerDialog extends MyDialog
     mLineLib  = BrushManager.getLineLib();
     mAreaLib  = BrushManager.getAreaLib();
 
-    mScale         = parent.getPointScale();     // FIXME_SCALE
+    // mScale         = parent.getPointScale();     // FIXME_SCALE
     mSelectedPoint = parent.mCurrentPoint;
     mSelectedLine  = parent.mCurrentLine;
     mSelectedArea  = parent.mCurrentArea;
@@ -199,7 +199,7 @@ class ItemPickerDialog extends MyDialog
     mBTarea  = (Button) findViewById(R.id.item_area );
     // mBTsize  = (Button) findViewById(R.id.size);     // FIXME_SCALE
     // mBTsize.setOnClickListener( this );
-    mLayoutProperties = (LinearLayout) findViewById( R.id.layout_properties );
+    // mLayoutProperties = (LinearLayout) findViewById( R.id.layout_properties ); // FIXME_SCALE FIXME_ORIENTATION
     // mBTleft  = (Button) findViewById(R.id.item_left );
     // mBTright = (Button) findViewById(R.id.item_right );
     // mBTcancel  = (Button) findViewById(R.id.item_cancel );
@@ -229,16 +229,17 @@ class ItemPickerDialog extends MyDialog
     // mBTleft.setOnClickListener( this );
     // mBTright.setOnClickListener( this );
 
-    mSeekBar = (SeekBar) findViewById(R.id.seekbar );     // FIXME_SCALE
-    mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
-        public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
-          if ( fromUser ) {
-            setItemAngle( (180 + progress)%360 );
-          }
-        }
-        public void onStartTrackingTouch(SeekBar seekbar) { }
-        public void onStopTrackingTouch(SeekBar seekbar) { }
-    } );
+    // mSeekBar = (SeekBar) findViewById(R.id.seekbar );     // FIXME_ORIENTATION
+    // mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+    //     public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+    //       if ( fromUser ) {
+    //         setItemAngle( (180 + progress)%360 );
+    //       }
+    //     }
+    //     public void onStartTrackingTouch(SeekBar seekbar) { }
+    //     public void onStopTrackingTouch(SeekBar seekbar) { }
+    // } );
+
     // } else {
     //   mBTpoint.setVisibility( View.GONE );
     //   mBTarea.setVisibility( View.GONE );
@@ -261,21 +262,21 @@ class ItemPickerDialog extends MyDialog
   // FIXME_SCALE
   private void setSeekBarProgress()
   {
-    boolean orientable = false;
+    // boolean orientable = false; // FIXME_ORIENTATION
     ItemSymbol item = null;
     if ( mItemType == SymbolType.POINT &&  mPointAdapter != null ) {
       item = mPointAdapter.get( mPointAdapter.getSelectedPos() );
     } else if ( mItemType == SymbolType.AREA &&  mAreaAdapter != null ) {
       item = mAreaAdapter.get( mAreaAdapter.getSelectedPos() );
     }
-    if ( item != null ) {
-      SymbolInterface symbol = item.mSymbol;
-      if ( symbol != null && symbol.isOrientable() ) {
-        mSeekBar.setProgress( (180+symbol.getAngle())%360 );
-        orientable = true;
-      }
-    }
-    mSeekBar.setEnabled( orientable );
+    // if ( item != null ) { // FIXME_ORIENTATION
+    //   SymbolInterface symbol = item.mSymbol;
+    //   if ( symbol != null && symbol.isOrientable() ) {
+    //     mSeekBar.setProgress( (180+symbol.getAngle())%360 );
+    //     orientable = true;
+    //   }
+    // }
+    // mSeekBar.setEnabled( orientable );
   }
 
   // FIXME_SCALE
@@ -288,15 +289,13 @@ class ItemPickerDialog extends MyDialog
       int pos = mPointAdapter.getSelectedPos();
       item = mPointAdapter.get( pos );
       symbols = ItemDrawer.mRecentPoint;
-      mPointAdapter.setItemOrientation( pos, angle );
-      // setPointOrientation( pos, angle );
+      // mPointAdapter.setItemOrientation( pos, angle ); // FIXME_ORIENTATION
     } else if ( mItemType == SymbolType.AREA && mAreaAdapter != null ) {
       // TDLog.v("Item Picker set arae angle " + angle );
       int pos = mAreaAdapter.getSelectedPos();
       item = mAreaAdapter.get( pos );
       symbols = ItemDrawer.mRecentArea;
-      mAreaAdapter.setItemOrientation( pos, angle );
-      // setAreaOrientation( pos, angle );
+      // mAreaAdapter.setItemOrientation( pos, angle ); // FXIME_ORIENTATION
     }
     // if ( item != null ) {
     //   // item.setAngle( angle );
@@ -431,7 +430,7 @@ class ItemPickerDialog extends MyDialog
             mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
             mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
             mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-            mSeekBar.setVisibility( View.VISIBLE ); // FIXME_SCALE
+            // mSeekBar.setVisibility( View.VISIBLE ); // FIXME_ORIENTATION
             setSeekBarProgress();
           }
           break;
@@ -440,7 +439,7 @@ class ItemPickerDialog extends MyDialog
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mSeekBar.setVisibility( View.INVISIBLE ); // FIXME_SCALE
+          // mSeekBar.setVisibility( View.INVISIBLE ); // FIXME_ORIENTATION
           break;
         case SymbolType.AREA:
           // if ( TDLevel.overBasic )
@@ -449,7 +448,7 @@ class ItemPickerDialog extends MyDialog
             mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
             mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
             mBTarea.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
-            mSeekBar.setVisibility( View.VISIBLE ); // FIXME_SCALE
+            // mSeekBar.setVisibility( View.VISIBLE ); // FIXME_ORIENTATION
           }
           break;
       }
@@ -500,9 +499,9 @@ class ItemPickerDialog extends MyDialog
     StringBuilder title = new StringBuilder();
     switch ( mItemType ) {
       case SymbolType.POINT: 
-        title.append( "[" ); // FIXME_SCALE
-        title.append( PointScale.scaleToStringUC( mScale ) );
-        title.append( "] " );
+        // title.append( "[" ); // FIXME_SCALE
+        // title.append( PointScale.scaleToStringUC( mScale ) );
+        // title.append( "] " );
         title.append( resString( R.string.POINT ) );
         title.append( " " );
         title.append( BrushManager.getPointName( mSelectedPoint ) );
@@ -537,8 +536,8 @@ class ItemPickerDialog extends MyDialog
     switch ( type ) {
       case SymbolType.POINT: 
         // mLayoutProperties.setVisibility( View.VISIBLE );
-        // mBTsize.setVisibility( View.VISIBLE ); // FXIME_SCALE
-        mSeekBar.setVisibility( View.VISIBLE );
+        // mBTsize.setVisibility( View.VISIBLE ); // FIXME_SCALE
+        // mSeekBar.setVisibility( View.VISIBLE ); // FIXME_ORIENTATION
         if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
           // TDLog.v( "set TypeAndItem type point pos " + index + " index " + is.mIndex );
@@ -552,14 +551,14 @@ class ItemPickerDialog extends MyDialog
         break;
       case SymbolType.LINE: 
         // mLayoutProperties.setVisibility( View.GONE );
-        // mBTsize.setVisibility( View.GONE ); // FXIME_SCALE
-        mSeekBar.setVisibility( View.GONE );
+        // mBTsize.setVisibility( View.GONE ); // FIXME_SCALE
+        // mSeekBar.setVisibility( View.GONE ); // FIXME_ORIENTATION
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
           mSelectedLine = is.mIndex;
           // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
-          mSeekBar.setEnabled( false );
+          // mSeekBar.setEnabled( false ); // FIXME_ORIENTATION
           // mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
           mBTline.setTextColor(  TDColor.SYMBOL_ON );
           // mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
@@ -567,8 +566,8 @@ class ItemPickerDialog extends MyDialog
         break;
       case SymbolType.AREA: 
         // mLayoutProperties.setVisibility( View.GONE );
-        // mBTsize.setVisibility( View.GONE ); // FXIME_SCALE
-        mSeekBar.setVisibility( View.VISIBLE );
+        // mBTsize.setVisibility( View.GONE ); // FIXME_SCALE
+        // mSeekBar.setVisibility( View.VISIBLE ); // FIXME_ORIENTATION
         if ( mAreaAdapter != null /* && TDLevel.overBasic */ ) {
           // mAreaPos = index;
           is = mAreaAdapter.get( index );

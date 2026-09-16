@@ -298,7 +298,8 @@ public class SymbolLibrary
     return ( a != null ) && a.isEnabled();
   }
 
-  void resetOrientations() { for ( Symbol s : mSymbols ) s.setAngle(0); }
+  // FIXME_ORIENTATION
+  // void resetOrientations() { for ( Symbol s : mSymbols ) s.setAngle(0); }
   
   // ========================================================================
 

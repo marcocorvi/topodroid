@@ -125,6 +125,8 @@ public class Symbol implements SymbolInterface
 
   boolean isPicture() { return mSymbolType == TYPE_POINT && mThName.equals("picture"); }
 
+  // protected boolean isSlope() { return mThName.equals("slope"); }
+
   /** @return true if this is a POINT symbol
    */
   boolean isPoint() { return mSymbolType == TYPE_POINT; }
@@ -209,6 +211,10 @@ public class Symbol implements SymbolInterface
    */
   public Paint  getPaint()      { return null; } // Overridden
 
+  /** @return the symbol button-paint - default to getPaint()
+   */
+  public Paint getButtonPaint() { return getPaint(); } // can be overridden
+
   /** @return the symbol paint for the preview - default to getPaint() 
    */
   public Paint getPreviewPaint() { return getPaint(); } // TDSKETCH
@@ -284,15 +290,15 @@ public class Symbol implements SymbolInterface
    */
   public void toggleEnabled() { mEnabled = ! mEnabled; }
   
-  /** set the symbol orientation angle
-   * @param angle    angle [degrees]
-   * @return true if the orientation has been set, false by default
-   */
-  public boolean setAngle( float angle ) { return false; }
+  // /** set the symbol orientation angle // FIXME_ORIENTATION
+  //  * @param angle    angle [degrees]
+  //  * @return true if the orientation has been set, false by default
+  //  */
+  // public boolean setAngle( float angle ) { return false; }
 
-  /** @return the symbol orientation angle, 0 degrees by default
-   */
-  public int getAngle() { return 0; }
+  // /** @return the symbol orientation angle, 0 degrees by default // FIXME_ORIENTATION
+  //  */
+  // public int getAngle() { return 0; }
 
   /** @return the symbol X-dimension
    * @param type   symbol type (point, line, or area)

@@ -24,6 +24,7 @@ import java.io.IOException;
 
 
 import android.graphics.Path;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.graphics.ComposePathEffect;
@@ -37,7 +38,7 @@ public class SymbolLine extends Symbol
   String mName;       // local name
   Paint  mPaint;      // forward paint
   Paint  mRevPaint;   // reverse paint
-  boolean mHasEffect; // whether the line paint has path-effect
+  boolean mHasEffect = false; // whether the line paint has path-effect
   Path mPath;
   boolean mStyleStraight;
   boolean mClosed  = false;
@@ -64,8 +65,8 @@ public class SymbolLine extends Symbol
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
-  // @Override public boolean setAngle( float angle ) { }
-  // @Override public int getAngle() { return 0; }
+  // @Override public boolean setAngle( float angle ) { } // FIXME_ORIENTATION
+  // @Override public int getAngle() { return 0; } // FIXME_ORIENTATION
 
   // width = 1;
   // no effect
@@ -142,7 +143,6 @@ public class SymbolLine extends Symbol
       mPath.lineTo( 50, 0 );
     }
   }
-
 
   private int k_val; // index in array vals[]
 
@@ -505,8 +505,8 @@ public class SymbolLine extends Symbol
                     // mPathDir.close();
                     // mPathRev.close();
                     mEffectLen = xmax-xmin;
-                    dir_effect = new PathDashPathEffect( mPathDir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
-                    rev_effect = new PathDashPathEffect( mPathRev, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
+                    dir_effect = new PathDashPathEffect( mPathDir, mEffectLen, 0, PathDashPathEffect.Style.MORPH );
+                    rev_effect = new PathDashPathEffect( mPathRev, mEffectLen, 0, PathDashPathEffect.Style.MORPH );
                     break;
                   }
                 }
@@ -558,6 +558,22 @@ public class SymbolLine extends Symbol
     } catch( IOException e ) {
       // FIXME
     }
+  }
+
+  @Override
+  public Paint getButtonPaint() 
+  {
+    if ( mPathDir != null ) {
+      Paint paint = new Paint( mPaint );
+      Path path = new Path( mPathDir );
+      Matrix m = new Matrix();
+      m.postScale( 5.0f, 3.0f );
+      path.transform( m );
+      PathEffect effect = new PathDashPathEffect( path, mEffectLen*5, 0, PathDashPathEffect.Style.MORPH );
+      paint.setPathEffect( effect );
+      return paint;
+    }
+    return mPaint;
   }
 
 }

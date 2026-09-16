@@ -122,7 +122,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mOrientation = 0.0;
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       // FIXME AREA_ORIENT 
-      mOrientation = BrushManager.getAreaOrientation( type );
+      // mOrientation = BrushManager.getAreaOrientation( type ); // FIXME_ORIENTATION
       mLocalShader = BrushManager.cloneAreaShader( mAreaType );
       resetPathPaint();
       mPaint.setShader( mLocalShader );

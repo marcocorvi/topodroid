@@ -134,9 +134,9 @@ public class DrawingPointPath extends DrawingPath
     mPointText = null; // getTextFromOptions( options ); // this can also reset mOptions
     mLevel     = BrushManager.getPointLevel( mPointType );
 
-    if ( BrushManager.isPointOrientable( mPointType ) ) {
-      mOrientation = BrushManager.getPointOrientation( mPointType );
-    }
+    // if ( BrushManager.isPointOrientable( mPointType ) ) { // FIXME_ORIENTATION
+    //   mOrientation = BrushManager.getPointOrientation( mPointType );
+    // }
     setPathPaint( BrushManager.getPointPaint( mPointType ) );
     mScale = scale;
     resetPath( 1.0f );
@@ -163,9 +163,9 @@ public class DrawingPointPath extends DrawingPath
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
     mLevel     = BrushManager.getPointLevel( type );
 
-    if ( BrushManager.isPointOrientable( type ) ) {
-      mOrientation = BrushManager.getPointOrientation(type);
-    }
+    // if ( BrushManager.isPointOrientable( type ) ) { // FIXME_ORIENTATION
+    //   mOrientation = BrushManager.getPointOrientation(type);
+    // }
     setPathPaint( BrushManager.getPointPaint( mPointType ) );
     mScale = scale;
     resetPath( 1.0f );

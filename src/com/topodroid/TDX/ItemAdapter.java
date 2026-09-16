@@ -99,16 +99,16 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   private boolean isValid( int p ) { return p >= 0 && p < mItems.size() /* && p != mNonClick */ ; }
 
-  /** set an item orientation
-   * @param pos    item position (index)
-   * @param angle  orientation angle [degrees]
-   */
-  void setItemOrientation( int pos, int angle ) 
-  {
-    if ( isValid(pos) ) {
-      mItems.get( pos ).setAngle( angle );
-    }
-  }
+  // /** set an item orientation // FIXME_ORIENTATION
+  //  * @param pos    item position (index)
+  //  * @param angle  orientation angle [degrees]
+  //  */
+  // void setItemOrientation( int pos, int angle ) 
+  // {
+  //   if ( isValid(pos) ) {
+  //     mItems.get( pos ).setAngle( angle );
+  //   }
+  // }
 
   /** set whether to show selected item
    * @param s   whether to show selected item or not

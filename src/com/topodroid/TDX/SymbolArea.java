@@ -36,7 +36,7 @@ public class SymbolArea extends Symbol
   boolean mCloseHorizontal;
   boolean mOrientable; // PRIVATE
   // FIXME AREA_ORIENT
-  double mOrientation;
+  // double mOrientation; // FIXME_ORIENTATION
 
   private Paint mPaint;
   private Path mPath;
@@ -62,20 +62,20 @@ public class SymbolArea extends Symbol
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
-  // FIXME AREA_ORIENT
-  @Override public boolean setAngle( float angle ) 
-  {
-    if ( mBitmap == null ) return false;
-    mOrientation = angle;
-    // TDLog.e( "ERROR area symbol set orientation " + angle + " not supported" );
-    android.graphics.Matrix m = new android.graphics.Matrix();
-    m.preRotate( (float)mOrientation );
-    mShader.setLocalMatrix( m );
-    return true;
-  }
+  // // FIXME AREA_ORIENT
+  // @Override public boolean setAngle( float angle )  // FIXME_ORIENTATION
+  // {
+  //   if ( mBitmap == null ) return false;
+  //   mOrientation = angle;
+  //   // TDLog.e( "ERROR area symbol set orientation " + angle + " not supported" );
+  //   android.graphics.Matrix m = new android.graphics.Matrix();
+  //   m.preRotate( (float)mOrientation );
+  //   mShader.setLocalMatrix( m );
+  //   return true;
+  // }
 
-  // FIXME AREA_ORIENT
-  @Override public int getAngle() { return (int)mOrientation; }
+  // // FIXME AREA_ORIENT
+  // @Override public int getAngle() { return (int)mOrientation; } // FIXME_ORIENTATION
 
   /** 
    * color 0xaarrggbb
@@ -107,22 +107,22 @@ public class SymbolArea extends Symbol
     makeAreaPath();
   }
 
-  // FIXME AREA_ORIENT
-  void rotateGradArea( double a ) 
-  {
-    if ( mOrientable ) {
-      // TDLog.e( "ERROR area symbol rotate by " + a + " not implemented" );
-      // mOrientation += a;
-      // while ( mOrientation >= 360 ) mOrientation -= 360;
-      // while ( mOrientation < 0 ) mOrientation += 360;
-      mOrientation = TDMath.in360( mOrientation + a );
-      if ( mShader != null ) {
-        android.graphics.Matrix m = new android.graphics.Matrix();
-        m.preRotate( (float)mOrientation );
-        mShader.setLocalMatrix( m );
-      }
-    }
-  }
+  // // FIXME AREA_ORIENT
+  // void rotateGradArea( double a ) // FIXME_ORIENTATION
+  // {
+  //   if ( mOrientable ) {
+  //     // TDLog.e( "ERROR area symbol rotate by " + a + " not implemented" );
+  //     // mOrientation += a;
+  //     // while ( mOrientation >= 360 ) mOrientation -= 360;
+  //     // while ( mOrientation < 0 ) mOrientation += 360;
+  //     mOrientation = TDMath.in360( mOrientation + a );
+  //     if ( mShader != null ) {
+  //       android.graphics.Matrix m = new android.graphics.Matrix();
+  //       m.preRotate( (float)mOrientation );
+  //       mShader.setLocalMatrix( m );
+  //     }
+  //   }
+  // }
 
   private void makeAreaPath()
   {
@@ -142,7 +142,7 @@ public class SymbolArea extends Symbol
     super( Symbol.TYPE_AREA, null, null, fname, Symbol.W2D_DETAIL_SHP );
     mOrientable  = false;
     // FIXME AREA_ORIENT
-    mOrientation = 0;
+    // mOrientation = 0; // FIXME_ORIENTATION
 
     readFile( filepath, locale, iso );
     makeAreaPath();

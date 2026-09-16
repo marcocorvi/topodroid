@@ -246,10 +246,11 @@ public class BrushManager
   public static boolean isPointDeclinable( int index )  { return mPointLib != null && mPointLib.isSymbolDeclinable( index ); } // TH2EDIT package
   public static boolean isPointOrientable( int index )  { return mPointLib != null && mPointLib.isSymbolOrientable( index ); } // TH2EDIT package
   // public static boolean isPointScalable( int index ) { return mPointLib != null && mPointLib.isSymolScalable( index ); } // TDSKETCH
-  static double getPointOrientation( int index ) { return (mPointLib == null)? 0 : mPointLib.getPointOrientation( index ); }
-  // test should not be necessary but Xperia Z Ultra Android 5.1 crashed 2019-10-07
-  public static void resetPointOrientations( )              { if ( mPointLib != null ) mPointLib.resetOrientations(); } // TH2EDIT package
-  public static void rotateGradPoint( int index, double a ) { if ( mPointLib != null ) mPointLib.rotateGrad( index, a ); } // TH2EDIT package
+  // FIXME_ORIENTATION
+  // static double getPointOrientation( int index ) { return (mPointLib == null)? 0 : mPointLib.getPointOrientation( index ); }
+  // // test should not be necessary but Xperia Z Ultra Android 5.1 crashed 2019-10-07
+  // public static void resetPointOrientations( )              { if ( mPointLib != null ) mPointLib.resetOrientations(); } // TH2EDIT package
+  // public static void rotateGradPoint( int index, double a ) { if ( mPointLib != null ) mPointLib.rotateGrad( index, a ); } // TH2EDIT package
   static Path getPointPath( int i )                  { return (mPointLib == null)? null : mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i )              { return (mPointLib == null)? null : mPointLib.getPointOrigPath( i ); }
 
@@ -302,9 +303,10 @@ public class BrushManager
   static boolean isAreaUser( int idx )      { return mAreaLib != null && idx == mAreaLib.mAreaUserIndex; }
   // FIXME AREA_ORIENT
   static boolean isAreaOrientable( int index )      { return mAreaLib != null && mAreaLib.isSymbolOrientable( index ); }
-  static double getAreaOrientation( int index )     { return (mAreaLib == null)? 0 : mAreaLib.getAreaOrientation( index ); }
-  static void resetAreaOrientations( )              { if (mAreaLib != null) mAreaLib.resetOrientations(); }
-  static void rotateGradArea( int index, double a ) { if (mAreaLib != null) mAreaLib.rotateGrad( index, a ); }
+  // FIXME_ORIENTATION
+  // static double getAreaOrientation( int index )     { return (mAreaLib == null)? 0 : mAreaLib.getAreaOrientation( index ); }
+  // static void resetAreaOrientations( )              { if (mAreaLib != null) mAreaLib.resetOrientations(); }
+  // static void rotateGradArea( int index, double a ) { if (mAreaLib != null) mAreaLib.rotateGrad( index, a ); }
 
   static Bitmap getAreaBitmap( int index )  { return (mAreaLib == null)? null : mAreaLib.getAreaBitmap( index ); }
   static Shader getAreaShader( int index )  { return (mAreaLib == null)? null : mAreaLib.getAreaShader( index ); }

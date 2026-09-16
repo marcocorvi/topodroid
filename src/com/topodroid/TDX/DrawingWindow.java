@@ -6114,7 +6114,7 @@ public class DrawingWindow extends ItemDrawer
     int point_scale = mScaleBar.getActive() - 2; // mPointScale
     if ( mLandscape ) { float t=x; x=-y; y=t; }
     DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, point_scale, null, mDrawingSurface.scrapIndex() );
-    label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
+    // label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov // FIXME_ORIENTATION
     label_path.mLandscape = mLandscape;
     label_path.mLevel = level;
     mDrawingSurface.addDrawingPath( label_path );
@@ -10759,20 +10759,20 @@ public class DrawingWindow extends ItemDrawer
       case SymbolType.POINT: 
         mRecentTools = mRecentPoint;
         mSymbol = symbol;
-        setButtonRecent( mBtnRecentP, mRecentPoint );
+        setButtonRecents( mBtnRecentP, mRecentPoint );
         index = getCurrentPointIndex();
         break;
       case SymbolType.LINE: 
         mRecentTools = mRecentLine;
         mSymbol = symbol;
-        setButtonRecent( mBtnRecentL, mRecentLine  );
+        setButtonRecents( mBtnRecentL, mRecentLine  );
         index = getCurrentLineIndex();
         // TDLog.v("set btn recent line: current " + mCurrentLine + " index " + index );
         break;
       case SymbolType.AREA: 
         mRecentTools = mRecentArea;
         mSymbol = symbol;
-        setButtonRecent( mBtnRecentA, mRecentArea  );
+        setButtonRecents( mBtnRecentA, mRecentArea  );
         index = getCurrentAreaIndex();
         break;
     }
@@ -10820,9 +10820,9 @@ public class DrawingWindow extends ItemDrawer
   private void setBtnRecentAll()
   {
     // TDLog.v("set btn recent all" );
-    setButtonRecent( mBtnRecentP, mRecentPoint );
-    setButtonRecent( mBtnRecentL, mRecentLine  );
-    setButtonRecent( mBtnRecentA, mRecentArea  );
+    setButtonRecents( mBtnRecentP, mRecentPoint );
+    setButtonRecents( mBtnRecentL, mRecentLine  );
+    setButtonRecents( mBtnRecentA, mRecentArea  );
 
     mRecentTools = mRecentLine; // by default the drawing tool is the wall-line
     if ( mCurrentLine < 0 ) mCurrentLine = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
@@ -10833,7 +10833,7 @@ public class DrawingWindow extends ItemDrawer
    * @param buttons   array of buttons
    * @param recents   array of recent tools
    */
-  private void setButtonRecent( ItemButton[] buttons, Symbol[] recents )
+  private void setButtonRecents( ItemButton[] buttons, Symbol[] recents )
   {
     int kk = 0;
     for ( int k=0; k<NR_RECENT; ++k ) {
@@ -10841,13 +10841,13 @@ public class DrawingWindow extends ItemDrawer
       if ( p == null || buttons[k] == null ) break;
       if ( p.isPoint() && p.isSection() ) continue;
       // if ( p.isPoint() ) TDLog.v("SET button point " + p.getThName() );
-      buttons[kk].resetPaintPath( p.getPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY );
+      buttons[kk].resetPaintPath( p.getButtonPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY );
       buttons[kk].invalidate();
       ++kk;
     }
   }
 
-  // /** set the recent points tools buttons - merged in setButtonRecent using isPoint()
+  // /** set the recent points tools buttons - merged in setButtonRecents using isPoint()
   //  * @param buttons   array of buttons
   //  * @param recents   array of recent tools
   //  * @note a special method for points is necessary to skip the "section" point

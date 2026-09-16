@@ -102,28 +102,28 @@ public class SymbolPointLibrary extends SymbolLibrary
    */
   boolean pointHasTextOrValue( int k ) { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
 
-  /** @return the orientation current value of the point symbol
-   * @param k    point index
-   */
-  double getPointOrientation( int k )
-  { return ( k < 0 || k >= size() )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
+  // /** @return the orientation current value of the point symbol // FIXME_ORIENTATION
+  //  * @param k    point index
+  //  */
+  // double getPointOrientation( int k )
+  // { return ( k < 0 || k >= size() )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
 
-  /** reset the orientation of all points
-   */
-  @Override
-  void resetOrientations()
-  {
-    for ( Symbol sp : mSymbols ) ((SymbolPoint)sp).resetOrientation();
-  }
+  // /** reset the orientation of all points // FIXME_ORIENTATION
+  //  */
+  // @Override
+  // void resetOrientations()
+  // {
+  //   for ( Symbol sp : mSymbols ) ((SymbolPoint)sp).resetOrientation();
+  // }
 
-  /** rotate (clockwise?) the current orientation value of a point
-   * @param k    point index
-   * @param a    rotation angle [degrees]
-   */
-  void rotateGrad( int k, double a )
-  {
-    if ( k >= 0 && k < size() ) ((SymbolPoint)mSymbols.get(k)).rotateGradP( a );
-  }
+  // /** rotate (clockwise?) the current orientation value of a point // FIXME_ORIENTATION
+  //  * @param k    point index
+  //  * @param a    rotation angle [degrees]
+  //  */
+  // void rotateGrad( int k, double a )
+  // {
+  //   if ( k >= 0 && k < size() ) ((SymbolPoint)mSymbols.get(k)).rotateGradP( a );
+  // }
 
   /** @return the current drawing path of a point
    * @param k    point index

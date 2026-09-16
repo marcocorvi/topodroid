@@ -62,7 +62,7 @@ public class SymbolPoint extends Symbol
   int mHasText;                // whether the point has a text (1), value (2), or none (0)
   boolean mOrientable;         // PRIVATE
   boolean mScalable = false;   // TDSKETCH
-  double mOrientation;         // orientation [degrees]
+  // double mOrientation;         // orientation [degrees] // FIXME_ORIENTATION
   boolean mDeclinable = false; // whether the symbol should be rotated by the declination (must be orientable)
   // SymbolPointBasic mPoint1; // basic point
 
@@ -86,25 +86,25 @@ public class SymbolPoint extends Symbol
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
-  /** set the point orientation angle
-   * @param angle   orientation angle [degrees]
-   * @return true if the orientation has been set
-   */
-  @Override
-  public boolean setAngle( float angle )
-  {
-    if ( ! mOrientable ) return false;
-    float a = angle - (float)mOrientation;
-    if ( Math.abs(a) > 1 ) {
-      rotateGradP( a );
-      return true;
-    }
-    return false;
-  }
+  // /** set the point orientation angle // FIXME_ORIENTATION
+  //  * @param angle   orientation angle [degrees]
+  //  * @return true if the orientation has been set
+  //  */
+  // @Override
+  // public boolean setAngle( float angle )
+  // {
+  //   if ( ! mOrientable ) return false;
+  //   float a = angle - (float)mOrientation;
+  //   if ( Math.abs(a) > 1 ) {
+  //     rotateGradP( a );
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
-  /** @return the point orientation angle [degrees]
-   */
-  @Override public int getAngle() { return (int)mOrientation; } 
+  // /** @return the point orientation angle [degrees] // FIXME_ORIENTATION
+  //  */
+  // @Override public int getAngle() { return (int)mOrientation; } 
 
   /** @return the point local name
    */
@@ -149,18 +149,18 @@ public class SymbolPoint extends Symbol
     return makeScaledPath( mPathStr, TDSetting.mSymbolSize );
   }
 
-  // showing orientation makes UI a bit confusing
-  @Override
-  public Path getScaledOrientedPath()
-  {
-    Path ret = makeScaledPath( mPathStr, TDSetting.mSymbolSize );
-    if ( mOrientable ) {
-      Matrix m = new Matrix();
-      m.preRotate( (float)mOrientation );
-      ret.transform( m );
-    }
-    return ret;
-  }
+  // // showing orientation makes UI a bit confusing // FIXME_ORIENTATION
+  // @Override
+  // public Path getScaledOrientedPath()
+  // {
+  //   Path ret = makeScaledPath( mPathStr, TDSetting.mSymbolSize );
+  //   if ( mOrientable ) {
+  //     Matrix m = new Matrix();
+  //     m.preRotate( (float)mOrientation );
+  //     ret.transform( m );
+  //   }
+  //   return ret;
+  // }
 
   
  
@@ -184,7 +184,7 @@ public class SymbolPoint extends Symbol
     mOrientable = false;
     mScalable   = false; // TDSKETCH
     mHasText = 0;
-    mOrientation = 0.0;
+    // mOrientation = 0.0; // FIXME_ORIENTATION
     readFile( pathname, locale, iso );
   }
 
@@ -213,7 +213,7 @@ public class SymbolPoint extends Symbol
     mOrientable  = orientable;
     mScalable    = false; // TDSKETCH
     mHasText     = 0;
-    mOrientation = 0.0;
+    // mOrientation = 0.0; // FIXME_ORIENTATION
     mDeclinable  = mOrientable && ( mHasText == 0 );
     mLevel = level;
   }
@@ -245,36 +245,36 @@ public class SymbolPoint extends Symbol
     mScalable    = false; // TDSKETCH
     mHasText     = has_text;
     mDeclinable  = mOrientable && ( mHasText == 0 );
-    mOrientation = 0.0;
+    // mOrientation = 0.0; // FIXME_ORIENTATION
     mLevel       = level;
   }
 
-  /** rotate the orientation of the point symbol
-   * @param a   rotation angle [degrees]
-   */
-  void rotateGradP( double a )
-  {
-    if ( mOrientable ) {
-      mOrientation += a;
-      if ( mOrientation > 360.0 ) mOrientation -= 360.0;
-      if ( mOrientation < 0.0 )   mOrientation += 360.0;
-      Matrix m = new Matrix();
-      m.postRotate( (float)(a) );
-      mPath.transform( m );
-    }
-  }
+  // /** rotate the orientation of the point symbol // FIXME_ORIENTATION
+  //  * @param a   rotation angle [degrees]
+  //  */
+  // void rotateGradP( double a )
+  // {
+  //   if ( mOrientable ) {
+  //     mOrientation += a;
+  //     if ( mOrientation > 360.0 ) mOrientation -= 360.0;
+  //     if ( mOrientation < 0.0 )   mOrientation += 360.0;
+  //     Matrix m = new Matrix();
+  //     m.postRotate( (float)(a) );
+  //     mPath.transform( m );
+  //   }
+  // }
 
-  /** reset the orientation of the point symbol
-   */
-  void resetOrientation()
-  {
-    if ( mOrientable && mOrientation != 0.0 ) {
-      Matrix m = new Matrix();
-      m.postRotate( (float)(-mOrientation) );
-      mPath.transform( m );
-      mOrientation = 0.0;
-    }
-  }
+  // /** reset the orientation of the point symbol // FIXME_ORIENTATION
+  //  */
+  // void resetOrientation()
+  // {
+  //   if ( mOrientable && mOrientation != 0.0 ) {
+  //     Matrix m = new Matrix();
+  //     m.postRotate( (float)(-mOrientation) );
+  //     mPath.transform( m );
+  //     mOrientation = 0.0;
+  //   }
+  // }
 
   /** create a symbol reading it from a file
    * @param pathname  file path
@@ -502,7 +502,7 @@ public class SymbolPoint extends Symbol
     } catch( IOException e ) {// FIXME
     }
     if ( ! mOrientable ) mDeclinable = false;
-    mOrientation = 0.0;
+    // mOrientation = 0.0; // FIXME_ORIENTATION
   }
 
   // private void makePointPath()

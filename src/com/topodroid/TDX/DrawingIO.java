@@ -684,7 +684,8 @@ public class DrawingIO
 				   String plotName )
   {
     // TDLog.v( "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
-    BrushManager.resetPointOrientations();
+    // BrushManager.resetPointOrientations(); // FIXME_ORIENTATION
+
     // int project_dir = 0;
     // float north_x1, north_y1, north_x2, north_y2;
 

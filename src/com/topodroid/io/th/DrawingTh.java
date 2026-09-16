@@ -110,7 +110,7 @@ public class DrawingTh
     String thname;
 
     // TDLog.v( "Load Therion file " + " delta " + dx + " " + dy );
-    BrushManager.resetPointOrientations();
+    // BrushManager.resetPointOrientations(); // FIXME_ORIENTATION
     ArrayList< DrawingAreaPath > areas = new ArrayList<>();
     int area_cnt = 0;
 
@@ -239,10 +239,10 @@ public class DrawingTh
             }
           } else if ( has_orientation && BrushManager.isPointOrientable(ptType) ) {
             // TDLog.v( "TH point " + ptType + " has orientation " + orientation );
-            BrushManager.rotateGradPoint( ptType, orientation );
+            // BrushManager.rotateGradPoint( ptType, orientation ); // FIXME_ORIENTATION
             DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options, scrap_idx );
             surface.addDrawingPath( path );
-            BrushManager.rotateGradPoint( ptType, -orientation );
+            // BrushManager.rotateGradPoint( ptType, -orientation ); // FIXME_ORIENTATION
           } else {
             DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options, scrap_idx );
             surface.addDrawingPath( path );

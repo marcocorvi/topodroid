@@ -55,19 +55,19 @@ public class SymbolAreaLibrary extends SymbolLibrary
     return ( s != null ) && s.mCloseHorizontal;
   }
 
-  // FIXME AREA_ORIENT
-  double getAreaOrientation( int k )
-  {
-    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
-    return ( s == null )? 0 : s.mOrientation;
-  }
+  // // FIXME AREA_ORIENT
+  // double getAreaOrientation( int k ) // FXIME_ORIENTATION
+  // {
+  //   SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+  //   return ( s == null )? 0 : s.mOrientation;
+  // }
 
-  // FIXME AREA_ORIENT
-  void rotateGrad( int k, double a ) 
-  {
-    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
-    if ( s != null ) s.rotateGradArea( a );
-  }
+  // // FIXME AREA_ORIENT
+  // void rotateGrad( int k, double a )  // FXIME_ORIENTATION
+  // {
+  //   SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+  //   if ( s != null ) s.rotateGradArea( a );
+  // }
 
   Bitmap getAreaBitmap( int k ) 
   { 
