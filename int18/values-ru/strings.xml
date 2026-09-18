@@ -102,7 +102,7 @@
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
     <string name="thp_section">сечение</string>
-    <!-- TODO string name="thp_section_point">section-point</string -->
+    <string name="thp_section_point">точка сечения</string>
     <string name="thp_picture">картинка</string>
     <string name="thp_station">пикет</string>
     <!-- UNUSED string name="thp_danger">опасность</string -->
@@ -433,7 +433,7 @@
     <!-- UNUSED string name="including_splays">бок. замеры</string -->
     <string name="with_splays">со сплеями</string>
     <string name="cell_size">Размер сетки [m]</string>
-    <!-- TODO string name="reset_ids">Reset IDs</string -->
+    <string name="reset_ids">Сбросить ID</string>
 
     <string name="legs">Замеры м-у пикетами</string>
     <string name="stations">Пикет</string>
@@ -918,7 +918,7 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
     <string name="button_less">Меньше</string>
-    <!-- TODO string name="button_fewer"   >Fewer</string -->
+    <string name="button_fewer"   >Меньше</string>
     <string name="button_more"    >Ещё</string>
     <string name="button_move"    >Переместить</string>
     <string name="button_next"    >Далее</string>
@@ -986,7 +986,7 @@
 
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
-    <!-- TODO string name="button_xpoint">Section-Point</string -->
+    <string name="button_xpoint">Точка сечения</string>
     <string name="xsection">Сечение</string>
     <string name="buffer">Буфер</string>
     <string name="buffer_size">Буфер: %1$d записей</string>
@@ -2028,8 +2028,8 @@
   <string name="pref_plot_shift_summary">Включить режим смещения и масштабирования абриса относительно нитки</string>
   <string name="pref_splay_alpha_title">Прозрачность сплеев</string>
   <string name="pref_splay_alpha_summary">Прозрачность сплеев [0: прозрачные, 100: видимые]</string>
-  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
-  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
+  <string name="pref_reset_ids_title">Сброс ID</string>
+  <string name="pref_reset_ids_summary">Включить сброс ID в съёмке</string>
 
   <!-- UNUSED string name="pref_picker_type_title">Вид меню инструментов рисования</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Тип меню инструментов рисования</string -->

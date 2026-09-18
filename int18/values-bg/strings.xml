@@ -14,7 +14,7 @@
     <string name="no_manual">Ръководството не може да бъде изтеглено</string>
     <string name="user_man_ok">Преведеното ръководство е инсталирано</string>
     <string name="user_man_fail">Грешка при инсталиране на ръководството [%1$d]</string>
-    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
+    <string name="db_not_ready">Базата данни за картировката не е готова.</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -42,13 +42,13 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">project.tdconfig</string>
     <string name="double_back">Натиснете НАЗАД отново, за да излезете</string>
-    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
+    <string name="tdm_disconnected_survey">Прекъсната връзка с картировката</string>
 
     <string name="new_survey_label">Нова картировка</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s\?\n(Текущи v.%2$s)</string>
-    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
+    <string name="symbols_recover">Възстановяване на инструментите за чертане?</string>
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
@@ -104,7 +104,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="thp_user">потребител</string>
     <string name="thp_label">надпис</string>
     <string name="thp_section">сечение</string>
-    <!-- TODO string name="thp_section_point">section-point</string -->
+    <string name="thp_section_point">точка в сечение</string>
     <string name="thp_picture">снимка</string>
     <string name="thp_station">репер</string>
     <!-- UNUSED string name="thp_danger">опасност</string -->
@@ -364,10 +364,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Начална добра позиция</string>
     <string name="location_enabled">Уверете се, че LOCATION (местоположението) е активиран.</string>
-    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
+    <string name="location_no_permission">Няма разрешение за достъп до местоположението</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
     <string name="discovery_error">Грешка при откриване на BT: %1$s</string>
-    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
+    <string name="depth_format">Дълбочина %1$.1f</string>
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -434,7 +434,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="including_splays">включително странични измервания</string -->
     <string name="with_splays">със странични измервания</string>
     <string name="cell_size">Размер [m]</string>
-    <!-- TODO string name="reset_ids">Reset IDs</string -->
+    <string name="reset_ids">Нулиране на идентификаторите</string>
 
     <string name="legs">Отсечка</string>
     <string name="stations">Репер</string>
@@ -639,7 +639,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="scrap_delete">Изтриване на отрязък\?</string>
     <string name="item_delete">Изтриване на елемент %1$s \?</string>
     <string name="splay_delete">Изтриване на странично измерване %1$s \?</string>
-    <!-- TODO string name="scanset_delete">Delete scan-set shot at %1$s ?</string -->
+    <string name="scanset_delete">Изтриване на измерването в %1$s ?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
     <string name="plot_dangling">Висяща скица</string>
     <string name="plot_name">Име на картировката</string>
@@ -670,7 +670,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="section_name">коментар за сечението</string>
     <!-- UNUSED string name="scrap_outline">Контур на скица</string -->
     <string name="scrap_string">Отрязък от скица: %1$d / %2$d</string>
-    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
+    <string name="scrap_index">Отрязък %1$d</string>
     <string name="section_point_not_allowed">точката в сечението не е разрешена</string>
     <string name="section_line_not_allowed">линията в сечението не е разрешена</string>
 
@@ -735,7 +735,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="saturated_coeffs">ПРЕДУПРЕЖДЕНИЕ: наситени коефициенти на калибриране</string>
     <string name="out_of_memory">ПРЕДУПРЕЖДЕНИЕ: недостатъчна памет !</string>
     <string name="disk_io_error">КРИТИЧНО: грешка на диска!</string>
-    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+    <string name="tdr_load_fail">Неуспешно четене на TDR файла</string>
 
     <string name="toporobot_warning">Политиката на TopoRobot е експериментална !</string>
     <string name="anomaly_warning">Компенсацията на магнитната аномалия е експертна !</string>
@@ -865,7 +865,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="display_refresh">Обновен дисплей</string>
     <string name="plan_view">план</string>
     <string name="profile_view">профил</string>
-    <!-- TODO string name="xsection_view">x-section</string -->
+    <string name="xsection_view">напречно сечение</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Неуспешно четене на паметта на DistoX</string>
@@ -881,7 +881,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Актуализиране на ръководството за потребителя\?\nТекуща версия  %1$d Инсталирана версия %2$d</string>
     <string name="ask_clear_equates">Премахване на всички еквиваленти?</string>
     <string name="ask_forget_device">Забрави устройство %1$s?</string>
-    <!-- TODO string name="ask_scan_delete">Delete scan-set?</string -->
+    <string name="ask_scan_delete">Изтриване?</string>
 
 
     <string name="button_add">Добави</string>
@@ -921,8 +921,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot">Рисунка</string>
-    <string name="button_less">По-малко</string>
-    <!-- TODO string name="button_fewer"   >Fewer</string -->
+    <string name="button_less">Малко</string>
+    <string name="button_fewer">По-малко</string>
     <string name="button_more">Още</string>
     <string name="button_move">Премести</string>
     <string name="button_next">Следващ</string>
@@ -990,7 +990,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="button_write">Качване</string>
     <string name="button_xsection">Сечение</string>
-    <!-- TODO string name="button_xpoint">Section-Point</string -->
+    <string name="button_xpoint">Точка на сечение</string>
     <string name="xsection">Сечение</string>
     <string name="buffer">Буфер</string>
     <string name="buffer_size">Размер на буфера: %1$d</string>
@@ -1281,7 +1281,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_add_equate">Добави свързани картировки</string>
     <string name="help_all_equates">Всички възможни свързани картировки</string>
     <string name="help_equates">Дай списък със свързани картировки</string>
-    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
+    <string name="help_equate_surveys">Списък с еквивалентни картировки</string>
     <string name="help_stations_minus">Покажи по-малко репери</string>
     <string name="help_stations_plus">Покажи повече репери</string>
 
@@ -1367,7 +1367,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
     <string name="title_scan_shot">Проверка на измерване</string>
-    <!-- TODO string name="title_scanset">Scan set</string -->
+    <string name="title_scanset">Набор за сканиране</string>
 
     <string name="title_search">Търси репер/отсечка</string>
     <string name="title_stations">Репери</string>
@@ -1497,7 +1497,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_import_shot">Импортирай картировка</string>
     <string name="title_import_gps">Импортирай GPS точка</string>
     <string name="title_import_th2">Therion th2 файл</string>
-    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
+    <string name="title_import_surveys">Папка с картировки</string>
     <string name="title_infos">Географски точки за картировката</string>
     <string name="title_graph_paper">Милиметрова хартия в мащаб 1:100</string>
     <string name="graph_paper_scale">Направи линията с дължина 5 cm</string>
@@ -1545,8 +1545,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_single_back_summary">Затвори прозорците с единично докосване</string>
   <string name="pref_hide_navbar_title">Навигационна лента</string>
   <string name="pref_hide_navbar_summary">Скрита. Показване с плъзгане нагоре</string>
-  <!-- TODO string name="pref_analytics_title">Share analytics</string -->
-  <!-- TODO string name="pref_analytics_summary">Enable functions analytics sharing</string -->
+  <string name="pref_analytics_title">Споделяне на анализи</string>
+  <string name="pref_analytics_summary">Активиране на споделянето на анализи</string>
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Покажи необработени данни за калибриране</string>
@@ -1741,12 +1741,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_bric_index_is_id_summary">Използвай индексът на BRIC като ID на измерването</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
-  <!-- TODO string name="pref_cvwy_abs_title" copyable="all">Cavway ABS threshold</string -->
-  <!-- TODO string name="pref_cvwy_abs_summary" copyable="bg">Cavway shot accuracy ABS threshold</string -->
-  <!-- TODO string name="pref_cvwy_dip_title" copyable="all">Cavway Dip threshold</string -->
-  <!-- TODO string name="pref_cvwy_dip_summary" copyable="bg">Cavway shot accuracy Dip threshold</string -->
-  <!-- TODO string name="pref_cvwy_angle_title" copyable="all">Cavway Angle threshold</string -->
-  <!-- TODO string name="pref_cvwy_angle_summary" copyable="bg">Cavway shot accuracy Angle threshold</string -->
+  <string name="pref_cvwy_abs_title" copyable="all">Cavway ABS праг</string>
+  <string name="pref_cvwy_abs_summary" copyable="bg">Абсолютна лимитирана грешка за точност на измерването с Cavway</string>
+  <string name="pref_cvwy_dip_title" copyable="all">Cavway Dip праг</string>
+  <string name="pref_cvwy_dip_summary" copyable="bg">Магнитно инклиниране за точност на измерването с Cavway</string>
+  <string name="pref_cvwy_angle_title" copyable="all">Cavway Angle праг</string>
+  <string name="pref_cvwy_angle_summary" copyable="bg">Ъглов праг за точност на измерването с Cavway</string>
 
 
   <string name="pref_plot_screen_title">СКИЦА</string>
@@ -1946,8 +1946,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_linecurve_summary">Активирай действие за изглаждане/изправяне на линията на сегмента</string>
   <string name="pref_linestraight_title">Изправяне на линии</string>
   <string name="pref_linestraight_summary">Активирай действието за изправяне на цяла линия</string>
-  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
-  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
+  <string name="pref_lineclip_title">iClip линии</string>
+  <string name="pref_lineclip_summary">Активирайте отрязването на линиите спрямо контура</string>
   <string name="pref_path_multiselect_title">Избор на множество пътеки</string>
   <string name="pref_path_multiselect_summary">Активирай действието за избор на множество пътеки</string>
   <!-- UNUSED string name="pref_composite_actions_title">Композитни действия</string -->
@@ -2026,8 +2026,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_plot_shift_summary">Активирай отместване/мащабиране на скица</string>
   <string name="pref_splay_alpha_title">Прозрачност на странични измервания</string>
   <string name="pref_splay_alpha_summary">Непрозрачност на странични измервания [0: прозрачни, 100: непрозрачни]</string>
-  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
-  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
+  <string name="pref_reset_ids_title">Нулиране на идентификаторите</string>
+  <string name="pref_reset_ids_summary">Активиране на нулирането на идентификаторите</string>
 
   <!-- UNUSED string name="pref_picker_type_title">Drawing tool picker</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Drawing tool picker type</string -->
@@ -2200,8 +2200,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="equate_no_station">No station selected</string -->
     <string name="equate_no_stations">Прекалено малко репери</string>
     <string name="equate_no_nearby">Няма близки репери</string>
-    <!-- TODO string name="equate_exists">Stations already equated</string -->
-    <!-- UNUSED string name="equate_same_station">Cannot equate a station with itself</string -->
+    <string name="equate_exists">Репери, които вече са приравнени</string>
+    <!-- UNUSED string name="equate_same_station">Не може да се постави знак за равенство между репера и самия него.</string -->
 
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
@@ -2223,9 +2223,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_drop">Извлачване на картировки \?</string>
     <string name="title_tdconfig">Въведи име на проекта</string>
     <string name="title_surveys">Картировки</string>
-    <!-- TODO string name="title_tdsurveys">Select survey</string -->
-    <!-- TODO string name="title_symbols">Active tools</string -->
-    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
+    <string name="title_tdsurveys">Избери картировка</string>
+    <string name="title_symbols">Активни инструменти</string>
+    <string name="title_symbol_choose">Избор на инструменти</string>
 
     <string name="exported">Запазен файл %1$s</string>
     <string name="export_failed">Неуспешен експорт</string>
