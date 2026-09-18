@@ -298,7 +298,7 @@ public class DrawingSvgBase
     // }
     boolean effect = BrushManager.hasLineEffect( line.lineType() );
     boolean arrow = th_name.equals( SymbolLibrary.GRADIENT ) || th_name.equals( SymbolLibrary.ARROW );
-    if ( arrow && TDSetting.mSvgProgram != TDSetting.SVG_ADOBE_CS ) {
+    if ( arrow && TDSetting.mSvgProgram != TDSetting.SVG_ADOBE ) {
       pw.format(" marker-end=\"url(#Triangle)\"");
     }
     else if ( th_name.equals( SymbolLibrary.SECTION ) )         pw.format(" stroke-dasharray=\"5 3\"");
@@ -415,7 +415,7 @@ public class DrawingSvgBase
     if ( closed ) { 
       pw.format(" Z ");
     } else {
-      if ( arrow && TDSetting.mSvgProgram == TDSetting.SVG_ADOBE_CS ) {
+      if ( arrow && TDSetting.mSvgProgram == TDSetting.SVG_ADOBE ) {
         LinePoint p0 = lp.first();
         LinePoint pp = p0.mNext;
         if ( ! reverse ) { // is line-type is not reversed use last and prev
@@ -433,7 +433,7 @@ public class DrawingSvgBase
         printPoint( pw, " L", xoff + p0.x, yoff + p0.y );
         printPoint( pw, " L", xoff + p2.x, yoff + p2.y );
       } else if ( effect && TDSetting.mSvgLineDirection ) {
-        if ( TDSetting.mSvgProgram == TDSetting.SVG_ADOBE_CS ) {
+        if ( TDSetting.mSvgProgram == TDSetting.SVG_ADOBE ) {
           LinePoint p1 = lp.middle();
           LinePoint p0 = p1.mPrev; if ( p0 == null ) p0 = p1;
           LinePoint p2 = p1.mNext; if ( p2 == null ) p2 = p1;

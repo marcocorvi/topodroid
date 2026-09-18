@@ -96,7 +96,9 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     // holder.mCheckBox.setText( b.getName() );
     holder.mTextView.setText( b.getName() );
     holder.mGroupView.setText( b.getGroupName() );
-    holder.mButton.resetPaintPath( b.mSymbol.getPaint(), b.mSymbol.getScaledOrientedPath(), b.sx, b.sy );
+    int offset_x = 1; // b.isNotLine();
+    holder.mButton.resetPaintPath( b.mSymbol.getButtonPaint(), b.mSymbol.getScaledPath(), b.sx, b.sy, offset_x ); // FIXME_ORIENTATION
+    // holder.mButton.resetPaintPath( b.mSymbol.getPaint(), b.mSymbol.getScaledOrientedPath(), b.sx, b.sy, offset_x );
     convertView.invalidate();
     return convertView;
   }

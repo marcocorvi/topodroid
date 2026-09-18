@@ -3078,7 +3078,7 @@ public class Scrap
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               // Paint paint = new Paint( line.mPaint
-              line.zoomPathEffect( zoom );
+              if ( ! TDSetting.mUnscaledLines ) line.zoomPathEffect( zoom );
               line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 Paint paint = new Paint( BrushManager.mSectionPaint );
@@ -3104,7 +3104,7 @@ public class Scrap
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
-                line.zoomPathEffect( zoom );
+                if ( ! TDSetting.mUnscaledLines ) line.zoomPathEffect( zoom );
                 line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   Paint paint = new Paint( BrushManager.mSectionPaint );
@@ -3163,7 +3163,7 @@ public class Scrap
             cmd.draw( canvas, matrix, scale, bbox );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
-              line.zoomPathEffect( zoom );
+              if ( ! TDSetting.mUnscaledLines ) line.zoomPathEffect( zoom );
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, BrushManager.mSectionPaint );
               } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
@@ -3181,7 +3181,7 @@ public class Scrap
               cmd.draw( canvas, matrix, scale, bbox );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
-                line.zoomPathEffect( zoom );
+                if ( ! TDSetting.mUnscaledLines ) line.zoomPathEffect( zoom );
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, BrushManager.mSectionPaint );
                 } else if ( BrushManager.isLineSlope( line.mLineType ) ) {

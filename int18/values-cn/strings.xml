@@ -1897,6 +1897,8 @@
   <string name="pref_drawing_unit_summary">点工具的比例</string>
   <string name="pref_unscaled_points_title">缩放时点图标固定大小</string>
   <string name="pref_unscaled_points_summary">点图标不缩放</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
   <string name="pref_segment_title">线-点间隔</string>
   <string name="pref_segment_message">直线上点之间的最小距离</string>
   <string name="pref_linestyle_title">线样式</string>
@@ -2046,8 +2048,8 @@
   <string name="pref_station_size_summary">测点名称尺寸</string>
   <string name="pref_zoom_controls_title">缩放控制</string>
   <string name="pref_zoom_controls_summary">多点控制缩放</string>
-  <string name="pref_side_drag_title">角拖动</string>
-  <string name="pref_side_drag_summary">在草图窗口上启用角拖动</string>
+  <!-- UNUSED string name="pref_side_drag_title">角拖动</string -->
+  <!-- UNUSED string name="pref_side_drag_summary">在草图窗口上启用角拖动</string -->
   <string name="pref_unit_grid_title">草图参考单位</string>
   <string name="pref_unit_grid_summary">草图网格参考单格尺寸</string>
   <string name="pref_unit_measure_title">标尺单位</string>

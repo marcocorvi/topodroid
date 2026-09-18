@@ -83,7 +83,7 @@ class SetupDrawingUnitDialog extends MyDialog
 
     initLayout( R.layout.setup_drawingunit_dialog, R.string.setup_drawingunit_title );
     mSample = (ItemButton) findViewById(R.id.sample);
-    mSample.resetPaintPath( mPaint, mPath, mSize*1.4f, mSize*1.4f );
+    mSample.resetPaintPath( mPaint, mPath, mSize*1.4f, mSize*1.4f, 1 );
 
     mLayout = (LinearLayout) findViewById(R.id.layout2);
     mETsize = (EditText) findViewById( R.id.text_points );
@@ -144,7 +144,7 @@ class SetupDrawingUnitDialog extends MyDialog
     if ( mSize < 0.1f ) { mSize = 0.1f; edit_text = true; }
     else if ( mSize >= 14 ) { mSize = 14; edit_text = true; }
     if ( edit_text ) setETsize( mSize );
-    mSample.resetPaintPath( mPaint, mPath, mSize*1.4f, mSize*1.4f );
+    mSample.resetPaintPath( mPaint, mPath, mSize*1.4f, mSize*1.4f, 1 );
     mLayout.invalidate();
   }
 

@@ -24,7 +24,7 @@ interface SymbolInterface
   Paint  getButtonPaint();
   Path   getSymbolPath();
   Path   getScaledPath();
-  Path   getScaledOrientedPath();
+  // Path   getScaledOrientedPath(); // FIXME_ORIENTATION
   String getDefaultOptions(); 
   boolean isOrientable();
   boolean isEnabled();

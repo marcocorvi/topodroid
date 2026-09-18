@@ -617,7 +617,7 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_ZOOM  = 4; // used only for touchMode
   static final int MODE_SHIFT = 5; // change point symbol position
   static final int MODE_ERASE = 6;
-  static final int MODE_ROTATE = 7; // selected point rotate
+  static final int MODE_ROTATE = 7; // selected point/area rotate
   static final int MODE_SPLIT_SKETCH = 8;  // split the plot
   static final int MODE_SPLIT_SCRAP  = 9;  // split the scrap
 
@@ -2197,6 +2197,7 @@ public class DrawingWindow extends ItemDrawer
     if ( pt != null ) {
       mHotItemType = pt.type();
       mHotPath     = pt.mItem;
+      mDrawingSurface.sideDragHighlight( false );
       // TDLog.v("set button 3 item - type " + mHotItemType );
       // DrawingPath item = pt.mItem;
       switch ( mHotItemType ) {
@@ -2212,6 +2213,7 @@ public class DrawingWindow extends ItemDrawer
           mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)mHotPath).mPointType ) );
           hasPointActions = true;
           DrawingPointPath point = (DrawingPointPath)mHotPath;
+          if ( BrushManager.isPointOrientable( point.mPointType ) ) mDrawingSurface.sideDragHighlight( true );
           // deletable =  ( ! BrushManager.isPointSection( point.mPointType ) ); // DELETE SECTION-POINT
           deletable = true;
           setScaleToolbar( mHotPath );
@@ -2227,6 +2229,7 @@ public class DrawingWindow extends ItemDrawer
           mActivity.setTitle( title + " " + BrushManager.getAreaName( ((DrawingAreaPath)mHotPath).mAreaType ) );
           hasPointActions = true;
           // bm = mBMsnap;
+          if ( BrushManager.isAreaOrientable( ((DrawingAreaPath)mHotPath).mAreaType ) ) mDrawingSurface.sideDragHighlight( true );
 	  deletable = true;
           setScaleToolbar( mHotPath );
           break;
@@ -3051,21 +3054,21 @@ public class DrawingWindow extends ItemDrawer
     path.moveTo( 0, 8 ); path.lineTo(  8, 0 ); path.lineTo( 0, -8 );
     path.moveTo( 8, 8 ); path.lineTo( 16, 0 ); path.lineTo( 8, -8 );
 
-    mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 ); 
+    mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2, 1 ); 
     mBtnRecentP[NR_RECENT].invalidate();
     mBtnRecentP[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
         @Override public void onClick( View v ) { startItemPickerDialog( SymbolType.POINT ); }
       }
     );
-    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2, 1 );
     mBtnRecentL[NR_RECENT].invalidate();
     mBtnRecentL[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
         @Override public void onClick( View v ) { startItemPickerDialog( SymbolType.LINE ); }
       }
     );
-    mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2, 1 );
     mBtnRecentA[NR_RECENT].invalidate();
     mBtnRecentA[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
@@ -5477,9 +5480,16 @@ public class DrawingWindow extends ItemDrawer
       mTouchMode = MODE_ZOOM;
       SelectionPoint sp = mDrawingSurface.hotItem();
       // TDLog.v("set touchmode ZOOM and get hotItem " + ( (sp == null)? "null" : "non-null" ) );
-      if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
-        DrawingPointPath path = (DrawingPointPath)(sp.mItem);
-        if ( BrushManager.isPointOrientable(path.mPointType) ) {
+      if ( sp != null ) { 
+        boolean orientable = false;
+        if ( sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
+          DrawingPointPath path = (DrawingPointPath)(sp.mItem);
+          orientable = BrushManager.isPointOrientable(path.mPointType);
+        } else if ( sp.type() == DrawingPath.DRAWING_PATH_AREA ) {
+          DrawingAreaPath path = (DrawingAreaPath)(sp.mItem);
+          orientable = BrushManager.isAreaOrientable(path.mAreaType);
+        }
+        if ( orientable ) {
           mTouchMode = MODE_ROTATE;
           mRotateScale = ((xc > TopoDroidApp.mBorderRight)? 180 : -180) / TopoDroidApp.mDisplayHeight;
           mStartY = yc;
@@ -10841,7 +10851,7 @@ public class DrawingWindow extends ItemDrawer
       if ( p == null || buttons[k] == null ) break;
       if ( p.isPoint() && p.isSection() ) continue;
       // if ( p.isPoint() ) TDLog.v("SET button point " + p.getThName() );
-      buttons[kk].resetPaintPath( p.getButtonPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY );
+      buttons[kk].resetPaintPath( p.getButtonPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY, 1.4f ); // offset_x = 1.4
       buttons[kk].invalidate();
       ++kk;
     }
@@ -10859,7 +10869,7 @@ public class DrawingWindow extends ItemDrawer
   //     Symbol p = recents[k];
   //     if ( p == null || buttons[kk] == null ) break;
   //     if ( p.isSection() ) continue;
-  //     buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+  //     buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY, 1 );
   //     buttons[kk].invalidate();
   //     ++ kk;
   //   }

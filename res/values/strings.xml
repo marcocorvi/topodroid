@@ -1943,6 +1943,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_drawing_unit_summary">Scale of the point tools</string>
   <string name="pref_unscaled_points_title">Non-zoomed point icons</string>
   <string name="pref_unscaled_points_summary">Point icons are not zoomed</string>
+  <string name="pref_unscaled_lines_title">Non-zoomed line effects</string>
+  <string name="pref_unscaled_lines_summary">Line effects are not zoomed</string>
   <string name="pref_segment_title">Line-point spacing</string>
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">Line style</string>
@@ -2094,8 +2096,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_station_size_summary">Size of station names</string>
   <string name="pref_zoom_controls_title">Zoom controls</string>
   <string name="pref_zoom_controls_summary">Zoom controls on multitouch</string>
-  <string name="pref_side_drag_title">Corner drag</string>
-  <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
+  <!-- UNUSED string name="pref_side_drag_title">Corner drag</string -->
+  <!-- UNUSED string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string -->
   <string name="pref_unit_grid_title">Sketch units</string>
   <string name="pref_unit_grid_summary">Sketch grid cell size</string>
   <string name="pref_unit_measure_title">Ruler units</string>

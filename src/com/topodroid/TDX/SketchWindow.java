@@ -1303,21 +1303,21 @@ public class SketchWindow extends ItemDrawer
     path.moveTo( 0, 8 ); path.lineTo(  8, 0 ); path.lineTo( 0, -8 );
     path.moveTo( 8, 8 ); path.lineTo( 16, 0 ); path.lineTo( 8, -8 );
 
-    // mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 ); 
+    // mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2, 1 ); 
     // mBtnRecentP[NR_RECENT].invalidate();
     // mBtnRecentP[NR_RECENT].setOnClickListener(
     //   new View.OnClickListener() {
     //     @Override public void onClick( View v ) { startItemPickerDialog( SymbolType.POINT ); }
     //   }
     // );
-    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2, 1 );
     mBtnRecentL[NR_RECENT].invalidate();
     mBtnRecentL[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
         @Override public void onClick( View v ) { startItemPickerDialog( SymbolType.LINE ); }
       }
     );
-    // mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    // mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2, 1 );
     // mBtnRecentA[NR_RECENT].invalidate();
     // mBtnRecentA[NR_RECENT].setOnClickListener(
     //   new View.OnClickListener() {
@@ -2741,7 +2741,7 @@ public class SketchWindow extends ItemDrawer
       Symbol p = recents[k];
       if ( p == null || buttons[k] == null ) break;
       if ( p.isPoint() && p.isSection() ) continue;
-      buttons[kk].resetPaintPath( p.getPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY );
+      buttons[kk].resetPaintPath( p.getPaint(), p.getScaledPath(), mRecentDimX, mRecentDimY, 1 );
       buttons[kk].invalidate();
       ++kk;
     }
@@ -2759,7 +2759,7 @@ public class SketchWindow extends ItemDrawer
   //     Symbol p = recents[k];
   //     if ( p == null || buttons[kk] == null ) break;
   //     if ( p.isSection() ) continue;
-  //     buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+  //     buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY, 1 );
   //     buttons[kk].invalidate();
   //     ++ kk;
   //   }

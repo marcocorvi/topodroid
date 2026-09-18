@@ -132,15 +132,17 @@ public class SymbolLine extends Symbol
     makeLinePath();
   }
 
+  private final static int PATH_WIDTH = 20;
+
   private void makeLinePath()
   {
     mPath = new Path();
     if ( mReverse ) {
-      mPath.moveTo( 50, 0 );
-      mPath.lineTo(-50, 0 );
+      mPath.moveTo( PATH_WIDTH, 0 );
+      mPath.lineTo(-PATH_WIDTH, 0 );
     } else {
-      mPath.moveTo(-50, 0 );
-      mPath.lineTo( 50, 0 );
+      mPath.moveTo(-PATH_WIDTH, 0 );
+      mPath.lineTo( PATH_WIDTH, 0 );
     }
   }
 

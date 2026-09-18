@@ -1825,6 +1825,8 @@
     <string name="pref_drawing_unit_summary">Měřítko velikosti pro bodové značky/nástroje</string>
     <string name="pref_unscaled_points_title">Nezvětšovat ikony bodů</string>
     <string name="pref_unscaled_points_summary">Ikony bodových značek mění velikost nezávisle na přiblížení (zoomu)</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
     <string name="pref_segment_title">Rozestupy bodů linií</string>
     <string name="pref_segment_message">Minimální vzdálenost mezi dvěma body při kreslení linie</string>
     <string name="pref_linestyle_title">Styl linií</string>
@@ -1949,8 +1951,8 @@
     <string name="pref_station_size_summary">Velikost písma pro názvy měřických bodů</string>
     <string name="pref_zoom_controls_title">Ovládání přiblížení</string>
     <string name="pref_zoom_controls_summary">Zobrazovat tlačítka přiblížení při vícedotykovém ovládání</string>
-    <string name="pref_side_drag_title">Tažení za roh</string>
-    <string name="pref_side_drag_summary">Povolit posun/změnu výřezu tažením za roh okna náčrtu</string>
+    <!-- UNUSED string name="pref_side_drag_title">Tažení za roh</string -->
+    <!-- UNUSED string name="pref_side_drag_summary">Povolit posun/změnu výřezu tažením za roh okna náčrtu</string -->
     <string name="pref_unit_grid_title">Jednotky mřížky</string>
     <string name="pref_unit_grid_summary">Velikost buňky souřadnicové mřížky v náčrtu</string>
     <string name="pref_unit_measure_title">Jednotky pravítka</string>

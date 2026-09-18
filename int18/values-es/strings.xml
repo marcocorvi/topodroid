@@ -1895,6 +1895,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>
   <string name="pref_unscaled_points_summary">Símbolos de punto sin aumentar</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
   <string name="pref_segment_title">Precisión de la línea</string>
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
   <string name="pref_linestyle_title">Nº de puntos en línea</string>
@@ -2057,8 +2059,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_station_size_summary">Tamaño de la etiqueta de la estación</string>
   <string name="pref_zoom_controls_title">Visualizar botón del Zoom</string>
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
-  <string name="pref_side_drag_title">Arrastre lateral</string>
-  <string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string>
+  <!-- UNUSED string name="pref_side_drag_title">Arrastre lateral</string -->
+  <!-- UNUSED string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string -->
   <string name="pref_unit_grid_title">Unidades de dibujo</string>
   <string name="pref_unit_grid_summary">Tamaño de celda de la cuadrícula del dibujo</string>
   <string name="pref_unit_measure_title">Unidad de distancia</string>

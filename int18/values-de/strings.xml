@@ -1796,6 +1796,8 @@
   <string name="pref_drawing_unit_summary">Massstab der Punktsymbole</string>
   <string name="pref_unscaled_points_title">Punkte nicht zoomen</string>
   <string name="pref_unscaled_points_summary">Punktsymbole sind nicht gezoomt</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
   <string name="pref_segment_title">Punkteabstand</string>
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
   <string name="pref_linestyle_title">Linientyp</string>
@@ -1947,8 +1949,8 @@
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_zoom_controls_title">Zoom-Steuerung</string>
   <string name="pref_zoom_controls_summary">Zoom-Steuerung auf Multitouch-Geräten</string>
-  <string name="pref_side_drag_title">Skizze verschieben</string>
-  <string name="pref_side_drag_summary">Erlaubt das verschieben von den Ecken her</string>
+  <!-- UNUSED string name="pref_side_drag_title">Skizze verschieben</string -->
+  <!-- UNUSED string name="pref_side_drag_summary">Erlaubt das verschieben von den Ecken her</string -->
   <string name="pref_unit_grid_title">Masseinheit Gitter</string>
   <string name="pref_unit_grid_summary">Masseinheit Skizzengitter</string>
   <string name="pref_unit_measure_title">Massstab-Einheiten</string>

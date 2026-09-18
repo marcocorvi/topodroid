@@ -184,7 +184,7 @@ public class SapComm extends BleComm
    */
   void doDisconnectGatt()
   {
-    TDLog.v( "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
+    // TDLog.v( "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
     if ( mDisconnecting ) return;
     mDisconnecting = true;
     mQps.enqueueOp( new BleOpDisconnect( mContext, this ) );
@@ -199,7 +199,7 @@ public class SapComm extends BleComm
    */
   void doConnectGatt()
   {
-    TDLog.v( "SAP comm: do connect GATT");
+    // TDLog.v( "SAP comm: do connect GATT");
     notifyStatus( ConnectionState.CONN_WAITING );
     mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
     mQps.doNextOp();
@@ -210,7 +210,7 @@ public class SapComm extends BleComm
    */
   void connected( boolean is_connected )
   {
-    TDLog.v( "SAP comm: connected ... " + is_connected );
+    // TDLog.v( "SAP comm: connected ... " + is_connected );
     mBTConnected = is_connected;
     if (is_connected ) {
       notifyStatus( ConnectionState.CONN_CONNECTED );
@@ -226,7 +226,7 @@ public class SapComm extends BleComm
    */
   public void connected() 
   { 
-    TDLog.v( "SAP comm: connected ...");
+    // TDLog.v( "SAP comm: connected ...");
     connected( true );
   }
 
@@ -234,7 +234,7 @@ public class SapComm extends BleComm
    */
   void reconnectDevice()
   {
-    TDLog.v( "SAP comm: reconnect ...");
+    // TDLog.v( "SAP comm: reconnect ...");
     doDisconnectGatt();
     doConnectGatt();
     // mCallback.connectGatt( mContext, mRemoteBtDevice );
@@ -245,7 +245,7 @@ public class SapComm extends BleComm
    */
   private boolean readSapPacket( )
   { 
-    TDLog.v( "SAP comm: reading packet");
+    // TDLog.v( "SAP comm: reading packet");
     // BluetoothGattService srv = mGatt.getService( mServiceUuid );
     // BluetoothGattCharacteristic chrt = srv.getCharacteristic( mChrtReadUuid );
     // return mGatt.readCharacteristic( chrt );
@@ -268,7 +268,7 @@ public class SapComm extends BleComm
   @Override
   public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
-    TDLog.v( "SAP comm: connect device (continuous data download)");
+    // TDLog.v( "SAP comm: connect device (continuous data download)");
     mLister = lister;
     mDataType = data_type;
     mConnectionMode = 1;
@@ -282,7 +282,7 @@ public class SapComm extends BleComm
   @Override
   public boolean disconnectDevice() 
   {
-    TDLog.v( "SAP comm: disconnect device");
+    // TDLog.v( "SAP comm: disconnect device");
     if ( mDisconnecting ) return true;
     if ( ! mBTConnected ) return true;
     mDisconnecting = true;
@@ -300,7 +300,7 @@ public class SapComm extends BleComm
    */
   private void closeChrt()
   {
-    TDLog.v( "SAP comm: close chrts");
+    // TDLog.v( "SAP comm: close chrts");
     mWriteInitialized = false; 
     mReadInitialized  = false; 
   }
@@ -318,7 +318,7 @@ public class SapComm extends BleComm
   @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout )
   {
-    TDLog.v( "SAP comm: batch data download");
+    // TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;
     mLister = lister;
     mNrReadPackets = 0;
@@ -353,7 +353,7 @@ public class SapComm extends BleComm
   {
     byte[] bytes = mSapProto.handleWrite( );
     if ( bytes != null ) {
-      TDLog.v( "SAP comm: write chrt - bytes " + bytes.length );
+      // TDLog.v( "SAP comm: write chrt - bytes " + bytes.length );
       // mCallback.writeCharacteristic( mWriteChrt );
       mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, bytes );
       return true;
@@ -430,7 +430,7 @@ public class SapComm extends BleComm
     // String uuid_str = uuid.toString();
     // if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) || uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) 
     if ( uuid.compareTo( mChrtReadUuid ) == 0 ) {
-      TDLog.v( "SAP comm: changed chrt READ" );
+      // TDLog.v( "SAP comm: changed chrt READ" );
       int res = mSapProto.handleReadNotify( chrt );
       if ( res == DataType.PACKET_DATA ) {
         // if ( uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR ))
@@ -443,7 +443,7 @@ public class SapComm extends BleComm
       // readSapPacket();
     // } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
     } else if ( uuid.compareTo( mChrtWriteUuid ) == 0 ) {
-      TDLog.v( "SAP comm: changed chrt WRITE" );
+      // TDLog.v( "SAP comm: changed chrt WRITE" );
       byte[] bytes = mSapProto.handleWriteNotify( chrt );
       if ( bytes != null ) {
         mCallback.writeChrt( mServiceUuid, mChrtWriteUuid, bytes );
@@ -461,7 +461,7 @@ public class SapComm extends BleComm
    */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    TDLog.v( "SAP comm: readedChrt" );
+    // TDLog.v( "SAP comm: readedChrt" );
     if ( ! mReadInitialized ) { error(-1, uuid_str, "readInit"); return; }
     if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str, "readUUID"); return; }
     int res = mSapProto.handleRead( bytes ); 
@@ -478,7 +478,7 @@ public class SapComm extends BleComm
   @Override
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    TDLog.v( "SAP comm: written chrt ...");
+    // TDLog.v( "SAP comm: written chrt ...");
     if ( ! mWriteInitialized ) { error(-4, uuid_str, "writeInit"); return; }
     // A characteristic write just completed. If the protocol still has buffered
     // bytes (e.g. a multi-part SAP6 ACK) send the next chunk; otherwise advance
@@ -515,7 +515,7 @@ public class SapComm extends BleComm
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
+    // TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
     connected( true );
   }
 
@@ -533,7 +533,7 @@ public class SapComm extends BleComm
    */
   public void disconnected()
   {
-    TDLog.v( "SAP comm: disconnected ...");
+    // TDLog.v( "SAP comm: disconnected ...");
     mQps.clearPending();
     // if ( mDisconnecting ) return;
     mDisconnecting = false;
@@ -549,7 +549,7 @@ public class SapComm extends BleComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    TDLog.v( "SAP comm: service discovered" );
+    // TDLog.v( "SAP comm: service discovered" );
     BluetoothGattService srv = gatt.getService( mServiceUuid );
 
     mReadChrt  = srv.getCharacteristic( mChrtReadUuid );
@@ -633,7 +633,7 @@ public class SapComm extends BleComm
    */
   public void error( int status, String extra, String what )
   {
-    TDLog.t("SAP comm: error " + status + ": " + extra + " what: " + what );
+    // TDLog.t("SAP comm: error " + status + ": " + extra + " what: " + what );
     if ( status == 8 ) { // (timeout) is ok
       reconnectDevice();
     }
@@ -647,7 +647,7 @@ public class SapComm extends BleComm
   @Override
   public void failure( int status, String extra, String what )
   {
-    TDLog.t("SAP comm: failure " + status + " " + extra );
+    // TDLog.t("SAP comm: failure " + status + " " + extra );
     switch ( status ) {
       case -1:
         // TDLog.e("SAP comm: FAIL no R-desc CCCD ");
@@ -705,7 +705,7 @@ public class SapComm extends BleComm
   @Override
   public void disconnectGatt()
   {
-    TDLog.v( "SAP comm: disconnect Gatt" );
+    // TDLog.v( "SAP comm: disconnect Gatt" );
     closeChrt();
     mCallback.disconnectGatt();
     notifyStatus( ConnectionState.CONN_WAITING );
@@ -738,7 +738,7 @@ public class SapComm extends BleComm
     if ( ! isConnected() ) return false;
     byte[] command = new byte[1];
     command[0] = (byte)cmd;
-    TDLog.v( "SAP6 comm send command " + cmd );
+    // TDLog.v( "SAP6 comm send command " + cmd );
     mQps.enqueueOp( new BleOpChrtWrite( mContext, this, mServiceUuid, mChrtWriteUuid, command ) );
     mQps.doNextOp();
     return true;

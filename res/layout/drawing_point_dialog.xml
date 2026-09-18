@@ -24,18 +24,18 @@
     android:layout_height="wrap_content"
     / -->
 
-  <RadioGroup 
+  <!-- RadioGroup 
     android:id="@+id/line_outline"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:paddingBottom="@dimen/paddingbig"
     >
-    <!-- TextView 
+    <! - - TextView 
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/scale"
-    / -->
+    / - - >
     <RadioButton android:id="@+id/point_scale_xs"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
@@ -61,7 +61,7 @@
       android:layout_height="wrap_content" 
       android:text="@string/size_xl"
     />
-  </RadioGroup>
+  </RadioGroupi -->
 
   <LinearLayout android:id="@+id/layer_layout"
     style="@style/base_padding"
@@ -111,19 +111,19 @@
     / -->
   </LinearLayout>
 
-  <LinearLayout 
+  <!-- LinearLayout 
     style="@style/base_padding"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <!-- Button android:id="@+id/start"
+    <! - - Button android:id="@+id/start"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
       android:layout_marginStart="@dimen/marginv"
       android:layout_marginEnd="@dimen/marginv"
       android:background="@drawable/ic_undo"
-    / -->
+    / - - >
     <ImageView android:id="@+id/image"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
@@ -132,21 +132,21 @@
       android:paddingEnd="@dimen/paddingbig"
       android:contentDescription="@string/orientation"
     />
-    <!-- TextView android:id="@+id/value"
+    <! - - TextView android:id="@+id/value"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:singleLine="true"
        android:paddingStart="@dimen/paddingbig"
        android:paddingEnd="@dimen/paddingbig"
-    / --> 
-    <!-- Button android:id="@+id/right"
+    / - - > 
+    <! - - Button android:id="@+id/right"
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content" 
        android:singleLine="true"
        android:paddingStart="@dimen/paddingbig"
        android:paddingEnd="@dimen/paddingbig"
        android:background="@drawable/ic_redo"
-    / -->
+    / - - >
     <SeekBar android:id="@+id/seekbar"
       android:layout_width="match_parent"
       android:layout_height="20dp" 
@@ -154,7 +154,7 @@
       android:background="#666666"
       android:progressDrawable="@xml/progress2"
     />
-  </LinearLayout>
+  </LinearLayout -->
 
   <EditText android:id="@+id/point_text"
     style="@style/edit_text_light"

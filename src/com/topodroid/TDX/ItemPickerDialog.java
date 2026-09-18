@@ -304,7 +304,7 @@ class ItemPickerDialog extends MyDialog
     //       Symbol p = symbols[k];
     //       if ( p == null ) break;
     //       if ( p == item.mSymbol ) {
-    //         if ( mRecent != null ) mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP );
+    //         if ( mRecent != null ) mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP, false );
     //         break;
     //       }
     //     }
@@ -337,7 +337,7 @@ class ItemPickerDialog extends MyDialog
   //     if ( p == null ) {
   //       mRecent[k].setVisibility( View.INVISIBLE );
   //     } else {
-  //       mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), sx, sy );
+  //       mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), sx, sy, false );
   //       mRecent[k].setVisibility( View.VISIBLE );
   //     }
   //   }

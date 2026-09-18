@@ -99,12 +99,12 @@ public class ItemButton extends Button
    * @param sx       path X-scale
    * @param sy       path Y-scale
    */
-  public ItemButton(Context context, Paint paint, Path path, float sx, float sy )
+  public ItemButton(Context context, Paint paint, Path path, float sx, float sy, float offset_x )
   {
     super(context);
     setBackgroundColor( TDColor.BLACK );
     setPadding( PAD, PAD, PAD, PAD );
-    resetPaintPath( paint, path, sx, sy );
+    resetPaintPath( paint, path, sx, sy, offset_x );
   }
 
   /** cstr 
@@ -115,12 +115,12 @@ public class ItemButton extends Button
    * @param sy       path Y-scale
    * @param pad      padding [pixels]
    */
-  public ItemButton(Context context, Paint paint, Path path, float sx, float sy, int pad )
+  public ItemButton(Context context, Paint paint, Path path, float sx, float sy, int pad, float offset_x )
   {
     super(context);
     setBackgroundColor( TDColor.BLACK );
     setPadding(pad, pad, pad, pad );
-    resetPaintPath( paint, path, sx, sy );
+    resetPaintPath( paint, path, sx, sy, offset_x );
   }
 
   /** reset the path and the paint 
@@ -129,12 +129,12 @@ public class ItemButton extends Button
    * @param sx       path X-scale
    * @param sy       path Y-scale
    */
-  public void resetPaintPath(Paint paint, Path path, float sx, float sy )
+  public void resetPaintPath(Paint paint, Path path, float sx, float sy, float offset_x )
   {
     setMinimumWidth( (int)(2*W5*TDSetting.mItemButtonSize*sx) );
     setMinimumHeight( (int)(2*H4*TDSetting.mItemButtonSize*sy) );
     mPaint = paint;
-    resetPath( path, sx, sy );
+    resetPath( path, sx, sy, offset_x );
     // mClip = new Rect( 0, 0, (int)(40*sx), (int)(30*sy) );
   }
 
@@ -143,13 +143,13 @@ public class ItemButton extends Button
    * @param sx       path X-scale
    * @param sy       path Y-scale
    */
-  public void resetPath( Path path, float sx, float sy )
+  private void resetPath( Path path, float sx, float sy, float offset_x )
   {
     mPath = new Path(path);
     Matrix m = new Matrix();
     m.setScale( sx, sy );
     mPath.transform( m );
-    mPath.offset( W5*TDSetting.mItemButtonSize*sx, H4*TDSetting.mItemButtonSize*sy );
+    mPath.offset( offset_x*W5*TDSetting.mItemButtonSize*sx, H4*TDSetting.mItemButtonSize*sy );
   }
 
   /** draw the item button

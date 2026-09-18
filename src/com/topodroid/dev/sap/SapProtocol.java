@@ -102,15 +102,15 @@ public class SapProtocol extends TopoDroidProtocol
       // FIX SAP5 bug: 2023-01-05 Phil Underwood on SAP list:
       // Looks like calculation of high byte for distoX protocol is incorrect - marks bit 16 when distance > 32.676m, should be when > 65.535m
       if ( TDSetting.mSap5Bit16Bug ) {
-        if ( (buffer[2] & 0x80) == 0x80 ) buffer[0] &= 0xbf; // clear 0x40
+        if ( (buffer[2] & 0x80) == 0x80 ) buffer[0] &= 0xaf; 
       }
       return handlePacket( buffer );
     } else if ( Device.isSap6( mDeviceType ) || Device.isJedeye( mDeviceType ) ) { // FIXME_SAP6 // JedEye reuses SAP6 wire format
-      {
-        StringBuilder sb = new StringBuilder();
-        for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
-        TDLog.v( "SAP6 proto: read " + bytes.length + " bytes:" + sb.toString() );
-      }
+      // {
+      //   StringBuilder sb = new StringBuilder();
+      //   for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
+      //   TDLog.v( "SAP6 proto: read " + bytes.length + " bytes:" + sb.toString() );
+      // }
       if ( bytes.length != 17 ) return DataType.PACKET_NONE;
 
       if ( bytes[0] == SAP6byte0 ) return DataType.PACKET_NONE; // 2024-10-01 discard if equal to previous packet
@@ -126,7 +126,7 @@ public class SapProtocol extends TopoDroidProtocol
       // writeAgainChrt(), stalling the remote-command queue.
       if ( Device.isSap6( mDeviceType ) ) {
         byte[] ack = new byte[1];
-        ack[0] = (byte)( bytes[0] + 0x55 ); // SapConst.SAP_ACK
+        ack[0] = (byte)( bytes[0] & 0x55 ); // SapConst.SAP_ACK
         addToWriteBuffer( ack );
       }
 
@@ -137,7 +137,7 @@ public class SapProtocol extends TopoDroidProtocol
       mClino    = float_buffer.get(1);
       mRoll     = float_buffer.get(2);
       mDistance = float_buffer.get(3); // meters
-      TDLog.v( "SAP6 proto data: " + String.format(Locale.US, "%2f %2f %2f", mDistance, mBearing, mClino ) );
+      // TDLog.v( "SAP6 proto data: " + String.format(Locale.US, "%2f %2f %2f", mDistance, mBearing, mClino ) );
       return DataType.PACKET_DATA;
     }
     return DataType.PACKET_NONE;

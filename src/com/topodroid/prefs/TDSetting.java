@@ -342,8 +342,7 @@ public class TDSetting
   public static float   mToSvg     = SVG_SCALE / 100;
 
   public static final int SVG_INKSCAPE = 0;
-  public static final int SVG_ADOBE_CC = 1;
-  public static final int SVG_ADOBE_CS = 2;
+  public static final int SVG_ADOBE    = 1;
   public static int mSvgProgram = SVG_INKSCAPE;
 
   public static boolean mSvgRoundTrip  = false;
@@ -604,7 +603,7 @@ public class TDSetting
 
   // public static boolean mZoomControls = false;
   public static int mZoomCtrl = 0; // 0: gone, 1: temporary, 2: permanent
-  public static boolean mSideDrag = true;
+  final public static boolean mSideDrag = true;
   public static boolean mTripleToolbar = false;
 
   // ------------- UNIT SIZES
@@ -693,6 +692,7 @@ public class TDSetting
   // NOTE not used, but could set a default for section splays
   // public static int mSectionStations = 3; // 1: From, 2: To, 3: both
 
+  public static boolean mUnscaledLines  = false;
   public static boolean mUnscaledPoints = false;
   public static boolean mAreaBorder     = true;
   public static boolean mLineSnap       = false;
@@ -1201,9 +1201,9 @@ public class TDSetting
     // if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
     // ++k; mTripleToolbar   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) ); // DISTOX_TRIPLE_TOOLBAR
     // ++k; mRecentNr        = tryInt( prefs,       key[k].key,      key[k].dflt );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
-         mSideDrag   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) ); // DISTOX_SIDE_DRAG
+    //     mSideDrag   = prefs.getBoolean(    key[k].key, bool(key[k].dflt) ); // DISTOX_SIDE_DRAG
     // ++k; setZoomControls( prefs.getBoolean( key[k].key, bool(key[k].dflt) ) ); // DISTOX_ZOOM_CONTROLS
-    ++k; setZoomControls( prefs.getString(  key[k].key,      key[k].dflt ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
+         setZoomControls( prefs.getString(  key[k].key,      key[k].dflt ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
     // ++k; mSectionStations  = tryInt( prefs, key[k].key, "3");      // DISTOX_SECTION_STATIONS
     ++k; mHThreshold    = tryFloat( prefs,  key[k].key,      key[k].dflt );  // DISTOX_HTHRESHOLD
     ++k; mCheckAttached = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_CHECK_ATTACHED
@@ -1620,7 +1620,8 @@ public class TDSetting
 
     key = TDPrefKey.mLine;
     k = 0;
-         mLineThickness = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_THICKNESS
+         mUnscaledLines = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_UNSCALED_LINES
+    ++k; mLineThickness = tryFloat( prefs,  key[k].key,      key[k].dflt );   // DISTOX_LINE_THICKNESS
     ++k; setLineStyleAndType( prefs.getString( key[k].key,   key[k].dflt ) ); // DISTOX_LINE_STYLE
     ++k; setLineSegment( tryInt(    prefs,  key[k].key,      key[k].dflt ) ); // DISTOX_LINE_SEGMENT
     ++k; mLineClose     = prefs.getBoolean( key[k].key, bool(key[k].dflt) );  // DISTOX_LINE_CLOSE
@@ -1862,38 +1863,31 @@ public class TDSetting
 
   private static String updatePrefPlot( TDPrefHelper hlp, String k, String v )
   {
+    int j = -1;
     String ret = null;
     // TDLog.v("update pref plot: " + k );
     TDPrefKey[] key = TDPrefKey.mPlot;
-    // if ( k.equals( key[ 0 ].key ) ) {        // DISTOX_PICKER_TYPE (choice)
-    //   mPickerType = tryIntValue(   hlp, k, v, key[0].dflt );
-    //   if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
-    // } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_RECENT_NR (choice)
-    //   mRecentNr = tryIntValue( hlp, k, v, key[1].dflt );
-    // } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_TRIPLE_TOOLBAR (bool)
-    //   mTripleToolbar = tryBooleanValue( hlp, k, v, bool(key[1].dflt) );
-    //   TopoDroidApp.setToolsToolbars();
+    // if ( k.equals( key[ ++j ].key ) ) { // DISTOX_SIDE_DRAG (bool)
+    //   mSideDrag = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
     // } else 
-    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_SIDE_DRAG (bool)
-      mSideDrag = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_ZOOM_CTRL (choice)
-      // setZoomControls( tryBooleanValue( hlp, k, bool(key[1]) ) );
-      setZoomControls( tryStringValue( hlp, k, v, key[1].dflt ), TDandroid.checkMultitouch( TDInstance.context ) );
-    // } else if ( k.equals( key[ ? ] ) ) {  // DISTOX_SECTION_STATIONS
-    //   mSectionStations = tryIntValue( hlp, k, v, key[ ].dflt );
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_HTHRESHOLD
-      mHThreshold = tryFloatValue( hlp, k, v, key[2].dflt );
+    if ( k.equals( key[ ++j ].key ) ) { // DISTOX_ZOOM_CTRL (choice)
+      // setZoomControls( tryBooleanValue( hlp, k, bool(key[j]) ) );
+      setZoomControls( tryStringValue( hlp, k, v, key[j].dflt ), TDandroid.checkMultitouch( TDInstance.context ) );
+    // } else if ( k.equals( key[ ++j ] ) ) {  // DISTOX_SECTION_STATIONS
+    //   mSectionStations = tryIntValue( hlp, k, v, key[j].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_HTHRESHOLD
+      mHThreshold = tryFloatValue( hlp, k, v, key[j].dflt );
       if ( mHThreshold <  0 ) { mHThreshold =  0; ret = TDString.ZERO; }
       if ( mHThreshold > 90 ) { mHThreshold = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CHECK_ATTACHED (bool)
-      mCheckAttached = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_CHECK_EXTEND (bool)
-      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_TOOLBAR_SIZE
-      mItemButtonSize = tryFloatValue( hlp, k, v, key[5].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_CHECK_ATTACHED (bool)
+      mCheckAttached = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_CHECK_EXTEND (bool)
+      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_TOOLBAR_SIZE
+      mItemButtonSize = tryFloatValue( hlp, k, v, key[j].dflt );
       TopoDroidApp.setToolsToolbarParams();
-    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_PLOT_CACHE
-      mPlotCache = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_PLOT_CACHE
+      mPlotCache = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
     } else {
       TDLog.e("missing PLOT key: " + k );
     }
@@ -1902,55 +1896,56 @@ public class TDSetting
   }
 
   private static String updatePrefCalib( TDPrefHelper hlp, String k, String v )
-  {
+  { 
+    int j = -1;
     String ret = null;
     // TDLog.v("update pref calib: " + k );
     TDPrefKey[] key = TDPrefKey.mCalib;
-    if ( k.equals( key[ 0 ].key ) ) {
-      mGroupBy       = tryIntValue(   hlp, k, v, key[0].dflt );  // DISTOX_GROUP_BY (choice)
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_GROUP_DISTANCE
-      mGroupDistance = tryFloatValue( hlp, k, v, key[1].dflt );
+    if ( k.equals( key[ ++j ].key ) ) {
+      mGroupBy       = tryIntValue(   hlp, k, v, key[j].dflt );  // DISTOX_GROUP_BY (choice)
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_GROUP_DISTANCE
+      mGroupDistance = tryFloatValue( hlp, k, v, key[j].dflt );
       if ( mGroupDistance < 0 ) { mGroupDistance = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_CALIB_EPS
-      mCalibEps      = tryFloatValue( hlp, k, v, key[2].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_CALIB_EPS
+      mCalibEps      = tryFloatValue( hlp, k, v, key[j].dflt );
       if ( mCalibEps < 0.000001f ) { mCalibEps = 0.000001f; ret = "0.000001"; }
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_CALIB_MAX_IT
-      mCalibMaxIt    = tryIntValue(   hlp, k, v, key[3].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_CALIB_MAX_IT
+      mCalibMaxIt    = tryIntValue(   hlp, k, v, key[j].dflt );
       if ( mCalibMaxIt < 10 ) { mCalibMaxIt = 10; ret = TDString.TEN; }
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_CALIB_SHOT_DOWNLOAD (bool)
-      mCalibShotDownload = tryBooleanValue( hlp, k, v, bool(key[4].dflt) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_RAW_CDATA
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_CALIB_SHOT_DOWNLOAD (bool)
+      mCalibShotDownload = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_RAW_CDATA
       // mRawData       = tryBooleanValue( hlp, k, v, false );  // DISTOX_RAW_DATA (choice)
-      mRawCData      = tryIntValue( hlp, k, v, key[5].dflt ); 
-    // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_CALIB_ALGO (choice)
-    //   mCalibAlgo     = tryIntValue( hlp, k, v, key[6].dflt );
-    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_ALGO_MIN_ALPHA
-      mAlgoMinAlpha   = tryFloatValue( hlp, k, v, key[7].dflt );
+      mRawCData      = tryIntValue( hlp, k, v, key[j].dflt ); 
+    // } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_CALIB_ALGO (choice)
+    //   mCalibAlgo     = tryIntValue( hlp, k, v, key[j].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_ALGO_MIN_ALPHA
+      mAlgoMinAlpha   = tryFloatValue( hlp, k, v, key[j].dflt );
       if ( mAlgoMinAlpha < 0 ) { mAlgoMinAlpha = 0; ret = TDString.ZERO; }
       if ( mAlgoMinAlpha > 1 ) { mAlgoMinAlpha = 1; ret = TDString.ONE; }
-    } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_ALGO_MIN_BETA
-      mAlgoMinBeta    = tryFloatValue( hlp, k, v, key[8].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_ALGO_MIN_BETA
+      mAlgoMinBeta    = tryFloatValue( hlp, k, v, key[j].dflt );
       if ( mAlgoMinBeta  < 0 ) { mAlgoMinBeta  = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 9 ].key ) ) { // DISTOX_ALGO_MIN_GAMMA
-      mAlgoMinGamma   = tryFloatValue( hlp, k, v, key[9].dflt );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_ALGO_MIN_GAMMA
+      mAlgoMinGamma   = tryFloatValue( hlp, k, v, key[j].dflt );
       if ( mAlgoMinGamma < 0 ) { mAlgoMinGamma = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 10 ].key ) ) { // DISTOX_ALGO_MIN_DELTA
-      mAlgoMinDelta   = tryFloatValue( hlp, k, v, key[10].dflt ); 
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_ALGO_MIN_DELTA
+      mAlgoMinDelta   = tryFloatValue( hlp, k, v, key[j].dflt ); 
       if ( mAlgoMinDelta < -10 ) { mAlgoMinDelta = -10; ret = "-10"; }
-    } else if ( k.equals( key[ 11 ].key ) ) { // DISTOX_AUTO_CAL_BETA
-      mAutoCalBeta   = tryFloatValue( hlp, k, v, key[11].dflt ); 
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_AUTO_CAL_BETA
+      mAutoCalBeta   = tryFloatValue( hlp, k, v, key[j].dflt ); 
       if ( mAutoCalBeta < 0.001f ) { mAutoCalBeta = 0.001f; ret = "0.001"; }
       if ( mAutoCalBeta > 0.999f ) { mAutoCalBeta = 0.999f; ret = "0.999"; }
-    } else if ( k.equals( key[ 12 ].key ) ) { // DISTOX_AUTO_CAL_ETA
-      mAutoCalEta   = tryFloatValue( hlp, k, v, key[12].dflt ); 
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_AUTO_CAL_ETA
+      mAutoCalEta   = tryFloatValue( hlp, k, v, key[j].dflt ); 
       if ( mAutoCalEta < 0.01f ) { mAutoCalEta = 0.01f; ret = "0.01"; }
       if ( mAutoCalEta > 0.99f ) { mAutoCalEta = 0.99f; ret = "0.99"; }
-    } else if ( k.equals( key[ 13 ].key ) ) { // DISTOX_AUTO_CAL_GAMMA
-      mAutoCalGamma   = tryFloatValue( hlp, k, v, key[13].dflt ); 
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_AUTO_CAL_GAMMA
+      mAutoCalGamma   = tryFloatValue( hlp, k, v, key[j].dflt ); 
       if ( mAutoCalGamma < 0.01f ) { mAutoCalGamma = 0.01f; ret = "0.01"; }
       if ( mAutoCalGamma > 0.99f ) { mAutoCalGamma = 0.99f; ret = "0.99"; }
-    } else if ( k.equals( key[ 14 ].key ) ) { // DISTOX_AUTO_CAL_DELTA
-      mAutoCalDelta   = tryFloatValue( hlp, k, v, key[14].dflt ); 
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_AUTO_CAL_DELTA
+      mAutoCalDelta   = tryFloatValue( hlp, k, v, key[j].dflt ); 
       if ( mAutoCalDelta < 0.01f ) { mAutoCalDelta = 0.01f; ret = "0.01"; }
       if ( mAutoCalDelta > 0.99f ) { mAutoCalDelta = 0.99f; ret = "0.99"; }
     } else {
@@ -2784,7 +2779,7 @@ public class TDSetting
     //   mBezierStep  = tryFloatValue( hlp, k, v, key[8].dflt );
     } else if ( k.equals( key[13].key ) ) {  // DISTOX_SVG_PROGRAM
       mSvgProgram    = tryIntValue( hlp, k, v, key[13].dflt );
-      if ( mSvgProgram < SVG_INKSCAPE || mSvgProgram > SVG_ADOBE_CS ) mSvgProgram = SVG_INKSCAPE;
+      if ( mSvgProgram < SVG_INKSCAPE || mSvgProgram > SVG_ADOBE ) mSvgProgram = SVG_INKSCAPE;
       setExportScale( mTherionScale );
     } else {
       TDLog.e("missing EXPORT_SVG key: " + k );
@@ -2966,35 +2961,38 @@ public class TDSetting
 
   private static String updatePrefLine( TDPrefHelper hlp, String k, String v )
   {
+    int j = -1;
     String ret = null;
     // TDLog.v("update pref line: " + k );
     TDPrefKey[] key = TDPrefKey.mLine;
-    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_LINE_THICKNESS
-      ret = setLineThickness( tryStringValue( hlp, k, v, key[0].dflt ) );
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_LINE_STYLE (choice)
-      setLineStyleAndType( tryStringValue( hlp, k, v, key[1].dflt ) );
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LINE_SEGMENT
-      ret = setLineSegment( tryIntValue(   hlp, k, v, key[2].dflt ) );
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_LINE_CLOSE
-      mLineClose = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_ARROW_LENGTH
-      ret = setArrowLength( tryFloatValue( hlp, k, v, key[4].dflt ) );
-    // } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-    //   mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
-    // } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
-    //   mContinueLine  = tryIntValue( hlp, k, v, key[7].dflt );
-    // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
-    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(key[8].dflt) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
-    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_UNITS
+    if ( k.equals( key[ ++j ].key ) ) { // DISTOX_UNSCALED_LINES
+      mUnscaledLines = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LINE_THICKNESS
+      ret = setLineThickness( tryStringValue( hlp, k, v, key[j].dflt ) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LINE_STYLE (choice)
+      setLineStyleAndType( tryStringValue( hlp, k, v, key[j].dflt ) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LINE_SEGMENT
+      ret = setLineSegment( tryIntValue(   hlp, k, v, key[j].dflt ) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LINE_CLOSE
+      mLineClose = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_ARROW_LENGTH
+      ret = setArrowLength( tryFloatValue( hlp, k, v, key[j].dflt ) );
+    // } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+    //   mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    // } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LINE_CONTINUE (choice)
+    //   mContinueLine  = tryIntValue( hlp, k, v, key[j].dflt );
+    // } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LINE_UNITS
       try {
-        setDrawingUnitLines( tryFloatValue( hlp, k, v, key[6].dflt ) );
+        setDrawingUnitLines( tryFloatValue( hlp, k, v, key[j].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_SLOPE_LSIDE
-      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[7].dflt ) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_SLOPE_LSIDE
+      ret = setSlopeLSide( tryIntValue( hlp, k, v, key[j].dflt ) );
     } else {
       TDLog.e("missing LINE key: " + k );
     }
@@ -3004,30 +3002,31 @@ public class TDSetting
 
   private static String updatePrefPoint( TDPrefHelper hlp, String k, String v )
   {
+    int j = -1;
     String ret = null;
     // TDLog.v("update pref point: " + k );
     TDPrefKey[] key = TDPrefKey.mPoint;
-    if ( k.equals( key[ 0 ].key ) ) { // DISTOX_UNSCALED_POINTS (bool)
-      mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(key[0].dflt) );
-    } else if ( k.equals( key[ 1 ].key ) ) { // DISTOX_DRAWING_UNIT 
+    if ( k.equals( key[ ++j ].key ) ) { // DISTOX_UNSCALED_POINTS (bool)
+      mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_DRAWING_UNIT 
       try {
-        setDrawingUnitIcons( tryFloatValue( hlp, k, v, key[1].dflt ) );
+        setDrawingUnitIcons( tryFloatValue( hlp, k, v, key[j].dflt ) );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
-    } else if ( k.equals( key[ 2 ].key ) ) { // DISTOX_LABEL_SIZE
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_LABEL_SIZE
       try {
-        setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, key[2].dflt ) ), true );
+        setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, key[j].dflt ) ), true );
       } catch ( NumberFormatException e ) {
         TDLog.e( e.getMessage() );
       }
       // FIXME changing label size affects only new labels; not existing labels (until they are edited)
       ret = String.format(Locale.US, "%.2f", mLabelSize );
-    } else if ( k.equals( key[ 3 ].key ) ) { // DISTOX_SCALABLE_LABEL
-      mScalableLabel = tryBooleanValue( hlp, k, v, bool(key[3].dflt) );
-    } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_XSECTION_OFFSET
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_SCALABLE_LABEL
+      mScalableLabel = tryBooleanValue( hlp, k, v, bool(key[j].dflt) );
+    } else if ( k.equals( key[ ++j ].key ) ) { // DISTOX_XSECTION_OFFSET
       try {
-        int value = tryIntValue( hlp, k, v, key[4].dflt );
+        int value = tryIntValue( hlp, k, v, key[j].dflt );
         if ( value > 0 && value < 500 && value != mXSectionOffset ) {
           ret = String.format(Locale.US, "%d", value );
           mXSectionOffset = value;
@@ -3100,10 +3099,10 @@ public class TDSetting
       ret = setLineThickness( tryStringValue( hlp, k, v, key[3].dflt ) );
     } else if ( k.equals( key[ 4 ].key ) ) { // DISTOX_LINE_STYLE (choice)
       setLineStyleAndType( tryStringValue( hlp, k, v, key[4].dflt ) );
-    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_LINE_CLOSE
-      mLineClose = tryBooleanValue( hlp, k, v, bool(key[5].dflt) );
-    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_SEGMENT
-      ret = setLineSegment( tryIntValue(   hlp, k, v, key[6].dflt ) );
+    } else if ( k.equals( key[ 5 ].key ) ) { // DISTOX_LINE_SEGMENT
+      ret = setLineSegment( tryIntValue(   hlp, k, v, key[5].dflt ) );
+    } else if ( k.equals( key[ 6 ].key ) ) { // DISTOX_LINE_CLOSE
+      mLineClose = tryBooleanValue( hlp, k, v, bool(key[6].dflt) );
     } else if ( k.equals( key[ 7 ].key ) ) { // DISTOX_ARROW_LENGTH
       ret = setArrowLength( tryFloatValue( hlp, k, v, key[7].dflt ) );
     // } else if ( k.equals( key[ 8 ].key ) ) { // DISTOX_AUTO_SECTION_PT (bool)
@@ -4116,9 +4115,9 @@ B DISTOX_SAP5_BIT16_BUG true
               setZoomControls( value, TDandroid.checkMultitouch( TDInstance.context ) );
               setPreference( editor, kay, mZoomCtrl );
               break;
-            case "DISTOX_SIDE_DRAG":
-              mSideDrag = Boolean.parseBoolean( value ); setPreference( editor, kay, mSideDrag );
-              break;
+            // case "DISTOX_SIDE_DRAG":
+            //   mSideDrag = Boolean.parseBoolean( value ); setPreference( editor, kay, mSideDrag );
+            //   break;
             case "DISTOX_STYLUS_SIZE":
               setStylusSize( Float.parseFloat( value ) ); setPreference( editor, kay, mStylusSize ); // STYLUS_MM
               break;
@@ -4412,7 +4411,7 @@ B DISTOX_SAP5_BIT16_BUG true
               break;
             case  "DISTOX_SVG_PROGRAM":
               mSvgProgram     = Integer.parseInt( value );
-              if ( mSvgProgram < SVG_INKSCAPE || mSvgProgram > SVG_ADOBE_CS ) mSvgProgram = SVG_INKSCAPE; // 0: Inkscape, 1: AdobeCC, 2: AdobeCS
+              if ( mSvgProgram < SVG_INKSCAPE || mSvgProgram > SVG_ADOBE ) mSvgProgram = SVG_INKSCAPE; // 0: Inkscape, 1: AdobeCC, 2: AdobeCS
               setPreference( editor, kay, mSvgProgram );
               setExportScale( mTherionScale );
             break;

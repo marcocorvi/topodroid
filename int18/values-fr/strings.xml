@@ -1936,6 +1936,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_drawing_unit_summary">Échelle des symboles de dessin</string>
     <string name="pref_unscaled_points_title">Zoom icônes désactivé</string>
     <string name="pref_unscaled_points_summary">Désactivation du zoom sur les icônes</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
     <string name="pref_segment_title">Espacement points de ligne</string>
     <string name="pref_segment_message">Distance minimale entre les points d\'une ligne</string>
     <string name="pref_linestyle_title">Style de ligne</string>
@@ -2087,8 +2089,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_station_size_summary">Taille du texte des stations</string>
     <string name="pref_zoom_controls_title">Contrôle du zoom</string>
     <string name="pref_zoom_controls_summary">Contrôle du zoom mode multitouches</string>
-    <string name="pref_side_drag_title">Étirement angles</string>
-    <string name="pref_side_drag_summary">Active l\'étirement des angles dans la fenêtre de croquis</string>
+    <!-- UNUSED string name="pref_side_drag_title">Étirement angles</string -->
+    <!-- UNUSED string name="pref_side_drag_summary">Active l\'étirement des angles dans la fenêtre de croquis</string -->
     <string name="pref_unit_grid_title">Unités du croquis</string>
     <string name="pref_unit_grid_summary">Taille grille du croquis</string>
     <string name="pref_unit_measure_title">Unités de mesure de la règle</string>

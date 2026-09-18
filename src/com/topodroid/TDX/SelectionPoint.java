@@ -122,9 +122,26 @@ public class SelectionPoint
     return mDistance;
   }
 
+  // /** @return true in the item of this selection point is orientable
+  //  */
+  // boolean canRotate()
+  // {
+  //   if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
+  //     return BrushManager.isPointOrientable( ((DrawingPointPath)mItem).mPointType );
+  //   } else if ( mItem.mType == DrawingPath.DRAWING_PATH_AREA ) {
+  //     return BrushManager.isAreaOrientable( ((DrawingAreaPath)mItem).mAreaType );
+  //   }
+  //   return false;
+  // }
+
   boolean rotateBy( float dy )
   {
-    return ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) && mItem.rotateBy( dy );
+    if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
+      return mItem.rotateBy( dy );
+    } else if ( mItem.mType == DrawingPath.DRAWING_PATH_AREA ) {
+      return mItem.rotateBy( dy );
+    }
+    return false;
   }
 
 

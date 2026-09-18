@@ -200,7 +200,7 @@ class TDPrefKey
    * whether to use plot cache
    */
   static TDPrefKey[] mPlot = {
-    new TDPrefKey( B, BOOL, UI,  "DISTOX_SIDE_DRAG",      R.string.pref_side_drag_title,     R.string.pref_side_drag_summary,     TRUE ),
+    // new TDPrefKey( B, BOOL, UI,  "DISTOX_SIDE_DRAG",      R.string.pref_side_drag_title,     R.string.pref_side_drag_summary,     TRUE ),
     new TDPrefKey( B,       UI,  "DISTOX_ZOOM_CTRL",      R.string.pref_zoom_controls_title, R.string.pref_zoom_controls_summary, TDString.ZERO, R.array.zoomCtrl, R.array.zoomCtrlValue ),
     new TDPrefKey( T, FLT,  UI,  "DISTOX_HTHRESHOLD",     R.string.pref_hthr_title,          R.string.pref_hthr_summary,          "70"          ),
     new TDPrefKey( A, BOOL, DT,  "DISTOX_CHECK_ATTACHED", R.string.pref_checkAttached_title, R.string.pref_checkAttached_summary, FALSE         ),
@@ -583,6 +583,7 @@ class TDPrefKey
    * @note 7 keys repeated
    */
   static TDPrefKey[] mLine = {
+    new TDPrefKey( N, BOOL, UI, "DISTOX_UNSCALED_LINES",  R.string.pref_unscaled_lines_title,  R.string.pref_unscaled_lines_summary, FALSE ),
     new TDPrefKey( N, FLT,  UI, "DISTOX_LINE_THICKNESS",  R.string.pref_line_thickness_title, R.string.pref_line_thickness_summary,  TDString.ONE ),
     new TDPrefKey( N,       DR, "DISTOX_LINE_STYLE",      R.string.pref_linestyle_title,      R.string.pref_linestyle_summary,       TDString.TWO, R.array.lineStyle, R.array.lineStyleValue ),
     new TDPrefKey( N, LONG, DR, "DISTOX_LINE_SEGMENT",    R.string.pref_segment_title,        R.string.pref_segment_message,         TDString.TEN ),
@@ -631,8 +632,8 @@ class TDPrefKey
     new TDPrefKey( B, FLT,  UI, "DISTOX_LABEL_SIZE",      R.string.pref_label_size_title,      R.string.pref_label_size_summary,      TDString.TWENTYFOUR ),
     new TDPrefKey( N, FLT,  UI, "DISTOX_LINE_THICKNESS",  R.string.pref_line_thickness_title,  R.string.pref_line_thickness_summary,  TDString.ONE ),
     new TDPrefKey( N,       DR, "DISTOX_LINE_STYLE",      R.string.pref_linestyle_title,       R.string.pref_linestyle_summary,       TDString.TWO, R.array.lineStyle, R.array.lineStyleValue ),
-    new TDPrefKey( N, BOOL, DR, "DISTOX_LINE_CLOSE",      R.string.pref_line_close_title,      R.string.pref_line_close_summary,      TRUE ),
     new TDPrefKey( N, LONG, DR, "DISTOX_LINE_SEGMENT",    R.string.pref_segment_title,         R.string.pref_segment_message,         TDString.TEN ),
+    new TDPrefKey( N, BOOL, DR, "DISTOX_LINE_CLOSE",      R.string.pref_line_close_title,      R.string.pref_line_close_summary,      TRUE ),
     new TDPrefKey( A, FLT,  UI, "DISTOX_ARROW_LENGTH",    R.string.pref_arrow_length_title,    R.string.pref_arrow_length_message,    "8" ),
     // new TDPrefKey( A, BOOL, DR, "DISTOX_AUTO_SECTION_PT", R.string.pref_auto_section_pt_title, R.string.pref_auto_section_pt_summary, FALSE ),
     new TDPrefKey( N, BOOL, UI, "DISTOX_AREA_BORDER",     R.string.pref_area_border_title,     R.string.pref_area_border_summary,     TRUE )

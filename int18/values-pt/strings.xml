@@ -1784,6 +1784,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
   <string name="pref_unscaled_points_title">Ícone ponto sem zoom</string>
   <string name="pref_unscaled_points_summary">Ícones de pontos não são afetados pelo zoom</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
   <string name="pref_segment_title">Dist mín ponto linha</string>
   <string name="pref_segment_message">Distância mínima entre pontos de uma linha de tipo normal</string>
   <string name="pref_linestyle_title">Estilo linha</string>
@@ -1935,8 +1937,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
   <string name="pref_zoom_controls_title">Controle zoom</string>
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
-  <string name="pref_side_drag_title">Arrastar canto</string>
-  <string name="pref_side_drag_summary">Habilitar o arrasto do croqui pelos cantos na tela de desenho</string>
+  <!-- UNUSED string name="pref_side_drag_title">Arrastar canto</string -->
+  <!-- UNUSED string name="pref_side_drag_summary">Habilitar o arrasto do croqui pelos cantos na tela de desenho</string -->
   <string name="pref_unit_grid_title">Grade croqui</string>
   <string name="pref_unit_grid_summary">Unidade usada para células da grade do croqui</string>
   <string name="pref_unit_measure_title">Régua</string>

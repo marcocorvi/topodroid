@@ -15,7 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.TDString;
-import com.topodroid.ui.MyOrientationWidget;
+// import com.topodroid.ui.MyOrientationWidget; // POINT_ORIENTATION
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PointScale;
@@ -35,7 +35,7 @@ class DrawingPointDialog extends MyDialog
 {
   private final DrawingWindow  mParent;
   private final DrawingPointPath mPoint;
-  private final boolean mOrientable;
+  // private final boolean mOrientable; POINT_ORIENTATION
   private final int mPointType;
   private final boolean  mDoOptions;
   // private boolean  mHasXSectionOutline;
@@ -45,11 +45,11 @@ class DrawingPointDialog extends MyDialog
   // private TextView mTVtype;
   private EditText mEToptions;
   private EditText mETtext;
-  private RadioButton mBtnScaleXS;
-  private RadioButton mBtnScaleS;
-  private RadioButton mBtnScaleM;
-  private RadioButton mBtnScaleL;
-  private RadioButton mBtnScaleXL;
+  // private RadioButton mBtnScaleXS; // POINT_SCALE
+  // private RadioButton mBtnScaleS;
+  // private RadioButton mBtnScaleM;
+  // private RadioButton mBtnScaleL;
+  // private RadioButton mBtnScaleXL;
 
   // private CheckBox mCBxsection; // to display xsection outline
   // private Button   mBTdraw;
@@ -63,7 +63,7 @@ class DrawingPointDialog extends MyDialog
   // private CheckBox mCBwater = null;
   // private CheckBox mCBtext  = null;
 
-  private MyOrientationWidget mOrientationWidget = null;
+  // private MyOrientationWidget mOrientationWidget = null; // POINT_ORIENTATION
  
   private Button   mBtnOk;
   private Button   mBtnCancel;
@@ -74,7 +74,8 @@ class DrawingPointDialog extends MyDialog
     mParent = parent;
     mPoint  = point;
     mPointType = mPoint.mPointType;
-    mOrientable = BrushManager.isPointOrientable( mPointType );
+    // mOrientable = BrushManager.isPointOrientable( mPointType ); // POINT_ORIENTATION
+
     // mXSectionName = null;
     // mHasXSectionOutline = false;
     mDoOptions = BrushManager.pointHasText( mPointType ) || TDLevel.overAdvanced;
@@ -109,7 +110,7 @@ class DrawingPointDialog extends MyDialog
       mETtext.setVisibility( View.GONE );
     }
 
-    mOrientationWidget = new MyOrientationWidget( this, mOrientable, mPoint.mOrientation );
+    // mOrientationWidget = new MyOrientationWidget( this, mOrientable, mPoint.mOrientation ); // POINT_ORIENTATION
 
     // if ( BrushManager.isPointSection( mPoint.mPointType ) ) {
     //   // FIXME SECTION_RENAME
@@ -133,18 +134,18 @@ class DrawingPointDialog extends MyDialog
     //   mBTdraw.setVisibility( View.GONE );
     // }
 
-    mBtnScaleXS = (RadioButton) findViewById( R.id.point_scale_xs );
-    mBtnScaleS  = (RadioButton) findViewById( R.id.point_scale_s  );
-    mBtnScaleM  = (RadioButton) findViewById( R.id.point_scale_m  );
-    mBtnScaleL  = (RadioButton) findViewById( R.id.point_scale_l  );
-    mBtnScaleXL = (RadioButton) findViewById( R.id.point_scale_xl );
-    switch ( mPoint.getScale() ) {
-      case PointScale.SCALE_XS: mBtnScaleXS.setChecked( true ); break;
-      case PointScale.SCALE_S:  mBtnScaleS.setChecked( true ); break;
-      case PointScale.SCALE_M:  mBtnScaleM.setChecked( true ); break;
-      case PointScale.SCALE_L:  mBtnScaleL.setChecked( true ); break;
-      case PointScale.SCALE_XL: mBtnScaleXL.setChecked( true ); break;
-    }
+    // mBtnScaleXS = (RadioButton) findViewById( R.id.point_scale_xs ); // POINT_SCALE
+    // mBtnScaleS  = (RadioButton) findViewById( R.id.point_scale_s  );
+    // mBtnScaleM  = (RadioButton) findViewById( R.id.point_scale_m  );
+    // mBtnScaleL  = (RadioButton) findViewById( R.id.point_scale_l  );
+    // mBtnScaleXL = (RadioButton) findViewById( R.id.point_scale_xl );
+    // switch ( mPoint.getScale() ) {
+    //   case PointScale.SCALE_XS: mBtnScaleXS.setChecked( true ); break;
+    //   case PointScale.SCALE_S:  mBtnScaleS.setChecked( true ); break;
+    //   case PointScale.SCALE_M:  mBtnScaleM.setChecked( true ); break;
+    //   case PointScale.SCALE_L:  mBtnScaleL.setChecked( true ); break;
+    //   case PointScale.SCALE_XL: mBtnScaleXL.setChecked( true ); break;
+    // }
 
     if ( TDSetting.mWithLevels > 1 ) {
       setCBlayers();
@@ -201,11 +202,11 @@ class DrawingPointDialog extends MyDialog
       if ( mDoOptions ) {
         mPoint.setOptions( TDUtil.getTextOrEmpty( mEToptions ) );
       }
-      if ( mBtnScaleXS.isChecked() )      mPoint.setScale( PointScale.SCALE_XS );
-      else if ( mBtnScaleS.isChecked() )  mPoint.setScale( PointScale.SCALE_S  );
-      else if ( mBtnScaleM.isChecked() )  mPoint.setScale( PointScale.SCALE_M  );
-      else if ( mBtnScaleL.isChecked() )  mPoint.setScale( PointScale.SCALE_L  );
-      else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( PointScale.SCALE_XL );
+      // if ( mBtnScaleXS.isChecked() )      mPoint.setScale( PointScale.SCALE_XS ); // POINT_SCALE
+      // else if ( mBtnScaleS.isChecked() )  mPoint.setScale( PointScale.SCALE_S  );
+      // else if ( mBtnScaleM.isChecked() )  mPoint.setScale( PointScale.SCALE_M  );
+      // else if ( mBtnScaleL.isChecked() )  mPoint.setScale( PointScale.SCALE_L  );
+      // else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( PointScale.SCALE_XL );
 
       // if ( mXSectionName != null ) {
       //   if ( TDLevel.overAdvanced && mHasXSectionOutline != mCBxsection.isChecked() ) {
@@ -213,10 +214,11 @@ class DrawingPointDialog extends MyDialog
       //   }
       // }
 
-      if ( mOrientable ) { // if ( mOrientationWidget != null ) 
-        mPoint.setOrientation( mOrientationWidget.mOrient );
-        // TDLog.v( "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
-      }
+      // if ( mOrientable ) { // if ( mOrientationWidget != null ) // POINT_ORIENTATION
+      //   mPoint.setOrientation( mOrientationWidget.mOrient );
+      //   // TDLog.v( "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
+      // }
+
       if ( BrushManager.pointHasTextOrValue( mPoint.mPointType ) ) {
         String text = TDString.replaceNul( mETtext.getText().toString().trim() ); // TRIM
         if ( BrushManager.isPointLabel( mPoint.mPointType ) ) {

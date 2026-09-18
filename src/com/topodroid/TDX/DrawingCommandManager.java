@@ -60,6 +60,7 @@ public class DrawingCommandManager
   static private volatile int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
   private RectF mBBox;
   boolean mIsExtended = false;
+  private Paint mTopSideDragPaint = BrushManager.sideDragPaint; // paint for the top side-drag corners
 
   private DrawingMeasureStartPath mFirstReference;
   private DrawingMeasureEndPath   mSecondReference;
@@ -602,34 +603,36 @@ public class DrawingCommandManager
    */ 
   private void drawSideDrag( Canvas canvas )
   {
-    Path path = new Path();
     float xl = TopoDroidApp.mBorderLeft;
     float xr = TopoDroidApp.mBorderRight;
     float ww = TopoDroidApp.mDisplayWidth;
     float hh = TopoDroidApp.mDisplayHeight;
     float h8 = TopoDroidApp.mBorderTop;    // hh / 8;
     float h7 = TopoDroidApp.mBorderBottom; // hh - h8;
-    path.moveTo(  0,  0);
-    path.lineTo( xl,  0);
-    path.lineTo( xl, h8);
-    path.lineTo(  0, h8);
-    path.lineTo(  0,  0);
-    path.moveTo(  0, h7);
-    path.lineTo( xl, h7);
-    path.lineTo( xl, hh);
-    path.lineTo(  0, hh);
-    path.lineTo(  0, h7);
-    path.moveTo( xr,  0);
-    path.lineTo( ww,  0);
-    path.lineTo( ww, h8);
-    path.lineTo( xr, h8);
-    path.lineTo( xr,  0);
-    path.moveTo( xr, h7);
-    path.lineTo( ww, h7);
-    path.lineTo( ww, hh);
-    path.lineTo( xr, hh);
-    path.lineTo( xr, h7);
-    canvas.drawPath( path, BrushManager.sideDragPaint );
+    Path pathT = new Path();
+    pathT.moveTo(  0,  0); // top-left
+    pathT.lineTo( xl,  0);
+    pathT.lineTo( xl, h8);
+    pathT.lineTo(  0, h8);
+    pathT.lineTo(  0,  0);
+    pathT.moveTo( xr,  0); // top-right
+    pathT.lineTo( ww,  0);
+    pathT.lineTo( ww, h8);
+    pathT.lineTo( xr, h8);
+    pathT.lineTo( xr,  0);
+    canvas.drawPath( pathT, mTopSideDragPaint );
+    Path pathB = new Path();
+    pathB.moveTo(  0, h7); // bottom-left
+    pathB.lineTo( xl, h7);
+    pathB.lineTo( xl, hh);
+    pathB.lineTo(  0, hh);
+    pathB.lineTo(  0, h7);
+    pathB.moveTo( xr, h7); // bottom-right
+    pathB.lineTo( ww, h7);
+    pathB.lineTo( ww, hh);
+    pathB.lineTo( xr, hh);
+    pathB.lineTo( xr, h7);
+    canvas.drawPath( pathB, BrushManager.sideDragPaint );
   }
 
   // ------------------------------------------------------------
@@ -843,6 +846,7 @@ public class DrawingCommandManager
       synchronized( mSyncScrap ) {
         for ( Scrap scrap : mScraps ) scrap.clearSelected();
       }
+      sideDragHighlight( false );
    }
   }
 
@@ -2544,5 +2548,6 @@ public class DrawingCommandManager
    */
   void clipLine( DrawingLinePath line, int clip_mode ) { if ( mCurrentScrap != null ) mCurrentScrap.clipLine( line, clip_mode ); }
 
+  void sideDragHighlight( boolean highlight ) { mTopSideDragPaint = highlight? BrushManager.sideDragPaintHighlight : BrushManager.sideDragPaint; }
 
 }

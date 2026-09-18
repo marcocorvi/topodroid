@@ -1673,4 +1673,6 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   void clipLine( DrawingLinePath line, int clip_mode ) { if ( commandManager != null ) commandManager.clipLine( line, clip_mode ); }
 
+  void sideDragHighlight( boolean highlight ) { if ( commandManager != null ) commandManager.sideDragHighlight( highlight ); }
+
 }

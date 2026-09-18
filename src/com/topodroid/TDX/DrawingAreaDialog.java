@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.util.TDLog;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyStateBox;
-import com.topodroid.ui.MyOrientationWidget;
+// import com.topodroid.ui.MyOrientationWidget; // AREA_ORIENTATION
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -54,7 +54,7 @@ class DrawingAreaDialog extends MyDialog
   private CheckBox mCBvisible;
   // private Spinner mETtype;
 
-  private MyOrientationWidget mOrientationWidget; 
+  // private MyOrientationWidget mOrientationWidget;  // AREA_ORIENTATION
 
   private Button mBtnOk;
   // private Button mBtnCancel;
@@ -81,7 +81,7 @@ class DrawingAreaDialog extends MyDialog
                                   BrushManager.getAreaName( mArea.mAreaType ) );
     initLayout( R.layout.drawing_area_dialog, title );
 
-    mOrientationWidget = new MyOrientationWidget( this, mOrientable, mArea.mOrientation );
+    // mOrientationWidget = new MyOrientationWidget( this, mOrientable, mArea.mOrientation ); // AREA_ORIENTATION
 
     Spinner eTtype = (Spinner) findViewById( R.id.area_type );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.getAreaNames() );
@@ -171,9 +171,10 @@ class DrawingAreaDialog extends MyDialog
       if ( reduce > 0 ) mParent.reduceArea( mArea, reduce );
 
       mArea.setVisible( mCBvisible.isChecked() );
-      if ( mOrientable ) {
-        mArea.setOrientation( mOrientationWidget.mOrient );
-      }
+
+      // if ( mOrientable ) { // AREA_ORIENTATION
+      //   mArea.setOrientation( mOrientationWidget.mOrient );
+      // }
 
       if ( TDSetting.mWithLevels > 1 ) setLevel();
      

@@ -325,6 +325,7 @@ public class BrushManager
   public static final Paint wavyPaint = makeWavyPaint( TDColor.DARK_ORANGE, WIDTH_FIXED, Paint.Style.STROKE); 
 
   public static final Paint sideDragPaint    = makePaint( 0x99333333,           WIDTH_CURRENT, Paint.Style.FILL );
+  public static final Paint sideDragPaintHighlight = makePaint( 0x99996633,     WIDTH_CURRENT, Paint.Style.FILL );
   public static final Paint errorPaint       = makePaint( TDColor.FULL_VIOLET,  WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE );
   public static final Paint highlightPaint   = makePaint( TDColor.HIGH_PINK,    WIDTH_CURRENT, Paint.Style.STROKE );
   public static final Paint highlightPaint2  = makePaint( TDColor.HIGH_GREEN,   WIDTH_CURRENT, Paint.Style.FILL );

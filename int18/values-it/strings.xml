@@ -1889,6 +1889,8 @@
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
   <string name="pref_unscaled_points_summary">I punti icona non sono ingranditi</string>
+  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
+  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
@@ -2038,8 +2040,8 @@
   <string name="pref_station_size_summary">Dimensione nome capisaldi</string>
   <string name="pref_zoom_controls_title">Regolazioni Zoom</string>
   <string name="pref_zoom_controls_summary">Regolazioni Zoom su multitouch</string>
-  <string name="pref_side_drag_title">Corner-drag</string>
-  <string name="pref_side_drag_summary">Corner-drag del disegno</string>
+  <!-- UNUSED string name="pref_side_drag_title">Corner-drag</string -->
+  <!-- UNUSED string name="pref_side_drag_summary">Corner-drag del disegno</string -->
   <string name="pref_unit_grid_title">Unità di misura disegno</string>
   <string name="pref_unit_grid_summary">Dimensione celle della griglia</string>
   <string name="pref_unit_measure_title">Unita` distanze</string>
