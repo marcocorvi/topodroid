@@ -1,6 +1,7 @@
 encoding utf-8
 symbol line
 name gradient
+name-hu gradiens
 th_name gradient
 style straight x0
 color 0xcccccc 0xff

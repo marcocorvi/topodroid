@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name map-connection
 name-cs spojení_map
+name-hu térkép csatlakozás
 th_name map-connection
 color 0xffffff
 path

@@ -1901,8 +1901,8 @@
   <string name="pref_drawing_unit_summary">Pont ikonok/szimbólumok méretaránya</string>
   <string name="pref_unscaled_points_title">Pont nagyítás</string>
   <string name="pref_unscaled_points_summary">A pont tipusú jelkulcs elemek nem nagyíthatóak</string>
-  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
-  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
+  <string name="pref_unscaled_lines_title">Vonal mintázat nagyítás</string>
+  <string name="pref_unscaled_lines_summary">Vonal mintázatok nem nagyítódnak</string>
   <string name="pref_segment_title">Vonal-pont távolság</string>
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
   <string name="pref_linestyle_title">Vonalstílus</string>
