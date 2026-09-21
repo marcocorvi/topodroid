@@ -2191,6 +2191,7 @@ public class DrawingWindow extends ItemDrawer
   {
     boolean deletable = false;
     hasPointActions  = false;
+    // TDLog.v("set button3 item - selection " + ( (pt == null)? "null" : "non-null" ) );
     // BitmapDrawable bm = mBMjoin_no;
     String title = getResources().getString( R.string.title_edit );
     setScaleToolbar( null );
@@ -3340,7 +3341,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    // TDLog.v( "Drawing Activity on Resume " );
+    TDLog.v( "Drawing Activity on Resume " );
     // TDLog.v( "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     doResume();
     if ( mDataDownloader != null ) {
@@ -3357,7 +3358,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   protected synchronized void onPause() 
   { 
-    // TDLog.v( "Drawing Activity onPause " );
+    TDLog.v( "Drawing Activity onPause " );
     doPause();
     super.onPause();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on pause done");
@@ -3369,7 +3370,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    // TDLog.v("Drawing Activity on Start " );
+    TDLog.v("Drawing Activity on Start " );
     TDLocale.resetTheLocale();
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
@@ -3386,7 +3387,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStop()
   {
     super.onStop();
-    // TDLog.v("Drawing Activity onStop ");
+    TDLog.v("Drawing Activity onStop ");
     saveRecentSymbols( mApp_mData );
     // doStop();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on stop done");
@@ -3397,7 +3398,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   protected synchronized void onDestroy()
   {
-    // TDLog.v( "Drawing activity onDestroy");
+    TDLog.v( "Drawing activity onDestroy");
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
     }
@@ -3427,9 +3428,9 @@ public class DrawingWindow extends ItemDrawer
       mOffset.x = info.xoffset;
       mOffset.y = info.yoffset;
       mZoom     = info.zoom;
-      TDLog.v("PLOT resume 1: " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      // TDLog.v("PLOT resume 1: " + mOffset.x + " " + mOffset.y + " " + mZoom );
       setPlotType( mType, false ); // PARAMS_YES overrites the above params - it seems it is not necessary
-      TDLog.v("PLOT resume 2: " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      // TDLog.v("PLOT resume 2: " + mOffset.x + " " + mOffset.y + " " + mZoom );
     }
     mDrawingSurface.setDrawing( true );
     // TDLog.v( "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
@@ -10648,11 +10649,12 @@ public class DrawingWindow extends ItemDrawer
   private void setToolsToolbars()
   {
     // TDLog.v("set tools toolbars - visible P " + mCurrentPoint + " L " + mCurrentLine + " A " + mCurrentArea );
+    int visible = ( mHotPath != null )? View.GONE : View.VISIBLE;
     int k = -1;
     // ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
     mZoomView.setTranslationY( ZOOM_TRANSLATION );
     if ( mRecentTools == mRecentPoint ) {
-      mLayoutToolsP.setVisibility( View.VISIBLE );
+      mLayoutToolsP.setVisibility( visible );
       mLayoutToolsL.setVisibility( View.GONE );
       mLayoutToolsA.setVisibility( View.GONE );
       // mLayoutScale.setVisibility( View.GONE ); // FIXME_SCALE
@@ -10663,7 +10665,7 @@ public class DrawingWindow extends ItemDrawer
       setButton2( BTN_TOOL, mBMtoolsPoint );
     } else if ( mRecentTools == mRecentLine ) {
       mLayoutToolsP.setVisibility( View.GONE );
-      mLayoutToolsL.setVisibility( View.VISIBLE );
+      mLayoutToolsL.setVisibility( visible );
       mLayoutToolsA.setVisibility( View.GONE );
       // mLayoutScale.setVisibility( View.GONE ); // FIXME_SCALE
       k = getCurrentLineIndex();
@@ -10674,7 +10676,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mLayoutToolsP.setVisibility( View.GONE );
       mLayoutToolsL.setVisibility( View.GONE );
-      mLayoutToolsA.setVisibility( View.VISIBLE );
+      mLayoutToolsA.setVisibility( visible );
       // mLayoutScale.setVisibility( View.GONE ); // FIXME_SCALE
       k = getCurrentAreaIndex();
       // TDLog.v("Set tools toolbars: Current area index " + k );
@@ -10691,6 +10693,7 @@ public class DrawingWindow extends ItemDrawer
   private void setScaleToolbar( DrawingPath path )
   {
     if ( path != null ) {
+      // TDLog.v("set scale bar");
       // int progress = 20 + 35 * ( 2 + path.getScale() );
       // mScaleBar.setProgress( progress );
       mScaleBar.setActive( 2 + path.getScale() );

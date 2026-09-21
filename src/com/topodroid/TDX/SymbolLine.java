@@ -132,7 +132,7 @@ public class SymbolLine extends Symbol
     makeLinePath();
   }
 
-  private final static int PATH_WIDTH = 20;
+  private final static int PATH_WIDTH = 60;
 
   private void makeLinePath()
   {
@@ -353,7 +353,9 @@ public class SymbolLine extends Symbol
                     }  
                     dash = new DashPathEffect( mDashX, 0 );
                   } catch ( NumberFormatException e ) {
-                   TDLog.e( filename + " parse dash error: " + line );
+                    TDLog.e( filename + " parse dash error: " + line );
+                    dash = null;
+                    mDashX = null;
                   }
                 }
               }
@@ -562,20 +564,37 @@ public class SymbolLine extends Symbol
     }
   }
 
+  final static private int BUTTON_SCALE_X = 3;
+  final static private int BUTTON_SCALE_Y = 3;
+
   @Override
   public Paint getButtonPaint() 
   {
+    Paint paint = mPaint;
+    DashPathEffect dash = null;
+    if ( mDashX != null ) {
+      float[] dash_x = new float[ mDashX.length ];
+      for ( int k=0; k<mDashX.length; ++k ) dash_x[k] = mDashX[k]*BUTTON_SCALE_X;
+      dash = new DashPathEffect( dash_x, 0 );
+      // TDLog.v("line " + getThName() + " has dash " + dash_x.length );
+    }
     if ( mPathDir != null ) {
-      Paint paint = new Paint( mPaint );
+      paint = new Paint( mPaint );
       Path path = new Path( mPathDir );
       Matrix m = new Matrix();
-      m.postScale( 5.0f, 3.0f );
+      m.postScale( BUTTON_SCALE_X, BUTTON_SCALE_Y );
       path.transform( m );
-      PathEffect effect = new PathDashPathEffect( path, mEffectLen*5, 0, PathDashPathEffect.Style.MORPH );
-      paint.setPathEffect( effect );
-      return paint;
+      PathEffect effect = new PathDashPathEffect( path, mEffectLen*BUTTON_SCALE_X, 0, PathDashPathEffect.Style.MORPH );
+      if ( dash != null ) {
+        paint.setPathEffect( new ComposePathEffect( effect, dash ) );
+      } else {
+        paint.setPathEffect( effect );
+      }
+    } else if ( dash != null ) {
+      paint = new Paint( mPaint );
+      paint.setPathEffect( dash );
     }
-    return mPaint;
+    return paint;
   }
 
 }
