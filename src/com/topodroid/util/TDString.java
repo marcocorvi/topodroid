@@ -232,7 +232,7 @@ public class TDString
       sb.append( ch );
     }
     return sb.toString();
-    // return str.replaceAll( "\\", "\\\\").replaceAll("\"", "\\\"");
+    // return str.replace( "\\", "\\\\").replace("\"", "\\\""); // ReplaceAll
   }
     
 

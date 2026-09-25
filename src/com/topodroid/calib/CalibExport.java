@@ -243,7 +243,7 @@ public class CalibExport
                   // FIXME
                   //   (1) replace ' '* with nothing
                   //   (2) split on ','
-                  line = line.replaceAll( " ", "" );
+                  line = line.replace( " ", "" ); // was ReplaceAll
                   vals = line.split(",");
                   if ( vals.length > 7 ) {
                     // TDLog.v("Calib " + vals.length + " <" + vals[1] + "><" + vals[2] + "><" + vals[3] + ">" );
@@ -265,7 +265,7 @@ public class CalibExport
                       }
                       if ( two_sensors ) {
                         line = br.readLine();
-                        line = line.replaceAll( " ", "" );
+                        line = line.replace( " ", "" ); // ReplaceAll
                         vals = line.split(",");
                         gx = Long.parseLong( vals[1] );
                         gy = Long.parseLong( vals[2] );

@@ -69,7 +69,7 @@ abstract class ItemDrawer extends MyActivity
   static int[] mRecentPointAge = { 6, 5, 4, 3, 2, 1 };
   static int[] mRecentLineAge  = { 6, 5, 4, 3, 2, 1 };
   static int[] mRecentAreaAge  = { 6, 5, 4, 3, 2, 1 };
-  static Symbol[] mRecentTools = mRecentLine;
+  static Symbol[] mRecentTools = null;
   static float mRecentDimX;
   static float mRecentDimY;
 

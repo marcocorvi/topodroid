@@ -170,7 +170,7 @@ public class Symbol implements SymbolInterface
    */
   public String getFullThName() { return (mThPrefix == null)? mThName : mThPrefix + mThName; }
 
-  public String getFullThNameEscapedColon() { return ( (mThPrefix == null)? mThName : (mThPrefix + mThName) ).replaceAll(":", "_"); }
+  public String getFullThNameEscapedColon() { return ( (mThPrefix == null)? mThName : (mThPrefix + mThName) ).replace(":", "_"); } // ReplaceAll
 
   /** @return true if the symbol Therion name is non-null and coincides with the given name
    * @param th_name   given name

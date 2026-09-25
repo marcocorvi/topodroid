@@ -12,7 +12,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDFeedback;
 import com.topodroid.prefs.TDSetting;
@@ -274,7 +274,7 @@ class StationName
    */
   protected void setBlockName( DBlock blk, String from, String to, boolean is_backleg ) 
   {
-    // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
+    // TDLog.v( "set block name " +  blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
     //   // TDLog.v("station name detect bad sibling (1)");
@@ -291,7 +291,7 @@ class StationName
    */
   protected void setBlockName( DBlock blk, String from, String to )
   {
-    // TDLog.v( "set block " + blk.mId + " name " + from + " " + to );
+    // TDLog.v( "set block name " + blk.mId + " name " + from + " " + to );
     // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
     blk.setBlockName( from, to );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
@@ -300,6 +300,47 @@ class StationName
     // }
     mData.updateShotName( blk.mId, mSid, from, to );
   }
+
+  // /** update a block name (FROM-TO) and if necessary the leg flag
+  //  * @param blk   block
+  //  * @param sid   survey ID
+  //  * @param from  FROM stations
+  //  * @param to    TO station
+  //  * @return true if the shot name and leg have been updated in the database
+  //  * @note if the leg has been updated in the database, the block-type is alsp updated in the block
+  //  */
+  // static boolean updateShotNameAndLeg( DataHelper data, DBlock blk, long sid, String from, String to )
+  // {
+  //   TDLog.v(" update shot name and leg");
+  //   if ( ! TDString.isNullOrEmpty( from ) ) {
+  //     if ( ! TDString.isNullOrEmpty( to ) ) {
+  //       if ( ! blk.isLeg() ) { // set block to MAIN_LEG
+  //         blk.setTypeLeg();
+  //         data.updateShotNameAndLeg( blk.mId, sid, from, to, (int)blk.getLegType() );
+  //         return true;
+  //       }
+  //     } else {
+  //       if ( ! blk.isSplay() ) { // set block SPLAY - isSplay includes splays and scans
+  //         blk.setTypeSplay();
+  //         data.updateShotNameAndLeg( blk.mId, sid, from, to, (int)blk.getLegType() );
+  //         return true;
+  //       }
+  //     }
+  //   } else if ( ! TDString.isNullOrEmpty( to ) ) {
+  //     if ( ! blk.isSplay() ) { // set block SPLAY - isSplay includes splays and scans
+  //       blk.setTypeSplay();
+  //       data.updateShotNameAndLeg( blk.mId, sid, from, to, (int)blk.getLegType() );
+  //       return true;
+  //     }
+  //   } else {
+  //     if ( ! blk.isTypeBlank() ) {
+  //       blk.setTypeBlank();
+  //       data.updateShotNameAndLeg( blk.mId, sid, from, to, (int)blk.getLegType() );
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // } 
 
   // ------------------------------------------------------------------------------------------------
   /** @return true if the block is a backsight

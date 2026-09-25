@@ -102,7 +102,7 @@ public class SapProtocol extends TopoDroidProtocol
       // FIX SAP5 bug: 2023-01-05 Phil Underwood on SAP list:
       // Looks like calculation of high byte for distoX protocol is incorrect - marks bit 16 when distance > 32.676m, should be when > 65.535m
       if ( TDSetting.mSap5Bit16Bug ) {
-        if ( (buffer[2] & 0x80) == 0x80 ) buffer[0] &= 0xaf; 
+        if ( (buffer[2] & 0x80) == 0x80 ) buffer[0] &= 0xbf; // clear 0x40
       }
       return handlePacket( buffer );
     } else if ( Device.isSap6( mDeviceType ) || Device.isJedeye( mDeviceType ) ) { // FIXME_SAP6 // JedEye reuses SAP6 wire format
@@ -126,7 +126,7 @@ public class SapProtocol extends TopoDroidProtocol
       // writeAgainChrt(), stalling the remote-command queue.
       if ( Device.isSap6( mDeviceType ) ) {
         byte[] ack = new byte[1];
-        ack[0] = (byte)( bytes[0] & 0x55 ); // SapConst.SAP_ACK
+        ack[0] = (byte)( bytes[0] + 0x55 ); // SapConst.SAP_ACK
         addToWriteBuffer( ack );
       }
 

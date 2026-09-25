@@ -156,7 +156,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   {
     // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
 
-    // TDLog.v( "save plot file task bkgr start");
+    TDLog.v( "save plot file task bkgr start - shared " + mShared );
     // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE
     // TDLog.v( "save scrap files " + mFullName + " suffix " + mSuffix );
 
@@ -239,7 +239,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             break;
           case TDConst.SURVEY_FORMAT_SHP:
             // TDLog.v("EXPORT AUTO shz " + mFullName );
-            if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
+            if ( mParent.get() != null && mNum != null /* && ! mParent.get().isFinishing() */ ) {
               mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shz", false, NO_SHARED );
             }
             break;

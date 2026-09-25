@@ -1518,8 +1518,8 @@ public class MainWindow extends Activity
     final int take_flag = intent.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION ;
     ContentResolver cr = this.getContentResolver();
     cr.takePersistableUriPermission( uri, take_flag );
-    String dirname = uri.getLastPathSegment();
-    TDLog.v("Main import folder <" + dirname + ">" );
+    String dirname = TDsafUri.getDocumentName( uri ); // uri.getLastPathSegment();
+    TDLog.v("Main import folder <" + dirname + ">");
     String dir_id = DocumentsContract.getTreeDocumentId( uri );
     Uri child = DocumentsContract.buildChildDocumentsUriUsingTree( uri, dir_id );
     String[] projection = new String[] {
@@ -1556,10 +1556,11 @@ public class MainWindow extends Activity
    */
   private String importFile( Intent intent )
   {
-    String filename = null;       // import filename
     Uri uri = intent.getData();   // import uri - may NullPointerException
     String mimetype = TDsafUri.getDocumentType( uri );
-    if ( mimetype == null ) {
+    /*
+	String filename = null;       // import filename
+	if ( mimetype == null ) {
       // String path = TDsafUri.getDocumentPath(this, uri); // 2025-11-26
       // if (path == null) {
         // filename = FilenameUtils.getName(uri.toString());
@@ -1583,15 +1584,21 @@ public class MainWindow extends Activity
       // }
     } else { // mime not null
       filename = uri.getLastPathSegment();
+	*/
+    String filename = TDsafUri.getDocumentName( uri ); // import filename [muddymohawk begin]
+    if ( filename != null ) {
       // TDLog.v( "Main import: uri " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );
       int ros = filename.indexOf(":"); // drop the "content" header
       if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+      int slash = filename.lastIndexOf("/");
+      if ( slash >= 0 ) filename = filename.substring( slash + 1 );
+
       int pos   = filename.lastIndexOf("."); 
-      int qos_1 = filename.lastIndexOf("/") + 1;
       String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
-      String name = TDString.spacesToUnderscore( (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 ) );
+      String name = TDString.spacesToUnderscore( (pos > 0 )? filename.substring( 0, pos ) : filename ); // [muddymohawk end]
+
       TDLog.v( "Main import URI: filename " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
-      if ( mimetype.equals("application/zip") ) {
+      if ( "application/zip".equals( mimetype ) ) {
         importOneZip( uri, true );
         return null;
       } else {

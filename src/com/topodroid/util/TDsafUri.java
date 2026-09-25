@@ -26,6 +26,7 @@ import android.content.ContentUris;
 
 // import java.util.ArrayList;
 import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 import android.net.Uri;
 import android.database.Cursor;
 
@@ -146,6 +147,38 @@ public class TDsafUri
   public static String getDocumentType( Uri uri ) 
   {
     return TDInstance.getContentResolver().getType( uri );
+  }
+
+  /** return the user-visible name of a document URI [muddymahawk]
+   * @param uri document URI
+   * @return the provider display name, or the URI last path segment as fallback
+   */
+  public static String getDocumentName( Uri uri )
+  {
+    if ( uri == null ) return null;
+    String display_name = null;
+    Cursor cursor = null;
+    try {
+      cursor = TDInstance.getContentResolver().query( uri, new String[] { OpenableColumns.DISPLAY_NAME }, null, null, null );
+      if ( cursor != null && cursor.moveToFirst() ) {
+        int column = cursor.getColumnIndex( OpenableColumns.DISPLAY_NAME );
+        if ( column >= 0 ) display_name = cursor.getString( column );
+      }
+    } catch ( Exception e ) {
+      TDLog.e( "document name query failed " + e.getMessage() );
+    } finally {
+      if ( cursor != null ) cursor.close();
+    }
+    return selectDocumentName( display_name, uri.getLastPathSegment() );
+  }
+
+  /** @return the document name using the display-name as first choice, and the path-segment as second choice [muddymahawk]
+   * @param display_name  display name
+   * @param path_name     path segment
+   */
+  private static String selectDocumentName( String display_name, String path_name ) 
+  {
+    return ( display_name == null || display_name.length() == 0 )? path_name : display_name;
   }
 
   /* DROPPED 2025-11-26

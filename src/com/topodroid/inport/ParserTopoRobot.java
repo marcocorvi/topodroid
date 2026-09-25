@@ -308,7 +308,7 @@ class ParserTopoRobot extends ImportParser
   // private boolean isValidDate( String date ) 
   // {
   //   if ( date.charAt(2) == '/' && date.charAt(5) == '/' ) {
-  //     mDate = String.format( "20%s", date.replaceAll("/", ".") );
+  //     mDate = String.format( "20%s", date.replace("/", ".") ); // ReplaceAll
   //     return true;
   //   }
   //   return false;

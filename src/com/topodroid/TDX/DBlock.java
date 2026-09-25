@@ -36,7 +36,6 @@ import android.graphics.Paint; // custom paint
 
 public class DBlock
 {
-
   private View mView;     // view of this dblock in the list
   // private int    mPos; // position in the list
   private int mVisible;   // whether this data is visible in the list: one of View.VISIBLE, View.GONE, View.INVISIBLE
@@ -248,7 +247,11 @@ public class DBlock
 
   /** set the type "BLANK_LEG" - only if the type was BLANK
    */
-  void setTypeBlankLeg( ) { if ( mBlockType == BlockType.BLANK ) mBlockType = BlockType.BLANK_LEG; }
+  void setTypeBlankToLeg( ) { if ( mBlockType == BlockType.BLANK ) mBlockType = BlockType.BLANK_LEG; }
+
+  /** set the type MAIN_LEG
+   */
+  void setTypeLeg()  { mBlockType = BlockType.MAIN_LEG; }
 
   /** set the type SEC_LEG
    */
@@ -1173,7 +1176,16 @@ public class DBlock
     mMagnetic     = b.mMagnetic;
     mDip          = b.mDip;
   }
-    
+
+  // /** @return true if this block has same FROM and TO as the other block and bot stations are not empty
+  //  * @param b other block
+  //  */
+  // boolean hasSameFromTo( DBlock b ) 
+  // {
+  //   if ( TDString.isNullOrEmpty( mFrom ) ) return false;
+  //   if ( TDString.isNullOrEmpty( mTo   ) ) return false;
+  //   return mFrom.equals( b.mFrom ) && mTo.equals( b.mTo );
+  // }
 
 }
 

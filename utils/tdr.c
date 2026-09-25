@@ -46,7 +46,8 @@ void readString( char * hdr, FILE * fp )
   printf("%s [length %d] <", hdr, len);
   for ( j=0; j<len; ++j ) {
     fread( &ch, sc, 1, fp );
-    printf("%c", ch, ch );
+    // printf("%c", ch, ch );
+    printf(" %02x", ch );
     if ( checkFilePos( fp ) ) break;
   }
   printf(">\n");

@@ -836,7 +836,7 @@ public class TDExporter
 
       pw.format(name, info.name );
       pw.format("<description>\n");
-      pw.format("  <![CDATA{%s - %s<br>\n",  TDUtil.getDateString("yyyy.MM.dd"), creator );
+      pw.format("  <![CDATA[%s - %s<br>\n",  TDUtil.getDateString("yyyy.MM.dd"), creator );
       pw.format("  Survey %s date %s]]>\n", info.name, info.date );
       pw.format("</description>\n");
 

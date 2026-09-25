@@ -614,6 +614,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_join">Join</string>
     <string name="popup_store">Store</string>
     <string name="popup_restore">Restore</string>
+    <string name="popup_reverse">Reverse</string>
 
     <string name="popup_erase_all">Erase all</string>
     <string name="popup_erase_point">Erase points</string>

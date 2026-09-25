@@ -790,7 +790,7 @@ class ShotEditDialog extends MyDialog
     }
 
     // TDLog.v("renumber " + renumber + " comment " + comment );
-    if ( LOG ) TDLog.v( "renumber " + renumber + " all_splay " + all_splay + " splay classes " + splay_classes + " set_xsplay " + set_xsplay + " splay_type " + splay_type );
+    // TDLog.v( "renumber " + renumber + " all_splay " + all_splay + " splay classes " + splay_classes + " set_xsplay " + set_xsplay + " splay_type " + splay_type );
 
     if ( all_splay ) {
       if ( set_xsplay >= 0 ) {
@@ -813,7 +813,7 @@ class ShotEditDialog extends MyDialog
       // mParent.updateSplayLegType( mBlk, leg );
       mParent.updateShotNameAndFlags( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk, renumber );
     } else {
-      // TDLog.v("other " + set_xsplay );
+      // TDLog.v("other: set_xsplay " + set_xsplay + " blk isSplay " + mBlk.isSplay() );
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
       long leg = LegType.NORMAL;
       if ( set_xsplay > 0 && mBlk.isSplay() ) {

@@ -434,6 +434,7 @@ public class ShotWindow extends MyActivity
    */
   int updateDisplay( )
   {
+    // TDLog.v("Shot window update display");
     int ret = 0;
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
@@ -443,7 +444,7 @@ public class ShotWindow extends MyActivity
       // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
       mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
       if ( ! mDataAdapter.isMultiSelect() ) { // FIXME 2024-11-15 check if causes errors
-        // TDLog.v( TAG + "update display updates shot list: " + mMyBlocks.size() );
+        // TDLog.v( "shot window: update display updates shot list: " + mMyBlocks.size() );
         updateShotList( mMyBlocks, mMyPhotos );
         // mSurveyAccuracy.debug();
         ret = 2;
@@ -576,7 +577,7 @@ public class ShotWindow extends MyActivity
       if ( ! ( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE  ) ) {
         mList.post( new Runnable() {
           @Override public void run() {
-            TDLog.v( TAG + "list runnable: notify data set changed " + mDataAdapter.getCount() );
+            // TDLog.v( TAG + "list runnable: notify data set changed " + mDataAdapter.getCount() );
             // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
             mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
             mList.setSelection( mDataAdapter.getCount() - 1 );
@@ -629,6 +630,7 @@ public class ShotWindow extends MyActivity
    */
   private void processShotList( List< DBlock > list )
   {
+    // TDLog.v("Shot window: process shot list " + list.size() );
     int cnt = 0;
     DBlock prev = null;
     long scan_idx = -1L;
@@ -653,29 +655,48 @@ public class ShotWindow extends MyActivity
         scan_idx = -1L;
         // prev_is_scan = false;
         if ( cur.isSecLeg() || cur.isRelativeDistance( prev ) ) {
-          // TDLog.v( TAG + "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+          // TDLog.v( TAG + "item " + cur.mId + " close - type " + cur.getBlockType() + " close " + cur.isRelativeDistance( prev ) );
           if ( cur.isBlank() ) {   // FIXME 20140612
+            // TDLog.v( TAG + "item " + cur.mId + " blank -> sec_leg");
             cur.setTypeSecLeg();
             mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.EXTRA ); // cur.mType ); // FIXME 20140616
-          }
-          else if ( ! cur.isSecLeg() ) { // FIXME 20201118
+          } else if ( ! cur.isSecLeg() ) { // FIXME 20201118 : cur isRelativeDistance from prev
             // if ( prev != null && prev.isBlank() ) prev.setBlockTypeFromLegType( DBlock.BLOCK_BLANK_LEG );
-            if ( prev != null ) prev.setTypeBlankLeg();
+            if ( prev != null ) {
+              // prev.setTypeBlankToLeg(); // 20260922-begin replaced with
+              // the following if-else that handles consecutive close shot with repeated/different FROM-TO
+              boolean empty_from = TDString.isNullOrEmpty( cur.mFrom );
+              boolean empty_to   = TDString.isNullOrEmpty( cur.mTo );
+              if ( ! ( empty_from || empty_to ) ) {
+                TDLog.v("mark " + cur.mId + " as leg");
+                mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.NORMAL );
+                cur.setTypeLeg();
+              } else if ( ! ( empty_from && empty_to ) ) {
+                TDLog.v("mark " + cur.mId + " as splay");
+                mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.NORMAL );
+                cur.setTypeSplay();
+              } else {
+                prev.setTypeBlankToLeg();
+              } // 20260922-end
+              // TDLog.v( TAG + "item prev " + prev.mId + " set blank-leg ");
+            }
           }
 
           if ( mFlagLeg ) { // flag: hide leg extra shots
-            // TDLog.Log( TDLog.LOG_SHOT, "close distance");
-
             if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
-              // prev was skipped: draw it now
               if ( ! prev_is_leg ) {
+                // TDLog.v("  prev " + prev.mId + " (blank not leg) set prev to current " + cur.mId ); 
                 cur = prev;
                 prev_is_leg = true;
               } else {
+                // TDLog.v("  prev " + prev.mId + "(blank type) is leg: continue");
                 continue;
               }
             } else {
-              continue;
+              if ( cur.isSecLeg() ) { // 20260922 inserted if-test
+                // TDLog.v("  prev null or not-blank: continnue");
+                continue;
+              }
             }
           } else { // do not hide extra leg-shots
             if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
@@ -683,6 +704,7 @@ public class ShotWindow extends MyActivity
                 ++cnt;
                 mDataAdapter.add( prev );
                 prev_is_leg = true;
+                // TDLog.v("  prev (blank not leg) was skipped: increased counter " + cnt );
               // } else {
                 /* nothing */
               }
@@ -2194,8 +2216,8 @@ public class ShotWindow extends MyActivity
     } else {
       mNextPos = mShotPos;
     }
-	// OLD CODE
-	// while ( mNextPos < mDataAdapter.getCount() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
+    // OLD CODE
+    // while ( mNextPos < mDataAdapter.getCount() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
     // ++ mNextPos; // one position after blk
     // while ( mNextPos < mDataAdapter.getCount() ) {
     //   DBlock b = mDataAdapter.get(mNextPos);
@@ -2243,8 +2265,8 @@ public class ShotWindow extends MyActivity
     } else {
       mPrevPos = mShotPos;
     }
-	// OLD CODE
-	// while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
+    // OLD CODE
+    // while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
     // while ( mPrevPos > 0 ) {
     //   -- mPrevPos;
     //   DBlock b = mDataAdapter.get(mPrevPos);
@@ -2333,13 +2355,28 @@ public class ShotWindow extends MyActivity
    */
   void updateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk, final boolean renumber )
   {
-    if ( LOG ) TDLog.v( TAG + "update shot name " + from + "-" + to + " and flags " + flag + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() + " renumber " + renumber );
+    // if ( ! TDString.isNullOrEmpty( from ) ) {
+    //   if ( ! TDString.isNullOrEmpty( to ) ) {
+    //     if ( ! ( leg == LegType.BACK || leg == LegType.BLUNDER ) ) leg = LegType.NORMAL;
+    //   } else {
+    //     if ( leg == LegType.INVALID || leg == LegType.EXTRA || leg == LegType.BACK ) leg = LegType.NORMAL;
+    //   }
+    // } else if ( ! TDString.isNullOrEmpty( to ) ) {
+    //   if ( leg == LegType.INVALID || leg == LegType.EXTRA || leg == LegType.BACK ) leg = LegType.NORMAL;
+    // } else {
+    //   if ( ! ( leg == LegType.NORMAL || leg == LegType.EXTRA ) ) {
+    //     // at this stage it is not clear whether to assign LegType.NORMAL or LegType.EXTRA
+    //   }
+    // }
+
+    // TDLog.v( TAG + "update shot name " + from + "-" + to + " and flags " + flag + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() + " renumber " + renumber );
     String sts = checkXSections( blk, from, to );
     if ( sts == null ) {
       doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
       if ( renumber ) renumberShotsAfter( blk );
     } else {
       Resources res = getResources();
+      final long leg0 = leg;
       TopoDroidAlertDialog.makeAlert( mActivity, res,
         String.format( res.getString( R.string.shot_rename_unsafe ), sts ),
         res.getString(R.string.button_ok), 
@@ -2347,7 +2384,7 @@ public class ShotWindow extends MyActivity
         new DialogInterface.OnClickListener() { // ok handler
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
+            doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg0, comment, blk );
             if ( renumber ) renumberShotsAfter( blk );
           } },
         null
@@ -2368,7 +2405,8 @@ public class ShotWindow extends MyActivity
    */
   private void doUpdateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
-    if ( LOG ) TDLog.v(  TAG + "do update shot name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
+    // boolean same_name = TDString.equals( blk.mFrom, from ) && TDString.equals( blk.mTo, to );
+    // TDLog.v(  TAG + "do update shot name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
     blk.setBlockTypeFromLegType( (int)leg );
 
@@ -2407,6 +2445,7 @@ public class ShotWindow extends MyActivity
       // FIXME if ( leg == LegType.EXTRA ) blk3.setBlockTypeFromLegType( DBlock.BLOCK_SEC_LEG );
       mDataAdapter.updateBlockView( blk3.mId );
     }
+    // if ( ! same_name ) processShotList( mMyBlocks ); // 20260922 not needed
   }
 
   // FIXME_HIGHLIGHT
@@ -2414,19 +2453,17 @@ public class ShotWindow extends MyActivity
   //  * @param blks  data blocks list
   //  * @note called by MultishotDialog
   //  */
-  /*
-  void highlightBlocks( List< DBlock > blks )  // HIGHLIGHT
-  {
-    mApp.setHighlighted( blks );
-    // TDLog.v( TAG + "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
-    if ( blks == null || blks.size() == 0 ) return; // TDUtil.isEmpty(blks)
-    // now if there is a plot open it
-    if ( TDInstance.recentPlot != null ) {
-      startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
-    }
-    clearMultiSelect( );
-  }
-  */
+  // void highlightBlocks( List< DBlock > blks )  // HIGHLIGHT
+  // {
+  //   mApp.setHighlighted( blks );
+  //   // TDLog.v( TAG + "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
+  //   if ( blks == null || blks.size() == 0 ) return; // TDUtil.isEmpty(blks)
+  //   // now if there is a plot open it
+  //   if ( TDInstance.recentPlot != null ) {
+  //     startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
+  //   }
+  //   clearMultiSelect( );
+  // }
 
   /** open the sketch and highlight block in the sketch
    * @param blks  data blocks list
@@ -2460,7 +2497,7 @@ public class ShotWindow extends MyActivity
    */
   void updateShotBlockName( DBlock b, String from, String to )
   {
-    // TDLog.v( TAG + "update shot " + b.mId );
+    // TDLog.v( TAG + "update shot block name " + b.mId );
     if ( b.isScan() ) {
       TDLog.e("THIS SHOULD NOT HAPPEN");
       long leg_type = b.getLegType();
@@ -2469,7 +2506,7 @@ public class ShotWindow extends MyActivity
       // b.mBlockType remains unchanged
     } else {
       boolean clear_backsight_flag = b.isBackSplay() && ! TDString.equals( b.mFrom, from );
-      if ( LOG ) TDLog.v( TAG + "update shot block " + b.mId + " name " +  b.mFrom + "-" + b.mTo + " -> " + from + "-" + to + " clear_backsight_flag " + clear_backsight_flag );
+      // TDLog.v( TAG + "update shot block " + b.mId + " name " +  b.mFrom + "-" + b.mTo + " -> " + from + "-" + to + " clear_backsight_flag " + clear_backsight_flag );
       mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to );
       b.setBlockName( from, to, b.isBackLeg() );
       if ( clear_backsight_flag ) clearBacksightFlag( b );
@@ -2673,6 +2710,9 @@ public class ShotWindow extends MyActivity
     clearMultiSelect( ); // can move inside ?
   }
 
+  /** swap from-to stations for a set of blocks - interface function
+   * @param blks   list of data blocks
+   */
   void swapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
   {
     String sts = checkXSections( blks, null, null );
@@ -2694,7 +2734,7 @@ public class ShotWindow extends MyActivity
     }
   }
 
-  /** swap from-to stations for a set of blocks
+  /** swap from-to stations for a set of blocks - work function
    * @param blks   list of data blocks
    * @note package for the alert dialog callback
    */

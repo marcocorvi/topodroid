@@ -6932,6 +6932,7 @@ public class DrawingWindow extends ItemDrawer
       Button myTextView5 = null;
       Button myTextView6 = null;
       Button myTextView7 = null;
+      Button myTextView9 = null; // reverse line
       Button myTextView8 = null; // PATH_MULTISELECTION
 
       if ( mDrawingSurface.isMultiselection() ) {
@@ -7261,6 +7262,25 @@ public class DrawingWindow extends ItemDrawer
             ww = myTextView7.getPaint().measureText( text );
             if ( ww > w ) w = ww;
           }
+
+          SelectionPoint sp = mDrawingSurface.hotItem();
+          if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_LINE ) {
+            DrawingLinePath line = (DrawingLinePath)(sp.mItem);
+            if ( line != null && line.hasPathEffect() ) {
+              text = getString(R.string.popup_reverse); 
+              myTextView9 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  public void onClick(View v) {
+                    line.reversePath();
+                    modified();
+                    dismissPopupEdit();
+                  }
+                } );
+              ww = myTextView9.getPaint().measureText( text );
+              if ( ww > w ) w = ww;
+            }
+          }
+
         }
 
         // PATH_MULTISELECTION
@@ -7303,6 +7323,7 @@ public class DrawingWindow extends ItemDrawer
       if ( myTextView5 != null ) myTextView5.setWidth( iw );
       if ( myTextView6 != null ) myTextView6.setWidth( iw );
       if ( myTextView7 != null ) myTextView7.setWidth( iw ); // APPEND LINE TO LINE
+      if ( myTextView9 != null ) myTextView9.setWidth( iw ); // APPEND LINE TO LINE
       if ( myTextView8 != null ) myTextView8.setWidth( iw ); // PATH_MULTISELECTION
       
       FontMetrics fm = myTextView0.getPaint().getFontMetrics();
@@ -8559,6 +8580,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSaveTh2( Uri uri, long type, final boolean toast, final boolean shared )
   {
+    // TDLog.v("do save th2: type " + type + " toast " + toast + " shared " + shared );
     DrawingCommandManager manager = mDrawingSurface.getManager( type );
     if ( manager == null ) return;
     Handler th2Handler = null;
@@ -8920,10 +8942,9 @@ public class DrawingWindow extends ItemDrawer
         if ( mLabelPath != null ) {
           int code_point = ev.getUnicodeChar();
           // TDLog.v("key event unicode " + code_point );
-          // TODO suppress invalid characters
           if ( code == KeyEvent.KEYCODE_DEL ) {
             mLabelPath.delTextChar( );
-          } else {
+          } else if ( code_point > 0 && ! Character.isISOControl( code_point ) ) { // skip non-printing keys 
             mLabelPath.addTextChar( Character.toChars( code_point ) );
           }
           // mDrawingSurface.setBackgroundColor( 0 ); // this makes grey for all modes
@@ -10087,7 +10108,7 @@ public class DrawingWindow extends ItemDrawer
             finish();
           }
           Uri uri = intent.getData();   // import uri
-          String filename = uri.getLastPathSegment();
+          String filename = TDsafUri.getDocumentName( uri ); // uri.getLastPathSegment();
           // TDLog.v( "DRAW URI to import: " + uri.toString() + " filename <" + filename + ">" );
           // int ros = filename.indexOf(":"); // drop the "content" header
           // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
@@ -10130,7 +10151,7 @@ public class DrawingWindow extends ItemDrawer
             finish();
           }
           Uri uri = intent.getData();   // import uri
-          String filename = uri.getLastPathSegment();
+          String filename = TDsafUri.getDocumentName( uri ); // uri.getLastPathSegment();
           // TDLog.v( "DRAW URI to export: " + uri.toString() + " filename <" + filename + ">" );
           // int ros = filename.indexOf(":"); // drop the "content" header
           // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
@@ -10837,8 +10858,10 @@ public class DrawingWindow extends ItemDrawer
     setButtonRecents( mBtnRecentL, mRecentLine  );
     setButtonRecents( mBtnRecentA, mRecentArea  );
 
-    mRecentTools = mRecentLine; // by default the drawing tool is the wall-line
-    if ( mCurrentLine < 0 ) mCurrentLine = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    if ( mRecentTools == null ) {
+      mRecentTools = mRecentLine; // by default the drawing tool is the wall-line
+      if ( mCurrentLine < 0 ) mCurrentLine = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    }
     setToolsToolbars();
   }
 

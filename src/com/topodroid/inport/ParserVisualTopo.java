@@ -112,7 +112,7 @@ class ParserVisualTopo extends ImportParser
           } else if ( line.startsWith("Trou") ) {
             String[] params = line.substring(5).split(",");
             if ( params.length > 0 ) {
-              mName = params[0].replaceAll(" ","_");
+              mName = params[0].replace(" ","_"); // ReplaceAll
               // TODO coordinates
             }
           } else if ( vals[0].equals("Param") ) {

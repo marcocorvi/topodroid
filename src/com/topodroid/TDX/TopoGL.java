@@ -1701,7 +1701,7 @@ public class TopoGL extends MyActivity
     // InputStreamReader isr = null;
     // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
-    String filename = uri.getLastPathSegment();
+    String filename = TDsafUri.getDocumentName( uri ); // uri.getLastPathSegment();
     TDLog.v("DEM Path " + pathname + " file " + filename );
     mDEMname = filename;
     (new AsyncTask< Uri, Void, Boolean>() {
@@ -1795,7 +1795,7 @@ public class TopoGL extends MyActivity
     if ( bounds == null ) return;
 
     String pathname = uri.getPath();
-    String filename = uri.getLastPathSegment();
+    String filename = TDsafUri.getDocumentName( uri ); // uri.getLastPathSegment();
     // TDLog.v("Texture Path " + pathname + " file " + filename );
     // get the model tie-point (upper left corner), the width-height, and the pixel scale
     

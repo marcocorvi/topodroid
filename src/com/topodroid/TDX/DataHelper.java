@@ -1995,9 +1995,9 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  // used internally to merge to next leg
+  // used internally to merge to next leg and ShotWindow
   @SuppressWarnings("SameParameterValue")
-  private void updateShotNameAndLeg(long id, long sid, String fStation, String tStation, int leg )
+  void updateShotNameAndLeg(long id, long sid, String fStation, String tStation, int leg )
   {
     if ( myDB == null ) return;
     if ( fStation == null ) fStation = TDString.EMPTY;
@@ -5375,9 +5375,9 @@ public class DataHelper extends DataSetObservable
         if ( ! block.isSecLeg() ) prev_leg = block.isMainLeg()? block : null;
       } while (cursor.moveToNext());
     }
-    // TDLog.v( "DB select all shots. list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // FIXME catch ( SQLiteCantOpenDatabaseException e )
+    // TDLog.v( "DB select all shots. list size " + list.size() );
     return list;
   }
 

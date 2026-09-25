@@ -95,7 +95,7 @@ public class DrawingLabelPath extends DrawingPointPath
       scale = dis.readInt( );
       if ( version > 401090 ) level = dis.readInt();
       if ( version > 401160 ) scrap = dis.readInt();
-      text = dis.readUTF();
+      text = dis.readUTF().replace("\u0000",""); // drop NUL chars stored by versions before 6.5.23
       options = dis.readUTF();
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );

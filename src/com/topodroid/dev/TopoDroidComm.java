@@ -113,8 +113,9 @@ public class TopoDroidComm
     // TODO split the data insert in three places: one for each data packet
 
     // TDLog.v( "TD comm: handle BRIC packet " + index + " " + d + " " + b + " " + c + " time " + time );
-    int leg_type = LegType.NORMAL;
-    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_RIGHT, leg_type, status, "", TDInstance.deviceAddress(), index, time );
+    int leg_type = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
+    if ( comment == null ) comment = "";
+    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg_type, status, comment, TDInstance.deviceAddress(), index, time );
     // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
     // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
 
@@ -189,6 +190,16 @@ public class TopoDroidComm
       long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       int leg_type = LegType.NORMAL;
       boolean update_idx = false;
+      if ( scan_bit > 0 ) {
+        leg_type = LegType.SCAN;
+        if ( scan_bit == 3 ) {
+          TDLog.v("start of scan");
+          mScanSetIdx = -1; // set scan-index in the database to the shot index
+        // } else { // nothing mScanSetIndex is positive and will be used to set scan-index in the database
+        }
+      } else {
+        mScanSetIdx = 0; // do not set scan-index field in the database
+      }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
               mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, status, comment, TDInstance.deviceAddress(),

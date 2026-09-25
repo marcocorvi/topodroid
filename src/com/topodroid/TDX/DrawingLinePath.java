@@ -758,6 +758,10 @@ public class DrawingLinePath extends DrawingPointLinePath
     pw.format( Locale.US, "ENDLINE\n" );
   }
 
+  /** @return true if the line has a path-effect
+   */
+  boolean hasPathEffect() { return mPathEffect != null; }
+
 
 }
 

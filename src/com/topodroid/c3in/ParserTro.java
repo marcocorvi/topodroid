@@ -89,7 +89,7 @@ public class ParserTro extends TglParser
   {
     String[] params = coords.split(",");
     if ( params.length >= 5 ) {
-      String name = params[0].replaceAll(" ","_"); // cave name
+      String name = params[0].replace(" ","_"); // cave name - was ReplaceAll
       // TDLog.v("TRO entrance " + entrance + " coords " + coords );
       try { // FIXME coordinates NOT SURE THERE IS z
         double x = Double.parseDouble( params[1] );
