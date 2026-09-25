@@ -5,6 +5,10 @@
 *  See the file COPYING.
 * --------------------------------------------------------
 *
+* Usage:
+*   tdr2th file1.tdr [file2.tdr ...]
+* The output files are file1.th2 [file2.th2 ...]
+*
 */
 #include <stdio.h>
 #include <stdlib.h>
