@@ -47,11 +47,13 @@ class ParserVisualTopoX extends ImportParser
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TRO );
+    if ( mApplyDeclination ) mDeclination = 0.0f;
     mName = TDio.extractName( filename );
     mLrud = lrud;
     mLegFirst = leg_first;
     readFile( isr, filename );
     checkValid();
+    if ( mApplyDeclination ) mDeclination = 0.0f;
   }
 
   /** @return angle value
@@ -243,7 +245,7 @@ class ParserVisualTopoX extends ImportParser
           } else {
             mClino   = angle( getFloatValue("Pte=\"", line, 0), uc, dmc);
           }
-          mBearing = TDMath.in360( mBearing );
+          mBearing = checkApplyDeclination( mBearing, mDeclination );
           if ( mLrud && ! isSplay ) {
             mLeft  = getFloatValue( "G=\"", line, -1 ) * ul;
             mRight = getFloatValue( "D=\"", line, -1 ) * ul;

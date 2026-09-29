@@ -134,7 +134,16 @@ public class QCamDrawingSurface extends SurfaceView
     // TDLog.v( "QCAM surface created " );
     try {
       mCamera = Camera.open();
-      mCamera.setPreviewDisplay( holder );
+      Camera.Parameters params = mCamera.getParameters(); // begin (Sevcik Radek)
+      if ( params.getSupportedFocusModes() != null ) {
+        if ( params.getSupportedFocusModes().contains( Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE ) ) {
+          params.setFocusMode( Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE );
+        } else if ( params.getSupportedFocusModes().contains( Camera.Parameters.FOCUS_MODE_AUTO ) ) {
+          params.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
+        }
+      }
+      mCamera.setParameters(params); // end (Sevcik Radek)
+      mCamera.setPreviewDisplay(holder);
       mOrientationListener = new OrientationEventListener( mContext, SensorManager.SENSOR_DELAY_NORMAL ) {
         public void onOrientationChanged( int orientation ) 
         { 

@@ -3077,18 +3077,19 @@ public class Scrap
             DrawingPath path = (DrawingPath)cmd;
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
-              // Paint paint = new Paint( line.mPaint
+              Paint paint = new Paint( line.mPaint );
+              if ( xor_color == 1 ) paint.setColor( BrushManager.xorColor( paint.getColor() ) );
               if ( ! TDSetting.mUnscaledLines ) line.zoomPathEffect( zoom );
-              line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
+              line.drawWithPaint( canvas, matrix, bbox, paint );
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
-                Paint paint = new Paint( BrushManager.mSectionPaint );
-                // paint.setColor( xor_color ^ paint.getColor() );
-                paint.setColor( BrushManager.xorColor( paint.getColor() ) );
+                // Paint paint = new Paint( BrushManager.mSectionPaint );
+                // // paint.setColor( xor_color ^ paint.getColor() );
+                // paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                 drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, paint );
               } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
-                Paint paint = new Paint( BrushManager.mLSidePaint );
-                // paint.setColor( xor_color ^ paint.getColor() );
-                paint.setColor( BrushManager.xorColor( paint.getColor() ) );
+                // Paint paint = new Paint( BrushManager.mLSidePaint );
+                // // paint.setColor( xor_color ^ paint.getColor() );
+                // paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                 float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
                 drawDirectionTick( canvas, matrix, line, lside*0.5f, paint ); // lside is divided by 2 to make it roughly long as in therion pdf
               }
@@ -3104,17 +3105,19 @@ public class Scrap
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
+                Paint paint = new Paint( line.mPaint );
+                if ( xor_color == 1 ) paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                 if ( ! TDSetting.mUnscaledLines ) line.zoomPathEffect( zoom );
-                line.drawWithPaint( canvas, matrix, bbox, line.mPaint );
+                line.drawWithPaint( canvas, matrix, bbox, paint );
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
-                  Paint paint = new Paint( BrushManager.mSectionPaint );
-                  // paint.setColor( xor_color ^ paint.getColor() );
-                  paint.setColor( BrushManager.xorColor( paint.getColor() ) );
+                  // Paint paint = new Paint( BrushManager.mSectionPaint );
+                  // // paint.setColor( xor_color ^ paint.getColor() );
+                  // paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                   drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, paint );
                 } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
-                  Paint paint = new Paint( BrushManager.mLSidePaint );
-                  // paint.setColor( xor_color ^ paint.getColor() );
-                  paint.setColor( BrushManager.xorColor( paint.getColor() ) );
+                  // Paint paint = new Paint( BrushManager.mLSidePaint );
+                  // // paint.setColor( xor_color ^ paint.getColor() );
+                  // paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                   float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
                   drawDirectionTick( canvas, matrix, line, lside*0.5f, paint );
                 }

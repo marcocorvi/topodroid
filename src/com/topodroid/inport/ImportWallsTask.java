@@ -54,7 +54,7 @@ public class ImportWallsTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserWalls parser = new ParserWalls( isr, str[0], false ); // apply_declination = false
+      ParserWalls parser = new ParserWalls( isr, str[0], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

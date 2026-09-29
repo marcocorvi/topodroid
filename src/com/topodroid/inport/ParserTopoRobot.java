@@ -267,10 +267,12 @@ class ParserTopoRobot extends ImportParser
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TRB );
+    if ( mApplyDeclination ) mDeclination = 0.0f;
     mName = TDio.extractName( filename );
     mDate = TDUtil.currentDate();
     readFile( isr, filename );
     checkValid();
+    if ( mApplyDeclination ) mDeclination = 0.0f;
   }
 
   void writeAnnotation( PrintWriter pw )
@@ -467,6 +469,7 @@ class ParserTopoRobot extends ImportParser
                       first_from  = from;
                     } else {
                       if ( first_from != null ) {
+                        azimuth = checkApplyDeclination( azimuth, mDeclination );
                         if ( first_left > 0.0f ) {
 	                  float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );
                           extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;

@@ -46,12 +46,13 @@ class ParserVisualTopo extends ImportParser
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TRO );
+    if ( mApplyDeclination ) mDeclination = 0.0f;
     mName = TDio.extractName( filename );
     mLrud = lrud;
     mLegFirst = leg_first;
     readFile( isr, filename );
     checkValid();
-
+    if ( mApplyDeclination ) mDeclination = 0.0f;
   }
 
   private static float angle( float value, float unit, boolean dm )
@@ -188,7 +189,7 @@ class ParserVisualTopo extends ImportParser
                 mLength  = Float.parseFloat(vals[k]) * ul; ++k; // 2
                 mBearing = angle( Float.parseFloat(vals[k]), ub, dmb); ++k; // 3
                 mClino   = angle( Float.parseFloat(vals[k]), uc, dmc); ++k; // 5
-                mBearing = TDMath.in360( mBearing );
+                mBearing = checkApplyDeclination( mBearing, mDeclination );
                 if ( splay ) {
                   shots.add( new ParserShot( mFrom, TDString.EMPTY, mLength, mBearing, mClino, 0.0f,
                                              ExtendType.EXTEND_UNSET, LegType.NORMAL, false, false, false, "" ) );

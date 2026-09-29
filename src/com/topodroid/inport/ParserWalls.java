@@ -77,9 +77,11 @@ class ParserWalls extends ImportParser
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_SRV );
+    if ( mApplyDeclination ) mDeclination = 0.0f;
     mFixes = new ArrayList< WallsFix >();
     readFile( isr, name, "" );
     checkValid();
+    if ( mApplyDeclination ) mDeclination = 0.0f;
   }
 
   /** @return true if the given value represents a "non-exist" (starts with two '-')
@@ -219,6 +221,7 @@ class ParserWalls extends ImportParser
                 len  = Float.parseFloat( vals[jLength] ) * ul;
                 ber  = Float.parseFloat( vals[jCompass] );
                 cln  = (sz == 4 )? 0 : Float.parseFloat( vals[jClino] );
+                ber = checkApplyDeclination( ber, mDeclination );
                 if ( sz > 5 ) {
                   // TDLog.v("LRUD str <" + vals[5] + ">" );
                   String[] lrud = vals[5].substring(1, vals[5].length()-1).split(",");

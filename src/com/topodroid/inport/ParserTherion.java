@@ -107,15 +107,16 @@ class ParserTherion extends ImportParser
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TH );
+    if ( mApplyDeclination ) mDeclination = 0.0f;
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
     // shots    = new ArrayList<>(); // FROM ImportParser
     // splays   = new ArrayList<>();
     // // mStates  = new Stack< ParserTherionState >();
-    // mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState(); // root of the linked list of states
     readFile( isr, name, "", state, therionPath, filepath );
     checkValid();
+    if ( mApplyDeclination ) mDeclination = 0.0f; // declination has been already applied to azimuths
   }
 
   // private String nextLine( BufferedReader br ) throws IOException // FROM ImportParser
@@ -661,9 +662,7 @@ class ParserTherion extends ImportParser
 
                     len = (len - zLen) * sLen;
                     ber = (ber - state.mZeroBer) * state.mScaleBer * state.mUnitBer;
-                    if ( mApplyDeclination ) ber += state.mDeclination;
-		    // if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
-                    ber = TDMath.in360( ber );
+                    ber = checkApplyDeclination( ber, state.mDeclination );
                     cln = (cln - state.mZeroCln) * state.mScaleCln * state.mUnitCln;
 
                     if ( to.equals("-") || to.equals(".") ) { to = "-"; }

@@ -316,6 +316,8 @@ public class ParserDat extends TglParser
     return ( temp_shots.size() > 0 );
   }
 
+  /** distribute shots to surveys
+   */
   private void setShotSurveys()
   {
     for ( Cave3DShot sh : shots ) {
@@ -442,11 +444,10 @@ public class ParserDat extends TglParser
             ++ mLoopCnt;
             sh.to_station = s;
           } else if ( sf != null && st == null ) {
-            // TDLog.v( "unused shot " + sh.from + " " + sh.to + " : " + sf.name + " null" );
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
             sh.to_station = s;
-            // TDLog.v( "add station " + sh.to_station.name + " N " + sh.to_station.n + " E " + sh.to_station.e + " Z " + sh.to_station.z );
+            // TDLog.v( "shot " + sh.from + " " + sh.to + " A: " + sf.getShortName() + " add station " + sh.to_station.getShortName() + " N " + sh.to_station.y + " E " + sh.to_station.x + " Z " + sh.to_station.z );
             sh.setUsed( );
             if ( sh.isSurvey() ) {
               mCaveLength += sh.length();
@@ -455,11 +456,10 @@ public class ParserDat extends TglParser
             }
             repeat = true;
           } else if ( sf == null && st != null ) { // always true
-            // TDLog.v( "unused shot " + sh.from + " " + sh.to + " : null " + st.name );
             Cave3DStation s = sh.getStationFromStation( st );
             stations.add( s );
             sh.from_station = s;
-            // TDLog.v( "add station " + sh.from_station.name + " N " + sh.from_station.n + " E " + sh.from_station.e + " Z " + sh.from_station.z );
+            // TDLog.v( "shot " + sh.from + " " + sh.to + " B: " + st.getShortName()  + " add station " + sh.from_station.getShortName() + " N " + sh.from_station.y + " E " + sh.from_station.x + " Z " + sh.from_station.z );
             sh.setUsed( );
             if ( sh.isSurvey() ) {
               mCaveLength += sh.length();

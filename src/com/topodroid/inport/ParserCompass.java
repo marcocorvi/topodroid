@@ -23,6 +23,7 @@ import com.topodroid.types.ExtendType;
 import com.topodroid.types.LegType;
 import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.SurveyInfo;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -46,12 +47,16 @@ class ParserCompass extends ImportParser
   {
     super( apply_declination );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_DAT );
-    // TDLog.v( "Parser Compass <" + filename + ">" );
+    if ( mApplyDeclination ) mDeclination = 0.0f;
+    TDLog.v( "Parser Compass <" + filename + "> apply-declination " + apply_declination );
     // mName = survey name is read from the file
     mLrud     = lrud;
     mLegFirst = leg_first;
     readFile( isr, filename );
     checkValid();
+    if ( mApplyDeclination && mDeclination < SurveyInfo.DECLINATION_MAX ) {
+      mDeclination = 0.0f; // set declination to 0 because it has been already applied
+    }
   }
 
   private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('L') >= 0 ); }
@@ -64,6 +69,7 @@ class ParserCompass extends ImportParser
   /** read input file
    * @param isr input stream reader
    * @param filename input filename
+   * @note if the declination is set it is added to the azimuths
    */
   private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {
@@ -108,6 +114,7 @@ class ParserCompass extends ImportParser
         } else if ( line.startsWith("DECLINATION") ) {
           String[] vals = splitLine(line); // line.split( "\\s+" );
           mDeclination = Float.parseFloat( vals[1] );
+          TDLog.v("Declination " + mDeclination );
         } else if ( line.length() > 8 ) {
           String[] vals = splitLine(line); // line.split( "\\s+" );
           int k = 0;
@@ -167,7 +174,7 @@ class ParserCompass extends ImportParser
                     }
                   }
                 }
-                mBearing = TDMath.in360( mBearing );
+                mBearing = checkApplyDeclination( mBearing, mDeclination );
 
                 // got shot+LRUD
                 int extend = 0;

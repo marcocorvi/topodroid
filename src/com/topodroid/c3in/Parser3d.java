@@ -41,7 +41,13 @@ public class Parser3d extends TglParser
   private double mLeft, mRight, mUp, mDown;
 
   double x0, y0, z0; // saved point
+  private Cave3DStation from0 = null;
 
+  /** cstr
+   * @param app   3d-viewer app
+   * @param dis   data input stream
+   * @param name  ?
+   */
   public Parser3d( TopoGL app, DataInputStream dis, String name ) throws ParserException
   {
     super( app, name );
@@ -54,6 +60,8 @@ public class Parser3d extends TglParser
     setShotsNames();
   }
 
+  /** assign station names to splays and shots
+   */
   private void setShotsNames()
   {
     for (Cave3DShot sp : splays ) {
@@ -64,8 +72,6 @@ public class Parser3d extends TglParser
       sh.to   = sh.to_station.getFullName();
     }
   }
-
-  private Cave3DStation from0 = null;
 
   private void moveTo( double x, double y, double z )
   {
@@ -89,6 +95,11 @@ public class Parser3d extends TglParser
     }
   }
 
+  /** @return the station at a point (within tolerance 1.e-7) or null
+   * @param x  point X coordinate
+   * @param y  point Y coordinate
+   * @param z  point Z coordinate
+   */
   Cave3DStation getStationAt( double x, double y, double z )
   {
     for ( Cave3DStation st : stations ) {

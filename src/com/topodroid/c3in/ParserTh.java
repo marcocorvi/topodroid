@@ -1040,7 +1040,6 @@ public class ParserTh extends TglParser
             if ( sf != null && st != null ) break;
           }
           if ( sf != null && st != null ) {
-            // TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + st.getFullName() );
             sh.setUsed(); // LOOP
 	    ++ used_cnt;
             if ( sh.isSurvey() ) {
@@ -1052,6 +1051,7 @@ public class ParserTh extends TglParser
             }
             // make a fake station
             Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
+            // TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + st.getFullName() + " add " + s.getFullName() + " " + s.x + " " + s.y );
             stations.add( s );
             s.addToName( mLoopCnt ); // s.name = s.name + "-" + mLoopCnt;
             ++ mLoopCnt;
@@ -1060,11 +1060,10 @@ public class ParserTh extends TglParser
             repeat = true; // unnecessary
           } else if ( sf != null && st == null ) {
             // TDLog.v( "TH shot found from " + sh.from + " no station to "  + sh.to );
-            // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " null" );
             Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
             stations.add( s );
             sh.to_station = s;
-            // TDLog.v( "Th add station TO " + sh.from + " " + sh.to + " " + sh.to_station.getFullName() );
+            // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + sf.x + " " + sf.y + " add " + sh.to_station.getFullName() + " " + sh.to_station.x + " " + sh.to_station.y );
             sh.setUsed();
 	    ++ used_cnt;
             if ( sh.isSurvey() ) {
@@ -1077,11 +1076,10 @@ public class ParserTh extends TglParser
             repeat = true;
           } else if ( sf == null && st != null ) {
             // TDLog.v( "TH shot found to " + sh.to + " no station from "  + sh.from );
-            // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.getFullName() );
             Cave3DStation s = sh.getStationFromStation( st, conv ); // HB_conv
             stations.add( s );
             sh.from_station = s;
-            // TDLog.v( "Th add station FR " + sh.from + " " + sh.to + " " + sh.from_station.name  );
+            // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : " + st.getFullName() + " " + st.x + " " + st.y + " add " + sh.from_station.getFullName() + " " + sh.from_station.x + " " + sh.from_station.y  );
             sh.setUsed();
 	    ++ used_cnt;
             if ( sh.isSurvey() ) {

@@ -61,7 +61,7 @@ public class ImportTRobotTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserTopoRobot parser = new ParserTopoRobot( isr, str[0], false ); // apply_declination = false
+      ParserTopoRobot parser = new ParserTopoRobot( isr, str[0], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       String survey = parser.mName;

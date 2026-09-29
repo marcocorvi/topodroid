@@ -122,7 +122,9 @@ The following export formats are no longer supported:
 <b id="compass"><i>Compass</i></b> ".dat"<br>
 <i>Compass</i> data file are supported both in import and in export.<br>
 Supported data format are "normal" and "diving".<br>
-Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br><p>
+Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br>
+The imported azimuths are corrected with the magnetic declination specified in the "dat" file,
+and the declination of the TopoDroid survey is set to 0.<br><p>
 
 Settings:<ul style="margin-top=0">
 <li><u>Station prefix</u>: if given it is prepended to the station names</li>
@@ -151,6 +153,10 @@ Settings:<ul style="margin-top=0">
 
 
 <b id="survex">Survex</b> ".svx"<br>
+<i>Survex</i> data file are supported both in import and in export.<br>
+The imported azimuths are corrected with the magnetic declination specified in the Survex file,
+and the declination of the TopoDroid survey is set to 0.<br><p>
+
 Survey data can be exported as <i>Survex</i> files.<br>
 Data units follow the user options.<br><p>
 
@@ -165,6 +171,10 @@ Settings:<ul style="margin-top=0">
 </ul><p>
 
 <b id="therion">Therion</b> ".th"<br>
+<i>Therion</i> data file are supported both in import and in export.<br>
+The imported azimuths are corrected with the magnetic declination specified in the Therion file,
+and the declination of the TopoDroid survey is set to 0.<br><p>
+
 Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>
 The TopoDroid survey name is used for the <i>Therion</i> cave name, with underscore '_' replaced by space.<br>
 Data units follow the user options.<br><p>
@@ -210,6 +220,9 @@ Fixed points ("fix") are parsed but not taken into account as "cs" is not suppor
 
 <b id="trobot">TopoRobot</b> ".text"<br>
 <i>TopoRobot</i> data file are supported both in import and in export.<br>
+The imported azimuths are corrected with the magnetic declination specified in the TopoRobot file,
+and the declination of the TopoDroid survey is set to 0.<br><p>
+
 Survey data can be exported as <i>TopoRobot</i> files. The <i>TopoRobot</i> station naming policy
 must have been selected. If the station names follow <i>TopoRobot</i> convention "series.number", they are used.<br><p>
 
@@ -223,6 +236,9 @@ of the <u>first shot</u> to export.<br><p>
 
 <b id="vtopo">VisualTopo</b> ".tro", ".trox"<br>
 <i>VisualTopo</i> data file are supported both in import and in export.<br>
+The imported azimuths are corrected with the magnetic declination specified in the VisualTopo file,
+and the declination of the TopoDroid survey is set to 0.<br><p>
+
 <i>VisualTopo</i> splays are included if enabled.<br>
 By default LRUD are at the TO station, but they can be set at the FROM station.<br>
 Data units are 'meters' and 'degrees'.<br>
@@ -239,6 +255,9 @@ Settings:<ul style="margin-top=0">
 
 <b id="walls">Walls</b> ".srv"<br>
 <i>Walls</i> data file are supported both in import and in export.<br>
+The imported azimuths are corrected with the magnetic declination specified in the Walls file,
+and the declination of the TopoDroid survey is set to 0.<br><p>
+
 Survey data can be exported as <i>Walls</i> files (partially tested).<br>
 Data units follow the user options.<br>
 If the "<i>Walls</i> splays" setting is set the splay shots are exported as "named" splays (as for <i>Compass</i>).
