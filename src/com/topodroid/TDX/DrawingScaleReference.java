@@ -199,7 +199,9 @@ class DrawingScaleReference
         canvas.drawLine( x, y, x + canvasLen, y, mPaint);
         canvas.drawLine( x, y, x, y - HEIGHT_BARS, mPaint);
         canvas.drawLine( x + canvasLen, y, x + canvasLen, y - HEIGHT_BARS, mPaint);
-        canvas.drawText( refstr, x + canvasLen / 2, y - HEIGHT_BARS, mPaint);
+        Paint textPaint = new Paint(mPaint); // HBtext
+        textPaint.setTextAlign(Paint.Align.CENTER); // HBtext
+        canvas.drawText( refstr, x + canvasLen / 2, y - HEIGHT_BARS, textPaint); // HBtext
 
         // North arrow line
 	if ( landscape ) {
@@ -308,7 +310,9 @@ class DrawingScaleReference
         canvas.drawLine( locX, locY, locX + canvasLen, locY, paint);
         canvas.drawLine( locX, locY, locX, locY - HEIGHT_BARS, paint);
         canvas.drawLine( locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, paint);
-        canvas.drawText( refstr, locX + canvasLen / 2, locY - HEIGHT_BARS, paint);
+        Paint textPaint = new Paint(paint); // HBtext
+        textPaint.setTextAlign(Paint.Align.CENTER); // HBtext
+        canvas.drawText( refstr, locX + canvasLen / 2 , locY - HEIGHT_BARS, textPaint); // HBtext
 
 	if ( landscape ) {
 	  x = locX/2 + arrowlen;
