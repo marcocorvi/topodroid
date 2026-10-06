@@ -68,14 +68,14 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
-    <!-- TODO string name="pref_gen">General</string -->
-    <!-- TODO string name="pref_ui">User Interface</string -->
-    <!-- TODO string name="pref_data">Data</string -->
-    <!-- TODO string name="pref_plot">Sketch</string -->
-    <!-- TODO string name="pref_3d">3D viewer</string -->
-    <!-- TODO string name="pref_io">Export</string -->
-    <!-- TODO string name="pref_bt">Bluetooth</string -->
-    <!-- TODO string name="pref_cal">Calibration</string -->
+    <string name="pref_gen">Všeobecné</string>
+    <string name="pref_ui">Používateľské rozhranie</string>
+    <string name="pref_data">Dáta</string>
+    <string name="pref_plot">Nákres</string>
+    <string name="pref_3d">3D viewer</string>
+    <string name="pref_io">Export</string>
+    <string name="pref_bt">Bluetooth</string>
+    <string name="pref_cal">Kalibrácia</string>
 
     <string name="cut">VYSTRIHNÚŤ</string>
     <string name="copy">KOPÍROVAŤ</string>
