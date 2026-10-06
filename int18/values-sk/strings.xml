@@ -104,8 +104,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="missing_station">Chýba meračský bod</string>
     <string name="station_not_found">Meračský bod nenájdený</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
-    <!-- TODO string name="station_not_saved">Station not saved</string -->
-    <!-- TODO string name="station_name_conflict">Conflicting names. Continue anyways?</string -->
+    <string name="station_not_saved">Staničenie neuložené</string>
+    <string name="station_name_conflict">Konflikt názvov. Pokračovať napriek tomu?</string>
     <string name="shot_not_found">Zámera nenájdená</string>
     <string name="shot_not_saved">Zámera neuložená</string>
     <string name="bad_sibling">Nesprávna opakovaná zámera</string>
@@ -123,7 +123,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="failed_snap_to_point">V blízkosti nie je žiadny bod "na prichytenie" k Bodu</string>
     <string name="failed_snap_to_splays">V blízkosti nie je pomocná zámera na "prichytenie" ku Čiare</string>
     <string name="failed_append_to_line">Nedá sa pripojiť k ďalšej Čiare</string>
-    <!-- TODO string name="failed_zoomfit">Failed to fit to screen</string -->
+    <string name="failed_zoomfit">Nepodarilo sa prispôsobiť obrazovke</string>
 
     <string name="bric_device">Zariadenie %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
@@ -175,14 +175,14 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="calib_roll">Rozdel. náklonu: %1$.2f &#xb0;</string>
     <string name="calib_reset">Vymazať kalibráciu DistaX?</string>
     <string name="calib_min_error">Malá chyba</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+    <string name="calib_delta_dir">Rozdiel.: %1$.2f ± %2$.2f (max %3$.2f)</string>
     <string name="magn_dip">Magn. uhol &#8230;</string>
     <string name="auto_calib">Auto Calibrácia</string>
     <string name="autocalib_not_supported">Vyžaduje sa výpočet kalibrácie</string>
-    <!-- TODO string name="recalibrate_with">Recompute shots with %1$s</string -->
-    <!-- TODO string name="recalibrate_none">No calibration selected</string -->
-    <!-- TODO string name="recalibrate_no_cavway">Not a Cavway calibration</string -->
-    <!-- TODO string name="recalibrate_no_coeff">No calibration coefficients</string -->
+    <string name="recalibrate_with">Prepočíta zámery s %1$s</string>
+    <string name="recalibrate_none">Nebola vybraná žiadna kalibrácia</string>
+    <string name="recalibrate_no_cavway">Cavway bez kalibrácie</string>
+    <string name="recalibrate_no_coeff">Žiadne koeficienty kalibrácie</string>
     
     <string name="algorithm">Algoritmus kalibrácie:</string>
     <string name="auto">Automatický</string>
@@ -219,7 +219,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="device_status_silent_on">Tichý režim: zapnutý</string>
     <string name="device_status_silent_off">Tichý režim: vypnutý</string>
     <string name="bt_reset">Obnovenie pripojenia Bluetooth</string>
-    <!-- TODO string name="bt_busy">Bluetooth busy</string -->
+    <string name="bt_busy">Bluetooth zaneprázdnený</string>
     <string name="save_as">Uložiť ako</string>
     <string name="nickname">Prezývka NICK</string>
     <string name="unknown_device_type">Neznámy typ zariadenia %1$d</string>
@@ -240,7 +240,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="splay_at_to">LRUD na druhom meračskom bode</string>
     <string name="lrud">LRUD</string>
     <!-- CHANGED string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
-    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
+    <string name="strike_dip">Smer sklonu %1$.0f sklon %2$.0f</string>
 
     <string name="few_data">Nedostatok údajov</string>
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
@@ -316,9 +316,9 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Napíšte poznámku</string>
     <!-- UNUSED string name="photo_failed">Zlyhanie fotografie</string -->
-    <!-- TODO string name="photo_not_ready">Photo not ready. Wait &#8230;</string -->
+    <string name="photo_not_ready">Foto nepripravené. Čakajte &#8230;</string>
     <string name="photo_max_captures">Dosiahnutý maximálny limit</string>
-    <!-- TODO string name="photo_many_pictures">Too many pictures</string -->
+    <string name="photo_many_pictures">Príliš veľa obrázkov</string>
     <string name="label_title">POPIS</string>
     <string name="label_text">Zadajte text popisu</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -343,7 +343,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="fmt_h_geoid">Geoid výška %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Začatie jemnej korekcie pozície</string>
-    <!-- TODO string name="location_enabled">Make sure LOCATION is enabled</string -->
+    <string name="location_enabled">Uistite sa, že je zapnutá POLOHA</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Vyžaduje sa azimut</string>
@@ -459,7 +459,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="no_profile_overview">Celkový pohľad pre Priemet je nepodporovaný</string>
     <string name="no_proj4">Proj4 nie je nainštalovaný</string>
     <string name="no_sensors">Mapovanie nemá žiadne meranie</string>
-    <!-- TODO string name="no_stations">Survey has no stations</string -->
+    <string name="no_stations">Mapovanie nemá žiadne Staničenia</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_search_result">Žiadny výsledok hľadania</string>
     <string name="no_survey">Nie je zvolené mapovanie</string>
@@ -493,7 +493,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="menu_device">ZARIADENIE</string>
     <string name="menu_device_add">PRIDAŤ NEPOMENOVANÉ</string> <!-- PONECHAŤ -->
     <string name="menu_export">EXPORTOVAŤ</string>
-    <!-- TODO string name="menu_exit">EXIT</string -->
+    <string name="menu_exit">EXIT</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GNSS APP</string>
     <string name="menu_recover">OBNOVIŤ</string>
