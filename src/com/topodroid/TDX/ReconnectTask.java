@@ -19,11 +19,12 @@ import android.os.AsyncTask;
 
 class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
-  private DataDownloader mDownloader;
+  private final DataDownloader mDownloader;
   private ReconnectTask  running;
-  private ListerHandler  mLister;
-  private int mDataType; // data type, passed to data_downloader try_connect()
-  private int mDelay = 0;
+  private final ListerHandler  mLister;
+  private final int mDataType; // data type, passed to data_downloader try_connect()
+  private final int mDelay;
+  // MM private final long mGeneration;
 
   /** cstr
    * @param downloader   data downloader
@@ -38,6 +39,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     mDataType = data_type;
     mDelay = delay;
     running = null;
+	// MM mGeneration = downloader.generation();
   }
 
   /** execute the task in background

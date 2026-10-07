@@ -85,7 +85,7 @@ public class DistoXComm extends TopoDroidComm
     try {
       mApp.unregisterReceiver( mBTReceiver );
     } catch ( IllegalArgumentException e ) {
-      TDLog.e( "unregister BT receiver " + e.getMessage() );
+      TDLog.e( "unregister BT receiver error " + e.getMessage() );
     }
     mBTReceiver = null;
   }
@@ -395,7 +395,7 @@ public class DistoXComm extends TopoDroidComm
             mProtocol = createProtocol( in, out );
             mAddress = address;
           } catch ( IOException e ) {
-            TDLog.e( "[6d] create Socket stream " + e.getMessage() );
+            TDLog.e( "[6d] create Socket stream error " + e.getMessage() );
             mAddress = null;
             try {
               mBTSocket.close();
@@ -461,7 +461,7 @@ public class DistoXComm extends TopoDroidComm
             //     TDToast.makeBad( R.string.connection_error  );
             //   }
             // } );
-            TDLog.e( "connect socket() (trial " + trial + ") i/o " + e.getMessage() );
+            TDLog.e( "connect socket() (trial " + trial + ") IO error " + e.getMessage() );
             // TDLog.LogStackTrace( e );
             closeSocket();
             // mBTSocket = null;

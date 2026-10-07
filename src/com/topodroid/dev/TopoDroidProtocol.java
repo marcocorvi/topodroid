@@ -40,6 +40,9 @@ public class TopoDroidProtocol
   protected Context mContext;
   protected int    mDeviceType;
   protected String mDeviceAddress;
+  public String getDeviceAddress() { return mDeviceAddress; } // MM
+  public int getDeviceType() { return mDeviceType; }
+  
   protected PacketLogger mPacketLogger;
 
   protected static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );

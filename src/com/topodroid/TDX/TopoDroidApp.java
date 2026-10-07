@@ -288,7 +288,41 @@ public class TopoDroidApp extends Application
 
   String[] DistoXConnectionError;
   // BluetoothAdapter mBTAdapter = null;     // BT connection
-  private TopoDroidComm mComm = null;     // BT communication
+  private volatile TopoDroidComm mComm = null;     // BT communication
+
+  /* MM
+  private final DeviceSwitchState mDeviceSwitch = new DeviceSwitchState();
+  private long mSwitchSurveyId;
+  private volatile boolean mSwitchCancelled;
+  public boolean isDeviceOperationBusy() 
+  { 
+    boolean ret = mDeviceSwitch.isBusy();
+    if ( ret ) TDToast.makeWarn( R.string.device_operation_busy );
+    return ret;
+  }
+  */
+
+  // MM public boolean isCurrentComm( TopoDroidComm source ) { return source == mComm; }
+
+  // MM public void notifyCommStatus( TopoDroidComm source, ListerHandler lister, int status )
+  // {
+  //   // synchronized ( mDeviceSwitch ) 
+  //   {
+  //     if ( source != mComm ) return;
+  //     if ( mDataDownloader != null ) mDataDownloader.setConnected( status );
+  //   }
+  //   if ( mDataDownloader != null ) {
+  //     if ( status == ConnectionState.CONN_DISCONNECTED && TDInstance.isContinuousMode() ) mDataDownloader.requestReconnect( mListerSet, DataType.DATA_SHOT, 500 );
+  //   }
+  //   TDandroid.runOnMainThread(
+  //     new Runnable() { public void run () { 
+  //       if ( source != mComm ) return;
+  //       if ( mListerSet != null ) mListerSet.setConnectionStatus( status );
+  //       if ( lister != null && lister != mListerSet ) lister.setConnectionStatus( status );
+  //     }
+  //   } );
+  // }
+  
   public DataDownloader mDataDownloader = null;  // data downloader
   public static DataHelper mData = null;         // database 
   public static DeviceHelper mDData = null;      // device/calib database
@@ -747,12 +781,15 @@ public class TopoDroidApp extends Application
   private void deleteComm( boolean disconnect ) // FIXME BLE5
   {
     // TDLog.v( "APP: delete comm - disconnect " + disconnect );
-    if ( mComm != null ) {
-      if ( disconnect || mComm.isConnected() ) {
-        mComm.disconnectRemoteDevice(); 
+	TopoDroidComm comm = mComm;
+	mComm = null;
+    if ( comm != null ) {
+      if ( disconnect || comm.isConnected() ) {
+        comm.disconnectRemoteDevice(); 
       }
-      mComm.terminate();
-      mComm = null;
+      comm.terminate();
+      // MM replace the above with
+	  // comm.shutdown();
     }
   }
 
@@ -774,7 +811,11 @@ public class TopoDroidApp extends Application
     // TDLog.v( "TDApp: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     // return mComm != null && mComm.connectDevice( address, mListerSet, data_type, timeout ); // FIXME_LISTER
     if ( lister == null ) lister = mListerSet;
-    return mComm != null && mComm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
+    TopoDroidComm comm = mComm; 
+    if ( comm == null ) return false;
+	// MM insert also
+    // comm.bindDataContext( TDInstance.sid, TDInstance.cid, address, TDInstance.deviceType() );
+    return comm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
   }
 
   /** disconnect from a decive
@@ -1009,6 +1050,9 @@ public class TopoDroidApp extends Application
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
           return;
         }
+      // } else if ( TDInstance.isDeviceXBLE() ) { // MM insert this if
+      //   CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
+      //   return; 
       } else if ( TDInstance.isDeviceBric() ) {
         // TDLog.v( "bt button over advanced : BRIC");
         if ( mComm != null && mComm.isConnected() ) { // FIXME BRIC_TESTER

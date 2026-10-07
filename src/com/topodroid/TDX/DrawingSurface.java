@@ -50,6 +50,10 @@ import java.io.PrintWriter;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
 
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
+
 /**
  */
 public class DrawingSurface extends SurfaceView // TH2EDIT was package
@@ -75,6 +79,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   private int mHeight;           // canvas height
   private long mType; 
 
+  private DrawingLabelPath mLabelPath;
+
   static private DrawingCommandManager commandManager = null; 
 
   static private DrawingCommandManager mCommandManager1 = null;
@@ -88,7 +94,63 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   boolean hasCommandManager() { return commandManager != null; }
 
+  void setLabelPath( DrawingLabelPath path ) // SR
+  {
+    mLabelPath = path;
+    TDLog.v("LABEL setLabelPath: " + (path != null));
+    if ( path != null ) {
+      setFocusableInTouchMode( true );
+      setFocusable( true );
+      requestFocus();
+      TDLog.v("LABEL hasFocus: " + hasFocus());
+    } else {
+      clearFocus();
+    }
+  }
 
+  @Override
+  public boolean onCheckIsTextEditor() // SR
+  {
+    TDLog.v("LABEL onCheckIsTextEditor: " + (mLabelPath != null));
+    return mLabelPath != null;
+  }
+
+  @Override
+  public InputConnection onCreateInputConnection( EditorInfo outAttrs ) // SR
+  {
+    TDLog.v("LABEL onCreateInputConnection: " + (mLabelPath != null));
+    if ( mLabelPath == null ) return null;
+    outAttrs.inputType = android.text.InputType.TYPE_CLASS_TEXT
+                       | android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE;
+    outAttrs.imeOptions = EditorInfo.IME_ACTION_NONE;
+
+    return new BaseInputConnection( this, false )
+    {
+      @Override
+      public boolean commitText( CharSequence text, int newCursorPosition )
+      {
+        TDLog.v("LABEL commitText [" + text + "]");
+        if ( mLabelPath != null && text != null ) {
+          for ( int i = 0; i < text.length(); ++i ) {
+            mLabelPath.addTextChar( Character.toChars( text.charAt(i) ) );
+          }
+        }
+        return true;
+      }
+
+      @Override
+      public boolean deleteSurroundingText( int beforeLength, int afterLength )
+      {
+        TDLog.v("LABEL deleteSurroundingText " + beforeLength + " " + afterLength);
+        if ( mLabelPath != null && beforeLength > 0 ) {
+          for ( int i = 0; i < beforeLength; ++i ) {
+            mLabelPath.delTextChar();
+          }
+        }
+        return true;
+      }
+    };
+  }
   // -----------------------------------------------------
   // SCRAPS 
 

@@ -101,11 +101,12 @@ public class CavwayComm extends BleComm
   BluetoothGattCharacteristic mWriteChrt = null;
   //private boolean mReadInitialized  = false;
   //private boolean mWriteInitialized = false;
-  private boolean mReconnect = false;
-  private boolean mSkipNotify = false;
+  private volatile boolean mReconnect = false;
+  private volatile boolean mSkipNotify = false;
   private int mReadingMemory = READ_NONE; // 0 none; 1 memory; 2 coeffs
 
   private int mDataType;
+  private volatile int mProcessedPackets; // MM
   private int mPacketType;  // type of the last incoming packet that has been read
 
   // private Timer mTimer;
@@ -200,6 +201,7 @@ public class CavwayComm extends BleComm
             if ( res == CavwayProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
               // if ( mPacketToRead > 0 ) mPacketToRead --; // only for shot data from laser task
+              mProcessedPackets = mNrReadPackets; // MM
               mPacketType = res;
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
@@ -535,7 +537,7 @@ public class CavwayComm extends BleComm
   {
     if ( LOG ) TDLog.v( TAG + "written descr, bytes " + bytes.length );
     if ( uuid_str.equals( BleUtils.CCCD_UUID_STR ) ) { // a notify op - 202301818 using CCCD_UUID_STR
-      if ( bytes != null ) {
+      if ( bytes != null && bytes.length > 0 ) {
         if ( bytes[0] != 0 ) { // set notify/indicate
           if ( LOG ) TDLog.v( TAG + "CCCD set notify " + bytes[0] + " chrt " + uuid_chrt_str );
           // here we may save the UUID of notifying characteristics
@@ -1331,13 +1333,14 @@ public class CavwayComm extends BleComm
     if ( LOG ) TDLog.v( TAG + "cavway batch download, address " + address + " data_type " + data_type );
     // mConnectionMode = 0;
     mDataType = data_type;
-    if ( ! tryConnectDevice( address, lister, 0 ) ) return -1; 
     mNrReadPackets = 0;
+    mProcessedPackets = 0; // MM fix reordering
+    mPacketType = CavwayProtocol.PACKET_NONE;
+    if ( ! tryConnectDevice( address, lister, data_type ) ) return -1;
 
     //sendCommand( 0x40 );     // start send measure packet ???
     TDUtil.yieldDown( 500 );
     // ??? start a thread that keeps track of read packets - when read done stop it and return
-    mPacketType = CavwayProtocol.PACKET_NONE;
     synchronized ( mNewDataFlag ) {
       while( true ) {
         if ( syncWait( 2000, "data download" ) ) {

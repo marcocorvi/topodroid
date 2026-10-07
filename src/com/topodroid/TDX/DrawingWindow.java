@@ -5319,7 +5319,10 @@ public class DrawingWindow extends ItemDrawer
                     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
                   }
                   mLabelPath = makeLabelPath( "", xs, ys, DrawingLevel.LEVEL_DEFAULT );
-                  showSoftKeyboard();
+                  if ( mLabelPath != null ) { // SR
+                    mDrawingSurface.setLabelPath( mLabelPath );
+                    showSoftKeyboard();
+                  }
                 }
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
                 new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
@@ -11078,13 +11081,23 @@ public class DrawingWindow extends ItemDrawer
   /** show the soft keyboard for the drawing surface (view)
    */
   private void showSoftKeyboard( )
-  { 
-    // TDLog.v("shot soft keyboard");
-    InputMethodManager imm = getSystemService( InputMethodManager.class );
-    // imm.showSoftInput( myView, InputMethodManager.SHOW_IMPLICIT ); // these two do not work for the second label point
-    // imm.showSoftInput( myView, InputMethodManager.SHOW_FORCED );
-    imm.toggleSoftInput( InputMethodManager.SHOW_FORCED, 0 ); // this works
-    myView.requestFocus();
+  {
+    // InputMethodManager imm = getSystemService( InputMethodManager.class );
+    // // imm.showSoftInput( myView, InputMethodManager.SHOW_IMPLICIT ); // these two do not work for the second label point
+    // // imm.showSoftInput( myView, InputMethodManager.SHOW_FORCED );
+    // imm.toggleSoftInput( InputMethodManager.SHOW_FORCED, 0 ); // this works
+    // myView.requestFocus();
+	
+    mDrawingSurface.setFocusableInTouchMode( true ); // SR
+    mDrawingSurface.requestFocus();
+    mDrawingSurface.post(new Runnable() {
+      @Override
+      public void run() {
+        InputMethodManager imm = getSystemService( InputMethodManager.class );
+        TDLog.v("LABEL showSoftInput hasFocus=" + mDrawingSurface.hasFocus());
+        imm.showSoftInput( mDrawingSurface, InputMethodManager.SHOW_IMPLICIT );
+      }
+    });
   }
 
   /** hide the soft keyboard for the drawing surface (view)

@@ -52,8 +52,18 @@ public class TopoDroidComm
   public String mAddress;
   public TopoDroidProtocol mProtocol;
 
-  public boolean mBTConnected;
-
+  public volatile boolean mBTConnected;
+  
+  // MM begin
+  private long mSurveyId = -1;
+  private long mCalibrationId = -1;
+  private int mSourceType = -1;
+  protected volatile boolean mRemoteOperation;
+  protected long surveyId() { return mSurveyId >= 0 ? mSurveyId : TDInstance.sid; }
+  protected long calibrationId() { return mCalibrationId >= 0 ? mCalibrationId : TDInstance.cid; }
+  protected String sourceAddress() { return mProtocol == null ? mAddress : mProtocol.getDeviceAddress(); }
+  protected int sourceType() { return mProtocol == null ? mSourceType : mProtocol.getDeviceType(); }
+  // end MM
   public CommThread mCommThread = null;
 
   public byte[] mCoeff;
@@ -100,7 +110,7 @@ public class TopoDroidComm
   public boolean handleBricPacket( long index, ListerHandler lister, int data_type, float clino_error, float azimuth_error, String comment )
   {
     // TODO this assert should be uncommented but  cannot test it
-    // assert( TDInstance.deviceType() == Device.DISTO_BRIC4 || TDInstance.deviceType() == Device.DISTO_BRIC5 );
+    // assert( sourceType() == Device.DISTO_BRIC4 || sourceType() == Device.DISTO_BRIC5 );
     // TDLog.v( "TD comm: packet DATA");
     ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
     double d = mProtocol.mDistance;
@@ -115,9 +125,9 @@ public class TopoDroidComm
     // TDLog.v( "TD comm: handle BRIC packet " + index + " " + d + " " + b + " " + c + " time " + time );
     int leg_type = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
-    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg_type, status, comment, TDInstance.deviceAddress(), index, time );
-    // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
-    // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
+    long id = TopoDroidApp.mData.insertBricShot( surveyId(), /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg_type, status, comment, sourceAddress(), index, time );
+    // TopoDroidApp.mData.updateShotAMDR( mLastShotId, surveyId(), clino_error, azimuth_error, dip, r, false );
+    // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, surveyId(), comment );
 
     if ( id == -1L ) {
       TDLog.e("Handle BRIC packet failure");
@@ -131,7 +141,7 @@ public class TopoDroidComm
       bundle.putLong( Lister.BLOCK_ID, mLastShotId );
       msg.setData(bundle);
       lister.sendMessage(msg);
-      if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+      if ( sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
@@ -151,14 +161,14 @@ public class TopoDroidComm
   //   TDLog.v( "TD comm: packet ZERO " + mNrReadPackets );
   //   double r = mProtocol.mRoll;
   //   long status = TDStatus.NORMAL;
-  //   mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress(), index );
+  //   mLastShotId = TopoDroidApp.mData.insertDistoXShot( surveyId(), index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, sourceAddress(), index );
   //   if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
   //     Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
   //     Bundle bundle = new Bundle();
   //     bundle.putLong( Lister.BLOCK_ID, mLastShotId );
   //     msg.setData(bundle);
   //     lister.sendMessage(msg);
-  //     if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+  //     if ( sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
   //       TDUtil.slowDown( TDSetting.mWaitData );
   //     }
   //   } else {
@@ -177,7 +187,7 @@ public class TopoDroidComm
    */
   public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment, int scan_bit )
   {
-    assert( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 );
+    assert( sourceType() == Device.DISTO_CAVWAYX1 );
     if ( res == DataType.PACKET_DATA ) {
       ++mNrReadPackets;
 
@@ -201,8 +211,8 @@ public class TopoDroidComm
         mScanSetIdx = 0; // do not set scan-index field in the database
       }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
-      mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
-              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, status, comment, TDInstance.deviceAddress(),
+      mLastShotId = TopoDroidApp.mData.insertCavwayShot(surveyId(), -1L, d, b, c, r, mProtocol.mMagnetic,
+              mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, status, comment, sourceAddress(),
               mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mScanSetIdx, time);
       // FIXME
       //      (int) mProtocol.mMX2, (int) mProtocol.mMY2, (int) mProtocol.mMZ2, (int) mProtocol.mGX2, (int) mProtocol.mGY2, (int) mProtocol.mGZ2);
@@ -211,7 +221,7 @@ public class TopoDroidComm
       // TDLog.v(" last shot id " + mLastShotId + " scan-set id " + mScanSetIdx );
 
       // this only updates the mBcakshot: it could be done in the previous call
-      TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
+      TopoDroidApp.mData.updateShotAMDR(mLastShotId, surveyId(), mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
       if (TDSetting.mWaitData > 10) {
         TDUtil.slowDown(TDSetting.mWaitData);
       }
@@ -223,7 +233,7 @@ public class TopoDroidComm
         bundle.putLong(Lister.BLOCK_ID, mLastShotId);
         msg.setData(bundle);
         lister.sendMessage(msg);
-        if (TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10) {
+        if (sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10) {
           TDUtil.slowDown(TDSetting.mWaitData);
         }
       }
@@ -235,7 +245,7 @@ public class TopoDroidComm
         long c_blk = -1L;
         if ( mProtocol instanceof CavwayProtocol ) {
           // CavwayProtocol proto = (CavwayProtocol)mProtocol;
-          c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, 
+          c_blk = TopoDroidApp.mDData.insertGM(calibrationId(),
             CavwayData.longToSignedInt1( mProtocol.mGX ), 
             CavwayData.longToSignedInt1( mProtocol.mGY ),
             CavwayData.longToSignedInt1( mProtocol.mGZ ),
@@ -243,7 +253,7 @@ public class TopoDroidComm
             CavwayData.longToSignedInt1( mProtocol.mMY ),
             CavwayData.longToSignedInt1( mProtocol.mMZ ),
             mProtocol.mTime );
-          TopoDroidApp.mDData.updateGMsecond( TDInstance.cid, c_blk, 
+          TopoDroidApp.mDData.updateGMsecond( calibrationId(), c_blk,
             CavwayData.longToSignedInt2( mProtocol.mGX ), 
             CavwayData.longToSignedInt2( mProtocol.mGY ),
             CavwayData.longToSignedInt2( mProtocol.mGZ ),
@@ -251,7 +261,7 @@ public class TopoDroidComm
             CavwayData.longToSignedInt2( mProtocol.mMY ),
             CavwayData.longToSignedInt2( mProtocol.mMZ ) );
         } else {
-          c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, 
+          c_blk = TopoDroidApp.mDData.insertGM(calibrationId(),
             mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mTime );
         }
         if ( lister != null && c_blk >= 0 ) {
@@ -286,10 +296,10 @@ public class TopoDroidComm
       // TDLog.v( "TD comm: D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress(), 0 );
-      assert( TDInstance.deviceType() != Device.DISTO_CAVWAYX1 );
-      // if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1) {
-      //   TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
+      mLastShotId = TopoDroidApp.mData.insertDistoXShot( surveyId(), -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, sourceAddress(), 0 );
+      assert( sourceType() != Device.DISTO_CAVWAYX1 );
+      // if ( sourceType() == Device.DISTO_CAVWAYX1) {
+      //   TopoDroidApp.mData.updateShotAMDR(mLastShotId, surveyId(), mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
       //   if ( TDSetting.mWaitData > 10 ) {
       //     TDUtil.slowDown( TDSetting.mWaitData );
       //   }
@@ -301,7 +311,7 @@ public class TopoDroidComm
         bundle.putLong( Lister.BLOCK_ID, mLastShotId );
         msg.setData(bundle);
         lister.sendMessage(msg);
-        if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+        if ( sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );
         }
       } else {
@@ -309,7 +319,7 @@ public class TopoDroidComm
       }
       // if ( lister != null ) {
       //   DBlock blk = new DBlock( );
-      //   blk.setId( mLastShotId, TDInstance.sid );
+      //   blk.setId( mLastShotId, surveyId() );
       //   blk.mLength  = (float)d;
       //   blk.mBearing = (float)b;
       //   blk.mClino   = (float)c;
@@ -326,7 +336,7 @@ public class TopoDroidComm
       // get G and M from mProtocol and save them to store
       // TDLog.v( "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
       if ( ! lister.hasDialog() ) {
-        long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mTime );
+        long c_blk = TopoDroidApp.mDData.insertGM( calibrationId(), mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mTime );
         if ( lister != null ) {
           Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
           Bundle bundle = new Bundle();
@@ -335,7 +345,7 @@ public class TopoDroidComm
           lister.sendMessage(msg);
         }
       } else { // AUTO-CALIB
-        TDLog.v("AutoCalib CID " + TDInstance.cid + " has-G " + mHasG );
+        TDLog.v("AutoCalib CID " + calibrationId() + " has-G " + mHasG );
         if ( mHasG ) {
           Message msg = lister.obtainMessage( Lister.LIST_AUTO_CALIB );
           Bundle bundle = new Bundle();
@@ -396,8 +406,8 @@ public class TopoDroidComm
       double roll = mProtocol.mRoll;
       boolean backshot = mProtocol.mBackshot;
       // TDLog.Log( TDLog.LOG_COMM, "Comm V PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
-      if ( TDInstance.deviceType() == Device.DISTO_X310 || TDInstance.deviceType() == Device.DISTO_XBLE ) {
-        TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, backshot );
+      if ( sourceType() == Device.DISTO_X310 || sourceType() == Device.DISTO_XBLE ) {
+        TopoDroidApp.mData.updateShotAMDR( mLastShotId, surveyId(), acc, mag, dip, roll, backshot );
         if ( TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );
         }
@@ -408,7 +418,7 @@ public class TopoDroidComm
           bundle.putLong( Lister.BLOCK_ID, mLastShotId );
           msg.setData(bundle);
           lister.sendMessage(msg);
-          if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+          if ( sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
             TDUtil.slowDown( TDSetting.mWaitData );
           }
         } else {

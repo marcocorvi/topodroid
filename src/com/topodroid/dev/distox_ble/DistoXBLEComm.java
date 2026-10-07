@@ -43,7 +43,7 @@ import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.IMemoryDialog;
 import com.topodroid.packetX.MemoryOctet;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.ui.TDProgress;
@@ -86,10 +86,11 @@ public class DistoXBLEComm extends BleComm
   BluetoothGattCharacteristic mWriteChrt = null;
   //private boolean mReadInitialized  = false;
   //private boolean mWriteInitialized = false;
-  private boolean mReconnect = false;
-  private boolean mSkipNotify = false;
+  private volatile boolean mReconnect = false;
+  private volatile boolean mSkipNotify = false;
 
   private int mDataType;
+  private volatile int mProcessedPackets; // MM
   private int mPacketType;  // type of the last incoming packet that has been read
 
   // private int mPacketToRead = 0; // number of packet to read with laser-commands
@@ -124,7 +125,7 @@ public class DistoXBLEComm extends BleComm
           if ( buffer == null ) continue;
           if ( buffer.type == BleQueue.DATA_PRIM ) {
             if ( buffer.data == null) {
-              TDLog.t( "XBLE commi consumer: buffer PRIM with null data");
+              TDLog.t( "XBLE comm consumer: buffer PRIM with null data");
               continue;
             }
             // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
@@ -439,7 +440,7 @@ public class DistoXBLEComm extends BleComm
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     if ( uuid_str.equals( BleUtils.CCCD_UUID_STR ) ) { // a notify op - 202301818 using CCCD_UUID_STR
-      if ( bytes != null ) {
+      if ( bytes != null && bytes.length > 0 ) {
         if ( bytes[0] != 0 ) { // set notify/indicate
           if ( LOG ) TDLog.v("XBLE CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
           // here we may save the UUID of notifying characteristics
@@ -1091,13 +1092,14 @@ public class DistoXBLEComm extends BleComm
     // if ( LOG ) TDLog.v("XBLE comm batch download " + address );
     // mConnectionMode = 0;
     mDataType = data_type;
-    if ( ! tryConnectDevice( address, lister, 0 ) ) return -1; 
     mNrReadPackets = 0;
+    mProcessedPackets = 0; // MM reorder
+    mPacketType = DistoXBLEProtocol.PACKET_NONE;
+    if ( ! tryConnectDevice( address, lister, data_type ) ) return -1;
 
     //sendCommand( 0x40 );     // start send measure packet ???
     TDUtil.yieldDown( 500 );
     // ??? start a thread that keeps track of read packets - when read done stop it and return
-    mPacketType = DistoXBLEProtocol.PACKET_NONE;
     synchronized ( mNewDataFlag ) {
       while( true ) {
         if ( syncWait( 2000, "data download" ) ) {

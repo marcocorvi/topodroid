@@ -34,10 +34,21 @@ public class DataDownloader
   private final TopoDroidApp mApp;
   private ListerHandler mLister = null;
 
-  private int mConnected = ConnectionState.CONN_DISCONNECTED;  // whether it is "connected": 0 unconnected, 1 connecting, 2 connected
-  private boolean mDownloading  = false;  // whether it is "downloading"
+  private volatile int mConnected = ConnectionState.CONN_DISCONNECTED;  // whether it is "connected": 0 unconnected, 1 connecting, 2 connected
+  private volatile boolean mDownloading  = false;  // whether it is "downloading"
+  // MM private volatile long mGeneration;
+  // MM private ReconnectTask mReconnectTask;
 
   // boolean isConnected() { return mConnected == ConnectionState.CONN_CONNECTED; }
+
+  /** cstr
+   * @param context context (unused)
+   * @param app     app
+   */
+  DataDownloader( Context context, TopoDroidApp app ) 
+  {
+    mApp = app;
+  }
 
   /** @return true if it is downloading
    */
@@ -95,26 +106,7 @@ public class DataDownloader
    */
   int getStatus()
   {
-    if ( ! mDownloading ) return ConnectionState.CONN_DISCONNECTED;
-    return mConnected;
-    // if ( mConnected == 0 ) {
-    //   if ( TDSetting.mAutoReconnect ) return ConnectionState.CONN_WAITING;
-    //   return ConnectionState.CONN_DISCONNECTED;
-    // } else if ( mConnected == 1 ) {
-    //   return ConnectionState.CONN_WAITING;
-    // } // else mConnected == 2
-    // return ConnectionState.CONN_CONNECTED;
-  }
-
-  /** cstr
-   * @param context   context (unused)
-   * @param app       application
-   */
-  DataDownloader( Context context, TopoDroidApp app )
-  {
-    // mContext = context;
-    mApp     = app;
-    // mBTReceiver = null;
+    return  mDownloading ? mConnected : ConnectionState.CONN_DISCONNECTED;
   }
 
   /** toggle the "download" status
