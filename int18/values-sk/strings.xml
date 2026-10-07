@@ -1227,12 +1227,12 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_drop_surveys">Zahodiť Mapovania</string>
     <string name="help_color_surveys">Zmeniť farbu Mapovania</string>
     <string name="help_view_surveys">Zobraziť Mapovania</string>
-    <string name="help_view_equates">Porovnanie</string>
+    <string name="help_view_equates">Stotožnenia</string>
     <string name="help_export_config">Export Projektu</string>
     <string name="help_delete_config">Vymazať Projekt</string>
-    <string name="help_add_equate">Pridať Mapovania na porovnanie</string>
+    <string name="help_add_equate">Pridať Stotožnenie</string>
     <string name="help_all_equates">Všetky možné stotožnenia</string>
-    <string name="help_equates">Zoznam porovnaní</string>
+    <string name="help_equates">Zoznam Stotožnení</string>
     <string name="help_stations_minus">Zobraziť menej Staničení</string>
     <string name="help_stations_plus">Zobraziť viacej Staničení</string>
 
@@ -1304,22 +1304,22 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_azimut">Smerová orientácia</string>
     <string name="title_audio">Zvukový komentár</string>
     <string name="title_audio_list">Audio nahrávky</string>
-    <!-- TODO string name="title_bt_search">Bluetooth scan</string -->
-    <!-- TODO string name="title_recalibrate">Calibrations</string -->
+    <string name="title_bt_search">Bluetooth skan</string>
+    <string name="title_recalibrate">Kalibrácie</string>
     <string name="title_calib">Kalibrácie</string>
     <string name="title_calib_check">Kalibrácia - Kontrolné merania</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribúcia kalibračných údajov</string>
     <string name="title_coeff">Kalibračné koeficienty</string>
-    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
+    <string name="title_coeff_two">Kalibračné koeficienty [%1$d]</string>
     <string name="title_color_picker">Vyber farbu</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_search">Staničenia/Hľadanie zámer</string>
-    <!-- TODO string name="title_stations">Stations</string -->
-    <!-- TODO string name="title_plot_search">Station search</string -->
-    <!-- TODO string name="title_pref_search">Settings search</string -->
+    <string name="title_stations">Staničenia</string>
+    <string name="title_plot_search">Vyhľadávanie Staničení</string>
+    <string name="title_pref_search">Vyhľadávania Nastavení</string>
     <string name="title_gm_search">Hľadanie kalibračných dát</string>
     <string name="title_dangling">Nepripojené zámery</string>
     <string name="title_device">DistoX</string>
@@ -1367,7 +1367,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_scraps">Nákresy</string>
     <string name="title_scraps_outline">Nákres obrysu</string>
     <!-- UNUSED string name="title_select">Select</string -->
-    <!-- TODO string name="setting" >setting</string -->
+    <string name="setting" >Nastavenia</string>
 
     <string name="title_settings_main">TopoDroid Hlavné nastavenia</string>
     <string name="title_settings_export">TopoDroid Import/Export nastavenia</string>
@@ -1386,7 +1386,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_settings_gpx">GPX nastavenia Exportu</string>
     <string name="title_settings_kml">KML nastavenia Exportu</string>
     <string name="title_settings_srv">Walls nastavenia Exportu</string>
-    <!-- TODO string name="title_settings_ply">Polygon export settings</string -->
+    <string name="title_settings_ply">Nastavenia exportu Polygónu</string>
 
     <string name="title_settings_sketch">TopoDroid 3D nastavenia</string>
     <string name="title_settings_survey">TopoDroid nastavenie Mapovania</string>
@@ -1429,14 +1429,14 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_survey_new">Nové mapovanie</string>
     <string name="title_survey_export">Export mapovania</string>
     <string name="title_survey_rename">Premenovať mapovanie</string>
-    <!-- TODO string name="title_station_photo">Station photo</string -->
+    <string name="title_station_photo">Foto Staničenia</string>
     <string name="title_team_dialog">Mená tímu</string>
-    <!-- TODO string name="title_plot_rename">Sketch operations</string -->
+    <string name="title_plot_rename">Správa Nákresov</string>
     <string name="title_plot_zoomfit">Orientácia</string>
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_read_names">Station names map</string -->
+    <string name="title_read_names">Názvy Staničení</string>
     <string name="title_import_shot">Import Mapovania</string>
     <string name="title_import_gps">Import bodov GPS</string>
     <string name="title_import_th2">Therion th2 file</string>
@@ -1451,8 +1451,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_bulk_export_title">Bulk data export</string -->
-  <!-- TODO string name="pref_bulk_export_summary">Bulk data export of all surveys</string -->
+  <string name="pref_bulk_export_title">Export objemných dát</string>
+  <string name="pref_bulk_export_summary">Export objemných dát všetkých Mapovaní</string>
   <string name="pref_export_plot_title">Formát exportu Nákresu</string>
   <string name="pref_export_plot_summary">Predvolený formát Nákresu pri Exporte</string>
   <string name="pref_export_shots_title">Formát exportu Dát</string>
@@ -1483,8 +1483,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_orientation_summary">Orientácia obrazovky aplikácie</string>
   <string name="pref_single_back_title">Tlačidlo Späť - jedno stlačenie</string>
   <string name="pref_single_back_summary">Zatvorí okno stlačením tlačidla Späť len jeden krát (namiesto dvojkliku)</string>
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+  <string name="pref_hide_navbar_title">Navigačný panel</string>
+  <string name="pref_hide_navbar_summary">Skrytý. Ukáže sa po sliding up</string>
 
   <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Výber typu zobrazenia surových (nespracovaných) dát</string>
@@ -1552,16 +1552,16 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_unnamed_device_summary">Povolí menu na vloženie názvu zariadenia</string> <!-- KEEP -->
   <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
-  <!-- TODO string name="pref_with_media_title">Media export</string -->
-  <!-- TODO string name="pref_with_media_summary">Include media in export [cSurvey]</string -->
+  <string name="pref_with_media_title">Export médií</string>
+  <string name="pref_with_media_summary">Zahrnie médiá do exportu [cSurvey]</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
   <string name="pref_walls_splays_title">Walls pomocné zámery</string>
   <string name="pref_walls_splays_summary">Export pomocných zámer do Walls súborov</string>
-  <!-- TODO string name="pref_ply_lrud_title">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_lrud_summary">Polygon LRUD</string -->
-  <!-- TODO string name="pref_ply_minus_title">Polygon minus</string -->
-  <!-- TODO string name="pref_ply_minus_summary">Polygon minus</string -->
+  <string name="pref_ply_lrud_title">Polygon LRUD</string>
+  <string name="pref_ply_lrud_summary">Polygon LRUD</string>
+  <string name="pref_ply_minus_title">Polygon mínus</string>
+  <string name="pref_ply_minus_summary">Polygon mínus</string>
   <string name="pref_vtopo_splays_title">VisualTopo pomocné zámery</string>
   <string name="pref_vtopo_splays_summary">Exportuje pomocné zámery do programu VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD na Počiatočnom Bode</string>
@@ -1695,8 +1695,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_pt_color_map_summary">Import podľa farieb z PocketTopo</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
   <string name="pref_text_size_summary">Veľkosť textu v hlavnom okne a v okne merania</string>
-  <!-- TODO string name="pref_symbol_size_title">Symbol size</string -->
-  <!-- TODO string name="pref_symbol_size_summary">Size of symbols in bottom bar</string -->
+  <string name="pref_symbol_size_title">Veľkosť Symbolu</string>
+  <string name="pref_symbol_size_summary">Veľkosť symbolu v spodnom panely</string>
   <string name="pref_closeness_title">Veľkosť výberu objektov</string>
   <string name="pref_closeness_message">Prednastavená veľkosť pri výbere objektov v Režime Editácie</string>
   <string name="pref_eraseness_title">Rozsah veľkosti gumy</string>
@@ -1851,10 +1851,10 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_label_size_summary">Veľkosť písmen v symbole BOD - Poznámka (priamo v nákrese)</string>
   <string name="pref_scalable_label_title">Zmena veľkosti písmen v Poznámke</string>
   <string name="pref_scalable_label_summary">Veľkosť písmen sa mení s priblížením</string>
-  <!-- TODO string name="pref_xsection_offset_title">XSection offset</string -->
-  <!-- TODO string name="pref_xsection_offset_summary">Offset of section points</string -->
-  <!-- TODO string name="pref_plot_cache_title">Sketch cache</string -->
-  <!-- TODO string name="pref_plot_cache_summary">Whether to cache sketches in memory</string -->
+  <string name="pref_xsection_offset_title">Offset Priečnych rezov</string>
+  <string name="pref_xsection_offset_summary">Offset bodov Priečnych rezov</string>
+  <string name="pref_plot_cache_title">Vyrovnávacia pamäť Nákresov</string>
+  <string name="pref_plot_cache_summary">Či zahrnúť Nákresy do vyrovnávacej pamäte</string>
   <string name="pref_slope_lside_title">Línia sklonu l-side</string>
   <string name="pref_slope_lside_summary">Predvolená línia sklonu l-side</string>
   <string name="pref_arrow_length_title">Šírka čiary priečneho rezu</string>
@@ -1937,8 +1937,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_LRExtend_summary">Odhadnúť Smerovú orientáciu vľavo/vpravo (len pre import Compass VisualTopo)</string>
   <string name="pref_diving_mode_title">Potápačský mód</string>
   <string name="pref_diving_mode_summary">Povolí potápačský mód</string>
-  <!-- TODO string name="pref_shot_tampering_title">Shot tampering</string -->
-  <!-- TODO string name="pref_shot_tampering_summary">Downloaded shots editing</string -->
+  <string name="pref_shot_tampering_title">Manipulácia so Zámeramy</string>
+  <string name="pref_shot_tampering_summary">Povolí editáciu hodnôt stiahnutých Zámer</string>
   <string name="pref_splay_classes_title">Triedy pomocných zámer</string>
   <string name="pref_splay_classes_summary">Povolí zaradenie pomocných zámer do tried</string>
   <string name="pref_splay_color_title">Označovanie pomocných zámer</string>
@@ -2084,7 +2084,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="no_editor">Editor nenájdený</string>
     <string name="no_file">Súbor nenájdený</string>
     <string name="no_path">Chýba cesta k súboru</string>
-    <string name="no_equate">Žiadne porovnanie</string>
+    <string name="no_equate">Žiadne Stotožnenie</string>
     <string name="no_surveys">Žiadne Mapovania</string>
     <string name="no_tdconfig">Chýba tdconfig súbor</string>
     <string name="no_th_file">Žiadny Therion súbor</string>
@@ -2093,7 +2093,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <!-- UNUSED string name="oom">Warning. Out of memory</string -->
 
     <string name="ask_delete_tdconfig">Vymazať TdConfig súbor</string>
-    <string name="ask_remove_equate">Odstrániť porovnanie %1$s ?</string>
+    <string name="ask_remove_equate">Odstrániť stotožnenie %1$s ?</string>
     <!-- UNUSED string name="equate_no_station">No station selected</string -->
     <string name="equate_no_stations">Príliš málo Staničení</string>
     <string name="equate_no_nearby">V blízkosti nie je žiadne Staničenie</string>
@@ -2108,12 +2108,12 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
 
     <string name="title_export_settings">Nastavenia Import/Export</string>
     <string name="title_export">Export projekt ako &#8230;</string>
-    <string name="title_equates">Projekt Porovnanie</string>
-    <string name="title_equate_new">Pridaj Porovnanie &#8230;</string>
-    <!-- TODO string name="button_equate_all">All</string -->
-    <!-- TODO string name="button_equate_one">One</string -->
-    <!-- TODO string name="button_equate_search">Search</string -->
-    <string name="title_equate_with">Porovnanie %1$s a %2$s</string>
+    <string name="title_equates">Projekt Stotožnení</string>
+    <string name="title_equate_new">Pridaj Stotožnenie &#8230;</string>
+    <string name="button_equate_all">Všetko</string>
+    <string name="button_equate_one">Jedno</string>
+    <string name="button_equate_search">Hľadaj</string>
+    <string name="title_equate_with">Stotožnenie %1$s a %2$s</string>
     <!-- UNUSED string name="title_cwd">Aktuálny Pracovný Adresár</string -->
     <string name="title_drop">Zahodiť Mapovania ?</string>
     <string name="title_tdconfig">Zadaj Meno projektu</string>
@@ -2195,7 +2195,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="legs_surface">Povrchové</string>
     <string name="legs_duplicate">Zdvojené</string>
     <string name="legs_commented">S poznámkou</string>
-    <!-- TODO string name="legs_backshot">Backshot</string -->
+    <string name="legs_backshot">Spatná zámera</string>
 
     <string name="proj_perspective">Parametre perspektívy</string>
     <string name="proj_orthographic">Parametre ortografické</string>
@@ -2338,7 +2338,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Chýba povolenie pre používanie Fotoaparátu</string>
     <string name="warning_no_csv_type">CSV typ nešpecifikovaný</string>
-    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
+    <string name="warning_cavway_info">Zlyhanie pri získaní Cavway info</string>
     <string name="no_permissions">Aplikácia nemôže bežať bez požadovaných povolení</string>
 
 
@@ -2384,8 +2384,8 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="cpref_grid_above_summary">Zaškrtnuté = mriežka hore</string>
     <string name="cpref_grid_extent_title">Mriežka - rozsah</string>
     <string name="cpref_grid_extent_summary">Rozsah mriežky okolo Mapovania</string>
-    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
-    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
+    <string name="cpref_names_visibility_title">Viditeľnosť Názvov</string>
+    <string name="cpref_names_visibility_summary">Názvy Staničení sú viditeľné</string>
     <string name="cpref_neg_clino_title">Pohľady spod horizontu</string>
     <string name="cpref_neg_clino_summary">Dovoliť pohľady aj spod horizontu  [n]</string>
     <string name="cpref_dem_buffer_title">DEM buffer</string>
@@ -2394,8 +2394,8 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="cpref_dem_maxsize_summary">Maximálny počet buniek [400]</string>
     <string name="cpref_dem_reduce_title">DEM redukcia</string>
     <string name="cpref_dem_reduce_summary">DEM v redukčnom móde [shrink]</string>
-    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
-    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
+    <string name="cpref_texture_root_title">Koreňový adresár</string>
+    <string name="cpref_texture_root_summary">Cesta ku koreňovému adresáru textúr [/sdcard/]</string>
     <string name="cpref_all_splay_title">Všetky pomocné zámery</string>
     <string name="cpref_all_splay_summary">Použiť všetky pomocné zámery pre zobrazenie stien [y]</string>
     <string name="cpref_splay_use_title">Použitie pomocných zámer</string>
