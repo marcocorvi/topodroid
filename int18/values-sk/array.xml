@@ -58,7 +58,7 @@
      <item name="tf">Stopy</item>
   </string-array>
      
-  <!-- TODO string-array name="loopClosure">
+  <string-array name="loopClosure">
      <item name="none">Žiadne</item>
      <item name="normal">Normálne</item>
      <item name="weighted">Weighted</item>

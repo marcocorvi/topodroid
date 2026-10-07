@@ -1825,8 +1825,8 @@
     <string name="pref_drawing_unit_summary">Měřítko velikosti pro bodové značky/nástroje</string>
     <string name="pref_unscaled_points_title">Nezvětšovat ikony bodů</string>
     <string name="pref_unscaled_points_summary">Ikony bodových značek mění velikost nezávisle na přiblížení (zoomu)</string>
-  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
-  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
+  <string name="pref_unscaled_lines_title">Efekty čar bez přiblížení</string -->
+  <string name="pref_unscaled_lines_summary">Efekty čar se nemění se zvětšením (přiblížením)</string -->
     <string name="pref_segment_title">Rozestupy bodů linií</string>
     <string name="pref_segment_message">Minimální vzdálenost mezi dvěma body při kreslení linie</string>
     <string name="pref_linestyle_title">Styl linií</string>
