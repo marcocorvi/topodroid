@@ -499,7 +499,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="menu_recover">OBNOVIŤ</string>
     <string name="menu_recover_paste">OBNOVIŤ/VLOŽIŤ</string>
     <string name="menu_reload">NAČÍTAŤ</string>
-    <!-- TODO string name="menu_rename_delete">OPERATIONS</string -->
+    <string name="menu_rename_delete">SPRÁVA</string>
     <string name="menu_rename">PREMENOVAŤ</string>
     <string name="menu_plot_scrap">SCRAPY</string>
     <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
@@ -514,7 +514,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
-    <!-- TODO string name="menu_stations">STATIONS</string -->
+    <string name="menu_stations">STANIČENIA</string>
     <string name="menu_sections">SEKCIE</string>
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SKENOVAŤ</string>
@@ -527,16 +527,16 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
-    <!-- TODO string name="menu_plot_search">STATION SEARCH</string -->
+    <string name="menu_plot_search">VYHĽADÁVANIE STANIČENÍ</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Milimetrový papier</string>
 
     <string name="start_scan">Štart sken</string>
     <string name="stop_scan">Stop sken</string>
-    <!-- TODO string name="scan_started">Discovery started</string -->
-    <!-- TODO string name="scan_finished">Discovery finished</string -->
-    <!-- TODO string name="scanning">Scanning ... Please wait</string -->
+    <string name="scan_started">Vyhľadávanie sa začalo</string>
+    <string name="scan_finished">Vyhľadávanie ukončené</string>
+    <string name="scanning">Skenujem... Prosím čakajte</string>
 
     <!-- UNUSED string name="title_scan">BLE sken</string -->
     <!-- UNUSED string name="ble_scan_failed">BLE sken neúspešný</string -->
@@ -678,7 +678,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="shot_note">Poznámka</string>
     <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">Na</string>
-    <!-- TODO string name="shot_refreshed">Refreshed shot list</string -->
+    <string name="shot_refreshed">Aktualizácia</string>
 
     <string name="station">Meračský bod</string>
     <string name="station_ask">Vložiť meračské body do nákresu?</string>
@@ -692,8 +692,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Vymazať mapovanie ?</string>
     <string name="survey_move">Presunúť zámery k Mapovaniu %1$s ?</string>
-    <!-- TODO string name="survey_copy_all_flags">Shots copyable only if all displayed</string -->
-    <!-- TODO string name="survey_copy_only_tail">Only the final segment of shots is copyable</string -->
+    <string name="survey_copy_all_flags">Zámery sú kopírovateľné iba keď sú zobrazené všetky</string>
+    <string name="survey_copy_only_tail">Skopírovať možno len posledný segment Zámer</string>
     <string name="survey_split">Rozdeliť Mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>
@@ -754,8 +754,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="zip_saved">Uložený </string>
     <string name="zip_failed">Obnova mapovania zlyhala-zip</string>
     <string name="zip_share_failed">Nie je možné zdieľať zip archív</string>
-    <!-- TODO string name="file_share_failed">Unable to share file</string -->
-    <!-- TODO string name="file_share_no_app">No file sharing app</string -->
+    <string name="file_share_failed">Súbor sa nepodarilo zdieľať</string>
+    <string name="file_share_no_app">Žiadna aplikácia na zdieľanie súborov</string>
     <string name="unzip_fail">Obnova mapovania zlyhala-unzip</string>
     <string name="unzip_fail_sqlite">Neúspešné SQL: vymažte mapovanie a skúste znova</string>
     <string name="unzip_fail_survey">Neúspešné: Neodpovedajúce pomenovanie</string>
@@ -796,7 +796,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="stat_surface">Povrchové zámery (počet-dĺžka) %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">Surface denivelation %1$.1f %2$.1f %3$s</string -->
     <string name="stat_survey_z">Denivelácia jaskyne %1$.1f %2$.1f %3$s</string>
-    <!-- TODO string name="stat_survey_length">Survey length %1$.1f %2$s</string -->
+    <string name="stat_survey_length">Dĺžka mapovania %1$.1f %2$s</string>
     <string name="stat_wens">Z - %1$.0f  V - %2$.0f  S - %3$.0f  J - %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Uhlové chyby %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Meranie %1$s - %2$s"</string>
@@ -830,7 +830,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Zobrazenie</string>
-    <!-- TODO string name="display_refresh">Refreshed display</string -->
+    <string name="display_refresh">Obnovený displej</string>
     <string name="plan_view">Pôdorys</string>
     <string name="profile_view">Rozvinutý rez</string>
 
@@ -846,7 +846,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
-    <!-- TODO string name="ask_clear_equates">Remove all equates?</string -->
+    <string name="ask_clear_equates">Odstrániť všetky stotožnenia?</string>
 
     <string name="button_add"       >Pridať       </string>
     <string name="button_apply"     >Aplikovať</string>
@@ -878,7 +878,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual"    >Používateľský Manuál</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
-    <!-- TODO string name="button_photo"   >Photo</string -->
+    <string name="button_photo"   >Foto</string>
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -890,17 +890,17 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_prev"    >Predchádzajúci</string>
     <string name="button_new"     >Nový scrap</string>
     <string name="button_rename"  >Premenovať</string>
-    <!-- TODO string name="button_retake"  >Retake</string -->
+    <string name="button_retake"  >Opakovaný záber</string>
     <string name="button_prefix"  >Predpona</string>
     <string name="button_skip"    >Preskočiť</string>
     <string name="button_done"    >Dokončiť</string>
     <string name="button_lrud"    >Pridať LRUD</string>
-    <!-- TODO string name="button_no">NO</string -->
+    <string name="button_no"      >NIE</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >Vypnúť</string>
     <string name="button_on"        >Zapnúť</string>
     <string name="button_open"      >Uložiť a Otvoriť     </string>
-    <!-- TODO string name="button_offset"    >Offset</string -->
+    <string name="button_offset"    >Offset</string>
     <string name="button_read"      >Čítať    </string>
     <string name="button_recover"   >Obnoviť</string>
     <string name="button_reverse"   >Vymeniť</string>
@@ -914,7 +914,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_left"      >Vľavo</string>
     <string name="button_right"     >Vpravo</string>
     <string name="button_clear"     >Vyčistiť  </string>
-    <!-- TODO string name="button_clear_all" >Clear all</string -->
+    <string name="button_clear_all" >Vyčistiť všetko</string>
     <string name="button_clear_day" >Vyčistiť 1d  </string>
     <string name="button_clear_week">Vyčistiť 7d  </string>
     <string name="button_clear_memory">Vyčistiť pamäť</string>
@@ -928,9 +928,9 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_saved"     >Uložené Staničenia</string>
     <string name="button_scrap"     >Obrysy</string>
     <string name="button_split"     >Rozdeliť   </string>
-    <!-- TODO string name="button_to_sketch">To sketch</string -->
-    <!-- TODO string name="button_to_scrap" >To scrap</string -->
-    <!-- TODO string name="button_to_buffer">buffer</string -->
+    <string name="button_to_sketch">Na Nákres</string>
+    <string name="button_to_scrap" >Na Scrap</string>
+    <string name="button_to_buffer">vyrovnávacia pamäť</string>
     <string name="button_station"   >Vycentrovať na</string>
     <string name="button_store"     >Zapísať    </string>
     <string name="button_swap"      >Vymeniť      </string>
@@ -949,7 +949,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="button_write"     >Nahrať koeficienty do DistaX</string>
     <string name="button_xsection">Priečny rez</string>
     <string name="xsection">Priečny rez</string>
-    <!-- TODO string name="buffer">Buffer</string -->
+    <string name="buffer">Vyrovnávacia pamäť</string>
     <string name="buffer_size">Veľkosť vyrovnávacej pamäte: %1$d</string>
     <string name="buffer_sorted">zoradené</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
@@ -960,7 +960,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="mode_station">Staničenie</string>
     <string name="mode_grid">Mriežka</string>
     <string name="mode_fixed">Bočný Posun</string>
-    <!-- TODO string name="mode_scrap">Current scrap only</string -->
+    <string name="mode_scrap">Iba aktuálny Scrap</string>
     <string name="mode_outline">Obrys</string>
     <string name="mode_scale_ref">Grafická mierka</string>
     <string name="mode_sections">Sekcie</string>
@@ -1019,7 +1019,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="hint_bt_code">Kód zariadenia</string>
     <string name="bt_alias_missing">Chýba BT alias</string>
     <string name="bt_code_missing">Chýba kód zariadenia</string>
-    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
+    <string name="bt_alias_delete">Odstrániť aliasy pre Bluetooth?</string>
 
     <string name="hint_cellsize">Veľkosť bunky</string>
     <string name="hint_cwd">Pracovný adresár</string>
@@ -1032,9 +1032,9 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="hint_units">Jednotky symbolu</string>
     <string name="hint_value">Hodnota</string>
 
-    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
-    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
-    <!-- TODO string name="calib_measurement_group">Group: </string -->
+    <string name="calib_measurement_id">Zámera %1$d</string>
+    <string name="calib_measurement_error">Chyba %1$.4f</string>
+    <string name="calib_measurement_group">Skupina: </string>
 
     <string name="hint_notes">Poznámky</string>
     <string name="hint_label">Štítok</string>
@@ -1071,9 +1071,9 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
 
     <string name="split_nothing">Nič na rozdelenie</string>
     <string name="flip_shots">Obrátiť aj zámery (nezaškrtnuté otočí len krezbu)</string>
-    <!-- TODO string name="move_items">Move</string -->
+    <string name="move_items">Presunúť</string>
     <string name="copy_items">Kopírovanie položiek</string>
-    <!-- TODO string name="paste_items">Paste items</string -->
+    <string name="paste_items">Vložiť položky</string>
     <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Preface</string>
@@ -1148,7 +1148,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Zobraziť nasnímané fotografie</string>
     <string name="help_sensor">Zobraziť merania z interných senzorov</string>
-    <!-- TODO string name="help_stations">Stations</string -->
+    <string name="help_stations">Staničenia</string>
     <string name="help_3d">3D zobrazenie (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Režim kreslenia</string>
@@ -1160,7 +1160,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_plot_delete">Vymazať nákres</string>
     <string name="help_plot_rename">Premenovať/Vymazať nákres</string>
     <string name="help_plot_scrap">Nákres - scrapy</string>
-    <!-- TODO string name="help_plot_search">Station search</string -->
+    <string name="help_plot_search">Vyhľadávanie Staničenia</string>
     <string name="help_plot_switch">Prepínanie medzi nákresmi</string>
     <string name="help_search">Vyhľadať body</string>
     <string name="help_stats">Štatistika mapovania</string>
@@ -1225,13 +1225,13 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_add_project">Pridaj Projekt</string>
     <string name="help_add_surveys">Pridač Mapovania</string>
     <string name="help_drop_surveys">Zahodiť Mapovania</string>
-    <!-- TODO string name="help_color_surveys">Change color of surveys</string -->
+    <string name="help_color_surveys">Zmeniť farbu Mapovania</string>
     <string name="help_view_surveys">Zobraziť Mapovania</string>
     <string name="help_view_equates">Porovnanie</string>
     <string name="help_export_config">Export Projektu</string>
     <string name="help_delete_config">Vymazať Projekt</string>
     <string name="help_add_equate">Pridať Mapovania na porovnanie</string>
-    <!-- TODO string name="help_all_equates">All possible equates</string -->
+    <string name="help_all_equates">Všetky možné stotožnenia</string>
     <string name="help_equates">Zoznam porovnaní</string>
     <string name="help_stations_minus">Zobraziť menej Staničení</string>
     <string name="help_stations_plus">Zobraziť viacej Staničení</string>
@@ -1240,7 +1240,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="export_bothviews">Pôdorys a Rez</string>
     <string name="export_config">Konfiguračné príkazy</string>
     <string name="export_csv_rawdata">Surové dáta</string>
-    <!-- TODO string name="export_data_batch">Exported %1$s of %2$d surveys</string -->
+    <string name="export_data_batch">Exportované %1$s z %2$d Mapovaní</string>
     <string name="export_dxf_blocks">DXF blocks</string>
     <string name="export_dxf_version">Verzia</string>
     <string name="export_georeference">Georeferencovanie</string>
@@ -1251,12 +1251,12 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD na POČIATOČNOM staničení</string>
     <string name="export_maps">Mapy pred dátami</string>
-    <!-- TODO string name="export_uncommented_maps">Uncommented maps</string -->
+    <string name="export_uncommented_maps">Mapy bez komentára</string>
     <string name="export_prefix">Cave-prefix v staničeniach</string>
     <string name="export_prefix_hint">Predpona</string>
-    <!-- TODO string name="export_prefix_set">Set</string -->
-    <!-- TODO string name="export_prefix_reset">Reset</string -->
-    <!-- TODO string name="export_media">media items</string -->
+    <string name="export_prefix_set">Nastaviť</string>
+    <string name="export_prefix_reset">Resetovať</string>
+    <string name="export_media">Média</string>
     <!-- UNUSED string name="export_suffix_hint">suffix</string -->
     <string name="export_series_hint">Série</string>
     <string name="export_roundtrip">Round-trip</string>
