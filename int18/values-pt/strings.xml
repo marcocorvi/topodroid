@@ -166,7 +166,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
 
   <!-- UNUSED string name="connect_failed">Falha de conexão</string -->
   <!-- UNUSED string name="data">Dados</string -->
-  <string name="using">Usando %1$s</string>
+  <string name="using_a">Usando %1$s</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
     <!-- TODO string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string -->
     <!-- TODO string name="cali_time">Calibration: %1$s</string -->
   <string name="calib_error">Erro médio: %1$.2f ° (Delta BH %2$.3f)</string>
@@ -199,6 +200,11 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="algo_minimum">minimum</string -->
   <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
   <string name="device_address">Endereço %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
   <string name="address">Endereço</string>
   <string name="model_invalid">número inválido</string>
   <string name="model_missing">número não informado</string>

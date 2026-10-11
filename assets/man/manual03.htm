@@ -10,6 +10,9 @@ TopoDroid works with one device at a time.
 To select it tap on its entry in the list. The name of the selected device is shown at the top, just below the buttons.
 If no device is selected, there is a red message saying "Device not selected".<br><p>
 
+If defined, the name of the alternate device is shown below in yellow when the
+connection mode is not "continuous".<br><p>
+
 <b>Supported devices</b><br>
 TopoDroid uses only devices connected and paired with the Android system.
 The devices are selected from the list of devices paired with Android based on their bluetooth name.<br>
@@ -32,16 +35,16 @@ TopoDroid does not recognize devices with a name that is not one of these.<br><p
 
 <h4>ACTIONS</h4>
 <ul style="margin-top=0">
-<li>tap on a device entry makes it the active device</li>
+<li>tap on a device entry makes it the active current device</li>
 <li>long tap on a device entry opens a <a href="page_device_name.htm">dialog</a> to edit the device properties</li>
 </ul><br><p>
 
 <b>Device properties</b><br>
 By default, TopoDroid uses the bluetooth MAC address as name for a device.
-The devices can be given <b>nicknames</b> to distinguish among several devices more easily.<br>
-Although TopoDroid works with one device at a time, it allows to set a second working device.
-This options makes it faster to switch between the two devices during the surveying.<br>
-Finally, it is possible to "forget" a device: this effectively removes the device from TopoDroid database
+The devices can be given <u>nicknames</u> to distinguish among several devices more easily.<br><p>
+Although TopoDroid works with one device at a time, it allows to set an <u>alternate device</u>.
+This options makes it faster to switch between the two devices during the surveying.<br><p>
+Finally, it is possible to <u>forget</u> a device: this effectively removes the device from TopoDroid database
 and from the Android connected devices (if was bonded).<br><p>
 
 <h4>BUTTONS</h4>
@@ -96,7 +99,7 @@ The <i>SAP</i> PIN is "000000", six zeros.<br><p>
 
 The following settings apply only to the DistoX (which uses classical bluetooth).
 <ul style="margin-top=0">
-<li><i>Data connection mode</i>. "On-demand", "continuous", or "multi" [default "on-demand"]</li>
+<li><i>Data connection mode</i>. "On-demand", "continuous", or "multi-batch" [default "on-demand"]</li>
 <!-- li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li -->
 <li>DistoX <i>Socket</i> type. Normal or "insecure" [default "insecure"]</li>
 <!-- li>DistoX <i>Z6-workaround</i>: a download timeout error on Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li -->
@@ -110,12 +113,12 @@ There are three connections modes for the DistoX/Cavway.
 <li>in <i>continuous</i> mode TopoDroid remains connected to the device and the shots are downloaded as soon as they are taken.
 If the device and Android disconnect, TopoDroid repeatedly tries to reconnect.
 Otherwise, the bluetooth connection is closed.</li>
-<li>the <i>multi</i> mode is like the "on-demand" mode, but a long-tap on the "download" button, in the <u>Survey Data window</u> or in the <u>Drawing window</u>,
+<li>the <i>multi-batch</i> mode is like the "on-demand" mode, but a long-tap on the "download" button, in the <u>Survey Data window</u> or in the <u>Drawing window</u>,
 changes the device. It you have set a "second" DistoX/Cavway (in the <u>Device window</u>) it is swapped with the current device.
 Otherwise, you get a dialog to pick one among the known devices.</li>
 </ul>
 <br>
-With the "multi" mode, the current device is shown in the title of the <u>Survey Data</u> and <u>Drawing windows</u>.<br>
+With the "multi-batch" mode, the current device is shown in the title of the <u>Survey Data</u> and <u>Drawing windows</u>.<br>
 The connection mode applies only to the data download. Other device functions use a one-shot query mode.
 <br><p>
 

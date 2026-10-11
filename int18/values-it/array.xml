@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="scanLegType">
-     <item name="s">Generic</item>
-     <item name="sX">XSection</item>
-     <item name="sH">Horizontal</item>
-     <item name="sV">Vertical</item>
-  </string-array -->
+  <string-array name="scanLegType">
+     <item name="s">Generico</item>
+     <item name="sX">Sezione Trasv.</item>
+     <item name="sH">Orizzontale</item>
+     <item name="sV">Verticale</item>
+  </string-array>
 
-  <!-- TODO string-array name="toolbarUpdate">
-     <item name="oldest">Replace oldest</item>
-     <item name="front">Put at front</item>
-     <item name="front_oldest">At front, drop oldest</item>
-  </string-array -->
+  <string-array name="toolbarUpdate">
+     <item name="oldest">Sostituisci piu\' vecchio</item>
+     <item name="front">Metti in primo piano</item>
+     <item name="front_oldest">In primo piano, cancella piu\' vecchio</item>
+  </string-array>
 
-  <!-- TODO string-array name="teamNames">
+  <string-array name="teamNames">
      <item name="plain">Testo</item>
      <item name="separated">Testo con separatori</item>
      <item name="dialog">Dialogo</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="bricMode">
+  <string-array name="bricMode">
      <item name="prim_only">Solo Prim.</item>
      <item name="all">Tutte le info</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="geoImportApp">
+  <string-array name="geoImportApp">
      <item name="none">Non specificato</item>
      <item name="mobile_topographer">Topografo mobile</item>
      <item name="gpx_recorder">Registratore GPXr</item>
      <item name="gps_position">Posizione GPS</item>
      <item name="gps_test">GPS-Test</item>
      <item name="gps_logger">GPS-Logger</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="orientation">
      <item name="unspecified">non specificato</item>

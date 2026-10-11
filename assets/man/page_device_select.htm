@@ -16,24 +16,27 @@ TopoDroid supports the following device:
 
 All devices must be paired with the Android.<br><p>
 
-Normally TopoDroid works with only one device.
-The data can be downloaded continuously (<i>continuous</i> mode) or in batch (<i>on-demand</i> mode).
-The difference between the two modes is that the <i>continuous</i> mode remains active when the data download
-is finished, or the connection with the device is lost, while the <i>on-demand</i> mode is closed. <br><p>
+TopoDroid works with only one device at a time, otherwise data coming from different devices 
+would be intermingled.
+The data can be downloaded continuously (<u>continuous</u> mode) or in batch (<u>on-demand</u> mode).
+The difference between the two modes is that the <u>continuous</u> mode remains active when the data download
+is finished, or the connection with the device is lost, while the <u>on-demand</u> mode is closed. <br><p>
 
-<i>SAP</i>, <i>BRIC</i>, and <i>JedEye</i> download the data only in continuous mode.<br><p>
+<i>SAP</i>, <i>BRIC</i>, <i>DiscoX</i>, and <i>JedEye</i> download the data only in continuous mode.<br><p>
 
-With DistoX's TopoDroid can work with more than one device at once, although
-the data are still downloaded from only one device at a tine.<br>
-The <i>data download mode</i> must be set to <i>multi</i>.
-When it is so a long-tap on the <i>download</i> button brings up a dialog to choose from which DistoX to download the data.<br><p>
+With <i>DistoX</i>'s and <i>Cavway</i>TopoDroid can work with more than one device at once (<u>multi-batch</u> mode)
+although the data are still downloaded from only one device at a time.<br>
+If the <i>second-disto</i> setting is enabled a long tap on the <i>download</i> button switches to the second disto device
+if this has been set. Oterwise it opens the <a href="page_device_select.htm">Device select</a> dialog.
+If the <i>second-disto</i> is not enabled and <i>data download mode</i> is set to <i>multi-batch</i>.
+a long-tap on the <i>download</i> button brings up the <a href="page_device_select.htm">Device select</a> dialog
+to choose from which disto to download the data.<br><p>
 
 <b>Shetland Attack Pony (SAP)</b><br>
 
-TopoDroid supports the model of the Shetland Attack Pony, version 5 (<i>SAP5</i>) and 6 (<i>SAP6</i>), with bluetooth.<br>
-The device must have been previously "paired" with Android, using the <i>Settings</i> app.
-The PIN is "000000" (six zeros).<br>
-Afterward the <i>SAP</i> is listed among the known devices in the <i>Device Window</i>.
+TopoDroid supports the model of the Shetland Attack Pony, version 5 (<i>SAP5</i>) with bluetooth, and 6 (<i>SAP6</i>).<br>
+If the SAP has been "paired" with Android, using the <i>Settings</i> app (the PIN is "000000", six zeros), or it is
+the the app database, the <i>SAP</i> is listed among the known devices in the <i>Device Window</i>.
 It appears as "SAP XX MAC-address", where "XX" is the two-letter code of the <i>SAP</i>, for example "HG".<br>
 To select the <i>SAP</i> as current device tap on the its entry in the list.<br><p>
 
@@ -57,8 +60,9 @@ The calibration of the <i>SAP</i> is done by the device and does not require an 
 <b>BRIC</b><br>
 
 TopoDroid supports the <i>BRIC</i> version 4 and 5.<br>
-The device must have been previously "paired" with Android, using the <i>Settings</i> app.<br>
-Afterward the <i>BRIC</i> is listed among the known devices in the <i>Device Window</i>.
+Like all BLE devices, the BRIC does nothave to be "paired" with Android, but it can be discovered with
+the menu of the <i>Device Window</i>.
+If it is in the app database the <i>BRIC</i> is listed among the known devices in the <i>Device Window</i>.
 It appears as "<i>BRIC</i> code MAC-address", ('X' being 4 or 5) where the code is the four-digit code of the <i>BRIC</i>, for example "0039".<br>
 To select the <i>BRIC</i> as current device tap on the its entry in the list.<br><p>
 
@@ -93,24 +97,27 @@ When the complete data are received TopoDroid records the <i>BRIC</i> error code
 
 <b>Cavway</b><br>
 
-TopoDroid supports the Cavway version X1.<br>
-The device must have been previously "paired" with Android, using the <i>Settings</i> app.<br>
-Afterward the Cavway is listed among the known devices in the <i>Device Window</i>.
+TopoDroid supports the <i>Cavway</i> version X1.<br>
+Like all BLE devices, the <i>Cavway</i> does nothave to be "paired" with Android, but it can be discovered with
+the menu of the <i>Device Window</i>.
+If it is in the app database the Cavway is listed among the known devices in the <i>Device Window</i>.
 It appears as "CVWYn code MAC-address", ('n' being 1, for "X1") where the code is the four-digit code of the Cavway, for example "0002".<br>
-To select the Cavway as the current device, tap on its entry in the list.<br><p>
+To select the <i>Cavway</i> as the current device, tap on its entry in the list.<br><p>
 
-The calibration of the Cavway is done by the device and does not require an external program.
+The calibration of the <i>Cavway</i> is done by the device and does not require an external program.
 However, the calibration data can also be downloaded in the app, and the calibration can be computed in TopoDroid and uploaded
-to the device. The calibration computation on the Cavway and in TopoDdroid are the same.<br><p>
+to the device. The calibration computation on the <i>Cavway</i> and in TopoDdroid are the same.<br><p>
 
-<!--
+<b>DiscoX</b><br>
+
+<i>DiscoX</i> behaves like <i>SAP6</i>.<br>
+
 <b>JedEye</b><br>
 
+<i>JedEye</i> connection is similar to <i>SAP</i>.<br>
 While connected, the <i>JedEye</i> will transfer all shot values to the app.<br>
 Shots taken while not connected will not be transmitted after the connection is established.<br><p>
 
 The <i>JedEye</i> data transmission protocol does not include the acknowledgment.<br><p>
-
--->
 
 </body></html>

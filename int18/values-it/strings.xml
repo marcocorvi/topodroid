@@ -14,7 +14,7 @@
     <string name="no_manual">Scarico manuale utente dal web non riuscito</string>
     <string name="user_man_ok">Installata la traduzione del manuale utente</string>
     <string name="user_man_fail">Errore nella installazione del manuale utente [%1$d]</string>
-    <!-- TODO string name="db_not_ready">Survey database not ready</string -->
+    <string name="db_not_ready">DB rilievi non pronto</string>
 
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
@@ -36,7 +36,7 @@
     <string name="tdm_title">Gestione Progetti</string>
     <string name="tdm_config_project">progetto.tdconfig</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
-    <!-- TODO string name="tdm_disconnected_survey">Disconnected survey</string -->
+    <string name="tdm_disconnected_survey">Rilievo disconnesso</string>
 
     <string name="new_survey_label">Nuovo rilievo</string>
     <!-- NO string name="distox_label">DistoX</string -->
@@ -44,7 +44,7 @@
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
-    <!-- TODO string name="symbols_recover">Recover drawing tools ?</string -->
+    <string name="symbols_recover">Ripristino strumenti di disegno?</string>
     <!-- UNUSED string name="version_check">Ultima versione</string -->
     <!-- UNUSED string name="version_check_failed">Verifica versione fallita</string -->
     <!-- UNUSED string name="version_check_latest">Versione già ultima</string -->
@@ -101,7 +101,7 @@
     <string name="thp_user">utente</string>
     <string name="thp_label">testo</string>
     <string name="thp_section">sezione</string>
-    <!-- TODO string name="thp_section_point">section-point</string -->
+    <string name="thp_section_point">punto-sezione</string>
     <string name="thp_picture">foto</string>
     <string name="thp_station">caposaldo</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
@@ -179,7 +179,8 @@
 
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
-    <string name="using">Uso %1$s</string>
+    <string name="using_a">Attivo %1$s</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
     <string name="cali_err">error: medio %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
     <string name="cali_time">Calibrazione: %1$s</string>
     <string name="calib_error">Errore %1$.2f &#xb0; (BH delta %2$.2f)</string>
@@ -213,6 +214,11 @@
    
     <!-- UNUSED string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string -->
     <string name="device_address">Indirizzo %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
     <string name="address">Indirizzo</string>
     <string name="model_invalid">Numero non valido</string>
     <string name="model_missing">numero mancante</string>
@@ -361,10 +367,10 @@
     <!-- UNUSED string name="fmt_h_ellipsoid">Errore %1$.0f m</string -->
     <string name="location_start_fine">Inizio affinamento posizione</string>
     <string name="location_enabled">Assicurati che LOCATION sia abilitata</string>
-    <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
+    <string name="location_no_permission">Localizzazione non abilitata</string>
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
     <string name="discovery_error">Errore individuazione BT: %1$s</string>
-    <!-- TODO string name="depth_format">Depth %1$.1f</string -->
+    <string name="depth_format">Profondita\' %1$.1f</string>
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -431,7 +437,7 @@
     <!-- UNUSED string name="including_splays">inclusi splay</string -->
     <string name="with_splays">con splays</string>
     <string name="cell_size">Lato cella [m]</string>
-    <!-- TODO string name="reset_ids">Reset IDs</string -->
+    <string name="reset_ids">Reset degli ID</string>
 
     <string name="legs">Battute</string>
     <string name="stations">Caposaldo</string>
@@ -635,7 +641,7 @@
     <string name="scrap_delete">Elimina scrap ?</string>
     <string name="item_delete">Cancellare elemento %1$s ?</string>
     <string name="splay_delete">Cancello splay %1$s ?</string>
-    <!-- TODO string name="scanset_delete">Delete scan-set shot at %1$s ?</string -->
+    <string name="scanset_delete">Cancellare tiri scan-set a %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>
     <string name="plot_dangling">Disegno dondolante</string>
     <string name="plot_name">Nome disegno</string>
@@ -666,7 +672,7 @@
     <string name="section_name">Nota sezione</string>
     <!-- UNUSED string name="scrap_outline">Contorno del disegno</string -->
     <string name="scrap_string">Disegno scartato: %1$d / %2$d</string>
-    <!-- TODO string name="scrap_index">Scrap %1$d</string -->
+    <string name="scrap_index">Scarto %1$d</string>
     <string name="section_point_not_allowed">Punto sezione non permesso</string>
     <string name="section_line_not_allowed">Linea sezione non permessa</string>
 
@@ -731,7 +737,7 @@
     <string name="saturated_coeffs">ATTENZIONE: Dati calibrazione saturati</string>
     <string name="out_of_memory">ATTENZIONE: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
-    <!-- TODO string name="tdr_load_fail">Failed to read TDR file</string -->
+    <string name="tdr_load_fail">Lettura file TDR fallita</string>
     
     <string name="toporobot_warning">TopoRobot e\' sperimentale !</string>
     <string name="anomaly_warning">La compensazione di anomalia magnetica e\' liv. esperto !</string>
@@ -859,7 +865,7 @@
     <string name="display_refresh">Aggiornata la visualizzazione</string>
     <string name="plan_view">pianta</string>
     <string name="profile_view">sezione</string>
-    <!-- TODO string name="xsection_view">x-section</string -->
+    <string name="xsection_view">section trasv.</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Lettura memoria DistoX fallita</string>
@@ -875,7 +881,7 @@
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Installata v. %2$d</string>
     <string name="ask_clear_equates">Rimuovere tutte le equivalenze?</string>
     <string name="ask_forget_device">Dimentico il device %1$s?</string>
-    <!-- TODO string name="ask_scan_delete">Delete scan-set?</string -->
+    <string name="ask_scan_delete">Cancello lo scan-set?</string>
 
     <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>
@@ -917,7 +923,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_less">Meno</string>
-    <!-- TODO string name="button_fewer"   >Fewer</string -->
+    <string name="button_fewer"   >Meno</string>
     <string name="button_more"    >Altro</string>
     <string name="button_move"    >Muovi</string>
     <string name="button_next"    >Prossimo</string>
@@ -985,7 +991,7 @@
 
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Sezione trasversale</string>
-    <!-- TODO string name="button_xpoint">Section-Point</string -->
+    <string name="button_xpoint">Punto-Sezione</string>
     <string name="xsection">Sezione trasversale</string>
     <string name="buffer">Buffer</string>
     <string name="buffer_size">Buffer: %1$d dati</string>
@@ -1276,7 +1282,7 @@
     <string name="help_add_equate">Aggiungi rilievi simili</string>
     <string name="help_all_equates">Tutte le possibili equivalenze</string>
     <string name="help_equates">Lista rilievi simili</string>
-    <!-- TODO string name="help_equate_surveys">List equating surveys</string -->
+    <string name="help_equate_surveys">Lista rilievi equivalenti</string>
     <string name="help_stations_minus">Mostra meno capisaldi</string>
     <string name="help_stations_plus">Mostra piú capisaldi</string>
 
@@ -1362,7 +1368,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_scan_shot">Tiri di scan</string>
-    <!-- TODO string name="title_scanset">Scan set</string -->
+    <string name="title_scanset">Set di Scan</string>
 
     <string name="title_search">Ricerca caposaldi/battute</string>
     <string name="title_stations">Capisaldi</string>
@@ -1497,7 +1503,7 @@
     <string name="title_import_shot">Importa rilievo</string>
     <string name="title_import_gps">Importa punto GPS</string>
     <string name="title_import_th2">File Therion th2</string>
-    <!-- TODO string name="title_import_surveys">Surveys folder</string -->
+    <string name="title_import_surveys">Cartella Rilievi</string>
     <string name="title_infos">Info rilievi</string>
     <string name="title_graph_paper">Carta milimetrata in scala 1:100</string>
     <string name="graph_paper_scale">Regola la linea a 5 cm</string>
@@ -1554,8 +1560,8 @@
   <string name="pref_single_back_summary">Chiudi window con indietro singolo</string>
   <string name="pref_hide_navbar_title">Barra di navigazione</string>
   <string name="pref_hide_navbar_summary">Nascota. Mostrata trascinando in sù</string>
-  <!-- TODO string name="pref_analytics_title">Share analytics</string -->
-  <!-- TODO string name="pref_analytics_summary">Enable functions analytics sharing</string -->
+  <string name="pref_analytics_title">Condividi dati analitici</string>
+  <string name="pref_analytics_summary">Abilita condivisione dati analitici</string>
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
@@ -1745,12 +1751,12 @@
   <string name="pref_bric_index_is_id_summary">Usare l\'indice BRIC del tiro com ID</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: ripara anomalia bit-16</string>
-  <!-- TODO string name="pref_cvwy_abs_title" copyable="all">Cavway ABS threshold</string -->
-  <!-- TODO string name="pref_cvwy_abs_summary" copyable="bg">Cavway shot accuracy ABS threshold</string -->
-  <!-- TODO string name="pref_cvwy_dip_title" copyable="all">Cavway Dip threshold</string -->
-  <!-- TODO string name="pref_cvwy_dip_summary" copyable="bg">Cavway shot accuracy Dip threshold</string -->
-  <!-- TODO string name="pref_cvwy_angle_title" copyable="all">Cavway Angle threshold</string -->
-  <!-- TODO string name="pref_cvwy_angle_summary" copyable="bg">Cavway shot accuracy Angle threshold</string -->
+  <string name="pref_cvwy_abs_title" copyable="all">Cavway:Soglia ABS</string>
+  <string name="pref_cvwy_abs_summary" copyable="bg">Cavway:Soglia ABS accuratezza tiro</string>
+  <string name="pref_cvwy_dip_title" copyable="all">Cavway:Soglia Dip</string>
+  <string name="pref_cvwy_dip_summary" copyable="bg">Cavway:Soglia Dip accuratezza tiro</string>
+  <string name="pref_cvwy_angle_title" copyable="all">Cavway:Soglia Angolo</string>
+  <string name="pref_cvwy_angle_summary" copyable="bg">Cavway:Soglia Angolo accuratezza tiro</string>
 
   <string name="pref_plot_screen_title">OPZIONI DISEGNO</string>
   <string name="pref_tool_line_title">OPZIONI LINEE</string>
@@ -1889,8 +1895,8 @@
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
   <string name="pref_unscaled_points_summary">I punti icona non sono ingranditi</string>
-  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
-  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
+  <string name="pref_unscaled_lines_title">Effetti di linea senza zoom</string>
+  <string name="pref_unscaled_lines_summary">Gli effetti di linea non hanno zoom</string>
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
@@ -1949,8 +1955,8 @@
   <string name="pref_linecurve_summary">Azioni per aggiustare segmenti</string>
   <string name="pref_linestraight_title">Raddrizza linee</string>
   <string name="pref_linestraight_summary">Azione per raddrizzare una intera linea</string>
-  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
-  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
+  <string name="pref_lineclip_title">Linee iClip</string>
+  <string name="pref_lineclip_summary">Abilita ritaglio linea al profilo</string>
   <string name="pref_path_multiselect_title">Multiselezione</string>
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
   <!-- UNUSED string name="pref_composite_actions_title">Azioni composite</string -->
@@ -2027,8 +2033,8 @@
   <string name="pref_plot_shift_summary">Spostamento/ridimensione disegno</string>
   <string name="pref_splay_alpha_title">Trasparenza splay</string>
   <string name="pref_splay_alpha_summary">Trasparenza splay [0: transparente, 100: opaco]</string>
-  <!-- TODO string name="pref_reset_ids_title">ID\'s reset</string -->
-  <!-- TODO string name="pref_reset_ids_summary">Enable reset survey ID\'s</string -->
+  <string name="pref_reset_ids_title">Reset degli ID</string>
+  <string name="pref_reset_ids_summary">Abilita reset degli ID</string>
 
   <!-- UNUSED string name="pref_picker_type_title">Dialogo scelta prototipo</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string -->
@@ -2208,7 +2214,7 @@
     <!-- UNUSED string name="equate_no_station">Nessun caposaldo selezionato</string -->
     <string name="equate_no_stations">Troppo pochi capisaldi</string>
     <string name="equate_no_nearby">Nessun caposaldo vicino</string>
-    <!-- TODO string name="equate_exists">Stations already equated</string -->
+    <string name="equate_exists">Capisaldi gia\' equiparati</string>
     <!-- UNUSED string name="equate_same_station">Cannot equate a station with itself</string -->
 
     <!-- UNUSED string name="menu_new">NUOVO</string -->
@@ -2231,9 +2237,9 @@
     <string name="title_drop">Cancello rilievi ?</string>
     <string name="title_tdconfig">Inserisci nome progetto</string>
     <string name="title_surveys">Rilievi</string>
-    <!-- TODO string name="title_tdsurveys">Select survey</string -->
+    <string name="title_tdsurveys">Seleziona rilievo</string>
     <string name="title_symbols">Strumenti attivi</string>
-    <!-- TODO string name="title_symbol_choose">Tool selection</string -->
+    <string name="title_symbol_choose">Strumenti di selezione</string>
 
     <string name="exported">Salvato file %1$s</string>
     <string name="export_failed">Esportazione fallita</string>

@@ -182,7 +182,8 @@
 
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
-    <string name="using">%1$s használata</string>
+    <string name="using_a">%1$s használata</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
     <string name="cali_err">hiba: átlag %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
     <string name="cali_time">Kalibráció: %1$s</string>
     <string name="calib_error">Átlagos hiba: %1$.2f &#xb0; (BH delta %2$.3f)</string>
@@ -217,6 +218,11 @@
    
     <!-- UNUSED string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string -->
     <string name="device_address">Cím %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
     <string name="address">Cím</string>
     <string name="model_invalid">érvénytelen szám</string>
     <string name="model_missing">hiányzó szám</string>

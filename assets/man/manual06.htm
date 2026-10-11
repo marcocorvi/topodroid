@@ -3,7 +3,7 @@
 
 The <u>Survey Data window</u> displays the list of the shots of the survey.<br><p>
 
-The title displays the survey name, and, in multi/double device mode, the active device.
+The title displays the survey name, and, in multi/alternate-device batch mode, the active device.
 The title color depends on the current station assignment policy:
 <ul>
 <li>blue: foreshot policies</li>
@@ -28,7 +28,7 @@ Shot data foreground color:
 <li>[orange] blank shots, i.e, shots with the stations not set yet</li>
 <li>[yellow]: back-leg (backsight policy)</li>
 <li>[violet]: blank leg</li>
-<li>[red]: tampered shot</li>
+<li>[light red]: tampered shot</li>
 </ol><p>
 
 TopoDroid distinguishes four kinds of shots (displayed with different colors): "leg", "repeated-leg", "splay", and "blank".
@@ -48,6 +48,7 @@ Shot data background color:
 Station name foreground color:
 <ul>
 <li>[bright green] current station</li>
+<li>[red] shot inconsistend with its siblings</li>
 </ul><p>
 
 Station names background color:
@@ -97,7 +98,7 @@ is changed.<br><p>
 
 <b>Long taps</b><br>
 <ul style="margin-top:0">
-<li>"Download": device switch (only for multi device modes)</li>
+<li>"Download": device switch (only for multi-batch device modes or batch mode with alternate dveice)</li>
 <li>"Sketch": immediately open the most recent sketch</li>
 <li>"Manual data": instruments calibration dialog</li>
 <li>"Search": move to the next result</li>

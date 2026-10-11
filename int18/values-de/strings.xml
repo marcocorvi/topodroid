@@ -164,7 +164,8 @@
   <string name="calib_reset_ok">Kalibrierung zurückgesetzt</string>
   <!-- UNUSED string name="connect_failed">Verbindung fehlgeschlagen</string -->
   <!-- UNUSED string name="data"> Daten</string -->
-  <string name="using">%1$s benutzen</string>
+  <string name="using_a">%1$s benutzen</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
   <string name="cali_err">Fehler: Durchschnitt %1$.2f°, Stddev. %2$.2f°. Max. %3$.2f°</string>
   <string name="cali_time">Kalibrierung: %1$s</string>
   <string name="calib_error">Abweichung: %1$.2f Grad (BH delta %2$.3f)</string>
@@ -196,6 +197,11 @@
   <!-- UNUSED string name="algo_minimum">minimum</string -->
   <!-- UNUSED string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string -->
   <string name="device_address">Adresse %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
   <string name="address">Adresse</string>
   <string name="model_invalid">Ungültige Nummer</string>
   <string name="model_missing">Fehlende Nummer</string>

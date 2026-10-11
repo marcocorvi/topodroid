@@ -182,7 +182,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- UNUSED string name="connect_failed">Няма връзка</string -->
     <!-- UNUSED string name="data"> данни</string -->
-    <string name="using">Използвани %1$s</string>
+    <string name="using_a">Използвани %1$s</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
     <string name="cali_err">грешка: средно %1$.2f&#xb0;, стандартно %2$.2f&#xb0;. максимално %3$.2f&#xb0;</string>
     <string name="cali_time">Калибрация: %1$s</string>
     <string name="calib_error">Средна грешка: %1$.2f ° (BH delta %2$.3f)</string>
@@ -216,6 +217,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
    
     <!-- UNUSED string name="device_algo_failed">Автоматичното определяне е невъзможно\nИзползвайте линеен алгоритъм</string -->
     <string name="device_address">Адрес %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
     <string name="address">Адрес</string>
     <string name="model_invalid">грешен номер</string>
     <string name="model_missing">липсващ номер</string>

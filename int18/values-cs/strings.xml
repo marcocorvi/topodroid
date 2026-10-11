@@ -182,7 +182,8 @@
     <string name="calib_validation">Porovnání %1$s a %2$s</string>
     <string name="calib_reset_ok">Kalibrace byla resetována</string>
 
-    <string name="using">Používá se %1$s</string>
+    <string name="using_a">Používá se %1$s</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
     <string name="cali_err">chyba: průměr %1$.2f&#xb0;, směrodatná odchylka %2$.2f&#xb0;, max. %3$.2f&#xb0;</string>
     <string name="cali_time">Kalibrace: %1$s</string>
     <string name="calib_error">Průměrná chyba: %1$.2f&#xb0; (rozdíl BH %2$.3f)</string>
@@ -214,6 +215,11 @@
     <string name="non_linear">nelineární</string>
 
     <string name="device_address">Adresa %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
     <string name="address">Adresa</string>
     <string name="model_invalid">Neplatné číslo</string>
     <string name="model_missing">Chybí číslo</string>

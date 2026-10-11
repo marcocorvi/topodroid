@@ -193,7 +193,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- UNUSED string name="connect_failed">Echec de la connexion</string -->
     <!-- UNUSED string name="data"> données</string -->
-    <string name="using">Utilisation de %1$s</string>
+    <string name="using_a">Utilisation de %1$s</string>
+    <!-- TODO string name="using_b">Alternate %1$s</string -->
 	 <string name="cali_err">Erreur: moyenne %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
     <string name="cali_time">Étalonnage: %1$s</string>
     <string name="calib_error">Erreur moyenne : %1$.2f degrés (BH delta %2$.2f)</string>
@@ -227,6 +228,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     
     <!-- UNUSED string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string -->
     <string name="device_address">Addresse %1$s</string>
+    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
+    <!-- TODO string name="device_command_failed">Device command failed</string -->
+    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
+    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
+    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
     <string name="address">Addresse</string>
     <string name="model_invalid">Nombre incorrect</string>
     <string name="model_missing">Nombre ommis</string>
