@@ -50,6 +50,18 @@ class ListerSetHandler extends ListerHandler
   }
 
   @Override
+  synchronized public void setTheTitle()
+  {
+    for ( ILister lister : mListers ) lister.setTheTitle();
+  }
+
+  @Override
+  synchronized public void enableBluetoothButton( boolean enable )
+  {
+    for ( ILister lister : mListers ) lister.enableBluetoothButton( enable );
+  }
+
+  @Override
   synchronized public void refreshDisplay( int nr, boolean toast )
   {
     for ( ILister lister : mListers ) lister.refreshDisplay( nr, toast );

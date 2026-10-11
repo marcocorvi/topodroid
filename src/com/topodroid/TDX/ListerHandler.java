@@ -76,6 +76,21 @@ public class ListerHandler extends Handler
     if ( mLister != null ) mLister.setConnectionStatus( status );
   }
 
+  /** set the title of the lister
+   */
+  public void setTheTitle() 
+  {
+    if ( mLister != null ) mLister.setTheTitle();
+  }
+
+  /** enable the bluetooth button of the lister
+   * @param enable  whether to enable or disable
+   */
+  public void enableBluetoothButton( boolean enable ) 
+  {
+    if ( mLister != null ) mLister.enableBluetoothButton( enable );
+  }
+
   /** handle a message
    * @param msg  message
    */

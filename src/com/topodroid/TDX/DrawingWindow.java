@@ -1469,10 +1469,8 @@ public class DrawingWindow extends ItemDrawer
       sb.append(": ");
     }
     
-    if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
-      sb.append( "{" );
-      if ( TDInstance.getDeviceA() != null ) sb.append( TDInstance.getDeviceA().getNickname() );
-      sb.append( "} " );
+    if ( TDInstance.getDeviceA() != null && TDSetting.isConnectionModeMulti() ) {
+      sb.append( "{" ).append( TDInstance.getDeviceA().getNickname() ).append( "} " );
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
     // sb.append( mLandscape ? titleLandscape : titlePortrait );
@@ -1576,7 +1574,7 @@ public class DrawingWindow extends ItemDrawer
     String scrap_name = mFullName3;
     startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber + 2, TDPath.NR_BACKUP );
     // TDSKETCH
-	// if ( ! ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) ) {
+    // if ( ! ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) ) {
     //   queuePendingSectionOverlayRefresh( scrap_name );
     // } else {
     //   mPendingSectionOverlayRefreshName = null;
@@ -2722,6 +2720,9 @@ public class DrawingWindow extends ItemDrawer
     mButtonView5  = new MyHorizontalButtonView( mButton5 );
   }
 
+  static float BUTTON_SCALE_X = 3;
+  static float BUTTON_SCALE_Y = 3;
+
   /** set the params of the tools toolbar
    * @NOTE called by TopoDroidApp when toolbar size setting is changed
    */
@@ -2738,6 +2739,9 @@ public class DrawingWindow extends ItemDrawer
       lp0 = mLayoutToolsL.getLayoutParams();
       lp0.height = (int)(scale * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
       mLayoutToolsL.setLayoutParams( lp0 );
+      BUTTON_SCALE_X = lp0.height / (60 * TDSetting.mUnitLines );
+      BUTTON_SCALE_Y = BUTTON_SCALE_X;
+      TDLog.v("Tools bar height " + lp0.height + " scale " + scale + " button-scale " + BUTTON_SCALE_X );
 
       lp0 = mLayoutToolsA.getLayoutParams();
       lp0.height = (int)(scale * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
@@ -2896,9 +2900,9 @@ public class DrawingWindow extends ItemDrawer
     }
     if ( TDLevel.overNormal ) {
       if ( BTN_TOOL < mNrButton2 ) mButton2[ BTN_TOOL ].setOnLongClickListener( this );
+      if ( BTN_DOWNLOAD  < mNrButton1 && mDataDownloader != null ) mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
     }
     if ( TDLevel.overAdvanced ) {
-      if ( BTN_DOWNLOAD  < mNrButton1 && mDataDownloader != null ) mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
       if ( BTN_DIAL      < mNrButton1 ) mButton1[BTN_DIAL].setOnLongClickListener( this );
       if ( BTN_ITEM_EDIT < mNrButton3 ) mButton3[BTN_ITEM_EDIT].setOnLongClickListener( this );
     }
@@ -7561,21 +7565,24 @@ public class DrawingWindow extends ItemDrawer
   {
     checkLabelPath();
     Button b = (Button)view;
-    if ( TDLevel.overAdvanced && BTN_DOWNLOAD < mNrButton1 && b == mButton1[ BTN_DOWNLOAD ] ) {
+    if ( TDLevel.overNormal && BTN_DOWNLOAD < mNrButton1 && b == mButton1[ BTN_DOWNLOAD ] ) {
       if ( mDataDownloader != null ) { // TH2EDIT added this test 
-        if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-          if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
-            mApp.switchSecondDevice();
-            setTheTitle();
-            // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
-          } else {
-            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
-          }
-        } else {
-          mDataDownloader.toggleDownloading();
-          setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
+        if ( mDataDownloader != null ) {
+          mApp.showSurveyDeviceSwitch( this, this ); // MM SWITCH replace the following if-then-else
         }
+        // if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.knownDevices().size() > 1 ) {
+        //   if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
+        //     mApp.switchSecondDevice();
+        //     setTheTitle();
+        //     // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+        //   } else {
+        //     (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+        //   }
+        // } else {
+        //   mDataDownloader.toggleDownloading();
+        //   setConnectionStatus( mDataDownloader.getStatus() );
+        //   mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
+        // }
       }
     } else if ( TDLevel.overAdvanced && BTN_DIAL < mNrButton1 && b == mButton1[ BTN_DIAL ] ) {
       if ( /* TDLevel.overAdvanced && */ mType == PlotType.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
@@ -8032,6 +8039,7 @@ public class DrawingWindow extends ItemDrawer
             (new ShotNewDialog( mActivity, mActivity, mApp, this, last_blk, -1L )).show();
             // (new ShotNewDialog( mActivity, mActivity, mApp, this, null, -1L )).show();
           } else {
+            // TDLog.v("Drawing window toggle dowloading");
             mDataDownloader.toggleDownloading();
             // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
             mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
@@ -9626,7 +9634,7 @@ public class DrawingWindow extends ItemDrawer
         switch ( status ) {
           case ConnectionState.CONN_CONNECTED:
             setButton1( BTN_DOWNLOAD, mBMdownload_on );
-            if ( TDInstance.isDeviceBric() ) {
+            if ( TDInstance.hasDeviceRemoteControl() ) {
               setButton1( BTN_BLUETOOTH, mBMbluetooth );
             } else {
               setButton1( BTN_BLUETOOTH, mBMbluetooth_no );

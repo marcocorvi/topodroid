@@ -786,8 +786,42 @@ public class TDandroid
    */
   public static void runOnMainThread( Runnable runnable )
   {
-    Handler handler = new Handler( Looper.getMainLooper() );
-    handler.post( runnable );
+    if ( Looper.myLooper() == Looper.getMainLooper() ) { // MM inserted this if-part
+      runnable.run();
+    } else {
+      Handler handler = new Handler( Looper.getMainLooper() );
+      handler.post( runnable );
+    }
+  }
+
+  public static void toast( final String msg )
+  {
+    runOnMainThread( new Runnable() { public void run() { TDToast.make( msg ); } } );
+  }
+
+  public static void toast( final int res_id )
+  {
+    runOnMainThread( new Runnable() { public void run() { TDToast.make( res_id ); } } );
+  }
+
+  public static void toastBad( final String msg )
+  {
+    runOnMainThread( new Runnable() { public void run() { TDToast.makeBad( msg ); } } );
+  }
+
+  public static void toastBad( final int res_id )
+  {
+    runOnMainThread( new Runnable() { public void run() { TDToast.makeBad( res_id ); } } );
+  }
+
+  public static void toastWarn( final String msg )
+  {
+    runOnMainThread( new Runnable() { public void run() { TDToast.makeWarn( msg ); } } );
+  }
+
+  public static void toastWarn( final int res_id )
+  {
+    runOnMainThread( new Runnable() { public void run() { TDToast.makeWarn( res_id ); } } );
   }
 
 

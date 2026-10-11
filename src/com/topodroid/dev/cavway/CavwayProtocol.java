@@ -64,6 +64,7 @@ public class CavwayProtocol extends TopoDroidProtocol
   public static final int PACKET_CALIB_DATA  = 0x22; // PACKET_MEASURE_DATA | 0x02
 
   public static final int PACKET_NONE           = 0;
+  public static final int PACKET_OOB            = 0x0f;
   public static final int PACKET_ERROR          = 0x80;
 
   // public long mG2X, mG2Y, mG2Z;
@@ -207,6 +208,7 @@ public class CavwayProtocol extends TopoDroidProtocol
 
     return ( packetdata[0] == 0x01 )? DataType.PACKET_DATA 
          : ( packetdata[0] == 0x02 )? DataType.PACKET_G    //definite a new identifier? PACKET_G not suitable
+         : ( ( packetdata[0] & MemoryOctet.BYTE_PACKET_OVER_BAND ) == 0 )? DataType.PACKET_OOB
          : PACKET_NONE;
   }
 
@@ -318,7 +320,10 @@ public class CavwayProtocol extends TopoDroidProtocol
     if ( LOG ) TDLog.v( TAG + " packet byte[0] " + String.format("%02x", databuf[0] ) + " " + String.format("%02x", databuf[1] ) );
     // scan mode   01 bf 1011.1111
     // normal mode 01 ff 1111.1111
-    if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length ==  CavwayData.SIZE  ) { // shot / calib data
+    if ( (   databuf[0] == MemoryOctet.BYTE_PACKET_DATA
+          || databuf[0] == MemoryOctet.BYTE_PACKET_G
+          || ((databuf[0] & MemoryOctet.BYTE_PACKET_OVER_BAND) == 0 )
+         ) && databuf.length ==  CavwayData.SIZE  ) { // shot / calib data
       if ( mComm.isDownloading() ) {
         mTime = TDUtil.getSeconds(); // not necesary because mTime is set by handleCavwayPacket
         for ( int kk=0; kk< CavwayData.SIZE ; ++kk ) {
@@ -339,6 +344,9 @@ public class CavwayProtocol extends TopoDroidProtocol
               } else if (  res == DataType.PACKET_G ) {
                 mComm.handleCavwayPacket(res, mLister, 0, mComment, 0 );
                 return PACKET_CALIB_DATA; 
+              } else if (  res == DataType.PACKET_OOB ) {
+                TDLog.t( TAG + "out-of-band packet");
+                return PACKET_OOB;
               } else {
                 return PACKET_ERROR;
               }

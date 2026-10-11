@@ -214,3 +214,5 @@ archive:
 release-archive:
 	echo -n "cannot make archive from this folder"
 
+save-archive:
+	tar -chvzf ../topodroid-`date -I`-old.tgz --exclude-vcs $(SRC)

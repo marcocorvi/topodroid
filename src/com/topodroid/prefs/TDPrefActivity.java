@@ -517,7 +517,7 @@ public class TDPrefActivity extends Activity
       if ( mBtAliasPref != null ) {
         View v = mBtAliasPref.getView();
         if ( v != null ) {
-          TDLog.v("Graph Paper Scale Intent prepared");
+          // TDLog.v("Graph Paper Scale Intent prepared");
           final Intent bt_alias_intent = new Intent( mCtx, com.topodroid.TDX.BtAliasActivity.class ); // this
           v.setOnClickListener( new OnClickListener() {
             @Override
@@ -666,7 +666,7 @@ public class TDPrefActivity extends Activity
   {
     final String[] vals = page.split(":");
     if ( vals.length != 2 ) return;
-    TDLog.v( "key <" + vals[0] + "> value <" + vals[1] + ">" );
+    // TDLog.v( "key <" + vals[0] + "> value <" + vals[1] + ">" );
     // vals[0] = key
     // vals[1] = value
     final TDPrefKey pref = TDPrefKey.getPrefKey( vals[0] );

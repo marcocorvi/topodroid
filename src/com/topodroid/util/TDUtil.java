@@ -585,7 +585,7 @@ public class TDUtil
     return age + "y"; // Long.toString(age) + "y";
   }
 
-  // SLOW ----------------------------------------------------
+  // THREAD ----------------------------------------------------
 
   /** sleep the thread
    * @param msec   sleep time [milliseconds]
@@ -595,7 +595,10 @@ public class TDUtil
     try {
       // TDLog.v("SLEEP slow " + msec );
       Thread.sleep( msec );
-    } catch ( InterruptedException e ) { return false; }
+    } catch ( InterruptedException e ) { 
+      Thread.currentThread().interrupt();
+      return false;
+    }
     return true;
   }
 
@@ -609,7 +612,8 @@ public class TDUtil
       // TDLog.v("SLEEP slow * " + msec );
       Thread.sleep( msec );
     } catch ( InterruptedException e ) {
-      TDLog.e( msg + " " + e.getMessage() );
+      if ( msg != null ) TDLog.e( msg + " " + e.getMessage() );
+      Thread.currentThread().interrupt();
       return false;
     }
     return true;
@@ -624,9 +628,27 @@ public class TDUtil
       // TDLog.v("SLEEP yield " + msec );
       Thread.yield();
       Thread.sleep( msec );
-    } catch ( InterruptedException e ) { return false; }
+    } catch ( InterruptedException e ) {
+      Thread.currentThread().interrupt();
+      return false;
+    }
     return true;
   }
+
+  public static void join( Thread thread )
+  {
+    if ( thread == null || thread == Thread.currentThread() ) return;
+    boolean interrupted = false;
+    while ( thread.isAlive() ) {
+      try {
+        thread.join();
+      } catch ( InterruptedException e ) {
+        interrupted = true;
+      }
+    }
+    if ( interrupted ) Thread.currentThread().interrupt();
+  }
+
 
   // -------------------------------------------------------
 

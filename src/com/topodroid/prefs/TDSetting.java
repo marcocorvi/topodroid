@@ -221,7 +221,9 @@ public class TDSetting
   }
      
 
-  public static String keyDeviceName() { return "DISTOX_DEVICE"; }
+  public static String keyDeviceName() { return "DISTOX_FIRST_DEVICE"; }
+  public static String keySecondDeviceName() { return "DISTOX_SECOND_DEVICE"; }
+
 
   // static final  String EXPORT_TYPE    = "th";    // DISTOX_EXPORT_TH
 
@@ -466,7 +468,15 @@ public class TDSetting
   public static boolean isConnectionModeMulti()      { return mConnectionMode == CONN_MODE_MULTI; }
   // public static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
 
-  public static String getConnectionMode() { return (mConnectionMode == CONN_MODE_BATCH)? "batch"
+  /** @return true if device can be switched
+   *   either mode is BATCH and second-disto is enabled
+   *   or mode is MULTI
+   */
+  public static boolean canSwitchDevice() { return ( mSecondDistoX && mConnectionMode == CONN_MODE_BATCH ) || ( mConnectionMode == CONN_MODE_MULTI ); }
+
+  /** @return the name of the connection mode 
+   */
+  public static String getConnectionMode() { return (mConnectionMode == CONN_MODE_BATCH)? "batch" // FIXME use resources
                                                   : (mConnectionMode == CONN_MODE_CONTINUOUS)? "continuous" 
                                                   : (mConnectionMode == CONN_MODE_MULTI)? "multi" : "unknown"; 
                                            }

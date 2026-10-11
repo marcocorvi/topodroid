@@ -156,7 +156,6 @@ public class BricProto extends TopoDroidProtocol
         TDLog.e("BRIC proto: missed data, last " + mLastIndex + " current " + mIndex );
         if ( TDSetting.mBricMode != BricMode.MODE_PRIM_ONLY && TopoDroidApp.mMainActivity != null ) {
           final String lost = "missed " + (mIndex - mLastIndex -1) + " data";
-          // TopoDroidApp.mMainActivity.runOnUiThread(
           TDandroid.runOnMainThread(
             new Runnable() { public void run() {
               TDToast.makeBad( lost );

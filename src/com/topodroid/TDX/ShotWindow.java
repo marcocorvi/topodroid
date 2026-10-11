@@ -464,10 +464,8 @@ public class ShotWindow extends MyActivity
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
-    if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
-      sb.append( "{" );
-      if ( TDInstance.getDeviceA() != null ) sb.append( TDInstance.getDeviceA().getNickname() );
-      sb.append( "} " );
+    if ( TDInstance.getDeviceA() != null && TDSetting.canSwitchDevice() ) {
+      sb.append( "{" ).append( TDInstance.getDeviceA().getNickname() ).append( "} " );
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
     sb.append( TDInstance.survey );
@@ -618,9 +616,26 @@ public class ShotWindow extends MyActivity
       return;
     }
     processShotList( list );
+    if ( checkMultiBadShots( list ) ) {
+      mDataAdapter.notifyDataSetChanged(); // THIS IS USED TO REFRESH THE DATA LIST
+    }
     if ( photos != null && ! photos.isEmpty() ) {
       mDataAdapter.reviseBlockWithPhotos( photos );
     }
+  }
+
+  private boolean checkMultiBadShots( List< DBlock > list )
+  {
+    boolean ret = false;
+    for ( DBlock blk : list ) {
+      if ( blk.isLeg() ) {
+        if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino ) ) {
+          blk.setMultiBad( true );
+          ret = true;
+        }
+      }
+    }
+    return ret;
   }
 
   /** process the list of shot data and fill the adapter for the display list
@@ -840,8 +855,7 @@ public class ShotWindow extends MyActivity
   {
     // TDLog.v( TAG + "item click pos " + pos );
     if ( mDataAdapter.isMultiSelect() ) {
-      if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
-        TDToast.makeWarn("Immutable survey");
+      if ( TDInstance.isSurveyImmutable ) {  // IMMUTABLE
         clearMultiSelect();
         return;
       }
@@ -1619,6 +1633,16 @@ public class ShotWindow extends MyActivity
 
     // mSearch = new SearchResult();
     // TDLog.v( TAG + "on create sid " + TDInstance.sid );
+
+    if ( TDSetting.isConnectionModeContinuous() ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.DOWN_C );
+    } else if ( TDSetting.isConnectionModeMulti() ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.DOWN_M );
+    } else if ( TDSetting.mSecondDistoX ) {
+      TopoDroidApp.updateAnalytic( TDAnalytics.DOWN_2 );
+    } else {
+      TopoDroidApp.updateAnalytic( TDAnalytics.DOWN_B );
+    }
   }
 
   @Override
@@ -1774,29 +1798,30 @@ public class ShotWindow extends MyActivity
       ret = true;
     } else {
       mDataAdapter.clearSearch();
-      if ( ! TDInstance.isDivingMode() && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DEVICE or SECOND-DEVICE
-        if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
-          TDToast.makeWarn("Immutable survey");
-          return true;
+      if ( TDSetting.canSwitchDevice() && Device.canSwitch( TDInstance.getDeviceA() ) ) {
+        if ( ! TDInstance.isDivingMode() && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DEVICE or SECOND-DEVICE
+          if ( TDInstance.isSurveyImmutable() ) return true;  // IMMUTABLE
+          mApp.showSurveyDeviceSwitch( this, this ); // MM SWITCH replaces the following if-then-else
+          // if ( TDInstance.isDeviceDistoX() ) {
+          //   if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.knownDevices().size() > 1 ) {
+          //     if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
+          //       mApp.switchSecondDevice();
+          //       setTheTitle();
+          //       // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+          //     } else {
+          //       (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+          //     }
+          //   } else {
+          //     mDataDownloader.toggleDownloading();
+          //     mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
+          //   }
+          // } else { // TODO something cleverer than falling back to short click
+          //   mDataDownloader.toggleDownloading();
+          //   mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
+          // }
+          ret = true;
         }
-        if ( TDInstance.isDeviceDistoX() ) {
-          if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-            if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
-              mApp.switchSecondDevice();
-              setTheTitle();
-              // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
-            } else {
-              (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
-            }
-          } else {
-            mDataDownloader.toggleDownloading();
-            mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
-          }
-        } else { // TODO something cleverer than falling back to short click
-          mDataDownloader.toggleDownloading();
-          mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
-        }
-        ret = true;
+        // ret = false
       } else if ( isButton1( b, BTN_PLOT ) ) {
         if ( mWaitPlot ) {
           TDToast.make( R.string.pleasewait );
@@ -1810,10 +1835,7 @@ public class ShotWindow extends MyActivity
         }
         ret = true;
       } else if ( isButton1( b, BTN_MANUAL ) ) {
-        if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
-          TDToast.makeWarn("Immutable survey");
-          return true;
-        }
+        if ( TDInstance.isSurveyImmutable() ) return true;  // IMMUTABLE
         new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
         ret = true;
       }
@@ -1852,10 +1874,7 @@ public class ShotWindow extends MyActivity
       if ( ! TDInstance.isDivingMode() ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
           // TDLog.v( TAG + "pressed download button");
-          if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
-            TDToast.makeWarn("Immutable survey");
-            return;
-          }
+          if ( TDInstance.isSurveyImmutable() ) return;  // IMMUTABLE
           if ( TDInstance.getDeviceA() != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == ConnectionState.CONN_DISCONNECTED ) {
@@ -1863,12 +1882,14 @@ public class ShotWindow extends MyActivity
             // }
             // TDLog.v( TAG + "Download button, mode " + TDSetting.getConnectionMode() );
             // toggle must come first
+            TDLog.v("Shot window toggle downloading");
             boolean downloading = mDataDownloader.toggleDownloading();
             TDFeedback.notifyFeedback( this, downloading && mBTstatus == ConnectionState.CONN_DISCONNECTED );
             // TDLog.v( TAG + "download button");
             mApp.notifyListerStatus( mApp.mListerSet, downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
             // TDLog.v( TAG + "Download, conn mode " + TDSetting.getConnectionMode() + " download status " + mDataDownloader.getStatus() );
             // setConnectionStatus( mDataDownloader.getStatus() );
+            TDLog.v("Shot window do download data");
             mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
           } else {
             TDLog.e( TAG + "null device A");
@@ -1894,10 +1915,7 @@ public class ShotWindow extends MyActivity
         }
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
-        if ( ! TDInstance.isSurveyMutable ) {  // IMMUTABLE
-          TDToast.makeWarn("Immutable survey");
-          return;
-        }
+        if ( TDInstance.isSurveyImmutable() ) return;  // IMMUTABLE
         if ( TDLevel.overBasic ) {
           // mSearch = null; // invalidate search
           DBlock last_blk = mApp_mData.selectLastShotWithFromStation( TDInstance.sid );
@@ -2372,8 +2390,59 @@ public class ShotWindow extends MyActivity
     // TDLog.v( TAG + "update shot name " + from + "-" + to + " and flags " + flag + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() + " renumber " + renumber );
     String sts = checkXSections( blk, from, to );
     if ( sts == null ) {
+      boolean multi_bad = blk.isMultiBad();
+      List< Integer > old_siblings = multi_bad ? mApp_mData.getBadSiblings( blk, TDInstance.sid, blk.mFrom, blk.mTo ) : null;
       doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
       if ( renumber ) renumberShotsAfter( blk );
+      if ( multi_bad ) {
+        List< Integer > new_siblings = mApp_mData.getBadSiblings( blk, TDInstance.sid, from, to );
+        if ( new_siblings.isEmpty() ) {
+          // TDLog.v("no new bad sibling");
+          blk.setMultiBad( false );
+          mDataAdapter.updateBlockView( blk.mId );
+          for ( Integer id : old_siblings ) {
+            DBlock b = mDataAdapter.getBlockById( id );
+            if ( b != null && ! mApp_mData.hasBadSiblings( b,  TDInstance.sid ) ) {
+              // TDLog.v("check old bad sibling " + id + " no longer bad");
+              b.setMultiBad( false );
+              mDataAdapter.updateBlockView( id );
+            // } else {
+            //   TDLog.v("check old bad sibling " + id + " no block or still bad");
+            }
+          }
+        } else {
+          // blk.setMultiBad( true ); not-neceessary
+          // TDLog.v("new bad sibling");
+          for ( Integer id : new_siblings ) { // mark block ID as bad
+            DBlock b = mDataAdapter.getBlockById( id );
+            if ( b != null ) {
+              // TDLog.v("ID " + id + " set bad block");
+              b.setMultiBad( true );
+              mDataAdapter.updateBlockView( id );
+            // } else {
+            //   TDLog.v("ID " + id + " no block");
+            }
+          }
+        }
+      } else { // no old sibling
+        List< Integer > new_siblings = mApp_mData.getBadSiblings( blk, TDInstance.sid, from, to );
+        if ( ! new_siblings.isEmpty() ) {
+          // TDLog.v("block " + blk.mId + " got bad siblings");
+          blk.setMultiBad( true );
+          mDataAdapter.updateBlockView( blk.mId );
+          for ( Integer id : new_siblings ) { // mark block ID as bad
+            DBlock b = mDataAdapter.getBlockById( id );
+            if ( b != null ) {
+              // TDLog.v("ID " + id + " set bad block");
+              b.setMultiBad( true );
+              mDataAdapter.updateBlockView( id );
+            // } else {
+            //   TDLog.v("ID " + id + " no block");
+            }
+          }
+        }
+        // TDLog.v("REFRESH THE DATA LIST");
+      }
     } else {
       Resources res = getResources();
       final long leg0 = leg;
@@ -2386,6 +2455,11 @@ public class ShotWindow extends MyActivity
           public void onClick( DialogInterface dialog, int btn ) {
             doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg0, comment, blk );
             if ( renumber ) renumberShotsAfter( blk );
+            boolean multi_bad = blk.isMultiBad();
+            boolean check_sibling = mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, blk.mLength, blk.mBearing, blk.mClino );
+            if ( multi_bad != check_sibling ) {
+              TDLog.v("REFRESH THE DATA LIST");
+            }
           } },
         null
       );
@@ -2562,9 +2636,20 @@ public class ShotWindow extends MyActivity
     if ( TDString.isNullOrEmpty( to ) ) return;
     if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, d, b, c ) ) { // bad sibling
       TDToast.makeWarn( R.string.bad_sibling );
+      blk.setMultiBad( true );
     // } else {
     //   // TDLog.v( TAG + "no bad sibling for " + blk.mId );
     }
+  }
+
+  /** check if a block has siblings
+   * @param blk  data block
+   * @param from FROM station
+   * @param to   TO station
+   */
+  private void checkSiblings( DBlock blk, String from, String to )
+  {
+    checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
   }
 
   /** @return true if no xsection refer to a station of the block, or to FROM / TO
@@ -2693,7 +2778,7 @@ public class ShotWindow extends MyActivity
       // TDLog.v( TAG + "update display : renumber assign stations after");
       updateDisplay();
       // mList.invalidate();
-      checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
+      checkSiblings( blk, from, to );
     } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
       // TDLog.v( TAG + "Block splay " + blk.mId );
       for ( DBlock b : blks ) {
@@ -2747,7 +2832,7 @@ public class ShotWindow extends MyActivity
       // TDLog.v( TAG + "swap block to <" + from + "-" + to + ">" );
       // blk.setBlockName( from, to ); // 2026064 was this instead on the next line
       updateShotBlockName( blk, from, to );
-      checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
+      checkSiblings( blk, from, to );
     }
     mApp_mData.updateShotsName( blks, TDInstance.sid );
     // updateDisplay();
@@ -3109,7 +3194,7 @@ public class ShotWindow extends MyActivity
       if ( status != mBTstatus ) {
         mBTstatus = status;
         // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
-        boolean isBricOrCavway = TDInstance.isDeviceBric() || TDInstance.isDeviceCavway();
+        boolean isBricOrCavway = TDInstance.isDeviceCavway() || TDInstance.isDeviceXBLE() || TDInstance.isDeviceBric();
         switch ( status ) {
           case ConnectionState.CONN_CONNECTED:
             TDFeedback.notifyFeedback( this, true );
@@ -3132,7 +3217,9 @@ public class ShotWindow extends MyActivity
   public void enableBluetoothButton( boolean enable )
   {
     if ( TDInstance.isDivingMode() ) return;
-    if ( TDInstance.hasBleDevice() ) enable = true;
+    TDLog.v("enable Bluetooth Button");
+    // if ( TDInstance.hasBleDevice() ) enable = true; // MM replaced with
+    enable = enable && ! mApp.isDeviceOperationBusy( );
     TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (enable ? mBMbluetooth : mBMbluetooth_no) );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }

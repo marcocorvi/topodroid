@@ -194,7 +194,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="calib_reset_ok">Resetted calibration</string>
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
-    <string name="using">Using %1$s</string>
+    <string name="using_a">Current %1$s</string>
+    <string name="using_b">Alternate %1$s</string>
     <string name="cali_err">error: average %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
     <string name="cali_time">Calibration: %1$s</string>
     <string name="calib_error">Average error: %1$.2f&#xb0; (BH delta %2$.3f)</string>
@@ -228,6 +229,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">Address %1$s</string>
+    <string name="device_connection_failed">Device connection failed</string>
+    <string name="device_command_failed">Device command failed</string>
+    <string name="device_switching">Switching to device %1$s</string>
+    <string name="device_operation_busy">Device operation busy</string>
+    <string name="device_pair_duplicate">Device pair duplicate</string>
     <string name="address">Address</string>
     <string name="model_invalid">invalid number</string>
     <string name="model_missing">missing number</string>

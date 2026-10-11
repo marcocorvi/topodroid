@@ -120,6 +120,9 @@ public class SapComm extends BleComm
   //   mRemoteBtDevice = device;
   // }
 
+  // FIXME 
+  // @Override public void terminate() ??
+
   // -------------------------------------------------------------
   // CONNECTION AND DATA HANDLING MUST RUN ON A SEPARATE THREAD
   // 

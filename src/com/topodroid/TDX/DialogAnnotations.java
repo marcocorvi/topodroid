@@ -81,10 +81,7 @@ class DialogAnnotations extends MyDialog // Activity
   private void save( )
   {
     // TDLog.Log( TDLog.LOG_IO, "annotations save to file " + mFilename );
-    if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
-      TDToast.makeWarn("Immutable survey");
-      return;
-    }
+    if ( TDSetting.WITH_IMMUTABLE && TDInstance.isSurveyImmutable() ) return; // IMMUTABLE
     try {
       TDPath.checkPath( mFilename );
       FileWriter fw = TDFile.getFileWriter( mFilename, false );

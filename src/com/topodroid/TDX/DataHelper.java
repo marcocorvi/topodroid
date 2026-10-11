@@ -1922,6 +1922,58 @@ public class DataHelper extends DataSetObservable
   //   return cnt >= 2;
   // }
 
+  List< Integer > getBadSiblings( DBlock blk, long sid, String from, String to )
+  {
+    ArrayList<Integer> ret = new ArrayList<>();
+    if ( from.length() == 0 || to.length() == 0 ) return ret;
+    long id0 = blk.mId;
+    double d0 = blk.mLength;
+    double b0 = blk.mBearing;
+    double c0 = blk.mClino;
+    Cursor cursor = myDB.rawQuery( qShotsByStations, new String[] { Long.toString( sid ), from, to } );
+    if (cursor.moveToFirst()) {
+      cursor.moveToFirst();
+      do { 
+        if ( cursor.getLong( 0 ) != id0 ) {
+          double b1 = Math.abs(cursor.getDouble( 2 ) - b0);
+          if ( b1 > 180 ) b1 = Math.abs( b1 - 360 );
+          if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > d0*TDSetting.mSiblingThrD )
+            || ( b1 > TDSetting.mSiblingThrA ) 
+            || ( Math.abs( cursor.getDouble( 3 ) - c0 ) > TDSetting.mSiblingThrA ) ) {
+            ret.add( (int)( cursor.getLong( 0 ) ) );
+          }
+        }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    cursor = myDB.rawQuery( qShotsByStations, new String[] { Long.toString( sid ), to, from } );
+    if ( cursor.moveToFirst() ) {
+      do { 
+        if ( cursor.getLong( 0 ) != id0 ) {
+          // TDLog.v( "B-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
+          double b1 = Math.abs(cursor.getDouble( 2 ) + 180 - b0);
+          if ( b1 > 180 ) b1 = Math.abs( b1 - 360 );
+          if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > d0*TDSetting.mSiblingThrD )
+            || ( b1 > TDSetting.mSiblingThrA ) 
+            || ( Math.abs( cursor.getDouble( 3 ) + c0 ) > TDSetting.mSiblingThrA ) ) {
+            ret.add( (int)( cursor.getLong( 0 ) ) );
+          }
+        }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  /** @return true if the block has bad siblings
+   * @param blk   block
+   * @param sid   survey ID
+   */
+  boolean hasBadSiblings( DBlock blk, long sid ) 
+  {
+    return checkSiblings( blk.mId, sid, blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino );
+  }
+
   /** check for possible bad siblings (shots with the given stations and conflicting data)
    * @return false if there are no conflicting siblings
    * @param id0    block id to skip
@@ -1949,6 +2001,7 @@ public class DataHelper extends DataSetObservable
             || ( b1 > TDSetting.mSiblingThrA ) 
             || ( Math.abs( cursor.getDouble( 3 ) - c0 ) > TDSetting.mSiblingThrA ) ) {
             ret = true;
+            TDLog.v( "Bad for-sibling " + id0 + " " + cursor.getLong(0) );
             break;
           }
         }
@@ -1967,6 +2020,7 @@ public class DataHelper extends DataSetObservable
               || ( b1 > TDSetting.mSiblingThrA ) 
               || ( Math.abs( cursor.getDouble( 3 ) + c0 ) > TDSetting.mSiblingThrA ) ) {
               ret = true;
+              TDLog.v( "Bad back-sibling " + id0 + " " + cursor.getLong(0) );
               break;
             }
           }

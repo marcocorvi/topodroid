@@ -42,6 +42,8 @@ public class MemoryOctet extends MemoryData
   public static final byte BYTE_PACKET_3D     = 0x3d;
   public static final byte BYTE_PACKET_3E     = 0x3e;
 
+  public static final byte BYTE_PACKET_OVER_BAND = (byte)0xf0; // over-band mask
+
   public static final int SIZE = 8;
 
   // ------------------------------------------------------------

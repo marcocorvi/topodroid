@@ -1217,6 +1217,7 @@ public class GMActivity extends MyActivity
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
         // new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
 
+        TDLog.v("GM window toggle downloading");
         boolean downloading = mApp.mDataDownloader.toggleDownloading();
         // TDLog.v("GM downloading " + downloading );
         // mApp.notifyListerStatus( handler, downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );

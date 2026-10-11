@@ -221,6 +221,19 @@ public class Device
   // public boolean canSendCommand() { return mType == DISTO_X310 mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
   // public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_XBLE type == DISTO_BRIC4 || type == DISTO_BRIC5 || type == DISTO_SAP6; }
 
+  /** @return true if the device is suitable for switch
+   * @param dev device
+   */
+  public static boolean canSwitch( Device dev ) { return dev.canSwitch(); }
+
+  /** @return true if this device is suitable for switch
+   */
+  public boolean canSwitch()
+  {
+    return isDistoXBLE( mType ) 
+        || isCavway( mType )
+        || isDistoX( mType );
+  }
 
   /** @return the list of the supported BLE models
    */
@@ -389,7 +402,7 @@ public class Device
   public String getNickname()
   {
     if ( mNickname != null && mNickname.length() > 0 ) return mNickname;
-    return mName;
+    return toSimpleString();
   }
 
   /** @return true if the device supports firmware

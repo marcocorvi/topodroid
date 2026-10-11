@@ -929,10 +929,7 @@ class ShotEditDialog extends MyDialog
       }
     }
 
-    if ( ! TDInstance.isSurveyMutable ) { // IMMUTABLE
-      TDToast.makeWarn("Immutable survey");
-      return;
-    }
+    if ( TDInstance.isSurveyImmutable() ) return; // IMMUTABLE
 
     if ( b == mCBlegPrev ) {
       // TDLog.v( "CB leg clicked ");

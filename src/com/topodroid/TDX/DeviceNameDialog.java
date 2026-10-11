@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.ui.MyDialog;
@@ -67,6 +68,13 @@ class DeviceNameDialog extends MyDialog
     mETnickname = (EditText) findViewById( R.id.tv_nickname );
 
     mCBsecondDevice = (CheckBox) findViewById( R.id.second_device );
+    // only switchable devices and not the device-A
+    if ( ( ! mDevice.canSwitch( ) ) || mDevice.hasAddress( TDInstance.deviceAddress() ) ) {
+      mCBsecondDevice.setVisibility( View.GONE );
+    } else {
+      mCBsecondDevice.setChecked( TDInstance.isSecondDeviceAddress( mDevice.getAddress() ) ); // MM
+    }
+    // mCBsecondDevice.setEnabled( mDevice.hasAddress( TDInstance.deviceAddress() ); // MM
 
     // setTitle( resString( R.string.device_info ) );
 
@@ -98,6 +106,8 @@ class DeviceNameDialog extends MyDialog
       }
       if ( mCBsecondDevice.isChecked() ) {
         mParent.setSecondDevice( mDevice.getAddress() );
+      } else if ( TDInstance.isSecondDeviceAddress( mDevice.getAddress() ) ) { // MM address was device-B but CB is not checked: reset
+        mParent.setSecondDevice( null );
       }
     } else if ( b == mBTforget ) {
       mParent.forgetDevice( mDevice );

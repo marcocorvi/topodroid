@@ -426,10 +426,7 @@ public class SurveyWindow extends MyActivity
       return;
     }
     if ( view instanceof EditText ) {
-      if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
-        TDToast.makeWarn("Immutable survey");
-        return;
-      } 
+      if ( TDSetting.WITH_IMMUTABLE && TDInstance.isSurveyImmutable() ) return;
       ArrayList< String > names = new ArrayList< String >();
       CharSequence chars = mEditTeam.getText();
       if ( chars != null ) {
@@ -454,10 +451,7 @@ public class SurveyWindow extends MyActivity
         }
         return;
       } else if ( b == mEditDate ) {
-        if ( TDSetting.WITH_IMMUTABLE && ! TDInstance.isSurveyMutable ) {
-          TDToast.makeWarn("Immutable survey");
-          return;
-        } 
+        if ( TDSetting.WITH_IMMUTABLE && TDInstance.isSurveyImmutable() ) return;
         String date = TDUtil.stringToDate( mEditDate.getText().toString() );
         int y = TDUtil.dateParseYear( date );
         int m = TDUtil.dateParseMonth( date );

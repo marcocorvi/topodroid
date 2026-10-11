@@ -218,6 +218,10 @@ public class TDAnalytics
   public static final String D_CVWY1    = "Dcvwy1";
   public static final String D_UNKWN    = "Dunkwn";
 
+  public static final String DOWN_B     = "DWb";
+  public static final String DOWN_C     = "DWc";
+  public static final String DOWN_M     = "DWm";
+  public static final String DOWN_2     = "DW2";
 
   private static final String QUERY = "analytics=";
   public static String  mCT = null;

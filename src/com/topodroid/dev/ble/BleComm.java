@@ -14,6 +14,7 @@ package com.topodroid.dev.ble;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.ConnectionState;
+import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDLog;
 
 import android.content.Context;
@@ -35,7 +36,55 @@ abstract public class BleComm extends TopoDroidComm
   protected BleOpsQueue mQps      = null;
   protected BleCallback mCallback = null;
   protected BleQueue    mQueue    = null;
+  // begin MM
+  private volatile boolean mClosing = false;
+  
+  public boolean isClosing() { return mClosing; }
 
+  @Override
+  public void disconnectRemoteDevice() { disconnectDevice(); }
+  
+  @Override
+  public void shutdown()
+  {
+    mClosing = true;
+    try {
+      terminate(); // drain accepted packets before clearing their protocol
+    } finally {
+      if ( mCallback != null ) mCallback.closeGatt();
+      if ( mQps != null ) mQps.discard();
+      mBTConnected = false;
+      closeProtocol();
+    }
+  }
+
+  /** Wait for queued command writes to be acknowledged before releasing the operation.
+   * @param timeout   wait time-out [msec ?]
+   */
+  protected boolean waitForOperations( int timeout )
+  {
+    long deadline = android.os.SystemClock.elapsedRealtime() + timeout;
+    while ( mQps != null && ! mQps.isIdle() ) {
+      if ( ! isConnected() || isClosing() || android.os.SystemClock.elapsedRealtime() >= deadline ) return false;
+      if ( ! TDUtil.slowDown( 20 ) ) return false;
+      // was
+      //  try { Thread.sleep(20); } catch ( InterruptedException e ) { Thread.currentThread().interrupt(); returm false; } 
+    }
+    return ! Thread.currentThread().isInterrupted();
+  }
+
+  protected void drainConsumer( Thread consumer )
+  {
+    mQueue.close();
+    TDUtil.join( consumer );
+    // was
+    // if ( consumer == null || consumer == Thread.currentThread() ) return;
+    // boolean intr = false;
+    //  while ( consumer.isAlive() ) { try { consumer.join(); } catch ( InterruptedException e ) { intr = true; } }
+    // if ( intr ) Thread.currentThread().interrupt(); 
+  }
+  // end MM
+  
   private boolean mUseMtu;
   protected UUID mServiceUuid;
   protected UUID mChrtReadUuid;

@@ -60,7 +60,7 @@ class Accuracy
   boolean isBlockAMDBad( DBlock blk )
   {
     if ( blk.mAcceleration < THRS || blk.mMagnetic < THRS ) {
-      TDLog.e("Accu block below threshold " + blk.mAcceleration + " " + blk.mMagnetic );
+      // TDLog.e("Accu block below threshold " + blk.mAcceleration + " " + blk.mMagnetic );
       return false; // block without G,M,Dip
     }
     // return deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr

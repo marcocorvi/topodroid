@@ -48,6 +48,9 @@ public class DistoX310Comm extends DistoXComm
     // TDLog.Log( TDLog.LOG_COMM, "Disto X310 Comm cstr");
   }
 
+  // FIXME 
+  // @Override public void terminate() ??
+
   /** must be overridden to call create proper protocol
    * @param in      input
    * @param out     output
@@ -68,6 +71,12 @@ public class DistoX310Comm extends DistoXComm
   }
 
   // -------------------------------------------------------- 
+  @Override
+  public boolean setLaser( String address, int what, int to_read, ListerHandler lister, int data_type, boolean close )
+  {
+    return setX310Laser( address, what, to_read, lister, data_type );
+  }
+
   /**
    * nothing to read (only write) --> no AsyncTask
    * @param address   remote device address

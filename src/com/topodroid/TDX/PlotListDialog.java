@@ -184,10 +184,7 @@ class PlotListDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnPlotNew ) {
       TDLog.v( "plot list dialog onClick() NEW ");
-      if ( ! TDInstance.isSurveyMutable ) { // IMMUTABLE
-        TDToast.makeWarn("Immutable survey");
-        return;
-      }
+      if ( TDInstance.isSurveyImmutable() ) return; // IMMUTABLE
       hide();
       if ( mParent != null ) {
         int idx = 1 + TopoDroidApp.mData.maxPlotIndex( TDInstance.sid );

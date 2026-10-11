@@ -44,5 +44,6 @@ public class DataType
   public static final int PACKET_M      = 3;
   public static final int PACKET_VECTOR = 4;
   public static final int PACKET_REPLY  = 5;
+  public static final int PACKET_OOB    = 0x0f;
 
 }

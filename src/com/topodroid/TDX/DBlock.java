@@ -402,7 +402,7 @@ public class DBlock
    */
   int getColorByType() { 
     // TDLog.v( "Block " + mId + " block type " + mBlockType + " color " + BlockType.mTypeColor[ mBlockType ] );
-    return isTampered()? /* BlockType.mTypeColor[ mBlockType ] | */ 0xffff0000
+    return isTampered()? /* BlockType.mTypeColor[ mBlockType ] | */ 0xffff6666
                        : BlockType.mTypeColor[ mBlockType ];
   }
 

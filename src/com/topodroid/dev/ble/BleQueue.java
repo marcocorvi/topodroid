@@ -32,6 +32,7 @@ public class BleQueue
 
   private BleBuffer mHead = null;
   private BleBuffer mTail = null;
+  private boolean mClosed = false; // MM
   public int size = 0;
 
   /** thread-safe putter
@@ -44,12 +45,14 @@ public class BleQueue
     BleBuffer buffer = new BleBuffer( type, bytes );
     mLock.lock();
     try {
+      if ( mClosed ) return; // MM
       if ( mTail == null ) {
         mHead = buffer;
         mTail = mHead;
         notEmpty.signal();
       } else {
         mTail.next = buffer;
+        mTail = buffer; // FIX MM
       }
       ++ size;
     } finally {
@@ -77,6 +80,20 @@ public class BleQueue
       // ret.next = null;
       -- size;
       return ret;
+    } finally {
+      mLock.unlock();
+    }
+  }
+
+  /** queue the STOP marker after all accepted packet and close the queue (reject later arrivals)
+   */
+  public void close() // MM
+  {
+    mLock.lock();
+    try {
+      if ( mClosed ) return;
+      put( DATA_QUIT, new byte[0] );
+      mClosed = true;
     } finally {
       mLock.unlock();
     }

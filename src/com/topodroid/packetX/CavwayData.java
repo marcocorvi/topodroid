@@ -36,6 +36,9 @@ public class CavwayData extends MemoryData
   // public static final byte BYTE_PACKET_G      = 0x02;
   // public static final byte BYTE_PACKET_M      = 0x03;
   // public static final byte BYTE_PACKET_VECTOR = 0x04;
+
+  public static final byte BYTE_PACKET_BAND_MASK = 0x0f;
+
   public static final byte BYTE_PACKET_REPLY  = 0x38;
   public static final byte BYTE_PACKET_REQST  = 0x39;
   // // public static final byte BYTE_PACKET_38     = 0x38;

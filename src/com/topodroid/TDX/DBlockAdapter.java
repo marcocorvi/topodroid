@@ -32,6 +32,7 @@ import android.view.View.OnLongClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
+import android.util.ArrayMap;
 
 // import androidx.annotation.RecentlyNonNull;
 
@@ -47,7 +48,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   private static final int START = 0;
   // private Context mContext;
   private final ShotWindow mParent;
-  // ArrayList< DBlock > mItems;
+  // ArrayMap< Long, DBlock > mItems;
   private ArrayList< DBlock > mSelect;
   boolean show_ids;  //!< whether to show data ids
   private final LayoutInflater mLayoutInflater;
@@ -70,7 +71,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // TDLog.v( "DBlock Adapter cstr. Items " + items.size() );
     // mContext = ctx;
     mParent  = parent;
-    // mItems   = items;
+    // mItems   = new ArrayMap< Long, DBlock >();
+    // for ( DBlock blk : items ) mItems.put( blk.mId, blk );
     add( new DBlock() );
     addAll( items );
 
@@ -191,11 +193,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             if ( long_tap && ( lastPosRemove > -1 ) ) { // continue to de-select blocks all way to the last de-selected item
               if (pos > lastPosRemove) {
                 while ( --pos >= lastPosRemove ) {
-                  removeItem(pos);
+                  removeItemFromMultiSelect(pos);
                 }
               } else {
                 while ( ++pos <= lastPosRemove ) {
-                  removeItem(pos);
+                  removeItemFromMultiSelect(pos);
                 }
               }
             }
@@ -210,11 +212,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             // if ( long_tap  && ( lastPosAdd > -1 ) ) { // continue to select block all the way to the last selected item
             //   if ( pos > lastPosAdd ) {
             //     while ( --pos > lastPosAdd ) {
-            //       addItem(pos);
+            //       addItemToMultiSelect(pos);
             //     }
             //   } else {
             //     while ( ++pos < lastPosAdd ) {
-            //       addItem(pos);
+            //       addItemToMultiSelect(pos);
             //     }
             //   }
             // }
@@ -224,11 +226,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             if ( long_tap  && ( lastPosAdd > -1 ) ) { // continue to select block all the way to the last selected item
               if ( pos > lastPosAdd ) {
                 while ( ++lastPosAdd < pos ) {
-                  addItem( lastPosAdd );
+                  addItemToMultiSelect( lastPosAdd );
                 }
               } else {
                 while ( --lastPosAdd > pos) {
-                  addItem( lastPosAdd );
+                  addItemToMultiSelect( lastPosAdd );
                 }
               }
             }
@@ -294,7 +296,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** remove a block from the multiselection set
    * @param pos   block position
    */
-  private void removeItem(int pos)
+  private void removeItemFromMultiSelect(int pos)
   {
     // TDLog.v("multiselect remove item");
     DBlock b = (DBlock)( getItem( pos ) );
@@ -307,7 +309,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** add a block to the multiselection set
    * @param pos   block position
    */
-  private void addItem(int pos)
+  private void addItemToMultiSelect(int pos)
   {
     // TDLog.v("multiselect add item");
     DBlock b = (DBlock) getItem(pos);
@@ -366,7 +368,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       if ( v != null ) {
         TextView tvFrom = (TextView) v.findViewById( R.id.from );
         TextView tvTo   = (TextView) v.findViewById( R.id.to );
-        int col = blk.getColorByType( );
+        int col = blk.isMultiBad()? TDColor.FULL_RED : blk.getColorByType( );
         tvFrom.setTextColor( col );
         tvTo.setTextColor( col );
       }
@@ -468,6 +470,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     if ( ! b.isScan() && hasBlock( b.mId ) ) return false;
     // TDLog.v("adapter add block " + b.mId );
+    // mItems.put( b.mId, b );
     add( b );
     // notifyDataSetChanged();
     return true;
@@ -497,9 +500,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   public void dropItem( long id )
   {
-    for ( int k = getCount() - 1; k >= 0; --k ) {
+    // DBlock blk = mItems.remove( id );
+    // remove( blk );
+    for ( int k = getCount() - 1; k >= 0; --k ) { // 2026-10-07
       DBlock blk = (DBlock)( getItem( k ) );
-      if ( id == blk.mId ) remove( blk );
+      if ( id == blk.mId ) {
+        remove( blk );
+      }
     }
   }
 
@@ -507,6 +514,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   private boolean hasBlock( long id )
   {
+    // this could be mItems.contains( id ); but there is a problem wit scan-shots
+
     // TDLog.v( "Data Adapter items size " + getCount() + " block id " + id );
     if ( id < START ) return false;
     int size = getCount();
@@ -515,8 +524,6 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // TDLog.v( "Data Adapter ID " + id + " last_blk " + last_blk.mId + " scan " + last_blk.isScan() );
     if ( last_blk.isScan() ) return false;
     return ( id <= last_blk.mId )? true : false;
-    // for ( DBlock b : mItems ) if ( b.mId == id ) return true;
-    // return false;
   }
 
   /** update the name, ie, from-to stations, of a block
@@ -596,11 +603,20 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return -1;
   }
 
-  // public DBlock getBlockById( long id ) 
-  // {
-  //   for ( DBlock b : mItems ) if ( b.mId == id ) return b;
-  //   return null;
-  // }
+  /** @return the block given its ID
+   * @param id  block ID
+   * @note this is not efficient - use some hash-map 
+   */
+  public DBlock getBlockById( long id ) 
+  {
+    // return mItems.get( id );
+    int cnt = getCount();
+    for ( int k=0; k<cnt; ++k ) {
+      DBlock blk = getItem( k );
+      if ( blk.mId == id ) return blk;
+    }
+    return null;
+  }
 
   private class ViewHolder implements OnClickListener
                            , OnLongClickListener
@@ -851,7 +867,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     {
       if ( b == null ) return;
       int col = b.getColorByType();
-      if ( b == lastMultiselectedBlock ) {
+      if ( b.isMultiBad() ) {
+        tvFrom.setTextColor( TDColor.FULL_RED );
+        tvTo.setTextColor( ( b == lastMultiselectedBlock )? TDColor.LIGHT_YELLOW : TDColor.FULL_RED );
+      } else if ( b == lastMultiselectedBlock ) {
         // TDLog.v("Block " + b.mId + " is last MS " + b.mMultiSelected );
         tvFrom.setTextColor( TDColor.LIGHT_YELLOW );
         tvTo.setTextColor( TDColor.LIGHT_YELLOW );
@@ -861,6 +880,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvLength.setTextColor( col );
       }
 
+      // if ( b.isMultiBad() ) {
+      //   TDLog.v("shot " + b.mId + " is RED" );
+      //   tvLength.setTextColor( TDColor.FULL_RED );
+      // }
       if (b.mMultiSelected ) {
         b.setBackgroundColor( TDColor.GRID );
       } else {
@@ -1036,7 +1059,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
             TextView tvTo   = (TextView) v.findViewById( R.id.to );
-            int col = b.getColorByType( );
+            int col = b.isMultiBad()? TDColor.FULL_RED : b.getColorByType( );
             tvFrom.setTextColor( col );
             tvTo.setTextColor( col );
           }
@@ -1050,7 +1073,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
             TextView tvTo   = (TextView) v.findViewById( R.id.to );
-            int col = b.getColorByType( );
+            int col = b.isMultiBad()? TDColor.FULL_RED : b.getColorByType( );
             tvFrom.setTextColor( col );
             tvTo.setTextColor( col );
             if ( mParent.isCurrentStationName( b.mFrom ) ) {

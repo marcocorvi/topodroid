@@ -103,6 +103,7 @@ public class DistoXComm extends TopoDroidComm
       @Override
       public void onReceive( Context ctx, Intent data )
       {
+        if ( ! mApp.isCurrentComm( DistoXComm.this ) ) return; // MM RECONNECT
         String action = data.getAction();
         BluetoothDevice bt_device = data.getParcelableExtra( DeviceUtil.EXTRA_DEVICE );
         String device = ( bt_device != null )? bt_device.getAddress() : "undefined";
@@ -455,7 +456,6 @@ public class DistoXComm extends TopoDroidComm
           } catch ( IOException e ) {
             // Toast must run on UI Thread
             // not sure this is good because it shows also when reconnection is interrupted
-            // // TopoDroidApp.mActivity.runOnUiThread(
             // TDandroid.runOnMainThread(
             //   new Runnable() { public void run() {
             //     TDToast.makeBad( R.string.connection_error  );
@@ -681,10 +681,10 @@ public class DistoXComm extends TopoDroidComm
       return DistoX.DISTOX_ERR_CONNECTED;
     }
     
-    // TDLog.v( "DistoX comm: download data: ready");
+    TDLog.v( "DistoX comm: download data: ready");
     int ret = -1; // failure
     if ( connectSocket( address, data_type ) ) {
-      // TDLog.v("DistoX comm: notify connected" );
+      TDLog.v("DistoX comm: socket connected" );
       notifyStatus( lister, ConnectionState.CONN_CONNECTED );
       DistoXProtocol protocol = (DistoXProtocol)mProtocol;
       if ( TDSetting.mHeadTail ) {
@@ -743,6 +743,7 @@ public class DistoXComm extends TopoDroidComm
       TDLog.e( "download data: fail to connect socket");
       notifyStatus( lister, ConnectionState.CONN_DISCONNECTED );
     }
+    TDLog.v("download data: destroy socket");
     destroySocket( );
     
     return ret;

@@ -564,9 +564,6 @@ public class SymbolLine extends Symbol
     }
   }
 
-  final static private int BUTTON_SCALE_X = 3;
-  final static private int BUTTON_SCALE_Y = 3;
-
   @Override
   public Paint getButtonPaint() 
   {
@@ -574,7 +571,7 @@ public class SymbolLine extends Symbol
     DashPathEffect dash = null;
     if ( mDashX != null ) {
       float[] dash_x = new float[ mDashX.length ];
-      for ( int k=0; k<mDashX.length; ++k ) dash_x[k] = mDashX[k]*BUTTON_SCALE_X;
+      for ( int k=0; k<mDashX.length; ++k ) dash_x[k] = mDashX[k] * DrawingWindow.BUTTON_SCALE_X;
       dash = new DashPathEffect( dash_x, 0 );
       // TDLog.v("line " + getThName() + " has dash " + dash_x.length );
     }
@@ -582,9 +579,9 @@ public class SymbolLine extends Symbol
       paint = new Paint( mPaint );
       Path path = new Path( mPathDir );
       Matrix m = new Matrix();
-      m.postScale( BUTTON_SCALE_X, BUTTON_SCALE_Y );
+      m.postScale(  DrawingWindow.BUTTON_SCALE_X,  DrawingWindow.BUTTON_SCALE_Y );
       path.transform( m );
-      PathEffect effect = new PathDashPathEffect( path, mEffectLen*BUTTON_SCALE_X, 0, PathDashPathEffect.Style.MORPH );
+      PathEffect effect = new PathDashPathEffect( path, mEffectLen * DrawingWindow.BUTTON_SCALE_X, 0, PathDashPathEffect.Style.MORPH );
       if ( dash != null ) {
         paint.setPathEffect( new ComposePathEffect( effect, dash ) );
       } else {

@@ -285,16 +285,17 @@ public class DeviceActivity extends MyActivity
       mTvAddress.setTextColor( 0xffffffff );
       String str = currDeviceA().toString();
       // TDLog.v( "using <" + str + ">" );
-      mTvAddress.setText( String.format( getResources().getString( R.string.using ), currDeviceA().toString() ) );
+      mTvAddress.setText( String.format( getResources().getString( R.string.using_a ), currDeviceA().toString() ) );
       // setButtonRemote();
     } else {
       mTvAddress.setTextColor( 0xffff0000 );
       mTvAddress.setText( R.string.no_device_address );
     }
-    if ( TDSetting.mSecondDistoX ) {
+    if ( TDSetting.mSecondDistoX && TDSetting.isConnectionModeBatch() ) {
+      mTvAddressB.setVisibility( View.VISIBLE ); // MM
       if ( currDeviceB() != null ) { 
         mTvAddressB.setTextColor( 0xffffcc33 );
-        mTvAddressB.setText( String.format( getResources().getString( R.string.using ), currDeviceB().toString() ) );
+        mTvAddressB.setText( String.format( getResources().getString( R.string.using_b ), currDeviceB().toString() ) );
       } else {
         mTvAddressB.setText( "" );
       }
@@ -404,6 +405,7 @@ public class DeviceActivity extends MyActivity
     String address = device.getAddress();
     // TDLog.v("forget device " + address );
     mApp_mDData.forgetDevice( address );
+    if ( TDInstance.isSecondDeviceAddress( address ) ) mApp.setDeviceB( null );
     // forget device on Android
     Set<BluetoothDevice> bt_device_set = DeviceUtil.getBondedDevices(); // add bonded devices
     if ( bt_device_set != null && ! bt_device_set.isEmpty() ) {
@@ -622,7 +624,7 @@ public class DeviceActivity extends MyActivity
     } else {
       // TDLog.v("No bonded devices" );
     }
-    List< Device > devices = mApp_mDData.getDevices(); // now add other devices stored in the database
+    List< Device > devices = mApp.knownDevices(); // now add other devices stored in the database
     // TDLog.v("DB devices " + devices.size() );
     for ( Device device : devices ) {
       // TDLog.v("DB device " + device.toString() );
@@ -648,7 +650,7 @@ public class DeviceActivity extends MyActivity
       TDLog.e("Cannot list device with null address"); // pretend it is already on the list
       return true;
     }
-    List< Device > devices = mApp_mDData.getDevices();
+    List< Device > devices = mApp.knownDevices();
     for ( Device device : devices ) {
       if ( address.equals( device.getAddress() ) ) {
         // TDLog.v("found device in DB " + address );
@@ -1590,12 +1592,14 @@ public class DeviceActivity extends MyActivity
    */
   void setSecondDevice( String address )
   {  
-    if ( currDeviceB() == null || ! address.equals( currDeviceB().getAddress() ) ) {
-      mApp.setDeviceB( address );
-      // mCurrDeviceB = TDInstance.getDeviceB();
-      mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
-      setState( false );
-    }
+    // if ( currDeviceB() == null || ! address.equals( currDeviceB().getAddress() ) ) {
+    //   mApp.setDeviceB( address );
+    //   // mCurrDeviceB = TDInstance.getDeviceB();
+    //   mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
+    //   setState( false );
+    // }
+    mApp.setDeviceB( address ); // MM
+    setState( false );
   }
 
   /** open a calibration

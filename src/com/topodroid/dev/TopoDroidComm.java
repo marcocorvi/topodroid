@@ -53,17 +53,43 @@ public class TopoDroidComm
   public TopoDroidProtocol mProtocol;
 
   public volatile boolean mBTConnected;
+  protected volatile boolean mRemoteOperation; // MM
   
-  // MM begin
-  private long mSurveyId = -1;
+  public void setRemoteOperation( boolean active ) { mRemoteOperation = active; } // MM
+
+  // MM SWITCH
+  private long mSurveyId      = -1;
   private long mCalibrationId = -1;
-  private int mSourceType = -1;
-  protected volatile boolean mRemoteOperation;
-  protected long surveyId() { return mSurveyId >= 0 ? mSurveyId : TDInstance.sid; }
-  protected long calibrationId() { return mCalibrationId >= 0 ? mCalibrationId : TDInstance.cid; }
-  protected String sourceAddress() { return mProtocol == null ? mAddress : mProtocol.getDeviceAddress(); }
-  protected int sourceType() { return mProtocol == null ? mSourceType : mProtocol.getDeviceType(); }
+  private int mSourceType     = -1;
+
+  /**
+   * @param survey_id    ID of survey
+   * @param calib_id     UD of calib
+   * @param address      device address
+   * @param type         ???
+   */
+  public void bindDataContext( long survey_id, long calib_id, String address, int type )
+  {
+    mSurveyId      = survey_id;
+    mCalibrationId = calib_id;
+    mAddress       = address;
+    mSourceType    = type;
+  }
+
+  /** Stop this driver completely before selecting a different instrument. */
+  public void shutdown()
+  {
+    disconnectRemoteDevice();
+    terminate();
+  }
+
+  protected long surveyId()        { return mSurveyId >= 0 ?      mSurveyId      : TDInstance.sid; }
+  protected long calibrationId()   { return mCalibrationId >= 0 ? mCalibrationId : TDInstance.cid; }
+  protected String sourceAddress() { return mProtocol == null ?   mAddress       : mProtocol.getDeviceAddress(); }
+  protected int sourceType()       { return mProtocol == null ?   mSourceType    : mProtocol.getDeviceType(); }
   // end MM
+
+  
   public CommThread mCommThread = null;
 
   public byte[] mCoeff;
@@ -72,7 +98,7 @@ public class TopoDroidComm
   long mLastShotId;   // last shot id
 
   // private AtomicInteger mNrReadPackets; // FIXME_ATOMIC_INT
-  protected volatile int mNrReadPackets;
+  protected volatile int mNrReadPackets; // number of read packets
 
 
 // -----------------------------------------------------------
@@ -176,7 +202,8 @@ public class TopoDroidComm
   //   }
   // }
 
-  static long mScanSetIdx = 0; // ID of the first block of the scan-set, or 0 not a scan-shot, -1 to be set
+  // static (MM removed)
+  long mScanSetIdx = 0; // ID of the first block of the scan-set, or 0 not a scan-shot, -1 to be set
 
   /** handle regular packet
    * @param res       packet type (as returned by handlePacket / or set by Protocol )
@@ -211,7 +238,7 @@ public class TopoDroidComm
         mScanSetIdx = 0; // do not set scan-index field in the database
       }
       // TDLog.v("Cavway packet is scan " + is_scan + " leg type " + leg_type );
-      mLastShotId = TopoDroidApp.mData.insertCavwayShot(surveyId(), -1L, d, b, c, r, mProtocol.mMagnetic,
+      mLastShotId = TopoDroidApp.mData.insertCavwayShot( surveyId(), -1L, d, b, c, r, mProtocol.mMagnetic,
               mProtocol.mAcceleration, mProtocol.mDip, ExtendType.EXTEND_IGNORE, flag, leg_type, status, comment, sourceAddress(),
               mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mScanSetIdx, time);
       // FIXME
@@ -221,31 +248,31 @@ public class TopoDroidComm
       // TDLog.v(" last shot id " + mLastShotId + " scan-set id " + mScanSetIdx );
 
       // this only updates the mBcakshot: it could be done in the previous call
-      TopoDroidApp.mData.updateShotAMDR(mLastShotId, surveyId(), mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
-      if (TDSetting.mWaitData > 10) {
+      TopoDroidApp.mData.updateShotAMDR( mLastShotId, surveyId(), mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
+      if ( TDSetting.mWaitData > 10 ) {
         TDUtil.slowDown(TDSetting.mWaitData);
       }
 
-      if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
+      if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
         // TDLog.v("Cavway send UPDATE " + mLastShotId );
         Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
         Bundle bundle = new Bundle();
         bundle.putLong(Lister.BLOCK_ID, mLastShotId);
         msg.setData(bundle);
         lister.sendMessage(msg);
-        if (sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10) {
+        if ( sourceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown(TDSetting.mWaitData);
         }
       }
     }
-    else if (res == DataType.PACKET_G)  //calib data
+    else if ( res == DataType.PACKET_G )  //calib data
     {
       ++mNrReadPackets;
       if ( ! lister.hasDialog() ) {
         long c_blk = -1L;
         if ( mProtocol instanceof CavwayProtocol ) {
           // CavwayProtocol proto = (CavwayProtocol)mProtocol;
-          c_blk = TopoDroidApp.mDData.insertGM(calibrationId(),
+          c_blk = TopoDroidApp.mDData.insertGM( calibrationId(),
             CavwayData.longToSignedInt1( mProtocol.mGX ), 
             CavwayData.longToSignedInt1( mProtocol.mGY ),
             CavwayData.longToSignedInt1( mProtocol.mGZ ),
@@ -458,6 +485,8 @@ public class TopoDroidComm
 
   /** dstr
    * terminate the Comm - by default cancel the Comm thread
+   * @note DistoXBLE, BRIC, Cavway override this 
+   *       DistoX2 and SAP do not (FIXME ?)
    */
   public void terminate()
   {
@@ -652,7 +681,8 @@ public class TopoDroidComm
    */
   public void notifyStatus( int status )
   {
-    mApp.notifyListerStatus( mApp.mListerSet, status );
+    // mApp.notifyListerStatus( mApp.mListerSet, status ); // MM replacement:
+    mApp.notifyCommStatus( this, mApp.mListerSet, status );
   }
 
   /** notify the lister of the connection status
@@ -662,7 +692,8 @@ public class TopoDroidComm
    */
   protected void notifyStatus( ListerHandler lister, int status )
   {
-    mApp.notifyListerStatus( lister, status );
+    // mApp.notifyListerStatus( lister, status ); // MM replacement: 
+    mApp.notifyCommStatus( this, lister, status ); // maybe MM was mApp.mListerSet
   }
 
   // -------------------------------------------------
@@ -703,5 +734,11 @@ public class TopoDroidComm
   //     mNewDataFlag.notifyAll(); // wake sleeping threads
   //   }
   // }
+
+  // to be overridden
+  public boolean setLaser( String address, int what, int to_read, ListerHandler lister, int data_type, boolean close )
+  {
+    return false;
+  }
 
 }
