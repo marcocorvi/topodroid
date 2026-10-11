@@ -317,13 +317,13 @@
 	  <!-- android:screenOrientation="portrait" -->
         </activity>
 
-        <activity android:name=".PtCmapActivity"
+        <!-- activity android:name=".PtCmapActivity"
 	  android:theme="@style/Theme.NoFullScreenNoTitle"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
+          -->
 	  <!-- android:screenOrientation="portrait" -->
-        </activity>
+        <!-- /activity -->
 
         <activity android:name=".GraphPaperScaleActivity"
 	  android:theme="@style/Theme.NoFullScreenNoTitle"

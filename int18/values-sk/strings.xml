@@ -1532,7 +1532,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_packet_logger_title">Paket log</string>
   <string name="pref_packet_logger_summary">Povolí logging Paketov</string>
   <string name="pref_th2_edit_title">Editácia Nákresu</string>
-  <string name="pref_th2_edit_summary">Povolí editáciu Nákresu</string>
+  <string name="pref_th2_edit_summary">Povolí editáciu Nákresu v Hlavnom menu (Therion)</string>
 
 
 
