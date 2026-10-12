@@ -183,7 +183,7 @@
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
     <string name="using_a">%1$s használata</string>
-    <string name="using_b">Változó %1$s</string>
+    <string name="using_b">Váltás %1$s</string>
     <string name="cali_err">hiba: átlag %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
     <string name="cali_time">Kalibráció: %1$s</string>
     <string name="calib_error">Átlagos hiba: %1$.2f &#xb0; (BH delta %2$.3f)</string>
