@@ -88,15 +88,19 @@ If you export the drawing in dxf with DXF version 6 do not use splines because t
 
 <h4>Line clipping</h4>
 If the <i>Line Clipping</i> setting is enabled, lines may be clipped to the sketch outline.<br>
-Only lines of types supporting "clipping" are clipped to the outline.<br>
-The type "clipping" attribute specifies whether the line is clipped at the end,
-or both at the end and the start, or not clipped (which is the default.
+Only lines and areas of types supporting "clipping" are clipped to the outline.<br><p>
+
+The "clippable" attribute specifies whether the line symbol is clipped at the end, at the start,
+or both at the end and the start, or not clipped (which is the default).
 If clipped at both sides the portion of the line that is retained starts
 from the middle and is increased towards both ends until an outline line is encountered.
 Otherwise the portion of line retained starts at one end and increased towards the other.<br>
 Clipping may fail, especially in presence of cubic (Bezier) curves.<br><p>
 
-Clipping does not apply to areas.<br><p>
+Areas are clipped only if they intersect a single outline line.
+In order to clip areas the border must be traced starting from outside the outline and ending again outside the outline.
+For areas the "clippable" attribute specifies whether the area is clipped in "plan" views, or "profile" views, or both.
+By default "clippable is none.<br><p>
 
 <h4>Retracing</h4>
 If the path-tracing style is not complex (Bezier or weeding), line and areas can be drawn in "retracing" mode.

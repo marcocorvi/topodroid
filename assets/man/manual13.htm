@@ -127,10 +127,14 @@ The imported azimuths are corrected with the magnetic declination specified in t
 and the declination of the TopoDroid survey is set to 0.<br><p>
 
 Settings:<ul style="margin-top=0">
-<li><u>Station prefix</u>: if given it is prepended to the station names</li>
-<li><u>Splays</u></li>
-<li><u>L/R swap</u></li>
+<li><u>Station prefix</u>: if the prefix is set, it is prepended to the station names</li>
+<li><u>Splays</u>: whether to include splays in the export</li>
+<li><u>L/R swap</u>: whther to swap LEFT and RIGHT</li>
 </ul>
+<br><p>
+
+The station prefix can be any arbitrary string. 
+By default it is the survey name.
 <br><p>
 
 <b id="csurvey"><i>cSurvey</i></b> ".csx"<br>
@@ -233,6 +237,10 @@ The name of the survey in the file is the filename without extension.<br>
 The export can also be limited to the last portion of data, by specifing the index
 of the <u>first shot</u> to export.<br><p>
 
+Settings:<ul style="margin-top=0">
+<li><i>Station prefix</i>: if set station name are prefixed with the survey name</li>
+</ul><br><p> 
+
 
 <b id="vtopo">VisualTopo</b> ".tro", ".trox"<br>
 <i>VisualTopo</i> data file are supported both in import and in export.<br>
@@ -246,9 +254,9 @@ Survey in <i>diving</i> data-mode are exported in "trox" format.<br><p>
 
 Settings:<ul style="margin-top=0">
 <li><u>Tro</u> old format. By default data are saved in "trox" format</li>
-<li><u>Splays</u></li>
-<li><u>LRUD at From</u></li>
-<li><u>Station series</u>: if specified the station names are qualified with the series</li>
+<li><u>Splays</u>: whether to include splays in the export</li>
+<li><u>LRUD at FROM</u> station</li>
+<li><u>Station prefix</u>: if set the station names can be qualified with a series. By default the series is the survey name</li>
 <li><u>Faverjon</u> whether the series is a prefix instead of a suffix.</li>
 </ul>
 <br><p>
@@ -273,10 +281,14 @@ Settings:<ul style="margin-top=0">
 Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
 Settings:<ul style="margin-top=0">
-<li><u>Station prefix</u>: if given it is prepended to the station names</li>
+<li><u>Station prefix</u>: if the station prefix is set, it is prepended to the station names</li>
 </ul>
 <br><p>
   
+The station prefix can be any arbitrary string. 
+By default it is the survey name.
+<br><p>
+
 <!--
 <b id="ptopo">PocketTopo</b> ".top"<br>
 TopoDroid supports <i>PocketTopo</i> only in import.<br><p>
