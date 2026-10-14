@@ -663,6 +663,7 @@ public class DistoXBLEComm extends BleComm
     if ( LOG ) TDLog.v("XBLE notify status " + status + " skip " + mSkipNotify );
     if ( mSkipNotify ) return;
     mApp.notifyCommStatus( this, mLister, status ); // MM replacement
+  }
 
   /** prepare a write op and put it on the queue - call the next op
    * @param srvUuid   service UUID

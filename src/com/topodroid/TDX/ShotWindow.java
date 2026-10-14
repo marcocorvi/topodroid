@@ -855,7 +855,7 @@ public class ShotWindow extends MyActivity
   {
     // TDLog.v( TAG + "item click pos " + pos );
     if ( mDataAdapter.isMultiSelect() ) {
-      if ( TDInstance.isSurveyImmutable ) {  // IMMUTABLE
+      if ( TDInstance.isSurveyImmutable() ) {  // IMMUTABLE
         clearMultiSelect();
         return;
       }
