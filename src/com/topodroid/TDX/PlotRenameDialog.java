@@ -35,6 +35,7 @@ class PlotRenameDialog extends MyDialog
   private Button   mBtnRename;
   private Button   mBtnBack;
   private Button   mBtnDelete;
+  private Button   mBtnDuplicate;
   // private Button   mBtnSplit;
   // private CheckBox mCBmove     = null;
   private CheckBox mCBcopy     = null;
@@ -76,6 +77,7 @@ class PlotRenameDialog extends MyDialog
     mBtnScrap  = (Button) findViewById(R.id.btn_to_scrap );
     mBtnBuffer = (Button) findViewById(R.id.btn_to_buffer );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
+    mBtnDuplicate = (Button) findViewById(R.id.btn_duplicate );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
     // mCBmove    = (CheckBox) findViewById( R.id.cb_move );
     mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
@@ -96,6 +98,7 @@ class PlotRenameDialog extends MyDialog
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
+    mBtnDuplicate.setOnClickListener( this );
     if ( TDLevel.overExpert && TDSetting.mPlotSplit && mParent != null && ! mParent.isAnySection() ) {
       // mCBmove.setOnClickListener( this );
       mCBcopy.setOnClickListener( this );
@@ -177,6 +180,8 @@ class PlotRenameDialog extends MyDialog
           mParent.setPlotOrigin( station );
         }
       }
+    } else if ( b == mBtnDuplicate ) {
+      mParent.duplicatePlot( );
     } else if ( b == mBtnDelete ) {
       // TDLog.v("click DELETE");
       mParent.askDelete();

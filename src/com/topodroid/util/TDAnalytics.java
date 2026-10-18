@@ -50,6 +50,7 @@ public class TDAnalytics
   public static final String TDM_DISCONNECED = "CPdisc";
 
   public static final String PLOT_NEW      = "1plot";  // new plot
+  public static final String PLOT_DUP      = "1dup";   // duplicate plot
   public static final String PLOT_FLIP     = "1flip";  // flipProfile
   public static final String PLOT_COPY     = "1copy";
   public static final String PLOT_SPLIT    = "1split"; // doSplitPlot

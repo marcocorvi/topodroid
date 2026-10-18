@@ -71,6 +71,7 @@ public class DistoXBLEComm extends BleComm
 {
   private final static boolean LOG = false;
   private final static boolean USE_MTU = false;
+  private final static String TAG = "DistoXBLEComm";
 
   // private ConcurrentLinkedQueue< BleOperation > mOps;
   // private BleopsQueue mQps;
@@ -453,17 +454,17 @@ public class DistoXBLEComm extends BleComm
           mBTConnected = true; // MM moved here from enablePNotify
           notifyStatus( ConnectionState.CONN_CONNECTED );
 		  
-          if ( LOG ) TDLog.v("XBLE CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
+          // if ( LOG ) TDLog.v( TAG + "CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
           // here we may save the UUID of notifying characteristics
         } else { 
-          if ( LOG ) TDLog.v("XBLE CCC clear notify chrt " + uuid_chrt_str );
+          // if ( LOG ) TDLog.v( TAG + "CCC clear notify chrt " + uuid_chrt_str );
           // here we may clear the UUID of the notifying characteristics
         }
       } else {
-        TDLog.t( "XBLE comm: written null-bytes CCC chrt " + uuid_chrt_str );
+        // TDLog.t( TAG + "written null-bytes CCC chrt " + uuid_chrt_str );
       }
     } else {
-      if ( LOG ) TDLog.v( "XBLE comm: written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
+      if ( LOG ) TDLog.v( TAG + "written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
     }
     mQps.clearPending();
   }
@@ -474,7 +475,7 @@ public class DistoXBLEComm extends BleComm
   @Override
   public void completedReliableWrite()
   {
-    if ( LOG ) TDLog.v( "DistoXBLE comm: reliable write" );
+    if ( LOG ) TDLog.v( TAG + "reliable write" );
   }
 
   // /** read a characteristics
@@ -485,7 +486,7 @@ public class DistoXBLEComm extends BleComm
   //  */
   // public boolean readChrt(UUID srvUuid, UUID chrtUuid )
   // {
-  //   if ( LOG ) TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
+  //   if ( LOG ) TDLog.v( TAG + "read chrt " + chrtUuid.toString() );
   //   return mCallback.readChrt( srvUuid, chrtUuid );
   // }
 
@@ -498,7 +499,7 @@ public class DistoXBLEComm extends BleComm
   //  */
   // public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   // {
-  //   if ( LOG ) TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
+  //   if ( LOG ) TDLog.v( TAG + "write chrt " + chrtUuid.toString() );
   //   return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
   // }
 
@@ -514,7 +515,7 @@ public class DistoXBLEComm extends BleComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    // if ( LOG ) TDLog.v( "XBLE comm discovered services");
+    // if ( LOG ) TDLog.v( TAG + "discovered services");
     if ( USE_MTU ) {
       mQps.enqueueOp( new BleOpRequestMtu( mContext, this, 400 ) ); // exec requestMtu
     } else {
@@ -542,7 +543,7 @@ public class DistoXBLEComm extends BleComm
       TDLog.t("XBLE enable PNotify failed ");
       // closeDevice( true );
     } else {
-      // if ( LOG ) TDLog.v("XBLE enable PNotify success");
+      // if ( LOG ) TDLog.v( TAG + "enable PNotify success");
       // 202610 MM moved to writtenDesc
       // mBTConnected  = true; 
       // notifyStatus( ConnectionState.CONN_CONNECTED );
@@ -558,7 +559,7 @@ public class DistoXBLEComm extends BleComm
   //  */
   // public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
   // {
-  //   // if ( LOG ) TDLog.v("XBLE enable P indicate");
+  //   // if ( LOG ) TDLog.v( TAG + "enable P indicate");
   //   return mCallback.enablePIndicate( srvUuid, chrtUuid );
   // }
 
@@ -571,37 +572,37 @@ public class DistoXBLEComm extends BleComm
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH:
-        TDLog.t("XBLE COMM: invalid attr length " + extra );
+        TDLog.t( TAG + "invalid attr length " + extra );
         break;
       case BluetoothGatt.GATT_WRITE_NOT_PERMITTED:
-        TDLog.t("XBLE COMM: write not permitted " + extra );
+        TDLog.t( TAG + "write not permitted " + extra );
         break;
       case BluetoothGatt.GATT_READ_NOT_PERMITTED:
-        TDLog.t("XBLE COMM: read not permitted " + extra );
+        TDLog.t( TAG + "read not permitted " + extra );
         break;
       // case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION: // 20221026 moved to failure()
-      //   TDLog.t("XBLE COMM: insufficient encrypt " + extra );
+      //   TDLog.t( TAG + "insufficient encrypt " + extra );
       //   break;
       // case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-      //   TDLog.t("XBLE COMM: insufficient auth " + extra );
+      //   TDLog.t( TAG + "insufficient auth " + extra );
       //   break;
       case BleCallback.CONNECTION_TIMEOUT:
-        // if ( LOG ) TDLog.v( "XBLE comm: connection timeout reconnect ...");
+        // if ( LOG ) TDLog.v( TAG + "connection timeout reconnect ...");
         reconnectDevice();
         break;
       case BleCallback.CONNECTION_133: // unfortunately this happens
-        // if ( LOG ) TDLog.v( "XBLE comm: connection " + status + " - disconnect");
+        // if ( LOG ) TDLog.v( TAG + "connection " + status + " - disconnect");
         TDUtil.slowDown( 111 ); // wait at least 500 msec
         reconnectDevice( );
         break;
       case BleCallback.CONNECTION_19: // unfortunately this too happens (when device is slow respond?)
-        // if ( LOG ) TDLog.v( "XBLE comm: connection " + status + " - reconnect");
+        // if ( LOG ) TDLog.v( TAG + "connection " + status + " - reconnect");
         // mCallback.clearServiceCache(); // TODO not sure there is a need to clear the service cache
         TDUtil.slowDown( 112 ); // wait at least 500 msec (let xble BT initialize)
         reconnectDevice();
         break;
       default:
-        TDLog.t("XBLE comm ***** ERROR " + status + ": reconnecting ...");
+        TDLog.t( TAG + "ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
     mQps.clearPending();
@@ -617,7 +618,7 @@ public class DistoXBLEComm extends BleComm
       mApp.notifyDisconnected( mLister, mDataType );
       return;
     } // end MM
-    if ( LOG ) TDLog.v("XBLE reconnect device - close GATT" );
+    if ( LOG ) TDLog.v( TAG + "reconnect device - close GATT" );
     // mOps.clear();
     // // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
@@ -625,13 +626,13 @@ public class DistoXBLEComm extends BleComm
     mCallback.closeGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     if ( mReconnect ) {
-      if ( LOG ) TDLog.v( "XBLE reconnect device - reconnecting ... ");
+      if ( LOG ) TDLog.v( TAG + "reconnect device - reconnecting ... ");
       notifyStatus( ConnectionState.CONN_WAITING );
       mQps.enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       mQps.doNextOp();
       mBTConnected = false; // FIX MM : was true 2026-11
     } else {
-      if ( LOG ) TDLog.v( "XBLE reconnect device - disconnected" );
+      if ( LOG ) TDLog.v( TAG + "reconnect device - disconnected" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
     }
   }
@@ -646,7 +647,7 @@ public class DistoXBLEComm extends BleComm
    */
   public void failure( int status, String extra, String what )
   {
-    if ( LOG ) TDLog.v( "XBLE comm Failure: disconnect and close GATT ...");
+    if ( LOG ) TDLog.v( TAG + "Failure: disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     mQps.clearPending();
     closeDevice( false );
@@ -660,7 +661,7 @@ public class DistoXBLEComm extends BleComm
   @Override
   public void notifyStatus( int status )
   {
-    if ( LOG ) TDLog.v("XBLE notify status " + status + " skip " + mSkipNotify );
+    if ( LOG ) TDLog.v( TAG + "notify status " + status + " skip " + mSkipNotify );
     if ( mSkipNotify ) return;
     mApp.notifyCommStatus( this, mLister, status ); // MM replacement
   }
@@ -677,7 +678,7 @@ public class DistoXBLEComm extends BleComm
     BluetoothGattCharacteristic chrt = null;
     for ( int repeat = 3; repeat > 0; --repeat ) {
       if ( (chrt = mCallback.getWriteChrt( srvUuid, chrtUuid )) != null ) break;
-      // if ( LOG ) TDLog.v("XBLE could not get write chrt ... repeat " + repeat );
+      // if ( LOG ) TDLog.v( TAG + "could not get write chrt ... repeat " + repeat );
       TDUtil.slowDown( 101 ); // 300
     }
     if ( chrt == null ) {
@@ -686,10 +687,10 @@ public class DistoXBLEComm extends BleComm
     }
     //Chrt.getPermission() always returns 0, I don't know why. Siwei Tian deleted
     // if ( ! BleUtils.isChrtWrite( chrt ) ) {
-    //   TDLog.t("XLE comm enlist write: cannot write chrt");
+    //   TDLog.t( TAG + "enlist write: cannot write chrt");
     //   return false;
     // }
-    // TDLog.v( "XBLE comm: enlist chrt write " + chrtUuid.toString() );
+    // TDLog.v( TAG + "enlist chrt write " + chrtUuid.toString() );
     if ( addHeader ) {
       byte[] framebytes = new byte[bytes.length + 8];
       framebytes[0] = 'd';
@@ -719,7 +720,7 @@ public class DistoXBLEComm extends BleComm
   public void getXBLEInfo( DistoXBLEInfoDialog info )
   {
     if ( info == null ) return;
-    // TDLog.v("XBLE comm get XBLE info");
+    // TDLog.v( TAG + "get XBLE info");
     if ( readMemory( DistoXBLEDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
       // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
       info.SetVal( DistoXBLEProtocol.PACKET_INFO_FIRMWARE, ((DistoXBLEProtocol)mProtocol).mFirmVer);
@@ -754,14 +755,14 @@ public class DistoXBLEComm extends BleComm
     // Thread laserThread = new Thread() {
     //   @Override public void run() {
         if ( ! tryConnectDevice( address, lister, 0 ) ) {
-          TDLog.t("XBLE set laser - failed connect device");
+          TDLog.t( TAG + "set laser - failed connect device");
           closeDevice( true );
           mSkipNotify = false;
           return false; 
         }
         // mNrReadPackets = 0;
         // mPacketToRead = to_read; // set the number of packet to read
-        // TDLog.v("XBLE set laser: " + what + " packet " + to_read + " close BT " + closeBT );
+        // TDLog.v( TAG + "set laser: " + what + " packet " + to_read + " close BT " + closeBT );
         switch ( what ) {
           case Device.DEVICE_OFF:
             sendCommand( (byte)Device.DEVICE_OFF );
@@ -785,22 +786,22 @@ public class DistoXBLEComm extends BleComm
             sendCommand( (byte)Device.CALIB_ON );
             break;
         }
-        if ( LOG ) TDLog.v("XBLE set laser - slow down after send command");
+        if ( LOG ) TDLog.v( TAG + "set laser - slow down after send command");
         TDUtil.slowDown(601);
         if ( closeBT ) {
           // synchronized ( mNewDataFlag ) {
           //   try {
-          //     if ( LOG ) TDLog.v("XBLE to read " + to_read + " read " + mNrReadPackets );
+          //     if ( LOG ) TDLog.v( TAG + "to read " + to_read + " read " + mNrReadPackets );
           //     while ( 2 * to_read > mNrReadPackets ) mNewDataFlag.wait( 500 ); // 0.5 seconds
           //   } catch ( InterruptedException e ) { 
           //     if ( LOG ) TDLog.v("XBLE interrupted setXBLELaser");
           //     // e.printStackTrace();
           //   }
           // }
-          if ( LOG ) TDLog.v("XBLE set laser - wait 2 sec before closing device");
+          if ( LOG ) TDLog.v( TAG + "set laser - wait 2 sec before closing device");
           TDUtil.slowDown( 2001 );
           // syncWait(2000, "laser close device");
-          // TDLog.v("XBLE laser close device");
+          // TDLog.v( TAG + "laser close device");
           closeDevice( true );
           mSkipNotify = false;
         }
@@ -860,7 +861,7 @@ public class DistoXBLEComm extends BleComm
   @Override
   public byte[] readMemory( String address, int addr )
   {
-    TDLog.t("XBLE readMemory( String address, int addr ) not implemented");
+    TDLog.t( TAG + "readMemory( String address, int addr ) not implemented");
     return null;
   }
 
@@ -885,7 +886,7 @@ public class DistoXBLEComm extends BleComm
     //     mNewDataFlag.wait( 2000 ); // 2 seconds
     //     // here if the thread gets notified
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE read-memory waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v( TAG + "read-memory waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) { 
     //     e.printStackTrace();
     //   }
@@ -893,7 +894,7 @@ public class DistoXBLEComm extends BleComm
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
       return ( (DistoXBLEProtocol) mProtocol).mRepliedData;
     } else {
-      TDLog.t("XBLE read memory: no reply");
+      TDLog.t( TAG + "read memory: no reply");
     }
     return null;
   }
@@ -905,7 +906,7 @@ public class DistoXBLEComm extends BleComm
    */
   public byte[] readMemory( int addr, int len )
   {
-    // if ( LOG ) TDLog.v("XBLE read memory " + addr + " " + len  );
+    // if ( LOG ) TDLog.v( TAG + "read memory " + addr + " " + len  );
     if ( len < 0 || len > 124 ) return null;
     byte[] cmd = new byte[4];
     cmd[0] = 0x3d;
@@ -921,7 +922,7 @@ public class DistoXBLEComm extends BleComm
     //     mNewDataFlag.wait( 2000 );
     //     // here if the thread gets notified
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE read-memory (len " + len + ") waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v( TAG + "read-memory (len " + len + ") waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) {
     //     e.printStackTrace();
     //   }
@@ -943,7 +944,7 @@ public class DistoXBLEComm extends BleComm
    */
   public boolean writeMemory( int addr, byte[] data )
   {
-    // if ( LOG ) TDLog.v( String.format("XBLE write memory [1] addr 0x%04x bytes %d", addr, data.length ) );
+    // if ( LOG ) TDLog.v( TAG + String.format("write memory [1] addr 0x%04x bytes %d", addr, data.length ) );
     if ( data.length < 4 ) return false;
     boolean ret = false;
     byte[] cmd = new byte[7];
@@ -962,20 +963,20 @@ public class DistoXBLEComm extends BleComm
     //     long start = System.currentTimeMillis();
     //     mNewDataFlag.wait(5000);
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v( TAG + "write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) {
-    //     if ( LOG ) TDLog.v( "XBLE interrupted " + e.getMessage() );
+    //     if ( LOG ) TDLog.v( TAG + "interrupted " + e.getMessage() );
     //     // e.printStackTrace();
     //   }
     // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
-      // if ( LOG ) TDLog.v("XBLE write memory [1] packet REPLY" );
+      // if ( LOG ) TDLog.v( TAG + "write memory [1] packet REPLY" );
       byte[] repliedbytes = ((DistoXBLEProtocol) mProtocol).mRepliedData;
       ret = Arrays.equals(data,repliedbytes);
     // } else {
-    //   if ( LOG ) TDLog.v("XBLE write memory [1] packet " + mPacketType );
+    //   if ( LOG ) TDLog.v( TAG + "write memory [1] packet " + mPacketType );
     }
-    // if ( LOG ) TDLog.v("XBLE write memory [1] return " + ret );
+    // if ( LOG ) TDLog.v( TAG + "write memory [1] return " + ret );
     return ret;
   }
 
@@ -988,7 +989,7 @@ public class DistoXBLEComm extends BleComm
    */
   public boolean writeMemory( int addr, byte[] data, int len)
   {
-    // if ( LOG ) TDLog.v("XBLE write memory [2] " + addr + " bytes " + data.length + " len " + len);
+    // if ( LOG ) TDLog.v( TAG + "write memory [2] " + addr + " bytes " + data.length + " len " + len);
     if ( data.length < len ) return false;
     if ( len < 0 || len > 124 ) return false;
     boolean ret = false;
@@ -1007,19 +1008,19 @@ public class DistoXBLEComm extends BleComm
     //     long start = System.currentTimeMillis();
     //     mNewDataFlag.wait(2000);
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v( TAG + "write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) {
     //     e.printStackTrace();
     //   }
     // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
-      // if ( LOG ) TDLog.v("XBLE write memory [2] packet REPLY" );
+      // if ( LOG ) TDLog.v( TAG + "write memory [2] packet REPLY" );
       byte[] repliedbytes = ((DistoXBLEProtocol) mProtocol).mRepliedData;
       ret = Arrays.equals(data,repliedbytes);
     // } else {
-    //   if ( LOG ) TDLog.v("XBLE write memory [2] packet " + mPacketType );
+    //   if ( LOG ) TDLog.v( TAG + "write memory [2] packet " + mPacketType );
     }
-    // if ( LOG ) TDLog.v("XBLE write memory [2] return " + ret );
+    // if ( LOG ) TDLog.v( TAG + "write memory [2] return " + ret );
     return ret;
   }
 
@@ -1032,7 +1033,7 @@ public class DistoXBLEComm extends BleComm
    */
   public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
   { 
-    TDLog.t("XBLE read XBLE memory ...");
+    TDLog.t( TAG + "read XBLE memory ...");
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
     Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
@@ -1043,10 +1044,10 @@ public class DistoXBLEComm extends BleComm
       // XBLE can read memory in one shot
       byte[] res_buf = readMemory( addr, BYTE_PER_OCTET );
       if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
-        if ( LOG ) TDLog.v("XBLE fail read memory - index " + k );
+        if ( LOG ) TDLog.v( TAG + "fail read memory - index " + k );
         break;
       } else {
-        // if ( LOG ) TDLog.v("XBLE read memory - index " + k );
+        // if ( LOG ) TDLog.v( TAG + "read memory - index " + k );
         System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_OCTET );
         data.add( result );
         ++ cnt;
@@ -1063,10 +1064,10 @@ public class DistoXBLEComm extends BleComm
       // ignore sequence bit ? Hot flag bytes ? HB
       res_buf = readMemory( addr, BYTE_PER_OCTET );
       if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
-        if ( LOG ) TDLog.v("XBLE fail read memory - index " + k );
+        if ( LOG ) TDLog.v( TAG + "fail read memory - index " + k );
         break;
       } else {
-        // if ( LOG ) TDLog.v("XBLE read memory - index " + k );
+        // if ( LOG ) TDLog.v( TAG + "read memory - index " + k );
         System.arraycopy( res_buf, 0, result2.data, 0, BYTE_PER_OCTET );
         data.add( result2 );
         ++ cnt;
@@ -1100,7 +1101,7 @@ public class DistoXBLEComm extends BleComm
   @Override
   public boolean toggleCalibMode( String address, int type )
   {
-    // if ( LOG ) TDLog.v("XBLE toggle calib addr " + address + " type " + type );
+    // if ( LOG ) TDLog.v( TAG + "toggle calib addr " + address + " type " + type );
     boolean ret = false;
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
     byte[] result = readMemory( DistoXBLEDetails.STATUS_ADDRESS, 4);
@@ -1109,7 +1110,7 @@ public class DistoXBLEComm extends BleComm
       return false;
     }
     ret = setCalibMode( DistoXBLEDetails.isNotCalibMode( result[0] ) );
-    // if ( LOG ) TDLog.v("XBLE toggle calib - wait 700 msec before closing device");
+    // if ( LOG ) TDLog.v( TAG + "toggle calib - wait 700 msec before closing device");
     TDUtil.slowDown( 701 );
     closeDevice( false );
     return ret;
@@ -1124,7 +1125,7 @@ public class DistoXBLEComm extends BleComm
    */
   private boolean setCalibMode( boolean turn_on )
   {
-    // if ( LOG ) TDLog.v("XBLE set calib " + turn_on );
+    // if ( LOG ) TDLog.v( TAG + "set calib " + turn_on );
     return sendCommand( turn_on? Device.CALIB_ON : Device.CALIB_OFF );
   }
 
@@ -1139,7 +1140,7 @@ public class DistoXBLEComm extends BleComm
   @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
-    // if ( LOG ) TDLog.v("XBLE comm batch download " + address );
+    // if ( LOG ) TDLog.v( TAG + "comm batch download " + address );
     // mConnectionMode = 0;
     mDataType = data_type;
     mNrReadPackets    = 0;
@@ -1155,9 +1156,9 @@ public class DistoXBLEComm extends BleComm
         if ( syncWait( 2000, "data download" ) ) {
           if ( mPacketType == DistoXBLEProtocol.PACKET_MEASURE_DATA ) {
             mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
-            // if ( LOG ) TDLog.v("XBLE got packet " + mNrReadPackets );
+            // if ( LOG ) TDLog.v( TAG + "got packet " + mNrReadPackets );
           } else {
-            // if ( LOG ) TDLog.v("XBLE no packet " );
+            // if ( LOG ) TDLog.v( TAG + "no packet " );
             break;
           }
         } else { // FIX MM
@@ -1177,7 +1178,7 @@ public class DistoXBLEComm extends BleComm
    */
   public boolean tryConnectDevice( String address, ListerHandler lister, int data_type )
   {
-    // if ( LOG ) TDLog.v("XBLE comm try connect " + address );
+    // if ( LOG ) TDLog.v( TAG + "comm try connect " + address );
     if ( ! mBTConnected ) {
       int timeout = 10;
       if ( ! connectDevice( address, lister, data_type, timeout ) ) {
@@ -1187,7 +1188,7 @@ public class DistoXBLEComm extends BleComm
     int loop_cnt = 50; // 20230118 local var "loop_cnt"
     while( ! mBTConnected ) {
       if ( isClosing() || Thread.currentThread().isInterrupted() ) return false; // MM RECONNECT
-      // if ( LOG ) TDLog.v("XBLE try connect - not connected ... " + loop_cnt );
+      // if ( LOG ) TDLog.v( TAG + "try connect - not connected ... " + loop_cnt );
       TDUtil.slowDown( 105 );
       if ( loop_cnt-- == 0 ) {
         disconnectGatt();
@@ -1205,7 +1206,7 @@ public class DistoXBLEComm extends BleComm
   @Override
   public boolean readCoeff( String address, byte[] coeff ) // 20250123 dropped second
   {
-    // if ( LOG ) TDLog.v("XBLE comm read coeff " + address );
+    // if ( LOG ) TDLog.v( TAG + "comm read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
@@ -1232,13 +1233,13 @@ public class DistoXBLEComm extends BleComm
   {
     if ( coeff == null ) return false;
     int  len  = coeff.length;
-    // if ( LOG ) TDLog.v("XBLE comm write coeff device " + address + " coeff len " + len );
+    // if ( LOG ) TDLog.v( TAG + "comm write coeff device " + address + " coeff len " + len );
     if( ! tryConnectDevice( address, null, 0 )) return false;
     int k = 0;
     int addr = 0x8010;
     boolean ret = writeMemory(addr, coeff, 52);
     disconnectDevice();
-    // if ( LOG ) TDLog.v( "XBLE comm write coeff return " + ret );
+    // if ( LOG ) TDLog.v( TAG + "comm write coeff return " + ret );
     return ret;
   }
 
@@ -1276,7 +1277,7 @@ public class DistoXBLEComm extends BleComm
   {
     final boolean DRY_RUN = false; // DEBUG
 
-    TDLog.v( "XBLE upload firmware " + file.getPath() );
+    if ( LOG ) TDLog.v( TAG + "upload firmware " + file.getPath() );
     // boolean is_log_file = TDLog.isStreamFile();
     // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
     // int ret = 0;
@@ -1299,7 +1300,7 @@ public class DistoXBLEComm extends BleComm
         try {
           // File fp = new File( filepath );
           if ( ! tryConnectDevice( address, null, 0 ) ) {
-            TDLog.t("XBLE fw upload - failed connect");
+            TDLog.t( TAG + "fw upload - failed connect");
             ok = false; // return 0;
           }
 
@@ -1312,10 +1313,10 @@ public class DistoXBLEComm extends BleComm
               int crc16 = calCRC16( buf, 256 );
               //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
               if (nr <= 0) { // EOF ?
-                TDLog.v("XBLE fw upload: file read " + nr + " - break");
+                TDLog.v( TAG + "fw upload: file read " + nr + " - break");
                 break;
               }
-              TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
+              TDLog.v( TAG + "fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
               //if(addr < 8) continue;
               int flashaddr = addr + 8;
               cnt += nr;
@@ -1366,13 +1367,13 @@ public class DistoXBLEComm extends BleComm
                   int ret_crc16 = ((DistoXBLEProtocol) mProtocol).mCheckCRC;
                   int ret_code  = ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode;
                   if ( ret_crc16 != crc16 || ret_code != 0 ) {
-                    TDLog.v( "XBLE fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
+                    TDLog.v( TAG + "fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
                     // ok = false; // without repeat-for uncomment these
                     // break;
                   } else {
                     String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "XBLE", cnt );
                     int cnt1 = cnt;
-                    TDLog.v( msg1 );
+                    TDLog.v( TAG + msg1 );
                     if ( progress != null ) {
                       handler.post( new Runnable() {
                         public void run() {
@@ -1384,33 +1385,33 @@ public class DistoXBLEComm extends BleComm
                     repeat = 0; // then the for-loop breaks with repeat = -1 (ie. success)
                   }
                 } else {
-                  TDLog.t( "XBLE fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
+                  TDLog.t( TAG + "fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
                   // ok = false; // without repeat-for uncomment these two lines
                   // break;
                 }
               }
               if ( repeat == 0 ) {
-                TDLog.t( "XBLE fw upload: fail after 3 repeats at " + cnt );
+                TDLog.t( TAG + "fw upload: fail after 3 repeats at " + cnt );
                 ok = false;
                 break;
               }
             }
             fis.close();
           } catch ( EOFException e ) { // OK
-            TDLog.v("XBLE fw update: EOF " + e.getMessage());
+            TDLog.v( TAG + "fw update: EOF " + e.getMessage());
           } catch ( FileNotFoundException e ) {
-            TDLog.t( "XBLE fw update: Not Found error " + e.getMessage() );
+            TDLog.t( TAG + "fw update: Not Found error " + e.getMessage() );
             ok = false;
           }
         } catch ( IOException e ) {
-          TDLog.t( "XBLE fw update: IO error " + e.getMessage() );
+          TDLog.t( TAG + "fw update: IO error " + e.getMessage() );
           ok = false;
         }
         closeDevice( false );     //close ble here
-        msg = "XBLE Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+        msg = TAG + "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
         TDLog.v( msg );
         int ret = ( ok ? cnt : -cnt );
-        TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
+        TDLog.v( TAG + "Dialog Firmware upload result: written " + ret + " bytes of " + len );
 
         boolean ok2 = ok;
         String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
@@ -1437,7 +1438,7 @@ public class DistoXBLEComm extends BleComm
    */
   private byte[] readFirmwareBlock(int addr)
   {
-    TDLog.v("XBLE fw read block at addr " + addr );
+    TDLog.v( TAG + "fw read block at addr " + addr );
     try {
       for (int repeat = 3; repeat > 0; --repeat ) {
         byte[] req_buf = new byte[3]; // request buffer
@@ -1461,17 +1462,17 @@ public class DistoXBLEComm extends BleComm
           byte[] ret_buf = ((DistoXBLEProtocol) mProtocol).mFlashBytes; // return buffer
           int crc16 = calCRC16( ret_buf, 256 );
           if ( crc16 == ((DistoXBLEProtocol) mProtocol).mCheckCRC ) {
-            TDLog.t("XBLE read fw (" + repeat +") OK");
+            TDLog.t( TAG + "read fw (" + repeat +") OK");
             return ret_buf; // success
           }
-          TDLog.t("XBLE read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((DistoXBLEProtocol) mProtocol).mCheckCRC );
+          TDLog.t( TAG + "read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((DistoXBLEProtocol) mProtocol).mCheckCRC );
         } else {
-          TDLog.t("XBLE read fw (" + repeat +") bad packet type " + mPacketType );
+          TDLog.t( TAG + "read fw (" + repeat +") bad packet type " + mPacketType );
         }
       }
-      TDLog.t("XBLE read fw: repeatedly failed packet addr " + addr );
+      TDLog.t( TAG + "read fw: repeatedly failed packet addr " + addr );
     } catch (Exception e) {
-      TDLog.t("XBLE error " + e.getMessage() );
+      TDLog.t( TAG + "error " + e.getMessage() );
     }
     return null;
   }
@@ -1482,7 +1483,7 @@ public class DistoXBLEComm extends BleComm
    */
   public void dumpFirmware( String address, File file, TDProgress progress )
   {
-    TDLog.v( "XBLE fw dump: output filepath " + file.getPath() );
+    TDLog.v( TAG + "fw dump: output filepath " + file.getPath() );
     Resources res   = mContext.getResources();
     Handler handler = new Handler();
 
@@ -1502,7 +1503,7 @@ public class DistoXBLEComm extends BleComm
               for ( int addr = 8; ; addr++ ) {
                 buf = readFirmwareBlock(addr);
                 if ( buf == null || buf.length < 256 ) {
-                  TDLog.t("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
+                  TDLog.t( TAG + "fw read - failed at addr " + addr + " cnt " + cnt );
                   ok = false;
                   break;
                 }
@@ -1513,7 +1514,7 @@ public class DistoXBLEComm extends BleComm
                   if ( buf[k] != (byte)0xff ) break;
                 }
                 if ( k == 256 ) break;
-                String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "XBLE", cnt );
+                String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), TAG, cnt );
                 int cnt1 = cnt;
                 TDLog.v( msg1 );
                 if ( progress != null ) {
@@ -1539,7 +1540,7 @@ public class DistoXBLEComm extends BleComm
         } catch ( FileNotFoundException e ) {
           ok = false;
         }
-        String msg = "XBLE Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+        String msg = TAG + "Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
         TDLog.v( msg );
         int ret = ( ok ? cnt : -cnt );
         boolean ok2 = ok;
@@ -1579,7 +1580,7 @@ public class DistoXBLEComm extends BleComm
     //     long start = System.currentTimeMillis();
     //     mNewDataFlag.wait(5000); // allow long wait for firmware
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE read firmware signature waited " + millis + " msec" );
+    //     if ( LOG ) TDLog.v( TAG + "read firmware signature waited " + millis + " msec" );
     //   } catch (InterruptedException e) {
     //     e.printStackTrace();
     //   }
@@ -1600,16 +1601,16 @@ public class DistoXBLEComm extends BleComm
   //  */
   // private boolean syncWait( long msec, String msg )
   // {
-  //   // TDLog.v("XBLE sync wait " + msec );
+  //   // TDLog.v( TAG + "sync wait " + msec );
   //   synchronized ( mNewDataFlag ) {
   //     try {
   //       long start = System.currentTimeMillis();
   //       mNewDataFlag.wait( msec );
   //       long millis = System.currentTimeMillis() - start;
-  //       if ( LOG ) TDLog.v("XBLE " + msg + " msec " + millis );
+  //       if ( LOG ) TDLog.v( TAG + msg + " msec " + millis );
   //       return true;
   //     } catch ( InterruptedException e ) {
-  //       if ( LOG ) TDLog.v( "XBLE interrupted wait " + msg );
+  //       if ( LOG ) TDLog.v( TAG + "interrupted wait " + msg );
   //       // e.printStackTrace();
   //       return false;
   //     }

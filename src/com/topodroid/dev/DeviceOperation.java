@@ -22,7 +22,7 @@ import com.topodroid.util.TDLog;
 //   but there are no try-with-resources in the called codes
 public class DeviceOperation implements AutoCloseable
 {
-  final static boolean MM_SWITCH = true;
+  // final static boolean MM_SWITCH = true;
 
   public final TopoDroidApp mApp;
   public final TopoDroidComm mComm;
@@ -79,17 +79,17 @@ public class DeviceOperation implements AutoCloseable
       /* if ( MM_SWITCH ) */ mApp.mDeviceSwitch.endOperation();  // MM SWITCH-2
     }
     if ( mRemote ) {
-      if ( MM_SWITCH ) {
+      // if ( MM_SWITCH ) {
         mApp.notifyCommStatus( mComm, mApp.mListerSet, mComm.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_DISCONNECTED ); // MM
-      } else {
-        mApp.notifyListerStatus( mApp.mListerSet, mComm.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_DISCONNECTED );
-      }
+      // } else {
+      //   mApp.notifyListerStatus( mApp.mListerSet, mComm.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_DISCONNECTED );
+      // }
     }
     TDandroid.runOnMainThread( new Runnable() { public void run() {
-      if ( MM_SWITCH ) {
+      // if ( MM_SWITCH ) {
         mApp.refreshDeviceUi(); // MM SWITCH
         mApp.processPendingDeviceSwitch(); // MM SWITCH
-      }
+      // }
       if ( TDInstance.isContinuousMode() ) mDataDownloader.requestReconnect( mApp.mListerSet, DataType.DATA_SHOT, 500 );
     } } );
   }

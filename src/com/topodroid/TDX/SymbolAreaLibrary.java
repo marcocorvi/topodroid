@@ -102,10 +102,23 @@ public class SymbolAreaLibrary extends SymbolLibrary
     return ( s == null )? TileMode.REPEAT : s.mYMode;
   }
   
+  /** return the color of the specified area-symbol, or color WHITE
+   * @param k   index of the area-symbol
+   */
   int getAreaColor( int k )
   {
     SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? 0xffffffff : s.mColor;
+  }
+
+  /** return true if the specified area-symbol is clippable
+   * @param k    index of the area-symbol
+   * @param type plot type
+   */
+  boolean isClippable( int k, int type )
+  {
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return s != null && s.isClippable( type );
   }
   
   // ========================================================================
@@ -116,11 +129,11 @@ public class SymbolAreaLibrary extends SymbolLibrary
     if ( size() > 0 ) return;
 
     // String user = res.getString( R.string.p_user );
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ), USER, null, USER, 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ), USER, null, USER, SymbolArea.CLIP_NONE, 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
     addSymbol( symbol );
 
     // String water = res.getString( R.string.p_water );
-    symbol = new SymbolArea( res.getString( R.string.tha_water ), WATER, null, WATER, 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_WATER, Symbol.W2D_DETAIL_SHP );
+    symbol = new SymbolArea( res.getString( R.string.tha_water ), WATER, null, WATER, SymbolArea.CLIP_PLAN, 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_WATER, Symbol.W2D_DETAIL_SHP ); 
     addSymbol( symbol );
     if ( TopoDroidApp.mData != null ) {
       TopoDroidApp.mData.setSymbolEnabled( "a_" +  USER, true );

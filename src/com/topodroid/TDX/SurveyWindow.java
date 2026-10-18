@@ -656,7 +656,6 @@ public class SurveyWindow extends MyActivity
       TDLog.e( "SURVEY do export - name " + filename + " : save survey failed" );
       return;
     }
-    TDSetting.mExportPrefix = prefix; // save export-prefix
     // mExportInfo = null;
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );

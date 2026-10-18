@@ -86,11 +86,12 @@ TopoDroid has five line styles. With the normal style [default] the lines are dr
 With the fifth line style the traced lines are simplified using a point-weeding algorithm.
 If you export the drawing in dxf with DXF version 6 do not use splines because they get exported as polylines.<br><p>
 
-<h4>Line clipping</h4>
+<h4>Line/Area clipping</h4>
 If the <i>Line Clipping</i> setting is enabled, lines may be clipped to the sketch outline.<br>
-Only lines and areas of types supporting "clipping" are clipped to the outline.<br><p>
+Only lines and areas of types supporting "clipping" are clipped to the outline.<br>
+By default lines and areas are not clippable<br><p>
 
-The "clippable" attribute specifies whether the line symbol is clipped at the end, at the start,
+The "clippable" attribute specifies whether the line symbol is clipped at the end, or both at te end and the start,
 or both at the end and the start, or not clipped (which is the default).
 If clipped at both sides the portion of the line that is retained starts
 from the middle and is increased towards both ends until an outline line is encountered.
@@ -99,8 +100,9 @@ Clipping may fail, especially in presence of cubic (Bezier) curves.<br><p>
 
 Areas are clipped only if they intersect a single outline line.
 In order to clip areas the border must be traced starting from outside the outline and ending again outside the outline.
-For areas the "clippable" attribute specifies whether the area is clipped in "plan" views, or "profile" views, or both.
-By default "clippable is none.<br><p>
+For areas the "clippable" attribute specifies whether the area is clipped in "plan" views, or "profile" views, or both.<br>
+If the area border is traced crossing the outline line several times, the area is clipped to the central portion.
+<br><p>
 
 <h4>Retracing</h4>
 If the path-tracing style is not complex (Bezier or weeding), line and areas can be drawn in "retracing" mode.

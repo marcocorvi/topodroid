@@ -223,7 +223,7 @@ public class Symbol implements SymbolInterface
    */
   public Path   getSymbolPath()       { return null; }
 
-  /** @return the symbol scaled path - default to getSymbolPath()
+  /** @return the symbol scaled path for the toolbar button - default to getSymbolPath()
    */
   public Path   getScaledPath() { return getSymbolPath(); }
 
@@ -243,7 +243,7 @@ public class Symbol implements SymbolInterface
    */
   public boolean isDeclinable() { return false; }
 
-  /** @return true if the symbol is scalable - default to true
+  /** @return true if the symbol can be rescaled - default to true
    */
   public boolean isScalable() { return true; } // TDSKETCH
 

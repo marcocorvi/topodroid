@@ -188,7 +188,7 @@ class PlotListDialog extends MyDialog
       hide();
       if ( mParent != null ) {
         int idx = 1 + TopoDroidApp.mData.maxPlotIndex( TDInstance.sid );
-        new PlotNewDialog( mContext, mApp, mParent, idx ).show();
+        new PlotNewDialog( mContext, mApp, mParent, idx, null, -1, -1 ).show();
       }
     } else if ( b == mBtnClose ) {
       TDLog.v( "plot list dialog onClick() CLOSE ");

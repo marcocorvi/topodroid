@@ -37,6 +37,9 @@ import android.content.Context;
 
 public class TopoDroidProtocol
 {
+  private final static boolean LOG = false;
+  private final static String TAG = "TDproto";
+
   protected Context mContext;
   protected int    mDeviceType;
   protected String mDeviceAddress;
@@ -79,7 +82,7 @@ public class TopoDroidProtocol
 
   public TopoDroidProtocol( Device device, Context context )
   {
-    // TDLog.v( "TD proto: type " + device.mType + " addr " + device.mAddress );
+    // if ( LOG ) TDLog.v( TAG + "type " + device.mType + " addr " + device.mAddress );
     mDeviceType    = device.mType;
     mDeviceAddress = device.getAddress();
     mPacketLogger  = new PacketLogger( context, TDSetting.mPacketLog );
@@ -166,8 +169,8 @@ public class TopoDroidProtocol
   {
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
     byte type = (byte)(buffer[0] & 0x3f);
-    // TDLog.v( "TD proto: handle packet: type " + type );
-    // TDLog.v( "TD proto: handle packet type " + type + " " + packetType[ type & 0x7 ] + ": " +
+    // if ( LOG ) TDLog.v( TAG + "handle packet: type " + type );
+    // if ( LOG ) TDLog.v( TAG + "handle packet type " + type + " " + packetType[ type & 0x7 ] + ": " +
     //      String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
     long time = TDUtil.getSeconds(); // seconds after the epoch
@@ -208,10 +211,10 @@ public class TopoDroidProtocol
             break;
           case Device.DISTO_BRIC4: 
           case Device.DISTO_BRIC5: 
-            TDLog.e("TD proto: does not handle packet BLE");
+            TDLog.e( TAG + "does not handle packet BLE");
             break;
           case Device.DISTO_SAP5: 
-            // TDLog.v( "TD proto: handle packet SAP");
+            // if ( LOG ) TDLog.v( TAG + "handle packet SAP");
             mDistance = d / 1000.0;
             break;
           default:
@@ -219,12 +222,12 @@ public class TopoDroidProtocol
             break;
         }
 
-        mBearing  = b * 180.0 / 32768.0; // 180/0x8000;
-        mClino    = c * 90.0  / 16384.0; // 90/0x4000;
-        if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
+        mBearing  = b * 180.0 / 32868.0; // 180/0x8000;
+        mClino    = c * 90.0  / 16484.0; // 90/0x4000;
+        if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16484.0; }
         mRoll = r * 180.0 / 128.0;
 
-        // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
+        // if ( LOG ) TDLog.v( TAG + String.format(Locale.US, "Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
       case MemoryOctet.BYTE_PACKET_G: // G 0x02
         mTime = time;
@@ -235,7 +238,7 @@ public class TopoDroidProtocol
           if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
           if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
           if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
-          // TDLog.v( "Proto packet G " + String.format(Locale.US, " %d %d %d", mGX, mGY, mGZ ) );
+          // if ( LOG ) TDLog.v( TAG + "packet G " + String.format(Locale.US, " %d %d %d", mGX, mGY, mGZ ) );
           return DataType.PACKET_G;
         }
         break;
@@ -247,7 +250,7 @@ public class TopoDroidProtocol
           if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
           if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
           if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
-          // TDLog.v( "Proto packet M " + String.format(Locale.US, " %d %d %d", mMX, mMY, mMZ ) );
+          // if ( LOG ) TDLog.v( TAG + "packet M " + String.format(Locale.US, " %d %d %d", mMX, mMY, mMZ ) );
           return DataType.PACKET_M;
         }
         break;
@@ -260,10 +263,10 @@ public class TopoDroidProtocol
           double rh = MemoryOctet.toInt( mRollHigh, buffer[7] );
           mAcceleration = acc;
           mMagnetic = mag;
-          mDip = dip * 90.0  / 16384.0; // 90/0x4000;
-          if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
-          mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
-          // TDLog.v( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
+          mDip = dip * 90.0  / 16484.0; // 90/0x4000;
+          if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16484.0; }
+          mRoll  = rh * 180.0 / 32868.0; // 180/0x8000;
+          // if ( LOG ) TDLog.v( TAG + "packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
           return DataType.PACKET_VECTOR;
         }
         break;
@@ -276,14 +279,14 @@ public class TopoDroidProtocol
           // mReplyBuffer[1] = buffer[4];
           // mReplyBuffer[2] = buffer[5];
           // mReplyBuffer[3] = buffer[6];
-          // TDLog.v( "PROTO handle Packet mReplyBuffer" );
+          // if ( LOG ) TDLog.v( TAG + "handle Packet mReplyBuffer" );
           // TODO
           return DataType.PACKET_REPLY;
         } 
         break;
       default:
         TDLog.e( 
-          "packet error. type " + type + " " + 
+          TAG + "packet error. type " + type + " " + 
           String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
           buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
       //   return DataType.PACKET_NONE;
@@ -301,7 +304,7 @@ public class TopoDroidProtocol
    */
   public int readPacket( boolean no_timeout, int data_type )
   {
-    // TDLog.v( "TD proto: read_packet returns NONE");
+    // if ( LOG ) TDLog.v( TAG + "read_packet returns NONE");
     return DataType.PACKET_NONE;
   }
 

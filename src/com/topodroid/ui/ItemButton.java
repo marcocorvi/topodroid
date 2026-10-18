@@ -89,7 +89,7 @@ public class ItemButton extends Button
    */
   public void highlight( boolean on )
   {
-    setBackgroundColor( on ? 0xff663300 : TDColor.BLACK );
+    setBackgroundColor( on ? 0x66221100 : TDColor.BLACK );
   }
 
   /** cstr 

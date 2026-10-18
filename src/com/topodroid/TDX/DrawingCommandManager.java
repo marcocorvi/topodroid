@@ -2548,6 +2548,11 @@ public class DrawingCommandManager
    */
   void clipLine( DrawingLinePath line, int clip_mode ) { if ( mCurrentScrap != null ) mCurrentScrap.clipLine( line, clip_mode ); }
 
+  /** clip an area to the scrap outline
+   * @param area  area to clip
+   */
+  void clipArea( DrawingAreaPath area ) { if ( mCurrentScrap != null ) mCurrentScrap.clipArea( area ); }
+
   void sideDragHighlight( boolean highlight ) { mTopSideDragPaint = highlight? BrushManager.sideDragPaintHighlight : BrushManager.sideDragPaint; }
 
 }

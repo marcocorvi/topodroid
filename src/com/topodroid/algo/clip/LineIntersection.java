@@ -29,6 +29,8 @@ public class LineIntersection
 
   public static float mT;    // intersect abscissa of the test segment
   public static Point2D mPt; // P1 + mT (P2 - P1)
+  static LinePoint lpQ1 = null; 
+  static LinePoint lpQ2 = null; 
 
   // private static final boolean skip = true;
   private static final boolean flaf = false;   // whether to use flag
@@ -56,85 +58,109 @@ public class LineIntersection
     float dpx = p2.x-p1.x;
     float dpy = p2.y-p1.y;
     // TDLog.v("point " + p1.x + " " + p1.y + " dp " + dpx + " " + dpy );
-    if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) return INTERSECT;
+    if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) {
+      lpQ1 = q1;
+      lpQ2 = q2;
+      return INTERSECT;
+    }
     q1 = q2; 
     for ( q2 = line.next( q1 ); q2 != null; q2 = line.next( q1 ) ) { // q1.mNext;
-      if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) return INTERSECT;
+      if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) {
+        lpQ1 = q1;
+        lpQ2 = q2;
+        return INTERSECT;
+      }
       q1 = q2;
       if ( q1 == line.last() ) return OUTSIDE;
     }
     return OUTSIDE;
   }
 
-  /** @return the intersection flag of a line and a segment P1-P2
-   * @param line  line
-   * @param first point of line from which to start forward search of the intersection
-   * @param p1    segment first endpoint
-   * @param p2    segment second endpoint
-   * @param cubic whether line is cubic
-   */
-  public static int forwardFlag( DrawingPointLinePath line, LinePoint first, LinePoint p1, LinePoint p2, boolean cubic )
-  {
-    if ( first == null ) return OUTSIDE;
-    int f1 = pointPosition( line, p1 );
-    int f2 = pointPosition( line, p2 );
-    int f = f1 & f2;
-    if ( flaf && f != 0 ) {
-      TDLog.v("forward flag " + f + " ==> skip line ");
-      return f;
-    }
-    TDLog.v("forward flag from " + first.x + " " + first.y + " pos " + f );
-    // eiher both inside or on opposite sides
-    LinePoint q1 = first;
-    LinePoint q2 = line.next( q1 ); // q1.mNext;
-    if ( q2 == null ) return OUTSIDE;
-    float dpx = p2.x-p1.x;
-    float dpy = p2.y-p1.y;
-    TDLog.v("point " + p1.x + " " + p1.y + " dp " + dpx + " " + dpy );
-    if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) return INTERSECT;
-    q1 = q2;
-    for ( q2 = line.next( q1 ); q2 != null; q2 = line.next( q1 ) ) { // q1.mNext;
-      if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) return INTERSECT;
-      q1 = q2;
-      if ( q1 == line.last() ) return OUTSIDE;
-    }
-    return OUTSIDE;
-  }
+  // /** @return the intersection flag of a line and a segment P1-P2
+  //  * @param line  line
+  //  * @param first point of line from which to start forward search of the intersection
+  //  * @param p1    segment first endpoint
+  //  * @param p2    segment second endpoint
+  //  * @param cubic whether line is cubic
+  //  */
+  // public static int forwardFlag( DrawingPointLinePath line, LinePoint first, LinePoint p1, LinePoint p2, boolean cubic )
+  // {
+  //   if ( first == null ) return OUTSIDE;
+  //   int f1 = pointPosition( line, p1 );
+  //   int f2 = pointPosition( line, p2 );
+  //   int f = f1 & f2;
+  //   if ( flaf && f != 0 ) {
+  //     TDLog.v("forward flag " + f + " ==> skip line ");
+  //     return f;
+  //   }
+  //   TDLog.v("forward flag from " + first.x + " " + first.y + " pos " + f );
+  //   // eiher both inside or on opposite sides
+  //   LinePoint q1 = first;
+  //   LinePoint q2 = line.next( q1 ); // q1.mNext;
+  //   if ( q2 == null ) return OUTSIDE;
+  //   float dpx = p2.x-p1.x;
+  //   float dpy = p2.y-p1.y;
+  //   TDLog.v("point " + p1.x + " " + p1.y + " dp " + dpx + " " + dpy );
+  //   if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) {
+  //     lpQ1 = q1;
+  //     lpQ2 = q2;
+  //     return INTERSECT;
+  //   }
+  //   q1 = q2;
+  //   for ( q2 = line.next( q1 ); q2 != null; q2 = line.next( q1 ) ) { // q1.mNext;
+  //     if ( intersect( q1, q2, q2.cp1(), q2.cp2(), p1, dpx, dpy, cubic ) ) {
+  //       lpQ1 = q1;
+  //       lpQ2 = q2;
+  //       return INTERSECT;
+  //     }
+  //     q1 = q2;
+  //     if ( q1 == line.last() ) return OUTSIDE;
+  //   }
+  //   return OUTSIDE;
+  // }
 
-  /** @return the intersection flag of a line and a segment P1-P2
-   * @param line  line
-   * @param first point of line from which to start backward search of the intersection
-   * @param p1    segment first endpoint
-   * @param p2    segment second endpoint
-   * @param cubc  whether line is cubic
-   */
-  public static int backwardFlag( DrawingPointLinePath line, LinePoint first, LinePoint p1, LinePoint p2, boolean cubic )
-  {
-    if ( first == null ) return OUTSIDE;
-    int f1 = pointPosition( line, p1 );
-    int f2 = pointPosition( line, p2 );
-    int f = f1 & f2;
-    if ( flaf && f != 0 ) {
-      TDLog.v("backward flag " + f + " ==> skip line ");
-      return f;
-    }
-    TDLog.v("backward flag from " + first.x + " " + first.y + " pos " + f );
-    // eiher both inside or on opposite sides
-    LinePoint q1 = first;
-    LinePoint q2 = line.prev( q1 ); // q1.mPrev;
-    if ( q2 == null ) return OUTSIDE;
-    float dpx = p2.x-p1.x;
-    float dpy = p2.y-p1.y;
-    TDLog.v("point " + p1.x + " " + p1.y + " dp " + dpx + " " + dpy );
-    if ( intersect( q2, q1, q1.cp1(), q1.cp2(), p1, dpx, dpy, cubic ) ) return INTERSECT;
-    q1 = q2;
-    for ( q2 = line.next( q1 ); q2 != null; q2 = line.prev( q1 ) ) { // q1.mPrev;
-      if ( intersect( q2, q1, q1.cp1(), q1.cp2(), p1, dpx, dpy, cubic ) ) return INTERSECT;
-      q1 = q2;
-      if ( q1 == line.first() ) return OUTSIDE;
-    }
-    return OUTSIDE;
-  }
+  // /** @return the intersection flag of a line and a segment P1-P2
+  //  * @param line  line
+  //  * @param first point of line from which to start backward search of the intersection
+  //  * @param p1    segment first endpoint
+  //  * @param p2    segment second endpoint
+  //  * @param cubic whether line is cubic
+  //  */
+  // public static int backwardFlag( DrawingPointLinePath line, LinePoint first, LinePoint p1, LinePoint p2, boolean cubic )
+  // {
+  //   if ( first == null ) return OUTSIDE;
+  //   int f1 = pointPosition( line, p1 );
+  //   int f2 = pointPosition( line, p2 );
+  //   int f = f1 & f2;
+  //   if ( flaf && f != 0 ) {
+  //     TDLog.v("backward flag " + f + " ==> skip line ");
+  //     return f;
+  //   }
+  //   TDLog.v("backward flag from " + first.x + " " + first.y + " pos " + f );
+  //   // eiher both inside or on opposite sides
+  //   LinePoint q1 = first;
+  //   LinePoint q2 = line.prev( q1 ); // q1.mPrev;
+  //   if ( q2 == null ) return OUTSIDE;
+  //   float dpx = p2.x-p1.x;
+  //   float dpy = p2.y-p1.y;
+  //   TDLog.v("point " + p1.x + " " + p1.y + " dp " + dpx + " " + dpy );
+  //   if ( intersect( q2, q1, q1.cp1(), q1.cp2(), p1, dpx, dpy, cubic ) ) {
+  //     lpQ1 = q1;
+  //     lpQ2 = q2;
+  //     return INTERSECT;
+  //   }
+  //   q1 = q2;
+  //   for ( q2 = line.next( q1 ); q2 != null; q2 = line.prev( q1 ) ) { // q1.mPrev;
+  //     if ( intersect( q2, q1, q1.cp1(), q1.cp2(), p1, dpx, dpy, cubic ) ) {
+  //       lpQ1 = q1;
+  //       lpQ2 = q2;
+  //       return INTERSECT;
+  //     }
+  //     q1 = q2;
+  //     if ( q1 == line.first() ) return OUTSIDE;
+  //   }
+  //   return OUTSIDE;
+  // }
 
   /** intersect with a (cubic) segment
    * @param q1   segment first endpoint

@@ -45,19 +45,28 @@ class PlotNewDialog extends MyDialog
   private CheckBox mCBprojected;
   private CheckBox mCBdangling;
   private int mIndex;
+  private String mStart;
+  private int mAzimuth;
+  private int mOblique;
   private MyKeyboard mKeyboard = null;
 
   /** cstr
    * @param context    context
    * @param app        application
    * @param maker      ...
-   * @param index      ...
+   * @param index      index = proposed name of plot
+   * @param start      start station
+   * @param azimuth    azimuth of projected profile or -1
+   * @param oblique    oblique of projected profile 
    */
-  PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index )
+  PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index, String start, int azimuth, int oblique )
   {
     super( context, app, R.string.PlotNewDialog );
     mMaker  = maker;
     mIndex  = index;
+    mStart  = start;
+    mAzimuth = azimuth;
+    mOblique = oblique;
     // notDone = true;
   }
 
@@ -73,21 +82,27 @@ class PlotNewDialog extends MyDialog
     // mEditProject = (EditText) findViewById(R.id.plot_project);
 
     mEtName.setText( String.format(Locale.US, "%d", mIndex ) );
-    // if current station is set:
-    String station = null;
-    if ( TDSetting.mFixedOrigin ) {
-      station = mApp.getFirstPlotOrigin( );
-      if ( station == null ) station = mApp.getFirstStation();
-    } else {
-      if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
-        station = mApp.getFirstStation();
+
+    if ( mStart == null ) {
+      // if current station is set:
+      String station = null;
+      if ( TDSetting.mFixedOrigin ) {
+        station = mApp.getFirstPlotOrigin( );
+        if ( station == null ) station = mApp.getFirstStation();
       } else {
-	station = mApp.getCurrentOrLastStation();
+        if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+          station = mApp.getFirstStation();
+        } else {
+          station = mApp.getCurrentOrLastStation();
+        }
       }
+      if ( station == null ) station = TDSetting.mInitStation;
+      if ( station != null ) mEtStart.setText( station );
+      mEtStart.setOnLongClickListener( this );
+    } else { 
+      mEtStart.setText ( mStart );
+      mEtStart.setInputType( android.text.InputType.TYPE_NULL );
     }
-    if ( station == null ) station = TDSetting.mInitStation;
-    if ( station != null ) mEtStart.setText( station );
-    mEtStart.setOnLongClickListener( this );
 
     mBtnOK = (Button) findViewById(R.id.btn_ok );
     mBtnBack = (Button) findViewById(R.id.btn_cancel );
@@ -97,12 +112,17 @@ class PlotNewDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
 
     mCBprojected = (CheckBox)findViewById( R.id.button_projected );
-    if ( ! TDLevel.overAdvanced ) {
-      mCBprojected.setVisibility( View.GONE );
-    }
     mCBdangling = (CheckBox)findViewById( R.id.button_dangling );
-    mCBdangling.setChecked( false );
-    if ( ! TDLevel.overExpert ) {
+    if ( mStart == null ) {
+      if ( ! TDLevel.overAdvanced ) {
+        mCBprojected.setVisibility( View.GONE );
+      }
+      mCBdangling.setChecked( false );
+      if ( ! TDLevel.overExpert ) {
+        mCBdangling.setVisibility( View.GONE );
+      }
+    } else {
+      mCBprojected.setVisibility( View.GONE );
       mCBdangling.setVisibility( View.GONE );
     }
 
@@ -165,7 +185,7 @@ class PlotNewDialog extends MyDialog
   {
     String plot_name  = TDString.spacesToUnderscore( mEtName.getText().toString() ); // this trims the string
 
-    String plot_start = TDString.noSpaces( mEtStart.getText().toString() );
+    String plot_start = ( mStart == null )? TDString.noSpaces( mEtStart.getText().toString() ) : mStart;
     // String view  = mEditView.getText().toString();
     // String view = null;
     if ( ! TDString.checkName( plot_name, mEtName, mContext.getResources() ) ) {
@@ -191,30 +211,37 @@ class PlotNewDialog extends MyDialog
     // }
     
     // plot_start = TDUtil.toStationFromName( plot_start );
-    if ( TDString.isNullOrEmpty( plot_start ) ) {
-      mEtStart.setError( resString( R.string.error_start_required ) );
-      return false;
-    } 
-    if ( ! TDUtil.isStationName( plot_start ) ) {
-      mEtStart.setError( resString( R.string.bad_station_name ) );
-      return false;
-    }
-    boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();
-    if ( ! ( dangling || mMaker.hasSurveyStation( plot_start ) ) ) {
-      mEtStart.setError( resString( R.string.error_station_non_existing ) );
-      return false;
-    }
-
-    boolean projected = false;
-    if ( TDLevel.overAdvanced ) {
-      projected = mCBprojected.isChecked();
-    }
-
-    if ( projected ) {
-      mMaker.doProjectionDialog( plot_name, plot_start );
+    if ( mStart == null ) {
+      if ( TDString.isNullOrEmpty( plot_start ) ) {
+        mEtStart.setError( resString( R.string.error_start_required ) );
+        return false;
+      } 
+      if ( ! TDUtil.isStationName( plot_start ) ) {
+        mEtStart.setError( resString( R.string.bad_station_name ) );
+        return false;
+      }
+      boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();
+      if ( ! ( dangling || mMaker.hasSurveyStation( plot_start ) ) ) {
+        mEtStart.setError( resString( R.string.error_station_non_existing ) );
+        return false;
+      }
+      boolean projected = false;
+      if ( TDLevel.overAdvanced ) {
+        projected = mCBprojected.isChecked();
+      }
+      if ( projected ) {
+        mMaker.doProjectionDialog( plot_name, plot_start );
+      } else {
+        mMaker.makeNewPlot( plot_name, plot_start, true, 0, 0 ); // true = extended
+      }
     } else {
-      mMaker.makeNewPlot( plot_name, plot_start, true, 0, 0 ); // true = extended
+      if ( mAzimuth >= 0 ) {
+        mMaker.makeNewPlot( plot_name, mStart, false, mAzimuth, mOblique );
+      } else {
+        mMaker.makeNewPlot( plot_name, mStart, true, 0, 0 );
+      }
     }
+
     return true;
   }
 

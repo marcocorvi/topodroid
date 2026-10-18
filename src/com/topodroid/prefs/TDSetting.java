@@ -291,8 +291,7 @@ public class TDSetting
   // public static final boolean mExportUri = true;
 
   public static boolean mExportMedia          = false;  // whether to include media in export
-  public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
-  public static String  mExportPrefix         = null;   // export prefix - only for the current run
+  public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/Compass export
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
   // public static boolean mZipShare             = false;  // whether to share exported zip
   public static boolean mZipShareCategory     = false;  // DISTOX_ZIP_SHARE_CATEGORY
@@ -609,7 +608,7 @@ public class TDSetting
 
   public static float mReduceAngle  = 45;    // minimal angle between segments of "straightened" lines
   public static float mReduceCosine = 0.7f;  // cosine of mReduceAngle
-  public static boolean mLineClip  = false; // whether to clip lines
+  public static boolean mLineClip  = false; // whether to clip lines and areas
 
   // public static boolean mZoomControls = false;
   public static int mZoomCtrl = 0; // 0: gone, 1: temporary, 2: permanent

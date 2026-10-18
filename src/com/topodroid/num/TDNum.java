@@ -490,12 +490,12 @@ public class TDNum
    */
   public void setStationHidden( String name, int hide )
   {
-    // TDLog.v( "Set Station Hidden: " + hide );
+    TDLog.v( "Set station " + name + " hide: " + hide );
     NumStation st = getStation( name );
     if ( st == null ) return;
     st.mBarrierAndHidden = ( st.mHidden == -1 && hide == 1 );
     st.mHidden += hide;
-    // TDLog.v( "station " + st.name + " hide " + st.mHidden );
+    TDLog.v( "begin station " + st.name + " hidden " + st.mHidden );
     hide *= 2;
     // st = st.parent(); // 20230318 fixed
     // while ( st != null ) {
@@ -513,6 +513,7 @@ public class TDNum
       // TDLog.v("pop " + st.name );
       if ( ! st.name.equals( name ) ) {
         st.mHidden += hide;
+        TDLog.v("pop " + st.name + " hidden " + st.mHidden );
         if ( st.sibling() != null ) {
           stack.push( st.sibling() );
           // TDLog.v("push sibling " + st.sibling().name );
@@ -540,23 +541,23 @@ public class TDNum
   }
 
   /** set a station either barrier or non-barrier
-   * @param name    station name
-   * @param barrier whether to barrier or not: +1 to barrier, -1 not to barrier
+   * @param name station name
+   * @param barr whether to barrier or not: +1 to barrier, -1 not to barrier
    */
-  public void setStationBarrier( String name, int barrier )
+  public void setStationBarrier( String name, int barr )
   {
-    // TDLog.v( "Set Station barrier: " + barrier );
+    TDLog.v( "Set station " + name + " barr: " + barr );
     NumStation st = getStation( name );
     if ( st == null ) return;
-    // TDLog.v( "station " + st.name + " barr " + st.mHidden );
-    st.mBarrierAndHidden = ( st.mHidden == 1 && barrier == 1 );
-    st.mHidden -= barrier;
+    st.mBarrierAndHidden = ( st.mHidden == 1 && barr == 1 );
+    st.mHidden -= barr;
+    TDLog.v( "begin station " + st.name + " hidden " + st.mHidden );
     if ( mStartStation == st ) return;
-    barrier *= 2;
+    barr *= 2;
     // stack.push( st ); // 20230318 fixed
     // while ( ! stack.empty() ) {
     //   st = stack.pop();
-    //   mStations.updateHidden( st, -barrier, stack );
+    //   mStations.updateHidden( st, -barr, stack );
     // }
     if ( st.child() != null ) {
       Stack<NumStation> stack = new Stack<NumStation>();
@@ -564,8 +565,8 @@ public class TDNum
       // TDLog.v("push " + st.name );
       while ( ! stack.empty() ) {
         st = stack.pop();
-        // TDLog.v("pop " + st.name );
-        st.mHidden -= barrier;
+        st.mHidden -= barr;
+        TDLog.v("pop " + st.name + " hidden " + st.mHidden );
         if ( st.sibling() != null ) {
           stack.push( st.sibling() );
           // TDLog.v("push sibling " + st.sibling().name );
@@ -584,6 +585,7 @@ public class TDNum
   private void setStationsBarr( String barr )
   {
     if ( barr == null ) return;
+    TDLog.v("set station barr: " + barr );
     String[] names = barr.split(" ");
     for ( int k=0; k<names.length; ++k ) {
       if ( names[k].length() > 0 ) setStationBarrier( names[k], 1 );
@@ -623,6 +625,8 @@ public class TDNum
     }
     return ret;
   }
+
+  // --------------------------------------------------------------------
 
   /** @return the station from the ID (name)
    * @param id    station ID (name)

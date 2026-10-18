@@ -1929,7 +1929,7 @@ public class MainWindow extends Activity
   void exportSurveys( final List<String> surveys )
   {
     String[] types = TDConst.surveyExportTypes( false ); // with_geo=false
-    new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, surveys, false, false ).show(); // diving=false
+    new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, surveys, false, false ).show(); // diving=false, with_name=false
   }
 
   /** bulk import of surveys
@@ -2002,7 +2002,6 @@ public class MainWindow extends Activity
   public void doExport( final String type, final String filename, final String prefix, final long first, boolean second, final List<String> survey_list, boolean shared )
   { 
     TDLog.v("Main export Type " + type + " filename " + filename + " prefix " + prefix );
-    TDSetting.mExportPrefix = prefix; // save export-prefix
     int index = TDConst.surveyFormatIndex( type );
     String extension = filename.substring( filename.lastIndexOf(".") );
     if ( index >= 0 ) {

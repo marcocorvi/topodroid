@@ -3823,5 +3823,13 @@ public class Scrap
     Clip.toOutline( mCurrentStack, line, clip_mode );
   }
 
+  /** clip an area to the scrap outline
+   * @param area  area to clip
+   */
+  void clipArea( DrawingAreaPath area ) 
+  {
+    Clip.toOutline( mCurrentStack, area );
+  }
+
 }
 

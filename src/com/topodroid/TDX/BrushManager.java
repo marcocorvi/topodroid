@@ -303,6 +303,11 @@ public class BrushManager
   static boolean isAreaUser( int idx )      { return mAreaLib != null && idx == mAreaLib.mAreaUserIndex; }
   // FIXME AREA_ORIENT
   static boolean isAreaOrientable( int index )      { return mAreaLib != null && mAreaLib.isSymbolOrientable( index ); }
+  /**
+   * @param index symbol index
+   * @param type  plot type
+   */
+  static boolean isAreaClippable( int index, int type ) { return mAreaLib != null && mAreaLib.isClippable( index, type ); }
   // FIXME_ORIENTATION
   // static double getAreaOrientation( int index )     { return (mAreaLib == null)? 0 : mAreaLib.getAreaOrientation( index ); }
   // static void resetAreaOrientations( )              { if (mAreaLib != null) mAreaLib.resetOrientations(); }

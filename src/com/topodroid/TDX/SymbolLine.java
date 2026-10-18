@@ -144,6 +144,12 @@ public class SymbolLine extends Symbol
       mPath.moveTo(-PATH_WIDTH, 0 );
       mPath.lineTo( PATH_WIDTH, 0 );
     }
+    if ( TDSetting.mLineClip && ( mClippable != 0 ) ) {
+      mPath.moveTo( 16, -7 );
+      mPath.lineTo( 15, -14 );
+      mPath.moveTo( 12, -14 );
+      mPath.lineTo( 20, -14 );
+    }
   }
 
   private int k_val; // index in array vals[]
@@ -178,7 +184,7 @@ public class SymbolLine extends Symbol
    *      group GROUP_NAME
    *      color 0xHHHHHH_COLOR 0xAA_ALPHA
    *      width WIDTH
-   *      clippable no
+   *      clippable no/none/yes/end/both [optional - default no]
    *      closed yes
    *      dash x1 y1 x2 y2 ...
    *      style straight | xN
@@ -281,28 +287,28 @@ public class SymbolLine extends Symbol
               }
   	    } else if ( vals[k].equals("closed") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	      if ( k < s && vals[k].equals("yes") ) {
+  	      if ( k < s && "yes".equals( vals[k] ) ) {
                 mClosed = true;
               }
-            } else if ( vals[k].equals("clip") ) {
+            } else if ( vals[k].equals("clippable") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                if ( vals[k].equals("no") ) {
-                  mClippable = 0;
-                } else if ( vals[k].equals("yes") ) {
+                if ( "yes".equals( vals[k] ) || "end".equals( vals[k] ) ) {
                   mClippable = 1;
-                } else if ( vals[k].equals("both") ) {
+                } else if ( "both".equals( vals[k] ) ) {
                   mClippable = 2;
+                } else {
+                  mClippable = 0;
                 }
               }
             } else if ( vals[k].equals("reverse") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s && vals[k].equals("yes") ) {
+              if ( k < s && "yes".equals( vals[k] ) ) {
                 mReverse = true;
               }
             } else if ( vals[k].equals("csurvey") ) {
               // syntax: csurvey <layer> <type> <category> <pen>
-  	    } else if ( vals[k].equals("color") ) {
+  	    } else if ( "color".equals( vals[k] ) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 try {

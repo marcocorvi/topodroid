@@ -220,7 +220,7 @@
     <string name="device_address">Cím %1$s</string>
     <string name="device_connection_failed">Műszer csatlakozási hiba</string>
     <string name="device_command_failed">Műszer csatlakozási hiba</string>
-    <!string name="device_switching">Váltás a %1$s műszerre</string>
+    <string name="device_switching">Váltás a %1$s műszerre</string>
     <string name="device_operation_busy">Műszer foglalt</string>
     <string name="device_pair_duplicate">Műszer pár dulikált</string>
     <string name="address">Cím</string>

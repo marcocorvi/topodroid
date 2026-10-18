@@ -16,6 +16,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDColor;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.types.PlotType;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -31,6 +32,11 @@ import android.graphics.Shader.TileMode;
 
 public class SymbolArea extends Symbol
 {
+  final static int CLIP_NONE    = 0;
+  final static int CLIP_PLAN    = 1;
+  final static int CLIP_PROFILE = 2;
+  final static int CLIP_BOTH    = 3;
+
   String mName;
   int mColor;
   boolean mCloseHorizontal;
@@ -45,6 +51,7 @@ public class SymbolArea extends Symbol
   BitmapShader mShader; // paint bitmap shader
   TileMode mXMode;
   TileMode mYMode;
+  private int mClippable = 0; // 0 none, 1 plan, 2 profile, 3 both
 
   @Override public String getName()  { return mName; }
 
@@ -54,9 +61,22 @@ public class SymbolArea extends Symbol
   //  */
   // @Override public int getColor() { return (mPaint == null)? 0 : mPaint.getColor(); }
 
-  @Override public Path   getSymbolPath()  { return mPath; }
+  @Override public Path getSymbolPath()  { return mPath; }
 
+
+  /** @return true if the area is orientable
+   */
   @Override public boolean isOrientable() { return mOrientable; }
+
+  /** @return true if the area is clippable
+   * @param type   plot type
+   */
+  public boolean isClippable( int type )
+  {
+    if ( type == PlotType.PLOT_PLAN ) return ( mClippable & CLIP_PLAN ) != 0;
+    // if ( PlotType.isProfile( type ) ) 
+    return ( mClippable & CLIP_PROFILE ) != 0;
+  }
 
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
@@ -78,14 +98,25 @@ public class SymbolArea extends Symbol
   // @Override public int getAngle() { return (int)mOrientation; } // FIXME_ORIENTATION
 
   /** 
-   * color 0xaarrggbb
-   * level canvas level
+   * @param name    symbol presentation name
+   * @param th_nane therion name
+   * @param group   symbol group
+   * @param fname   symbol filename
+   * @param clippable whether the symbol is clippable
+   * @param color   symbol color - 0xaarrggbb
+   * @param bitmap  symbol pattern bitmap
+   * @param x_mode  tiling X-mode
+   * @param y_mode  tiling Y-mode
+   * @param close_horizontal whether the area border closes horizontally in profile view
+   * @param level   canvas level
+   * @param rt      ...
    */
-  SymbolArea( String name, String th_name, String group, String fname, int color, Bitmap bitmap, TileMode x_mode, TileMode y_mode,
+  SymbolArea( String name, String th_name, String group, String fname, int clippable, int color, Bitmap bitmap, TileMode x_mode, TileMode y_mode,
               boolean close_horizontal, int level, int rt )
   {
     super( Symbol.TYPE_AREA, th_name, group, fname, rt );
     mName   = name;
+    mClippable = clippable;
     mColor  = color;
     mLevel  = level;
 
@@ -134,6 +165,12 @@ public class SymbolArea extends Symbol
       mPath.close();
     } else {
       mPath.addCircle( 0, 0, 10, Path.Direction.CCW );
+    }
+    if ( TDSetting.mLineClip && ( (mClippable & CLIP_BOTH) != 0 ) ) {
+      mPath.moveTo( 16, -7 );
+      mPath.lineTo( 20, -14 );
+      mPath.lineTo( 12, -14 );
+      mPath.close();
     }
   }
 
@@ -197,6 +234,7 @@ public class SymbolArea extends Symbol
    *      name NAME
    *      th_name THERION_NAME
    *      color 0xHHHHHH_COLOR 0xAA_ALPHA
+   *      clippable no/none/plan/profile/both [optional - default none]
    *      endsymbol
    */
   private void readFile( String filename, String locale, String iso )
@@ -259,6 +297,14 @@ public class SymbolArea extends Symbol
   	      if ( k < s ) {
   	        group = vals[k]; // should .trim(); for tab etc. ? no: require syntax without tabs etc.
   	      }
+            } else if ( vals[k].equals("clippable") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+                if ( "plan".equals( vals[k] ) ) mClippable = CLIP_PLAN;
+                else if ( "profile".equals( vals[k] ) ) mClippable = CLIP_PROFILE;
+                else if ( "both".equals( vals[k] ) ) mClippable = CLIP_BOTH;
+                else mClippable = CLIP_NONE;
+              }
             } else if ( vals[k].equals("options") ) {
               StringBuilder sb = new StringBuilder();
               boolean space = false;

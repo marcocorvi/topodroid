@@ -608,7 +608,7 @@ public class DrawingPointLinePath extends DrawingPath
   /** reset the path from the given list of points
    * @param pts   list of points
    */
-  void resetPath( ArrayList< LinePoint > pts )
+  public void resetPath( ArrayList< LinePoint > pts )
   {
     clear();
     // if ( pts == null ) return;

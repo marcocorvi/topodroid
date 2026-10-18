@@ -40,4 +40,6 @@ public class CavwayConst
   public static final int FLAG_GENERIC   = 0x4;
   // 0x3 0x2 0x1 unused
   public static final int FLAG_NONE      = 0x0;
+
+  static final byte[] CAVWAY_PROTOCOL = { (byte)(0xf0), (byte)(0x01) };
 }

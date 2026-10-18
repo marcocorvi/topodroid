@@ -306,6 +306,7 @@ public class DataDownloader
             // if ( LOG ) TDLog.v( TAG + "notify - connected " + connected );
             mConnected = connected;
             mApp.notifyListerStatus( lister, ConnectionState.CONN_WAITING );
+            // mApp.notifyCommStatus( this, lister, ConnectionState.CONN_WAITING ); // FIXME like-MM : what is comm ?
           } else {
             notifyUiThreadConnectionStatus( lister, connected );
           }

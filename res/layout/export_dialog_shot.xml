@@ -363,7 +363,7 @@
       android:layout_height="wrap_content"
       android:text="@string/export_faverjon"
       />
-    <EditText android:id="@+id/vtopo_series"
+    <EditText android:id="@+id/vtopo_name"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:hint="@string/export_series_hint"

@@ -55,9 +55,11 @@ import java.io.BufferedWriter;
 // import java.io.FilenameFilter;
 import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
+import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
@@ -689,6 +691,41 @@ public class TDFile
   public static boolean deleteDir( String dirname ) 
   { 
     return deleteDir( getTopoDroidFile( dirname ) ); // DistoX-SAF
+  }
+
+  /** copy an existing file to a new file
+   * @param from_name  name of existing file
+   * @param to_name    name of new file
+   * @return true if success
+   */
+  public static boolean copyFile( String from_name, String to_name )
+  {
+    File f1 = getTopoDroidFile( from_name ); // DistoX-SAF
+    if ( ! f1.exists() ) {
+      TDLog.e("copy file: source does not exist");
+      return false;
+    }
+    File f2 = getTopoDroidFile( to_name );
+    if ( f2.exists() ) {
+      TDLog.e("copy file: target exists");
+      return false;
+    }
+    try (
+      InputStream in = new BufferedInputStream( new FileInputStream( f1 ) );
+      OutputStream out = new BufferedOutputStream( new FileOutputStream( f2 ) )
+    ) {
+      byte[] buffer = new byte[2048];
+      int lengthRead;
+      while ( ( lengthRead = in.read(buffer) ) > 0) {
+        out.write(buffer, 0, lengthRead);
+        out.flush();
+      }
+      return true;
+    } catch ( IOException e ) {
+      TDLog.e("file copy " + e.getMessage() );
+      if ( f2.exists() ) f2.delete();
+    }
+    return false;
   }
 
   /** rename a file
