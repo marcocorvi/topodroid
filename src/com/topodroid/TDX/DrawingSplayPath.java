@@ -207,7 +207,11 @@ public class DrawingSplayPath extends DrawingPath
   {
     if ( intersects( bbox ) ) {
       if ( not_edit && mSplayMode == SPLAY_MODE_POINT ) {
-        TDGreenDot.draw( canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius*1.5f*scale, mPaint );
+        if ( mBlock.isRecent( ) ) { //HBspl_o_color
+          TDGreenDot.draw(canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius * 1.5f * scale, BrushManager.paintSplayLatest ); //HBspl_o
+        } else {
+          TDGreenDot.draw(canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius * 1.5f * scale, mPaint);
+        }
       } else {
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
@@ -230,7 +234,11 @@ public class DrawingSplayPath extends DrawingPath
   {
     if ( intersects( bbox ) ) {
       if ( not_edit && mSplayMode == SPLAY_MODE_POINT ) {
-        TDGreenDot.draw( canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius*1.5f*scale, mPaint );
+        if ( mBlock.isRecent( ) ) { //HBspl_o_color
+          TDGreenDot.draw(canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius * 1.5f * scale, BrushManager.paintSplayLatest );//HBspl_o
+        } else {
+          TDGreenDot.draw(canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius * 1.5f * scale, mPaint);
+        }
       } else {
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
