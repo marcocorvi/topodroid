@@ -585,6 +585,10 @@ public class DrawingWindow extends ItemDrawer
   // ZOOM
   static final float ZOOM_INC = 1.4f;
   static final float ZOOM_DEC = 1.0f/ZOOM_INC;
+  private final static float ZOOM_MIN = 0.01f;
+  private final static float ZOOM_SCALE_MIN = 0.1f; // was 0.05f
+  private final static float ZOOM_SCALE_MAX = 4.0f;
+
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;
  
@@ -597,7 +601,7 @@ public class DrawingWindow extends ItemDrawer
   // ZoomButton mZoomIn;
   private float oldDist;  // zoom pointer-spacing
   private View mZoomView;
-  private float mZoomTranslate = 48; // pixels
+  private float mZoomTranslate = 48; // pixels - changed to ButtonSize
   private LinearLayout mLayoutTools;
   private LinearLayout mLayoutToolsP;
   private LinearLayout mLayoutToolsL;
@@ -1103,9 +1107,10 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v("CHANGE ZOOM fixed-zoom " + mDrawingSurface.getFixedZoom() );
     if ( mDrawingSurface.isFixedZoom() ) return;
-    if ( f < 0.05f || f > 4.0f ) return;
+    if ( f < ZOOM_SCALE_MIN || f > ZOOM_SCALE_MAX ) return;
     float zoom = mZoom;
     mZoom     *= f;
+    if ( mZoom < ZOOM_MIN ) mZoom = ZOOM_MIN;
     // TDLog.v( "zoom " + mZoom );
     // mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
     // mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
@@ -1142,7 +1147,7 @@ public class DrawingWindow extends ItemDrawer
       mZoom = zoom;
       // TDLog.v( "fixed zoom " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
-      // updateDisplay();
+      // updateDisplay( );
     }
   }
 
@@ -1206,6 +1211,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.addFixedSplayPath( dpath, selectable );
       return dpath; 
     } else { // DrawingPath
+      // TDLog.v("add fixed leg " + x1 + " " + y1 + " -- " + x2 + " " + y2 );
       DrawingPath path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
       mDrawingSurface.addFixedLegPath( path, selectable );
       return path;
@@ -1913,6 +1919,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void computeStationReferences( TDNum num, int type, float cosp, float sinp, String name )
   {
+    // TDLog.v("Compute Station References");
     String parent = ( TDInstance.xsections? null : name );
     List< NumStation > stations = num.getStations();
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
@@ -1921,7 +1928,7 @@ public class DrawingWindow extends ItemDrawer
       List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION, parent );
       List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
-        if ( st.show() ) {
+        if ( st.show( true ) ) {
           // DrawingStationName dst =
           mDrawingSurface.addDrawingStationName( name, st,
                   DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections, saved );
@@ -1932,7 +1939,7 @@ public class DrawingWindow extends ItemDrawer
       List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         // TDLog.v("EXTEND station " + st.name + " has extend " + st.hasExtend() );
-        if ( st.hasExtend() && st.show() ) {
+        if ( st.hasExtend() && st.show( false ) ) {
           // DrawingStationName dst =
           mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
         }
@@ -1941,7 +1948,7 @@ public class DrawingWindow extends ItemDrawer
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
       List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
-        if ( st.show() ) {
+        if ( st.show( false ) ) {
           double h1 = st.e * cosp + st.s * sinp;
           // DrawingStationName dst =
           mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
@@ -1965,7 +1972,7 @@ public class DrawingWindow extends ItemDrawer
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
           NumStation st = sp.from;
-          if ( st.show() ) {
+          if ( st.show( true ) ) {
             DBlock blk = sp.getBlock();
             if ( ! ( blk.isNoPlan() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
               // TDLog.v("SPLAY cosine " + sp.getCosine() );
@@ -1977,7 +1984,7 @@ public class DrawingWindow extends ItemDrawer
     } else if ( type == PlotType.PLOT_EXTENDED ) { // ------------- EXTENDED PROFILE -----------------
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        if ( st.hasExtend() && st.show() ) {
+        if ( st.hasExtend() && st.show( false ) ) {
           DBlock blk = sp.getBlock();
           if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
             addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
@@ -1987,7 +1994,7 @@ public class DrawingWindow extends ItemDrawer
     } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        if ( st.show() ) {
+        if ( st.show( false ) ) {
           DBlock blk = sp.getBlock();
           if ( ! ( blk.isNoProfile() /* || blk.isCommented() */ ) ) { // FIXME_COMMENTED
             double h1 = st.e * cosp + st.s * sinp;
@@ -2011,20 +2018,24 @@ public class DrawingWindow extends ItemDrawer
   private void computeShotReferences( TDNum num, int type, float cosp, float sinp )
   {
     List< NumShot > shots       = num.getShots();
+    int cnt = 0;
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
         DBlock blk = sh.getFirstBlock();
         // if ( ! blk.isCommented() ) { // FIXME_COMMENTED
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          if ( st1.show() && st2.show() ) {
+          // TDLog.v(" shot stations " + st1.name + " " + st1.show(true) + " " + st2.name + " " + st2.show(true) );
+          if ( st1.show( true ) && st2.show( true ) ) {
             DrawingPath path = addFixedLine( type, blk, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
+            ++ cnt;
             if ( sh.isBadLoop() ) {
               path.setPathPaint( BrushManager.badLoopPaint );
             }
           }
         // }
       }
+      // TDLog.v("compute shot refs PLAN shots " + shots.size() + " legs " + cnt );
     }
     else if ( type == PlotType.PLOT_EXTENDED ) // ------------- EXTENDED PROFILE -----------------
     {
@@ -2032,23 +2043,28 @@ public class DrawingWindow extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
+          // TDLog.v("stations " + st1.name + " show " + st1.show( false ) + " " + st2.name + " show " + st2.show( false ) );
 	  DBlock blk = sh.getFirstBlock();
           if ( blk != null /* && ! blk.isCommented() */ ) { // FIXME_COMMENTED
-            if ( st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
+            if ( st1.hasExtend() && st2.hasExtend() && st1.show( false ) && st2.show( false ) ) {
               DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
+              ++ cnt;
               if ( sh.isBadLoop() ) {
                 path.setPathPaint( BrushManager.badLoopPaint );
               }
             }
+          } else {
+            TDLog.e("shot " + st1.name + " " + st2.name + " has no block");
           }
         }
       } 
+      // TDLog.v("compute shot refs PROFILE shots " + shots.size() + " legs " + cnt);
     } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
       for ( NumShot sh : shots ) {
-        // TDLog.v( "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
+        // TDLog.v( "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show( false ) + " to " + sh.to.show( false ) );
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        if ( st1.show() && st2.show() ) {
+        if ( st1.show( false ) && st2.show( false ) ) {
           double h1 = st1.e * cosp + st1.s * sinp;
           double h2 = st2.e * cosp + st2.s * sinp;
           DBlock blk = sh.getFirstBlock();
@@ -2068,14 +2084,13 @@ public class DrawingWindow extends ItemDrawer
    * @param type    plot type
    * @param name    plot name
    * @param zoom    zoom factor
-   * @param can_toast whether the method can toast
+   * @param red_menu whether the method can set the menu red
    * @note this is called only for PLAN / PROFILE
    */
   private boolean computeReferences( TDNum num, int type, String name,
                                   // float xoff, float yoff,
-                                  float zoom, boolean can_toast )
+                                  float zoom, boolean red_menu )
   {
-    // TDLog.v( "PLOT compute references() zoom " + zoom + " landscape " + mLandscape );
     if ( ! PlotType.isSketch2D( type ) ) return false;
     if ( num == null ) return false;
     // mLastLinePath = null;
@@ -2099,6 +2114,7 @@ public class DrawingWindow extends ItemDrawer
       s2 = num.surveyVmax();
     }
 
+    // TDLog.v( "PLOT compute references() type " + type + " bounds X " + e1 + " " + e2 + " Y " + s1 + " " + s2 );
     mDrawingSurface.newReferences( manager_type, type );
     // mDrawingSurface.clearReferences( type );
     // mDrawingSurface.setManager( manager_type, type );
@@ -2127,28 +2143,11 @@ public class DrawingWindow extends ItemDrawer
     computeShotReferences( num, type, cosp, sinp );
     computeSplayReferences( num, type, cosp, sinp );
     computeStationReferences( num, type, cosp, sinp, name );
-
     mDrawingSurface.commitReferences();
 
-    if ( can_toast ) {
+    if ( red_menu ) {
       setMenuImageRed( ! num.surveyAttached || ! num.surveyExtend || mMultiBad.size() > 0 /* || nr_magnetic_bad > 0 */ ); // nr_multi_bad > 0
     }
-
-    // if ( can_toast ) {
-    //   if ( (! num.surveyAttached) && TDSetting.mCheckAttached ) {
-    //     if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
-    //       TDToast.makeWarn( R.string.survey_not_attached_extend );
-    //     } else {
-    //       TDToast.makeWarn( R.string.survey_not_attached );
-    //     }
-    //   } else if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
-    //     TDToast.makeWarn( R.string.survey_not_extend );
-    //   } else if ( mMultiBad.size() > 0 ) { //  ( nr_multi_bad > 0 )
-    //     TDToast.makeWarn( R.string.survey_bad_siblings );
-    //   // } else if ( nr_magnetic_bad > 0 ) {
-    //   //   TDToast.makeWarn( R.string.survey_bad_magnetic );
-    //   }
-    // }
     return true;
   }
 
@@ -2742,7 +2741,7 @@ public class DrawingWindow extends ItemDrawer
       mLayoutToolsL.setLayoutParams( lp0 );
       BUTTON_SCALE_X = lp0.height / (60 * TDSetting.mUnitLines );
       BUTTON_SCALE_Y = BUTTON_SCALE_X;
-      TDLog.v("Tools bar height " + lp0.height + " scale " + scale + " button-scale " + BUTTON_SCALE_X );
+      // TDLog.v("Tools bar height " + lp0.height + " scale " + scale + " button-scale " + BUTTON_SCALE_X );
 
       lp0 = mLayoutToolsA.getLayoutParams();
       lp0.height = (int)(scale * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
@@ -3943,6 +3942,18 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.commitReferences();
   }
 
+  private void setBarriersAndHiddens( TDNum num, boolean plan )
+  {
+    // TDLog.v( "set berriers and hiddens" );
+    if ( plan ) {
+      num.setBarrierAndHidden( mPlot2.view, mPlot2.hide, false );
+      num.setBarrierAndHidden( mPlot1.view, mPlot1.hide, true );
+    } else {
+      num.setBarrierAndHidden( mPlot1.view, mPlot1.hide, true );
+      num.setBarrierAndHidden( mPlot2.view, mPlot2.hide, false );
+    }
+  }
+
   /** read the plot from file(s) - the file name(s) is taken from the plot names stored in the object
    * @param type    plot type
    * @param list    shots list
@@ -3997,12 +4008,10 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v( "data reduction " + list.size() + " start at " + mPlot1.start );
         mMultiBad = new ArrayList< StringPair >();
         mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
+        // setBarriersAndHiddens( mNum, (type == PlotType.PLOT_PLAN) ); // done below
         // if ( type == PlotType.PLOT_PLAN ) { // was 20250321
-        //   mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
-        // } else {
-        //   mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide );
+        // } else { // FIXME_HIDDEN2
         // }
-        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
 
         if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       } else {
@@ -4048,13 +4057,15 @@ public class DrawingWindow extends ItemDrawer
       if ( mNum == null ) {
         TDToast.makeBad( R.string.survey_no_data_reduction );
       } else {
-        // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-        // computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, true );
-        // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // was 20250321
-        // computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
-        mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
-        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
-        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, true );
+        setBarriersAndHiddens( mNum, (type == PlotType.PLOT_PLAN) ); 
+
+        // if ( type == PlotType.PLOT_PLAN ) { // was 20250321
+        //   TDLog.v("load files plan - set barrier " + mPlot1.view + " hidden " + mPlot1.hide );
+        // } else { // FIXME_HIDDEN2
+        //   TDLog.v("load files profile - set barrier " + mPlot2.view + " hidden " + mPlot2.hide );
+        // }
+        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, true );
+        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false ); // menu_red false
       }
 
       doMoveTo();
@@ -4313,25 +4324,25 @@ public class DrawingWindow extends ItemDrawer
     if ( block.getIntExtend() == extend && block.hasStretch( stretch ) ) return;
     block.setExtend( extend, stretch );
     mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch );
-    recomputeProfileReference();
+    recomputeProfileReference( ); 
   }
 
   /** recompute the plot centerline in profile view - only PLOT_EXTENDED ( not PLOT_PROJECTED )
    * @note used only when a shot extend is changed
    */
-  private void recomputeProfileReference()
+  private void recomputeProfileReference( )
   {
     // assert( mLastLinePath == null );
     if ( mType == PlotType.PLOT_EXTENDED ) { 
+      // TDLog.v("Recompute Profile Reference");
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
       mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-      // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
+      setBarriersAndHiddens( mNum, false );
 
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       mDrawingSurface.clearShotsAndStations( (int)mType );
-      computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
+      computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, true );
       // TDLog.v( "PLOT profile ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
       modified();
@@ -4356,7 +4367,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.deleteSplay( p, sp ); 
       mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
       if ( TopoDroidApp.mShotWindow != null ) {
-        TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+        TopoDroidApp.mShotWindow.updateDisplay( ); // FIXME ???
       }
     // }
   }
@@ -6541,12 +6552,11 @@ public class DrawingWindow extends ItemDrawer
    */
   void toggleStationHidden( String st_name, boolean is_hidden )
   {
-    // PlotInfo plot = ( mType == PlotType.PLOT_PLAN )? mPlot1 : mPlot2; // was 20250321
-    // String hide = plot.hide.trim();
-    // PlotInfo plot = mPlot1; // new 20250321
-    String hide = mPlot1.hide.trim();
-
-    // TDLog.v( "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + ">" );
+    boolean plan = ( mType == PlotType.PLOT_PLAN );
+    PlotInfo plot = plan? mPlot1 : mPlot2;
+    long pid = plan? mPid1 : mPid2;
+    String hide = plot.hide.trim();
+    // TDLog.v( "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + "> plan " + plan );
     String new_hide = ""; // empty string
     boolean drop = false;
     if ( /* hide != null && */ hide.length() > 0 ) {
@@ -6576,19 +6586,11 @@ public class DrawingWindow extends ItemDrawer
         hide = hide + " " + st_name;
       }
       // TDLog.v( "addStationHidden " + st_name + " hide <" + hide + ">" );
-      mApp_mData.updatePlotHide( mPid1, mSid, hide ); // new 20250321
-      mPlot1.hide = hide;
-      mApp_mData.updatePlotHide( mPid2, mSid, hide );
-      mPlot2.hide = hide;
-      // mApp_mData.updatePlotHide( mPid, mSid, hide ); // was 20250321
+      // mApp_mData.updatePlotHide( pid, mSid, hide ); 
       // plot.hide = hide;
       h = 1; // hide
     } else if ( drop && is_hidden ) {
-      mApp_mData.updatePlotHide( mPid1, mSid, new_hide ); // new 20250321
-      mPlot1.hide = new_hide;
-      mApp_mData.updatePlotHide( mPid2, mSid, new_hide );
-      mPlot2.hide = new_hide;
-      // mApp_mData.updatePlotHide( mPid, mSid, new_hide ); // was 20250321
+      // mApp_mData.updatePlotHide( pid, mSid, new_hide );
       // plot.hide = new_hide;
       h = -1; // un-hide
       // TDLog.v( "dropStationHidden " + st_name + " hide <" + new_hide + ">" );
@@ -6596,10 +6598,12 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "toggle station hidden: hide <" + hide + "> H " + h );
 
     if ( h != 0 ) {
+      mApp_mData.updatePlotHide( pid, mSid, hide ); 
+      plot.hide = hide;
       // TDLog.v("clear shots and stations" );
       mDrawingSurface.clearShotsAndStations( );
-      mNum.setStationHidden( st_name, h );
-      recomputeReferences( mNum, mZoom );
+      mNum.setStationHidden( st_name, h, plan );
+      recomputeOneReference( plan );
     }
   }
   //  mNum.setStationHidden( st_name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
@@ -6610,10 +6614,11 @@ public class DrawingWindow extends ItemDrawer
    */
   void toggleStationBarrier( String st_name, boolean is_barrier ) 
   {
-    // PlotInfo plot = ( mType == PlotType.PLOT_PLAN )? mPlot1 : mPlot2; // was 20250321
-    // String view = plot.view.trim();
-    String view = mPlot1.view.trim(); // new 20250321
-    TDLog.v( "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
+    boolean plan = ( mType == PlotType.PLOT_PLAN );
+    PlotInfo plot = plan? mPlot1 : mPlot2;
+    long pid = plan? mPid1 : mPid2;
+    String view = plot.view.trim();
+    // TDLog.v( "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
     String new_view = ""; // empty string
     boolean drop = false;
     if ( view != null && view.length() > 0 ) { // always true
@@ -6642,30 +6647,25 @@ public class DrawingWindow extends ItemDrawer
       } else {
         view = view + " " + st_name;
       }
-      // TDLog.v( "addStationBarrier " + st_name + " view <" + view + ">" );
-      mApp_mData.updatePlotView( mPid1, mSid, view ); // new 20250321
-      mPlot1.view = view;
-      mApp_mData.updatePlotView( mPid2, mSid, view );
-      mPlot2.view = view;
-      // mApp_mData.updatePlotView( mPid, mSid, view ); // was 20250321
+      // TDLog.v("toggle (add) barrier <" + mPlot1.view + "> hidden <" + mPlot1.hide + ">" );
+      // mApp_mData.updatePlotView( pid, mSid, view ); // FIXME_HIDDEN2
       // plot.view = view;
       h = 1;
     } else if ( drop && is_barrier ) {
-      mApp_mData.updatePlotView( mPid1, mSid, new_view ); // new 20250321
-      mPlot1.view = new_view;
-      mApp_mData.updatePlotView( mPid2, mSid, new_view );
-      mPlot2.view = new_view;
-      // mApp_mData.updatePlotView( mPid, mSid, new_view ); // was 20250321
-      // plot.view = new_view;
+      // TDLog.v("toggle (drop) barrier <" + mPlot1.view + "> hidden <" + mPlot1.hide + ">" );
+      // mApp_mData.updatePlotView( pid, mSid, view ); // FIXME_HIDDEN2
+      // plot.view = view;
       h = -1;
     }
     // TDLog.v( "toggle station barrier: view <" + view + "> H " + h );
 
     if ( h != 0 ) {
+      mApp_mData.updatePlotView( pid, mSid, view ); // FIXME_HIDDEN2
+      plot.view = view;
       // TDLog.v("clear shots and stations" );
       mDrawingSurface.clearShotsAndStations( );
-      mNum.setStationBarrier( st_name, h );
-      recomputeReferences( mNum, mZoom );
+      mNum.setStationBarrier( st_name, h, plan );
+      recomputeOneReference( plan );
     }
   }
 
@@ -6780,10 +6780,10 @@ public class DrawingWindow extends ItemDrawer
       String to_filename = TDInstance.survey + "-" + to_name + ( (mType == PlotType.PLOT_PLAN)? "p" : "s" );
       String to_tdr = TDPath.getTdrFileWithExt( to_filename );
       if ( TDFile.copyFile( my_tdr, to_tdr ) ) {
-        TDLog.v("tdr copied: " + my_tdr + " ->" + to_tdr );
+        // TDLog.v("tdr copied: " + my_tdr + " ->" + to_tdr );
         switchNameAndType( to_name, mType );
       } else {
-        TDLog.v("tdr copy: " + my_tdr + " ->" + to_tdr + " FAILED" );
+        TDLog.e("tdr copy: " + my_tdr + " ->" + to_tdr + " FAILED" );
       }
     }
   }
@@ -7505,15 +7505,15 @@ public class DrawingWindow extends ItemDrawer
   {
     // assert( mLastLinePath == null);
     if ( mPlot2 == null ) return;
-    // TDLog.v( "PLOT set type 2 mType " + mType );
+    // TDLog.v( "PLOT set type 2 mType " + mType + " compute " + compute + " view <" + mPlot2.view + "> hide <" + mPlot2.hide + ">" );
     mPid  = mPid2;
     mName = mName2;
     mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
     setButton1( BTN_PLAN, mBMextend );
     mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
     if ( compute && mNum != null ) {
-      // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
+      // TDLog.v("set plot tyep 2: barrier " + mPlot2.view + " hidden " + mPlot2.hide );
+      mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide, false ); // FIXME_HIDDEN2 profile view
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
     }
     resetReference( mPlot2, params );
@@ -7535,15 +7535,15 @@ public class DrawingWindow extends ItemDrawer
   {
     // assert( mLastLinePath == null);
     if ( mPlot1 == null ) return;
-    // TDLog.v( "PLOT set type 1 mType " + mType );
+    // TDLog.v( "PLOT set type 1 mType " + mType + " compute " + compute + " view <" + mPlot1.view + "> hide <" + mPlot1.hide + ">" );
     mPid  = mPid1;
     mName = mName1;
     mType = mPlot1.type;
     setButton1( BTN_PLAN, mBMplan );
     mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
     if ( compute && mNum != null ) {
-      // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // was 20250321
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
+      // TDLog.v("set plot tyep 1: barrier " + mPlot1.view + " hidden " + mPlot1.hide );
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide, true ); // FIXME_HIDDEN2 plan view
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
     }
     resetReference( mPlot1, params );
@@ -7579,17 +7579,17 @@ public class DrawingWindow extends ItemDrawer
     if ( flip_shots ) {
       DBlock blk;
       for ( NumShot sh : mNum.getShots() ) {
-        if ( sh.from.show() && sh.to.show() ) {
+        if ( sh.from.show( false ) && sh.to.show( false ) ) { // FIXME_HIDDEN2
           flipBlock( sh.getFirstBlock() );
         }
       }
       for ( NumSplay sp : mNum.getSplays() ) {
-        if ( sp.from.show() ) {
+        if ( sp.from.show( false ) ) { // FIXME_HIDDEN2
           flipBlock( sp.getBlock() );
         }
       }
     }
-    recomputeProfileReference();
+    recomputeProfileReference( ); 
   }
 
 
@@ -7977,8 +7977,9 @@ public class DrawingWindow extends ItemDrawer
             if ( item instanceof DrawingStationName ) {
               DrawingStationName st = (DrawingStationName)(item);
               DrawingStationUser path = mDrawingSurface.getStationPath( st.getName() );
-              boolean barrier = mNum.isBarrier( st.getName() );
-              boolean hidden  = mNum.isHidden( st.getName() );
+              boolean plan = ( mType == PlotType.PLOT_PLAN );
+              boolean barrier = mNum.isBarrier( st.getName(), plan );
+              boolean hidden  = mNum.isHidden( st.getName(), plan );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
               DrawingPointPath point = null;
               String section_name = null;
@@ -8051,7 +8052,8 @@ public class DrawingWindow extends ItemDrawer
             } else {
               // TDLog.v( "centerline path type " + sp.type() );
               if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
-                int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
+                boolean plan = ( mType == PlotType.PLOT_PLAN );
+                int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo, plan ) : 0;
                 new DrawingShotDialog( mActivity, this, item, flag ).show();
               } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
                 if ( item.mBlock.isScan() ) {
@@ -8096,7 +8098,7 @@ public class DrawingWindow extends ItemDrawer
           new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
         } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
           // TDLog.v("Button REFRESH");
-          updateDisplay();
+          updateDisplay( );
           TDToast.make( R.string.display_refresh );
         }
       } else {
@@ -8150,7 +8152,7 @@ public class DrawingWindow extends ItemDrawer
           }
         } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
           // TDLog.v("Button REFRESH");
-          updateDisplay();
+          updateDisplay( );
           TDToast.make( R.string.display_refresh );
         }
       }
@@ -8744,28 +8746,21 @@ public class DrawingWindow extends ItemDrawer
   private void doComputeReferences( boolean reset )
   {
     // TDLog.v( "PLOT compute ref type " + mType + " reset " + reset );
+    // TDLog.v("compute refs: barrier 1 <" + mPlot1.view + "> <" + mPlot1.hide + "> 2 <" + mPlot2.view + "> <" + mPlot2.hide + ">");
+    boolean plan = ( mType == PlotType.PLOT_PLAN );
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-    mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
+    setBarriersAndHiddens( mNum, plan );
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
-    if ( mType == (int)PlotType.PLOT_PLAN ) {
-      // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-      computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
-
-      // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // was 20250321
+    if ( plan ) {
+      computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true ); // menu_red = true
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
-
-      if ( reset ) resetReference( mPlot1, false );
-    } else if ( PlotType.isProfile( mType ) ) {
-      // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // was 20250321
+    } else {
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
-
-      // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-      computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
-
-      if ( reset ) resetReference( mPlot2, false );
+      computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true ); // menu_red = true
     }
+    if ( reset ) resetReference( (plan ? mPlot1 : mPlot2), false );
   }
 
   /** refresh the display
@@ -8798,18 +8793,21 @@ public class DrawingWindow extends ItemDrawer
    */
   private void updateDisplay( )
   {
-    if ( mType != (int)PlotType.PLOT_PLAN && ! PlotType.isProfile( mType ) ) {
+    boolean plan = ( mType == (int)PlotType.PLOT_PLAN );
+    if ( ! plan && ! PlotType.isProfile( mType ) ) {
       // FIXME_SK resetReference( mPlot3 );
       doRestart();
       updateSplays( mApp.mSplayMode );
     } else {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
+      // TDLog.v("update display - set barrier 1 <" + mPlot1.view + "> <" + mPlot1.hide + "> 2 <" + mPlot2.view + "> <" + mPlot2.hide + ">" );
       TDNum num = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+      setBarriersAndHiddens( num, plan );
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( num.nrInaccurateLoops > 0 );
-      recomputeReferences( num, TopoDroidApp.mScaleFactor );
+      recomputeReferences( false );
       mNum = num;
+
     }
   }
 
@@ -8819,14 +8817,16 @@ public class DrawingWindow extends ItemDrawer
    */
   private void incrementalUpdateDisplay( long blk_id, boolean got_leg )
   {
-    if ( mType != (int)PlotType.PLOT_PLAN && ! PlotType.isProfile( mType ) ) return;
+    boolean plan = ( mType == (int)PlotType.PLOT_PLAN );
+    if ( ! plan && ! PlotType.isProfile( mType ) ) return;
     if ( mNum == null ) {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
       TDNum num = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide );
+      // TDLog.v("incremental update display - set barrier <" + mPlot1.view + "> hidden <" + mPlot1.hide + ">" );
+      setBarriersAndHiddens( num, plan );
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( num.nrInaccurateLoops > 0 );
-      recomputeReferences( num, TopoDroidApp.mScaleFactor );
+      recomputeReferences( false );
       mNum = num;
     } else {
       DBlock blk = mApp_mData.selectShot( blk_id, mSid );
@@ -8845,7 +8845,7 @@ public class DrawingWindow extends ItemDrawer
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
           NumStation st0 = StationPolicy.isSurveyBackward() ? st1 : st2;
-          if ( st1.show() && st2.show() ) {
+          if ( st1.show( plan ) && st2.show( plan ) ) {
             // DBlock blk1 = sh.getFirstBlock(); // same as leg
             // TDLog.v("DATA " + "LEG blk " + blk.mId + " blk1 " + blk1.mId + " leg " + leg.mId );
             appendFixedLine( PlotType.PLOT_PLAN, leg, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
@@ -8875,7 +8875,7 @@ public class DrawingWindow extends ItemDrawer
           NumSplay sp = mNum.getLastSplay();
           if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
             NumStation st = sp.from;
-            if ( st.show() ) {
+            if ( st.show( plan ) ) {
               DBlock blk2 = sp.getBlock();
               if ( ! blk2.isNoPlan() ) appendFixedLine( mPlot1.type, blk2, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
               if ( ! blk2.isNoProfile() ) {
@@ -8939,21 +8939,6 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "PLOT zoom fit " + mOffset.x + " " + mOffset.y + " zoom " + mZoom + " tb " + tb + " lr " + lr );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     return true;
-  }
-
-  // called when the data reduction changes (hidden/barrier)
-  private void recomputeReferences( TDNum num, float zoom )
-  {
-    if ( num == null ) return;
-    // mLastLinePath = null; // not needed
-
-    if ( mType == (int)PlotType.PLOT_PLAN ) { // was 20250321
-      if ( mPlot2 != null ) computeReferences( num, mPlot2.type, mPlot2.name, zoom, false );
-    } else if ( PlotType.isProfile( mType ) ) {
-      if ( mPlot1 != null ) computeReferences( num, mPlot1.type, mPlot1.name, zoom, false );
-    }
-    mDrawingSurface.clearShotsAndStations( (int)mType );
-    computeReferences( num, (int)mType, mName, zoom, false );
   }
 
   /** forward the update request to the Shot Window
@@ -9605,7 +9590,7 @@ public class DrawingWindow extends ItemDrawer
       //   DrawingSurface.exportAsCsx( pw, PlotType.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
       // }
     } else {
-      TDLog.v("CSX psd2 null");
+      TDLog.e("CSX psd2 null");
     }
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
@@ -11125,37 +11110,33 @@ public class DrawingWindow extends ItemDrawer
     recomputeReferences( true );
   }
 
-  /** recompute plan and rofile references
+  private void recomputeOneReference( boolean plan )
+  {
+    if ( plan ) {
+      computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, true );
+    } else {
+      computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, true );
+    }
+  }
+
+  /** recompute plan and profile references
    * @param redo_num  whether to recompute num
    */
   private void recomputeReferences( boolean redo_num )
   {
+    boolean plan = (mType == PlotType.PLOT_PLAN);
     mDrawingSurface.clearShotsAndStations( );
     if ( redo_num ) {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new TDNum( list, mPlot1.start, mDecl, mFormatClosure );
-      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // new 20250321
+      // TDLog.v("recompute refs - barrier 1 <" + mPlot1.view + "> hidden <" + mPlot1.hide + "> 2 <" + mPlot2.view + "> hidden <" + mPlot2.hide + ">" );
+      mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide, plan ); // new 20250321
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
-      if ( mType == mPlot1.type ) {
-        // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
-        // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // was 20250321
-        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
-      } else if ( mType == mPlot2.type ) {
-        // mNum.setBarrierAndHidden( mPlot1.view, mPlot1.hide ); // was 20250321
-        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
-        // mNum.setBarrierAndHidden( mPlot2.view, mPlot2.hide ); // was 20250321
-        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
-      }
-    } else {
-      if ( mType == mPlot1.type ) {
-        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
-        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
-      } else if ( mType == mPlot2.type ) {
-        computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
-        computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
-      }
+    // } else {
+    //   TDLog.v("recompute refs");
     }
+    computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, true );
+    computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
   }
 
   /** show the soft keyboard for the drawing surface (view)
@@ -11174,7 +11155,7 @@ public class DrawingWindow extends ItemDrawer
       @Override
       public void run() {
         InputMethodManager imm = getSystemService( InputMethodManager.class );
-        TDLog.v("LABEL showSoftInput hasFocus=" + mDrawingSurface.hasFocus());
+        // TDLog.v("LABEL showSoftInput hasFocus=" + mDrawingSurface.hasFocus());
         imm.showSoftInput( mDrawingSurface, InputMethodManager.SHOW_IMPLICIT );
       }
     });

@@ -926,6 +926,7 @@ public class DrawingCommandManager
    */
   void commitReferences()
   {
+    // TDLog.v("commit refs: grids " + mTmpGridStack1.size() + " " + mTmpGridStack10.size() + " " + mTmpGridStack100.size() + " legs " + mTmpLegsStack.size() + " stations " + mTmpStations.size() );
     synchronized( TDPath.mGridsLock ) {
       mGridStack1   = mTmpGridStack1;
       mGridStack10  = mTmpGridStack10;

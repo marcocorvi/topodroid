@@ -97,12 +97,12 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   void setLabelPath( DrawingLabelPath path ) // SR
   {
     mLabelPath = path;
-    TDLog.v("LABEL setLabelPath: " + (path != null));
+    // TDLog.v("LABEL setLabelPath: " + (path != null));
     if ( path != null ) {
       setFocusableInTouchMode( true );
       setFocusable( true );
       requestFocus();
-      TDLog.v("LABEL hasFocus: " + hasFocus());
+      // TDLog.v("LABEL hasFocus: " + hasFocus());
     } else {
       clearFocus();
     }
@@ -111,14 +111,14 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   @Override
   public boolean onCheckIsTextEditor() // SR
   {
-    TDLog.v("LABEL onCheckIsTextEditor: " + (mLabelPath != null));
+    // TDLog.v("LABEL onCheckIsTextEditor: " + (mLabelPath != null));
     return mLabelPath != null;
   }
 
   @Override
   public InputConnection onCreateInputConnection( EditorInfo outAttrs ) // SR
   {
-    TDLog.v("LABEL onCreateInputConnection: " + (mLabelPath != null));
+    // TDLog.v("LABEL onCreateInputConnection: " + (mLabelPath != null));
     if ( mLabelPath == null ) return null;
     outAttrs.inputType = android.text.InputType.TYPE_CLASS_TEXT
                        | android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE;
@@ -129,7 +129,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       @Override
       public boolean commitText( CharSequence text, int newCursorPosition )
       {
-        TDLog.v("LABEL commitText [" + text + "]");
+        // TDLog.v("LABEL commitText [" + text + "]");
         if ( mLabelPath != null && text != null ) {
           for ( int i = 0; i < text.length(); ++i ) {
             mLabelPath.addTextChar( Character.toChars( text.charAt(i) ) );
@@ -141,7 +141,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       @Override
       public boolean deleteSurroundingText( int beforeLength, int afterLength )
       {
-        TDLog.v("LABEL deleteSurroundingText " + beforeLength + " " + afterLength);
+        // TDLog.v("LABEL deleteSurroundingText " + beforeLength + " " + afterLength);
         if ( mLabelPath != null && beforeLength > 0 ) {
           for ( int i = 0; i < beforeLength; ++i ) {
             mLabelPath.delTextChar();
@@ -297,8 +297,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     mType = type;
     // TDLog.v( " set manager type " + type );
     if ( mode == DRAWING_PROFILE ) {
+      // TDLog.v( " set manager PROFILE");
       commandManager = mCommandManager2;
     } else if ( mode == DRAWING_PLAN ) {
+      // TDLog.v( " set manager PLAN");
       commandManager = mCommandManager1;
     } else {
       commandManager = mCommandManager3;
@@ -771,7 +773,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    * @param manager drawing command manager
    * @note used to return true if the station is the current active
    */
-  private void setStationPaint( DrawingStationName st, List< StationInfo > saved, DrawingCommandManager manager )
+  private void setStationPaint( DrawingStationName st, List< StationInfo > saved, DrawingCommandManager manager, boolean plan )
   {
     if ( st == null ) return; // 20191010 should not be necessary: crash called from setCurrentStation
     String name = st.getName();
@@ -783,9 +785,9 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
         manager.setCurrentStationName( st );
       }
       st.setPathPaint( BrushManager.fixedStationActivePaint );
-    } else if ( num_st.mHidden == 1 ) {
+    } else if ( num_st.isHidden( plan ) ) {
       st.setPathPaint( BrushManager.fixedStationHiddenPaint );
-    } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
+    } else if ( num_st.canBarrier( plan ) ) {
       st.setPathPaint( BrushManager.fixedStationBarrierPaint );
     } else {
       st.setPathPaint( BrushManager.fixedStationPaint );
@@ -808,13 +810,13 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     DrawingStationName st = mCommandManager1.getCurrentStationName();
     if ( st != null ) {
       // TDLog.v("Clear current station name Manager 1");
-      setStationPaint( st, null, mCommandManager1 );
+      setStationPaint( st, null, mCommandManager1, true );
       mCommandManager1.setCurrentStationName( null );
     }
     st = mCommandManager2.getCurrentStationName();
     if ( st != null ) {
       // TDLog.v("Clear current station name Manager 1");
-      setStationPaint( st, null, mCommandManager2 );
+      setStationPaint( st, null, mCommandManager2, false );
       mCommandManager2.setCurrentStationName( null );
     }
   }
@@ -835,10 +837,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       // TDLog.v("Clear current station old " + st0.getName() );
       DrawingStationName st1 = mCommandManager1.getCurrentStationName();
       mCommandManager1.setCurrentStationName( null );
-      setStationPaint( st1, saved, mCommandManager1 );
+      setStationPaint( st1, saved, mCommandManager1, true );
       st1 = mCommandManager2.getCurrentStationName();
       mCommandManager2.setCurrentStationName( null );
-      setStationPaint( st1, saved, mCommandManager2 );
+      setStationPaint( st1, saved, mCommandManager2, false );
       if ( st == st0 ) {
         // TDLog.v("Set current station - same as old " + st0.getName() );
         return;
@@ -851,21 +853,21 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       st0 = commandManager.getStation( st.getName() );
       st0.setPathPaint( BrushManager.fixedStationActivePaint );
       commandManager.setCurrentStationName( st0 ); // this only saves the current-station object
-      // setStationPaint( st0, saved, commandManager );
+      // setStationPaint( st0, saved, commandManager, mType == PlotType.PLOT_PLAN );
       if ( commandManager == mCommandManager1 ) {
         st0 = mCommandManager2.getStation( st.getName() );
         if ( st0 != null ) {
           st0.setPathPaint( BrushManager.fixedStationActivePaint );
         }
         mCommandManager2.setCurrentStationName( st0 );
-        // setStationPaint( st0, saved, mCommandManager2 );
+        // setStationPaint( st0, saved, mCommandManager2, false );
       } else {
         st0 = mCommandManager1.getStation( st.getName() );
         if ( st0 != null ) {
           st0.setPathPaint( BrushManager.fixedStationActivePaint );
         } 
         mCommandManager1.setCurrentStationName( st0 );
-        // setStationPaint( st0, saved, mCommandManager1 );
+        // setStationPaint( st0, saved, mCommandManager1, true );
       }
     }
   }
@@ -889,7 +891,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     // DO as when loaded
 
     DrawingStationName st = new DrawingStationName( num_st, x, y, scrapIndex() );
-    setStationPaint( st, saved, commandManager );
+    setStationPaint( st, saved, commandManager, mType == PlotType.PLOT_PLAN );
 
     if ( xsections != null && parent != null ) {
       for ( PlotInfo plot : xsections ) {
@@ -916,10 +918,11 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   DrawingStationName appendDrawingStationName ( long type, NumStation num_st, float x, float y, boolean selectable )
   {
     // TDLog.v( "append Drawing Station Name [3] " + num_st.name + " " + x + " " + y );
-    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    boolean plan = ( type == PlotType.PLOT_PLAN );
+    DrawingCommandManager cmd = plan ? mCommandManager1 : mCommandManager2;
     clearCurrentStation();
     DrawingStationName st = new DrawingStationName( num_st, x, y, scrapIndex() );
-    setStationPaint( st, null, cmd );
+    setStationPaint( st, null, cmd, plan );
 
     cmd.appendStation( st, selectable ); // NOTE make this always true if you want station selectable on all sections
     return st;
@@ -983,25 +986,28 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   void addFixedLegPath( DrawingPath path, boolean selectable )
   {
-    if ( commandManager == null || path == null ) return;
+    if ( commandManager == null || path == null ) {
+      TDLog.e("null command manager");
+      return;
+    }
     commandManager.addTmpLegPath( path, selectable );
   }
 
   void appendFixedSplayPath( int type, DrawingSplayPath path, boolean selectable )
   {
-    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    DrawingCommandManager cmd = ( type == PlotType.PLOT_PLAN )? mCommandManager1 : mCommandManager2;
     cmd.appendSplayPath( path, selectable );
   }
 
   void appendFixedLegPath( int type, DrawingPath path, boolean selectable )
   {
-    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    DrawingCommandManager cmd = ( type == PlotType.PLOT_PLAN )? mCommandManager1 : mCommandManager2;
     cmd.appendLegPath( path, selectable );
   }
 
   void dropLastSplayPath( int type )
   {
-    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    DrawingCommandManager cmd = ( type == PlotType.PLOT_PLAN )? mCommandManager1 : mCommandManager2;
     cmd.dropLastSplayPath( );
   }
 

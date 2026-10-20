@@ -73,12 +73,13 @@ public class TDNum
    * @param view     barriers list
    * @param hide     hiding list
    */
-  public void setBarrierAndHidden( String view, String hide )
+  public void setBarrierAndHidden( String view, String hide, boolean plan )
   {
     if ( mStations == null ) return;
-    clearBarrierAndHidden();
-    setStationsHide( hide );
-    setStationsBarr( view );
+    // TDLog.v("set barrier <" + view + "> and hidden <" + hide + "> plan " + plan );
+    clearBarrierAndHidden( plan );
+    setStationsHide( hide, plan );
+    setStationsBarr( view, plan );
   }
 
   // public void dump( )
@@ -488,55 +489,51 @@ public class TDNum
    * If B gets un-hidden the line 0--A--B gets shown as well as C---D
    * and these two pieces remain separated.
    */
-  public void setStationHidden( String name, int hide )
+  public void setStationHidden( String name, int hide, boolean plan )
   {
-    TDLog.v( "Set station " + name + " hide: " + hide );
+    // TDLog.v( "Set station " + name + " hide: " + hide + " plan " + plan );
     NumStation st = getStation( name );
     if ( st == null ) return;
-    st.mBarrierAndHidden = ( st.mHidden == -1 && hide == 1 );
-    st.mHidden += hide;
-    TDLog.v( "begin station " + st.name + " hidden " + st.mHidden );
+    if ( plan ) {
+      st.mBarrierAndHidden1 = ( st.mHidden1 == -1 && hide == 1 );
+      st.mHidden1 += hide;
+    } else { // FIXME_HIDDEN2
+      st.mBarrierAndHidden2 = ( st.mHidden2 == -1 && hide == 1 );
+      st.mHidden2 += hide;
+    }
     hide *= 2;
-    // st = st.parent(); // 20230318 fixed
-    // while ( st != null ) {
-    //   st.mHidden += hide;
-    //   if ( st.mHidden < 0 ) st.mHidden = 0;
-    //   // TDLog.v( "station " + st.name + " hide " + st.mHidden );
-    //   st = st.parent();
-    // }
     if ( mStartStation.name.equals( name ) ) return;
     Stack<NumStation> stack = new Stack<NumStation>();
     stack.push( mStartStation );
-    // TDLog.v("push " + mStartStation.name );
     while ( ! stack.empty() ) {
       st = stack.pop();
-      // TDLog.v("pop " + st.name );
       if ( ! st.name.equals( name ) ) {
-        st.mHidden += hide;
-        TDLog.v("pop " + st.name + " hidden " + st.mHidden );
+        if ( plan ) {
+          st.mHidden1 += hide;
+        } else {
+          st.mHidden2 += hide; // FIXME_HIDDEN2
+        }
         if ( st.sibling() != null ) {
           stack.push( st.sibling() );
-          // TDLog.v("push sibling " + st.sibling().name );
         }
         if ( st.child() != null ) {
           stack.push( st.child() );
-          // TDLog.v("push child " + st.child().name );
         }
       }
     }    
   }
 
-  private void clearBarrierAndHidden() { mStations.clearBarrierAndHidden(); }
+  private void clearBarrierAndHidden( boolean plan ) { mStations.clearBarrierAndHidden( plan ); }
 
   /** set the hidden stations
    * @param hide   string with the names of the hidden stations
    */
-  private void setStationsHide( String hide )
+  private void setStationsHide( String hide, boolean plan )
   {
     if ( hide == null ) return;
     String[] names = hide.split(" ");
     for ( int k=0; k<names.length; ++k ) {
-      if ( names[k].length() > 0 ) setStationHidden( names[k], 1 );
+      if ( names[k].length() > 0 ) setStationHidden( names[k], 1, plan );
     }
   }
 
@@ -544,36 +541,36 @@ public class TDNum
    * @param name station name
    * @param barr whether to barrier or not: +1 to barrier, -1 not to barrier
    */
-  public void setStationBarrier( String name, int barr )
+  public void setStationBarrier( String name, int barr, boolean plan )
   {
-    TDLog.v( "Set station " + name + " barr: " + barr );
+    // TDLog.v( "Set station " + name + " barrier: " + barr + " plan " + plan );
     NumStation st = getStation( name );
     if ( st == null ) return;
-    st.mBarrierAndHidden = ( st.mHidden == 1 && barr == 1 );
-    st.mHidden -= barr;
-    TDLog.v( "begin station " + st.name + " hidden " + st.mHidden );
+    if ( plan ) {
+      st.mBarrierAndHidden1 = ( st.mHidden1 == 1 && barr == 1 );
+      st.mHidden1 -= barr;
+    } else { // FIXME_HIDDEN2
+      st.mBarrierAndHidden2 = ( st.mHidden2 == 1 && barr == 1 );
+      st.mHidden2 -= barr;
+    }
     if ( mStartStation == st ) return;
     barr *= 2;
-    // stack.push( st ); // 20230318 fixed
-    // while ( ! stack.empty() ) {
-    //   st = stack.pop();
-    //   mStations.updateHidden( st, -barr, stack );
-    // }
     if ( st.child() != null ) {
       Stack<NumStation> stack = new Stack<NumStation>();
       stack.push( st.child() );
       // TDLog.v("push " + st.name );
       while ( ! stack.empty() ) {
         st = stack.pop();
-        st.mHidden -= barr;
-        TDLog.v("pop " + st.name + " hidden " + st.mHidden );
+        if ( plan ) {
+          st.mHidden1 -= barr;
+        } else {
+          st.mHidden2 -= barr; // FIXME_HIDDEN2
+        }
         if ( st.sibling() != null ) {
           stack.push( st.sibling() );
-          // TDLog.v("push sibling " + st.sibling().name );
         }
         if ( st.child() != null ) {
           stack.push( st.child() );
-          // TDLog.v("push child " + st.child().name );
         }
       }
     }
@@ -582,46 +579,46 @@ public class TDNum
   /** set the barrier stations
    * @param barr   string with the names of the barrier stations
    */
-  private void setStationsBarr( String barr )
+  private void setStationsBarr( String barr, boolean plan )
   {
     if ( barr == null ) return;
-    TDLog.v("set station barr: " + barr );
+    // TDLog.v("set stations barr: " + barr + " plan " + plan);
     String[] names = barr.split(" ");
     for ( int k=0; k<names.length; ++k ) {
-      if ( names[k].length() > 0 ) setStationBarrier( names[k], 1 );
+      if ( names[k].length() > 0 ) setStationBarrier( names[k], 1, plan );
     }
   }
 
   /** @return true if the station is hidden
    * @param name  station name
    */
-  public boolean isHidden( String name )
+  public boolean isHidden( String name, boolean plan )
   {
     NumStation st = getStation( name );
-    return ( st != null && st.hidden() );
+    return ( st != null && st.hidden(plan) );
   }
 
   /** @return true if the station is barrier
    * @param name  station name
    */
-  public boolean isBarrier( String name )
+  public boolean isBarrier( String name, boolean plan )
   {
     NumStation st = getStation( name );
-    return ( st != null && st.barrier() );
+    return ( st != null && st.barrier(plan) );
   }
 
   // @note for the shot FROM-TO
-  public int canBarrierHidden( String from, String to )
+  public int canBarrierHidden( String from, String to, boolean plan )
   {
     int has_shot = hasShot( from, to );
     if ( has_shot == 0 ) return 0;
     int ret = 0;
     if ( has_shot == 1 ) {
-      if ( ! isHidden( from ) )  ret |= 0x02;
-      if ( ! isBarrier( to ) )   ret |= 0x04;
+      if ( ! isHidden( from, plan ) )  ret |= 0x02;
+      if ( ! isBarrier( to, plan ) )   ret |= 0x04;
     } else { // has_shot == -1
-      if ( ! isBarrier( from ) ) ret |= 0x01;
-      if ( ! isHidden( to ) )    ret |= 0x08;
+      if ( ! isBarrier( from, plan ) ) ret |= 0x01;
+      if ( ! isHidden( to, plan ) )    ret |= 0x08;
     }
     return ret;
   }

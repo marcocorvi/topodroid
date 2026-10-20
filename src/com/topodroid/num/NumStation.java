@@ -38,11 +38,14 @@ public class NumStation extends NumSurveyPoint
   NumShot s1;
   NumShot s2;
   NumNode node;
-  float   mAnomaly;    // local magnetic anomaly
-  public int mHidden;  // whether the station is "hidden": 0 show, 1 hiding, 2 hidden
-                       //                     or "barrier": -1 barrier, -2 behind
-  public boolean mBarrierAndHidden;
+  float   mAnomaly;  // local magnetic anomaly
+  int mHidden1 = 0;; // whether the station is "hidden": 0 show, 1 hiding, 2 hidden (plan view)
+                     //                     or "barrier": -1 barrier, -2 behind
+  boolean mBarrierAndHidden1 = false;
+  int mHidden2 = 0; // profile view
+  boolean mBarrierAndHidden2 = false;
   // NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
+
 
   private float mWrapAzimuth1 = 0;   // start wrap-azimuth
   private float mWrapAzimuth2 = 360; // end wrap-azimuth
@@ -53,18 +56,27 @@ public class NumStation extends NumSurveyPoint
   private NumStation mChild;   // child station in the reduction tree
   private NumStation mSibling; // sibling child station in the reduction tree
 
-  public boolean show() { return Math.abs( mHidden ) < 2; }
-  public boolean barriered() { return mHidden < -1; }
-  public boolean unbarriered() { return mHidden >= -1; }
-  public boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
-  public boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
+  public boolean show( boolean plan ) { return Math.abs( plan ? mHidden1 : mHidden2 ) < 2; }
+  public boolean barriered( boolean plan ) { return (plan ? mHidden1 : mHidden2) < -1; }
+  // public boolean unbarriered( boolean plan ) { return (plan ? mHidden1 : mHidden2) >= -1; }
+  public boolean barrier( boolean plan ) { return plan? (mBarrierAndHidden1 || mHidden1 < 0) : (mBarrierAndHidden2 || mHidden2 < 0); }
+  public boolean hidden( boolean plan )  { return plan? (mBarrierAndHidden1 || mHidden1 > 0) : (mBarrierAndHidden2 || mHidden2 > 0); }
+  public boolean isHidden( boolean plan ) { return ( plan? mHidden1 : mHidden2) == 1; }
+  // public boolean isBarrier( boolean plan ) { return (plan? mHidden1 : mHidden2) == -1; } 
+  public boolean canBarrier( boolean plan ) { return plan? (mBarrierAndHidden1 || mHidden1 == -1) : (mBarrierAndHidden2 || mHidden2 == -1); }
+  // public boolean canHidden( boolean plan ) { return plan? (mBarrierAndHidden1 || mHidden1 == 1) : (mBarrierAndHidden2 || mHidden2 == 1); }
 
   /** clear the hidden/barrier flags
    */
-  void clearBarrierAndHidden() 
+  void clearBarrierAndHidden( boolean plan ) 
   {
-    mHidden = 0;
-    mBarrierAndHidden = false;
+    if ( plan ) {
+      mHidden1 = 0;
+      mBarrierAndHidden1 = false;
+    } else {
+      mHidden2 = 0;
+      mBarrierAndHidden2 = false;
+    }
   }
 
   // /** @return the station reduction type: 0 unknown, 1 survey, 2 surface, 3 origin
@@ -109,7 +121,7 @@ public class NumStation extends NumSurveyPoint
     s2 = null;
     node = null;
     mAnomaly = 0.0f;
-    clearBarrierAndHidden();
+    // clearBarrierAndHidden( bool ); // not necessary
     mParent  = null;
     mChild   = null;
     mSibling = null;
@@ -146,7 +158,7 @@ public class NumStation extends NumSurveyPoint
     s2 = null;
     node = null;
     mAnomaly = 0.0f;
-    clearBarrierAndHidden();
+    // clearBarrierAndHidden( bool ); // not necessary
     setParent( from );
     mLegAzimuths = new ArrayList<>();
     // mReductionType = reduction_type;

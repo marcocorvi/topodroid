@@ -202,9 +202,9 @@ class NumStationSet
 
   /** clear the stations barrier/hidden flag
    */
-  void clearBarrierAndHidden()
+  void clearBarrierAndHidden( boolean plan )
   {
-    for ( NumStation st : mStations ) st.clearBarrierAndHidden();
+    for ( NumStation st : mStations ) st.clearBarrierAndHidden( plan );
   }
   
   /** initialize the search of the shortest path

@@ -1311,7 +1311,7 @@ public class DrawingIO
       //   synchronized( TDPath.mStationsLock ) {
       //     for ( DrawingStationName st : stations ) {
       //       NumStation station = st.getNumStation();
-      //       if ( station != null && station.barriered() ) continue;
+      //       if ( station != null && station.barriered( type == PlotType.PLOT_PLAN ) ) continue;
       //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
       //       if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
       //       st.toDataStream( dos, -1 );
@@ -1420,7 +1420,7 @@ public class DrawingIO
         synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : stations ) {
             NumStation station = st.getNumStation();
-            if ( station != null && station.barriered() ) continue;
+            if ( station != null && station.barriered( type == PlotType.PLOT_PLAN ) ) continue;
             if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
             if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
             st.toDataStream( dos, -1 );
@@ -1740,13 +1740,13 @@ public class DrawingIO
    * @param stations  set of station names
    * @param bbox      clipping rectangle
    */
-  static private void exportTherionStations( BufferedWriter out, List< DrawingStationName > stations, RectF bbox ) throws IOException
+  static private void exportTherionStations( BufferedWriter out, List< DrawingStationName > stations, RectF bbox, boolean plan ) throws IOException
   {
     if ( stations == null ) return;
     synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationName st : stations ) {
         NumStation station = st.getNumStation();
-        if ( station != null && station.barriered() ) continue;
+        if ( station != null && station.barriered( plan ) ) continue;
         // FIXME if station is in the convex hull (bbox) of the lines
         if ( bbox != null ) {
           if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
@@ -1864,7 +1864,7 @@ public class DrawingIO
               }
             }
             if ( TDSetting.mAutoStations ) { // TH2EDIT 
-              exportTherionStations( out, stations, scrap_bbox );
+              exportTherionStations( out, stations, scrap_bbox, type == PlotType.PLOT_PLAN );
             }
           } else {
             List< DrawingStationUser > userstations = scrap.mUserStations;
@@ -2058,7 +2058,7 @@ public class DrawingIO
           exportTherionSplays( out, splays, bbox );
         }
         if ( TDSetting.mAutoStations ) {
-          exportTherionStations( out, stations, bbox );
+          exportTherionStations( out, stations, bbox, type == PlotType.PLOT_PLAN );
         }
         exportTherionScrapEnd( out );
         out.flush();

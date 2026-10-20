@@ -294,7 +294,8 @@ class ProjectionDialog extends MyDialog
       if ( ! blk.isCommented() ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        if ( st1.show() && st2.show() ) {
+        // if ( st1.show( true ) && st2.show( true ) )
+        {
           double x1 = (st1.e - e0) * cx + (st1.s - s0) * sx; // - dx;
           double x2 = (st2.e - e0) * cx + (st2.s - s0) * sx; // - dx;
           double y1 = st1.v - v0; // - dy;
@@ -309,7 +310,8 @@ class ProjectionDialog extends MyDialog
     } 
     // for ( NumSplay sp : splays ) {
     //   NumStation st = sp.from;
-    //   if ( st.show() ) {
+    //   // if ( st.show( true ) )
+    //   {
     //     double x1 = (st.e - e0) * cx + (st.s - s0) * sx; // - dx;
     //     double x2 = (sp.e - e0) * cx + (sp.s - s0) * sx; // - dx;
     //     double y1 = st.v - v0; // - dy;
@@ -322,7 +324,8 @@ class ProjectionDialog extends MyDialog
     //   }
     // }
     for ( NumStation st : stations ) {
-      if ( st.show() ) {
+      // if ( st.show( true ) )
+      {
 	double x1 = (st.e -e0) * cx + (st.s - s0) * sx; // - dx;
 	double y1 = st.v - v0; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
