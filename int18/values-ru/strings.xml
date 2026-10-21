@@ -181,7 +181,7 @@
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using_a">Использую %1$s</string>
-    <!-- TODO string name="using_b">Alternate %1$s</string -->
+    <string name="using_b">Чередовать %1$s</string>
     <string name="cali_err">ошибки: среднее %1$.2f&#xb0;, СтОткл %2$.2f&#xb0;. макс. %3$.2f&#xb0;</string>
     <string name="cali_time">Калибровка: %1$s</string>
     <string name="calib_error">Средн. Ошибка: %1$.2f градуса (BH дельта %2$.3f)</string>
@@ -215,11 +215,11 @@
    
     <!-- UNUSED string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string -->
     <string name="device_address">Адрес %1$s</string>
-    <!-- TODO string name="device_connection_failed">Device connection failed</string -->
-    <!-- TODO string name="device_command_failed">Device command failed</string -->
-    <!-- TODO string name="device_switching">Switching to device %1$s</string -->
-    <!-- TODO string name="device_operation_busy">Device operation busy</string -->
-    <!-- TODO string name="device_pair_duplicate">Device pair duplicate</string -->
+    <string name="device_connection_failed">Не удалось подключить устройство</string>
+    <string name="device_command_failed">Выполнение команды устройством не удалось</string>
+    <string name="device_switching">Переключение на устройство %1$s</string>
+    <string name="device_operation_busy">Устройство занято</string>
+    <string name="device_pair_duplicate">Дубликат привязки устройств</string>
     <string name="address">Адрес</string>
     <string name="model_invalid">неверный номер</string>
     <string name="model_missing">номер отсутствует</string>
@@ -1898,8 +1898,8 @@
   <string name="pref_drawing_unit_summary">Базовый размер символов точек [требуется перезапуск программы]</string>
   <string name="pref_unscaled_points_title">Немасштабируемые значки точек</string>
   <string name="pref_unscaled_points_summary">Не масштабировать значки точек при зуме</string>
-  <!-- TODO string name="pref_unscaled_lines_title">Non-zoomed line effects</string -->
-  <!-- TODO string name="pref_unscaled_lines_summary">Line effects are not zoomed</string -->
+  <string name="pref_unscaled_lines_title">Орнамент линий без масштабирования</string>
+  <string name="pref_unscaled_lines_summary">Орнамент линий не масштабируется</string>
   <string name="pref_segment_title">Шаг точек в линии</string>
   <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
   <string name="pref_linestyle_title">Стиль рисования линий</string>
