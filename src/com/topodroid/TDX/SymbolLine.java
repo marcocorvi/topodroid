@@ -230,7 +230,7 @@ public class SymbolLine extends Symbol
           if ( vals[k].length() == 0 ) continue;
           if ( ! in_symbol ) {
             // TDLog.v("SL not in symbol " + line );
-  	    if ( vals[k].equals("symbol" ) ) {
+  	    if ( "symbol".equals( vals[k] ) ) {
   	      name    = null;
   	      th_name = null;
               group   = null;
@@ -240,24 +240,24 @@ public class SymbolLine extends Symbol
               break;
             }
           } else {
-  	    if ( vals[k].equals("name") || vals[k].equals(locale) ) {
+  	    if ( "name".equals( vals[k] ) || vals[k].equals(locale) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
   	      }
               // TDLog.v("SL " + filename + " name " + name );
-  	    } else if ( vals[k].equals("th_name") ) {
+  	    } else if ( "th_name".equals( vals[k] ) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 // 2023-01-31 th_name = deprefix_u( vals[k] );
                 th_name = vals[k];
   	      }
-  	    } else if ( vals[k].equals("group") ) {
+  	    } else if ( "group".equals( vals[k] ) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
   	        group = vals[k];
   	      }
-            } else if ( vals[k].equals("options") ) {
+            } else if ( "options".equals( vals[k] ) ) {
               StringBuilder sb = new StringBuilder();
               boolean space = false;
               for ( ++k; k < s; ++k ) {
@@ -267,7 +267,7 @@ public class SymbolLine extends Symbol
                 }
               }
               options = sb.toString();
-            } else if ( vals[k].equals("level") ) {
+            } else if ( "level".equals( vals[k] ) ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 try {
@@ -276,7 +276,7 @@ public class SymbolLine extends Symbol
                   TDLog.e("Non-integer level");
                 }
               }
-            } else if ( vals[k].equals("roundtrip") ) {
+            } else if ( "roundtrip".equals( vals[k] ) ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 try {
@@ -285,12 +285,12 @@ public class SymbolLine extends Symbol
                   TDLog.e("Non-integer roundtrip");
                 }
               }
-  	    } else if ( vals[k].equals("closed") ) {
+  	    } else if ( "closed".equals( vals[k] ) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s && "yes".equals( vals[k] ) ) {
                 mClosed = true;
               }
-            } else if ( vals[k].equals("clippable") ) {
+            } else if ( vals[k].startsWith("clip") ) { // "clip".equals( ) || "clippable".equals( )
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 if ( "yes".equals( vals[k] ) || "end".equals( vals[k] ) ) {
@@ -301,7 +301,7 @@ public class SymbolLine extends Symbol
                   mClippable = 0;
                 }
               }
-            } else if ( vals[k].equals("reverse") ) {
+            } else if ( "reverse".equals( vals[k] ) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s && "yes".equals( vals[k] ) ) {
                 mReverse = true;
@@ -325,7 +325,7 @@ public class SymbolLine extends Symbol
                   TDLog.e("Non-integer alpha");
                 }
   	      }
-  	    } else if ( vals[k].equals("width") ) {
+  	    } else if ( "width".equals( vals[k] ) ) {
               try {
                 k_val = k;
                 width = nextInt( vals, s ) * TDSetting.mLineThickness;
@@ -336,7 +336,7 @@ public class SymbolLine extends Symbol
               } catch ( NumberFormatException e ) {
                 TDLog.e( filename + " parse width error: " + line );
               }
-  	    } else if ( vals[k].equals("dash") ) {
+  	    } else if ( "dash".equals( vals[k] ) ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 int k1 = k;
@@ -365,10 +365,10 @@ public class SymbolLine extends Symbol
                   }
                 }
               }
-  	    } else if ( vals[k].equals("style") ) { // STYLE
+  	    } else if ( "style".equals( vals[k] ) ) { // STYLE
               for ( ++ k; k < s; ++k ) {
   	        if ( vals[k].length() == 0 ) continue;
-                if ( vals[k].equals("straight") ) {
+                if ( "straight".equals( vals[k] ) ) {
                   mStyleStraight = true;
                 } else if ( vals[k].startsWith("x") ) {
                   try {
@@ -379,7 +379,7 @@ public class SymbolLine extends Symbol
                   }
                 }
               }
-  	    } else if ( vals[k].equals("effect") ) {
+  	    } else if ( "effect".equals( vals[k] ) ) {
               // TDLog.v("SL effect begins");
               mPathDir = new Path();
               mPathRev = new Path();
@@ -393,7 +393,7 @@ public class SymbolLine extends Symbol
                 k = 0;
   	        while ( k < s && vals[k].length() == 0 ) ++k;
                 if ( k < s ) {
-                  if ( vals[k].equals("moveTo") ) {
+                  if ( "moveTo".equals( vals[k] ) ) {
                     try {
                       // if ( ! moved_to ) {
                         k_val = k;
@@ -422,7 +422,7 @@ public class SymbolLine extends Symbol
                     } catch ( NumberFormatException e ) {
                       TDLog.e( filename + " parse moveTo point error: " + line );
                     }
-                  } else if ( vals[k].equals("lineTo") ) { 
+                  } else if ( "lineTo".equals( vals[k] ) ) { 
                     try {
                       k_val = k;
                       float x = nextFloat( vals, s, unit );
@@ -446,7 +446,7 @@ public class SymbolLine extends Symbol
                     } catch ( NumberFormatException e ) {
                       TDLog.e( filename + " parse lineTo point error: " + line );
                     }
-                  } else if ( vals[k].equals("cubicTo") ) { 
+                  } else if ( "cubicTo".equals( vals[k] ) ) { 
                     try {
                       k_val = k;
                       float x1 = nextFloat( vals, s, unit );
@@ -496,7 +496,7 @@ public class SymbolLine extends Symbol
                     } catch ( NumberFormatException e ) {
                       TDLog.e( filename + " parse lineTo point error: " + line );
                     }
-                  } else if ( vals[k].equals("addCircle") ) { 
+                  } else if ( "addCircle".equals( vals[k] ) ) { 
                     try {
                       k_val = k;
                       float x = nextFloat( vals, s, unit );
@@ -510,7 +510,7 @@ public class SymbolLine extends Symbol
                     } catch ( NumberFormatException e ) {
                       TDLog.e( filename + " parse lineTo point error: " + line );
                     }
-                  } else if ( vals[k].equals("endeffect") ) {
+                  } else if ( "endeffect".equals( vals[k] ) ) {
                     // TDLog.v("SL effect ends");
                     // mPathDir.close();
                     // mPathRev.close();
@@ -521,7 +521,7 @@ public class SymbolLine extends Symbol
                   }
                 }
               }
-  	    } else if ( vals[k].equals("endsymbol") ) {
+  	    } else if ( "endsymbol".equals( vals[k] ) ) {
   	      if ( name != null && th_name != null ) { 
                 // TDLog.v("SL " + filename + " end-symbol is ok");
                 mName   = name;

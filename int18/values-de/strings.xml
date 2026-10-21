@@ -267,6 +267,7 @@
   <string name="export_tdconfig_title">Projekt Export (TDConfig)</string>
   <!-- UNUSED string name="import_wait">Importieren&#8230; bitte warten&#8230;</string -->
   <string name="import_already">Vermessung bereits importiert</string>
+    <!-- TODO string name="import_partial">Partial file import</string -->
   <string name="import_bad">Ungültiges Importfile</string>
   <string name="import_none">Keine Daten importiert</string>
   <string name="import_failed">Import fehlgeschlagen</string>

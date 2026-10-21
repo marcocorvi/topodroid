@@ -49,6 +49,7 @@ public class ImportSurvexTask extends ImportTask
       if ( hasSurveyName( parser.mName ) ) {
         return -1L;
       }
+      mPartial = parser.isPartial();
 
       sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, true );
 

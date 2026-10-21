@@ -56,6 +56,7 @@ public class ImportTherionTask extends ImportTask
       if ( hasSurveyName( parser.mName ) ) {
         return -1L;
       }
+      mPartial = parser.isPartial();
 
       sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false, true ); // IMPORT TH no update
 

@@ -271,6 +271,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="export_tdconfig_title">Exportar projeto</string>
   <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
   <string name="import_already">Topo já importada</string>
+    <!-- TODO string name="import_partial">Partial file import</string -->
   <string name="import_bad">Arquivo de importação inválido</string>
   <string name="import_none">Nenhum arquivo a ser importado</string>
   <string name="import_failed">Importação de arquivo falhou</string>

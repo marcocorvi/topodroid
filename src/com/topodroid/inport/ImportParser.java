@@ -44,6 +44,10 @@ class ImportParser
   protected ArrayList< ParserShot > shots;   // centerline shots
   protected ArrayList< ParserShot > splays;  // splay shots
 
+  protected boolean mPartial = false; // whether import was partial 
+  
+  boolean isPartial() { return mPartial; }
+
   /** @return the number of legs
    */
   public int getShotNumber()    { return shots.size(); }

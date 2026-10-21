@@ -88,4 +88,12 @@ class ParserUtil
     return ExtendType.EXTEND_RIGHT;
   }
 
+  static float parseFloat( String val, float def )
+  {
+    try {
+      return Float.parseFloat( val );
+    } catch ( NumberFormatException e ) { }
+    return def;
+  }
+
 }

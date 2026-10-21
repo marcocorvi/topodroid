@@ -291,6 +291,7 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <!-- UNUSED string name="import_wait">Importar archivo&#8230; attendi&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
+    <!-- TODO string name="import_partial">Partial file import</string -->
     <string name="import_bad">Archivo de importación no válido</string>
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_failed">Fallo al importar archivo</string>

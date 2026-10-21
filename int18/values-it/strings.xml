@@ -288,6 +288,7 @@
 
     <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
     <string name="import_already">Rilievo già presente</string>
+    <!-- TODO string name="import_partial">Partial file import</string -->
     <string name="import_bad">File di Import non valido</string>
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>

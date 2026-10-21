@@ -273,6 +273,7 @@
     <string name="export_tdconfig_title">Export projektu</string>
 
     <string name="import_already">Měření s tímto názvem již existuje</string>
+    <!-- TODO string name="import_partial">Partial file import</string -->
     <string name="import_bad">Neplatný soubor pro import</string>
     <string name="import_none">Nebyl vybrán soubor pro import</string>
     <string name="import_failed">Import souboru selhal</string>

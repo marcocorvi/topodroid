@@ -290,6 +290,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_tdconfig_title">Експортиране на картировка</string>
     <!-- UNUSED string name="import_wait">Импортира се файл &#8230; моля, изчакайте &#8230;</string -->
     <string name="import_already">Картировката е вече импортирана</string>
+    <!-- TODO string name="import_partial">Partial file import</string -->
     <string name="import_bad">Невалиден файл</string>
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_failed">Файлът не е импортиран</string>

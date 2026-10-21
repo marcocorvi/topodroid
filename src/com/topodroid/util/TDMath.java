@@ -50,6 +50,12 @@ public class TDMath
   static public float atan2Fd( double y, double x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
   static public float sqrtF( double x )   { return (float)Math.sqrt( x ); }
 
+  static public float averageDegrees( float d1, float d2 )
+  {
+    if ( Math.abs( d1 - d2 ) < 180 ) return (d1 + d2)/2;
+    return in360( (d1 + 360 + d2)/2 );
+  }
+
   /** @return the difference between two angles [degrees]
    * @param a1   first angle [deg.]
    * @param a2   second angle [deg.]

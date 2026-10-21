@@ -40,6 +40,7 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   protected InputStream fis = null;
   protected InputStreamReader isr = null;
   protected ParcelFileDescriptor mPfd = null;
+  protected boolean mPartial = false; // whether import was partial - this is set in background task
 
   ImportTask( MainWindow main )
   {
@@ -117,10 +118,11 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
       main.setTheTitle( );
       if ( result >= 0 ) {
         main.updateDisplay( );
+        if ( mPartial ) TDToast.makeWarn( R.string.import_partial );
       } else {
         if ( result == -1L ) {
           TDToast.makeBad( R.string.import_already );
-        } else {
+        } else { // -2L
           TDToast.makeBad( R.string.import_bad );
         }
       }
