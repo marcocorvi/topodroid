@@ -1792,6 +1792,17 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="silexgis_artefact_selected">Selected: %1$s</string>
   <string name="silexgis_download_failed">Download of %1$s failed: %2$s</string>
   <string name="silexgis_downloading">Downloading %1$s: %2$d kB</string>
+  <string name="silexgis_import_button">From SilexGIS...</string>
+  <string name="silexgis_import_title">Import from SilexGIS</string>
+  <string name="silexgis_import_filter_hint">Filter by cave, survey or uploader</string>
+  <string name="silexgis_import_empty">No survey to import</string>
+  <string name="silexgis_import_partial">Showing %1$d of %2$d surveys</string>
+  <string name="silexgis_import_row">%1$s UTC, %2$s, %3$s</string>
+  <string name="silexgis_import_select">Select a survey in the list</string>
+  <string name="silexgis_import_th">Therion file</string>
+  <string name="silexgis_import_no_th">This upload has no Therion file</string>
+  <string name="silexgis_import_downloading">Downloading %1$s: %2$s</string>
+  <string name="silexgis_file_error">Cannot write the file: %1$s</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>
   <string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string>
   <string name="pref_vtopo_lrud_title">LRUD at From</string>

@@ -28,6 +28,9 @@ import java.net.URL;
 import java.net.MalformedURLException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 import java.io.UnsupportedEncodingException;
@@ -477,6 +480,209 @@ public class SilexGisClient
   }
 
   // ---------------------------------------------------------------------
+  // survey uploads, for the import
+
+  /** a survey upload, as listed by the server: the archive of a TopoDroid survey and its Therion files
+   */
+  public static class Upload
+  {
+    public String id         = "";
+    public String caveId     = "";    // id of the cave (empty if the server did not send it): cave names are not unique
+    public String caveName   = "";
+    public String surveyId   = "";    // id of the survey of the cave that the upload is a version of (empty if not sent)
+    public String title      = "";    // title of the survey of the cave, else the survey title, else the survey name
+    public String surveyName = "";
+    public String createdAt  = "";    // UTC time of the upload
+    public String version    = "";    // UTC time that names the version of the survey (empty if not sent: the time of the upload)
+    public String uploader   = "";
+    public long   size       = -1L;   // size of the archive [bytes], -1 if not known
+    public String archiveName = "";
+    public String archiveUrl  = "";
+    public final ArrayList< String[] > therion = new ArrayList<>(); // Therion files: { name, content URL }
+
+    /** @return the key of the cave of the upload: its id, else its name
+     */
+    public String caveKey() { return caveId.isEmpty()? caveName : caveId; }
+
+    /** @return the key of the survey of the cave that the upload is a version of: its id, else its title
+     */
+    public String surveyKey() { return surveyId.isEmpty()? title : surveyId; }
+
+    /** @return the time that orders the versions of a survey: the version, else the time of the upload
+     */
+    public String stamp() { return version.isEmpty()? createdAt : version; }
+  }
+
+  /** @return the answer of the list of the uploads of a source: GET /api/v1/survey-uploads
+   * @param source     source of the uploads, eg, "topodroid"
+   * @param page_size  maximum number of uploads in the answer
+   */
+  public Result listUploads( String source, int page_size )
+  {
+    return request( "GET", "/api/v1/survey-uploads?source=" + source + "&pageSize=" + page_size, null );
+  }
+
+  /** @return the uploads of an answer of listUploads(), or null if the answer has no list of items
+   * @param json   answer of listUploads()
+   * @note an item without the content URL of the archive is skipped: there is nothing to import from it
+   */
+  public static ArrayList< Upload > parseUploads( JSONObject json )
+  {
+    if ( json == null ) return null;
+    JSONArray items = json.optJSONArray( "items" );
+    if ( items == null ) return null;
+    ArrayList< Upload > ret = new ArrayList<>();
+    for ( int k = 0; k < items.length(); ++k ) {
+      JSONObject item = items.optJSONObject( k );
+      if ( item == null ) continue;
+      JSONObject archive = item.optJSONObject( "archive" );
+      if ( archive == null ) continue;
+      Upload up = new Upload();
+      up.archiveUrl = optString( archive, "contentUrl" );
+      if ( up.archiveUrl.isEmpty() ) continue;
+      up.archiveName = optString( archive, "name" );
+      up.size        = archive.optLong( "sizeBytes", -1L );
+      up.id          = optString( item, "id" );
+      up.caveId      = optString( item, "caveId" );
+      up.caveName    = optString( item, "caveName" );
+      up.surveyName  = optString( item, "surveyName" );
+      JSONObject cs  = item.optJSONObject( "caveSurvey" );
+      if ( cs != null ) {
+        up.surveyId  = optString( cs, "id" );
+        up.title     = optString( cs, "title" );
+      }
+      if ( up.title.isEmpty() ) up.title = optString( item, "surveyTitle" );
+      if ( up.title.isEmpty() ) up.title = up.surveyName;
+      up.createdAt   = optString( item, "createdAt" );
+      up.version     = optString( item, "version" );
+      JSONObject by  = item.optJSONObject( "uploadedBy" );
+      up.uploader    = ( by != null )? optString( by, "displayName" ) : "";
+      JSONArray th = item.optJSONArray( "therionSources" );
+      if ( th != null ) {
+        for ( int j = 0; j < th.length(); ++j ) {
+          JSONObject t = th.optJSONObject( j );
+          if ( t == null ) continue;
+          String url = optString( t, "contentUrl" );
+          if ( ! url.isEmpty() ) up.therion.add( new String[] { optString( t, "name" ), url } );
+        }
+      }
+      ret.add( up );
+    }
+    return ret;
+  }
+
+  /** @return the number of uploads the server holds for the list, as it says, or -1 if it does not say
+   * @param json   answer of listUploads()
+   */
+  public static int totalUploads( JSONObject json )
+  {
+    return ( json == null || ! json.has( "total" ) )? -1 : json.optInt( "total", -1 );
+  }
+
+  /** @return the number of items of the answer of listUploads() (-1 if it has no list)
+   * @param json   answer of listUploads()
+   */
+  public static int countItems( JSONObject json )
+  {
+    JSONArray items = ( json == null )? null : json.optJSONArray( "items" );
+    return ( items == null )? -1 : items.length();
+  }
+
+  /** sort the uploads by cave (name, then id: two caves can have the same name), then by survey of the cave
+   * (title, then id), then newest version first. The uploads of one cave, and of one survey, are next to each other
+   * @param uploads  list of uploads
+   */
+  public static void sortUploads( List< Upload > uploads )
+  {
+    Collections.sort( uploads, new Comparator< Upload >() {
+      @Override
+      public int compare( Upload a, Upload b ) {
+        int c = a.caveName.compareToIgnoreCase( b.caveName );
+        if ( c == 0 ) c = a.caveName.compareTo( b.caveName ); // names that differ only in case do not alternate
+        if ( c == 0 ) c = a.caveKey().compareTo( b.caveKey() );
+        if ( c == 0 ) c = a.title.compareToIgnoreCase( b.title );
+        if ( c == 0 ) c = a.surveyKey().compareTo( b.surveyKey() );
+        if ( c == 0 ) c = b.stamp().compareTo( a.stamp() ); // ISO times: the later is greater
+        return c;
+      }
+    } );
+  }
+
+  /** @return the uploads with the text in the cave name, the survey title or name, or the uploader
+   * @param uploads  list of uploads
+   * @param text     filter text (blank for all)
+   */
+  public static ArrayList< Upload > filterUploads( List< Upload > uploads, String text )
+  {
+    ArrayList< Upload > ret = new ArrayList<>();
+    String t = ( text == null )? "" : text.trim().toLowerCase( Locale.getDefault() );
+    for ( Upload up : uploads ) {
+      if ( t.isEmpty()
+        || up.caveName.toLowerCase( Locale.getDefault() ).contains( t )
+        || up.title.toLowerCase( Locale.getDefault() ).contains( t )
+        || up.surveyName.toLowerCase( Locale.getDefault() ).contains( t )
+        || up.uploader.toLowerCase( Locale.getDefault() ).contains( t ) ) ret.add( up );
+    }
+    return ret;
+  }
+
+  /** @return the file name from a name given by the server: no folder, only letters, digits, dot, dash and underscore, with the extension
+   * @param name   name given by the server
+   * @param ext    extension, with the dot, eg, ".zip"
+   * @note the name comes from a server: it must not move the file out of its folder
+   */
+  public static String safeFileName( String name, String ext )
+  {
+    if ( name == null ) name = "";
+    int pos = Math.max( name.lastIndexOf( '/' ), name.lastIndexOf( '\\' ) );
+    name = name.substring( pos + 1 ).replaceAll( "[^A-Za-z0-9._-]", "_" );
+    while ( name.startsWith( "." ) ) name = name.substring( 1 );
+    if ( name.isEmpty() ) name = "survey";
+    if ( ! name.toLowerCase( Locale.US ).endsWith( ext ) ) name = name + ext;
+    return name;
+  }
+
+  /** @return a file in the folder that does not exist yet: the name, or the name with -1, -2, ... before the extension
+   * @param dir    folder
+   * @param name   file name
+   */
+  public static File newFile( File dir, String name )
+  {
+    File file = new File( dir, name );
+    if ( ! file.exists() ) return file;
+    int pos = name.lastIndexOf( '.' );
+    String base = ( pos > 0 )? name.substring( 0, pos ) : name;
+    String ext  = ( pos > 0 )? name.substring( pos ) : "";
+    for ( int k = 1; ; ++k ) {
+      file = new File( dir, base + "-" + k + ext );
+      if ( ! file.exists() ) return file;
+    }
+  }
+
+  /** @return the time of an ISO UTC time, to the minute: "2026-10-25 01:32"
+   * @param iso   ISO time
+   */
+  public static String shortTime( String iso )
+  {
+    String ret = iso.replace( 'T', ' ' );
+    return ( ret.length() > 16 )? ret.substring( 0, 16 ) : ret;
+  }
+
+  /** @return the size in megabytes ("5.2 MB") or, under one megabyte, in kilobytes ("5.2 kB"); "5.2 / 12.0 MB" if the total is known
+   * @param done   size [bytes]
+   * @param total  total size [bytes] (-1 if not known)
+   */
+  public static String sizeText( long done, long total )
+  {
+    if ( done < 0 ) return "";
+    boolean kb = Math.max( done, total ) < 1048576L;
+    double unit = kb? 1024.0 : 1048576.0;
+    String name = kb? "kB" : "MB";
+    if ( total > 0 ) return String.format( Locale.US, "%.1f / %.1f %s", done / unit, total / unit, name );
+    return String.format( Locale.US, "%.1f %s", done / unit, name );
+  }
+
+  // ---------------------------------------------------------------------
   // downloads
 
   /** listener of the progress of a download
@@ -516,6 +722,47 @@ public class SilexGisClient
     } catch ( MalformedURLException e ) {
       return false;
     }
+  }
+
+  /** download the archive or a Therion file of an upload. The content URLs are signed and expire a few minutes after the
+   * server has listed them: if the download is refused with a 4xx other than 401 and 403, the list is read again, the URLs of
+   * the upload are replaced with the fresh ones, and the download is tried once more
+   * @param up        upload (its URLs are updated if they are refreshed)
+   * @param therion   index of the Therion file, -1 for the archive
+   * @param dest      destination file
+   * @param progress  progress listener (can be null)
+   * @return the result of the download, as in download()
+   */
+  public Result downloadUpload( Upload up, int therion, File dest, Progress progress )
+  {
+    Result res = download( contentUrlOf( up, therion ), dest, progress );
+    if ( res.kind != PROBLEM || res.status < 400 || res.status >= 500 || res.status == 403 ) return res;
+    Result list = listUploads( "topodroid", 100 );
+    ArrayList< Upload > ups = list.isOk()? parseUploads( list.json ) : null;
+    if ( ups == null ) return res;
+    for ( Upload fresh : ups ) {
+      if ( fresh.id.equals( up.id ) && ! up.id.isEmpty() ) {
+        up.archiveUrl = fresh.archiveUrl;
+        if ( therion >= 0 && therion < up.therion.size() ) {
+          String name = up.therion.get( therion )[0];
+          for ( String[] t : fresh.therion ) {
+            if ( t[0].equals( name ) ) {
+              up.therion.get( therion )[1] = t[1];
+              break;
+            }
+          }
+        }
+        return download( contentUrlOf( up, therion ), dest, progress );
+      }
+    }
+    return res;
+  }
+
+  /** @return the content URL of the archive (therion < 0) or of a Therion file of an upload
+   */
+  private static String contentUrlOf( Upload up, int therion )
+  {
+    return ( therion < 0 )? up.archiveUrl : up.therion.get( therion )[1];
   }
 
   /** download a file of the server
