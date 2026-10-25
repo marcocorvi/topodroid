@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.util.TDLog;
+
 class PhotoInfo extends MediaInfo
 {
   static final int FORMAT_JPEG = 0;
@@ -34,12 +36,12 @@ class PhotoInfo extends MediaInfo
    * @param _id      id 
    * @param item_id  reference item ID: shot id or plot ID
    * @param t        title
-   * @param sn       reference name: shot name or plot name
+   * @param sn       reference name: shot name ( FROM-TO ) or plot name
    * @param dt       datetime
    * @param cmt      comment
    * @param camera   camera type
    * @param code     geomorphology code
-   * @param type     reference item type
+   * @param type     reference item type: 1 = shot, ...
    * @param format   image format (0: JOEG, 1: PNG)
    */
   PhotoInfo( long _sid, long _id, long item_id, String t, String sn, String dt, String cmt, int camera, String code, int type, int format )
@@ -51,6 +53,7 @@ class PhotoInfo extends MediaInfo
     mCamera  = camera;
     mFormat  = format; // FIXME this could go in MediaInfo
     mGeoCode = (code == null)? "" : code;
+    TDLog.v("Photo Info, item ID " + item_id + " name " + sn + " type " + type + " format " + format );
   }
 
   // String getPhotoName() 

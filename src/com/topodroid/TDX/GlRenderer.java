@@ -73,6 +73,7 @@ public class GlRenderer implements Renderer
   private GlModel mModel = null;
   private TglParser mParser = null;
   private ParserDEM mDEM = null;
+  boolean mHasDEM = false;
   private float[] mCenter = null;
   private float[] mOffset = null;  // center offset
 
@@ -705,18 +706,24 @@ public class GlRenderer implements Renderer
   }
 
   // ------------------------------- DISPLAY MODEs
-  void toggleStations()    { GlNames.toggleStations(); }
+  // void toggleStations()    { GlNames.toggleStations(); }
   // void toggleSplays()      { GlModel.toggleSplays(); }
   // void togglePlanview()    { GlModel.togglePlanview(); }
   // void toggleSurface()     { GlModel.toggleSurface(); }
   // void toggleWallMode()    { GlModel.toggleWallMode(); }
-  void toggleColorMode()   { if ( mModel != null ) mModel.toggleColorMode(); }
-  void toggleFrameMode()   { GlModel.toggleFrameMode(); }
+  // void toggleColorMode()   { if ( mModel != null ) mModel.toggleColorMode(); }
+  // void toggleFrameMode()   { GlModel.toggleFrameMode(); }
   // void toggleSurfaceLegs() { GlModel.toggleSurfaceLegs(); }
+
+  void setColorMode( int mode ) { if ( mModel != null ) mModel.setColorMode( mode ); }
 
   int getColorMode() { return ( mModel != null )? mModel.getColorMode() : GlLines.COLOR_NONE; }
 
   boolean hasSurface() { return ( mModel != null ) && mModel.hasSurface(); }
+
+  /* boolean hasWalls() { return ( mModel != null ) && mModel.hasWalls(); } */
+
+  boolean hasPhotos() { return ( mModel != null ) && mModel.hasPhotos(); }
 
   void notifyWall( int type, boolean b )
   { 
@@ -749,11 +756,13 @@ public class GlRenderer implements Renderer
     if ( mModel != null ) {
       mDEM = dem;
       if ( mDEM != null ) {
-        mModel.prepareDEM( dem );
+        mHasDEM = mModel.prepareDEM( dem );
         // mModel.prepareSurfaceLegs( mParser, dem );
       }
     }
   }
+
+  boolean hasSurfaceDistance() { return mModel != null && mModel.mHasSurfaceDistance; }
 
   double getDEM_Z( double e, double n )
   {

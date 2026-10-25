@@ -12,6 +12,7 @@
  */
 package com.topodroid.inport;
 
+import com.topodroid.util.TDLog;
 class ParserSurvexState
 {
   ParserSurvexState mParent;

@@ -164,6 +164,7 @@ public class GlLines extends GlShape
   private float mAlpha = 1.0f;
 
   private FloatBuffer depthBuffer = null;
+  private FloatBuffer distanceBuffer = null;
   // private FloatBuffer tempBuffer = null; // TEMPERATURE
 
   ArrayList< Line3D > lines;
@@ -426,6 +427,31 @@ public class GlLines extends GlShape
     depthBuffer = DataBuffer.getFloatBuffer( count );
     if ( depthBuffer != null ) {
       depthBuffer.put( col );
+    }
+  }
+
+  /** prepare the buffer of surface distance
+   * @param legs   list of legs
+   */
+  void prepareDistanceBuffer( List<Cave3DShot> legs )
+  {
+    int count = 2 * legs.size();
+    if ( count == 0 ) return;
+    depthBuffer = null;
+    float[] col = new float[ count ];
+    int k = 0;
+    for ( Cave3DShot leg : legs ) {
+      Cave3DStation f = leg.from_station;
+      Cave3DStation t = leg.to_station;
+      col[k] = /* (f == null)? 0 : */ (float)f.surface_distance;
+      ++k;
+      col[k] = /* (t == null)? 0 : */ (float)t.surface_distance;
+      ++k;
+    }
+    // TDLog.v("Line depth buffer count " + count + " k " + k );
+    distanceBuffer = DataBuffer.getFloatBuffer( count );
+    if ( distanceBuffer != null ) {
+      distanceBuffer.put( col );
     }
   }
 
@@ -696,6 +722,14 @@ public class GlLines extends GlShape
         GL.useProgram( mProgramUColor );
         bindDataUColor( mvpMatrix, acolor );
       }
+    } else if ( mColorMode == COLOR_DISTANCE  ) {
+      if ( distanceBuffer != null ) {
+        GL.useProgram( mProgramSColor );
+        bindDataSColor( mvpMatrix, distanceBuffer );
+      } else {
+        GL.useProgram( mProgramUColor );
+        bindDataUColor( mvpMatrix, acolor );
+      }
     // } else if ( mColorMode == COLOR_TEMP  ) { // TEMPERATURE
     //   if ( tempBuffer != null ) {
     //     GL.useProgram( mProgramSColor );
@@ -739,6 +773,14 @@ public class GlLines extends GlShape
       if ( depthBuffer != null ) {
         GL.useProgram( mProgramSColor );
         bindDataSColor( mvpMatrix, depthBuffer );
+      } else {
+        GL.useProgram( mProgramUColor );
+        bindDataUColor( mvpMatrix, mColor.color );
+      }
+    } else if ( mColorMode == COLOR_DISTANCE  ) {
+      if ( distanceBuffer != null ) {
+        GL.useProgram( mProgramSColor );
+        bindDataSColor( mvpMatrix, distanceBuffer );
       } else {
         GL.useProgram( mProgramUColor );
         bindDataUColor( mvpMatrix, mColor.color );
@@ -875,19 +917,22 @@ public class GlLines extends GlShape
   static final int COLOR_SURVEY  = 1;
   static final int COLOR_DEPTH   = 2;
   static final int COLOR_SURFACE = 3;
-  // static final int COLOR_TEMP    = 4; // TEMPERATURE
-  static final int COLOR_MAX     = 4;
+  static final int COLOR_DISTANCE = 4;
+  // static final int COLOR_TEMP    = 5; // TEMPERATURE
+  static final int COLOR_MAX     = 5;
 
-  /** cyclically rotate the color mode
-   * @param max   maximum value of the color mode
-   */
-  void toggleColorMode( int max ) { setColorMode( mColorMode + 1, max ); }
+  // /** cyclically rotate the color mode
+  //  * @param max   maximum value of the color mode
+  //  */
+  // void toggleColorMode( int max ) { setColorMode( mColorMode + 1, max ); }
 
-  /** set the color mode
-   * @param mode  new color mode
-   * @param max   maximum value of the color mode
-   */
-  void setColorMode(int mode, int max ) { mColorMode = mode % max; }
+  void setColorMode( int mode ) { mColorMode = mode % COLOR_MAX; }
+
+  // /** set the color mode
+  //  * @param mode  new color mode
+  //  * @param max   maximum value of the color mode
+  //  */
+  // void setColorMode(int mode, int max ) { mColorMode = mode % max; }
 
   // -----------------------------------------------------------------
   // OpenGL

@@ -29,6 +29,7 @@ import com.topodroid.algo.pcrust.PCPolygon;
 import android.content.Context;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.RectF;
 
 import android.opengl.Matrix;
@@ -64,6 +65,8 @@ public class GlModel
   RectF mSurfaceBounds = null;
   // List< GlSketch > glSketches = null; // NO_C3D
 
+  boolean mHasSurfaceDistance = false;
+
   private double mXmed, mYmed, mZmed; // XYZ openGL
   float grid_size = 1;
   static  double mZMin, mZDelta; // draw params
@@ -90,6 +93,7 @@ public class GlModel
   GlLines glPlan    = null; // plan projection
   GlLines glProfile = null;
   GlPath  glPath    = null;
+  ArrayList< GlPhoto > glPhotos = new ArrayList<>();
 
   // -----------------------------------------------------------------
   // WITH-GPS GPS LOCATION
@@ -119,7 +123,11 @@ public class GlModel
 
   /** @return true if the rendered has a DEM surface
    */
-  boolean hasSurface() { return /* surfaceMode && */ glSurface != null; }
+  boolean hasSurface() { return glSurface != null; }
+
+  boolean hasWalls() { return glWalls != null; }
+
+  boolean hasPhotos() { return ! glPhotos.isEmpty(); }
 
   // /** rebind textures - empty: unused
   //  */
@@ -178,6 +186,24 @@ public class GlModel
     glPath    = null;
     mParser   = null;
     glPoint   = null; // WITH-GPS
+    for ( GlPhoto photo : glPhotos ) photo.release();
+    glPhotos.clear();
+  }
+
+  // station is Vector3D (X, Y, Z) Cave3DStation
+  // ( X - mXmed, Z - mYmed, -Y - mZmed )
+  // azimuth and cino are from the image
+  // dist is to be picked
+  void addPhoto( String filepath, Cave3DStation st, float azimuth, float clino, float dist )
+  {
+    BitmapFactory.Options options = new BitmapFactory.Options();
+    options.inSampleSize = 8;
+    options.outWidth = 256;
+    Bitmap bitmap = BitmapFactory.decodeFile( filepath, options );
+    if ( bitmap != null ) {
+      GlPhoto photo = new GlPhoto( bitmap, (float)st.x, (float)st.y, (float)st.z, azimuth, clino, dist, 256 );
+      glPhotos.add( photo );
+    }
   }
 
   /** set the width and the height
@@ -207,13 +233,13 @@ public class GlModel
   // ----------------------------------------------------------------------------------
   // DISPLAY MODE
 
-  static final int FRAME_NONE  = 0;
+  // static final int FRAME_NONE  = 0;
   static final int FRAME_GRID  = 1;
   static final int FRAME_GRID2 = 2;
   static final int FRAME_AXES  = 3;
   static final int FRAME_MAX   = 4;
 
-  static final int DRAW_NONE  = 0;
+  static final int DRAW_NONE  = 0; // used by other classes
   static final int DRAW_LINE  = 1;
   static final int DRAW_POINT = 2;
   static final int DRAW_ALL   = 3; 
@@ -225,13 +251,21 @@ public class GlModel
   static final int PROJ_PROFILE = 2;
 
   // -------------------------- DISPLAY MODE
-  static boolean surfaceMode = false;     // show_surface;
+  static boolean showSurface = false;     // show_surface;
   static boolean surfaceLegsMode = false; // show_surface_legs;
   static boolean surfaceTexture  = true;  // show_surface texture;
-  static boolean wallMode = false;        // shaw_walls
+
+  static boolean showWalls = false;        // shaw_walls
   // static int planviewMode = 0;            // howto_show_planview = 0;
-  static int splayMode = DRAW_NONE;       // howto_show_splays;
+
+  static boolean showPhotos = false;      // whether to show photos
+
+  static boolean showSplays = false;
+  static int splayMode = DRAW_LINE;       // howto_show_splays;
+
+  static boolean showFrame = true;
   static int frameMode = FRAME_GRID;      // howto_show_grid/frame
+
   static int projMode  = PROJ_NONE;       // howto_show_proj
 
   static public boolean mStationPoints = false;
@@ -246,43 +280,58 @@ public class GlModel
   static public double mSplitStretchDelta   = 0.1f;
   static public double mPowercrustDelta     = 0.1f; // meters
 
-  /** cycle through the modes of the display of the splays
-   */
-  static void toggleSplays()   { splayMode = (splayMode+1) % DRAW_MAX; }
+  // --------------------------------------------------------
+
+  // static void toggleFrameMode()
+  // {
+  //   if ( frameMode == FRAME_AXES ) {
+  //     frameMode = FRAME_GRID;
+  //   } else {
+  //     frameMode = FRAME_AXES;
+  //   }
+  // }
+
+  static boolean isReferenceAxes() { return frameMode == FRAME_AXES; }
+  static boolean isSplayEndpoint() { return splayMode == DRAW_POINT; }
+
+  static void setShowSplay( boolean show_splay, boolean show_endpoints )
+  {
+    showSplays = show_splay;
+    splayMode  = show_endpoints? DRAW_POINT : DRAW_LINE;
+  }
 
   // static void togglePlanview() { planviewMode = ( planviewMode + 1 ) % 4; }
 
-  /** toggle the display of the wall-model
+  /** set the display of the wall-model
    */
-  static void toggleWallMode() { wallMode = ! wallMode; }
+  static void setShowWalls( boolean show_walls ) { showWalls = show_walls; }
 
-  /** toggle the display of the DEM surface
-   */
-  static void toggleSurface() 
+  static void setShowPhotos( boolean show_photos ) { showPhotos = show_photos; }
+
+  static void setShowReference( boolean show_frame, boolean show_axes )
   { 
-    surfaceMode = ! surfaceMode;
-    // TDLog.v("Model surface mode " + surfaceMode );
+    showFrame = show_frame;
+    frameMode = show_axes? FRAME_AXES : FRAME_GRID;
   }
+
+  static void setShowSurface( boolean show_surface ) { showSurface = show_surface; }
+
 
   // static void toggleSurfaceLegs() { surfaceLegsMode = ! surfaceLegsMode; }
-
-  /** cycle through the modes of the display of the frame
-   */
-  static void toggleFrameMode() 
-  { 
-    frameMode = (frameMode + 1) % FRAME_MAX;
-  }
 
   /** reset to the default display modes
    */
   static void resetModes()
   {
-    splayMode    = DRAW_NONE;
+    showSplays   = false;
+    splayMode    = DRAW_LINE;
     // planviewMode = 0;
-    wallMode     = false;
+    showWalls    = false;
+    showPhotos   = false;
+    showFrame    = true;
     frameMode    = FRAME_GRID;
     projMode     = PROJ_NONE;
-    surfaceMode  = false;
+    showSurface  = false;
     surfaceLegsMode   = false;
     surfaceTexture    = true;
     showLegsSurface   = true;
@@ -296,12 +345,12 @@ public class GlModel
    */
   void resetColorMode()
   {
-    if ( glLegs   != null ) glLegs.setColorMode(   GlLines.COLOR_NONE, GlLines.COLOR_MAX );
-    if ( glLegsS  != null ) glLegsS.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
-    if ( glLegsD  != null ) glLegsD.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
-    if ( glLegsC  != null ) glLegsC.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
-    if ( glLegsB  != null ) glLegsB.setColorMode(  GlLines.COLOR_NONE, GlLines.COLOR_MAX );
-    if ( glSplays != null ) glSplays.setColorMode( GlLines.COLOR_NONE, GlLines.COLOR_MAX );
+    if ( glLegs   != null ) glLegs.setColorMode(   GlLines.COLOR_NONE );
+    if ( glLegsS  != null ) glLegsS.setColorMode(  GlLines.COLOR_NONE );
+    if ( glLegsD  != null ) glLegsD.setColorMode(  GlLines.COLOR_NONE );
+    if ( glLegsC  != null ) glLegsC.setColorMode(  GlLines.COLOR_NONE );
+    if ( glLegsB  != null ) glLegsB.setColorMode(  GlLines.COLOR_NONE );
+    if ( glSplays != null ) glSplays.setColorMode( GlLines.COLOR_NONE );
     clearStationHighlight();
   }
 
@@ -321,20 +370,31 @@ public class GlModel
     clearPath( );
   }
 
-  /** cycle through the leg/splay color modes
-   */
-  synchronized void toggleColorMode() { 
-    if ( glLegs != null ) {
-      // int max = ( mParser.has_temperature )? GlLines.COLOR_MAX : GlLines.COLOR_MAX - 1; // TEMPERATURE
-      // TDLog.v("max color " + max );
-      int max = GlLines.COLOR_MAX;
+  // /** cycle through the leg/splay color modes
+  //  */
+  // synchronized void toggleColorMode() { 
+  //   if ( glLegs != null ) {
+  //     // int max = ( mParser.has_temperature )? GlLines.COLOR_MAX : GlLines.COLOR_MAX - 1; // TEMPERATURE
+  //     // TDLog.v("max color " + max );
+  //     int max = GlLines.COLOR_MAX;
+  //     glLegs.toggleColorMode( max );
+  //     if ( glLegsS  != null ) glLegsS.toggleColorMode( max );
+  //     if ( glLegsD  != null ) glLegsD.toggleColorMode( max );
+  //     if ( glLegsC  != null ) glLegsC.toggleColorMode( max );
+  //     if ( glLegsB  != null ) glLegsB.toggleColorMode( max );
+  //     if ( glSplays != null ) glSplays.setColorMode( glLegs.mColorMode, GlLines.COLOR_MAX ); 
+  //   }
+  // }
 
-      glLegs.toggleColorMode( max );
-      if ( glLegsS  != null ) glLegsS.toggleColorMode( max );
-      if ( glLegsD  != null ) glLegsD.toggleColorMode( max );
-      if ( glLegsC  != null ) glLegsC.toggleColorMode( max );
-      if ( glLegsB  != null ) glLegsB.toggleColorMode( max );
-      if ( glSplays != null ) glSplays.setColorMode( glLegs.mColorMode, GlLines.COLOR_MAX ); 
+  void setColorMode( int mode )
+  {
+    if ( glLegs != null ) {
+      glLegs.setColorMode( mode );
+      if ( glLegsS  != null ) glLegsS.setColorMode( mode );
+      if ( glLegsD  != null ) glLegsD.setColorMode( mode );
+      if ( glLegsC  != null ) glLegsC.setColorMode( mode );
+      if ( glLegsB  != null ) glLegsB.setColorMode( mode );
+      if ( glSplays != null ) glSplays.setColorMode( mode );
     }
   }
 
@@ -398,7 +458,7 @@ public class GlModel
 
     boolean with_surface = false;
     GL.enableDepth( true );
-    if ( surfaceMode ) {
+    if ( showSurface ) {
       GlSurface gl_surface = null;
       synchronized( this ) { gl_surface = glSurface; }
       if ( gl_surface != null ) {
@@ -407,51 +467,53 @@ public class GlModel
       }
     }
 
-    if ( frameMode == FRAME_GRID || frameMode == FRAME_GRID2 ) { 
-      GlLines grid = null;
-      synchronized( this ) { grid = glGrid; } 
-      if ( grid != null ) {
-        GL.setLineWidth( 1.0f );
-        if ( mGridAbove ) {
-          float[] revMatrix = new float[16];
-          float[] matrix = new float[16];
-          Matrix.setIdentityM( revMatrix, 0 );
-          revMatrix[13] = (float)mY0med; // glLegs.getYmed();
-          revMatrix[ 5] = -1;
-          Matrix.multiplyMM( matrix, 0, mvp_matrix, 0, revMatrix, 0 );
-          grid.draw( matrix, DRAW_LINE ); 
-          grid = (frameMode == FRAME_GRID) ? glVGrid1 : glVGrid2 ;
-          if ( grid != null ) {
-            grid.draw( matrix, DRAW_LINE );
-          }
-        } else {
-          grid.draw( mvp_matrix, DRAW_LINE );
-          grid = (frameMode == FRAME_GRID) ? glVGrid1 : glVGrid2 ;
-          if ( grid != null ) {
+    if ( showFrame ) {
+      if ( frameMode == FRAME_GRID || frameMode == FRAME_GRID2 ) { 
+        GlLines grid = null;
+        synchronized( this ) { grid = glGrid; } 
+        if ( grid != null ) {
+          GL.setLineWidth( 1.0f );
+          if ( mGridAbove ) {
+            float[] revMatrix = new float[16];
+            float[] matrix = new float[16];
+            Matrix.setIdentityM( revMatrix, 0 );
+            revMatrix[13] = (float)mY0med; // glLegs.getYmed();
+            revMatrix[ 5] = -1;
+            Matrix.multiplyMM( matrix, 0, mvp_matrix, 0, revMatrix, 0 );
+            grid.draw( matrix, DRAW_LINE ); 
+            grid = (frameMode == FRAME_GRID) ? glVGrid1 : glVGrid2 ;
+            if ( grid != null ) {
+              grid.draw( matrix, DRAW_LINE );
+            }
+          } else {
             grid.draw( mvp_matrix, DRAW_LINE );
+            grid = (frameMode == FRAME_GRID) ? glVGrid1 : glVGrid2 ;
+            if ( grid != null ) {
+              grid.draw( mvp_matrix, DRAW_LINE );
+            }
           }
         }
-      }
-    } else if ( frameMode == FRAME_AXES  ) { 
-      GlLines frame = null;
-      synchronized( this ) { frame = glFrame; } 
-      if ( frame != null ) {
-        GL.setLineWidth( 2.0f );
-        // if ( mGridAbove ) {
-        //   float[] revMatrix = new float[16];
-        //   float[] matrix = new float[16];
-        //   Matrix.setIdentityM( revMatrix, 0 );
-        //   revMatrix[14] = (glLegs.getZmax() + glLegs.getZmin())/2;
-        //   revMatrix[10] = -1;
-        //   Matrix.multiplyMM( matrix, 0, mvp_matrix, 0, revMatrix, 0 );
-        //   frame.draw( matrix, DRAW_LINE ); 
-        // } else {
-          frame.draw( mvp_matrix, DRAW_LINE  );
-        // }
+      } else if ( frameMode == FRAME_AXES  ) { 
+        GlLines frame = null;
+        synchronized( this ) { frame = glFrame; } 
+        if ( frame != null ) {
+          GL.setLineWidth( 2.0f );
+          // if ( mGridAbove ) {
+          //   float[] revMatrix = new float[16];
+          //   float[] matrix = new float[16];
+          //   Matrix.setIdentityM( revMatrix, 0 );
+          //   revMatrix[14] = (glLegs.getZmax() + glLegs.getZmin())/2;
+          //   revMatrix[10] = -1;
+          //   Matrix.multiplyMM( matrix, 0, mvp_matrix, 0, revMatrix, 0 );
+          //   frame.draw( matrix, DRAW_LINE ); 
+          // } else {
+            frame.draw( mvp_matrix, DRAW_LINE  );
+          // }
+        }
       }
     }
 
-    if ( wallMode ) {
+    if ( showWalls ) {
       GlWalls walls = null;
       synchronized( this ) { walls = glWalls; }
       if ( walls != null ) { 
@@ -462,18 +524,20 @@ public class GlModel
     }
     GL.enableDepth( false );
 
-    if ( with_surface ) { // WITH-GPS
-      GlPoint point = null;
-      synchronized( this ) { point = glPoint; }
-      if ( point != null ) point.draw( mvp_matrix );
-    }
+    if ( showSurface ) {
+      if ( with_surface ) { // WITH-GPS
+        GlPoint point = null;
+        synchronized( this ) { point = glPoint; }
+        if ( point != null ) point.draw( mvp_matrix );
+      }
 
-    if ( surfaceLegsMode ) {
-      GlLines surface_legs = null;
-      synchronized( this ) { surface_legs = glSurfaceLegs; }
-      if ( surface_legs != null ) {
-        GL.setLineWidth( 2.0f );
-        surface_legs.draw( mvp_matrix, DRAW_ALL );
+      if ( surfaceLegsMode ) {
+        GlLines surface_legs = null;
+        synchronized( this ) { surface_legs = glSurfaceLegs; }
+        if ( surface_legs != null ) {
+          GL.setLineWidth( 2.0f );
+          surface_legs.draw( mvp_matrix, DRAW_ALL );
+        }
       }
     }
 
@@ -490,7 +554,7 @@ public class GlModel
 
     GlLines splays = null;
     synchronized( this ) { splays = glSplays; }
-    if ( splays != null ) splays.draw( mvp_matrix, splayMode );
+    if ( showSplays && splays != null ) splays.draw( mvp_matrix, splayMode );
 
     GlLines legs = null;
     GL.setLineWidth( 2.0f );
@@ -537,6 +601,15 @@ public class GlModel
     //   }
     // }
 
+    if ( showPhotos ) {
+      List< GlPhoto > gl_photos = null;
+      synchronized( this ) { gl_photos = glPhotos; }
+      if ( gl_photos != null ) {
+        for ( GlPhoto photo : gl_photos ) {
+          photo.draw( mvp_matrix );
+        }
+      }
+    }
   }
 
   /** check if there is a station name at point (x,y) of the display
@@ -759,25 +832,49 @@ public class GlModel
   // }
 
   // called by GlRenderer notifyDEM
-  void prepareDEM( ParserDEM dem ) 
+  boolean prepareDEM( ParserDEM dem ) 
   {
-    if ( dem == null ) return;
+    if ( dem == null ) return false;
     mSurfaceBounds = dem.getBounds();
+    // TODO if bounds fails return false
     TDLog.v("Model prepare DEM " + mSurfaceBounds.left + " " + mSurfaceBounds.right + " " + mSurfaceBounds.top + " " + mSurfaceBounds.bottom );
     GlSurface surface = new GlSurface( mContext );
     TDLog.v("MODEL surface DEM init data and set glSurface");
     surface.initData( dem, mXmed, mYmed, mZmed );
     synchronized( this ) { glSurface = surface; }
+    prepareDEMDepth( mParser, dem );
+    prepareDEMDistance( mParser, dem );
+    prepareSurfaceLegs( mParser, dem );
+    return true;
+  }
 
+  private void prepareDEMDepth( TglParser parser, DEMsurface dem )
+  {
     // glLegs.prepareDepthBuffer( mParser.getShots(), dem );
-    double inv_surface_zmax = prepareStationSurfaceDepth( mParser, dem );
+    double inv_surface_zmax = prepareStationSurfaceDepth( parser, dem );
     glLegs.prepareDepthBuffer(  legsSurvey );
     glLegsS.prepareDepthBuffer( legsSurface );
     glLegsD.prepareDepthBuffer( legsDuplicate );
     glLegsC.prepareDepthBuffer( legsCommented );
     glLegsB.prepareDepthBuffer( legsBackshot );
+  }
 
-    prepareSurfaceLegs( mParser, dem );
+  private void prepareDEMDistance( TglParser parser, DEMsurface dem )
+  {
+    mHasSurfaceDistance = false;
+    ( new Thread() {
+        public void run() {
+          // glLegs.prepareDepthBuffer( mParser.getShots(), dem );
+          double inv_surface_zmax = prepareStationSurfaceDistance( parser, dem );
+          glLegs.prepareDistanceBuffer(  legsSurvey );
+          glLegsS.prepareDistanceBuffer( legsSurface );
+          glLegsD.prepareDistanceBuffer( legsDuplicate );
+          glLegsC.prepareDistanceBuffer( legsCommented );
+          glLegsB.prepareDistanceBuffer( legsBackshot );
+          mHasSurfaceDistance = true;
+        }
+      }
+    ).start();
   }
   
   private void prepareSurfaceLegs( TglParser parser, DEMsurface surface )
@@ -1237,12 +1334,14 @@ public class GlModel
     prepareGridAndFrame( legs, grid_size, mGridExtent*grid_size );
 
     if ( valid_surface /* && surface != null */ ) {
-      double surface_zmax = prepareStationSurfaceDepth( parser, surface );
-      legs.prepareDepthBuffer(  legsSurvey );
-      legsS.prepareDepthBuffer( legsSurface );
-      legsD.prepareDepthBuffer( legsDuplicate );
-      legsC.prepareDepthBuffer( legsCommented );
-      legsB.prepareDepthBuffer( legsBackshot );
+      prepareDEMDepth( parser, surface );
+      prepareDEMDistance( parser, surface );
+      // double surface_zmax = prepareStationSurfaceDepth( parser, surface );
+      // legs.prepareDepthBuffer(  legsSurvey );
+      // legsS.prepareDepthBuffer( legsSurface );
+      // legsD.prepareDepthBuffer( legsDuplicate );
+      // legsC.prepareDepthBuffer( legsCommented );
+      // legsB.prepareDepthBuffer( legsBackshot );
     }
 
     mDiameter = legs.diameter();
@@ -1388,6 +1487,29 @@ public class GlModel
       }
     }
     // TDLog.v("Model surface inv depth " + zmax + " stations " + parser.getStations().size() );
+    return zmax;
+  }
+
+  /** compute the distance from the surface for all the stations
+   */
+  private double prepareStationSurfaceDistance( TglParser parser, DEMsurface surface )
+  {
+    if ( surface == null ) return 1.0f;
+    // TDLog.v("Model prepare station surface-depth");
+    double zmax = 0;
+    for ( Cave3DStation st : parser.getStations() ) {
+      st.surface_distance = surface.distance( st.x, st.y, st.z );
+      if ( st.surface_distance > zmax ) { zmax = st.surface_distance; }
+      else if ( st.surface_distance < 0.0f ) { st.surface_distance = 0.0f; }
+    }
+    if ( zmax > 0 ) { // always true
+      zmax = 1.0 / zmax;
+      for ( Cave3DStation st : parser.getStations() ) {
+        st.surface_distance *= zmax;
+        if ( st.surface_distance > 1.0f ) st.surface_distance = 1.0f;
+      }
+    }
+    // TDLog.v("Model surface inv distance " + zmax + " stations " + parser.getStations().size() );
     return zmax;
   }
 

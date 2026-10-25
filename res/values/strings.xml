@@ -430,7 +430,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_value_required">Value required</string>
     <string name="error_bad_fixes">Fix points not in the survey</string>
     <string name="error_bad_name">Filename modified</string>
-    <string name="error_question">Please, enter a question</string>
+    <!-- UNUSED string name="error_question">Please, enter a question</string -->
 
     <string name="group_title">Calibration data groups</string>
     <!-- UNUSED string name="group_policy_four">Policy: group by four</string -->
@@ -634,6 +634,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_select_area">Select areas</string>
     <string name="popup_select_shot">Select shots</string>
     <string name="popup_select_station">Select stations</string>
+
+    <string name="popup_color_none">Default color</string>
+    <string name="popup_color_survey">Color by survey</string>
+    <string name="popup_color_depth">Color by depth</string>
+    <string name="popup_color_surface">By surface-depth</string>
+    <string name="popup_color_distance">By surface-distance</string>
 
     <!-- UNUSED string name="popup_cont_none">None</string -->
     <!-- UNUSED string name="popup_cont_start">Start point</string -->
@@ -1047,6 +1053,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="mode_elevation" copyable="fr">Elevation</string -->
     <string name="mode_grid">Grid</string>
     <string name="mode_fixed">Fix refs</string>
+    <string name="mode_reference">Reference</string>
+    <string name="mode_axes">Axes only</string>
+    <string name="mode_names">Names</string>
+    <string name="mode_endpoints">Endpoints</string>
+    <string name="mode_surface">Surface</string>
+    <string name="mode_photo">Photos</string>
     <string name="mode_scrap">Current scrap only</string>
     <string name="mode_outline">Outline only</string>
     <string name="mode_scale_ref">Scale bar</string>
@@ -1102,7 +1114,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Bluetooth aliases</string>
-    <string name="hint_api_key" copyable="all">API key</string>
+    <!-- UNUSED string name="hint_api_key" copyable="all">API key</string -->
     <string name="hint_bt_alias" copyable="sk">BT alias</string>
     <string name="hint_bt_code">Device code</string>
     <string name="bt_alias_missing">BT alias missing</string>
@@ -1394,9 +1406,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="import_diving_datamode">Diving datamode</string>
     <string name="import_therion_path">Stations with survey path</string>
 
-    <string name="title_gemini">Enter your AI API key</string>
-    <string name="title_ai_dialog">AI helper</string>
-    <string name="title_ai_dialog_pref">AI configuration help</string>
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_audio_list">Audio records</string>
@@ -1599,8 +1608,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_locale_title">Language</string>
   <string name="pref_locale_summary">App language</string>
-  <string name="pref_gemini_title">AI key</string>
-  <string name="pref_gemini_summary">Gemini API key</string>
   <string name="pref_orientation_title">Screen orientation</string>
   <string name="pref_orientation_summary">App screen orientation</string>
   <string name="pref_single_back_title">Single back</string>
@@ -2011,8 +2018,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_linecurve_summary">Enable smooth/straighten line segment action</string>
   <string name="pref_linestraight_title">Straighten lines</string>
   <string name="pref_linestraight_summary">Enable straighten whole line action</string>
-  <string name="pref_lineclip_title">Clip lines/areas</string>
-  <string name="pref_lineclip_summary">Enable line/areas clipping to outline</string>
+  <!-- UNUSED string name="pref_lineclip_title">Clip lines/areas</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Enable line/areas clipping to outline</string -->
   <string name="pref_path_multiselect_title">Path multiselection</string>
   <string name="pref_path_multiselect_summary">Enable path multiselection action</string>
   <!-- UNUSED string name="pref_composite_actions_title">Composite actions</string -->
@@ -2647,12 +2654,12 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 
     <string name="help_light_3d">Pan and light</string>
     <string name="help_projection_3d" copyable="fr">3D projection</string>
-    <string name="help_stations_3d" copyable="fr">Stations</string>
-    <string name="help_splays_3d" copyable="all">Splays</string>
+    <!-- UNUSED string name="help_stations_3d" copyable="fr">Stations</string -->
+    <!-- UNUSED string name="help_splays_3d" copyable="all">Splays</string -->
     <string name="help_walls_3d">Walls</string>
-    <string name="help_surface_3d" copyable="fr">Terrain</string>
+    <!-- UNUSED string name="help_surface_3d" copyable="fr">Terrain</string -->
     <string name="help_color_3d">Colors</string>
-    <string name="help_frame_3d">Frame</string>
+    <!-- UNUSED string name="help_frame_3d">Frame</string -->
 
    
 </resources>

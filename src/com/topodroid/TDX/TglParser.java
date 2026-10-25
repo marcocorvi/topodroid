@@ -103,6 +103,7 @@ public class TglParser
   protected ArrayList< Cave3DShot >     splays;  // splay shots
   protected ArrayList< Cave3DXSection > xsections = null;
   protected ArrayList< String > mEquateTable = null;
+  protected ArrayList< PhotoInfo > mPhoto = null;
 
   PowercrustComputer powercrustcomputer = null;
   ConvexHullComputer convexhullcomputer = null;

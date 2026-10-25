@@ -143,6 +143,7 @@ public class ParserDat extends TglParser
   }
 
   /** read input DAT file
+  TODO FIXME splays
    */
   private boolean readFileDat( InputStreamReader isr, String survey, String station, double x, double y, double z )
                   throws ParserException

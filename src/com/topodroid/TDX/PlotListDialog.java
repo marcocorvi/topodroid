@@ -79,7 +79,7 @@ class PlotListDialog extends MyDialog
     mParent  = parent;
     mParent2 = parent2;
     mDoNew = ( mParent2 == null );
-    TDLog.v("plot list new: new " + mDoNew );
+    // TDLog.v("plot list new: new " + mDoNew );
   }
 
   @Override
@@ -183,7 +183,7 @@ class PlotListDialog extends MyDialog
   {
     Button b = (Button) v;
     if ( b == mBtnPlotNew ) {
-      TDLog.v( "plot list dialog onClick() NEW ");
+      // TDLog.v( "plot list dialog onClick() NEW ");
       if ( TDInstance.isSurveyImmutable() ) return; // IMMUTABLE
       hide();
       if ( mParent != null ) {
@@ -191,12 +191,12 @@ class PlotListDialog extends MyDialog
         new PlotNewDialog( mContext, mApp, mParent, idx, null, -1, -1 ).show();
       }
     } else if ( b == mBtnClose ) {
-      TDLog.v( "plot list dialog onClick() CLOSE ");
+      // TDLog.v( "plot list dialog onClick() CLOSE ");
       if ( mParent2 != null ) {
         mParent2.doClose();
       }
     } else if ( b == mBtnBack ) {
-      TDLog.v( "plot list dialog onClick() BACK ");
+      // TDLog.v( "plot list dialog onClick() BACK ");
       /* nothing */
     /* FIXME_SKETCH_3D *
     } else if ( TopoDroidApp.mSketches && b == mBtnSketch3dNew ) {

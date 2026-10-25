@@ -1,9 +1,9 @@
-/* @file IFilterClickHandler.java
+/* @file IPopupClickHandler.java
  *
  * @author marco corvi
- * @date may 2017
+ * @date oct 2026
  *
- * @brief TopoDroid filter-click handler interface
+ * @brief TopoDroid popup-click handler interface
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,9 +11,9 @@
  */
 package com.topodroid.ui;
 
-public interface IFilterClickHandler
+public interface IPopupClickHandler
 {
-  public void setButtonFilterMode( int filter_mode, int code );
+  public void setButtonPopupMode( int popup_mode, int code );
 
-  public boolean dismissPopupFilter();
+  public boolean dismissPopup( int code );
 }

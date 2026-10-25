@@ -759,8 +759,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           b.mBearing * TDSetting.mUnitAngle,
           b.mLength  * TDSetting.mUnitLength,
           b.toNote() ) );
-      } else { // normal
-        tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$5.1f %4$s", 
+      } else { // normal - unicode for compass: 1D3A uppercase N, 207F lowercase n, A71B small uparrow (all too bad)
+        tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$+5.1f %4$s", 
           b.mLength  * TDSetting.mUnitLength,
           b.mBearing * TDSetting.mUnitAngle,
           b.mClino   * TDSetting.mUnitAngle,

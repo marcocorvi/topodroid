@@ -86,6 +86,11 @@ class GL
   {
     String vertex_glsl   = GlResourceReader.readRaw( ctx, vertex );
     String fragment_glsl = GlResourceReader.readRaw( ctx, fragment );
+    return makeProgram( vertex_glsl, fragment_glsl );
+  }
+
+  public static int makeProgram( String vertex_glsl, String fragment_glsl )
+  {
     int vertexShader   = compileVertexShader( vertex_glsl );
     if ( vertexShader == 0 ) return 0;
     int fragmentShader = compileFragmentShader( fragment_glsl );

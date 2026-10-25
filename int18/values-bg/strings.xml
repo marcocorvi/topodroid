@@ -415,7 +415,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_value_required">Необходима стойност</string>
     <string name="error_bad_fixes">Фиксираните точки не са включени в картировката</string>
     <string name="error_bad_name">Името на файла е променено</string>
-    <string name="error_question">Моля, въведете въпрос</string>
+    <!-- UNUSED string name="error_question">Моля, въведете въпрос</string -->
 
     <string name="group_title">Групиране на данните за калибрацията</string>
     <!-- UNUSED string name="group_policy_four">Групирай по четири</string -->
@@ -1066,7 +1066,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Bluetooth псевдоними</string>
-    <string name="hint_api_key">API ключ</string>
+    <!-- UNUSED string name="hint_api_key">API ключ</string -->
     <string name="hint_bt_alias">Псевдоним на BT</string>
     <string name="hint_bt_code">Код на устройството</string>
     <string name="bt_alias_missing">Липсва псевдоним на BT</string>
@@ -1355,9 +1355,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="import_diving_datamode">Подводен режим на данни</string>
     <string name="import_therion_path">С картировачен път</string>
 
-    <string name="title_gemini">Въведи твоя AI API ключ</string>
-    <string name="title_ai_dialog">AI помощник</string>
-    <string name="title_ai_dialog_pref">Pомощ за конфигурацияna AI</string>
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
@@ -1544,8 +1541,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_locale_title">Език</string>
   <string name="pref_locale_summary">Език на приложението</string>
-  <string name="pref_gemini_title">AI ключ</string>
-  <string name="pref_gemini_summary">Gemini API ключ</string>
   <string name="pref_orientation_title">Ориентация на екрана</string>
   <string name="pref_orientation_summary">Ориентация на екрана на приложението</string>
   <string name="pref_single_back_title">Единично докосване</string>
@@ -1953,8 +1948,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_linecurve_summary">Активирай действие за изглаждане/изправяне на линията на сегмента</string>
   <string name="pref_linestraight_title">Изправяне на линии</string>
   <string name="pref_linestraight_summary">Активирай действието за изправяне на цяла линия</string>
-  <string name="pref_lineclip_title">iClip линии</string>
-  <string name="pref_lineclip_summary">Активирайте отрязването на линиите спрямо контура</string>
+  <!-- UNUSED string name="pref_lineclip_title">iClip линии</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Активирайте отрязването на линиите спрямо контура</string -->
   <string name="pref_path_multiselect_title">Избор на множество пътеки</string>
   <string name="pref_path_multiselect_summary">Активирай действието за избор на множество пътеки</string>
   <!-- UNUSED string name="pref_composite_actions_title">Композитни действия</string -->
@@ -2551,12 +2546,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="help_light_3d">Панорама и осветление</string>
     <string name="help_projection_3d">3D проекция</string>
-    <string name="help_stations_3d">Репери</string>
-    <string name="help_splays_3d">Странични измервания</string>
+    <!-- UNUSED string name="help_stations_3d">Репери</string -->
+    <!-- UNUSED string name="help_splays_3d">Странични измервания</string -->
     <string name="help_walls_3d">Стени</string>
-    <string name="help_surface_3d">Терен</string>
+    <!-- UNUSED string name="help_surface_3d">Терен</string -->
     <string name="help_color_3d">Цветове</string>
-    <string name="help_frame_3d">Рамка</string>
+    <!-- UNUSED string name="help_frame_3d">Рамка</string -->
 
    
 </resources>

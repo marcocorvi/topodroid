@@ -2782,7 +2782,7 @@ public class TDExporter
           // if ( TDSetting.mCompassSplayMode == 1 ) {
 	      //   printSplayToDat( pw, prefix, to, to + "ss" + ii, item, true ); // reverse
           // } else { // TDSetting.mCompassSplayModes ==  2
-            printSplayToDat( pw, prefix, to, ")" + to + ii, item, true ); // reverse
+            printSplayToDat( pw, prefix, to, ")" + to + "-" + ii, item, true ); // reverse
           // }
 	    }
           }
@@ -2800,7 +2800,7 @@ public class TDExporter
           // if ( TDSetting.mCompassSplayMode == 1 ) {
 	      //   printSplayToDat( pw, prefix, from, from + "ss" + ii, item, false ); // not reverse
           // } else { // TDSetting.mCompassSplayMode ==  2
-	        printSplayToDat( pw, prefix, from, ")" + from + ii, item, false ); // not reverse
+	        printSplayToDat( pw, prefix, from, ")" + from + "-" + ii, item, false ); // not reverse
           // }
 	    }
           } else {

@@ -37,14 +37,15 @@ public class GlNames extends GlShape
 {
   private final static int NN = 6; // 2 triangles (3 vertex per triangle)
 
-  static final int STATION_NONE  = 0;
+  // static final int STATION_NONE  = 0;
   static final int STATION_POINT = 1;
   static final int STATION_NAME  = 2;
   static final int STATION_LEG   = 3;
   // static final int STATION_ALL   = 3; 
   static final int STATION_MAX   = 4; // skip station_all
 
-  private static int stationMode = STATION_NONE;     // show_stations;
+  static boolean showStations = false;
+  static int stationMode = STATION_POINT;     // show_stations;
 
   public static boolean mNamesVisible = false;
 
@@ -56,22 +57,32 @@ public class GlNames extends GlShape
    */
   static void resetStations()
   {
-    stationMode = STATION_NONE; 
+    showStations = false;
+    stationMode = STATION_POINT; 
   }
 
-  /** cycle among the stations display-mode
-   */
-  static void toggleStations() 
-  { 
-    stationMode = (stationMode + 1)%STATION_MAX; 
-    // TDLog.v("GL NAMES station mode " + stationMode + " station_points " + GlModel.mStationPoints ); 
-    if ( stationMode == STATION_LEG ) {
-      if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) { stationMode = (stationMode + 1)%STATION_MAX; }
-      else { TDLog.v("GL NAMES Station LEG"); }
-    }
-    if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
-    // if ( ! hasNames() ) stationMode = STATION_NONE;
-  } 
+  static boolean isStationNames() { return stationMode == STATION_NAME; }
+
+  // /** cycle among the stations display-mode
+  //  */
+  // static void toggleStations() 
+  // { 
+  //   stationMode = (stationMode + 1)%STATION_MAX; 
+  //   // TDLog.v("GL NAMES station mode " + stationMode + " station_points " + GlModel.mStationPoints ); 
+  //   if ( stationMode == STATION_LEG ) {
+  //     if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) { stationMode = (stationMode + 1)%STATION_MAX; }
+  //     else { TDLog.v("GL NAMES Station LEG"); }
+  //   }
+  //   if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
+  //   // if ( ! hasNames() ) stationMode = STATION_NONE;
+  // } 
+
+  static void setShowStations( boolean show_stations, boolean show_names )
+  {
+    showStations = show_stations;
+    stationMode  = show_names ? STATION_NAME : STATION_POINT; // and STATION_LEG ???
+  }
+    
 
   /** highlight station search
    * @param prefix  prefix of station name
@@ -91,23 +102,24 @@ public class GlNames extends GlShape
   }
       
 
-  /** @return the stations display-mode
-   */
-  static int getStationMode() { return stationMode; }
-
   private boolean hasNames() { return nameBuffer != null; }
+
+  /** @return the stations display-mode (1-3) if stations are shown, 0 otherwise
+   */
+  static int getStationMode() { return showStations ? stationMode : 0; }
+
+  /** @return true if the stations diaplay-mode shows nothing
+   * @note used by the renderer
+   */
+  static boolean hiddenStations() { return ! showStations; }
 
   /** @return true if the stations diaplay-mode shows names
    */
-  static boolean showStationNames()  { return stationMode == STATION_NAME /* || stationMode == STATION_ALL */ ; }
-
-  /** @return true if the stations diaplay-mode shows nothing
-   */
-  static boolean hiddenStations()    { return stationMode == STATION_NONE; }
+  private static boolean showStationNames()  { return showStations && stationMode == STATION_NAME; }
 
   /** @return true if the stations diaplay-mode shows dots
    */
-  static boolean showStationPoints() { return stationMode == STATION_POINT || stationMode == STATION_LEG /* || stationMode == STATION_ALL */ ; }
+  private static boolean showStationPoints() { return showStations && ( stationMode == STATION_POINT /* || stationMode == STATION_LEG */ ); }
 
   // ----------------------------------------
  
@@ -394,12 +406,11 @@ public class GlNames extends GlShape
    */
   void draw( float[] mvpMatrix )
   {
-    if ( stationMode == STATION_NONE || TDUtil.isEmpty(mNames) ) {
+    if ( ! showStations || TDUtil.isEmpty(mNames) ) {
       // TDLog.v("GL NAMES nothing to draw"); 
       return;
     }
     if ( showStationNames() ) {
-      
       //   Bitmap bitmap = BitmapFactory.decodeStream( is );
       //   byte[] buffer = new byte[ bitmap.getWidth() * bitmap.getHeight() );
       //   ... fill buffer with pixels values
@@ -435,8 +446,7 @@ public class GlNames extends GlShape
         bindDataHL( mvpMatrix ); 
         GL.drawLineLoop( mHighlight*6, 6 );
       }
-    }
-    if ( showStationPoints() ) {
+    } else if ( showStationPoints() ) {
       GL.useProgram( mProgramPos );
       bindDataPos( mvpMatrix );
       GL.drawPoint( 0, nameCount );

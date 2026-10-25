@@ -13,6 +13,7 @@ package com.topodroid.dem;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
+import com.topodroid.util.TDMath;
 // import com.topodroid.util.TDFile;
 import com.topodroid.c3in.ParserException;
 import com.topodroid.c3in.ParserTh;
@@ -305,5 +306,14 @@ public class DEMsurface
   //   }
   //   // TDLog.v("DEM Z " + zmin + " " + zmax );
   // }
+  /** @return the minimum distance of a 3D point from the surface
+   * @param e0  East coordinate
+   * @param n0  North coordinate
+   * @param z0  Z coordinate (upward)
+   */
+  public double distance( double e0, double n0, double z0 )
+  {
+    return 1; // TODO
+  }
 }
 

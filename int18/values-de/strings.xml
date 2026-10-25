@@ -386,7 +386,7 @@
   <string name="error_value_required">Wert erforderlich</string>
   <string name="error_bad_fixes">Fixpunkte nicht in der Vermessung enthalten</string>
   <string name="error_bad_name">Dateiname geändert</string>
-  <string name="error_question">Bitte Frage eingeben</string>
+  <!-- UNUSED string name="error_question">Bitte Frage eingeben</string -->
   <string name="group_title">Den Kalibrierungsdaten Gruppen zuweisen</string>
   <!-- UNUSED string name="group_policy_four">Jeweils 4 Messungen</string -->
   <!-- UNUSED string name="group_policy_sixteen">Vier mal 4 Messungen, Rest einzeln</string -->
@@ -1000,7 +1000,7 @@
   <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
   <!-- UNUSED string name="clino">Clino [deg]</string -->
   <string name="bt_alias_title">Bluetooth Namen</string>
-  <string name="hint_api_key">API-Schlüssel</string>
+  <!-- UNUSED string name="hint_api_key">API-Schlüssel</string -->
   <string name="hint_bt_alias">BT Name</string>
   <string name="hint_bt_code">Gerätecode</string>
   <string name="bt_alias_missing">BT Name fehlt</string>
@@ -1272,9 +1272,6 @@
   <string name="import_leg_first">Messzug vor LRUD</string>
   <string name="import_diving_datamode">Tauchmodus</string>
   <string name="import_therion_path">Mit Vermessungspfad</string>
-  <string name="title_gemini">KI API-Schlüssel eingeben</string>
-  <string name="title_ai_dialog">KI Hilfe</string>
-  <string name="title_ai_dialog_pref">KI Konfigurationshilfe</string>
   <string name="title_azimut">Seitenriss-Azimut</string>
   <string name="title_audio">Audio-Kommentar</string>
   <string name="title_audio_list">Audioaufnahmen</string>
@@ -1453,8 +1450,6 @@
   <!-- UNUSED string name="pref_cat_log">Log Optionen</string -->
   <string name="pref_locale_title">Sprache</string>
   <string name="pref_locale_summary">Auswahl der Sprache</string>
-  <string name="pref_gemini_title">KI API-Schlüssel</string>
-  <string name="pref_gemini_summary">Gemini API-Schlüssel</string>
   <string name="pref_orientation_title">Bildschirmausrichtung</string>
   <string name="pref_orientation_summary">Bildschirmausrichtung fixieren oder automatisch</string>
   <string name="pref_single_back_title">Dialoge mit einfachem Zurück schließen</string>
@@ -1863,8 +1858,8 @@
   <string name="pref_linecurve_summary">Punkteigenschaften: Zwischen rund/eckig ändern</string>
   <string name="pref_linestraight_title">Linie begradigen</string>
   <string name="pref_linestraight_summary">Punkteigenschaften: Ganze linie begradigen</string>
-  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
-  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
+  <!-- UNUSED string name="pref_lineclip_title">Clip lines</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Enable line clipping to outline</string -->
   <string name="pref_path_multiselect_title">Pfad Mehrfachauswahl</string>
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <!-- UNUSED string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string -->
@@ -2415,10 +2410,10 @@
   <!-- UNUSED string name="help_fractal">Fraktale Analyse</string -->
   <string name="help_light_3d">Verschieben und Licht</string>
   <string name="help_projection_3d">3D Projektion</string>
-  <string name="help_stations_3d">Messpunkte</string>
-  <string name="help_splays_3d">Hilfszüge</string>
+  <!-- UNUSED string name="help_stations_3d">Messpunkte</string -->
+  <!-- UNUSED string name="help_splays_3d">Hilfszüge</string -->
   <string name="help_walls_3d">Wände</string>
-  <string name="help_surface_3d">Terrain</string>
+  <!-- UNUSED string name="help_surface_3d">Terrain</string -->
   <string name="help_color_3d">Farben</string>
-  <string name="help_frame_3d">Rahmen</string>
+  <!-- UNUSED string name="help_frame_3d">Rahmen</string -->
 </resources>

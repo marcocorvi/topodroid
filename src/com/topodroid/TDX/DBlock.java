@@ -912,7 +912,7 @@ public class DBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     if ( show_id ) pw.format("%d ", mId );
-    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c",
+    pw.format(Locale.US, "<%s-%s> %.2f %.1f %+.1f [%c",
       mFrom, mTo,
       mLength*ul, mBearing*ua, mClino*ua, ExtendType.mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
     formatFlagPhoto( pw );

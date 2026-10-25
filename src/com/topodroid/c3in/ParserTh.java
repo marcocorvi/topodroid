@@ -171,6 +171,7 @@ public class ParserTh extends TglParser
       setStationDepths();
       processMarks();
       // TDLog.v( "Th read survey " + surveyname );
+      // mPhoto = mData.selectAllPhotosShot( TDInstance.sid, 0 ); // TODO PHOTO-3D
     }
   }
 

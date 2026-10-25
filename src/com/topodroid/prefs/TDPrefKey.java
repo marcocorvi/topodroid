@@ -686,7 +686,7 @@ class TDPrefKey
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_SNAP",        R.string.pref_linesnap_title,        R.string.pref_linesnap_summary,         FALSE ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_CURVE",       R.string.pref_linecurve_title,       R.string.pref_linecurve_summary,        FALSE ),
     new TDPrefKey( A, BOOL, UI, "DISTOX_LINE_STRAIGHT",    R.string.pref_linestraight_title,    R.string.pref_linestraight_summary,     FALSE ),
-    new TDPrefKey( T, BOOL, UI, "DISTOX_LINE_CLIP",        R.string.pref_lineclip_title,        R.string.pref_lineclip_summary,         FALSE ),
+    // new TDPrefKey( T, BOOL, UI, "DISTOX_LINE_CLIP",        R.string.pref_lineclip_title,        R.string.pref_lineclip_summary,         FALSE ),
     new TDPrefKey( T, BOOL, UI, "DISTOX_PATH_MULTISELECT", R.string.pref_path_multiselect_title,R.string.pref_path_multiselect_summary, FALSE ),
     new TDPrefKey( T, LONG, DR, "DISTOX_LINE_ENDS",        R.string.pref_line_ends_title,       R.string.pref_line_ends_summary,        TDString.ZERO )
   };

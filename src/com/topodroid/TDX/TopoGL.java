@@ -53,6 +53,9 @@ import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.help.HelpDialog;
 
 import com.topodroid.ui.MyButton;
+import com.topodroid.ui.PopupMode;
+import com.topodroid.ui.PopupClickListener;
+import com.topodroid.ui.IPopupClickHandler;
 // import com.topodroid.ui.MyMenuAdapter;
 // import com.topodroid.ui.MyMenuItem;
 import com.topodroid.ui.MyHorizontalListView;
@@ -105,6 +108,7 @@ import android.graphics.RectF;
 import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Paint.FontMetrics;
 
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
@@ -119,6 +123,7 @@ import android.widget.Toast;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.PopupWindow;
 // import android.widget.CheckBox;
 // import android.widget.TextView;
 import android.widget.LinearLayout;
@@ -142,6 +147,7 @@ public class TopoGL extends MyActivity
                     , OnItemClickListener
                     // , OnSharedPreferenceChangeListener
                     , GPS.GPSListener // WITH-GPS 
+                    , IPopupClickHandler
 {
   // runtime flags
   // BLUETOOTH
@@ -199,6 +205,8 @@ public class TopoGL extends MyActivity
   private static final int HELP_PAGE = R.string.TopoGL;
 
   boolean doSketches = false;
+
+  private PopupWindow mPopupColor = null;
 
   // SKETCH
   private Cave3DShot mSketchLeg = null;
@@ -289,6 +297,10 @@ public class TopoGL extends MyActivity
    * @note used also by DialogSurface
    */
   boolean hasSurface() { return ( mRenderer != null ) && mRenderer.hasSurface(); }
+
+  boolean hasPhotos() { return ( mRenderer != null ) && mRenderer.hasPhotos(); }
+
+  // boolean hasWalls() { return ( mRenderer != null ) && mRenderer.hasWalls(); }
 
   /** @return true is there is a model parser and it has an origin
    */
@@ -589,6 +601,7 @@ public class TopoGL extends MyActivity
       closeMenu();
       return;
     }
+    if ( dismissPopups() != DISMISS_NONE ) return;
     if ( TDSetting.mSingleBack ) {
       super.onBackPressed(); // FIXME issue 167
     } else if ( doubleBack ) {
@@ -918,21 +931,23 @@ public class TopoGL extends MyActivity
   MyHorizontalListView mListView = null;
   MyHorizontalButtonView mButtonView1;
   Button[] mButton1 = null;
-  static int mNrButton1 = 8;
+  static int mNrButton1 = 5;
   private static final int[] izons = {
     R.drawable.iz_light,
     R.drawable.iz_orthogonal,
-    R.drawable.iz_station_no, // R.drawable.iz_station_no_dot,
-    R.drawable.iz_splays_none,
-    R.drawable.iz_wall_no,
-    R.drawable.iz_surface_off,
+    R.drawable.iz_mode,
+    // R.drawable.iz_station_no, // R.drawable.iz_station_no_dot,
+    // R.drawable.iz_splays_none,
+    // R.drawable.iz_wall_no,
+    // R.drawable.iz_surface_off,
     R.drawable.iz_color,
-    R.drawable.iz_frame_grid,
+    R.drawable.iz_polyline,
+    // R.drawable.iz_frame_grid,
     // R.drawable.iz_bt_down, // FIXME BLUETOOTH BUTTON
     // secondary bitmaps
-    R.drawable.iz_wall,
-    R.drawable.iz_perspective,
-    R.drawable.iz_surface_on
+    // R.drawable.iz_wall,
+    R.drawable.iz_perspective, // 5
+    // R.drawable.iz_surface_on,
     // R.drawable.iz_bt_off, // FIXME BLUETOOTH BUTTON
     // R.drawable.iz_bt_wait,
     // R.drawable.iz_bt_ready,
@@ -943,22 +958,25 @@ public class TopoGL extends MyActivity
 
   private static final int[] help_icons = { R.string.help_light_3d,
                           R.string.help_projection_3d,
-                          R.string.help_stations_3d,
-                          R.string.help_splays_3d,
-                          R.string.help_walls_3d,
-                          R.string.help_surface_3d,
+                          R.string.help_display,
+                          // R.string.help_stations_3d,
+                          // R.string.help_splays_3d,
+                          // R.string.help_walls_3d,
+                          // R.string.help_surface_3d,
                           R.string.help_color_3d,
-                          R.string.help_frame_3d
+                          // R.string.help_frame_3d
   };
 
   int BTN_MOVE     = 0;
   int BTN_PROJECT  = 1;
-  int BTN_STATION  = 2;
-  int BTN_SPLAYS   = 3;
-  int BTN_WALL     = 4;
-  int BTN_SURFACE  = 5;
-  int BTN_COLOR    = 6;
-  int BTN_FRAME    = 7;
+  // int BTN_STATION  = 2;
+  // int BTN_SPLAYS   = 3;
+  // int BTN_WALL     = 4;
+  // int BTN_SURFACE  = 5;
+  int BTN_MODE     = 2;
+  int BTN_COLOR    = 3;
+  int BTN_LEGS     = 4;
+  // int BTN_FRAME    = 4;
   // int BTN_BLE      = 8; // FIXME BLUETOOTH BUTTON
   BitmapDrawable mBMlight;
   BitmapDrawable mBMmove;
@@ -974,20 +992,22 @@ public class TopoGL extends MyActivity
   // BitmapDrawable mBMbleShot  = null;
   // BitmapDrawable mBMbleScan  = null;
 
-  BitmapDrawable mBMdelaunay;
-  BitmapDrawable mBMpowercrust;
+  // BitmapDrawable mBMdelaunay;
+  // BitmapDrawable mBMpowercrust;
   // BitmapDrawable mBMconvex;
-  BitmapDrawable mBMwallNo;
-  BitmapDrawable mBMsurfaceNo;
-  BitmapDrawable mBMwall;
+  // BitmapDrawable mBMwallNo;
+  // BitmapDrawable mBMsurfaceNo;
+  // BitmapDrawable mBMwall;
+
   BitmapDrawable mBMperspective;
   BitmapDrawable mBMorthogonal;
   BitmapDrawable mBMsurface;
 
-  BitmapDrawable mBMstationNo; // STATION_TRUE
-  BitmapDrawable mBMstationPoint;
-  BitmapDrawable mBMstationName;
-  BitmapDrawable mBMstationLeg;
+  // BitmapDrawable mBMstationNo; // STATION_TRUE
+  // BitmapDrawable mBMstationPoint;
+  // BitmapDrawable mBMstationName;
+  // BitmapDrawable mBMstationLeg;
+
   // BitmapDrawable mBMstation;
   // BitmapDrawable mBMstationNoDot; // STATION_TRUE
   // BitmapDrawable mBMstationPointDot;
@@ -995,20 +1015,20 @@ public class TopoGL extends MyActivity
   // BitmapDrawable mBMstationLegDot;
   // // BitmapDrawable mBMstationDot;
 
-  BitmapDrawable mBMsplaysNo;
-  BitmapDrawable mBMsplaysLine;
-  BitmapDrawable mBMsplaysPoint;
+  // BitmapDrawable mBMsplaysNo;
+  // BitmapDrawable mBMsplaysLine;
+  // BitmapDrawable mBMsplaysPoint;
   // BitmapDrawable mBMsplays;
 
-  BitmapDrawable mBMcolorNo;
-  BitmapDrawable mBMcolorSurvey;
-  BitmapDrawable mBMcolorDepth;
-  BitmapDrawable mBMcolorSurface;
+  // BitmapDrawable mBMcolorNo;
+  // BitmapDrawable mBMcolorSurvey;
+  // BitmapDrawable mBMcolorDepth;
+  // BitmapDrawable mBMcolorSurface;
   // BitmapDrawable mBMcolorTemp; // TEMPERATURE
 
-  BitmapDrawable mBMframeNo;
-  BitmapDrawable mBMframeGrid;
-  BitmapDrawable mBMframeAxes;
+  // BitmapDrawable mBMframeNo;
+  // BitmapDrawable mBMframeGrid;
+  // BitmapDrawable mBMframeAxes;
 
 
   /** reset the button bar
@@ -1027,18 +1047,18 @@ public class TopoGL extends MyActivity
       mButton1[2] = MyButton.getButton( this, this, izons[2] );
       mButton1[3] = MyButton.getButton( this, this, izons[3] );
       mButton1[4] = MyButton.getButton( this, this, izons[4] );
-      mButton1[5] = MyButton.getButton( this, this, izons[5] );
-      mButton1[6] = MyButton.getButton( this, this, izons[6] );
-      mButton1[7] = MyButton.getButton( this, this, izons[7] );
+      // mButton1[5] = MyButton.getButton( this, this, izons[5] );
+      // mButton1[6] = MyButton.getButton( this, this, izons[6] );
+      // mButton1[7] = MyButton.getButton( this, this, izons[7] );
       // if ( BLUETOOTH ) mButton1[8] = MyButton.getButton( this, this, izons[8] );
       mButton1[ mNrButton1 ] = MyButton.getButton( this, null, R.drawable.iz_empty );
 
       // mButton1[ 0 ].setOnLongClickListener( this );
       mButton1[ 1 ].setOnLongClickListener( this ); // projection params
       // mButton1[ 2 ].setOnLongClickListener( this ); // stations
-      mButton1[ 3 ].setOnLongClickListener( this ); // splays: new manual leg
-      mButton1[ 6 ].setOnLongClickListener( this ); // surveys
-      mButton1[ 7 ].setOnLongClickListener( this ); // frame: leg-visibility
+      // mButton1[ 2 ].setOnLongClickListener( this ); // splays: new manual leg
+      mButton1[ 3 ].setOnLongClickListener( this ); // surveys
+      // mButton1[ 4 ].setOnLongClickListener( this ); // frame: leg-visibility
 
       mBMlight = MyButton.getButtonBackground( this, size, R.drawable.iz_light );
       mBMturn  = MyButton.getButtonBackground( this, size, R.drawable.iz_turn );
@@ -1054,31 +1074,31 @@ public class TopoGL extends MyActivity
       // mBMstationLegDot  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg_dot );
       // // mBMstationDot     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_dot );
 
-      mBMstationNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no ); // STATION_TRUE
-      mBMstationPoint= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point );
-      mBMstationName = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name );
-      mBMstationLeg  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg );
-      // mBMstation     = MyButton.getButtonBackground( this, size, R.drawable.iz_station );
+      // mBMstationNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no ); // STATION_TRUE
+      // mBMstationPoint= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point );
+      // mBMstationName = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name );
+      // mBMstationLeg  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg );
+      // // mBMstation     = MyButton.getButtonBackground( this, size, R.drawable.iz_station );
 
-      mBMsplaysNo    = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_none );
-      mBMsplaysLine  = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_line );
-      mBMsplaysPoint = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_point );
+      // mBMsplaysNo    = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_none );
+      // mBMsplaysLine  = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_line );
+      // mBMsplaysPoint = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_point );
 
-      mBMwallNo      = MyButton.getButtonBackground( this, size, R.drawable.iz_wall_no );
-      mBMwall        = MyButton.getButtonBackground( this, size, R.drawable.iz_wall );
+      // mBMwallNo      = MyButton.getButtonBackground( this, size, R.drawable.iz_wall_no );
+      // mBMwall        = MyButton.getButtonBackground( this, size, R.drawable.iz_wall );
 
-      mBMsurfaceNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_surface_off );
-      mBMsurface     = MyButton.getButtonBackground( this, size, R.drawable.iz_surface_on );
+      // mBMsurfaceNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_surface_off );
+      // mBMsurface     = MyButton.getButtonBackground( this, size, R.drawable.iz_surface_on );
 
-      mBMcolorNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_color );
-      mBMcolorSurvey = MyButton.getButtonBackground( this, size, R.drawable.iz_color_survey );
-      mBMcolorDepth  = MyButton.getButtonBackground( this, size, R.drawable.iz_color_depth );
-      mBMcolorSurface= MyButton.getButtonBackground( this, size, R.drawable.iz_color_surface );
+      // mBMcolorNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_color );
+      // mBMcolorSurvey = MyButton.getButtonBackground( this, size, R.drawable.iz_color_survey );
+      // mBMcolorDepth  = MyButton.getButtonBackground( this, size, R.drawable.iz_color_depth );
+      // mBMcolorSurface= MyButton.getButtonBackground( this, size, R.drawable.iz_color_surface );
       // mBMcolorTemp   = MyButton.getButtonBackground( this, size, R.drawable.iz_color_temp ); // TEMPERATURE
 
-      mBMframeGrid   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_grid );
-      mBMframeNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_no );
-      mBMframeAxes   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_axes );
+      // mBMframeGrid   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_grid );
+      // mBMframeNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_no );
+      // mBMframeAxes   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_axes );
 
       // if ( BLUETOOTH ) { // bluetooth button state-icons
       //   mBMbleDown  = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_down );
@@ -1143,17 +1163,17 @@ public class TopoGL extends MyActivity
     //   // TDLog.v("TopoGL on long click " + mSelectStation );
     //   setButtonStation();
     //   closeCurrentStation( false );
-    } else if ( b == mButton1[ BTN_SPLAYS ] ) {
-      // if ( BLUETOOTH && mWithBluetooth ) {
-      //   new DialogManualLeg( this, this ).show();
-      // } else {
-        onClick( v );
-      // }
+    // } else if ( b == mButton1[ BTN_SPLAYS ] ) {
+    //   // if ( BLUETOOTH && mWithBluetooth ) {
+    //   //   new DialogManualLeg( this, this ).show();
+    //   // } else {
+    //     onClick( v );
+    //   // }
     } else if ( b == mButton1[ BTN_COLOR ] ) {
       if ( mParser == null || mParser.getSurveyNumber() < 2 ) return false;
       new DialogSurveys( this, this, mParser.getSurveys() ).show();
-    } else if ( b == mButton1[ BTN_FRAME ] ) {
-      new DialogLegs( this ).show();
+    // } else if ( b == mButton1[ BTN_FRAME ] ) {
+    //   new DialogLegs( this ).show();
     // } else if ( BLUETOOTH && b == mButton1[ BTN_BLE ] ) {
     //   // TDLog.v("BT button long click ");
     //   if ( mWithBluetooth ) {
@@ -1170,132 +1190,106 @@ public class TopoGL extends MyActivity
   private void resetButtons()
   {
     setButtonProjection();
-    setButtonSurface();
-    setButtonWall();
+    // setButtonSurface();
+    // setButtonWall();
     setButtonMove();
-    setButtonStation();
-    setButtonSplays();
-    setButtonColor();
-    setButtonFrame();
+    // setButtonStation();
+    // setButtonSplays();
+    // setButtonColor();
+    // setButtonFrame();
   }
 
-  /** set the state of the STATION button, according to the selectability and the station-mode (none, point, name)
-   */
-  private void setButtonStation()
-  {
-    // TDLog.v("GL set button station - select " + mSelectStation + " station " + GlNames.getStationMode() );
-    // if ( mSelectStation ) { // STATION_TRUE
-    //   switch ( GlNames.getStationMode() ) {
-    //     case GlNames.STATION_NONE:
-    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNoDot );
-    //       break;
-    //     case GlNames.STATION_POINT:
-    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationPointDot );
-    //       break;
-    //     case GlNames.STATION_NAME:
-    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNameDot );
-    //       break;
-    //     case GlNames.STATION_LEG:
-    //       mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLegDot );
-    //       break;
-    //     // case GlNames.STATION_ALL:
-    //     //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationDot );
-    //     //   break;
-    //   }
-    // } else {
-      switch ( GlNames.getStationMode() ) {
-        case GlNames.STATION_NONE:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNo );
-          break;
-        case GlNames.STATION_POINT:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationPoint );
-          break;
-        case GlNames.STATION_NAME:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationName );
-          break;
-        case GlNames.STATION_LEG:
-          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLeg );
-          break;
-        // case GlNames.STATION_ALL:
-        //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstation );
-        //   break;
-      }
-    // }
-  }
+  // /** set the state of the STATION button, according to the selectability and the station-mode (none, point, name)
+  //  */
+  // private void setButtonStation()
+  // {
+  //     switch ( GlNames.getStationMode() ) {
+  //       case GlNames.STATION_NONE:
+  //         mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNo );
+  //         break;
+  //       case GlNames.STATION_POINT:
+  //         mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationPoint );
+  //         break;
+  //       case GlNames.STATION_NAME:
+  //         mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationName );
+  //         break;
+  //       case GlNames.STATION_LEG:
+  //         mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLeg );
+  //         break;
+  //     }
+  // }
 
-  /** set the FRAME button, according to the frame-mode
-   */
-  private void setButtonFrame()
-  {
-    if ( mRenderer == null ) return;
-    switch ( GlModel.frameMode ) {
-      case GlModel.FRAME_NONE:
-        mButton1[ BTN_FRAME ].setBackgroundDrawable( mBMframeNo );
-        break;
-      case GlModel.FRAME_GRID:
-        mButton1[ BTN_FRAME ].setBackgroundDrawable( mBMframeGrid );
-        break;
-      case GlModel.FRAME_AXES:
-        mButton1[ BTN_FRAME ].setBackgroundDrawable( mBMframeAxes );
-        break;
-    }
-  }
+  boolean isShowingStations() { return GlNames.showStations; }
 
-  /** set the COLOR button, according to the color-mode (grey, by-survey, by-depth, by-surface)
-   * @note the color could also be set by an attribute, eg, temperature, if there are enough values
-   */
-  private void setButtonColor()
-  {
-    if ( mRenderer == null ) return;
-    switch ( mRenderer.getColorMode() ) {
-      case GlLines.COLOR_NONE:
-        mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorNo );
-        break;
-      case GlLines.COLOR_SURVEY:
-        mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorSurvey );
-        break;
-      case GlLines.COLOR_DEPTH:
-        mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorDepth );
-        break;
-      case GlLines.COLOR_SURFACE:
-        mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorSurface );
-        break;
-      // case GlLines.COLOR_TEMP:
-      //   mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorTemp );
-      //   break;
-    }
-  }
+  // /** set the FRAME button, according to the frame-mode
+  //  */
+  // private void setButtonFrame()
+  // {
+  //   if ( mRenderer == null ) return;
+  //   if ( ! GlModel.showFrame ) {
+  //     mButton1[ BTN_FRAME ].setBackgroundDrawable( mBMframeNo );
+  //   } else if ( GlModel.frameMode == GlModel.FRAME_GRID ) {
+  //     mButton1[ BTN_FRAME ].setBackgroundDrawable( mBMframeGrid );
+  //   } else {
+  //     mButton1[ BTN_FRAME ].setBackgroundDrawable( mBMframeAxes );
+  //   }
+  // }
+
+  // /** set the COLOR button, according to the color-mode (grey, by-survey, by-depth, by-surface)
+  //  * @note the color could also be set by an attribute, eg, temperature, if there are enough values
+  //  */
+  // private void setButtonColor()
+  // {
+  //   if ( mRenderer == null ) return;
+  //   switch ( mRenderer.getColorMode() ) {
+  //     case GlLines.COLOR_NONE:
+  //       mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorNo );
+  //       break;
+  //     case GlLines.COLOR_SURVEY:
+  //       mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorSurvey );
+  //       break;
+  //     case GlLines.COLOR_DEPTH:
+  //       mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorDepth );
+  //       break;
+  //     case GlLines.COLOR_SURFACE:
+  //       mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorSurface );
+  //       break;
+  //     // case GlLines.COLOR_TEMP:
+  //     //   mButton1[ BTN_COLOR ].setBackgroundDrawable( mBMcolorTemp );
+  //     //   break;
+  //   }
+  // }
 
   /** set the SPLAYS button, according to the splay-mode (none, line, endpoint)
    */
-  private void setButtonSplays()
-  {
-    switch ( GlModel.splayMode ) {
-      case GlModel.DRAW_NONE:
-        mButton1[ BTN_SPLAYS ].setBackgroundDrawable( mBMsplaysNo );
-        break;
-      case GlModel.DRAW_LINE:
-        mButton1[ BTN_SPLAYS ].setBackgroundDrawable( mBMsplaysLine );
-        break;
-      case GlModel.DRAW_POINT:
-        mButton1[ BTN_SPLAYS ].setBackgroundDrawable( mBMsplaysPoint );
-        break;
-    }
-  }
+  // private void setButtonSplays()
+  // {
+  //   switch ( GlModel.splayMode ) {
+  //     case GlModel.DRAW_NONE:
+  //       mButton1[ BTN_SPLAYS ].setBackgroundDrawable( mBMsplaysNo );
+  //       break;
+  //     case GlModel.DRAW_LINE:
+  //       mButton1[ BTN_SPLAYS ].setBackgroundDrawable( mBMsplaysLine );
+  //       break;
+  //     case GlModel.DRAW_POINT:
+  //       mButton1[ BTN_SPLAYS ].setBackgroundDrawable( mBMsplaysPoint );
+  //       break;
+  //   }
+  // }
 
-  /** set the SURFACE button: either shown or hidden
-   */
-  private void setButtonSurface()
-  {
-    mButton1[ BTN_SURFACE ].setBackgroundDrawable( GlModel.surfaceMode ? mBMsurface : mBMsurfaceNo );
-  }
+  // /** set the SURFACE button: either shown or hidden
+  //  */
+  // private void setButtonSurface()
+  // {
+  //   mButton1[ BTN_SURFACE ].setBackgroundDrawable( GlModel.surfaceMode ? mBMsurface : mBMsurfaceNo );
+  // }
 
-  /** set the WALLS button: either shown or hidden
-   */
-  private void setButtonWall() 
-  {
-    mButton1[ BTN_WALL ].setBackgroundDrawable( GlModel.wallMode ? mBMwall : mBMwallNo );
-  }
+  // /** set the WALLS button: either shown or hidden
+  //  */
+  // private void setButtonWall() 
+  // {
+  //   mButton1[ BTN_WALL ].setBackgroundDrawable( GlModel.wallMode ? mBMwall : mBMwallNo );
+  // }
 
   /** set the PROJECTION button: either orthogonal or perspective
    */
@@ -1384,6 +1378,34 @@ public class TopoGL extends MyActivity
   }
 
   // ---------------------------------------------------------
+  // utils for GlDisplayDialog
+
+  void setShowStations( boolean show_stations, boolean show_names ) { GlNames.setShowStations( show_stations, show_names ); }
+
+  void setShowSplay( boolean show_splay, boolean show_endpoints ) { GlModel.setShowSplay( show_splay, show_endpoints ); }
+
+  void setShowReference( boolean show_ref, boolean show_axes ) { GlModel.setShowReference( show_ref, show_axes ); }
+
+  void setShowWalls( boolean show_walls ) { /* if ( hasWalls() ) */ GlModel.setShowWalls( show_walls ); }
+
+  void setShowSurface( boolean show_surface ) { /* if ( hasSurface() ) */ GlModel.setShowSurface( show_surface ); }
+
+  void setShowPhotos( boolean show_photos ) { if ( hasPhotos() ) GlModel.setShowPhotos( show_photos ); }
+
+  boolean isShowStations()  { return GlNames.showStations; }
+  boolean isShowSplays()    { return GlModel.showSplays; }
+  boolean isShowReference() { return GlModel.showFrame; }
+  boolean isShowWalls()     { return GlModel.showWalls; }
+  boolean isShowSurface()   { return GlModel.showSurface; }
+  boolean isShowPhotos()    { return GlModel.showPhotos; }
+
+  boolean isStationNames()  { return GlNames.isStationNames(); }
+  boolean isSplayEndpoint() { return GlModel.isSplayEndpoint(); }
+  boolean isReferenceAxes() { return GlModel.isReferenceAxes(); }
+
+
+  // ----------------------------------------------------------
+    
 
   /** respond to user taps
    * @param view tapped view
@@ -1396,6 +1418,7 @@ public class TopoGL extends MyActivity
       closeMenu();
       return;
     }
+    int dismiss = dismissPopups();
     int id = view.getId();
     if ( id == R.id.handle ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {
@@ -1423,29 +1446,39 @@ public class TopoGL extends MyActivity
         setButtonProjection();
         refresh(); // does not help
       }
-    } else if ( b0 == mButton1[k1++] ) { // STATIONS
-      GlNames.toggleStations();
-      setButtonStation();
-    } else if ( b0 == mButton1[k1++] ) { // SPLAYS
-      GlModel.toggleSplays();
-      setButtonSplays();
-    } else if ( b0 == mButton1[k1++] ) { // WALLS
-      GlModel.toggleWallMode();
-      setButtonWall();
-    } else if ( b0 == mButton1[k1++] ) { // SURFACE
-      GlModel.toggleSurface();
-      setButtonSurface();
-      setButtonMove();
+    } else if ( b0 == mButton1[k1++] ) { // DISPLAY MODE
+      (new GlDisplayDialog( this, this )).show();
+    // } else if ( b0 == mButton1[k1++] ) { // STATIONS
+    //   GlNames.toggleStations();
+    //   setButtonStation();
+    // } else if ( b0 == mButton1[k1++] ) { // SPLAYS
+    //   GlModel.toggleSplays();
+    //   setButtonSplays();
+    // } else if ( b0 == mButton1[k1++] ) { // WALLS
+    //   GlModel.toggleWallMode();
+    //   setButtonWall();
+    // } else if ( b0 == mButton1[k1++] ) { // SURFACE
+    //   GlModel.toggleSurface();
+    //   setButtonSurface();
+    //   setButtonMove();
     } else if ( b0 == mButton1[k1++] ) { // COLOR
       if ( mRenderer != null ) {
-        mRenderer.toggleColorMode();
-        setButtonColor();
+        int nr = 3;
+        if ( mRenderer.mHasDEM ) ++nr;
+        if ( mRenderer.hasSurfaceDistance() ) ++nr;
+        makePopupColor( b0, PopupMode.mColorModes, nr, PopupMode.CODE_COLOR, dismiss ); // pull-down menu to select model coloring
+        // mRenderer.toggleColorMode();
+        // setButtonColor();
       }
-    } else if ( b0 == mButton1[k1++] ) { // FRAME
-      if ( mRenderer != null ) {
-        mRenderer.toggleFrameMode();
-        setButtonFrame();
-      }
+    // } else if ( b0 == mButton1[k1++] ) { // FRAME
+    //   if ( mRenderer != null ) {
+    //     mRenderer.toggleFrameMode();
+    //     setButtonFrame();
+    //   }
+    } else if ( b0 == mButton1[k1++] ) { // LEG-VISIBILITY
+      new DialogLegs( this ).show();
+      
+
     // } else if ( BLUETOOTH && b0 == mButton1[k1++] ) { // BLUETOOTH
     //   // TDLog.v("TopoGL BT button click ");
     //   if ( hasBluetoothName() ) doBluetoothClick();
@@ -2318,6 +2351,7 @@ public class TopoGL extends MyActivity
       if ( mRenderer != null ) {
         mRenderer.clearModel();
         mRenderer.setParser( mParser, true );
+        // TODO get list of survey photo and add them to the renderer
       }
       doSketches = true;
       // TDLog.v( "Station " + mParser.getStationNumber() + " shot " + mParser.getShotNumber() );
@@ -3343,4 +3377,77 @@ public class TopoGL extends MyActivity
     mDialogStation = null;
     return true;
   }
+
+  // ------------------------------------------------------------------
+  // survey popup COLOR
+
+  private final static int DISMISS_NONE  = 0;
+  private final static int DISMISS_COLOR = 1;
+
+  /** color dropdown menu
+   * @param b     button
+   * @param modes ...
+   * @param nr    number of color modes
+   * @param code  code of the filter-listener 
+   * @param dismiss if dismiss is FILTER don't make popup
+   */
+  private void makePopupColor( View b, int[] modes, int nr, final int code, int dismiss )
+  {
+    if ( dismiss == DISMISS_COLOR ) return;
+
+    final Context context = this;
+    LinearLayout popup_layout = new LinearLayout(this);
+    popup_layout.setOrientation(LinearLayout.VERTICAL);
+    int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+    int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+    String text;
+    float w = 0;
+    Button[] tv = new Button[nr];
+    for ( int k=0; k<nr; ++k ) {
+      text = getString( modes[k] );
+      tv[k] = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight, new PopupClickListener( this, k, code ) );
+      float ww = ( tv[k].getPaint().measureText( text ) );
+      if ( ww > w ) w = ww;
+    }
+    int iw = (int)(w + 10);
+    // TDLog.v("FONT W " + w + " " + TopoDroidApp.mDisplayWidth );
+    // if ( w > TopoDroidApp.mDisplayWidth / 2 ) w = (int)TopoDroidApp.mDisplayWidth / 2;
+    for ( int k=0; k<nr; ++k ) {
+      tv[k].setWidth( iw );
+    }
+
+    FontMetrics fm = tv[0].getPaint().getFontMetrics();
+    int ih = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+    mPopupColor = new PopupWindow( popup_layout, iw, ih ); 
+    mPopupColor.showAsDropDown(b); 
+  }
+
+  /** dismiss the popups
+   */
+  private int dismissPopups() 
+  {
+    if ( dismissPopup( PopupMode.CODE_COLOR ) ) return DISMISS_COLOR;
+    return DISMISS_NONE;
+  }
+
+  /** dismiss the model COLOR popup
+   */
+  public boolean dismissPopup( int code )
+  {
+    if ( code == PopupMode.CODE_COLOR && mPopupColor != null ) {
+      mPopupColor.dismiss();
+      mPopupColor = null;
+      return true;
+    }
+    return false;
+  }
+
+  public void setButtonPopupMode( int color_mode, int code )
+  {
+    TDLog.v("set color mode " + color_mode + " code " + code );
+    if ( mRenderer != null ) mRenderer.setColorMode( color_mode );
+  }
+
+
 }

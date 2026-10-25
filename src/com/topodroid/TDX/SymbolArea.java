@@ -166,7 +166,7 @@ public class SymbolArea extends Symbol
     } else {
       mPath.addCircle( 0, 0, 10, Path.Direction.CCW );
     }
-    if ( TDSetting.mLineClip && ( (mClippable & CLIP_BOTH) != 0 ) ) {
+    if ( /* TDSetting.mLineClip && */ ( (mClippable & CLIP_BOTH) != 0 ) ) {
       mPath.moveTo( 16, -7 );
       mPath.lineTo( 20, -14 );
       mPath.lineTo( 12, -14 );

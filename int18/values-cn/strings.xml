@@ -416,7 +416,7 @@
     <string name="error_value_required">输入赋值</string>
     <string name="error_bad_fixes">修正点不在测量数据中</string>
     <string name="error_bad_name">文件名已修改</string>
-    <string name="error_question">请输入问题</string>
+    <!-- UNUSED string name="error_question">请输入问题</string -->
 
     <string name="group_title">校准数据组</string>
     <!-- UNUSED string name="group_policy_four">原则: 四个一组</string -->
@@ -1067,7 +1067,7 @@
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">蓝牙别名</string>
-    <string name="hint_api_key">API密钥</string>
+    <!-- UNUSED string name="hint_api_key">API密钥</string -->
     <string name="hint_bt_alias">蓝牙别名</string>
     <string name="hint_bt_code">设备代码</string>
     <string name="bt_alias_missing">蓝牙别名丢失</string>
@@ -1356,9 +1356,6 @@
     <string name="import_diving_datamode">潜水数据模式</string>
     <string name="import_therion_path">跟随测量路径</string>
 
-    <string name="title_gemini">输入你的AI API密钥</string>
-    <string name="title_ai_dialog">AI助手</string>
-    <string name="title_ai_dialog_pref">AI配置帮助</string>
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
     <string name="title_audio_list">音频记录</string>
@@ -1558,8 +1555,6 @@
 
   <string name="pref_locale_title">语言</string>
   <string name="pref_locale_summary">软件语言</string>
-  <string name="pref_gemini_title">AI密钥</string>
-  <string name="pref_gemini_summary">Gemini API密钥</string>
   <string name="pref_orientation_title">屏幕适应</string>
   <string name="pref_orientation_summary">软件屏幕适应</string>
   <string name="pref_single_back_title">单次操作返回</string>
@@ -1964,8 +1959,8 @@
   <string name="pref_linecurve_summary">启用线段动作平稳/伸直</string>
   <string name="pref_linestraight_title">伸直线</string>
   <string name="pref_linestraight_summary">启用伸直所有线操作</string>
-  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
-  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
+  <!-- UNUSED string name="pref_lineclip_title">Clip lines</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Enable line clipping to outline</string -->
   <string name="pref_path_multiselect_title">路径的多个选项</string>
   <string name="pref_path_multiselect_summary">启用路径的多个选项操作</string>
   <!-- UNUSED string name="pref_composite_actions_title">合并操作</string -->
@@ -2575,11 +2570,11 @@
 
     <string name="help_light_3d">Pan and light</string>
     <string name="help_projection_3d">3D 预测</string>
-    <string name="help_stations_3d">站点</string>
-    <string name="help_splays_3d">侧线</string>
+    <!-- UNUSED string name="help_stations_3d">站点</string -->
+    <!-- UNUSED string name="help_splays_3d">侧线</string -->
     <string name="help_walls_3d">洞壁</string>
-    <string name="help_surface_3d">地形</string>
+    <!-- UNUSED string name="help_surface_3d">地形</string -->
     <string name="help_color_3d">颜色</string>
-    <string name="help_frame_3d">框架</string>
+    <!-- UNUSED string name="help_frame_3d">框架</string -->
 
 </resources>

@@ -3,7 +3,6 @@
 
   <!-- string name="PhotoActivity" translatable="false">page_photo_list.htm</string -->
   <string name="PhotoListDialog" translatable="false">page_photo_list.htm</string>
-  <string name="PtCmapActivity" translatable="false">page_pt_cmap.htm</string>
   <string name="SensorActivity" translatable="false">page_sensors.htm</string>
   <string name="SensorListActivity" translatable="false">page_sensors_list.htm</string>
   <string name="SketchWindow" translatable="false">page_sketch.htm</string>
@@ -114,6 +113,7 @@
   <string name="ScanShotEditDialog" translatable="false">page_scan_shot.htm</string>
   <string name="DrawingScanSetDialog" translatable="false">page_plot_scan.htm</string>
   <string name="ShotDisplayDialog" translatable="false">page_displaymode.htm</string>
+  <string name="GlDisplayDialog" translatable="false">page_3Ddisplaymode.htm</string>
   <string name="ShotNewDialog" translatable="false">page_man_data.htm</string>
   <string name="StationsDialog" translatable="false">page_stations_map.htm</string>
   <!-- FIXME_SKETCH_3D string name="Sketch3dNewDialog" translatable="false">page_todo.htm</string -->

@@ -30,6 +30,7 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.ItemButton;
 import com.topodroid.ui.MotionEventWrap;
+import com.topodroid.ui.PopupMode;
 // import com.topodroid.ui.IJoinClickHandler;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
@@ -951,18 +952,18 @@ public class SketchWindow extends ItemDrawer
    */
   private void setButtonEraseSize( int scale )
   {
-    mEraseScale = scale % Drawing.SCALE_MAX;
+    mEraseScale = scale % PopupMode.SCALE_MAX;
     // TDLog.v("SKETCH erase scale " + mEraseScale );
     switch ( mEraseScale ) {
-      case Drawing.SCALE_SMALL:
+      case PopupMode.SCALE_SMALL:
         mEraseSize = 0.75f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMsmall );
         break;
-      case Drawing.SCALE_MEDIUM:
+      case PopupMode.SCALE_MEDIUM:
         mEraseSize = 1.5f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMmedium );
         break;
-      case Drawing.SCALE_LARGE:
+      case PopupMode.SCALE_LARGE:
         mEraseSize = 3.0f * mTouchSlop; // TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMlarge );
         break;
@@ -982,18 +983,18 @@ public class SketchWindow extends ItemDrawer
    */
   private void setButtonSelectSize( int scale )
   {
-    mSelectScale = scale % Drawing.SCALE_MAX;
+    mSelectScale = scale % PopupMode.SCALE_MAX;
     // TDLog.v("SKETCH select scale " + mSelectScale );
     switch ( mSelectScale ) {
-      case Drawing.SCALE_SMALL:
+      case PopupMode.SCALE_SMALL:
         mSelectSize = 0.5f * mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_SIZE, mBMsmall );
         break;
-      case Drawing.SCALE_MEDIUM:
+      case PopupMode.SCALE_MEDIUM:
         mSelectSize = mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_SIZE, mBMmedium );
         break;
-      case Drawing.SCALE_LARGE:
+      case PopupMode.SCALE_LARGE:
         mSelectSize = 2.0f * mTouchSlop; // TDSetting.mSelectness;
         setButton3( BTN_SELECT_SIZE, mBMlarge );
         break;
@@ -1086,8 +1087,8 @@ public class SketchWindow extends ItemDrawer
     mBMdeleteOn  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OK] );
     mBMdeleteOff = MyButton.getButtonBackground( this, res, izons[IC_DELETE_NO] );
 
-    setButtonEraseSize( Drawing.SCALE_MEDIUM );
-    setButtonSelectSize( Drawing.SCALE_MEDIUM );
+    setButtonEraseSize( PopupMode.SCALE_MEDIUM );
+    setButtonSelectSize( PopupMode.SCALE_MEDIUM );
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mButtonView2 = new MyHorizontalButtonView( mButton2 );

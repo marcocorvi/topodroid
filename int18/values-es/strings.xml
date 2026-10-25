@@ -415,7 +415,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_value_required">Introducir valor</string>
     <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
     <string name="error_bad_name">Nombre de archivo modificado</string>
-    <string name="error_question">Por favor, escribe una pregunta</string>
+    <!-- UNUSED string name="error_question">Por favor, escribe una pregunta</string -->
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
@@ -1072,7 +1072,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Alias ​​de Bluetooth</string>
-    <string name="hint_api_key">Clave API</string>
+    <!-- UNUSED string name="hint_api_key">Clave API</string -->
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Codigo dispositivo</string>
     <string name="bt_alias_missing">Alias desconocido BT</string>
@@ -1360,9 +1360,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_diving_datamode">Modo de datos de inmersión</string>
     <string name="import_therion_path">Con ruta de topografía</string>
 
-    <string name="title_gemini">Introduce tu clave de API de IA</string>
-	<string name="title_ai_dialog">Asistente de IA</string>
-	<string name="title_ai_dialog_pref">Ayuda para configurar la IA</string>
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_audio_list">Registros de audio</string>
@@ -1548,8 +1545,6 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Seleccione idioma</string>
-  <string name="pref_gemini_title">Clave de IA</string>
-  <string name="pref_gemini_summary">Clave de API de Gemini</string>
   <string name="pref_orientation_title">Orientación de Pantalla</string>
   <string name="pref_orientation_summary">Orientación Pantalla App </string>
   <string name="pref_single_back_title">Respaldo Simple</string>
@@ -1964,8 +1959,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_linecurve_summary">Acción de segmento de línea suave/enderezado</string>
   <string name="pref_linestraight_title">Enderezar líneas</string>
   <string name="pref_linestraight_summary">Enderezar toda la acción de la línea</string>
-  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
-  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
+  <!-- UNUSED string name="pref_lineclip_title">Clip lines</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Enable line clipping to outline</string -->
   <string name="pref_path_multiselect_title">Ruta multiselección</string>
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>
   <!-- UNUSED string name="pref_composite_actions_title">Acciones compuestas</string -->
@@ -2606,11 +2601,11 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="help_light_3d">Panoramica y luz</string>
     <string name="help_projection_3d">Proyección 3D</string>
-    <string name="help_stations_3d">Estaciones</string>
-    <string name="help_splays_3d">Tomas</string>
+    <!-- UNUSED string name="help_stations_3d">Estaciones</string -->
+    <!-- UNUSED string name="help_splays_3d">Tomas</string -->
     <string name="help_walls_3d">Paredes</string>
-    <string name="help_surface_3d">superficie</string>
+    <!-- UNUSED string name="help_surface_3d">superficie</string -->
     <string name="help_color_3d">Colores</string>
-    <string name="help_frame_3d">Cuadrícula</string>
+    <!-- UNUSED string name="help_frame_3d">Cuadrícula</string -->
 
 </resources>

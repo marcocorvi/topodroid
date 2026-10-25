@@ -429,7 +429,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_value_required">Valeur nécessaire</string>
     <string name="error_bad_fixes">Corriger les points qui ne figurent pas dans le relevé</string>
     <string name="error_bad_name">Nom de fichier modifié</string>
-    <string name="error_question">Merci de saisir une question</string>
+    <!-- UNUSED string name="error_question">Merci de saisir une question</string -->
     
     <string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
     <!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->
@@ -1095,7 +1095,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="clino">Clino [deg]</string -->
     
     <string name="bt_alias_title">Alias Bluetooth</string>
-    <string name="hint_api_key">Clé API</string>
+    <!-- UNUSED string name="hint_api_key">Clé API</string -->
     <string name="hint_bt_alias">BT alias</string>
     <string name="hint_bt_code">Code de l\'appareil</string>
     <string name="bt_alias_missing">Alias BT manquant</string>
@@ -1387,9 +1387,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="import_diving_datamode">Mode de données plongée</string>
     <string name="import_therion_path">Avec chemin du relevé</string>
 
-    <string name="title_gemini">Entrer votre clé API IA</string>
-    <string name="title_ai_dialog">Aide IA</string>
-	 <string name="title_ai_dialog_pref">Aide configuration IA</string>
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_audio_list">Enregistrements audio</string>
@@ -1593,8 +1590,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="pref_locale_title">Langue</string>
     <string name="pref_locale_summary">Langue de l\'application</string>
-    <string name="pref_gemini_title">Clé IA</string>
-    <string name="pref_gemini_summary">Clé API Gemini</string>
     <string name="pref_orientation_title">Orientation écran</string>
     <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
     <string name="pref_single_back_title">Simple retour arrière</string>
@@ -2003,8 +1998,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="pref_linecurve_summary">Action de lissage ou de redressement des segments de ligne</string>
     <string name="pref_linestraight_title">Redresser ligne</string>
     <string name="pref_linestraight_summary">Action de redresser l\'ensemble de la ligne</string>
-  <!-- TODO string name="pref_lineclip_title">iClip lines</string -->
-  <!-- TODO string name="pref_lineclip_summary">Enable line clipping to outline</string -->
+  <!-- UNUSED string name="pref_lineclip_title">Clip lines</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Enable line clipping to outline</string -->
     <string name="pref_path_multiselect_title">Chemin multisélection</string>
     <string name="pref_path_multiselect_summary">Active le chemin de multisélection</string>
     <!-- UNUSED string name="pref_composite_actions_title">Actions multiples</string -->
@@ -2637,11 +2632,11 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
 
     <string name="help_light_3d">Panoramique et lumière</string>
     <string name="help_projection_3d">Projection 3D</string>
-    <string name="help_stations_3d">Stations</string>
-    <string name="help_splays_3d">Visées latérales d\'habillage</string>
+    <!-- UNUSED string name="help_stations_3d">Stations</string -->
+    <!-- UNUSED string name="help_splays_3d">Visées latérales d\'habillage</string -->
     <string name="help_walls_3d">Parois</string>
-    <string name="help_surface_3d">Terrain</string>
+    <!-- UNUSED string name="help_surface_3d">Terrain</string -->
     <string name="help_color_3d">Couleurs</string>
-    <string name="help_frame_3d">Cadre</string>
+    <!-- UNUSED string name="help_frame_3d">Cadre</string -->
    
 </resources>

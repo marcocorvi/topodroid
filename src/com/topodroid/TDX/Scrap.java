@@ -17,6 +17,7 @@ import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDFile;
 import com.topodroid.ui.TDGreenDot;
+import com.topodroid.ui.PopupMode;
 import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
 
@@ -659,7 +660,7 @@ public class Scrap
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
     synchronized ( TDPath.mSelectionLock ) {
-      mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null );
+      mSelection.selectAt( sel, x, y, erase_radius, PopupMode.FILTER_ALL, false, false, false, null );
     }
     // int ret = 0;
     if ( sel.size() > 0 ) {
@@ -667,7 +668,7 @@ public class Scrap
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
           if ( path.isLine() ) { // path  instanceof DrawingLinePath
-            if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_LINE ) {
+            if ( erase_mode == PopupMode.FILTER_ALL || erase_mode == PopupMode.FILTER_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
 	      if ( BrushManager.isLineSection( line.mLineType ) ) {
 		// do not erase section lines 2018-06-22
@@ -753,7 +754,7 @@ public class Scrap
               }
             }
           } else if ( path.isArea() ) { // path  instanceof DrawingAreaPath
-            if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_AREA ) {
+            if ( erase_mode == PopupMode.FILTER_ALL || erase_mode == PopupMode.FILTER_AREA ) {
               DrawingAreaPath area = (DrawingAreaPath)path;
               if ( area.size() <= 3 ) {
                 // TDLog.Log( TDLog.LOG_PLOT, remove_area );
@@ -772,7 +773,7 @@ public class Scrap
               }
             }
           } else if ( path.isPoint() ) { // path  instanceof DrawingPointPath
-            if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_POINT ) {
+            if ( erase_mode == PopupMode.FILTER_ALL || erase_mode == PopupMode.FILTER_POINT ) {
               // ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );

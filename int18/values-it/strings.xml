@@ -412,7 +412,7 @@
     <string name="error_value_required">Valore mancante</string>
     <string name="error_bad_fixes">Geo-punti non presenti nel rilievo</string>
     <string name="error_bad_name">Nome file modificato</string>
-    <string name="error_question">Scrivi una domanda</string>
+    <!-- UNUSED string name="error_question">Scrivi una domanda</string -->
     
     <string name="group_title">Assegna i gruppi ai dati calibrazione</string>
     <!-- UNUSED string name="group_policy_four">Metodo: gruppi di quattro</string -->
@@ -1062,7 +1062,7 @@
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
     <string name="bt_alias_title">Alias Bluetooth</string>
-    <string name="hint_api_key">API key</string>
+    <!-- UNUSED string name="hint_api_key">API key</string -->
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Codice Device</string>
     <string name="bt_alias_missing">Alias BT mancante</string>
@@ -1350,9 +1350,6 @@
     <string name="import_diving_datamode">Modo dati da immersione</string>
     <string name="import_therion_path">Con percorso del rilievo</string>
 
-    <string name="title_gemini">Inserisci la tua API key per IA</string>
-    <string name="title_ai_dialog">Assistente IA</string>
-    <string name="title_ai_dialog_pref">Guida alla configurazione IA</string>
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
     <string name="title_audio_list">Registrazioni audio</string>
@@ -1553,8 +1550,6 @@
 
   <string name="pref_locale_title">Lingua</string>
   <string name="pref_locale_summary">Lingua</string>
-  <string name="pref_gemini_title">IA key</string>
-  <string name="pref_gemini_summary">Gemini API key</string>
   <string name="pref_orientation_title">Orientazione display</string>
   <string name="pref_orientation_summary">Orientazione display</string>
   <string name="pref_single_back_title">Indietro singolo</string>
@@ -1956,8 +1951,8 @@
   <string name="pref_linecurve_summary">Azioni per aggiustare segmenti</string>
   <string name="pref_linestraight_title">Raddrizza linee</string>
   <string name="pref_linestraight_summary">Azione per raddrizzare una intera linea</string>
-  <string name="pref_lineclip_title">Linee iClip</string>
-  <string name="pref_lineclip_summary">Abilita ritaglio linea al profilo</string>
+  <!-- UNUSED string name="pref_lineclip_title">Linee iClip</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Abilita ritaglio linea al profilo</string -->
   <string name="pref_path_multiselect_title">Multiselezione</string>
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
   <!-- UNUSED string name="pref_composite_actions_title">Azioni composite</string -->
@@ -2572,11 +2567,11 @@
 
     <string name="help_light_3d">Panoramica e luce</string>
     <string name="help_projection_3d">Proiezione 3D</string>
-    <string name="help_stations_3d">Capisaldi</string>
-    <string name="help_splays_3d">Splay</string>
+    <!-- UNUSED string name="help_stations_3d">Capisaldi</string -->
+    <!-- UNUSED string name="help_splays_3d">Splay</string -->
     <string name="help_walls_3d">Pareti</string>
-    <string name="help_surface_3d">Terreno</string>
+    <!-- UNUSED string name="help_surface_3d">Terreno</string -->
     <string name="help_color_3d">Colori</string>
-    <string name="help_frame_3d">Cornice</string>
+    <!-- UNUSED string name="help_frame_3d">Cornice</string -->
 
 </resources>

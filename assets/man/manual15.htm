@@ -31,22 +31,25 @@ geo-referenced in the same coordinate system.
 <ul style="margin-top:0">
 <li><img style="border:1px solid black" width="36" height="36" src="btn_3d_turn.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_move.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_light.png"> <i>Mode</i>: either rotate the model or move the model or the light (if there is a DEM).  Two-finger always scale and translate the model.</li>
 <li><img style="border:1px solid black" width="36" height="36" src="btn_3d_orthogonal.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_perspective.png"> <i>View</i>: either orthographic or perspective.</li>
-<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_station_no_dot.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_station_point_dot.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_station_name_dot.png"> <i>Stations</i>: hide or show stations, as green points or names.</li>
-<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_splays_none.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_splays_line.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_splays_point.png"> <i>Splays</i>: hide or show splays, as segments or endpoints.</li>
-<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_wall_no.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_wall.png"> <i>Walls</i>: hide or show walls (if created).</li>
-<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_surface_off.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_surface_on.png"> <i>Surface</i>: hide or show surface DEM (if present).</li>
-<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_color.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_color_survey.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_color_depth.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_color_surface.png"> <i>Color</i>: midline color-coding: white, by-survey, denivelation, or depth below the surface.</li>
-<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_frame_grid.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_frame_axes.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_frame_no.png"> <i>Frame</i>: XY grid with vertical line, or XYZ axes, or none.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_mode.png">Display mode</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_color.png"><i>Color</i>: midline color-coding: white, by-survey, denivelation, or depth below the surface.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_polyline.png"><i>Leg display</i> dialog to select the types of legs to show</li>
 </ul><br>
-The button icons are adjusted to the state of the program.
 <br><p>
 
-A few buttons have long-tap actions:
+The display mode dialog allows to specify which items to display:
+<ul>
+<li><i>Stations</i> either as dots or names</li>
+<li><i>Splays</i> either as segments or endpoints</li>
+<li><i>Reference</i> frame: either as horizontal grid, or only axes, or hidden</li>
+<li><i>Walls</i></li>
+<li><i>Surface</i> DEM and texture</li>
+</ul>
+
+Two buttons have long-tap actions:
 <ul>
 <li><i>View</i>: Adjust the focal parameter of the perspective.</li>
-<li><i>Stations</i>: Toggle station selection on/off.</li>
 <li><i>Color</i>: Change the survey colors and select the surveys to show or hide. Up to Android-9 the station names are shown even when the survey is hidden.</li>
-<li><i>Frame</i>: Open the <i>leg dialog</i> (display of surface/duplicate/commented legs).</li>
 </ul>
 <br><p>
 

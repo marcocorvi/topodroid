@@ -144,7 +144,7 @@ public class SymbolLine extends Symbol
       mPath.moveTo(-PATH_WIDTH, 0 );
       mPath.lineTo( PATH_WIDTH, 0 );
     }
-    if ( TDSetting.mLineClip && ( mClippable != 0 ) ) {
+    if ( /* TDSetting.mLineClip && */ ( mClippable != 0 ) ) {
       mPath.moveTo( 16, -7 );
       mPath.lineTo( 15, -14 );
       mPath.moveTo( 12, -14 );

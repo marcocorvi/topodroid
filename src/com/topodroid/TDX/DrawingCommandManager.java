@@ -15,6 +15,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDMath;
 import com.topodroid.util.TDUtil;
 import com.topodroid.ui.TDGreenDot;
+import com.topodroid.ui.PopupMode;
 import com.topodroid.num.TDNum;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
@@ -558,7 +559,7 @@ public class DrawingCommandManager
    */
   public List< DrawingPath > getGrid100() { return mGridStack100; }
 
-  private int mSelectMode = Drawing.FILTER_ALL;
+  private int mSelectMode = PopupMode.FILTER_ALL;
   void setSelectMode( int mode ) { mSelectMode = mode; }
 
   // ------------------------------------------------------------
@@ -1754,24 +1755,24 @@ public class DrawingCommandManager
     boolean sstations = false;
 
     switch (mSelectMode) {
-      case Drawing.FILTER_ALL:
+      case PopupMode.FILTER_ALL:
         sshots = true;
         sstations = stations;
         spoints = slines = sareas = true;
         break;
-      case Drawing.FILTER_POINT:
+      case PopupMode.FILTER_POINT:
         spoints = true;
         break;
-      case Drawing.FILTER_LINE:
+      case PopupMode.FILTER_LINE:
         slines = true;
         break;
-      case Drawing.FILTER_AREA:
+      case PopupMode.FILTER_AREA:
         sareas = true;
         break;
-      case Drawing.FILTER_SHOT:
+      case PopupMode.FILTER_SHOT:
         sshots = true;
         break;
-      case Drawing.FILTER_STATION:
+      case PopupMode.FILTER_STATION:
         sstations = true;
         break;
     }

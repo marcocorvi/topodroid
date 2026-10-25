@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <!-- ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    -->
+<LinearLayout
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+    android:layout_below="@id/title"
+  >
+  <LinearLayout
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/margintiny"
+    >
+    <CheckBox android:id="@+id/cb_mode_station"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_station"
+    />
+    <CheckBox android:id="@+id/cb_mode_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_names"
+      android:layout_marginEnd="@dimen/margintiny"
+    />
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/margintiny"
+    >
+    <CheckBox android:id="@+id/cb_mode_splay"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_splay"
+    />
+    <CheckBox android:id="@+id/cb_mode_endpoint"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_endpoints"
+      android:layout_marginEnd="@dimen/margintiny"
+    />
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/margintiny"
+    >
+    <CheckBox android:id="@+id/cb_mode_ref"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_reference"
+    />
+    <CheckBox android:id="@+id/cb_mode_axes"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_axes"
+      android:layout_marginEnd="@dimen/margintiny"
+    />
+  </LinearLayout>
+  <CheckBox android:id="@+id/cb_mode_wall"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/mode_walls"
+  />
+  <CheckBox android:id="@+id/cb_mode_surface"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/mode_surface"
+  />
+  <CheckBox android:id="@+id/cb_mode_photo"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/mode_photo"
+  />
+   					  
+  <LinearLayout android:id="@+id/help"
+    style="@style/help_layout"
+    >
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+      android:layout_marginEnd="@dimen/marginh"
+    />
+    <Button android:id="@+id/btn_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginEnd="@dimen/marginh"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/btn_ok"
+          style="@style/button_default"
+          android:text="@string/button_ok"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+  </LinearLayout>
+  <!-- /ScrollView -->
+
+</RelativeLayout>

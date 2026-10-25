@@ -167,7 +167,8 @@ The <b>draw</b> mode has, besides the green buttons:
 <li><img src="btn_text.png"  width="36" border="1"> Insert a <i>text</i></li>
 <li><img src="btn_cont.png"  width="36" border="1"> Line <i>join</i> (only for line)</li>
 </ul><br><p>
-The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br>
+The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.
+For line and areas it shows also the drawing mode: normal, retracing, or clipping.<br>
 The <i>text</i> button allows to insert a point of type "label" without the dialog of the "label" point tools.<br>
 The line <i>join</i> is shown only for lines. When line-joining is active, a new line started and/or ended close to lines of the same group is joined to them.<br>
 The "Line-join" has no effect on lines that cannot be joined (e.g. "section" line or closed lines).<br><p>
@@ -211,7 +212,7 @@ graphically editable by sliding the finger across the display.  The button turns
 <li>In the extended profile view, a long tap on the <i>plan/profile</i> button flips the sketch [N].
 If the checkbox <I>Fix refs</i> of the reference dialog is not set, the "extend" of the shots is also reversed.</li>
 <li>For x-sections it toggles the display of splays that are off the section plane [T].</li>
-<li>A long tap on the <i>tools</i> button toggles retracing on/off (only for line and areas) [A]</li>
+<li>A long tap on the <i>tools</i> button cycles the mode: normal, retracing, clipping (only for line and areas) [A]</li>
 <li>A long tap on the <i>delete</i> button removes the selected point of a line or an area [N].</li>
 <!-- li>When the selected item is a "section" point, a long tap on the item <i>properties</i> button opens the x-section sketch [T].</li -->
 </ul><br><p>
@@ -271,7 +272,7 @@ The following actions are started with a long tap:
     <li><i>Style</i>: fine, normal, coarse, "splines" (interpolated-curve), simplified [normal]</li>
     <li><i>Close</i>: whether to close lines of "closed" type. [yes]</li>
     <li><i>Line-point spacing</i>: distance between line points in normal style [10 px] </li>
-    <li><i>Line-clipping</i>: clipping lines/areas to the outline [no] </li>
+    <!-- li><i>Line-clipping</i>: clipping lines/areas to the outline [no] </li -->
     <li>Section line <i>direction tick length</i>: size of the section line tick [5 px]</li>
     <li><i>Section points</i>: whether to add a "section" point automatically for "section" lines [yes]</li>
     <li>Area <i>border visibility</i> [on]</li>

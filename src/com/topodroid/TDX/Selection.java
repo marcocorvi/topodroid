@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.ui.PopupMode;
 import com.topodroid.prefs.TDSetting;
 
 // import java.util.LinkedList;
@@ -563,7 +564,7 @@ class Selection
   {
     // TDLog.v( "bucket select [2] at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     // TDLog.v( "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
-    if ( mode == Drawing.FILTER_ALL ) {
+    if ( mode == PopupMode.FILTER_ALL ) {
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
@@ -595,7 +596,7 @@ class Selection
           }
         }
       }
-    } else if ( mode == Drawing.FILTER_SHOT ) {
+    } else if ( mode == PopupMode.FILTER_SHOT ) {
       if ( ! (legs || splays) ) return;
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
@@ -607,7 +608,7 @@ class Selection
           }
         }
       }
-    } else if ( mode == Drawing.FILTER_STATION ) {
+    } else if ( mode == PopupMode.FILTER_STATION ) {
       if ( ! stations ) return;
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
@@ -621,9 +622,9 @@ class Selection
       }
     } else {
       int type = -0;
-      if ( mode == Drawing.FILTER_POINT ) { type = DrawingPath.DRAWING_PATH_POINT; }
-      else if ( mode == Drawing.FILTER_LINE ) { type = DrawingPath.DRAWING_PATH_LINE; }
-      else if ( mode == Drawing.FILTER_AREA ) { type = DrawingPath.DRAWING_PATH_AREA; }
+      if ( mode == PopupMode.FILTER_POINT ) { type = DrawingPath.DRAWING_PATH_POINT; }
+      else if ( mode == PopupMode.FILTER_LINE ) { type = DrawingPath.DRAWING_PATH_LINE; }
+      else if ( mode == PopupMode.FILTER_AREA ) { type = DrawingPath.DRAWING_PATH_AREA; }
       // TDLog.v("pt " + sp.mPoint.x + " " + sp.mPoint.y + " type " + type );
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {

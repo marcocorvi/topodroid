@@ -401,7 +401,7 @@
     <string name="error_value_required">Je vyžadována hodnota</string>
     <string name="error_bad_fixes">Pevné body nejsou součástí měření</string>
     <string name="error_bad_name">Název souboru byl upraven</string>
-    <string name="error_question">Zadejte prosím otázku</string>
+    <!-- UNUSED string name="error_question">Zadejte prosím otázku</string -->
 
     <string name="group_title">Skupiny kalibračních dat</string>
     <!-- UNUSED string name="group_policy_four">Policy: group by four</string -->
@@ -1034,7 +1034,7 @@
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Aliasy Bluetooth</string>
-    <string name="hint_api_key">API klíč</string>
+    <!-- UNUSED string name="hint_api_key">API klíč</string -->
     <string name="hint_bt_alias">Alias BT</string>
     <string name="hint_bt_code">Kód zařízení</string>
     <string name="bt_alias_missing">Chybí alias BT</string>
@@ -1303,9 +1303,6 @@
     <string name="import_diving_datamode">Potápěčský režim dat</string>
     <string name="import_therion_path">Měřické body s cestou měření (survey path)</string>
 
-    <string name="title_gemini">Zadejte svůj API klíč pro AI pomocníka</string>
-    <string name="title_ai_dialog">AI pomocník</string>
-    <string name="title_ai_dialog_pref">Nápověda pro konfiguraci AI</string>
     <string name="title_azimut">Referenční azimut rozvinutého profilu</string>
     <string name="title_audio">Audio komentář</string>
     <string name="title_audio_list">Audio nahrávky</string>
@@ -1493,8 +1490,6 @@
 
     <string name="pref_locale_title">Jazyk</string>
     <string name="pref_locale_summary">Jazyk aplikace</string>
-    <string name="pref_gemini_title">AI klíč</string>
-    <string name="pref_gemini_summary">API klíč pro Gemini AI</string>
     <string name="pref_orientation_title">Orientace obrazovky</string>
     <string name="pref_orientation_summary">Orientace obrazovky aplikace</string>
     <string name="pref_single_back_title">Ukončení jedním stisknutím Zpět</string>
@@ -1888,8 +1883,8 @@
     <string name="pref_linecurve_summary">Povolit funkci pro lokální vyhlazení nebo narovnání úseku linie</string>
     <string name="pref_linestraight_title">Narovnat celé linie</string>
     <string name="pref_linestraight_summary">Povolit funkci pro napřímení linie v celé její délce</string>
-    <string name="pref_lineclip_title">Oříznout linie</string>
-    <string name="pref_lineclip_summary">Povolit ořezávání linií podle obrysu</string>
+    <!-- UNUSED string name="pref_lineclip_title">Oříznout linie</string -->
+    <!-- UNUSED string name="pref_lineclip_summary">Povolit ořezávání linií podle obrysu</string -->
     <string name="pref_path_multiselect_title">Hromadný výběr cest</string>
     <string name="pref_path_multiselect_summary">Povolit nástroj pro vícenásobný výběr nakreslených křivek</string>
     <string name="pref_plane_interpolation_title">Proložení rovinou</string>
@@ -2290,11 +2285,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="help_wall_3d">3D model stěn</string>
     <string name="help_light_3d">Posun a osvětlení scény</string>
     <string name="help_projection_3d">Typ 3D projekce (perspektivní/ortografická)</string>
-    <string name="help_stations_3d">Zobrazení měřických bodů/dlouhé podržení aktivuje odměřování</string>
-    <string name="help_splays_3d">Zobrazení paprsků stěn (splays)</string>
+    <!-- UNUSED string name="help_stations_3d">Zobrazení měřických bodů/dlouhé podržení aktivuje odměřování</string -->
+    <!-- UNUSED string name="help_splays_3d">Zobrazení paprsků stěn (splays)</string -->
     <string name="help_walls_3d">Zobrazení rekonstruovaného modelu stěn</string>
-    <string name="help_surface_3d">Zobrazení terénu povrchu</string>
+    <!-- UNUSED string name="help_surface_3d">Zobrazení terénu povrchu</string -->
     <string name="help_color_3d">Barevná schémata modelu</string>
-    <string name="help_frame_3d">Zobrazení referenční mřížky a os</string>
+    <!-- UNUSED string name="help_frame_3d">Zobrazení referenční mřížky a os</string -->
    
 </resources>

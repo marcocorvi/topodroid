@@ -416,7 +416,7 @@
     <string name="error_value_required">Érték szükséges</string>
     <string name="error_bad_fixes">A fix pont nincs a mérésben</string>
     <string name="error_bad_name">Módosult fájlnév</string>
-    <string name="error_question">Írj be egy kérdést</string>
+    <!-- UNUSED string name="error_question">Írj be egy kérdést</string -->
     
     <string name="group_title">Kalibrációs adat csoportok</string>
     <!-- UNUSED string name="group_policy_four">Négyesével csoportosítva</string -->
@@ -1070,7 +1070,7 @@
     <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
     <string name="bt_alias_title">Bluetooth aliasok</string>
-    <string name="hint_api_key">API kulcs</string>
+    <!-- UNUSED string name="hint_api_key">API kulcs</string -->
     <string name="hint_bt_alias">BT alias</string>
     <string name="hint_bt_code">Műszer kód</string>
     <string name="bt_alias_missing">BT alias hiányzik</string>
@@ -1359,9 +1359,6 @@
     <string name="import_diving_datamode">Merülési adatmód</string>
     <string name="import_therion_path">Felmérési útvonallal</string>
 
-    <string name="title_gemini">Ird be a te MI API kulcsodat</string>
-    <string name="title_ai_dialog">MI súgó</string>
-    <string name="title_ai_dialog_pref">MI beállítás súgó</string>
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
@@ -1560,8 +1557,6 @@
 
   <string name="pref_locale_title">Nyelv</string>
   <string name="pref_locale_summary">Nyelv</string>
-  <string name="pref_gemini_title">MI kulcs</string>
-  <string name="pref_gemini_summary">Gemini API kulcs</string>
   <string name="pref_orientation_title">Képernyő irány</string>
   <string name="pref_orientation_summary">App képernyő irány</string>
   <string name="pref_single_back_title">Egy vissza</string>
@@ -1968,8 +1963,8 @@
   <string name="pref_linecurve_summary">Sima/Kiegyenesített vonal szakasz lehetőség</string>
   <string name="pref_linestraight_title">Kiegyenesített vonal</string>
   <string name="pref_linestraight_summary">Egyenesítse az egész vonalat</string>
-  <string name="pref_lineclip_title">Vonal/terület levágás</string>
-  <string name="pref_lineclip_summary">Vonal/terület vágás engedélyezése külső vonalnál</string>
+  <!-- UNUSED string name="pref_lineclip_title">Vonal/terület levágás</string -->
+  <!-- UNUSED string name="pref_lineclip_summary">Vonal/terület vágás engedélyezése külső vonalnál</string -->
   <string name="pref_path_multiselect_title">Útvonalas kiválasztás</string>
   <string name="pref_path_multiselect_summary">Útvonalas többes kiválasztás lehetőség</string>
   <!-- UNUSED string name="pref_composite_actions_title">Összetett lehetőség</string -->
@@ -2586,11 +2581,11 @@
 
     <string name="help_light_3d">Eltolás és fény</string>
     <string name="help_projection_3d">3D vetítés</string>
-    <string name="help_stations_3d">Mérési pontok</string>
-    <string name="help_splays_3d">Sünök</string>
+    <!-- UNUSED string name="help_stations_3d">Mérési pontok</string -->
+    <!-- UNUSED string name="help_splays_3d">Sünök</string -->
     <string name="help_walls_3d">Falak</string>
-    <string name="help_surface_3d">Terep</string>
+    <!-- UNUSED string name="help_surface_3d">Terep</string -->
     <string name="help_color_3d">Színek</string>
-    <string name="help_frame_3d">Keret</string>
+    <!-- UNUSED string name="help_frame_3d">Keret</string -->
 
 </resources>
