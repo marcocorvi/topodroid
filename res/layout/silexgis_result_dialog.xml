@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <LinearLayout
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
+    >
+
+    <TextView android:id="@+id/silexgis_result"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="@dimen/marginv"
+      />
+    <TextView android:id="@+id/silexgis_notes"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:textColor="@color/textdelete"
+      android:visibility="gone"
+      />
+    <TextView android:id="@+id/silexgis_link"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="@dimen/marginv"
+      android:textIsSelectable="true"
+      android:visibility="gone"
+      />
+    <TextView android:id="@+id/silexgis_pick"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/silexgis_artefact_pick"
+      android:visibility="gone"
+      />
+    <ListView android:id="@+id/silexgis_artefacts"
+      android:layout_width="match_parent"
+      android:layout_height="160dp"
+      android:visibility="gone"
+      />
+
+    <LinearLayout
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginv"
+      >
+      <Button android:id="@+id/button_browser"
+        style="@style/button_default"
+        android:text="@string/silexgis_open_browser"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_copy"
+        style="@style/button_default"
+        android:text="@string/button_copy"
+      />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      >
+      <Button android:id="@+id/button_download"
+        style="@style/button_default"
+        android:text="@string/button_download"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_cave3d"
+        style="@style/button_default"
+        android:text="@string/silexgis_open_cave3d"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/button_close"
+          style="@style/button_default"
+          android:text="@string/button_close"
+        />
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+
+</RelativeLayout>

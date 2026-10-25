@@ -36,6 +36,7 @@ import com.topodroid.TDX.DrawingWindow;
 import com.topodroid.TDX.DistoXStationName;
 import com.topodroid.TDX.StationPolicy;
 import com.topodroid.TDX.SurveyInfo;
+import com.topodroid.TDX.SilexGisClient;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.GlRenderer;
@@ -278,6 +279,21 @@ public class TDSetting
 
   public static boolean mPlyLRUD            = true; // HBPly
   public static boolean mPlyMinus           = false; // HBPly
+
+  public static String  mSilexGisUrl        = "";    // SilexGIS server base URL
+  public static String  mSilexGisKey        = "";    // SilexGIS personal access key - never exported
+  public static String  mSilexGisAccount    = "";    // SilexGIS account, as shown by the last successful test
+  public static boolean mSilexGisWithTh     = true;  // upload also th and th2
+  public static boolean mSilexGisWithSvx    = false; // upload also Survex
+  public static boolean mSilexGisWithDat    = false; // upload also Compass
+  public static boolean mSilexGisWithCsv    = false; // upload also CSV
+  public static boolean mSilexGisWithKml    = false; // upload also KML
+  public static boolean mSilexGisWithGpx    = false; // upload also GPX
+  public static boolean mSilexGisWithOut    = false; // upload also the other files of the survey "out" folder
+  public static boolean mSilexGisCompile    = true;  // ask the server to compile
+  public static String  mSilexGisOutputs    = "lox,3d,plan-pdf,extended-pdf"; // outputs asked to the server
+  public static String  mSilexGisVisibility = "cavingGroup"; // who may see a new cave: private, cavingGroup, authenticated, public
+  public static boolean mSilexGisPublicLink = true;  // ask for a public link to the results
   public static String  mSurvexEol          = "\n";
   public static boolean mSurvexSplay        = false; // splays with named TO
   public static boolean mSurvexLRUD         = false;
@@ -1376,6 +1392,23 @@ public class TDSetting
          mPlyLRUD  = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_PLY_LRUD
     ++k; mPlyMinus = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_PLY_MINUS
 
+    key = TDPrefKey.mExportSilexgis;
+    k = 0;
+         mSilexGisUrl       = prefs.getString(  key[k].key,      key[k].dflt ).trim(); // DISTOX_SILEXGIS_URL
+    ++k; mSilexGisKey       = prefs.getString(  key[k].key,      key[k].dflt ).trim(); // DISTOX_SILEXGIS_KEY
+    ++k; mSilexGisAccount   = prefs.getString(  key[k].key,      key[k].dflt );        // DISTOX_SILEXGIS_ACCOUNT
+    ++k; mSilexGisWithTh    = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_TH
+    ++k; mSilexGisWithSvx   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_SVX
+    ++k; mSilexGisWithDat   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_DAT
+    ++k; mSilexGisWithCsv   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_CSV
+    ++k; mSilexGisWithKml   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_KML
+    ++k; mSilexGisWithGpx   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_GPX
+    ++k; mSilexGisWithOut   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_WITH_OUT
+    ++k; mSilexGisCompile   = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_COMPILE
+    ++k; mSilexGisOutputs   = silexGisOutputs( prefs.getString( key[k].key, key[k].dflt ), key[k].dflt ); // DISTOX_SILEXGIS_OUTPUTS
+    ++k; mSilexGisVisibility = prefs.getString( key[k].key,      key[k].dflt );        // DISTOX_SILEXGIS_VISIBILITY
+    ++k; mSilexGisPublicLink = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_SILEXGIS_PUBLIC_LINK
+
     key = TDPrefKey.mExportTh;
     k = 0;
          mTherionWithConfig = prefs.getBoolean( key[k].key, bool(key[k].dflt) ); // DISTOX_THERION_CONFIG
@@ -1691,6 +1724,7 @@ public class TDSetting
       case TDPrefCat.PREF_CATEGORY_CSX:    return updatePrefCsx( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SVG:    return updatePrefSvg( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_PLY:    return updatePrefPly( hlp, k, v );
+      case TDPrefCat.PREF_CATEGORY_SILEXGIS: return updatePrefSilexgis( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SHP:    return updatePrefShp( hlp, k, v );
       // case TDPrefCat.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v ); // NO_PNG
@@ -2548,6 +2582,94 @@ public class TDSetting
     }
     return null;
   }
+
+  private static String updatePrefSilexgis( TDPrefHelper hlp, String k, String v ) 
+  { 
+    TDPrefKey[] key = TDPrefKey.mExportSilexgis;
+    String ret = null;
+    if ( k.equals( key[ 0].key ) ) {        // DISTOX_SILEXGIS_URL
+      String url = ( v == null )? "" : v.trim();
+      if ( ! url.equals( mSilexGisUrl ) ) setSilexGisAccount( "" ); // the account was found on the old server
+      mSilexGisUrl = tryStringValue( hlp, k, url, key[ 0].dflt );
+      if ( ! mSilexGisUrl.equals( v ) ) ret = mSilexGisUrl;
+    } else if ( k.equals( key[ 1].key ) ) { // DISTOX_SILEXGIS_KEY
+      String sgx = ( v == null )? "" : v.trim();
+      if ( ! sgx.equals( mSilexGisKey ) ) setSilexGisAccount( "" ); // the account belongs to the old key
+      mSilexGisKey = tryStringValue( hlp, k, sgx, key[ 1].dflt );
+      if ( ! mSilexGisKey.equals( v ) ) ret = mSilexGisKey;
+    } else if ( k.equals( key[ 3].key ) ) { // DISTOX_SILEXGIS_WITH_TH
+      mSilexGisWithTh  = tryBooleanValue( hlp, k, v, bool(key[ 3].dflt) );
+    } else if ( k.equals( key[ 4].key ) ) { // DISTOX_SILEXGIS_WITH_SVX
+      mSilexGisWithSvx = tryBooleanValue( hlp, k, v, bool(key[ 4].dflt) );
+    } else if ( k.equals( key[ 5].key ) ) { // DISTOX_SILEXGIS_WITH_DAT
+      mSilexGisWithDat = tryBooleanValue( hlp, k, v, bool(key[ 5].dflt) );
+    } else if ( k.equals( key[ 6].key ) ) { // DISTOX_SILEXGIS_WITH_CSV
+      mSilexGisWithCsv = tryBooleanValue( hlp, k, v, bool(key[ 6].dflt) );
+    } else if ( k.equals( key[ 7].key ) ) { // DISTOX_SILEXGIS_WITH_KML
+      mSilexGisWithKml = tryBooleanValue( hlp, k, v, bool(key[ 7].dflt) );
+    } else if ( k.equals( key[ 8].key ) ) { // DISTOX_SILEXGIS_WITH_GPX
+      mSilexGisWithGpx = tryBooleanValue( hlp, k, v, bool(key[ 8].dflt) );
+    } else if ( k.equals( key[ 9].key ) ) { // DISTOX_SILEXGIS_WITH_OUT
+      mSilexGisWithOut = tryBooleanValue( hlp, k, v, bool(key[ 9].dflt) );
+    } else if ( k.equals( key[10].key ) ) { // DISTOX_SILEXGIS_COMPILE
+      mSilexGisCompile = tryBooleanValue( hlp, k, v, bool(key[10].dflt) );
+    } else if ( k.equals( key[11].key ) ) { // DISTOX_SILEXGIS_OUTPUTS
+      mSilexGisOutputs = tryStringValue( hlp, k, silexGisOutputs( v, key[11].dflt ), key[11].dflt );
+      if ( ! mSilexGisOutputs.equals( v ) ) ret = mSilexGisOutputs;
+    } else if ( k.equals( key[12].key ) ) { // DISTOX_SILEXGIS_VISIBILITY (choice)
+      mSilexGisVisibility = tryStringValue( hlp, k, v, key[12].dflt );
+    } else if ( k.equals( key[13].key ) ) { // DISTOX_SILEXGIS_PUBLIC_LINK
+      mSilexGisPublicLink = tryBooleanValue( hlp, k, v, bool(key[13].dflt) );
+    } else {
+      TDLog.e("missing EXPORT SILEXGIS key: " + k );
+    }
+    return ret;
+  }
+
+  /** @return the SilexGIS outputs list, lowercase, comma separated, without blanks
+   * @param v     input list (separated by commas or spaces)
+   * @param dflt  default list, used if the input has no names
+   */
+  private static String silexGisOutputs( String v, String dflt )
+  {
+    if ( v == null ) return dflt;
+    StringBuilder sb = new StringBuilder();
+    for ( String name : v.split("[,\\s]+") ) {
+      if ( name.isEmpty() ) continue;
+      if ( sb.length() > 0 ) sb.append(",");
+      sb.append( name.toLowerCase( Locale.US ) );
+    }
+    return ( sb.length() == 0 )? dflt : sb.toString();
+  }
+
+  /** set the SilexGIS server URL and access key
+   * @param url   server base URL
+   * @param key   personal access key
+   * @note the account label is cleared if the URL or the key changes
+   */
+  public static void setSilexGisAccess( String url, String key )
+  {
+    url = ( url == null )? "" : url.trim();
+    key = ( key == null )? "" : key.trim();
+    if ( ! key.equals( mSilexGisKey ) || ! url.equals( mSilexGisUrl ) ) setSilexGisAccount( "" );
+    mSilexGisUrl = url;
+    mSilexGisKey = key;
+    TDPrefHelper.update( "DISTOX_SILEXGIS_URL", mSilexGisUrl, "DISTOX_SILEXGIS_KEY", mSilexGisKey );
+  }
+
+  /** set the SilexGIS account label, shown in the settings
+   * @param account  account label (empty if the access has not been tested)
+   */
+  public static void setSilexGisAccount( String account )
+  {
+    mSilexGisAccount = ( account == null )? "" : account;
+    TDPrefHelper.update( "DISTOX_SILEXGIS_ACCOUNT", mSilexGisAccount );
+  }
+
+  /** @return the SilexGIS access key masked for display: its prefix (first 12 characters) followed by an ellipsis
+   * @param key   access key
+   */
+  public static String maskSilexGisKey( String key ) { return SilexGisClient.maskKey( key ); }
 
   private static String updatePrefTh( TDPrefHelper hlp, String k, String v )
   {
@@ -3602,6 +3724,7 @@ public class TDSetting
           if ( TDPrefKey.repeatedKey( j, k ) ) continue;
           TDPrefKey kay = TDPrefKey.getKey( j, k );
           // if ( kay != null && kay.key.equals("DISTOX_GEMINI") ) continue;  // really make sure API_key not exported
+          if ( kay != null && TDPrefKey.isSecret( kay.key ) ) continue;  // really make sure the SilexGIS access key is not exported
           if ( ( flag & (1<<kay.group) ) != 0 ) {
             String val;
             boolean bval;
@@ -3626,6 +3749,7 @@ public class TDSetting
                 break;
               case TDPrefKey.STR:
                 val = prefs.getString( kay.key, kay.dflt );
+                if ( ( val == null || val.isEmpty() ) && kay.key.startsWith("DISTOX_SILEXGIS_") ) break; // an empty value would make a line without value, which the import cannot read
                 pw.printf(Locale.US, "S %s %s\n", kay.key, val );
                 // ++cnt;
                 break;
@@ -4089,6 +4213,9 @@ B DISTOX_SAP5_BIT16_BUG true
             // case "DISTOX_GEMINI":
             //   /* Gemini API key is not imported */
             //   break;
+            case "DISTOX_SILEXGIS_KEY":
+              /* SilexGIS access key is not imported */
+              break;
             // case "DISTOX_LOCAL_MAN":
             //   setPreference( editor, kay, mLocalManPages );
             //   break;
@@ -4305,6 +4432,43 @@ B DISTOX_SAP5_BIT16_BUG true
               break;
             case "DISTOX_PLY_MINUS":
               mPlyMinus = Boolean.parseBoolean( value ); setPreference( editor, kay, mPlyMinus );
+              break;
+            case "DISTOX_SILEXGIS_URL":
+              if ( ! value.equals( mSilexGisUrl ) ) { mSilexGisAccount = ""; setPreference( editor, "DISTOX_SILEXGIS_ACCOUNT", mSilexGisAccount ); } // the account was found on the old server
+              mSilexGisUrl = value; setPreference( editor, kay, mSilexGisUrl );
+              break;
+            case "DISTOX_SILEXGIS_WITH_TH":
+              mSilexGisWithTh  = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithTh );
+              break;
+            case "DISTOX_SILEXGIS_WITH_SVX":
+              mSilexGisWithSvx = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithSvx );
+              break;
+            case "DISTOX_SILEXGIS_WITH_DAT":
+              mSilexGisWithDat = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithDat );
+              break;
+            case "DISTOX_SILEXGIS_WITH_CSV":
+              mSilexGisWithCsv = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithCsv );
+              break;
+            case "DISTOX_SILEXGIS_WITH_KML":
+              mSilexGisWithKml = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithKml );
+              break;
+            case "DISTOX_SILEXGIS_WITH_GPX":
+              mSilexGisWithGpx = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithGpx );
+              break;
+            case "DISTOX_SILEXGIS_WITH_OUT":
+              mSilexGisWithOut = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisWithOut );
+              break;
+            case "DISTOX_SILEXGIS_COMPILE":
+              mSilexGisCompile = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisCompile );
+              break;
+            case "DISTOX_SILEXGIS_OUTPUTS": // the commas have been removed from vals: take the value from the line
+              mSilexGisOutputs = silexGisOutputs( line.trim().split("\\s+")[2], mSilexGisOutputs ); setPreference( editor, kay, mSilexGisOutputs );
+              break;
+            case "DISTOX_SILEXGIS_VISIBILITY":
+              mSilexGisVisibility = value; setPreference( editor, kay, mSilexGisVisibility );
+              break;
+            case "DISTOX_SILEXGIS_PUBLIC_LINK":
+              mSilexGisPublicLink = Boolean.parseBoolean( value ); setPreference( editor, kay, mSilexGisPublicLink );
               break;
             case "DISTOX_SWAP_LR":
               mSwapLR = Boolean.parseBoolean( value ); setPreference( editor, kay, mSwapLR );

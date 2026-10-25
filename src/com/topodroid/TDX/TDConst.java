@@ -63,6 +63,8 @@ public class TDConst
   // public static final int SURVEY_FORMAT_PNM     = 37; // NO_PNM
   public static final int SURVEY_FORMAT_TEXT    = 38; // TEXT_PLAIN
 
+  public static final int SURVEY_FORMAT_SILEXGIS = 39; // upload to a SilexGIS server (no file of its own)
+
   private static int getIndexFromFilename( String filename ) 
   {
     int pos = filename.lastIndexOf('.');
@@ -315,6 +317,7 @@ public class TDConst
   public final static int SURVEY_POS_GPX       = 14;
   // public final static int SURVEY_POS_GEOJSON  = 16;
   public final static int SURVEY_POS_SHAPEFILE = 15;
+  public final static int SURVEY_POS_SILEXGIS  = 16; // upload, not a file format: listed only by surveyExportTypes( with_geo, true )
 
 
   public static boolean[] mSurveyExportEnable = { true, // "ZIP", 
@@ -338,6 +341,7 @@ public class TDConst
     false, // "GPX",
     // false, // "GeoJSON",
     false, // "Shapefile",
+    true,  // "SilexGIS",   // 16
   };
 
   final static int NR_EXPORT_DATA        = 16;
@@ -346,11 +350,20 @@ public class TDConst
   /** @return the array of enabled export types
    * @param with_geo  whether to include geo-types
    */
-  public static String[] surveyExportTypes( boolean with_geo )
+  public static String[] surveyExportTypes( boolean with_geo ) { return surveyExportTypes( with_geo, false ); }
+
+  /** @return the array of enabled export types
+   * @param with_geo     whether to include geo-types
+   * @param with_upload  whether to include the uploads to a server (SilexGIS), for the export of the current survey
+   * @note the upload is listed from the normal level on
+   */
+  public static String[] surveyExportTypes( boolean with_geo, boolean with_upload )
   {
     int nr = 0;
     int kk = with_geo? NR_EXPORT_DATA : NR_EXPORT_DATA_NO_GEO;
+    boolean upload = with_upload && TDLevel.overBasic && mSurveyExportEnable[ SURVEY_POS_SILEXGIS ];
     for ( int k = 0; k < kk; ++k ) if ( mSurveyExportEnable[k] ) ++ nr;
+    if ( upload ) ++ nr;
     String[] ret = new String[nr];
     int n = 0;
     for ( int k = 0; k < kk; ++k ) {
@@ -358,8 +371,21 @@ public class TDConst
         ret[n ++] = mSurveyExportTypes[k];
       }
     }
+    if ( upload ) ret[n ++] = mSurveyExportTypes[ SURVEY_POS_SILEXGIS ];
     assert( n == nr );
     return ret;
+  }
+
+  /** @return the index of an export type in the array of export types, -1 if not found
+   * @param type   export type
+   * @note the enabled export list can skip the geo-types before the upload, so a position in it is not counted
+   */
+  public static int surveyPosition( String type )
+  {
+    for ( int k = 0; k < mSurveyExportTypes.length; ++k ) {
+      if ( mSurveyExportTypes[k].equals( type ) ) return k;
+    }
+    return -1;
   }
 
   /** @return the array export index from the position of the enabled export list
@@ -400,6 +426,7 @@ public class TDConst
     "GPX",        // 15
     // "GeoJSON",
     "Shapefile",  // 16
+    "SilexGIS",   // upload
   };
 
   public static final String[] mSurveyExportTypesNoGeo = { "ZIP", 
@@ -417,12 +444,13 @@ public class TDConst
     "Walls", 
     "WinKarst",
     "CSV",
-    "DXF"
+    "DXF",
     // "KML",
     // // "OziExplorer",
     // "GPX",
     // // "GeoJSON",
     // "Shapefile"
+    "SilexGIS"
   };
 
   static final int[] mSurveyExportIndex = {
@@ -446,7 +474,8 @@ public class TDConst
     // SURVEY_FORMAT_PLT,
     SURVEY_FORMAT_GPX,
     // SURVEY_FORMAT_JSON,
-    SURVEY_FORMAT_SHP
+    SURVEY_FORMAT_SHP,
+    SURVEY_FORMAT_SILEXGIS
   };
 
   /** return the survey export name (null if illegal type)
@@ -478,6 +507,7 @@ public class TDConst
       case SURVEY_POS_GPX:       return survey + TDPath.GPX;
       // case SURVEY_POS_GEOJSON:   return survey + ".json";
       case SURVEY_POS_SHAPEFILE: return survey + TDPath.SHZ; // 15
+      case SURVEY_POS_SILEXGIS:  return survey; // the upload names its own files
       case SURVEY_POS_VTOPOX:    return survey + TDPath.TROX; // -9
     }
     return null;
@@ -651,5 +681,6 @@ public class TDConst
   public static final int NUMBER_SIGNED          = NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;
   public static final int NUMBER_DECIMAL_SIGNED  = NUMBER_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
   public static final int TEXT                   = InputType.TYPE_CLASS_TEXT;
+  public static final int TEXT_PASSWORD          = TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
 }

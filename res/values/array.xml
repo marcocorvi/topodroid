@@ -144,6 +144,19 @@
      <item name="tab">2</item>
   </string-array>
 
+  <string-array name="silexgisVisibility" translatable="false">
+     <item name="private">@string/silexgis_visibility_private</item>
+     <item name="cavingGroup">@string/silexgis_visibility_club</item>
+     <item name="authenticated">@string/silexgis_visibility_authenticated</item>
+     <item name="public">@string/silexgis_visibility_public</item>
+  </string-array>
+  <string-array name="silexgisVisibilityValue" translatable="false">
+     <item name="private">private</item>
+     <item name="cavingGroup">cavingGroup</item>
+     <item name="authenticated">authenticated</item>
+     <item name="public">public</item>
+  </string-array>
+
   <!-- UNUSED string-array name="lineContinue">
      <item name="none">none</item>
      <item name="start">join with start point</item>

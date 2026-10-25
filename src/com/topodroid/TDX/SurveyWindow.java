@@ -837,7 +837,7 @@ public class SurveyWindow extends MyActivity
       super.onBackPressed(); // issue 167
     } else if ( p++ == pos ) { // EXPORT
       boolean diving = (mDatamode == SurveyInfo.DATAMODE_DIVING );
-      String[] types = TDConst.surveyExportTypes( mApp_mData.hasFixed( TDInstance.sid, TDStatus.NORMAL) );
+      String[] types = TDConst.surveyExportTypes( mApp_mData.hasFixed( TDInstance.sid, TDStatus.NORMAL), true ); // with_upload = true
       new ExportDialogShot( mActivity, this, types, R.string.title_survey_export, TDInstance.survey, null, diving, true ).show(); // with_name = true
     } else if ( TDLevel.overExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();

@@ -476,6 +476,105 @@
       / -->
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout_silexgis"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <TextView
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_target_label"
+      />
+    <Button android:id="@+id/silexgis_target"
+      style="@style/button_default"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/margintiny"
+      />
+    <CheckBox android:id="@+id/silexgis_with_th"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_pref_with_th_title"
+      />
+    <CheckBox android:id="@+id/silexgis_compile"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_pref_compile_title"
+      />
+    <LinearLayout android:id="@+id/silexgis_advanced"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="vertical" 
+      >
+      <TextView
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/silexgis_pref_outputs_title"
+        />
+      <EditText android:id="@+id/silexgis_outputs"
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:hint="@string/silexgis_outputs_default"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        />
+      <CheckBox android:id="@+id/silexgis_with_svx"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/silexgis_pref_with_svx_title"
+        />
+      <CheckBox android:id="@+id/silexgis_with_dat"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/silexgis_pref_with_dat_title"
+        />
+      <CheckBox android:id="@+id/silexgis_with_csv"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/silexgis_pref_with_csv_title"
+        />
+      <CheckBox android:id="@+id/silexgis_with_kml"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/silexgis_pref_with_kml_title"
+        />
+      <CheckBox android:id="@+id/silexgis_with_gpx"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/silexgis_pref_with_gpx_title"
+        />
+    </LinearLayout>
+    <CheckBox android:id="@+id/silexgis_with_out"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_pref_with_out_title"
+      />
+    <TextView
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_pref_visibility_title"
+      />
+    <Spinner android:id="@+id/silexgis_visibility"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawSelectorOnTop="true"
+      />
+    <CheckBox android:id="@+id/silexgis_public_link"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_pref_public_link_title"
+      android:visibility="gone"
+      />
+    <TextView
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/silexgis_pref_public_link_summary"
+      />
+  </LinearLayout>
+
   <CheckBox android:id="@+id/export_share"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

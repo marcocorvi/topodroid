@@ -337,6 +337,7 @@ public class TopoGL extends MyActivity
   private String mSurveyBase   = null; // TopoDroid CWD fullpath
   private String mSurveyName   = null; 
   private String mThconfigName = null; 
+  private String mInputFile    = null; // full pathname of a model file to open (lox, 3d, ...)
 
   /** handle extra parameters
    * @note when called, FeatureChecker.checkPermissions( this ) >= 0
@@ -356,6 +357,10 @@ public class TopoGL extends MyActivity
 
     if ( mHasExtra ) {
       // if ( mVersionCheck >= 0 ) {
+        if ( mInputFile != null ) { // open a model file as from the file chooser
+          mFileDialog = false;
+          importSurvey( Uri.fromFile( new File( mInputFile ) ) );
+        } else
         if ( mSurveyBase != null && mSurveyBase.length() > 0 ) {
           // TDLog.v("Survey mSurveyBase <" + mSurveyBase + ">" );
           // Cave3DFile.setTopoDroidPaths( mSurveyBase ); // BLUETOOTH
@@ -487,6 +492,7 @@ public class TopoGL extends MyActivity
         mSurveyBase   = extras.getString( "SURVEY_BASE" ); // TopoDroid CWD fullpath
         mThconfigName = extras.getString( "INPUT_THCONFIG" );  // thconfig
         mSurveyName   = extras.getString( "INPUT_SURVEY" );
+        mInputFile    = extras.getString( "INPUT_FILE" );    // model file, e.g. downloaded from a SilexGIS server
         // TDLog.v("3D extras: base " + mSurveyBase + " survey " + mSurveyName + " config " + mThconfigName );
       // }
     }
