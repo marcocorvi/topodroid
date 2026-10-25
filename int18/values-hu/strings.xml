@@ -183,7 +183,7 @@
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
     <string name="using_a">%1$s használata</string>
-    <string name="using_b">Váltás %1$s</string>
+    <string name="using_b">Alternatív: %1$s</string>
     <string name="cali_err">hiba: átlag %1$.2f&#xb0;, stddev %2$.2f&#xb0;. max. %3$.2f&#xb0;</string>
     <string name="cali_time">Kalibráció: %1$s</string>
     <string name="calib_error">Átlagos hiba: %1$.2f &#xb0; (BH delta %2$.3f)</string>
@@ -291,7 +291,7 @@
 
     <!-- UNUSED string name="import_wait">Fájl importálása &#8230; kérjük várjál &#8230;</string -->
     <string name="import_already">A felmérés már importálva</string>
-    <!-- TODO string name="import_partial">Partial file import</string -->
+    <string name="import_partial">Részleges fájl import</string>
     <string name="import_bad">Hibás importálható fájl</string>
     <string name="import_none">Nincs importálható fájl</string>
     <string name="import_failed">Fájl importálása nem sikerült</string>
@@ -527,7 +527,7 @@
     <string name="menu_device">MŰSZER</string>
     <string name="menu_device_add">MŰSZER HOZZÁADÁSA</string>
     <string name="menu_export">EXPORTÁLÁS</string>
-	<string name="menu_bulkops">CSOPORTOS MŰV.</string>
+	<string name="menu_bulkops">CSOPORTOS MŰVELETEK</string>
     <string name="menu_exit">KILÉP</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GNSS APP</string>
@@ -660,7 +660,7 @@
     <string name="plot_start">Vázlat kezdőpontja</string>
     <string name="plot_no_backups">Nincs mentett vázlat</string>
     <!-- UNUSED string name="plot_view">Megtekintett pont</string -->
-        <string name="read_fail_with_code">Olvasási hiba: hiba kód </string>
+    <string name="read_fail_with_code">Olvasási hiba: hiba kód </string>
     <string name="read_failed">DistoX kiolvasása nem sikerült</string>
 	<string name="swap_hotbit_ok">Kicserélt első bit</string>
     <!-- UNUSED string name="reading_file_failed">Hibás fájl olvasás</string -->
