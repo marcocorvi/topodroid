@@ -62,6 +62,7 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
   private final SilexGisClient mClient;
   private final SilexGisProgressDialog mDialog;
   private final ArrayList< String > mNotes = new ArrayList<>();
+  private boolean mSketchesBehind = false; // a sketch has no Therion export, or an old one
   private volatile boolean mCancelled = false;
   private String mStepText = null;
   private int mPercent = -1;
@@ -230,6 +231,7 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     SilexGisUploader uploader = new SilexGisUploader( mClient, null );
     onStep( SilexGisUploader.STEP_CONNECT, null, 0, 0 );
     SilexGisUploader.Outcome refused = uploader.check( mUpload );
+    getStore( mContext ).saveAccountAudience( SilexGisUploader.accountLinkAudience( uploader.capabilities() ) ); // the default of the next upload
     if ( refused != null ) return refused;
 
     // the ordinary survey archive
@@ -256,9 +258,11 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
           files.add( th2_name, th2, SilexGisFiles.ROLE_TH2 );
           if ( tdr.lastModified() > th2.lastModified() + SKETCH_MARGIN ) {
             mNotes.add( String.format( mRes.getString( R.string.silexgis_sketch_old ), plot.name ) );
+            mSketchesBehind = true;
           }
         } else {
           all_sketches = false;
+          mSketchesBehind = true;
           mNotes.add( String.format( mRes.getString( R.string.silexgis_sketch_missing ), plot.name ) );
         }
       }
@@ -475,7 +479,7 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
       if ( notes.length() > 0 ) notes.append( "\n" );
       notes.append( note );
     }
-    (new SilexGisResultDialog( mContext, mClient, out, notes.toString() )).show();
+    (new SilexGisResultDialog( mContext, mClient, out, notes.toString(), mSketchesBehind, mUpload.linkAudience )).show();
     if ( out.kind == SilexGisUploader.KEY_REFUSED ) SilexGisSettingsDialog.showKeyRefused( mContext, null ); // over the result: the upload is not sent again
   }
 

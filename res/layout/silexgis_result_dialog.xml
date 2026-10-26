@@ -26,6 +26,22 @@
       android:textColor="@color/textdelete"
       android:visibility="gone"
       />
+    <LinearLayout android:id="@+id/silexgis_auto_th2"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:visibility="gone"
+      >
+      <TextView android:id="@+id/silexgis_auto_th2_text"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/margintiny"
+        />
+      <Button android:id="@+id/button_auto_th2"
+        style="@style/button_default"
+        android:text="@string/silexgis_auto_th2_button"
+      />
+    </LinearLayout>
     <TextView android:id="@+id/silexgis_link"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content" 
@@ -33,6 +49,31 @@
       android:textIsSelectable="true"
       android:visibility="gone"
       />
+    <TextView android:id="@+id/silexgis_link_note"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:visibility="gone"
+      />
+    <LinearLayout android:id="@+id/silexgis_link_edit"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/margintiny"
+      android:visibility="gone"
+      >
+      <Spinner android:id="@+id/silexgis_link_audience"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        />
+      <Button android:id="@+id/button_link_make"
+        style="@style/button_default"
+        android:text="@string/silexgis_link_make"
+        android:layout_marginStart="@dimen/marginh"
+      />
+    </LinearLayout>
     <TextView android:id="@+id/silexgis_pick"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content" 
@@ -60,6 +101,12 @@
       <Button android:id="@+id/button_copy"
         style="@style/button_default"
         android:text="@string/button_copy"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_link_withdraw"
+        style="@style/button_default"
+        android:text="@string/silexgis_link_withdraw"
+        android:visibility="gone"
       />
     </LinearLayout>
 

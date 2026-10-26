@@ -584,7 +584,7 @@ public class ExportDialogShot extends MyDialog
           mSilexgisUpload.withKml    = ((CheckBox) findViewById( R.id.silexgis_with_kml )).isChecked();
           mSilexgisUpload.withGpx    = ((CheckBox) findViewById( R.id.silexgis_with_gpx )).isChecked();
           mSilexgisUpload.withOut    = ((CheckBox) findViewById( R.id.silexgis_with_out )).isChecked();
-          mSilexgisUpload.publicLink = ((CheckBox) findViewById( R.id.silexgis_public_link )).isChecked();
+          mSilexgisUpload.setLinkChoice( ((Spinner) findViewById( R.id.silexgis_link )).getSelectedItemPosition() );
           mSilexgisUpload.outputs = ((EditText) findViewById( R.id.silexgis_outputs )).getText().toString().trim(); // empty: the server default
           int vis = ((Spinner) findViewById( R.id.silexgis_visibility )).getSelectedItemPosition();
           if ( vis >= 0 && vis < SilexGisUpload.VISIBILITIES.length ) mSilexgisUpload.visibility = SilexGisUpload.VISIBILITIES[ vis ];
@@ -643,7 +643,9 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.silexgis_with_kml )).setChecked( mSilexgisUpload.withKml );
     ((CheckBox) findViewById( R.id.silexgis_with_gpx )).setChecked( mSilexgisUpload.withGpx );
     ((CheckBox) findViewById( R.id.silexgis_with_out )).setChecked( mSilexgisUpload.withOut );
-    ((CheckBox) findViewById( R.id.silexgis_public_link )).setChecked( mSilexgisUpload.publicLink );
+    Spinner link = (Spinner) findViewById( R.id.silexgis_link );
+    link.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisLinkChoice ) ) );
+    link.setSelection( mSilexgisUpload.linkChoice() );
     ((EditText) findViewById( R.id.silexgis_outputs )).setText( mSilexgisUpload.outputs );
     Spinner vis = (Spinner) findViewById( R.id.silexgis_visibility );
     vis.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisVisibility ) ) );

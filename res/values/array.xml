@@ -150,6 +150,15 @@
      <item name="authenticated">@string/silexgis_visibility_authenticated</item>
      <item name="public">@string/silexgis_visibility_public</item>
   </string-array>
+  <string-array name="silexgisLinkChoice" translatable="false">
+     <item name="none">@string/silexgis_link_choice_none</item>
+     <item name="public">@string/silexgis_link_choice_public</item>
+     <item name="organization">@string/silexgis_link_choice_organization</item>
+  </string-array>
+  <string-array name="silexgisLinkAudience" translatable="false">
+     <item name="public">@string/silexgis_link_choice_public</item>
+     <item name="organization">@string/silexgis_link_choice_organization</item>
+  </string-array>
   <string-array name="silexgisVisibilityValue" translatable="false">
      <item name="private">private</item>
      <item name="cavingGroup">cavingGroup</item>

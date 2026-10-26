@@ -355,13 +355,13 @@ public class TDConst
   /** @return the array of enabled export types
    * @param with_geo     whether to include geo-types
    * @param with_upload  whether to include the uploads to a server (SilexGIS), for the export of the current survey
-   * @note the upload is listed from the normal level on
+   * @note the upload is listed at every level
    */
   public static String[] surveyExportTypes( boolean with_geo, boolean with_upload )
   {
     int nr = 0;
     int kk = with_geo? NR_EXPORT_DATA : NR_EXPORT_DATA_NO_GEO;
-    boolean upload = with_upload && TDLevel.overBasic && mSurveyExportEnable[ SURVEY_POS_SILEXGIS ];
+    boolean upload = with_upload && mSurveyExportEnable[ SURVEY_POS_SILEXGIS ];
     for ( int k = 0; k < kk; ++k ) if ( mSurveyExportEnable[k] ) ++ nr;
     if ( upload ) ++ nr;
     String[] ret = new String[nr];

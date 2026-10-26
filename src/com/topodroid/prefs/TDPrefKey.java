@@ -312,7 +312,7 @@ class TDPrefKey
     new TDPrefKey( N,      NON, "DISTOX_EXPORT_KML_PREF",   R.string.pref_cat_exportkml ),
     new TDPrefKey( N,      NON, "DISTOX_EXPORT_GPX_PREF",   R.string.pref_cat_exportgpx ),   
     new TDPrefKey( N,      NON, "DISTOX_EXPORT_CSV_PREF",   R.string.pref_cat_exportcsv ),
-    new TDPrefKey( N,      NON, "DISTOX_EXPORT_SILEXGIS_PREF", R.string.silexgis_pref_cat )
+    new TDPrefKey( B,      NON, "DISTOX_EXPORT_SILEXGIS_PREF", R.string.silexgis_pref_cat ) // basic: the upload is listed at every level
   };                                                    
 
   /** import settings
@@ -447,12 +447,12 @@ class TDPrefKey
    * whether to ask the server to compile the survey
    * outputs to ask the server for (comma separated)
    * who may see a cave created by the upload
-   * whether to ask for a public link to the results (not sent yet: the account preference in SilexGIS decides)
+   * whether to ask for a link to the results (the first time: the export dialog remembers the last choice)
    */
   static TDPrefKey[] mExportSilexgis = {
-    new TDPrefKey( N, STR,  XP, "DISTOX_SILEXGIS_URL",         R.string.silexgis_pref_url_title,         R.string.silexgis_pref_url_summary,         TDString.EMPTY ),
-    new TDPrefKey( N, STR,  XP, "DISTOX_SILEXGIS_KEY",         R.string.silexgis_pref_key_title,         R.string.silexgis_pref_key_summary,         TDString.EMPTY ),
-    new TDPrefKey( N, BTN,  XP, "DISTOX_SILEXGIS_ACCOUNT",     R.string.silexgis_pref_account_title,     R.string.silexgis_pref_account_summary,     TDString.EMPTY ),
+    new TDPrefKey( B, STR,  XP, "DISTOX_SILEXGIS_URL",         R.string.silexgis_pref_url_title,         R.string.silexgis_pref_url_summary,         TDString.EMPTY ),
+    new TDPrefKey( B, STR,  XP, "DISTOX_SILEXGIS_KEY",         R.string.silexgis_pref_key_title,         R.string.silexgis_pref_key_summary,         TDString.EMPTY ),
+    new TDPrefKey( B, BTN,  XP, "DISTOX_SILEXGIS_ACCOUNT",     R.string.silexgis_pref_account_title,     R.string.silexgis_pref_account_summary,     TDString.EMPTY ),
     new TDPrefKey( N, BOOL, XP, "DISTOX_SILEXGIS_WITH_TH",     R.string.silexgis_pref_with_th_title,     R.string.silexgis_pref_with_th_summary,     TRUE  ),
     new TDPrefKey( A, BOOL, XP, "DISTOX_SILEXGIS_WITH_SVX",    R.string.silexgis_pref_with_svx_title,    R.string.silexgis_pref_with_svx_summary,    FALSE ),
     new TDPrefKey( A, BOOL, XP, "DISTOX_SILEXGIS_WITH_DAT",    R.string.silexgis_pref_with_dat_title,    R.string.silexgis_pref_with_dat_summary,    FALSE ),
@@ -463,7 +463,7 @@ class TDPrefKey
     new TDPrefKey( N, BOOL, XP, "DISTOX_SILEXGIS_COMPILE",     R.string.silexgis_pref_compile_title,     R.string.silexgis_pref_compile_summary,     TRUE  ),
     new TDPrefKey( A, STR,  XP, "DISTOX_SILEXGIS_OUTPUTS",     R.string.silexgis_pref_outputs_title,     R.string.silexgis_pref_outputs_summary,     "lox,3d,plan-pdf,extended-pdf" ),
     new TDPrefKey( N,       XP, "DISTOX_SILEXGIS_VISIBILITY",  R.string.silexgis_pref_visibility_title,  R.string.silexgis_pref_visibility_summary,  "cavingGroup", R.array.silexgisVisibility, R.array.silexgisVisibilityValue ),
-    new TDPrefKey( D, BOOL, XP, "DISTOX_SILEXGIS_PUBLIC_LINK", R.string.silexgis_pref_public_link_title, R.string.silexgis_pref_public_link_summary, TRUE  )
+    new TDPrefKey( N, BOOL, XP, "DISTOX_SILEXGIS_PUBLIC_LINK", R.string.silexgis_pref_public_link_title, R.string.silexgis_pref_public_link_summary, TRUE  )
   };
 
   /** VisualTopo settings

@@ -216,7 +216,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // boolean ret2 = true; // false = binary cancelled
       // TDLog.v( "save plot SAVE (no action) " + mFullName );
       // // TDLog.v( "save plot Therion file SAVE " + mFullName );
-      if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 && mManager != null ) {
+      // the Therion auto-export is made at every level: a SilexGIS upload offers to switch it on, to upload the sketches
+      // if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 && mManager != null ) {
+      if ( ( TDLevel.overExpert || TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_TH2 ) && TDSetting.mAutoExportPlotFormat >= 0 && mManager != null ) {
         // APP_OUT_DIR
         switch ( TDSetting.mAutoExportPlotFormat ) { // auto-export format
           case TDConst.SURVEY_FORMAT_TH2:

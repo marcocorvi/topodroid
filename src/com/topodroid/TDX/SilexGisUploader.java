@@ -264,6 +264,20 @@ class SilexGisUploader
     return null;
   }
 
+  /** @return the capabilities of the server, null if they have not been asked
+   */
+  JSONObject capabilities() { return mCaps; }
+
+  /** @return the link audience the account prefers, null if the server does not say
+   * @param caps   capabilities (can be null)
+   */
+  static String accountLinkAudience( JSONObject caps )
+  {
+    JSONObject links = ( caps == null )? null : caps.optJSONObject( "publicLinks" );
+    String audience = ( links == null )? null : links.optString( "defaultAudience", null );
+    return SilexGisUpload.isAudience( audience )? audience : null;
+  }
+
   /** @return whether the server makes a cave for an upload that names none, or asks a new one
    * @param caps   capabilities (null if not known: allowed)
    */

@@ -34,6 +34,15 @@ class SilexGisUpload
   static final String[] VISIBILITIES = { "private", "cavingGroup", "authenticated", "public" };
   static final String VISIBILITY_CLUB = "cavingGroup";
 
+  // who may open the link to the results: anyone with the address, or the signed-in accounts of the server
+  static final String AUDIENCE_PUBLIC       = "public";
+  static final String AUDIENCE_ORGANIZATION = "organization";
+
+  // link choices of the export dialog, in the order of the array silexgisLinkChoice
+  static final int LINK_NONE         = 0;
+  static final int LINK_PUBLIC       = 1;
+  static final int LINK_ORGANIZATION = 2;
+
   static final int MAX_DESCRIPTION = 4000; // characters of the description the server keeps
 
   int    target = TARGET_AUTO;
@@ -54,7 +63,8 @@ class SilexGisUpload
   boolean withGpx    = false;
   boolean withOut    = false;
   boolean compile    = true;
-  boolean publicLink = true;
+  boolean publicLink = true; // ask for a link to the results
+  String  linkAudience = AUDIENCE_PUBLIC; // who may open it
   String  outputs    = "lox,3d,plan-pdf,extended-pdf"; // comma separated
   String  visibility = "cavingGroup"; // documents of the upload, and the cave the server makes without a target
 
@@ -79,6 +89,32 @@ class SilexGisUpload
     if ( v == null ) return false;
     for ( String vis : VISIBILITIES ) if ( vis.equals( v ) ) return true;
     return false;
+  }
+
+  /** @return true if the value is one of the link audiences the server knows
+   * @param v   audience
+   */
+  static boolean isAudience( String v ) { return AUDIENCE_PUBLIC.equals( v ) || AUDIENCE_ORGANIZATION.equals( v ); }
+
+  /** @return the link choice: LINK_NONE, LINK_PUBLIC, LINK_ORGANIZATION
+   */
+  int linkChoice()
+  {
+    if ( ! publicLink ) return LINK_NONE;
+    return AUDIENCE_ORGANIZATION.equals( linkAudience )? LINK_ORGANIZATION : LINK_PUBLIC;
+  }
+
+  /** set the link choice
+   * @param choice   LINK_NONE, LINK_PUBLIC, LINK_ORGANIZATION
+   * @note "no link" keeps the audience, so that it is the one shown when a link is chosen again
+   */
+  void setLinkChoice( int choice )
+  {
+    switch ( choice ) {
+      case LINK_NONE:         publicLink = false; break;
+      case LINK_ORGANIZATION: publicLink = true; linkAudience = AUDIENCE_ORGANIZATION; break;
+      default:                publicLink = true; linkAudience = AUDIENCE_PUBLIC;
+    }
   }
 
   /** @return the list of the outputs: lowercase, without blanks and repetitions
@@ -113,6 +149,7 @@ class SilexGisUpload
       ret.put( "withOut",    withOut );
       ret.put( "compile",    compile );
       ret.put( "publicLink", publicLink );
+      ret.put( "linkAudience", linkAudience );
       ret.put( "outputs",    outputs );
       ret.put( "visibility", visibility );
     } catch ( JSONException e ) { /* cannot happen with these values */ }
@@ -134,6 +171,8 @@ class SilexGisUpload
     withOut    = json.optBoolean( "withOut",    withOut );
     compile    = json.optBoolean( "compile",    compile );
     publicLink = json.optBoolean( "publicLink", publicLink );
+    String aud = optString( json, "linkAudience", linkAudience );
+    if ( isAudience( aud ) ) linkAudience = aud;
     outputs    = optString( json, "outputs", outputs );
     String vis = optString( json, "visibility", visibility );
     if ( isVisibility( vis ) ) visibility = vis;
@@ -334,7 +373,13 @@ class SilexGisUpload
       }
       ret.put( "pipeline", pipeline );
       if ( isVisibility( visibility ) ) ret.put( "documentsVisibility", visibility );
-      // ret.put( "publicLink", publicLink ); // the server reads no such member yet: the account preference in SilexGIS decides
+      // the link to the results of this upload: none, or one for the chosen audience. A cave whose position is
+      // protected gets a link only when it is asked for on purpose, after the upload (SilexGisLink)
+      JSONObject link = new JSONObject();
+      link.put( "wanted", publicLink );
+      link.put( "audience", isAudience( linkAudience )? linkAudience : AUDIENCE_PUBLIC );
+      link.put( "allowProtected", false );
+      ret.put( "publicLink", link );
     } catch ( JSONException e ) { /* cannot happen with these values */ }
     return ret;
   }

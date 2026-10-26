@@ -375,6 +375,18 @@ public class SilexGisClient
    */
   public Result abandonUpload( String id ) { return request( "DELETE", "/api/v1/survey-uploads/" + encodePath( id ), null ); }
 
+  /** @return the answer of the request that makes a new link to the results of an upload, in place of the one it had:
+   *          POST /api/v1/survey-uploads/{id}/public-link
+   * @param id     upload id
+   * @param body   request (SilexGisLink.makeRequest)
+   */
+  public Result makePublicLink( String id, JSONObject body ) { return request( "POST", "/api/v1/survey-uploads/" + encodePath( id ) + "/public-link", body ); }
+
+  /** @return the answer of the request that withdraws the link to the results of an upload: DELETE /api/v1/survey-uploads/{id}/public-link
+   * @param id     upload id
+   */
+  public Result withdrawPublicLink( String id ) { return request( "DELETE", "/api/v1/survey-uploads/" + encodePath( id ) + "/public-link", null ); }
+
   /** @return the default route of a file of an upload: /api/v1/survey-uploads/{id}/files/{name}
    * @param id     upload id
    * @param name   file name

@@ -74,7 +74,7 @@ EXPORT_DATA_DXF: B, Bool, "DXF export", "Enable DXF (AutoCAD) data export, for C
 EXPORT_DATA_KML: B, Bool, "KML export", "Enable KML (GoogleEarth) data export"
 EXPORT_DATA_GPX: B, Bool, "GPX export", "Enable GPX (trackfile) data export"
 EXPORT_DATA_SHAPEFILE: B, Bool, "Shapefile export", "Enable shapefile data export, for GIS programs"
-EXPORT_DATA_SILEXGIS: B, Bool, "SilexGIS upload", "Enable the upload of the survey to a SilexGIS server (from the normal level on)"
+EXPORT_DATA_SILEXGIS: B, Bool, "SilexGIS upload", "Enable the upload of the survey to a SilexGIS server (at every level)"
 }
 IMPORT {
 DISTOX_PT_CMAP: N, Button, "PocketTopo color map", "Open a dialog to set the PocketTopo colormap", "The PocketTopo color map translates PocketTopo color to TopoDroid lines and areas"
@@ -85,7 +85,7 @@ DISTOX_LRUD_COUNT: T, Bool, "LRUD count", "Insert LRUD as soon as they are found
 EXPORT {
 DISTOX_EXPORT_SHOTS: N, Enum{-1 no preference, 0 Therion, 2 Compass, 3 Survex, 4 VisualTopo (VTopo), 5 CSV, 7 cSurvey, 8 DXF, 9 Walls, 16 Polygon, 17 Topo, 20 Winkarst, 21 TopoRobot}, "Preferred data export format", "If set the data export dialog opens with the preferred format selected"
 DISTOX_EXPORT_PLOT: N, Enum{-1 no prefrence, 6 DXF, 7 cSurvey, 13 SVG, 14 Therion, 23 shapefile, 24 xtherion, 27 PDF}, "Preferred sketch export format", "If set the sketch export dialog opens with the preferred format selected"
-DISTOX_AUTO_PLOT_EXPORT: N, Enum{-1 no choice, 6 DXF, 7 cSurvey, 13 SVG, 14 Therion, 23 shapefile, 24 xtherion}, "Auto sketch export format".  "If set the sketches are automatically exported in the format when closed"
+DISTOX_AUTO_PLOT_EXPORT: N, Enum{-1 no choice, 6 DXF, 7 cSurvey, 13 SVG, 14 Therion, 23 shapefile, 24 xtherion}, "Auto sketch export format".  "If set the sketches are automatically exported in the format when closed (Therion at every level, the other formats only at the tester level)"
 DISTOX_ZIP_WITH_SYMBOLS: T, Bool, "Symbols in zips", "Include the symbols used in the drawings in the zip archive"
 DISTOX_ZIP_SHARE_CATEGORY: T, Bool, "Zip share category", "Add a category 'com.topodroid.TDX.CATGORY_SURVEY' to the SEND intent for sharing zips"
 }
@@ -131,9 +131,9 @@ DISTOX_PLY_LRUD: N, Bool, "Polygon splays", "Add the splays in the Polygon expor
 DISTOX_PLY_MINUS: N, Bool, "Polygon minus", "Use '-' for splays instead of 'S_N' with N incrementing number"
 }
 EXPORT_SILEXGIS {
-DISTOX_SILEXGIS_URL: N, String, "Server URL", "Address of the SilexGIS server; https is required; http to the local addresses 10.0.2.2, 127.0.0.1 and localhost is accepted only for development, in builds that allow cleartext to them"
-DISTOX_SILEXGIS_KEY: N, String, "Access key", "Personal access key created in SilexGIS (Settings, Access keys); it is not exported with the settings"
-DISTOX_SILEXGIS_ACCOUNT: N, Button, "Account", "Open a dialog to test the access to the SilexGIS server, or to forget the access key"
+DISTOX_SILEXGIS_URL: B, String, "Server URL", "Address of the SilexGIS server; https is required; http to the local addresses 10.0.2.2, 127.0.0.1 and localhost is accepted only for development, in builds that allow cleartext to them"
+DISTOX_SILEXGIS_KEY: B, String, "Access key", "Personal access key created in SilexGIS (Settings, Access keys); it is not exported with the settings"
+DISTOX_SILEXGIS_ACCOUNT: B, Button, "Account", "Open a dialog to test the access to the SilexGIS server, or to forget the access key"
 DISTOX_SILEXGIS_WITH_TH: N, Bool, "Therion files", "Upload also the Therion survey file and the sketches (th, th2) to SilexGIS"
 DISTOX_SILEXGIS_WITH_SVX: A, Bool, "Survex file", "Upload also the Survex export to SilexGIS"
 DISTOX_SILEXGIS_WITH_DAT: A, Bool, "Compass file", "Upload also the Compass export to SilexGIS"
@@ -144,7 +144,7 @@ DISTOX_SILEXGIS_WITH_OUT: E, Bool, "Out folder", "Upload also every other file i
 DISTOX_SILEXGIS_COMPILE: N, Bool, "Compile", "Ask the SilexGIS server to compile the survey"
 DISTOX_SILEXGIS_OUTPUTS: A, String, "Outputs", "Comma-separated list of the outputs to ask the SilexGIS server for, for example lox,3d,plan-pdf,extended-pdf"
 DISTOX_SILEXGIS_VISIBILITY: N, Enum{private, cavingGroup, authenticated, public}, "Visibility", "Who may see a cave created by the upload: only the user, the user's club, every signed-in user, or everyone"
-DISTOX_SILEXGIS_PUBLIC_LINK: N, Bool, "Public link", "Ask the SilexGIS server for a public link to the results"
+DISTOX_SILEXGIS_PUBLIC_LINK: N, Bool, "Public link", "Ask the SilexGIS server for a link to the results the first time; the export dialog then offers no link, a link for anyone, or a link for the signed-in members, and remembers the last choice"
 }
 EXPORT_VISUALTOPO {
 DISTOX_VTOPO_SPLAYS: A, Bool, "VisualTopo splays", "Include the splays in the VisualTopo export"

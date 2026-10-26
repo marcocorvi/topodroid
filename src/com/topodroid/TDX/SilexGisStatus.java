@@ -28,6 +28,9 @@ class SilexGisStatus
   static final String FAILED    = "failed";
   static final String ABANDONED = "abandoned";
 
+  static final String REFUSAL_PROTECTED  = "protected-cave"; // no link: the position of the cave is protected
+  static final String REFUSAL_NOT_WANTED = "not-wanted";     // no link: the upload asked for none
+
   /** a result of the processing of an upload
    */
   static class Artefact
@@ -59,6 +62,7 @@ class SilexGisStatus
   String version         = null; // UTC time of the upload: it names the version of the survey
   String statusPageUrl   = null; // web path of the status page
   String publicLinkUrl   = null; // web path (or URL) of the public link, null if none
+  String publicLinkAudience = null; // who may open it: public, organization (null if the server does not say)
   String publicLinkRefusal = null; // why there is no public link, if the server says
   final ArrayList< Artefact > artefacts = new ArrayList<>();
 
@@ -131,6 +135,7 @@ class SilexGisStatus
     JSONObject link = json.optJSONObject( "publicLink" );
     if ( link != null ) {
       ret.publicLinkUrl = text( link, "url" );
+      ret.publicLinkAudience = text( link, "audience" );
     } else {
       ret.publicLinkUrl = null;
     }

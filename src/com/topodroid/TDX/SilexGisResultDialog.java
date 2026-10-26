@@ -8,6 +8,10 @@
  * The results of the processing can be downloaded into the survey "out" folder, and the
  * 3D models opened in Cave3D. The upload is followed in the browser: its public link if
  * there is one, else its status page on the server (which asks to sign in).
+ * The link can be withdrawn, or a new one made for anyone or for the signed-in members;
+ * for a cave whose position is protected a link is made only after a confirmation.
+ * When sketches had no current Therion export, the dialog offers to switch the sketch
+ * auto-export to Therion.
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -17,10 +21,13 @@ package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefHelper;
 
 import android.os.Bundle;
 import android.os.AsyncTask;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -32,6 +39,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import android.view.View;
@@ -50,23 +58,40 @@ class SilexGisResultDialog extends MyDialog
   private List< SilexGisStatus.Artefact > mArtefacts = null;
   private SilexGisStatus.Artefact mSelected = null;
   private boolean mDownloading = false; // a download is running: no other is started
+  private final boolean mSketchesBehind;  // a sketch had no current Therion export
+  private final String mAudience;         // link audience of the upload
+  private final SilexGisLink mLink;
+  private final boolean mLinkEditable;    // the server has the whole upload: its link can be withdrawn or made again
+  private boolean mLinkBusy = false;      // a link request is running
 
   private TextView mTVpick;
   private Button mBtnDownload;
   private Button mBtnCave3d;
+  private Button mBtnBrowser;
+  private Button mBtnCopy;
+  private Button mBtnWithdraw;
+  private Button mBtnMake;
+  private Spinner mSpinAudience;
 
   /** cstr
    * @param context   context
    * @param client    client of the server
    * @param outcome   outcome of the upload
    * @param notes     what the user should know about the files of the upload (can be empty)
+   * @param sketches_behind  whether a sketch had no current Therion export
+   * @param audience  link audience asked for the upload
    */
-  SilexGisResultDialog( Context context, SilexGisClient client, SilexGisUploader.Outcome outcome, String notes )
+  SilexGisResultDialog( Context context, SilexGisClient client, SilexGisUploader.Outcome outcome, String notes,
+                        boolean sketches_behind, String audience )
   {
     super( context, null, 0 ); // 0: no help resource
     mClient  = client;
     mOutcome = outcome;
     mNotes   = notes;
+    mSketchesBehind = sketches_behind;
+    mAudience = SilexGisUpload.isAudience( audience )? audience : SilexGisUpload.AUDIENCE_PUBLIC;
+    mLink    = SilexGisLink.of( outcome.status );
+    mLinkEditable = outcome.completed && outcome.uploadId != null && outcome.kind != SilexGisUploader.KEY_REFUSED;
   }
 
   @Override
@@ -91,14 +116,10 @@ class SilexGisResultDialog extends MyDialog
       notes.setVisibility( View.VISIBLE );
     }
 
-    String link = publicLink();
-    TextView tv_link = (TextView) findViewById( R.id.silexgis_link );
-    if ( link != null ) {
-      tv_link.setText( String.format( res.getString( R.string.silexgis_public_link ), link ) );
-      tv_link.setVisibility( View.VISIBLE );
-    } else if ( status != null && status.publicLinkRefusal != null ) {
-      tv_link.setText( String.format( res.getString( R.string.silexgis_no_public_link ), status.publicLinkRefusal ) );
-      tv_link.setVisibility( View.VISIBLE );
+    if ( mSketchesBehind && TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) {
+      ( (TextView) findViewById( R.id.silexgis_auto_th2_text ) ).setText( String.format( res.getString( R.string.silexgis_auto_th2_offer ), autoExportName( res ) ) );
+      ( (Button) findViewById( R.id.button_auto_th2 ) ).setOnClickListener( this );
+      findViewById( R.id.silexgis_auto_th2 ).setVisibility( View.VISIBLE );
     }
 
     mTVpick = (TextView) findViewById( R.id.silexgis_pick );
@@ -115,12 +136,19 @@ class SilexGisResultDialog extends MyDialog
       }
     }
 
-    Button browser = (Button) findViewById( R.id.button_browser );
-    browser.setOnClickListener( this );
-    browser.setEnabled( browserUrl() != null );
-    Button copy = (Button) findViewById( R.id.button_copy );
-    copy.setOnClickListener( this );
-    copy.setEnabled( link != null );
+    mBtnBrowser = (Button) findViewById( R.id.button_browser );
+    mBtnBrowser.setOnClickListener( this );
+    mBtnCopy = (Button) findViewById( R.id.button_copy );
+    mBtnCopy.setOnClickListener( this );
+    mBtnWithdraw = (Button) findViewById( R.id.button_link_withdraw );
+    mBtnWithdraw.setOnClickListener( this );
+    mBtnMake = (Button) findViewById( R.id.button_link_make );
+    mBtnMake.setOnClickListener( this );
+    mSpinAudience = (Spinner) findViewById( R.id.silexgis_link_audience );
+    mSpinAudience.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, res.getStringArray( R.array.silexgisLinkAudience ) ) );
+    String audience = ( mLink.hasLink() && SilexGisUpload.isAudience( mLink.audience ) )? mLink.audience : mAudience;
+    mSpinAudience.setSelection( SilexGisUpload.AUDIENCE_ORGANIZATION.equals( audience )? 1 : 0 );
+    showLink();
     mBtnDownload = (Button) findViewById( R.id.button_download );
     mBtnDownload.setOnClickListener( this );
     mBtnCave3d = (Button) findViewById( R.id.button_cave3d );
@@ -142,8 +170,101 @@ class SilexGisResultDialog extends MyDialog
    */
   private String publicLink()
   {
-    if ( mOutcome.status == null || mOutcome.status.publicLinkUrl == null ) return null;
-    return mClient.resolveUrl( mOutcome.status.publicLinkUrl );
+    if ( mLink.url == null ) return null;
+    return mClient.resolveUrl( mLink.url );
+  }
+
+  /** show the link, or why there is none, and what can be done with it
+   */
+  private void showLink()
+  {
+    Resources res = mContext.getResources();
+    String link = publicLink();
+    TextView tv_link = (TextView) findViewById( R.id.silexgis_link );
+    if ( link != null ) {
+      tv_link.setText( String.format( res.getString( R.string.silexgis_public_link ), link ) );
+      tv_link.setVisibility( View.VISIBLE );
+    } else if ( SilexGisLink.REVOKED.equals( mLink.refusal ) ) {
+      tv_link.setText( R.string.silexgis_link_withdrawn );
+      tv_link.setVisibility( View.VISIBLE );
+    } else if ( mLink.refusal != null && ! mLink.isProtected() && ! mLink.isNotWanted() ) { // no link asked for: nothing to say
+      tv_link.setText( String.format( res.getString( R.string.silexgis_no_public_link ), mLink.refusal ) );
+      tv_link.setVisibility( View.VISIBLE );
+    } else {
+      tv_link.setVisibility( View.GONE );
+    }
+    TextView tv_note = (TextView) findViewById( R.id.silexgis_link_note );
+    if ( mLink.isProtected() ) {
+      tv_note.setText( R.string.silexgis_link_protected );
+      tv_note.setVisibility( View.VISIBLE );
+    } else if ( mLink.isOrganization() ) {
+      tv_note.setText( R.string.silexgis_link_organization_note );
+      tv_note.setVisibility( View.VISIBLE );
+    } else {
+      tv_note.setVisibility( View.GONE );
+    }
+    mBtnBrowser.setEnabled( browserUrl() != null );
+    mBtnCopy.setEnabled( link != null );
+    mBtnWithdraw.setVisibility( ( mLinkEditable && link != null )? View.VISIBLE : View.GONE );
+    mBtnWithdraw.setEnabled( ! mLinkBusy );
+    findViewById( R.id.silexgis_link_edit ).setVisibility( mLinkEditable? View.VISIBLE : View.GONE );
+    mBtnMake.setText( mLink.isProtected()? R.string.silexgis_link_make_anyway : R.string.silexgis_link_make );
+    mBtnMake.setEnabled( ! mLinkBusy );
+  }
+
+  /** @return the audience chosen for a new link
+   */
+  private String chosenAudience()
+  {
+    return ( mSpinAudience.getSelectedItemPosition() == 1 )? SilexGisUpload.AUDIENCE_ORGANIZATION : SilexGisUpload.AUDIENCE_PUBLIC;
+  }
+
+  /** @return the name of the current sketch auto-export format
+   * @param res   resources
+   */
+  private static String autoExportName( Resources res )
+  {
+    String[] names  = res.getStringArray( R.array.exportPlotAuto );
+    String[] values = res.getStringArray( R.array.exportPlotAutoValue );
+    String value = Integer.toString( TDSetting.mAutoExportPlotFormat );
+    for ( int k = 0; k < values.length && k < names.length; ++k ) if ( values[k].equals( value ) ) return names[k];
+    return value;
+  }
+
+  /** a link request ends
+   * @param outcome   outcome of the request
+   */
+  private void linkDone( int outcome )
+  {
+    mLinkBusy = false;
+    Resources res = mContext.getResources();
+    switch ( outcome ) {
+      case SilexGisLink.WITHDRAWN:
+        TDToast.make( R.string.silexgis_link_withdrawn );
+        break;
+      case SilexGisLink.KEY_REFUSED:
+        SilexGisSettingsDialog.showKeyRefused( mContext, null );
+        break;
+      case SilexGisLink.REFUSED:
+        String why = ( mLink.result == null )? "" : SilexGisSettingsDialog.errorMessage( res, mLink.result );
+        TDToast.makeBad( String.format( res.getString( R.string.silexgis_link_failed ), why ) );
+        break;
+      // MADE: the new link is shown; PROTECTED: the explanation is shown, and the button asks for the link anyway
+    }
+    showLink();
+  }
+
+  /** start a link request
+   * @param make             whether to make a link (else withdraw it)
+   * @param allow_protected  whether the link is asked for although the position of the cave is protected
+   */
+  private void startLink( boolean make, boolean allow_protected )
+  {
+    if ( mLinkBusy || ! mLinkEditable ) return;
+    mLinkBusy = true;
+    mBtnWithdraw.setEnabled( false );
+    mBtnMake.setEnabled( false );
+    (new LinkTask( this, make, chosenAudience(), allow_protected )).execute();
   }
 
   /** @return the URL to open in the browser: the public link, else the status page (null if none)
@@ -212,6 +333,25 @@ class SilexGisResultDialog extends MyDialog
         TDToast.make( String.format( resString( R.string.copied ), link ) );
       }
       return;
+    } else if ( id == R.id.button_link_withdraw ) {
+      startLink( false, false );
+      return;
+    } else if ( id == R.id.button_link_make ) {
+      if ( mLink.isProtected() ) { // the results show where the passages are: never without a confirmation
+        TopoDroidAlertDialog.makeAlert( mContext, mContext.getResources(), R.string.silexgis_link_confirm_protected,
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { startLink( true, true ); }
+          } );
+      } else {
+        startLink( true, false );
+      }
+      return;
+    } else if ( id == R.id.button_auto_th2 ) {
+      TDSetting.mAutoExportPlotFormat = TDConst.SURVEY_FORMAT_TH2;
+      TDPrefHelper.update( "DISTOX_AUTO_PLOT_EXPORT", Integer.toString( TDConst.SURVEY_FORMAT_TH2 ) );
+      TDToast.make( R.string.silexgis_auto_th2_done );
+      findViewById( R.id.silexgis_auto_th2 ).setVisibility( View.GONE );
+      return;
     } else if ( id == R.id.button_download || id == R.id.button_cave3d ) {
       if ( mSelected == null || mDownloading ) return;
       TDPath.checkOutdir();
@@ -235,6 +375,34 @@ class SilexGisResultDialog extends MyDialog
     } catch ( ActivityNotFoundException e ) {
       TDToast.makeBad( R.string.no_cave3d );
     }
+  }
+
+  /** make or withdraw the link off the UI thread
+   */
+  private static class LinkTask extends AsyncTask< Void, Void, Integer >
+  {
+    private final SilexGisResultDialog mDialog;
+    private final boolean mMake;
+    private final String mAudience;
+    private final boolean mAllowProtected;
+
+    LinkTask( SilexGisResultDialog dialog, boolean make, String audience, boolean allow_protected )
+    {
+      mDialog   = dialog;
+      mMake     = make;
+      mAudience = audience;
+      mAllowProtected = allow_protected;
+    }
+
+    @Override
+    protected Integer doInBackground( Void... args )
+    {
+      String id = mDialog.mOutcome.uploadId;
+      return mMake ? mDialog.mLink.make( mDialog.mClient, id, mAudience, mAllowProtected ) : mDialog.mLink.withdraw( mDialog.mClient, id );
+    }
+
+    @Override
+    protected void onPostExecute( Integer outcome ) { mDialog.linkDone( outcome ); }
   }
 
   /** download an artefact off the UI thread
