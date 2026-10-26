@@ -23,7 +23,6 @@ class SilexGisStore
 {
   static final String KEY_SWITCHES = "SILEXGIS_LAST_SWITCHES";
   static final String KEY_TARGET   = "SILEXGIS_TARGET_"; // followed by the survey name
-  static final String KEY_AUDIENCE = "SILEXGIS_ACCOUNT_LINK_AUDIENCE"; // link audience the account prefers, as the server last said
 
   /** the key-value storage (the app shared preferences)
    */
@@ -57,10 +56,6 @@ class SilexGisStore
     SilexGisUpload ret = ( defaults == null )? new SilexGisUpload() : defaults.copy();
     JSONObject switches = parse( mPrefs.get( KEY_SWITCHES ) );
     if ( switches != null ) ret.switchesFromJson( switches );
-    if ( switches == null || ! switches.has( "linkAudience" ) ) { // no audience chosen yet: the account preference, if the server said it
-      String audience = mPrefs.get( KEY_AUDIENCE );
-      if ( SilexGisUpload.isAudience( audience ) ) ret.linkAudience = audience;
-    }
     ret.targetFromJson( parse( mPrefs.get( targetKey( survey ) ) ) ); // automatic if none
     return ret;
   }
@@ -88,14 +83,6 @@ class SilexGisStore
     } else {
       mPrefs.put( targetKey( survey ), upload.targetToJson().toString() );
     }
-  }
-
-  /** remember the link audience the account prefers
-   * @param audience   audience the server said (null or unknown: nothing is changed)
-   */
-  void saveAccountAudience( String audience )
-  {
-    if ( SilexGisUpload.isAudience( audience ) ) mPrefs.put( KEY_AUDIENCE, audience );
   }
 
   /** remember the survey of the cave the server answered for an upload of a survey

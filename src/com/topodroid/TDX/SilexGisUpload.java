@@ -38,10 +38,13 @@ class SilexGisUpload
   static final String AUDIENCE_PUBLIC       = "public";
   static final String AUDIENCE_ORGANIZATION = "organization";
 
-  // link choices of the export dialog, in the order of the array silexgisLinkChoice
-  static final int LINK_NONE         = 0;
-  static final int LINK_PUBLIC       = 1;
-  static final int LINK_ORGANIZATION = 2;
+  // link choices of the export dialog, in the order of the array silexgisLinkChoice.
+  // LINK_ACCOUNT sends no choice: the preferences of the SilexGIS account decide (link or not, and its audience)
+  static final int LINK_ACCOUNT      = 0;
+  static final int LINK_NONE         = 1;
+  static final int LINK_PUBLIC       = 2;
+  static final int LINK_ORGANIZATION = 3;
+  static final String[] LINK_CHOICES = { "account", "none", AUDIENCE_PUBLIC, AUDIENCE_ORGANIZATION }; // remembered names
 
   static final int MAX_DESCRIPTION = 4000; // characters of the description the server keeps
 
@@ -63,8 +66,7 @@ class SilexGisUpload
   boolean withGpx    = false;
   boolean withOut    = false;
   boolean compile    = true;
-  boolean publicLink = true; // ask for a link to the results
-  String  linkAudience = AUDIENCE_PUBLIC; // who may open it
+  int     link       = LINK_ACCOUNT; // the link to the results: as the account says, none, or one for an audience
   String  outputs    = "lox,3d,plan-pdf,extended-pdf"; // comma separated
   String  visibility = "cavingGroup"; // documents of the upload, and the cave the server makes without a target
 
@@ -96,25 +98,31 @@ class SilexGisUpload
    */
   static boolean isAudience( String v ) { return AUDIENCE_PUBLIC.equals( v ) || AUDIENCE_ORGANIZATION.equals( v ); }
 
-  /** @return the link choice: LINK_NONE, LINK_PUBLIC, LINK_ORGANIZATION
+  /** @return the link choice: LINK_ACCOUNT, LINK_NONE, LINK_PUBLIC, LINK_ORGANIZATION
    */
-  int linkChoice()
-  {
-    if ( ! publicLink ) return LINK_NONE;
-    return AUDIENCE_ORGANIZATION.equals( linkAudience )? LINK_ORGANIZATION : LINK_PUBLIC;
-  }
+  int linkChoice() { return link; }
 
   /** set the link choice
-   * @param choice   LINK_NONE, LINK_PUBLIC, LINK_ORGANIZATION
-   * @note "no link" keeps the audience, so that it is the one shown when a link is chosen again
+   * @param choice   LINK_ACCOUNT, LINK_NONE, LINK_PUBLIC, LINK_ORGANIZATION (anything else: LINK_ACCOUNT)
    */
-  void setLinkChoice( int choice )
+  void setLinkChoice( int choice ) { link = ( choice >= 0 && choice < LINK_CHOICES.length )? choice : LINK_ACCOUNT; }
+
+  /** @return the audience chosen for the link, null if none was chosen (the account decides, or no link)
+   */
+  String linkAudience()
   {
-    switch ( choice ) {
-      case LINK_NONE:         publicLink = false; break;
-      case LINK_ORGANIZATION: publicLink = true; linkAudience = AUDIENCE_ORGANIZATION; break;
-      default:                publicLink = true; linkAudience = AUDIENCE_PUBLIC;
-    }
+    if ( link == LINK_PUBLIC )       return AUDIENCE_PUBLIC;
+    if ( link == LINK_ORGANIZATION ) return AUDIENCE_ORGANIZATION;
+    return null;
+  }
+
+  /** @return the link choice of a remembered name, -1 if unknown
+   * @param name   name of the choice
+   */
+  static int linkChoiceOf( String name )
+  {
+    for ( int k = 0; k < LINK_CHOICES.length; ++k ) if ( LINK_CHOICES[k].equals( name ) ) return k;
+    return -1;
   }
 
   /** @return the list of the outputs: lowercase, without blanks and repetitions
@@ -148,8 +156,7 @@ class SilexGisUpload
       ret.put( "withGpx",    withGpx );
       ret.put( "withOut",    withOut );
       ret.put( "compile",    compile );
-      ret.put( "publicLink", publicLink );
-      ret.put( "linkAudience", linkAudience );
+      ret.put( "link",       LINK_CHOICES[ link ] );
       ret.put( "outputs",    outputs );
       ret.put( "visibility", visibility );
     } catch ( JSONException e ) { /* cannot happen with these values */ }
@@ -170,9 +177,8 @@ class SilexGisUpload
     withGpx    = json.optBoolean( "withGpx",    withGpx );
     withOut    = json.optBoolean( "withOut",    withOut );
     compile    = json.optBoolean( "compile",    compile );
-    publicLink = json.optBoolean( "publicLink", publicLink );
-    String aud = optString( json, "linkAudience", linkAudience );
-    if ( isAudience( aud ) ) linkAudience = aud;
+    int choice = linkChoiceOf( optString( json, "link", null ) );
+    if ( choice >= 0 ) link = choice;
     outputs    = optString( json, "outputs", outputs );
     String vis = optString( json, "visibility", visibility );
     if ( isVisibility( vis ) ) visibility = vis;
@@ -373,13 +379,16 @@ class SilexGisUpload
       }
       ret.put( "pipeline", pipeline );
       if ( isVisibility( visibility ) ) ret.put( "documentsVisibility", visibility );
-      // the link to the results of this upload: none, or one for the chosen audience. A cave whose position is
+      // the link to the results of this upload: none, or one for the chosen audience; nothing when the user
+      // left it to the account, whose preferences then decide on the server. A cave whose position is
       // protected gets a link only when it is asked for on purpose, after the upload (SilexGisLink)
-      JSONObject link = new JSONObject();
-      link.put( "wanted", publicLink );
-      link.put( "audience", isAudience( linkAudience )? linkAudience : AUDIENCE_PUBLIC );
-      link.put( "allowProtected", false );
-      ret.put( "publicLink", link );
+      if ( link != LINK_ACCOUNT ) {
+        JSONObject public_link = new JSONObject();
+        public_link.put( "wanted", link != LINK_NONE );
+        if ( linkAudience() != null ) public_link.put( "audience", linkAudience() );
+        public_link.put( "allowProtected", false );
+        ret.put( "publicLink", public_link );
+      }
     } catch ( JSONException e ) { /* cannot happen with these values */ }
     return ret;
   }

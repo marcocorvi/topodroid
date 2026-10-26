@@ -96,7 +96,7 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     ret.withOut    = TDSetting.mSilexGisWithOut;
     ret.compile    = TDSetting.mSilexGisCompile;
     ret.outputs    = TDSetting.mSilexGisOutputs;
-    ret.publicLink = TDSetting.mSilexGisPublicLink;
+    if ( ! TDSetting.mSilexGisPublicLink ) ret.setLinkChoice( SilexGisUpload.LINK_NONE ); // else the account decides
     if ( SilexGisUpload.isVisibility( TDSetting.mSilexGisVisibility ) ) ret.visibility = TDSetting.mSilexGisVisibility;
     return ret;
   }
@@ -231,7 +231,6 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     SilexGisUploader uploader = new SilexGisUploader( mClient, null );
     onStep( SilexGisUploader.STEP_CONNECT, null, 0, 0 );
     SilexGisUploader.Outcome refused = uploader.check( mUpload );
-    getStore( mContext ).saveAccountAudience( SilexGisUploader.accountLinkAudience( uploader.capabilities() ) ); // the default of the next upload
     if ( refused != null ) return refused;
 
     // the ordinary survey archive
@@ -479,7 +478,7 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
       if ( notes.length() > 0 ) notes.append( "\n" );
       notes.append( note );
     }
-    (new SilexGisResultDialog( mContext, mClient, out, notes.toString(), mSketchesBehind, mUpload.linkAudience )).show();
+    (new SilexGisResultDialog( mContext, mClient, out, notes.toString(), mSketchesBehind, mUpload.linkAudience() )).show();
     if ( out.kind == SilexGisUploader.KEY_REFUSED ) SilexGisSettingsDialog.showKeyRefused( mContext, null ); // over the result: the upload is not sent again
   }
 

@@ -144,7 +144,7 @@ DISTOX_SILEXGIS_WITH_OUT: E, Bool, "Out folder", "Upload also every other file i
 DISTOX_SILEXGIS_COMPILE: N, Bool, "Compile", "Ask the SilexGIS server to compile the survey"
 DISTOX_SILEXGIS_OUTPUTS: A, String, "Outputs", "Comma-separated list of the outputs to ask the SilexGIS server for, for example lox,3d,plan-pdf,extended-pdf"
 DISTOX_SILEXGIS_VISIBILITY: N, Enum{private, cavingGroup, authenticated, public}, "Visibility", "Who may see a cave created by the upload: only the user, the user's club, every signed-in user, or everyone"
-DISTOX_SILEXGIS_PUBLIC_LINK: N, Bool, "Public link", "Ask the SilexGIS server for a link to the results the first time; the export dialog then offers no link, a link for anyone, or a link for the signed-in members, and remembers the last choice"
+DISTOX_SILEXGIS_PUBLIC_LINK: N, Bool, "Public link", "On: the preferences of the SilexGIS account decide the link to the results; off: no link. Only the first time: the export dialog then offers the account's choice, no link, a link for anyone, or a link for the signed-in members, and remembers the last choice"
 }
 EXPORT_VISUALTOPO {
 DISTOX_VTOPO_SPLAYS: A, Bool, "VisualTopo splays", "Include the splays in the VisualTopo export"

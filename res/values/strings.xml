@@ -1723,7 +1723,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="silexgis_pref_visibility_title">Visibility</string>
   <string name="silexgis_pref_visibility_summary">Who may see a cave created by the upload, and the documents of the upload</string>
   <string name="silexgis_pref_public_link_title">Link to the results</string>
-  <string name="silexgis_pref_public_link_summary">Ask for a link to the results of an upload (the export dialog then remembers the last choice)</string>
+  <string name="silexgis_pref_public_link_summary">On: the preferences of the SilexGIS account decide the link to the results of an upload. Off: no link, unless the export dialog asks for one (it remembers the last choice)</string>
   <string name="silexgis_visibility_private">private</string>
   <string name="silexgis_visibility_club">club</string>
   <string name="silexgis_visibility_authenticated">signed-in users</string>
@@ -1803,6 +1803,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="silexgis_import_no_th">This upload has no Therion file</string>
   <string name="silexgis_import_downloading">Downloading %1$s: %2$s</string>
   <string name="silexgis_file_error">Cannot write the file: %1$s</string>
+  <string name="silexgis_link_choice_account">As my SilexGIS account says</string>
   <string name="silexgis_link_choice_none">No link</string>
   <string name="silexgis_link_choice_public">Link for anyone</string>
   <string name="silexgis_link_choice_organization">Link for signed-in members</string>
@@ -1814,9 +1815,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="silexgis_link_withdraw">Withdraw link</string>
   <string name="silexgis_link_withdrawn">The link has been withdrawn: its address no longer opens the results</string>
   <string name="silexgis_link_failed">The link could not be changed: %1$s</string>
-  <string name="silexgis_auto_th2_offer">Sketches without a current Therion export are not uploaded. TopoDroid can export each sketch to Therion every time it is saved: this sets Settings, Import/export, Sketch auto export format to Therion (now: %1$s). Then open and save each sketch once before the next upload.</string>
+  <string name="silexgis_auto_th2_offer">Sketches without a Therion export, or with one older than the drawing, are uploaded without it or with the old one. TopoDroid can export each sketch to Therion every time it is saved: this sets the sketch auto export format to Therion (now: %1$s), and it can be turned off again here. Then open and save each sketch once before the next upload.</string>
   <string name="silexgis_auto_th2_button">Export sketches to Therion automatically</string>
-  <string name="silexgis_auto_th2_done">Sketch auto export format: Therion</string>
+  <string name="silexgis_auto_th2_done">Sketch auto export format: %1$s</string>
+  <string name="silexgis_auto_th2_on">TopoDroid exports each sketch to Therion every time it is saved (sketch auto export format: Therion)</string>
+  <string name="silexgis_auto_th2_off">Turn off the automatic Therion export</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>
   <string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string>
   <string name="pref_vtopo_lrud_title">LRUD at From</string>

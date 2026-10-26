@@ -11,7 +11,7 @@
  * The link can be withdrawn, or a new one made for anyone or for the signed-in members;
  * for a cave whose position is protected a link is made only after a confirmation.
  * When sketches had no current Therion export, the dialog offers to switch the sketch
- * auto-export to Therion.
+ * auto-export to Therion, and it offers to turn it off again where the settings do not show it.
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -59,10 +59,11 @@ class SilexGisResultDialog extends MyDialog
   private SilexGisStatus.Artefact mSelected = null;
   private boolean mDownloading = false; // a download is running: no other is started
   private final boolean mSketchesBehind;  // a sketch had no current Therion export
-  private final String mAudience;         // link audience of the upload
-  private final SilexGisLink mLink;
+  private final String mAudience;         // link audience asked for the upload, null if the account decided
+  private SilexGisLink mLink;             // replaced, on the UI thread, by the one a link request worked on
   private final boolean mLinkEditable;    // the server has the whole upload: its link can be withdrawn or made again
   private boolean mLinkBusy = false;      // a link request is running
+  private int mAutoExportBefore = -2;     // sketch auto-export format before it was switched here (-2: not switched)
 
   private TextView mTVpick;
   private Button mBtnDownload;
@@ -79,7 +80,7 @@ class SilexGisResultDialog extends MyDialog
    * @param outcome   outcome of the upload
    * @param notes     what the user should know about the files of the upload (can be empty)
    * @param sketches_behind  whether a sketch had no current Therion export
-   * @param audience  link audience asked for the upload
+   * @param audience  link audience asked for the upload (null if the account decided)
    */
   SilexGisResultDialog( Context context, SilexGisClient client, SilexGisUploader.Outcome outcome, String notes,
                         boolean sketches_behind, String audience )
@@ -89,7 +90,7 @@ class SilexGisResultDialog extends MyDialog
     mOutcome = outcome;
     mNotes   = notes;
     mSketchesBehind = sketches_behind;
-    mAudience = SilexGisUpload.isAudience( audience )? audience : SilexGisUpload.AUDIENCE_PUBLIC;
+    mAudience = SilexGisUpload.isAudience( audience )? audience : null;
     mLink    = SilexGisLink.of( outcome.status );
     mLinkEditable = outcome.completed && outcome.uploadId != null && outcome.kind != SilexGisUploader.KEY_REFUSED;
   }
@@ -116,11 +117,8 @@ class SilexGisResultDialog extends MyDialog
       notes.setVisibility( View.VISIBLE );
     }
 
-    if ( mSketchesBehind && TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) {
-      ( (TextView) findViewById( R.id.silexgis_auto_th2_text ) ).setText( String.format( res.getString( R.string.silexgis_auto_th2_offer ), autoExportName( res ) ) );
-      ( (Button) findViewById( R.id.button_auto_th2 ) ).setOnClickListener( this );
-      findViewById( R.id.silexgis_auto_th2 ).setVisibility( View.VISIBLE );
-    }
+    ( (Button) findViewById( R.id.button_auto_th2 ) ).setOnClickListener( this );
+    showAutoExport();
 
     mTVpick = (TextView) findViewById( R.id.silexgis_pick );
     if ( status != null ) {
@@ -147,7 +145,7 @@ class SilexGisResultDialog extends MyDialog
     mSpinAudience = (Spinner) findViewById( R.id.silexgis_link_audience );
     mSpinAudience.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, res.getStringArray( R.array.silexgisLinkAudience ) ) );
     String audience = ( mLink.hasLink() && SilexGisUpload.isAudience( mLink.audience ) )? mLink.audience : mAudience;
-    mSpinAudience.setSelection( SilexGisUpload.AUDIENCE_ORGANIZATION.equals( audience )? 1 : 0 );
+    mSpinAudience.setSelection( SilexGisUpload.AUDIENCE_ORGANIZATION.equals( audience )? 2 : SilexGisUpload.AUDIENCE_PUBLIC.equals( audience )? 1 : 0 );
     showLink();
     mBtnDownload = (Button) findViewById( R.id.button_download );
     mBtnDownload.setOnClickListener( this );
@@ -203,8 +201,8 @@ class SilexGisResultDialog extends MyDialog
     } else {
       tv_note.setVisibility( View.GONE );
     }
-    mBtnBrowser.setEnabled( browserUrl() != null );
-    mBtnCopy.setEnabled( link != null );
+    mBtnBrowser.setEnabled( ! mLinkBusy && browserUrl() != null ); // not while the link changes
+    mBtnCopy.setEnabled( ! mLinkBusy && link != null );
     mBtnWithdraw.setVisibility( ( mLinkEditable && link != null )? View.VISIBLE : View.GONE );
     mBtnWithdraw.setEnabled( ! mLinkBusy );
     findViewById( R.id.silexgis_link_edit ).setVisibility( mLinkEditable? View.VISIBLE : View.GONE );
@@ -212,11 +210,48 @@ class SilexGisResultDialog extends MyDialog
     mBtnMake.setEnabled( ! mLinkBusy );
   }
 
-  /** @return the audience chosen for a new link
+  /** @return the audience chosen for a new link, null to leave it to the server (the audience of the link it
+   *          replaces, else the one the upload asked for, else the account's default)
    */
   private String chosenAudience()
   {
-    return ( mSpinAudience.getSelectedItemPosition() == 1 )? SilexGisUpload.AUDIENCE_ORGANIZATION : SilexGisUpload.AUDIENCE_PUBLIC;
+    switch ( mSpinAudience.getSelectedItemPosition() ) {
+      case 1: return SilexGisUpload.AUDIENCE_PUBLIC;
+      case 2: return SilexGisUpload.AUDIENCE_ORGANIZATION;
+    }
+    return null;
+  }
+
+  /** show the offer to export the sketches to Therion automatically, or the way to turn it off:
+   *  off where the settings do not show the sketch auto-export format (basic level), or once switched here
+   */
+  private void showAutoExport()
+  {
+    Resources res = mContext.getResources();
+    boolean th2 = ( TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_TH2 );
+    View block = findViewById( R.id.silexgis_auto_th2 );
+    if ( ! th2 && mSketchesBehind ) {
+      ( (TextView) findViewById( R.id.silexgis_auto_th2_text ) ).setText( String.format( res.getString( R.string.silexgis_auto_th2_offer ), autoExportName( res ) ) );
+      ( (Button) findViewById( R.id.button_auto_th2 ) ).setText( R.string.silexgis_auto_th2_button );
+      block.setVisibility( View.VISIBLE );
+    } else if ( th2 && ( ! TDLevel.overBasic || mAutoExportBefore != -2 ) ) {
+      ( (TextView) findViewById( R.id.silexgis_auto_th2_text ) ).setText( R.string.silexgis_auto_th2_on );
+      ( (Button) findViewById( R.id.button_auto_th2 ) ).setText( R.string.silexgis_auto_th2_off );
+      block.setVisibility( View.VISIBLE );
+    } else {
+      block.setVisibility( View.GONE );
+    }
+  }
+
+  /** set the sketch auto-export format
+   * @param format   format (-1 none)
+   */
+  private void setAutoExport( int format )
+  {
+    TDSetting.mAutoExportPlotFormat = format;
+    TDPrefHelper.update( "DISTOX_AUTO_PLOT_EXPORT", Integer.toString( format ) );
+    TDToast.make( String.format( mContext.getResources().getString( R.string.silexgis_auto_th2_done ), autoExportName( mContext.getResources() ) ) );
+    showAutoExport();
   }
 
   /** @return the name of the current sketch auto-export format
@@ -264,6 +299,8 @@ class SilexGisResultDialog extends MyDialog
     mLinkBusy = true;
     mBtnWithdraw.setEnabled( false );
     mBtnMake.setEnabled( false );
+    mBtnCopy.setEnabled( false );
+    mBtnBrowser.setEnabled( false );
     (new LinkTask( this, make, chosenAudience(), allow_protected )).execute();
   }
 
@@ -347,10 +384,12 @@ class SilexGisResultDialog extends MyDialog
       }
       return;
     } else if ( id == R.id.button_auto_th2 ) {
-      TDSetting.mAutoExportPlotFormat = TDConst.SURVEY_FORMAT_TH2;
-      TDPrefHelper.update( "DISTOX_AUTO_PLOT_EXPORT", Integer.toString( TDConst.SURVEY_FORMAT_TH2 ) );
-      TDToast.make( R.string.silexgis_auto_th2_done );
-      findViewById( R.id.silexgis_auto_th2 ).setVisibility( View.GONE );
+      if ( TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) {
+        mAutoExportBefore = TDSetting.mAutoExportPlotFormat;
+        setAutoExport( TDConst.SURVEY_FORMAT_TH2 );
+      } else { // back to the format it had before it was switched here, else none
+        setAutoExport( ( mAutoExportBefore >= 0 && mAutoExportBefore != TDConst.SURVEY_FORMAT_TH2 )? mAutoExportBefore : -1 );
+      }
       return;
     } else if ( id == R.id.button_download || id == R.id.button_cave3d ) {
       if ( mSelected == null || mDownloading ) return;
@@ -377,11 +416,13 @@ class SilexGisResultDialog extends MyDialog
     }
   }
 
-  /** make or withdraw the link off the UI thread
+  /** make or withdraw the link off the UI thread: the request works on a copy of the link, which takes the
+   *  place of the one of the dialog when it ends, so that the dialog never reads a link that is changing
    */
   private static class LinkTask extends AsyncTask< Void, Void, Integer >
   {
     private final SilexGisResultDialog mDialog;
+    private final SilexGisLink mLink;
     private final boolean mMake;
     private final String mAudience;
     private final boolean mAllowProtected;
@@ -389,6 +430,7 @@ class SilexGisResultDialog extends MyDialog
     LinkTask( SilexGisResultDialog dialog, boolean make, String audience, boolean allow_protected )
     {
       mDialog   = dialog;
+      mLink     = dialog.mLink.copy();
       mMake     = make;
       mAudience = audience;
       mAllowProtected = allow_protected;
@@ -398,11 +440,15 @@ class SilexGisResultDialog extends MyDialog
     protected Integer doInBackground( Void... args )
     {
       String id = mDialog.mOutcome.uploadId;
-      return mMake ? mDialog.mLink.make( mDialog.mClient, id, mAudience, mAllowProtected ) : mDialog.mLink.withdraw( mDialog.mClient, id );
+      return mMake ? mLink.make( mDialog.mClient, id, mAudience, mAllowProtected ) : mLink.withdraw( mDialog.mClient, id );
     }
 
     @Override
-    protected void onPostExecute( Integer outcome ) { mDialog.linkDone( outcome ); }
+    protected void onPostExecute( Integer outcome )
+    {
+      mDialog.mLink = mLink;
+      mDialog.linkDone( outcome );
+    }
   }
 
   /** download an artefact off the UI thread

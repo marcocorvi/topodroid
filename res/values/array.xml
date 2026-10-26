@@ -151,11 +151,13 @@
      <item name="public">@string/silexgis_visibility_public</item>
   </string-array>
   <string-array name="silexgisLinkChoice" translatable="false">
+     <item name="account">@string/silexgis_link_choice_account</item>
      <item name="none">@string/silexgis_link_choice_none</item>
      <item name="public">@string/silexgis_link_choice_public</item>
      <item name="organization">@string/silexgis_link_choice_organization</item>
   </string-array>
   <string-array name="silexgisLinkAudience" translatable="false">
+     <item name="account">@string/silexgis_link_choice_account</item>
      <item name="public">@string/silexgis_link_choice_public</item>
      <item name="organization">@string/silexgis_link_choice_organization</item>
   </string-array>

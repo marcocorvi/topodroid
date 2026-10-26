@@ -31,7 +31,6 @@ class SilexGisLink
   static final int KEY_REFUSED = 4; // the access key was refused
 
   static final String CODE_PROTECTED = "survey_upload.public_link_refused_protected";
-  static final String CODE_NOT_FOUND = "survey_upload.public_link_not_found";
   static final String REVOKED        = "revoked"; // refusal code of a withdrawn link
 
   String url      = null; // web path (or URL) of the link, null if none
@@ -42,6 +41,19 @@ class SilexGisLink
 
   /** cstr: no link */
   SilexGisLink() { }
+
+  /** @return a copy of this link, for a request to work on while the dialog shows this one
+   */
+  SilexGisLink copy()
+  {
+    SilexGisLink ret = new SilexGisLink();
+    ret.url      = url;
+    ret.audience = audience;
+    ret.refusal  = refusal;
+    ret.protectedRefused = protectedRefused;
+    ret.result   = result;
+    return ret;
+  }
 
   /** @return the link of an upload, as its status says it
    * @param st   status (can be null)
@@ -72,14 +84,15 @@ class SilexGisLink
   boolean isProtected() { return protectedRefused || ( ! hasLink() && SilexGisStatus.REFUSAL_PROTECTED.equals( refusal ) ); }
 
   /** @return the body of the request that makes a link
-   * @param audience          who may open it: public, organization
+   * @param audience          who may open it: public, organization (null: the server keeps the audience of the
+   *                          link it replaces, else the one the upload asked for, else the account's default)
    * @param allow_protected   whether the link is asked for although the position of the cave is protected
    */
   static JSONObject makeRequest( String audience, boolean allow_protected )
   {
     JSONObject ret = new JSONObject();
     try {
-      ret.put( "audience", SilexGisUpload.isAudience( audience )? audience : SilexGisUpload.AUDIENCE_PUBLIC );
+      if ( SilexGisUpload.isAudience( audience ) ) ret.put( "audience", audience );
       ret.put( "allowProtected", allow_protected );
     } catch ( JSONException e ) { /* cannot happen with these values */ }
     return ret;
@@ -88,7 +101,7 @@ class SilexGisLink
   /** make a new link in place of the one the upload has - not on the UI thread
    * @param client           client of the server
    * @param upload_id        upload id
-   * @param audience         who may open the link
+   * @param audience         who may open the link (null: as the server decides)
    * @param allow_protected  whether the link is asked for although the position of the cave is protected
    * @return the outcome: MADE, PROTECTED, REFUSED, KEY_REFUSED
    */
@@ -127,7 +140,7 @@ class SilexGisLink
   int withdraw( SilexGisClient client, String upload_id )
   {
     result = client.withdrawPublicLink( upload_id );
-    if ( ! result.isOk() && ! CODE_NOT_FOUND.equals( result.code ) ) return refused( result ); // a link that is not there is withdrawn
+    if ( ! result.isOk() ) return refused( result ); // the server answers 204 also when there was no link
     url      = null;
     refusal  = REVOKED;
     protectedRefused = false;

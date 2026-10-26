@@ -234,7 +234,6 @@ public class SilexGisSettingsDialog extends MyDialog
       }
     }
     sb.append( String.format( r.getString( R.string.silexgis_server ), res[1].getString( "name", "" ), res[1].getString( "version", "" ) ) ).append( "\n" );
-    SilexGisExportTask.getStore( mContext ).saveAccountAudience( SilexGisUploader.accountLinkAudience( res[2].json ) ); // the default link audience
     if ( SilexGisClient.compilerAvailable( res[2] ) ) {
       JSONObject compiler = res[2].json.optJSONObject( "compiler" );
       sb.append( String.format( r.getString( R.string.silexgis_compiles ), compiler.optString( "version", "" ) ) );
