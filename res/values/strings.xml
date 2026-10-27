@@ -1782,6 +1782,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="silexgis_too_many_files">Too many files: the server accepts %1$d</string>
   <string name="silexgis_sketch_missing">Sketch %1$s has no Therion export: export it from the sketch window to upload it</string>
   <string name="silexgis_sketch_old">The Therion export of sketch %1$s is older than the sketch</string>
+  <string name="silexgis_older_versions">The %1$d older versions of this survey keep %2$s of results on the server: its administrator decides how many versions keep them</string>
   <string name="silexgis_outputs_dropped">Outputs this server does not produce: %1$s</string>
   <string name="silexgis_files_dropped">Files this server does not accept: %1$s</string>
   <string name="silexgis_public_link">Link to the results: %1$s</string>

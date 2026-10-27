@@ -44,6 +44,7 @@ public class SilexGisSettingsDialog extends MyDialog
   private String mTestedUrl = null; // URL and key of the last successful test
   private String mTestedKey = null;
   private String mAccount   = null; // account found by the last successful test
+  private JSONObject mCaps  = null; // capabilities answered to the last successful test
 
   /** cstr
    * @param context       context
@@ -180,6 +181,7 @@ public class SilexGisSettingsDialog extends MyDialog
       setKeyHint();
       mTestedKey = null;
       mAccount   = null;
+      mCaps      = null;
       mTVresult.setText( R.string.silexgis_forgotten );
       return;
     } else if ( id == R.id.button_ok ) {
@@ -199,6 +201,7 @@ public class SilexGisSettingsDialog extends MyDialog
       TDSetting.setSilexGisAccess( url, key );
       if ( mAccount != null && url.equals( mTestedUrl ) && key.equals( mTestedKey ) ) {
         TDSetting.setSilexGisAccount( mAccount );
+        if ( mCaps != null ) SilexGisExportTask.getStore( mContext ).saveLinks( mCaps ); // the link choice of the next upload starts from them
       }
       dismiss();
       if ( mOnConfigured != null && ! url.isEmpty() && ! key.isEmpty() ) mOnConfigured.run();
@@ -224,6 +227,7 @@ public class SilexGisSettingsDialog extends MyDialog
     mTestedUrl = url;
     mTestedKey = key;
     mAccount   = SilexGisClient.accountLabel( res[0] );
+    mCaps      = ( res.length > 2 && res[2].isOk() )? res[2].json : null;
     StringBuilder sb = new StringBuilder();
     sb.append( String.format( r.getString( R.string.silexgis_account ), mAccount ) ).append( "\n" );
     for ( int k = 1; k < res.length; ++k ) {

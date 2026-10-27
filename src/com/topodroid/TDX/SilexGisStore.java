@@ -23,6 +23,7 @@ class SilexGisStore
 {
   static final String KEY_SWITCHES = "SILEXGIS_LAST_SWITCHES";
   static final String KEY_TARGET   = "SILEXGIS_TARGET_"; // followed by the survey name
+  static final String KEY_LINKS    = "SILEXGIS_LINKS";   // what the server last said of the links of the account
 
   /** the key-value storage (the app shared preferences)
    */
@@ -56,8 +57,31 @@ class SilexGisStore
     SilexGisUpload ret = ( defaults == null )? new SilexGisUpload() : defaults.copy();
     JSONObject switches = parse( mPrefs.get( KEY_SWITCHES ) );
     if ( switches != null ) ret.switchesFromJson( switches );
+    ret.presetLinks( loadLinks(), switches == null || ! switches.has( "link" ) ); // the first time, the account's audience
     ret.targetFromJson( parse( mPrefs.get( targetKey( survey ) ) ) ); // automatic if none
     return ret;
+  }
+
+  /** remember what the server says of the links of the account, for the next export dialog
+   * @param caps   capabilities of the server (null: nothing changes)
+   */
+  void saveLinks( JSONObject caps )
+  {
+    if ( caps == null ) return;
+    JSONObject links = SilexGisUploader.publicLinks( caps );
+    mPrefs.put( KEY_LINKS, ( links == null )? null : links.toString() );
+  }
+
+  /** @return what the server last said of the links of the account: { enabled, defaultAudience }, null if not known
+   */
+  JSONObject loadLinks() { return parse( mPrefs.get( KEY_LINKS ) ); }
+
+  /** @return true if the link choice of an upload has been remembered
+   */
+  boolean hasLinkChoice()
+  {
+    JSONObject switches = parse( mPrefs.get( KEY_SWITCHES ) );
+    return switches != null && switches.has( "link" );
   }
 
   /** remember an upload: its switches as the last ones, and its target for the survey

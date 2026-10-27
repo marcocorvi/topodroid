@@ -231,6 +231,7 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     SilexGisUploader uploader = new SilexGisUploader( mClient, null );
     onStep( SilexGisUploader.STEP_CONNECT, null, 0, 0 );
     SilexGisUploader.Outcome refused = uploader.check( mUpload );
+    getStore( mContext ).saveLinks( uploader.capabilities() ); // the link choice of the next export dialog starts from them
     if ( refused != null ) return refused;
 
     // the ordinary survey archive
@@ -472,6 +473,9 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     if ( out.mayRestart() ) { // nothing is on the server yet: the upload starts again with the new key
       SilexGisSettingsDialog.showKeyRefused( mContext, new Runnable() { @Override public void run() { start( mContext, mApp ); } } );
       return;
+    }
+    if ( out.status != null && out.status.olderWarn ) { // past the warning size of the server
+      mNotes.add( String.format( mRes.getString( R.string.silexgis_older_versions ), out.status.olderCount, SilexGisClient.sizeText( out.status.olderBytes, -1 ) ) );
     }
     StringBuilder notes = new StringBuilder();
     for ( String note : mNotes ) {

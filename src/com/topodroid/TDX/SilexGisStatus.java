@@ -64,6 +64,11 @@ class SilexGisStatus
   String publicLinkUrl   = null; // web path (or URL) of the public link, null if none
   String publicLinkAudience = null; // who may open it: public, organization (null if the server does not say)
   String publicLinkRefusal = null; // why there is no public link, if the server says
+  // what the older versions of the survey keep of their results on the server (olderVersions)
+  int     olderCount = 0;      // versions older than the newest
+  long    olderBytes = 0;      // their stored outputs and logs
+  boolean olderWarn  = false;  // past the warning size of the server
+  int     keepVersions = 0;    // versions that keep their outputs (0: all of them), as the administrator set
   final ArrayList< Artefact > artefacts = new ArrayList<>();
 
   /** @return true if the server does no more work on the upload
@@ -146,6 +151,13 @@ class SilexGisStatus
         ret.publicLinkRefusal = text( refusal, "message" );
         if ( ret.publicLinkRefusal == null ) ret.publicLinkRefusal = text( refusal, "code" );
       }
+    }
+    JSONObject older = json.optJSONObject( "olderVersions" );
+    if ( older != null ) {
+      ret.olderCount   = Math.max( 0, older.optInt( "count", 0 ) );
+      ret.olderBytes   = Math.max( 0, older.optLong( "sizeBytes", 0 ) );
+      ret.olderWarn    = older.optBoolean( "warn", false );
+      ret.keepVersions = Math.max( 0, older.optInt( "keepVersions", 0 ) );
     }
     JSONArray array = json.optJSONArray( "artefacts" );
     if ( array != null ) {

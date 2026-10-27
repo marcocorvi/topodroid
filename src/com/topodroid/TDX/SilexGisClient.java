@@ -70,6 +70,7 @@ public class SilexGisClient
   public static final int KEY_PREFIX_LENGTH = 12; // characters of the key shown, as the server lists the keys by their first 12 characters
 
   public static final String CODE_KEY_NOT_ACCEPTED = "auth.access_key_not_accepted";
+  public static final String CODE_SIGN_IN_REQUIRED = "survey_upload.public_link_sign_in_required"; // 401 of a link for the signed-in accounts: not a key refusal
 
   /** result of a call
    */
@@ -301,7 +302,7 @@ public class SilexGisClient
     String code   = optText( problem, "code" );
     String title  = optText( problem, "title" );
     String detail = optText( problem, "detail" );
-    if ( status == HttpURLConnection.HTTP_UNAUTHORIZED ) {
+    if ( status == HttpURLConnection.HTTP_UNAUTHORIZED && ! CODE_SIGN_IN_REQUIRED.equals( code ) ) { // the page of a link opens only on the web, signed in
       return new Result( KEY_REFUSED, status, code, title, detail, null, URL_OK );
     }
     if ( status == HttpURLConnection.HTTP_FORBIDDEN && CODE_KEY_NOT_ACCEPTED.equals( code ) ) {

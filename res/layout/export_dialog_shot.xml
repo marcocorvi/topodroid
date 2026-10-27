@@ -562,7 +562,7 @@
       android:layout_height="wrap_content"
       android:drawSelectorOnTop="true"
       />
-    <TextView
+    <TextView android:id="@+id/silexgis_link_label"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/silexgis_pref_public_link_title"

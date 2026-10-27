@@ -166,6 +166,7 @@ class SilexGisUploader
     List< String > outputs = ( compiler == null )? null : lowercase( compiler.optJSONArray( "outputs" ) );
     if ( upload.compile && out.compilerAvailable ) out.droppedOutputs.addAll( upload.droppedOutputs( outputs ) );
     long poll = 1000L * Math.max( 1, json.optInt( "pollIntervalSeconds", 3 ) );
+    upload.presetLinks( publicLinks( json ), false ); // an account that gets no links is not sent the choice
 
     out.droppedFiles.addAll( files.dropNotAccepted( accepted ) );
     out.problem = files.check( out.maxFileBytes, out.maxFiles );
@@ -262,6 +263,33 @@ class SilexGisUploader
       return out;
     }
     return null;
+  }
+
+  /** @return the capabilities of the server, null if not asked yet
+   */
+  JSONObject capabilities() { return mCaps; }
+
+  /** @return what the server says of the links of the account: { enabled, defaultAudience }, null if it says nothing
+   * @param caps   capabilities (can be null)
+   */
+  static JSONObject publicLinks( JSONObject caps ) { return ( caps == null )? null : caps.optJSONObject( "publicLinks" ); }
+
+  /** @return whether the server makes links to the results of the uploads of the account
+   * @param caps   capabilities (null if not known: it does)
+   */
+  static boolean publicLinksEnabled( JSONObject caps )
+  {
+    JSONObject links = publicLinks( caps );
+    return links == null || links.optBoolean( "enabled", true );
+  }
+
+  /** @return the audience of the links of the account: public, organization, null if not known
+   * @param caps   capabilities (can be null)
+   */
+  static String defaultLinkAudience( JSONObject caps )
+  {
+    String audience = SilexGisUpload.optString( publicLinks( caps ), "defaultAudience", null );
+    return SilexGisUpload.isAudience( audience )? audience : null;
   }
 
   /** @return whether the server makes a cave for an upload that names none, or asks a new one

@@ -69,6 +69,7 @@ class SilexGisUpload
   int     link       = LINK_ACCOUNT; // the link to the results: as the account says, none, or one for an audience
   String  outputs    = "lox,3d,plan-pdf,extended-pdf"; // comma separated
   String  visibility = "cavingGroup"; // documents of the upload, and the cave the server makes without a target
+  boolean linksOff   = false; // the server makes no links for this account: the link choice is not offered, nor sent (not remembered)
 
   /** default cstr: the defaults of the settings
    */
@@ -80,6 +81,7 @@ class SilexGisUpload
   {
     SilexGisUpload ret = new SilexGisUpload();
     ret.fromJson( toJson() );
+    ret.linksOff = linksOff;
     return ret;
   }
 
@@ -114,6 +116,23 @@ class SilexGisUpload
     if ( link == LINK_PUBLIC )       return AUDIENCE_PUBLIC;
     if ( link == LINK_ORGANIZATION ) return AUDIENCE_ORGANIZATION;
     return null;
+  }
+
+  /** set the link choice from what the server says of the links of the account (capabilities publicLinks)
+   * @param links       { enabled, defaultAudience } (null if not known: nothing changes)
+   * @param first_run   whether no link choice has been remembered yet: it then starts from the account's audience
+   */
+  void presetLinks( JSONObject links, boolean first_run )
+  {
+    if ( links == null ) return;
+    linksOff = ! links.optBoolean( "enabled", true );
+    if ( linksOff || ! first_run || link != LINK_ACCOUNT ) return; // a choice made, or no link wanted in the settings, is kept
+    String audience = optString( links, "defaultAudience", null );
+    if ( AUDIENCE_PUBLIC.equals( audience ) ) {
+      link = LINK_PUBLIC;
+    } else if ( AUDIENCE_ORGANIZATION.equals( audience ) ) {
+      link = LINK_ORGANIZATION;
+    }
   }
 
   /** @return the link choice of a remembered name, -1 if unknown
@@ -156,7 +175,7 @@ class SilexGisUpload
       ret.put( "withGpx",    withGpx );
       ret.put( "withOut",    withOut );
       ret.put( "compile",    compile );
-      ret.put( "link",       LINK_CHOICES[ link ] );
+      if ( ! linksOff ) ret.put( "link", LINK_CHOICES[ link ] ); // a choice not offered is not remembered
       ret.put( "outputs",    outputs );
       ret.put( "visibility", visibility );
     } catch ( JSONException e ) { /* cannot happen with these values */ }
@@ -380,9 +399,10 @@ class SilexGisUpload
       ret.put( "pipeline", pipeline );
       if ( isVisibility( visibility ) ) ret.put( "documentsVisibility", visibility );
       // the link to the results of this upload: none, or one for the chosen audience; nothing when the user
-      // left it to the account, whose preferences then decide on the server. A cave whose position is
-      // protected gets a link only when it is asked for on purpose, after the upload (SilexGisLink)
-      if ( link != LINK_ACCOUNT ) {
+      // left it to the account, whose preferences then decide on the server, or when the account gets no
+      // links (the choice is not offered then). A cave whose position is protected gets a link only when
+      // it is asked for on purpose, after the upload (SilexGisLink)
+      if ( link != LINK_ACCOUNT && ! linksOff ) {
         JSONObject public_link = new JSONObject();
         public_link.put( "wanted", link != LINK_NONE );
         if ( linkAudience() != null ) public_link.put( "audience", linkAudience() );

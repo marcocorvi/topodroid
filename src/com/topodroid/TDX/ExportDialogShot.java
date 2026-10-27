@@ -19,6 +19,7 @@ import com.topodroid.prefs.TDSetting;
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
+import android.os.AsyncTask;
 
 // import android.content.Intent;
 
@@ -88,6 +89,8 @@ public class ExportDialogShot extends MyDialog
   private Button mBtnSilexgisTarget;
   private SilexGisUpload mSilexgisUpload = null;     // upload options, pre-set from the last upload
   private SilexGisUpload mSilexgisRemembered = null; // target remembered for the survey
+  private boolean mSilexgisLinkFirst = false;        // no link choice remembered yet: it starts from the account's audience
+  private boolean mSilexgisLinksAsked = false;       // the server has been asked the links of the account
 
   /** cstr
    * @param context     context
@@ -348,7 +351,7 @@ public class ExportDialogShot extends MyDialog
       // case TDConst.SURVEY_POS_GPX: // GPX
       // case TDConst.SURVEY_POS_GEOJSON: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
       case TDConst.SURVEY_POS_SHAPEFILE: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
-      case TDConst.SURVEY_POS_SILEXGIS: mLayoutSilexgis.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_SILEXGIS: mLayoutSilexgis.setVisibility( View.VISIBLE ); askSilexgisLinks(); break;
     }
   }
 
@@ -613,6 +616,7 @@ public class ExportDialogShot extends MyDialog
     if ( vis >= 0 && vis < SilexGisUpload.VISIBILITIES.length ) mSilexgisUpload.visibility = SilexGisUpload.VISIBILITIES[ vis ];
     Runnable pick = new Runnable() {
       @Override public void run() {
+        askSilexgisLinks(); // the access may have been set just now
         (new SilexGisCaveDialog( mContext, SilexGisExportTask.surveyTitle( mSurvey ), mSilexgisUpload, mSilexgisRemembered,
           new SilexGisCaveDialog.Listener() {
             @Override public void onTarget( SilexGisUpload target ) {
@@ -623,6 +627,64 @@ public class ExportDialogShot extends MyDialog
       }
     };
     if ( SilexGisSettingsDialog.ensureConfigured( mContext, pick ) ) pick.run();
+  }
+
+  /** show the link choice, unless the server makes no links for the account
+   */
+  private void showSilexgisLink()
+  {
+    int visible = ( mSilexgisUpload != null && mSilexgisUpload.linksOff )? View.GONE : View.VISIBLE;
+    findViewById( R.id.silexgis_link_label ).setVisibility( visible );
+    findViewById( R.id.silexgis_link ).setVisibility( visible );
+  }
+
+  /** ask the server, once, what it says of the links of the account: whether it makes them, and their audience
+   */
+  private void askSilexgisLinks()
+  {
+    if ( mSilexgisLinksAsked || mSilexgisUpload == null ) return;
+    SilexGisClient client = new SilexGisClient( TDSetting.mSilexGisUrl, TDSetting.mSilexGisKey );
+    if ( ! client.isConfigured() || SilexGisClient.checkBaseUrl( client.getBaseUrl() ) != SilexGisClient.URL_OK
+      || ! SilexGisClient.checkKey( TDSetting.mSilexGisKey ) ) return; // not before the access is set
+    mSilexgisLinksAsked = true;
+    (new LinksTask( this, client )).executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR );
+  }
+
+  /** the server said what it does with the links of the account
+   * @param caps   capabilities of the server
+   */
+  private void onSilexgisLinks( org.json.JSONObject caps )
+  {
+    SilexGisExportTask.getStore( mContext ).saveLinks( caps );
+    if ( mSilexgisUpload == null || ! isShowing() ) return;
+    Spinner link = (Spinner) findViewById( R.id.silexgis_link );
+    boolean untouched = ( link.getSelectedItemPosition() == mSilexgisUpload.linkChoice() ); // a choice the user made is kept
+    mSilexgisUpload.presetLinks( SilexGisUploader.publicLinks( caps ), mSilexgisLinkFirst && untouched );
+    if ( untouched ) link.setSelection( mSilexgisUpload.linkChoice() );
+    showSilexgisLink();
+  }
+
+  /** capabilities of the server off the UI thread
+   */
+  private static class LinksTask extends AsyncTask< Void, Void, SilexGisClient.Result >
+  {
+    private final ExportDialogShot mDialog;
+    private final SilexGisClient mClient;
+
+    LinksTask( ExportDialogShot dialog, SilexGisClient client )
+    {
+      mDialog = dialog;
+      mClient = client;
+    }
+
+    @Override
+    protected SilexGisClient.Result doInBackground( Void... args ) { return mClient.capabilities(); }
+
+    @Override
+    protected void onPostExecute( SilexGisClient.Result res )
+    {
+      if ( res != null && res.isOk() && res.json != null ) mDialog.onSilexgisLinks( res.json ); // else the choice stays as it is
+    }
   }
 
   /** initialize the SilexGIS options: the last upload, the settings the first time
@@ -646,6 +708,8 @@ public class ExportDialogShot extends MyDialog
     Spinner link = (Spinner) findViewById( R.id.silexgis_link );
     link.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisLinkChoice ) ) );
     link.setSelection( mSilexgisUpload.linkChoice() );
+    mSilexgisLinkFirst = ! SilexGisExportTask.getStore( mContext ).hasLinkChoice();
+    showSilexgisLink();
     ((EditText) findViewById( R.id.silexgis_outputs )).setText( mSilexgisUpload.outputs );
     Spinner vis = (Spinner) findViewById( R.id.silexgis_visibility );
     vis.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisVisibility ) ) );
