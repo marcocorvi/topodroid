@@ -603,6 +603,7 @@
     <string name="popup_join">Kapcsol</string>
     <string name="popup_store">Mentés</string>
     <string name="popup_restore">Visszaállítás</string>
+  <string name="popup_reverse">Megfordítás</string>
 
     <string name="popup_erase_all">Minden törlése</string>
     <string name="popup_erase_point">Pontok törlése</string>
@@ -615,6 +616,12 @@
     <string name="popup_select_area">Területek kijelölése</string>
     <string name="popup_select_shot">Mérések kijelölése</string>
     <string name="popup_select_station">Mérési pontok kijelölése</string>
+
+  <string name="popup_color_none">Alap színezés</string>
+  <string name="popup_color_survey">Felmérések színezése</string>
+  <string name="popup_color_depth">Mélység szerinti színezés</string>
+  <string name="popup_color_surface">Felszín mélység szerint</string>
+  <string name="popup_color_distance">Felszín távolság szerint</string>
 
     <!-- UNUSED string name="popup_cont_none">Nincs</string -->
     <!-- UNUSED string name="popup_cont_start">Kezdőpont</string -->
@@ -1014,6 +1021,12 @@
     <!-- UNUSED string name="mode_elevation">Magasság</string -->
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Fix ref.</string>
+  <string name="mode_reference">Referencia</string>
+  <string name="mode_axes">Csak tengelyek</string>
+  <string name="mode_names">Nevek</string>
+  <string name="mode_endpoints">Végpontok</string>
+  <string name="mode_surface">Felszín</string>
+  <string name="mode_photo">Fotók</string>
     <string name="mode_scrap">Cak a jelenlegi szint</string>
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
@@ -2159,12 +2172,13 @@
 
     <string name="welcome_db_version">Adatbázis v. %1$d, %2$d</string>
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
-    <string name="welcome_text">
+    <string name="welcome_text"><![CDATA[
 \nKöszönjük, hogy a TopoDroidot választotta.
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás digitális integrált műszerekkel történő barlangfelmérésre.
 \nTámogatott műszerek: DistoX, BRIC, SAP, Cavway, DiscoX és JedEye
 \n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
-\n\nSegítség: menü "súgó, ?"
+\n\nÚjdonságok: https://github.com/marcocorvi/topodroid/blob/master/changes/6.5.39.md
+\nSegítség: menü "súgó, ?"
 \nFelhasználói kézikönyv: Könyv ikon a súgó ablakban
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nLetöltés: http://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html
@@ -2172,7 +2186,7 @@
 \nA magyar fordítást Sűrű Péter munkája nyomán
 \nHoll Balázs (holl.balazs.TopoDroid@gmail.com) készítette.
 \n
-    </string>
+    ]]></string>
 
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
   <string name="firmware_title">Firmware Frissítés</string>
