@@ -196,6 +196,9 @@ public class Parser3d extends TglParser
     return sb.toString().trim();
   }
 
+  /** 
+   * @note called by the cstr
+   */
   private void readfile( DataInputStream dis ) throws ParserException
   {
     try {
@@ -206,7 +209,7 @@ public class Parser3d extends TglParser
       line = readline( dis );
       // TDLog.v("3d <ver.> " + line ); // v8
       if ( ! line.equals( "v8" ) ) {
-        dis.close(); 
+        // dis.close(); 
         throw new ParserException( getName(), 2 );
       }
       // line = readline( dis );
@@ -247,7 +250,7 @@ public class Parser3d extends TglParser
           handleLabel( dis, code );
         }
       }
-      /* if ( dis != null ) */ dis.close(); // test always true
+      // /* if ( dis != null ) */ dis.close(); // test always true
     } catch ( IOException e ) { 
       TDLog.e("3d error " + e.getMessage() );
     }

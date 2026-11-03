@@ -423,9 +423,9 @@ public class GlLines extends GlShape
       col[k] = /* (t == null)? 0 : */ (float)t.surface_depth;
       ++k;
     }
-    // TDLog.v("Line depth buffer count " + count + " k " + k );
     depthBuffer = DataBuffer.getFloatBuffer( count );
     if ( depthBuffer != null ) {
+      // TDLog.v("Line depth buffer count " + count + " k " + k );
       depthBuffer.put( col );
     }
   }
@@ -437,7 +437,7 @@ public class GlLines extends GlShape
   {
     int count = 2 * legs.size();
     if ( count == 0 ) return;
-    depthBuffer = null;
+    distanceBuffer = null;
     float[] col = new float[ count ];
     int k = 0;
     for ( Cave3DShot leg : legs ) {
@@ -448,9 +448,9 @@ public class GlLines extends GlShape
       col[k] = /* (t == null)? 0 : */ (float)t.surface_distance;
       ++k;
     }
-    // TDLog.v("Line depth buffer count " + count + " k " + k );
     distanceBuffer = DataBuffer.getFloatBuffer( count );
     if ( distanceBuffer != null ) {
+      // TDLog.v("Line distance buffer count " + count + " k " + k );
       distanceBuffer.put( col );
     }
   }
@@ -560,7 +560,7 @@ public class GlLines extends GlShape
 
     float[] acolor = new float[ COORDS_PER_COLOR ];
     int k = 3; // index in the dataBuffer
-    TDLog.v("lines get survey colors is splay " + mSplays + " count " + lineCount );
+    // TDLog.v("lines get survey colors is splay " + mSplays + " count " + lineCount );
     for ( int i = 0; i<lineCount; ++i ) {
       Line3D line = lines.get( i );
       // TDLog.v("line " + i + ": survey " + line.survey + " color " + line.mCol + " max " + max );
@@ -609,7 +609,7 @@ public class GlLines extends GlShape
     // lines.get(0).getLineColor( acolor, mSplays );
     // TDLog.v("Lines prepare " + lineCount + " acolor " + acolor[0] + " " + acolor[1] + " " + acolor[2] + " " + acolor[3] );
     // TDLog.v("Lines prepare " + lineCount + " zmin " + zmin );
-    TDLog.v("lines prepare data is splay " + mSplays + " count " + lineCount );
+    // TDLog.v("lines prepare data is splay " + mSplays + " count " + lineCount );
     int k = 0;
     int h = 0; // center index
     for ( Line3D line : lines ) {
@@ -704,43 +704,43 @@ public class GlLines extends GlShape
       // TDLog.v("Lines draw none " + lineCount );
       return;
     }
-    if ( mColorMode == COLOR_NONE   ) {
-      // TDLog.v("Lines draw [1] " + lineCount ); // <-- this is the branch that is followed for less
+    boolean done = false;
+    switch ( mColorMode ) {
+      case COLOR_SURVEY:
+        GL.useProgram( mProgramAColor );
+        bindDataAColor( mvpMatrix );
+        done = true;
+        break;
+      case COLOR_DEPTH:
+        GL.useProgram( mProgramZColor );
+        bindDataZColor( mvpMatrix, acolor );
+        done = true;
+        break;
+      case COLOR_SURFACE:
+        if ( depthBuffer != null ) {
+          GL.useProgram( mProgramSColor );
+          bindDataSColor( mvpMatrix, depthBuffer );
+          done = true;
+        }
+        break;
+      case COLOR_DISTANCE:
+        if ( distanceBuffer != null ) {
+          GL.useProgram( mProgramSColor );
+          bindDataSColor( mvpMatrix, distanceBuffer );
+          done = true;
+        }
+        break;
+      // case COLOR_TEMP: // TEMPERATURE
+      //   if ( tempBuffer != null ) {
+      //     GL.useProgram( mProgramSColor );
+      //     bindDataSColor( mvpMatrix, tempBuffer );
+      //     done = true;
+      //   }
+      //   break;
+    }
+    if ( ! done ) {
       GL.useProgram( mProgramUColor );
       bindDataUColor( mvpMatrix, acolor );
-    } else if ( mColorMode == COLOR_SURVEY ) {
-      GL.useProgram( mProgramAColor );
-      bindDataAColor( mvpMatrix );
-    } else if ( mColorMode == COLOR_DEPTH  ) {
-      GL.useProgram( mProgramZColor );
-      bindDataZColor( mvpMatrix, acolor );
-    } else if ( mColorMode == COLOR_SURFACE  ) {
-      if ( depthBuffer != null ) {
-        GL.useProgram( mProgramSColor );
-        bindDataSColor( mvpMatrix, depthBuffer );
-      } else {
-        GL.useProgram( mProgramUColor );
-        bindDataUColor( mvpMatrix, acolor );
-      }
-    } else if ( mColorMode == COLOR_DISTANCE  ) {
-      if ( distanceBuffer != null ) {
-        GL.useProgram( mProgramSColor );
-        bindDataSColor( mvpMatrix, distanceBuffer );
-      } else {
-        GL.useProgram( mProgramUColor );
-        bindDataUColor( mvpMatrix, acolor );
-      }
-    // } else if ( mColorMode == COLOR_TEMP  ) { // TEMPERATURE
-    //   if ( tempBuffer != null ) {
-    //     GL.useProgram( mProgramSColor );
-    //     bindDataSColor( mvpMatrix, tempBuffer );
-    //   } else {
-    //     GL.useProgram( mProgramUColor );
-    //     bindDataUColor( mvpMatrix, acolor );
-    //   }
-    } else { 
-      TDLog.e("Lines unexpected color mode " + mColorMode );
-      return; 
     }
 
     GL.drawLine( 0, lineCount ); 
@@ -759,42 +759,43 @@ public class GlLines extends GlShape
   void draw( float[] mvpMatrix, int draw_mode )
   {
     if ( draw_mode == GlModel.DRAW_NONE || lineCount == 0 ) return;
-    if ( mColorMode == COLOR_NONE   ) {
-      // TDLog.v("Lines draw [2] " + lineCount );
+    boolean done = false;
+    switch ( mColorMode ) {
+      case COLOR_SURVEY:
+        GL.useProgram( mProgramAColor );
+        bindDataAColor( mvpMatrix );
+        done = true;
+        break;
+      case COLOR_DEPTH:
+        GL.useProgram( mProgramZColor );
+        bindDataZColor( mvpMatrix, mColor.color );
+        done = true;
+        break;
+      case COLOR_SURFACE:
+        if ( depthBuffer != null ) {
+          GL.useProgram( mProgramSColor );
+          bindDataSColor( mvpMatrix, depthBuffer );
+          done = true;
+          break;
+        }
+      case COLOR_DISTANCE:
+        if ( distanceBuffer != null ) {
+          GL.useProgram( mProgramSColor );
+          bindDataSColor( mvpMatrix, distanceBuffer );
+          done = true;
+          break;
+        }
+      //   case COLOR_TEMP: // TEMPERATURE
+      //   if ( tempBuffer != null ) {
+      //     GL.useProgram( mProgramSColor );
+      //     bindDataSColor( mvpMatrix, tempBuffer );
+      //     done = true;
+      //     break;
+      //   }
+    }
+    if ( ! done ) {
       GL.useProgram( mProgramUColor );
       bindDataUColor( mvpMatrix, mColor.color );
-    } else if ( mColorMode == COLOR_SURVEY ) {
-      GL.useProgram( mProgramAColor );
-      bindDataAColor( mvpMatrix );
-    } else if ( mColorMode == COLOR_DEPTH  ) {
-      GL.useProgram( mProgramZColor );
-      bindDataZColor( mvpMatrix, mColor.color );
-    } else if ( mColorMode == COLOR_SURFACE  ) {
-      if ( depthBuffer != null ) {
-        GL.useProgram( mProgramSColor );
-        bindDataSColor( mvpMatrix, depthBuffer );
-      } else {
-        GL.useProgram( mProgramUColor );
-        bindDataUColor( mvpMatrix, mColor.color );
-      }
-    } else if ( mColorMode == COLOR_DISTANCE  ) {
-      if ( distanceBuffer != null ) {
-        GL.useProgram( mProgramSColor );
-        bindDataSColor( mvpMatrix, distanceBuffer );
-      } else {
-        GL.useProgram( mProgramUColor );
-        bindDataUColor( mvpMatrix, mColor.color );
-      }
-    // } else if ( mColorMode == COLOR_TEMP  ) { // TEMPERATURE
-    //   if ( tempBuffer != null ) {
-    //     GL.useProgram( mProgramSColor );
-    //     bindDataSColor( mvpMatrix, tempBuffer );
-    //   } else {
-    //     GL.useProgram( mProgramUColor );
-    //     bindDataUColor( mvpMatrix, mColor.color );
-    //   }
-    } else { 
-      return; 
     }
 
     if ( draw_mode == GlModel.DRAW_LINE ) {

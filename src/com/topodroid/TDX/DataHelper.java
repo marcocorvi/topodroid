@@ -70,7 +70,7 @@ public class DataHelper extends DataSetObservable
   private static final String FIXED_TABLE  = "fixeds";
   private static final String SHOT_TABLE   = "shots";
   private static final String STATION_TABLE = "stations";
-  private static final String PLOT_TABLE   = "plots";
+  public static final String PLOT_TABLE   = "plots";
   // private static final String SKETCH_TABLE = "sketches";
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
@@ -79,7 +79,7 @@ public class DataHelper extends DataSetObservable
 
   private final static String WHERE_ID          = "id=?";
   private final static String WHERE_SID         = "surveyId=?";
-  private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
+  public final static String WHERE_SID_ID      = "surveyId=? AND id=?";
   // private final static String WHERE_SID_ID_LEGTYPE = "surveyId=? AND id=? AND leg=?";
   private final static String WHERE_SID_ID_MORE = "surveyId=? AND id>=?";
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
@@ -2286,11 +2286,12 @@ public class DataHelper extends DataSetObservable
         ih.bind( magneticCol, 0.0);
         ih.bind( dipCol, 0.0);
         ih.bind( extendCol, s.extend );
-        ih.bind( flagCol, s.duplicate ? DBlock.FLAG_DUPLICATE 
-                        : s.surface ? DBlock.FLAG_SURFACE 
-                        // : s.commented ? DBlock.FLAG_COMMENTED // ParserShots are not "commented"
-                        : s.backshot ? DBlock.FLAG_BACKSHOT
-                        : 0 );
+        ih.bind( flagCol, ( s.duplicate ? DBlock.FLAG_DUPLICATE : 0 )
+                        | ( s.surface ? DBlock.FLAG_SURFACE : 0 )
+                        // | ( s.commented ? DBlock.FLAG_COMMENTED : 0 ) // ParserShots are not "commented"
+                        | ( s.backshot ? DBlock.FLAG_BACKSHOT : 0 )
+                        // | ( s.noPlot ? DBlock.FLAG_NONE : 0 )
+        );
         ih.bind( legCol, s.leg );
         ih.bind( statusCol, 0 );
         ih.bind( commentCol, s.comment );
@@ -3286,14 +3287,14 @@ public class DataHelper extends DataSetObservable
     "select p.id, p.shotId, p.status, p.title, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p where p.surveyId=? AND id=? AND reftype=?";
 
   // used in selectAllPhotosShot
-  private static final String qjPhotosShot  =
+  public static final String qjPhotosShot  =
     "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and s.status=? and p.reftype=1";
   // 20241018 was p.status
   //  "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
 
   // used in selectAllPhotosPlot
-  private static final String qjPhotosPlot  =
+  public static final String qjPhotosPlot  =
     "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and q.status=? and p.reftype=2";
   // 20241018 was p.status
 
@@ -3730,6 +3731,8 @@ public class DataHelper extends DataSetObservable
   // select p.id, p.shotId, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=?
   //
 
+  public List< PhotoInfo > selectAllPlotPhotos( long sid, long status ) { return selectAllPhotosPlot( sid, status ); }
+
   /** @return the photos at plots of a survey
    * @param sid      survey ID
    * @param status   plot status [20241018 was photo status]
@@ -3795,7 +3798,7 @@ public class DataHelper extends DataSetObservable
    * @param status   shot status [20241018 was photo status]
    * @note used also by the ShotWindow
    */
-  List< PhotoInfo > selectAllPhotosShot( long sid, long status )
+  public List< PhotoInfo > selectAllPhotosShot( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -8262,7 +8265,7 @@ public class DataHelper extends DataSetObservable
             + " ( surveyId INTEGER, "
             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
             +   " name TEXT, "
-            +   " type INTEGER, "
+            +   " type INTEGER, "   // 0 station XS, 1 plan, 2 extended, 3 H leg-XS, 4 photo, 5 V leg-XS, 6 3d, 7 XH station XS , 8 projected, 9 leg-inclined projected
             +   " status INTEGER, " // NORMAL DELETED
             +   " start TEXT, "
             +   " view TEXT, "

@@ -214,7 +214,7 @@ public class MainWindow extends Activity
 
   // -------------------------------------------------------------
   private boolean say_no_survey   = true;
-  private boolean say_not_enabled = true; // whether to say that BT is not enabled
+  private boolean say_BT_not_enabled = true; // whether to say that BT is not enabled
   private boolean do_check_bt     = true;     // one-time bluetooth check sentinel
 
   static private boolean mPaletteButtonEnabled = false;
@@ -233,7 +233,7 @@ public class MainWindow extends Activity
     if ( TopoDroidApp.mData != null ) {
       List< String > list = TopoDroidApp.mData.selectAllSurveys();
       updateList( list );
-      if ( (! TopoDroidApp.sayDialogR()) && say_no_survey && TDUtil.isEmpty(list) ) { // PRIVATE_STORAGE : sayDialogR was commented
+      if ( /* (! TopoDroidApp.sayDialogR()) && */ say_no_survey && TDUtil.isEmpty(list) ) { // PRIVATE_STORAGE = false: sayDialogR was commented
         say_no_survey = false;
         TDToast.make( R.string.no_survey );
       } 
@@ -906,12 +906,12 @@ public class MainWindow extends Activity
   void showInitDialogs( ) // PRIVATE_STORAGE dropped arg say_dialog_r effectively unused
   {
     TDLog.v( "Main INIT dialogs - already done: " + done_init_dialogs /* + " say_dialog_r " + say_dialog_r */ );
-    if ( TDandroid.PRIVATE_STORAGE && TopoDroidApp.sayDialogR() ) { // FIXME_R
-      TDLog.v( "Main Dialog R: delaying init environment second");
-      (new DialogR( this, this)).show();
-      // TopoDroidApp.setSayDialogR( false );
-      return;
-    } 
+    // if ( TDandroid.PRIVATE_STORAGE && TopoDroidApp.sayDialogR() ) { // FIXME_R : PRIVATE_STORAGE = false
+    //   TDLog.v( "Main Dialog R: delaying init environment second");
+    //   (new DialogR( this, this)).show();
+    //   // TopoDroidApp.setSayDialogR( false );
+    //   return;
+    // } 
     if ( done_init_dialogs ) return;
     String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
     // TDLog.v( "Main INIT dialogs: app_dir <" + app_dir + ">" );
@@ -959,6 +959,8 @@ public class MainWindow extends Activity
         // tda.setOnDismissListener( this );
         // tda.show();
       }
+    } else if ( mApp.isUpdate ) {
+      (new TopoDroidAbout( this, this, -2 )).show();
     }
     
     // TDLog.v( "Main INIT symbols");
@@ -1132,7 +1134,7 @@ public class MainWindow extends Activity
   public void onDismiss( DialogInterface d )
   { 
     if ( d == (Dialog)mTopoDroidAbout ) {
-      doNextSetup( mTopoDroidAbout.nextSetup() );
+      if ( ! mApp.isUpdate ) doNextSetup( mTopoDroidAbout.nextSetup() );
       mTopoDroidAbout = null;
     }
   }
@@ -1141,7 +1143,7 @@ public class MainWindow extends Activity
   public void onCancel( DialogInterface d )
   {
     if ( d == (Dialog)mTopoDroidAbout ) {
-      doNextSetup( mTopoDroidAbout.nextSetup() );
+      if ( ! mApp.isUpdate ) doNextSetup( mTopoDroidAbout.nextSetup() );
       mTopoDroidAbout = null;
     }
   }
@@ -1392,9 +1394,9 @@ public class MainWindow extends Activity
     // saveInstanceToData();
 
     mApp.stopPairingRequest(); // FIXME DROP_PAIRING
-    if ( TopoDroidApp.sayDialogR() ) {
-      android.os.Process.killProcess( android.os.Process.myPid() );
-    }
+    // if ( TopoDroidApp.sayDialogR() ) { // FIXME_R PRIVATE_STORAGE = false
+    //   android.os.Process.killProcess( android.os.Process.myPid() );
+    // }
   }
 
   private boolean doubleBack = false;
@@ -1477,8 +1479,8 @@ public class MainWindow extends Activity
         // TDLocale.resetTheLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDevices() is called by menu CONNECT
-        } else if ( ! TopoDroidApp.sayDialogR() && say_not_enabled ) {
-          say_not_enabled = false;
+        } else if ( /* ! TopoDroidApp.sayDialogR() && */ say_BT_not_enabled ) { // FIXME_R PRIVATE_STORAGE = false
+          say_BT_not_enabled = false;
           TDToast.makeBad(R.string.not_enabled );
           // finish();
         }
@@ -1905,21 +1907,21 @@ public class MainWindow extends Activity
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_shot ) ), TDRequest.REQUEST_GET_IMPORT );
   }
 
-  /** handle the result of DialogR
-   * @param res   result: true = accepted, false = rejected
-   * @note this is the only place where sayDialogR is cleared (false)
-   */
-  void resultR( boolean res )
-  {
-    if ( ! TDandroid.PRIVATE_STORAGE ) return;
-    // TDLog.v("Main result R " + res );
-    if ( ! res ) {
-      TopoDroidApp.setSayDialogR( true );
-      finish();
-    } else {
-      TopoDroidApp.setSayDialogR( false );
-    }
-  }
+  // /** handle the result of DialogR  - FIXME_R PRIVATE_STORAE = false
+  //  * @param res   result: true = accepted, false = rejected
+  //  * @note this is the only place where sayDialogR is cleared (false)
+  //  */
+  // void resultR( boolean res )
+  // {
+  //   if ( ! TDandroid.PRIVATE_STORAGE ) return;
+  //   // TDLog.v("Main result R " + res );
+  //   if ( ! res ) {
+  //     TopoDroidApp.setSayDialogR( true );
+  //     finish();
+  //   } else {
+  //     TopoDroidApp.setSayDialogR( false );
+  //   }
+  // }
 
   // EXPORT -----------------------------------------------------------------
 

@@ -25,6 +25,7 @@ public class ParserShot
     public boolean duplicate; // flags
     public boolean surface;
     public boolean backshot;
+    // public boolean noPlot; // hide leg in both drawings
     public String comment;
 
     /** cstr 

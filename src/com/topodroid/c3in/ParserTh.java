@@ -12,8 +12,6 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.TDX.R;
-
 import com.topodroid.util.TDLog;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
@@ -24,6 +22,10 @@ import com.topodroid.c3db.SurveyInfo;
 import com.topodroid.c3db.DBlock;
 import com.topodroid.io.th.ThStatus;
 import com.topodroid.dem.DEMsurface;
+import com.topodroid.mag.Geodetic;
+import com.topodroid.mag.MagElement;
+import com.topodroid.mag.WorldMagneticModel;
+import com.topodroid.math.Vector3D;
 import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.TglColor;
@@ -33,12 +35,11 @@ import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.TDX.Cave3DFix;
 // import com.topodroid.TDX.Cave3DXSection;
-import com.topodroid.mag.Geodetic;
-import com.topodroid.mag.MagElement;
-import com.topodroid.mag.WorldMagneticModel;
-import com.topodroid.math.Vector3D;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.PhotoInfo;
+import com.topodroid.TDX.R;
+
 
 import java.io.File; // DB FILE
 import java.io.IOException;
@@ -50,6 +51,7 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Calendar;
@@ -72,8 +74,9 @@ public class ParserTh extends TglParser
   private static final int INCL = 2;
 
   public ArrayList< String > mMarks;
+  private ArrayList< GlPhotoInfo > mPhoto = null; // PHOTO-3D
 
-  DataHelper mData;
+  DataHelper mC3Data;
 
   private Cave3DCS cs0 = new Cave3DCS( ); // long-lat CS ?
   private Cave3DCS cs1 = null;  // custom CS
@@ -154,7 +157,7 @@ public class ParserTh extends TglParser
 
     String path = base + "/distox14.sqlite";
     // TDLog.v( "Th parser DB " + path + " survey " + surveyname );
-    mData = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
+    mC3Data = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
 
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
@@ -165,13 +168,26 @@ public class ParserTh extends TglParser
     if ( sw != null ) TDToast.make( sw.toString() );
 
     if ( res == SUCCESS ) {
-      processShots();
+      List< PhotoInfo > photos = mC3Data.selectAllPlotPhotos( TDInstance.sid, 0L ); // PHOTO-3D
+      TDLog.v("Plot photos " + ( (photos == null)? "null " : photos.size() ) );
+      for ( PhotoInfo photo : photos ) {
+        float intercept = mC3Data.selectPlotIntercept( photo.getItemId(), TDInstance.sid );
+        // item ID   = xsection plot ID
+        // item name = xsection plot name
+        TDLog.v("Photo: photoId " + photo.getId() + " title " + photo.getTitle() + " reftype " + photo.getRefType() + " item " + photo.getItemName() + " item ID " + photo.getItemId() + " intercept "+ intercept );
+        GlPhotoInfo photo_info = new GlPhotoInfo( photo.getId(), photo.getFilename(), photo.getItemId(), intercept );
+        mC3Data.selectPhotoStations( TDInstance.sid, photo.getItemId(), photo_info );
+        TDLog.v("       photoId " + photo.getId() + " item ID " + photo.getItemId() + " stations " + photo_info.from + " " + photo_info.to + " intercept "+ intercept + " file " + photo.getFilename() );
+        if ( mPhoto == null ) mPhoto = new ArrayList< GlPhotoInfo >();
+        mPhoto.add( photo_info );
+      }
+      TDLog.v("Th Parser: plot photo-infos " + ( (mPhoto == null)? "null " : mPhoto.size() ) );
+      processShots( surveyname );
       setShotSurveys();
       setSplaySurveys();
       setStationDepths();
       processMarks();
       // TDLog.v( "Th read survey " + surveyname );
-      // mPhoto = mData.selectAllPhotosShot( TDInstance.sid, 0 ); // TODO PHOTO-3D
     }
   }
 
@@ -191,9 +207,9 @@ public class ParserTh extends TglParser
     if ( pos >= 0 ) {
       String path = filename.substring(0, pos) + "/distox14.sqlite";
       // TDLog.v( "Th DB " + path );
-      mData = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
+      mC3Data = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
     } else {
-      mData = null;
+      mC3Data = null;
     }
     // clearData();
 
@@ -205,7 +221,7 @@ public class ParserTh extends TglParser
     // Toast.makeText( mApp, sw.toString(), Toast.LENGTH_LONG ).show();
 
     if ( res == SUCCESS ) {
-      processShots();
+      processShots( null );
       setShotSurveys();
       setSplaySurveys();
       setStationDepths();
@@ -240,7 +256,7 @@ public class ParserTh extends TglParser
    */
   private int readSurvey( String surveyname, String basepath, boolean usd, double sd, int color, PrintWriter pw ) // throws ParserException
   {
-    if ( mData == null ) {
+    if ( mC3Data == null ) {
       if ( pw != null ) pw.printf( mApp.getResources().getString( R.string.no_database ) );
       return ERR_NO_DB; 
     }
@@ -248,7 +264,7 @@ public class ParserTh extends TglParser
     // TDLog.v("TH read survey " + surveyname + " color " + color );
     // Toast.makeText( mApp, "Reading " + surveyname, Toast.LENGTH_SHORT ).show();
 
-    SurveyInfo info = mData.getSurveyInfo( surveyname );
+    SurveyInfo info = mC3Data.getSurveyInfo( surveyname );
     if ( info == null ) {
       if ( pw != null ) pw.printf( String.format( mApp.getResources().getString( R.string.cno_survey ), surveyname ) );
       return ERR_NO_SURVEY;
@@ -256,7 +272,7 @@ public class ParserTh extends TglParser
     info.color = color;
     long sid = info.id;
 
-    List< DBlock > blks = mData.getSurveyShots( sid, 0 );
+    List< DBlock > blks = mC3Data.getSurveyShots( sid, 0 );
     // TDLog.v("TH survey: shots " + blks.size() );
     if ( blks.size() == 0 ) {
       if ( pw != null ) pw.printf( String.format( mApp.getResources().getString( R.string.empty_survey ), surveyname ) );
@@ -291,7 +307,7 @@ public class ParserTh extends TglParser
     path = surveyname + "." + path;
     // ++ks;
 
-    List< SurveyFixed > fixeds = mData.getSurveyFixeds( sid );
+    List< SurveyFixed > fixeds = mC3Data.getSurveyFixeds( sid );
     // TDLog.v("TH survey: fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
     if ( fixeds != null && fixeds.size() > 0 ) {
@@ -796,7 +812,7 @@ public class ParserTh extends TglParser
                   // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
                 }
                 // TDLog.v( "TH load survey " + filename + " color " + color );
-                if ( mData == null ) {
+                if ( mC3Data == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
                     // base = dirname.replace( "tdconfig/", "" );
@@ -809,7 +825,7 @@ public class ParserTh extends TglParser
                   String db_path = base + "/distox14.sqlite";
                   // TDLog.v( "TH DB " + db_path );
                   if ( (new File(db_path)).exists() ) { // DB FILE
-                    mData = new DataHelper( mApp, db_path, TDVersion.DATABASE_VERSION );
+                    mC3Data = new DataHelper( mApp, db_path, TDVersion.DATABASE_VERSION );
                   } else {
                     TDLog.e("TH inexistent database " + db_path );
                   }
@@ -947,7 +963,7 @@ public class ParserTh extends TglParser
 
   /** process the shots
    */
-  private void processShots()
+  private void processShots( String survey_name )
   {
     if ( shots.size() == 0 ) return;
     // TDLog.v( "Th shots " + shots.size() + " stations " + stations.size() + " fixes " + fixes.size() );
@@ -1004,9 +1020,12 @@ public class ParserTh extends TglParser
         continue; // go to next fix
       }
       // TDLog.v( "Th add start station " + fix.getFullName() + " N " + fix.y + " E " + fix.x + " Z " + fix.z );
-      stations.add( new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z ) );
+      Cave3DStation s0 = new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z );
+      // TDLog.v("Th parser add start station " + s0.getFullName() + " " + s0.getShortName() + " survey " + s0.getSurvey() );
+      stations.add( s0 );
       conv = fix.mConvergence;  // HB_conv
       // sh.from_station = s0;
+      // checkStationPhoto( s0 ); PHOTO-3D TODO
 
       boolean repeat = true;
       while ( repeat ) {
@@ -1040,16 +1059,9 @@ public class ParserTh extends TglParser
             }
             if ( sf != null && st != null ) break;
           }
-          if ( sf != null && st != null ) {
-            sh.setUsed(); // LOOP
+          if ( sf != null && st != null ) { // LOOP
 	    ++ used_cnt;
-            if ( sh.isSurvey() ) {
-              mCaveLength += sh.length();
-            } else if ( sh.isSurface() ) {
-              mSurfaceLength += sh.length();
-            } else if ( sh.isDuplicate() ) {
-              mDuplicateLength += sh.length();
-            }
+            addToLengthsAndSetUsed( sh );
             // make a fake station
             Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
             // TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + st.getFullName() + " add " + s.getFullName() + " " + s.x + " " + s.y );
@@ -1064,32 +1076,18 @@ public class ParserTh extends TglParser
             Cave3DStation s = sh.getStationFromStation( sf, conv ); // HB_conv
             stations.add( s );
             sh.to_station = s;
-            // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + sf.x + " " + sf.y + " add " + sh.to_station.getFullName() + " " + sh.to_station.x + " " + sh.to_station.y );
-            sh.setUsed();
+            // checkStationPhoto( s ); // PHOTO-3D TODO
 	    ++ used_cnt;
-            if ( sh.isSurvey() ) {
-              mCaveLength += sh.length();
-            } else if ( sh.isSurface() ) {
-              mSurfaceLength += sh.length();
-            } else if ( sh.isDuplicate() ) {
-              mDuplicateLength += sh.length();
-            }
+            addToLengthsAndSetUsed( sh );
             repeat = true;
           } else if ( sf == null && st != null ) {
             // TDLog.v( "TH shot found to " + sh.to + " no station from "  + sh.from );
             Cave3DStation s = sh.getStationFromStation( st, conv ); // HB_conv
             stations.add( s );
             sh.from_station = s;
-            // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : " + st.getFullName() + " " + st.x + " " + st.y + " add " + sh.from_station.getFullName() + " " + sh.from_station.x + " " + sh.from_station.y  );
-            sh.setUsed();
+            // checkStationPhoto( s ); // PHOTO-3D TODO
 	    ++ used_cnt;
-            if ( sh.isSurvey() ) {
-              mCaveLength += sh.length();
-            } else if ( sh.isSurface() ) {
-              mSurfaceLength += sh.length();
-            } else if ( sh.isDuplicate() ) {
-              mDuplicateLength += sh.length();
-            }
+            addToLengthsAndSetUsed( sh );
             repeat = true;
           } else {
             // TDLog.v( "Th unused shot " + sh.from + " " + sh.to + " : null null" );
@@ -1099,6 +1097,9 @@ public class ParserTh extends TglParser
       // TDLog.v( "Th after " + fix.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
     } // for ( Cave3DFix fix : ok_fixes )
     TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
+    if ( survey_name != null ) {
+      checkPhotoXSections( "@" + survey_name + "." );
+    }
 
     // for ( Cave3DStation st : stations ) {
     //   TDLog.v("Th station " + st.getFullName() );
@@ -1140,4 +1141,39 @@ public class ParserTh extends TglParser
     // TDLog.v("Th bbox E " + emin + " " + emax + " N " + nmin + " " + nmax );
   }
 
+  private void addToLengthsAndSetUsed( Cave3DShot sh ) 
+  {
+    sh.setUsed();
+    if ( sh.isSurvey() ) {
+      mCaveLength += sh.length();
+    } else if ( sh.isSurface() ) {
+      mSurfaceLength += sh.length();
+    } else if ( sh.isDuplicate() ) {
+      mDuplicateLength += sh.length();
+    }
+  }
+
+  /** check photos of XSections
+   * @param survey_suffix   survey suffix: '@' + survey_name + '.'
+   */
+  private void checkPhotoXSections( String survey_suffix )
+  {
+    if ( mPhoto == null || mPhoto.isEmpty() ) return;
+
+    TDLog.v("Th Parser: photos " + ( (mPhoto == null)? "null" : mPhoto.size() ) );
+    for ( GlPhotoInfo photo : mPhoto ) {
+      // get station with name photo.from
+      Cave3DStation st_from = getStation( photo.from + survey_suffix );
+      Cave3DStation st_to = getStation( photo.to + survey_suffix );
+      if ( photo.interpolate( st_from, st_to ) ) {
+        if ( mGlPhotoList == null ) mGlPhotoList = new ArrayList< GlPhotoInfo >();
+        mGlPhotoList.add( photo );
+      } else {
+        TDLog.v("failed interolate photo " + photo.from + " " + photo.to );
+      }
+    }
+    mPhoto.clear();
+    TDLog.v("Th Parser: GL photos " + ( (mGlPhotoList == null)? "null" : mGlPhotoList.size() ) );
+  }
+ 
 }

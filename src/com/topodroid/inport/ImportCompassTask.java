@@ -74,6 +74,7 @@ public class ImportCompassTask extends ImportTask
       insertImportShots( sid, id, splays );
     } catch ( ParserException e ) {
       // TDToast.makeBad( R.string.file_parse_fail );
+      return -2L;
     }
     return sid;
   }

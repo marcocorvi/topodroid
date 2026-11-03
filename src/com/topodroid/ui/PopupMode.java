@@ -55,7 +55,8 @@ public class PopupMode
     R.string.popup_color_none,
     R.string.popup_color_survey,
     R.string.popup_color_depth,
-    R.string.popup_color_surface
+    R.string.popup_color_surface,
+    R.string.popup_color_distance
   };
 
   // 2023-03-10 DROPPED 

@@ -12,11 +12,13 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.ui.ExifInfo;
 import com.topodroid.math.Triangle3D;
 import com.topodroid.math.Vector3D;
 import com.topodroid.dem.DEMsurface;
 import com.topodroid.dem.ParserDEM;
 
+import com.topodroid.c3in.GlPhotoInfo;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch; // NO_C3D
 import com.topodroid.algo.cw.CWConvexHull;
@@ -37,6 +39,7 @@ import android.opengl.Matrix;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 public class GlModel
 {
@@ -93,7 +96,7 @@ public class GlModel
   GlLines glPlan    = null; // plan projection
   GlLines glProfile = null;
   GlPath  glPath    = null;
-  ArrayList< GlPhoto > glPhotos = new ArrayList<>();
+  ArrayList< GlPhoto > glPhotos = null; // PHOTO-3D
 
   // -----------------------------------------------------------------
   // WITH-GPS GPS LOCATION
@@ -127,7 +130,9 @@ public class GlModel
 
   boolean hasWalls() { return glWalls != null; }
 
-  boolean hasPhotos() { return ! glPhotos.isEmpty(); }
+  /* @return true if the model has (leg / station) photos
+   */
+  boolean hasGlPhotos() { return ! ( glPhotos == null || glPhotos.isEmpty() ); } // PHOTO-3D
 
   // /** rebind textures - empty: unused
   //  */
@@ -145,6 +150,25 @@ public class GlModel
     // TDLog.v("Model unbind textures");
     if ( glNames != null ) glNames.unbindTexture();
     if ( glSurface != null ) glSurface.unbindTexture();
+    if ( glPhotos != null && ! glPhotos.isEmpty() ) for ( GlPhoto p : glPhotos ) p.unbindTexture();
+  }
+
+  /** forget te GL ids of the photos - the GL context is new
+   *  Do not delete the textures
+   */
+  void resetPhotos() 
+  {
+    GlPhoto.resetProgram();
+    List< GlPhoto > photos;
+    synchronized( this ) { photos = glPhotos; }
+    if ( photos != null ) for ( GlPhoto p : photos ) p.forgetTexture();
+  }
+
+  private void releasePhotos()
+  {
+    List< GlPhoto > photos = glPhotos;
+    if ( photos != null ) for ( GlPhoto p : photos ) p.release();
+    glPhotos.clear();
   }
 
   /** @return the diameter of the model
@@ -167,6 +191,11 @@ public class GlModel
    */
   synchronized void clearAll() 
   {
+    if ( glNames != null )   glNames.release();
+    if ( glSurface != null ) glSurface.release();
+    ArrayList< GlPhoto > photos = glPhotos;
+    glPhotos = null;
+    if ( photos != null ) for ( GlPhoto photo : photos ) photo.release(); // PHOTO-3D
     glSurfaceLegs = null;
     glSurface = null;
     glGrid    = null;
@@ -186,24 +215,70 @@ public class GlModel
     glPath    = null;
     mParser   = null;
     glPoint   = null; // WITH-GPS
-    for ( GlPhoto photo : glPhotos ) photo.release();
-    glPhotos.clear();
+    if ( glPhotos != null ) {
+      TDLog.v("GL photo not null - clearing");
+      for ( GlPhoto photo : glPhotos ) photo.release(); // PHOTO-3D
+      glPhotos.clear();
+    }
+  }
+
+  void forgetGLIds()
+  {
+    TopoGL.forgetTrash();
+    synchronized( this ) {
+      if ( glNames != null ) glNames.forgetTexture();
+      if ( glSurface != null ) glSurface.forgetTexture();
+      if ( glPhotos != null ) {
+        ArrayList< GlPhoto > photos = glPhotos;
+        for ( GlPhoto photo : photos ) photo.forgetTexture();
+      }
+    }
   }
 
   // station is Vector3D (X, Y, Z) Cave3DStation
   // ( X - mXmed, Z - mYmed, -Y - mZmed )
   // azimuth and cino are from the image
   // dist is to be picked
-  void addPhoto( String filepath, Cave3DStation st, float azimuth, float clino, float dist )
+  boolean addPhoto( String filepath, Vector3D st, float dist ) // PHOTO-3D
   {
+    ExifInfo exif = new ExifInfo( filepath );
+    float azimuth = exif.azimuth();
+    float clino   = exif.clino();
     BitmapFactory.Options options = new BitmapFactory.Options();
-    options.inSampleSize = 8;
+    options.inSampleSize = 8; // subsampling
     options.outWidth = 256;
-    Bitmap bitmap = BitmapFactory.decodeFile( filepath, options );
-    if ( bitmap != null ) {
-      GlPhoto photo = new GlPhoto( bitmap, (float)st.x, (float)st.y, (float)st.z, azimuth, clino, dist, 256 );
-      glPhotos.add( photo );
+    Bitmap bitmap = BitmapFactory.decodeFile( filepath, options ); // bitmap is recycled after GlPhoto upload the texture
+    if ( bitmap == null ) {
+      TDLog.e("Photo " + filepath + " null bitmap ");
+      return false;
     }
+    float cx = (float)( st.x - mXmed);
+    float cy = (float)( st.z - mYmed);
+    float cz = (float)(-st.y - mZmed);
+    // TDLog.v("Gl Model: photo " + filepath + " bitmap " + bitmap.getWidth() + "x" + bitmap.getHeight() + " center " + cx + " " + cy + " " + cz );
+    GlPhoto photo = new GlPhoto( bitmap, cx, cy, cz, azimuth, clino, dist, 2f );
+    if ( glPhotos == null ) {
+      // TDLog.v("GL photo null - creating");
+      glPhotos = new ArrayList< GlPhoto >();
+    }
+    glPhotos.add( photo );
+    // TDLog.v("Gl Model: photos - nr. " + glPhotos.size() );
+    return true;
+  }
+
+  /** add a set of photos (at stations)
+   * @param photos   photos at specified stations
+   */
+  private void preparePhotos( List< GlPhotoInfo > photos ) // PHOTO-3D
+  {
+    if ( photos == null || photos.size() == 0 ) return;
+    int cnt = 0;
+    for ( GlPhotoInfo photo : photos ) {
+      String filepath = photo.mFilename;
+      // if ( filepath == null ) continue;
+      if ( addPhoto( filepath, photo, 0.1f ) ) ++ cnt;
+    }
+    // TDLog.v("Gl Model: add photos " + cnt );
   }
 
   /** set the width and the height
@@ -228,6 +303,7 @@ public class GlModel
     GlPath.initGL( mContext );
     // GlSketch.initGL( mContext ); // NO_C3D
     GlPoint.initGL( mContext );
+    GlPhoto.initGL( mContext );
   }
 
   // ----------------------------------------------------------------------------------
@@ -306,7 +382,11 @@ public class GlModel
    */
   static void setShowWalls( boolean show_walls ) { showWalls = show_walls; }
 
-  static void setShowPhotos( boolean show_photos ) { showPhotos = show_photos; }
+  static void setShowPhotos( boolean show_photos )
+  { 
+    showPhotos = show_photos; 
+    // TDLog.v("Gl Model show photo " + showPhotos );
+  }
 
   static void setShowReference( boolean show_frame, boolean show_axes )
   { 
@@ -389,6 +469,7 @@ public class GlModel
   void setColorMode( int mode )
   {
     if ( glLegs != null ) {
+      // TDLog.v("Model set color mode " + mode );
       glLegs.setColorMode( mode );
       if ( glLegsS  != null ) glLegsS.setColorMode( mode );
       if ( glLegsD  != null ) glLegsD.setColorMode( mode );
@@ -417,6 +498,7 @@ public class GlModel
    */
   GlModel ( Context ctx )
   { 
+    // TDLog.v("GL model cstr");
     mContext = ctx;
     // NO_C3D
     // GlSketch.loadSymbols( TDPath.getPointDir() ); 
@@ -601,7 +683,7 @@ public class GlModel
     //   }
     // }
 
-    if ( showPhotos ) {
+    if ( showPhotos ) { // PHOTO-3D
       List< GlPhoto > gl_photos = null;
       synchronized( this ) { gl_photos = glPhotos; }
       if ( gl_photos != null ) {
@@ -1351,6 +1433,10 @@ public class GlModel
     // splays.logMinMax();
 
     synchronized( this ) {
+      releasePhotos();
+      if ( parser.hasGlPhotos() ) { // PHOTO-3D
+        preparePhotos( parser.getPhotoList() );
+      }
       glLegs   = legs;
       glLegsS  = legsS;
       glLegsD  = legsD;

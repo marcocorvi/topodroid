@@ -13,103 +13,45 @@
 package com.topodroid.inport;
 
 import com.topodroid.util.TDLog;
-class ParserSurvexState
+
+class ParserSurvexState extends ParserState
 {
   ParserSurvexState mParent;
-
   String mName; // *begin name
-
-  // zero_error includes scale and units
-  float mUnitLen,   mScaleLen,   mZeroLen; 
-  float mUnitBer,   mScaleBer,   mZeroBer; 
-  float mUnitCln,   mScaleCln,   mZeroCln;
-  // float mUnitLeft,  mScaleLeft,  mZeroLeft;
-  // float mUnitRight, mScaleRight, mZeroRight;
-  // float mUnitUp,    mScaleUp,    mZeroUp;
-  // float mUnitDown,  mScaleDown,  mZeroDown;
-  float mDeclination;
-  boolean mDuplicate;
-  boolean mSurface;
-  boolean mSplay;
   int mSurveyLevel;
   int mCase;
   boolean interleaved; // interleaved data
 
-  int data_type;
+  // void dump( String msg )
+  // {
+  //   TDLog.v( msg + " state: " + mName + " level " + mSurveyLevel + " units " + mUnitLen + " " + mUnitBer + "/" + mScaleBer + "/" + mZeroBer + " " + mUnitCln + "/" + mScaleCln + "/" + mZeroCln );
+  //   TDLog.v( "     " + mUnitBackBer + " " + mUnitBackCln );
+
+  // }
 
   ParserSurvexState( String name )
   {
+    super();
     mParent = null;
     mName   = name;
-    setUnitsDefault();
-    setCalibrateDefault();
     setDataDefault();
-
-    mDeclination= 0.0f;
-    mDuplicate = false;
-    mSurface   = false;
-    mSplay     = false;
-    mSurveyLevel = 0;
     mCase = ParserUtil.CASE_LOWER;
   }
 
   void setDataDefault()
   {
-    data_type = 0; // DATA_DEFAULT
+    // data_type = 0; // DATA_DEFAULT
     interleaved = false;
-  }
-
-  void setCalibrateDefault()
-  {
-    mZeroLen   = mZeroBer   = mZeroCln   = 0.0f;
-    mScaleLen  = mScaleBer  = mScaleCln  = 1.0f;
-    // mUnitLeft  = mUnitRight  = mUnitUp  = mUnitDown  = 1.0f;
-    // mScaleLeft = mScaleRight = mScaleUp = mScaleDown = 1.0f;
-    // mZeroLeft  = mZeroRight  = mZeroUp  = mZeroDown  = 0.0f;
-  }
-
-  void setUnitsDefault()
-  {
-    mUnitLen   = mUnitBer   = mUnitCln   = 1.0f;
   }
 
   ParserSurvexState( ParserSurvexState state, String name )
   {
+    super( state );
     mParent  = state;
     mName    = name;
-
-    mUnitLen   = state.mUnitLen;
-    mUnitBer   = state.mUnitBer;
-    mUnitCln   = state.mUnitCln;
-    mZeroLen   = state.mZeroLen;
-    mZeroBer   = state.mZeroBer;
-    mZeroCln   = state.mZeroCln;
-    mScaleLen  = state.mScaleLen;
-    mScaleBer  = state.mScaleBer;
-    mScaleCln  = state.mScaleCln;
-
-    // mUnitLeft   = state.mUnitLeft;
-    // mUnitRight  = state.mUnitRight;
-    // mUnitUp     = state.mUnitUp;
-    // mUnitDown   = state.mUnitDown;
-    // mScaleLeft  = state.mScaleLeft;
-    // mScaleRight = state.mScaleRight;
-    // mScaleUp    = state.mScaleUp;
-    // mScaleDown  = state.mScaleDown;
-    // mZeroLeft   = state.mZeroLeft;
-    // mZeroRight  = state.mZeroRight;
-    // mZeroUp     = state.mZeroUp;
-    // mZeroDown   = state.mZeroDown;
-
-    mDeclination= state.mDeclination;
-    mDuplicate = state.mDuplicate;
-    mSurface   = state.mSurface;
-    mSplay     = state.mSplay;
-    data_type = state.data_type;
     interleaved = state.interleaved;
-
     mCase = state.mCase;
-    mSurveyLevel = state.mSurveyLevel + 1;
+    // mSurveyLevel = state.mSurveyLevel + 1;
   }
 
 }

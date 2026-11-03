@@ -60,7 +60,10 @@ class TopoDroidAbout extends MyDialog
 
     String title = String.format( mContext.getResources().getString(R.string.welcome_title), TDVersion.fullString() );
     setTitle( title );
-    TDLog.v("About: title <" + title + ">" );
+    // TDLog.v("About: title <" + title + ">" );
+
+    TextView welcome_text = (TextView) findViewById( R.id.TextView01 );
+    welcome_text.setText( String.format( mContext.getResources().getString(R.string.welcome_text), TDVersion.string() ) );
 
     TextView version = (TextView) findViewById( R.id.TextView02 );
     version.setText( String.format( mContext.getResources().getString(R.string.welcome_db_version), TDVersion.DATABASE_VERSION, TDVersion.DEVICE_DATABASE_VERSION ) );

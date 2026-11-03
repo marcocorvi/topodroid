@@ -253,9 +253,9 @@ class DrawingLineSectionDialog extends MyDialog
       MyCheckBox cb = (MyCheckBox)v;
       if ( canTakePhoto && cb == mBtnFoto ) {
         // TODO mCenter for multileg xsection
-        mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
+        mParent.makeLegXSectionPhoto( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
       } else if ( cb == mBtnDraw ) {
-        mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT, mCenter );
+        mParent.makeLegXSectionPlot( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT, mCenter );
       } else if ( cb == mBtnErase ) {
         mParent.deleteLine( mLine );
       } else if ( cb == mBtnSave ) {

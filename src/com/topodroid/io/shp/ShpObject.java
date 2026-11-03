@@ -78,14 +78,17 @@ class ShpObject
   FileChannel shxChannel;
   FileChannel dbfChannel;
   FileChannel cpgChannel; // HBshp
+  FileChannel prjChannel;
   ByteBuffer shpBuffer;
   ByteBuffer shxBuffer;
   ByteBuffer dbfBuffer;
   ByteBuffer cpgBuffer; // HBshp
+  ByteBuffer prjBuffer; 
   FileOutputStream shpFos;
   FileOutputStream shxFos;
   FileOutputStream dbfFos;
   FileOutputStream cpgFos; // HBshp
+  FileOutputStream prjFos; 
 
   List< String > mFiles; // list of files to which append my files
 
@@ -165,15 +168,18 @@ class ShpObject
       shxFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".shx" ) );
       dbfFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".dbf" ) );
       cpgFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".cpg" ) ); // HBshp
+      prjFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".prj" ) ); // coordinate system
       shpChannel = shpFos.getChannel();
       shxChannel = shxFos.getChannel();
       dbfChannel = dbfFos.getChannel();
       cpgChannel = cpgFos.getChannel(); // HBshp
+      prjChannel = prjFos.getChannel();
       if ( mFiles != null ) {
         mFiles.add( name + ".shp" );
         mFiles.add( name + ".shx" );
         mFiles.add( name + ".dbf" );
         mFiles.add( name + ".cpg" ); // HBshp
+        mFiles.add( name + ".prj" );
       }
     } catch ( IOException e ) {
       TDLog.e("SHP open i/o " + e.getMessage() );
@@ -209,11 +215,13 @@ class ShpObject
     shxBuffer = ByteBuffer.allocateDirect( shx_len + 8 );
     dbfBuffer = ByteBuffer.allocateDirect( dbf_len + 8 );
     cpgBuffer = ByteBuffer.allocateDirect( 5 ); // HBshp
+    prjBuffer = ByteBuffer.allocateDirect( 5 ); // TODO
     try {
       shpChannel.position(0);
       shxChannel.position(0);
       dbfChannel.position(0);
       cpgChannel.position(0); // HBshp
+      prjChannel.position(0); 
     } catch ( IOException e ) {
       TDLog.e("SHP reset channels " + e.getMessage() );
       throw e;
@@ -241,6 +249,7 @@ class ShpObject
     drain( shxBuffer, shxChannel );
     drain( dbfBuffer, dbfChannel );
     drain( cpgBuffer, cpgChannel ); // HBshp
+    drain( prjBuffer, prjChannel ); 
   }
 
   private void drain( ByteBuffer buffer, FileChannel channel )  throws IOException
@@ -303,10 +312,12 @@ class ShpObject
     if (shxBuffer instanceof MappedByteBuffer) shxBuffer.clear();
     if (dbfBuffer instanceof MappedByteBuffer) dbfBuffer.clear();
     if (cpgBuffer instanceof MappedByteBuffer) cpgBuffer.clear(); // HBshp
+    if (prjBuffer instanceof MappedByteBuffer) prjBuffer.clear();
     shpBuffer = null;
     shxBuffer = null;
     dbfBuffer = null;
     cpgBuffer = null; // HBshp
+    prjBuffer = null;
     // TDLog.v( "drain and close DONE" );
   }
 
@@ -371,6 +382,7 @@ class ShpObject
   public void writeDBaseHeader( int n_rec, int lenRecord, int n_fld, String[] fields, byte[] types, int[] lens )
   {
     writeCPG(); // HBshp
+    // writePRJ( null ); // FIXME UNCOMMENT
     int fldLength = 32; // field descriptor length [bytes]
     int lenHeader = 32 + fldLength * n_fld + 1;
     // int lenRecord = 1 + 16 * n_fld; // 16 bytes per field in each record
@@ -466,6 +478,19 @@ class ShpObject
     cpgBuffer.put( (byte)0x46 ); // F
     cpgBuffer.put( (byte)0x2d ); // -
     cpgBuffer.put( (byte)0x38 ); // 8
+  }
+
+  static String WGS84 = "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\", 0.0174532925199433]];
+ 
+  static String UTM( String zone ) { return "PROJCS[\"WGS_1984_UTM_Zone_" + zone + "\"," + WGS84 + ",PROJECTION[\"Central_Meridian\",-123.0]"; }
+
+  public void writePRJ( String zone )
+  {
+    String PRJ = (zone == null)? WGS84 : UTM( zone );
+    int len = PRJ.length();
+    prjBuffer = checkBuffer( prjBuffer, len );
+    byte[] PRJ_bytes = PRJ.getBytes();
+    for ( int k=0; k<len; ++k ) prjBuffer.put( PRJ_bytes[k] );
   }
 
   // dbf record length = 1 + 16*n_fld

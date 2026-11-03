@@ -94,7 +94,10 @@ class GL
     int vertexShader   = compileVertexShader( vertex_glsl );
     if ( vertexShader == 0 ) return 0;
     int fragmentShader = compileFragmentShader( fragment_glsl );
-    if ( fragmentShader == 0 ) return 0;
+    if ( fragmentShader == 0 ) { 
+      GLES20.glDeleteShader( vertexShader ); // release vertex shader
+      return 0;
+    }
     return linkProgram( vertexShader, fragmentShader );
   }
 
@@ -300,7 +303,7 @@ class GL
     return id;
   }
 
-  private  static int linkProgram( int vertexShader, int fragmentShader )
+  private static int linkProgram( int vertexShader, int fragmentShader )
   {
     int program = GLES20.glCreateProgram(); // create empty OpenGL ES Program
     if ( program == 0 ) {
@@ -310,10 +313,11 @@ class GL
     GLES20.glAttachShader(program, vertexShader); // add the vertex shader to program
     GLES20.glAttachShader(program, fragmentShader); // add the fragment shader to program
     GLES20.glLinkProgram(program); // creates OpenGL ES program executables
+    // WHY detach and delete both shaders
     final int[] status = new int[1];
     GLES20.glGetProgramiv( program, GLES20.GL_LINK_STATUS, status, 0 );
     if ( status[0] == 0 ) {
-      TDLog.e("GL failed link program: " + GLES20.glGetShaderInfoLog( program ) );
+      TDLog.e("GL failed link program: " + GLES20.glGetProgramInfoLog( program ) );
       GLES20.glDeleteProgram( program );
       return 0;
     }
@@ -321,7 +325,7 @@ class GL
   }
 
 /* GLES32
-  private  static int linkProgram( int vertexShader, int fragmentShader, int geometryShader )
+  private static int linkProgram( int vertexShader, int fragmentShader, int geometryShader )
   {
     int program = GLES20.glCreateProgram(); // create empty OpenGL ES Program
     if ( program == 0 ) {
@@ -397,6 +401,13 @@ class GL
 
 
   // @note bitmap not-null
+  /** bind a bitmap
+   * @param target    always GLES20.GL_TEXTURE_2D
+   * @param bitmap    bitmap
+   * @param wrap      how to wrap around the borders: GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_REPEAT, ???
+   * @param one_byte  whether the bitmap is 1-byte per pixel
+   * @return texure_id or 0 on failure
+   */
   private static int bindBitmap( int target, Bitmap bitmap, int wrap, boolean one_byte )
   {
     // if ( bitmap == null ) {
@@ -404,14 +415,14 @@ class GL
     //   return -1; // neg. failure
     // }
     final int[] texId = new int[1];
-    GLES20.glGenTextures( 1, texId, 0 ); // 1 = number, 0 = offset
+    GLES20.glGenTextures( 1, texId, 0 ); // number=1, offset=0
     if ( texId[0] == 0 ) {
       return 0;
     }
     TDLog.v("GL bind bitmap target " + target + " texIT " + texId[0] );
     GLES20.glBindTexture(   target, texId[0] );
-    GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_S, wrap );
-    GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_T, wrap );
+    GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_S, wrap ); // how to wrap S coordinate
+    GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_T, wrap ); // how to wrap T coordinate
     GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST );
     GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR );
     if ( one_byte ) {
@@ -426,7 +437,7 @@ class GL
     GLES20.glBindTexture( target, 0 );
     final int[] texId = new int[1];
     texId[0] = id;
-    GLES20.glDeleteTextures( 1, texId, 0 ); // 1 = number, 0 = offset
+    GLES20.glDeleteTextures( 1, texId, 0 ); // number=1, offset=0
   }
   
 
@@ -436,6 +447,8 @@ class GL
     texId[0] = id;
     GLES20.glDeleteTextures( 1, texId, 0 );
   }
+
+  static void releaseTextures( int len, int[] ids, int offset ) { GLES20.glDeleteTextures( len, ids, offset); }
 
   // UNUSED
   // static ShortBuffer getShortBuffer( int count )

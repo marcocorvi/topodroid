@@ -153,6 +153,7 @@ public class TopoDroidApp extends Application
 
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
+  static boolean isUpdate = false;
 
   static private GeoCodes mGeoCodes = null; // singleton
   static private boolean mDebugTest = false; // DO NOT SYNC
@@ -181,25 +182,25 @@ public class TopoDroidApp extends Application
   // DialogR controller - only for PRIVATE_STORAGE
   // static private boolean say_dialogR = false; // ! TopoDroidApp.hasTopoDroidDatabase(); // updated by showInitDialogs
 
-  /** @return  whether to say the dialogR or not
-   */
-  static boolean sayDialogR() 
-  { 
-    if ( mDData == null ) return true;
-    String res = mDData.getValue( "say_dialogR" );
-    boolean ret = ( res == null || ! res.equals("NO") );
-    // TDLog.v("TD say dialog R " + ret );
-    return ret;
-  }
+  // /** @return  whether to say the dialogR or not - FIXME_R PRIVATE_STORAGE = false
+  //  */
+  // static boolean sayDialogR() 
+  // { 
+  //   if ( mDData == null ) return true;
+  //   String res = mDData.getValue( "say_dialogR" );
+  //   boolean ret = ( res == null || ! res.equals("NO") );
+  //   // TDLog.v("TD say dialog R " + ret );
+  //   return ret;
+  // }
 
-  /** set the say_dialog_R config
-   * @param res   whether to say the dialogR or not
-   */
-  static void setSayDialogR( boolean res ) 
-  { 
-    // TDLog.v("TD set dialog R " + res );
-    if ( mDData != null ) mDData.setValue( "say_dialogR", ( res? "YES" : "NO" ) );
-  }
+  // /** set the say_dialog_R config - FIXME_R PRIVATE_STORAGE = false
+  //  * @param res   whether to say the dialogR or not
+  //  */
+  // static void setSayDialogR( boolean res ) 
+  // { 
+  //   // TDLog.v("TD set dialog R " + res );
+  //   if ( mDData != null ) mDData.setValue( "say_dialogR", ( res? "YES" : "NO" ) );
+  // }
 
 
   // static int mCheckPerms;
@@ -1462,11 +1463,11 @@ public class TopoDroidApp extends Application
 
     thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
 
-    if ( TDandroid.PRIVATE_STORAGE && mDData != null ) {
+    if ( /* TDandroid.PRIVATE_STORAGE && */ mDData != null ) { // FIXME PRIVATE_STORAGE = false
       String version = mDData.getValue( "version" );
-      if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
-        setSayDialogR( true );
-      }
+      isUpdate = ( version == null || ( ! version.equals( TDVersion.string() ) ) );
+      // if ( isUpdate ) setSayDialogR( true ); // FIXME_R PRIVATE_STORAGE = false
+      // TDLog.v("App is update " + isUpdate );
     }
 
     // DO NOT SYNC

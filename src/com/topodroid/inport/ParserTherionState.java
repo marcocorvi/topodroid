@@ -14,7 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.types.ExtendType;
 
-class ParserTherionState
+class ParserTherionState extends ParserState
 {
   ParserTherionState mParent;
 
@@ -28,41 +28,22 @@ class ParserTherionState
   boolean in_area;
   boolean in_grade;
 
-  float mUnitLen,   mScaleLen,   mZeroLen;
-  float mUnitBer,   mScaleBer,   mZeroBer;
-  float mUnitCln,   mScaleCln,   mZeroCln;
-  // float mUnitLeft,  mScaleLeft,  mZeroLeft;
-  // float mUnitRight, mScaleRight, mZeroRight;
-  // float mUnitUp,    mScaleUp,    mZeroUp;
-  // float mUnitDown,  mScaleDown,  mZeroDown;
-  float mDeclination;
-  boolean mDuplicate;
-  boolean mSurface;
-  boolean mSplay = false;
+
   int mExtend;
   String mPrefix;
   String mSuffix;
-  int mSurveyLevel;
 
-  int data_type;
+  int min_value_len;
 
   ParserTherionState()
-  {
+  { 
+    super();
     mParent = null;
-    mUnitLen   = mUnitBer    = mUnitCln   = 1.0f;
-    mZeroLen   = mZeroBer    = mZeroCln   = 0.0f;
-    mScaleLen  = mScaleBer   = mScaleCln  = 1.0f;
-    // mUnitLeft  = mUnitRight  = mUnitUp  = mUnitDown  = 1.0f;
-    // mScaleLeft = mScaleRight = mScaleUp = mScaleDown = 1.0f;
-    // mZeroLeft  = mZeroRight  = mZeroUp  = mZeroDown  = 0.0f;
-    mDeclination= 0.0f;
-    mDuplicate = false;
-    mSurface   = false;
-    mSplay     = false;
+
     mExtend = ExtendType.EXTEND_RIGHT;
     mPrefix = "";
     mSuffix = "";
-    mSurveyLevel = 0;
+
     in_centerline = false;
     in_data = false;
     in_survey = false;
@@ -72,44 +53,20 @@ class ParserTherionState
     in_line  = false;
     in_area  = false;
     in_grade = false;
-    data_type = 0; // DATA_NONE
+    
+    min_value_len = 0;
   }
 
   ParserTherionState( ParserTherionState state )
   {
+    super( state );
     mParent  = state;
 
-    mUnitLen  = state.mUnitLen;
-    mUnitBer  = state.mUnitBer;
-    mUnitCln  = state.mUnitCln;
-    mZeroLen  = state.mZeroLen;
-    mZeroBer  = state.mZeroBer;
-    mZeroCln  = state.mZeroCln;
-    mScaleLen = state.mScaleLen;
-    mScaleBer = state.mScaleBer;
-    mScaleCln = state.mScaleCln;
-
-    // mUnitLeft   = state.mUnitLeft;
-    // mUnitRight  = state.mUnitRight;
-    // mUnitUp     = state.mUnitUp;
-    // mUnitDown   = state.mUnitDown;
-    // mScaleLeft  = state.mScaleLeft;
-    // mScaleRight = state.mScaleRight;
-    // mScaleUp    = state.mScaleUp;
-    // mScaleDown  = state.mScaleDown;
-    // mZeroLeft   = state.mZeroLeft;
-    // mZeroRight  = state.mZeroRight;
-    // mZeroUp     = state.mZeroUp;
-    // mZeroDown   = state.mZeroDown;
-
-    mDeclination= state.mDeclination;
-    mDuplicate = state.mDuplicate;
-    mSurface   = state.mSurface;
-    mSplay     = state.mSplay;
     mExtend = state.mExtend;
     mPrefix = state.mPrefix;
     mSuffix = state.mSuffix;
-    mSurveyLevel = state.mSurveyLevel;
+    // mSurveyLevel = state.mSurveyLevel;
+
     in_centerline = state.in_centerline;
     in_data = state.in_data;
     in_survey = state.in_survey;
@@ -118,7 +75,7 @@ class ParserTherionState
     in_scrap = state.in_scrap;
     in_line = state.in_line;
     in_area = state.in_area;
-    data_type = state.data_type;
+    min_value_len = state.min_value_len;
   }
 
 }

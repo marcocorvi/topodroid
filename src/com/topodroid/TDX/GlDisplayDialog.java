@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -32,7 +32,7 @@ class GlDisplayDialog extends MyDialog
     private CheckBox mCBendpoint; // whether to show splay endpoints
     private CheckBox mCBwall;     // whether to show walls
     private CheckBox mCBsurface;  // whether to show surface
-    private CheckBox mCBphoto;    // whether to show photo
+    private CheckBox mCBphoto;    // whether to show photo // PHOTO-3D
     private CheckBox mCBref;      // whether to show reference
     private CheckBox mCBaxes;     // whether to show only axes
     // private Button mBtnRefresh;
@@ -58,7 +58,7 @@ class GlDisplayDialog extends MyDialog
         mCBendpoint = (CheckBox) findViewById(R.id.cb_mode_endpoint);
         mCBwall     = (CheckBox) findViewById(R.id.cb_mode_wall);
         mCBsurface  = (CheckBox) findViewById(R.id.cb_mode_surface);
-        mCBphoto    = (CheckBox) findViewById(R.id.cb_mode_photo);
+        mCBphoto    = (CheckBox) findViewById(R.id.cb_mode_photo); // PHOTO-3D
         mCBref      = (CheckBox) findViewById(R.id.cb_mode_ref);
         mCBaxes     = (CheckBox) findViewById(R.id.cb_mode_axes);
 
@@ -80,9 +80,10 @@ class GlDisplayDialog extends MyDialog
         // } else {
         //   mCBsurface.setVisibility( View.GONE );
         // }
-        if ( mParent.hasPhotos() ) {
+        if ( mParent.hasGlPhotos() ) { // PHOTO-3D
 	  mCBphoto.setChecked( mParent.isShowPhotos() );
         } else {
+          TDLog.v("no GL photos");
           mCBphoto.setVisibility( View.GONE );
         }
         mCBref.setChecked( mParent.isShowReference() );
@@ -120,6 +121,6 @@ class GlDisplayDialog extends MyDialog
       mParent.setShowReference( mCBref.isChecked(), mCBaxes.isChecked() );
       /* if ( mParent.hasWalls() ) */ mParent.setShowWalls( mCBwall.isChecked() );
       /* if ( mParent.hasSurface() ) */ mParent.setShowSurface( mCBsurface.isChecked() );
-      if ( mParent.hasPhotos() ) mParent.setShowPhotos( mCBphoto.isChecked() );
+      if ( mParent.hasGlPhotos() ) mParent.setShowPhotos( mCBphoto.isChecked() ); // PHOTO-3D
     }
 }

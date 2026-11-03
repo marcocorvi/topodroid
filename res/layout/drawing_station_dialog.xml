@@ -191,6 +191,11 @@
         style="@style/button_default"
         android:layout_marginEnd="@dimen/marginh"
       />
+      <Button android:id="@+id/btn_photo"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_photo"
+      />
       <Button android:id="@+id/btn_xdelete"
         style="@style/button_default"
         android:text="@string/button_delete"

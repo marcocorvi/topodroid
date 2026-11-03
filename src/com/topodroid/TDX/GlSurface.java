@@ -29,6 +29,8 @@ import android.graphics.Bitmap;
 
 public class GlSurface extends GlShape
 {
+  private final static int ACTIVE_TEXTURE = GLES20.GL_TEXTURE1;
+
   final static int STYLE_FILL   = 0;
   final static int STYLE_STROKE = 1;
   final static int STYLE_FILL_AND_STROKE = 1;
@@ -141,21 +143,39 @@ public class GlSurface extends GlShape
   { 
     // TDLog.v("GL surface set texture bitmap- bound " + mBitmapBounded );
     if ( mBitmap == bitmap ) return;
-    if ( mBitmap != null ) {
-      mBitmap.recycle();
-    }
+    releaseBitmap();
     mBitmap = bitmap; 
     mBitmapBounded = false;
   }
+
+  private void releaseBitmap()
+  {
+    if ( mBitmap != null ) {
+      mBitmap.recycle();
+      mBitmap = null;
+    }
+  }
+ 
+  synchronized void forgetTexture()
+  {
+    mTexId = -1;
+    mBitmapBounded = false;
+  }
+
+  synchronized void release()
+  {
+    if ( mTexId > 0 ) TopoGL.trashTexture( mTexId );
+    forgetTexture();
+    releaseBitmap();
+  }
+
 
   // /** initialize the texture - NOT USED 
   //  * @param texture   texture resource id
   //  */
   // synchronized void initTextureBitmap( int texture )
   // {
-  //   if ( mBitmap != null ) {
-  //     mBitmap.recycle();
-  //   }
+  //   release();
   //   mBitmap = GlResourceReader.readTexture( mContext, texture );
   // }
 
@@ -163,7 +183,7 @@ public class GlSurface extends GlShape
    */
   synchronized void unbindTexture()
   {
-    // TDLog.v("GL SURFACE unbind texture " + mTexId );
+    TDLog.v("Gl Surface unbind texture " + mTexId );
     if ( mTexId >= 0 ) GL.unbindTexture( mTexId );
     mTexId = -1;
     mBitmapBounded = false;
@@ -191,9 +211,10 @@ public class GlSurface extends GlShape
   {
     if ( mBitmap == null ) return;
     if ( mBitmapBounded ) return;
+    if ( mTexId > 0 ) GL.releaseTexture( mTexId );
     mTexId = GL.bindTexture( mBitmap );
-    // mBitmap.recycle();
-    // mBitmap = null;
+    TDLog.v("Gl Surface bound texture " + mTexId );
+    // release(); // do not release the bitmap
     mBitmapBounded = true;
     // TDLog.v("GL SURFACE bind texture bitmap: " + mTexId );
   }
@@ -216,7 +237,7 @@ public class GlSurface extends GlShape
     // mUTexUnit   = GL.getUniform( mProgram, GL.uTexUnit ); // texture units
     // GL.setUniformTexture( mATexCoord, 1 );
     GL.setUniformTexture( mbUTexUnit, 1 );
-    GLES20.glActiveTexture( GLES20.GL_TEXTURE1 );
+    GLES20.glActiveTexture( ACTIVE_TEXTURE ); // set active texture
     GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, mTexId ); // texture-id from load-texture
     if ( dataBuffer != null ) {
       GL.setAttributePointer( mbATexCoord, dataBuffer, OFFSET_TEXEL,  COORDS_PER_TEXEL,  BYTE_STRIDE );
@@ -233,7 +254,7 @@ public class GlSurface extends GlShape
    */
   private void bindDataGray( float[] mvp_matrix, float[] mv_matrix_inv_t, Vector3D light )
   {
-    // GLES20.glActiveTexture( 0 );
+    // GLES20.glActiveTexture( 0 ); // ??? release active texture
     if ( once < 10 ) {
       TDLog.v("GL surface: draw with gray" );
       once ++;

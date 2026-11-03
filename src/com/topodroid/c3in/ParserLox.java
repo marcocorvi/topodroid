@@ -61,8 +61,10 @@ public class ParserLox extends TglParser
     return lox_survey.Name();
   }
 
-  // @param dis    input stream
-  // @param name   name for error report
+  /**
+   * @param dis    input stream
+   * @note the data input stream is closed by the caller
+   */
   private void readfile( DataInputStream dis ) throws ParserException
   {
     if ( dis == null ) {

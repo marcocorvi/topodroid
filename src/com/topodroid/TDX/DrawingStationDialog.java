@@ -43,418 +43,450 @@ class DrawingStationDialog extends MyDialog
                            , IBearingAndClino
                            , IGeoCoder
 {
-    // private TextView mLabel;
-    // private TextView mBarrierLabel;
-    // private TextView mHiddenLabel;
-    // private TextView mCoords;
-    private Button mBtnOK;
-    private Button mBtnActive;
-    private TextView mTextActive;
-    private Button mBtnBarrier;
-    private Button mBtnHidden;
-    private CheckBox mCbSplaysOn;
-    private CheckBox mCbSplaysOff;
+  // private TextView mLabel;
+  // private TextView mBarrierLabel;
+  // private TextView mHiddenLabel;
+  // private TextView mCoords;
+  private Button mBtnOK;
+  private Button mBtnActive;
+  private TextView mTextActive;
+  private Button mBtnBarrier;
+  private Button mBtnHidden;
+  private CheckBox mCbSplaysOn;
+  private CheckBox mCbSplaysOff;
 
-    private EditText mETnick;
-    private EditText mComment;
-    private Button mBtnXSection;
-    private Button mBtnXDelete;
-    private Button mBtnXPoint;
-    private Button mBtnDirect;
-    private Button mBtnInverse;
-    private CheckBox mCBhorizontal;
+  private EditText mETnick;
+  private EditText mComment;
+  private Button mBtnXSection;
+  private Button mBtnXDelete;
+  private Button mBtnXPoint; // whether to add a section point
+  private Button mBtnDirect;
+  private Button mBtnInverse;
+  private Button mBtnPhoto;
+  private CheckBox mCBhorizontal;
 
-    private Button mBtnOkComment; // saved station dialog
-    private Button mBtnSaved; // saved station dialog
-    private Button mBtnCancel;
-    private Button mBtnGeoCode;
+  private Button mBtnOkComment; // saved station dialog
+  private Button mBtnSaved; // saved station dialog
+  private Button mBtnCancel;
+  private Button mBtnGeoCode;
 
-    private final DrawingWindow mParent;
-    private final DrawingStationName mStation; // num station point
-    private final DrawingStationUser mPath;
-    private final TopoDroidApp mApp;
+  private final DrawingWindow mParent;
+  private final DrawingStationName mStation; // num station point
+  private final DrawingStationUser mPath;
+  private final TopoDroidApp mApp;
 
-    private String mStationName; // num-station name
-    private int mFlag; // saved-station flag (if any)
-    private boolean mIsBarrier;
-    private boolean mIsHidden;
-    // private boolean mGlobalXSections; // unused
-    private float mBearing;
-    private float mClino;
-    private String mGeoCode = "";
-    private List< DBlock > mBlk;   // list of blocks of the legs at ths station
-    private String mXSectionName;  // name of x-section without section-point or null
+  private String mStationName; // num-station name
+  private int mFlag; // saved-station flag (if any)
+  private boolean mIsBarrier;
+  private boolean mIsHidden;
+  // private boolean mGlobalXSections; // unused
+  private float mBearing;
+  private float mClino;
+  private String mGeoCode = "";
+  private List< DBlock > mBlk;   // list of blocks of the legs at ths station
+  private String mXSectionName;  // name of x-section without section-point or null
 
-    // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
-    // private boolean sensorCheck; // whether android sensor is enabled
-    private boolean mSensors;    // whether use compass or delete x-section
+  // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
+  // private boolean sensorCheck; // whether android sensor is enabled
+  private boolean mSensors;    // whether use compass or delete x-section
 
-    /** cstr 
-     * @param context    context
-     * @param parent     parent activity
-     * @param app        application
-     * @param station    (auto) station
-     * @param path       user-station
-     * @param is_barrier whether the station is "barrier"
-     * @param is_hidden  whether the station is "hidden"
-     * @param blk        legs at the station
-     * @param xsection_name name of xsection if there is xsection and section-point exists, otherwise null
-     */
-    DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
-                          DrawingStationName station, DrawingStationUser path,
-                          boolean is_barrier, boolean is_hidden, // boolean global_xsections,
-                          List< DBlock > blk, String xsection_name )
-    {
-      super( context, null, R.string.DrawingStationDialog ); // null app
-      mParent   = parent;
-      mApp      = app;
-      mStation  = station;
-      mPath     = path;
-      mStationName = mStation.getName();
-      mIsBarrier = is_barrier; 
-      mIsHidden  = is_hidden; 
-      // mGlobalXSections = global_xsections;
-      mBlk       = blk;
-      mXSectionName = xsection_name;
-      // TDLog.v("Station dialog: section name " + xsection_name );
-      // sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
-      TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_STATION );
+  /** cstr 
+   * @param context    context
+   * @param parent     parent activity
+   * @param app        application
+   * @param station    (auto) station
+   * @param path       user-station
+   * @param is_barrier whether the station is "barrier"
+   * @param is_hidden  whether the station is "hidden"
+   * @param blk        legs at the station
+   * @param xsection_name name of xsection if there is xsection and section-point exists, otherwise null
+   */
+  DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
+                        DrawingStationName station, DrawingStationUser path,
+                        boolean is_barrier, boolean is_hidden, // boolean global_xsections,
+                        List< DBlock > blk, String xsection_name )
+  {
+    super( context, null, R.string.DrawingStationDialog ); // null app
+    mParent   = parent;
+    mApp      = app;
+    mStation  = station;
+    mPath     = path;
+    mStationName = mStation.getName();
+    mIsBarrier = is_barrier; 
+    mIsHidden  = is_hidden; 
+    // mGlobalXSections = global_xsections;
+    mBlk       = blk;
+    mXSectionName = xsection_name;
+    // TDLog.v("Station dialog: section name " + xsection_name + " barrier " + is_barrier + " hidden " + is_hidden );
+    // sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
+    TopoDroidApp.updateAnalytic( TDAnalytics.PLOT_STATION );
+  }
+
+  @Override
+  protected void onCreate( Bundle savedInstanceState )
+  {
+    super.onCreate(savedInstanceState);
+
+    // TDLog.v("Station dialog: name " + mStationName );
+  
+    String title = resString(R.string.STATION) + " " + mStationName;
+    initLayout( R.layout.drawing_station_dialog, title );
+
+    TextView mLabel        = (TextView) findViewById(R.id.station_text);
+    TextView mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
+    TextView mHiddenLabel  = (TextView) findViewById(R.id.hidden_text);
+    TextView mCoords       = (TextView) findViewById(R.id.coords);
+    mCoords.setText( mStation.getCoordsString() );
+
+    mBtnBarrier  = (Button) findViewById(R.id.btn_barrier );
+    mBtnHidden = (Button) findViewById(R.id.btn_hidden );
+    mCbSplaysOn  = (CheckBox) findViewById(R.id.btn_splays_on );
+    mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
+    mBtnOK       = (Button) findViewById(R.id.btn_ok);
+    mBtnActive   = (Button) findViewById(R.id.btn_active);
+    mTextActive  = (TextView) findViewById(R.id.station_set);
+    mBtnSaved    = (Button) findViewById(R.id.btn_saved);
+    mBtnCancel   = (Button) findViewById(R.id.btn_cancel);
+
+    mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
+    mCBhorizontal = (CheckBox) findViewById(R.id.cb_horizontal );
+    mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );  // delete / sensors
+    mBtnXPoint    = (Button) findViewById(R.id.btn_xpoint );  // section-point 
+    mBtnDirect  = (Button) findViewById( R.id.btn_direct );
+    mBtnInverse = (Button) findViewById( R.id.btn_inverse );
+    mBtnPhoto   = (Button) findViewById( R.id.btn_photo );  // photo XSection
+    mETnick = (EditText) findViewById( R.id.nick );  // section name
+
+    mBtnOkComment = (Button) findViewById( R.id.btn_ok_comment );
+    mComment = (EditText) findViewById( R.id.comment );
+    mFlag    = StationFlag.STATION_NONE;
+    if ( TDLevel.overExpert ) {
+      StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName, null ); // null: do not create
+      mBtnOkComment.setOnClickListener( this );
+      if ( cs != null ) {
+        mComment.setText( cs.mComment );
+        mFlag = cs.mFlag.getValue();
+      // } else {
+      //   mComment.setVisibility( View.GONE );
+      }
+    } else {
+      mBtnOkComment.setVisibility( View.GONE );
+      mComment.setVisibility( View.GONE );
     }
 
-    @Override
-    protected void onCreate( Bundle savedInstanceState )
-    {
-      super.onCreate(savedInstanceState);
+    mSensors = false;
+    mBearing = 0;
+    mClino   = 0;
+    if ( mParent.isAnySection() ) {
+      mBtnOK.setVisibility( View.GONE );
+      ((LinearLayout)findViewById( R.id.layout_set )).setVisibility( View.GONE );
+      // mBtnActive.setVisibility( View.GONE );
+      // ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
+      ((LinearLayout)findViewById( R.id.layout_barrier )).setVisibility( View.GONE );
+      // mBtnBarrier.setVisibility( View.GONE );
+      // mBarrierLabel.setVisibility( View.GONE );
+      ((LinearLayout)findViewById( R.id.layout_hidden )).setVisibility( View.GONE );
+      // mBtnHidden.setVisibility( View.GONE );
+      // mHiddenLabel.setVisibility( View.GONE );
+      mLabel.setVisibility( View.GONE );
+      mCbSplaysOn.setOnClickListener( this );
+      mCbSplaysOff.setOnClickListener( this );
+      mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
+      mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
 
-      // TDLog.v("Station dialog: name " + mStationName );
-  
-      String title = resString(R.string.STATION) + " " + mStationName;
-      initLayout( R.layout.drawing_station_dialog, title );
-
-      TextView mLabel        = (TextView) findViewById(R.id.station_text);
-      TextView mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
-      TextView mHiddenLabel  = (TextView) findViewById(R.id.hidden_text);
-      TextView mCoords       = (TextView) findViewById(R.id.coords);
-      mCoords.setText( mStation.getCoordsString() );
-
-      mBtnBarrier  = (Button) findViewById(R.id.btn_barrier );
-      mBtnHidden = (Button) findViewById(R.id.btn_hidden );
-      mCbSplaysOn  = (CheckBox) findViewById(R.id.btn_splays_on );
-      mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
-      mBtnOK       = (Button) findViewById(R.id.btn_ok);
-      mBtnActive   = (Button) findViewById(R.id.btn_active);
-      mTextActive  = (TextView) findViewById(R.id.station_set);
-      mBtnSaved    = (Button) findViewById(R.id.btn_saved);
-      mBtnCancel   = (Button) findViewById(R.id.btn_cancel);
-
-      mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
-      mCBhorizontal = (CheckBox) findViewById(R.id.cb_horizontal );
-      mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );  // delete / sensors
-      mBtnXPoint    = (Button) findViewById(R.id.btn_xpoint );  // section-point
-      mBtnDirect  = (Button) findViewById( R.id.btn_direct );
-      mBtnInverse = (Button) findViewById( R.id.btn_inverse );
-      mETnick = (EditText) findViewById( R.id.nick );  // section name
-
-      mBtnOkComment = (Button) findViewById( R.id.btn_ok_comment );
-      mComment = (EditText) findViewById( R.id.comment );
-      mFlag    = StationFlag.STATION_NONE;
-      if ( TDLevel.overExpert ) {
-        StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName, null ); // null: do not create
-        mBtnOkComment.setOnClickListener( this );
-        if ( cs != null ) {
-          mComment.setText( cs.mComment );
-          mFlag = cs.mFlag.getValue();
-        // } else {
-        //   mComment.setVisibility( View.GONE );
-        }
-      } else {
-        mBtnOkComment.setVisibility( View.GONE );
-        mComment.setVisibility( View.GONE );
-      }
-
-      mSensors = false;
-      mBearing = 0;
-      mClino   = 0;
-      if ( mParent.isAnySection() ) {
+      mETnick.setVisibility( View.GONE );
+      mBtnXSection.setVisibility( View.GONE );
+      mCBhorizontal.setVisibility( View.GONE );
+      mBtnXDelete.setVisibility( View.GONE );
+      mBtnXPoint.setVisibility( View.GONE );
+      setXSectionButtonVisibility( View.GONE );
+    } else {
+      if ( TDSetting.mAutoStations ) {
         mBtnOK.setVisibility( View.GONE );
-        ((LinearLayout)findViewById( R.id.layout_set )).setVisibility( View.GONE );
-        // mBtnActive.setVisibility( View.GONE );
-        // ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
-        ((LinearLayout)findViewById( R.id.layout_barrier )).setVisibility( View.GONE );
-        // mBtnBarrier.setVisibility( View.GONE );
-        // mBarrierLabel.setVisibility( View.GONE );
-        ((LinearLayout)findViewById( R.id.layout_hidden )).setVisibility( View.GONE );
-        // mBtnHidden.setVisibility( View.GONE );
-        // mHiddenLabel.setVisibility( View.GONE );
         mLabel.setVisibility( View.GONE );
-        mCbSplaysOn.setOnClickListener( this );
-        mCbSplaysOff.setOnClickListener( this );
-        mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
-        mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
+      } else {
+        if ( mPath != null ) {
+          mLabel.setText( resString(R.string.station_del) );
+        // } else {
+        //   mLabel.setText( resString(R.string.station_ask) );
+        }
+        mBtnOK.setOnClickListener( this );
+      }
+      mBtnActive.setOnClickListener( this );
+      String current_station = StationName.getCurrentStationName();
+      TDLog.v("Station " + mStationName + " current " + current_station );
+      if ( mStationName.equals( StationName.getCurrentStationName() ) ) {
+        mTextActive.setText( R.string.station_reset );
+      }
+      mCbSplaysOn.setOnClickListener( this );
+      mCbSplaysOff.setOnClickListener( this );
+      mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
+      mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
+  
+      if ( TDLevel.overNormal ) {
+        mBtnXDelete.setOnClickListener( this );
 
+        if ( mStation.mXSectionType == PlotType.PLOT_NULL ) {
+          mBtnXPoint.setVisibility( View.GONE );
+          int leg_size = mBlk.size();
+          String direct  = null;
+          String inverse = null;
+          boolean cb = false; // no checkboxes
+          if ( leg_size == 1 ) {
+            DBlock leg0 = mBlk.get(0);
+            direct  = String.format( resString(R.string.arrow_from_to), leg0.mFrom, leg0.mTo );
+            inverse = String.format( resString(R.string.arrow_from_to), leg0.mTo,   leg0.mFrom );
+            cb = true;
+            mBearing = leg0.mBearing; 
+            mClino   = leg0.mClino; // later reset to 0 if PLAN
+          } else if ( leg_size == 2 ) {
+            DBlock leg0 = mBlk.get(0);
+            DBlock leg1 = mBlk.get(1);
+            float b0 = leg0.mBearing;
+            float b1 = leg1.mBearing;
+            float c0 = leg0.mClino;
+            float c1 = leg1.mClino;
+            // TDLog.v( "legs " + leg0.mFrom + " " + leg0.mTo + " .. " + leg1.mFrom + " " + leg1.mTo );
+
+            String from = leg0.mFrom;
+            if ( from.equals( mStationName ) ) {
+              from = leg0.mTo;
+              // b0 += 180; if ( b0 >= 360 ) b0 -= 360;
+              b0 = TDMath.add180( b0 );
+              c0 = -c0;
+            }
+            String to = leg1.mTo;
+            if ( to.equals( mStationName ) ) {
+              to = leg1.mFrom;
+              // b1 += 180; if ( b1 >= 360 ) b1 -= 360;
+              b1 = TDMath.add180( b1 );
+              c1 = -c1;
+            }
+
+            mBearing = (b1 + b0)/2;
+            if ( Math.abs( b1 - b0 ) > 180 ) {
+              // like adding 360 to b1
+              // mBearing += 180; if ( mBearing >= 360 ) mBearing -= 360;
+              mBearing = TDMath.add180( mBearing );
+            }
+            mClino = ( c0 + c1 ) / 2; // later reset to 0 if PLAN
+
+            direct  = String.format( resString(R.string.arrow_from_to), from, to); // skip mStationName in the middle
+            inverse = String.format( resString(R.string.arrow_from_to), to, from); 
+            cb = true;
+          }
+          if ( mParent.getPlotType() == PlotType.PLOT_PLAN ) {
+            mClino = 0;
+            mCBhorizontal.setVisibility( View.GONE );
+          } else {
+            mCBhorizontal.setChecked( false );
+          }
+
+          if ( cb ) { // leg_size == 1 or 2
+            mBtnDirect.setText( direct );
+            mBtnInverse.setText( inverse );
+            mBtnDirect.setOnClickListener( this );
+            mBtnInverse.setOnClickListener( this );
+            mBtnPhoto.setOnClickListener( this );
+          } else {
+            setXSectionButtonVisibility( View.GONE );
+          }
+
+          // if ( sensorCheck ) {
+            mBtnXDelete.setText( "" );
+            TDandroid.setButtonBackground( mBtnXDelete, MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
+            mSensors = true;
+            mBtnXDelete.setOnClickListener( this );
+          // } else {
+          //   mBtnXDelete.setVisibility( View.GONE );
+          // }
+
+          mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
+          // if ( mGlobalXSections ) {
+          //   mETnick.setVisibility( View.GONE );
+          // }
+        } else {
+          // if ( mGlobalXSections ) {
+          //   mETnick.setVisibility( View.GONE );
+          // } else
+          String nick = mParent.getXSectionNick( mStationName, mParent.getPlotType() );
+          if ( nick != null ) {
+            mETnick.setText( nick );
+            // mETnick.setFocusable( false ); 
+            // TDLog.v( "Station " + mStationName + " nick <" + nick + ">" );
+          }
+          mBtnXSection.setOnClickListener( this );
+          mBtnXDelete.setOnClickListener( this );
+          if ( mXSectionName != null ) { 
+            mBtnXPoint.setOnClickListener( this );
+          } else {
+            mBtnXPoint.setVisibility( View.GONE );
+          }
+          mCBhorizontal.setVisibility( View.GONE );
+          setXSectionButtonVisibility( View.GONE );
+        } 
+      } else { // level <= normal
         mETnick.setVisibility( View.GONE );
         mBtnXSection.setVisibility( View.GONE );
-        mCBhorizontal.setVisibility( View.GONE );
         mBtnXDelete.setVisibility( View.GONE );
         mBtnXPoint.setVisibility( View.GONE );
-        mBtnDirect.setVisibility( View.GONE );
-        mBtnInverse.setVisibility( View.GONE );
-      } else {
-        if ( TDSetting.mAutoStations ) {
-          mBtnOK.setVisibility( View.GONE );
-          mLabel.setVisibility( View.GONE );
-        } else {
-          if ( mPath != null ) {
-            mLabel.setText( resString(R.string.station_del) );
-          // } else {
-          //   mLabel.setText( resString(R.string.station_ask) );
-          }
-          mBtnOK.setOnClickListener( this );
-        }
-        mBtnActive.setOnClickListener( this );
-        String current_station = StationName.getCurrentStationName();
-        TDLog.v("Station " + mStationName + " current " + current_station );
-        if ( mStationName.equals( StationName.getCurrentStationName() ) ) {
-          mTextActive.setText( R.string.station_reset );
-        }
-        mCbSplaysOn.setOnClickListener( this );
-        mCbSplaysOff.setOnClickListener( this );
-	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
-	mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
-    
-        if ( TDLevel.overNormal ) {
-          mBtnXDelete.setOnClickListener( this );
-
-          if ( mStation.mXSectionType == PlotType.PLOT_NULL ) {
-            mBtnXPoint.setVisibility( View.GONE );
-            int leg_size = mBlk.size();
-            String direct  = null;
-            String inverse = null;
-            boolean cb = false; // no checkboxes
-            if ( leg_size == 1 ) {
-              DBlock leg0 = mBlk.get(0);
-              direct  = String.format( resString(R.string.arrow_from_to), leg0.mFrom, leg0.mTo );
-              inverse = String.format( resString(R.string.arrow_from_to), leg0.mTo,   leg0.mFrom );
-              cb = true;
-              mBearing = leg0.mBearing; 
-              mClino   = leg0.mClino; // later reset to 0 if PLAN
-            } else if ( leg_size == 2 ) {
-              DBlock leg0 = mBlk.get(0);
-              DBlock leg1 = mBlk.get(1);
-              float b0 = leg0.mBearing;
-              float b1 = leg1.mBearing;
-              float c0 = leg0.mClino;
-              float c1 = leg1.mClino;
-              // TDLog.v( "legs " + leg0.mFrom + " " + leg0.mTo + " .. " + leg1.mFrom + " " + leg1.mTo );
-
-              String from = leg0.mFrom;
-              if ( from.equals( mStationName ) ) {
-                from = leg0.mTo;
-                // b0 += 180; if ( b0 >= 360 ) b0 -= 360;
-                b0 = TDMath.add180( b0 );
-                c0 = -c0;
-              }
-              String to = leg1.mTo;
-              if ( to.equals( mStationName ) ) {
-                to = leg1.mFrom;
-                // b1 += 180; if ( b1 >= 360 ) b1 -= 360;
-                b1 = TDMath.add180( b1 );
-                c1 = -c1;
-              }
-
-              mBearing = (b1 + b0)/2;
-              if ( Math.abs( b1 - b0 ) > 180 ) {
-                // like adding 360 to b1
-                // mBearing += 180; if ( mBearing >= 360 ) mBearing -= 360;
-                mBearing = TDMath.add180( mBearing );
-              }
-              mClino = ( c0 + c1 ) / 2; // later reset to 0 if PLAN
-
-              direct  = String.format( resString(R.string.arrow_from_to), from, to); // skip mStationName in the middle
-              inverse = String.format( resString(R.string.arrow_from_to), to, from); 
-              cb = true;
-            }
-            if ( mParent.getPlotType() == PlotType.PLOT_PLAN ) {
-              mClino = 0;
-              mCBhorizontal.setVisibility( View.GONE );
-            } else {
-              mCBhorizontal.setChecked( false );
-            }
-
-            if ( cb ) { // leg_size == 1 or 2
-              mBtnDirect.setText( direct );
-              mBtnInverse.setText( inverse );
-              mBtnDirect.setOnClickListener( this );
-              mBtnInverse.setOnClickListener( this );
-            } else {
-              mBtnDirect.setVisibility( View.GONE );
-              mBtnInverse.setVisibility( View.GONE );
-            }
-
-            // if ( sensorCheck ) {
-              mBtnXDelete.setText( "" );
-              TDandroid.setButtonBackground( mBtnXDelete, MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
-              mSensors = true;
-              mBtnXDelete.setOnClickListener( this );
-            // } else {
-            //   mBtnXDelete.setVisibility( View.GONE );
-            // }
-
-            mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
-            // if ( mGlobalXSections ) {
-            //   mETnick.setVisibility( View.GONE );
-            // }
-          } else {
-            // if ( mGlobalXSections ) {
-            //   mETnick.setVisibility( View.GONE );
-            // } else
-            String nick = mParent.getXSectionNick( mStationName, mParent.getPlotType() );
-            if ( nick != null ) {
-              mETnick.setText( nick );
-              // mETnick.setFocusable( false ); 
-              // TDLog.v( "Station " + mStationName + " nick <" + nick + ">" );
-            }
-            mBtnXSection.setOnClickListener( this );
-            mCBhorizontal.setVisibility( View.GONE );
-            mBtnXDelete.setOnClickListener( this );
-            if ( mXSectionName != null ) { 
-              mBtnXPoint.setOnClickListener( this );
-            } else {
-              mBtnXPoint.setVisibility( View.GONE );
-            }
-            mBtnDirect.setVisibility( View.GONE );
-            mBtnInverse.setVisibility( View.GONE );
-          } 
-        } else { // level <= normal
-          mETnick.setVisibility( View.GONE );
-          mBtnXSection.setVisibility( View.GONE );
-          mCBhorizontal.setVisibility( View.GONE );
-          mBtnXDelete.setVisibility( View.GONE );
-          mBtnXPoint.setVisibility( View.GONE );
-          mBtnDirect.setVisibility( View.GONE );
-          mBtnInverse.setVisibility( View.GONE );
-        }
-
-        if ( TDLevel.overNormal ) {
-          mBtnSaved.setOnClickListener( this );
-        } else {
-          mBtnSaved.setVisibility( View.GONE );
-        }
-        mBtnCancel.setOnClickListener( this );
-        if ( mIsBarrier ) {
-          mBtnBarrier.setOnClickListener( this );
-        } else {
-          mBtnBarrier.setVisibility( View.GONE );
-          mBarrierLabel.setVisibility( View.GONE );
-        }
-        if ( mIsHidden ) {
-          mBtnHidden.setOnClickListener( this );
-        } else {
-          mBtnHidden.setVisibility( View.GONE );
-          mHiddenLabel.setVisibility( View.GONE );
-        }
+        mCBhorizontal.setVisibility( View.GONE );
+        setXSectionButtonVisibility( View.GONE );
       }
 
-      mBtnGeoCode = (Button) findViewById( R.id.station_code );
-      if ( TDLevel.overExpert ) {
-        GeoCodes geocodes = TopoDroidApp.getGeoCodes();
-        if ( geocodes.size() > 0 ) {
-          mBtnGeoCode.setOnClickListener( this );
-        } else {
-          mBtnGeoCode.setVisibility( View.GONE );
-        }
+      if ( TDLevel.overNormal ) {
+        mBtnSaved.setOnClickListener( this );
+      } else {
+        mBtnSaved.setVisibility( View.GONE );
+      }
+      mBtnCancel.setOnClickListener( this );
+      if ( mIsBarrier ) {
+        mBtnBarrier.setOnClickListener( this );
+      } else {
+        mBtnBarrier.setVisibility( View.GONE );
+        mBarrierLabel.setVisibility( View.GONE );
+      }
+      if ( mIsHidden ) {
+        mBtnHidden.setOnClickListener( this );
+      } else {
+        mBtnHidden.setVisibility( View.GONE );
+        mHiddenLabel.setVisibility( View.GONE );
+      }
+    }
+
+    mBtnGeoCode = (Button) findViewById( R.id.station_code );
+    if ( TDLevel.overExpert ) {
+      GeoCodes geocodes = TopoDroidApp.getGeoCodes();
+      if ( geocodes.size() > 0 ) {
+        mBtnGeoCode.setOnClickListener( this );
       } else {
         mBtnGeoCode.setVisibility( View.GONE );
       }
+    } else {
+      mBtnGeoCode.setVisibility( View.GONE );
     }
+  }
 
-    @Override
-    public void onClick(View view)
-    {
-      // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
-      Button b = (Button)view;
+  private void setXSectionButtonVisibility( int visibility )
+  {
+    mBtnDirect.setVisibility( visibility );
+    mBtnInverse.setVisibility( visibility );
+    mBtnPhoto.setVisibility( visibility );
+  }
 
-      String nick = "";
-      if ( b == mBtnOK ) {
-        if ( mPath == null ) {
-          mParent.addStationPoint( mStation );
-        } else {
-          mParent.removeStationPoint( mStation, mPath );
-        }
-      } else if ( /* TDLevel.overExpert && */ b == mBtnGeoCode ) {
-        (new GeoCodeDialog( mContext, this, mGeoCode )).show();
-        return;
-      } else if ( TDLevel.overNormal && b == mBtnXPoint ) {
-        mParent.addStationSectionPoint( mStation, mXSectionName );
-      } else if ( /* TDLevel.overExpert && */ b == mBtnOkComment ) {
-        boolean fail = true;
-        String comment = TDUtil.getTextOrNull( mComment );
-        if ( comment != null ) {
-          // set/change saved-station comment - leave flags unchanged
-          TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName, mGeoCode ); // PRESENTATION
-          fail = false;
-        } 
-        if ( fail ) {
-          mComment.setError( resString( R.string.error_comment_required ) );
-          return;
-        }
-      } else if ( /* TDLevel.overNormal && */ b == mBtnSaved ) {
-        dismiss();
-        // FIXME with TopoDrooidApp.mShotWindow the method doTakePhoto is called, but QCamCompass does not show up
-        (new CurrentStationDialog( mContext, TopoDroidApp.mShotWindow , mApp, mStationName, -1 )).show();
-        // (new CurrentStationDialog( mContext, null, mApp, mStationName )).show();
-        return;
-      } else if ( b == mBtnCancel ) {
-        /* nothing */
-      } else if ( b == mBtnActive ) {
-        TDLog.v("Set Station " + mStationName );
-        mParent.setCurrentStationName( mStationName, mStation );
-      } else if ( b == mBtnBarrier ) {
-        mParent.toggleStationBarrier( mStationName, mIsBarrier );
-      } else if ( b == mBtnHidden ) {
-        mParent.toggleStationHidden( mStationName, mIsHidden );
-      } else if ( b == mCbSplaysOn ) {
-	mCbSplaysOff.setChecked( false );
-        mParent.toggleStationSplays( mStationName, mCbSplaysOn.isChecked(), false );
-      } else if ( b == mCbSplaysOff ) {
-	mCbSplaysOn.setChecked( false );
-        mParent.toggleStationSplays( mStationName, false, mCbSplaysOff.isChecked() );
+  @Override
+  public void onClick(View view)
+  {
+    // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
+    Button b = (Button)view;
 
-      } else if ( b == mBtnXSection ) {
-        nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
-        // if ( nick.length() == 0 ) {
-        //   mETnick.setError( resString( R.string.error_nick_required ) );
-        //   return;
-        // }
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, false, nick );
-      } else if ( b == mBtnXDelete ) {
-        if ( mSensors ) {
-          TimerTask timer = new TimerTask( mParent, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
-          timer.execute();
-          return;
-        } else {
-          mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
-        }
-      } else if ( b == mBtnDirect ) {
-        nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
-        // if ( nick.length() == 0 ) {
-        //   mETnick.setError( resString( R.string.error_nick_required ) );
-        //   return;
-        // }
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
-      } else if ( b == mBtnInverse ) {
-        nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
-        // if ( nick.length() == 0 ) {
-        //   mETnick.setError( resString( R.string.error_nick_required ) );
-        //   return;
-        // }
-        // mBearing += 180; if ( mBearing >= 360 ) mBearing -= 360;
-        mBearing = TDMath.add180( mBearing );
-        mClino = -mClino;
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
+    String nick = "";
+    if ( b == mBtnOK ) {
+      if ( mPath == null ) {
+        mParent.addStationPoint( mStation );
+      } else {
+        mParent.removeStationPoint( mStation, mPath );
       }
+    } else if ( /* TDLevel.overExpert && */ b == mBtnGeoCode ) {
+      (new GeoCodeDialog( mContext, this, mGeoCode )).show();
+      return;
+    } else if ( TDLevel.overNormal && b == mBtnXPoint ) {
+      mParent.addStationSectionPoint( mStation, mXSectionName );
+    } else if ( /* TDLevel.overExpert && */ b == mBtnOkComment ) {
+      boolean fail = true;
+      String comment = TDUtil.getTextOrNull( mComment );
+      if ( comment != null ) {
+        // set/change saved-station comment - leave flags unchanged
+        TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName, mGeoCode ); // PRESENTATION
+        fail = false;
+      } 
+      if ( fail ) {
+        mComment.setError( resString( R.string.error_comment_required ) );
+        return;
+      }
+    } else if ( /* TDLevel.overNormal && */ b == mBtnSaved ) {
       dismiss();
+      // FIXME with TopoDrooidApp.mShotWindow the method doTakePhoto is called, but QCamCompass does not show up
+      (new CurrentStationDialog( mContext, TopoDroidApp.mShotWindow , mApp, mStationName, -1 )).show();
+      // (new CurrentStationDialog( mContext, null, mApp, mStationName )).show();
+      return;
+    } else if ( b == mBtnCancel ) {
+      /* nothing */
+    } else if ( b == mBtnActive ) {
+      TDLog.v("Set Station " + mStationName );
+      mParent.setCurrentStationName( mStationName, mStation );
+    } else if ( b == mBtnBarrier ) {
+      mParent.toggleStationBarrier( mStationName, mIsBarrier );
+    } else if ( b == mBtnHidden ) {
+      mParent.toggleStationHidden( mStationName, mIsHidden );
+    } else if ( b == mCbSplaysOn ) {
+      mCbSplaysOff.setChecked( false );
+      mParent.toggleStationSplays( mStationName, mCbSplaysOn.isChecked(), false );
+    } else if ( b == mCbSplaysOff ) {
+      mCbSplaysOn.setChecked( false );
+      mParent.toggleStationSplays( mStationName, false, mCbSplaysOff.isChecked() );
+
+    } else if ( b == mBtnXSection ) {
+      nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
+      // if ( nick.length() == 0 ) {
+      //   mETnick.setError( resString( R.string.error_nick_required ) );
+      //   return;
+      // }
+      mParent.openStationXSectionPlot( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, false, nick );
+    } else if ( b == mBtnXDelete ) {
+      if ( mSensors ) {
+        TimerTask timer = new TimerTask( mParent, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+        timer.execute();
+        return;
+      } else {
+        String section = getXSectionNameFromIndex( mStationName, mParent.getPlotType() );
+        if ( section != null ) mParent.deleteStationXSection( mStation, section );
+      }
+    } else if ( b == mBtnDirect ) {
+      nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
+      // if ( nick.length() == 0 ) {
+      //   mETnick.setError( resString( R.string.error_nick_required ) );
+      //   return;
+      // }
+      mParent.openStationXSectionPlot( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
+    } else if ( b == mBtnInverse ) {
+      nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
+      // if ( nick.length() == 0 ) {
+      //   mETnick.setError( resString( R.string.error_nick_required ) );
+      //   return;
+      // }
+      // mBearing += 180; if ( mBearing >= 360 ) mBearing -= 360;
+      mBearing = TDMath.add180( mBearing );
+      mClino = -mClino;
+      mParent.openStationXSectionPlot( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
+    } else if ( b == mBtnPhoto ) {
+      nick = TDUtil.getTextOrEmpty( mETnick ); // section comment
+      // TODO photo XSection
+      mParent.makeStationXSectionPhoto( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
     }
+    dismiss();
+  }
+
+  /** @return xsection name from the index string
+   * @param name xsection index
+   * @param type parent sketch type (PLAN or profile)
+   */
+  private String getXSectionNameFromIndex( String name, long type )
+  {
+    // long xtype = -1;
+    String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
+    if ( type == PlotType.PLOT_PLAN ) {
+      xs_id = "xs-" + name;
+      // xtype = PlotType.PLOT_X_SECTION;
+    } else if ( PlotType.isProfile( type ) ) {
+      xs_id = "xh-" + name;
+      // xtype = PlotType.PLOT_XH_SECTION;
+    } else {
+      TDLog.e("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
+      return null;
+    }
+    return TDInstance.xsections ? xs_id : xs_id + "-" + mParent.getName();
+  }
 
   /**
    * @param b  azimuth [degrees]
@@ -476,7 +508,7 @@ class DrawingStationDialog extends MyDialog
         c = 0;
       } else { // PlotType.isProfile( type )
       }
-      mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c, mCBhorizontal.isChecked(), nick );
+      mParent.openStationXSectionPlot( mStation, mStationName, mParent.getPlotType(), b, c, mCBhorizontal.isChecked(), nick );
       dismiss();
     }
 

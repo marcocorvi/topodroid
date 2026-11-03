@@ -141,6 +141,8 @@ import android.net.Uri;
 
 // import android.opengl.GLSurfaceView;
 
+import java.util.ArrayList;
+
 public class TopoGL extends MyActivity 
                     implements OnClickListener
                     , OnLongClickListener
@@ -149,6 +151,24 @@ public class TopoGL extends MyActivity
                     , GPS.GPSListener // WITH-GPS 
                     , IPopupClickHandler
 {
+  private static final ArrayList< Integer > sTrash = new ArrayList<>();
+
+  static void trashTexture( int id ) { if ( id > 0 ) synchronized( sTrash ) { sTrash.add( id ); } }
+
+  static void forgetTrash() { synchronized( sTrash ) { sTrash.clear(); } }
+
+  static void emptyTrash() // GL tread only
+  {
+    int[] ids;
+    synchronized( sTrash ) {
+      if ( sTrash.isEmpty() ) return;
+      ids = new int[ sTrash.size() ];
+      for ( int k=0; k<ids.length; ++k ) ids[k] = sTrash.get( k );
+      sTrash.clear();
+    }
+    GL.releaseTextures( ids.length, ids, 0 );
+  }
+
   // runtime flags
   // BLUETOOTH
   // final static boolean BLUETOOTH = true;
@@ -298,7 +318,7 @@ public class TopoGL extends MyActivity
    */
   boolean hasSurface() { return ( mRenderer != null ) && mRenderer.hasSurface(); }
 
-  boolean hasPhotos() { return ( mRenderer != null ) && mRenderer.hasPhotos(); }
+  boolean hasGlPhotos() { return ( mRenderer != null ) && mRenderer.hasGlPhotos(); } // PHOTO-3D
 
   // boolean hasWalls() { return ( mRenderer != null ) && mRenderer.hasWalls(); }
 
@@ -374,6 +394,13 @@ public class TopoGL extends MyActivity
         finish();
       }
     }
+  }
+
+  @Override
+  public void onStop()
+  {
+    TDLog.v("Topo GL on stop");
+    super.onStop();
   }
 
   @Override
@@ -481,7 +508,7 @@ public class TopoGL extends MyActivity
     if ( rendererSet ) {
       // TDLog.v("TopoGL on pause");
       if ( glSurfaceView != null ) glSurfaceView.onPause();
-      if ( mRenderer != null ) mRenderer.unbindTextures();
+      // if ( mRenderer != null ) mRenderer.unbindTextures();
     }
   }
 
@@ -582,10 +609,24 @@ public class TopoGL extends MyActivity
   @Override
   protected void onDestroy( )
   {
-    ((TopoDroidApp)getApplication()).mTopoGL = null;
+    // TDLog.v("Topo GL on destroy");
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
     }
+    ((TopoDroidApp)getApplication()).mTopoGL = null;
+    if ( mGPS != null ) { // stop GPS
+      mGPS.setGPSoff();
+      mGPS.setListener( null );
+    }
+    if ( mDialogStation != null ) { // safety check
+      mDialogStation.dismiss();
+      mDialogStation = null;
+    }
+    if ( mPopupColor != null ) { // safety check
+      mPopupColor.dismiss();
+      mPopupColor = null;
+    }
+    if ( mRenderer != null ) mRenderer.destroyModel();
     super.onDestroy();
   }
 
@@ -1390,7 +1431,7 @@ public class TopoGL extends MyActivity
 
   void setShowSurface( boolean show_surface ) { /* if ( hasSurface() ) */ GlModel.setShowSurface( show_surface ); }
 
-  void setShowPhotos( boolean show_photos ) { if ( hasPhotos() ) GlModel.setShowPhotos( show_photos ); }
+  void setShowPhotos( boolean show_photos ) { if ( hasGlPhotos() ) GlModel.setShowPhotos( show_photos ); } // PHOTO-3D
 
   boolean isShowStations()  { return GlNames.showStations; }
   boolean isShowSplays()    { return GlModel.showSplays; }
@@ -1575,6 +1616,7 @@ public class TopoGL extends MyActivity
     // final String path = ( idx >= 0 )? pathname.substring( idx+1 ) : pathname;
     // TDLog.v("TopoGL do open file: " + pathname + " asynch " + asynch );
 
+    InputStream is = null;
     if ( uri == null ) {
       // String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
@@ -1583,7 +1625,7 @@ public class TopoGL extends MyActivity
       try {
         // final InputStream is = new FileInputStream( path );
         // TDLog.v("GL get input stream of path " + path );
-        InputStream is = TDFile.getTopoDroidFileInputStream( path );
+        is = TDFile.getTopoDroidFileInputStream( path );
         if ( is == null ) {
           TDToast.makeBad( R.string.no_file );
           return false;
@@ -1606,7 +1648,7 @@ public class TopoGL extends MyActivity
           //   } ).execute();
           //   return false;
           // } else { // synchronous
-          if ( initRendering2( is, path, mSurveyName ) ) {
+          if ( initRendering2( is, path, mSurveyName ) ) { // this closes the input-stream
             mFilename = path;
             com.topodroid.algo.cw.CWConvexHull.resetCounters();
             if ( mRenderer != null ) mRenderer.setParser( mParser, true );
@@ -1634,15 +1676,17 @@ public class TopoGL extends MyActivity
       String path = pathname; // uri.getPath();
       // TDLog.v("TopoGL input stream from uri " + path );
       try { 
-        final InputStream is = this.getContentResolver().openInputStream( uri );
-        if ( initRendering2( is, path, mSurveyName ) ) {
-          mFilename = path;
-          com.topodroid.algo.cw.CWConvexHull.resetCounters();
-          if ( mRenderer != null ) mRenderer.setParser( mParser, true );
+        is = this.getContentResolver().openInputStream( uri );
+        if ( is != null ) {
+          if ( initRendering2( is, path, mSurveyName ) ) { // this closes the input-stream
+            mFilename = path;
+            com.topodroid.algo.cw.CWConvexHull.resetCounters();
+            if ( mRenderer != null ) mRenderer.setParser( mParser, true );
+          }
         }
       } catch ( FileNotFoundException e ) {
         TDLog.e( "TopoGL open file " + e.getMessage() );
-      }
+      } 
       return ( mFilename != null );
     }
     return false;
@@ -1731,7 +1775,6 @@ public class TopoGL extends MyActivity
   private void openDEM( /* final Activity activity, */ Uri uri )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.DEM );
-    // InputStreamReader isr = null;
     // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
     String filename = TDsafUri.getDocumentName( uri ); // uri.getLastPathSegment();
@@ -1743,7 +1786,7 @@ public class TopoGL extends MyActivity
       {
         ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri[0] );
         if ( pfd == null ) return false;
-        InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+        final InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
         String pathname = uri[0].getPath();
         if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".grid" ) ) {
           dem = new DEMgridParser( isr, pathname /* , mDEMmaxsize */ );
@@ -1753,7 +1796,7 @@ public class TopoGL extends MyActivity
           double xunit = mParser.getWEradius(); // radius * PI/180
           double yunit = mParser.getSNradius(); // radius * PI/180
           // TDLog.v("xunit " + xunit + " yunit " + yunit /* + " max size " + mDEMmaxsize */ );
-          isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+          // isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
           dem = new DEMasciiParser( /* activity, */ isr, pathname, /* mDEMmaxsize, */ false, xunit, yunit ); // false: flip horz
         } else if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".hgt" ) ) {
           // TODO support of HGT DEM file has not been debugged
@@ -2422,6 +2465,8 @@ public class TopoGL extends MyActivity
       // TDLog.e("parser exception " + e.msg() );
       TDToast.makeBad( TDInstance.formatString( R.string.error_parser_error, e.msg() ) );
       mParser = null;
+    } finally { // streams are closed by the parsers
+      try { if ( is != null ) is.close(); } catch ( IOException e ) { } 
     }
     return (mParser != null);
   }

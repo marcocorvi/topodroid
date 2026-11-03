@@ -80,6 +80,13 @@ public class TDImage
    */
   public boolean isPortrait() { return mExif.isPortrait(); }
 
+  public Bitmap getScaledImage( int ww, int hh )
+  {
+    if ( mImage2 != null ) mImage2.recycle();
+    if ( ww <= 0 || hh <= 0 ) return null;
+    return Bitmap.createScaledBitmap( mImage, ww, hh, true );
+  }
+    
   /** fill the view with the image
    * @param view   view to fill
    * @param ww     width
@@ -97,19 +104,15 @@ public class TDImage
     } else {
       hh = h;
     }
+    // TDLog.v( "fill image view w " + ww + " h " + hh + " orientation " + mExif.orientation() );
+    mImage2 = getScaledImage( ww, hh );
+    if ( mImage2 == null ) return false;
 
     // if ( isPortrait() ) {
     //   hh = (int)( mImageHeight * ww / mImageWidth );
     // } else {
     //   ww = (int)( mImageWidth * hh / mImageHeight );
     // }
-      
-    // TDLog.v( "fill image view w " + ww + " h " + hh + " orientation " + mExif.orientation() );
-    if ( ww <= 0 || hh <= 0 ) return false;
-    if ( mImage2 != null ) mImage2.recycle();
-    mImage2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );
-    if ( mImage2 == null ) return false;
-
     // MyBearingAndClino.applyOrientation( view, mImage2, (orient? mExif.orientation() : 6) );
     applyOrientation( view, mImage2, mExif.orientation() );
     return true;

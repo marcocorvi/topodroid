@@ -209,6 +209,20 @@ public class GlRenderer implements Renderer
     doMakeModel = false;
   }
 
+  void clearModel()
+  {
+    if ( mModel != null ) {
+      // mModel.releaseResources(); // WHY
+      mModel.clearAll();
+    }
+  }
+
+  void destroyModel()
+  {
+    clearModel();
+    mModel = null;
+  }
+
   /** set the parser
    * @param parser   data parser
    * @param reduce   ...   
@@ -296,6 +310,11 @@ public class GlRenderer implements Renderer
     GL.enableAlpha( true );
     GL.enableDepth( true );
     // GL.enableCull( true ); 
+    if ( mModel != null ) {
+      mModel.initGL();
+      mModel.forgetGLIds();
+      // mModel.resetPhotos(); // WHY
+    }
 
     makeModelMatrix();
     // model can be created here were not for names
@@ -326,7 +345,7 @@ public class GlRenderer implements Renderer
     makePerspectiveMatrix( );
     makeOrthographicMatrix( );
 
-    mModel.initGL();
+    // mModel.initGL(); // moved to onSurfaceCreated
     // mModel.createModel( width ); // must be done on surface created
   }
 
@@ -592,6 +611,7 @@ public class GlRenderer implements Renderer
     // TDLog.v( "Renderer surface draw frame" );
     // Clear the rendering surface.
     GL.clear();
+    TopoGL.emptyTrash();
     if ( mModel == null ) return;
     if ( mParser != null && doMakeModel ) makeModel( );
     if ( ! mModel.hasParser() ) return;
@@ -723,7 +743,7 @@ public class GlRenderer implements Renderer
 
   /* boolean hasWalls() { return ( mModel != null ) && mModel.hasWalls(); } */
 
-  boolean hasPhotos() { return ( mModel != null ) && mModel.hasPhotos(); }
+  boolean hasGlPhotos() { return ( mModel != null ) && mModel.hasGlPhotos(); } // PHOTO-3D
 
   void notifyWall( int type, boolean b )
   { 
@@ -781,11 +801,6 @@ public class GlRenderer implements Renderer
   // {
   //   if ( mModel != null ) mModel.prepareTemperatures();
   // }
-
-  void clearModel()
-  {
-    if ( mModel != null ) mModel.clearAll();
-  }
 
   // ------- NO_C3D ----------------------------------------------
   // void updateSketches() // NO_C3D

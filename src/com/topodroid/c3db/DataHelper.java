@@ -12,6 +12,8 @@
 package com.topodroid.c3db;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.TDX.PhotoInfo;
+import com.topodroid.c3in.GlPhotoInfo;
 
 // import java.io.File;
 // import java.io.FileNotFoundException;
@@ -50,7 +52,7 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_SID         = "surveyId=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
 
-  // private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
+  private final static String WHERE_SID_ID      = com.topodroid.TDX.DataHelper.WHERE_SID_ID;
 
   private SQLiteDatabase myDB = null;
 
@@ -252,6 +254,105 @@ public class DataHelper extends DataSetObservable
   //   {  
   //   }
   // }
+
+
+  /** @return the photos at shots of a survey - SAME AS com.topodroid.TDX.DataHelper.selectAllPhotosShot
+   * @param sid      survey ID
+   * @param status   shot status [20241018 was photo status]
+   * @note used also by the ShotWindow
+   */
+  public List< PhotoInfo > selectAllShotPhotos( long sid, long status )
+  {
+    List< PhotoInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.rawQuery( com.topodroid.TDX.DataHelper.qjPhotosShot, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
+    if (cursor.moveToFirst()) {
+      do {
+        String name = cursor.getString(3) + "-" + cursor.getString(4);
+        list.add( new PhotoInfo( sid, 
+                                 cursor.getLong(0),        // id
+                                 cursor.getLong(1),        // shot id
+                                 cursor.getString(2),
+                                 name,                     // shot name
+                                 cursor.getString(5),      // date
+                                 cursor.getString(6),      // comment
+                                 (int)(cursor.getLong(7)), // camera
+                                 cursor.getString(8),      // code
+                                 (int)(cursor.getLong(9)), // reftype
+                                 (int)(cursor.getLong(10)) // format
+                 ) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.v(  "select All Photos Shot list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
+  public static final String qjPhotosPlot  =
+    "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype, p.format from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and q.status=?";
+
+  /** @return the photos at plots of a survey - SAME AS in com.topodroid.TDX.DataHelper.selectAllPhotosPlot
+   * @param sid      survey ID
+   * @param status   plot status [20241018 was photo status]
+   */
+  public List< PhotoInfo > selectAllPlotPhotos( long sid, long status )
+  {
+    List< PhotoInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.rawQuery( /* com.topodroid.TDX.DataHelper. */ qjPhotosPlot, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new PhotoInfo( sid, 
+                                 cursor.getLong(0),        // id
+                                 cursor.getLong(1),        // plot id
+                                 cursor.getString(2),      // photo title
+                                 cursor.getString(3),      // plot name
+                                 cursor.getString(4),      // date
+                                 cursor.getString(5),      // comment
+                                 (int)(cursor.getLong(6)), // camera
+                                 cursor.getString(7),      // code
+                                 (int)(cursor.getLong(8)), // reftype
+                                 (int)(cursor.getLong(9))  // format
+                 ) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.v( "select All Photos Plot list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
+  // SAME AS com.topodroid.TDX.DataHelper.selectPlotIntercept()
+  public float selectPlotIntercept( long pid, long sid )
+  {
+    if ( myDB == null ) return -1;
+    float ret = -1;
+    Cursor cursor = myDB.query( com.topodroid.TDX.DataHelper.PLOT_TABLE,
+       		         new String[] { "intercept" }, // columns
+                                WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(pid) }, null, null, null );
+    if ( cursor.moveToFirst() ) {
+      ret = (float)cursor.getDouble(0);
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  /** select shot stations given the shot ID
+   * @param id   plot ID
+   * @param sid  survey ID
+   * @return the shot
+   */
+  public void selectPhotoStations( long sid, long id, GlPhotoInfo photo_info )
+  {
+    TDLog.v( "select photo stations for shot" + id + "/" + sid );
+    if ( myDB == null ) return;
+    Cursor cursor = myDB.query( "plots", new String[] { "start", "view" },
+                                WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(id) }, null, null, null );
+    if (cursor.moveToFirst()) {
+      photo_info.from = cursor.getString( 0 );
+      photo_info.to   = cursor.getString( 1 );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  }
 
 }
 

@@ -2235,7 +2235,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 \n\nTopoDroid is an Open Source Android app for surveying caves with electronic integrated surveying devices.
 \nSupported devices: DistoX, Cavway, BRIC, SAP, DiscoX, and JedEye.
 \n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
-\n\nHelp: menu "HELP"
+\n\nWhat\'s new: https://github.com/marcocorvi/topodroid/blob/master/changes/%1$s.md
+\nHelp: menu "HELP"
 \nMan pages: Book icon in the Help dialog
 \nDocs: https://sites.google.com/site/speleoapps
 \nDownload: https://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidApks.html

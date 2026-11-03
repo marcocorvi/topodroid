@@ -26,6 +26,7 @@ import com.topodroid.c3out.ExportGPX;
 import com.topodroid.c3out.ExportSHP;
 import com.topodroid.c3out.ExportSTL;
 import com.topodroid.c3in.LoxBitmap;
+import com.topodroid.c3in.GlPhotoInfo; // PHOTO-3D
 import com.topodroid.algo.hull.HullComputer;
 import com.topodroid.algo.cw.CWTriangle;
 import com.topodroid.algo.cw.CWBorder;
@@ -58,6 +59,7 @@ import java.util.regex.Pattern;
 import java.util.Locale;
 import java.util.TreeSet;
 import java.util.Iterator;
+import java.util.HashMap;
 // import java.util.HashTable;
 
 // import android.widget.Toast;
@@ -103,7 +105,7 @@ public class TglParser
   protected ArrayList< Cave3DShot >     splays;  // splay shots
   protected ArrayList< Cave3DXSection > xsections = null;
   protected ArrayList< String > mEquateTable = null;
-  protected ArrayList< PhotoInfo > mPhoto = null;
+  protected ArrayList< GlPhotoInfo > mGlPhotoList = null; // PHOTO-3D
 
   PowercrustComputer powercrustcomputer = null;
   ConvexHullComputer convexhullcomputer = null;
@@ -131,6 +133,8 @@ public class TglParser
   boolean hasOrigin() { return mOrigin != null; }
   public boolean isWGS84() { return mOrigin != null && mOrigin.isWGS84(); }
   boolean hasWGS84() { return mOrigin != null && mOrigin.hasWGS84(); }
+
+  boolean hasGlPhotos() { return mGlPhotoList != null && mGlPhotoList.size() > 0; } // PHOTO-3D
 
   // /** @return the meridian convergence (at the origin)
   //  */
@@ -222,7 +226,7 @@ public class TglParser
   public ArrayList< Cave3DStation >  getStations()  { return stations; }
   public ArrayList< Cave3DFix >      getFixes()     { return fixes; }
   public ArrayList< Cave3DXSection > getXSections() { return xsections; }
- 
+  public ArrayList< GlPhotoInfo >    getPhotoList() { return mGlPhotoList; } // PHOTO-3D
 
   /** @return the string of the stations equated to a given station
    * @param station  input station qualified name (eg station@survey)
