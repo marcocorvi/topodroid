@@ -164,11 +164,13 @@ public class GlModel
     if ( photos != null ) for ( GlPhoto p : photos ) p.forgetTexture();
   }
 
+  /** release all photos and clear the array
+   */
   private void releasePhotos()
   {
     List< GlPhoto > photos = glPhotos;
     if ( photos != null ) for ( GlPhoto p : photos ) p.release();
-    glPhotos.clear();
+    if ( glPhotos != null ) glPhotos.clear();
   }
 
   /** @return the diameter of the model
@@ -1434,7 +1436,7 @@ public class GlModel
 
     synchronized( this ) {
       releasePhotos();
-      if ( parser.hasGlPhotos() ) { // PHOTO-3D
+      if ( TDLevel.overExpert && parser.hasGlPhotos() ) { // PHOTO-3D
         preparePhotos( parser.getPhotoList() );
       }
       glLegs   = legs;

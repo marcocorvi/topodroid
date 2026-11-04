@@ -480,7 +480,7 @@ class ShpObject
     cpgBuffer.put( (byte)0x38 ); // 8
   }
 
-  static String WGS84 = "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\", 0.0174532925199433]];
+  static String WGS84 = "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\", 0.0174532925199433]]";
  
   static String UTM( String zone ) { return "PROJCS[\"WGS_1984_UTM_Zone_" + zone + "\"," + WGS84 + ",PROJECTION[\"Central_Meridian\",-123.0]"; }
 
