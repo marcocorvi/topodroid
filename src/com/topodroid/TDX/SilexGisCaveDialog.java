@@ -49,6 +49,11 @@ class SilexGisCaveDialog extends MyDialog
   static final long SEARCH_DELAY = 300; // [ms] after the last key
   static final int  SEARCH_SIZE  = 20;  // most caves listed
 
+  // field that has the focus when the dialog opens
+  static final int FOCUS_NONE   = 0;
+  static final int FOCUS_SEARCH = 1; // the cave search
+  static final int FOCUS_NEW    = 2; // the name of a new cave
+
   /** receiver of the picked target
    */
   interface Listener
@@ -56,12 +61,17 @@ class SilexGisCaveDialog extends MyDialog
     /** @param target   upload that carries the picked target
      */
     void onTarget( SilexGisUpload target );
+
+    /** the user asked to forget the server survey remembered for the survey (the dialog stays open)
+     */
+    void onForget();
   }
 
   private final Listener mListener;
   private final String mSurveyTitle;
   private final SilexGisUpload mCurrent;    // target in the export dialog
-  private final SilexGisUpload mRemembered; // target remembered for the survey (null if none)
+  private SilexGisUpload mRemembered;       // target remembered for the survey (null if none, or forgotten)
+  private final int mFocus;
 
   private EditText mETsearch;
   private TextView mTVsearch;
@@ -70,6 +80,8 @@ class SilexGisCaveDialog extends MyDialog
   private Spinner  mSPvisibility;
   private CheckBox mCBprotected;
   private Button   mBtnNew;
+  private String   mStartVisibility = null; // visibility the new-cave form started on
+  private boolean  mStartChosen = false;    // whether that one was the user's choice already
 
   private final ArrayList< String[] > mCaves = new ArrayList<>(); // { id, name } of the listed caves
   private ArrayAdapter< String > mAdapter;
@@ -91,11 +103,25 @@ class SilexGisCaveDialog extends MyDialog
    */
   SilexGisCaveDialog( Context context, String survey_title, SilexGisUpload current, SilexGisUpload remembered, Listener listener )
   {
+    this( context, survey_title, current, remembered, listener, FOCUS_NONE );
+  }
+
+  /** cstr
+   * @param context      context
+   * @param survey_title survey title, the name of a new cave
+   * @param current      current target
+   * @param remembered   target remembered for the survey (can be null)
+   * @param listener     receiver of the picked target
+   * @param focus        field that has the focus at the start: FOCUS_NONE, FOCUS_SEARCH, FOCUS_NEW
+   */
+  SilexGisCaveDialog( Context context, String survey_title, SilexGisUpload current, SilexGisUpload remembered, Listener listener, int focus )
+  {
     super( context, null, 0 ); // 0: no help resource
     mSurveyTitle = survey_title;
     mCurrent     = current;
     mRemembered  = remembered;
     mListener    = listener;
+    mFocus       = focus;
   }
 
   /** @return the client of the configured server
@@ -114,6 +140,9 @@ class SilexGisCaveDialog extends MyDialog
       last.setText( SilexGisExportTask.targetText( mContext.getResources(), mRemembered ) );
       last.setVisibility( View.VISIBLE );
       last.setOnClickListener( this );
+      Button forget = (Button) findViewById( R.id.silexgis_forget );
+      forget.setVisibility( View.VISIBLE );
+      forget.setOnClickListener( this );
     }
 
     mETsearch = (EditText) findViewById( R.id.silexgis_search );
@@ -138,11 +167,21 @@ class SilexGisCaveDialog extends MyDialog
     if ( mCurrent != null && mCurrent.target == SilexGisUpload.TARGET_NEW_CAVE ) {
       mETname.setText( mCurrent.newCaveName );
       visibility = mCurrent.newCaveVisibility;
+      mStartChosen = mCurrent.newCaveVisibilityChosen;
       mCBprotected.setChecked( mCurrent.newCaveProtected );
     } else {
       mETname.setText( mSurveyTitle );
     }
     setVisibilities( mVisibilities, visibility );
+    mStartVisibility = selectedVisibility();
+    // the form starts on the club unless the user set another visibility in the export dialog or in the settings:
+    // only the club preset is left to the server when it is not changed
+    if ( ! SilexGisUpload.VISIBILITY_CLUB.equals( mStartVisibility ) ) mStartChosen = true;
+    if ( mFocus == FOCUS_SEARCH ) {
+      mETsearch.requestFocus();
+    } else if ( mFocus == FOCUS_NEW ) {
+      mETname.requestFocus();
+    }
 
     mBtnNew = (Button) findViewById( R.id.button_ok );
     mBtnNew.setOnClickListener( this );
@@ -160,13 +199,21 @@ class SilexGisCaveDialog extends MyDialog
       target.setAuto();
     } else if ( id == R.id.silexgis_last ) {
       target = mRemembered.copy();
+    } else if ( id == R.id.silexgis_forget ) { // the link to the server survey goes, the dialog stays for another target
+      mRemembered = null;
+      findViewById( R.id.silexgis_last ).setVisibility( View.GONE );
+      v.setVisibility( View.GONE );
+      if ( mListener != null ) mListener.onForget();
+      TDToast.make( R.string.silexgis_link_forgotten );
+      return;
     } else if ( id == R.id.button_ok ) { // new cave
       String name = mETname.getText().toString().trim();
       if ( name.isEmpty() ) {
         mETname.setError( resString( R.string.error_name_required ) );
         return;
       }
-      target.setNewCave( name, selectedVisibility(), mCBprotected.isChecked() );
+      String visibility = selectedVisibility();
+      target.setNewCave( name, visibility, SilexGisUpload.visibilityChosen( mStartVisibility, mStartChosen, visibility ), mCBprotected.isChecked() );
     } else { // button_cancel
       mHandler.removeCallbacks( mSearch );
       dismiss();
@@ -270,7 +317,10 @@ class SilexGisCaveDialog extends MyDialog
   {
     if ( caps == null || ! caps.isOk() ) return;
     if ( SilexGisUploader.caveCreationAllowed( caps.json ) ) {
-      setVisibilities( SilexGisUploader.caveVisibilities( caps.json ), selectedVisibility() );
+      String selected = selectedVisibility();
+      boolean untouched = selected.equals( mStartVisibility );
+      setVisibilities( SilexGisUploader.caveVisibilities( caps.json ), selected );
+      if ( untouched && ! mStartChosen ) mStartVisibility = selectedVisibility(); // the form starts on what the server offers
     } else { // neither a new cave nor one named after the survey title
       findViewById( R.id.silexgis_auto ).setEnabled( false );
       mBtnNew.setEnabled( false );

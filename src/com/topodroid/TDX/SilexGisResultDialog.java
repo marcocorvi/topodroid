@@ -5,8 +5,8 @@
  *
  * @brief TopoDroid upload to a SilexGIS server: what the upload came to
  *
- * The results of the processing can be downloaded into the survey "out" folder, and the
- * 3D models opened in Cave3D. The upload is followed in the browser: its public link if
+ * The results of the processing can be downloaded into the public Download folder (else the
+ * survey "out" folder) and opened with the app of their type, and the 3D models opened in Cave3D. The upload is followed in the browser: its public link if
  * there is one, else its status page on the server (which asks to sign in).
  * The link can be withdrawn, or a new one made for anyone or for the signed-in members;
  * for a cave whose position is protected a link is made only after a confirmation.
@@ -334,6 +334,14 @@ class SilexGisResultDialog extends MyDialog
     setSelected( mSelected );
   }
 
+  /** say where a download went: it stays in the dialog after the app that opens the file is left
+   * @param where   message
+   */
+  private void showDownloaded( String where )
+  {
+    mTVpick.setText( where );
+  }
+
   /** show the progress of a download
    * @param name   artefact name
    * @param done   bytes received
@@ -462,6 +470,7 @@ class SilexGisResultDialog extends MyDialog
     private final SilexGisStatus.Artefact mArtefact;
     private final File mDest;
     private final boolean mOpen;
+    private SilexGisDownload.Saved mSaved = null; // where the downloaded file is kept (not for Cave3D)
 
     private long mShown = -1; // kB shown
 
@@ -482,7 +491,7 @@ class SilexGisResultDialog extends MyDialog
     @Override
     protected SilexGisClient.Result doInBackground( Void... args )
     {
-      return ( new SilexGisUploader( mClient, null ) ).fetchArtefact( mUploadId, mArtefact, mDest, new SilexGisClient.Progress() {
+      SilexGisClient.Result r = ( new SilexGisUploader( mClient, null ) ).fetchArtefact( mUploadId, mArtefact, mDest, new SilexGisClient.Progress() {
         @Override public boolean onProgress( long done, long total ) {
           if ( done / 1024 != mShown ) { // one update per kB
             mShown = done / 1024;
@@ -491,6 +500,9 @@ class SilexGisResultDialog extends MyDialog
           return true;
         }
       } );
+      // Cave3D reads the model from the "out" folder; any other download goes to the public Download folder
+      if ( r.isOk() && ! mOpen ) mSaved = SilexGisDownload.publish( mContext, mDest, mDest.getName() );
+      return r;
     }
 
     @Override
@@ -509,8 +521,11 @@ class SilexGisResultDialog extends MyDialog
       }
       if ( mOpen ) {
         openInCave3D( mContext, mDest.getPath() );
-      } else {
-        TDToast.make( String.format( res.getString( R.string.saved_file_1 ), mDest.getName() ) );
+      } else if ( mSaved != null ) {
+        String where = String.format( res.getString( R.string.silexgis_downloaded ), mSaved.shown );
+        mDialog.showDownloaded( where );
+        TDToast.makeLong( where );
+        SilexGisDownload.open( mContext, mSaved, mDest.getName() );
       }
     }
   }

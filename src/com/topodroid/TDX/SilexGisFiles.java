@@ -189,6 +189,44 @@ class SilexGisFiles
     return name.substring( dot ).toLowerCase( Locale.US );
   }
 
+  // MIME types of the files a SilexGIS server sends back, by extension; anything else is application/octet-stream
+  private static final String[][] MIME_TYPES = {
+    { "pdf",  "application/pdf" },
+    { "kml",  "application/vnd.google-earth.kml+xml" },
+    { "kmz",  "application/vnd.google-earth.kmz" },
+    { "gpx",  "application/gpx+xml" },
+    { "svg",  "image/svg+xml" },
+    { "png",  "image/png" },
+    { "jpg",  "image/jpeg" },
+    { "jpeg", "image/jpeg" },
+    { "zip",  "application/zip" },
+    { "csv",  "text/csv" },
+    { "html", "text/html" },
+    { "json", "application/json" },
+    { "xml",  "text/xml" },
+    { "txt",  "text/plain" },
+    { "log",  "text/plain" },
+    { "th",   "text/plain" },
+    { "th2",  "text/plain" },
+    { "thconfig", "text/plain" },
+    { "svx",  "text/plain" },
+    { "dat",  "text/plain" },
+  };
+  static final String MIME_DEFAULT = "application/octet-stream";
+
+  /** @return the MIME type of a file, by its extension (application/octet-stream if not known)
+   * @param name   file name
+   */
+  static String mimeType( String name )
+  {
+    if ( name == null ) return MIME_DEFAULT;
+    int pos = name.lastIndexOf( '.' );
+    if ( pos < 0 || pos == name.length() - 1 ) return MIME_DEFAULT;
+    String ext = name.substring( pos + 1 ).toLowerCase( Locale.US );
+    for ( String[] mt : MIME_TYPES ) if ( mt[0].equals( ext ) ) return mt[1];
+    return MIME_DEFAULT;
+  }
+
   /** @return a name that is safe as the name of a file on the device: the last segment, without characters a file name cannot have
    * @param name   name given by the server
    * @param dflt   name to use if nothing is left

@@ -91,6 +91,7 @@ public class ExportDialogShot extends MyDialog
   private SilexGisUpload mSilexgisRemembered = null; // target remembered for the survey
   private boolean mSilexgisLinkFirst = false;        // no link choice remembered yet: it starts from the account's audience
   private boolean mSilexgisLinksAsked = false;       // the server has been asked the links of the account
+  private int mSilexgisVisibilityStart = -1;         // documents visibility the dialog started on
 
   /** cstr
    * @param context     context
@@ -591,6 +592,7 @@ public class ExportDialogShot extends MyDialog
           mSilexgisUpload.outputs = ((EditText) findViewById( R.id.silexgis_outputs )).getText().toString().trim(); // empty: the server default
           int vis = ((Spinner) findViewById( R.id.silexgis_visibility )).getSelectedItemPosition();
           if ( vis >= 0 && vis < SilexGisUpload.VISIBILITIES.length ) mSilexgisUpload.visibility = SilexGisUpload.VISIBILITIES[ vis ];
+          mSilexgisUpload.visibilityChosen = ( vis != mSilexgisVisibilityStart );
         }
         break;
     }
@@ -621,6 +623,12 @@ public class ExportDialogShot extends MyDialog
           new SilexGisCaveDialog.Listener() {
             @Override public void onTarget( SilexGisUpload target ) {
               mSilexgisUpload.targetFromJson( target.targetToJson() );
+              mBtnSilexgisTarget.setText( SilexGisExportTask.targetText( mContext.getResources(), mSilexgisUpload ) );
+            }
+            @Override public void onForget() {
+              SilexGisExportTask.getStore( mContext ).forgetTarget( mSurvey );
+              mSilexgisRemembered = null;
+              if ( mSilexgisUpload.target == SilexGisUpload.TARGET_CAVE_SURVEY || mSilexgisUpload.target == SilexGisUpload.TARGET_CAVE ) mSilexgisUpload.setAuto();
               mBtnSilexgisTarget.setText( SilexGisExportTask.targetText( mContext.getResources(), mSilexgisUpload ) );
             }
           } )).show();
@@ -713,7 +721,8 @@ public class ExportDialogShot extends MyDialog
     ((EditText) findViewById( R.id.silexgis_outputs )).setText( mSilexgisUpload.outputs );
     Spinner vis = (Spinner) findViewById( R.id.silexgis_visibility );
     vis.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisVisibility ) ) );
-    vis.setSelection( SilexGisExportTask.visibilityIndex( mSilexgisUpload.visibility ) );
+    mSilexgisVisibilityStart = SilexGisExportTask.visibilityIndex( mSilexgisUpload.visibility );
+    vis.setSelection( mSilexgisVisibilityStart );
     findViewById( R.id.silexgis_advanced ).setVisibility( TDLevel.overNormal ? View.VISIBLE : View.GONE );
     findViewById( R.id.silexgis_with_out ).setVisibility( TDLevel.overAdvanced ? View.VISIBLE : View.GONE );
   }

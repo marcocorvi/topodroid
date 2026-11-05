@@ -27,7 +27,9 @@ import com.topodroid.prefs.TDPrefHelper;
 
 import android.os.AsyncTask;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.Uri;
 
@@ -135,7 +137,8 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
           ( upload.caveName == null )? "-" : upload.caveName );
       case SilexGisUpload.TARGET_NEW_CAVE:
         String[] vis = res.getStringArray( R.array.silexgisVisibility );
-        return String.format( res.getString( R.string.silexgis_target_new ), upload.newCaveName, vis[ visibilityIndex( upload.newCaveVisibility ) ] );
+        String shown = upload.newCaveVisibilityChosen ? vis[ visibilityIndex( upload.newCaveVisibility ) ] : res.getString( R.string.silexgis_visibility_server );
+        return String.format( res.getString( R.string.silexgis_target_new ), upload.newCaveName, shown );
     }
     return res.getString( R.string.silexgis_target_auto );
   }
@@ -217,6 +220,59 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     mClient  = new SilexGisClient( TDSetting.mSilexGisUrl, TDSetting.mSilexGisKey );
     mDialog  = new SilexGisProgressDialog( context, new Runnable() { @Override public void run() { mCancelled = true; } } );
     mDialog.show();
+  }
+
+  /** say that the server no longer has the survey or the cave the survey is linked to, and offer a way on:
+   *  upload it as a new survey, pick a cave, or cancel
+   * @param context   activity context
+   * @param app       application
+   * @param survey    survey name
+   * @param upload    upload that was refused
+   */
+  static void showDeadTarget( final Context context, final TopoDroidApp app, final String survey, SilexGisUpload upload )
+  {
+    Resources res = context.getResources();
+    AlertDialog.Builder builder = new AlertDialog.Builder( context );
+    builder.setTitle( R.string.silexgis_upload_title );
+    builder.setMessage( String.format( res.getString( R.string.silexgis_dead_target ), targetText( res, upload ) ) );
+    builder.setPositiveButton( R.string.silexgis_dead_new, new DialogInterface.OnClickListener() {
+      @Override public void onClick( DialogInterface dialog, int btn ) { pickNewTarget( context, app, survey, SilexGisCaveDialog.FOCUS_NEW ); }
+    } );
+    builder.setNeutralButton( R.string.silexgis_dead_pick, new DialogInterface.OnClickListener() {
+      @Override public void onClick( DialogInterface dialog, int btn ) { pickNewTarget( context, app, survey, SilexGisCaveDialog.FOCUS_SEARCH ); }
+    } );
+    builder.setNegativeButton( R.string.button_cancel, null );
+    AlertDialog alert = builder.create();
+    if ( TDandroid.ABOVE_API_24 ) { // as the other alerts of the app
+      alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
+    } else {
+      alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
+    }
+    alert.show();
+  }
+
+  /** forget the dead link of a survey, let the user pick where it goes as for its first upload, and upload it there
+   * @param context   activity context
+   * @param app       application
+   * @param survey    survey name
+   * @param focus     field of the cave dialog that has the focus
+   */
+  private static void pickNewTarget( final Context context, final TopoDroidApp app, final String survey, int focus )
+  {
+    final SilexGisStore store = getStore( context );
+    store.forgetTarget( survey );
+    SilexGisUpload current = loadUpload( context, survey ); // no target now: a new cave named after the survey title
+    (new SilexGisCaveDialog( context, surveyTitle( survey ), current, null, new SilexGisCaveDialog.Listener() {
+      @Override public void onTarget( SilexGisUpload target ) {
+        if ( ! survey.equals( TDInstance.survey ) ) { // another survey was opened meanwhile
+          TDToast.makeBad( R.string.no_survey );
+          return;
+        }
+        store.saveTarget( survey, target );
+        start( context, app );
+      }
+      @Override public void onForget() { } // nothing is remembered any more
+    }, focus )).show();
   }
 
   // ---------------------------------------------------------------------
@@ -472,6 +528,10 @@ class SilexGisExportTask extends AsyncTask< Void, SilexGisExportTask.Line, Silex
     }
     if ( out.mayRestart() ) { // nothing is on the server yet: the upload starts again with the new key
       SilexGisSettingsDialog.showKeyRefused( mContext, new Runnable() { @Override public void run() { start( mContext, mApp ); } } );
+      return;
+    }
+    if ( SilexGisUploader.deadTarget( out, mUpload ) ) { // the server survey or cave remembered for the survey is gone: nothing was sent
+      showDeadTarget( mContext, mApp, mSurvey, mUpload );
       return;
     }
     if ( out.status != null && out.status.olderWarn ) { // past the warning size of the server

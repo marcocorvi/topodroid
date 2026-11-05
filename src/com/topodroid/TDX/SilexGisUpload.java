@@ -55,6 +55,7 @@ class SilexGisUpload
   String caveSurveyTitle = null;
   String newCaveName       = null; // TARGET_NEW_CAVE
   String newCaveVisibility = null;
+  boolean newCaveVisibilityChosen = false; // the user picked the visibility: else it is not sent, and the server applies its default
   boolean newCaveProtected = false; // whether the server is to protect the location of the new cave
 
   // switches: the last combination is remembered
@@ -69,6 +70,7 @@ class SilexGisUpload
   int     link       = LINK_ACCOUNT; // the link to the results: as the account says, none, or one for an audience
   String  outputs    = "lox,3d,plan-pdf,extended-pdf"; // comma separated
   String  visibility = "cavingGroup"; // documents of the upload, and the cave the server makes without a target
+  boolean visibilityChosen = false;   // the user picked the documents visibility in this export: an untouched club is not sent
   boolean linksOff   = false; // the server makes no links for this account: the link choice is not offered, nor sent (not remembered)
 
   /** default cstr: the defaults of the settings
@@ -178,6 +180,7 @@ class SilexGisUpload
       if ( ! linksOff ) ret.put( "link", LINK_CHOICES[ link ] ); // a choice not offered is not remembered
       ret.put( "outputs",    outputs );
       ret.put( "visibility", visibility );
+      if ( visibilityChosen ) ret.put( "visibilityChosen", true ); // carried from the export dialog to the upload task
     } catch ( JSONException e ) { /* cannot happen with these values */ }
     return ret;
   }
@@ -201,6 +204,7 @@ class SilexGisUpload
     outputs    = optString( json, "outputs", outputs );
     String vis = optString( json, "visibility", visibility );
     if ( isVisibility( vis ) ) visibility = vis;
+    visibilityChosen = json.optBoolean( "visibilityChosen", false );
   }
 
   /** @return the target as JSON
@@ -216,6 +220,7 @@ class SilexGisUpload
       if ( caveSurveyTitle   != null ) ret.put( "caveSurveyTitle",   caveSurveyTitle );
       if ( newCaveName       != null ) ret.put( "newCaveName",       newCaveName );
       if ( newCaveVisibility != null ) ret.put( "newCaveVisibility", newCaveVisibility );
+      if ( newCaveVisibilityChosen ) ret.put( "newCaveVisibilityChosen", true );
       if ( newCaveProtected ) ret.put( "newCaveProtected", true );
     } catch ( JSONException e ) { /* cannot happen with these values */ }
     return ret;
@@ -235,6 +240,7 @@ class SilexGisUpload
     caveSurveyTitle   = optString( json, "caveSurveyTitle", null );
     newCaveName       = optString( json, "newCaveName", null );
     newCaveVisibility = optString( json, "newCaveVisibility", null );
+    newCaveVisibilityChosen = json.optBoolean( "newCaveVisibilityChosen", false );
     newCaveProtected  = json.optBoolean( "newCaveProtected", false );
     switch ( t ) {
       case TARGET_CAVE:        if ( caveId != null )       target = t; break;
@@ -276,6 +282,7 @@ class SilexGisUpload
     target = TARGET_AUTO;
     caveId = caveName = caveSurveyId = caveSurveyTitle = null;
     newCaveName = newCaveVisibility = null;
+    newCaveVisibilityChosen = false;
     newCaveProtected = false;
   }
 
@@ -307,18 +314,41 @@ class SilexGisUpload
     caveName        = cave_name;
   }
 
-  /** upload to a new cave
+  /** upload to a new cave, with a visibility the user picked
    * @param name        cave name
    * @param visibility  who may see the cave (a club-visible cave goes to the club of the account)
    * @param protect     whether the server is to protect the location of the cave
    */
-  void setNewCave( String name, String visibility, boolean protect )
+  void setNewCave( String name, String visibility, boolean protect ) { setNewCave( name, visibility, true, protect ); }
+
+  /** upload to a new cave
+   * @param name        cave name
+   * @param visibility  who may see the cave, as shown (a club-visible cave goes to the club of the account)
+   * @param chosen      whether the user picked the visibility: else it is not sent, and the server applies its default
+   * @param protect     whether the server is to protect the location of the cave
+   */
+  void setNewCave( String name, String visibility, boolean chosen, boolean protect )
   {
     setAuto();
     target            = TARGET_NEW_CAVE;
     newCaveName       = name;
     newCaveVisibility = visibility;
+    newCaveVisibilityChosen = chosen;
     newCaveProtected  = protect;
+  }
+
+  /** @return whether the visibility of a new cave is the user's choice, and is to be sent
+   * @param start          visibility the new-cave form started on
+   * @param start_chosen   whether that one was already a choice of the user (a new cave picked before)
+   * @param selected       visibility selected when the form is confirmed
+   * @note the form starts on the club, which the server refuses to an account in no caving group:
+   *       a visibility left as it started is not sent, so that the server applies its own default
+   *       (the club of the account, else private)
+   */
+  static boolean visibilityChosen( String start, boolean start_chosen, String selected )
+  {
+    if ( selected == null ) return false;
+    return start_chosen || ! selected.equals( start );
   }
 
   /** @return true if the server is to make a cave for the upload: without a target, or with a new cave
@@ -357,7 +387,7 @@ class SilexGisUpload
         case TARGET_NEW_CAVE:
           JSONObject cave = new JSONObject();
           cave.put( "name", newCaveName );
-          cave.put( "visibility", newCaveVisibility );
+          if ( newCaveVisibilityChosen && isVisibility( newCaveVisibility ) ) cave.put( "visibility", newCaveVisibility );
           cave.put( "locationProtected", newCaveProtected ); // a server that does not know it yet ignores it
           ret.put( "newCave", cave );
           break;
@@ -397,7 +427,7 @@ class SilexGisUpload
         pipeline.put( "outputs", outs );
       }
       ret.put( "pipeline", pipeline );
-      if ( isVisibility( visibility ) ) ret.put( "documentsVisibility", visibility );
+      if ( documentsVisibilitySent( visibility, visibilityChosen ) ) ret.put( "documentsVisibility", visibility );
       // the link to the results of this upload: none, or one for the chosen audience; nothing when the user
       // left it to the account, whose preferences then decide on the server, or when the account gets no
       // links (the choice is not offered then). A cave whose position is protected gets a link only when
@@ -411,6 +441,20 @@ class SilexGisUpload
       }
     } catch ( JSONException e ) { /* cannot happen with these values */ }
     return ret;
+  }
+
+  /** @return whether the documents visibility of an upload is sent
+   * @param visibility   documents visibility
+   * @param chosen       whether the user picked it in the export dialog
+   * @note the club is the starting value, and the server refuses it when the upload has documents (exports without
+   *       a survey format) and the cave has no caving group the account may file them under: an untouched club is not
+   *       sent, so that the documents get the cave's own audience. Another visibility was the user's choice, here or in
+   *       the settings, and is sent
+   */
+  static boolean documentsVisibilitySent( String visibility, boolean chosen )
+  {
+    if ( ! isVisibility( visibility ) ) return false;
+    return chosen || ! VISIBILITY_CLUB.equals( visibility );
   }
 
   /** @return the outputs to ask for: those of the switches that the server can produce

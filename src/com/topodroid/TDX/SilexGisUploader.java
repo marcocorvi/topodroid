@@ -265,6 +265,28 @@ class SilexGisUploader
     return null;
   }
 
+  // codes of the opening that say the cave or the survey of a cave named in the request is not on the server
+  // (deleted, the server reset, or no longer visible to the account: the server answers these alike)
+  static final String CODE_SURVEY_NOT_FOUND = "survey_upload.survey_not_found";
+  static final String CODE_CAVE_NOT_FOUND   = "cave.not_found";
+
+  /** @return true if the upload was refused because the cave or the survey of a cave it named is not on the server:
+   *          the link remembered for the survey is dead, and only another target can make the upload go
+   * @param out      outcome of the upload
+   * @param upload   where to it went
+   */
+  static boolean deadTarget( Outcome out, SilexGisUpload upload )
+  {
+    if ( out == null || upload == null || out.kind != REFUSED || out.hasUpload() ) return false; // nothing opened: refused at the opening
+    SilexGisClient.Result r = out.result;
+    if ( r == null || r.kind != SilexGisClient.PROBLEM || r.status != 404 || r.code == null ) return false;
+    switch ( upload.target ) {
+      case SilexGisUpload.TARGET_CAVE_SURVEY: return CODE_SURVEY_NOT_FOUND.equals( r.code ) || CODE_CAVE_NOT_FOUND.equals( r.code );
+      case SilexGisUpload.TARGET_CAVE:        return CODE_CAVE_NOT_FOUND.equals( r.code );
+    }
+    return false;
+  }
+
   /** @return the capabilities of the server, null if not asked yet
    */
   JSONObject capabilities() { return mCaps; }

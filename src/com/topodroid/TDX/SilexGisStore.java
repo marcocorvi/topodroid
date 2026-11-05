@@ -125,6 +125,15 @@ class SilexGisStore
     saveTarget( survey, upload );
   }
 
+  /** forget where a survey was uploaded: its next upload goes where the user picks, as the first one did
+   * @param survey   survey name
+   */
+  void forgetTarget( String survey )
+  {
+    if ( survey == null ) return;
+    mPrefs.put( targetKey( survey ), null );
+  }
+
   /** @return the remembered target of a survey, null if none
    * @param survey   survey name
    */

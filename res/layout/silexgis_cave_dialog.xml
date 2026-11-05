@@ -28,6 +28,14 @@
       android:layout_marginTop="@dimen/margintiny"
       android:visibility="gone"
       />
+    <Button android:id="@+id/silexgis_forget"
+      style="@style/button_default"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/margintiny"
+      android:text="@string/silexgis_forget_link"
+      android:visibility="gone"
+      />
 
     <EditText android:id="@+id/silexgis_search" 
       style="@style/edit_text"

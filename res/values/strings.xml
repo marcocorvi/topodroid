@@ -1752,6 +1752,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="silexgis_target_cave">Cave %1$s</string>
   <string name="silexgis_target_survey">Survey %1$s of the cave %2$s</string>
   <string name="silexgis_target_new">New cave %1$s (%2$s)</string>
+  <string name="silexgis_visibility_server">visibility the server decides</string>
+  <string name="silexgis_forget_link">Forget the link to the server survey</string>
+  <string name="silexgis_link_forgotten">Link to the server survey forgotten: the next upload goes where you pick</string>
+  <string name="silexgis_dead_target">This survey is linked to something the server no longer has: %1$s. It was deleted, or the server was reset.\n\nUpload it as a new survey, or pick an existing cave on the server. Either way the old link is forgotten.</string>
+  <string name="silexgis_dead_new">Upload as new</string>
+  <string name="silexgis_dead_pick">Pick a cave</string>
+  <string name="silexgis_downloaded">Downloaded to %1$s</string>
+  <string name="silexgis_open_no_app">No app on this device can open %1$s</string>
   <string name="silexgis_cave_title">SilexGIS cave</string>
   <string name="silexgis_cave_search">Search a cave by name</string>
   <string name="silexgis_cave_searching">Searching...</string>
