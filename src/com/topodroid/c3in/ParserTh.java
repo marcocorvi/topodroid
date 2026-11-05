@@ -90,7 +90,7 @@ public class ParserTh extends TglParser
 
   /** set a data value
    * @param type  value type
-   * @param valA  value
+   * @param val  value
    * @param thStatus Thrion reading status
    */
   private void setDataValue( int type, double val, ThStatus thStatus )
