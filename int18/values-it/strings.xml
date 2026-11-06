@@ -369,7 +369,12 @@
     <string name="location_start_fine">Inizio affinamento posizione</string>
     <string name="location_enabled">Assicurati che LOCATION sia abilitata</string>
     <string name="location_no_permission">Localizzazione non abilitata</string>
+    <!-- TODO string name="location_permission_setting">Set LOCATION permision ?</string -->
+    <!-- TODO string name="no_gps_hardware">No GPS hardware</string -->
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
+    <!-- TODO string name="bt_scan_in_progress">BT scan in progress. Wait &#8230;</string -->
+    <!-- TODO string name="bt_scan_no_permission">BT scan needs a permission</string -->
+    <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Errore individuazione BT: %1$s</string>
     <string name="depth_format">Profondita\' %1$.1f</string>
 

@@ -8676,8 +8676,8 @@ public class DrawingWindow extends ItemDrawer
     GeoReference station = null;
 
     if ( type == PlotType.PLOT_PLAN && ext.equals("shz") ) {
-      String origin = num.getOriginStation();
-      station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin, true );
+      String origin = num.getOriginStation(); // with-convergence: use transformed CS if defined or WGS84 otherwise
+      station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin, true ); // FIXME PROJ_CRS
     // } else if ( ext.equals("c3d") ) { // NO_C3D
     //   // c3d export uses plot and fixed instead of station
     //   plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;

@@ -1716,7 +1716,7 @@ public class MainWindow extends Activity
   {
     // TDLog.v(  "Main perm request result " + results.length + " request time " + mRequestPermissionTime );
     ++ mRequestPermissionTime;
-    if ( code == TDandroid.REQUEST_PERMISSIONS ) {
+    if ( code == TDRequest.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
         int granted = 0;
 	for ( int k = 0; k < results.length; ++ k ) {

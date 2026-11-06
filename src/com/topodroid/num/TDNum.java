@@ -381,6 +381,7 @@ public class TDNum
 
   public boolean surveyAttached; //!< whether the survey is attached
   public boolean surveyExtend;
+  public String mCRS = null;
 
   public List< NumStation > getStations() { return mStations.getStations(); }
   public List< NumStation > getClosureStations() { return mClosureStations; }

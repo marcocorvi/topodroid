@@ -50,7 +50,7 @@ public class DrawingShp
   // @param type       sketch type
   // @param station    WGS84 data of the sketch origin 
   // @return true if successful
-  public static boolean writeShp( OutputStream fos, String dirname, DrawingCommandManager plot, long type, GeoReference station )
+  public static boolean writeShp( OutputStream fos, String dirname, DrawingCommandManager plot, long type, GeoReference station, String crs )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SHP2 );
     // TDLog.v( "SHP sketch export dirname " + dirname );
@@ -61,6 +61,7 @@ public class DrawingShp
     float cd = 1;
     float sd = 0;
     float decl = 0;
+    String prj_crs = null;
     if ( station != null && TDSetting.mShpGeoref ) {
       xoff = station.ge;
       yoff = station.gs;
@@ -69,6 +70,7 @@ public class DrawingShp
       decl = station.declination; // N.B. station.declination can include -convergence
       cd = TDMath.cosd( decl ); 
       sd = TDMath.sind( decl );
+      prj_crs = ShpUtil.getPrjCrs( crs );
     }
 
     if ( ! TDFile.makeMSdir( dirname ) ) {
@@ -91,8 +93,8 @@ public class DrawingShp
         }
       }
       ShpSegment shp_shot = new ShpSegment( dirname, "shot", files );
-
       shp_shot.writeSegments( shots, xoff, yoff, xscale, yscale, cd, sd );
+      if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "shot", prj_crs, files );
 
       // points shapefile
       ArrayList< DrawingPointPath > points     = new ArrayList<>();
@@ -126,22 +128,28 @@ public class DrawingShp
       }
       ShpPoint shp_point = new ShpPoint( dirname, "point", files );
       shp_point.writePoints( points, xoff, yoff, xscale, yscale, cd, sd, decl );
+      if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "point", prj_crs, files );
       ShpExtra shp_extra = new ShpExtra( dirname, "extra", files );
       shp_extra.writeExtras( extras, xoff, yoff, xscale, yscale, cd, sd, links );
+      if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "extra", prj_crs, files );
       ShpPolyline shp_line = new ShpPolyline( dirname, "line", DrawingPath.DRAWING_PATH_LINE, files );
       shp_line.writeLines( lines, xoff, yoff, xscale, yscale, cd, sd );
+      if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "line", prj_crs, files );
       ShpPolyline shp_area = new ShpPolyline( dirname, "area", DrawingPath.DRAWING_PATH_AREA, files );
       shp_area.writeAreas( areas, xoff, yoff, xscale, yscale, cd, sd );
+      if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "area", prj_crs, files );
 
       if ( links != null && links.size() > 0 ) {
         ShpLink shp_link = new ShpLink( dirname, "link", files );
         shp_link.writeLinks( links, xoff, yoff, xscale, yscale, cd, sd );
+        if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "link", prj_crs, files );
       }
 
       // stations: xoff+name.cx, yoff+name.cy
       List< DrawingStationName > stations = plot.getStations();
       ShpStation shp_station = new ShpStation( dirname, "station", files );
       shp_station.writeStations( stations, xoff, yoff, xscale, yscale, cd, sd );
+      if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, "station", prj_crs, files );
 
       // (new Archiver()).compressFiles( "shp", filename + ".shz", dirname, files );
       (new Archiver()).compressFiles( fos, dirname, files );

@@ -116,8 +116,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           String dirpath = TDPath.getShpTempRelativeDir();
           if ( dirpath != null ) {
             // TDLog.v("EXPORT shp - dir " + dirpath );
-            DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
-            // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
+            String crs = ( mNum == null )? null : (mNum.mCRS == null )? "WGS84" : mNum.mCRS;
+            DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation, crs );
+            // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation, crs );
             // TDFile.deleteDir( dirpath );
           } else {
             TDLog.e("EXPORT shp - null dirpath"); // TODO

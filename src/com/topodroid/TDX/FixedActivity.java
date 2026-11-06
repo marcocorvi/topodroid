@@ -8,6 +8,12 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * TODO Manual test matrix
+ 1) GPS button:
+    deny location, tap, expect the toast and dialog.
+    Grant it with GPS off, expect the ask_gps_service alert.
+    Test a device without GPS, expect the no_gps_hardware toast.
+ 2) Import buttons work with location denied.
  */
 package com.topodroid.TDX;
 
@@ -39,6 +45,7 @@ import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.pm.PackageManager;
 
 // import android.widget.TextView;
 // import android.widget.EditText;
@@ -170,7 +177,7 @@ public class FixedActivity extends MyActivity
     // mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
-    hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
+    hasGps = TDandroid.hasGpsFeature( mContext );
     hasGPSTest  = TDandroid.hasPackage( this, "com.android.gpstest" );
     mImportFlag = TDandroid.getImportPointFlag( this );
     mImportAppNr = 0;
@@ -475,25 +482,13 @@ public class FixedActivity extends MyActivity
 
     int k = 0;
     if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // GPS
-      if ( hasGps ) { 
-        final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
-        if ( lm != null ) {
-          if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-            TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
-              new DialogInterface.OnClickListener( ) { 
-                @Override public void onClick( DialogInterface dialog, int btn ) { 
-                  startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
-                }
-              }
-            );
-          } else {
-            new FixedGpsDialog( mContext, this ).show();
-          }
-        } else {
-          TDLog.e("No location manager" );
-        }
+      if ( ! hasGps ) {
+        TDToast.makeWarn( R.string.no_gps_hardware ); 
+      } else if ( ! TDandroid.hasLocationPermission( this ) ) {
+        TDToast.makeWarn( R.string.location_no_permission );
+        requestPermissions( new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION }, TDRequest.REQUEST_LOCATION_PERMISSION );
       } else {
-        // TODO
+        startGpsDialog();
       }
     } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this /* , false */ ).show();
@@ -522,6 +517,26 @@ public class FixedActivity extends MyActivity
       }
     }
     // refreshList();
+  }
+
+  /** check that GPS is enabled and open the GPS dialog */
+  private void startGpsDialog()
+  {
+    final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
+    if ( lm == null ) {
+      TDLog.e("No location manager" );
+      return;
+    }
+    if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) {
+            startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+          }
+        } );
+    } else {
+      new FixedGpsDialog( mContext, this ).show();
+    }
   }
 
   private void selectImportFromProvider( ) // GPS IMPORT
@@ -614,7 +629,6 @@ public class FixedActivity extends MyActivity
     TopoDroidApp.mData.updateSurveyDeclination( TDInstance.sid, decl );
   }
 
-  // private final static int LOCATION_REQUEST = 1;
   private static final int CRS_CONVERSION_REQUEST = 2; // not final ?
   private static final int CRS_INPUT_REQUEST = 3;      // not final ?
   private double mFixedHGeo = 0;
@@ -997,6 +1011,28 @@ public class FixedActivity extends MyActivity
         // TDLog.e( "key down: code " + code );
     }
     return false;
+  }
+
+  @Override
+  public void onRequestPermissionsResult( int code, String[] perms, int[] results )
+  {
+    super.onRequestPermissionsResult( code, perms, results );
+    if ( code != TDRequest.REQUEST_LOCATION_PERMISSION ) return;
+    if ( results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED ) {
+      startGpsDialog();
+    } else {
+      if ( results.length == 0 ) return; // request interrupted
+      if ( ! shouldShowRequestPermissionRationale( android.Manifest.permission.ACCESS_FINE_LOCATION ) ) {
+        // "don't ask again": the system dialog will no longer appear, so point to app settings
+        TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.location_permission_setting ),
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) {
+              startActivity( new Intent( android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                         Uri.fromParts( "package", getPackageName(), null ) ) );
+            }
+          } );
+      }
+    }
   }
 
   /** start user-man window with the help page of this activity

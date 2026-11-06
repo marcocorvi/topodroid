@@ -372,7 +372,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="location_start_fine">Начална добра позиция</string>
     <string name="location_enabled">Уверете се, че LOCATION (местоположението) е активиран.</string>
     <string name="location_no_permission">Няма разрешение за достъп до местоположението</string>
+    <!-- TODO string name="location_permission_setting">Set LOCATION permision ?</string -->
+    <!-- TODO string name="no_gps_hardware">No GPS hardware</string -->
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
+    <!-- TODO string name="bt_scan_in_progress">BT scan in progress. Wait &#8230;</string -->
+    <!-- TODO string name="bt_scan_no_permission">BT scan needs a permission</string -->
+    <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Грешка при откриване на BT: %1$s</string>
     <string name="depth_format">Дълбочина %1$.1f</string>
 

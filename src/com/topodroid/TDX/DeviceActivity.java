@@ -8,6 +8,14 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * TODO Manual test matrix
+ 1) API ≤ 30:
+    deny location, tap scan, expect the toast and the dialog.
+    Grant it with location services off, expect the location_enabled toast.
+    Turn services on, scan works.
+ 2) API 31+:
+    revoke “Nearby devices” in settings, then scan, expect the dialog.
+    Deny twice, expect the settings prompt.
  */
 package com.topodroid.TDX;
 
@@ -230,11 +238,10 @@ public class DeviceActivity extends MyActivity
 
   private ArrayList< BluetoothDevice > mNonameList = null;  // BT_NONAME
   private boolean mHasNonameDevice = false;
+  private boolean mHasBLE = true;
 
   private Device currDeviceA() { return TDInstance.getDeviceA(); }
   private Device currDeviceB() { return TDInstance.getDeviceB(); }
-
-  private boolean mHasBLE     = false; // BRIC default to false
 
   private boolean mBTisScanning = false;
 
@@ -1397,7 +1404,7 @@ public class DeviceActivity extends MyActivity
 
     int k = -1;
     ++k; menu_adapter.add( res.getString( menus[k] ) );         // CLOSE
-    ++k; menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
+    ++k; if ( mHasBLE ) menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
     // ++k; if ( TDLevel.overExpert && mHasBLE ) menu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
@@ -1429,6 +1436,47 @@ public class DeviceActivity extends MyActivity
     }
   }
 
+  /** start a BLE scan: the permissions must have been checked 
+   */
+  private void startBleScan()
+  {
+    // location services are needed only below API-31 (BLUETOOTH_SCAN is neverForLocation)
+    if ( TDandroid.BELOW_API_31 && ! TDandroid.hasLocation( this ) ) { 
+      TDToast.makeWarn( R.string.location_enabled );
+      return;
+    }
+    mBleScanner = new BleScanner( this, this );
+    mBleScanner.startBleScan( new BleScanCallback(this, mBleScanner) );
+    setBtScanning( true );
+  }
+
+  @Override
+  public void onRequestPermissionsResult( int code, String[] perms, int[] results )
+  {
+    super.onRequestPermissionsResult( code, perms, results );
+    if ( code != TDRequest.REQUEST_SCAN_PERMISSION ) return;
+    if ( TDandroid.canScanBLE( this ) ) {
+      startBleScan();
+    } else {
+      if ( results.length == 0 ) return; // request interrupted
+      // if any missing permission is permanently denied, the system dialog will not show again
+      boolean permanent = false;
+      for ( String p : TDandroid.missingScanPermissions( this ) ) {
+        if ( ! shouldShowRequestPermissionRationale( p ) ) { permanent = true; break; }
+      }
+      if ( permanent ) {
+        TopoDroidAlertDialog.makeAlert( this, getResources(),
+          getResources().getString( R.string.bt_scan_permission_setting ),
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) {
+              startActivity( new Intent( android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                         android.net.Uri.fromParts( "package", getPackageName(), null ) ) );
+            }
+          } );
+      }
+    }
+  }
+
   /** handle a tap on a menu
    * @param pos  index of the tapped menu
    */
@@ -1438,30 +1486,18 @@ public class DeviceActivity extends MyActivity
     int p = 0;
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed(); // FIXME issue 167
-    } else if ( p++ == pos ) { // BT_SCAN
-      if ( mBTisScanning ) return;
-      if ( TDandroid.BELOW_API_31 ) {
-        // Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, BtScan.class );
-        // scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, BtScan.DEVICE_SCAN );
-        // startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
-        // TDToast.makeLong(R.string.wait_scan );
-        if ( ! TDandroid.hasLocation( this ) ) { // check if location is enabled
-          TDToast.makeWarn( R.string.location_enabled );
-          return;
-        }
-        // else {
-        //   mBtScan = new BtScan( this, this ); // ).show();
-        //   if ( mBtScan.scanBtDevices() ) {
-        //     setBtScanning( true );
-        //   } else {
-        //     mBtScan = null;
-        //   }
-        // }
-      } // else {
-        mBleScanner = new BleScanner( this, this );
-        mBleScanner.startBleScan( new BleScanCallback(this, mBleScanner) );
-        setBtScanning( true );
-      // }
+    } else if ( mHasBLE && p++ == pos ) { // BT_SCAN
+      if ( mBTisScanning ) {
+        TDToast.make( R.string.bt_scan_in_progress );
+        return;
+      }
+      String[] missing = TDandroid.missingScanPermissions( this );
+      if ( missing.length > 0 ) {
+        TDToast.makeWarn( R.string.bt_scan_no_permission ); // e.g. "Grant Location / Nearby devices permission to scan"
+        requestPermissions( missing, TDRequest.REQUEST_SCAN_PERMISSION );
+        return;
+      }
+      startBleScan();
 
     // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC BLE_SCAN
     //   BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();

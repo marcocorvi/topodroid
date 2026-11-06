@@ -57,6 +57,7 @@ import com.topodroid.types.PlotType;
 import com.topodroid.types.TDStatus;
 import com.topodroid.packetX.MemoryData;
 // import com.topodroid.types.StationFlag;
+import com.topodroid.io.shp.ShpUtil;
 
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
@@ -695,6 +696,7 @@ public class TDExporter
     if ( nums == null ) return null;
     for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
+        // FIXME PROJ_CRS need the CRS
         if ( station.equals( st.name ) ) return new GeoReference( st.e, st.s, st.v, mERadius, mSRadius, num.getDeclination() ); // 20230104 was decl
       }
     }
@@ -718,6 +720,7 @@ public class TDExporter
     List< TDNum > nums = new ArrayList< TDNum >();
     List< DBlock > shots_data = data.selectAllExportShots( sid, 0 );
     FixedInfo origin = null;
+    String cs = null;
     for ( FixedInfo fixed : fixeds ) {
       float decl0 = decl;
       if ( convergence && fixed.hasCSCoords() ) decl0 -= fixed.getConvergence();
@@ -725,7 +728,12 @@ public class TDExporter
       // TDLog.v( "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
         makeGeolocalizedData( num, fixed, h_geo_factor, ellipsoid_h, convergence );
-	nums.add( num );
+        if ( cs == null ) {
+          cs = num.mCRS;
+          nums.add( num );
+	} else if ( cs.equals( num.mCRS ) ) {
+          nums.add( num );
+        }
       } 
     }
     // if ( origin == null || num == null ) return null;
@@ -738,13 +746,14 @@ public class TDExporter
    * @param origin       fix point, origin
    * @param h_geo_factor unit conversion factor for vertical coords
    * @param ellipsoid_h  whether to use ellipsoid altitude
-   * @param convergence  whether to apple meridian convergence
+   * @param convergence  whether to apply meridian convergence
    */
-  static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float h_geo_factor, boolean ellipsoid_h, boolean convergence )
+  static private void makeGeolocalizedData( TDNum num, FixedInfo origin, float h_geo_factor, boolean ellipsoid_h, boolean convergence )
   {
     double lat, lng, h_geo;
     // TDLog.v( "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
     if ( convergence && origin.hasCSCoords() ) {
+      num.mCRS = origin.cs;
       lat   = origin.cs_lat   * origin.mToUnits; // CS units
       lng   = origin.cs_lng   * origin.mToUnits; 
       h_geo = origin.cs_h_geo; // meters
@@ -752,6 +761,7 @@ public class TDExporter
       mSRadius = origin.mToUnits;
       h_geo_factor = (float)origin.mToVUnits; 
     } else { // WGS84
+      num.mCRS = "WGS84";
       lat = origin.lat;
       lng = origin.lng;
       h_geo = ellipsoid_h ? origin.h_ell : origin.h_geo; // KML uses Geoid altitude (unless altitudeMode is set)
@@ -818,6 +828,7 @@ public class TDExporter
     final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // TDLog.v( "export as KML " + file.getFilename() );
+    // FIXME PROJ_CRS: false = no-convergence implies use WGS84
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.e( "KML failed export: no geolocalized station");
@@ -963,6 +974,7 @@ public class TDExporter
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_SHP );
+    // FIXME PROJ_CRS with-convergence implies transformed CS if defined and WGS84 otherwise
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude, true with convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.e( "SHP failed export: no geolocalized station");
@@ -978,6 +990,9 @@ public class TDExporter
       if ( TDFile.makeMSdir( dirname ) ) {
         // TDLog.v( "SHP created MSdir " + dirname );
         ArrayList< String > files = new ArrayList<>();
+        // TODO PROJ_CRS write prj file using num.mCRS
+        TDNum num0 = nums.get(0);
+        String prj_crs = ShpUtil.getPrjCrs( num0.mCRS );
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
           // TDLog.v( "SHP export stations ");
@@ -987,7 +1002,9 @@ public class TDExporter
             List< NumStation > stations = num.getStations();
             ShpPointz shp = new ShpPointz( dirname, filepath, files );
             shp.setYYMMDD( info.date );
-            success &= shp.writeStations( stations );
+            if (  shp.writeStations( stations ) ) {
+              if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, filepath, prj_crs, files ); 
+            } else { success = false; }
           }
         }
 
@@ -1001,7 +1018,9 @@ public class TDExporter
           // TDLog.v( "SHP export " + filepath + " shots " + shots.size() );
           ShpPolylinez shp = new ShpPolylinez( dirname, filepath, files );
           shp.setYYMMDD( info.date );
-          success &= shp.writeShots( shots, splays );
+          if ( shp.writeShots( shots, splays ) ) {
+            if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, filepath, prj_crs, files );
+          } else { success = false; }
         }
 
         // if ( TDSetting.mKmlSplays ) {
@@ -1034,6 +1053,7 @@ public class TDExporter
             ShpNamez shp = new ShpNamez( dirname, filepath, files );
             shp.setYYMMDD( info.date );
             shp.writeNames( sst );
+            if ( prj_crs != null ) ShpUtil.writePrjFile( dirname, filepath, prj_crs, files );
           }
         }
 
@@ -1058,6 +1078,21 @@ public class TDExporter
             ShpFixedz shp = new ShpFixedz( dirname, filepath, files );
             shp.setYYMMDD( info.date );
             shp.writeFixeds( fst );
+
+            boolean any_cs = false;
+            boolean same_cs = true;
+            for ( FixedInfo fi : fis ) {
+              if ( fi.hasCSCoords() ) {
+                any_cs = true;
+                if ( ! fi.cs.equals( num0.mCRS ) ) same_cs = false;
+              } else {
+                same_cs = false;
+              }
+            }
+            String fix_prj = null;
+            if ( ! any_cs )     fix_prj = ShpUtil.getPrjCrs( "WGS84" );  // all WGS84 degrees
+            else if ( same_cs ) fix_prj = prj_crs;                       // all in the survey CS
+            ShpUtil.writePrjFile( dirname, filepath, fix_prj, files );
           // }
         }   
 
@@ -1109,6 +1144,7 @@ public class TDExporter
   {
     TopoDroidApp.updateAnalytic( TDAnalytics.EXPORT_GPX );
     // TDLog.v( "export as trackfile: " + file.getName() );
+    // FIXME PROJ_CRS - no-convergence implies use WGS84
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.e( "KML failed export: no geolocalized station");

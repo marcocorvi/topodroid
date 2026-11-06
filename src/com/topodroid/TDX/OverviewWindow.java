@@ -745,8 +745,8 @@ public class OverviewWindow extends ItemDrawer
       } else {
         GeoReference station = null;
         if ( mType == PlotType.PLOT_PLAN && ext.equals("shz") ) {
-         String origin = mNum.getOriginStation();
-         station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin, true );
+         String origin = mNum.getOriginStation(); // with-convergence: use transformed CS if defined or WGS84 otherwise
+         station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin, true ); // FIXME PROJ_CRS
         }
         SurveyInfo info = mApp_mData.selectSurveyInfo( mSid );
         // null PlotInfo, null FixedInfo, true toast

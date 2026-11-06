@@ -344,7 +344,12 @@
   <string name="location_start_fine">Starte genaue Lokalisierung</string>
   <string name="location_enabled">Standort nicht erlaubt</string>
   <string name="location_no_permission">Keine Standort Erlaubnis</string>
+    <!-- TODO string name="location_permission_setting">Set LOCATION permision ?</string -->
+    <!-- TODO string name="no_gps_hardware">No GPS hardware</string -->
   <!-- UNUSED string name="depth_error">Warnung: Fehler bei der Tiefe</string -->
+    <!-- TODO string name="bt_scan_in_progress">BT scan in progress. Wait &#8230;</string -->
+    <!-- TODO string name="bt_scan_no_permission">BT scan needs a permission</string -->
+    <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
   <string name="discovery_error">Fehler bei Bluetooth-Suche: %1$s</string>
     <!-- TODO string name="depth_format">Depth %1$.1f</string -->
 

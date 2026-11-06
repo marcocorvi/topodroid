@@ -33,6 +33,12 @@ public class TDRequest
   public static final int REQUEST_GPS_POINT          = 18; // plain text
   public static final int REQUEST_READ_NAMES         = 19; // plain text
 
+  public static final int REQUEST_PERMISSIONS         = 20; 
+  public static final int REQUEST_SCAN_PERMISSION     = 21; 
+  public static final int REQUEST_LOCATION_PERMISSION = 22; 
+  public static final int REQUEST_CAMERA_PERMISSION   = 23; 
+  public static final int REQUEST_AUDIO_PERMISSION    = 24; 
+
   // public static final int REQUEST_TREE_URI = 20;
 
   public static final int REQUEST_CWD                = 30; // current work directory

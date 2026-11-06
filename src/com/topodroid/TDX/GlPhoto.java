@@ -61,12 +61,13 @@ public class GlPhoto
     float dx = TDMath.cos(cl) * TDMath.sin(az);
     float dy = TDMath.sin(cl);
     float dz = - TDMath.cos(cl) * TDMath.cos(az);
-    float rx = TDMath.cos(az); // right = horizontal, perpendicular to dir
-    float ry = 0;
-    float rz = TDMath.sin(az);
-    float ux = ry*dz - rz*dy; // up = right x dir
-    float uy = rz*dx - rx*dz;
-    float uz = rx*dy - ry*dx;
+    float ux = TDMath.cos(az); // up = horizontal, perpendicular to dir
+    float uy = 0;
+    float uz = TDMath.sin(az);
+    float rx = uz*dy - uy*dz; // right = dir x up
+    float ry = ux*dz - uz*dx;
+    float rz = uy*dx - ux*dy;
+
     float w = width/2;
     float h = width * bmp.getHeight() / bmp.getWidth() / 2;
     // dist = 0.5f; // ADDED-PHOTO

@@ -348,7 +348,12 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="location_start_fine">Posição de início adequada</string>
   <string name="location_enabled">Garanta que o serviço LOCALIZAÇÃO está habilitado</string>
     <!-- TODO string name="location_no_permission">No LOCATION permision</string -->
-  <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
+    <!-- TODO string name="location_permission_setting">Set LOCATION permision ?</string -->
+    <!-- TODO string name="no_gps_hardware">No GPS hardware</string -->
+    <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
+    <!-- TODO string name="bt_scan_in_progress">BT scan in progress. Wait &#8230;</string -->
+    <!-- TODO string name="bt_scan_no_permission">BT scan needs a permission</string -->
+    <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <!-- TODO string name="discovery_error">BT discovery error: %1$s</string -->
     <!-- TODO string name="depth_format">Depth %1$.1f</string -->
 
