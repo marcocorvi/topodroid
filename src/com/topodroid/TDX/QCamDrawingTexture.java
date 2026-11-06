@@ -390,18 +390,18 @@ public class QCamDrawingTexture extends TextureView {
   @SuppressLint("MissingPermission")
   private boolean openCamera(int w, int h)
   {
-    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) return false;
+    if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP ) return false;
     // TDLog.v("QCAM2 open camera");
+    if ( ! TDandroid.checkCamera(mContext) ) {
+      TDLog.e("No CAMERA permission");
+      return false;
+    }
     mManager = (CameraManager) (mContext.getSystemService(Context.CAMERA_SERVICE));
     if ( ! setupCameraOutput( w, h ) ) return false;
     configureTransform(w, h);
     try {
       if (!mLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
         return false; // throw
-      }
-      if ( ! TDandroid.checkCamera(mContext) ) {
-        TDLog.e("No CAMERA permission");
-        return false;
       }
       mManager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
       return true;

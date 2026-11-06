@@ -378,11 +378,11 @@ class ItemPickerDialog extends MyDialog
         if ( p.isConfigEnabled() ) // uncomment to have only config-enabled - or p.isEnabled()
         {
           // FIXME photo and audio cannot be selected if the hardware is not granted
-          if ( p.isThName( SymbolLibrary.PHOTO ) && TDandroid.checkCamera( mContext ) ) {
+          if ( p.isThName( SymbolLibrary.PHOTO ) && TDandroid.hasCameraFeature( mContext ) ) {
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
-          } else if ( p.isThName( SymbolLibrary.AUDIO ) && TDandroid.checkMicrophone( mContext ) ) {
+          } else if ( p.isThName( SymbolLibrary.AUDIO ) && TDandroid.hasAudioFeature( mContext ) ) {
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
-          } else if ( ! ( p.isThName( SymbolLibrary.SECTION ) || p.isThName( SymbolLibrary.PICTURE ) ) ) { // FIXME_SECTION_POINT 
+          } else if ( ! ( p.isThName( SymbolLibrary.SECTION ) || p.isThName( SymbolLibrary.PICTURE ) ) ) { // skip section and picture
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
           }
         }

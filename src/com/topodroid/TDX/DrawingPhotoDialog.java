@@ -61,12 +61,12 @@ class DrawingPhotoDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    if ( ! TDandroid.checkCamera( mContext ) ) {
+    cameraCheck = /* TDandroid.AT_LEAST_API_21 && */ TDandroid.checkCamera( mContext ); // min sdk is 21
+    if ( ! cameraCheck ) { // DrawingPhotoDialog should never be created if the app has no camera hw or permission
       TDToast.makeWarn( R.string.warning_nogrant_camera );
       dismiss();
       return;
     }
-    cameraCheck = TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mContext );
     initLayout( R.layout.drawing_photo_dialog, R.string.photo_title );
 
     mComment = (EditText) findViewById(R.id.photo_comment);

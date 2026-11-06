@@ -220,6 +220,7 @@ public class TDandroid
    */
   private static boolean hasPermission( Context ctx, String permission )
   {
+    if ( BELOW_API_23 ) return ctx.checkCallingOrSelfPermission( permission ) == PackageManager.PERMISSION_GRANTED;
     return ( ctx.checkSelfPermission( permission ) == PackageManager.PERMISSION_GRANTED );
   }
 
@@ -228,7 +229,7 @@ public class TDandroid
     return ( ctx.checkCallingOrSelfPermission( permission ) == PackageManager.PERMISSION_GRANTED );
   }
 
-  /** @return the number of permissions that are not granted
+  /** @return the number of mandatory permissions that are not granted
    * @param ctx  context
    * @param activity activity
    * @param time     time that the permissions are requested
@@ -245,6 +246,7 @@ public class TDandroid
     // StringBuilder sb = new StringBuilder();
     // sb.append("Not granted" );
 
+    ArrayList< String > ask = new ArrayList<>();
     int not_granted = 0;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       // TDLog.v("PERM Create permission " + k + ": " + permNames[k] );
@@ -276,6 +278,7 @@ public class TDandroid
       if ( ! GrantedPermission[k] ) {
         TDLog.v( "PERM " + permNames[k] + " not granted - request time " + time );
         if ( k >= NR_PERMS_D ) continue;
+        ask.add( perms[k] );
         if ( time > 1 ) {
           activity.requestPermissions( new String[] { perms[k] }, TDRequest.REQUEST_PERMISSIONS );
           GrantedPermission[k] = hasPermission( ctx, perms[k] );
@@ -290,12 +293,12 @@ public class TDandroid
     }
     TDLog.v("PERM create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS );
 
-    if ( not_granted > 0 && time < 3 ) {
+    if ( not_granted > 0 && time < 3 && ! ask.isEmpty() ) {
       TDLog.v( "request perms time " + time );
       // String[] ask_perms = new String[ not_granted ];
       // int kk = 0;
       // for ( int k = 0; k < NR_PERMS; ++k ) if ( ! GrantedPermission[k] ) ask_perms[kk++] = perms[k];
-      activity.requestPermissions( perms, TDRequest.REQUEST_PERMISSIONS );
+      activity.requestPermissions( ask.toArray( new String[0] ), TDRequest.REQUEST_PERMISSIONS );
     }
     
     // TDLog.v("PERM " + "FC must restart " + MustRestart + " " + sb.toString() );
@@ -510,7 +513,7 @@ public class TDandroid
     int flag = 1;
     for ( ; k<NR_PERMS; ++k ) {
       // TDLog.v("PERM Check permission " + permNames[k] );
-      if ( k == PERM_CAMERA && AT_LEAST_API_21 ) { // CAMERA only for API >= 21
+      if ( k == PERM_CAMERA /* && AT_LEAST_API_21 */ ) { // CAMERA only for API >= 21 min sdk is 21
         if ( ! hasCallingOrPermission( ctx, perms[k] ) ) {
           // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
           // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
@@ -540,32 +543,66 @@ public class TDandroid
   }
 
   /* TODO
-     1) Split hardware from permission.
-        checkCamera() and checkMicrophone() currently combine both checks, so a denied permission looks like missing hardware.
+     1) Split hardware from permission. [DONE]
+        checkCamera() and checkAudio() currently combine both checks, so a denied permission looks like missing hardware.
         Keep the feature checks separate and test the permission live at the point of use.
-     2) Request lazily, with a result handler.
-        Use a dedicated code in TDRequest and an onRequestPermissionsResult that resumes the action on grant
-        and points to app settings after a permanent denial.
-     3) Find the entry points first.
-        Grep for checkCamera, checkMicrophone and the GrantedPermission[PERM_CAMERA] / [PERM_AUDIO] reads.
+     2) Request lazily, with a result handler. [TODO]
+        Use dedicated codes in TDRequest, REQUEST_CAMERA_PERMISSION ans REQUEST_AUDIO_PERMISSION,
+        and an onRequestPermissionsResult that resumes the action on grant and points to app settings after a permanent denial.
+     3) Find the entry points first. [DONE]
         Photo capture and audio recording from the shot, plot and sensor windows will each need their own request path.
-     4) Then drop them from createPermissions().
+        REQUEST_CAMERA_PERMISSION: DrawingWindow ShotWindow DrawingLineSectionDialog
+        REQUEST_AUDIO_PERMISSION:  DrawingWindow ShotWindow
+     4) Then drop them from createPermissions(). [TODO]
         Only once every entry point asks for itself, remove them from the startup request loop, as with location.
         Check how MainWindow uses the returned not_granted count before changing it.
    */
 
+  // --- camera
+  /** @return true if the device has a (rear, autofocus) camera */
+  static boolean hasCameraFeature( Context ctx )
+  {
+    PackageManager pm = ctx.getPackageManager();
+    return pm.hasSystemFeature( PackageManager.FEATURE_CAMERA )
+        && pm.hasSystemFeature( PackageManager.FEATURE_CAMERA_AUTOFOCUS );
+  }
+  
+  /** @return true if the app holds the CAMERA permission (checked live) */
+  static boolean hasCameraPermission( Context ctx )
+  {
+    return hasPermission( ctx, android.Manifest.permission.CAMERA );
+  }
+  
   /** @return true if camera is granted
    * @param ctx  context
    */
   public static boolean checkCamera( Context ctx )
   {
-    // TDLog.v("PERM Check camera ");
-    if ( ! AT_LEAST_API_21 ) return false;
-    PackageManager pm = ctx.getPackageManager();
-    return hasCallingOrPermission( ctx, android.Manifest.permission.CAMERA )
-        && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
-        && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
+    return hasCameraFeature( ctx ) && hasCameraPermission( ctx );
   }
+  
+  // --- microphone
+  static boolean hasAudioFeature( Context ctx )
+  {
+    return ctx.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
+  }
+  
+  /** @return true if the app holds the AUDIO permission (checked live) */
+  static boolean hasAudioPermission( Context ctx )
+  {
+    return hasPermission( ctx, android.Manifest.permission.RECORD_AUDIO );
+  }
+  
+  /** @return true if device has audio (microphone) and audio is granted
+   * @param ctx  context
+   */
+  public static boolean checkAudio( Context ctx )
+  {
+    return hasAudioFeature( ctx ) && hasAudioPermission( ctx );
+    // return hasCallingOrPermission( ctx, android.Manifest.permission.RECORD_AUDIO )
+    //     && ctx.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
+  }
+
 
   /** @return true if the display is multitouch
    * @param ctx  context
@@ -574,16 +611,6 @@ public class TDandroid
   {
     // TDLog.v("PERM Check multitouch ");
     return ctx.getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
-  }
-
-  /** @return true if audio is granted
-   * @param ctx  context
-   */
-  public static boolean checkMicrophone( Context ctx )
-  {
-    // TDLog.v("PERM Check microphone ");
-    return hasCallingOrPermission( ctx, android.Manifest.permission.RECORD_AUDIO )
-        && ctx.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
   }
 
   /** @return true if bluetooth is granted

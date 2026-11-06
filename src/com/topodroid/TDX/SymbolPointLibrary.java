@@ -212,9 +212,9 @@ public class SymbolPointLibrary extends SymbolLibrary
       for ( File file : files ) { // there is a null-pointer exception here, but files cannot be null !!!
         String fname = file.getName();
 
-        if ( fname.equals( PHOTO ) && ! TDandroid.checkCamera( ctx ) ) continue;
-        // if ( fname.equals( PICTURE ) && ! TDandroid.checkCamera( ctx ) ) continue;
-        if ( fname.equals( AUDIO ) && ! TDandroid.checkMicrophone( ctx ) ) continue;
+        if ( fname.equals( PHOTO ) && ! TDandroid.hasCameraFeature( ctx ) ) continue;
+        // if ( fname.equals( PICTURE ) && ! TDandroid.hasCameraFeature( ctx ) ) continue;
+        if ( fname.equals( AUDIO ) && ! TDandroid.hasAudioFeature( ctx ) ) continue;
 
         // if ( fname.equals(USER) || fname.equals(LABEL) || fname.equals(SECTION) ) continue;
 

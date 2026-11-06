@@ -1149,9 +1149,17 @@ public class ShotWindow extends MyActivity
 
   // ---------------------------------------------------------------
 
-  void askPhotoComment( DBlock blk )
+  /** open the shot photo dialog
+   * @param blk_id    shot block ID
+   * @param blk_name  shot name
+   */
+  void askPhotoComment( long blk_id, String blk_name )
   {
-    (new ShotPhotoDialog(mActivity, this, blk.mId, blk.Name() ) ).show();
+    if ( ! TDandroid.hasCameraPermission( this ) ) {
+      // TODO REQUEST_CAMERA_PERMISSION
+    } else {
+      (new ShotPhotoDialog(mActivity, this, blk_id, blk_name ) ).show();
+    }
   }
 
   /**
@@ -1419,7 +1427,7 @@ public class ShotWindow extends MyActivity
     switch ( reqCode ) {
       // case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
       //   if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
-      //     // (new ShotPhotoDialog(this, this, mShotId, blk_name ) ).show();
+      //     // askPhotoComment( mShotId, blk_name );
       //     // Bundle extras = intent.getExtras();
       //     // Bitmap bitmap = (Bitmap) extras.get("data");
       //     // mMediaManager.savePhotoFile( bitmap, 90 ); // compression = 90
@@ -3534,10 +3542,13 @@ public class ShotWindow extends MyActivity
    */
   void startAudio( AudioInfo audio, DBlock blk )
   {
-    long audio_id = (audio == null) ? mApp_mData.getAudioIdByItem( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT )
-                                    : audio.getId();
-    // TDLog.v( TAG + "start audio id " + audio_id + " block " + blk.mId );
-    (new AudioDialog( mActivity, /* this */ null, audio_id, blk, blk.mId, MediaInfo.TYPE_SHOT )).show();
+    if ( ! TDandroid.hasAudioPermission( this ) ) {
+      // TODO REQUEST_AUDIO_PERMISSION
+    } else {
+      long audio_id = (audio == null) ? mApp_mData.getAudioIdByItem( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT ) : audio.getId();
+      // TDLog.v( TAG + "start audio id " + audio_id + " block " + blk.mId );
+      (new AudioDialog( mActivity, /* this */ null, audio_id, blk, blk.mId, MediaInfo.TYPE_SHOT )).show();
+    }
   }
 
   /** open dialog to recalibrate shots from the given ID onwards

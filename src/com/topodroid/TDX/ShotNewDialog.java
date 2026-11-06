@@ -82,7 +82,7 @@ class ShotNewDialog extends MyDialog
   private Button   mBtnSave;
   private Button   mBtnBack;
   private Button   mBtnSensor;
-  private Button   mBtnCamera = null; // TopoDroid camera button
+  private Button   mBtnCamera = null; // TopoDroid camera button - non-null only if device has camera hw
   private byte[] mJpegData = null;    // camera jpeg data
 
   private static boolean mLRUDatTo = false;
@@ -112,7 +112,7 @@ class ShotNewDialog extends MyDialog
     mTimer   = null;
     // mJpegData = null;
     sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
-    cameraCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced && TDandroid.checkCamera( mApp );
+    cameraCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced;
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
     mExif = new ExifInfo();
   }
@@ -276,7 +276,7 @@ class ShotNewDialog extends MyDialog
       TDLayout.setMargins( mBtnSensor, 0, -10, 40, 10 );
       mBtnSensor.setOnClickListener( this );
     }
-    if ( cameraCheck && ! diving ) {
+    if ( cameraCheck && TDandroid.hasCameraFeature( mApp ) && ! diving ) {
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); // both was iz_camera_transp
       layout4.addView( mBtnCamera );
       TDLayout.setMargins( mBtnCamera, 0, -10, 40, 10 );
@@ -664,9 +664,13 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( mParent, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
+      if ( ! TDandroid.hasCameraPermission( mContext ) ) {
+        // TODO REQUEST_CAMERA_PERMISISON
+      } else {
+        new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
                        // null inserter, with_box, with_delay
                        // NOTE null MediaManager : do not insert photo record in table
+      }
     } else if ( b == mBtnBack ) {
       dismiss();
     }

@@ -27,7 +27,7 @@ import android.location.GpsSatellite;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.content.Context;
-import android.content.pm.PackageManager;
+// import android.content.pm.PackageManager;
 
 import java.util.Iterator;
 
@@ -35,7 +35,7 @@ class GPS implements LocationListener
           , GpsStatus.Listener
 {
   private Context mContext;
-  private LocationManager locManager = null;
+  private LocationManager mLocManager = null;
   private GpsStatus mStatus = null;
   private GnssStatus.Callback mGnssStatusCallback = null;
 
@@ -63,10 +63,8 @@ class GPS implements LocationListener
    */
   boolean canLocate() 
   { 
-    if ( locManager == null ) {
-      tryGetLocManager();
-    }
-    return locManager != null;
+    if ( mLocManager == null ) tryGetLocManager();
+    return mLocManager != null;
   }
 
   interface GPSListener
@@ -81,45 +79,34 @@ class GPS implements LocationListener
   void setDelta( double delta ) { if ( delta > 0 ) mDelta = delta; }
 
 
-  public static boolean checkLocation( Context context )
-  {
-    // TDLog.Log( LOG_PERM, "check location" );
-    // TDLog.v("PERM " + "Check location ");
-    PackageManager pm = context.getPackageManager();
-    return ( context.checkCallingOrSelfPermission( android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED )
-        && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION)
-        && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
-  }
-
   GPS( Context ctx )
   {
     mContext    = ctx;
     mDelta      = 1.0e-7;
     mIsLocating = false;
     mStatus     = null;
-    locManager  = null;
+    mLocManager  = null;
     // mNrSatellites = 0;
-    tryGetLocManager( );
-	TDLog.v("GPS cstr: mIsLocating " + mIsLocating + " locManager " + ( (locManager == null)? "null" : "non-null" ) );
+    // TDLog.v("GPS cstr: mIsLocating " + mIsLocating + " mLocManager " + ( (mLocManager == null)? "null" : "non-null" ) );
   }
 
   private void tryGetLocManager( )
   {
-    if ( checkLocation( mContext ) ) { // CHECK_PERMISSIONS
+    if ( TDandroid.checkLocation( mContext ) ) { // CHECK_PERMISSIONS
       TDLog.v("GPS check permission/features OK");
-      locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
-      if ( locManager != null ) {
+      mLocManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
+      if ( mLocManager != null ) {
         if ( useGps ) {
           try { 
-            mStatus = locManager.getGpsStatus( null );
+            mStatus = mLocManager.getGpsStatus( null );
           } catch ( SecurityException e ) {
             mStatus = null;
             // setGPSoff();
-            locManager = null;
+            mLocManager = null;
             TDLog.e( "GPS failed to get GpsStatus" );
           } catch ( UnsupportedOperationException e ) {
             mStatus = null;
-            locManager = null;
+            mLocManager = null;
             TDLog.e( "GPS unsupported op " + e.getMessage() );
           }
         }
@@ -178,12 +165,12 @@ class GPS implements LocationListener
     if ( canLocate() ) {
       TDLog.v("GPS off can locate - is locating " + mIsLocating );
       try {
-        locManager.removeUpdates( this );
+        mLocManager.removeUpdates( this );
         if ( useGps ) {
-          locManager.removeGpsStatusListener( this );
+          mLocManager.removeGpsStatusListener( this );
         } else {
           if ( mGnssStatusCallback != null ) {
-            locManager.unregisterGnssStatusCallback( mGnssStatusCallback );
+            mLocManager.unregisterGnssStatusCallback( mGnssStatusCallback );
             mGnssStatusCallback = null;
           }
         }
@@ -208,7 +195,7 @@ class GPS implements LocationListener
       // if ( ! mIsLocating ) 
       try {
         if ( useGps ) {
-          locManager.addGpsStatusListener( this );
+          mLocManager.addGpsStatusListener( this );
         } else {
           if ( mGnssStatusCallback == null ) {
             mGnssStatusCallback = new GnssStatus.Callback() { 
@@ -230,9 +217,9 @@ class GPS implements LocationListener
               @Override public void onStopped() { }
             };
           }
-          locManager.registerGnssStatusCallback( mGnssStatusCallback );
+          mLocManager.registerGnssStatusCallback( mGnssStatusCallback );
         }
-        locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
+        mLocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
         mIsLocating = true;
       } catch ( SecurityException e ) {
         TDLog.e( "Location manager error-2 " + e.getMessage() );
@@ -276,7 +263,7 @@ class GPS implements LocationListener
   @SuppressLint("MissingPermission")
   private int getNrSatellites()
   {
-    locManager.getGpsStatus( mStatus );
+    mLocManager.getGpsStatus( mStatus );
     Iterator< GpsSatellite > sats = mStatus.getSatellites().iterator();
     int  nr = 0;
     while( sats.hasNext() ) {
@@ -284,10 +271,10 @@ class GPS implements LocationListener
       if ( sat.usedInFix() ) ++nr;
 	}
 	/*
-    if ( locManager != null ) {
+    if ( mLocManager != null ) {
       GpsStatus mGpsStatus = null;
       try { 
-        mGpsStatus = locManager.getGpsStatus( mGpsStatus );
+        mGpsStatus = mLocManager.getGpsStatus( mGpsStatus );
       } catch ( SecurityException e ) {
         TDLog.e( "GPS failed to get GpsStatus - security error" );
       } catch ( UnsupportedOperationException e ) {
@@ -308,12 +295,12 @@ class GPS implements LocationListener
   public void onGpsStatusChanged( int event ) 
   {
     if ( event == GpsStatus.GPS_EVENT_SATELLITE_STATUS ) {
-      if ( locManager == null || ! useGps ) return;
+      if ( mLocManager == null || ! useGps ) return;
       mNrSatellites = getNrSatellites();
       // TDLog.v("GPS Status Changed nr satellites used in fix " + mNrSatellites );
       if ( mNrSatellites > 4 ) {
         try {
-          Location loc = locManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
+          Location loc = mLocManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
           if ( loc != null ) assignLocation( loc );
         } catch ( IllegalArgumentException e ) {
           TDLog.e("GL onGpsStatusChanged IllegalArgumentException " );

@@ -1158,7 +1158,7 @@ public class SketchWindow extends ItemDrawer
     mActivity = this;
     mApp_mData = TopoDroidApp.mData; 
 
-    // audioCheck = TDandroid.checkMicrophone( mActivity );
+    // audioCheck = TDandroid.checkAudio( mActivity );
     // TDLog.v( "Microphone perm : " + audioCheck );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content

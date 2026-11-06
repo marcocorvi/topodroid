@@ -72,10 +72,10 @@ class ShotPhotoDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    if ( ! TDandroid.checkCamera( mContext ) ) {
-      TDToast.makeWarn( R.string.warning_nogrant_camera );
-      dismiss();
-    } else {
+    // if ( ! TDandroid.checkCamera( mContext ) ) { // the dialog is created only if there is hw and the app has CAMERA permission
+    //   TDToast.makeWarn( R.string.warning_nogrant_camera ); // drop string ?
+    //   dismiss();
+    // } else {
       // cameraAPIbelow21 = TDandroid.BELOW_API_21;
       // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
       initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
@@ -108,7 +108,7 @@ class ShotPhotoDialog extends MyDialog
       mButtonCancel = (Button) findViewById(R.id.button_cancel );
       mButtonCancel.setOnClickListener( this );
       ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
-    }
+    // }
   }
 
   @Override

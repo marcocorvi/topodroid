@@ -127,7 +127,6 @@ class ScanShotEditDialog extends MyDialog
     super.onCreate(savedInstanceState);
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    // boolean photoCheck = TDandroid.checkCamera( mContext );
 
     initLayout( R.layout.scan_shot_dialog, R.string.title_scan_shot );
 

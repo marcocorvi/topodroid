@@ -182,7 +182,6 @@ class ShotEditDialog extends MyDialog
 
   private int mColor;    // block color
   private boolean hideColorBtn = true;
-  private boolean hasAudio = false;
 
   /** cstr
    */
@@ -214,7 +213,6 @@ class ShotEditDialog extends MyDialog
     } 
     // TDLog.v("splay type " + splay_type );
     mColor  = mBlk.getPaintColor();
-    hasAudio = TDandroid.checkMicrophone( mContext );
     TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_EDIT );
   }
 
@@ -421,7 +419,6 @@ class ShotEditDialog extends MyDialog
     super.onCreate(savedInstanceState);
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    // boolean photoCheck = TDandroid.checkCamera( mContext );
 
     initLayout( R.layout.shot_dialog, R.string.title_shot_edit );
 
@@ -1103,7 +1100,7 @@ class ShotEditDialog extends MyDialog
     //   mParent.highlightBlock( mBlk );
     //   dismiss();
     } else if ( mButtonPhoto != null && b == mButtonPhoto ) {  // PHOTO
-      mParent.askPhotoComment( mBlk );
+      mParent.askPhotoComment( mBlk.mId, mBlk.Name() );
       dismiss();
     } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO
       mParent.startAudio( null, mBlk );
@@ -1221,15 +1218,15 @@ class ShotEditDialog extends MyDialog
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     // mButtonPlot.setOnClickListener( this );
     
-    // if ( photoCheck ) {
-      mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+    if ( TDandroid.hasCameraFeature( mContext ) ) {
+      mButtonPhoto = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       mButtonPhoto.setOnClickListener( this );
-    // } else {
-    //   mButtonPhoto = null;
-    //   -- nr_buttons;
-    // }
+    } else {
+      mButtonPhoto = null;
+      -- nr_buttons;
+    }
 
-    if ( hasAudio ) {
+    if ( TDandroid.hasAudioFeature( mContext ) ) {
       mButtonAudio = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
       mButtonAudio.setOnClickListener( this );
     } else {

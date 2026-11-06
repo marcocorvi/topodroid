@@ -8,6 +8,24 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+   Things to check
+   1) Permission dialog and onPause():
+      the system permission dialog pauses the activity too. That is safe here.
+      Tracking is not yet on at that point, so getGPSstatus() returns false and mGpsWasOn stays false.
+      The grant callback then starts GPS itself through setGPSstatus( true ).
+   2) Settings detour:
+      the “open settings” alert pauses the activity too, with the same safe result.
+   3) Failed restart:
+      if the permission was revoked or GPS was switched off while the app was in the background,
+      setGPSstatus( true ) falls into its checks and shows the toast or alert.
+      That is the right behaviour, but the user’s toggle may still show “on”.
+      This is the same caveat as before about the dialog that calls setGPSstatus().
+      If it reads getGPSstatus() each time it is shown, it will be correct.
+   4) onDestroy():
+      it still calls setGPSoff() and setListener( null ), so nothing else is needed there.
+      After onPause() has already turned it off, the second call is harmless.
+   5) Rotation: 
+      TopoGL handles orientation|screenSize in the manifest, so rotation doesn’t recreate the activity and doesn’t trigger this path.
  */
 package com.topodroid.TDX;
 
@@ -16,6 +34,7 @@ import com.topodroid.util.TDFile;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDAnalytics;
 import com.topodroid.util.TDColor;
+import com.topodroid.util.TDRequest;
 // import com.topodroid.util.TDString;
 // import com.topodroid.util.TDVersion;
 // import com.topodroid.util.TDVersion;
@@ -95,10 +114,11 @@ import android.content.SharedPreferences;
 // import android.content.SharedPreferences.Editor;
 import android.content.Intent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.pm.ConfigurationInfo;
-// import android.content.pm.PackageManager;
+import android.content.pm.PackageManager;
 // import android.content.pm.PackageManager.NameNotFoundException;
 
 import android.provider.MediaStore;
@@ -224,6 +244,8 @@ public class TopoGL extends MyActivity
 
   private static final int HELP_PAGE = R.string.TopoGL;
 
+  private boolean mGpsWasOn = false; // GPS was on when the activity paused
+
   boolean doSketches = false;
 
   private PopupWindow mPopupColor = null;
@@ -343,17 +365,6 @@ public class TopoGL extends MyActivity
    */
   private void handleExtra()
   {
-    // TDLog.v("handle extra " + mHasExtra );
-    // if ( FeatureChecker.checkLocation( this ) ) mGPS = new GPS( this ); // WITH-GPS
-    if ( TDandroid.checkLocation( this ) ) {
-      mGPS = new GPS( this ); // WITH-GPS
-      if ( ! mGPS.canLocate() ) {
-        TDToast.make( R.string.location_enabled );
-      }
-    } else {
-      TDToast.make( R.string.location_no_permission );
-    }
-
     if ( mHasExtra ) {
       // if ( mVersionCheck >= 0 ) {
         if ( mSurveyBase != null && mSurveyBase.length() > 0 ) {
@@ -505,8 +516,10 @@ public class TopoGL extends MyActivity
   protected void onPause()
   {
     super.onPause();
+    // TDLog.v("TopoGL on pause");
+    mGpsWasOn = getGPSstatus();
+    if ( mGpsWasOn ) setGPSstatus( false );
     if ( rendererSet ) {
-      // TDLog.v("TopoGL on pause");
       if ( glSurfaceView != null ) glSurfaceView.onPause();
       // if ( mRenderer != null ) mRenderer.unbindTextures();
     }
@@ -565,18 +578,16 @@ public class TopoGL extends MyActivity
     super.onResume();
     // TDLog.v("TopoGL on Resume");
     if ( rendererSet ) {
-      // TDLog.v("TopoGL on resume");
-      // glSurfaceView.setMinimumWidth( mLayout.getWidth() );
-      // glSurfaceView.setMinimumHeight( mLayout.getHeight() );
       glSurfaceView.onResume();
-      // mRenderer.rebindTextures(); // this method is empty-unused
-      // mRenderer.onSurfaceChanged( null, glSurfaceView.getWidth(), glSurfaceView.getHeight() );
-      // glSurfaceView.requestRender();
     }
     // if ( BLUETOOTH  && mPrefs != null ) {
     //   String name = mPrefs.getString( "CAVE3D_BLUETOOTH_DEVICE", "" );
     //   checkBluetooth( name );
     // }
+    if ( mGpsWasOn ) {
+      mGpsWasOn = false;
+      setGPSstatus( true );
+    }
   }
 
   /** react to a change of configuration
@@ -2609,23 +2620,74 @@ public class TopoGL extends MyActivity
 ------------ */
 
   // WITH-GPS -----------------------------------------------------------------
+  
+  // /** start the GPS 
+  //  */
+  // private void startGps()
+  // {
+  //   mGPS = new GPS( this ); // WITH-GPS
+  //   if ( ! mGPS.canLocate() ) {
+  //     TDToast.make( R.string.location_enabled );
+  //   }
+  // }
+
+  @Override
+  public void onRequestPermissionsResult( int code, String[] perms, int[] results )
+  {
+    super.onRequestPermissionsResult( code, perms, results );
+    if ( code != TDRequest.REQUEST_GPS_PERMISSION ) return;
+    if ( results.length == 0 ) return; // request interrupted
+    if ( results[0] == PackageManager.PERMISSION_GRANTED ) {
+      setGPSstatus( true );            // resume the action the user asked for
+    } else if ( ! shouldShowRequestPermissionRationale( android.Manifest.permission.ACCESS_FINE_LOCATION ) ) {
+      // "don't ask again": the system dialog will no longer appear, so point to app settings
+      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.location_permission_setting ),
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) {
+            startActivity( new Intent( android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                       Uri.fromParts( "package", getPackageName(), null ) ) );
+          }
+        } );
+    }
+  }
+
   /** set the GPS status
    * @param status  either on (true) or off (false)
+   * @note turning on may be asynchronous: if the permission is missing it is requested,
+   *       and the GPS is started from onRequestPermissionsResult
    */
   void setGPSstatus( boolean status )
   {
-    if ( mGPS == null ) {
-      TDLog.v("TopoGL GPS set status " + status + " GPS null" );
+    if ( ! status ) {
+      if ( mGPS != null ) {
+        mGPS.setGPSoff();
+        mGPS.setListener( null );
+      }
       return;
     }
-
-    // TDLog.v("TopoGL GPS set status " + status );
-    if ( status ) {
-      mGPS.setGPSon();
+    if ( ! TDandroid.hasGpsFeature( this ) ) {
+      TDToast.makeWarn( R.string.no_gps_hardware );
+      return;
+    }
+    if ( ! TDandroid.hasLocationPermission( this ) ) {
+      TDToast.makeWarn( R.string.location_no_permission );
+      requestPermissions( new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION }, TDRequest.REQUEST_GPS_PERMISSION );
+      return;
+    }
+    if ( ! TDandroid.hasLocation( this ) ) { // GPS provider is off
+      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) {
+            startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+          }
+        } );
+      return;
+    }
+    if ( mGPS == null ) mGPS = new GPS( this );
+    if ( mGPS.setGPSon() ) {
       mGPS.setListener( this );
     } else {
-      mGPS.setGPSoff();
-      mGPS.setListener( null );
+      TDToast.make( R.string.location_enabled );
     }
   }
 

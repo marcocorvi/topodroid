@@ -506,7 +506,6 @@ public class DrawingWindow extends ItemDrawer
   private float mStylusSizeDpi = 1000;  // stylus size in dpi
 
   private boolean mLandscape;
-  private boolean audioCheck;
   // private DataHelper mData;
   private Activity mActivity = null;
   private int mBTstatus; // status of bluetooth buttons (download and reset)
@@ -2827,9 +2826,6 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("STYLUS size " + mStylusSizeDpi + " flag " + TDSetting.mStylusOnly );
 
     mFormatClosure = getResources().getString(R.string.format_closure );
-
-    audioCheck = TDandroid.checkMicrophone( mActivity );
-    // TDLog.v( "Microphone perm : " + audioCheck );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
     // mPointScale = PointScale.SCALE_M; // FIXME_SCALE
@@ -5401,12 +5397,17 @@ public class DrawingWindow extends ItemDrawer
                   }
                 }
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
-                new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
+                if ( ! TDandroid.hasCameraPermission( this ) ) {
+                  // TODO REQUEST_CAMERA_PERMISSION
+                } else {
+                  new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
+                }
               } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
-	        if ( audioCheck ) {
+	        if ( ! TDandroid.hasAudioPermission( this ) ) {
+                  // TDToast.makeWarn( R.string.no_feature_audio ); // drop string
+                  // TODO REQUEST_AUDIO_PERMISSION
+                } else {
                   addAudioPoint( mPid, xs, ys );
-	        } else {
-                  TDToast.makeWarn( R.string.no_feature_audio );
                 }
               } else {
                 int point_scale = mScaleBar.getActive() - 2; // mPointScale
@@ -5736,10 +5737,11 @@ public class DrawingWindow extends ItemDrawer
                 } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
                   // new DrawingPhotoDialog( mActivity, this, xs, ys ).show(); // HBXP
                 } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
-                  if ( audioCheck ) {
-                    // addAudioPoint( xs, ys ); // HBXP
+                  if ( ! TDandroid.hasAudioPermission( this ) ) {
+                    // TDToast.makeWarn( R.string.no_feature_audio );
+                    // TODO REQUEST_AUDIO_PERMISSION
                   } else {
-                    TDToast.makeWarn( R.string.no_feature_audio );
+                    // addAudioPoint( xs, ys ); // HBXP
                   }
                 } else {
                   int point_scale = mScaleBar.getActive() - 2; // mPointScale
@@ -6292,7 +6294,7 @@ public class DrawingWindow extends ItemDrawer
   private void doTakePointPhoto( String imagefile, boolean insert, long pid, int type )
   {
     // TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
-    // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // canTakeasPhoto
+    // if ( /* TDandroid.AT_LEAST_API_21 && */ TDandroid.checkCamera( mApp ) ) { // canTakeasPhoto - min sdk is 21
       boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
       if ( pid > 0 ) mMediaManager.setReferenceItem( pid, type );
@@ -6356,13 +6358,14 @@ public class DrawingWindow extends ItemDrawer
    * @param pid    plot ID 
    * @param x      X coord
    * @param y      Y coord
+   * @note called only if the app has AUDIO permission
    */
   private void addAudioPoint( long pid, float x, float y )
   {
     // TDLog.v("add Audio Point " + x + " " + y );
     // assert( mLastLinePath == null );
     // mMediaComment = ""; // audio point do not have comment
-    if ( ! audioCheck ) {
+    if ( ! TDandroid.hasAudioPermission( this ) ) { // check again
       TDToast.makeWarn( R.string.no_feature_audio );
       return;
     }
@@ -7949,11 +7952,12 @@ public class DrawingWindow extends ItemDrawer
                   TDLog.e("Picture without photo");
                 }
               } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
-                if ( audioCheck ) {
+                if ( ! TDandroid.hasAudioPermission( this ) ) {
+                  // TDToast.makeWarn( R.string.no_feature_audio );
+                  // TODO toast or REQUEST_AUDIO_PERMISSION ?
+                } else {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
                   new AudioDialog( mActivity, this, audio.mId, null, mPid, MediaInfo.TYPE_PLOT ).show(); // null DBlock
-                } else {
-                  TDToast.makeWarn( R.string.no_feature_audio );
                 }
               } else if ( BrushManager.isPointSection( point.mPointType ) ) { // open x-section sketch
                 // if ( TDSetting.mFixmeXSection ) {

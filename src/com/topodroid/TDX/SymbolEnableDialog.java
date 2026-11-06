@@ -118,8 +118,9 @@ class SymbolEnableDialog extends MyDialog
       int np = point_lib.size();
       for ( int i=0; i<np; ++i ) {
 	Symbol point = point_lib.getSymbolByIndex( i );
-	// if ( point.isThName( SymbolLibrary.PHOTO && ! TDandroid.checkCamera( mContext ) ) continue; // TODO skip if hw not granted
-	// if ( point.isThName( SymbolLibrary.AUDIO && ! TDandroid.checkMicrophone( mContext ) ) continue;
+        // WHY these two were commented ?
+	// if ( point.isThName( SymbolLibrary.PHOTO && ! TDandroid.hasCameraFeature( mContext ) ) continue; // TODO skip if hw not present
+	// if ( point.isThName( SymbolLibrary.AUDIO && ! TDandroid.hasAudioFeature( mContext ) ) continue;
 	if ( ! ( point.isThName( SymbolLibrary.SECTION ) || point.isThName( SymbolLibrary.PICTURE ) ) ) { // FIXME_SECTION_POINT always enabled
           mPointAdapter.add( new EnableSymbol( mContext, SymbolType.POINT, i, point ) );
         }

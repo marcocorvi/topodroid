@@ -53,7 +53,7 @@ class DialogSurface extends MyDialog
     super( context, null, R.string.DialogSurface ); // null app
     mTopoGl  = topogl;
     // mHasLocation = FeatureChecker.checkLocation( mContext ); // WITH-GPS
-    mHasLocation = TDandroid.checkLocation( mContext ); // WITH-GPS
+    mHasLocation = TDandroid.checkLocation( mContext ); // has permission and hardware
   }
 
   @Override
@@ -105,7 +105,7 @@ class DialogSurface extends MyDialog
     mCBproj.setChecked( GlModel.surfaceLegsMode );
     mCBtexture.setChecked( GlModel.surfaceTexture );
     if ( mHasLocation ) { // WITH-GPS
-      TDLog.v("Dialog Surface GPS status " + mTopoGl.getGPSstatus() );
+      // TDLog.v("Dialog Surface GPS status " + mTopoGl.getGPSstatus() );
       mCBgps.setChecked( mTopoGl.getGPSstatus() );
     } else {
       mCBgps.setVisibility( View.GONE );
