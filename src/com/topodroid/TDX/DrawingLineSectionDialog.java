@@ -251,13 +251,10 @@ class DrawingLineSectionDialog extends MyDialog
       long type = mHSection ? PlotType.PLOT_H_SECTION : PlotType.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : ""; // FIXME NOSPACES ?
       MyCheckBox cb = (MyCheckBox)v;
-      if ( cb == mBtnFoto ) {
-        if ( ! TDandroid.hasCameraPermission( mContext ) ) {
-          // TODO REQUEST_CAMERA_PERMISSION
-        } else {
-          // TODO mCenter for multileg xsection
-          mParent.makeLegXSectionPhoto( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
-        }
+      if ( mBtnFoto != null && cb == mBtnFoto ) {
+        // the CAMERA permission is requested by the parent (DrawingWindow.doTakePointPhoto) when the photo is taken
+        // TODO mCenter for multileg xsection
+        mParent.makeLegXSectionPhoto( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
       } else if ( cb == mBtnDraw ) {
         mParent.makeLegXSectionPlot( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT, mCenter );
       } else if ( cb == mBtnErase ) {

@@ -116,9 +116,9 @@ public class TDandroid
       // android.Manifest.permission.MANAGE_EXTERNAL_STORAGE, // will always be denied from API-30
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       android.Manifest.permission.READ_EXTERNAL_STORAGE,
-      android.Manifest.permission.ACCESS_FINE_LOCATION,
-      android.Manifest.permission.CAMERA,
-      android.Manifest.permission.RECORD_AUDIO
+      android.Manifest.permission.ACCESS_FINE_LOCATION // needed fot BLE scan
+      // .. android.Manifest.permission.CAMERA,
+      // .. android.Manifest.permission.RECORD_AUDIO
       // android.Manifest.permission.ACCESS_MEDIA_LOCATION
   };
 
@@ -131,9 +131,9 @@ public class TDandroid
       "WRITE_EXTERNAL_STORAGE",
       "READ_EXTERNAL_STORAGE",
       // "INTERNET",
-      "ACCESS_FINE_LOCATION",
-      "CAMERA",
-      "RECORD_AUDIO"
+      // .. "ACCESS_FINE_LOCATION",
+      // .. "CAMERA",
+      // .. "RECORD_AUDIO"
       // "ACCESS_MEDIA_LOCATION"
   };
 
@@ -146,9 +146,9 @@ public class TDandroid
       "WRITE_FILE",
       "READ_FILE",
       // "INTERNET",
-      "LOCATION",
-      "CAMERA",
-      "AUDIO"
+      // .. "LOCATION",
+      // .. "CAMERA",
+      // .. "AUDIO"
       // "ACCESS_MEDIA_LOCATION"
   };
 
@@ -156,7 +156,7 @@ public class TDandroid
   static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
   static final int NR_PERMS_D = 6; // 5 API-31 "mandatory" permissions
-  static final int NR_PERMS   = NR_PERMS_D + 3;
+  // static final int NR_PERMS   = NR_PERMS_D + 3;
 
   // private static final int PERM_BT         = 0;
   // private static final int PERM_BT_ADMIN   = 1;
@@ -165,8 +165,8 @@ public class TDandroid
   private static final int PERM_WRITE      = 4;
   private static final int PERM_READ       = 5; 
   private static final int PERM_LOCATION   = NR_PERMS_D;
-  private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
-  private static final int PERM_AUDIO      = NR_PERMS_D + 2;
+  // .. private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
+  // .. private static final int PERM_AUDIO      = NR_PERMS_D + 2;
   // private static final int PERM_MEDIA      = NR_PERMS_D + 3;
 
   // private static boolean MustRestart = false; // whether need to restart app
@@ -209,7 +209,7 @@ public class TDandroid
   /** GrantedPermission[] is still only refreshed in createPermissions().
    * Anything that reads it, for example for BLE connection, should switch to live checks (see checkLocation() for example)
    */
-  static boolean[] GrantedPermission = { false, false, false, false, false, false, false, false, false }; // size = NR_PERMS
+  static boolean[] GrantedPermission = { false, false, false, false, false, false /* .. , false, false, false */ }; // size = NR_PERMS_D
   static boolean MustRestart = false; // whether need to restart app
 
   // number of times permissions are requested
@@ -248,7 +248,7 @@ public class TDandroid
 
     ArrayList< String > ask = new ArrayList<>();
     int not_granted = 0;
-    for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
+    for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
       // TDLog.v("PERM Create permission " + k + ": " + permNames[k] );
 
       if ( k == PERM_BT_CONNECT && BELOW_API_31 ) { // BT_CONNECT only for API >= 31 - API-31
@@ -263,11 +263,6 @@ public class TDandroid
         continue;
       } 
 
-      // if ( k == PERM_CAMERA && BELOW_API_21 ) { // CAMERA only for API >= 21
-      //   // GrantedPermission[k] = false;
-      //   continue;
-      // }
-
       if ( (k == PERM_WRITE || k == PERM_READ) && (PRIVATE_STORAGE || AT_LEAST_API_33) ) {
         // TDLog.v("PERM Create permission " + k + ": " + permNames[k] + " not granted above 33" );
         // GrantedPermission[k] = false;
@@ -277,7 +272,6 @@ public class TDandroid
       GrantedPermission[k] = hasPermission( ctx, perms[k] );
       if ( ! GrantedPermission[k] ) {
         TDLog.v( "PERM " + permNames[k] + " not granted - request time " + time );
-        if ( k >= NR_PERMS_D ) continue;
         ask.add( perms[k] );
         if ( time > 1 ) {
           activity.requestPermissions( new String[] { perms[k] }, TDRequest.REQUEST_PERMISSIONS );
@@ -291,13 +285,10 @@ public class TDandroid
         // TDLog.v( "PERM " + k + ": " + permNames[k] + " granted ");
       }
     }
-    TDLog.v("PERM create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS );
+    TDLog.v("PERM create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS_D );
 
     if ( not_granted > 0 && time < 3 && ! ask.isEmpty() ) {
       TDLog.v( "request perms time " + time );
-      // String[] ask_perms = new String[ not_granted ];
-      // int kk = 0;
-      // for ( int k = 0; k < NR_PERMS; ++k ) if ( ! GrantedPermission[k] ) ask_perms[kk++] = perms[k];
       activity.requestPermissions( ask.toArray( new String[0] ), TDRequest.REQUEST_PERMISSIONS );
     }
     
@@ -347,6 +338,21 @@ public class TDandroid
     intent.setData( uri );
     try {
       activity.startActivity( intent );
+    } catch ( ActivityNotFoundException e ) {
+      TDLog.e("Error " + e.getMessage() );
+    }
+  }
+
+  /** open the system settings page of this app (where the user can grant a permanently denied permission)
+   * @param ctx    context
+   */
+  static void openAppSettings( Context ctx )
+  {
+    Intent intent = new Intent( Settings.ACTION_APPLICATION_DETAILS_SETTINGS );
+    intent.setData( Uri.fromParts( "package", ctx.getPackageName(), null ) );
+    intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+    try {
+      ctx.startActivity( intent );
     } catch ( ActivityNotFoundException e ) {
       TDLog.e("Error " + e.getMessage() );
     }
@@ -402,129 +408,44 @@ public class TDandroid
 
   public static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
   public static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
-/* */
   
-/* FIXME-16
-  static final int TEMPERATURE      = Sensor.TYPE_AMBIENT_TEMPERATURE;
-
-  static final int TITLE_NORMAL     = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
-  static final int TITLE_NORMAL2    = 0xff6699cc; 
-  static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE
-  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
-  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
-  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
-  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
-
-  static void applyEditor( Editor editor )
-  {
-    editor.commit();
-  }
-
-  private static boolean MustRestart = false; // whether need to restart app
-  static boolean[] GrantedPermission = { false, false, false, false, false, false };
-
-  static void createPermissions( Context ctx, Activity activity )
-  {
-    // TDLog.v( "PERM create permissions" );
-    MustRestart = false;
-
-    for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
-      GrantedPermission[k] = true;
-      // TDLog.v( "FC perm " + k + " granted " + GrantedPermission[k] );
-      if ( ! GrantedPermission[k] ) MustRestart = true;
-    }
-    // TDLog.v( "FC must restart " + MustRestart );
-    if ( MustRestart ) { // if a permission has not been granted request it
-      // nothing
-    }
-  }
-
-  static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
-  static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
-/* */
-  
-/* FIXME-8 
-  static final int TEMPERATURE      = Sensor.TYPE_TEMPERATURE;
-
-  static final int TITLE_NORMAL     = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
-  static final int TITLE_NORMAL2    = 0xff6699cc; 
-  static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE
-  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
-  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
-  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
-  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
-
-  static void applyEditor( Editor editor )
-  {
-    editor.commit();
-  }
-
-  private static boolean MustRestart = false; // whether need to restart app
-  static boolean[] GrantedPermission = { false, false, false, false, false, false };
-
-  static void createPermissions( Context ctx, Activity activity )
-  {
-    // TDLog.v( "PERM create permissions" );
-    MustRestart = false;
-
-    for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
-      GrantedPermission[k] = true;
-      // TDLog.v( "FC perm " + k + " granted " + GrantedPermission[k] );
-      if ( ! GrantedPermission[k] ) MustRestart = true;
-    }
-    // TDLog.v( "FC must restart " + MustRestart );
-    if ( MustRestart ) { // if a permission has not been granted request it
-      // nothing
-    }
-  }
-
-  static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackgroundDrawable( drawable ); }
-  static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackgroundDrawable( drawable ); }
-/* */
-
-
-  /** check whether the running app has the needed permissions
-   * @return 0 ok
-   *         -1 missing some necessary permission
-   *         >0 missing some complementary permission (flag):
-   *            1 FINE_LOCATION
-   *            2 CAMERA
-   *            4 AUDIO
-   *            8 MEDIA_LOCATION
-   */
-  static int checkPermissions( Context ctx )
-  {
-    // TDLog.v( "PERM check permissions" );
-    int k;
-    for ( k=0; k<NR_PERMS_D; ++k ) {
-      if ( k == PERM_BT_CONNECT && BELOW_API_31 ) {
-        // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
-      } else if ( k == PERM_BT_SCAN && BELOW_API_31 ) {
-        // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
-      } else {
-        if ( ! hasCallingOrPermission( ctx, perms[k] ) ) {
-          // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
-          // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
-          return -1;
-        }
-      }
-    }
-    int ret = 0;
-    int flag = 1;
-    for ( ; k<NR_PERMS; ++k ) {
-      // TDLog.v("PERM Check permission " + permNames[k] );
-      if ( k == PERM_CAMERA /* && AT_LEAST_API_21 */ ) { // CAMERA only for API >= 21 min sdk is 21
-        if ( ! hasCallingOrPermission( ctx, perms[k] ) ) {
-          // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
-          // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
-          ret += flag;
-        }
-      }
-      flag *= 2;
-    }
-    // TDLog.v("PERM Check permission returns " + ret );
-    return ret;
-  }
+  // /** check whether the running app has the needed permissions
+  //  * @return 0 ok
+  //  *         -1 missing some necessary permission
+  //  *         > 0 if missing non-necessary permission
+  //  */
+  // static int checkPermissions( Context ctx )
+  // {
+  //   // TDLog.v( "PERM check permissions" );
+  //   int k;
+  //   for ( k=0; k<NR_PERMS_D; ++k ) {
+  //     if ( k == PERM_BT_CONNECT && BELOW_API_31 ) {
+  //       // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
+  //     } else if ( k == PERM_BT_SCAN && BELOW_API_31 ) {
+  //       // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
+  //     } else {
+  //       if ( ! hasCallingOrPermission( ctx, perms[k] ) ) {
+  //         // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
+  //         // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
+  //         return -1;
+  //       }
+  //     }
+  //   }
+  //   int flag = 1;
+  //   for ( ; k<NR_PERMS_D; ++k ) {
+  //     if ( k == PERM_CAMERA /* && AT_LEAST_API_21 */ ) { // CAMERA only for API >= 21 min sdk is 21
+  //       if ( ! hasCallingOrPermission( ctx, perms[k] ) ) {
+  //         // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
+  //         // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
+  //         ret += flag;
+  //       }
+  //     }
+  //     flag *= 2;
+  //   }
+  //   // TDLog.v("PERM Check permission returns " + ret );
+  //   return ret;
+  //   return 0;
+  // }
 
   /** @return true if coarse location access is granted
    * @param ctx  context
@@ -546,12 +467,15 @@ public class TDandroid
      1) Split hardware from permission. [DONE]
         checkCamera() and checkAudio() currently combine both checks, so a denied permission looks like missing hardware.
         Keep the feature checks separate and test the permission live at the point of use.
-     2) Request lazily, with a result handler. [TODO]
+     2) Request lazily, with a result handler. 
+        [CAMERA: ShotWindow DONE (askPhotoComment);
+        other CAMERA entry points 
+        AUDIO TODO]
         Use dedicated codes in TDRequest, REQUEST_CAMERA_PERMISSION ans REQUEST_AUDIO_PERMISSION,
         and an onRequestPermissionsResult that resumes the action on grant and points to app settings after a permanent denial.
      3) Find the entry points first. [DONE]
         Photo capture and audio recording from the shot, plot and sensor windows will each need their own request path.
-        REQUEST_CAMERA_PERMISSION: DrawingWindow ShotWindow DrawingLineSectionDialog
+        REQUEST_CAMERA_PERMISSION: DrawingWindow ShotWindow DrawingLineSectionDialog ShotNewDialog
         REQUEST_AUDIO_PERMISSION:  DrawingWindow ShotWindow
      4) Then drop them from createPermissions(). [TODO]
         Only once every entry point asks for itself, remove them from the startup request loop, as with location.

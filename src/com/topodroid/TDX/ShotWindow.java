@@ -1155,10 +1155,53 @@ public class ShotWindow extends MyActivity
    */
   void askPhotoComment( long blk_id, String blk_name )
   {
-    if ( ! TDandroid.hasCameraPermission( this ) ) {
-      // TODO REQUEST_CAMERA_PERMISSION
+    runWithCameraPermission( new Runnable() {
+      @Override public void run() { (new ShotPhotoDialog(mActivity, ShotWindow.this, blk_id, blk_name ) ).show(); }
+    } );
+  }
+
+  // action waiting for the CAMERA permission result
+  private Runnable mPendingCameraAction = null;
+
+  /** run an action that needs the CAMERA permission, requesting the permission first if necessary
+   * @param action   action to run once the permission is granted
+   * @note used also by ShotNewDialog
+   */
+  void runWithCameraPermission( Runnable action )
+  {
+    if ( TDandroid.hasCameraPermission( this ) ) {
+      action.run();
     } else {
-      (new ShotPhotoDialog(mActivity, this, blk_id, blk_name ) ).show();
+      // remember the action and resume it in onRequestPermissionsResult()
+      mPendingCameraAction = action;
+      requestPermissions( new String[] { android.Manifest.permission.CAMERA }, TDRequest.REQUEST_CAMERA_PERMISSION );
+    }
+  }
+
+  /** handle the result of a runtime permission request
+   * @param reqCode  request code
+   * @param perms    requested permissions
+   * @param results  grant results
+   */
+  @Override
+  public void onRequestPermissionsResult( int reqCode, String[] perms, int[] results )
+  {
+    super.onRequestPermissionsResult( reqCode, perms, results );
+    if ( reqCode != TDRequest.REQUEST_CAMERA_PERMISSION ) return;
+
+    Runnable action = mPendingCameraAction;
+    mPendingCameraAction = null;
+
+    if ( results.length > 0 && results[0] == android.content.pm.PackageManager.PERMISSION_GRANTED ) {
+      if ( action != null ) action.run();
+    } else if ( results.length > 0 ) { // an empty result means the request was interrupted
+      if ( ! shouldShowRequestPermissionRationale( android.Manifest.permission.CAMERA ) ) {
+        // permanently denied: the system will no longer show the prompt
+        TDToast.makeWarn( R.string.camera_permission_setting );
+        TDandroid.openAppSettings( this );
+      } else {
+        TDToast.makeWarn( R.string.camera_no_permission );
+      }
     }
   }
 
@@ -3545,6 +3588,7 @@ public class ShotWindow extends MyActivity
     if ( ! TDandroid.hasAudioPermission( this ) ) {
       // TODO REQUEST_AUDIO_PERMISSION
     } else {
+      // getAudioIdByItem returns the audio-ID if the block has an audio or a new audio ID - no new audio record is created
       long audio_id = (audio == null) ? mApp_mData.getAudioIdByItem( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT ) : audio.getId();
       // TDLog.v( TAG + "start audio id " + audio_id + " block " + blk.mId );
       (new AudioDialog( mActivity, /* this */ null, audio_id, blk, blk.mId, MediaInfo.TYPE_SHOT )).show();

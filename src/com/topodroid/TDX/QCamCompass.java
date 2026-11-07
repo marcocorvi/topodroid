@@ -141,6 +141,11 @@ class QCamCompass extends Dialog
     // TDLog.v( "QCAM compass. Box " + mWithBox + " Delay " + mWithDelay + " Camera " + mCamera );
   }
 
+  /** @return true if the photo has been saved (valid when the dialog has been dismissed)
+   * @note used by the parent, in a dismiss listener, to roll back items created for a photo that has not been taken
+   */
+  boolean isPhotoSaved() { return mHasSaved; }
+
   void enableButtons( boolean enable )
   {
     enableButtonCancel( enable );

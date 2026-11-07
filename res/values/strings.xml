@@ -395,6 +395,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bt_scan_permission_setting">Set BT scan permission ?</string>
     <string name="discovery_error">BT discovery error: %1$s</string>
     <string name="depth_format">Depth %1$.1f</string>
+    <string name="camera_no_permission">CAMERA permission needed to take photo</string>
+    <string name="camera_permission_setting">Set CAMERA permission ?</string>
+    <string name="audio_no_permission">AUDIO permission needed to record audio</string>
+    <string name="audio_permission_setting">Set AUDIO permission ?</string>
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>

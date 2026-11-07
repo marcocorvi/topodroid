@@ -53,8 +53,8 @@ class ShotNewDialog extends MyDialog
                     , IBearingAndClino
 {
   // private ShotWindow mParent;
+  private Activity mParent; // pareny activity, either ShotWindow or DrawingWindow
   private final ILister mLister;
-  private Activity mParent;
   private DBlock mPrevBlk;
   private boolean  notDone;
   private long mAt; // id of the shot where to add new shot (-1 end)
@@ -96,6 +96,7 @@ class ShotNewDialog extends MyDialog
 
   /** cstr
    * @param context    context
+   * @param parent     parent activity
    * @param app        application
    * @param lister     data lister
    * @param last_blk   last data block
@@ -664,12 +665,24 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( mParent, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      if ( ! TDandroid.hasCameraPermission( mContext ) ) {
-        // TODO REQUEST_CAMERA_PERMISISON
-      } else {
-        new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
-                       // null inserter, with_box, with_delay
-                       // NOTE null MediaManager : do not insert photo record in table
+      // final ShotWindow shot_window = TopoDroidApp.mShotWindow;
+      Runnable open_camera = new Runnable() {
+        @Override public void run() {
+          // new QCamCompass( mContext, shot_window, ShotNewDialog.this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
+          new QCamCompass( mContext, mParent, ShotNewDialog.this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
+                         // null inserter, with_box, with_delay
+                         // NOTE null MediaManager : do not insert photo record in table
+        }
+      };
+      // the CAMERA permission is requested when the button is tapped: the parent window handles the request
+      // if ( shot_window != null ) {
+      //   shot_window.runWithCameraPermission( open_camera );
+      if ( mParent != null && mParent instanceof ShotWindow ) {
+        ((ShotWindow)mParent).runWithCameraPermission( open_camera );
+      } else if ( mParent != null && mParent instanceof DrawingWindow ) 
+        ((DrawingWindow)mParent).runWithCameraPermission( open_camera );
+      } else if ( TDandroid.hasCameraPermission( mContext ) ) {
+        open_camera.run();
       }
     } else if ( b == mBtnBack ) {
       dismiss();

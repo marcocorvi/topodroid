@@ -2026,41 +2026,6 @@ public class TopoGL extends MyActivity
     // }
   }
 
-  /* FeatureChecker
-  @Override
-  public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
-  {
-    // TDLog.v("PERM req code " + code + " results length " + results.length );
-    if ( code == FeatureChecker.REQUEST_PERMISSIONS ) {
-      if ( results.length > 0 ) {
-	for ( int k = 0; k < results.length; ++ k ) {
-	  FeatureChecker.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  // TDLog.v( "PERM " + k + " perms " + perms[k] + " result " + results[k] );
-	}
-        ++ mRequestPermissionTime;
-        checkPermissions();
-      }
-    }
-  }
-
-  private void checkPermissions()
-  {
-    boolean granted = FeatureChecker.createPermissions( this, this, mRequestPermissionTime );
-    // TDLog.v("PERM check perms: granted " + granted + " at time " + mRequestPermissionTime );
-    // if ( ! TDandroid.canRun( mApp, this ) ) 
-    if ( FeatureChecker.checkPermissions( this ) < 0 ) {
-      if ( mRequestPermissionTime > 2 ) { 
-        TDToast.make( "Permissions not granted. Goodbye" );
-        finish();
-      } else {
-        TDToast.make( "Permissions not granted. Retry" );
-      }
-    } else {
-      handleExtra();
-    }
-  }
-  */
-
   // --------------------------------------- DIMENSIONS
   // private static int setListViewHeight( Context context, HorizontalListView listView )
   // {
