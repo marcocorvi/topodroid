@@ -8,7 +8,7 @@ Survey sketches are exported from the <u>Drawing window</u> (single sketch) and 
 
 TopoDroid zip archives are stored in the <i>zip</i> subfolder of the "TopoDroid" folder.<br><p>
 
-Exported data and sketches files are stored in the "out" subfolder of the survey folder.<br><p>
+Exported data and sketches files are stored in the <i>out</i> subfolder of the survey folder.<br><p>
 
 The destination file of exports of 3D models are chosen with a system filemanager.<br><p>
 
@@ -420,6 +420,7 @@ There is a shapefile for the stations and one for the shots (both legs and splay
 If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
 Data are corrected with the magnetic declination.
 Each shapefile consists of three files: the data file, with extension ".shp", the index file, ".shx", and the attributes file, ".dbf".
+If the georeferenced station coordinates are only geographic WGS84 or are converted to UTM, each shapefile has also a ".prj" file.
 The files are zip-compressed and the zip is saved with extension ".shz".
 <br><p>
 
@@ -467,7 +468,7 @@ The following sketch export formats are non longer supported:
 <br><p>
 
 Screenshots of the sketch window and the overview window can be taken with the volume-up button.
-Screenshots are saved in the "out" folder of the survey.<br><p>
+Screenshots are saved in the <i>out</i> folder of the survey.<br><p>
 
 
 <b id="csx">cSurvey</b> ".csx"<br>
@@ -621,9 +622,9 @@ Settings:<ul style="margin-top=0">
 
 <b id="shp2">Shapefile</b> ".shp"<br>
 Sketches can be exported as <i>shapefile</i>, with stations, shots, and lines.
-Each item has three files: the shape data file, the shape index file, and the database file.
-The files comprising the <i>shapefile</i> export are zip-compressed and the zip file is saved in the
-folder "shp" with extension ".shz".<br><p>
+Each shapefile consists of three files: the data file, with extension ".shp", the index file, ".shx", and the attributes file, ".dbf".
+If the georeferenced station coordinates are only geographic WGS84 or are converted to UTM, each shapefile has also a ".prj" file.
+The files comprising the <i>shapefile</i> export are zip-compressed and the zip file is saved in the <i>out</i> folder with extension ".shz".<br><p>
 
 If you have georeferenced at least a station and checked the appropriate checkbox in the export dialog,
 the data are exported in the <i>WGS84</i> reference system, and corrected with the magnetic declination.<br>
@@ -716,7 +717,9 @@ otherwise only the user-chosen stations are included</li>
 <ul>
   <li><i>Data default-export</i>: default data export format to present in the export dialog [default none]</li>
   <li><i>Sketch default-export</i>: default sketch export format to present in the export dialog [default none]</li>
-  <li><i>Sketch auto-export</i>: if set sketches are exported in the chosen format when they are closed. The exported files are stored in the "out" subfolder of the survey folder. Sketch auto-export puts an extra load on the app, and is not set by default.</li>
+  <li><i>Sketch auto-export</i>: if set sketches are exported in the chosen format when they are closed.
+The exported files are stored in the <i>out</i> subfolder of the survey folder.
+Sketch auto-export puts an extra load on the app, and is not set by default.</li>
   <li><i>ENABLE</i>: settings to enable data export formats.</li>
 <li><b>Compass</b>:
   <ul>

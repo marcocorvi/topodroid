@@ -1,15 +1,12 @@
 <html><body>
 <h4>Android PERMISSIONS</h4>
 
+<i>Storage access</i> and <i>Bluetooth</i> are mandatory permissions.
+Without them the app will not run.<br> 
+
 <b>Storage</b><br>
 TopoDroid saves the survey data and sketches, and the calibrations, in the <i>primary external storage</i>.<br>
 It cannot work without read/write access to the storage.
-<br><p>
-
-<b>Internet</b><br>
-The network connection is necessary to install a translation of the user manual, and to use the AI help and setting assistants.<br>
-TopoDroid does not use the network in any other way, and it is safe to disable this permission if you do not want to use AI
-assistance nor install user manual translations.
 <br><p>
 
 <b>Bluetooth</b><br>
@@ -17,26 +14,33 @@ TopoDroid requires bluetooth access to communicate with the devices.<br>
 If the survey data are entered manually, it can be used without bluetooth.<br>
 TopoDroid uses also bluetooth pairing, to pair with newly discovered devices.
 Discovery and pairing of DistoX2 can be done with the "settings" app.<br>
-Discovery of BLE devices are done by TopoDroid itself
+Discovery of BLE devices are done by TopoDroid itself, and it requires <i>Location</i> permission.
+<br><p>
+
+<b>Location</b><br>
+Location is non-mandatory, but it is necessary to scan for BLE devices.<br>
+TopoDroid uses the device GNSS to get the geographical position of a point, but it can import it from <a href="page_fixed_import.htm">external apps</a>.<br>
+GNSS is used also to track a point on the DEM in the 3D viewer.
 <br><p>
 
 <b>Camera</b><br>
+Camera permission is non-mandatory.<br>
 TopoDroid can use the camera to take pictures.<br>
 TopoDroid camera management is not so feature-rich as that of a "camera" app, but it stores
-the direction of view (azimuth and inclination) in the pictures.<br>
-It should be safe to use TopoDroid without this permission.
+the direction of view (azimuth and inclination) in the pictures.
 <br><p>
 
 <b>Audio</b><br>
+Audio permission is non-mandatory.<br>
 TopoDroid uses the microphone to record audio notes (for shots and audio points).<br>
 If this permission is not granted, audio recording is disabled.<br>
 It should be safe to use TopoDroid without this permission.
 <br><p>
 
-<b>Location</b><br>
-Location is necessary to scan for BLE devices.<br>
-TopoDroid uses the device GNSS to get the geographical position of a point, but it can import it from <a href="page_fixed_import.htm">external apps</a>.<br>
-GNSS is used also to track a point on the DEM in the 3D viewer.
+<b>Internet</b><br>
+The network connection is necessary to install a translation of the user manual.<br>
+TopoDroid uses the network access also to tranfer the function-usage counts. 
+This is done only once a month and the amount of data transfer is very small.
 <br><p>
 
 

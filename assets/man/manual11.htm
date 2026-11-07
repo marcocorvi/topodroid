@@ -2,7 +2,13 @@
 <h3>[11] CROSS-SECTIONS</h3>
 
 X-sections are kind of special because they do not belong to the sketch but are independent sketches associated to either the plan or the profile.
-TopoDroid has two types of x-sections: <u>leg</u> x-section and <u>station</u> x-section. The former crosses a leg, the latter is defined at a station.<br><p>
+TopoDroid has two types of x-sections: <u>leg</u> x-section and <u>station</u> x-section.<br>
+The former crosses a leg, and is defined by tarcing a "section" line.<br>
+The latter is defined at a station through the <i>station-point</i> dialog.<br><p>
+
+X-section can be sketched and/or have a photo attached.<br>
+The x-section photo are included in the list of survey photos and can be displayed in the 3D viewer.<br><p>
+
 
 A plan-view x-section is always in a vertical plane and the upward direction is the vertical.<br>
 Profile-view x-sections can be either vertical or horizontal, or slanted if the appropriate setting is enabled [T].<br><p>
@@ -98,7 +104,7 @@ This point marks the place of the x-section on the sketch.
 Section-points are displayed as a white small cross and an orange line connecting them to the relative section-line or station.<br>
 If the x-section is deleted, the corresponding section-point is also deleted.<br><p>
 
-The outline of the x-section is displayed at the section-point.<br>
+The outline of the x-section sketch is displayed at the section-point.<br>
 The outline can be moved by selecting the section-point (in edit mode) and dragging it around.<br>
 Tapping the "properties" button, when a section-point is selected, opens the x-section sketch for drawing.<br><p>
 
@@ -109,7 +115,7 @@ For leg x-section this is done through the section line dialog.<br><p>
 
 
 The x-section is deleted only deleting the <i>section-line</i>, for
-leg x-sections, or through the station dialog, for station x-sections.<br><p>
+leg x-sections, or through the station-point dialog, for station x-sections.<br><p>
 
 <b>X-section files</b><br>
 Each x-section is saved in a separate file in the "tdr" subfolder. The files get consecutive names "MySurvey-xx0.tdr", "MySurvey-xx1.tdr", etc. The "xx0" numbering part of the name is also displayed in the Section dialog that pops up when you create or edit a section.<br>
