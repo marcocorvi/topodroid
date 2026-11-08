@@ -380,6 +380,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Error al buscar dispositivos Bluetooth: %1$s</string>
     <!-- TODO string name="depth_format">Depth %1$.1f</string -->
+    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
+    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
+    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
+    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
@@ -2612,5 +2616,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="help_surface_3d">superficie</string -->
     <string name="help_color_3d">Colores</string>
     <!-- UNUSED string name="help_frame_3d">Cuadrícula</string -->
+    <!-- TODO string name="help_legs">Legs display</string -->
 
 </resources>

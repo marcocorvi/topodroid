@@ -380,6 +380,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Грешка при откриване на BT: %1$s</string>
     <string name="depth_format">Дълбочина %1$.1f</string>
+    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
+    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
+    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
+    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -2557,6 +2561,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="help_surface_3d">Терен</string -->
     <string name="help_color_3d">Цветове</string>
     <!-- UNUSED string name="help_frame_3d">Рамка</string -->
+    <!-- TODO string name="help_legs">Legs display</string -->
 
    
 </resources>

@@ -394,6 +394,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Erreur de recherche BT: %1$s</string>
     <!-- TODO string name="depth_format">Depth %1$.1f</string -->
+    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
+    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
+    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
+    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
 
     <string name="error_azimuth_required">Azimut nécessaire</string>
     <string name="error_length_required">Longueur nécessaire</string>
@@ -2643,5 +2647,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <!-- UNUSED string name="help_surface_3d">Terrain</string -->
     <string name="help_color_3d">Couleurs</string>
     <!-- UNUSED string name="help_frame_3d">Cadre</string -->
+    <!-- TODO string name="help_legs">Legs display</string -->
    
 </resources>

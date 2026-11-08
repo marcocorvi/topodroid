@@ -365,6 +365,10 @@
     <string name="bt_scan_permission_setting">Nastavit oprávnění pro vyhledávání BT?</string>
     <string name="discovery_error">Chyba vyhledávání BT: %1$s</string>
     <string name="depth_format">Hloubka %1$.1f</string>
+    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
+    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
+    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
+    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
 
     <string name="error_azimuth_required">Je vyžadován azimut</string>
     <string name="error_length_required">Je vyžadována délka</string>
@@ -2296,5 +2300,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="help_surface_3d">Zobrazení terénu povrchu</string -->
     <string name="help_color_3d">Barevná schémata modelu</string>
     <!-- UNUSED string name="help_frame_3d">Zobrazení referenční mřížky a os</string -->
+    <!-- TODO string name="help_legs">Legs display</string -->
    
 </resources>

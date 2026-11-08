@@ -379,6 +379,10 @@
     <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Ошибка обнаружения BT: %1$s</string>
     <string name="depth_format">Глубина %1$.1f</string>
+    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
+    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
+    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
+    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
@@ -2571,5 +2575,6 @@
     <!-- UNUSED string name="help_surface_3d">Поверхность</string -->
     <string name="help_color_3d">Цвета</string>
     <!-- UNUSED string name="help_frame_3d">Рамка</string -->
+    <!-- TODO string name="help_legs">Legs display</string -->
 
 </resources>

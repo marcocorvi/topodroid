@@ -377,6 +377,10 @@
     <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
     <string name="discovery_error">Errore individuazione BT: %1$s</string>
     <string name="depth_format">Profondita\' %1$.1f</string>
+    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
+    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
+    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
+    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -2578,5 +2582,6 @@
     <!-- UNUSED string name="help_surface_3d">Terreno</string -->
     <string name="help_color_3d">Colori</string>
     <!-- UNUSED string name="help_frame_3d">Cornice</string -->
+    <!-- TODO string name="help_legs">Legs display</string -->
 
 </resources>
