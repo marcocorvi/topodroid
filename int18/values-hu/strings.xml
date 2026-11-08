@@ -373,14 +373,18 @@
     <string name="location_start_fine">Pontos helymeghatározás kezdés</string>
     <string name="location_enabled">Ellenőrizd a HELYMEGHATÁROZÁS engedélyezését</string>
     <string name="location_no_permission">Nincs helymeghatározás engedély</string>
-    <string name="location_permission_setting">Beállítod a LOCATION engedélyt?</string>
-    <string name="no_gps_hardware">Nincs GPS hardware</string>
+  <string name="location_permission_setting">Beállítod a LOCATION engedélyt?</string>
+  <string name="no_gps_hardware">Nincs GPS hardware</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
-    <string name="bt_scan_in_progress">BT scan folyamatban. Várj &#8230;</string>
-    <string name="bt_scan_no_permission">BT scan-hez engedély szükséges</string>
-    <string name="bt_scan_permission_setting">Beállítod a BT scan engedélyt?</string>
+  <string name="bt_scan_in_progress">BT scan folyamatban. Várj &#8230;</string>
+  <string name="bt_scan_no_permission">BT scan-hez engedély szükséges</string>
+  <string name="bt_scan_permission_setting">Beállítod a BT scan engedélyt?</string>
     <string name="discovery_error">BT keresési hiba: %1$s</string>
     <string name="depth_format">Mélység %1$.1f</string>
+  <string name="camera_no_permission">CAMERA engedély szükséges a fénykép felvételhez</string>
+  <string name="camera_permission_setting">Beállítod a CAMERA engedélyt?</string>
+  <string name="audio_no_permission">AUDIO engedély szükséges a hang felvételhez</string>
+  <string name="audio_permission_setting">Beállítod az AUDIO engedélyt?</string>
 
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
@@ -2177,11 +2181,12 @@
 
     <string name="welcome_db_version">Adatbázis v. %1$d, %2$d</string>
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
-    <string name="welcome_text"> \nKöszönjük, hogy a TopoDroidot választotta.
+    <string name="welcome_text"><![CDATA[
+\nKöszönjük, hogy a TopoDroidot választottad.
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás digitális integrált műszerekkel történő barlangfelmérésre.
 \nTámogatott műszerek: DistoX, BRIC, SAP, Cavway, DiscoX és JedEye
-\n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
-\n\nÚjdonságok: https://github.com/marcocorvi/topodroid/blob/master/changes/%1$s.md
+\n\nNincs garancia: A szoftver használatával elfogadod azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
+\n\nÚjdonságok: https://github.com/BalazsHoll/TopoDroid_manual_hu/blob/master/changes/%1$s.md
 \nSegítség: menü "súgó, ?"
 \nFelhasználói kézikönyv: Könyv ikon a súgó ablakban
 \nDokumentumok: http://sites.google.com/site/speleoapps
@@ -2189,7 +2194,8 @@
 \nHozzászólások, hiba bejelentés, új funkció igények: marco.corvi@gmail.com
 \nA magyar fordítást Sűrű Péter munkája nyomán
 \nHoll Balázs (holl.balazs.TopoDroid@gmail.com) készítette.
-\n </string>
+\n
+    ]]></string>
 
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
   <string name="firmware_title">Firmware Frissítés</string>
