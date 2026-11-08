@@ -1016,7 +1016,8 @@ public class TopoGL extends MyActivity
                           // R.string.help_walls_3d,
                           // R.string.help_surface_3d,
                           R.string.help_color_3d,
-                          // R.string.help_frame_3d
+                          // R.string.help_frame_3d,
+                          R.string.help_legs
   };
 
   int BTN_MOVE     = 0;

@@ -558,9 +558,10 @@ value of the first acceptable splay. A dimension can be left with value zero by 
 in a direction already set.<br>
 By default the tolerances are very permissive: 0&deg; for vertical directions and 90&deg; for horizontal.<br><p>
   
-  Zip sharing can be categorized to restrict its handling to specific apps.
-  <!-- TopoDRoid category is "com.topodroid.TDX.CATEGORY_SURVEY" -->
-  If there is no app that can handle sharing, the action fails.<br>
+Zip sharing can be categorized to restrict its handling to specific apps.
+In this case the app must implement the action SEND and handle the TopoDroid category,
+"com.topodroid.TDX.CATEGORY_SURVEY".<br>
+If there is no app that can handle sharing, the action fails.<br>
 
 <hr style="height:2px;background-color:black;">
 

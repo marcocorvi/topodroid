@@ -283,6 +283,24 @@ class AudioDialog extends MyDialog
    */
   private void startRec()
   {
+    Runnable start = new Runnable() { @Override public void run() {
+      if ( ! isShowing() ) return; // dialog dismissed while the permission prompt was open
+      doStartRec();
+    } };
+    if ( mContext instanceof MyActivity ) {
+      ((MyActivity)mContext).runWithAudioPermission( start );
+    } else if ( TDandroid.hasAudioPermission( mContext ) ) {
+      start.run();
+    } else {
+      TDToast.makeWarn( R.string.audio_no_permission );
+    }
+  }
+
+  /** actually start recording audio (RECORD_AUDIO permission granted)
+   * @note called only with isRecPlay == STATUS_IDLE
+   */
+  private void doStartRec()
+  {
     assert( isRecPlay == STATUS_IDLE );
     try {
       isRecPlay = STATUS_RECORD;

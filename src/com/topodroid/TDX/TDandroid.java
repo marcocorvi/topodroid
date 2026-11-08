@@ -8,9 +8,10 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * TODO Live permission check:
- CAMERA and AUDIO have the same issue.
- First check that the camera and audio code paths also request them lazily, and how MainWindow uses the returned count.
+ * Permissions: only the "mandatory" ones (index < NR_PERMS_D) are requested at startup.
+ * LOCATION (BLE scan below API-31), CAMERA and RECORD_AUDIO are requested lazily, when the feature is used:
+ * CAMERA and RECORD_AUDIO through MyActivity.runWithCameraPermission() / runWithAudioPermission(),
+ * checked live with hasCameraPermission() / hasAudioPermission().
  *
  */
 package com.topodroid.TDX;
@@ -463,24 +464,16 @@ public class TDandroid
     return hasLocationPermission( ctx ) && hasGpsFeature( ctx );
   }
 
-  /* TODO
-     1) Split hardware from permission. [DONE]
-        checkCamera() and checkAudio() currently combine both checks, so a denied permission looks like missing hardware.
-        Keep the feature checks separate and test the permission live at the point of use.
-     2) Request lazily, with a result handler. 
-        [CAMERA: ShotWindow DONE (askPhotoComment);
-        other CAMERA entry points 
-        AUDIO TODO]
-        Use dedicated codes in TDRequest, REQUEST_CAMERA_PERMISSION ans REQUEST_AUDIO_PERMISSION,
-        and an onRequestPermissionsResult that resumes the action on grant and points to app settings after a permanent denial.
-     3) Find the entry points first. [DONE]
-        Photo capture and audio recording from the shot, plot and sensor windows will each need their own request path.
-        REQUEST_CAMERA_PERMISSION: DrawingWindow ShotWindow DrawingLineSectionDialog ShotNewDialog
-        REQUEST_AUDIO_PERMISSION:  DrawingWindow ShotWindow
-     4) Then drop them from createPermissions(). [TODO]
-        Only once every entry point asks for itself, remove them from the startup request loop, as with location.
-        Check how MainWindow uses the returned not_granted count before changing it.
-   */
+  /* Camera and audio permissions
+     1) Hardware is split from permission: hasCameraFeature(), hasAudioFeature() and the live
+        hasCameraPermission(), hasAudioPermission(). checkCamera() and checkAudio() combine them.
+     2) Permissions are requested lazily by MyActivity (ShotWindow and DrawingWindow), with the codes
+        TDRequest.REQUEST_CAMERA_PERMISSION and REQUEST_AUDIO_PERMISSION. On grant the pending action is resumed;
+        after a permanent denial the user is sent to the app settings (openAppSettings()).
+        CAMERA: ShotWindow, DrawingWindow, DrawingLineSectionDialog, ShotNewDialog
+        AUDIO:  AudioDialog, when the user starts recording (playback does not need it)
+     3) CAMERA and AUDIO are not in the startup request loop of createPermissions().
+  */
 
   // --- camera
   /** @return true if the device has a (rear, autofocus) camera */

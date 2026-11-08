@@ -52,8 +52,7 @@ class ShotNewDialog extends MyDialog
                     , View.OnLongClickListener
                     , IBearingAndClino
 {
-  // private ShotWindow mParent;
-  private Activity mParent; // pareny activity, either ShotWindow or DrawingWindow
+  private MyActivity mParent; // pareny activity, either ShotWindow or DrawingWindow
   private final ILister mLister;
   private DBlock mPrevBlk;
   private boolean  notDone;
@@ -102,7 +101,7 @@ class ShotNewDialog extends MyDialog
    * @param last_blk   last data block
    * @param at         ID where to insert the new data
    */
-  ShotNewDialog( Context context, Activity parent, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
+  ShotNewDialog( Context context, MyActivity parent, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
     super( context, app, R.string.ShotNewDialog );
     mParent  = parent;
@@ -677,10 +676,8 @@ class ShotNewDialog extends MyDialog
       // the CAMERA permission is requested when the button is tapped: the parent window handles the request
       // if ( shot_window != null ) {
       //   shot_window.runWithCameraPermission( open_camera );
-      if ( mParent != null && mParent instanceof ShotWindow ) {
-        ((ShotWindow)mParent).runWithCameraPermission( open_camera );
-      } else if ( mParent != null && mParent instanceof DrawingWindow ) 
-        ((DrawingWindow)mParent).runWithCameraPermission( open_camera );
+      if ( mParent != null ) {
+        mParent.runWithCameraPermission( open_camera );
       } else if ( TDandroid.hasCameraPermission( mContext ) ) {
         open_camera.run();
       }

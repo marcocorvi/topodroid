@@ -5405,12 +5405,8 @@ public class DrawingWindow extends ItemDrawer
                   }
                 } );
               } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
-	        if ( ! TDandroid.hasAudioPermission( this ) ) {
-                  // TDToast.makeWarn( R.string.no_feature_audio ); // drop string
-                  // TODO REQUEST_AUDIO_PERMISSION
-                } else {
-                  addAudioPoint( mPid, xs, ys );
-                }
+	        // addAudioPoint() requests the RECORD_AUDIO permission, if necessary
+                addAudioPoint( mPid, xs, ys );
               } else {
                 int point_scale = mScaleBar.getActive() - 2; // mPointScale
     	        if ( mLandscape ) {
@@ -6315,66 +6311,6 @@ public class DrawingWindow extends ItemDrawer
     }, on_no_photo );
   }
 
-  // actions waiting for the CAMERA permission result
-  private Runnable mPendingCameraAction = null;
-  private Runnable mPendingCameraDenied = null;
-
-  /** run an action that needs the CAMERA permission, requesting the permission first if necessary
-   * @param action   action to run once the permission is granted
-   */
-  private void runWithCameraPermission( Runnable action )
-  {
-    runWithCameraPermission( action, null );
-  }
-
-  /** run an action that needs the CAMERA permission, requesting the permission first if necessary
-   * @param action     action to run once the permission is granted
-   * @param on_denied  action to run if the permission is not granted (can be null)
-   */
-  private void runWithCameraPermission( Runnable action, Runnable on_denied )
-  {
-    if ( TDandroid.hasCameraPermission( this ) ) {
-      action.run();
-    } else {
-      mPendingCameraAction = action;
-      mPendingCameraDenied = on_denied;
-      requestPermissions( new String[] { android.Manifest.permission.CAMERA }, TDRequest.REQUEST_CAMERA_PERMISSION );
-    }
-  }
-
-  /** handle the result of a runtime permission request
-   * @param reqCode  request code
-   * @param perms    requested permissions
-   * @param results  grant results
-   */
-  @Override
-  public void onRequestPermissionsResult( int reqCode, String[] perms, int[] results )
-  {
-    super.onRequestPermissionsResult( reqCode, perms, results );
-    if ( reqCode != TDRequest.REQUEST_CAMERA_PERMISSION ) return;
-
-    Runnable action = mPendingCameraAction;
-    Runnable denied = mPendingCameraDenied;
-    mPendingCameraAction = null;
-    mPendingCameraDenied = null;
-
-    if ( results.length > 0 && results[0] == android.content.pm.PackageManager.PERMISSION_GRANTED ) {
-      if ( action != null ) action.run();
-      return;
-    }
-    // not granted (an empty result means the request was interrupted: nothing to tell the user)
-    if ( denied != null ) denied.run();
-    if ( results.length > 0 ) {
-      if ( ! shouldShowRequestPermissionRationale( android.Manifest.permission.CAMERA ) ) {
-        // permanently denied: the system will no longer show the prompt
-        TDToast.makeWarn( R.string.camera_permission_setting );
-        TDandroid.openAppSettings( this );
-      } else {
-        TDToast.makeWarn( R.string.camera_no_permission );
-      }
-    }
-  }
-
   private void doTakePointPhotoGranted( String imagefile, boolean insert, long pid, int type, final Runnable on_no_photo )
   {
     // TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
@@ -6448,17 +6384,14 @@ public class DrawingWindow extends ItemDrawer
    * @param pid    plot ID 
    * @param x      X coord
    * @param y      Y coord
-   * @note called only if the app has AUDIO permission
+   * @note the RECORD_AUDIO permission is requested by AudioDialog when recording starts. Nothing is created
+   *       before the recording is made: the audio point and record are added by stopRecordAudio()
    */
-  private void addAudioPoint( long pid, float x, float y )
+  private void addAudioPoint( final long pid, final float x, final float y )
   {
     // TDLog.v("add Audio Point " + x + " " + y );
     // assert( mLastLinePath == null );
     // mMediaComment = ""; // audio point do not have comment
-    if ( ! TDandroid.hasAudioPermission( this ) ) { // check again
-      TDToast.makeWarn( R.string.no_feature_audio );
-      return;
-    }
     if ( mLandscape ) {
       mMediaManager.setPoint( -y, x );
     } else {
@@ -6467,8 +6400,7 @@ public class DrawingWindow extends ItemDrawer
     long audio_id = mMediaManager.prepareNextAudio( pid, "", MediaInfo.TYPE_PLOT );
     // mMediaId = mApp_mData.nextAudioId( TDInstance.sid, MediaInfo.TYPE_PLOT );
     // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
-    // TODO RECORD AUDIO
-    new AudioDialog( mActivity, this, audio_id, null, pid, MediaInfo.TYPE_PLOT ).show();
+    new AudioDialog( mActivity, DrawingWindow.this, audio_id, null, pid, MediaInfo.TYPE_PLOT ).show();
   }
 
   /** delete an audio record
@@ -8042,13 +7974,9 @@ public class DrawingWindow extends ItemDrawer
                   TDLog.e("Picture without photo");
                 }
               } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
-                if ( ! TDandroid.hasAudioPermission( this ) ) {
-                  // TDToast.makeWarn( R.string.no_feature_audio );
-                  // TODO toast or REQUEST_AUDIO_PERMISSION ?
-                } else {
-                  DrawingAudioPath audio = (DrawingAudioPath)point;
-                  new AudioDialog( mActivity, this, audio.mId, null, mPid, MediaInfo.TYPE_PLOT ).show(); // null DBlock
-                }
+                // playback does not need RECORD_AUDIO: AudioDialog requests it only when recording starts
+                final DrawingAudioPath audio = (DrawingAudioPath)point;
+                new AudioDialog( mActivity, DrawingWindow.this, audio.mId, null, mPid, MediaInfo.TYPE_PLOT ).show(); // null DBlock
               } else if ( BrushManager.isPointSection( point.mPointType ) ) { // open x-section sketch
                 // if ( TDSetting.mFixmeXSection ) {
                   String section = point.getOption(TDString.OPTION_SCRAP);
@@ -8147,7 +8075,7 @@ public class DrawingWindow extends ItemDrawer
           updateReference();
           if ( TDInstance.getDeviceA() == null ) {
             DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
-            (new ShotNewDialog( mActivity, mActivity, mApp, this, last_blk, -1L )).show();
+            (new ShotNewDialog( mActivity, this, mApp, this, last_blk, -1L )).show();
             // (new ShotNewDialog( mActivity, mActivity, mApp, this, null, -1L )).show();
           } else {
             // TDLog.v("Drawing window toggle dowloading");
