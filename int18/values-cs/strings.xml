@@ -2299,6 +2299,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="help_surface_3d">Zobrazení terénu povrchu</string -->
     <string name="help_color_3d">Barevná schémata modelu</string>
     <!-- UNUSED string name="help_frame_3d">Zobrazení referenční mřížky a os</string -->
-    <!-- TODO string name="help_legs">Legs display</string -->
+    <string name="help_legs">Které tahy se mají zobrazit</string>
    
 </resources>
