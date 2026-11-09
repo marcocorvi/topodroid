@@ -607,6 +607,7 @@
     <string name="popup_store">Salva</string>
     <string name="popup_restore">Riprendi</string>
 
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">Cancella tutto</string>
     <string name="popup_erase_point">Cancella punti</string>
     <string name="popup_erase_line">Cancella linee</string>
@@ -619,6 +620,11 @@
     <string name="popup_select_shot">Seleziona tiri</string>
     <string name="popup_select_station">Seleziona caposaldi</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
     <!-- UNUSED string name="popup_cont_none">Nessuno</string -->
     <!-- UNUSED string name="popup_cont_start">Punto inizio</string -->
     <!-- UNUSED string name="popup_cont_end">Punto fine</string -->
@@ -1015,6 +1021,12 @@
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">Solo scrap attivo</string>
     <string name="mode_outline">Solo contorno</string>
     <string name="mode_scale_ref">Scala barra di riferimento</string>

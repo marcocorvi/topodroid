@@ -608,6 +608,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_join">Unirse</string>
     <string name="popup_store">Guardar</string>
     <string name="popup_restore">Restaurar</string>
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
     <string name="popup_erase_line">Borrar líneas</string>
@@ -619,6 +620,11 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_select_shot">Seleccionar tomas</string>
     <string name="popup_select_station">Seleccionar estación</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
      <!-- UNUSED string name="popup_cont_none">None</string -->
     <!-- UNUSED string name="popup_cont_start">Start point</string -->
     <!-- UNUSED string name="popup_cont_end">End point</string -->
@@ -1026,6 +1032,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">Solo el fragmento actual</string>
     <string name="mode_outline">Solo poligonal</string>
     <string name="mode_scale_ref">Barra de referencia de escala</string>

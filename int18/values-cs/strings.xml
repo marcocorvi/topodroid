@@ -595,6 +595,7 @@
     <string name="popup_store">Uložit</string>
     <string name="popup_restore">Obnovit</string>
 
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">Vymazat vše</string>
     <string name="popup_erase_point">Vymazat body</string>
     <string name="popup_erase_line">Vymazat linie</string>
@@ -607,6 +608,11 @@
     <string name="popup_select_shot">Vybrat záměry</string>
     <string name="popup_select_station">Vybrat měřické body</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
     <!-- UNUSED string name="popup_cont_none">None</string -->
     <!-- UNUSED string name="popup_cont_start">Start point</string -->
     <!-- UNUSED string name="popup_cont_end">End point</string -->
@@ -986,6 +992,12 @@
     <!-- UNUSED string name="mode_elevation">Výškový profil</string -->
     <string name="mode_grid">Mřížka</string>
     <string name="mode_fixed">Upevnit ref. body</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">Pouze aktivní dílčí náčrt (scrap)</string>
     <string name="mode_outline">Pouze obrys</string>
     <string name="mode_scale_ref">Měřítko</string>
@@ -1707,6 +1719,7 @@
     <string name="pref_cvwy_angle_title">Práh úhlu pro Cavway</string>
     <string name="pref_cvwy_angle_summary">Práh přesnosti měření Cavway pro úhel</string>
 
+    <!-- TODO string name="pref_plot_screen_title">SKETCH</string -->
     <string name="pref_tool_line_title">LINIE</string>
     <string name="pref_tool_point_title">BODY</string>
     <string name="pref_location_title">POLOHA</string>

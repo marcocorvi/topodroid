@@ -626,6 +626,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_store">Mémoriser</string>
     <string name="popup_restore">Restaurer</string>
 
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">Tout suppr.</string>
     <string name="popup_erase_point">Suppr. points</string>
     <string name="popup_erase_line">Suppr. lignes</string>
@@ -638,6 +639,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_select_shot">Sélectionner les visées</string>
     <string name="popup_select_station">Sélectionner les stations</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
     <!-- UNUSED string name="popup_cont_none">Rien</string -->
     <!-- UNUSED string name="popup_cont_start">Point de départ</string -->
     <!-- UNUSED string name="popup_cont_end">Point d\'arrivée</string -->
@@ -701,6 +707,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="section_name">Commentaires section</string>
     <!-- UNUSED string name="scrap_outline">Contour croquis</string -->
     <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
+    <!-- TODO string name="scrap_index">Scrap: %1$d</string -->
     <string name="section_point_not_allowed">Point de section non autorisé</string>
     <string name="section_line_not_allowed">Ligne de section non autorisée</string>
 
@@ -1049,6 +1056,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">Grille</string>
     <string name="mode_fixed">Références fixes</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">Scrap courant uniquement</string>
     <string name="mode_outline">Bordure ext. uniquement</string>
     <string name="mode_scale_ref">Barre d\'échelle de réf.</string>

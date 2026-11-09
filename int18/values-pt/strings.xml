@@ -576,6 +576,7 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="popup_join">Unir</string>
   <string name="popup_store">Arquivar</string>
   <string name="popup_restore">Resgatar</string>
+    <!-- TODO string name="popup_reverse">Reverse</string -->
   <string name="popup_erase_all">Tudo</string>
   <string name="popup_erase_point">Pontos</string>
   <string name="popup_erase_line">Linhas</string>
@@ -586,6 +587,11 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <string name="popup_select_area">Áreas</string>
   <string name="popup_select_shot">Medidas</string>
   <string name="popup_select_station">Bases</string>
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
   <!-- UNUSED string name="popup_cont_none">Nada</string -->
   <!-- UNUSED string name="popup_cont_start">Ponto inicial</string -->
   <!-- UNUSED string name="popup_cont_end">Ponto final</string -->
@@ -964,6 +970,12 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
   <string name="mode_grid">Grade</string>
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
   <string name="mode_scrap">Somente trecho atual</string>
   <string name="mode_outline">Contorno</string>
   <string name="mode_scale_ref">Escala</string>

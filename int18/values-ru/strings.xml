@@ -610,6 +610,7 @@
     <string name="popup_store">Сохранить</string>
     <string name="popup_restore">Восстановить</string>
 
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">Стереть все</string>
     <string name="popup_erase_point">Стереть точки</string>
     <string name="popup_erase_line">Стереть линии</string>
@@ -622,6 +623,11 @@
     <string name="popup_select_shot">Выбрать замеры</string>
     <string name="popup_select_station">Выбрать пикеты</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
     <!-- UNUSED string name="popup_cont_none">Не соединять</string -->
     <!-- UNUSED string name="popup_cont_start">Начальная точка</string -->
     <!-- UNUSED string name="popup_cont_end">Конечная точка</string -->
@@ -1016,6 +1022,12 @@
     <!-- UNUSED string name="mode_elevation">Превышение</string -->
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">Только текущий абрис</string>
     <string name="mode_outline">Только контур</string>
     <string name="mode_scale_ref">Шкала масштаба</string>

@@ -611,6 +611,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_store">Запази</string>
     <string name="popup_restore">Възстанови</string>
 
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">Изтрий всичко</string>
     <string name="popup_erase_point">Изтрий точки</string>
     <string name="popup_erase_line">Изтрий линии</string>
@@ -623,6 +624,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_select_shot">Избери отсечки</string>
     <string name="popup_select_station">Избери репери</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
     <!-- UNUSED string name="popup_cont_none">Без</string -->
     <!-- UNUSED string name="popup_cont_start">Начална точка</string -->
     <!-- UNUSED string name="popup_cont_end">Крайна точка</string -->
@@ -921,6 +927,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_empty">Празно</string>
     <string name="button_settime">Настроване на време</string>
     <string name="button_surface">Повърхност</string>
+    <!-- TODO string name="button_splay" copyable="all">Splay</string -->
+    <!-- TODO string name="button_scan" copyable="all">Scan</string -->
     <string name="button_no_extend">Без удължаване</string>
     <string name="button_eval">Необработен</string>
     <string name="button_evalg">G</string>
@@ -1020,6 +1028,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">Решетка</string>
     <string name="mode_fixed">Коригиране на референции</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">Само текущ отрязък</string>
     <string name="mode_outline">Само контур</string>
     <string name="mode_scale_ref">Лента за мащаб</string>
