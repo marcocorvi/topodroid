@@ -365,11 +365,10 @@
     <string name="bt_scan_permission_setting">Nastavit oprávnění pro vyhledávání BT?</string>
     <string name="discovery_error">Chyba vyhledávání BT: %1$s</string>
     <string name="depth_format">Hloubka %1$.1f</string>
-    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
-    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
-    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
-    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
-
+    <string name="camera_no_permission">Pro pořízení fotografie je potřeba oprávnění pro fotoaparát</string>
+    <string name="camera_permission_setting">Nastavit oprávnění fotoaparátu?</string>
+    <string name="audio_no_permission">Pro záznam zvuku je potřeba oprávnění AUDIO</string>
+    <string name="audio_permission_setting">Nastavit oprávnění pro záznam zvuku?</string>
     <string name="error_azimuth_required">Je vyžadován azimut</string>
     <string name="error_length_required">Je vyžadována délka</string>
     <string name="error_depth_required">Je vyžadována hloubka</string>
