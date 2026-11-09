@@ -2610,6 +2610,6 @@
     <!-- UNUSED string name="help_surface_3d">Terep</string -->
     <string name="help_color_3d">Színek</string>
     <!-- UNUSED string name="help_frame_3d">Keret</string -->
-    <!-- TODO string name="help_legs">Legs display</string -->
+    <string name="help_legs">Poligonok megjelenítése</string>
 
 </resources>
