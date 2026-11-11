@@ -73,6 +73,8 @@ public class ImportDialogShot extends MyDialog
   private CheckBox mCsvBric;
   private CheckBox mCsvCavway;
 
+  private Button   mBtnSilexGis; // import from a SilexGIS server, only if the server is set
+
   private ImportData mImportData;
 
   public ImportDialogShot( Context context, MainWindow parent, String[] types, int title )
@@ -116,6 +118,11 @@ public class ImportDialogShot extends MyDialog
     // mBtnBack = (Button) findViewById(R.id.button_cancel );
     // mBtnBack.setOnClickListener( this );
     ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
+    mBtnSilexGis = (Button) findViewById( R.id.button_silexgis );
+    if ( SilexGisImportDialog.isAvailable() ) {
+      mBtnSilexGis.setVisibility( View.VISIBLE );
+      mBtnSilexGis.setOnClickListener( this );
+    }
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
@@ -152,6 +159,11 @@ public class ImportDialogShot extends MyDialog
     } 
     if ( v.getId() == R.id.csv_cavway ) { 
       mCsvBric.setChecked( false );
+      return;
+    }
+    if ( v.getId() == R.id.button_silexgis ) {
+      (new SilexGisImportDialog( mContext, mParent )).show();
+      dismiss();
       return;
     }
     Button b = (Button)v;

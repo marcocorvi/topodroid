@@ -19,6 +19,7 @@ import com.topodroid.prefs.TDSetting;
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
+import android.os.AsyncTask;
 
 // import android.content.Intent;
 
@@ -83,6 +84,14 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
   private LinearLayout mLayoutWinkarst;
+  private LinearLayout mLayoutSilexgis;
+
+  private Button mBtnSilexgisTarget;
+  private SilexGisUpload mSilexgisUpload = null;     // upload options, pre-set from the last upload
+  private SilexGisUpload mSilexgisRemembered = null; // target remembered for the survey
+  private boolean mSilexgisLinkFirst = false;        // no link choice remembered yet: it starts from the account's audience
+  private boolean mSilexgisLinksAsked = false;       // the server has been asked the links of the account
+  private int mSilexgisVisibilityStart = -1;         // documents visibility the dialog started on
 
   /** cstr
    * @param context     context
@@ -136,6 +145,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutKml      = (LinearLayout) findViewById( R.id.layout_kml );
     mLayoutShp      = (LinearLayout) findViewById( R.id.layout_shp );
     mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
+    mLayoutSilexgis = (LinearLayout) findViewById( R.id.layout_silexgis );
 
     mBtnCompassSurvey = (Button) findViewById( R.id.compass_prefix_survey );
     mBtnCompassSurvey.setOnClickListener( this );
@@ -224,7 +234,8 @@ public class ExportDialogShot extends MyDialog
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
-    int ppos = TDConst.surveyIndex( pos );
+    // int ppos = TDConst.surveyIndex( pos );
+    int ppos = ( pos >= 0 && pos < mTypes.length )? TDConst.surveyPosition( mTypes[ pos ] ) : -1;
     // TDLog.v( "EXPORT pos " + pos + " ppos " + ppos );
     if ( ppos < 0 ) return;
     mSelected = TDConst.mSurveyExportTypes[ ppos ];
@@ -273,9 +284,18 @@ public class ExportDialogShot extends MyDialog
     //   ((EditText) findViewById( R.id.csurvey_prefix )).setText( mSurvey );
     //   return;
     // }
+    if ( v.getId() == R.id.silexgis_target ) {
+      pickSilexgisTarget();
+      return;
+    }
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       if ( ! setOptions() ) return;
+      if ( mSelectedPos == TDConst.SURVEY_POS_SILEXGIS ) { // the upload needs the server access: without it the access dialog opens first, and this dialog stays
+        Runnable upload = new Runnable() { @Override public void run() { doUploadSilexgis(); } };
+        if ( SilexGisSettingsDialog.ensureConfigured( mContext, upload ) ) upload.run();
+        return;
+      }
       TDLog.v("Survey format selected " + mSelected + " pos " + mSelectedPos + ": " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName  + " prefix " + mExportPrefix );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
@@ -307,6 +327,10 @@ public class ExportDialogShot extends MyDialog
     mLayoutKml.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
     mLayoutWinkarst.setVisibility( View.GONE );
+    mLayoutSilexgis.setVisibility( View.GONE );
+    boolean upload = ( mSelectedPos == TDConst.SURVEY_POS_SILEXGIS );
+    mBtnOk.setText( upload? R.string.button_upload : R.string.button_save );
+    findViewById( R.id.export_share ).setVisibility( upload? View.GONE : View.VISIBLE ); // an upload is not shared
     switch ( mSelectedPos ) { // indices in mSurveyExportTypes
       case TDConst.SURVEY_POS_ZIP: mLayoutZip.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_COMPASS: mLayoutCompass.setVisibility( View.VISIBLE ); break;
@@ -328,6 +352,7 @@ public class ExportDialogShot extends MyDialog
       // case TDConst.SURVEY_POS_GPX: // GPX
       // case TDConst.SURVEY_POS_GEOJSON: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
       case TDConst.SURVEY_POS_SHAPEFILE: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_SILEXGIS: mLayoutSilexgis.setVisibility( View.VISIBLE ); askSilexgisLinks(); break;
     }
   }
 
@@ -552,8 +577,154 @@ public class ExportDialogShot extends MyDialog
           // TDSetting.mShpGeoref = ((CheckBox) findViewById( R.id.shp_georeference )).isChecked();
         }
         break;
+      case TDConst.SURVEY_POS_SILEXGIS: // SilexGIS upload: the switches of this upload (the settings are not changed)
+        if ( mSilexgisUpload == null ) return false;
+        {
+          mSilexgisUpload.withTh     = ((CheckBox) findViewById( R.id.silexgis_with_th )).isChecked();
+          mSilexgisUpload.compile    = ((CheckBox) findViewById( R.id.silexgis_compile )).isChecked();
+          mSilexgisUpload.withSvx    = ((CheckBox) findViewById( R.id.silexgis_with_svx )).isChecked();
+          mSilexgisUpload.withDat    = ((CheckBox) findViewById( R.id.silexgis_with_dat )).isChecked();
+          mSilexgisUpload.withCsv    = ((CheckBox) findViewById( R.id.silexgis_with_csv )).isChecked();
+          mSilexgisUpload.withKml    = ((CheckBox) findViewById( R.id.silexgis_with_kml )).isChecked();
+          mSilexgisUpload.withGpx    = ((CheckBox) findViewById( R.id.silexgis_with_gpx )).isChecked();
+          mSilexgisUpload.withOut    = ((CheckBox) findViewById( R.id.silexgis_with_out )).isChecked();
+          mSilexgisUpload.setLinkChoice( ((Spinner) findViewById( R.id.silexgis_link )).getSelectedItemPosition() );
+          mSilexgisUpload.outputs = ((EditText) findViewById( R.id.silexgis_outputs )).getText().toString().trim(); // empty: the server default
+          int vis = ((Spinner) findViewById( R.id.silexgis_visibility )).getSelectedItemPosition();
+          if ( vis >= 0 && vis < SilexGisUpload.VISIBILITIES.length ) mSilexgisUpload.visibility = SilexGisUpload.VISIBILITIES[ vis ];
+          mSilexgisUpload.visibilityChosen = ( vis != mSilexgisVisibilityStart );
+        }
+        break;
     }
     return true;
+  }
+
+  /** start the SilexGIS upload: remember its options and let the survey window export
+   */
+  private void doUploadSilexgis()
+  {
+    if ( mSilexgisUpload == null ) return;
+    SilexGisExportTask.getStore( mContext ).save( mSurvey, mSilexgisUpload ); // the next upload starts from these
+    mParent.doExport( mSelected, TDConst.getSurveyFilename( TDConst.SURVEY_POS_SILEXGIS, mSurvey ), null, -1L, false, mSurveys, false ); // second = false, shared = false
+    dismiss();
+  }
+
+  /** open the dialog of the cave to upload to - after the access to the server has been set
+   */
+  private void pickSilexgisTarget()
+  {
+    if ( mSilexgisUpload == null ) return;
+    int vis = ((Spinner) findViewById( R.id.silexgis_visibility )).getSelectedItemPosition(); // a new cave starts from the visibility shown
+    if ( vis >= 0 && vis < SilexGisUpload.VISIBILITIES.length ) mSilexgisUpload.visibility = SilexGisUpload.VISIBILITIES[ vis ];
+    Runnable pick = new Runnable() {
+      @Override public void run() {
+        askSilexgisLinks(); // the access may have been set just now
+        (new SilexGisCaveDialog( mContext, SilexGisExportTask.surveyTitle( mSurvey ), mSilexgisUpload, mSilexgisRemembered,
+          new SilexGisCaveDialog.Listener() {
+            @Override public void onTarget( SilexGisUpload target ) {
+              mSilexgisUpload.targetFromJson( target.targetToJson() );
+              mBtnSilexgisTarget.setText( SilexGisExportTask.targetText( mContext.getResources(), mSilexgisUpload ) );
+            }
+            @Override public void onForget() {
+              SilexGisExportTask.getStore( mContext ).forgetTarget( mSurvey );
+              mSilexgisRemembered = null;
+              if ( mSilexgisUpload.target == SilexGisUpload.TARGET_CAVE_SURVEY || mSilexgisUpload.target == SilexGisUpload.TARGET_CAVE ) mSilexgisUpload.setAuto();
+              mBtnSilexgisTarget.setText( SilexGisExportTask.targetText( mContext.getResources(), mSilexgisUpload ) );
+            }
+          } )).show();
+      }
+    };
+    if ( SilexGisSettingsDialog.ensureConfigured( mContext, pick ) ) pick.run();
+  }
+
+  /** show the link choice, unless the server makes no links for the account
+   */
+  private void showSilexgisLink()
+  {
+    int visible = ( mSilexgisUpload != null && mSilexgisUpload.linksOff )? View.GONE : View.VISIBLE;
+    findViewById( R.id.silexgis_link_label ).setVisibility( visible );
+    findViewById( R.id.silexgis_link ).setVisibility( visible );
+  }
+
+  /** ask the server, once, what it says of the links of the account: whether it makes them, and their audience
+   */
+  private void askSilexgisLinks()
+  {
+    if ( mSilexgisLinksAsked || mSilexgisUpload == null ) return;
+    SilexGisClient client = new SilexGisClient( TDSetting.mSilexGisUrl, TDSetting.mSilexGisKey );
+    if ( ! client.isConfigured() || SilexGisClient.checkBaseUrl( client.getBaseUrl() ) != SilexGisClient.URL_OK
+      || ! SilexGisClient.checkKey( TDSetting.mSilexGisKey ) ) return; // not before the access is set
+    mSilexgisLinksAsked = true;
+    (new LinksTask( this, client )).executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR );
+  }
+
+  /** the server said what it does with the links of the account
+   * @param caps   capabilities of the server
+   */
+  private void onSilexgisLinks( org.json.JSONObject caps )
+  {
+    SilexGisExportTask.getStore( mContext ).saveLinks( caps );
+    if ( mSilexgisUpload == null || ! isShowing() ) return;
+    Spinner link = (Spinner) findViewById( R.id.silexgis_link );
+    boolean untouched = ( link.getSelectedItemPosition() == mSilexgisUpload.linkChoice() ); // a choice the user made is kept
+    mSilexgisUpload.presetLinks( SilexGisUploader.publicLinks( caps ), mSilexgisLinkFirst && untouched );
+    if ( untouched ) link.setSelection( mSilexgisUpload.linkChoice() );
+    showSilexgisLink();
+  }
+
+  /** capabilities of the server off the UI thread
+   */
+  private static class LinksTask extends AsyncTask< Void, Void, SilexGisClient.Result >
+  {
+    private final ExportDialogShot mDialog;
+    private final SilexGisClient mClient;
+
+    LinksTask( ExportDialogShot dialog, SilexGisClient client )
+    {
+      mDialog = dialog;
+      mClient = client;
+    }
+
+    @Override
+    protected SilexGisClient.Result doInBackground( Void... args ) { return mClient.capabilities(); }
+
+    @Override
+    protected void onPostExecute( SilexGisClient.Result res )
+    {
+      if ( res != null && res.isOk() && res.json != null ) mDialog.onSilexgisLinks( res.json ); // else the choice stays as it is
+    }
+  }
+
+  /** initialize the SilexGIS options: the last upload, the settings the first time
+   */
+  private void initSilexgisOptions()
+  {
+    mBtnSilexgisTarget = (Button) findViewById( R.id.silexgis_target );
+    mBtnSilexgisTarget.setOnClickListener( this );
+    if ( ! mWithName ) return; // only the current survey is uploaded
+    mSilexgisUpload     = SilexGisExportTask.loadUpload( mContext, mSurvey );
+    mSilexgisRemembered = SilexGisExportTask.getStore( mContext ).loadTarget( mSurvey );
+    mBtnSilexgisTarget.setText( SilexGisExportTask.targetText( mContext.getResources(), mSilexgisUpload ) );
+    ((CheckBox) findViewById( R.id.silexgis_with_th )).setChecked( mSilexgisUpload.withTh );
+    ((CheckBox) findViewById( R.id.silexgis_compile )).setChecked( mSilexgisUpload.compile );
+    ((CheckBox) findViewById( R.id.silexgis_with_svx )).setChecked( mSilexgisUpload.withSvx );
+    ((CheckBox) findViewById( R.id.silexgis_with_dat )).setChecked( mSilexgisUpload.withDat );
+    ((CheckBox) findViewById( R.id.silexgis_with_csv )).setChecked( mSilexgisUpload.withCsv );
+    ((CheckBox) findViewById( R.id.silexgis_with_kml )).setChecked( mSilexgisUpload.withKml );
+    ((CheckBox) findViewById( R.id.silexgis_with_gpx )).setChecked( mSilexgisUpload.withGpx );
+    ((CheckBox) findViewById( R.id.silexgis_with_out )).setChecked( mSilexgisUpload.withOut );
+    Spinner link = (Spinner) findViewById( R.id.silexgis_link );
+    link.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisLinkChoice ) ) );
+    link.setSelection( mSilexgisUpload.linkChoice() );
+    mSilexgisLinkFirst = ! SilexGisExportTask.getStore( mContext ).hasLinkChoice();
+    showSilexgisLink();
+    ((EditText) findViewById( R.id.silexgis_outputs )).setText( mSilexgisUpload.outputs );
+    Spinner vis = (Spinner) findViewById( R.id.silexgis_visibility );
+    vis.setAdapter( new ArrayAdapter<>( mContext, R.layout.menu, mContext.getResources().getStringArray( R.array.silexgisVisibility ) ) );
+    mSilexgisVisibilityStart = SilexGisExportTask.visibilityIndex( mSilexgisUpload.visibility );
+    vis.setSelection( mSilexgisVisibilityStart );
+    findViewById( R.id.silexgis_advanced ).setVisibility( TDLevel.overNormal ? View.VISIBLE : View.GONE );
+    findViewById( R.id.silexgis_with_out ).setVisibility( TDLevel.overAdvanced ? View.VISIBLE : View.GONE );
   }
 
   /** initialize the options widgets
@@ -631,6 +802,8 @@ public class ExportDialogShot extends MyDialog
     if ( mWithName && ! TDString.isNullOrEmpty( mExportPrefix ) ) {
       ((EditText)findViewById( R.id.vtopo_name )).setText( mExportPrefix );
     }
+
+    initSilexgisOptions();
   }
 
   // @Override

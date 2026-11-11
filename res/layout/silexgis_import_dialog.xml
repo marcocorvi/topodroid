@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/root_view"
+  style="@style/root_view"
+  >
+  <TextView android:id="@+id/title"
+    style="@style/text_title"
+  />
+  <LinearLayout
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@id/title"
+    >
+
+    <EditText android:id="@+id/silexgis_filter" 
+      style="@style/edit_text"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:hint="@string/silexgis_import_filter_hint"
+        android:importantForAutofill="no"
+      />
+
+    <TextView android:id="@+id/silexgis_status" 
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+      />
+
+    <ListView android:id="@+id/silexgis_list" 
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="1"
+        android:minHeight="100dp"
+      />
+
+    <ProgressBar android:id="@+id/silexgis_progress"
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="@dimen/marginv"
+      android:visibility="gone"
+    />
+
+    <LinearLayout android:id="@+id/help"
+      style="@style/help_layout"
+      >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+        android:layout_marginRight="@dimen/marginh"
+      />
+        <Button android:id="@+id/button_cancel"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+        />
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/button_th"
+          style="@style/button_default"
+          android:text="@string/silexgis_import_th"
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_ok"
+          style="@style/button_default"
+          android:text="@string/button_import"
+        />
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+
+</RelativeLayout>

@@ -3515,6 +3515,11 @@ public class TopoDroidApp extends Application
   {
     // TDLog.v( "APP async-export - index " + export_info.index + " name " + export_info.name );
     if ( export_info.index < 0 ) return false; // extra safety
+    if ( export_info.index == TDConst.SURVEY_FORMAT_SILEXGIS ) { // UPLOAD to a SilexGIS server, always in background
+      if ( mSurveyWindow == null ) return false; // the upload shows its progress and its result over the survey window
+      SilexGisExportTask.start( mSurveyWindow, this );
+      return true;
+    }
     if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       if ( in_foreground ) {

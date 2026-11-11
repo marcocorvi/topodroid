@@ -56,6 +56,7 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.mag.WorldMagneticModel;
 
 // import java.io.File;
+import java.io.File;
 import java.io.FileInputStream;
 // import java.io.InputStreamReader;
 // import java.io.FileFilter;
@@ -576,13 +577,38 @@ public class MainWindow extends Activity
   //   // FIXME SYNC updateDisplay();
   // }
 
-  public void importZipFile( String filename )
+  /** import a survey from a ZIP file, downloaded from SilexGIS
+   * @param file   ZIP file
+   * @note the file is imported as a ZIP picked by the user, with its uri: Archiver.unArchive( app, filename, force ), which
+   *       ImportZipTask runs without a uri, does not set the survey paths and fails to unpack the SQL of a survey.
+   *       The import runs off the UI thread, with its progress and its messages; a file that is refused is deleted
+   */
+  void importZipFile( File file )
   {
-    if ( ! filename.toLowerCase( Locale.getDefault() ).endsWith(".zip") ) return;
+    if ( ! file.getName().toLowerCase( Locale.getDefault() ).endsWith(".zip") ) return;
     setTitleImport();
-    new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
+    new ImportZipTask( this, Uri.fromFile( file ), false ).setCheckManifest().setDeleteIfFail( file ).execute( file.getName() );
   }
  
+  /** import a survey from a Therion file in a folder of the app (downloaded from SilexGIS)
+   * @param file   Therion file
+   */
+  void importTherionFile( File file )
+  {
+    String filename = file.getName();
+    int pos = filename.lastIndexOf( "." );
+    String name = TDString.spacesToUnderscore( ( pos > 0 )? filename.substring( 0, pos ) : filename );
+    try {
+      ParcelFileDescriptor pfd = ParcelFileDescriptor.open( file, ParcelFileDescriptor.MODE_READ_ONLY );
+      setTitleImport();
+      new ImportTherionTask( this, pfd, mImportData ).execute( name, name, file.getPath() ); // the task dups the descriptor
+      TDsafUri.closeFileDescriptor( pfd );
+    } catch ( IOException e ) {
+      TDLog.e( "Main import Therion file " + e.getMessage() );
+      TDToast.makeBad( String.format( getResources().getString( R.string.silexgis_file_error ), e.getMessage() ) );
+    }
+  }
+
   /** import survey data from a URI
    * @param uri    input stream uri
    * @param name   file name
@@ -1625,6 +1651,35 @@ public class MainWindow extends Activity
     return filename;
   }
 
+  /** show why the manifest of a ZIP archive has been refused
+   * @param manifest_ok   result of the manifest check (negative)
+   */
+  public void toastBadManifest( int manifest_ok )
+  {
+    int bad = -1;
+    switch ( -manifest_ok ) {
+      case  1: bad = R.string.bad_manifest_zip;      break;
+      case  2: bad = R.string.bad_manifest_td;       break;
+      case  3: bad = R.string.bad_manifest_db_old;   break;
+      case  4: bad = R.string.bad_manifest_db_new;   break;
+      // case  5: bad = R.string.bad_manifest_name;     break;
+      case  6: bad = R.string.bad_manifest_present;  break;
+      case  7: bad = R.string.bad_manifest_db;       break;
+      case  8: bad = R.string.bad_manifest_sql;      break;
+      case  9: bad = R.string.bad_manifest_number;   break;
+      case 10: bad = R.string.bad_manifest_manifest; break;
+      case 11: bad = R.string.bad_manifest_file;     break;
+      case 12: bad = R.string.bad_manifest_error;    break;
+      case 13: bad = R.string.bad_manifest_missing;  break;
+      case 14: bad = R.string.bad_manifest_other;    break;
+      default:
+        TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
+    }
+    if ( bad > 0 ) {
+      TDToast.makeBad( bad );
+    }
+  }
+
   /** import one zip file
    * @param uri   zip uri
    * @param toast wheter to toast
@@ -1659,28 +1714,7 @@ public class MainWindow extends Activity
       return ret;
     } else {
       TDLog.e( "Main 1-zip manifest " + manifest_ok );
-      int bad = -1;
-      switch ( -manifest_ok ) {
-        case  1: bad = R.string.bad_manifest_zip;      break;
-        case  2: bad = R.string.bad_manifest_td;       break;
-        case  3: bad = R.string.bad_manifest_db_old;   break;
-        case  4: bad = R.string.bad_manifest_db_new;   break;
-        // case  5: bad = R.string.bad_manifest_name;     break;
-        case  6: bad = R.string.bad_manifest_present;  break;
-        case  7: bad = R.string.bad_manifest_db;       break;
-        case  8: bad = R.string.bad_manifest_sql;      break;
-        case  9: bad = R.string.bad_manifest_number;   break;
-        case 10: bad = R.string.bad_manifest_manifest; break;
-        case 11: bad = R.string.bad_manifest_file;     break;
-        case 12: bad = R.string.bad_manifest_error;    break;
-        case 13: bad = R.string.bad_manifest_missing;  break;
-        case 14: bad = R.string.bad_manifest_other;    break;
-        default:
-          if ( toast ) TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
-      }
-      if ( bad > 0 && toast ) {
-        TDToast.makeBad( bad );
-      }
+      if ( toast ) toastBadManifest( manifest_ok );
       return false;
     }
   }

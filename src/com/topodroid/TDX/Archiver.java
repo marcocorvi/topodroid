@@ -120,6 +120,10 @@ public class Archiver
     data = new byte[ BUF_SIZE ];
   }
 
+  /** @return the pathname of the zip written by the last archiveSurvey to the default zip file (null if none)
+   */
+  String getZipname() { return mZipname; }
+
   /** add an entry to the ZIP archive
    * @param zos       zip output stream
    * @param name      zip-entry file

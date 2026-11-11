@@ -32,6 +32,12 @@
       android:layout_marginTop="@dimen/marginvbig"
       android:layout_marginBottom="@dimen/marginvbig"
       >
+      <Button android:id="@+id/button_silexgis"
+        style="@style/button_default"
+        android:layout_width="match_parent"
+        android:text="@string/silexgis_import_button"
+        android:visibility="gone"
+      />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_compass"
