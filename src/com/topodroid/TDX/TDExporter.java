@@ -22,6 +22,9 @@
  *   Track file (OziExplorer)
  *   DXF
  *   CSV
+ *
+ * mod HB HBTc Therion comment
+ *
  */
 package com.topodroid.TDX;
 
@@ -1247,7 +1250,8 @@ public class TDExporter
    */
   static private void writeThLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
-    pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
+    // pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
+    pw.format(Locale.US, "%.2f %.1f %.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua ); // HBTc no lf
     leg.reset();
   }
 
@@ -1582,12 +1586,23 @@ public class TDExporter
             }
 
             writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
-            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            //pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            pw.format(Locale.US, "%.2f %.1f %.1f", item.mLength * ul, item.mBearing * ua, item.mClino * ua ); // HBTc no lf
+            if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc
+              pw.format("  #\"%s\"\n", item.mComment );
+            } else {
+              pw.format("\n");
+            }
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               writeThLeg( pw, leg, ul, ua );
+              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) { // HBTc
+                pw.format("  #\"%s\"\n", ref_item.mComment );
+              } else {
+                pw.format("\n");
+              }
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -1603,9 +1618,9 @@ public class TDExporter
               }
               ref_item = null; 
             }
-            if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("  # %s\n", item.mComment );
-            }
+            //if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc no comment before
+            //  pw.format("  # %s\n", item.mComment );
+            //}
             int tmp = writeSplayExtend( pw, item, splay_extend, extend );
             if ( tmp == 0 ) {
               splay_extend = false;
@@ -1616,10 +1631,21 @@ public class TDExporter
             }
             
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
-            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            // pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            pw.format(Locale.US, "%.2f %.1f %.1f", item.mLength * ul, item.mBearing * ua, item.mClino * ua ); // HBTc
+            if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc
+              pw.format("  #\"%s\"\n", item.mComment );
+            } else {
+              pw.format("\n");
+            }
           } else { // with both FROM and TO stations
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeThLeg( pw, leg, ul, ua );
+              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) { // HBTc
+                pw.format("  #\"%s\"\n", ref_item.mComment );
+              } else {
+                pw.format("\n");
+              }
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -1665,7 +1691,7 @@ public class TDExporter
               //   extend_ratio = 100;
               //   pw.format("    extend %d\n", extend_ratio );
               // }
-	      splay_extend = true;
+	          splay_extend = true;
             } else {
 
             }
@@ -1680,9 +1706,9 @@ public class TDExporter
             //   pw.format(therion_flags_duplicate);
             //   duplicate = true;
             }
-            if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("  # %s\n", item.mComment );
-            }
+            //if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc no comment before
+            //  pw.format("  # %s\n", item.mComment );
+            //}
             writeThStations( pw, from, to, item.isCommented() );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
@@ -1691,6 +1717,11 @@ public class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeThLeg( pw, leg, ul, ua );
+        if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) { // HBTc
+          pw.format("  #\"%s\"\n", ref_item.mComment );
+        } else {
+          pw.format("\n");
+        }
         if ( duplicate ) {
           pw.format(therion_flags_not_duplicate);
           // duplicate = false;

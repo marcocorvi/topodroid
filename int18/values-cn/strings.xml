@@ -554,6 +554,7 @@
     <string name="menu_options">设定</string>
     <string name="menu_overview">概览</string>
     <string name="menu_packets">数据包</string>
+    <!-- TODO string name="menu_calib_auto" copyable="pt">AUTO-CALIB</string -->
     <!-- UNUSED string name="menu_pair">配对</string -->
     <string name="menu_palette">调色板</string>
     <string name="menu_photo">照片</string>
@@ -613,6 +614,7 @@
     <string name="popup_store">存储</string>
     <string name="popup_restore">重置</string>
 
+    <!-- TODO string name="popup_reverse">Reverse</string -->
     <string name="popup_erase_all">擦除全部</string>
     <string name="popup_erase_point">擦除点</string>
     <string name="popup_erase_line">擦除线</string>
@@ -625,6 +627,11 @@
     <string name="popup_select_shot">选择测线</string>
     <string name="popup_select_station">选择测点</string>
 
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
     <!-- UNUSED string name="popup_cont_none">无</string -->
     <!-- UNUSED string name="popup_cont_start">起始点</string -->
     <!-- UNUSED string name="popup_cont_end">结束点</string -->
@@ -1021,6 +1028,12 @@
     <!-- UNUSED string name="mode_elevation">Elevation</string -->
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">修复refs文件</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
     <string name="mode_scrap">只有当前scrap</string>
     <string name="mode_outline">只显示轮廓</string>
     <string name="mode_scale_ref">比例尺参考</string>

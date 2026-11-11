@@ -371,18 +371,18 @@
     <string name="location_start_fine">Начинаю уточнение позиции</string>
     <string name="location_enabled">Убедитесь, что функция МЕСТОПОЛОЖЕНИЕ включена</string>
     <string name="location_no_permission">Нет разрешения на доступ к МЕСТОПОЛОЖЕНИЮ</string>
-    <!-- TODO string name="location_permission_setting">Set LOCATION permision ?</string -->
-    <!-- TODO string name="no_gps_hardware">No GPS hardware</string -->
+    <string name="location_permission_setting">Предоставить разрешение на доступ к местоположению?</string>
+    <string name="no_gps_hardware">Отсутствует модуль GPS</string>
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
-    <!-- TODO string name="bt_scan_in_progress">BT scan in progress. Wait &#8230;</string -->
-    <!-- TODO string name="bt_scan_no_permission">BT scan needs a permission</string -->
-    <!-- TODO string name="bt_scan_permission_setting">Set BT scan permission ?</string -->
+    <string name="bt_scan_in_progress">Выполняется сканирование BT. Обождите &#8230;</string>
+    <string name="bt_scan_no_permission">Для сканирования Bluetooth требуется разрешение</string>
+    <string name="bt_scan_permission_setting">Установить разрешение на сканирование Bluetooth?</string>
     <string name="discovery_error">Ошибка обнаружения BT: %1$s</string>
     <string name="depth_format">Глубина %1$.1f</string>
-    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
-    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
-    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
-    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
+    <string name="camera_no_permission">Для фотосъемки требуется разрешение.</string>
+    <string name="camera_permission_setting">Предоставить разрешение на использование камеры?</string>
+    <string name="audio_no_permission">Для записи звука требуется разрешение на доступ к аудио</string>
+    <string name="audio_permission_setting">Предоставить разрешение на доступ к аудио?</string>
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
@@ -610,6 +610,7 @@
     <string name="popup_store">Сохранить</string>
     <string name="popup_restore">Восстановить</string>
 
+    <string name="popup_reverse">Обратный</string>
     <string name="popup_erase_all">Стереть все</string>
     <string name="popup_erase_point">Стереть точки</string>
     <string name="popup_erase_line">Стереть линии</string>
@@ -622,6 +623,11 @@
     <string name="popup_select_shot">Выбрать замеры</string>
     <string name="popup_select_station">Выбрать пикеты</string>
 
+    <string name="popup_color_none">Цвет по умолчанию</string>
+    <string name="popup_color_survey">Цвет по съёмке</string>
+    <string name="popup_color_depth">Цвет по глубине</string>
+    <string name="popup_color_surface">По глубине от поверхности</string>
+    <string name="popup_color_distance">По расстоянию на поверхности</string>
     <!-- UNUSED string name="popup_cont_none">Не соединять</string -->
     <!-- UNUSED string name="popup_cont_start">Начальная точка</string -->
     <!-- UNUSED string name="popup_cont_end">Конечная точка</string -->
@@ -1016,6 +1022,12 @@
     <!-- UNUSED string name="mode_elevation">Превышение</string -->
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
+    <string name="mode_reference">Относительный</string>
+    <string name="mode_axes">Только оси</string>
+    <string name="mode_names">Названия</string>
+    <string name="mode_endpoints">Окончания</string>
+    <string name="mode_surface">Поверхность</string>
+    <string name="mode_photo">Фото</string>
     <string name="mode_scrap">Только текущий абрис</string>
     <string name="mode_outline">Только контур</string>
     <string name="mode_scale_ref">Шкала масштаба</string>
@@ -2577,6 +2589,6 @@
     <!-- UNUSED string name="help_surface_3d">Поверхность</string -->
     <string name="help_color_3d">Цвета</string>
     <!-- UNUSED string name="help_frame_3d">Рамка</string -->
-    <!-- TODO string name="help_legs">Legs display</string -->
+    <string name="help_legs">Показ замеров</string>
 
 </resources>

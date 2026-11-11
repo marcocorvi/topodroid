@@ -570,6 +570,7 @@
   <string name="popup_join">Verbinden</string>
   <string name="popup_store">Speichern</string>
   <string name="popup_restore">Laden</string>
+    <!-- TODO string name="popup_reverse">Reverse</string -->
   <string name="popup_erase_all">Alles löschen</string>
   <string name="popup_erase_point">Punkte löschen</string>
   <string name="popup_erase_line">Linien löschen</string>
@@ -580,6 +581,11 @@
   <string name="popup_select_area">Flächen auswählen</string>
   <string name="popup_select_shot">Messzügen auswählen</string>
   <string name="popup_select_station">Messpunkte auswählen</string>
+    <!-- TODO string name="popup_color_none">Default color</string -->
+    <!-- TODO string name="popup_color_survey">Color by survey</string -->
+    <!-- TODO string name="popup_color_depth">Color by depth</string -->
+    <!-- TODO string name="popup_color_surface">By surface-depth</string -->
+    <!-- TODO string name="popup_color_distance">By surface-distance</string -->
   <!-- UNUSED string name="popup_cont_none">Keine</string -->
   <!-- UNUSED string name="popup_cont_start">Nur am Startpunkt</string -->
   <!-- UNUSED string name="popup_cont_end">nur am Endpunkt</string -->
@@ -962,6 +968,12 @@
   <!-- UNUSED string name="mode_elevation">Elevation</string -->
   <string name="mode_grid">Gitter</string>
   <string name="mode_fixed">Fester Rahmen</string>
+    <!-- TODO string name="mode_reference">Reference</string -->
+    <!-- TODO string name="mode_axes">Axes only</string -->
+    <!-- TODO string name="mode_names">Names</string -->
+    <!-- TODO string name="mode_endpoints">Endpoints</string -->
+    <!-- TODO string name="mode_surface">Surface</string -->
+    <!-- TODO string name="mode_photo">Photos</string -->
   <string name="mode_scrap">Nur aktuelle Skizze</string>
   <string name="mode_outline">Nur Umriss</string>
   <string name="mode_scale_ref">Massstab</string>

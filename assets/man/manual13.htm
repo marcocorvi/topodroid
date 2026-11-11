@@ -419,7 +419,7 @@ Survey data can be exported as shapefile.
 There is a shapefile for the stations and one for the shots (both legs and splays).
 If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
 Data are corrected with the magnetic declination.
-Each shapefile consists of three files: the data file, with extension ".shp", the index file, ".shx", and the attributes file, ".dbf".
+Each shapefile consists of four files: the data file, with extension ".shp", the index file, ".shx", the attributes file, ".dbf", and a file specifying the character encoding, ".cpg".
 If the georeferenced station coordinates are only geographic WGS84 or are converted to UTM, each shapefile has also a ".prj" file.
 The files are zip-compressed and the zip is saved with extension ".shz".
 <br><p>
@@ -622,7 +622,7 @@ Settings:<ul style="margin-top=0">
 
 <b id="shp2">Shapefile</b> ".shp"<br>
 Sketches can be exported as <i>shapefile</i>, with stations, shots, and lines.
-Each shapefile consists of three files: the data file, with extension ".shp", the index file, ".shx", and the attributes file, ".dbf".
+Each shapefile consists of four files: the data file, with extension ".shp", the index file, ".shx", the attributes file, ".dbf", and a file specifying the character encoding, ".cpg".
 If the georeferenced station coordinates are only geographic WGS84 or are converted to UTM, each shapefile has also a ".prj" file.
 The files comprising the <i>shapefile</i> export are zip-compressed and the zip file is saved in the <i>out</i> folder with extension ".shz".<br><p>
 

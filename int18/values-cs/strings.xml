@@ -365,11 +365,10 @@
     <string name="bt_scan_permission_setting">Nastavit oprávnění pro vyhledávání BT?</string>
     <string name="discovery_error">Chyba vyhledávání BT: %1$s</string>
     <string name="depth_format">Hloubka %1$.1f</string>
-    <!-- TODO string name="camera_no_permission">CAMERA permission needed to take photo</string -->
-    <!-- TODO string name="camera_permission_setting">Set CAMERA permission ?</string -->
-    <!-- TODO string name="audio_no_permission">AUDIO permission needed to record audio</string -->
-    <!-- TODO string name="audio_permission_setting">Set AUDIO permission ?</string -->
-
+    <string name="camera_no_permission">Pro pořízení fotografie je potřeba oprávnění pro fotoaparát</string>
+    <string name="camera_permission_setting">Nastavit oprávnění fotoaparátu?</string>
+    <string name="audio_no_permission">Pro záznam zvuku je potřeba oprávnění AUDIO</string>
+    <string name="audio_permission_setting">Nastavit oprávnění pro záznam zvuku?</string>
     <string name="error_azimuth_required">Je vyžadován azimut</string>
     <string name="error_length_required">Je vyžadována délka</string>
     <string name="error_depth_required">Je vyžadována hloubka</string>
@@ -596,6 +595,7 @@
     <string name="popup_store">Uložit</string>
     <string name="popup_restore">Obnovit</string>
 
+    <string name="popup_reverse">Obrátit směr</string>
     <string name="popup_erase_all">Vymazat vše</string>
     <string name="popup_erase_point">Vymazat body</string>
     <string name="popup_erase_line">Vymazat linie</string>
@@ -608,6 +608,11 @@
     <string name="popup_select_shot">Vybrat záměry</string>
     <string name="popup_select_station">Vybrat měřické body</string>
 
+    <string name="popup_color_none">Výchozí barva</string>
+    <string name="popup_color_survey">Barva podle zaměření</string>
+    <string name="popup_color_depth">Barva podle hloubky</string>
+    <string name="popup_color_surface">Podle hloubky od povrchu</string>
+    <string name="popup_color_distance">Podle vzdálenosti od povrchu</string>
     <!-- UNUSED string name="popup_cont_none">None</string -->
     <!-- UNUSED string name="popup_cont_start">Start point</string -->
     <!-- UNUSED string name="popup_cont_end">End point</string -->
@@ -987,6 +992,12 @@
     <!-- UNUSED string name="mode_elevation">Výškový profil</string -->
     <string name="mode_grid">Mřížka</string>
     <string name="mode_fixed">Upevnit ref. body</string>
+    <string name="mode_reference">Referenční body</string>
+    <string name="mode_axes">Pouze osy</string>
+    <string name="mode_names">Názvy</string>
+    <string name="mode_endpoints">Koncové body</string>
+    <string name="mode_surface">Povrch</string>
+    <string name="mode_photo">Fotografie</string>
     <string name="mode_scrap">Pouze aktivní dílčí náčrt (scrap)</string>
     <string name="mode_outline">Pouze obrys</string>
     <string name="mode_scale_ref">Měřítko</string>
@@ -1710,6 +1721,7 @@
     <string name="pref_cvwy_angle_title">Práh úhlu pro Cavway</string>
     <string name="pref_cvwy_angle_summary">Práh přesnosti měření Cavway pro úhel</string>
 
+<string name="pref_plot_screen_title">NÁČRT</string>
     <string name="pref_tool_line_title">LINIE</string>
     <string name="pref_tool_point_title">BODY</string>
     <string name="pref_location_title">POLOHA</string>
@@ -2302,6 +2314,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="help_surface_3d">Zobrazení terénu povrchu</string -->
     <string name="help_color_3d">Barevná schémata modelu</string>
     <!-- UNUSED string name="help_frame_3d">Zobrazení referenční mřížky a os</string -->
-    <!-- TODO string name="help_legs">Legs display</string -->
+    <string name="help_legs">Které tahy se mají zobrazit</string>
    
 </resources>
