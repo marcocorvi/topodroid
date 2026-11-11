@@ -1521,6 +1521,8 @@
 
   <string name="pref_bulk_export_title">Пакетный экспорт</string>
   <string name="pref_bulk_export_summary">Экспорт данных всех съемок в пакетном режиме</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
   <string name="pref_export_plot_summary">Формат по умолчанию для экспорта абрисов</string>
   <string name="pref_export_shots_title">Формат экспорта съёмки</string>

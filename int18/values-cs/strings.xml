@@ -1472,6 +1472,8 @@
 
     <string name="pref_bulk_export_title">Hromadné operace</string>
     <string name="pref_bulk_export_summary">Hromadné operace s měřeními</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
     <string name="pref_export_plot_title">Formát exportu náčrtu</string>
     <string name="pref_export_plot_summary">Výchozí formát pro export náčrtů</string>
     <string name="pref_export_shots_title">Formát exportu dat</string>

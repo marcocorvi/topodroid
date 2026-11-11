@@ -1528,6 +1528,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="pref_bulk_export_title">Exportación masiva de datos</string>
  <string name="pref_bulk_export_summary">Exportación masiva de todas las topografías</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
   <string name="pref_export_plot_title">Formato de exportación de croquis</string>
   <string name="pref_export_plot_summary">Formato de exportación de croquis predeterminado</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>

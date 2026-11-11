@@ -1436,6 +1436,8 @@ On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this wi
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
   <string name="pref_bulk_export_title">Exportação de dados brutos</string>
   <string name="pref_bulk_export_summary">Exportação de dados brutos de todas as topos</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
   <string name="pref_export_plot_title">Form export croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
   <string name="pref_export_shots_title">Form export dados</string>

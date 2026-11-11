@@ -1435,6 +1435,8 @@
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
   <string name="pref_bulk_export_title">Mehrfachexport</string>
   <string name="pref_bulk_export_summary">Mehrfachexport von allen Vermessungen</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
   <string name="pref_export_plot_title">Exportformat für Skizzen</string>
   <string name="pref_export_plot_summary">Standardexportformat für Skizzen</string>
   <string name="pref_export_shots_title">Exportformat für Daten</string>

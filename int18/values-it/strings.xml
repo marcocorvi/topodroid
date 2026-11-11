@@ -1524,6 +1524,8 @@
 
   <string name="pref_bulk_export_title">Esportazione blocco di dati</string>
   <string name="pref_bulk_export_summary">Esportazione blocco dati di tutti i rilievi</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
   <string name="pref_export_plot_title">Formato export schizzi</string>
   <string name="pref_export_plot_summary">Formato export schizzi di default</string>
   <string name="pref_export_shots_title">Formato export dati</string>

@@ -1559,6 +1559,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_bulk_export_title">Export groupé de données</string>
   <string name="pref_bulk_export_summary">Export groupé de tous les relevés</string>
+  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
+  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
     <string name="pref_export_plot_title">Format d\'export dessin</string>
     <string name="pref_export_plot_summary">Format par défaut d\'export dessin </string>
     <string name="pref_export_shots_title">Format d\'export données</string>
