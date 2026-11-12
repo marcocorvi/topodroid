@@ -1246,16 +1246,16 @@ public class TopoDroidApp extends Application
     }
 
     // TDLog.v("do Bluetooth Button");
-    if ( isDeviceOperationBusyToast( ) ) return; // MM SWITCH
-	boolean test_multi = DataDownloader.MM || ! TDSetting.isConnectionModeMulti();
+    if ( isDeviceOperationBusyToast( ) ) {
+      TDLog.v("device operation busy toast");
+      return; // MM SWITCH
+    }
+    boolean test_multi = /* DataDownloader.MM || */ ! TDSetting.isConnectionModeMulti();
     if ( TDLevel.overAdvanced ) {
-      if ( TDInstance.isDeviceCavway() ) { // CAVWAY
-        if ( TDInstance.hasDeviceRemoteControl() && test_multi ) { // MM does not have test on isConnectionMulti
+      if ( TDInstance.isDeviceCavway() || TDInstance.isDeviceX310() || TDInstance.isDeviceXBLE() ) { // CAVWAY DISTOX310 DISTOXBLE - hasDeviceRemoteControl
+        if ( test_multi ) { // MM does not have test on isConnectionMulti
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
-          return;
         }
-      } else if ( DataDownloader.MM && TDInstance.isDeviceXBLE() ) { // MM inserted
-        CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
         return; 
       } else if ( TDInstance.isDeviceBric() ) {
         // TDLog.v( "bt button over advanced : BRIC");
@@ -1263,29 +1263,17 @@ public class TopoDroidApp extends Application
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
           return;
         }
-      } else if ( TDInstance.isDeviceSap5() ) { // SAP5 nothing
-        // TDLog.v( "bt button over advanced : SAP5");
-      } else if ( TDInstance.isDeviceSap6() ) { // FIXME_SAP6
+      } else if ( TDInstance.isDeviceSap6() || TDInstance.isDeviceDiscoX() ) { // SAP6 DiscoX
         TDLog.v( "SAP6 do bt button");
-        // if ( TDInstance.hasDeviceRemoteControl() ) { // test not necessary
-          CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
-          return;
-        // }
+        CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
+        return;
       } else if ( TDInstance.isDeviceJedeye() ) {
         // JedEye speaks the SAP6 wire format; reuse the SAP6 BT popup so the
         // user can drive LASER_ON / LASER_OFF / MEASURE / DEVICE_OFF remotely.
         CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
         return;
-      } else { // DistoX
-        // TDLog.v( "bt button over advanced : DistoX");
-        if ( ! isDownloading() ) {
-          if ( TDInstance.hasDeviceRemoteControl() && test_multi ) {
-            CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
-            return;
-          }
-        } else { // downloading: nothing
-          return;
-        }
+      } else { // DistoX (A3) SAP5
+        TDLog.v("Device does not has BT remote");
       }
     }
     // TDLog.v( "bt button not over advanced");
@@ -1984,6 +1972,7 @@ public class TopoDroidApp extends Application
       mSurveyWindow.updateDisplay();
     }
   }
+
 
   /**
    * @param name      survey name - if name is null, survey refs in TDInstance are cleared 
@@ -3187,7 +3176,8 @@ public class TopoDroidApp extends Application
    */
   public boolean setXBLELaser( int what, int nr, ListerHandler lister, int data_type, boolean closeBT, boolean do_thread ) // FIXME_LISTER
   {
-    return runLaserCommand( DistoX310Comm.class, what, nr, lister, data_type, closeBT, do_thread );
+    TDLog.v("App set XBLE laver " + (what % 16) + " nr " + nr );
+    return runLaserCommand( DistoXBLEComm.class, what, nr, lister, data_type, closeBT, do_thread );
   }
 
   /** set the Cavway laser

@@ -13,6 +13,7 @@
 package com.topodroid.c3in;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLock;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDVersion;
@@ -38,6 +39,7 @@ import com.topodroid.TDX.Cave3DFix;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.PhotoInfo;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
 
 
@@ -164,6 +166,7 @@ public class ParserTh extends TglParser
     pw.printf( String.format( mApp.getResources().getString( R.string.read_survey ), surveyname ) );
 
     int color = TglColor.getSurveyColor( );
+    TDLock.waitSurveyLock( surveyname );
     int res = readSurvey( surveyname, "", false, 0, color, pw );
     if ( sw != null ) TDToast.make( sw.toString() );
 
@@ -189,6 +192,7 @@ public class ParserTh extends TglParser
       processMarks();
       // TDLog.v( "Th read survey " + surveyname );
     }
+   TDLock.releaseSurveyLock( surveyname );
   }
 
   /** cstr - parse a Therion file
@@ -830,7 +834,9 @@ public class ParserTh extends TglParser
                     TDLog.e("TH inexistent database " + db_path );
                   }
                 }
+                TDLock.waitSurveyLock( filename );
                 int res = readSurvey( filename, path, use_survey_declination, survey_declination, color, pw );
+                TDLock.releaseSurveyLock( filename );
                 if ( res != SUCCESS ) {
                   TDLog.e( "TH read survey " + filename + " failed. Error code " + res );
                   TDToast.makeBad( TDInstance.formatString( R.string.error_survey_read, filename ) );

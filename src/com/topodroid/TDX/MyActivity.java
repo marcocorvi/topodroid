@@ -36,7 +36,7 @@ abstract public class MyActivity extends Activity
 
     static void registerBack( MyActivity d )
     {
-      TDLog.v("*** Item Drawer register BACK");
+      // TDLog.v("*** Item Drawer register BACK");
       OnBackInvokedCallback cb = d::onBackPressed;
       sCallbacks.put( d, cb );
       d.getOnBackInvokedDispatcher().registerOnBackInvokedCallback( OnBackInvokedDispatcher.PRIORITY_DEFAULT, cb );
@@ -44,7 +44,7 @@ abstract public class MyActivity extends Activity
 
     static void unregisterBack( MyActivity d )
     {
-      TDLog.v("*** Item Drawer unregister BACK");
+      // TDLog.v("*** Item Drawer unregister BACK");
       OnBackInvokedCallback cb = sCallbacks.remove( d );
       if ( cb != null ) {
         d.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback( cb );
@@ -55,7 +55,7 @@ abstract public class MyActivity extends Activity
   @Override
   public void onBackPressed()
   {
-    TDLog.v("*** my Activity BACK pressed");
+    // TDLog.v("*** my Activity BACK pressed");
     finish();
   }
 

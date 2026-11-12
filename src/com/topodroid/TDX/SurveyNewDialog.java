@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLock;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.ui.MyDialog;
@@ -72,6 +73,7 @@ class SurveyNewDialog extends MyDialog
   private long mOldSid = -1L;
   private long mOldId  = -1L;
   private boolean mWarnTeam;
+  private String mOldSurvey;
 
 // -------------------------------------------------------------------
   /** cstr
@@ -80,13 +82,14 @@ class SurveyNewDialog extends MyDialog
    * @param old_sid  old survey ID, from which to populate the new survey
    * @param old_id   old shot ID, to start populating the new survey
    */
-  SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id )
+  SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id, String old_survey )
   {
     super( context, null, R.string.SurveyNewDialog ); // null app
     mParent = parent;
     mApp    = (TopoDroidApp) mParent.getApplication();
     mOldSid = old_sid;
     mOldId  = old_id;
+    mOldSurvey = old_survey;
     mWarnTeam = true;
   }
 
@@ -179,7 +182,7 @@ class SurveyNewDialog extends MyDialog
       Button b = (Button)view;
 
       if ( b == mBTback ) {
-        dismiss();
+        closeDialog();
       }
       if ( b == mEditDate ) {
         String date = TDUtil.stringToDate( mEditDate.getText().toString() );
@@ -205,14 +208,14 @@ class SurveyNewDialog extends MyDialog
       // TDLog.Log( TDLog.LOG_INPUT, "SurveyDialog onClick() " + item.toString() );
       if ( b == mBTsave ) {
         // TDLog.v( "new survey save ");
-        dismiss();
+        closeDialog();
         mParent.updateDisplay( );
       } else if ( b == mBTopen ) {
         // TDLog.v( "new survey open ");
-        dismiss();
+        closeDialog();
         mParent.doOpenSurvey( name );
       }
-      dismiss();
+      closeDialog();
     }
   }
 
@@ -273,8 +276,10 @@ class SurveyNewDialog extends MyDialog
     int datamode  = SurveyInfo.DATAMODE_NORMAL;
     if ( TDLevel.overExpert && TDSetting.mDivingMode && mCBdatamode.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
 
+    // TDLock.waitSurveyLock( name ); // FIXME necessary ?
     long sid = mApp.setSurveyFromName( name, datamode, true, true ); // save survey name: tell app to set it into the database
-    if ( sid <= 0 ) {
+    // TDLock.releaseSurveyLock( name );
+	if ( sid <= 0 ) {
       TDLog.e( "Failed to set survey name in DB");
       return false;
     }
@@ -295,6 +300,12 @@ class SurveyNewDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
+    closeDialog();
+  }
+
+  private void closeDialog()
+  {
+    if ( mOldSurvey != null ) TDLock.releaseSurveyLock( mOldSurvey );
     dismiss();
   }
 

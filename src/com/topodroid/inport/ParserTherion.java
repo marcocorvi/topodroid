@@ -214,17 +214,19 @@ class ParserTherion extends ImportParser
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
-      String cmnt = ""; //HBTc
-      boolean isCommented = false; //HBTc
       while ( line != null ) {
         // TDLog.v( "Parser TH " + mLineCnt + " (" + state.in_survey + " " + state.in_centerline + " " + state.in_data + "): " + line );
         line = line.trim();
-        cmnt = ""; //HBTc
+        String cmnt = ""; // HBTc
         int pos = line.indexOf( '#' );
         if ( pos >= 0 ) {
-          if (!line.isEmpty()) cmnt = line.substring( pos+1);//HBTc
           line = line.substring( 0, pos ).trim();
-          if ( line.length() > 0 ) {isCommented = true;} else {isCommented = false;} //HBTc
+          if ( line.length() > 0 ) { // empty and comment lines are skipped
+            cmnt = line.substring( pos+1).trim(); // HBTc
+            if ( cmnt.charAt( 0 ) == '\"' ) cmnt = cmnt.substring(1); // strip leading and ending double-quotes
+            int cmnt_len = cmnt.length();
+            if ( cmnt_len > 0 && cmnt.charAt( cmnt_len-1 ) == '\"' ) cmnt = cmnt.substring(0, cmnt_len-1 );
+          }
         }
         if ( line.length() > 0 ) {
           String[] vals = pattern.split(line); // line.split( "\\s+" );
@@ -773,14 +775,6 @@ class ParserTherion extends ImportParser
                   float blen  = ( jBackLength  < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jBackLength],  Float.NaN );
                   float bber  = ( jBackCompass < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jBackCompass], Float.NaN );
                   float bcln  = ( jBackClino   < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jBackClino],   Float.NaN );
-                  if (isCommented) { //HBTc comment "..." 
-                    pos = cmnt.indexOf( '\"' );
-                    if ( pos >= 0 ) {
-                      cmnt = cmnt.substring( pos+1,cmnt.length()-1 ); //HBTc
-                    }
-                  } else {
-                    //cmnt = ""; //HBTc
-                  }
 
 		  // measure = (read - zero)*scale
 		  float zLen = state.mZeroLen;
@@ -836,30 +830,26 @@ class ParserTherion extends ImportParser
                       dist = (ParserUtil.parseFloat( vals[jLeft], Float.NaN ) - zLen) * sLen;
                       if ( ! Float.isNaN( dist ) ) {
                         b = TDMath.sub90( ber ); // b = ber - 90; if ( b < 0 ) b += 360;
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                        cmnt = ""; //HBTc
+                        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") );
                       }
                     }
                     if ( jRight >= 0 && jRight < sz ) {
                       dist = (ParserUtil.parseFloat( vals[jRight], Float.NaN ) - zLen) * sLen;
                       if ( ! Float.isNaN( dist ) ) {
                         b = TDMath.add90( ber ); // b = ber + 90; if ( b >= 360 ) b -= 360;
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                        cmnt = ""; //HBTc
+                        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") ); 
                       }
                     }
                     if ( jUp >= 0 && jUp < sz ) {
                       dist = (ParserUtil.parseFloat( vals[jUp], Float.NaN ) - zLen) * sLen;
                       if ( ! Float.isNaN( dist ) ) {
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, 0, 90, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                        cmnt = ""; //HBTc
+                        shots.add( new ParserShot( from, TDString.EMPTY, dist, 0, 90, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") );
                       }
                     }
                     if ( jDown >= 0 && jDown < sz ) {
                       dist = (ParserUtil.parseFloat( vals[jDown], Float.NaN ) - zLen) * sLen;
                       if ( ! Float.isNaN( dist ) ) {
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, 0, -90, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                        cmnt = ""; //HBTc
+                        shots.add( new ParserShot( from, TDString.EMPTY, dist, 0, -90, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") );
                       }
                     }
 
@@ -868,11 +858,11 @@ class ParserTherion extends ImportParser
                       // FIXME splays
                       // TDLog.v( "Therion add shot " + from + " -- ");
                       shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                      cmnt = ""; //HBTc
+                      // cmnt = ""; //HBTc cmnt is reset each line
                     } else {
                       // TDLog.v( "Therion add shot " + from + " " + to);
                       shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                      cmnt = ""; //HBTc
+                      // cmnt = ""; //HBTc cmnt is reset each line
                     }
                   }
                 } else { // if ( state.data_type == ParserUtil.DATA_NORMAL ) 

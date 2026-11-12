@@ -289,6 +289,7 @@ class TDPrefKey
    * max step between interpolating points for bezier in export (cSurvey)
    */
   static TDPrefKey[] mExport = {
+    new TDPrefKey( N, BOOL,XP,  "DISTOX_ZIP_SAVE",          R.string.pref_zip_save_title,         R.string.pref_zip_save_summary,        FALSE ),
     new TDPrefKey( N,      XP,  "DISTOX_EXPORT_SHOTS",      R.string.pref_export_shots_title,     R.string.pref_export_shots_summary,    "-1", R.array.exportShots, R.array.exportShotsValue ),
     new TDPrefKey( N,      XP,  "DISTOX_EXPORT_PLOT",       R.string.pref_export_plot_title,      R.string.pref_export_plot_summary,     "-1", R.array.exportPlot, R.array.exportPlotValue ),
     new TDPrefKey( N,      XP,  "DISTOX_AUTO_PLOT_EXPORT",  R.string.pref_auto_plot_export_title, R.string.pref_auto_plot_export_summary,"-1", R.array.exportPlotAuto, R.array.exportPlotAutoValue ),

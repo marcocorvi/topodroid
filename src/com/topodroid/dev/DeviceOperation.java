@@ -64,6 +64,7 @@ public class DeviceOperation implements AutoCloseable
       mDataDownloader.setDownloading( false );
     }
     return mComm.setLaser( mAddress, what, to_read, lister, data_type, (close && ! mKeepConnection) );
+    // TDLog.v("Device Op: " + (what % 16) + " close " + close + " result " + ret );
   }
 
   /** close the device operation (implements AutoCloseable)

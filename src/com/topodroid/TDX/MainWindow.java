@@ -22,6 +22,7 @@ import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDString;
 import com.topodroid.util.CWDfolder;
 import com.topodroid.util.TDAnalytics;
+import com.topodroid.util.TDLock;
 // import com.topodroid.util.TDVersion;
 import com.topodroid.types.ExportInfo;
 
@@ -237,6 +238,8 @@ public class MainWindow extends Activity
         say_no_survey = false;
         TDToast.make( R.string.no_survey );
       } 
+    } else {
+      TDLog.e("MAIN update display: null Data Helper" );
     }
   }
 
@@ -277,7 +280,7 @@ public class MainWindow extends Activity
       return;
     }
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
-    (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
+    (new SurveyNewDialog( mActivity, this, -1, -1, null )).show(); 
   }
 
   // @Override
@@ -393,6 +396,7 @@ public class MainWindow extends Activity
   //
   private void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
+    TDLock.waitSurveyLock( value );
     mApp.setSurveyFromName( value, -1, true, true ); // open survey activity: tell app to update survey name+id
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyWindow.class );
     surveyIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen );
@@ -401,12 +405,13 @@ public class MainWindow extends Activity
     mActivity.startActivity( surveyIntent );
   }
 
-  void startSplitSurvey( long old_sid, long old_id )
+  // TODO this could belong to TopoDroidApp
+  void startSplitSurvey( long old_sid, long old_id, String old_survey )
   {
-    // TDLog.v( "Main split survey");
     TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_SPLIT );
+    TDLog.v( "Main split survey " + TDInstance.survey );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
-    (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
+    (new SurveyNewDialog( mActivity, this, old_sid, old_id, old_survey )).show(); // WITH SPLIT
   }
 
   /** start to move survey data to a new survey
@@ -414,14 +419,16 @@ public class MainWindow extends Activity
    * @param old_id     start data ID
    * @param new_survey name of the new survey
    */
-  void startMoveSurvey( long old_sid, long old_id, String new_survey )
+  void startMoveSurvey( long old_sid, long old_id, String new_survey, String old_survey )
   {
-    // TDLog.v( "Main move survey");
     TopoDroidApp.updateAnalytic( TDAnalytics.SHOT_MOVE );
+    TDLog.v( "Main move survey " + TDInstance.survey );
+    TDLock.waitSurveyLock( new_survey ); // FIXME it should lock also the name of old_sid 
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
       mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // FIXME CO-SURVEY
-    // } else {
-    }
+    } 
+    TDLock.releaseSurveyLock( new_survey );
+    TDLock.releaseSurveyLock( old_survey );
   }
 
   /** react to a user long tap on an item in the survey list or on a menu
@@ -447,6 +454,7 @@ public class MainWindow extends Activity
    */
   void doOpenSurvey( String name )
   {
+    TDLock.waitSurveyLock( name );
     mApp.setSurveyFromName( name, -1, true, true ); // open survey: tell app to update survey name+id
     Intent intent = new Intent( this, ShotWindow.class );
     intent.setAction( Intent.ACTION_VIEW ); // SDK-35
@@ -492,7 +500,9 @@ public class MainWindow extends Activity
    */
   private void startShotWindow( CharSequence item )
   {
-    mApp.setSurveyFromName( item.toString(), -1, true, true ); 
+    String name = item.toString();
+    TDLock.waitSurveyLock( name );
+    mApp.setSurveyFromName( name, -1, true, true ); 
     Intent intent = new Intent( this, ShotWindow.class );
     intent.setAction( Intent.ACTION_VIEW ); // SDK-35
     startActivity( intent );
@@ -1249,14 +1259,14 @@ public class MainWindow extends Activity
       }
     }
 
-    if ( TDSetting.isFlagButton() ) resetButtonBar(); // 6.0.33
-    // if ( TDSetting.isFlagMenu() ) {
-    //   setMenuAdapter( );
-    //   closeMenu();
-    // }
     TDLocale.resetTheLocale();
-    setMenuAdapter( );
-    closeMenu();
+    // if ( TDSetting.isFlagButton() ) {
+      resetButtonBar(); // 6.0.33
+    // }
+    // if ( TDSetting.isFlagMenu() ) {
+       setMenuAdapter( );
+       closeMenu();
+    // }
 
     Intent intent = getIntent();
     if ( intent != null ) {
@@ -1978,11 +1988,13 @@ public class MainWindow extends Activity
     // Thread delete_thread = new Thread() {
     //   public void run() {
         for ( String survey : surveys ) {
+          TDLock.waitSurveyLock( survey );
           long sid = TopoDroidApp.mData.getSurveyId( survey );
           if ( sid > 0 ) {
             TDPath.deleteSurveyDir( survey );
             TopoDroidApp.mData.doDeleteSurvey( sid );
           }
+          TDLock.releaseSurveyLock( survey );
         }
         // mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, true ); // tell app to clear survey name and id - not needed
         updateList( TopoDroidApp.mData.selectAllSurveys() );
@@ -2015,12 +2027,14 @@ public class MainWindow extends Activity
           ExportInfo export_info = new ExportInfo( index, null, null, first );
           int cnt = 0; 
           for ( String survey : survey_list ) {
+            TDLock.waitSurveyLock( survey );
             String file_name = survey + extension;
             // TDLog.v("Main Export Thread Index " + index + " Exporting " + file_name + " prefix " + prefix );
             if ( prefix != null ) export_info.prefix = survey;
             export_info.name = file_name;
             mApp.setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false, false ); // all_info = false
             if ( doExportOne( survey, index, file_name, export_info, false ) ) ++cnt;   // false shared
+            TDLock.releaseSurveyLock( survey );
           }
           // TDLog.v("Main Export Thread done");
           final String res = TDInstance.getResources().getQuantityString( R.plurals.export_data_batch, cnt, type, cnt );

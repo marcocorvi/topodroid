@@ -53,7 +53,7 @@ public class RemoteShotTask extends AsyncTask<Integer, Integer, Boolean>
 
   @Override protected void onPreExecute()
   {
-    // mOperation = mApp.beginDeviceOperation(); // MM SWITCH
+    mOperation = mApp.beginDeviceOperation(); // MM SWITCH
     mILister.enableBluetoothButton( false );
   }
 
@@ -66,10 +66,12 @@ public class RemoteShotTask extends AsyncTask<Integer, Integer, Boolean>
         TDUtil.slowDown( TDSetting.mWaitShot );
       }
       for ( int i = mNr; i > 0; --i ) {
+        // TDLog.v("Remote task: is cancelled " + isCancelled() );
         if ( isCancelled() || ! mOperation.laser( Device.LASER_ON, 0, mLister, mDataType, false ) ) return false;
         if ( ! TDUtil.slowDown( TDSetting.mWaitLaser ) ) return false;
         boolean last = (i == 1);
         int toRead = ( last && mLister != null )? (x310 ? mNr : 1) : 0;
+        // TDLog.v("Remote task: to read " + toRead );
         if ( ! mOperation.laser( Device.MEASURE, toRead, ( x310 && ! last )? null : mLister, mDataType, last ) ) return false;
         if ( ! last && ! TDUtil.slowDown( TDSetting.mWaitShot ) ) return false;
       }

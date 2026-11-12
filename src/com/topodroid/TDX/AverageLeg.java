@@ -43,9 +43,10 @@ public class AverageLeg
   }
 
   public void set( DBlock blk ) { set( blk.mLength, blk.mBearing, blk.mClino ); }
+
   public void add( DBlock blk ) { add( blk.mLength, blk.mBearing, blk.mClino ); }
 
-  public void set( float l, float b, float c ) 
+  public void set( float l, float b, float c )
   {
     float cc = TDMath.cosd( c );
     mAverage.x = (l * TDMath.sind(b) * cc );

@@ -1248,11 +1248,11 @@ public class TDExporter
    * @param ul    length unit factor
    * @param ua    angle unit factor
    */
-  static private void writeThLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
+  static private void writeThLeg( PrintWriter pw, AverageLeg leg, DBlock blk, float ul, float ua )
   {
-    // pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
-    pw.format(Locale.US, "%.2f %.1f %.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua ); // HBTc no lf
+    pw.format(Locale.US, "%.2f %.1f %.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
+    endLineWithThComment( pw, blk.mComment );
   }
 
   /** write the extend of a splay
@@ -1332,6 +1332,15 @@ public class TDExporter
       pw.format("#   %s %s ", from, to );
     } else {
       pw.format("    %s %s ", from, to );
+    }
+  }
+
+  static private void endLineWithThComment( PrintWriter pw, String comment )
+  {
+    if ( TDString.isNullOrEmpty( comment ) ) {
+      pw.format( "\n" );
+    } else {
+      pw.format( " # %s\n", comment );
     }
   }
 
@@ -1563,7 +1572,7 @@ public class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeThLeg( pw, leg, ul, ua );
+              writeThLeg( pw, leg, ref_item, ul, ua );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -1574,9 +1583,6 @@ public class TDExporter
               }
               ref_item = null; 
             }
-            if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("  # %s\n", item.mComment );
-            }
             int tmp = writeSplayExtend( pw, item, splay_extend, extend );
             if ( tmp == 0 ) {
               splay_extend = false;
@@ -1586,23 +1592,13 @@ public class TDExporter
             }
 
             writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
-            //pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
-            pw.format(Locale.US, "%.2f %.1f %.1f", item.mLength * ul, item.mBearing * ua, item.mClino * ua ); // HBTc no lf
-            if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc
-              pw.format("  #\"%s\"\n", item.mComment );
-            } else {
-              pw.format("\n");
-            }
+            pw.format(Locale.US, "%.2f %.1f %.1f", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            endLineWithThComment( pw, item.mComment );
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeThLeg( pw, leg, ul, ua );
-              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) { // HBTc
-                pw.format("  #\"%s\"\n", ref_item.mComment );
-              } else {
-                pw.format("\n");
-              }
+              writeThLeg( pw, leg, ref_item, ul, ua );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -1618,9 +1614,7 @@ public class TDExporter
               }
               ref_item = null; 
             }
-            //if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc no comment before
-            //  pw.format("  # %s\n", item.mComment );
-            //}
+
             int tmp = writeSplayExtend( pw, item, splay_extend, extend );
             if ( tmp == 0 ) {
               splay_extend = false;
@@ -1631,21 +1625,11 @@ public class TDExporter
             }
             
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
-            // pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
-            pw.format(Locale.US, "%.2f %.1f %.1f", item.mLength * ul, item.mBearing * ua, item.mClino * ua ); // HBTc
-            if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc
-              pw.format("  #\"%s\"\n", item.mComment );
-            } else {
-              pw.format("\n");
-            }
+            pw.format(Locale.US, "%.2f %.1f %.1f", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            endLineWithThComment( pw, item.mComment );
           } else { // with both FROM and TO stations
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeThLeg( pw, leg, ul, ua );
-              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) { // HBTc
-                pw.format("  #\"%s\"\n", ref_item.mComment );
-              } else {
-                pw.format("\n");
-              }
+              writeThLeg( pw, leg, ref_item, ul, ua );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -1706,9 +1690,7 @@ public class TDExporter
             //   pw.format(therion_flags_duplicate);
             //   duplicate = true;
             }
-            //if ( item.mComment != null && item.mComment.length() > 0 ) { // HBTc no comment before
-            //  pw.format("  # %s\n", item.mComment );
-            //}
+
             writeThStations( pw, from, to, item.isCommented() );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
@@ -1716,12 +1698,7 @@ public class TDExporter
         // pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeThLeg( pw, leg, ul, ua );
-        if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) { // HBTc
-          pw.format("  #\"%s\"\n", ref_item.mComment );
-        } else {
-          pw.format("\n");
-        }
+        writeThLeg( pw, leg, ref_item, ul, ua );
         if ( duplicate ) {
           pw.format(therion_flags_not_duplicate);
           // duplicate = false;

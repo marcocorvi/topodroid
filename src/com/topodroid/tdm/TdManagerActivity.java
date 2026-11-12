@@ -16,6 +16,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLock;
 import com.topodroid.util.TDFile;
 import com.topodroid.util.TDRequest;
 import com.topodroid.util.TDLocale;
@@ -237,9 +238,17 @@ public class TdManagerActivity extends MyActivity
   //   super.onResume();
   // }
 
-  @Override public void onDestroy() { super.onDestroy(); }
+  @Override public void onDestroy() 
+  { 
+    TDLock.clearTdConfigLock( ); // FIXME this is overkill
+    super.onDestroy();
+  }
 
-  @Override public void onBackPressed() { super.onBackPressed(); }
+  @Override public void onBackPressed() 
+  {
+    TDLock.clearTdConfigLock( ); // FIXME this is overkill
+    super.onBackPressed();
+  }
 
   /** handle key up event // alternative-169
    * @param code  key code
@@ -270,9 +279,12 @@ public class TdManagerActivity extends MyActivity
         public void onClick( View v ) {
           String survey = ((TextView)v).getText().toString();
 	  // TDLog.v( "view on click " + survey );
+          TDLock.waitTdConfigLock( survey );
           TdmConfig tdconfig = mTdmConfigAdapter.getTdmConfig( survey );
 	  if ( tdconfig != null ) {
             startTdmConfigActivity( tdconfig );
+          } else {
+            TDLock.releaseTdConfigLock( survey );
           }
 	}
       }

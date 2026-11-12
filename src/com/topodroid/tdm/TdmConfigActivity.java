@@ -14,6 +14,7 @@ package com.topodroid.tdm;
 import com.topodroid.util.TDRequest;
 // import com.topodroid.util.TDVersion;
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLock;
 import com.topodroid.util.TDLocale;
 import com.topodroid.util.TDsafUri;
 import com.topodroid.util.TDAnalytics;
@@ -319,11 +320,13 @@ public class TdmConfigActivity extends MyActivity
     for ( TdmInput input : mTdmConfig.getInputs() ) {
       if ( input.isChecked() ) {
         // DataHelper mAppData = TopoDroidApp.mData;
+        TDLock.waitSurveyLock( input.getName() );
         if ( input.loadSurveyData ( TopoDroidApp.mData ) ) {
           mySurvey.addSurvey( input );
         } else {
           TDToast.makeWarn( String.format( getResources().getString( R.string.error_survey_read ), input.getSurveyName() ) );
         }
+        TDLock.releaseSurveyLock( input.getName() );
         // TDLog.v( "parse file " + input.getSurveyName() );
         // TdParser parser = new TdParser( mAppData, input.getSurveyName(), mySurvey );
       }

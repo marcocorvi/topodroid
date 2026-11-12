@@ -185,8 +185,7 @@ public class CutNPaste
    * @param listener button click listener
    * @return the created button
    */
-  static public Button makePopupButton( Context context, String text,
-                                 LinearLayout layout, int w, int h, View.OnClickListener listener )
+  static public Button makePopupButton( Context context, String text, LinearLayout layout, int w, int h, View.OnClickListener listener )
   {
     Button button = makeButton( context, text, TDColor.WHITE, BUTTON_HEIGHT );
     layout.addView( button, new LinearLayout.LayoutParams(h, w));
@@ -244,10 +243,9 @@ public class CutNPaste
     Button textview5 = null;
     // TDLog.v("BLE-CnP device type " + TDInstance.deviceType() );
 
-    if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
-      // ----- TURN LASER ON
-      //
-      text = res.getString(R.string.remote_on);
+    if ( TDInstance.deviceType() == Device.DISTO_X310 ) // DISTO X310
+    {
+      text = res.getString(R.string.remote_on);             // X310 ----- TURN LASER ON
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -258,9 +256,7 @@ public class CutNPaste
       float ww = textview1.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
-      // ----- TURN LASER OFF
-      //
-      text = res.getString(R.string.remote_off);
+      text = res.getString(R.string.remote_off);            // X310 ----- TURN LASER OFF
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -272,9 +268,7 @@ public class CutNPaste
       if ( ww > w ) w = ww;
 
       if ( gm_data ) {
-        // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
-        //
-        text = res.getString( R.string.popup_do_gm_data );
+        text = res.getString( R.string.popup_do_gm_data ); // X310 ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -288,8 +282,7 @@ public class CutNPaste
         if ( ww > w ) w = ww;
 
         // if ( TDSetting.isConnectionModeContinuous() ) {
-        //   // ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
-        //   text = res.getString( R.string.popup_do_gm_group );
+        //   text = res.getString( R.string.popup_do_gm_group ); // X310 ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
         //   textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         //     new View.OnClickListener( ) {
         //       public void onClick(View v) {
@@ -303,9 +296,7 @@ public class CutNPaste
         // }
 
       } else {
-        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
-        //
-        text = res.getString( R.string.popup_do_splay );
+        text = res.getString( R.string.popup_do_splay );   // X310 ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -318,8 +309,7 @@ public class CutNPaste
         ww = textview3.getPaint().measureText( text );
         if ( ww > w ) w = ww;
 
-        // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
-        text = res.getString(R.string.popup_do_leg);
+        text = res.getString(R.string.popup_do_leg);       // X310 ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
         textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -332,9 +322,10 @@ public class CutNPaste
         ww = textview4.getPaint().measureText( text );
         if ( ww > w ) w = ww;
       }
-    } else if ( TDInstance.deviceType() == Device.DISTO_XBLE ) { // SIWEI
-      // ----- TURN LASER ON
-      text = res.getString(R.string.remote_on);
+    } 
+    else if ( TDInstance.deviceType() == Device.DISTO_XBLE ) // DISTO XBLE
+    {
+      text = res.getString(R.string.remote_on);              // XBLE ----- TURN LASER ON
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           @Override public void onClick(View v) {
@@ -346,8 +337,7 @@ public class CutNPaste
       float ww = textview1.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
-      // ----- TURN LASER OFF
-      text = res.getString(R.string.remote_off);
+      text = res.getString(R.string.remote_off);            // XBLE ----- TURN LASER OFF
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 @Override public void onClick(View v) {
@@ -359,8 +349,7 @@ public class CutNPaste
       if ( ww > w ) w = ww;
 
       if ( gm_data ) {
-        // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
-        text = res.getString( R.string.popup_do_gm_data );
+        text = res.getString( R.string.popup_do_gm_data ); // XBLE ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
                 new View.OnClickListener( ) {
                   @Override public void onClick(View v) {
@@ -374,8 +363,7 @@ public class CutNPaste
         if ( ww > w ) w = ww;
 
         // if ( TDSetting.isConnectionModeContinuous() ) {
-        //   // ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
-        //   text = res.getString( R.string.popup_do_gm_group );
+        //   text = res.getString( R.string.popup_do_gm_group ); // XBLE ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
         //   textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         //           new View.OnClickListener( ) {
         //             public void onClick(View v) {
@@ -389,8 +377,7 @@ public class CutNPaste
         // }
 
       } else {
-        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
-        text = res.getString( R.string.popup_do_splay );
+        text = res.getString( R.string.popup_do_splay );       // XBLE ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
@@ -403,8 +390,7 @@ public class CutNPaste
         ww = textview3.getPaint().measureText( text );
         if ( ww > w ) w = ww;
 
-        // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
-        text = res.getString(R.string.popup_do_leg);
+        text = res.getString(R.string.popup_do_leg);          // XBLE ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
         textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
@@ -417,9 +403,10 @@ public class CutNPaste
         ww = textview4.getPaint().measureText( text );
         if ( ww > w ) w = ww;
       }
-    } else if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 ) { // SIWEI
-      // ----- TURN LASER ON
-      text = res.getString(R.string.remote_on);
+    }
+    else if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 ) // CAVWAY
+    {
+      text = res.getString(R.string.remote_on);              // CAVWAY ----- TURN LASER ON
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 @Override public void onClick(View v) {
@@ -431,8 +418,7 @@ public class CutNPaste
       float ww = textview1.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
-      // ----- TURN LASER OFF
-      text = res.getString(R.string.remote_off);
+      text = res.getString(R.string.remote_off);             // CAVWAY ----- TURN LASER OFF
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 @Override public void onClick(View v) {
@@ -444,8 +430,7 @@ public class CutNPaste
       if ( ww > w ) w = ww;
 
       if ( gm_data ) {
-        // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
-        text = res.getString( R.string.popup_do_gm_data );
+        text = res.getString( R.string.popup_do_gm_data );   // CAVWAY ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
                 new View.OnClickListener( ) {
                   @Override public void onClick(View v) {
@@ -459,8 +444,7 @@ public class CutNPaste
         if ( ww > w ) w = ww;
 
         // if ( TDSetting.isConnectionModeContinuous() ) {
-        //   // ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
-        //   text = res.getString( R.string.popup_do_gm_group );
+        //   text = res.getString( R.string.popup_do_gm_group ); // CAVWAY ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
         //   textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         //           new View.OnClickListener( ) {
         //             public void onClick(View v) {
@@ -474,8 +458,7 @@ public class CutNPaste
         // }
 
       } else {
-        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
-        text = res.getString( R.string.popup_do_splay );
+        text = res.getString( R.string.popup_do_splay );    // CAVWAY ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
@@ -488,8 +471,7 @@ public class CutNPaste
         ww = textview3.getPaint().measureText( text );
         if ( ww > w ) w = ww;
 
-        // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
-        text = res.getString(R.string.popup_do_leg);
+        text = res.getString(R.string.popup_do_leg);       // CAVWAY ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
         textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
                 new View.OnClickListener( ) {
                   public void onClick(View v) {

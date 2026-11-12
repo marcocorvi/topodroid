@@ -531,7 +531,7 @@ public class TopoGL extends MyActivity
   protected void onStart()
   {
     super.onStart();
-    // TDLog.v("TopoGL on Start");
+    TDLog.v("TopoGL on Start");
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
       TDandroid.requestExternalStorage( this, this );
     }
@@ -576,7 +576,7 @@ public class TopoGL extends MyActivity
   protected void onResume()
   {
     super.onResume();
-    // TDLog.v("TopoGL on Resume");
+    TDLog.v("TopoGL on Resume");
     if ( rendererSet ) {
       glSurfaceView.onResume();
     }

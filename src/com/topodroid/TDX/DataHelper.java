@@ -5653,7 +5653,7 @@ public class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // CONFIG DATA
 
-  String getValue( String key )
+  public String getValue( String key )
   {
     if ( myDB == null ) {
       // TDLog.e( "Data Helper::getValue null DB");
@@ -5681,7 +5681,7 @@ public class DataHelper extends DataSetObservable
     return value;
   }
 
-  void setValue( String key, String value )
+  public void setValue( String key, String value )
   {
     if ( myDB == null ) {
       // TDLog.e( "Data Helper::setValue null DB");

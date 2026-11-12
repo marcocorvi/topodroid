@@ -1046,6 +1046,17 @@ public class ShotWindow extends MyActivity
     return false;
   }
 
+  private void doCloseWindow()
+  {
+    if ( TDSetting.mExportZipSave ) {
+      TDLog.v("Export ZIP save");
+      ExportZipTask zip_export = new ExportZipTask( this, mApp, null, false, false ); // no toast, no share
+      zip_export.execute();
+    }
+    TopoDroidApp.mShotWindow = null;
+  }
+
+
   private void handleMenu( int pos )
   {
     closeMenu();
@@ -1054,7 +1065,7 @@ public class ShotWindow extends MyActivity
       // TDLog.v(TAG + "Shot activity close");
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
       // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217
-      TopoDroidApp.mShotWindow = null;
+      doCloseWindow();
       super.onBackPressed(); // FIXME issue 167
 
     } else if ( p++ == pos ) { // SURVEY ACTIVITY
@@ -1312,6 +1323,7 @@ public class ShotWindow extends MyActivity
   void doSplitOrMoveSurvey( long shot_id, String survey )
   {
     long old_sid = TDInstance.sid;
+    String old_survey = TDInstance.survey;
     // long old_id  = shot_id; // mShotId;
     // TDLog.v( TAG + "split survey old: " + old_sid + " " + shot_id + " New: " + ((survey == null)? "null" : survey) );
     if ( TopoDroidApp.mShotWindow != null ) {
@@ -1325,10 +1337,10 @@ public class ShotWindow extends MyActivity
     }
     if ( survey == null ) {
       // TDLog.v( TAG + "split survey " + old_sid + " " + shot_id );
-      TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, shot_id ); // SPLIT SURVEY
+      TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, shot_id, old_survey ); // SPLIT SURVEY
     } else {
       // TDLog.v( TAG + "MOVE survey Old: " + old_sid + " " + shot_id + " New: " + survey );
-      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, shot_id, survey ); // MOVE SURVEY
+      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, shot_id, survey, old_survey ); // MOVE SURVEY
       // FIXME 20251205 TODO renumber moved shots inside the target survey
     }
   }
@@ -1901,7 +1913,7 @@ public class ShotWindow extends MyActivity
             TDLog.e( TAG + "null device A");
           }
 	  return;
-        } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
+        } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET - COMMAND
           doBluetooth( b );
 	  return;
         }
@@ -3050,7 +3062,7 @@ public class ShotWindow extends MyActivity
       DrawingSurface.clearManagersCache();
       // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
-      TopoDroidApp.mShotWindow = null;
+      doCloseWindow();
       super.onBackPressed();  // FIXME issue 167
     } else if ( doubleBack ) {
       // TDLog.v( TAG + "on back pressed - double back execute");
@@ -3059,7 +3071,7 @@ public class ShotWindow extends MyActivity
       DrawingSurface.clearManagersCache();
       // new DataStopTask( mApp, this, mDataDownloader ).immediateExecute(); // 20251217 
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false, false ); // try_save
-      TopoDroidApp.mShotWindow = null;
+      doCloseWindow();
       super.onBackPressed(); // FIXME issue 167
     } else {
       // TDLog.v( TAG + "on back pressed - double back post runnable");
@@ -3081,6 +3093,7 @@ public class ShotWindow extends MyActivity
   {
     switch ( code ) {
       // case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) issue 167
+      //   doCloseWindow();
       //   onBackPressed();
       //   return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4) // alternative-169

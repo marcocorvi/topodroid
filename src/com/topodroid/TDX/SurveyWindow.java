@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.util.TDLog;
+import com.topodroid.util.TDLock;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDColor;
@@ -730,6 +731,7 @@ public class SurveyWindow extends MyActivity
   {
     if ( TDInstance.sid < 0 ) return;
     String survey = TDInstance.survey;
+    TDLock.waitSurveyLock( survey );
 
     // // TDPath.deleteShpDirs( survey, mApp_mData.selectPlotNames( TDInstance.sid ) );
     // TDPath.deleteSurveyFiles( survey );
@@ -753,6 +755,7 @@ public class SurveyWindow extends MyActivity
     TDPath.deleteSurveyDir( survey );
     mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, true ); // tell app to clear survey name and id
+    TDLock.releaseSurveyLock( survey );
     setResult( RESULT_OK, new Intent() );
     onBackPressed(); // FIXME issue 167
     // finish();
