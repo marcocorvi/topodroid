@@ -986,13 +986,13 @@
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Tahy (polygon)</string>
-    <string name="mode_splay">Paprsky (pomocné záměry)</string>
+    <string name="mode_splay">Paprsky (pom. záměry)</string>
     <string name="mode_latest">Nejnovější paprsky</string>
     <string name="mode_station">Měřické body</string>
     <!-- UNUSED string name="mode_elevation">Výškový profil</string -->
     <string name="mode_grid">Mřížka</string>
     <string name="mode_fixed">Upevnit ref. body</string>
-    <string name="mode_reference">Referenční body</string>
+    <string name="mode_reference">Ref. mřížka</string>
     <string name="mode_axes">Pouze osy</string>
     <string name="mode_names">Názvy</string>
     <string name="mode_endpoints">Koncové body</string>
@@ -1483,8 +1483,8 @@
 
     <string name="pref_bulk_export_title">Hromadné operace</string>
     <string name="pref_bulk_export_summary">Hromadné operace s měřeními</string>
-  <!-- TODO string name="pref_zip_save_title">ZIP auto-save</string -->
-  <!-- TODO string name="pref_zip_save_summary">Save ZIP whenever survey is closed</string -->
+    <string name="pref_zip_save_title">Automatické uložení ZIP</string>
+    <string name="pref_zip_save_summary">Uložit ZIP při každém zavření jeskynního měření</string>
     <string name="pref_export_plot_title">Formát exportu náčrtu</string>
     <string name="pref_export_plot_summary">Výchozí formát pro export náčrtů</string>
     <string name="pref_export_shots_title">Formát exportu dat</string>
