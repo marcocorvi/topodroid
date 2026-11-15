@@ -87,19 +87,23 @@ public class DBlock
   // ------------------------------------------------------------------
   // FLAGS
 
-  static final long FLAG_SURVEY     =  0; // flags
-  static final long FLAG_SURFACE    =  1;
-  static final long FLAG_DUPLICATE  =  2;
-  static final long FLAG_COMMENTED  =  4; // unused // FIXME_COMMENTED
-  static final long FLAG_NO_PLAN    =  8;
-  static final long FLAG_NO_PROFILE = 16;
-  static final long FLAG_NONE       = 24; // 16 | 8
-  static final long FLAG_BACKSHOT   = 32; // BACKSHOT - backsight leg
-  static final long FLAG_TAMPERED   = 64;
-  static final long FLAG_BACKSPLAY  =128; // 1 << 7 - backsight splay
+  public static final long FLAG_SURVEY     =  0; // flags
+  public static final long FLAG_SURFACE    =  1;
+  public static final long FLAG_DUPLICATE  =  2;
+  public static final long FLAG_COMMENTED  =  4; // unused // FIXME_COMMENTED
+  public static final long FLAG_NO_PLAN    =  8;
+  public static final long FLAG_NO_PROFILE = 16;
+  public static final long FLAG_NONE       = 24; // 16 | 8
+  public static final long FLAG_BACKSHOT   = 32; // BACKSHOT - backsight leg
+  public static final long FLAG_TAMPERED   = 64;
+  public static final long FLAG_BACKSPLAY  =128; // 1 << 7 - backsight splay
+  public static final long FLAG_ARTIFICIAL =256; // 1 << 8 - backsight splay
+  public static final long FLAG_APPROXIMATE=512; // 1 << 8 - backsight splay
 
   static final long FLAG_SURFACE_DUPLICATE_COMMENTED = 7; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED 
+  static final long FLAG_SURFACE_DUPLICATE_COMMENTED_ARTIFICIAL = 263; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED | FLAG_ARIFICIAL
   static final long FLAG_SURFACE_DUPLICATE_COMMENTED_BACKSHOT = 39; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED | FLAG_BACKSHOT
+  static final long FLAG_SURFACE_DUPLICATE_COMMENTED_BACKSHOT_ARTIFICIAL = 295; // FLAG_SURFACE | FLAG_DUPLICATE | FLAG_COMMENTED | FLAG_BACKSHOT | FLAG_ARIFICIAL
 
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
@@ -148,6 +152,7 @@ public class DBlock
   public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT LEG
   public boolean isTampered()  { return (mFlag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
   public boolean isBackSplay() { return (mFlag & FLAG_BACKSPLAY ) == FLAG_BACKSPLAY; } // BACKSIGHT SPLAY
+  public boolean isArtificial() { return (mFlag & FLAG_ARTIFICIAL ) == FLAG_ARTIFICIAL; } // ARTIFICIAL
 
   /** @return true if the cavway flag has the requested value
    * @param f   requested flag value
@@ -164,6 +169,7 @@ public class DBlock
   public static boolean isBackshot(long flag)  { return (flag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; } // BACKSHOT LEG
   public static boolean isTampered(long flag)  { return (flag & FLAG_TAMPERED)   == FLAG_TAMPERED; }
   public static boolean isBackSplay(long flag) { return (flag & FLAG_BACKSPLAY ) == FLAG_BACKSPLAY; } // BACKSIGHT SPLAY
+  public static boolean isArtificial(long flag) { return (flag & FLAG_ARTIFICIAL ) == FLAG_ARTIFICIAL; } // ARTIFICIAL
 
   public void setTampered() { mFlag |= FLAG_TAMPERED; }
   public void clearTampered() { mFlag &= ~FLAG_TAMPERED; }

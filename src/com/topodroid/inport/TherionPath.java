@@ -111,10 +111,12 @@ class TherionPath
     return (ks > 0);
   }
    
-  /** @return the fullname of a therion item
+  /** @return the fullname of a therion item, that is the name followed by '@' and the path-string
    * @param name  item short-name
    */
   String getName( String name ) { return name + "@" + path.toString(); }
 
+  /** @return the path string
+   */
   public String toString() { return path.toString(); }
 }

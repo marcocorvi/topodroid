@@ -33,6 +33,7 @@ public class TDMath
   static public float acos( float x )   { return (float)( Math.acos( x ) ); }
   static public float acosd( float x )  { return (float)( RAD2DEG * Math.acos( x ) ); }
   static public float asind( float x )  { return (float)( RAD2DEG * Math.asin( x ) ); }
+  static public float atand( float x )  { return (float)( RAD2DEG * Math.atan( x ) ); }
   static public float sqrt( float x )   { return (float)Math.sqrt( x ); }
   static public float pow( float x, float y ) { return (float)Math.pow( x, y ); }
 

@@ -120,7 +120,7 @@ public class ParserTh extends TglParser
       int len = vals.length;
       len = TDString.prevIndex( vals, len );
       if ( len > 0 ) { // 0 must be "mark"
-        int flag = parseStationFlag( vals[len] );
+        int flag = parseStationType( vals[len] );
         int idx = TDString.nextIndex( vals, -1 );
         while ( idx < len && vals[idx].equals("mark") ) idx = TDString.nextIndex( vals, idx );
         while ( idx < len ) {
@@ -135,7 +135,7 @@ public class ParserTh extends TglParser
   /** @return int-flag parsed from a string
    * @param str station flag
    */
-  private int parseStationFlag( String str ) // parse Therion flag name
+  private int parseStationType( String str ) // parse Therion flag name
   {
     if ( str.equals( "fixed" ) ) {
       return Cave3DStation.FLAG_PAINTED;

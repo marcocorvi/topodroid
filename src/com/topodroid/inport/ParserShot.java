@@ -24,6 +24,8 @@ public class ParserShot
     public int leg;
     public boolean duplicate; // flags
     public boolean surface;
+    public boolean artificial;
+    public boolean approximate;
     public boolean backshot;
     // public boolean noPlot; // hide leg in both drawings
     public String comment;
@@ -43,18 +45,24 @@ public class ParserShot
      * @param cmnt comment
      */
     public ParserShot( String f, String t, float l, float b, float c, float r, int ex, int lg,
-                       boolean d, boolean s, boolean bs, String cmnt )
+                       boolean d, boolean s, boolean artif, boolean approx, boolean bs, String cmnt )
     {
-      from = f;
-      to   = t;
-      len = l;
-      ber = b;
-      cln = c;
-      rol = r;
-      extend = ex;
-      leg    = lg;
+      init( f, t, l, b, c, r, ex, lg );
       duplicate = d;
       surface   = s;
+      artificial  = artif;
+      approximate = approx;
+      backshot  = bs;
+      comment   = cmnt;
+    }
+
+    public ParserShot( String f, String t, float l, float b, float c, float r, int ex, int lg, boolean d, boolean s, boolean bs, String cmnt )
+    {
+      init( f, t, l, b, c, r, ex, lg );
+      duplicate   = d;
+      surface     = s;
+      artificial  = false;
+      approximate = false;
       backshot  = bs;
       comment   = cmnt;
     }
@@ -71,18 +79,25 @@ public class ParserShot
      */
     public ParserShot( String f, String t, float l, float b, float c, float r, int ex, int lg )
     {
-      from = f;
-      to   = t;
-      len = l;
-      ber = b;
-      cln = c;
-      rol = r;
-      extend = ex;
-      leg    = lg;
-      duplicate = false;
-      surface   = false;
+      init( f, t, l, b, c, r, ex, lg );
+      duplicate   = false;
+      surface     = false;
+      artificial  = false;
+      approximate = false;
       backshot  = false;
       comment   = "";
+    }
+
+    private void init( String f, String t, float l, float b, float c, float r, int ex, int lg )
+    {
+      from = f;
+      to   = t;
+      len  = l;
+      ber  = b;
+      cln  = c;
+      rol  = r;
+      extend = ex;
+      leg    = lg;
     }
 
 }

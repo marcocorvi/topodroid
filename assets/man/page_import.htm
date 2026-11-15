@@ -55,19 +55,34 @@ single session.
 <br><p>
 
 <b>Therion import</b> ".th"<br>
-N.B. <i>Therion</i> syntax is partially supported.<br>
+N.B. <i>Therion</i> syntax is not completely supported.<br>
 
 Only <i>Therion</i> survey files with data in "normal" datamode are importable.<br>
-The "declination" command is taken into account: the read azimuth are corrected with the value
-of the declination.<br>
+The first encountered "date" is used for the import.
+If no "date" is specified the survey date is set to the current date.<br>
+The "team" names and roles are not properly handled.<br>
+The "declination" command is taken into account, however if dated the date are not handled.
+The data azimuths are corrected with the value of the declination.<br>
+The "grid-angle" command is ignored.<br>
+Recognized station "mark"s are "fixed", "painted" and "temporary".<br>
+Shot "flag"s are "duplicate", "surface", "artificial", and "approximate".<br>
 If the station short-names have no clash the file can be imported with "short-names".
 Otherwise, it must be imported with full names, ie station names qualified by the survey path.<br>
-TopoDroid does not import <i>Therion</i> scraps.<br><p>
+A "grade" command inside "centerline" is ignored.
+If outside "centerline" everything between "grade" and "endgrade" is discarded.<br>
+Everything between "comment" and "endcomment" is discarded.<br>
+Everything between "scan" and "endscan" is discarded.<br>
+TopoDroid does not import "map" and "scrap". All the drawing items are ignored.<br><p>
 
-TopoDroid supports the Therion "input" command. Therefore,
-whole Therion projects can be imported as a single survey, starting from the top Therion file.<br>
+TopoDroid supports the "input" command but the filename must end in ".th".
+Therefore, whole Therion projects can be imported as a single survey, starting from the top Therion file.<br>
 It is necessary to use full names for stations.<br>
 The survey files should have the "declination" command if the dates span a long time.<br><p>
+
+Processing related commands (<i>layout</i>, <i>source</i>, <i>export</i>, etc) are not supported.<br><p>
+
+The <i>Therion</i> import dialog has a button to enable adding the filepath to the surveypath
+to the station names. For simple imports it is safe to leave it disabled.<br><p>
 
 <b>VisualTopo import</b> ".tro" and ".trox"<br>
 N.B. <i>VisualTopo</i> syntax is partially supported.<br>

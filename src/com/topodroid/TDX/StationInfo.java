@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.types.StationFlag;
+import com.topodroid.types.StationType;
 
 // import androidx.annotation.RecentlyNonNull;
 
@@ -21,27 +21,30 @@ public class StationInfo
 {
   String mName;          // name (ID)
   String mComment;       // comment / description
-  StationFlag mFlag;     // flags
+  StationType mType;     // type
   String mPresentation;  // presentation string
   String mGeoCode;       // geomorphology code
   long mPhotoId;         // photo ID
 
   /** @return true if the station info flag is "fixed"
    */
-  private boolean isFlagFixed()   { return mFlag.isFixed(); }
+  boolean isTypeFixed()   { return mType.isFixed(); }
 
   /** @return true if the station info flag is "painted"
    */
-  private boolean isFlagPainted() { return mFlag.isPainted(); }
+  boolean isTypePainted() { return mType.isPainted(); }
 
   // /** @return true if the station info flag is "geo"
   //  */
-  // private boolean isFlagGeo()     { return mFlag.isGeo(); }
+  // private boolean isTypeGeo()     { return mType.isGeo(); }
 
   /**
    * @return the string presentation of the flags
+   * @note used also by ShpNamez
    */
-  public String getFlagCode() { return mFlag.getCode(); }
+  public String getTypeCode() { return mType.getCode(); }
+
+  public int getTypeValue() { return mType.getValue(); }
 
   /** cstr
    * @param name     name (presentation string)
@@ -53,7 +56,7 @@ public class StationInfo
   {
     mName    = name;
     mComment = (comment == null)? TDString.EMPTY : comment;
-    mFlag    = new StationFlag( (int)flag );
+    mType    = new StationType( (int)flag );
     mPresentation = presentation;
     mGeoCode    = code;
     mPhotoId    = photoId;
@@ -66,7 +69,7 @@ public class StationInfo
   public String toString()
   { 
     StringBuilder sb = new StringBuilder();
-    sb.append( mPresentation ).append(" [").append( getFlagCode() ).append("]");
+    sb.append( mPresentation ).append(" [").append( getTypeCode() ).append("]");
     if ( mComment != null ) sb.append(" ").append( mComment );
     return sb.toString();
   }

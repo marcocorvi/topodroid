@@ -23,7 +23,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.types.PlotType;
-import com.topodroid.types.StationFlag;
+import com.topodroid.types.StationType;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ class DrawingStationDialog extends MyDialog
   private final TopoDroidApp mApp;
 
   private String mStationName; // num-station name
-  private int mFlag; // saved-station flag (if any)
+  private int mType; // saved-station type (0: no type / temporary)
   private boolean mIsBarrier;
   private boolean mIsHidden;
   // private boolean mGlobalXSections; // unused
@@ -159,13 +159,13 @@ class DrawingStationDialog extends MyDialog
 
     mBtnOkComment = (Button) findViewById( R.id.btn_ok_comment );
     mComment = (EditText) findViewById( R.id.comment );
-    mFlag    = StationFlag.STATION_NONE;
+    mType    = StationType.STATION_NONE;
     if ( TDLevel.overExpert ) {
       StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName, null ); // null: do not create
       mBtnOkComment.setOnClickListener( this );
       if ( cs != null ) {
         mComment.setText( cs.mComment );
-        mFlag = cs.mFlag.getValue();
+        mType = cs.getTypeValue();
       // } else {
       //   mComment.setVisibility( View.GONE );
       }
@@ -397,7 +397,7 @@ class DrawingStationDialog extends MyDialog
       String comment = TDUtil.getTextOrNull( mComment );
       if ( comment != null ) {
         // set/change saved-station comment - leave flags unchanged
-        TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName, mGeoCode ); // PRESENTATION
+        TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mType, mStationName, mGeoCode ); // PRESENTATION
         fail = false;
       } 
       if ( fail ) {

@@ -100,25 +100,7 @@ public class TDUtil
     return "";
   }
 
-  /** concatenate the missing strings to the string buffer
-   * @param sb   string buffer
-   * @param vals strings array
-   * @param k    start index in the strings array
-   * @note used to parse "team" commands
-   */
-  public static void concatMissings( StringBuffer sb, String[] vals, int k )
-  {
-    if ( k < vals.length ) {
-      for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 && sb.indexOf( vals[k] ) < 0 ) {
-        sb.append(vals[k]);
-        break;
-      }
-      for (++k; k < vals.length; ++k) {
-        if ( vals[k].length() > 0 && sb.indexOf( vals[k] ) < 0 ) sb.append(" ").append(vals[k]);
-      }
-      sb.append(" ");
-    }
-  }
+  
 
   /** @return the inpuy string with special characters replaced
    *          N.B. empty string is ok

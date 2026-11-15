@@ -59,7 +59,7 @@ import com.topodroid.types.ExtendType;
 import com.topodroid.types.PlotType;
 import com.topodroid.types.TDStatus;
 import com.topodroid.packetX.MemoryData;
-// import com.topodroid.types.StationFlag;
+// import com.topodroid.types.StationType;
 import com.topodroid.io.shp.ShpUtil;
 
 import android.os.ParcelFileDescriptor;
@@ -1340,7 +1340,7 @@ public class TDExporter
     if ( TDString.isNullOrEmpty( comment ) ) {
       pw.format( "\n" );
     } else {
-      pw.format( " # %s\n", comment );
+      pw.format( " # \"%s\"\n", comment );
     }
   }
 
@@ -1453,6 +1453,22 @@ public class TDExporter
         pw.format("    # %s \n", info.comment );
       }
       pw.format("\n");
+      
+      String notepath = TDPath.getNoteFile( info.name + ".txt" );
+      boolean end_comment = false;
+      BufferedReader br = null;
+      try {
+        if ( ( br = TDFile.getTopoDroidFileReader( notepath ) ) != null ) {
+          pw.format("comment\n");
+          end_comment = true;
+          String note_line;
+          while ( ( note_line = br.readLine() ) != null ) pw.format("%s\n", note_line );
+        }
+      } catch ( IOException e ) { // nothing
+      } finally {
+        try { if ( br != null ) br.close(); } catch ( IOException e ) { }
+        if ( end_comment ) pw.format("endcomment\n");
+      }
 
       if ( c_list.size() > 0 ) {
         pw.format("# calibration-check\n");
@@ -1521,10 +1537,10 @@ public class TDExporter
         StringBuilder sb_fixed   = new StringBuilder();
         StringBuilder sb_painted = new StringBuilder();
         for ( StationInfo station : stations ) {
-          if ( station.mFlag.isFixed() ) { 
+          if ( station.isTypeFixed() ) { 
             sb_fixed.append(" ");
             sb_fixed.append( station.mName );
-          } else if ( station.mFlag.isPainted() ) {
+          } else if ( station.isTypePainted() ) {
             sb_painted.append(" ");
             sb_painted.append( station.mName );
           }
@@ -2443,9 +2459,9 @@ public class TDExporter
         pw.format(Locale.US, "# station%c comment%c flag%c%s", sep, sep, sep, newline );
         for ( StationInfo station : stations ) {
           pw.format(Locale.US, "%s%c \"%s\"%c", station.mName, sep, station.mComment, sep );
-          if ( station.mFlag.isFixed() ) {
+          if ( station.isTypeFixed() ) {
             pw.format("F");
-          } else if ( station.mFlag.isPainted() ) {
+          } else if ( station.isTypePainted() ) {
             pw.format("P");
           }
           //station.mPresentation

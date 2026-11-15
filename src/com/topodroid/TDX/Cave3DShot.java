@@ -32,6 +32,8 @@ public class Cave3DShot
   // static final long FLAG_NO_PLAN    =  8;
   // static final long FLAG_NO_PROFILE = 16;
   static final long FLAG_BACKSHOT   = DBlock.FLAG_BACKSHOT;  // 32;
+  static final long FLAG_ARTIFICIAL = DBlock.FLAG_ARTIFICIAL; // 256;
+  static final long FLAG_APPROXIMATE = DBlock.FLAG_APPROXIMATE; // 512;
 
   public double len, ber, cln;      // radians
   boolean used = false;
@@ -53,6 +55,8 @@ public class Cave3DShot
   public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
   public boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } 
   public boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
+  public boolean isArtificial() { return (mFlag & FLAG_ARTIFICIAL) == FLAG_ARTIFICIAL; }
+  public boolean isApproximate() { return (mFlag & FLAG_APPROXIMATE) == FLAG_APPROXIMATE; }
   public boolean isUsed()      { return used; }
   public void setUsed() { used = true; }
 

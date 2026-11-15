@@ -22,7 +22,7 @@ import com.topodroid.util.TDAnalytics;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.types.StationFlag;
+import com.topodroid.types.StationType;
 
 // import androidx.annotation.RecentlyNonNull;
 
@@ -276,9 +276,9 @@ class CurrentStationDialog extends MyDialog
     mBtnFixed.setChecked( false );
     mBtnPainted.setChecked( false );
     if ( cs == null ) return; // safety check
-    if ( cs.mFlag.isFixed() ) {
+    if ( cs.isTypeFixed() ) {
       mBtnFixed.setChecked( true );
-    } else if ( cs.mFlag.isPainted() ) {
+    } else if ( cs.isTypePainted() ) {
       mBtnPainted.setChecked( true );
     }
   }
@@ -315,11 +315,11 @@ class CurrentStationDialog extends MyDialog
       mName.setError( resString( R.string.error_name_required ) );
       return false;
     }
-    int flag = StationFlag.STATION_NONE;
+    int flag = StationType.STATION_NONE;
     if ( mBtnFixed.isChecked() ) {
-      flag = StationFlag.STATION_FIXED;
+      flag = StationType.STATION_FIXED;
     } else if ( mBtnPainted.isChecked() ) {
-      flag = StationFlag.STATION_PAINTED;
+      flag = StationType.STATION_PAINTED;
     }
 
     String comment = TDUtil.getTextOrEmpty( mComment ); // COMMENT

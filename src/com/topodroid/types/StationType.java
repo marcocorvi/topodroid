@@ -1,4 +1,4 @@
-/* @file StationFlag.java
+/* @file StationType.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -13,22 +13,21 @@ package com.topodroid.types;
 
 // import androidx.annotation.RecentlyNonNull;
 
-public class StationFlag
+public class StationType
 {
-  public static final int STATION_NONE    = 0;  // no flag
+  public static final int STATION_NONE    = 0;  // no flag = temporary (default)
   public static final int STATION_FIXED   = 1;  // fixed station
   public static final int STATION_PAINTED = 2;  // painted station
-  // public static final int STATION_GEO     = 4;  // geolocalized station
-  private static final int STATION_MAX = 3; 
+  private static final int STATION_MAX = 2; // or of all flags
 
   private int mValue;
 
-  static final private String[] flag_str = { " ", " [F] ", " [P] ", " [G] " };
+  static final private String[] flag_str = { " ", " [F] ", " [P] ", " [T] " };
 
   /** cstr
    * @param flag   flag value
    */
-  public StationFlag( int flag ) 
+  public StationType( int flag ) 
   {
     if ( flag < STATION_NONE || flag > STATION_MAX ) flag = STATION_NONE;
     mValue = flag;
@@ -41,10 +40,12 @@ public class StationFlag
   // flag tests
   public static boolean isFixed( int flag )   { return (flag & STATION_FIXED)   == STATION_FIXED; }
   public static boolean isPainted( int flag ) { return (flag & STATION_PAINTED) == STATION_PAINTED; }
+  public static boolean isTemporary( int flag ) { return flag == 0; }
   // public static boolean isGeo( int flag )     { return (flag & STATION_GEO)     == STATION_GEO; }
 
   public boolean isFixed( )   { return (mValue & STATION_FIXED)   == STATION_FIXED; }
   public boolean isPainted( ) { return (mValue & STATION_PAINTED) == STATION_PAINTED; }
+  public boolean isTemporary( ) { return mValue == 0; }
   // public boolean isGeo( )     { return (mValue & STATION_GEO)     == STATION_GEO; }
 
   /**
@@ -54,8 +55,8 @@ public class StationFlag
   {
     if ( flag == 0 ) return " ";
     StringBuilder sb = new StringBuilder();
-    if ( isFixed(flag) )   sb.append("F");
-    if ( isPainted(flag) ) sb.append("P");
+    if ( isFixed(flag) )     sb.append("F");
+    if ( isPainted(flag) )   sb.append("P");
     // if ( isGeo(flag) )     sb.append("G");
     return sb.toString();
   }

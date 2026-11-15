@@ -108,7 +108,7 @@ class ImportParser
    */
   ImportParser( boolean apply_declination ) // throws ParserException
   {
-    mDate  = TDUtil.currentDate();
+    mDate  = TDUtil.currentDate(); // TODO check how the parsers handle mDate
     shots  = new ArrayList<>();
     splays = new ArrayList<>();
     mApplyDeclination = apply_declination;
@@ -134,13 +134,15 @@ class ImportParser
     if ( br == null ) throw new IOException( "null BufferedReader" ); // 20230118 new test
     String line = br.readLine();
     if ( line == null ) return null; // EOF
-    line = line.trim();
     ++mLineCnt;
+    line = line.trim();
     StringBuilder ret = new StringBuilder();
-    while ( line != null && line.endsWith( "\\" ) ) {
-      ret.append( line.replace( '\\', ' ' ) ); // FIXME
+    while ( line.endsWith( "\\" ) ) {
+      ret.append( line, 0, line.length() - 1).append(' ');
       line = br.readLine();
+      if ( line == null ) break;
       ++mLineCnt;
+      line = line.trim();
     }
     if ( line != null ) ret.append( line );
     return ret.toString();

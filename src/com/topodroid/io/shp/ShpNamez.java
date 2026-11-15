@@ -90,7 +90,7 @@ public class ShpNamez extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.name;
       fields[1] = cs.getComment();
-      fields[2] = cs.getFlagCode();
+      fields[2] = cs.getTypeCode();
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }

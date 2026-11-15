@@ -24,15 +24,21 @@ import com.topodroid.util.TDAnalytics;
 // import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.types.LegType;
-import com.topodroid.types.StationFlag;
+import com.topodroid.types.StationType;
 import com.topodroid.TDX.TopoDroidApp;
 
 import java.io.IOException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.regex.Pattern;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 // TODO this class can be made extend ImportParser
 //
@@ -73,8 +79,11 @@ class ParserTherion extends ImportParser
     }
   }
 
+  // private boolean mTherionPath;   // if true filename hierarchy replaces survay hierarchy
+
   private ArrayList< ThFix > fixes;
   private ArrayList< Station > stations;
+
   // private ArrayList< ParserShot > shots;   // centerline shots // FROM ImportParser
   // private ArrayList< ParserShot > splays;  // splay shots
   // public int getShotNumber()    { return shots.size(); } // FROM ImportParser
@@ -84,14 +93,13 @@ class ParserTherion extends ImportParser
   ArrayList< Station >    getStations() { return stations; }
   ArrayList< ThFix >      getFixes()    { return fixes; }
 
-  // same as in ImportParser.java
-  // String initStation() // FROM ImportParser
-  // {
-  //   for ( ParserShot sh : shots ) {
-  //     if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
-  //   }
-  //   return TDString.ZERO;
-  // }
+  
+  private final HashSet<String> mOpenPath = new HashSet<>();   // canonical paths of files being read (recursion guard)
+
+  private static String canonical( String path )
+  {
+    try { return new File( path ).getCanonicalPath(); } catch ( IOException e ) { return path; }
+  }
 
   /** @return the declination value [deg ?]
    */
@@ -103,12 +111,12 @@ class ParserTherion extends ImportParser
    * @param isr    input reader
    * @param name   filename or surveyname ?
    * @param apply_declination whether to apply the declination correction
-   * @param therionPath       whether to add survey-path to station names
    * @param filepath          file path (absolute)
    */
-  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, boolean therionPath, String filepath ) throws ParserException
+  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, /* boolean therion_path, */ String filepath ) throws ParserException
   {
     super( apply_declination );
+    mDate = null; // override super assignment
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_TH );
     if ( mApplyDeclination ) mDeclination = 0.0f;
     fixes    = new ArrayList<>();
@@ -116,8 +124,17 @@ class ParserTherion extends ImportParser
     // shots    = new ArrayList<>(); // FROM ImportParser
     // splays   = new ArrayList<>();
     // // mStates  = new Stack< ParserTherionState >();
+    // mTherionPath = therion_path;
     ParserTherionState state = new ParserTherionState(); // root of the linked list of states
-    mPartial = readFile( isr, name, "", state, therionPath, filepath );
+    mOpenPath.add( canonical( filepath ) );
+    // FXIME openReader is not used for the top file - encoding is not handled 
+    mPartial = readFile( isr, name, state, filepath ); // initial surveypath is empty
+    if ( state.mTeam.size() > 0 ) {
+      StringBuilder team = new StringBuilder();
+      for ( String team_name : state.mTeam ) team.append(" \"").append( team_name ).append("\"");
+      mTeam = team.toString().substring(1);
+    }
+    if ( mDate == null ) mDate = TDUtil.currentDate();
     checkValid();
     if ( mApplyDeclination ) mDeclination = 0.0f; // declination has been already applied to azimuths
   }
@@ -137,79 +154,50 @@ class ParserTherion extends ImportParser
   //   return ret.toString();
   // }
 
-  /** @return the name of the station from a fullname 
-   * @param fullname   fullname
-   * @param path       ...
+  /** @return the fullname of the station from a parser name
+   * @param fullname   station name as read from the therion file: can be aaa or aaa@b.c
+   * @param state      parser state
+   * station name are referenced in the file as "N" or "N@A" where N is the name of the station and A is a survey path (eg, "a1.a2.a3")
+   * (1) with prefix "p" and suffix  they are first to be converted in "pNs" and "pNs@A"
+   * (2) in the context of surveyB path they must be fully specified as "pNs@B" and "pNs@A.B
+   * in summary
+   *     N     --> pNs     --> pNs @ B
+   *     N @ A --> pNs @ A --> pNs @ A.B
    */
-  private String extractStationName( String fullname, String path ) 
+  private String extractStationName( String name, ParserTherionState state ) 
   {
-    int idx = fullname.indexOf('@');
-    if ( idx > 0 ) {
-       if ( path != null ) {
-         return fullname.substring( 0, idx ) + "@" + fullname.substring(idx+1) + "." + path;
-       } else {
-         return fullname.substring( 0, idx );
-       }
-    }
-    if ( path != null ) {
-      return fullname + "@" + path;
-    }
-    return fullname;
+    int idx = name.indexOf('@');
+    if ( idx == 0 || idx == name.length() - 1 ) return null;       // bad name "@x", "x@"
+    String ret = state.mPrefix + ( idx > 0 ? name.substring( 0, idx ) : name ) + state.mSuffix;
+    if ( idx > 0 ) ret += name.substring( idx );                  // "@A"
+    if ( ! state.mSurveyPath.isEmpty() ) ret += ( idx > 0 ? "." : "@" ) + state.mSurveyPath;
+    return ret;
   }
 
   /** read input file
+   * @param isr      input stream reader
    * @param filename name of the file to parse
-   * @param basepath survey pathname base
    * @param state    state of the parser
-   * @param therionPath       whether to add survey-path to station names
+   * @param filepath ...
    */
-  private boolean readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state, boolean therionPath, String filepath ) throws ParserException
+  private boolean readFile( InputStreamReader isr, String filename, ParserTherionState state, String filepath ) throws ParserException
   {
-    TDLog.v("Parser TH file " + filename + " base " + basepath );
+    TDLog.v("Parser TH file " + filename );
 
-    // StringBuilder path; // path = basepath;   // survey pathname(s)
-    // int ks = 0;               // survey index
-    // int ks_max = 20;
-    // int[] survey_pos = new int[ks_max]; // current survey pos in the pathname
-    // if (basepath != null) { path = new StringBuilder(); } else { path = new StringBuilder( basepath ); }
-    TherionPath path = new TherionPath( basepath );
-
-    int jFrom    = 0;
-    int jTo      = 1;
-    int jStation = 1;
-    int jLength  = 2;
-    int jCompass = 3;
-    int jClino   = 4;
-    int jBackLength  = -1;
-    int jBackCompass = -1;
-    int jBackClino   = -1;
-    int jLeft  = -1;
-    int jRight = -1;
-    int jUp    = -1;
-    int jDown  = -1;
-    int jDepth = -1;
-    int jFromdepth = -1;
-    int jTodepth = -1;
-    int jCount = -1;
-    int jNorthing = -1;
-    int jEasting  = -1;
-    int jAltitude = -1;
     boolean partial = false;
 
     Pattern pattern = Pattern.compile( "\\s+" );
-    StringBuffer team = new StringBuffer();
-    String surveyPath = therionPath? path.toString() : null;
 
     String dirpath = "./";
     int i = filepath.lastIndexOf('/');
-    if ( i > 0 ) dirpath = filepath.substring(0, i+1);
+    if ( i >= 0 ) dirpath = filepath.substring(0, i+1);
     TDLog.v( "import read Therion dirpath <" + dirpath + ">"  );
 
     try {
       String dirname = "./";
       i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
-      // System.out.println("readFile dir " + dirname + " filename " + filename );
+      // System.out.println("read file dir " + dirname + " filename " + filename );
       TDLog.v( "import read Therion file <" + filename + "> dir " + dirname );
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
@@ -220,11 +208,13 @@ class ParserTherion extends ImportParser
         String cmnt = ""; // HBTc
         int pos = line.indexOf( '#' );
         if ( pos >= 0 ) {
+          // TDLog.v("TH parser line <" + line + "> pos " + pos );
+          cmnt = line.substring( pos+1 ).trim(); // HBTc
           line = line.substring( 0, pos ).trim();
           if ( line.length() > 0 ) { // empty and comment lines are skipped
-            cmnt = line.substring( pos+1).trim(); // HBTc
-            if ( cmnt.charAt( 0 ) == '\"' ) cmnt = cmnt.substring(1); // strip leading and ending double-quotes
             int cmnt_len = cmnt.length();
+            if ( cmnt_len > 0 && cmnt.charAt( 0 ) == '\"' ) cmnt = cmnt.substring(1); // strip leading and ending double-quotes
+            cmnt_len = cmnt.length();
             if ( cmnt_len > 0 && cmnt.charAt( cmnt_len-1 ) == '\"' ) cmnt = cmnt.substring(0, cmnt_len-1 );
           }
         }
@@ -242,687 +232,563 @@ class ParserTherion extends ImportParser
           if ( vals_len > 0 ) {
             String cmd = vals[0];
             
-            if ( cmd.equals("encoding" ) ) { 
-              // TDLog.v("Warning: therion encoding ignored");
-            } else if ( cmd.equals("import") ) {
-              // TDLog.v("Warning: therion import ignored");
-            } else if ( ! state.in_centerline && cmd.equals("grade") ) {
-              TDLog.v("TH grade not in centerline ignored");
-              partial = true;
-            } else if ( cmd.equals("revise") ) {
-              TDLog.v("TH revise ignored");
-              partial = true;
-            } else if ( cmd.equals("join") ) {
-              // TDLog.v("Warning: therion join ignored");
-            } else if ( cmd.equals("grade") ) {
-              // TDLog.v("Warning: therion grade ignored");
-              state.in_grade = true;
-            } else if ( cmd.equals("input") ) { // ignore
-              // TDLog.v("Warning: therion input ignored");
-              int j = 1;
-              while ( vals[j] != null ) {
-                if ( vals[j].length() > 0 ) {
-                  String filename1 = vals[j];
-                  if ( filename1.endsWith( ".th" ) ) {
-                    String filename2 = dirpath + filename1;
-                    TDLog.v("Warning: therion input " + filename1 + " basepath " + filename2 );
-                    InputStreamReader isr1 = new InputStreamReader( new FileInputStream( filename2 ) );
-                    if ( readFile( isr1, filename1, path.toString(), state, therionPath, filename2 ) ) partial = true;
+            if ( state.in_comment ) {  // CONTEXT NONE SURVEY CENTERLINE
+              if ( cmd.equals("endcomment" ) ) state.in_comment = false;
+              // otherwise everythin ignored
+            } else if ( cmd.equals("comment") ) {
+                state.in_comment = true;
+            } else {
+              if ( cmd.equals("scan") ) { // skip everything until endscan
+                state.in_scan = true;
+              } else if ( state.in_scan ) {
+                if ( cmd.equals("endscan") ) state.in_scan = false;
+
+              } else if ( cmd.equals("revise") ) { // ignore everything until endrevise
+                partial = true;
+              //   state.in_revise = true;
+              // } else if ( state.in_revise ) {
+              //   if ( cmd.equals("endrevise") ) { state.in_revise = false; } else { partial = true; }
+              } else if ( cmd.equals("endrevise") ) {
+                // nothing
+
+              } else if ( cmd.equals("encoding" ) ) { // encoding is ignored - TDLog.v("Warning: therion encoding ignored");
+              
+              } else if ( cmd.equals("import") ) { // ignored
+              } else if ( cmd.equals("join") ) { // ignored
+              } else if ( cmd.equals("grade") ) { 
+                if ( ! state.in_centerline) state.in_grade = true;
+              } else if ( cmd.equals("endgrade") ) { // ignored
+                state.in_grade = false;
+              } else if ( cmd.equals("input") ) {  // input requires a ".th" file. other filename are ignored 
+                if ( handleInput( vals, vals_len, dirpath, state ) ) partial = true;
+              } else if ( cmd.equals("surface") ) { // skip everything until endsurface
+                state.in_surface = true;
+              } else if ( cmd.equals("map") ) {     // skip everything until endmap
+                state.in_map = true;
+              } else if ( cmd.equals("scrap") ) {   // skip everything until endscrap
+                state.in_scrap = true;
+
+              // } else if ( state.in_scrap && cmd.equals("point") ) { // handled below
+              //   // ignore
+              // } else if ( state.in_scrap && cmd.equals("line") ) { // not necessary because they are in SCRAP CONTEXT
+              //   // TODO check not already in_line
+              //   state.in_line = true;
+              //   // TDLog.v("Theron in line");
+              // } else if ( state.in_scrap && cmd.equals("area") ) {
+              //   // TODO check not already in_area
+              //   state.in_area = true;
+              //   // TDLog.v("Theron in area");
+
+              // } else if ( state.in_line && cmd.equals("endline") ) { 
+              //   state.in_line = false;
+              // } else if ( state.in_area && cmd.equals("endarea" ) ) {
+              //   state.in_area = false;
+              } else if ( cmd.equals("endscrap" ) ) {
+                // if ( ! state.in_scrap ) TDLog.e("TH parser endscrap while not in scrap");
+                state.in_scrap = false;
+              } else if ( cmd.equals("endmap" ) ) {
+                // if ( ! state.in_map ) TDLog.e("TH parser endmap while not in map");
+                state.in_map = false;
+              } else if ( cmd.equals("endsurface" ) ) {
+                // if ( ! state.in_surface ) TDLog.e("TH parser endsurface while not in surface");
+                state.in_surface = false;
+
+              } else if ( state.in_map || state.in_surface || state.in_scrap /* || state.in_line || state.in_area */ || state.in_grade ) {
+                // ignore
+
+              } else if ( cmd.equals("survey") ) {  // START SURVEY CONTEXT
+                if ( vals.length > 1 ) {
+                  state = new ParserTherionState( state, vals[1] ); // pushState( state ); - note: autonatic mSurveyLevel increment and mSurveyPath update
+                  state.in_survey= true;
+
+                  if ( mName == null ) { // parse survey id
+                    mName = vals[1];
                   }
-                  break;
-                }
-              }
-            } else if ( cmd.equals("surface") ) {
-              // TODO check not already in_surface
-              state.in_surface = true;
-              // TDLog.v("Theron in surface");
-            } else if ( cmd.equals("map") ) {
-              // TODO check not already in_map
-              state.in_map = true;
-              // TDLog.v("Theron in map");
-            } else if ( cmd.equals("scrap") ) {
-              // TODO check not already in_scrap
-              state.in_scrap = true;
-              // TDLog.v("Theron in scrap");
-            } else if ( state.in_scrap && cmd.equals("line") ) {
-              // TODO check not already in_line
-              state.in_line = true;
-              // TDLog.v("Theron in line");
-            } else if ( state.in_scrap && cmd.equals("area") ) {
-              // TODO check not already in_area
-              state.in_area = true;
-              // TDLog.v("Theron in area");
+                  // TDLog.v("Therion in survey " + mName );
 
-            } else if ( state.in_line && cmd.equals("endline") ) { 
-              state.in_line = false;
-            } else if ( state.in_area && cmd.equals("endarea" ) ) {
-              state.in_area = false;
-            } else if ( state.in_scrap && cmd.equals("endscrap" ) ) {
-              state.in_scrap = false;
-            } else if ( state.in_map && cmd.equals("endmap" ) ) {
-              state.in_map = false;
-            } else if ( state.in_surface && cmd.equals("endsurface" ) ) {
-              state.in_surface = false;
-            } else if ( state.in_grade && cmd.equals("endgrade") ) {
-              state.in_grade = false;
-            } else if ( state.in_map || state.in_surface || state.in_scrap || state.in_line || state.in_area || state.in_grade ) {
-              // ignore
-              // TDLog.v("Warning: therion ignored " + line);
-
-            } else if ( cmd.equals("survey") ) {
-              path.insertSurvey( vals[1] );
-              // survey_pos[ks] = path.length(); // set current survey pos in pathname
-              // TDLog.v("Parser TH survey (" + ks + " " + survey_pos[ks] + "): " + path.toString() + " <" + vals[1] + ">" );
-              // // path = path + "." + vals[1];    // add survey name to path
-              // path.append( "." ).append( vals[1] );
-              // ++ks;
-	      // if ( ks >= ks_max ) {
-	      //       ks_max += 10;
-	      //       int[] tmp = new int[ks_max];
-	      //       // for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
-	      //       System.arraycopy( survey_pos, 0, tmp, 0, ks );
-	      //       survey_pos = tmp;
-	      // }
-              // pushState( state );
-              state = new ParserTherionState( state );
-              state.mSurveyLevel ++;
-              state.in_survey= true;
-
-              // parse survey id
-              if ( mName == null ) {
-                mName = vals[1];
-              }
-              // TDLog.v("Theron in survey " + mName );
-
-              // parse survey options
-              for ( int j=2; j<vals_len; ++j ) {
-                if ( vals[j].equals("-declination") && j+1 < vals_len ) {
-		  if ( vals[j+1].equals("-") ) { // declination reset
-                    state.mDeclination = ( state.mParent == null )? 0 : state.mParent.mDeclination;
-		  } else {
-                    try {
-                      state.mDeclination = Float.parseFloat( vals[j+1] );
-                      ++j;
-                      if ( j+1 < vals_len ) { // FIXME check for units
-                        state.mDeclination *= ParserUtil.parseAngleUnit( vals[j+1] );
-                        ++j;
+                  for ( int j=2; j<vals_len; ++j ) { // parse survey options
+                    if ( vals[j].equals("-declination") && j+1 < vals_len ) {
+                      j = state.handleDeclination( ++j, vals ); // j will be then incremented in the for loop
+                      if ( j > 0 ) {
+                        if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
+                      } else {
+                        j = -j; // reset j positive
+                        partial = true;
                       }
-                      if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
-                    } catch ( NumberFormatException e ) {
-                      TDLog.e( "TH declination " + line );
+                    } else if ( vals[j].equals("-title") && j+1 < vals_len ) {
+                      for ( ++j; j<vals_len; ++j ) {
+                        if ( vals[j].length() == 0 ) continue;
+                        if ( vals[j].startsWith("\"") ) {
+                          if ( vals[j].endsWith( "\"" ) ) {
+                            mTitle = vals[j].substring(1,vals[j].length()-1);
+                          } else {
+                            StringBuilder sb = new StringBuilder();
+                            sb.append( vals[j].substring(1) );
+                            for ( ++j; j<vals_len; ++j ) {
+                              if ( vals[j].length() == 0 ) continue;
+                              if ( vals[j].endsWith( "\"" ) ) {
+                                sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
+                                break;
+                              } else {
+                                sb.append(" ").append(vals[j] );
+                              }
+                            }
+                            mTitle = sb.toString();
+                          }
+                        } else {
+                          mTitle = vals[j];
+                        }
+                        break;
+                      }
+                    } else if ( vals[j].equals("-namespace") ) {
+                      if ( ++j < vals_len && vals[j].equals("off") ) { // not handled
+                        partial = true;
+                      }
+                    } else if ( vals[j].equals("-entrance") ) { // ignored
+                    } else if ( vals[j].equals("-person-rename") ) { // TODO
+                      partial = true;
+                    } else {
                       partial = true;
                     }
-		  }
-                } else if ( vals[j].equals("-title") && j+1 < vals_len ) {
-                  for ( ++j; j<vals_len; ++j ) {
-                    if ( vals[j].length() == 0 ) continue;
-                    if ( vals[j].startsWith("\"") ) {
-                      if ( vals[j].endsWith( "\"" ) ) {
-                        mTitle = vals[j].substring(1,vals[j].length()-1);
+                  }
+                } else {
+                  // TODO
+                }
+              } else if ( state.in_centerline ) {  // CENTERLINE CONTEXT
+                if ( cmd.equals("endcenterline") || cmd.equals("endcentreline") ) {
+                  if ( state.mParent != null ) state = state.mParent; // state = popState();
+                } else if ( cmd.equals("date") ) {
+                  if ( vals.length > 1 ) {
+                    String date = vals[1];
+                    if ( ! date.equals("-") && mDate == null ) mDate = date; // save centerline date - overwrite today date
+                  } else {
+                    // TODO
+                  }
+                } else if ( cmd.equals("team") ) {
+                  state.concatTeam( vals, 1 );
+                } else if ( cmd.equals("explo-date") ) { // ignored
+                } else if ( cmd.equals("explo-team") ) { // ignored
+                } else if ( cmd.equals("calibrate") ) {
+                  boolean c_len = false;
+                  boolean c_ber = false;
+                  boolean c_cln = false;
+                  boolean c_blen = false;
+                  boolean c_bber = false;
+                  boolean c_bcln = false;
+                  boolean c_left  = false;
+                  boolean c_right = false;
+                  boolean c_up    = false;
+                  boolean c_down  = false;
+                  boolean c_depth = false;
+	          int k = 1;
+                  for ( ; k<vals_len - 1; ++k ) {
+                    if ( vals[k].equals("length") || vals[k].equals("tape") )                  { c_len = true; }
+                    else if ( vals[k].equals("compass") || vals[k].equals("bearing") )         { c_ber = c_bber = true; } // N.B. "compass" not in Therion
+                    else if ( vals[k].equals("clino") || vals[k].equals("gradient") )          { c_cln = c_bcln = true; } // N.B. "clino" not in Therion
+                    else if ( vals[k].equals("backlength") || vals[k].equals("backtape") )     { c_blen = true; }
+                    // else if ( vals[k].equals("backcompass") || vals[k].equals("backbearing") ) { c_bber = true; }
+                    // else if ( vals[k].equals("backclino") || vals[k].equals("backgradient") )  { c_bcln = true; }
+                    else if ( vals[k].equals("depth") || vals[k].equals("depthchange") )       { c_depth = true; } 
+                    else if ( vals[k].equals("dimensions") ) { c_left = c_right = c_up = c_down = true; }
+                    else if ( vals[k].equals("left") )  { c_left  = true; }
+                    else if ( vals[k].equals("right") ) { c_right = true; }
+                    else if ( vals[k].equals("up") )    { c_up    = true; }
+                    else if ( vals[k].equals("down") )  { c_down  = true; }
+                    // not handled: counter depth=deptchange x=easting y=northing z=altitude, and position (=x,y,z)
+                    else if ( Float.isNaN( ParserUtil.parseFloat( vals[k], Float.NaN ) ) ) { partial = true; }
+                  }
+                  float zero = 0.0f;
+                  float scale = 1.0f;
+	          int kk = 1;
+                  while ( kk < vals_len && Float.isNaN( ParserUtil.parseFloat( vals[kk], Float.NaN ) ) ) ++kk;
+                  if ( kk < vals_len ) { zero  = ParserUtil.parseFloat( vals[kk], 0.0f ); ++kk; }
+                  if ( kk < vals_len ) { scale = ParserUtil.parseFloat( vals[kk], 1.0f ); }
+
+                  if ( c_len   ) { state.mZeroLen     = zero; state.mScaleLen     = scale; }
+                  if ( c_ber   ) { state.mZeroBer     = zero; state.mScaleBer     = scale; }
+                  if ( c_cln   ) { 
+                    if ( state.mClinoPercent ) { state.mZeroCln = TDMath.atand( zero ); state.mScaleCln = 1; }
+                    else {  state.mZeroCln     = zero; state.mScaleCln     = scale; }
+                  }
+                  if ( c_blen  ) { state.mZeroBackLen = zero; state.mScaleBackLen = scale; }
+                  if ( c_bber  ) { state.mZeroBackBer = zero; state.mScaleBackBer = scale; }
+                  if ( c_bcln  ) { 
+                    if ( state.mClinoPercent ) { state.mZeroBackCln = TDMath.atand( zero ); state.mScaleBackCln = 1; }
+                    else { state.mZeroBackCln = zero; state.mScaleBackCln = scale; }
+                  }
+                  if ( c_left  ) { state.mZeroLeft    = zero; state.mScaleLeft    = scale; }
+                  if ( c_right ) { state.mZeroRight   = zero; state.mScaleRight   = scale; }
+                  if ( c_up    ) { state.mZeroUp      = zero; state.mScaleUp      = scale; }
+                  if ( c_down  ) { state.mZeroDown    = zero; state.mScaleDown    = scale; }
+                  if ( c_depth ) { state.mZeroDepth   = zero; state.mScaleDepth   = scale; }
+                } else if ( cmd.equals("units") ) { // units quantity_list [factor] unit
+                  boolean u_len   = false;
+                  boolean u_ber   = false;
+                  boolean u_cln   = false;
+                  boolean u_blen  = false; // these are effectively same as u_len etc.
+                  boolean u_bber  = false;
+                  boolean u_bcln  = false;
+                  boolean u_left  = false;
+                  boolean u_right = false;
+                  boolean u_up    = false;
+                  boolean u_down  = false;
+                  boolean u_depth = false;
+                  for ( int k=1; k<vals_len - 1; ++k ) {
+                    if (      vals[k].equals("length")      || vals[k].equals("tape") )         { u_len  = u_blen = true; }
+                    else if ( vals[k].equals("compass")     || vals[k].equals("bearing") )      { u_ber  = u_bber = true; } // N.B. "compass" not in Therion
+                    else if ( vals[k].equals("clino")       || vals[k].equals("gradient") )     { u_cln  = u_bcln = true; } // N.B. "clino" not in Therion
+                    // else if ( vals[k].equals("backlength")  || vals[k].equals("backtape") )     { u_blen = true; }
+                    // else if ( vals[k].equals("backcompass") || vals[k].equals("backbearing") )  { u_bber = true; }
+                    // else if ( vals[k].equals("backclino")   || vals[k].equals("backgradient") ) { u_bcln = true; }
+                    else if ( vals[k].equals("depth") || vals[k].equals("depthchange") )       { u_depth = true; } 
+                    else if ( vals[k].equals("dimensions") ) { u_left = u_right = u_up = u_down = true; }
+                    else if ( vals[k].equals("left") )  { u_left  = true; }
+                    else if ( vals[k].equals("right") ) { u_right = true; }
+                    else if ( vals[k].equals("up") )    { u_up    = true; }
+                    else if ( vals[k].equals("down") )  { u_down  = true; }
+                    // not handles depth = depthchange, counter, x=easting, y=northing, z=altitude 
+                    else if ( Float.isNaN( ParserUtil.parseFloat( vals[k], Float.NaN ) ) ) { partial = true; }
+                  }
+                  float factor = ParserUtil.parseFloat( vals[vals_len-2], 1.0f );
+                  if ( u_len || u_left || u_right || u_up || u_down || u_blen ) {
+                    float len = factor * ParserUtil.parseLengthUnit( vals[vals_len-1] );
+                    if ( u_len )  state.mUnitLen     = len;
+                    if ( u_blen ) state.mUnitBackLen = len;
+                    if ( u_left ) state.mUnitLeft    = len;
+                    if ( u_right) state.mUnitRight   = len;
+                    if ( u_up   ) state.mUnitUp      = len;
+                    if ( u_down ) state.mUnitDown    = len;
+                  } 
+                  if ( u_depth ) {
+                    float len = factor * ParserUtil.parseLengthUnit( vals[vals_len-1] );
+                    if ( u_depth ) state.mUnitDepth   = len;
+                  }
+                  if ( ( u_cln || u_bcln ) && vals[vals_len-1].equals("percent") ) {
+                    state.mUnitCln = state.mUnitBackCln = 1; // clino percent have units = 1
+                    state.mClinoPercent = true;
+                  } else if ( u_ber || u_cln || u_bber || u_bcln ) {
+                    float angle = factor * ParserUtil.parseAngleUnit( vals[vals_len-1] );
+                    if ( u_ber )  state.mUnitBer     = angle;
+                    if ( u_cln )  state.mUnitCln     = angle;
+                    if ( u_bber ) state.mUnitBackBer = angle;
+                    if ( u_bcln ) state.mUnitBackCln = angle;
+                    if (  u_cln || u_bcln ) state.mClinoPercent = false;
+                  }
+                } else if ( cmd.equals("sd") ) {         // std devs are not handled in TopoDroid: ignored
+                } else if ( cmd.equals("grade") ) {      // grade not handled in TopoDroid: ignored 
+                } else if ( cmd.equals("grid-angle") ) { // magnetic grid angle not handled in TopoDroid: ignored
+                } else if ( cmd.equals("declination") ) { 
+                  if ( state.handleDeclination( 1, vals ) > 0 ) {
+                    if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
+                  } else {
+                    partial = true;
+                  }
+                } else if ( cmd.equals("instrument") ) { // not handled
+                  // partial = true;
+                } else if ( cmd.equals("flags") ) {
+                  boolean yes = true;
+                  for ( int ii = 1; ii < vals_len; ++ii ) {
+                    if ( vals[ii].equals("not") ) {
+                      yes = false;
+                    } else {
+                      if ( vals[ii].startsWith("splay") ) {
+                        state.mSplay = yes;
+                      } else if ( vals[ii].startsWith("dup") ) {
+                        state.mDuplicate = yes;
+                      } else if ( vals[ii].startsWith("surf") ) {
+                        state.mSurface = yes;
+                      } else if ( vals[ii].startsWith("artif") ) {
+                        state.mArtificial = yes;
+                      } else if ( vals[ii].startsWith("approx") ) {
+                        state.mApproximate = yes;
                       } else {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append( vals[j].substring(1) );
-                        for ( ++j; j<vals_len; ++j ) {
-                          if ( vals[j].length() == 0 ) continue;
-                          if ( vals[j].endsWith( "\"" ) ) {
-                            sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
-                            break;
+                        TDLog.e("TH unknown flag " + vals[ii] );
+                        partial = true;
+                      }
+                      yes = true;
+                    }
+                  }
+                } else if ( cmd.equals("mark") ) { // ***** fix station east north Z (ignored std-dev's)
+                  // N.B. mark before shots affect only station lines, not stations in shot lines
+                  //      This may be fine because stations in shots are (string) attributes of the shot
+                  //      and onle important stations are saved in the database (indexed by the station-name)
+                  if ( vals_len > 0 ) {
+                    String last = vals[vals_len-1];
+                    int type = -1;
+                    if ( "painted".equals(last) )        type = StationType.STATION_PAINTED;
+                    else if ( "fixed".equals(last) )     type = StationType.STATION_FIXED;
+                    else if ( "temporary".equals(last) ) type = StationType.STATION_NONE;
+                    else { TDLog.e("TH unknown mark " + last ); partial = true; }
+                    int end = vals_len-1;
+                    if ( type >= 0 ) {
+                      if ( end <= 1 ) {                        // no station list: following stations
+                        state.mMark = type;
+                      } else {
+                        for ( int k = 1; k < end; ++k ) {
+                          String name = extractStationName( vals[k], state );
+                          if ( name != null ) {
+                            boolean not_found = true;
+                            for ( Station s : stations ) if ( s.name.equals( name ) ) { s.flag = type; not_found = false; break; }
+                            if ( not_found ) { 
+                              stations.add( new Station( name, "", type ) );
+                            }
                           } else {
-                            sb.append(" ").append(vals[j] );
+                            partial = true;
                           }
                         }
-                        mTitle = sb.toString();
                       }
-                    } else {
-                      mTitle = vals[j];
                     }
-                    break;
                   }
-                }
-              }
-            } else if ( state.in_centerline ) {
-              if ( cmd.equals("endcenterline") || cmd.equals("endcentreline") ) {
-                // state.in_data = false;
-                // state.in_centerline = false;
-                // state = popState();
-                // TDLog.v("Theron end centerline");
-                if ( state.mParent != null ) state = state.mParent;
-
-              } else if ( cmd.equals("date") ) {
-                String date = vals[1];
-                if ( mDate == null ) mDate = date; // save centerline date
-                // TDLog.v("Theron date " + mDate );
-              } else if ( cmd.equals("team") ) {
-                TDUtil.concatMissings( team, vals, 1 );
-              // } else if ( cmd.equals("explo-date") ) {
-              // } else if ( cmd.equals("explo-team") ) {
-              // } else if ( cmd.equals("instrument") ) {
-              } else if ( cmd.equals("calibrate") ) {
-                // TDLog.v("Theron calibrate" );
-                boolean c_len = false;
-                boolean c_ber = false;
-                boolean c_cln = false;
-                boolean c_blen = false;
-                boolean c_bber = false;
-                boolean c_bcln = false;
-		int k = 1;
-                for ( ; k<vals_len - 1; ++k ) {
-                  if ( vals[k].equals("length") || vals[k].equals("tape") )          { c_len = true; }
-                  else if ( vals[k].equals("compass") || vals[k].equals("bearing") ) { c_ber = true; }
-                  else if ( vals[k].equals("clino") || vals[k].equals("gradient") )  { c_cln = true; }
-                  else if ( vals[k].equals("backlength") || vals[k].equals("backtape") )     { c_blen = true; }
-                  else if ( vals[k].equals("backcompass") || vals[k].equals("backbearing") ) { c_bber = true; }
-                  else if ( vals[k].equals("backclino") || vals[k].equals("backgradient") )  { c_bcln = true; }
-                }
-                float zero = 0.0f;
-                float scale = 1.0f;
-		int kk = 1;
-                while ( kk<vals_len-1 ) {
-		  try { // try to read the "zero" float (next val)
-		    ++kk;
-                    zero = Float.parseFloat( vals[kk] );
-		    break;
-                  } catch ( NumberFormatException e ) {
-                    TDLog.e("TH Non-number zero");
-                    partial = true;
-                  }
-		}
-                while ( kk<vals_len-1 ) {
-		  try { // try to read the "scale" float (next val)
-		    ++kk;
-                    scale  = Float.parseFloat( vals[kk] );
-		    break;
-                  } catch ( NumberFormatException e ) {
-                    TDLog.e("TH Non-number scale");
-                    partial = true;
-                  }
-                }
-
-                if ( c_len ) {
-                  state.mZeroLen  = zero;
-                  state.mScaleLen = scale;
-                }
-                if ( c_ber ) {
-                  state.mZeroBer  = zero;
-                  state.mScaleBer = scale;
-                }
-                if ( c_cln ) {
-                  state.mZeroCln  = zero;
-                  state.mScaleCln = scale;
-                }
-                if ( c_blen ) {
-                  state.mZeroBackLen  = zero;
-                  state.mScaleBackLen = scale;
-                }
-                if ( c_bber ) {
-                  state.mZeroBackBer  = zero;
-                  state.mScaleBackBer = scale;
-                }
-                if ( c_bcln ) {
-                  state.mZeroBackCln  = zero;
-                  state.mScaleBackCln = scale;
-                }
-              } else if ( cmd.equals("units") ) { // units quantity_list [factor] unit
-                // TDLog.v("Therion units" );
-                boolean u_len = false;
-                boolean u_ber = false;
-                boolean u_cln = false;
-                boolean u_blen = false;
-                boolean u_bber = false;
-                boolean u_bcln = false;
-                boolean u_left  = false;
-                boolean u_right = false;
-                boolean u_up    = false;
-                boolean u_down  = false;
-                for ( int k=1; k<vals_len - 1; ++k ) {
-                  if ( vals[k].equals("length")  || vals[k].equals("tape") )          { u_len = true; }
-                  else if ( vals[k].equals("compass") || vals[k].equals("bearing") )  { u_ber = true; }
-                  else if ( vals[k].equals("clino")   || vals[k].equals("gradient") ) { u_cln = true; }
-                  else if ( vals[k].equals("backlength")  || vals[k].equals("backtape") )     { u_blen = true; }
-                  else if ( vals[k].equals("backcompass") || vals[k].equals("backbearing") )  { u_bber = true; }
-                  else if ( vals[k].equals("backclino")   || vals[k].equals("backgradient") ) { u_bcln = true; }
-                  else { if ( k < vals_len-2 ) partial = true; }
-                }
-                float factor = ParserUtil.parseFloat( vals[vals_len-2], 1.0f );
-                if ( u_len || u_left || u_right || u_up || u_down ) {
-                  float len = factor * ParserUtil.parseLengthUnit( vals[vals_len-1] );
-                  if ( u_len ) state.mUnitLen = len;
-                  if ( u_blen ) state.mUnitBackLen = len;
-                } 
-                if ( u_ber || u_cln ) {
-                  float angle = factor * ParserUtil.parseAngleUnit( vals[vals_len-1] );
-                  if ( u_ber ) state.mUnitBer = angle;
-                  if ( u_cln ) state.mUnitCln = angle;
-                  if ( u_bber ) state.mUnitBackBer = angle;
-                  if ( u_bcln ) state.mUnitBackCln = angle;
-                }
-              } else if ( cmd.equals("sd") ) { // TDLog.v("TH sd not handled" );
-              } else if ( cmd.equals("grade") ) { // TDLog.v("TH grade not handled" );
-              } else if ( cmd.equals("declination") ) { 
-                // TDLog.v("Therion declination " + line );
-                if ( 1 < vals_len ) {
-		  if ( vals[1].equals("-") ) { // declination reset
-                    state.mDeclination = ( state.mParent == null )? 0 : state.mParent.mDeclination;
-		  } else {
-                    try {
-                      float declination = Float.parseFloat( vals[1] );
-                      if ( 2 < vals_len ) {
-                      declination *= ParserUtil.parseAngleUnit( vals[2] );
-                      }
-                      state.mDeclination = declination;
-                      if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
-                    } catch ( NumberFormatException e ) {
-                      TDLog.e( "TH declination " + line );
-                      partial = true;
-                    }
-		  }
-                }      
-              } else if ( cmd.equals("instrument") ) {
-                // TDLog.v("TH instrument not handled" );
-                // partial = true;
-              } else if ( cmd.equals("flags") ) {
-                // TDLog.v("Therion flags");
-                boolean yes = true;
-                for ( int ii = 1; ii < vals_len; ++ii ) {
-                  if ( vals[ii].equals("not") ) {
-                    yes = false;
-                  } else {
-                    if ( vals[ii].startsWith("splay") ) {
-                      state.mSplay = yes;
-                    } else if ( vals[ii].startsWith("dup") ) {
-                      state.mSurface = yes;
-                    } else if ( vals[ii].startsWith("surf") ) {
-                      state.mDuplicate = yes;
-                    } else {
-                      TDLog.e("TH unknown flag " + vals[ii] );
-                      partial = true;
-                    }
-                    yes = true;
-                  }
-                }
-              } else if ( cmd.equals("mark") ) { // ***** fix station east north Z (ignored std-dev's)
-                // TDLog.v("Therion mark");
-                String flag_str = vals[ vals_len - 1 ];
-                int flag = 0;
-                if ( "painted".equals( vals[ vals_len-1 ] ) ) {
-                  flag = StationFlag.STATION_PAINTED;
-                } else if ( "fixed".equals( vals[ vals_len-1 ] ) ) {
-                  flag = StationFlag.STATION_FIXED;
-                } else {
-                  TDLog.e("TH unknown mark " + vals[ vals_len-1 ] );
-                  partial = true;
-                }
-                // TDLog.v( "Therion parser: mark flag " + flag + " " + flag_str );
-                if ( flag != 0 ) {
-                  for ( int k=1; k<vals_len-1; ++k ) {
-                    String name = therionPath ? vals[k] : extractStationName( vals[k], surveyPath );
-                    // TDLog.v("Therion mark " + name );
-                    // TDLog.v( "mark station " + name );
-                    boolean must_add = true;
-                    for ( Station st : stations ) if ( st.name.equals( name ) ) {
-                      must_add = false;
-                      st.flag = flag;
-                      break;
-                    }
-                    if ( must_add ) stations.add( new Station( name, "", flag ) );
-                  }
-                }   
-              } else if ( cmd.equals("station") ) { // ***** station name "comment"
-                // TDLog.v("Therion station");
-                if ( vals_len > 2 ) {
-                  String name = therionPath ? vals[1] : extractStationName( vals[1], surveyPath );
-                  // TDLog.v("Therion station " + name );
-                  String comment = vals[2];
-                  if ( comment.startsWith( "\"" ) ) {
-                    if ( comment.endsWith( "\"" ) ) {
-                      comment = comment.substring(1,comment.length()-1);
-                    } else {
-                      StringBuilder sb = new StringBuilder();
-                      sb.append( comment.substring( 1 ) );
-                      for ( int kk=3; kk<vals_len; ++kk ) {
-                        if ( vals[kk].endsWith("\"") ) {
-                          sb.append(" ");
-                          sb.append( vals[kk].substring(0, vals[kk].length()-1) );
-                          break;
+                } else if ( cmd.equals("station") ) { // ***** station name "comment" 
+                  // N.B. station flags (entrance, continuation, explored, attr) are not handled in TopoDroid
+                  if ( vals_len > 2 ) {
+                    String name = extractStationName( vals[1], state );
+                    if ( name != null ) {
+                      // TDLog.v("Therion station " + name );
+                      String comment = vals[2];
+                      if ( comment.startsWith( "\"" ) ) {
+                        if ( comment.endsWith( "\"" ) ) {
+                          comment = comment.substring(1,comment.length()-1);
                         } else {
-                          sb.append(" ");
-                          sb.append( vals[kk] );
+                          StringBuilder sb = new StringBuilder();
+                          sb.append( comment.substring( 1 ) );
+                          for ( int kk=3; kk<vals_len; ++kk ) {
+                            if ( vals[kk].endsWith("\"") ) {
+                              sb.append(" ");
+                              sb.append( vals[kk].substring(0, vals[kk].length()-1) );
+                              break;
+                            } else {
+                              sb.append(" ");
+                              sb.append( vals[kk] );
+                            }
+                          }
+                          comment = sb.toString();
                         }
                       }
-                      comment = sb.toString();
+                      // TDLog.v( "Therion parser station " + name + " comment <" + comment + ">" );
+                      if ( comment.length() > 0 ) {
+                        boolean must_add = true;
+                        for ( Station st : stations ) if ( st.name.equals( name ) ) { 
+                          must_add = false;
+                          st.comment = comment;
+                          // st.flag is kept
+                          break;
+                        }
+                        if ( must_add ) stations.add( new Station( name, comment, state.mMark ) ); 
+                      }
+                    } else {
+                      partial = true;
                     }
                   }
-                  // TDLog.v( "Therion parser station " + name + " comment <" + comment + ">" );
-                  if ( comment.length() > 0 ) {
-                    boolean must_add = true;
-                    for ( Station st : stations ) if ( st.name.equals( name ) ) { 
-                      must_add = false;
-                      st.comment = comment;
-                      break;
-                    }
-                    if ( must_add ) stations.add( new Station( name, comment, 0 ) );
-                  }
-                }
 
-              } else if ( cmd.startsWith("explo") ) { // explo-date explo-team // TDLog.v("TH explo not handled");
-              } else if ( cmd.equals("break") ) {
-                // TDLog.v("TH break ignored");
-                partial = true;
-              } else if ( cmd.equals("infer") ) { // TDLog.v("TH infer ignored");
-
-              } else if ( cmd.equals("group") ) {
-                // TDLog.v("Therion group");
-                // pushState( state );
-                state = new ParserTherionState( state );
-              } else if ( cmd.equals("endgroup") ) {
-                // TDLog.v("Therion end group");
-                // state = popState();
-                if ( state.mParent != null ) state = state.mParent;
-
-              } else if ( cmd.equals("walls") ) { // TDLog.v("TH walls ignored");
-              } else if ( cmd.equals("vthreshold") ) { // TDLog.v("TH vthreshold ignored");
-              } else if ( cmd.equals("extend") ) { 
-                if ( vals_len == 2 ) {
-                  state.mExtend = ParserUtil.parseExtend( vals[1], state.mExtend );
-                  // TDLog.v("Therion extend " + state.mExtend );
-                } else { 
-                  TDLog.v("TH not implemented extend value station [station]");
+                } else if ( cmd.equals("break") ) {
+                  // TDLog.v("TH break ignored");
                   partial = true;
-                }
-              } else if ( cmd.equals("station_names") ) {
-                // TDLog.v("Therion station_names");
-                state.mPrefix = "";
-                state.mSuffix = "";
-                if ( vals_len > 1 ) {
-                  int off = vals[1].indexOf( '"' );
-                  if ( off >= 0 ) {
-                    int end = vals[1].lastIndexOf( '"' );
-                    state.mPrefix = vals[1].substring(off+1, end );
+                } else if ( cmd.equals("infer") ) { // TDLog.v("TH infer ignored");
+
+                } else if ( cmd.equals("group") ) {
+                  state = new ParserTherionState( state, null ); // pushState( state );
+                } else if ( cmd.equals("endgroup") ) {
+                  if ( state.mParent != null ) state = state.mParent; // state = popState();
+
+                } else if ( cmd.equals("walls") ) { // TDLog.v("TH walls ignored");
+                } else if ( cmd.equals("vthreshold") ) { // TDLog.v("TH vthreshold ignored");
+                } else if ( cmd.equals("extend") ) {     // fractional extend (second arg) not handled in TopoDroid TODO
+                  if ( vals_len >= 2 ) {
+                    state.mExtend = ParserUtil.parseExtend( vals[1], state.mExtend );
+                  } else { 
+                    // TDLog.v("TH not implemented extend value station [station]");
+                    partial = true;
                   }
-                  if ( vals_len > 2 ) {
-                    off = vals[2].indexOf( '"' );
+                } else if ( cmd.equals("station-names") ) {
+                  // TDLog.v("Therion station-names");
+                  state.mPrefix = "";
+                  state.mSuffix = "";
+                  if ( vals_len > 1 ) {
+                    int off = vals[1].indexOf( '"' );
                     if ( off >= 0 ) {
-                      int end = vals[2].lastIndexOf( '"' );
-                      state.mSuffix = vals[2].substring(off+1, end );
+                      int end = vals[1].lastIndexOf( '"' );
+                      state.mPrefix = vals[1].substring(off+1, end );
+                    }
+                    if ( vals_len > 2 ) {
+                      off = vals[2].indexOf( '"' );
+                      if ( off >= 0 ) {
+                        int end = vals[2].lastIndexOf( '"' );
+                        state.mSuffix = vals[2].substring(off+1, end );
+                      }
                     }
                   }
-                }
-              } else if ( cmd.equals("data") ) {
-                // TDLog.v("Therion data format");
-                // data normal from to length compass clino ...
-                if ( vals[1].equals("normal") ) {
-                  state.data_type = ParserUtil.DATA_NORMAL;
-                } else if ( vals[1].equals("topofil") ) {
-                  state.data_type = ParserUtil.DATA_TOPOFIL;
-                } else if ( vals[1].equals("diving") ) {
-                  state.data_type = ParserUtil.DATA_DIVING;
-                } else if ( vals[1].equals("cartesian") ) {
-                  state.data_type = ParserUtil.DATA_CARTESIAN;
-                } else if ( vals[1].equals("cylpolar") ) {
-                  state.data_type = ParserUtil.DATA_CYLPOLAR;
-                } else if ( vals[1].equals("dimensions") ) {
-                  state.data_type = ParserUtil.DATA_DIMENSION;
-                } else if ( vals[1].equals("nosurvey") ) {
-                  state.data_type = ParserUtil.DATA_NOSURVEY;
+                } else if ( cmd.equals("data") ) {
+                  if ( vals.length > 1 ) { // data normal from to length compass clino ...
+                    state.setDataType( vals[1] );
+                    state.resetJindices();
+                 
+                    int j0 = 0;
+                    int j  = 2;
+                    for ( ; j < vals_len; ++j ) {
+                      if ( vals[j].equals("ignoreall") ) break;
+                      if ( ! state.setJindex( vals[j], j0 ) ) partial = true;
+                      ++j0;
+                    }
+                    while ( j > 2 && vals[j-1].equals( "ignore" ) ) { --j0; --j; } // decrement j0 for last "ignore"s
+                    state.min_value_len = j0; 
+
+                    state.checkStateInData();
+                    // TDLog.v("Therion data format - type " + state.data_type );
+                  } else {
+                    // TODO
+                  }
+                } else if ( state.in_data && vals_len >= state.min_value_len ) { // therion says that dataline can contain reserved wrord if they start with '!' - TopoDroid does not support it
+                  // TDLog.v("Therion data " + line );
+                  if ( state.data_type == ParserUtil.DATA_NORMAL ) {
+                    vals = processDataVals( vals ); // process vals condensates double L R U D of the form [f t] to f:t
+                    if ( vals == null || vals.length < state.min_value_len ) { 
+                      partial = true;
+                    } else {
+                      int sz = vals.length;
+                      String from = vals[state.jFrom];
+                      String to   = vals[state.jTo];
+                      float len   = ( state.jLength      < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jLength],      Float.NaN );
+                      float ber   = ( state.jCompass     < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jCompass],     Float.NaN );
+                      float cln   = ( state.jClino       < 0 )? Float.NaN : parseClino( vals[state.jClino], state.mClinoPercent );
+                      float blen  = ( state.jBackLength  < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jBackLength],  Float.NaN );
+                      float bber  = ( state.jBackCompass < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jBackCompass], Float.NaN );
+                      float bcln  = ( state.jBackClino   < 0 )? Float.NaN : parseClino( vals[state.jBackClino], state.mClinoPercent );
+	              // measure = (read - zero)*scale
+	              float zLen  = state.mZeroLen;
+	              float sLen  = state.mScaleLen * state.mUnitLen;
+	              float zBLen = state.mZeroBackLen;
+	              float sBLen = state.mScaleBackLen * state.mUnitBackLen;
+
+                      if ( Float.isNaN( len ) ) {
+                        len = Float.isNaN( blen )? Float.NaN : (blen - zBLen) * sBLen;
+                      } else {
+                        len = (len - zLen) * sLen;
+                        if ( ! Float.isNaN( blen ) ) { blen = (blen - zBLen) * sBLen; len  = ( len + blen )/2; }
+                      }
+
+                      if ( Float.isNaN( cln ) ) { // TODO assume clino percent corrected in zero (converted to degrees) and scale=1. units=1 (degrees)
+                        cln = Float.isNaN( bcln )? Float.NaN : - (bcln - state.mZeroBackCln) * state.mScaleBackCln * state.mUnitBackCln;
+                      } else {
+                        cln = (cln - state.mZeroCln) * state.mScaleCln * state.mUnitCln;
+                        if ( ! Float.isNaN( bcln ) ) { 
+                          bcln = (bcln - state.mZeroBackCln) * state.mScaleBackCln * state.mUnitBackCln;
+                          cln  = ( cln - bcln )/2;
+                        }
+                      }
+
+                      if ( Float.isNaN( ber ) ) {
+                        ber = Float.isNaN( bber )? Float.NaN : TDMath.in360(180 + (bber - state.mZeroBackBer) * state.mScaleBackBer * state.mUnitBackBer );
+                      } else {
+                        ber = (ber - state.mZeroBer) * state.mScaleBer * state.mUnitBer;
+                        if ( ! Float.isNaN( bber ) ) { bber = (bber - state.mZeroBackBer) * state.mScaleBackBer * state.mUnitBackBer; ber  = TDMath.averageDegrees( ber, TDMath.in360(bber+180) ); }
+                      }
+
+                      if ( Float.isNaN( len ) || Float.isNaN( ber ) || Float.isNaN( cln ) ) {
+                        // TDLog.v("TH data NaN " + line );
+                        partial = true;
+                      } else {
+                        boolean from_splay = isSplayStationName( from );
+                        boolean to_splay   = isSplayStationName( to );
+                        if ( from_splay && to_splay ) {            // no real station
+                          // TDLog.v( "TH no real station");
+                          partial = true;
+                        } else {
+                          ber = checkApplyDeclination( ber, state.mDeclination );
+                          boolean is_splay = from_splay || to_splay || state.mSplay;
+                          boolean mirrored = false; // TODO this needs checkin against Therion sources
+                          // If LRUD belongs to the FROM station, which is the anonymous one in the swapped case, attaching it to the real station is a guess.
+                          if ( from_splay ) {
+                            from = to;
+                            mirrored = true;
+                            ber  = TDMath.in360( ber + 180 );
+                            cln  = - cln;
+                          }
+                          from = extractStationName( from, state );
+                          to = is_splay ? "-" : extractStationName( to, state );
+                          if ( from != null && to != null ) {
+                            if ( state.jLeft >= 0 && state.jLeft < sz ) {
+                              float b = mirrored ? TDMath.add90( ber ) : TDMath.sub90( ber );
+                              handleSplay( vals[state.jLeft], from, to, b, 0, state.mZeroLeft, state.mScaleLeft * state.mUnitLeft, state );
+                            }
+                            if ( state.jRight >= 0 && state.jRight < sz ) {
+                              float b = mirrored ? TDMath.sub90( ber ) : TDMath.add90( ber );
+                              handleSplay( vals[state.jRight], from, to, b, 0, state.mZeroRight, state.mScaleRight * state.mUnitRight, state );
+                            }
+                            if ( state.jUp >= 0 && state.jUp < sz ) {
+                              handleSplay( vals[state.jUp], from, to, 0, 90, state.mZeroUp, state.mScaleUp * state.mUnitUp, state );
+                            }
+                            if ( state.jDown >= 0 && state.jDown < sz ) {
+                              handleSplay( vals[state.jDown], from, to, 0, -90, state.mZeroDown, state.mScaleDown * state.mUnitDown, state );
+                            }
+                            if ( is_splay ) { // splay shot
+                              shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, 
+                                         state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, cmnt ) );
+                            } else {
+                              // TDLog.v( "Therion add shot " + from + " " + to);
+                              shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, 
+                                         state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, cmnt ) );
+                            }
+                          } else {
+                            partial = true;
+                          }
+                        }
+                      }
+                    }
+                  } else { // if ( state.data_type == ParserUtil.DATA_NORMAL ) 
+                    // FIXME other data types
+                    partial = true;
+                  }
+                } else if ( cmd.equals("equate") ) { // NOTE "equate", "fix", "cs" are allowed both in "survey" and in "centerline"
+                  if ( ! handleEquate( vals, vals_len, state ) ) partial = true;
+                } else if ( cmd.equals("fix") ) { 
+                  if ( ! handleFix( vals, vals_len, state ) ) partial = true;
+                } else if ( cmd.equals("cs") ) { 
+                  if ( ! handleCs( vals, vals_len, state ) ) partial = true; // prepared for CS
+
                 } else {
-                  state.data_type = ParserUtil.DATA_NONE;
-                }
-
-                jFrom = jTo = jStation = jLength = jCompass = jClino = -1;
-                jBackLength = jBackCompass = jBackClino = -1;
-                jLeft = jUp = jRight  = jDown = -1;
-                jDepth = jTodepth = jFromdepth = jCount = jNorthing = jEasting = jAltitude = -1;
-               
-                int j0 = 0;
-                for ( int j=2; j < vals_len; ++j ) {
-                  if ( vals[j].equals("from") ) {
-                    jFrom = j0; ++j0;
-                  } else if ( vals[j].equals("to") ) {
-                    jTo = j0; ++j0;
-                  } else if ( vals[j].equals("station") ) {
-                    jStation = j0; ++j0;
-                  } else if ( vals[j].equals("length") || vals[j].equals("tape") ) {
-                    jLength = j0; ++j0;
-                  } else if ( vals[j].equals("compass") || vals[j].equals("bearing") ) {
-                    jCompass = j0; ++j0;
-                  } else if ( vals[j].equals("clino") || vals[j].equals("gradient") ) {
-                    jClino = j0; ++j0;
-                  } else if ( vals[j].equals("backlength") || vals[j].equals("backtape") ) {
-                    jBackLength = j0; ++j0;
-                  } else if ( vals[j].equals("backcompass") || vals[j].equals("backbearing") ) {
-                    jBackCompass = j0; ++j0;
-                  } else if ( vals[j].equals("backclino") || vals[j].equals("backgradient") ) {
-                    jBackClino = j0; ++j0;
-                  } else if ( vals[j].equals("left") ) {
-                    jLeft  = j0; ++j0;
-                  } else if ( vals[j].equals("right") ) {
-                    jRight = j0; ++j0;
-                  } else if ( vals[j].equals("up") || vals[j].equals("ceiling") ) {
-                    jUp    = j0; ++j0;
-                  } else if ( vals[j].equals("down") || vals[j].equals("floor") ) {
-                    jDown  = j0; ++j0;
-                  } else if ( vals[j].equals("depth") ) {
-                    jDepth = j0; ++j0;
-                  } else if ( vals[j].equals("todepth") ) {
-                    jTodepth = j0; ++j0;
-                  } else if ( vals[j].equals("fromdepth") ) {
-                    jFromdepth = j0; ++j0;
-                  } else if ( vals[j].equals("count") ) {
-                    jCount = j0; ++j0;
-                  } else if ( vals[j].equals("northing") ) {
-                    jNorthing = j0; ++j0;
-                  } else if ( vals[j].equals("easting") ) {
-                    jEasting = j0; ++j0;
-                  } else if ( vals[j].equals("altitude") ) {
-                    jAltitude = j0; ++j0;
-                  } else if ( vals[j].equals("ignore") ) {
-                    ++j0;
-                  } else if ( vals[j].equals("ignoreall") ) {
-                    break;
-                  } else {
-                    ++j0;
-                    partial = true;
-                  }
-                }
-                state.min_value_len = j0;
-               
-                switch ( state.data_type ) {
-                  case ParserUtil.DATA_NORMAL:
-                    state.in_data = (jFrom >= 0) && (jTo >= 0) 
-                      && ( jLength >= 0 || jBackLength >= 0 )
-                      && ( jCompass >= 0 || jBackCompass >= 0 )
-                      && ( jClino >= 0 || jBackClino >= 0 );
-                    break;
-                  case ParserUtil.DATA_TOPOFIL:
-                    state.in_data = (jFrom >= 0) && (jTo >= 0) 
-                      && ( jLength >= 0 || jBackLength >= 0 )
-                      && ( jCompass >= 0 || jBackCompass >= 0 )
-                      && ( jClino >= 0 || jBackClino >= 0 );
-                    break;
-                  case ParserUtil.DATA_DIVING:
-                    state.in_data = (jFrom >= 0) && (jTo >= 0) 
-                      && ( jLength >= 0 || jBackLength >= 0 )
-                      && ( jCompass >= 0 || jBackCompass >= 0 )
-                      && ( jDepth >= 0 || jTodepth >= 0 || jFromdepth >= 0);
-                    break;
-                  case ParserUtil.DATA_CARTESIAN:
-                    state.in_data = (jFrom >= 0) && (jTo >= 0) 
-                      && ( jNorthing >= 0 ) && ( jEasting >= 0 ) && ( jAltitude >= 0 );
-                    break;
-                  case ParserUtil.DATA_CYLPOLAR:
-                    state.in_data = (jFrom >= 0) && (jTo >= 0) 
-                      && ( jLength >= 0 ) // horizoltan length
-                      && ( jCompass >= 0 )
-                      && ( jDepth >= 0 ); // vertical
-                    break;
-                  case ParserUtil.DATA_DIMENSION:
-                    state.in_data = (jStation >= 0) && ( jLeft >= 0 || jRight >= 0 || jUp >= 0 || jDown >= 0 );
-                    break;
-                  case ParserUtil.DATA_NOSURVEY:
-                    state.in_data = true;
-                }
-                // TODO other style syntax
-                // TDLog.v("Therion data format - type " + state.data_type );
-              } else if ( state.in_data && vals_len >= state.min_value_len ) {
-                // TDLog.v("Therion data " + line );
-                if ( state.data_type == ParserUtil.DATA_NORMAL ) {
-                  int sz = vals.length;
-                  String from = vals[jFrom];
-                  String to   = vals[jTo];
-                  float len  = ( jLength  < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jLength],  Float.NaN );
-                  float ber  = ( jCompass < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jCompass], Float.NaN );
-                  float cln  = ( jClino   < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jClino],   Float.NaN );
-                  float blen  = ( jBackLength  < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jBackLength],  Float.NaN );
-                  float bber  = ( jBackCompass < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jBackCompass], Float.NaN );
-                  float bcln  = ( jBackClino   < 0 )? Float.NaN : ParserUtil.parseFloat( vals[jBackClino],   Float.NaN );
-
-		  // measure = (read - zero)*scale
-		  float zLen = state.mZeroLen;
-		  float sLen = state.mScaleLen * state.mUnitLen;
-		  float zBLen = state.mZeroBackLen;
-		  float sBLen = state.mScaleBackLen * state.mUnitBackLen;
-
-                  if ( Float.isNaN( len ) ) {
-                    len = Float.isNaN( blen )? Float.NaN : (blen - zBLen) * sBLen;
-                  } else {
-                    len = (len - zLen) * sLen;
-                    if ( ! Float.isNaN( blen ) ) {
-                      blen = (blen - zBLen) * sBLen;
-                      len = ( len + blen )/2;
-                    }
-                  }
-                  if ( Float.isNaN( cln ) ) {
-                    cln = Float.isNaN( bcln )? Float.NaN : - (bcln - state.mZeroBackCln) * state.mScaleBackCln * state.mUnitBackCln;
-                  } else {
-                    cln = (cln - state.mZeroCln) * state.mScaleCln * state.mUnitCln;
-                    if ( ! Float.isNaN( bcln ) ) {
-                      bcln = (bcln - state.mZeroBackCln) * state.mScaleBackCln * state.mUnitBackCln;
-                      cln = ( cln - bcln )/2;
-                    }
-                  }  
-                  if ( Float.isNaN( ber ) ) {
-                    ber = Float.isNaN( bber )? Float.NaN : TDMath.in360(180 + (bber - state.mZeroBackBer) * state.mScaleBackBer * state.mUnitBackBer );
-                  } else {
-                    ber = (ber - state.mZeroBer) * state.mScaleBer * state.mUnitBer;
-                    if ( ! Float.isNaN( bber ) ) {
-                      bber = (bber - state.mZeroBackBer) * state.mScaleBackBer * state.mUnitBackBer;
-                      ber = TDMath.averageDegrees( ber, TDMath.in360(bber+180) );
-                    }
-                  }
-
-                  if ( Float.isNaN( len ) || Float.isNaN( ber ) || Float.isNaN( cln ) ) {
-                    TDLog.v("TH data " + line );
-                    partial = true;
-                  } else {
-                    ber = checkApplyDeclination( ber, state.mDeclination );
-
-                    if ( to.equals("-") || to.equals(".") || to.equals("..") || to.equals("...") ) { to = "-"; }
-                    if ( therionPath ) {
-                      from = state.mPrefix + path.getName( from ) + state.mSuffix;
-                      to   = state.mPrefix + path.getName( to )   + state.mSuffix;
-                    } else {
-                      from = state.mPrefix + from + state.mSuffix;
-                      to   = state.mPrefix + to   + state.mSuffix;
-                    }
-
-                    float dist, b;
-                    if ( jLeft >= 0 && jLeft < sz ) {
-                      dist = (ParserUtil.parseFloat( vals[jLeft], Float.NaN ) - zLen) * sLen;
-                      if ( ! Float.isNaN( dist ) ) {
-                        b = TDMath.sub90( ber ); // b = ber - 90; if ( b < 0 ) b += 360;
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") );
-                      }
-                    }
-                    if ( jRight >= 0 && jRight < sz ) {
-                      dist = (ParserUtil.parseFloat( vals[jRight], Float.NaN ) - zLen) * sLen;
-                      if ( ! Float.isNaN( dist ) ) {
-                        b = TDMath.add90( ber ); // b = ber + 90; if ( b >= 360 ) b -= 360;
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") ); 
-                      }
-                    }
-                    if ( jUp >= 0 && jUp < sz ) {
-                      dist = (ParserUtil.parseFloat( vals[jUp], Float.NaN ) - zLen) * sLen;
-                      if ( ! Float.isNaN( dist ) ) {
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, 0, 90, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") );
-                      }
-                    }
-                    if ( jDown >= 0 && jDown < sz ) {
-                      dist = (ParserUtil.parseFloat( vals[jDown], Float.NaN ) - zLen) * sLen;
-                      if ( ! Float.isNaN( dist ) ) {
-                        shots.add( new ParserShot( from, TDString.EMPTY, dist, 0, -90, 0.0f, state.mExtend, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "") );
-                      }
-                    }
-
-                    // TODO add shot
-                    if ( state.mSplay || to.equals("-") || to.equals("_") || to.equals(".") || to.equals("..") || to.equals("...") ) { // splay shot
-                      // FIXME splays
-                      // TDLog.v( "Therion add shot " + from + " -- ");
-                      shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                      // cmnt = ""; //HBTc cmnt is reset each line
-                    } else {
-                      // TDLog.v( "Therion add shot " + from + " " + to);
-                      shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, cmnt) ); //HBTc
-                      // cmnt = ""; //HBTc cmnt is reset each line
-                    }
-                  }
-                } else { // if ( state.data_type == ParserUtil.DATA_NORMAL ) 
-                  // FIXME other data types
+                  TDLog.v("TH unknown cmd " + cmd + " in centerline");
                   partial = true;
                 }
-              } else if ( cmd.equals("equate") ) { // NOTE "equate", "fix", "cs" are allowed both in "survey" and in "centerline"
-                handleEquate( vals, vals_len, surveyPath, therionPath, path, state );
-              } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
-                handleFix( vals, vals_len, surveyPath, therionPath, path  );
-              } else if ( cmd.equals("cs") ) { 
-                handleCs( vals, vals_len, surveyPath, therionPath, path  );
-              } else {
-                TDLog.v("TH unknown cmd " + cmd + " in centerline");
-                partial = true;
-              }
-            } else if ( state.in_survey ) { // && ! state.in_centerline
-              if ( cmd.equals("centerline") || cmd.equals("centreline") ) {
-                // TDLog.v("Therion in centerline");
-                // pushState( state );
-                state = new ParserTherionState( state );
-                state.in_centerline = true;
-                state.in_data = false;
-              } else if ( cmd.equals("endsurvey") ) {
-                if ( state.in_centerline ) {
-                  TDLog.e("Parser Therion close survey " + path.toString() + " in centerline");
+                // state ! in scan
+              } else if ( state.in_survey ) { // && ! state.in_centerline  // SURVEY CONTEXT
+                if ( cmd.equals("centerline") || cmd.equals("centreline") ) { // START CENTERLINE CONTEXT N.B. Therion allow cetnterline outside SURVEY CONTEXT but TopoDroid only handles inside SURVEY
+                  // TDLog.v("Therion in centerline");
+                  // pushState( state );
+                  state = new ParserTherionState( state, null );
+                  state.in_centerline = true;
+                  state.in_data = false;
+                } else if ( cmd.equals("endsurvey") ) {
+                  if ( state.in_centerline ) {
+                    TDLog.e("TH Parser close survey " + state.mSurveyPath + " in centerlline" );
+                  }
+                  if ( state.mParent != null ) state = state.mParent;
+
+                // } else if ( cmd.equals("scan") ) { // handled by the top "scan"
+                //   state.in_scan = true;
+                // } else if ( state.in_scan ) {
+                //   if ( cmd.equals("endscan") ) state.in_scan = false;
+                //   // oterwise ignore scan
+
+                } else if ( cmd.equals("equate") ) { // N.B. Therion allows equate outside SURVEY CONTEXT
+                  if ( ! handleEquate( vals, vals_len, state ) ) partial = true;
+                } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's) N.B. Therion allows fix outside SURVEY CONTEXT
+                  if ( ! handleFix( vals, vals_len, state  ) ) partial = true;
+                } else if ( cmd.equals("cs") ) { 
+                  if ( ! handleCs( vals, vals_len, state  ) ) partial = true; // prepared for CS
+                } else {
+                  TDLog.v("TH unknown cmd " + cmd + " in survey");
+                  partial = true;
                 }
-                // TDLog.v("Therion endsurvey " + path.toString() );
-                // state = popState();
-                if ( state.mParent != null ) state = state.mParent;
-	        // if ( ks > 0 ) {
-                //   --ks;
-                // } else {
-                //   TDLog.e("Parser Therion: endsurvey out of survey");
-	        // }
-                // int k_pos = survey_pos[ks];
-                // TDLog.v("Parser TH: end survey (" + k_pos + " " + ks + "): " + path.toString() );
-                // // path = ( k_pos > 0 )? path.substring(k_pos) : ""; // return to previous survey_pos in path
-                // if ( k_pos > 0 ) path.setLength( k_pos );
-                // state.in_survey = ( ks > 0 );
-                state.in_survey = path.dropSurvey();
-              } else if ( cmd.equals("equate") ) { 
-                handleEquate( vals, vals_len, surveyPath, therionPath, path, state );
-              } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
-                handleFix( vals, vals_len, surveyPath, therionPath, path  );
-              } else if ( cmd.equals("cs") ) { 
-                handleCs( vals, vals_len, surveyPath, therionPath, path  );
               } else {
-                TDLog.v("TH unknown cmd " + cmd + " in survey");
+                TDLog.v("TH unknown cmd " + cmd );
                 partial = true;
               }
-            } else {
-              TDLog.v("TH unknown cmd " + cmd );
-              partial = true;
-            }
+            } // state ! in_comment
           } // empty vals 
         } // empty line
         line = nextLine( br );
       }
-      mTeam = team.toString();
 
     } catch ( IOException e ) {
       // TODO
@@ -930,79 +796,278 @@ class ParserTherion extends ImportParser
       partial = true;
       throw new ParserException();
     }
-    if ( mDate == null ) {
-      mDate = TDUtil.currentDate();
-    }
     // TDLog.v( "Parser TH shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
     return partial;
   }
 
-  private void handleEquate(String[] vals, int vals_len, String surveyPath, boolean therionPath, TherionPath path, ParserTherionState state )
+  /** handle a "equate" command
+   * @param vals       string array of tokens on the command (vals[0] = "equate")
+   * @param vals_len   number of tokens
+   * @param state      parser state
+   * @return false if there was a bad reading
+   */
+  private boolean handleEquate( String[] vals, int vals_len, ParserTherionState state )
   {
     // TDLog.v("Therion equate vals " + vals_len);
-    if ( vals_len > 2 ) {
-      String from, to;
-      int idx = vals[1].indexOf('@');
-      if ( idx > 0 ) {
-        if ( therionPath ) {
-          from = vals[1] + "." + path.toString();
-          // from = vals[1].substring( 0, idx ) + "@" + path.path2qath( vals[1].substring(idx+1) );
-        } else {
-          from = vals[1].substring( 0, idx );
-        }
+    if ( vals_len < 2 ) return false;
+    boolean ret = true;
+    int j = 1;
+    String from = extractStationName( vals[j++], state );
+    if ( from == null ) {
+      ret = false;
+      while ( j<vals_len ) {
+        from = extractStationName( vals[j++], state );
+        if ( from != null ) break;
+      }
+    }
+    if ( from != null ) {
+      while ( j<vals_len ) {
+        String to   = extractStationName( vals[j++], state );
+        if ( to == null ) { ret = false; }
+        else { shots.add( new ParserShot( from, to, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, false, false, "" ) ); }
+      }
+    }
+    return ret;
+  }
+
+  /** handle a "fix" command, "fix station x y z" (ignoring std-dev's)
+   * @param vals       string array of tokens on the command (vals[0] = "fix")
+   * @param vals_len   number of tokens
+   * @param state      parser state
+   * @return false if there was a bad reading
+   */
+  private boolean handleFix( String[] vals, int vals_len, ParserTherionState state )
+  {
+    if ( vals_len < 5 || state.mCSorder == state.CS_NONE ) return false;
+    String name = extractStationName( vals[1], state );
+    if ( name == null ) return false;
+    try {
+      float a = parseDegrees( vals[2] );
+      float b = parseDegrees( vals[3] );
+      boolean latlong = ( state.mCSorder == ParserTherionState.CS_LAT_LONG );
+      fixes.add( new ThFix( name, latlong ? b : a, latlong ? a : b, Float.parseFloat( vals[4] ) ) ); // e=long, n=lat
+      return true;
+    } catch ( NumberFormatException e ) {
+      TDLog.e( "therion parser error: fix " + vals[1] + " " + vals[2] + " " + vals[3] + " " + vals[4] );
+    }
+    return false;
+  }
+
+  /** handle a "cs" command, "cs ..." - TODO not implemented
+   * @param vals       string array of tokens on the command (vals[0] = "cs")
+   * @param vals_len   number of tokens
+   * @param state      parser state
+   * @return false if there was a bad reading
+   */
+  private boolean handleCs(String[] vals, int vals_len, ParserTherionState state )
+  { 
+    if ( vals_len < 2 ) return false;
+    if ( vals[1].equals("long-lat") ) { state.mCSorder = ParserTherionState.CS_LONG_LAT; return true; }
+    if ( vals[1].equals("lat-long") ) { state.mCSorder = ParserTherionState.CS_LAT_LONG; return true; }
+    state.mCSorder = ParserTherionState.CS_NONE;
+    return false;
+  }
+
+  private boolean isSplayStationName( String name )
+  {
+    return ( name.equals("-") || name.equals("_") || name.equals(".") || name.equals("..") || name.equals("...") );
+  }
+
+  /** process data vals array to merge double LRUD of form [f t] into a single token f:t
+   * @param vals   input data string array
+   * @return condensed data strin array
+   */
+  private String[] processDataVals( String[] vals )
+  {
+    ArrayList<String> result = new ArrayList<>();
+    int n = vals.length;
+    int k = 0;
+    while ( k<n ) {
+      if ( ! vals[k].startsWith("[") ) { 
+        result.add( vals[k] ); 
       } else {
-        if ( therionPath ) {
-          from = vals[1] + "@" + path.toString();
-        } else {
-          from = vals[1];
+        ArrayList<String> inner = new ArrayList<>();
+
+        // boolean closed = false;
+        // for ( ; k < n && ! closed; ++k ) {
+        //   String t = vals[k].replace("[", "").replace("]", "");
+        //   if ( t.length() > 0 ) inner.add( t );
+        //   closed = vals[k].endsWith("]");
+        // }
+        // if ( ! closed || inner.size() > 2 ) return null;          // unclosed or bad data
+        // result.add( inner.isEmpty() ? "" : ( inner.size() == 1 ? inner.get(0) : inner.get(0) + ":" + inner.get(1) ) );
+      
+        if ( vals[k].equals("[]") ) { } // [] 
+        else if ( vals[k].equals("[") ) {
+          if ( ++k < n && vals[k].equals("]") ) { } // [ ]
+          else if ( vals[k].endsWith("]") ) { inner.add( " " ); inner.add( vals[k].replace("]", "") ); } // [ 1.2]
+          else {
+            inner.add( vals[k] ); 
+            while ( ++k < n ) { 
+              if ( vals[k].equals("]") ) break;    // [ 1.2 2.3 ] or [ 1.2 ]
+              inner.add( vals[k].replace("]", "") );
+              if ( vals[k].endsWith("]") ) break;  // [ 1.2 2.3]  or [ 1.2] 
+            }
+          }
+        } else if ( vals[ k ].startsWith("[") ) { //  one of [1.2] [1.2 ] [1.2 2.3 ] [1.2 2.3]
+          if ( vals[ k ].endsWith("]") ) inner.add( vals[k].replace("[", "").replace("]", "") ); // [1.2]
+          else {
+            inner.add( vals[k].replace("[", "") );
+            while ( ++k < n ) { 
+              if ( vals[k].equals("]") ) break; // [1.2 ] or [1.2 2.3 ]
+              inner.add( vals[k].replace("]", "") ); 
+              if ( vals[k].endsWith("]") ) break; // [1.2 2.3]
+            }
+          }
+        } 
+        if ( inner.size() == 0 )      result.add( "" );
+        else if ( inner.size() == 1 ) result.add( inner.get(0) );
+        else if ( inner.size() == 2 ) result.add( inner.get(0) + ":" + inner.get(1) );
+        else return null; // bad data
+      }
+      ++k;
+    }
+    return  result.toArray( new String[0] );
+  }
+        
+  /** handle a splay output
+   * @param val    distance string, either one float or two floats joined by ':'
+   * @param from   primary splay station
+   * @param to     secondary splay station
+   * @param b      azimuth
+   * @param c      clino
+   * @param zero   data zero correction
+   * @param scale_unit data scale-unit factor
+   * @param state  parsing state
+   */
+  private void handleSplay( String val, String from, String to, float b, float c, float zero, float scale_unit, ParserTherionState state )
+  {
+    float dist;
+    if ( val.indexOf(':') > 0 ) {
+      String[] dists = val.split(":");
+      if ( dists.length == 2 ) {
+        dist = (ParserUtil.parseFloat( dists[0], Float.NaN ) - zero) * scale_unit;
+        if ( ! Float.isNaN( dist ) && dist > 0 ) {
+          shots.add( new ParserShot( from, TDString.EMPTY, dist, b, c, 0.0f, state.mExtend, LegType.XSPLAY,
+                                     state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, "") );
+        }
+        if ( ! to.equals("-") ) {
+          dist = (ParserUtil.parseFloat( dists[1], Float.NaN ) - zero) * scale_unit;
+          if ( ! Float.isNaN( dist ) && dist > 0 ) {
+            shots.add( new ParserShot( to, TDString.EMPTY, dist, b, c, 0.0f, state.mExtend, LegType.XSPLAY,
+                                       state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, "") );
+          }
+        // } else { 
+        //   TODO partial = true
         }
       }
-      for ( int j=2; j<vals_len; ++j ) {
-        idx = vals[j].indexOf('@');
-        if ( idx > 0 ) {
-          if ( therionPath ) {
-            to = vals[j] + "." + path.toString();
-            // to = vals[j].substring( 0, idx ) + "@" + path.path2qath( vals[j].substring(idx+1) );
-          } else {
-            to = vals[j].substring( 0, idx );
-          }
-        } else {
-          if ( therionPath ) {
-            to = vals[j] + "@" + path.toString();
-          } else {
-            to = vals[j];
-          }
-        }
-        // TDLog.v("Therion equate " + from + " " + to );
-        if ( therionPath ) {
-          shots.add( new ParserShot( from, to, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
-        } else {
-          shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
-        }
+    } else {
+      dist = (ParserUtil.parseFloat( val, Float.NaN ) - zero) * scale_unit;
+      if ( ! Float.isNaN( dist ) && dist > 0 ) {
+        shots.add( new ParserShot( from, TDString.EMPTY, dist, b, c, 0.0f, state.mExtend, LegType.XSPLAY,
+                                   state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, "") );
       }
     }
   }
 
-  private void handleFix(String[] vals, int vals_len, String surveyPath, boolean therionPath, TherionPath path )
+  private float parseDegrees( String val ) throws NumberFormatException
   {
-    if ( vals_len > 4 ) {
-      String name = therionPath ? vals[1] + "." + path.toString(): extractStationName( vals[1], surveyPath );
-      TDLog.v("Therion fix " + name );
-      try {
-        fixes.add( new ThFix( name,
-                            Float.parseFloat( vals[2] ),
-                            Float.parseFloat( vals[3] ),
-                            Float.parseFloat( vals[4] ) ) );
-      } catch ( NumberFormatException e ) {
-        TDLog.e( "therion parser error: fix " + vals[1] + " " + vals[2] + " " + vals[3] + " " + vals[4] );
+    if ( val == null || val.isEmpty() ) throw new NumberFormatException();
+    boolean neg = val.startsWith("-");
+    if ( neg || val.startsWith("+") ) val = val.substring(1);
+    String[] p = val.split(":");
+    if ( p.length > 3 ) throw new NumberFormatException();
+    float d = Float.parseFloat( p[0] );
+    if ( p.length > 1 ) d += Float.parseFloat( p[1] ) / 60.0f;
+    if ( p.length > 2 ) d += Float.parseFloat( p[2] ) / 3600.0f;
+    return neg ? -d : d;
+  }
+
+  private float parseClino( String val, boolean percent )
+  {
+    float f = ParserUtil.parseFloat( val, Float.NaN );
+    if ( Float.isNaN(f) ) return f;
+    return ( percent? TDMath.atand( f ) : f);
+  }
+    
+  /** open a therion file honouring its "encoding" command (the first non-comment line); UTF-8 if absent or unknown.
+   *  Use this also for the root file, so that the caller does not build the reader itself.
+   */
+  static InputStreamReader openReader( String path ) throws IOException
+  {
+    String enc = null;
+    try ( FileInputStream fis = new FileInputStream( path ) ) {
+      byte[] buf = new byte[4096];
+      int n = fis.read( buf );
+      if ( n >= 3 && (buf[0]&0xff) == 0xEF && (buf[1]&0xff) == 0xBB && (buf[2]&0xff) == 0xBF ) {
+        enc = "UTF-8";
+      } else if ( n > 0 ) {
+        for ( String line : new String( buf, 0, n, StandardCharsets.ISO_8859_1 ).split( "\r?\n" ) ) {
+          line = line.trim();
+          if ( line.isEmpty() || line.startsWith("#") ) continue;
+          String[] t = line.split( "\\s+" );
+          if ( t.length > 1 && t[0].equals("encoding") ) enc = t[1];
+          break; // only the first significant line counts
+        }
       }
     }
+    return new InputStreamReader( new FileInputStream( path ), therionCharset( enc ) );
   }
 
-  private void handleCs(String[] vals, int vals_len, String surveyPath, boolean therionPath, TherionPath path )
+  private static Charset therionCharset( String enc )
   {
-    // TDLog.v("Warning: therion cs ignored" );
-    // TODO cs
+    if ( enc == null ) return StandardCharsets.UTF_8;
+    String e = enc.trim().toUpperCase( Locale.ROOT ).replace( '_', '-' );
+    if ( e.startsWith("ISO8859-") ) e = "ISO-8859-" + e.substring(8);
+    else if ( e.startsWith("CP125") || e.startsWith("WIN125") ) e = "windows-" + e.substring( e.indexOf('1') );
+    try { return Charset.forName( e ); } catch ( Exception ex ) { return StandardCharsets.UTF_8; }
   }
 
+  /** handle an "input" command: textual inclusion of another .th file (the state is shared with the included file)
+   * @return true if the input is partial (not read, or read with problems)
+   */
+  private boolean handleInput( String[] vals, int vals_len, String dirpath, ParserTherionState state ) throws ParserException
+  {
+    StringBuilder sb = new StringBuilder();
+    for ( int j = 1; j < vals_len; ++j ) {          // the name is the rest of the line (it may contain spaces if quoted)
+      if ( vals[j].length() == 0 ) continue;
+      if ( sb.length() > 0 ) sb.append(' ');
+      sb.append( vals[j] );
+    }
+    String name = sb.toString();
+    if ( name.length() > 1 && name.startsWith("\"") && name.endsWith("\"") ) name = name.substring( 1, name.length()-1 );
+    if ( name.length() == 0 ) return true;
+    name = name.replace( '\\', '/' );
+  
+    String lower = name.toLowerCase( Locale.ROOT );
+    if ( lower.endsWith(".th2") ) return false;      // scrap/map file: not needed, not partial
+    if ( ! lower.endsWith(".th") ) {
+      if ( name.indexOf( '.', name.lastIndexOf('/') + 1 ) >= 0 ) {   // some other extension
+        TDLog.e("TH parser ignored input " + name );
+        return true;
+      }
+      name = name + ".th";                           // default extension
+    }
+    String path = name.startsWith("/") ? name : dirpath + name;
+    String canon = canonical( path );
+    if ( mOpenPath.contains( canon ) ) {
+      TDLog.e("TH parser recursive input " + path );
+      return true;
+    }
+    boolean partial = false;
+    InputStreamReader isr1 = null;
+    mOpenPath.add( canon );
+    try {
+      isr1 = openReader( path );
+      if ( readFile( isr1, name, state, path ) ) partial = true;
+    } catch ( IOException e ) {                      // missing or unreadable file: skip it
+      TDLog.e("TH parser cannot read input " + path + " " + e.getMessage() );
+      partial = true;
+    } finally {
+      mOpenPath.remove( canon );
+      if ( isr1 != null ) try { isr1.close(); } catch ( IOException ee ) { }
+    }
+    return partial;
+  }
+      
 }

@@ -8252,7 +8252,7 @@ public class DataHelper extends DataSetObservable
             + " ( surveyId INTEGER, " 
             +   " name TEXT, "          // PRIMARY KEY
             +   " comment TEXT, "
-            +   " flag INTEGER default 0, "
+            +   " flag INTEGER default 0, " // 0: NONE (temporary), 1: fixed, 2: painted, 
             +   " presentation TEXT default NIL, "
             +   " code TEXT default NIL, "      // geo-morphology code(s)
             +   " photoId INTEGER default 0 "
