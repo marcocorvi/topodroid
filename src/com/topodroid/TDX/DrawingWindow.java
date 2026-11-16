@@ -8598,24 +8598,20 @@ public class DrawingWindow extends ItemDrawer
     // TDPath.getPdfDir();
     // TDLog.v( "PDF export <" + fullname + ">");
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
-    if ( pfd == null ) return;
+    if ( pfd == null ) {
+      TDLog.e("PDF: null file descriptor");
+      return;
+    }
+    PageInfo info = getPdfPage( manager );
+    if ( info == null ) {
+      TDLog.e("PDF: null page info");
+      return;
+    }
     try {
       // OutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
       OutputStream fos = TDsafUri.docFileOutputStream( pfd );
-
-      // PrintAttributes.Builder builder = new PrintAttributes.Builder();
-      // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
-      // if ( TDandroid.AT_LEAST_API_23 ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // not less than Android-6 (M)
-      // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
-      // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
-      // // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
-      // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
-      // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
-
-      PageInfo info = getPdfPage( manager );
       PdfDocument pdf = new PdfDocument( );
       Page page = pdf.startPage( info );
-
       // page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
       // page.getCanvas().drawRect( new RectF(0,0,zw,zh), BrushManager.blackPaint ); // TDSetting.mBitmapBgcolor );
       manager.executeAll( page.getCanvas(), -1.0f, null, true ); // zoom is 1.0, true = inverted_color
@@ -8634,7 +8630,7 @@ public class DrawingWindow extends ItemDrawer
       }
     // } catch ( NoSuchMethodException e ) {
     } catch ( IOException e ) {
-      TDLog.e("failed PDF export " + e.getMessage() );
+      TDLog.e("PDF: " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }

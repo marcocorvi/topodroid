@@ -77,12 +77,16 @@ public class Scrap
    * @param b0   first rectangle
    * @param b1   second rectangle
    */
-  static void union( RectF b0, RectF b1 )
+  static RectF union( RectF b0, RectF b1 )
   {
-    if ( b0.left   > b1.left   ) b0.left   = b1.left;
-    if ( b0.right  < b1.right  ) b0.right  = b1.right;
-    if ( b0.top    > b1.top    ) b0.top    = b1.top;
-    if ( b0.bottom < b1.bottom ) b0.bottom = b1.bottom;
+    if ( b0 == null ) return b1;
+    if ( b1 != null ) {
+      if ( b0.left   > b1.left   ) b0.left   = b1.left;
+      if ( b0.right  < b1.right  ) b0.right  = b1.right;
+      if ( b0.top    > b1.top    ) b0.top    = b1.top;
+      if ( b0.bottom < b1.bottom ) b0.bottom = b1.bottom;
+    }
+    return b0;
   }
 
   // /** @return the next index for an area item - 20240604 moved to commandmanager
@@ -938,19 +942,26 @@ public class Scrap
   /** compute the bitmap bounding box, union of the bounding boxes of the sketch items
    * @param bounds   output bounding box
    */
-  void getBitmapBounds( RectF bounds )
+  RectF getBitmapBounds( RectF bounds )
   {
-    RectF b = new RectF();
     if( mCurrentStack != null ){
       synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
-          cmd.computeBounds( b, true );
-          // TDLog.v("command bounds X " + b.left + " " + b.right + " Y " + b.top + " " + b.bottom );
+          if ( cmd.commandType() != 0 ) continue;
+          RectF b = cmd.computeBounds( true );
+          String type = null;
+          if ( cmd instanceof DrawingLinePath ) type = "LINE";
+          else if ( cmd instanceof DrawingAreaPath ) type = "AREA";
+          else if ( cmd instanceof DrawingLabelPath ) type = "LABEL " + ((DrawingLabelPath)cmd).getPointText();
+          else if ( cmd instanceof DrawingPointPath ) type = "POINT";
           // bounds.union( b );
-          union( bounds, b );
+          TDLog.v( "      command bounds " + String.format( "X %7.1f %7.1f Y %7.1f %7.1f  ", b.left, b.right, b.bottom, b.top ) + type );
+          bounds = union( bounds, b );
+          TDLog.v( "AFter command bounds " + String.format( "X %7.1f %7.1f Y %7.1f %7.1f  ", bounds.left, bounds.right, bounds.bottom, bounds.top ) );
         }
       }
     }
+    return bounds;
     // TDLog.v( "bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
   }
 
@@ -965,17 +976,13 @@ public class Scrap
       synchronized( TDPath.mCommandsLock ) {
         if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
           for ( ICanvasCommand cmd : mCurrentStack ) {
-            if ( cmd.commandType() == 0 ) {
-              cmd.draw( c, mat, scale, null );
-            }
+            if ( cmd.commandType() != 0 ) continue;
+            cmd.draw( c, mat, scale, null );
           }
         } else {
           for ( ICanvasCommand cmd : mCurrentStack ) {
-            if ( cmd.commandType() == 0 ) {
-              if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-                cmd.draw( c, mat, scale, null );
-              }
-            }
+            if ( cmd.commandType() != 0 ) continue;
+            if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) cmd.draw( c, mat, scale, null );
           }
         }
       }

@@ -1516,36 +1516,35 @@ public class DrawingCommandManager
   // called by DrawingSurface.getBitmap()
   public RectF getBitmapBounds( float scale )
   {
-    // TDLog.v( "get bitmap bounds. splays " + mSplaysStack.size() 
-    //               + " legs " + mLegsStack.size() 
-    //               + " cmds " + mCurrentStack.size() );
-    RectF bounds = new RectF(-1,-1,1,1);
-    RectF b = new RectF();
+    // TDLog.v( "get bitmap bounds. splays " + mSplaysStack.size() + " legs " + mLegsStack.size() + " cmds " + mCurrentStack.size() );
+    RectF bounds = null;
     synchronized( TDPath.mShotsLock ) {
       if( mSplaysStack != null ) { 
         for ( DrawingSplayPath path : mSplaysStack ) {
-          path.computeBounds( b, true );
+          RectF b = path.computeBounds( true );
           // bounds.union( b );
-          Scrap.union( bounds, b );
+          bounds = Scrap.union( bounds, b );
         }
       }
       if( mLegsStack != null ) { 
         for ( DrawingPath path : mLegsStack ) {
-          path.computeBounds( b, true );
+          RectF b = path.computeBounds( true );
+          // TDLog.v("leg X " + b.left + " " + b.right + " Y " + b.bottom + " " + b.top );
           // bounds.union( b );
-          Scrap.union( bounds, b );
+          bounds = Scrap.union( bounds, b );
         }
       }
     }
-    // TDLog.v( "Before scraps bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+    TDLog.v( "Before scraps bounds " + String.format( "X %7.1f %7.1f Y %7.1f %7.1f", bounds.left, bounds.right, bounds.bottom, bounds.top ) );
     synchronized( mSyncScrap ) {
-      for ( Scrap scrap : mScraps ) scrap.getBitmapBounds( bounds );
+      for ( Scrap scrap : mScraps ) bounds = scrap.getBitmapBounds( bounds );
     }
+    TDLog.v( "AFter  scraps bounds " + String.format( "X %7.1f %7.1f Y %7.1f %7.1f", bounds.left, bounds.right, bounds.bottom, bounds.top ) );
     bounds.left   *= scale;
     bounds.top    *= scale;
     bounds.right  *= scale;
     bounds.bottom *= scale;
-    // TDLog.v( "After scraps bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+    TDLog.v( "AFter scale          " + String.format( "X %7.1f %7.1f Y %7.1f %7.1f", bounds.left, bounds.right, bounds.bottom, bounds.top ) );
     return bounds;
   }
 

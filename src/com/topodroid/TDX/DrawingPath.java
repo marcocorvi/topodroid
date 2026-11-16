@@ -845,9 +845,11 @@ public class DrawingPath extends RectF
    * @param bound   bounding box (unaffected)
    * @param b       not used (see android.graphics.Path)
    */
-  public void computeBounds( RectF bound, boolean b ) 
+  public RectF computeBounds( boolean b ) 
   { 
-    mPath.computeBounds( bound, b );
+    RectF bnds = new RectF();
+    mPath.computeBounds( bnds, b );
+    return bnds;
   }
 
   // void transform( Matrix matrix ) { mPath.transform( matrix ); }

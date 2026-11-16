@@ -158,10 +158,10 @@ class RetraceCommand implements ICanvasCommand
   public void affineTransformPathBy( float[] mm, Matrix m ) { }
 
   /** compute the bounding box - it does nothing
-   * @param bounds   bounding box (unaffected)
+   * @return bounding box 
    * @param b        not used (see android.graphics.Path)
    */
-  public void computeBounds( RectF bounds, boolean b ) { }
+  public RectF computeBounds( boolean b ) { return null; }
   
   // public void undoCommand() 
   // {

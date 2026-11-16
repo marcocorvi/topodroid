@@ -199,24 +199,31 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
   {
     // TDLog.v("DRAW xor color " + xor_color + " scale " + scale );
-    if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
-      setTextSize();
-      if ( mPointText.length() == 0 ) { 
-        mTransformedPath = new Path( mCrossPath );
-      } else {
-        mTransformedPath = new Path( mPath );
-      }
-      if ( mLandscape ) {
-        Matrix rot = new Matrix();
-        rot.postRotate( 90, cx, cy );
-        mTransformedPath.transform( rot );
-      }
-      mTransformedPath.transform( matrix );
-      Paint paint = xorPaint( mPaint, xor_color );
-      paint.setTextSize( PDF_SCALE * paint.getTextSize() );
-      drawOnCanvas( canvas, mTransformedPath, paint ); // HB PDF
+    if ( ! intersects( bbox ) ) return;
+    // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
+    setTextSize();
+    Paint paint = xorPaint( mPaint, xor_color );
+    paint.setTextSize( PDF_SCALE * paint.getTextSize() );
+    Matrix m = new Matrix();
+    if ( mLandscape ) m.postRotate( 90, cx, cy );
+    m.postConcat( matrix );
+    if ( mPointText.length() == 0 ) {
+      mTransformedPath = new Path( mCrossPath );
+      mTransformedPath.transform( m );
+      canvas.drawPath( mTransformedPath, paint );
+      return;
     }
+    float a = (float)( mOrientation * TDMath.DEG2RAD );
+    float[] p = { cx, cy };
+    float[] v = { TDMath.cos( a ), TDMath.sin( a ) };
+    m.mapPoints( p );
+    m.mapVectors( v );
+    float vl = (float)Math.sqrt( v[0]*v[0] + v[1]*v[1] );
+    float len = 1.1f * paint.measureText( mPointText ); // output units
+    mTransformedPath = new Path();
+    mTransformedPath.moveTo( p[0], p[1] );
+    mTransformedPath.lineTo( p[0] + len * v[0] / vl, p[1] + len * v[1] / vl );
+    canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, paint );  
   }
 
   /** @return the font-size factor according to the point scale
@@ -239,12 +246,12 @@ public class DrawingLabelPath extends DrawingPointPath
     Rect r = new Rect();
     mPaint.getTextBounds( mPointText, 0, mPointText.length(), r );
     // float len = 20 * f * mPointText.length();
-    float len = 2 * r.width(); // FIXME multiplying by 10 is a hack
+    float len = 1.05f * r.width(); // FIXME multiplying by 10 is a hack
 
     float a = (float)(mOrientation) * TDMath.DEG2RAD;
     float ca = len * TDMath.cos( a );
     float sa = len * TDMath.sin( a );
-    makeStraightPath( 0, 0, ca, sa, cx, cy );
+    makeStraightPath( 0, 0, ca, sa, cx, cy ); // straigt segment (0,0)--(ca,sa) at offset (cx,cy)
   }
 
   /** set the point scale
@@ -380,6 +387,21 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     super.addTextChar( chs );
     makeLabelPath();
+  }
+
+  @Override
+  public RectF computeBounds( boolean b )
+  {
+    RectF bnds = super.computeBounds( b );
+    float c = ( bnds.left + bnds.right)/6; // midpoint of the path
+    float d = bnds.width() / 6;
+    bnds.left   = c - d;
+    bnds.right  = c + d;
+    c = ( bnds.top + bnds.bottom)/6;
+    d = bnds.height() / 6;
+    bnds.bottom = c + d;
+    bnds.top    = c - d;
+    return bnds;
   }
 
 }

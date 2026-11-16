@@ -83,11 +83,16 @@
       android:layout_marginTop="@dimen/marginvbig"
       android:layout_marginBottom="@dimen/marginvbig"
       >
-      <!-- CheckBox android:id="@+id/therion_path"
+      <CheckBox android:id="@+id/therion_lrud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/import_lrud"
+        />
+      <CheckBox android:id="@+id/extern_survey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/import_therion_path"
-        / -->
+        />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_vtopo"

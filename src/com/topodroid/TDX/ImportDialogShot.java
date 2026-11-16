@@ -69,7 +69,8 @@ public class ImportDialogShot extends MyDialog
   private CheckBox mCBdivingDat; // Compass
   private CheckBox mCBlrudDat;
   private CheckBox mCBlegDat;
-  private CheckBox mCBtherionPath; // Therion survey path
+  private CheckBox mCBexternSurvey; // Therion survey path
+  private CheckBox mCBlrudTherion; // Therion survey path
   private CheckBox mCsvBric;
   private CheckBox mCsvCavway;
 
@@ -214,7 +215,8 @@ public class ImportDialogShot extends MyDialog
         break;
       case 3: // Therion
         {
-          // if ( TDLevel.overExpert ) mImportData.mTherionPath = mCBtherionPath.isChecked();
+          mImportData.mLrud   = mCBlrudTherion.isChecked();
+          if ( TDLevel.overExpert ) mImportData.mExternSurvey = mCBexternSurvey.isChecked();
         }
         break;
       case 4: // VTopo
@@ -264,11 +266,13 @@ public class ImportDialogShot extends MyDialog
     mCBlegTro .setChecked( mImportData.mLeg );
     mCBtroxTro.setChecked( mImportData.mTrox );
 
-    // mCBtherionPath = (CheckBox) findViewById( R.id.therion_path );
-    // mCBtherionPath.setChecked( mImportData.mTherionPath );
-    // if ( ! TDLevel.overExpert ) {
-    //   mCBtherionPath.setVisibility( View.GONE );
-    // }
+    mCBlrudTherion = (CheckBox) findViewById( R.id.therion_lrud );   // VTopo
+    mCBexternSurvey = (CheckBox) findViewById( R.id.extern_survey );
+    mCBlrudTherion.setChecked( mImportData.mLrud );
+    mCBexternSurvey.setChecked( mImportData.mExternSurvey );
+    if ( ! TDLevel.overExpert ) {
+      mCBexternSurvey.setVisibility( View.GONE );
+    }
 
     mCsvBric = (CheckBox) findViewById( R.id.csv_bric );
     mCsvCavway = (CheckBox) findViewById( R.id.csv_cavway );
