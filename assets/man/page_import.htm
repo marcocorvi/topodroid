@@ -74,15 +74,19 @@ Everything between "comment" and "endcomment" is discarded.<br>
 Everything between "scan" and "endscan" is discarded.<br>
 TopoDroid does not import "map" and "scrap". All the drawing items are ignored.<br><p>
 
-TopoDroid supports the "input" command but the filename must end in ".th".
+TopoDroid supports the "input" command. If the filename does not end in ".th" the extension is added to the filename.<br>
 Therefore, whole Therion projects can be imported as a single survey, starting from the top Therion file.<br>
 It is necessary to use full names for stations.<br>
 The survey files should have the "declination" command if the dates span a long time.<br><p>
 
 Processing related commands (<i>layout</i>, <i>source</i>, <i>export</i>, etc) are not supported.<br><p>
 
-The <i>Therion</i> import dialog has a button to enable adding the filepath to the surveypath
-to the station names. For simple imports it is safe to leave it disabled.<br><p>
+<i>Therion</i> import options:
+<ul>
+<li><i>Therion path</i> adds the top survey name to the station names. For inner surveys the name is always added to disambiguate</li>
+<li><i>LRUD</i> adds to the import the LRUD's as splays</li>
+</ul>
+<br><p>
 
 <b>VisualTopo import</b> ".tro" and ".trox"<br>
 N.B. <i>VisualTopo</i> syntax is partially supported.<br>
