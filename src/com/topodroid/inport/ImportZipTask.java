@@ -32,18 +32,43 @@ import java.io.IOException;
 
 import android.os.ParcelFileDescriptor;
 
+import java.io.File;
+
 import android.net.Uri;
 
 public class ImportZipTask extends ImportTask
 {
   boolean mForce;
   Uri mUri;
+  File mDelete = null; // file to delete if the import fails
+  boolean mCheck = false; // whether the manifest is checked first (as for a ZIP file picked by the user)
+  static final long MANIFEST_BASE = -100L; // a failed manifest check is returned as MANIFEST_BASE plus its (negative) code
 
   public ImportZipTask( MainWindow main, Uri uri, boolean force )
   { 
     super(main );
     mUri = uri;
     mForce = force;
+  }
+
+  /** delete a file if the import fails (eg, the file has been downloaded only to be imported)
+   * @param file   file
+   * @return this task
+   */
+  public ImportZipTask setDeleteIfFail( File file )
+  {
+    mDelete = file;
+    return this;
+  }
+
+  /** check the manifest of the archive before un-archiving it: the un-archive from a stream relies on the check, which sets
+   * the name of the survey. A refusal of the manifest is shown with its own message, as for a ZIP file picked by the user
+   * @return this task
+   */
+  public ImportZipTask setCheckManifest()
+  {
+    mCheck = true;
+    return this;
   }
 
   @Override
@@ -61,6 +86,13 @@ public class ImportZipTask extends ImportTask
       return (long)archiver.unArchive( app, TDPath.getZipFile( filename ), /* name, */ mForce );
     } else {
       long ret = -1L;
+      if ( mCheck ) {
+        int manifest_ok = Archiver.getOkManifest( app, TDsafUri.docFileInputStream( pfd ) );
+        TDsafUri.closeFileDescriptor( pfd );
+        if ( manifest_ok < 0 ) return MANIFEST_BASE + manifest_ok;
+        pfd = TDsafUri.docReadFileDescriptor( mUri );
+        if ( pfd == null ) return ret;
+      }
       try {
         fis = TDsafUri.docFileInputStream( pfd ); // super.fis
         ret = (long)Archiver.unArchive( app, fis );
@@ -81,9 +113,12 @@ public class ImportZipTask extends ImportTask
   protected void onPostExecute(Long result)
   {
     mProgress.dismiss();
+    if ( result < 0 && mDelete != null ) mDelete.delete();
     if ( mMain.get() != null && ! mMain.get().isFinishing() ) {
       mMain.get().setTheTitle( );
-      if ( result < -5 ) {
+      if ( result <= MANIFEST_BASE ) {
+        mMain.get().toastBadManifest( (int)( result - MANIFEST_BASE ) );
+      } else if ( result < -5 ) {
         TDToast.makeBad( R.string.unzip_fail );
       } else if ( result == -5 ) {
         TDToast.makeBad( R.string.unzip_fail_sqlite );
@@ -98,7 +133,7 @@ public class ImportZipTask extends ImportTask
       } else {
         mMain.get().updateDisplay( );
         if ( result == 1 ) {
-          TDToast.makeWarn( R.string.import_zip_newer );
+          TDToast.makeWarn( mCheck? R.string.archive_reset_color : R.string.import_zip_newer );
         } else { // result == 0
           TDToast.make( R.string.import_zip_ok );
         }

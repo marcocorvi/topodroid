@@ -63,8 +63,9 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_CSV       = 40;
   public static final int PREF_CATEGORY_SRV       = 41;
   public static final int PREF_CATEGORY_PLY       = 42;
+  public static final int PREF_CATEGORY_SILEXGIS  = 43;
   // public static final int PREF_CATEGORY_LOG       = 42; // this must be the last NO_LOGS
-  public static final int PREF_CATEGORY_MAX = 42; // last category
+  public static final int PREF_CATEGORY_MAX = 43; // last category
 
   // the order must be the same as TDPrefKey.mKeySet as above
   static int[] mTitleRes = {
@@ -113,7 +114,8 @@ public class TDPrefCat
     R.string.title_settings_csv,
     R.string.title_settings_srv,      // 41
     R.string.title_settings_ply,
-    // R.string.title_settings_log       // 43
+    R.string.silexgis_title_settings, // 43
+    // R.string.title_settings_log       // 44
   };
 
   /** settings categories
@@ -164,6 +166,7 @@ public class TDPrefCat
     "EXPORT_CSV",
     "EXPORT_WALLS",
     "EXPORT_POLYGON",
-    // R.string.title_settings_log       // 43
+    "EXPORT_SILEXGIS",      // 43 PREF_CATEGORY_SILEXGIS
+    // R.string.title_settings_log       // 44
   };
 }

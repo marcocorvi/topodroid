@@ -175,6 +175,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 	    mEdittext.setInputType( TDConst.TEXT );
             break;
         }
+        if ( TDPrefKey.isSecret( name ) ) mEdittext.setInputType( TDConst.TEXT_PASSWORD ); // the access key is not displayed
         mEdittext.addTextChangedListener( this );
         mEdittext.setOnKeyListener(this);
         mEdittext.setOnFocusChangeListener(this);
@@ -213,9 +214,20 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       ((TextView) v.findViewById( R.id.summary )).setVisibility( View.GONE );
     } else {
       ((TextView) v.findViewById( R.id.summary )).setText( summary );
+      if ( TDPrefKey.isSecret( name ) ) showMaskedKey( v );
     }
     mView = v;
     return v;
+  }
+
+  /** display the masked SilexGIS access key in the summary
+   * @param v   preference view
+   */
+  private void showMaskedKey( View v )
+  {
+    if ( v == null || summary == null ) return;
+    String masked = TDSetting.maskSilexGisKey( value );
+    ((TextView) v.findViewById( R.id.summary )).setText( masked.isEmpty()? summary : masked );
   }
 
   /** @return the view stored in this preference
@@ -283,6 +295,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 	  // TDLog.v("commit value <" + text + ">" );
 	  mEdittext.setText( text );
 	}
+        if ( TDPrefKey.isSecret( name ) ) showMaskedKey( mView );
       }
       commit = false;
     }
@@ -790,6 +803,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static TDPref[] makeDatPrefs( Context ctx, TDPrefHelper hlp )          { return makePrefs( TDPrefKey.mExportDat, ctx, hlp ); }
   static TDPref[] makeSrvPrefs( Context ctx, TDPrefHelper hlp )          { return makePrefs( TDPrefKey.mExportSrv, ctx, hlp ); }
   static TDPref[] makePlyPrefs( Context ctx, TDPrefHelper hlp )          { return makePrefs( TDPrefKey.mExportPly, ctx, hlp ); }
+  static TDPref[] makeSilexgisPrefs( Context ctx, TDPrefHelper hlp )     { return makePrefs( TDPrefKey.mExportSilexgis, ctx, hlp ); }
   static TDPref[] makeTroPrefs( Context ctx, TDPrefHelper hlp )          { return makePrefs( TDPrefKey.mExportTro, ctx, hlp ); }
   static TDPref[] makeSvgPrefs( Context ctx, TDPrefHelper hlp )          { return makePrefs( TDPrefKey.mExportSvg, ctx, hlp ); }
   static TDPref[] makeDxfPrefs( Context ctx, TDPrefHelper hlp )          { return makePrefs( TDPrefKey.mExportDxf, ctx, hlp ); }
