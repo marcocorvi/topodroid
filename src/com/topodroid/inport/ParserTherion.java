@@ -93,6 +93,8 @@ class ParserTherion extends ImportParser
   ArrayList< Station >    getStations() { return stations; }
   ArrayList< ThFix >      getFixes()    { return fixes; }
 
+  private boolean mWithLrud;
+
   
   private final HashSet<String> mOpenPath = new HashSet<>();   // canonical paths of files being read (recursion guard)
 
@@ -111,9 +113,10 @@ class ParserTherion extends ImportParser
    * @param isr    input reader
    * @param name   filename or surveyname ?
    * @param apply_declination whether to apply the declination correction
+   * @param extern_survey  extrenal survey name - if null the top survey is not used
    * @param filepath          file path (absolute)
    */
-  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, /* boolean therion_path, */ String filepath ) throws ParserException
+  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, boolean with_lrud, String extern_survey, String filepath ) throws ParserException
   {
     super( apply_declination );
     mDate = null; // override super assignment
@@ -123,11 +126,10 @@ class ParserTherion extends ImportParser
     stations = new ArrayList<>();
     // shots    = new ArrayList<>(); // FROM ImportParser
     // splays   = new ArrayList<>();
-    // // mStates  = new Stack< ParserTherionState >();
-    // mTherionPath = therion_path;
-    ParserTherionState state = new ParserTherionState(); // root of the linked list of states
+    mWithLrud = with_lrud;
+    ParserTherionState state = new ParserTherionState( extern_survey ); // root of the linked list of states
     mOpenPath.add( canonical( filepath ) );
-    // FXIME openReader is not used for the top file - encoding is not handled 
+    // FIXME openReader is not used for the top file - encoding is not handled 
     mPartial = readFile( isr, name, state, filepath ); // initial surveypath is empty
     if ( state.mTeam.size() > 0 ) {
       StringBuilder team = new StringBuilder();
@@ -194,11 +196,11 @@ class ParserTherion extends ImportParser
     TDLog.v( "import read Therion dirpath <" + dirpath + ">"  );
 
     try {
-      String dirname = "./";
-      i = filename.lastIndexOf('/');
-      if ( i > 0 ) dirname = filename.substring(0, i+1);
-      // System.out.println("read file dir " + dirname + " filename " + filename );
-      TDLog.v( "import read Therion file <" + filename + "> dir " + dirname );
+      // String dirname = "./";
+      // i = filename.lastIndexOf('/');
+      // if ( i > 0 ) dirname = filename.substring(0, i+1);
+      // // System.out.println("read file dir " + dirname + " filename " + filename );
+      // TDLog.v( "import read Therion file <" + filename + "> dir " + dirname );
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
@@ -360,7 +362,7 @@ class ParserTherion extends ImportParser
                 } else if ( cmd.equals("date") ) {
                   if ( vals.length > 1 ) {
                     String date = vals[1];
-                    if ( ! date.equals("-") && mDate == null ) mDate = date; // save centerline date - overwrite today date
+                    if ( ! date.equals("-") && mDate == null ) mDate = date.replaceAll("-", "."); // save centerline date - overwrite today date
                   } else {
                     // TODO
                   }
@@ -619,6 +621,12 @@ class ParserTherion extends ImportParser
                     }
                   }
                 } else if ( cmd.equals("data") ) {
+                  // TODO
+                  // cartesian is easy: len = √(dN²+dE²+dZ²), bearing = atan2(dE,dN), clino = asin(dZ/len).
+                  // cylpolar is similar
+                  // diving needs clino = −asin(Δdepth/len) with depth positive downward.
+                  // topofil: counter, fromcount and tocount should substitute for length.
+
                   if ( vals.length > 1 ) { // data normal from to length compass clino ...
                     state.setDataType( vals[1] );
                     state.resetJindices();
@@ -650,10 +658,10 @@ class ParserTherion extends ImportParser
                       String to   = vals[state.jTo];
                       float len   = ( state.jLength      < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jLength],      Float.NaN );
                       float ber   = ( state.jCompass     < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jCompass],     Float.NaN );
-                      float cln   = ( state.jClino       < 0 )? Float.NaN : parseClino( vals[state.jClino], state.mClinoPercent );
+                      float cln   = ( state.jClino       < 0 )? Float.NaN : ParserUtil.parseClino( vals[state.jClino], state.mClinoPercent );
                       float blen  = ( state.jBackLength  < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jBackLength],  Float.NaN );
                       float bber  = ( state.jBackCompass < 0 )? Float.NaN : ParserUtil.parseFloat( vals[state.jBackCompass], Float.NaN );
-                      float bcln  = ( state.jBackClino   < 0 )? Float.NaN : parseClino( vals[state.jBackClino], state.mClinoPercent );
+                      float bcln  = ( state.jBackClino   < 0 )? Float.NaN : ParserUtil.parseClino( vals[state.jBackClino], state.mClinoPercent );
 	              // measure = (read - zero)*scale
 	              float zLen  = state.mZeroLen;
 	              float sLen  = state.mScaleLen * state.mUnitLen;
@@ -705,23 +713,25 @@ class ParserTherion extends ImportParser
                             cln  = - cln;
                           }
                           from = extractStationName( from, state );
-                          to = is_splay ? "-" : extractStationName( to, state );
-                          if ( from != null && to != null ) {
-                            if ( state.jLeft >= 0 && state.jLeft < sz ) {
-                              float b = mirrored ? TDMath.add90( ber ) : TDMath.sub90( ber );
-                              handleSplay( vals[state.jLeft], from, to, b, 0, state.mZeroLeft, state.mScaleLeft * state.mUnitLeft, state );
+                          to = is_splay ? "-" : extractStationName( to, state ); 
+                          if ( from != null && to != null ) { // from != null && to != null are always true
+                            if ( mWithLrud ) {
+                              if ( state.jLeft >= 0 && state.jLeft < sz ) {
+                                float b = mirrored ? TDMath.add90( ber ) : TDMath.sub90( ber );
+                                handleSplay( vals[state.jLeft], from, to, b, 0, state.mZeroLeft, state.mScaleLeft * state.mUnitLeft, state );
+                              }
+                              if ( state.jRight >= 0 && state.jRight < sz ) {
+                                float b = mirrored ? TDMath.sub90( ber ) : TDMath.add90( ber );
+                                handleSplay( vals[state.jRight], from, to, b, 0, state.mZeroRight, state.mScaleRight * state.mUnitRight, state );
+                              }
+                              if ( state.jUp >= 0 && state.jUp < sz ) {
+                                handleSplay( vals[state.jUp], from, to, 0, 90, state.mZeroUp, state.mScaleUp * state.mUnitUp, state );
+                              }
+                              if ( state.jDown >= 0 && state.jDown < sz ) {
+                                handleSplay( vals[state.jDown], from, to, 0, -90, state.mZeroDown, state.mScaleDown * state.mUnitDown, state );
+                              }
                             }
-                            if ( state.jRight >= 0 && state.jRight < sz ) {
-                              float b = mirrored ? TDMath.sub90( ber ) : TDMath.add90( ber );
-                              handleSplay( vals[state.jRight], from, to, b, 0, state.mZeroRight, state.mScaleRight * state.mUnitRight, state );
-                            }
-                            if ( state.jUp >= 0 && state.jUp < sz ) {
-                              handleSplay( vals[state.jUp], from, to, 0, 90, state.mZeroUp, state.mScaleUp * state.mUnitUp, state );
-                            }
-                            if ( state.jDown >= 0 && state.jDown < sz ) {
-                              handleSplay( vals[state.jDown], from, to, 0, -90, state.mZeroDown, state.mScaleDown * state.mUnitDown, state );
-                            }
-                            if ( is_splay ) { // splay shot
+                            if ( is_splay ) { // splay shot - topodroid uses "" for splay endpoint
                               shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, 
                                          state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, cmnt ) );
                             } else {
@@ -842,10 +852,11 @@ class ParserTherion extends ImportParser
     String name = extractStationName( vals[1], state );
     if ( name == null ) return false;
     try {
-      float a = parseDegrees( vals[2] );
-      float b = parseDegrees( vals[3] );
-      boolean latlong = ( state.mCSorder == ParserTherionState.CS_LAT_LONG );
-      fixes.add( new ThFix( name, latlong ? b : a, latlong ? a : b, Float.parseFloat( vals[4] ) ) ); // e=long, n=lat
+      float a = ParserUtil.parseDegrees( vals[2], Float.NaN ); if ( Float.isNaN( a ) ) return false;
+      float b = ParserUtil.parseDegrees( vals[3], Float.NaN ); if ( Float.isNaN( b ) ) return false;
+      float c = ParserUtil.parseFloat( vals[4], Float.NaN );   if ( Float.isNaN( c ) ) return false;
+      boolean latlong = ( state.mCSorder == ParserState.CS_LAT_LONG );
+      fixes.add( new ThFix( name, latlong ? b : a, latlong ? a : b, c ) ); // e=long, n=lat
       return true;
     } catch ( NumberFormatException e ) {
       TDLog.e( "therion parser error: fix " + vals[1] + " " + vals[2] + " " + vals[3] + " " + vals[4] );
@@ -862,9 +873,9 @@ class ParserTherion extends ImportParser
   private boolean handleCs(String[] vals, int vals_len, ParserTherionState state )
   { 
     if ( vals_len < 2 ) return false;
-    if ( vals[1].equals("long-lat") ) { state.mCSorder = ParserTherionState.CS_LONG_LAT; return true; }
-    if ( vals[1].equals("lat-long") ) { state.mCSorder = ParserTherionState.CS_LAT_LONG; return true; }
-    state.mCSorder = ParserTherionState.CS_NONE;
+    if ( vals[1].equals("long-lat") ) { state.mCSorder = ParserState.CS_LONG_LAT; return true; }
+    if ( vals[1].equals("lat-long") ) { state.mCSorder = ParserState.CS_LAT_LONG; return true; }
+    state.mCSorder = ParserState.CS_NONE;
     return false;
   }
 
@@ -951,7 +962,7 @@ class ParserTherion extends ImportParser
           shots.add( new ParserShot( from, TDString.EMPTY, dist, b, c, 0.0f, state.mExtend, LegType.XSPLAY,
                                      state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, "") );
         }
-        if ( ! to.equals("-") ) {
+        if ( ! to.equals("-") ) { // therion uses "-" for splay endpoint
           dist = (ParserUtil.parseFloat( dists[1], Float.NaN ) - zero) * scale_unit;
           if ( ! Float.isNaN( dist ) && dist > 0 ) {
             shots.add( new ParserShot( to, TDString.EMPTY, dist, b, c, 0.0f, state.mExtend, LegType.XSPLAY,
@@ -968,26 +979,6 @@ class ParserTherion extends ImportParser
                                    state.mDuplicate, state.mSurface, state.mArtificial, state.mApproximate, false, "") );
       }
     }
-  }
-
-  private float parseDegrees( String val ) throws NumberFormatException
-  {
-    if ( val == null || val.isEmpty() ) throw new NumberFormatException();
-    boolean neg = val.startsWith("-");
-    if ( neg || val.startsWith("+") ) val = val.substring(1);
-    String[] p = val.split(":");
-    if ( p.length > 3 ) throw new NumberFormatException();
-    float d = Float.parseFloat( p[0] );
-    if ( p.length > 1 ) d += Float.parseFloat( p[1] ) / 60.0f;
-    if ( p.length > 2 ) d += Float.parseFloat( p[2] ) / 3600.0f;
-    return neg ? -d : d;
-  }
-
-  private float parseClino( String val, boolean percent )
-  {
-    float f = ParserUtil.parseFloat( val, Float.NaN );
-    if ( Float.isNaN(f) ) return f;
-    return ( percent? TDMath.atand( f ) : f);
   }
     
   /** open a therion file honouring its "encoding" command (the first non-comment line); UTF-8 if absent or unknown.

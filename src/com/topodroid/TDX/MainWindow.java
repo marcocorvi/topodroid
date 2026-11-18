@@ -531,61 +531,6 @@ public class MainWindow extends Activity
     mActivity.setTitleColor( TDColor.CONNECTED );
   }
 
-  // public void importDatFile( InputStreamReader isr, String filepath, int datamode, boolean lrud, boolean leg_first )
-  // {
-  //   setTitleImport();
-  //   new ImportCompassTask( this, isr, datamode, lrud, leg_first ).execute( filepath );
-  // }
-
-  // public void importTroFile( InputStreamReader isr, String filepath, boolean lrud, boolean leg_first, boolean trox )
-  // {
-  //   setTitleImport();
-  //   new ImportVisualTopoTask( this, isr, lrud, leg_first, trox ).execute( filepath );
-  // }
-
-  // public void importFile( String filename )
-  // {
-  //   // TDLog.v( "Main import file " + filename );
-  //   // FIXME connect-title string
-  //   if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".th") ) {
-  //     String filepath = TDPath.getImportFile( filename );
-  //     String name = filename.replace(".th", "" ).replace(".TH", "");
-  //     if ( TopoDroidApp.mData.hasSurveyName( name ) ) {
-  //       TDToast.makeBad(R.string.import_already );
-  //       return;
-  //     }
-  //     // TDToast.make( R.string.import_wait );
-  //     setTitleImport();
-  //     new ImportTherionTask( this, null ).execute( filepath, name );  // null FileReader
-  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".dat") ) {
-  //     String filepath = TDPath.getImportFile( filename );
-  //     (new ImportDatDialog( this, this, null, filepath )).show();
-  //     // new ImportCompassTask( this ).execute( filepath );
-  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".top") ) {
-  //     String filepath = TDPath.getImportFile( filename );
-  //     setTitleImport();
-  //     new ImportPocketTopoTask( this, null ).execute( filepath, filename ); // TODO pass the drawer as arg
-  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".tro") ) {
-  //     String filepath = TDPath.getImportFile( filename );
-  //     (new ImportTroDialog( this, this, null, filepath )).show();
-  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".svx") ) {
-  //     String filepath = TDPath.getImportFile( filename );
-  //     setTitleImport();
-  //     new ImportSurvexTask( this, null ).execute( filepath ); 
-  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".csn") ) { // CaveSniper text file
-  //     String filepath = TDPath.getImportFile( filename );
-  //     new ImportCaveSniperTask( this, null ).execute( filepath ); 
-  //     setTitleImport();
-  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".zip") ) {
-  //     // TDToast.makeLong( R.string.import_zip_wait );
-  //     setTitleImport();
-  //     new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
-  //   // } else {
-  //   //   setTheTitle( );
-  //   }
-  //   // FIXME SYNC updateDisplay();
-  // }
-
   public void importZipFile( String filename )
   {
     if ( ! filename.toLowerCase( Locale.getDefault() ).endsWith(".zip") ) return;
@@ -632,7 +577,7 @@ public class MainWindow extends Activity
       // String filepath = uri.getPath().replace("document/primary:", "/sdcard/" ); // FIXME_IMPORT
       String filepath = uri.getPath().replace("document/primary:", Environment.getExternalStorageDirectory().getPath() + "/" ); // FIXME_IMPORT
       TDLog.v( "Main import File Path " + filepath );
-      new ImportTherionTask( this, pfd, data ).execute( name, name, filepath );
+      new ImportTherionTask( this, pfd, data ).execute( name, name, filepath ); // filepath must not be null nor empty
     } else if ( type.equals( TDPath.DAT ) ) {
       setTitleImport();
       new ImportCompassTask( this, pfd, data ).execute( name, name );
@@ -644,7 +589,8 @@ public class MainWindow extends Activity
       // (new ImportTroDialog( this, this, pfd, name )).show();
     } else if ( type.equals( TDPath.SVX ) ) {
       setTitleImport();
-      new ImportSurvexTask( this, pfd ).execute( name ); 
+      String filepath = uri.getPath().replace("document/primary:", Environment.getExternalStorageDirectory().getPath() + "/" ); // FIXME_IMPORT
+      new ImportSurvexTask( this, pfd, data ).execute( name, name, filepath ); // filepath must not be null nor empty
     } else if ( type.equals( TDPath.SRV ) ) {
       setTitleImport();
       new ImportWallsTask( this, pfd ).execute( name ); 

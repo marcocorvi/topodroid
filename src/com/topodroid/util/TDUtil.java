@@ -42,6 +42,8 @@ public class TDUtil
 
   public static final float DEG2GRAD = 400.0f/360.0f;
   public static final float GRAD2DEG = 360.0f/400.0f;
+  public static final float MIL2DEG  = 360.0f/6400.0f;
+  public static final float RAD2DEG  = TDMath.RAD2DEG;
 
   public static final int DDMMSS = 0;
   public static final int DEGREE = 1;

@@ -23,7 +23,7 @@ public class ImportData
   public boolean mLeg;   // leg first
   public boolean mTrox;
   public int     mDatamode; // Compass
-  // public boolean mTherionPath; // Therion survey path - this is false by default, but it can be set from the import dialog
+  public boolean mExternSurvey;
 
   private boolean mDiving;
   public int mCsv;      // CSV type
@@ -46,7 +46,7 @@ public class ImportData
       mDatamode = SurveyInfo.DATAMODE_NORMAL;
       mDiving = false;
     }
-    // mTherionPath = false;
+    mExternSurvey = false;
     mCsv = CSV_NONE;
   }
 

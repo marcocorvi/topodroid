@@ -21,13 +21,8 @@ class ParserTherionState extends ParserState
 {
   ParserTherionState mParent;
 
-  final static int CS_NONE = 0;
-  final static int CS_LONG_LAT = 1;
-  final static int CS_LAT_LONG = 2;
-
   String mSurveyPath; // survey pathname
   ArrayList<String> mTeam; // shared among the top parser and the children
-  int mCSorder = 0;
 
   boolean in_centerline;
   boolean in_data;
@@ -74,13 +69,12 @@ class ParserTherionState extends ParserState
   int jEasting     = -1;
   int jAltitude    = -1;
 
-  ParserTherionState()
+  ParserTherionState( String survey_path )
   { 
     super();
     mParent = null;
-    mSurveyPath = "";
+    mSurveyPath = survey_path;
     mTeam = new ArrayList<>();
-    mCSorder = 0;
 
     mExtend = ExtendType.EXTEND_RIGHT;
     mPrefix = "";
@@ -108,10 +102,14 @@ class ParserTherionState extends ParserState
   {
     super( state );
     mParent  = state;
-    if ( survey_name == null ) {
-      mSurveyPath = state.mSurveyPath;
+    if ( mSurveyPath == null ) {
+      mSurveyPath = "";
     } else {
-      mSurveyPath = state.mSurveyPath.isEmpty()? survey_name : survey_name + "." + state.mSurveyPath;
+      if ( survey_name == null ) {
+        mSurveyPath = state.mSurveyPath;
+      } else {
+        mSurveyPath = state.mSurveyPath.isEmpty()? survey_name : survey_name + "." + state.mSurveyPath;
+      }
     }
 
     mExtend = state.mExtend;

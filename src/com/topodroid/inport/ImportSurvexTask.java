@@ -28,22 +28,26 @@ import java.util.ArrayList;
 // NOTE survey name must be guaranteed not be in the db
 public class ImportSurvexTask extends ImportTask
 {
-  // public ImportSurvexTask( MainWindow main, InputStreamReader isr )
-  // {
-  //   super( main, isr );
-  // }
+  private String mExternSurvey = null;
+  private boolean mWithLrud;
 
-  public ImportSurvexTask( MainWindow main, ParcelFileDescriptor pfd )
+  // public ImportSurvexTask( MainWindow main, InputStreamReader isr ) { super( main, isr ); }
+
+  public ImportSurvexTask( MainWindow main, ParcelFileDescriptor pfd, ImportData data )
   {
     super( main, pfd );
+    mExternSurvey = data.mExternSurvey ? "" : null;
+    mWithLrud     = data.mLrud;
   }
 
+  // str[2] must not be null nor empty
   @Override
   protected Long doInBackground( String... str )
   {
     long sid = 0;
     try {
-      ParserSurvex parser = new ParserSurvex( isr, str[0], true ); // apply_declination = true
+      String filepath = str[2];
+      ParserSurvex parser = new ParserSurvex( isr, str[0], true, mWithLrud, mExternSurvey, filepath ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

@@ -70,7 +70,8 @@ public class ImportDialogShot extends MyDialog
   private CheckBox mCBlrudDat;
   private CheckBox mCBlegDat;
   private CheckBox mCBexternSurvey; // Therion survey path
-  private CheckBox mCBlrudTherion; // Therion survey path
+  private CheckBox mCBlrudTherion;  // Therion survey path
+  private CheckBox mCBlrudSurvex;   // Survex survey path
   private CheckBox mCsvBric;
   private CheckBox mCsvCavway;
 
@@ -212,6 +213,7 @@ public class ImportDialogShot extends MyDialog
       // case 2: // CaveSniper
       //   break;
       case 2: // Survex
+        mImportData.mLrud   = mCBlrudSurvex.isChecked();
         break;
       case 3: // Therion
         {
@@ -266,7 +268,10 @@ public class ImportDialogShot extends MyDialog
     mCBlegTro .setChecked( mImportData.mLeg );
     mCBtroxTro.setChecked( mImportData.mTrox );
 
-    mCBlrudTherion = (CheckBox) findViewById( R.id.therion_lrud );   // VTopo
+    mCBlrudSurvex = (CheckBox) findViewById( R.id.survex_lrud );   // Survex
+    mCBlrudSurvex.setChecked( mImportData.mLrud );
+
+    mCBlrudTherion = (CheckBox) findViewById( R.id.therion_lrud );   // Therion
     mCBexternSurvey = (CheckBox) findViewById( R.id.extern_survey );
     mCBlrudTherion.setChecked( mImportData.mLrud );
     mCBexternSurvey.setChecked( mImportData.mExternSurvey );

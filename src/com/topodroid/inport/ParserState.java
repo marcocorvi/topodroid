@@ -16,8 +16,13 @@ import com.topodroid.TDX.DBlock; // FLAG_xxx
 
 class ParserState
 {
+  final static int CS_NONE = 0;
+  final static int CS_LONG_LAT = 1;
+  final static int CS_LAT_LONG = 2;
+
   int data_type;
   int mSurveyLevel;
+  int mCSorder = CS_NONE;
 
   // zero_error includes scale and units
   float mUnitLen,   mScaleLen,   mZeroLen;
@@ -50,7 +55,7 @@ class ParserState
   ParserState( ParserState state )
   {
     data_type = state.data_type;
-    mSurveyLevel = state.mSurveyLevel + 1; 
+    mSurveyLevel = state.mSurveyLevel + 1;
 
     mUnitLen   = state.mUnitLen;
     mZeroLen   = state.mZeroLen;
@@ -103,12 +108,14 @@ class ParserState
     mApproximate = state.mApproximate;
     mSplay       = state.mSplay;
     // mShotFlag    = state.mShotFlag;
+    mCSorder = state.mCSorder; // the input coordinate system is inherited by nested surveys
   }
 
   protected void setDefault()
   {
     data_type = 0; // DATA_NONE as in TH
     mSurveyLevel = 0;
+    mCSorder = CS_NONE;
     // mShotFlag    = 0;
     setUnitsDefault();
     setCalibrateDefault();

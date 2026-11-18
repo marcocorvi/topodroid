@@ -30,7 +30,8 @@ import java.util.ArrayList;
 // NOTE survey name must be guaranteed not be in the db
 public class ImportTherionTask extends ImportTask
 {
-  private boolean mTherionPath = false; // whether to add survey-path to station names
+  private String mExternSurvey = null;
+  private boolean mWithLrud;
 
   public ImportTherionTask( MainWindow main ) { super( main ); }
 
@@ -39,7 +40,8 @@ public class ImportTherionTask extends ImportTask
   public ImportTherionTask( MainWindow main, ParcelFileDescriptor pfd, ImportData data )
   {
     super( main, pfd );
-    // mTherionPath = data.mTherionPath;
+    mExternSurvey = data.mExternSurvey ? "" : null;
+    mWithLrud     = data.mLrud;
   }
 
   @Override
@@ -50,7 +52,7 @@ public class ImportTherionTask extends ImportTask
     try {
       // if fr == null, str[0] is the filename, otherwise it is the survey name
       String filepath = str[2];
-      ParserTherion parser = new ParserTherion( isr, str[0], true, /* mTherionPath, */ filepath ); // apply_declination = true
+      ParserTherion parser = new ParserTherion( isr, str[0], true, mWithLrud, mExternSurvey, filepath ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

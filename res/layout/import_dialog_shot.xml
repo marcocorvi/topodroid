@@ -74,6 +74,11 @@
       android:layout_marginTop="@dimen/marginvbig"
       android:layout_marginBottom="@dimen/marginvbig"
       >
+      <CheckBox android:id="@+id/survex_lrud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/import_lrud"
+        />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_therion"
