@@ -144,7 +144,7 @@ class ParserSurvex extends ImportParser
     super( apply_decl );
     TopoDroidApp.updateAnalytic( TDAnalytics.IMPORT_SVX );
     if ( mApplyDeclination ) mDeclination = 0.0f;
-    // mName     = TDio.extractName( filename );
+    mName     = TDio.extractName( filename );
     mWithLrud = with_lrud;
     mExternSurvey = extern_survey;
     fixes    = new ArrayList<>();
@@ -1145,8 +1145,8 @@ class ParserSurvex extends ImportParser
 
   private void addSplay( ParserSurvexState st, String from, float dist, float ber, float cln )
   {
-    if ( Float.isNaN( dist ) || dist < 0 ) return;
-    shots.add( new ParserShot( from, TDString.EMPTY, dist, ber, cln, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, st.mDuplicate, st.mSurface, false, "" ) );
+    if ( Float.isNaN( dist ) || dist < 0.001f ) return;
+    shots.add( new ParserShot( from, TDString.EMPTY, dist, ber, cln, 0.0f, EXTEND_SPLAY, LegType.XSPLAY, st.mDuplicate, st.mSurface, false, "" ) );
   }
 
   /** insert a leg or splay shot
@@ -1155,6 +1155,7 @@ class ParserSurvex extends ImportParser
    */
   private void insertLegShot( String from, String to, float len, float ber, float cln, ParserSurvexState st )
   {
+    if ( Float.isNaN( len ) || len < 0.001f ) return;
     boolean splay_from = SPLAY.equals( from );
     boolean splay_to   = SPLAY.equals( to );
     if ( splay_from && splay_to ) return;
@@ -1167,7 +1168,7 @@ class ParserSurvex extends ImportParser
     } 
     // insertStation( from );
     boolean splay = splay_to || st.mSplay;
-    shots.add( new ParserShot( from, splay? TDString.EMPTY : to, len, ber, cln, 0.0f, splay? ExtendType.EXTEND_UNSET : ExtendType.EXTEND_RIGHT, LegType.NORMAL, st.mDuplicate, st.mSurface, false, "" ) );
+    shots.add( new ParserShot( from, splay? TDString.EMPTY : to, len, ber, cln, 0.0f, splay? EXTEND_SPLAY : ExtendType.EXTEND_RIGHT, LegType.NORMAL, st.mDuplicate, st.mSurface, false, "" ) );
   }
 
   // ---------------------------------------------------------------------

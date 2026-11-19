@@ -472,12 +472,12 @@ class ParserTopoRobot extends ImportParser
                         azimuth = checkApplyDeclination( azimuth, mDeclination );
                         if ( first_left > 0.0f ) {
 	                  float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );
-                          extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                          extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
                           shots.add( new ParserShot( first_from, TDString.EMPTY, first_left, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                         }
                         if ( first_right > 0.0f ) {
 	                  float ber = TDMath.in360( azimuth + 180 - 90 * dir_w );
-                          extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                          extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
                           shots.add( new ParserShot( first_from, TDString.EMPTY, first_right, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                         }
                         first_from = null;
@@ -495,12 +495,12 @@ class ParserTopoRobot extends ImportParser
                       from = station;
                       if ( left > 0.0f ) {
 	                float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );
-                        extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                        extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
                         shots.add( new ParserShot( from, TDString.EMPTY, left, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                       }
                       if ( right > 0.0f ) {
 	                float ber = TDMath.in360( azimuth + 180 - 90 * dir_w );
-                        extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                        extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
                         shots.add( new ParserShot( from, TDString.EMPTY, right, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                       }
                     }

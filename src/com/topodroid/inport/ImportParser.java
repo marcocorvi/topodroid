@@ -16,6 +16,7 @@ import com.topodroid.util.TDLog;
 import com.topodroid.util.TDString;
 import com.topodroid.util.TDUtil;
 import com.topodroid.util.TDMath;
+import com.topodroid.types.ExtendType;
 import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.DataHelper;
 
@@ -31,6 +32,8 @@ import java.util.regex.Pattern;
 
 class ImportParser
 {
+  protected static final int EXTEND_SPLAY = ExtendType.EXTEND_IGNORE;
+
   // final static String EMPTY = "";
   String mName = null;  // survey name
   String mDate = null;  // survey date

@@ -263,13 +263,13 @@ class ParserCompass extends ImportParser
                   String station = ( mAtTo && ! mTo.isEmpty() )? mTo : mFrom;
                   if ( mLeft > 0 ) {
                     float ber = TDMath.in360( mBearing + 270 );
-                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
                     // FIXME splays in the shots array to keep them interleaved with legs, but have leg flag 2
                     shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                   }
                   if ( mRight > 0 ) {
                     float ber = TDMath.in360( mBearing + 90 );
-                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
                     shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                   }
                   if ( mUp > 0 ) {

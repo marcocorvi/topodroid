@@ -107,11 +107,9 @@ class ParserBricCsv extends ImportParser
                   mOldShot.extend = ExtendType.EXTEND_RIGHT;
                   mExtendSet = true;
                 }
-                shots.add( new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 
-		                           ExtendType.EXTEND_IGNORE, LegType.INVALID, false, false, false, "" ) );
+                shots.add( new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, EXTEND_SPLAY, LegType.INVALID, false, false, false, "" ) );
               } else {
-                mOldShot =  new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f,  
-                                            ExtendType.EXTEND_IGNORE, LegType.INVALID, false, false, false, "" );
+                mOldShot =  new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, EXTEND_SPLAY, LegType.INVALID, false, false, false, "" );
                 mExtendSet  = false;
                 mOldLength  = mLength;
                 mOldBearing = mBearing;

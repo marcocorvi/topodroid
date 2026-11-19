@@ -145,12 +145,12 @@ class ParserVisualTopoX extends ImportParser
     if ( mLrud ) {
       if ( mLeft > 0 ) {
         float ber = TDMath.in360( mBearing + 180 + 90 * dir_w );
-        int extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+        int extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
         shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
       }
       if ( mRight > 0 ) {
         float ber = TDMath.in360( mBearing + 180 - 90 * dir_w );
-        int extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+        int extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : EXTEND_SPLAY;
         shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, LegType.XSPLAY, false, false, false, "" ) );
       } 
       if ( mUp > 0 ) {
@@ -169,8 +169,7 @@ class ParserVisualTopoX extends ImportParser
   }
   private void addSplay( String mFrom, float mLength, float mBearing, float mClino )
   {
-    shots.add( new ParserShot( mFrom, TDString.EMPTY, mLength, mBearing, mClino, 0.0f,
-                               ExtendType.EXTEND_UNSET, LegType.NORMAL, false, false, false, "" ) );
+    shots.add( new ParserShot( mFrom, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, EXTEND_SPLAY, LegType.NORMAL, false, false, false, "" ) );
   }
 
   /** read input file

@@ -127,7 +127,7 @@ class ParserCavwayCsv extends ImportParser
           if ( t == 1 ) {
             if ( old_shot != null && closeShots( mLength, mBearing, mClino, old_length, old_bearing, old_clino ) ) {
               old_shot.leg = LegType.EXTRA;
-              old_shot.extend = ExtendType.EXTEND_IGNORE;
+              old_shot.extend = EXTEND_SPLAY;
             }
             old_shot = new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 
 	                               ExtendType.EXTEND_RIGHT, LegType.NORMAL, false, false, false, "" );
@@ -137,8 +137,7 @@ class ParserCavwayCsv extends ImportParser
             tmp_shots.add( old_shot );
           } else { // t == 2
             old_shot = null;
-            tmp_shots.add( new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 
-	                               ExtendType.EXTEND_IGNORE, LegType.NORMAL, false, false, false, "" ) );
+            tmp_shots.add( new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, EXTEND_SPLAY, LegType.NORMAL, false, false, false, "" ) );
           }
         }
         line = nextLine( br );
